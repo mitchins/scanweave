@@ -89,3 +89,24 @@ at the bottom.
   (already disclosed), copyleft/determinism execution verification.
 - DECISION: PROVISIONAL stands (reviewer's own verdict; repairs address blocking items;
   corpus + external baselines remain blocked). M1 NOT authorized.
+
+## Operator disposition — M0-Q authorized (2026-10-14)
+
+- Commit 3172a32 ACCEPTED as the provisional M0 baseline; tagged `m0-provisional-baseline`.
+- PROVISIONAL accepted as correct. M1 remains BLOCKED.
+- Architecture, reconstruction algorithm and public interfaces FROZEN unless a concrete
+  qualification failure demonstrates a defect (repair allowed; redesign is not).
+- Next phase: **M0-Q (qualification closure)** — evidence gaps only:
+  1. independent reproduction (full suite executed, versions/commands/hashes recorded)
+  2. visual-failure characterization (PDFium ~1.1px displacement; p01 MAE 0.0206 vs 0.02)
+     — geometric fidelity vs renderer AA distinction; defects repaired or a versioned,
+     independently-reviewed policy amendment proposed; thresholds never auto-relaxed
+  3. benign pilot corpus mounted (document-level split isolation; holdouts preserved)
+  4. external MRC baselines on identical sources (bytes, extraction, fidelity, non-text;
+     repeated-glyph coverage)
+  5. consolidated gate report: every criterion PASS/FAIL/BLOCKED, no implicit waivers
+- Evidence-ledger distinction preserved per operator: the previous review verified QDF
+  properties by re-parsing but did NOT independently execute the full suite; that
+  distinction stands until an unrestricted execution reproduction is recorded.
+- Expectation recorded: reconstruction need not beat MRC per-document; M0-Q establishes
+  correctness and measurable costs, not compression superiority.
