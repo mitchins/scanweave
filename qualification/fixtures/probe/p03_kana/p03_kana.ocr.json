@@ -1,0 +1,108 @@
+{
+ "schema_version": "1.0",
+ "page_id": "p03",
+ "raster": {
+  "asset_path": "p03_kana/p03_kana.png",
+  "file_sha256": "b8c9402a52aebbde9daeda2d2d0d7417980c0c98765590ea55d8dec1c16ff347",
+  "pixel_sha256": "a29c16ca36876d79bc22ee60526fed8dbdbc4987c2713aabaf0574d5ab0f0c36",
+  "width_px": 520,
+  "height_px": 340,
+  "canonical_format": "rgb8",
+  "colour_tag": "srgb",
+  "icc_sha256": null,
+  "orientation_policy": "applied_once",
+  "decoder_id": "m0-fixture-pillow-rasterizer",
+  "dpi_x": 300.0,
+  "dpi_y": 300.0
+ },
+ "page": {
+  "width_pt": 124.8,
+  "height_pt": 81.6,
+  "raster_to_page_pt": [
+   0.24,
+   0.0,
+   0.0,
+   -0.24,
+   0.0,
+   81.6
+  ]
+ },
+ "producer": {
+  "name": "m0-fixture-generator",
+  "version": "1.0",
+  "models": [],
+  "languages": []
+ },
+ "granularity": "symbol",
+ "reading_order_status": "supplied",
+ "reading_order": [
+  "g000"
+ ],
+ "spans": [
+  {
+   "id": "g000",
+   "text": "ガ",
+   "separator_after": " ",
+   "polygon": [
+    [
+     60,
+     40
+    ],
+    [
+     260,
+     40
+    ],
+    [
+     260,
+     211
+    ],
+    [
+     60,
+     211
+    ]
+   ],
+   "direction": "ltr",
+   "role": "body",
+   "language": null,
+   "confidence": {
+    "value": 99.0,
+    "scale": "range_0_100",
+    "calibrated": false
+   },
+   "provenance": "source_generated",
+   "symbols": [
+    {
+     "id": "g000s0",
+     "text_range_utf8": [
+      0,
+      3
+     ],
+     "polygon": [
+      [
+       60,
+       40
+      ],
+      [
+       260,
+       40
+      ],
+      [
+       260,
+       211
+      ],
+      [
+       60,
+       211
+      ]
+     ],
+     "confidence": {
+      "value": 99.0,
+      "scale": "range_0_100",
+      "calibrated": false
+     }
+    }
+   ]
+  }
+ ],
+ "protected_regions": []
+}

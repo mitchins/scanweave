@@ -1,0 +1,108 @@
+{
+ "schema_version": "1.0",
+ "page_id": "p02",
+ "raster": {
+  "asset_path": "p02_wronglabel/p02_wronglabel.png",
+  "file_sha256": "60c9307485e1507706313873b179e106986d88a57ae92289e67a38f2db4b9854",
+  "pixel_sha256": "2aaa6d1ffc81399d007656a54f690f21520a4faa595d9691ccdd5bac1a234684",
+  "width_px": 520,
+  "height_px": 340,
+  "canonical_format": "rgb8",
+  "colour_tag": "srgb",
+  "icc_sha256": null,
+  "orientation_policy": "applied_once",
+  "decoder_id": "m0-fixture-pillow-rasterizer",
+  "dpi_x": 300.0,
+  "dpi_y": 300.0
+ },
+ "page": {
+  "width_pt": 124.8,
+  "height_pt": 81.6,
+  "raster_to_page_pt": [
+   0.24,
+   0.0,
+   0.0,
+   -0.24,
+   0.0,
+   81.6
+  ]
+ },
+ "producer": {
+  "name": "m0-fixture-generator",
+  "version": "1.0",
+  "models": [],
+  "languages": []
+ },
+ "granularity": "symbol",
+ "reading_order_status": "supplied",
+ "reading_order": [
+  "g000"
+ ],
+ "spans": [
+  {
+   "id": "g000",
+   "text": "6",
+   "separator_after": " ",
+   "polygon": [
+    [
+     60,
+     68
+    ],
+    [
+     199,
+     68
+    ],
+    [
+     199,
+     219
+    ],
+    [
+     60,
+     219
+    ]
+   ],
+   "direction": "ltr",
+   "role": "body",
+   "language": null,
+   "confidence": {
+    "value": 99.0,
+    "scale": "range_0_100",
+    "calibrated": false
+   },
+   "provenance": "source_generated",
+   "symbols": [
+    {
+     "id": "g000s0",
+     "text_range_utf8": [
+      0,
+      1
+     ],
+     "polygon": [
+      [
+       60,
+       68
+      ],
+      [
+       199,
+       68
+      ],
+      [
+       199,
+       219
+      ],
+      [
+       60,
+       219
+      ]
+     ],
+     "confidence": {
+      "value": 99.0,
+      "scale": "range_0_100",
+      "calibrated": false
+     }
+    }
+   ]
+  }
+ ],
+ "protected_regions": []
+}

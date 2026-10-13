@@ -1,0 +1,24 @@
+# m0-probe-1 — M0 geometric error budget policy (SPEC §5.5)
+# One shared budget in source pixels; every stage draws from it explicitly.
+# The tracer tolerance is DERIVED from its allocation. Stage-wise error
+# decomposition is recorded for every traced glyph — accepted, near-budget and
+# rejected alike — so independent budget consumption is detectable.
+
+schema = "scanweave-policy"
+revision = "m0-probe-1"
+recorded = "2026-10-13"
+units = "source_pixels"
+
+[budget]
+total_max_edge_px = 1.0      # B; consistent with defaults.toml visual.max_edge_max_px
+p95_max_edge_px = 0.5        # per dev-initial-1 policy (QUALIFICATION §4.2)
+
+[budget.stages]
+trace_simplify_max_px = 0.50      # vtracer simplification allocation
+cubic_to_quad_max_px = 0.25       # kurbo cubics_to_quadratic_splines accuracy
+quantization_placement_max_px = 0.25  # font-unit integer rounding + placement
+
+[derivation]
+units_per_em = 2048
+font_units_formula = "B_font = B_px * (units_per_em / em_px_of_unit)"
+note = "em_px_of_unit is the tallest ink height on the page; k = units_per_em/em_px"

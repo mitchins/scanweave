@@ -1,0 +1,173 @@
+{
+ "schema_version": "1.0",
+ "page_id": "p04",
+ "raster": {
+  "asset_path": "p04_ligature/p04_ligature.png",
+  "file_sha256": "1ec2c52fe185f03152736c0a1f137c8e08b93446fe403bf97a46a8b5c0e58d98",
+  "pixel_sha256": "9b8966edb454f748f46f359e3d28f9f208ffe24db3d31a73bb43f72203ffedd2",
+  "width_px": 520,
+  "height_px": 340,
+  "canonical_format": "rgb8",
+  "colour_tag": "srgb",
+  "icc_sha256": null,
+  "orientation_policy": "applied_once",
+  "decoder_id": "m0-fixture-pillow-rasterizer",
+  "dpi_x": 300.0,
+  "dpi_y": 300.0
+ },
+ "page": {
+  "width_pt": 124.8,
+  "height_pt": 81.6,
+  "raster_to_page_pt": [
+   0.24,
+   0.0,
+   0.0,
+   -0.24,
+   0.0,
+   81.6
+  ]
+ },
+ "producer": {
+  "name": "m0-fixture-generator",
+  "version": "1.0",
+  "models": [],
+  "languages": []
+ },
+ "granularity": "symbol",
+ "reading_order_status": "supplied",
+ "reading_order": [
+  "g000",
+  "g001"
+ ],
+ "spans": [
+  {
+   "id": "g000",
+   "text": "fi",
+   "separator_after": " ",
+   "polygon": [
+    [
+     30,
+     54
+    ],
+    [
+     178,
+     54
+    ],
+    [
+     178,
+     206
+    ],
+    [
+     30,
+     206
+    ]
+   ],
+   "direction": "ltr",
+   "role": "body",
+   "language": null,
+   "confidence": {
+    "value": 99.0,
+    "scale": "range_0_100",
+    "calibrated": false
+   },
+   "provenance": "source_generated",
+   "symbols": [
+    {
+     "id": "g000s0",
+     "text_range_utf8": [
+      0,
+      2
+     ],
+     "polygon": [
+      [
+       30,
+       54
+      ],
+      [
+       178,
+       54
+      ],
+      [
+       178,
+       206
+      ],
+      [
+       30,
+       206
+      ]
+     ],
+     "confidence": {
+      "value": 99.0,
+      "scale": "range_0_100",
+      "calibrated": false
+     }
+    }
+   ]
+  },
+  {
+   "id": "g001",
+   "text": "𝐀",
+   "separator_after": " ",
+   "polygon": [
+    [
+     260,
+     71
+    ],
+    [
+     344,
+     71
+    ],
+    [
+     344,
+     194
+    ],
+    [
+     260,
+     194
+    ]
+   ],
+   "direction": "ltr",
+   "role": "body",
+   "language": null,
+   "confidence": {
+    "value": 99.0,
+    "scale": "range_0_100",
+    "calibrated": false
+   },
+   "provenance": "source_generated",
+   "symbols": [
+    {
+     "id": "g001s0",
+     "text_range_utf8": [
+      0,
+      4
+     ],
+     "polygon": [
+      [
+       260,
+       71
+      ],
+      [
+       344,
+       71
+      ],
+      [
+       344,
+       194
+      ],
+      [
+       260,
+       194
+      ]
+     ],
+     "confidence": {
+      "value": 99.0,
+      "scale": "range_0_100",
+      "calibrated": false
+     }
+    }
+   ]
+  }
+ ],
+ "protected_regions": []
+}

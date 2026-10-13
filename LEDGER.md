@@ -33,3 +33,12 @@ at the bottom.
 - Environment constraint recorded: session has no root; apt installs impossible. qpdf built
   from pinned source, OTS from prebuilt release, PDFium from pinned release; tesseract
   recorded UNAVAILABLE (optional OCR subprocess; M0 synthetic probes do not invoke OCR).
+
+## WP-D environment note (2026-10-13)
+
+- Qualification Python deps (pypdfium2, jsonschema) live in `qualification/.venv`
+  (gitignored). System pip is PEP-668-managed and `~/.local` site-packages is
+  read-only in this session; a venv was the clean solution per operator direction.
+- Engine #2 = PDFium via pypdfium2 (bundled PDFium build, Apache-2.0/BSD-3-Clause;
+  qualification-only). The bblanchon pdfium tgz recorded in UPSTREAMS remains
+  unused by the harness; noted honestly here.
