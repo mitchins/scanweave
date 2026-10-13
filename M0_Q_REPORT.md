@@ -11,8 +11,8 @@ hOCR 5.5 reader) — each is a concrete qualification-failure repair under the c
 - Fresh clone → from-source build → full suite: **36 cargo tests pass** (incl. the E0
   four-part-key mutation property test), schema fixture layer green (3 positive / 6
   negative), checks.py 8 pages + 8/8 E-proofs, measure.py all B0 checks true.
-- **28/28 acceptance artifacts byte-identical** between independent checkouts on the
-  FINAL tree (out.pdf / out.ttf / b0_raster.pdf / b0_notext.pdf × 7 gate pages; full
+- **32/32 acceptance artifacts byte-identical** between independent checkouts on the
+  FINAL tree (out.pdf / out.ttf / b0_raster.pdf / b0_notext.pdf × 8 gate pages; full
   SHA-256 digests committed in `qualification/repro_hashcheck.json`; narrative in
   `qualification/REPRODUCTION.md`). An earlier truncated-digest spot-check existed only
   outside the tree (never committed); the committed record is the final-tree full-digest
@@ -42,7 +42,7 @@ Evidence (`qualification/characterization.json`):
 2. **PDFium vs Poppler signed displacement** — per-page numbers from the committed
    `characterization.json` (NOT an aggregate): p01: mean |d| 0.257 px, 74.3% < 0.5 px,
    max 1.0 px, mean_dx −0.186; p04: mean |d| 0.475 px, 52.5% < 0.5 px, max 1.414 px
-   (the `fi` page); p05: mean |d| 0.199 px, 80.1% < 0.5 px, max 1.0 px. Poppler-vs-
+   (the `fi` page); p05: mean |d| 0.133 px, 86.7% < 0.5 px, max 1.0 px. Poppler-vs-
    source integer boundary displacement is 0.0 where the gate passes. Conclusion: PDFium's ~1.1 px p95 is AA-threshold wobble
    on shallow anti-aliased ramps (page-dependent), NOT a geometry or placement defect;
    p04's larger values track the disclosed 1 px `fi` placement deviation. No repair
@@ -54,8 +54,9 @@ Evidence (`qualification/characterization.json`):
    MAE gate correctly caught. REPAIR (charter-sanctioned): the probe now samples the
    source ink colour (median of foreground samples) and repaints glyphs in that colour
    (`mask.rs` `Segmentation.ink`, consumed by `pdf.rs`). Post-repair p01 poppler:
-   IoU 1.000, edge p95 0.29 px, **MAE 0.0052** — the page PASSES all dev-initial-1
-   criteria in Poppler. Lesson recorded: the gate was right; the defect was ours.
+   IoU 1.000, edge p95 0.29 px, **MAE 0.0038** (pdfium 0.0052) — the page PASSES all
+   dev-initial-1 criteria in Poppler. Lesson recorded: the gate was right; the defect
+   was ours.
 4. **p04 `fi` 1px**: sub-pixel metric confirms p95 1.01/1.07, max 1.32/1.07 — single-glyph,
    both engines, deterministic; unchanged from the M0 report disclosure.
 5. **Caveat disclosed:** the planned rasterizer-independent outline ground-truth check
@@ -107,7 +108,7 @@ Committed numbers from `measurements.json` (`pages.p09_realtext`, harness-execut
 |---|---|---|---|
 | source PNG | 37,740 | — | — |
 | IA MRC (recode_pdf, JP2 `-r 500/750`) | 45,020 | 0.8452 | 118 chars |
-| OCRmyPDF 17.13 (`--force-ocr --output-type pdf --optimize 0`) | 40,120 | 0.7077 | 118 chars |
+| OCRmyPDF 17.13 (`--force-ocr --output-type pdf --optimize 0`) | 40,121 | 0.7077 | 118 chars |
 | **ours B2 (reconstruction)** | **24,058** | **0.8307** | 113 chars ⚠ |
 | ours B0 (searchable raster) | 50,304 | 0.8508 (render-neutrality verified) | 113 chars ⚠ |
 
@@ -144,14 +145,14 @@ expectation (when reconstruction helps) is what this table establishes on this m
 | # | Criterion | Status | Evidence |
 |---|---|---|---|
 | 1 | Pipeline end-to-end (synthetic, 8 gate pages incl. p08) | PASS with one recorded exception: p08 pdfium transport ORDER diverges on the scattered-symbol layout (content complete; visual gates otherwise pass) | checks.py; probe_results.json (8 pages after Q-phase re-run) |
-| 2 | Independent reproduction (36 tests, 28/28 artifacts byte-equal) | PASS | REPRODUCTION.md |
+| 2 | Independent reproduction (36 tests, 32/32 artifacts byte-equal, 8 pages) | PASS | REPRODUCTION.md; repro_hashcheck.json |
 | 3 | E0–E7 font-graph proofs | PASS (8/8) | probe_results.json + QDF re-parse (prior review) |
 | 4 | Six negative schema fixtures, dual layer | PASS | validate_fixtures.py + Rust tests |
 | 5 | B0 raster baseline (transport/neutral/qpdf) | PASS | measurements.json |
 | 6 | External MRC baselines executed on identical sources | PASS | §4 table |
 | 7 | Repeated-glyph coverage (no raster-fallback success claim) | PASS | §4 repeated-text table |
 | 8 | Real-tesseract UC-01 import path | PASS | §4 + hocr2json |
-| 9 | dev-initial-1 visual gate, all pages | **FAIL (honest)** | probe_results.json (pdfium AA edge; p01 MAE 3% over; p04 fi; p06 topology) |
+| 9 | dev-initial-1 visual gate, all pages | **FAIL (honest)** | probe_results.json (pdfium AA edge ~1.1px on all pages; p04 `fi` IoU/edge; p06 topology+outliers; MAE now passes on every page post ink-colour repair) |
 | 10 | `m0-qual-1` policy amendment | **BLOCKED (review pending)** | §2 draft |
 | 11 | Benign corpus qualification | **BLOCKED (not mounted)** | §3 |
 | 12 | Touching-character character loss on small kerned text | **FAIL (known defect, M1-scoped)** | §4 ⚠ (5/118 chars; B0 carries full text) |

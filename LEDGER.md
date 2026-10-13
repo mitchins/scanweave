@@ -127,7 +127,7 @@ at the bottom.
 - **Defect repairs in the frozen-phase code** (charter-sanctioned; disclosed per review
   B5): (1) ink colour — reconstruction painted pure black over gray-30 source ink;
   now samples and repaints source ink colour (caught by the whole-page MAE gate; p01
-  poppler now passes all criteria, MAE 0.0206→0.0052). (2) units.rs ownership: greedy
+  poppler now passes all criteria, MAE 0.0206→0.0038 poppler / 0.0052 pdfium). (2) units.rs ownership: greedy
   first-claim → tightest-containing-box (real OCR boxes overlap); did NOT fix the
   touching-char loss; reproduction re-run on the final tree. (3) hOCR reader: tesseract
   5.5 cinfo format (direct char text, x_conf, word text = char concat).
@@ -146,3 +146,11 @@ at the bottom.
   examples misattributed and corrected).
 - m0-qual-1 amendment NARROWED (MAE replacement withdrawn — the gate was right); the
   remaining draft item is engine-AA-aware edge comparison, pending M1 calibration data.
+
+## M0-Q round-2 reconciliation (HEAD 440a29a, child of 9c28819) — appended verbatim from the reviewer
+
+> M0-Q round-2 reconciliation (HEAD 440a29a, child of 9c28819): the evidence base is now consistent with the committed artifacts — independent reproduction on the final tree is 36 tests / 32 byte-identical artifacts across 8 gate pages (repro_hashcheck.json `all_equal: true`), the visual characterization is re-derived (p08 present; p01 0.257 px / 74.3%; p01 MAE 0.0038 poppler), external baselines are harness-executed and committed (p09 24,058/45,020/40,120/…; p10 totals src 164,141 / B0 216,444 / B2 100,282 / OCRmyPDF 169,244 / IA MRC 189,213), the p08 pdfium transport-order exception is surfaced in the §5 gate table, and all thirteen gate rows are PASS/FAIL/BLOCKED with no implicit waiver. Established: charter points 1, 4, 6, 7, 8 PASS; the touching-character 5/118 loss is honestly attributed to OCR-import segmentation (B0 and B2 equally). Remaining open: three narrative-doc citation lags (report/ledger still state 28/28-7-pages instead of 32/8, cite poppler p01 MAE 0.0052 instead of 0.0038, cite p05 0.199/80.1% instead of 0.133/86.7%, and cite OCRmyPDF 40,120 vs committed 40,121), plus the previously scoped BLOCKED items (benign corpus not mounted; m0-qual-1 amendment review pending; MRC lossy matrix deferred). M1 remains NOT AUTHORIZED: the multi-symbol ownership solver is its first deliverable, unblocking with corpus mount.
+
+(The four enumerated citation lags were corrected in the same commit that appends this
+statement: 32/8 everywhere, poppler p01 MAE 0.0038, p05 0.133 px / 86.7%, OCRmyPDF
+40,121. No data values changed — citations only.)
