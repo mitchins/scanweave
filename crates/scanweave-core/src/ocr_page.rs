@@ -4,15 +4,15 @@
 use crate::error::ScanWeaveError;
 use crate::pixel_hash::{CanonicalFormat, ColourTag};
 use crate::{is_sha256_hex, is_valid_id, Limits};
-use serde::Deserialize;
+use serde::{Deserialize, Serialize};
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Deserialize)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Deserialize, Serialize)]
 pub enum SchemaVersion {
     #[serde(rename = "1.0")]
     V1,
 }
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Deserialize)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Deserialize, Serialize)]
 pub enum Granularity {
     #[serde(rename = "symbol")]
     Symbol,
@@ -28,7 +28,7 @@ pub enum Granularity {
     None,
 }
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Deserialize)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Deserialize, Serialize)]
 pub enum ReadingOrderStatus {
     #[serde(rename = "supplied")]
     Supplied,
@@ -38,7 +38,7 @@ pub enum ReadingOrderStatus {
     Unknown,
 }
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Deserialize)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Deserialize, Serialize)]
 pub enum Direction {
     #[serde(rename = "ltr")]
     Ltr,
@@ -50,7 +50,7 @@ pub enum Direction {
     Unknown,
 }
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Deserialize)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Deserialize, Serialize)]
 pub enum Role {
     #[serde(rename = "body")]
     Body,
@@ -70,7 +70,7 @@ pub enum Role {
     Unknown,
 }
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Deserialize)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Deserialize, Serialize)]
 pub enum Provenance {
     #[serde(rename = "ocr")]
     Ocr,
@@ -82,13 +82,13 @@ pub enum Provenance {
     Unknown,
 }
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Deserialize)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Deserialize, Serialize)]
 pub enum OrientationPolicy {
     #[serde(rename = "applied_once")]
     AppliedOnce,
 }
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Deserialize)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Deserialize, Serialize)]
 pub enum SourceKind {
     #[serde(rename = "image")]
     Image,
@@ -96,7 +96,7 @@ pub enum SourceKind {
     Pdf,
 }
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Deserialize)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Deserialize, Serialize)]
 pub enum ProtectedOrigin {
     #[serde(rename = "caller")]
     Caller,
@@ -106,7 +106,7 @@ pub enum ProtectedOrigin {
     SourceGenerated,
 }
 
-#[derive(Debug, Clone, Copy, PartialEq, Deserialize)]
+#[derive(Debug, Clone, Copy, PartialEq, Deserialize, Serialize)]
 #[serde(deny_unknown_fields)]
 pub struct Confidence {
     pub value: Option<f64>,
@@ -114,7 +114,7 @@ pub struct Confidence {
     pub calibrated: bool,
 }
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Deserialize)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Deserialize, Serialize)]
 pub enum ConfidenceScale {
     #[serde(rename = "range_0_100")]
     Range0To100,
@@ -128,7 +128,7 @@ pub enum ConfidenceScale {
     Unknown,
 }
 
-#[derive(Debug, Clone, Deserialize)]
+#[derive(Debug, Clone, Deserialize, Serialize)]
 #[serde(deny_unknown_fields)]
 pub struct RasterBinding {
     pub asset_path: String,
@@ -145,7 +145,7 @@ pub struct RasterBinding {
     pub dpi_y: Option<f64>,
 }
 
-#[derive(Debug, Clone, Deserialize)]
+#[derive(Debug, Clone, Deserialize, Serialize)]
 #[serde(deny_unknown_fields)]
 pub struct PageGeometry {
     pub width_pt: f64,
@@ -153,7 +153,7 @@ pub struct PageGeometry {
     pub raster_to_page_pt: [f64; 6],
 }
 
-#[derive(Debug, Clone, Deserialize)]
+#[derive(Debug, Clone, Deserialize, Serialize)]
 #[serde(deny_unknown_fields)]
 pub struct SourceGeometry {
     pub source_kind: SourceKind,
@@ -165,7 +165,7 @@ pub struct SourceGeometry {
     pub raster_to_source_user: Option<[f64; 6]>,
 }
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Deserialize)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Deserialize, Serialize)]
 pub enum RotateDegrees {
     #[serde(rename = "0")]
     D0,
@@ -177,14 +177,14 @@ pub enum RotateDegrees {
     D270,
 }
 
-#[derive(Debug, Clone, Deserialize)]
+#[derive(Debug, Clone, Deserialize, Serialize)]
 #[serde(deny_unknown_fields)]
 pub struct ModelInfo {
     pub name: String,
     pub sha256: String,
 }
 
-#[derive(Debug, Clone, Deserialize)]
+#[derive(Debug, Clone, Deserialize, Serialize)]
 #[serde(deny_unknown_fields)]
 pub struct Producer {
     pub name: String,
@@ -193,7 +193,7 @@ pub struct Producer {
     pub languages: Vec<String>,
 }
 
-#[derive(Debug, Clone, Deserialize)]
+#[derive(Debug, Clone, Deserialize, Serialize)]
 #[serde(deny_unknown_fields)]
 pub struct Symbol {
     pub id: String,
@@ -202,7 +202,7 @@ pub struct Symbol {
     pub confidence: Confidence,
 }
 
-#[derive(Debug, Clone, Deserialize)]
+#[derive(Debug, Clone, Deserialize, Serialize)]
 #[serde(deny_unknown_fields)]
 pub struct Span {
     pub id: String,
@@ -219,7 +219,7 @@ pub struct Span {
     pub symbols: Vec<Symbol>,
 }
 
-#[derive(Debug, Clone, Deserialize)]
+#[derive(Debug, Clone, Deserialize, Serialize)]
 #[serde(deny_unknown_fields)]
 pub struct ProtectedRegion {
     pub id: String,
@@ -228,7 +228,7 @@ pub struct ProtectedRegion {
     pub origin: ProtectedOrigin,
 }
 
-#[derive(Debug, Clone, Deserialize)]
+#[derive(Debug, Clone, Deserialize, Serialize)]
 #[serde(deny_unknown_fields)]
 pub struct OcrPage {
     pub schema_version: SchemaVersion,

@@ -54,6 +54,7 @@ EXPECTED = {
     "p05_colour": ["8"],
     "p06_degraded": ["8"],
     "p07_sharedcid": ["8", "6", "8", "18"],
+    "p08_symbols": [".", ",", "-", "$", "%", "1,234.56", "-42"],
 }
 
 results = {"pages": {}, "gates": {}, "tools": {}}

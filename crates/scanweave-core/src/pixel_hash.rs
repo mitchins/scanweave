@@ -3,9 +3,9 @@
 //! followed by packed, row-major, top-to-bottom, padding-free sample bytes.
 
 use crate::error::ScanWeaveError;
-use serde::Deserialize;
+use serde::{Deserialize, Serialize};
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Deserialize)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Deserialize, Serialize)]
 pub enum CanonicalFormat {
     #[serde(rename = "mono1_msb")]
     Mono1Msb,
@@ -51,7 +51,7 @@ impl CanonicalFormat {
     }
 }
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Deserialize)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Deserialize, Serialize)]
 pub enum ColourTag {
     #[serde(rename = "srgb")]
     Srgb,

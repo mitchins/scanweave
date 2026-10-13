@@ -66,8 +66,9 @@ fn main() -> ExitCode {
     let args: Vec<String> = std::env::args().collect();
     match args.get(1).map(|s| s.as_str()) {
         Some("build") => cmd_build(&args[2..]),
+        Some("hocr2json") => cmd_hocr2json(&args[2..]),
         other => {
-            eprintln!("unknown or missing subcommand {other:?}; expected: build --page <dir> --out <dir>");
+            eprintln!("unknown or missing subcommand {other:?}; expected: build --page <dir> --out <dir> | hocr2json --hocr <file> --png <png> --dpi <dpi> --out <json>");
             ExitCode::from(2)
         }
     }
@@ -116,6 +117,92 @@ fn cmd_build(args: &[String]) -> ExitCode {
         }
         Err(e) => {
             eprintln!("probe FAILED: {e}");
+            ExitCode::from(1)
+        }
+    }
+}
+
+/// Dev tooling: real-Tesseract hOCR -> normalized OCR JSON via the scanweave-io
+/// import path (UC-01). Binding hashes are computed from the actual PNG bytes.
+fn cmd_hocr2json(args: &[String]) -> ExitCode {
+    let (Some(hocr), Some(png), Some(out_path)) = (
+        arg_of(args, "--hocr"),
+        arg_of(args, "--png"),
+        arg_of(args, "--out"),
+    ) else {
+        eprintln!("hocr2json requires --hocr <file> --png <png> --dpi <dpi> --out <json>");
+        return ExitCode::from(2);
+    };
+    let dpi: f64 = arg_of(args, "--dpi").and_then(|v| v.parse().ok()).unwrap_or(0.0);
+    if dpi <= 0.0 {
+        eprintln!("--dpi must be > 0 (no default guess)");
+        return ExitCode::from(2);
+    }
+    let hocr_bytes = std::fs::read(&hocr).unwrap_or_else(|e| panic!("read {hocr}: {e}"));
+    let img = image::open(&png).unwrap_or_else(|e| panic!("open {png}: {e}")).to_rgb8();
+    let (w, h) = (img.width(), img.height());
+    let doc = scanweave_io::hocr::parse_hocr(&hocr_bytes, w, h).map_err(|e| e.to_string());
+    let doc = match doc {
+        Ok(d) => d,
+        Err(e) => {
+            eprintln!("hOCR import failed: {e}");
+            return ExitCode::from(1);
+        }
+    };
+    let file_sha = scanweave_core::hash_hex(&std::fs::read(&png).unwrap_or_default());
+    let pixel_sha = scanweave_core::pixel_hash::pixel_hash(
+        scanweave_core::pixel_hash::CanonicalFormat::Rgb8,
+        w as u64,
+        h as u64,
+        scanweave_core::pixel_hash::ColourTag::Srgb,
+        None,
+        img.as_raw(),
+    )
+    .map_err(|e| e.to_string());
+    let pixel_sha = match pixel_sha {
+        Ok(x) => x,
+        Err(e) => {
+            eprintln!("pixel hash failed: {e}");
+            return ExitCode::from(1);
+        }
+    };
+    let binding = scanweave_io::normalize::Binding {
+        asset_path: std::path::Path::new(&png)
+            .file_name()
+            .map(|s| s.to_string_lossy().to_string())
+            .unwrap_or_default(),
+        file_sha256: file_sha,
+        pixel_sha256: pixel_sha,
+    };
+    match scanweave_io::normalize::build_normalized_page(
+        &scanweave_io::normalize::ImageMeta { width: w, height: h },
+        &doc,
+        Some(dpi),
+        &binding,
+    ) {
+        Ok(page) => {
+            match page.validate(&scanweave_core::Limits::m0_defaults()) {
+                Ok(()) => {}
+                Err(e) => {
+                    eprintln!("normalized page failed validation: {e}");
+                    return ExitCode::from(1);
+                }
+            }
+            std::fs::write(
+                &out_path,
+                serde_json::to_vec_pretty(&page).unwrap_or_default(),
+            )
+            .unwrap_or_else(|e| panic!("write {out_path}: {e}"));
+            println!(
+                "hocr2json OK: {} words -> {} (granularity {:?})",
+                doc.words.len(),
+                out_path,
+                page.granularity
+            );
+            ExitCode::SUCCESS
+        }
+        Err(e) => {
+            eprintln!("normalization failed: {e}");
             ExitCode::from(1)
         }
     }

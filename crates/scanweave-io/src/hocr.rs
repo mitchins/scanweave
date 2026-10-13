@@ -156,12 +156,14 @@ fn handle_start(
             for (k, v) in &map {
                 match k.as_str() {
                     "x_bboxes" => bbox = Some(parse_bbox(v)?),
+                    // tesseract <=4 emits x_confs (list); 5.x emits x_conf (single)
                     "x_confs" => {
                         conf = v
                             .split_whitespace()
                             .next()
                             .and_then(|t| t.parse::<f64>().ok())
                     }
+                    "x_conf" => conf = v.trim().parse::<f64>().ok(),
                     _ => {}
                 }
             }
@@ -233,6 +235,12 @@ pub fn parse_hocr(
                         } else if class == "ocrx_word" {
                             if let Some(mut w) = st.cur_word.take() {
                                 w.text = w.text.trim().to_string();
+                                if w.text.is_empty() && !w.chars.is_empty() {
+                                    // char-box hOCR (tesseract 5.x): the word span
+                                    // carries no direct text; the honest word text is
+                                    // the concatenation of the character labels
+                                    w.text = w.chars.iter().map(|c| c.text.as_str()).collect();
+                                }
                                 st.words.push(w);
                             }
                         }

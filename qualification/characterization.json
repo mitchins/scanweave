@@ -1,0 +1,128 @@
+{
+ "A_displacement": {
+  "p01_latin": {
+   "pdfium_vs_poppler": {
+    "n": 2445,
+    "mean_dx": -0.196,
+    "mean_dy": -0.074,
+    "mean_mag": 0.27,
+    "p95_mag": 1.0,
+    "max_mag": 1.0,
+    "frac_lt_0.5px": 0.7301,
+    "frac_lt_1px": 0.7301
+   },
+   "poppler_vs_source": {
+    "n": 2435,
+    "mean_dx": 0.0,
+    "mean_dy": 0.0,
+    "mean_mag": 0.0,
+    "p95_mag": 0.0,
+    "max_mag": 0.0,
+    "frac_lt_0.5px": 1.0,
+    "frac_lt_1px": 1.0
+   }
+  },
+  "p02_wronglabel": {
+   "pdfium_vs_poppler": {
+    "n": 707,
+    "mean_dx": -0.178,
+    "mean_dy": -0.074,
+    "mean_mag": 0.252,
+    "p95_mag": 1.0,
+    "max_mag": 1.0,
+    "frac_lt_0.5px": 0.7482,
+    "frac_lt_1px": 0.7482
+   },
+   "poppler_vs_source": {
+    "n": 696,
+    "mean_dx": 0.0,
+    "mean_dy": 0.0,
+    "mean_mag": 0.0,
+    "p95_mag": 0.0,
+    "max_mag": 0.0,
+    "frac_lt_0.5px": 1.0,
+    "frac_lt_1px": 1.0
+   }
+  },
+  "p04_ligature": {
+   "pdfium_vs_poppler": {
+    "n": 1593,
+    "mean_dx": -0.23,
+    "mean_dy": -0.245,
+    "mean_mag": 0.475,
+    "p95_mag": 1.0,
+    "max_mag": 1.414,
+    "frac_lt_0.5px": 0.5254,
+    "frac_lt_1px": 0.5254
+   },
+   "poppler_vs_source": {
+    "n": 1589,
+    "mean_dx": 0.014,
+    "mean_dy": 0.221,
+    "mean_mag": 0.244,
+    "p95_mag": 1.0,
+    "max_mag": 1.0,
+    "frac_lt_0.5px": 0.7558,
+    "frac_lt_1px": 0.7558
+   }
+  },
+  "p05_colour": {
+   "pdfium_vs_poppler": {
+    "n": 700,
+    "mean_dx": -0.146,
+    "mean_dy": -0.053,
+    "mean_mag": 0.199,
+    "p95_mag": 1.0,
+    "max_mag": 1.0,
+    "frac_lt_0.5px": 0.8014,
+    "frac_lt_1px": 0.8014
+   },
+   "poppler_vs_source": {
+    "n": 696,
+    "mean_dx": 0.0,
+    "mean_dy": 0.0,
+    "mean_mag": 0.0,
+    "p95_mag": 0.0,
+    "max_mag": 0.0,
+    "frac_lt_0.5px": 1.0,
+    "frac_lt_1px": 1.0
+   }
+  },
+  "p08_symbols": {
+   "error": "missing renders"
+  }
+ },
+ "B_p01_mae_decomposition": {
+  "edge_0_1px": {
+   "px": 7296,
+   "mean_abs_diff": 36.5408,
+   "contribution_pct": 28.7
+  },
+  "near_2_3px": {
+   "px": 9636,
+   "mean_abs_diff": 10.1304,
+   "contribution_pct": 10.51
+  },
+  "far_gt3": {
+   "px": 59994,
+   "mean_abs_diff": 9.3396,
+   "contribution_pct": 60.31
+  },
+  "overall_mae": 0.0206
+ },
+ "C_outline_ground_truth": {
+  "p02_wronglabel": {
+   "outline_render_ink": 0,
+   "bbox": null,
+   "note": "outline renders; geometry sanity only (exact compare needs the source crop)"
+  }
+ },
+ "D_highres_convergence": {
+  "poppler_600dpi_to_300": {
+   "iou": 1.0
+  },
+  "pdfium_600dpi_to_300": {
+   "iou": 1.0
+  }
+ }
+}

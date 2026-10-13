@@ -244,7 +244,7 @@ def make_page_legacy(name, glyphs, paper=(255, 255, 255), w=520, h=340):
 
 def main():
     os.makedirs(OUT, exist_ok=True)
-    for d in ["p01_latin", "p02_wronglabel", "p03_kana", "p04_ligature", "p05_colour", "p06_degraded", "p07_sharedcid"]:
+    for d in ["p01_latin", "p02_wronglabel", "p03_kana", "p04_ligature", "p05_colour", "p06_degraded", "p07_sharedcid", "p08_symbols"]:
         os.makedirs(os.path.join(OUT, d), exist_ok=True)
 
     # p01: clean latin incl. two IDENTICAL 8 shapes (share a glyph: E1/E2)
@@ -292,6 +292,21 @@ def main():
         w=700,
         # reading order: top row left-to-right, then the word row
         groups=[[0], [1], [4], [2, 3]],
+    )
+
+    # p08: punctuation + financial symbols (operator M0-Q charter: counters,
+    # punctuation, kana marks, financial symbols localization)
+    make_page(
+        "p08_symbols",
+        [
+            (".", DEJAVU, 140, 20, 20),
+            (",", DEJAVU, 140, 80, 20),
+            ("-", DEJAVU, 140, 140, 30),
+            ("$", DEJAVU, 140, 220, 20),
+            ("%", DEJAVU, 140, 300, 20),
+            ("1,234.56", DEJAVU, 90, 20, 190, "1,234.56"),
+            ("-42", DEJAVU, 90, 320, 190, "-42"),
+        ],
     )
 
     # p06: degraded 8 variant (E2: distinct GID, same ToUnicode string)
