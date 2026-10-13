@@ -35,7 +35,123 @@ def canonical_rgb(img: Image.Image) -> bytes:
     return img.convert("RGB").tobytes()
 
 
-def make_page(name: str, glyphs, paper=(255, 255, 255), w=520, h=340):
+def make_page(name: str, glyphs, paper=(255, 255, 255), w=520, h=340, groups=None):
+    """glyphs: list of (text, font_path, size, x, y, ocr_text or None).
+    groups: optional list of lists of glyph indices; each group becomes ONE span
+    covering multiple symbols (SPEC §3 span-over-units cardinality)."""
+    img = Image.new("RGB", (w, h), paper)
+    draw = ImageDraw.Draw(img)
+    bboxes = []
+    for i, g in enumerate(glyphs):
+        text, font_path, size, x, y = g[:5]
+        ocr = g[5] if len(g) > 5 else None
+        font = ImageFont.truetype(font_path, size)
+        draw.text((x, y), text, font=font, fill=(20, 20, 20))
+        bboxes.append(draw.textbbox((x, y), text, font=font))
+    spans = []
+    order = []
+    if groups is None:
+        groups = [[i] for i in range(len(glyphs))]
+    for si, group in enumerate(groups):
+        oid = f"g{si:03d}"
+        # span text: concat of member texts (ocr labels)
+        parts = []
+        for gi in group:
+            g = glyphs[gi]
+            parts.append(g[5] if len(g) > 5 else g[0])
+        text = "".join(parts)
+        # byte ranges per member
+        ranges = []
+        off = 0
+        for gi in group:
+            g = glyphs[gi]
+            lbl = g[5] if len(g) > 5 else g[0]
+            n = len(lbl.encode("utf-8"))
+            ranges.append([off, off + n])
+            off += n
+        # span polygon = union bbox
+        xs0 = min(bboxes[gi][0] for gi in group)
+        ys0 = min(bboxes[gi][1] for gi in group)
+        xs1 = max(bboxes[gi][2] for gi in group)
+        ys1 = max(bboxes[gi][3] for gi in group)
+        sym_objs = []
+        for k, gi in enumerate(group):
+            bb = bboxes[gi]
+            sym_objs.append(
+                {
+                    "id": f"{oid}s{k:02d}",
+                    "text_range_utf8": ranges[k],
+                    "polygon": [
+                        [bb[0], bb[1]],
+                        [bb[2], bb[1]],
+                        [bb[2], bb[3]],
+                        [bb[0], bb[3]],
+                    ],
+                    "confidence": {"value": 99.0, "scale": "range_0_100", "calibrated": False},
+                }
+            )
+        spans.append(
+            {
+                "id": oid,
+                "text": text,
+                "separator_after": " ",
+                "polygon": [[xs0, ys0], [xs1, ys0], [xs1, ys1], [xs0, ys1]],
+                "direction": "ltr",
+                "role": "body",
+                "language": None,
+                "confidence": {"value": 99.0, "scale": "range_0_100", "calibrated": False},
+                "provenance": "source_generated",
+                "symbols": sym_objs,
+            }
+        )
+        order.append(oid)
+
+    page_id = name.split("_")[0]
+    png_path = os.path.join(OUT, name, name + ".png")
+    img.save(png_path)
+    rgb = canonical_rgb(img)
+    file_sha = hashlib.sha256(open(png_path, "rb").read()).hexdigest()
+    pixel_sha = pixel_hash_rgb(w, h, rgb)
+    doc = {
+        "schema_version": "1.0",
+        "page_id": page_id,
+        "raster": {
+            "asset_path": f"{name}/{name}.png",
+            "file_sha256": file_sha,
+            "pixel_sha256": pixel_sha,
+            "width_px": w,
+            "height_px": h,
+            "canonical_format": "rgb8",
+            "colour_tag": "srgb",
+            "icc_sha256": None,
+            "orientation_policy": "applied_once",
+            "decoder_id": "m0-fixture-pillow-rasterizer",
+            "dpi_x": DPI,
+            "dpi_y": DPI,
+        },
+        "page": {
+            "width_pt": w * PT,
+            "height_pt": h * PT,
+            "raster_to_page_pt": [PT, 0.0, 0.0, -PT, 0.0, h * PT],
+        },
+        "producer": {
+            "name": "m0-fixture-generator",
+            "version": "1.0",
+            "models": [],
+            "languages": [],
+        },
+        "granularity": "symbol",
+        "reading_order_status": "supplied",
+        "reading_order": order,
+        "spans": spans,
+        "protected_regions": [],
+    }
+    with open(os.path.join(OUT, name, name + ".ocr.json"), "w") as f:
+        json.dump(doc, f, indent=1, ensure_ascii=False)
+    print(f"{name}: {len(groups)} spans, file_sha={file_sha[:12]}..., pixel_sha={pixel_sha[:12]}...")
+
+
+def make_page_legacy(name, glyphs, paper=(255, 255, 255), w=520, h=340):
     """glyphs: list of (text, font_path, size, x, y, ocr_text or None)"""
     img = Image.new("RGB", (w, h), paper)
     draw = ImageDraw.Draw(img)
@@ -128,7 +244,7 @@ def make_page(name: str, glyphs, paper=(255, 255, 255), w=520, h=340):
 
 def main():
     os.makedirs(OUT, exist_ok=True)
-    for d in ["p01_latin", "p02_wronglabel", "p03_kana", "p04_ligature", "p05_colour", "p06_degraded"]:
+    for d in ["p01_latin", "p02_wronglabel", "p03_kana", "p04_ligature", "p05_colour", "p06_degraded", "p07_sharedcid"]:
         os.makedirs(os.path.join(OUT, d), exist_ok=True)
 
     # p01: clean latin incl. two IDENTICAL 8 shapes (share a glyph: E1/E2)
@@ -160,6 +276,23 @@ def main():
 
     # p05: 8 on coloured paper (VS-06): counters must show paper colour
     make_page("p05_colour", [("8", DEJAVU, 200, 60, 30)], paper=(216, 200, 160))
+
+    # p07: E1 (identical shapes, different labels -> N CIDs, one GID),
+    # E2 (different shapes, same label -> distinct GIDs, one string),
+    # E6 (one span covering two visual units)
+    make_page(
+        "p07_sharedcid",
+        [
+            ("8", DEJAVU, 200, 20, 20, "8"),
+            ("8", DEJAVU, 200, 240, 20, "6"),
+            ("1", DEJAVU, 120, 20, 200, "1"),
+            ("8", DEJAVU, 120, 90, 210, "8"),
+            ("8", DEJAVU, 200, 470, 20, "8"),  # regular 8 again -> same GID as glyph 0
+        ],
+        w=700,
+        # reading order: top row left-to-right, then the word row
+        groups=[[0], [1], [4], [2, 3]],
+    )
 
     # p06: degraded 8 variant (E2: distinct GID, same ToUnicode string)
     img = Image.new("RGB", (520, 340), (255, 255, 255))

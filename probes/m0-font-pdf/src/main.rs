@@ -46,6 +46,8 @@ pub struct OccurrenceRecord {
     pub semantic_text: String,
     pub cid: usize,
     pub bbox_px: [f64; 4],
+    /// SPEC §6.2 semantic owner (probe subset: visible_tounicode | unmapped)
+    pub owner: String,
 }
 
 #[derive(Debug, Default, serde::Serialize)]
@@ -281,6 +283,19 @@ fn build(page_dir: &PathBuf, out_dir: &PathBuf) -> Result<TraceLog, String> {
             semantic_text: text.clone(),
             cid: *cid,
             bbox_px: *bbox,
+            owner: "visible_tounicode".into(),
+        });
+        let _ = glyph_idx;
+    }
+    for (glyph_idx, bbox) in &artwork {
+        log.occurrences.push(OccurrenceRecord {
+            page_id: page.page_id.clone(),
+            span_id: "unowned".into(),
+            symbol_id: "artwork".into(),
+            semantic_text: String::new(),
+            cid: usize::MAX,
+            bbox_px: *bbox,
+            owner: "unmapped".into(),
         });
         let _ = glyph_idx;
     }

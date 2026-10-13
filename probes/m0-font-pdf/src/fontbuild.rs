@@ -131,12 +131,19 @@ pub fn build_font(
         vec![],
     );
 
-    // nominal cmap: representative chars per shape (NOT the PDF extraction truth)
+    // nominal cmap: representative chars per shape (NOT the PDF extraction truth).
+    // One char may be carried by several shapes (SPEC §3: several differently
+    // printed shapes can expose the same Unicode); the nominal cmap keeps only
+    // the first mapping per char — extraction uses ToUnicode, never this table.
     let mut mappings: Vec<(char, GlyphId)> = Vec::new();
+    let mut seen: Vec<char> = Vec::new();
     for (glyph_idx, semantic) in encodings {
         let gid = GlyphId::new((*glyph_idx + 1) as u32);
         for ch in semantic.chars() {
-            mappings.push((ch, gid));
+            if !seen.contains(&ch) {
+                seen.push(ch);
+                mappings.push((ch, gid));
+            }
         }
     }
     let cmap = Cmap::from_mappings(mappings).map_err(|e| e.to_string())?;
