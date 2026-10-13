@@ -57,3 +57,13 @@ at the bottom.
 - Open items recorded in M0_REPORT.md §7 (sub-pixel edge metric, ﬁ 1px placement,
   p06 topology AA sensitivity, MRC/tesseract blocked, corpus blocked).
 - Expected outcome: PROVISIONAL (no corpus, external baselines blocked). No M1 work.
+
+## Final M0 review — REVIEW_PENDING (2026-10-14)
+
+- deepseek-reviewer dispatch for the final implementation/artifact gate FAILED with an
+  infrastructure error: "Upstream request failed: Insufficient account funds"
+  (task_id ses_ec8d80710ffeY9txBR8aHFjS59). No review occurred.
+- Per SPEC/AGENT_BRIEF: a missing reviewer is REVIEW_PENDING, not approval. The M0 exit
+  decision in M0_REPORT.md §10 remains a PROPOSAL (PROVISIONAL), not a decision.
+- NOT DONE without review: M1 authorization, any unblocking of the operator exit table.
+- Retry: re-dispatch the final-gate reviewer when reviewer capacity is available.
