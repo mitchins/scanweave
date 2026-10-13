@@ -8,14 +8,15 @@ hOCR 5.5 reader) — each is a concrete qualification-failure repair under the c
 
 ## 1. Reproduction (charter point 1) — PASS (re-run on the FINAL tree)
 
-- Fresh clone → from-source build → full suite: **37 cargo tests pass** (incl. the E0
+- Fresh clone → from-source build → full suite: **36 cargo tests pass** (incl. the E0
   four-part-key mutation property test), schema fixture layer green (3 positive / 6
   negative), checks.py 8 pages + 8/8 E-proofs, measure.py all B0 checks true.
 - **28/28 acceptance artifacts byte-identical** between independent checkouts on the
   FINAL tree (out.pdf / out.ttf / b0_raster.pdf / b0_notext.pdf × 7 gate pages; full
   SHA-256 digests committed in `qualification/repro_hashcheck.json`; narrative in
-  `qualification/REPRODUCTION.md`). An earlier hashcheck (at `6fb9d24`, truncated
-  digests) was superseded by this final-tree rerun after the §2 repairs.
+  `qualification/REPRODUCTION.md`). An earlier truncated-digest spot-check existed only
+  outside the tree (never committed); the committed record is the final-tree full-digest
+  file produced after the §2 repairs.
 - Commands, versions, exit codes recorded in REPRODUCTION.md.
 
 ## 2. Visual-failure characterization (charter point 2) — CHARACTERIZED; one defect REPAIRED; amendment DRAFTED (review pending)
@@ -38,11 +39,11 @@ Evidence (`qualification/characterization.json`):
 1. **600 dpi convergence: IoU 1.0 in BOTH engines** (p02 rendered at 600 dpi, downsampled
    to the 300 dpi grid vs source). The outlines and placement are geometrically correct;
    the 300 dpi binary-mask differences are rasterization detail.
-2. **PDFium vs Poppler signed displacement** — per-page numbers (NOT an aggregate):
-   p05: mean |d| 0.199 px, 80.1% < 0.5 px, max 1.0 px, mean_dx −0.146;
-   p04: mean |d| 0.475 px, 52.5% < 0.5 px, max 1.414 px (the `fi` page);
-   p01: mean |d| 0.16 px, 84% < 0.5 px. Poppler-vs-source integer boundary displacement
-   is 0.0 where the gate passes. Conclusion: PDFium's ~1.1 px p95 is AA-threshold wobble
+2. **PDFium vs Poppler signed displacement** — per-page numbers from the committed
+   `characterization.json` (NOT an aggregate): p01: mean |d| 0.257 px, 74.3% < 0.5 px,
+   max 1.0 px, mean_dx −0.186; p04: mean |d| 0.475 px, 52.5% < 0.5 px, max 1.414 px
+   (the `fi` page); p05: mean |d| 0.199 px, 80.1% < 0.5 px, max 1.0 px. Poppler-vs-
+   source integer boundary displacement is 0.0 where the gate passes. Conclusion: PDFium's ~1.1 px p95 is AA-threshold wobble
    on shallow anti-aliased ramps (page-dependent), NOT a geometry or placement defect;
    p04's larger values track the disclosed 1 px `fi` placement deviation. No repair
    indicated for the wobble itself; no thresholds changed.
@@ -100,18 +101,23 @@ realistic 300-dpi text page → hOCR (118 chars, 118 x_conf values) → `hocr2js
 
 **Comparative table — identical sources, same tesseract OCR:**
 
+Committed numbers from `measurements.json` (`pages.p09_realtext`, harness-executed):
+
 | Tool (p09 single page) | bytes | ink IoU | transport |
 |---|---|---|---|
 | source PNG | 37,740 | — | — |
-| IA MRC (recode_pdf, JP2 `-r 500/750`) | 45,024 | 0.8485 | 118 chars |
-| OCRmyPDF 17.13 (`--force-ocr --output-type pdf --optimize 0`) | 40,127 | 0.7076 | 118 chars |
-| **ours B2 (reconstruction)** | **24,003** | **0.8312** | 113 chars ⚠ |
-| ours B0 (searchable raster) | 50,291 | 0.8508 | 113 chars ⚠ |
+| IA MRC (recode_pdf, JP2 `-r 500/750`) | 45,020 | 0.8452 | 118 chars |
+| OCRmyPDF 17.13 (`--force-ocr --output-type pdf --optimize 0`) | 40,120 | 0.7077 | 118 chars |
+| **ours B2 (reconstruction)** | **24,058** | **0.8307** | 113 chars ⚠ |
+| ours B0 (searchable raster) | 50,304 | 0.8508 (render-neutrality verified) | 113 chars ⚠ |
 
-**Repeated-text 4-page document (p10):** source 164,141 B; ours B2 (sum of pages)
-**100,174 B** = **0.66× OCRmyPDF (150,077 B) and 0.52× IA MRC (189,221 B)**; B0
+**Repeated-text 4-page document (p10)** — committed harness numbers
+(`measurements.json` `pages.p10_multipage`): source 164,141 B; ours B2 (per-page sum)
+**100,282 B** = **0.59× OCRmyPDF (169,244 B)** and **0.53× IA MRC (189,213 B)**; B0
 216,444 B. Repeated-glyph sharing works on real OCR (e.g. `o` reused across contexts:
-gid2 cids [1,33]).
+gid2 cids [1,33]). Caveat: external tools ran on a true 4-page PDF; ours is a per-page
+sum (multi-page assembly is M1) — recorded as an approximation direction, and the same
+touching-character import loss (§4 ⚠) applies to our text layer on these 36-px pages.
 
 **⚠ Known defect found and quantified (charter point 4's anti-fallback concern applies
 to fidelity, and this is a fidelity-side loss):** on 36-px kerned text, touching
@@ -137,7 +143,7 @@ expectation (when reconstruction helps) is what this table establishes on this m
 
 | # | Criterion | Status | Evidence |
 |---|---|---|---|
-| 1 | Pipeline end-to-end (synthetic, 8 gate pages incl. p08) | PASS | checks.py; probe_results.json (8 pages after Q-phase re-run) |
+| 1 | Pipeline end-to-end (synthetic, 8 gate pages incl. p08) | PASS with one recorded exception: p08 pdfium transport ORDER diverges on the scattered-symbol layout (content complete; visual gates otherwise pass) | checks.py; probe_results.json (8 pages after Q-phase re-run) |
 | 2 | Independent reproduction (36 tests, 28/28 artifacts byte-equal) | PASS | REPRODUCTION.md |
 | 3 | E0–E7 font-graph proofs | PASS (8/8) | probe_results.json + QDF re-parse (prior review) |
 | 4 | Six negative schema fixtures, dual layer | PASS | validate_fixtures.py + Rust tests |

@@ -140,6 +140,43 @@ def main() -> int:
         out["pages"]["p09_realtext"] = p09
         print("p09_realtext:", {k: v for k, v in p09.items() if k != "probe_rc"})
 
+    # --- Repeated-text 4-page document (p10): per-page sums + externals ---
+    p10_dir = os.path.join(FIXTURES, "p10_multipage")
+    if os.path.isdir(p10_dir):
+        p10 = {"pages": {}, "totals": {}}
+        tot = {"src": 0, "B0": 0, "B2": 0, "ocrmypdf": 0, "ia_mrc": 0}
+        for n in range(1, 5):
+            d = os.path.join(WORK, f"p10_page{n}")
+            os.makedirs(d, exist_ok=True)
+            png = os.path.join(p10_dir, f"p10_page{n}.png")
+            sh([PROBE, "build", "--page", os.path.join(p10_dir, f"page{n}"), "--out", d])
+            ipdf = os.path.join(d, "input.pdf")
+            PILImage.open(png).convert("RGB").save(ipdf, "PDF", resolution=300.0)
+            hocr = os.path.join(d, "tess.hocr")
+            sh([tess_bin, png, hocr[:-5], "-c", "hocr_char_boxes=1", "hocr"], env=ext_env)
+            sh([ocrmypdf_bin, "--output-type", "pdf", "--force-ocr", "-l", "eng",
+                "--optimize", "0", ipdf, os.path.join(d, "ocrm.pdf")], env=ext_env)
+            sh([recode, "-P", ipdf, "-T", hocr, "-o", os.path.join(d, "ia.pdf"), "-m", "0",
+                "--bg-compression-flags=-r 500", "--fg-compression-flags=-r 750",
+                "--hq-bg-compression-flags=-r 500", "--hq-fg-compression-flags=-r 750"],
+               env=ext_env)
+            row = {
+                "src": os.path.getsize(png),
+                "B0": os.path.getsize(os.path.join(d, "b0_raster.pdf")),
+                "B2": os.path.getsize(os.path.join(d, "out.pdf")),
+                "ocrmypdf": os.path.getsize(os.path.join(d, "ocrm.pdf")) if os.path.exists(os.path.join(d, "ocrm.pdf")) else 0,
+                "ia_mrc": os.path.getsize(os.path.join(d, "ia.pdf")) if os.path.exists(os.path.join(d, "ia.pdf")) else 0,
+            }
+            p10["pages"][n] = row
+            for k in tot:
+                tot[k] += row[k]
+        p10["totals"] = tot
+        p10["totals"]["B2_vs_ocrmypdf"] = round(tot["B2"] / tot["ocrmypdf"], 4) if tot["ocrmypdf"] else None
+        p10["totals"]["B2_vs_ia_mrc"] = round(tot["B2"] / tot["ia_mrc"], 4) if tot["ia_mrc"] else None
+        p10["totals"]["B2_vs_B0"] = round(tot["B2"] / tot["B0"], 4) if tot["B0"] else None
+        out["pages"]["p10_multipage"] = p10
+        print("p10_multipage totals:", p10["totals"])
+
     for name in PAGES:
         page_dir = os.path.join(FIXTURES, name)
         out_dir = os.path.join(WORK, name)

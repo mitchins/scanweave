@@ -5,11 +5,14 @@ Date: 2026-10-14. Method: fresh `git clone` of the repository into
 in that clean checkout. This closes the ledger distinction left by the restricted-shell
 final review ("re-parsed but did not execute").
 
-## Frozen baseline
+## Reproduction checkout
 
-- Tag `m0-provisional-baseline` → commit `3172a32` (operator-accepted).
-- Reproduction checkout HEAD: `6fb9d24` (M0-Q plan commit; contains no engine changes —
-  tag is 2 commits behind HEAD: ledger + this plan only).
+- Frozen baseline tag `m0-provisional-baseline` → commit `3172a32` (operator-accepted).
+- Final-tree reproduction checkout: `597386f` (M0-Q REVISE repairs). The subsequent
+  commit `9c28819` adds ONLY the committed digest record
+  (`qualification/repro_hashcheck.json`) produced by this reproduction — no code.
+- Scope: 8 gate pages; 32 acceptance artifacts (8 × out.pdf / out.ttf / b0_raster.pdf /
+  b0_notext.pdf).
 
 ## Environment (recorded)
 
@@ -36,15 +39,18 @@ clone (`cargo build` after clean clone; target/ is gitignored).
 | `cargo build -p m0-font-pdf` | success (29.8 s, from source) |
 | `cargo test` | **36 passed, 0 failed** (incl. `e0_four_part_key_property`) |
 | `qualification/validate_fixtures.py` | 3 positive pass / 6 negative rejected — all ok |
-| `qualification/checks.py` | 7 pages verified; **8/8 E-proofs PASS**; visual gates as in probe_results.json (see Q2) |
-| `qualification/measure.py` | all B0 checks (chars/neutral/qpdf) true ×7; ratios reproduced |
+| `qualification/checks.py` | **8 pages** verified; **8/8 E-proofs PASS**; visual gates as in probe_results.json (p08 pdfium transport-order exception recorded; see M0_Q_REPORT §5) |
+| `qualification/measure.py` | all B0 checks (chars/neutral/qpdf) true; p09 external comparison executed (IA MRC / OCRmyPDF / ours — numbers committed in measurements.json); ratios reproduced |
 
-## Cross-checkout determinism
+## Cross-checkout determinism (final tree)
 
-All 28 acceptance artifacts (7 pages × out.pdf / out.ttf / b0_raster.pdf / b0_notext.pdf)
-SHA-256 **byte-identical** between the canonical checkout and the fresh from-source clone
-(`repro_hashcheck.json`, full table). Determinism claim E7 generalizes from single-checkout
-reruns to independent checkouts of the same tree on the pinned toolchain.
+All **32** acceptance artifacts (8 pages × out.pdf / out.ttf / b0_raster.pdf /
+b0_notext.pdf) SHA-256 **byte-identical** (full 64-hex digests) between the canonical
+checkout and the fresh from-source clone — committed record:
+`qualification/repro_hashcheck.json` (all_equal: true; per-artifact rows).
+Determinism claim E7 generalizes from single-checkout reruns to independent checkouts
+of the same tree on the pinned toolchain. Additionally, one pixel-hash binding was
+independently re-derived from the SWRASTER1 preimage during reproduction (match).
 
 ## Tool versions for the record
 

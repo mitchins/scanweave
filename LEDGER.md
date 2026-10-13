@@ -131,7 +131,7 @@ at the bottom.
   first-claim → tightest-containing-box (real OCR boxes overlap); did NOT fix the
   touching-char loss; reproduction re-run on the final tree. (3) hOCR reader: tesseract
   5.5 cinfo format (direct char text, x_conf, word text = char concat).
-- **Reproduction re-run on the FINAL tree** (after all repairs): 37 tests pass; 28/28
+- **Reproduction re-run on the FINAL tree** (after all repairs): 36 tests pass; 28/28
   artifacts byte-identical across independent checkouts; full SHA-256 digests committed
   at qualification/repro_hashcheck.json (supersedes the truncated-digest check at
   6fb9d24 flagged by the reviewer).
