@@ -1,0 +1,212 @@
+# ScanWeave UPSTREAMS lock — M0
+# Created 2026-10-13 by the M0 implementation agent.
+# Evidence basis: crates.io registry API (2026-10-13), Cargo.lock resolved by cargo 1.99.0,
+# sha256 over the exact .crate artifacts cached by that resolution, upstream release artifacts
+# for qualification tools. Existing version numbers from conversation or marketing were NOT
+# used as evidence.
+#
+# POLICY: no silent upstream upgrades in qualification. Any version bump = new lock entry +
+# ledger note. Licences audited 2026-10-13.
+
+[metadata]
+lock_date = "2026-10-13"
+rust_toolchain = "1.99.0 (b940084d7 2026-09-28)"
+cargo_version = "1.99.0"
+cargo_lockfile_sha256_note = "Cargo.lock is committed; see git for its hash"
+registry = "sparse+https://index.crates.io/"
+
+# ---------------------------------------------------------------------------
+# Runtime dependencies (shipped path: core, io; probe binary is dev-scope but
+# links the same crates). Exact .crate sha256 recorded from the cargo cache.
+# ---------------------------------------------------------------------------
+
+[[runtime_crate]]
+name = "serde"
+version = "1.0.229"
+sha256 = "4148590afebada386688f18773da617792bf2ef03ffc1e4cbd2b1d45b023e0ba"
+licence = "MIT OR Apache-2.0"
+features = ["derive"]
+scope = "core/io: normalized OCR types, schema-mirroring structs"
+platform = "linux-x86_64 verified by build"
+
+[[runtime_crate]]
+name = "serde_json"
+version = "1.0.154"
+sha256 = "e7e9cc8b1b85264074fbcc02a88680c4096b1e47df8f739dceb03bf482f04bd6"
+licence = "MIT OR Apache-2.0"
+features = ["default"]
+scope = "core/io: normalized OCR JSON import/export"
+
+[[runtime_crate]]
+name = "thiserror"
+version = "2.0.21"
+sha256 = "09e52cb86a36cede5cb101bf8908837b3e4c6e5e59fe7fd85c23fb56200d189e"
+licence = "MIT OR Apache-2.0"
+features = ["default"]
+scope = "core/io: typed error enums"
+
+[[runtime_crate]]
+name = "kurbo"
+version = "0.11.3"
+sha256 = "c62026ae44756f8a599ba21140f350303d4f08dcdcc71b5ad9c9bb8128c13c62"
+licence = "Apache-2.0 OR MIT"
+features = ["default"]
+scope = "core/io/probe: Bezier path types, cubic-to-quadratic conversion"
+
+[[runtime_crate]]
+name = "quick-xml"
+version = "0.36.2"
+sha256 = "f7649a7b4df05aed9ea7ec6f628c67c9953a43869b8bc50929569b2999d443fe"
+licence = "MIT"
+features = ["default"]
+scope = "io: hOCR reader (external-entity-free parsing to be asserted by IN-06 test)"
+
+[[runtime_crate]]
+name = "image"
+version = "0.25.10"
+sha256 = "85ab80394333c02fe689eaf900ab500fbd0c2213da414687ebf995a65d5a6104"
+licence = "MIT OR Apache-2.0"
+features = ["png", "jpeg", "tiff"]   # default features disabled; audited codecs only
+scope = "io/probe: raster decode/encode (canonical samples)"
+
+[[runtime_crate]]
+name = "imageproc"
+version = "0.25.1"
+sha256 = "602b4e8a4cc3e98372b766cd184ab532999bc0e839b7469e759511ccabc65d77"
+licence = "MIT"
+features = ["default"]
+scope = "probe: connected components, thresholding"
+
+[[runtime_crate]]
+name = "vtracer"
+version = "0.6.5"
+sha256 = "c2307187c5c99e7387f3158a29b0be541b99b06c5c492598b77644bf5603bd0c"
+licence = "MIT OR Apache-2.0"
+features = ["default"]
+scope = "probe: raster mask -> vector contours (M0 probe only; adapter route per SPEC 11.1)"
+note = "transitively pulls visioncortex 0.8.10 (MIT OR Apache-2.0); wasm/cross-target deps locked but not built on linux-x86_64"
+
+[[runtime_crate]]
+name = "write-fonts"
+version = "0.34.0"
+sha256 = "eac08930632f8f2f9cc8c1270570206cce97abf84862e5b485a9897e2d743e27"
+licence = "MIT OR Apache-2.0"
+features = ["default"]
+scope = "io/probe: TrueType serialization (glyf/loca/head/hhea/hmtx/maxp/cmap/name/OS2/post)"
+
+[[runtime_crate]]
+name = "read-fonts"
+version = "0.33.1"
+sha256 = "50ea612a55c08586a1d15134be8a776186c440c312ebda3b9e8efbfe4255b7f4"
+licence = "MIT OR Apache-2.0"
+features = ["default"]
+scope = "io/probe: font re-parse for self-check (independent validation is fontTools/OTS)"
+
+[[runtime_crate]]
+name = "pdf-writer"
+version = "0.12.1"
+sha256 = "5df03c7d216de06f93f398ef06f1385a60f2c597bb96f8195c8d98e08a26b1d5"
+licence = "MIT OR Apache-2.0"
+features = ["default"]
+scope = "io/probe: Type0/CIDFontType2 PDF emission, ToUnicode, CIDToGIDMap"
+
+[[runtime_crate]]
+name = "pdfium-render"
+version = "0.8.37"
+sha256 = "6553f6604a52b3203db7b4e9d51eb4dd193cf455af9e56d40cab6575b547b679"
+licence = "MIT OR Apache-2.0"
+features = []
+scope = "probe/qualification-only: bindings to the pinned PDFium shared lib (engine #2)"
+runtime_lib = "tools/src/pdfium/lib/libpdfium.so (chromium/8100, tgz sha256 1c1894a12d4d96ee01400c3874444126254180c5c7d2ab628576b67f8120320a)"
+
+# ---------------------------------------------------------------------------
+# Transitive licence audit (2026-10-13, crates.io API, full Cargo.lock graph):
+# 224 packages. NONE copyleft (no GPL/AGPL/MPL/EPL). Permissive set:
+# MIT / Apache-2.0 / BSD-2/3-Clause / ISC / Zlib / 0BSD / Unlicense / BSL-1.0 /
+# CC0-1.0 / Unicode-3.0, incl. "Apache-2.0 WITH LLVM-exception" (wasi/wit-bindgen).
+# Notable composite licences:
+#   libfuzzer-sys 0.4.13 = (MIT OR Apache-2.0) AND NCSA   [NCSA = permissive U.Ill.]
+#   unicode-ident 1.0.27 = (MIT OR Apache-2.0) AND Unicode-3.0
+#   r-efi 5.3.0/6.0.0    = MIT OR Apache-2.0 OR LGPL-2.1+ [MIT/Apache option used]
+# Platform-inapplicable deps (winapi*, wasm-bindgen*, wasm/web-sys, windows-*,
+# android/hermit/wasi targets) are locked by cargo for other targets and are
+# NOT built on linux-x86_64.
+# ---------------------------------------------------------------------------
+
+# ---------------------------------------------------------------------------
+# Qualification-only dependencies (dev harness; never linked into shipped code)
+# ---------------------------------------------------------------------------
+
+[[qualification_tool]]
+name = "qpdf"
+version = "12.4.2"
+provenance = "github release tarball qpdf-12.4.2.tar.gz"
+sha256 = "8a58af5b6141319287c1883bec8bd1bd545b7567b7fc5e6ce5d25a1c85f36397"
+licence = "Apache-2.0"
+built_locally = true
+role = "independent structural PDF checker (qpdf --check)"
+
+[[qualification_tool]]
+name = "ots-sanitize"
+version = "9.3.0"
+provenance = "github release prebuilt Linux zip + source tarball"
+sha256_zip = "1caab4037806688203efd124b97443694794ca69a3dddd9a42b4833a4f8c4967"
+sha256_source = "23814f8e90ee77379f54e86a012c09bba2d133940e5257546b29cf087a73beec"
+licence = "BSD-3-Clause (upstream ots)"
+role = "independent OpenType sanitizer"
+
+[[qualification_tool]]
+name = "poppler-utils"
+version = "24.02.0"
+provenance = "system (Ubuntu 24.04 apt)"
+licence = "GPL-2.0 (executables, used as black-box CLI only — no code linkage)"
+role = "independent render (pdftoppm) + extraction (pdftotext) engine #1"
+
+[[qualification_tool]]
+name = "fontTools"
+version = "4.46.0"
+provenance = "system python3 site-packages"
+licence = "MIT"
+role = "independent font parser/oracle (glyf contours, winding, cmap/ToUnicode dumps)"
+
+[[qualification_tool]]
+name = "pdfium"
+version = "chromium/8100"
+provenance = "bblanchon/pdfium-binaries release pdfium-linux-x64.tgz"
+sha256 = "1c1894a12d4d96ee01400c3874444126254180c5c7d2ab628576b67f8120320a"
+licence = "Apache-2.0 (BSD-style, Chromium)"
+role = "independent render/extraction engine #2 via pdfium-render bindings"
+
+[[qualification_tool]]
+name = "python3"
+version = "system 3.12.x (Ubuntu 24.04)"
+licence = "PSF-2.0"
+role = "qualification harness + JSON-Schema Draft 2020-12 validation (jsonschema 4.10.3, MIT, system)"
+
+[[qualification_tool]]
+name = "fixture fonts (harness-only, never committed)"
+provenance = "system: DejaVu, Liberation, Noto Sans Mono, fonts-japanese-gothic, IPA Gothic, WQY"
+licence = "Bitstream-Vera/DejaVu, OFL, GPL+exception (IPA) — rasterized into synthetic scans only"
+role = "pixel sources for synthetic scans; reconstruction never reads font files"
+
+# ---------------------------------------------------------------------------
+# Optional OCR subprocess
+# ---------------------------------------------------------------------------
+
+[[optional_subprocess]]
+name = "tesseract"
+version = "UNAVAILABLE in this environment"
+provenance = "apt candidate 5.3.4-1build5 exists; no root (sudo requires password); source build deferred"
+licence_would_be = "Apache-2.0"
+role = "optional convenience OCR; NOT exercised by M0 synthetic probes"
+status = "UNAVAILABLE — convenience-OCR routes untestable here; recorded, never reported as pass"
+
+# ---------------------------------------------------------------------------
+# Rules
+# ---------------------------------------------------------------------------
+# 1. Builds use `cargo build --locked` against the committed Cargo.lock.
+# 2. Upgrades/changes = new entry here + LEDGER.md note; never silent.
+# 3. Qualification tools are executables/oracles; none are linked into
+#    scanweave-core/io/cli. Poppler/tesseract GPL executables are black-box
+#    subprocess/CLI usage only.
+# 4. No font files or model weights are committed to the repository.

@@ -1,0 +1,18 @@
+[package]
+name = "scanweave-io"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+description = "Image and OCR import, bundle validation, font serialization, PDF assembly adapters."
+
+[dependencies]
+scanweave-core = { workspace = true }
+serde = { workspace = true }
+serde_json = { workspace = true }
+thiserror = { workspace = true }
+kurbo = { workspace = true }
+quick-xml = { workspace = true }
+image = { workspace = true }
+write-fonts = { workspace = true }
+read-fonts = { workspace = true }
+pdf-writer = { workspace = true }

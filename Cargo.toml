@@ -1,0 +1,33 @@
+[workspace]
+resolver = "2"
+members = [
+    "crates/scanweave-core",
+    "crates/scanweave-io",
+    "crates/scanweave-cli",
+    "probes/m0-font-pdf",
+]
+
+[workspace.package]
+version = "0.1.0"
+edition = "2021"
+license = "MIT OR Apache-2.0"
+repository = "https://example.invalid/scanweave"
+
+[workspace.dependencies]
+scanweave-core = { path = "crates/scanweave-core" }
+scanweave-io = { path = "crates/scanweave-io" }
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+thiserror = "2"
+kurbo = "0.11"
+quick-xml = "0.36"
+image = { version = "0.25", default-features = false, features = ["png", "jpeg", "tiff"] }
+imageproc = "0.25"
+vtracer = "0.6"
+write-fonts = "0.34"
+read-fonts = "0.33"
+pdf-writer = "0.12"
+pdfium-render = "0.8"
+
+[profile.release]
+debug = false
