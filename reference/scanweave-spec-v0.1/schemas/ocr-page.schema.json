@@ -1,0 +1,544 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:scanweave:schema:ocr-page:1.0",
+  "title": "ScanWeave normalized OCR page v1.0",
+  "description": "A proposed interchange contract. Structural validation does not establish image binding or OCR correctness.",
+  "type": "object",
+  "properties": {
+    "schema_version": {
+      "const": "1.0"
+    },
+    "page_id": {
+      "type": "string",
+      "pattern": "^[A-Za-z][A-Za-z0-9_.:-]{0,127}$"
+    },
+    "raster": {
+      "type": "object",
+      "properties": {
+        "asset_path": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 4096,
+          "description": "Relative path below the bundle root. Runtime must reject traversal, URI schemes and symlink escapes."
+        },
+        "file_sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "pixel_sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "width_px": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 100000
+        },
+        "height_px": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 100000
+        },
+        "canonical_format": {
+          "enum": [
+            "mono1_msb",
+            "gray8",
+            "gray16be",
+            "rgb8",
+            "rgb16be",
+            "rgba8",
+            "rgba16be"
+          ]
+        },
+        "colour_tag": {
+          "enum": [
+            "srgb",
+            "gray_gamma22",
+            "icc"
+          ]
+        },
+        "icc_sha256": {
+          "anyOf": [
+            {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "orientation_policy": {
+          "const": "applied_once"
+        },
+        "decoder_id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256
+        },
+        "dpi_x": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "dpi_y": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        }
+      },
+      "required": [
+        "asset_path",
+        "file_sha256",
+        "pixel_sha256",
+        "width_px",
+        "height_px",
+        "canonical_format",
+        "colour_tag",
+        "icc_sha256",
+        "orientation_policy",
+        "decoder_id"
+      ],
+      "additionalProperties": false
+    },
+    "page": {
+      "type": "object",
+      "properties": {
+        "width_pt": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "height_pt": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "raster_to_page_pt": {
+          "type": "array",
+          "items": {
+            "type": "number"
+          },
+          "minItems": 6,
+          "maxItems": 6
+        }
+      },
+      "required": [
+        "width_pt",
+        "height_pt",
+        "raster_to_page_pt"
+      ],
+      "additionalProperties": false
+    },
+    "source_geometry": {
+      "type": "object",
+      "properties": {
+        "source_kind": {
+          "enum": [
+            "image",
+            "pdf"
+          ]
+        },
+        "source_page_index": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "media_box": {
+          "type": "array",
+          "items": {
+            "type": "number"
+          },
+          "minItems": 4,
+          "maxItems": 4
+        },
+        "crop_box": {
+          "type": "array",
+          "items": {
+            "type": "number"
+          },
+          "minItems": 4,
+          "maxItems": 4
+        },
+        "rotate_degrees": {
+          "enum": [
+            0,
+            90,
+            180,
+            270
+          ]
+        },
+        "user_unit": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "raster_to_source_user": {
+          "type": "array",
+          "items": {
+            "type": "number"
+          },
+          "minItems": 6,
+          "maxItems": 6
+        }
+      },
+      "required": [
+        "source_kind",
+        "source_page_index"
+      ],
+      "additionalProperties": false
+    },
+    "producer": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256
+        },
+        "version": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256
+        },
+        "models": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 256
+              },
+              "sha256": {
+                "type": "string",
+                "pattern": "^[0-9a-f]{64}$"
+              }
+            },
+            "required": [
+              "name",
+              "sha256"
+            ],
+            "additionalProperties": false
+          },
+          "minItems": 0,
+          "maxItems": 256
+        },
+        "languages": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 64
+          },
+          "minItems": 0,
+          "maxItems": 256
+        }
+      },
+      "required": [
+        "name",
+        "version",
+        "models",
+        "languages"
+      ],
+      "additionalProperties": false
+    },
+    "granularity": {
+      "enum": [
+        "symbol",
+        "cluster",
+        "word",
+        "line",
+        "mixed",
+        "none"
+      ]
+    },
+    "reading_order_status": {
+      "enum": [
+        "supplied",
+        "inferred",
+        "unknown"
+      ]
+    },
+    "reading_order": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^[A-Za-z][A-Za-z0-9_.:-]{0,127}$"
+      },
+      "minItems": 0,
+      "maxItems": 100000,
+      "uniqueItems": true
+    },
+    "spans": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^[A-Za-z][A-Za-z0-9_.:-]{0,127}$"
+          },
+          "text": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 16384
+          },
+          "separator_after": {
+            "type": "string",
+            "maxLength": 1024,
+            "pattern": "^\\s*$"
+          },
+          "polygon": {
+            "type": "array",
+            "items": {
+              "type": "array",
+              "items": {
+                "type": "number",
+                "minimum": -10000000,
+                "maximum": 10000000
+              },
+              "minItems": 2,
+              "maxItems": 2
+            },
+            "minItems": 3,
+            "maxItems": 128
+          },
+          "direction": {
+            "enum": [
+              "ltr",
+              "rtl",
+              "ttb",
+              "unknown"
+            ]
+          },
+          "role": {
+            "enum": [
+              "body",
+              "heading",
+              "table_cell",
+              "ruby",
+              "footnote",
+              "marginalia",
+              "other",
+              "unknown"
+            ]
+          },
+          "language": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "maxLength": 64
+          },
+          "confidence": {
+            "type": "object",
+            "properties": {
+              "value": {
+                "type": [
+                  "number",
+                  "null"
+                ]
+              },
+              "scale": {
+                "enum": [
+                  "range_0_100",
+                  "probability",
+                  "logit",
+                  "engine_specific",
+                  "unknown"
+                ]
+              },
+              "calibrated": {
+                "type": "boolean"
+              }
+            },
+            "required": [
+              "value",
+              "scale",
+              "calibrated"
+            ],
+            "additionalProperties": false,
+            "description": "Source-engine confidence, not an automatically calibrated probability. Unknown is null/unknown/false."
+          },
+          "provenance": {
+            "enum": [
+              "ocr",
+              "human_correction",
+              "source_generated",
+              "unknown"
+            ]
+          },
+          "baseline": {
+            "type": "array",
+            "items": {
+              "type": "array",
+              "items": {
+                "type": "number",
+                "minimum": -10000000,
+                "maximum": 10000000
+              },
+              "minItems": 2,
+              "maxItems": 2
+            },
+            "minItems": 2,
+            "maxItems": 256
+          },
+          "parent_span_id": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "symbols": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "pattern": "^[A-Za-z][A-Za-z0-9_.:-]{0,127}$"
+                },
+                "text_range_utf8": {
+                  "type": "array",
+                  "items": {
+                    "type": "integer",
+                    "minimum": 0
+                  },
+                  "minItems": 2,
+                  "maxItems": 2
+                },
+                "polygon": {
+                  "type": "array",
+                  "items": {
+                    "type": "array",
+                    "items": {
+                      "type": "number",
+                      "minimum": -10000000,
+                      "maximum": 10000000
+                    },
+                    "minItems": 2,
+                    "maxItems": 2
+                  },
+                  "minItems": 3,
+                  "maxItems": 128
+                },
+                "confidence": {
+                  "type": "object",
+                  "properties": {
+                    "value": {
+                      "type": [
+                        "number",
+                        "null"
+                      ]
+                    },
+                    "scale": {
+                      "enum": [
+                        "range_0_100",
+                        "probability",
+                        "logit",
+                        "engine_specific",
+                        "unknown"
+                      ]
+                    },
+                    "calibrated": {
+                      "type": "boolean"
+                    }
+                  },
+                  "required": [
+                    "value",
+                    "scale",
+                    "calibrated"
+                  ],
+                  "additionalProperties": false,
+                  "description": "Source-engine confidence, not an automatically calibrated probability. Unknown is null/unknown/false."
+                }
+              },
+              "required": [
+                "id",
+                "text_range_utf8",
+                "polygon",
+                "confidence"
+              ],
+              "additionalProperties": false,
+              "description": "Range is [start,end) in UTF-8 bytes of the parent span text; semantic validator enforces boundaries and nonempty valid coverage."
+            },
+            "minItems": 0,
+            "maxItems": 100000
+          }
+        },
+        "required": [
+          "id",
+          "text",
+          "separator_after",
+          "polygon",
+          "direction",
+          "role",
+          "language",
+          "confidence",
+          "provenance",
+          "symbols"
+        ],
+        "additionalProperties": false
+      },
+      "minItems": 0,
+      "maxItems": 100000
+    },
+    "protected_regions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^[A-Za-z][A-Za-z0-9_.:-]{0,127}$"
+          },
+          "polygon": {
+            "type": "array",
+            "items": {
+              "type": "array",
+              "items": {
+                "type": "number",
+                "minimum": -10000000,
+                "maximum": 10000000
+              },
+              "minItems": 2,
+              "maxItems": 2
+            },
+            "minItems": 3,
+            "maxItems": 128
+          },
+          "reason": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 256
+          },
+          "origin": {
+            "enum": [
+              "caller",
+              "preset",
+              "source_generated"
+            ]
+          }
+        },
+        "required": [
+          "id",
+          "polygon",
+          "reason",
+          "origin"
+        ],
+        "additionalProperties": false
+      },
+      "minItems": 0,
+      "maxItems": 100000
+    }
+  },
+  "required": [
+    "schema_version",
+    "page_id",
+    "raster",
+    "page",
+    "producer",
+    "granularity",
+    "reading_order_status",
+    "reading_order",
+    "spans",
+    "protected_regions"
+  ],
+  "additionalProperties": false
+}

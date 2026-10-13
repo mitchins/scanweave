@@ -1,0 +1,260 @@
+{
+  "schema_version": "1.0",
+  "page_id": "p000001",
+  "raster": {
+    "asset_path": "pages/illustrative-not-bundled.png",
+    "file_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+    "pixel_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+    "width_px": 64,
+    "height_px": 32,
+    "canonical_format": "rgb8",
+    "colour_tag": "srgb",
+    "icc_sha256": null,
+    "orientation_policy": "applied_once",
+    "decoder_id": "illustrative-not-executed",
+    "dpi_x": 300,
+    "dpi_y": 300
+  },
+  "page": {
+    "width_pt": 15.36,
+    "height_pt": 7.68,
+    "raster_to_page_pt": [
+      0.24,
+      0,
+      0,
+      -0.24,
+      0,
+      7.68
+    ]
+  },
+  "producer": {
+    "name": "illustrative-provider",
+    "version": "not-executed",
+    "models": [],
+    "languages": [
+      "eng",
+      "jpn"
+    ]
+  },
+  "granularity": "symbol",
+  "reading_order_status": "supplied",
+  "reading_order": [
+    "s001",
+    "s002"
+  ],
+  "spans": [
+    {
+      "id": "s001",
+      "text": "Aガ",
+      "separator_after": " ",
+      "polygon": [
+        [
+          2,
+          4
+        ],
+        [
+          28,
+          4
+        ],
+        [
+          28,
+          24
+        ],
+        [
+          2,
+          24
+        ]
+      ],
+      "direction": "ltr",
+      "role": "body",
+      "language": "ja",
+      "confidence": {
+        "value": null,
+        "scale": "unknown",
+        "calibrated": false
+      },
+      "provenance": "source_generated",
+      "symbols": [
+        {
+          "id": "g001",
+          "text_range_utf8": [
+            0,
+            1
+          ],
+          "polygon": [
+            [
+              2,
+              4
+            ],
+            [
+              12,
+              4
+            ],
+            [
+              12,
+              24
+            ],
+            [
+              2,
+              24
+            ]
+          ],
+          "confidence": {
+            "value": null,
+            "scale": "unknown",
+            "calibrated": false
+          }
+        },
+        {
+          "id": "g002",
+          "text_range_utf8": [
+            1,
+            4
+          ],
+          "polygon": [
+            [
+              14,
+              4
+            ],
+            [
+              28,
+              4
+            ],
+            [
+              28,
+              24
+            ],
+            [
+              14,
+              24
+            ]
+          ],
+          "confidence": {
+            "value": null,
+            "scale": "unknown",
+            "calibrated": false
+          }
+        }
+      ]
+    },
+    {
+      "id": "s002",
+      "text": "80",
+      "separator_after": "\n",
+      "polygon": [
+        [
+          34,
+          4
+        ],
+        [
+          54,
+          4
+        ],
+        [
+          54,
+          24
+        ],
+        [
+          34,
+          24
+        ]
+      ],
+      "direction": "ltr",
+      "role": "table_cell",
+      "language": "en",
+      "confidence": {
+        "value": null,
+        "scale": "unknown",
+        "calibrated": false
+      },
+      "provenance": "source_generated",
+      "symbols": [
+        {
+          "id": "g003",
+          "text_range_utf8": [
+            0,
+            1
+          ],
+          "polygon": [
+            [
+              34,
+              4
+            ],
+            [
+              43,
+              4
+            ],
+            [
+              43,
+              24
+            ],
+            [
+              34,
+              24
+            ]
+          ],
+          "confidence": {
+            "value": null,
+            "scale": "unknown",
+            "calibrated": false
+          }
+        },
+        {
+          "id": "g004",
+          "text_range_utf8": [
+            1,
+            2
+          ],
+          "polygon": [
+            [
+              45,
+              4
+            ],
+            [
+              54,
+              4
+            ],
+            [
+              54,
+              24
+            ],
+            [
+              45,
+              24
+            ]
+          ],
+          "confidence": {
+            "value": null,
+            "scale": "unknown",
+            "calibrated": false
+          }
+        }
+      ]
+    }
+  ],
+  "protected_regions": [
+    {
+      "id": "pr001",
+      "polygon": [
+        [
+          32,
+          2
+        ],
+        [
+          56,
+          2
+        ],
+        [
+          56,
+          26
+        ],
+        [
+          32,
+          26
+        ]
+      ],
+      "reason": "numeric token including uncertainty margin",
+      "origin": "caller"
+    }
+  ]
+}

@@ -1,0 +1,104 @@
+# Proposed defaults, not a measured/qualified production profile.
+# SPEC.md and QUALIFICATION.md define semantics and the freeze procedure.
+schema_version = 1
+preset = "faithful"
+mode = "auto"
+effort = "balanced"
+
+[ocr]
+engine = "external"
+preserve_supplied_text = true
+# No automatic confidence-based deletion. Missing confidence stays unknown.
+# Languages apply only to an explicitly selected convenience OCR engine.
+languages = []
+
+[visual]
+policy_revision = "dev-initial-1"
+min_ink_iou = 0.98
+max_edge_p95_px = 0.5
+max_edge_max_px = 1.0
+max_local_mae = 0.02
+threshold_offsets = [-0.05, 0.0, 0.05]
+require_topology_preservation = true
+require_complete_ink_ownership = true
+context_padding_px = 2
+cleanup = "none"
+representative = "observed_medoid"
+# All error limits apply after final font quantization and placement.
+
+[dictionary]
+scope = "document_window"
+window_pages = 64
+persistent_cross_document_cache = false
+max_candidates_per_observation = 32
+max_bucket_entries = 4096
+max_representatives_per_window = 60000
+# Exhausting a limit means explicit fallback, never transitive merging.
+
+[fonts]
+format = "truetype_cid"
+units_per_em = 2048
+hinting = false
+max_glyphs_per_font = 60000
+max_cids_per_font = 60000
+max_points_per_glyph = 4096
+max_contours_per_glyph = 512
+max_font_bytes = 8388608
+
+[compression]
+background = "preserve"
+foreground_lossless_codec = true
+fallback_lossless = true
+mask_codec = "flate"
+jbig2 = "disabled"
+choose_actual_serialized_size = true
+keep_searchable_raster_candidate = true
+embed_original_document = false
+
+[compact_preset]
+# These apply only when explicitly selecting the compact preset.
+background_dpi = 150
+background_jpeg_quality = 85
+photo_jpeg_quality = 85
+preserve_unreconstructed_text_resolution = true
+
+[protection]
+financial_presets_protect_numeric_tokens = true
+include_adjacent_signs_and_currency = true
+include_identifier_like_tokens = true
+caller_regions_take_priority = true
+protected_pixels_lossless = true
+
+[execution]
+jobs = 2
+memory_mib = 1024
+scratch_mib = 4096
+max_page_pixels = 80000000
+max_page_dimension_px = 100000
+max_pages = 10000
+max_ocr_page_bytes = 16777216
+max_spans_per_page = 100000
+max_symbols_per_page = 500000
+max_span_utf8_bytes = 16384
+max_output_bytes = 1073741824
+network = false
+deterministic = true
+retain_debug_artifacts = false
+# All child-process limits must be included in the report.
+
+[validation]
+runtime_renderer = "hayro"
+require_runtime_visual_check = true
+compare_native_dpi = true
+compare_double_dpi = true
+require_structural_check = true
+require_independent_release_renderers = 2
+# A backend is selectable for a qualified run only after its pinned version passes M0-M5.
+
+[output]
+pdf_version = "1.7"
+incremental = false
+allow_source_overwrite = false
+allow_existing_output_replace = false
+metadata = "preserve_supported_safe"
+pdfa = "off"
