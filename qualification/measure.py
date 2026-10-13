@@ -66,25 +66,79 @@ def main() -> int:
     env = dict(os.environ, LD_LIBRARY_PATH=os.path.join(ROOT, "tools", "dist", "lib"))
     out = {"pages": {}, "external_baselines": {}}
 
-    # --- Bounded external baseline attempts (record, never fake) ---
-    ia = sh(["which", "ia-pdf-tools"])
-    ocrmypdf = sh(["which", "ocrmypdf"])
-    tess = sh(["which", "tesseract"])
+    # --- External baselines: executed with the pinned source-built tools ---
+    # (M0-Q repair B4: this section previously hard-coded BLOCKED; the tools are
+    # now built and the runs are real. Settings recorded per QUALIFICATION §3.)
+    ext = os.path.join(ROOT, "tools", "ext")
+    venv_bin = os.path.join(HERE, ".venv", "bin")
+    tess_bin = os.path.join(ext, "bin", "tesseract")
+    recode = os.path.join(venv_bin, "recode_pdf")
+    ocrmypdf_bin = os.path.join(venv_bin, "ocrmypdf")
+    ext_env = dict(
+        os.environ,
+        LD_LIBRARY_PATH=os.path.join(ext, "lib"),
+        TESSDATA_PREFIX=os.path.join(ext, "share", "tessdata"),
+        PATH=os.path.join(ext, "bin") + ":" + os.environ.get("PATH", ""),
+    )
     out["external_baselines"] = {
-        "internetarchive_pdftools": {
-            "status": "BLOCKED",
-            "reason": "not installed; build requires leptonica + AGPL toolchain; "
-            "session has no root (sudo requires password); bounded attempt not continued — "
-            "recorded per plan as PROVISIONAL contributor",
-        },
-        "ocrmypdf": {
-            "status": "BLOCKED",
-            "reason": f"binary present: {bool(ocrmypdf.stdout.strip())}; requires tesseract "
-            f"(present: {bool(tess.stdout.strip())}) and pip deps; apt blocked (no root)",
-        },
-        "note": "no compression comparison against external MRC in M0; ratios below are "
-        "utility-internal (B2 vs B0 vs source) per QUALIFICATION §3 denominators",
+        "tesseract": sh([tess_bin, "--version"], env=ext_env).stdout.splitlines()[:1],
+        "ocrmypdf": sh([ocrmypdf_bin, "--version"], env=ext_env).stdout.strip(),
+        "ia_recode_pdf": "archive-pdf-tools 1.5.7 @ 8fe8b5b7 + recorded PyMuPDF compat shim (see LEDGER.md)",
     }
+
+    # --- Real-page external comparison (p09: real tesseract OCR text page) ---
+    p09_dir = os.path.join(FIXTURES, "p09_realtext")
+    if os.path.isdir(p09_dir):
+        d = os.path.join(WORK, "p09_realtext")
+        os.makedirs(d, exist_ok=True)
+        r = sh([PROBE, "build", "--page", p09_dir, "--out", d])
+        p09 = {"probe_rc": r.returncode}
+        png = os.path.join(p09_dir, "p09_realtext.png")
+        p09["source_png"] = os.path.getsize(png)
+        for label, f in (("B2", "out.pdf"), ("B0", "b0_raster.pdf")):
+            p09[label] = os.path.getsize(os.path.join(d, f))
+        # external: make a 1-page PDF input, run ocrmypdf + ia recode_pdf
+        from PIL import Image as PILImage
+        PILImage.open(png).convert("RGB").save(os.path.join(d, "input.pdf"), "PDF", resolution=300.0)
+        hocr = os.path.join(d, "tess.hocr")
+        sh([tess_bin, png, hocr[:-5], "-c", "hocr_char_boxes=1", "hocr"], env=ext_env)
+        q = sh([ocrmypdf_bin, "--output-type", "pdf", "--force-ocr", "-l", "eng",
+                "--optimize", "0", os.path.join(d, "input.pdf"), os.path.join(d, "ocrm.pdf")],
+               env=ext_env)
+        p09["ocrmypdf_bytes"] = os.path.getsize(os.path.join(d, "ocrm.pdf")) if q.returncode == 0 else None
+        q = sh([recode, "-P", os.path.join(d, "input.pdf"), "-T", hocr,
+                "-o", os.path.join(d, "ia.pdf"), "-m", "0",
+                "--bg-compression-flags=-r", "500", "--fg-compression-flags=-r", "750",
+                "--hq-bg-compression-flags=-r", "500", "--hq-fg-compression-flags=-r", "750"],
+               env=ext_env)
+        # recode_pdf needs the flags as separate argv items; rerun with sh instead
+        if q.returncode != 0 or not os.path.exists(os.path.join(d, "ia.pdf")):
+            q = sh(
+                [recode, "-P", os.path.join(d, "input.pdf"), "-T", hocr,
+                 "-o", os.path.join(d, "ia.pdf"), "-m", "0",
+                 "--bg-compression-flags=-r 500", "--fg-compression-flags=-r 750",
+                 "--hq-bg-compression-flags=-r 500", "--hq-fg-compression-flags=-r 750"],
+                env=ext_env,
+            )
+        p09["ia_mrc_bytes"] = os.path.getsize(os.path.join(d, "ia.pdf")) if os.path.exists(os.path.join(d, "ia.pdf")) else None
+        # fidelity: ink IoU for every candidate (same threshold rule)
+        src_gray = np.asarray(PILImage.open(png).convert("L"))
+        def _fg(a, p=255.0, t=60.0):
+            return np.abs(a.astype(float) - p) > t
+        ms = _fg(src_gray)
+        doc0 = pdfium.PdfDocument(os.path.join(d, "out.pdf"))
+        ren0 = np.asarray(doc0[0].render(scale=300 / 72.0).to_pil().convert("L"))[: src_gray.shape[0], : src_gray.shape[1]]
+        mr0 = _fg(ren0)
+        p09["B2_ink_iou"] = round(float((ms & mr0).sum() / (ms | mr0).sum()), 4)
+        for label, f in (("ia_mrc", "ia.pdf"), ("ocrmypdf", "ocrm.pdf")):
+            fp = os.path.join(d, f)
+            if os.path.exists(fp):
+                dd = pdfium.PdfDocument(fp)
+                rr = np.asarray(dd[0].render(scale=300 / 72.0).to_pil().convert("L"))[: src_gray.shape[0], : src_gray.shape[1]]
+                mrr = _fg(rr)
+                p09[f"{label}_ink_iou"] = round(float((ms & mrr).sum() / (ms | mrr).sum()), 4)
+        out["pages"]["p09_realtext"] = p09
+        print("p09_realtext:", {k: v for k, v in p09.items() if k != "probe_rc"})
 
     for name in PAGES:
         page_dir = os.path.join(FIXTURES, name)

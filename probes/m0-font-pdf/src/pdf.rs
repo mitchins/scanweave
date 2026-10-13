@@ -24,6 +24,7 @@ pub fn assemble(
     page_w_pt: f32,
     page_h_pt: f32,
     paper: [u8; 3],
+    ink: [u8; 3],
     font_bytes: Vec<u8>,
 ) -> Result<(Vec<u8>, Vec<(String, u64)>), String> {
     let upem = 2048.0f32;
@@ -160,7 +161,14 @@ pub fn assemble(
     );
     content.rect(0.0, 0.0, page_w_pt, page_h_pt);
     content.fill_nonzero();
-    content.set_fill_rgb(0.0, 0.0, 0.0);
+    // glyph fill uses the SAMPLED source ink colour (never pure black by default:
+    // repainting gray-30 source ink as pure black is a visible colour change —
+    // caught by the M0-Q whole-page MAE gate)
+    content.set_fill_rgb(
+        ink[0] as f32 / 255.0,
+        ink[1] as f32 / 255.0,
+        ink[2] as f32 / 255.0,
+    );
 
     // unowned ink: vector artwork paths (no text semantics, no invented Unicode)
     for (glyph_idx, bbox_px) in artwork {

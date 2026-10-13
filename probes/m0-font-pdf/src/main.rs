@@ -348,6 +348,7 @@ fn build(page_dir: &PathBuf, out_dir: &PathBuf) -> Result<TraceLog, String> {
         page_w_pt,
         page_h_pt,
         paper,
+        seg.ink,
         font_bytes.clone(),
     )
     .map_err(|e| e.to_string())?;

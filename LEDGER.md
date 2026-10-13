@@ -110,3 +110,39 @@ at the bottom.
   distinction stands until an unrestricted execution reproduction is recorded.
 - Expectation recorded: reconstruction need not beat MRC per-document; M0-Q establishes
   correctness and measurable costs, not compression superiority.
+
+## M0-Q phase entries (2026-10-14) — reviewer REVISE findings repaired
+
+- **Corpus mount check**: no benign corpus anywhere on this machine (filesystem scan of
+  /data, /mnt, /media, /opt, /srv recorded in session). Q3 remains BLOCKED; adapter
+  delivered (`qualification/corpus_adapter.py`).
+- **External-baseline tool builds** (all pinned, no root): libtiff 4.6.0 (sha256
+  88b3979e…), leptonica 1.85.0 (3745ae3b…, rebuilt with TIFF, webp/openjpeg off),
+  tesseract 5.5.0 (f2fb34ca…), OpenJPEG 2.5.2 (90e3896f…), OCRmyPDF 17.13.0 (venv),
+  archive-pdf-tools 1.5.7 @ 8fe8b5b7. eng.traineddata sha256 7d4322bd….
+- **IA-tools compatibility shim (recorded per prior review)**: recode.py getPageImageList
+  → get_page_images (PyMuPDF ≥ 1.22 removed the alias; Python 3.12 has no legacy build)
+  + modulo index guard. 6 lines, applied to BOTH the source tree and the venv-installed
+  copy. Black-box AGPL comparator; no code enters the permissive engine.
+- **Defect repairs in the frozen-phase code** (charter-sanctioned; disclosed per review
+  B5): (1) ink colour — reconstruction painted pure black over gray-30 source ink;
+  now samples and repaints source ink colour (caught by the whole-page MAE gate; p01
+  poppler now passes all criteria, MAE 0.0206→0.0052). (2) units.rs ownership: greedy
+  first-claim → tightest-containing-box (real OCR boxes overlap); did NOT fix the
+  touching-char loss; reproduction re-run on the final tree. (3) hOCR reader: tesseract
+  5.5 cinfo format (direct char text, x_conf, word text = char concat).
+- **Reproduction re-run on the FINAL tree** (after all repairs): 37 tests pass; 28/28
+  artifacts byte-identical across independent checkouts; full SHA-256 digests committed
+  at qualification/repro_hashcheck.json (supersedes the truncated-digest check at
+  6fb9d24 flagged by the reviewer).
+- **measure.py**: external-baselines section now EXECUTES the pinned tools (no longer
+  hard-coded BLOCKED); p09 real-page comparison recorded in measurements.json.
+- **p08/p09/p10 fixtures** added (symbols; real-tesseract text page; 4-page repeated
+  text). probe_results.json covers 8 gate pages after re-run.
+- Report corrections per review B1/B2/B6/B7: MAE narrative corrected (ink-colour defect,
+  not AA softness), displacement stats per-page (no aggregate cherry-pick; p04 worse,
+  p08 completed), page count fixed, B0 113-char wording corrected (loss is in OCR-import
+  segmentation, affects B0 and B2 equally; NOT tesseract misrecognition — earlier
+  examples misattributed and corrected).
+- m0-qual-1 amendment NARROWED (MAE replacement withdrawn — the gate was right); the
+  remaining draft item is engine-AA-aware edge comparison, pending M1 calibration data.

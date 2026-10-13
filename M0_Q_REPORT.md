@@ -1,56 +1,79 @@
 # M0-Q Gate Report — qualification closure
 
 Date: 2024-10-14. Frozen baseline: commit `3172a32` (tag `m0-provisional-baseline`);
-post-review repairs and Q-phase tooling landed in subsequent commits (listed below).
-Charter: operator message of 2024-10-14 (5 points). No architecture/algorithm/interface
-changes were made; defect repairs are itemized in §2.
+Q-phase work landed in commits after `9479414` (itemized in §2 and LEDGER.md).
+Charter: operator message of 2024-10-14 (5 points). No architecture or interface
+changes; THREE defect repairs are itemized in §2 (ink colour, ownership assignment,
+hOCR 5.5 reader) — each is a concrete qualification-failure repair under the charter.
 
-## 1. Reproduction (charter point 1) — PASS
+## 1. Reproduction (charter point 1) — PASS (re-run on the FINAL tree)
 
-- Fresh clone → from-source build → full suite: **36 cargo tests pass** (incl. the E0
+- Fresh clone → from-source build → full suite: **37 cargo tests pass** (incl. the E0
   four-part-key mutation property test), schema fixture layer green (3 positive / 6
-  negative), checks.py 7 pages + 8/8 E-proofs, measure.py all B0 checks true.
-- **28/28 acceptance artifacts byte-identical** between independent checkouts
-  (out.pdf / out.ttf / b0_raster.pdf / b0_notext.pdf × 7 pages; SHA-256 table in
-  `repro_hashcheck.json`, narrative in `qualification/REPRODUCTION.md`).
+  negative), checks.py 8 pages + 8/8 E-proofs, measure.py all B0 checks true.
+- **28/28 acceptance artifacts byte-identical** between independent checkouts on the
+  FINAL tree (out.pdf / out.ttf / b0_raster.pdf / b0_notext.pdf × 7 gate pages; full
+  SHA-256 digests committed in `qualification/repro_hashcheck.json`; narrative in
+  `qualification/REPRODUCTION.md`). An earlier hashcheck (at `6fb9d24`, truncated
+  digests) was superseded by this final-tree rerun after the §2 repairs.
 - Commands, versions, exit codes recorded in REPRODUCTION.md.
 
-## 2. Visual-failure characterization (charter point 2) — CHARACTERIZED; policy amendment DRAFTED (review pending)
+## 2. Visual-failure characterization (charter point 2) — CHARACTERIZED; one defect REPAIRED; amendment DRAFTED (review pending)
+
+**Defect repairs itemized (charter-sanctioned; disclosed per review finding B5):**
+1. **Ink colour** (`mask.rs`/`pdf.rs`): reconstruction painted pure black over gray-30
+   source ink — caught by the whole-page MAE gate; now repaints sampled source ink
+   colour. Post-repair p01 poppler passes all criteria.
+2. **Ownership assignment** (`units.rs`): greedy first-claim → tightest-containing-box
+   (real OCR boxes overlap). This did NOT fix the touching-character loss (see §4 ⚠)
+   and is disclosed as an algorithm-level repair in a freeze phase, taken because the
+   prior assignment was measurably unfair on real OCR; the reproduction set was RE-RUN
+   on the final tree (§1 note).
+3. **hOCR 5.5 reader** (`hocr.rs`): char text directly inside cinfo spans (no `<u>`
+   wrapper), single `x_conf`, word text = char concat when the word span has no direct
+   text. Verified against real tesseract 5.5.0 output.
 
 Evidence (`qualification/characterization.json`):
 
-1. **600 dpi convergence: IoU 1.0 in BOTH engines** (rendered at 600 dpi, downsampled to
-   the 300 dpi grid vs source). The outlines and placement are geometrically correct; the
-   300 dpi binary-mask differences are rasterization detail.
-2. **PDFium vs Poppler signed displacement** (p04/p05/p08): mean |d| 0.199 px, 80% of
-   boundary points < 0.5 px, max 1.0 px, no systematic direction (mean_dx −0.146 px).
-   Poppler-vs-source integer boundary displacement is 0.0. Conclusion: PDFium's
-   ~1.1 px p95 is AA-threshold wobble on shallow anti-aliased ramps, NOT a geometry or
-   placement defect. No repair indicated; no thresholds changed.
-3. **p01 MAE 0.0206 decomposition**: the flat background differs by ~0.02/255 (negligible);
-   the difference concentrates in the anti-aliased ramp band where the SOURCE fixture's
-   PIL rasterization is softer than the font rasterizer's crisp edges (masks are
-   pixel-identical at the threshold; the raw-value MAE measures fixture rasterization
-   softness as much as reconstruction). The p01 miss is 3% over the 0.02 limit.
+1. **600 dpi convergence: IoU 1.0 in BOTH engines** (p02 rendered at 600 dpi, downsampled
+   to the 300 dpi grid vs source). The outlines and placement are geometrically correct;
+   the 300 dpi binary-mask differences are rasterization detail.
+2. **PDFium vs Poppler signed displacement** — per-page numbers (NOT an aggregate):
+   p05: mean |d| 0.199 px, 80.1% < 0.5 px, max 1.0 px, mean_dx −0.146;
+   p04: mean |d| 0.475 px, 52.5% < 0.5 px, max 1.414 px (the `fi` page);
+   p01: mean |d| 0.16 px, 84% < 0.5 px. Poppler-vs-source integer boundary displacement
+   is 0.0 where the gate passes. Conclusion: PDFium's ~1.1 px p95 is AA-threshold wobble
+   on shallow anti-aliased ramps (page-dependent), NOT a geometry or placement defect;
+   p04's larger values track the disclosed 1 px `fi` placement deviation. No repair
+   indicated for the wobble itself; no thresholds changed.
+3. **p01 MAE 0.0206 — REAL DEFECT FOUND AND REPAIRED.** The decomposition showed the
+   far-from-edge band contributing 60% of the absolute difference: the FIXTURE draws ink
+   at gray 30 while the reconstruction painted PURE BLACK — a ~0.078–0.118 solid-ink
+   colour change, i.e. a genuine visible-colour fidelity violation that the whole-page
+   MAE gate correctly caught. REPAIR (charter-sanctioned): the probe now samples the
+   source ink colour (median of foreground samples) and repaints glyphs in that colour
+   (`mask.rs` `Segmentation.ink`, consumed by `pdf.rs`). Post-repair p01 poppler:
+   IoU 1.000, edge p95 0.29 px, **MAE 0.0052** — the page PASSES all dev-initial-1
+   criteria in Poppler. Lesson recorded: the gate was right; the defect was ours.
 4. **p04 `fi` 1px**: sub-pixel metric confirms p95 1.01/1.07, max 1.32/1.07 — single-glyph,
    both engines, deterministic; unchanged from the M0 report disclosure.
+5. **Caveat disclosed:** the planned rasterizer-independent outline ground-truth check
+   (render the embedded TTF via PIL/cmap) produced no data — the probe's minimal nominal
+   cmap maps OCR labels, and PIL resolved the test char to .notdef. Nominal-cmap
+   completeness is deferred to M1; geometry ground truth is instead established by the
+   600 dpi convergence (item 1).
 
 **Proposed versioned policy amendment `m0-qual-1` (DRAFT — requires independent review
-before adoption; current gates remain as-is until then):**
+before adoption; current gates remain as-is until then; NARROWED after the ink-colour
+repair removed the MAE driver):**
 (a) geometric fidelity is judged by ink-mask IoU + sub-pixel symmetric edge distance
-against the source ink (the measures that isolate geometry from rasterizer AA);
-(b) raw-channel MAE is reported ink-weighted and background-weighted separately (as
-QUALIFICATION §4.2 already requires) and the flat 0.02 whole-page MAE criterion is
-replaced by background MAE ≤ 0.01 and solid-region MAE ≤ 0.03 on the same data.
-Rationale: the current whole-page MAE conflates the reference fixture's own
-anti-aliasing softness with reconstruction error, and cross-engine AA differences
-(documented above) dominate at 300 dpi. No threshold is relaxed in this report; the
-amendment takes effect only after review.
-
-Localized evidence for counters/punctuation/kana/financial symbols: `p08_symbols`
-fixture added (`. , - $ %`, `1,234.56`, `-42`): qpdf/OTS/extraction pass; per-symbol
-trace metrics within budget (trace ≤ 0.497 px); gate results in probe_results.json
-(same AA-dominated pattern as other pages).
+against the source ink;
+(b) whole-page raw MAE stays as a gate (it caught a real defect) with the ink-weighted /
+background-weighted split reported alongside (QUALIFICATION §4.2);
+(c) the remaining pdfium edge p95 ~1.1 px is proposed to be treated as engine-AA
+variance with an engine-paired criterion ONLY IF the M1 calibration data confirms the
+outlines are sub-pixel accurate under pdfium at higher rendering resolutions. Nothing
+is relaxed in this report.
 
 ## 3. Benign pilot corpus (charter point 3) — BLOCKED (environment)
 
@@ -94,13 +117,16 @@ gid2 cids [1,33]).
 to fidelity, and this is a fidelity-side loss):** on 36-px kerned text, touching
 characters rasterize as ONE component; the M0 probe's disjoint ownership assigns the
 component to one symbol and the paired symbol is dropped — **5 of 118 characters
-(4.2%) lost in reconstruction text** on p09 (e.g. `Accounthlder`, `IV-2026`). The B0
-raster baseline carries the full text. Component splitting / multi-symbol shared units
-is scoped as the FIRST M1 ownership-solver item (SPEC §5.2/§5.3); no incorrect
-half-repair was kept (an attempted text-merge mangled character order and was reverted).
-Additionally, tesseract itself misrecognized two words (`Accouthlder`, `IV-2026` in its
-hOCR) — present in ALL tools' text layers equally (same OCR); ours keeps the visuals
-correct and marks the text unreviewed, per VS-01.
+(4.2%) lost in the normalized OCR import**, affecting OUR B0 and B2 text layers
+EQUALLY (both extract 113 chars; the loss is in import segmentation, upstream of the
+raster/reconstruction split — it is NOT a reconstruction-specific loss, and it is NOT
+a tesseract misrecognition: tesseract's hOCR for this page is correct and the earlier
+report examples that blamed tesseract were misattributed; corrected herewith).
+B0's render still shows 100% of the ink (the pixels are all present in the raster);
+the loss is text-layer-only. Component splitting / multi-symbol shared units is scoped
+as the FIRST M1 ownership-solver item (SPEC §5.2/§5.3); an attempted text-merge repair
+was REVERTED because it reordered characters (a §4.3 content-critical error class) —
+revert verified by the reviewer's request and recorded here.
 
 Settings caveat (recorded, per QUALIFICATION §3): OCRmyPDF ran with `--optimize 0`
 (lossless image stage); its lossy modes would reduce size with fidelity cost. IA MRC
@@ -111,7 +137,7 @@ expectation (when reconstruction helps) is what this table establishes on this m
 
 | # | Criterion | Status | Evidence |
 |---|---|---|---|
-| 1 | Pipeline end-to-end (synthetic, 8 pages) | PASS | checks.py; probe_results.json |
+| 1 | Pipeline end-to-end (synthetic, 8 gate pages incl. p08) | PASS | checks.py; probe_results.json (8 pages after Q-phase re-run) |
 | 2 | Independent reproduction (36 tests, 28/28 artifacts byte-equal) | PASS | REPRODUCTION.md |
 | 3 | E0–E7 font-graph proofs | PASS (8/8) | probe_results.json + QDF re-parse (prior review) |
 | 4 | Six negative schema fixtures, dual layer | PASS | validate_fixtures.py + Rust tests |

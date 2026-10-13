@@ -8,6 +8,10 @@ pub struct Segmentation {
     pub fg: Vec<bool>,
     /// median paper colour estimate (corner patches)
     pub paper: [u8; 3],
+    /// median ink colour estimate (foreground samples) — reconstruction must
+    /// repaint ink in the SOURCE ink colour, not pure black (M0-Q repair:
+    /// the whole-page MAE gate correctly caught pure-black over gray-30 ink)
+    pub ink: [u8; 3],
 }
 
 fn lum(rgb: [u8; 3]) -> f64 {
@@ -65,10 +69,31 @@ pub fn segment(rgb: &[u8], width: u32, height: u32) -> Segmentation {
         }
     }
 
+    // ink colour: median over foreground samples
+    let mut ink = paper;
+    {
+        let mut samples = Vec::new();
+        for y in 0..h {
+            for x in 0..w {
+                if fg[y * w + x] {
+                    samples.push(px(x, y));
+                }
+            }
+        }
+        if !samples.is_empty() {
+            for c in 0..3 {
+                let mut v: Vec<u8> = samples.iter().map(|s| s[c]).collect();
+                v.sort_unstable();
+                ink[c] = v[v.len() / 2];
+            }
+        }
+    }
+
     Segmentation {
         width: w,
         height: h,
         fg,
         paper,
+        ink,
     }
 }
