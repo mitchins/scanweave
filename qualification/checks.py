@@ -91,41 +91,72 @@ def boundary(m: np.ndarray) -> np.ndarray:
     return m & ~er
 
 
-def edge_errors(a: np.ndarray, b: np.ndarray, cap: int = 12) -> tuple[float, float]:
-    """symmetric edge error between two foreground masks (pixel units)"""
+def subpixel_boundary_points(gray: np.ndarray, m: np.ndarray, i50: float) -> np.ndarray:
+    """Anti-aliased sub-pixel boundary localization: for every adjacent
+    inside/outside pixel pair, linearly interpolate the 50%-coverage crossing
+    along the connecting segment. Returns continuous points (pixel centres at
+    x+0.5, y+0.5)."""
+    pts = []
+    H, W = m.shape
+    g = gray
+    for dy, dx in ((0, 1), (0, -1), (1, 0), (-1, 0)):
+        # vectorized: q = pixel at (y+dy, x+dx) is outside while p inside
+        ys, xs = np.where(m)
+        qy, qx = ys + dy, xs + dx
+        ok = (qy >= 0) & (qy < H) & (qx >= 0) & (qx < W)
+        ys, xs, qy, qx = ys[ok], xs[ok], qy[ok], qx[ok]
+        out_side = ~m[qy, qx]
+        ys, xs, qy, qx = ys[out_side], xs[out_side], qy[out_side], qx[out_side]
+        if len(ys) == 0:
+            continue
+        vi = g[ys, xs].astype(np.float64)
+        vq = g[qy, qx].astype(np.float64)
+        denom = vq - vi
+        t = np.where(np.abs(denom) > 1e-9, (vq - i50) / np.where(np.abs(denom) > 1e-9, denom, 1.0), 0.5)
+        t = np.clip(t, 0.0, 1.0)
+        # crossing point between p centre and q centre
+        px = xs + 0.5
+        py = ys + 0.5
+        qx_c = qx + 0.5
+        qy_c = qy + 0.5
+        cx = px + (qx_c - px) * t
+        cy = py + (qy_c - py) * t
+        pts.append(np.stack([cx, cy], axis=1))
+    if not pts:
+        return np.zeros((0, 2))
+    return np.concatenate(pts, axis=0)
+
+
+def edge_errors_subpixel(
+    gray_a: np.ndarray, a: np.ndarray, gray_b: np.ndarray, b: np.ndarray,
+    i50_a: float, i50_b: float, cap: float = 12.0,
+) -> tuple[float, float]:
+    """Symmetric sub-pixel symmetric boundary distance (source pixels)."""
     if not a.any() and not b.any():
         return (0.0, 0.0)
     if not a.any() or not b.any():
         return (float(cap), float(cap))
-    ba, bb = boundary(a), boundary(b)
-    if not ba.any() or not bb.any():
+    pa = subpixel_boundary_points(gray_a, a, i50_a)
+    pb = subpixel_boundary_points(gray_b, b, i50_b)
+    if len(pa) == 0 or len(pb) == 0:
         return (float(cap), float(cap))
-
-    def dist_map(target: np.ndarray) -> np.ndarray:
-        # iterative chebyshev dilation of target; returns distance to nearest set bit
-        d = np.full(target.shape, cap + 1, dtype=np.float64)
-        cur = target.copy()
-        for r in range(1, cap + 1):
-            grown = cur.copy()
-            grown[1:, :] |= cur[:-1, :]
-            grown[:-1, :] |= cur[1:, :]
-            grown[:, 1:] |= cur[:, :-1]
-            grown[:, :-1] |= cur[:, 1:]
-            grown[1:, 1:] |= cur[:-1, :-1]
-            grown[:-1, :-1] |= cur[1:, 1:]
-            grown[1:, :-1] |= cur[:-1, 1:]
-            grown[:-1, 1:] |= cur[1:, :-1]
-            d[grown & (d > r)] = r
-            cur = grown
-            if (d <= cap).all():
-                break
-        return d
-
-    da = dist_map(bb)[ba]
-    db = dist_map(ba)[bb]
-    per_pixel = np.concatenate([da, db])
-    p95 = float(np.percentile(per_pixel, 95))
-    mx = float(per_pixel.max())
+    # cap the point counts for memory (bounded work)
+    if len(pa) > 20000:
+        pa = pa[:: len(pa) // 20000 + 1]
+    if len(pb) > 20000:
+        pb = pb[:: len(pb) // 20000 + 1]
+    d2 = (
+        (pa[:, 0][:, None] - pb[:, 0][None, :]) ** 2
+        + (pa[:, 1][:, None] - pb[:, 1][None, :]) ** 2
+    )
+    da = np.sqrt(d2.min(axis=1))
+    db = np.sqrt(d2.min(axis=0))
+    per_point = np.concatenate([da, db])
+    per_point = per_point[per_point <= cap]
+    if len(per_point) == 0:
+        return (float(cap), float(cap))
+    p95 = float(np.percentile(per_point, 95))
+    mx = float(per_point.max())
     return (p95, mx)
 
 
@@ -323,7 +354,10 @@ def check_page(name: str) -> dict:
         inter = (src_fg & rend_fg).sum()
         union = (src_fg | rend_fg).sum()
         m["iou"] = float(inter / union) if union else 1.0
-        p95, mx = edge_errors(src_fg, rend_fg)
+        p95, mx = edge_errors_subpixel(
+            src_gray, src_fg, rend_gray, rend_fg,
+            paper - 30.0, rend_paper - 30.0,
+        )
         m["edge_p95"], m["edge_max"] = p95, mx
         mae = float(np.abs(src_gray - rend_gray).mean() / 255.0)
         m["mae"] = mae
@@ -534,12 +568,24 @@ def e_proofs(results: dict) -> None:
         "ttf_equal": h(os.path.join(WORK, "p01_latin", "out.ttf")) == h(os.path.join(out2, "out.ttf")),
     }
 
-    # E0: four-part key property — probe unit test (cid separation vs dedup) is
-    # covered by E1 (same glyph+diff string -> new CID) and repeated text (same
-    # glyph+same string -> same CID); record the observation.
+    # E0: executable four-part-key mutation property test (encoding.rs Rust unit
+    # test): mutating each of (visual_glyph_id, semantic_string, writing_mode,
+    # required_metrics) must assert CID separation; identical keys dedup.
+    env = dict(os.environ)
+    env.setdefault("PATH", os.environ.get("PATH", ""))
+    r = sh(["bash", "-lc", "source $HOME/.cargo/env && cargo test -p m0-font-pdf e0_four_part_key_property 2>&1"],
+           env=env)
+    e0_pass = r.returncode == 0 and "test encoding::tests::e0_four_part_key_property ... ok" in r.stdout
     log1 = json.load(open(os.path.join(WORK, "p01_latin", "trace_log.json")))
-    e0 = {"same_glyph_same_string_single_cid": any(len(g["cids"]) == 1 for g in log1["glyphs"]),
-          "same_glyph_diff_string_multi_cid": any(len(g["cids"]) > 1 for g in json.load(open(os.path.join(WORK, "p07_sharedcid", "trace_log.json")))["glyphs"])}
+    e0 = {
+        "rust_property_test": "cargo test e0_four_part_key_property: ok" if e0_pass else r.stdout.strip()[-200:],
+        "passed": e0_pass,
+        "same_glyph_same_string_single_cid": any(len(g["cids"]) == 1 for g in log1["glyphs"]),
+        "same_glyph_diff_string_multi_cid": any(
+            len(g["cids"]) > 1
+            for g in json.load(open(os.path.join(WORK, "p07_sharedcid", "trace_log.json")))["glyphs"]
+        ),
+    }
     ep["E0_key_property"] = e0
 
     results["eproofs"] = ep
@@ -560,7 +606,7 @@ def e_proofs(results: dict) -> None:
         if k == "E4_utf16_transport":
             vok = bool(v.get("fi_ok") and v.get("surrogate_ok"))
         if k == "E0_key_property":
-            vok = bool(v.get("same_glyph_diff_string_multi_cid") and v.get("same_glyph_same_string_single_cid"))
+            vok = bool(v.get("passed") and v.get("same_glyph_diff_string_multi_cid") and v.get("same_glyph_same_string_single_cid"))
         print(f"{'PASS' if vok else 'FAIL'} {k}")
         results["gates"][k] = vok
     return

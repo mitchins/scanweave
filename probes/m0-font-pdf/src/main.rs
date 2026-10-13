@@ -6,6 +6,7 @@
 //! Writes: <dir>/out.pdf, <dir>/out.ttf, <dir>/trace_log.json
 
 mod baseline;
+mod encoding;
 mod fontbuild;
 mod glyphs;
 mod mask;
@@ -70,6 +71,10 @@ fn main() -> ExitCode {
             ExitCode::from(2)
         }
     }
+}
+
+fn keys_to_semantic(keys: &[encoding::EncodingKey], cid: usize) -> String {
+    keys[cid - 1].semantic_string.clone()
 }
 
 fn arg_of(args: &[String], flag: &str) -> Option<String> {
@@ -190,10 +195,12 @@ fn build(page_dir: &PathBuf, out_dir: &PathBuf) -> Result<TraceLog, String> {
     // 7. build glyph outlines + records
     let shapes = glyphs::build_glyph_shapes(&traced, units_per_px, &policy)?;
 
-    // 8. allocate CIDs: key = (visual glyph, semantic string). Same shape with
-    //    different labels shares the GID but gets distinct CIDs (SPEC §6.1).
-    let mut encodings: Vec<(usize, String)> = Vec::new(); // (glyph index, semantic string)
-    let mut occurrences: Vec<(usize, usize, [f64; 4], String, String, String)> = Vec::new(); // glyph_idx, cid, bbox, span, symbol, text
+    // 8. allocate CIDs: key = (visual glyph, semantic string, writing mode,
+    //    required metrics) — the SPEC §6.1 four-part key (encoding.rs). Same key
+    //    dedups; mutating any component yields a distinct CID. Same shape with
+    //    different labels shares the GID but gets distinct CIDs.
+    let mut keys: Vec<encoding::EncodingKey> = Vec::new();
+    let mut occ_meta: Vec<(usize, [f64; 4], String, String)> = Vec::new(); // glyph_idx, bbox, span, symbol
     let mut artwork: Vec<(usize, [f64; 4])> = Vec::new(); // glyph_idx, bbox (no semantics)
     for u in &unit_list {
         let glyph_idx = shapes.iter().position(|s| s.shape_key == u.shape_key).unwrap();
@@ -202,21 +209,33 @@ fn build(page_dir: &PathBuf, out_dir: &PathBuf) -> Result<TraceLog, String> {
             artwork.push((glyph_idx, u.bbox_px));
             continue;
         }
-        let semantic = u.semantic_text.clone();
-        let cid = encodings
-            .iter()
-            .position(|(g, s)| *g == glyph_idx && s == &semantic)
-            .unwrap_or_else(|| {
-                encodings.push((glyph_idx, semantic.clone()));
-                encodings.len() - 1
-            });
+        let advance = (shapes[glyph_idx].ink_span_fu[0].ceil() as u16).saturating_add(2).max(1);
+        keys.push(encoding::EncodingKey {
+            visual_glyph_id: glyph_idx,
+            semantic_string: u.semantic_text.clone(),
+            writing_mode: encoding::WritingMode::Horizontal, // vertical is M4
+            required_metrics: encoding::MetricsKey { advance, units_per_em: 2048 },
+        });
+        occ_meta.push((glyph_idx, u.bbox_px, u.span_id.clone(), u.symbol_id.clone()));
+    }
+    let cids = encoding::allocate_cids(&keys);
+    // cid -> (glyph_idx, semantic) table for font/ToUnicode construction
+    let mut encodings: Vec<(usize, String)> = Vec::new();
+    for (k, _) in keys.iter().enumerate() {
+        let cid = cids[k];
+        if encodings.len() < cid {
+            encodings.push((keys[k].visual_glyph_id, keys[k].semantic_string.clone()));
+        }
+    }
+    let mut occurrences: Vec<(usize, usize, [f64; 4], String, String, String)> = Vec::new();
+    for ((glyph_idx, bbox, span_id, symbol_id), cid) in occ_meta.iter().zip(cids.iter()) {
         occurrences.push((
-            glyph_idx,
-            cid,
-            u.bbox_px,
-            u.span_id.clone(),
-            u.symbol_id.clone(),
-            semantic.clone(),
+            *glyph_idx,
+            cid - 1, // pdf layer shifts +1 for the .notdef reservation
+            *bbox,
+            span_id.clone(),
+            symbol_id.clone(),
+            keys_to_semantic(&keys, *cid),
         ));
     }
 
@@ -233,7 +252,7 @@ fn build(page_dir: &PathBuf, out_dir: &PathBuf) -> Result<TraceLog, String> {
     let page_w_pt = page.page.width_pt as f32;
     let page_h_pt = page.page.height_pt as f32;
     let paper = seg.paper;
-    let pdf_bytes = pdf::assemble(
+    let (pdf_bytes, breakdown) = pdf::assemble(
         &shapes,
         &encodings,
         &occurrences,
@@ -248,7 +267,7 @@ fn build(page_dir: &PathBuf, out_dir: &PathBuf) -> Result<TraceLog, String> {
 
     // B0 searchable raster control (same OCR, own path), plus a text-less twin
     // for render-neutrality verification (invisible text must paint nothing)
-    let b0_bytes = baseline::assemble_raster(
+    let (b0_bytes, b0_breakdown) = baseline::assemble_raster(
         img.as_raw(),
         w,
         h,
@@ -260,7 +279,7 @@ fn build(page_dir: &PathBuf, out_dir: &PathBuf) -> Result<TraceLog, String> {
         &shapes,
     )
     .map_err(|e| e.to_string())?;
-    let b0_notext_bytes = baseline::assemble_raster(
+    let (b0_notext_bytes, _) = baseline::assemble_raster(
         img.as_raw(),
         w,
         h,
@@ -280,6 +299,16 @@ fn build(page_dir: &PathBuf, out_dir: &PathBuf) -> Result<TraceLog, String> {
     std::fs::write(out_dir.join("b0_notext.pdf"), &b0_notext_bytes)
         .map_err(|e| e.to_string())?;
     std::fs::write(out_dir.join("out.ttf"), &font_bytes).map_err(|e| e.to_string())?;
+    std::fs::write(
+        out_dir.join("breakdown.json"),
+        serde_json::to_vec_pretty(&serde_json::json!({
+            "B2_reconstructed": breakdown,
+            "B0_searchable_raster": b0_breakdown,
+            "font_file": font_bytes.len(),
+        }))
+        .map_err(|e| e.to_string())?,
+    )
+    .map_err(|e| e.to_string())?;
 
     // trace log
     for (gi, s) in shapes.iter().enumerate() {

@@ -67,3 +67,25 @@ at the bottom.
   decision in M0_REPORT.md §10 remains a PROPOSAL (PROVISIONAL), not a decision.
 - NOT DONE without review: M1 authorization, any unblocking of the operator exit table.
 - Retry: re-dispatch the final-gate reviewer when reviewer capacity is available.
+
+## Final M0 review — VERDICT: PROVISIONAL (deepseek-reviewer, 2026-10-14, session ses_ec8c14e48ffedje5AJdKw6Ko0m)
+
+- Reviewer could not execute commands (restricted shell); verdict based on independent
+  re-parsing of committed artifacts (QDF dumps of CIDToGIDMap/ToUnicode) + harness/code
+  reads. Execution NOT_VERIFIED items acknowledged in the review itself.
+- FONT ARCHITECTURE VERDICT: E-proofs DO demonstrate different character codes reusing
+  one visual glyph with independent Unicode mappings; OCR mistakes cannot become visual
+  mistakes. Caveat: allocation key was 2/4 components.
+- Blocking findings (all repaired in the post-review commit):
+  - B1 four-part key absent → `encoding.rs` implements the full key; report corrected.
+  - B2 E0 not executable → `e0_four_part_key_property` Rust mutation test, run by harness.
+  - B3 visual gate unevaluable (integer metric floor) → sub-pixel AA edge metric
+    implemented; honest measured outcomes recorded (poppler passes edge on 4 pages;
+    pdfium ~1.1px; p01 MAE 0.0206>0.02; p04/p06 fail) — no waiving.
+  - B4 byte breakdown claimed-not-delivered → breakdown.json emitted per page and
+    surfaced in measurements.json; flate2 + visioncortex added to UPSTREAMS.lock.toml.
+- Non-blocking items accepted for M1: 2× DPI render comparison, threshold-offset
+  representation, report revision-line staleness (fixed), PDFium double-provisioning
+  (already disclosed), copyleft/determinism execution verification.
+- DECISION: PROVISIONAL stands (reviewer's own verdict; repairs address blocking items;
+  corpus + external baselines remain blocked). M1 NOT authorized.

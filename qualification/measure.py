@@ -138,12 +138,10 @@ def main() -> int:
             "render_diff_px": diff_px,
         }
 
-        # byte breakdown of B2 via qpdf --show-xref? bounded: use pdfium-independent
-        # accounting from our writer instrumentation notes (font/image/content)
-        page["note"] = (
-            "B2 breakdown from writer instrumentation is recorded in trace_log.json; "
-            "independent per-stream breakdown requires a PDF parser (M1 scope)"
-        )
+        # byte breakdown: writer instrumentation, emitted by the probe itself
+        bd_path = os.path.join(out_dir, "breakdown.json")
+        if os.path.exists(bd_path):
+            page["byte_breakdown"] = json.load(open(bd_path))
         out["pages"][name] = page
         print(f"{name}: B0={sizes['B0_searchable_raster']}B B2={sizes['B2_reconstructed']}B "
               f"src={sizes['source_png']}B baseline_ratio_B2={sizes['baseline_ratio_B2']} "

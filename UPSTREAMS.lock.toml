@@ -129,6 +129,24 @@ scope = "core: semantic validator — symbol byte ranges must not split extended
 added = "2026-10-13, WP-C: required by SPEC §4.3 cluster-integrity rule"
 
 [[runtime_crate]]
+name = "flate2"
+version = "1.1.10"
+sha256 = "6e634e2e0ebac1ee034020da1ca582e17ffe4e0f5e985823721e168928136dcb"
+licence = "MIT OR Apache-2.0"
+features = ["default"]
+scope = "probe/B0 baseline: Flate compression of the page raster XObject"
+added = "2026-10-14, final-gate review repair B4: was an unrecorded direct dep"
+
+[[runtime_crate]]
+name = "visioncortex"
+version = "0.8.10"
+sha256 = "7c9a7e6cc136c7c79b4adbd311c46c323a19db7baf446822b5f90f84375934e3"
+licence = "MIT OR Apache-2.0"
+features = ["default"]
+scope = "probe: CompoundPath/Spline/ColorImage types consumed from vtracer output"
+added = "2026-10-14, final-gate review repair B4: was a direct dep recorded only as a note"
+
+[[runtime_crate]]
 name = "pdfium-render"
 version = "0.8.37"
 sha256 = "6553f6604a52b3203db7b4e9d51eb4dd193cf455af9e56d40cab6575b547b679"

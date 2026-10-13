@@ -26,7 +26,7 @@ pub fn assemble_raster(
     page_h_pt: f32,
     font_bytes: Vec<u8>,
     shapes: &[GlyphShape],
-) -> Result<Vec<u8>, String> {
+) -> Result<(Vec<u8>, Vec<(String, u64)>), String> {
     let upem = 2048.0f32;
     let mut pdf = Pdf::new();
     pdf.set_version(1, 7);
@@ -46,11 +46,13 @@ pub fn assemble_raster(
 
     pdf.catalog(catalog_id).pages(page_tree_id);
     pdf.pages(page_tree_id).kids([page_id]).count(1);
+    let mut breakdown: Vec<(String, u64)> = Vec::new();
 
     // page image: Flate RGB
     let mut enc = flate2::write::ZlibEncoder::new(Vec::new(), flate2::Compression::default());
     enc.write_all(rgb).map_err(|e| e.to_string())?;
     let compressed = enc.finish().map_err(|e| e.to_string())?;
+    breakdown.push(("page_image_flate".into(), compressed.len() as u64));
     let mut img = pdf.stream(image_id, &compressed);
     img.pair(Name(b"Type"), Name(b"XObject"));
     img.pair(Name(b"Subtype"), Name(b"Image"));
@@ -184,5 +186,14 @@ pub fn assemble_raster(
     doc.producer(TextStr("scanweave-m0-probe-b0"));
     doc.finish();
 
-    Ok(pdf.finish())
+    let bytes = pdf.finish();
+    breakdown.push(("font_file2".into(), font_bytes.len() as u64));
+    breakdown.push(("cid_to_gid_map".into(), map_bytes.len() as u64));
+    breakdown.push(("to_unicode_cmap".into(), cmap.as_bytes().len() as u64));
+    breakdown.push(("content_stream".into(), content_bytes.len() as u64));
+    let total = bytes.len() as u64;
+    let streams: u64 = breakdown.iter().map(|(_, n)| n).sum();
+    breakdown.push(("xref_dicts_overhead".into(), total.saturating_sub(streams)));
+    breakdown.push(("total".into(), total));
+    Ok((bytes, breakdown))
 }

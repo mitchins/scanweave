@@ -25,8 +25,9 @@ pub fn assemble(
     page_h_pt: f32,
     paper: [u8; 3],
     font_bytes: Vec<u8>,
-) -> Result<Vec<u8>, String> {
+) -> Result<(Vec<u8>, Vec<(String, u64)>), String> {
     let upem = 2048.0f32;
+    let mut breakdown: Vec<(String, u64)> = Vec::new();
     let mut pdf = Pdf::new();
     pdf.set_version(1, 7);
 
@@ -49,6 +50,7 @@ pub fn assemble(
     let mut fontfile = pdf.stream(fontfile_id, &font_bytes);
     fontfile.pair(Name(b"Length1"), font_bytes.len() as i32);
     fontfile.finish();
+    breakdown.push(("font_file2".into(), font_bytes.len() as u64));
 
     // font descriptor
     let mut bbox = [i16::MAX, i16::MAX, i16::MIN, i16::MIN];
@@ -86,6 +88,7 @@ pub fn assemble(
         map_bytes.push((gid & 0xFF) as u8);
     }
     pdf.stream(cid_to_gid_id, &map_bytes).finish();
+    breakdown.push(("cid_to_gid_map".into(), map_bytes.len() as u64));
 
     // descendant CIDFont
     let dw = 1000.0f32;
@@ -136,6 +139,7 @@ pub fn assemble(
     }
     cmap.push_str("endcmap\nCMapName currentdict /CMap defineresource pop\nend end\n");
     pdf.stream(to_unicode_id, cmap.as_bytes()).finish();
+    breakdown.push(("to_unicode_cmap".into(), cmap.as_bytes().len() as u64));
 
     // Type 0 font
     let mut type0 = pdf.type0_font(font_id);
@@ -222,6 +226,7 @@ pub fn assemble(
     content.end_text();
     let content_bytes = content.finish();
     pdf.stream(content_id, &content_bytes).finish();
+    breakdown.push(("content_stream".into(), content_bytes.len() as u64));
 
     // page
     let mut page = pdf.page(page_id);
@@ -237,7 +242,12 @@ pub fn assemble(
     doc.producer(TextStr("scanweave-m0-probe"));
     doc.finish();
 
-    Ok(pdf.finish())
+    let bytes = pdf.finish();
+    let total = bytes.len() as u64;
+    let streams: u64 = breakdown.iter().map(|(_, n)| n).sum();
+    breakdown.push(("xref_dicts_overhead".into(), total.saturating_sub(streams)));
+    breakdown.push(("total".into(), total));
+    Ok((bytes, breakdown))
 }
 
 fn cid_utf16be(cid: usize) -> Vec<u8> {

@@ -6,11 +6,11 @@ Authorization: AGENT_BRIEF M0 only; plan approved by deepseek-reviewer (rev 2).
 
 ## 1. Revision and state
 
-- Final revision at report time: see `git log --oneline` (HEAD = WP-F commit). Working tree
-  contains only the report/ledger updates (dirty-state disclosed here).
+- Final revision at report time: see `git log --oneline` (post-repair commit following the
+  final-gate review). Dirty-state at report time: report/ledger updates only (disclosed).
 - Toolchain: rustc/cargo 1.99.0, pinned via `rust-toolchain.toml`; `Cargo.lock` committed;
-  dependencies locked per `UPSTREAMS.lock.toml` (all MIT OR Apache-2.0; transitive audit:
-  224 packages, no copyleft).
+  dependencies locked per `UPSTREAMS.lock.toml` (16 runtime crate entries, all MIT OR
+  Apache-2.0; transitive audit: 224 packages, no copyleft).
 - Environment: Ubuntu 24.04, 24 CPUs, 78 GiB RAM. No root access (recorded; shaped the
   validator provisioning below).
 
@@ -48,15 +48,20 @@ binding check caught a real pairing mismatch during development).
 
 Per-page independent verification (both engines where applicable):
 
-| Page | Content | qpdf | OTS | extraction (poppler+pdfium) | ink IoU poppler/pdfium | edge p95 | topo |
-|---|---|---|---|---|---|---|---|
-| p01_latin | 8,6,8(identical),a | ✓ | ✓ | ✓/✓ | 1.000/0.983 | 1px | ✓ |
-| p02_wronglabel | 8 labelled 6 (VS-01) | ✓ | ✓ | ✓/✓ ("6") | 1.000/0.985 | 1px | ✓ |
-| p03_kana | ガ multi-component + dakuten | ✓ | ✓ | ✓/✓ ("ガ") | 1.000/0.961 | 1px | ✓ |
-| p04_ligature | fi ligature + U+1D400 | ✓ | ✓ | ✓/✓ | 0.974/0.976 | 1px | ✓ |
-| p05_colour | 8 on coloured paper | ✓ | ✓ | ✓/✓ | 1.000/0.988 | 1px | ✓ |
-| p06_degraded | blurred noisy 8 + speckle | ✓ | ✓ | ✓/✓ | 0.993/0.967 | 1px (max 11-13 outliers) | ✗ (see §7) |
-| p07_sharedcid | shared-shape/label proofs | ✓ | ✓ | ✓/✓ | 0.996/1.000 | 1px | ✓ |
+Sub-pixel symmetric edge metric (review repair B3): boundary localized by linear
+interpolation of the 50%-coverage crossing on the anti-aliased grayscale; distances in
+continuous source pixels. Gate = dev-initial-1: IoU ≥ 0.98, edge p95 ≤ 0.5 px,
+max ≤ 1.0 px, MAE ≤ 0.02, topology stable at thresholds 55/60/65.
+
+| Page | qpdf | OTS | extraction (pop+pdf) | IoU pop/pdf | edge p95 pop/pdf | MAE pop/pdf | topo | gate |
+|---|---|---|---|---|---|---|---|---|
+| p01_latin | ✓ | ✓ | ✓/✓ | 1.000/0.983 | **0.29**/1.07 | 0.0206/0.0219 | ✓ | poppler: MAE fail (0.0206>0.02); pdfium: edge+MAE fail |
+| p02_wronglabel | ✓ | ✓ | ✓/✓ | 1.000/0.985 | **0.27**/1.10 | 0.0063/0.0064 | ✓ | poppler PASS; pdfium edge fail |
+| p03_kana | ✓ | ✓ | ✓/✓ | 1.000/0.961 | **0.28**/1.16 | 0.0049/0.0052 | ✓ | poppler PASS; pdfium edge fail |
+| p04_ligature | ✓ | ✓ | ✓/✓ | 0.974/0.976 | 1.01/1.07 | 0.0100/0.0092 | ✓ | both: IoU+edge fail (see §7.2) |
+| p05_colour | ✓ | ✓ | ✓/✓ | 1.000/0.988 | **0.25**/1.12 | 0.0060/0.0060 | ✓ | poppler PASS; pdfium edge fail |
+| p06_degraded | ✓ | ✓ | ✓/✓ | 0.993/0.967 | 4.89/4.67 | 0.0161/0.0157 | ✗ | FAIL both (speckle outliers; §7.3) |
+| p07_sharedcid | ✓ | ✓ | ✓/✓ | 0.996/1.000 | 0.37/0.29 | 0.0178/0.0172 | ✓ | poppler max 1.35 fail; pdfium PASS |
 
 Counter-hole evidence (VS-06): p05 counters sampled — mean counter colour ≈ paper colour
 (d_paper < d_white; probe_results.json `counter_colour`). Winding independently dumped via
@@ -73,8 +78,9 @@ independently via qpdf --qdf), NOT inferred from pixels:
 - **E2 (different outlines, same Unicode):** p07 — regular and smaller `8` are distinct
   GIDs whose CIDs both map to `8`. PASS
 - **E3 (VS-01, OCR mistake ≠ visual mistake):** p02 — observed `8` with OCR `6`:
-  visible render IoU 1.000/0.985 vs source (shape preserved), extraction yields `6`,
-  provenance recorded `ocr` (unreviewed). PASS
+  visible render IoU 1.000/0.985 vs source with sub-pixel edge p95 0.27/1.10 px (shape
+  preserved; measured, see §4 gate split), extraction yields `6`, provenance recorded
+  `ocr` (unreviewed). PASS
 - **E4 (multi-codepoint + supplementary):** ToUnicode `fi` → `0066 0069`; `𝐀` → UTF-16BE
   surrogate pair `D835 DC00`; both extract correctly in both engines. PASS
 - **E5 (kana, no normalization):** `ガ` traced as multi-component unit (base + two
@@ -82,10 +88,15 @@ independently via qpdf --qdf), NOT inferred from pixels:
 - **E6 (span cardinality + §6.2 owners):** one span covers two visual units (`18`);
   owner recorded `visible_tounicode` for text, `unmapped` for artwork. PASS
 - **E7 (determinism):** repeat build → byte-equal font and PDF. PASS
-- **E0 (four-part key property):** same glyph + same string → single CID;
-  same glyph + different string → additional CID (never a second GID). PASS
-  (`writing_mode`/`required_metrics` are carried as explicit fields, fixed for M0; the
-  executable mutation property test across all four components is an M1 item.)
+- **E0 (four-part key property, executable):** `probes/m0-font-pdf/src/encoding.rs`
+  implements the full SPEC §6.1 key `(visual_glyph_id, semantic_string, writing_mode,
+  required_metrics)` — `WritingMode` (Horizontal/Vertical) and `MetricsKey
+  {advance, units_per_em}` are real key components — with a Rust unit test that mutates
+  each of the four components in turn and asserts CID separation, plus dedup for
+  identical keys and 1-based dense allocation. `cargo test -p m0-font-pdf
+  e0_four_part_key_property` passes and is executed by the harness. M0 fixes
+  Horizontal/2048; vertical + metric variants are representable without schema change.
+  PASS
 
 ## 6. Baselines and measurements (WP-F)
 
@@ -101,6 +112,10 @@ independently via qpdf --qdf), NOT inferred from pixels:
 
 - B0 verified: qpdf ✓, transport ✓, render-neutral ✓ (B0 vs its own text-less twin:
   byte-identical renders — invisible text paints nothing).
+- Per-stream byte breakdowns are emitted per page to `breakdown.json` (writer
+  instrumentation): font_file2, cid_to_gid_map, to_unicode_cmap, content_stream,
+  page_image_flate (B0), xref/dict overhead, total; mirrored into
+  `qualification/measurements.json` (review repair B4).
 - **No size advantage is claimed.** These are utility-internal ratios on synthetic pages.
   p06 demonstrates the spec-predicted no-gain case (noise → glyph complexity → font
   overhead beats raster).
@@ -110,15 +125,20 @@ independently via qpdf --qdf), NOT inferred from pixels:
 
 ## 7. Findings, deviations and unresolved items (honest list)
 
-1. **dev-initial-1 edge metric implementation gap:** the policy specifies symmetric edge
-   p95 ≤ 0.5 px; the harness implements an integer-pixel distance transform whose floor
-   is 1.0 px for any non-identical raster. Measured p95 = 1 px everywhere (floor). A
-   sub-pixel (anti-aliased edge distance) metric implementation is required before the
-   0.5 px threshold is meaningful. CALIBRATION ITEM for review — not silently relaxed.
-2. **Single-glyph 1px placement deviation:** p04 `fi` renders exactly 1 source pixel
-   high in BOTH engines (identical ink count, pure translation, deterministic). Root
-   cause narrowed to rasterizer fill-boundary behaviour at the construction-box edge;
-   per-glyph, quantified; regression-fenced via probe_results.json.
+1. **Sub-pixel edge metric implemented (review repair B3); measured outcomes are mixed
+   and honest:** Poppler renders meet the edge criterion outright on p01/p02/p03/p05
+   (p95 0.25–0.29 px, max ≤ 0.43 px) — the traced fonts are genuinely sub-pixel accurate
+   there. PDFium shows p95 ≈ 1.07–1.16 px on the same files (heavier anti-aliasing at
+   the 60-luminance threshold). p01 MAE is 0.0206 vs the 0.02 policy (3% over) in BOTH
+   engines. The visual gate therefore genuinely FAILS on pdfium-edge (all pages) and
+   poppler-MAE (p01) by small margins — recorded as the calibration baseline for the
+   M0/M1 policy revision (QUALIFICATION §4.2), not waived. p06 fails topology + edge
+   outliers (§7.3); p04 fails IoU/edge (§7.2).
+2. **Single-glyph 1px placement deviation:** p04 `fi` renders ~1 source pixel high in
+   BOTH engines (identical ink count, pure translation, deterministic; survives the
+   sub-pixel metric: p95 1.01/1.07, max 1.32/1.07). Root cause narrowed to rasterizer
+   fill-boundary behaviour at the construction-box edge; per-glyph, quantified;
+   regression-fenced via probe_results.json.
 3. **p06 topology gate:** synthetic speckle noise (900 dots) — component-count
    topology is AA-threshold-sensitive on 1–2 px marks; ink preserved within 0.7%
    (IoU 0.993). Rendered as vector artwork for unowned ink (VS-05 preserve path);
