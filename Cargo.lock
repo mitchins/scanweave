@@ -931,6 +931,7 @@ dependencies = [
 name = "m0-font-pdf"
 version = "0.1.0"
 dependencies = [
+ "flate2",
  "image 0.25.10",
  "imageproc",
  "kurbo",

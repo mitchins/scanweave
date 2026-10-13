@@ -5,6 +5,7 @@
 //! Usage: m0-font-pdf build --page <dir-with-png+ocr.json> --out <dir>
 //! Writes: <dir>/out.pdf, <dir>/out.ttf, <dir>/trace_log.json
 
+mod baseline;
 mod fontbuild;
 mod glyphs;
 mod mask;
@@ -245,9 +246,39 @@ fn build(page_dir: &PathBuf, out_dir: &PathBuf) -> Result<TraceLog, String> {
     )
     .map_err(|e| e.to_string())?;
 
+    // B0 searchable raster control (same OCR, own path), plus a text-less twin
+    // for render-neutrality verification (invisible text must paint nothing)
+    let b0_bytes = baseline::assemble_raster(
+        img.as_raw(),
+        w,
+        h,
+        &encodings,
+        &occurrences,
+        page_w_pt,
+        page_h_pt,
+        font_bytes.clone(),
+        &shapes,
+    )
+    .map_err(|e| e.to_string())?;
+    let b0_notext_bytes = baseline::assemble_raster(
+        img.as_raw(),
+        w,
+        h,
+        &encodings,
+        &[],
+        page_w_pt,
+        page_h_pt,
+        font_bytes.clone(),
+        &shapes,
+    )
+    .map_err(|e| e.to_string())?;
+
     // outputs
     std::fs::create_dir_all(out_dir).map_err(|e| e.to_string())?;
     std::fs::write(out_dir.join("out.pdf"), &pdf_bytes).map_err(|e| e.to_string())?;
+    std::fs::write(out_dir.join("b0_raster.pdf"), &b0_bytes).map_err(|e| e.to_string())?;
+    std::fs::write(out_dir.join("b0_notext.pdf"), &b0_notext_bytes)
+        .map_err(|e| e.to_string())?;
     std::fs::write(out_dir.join("out.ttf"), &font_bytes).map_err(|e| e.to_string())?;
 
     // trace log

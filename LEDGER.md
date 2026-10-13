@@ -42,3 +42,18 @@ at the bottom.
 - Engine #2 = PDFium via pypdfium2 (bundled PDFium build, Apache-2.0/BSD-3-Clause;
   qualification-only). The bblanchon pdfium tgz recorded in UPSTREAMS remains
   unused by the harness; noted honestly here.
+
+## M0 implementation gate — PROVISIONAL (proposed; pending final independent review)
+
+- WP-A..G executed 2026-10-13/14; commits per work package.
+- Tests: 35 Rust (tests-first) + 7-page dual-engine verification + 8/8 E-proofs +
+  dual-layer schema fixtures (6 negative reproduced) + B0 neutrality/transport.
+- Notable failures encountered and fixed (all preserved in git history):
+  blank-render bugs (CID 0 notdef reservation; ToUnicode codespace <0000>-<0000>;
+  glyph units not transformed; missing ×upem scale; translation term missing /upem),
+  hOCR reader class-stack bug, name-table sort order, maxp v1.0 fields, cmap
+  one-char-one-glyph dedup, vtracer smoothing exceeding trace budget (resolved via
+  corner=0/length=1.0 + 2× supersampling; 0.496px ≤ 0.50 allocation).
+- Open items recorded in M0_REPORT.md §7 (sub-pixel edge metric, ﬁ 1px placement,
+  p06 topology AA sensitivity, MRC/tesseract blocked, corpus blocked).
+- Expected outcome: PROVISIONAL (no corpus, external baselines blocked). No M1 work.
