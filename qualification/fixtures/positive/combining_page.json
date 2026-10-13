@@ -1,0 +1,200 @@
+{
+ "schema_version": "1.0",
+ "page_id": "p000001",
+ "raster": {
+  "asset_path": "pages/p000001.png",
+  "file_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+  "pixel_sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+  "width_px": 64,
+  "height_px": 32,
+  "canonical_format": "rgb8",
+  "colour_tag": "srgb",
+  "icc_sha256": null,
+  "orientation_policy": "applied_once",
+  "decoder_id": "m0-fixture-decoder",
+  "dpi_x": 300.0,
+  "dpi_y": 300.0
+ },
+ "page": {
+  "width_pt": 15.36,
+  "height_pt": 7.68,
+  "raster_to_page_pt": [
+   0.24,
+   0,
+   0,
+   -0.24,
+   0,
+   7.68
+  ]
+ },
+ "producer": {
+  "name": "m0-fixture",
+  "version": "1",
+  "models": [],
+  "languages": [
+   "eng"
+  ]
+ },
+ "granularity": "symbol",
+ "reading_order_status": "supplied",
+ "reading_order": [
+  "s001"
+ ],
+ "spans": [
+  {
+   "id": "s001",
+   "text": "café",
+   "separator_after": "\n",
+   "polygon": [
+    [
+     2,
+     4
+    ],
+    [
+     40,
+     4
+    ],
+    [
+     40,
+     24
+    ],
+    [
+     2,
+     24
+    ]
+   ],
+   "direction": "ltr",
+   "role": "body",
+   "language": "fr",
+   "confidence": {
+    "value": null,
+    "scale": "unknown",
+    "calibrated": false
+   },
+   "provenance": "ocr",
+   "symbols": [
+    {
+     "id": "g001",
+     "text_range_utf8": [
+      0,
+      1
+     ],
+     "polygon": [
+      [
+       2,
+       4
+      ],
+      [
+       10,
+       4
+      ],
+      [
+       10,
+       24
+      ],
+      [
+       2,
+       24
+      ]
+     ],
+     "confidence": {
+      "value": null,
+      "scale": "unknown",
+      "calibrated": false
+     }
+    },
+    {
+     "id": "g002",
+     "text_range_utf8": [
+      1,
+      2
+     ],
+     "polygon": [
+      [
+       10,
+       4
+      ],
+      [
+       18,
+       4
+      ],
+      [
+       18,
+       24
+      ],
+      [
+       10,
+       24
+      ]
+     ],
+     "confidence": {
+      "value": null,
+      "scale": "unknown",
+      "calibrated": false
+     }
+    },
+    {
+     "id": "g003",
+     "text_range_utf8": [
+      2,
+      3
+     ],
+     "polygon": [
+      [
+       18,
+       4
+      ],
+      [
+       26,
+       4
+      ],
+      [
+       26,
+       24
+      ],
+      [
+       18,
+       24
+      ]
+     ],
+     "confidence": {
+      "value": null,
+      "scale": "unknown",
+      "calibrated": false
+     }
+    },
+    {
+     "id": "g004",
+     "text_range_utf8": [
+      3,
+      6
+     ],
+     "polygon": [
+      [
+       26,
+       4
+      ],
+      [
+       40,
+       4
+      ],
+      [
+       40,
+       24
+      ],
+      [
+       26,
+       24
+      ]
+     ],
+     "confidence": {
+      "value": null,
+      "scale": "unknown",
+      "calibrated": false
+     }
+    }
+   ]
+  }
+ ],
+ "protected_regions": []
+}

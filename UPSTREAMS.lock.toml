@@ -111,6 +111,24 @@ features = ["default"]
 scope = "io/probe: Type0/CIDFontType2 PDF emission, ToUnicode, CIDToGIDMap"
 
 [[runtime_crate]]
+name = "sha2"
+version = "0.10.9"
+sha256 = "a7507d819769d01a365ab707794a4084392c824f54a7a6a7862f8c3d0892b283"
+licence = "MIT OR Apache-2.0"
+features = ["default"]
+scope = "core: file_sha256/pixel_sha256 (SWRASTER1 preimage) binding hashes"
+added = "2026-10-13, WP-C: required by SPEC §4.2 binding contract"
+
+[[runtime_crate]]
+name = "unicode-segmentation"
+version = "1.13.3"
+sha256 = "c6f5d3c3b1bf09027a88a6bc961fc00497d651009560b5463668dc81b0fa87a8"
+licence = "MIT OR Apache-2.0"
+features = ["default"]
+scope = "core: semantic validator — symbol byte ranges must not split extended grapheme sequences"
+added = "2026-10-13, WP-C: required by SPEC §4.3 cluster-integrity rule"
+
+[[runtime_crate]]
 name = "pdfium-render"
 version = "0.8.37"
 sha256 = "6553f6604a52b3203db7b4e9d51eb4dd193cf455af9e56d40cab6575b547b679"

@@ -1,0 +1,79 @@
+{
+ "schema_version": "1.0",
+ "page_id": "p000001",
+ "raster": {
+  "asset_path": "pages/p000001.png",
+  "file_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+  "pixel_sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+  "width_px": 64,
+  "height_px": 32,
+  "canonical_format": "rgb8",
+  "colour_tag": "srgb",
+  "icc_sha256": null,
+  "orientation_policy": "applied_once",
+  "decoder_id": "m0-fixture-decoder",
+  "dpi_x": 300.0,
+  "dpi_y": 300.0
+ },
+ "page": {
+  "width_pt": 15.36,
+  "height_pt": 7.68,
+  "raster_to_page_pt": [
+   0.24,
+   0,
+   0,
+   -0.24,
+   0,
+   7.68
+  ]
+ },
+ "producer": {
+  "name": "m0-fixture",
+  "version": "1",
+  "models": [],
+  "languages": [
+   "eng"
+  ]
+ },
+ "granularity": "word",
+ "reading_order_status": "inferred",
+ "reading_order": [
+  "w001"
+ ],
+ "spans": [
+  {
+   "id": "w001",
+   "text": "Hello",
+   "separator_after": " ",
+   "polygon": [
+    [
+     2,
+     4
+    ],
+    [
+     30,
+     4
+    ],
+    [
+     30,
+     24
+    ],
+    [
+     2,
+     24
+    ]
+   ],
+   "direction": "ltr",
+   "role": "body",
+   "language": "en",
+   "confidence": {
+    "value": null,
+    "scale": "unknown",
+    "calibrated": false
+   },
+   "provenance": "ocr",
+   "symbols": []
+  }
+ ],
+ "protected_regions": []
+}

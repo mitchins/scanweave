@@ -23,3 +23,13 @@ at the bottom.
 - Round 2: VERDICT **APPROVE** — all four findings RESOLVED, no new blocking findings.
 - Decision: implementation authorized per plan. Expected M0 ceiling: PROVISIONAL (corpus not
   mounted); PASS reserved per operator exit table.
+
+## WP-A/B note — additional locked crates (2026-10-13)
+
+- `sha2 0.10.9` and `unicode-segmentation 1.13.3` added to scanweave-core during WP-C prep;
+  both MIT OR Apache-2.0, sha256 recorded in UPSTREAMS.lock.toml. Reason: SPEC §4.2 binding
+  hashes and §4.3 grapheme-integrity validation require them; no permissive equivalent was
+  already in the graph. Per lock policy: explicit entry + this note (not silent).
+- Environment constraint recorded: session has no root; apt installs impossible. qpdf built
+  from pinned source, OTS from prebuilt release, PDFium from pinned release; tesseract
+  recorded UNAVAILABLE (optional OCR subprocess; M0 synthetic probes do not invoke OCR).
