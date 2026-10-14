@@ -6,3 +6,7 @@ license.workspace = true
 description = "CLI/config, jobs, reports, atomic publication. Stub until M1."
 
 [dependencies]
+scanweave-core = { workspace = true }
+scanweave-io = { workspace = true }
+serde_json = { workspace = true }
+image = { workspace = true }

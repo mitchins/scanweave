@@ -702,7 +702,7 @@ def e_proofs(results: dict) -> None:
     # required_metrics) must assert CID separation; identical keys dedup.
     env = dict(os.environ)
     env.setdefault("PATH", os.environ.get("PATH", ""))
-    r = sh(["bash", "-lc", "source $HOME/.cargo/env && cargo test -p m0-font-pdf e0_four_part_key_property 2>&1"],
+    r = sh(["bash", "-lc", "source $HOME/.cargo/env && cargo test -p scanweave-io e0_four_part_key_property 2>&1"],
            env=env)
     e0_pass = r.returncode == 0 and "test encoding::tests::e0_four_part_key_property ... ok" in r.stdout
     if not have("p01_latin"):

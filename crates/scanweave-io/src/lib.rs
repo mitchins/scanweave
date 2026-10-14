@@ -1,5 +1,18 @@
-//! scanweave-io: image and OCR import, bundle validation adapters, font/PDF serialization.
-//! Filesystem access is allowed here (adapter crate), never in scanweave-core.
+//! scanweave-io: raster/OCR import, ownership planning, reconstruction,
+//! font/PDF serialization. The single reconstruction implementation
+//! (no second pipeline lives elsewhere).
 
+pub mod baseline;
+pub mod encoding;
+pub mod fontbuild;
+pub mod glyphs;
 pub mod hocr;
+pub mod mask;
 pub mod normalize;
+pub mod ownership;
+pub mod page_pdf;
+pub mod pdf;
+pub mod plan;
+pub mod convert;
+pub mod trace;
+pub mod units;

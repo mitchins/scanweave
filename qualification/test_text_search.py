@@ -84,6 +84,15 @@ def has_intra_word_spaces(text: str) -> bool:
     return False
 
 
+def pdfium_native_search(pdf: str, q: str) -> bool:
+    """The required gate: native PDFium search, not a substring check."""
+    doc = pdfium.PdfDocument(pdf)
+    searcher = doc[0].get_textpage().search(q)
+    found = bool(searcher.get_next())
+    doc.close()
+    return found
+
+
 def main() -> int:
     os.makedirs(WORK, exist_ok=True)
 
@@ -96,6 +105,9 @@ def main() -> int:
         check(f"pdfium B2 search {q!r}", q in pt)
         check(f"pdfium B0 search {q!r}", q in pt_b0)
         check(f"poppler B2 text {q!r}", q in qt)
+        # NATIVE PDFium search (textpage.search + get_next) — operator-required gate
+        check(f"pdfium NATIVE search {q!r}", pdfium_native_search(b2, q))
+        check(f"pdfium B0 NATIVE search {q!r}", pdfium_native_search(b0, q))
 
     # intact words / no intra-word whitespace (both engines, B2 and B0)
     check("pdfium B2 no intra-word spaces", not has_intra_word_spaces(pt), repr(pt[:60]))

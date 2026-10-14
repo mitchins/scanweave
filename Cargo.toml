@@ -31,6 +31,7 @@ write-fonts = "0.34"
 read-fonts = "0.33"
 pdf-writer = "0.12"
 pdfium-render = "0.8"
+hayro = { git = "https://github.com/LaurenzV/hayro", package = "hayro" }
 flate2 = "1"
 
 [profile.release]

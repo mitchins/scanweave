@@ -1,0 +1,298 @@
+{
+ "schema_version": "1.0",
+ "page_id": "p12_disconnected",
+ "raster": {
+  "asset_path": "p12_disconnected/p12_disconnected.png",
+  "file_sha256": "3bd50780a066471a546db204442e0ef6c0c81fa92fab844ebafceb0e395edfab",
+  "pixel_sha256": "36db638b0daf391b08bc5794ec0550e4ebc15b4d44b157f5d338ff6f42404bb7",
+  "width_px": 640,
+  "height_px": 300,
+  "canonical_format": "rgb8",
+  "colour_tag": "srgb",
+  "icc_sha256": null,
+  "orientation_policy": "applied_once",
+  "decoder_id": "m1a-synth-ground-truth",
+  "dpi_x": 300.0,
+  "dpi_y": 300.0
+ },
+ "page": {
+  "width_pt": 153.6,
+  "height_pt": 72.0,
+  "raster_to_page_pt": [
+   0.24,
+   0.0,
+   0.0,
+   -0.24,
+   0.0,
+   72.0
+  ]
+ },
+ "producer": {
+  "name": "m1a-synth",
+  "version": "1.0",
+  "models": [],
+  "languages": []
+ },
+ "granularity": "symbol",
+ "reading_order_status": "supplied",
+ "reading_order": [
+  "g000",
+  "g001",
+  "g002"
+ ],
+ "spans": [
+  {
+   "id": "g000",
+   "text": "ij",
+   "separator_after": " ",
+   "polygon": [
+    [
+     40,
+     40
+    ],
+    [
+     112,
+     40
+    ],
+    [
+     112,
+     101
+    ],
+    [
+     40,
+     101
+    ]
+   ],
+   "direction": "ltr",
+   "role": "body",
+   "language": null,
+   "confidence": {
+    "value": null,
+    "scale": "unknown",
+    "calibrated": false
+   },
+   "provenance": "source_generated",
+   "symbols": [
+    {
+     "id": "g000s00",
+     "text_range_utf8": [
+      0,
+      1
+     ],
+     "polygon": [
+      [
+       40,
+       40
+      ],
+      [
+       76,
+       40
+      ],
+      [
+       76,
+       94
+      ],
+      [
+       40,
+       94
+      ]
+     ],
+     "confidence": {
+      "value": null,
+      "scale": "unknown",
+      "calibrated": false
+     }
+    },
+    {
+     "id": "g000s01",
+     "text_range_utf8": [
+      1,
+      2
+     ],
+     "polygon": [
+      [
+       76,
+       40
+      ],
+      [
+       112,
+       40
+      ],
+      [
+       112,
+       101
+      ],
+      [
+       76,
+       101
+      ]
+     ],
+     "confidence": {
+      "value": null,
+      "scale": "unknown",
+      "calibrated": false
+     }
+    }
+   ]
+  },
+  {
+   "id": "g001",
+   "text": "!",
+   "separator_after": " ",
+   "polygon": [
+    [
+     40,
+     137
+    ],
+    [
+     76,
+     137
+    ],
+    [
+     76,
+     195
+    ],
+    [
+     40,
+     195
+    ]
+   ],
+   "direction": "ltr",
+   "role": "body",
+   "language": null,
+   "confidence": {
+    "value": null,
+    "scale": "unknown",
+    "calibrated": false
+   },
+   "provenance": "source_generated",
+   "symbols": [
+    {
+     "id": "g001s00",
+     "text_range_utf8": [
+      0,
+      1
+     ],
+     "polygon": [
+      [
+       40,
+       137
+      ],
+      [
+       76,
+       137
+      ],
+      [
+       76,
+       195
+      ],
+      [
+       40,
+       195
+      ]
+     ],
+     "confidence": {
+      "value": null,
+      "scale": "unknown",
+      "calibrated": false
+     }
+    }
+   ]
+  },
+  {
+   "id": "g002",
+   "text": "\u30ac\u30d1",
+   "separator_after": " ",
+   "polygon": [
+    [
+     40,
+     214
+    ],
+    [
+     184,
+     214
+    ],
+    [
+     184,
+     276
+    ],
+    [
+     40,
+     276
+    ]
+   ],
+   "direction": "ltr",
+   "role": "body",
+   "language": null,
+   "confidence": {
+    "value": null,
+    "scale": "unknown",
+    "calibrated": false
+   },
+   "provenance": "source_generated",
+   "symbols": [
+    {
+     "id": "g002s00",
+     "text_range_utf8": [
+      0,
+      3
+     ],
+     "polygon": [
+      [
+       40,
+       214
+      ],
+      [
+       112,
+       214
+      ],
+      [
+       112,
+       276
+      ],
+      [
+       40,
+       276
+      ]
+     ],
+     "confidence": {
+      "value": null,
+      "scale": "unknown",
+      "calibrated": false
+     }
+    },
+    {
+     "id": "g002s01",
+     "text_range_utf8": [
+      3,
+      6
+     ],
+     "polygon": [
+      [
+       112,
+       215
+      ],
+      [
+       184,
+       215
+      ],
+      [
+       184,
+       274
+      ],
+      [
+       112,
+       274
+      ]
+     ],
+     "confidence": {
+      "value": null,
+      "scale": "unknown",
+      "calibrated": false
+     }
+    }
+   ]
+  }
+ ],
+ "protected_regions": []
+}
