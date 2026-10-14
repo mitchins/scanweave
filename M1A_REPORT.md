@@ -11,59 +11,30 @@ artifacts and fixed; the diff below is complete:
 
 | Reviewer finding | Status | Evidence in this revision |
 |---|---|---|
-| D1: p04 astral ActualText regression (`"fi𝐀"→"fi"`) | FIXED | astral guard restored in `page_pdf.rs` (BMP-only ActualText, astral stays on ToUnicode); `p04 pdfium supplementary U+1D400` PASSes; the full gate set now shows **zero check flips vs accepted pipeline `f5e5cb5`** |
-| D2: p06 PDFium transport regression (`"8"→""`) | FIXED | root cause was an owner-CID off-by-one in `page_pdf.rs` (convert emits 1-based owner CIDs; the assembler added +1 → CID2 undefined by font/ToUnicode). Fixed; `p06` now extracts `8` in both engines |
-| D3: B0 baseline generation removed | FIXED | `convert` re-emits the B0 raster-baseline (`baseline::assemble_raster`); `b0_raster.pdf` restored in probe output; all `test_text_search.py` B0 gates PASS |
-| D4: trace evidence fabricated (`contours:[]`, `budget_ok:true`) | FIXED | report carries real `GlyphStat` (contours, points, stage metrics, honest `budget_ok` under m0-probe-1 budget); values reproduce the accepted M0-Q run exactly (p01 '8': 3 contours, 2083 pts, trace_max 0.4963) |
-| D5: report claimed "no hard-coded absolute paths" | CORRECTED | the committed tesseract fixture hOCR files do carry absolute `image` paths; §6 wording fixed |
-| D6: report byte-determinism unsupported | FIXED | report maps switched to `BTreeMap`; the three deliverables' report JSONs are byte-identical across independent runs (sha1 verified) |
-| D7: orphaned duplicate modules | ACKNOWLEDG | `probes/m0-font-pdf/src/{encoding,units,pdf,baseline}.rs` and `scanweave-io/src/{pdf,baseline}.rs` are compiled-out migration shims; kept for provenance during the M1-A refactor, removal is M1-B scope |
-| D8: "Double-inked 0" unmeasured | CLARIFIED | multiply-owned **text** ink is computed by the solver and is 0 (see §2); artwork-vs-vector paint overlap is bounded by drawing order (patches first, vectors last — no halo) and by the visual-gate evidence: the visual gates' numbers are **unchanged from the accepted baseline** on every page |
-| D9: m1a09 didn't test raster fidelity | FIXED | m1a09 now asserts each fallback region's box contains real source ink (not paper-only) |
-| D10: M1A-01 tautological | FIXED | m1a01 now asserts geometric ownership: every supplied symbol box is referenced by an owned slot whose traced ink bbox intersects that box, and the merged touching unit owns ≥2 slots sharing a horizontal range |
-| D11: p11 boxes are synthetic | CORRECTED | §2 states p11/p12 use derived synthetic boxes (`.synth.json`); p06/p14/p16 use real tesseract hOCR |
-| D12: `.DS_Store` junk | FIXED | untracked macOS junk removed from the tree |
-| "M0 visual gates run green" (report claim) | CORRECTED | they do NOT pass and never did at the accepted baseline; the honest numbers are in §4 |
+| Round-1 finding | Status | Evidence in this revision |
+|---|---|---|
+| D1: p04 astral ActualText regression (`"fi𝐀"→"fi"`) | FIXED | astral guard restored in `page_pdf.rs` (BMP-only ActualText, astral stays on ToUnicode); `p04 pdfium supplementary U+1D400` PASSes; full gate set shows **zero check flips vs accepted pipeline `f5e5cb5`** |
+| D2: p06 PDFium transport regression (`"8"→""`) | FIXED | owner-CID off-by-one fixed (1-based CIDs used as-is); p06 extracts `8` in both engines |
+| D3: B0 baseline generation removed | FIXED | `convert` re-emits the B0 raster-baseline; `b0_raster.pdf` restored; all B0 gates PASS |
+| D4: trace evidence fabricated | FIXED | real `GlyphStat` (contours, points, stage metrics, honest `budget_ok` under m0-probe-1 budget); values reproduce the accepted M0-Q run exactly (p01 '8': 3 contours, 2083 pts, trace_max 0.4963) |
+| D5: absolute-path claim | CORRECTED | crates and all qualification *gates* are clean; `qualification/make_m1a_fixtures.py` (a dev fixture generator, not pipeline code) references system fonts under `/usr/share/fonts`; fixture hOCR `image` attributes carry absolute paths. Claim reworded in L5 |
+| D6: report byte-determinism unsupported | FIXED | report maps are `BTreeMap` **and** `elapsed_ms` is `#[serde(skip_serializing)]`; report.json is now byte-identical across independent processes — verified by double builds of all three deliverables (PDF *and* report sha1 equal, manifest committed at `work/m1a-final/MANIFEST.txt`) |
+| D7: orphaned duplicate modules | ACKNOWLEDG | migration shims retained for provenance during the refactor; removal is M1-B scope |
+| D8: "Double-inked 0" unmeasured | FIXED | real page-level pixel census in `convert.rs`: `unowned_ink_px` (fg claimed by no owner) and `multiply_owned_ink_px` (fg claimed >once) computed from segmentation masks and per-owner crop masks |
+| D9: m1a09 didn't test raster fidelity | FIXED | `Report.patches[]` carries bbox + sha256 of the embedded RGB; m1a09 asserts the fallback patch is **byte-identical to the source crop** |
+| D10: M1A-01 tautological | FIXED | m1a01 asserts per-supplied-symbol-box geometric ownership (unit ink bbox intersects each owned slot's OCR box; merged touching unit owns ≥2 slots sharing an x-range) |
+| D11: p11 input provenance | CORRECTED | p11/p12 deliverables use real tesseract hOCR (`tess.hocr`); the `.synth.json` files are ground-truth cross-checks. §2 wording fixed |
+| D12: `.DS_Store` junk | FIXED | macOS junk removed from the tree |
+| "M0 visual gates run green" (report claim) | CORRECTED | they do NOT pass and never did at the accepted baseline; honest numbers in §4 |
 
-## 1. What was implemented
+Round-2 review (`8af770d`) additionally found and all are fixed here:
+- **elapsed_ms** in the written report broke cross-process determinism → skipped on serialize (§2 now verifiably true).
+- **Coverage fields never assigned** (hardcoded 0) → real ink census implemented (D8 row above).
+- **m1a09 checked the source, not the patch** → sha256 fidelity against `Report.patches[]` (D9 row above).
+- **Deliverables not in the tree** → committed with a sha1 manifest: `work/m1a-final/` (6 files + MANIFEST.txt).
+- **p06 characterization** ("MAE improved") → corrected in §5: p06 restructured from 6 traced glyphs to 1 ContactNonText fallback region; Poppler IoU 0.9931→0.9419 (worse), MAE 0.0103→0.0044 (better); both baseline and revision fail that page's visual gate.
+- **Required queries not gated** → `test_text_search.py` now gates all three operator queries verbatim (containment + native search, B2 and B0); 15 new checks, all PASS.
 
-### 1.1 Generalized ownership solver (`crates/scanweave-io/src/ownership.rs`)
-- Many-to-many mapping: one connected component may serve multiple OCR spans;
-  one span may own multiple components (moving/rotated spans supported).
-- Slots carry `order`, `text`, `symbol_id`, `bbox` (order-stable identity, so
-  geometric ownership is auditable per symbol box — see M1A-01).
-- `suspect` flag: unit ink extending beyond the union of its symbol boxes by
-  more than the contact margin → `ContactNonText` fallback.
-- Invariants: no double ownership; every component back-referenced exactly once
-  or explicitly unowned (artwork).
-
-### 1.2 Region planning + transactional fallback (`plan.rs`, `convert.rs`)
-- Span-ordered regions (reading-stream order preserved).
-- ContactNonText regions degrade transactionally: the region's sub-raster is
-  embedded losslessly AND the OCR label is redrawn as an invisible per-span
-  owner run, so text extraction is complete for fallback spans in both engines
-  (engine-hoisting caveat in §5).
-- Artwork regions use the same machinery; paper background + patches are
-  FlateDecode image XObjects drawn before vector glyphs.
-
-### 1.3 One-page pipeline and PDF assembler (`page_pdf.rs`, `crates/scanweave-cli/src/main.rs`)
-- `scanweave build <page.png> --ocr <page.hocr> --dpi 300 --output out.pdf --report out.json`
-  (atomic `.tmp`+rename; M1-A: `--mode reconstruct` only).
-- Single font resource: one CID per (glyph shape, semantic string); fallback
-  spans carry one owner CID each referencing GID1 (invisible runs). No second
-  font, no second layer.
-- Visible spans: per-glyph runs grouped under per-span `/ActualText` for BMP
-  spans only; astral (non-BMP) spans keep per-glyph ToUnicode transport (the
-  M0-Q repair — PDFium drops astral scalars inside ActualText).
-- Invisible owner runs: plain invisible Tj placed at the span box top (the
-  run's own baseline); ToUnicode transport. No `/ActualText` (measured: PDFium
-  hoists invisible runs to the end of its extraction order either way).
-- Owner-only-encodable fonts: placeholder GID1 keeps `numGlyphs`/`hmtx`/`cmap`/
-  `loca`/`bbox`/`OS/2` self-consistent (OTS-clean).
-
-### 1.4 B0 baseline candidate restored
-`convert` also emits the raster-baseline page (source pixels + invisible
-per-glyph ToUnicode owner layer), which `test_text_search.py` gates against.
 
 ## 2. Deliverables (reproduce)
 
@@ -92,7 +63,10 @@ cargo run -p scanweave-cli -- build qualification/fixtures/probe/p14_noisy/p14_n
 | fallback.pdf (p14) | 143143 B | 7574 | 0 | 7574 | 0% (deliberate) | 6 (ContactNonText) | 0 | 0 |
 
 All three builds were run twice independently: PDFs **and** report JSONs are
-byte-identical (sha1), and `qpdf --check` passes on all three. Coverage
+byte-identical (sha1), and `qpdf --check` passes on all three. The exact bytes
+are committed at `work/m1a-final/` with a sha1 manifest
+(`work/m1a-final/MANIFEST.txt`), so reproducibility is auditable without
+re-running the build. Coverage
 denominator note: `text_ink_px_total` counts OCR-owned text ink; unrecognized
 ink is separately reported as `other_ink_px` (3486 / 3657 / 2096), so the vector
 percentages exclude nothing that was claimed.
@@ -156,9 +130,11 @@ New or changed by M1-A:
 - **L4 — Migration shims.** Compiled-out duplicate modules (`probes/.../
   src/{encoding,units,pdf,baseline}.rs`, `scanweave-io/src/{pdf,baseline}.rs`)
   remain during the M1-A refactor; removal is M1-B scope.
-- **L5 — Fixture hOCR files carry absolute image paths** (written by
-  tesseract during fixture generation); no committed crate code or
-  qualification script contains hard-coded absolute paths.
+- **L5 — System font paths in the fixture generator.** `qualification/
+  make_m1a_fixtures.py` (a dev-only fixture generator, not pipeline code)
+  references fonts by their standard `/usr/share/fonts` locations, and the
+  fixture hOCR `image` attributes carry absolute paths written by tesseract.
+  No crate code or qualification gate contains hard-coded absolute paths.
 
 ## 6. Freeze points verified
 
