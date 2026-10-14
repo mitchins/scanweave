@@ -115,10 +115,10 @@ def main() -> int:
     )
     printed = r.stdout + r.stderr
     # interface criterion: every corpus page is PROCESSED (PASS/FAIL line) and
-    # recorded in results; gate outcomes are corpus-evaluation territory, not
-    # an interface assertion.
+    # recorded in the RUN-SPECIFIC results file (never the committed gate
+    # artifact — checks.py enforces this).
     processed = sum(1 for n in names if f"PASS {n}" in printed or f"FAIL {n}" in printed)
-    res = json.load(open(os.path.join(HERE, "probe_results.json")))
+    res = json.load(open(os.path.join(WORK, "corpus_checks.json")))
     recorded = sum(1 for n in names if n in res["pages"])
     # transport (correctness) must PASS on corpus pages; visual gates are reported
     transport_ok = all(
