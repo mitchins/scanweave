@@ -179,3 +179,18 @@ statement: 32/8 everywhere, poppler p01 MAE 0.0038, p05 0.133 px / 86.7%, OCRmyP
 - Full suite: 38 cargo tests (incl. E0 + p09/p10 transport regressions),
   sub-pixel analytical, corpus pipeline, schema layer — all green. REVIEW OF
   THIS PASS PENDING (deepseek-reviewer).
+
+## M0-Q hardening-pass ACCEPTED (deepseek-reviewer, 2026-10-14)
+
+> **Ledger statement (M0-Q hardening-pass acceptance).** The M0-Q hardening pass is
+> accepted at final revision 086bf57: the reviewer's two residual findings are closed —
+> the gate-artifact write privilege is now restricted to the unqualified default run
+> with all subsets/overrides failing closed absent an explicit `--out`
+> (checks.py:742-752), and the reproduction record pins the hardening-pass final
+> revision with 38 cargo tests (matching the tree's 38 `#[test]` functions), 8 gate
+> pages, and 8/8 E-proofs while retaining the historical `597386f`=36-test and
+> `9c28819`=digest-only records — and the canonical `qualification/probe_results.json`
+> (8 pages, top-level gates E0–E7 all true, 8 eproofs) was demonstrably not modified by
+> either of the last two commits. The previously scoped BLOCKED items (benign corpus
+> not mounted, m0-qual-1 amendment review pending, MRC lossy matrix deferred) remain
+> open and are not waived; M1 remains NOT AUTHORIZED.
