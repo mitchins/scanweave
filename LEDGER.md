@@ -216,3 +216,39 @@ statement: 32/8 everywhere, poppler p01 MAE 0.0038, p05 0.133 px / 86.7%, OCRmyP
   schema layer, 38 cargo tests. Reproduction: fresh checkout at final revision,
   38 tests + 8/8 E-proofs + 32/32 artifacts byte-identical.
 - awaiting deepseek-reviewer sign-off of this correction.
+
+## M0-Q final correctness correction — ACCEPTED (deepseek-reviewer, 2026-10-14)
+
+> **Final disposition of the M0-Q final correctness correction:** The M0-Q final
+> correctness correction is accepted at HEAD `392d42d` ("report: remove orphaned stale
+> B0 row, dedupe historical note, audit confirms full sync with measurements.json"):
+> the §4 external-baseline table now carries a single B2 row and a single B0 row and
+> every current p09/p10 figure (B2 25,005 / B0 51,236 / IA 45,020 / OCRmyPDF ~40,12 kB
+> with per-run variance documented; p10 B2 104,698 / OCRmyPDF 169,241 / IA 189,213 /
+> B0 220,800 at committed ratios 0.6186 / 0.5533) is reconciled to the committed
+> `qualification/measurements.json`, the residual known touching-character import loss
+> is disclosed with B0/B2 treated equally and the earlier misattribution to tesseract
+> corrected, 8/8 E-proofs and 21/21 p09 marked-content balance are committed, BDC/EMC
+> balance is gated in `checks.py` and `measure.py`, and 38 cargo tests plus 8-page
+> checks remain green; the PROVISIONAL baseline therefore stands unchanged, M0-Q closes
+> charter points 1, 4, 6, 7 and 8 as PASS with points 9–13 recorded as honest
+> FAIL/BLOCKED and no implicit waiver, and — per the operator's stated disposition —
+> M1 remains NOT authorized: the multi-symbol ownership solver (point 12) is the first
+> M1 deliverable and point 11 unblocks on benign-corpus mount, while the `m0-qual-1`
+> amendment and the real benign corpus remain draft and sealed/unmounted respectively.
+
+Correction record (red→green):
+- **A. Semantic search** — RED: raw extraction `'Tota l a m o u nt d u e : 1 , 2 3 4 . 5 6
+  EU R...'`; PDFium search for Total / 1,234.56 / INV-2026-0042 all MISSING. Repaired
+  via per-span `/ActualText` marked-content runs (SPEC §6.2 single semantic owner;
+  per-glyph ToUnicode retained as fallback; astral spans keep ToUnicode because PDFium
+  drops astral inside ActualText; BDC/EMC balance structurally gated after the reviewer
+  caught an unmatched-EMC regression). GREEN: all three queries in PDFium AND Poppler
+  for B2 and B0; 118/118 exact nonduplicated transport; primary gates
+  word_boundary_ok / no_intra_word_spaces; p08 pdfium ordering FAIL preserved.
+- **B. Holdout sealing** — RED: holdout normalized content written to the bundle; seal
+  varied with --out. Repaired: holdouts identified before any processing; sealed from
+  canonical identity + source-byte hashes (scanweave-holdout-seal/1); no holdout
+  content materialized; seal content-bound and location-independent;
+  --include-holdout preserves the development seal; --out to the canonical gate
+  artifact refused.
