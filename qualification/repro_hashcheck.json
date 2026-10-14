@@ -1,12 +1,12 @@
 {
- "note": "Hardening-review reproduction. Fresh clone at final revision, from-source build.",
+ "note": "Final-correction reproduction. Fresh clone at final revision, from-source build.",
  "all_equal": true,
  "rows": [
   {
    "page": "p01_latin",
    "artifact": "out.pdf",
-   "sha256_clone": "0f907c7352ffdba1221d8b7f047092b1356536764b049aacec75221bbcee1545",
-   "sha256_canonical": "0f907c7352ffdba1221d8b7f047092b1356536764b049aacec75221bbcee1545",
+   "sha256_clone": "b488c812e9556f0ea87de700abecf443b2b4b2502e198a68f8db7b4ea0162a72",
+   "sha256_canonical": "b488c812e9556f0ea87de700abecf443b2b4b2502e198a68f8db7b4ea0162a72",
    "equal": true
   },
   {
@@ -33,8 +33,8 @@
   {
    "page": "p02_wronglabel",
    "artifact": "out.pdf",
-   "sha256_clone": "37986e5db51922dc42c01df8c609514f13463e46b8700c7cf21f51a8dd9a82a8",
-   "sha256_canonical": "37986e5db51922dc42c01df8c609514f13463e46b8700c7cf21f51a8dd9a82a8",
+   "sha256_clone": "d5801f4e192e600350c9a24d3f4c186c70e0a093b4f7ecbc44c7102e23dac401",
+   "sha256_canonical": "d5801f4e192e600350c9a24d3f4c186c70e0a093b4f7ecbc44c7102e23dac401",
    "equal": true
   },
   {
@@ -61,8 +61,8 @@
   {
    "page": "p03_kana",
    "artifact": "out.pdf",
-   "sha256_clone": "bc819e4a5be082969767bc09b45d84dfb31f6bb9f41d190c6728ad91fc1716fe",
-   "sha256_canonical": "bc819e4a5be082969767bc09b45d84dfb31f6bb9f41d190c6728ad91fc1716fe",
+   "sha256_clone": "93d587ccfe869f68eabeacf9e81d074b20a1624191f18719817097d766f9b0bc",
+   "sha256_canonical": "93d587ccfe869f68eabeacf9e81d074b20a1624191f18719817097d766f9b0bc",
    "equal": true
   },
   {
@@ -89,8 +89,8 @@
   {
    "page": "p04_ligature",
    "artifact": "out.pdf",
-   "sha256_clone": "bc06d834b3c3e7d33a0f545ad58cb19c686a0b4e2432c31348cbe9e9a9ab4a18",
-   "sha256_canonical": "bc06d834b3c3e7d33a0f545ad58cb19c686a0b4e2432c31348cbe9e9a9ab4a18",
+   "sha256_clone": "a95ac337ecffe96aeabde853b03bf3f176ddf6a571075d7f509145a305529fc9",
+   "sha256_canonical": "a95ac337ecffe96aeabde853b03bf3f176ddf6a571075d7f509145a305529fc9",
    "equal": true
   },
   {
@@ -117,8 +117,8 @@
   {
    "page": "p05_colour",
    "artifact": "out.pdf",
-   "sha256_clone": "ebb04c101693562059a9cb78c9d78165416c0eb33cf6294712349986e7ade739",
-   "sha256_canonical": "ebb04c101693562059a9cb78c9d78165416c0eb33cf6294712349986e7ade739",
+   "sha256_clone": "ab5d38dde07aafbfd71fa370ecf5c0f4e792d9b2d1f1c970ec0b8f437cd06dd0",
+   "sha256_canonical": "ab5d38dde07aafbfd71fa370ecf5c0f4e792d9b2d1f1c970ec0b8f437cd06dd0",
    "equal": true
   },
   {
@@ -145,8 +145,8 @@
   {
    "page": "p06_degraded",
    "artifact": "out.pdf",
-   "sha256_clone": "b5b674a9b66cf69c289cf6dbb01d57a1322e33fbbb647f191eb566091ae46c36",
-   "sha256_canonical": "b5b674a9b66cf69c289cf6dbb01d57a1322e33fbbb647f191eb566091ae46c36",
+   "sha256_clone": "176d9fee34d6367aaa6c0c11c88c0209b9588c753a7cc79eef1b7d7c8d6253ef",
+   "sha256_canonical": "176d9fee34d6367aaa6c0c11c88c0209b9588c753a7cc79eef1b7d7c8d6253ef",
    "equal": true
   },
   {
@@ -173,8 +173,8 @@
   {
    "page": "p07_sharedcid",
    "artifact": "out.pdf",
-   "sha256_clone": "2e0a5a9b42f8205ad3621ce2a02f7e0711776fe6b0bf36fc948b60681d501d44",
-   "sha256_canonical": "2e0a5a9b42f8205ad3621ce2a02f7e0711776fe6b0bf36fc948b60681d501d44",
+   "sha256_clone": "681f679595659cae5d234368bf4eb19a6c9bfd920197aaa5afab2111a8ad9720",
+   "sha256_canonical": "681f679595659cae5d234368bf4eb19a6c9bfd920197aaa5afab2111a8ad9720",
    "equal": true
   },
   {
@@ -201,8 +201,8 @@
   {
    "page": "p08_symbols",
    "artifact": "out.pdf",
-   "sha256_clone": "28f75c9d9a7860c9a817b5d666ed7383a7c3935b7c6b586a403e2026743574c3",
-   "sha256_canonical": "28f75c9d9a7860c9a817b5d666ed7383a7c3935b7c6b586a403e2026743574c3",
+   "sha256_clone": "39d4777cf2d2742f1f8ea7342eb47d6c5aba15f119e789e0437c314d95e6eaec",
+   "sha256_canonical": "39d4777cf2d2742f1f8ea7342eb47d6c5aba15f119e789e0437c314d95e6eaec",
    "equal": true
   },
   {
