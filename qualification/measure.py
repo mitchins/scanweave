@@ -47,6 +47,20 @@ def sh(cmd, env=None):
     return subprocess.run(cmd, capture_output=True, text=True, env=env)
 
 
+def run_external(cmd, out_path, env=None, label="") -> None:
+    """Run an external baseline command FAIL-CLOSED: prior outputs are removed
+    first (no stale reuse) and a missing/failed artifact aborts with a precise
+    reason instead of being silently skipped or implicitly reported as smaller."""
+    if os.path.exists(out_path):
+        os.remove(out_path)
+    r = sh(cmd, env=env)
+    if r.returncode != 0 or not os.path.exists(out_path):
+        raise RuntimeError(
+            f"external baseline {label} failed (rc={r.returncode}) or produced no output: "
+            f"{(r.stdout + r.stderr).strip()[-300:]}"
+        )
+
+
 def extract_pdfium(pdf):
     doc = pdfium.PdfDocument(pdf)
     t = doc[0].get_textpage().get_text_bounded()
@@ -154,18 +168,19 @@ def main() -> int:
             PILImage.open(png).convert("RGB").save(ipdf, "PDF", resolution=300.0)
             hocr = os.path.join(d, "tess.hocr")
             sh([tess_bin, png, hocr[:-5], "-c", "hocr_char_boxes=1", "hocr"], env=ext_env)
-            sh([ocrmypdf_bin, "--output-type", "pdf", "--force-ocr", "-l", "eng",
-                "--optimize", "0", ipdf, os.path.join(d, "ocrm.pdf")], env=ext_env)
-            sh([recode, "-P", ipdf, "-T", hocr, "-o", os.path.join(d, "ia.pdf"), "-m", "0",
-                "--bg-compression-flags=-r 500", "--fg-compression-flags=-r 750",
-                "--hq-bg-compression-flags=-r 500", "--hq-fg-compression-flags=-r 750"],
-               env=ext_env)
+            run_external([ocrmypdf_bin, "--output-type", "pdf", "--force-ocr", "-l", "eng",
+                          "--optimize", "0", ipdf, os.path.join(d, "ocrm.pdf")],
+                         os.path.join(d, "ocrm.pdf"), ext_env, "ocrmypdf")
+            run_external([recode, "-P", ipdf, "-T", hocr, "-o", os.path.join(d, "ia.pdf"), "-m", "0",
+                          "--bg-compression-flags=-r 500", "--fg-compression-flags=-r 750",
+                          "--hq-bg-compression-flags=-r 500", "--hq-fg-compression-flags=-r 750"],
+                         os.path.join(d, "ia.pdf"), ext_env, "ia recode_pdf")
             row = {
                 "src": os.path.getsize(png),
                 "B0": os.path.getsize(os.path.join(d, "b0_raster.pdf")),
                 "B2": os.path.getsize(os.path.join(d, "out.pdf")),
-                "ocrmypdf": os.path.getsize(os.path.join(d, "ocrm.pdf")) if os.path.exists(os.path.join(d, "ocrm.pdf")) else 0,
-                "ia_mrc": os.path.getsize(os.path.join(d, "ia.pdf")) if os.path.exists(os.path.join(d, "ia.pdf")) else 0,
+                "ocrmypdf": os.path.getsize(os.path.join(d, "ocrm.pdf")),
+                "ia_mrc": os.path.getsize(os.path.join(d, "ia.pdf")),
             }
             p10["pages"][n] = row
             for k in tot:

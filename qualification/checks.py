@@ -46,6 +46,11 @@ MAX_EDGE_MAX = 1.0
 MAX_MAE = 0.02
 THRESHOLDS = (55, 60, 65)  # bounded stand-in for threshold offsets -0.05/0/+0.05
 
+DEFAULT_PAGES = [
+    "p01_latin", "p02_wronglabel", "p03_kana", "p04_ligature",
+    "p05_colour", "p06_degraded", "p07_sharedcid", "p08_symbols",
+]
+
 EXPECTED = {
     "p01_latin": ["8", "6", "8", "a"],
     "p02_wronglabel": ["6"],
@@ -56,6 +61,20 @@ EXPECTED = {
     "p07_sharedcid": ["8", "6", "8", "18"],
     "p08_symbols": [".", ",", "-", "$", "%", "1,234.56", "-42"],
 }
+
+
+def expected_from_ocr(name: str) -> list[str] | None:
+    """Original OCR input (the normalized OCR JSON fixture) — the transport
+    contract is verified against THIS source, not a hand-typed list. Returns
+    span texts in the fixture's declared reading order."""
+    path = os.path.join(FIXTURES, name, f"{name}.ocr.json")
+    if not os.path.exists(path):
+        return None
+    doc = json.load(open(path))
+    spans = {s["id"]: s["text"] for s in doc["spans"]}
+    if doc.get("reading_order"):
+        return [spans[i] for i in doc["reading_order"] if i in spans]
+    return [s["text"] for s in doc["spans"]]
 
 results = {"pages": {}, "gates": {}, "tools": {}}
 
@@ -93,15 +112,29 @@ def boundary(m: np.ndarray) -> np.ndarray:
 
 
 def subpixel_boundary_points(gray: np.ndarray, m: np.ndarray, i50: float) -> np.ndarray:
-    """Anti-aliased sub-pixel boundary localization: for every adjacent
-    inside/outside pixel pair, linearly interpolate the 50%-coverage crossing
-    along the connecting segment. Returns continuous points (pixel centres at
-    x+0.5, y+0.5)."""
+    """Anti-aliased sub-pixel boundary localization.
+
+    For every adjacent (inside p, outside q) pixel pair, the 50%-coverage
+    crossing is found by linear interpolation ALONG THE INSIDE-TO-OUTSIDE
+    segment direction: I(t) = vi + (vq - vi) * t with t measured from p toward
+    q; the crossing sits at t* = (i50 - vi) / (vq - vi), i.e. BEYOND p toward q,
+    never mirrored. Pairs with a degenerate ramp (|vq - vi| < 1e-6) are skipped.
+
+    Sampling threshold (rigorous definition): i50 MUST be the 50%-coverage
+    intensity, i50 = (paper_ref + ink_ref) / 2, computed per image from its own
+    paper and ink references. The binary mask `m` is only used to locate
+    adjacent pairs; the metric therefore measures the geometric 50% contour of
+    each image independently of its rasterizer's anti-aliasing strength.
+
+    Known bound: linear interpolation of an ideal area-coverage edge has a
+    phase-dependent bias of at most (sqrt(2)-1)/2 ~= 0.086 px; analytical tests
+    assert recovery within 0.09 px on that basis.
+
+    Returns continuous points (pixel centres at x+0.5, y+0.5)."""
     pts = []
     H, W = m.shape
     g = gray
     for dy, dx in ((0, 1), (0, -1), (1, 0), (-1, 0)):
-        # vectorized: q = pixel at (y+dy, x+dx) is outside while p inside
         ys, xs = np.where(m)
         qy, qx = ys + dy, xs + dx
         ok = (qy >= 0) & (qy < H) & (qx >= 0) & (qx < W)
@@ -113,9 +146,13 @@ def subpixel_boundary_points(gray: np.ndarray, m: np.ndarray, i50: float) -> np.
         vi = g[ys, xs].astype(np.float64)
         vq = g[qy, qx].astype(np.float64)
         denom = vq - vi
-        t = np.where(np.abs(denom) > 1e-9, (vq - i50) / np.where(np.abs(denom) > 1e-9, denom, 1.0), 0.5)
+        good = np.abs(denom) > 1e-6
+        ys, xs, vi, vq, qy, qx = ys[good], xs[good], vi[good], vq[good], qy[good], qx[good]
+        if len(ys) == 0:
+            continue
+        # t from p toward q at the i50 crossing (mirrored formula was the defect)
+        t = (i50 - vi) / (vq - vi)
         t = np.clip(t, 0.0, 1.0)
-        # crossing point between p centre and q centre
         px = xs + 0.5
         py = ys + 0.5
         qx_c = qx + 0.5
@@ -217,6 +254,17 @@ def render_pdfium(pdf: str, out_png: str) -> None:
 def check_page(name: str) -> dict:
     out = {"name": name, "checks": {}, "metrics": {}, "fail": []}
 
+    exp = EXPECTED.get(name)
+    ocr_exp = expected_from_ocr(name)
+    if ocr_exp is not None:
+        if exp is not None and sorted(ocr_exp) != sorted(exp):
+            # fixture OCR and hand list disagree — the OCR input is authoritative
+            out["fail"].append(f"fixture OCR spans {ocr_exp} disagree with EXPECTED hand list {exp}")
+        exp = ocr_exp
+    if exp is None:
+        out["fail"].append("no expectation source for this page")
+        return out
+
     page_dir = os.path.join(FIXTURES, name)
     out_dir = os.path.join(WORK, name)
     os.makedirs(out_dir, exist_ok=True)
@@ -296,8 +344,8 @@ def check_page(name: str) -> dict:
         out["checks"]["fonttools_parse"] = False
         out["fail"].append(f"fontTools parse failed: {e}")
 
-    # 5. extraction: both engines must return exactly the expected span strings
-    exp = EXPECTED[name]
+    # 5. extraction: both engines verified against the OCR-input expectation
+    # (exp is derived at the top of check_page from the fixture's OCR spans)
     for engine, fn in (("poppler", extract_poppler), ("pdfium", extract_pdfium)):
         try:
             text = fn(pdf_path)
@@ -305,24 +353,43 @@ def check_page(name: str) -> dict:
             out["checks"][f"extract_{engine}"] = False
             out["fail"].append(f"{engine} extraction failed: {e}")
             continue
-        # M0 transport check (preregistered): each admitted span's text must
-        # appear in the extraction stream in span (reading) order; extractors
-        # may merge/remove inter-span whitespace and regroup layout lines,
-        # so comparison is per-span order-preserving subsequence over the
-        # whitespace-stripped stream. Numeric punctuation is never normalized.
+        # Transport verification against the ORIGINAL OCR INPUT (item 3):
+        # (1) codepoint cardinality + duplicate detection: the whitespace-
+        #     stripped extraction must have EXACTLY the expected code points
+        #     (no additions, deletions or duplicate layers);
+        # (2) span coverage: each admitted span appears in reading order
+        #     (order-preserving subsequence). Extractors may merge/remove
+        #     inter-span whitespace and regroup layout lines; punctuation is
+        #     never normalized. p08's scattered-symbol layout divergence
+        #     remains a FAIL (not an exception) per the operator directive.
         got = "".join(t for t in re.split(r"\s+", text) if t)
-        ok = True
+        expected = "".join(exp)
+        from collections import Counter as _C
+
+        cardinality_ok = _C(got) == _C(expected)
+        duplicates_ok = _C(got) == _C(expected)
+        coverage_ok = True
         pos = 0
         for span_text in exp:
             idx = got.find(span_text, pos)
             if idx < 0:
-                ok = False
+                coverage_ok = False
                 break
             pos = idx + len(span_text)
+        ok = cardinality_ok and duplicates_ok and coverage_ok
         out["checks"][f"extract_{engine}"] = ok
         out[f"extracted_{engine}"] = got
+        out[f"transport_{engine}"] = {
+            "cardinality_ok": cardinality_ok,
+            "duplicates_ok": duplicates_ok,
+            "span_coverage_ok": coverage_ok,
+        }
         if not ok:
-            out["fail"].append(f"{engine} extraction {got!r} does not contain span sequence {exp}")
+            out["fail"].append(
+                f"{engine} transport vs original OCR: cardinality={cardinality_ok} "
+                f"duplicates={duplicates_ok} coverage={coverage_ok} "
+                f"(got {len(got)} chars, expected {len(expected)})"
+            )
 
     # 6. renders + visual metrics vs source
     src = np.asarray(Image.open(os.path.join(page_dir, f"{name}.png")).convert("RGB"))
@@ -355,9 +422,13 @@ def check_page(name: str) -> dict:
         inter = (src_fg & rend_fg).sum()
         union = (src_fg | rend_fg).sum()
         m["iou"] = float(inter / union) if union else 1.0
+        # rigorous 50%-coverage references: i50 = (paper + ink)/2 per image,
+        # ink = median intensity of that image's own foreground pixels
+        ink_src = float(np.median(src_gray[src_fg])) if src_fg.any() else 0.0
+        ink_ren = float(np.median(rend_gray[rend_fg])) if rend_fg.any() else 0.0
         p95, mx = edge_errors_subpixel(
             src_gray, src_fg, rend_gray, rend_fg,
-            paper - 30.0, rend_paper - 30.0,
+            (paper + ink_src) / 2.0, (rend_paper + ink_ren) / 2.0,
         )
         m["edge_p95"], m["edge_max"] = p95, mx
         mae = float(np.abs(src_gray - rend_gray).mean() / 255.0)
@@ -476,9 +547,23 @@ def parse_font_graph(pdf_path: str, tag: str) -> dict:
     return graph
 
 
+def have(name: str) -> bool:
+    """Whether a gate fixture page is present in the current fixtures dir/run."""
+    return name in results["pages"]
+
 def e_proofs(results: dict) -> None:
-    """WP-E font-graph proofs (E1..E7). Evidence from the PDF/font graph itself."""
+    """WP-E font-graph proofs (E1..E7). Evidence from the PDF/font graph itself.
+
+    Proofs whose fixture page is not part of the current run (e.g. a corpus
+    bundle subset) are recorded NOT_RUN rather than crashing."""
     ep = {}
+    if not have("p07_sharedcid"):
+        for k in ("E1_same_outline_two_cids", "E2_two_gids_one_string",
+                  "E0_key_property", "E7_determinism"):
+            ep[k] = "NOT_RUN (fixture page not in run)"
+        results["eproofs"] = ep
+        results["gates"].update({k: None for k in ep})
+        return
     work1 = os.path.join(WORK, "p07_sharedcid")
     pdf7 = os.path.join(work1, "out.pdf")
 
@@ -510,6 +595,11 @@ def e_proofs(results: dict) -> None:
         }
 
     # E4: multi-codepoint + supplementary-plane ToUnicode (UTF-16BE)
+    if not have("p04_ligature"):
+        ep["E4_utf16_transport"] = "NOT_RUN (fixture page not in run)"
+        results["eproofs"] = ep
+        results["gates"].update({"E4_utf16_transport": None})
+        return
     g4 = parse_font_graph(os.path.join(WORK, "p04_ligature", "out.pdf"), "e4")
     tu4 = g4.get("tounicode", {})
     ep["E4_utf16_transport"] = {
@@ -521,6 +611,12 @@ def e_proofs(results: dict) -> None:
 
     # E3: wrong-label preservation — visible render matches the 8 SOURCE, extraction says 6
     p02 = results["pages"].get("p02_wronglabel", {})
+    if not have("p02_wronglabel") or not have("p03_kana"):
+        ep["E3_wronglabel_preservation"] = "NOT_RUN (fixture page not in run)"
+        ep["E5_kana"] = "NOT_RUN (fixture page not in run)"
+        results["eproofs"] = ep
+        results["gates"].update({"E3_wronglabel_preservation": None, "E5_kana": None})
+        return
     src = np.asarray(Image.open(os.path.join(FIXTURES, "p02_wronglabel", "p02_wronglabel.png")).convert("L"))
     ren = np.asarray(Image.open(os.path.join(WORK, "p02_wronglabel", "render_pdfium.png")).convert("L"))
 
@@ -577,6 +673,10 @@ def e_proofs(results: dict) -> None:
     r = sh(["bash", "-lc", "source $HOME/.cargo/env && cargo test -p m0-font-pdf e0_four_part_key_property 2>&1"],
            env=env)
     e0_pass = r.returncode == 0 and "test encoding::tests::e0_four_part_key_property ... ok" in r.stdout
+    if not have("p01_latin"):
+        ep["E0_key_property"] = {"passed": None, "note": "E1.pdf pages not in run"}
+        results["eproofs"] = ep
+        return
     log1 = json.load(open(os.path.join(WORK, "p01_latin", "trace_log.json")))
     e0 = {
         "rust_property_test": "cargo test e0_four_part_key_property: ok" if e0_pass else r.stdout.strip()[-200:],
@@ -590,7 +690,6 @@ def e_proofs(results: dict) -> None:
     ep["E0_key_property"] = e0
 
     results["eproofs"] = ep
-    ok = True
     status_key = {
         "E1_same_outline_two_cids": "reuse_proven",
         "E2_two_gids_one_string": "same_string",
@@ -602,6 +701,10 @@ def e_proofs(results: dict) -> None:
         "E0_key_property": "same_glyph_diff_string_multi_cid",
     }
     for k, v in ep.items():
+        if isinstance(v, str):
+            print(f"NOT_RUN {k}")
+            results["gates"].setdefault(k, None)
+            continue
         key = status_key.get(k)
         vok = bool(v.get(key)) if isinstance(v, dict) and key else False
         if k == "E4_utf16_transport":
@@ -614,6 +717,15 @@ def e_proofs(results: dict) -> None:
 
 
 def main() -> int:
+    import argparse
+
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--pages", help="comma-separated page list")
+    ap.add_argument("--fixtures-dir", help="override the probe fixtures root (corpus bundles)")
+    args = ap.parse_args()
+    if args.fixtures_dir:
+        global FIXTURES
+        FIXTURES = os.path.abspath(args.fixtures_dir)
     os.makedirs(WORK, exist_ok=True)
     env = dict(os.environ, LD_LIBRARY_PATH=os.path.join(ROOT, "tools", "dist", "lib"))
     results["tools"]["qpdf"] = sh([QPDF, "--version"], env=env).stdout.splitlines()[0]
@@ -621,7 +733,7 @@ def main() -> int:
     results["tools"]["pdfium"] = "pypdfium2 bundled"
     results["tools"]["ots"] = sh([OTS, "--version"]).stdout.strip()
 
-    pages = sys.argv[1].split("=")[1].split(",") if "--pages" in sys.argv else list(EXPECTED)
+    pages = [p.strip() for p in args.pages.split(",") if p.strip()] if args.pages else list(DEFAULT_PAGES)
     all_ok = True
     for name in pages:
         res = check_page(name)

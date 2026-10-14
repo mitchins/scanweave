@@ -155,3 +155,27 @@ at the bottom.
 (The four enumerated citation lags were corrected in the same commit that appends this
 statement: 32/8 everywhere, poppler p01 MAE 0.0038, p05 0.133 px / 86.7%, OCRmyPDF
 40,121. No data values changed — citations only.)
+
+## M0-Q hardening pass (2026-10-14)
+
+- Item 1: sub-pixel edge interpolation CORRECTED (mirrored direction →
+  inside→outside t*); rigorous i50 = (paper+ink)/2 per image; 11 analytical
+  tests green incl. mirrored-implementation regression guard; visual metric
+  regenerated (Poppler p95 0.50–0.52, pdfium 0.51–1.00; MAE passes all pages
+  Poppler Poppler p01 0.0038). No threshold relaxations.
+- Item 2: touching-character transport defect REPAIRED — one visual unit may
+  carry multiple semantic chars (ordered by OCR slot index, not polygon x0).
+  Regression tests RED 113/118 → GREEN; end-to-end 118/118 exact-order in both
+  engines. Also fixed: normalized-JSON export emitted null for schema-optional
+  fields (real interchange bug caught by the adapter's validation).
+- Item 3: extraction verified against the ORIGINAL OCR input (cardinality +
+  duplicates + per-span coverage, both engines); p08 ordering stays FAIL.
+- Item 4: corpus_adapter hardened (pixel-hash binding, OCR validation,
+  document-level splits, sealed holdouts); runner --pages argparse +
+  --fixtures-dir; miniature synthetic-corpus end-to-end test all green.
+- Item 5: dates reconciled (2024→2026); measure.py external runs fail closed;
+  measurements regenerated (p09 B2 24,110B; p10 B2 100,490B = 0.59× OCRmyPDF,
+  0.53× IA MRC); non-quality-equivalent mark superseded by the item-2 repair.
+- Full suite: 38 cargo tests (incl. E0 + p09/p10 transport regressions),
+  sub-pixel analytical, corpus pipeline, schema layer — all green. REVIEW OF
+  THIS PASS PENDING (deepseek-reviewer).

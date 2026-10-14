@@ -1,8 +1,8 @@
 # M0-Q Gate Report — qualification closure
 
-Date: 2024-10-14. Frozen baseline: commit `3172a32` (tag `m0-provisional-baseline`);
+Date: 2026-10-14. Frozen baseline: commit `3172a32` (tag `m0-provisional-baseline`);
 Q-phase work landed in commits after `9479414` (itemized in §2 and LEDGER.md).
-Charter: operator message of 2024-10-14 (5 points). No architecture or interface
+Charter: operator message of 2026-10-14 (5 points). No architecture or interface
 changes; THREE defect repairs are itemized in §2 (ink colour, ownership assignment,
 hOCR 5.5 reader) — each is a concrete qualification-failure repair under the charter.
 
@@ -79,7 +79,7 @@ is relaxed in this report.
 
 ## 3. Benign pilot corpus (charter point 3) — BLOCKED (environment)
 
-- No corpus is mounted on this machine (checked 2024-10-14; filesystem scan recorded in
+- No corpus is mounted on this machine (checked 2026-10-14; filesystem scan recorded in
   the session ledger). Nothing was fabricated or substituted.
 - Turnkey adapter delivered: `qualification/corpus_adapter.py` (expected layout,
   document-level manifest, split isolation, pixel-hash binding; see file header).
@@ -164,3 +164,89 @@ PROVISIONAL baseline stands. M0-Q closes points 1, 4, 6, 7, 8 as PASS; points 9�
 FAIL/BLOCKED with evidence and scoped fixes. Per the operator table this does not
 authorize M1: point 12's ownership solver is the first M1 deliverable, and point 11
 unblocks on corpus mount.
+
+
+---
+
+## Appendix — M0-Q hardening pass (2026-10-14, reviewer-authorized)
+
+Charter: "Targeted qualification-harness corrections and repairs of demonstrated
+defects only. M1 remains unauthorized. Preserve the frozen architecture,
+encoding contracts, existing thresholds and source evidence."
+
+**Item 1 — sub-pixel edge interpolation: CORRECTED.** The interpolator had the
+crossing mirrored to the opposite side of the inside→outside segment (analytic
+tests: mid-ramp edges recovered at ~1.0 px error). Fixed to
+`t* = (i50 − vi)/(vq − vi)` along the inside→outside direction, with a rigorous
+sampling threshold: `i50 = (paper_ref + ink_ref)/2` per image (50%-coverage
+contour; AA-invariant), degenerate ramps skipped. New analytical tests
+(`qualification/test_subpixel_metric.py`): known sub-pixel edge positions
+(phases 0/0.25/0.5/0.75), horizontal/vertical/inverted polarity, low-contrast
+colour pairs, a known 0.3 px two-render offset, and a mirrored-implementation
+regression guard — all pass within the derived linear-interpolation bias bound
+((√2−1)/2 ≈ 0.086 px; tests assert 0.09 px). Regenerated visual results:
+Poppler p95 now measures 0.50–0.52 px (the old mirrored metric read low at
+0.25–0.29); pdfium 0.51–1.00 px. MAE: Poppler passes every page (p01 0.0038),
+pdfium also passes MAE; the remaining gate failures are (a) Poppler edge p95
+0.51–0.52 against the 0.5 policy on 4 pages (marginal, honest measurement — no
+threshold relaxation made; the `m0-qual-1` draft is updated: the measured
+0.51 is within the 0.086 px estimator bias of a ≤0.42 px true geometric
+deviation, so an estimator-bias-aware criterion is the proposed amendment,
+subject to independent approval) and (b) p04 `fi` and p06 (unchanged analyses).
+
+**Item 2 — semantic transport loss: REPAIRED.** Regression tests first
+(`probes/m0-font-pdf/tests/transport_regression.rs`): red at 113/118 carried
+characters; green after repair. Root causes fixed: (i) touching characters →
+one connected component → the paired symbol's slot left empty; now absorbed
+into the owning unit as ONE visual unit carrying MULTIPLE semantic characters
+(SPEC §3/§5.3), ordered by the OCR's own slot index (reading sequence) —
+polygon x0 ordering was ambiguous when hOCR boxes overlap ('w'/'i' both at
+x0=258, which corrupted the first repair attempt to "iwthin"); (ii) index bug
+in the absorption scan (enumerated spans, indexed slots). **End-to-end: 118/118
+characters extract in exact order through BOTH Poppler and PDFium on the
+real-tesseract fixture (c00_page_01 through the corpus adapter as well).**
+Also fixed en route: normalized-JSON export emitted `null` for schema-optional
+fields (`source_geometry`, `baseline`, `parent_span_id`, dpi) that the schema
+requires be ABSENT — a real interchange round-trip bug caught by the hardened
+adapter's validation; committed fixtures re-generated schema-clean.
+
+**Item 3 — extraction verification hardened.** Transport now verified against
+the ORIGINAL OCR INPUT (fixture span texts in declared reading order), not a
+hand-typed list: codepoint cardinality, duplicate detection and per-span
+coverage through both engines, per page, recorded in
+`probe_results.json.<page>.transport_{poppler,pdfium}`. p08 pdfium
+span-ordering remains FAIL (coverage=False, cardinality=True) exactly as
+directed — explicitly listed in §5, not waived.
+
+**Item 4 — corpus qualification executable.** `corpus_adapter.py` upgraded:
+SWRASTER1 pixel-hash binding per page (mismatch ⇒ fail-closed error), OCR
+validation (hOCR via the real Rust import path; pre-normalized vs schema +
+structural rules), document-level split isolation (deterministic SHA-256
+bucket → train/development/calibration 60/20/20), sealed holdouts
+(`*_holdout` strata / `holdout_` documents hashed and refused unless
+`--include-holdout`). Runner `--pages` fixed to argparse (+ `--fixtures-dir`
+over-ride). `qualification/test_corpus_adapter.py` exercises the WHOLE
+adapter→runner interface on a miniature synthetic corpus (6 documents incl.
+one sealed holdout, a deliberately broken binding, repair, per-page checks
+`--pages` run): all green. The real benign corpus remains NOT MOUNTED; the
+real-corpus gate stays BLOCKED.
+
+**Item 5 — evidence/provenance reconciled.** Dates corrected (2024→2026).
+External-comparison commands fail closed (`measure.py` `run_external`: prior
+outputs deleted, tool failure raises a precise reason instead of silently
+reusing stale outputs or reporting smaller totals). Measurements regenerated on
+the final revision: p09 B2=24,110 B / IA MRC 45,020 B / OCRmyPDF 40,120 B;
+p10 totals B2=100,490 B = 0.59× OCRmyPDF, 0.53× IA MRC. The
+"non-quality-equivalent" mark for documents with missing OCR characters is
+SUPERSEDED by the item-2 repair: p09/p10 now transport 118/118(and p10's
+per-page sets) exactly in both engines, so the compression results above are
+quality-equivalent on the transport dimension; the record of the earlier
+defect is retained here and in the ledger.
+
+**Gate list impact:** rows 1–8 unchanged PASS; row 12 (touching-character
+loss) moves FAIL → PASS-BY-REPAIR with the regression tests as evidence; row
+9 (dev-initial-1 visual gate) remains FAIL on the honest corrected-metric
+margins (Poppler edge p95 ≈0.51 on 4 pages; pdfium ≈1.0 on all; p04/p06 as
+before); the `m0-qual-1` amendment is a draft pending independent approval;
+row 11 (corpus) remains BLOCKED. Disposition: PROVISIONAL unchanged. M1 not
+authorized.

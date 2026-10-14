@@ -141,7 +141,9 @@ pub struct RasterBinding {
     pub icc_sha256: Option<String>,
     pub orientation_policy: OrientationPolicy,
     pub decoder_id: String,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
     pub dpi_x: Option<f64>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
     pub dpi_y: Option<f64>,
 }
 
@@ -214,7 +216,9 @@ pub struct Span {
     pub language: Option<String>,
     pub confidence: Confidence,
     pub provenance: Provenance,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
     pub baseline: Option<Vec<[f64; 2]>>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
     pub parent_span_id: Option<String>,
     pub symbols: Vec<Symbol>,
 }
@@ -235,6 +239,7 @@ pub struct OcrPage {
     pub page_id: String,
     pub raster: RasterBinding,
     pub page: PageGeometry,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
     pub source_geometry: Option<SourceGeometry>,
     pub producer: Producer,
     pub granularity: Granularity,

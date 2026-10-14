@@ -10,29 +10,30 @@
     "hole_winding": true,
     "extract_poppler": true,
     "extract_pdfium": true,
-    "visual_poppler": true,
+    "visual_poppler": false,
     "visual_pdfium": false
    },
    "metrics": {
     "poppler": {
      "iou": 1.0,
-     "edge_p95": 0.27705627705626057,
-     "edge_max": 0.4187439179579542,
+     "edge_p95": 0.508658008658017,
+     "edge_max": 0.5316742081448069,
      "mae": 0.0038025019962736224,
      "mae_ink": 0.015503887971107164,
      "topology_ok": true
     },
     "pdfium": {
      "iou": 0.9837290774620475,
-     "edge_p95": 1.0782538647436013,
-     "edge_max": 1.4761904761904816,
+     "edge_p95": 1.0033471189771785,
+     "edge_max": 1.4560185185185333,
      "mae": 0.005207279744476976,
      "mae_ink": 0.0219378868713698,
      "topology_ok": true
     }
    },
    "fail": [
-    "pdfium visual gate: iou=0.9837 p95=1.08 max=1.48 mae=0.0052 topo=True"
+    "poppler visual gate: iou=1.0000 p95=0.51 max=0.53 mae=0.0038 topo=True",
+    "pdfium visual gate: iou=0.9837 p95=1.00 max=1.46 mae=0.0052 topo=True"
    ],
    "pdf_bytes": 9817,
    "ttf_bytes": 7608,
@@ -62,7 +63,17 @@
     }
    },
    "extracted_poppler": "868a",
+   "transport_poppler": {
+    "cardinality_ok": true,
+    "duplicates_ok": true,
+    "span_coverage_ok": true
+   },
    "extracted_pdfium": "868a",
+   "transport_pdfium": {
+    "cardinality_ok": true,
+    "duplicates_ok": true,
+    "span_coverage_ok": true
+   },
    "unowned_components": 0,
    "glyphs": [
     {
@@ -131,29 +142,30 @@
     "hole_winding": true,
     "extract_poppler": true,
     "extract_pdfium": true,
-    "visual_poppler": true,
+    "visual_poppler": false,
     "visual_pdfium": false
    },
    "metrics": {
     "poppler": {
      "iou": 1.0,
-     "edge_p95": 0.26328216954653794,
-     "edge_max": 0.4187439179579542,
+     "edge_p95": 0.5086580086580028,
+     "edge_max": 0.5316742081448069,
      "mae": 0.0010806050927158193,
      "mae_ink": 0.014004181193911572,
      "topology_ok": true
     },
     "pdfium": {
      "iou": 0.9868991989319092,
-     "edge_p95": 1.1111111111111143,
-     "edge_max": 1.4219345011424025,
+     "edge_p95": 0.9957627118644155,
+     "edge_max": 1.0,
      "mae": 0.001213312926980747,
      "mae_ink": 0.01587050708133721,
      "topology_ok": true
     }
    },
    "fail": [
-    "pdfium visual gate: iou=0.9869 p95=1.11 max=1.42 mae=0.0012 topo=True"
+    "poppler visual gate: iou=1.0000 p95=0.51 max=0.53 mae=0.0011 topo=True",
+    "pdfium visual gate: iou=0.9869 p95=1.00 max=1.00 mae=0.0012 topo=True"
    ],
    "pdf_bytes": 5852,
    "ttf_bytes": 3856,
@@ -169,7 +181,17 @@
     }
    },
    "extracted_poppler": "6",
+   "transport_poppler": {
+    "cardinality_ok": true,
+    "duplicates_ok": true,
+    "span_coverage_ok": true
+   },
    "extracted_pdfium": "6",
+   "transport_pdfium": {
+    "cardinality_ok": true,
+    "duplicates_ok": true,
+    "span_coverage_ok": true
+   },
    "unowned_components": 0,
    "glyphs": [
     {
@@ -202,29 +224,30 @@
     "hole_winding": true,
     "extract_poppler": true,
     "extract_pdfium": true,
-    "visual_poppler": true,
+    "visual_poppler": false,
     "visual_pdfium": false
    },
    "metrics": {
     "poppler": {
      "iou": 1.0,
-     "edge_p95": 0.26893735897712645,
-     "edge_max": 0.4069818501170914,
+     "edge_p95": 0.5176211453744486,
+     "edge_max": 0.541474654377879,
      "mae": 0.0013603939313281872,
      "mae_ink": 0.025961578530649666,
      "topology_ok": true
     },
     "pdfium": {
      "iou": 0.9631547260686334,
-     "edge_p95": 1.185171710986178,
-     "edge_max": 1.4761904761904816,
+     "edge_p95": 1.0,
+     "edge_max": 1.0,
      "mae": 0.001714909945878804,
      "mae_ink": 0.033585248669004024,
      "topology_ok": true
     }
    },
    "fail": [
-    "pdfium visual gate: iou=0.9632 p95=1.19 max=1.48 mae=0.0017 topo=True"
+    "poppler visual gate: iou=1.0000 p95=0.52 max=0.54 mae=0.0014 topo=True",
+    "pdfium visual gate: iou=0.9632 p95=1.00 max=1.00 mae=0.0017 topo=True"
    ],
    "pdf_bytes": 6248,
    "ttf_bytes": 4244,
@@ -240,7 +263,17 @@
     }
    },
    "extracted_poppler": "\u30ac",
+   "transport_poppler": {
+    "cardinality_ok": true,
+    "duplicates_ok": true,
+    "span_coverage_ok": true
+   },
    "extracted_pdfium": "\u30ac",
+   "transport_pdfium": {
+    "cardinality_ok": true,
+    "duplicates_ok": true,
+    "span_coverage_ok": true
+   },
    "unowned_components": 0,
    "glyphs": [
     {
@@ -279,24 +312,24 @@
    "metrics": {
     "poppler": {
      "iou": 0.9745322245322245,
-     "edge_p95": 1.0,
-     "edge_max": 1.3126260588947218,
+     "edge_p95": 1.0176211453744486,
+     "edge_max": 1.5110619469026574,
      "mae": 0.0032693638541389405,
      "mae_ink": 0.03628877746524806,
      "topology_ok": true
     },
     "pdfium": {
      "iou": 0.9763556926240041,
-     "edge_p95": 1.0946261682242948,
-     "edge_max": 1.0946261682242948,
+     "edge_p95": 1.0,
+     "edge_max": 1.0,
      "mae": 0.0026811951024753792,
      "mae_ink": 0.02848579678594645,
      "topology_ok": true
     }
    },
    "fail": [
-    "poppler visual gate: iou=0.9745 p95=1.00 max=1.31 mae=0.0033 topo=True",
-    "pdfium visual gate: iou=0.9764 p95=1.09 max=1.09 mae=0.0027 topo=True"
+    "poppler visual gate: iou=0.9745 p95=1.02 max=1.51 mae=0.0033 topo=True",
+    "pdfium visual gate: iou=0.9764 p95=1.00 max=1.00 mae=0.0027 topo=True"
    ],
    "pdf_bytes": 3385,
    "ttf_bytes": 1304,
@@ -318,7 +351,17 @@
     }
    },
    "extracted_poppler": "fi\ud835\udc00",
+   "transport_poppler": {
+    "cardinality_ok": true,
+    "duplicates_ok": true,
+    "span_coverage_ok": true
+   },
    "extracted_pdfium": "fi\ud835\udc00",
+   "transport_pdfium": {
+    "cardinality_ok": true,
+    "duplicates_ok": true,
+    "span_coverage_ok": true
+   },
    "unowned_components": 0,
    "glyphs": [
     {
@@ -369,30 +412,31 @@
     "hole_winding": true,
     "extract_poppler": true,
     "extract_pdfium": true,
-    "visual_poppler": true,
+    "visual_poppler": false,
     "visual_pdfium": false,
     "counters_paper_colour": true
    },
    "metrics": {
     "poppler": {
      "iou": 1.0,
-     "edge_p95": 0.23221037425906843,
-     "edge_max": 0.35716850450077686,
+     "edge_p95": 0.5028464402418251,
+     "edge_max": 0.5326600781136648,
      "mae": 0.00076016737201668,
      "mae_ink": 0.009067541025065096,
      "topology_ok": true
     },
     "pdfium": {
      "iou": 0.992003367003367,
-     "edge_p95": 1.0869983336071045,
-     "edge_max": 1.4972073520393678,
+     "edge_p95": 0.7435323735554675,
+     "edge_max": 1.0,
      "mae": 0.0008332668574217016,
      "mae_ink": 0.009691081204198853,
      "topology_ok": true
     }
    },
    "fail": [
-    "pdfium visual gate: iou=0.9920 p95=1.09 max=1.50 mae=0.0008 topo=True"
+    "poppler visual gate: iou=1.0000 p95=0.50 max=0.53 mae=0.0008 topo=True",
+    "pdfium visual gate: iou=0.9920 p95=0.74 max=1.00 mae=0.0008 topo=True"
    ],
    "pdf_bytes": 5877,
    "ttf_bytes": 3856,
@@ -408,7 +452,17 @@
     }
    },
    "extracted_poppler": "8",
+   "transport_poppler": {
+    "cardinality_ok": true,
+    "duplicates_ok": true,
+    "span_coverage_ok": true
+   },
    "extracted_pdfium": "8",
+   "transport_pdfium": {
+    "cardinality_ok": true,
+    "duplicates_ok": true,
+    "span_coverage_ok": true
+   },
    "counter_colour": {
     "mean": [
      213.58157894736843,
@@ -456,8 +510,8 @@
    "metrics": {
     "poppler": {
      "iou": 0.9930761622156281,
-     "edge_p95": 4.884558806247912,
-     "edge_max": 11.840183755051285,
+     "edge_p95": 4.6097722286464435,
+     "edge_max": 11.869505843190904,
      "mae": 0.010314679265371307,
      "mae_ink": 0.12151879849558327,
      "topology_ok": false,
@@ -472,8 +526,8 @@
     },
     "pdfium": {
      "iou": 0.9691839310908146,
-     "edge_p95": 4.7065421488722965,
-     "edge_max": 11.984680615037028,
+     "edge_p95": 4.622561578991908,
+     "edge_max": 11.988147619737735,
      "mae": 0.00999086150297223,
      "mae_ink": 0.11690799732679884,
      "topology_ok": false,
@@ -492,8 +546,8 @@
     }
    },
    "fail": [
-    "poppler visual gate: iou=0.9931 p95=4.88 max=11.84 mae=0.0103 topo=False",
-    "pdfium visual gate: iou=0.9692 p95=4.71 max=11.98 mae=0.0100 topo=False"
+    "poppler visual gate: iou=0.9931 p95=4.61 max=11.87 mae=0.0103 topo=False",
+    "pdfium visual gate: iou=0.9692 p95=4.62 max=11.99 mae=0.0100 topo=False"
    ],
    "pdf_bytes": 44373,
    "ttf_bytes": 11484,
@@ -807,7 +861,17 @@
     }
    },
    "extracted_poppler": "8",
+   "transport_poppler": {
+    "cardinality_ok": true,
+    "duplicates_ok": true,
+    "span_coverage_ok": true
+   },
    "extracted_pdfium": "8",
+   "transport_pdfium": {
+    "cardinality_ok": true,
+    "duplicates_ok": true,
+    "span_coverage_ok": true
+   },
    "unowned_components": 81,
    "glyphs": [
     {
@@ -911,28 +975,29 @@
     "extract_poppler": true,
     "extract_pdfium": true,
     "visual_poppler": false,
-    "visual_pdfium": true
+    "visual_pdfium": false
    },
    "metrics": {
     "poppler": {
      "iou": 0.9961678661557155,
-     "edge_p95": 0.36310270339859646,
-     "edge_max": 1.3354166666666742,
+     "edge_p95": 0.5202702702702595,
+     "edge_max": 1.508658008658017,
      "mae": 0.003767095073323447,
      "mae_ink": 0.018669602619999302,
      "topology_ok": true
     },
     "pdfium": {
      "iou": 1.0,
-     "edge_p95": 0.2766500405985397,
-     "edge_max": 0.41488020176547025,
+     "edge_p95": 0.5064655172413808,
+     "edge_max": 0.541474654377879,
      "mae": 0.003187543252595156,
      "mae_ink": 0.015454454479267944,
      "topology_ok": true
     }
    },
    "fail": [
-    "poppler visual gate: iou=0.9962 p95=0.36 max=1.34 mae=0.0038 topo=True"
+    "poppler visual gate: iou=0.9962 p95=0.52 max=1.51 mae=0.0038 topo=True",
+    "pdfium visual gate: iou=1.0000 p95=0.51 max=0.54 mae=0.0032 topo=True"
    ],
    "pdf_bytes": 8206,
    "ttf_bytes": 5908,
@@ -962,7 +1027,17 @@
     }
    },
    "extracted_poppler": "86818",
+   "transport_poppler": {
+    "cardinality_ok": true,
+    "duplicates_ok": true,
+    "span_coverage_ok": true
+   },
    "extracted_pdfium": "86818",
+   "transport_pdfium": {
+    "cardinality_ok": true,
+    "duplicates_ok": true,
+    "span_coverage_ok": true
+   },
    "unowned_components": 0,
    "glyphs": [
     {
@@ -1039,25 +1114,25 @@
    "metrics": {
     "poppler": {
      "iou": 0.957319997259711,
-     "edge_p95": 1.008115552381458,
-     "edge_max": 1.364143704220453,
+     "edge_p95": 1.1025944669365728,
+     "edge_max": 1.5,
      "mae": 0.00956479016946145,
      "mae_ink": 0.055630823953887916,
      "topology_ok": true
     },
     "pdfium": {
      "iou": 0.9616283401632404,
-     "edge_p95": 1.1234443998394283,
-     "edge_max": 2.241935483870975,
+     "edge_p95": 1.0600000000000023,
+     "edge_max": 1.4668029164825498,
      "mae": 0.0076593913583532965,
      "mae_ink": 0.043674084935223796,
      "topology_ok": true
     }
    },
    "fail": [
-    "pdfium extraction '.,-1,234.56$%-42' does not contain span sequence ['.', ',', '-', '$', '%', '1,234.56', '-42']",
-    "poppler visual gate: iou=0.9573 p95=1.01 max=1.36 mae=0.0096 topo=True",
-    "pdfium visual gate: iou=0.9616 p95=1.12 max=2.24 mae=0.0077 topo=True"
+    "pdfium transport vs original OCR: cardinality=True duplicates=True coverage=False (got 16 chars, expected 16)",
+    "poppler visual gate: iou=0.9573 p95=1.10 max=1.50 mae=0.0096 topo=True",
+    "pdfium visual gate: iou=0.9616 p95=1.06 max=1.47 mae=0.0077 topo=True"
    ],
    "pdf_bytes": 13780,
    "ttf_bytes": 11248,
@@ -1124,7 +1199,17 @@
     }
    },
    "extracted_poppler": ".,-$%1,234.56-42",
+   "transport_poppler": {
+    "cardinality_ok": true,
+    "duplicates_ok": true,
+    "span_coverage_ok": true
+   },
    "extracted_pdfium": ".,-1,234.56$%-42",
+   "transport_pdfium": {
+    "cardinality_ok": true,
+    "duplicates_ok": true,
+    "span_coverage_ok": false
+   },
    "unowned_components": 0,
    "glyphs": [
     {

@@ -126,19 +126,68 @@ pub fn extract_units(
             claimed.insert(li);
         }
     }
-    // KNOWN M0 LIMITATION (quantified, M1 scope): when small text kerns so that
-    // two characters rasterize as ONE connected component, disjoint ownership
-    // assigns that component to one symbol and the other symbol is left empty
-    // (measured: 5 of 118 chars on the real-tesseract page). The correct fix is
-    // component splitting / multi-symbol shared units in the M1 ownership solver
-    // (SPEC §5.2/§5.3). Until then the B0 raster baseline carries the full text.
+    // Touching-character repair (M0-Q item 2): a symbol left empty by the
+    // disjoint ownership (its ink fused into a neighbour's connected component)
+    // is ABSORBED into the owning unit — the merged component becomes ONE
+    // visual unit carrying MULTIPLE semantic characters (SPEC §3/§5.3). Image
+    // ownership and Unicode text ownership are independent: no character is
+    // dropped, nothing is double-painted, and the merged unit's ToUnicode
+    // carries the concatenated text in symbol-box x order.
+    let mut absorbed: std::collections::HashMap<usize, Vec<(usize, String)>> =
+        std::collections::HashMap::new(); // owner slot -> (owning empty slot idx, text)
+    let mut si = 0usize; // FLATTENED slot index (spans x symbols) — must match
+    for span in &page.spans {
+        for sym in &span.symbols {
+            si += 1;
+            let this_slot = si - 1;
+            if !slot_pixels[this_slot].is_empty() {
+                continue;
+            }
+            let bb = polygon_bbox(&sym.polygon);
+            // component with the most pixels intersecting the empty symbol box
+            let mut best: Option<(usize, usize)> = None; // (count, comp li)
+            for (li, pixels) in comp_pixels.iter().enumerate().skip(1) {
+                let inside = pixels
+                    .iter()
+                    .filter(|(x, y)| {
+                        *x as f64 >= bb[0]
+                            && *x as f64 <= bb[2]
+                            && *y as f64 >= bb[1]
+                            && *y as f64 <= bb[3]
+                    })
+                    .count();
+                if inside > 0 && best.map_or(true, |(bc, _)| inside > bc) {
+                    best = Some((inside, li));
+                }
+            }
+            if let Some((_, li)) = best {
+                match owner_of[li] {
+                    Some(owner_slot) => {
+                        let text = span.text[sym.text_range_utf8[0]..sym.text_range_utf8[1]]
+                            .to_string();
+                        absorbed
+                            .entry(owner_slot)
+                            .or_default()
+                            .push((this_slot, text));
+                    }
+                    None => eprintln!("DBG absorb FAILED: best comp {} has NO owner", li),
+                }
+            } else {
+                eprintln!("DBG absorb FAILED: no component intersects empty {} box {:?}", sym.id, bb);
+            }
+            let _ = si;
+        }
+    }
     let mut slot_idx = 0usize;
     for span in &page.spans {
         for sym in &span.symbols {
         let mask_pixels = &slot_pixels[slot_idx];
+        let absorbed_here = absorbed.remove(&slot_idx).unwrap_or_default();
         slot_idx += 1;
         {
             if mask_pixels.is_empty() {
+                // unabsorbed empty symbol: its ink is not attributable to any
+                // component (should not happen; counted as unowned ink instead)
                 continue;
             }
             let x0 = mask_pixels.iter().map(|p| p.0).min().unwrap();
@@ -157,12 +206,20 @@ pub fn extract_units(
                 .map(|c| c.iter().enumerate().fold(0u8, |acc, (i, b)| acc | ((*b as u8) << i)))
                 .collect();
             let shape_key = scanweave_core::hash_hex(&packed);
+            // semantic ownership: own text-range text plus absorbed touching-
+            // character texts, ordered by the OCR slot index (reading sequence).
+            // Polygon x0 must NOT be used: hOCR boxes overlap horizontally
+            // (measured: 'w' and 'i' both at x0=258), which corrupts order.
+            let mut semantics: Vec<(usize, String)> =
+                vec![(slot_idx, span.text[sym.text_range_utf8[0]..sym.text_range_utf8[1]].to_string())];
+            semantics.extend(absorbed_here.into_iter());
+            semantics.sort_by(|a, b| a.0.cmp(&b.0));
+            let semantic_text: String = semantics.into_iter().map(|(_, t)| t).collect();
             units.push(Unit {
                 shape_key,
                 span_id: span.id.clone(),
                 symbol_id: sym.id.clone(),
-                semantic_text: span.text[sym.text_range_utf8[0]..sym.text_range_utf8[1]]
-                    .to_string(),
+                semantic_text,
                 // exact INK bbox: placement maps ink to ink (the OCR polygon may
                 // include font padding and is only a hint)
                 bbox_px: [x0 as f64, y0 as f64, x1 as f64, y1 as f64],
