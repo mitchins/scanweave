@@ -214,8 +214,10 @@ fallback pdf identical / fallback report identical
 sha1s recorded in work/m1a-final/MANIFEST.txt:
   21cc83273253b1de0b724dfbfc7abb417e976440  clean.pdf
   71e3676272b3ce747201a9e4457c697d5c2d691f  fallback.pdf
-  676bf03c8b59b8ca7e714c663be6de207243fe48  touching.pdf
-  (report JSONs likewise)
+  676bf03c8b59f8ca7e714c663be6de207243fe48  touching.pdf
+  74a6bd00efb842233ebf0e01886aa14a2368c67a  clean.json
+  d52e09e8539217fc4f71b52509293d2aa81a7881  fallback.json
+  b025b8c2002b7b9ab07ad428c53b89001d1a5113  touching.json
 
 $ qpdf --check work/m1a-final/*.pdf
 all three: "checking <file>" — no syntax errors reported
