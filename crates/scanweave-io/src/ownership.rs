@@ -140,6 +140,8 @@ impl OwnedUnit {
 pub struct SlotRef {
     pub order: usize,
     pub text: String,
+    pub symbol_id: String,
+    pub bbox: [f64; 4],
 }
 
 /// Build the ownership plan for a page.
@@ -265,7 +267,7 @@ pub fn build_plan(
         let suspect = unit_ink_exceeds_slots(&comp_pixels, comps, &slots[si], 6.0);
         unit_of_slot.insert(si, ui);
         plan.owned.push(OwnedUnit {
-            slots: vec![SlotRef { order: si, text: slots[si].text.clone() }],
+            slots: vec![SlotRef { order: si, text: slots[si].text.clone(), symbol_id: slots[si].symbol_id.clone(), bbox: slots[si].bbox }],
             components: comps.clone(),
             unit: u.clone(),
             suspect,
@@ -300,7 +302,7 @@ pub fn build_plan(
         if let Some((cui, _)) = best {
             plan.owned[cui]
                 .slots
-                .push(SlotRef { order: si, text: slots[si].text.clone() });
+                .push(SlotRef { order: si, text: slots[si].text.clone(), symbol_id: slots[si].symbol_id.clone(), bbox: slots[si].bbox });
             let text_all = plan.owned[cui].semantic_text();
             plan.owned[cui].unit.semantic_text = text_all;
         } else {

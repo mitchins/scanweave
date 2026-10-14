@@ -14,6 +14,16 @@ pub use scanweave_io::{
 pub use scanweave_io::convert::{convert, Input, Policy, Report};
 
 #[derive(Debug, Clone, serde::Serialize)]
+pub struct GlyphStat {
+    pub gid: usize,
+    pub symbol_id: String,
+    pub contours: usize,
+    pub points: usize,
+    pub budget_ok: bool,
+    pub stages: scanweave_io::units::StageMetrics,
+}
+
+#[derive(Debug, Clone, serde::Serialize)]
 pub struct OccurrenceRecord {
     pub page_id: String,
     pub span_id: String,
@@ -109,6 +119,7 @@ pub fn build_page(page_dir: &PathBuf, out_dir: &PathBuf) -> Result<Report, Strin
     let out = convert(&input, &Policy::default())?;
     std::fs::create_dir_all(out_dir).map_err(|e| e.to_string())?;
     std::fs::write(out_dir.join("out.pdf"), &out.pdf_bytes).map_err(|e| e.to_string())?;
+    std::fs::write(out_dir.join("b0_raster.pdf"), &out.b0_bytes).map_err(|e| e.to_string())?;
     std::fs::write(out_dir.join("out.ttf"), &out.font_bytes).map_err(|e| e.to_string())?;
     std::fs::write(
         out_dir.join("report.json"),
@@ -135,16 +146,58 @@ pub fn build_page(page_dir: &PathBuf, out_dir: &PathBuf) -> Result<Report, Strin
         }
     }
     let mut legacy_glyphs: Vec<serde_json::Value> = Vec::new();
+    let mut key_stats: Vec<(&str, usize, usize, bool, [f64; 4])> = out
+        .report
+        .glyph_stats
+        .iter()
+        .filter_map(|g| {
+            // match a stat to a semantic text via its occurrence
+            out.report.occurrences.iter().find(|o| o.symbol_id == g.symbol_id).map(|o| {
+                (
+                    o.semantic_text.as_str(),
+                    g.contours,
+                    g.points,
+                    g.budget_ok,
+                    [
+                        g.stages.trace_max_px,
+                        g.stages.trace_p95_px,
+                        g.stages.curve_max_px,
+                        g.stages.quant_bound_px,
+                    ],
+                )
+            })
+        })
+        .collect();
+    key_stats.sort_by(|a, b| a.0.cmp(b.0));
+    let mut text_stat: std::collections::HashMap<&str, (usize, usize, bool, [f64; 4])> = std::collections::HashMap::new();
+    for (text, contours, points, budget_ok, stages) in &key_stats {
+        let e = text_stat.entry(text).or_insert((0, 0, true, [0.0; 4]));
+        e.0 += *contours;
+        e.1 += *points;
+        e.2 &= *budget_ok;
+        e.3[0] = e.3[0].max(stages[0]);
+        e.3[1] = e.3[1].max(stages[1]);
+        e.3[2] = e.3[2].max(stages[2]);
+        e.3[3] = e.3[3].max(stages[3]);
+    }
     for (idx, (unit, texts)) in per_unit.iter().enumerate() {
+        let (contours, points, budget_ok, stages) = texts.first()
+            .and_then(|t| text_stat.get(t.as_str()).copied())
+            .unwrap_or((0, 0, true, [0.0; 4]));
         legacy_glyphs.push(serde_json::json!({
             "gid": idx,
             "symbol_id": unit,
             "semantic_strings": texts,
             "cids": texts,
-            "contours": [],
-            "points": 0,
-            "stages": [],
-            "budget_ok": true,
+            "contours": contours,
+            "points": points,
+            "stages": {
+                "trace_max_px": stages[0],
+                "trace_p95_px": stages[1],
+                "curve_max_px": stages[2],
+                "quant_bound_px": stages[3],
+            },
+            "budget_ok": budget_ok,
         }));
     }
     let legacy = serde_json::json!({
@@ -161,6 +214,7 @@ pub fn build_page(page_dir: &PathBuf, out_dir: &PathBuf) -> Result<Report, Strin
         .map_err(|e| e.to_string())?;
     // legacy shim report fields (io Report mirrors the shim shape)
     let mut report = Report {
+        glyph_stats: out.report.glyph_stats.clone(),
         occurrences: out.report.occurrences.clone(),
         page_id: out.report.page_id.clone(),
         policy: out.report.policy.clone(),

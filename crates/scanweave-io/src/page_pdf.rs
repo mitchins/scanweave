@@ -262,34 +262,6 @@ pub fn assemble(
         .collect();
 
     c.begin_text();
-    // invisible owner text (glyphless font F2), per-span /ActualText
-    if !owners.is_empty() {
-        c.set_text_rendering_mode(TextRenderingMode::Invisible);
-        c.set_text_rendering_mode(TextRenderingMode::Invisible);
-        c.set_font(Name(b"F1"), 10.0);
-        // invisible owner text, drawn with F1's owner CIDs, wrapped in per-span
-        // /ActualText (exactly one semantic owner per fallback span). Placement is a
-        // plain translation at the span's own height: engine run handling degrades
-        // on extreme text-matrix scales, and the run is invisible anyway.
-        for (owner, cid) in owners.iter().zip(owner_cids.iter()) {
-            {
-                let mut mc = c.begin_marked_content_with_properties(Name(b"Span"));
-                let mut pl = mc.properties();
-                pl.actual_text(TextStr(&owner.text));
-            }
-            let x0 = owner.bbox_px[0] as f32 * 72.0 / dpi as f32;
-            let y_bot = page_h_pt - owner.bbox_px[3] as f32 * 72.0 / dpi as f32;
-            let h_pt = ((owner.bbox_px[3] - owner.bbox_px[1]) as f32 * 72.0 / dpi as f32).max(4.0);
-            let cx = *cid + 1;
-            let bytes = Str(&[(cx >> 8) as u8, (cx & 0xFF) as u8]);
-            c.set_font(Name(b"F1"), h_pt);
-            c.set_text_matrix([1.0, 0.0, 0.0, 1.0, x0, y_bot]);
-            c.show(bytes);
-            c.end_marked_content();
-        }
-        c.set_text_rendering_mode(TextRenderingMode::Fill);
-    }
-
     // visible vector glyphs with per-span /ActualText
     c.set_font(Name(b"F1"), 1.0);
     c.set_fill_rgb(
@@ -311,11 +283,17 @@ pub fn assemble(
         for group in &groups {
             let span_id = occurrences[group[0]].3.as_str();
             let actual = span_map.get(span_id).copied().unwrap_or("");
-            {
+            // Non-BMP spans are NOT wrapped in /ActualText: PDFium decodes
+            // ActualText as UTF-16 but drops astral scalars in extraction
+            // (measured in M0-Q), while the per-glyph ToUnicode path transports
+            // them correctly. BMP word grouping via ActualText avoids intra-word
+            // spaces; astral spans keep the ToUnicode owner (exact transport
+            // wins over word grouping).
+            let astral = actual.chars().any(|c| (c as u32) > 0xFFFF);
+            if !astral {
                 let mut mc = c.begin_marked_content_with_properties(Name(b"Span"));
                 let mut pl = mc.properties();
                 pl.actual_text(TextStr(actual));
-                let _ = &mut pl;
             }
             for &i in group {
                 let (gidx, cid, bbox_px, _, _, _) = &occurrences[i];
@@ -337,9 +315,35 @@ pub fn assemble(
                 let cid = *cid + 1;
                 c.show(Str(&[(cid >> 8) as u8, (cid & 0xFF) as u8]));
             }
-            c.end_marked_content();
+            if !astral {
+                c.end_marked_content();
+            }
         }
     }
+    // invisible owner text for raster/fallback spans: plain invisible runs of F1's
+    // owner CIDs (each CID's ToUnicode carries the span's exact label). Placed at
+    // the span's own box top. No /ActualText: PDFium drops astral scalars and the
+    // whole invisible run inside ActualText on some paths, while the per-glyph
+    // ToUnicode path transports the owner text exactly (measured in M0-Q, VS-01
+    // semantics: the visible run owns the span when it exists).
+    if !owners.is_empty() {
+        c.set_text_rendering_mode(TextRenderingMode::Invisible);
+        c.set_font(Name(b"F1"), 10.0);
+        for (owner, cid) in owners.iter().zip(owner_cids.iter()) {
+            let x0 = owner.bbox_px[0] as f32 * 72.0 / dpi as f32;
+            let y_bot = page_h_pt - owner.bbox_px[3] as f32 * 72.0 / dpi as f32;
+            let h_pt = ((owner.bbox_px[3] - owner.bbox_px[1]) as f32 * 72.0 / dpi as f32).max(4.0);
+            // owner_cids are already 1-based (CID 0 is .notdef); the visible
+            // occurrence path passes 0-based CIDs and adds 1 itself.
+            let cx = *cid;
+            let bytes = Str(&[(cx >> 8) as u8, (cx & 0xFF) as u8]);
+            c.set_font(Name(b"F1"), h_pt);
+            c.set_text_matrix([1.0, 0.0, 0.0, 1.0, x0, y_bot]);
+            c.show(bytes);
+        }
+        c.set_text_rendering_mode(TextRenderingMode::Fill);
+    }
+
     c.end_text();
     let content_bytes = c.finish();
     pdf.stream(content, &content_bytes).finish();

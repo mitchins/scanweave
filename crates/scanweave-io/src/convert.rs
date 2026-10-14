@@ -13,7 +13,7 @@ use crate::page_pdf::{assemble, Owner, Patch};
 use crate::plan::{plan_regions, FallbackReason, Region, RegionDisposition, RegionKind};
 use crate::trace::{trace_shape, Budget, TracedShape};
 use serde::Serialize;
-use std::collections::HashMap;
+use std::collections::BTreeMap;
 
 #[derive(Debug, Clone, Serialize)]
 pub struct Policy {
@@ -67,7 +67,18 @@ pub struct OccurrenceRecord {
 }
 
 #[derive(Debug, Clone, Serialize)]
+pub struct GlyphStat {
+    pub gid: usize,
+    pub stages: crate::units::StageMetrics,
+    pub symbol_id: String,
+    pub contours: usize,
+    pub points: usize,
+    pub budget_ok: bool,
+}
+
+#[derive(Debug, Clone, Serialize)]
 pub struct Report {
+    pub glyph_stats: Vec<GlyphStat>,
     pub occurrences: Vec<OccurrenceRecord>,
     pub page_id: String,
     pub policy: Policy,
@@ -79,13 +90,13 @@ pub struct Report {
     pub semantic_spans: usize,
     pub regions: Vec<RegionRecord>,
     pub coverage: Coverage,
-    pub fallback_reasons: HashMap<String, usize>,
+    pub fallback_reasons: BTreeMap<String, usize>,
     pub font_glyphs: usize,
     pub font_bytes: usize,
     pub pdf_bytes: usize,
     pub raster_bytes: usize,
-    pub semantic_owner: HashMap<String, String>,
-    pub ownership_invariants: HashMap<String, bool>,
+    pub semantic_owner: BTreeMap<String, String>,
+    pub ownership_invariants: BTreeMap<String, bool>,
     pub elapsed_ms: u128,
 }
 
@@ -115,6 +126,7 @@ pub struct Input {
 
 pub struct Output {
     pub pdf_bytes: Vec<u8>,
+    pub b0_bytes: Vec<u8>,
     pub report: Report,
     pub font_bytes: Vec<u8>,
 }
@@ -210,7 +222,7 @@ pub fn convert(input: &Input, policy: &Policy) -> Result<Output, String> {
     let mut regions = plan_regions(&plan, 512);
 
     let mut coverage = Coverage::default();
-    let mut fallback_reasons: HashMap<String, usize> = HashMap::new();
+    let mut fallback_reasons: BTreeMap<String, usize> = BTreeMap::new();
     for r in &regions {
         let is_vector = matches!(r.disposition, RegionDisposition::Vector);
         for &ui in &r.units {
@@ -334,7 +346,7 @@ pub fn convert(input: &Input, policy: &Policy) -> Result<Output, String> {
 
     // raster patches (fallback regions) + artwork ------------------------------
     let mut patches: Vec<Patch> = Vec::new();
-    let mut semantic_owner: HashMap<String, String> = HashMap::new();
+    let mut semantic_owner: BTreeMap<String, String> = BTreeMap::new();
     for s in &ocr.spans {
         semantic_owner.insert(s.id.clone(), "invisible".into());
     }
@@ -468,7 +480,29 @@ pub fn convert(input: &Input, policy: &Policy) -> Result<Output, String> {
         &owner_cids,
     )?;
 
-    let mut invariants = HashMap::new();
+    // B0 baseline candidate: the canonical raster page (source pixels) plus the
+    // invisible per-glyph ToUnicode owner layer — the "restore everything as
+    // raster, keep text searchable" candidate the harness compares against.
+    let span_text_map: std::collections::HashMap<String, String> =
+        span_texts.iter().cloned().collect();
+    let occ_b0: Vec<(usize, usize, [f64; 4], String, String, String)> = occ
+        .iter()
+        .map(|(g, c, b, span, sym, t)| (*g, *c as usize, *b, span.clone(), sym.clone(), t.clone()))
+        .collect();
+    let (b0_bytes, _) = crate::baseline::assemble_raster(
+        input.rgb.as_slice(),
+        w,
+        h,
+        &all_encodings,
+        &occ_b0,
+        (w as f64 * 72.0 / policy.dpi) as f32,
+        (h as f64 * 72.0 / policy.dpi) as f32,
+        font_bytes.clone(),
+        &shapes,
+        &span_text_map,
+    )?;
+
+    let mut invariants: BTreeMap<String, bool> = BTreeMap::new();
     invariants.insert("visual".into(), visual_ok);
     invariants.insert("semantic".into(), semantic_ok);
 
@@ -499,7 +533,36 @@ pub fn convert(input: &Input, policy: &Policy) -> Result<Output, String> {
         });
     }
 
+    // real outline statistics per glyph (contours/points traced for this shape)
+    let mut glyph_stats: Vec<GlyphStat> = shapes
+        .iter()
+        .enumerate()
+        .map(|(gi, g)| GlyphStat {
+            gid: gi,
+            symbol_id: occ
+                .iter()
+                .find(|(gidx, ..)| *gidx == gi)
+                .map(|(.., _span, sym, _text)| sym.clone())
+                .unwrap_or_default(),
+            stages: g.stages.clone(),
+            contours: g.num_contours,
+            points: g.num_points,
+            // the m0-probe-1 budget: per-stage error in pixels
+            budget_ok: g.stages.trace_max_px <= crate::trace::Budget::from_m0_policy().trace_max
+                && g.stages.curve_max_px <= crate::trace::Budget::from_m0_policy().curve_max
+                && g.stages.quant_bound_px <= crate::trace::Budget::from_m0_policy().quant_max,
+        })
+        .collect();
+    for gi in 0..shapes.len() {
+        if let Some(st) = glyph_stats.iter_mut().find(|st| st.gid == gi) {
+            if st.symbol_id.is_empty() {
+                continue;
+            }
+        }
+    }
+    glyph_stats.retain(|st| !st.symbol_id.is_empty() || st.contours > 0);
     let report = Report {
+        glyph_stats,
         occurrences: occ_records,
         page_id: input.page_id.clone(),
         policy: policy.clone(),
@@ -532,6 +595,7 @@ pub fn convert(input: &Input, policy: &Policy) -> Result<Output, String> {
 
     Ok(Output {
         pdf_bytes,
+        b0_bytes,
         report,
         font_bytes,
     })

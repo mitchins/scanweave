@@ -93,9 +93,14 @@
      "cids": [
       "8"
      ],
-     "contours": [],
-     "points": 0,
-     "stages": [],
+     "contours": 3,
+     "points": 2083,
+     "stages": {
+      "trace_max_px": 0.4962500000000034,
+      "trace_p95_px": 0.49624999999999986,
+      "curve_max_px": 0.005000000000013605,
+      "quant_bound_px": 0.036865234375
+     },
      "budget_ok": true
     },
     {
@@ -106,9 +111,14 @@
      "cids": [
       "6"
      ],
-     "contours": [],
-     "points": 0,
-     "stages": [],
+     "contours": 2,
+     "points": 1770,
+     "stages": {
+      "trace_max_px": 0.4962500000000034,
+      "trace_p95_px": 0.49624999999999986,
+      "curve_max_px": 0.005000000000038751,
+      "quant_bound_px": 0.036865234375
+     },
      "budget_ok": true
     },
     {
@@ -119,9 +129,14 @@
      "cids": [
       "8"
      ],
-     "contours": [],
-     "points": 0,
-     "stages": [],
+     "contours": 3,
+     "points": 2083,
+     "stages": {
+      "trace_max_px": 0.4962500000000034,
+      "trace_p95_px": 0.49624999999999986,
+      "curve_max_px": 0.005000000000013605,
+      "quant_bound_px": 0.036865234375
+     },
      "budget_ok": true
     },
     {
@@ -132,9 +147,14 @@
      "cids": [
       "a"
      ],
-     "contours": [],
-     "points": 0,
-     "stages": [],
+     "contours": 2,
+     "points": 690,
+     "stages": {
+      "trace_max_px": 0.4962500000000034,
+      "trace_p95_px": 0.49624999999999986,
+      "curve_max_px": 0.007962962962970194,
+      "quant_bound_px": 0.036865234375
+     },
      "budget_ok": true
     }
    ]
@@ -218,9 +238,14 @@
      "cids": [
       "6"
      ],
-     "contours": [],
-     "points": 0,
-     "stages": [],
+     "contours": 3,
+     "points": 2083,
+     "stages": {
+      "trace_max_px": 0.4962500000000034,
+      "trace_p95_px": 0.49624999999999986,
+      "curve_max_px": 0.005000000000013605,
+      "quant_bound_px": 0.036865234375
+     },
      "budget_ok": true
     }
    ]
@@ -304,9 +329,14 @@
      "cids": [
       "\u30ac"
      ],
-     "contours": [],
-     "points": 0,
-     "stages": [],
+     "contours": 3,
+     "points": 2339,
+     "stages": {
+      "trace_max_px": 0.4992592592592615,
+      "trace_p95_px": 0.49624999999999986,
+      "curve_max_px": 0.011481481481475653,
+      "quant_bound_px": 0.04150390625
+     },
      "budget_ok": true
     }
    ]
@@ -321,7 +351,7 @@
     "fonttools_parse": true,
     "hole_winding": true,
     "extract_poppler": true,
-    "extract_pdfium": false,
+    "extract_pdfium": true,
     "visual_poppler": false,
     "visual_pdfium": false
    },
@@ -344,15 +374,14 @@
     }
    },
    "fail": [
-    "pdfium transport vs original OCR: words=False spaces=True cardinality=False duplicates=False coverage=False (got 2 chars, expected 3)",
     "poppler visual gate: iou=0.9745 p95=1.02 max=1.51 mae=0.0033 topo=True",
     "pdfium visual gate: iou=0.9764 p95=1.00 max=1.00 mae=0.0027 topo=True"
    ],
-   "pdf_bytes": 3617,
+   "pdf_bytes": 3568,
    "ttf_bytes": 1328,
    "marked_content": {
-    "bdc": 2,
-    "emc": 2
+    "bdc": 1,
+    "emc": 1
    },
    "font_glyphs": 2,
    "font_contours": {
@@ -379,12 +408,12 @@
     "word_boundary_ok": true,
     "no_intra_word_spaces": true
    },
-   "extracted_pdfium": "fi",
+   "extracted_pdfium": "fi\ud835\udc00",
    "transport_pdfium": {
-    "cardinality_ok": false,
-    "duplicates_ok": false,
-    "span_coverage_ok": false,
-    "word_boundary_ok": false,
+    "cardinality_ok": true,
+    "duplicates_ok": true,
+    "span_coverage_ok": true,
+    "word_boundary_ok": true,
     "no_intra_word_spaces": true
    },
    "unowned_components": 0,
@@ -397,9 +426,14 @@
      "cids": [
       "fi"
      ],
-     "contours": [],
-     "points": 0,
-     "stages": [],
+     "contours": 2,
+     "points": 266,
+     "stages": {
+      "trace_max_px": 0.4962500000000034,
+      "trace_p95_px": 0.49531249999999716,
+      "curve_max_px": 0.02018518518519352,
+      "quant_bound_px": 0.037109375
+     },
      "budget_ok": true
     },
     {
@@ -410,9 +444,14 @@
      "cids": [
       "\ud835\udc00"
      ],
-     "contours": [],
-     "points": 0,
-     "stages": [],
+     "contours": 2,
+     "points": 34,
+     "stages": {
+      "trace_max_px": 0.49921875000000426,
+      "trace_p95_px": 0.4555555555555486,
+      "curve_max_px": 0.022777777777797326,
+      "quant_bound_px": 0.037109375
+     },
      "budget_ok": true
     }
    ]
@@ -506,9 +545,14 @@
      "cids": [
       "8"
      ],
-     "contours": [],
-     "points": 0,
-     "stages": [],
+     "contours": 3,
+     "points": 2083,
+     "stages": {
+      "trace_max_px": 0.4962500000000034,
+      "trace_p95_px": 0.49624999999999986,
+      "curve_max_px": 0.004814814814826984,
+      "quant_bound_px": 0.036865234375
+     },
      "budget_ok": true
     }
    ]
@@ -523,7 +567,7 @@
     "fonttools_parse": true,
     "hole_winding": true,
     "extract_poppler": true,
-    "extract_pdfium": false,
+    "extract_pdfium": true,
     "visual_poppler": false,
     "visual_pdfium": false
    },
@@ -570,15 +614,14 @@
     }
    },
    "fail": [
-    "pdfium transport vs original OCR: words=False spaces=True cardinality=False duplicates=False coverage=False (got 0 chars, expected 1)",
     "poppler visual gate: iou=0.9419 p95=4.48 max=11.82 mae=0.0044 topo=False",
     "pdfium visual gate: iou=0.9465 p95=4.29 max=11.82 mae=0.0041 topo=False"
    ],
-   "pdf_bytes": 37502,
+   "pdf_bytes": 37459,
    "ttf_bytes": 756,
    "marked_content": {
-    "bdc": 1,
-    "emc": 1
+    "bdc": 0,
+    "emc": 0
    },
    "font_glyphs": 1,
    "font_contours": {
@@ -597,12 +640,12 @@
     "word_boundary_ok": true,
     "no_intra_word_spaces": true
    },
-   "extracted_pdfium": "",
+   "extracted_pdfium": "8",
    "transport_pdfium": {
-    "cardinality_ok": false,
-    "duplicates_ok": false,
-    "span_coverage_ok": false,
-    "word_boundary_ok": false,
+    "cardinality_ok": true,
+    "duplicates_ok": true,
+    "span_coverage_ok": true,
+    "word_boundary_ok": true,
     "no_intra_word_spaces": true
    },
    "unowned_components": 81,
@@ -615,9 +658,14 @@
      "cids": [
       "8"
      ],
-     "contours": [],
+     "contours": 0,
      "points": 0,
-     "stages": [],
+     "stages": {
+      "trace_max_px": 0.0,
+      "trace_p95_px": 0.0,
+      "curve_max_px": 0.0,
+      "quant_bound_px": 0.0
+     },
      "budget_ok": true
     }
    ]
@@ -715,9 +763,14 @@
      "cids": [
       "8"
      ],
-     "contours": [],
-     "points": 0,
-     "stages": [],
+     "contours": 6,
+     "points": 3302,
+     "stages": {
+      "trace_max_px": 0.4962500000000034,
+      "trace_p95_px": 0.49624999999999986,
+      "curve_max_px": 0.005000000000013605,
+      "quant_bound_px": 0.036865234375
+     },
      "budget_ok": true
     },
     {
@@ -728,9 +781,14 @@
      "cids": [
       "6"
      ],
-     "contours": [],
+     "contours": 0,
      "points": 0,
-     "stages": [],
+     "stages": {
+      "trace_max_px": 0.0,
+      "trace_p95_px": 0.0,
+      "curve_max_px": 0.0,
+      "quant_bound_px": 0.0
+     },
      "budget_ok": true
     },
     {
@@ -741,9 +799,14 @@
      "cids": [
       "8"
      ],
-     "contours": [],
-     "points": 0,
-     "stages": [],
+     "contours": 6,
+     "points": 3302,
+     "stages": {
+      "trace_max_px": 0.4962500000000034,
+      "trace_p95_px": 0.49624999999999986,
+      "curve_max_px": 0.005000000000013605,
+      "quant_bound_px": 0.036865234375
+     },
      "budget_ok": true
     },
     {
@@ -756,9 +819,14 @@
       "1",
       "8"
      ],
-     "contours": [],
-     "points": 0,
-     "stages": [],
+     "contours": 1,
+     "points": 105,
+     "stages": {
+      "trace_max_px": 0.4962500000000001,
+      "trace_p95_px": 0.48125000000000107,
+      "curve_max_px": 0.013148148148157845,
+      "quant_bound_px": 0.036865234375
+     },
      "budget_ok": true
     }
    ]
@@ -894,9 +962,14 @@
      "cids": [
       "."
      ],
-     "contours": [],
-     "points": 0,
-     "stages": [],
+     "contours": 1,
+     "points": 17,
+     "stages": {
+      "trace_max_px": 0.4871238425925952,
+      "trace_p95_px": 0.43906250000000036,
+      "curve_max_px": 0.004814814814817936,
+      "quant_bound_px": 0.03125
+     },
      "budget_ok": true
     },
     {
@@ -907,9 +980,14 @@
      "cids": [
       ","
      ],
-     "contours": [],
-     "points": 0,
-     "stages": [],
+     "contours": 1,
+     "points": 201,
+     "stages": {
+      "trace_max_px": 0.4962500000000034,
+      "trace_p95_px": 0.49624999999999986,
+      "curve_max_px": 0.004629629629627985,
+      "quant_bound_px": 0.03125
+     },
      "budget_ok": true
     },
     {
@@ -920,9 +998,14 @@
      "cids": [
       "-"
      ],
-     "contours": [],
-     "points": 0,
-     "stages": [],
+     "contours": 1,
+     "points": 17,
+     "stages": {
+      "trace_max_px": 0.4973379629629662,
+      "trace_p95_px": 0.4637037037037075,
+      "curve_max_px": 0.008148148148155343,
+      "quant_bound_px": 0.03125
+     },
      "budget_ok": true
     },
     {
@@ -933,9 +1016,14 @@
      "cids": [
       "$"
      ],
-     "contours": [],
-     "points": 0,
-     "stages": [],
+     "contours": 3,
+     "points": 939,
+     "stages": {
+      "trace_max_px": 0.4962500000000034,
+      "trace_p95_px": 0.49531249999999893,
+      "curve_max_px": 0.003888888888891273,
+      "quant_bound_px": 0.03125
+     },
      "budget_ok": true
     },
     {
@@ -946,9 +1034,14 @@
      "cids": [
       "%"
      ],
-     "contours": [],
-     "points": 0,
-     "stages": [],
+     "contours": 5,
+     "points": 2397,
+     "stages": {
+      "trace_max_px": 0.4962500000000034,
+      "trace_p95_px": 0.49624999999999986,
+      "curve_max_px": 0.002962962962968163,
+      "quant_bound_px": 0.03125
+     },
      "budget_ok": true
     },
     {
@@ -959,9 +1052,14 @@
      "cids": [
       "1,234.56"
      ],
-     "contours": [],
-     "points": 0,
-     "stages": [],
+     "contours": 6,
+     "points": 1926,
+     "stages": {
+      "trace_max_px": 0.4962500000000034,
+      "trace_p95_px": 0.49624999999999986,
+      "curve_max_px": 0.010000000000005116,
+      "quant_bound_px": 0.03125
+     },
      "budget_ok": true
     },
     {
@@ -972,9 +1070,14 @@
      "cids": [
       "-42"
      ],
-     "contours": [],
-     "points": 0,
-     "stages": [],
+     "contours": 7,
+     "points": 1375,
+     "stages": {
+      "trace_max_px": 0.4962500000000034,
+      "trace_p95_px": 0.49624999999999986,
+      "curve_max_px": 0.010740740740743604,
+      "quant_bound_px": 0.03125
+     },
      "budget_ok": true
     }
    ]
