@@ -11,8 +11,6 @@ artifacts and fixed; the diff below is complete:
 
 | Reviewer finding | Status | Evidence in this revision |
 |---|---|---|
-| Round-1 finding | Status | Evidence in this revision |
-|---|---|---|
 | D1: p04 astral ActualText regression (`"fi𝐀"→"fi"`) | FIXED | astral guard restored in `page_pdf.rs` (BMP-only ActualText, astral stays on ToUnicode); `p04 pdfium supplementary U+1D400` PASSes; full gate set shows **zero check flips vs accepted pipeline `f5e5cb5`** |
 | D2: p06 PDFium transport regression (`"8"→""`) | FIXED | owner-CID off-by-one fixed (1-based CIDs used as-is); p06 extracts `8` in both engines |
 | D3: B0 baseline generation removed | FIXED | `convert` re-emits the B0 raster-baseline; `b0_raster.pdf` restored; all B0 gates PASS |
@@ -35,6 +33,46 @@ Round-2 review (`8af770d`) additionally found and all are fixed here:
 - **p06 characterization** ("MAE improved") → corrected in §5: p06 restructured from 6 traced glyphs to 1 ContactNonText fallback region; Poppler IoU 0.9931→0.9419 (worse), MAE 0.0103→0.0044 (better); both baseline and revision fail that page's visual gate.
 - **Required queries not gated** → `test_text_search.py` now gates all three operator queries verbatim (containment + native search, B2 and B0); 15 new checks, all PASS.
 
+
+## 1. What was implemented
+
+### 1.1 Generalized ownership solver (`crates/scanweave-io/src/ownership.rs`)
+- Many-to-many mapping: one connected component may serve multiple OCR spans;
+  one span may own multiple components (moving/rotated spans supported).
+- Slots carry `order`, `text`, `symbol_id`, `bbox` (order-stable identity, so
+  geometric ownership is auditable per symbol box — see M1A-01).
+- `suspect` flag: unit ink extending beyond the union of its symbol boxes by
+  more than the contact margin → `ContactNonText` fallback.
+- Invariants: no double ownership; every component back-referenced exactly once
+  or explicitly unowned (artwork).
+
+### 1.2 Region planning + transactional fallback (`plan.rs`, `convert.rs`)
+- Span-ordered regions (reading-stream order preserved).
+- ContactNonText regions degrade transactionally: the region's sub-raster is
+  embedded losslessly AND the OCR label is redrawn as an invisible per-span
+  owner run, so text extraction is complete for fallback spans in both engines
+  (engine-hoisting caveat in §5).
+- Artwork regions use the same machinery; paper background + patches are
+  FlateDecode image XObjects drawn before vector glyphs.
+
+### 1.3 One-page pipeline and PDF assembler (`page_pdf.rs`, `crates/scanweave-cli/src/main.rs`)
+- `scanweave build <page.png> --ocr <page.hocr> --dpi 300 --output out.pdf --report out.json`
+  (atomic `.tmp`+rename; M1-A: `--mode reconstruct` only).
+- Single font resource: one CID per (glyph shape, semantic string); fallback
+  spans carry one owner CID each referencing GID1 (invisible runs). No second
+  font, no second layer.
+- Visible spans: per-glyph runs grouped under per-span `/ActualText` for BMP
+  spans only; astral (non-BMP) spans keep per-glyph ToUnicode transport (the
+  M0-Q repair — PDFium drops astral scalars inside ActualText).
+- Invisible owner runs: plain invisible Tj placed at the span box top (the
+  run's own baseline); ToUnicode transport. No `/ActualText` (measured: PDFium
+  hoists invisible runs to the end of its extraction order either way).
+- Owner-only-encodable fonts: placeholder GID1 keeps `numGlyphs`/`hmtx`/`cmap`/
+  `loca`/`bbox`/`OS/2` self-consistent (OTS-clean).
+
+### 1.4 B0 baseline candidate restored
+`convert` also emits the raster-baseline page (source pixels + invisible
+per-glyph ToUnicode owner layer), which `test_text_search.py` gates against.
 
 ## 2. Deliverables (reproduce)
 
@@ -133,8 +171,9 @@ New or changed by M1-A:
 - **L1 — Not a general document pipeline.** Single page, single OCR input
   format (hOCR), `--mode reconstruct` only; multi-page/M1-B out of scope.
 - **L2 — Fixtures, not a corpus.** No real benign corpus was mounted in this
-  environment (BLOCKED); all evidence is synthetic, tesseract-hOCR-seeded
-  fixtures, with p11/p12 using deliberately derived synthetic boxes.
+  environment (BLOCKED); all evidence is tesseract-seeded fixtures (real
+  tesseract hOCR in every fixture directory, with `.synth.json` ground-truth
+  cross-checks for the deliberately touching-glyph fixtures p11/p12).
 - **L3 — Fallback size.** Fully-raster pages are large (fallback.pdf 143 KB
   for one small page); 300 dpi sub-raster embedding, uncompressed RGB.
 - **L4 — Migration shims.** Compiled-out duplicate modules (`probes/.../
