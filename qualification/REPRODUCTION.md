@@ -37,7 +37,7 @@ clone (`cargo build` after clean clone; target/ is gitignored).
 | Command | Outcome |
 |---|---|
 | `cargo build -p m0-font-pdf` | success (29.8 s, from source) |
-| `cargo test` | **36 passed, 0 failed** (incl. `e0_four_part_key_property`) |
+| `cargo test` | **38 passed, 0 failed** (incl. `e0_four_part_key_property` + transport regressions) |
 | `qualification/validate_fixtures.py` | 3 positive pass / 6 negative rejected — all ok |
 | `qualification/checks.py` | **8 pages** verified; **8/8 E-proofs PASS**; visual gates as in probe_results.json (p08 pdfium transport-order exception recorded; see M0_Q_REPORT §5) |
 | `qualification/measure.py` | all B0 checks (chars/neutral/qpdf) true; p09 external comparison executed (IA MRC / OCRmyPDF / ours — numbers committed in measurements.json); ratios reproduced |

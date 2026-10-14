@@ -25,9 +25,10 @@ INK = 20.0
 I50 = (PAPER + INK) / 2.0  # 50%-coverage reference (rigorous definition)
 
 # Linear interpolation of an ideal area-coverage edge has a phase-dependent
-# bias bounded by (sqrt(2)-1)/2 ~= 0.0858 px (derivation: maximize
-# |9.5 + 117.5/(235*(1-d)) - (10+d)| over d in (0,1) -> d* = 1 - 1/sqrt(2)).
-# Analytical assertions therefore use TOL = 0.09 px.
+# bias bounded by (3/2 - sqrt(2)) = (sqrt(2)-1)^2/2 ~= 0.0858 px (derivation:
+# the crossing estimate is u(d) = 9.5 + 0.5/(1-d) with ink/paper 20/255;
+# maximizing |u(d) - (10+d)| over d in (0,1) gives d* = 1 - 1/sqrt(2) and
+# bias = 3/2 - sqrt(2)). Analytical assertions use TOL = 0.09 px.
 TOL = 0.09
 
 FAILURES = []
@@ -41,25 +42,20 @@ def check(name, cond, detail=""):
 
 
 def ideal_edge_image(h, w, edge_x, ink=INK, paper=PAPER, vertical=True, invert=False):
-    """Vertical edge at x = edge_x (pixel centres at x+0.5): pixels fully left of
-    the edge are ink, fully right are paper, the straddling column gets exact
-    area coverage. invert=True swaps ink/paper (opposite polarity)."""
-    img = np.full((h, w), paper if not invert else ink, dtype=np.float64)
-    for x in range(w):
-        if vertical:
-            cov = min(1.0, max(0.0, edge_x - x))  # ink coverage of column x
-        else:
-            cov = min(1.0, max(0.0, edge_x - x))
-        if invert:
-            img[:, x] = ink + (paper - ink) * (1.0 - cov) if not False else img[:, x]
-            img[:, x] = paper + (ink - paper) * cov * 0 + (ink + (paper - ink) * (1 - cov)) * 0
-            # for inverted polarity the LEFT side is paper: coverage of ink is 1-cov
-            img[:, x] = ink + (paper - ink) * (1.0 - cov)
-        else:
-            img[:, x] = ink + (paper - ink) * (1.0 - cov)
-    if not vertical:
-        img = img.T
-    return img
+    """Edge at x (or y) = edge_x. Default: ink left, paper right; the straddling
+    column gets exact area coverage. invert=True GENUINELY swaps polarity:
+    paper left, ink right — the ramp descends instead of ascends."""
+    n = w if vertical else h
+    cov = np.clip(np.arange(n) - (edge_x - 1.0), 0.0, 1.0)
+    cov = 1.0 - cov if False else cov
+    if invert:
+        # left side paper, right side ink: ink coverage ascends left->right
+        row = ink + (paper - ink) * cov
+    else:
+        row = ink + (paper - ink) * (1.0 - cov)
+    if vertical:
+        return np.tile(row, (h, 1))
+    return np.tile(row.reshape(-1, 1), (1, w))
 
 
 def edge_mask(img, i50):

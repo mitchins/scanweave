@@ -367,7 +367,8 @@ def check_page(name: str) -> dict:
         from collections import Counter as _C
 
         cardinality_ok = _C(got) == _C(expected)
-        duplicates_ok = _C(got) == _C(expected)
+        # coverage: each admitted span appears in reading order (order-preserving
+        # subsequence) ...
         coverage_ok = True
         pos = 0
         for span_text in exp:
@@ -376,6 +377,11 @@ def check_page(name: str) -> dict:
                 coverage_ok = False
                 break
             pos = idx + len(span_text)
+        # independent duplicate detection: after the ordered consumption of all
+        # admitted spans, NOTHING may remain unconsumed. A duplicated layer or
+        # unexpected extra text leaves a remainder (or breaks cardinality);
+        # string counting is confounded by nested spans ('8' inside "18").
+        duplicates_ok = coverage_ok and pos == len(got)
         ok = cardinality_ok and duplicates_ok and coverage_ok
         out["checks"][f"extract_{engine}"] = ok
         out[f"extracted_{engine}"] = got

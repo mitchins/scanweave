@@ -1,7 +1,1310 @@
 {
  "pages": {
-  "p01_latin": {
-   "name": "p01_latin",
+  "c00_page_01": {
+   "name": "c00_page_01",
+   "checks": {
+    "probe_build": true,
+    "qpdf": true,
+    "ots": true,
+    "fonttools_parse": true,
+    "hole_winding": true,
+    "extract_poppler": true,
+    "extract_pdfium": true,
+    "visual_poppler": false,
+    "visual_pdfium": false
+   },
+   "metrics": {
+    "poppler": {
+     "iou": 0.7361206305688828,
+     "edge_p95": 1.118033988749895,
+     "edge_max": 1.5,
+     "mae": 0.013646382079772078,
+     "mae_ink": 0.2660128563413028,
+     "topology_ok": true
+    },
+    "pdfium": {
+     "iou": 0.831165452653486,
+     "edge_p95": 1.0581187363234605,
+     "edge_max": 2.74353226581909,
+     "mae": 0.00928162530082118,
+     "mae_ink": 0.1640502389939673,
+     "topology_ok": true
+    }
+   },
+   "fail": [
+    "poppler visual gate: iou=0.7361 p95=1.12 max=1.50 mae=0.0136 topo=True",
+    "pdfium visual gate: iou=0.8312 p95=1.06 max=2.74 mae=0.0093 topo=True"
+   ],
+   "pdf_bytes": 24110,
+   "ttf_bytes": 14496,
+   "font_glyphs": 47,
+   "font_contours": {
+    "T": {
+     "contours": 1,
+     "signed_areas": [
+      -609151.0
+     ]
+    },
+    "o": {
+     "contours": 2,
+     "signed_areas": [
+      -1182465.0,
+      447393.0
+     ]
+    },
+    "t": {
+     "contours": 1,
+     "signed_areas": [
+      -542872.0
+     ]
+    },
+    "a": {
+     "contours": 2,
+     "signed_areas": [
+      -959079.0,
+      173725.0
+     ]
+    },
+    "l": {
+     "contours": 1,
+     "signed_areas": [
+      -415648.0
+     ]
+    },
+    "m": {
+     "contours": 1,
+     "signed_areas": [
+      -1000494.0
+     ]
+    },
+    "u": {
+     "contours": 1,
+     "signed_areas": [
+      -707978.0
+     ]
+    },
+    "n": {
+     "contours": 1,
+     "signed_areas": [
+      -700290.0
+     ]
+    },
+    "d": {
+     "contours": 2,
+     "signed_areas": [
+      -1374913.0,
+      455081.0
+     ]
+    },
+    "e": {
+     "contours": 2,
+     "signed_areas": [
+      -923676.0,
+      165602.0
+     ]
+    },
+    "colon": {
+     "contours": 2,
+     "signed_areas": [
+      -61504.0,
+      -61504.0
+     ]
+    },
+    "one": {
+     "contours": 1,
+     "signed_areas": [
+      -621366.0
+     ]
+    },
+    "comma": {
+     "contours": 1,
+     "signed_areas": [
+      -123256.0
+     ]
+    },
+    "two": {
+     "contours": 1,
+     "signed_areas": [
+      -743692.0
+     ]
+    },
+    "three": {
+     "contours": 1,
+     "signed_areas": [
+      -747411.0
+     ]
+    },
+    "four": {
+     "contours": 2,
+     "signed_areas": [
+      -975137.0,
+      200446.0
+     ]
+    },
+    "period": {
+     "contours": 1,
+     "signed_areas": [
+      -61504.0
+     ]
+    },
+    "five": {
+     "contours": 1,
+     "signed_areas": [
+      -739723.0
+     ]
+    },
+    "six": {
+     "contours": 3,
+     "signed_areas": [
+      -1271622.0,
+      3844.0,
+      339575.0
+     ]
+    },
+    "E": {
+     "contours": 1,
+     "signed_areas": [
+      -862917.0
+     ]
+    },
+    "U": {
+     "contours": 1,
+     "signed_areas": [
+      -881454.0
+     ]
+    },
+    "R": {
+     "contours": 2,
+     "signed_areas": [
+      -1290097.0,
+      288858.0
+     ]
+    },
+    "I": {
+     "contours": 1,
+     "signed_areas": [
+      -400272.0
+     ]
+    },
+    "v": {
+     "contours": 1,
+     "signed_areas": [
+      -569842.0
+     ]
+    },
+    "i": {
+     "contours": 2,
+     "signed_areas": [
+      -61752.0,
+      -307768.0
+     ]
+    },
+    "c": {
+     "contours": 1,
+     "signed_areas": [
+      -523404.0
+     ]
+    },
+    "O": {
+     "contours": 2,
+     "signed_areas": [
+      -2022070.0,
+      1001487.0
+     ]
+    },
+    "b": {
+     "contours": 2,
+     "signed_areas": [
+      -1363381.0,
+      447393.0
+     ]
+    },
+    "r": {
+     "contours": 1,
+     "signed_areas": [
+      -407898.0
+     ]
+    },
+    "zero": {
+     "contours": 2,
+     "signed_areas": [
+      -1571702.0,
+      678343.0
+     ]
+    },
+    "A": {
+     "contours": 2,
+     "signed_areas": [
+      -1078739.0,
+      215388.0
+     ]
+    },
+    "glyph00032": {
+     "contours": 2,
+     "signed_areas": [
+      -543990.0,
+      -700290.0
+     ]
+    },
+    "h": {
+     "contours": 1,
+     "signed_areas": [
+      -808170.0
+     ]
+    },
+    "glyph00034": {
+     "contours": 3,
+     "signed_areas": [
+      -407898.0,
+      -61504.0,
+      -61504.0
+     ]
+    },
+    "J": {
+     "contours": 1,
+     "signed_areas": [
+      -548144.0
+     ]
+    },
+    "G": {
+     "contours": 1,
+     "signed_areas": [
+      -997519.0
+     ]
+    },
+    "f": {
+     "contours": 1,
+     "signed_areas": [
+      -489367.0
+     ]
+    },
+    "N": {
+     "contours": 2,
+     "signed_areas": [
+      -400272.0,
+      -1162687.0
+     ]
+    },
+    "V": {
+     "contours": 1,
+     "signed_areas": [
+      -789695.0
+     ]
+    },
+    "hyphen": {
+     "contours": 1,
+     "signed_areas": [
+      -103974.0
+     ]
+    },
+    "P": {
+     "contours": 2,
+     "signed_areas": [
+      -1163059.0,
+      319672.0
+     ]
+    },
+    "s": {
+     "contours": 1,
+     "signed_areas": [
+      -604438.0
+     ]
+    },
+    "p": {
+     "contours": 2,
+     "signed_areas": [
+      -1363878.0,
+      446772.0
+     ]
+    },
+    "y": {
+     "contours": 1,
+     "signed_areas": [
+      -670469.0
+     ]
+    },
+    "w": {
+     "contours": 1,
+     "signed_areas": [
+      -993674.0
+     ]
+    },
+    "glyph00046": {
+     "contours": 3,
+     "signed_areas": [
+      -61752.0,
+      -542686.0,
+      -307768.0
+     ]
+    },
+    "glyph00047": {
+     "contours": 2,
+     "signed_areas": [
+      -604438.0,
+      -61752.0
+     ]
+    }
+   },
+   "extracted_poppler": "Totalamountdue:1,234.56EURInvoicedate:13October2026Accountholder:J.GarciaReference:INV-2026-0042Pleasepaywithin30days.",
+   "transport_poppler": {
+    "cardinality_ok": true,
+    "duplicates_ok": true,
+    "span_coverage_ok": true
+   },
+   "extracted_pdfium": "Totalamountdue:1,234.56EURInvoicedate:13October2026Accountholder:J.GarciaReference:INV-2026-0042Pleasepaywithin30days.",
+   "transport_pdfium": {
+    "cardinality_ok": true,
+    "duplicates_ok": true,
+    "span_coverage_ok": true
+   },
+   "unowned_components": 0,
+   "glyphs": [
+    {
+     "gid": 1,
+     "text": [
+      "T"
+     ],
+     "cids": [
+      0
+     ],
+     "contours": 1,
+     "points": 33,
+     "stages": {
+      "trace_max_px": 0.4958622685185201,
+      "trace_p95_px": 0.49236111111111125,
+      "curve_max_px": 0.004259259259261017,
+      "quant_bound_px": 0.008056640625
+     },
+     "budget_ok": true
+    },
+    {
+     "gid": 2,
+     "text": [
+      "o",
+      "ol"
+     ],
+     "cids": [
+      1,
+      34
+     ],
+     "contours": 2,
+     "points": 258,
+     "stages": {
+      "trace_max_px": 0.4962500000000001,
+      "trace_p95_px": 0.49624999999999986,
+      "curve_max_px": 0.001851851851853492,
+      "quant_bound_px": 0.008056640625
+     },
+     "budget_ok": true
+    },
+    {
+     "gid": 3,
+     "text": [
+      "t"
+     ],
+     "cids": [
+      2
+     ],
+     "contours": 1,
+     "points": 89,
+     "stages": {
+      "trace_max_px": 0.49624999999999986,
+      "trace_p95_px": 0.4950347222222238,
+      "curve_max_px": 0.0025925925925934235,
+      "quant_bound_px": 0.008056640625
+     },
+     "budget_ok": true
+    },
+    {
+     "gid": 4,
+     "text": [
+      "a",
+      "ay"
+     ],
+     "cids": [
+      3,
+      51
+     ],
+     "contours": 2,
+     "points": 234,
+     "stages": {
+      "trace_max_px": 0.4962500000000001,
+      "trace_p95_px": 0.49531250000000027,
+      "curve_max_px": 0.0027777777777793222,
+      "quant_bound_px": 0.008056640625
+     },
+     "budget_ok": true
+    },
+    {
+     "gid": 5,
+     "text": [
+      "l",
+      "d"
+     ],
+     "cids": [
+      4,
+      35
+     ],
+     "contours": 1,
+     "points": 17,
+     "stages": {
+      "trace_max_px": 0.4562499999999998,
+      "trace_p95_px": 0.43125000000000213,
+      "curve_max_px": 0.005000000000000948,
+      "quant_bound_px": 0.008056640625
+     },
+     "budget_ok": true
+    },
+    {
+     "gid": 6,
+     "text": [
+      "m"
+     ],
+     "cids": [
+      5
+     ],
+     "contours": 1,
+     "points": 225,
+     "stages": {
+      "trace_max_px": 0.4962500000000001,
+      "trace_p95_px": 0.49531250000000027,
+      "curve_max_px": 0.0037037037037024045,
+      "quant_bound_px": 0.008056640625
+     },
+     "budget_ok": true
+    },
+    {
+     "gid": 7,
+     "text": [
+      "u",
+      "un"
+     ],
+     "cids": [
+      6,
+      31
+     ],
+     "contours": 1,
+     "points": 121,
+     "stages": {
+      "trace_max_px": 0.4962500000000001,
+      "trace_p95_px": 0.49531249999999716,
+      "curve_max_px": 0.0037037037037051523,
+      "quant_bound_px": 0.008056640625
+     },
+     "budget_ok": true
+    },
+    {
+     "gid": 8,
+     "text": [
+      "n"
+     ],
+     "cids": [
+      7
+     ],
+     "contours": 1,
+     "points": 121,
+     "stages": {
+      "trace_max_px": 0.4962500000000001,
+      "trace_p95_px": 0.4953124999999998,
+      "curve_max_px": 0.0037037037037024045,
+      "quant_bound_px": 0.008056640625
+     },
+     "budget_ok": true
+    },
+    {
+     "gid": 9,
+     "text": [
+      "d",
+      "e"
+     ],
+     "cids": [
+      8,
+      36
+     ],
+     "contours": 2,
+     "points": 226,
+     "stages": {
+      "trace_max_px": 0.4962500000000001,
+      "trace_p95_px": 0.49624999999999986,
+      "curve_max_px": 0.005000000000000948,
+      "quant_bound_px": 0.008056640625
+     },
+     "budget_ok": true
+    },
+    {
+     "gid": 10,
+     "text": [
+      "e",
+      "r"
+     ],
+     "cids": [
+      9,
+      37
+     ],
+     "contours": 2,
+     "points": 258,
+     "stages": {
+      "trace_max_px": 0.4962500000000001,
+      "trace_p95_px": 0.49624999999999986,
+      "curve_max_px": 0.0025925925925952553,
+      "quant_bound_px": 0.008056640625
+     },
+     "budget_ok": true
+    },
+    {
+     "gid": 11,
+     "text": [
+      ":"
+     ],
+     "cids": [
+      10
+     ],
+     "contours": 2,
+     "points": 34,
+     "stages": {
+      "trace_max_px": 0.3481481481481481,
+      "trace_p95_px": 0.3481481481481481,
+      "curve_max_px": 0.0007407407407435951,
+      "quant_bound_px": 0.008056640625
+     },
+     "budget_ok": true
+    },
+    {
+     "gid": 12,
+     "text": [
+      "1"
+     ],
+     "cids": [
+      11
+     ],
+     "contours": 1,
+     "points": 57,
+     "stages": {
+      "trace_max_px": 0.4962500000000001,
+      "trace_p95_px": 0.49503472222222217,
+      "curve_max_px": 0.004259259259262849,
+      "quant_bound_px": 0.008056640625
+     },
+     "budget_ok": true
+    },
+    {
+     "gid": 13,
+     "text": [
+      ","
+     ],
+     "cids": [
+      12
+     ],
+     "contours": 1,
+     "points": 41,
+     "stages": {
+      "trace_max_px": 0.49624999999999997,
+      "trace_p95_px": 0.49343750000000064,
+      "curve_max_px": 0.0009259259259258301,
+      "quant_bound_px": 0.008056640625
+     },
+     "budget_ok": true
+    },
+    {
+     "gid": 14,
+     "text": [
+      "2"
+     ],
+     "cids": [
+      13
+     ],
+     "contours": 1,
+     "points": 289,
+     "stages": {
+      "trace_max_px": 0.4962500000000001,
+      "trace_p95_px": 0.49624999999999986,
+      "curve_max_px": 0.0033333333333342707,
+      "quant_bound_px": 0.008056640625
+     },
+     "budget_ok": true
+    },
+    {
+     "gid": 15,
+     "text": [
+      "3"
+     ],
+     "cids": [
+      14
+     ],
+     "contours": 1,
+     "points": 265,
+     "stages": {
+      "trace_max_px": 0.4962500000000001,
+      "trace_p95_px": 0.49531250000000004,
+      "curve_max_px": 0.002037037037038475,
+      "quant_bound_px": 0.008056640625
+     },
+     "budget_ok": true
+    },
+    {
+     "gid": 16,
+     "text": [
+      "4"
+     ],
+     "cids": [
+      15
+     ],
+     "contours": 2,
+     "points": 194,
+     "stages": {
+      "trace_max_px": 0.4962500000000001,
+      "trace_p95_px": 0.4953124999999998,
+      "curve_max_px": 0.003148148148147456,
+      "quant_bound_px": 0.008056640625
+     },
+     "budget_ok": true
+    },
+    {
+     "gid": 17,
+     "text": [
+      "."
+     ],
+     "cids": [
+      16
+     ],
+     "contours": 1,
+     "points": 17,
+     "stages": {
+      "trace_max_px": 0.3481481481481481,
+      "trace_p95_px": 0.3481481481481481,
+      "curve_max_px": 0.0007407407407410763,
+      "quant_bound_px": 0.008056640625
+     },
+     "budget_ok": true
+    },
+    {
+     "gid": 18,
+     "text": [
+      "5"
+     ],
+     "cids": [
+      17
+     ],
+     "contours": 1,
+     "points": 185,
+     "stages": {
+      "trace_max_px": 0.4962500000000001,
+      "trace_p95_px": 0.49531249999999893,
+      "curve_max_px": 0.0025925925925925075,
+      "quant_bound_px": 0.008056640625
+     },
+     "budget_ok": true
+    },
+    {
+     "gid": 19,
+     "text": [
+      "6"
+     ],
+     "cids": [
+      18
+     ],
+     "contours": 3,
+     "points": 347,
+     "stages": {
+      "trace_max_px": 0.4962500000000001,
+      "trace_p95_px": 0.49624999999999986,
+      "curve_max_px": 0.0016666666666675933,
+      "quant_bound_px": 0.008056640625
+     },
+     "budget_ok": true
+    },
+    {
+     "gid": 20,
+     "text": [
+      "E"
+     ],
+     "cids": [
+      19
+     ],
+     "contours": 1,
+     "points": 49,
+     "stages": {
+      "trace_max_px": 0.49513888888889035,
+      "trace_p95_px": 0.4887499999999996,
+      "curve_max_px": 0.004814814814815049,
+      "quant_bound_px": 0.008056640625
+     },
+     "budget_ok": true
+    },
+    {
+     "gid": 21,
+     "text": [
+      "U"
+     ],
+     "cids": [
+      20
+     ],
+     "contours": 1,
+     "points": 145,
+     "stages": {
+      "trace_max_px": 0.4962500000000001,
+      "trace_p95_px": 0.49531250000000426,
+      "curve_max_px": 0.003888888888891051,
+      "quant_bound_px": 0.008056640625
+     },
+     "budget_ok": true
+    },
+    {
+     "gid": 22,
+     "text": [
+      "R"
+     ],
+     "cids": [
+      21
+     ],
+     "contours": 2,
+     "points": 242,
+     "stages": {
+      "trace_max_px": 0.4962500000000001,
+      "trace_p95_px": 0.49531250000000426,
+      "curve_max_px": 0.004814814814815049,
+      "quant_bound_px": 0.008056640625
+     },
+     "budget_ok": true
+    },
+    {
+     "gid": 23,
+     "text": [
+      "I"
+     ],
+     "cids": [
+      22
+     ],
+     "contours": 1,
+     "points": 17,
+     "stages": {
+      "trace_max_px": 0.43906250000000036,
+      "trace_p95_px": 0.41468749999999943,
+      "curve_max_px": 0.004814814814815049,
+      "quant_bound_px": 0.008056640625
+     },
+     "budget_ok": true
+    },
+    {
+     "gid": 24,
+     "text": [
+      "v"
+     ],
+     "cids": [
+      23
+     ],
+     "contours": 1,
+     "points": 225,
+     "stages": {
+      "trace_max_px": 0.4962500000000001,
+      "trace_p95_px": 0.49531249999999893,
+      "curve_max_px": 0.000925925925927662,
+      "quant_bound_px": 0.008056640625
+     },
+     "budget_ok": true
+    },
+    {
+     "gid": 25,
+     "text": [
+      "i"
+     ],
+     "cids": [
+      24
+     ],
+     "contours": 2,
+     "points": 34,
+     "stages": {
+      "trace_max_px": 0.4103009259259256,
+      "trace_p95_px": 0.38425925925925775,
+      "curve_max_px": 0.0037037037037051523,
+      "quant_bound_px": 0.008056640625
+     },
+     "budget_ok": true
+    },
+    {
+     "gid": 26,
+     "text": [
+      "c"
+     ],
+     "cids": [
+      25
+     ],
+     "contours": 1,
+     "points": 225,
+     "stages": {
+      "trace_max_px": 0.4962500000000001,
+      "trace_p95_px": 0.49624999999999986,
+      "curve_max_px": 0.0014814814814835264,
+      "quant_bound_px": 0.008056640625
+     },
+     "budget_ok": true
+    },
+    {
+     "gid": 27,
+     "text": [
+      "O"
+     ],
+     "cids": [
+      26
+     ],
+     "contours": 2,
+     "points": 386,
+     "stages": {
+      "trace_max_px": 0.4962500000000001,
+      "trace_p95_px": 0.49624999999999986,
+      "curve_max_px": 0.0018518518518516602,
+      "quant_bound_px": 0.008056640625
+     },
+     "budget_ok": true
+    },
+    {
+     "gid": 28,
+     "text": [
+      "b"
+     ],
+     "cids": [
+      27
+     ],
+     "contours": 2,
+     "points": 242,
+     "stages": {
+      "trace_max_px": 0.49624999999999986,
+      "trace_p95_px": 0.49624999999999986,
+      "curve_max_px": 0.005000000000000948,
+      "quant_bound_px": 0.008056640625
+     },
+     "budget_ok": true
+    },
+    {
+     "gid": 29,
+     "text": [
+      "r"
+     ],
+     "cids": [
+      28
+     ],
+     "contours": 1,
+     "points": 73,
+     "stages": {
+      "trace_max_px": 0.4962500000000001,
+      "trace_p95_px": 0.4953124999999998,
+      "curve_max_px": 0.0037037037037024045,
+      "quant_bound_px": 0.008056640625
+     },
+     "budget_ok": true
+    },
+    {
+     "gid": 30,
+     "text": [
+      "0"
+     ],
+     "cids": [
+      29
+     ],
+     "contours": 2,
+     "points": 290,
+     "stages": {
+      "trace_max_px": 0.4962500000000001,
+      "trace_p95_px": 0.49531250000000426,
+      "curve_max_px": 0.0014814814814835264,
+      "quant_bound_px": 0.008056640625
+     },
+     "budget_ok": true
+    },
+    {
+     "gid": 31,
+     "text": [
+      "A"
+     ],
+     "cids": [
+      30
+     ],
+     "contours": 2,
+     "points": 298,
+     "stages": {
+      "trace_max_px": 0.4962500000000001,
+      "trace_p95_px": 0.49531249999999893,
+      "curve_max_px": 0.0022222222222252896,
+      "quant_bound_px": 0.008056640625
+     },
+     "budget_ok": true
+    },
+    {
+     "gid": 32,
+     "text": [
+      "t"
+     ],
+     "cids": [
+      32
+     ],
+     "contours": 2,
+     "points": 210,
+     "stages": {
+      "trace_max_px": 0.49624999999999986,
+      "trace_p95_px": 0.49513888888889035,
+      "curve_max_px": 0.0037037037037024045,
+      "quant_bound_px": 0.008056640625
+     },
+     "budget_ok": true
+    },
+    {
+     "gid": 33,
+     "text": [
+      "h"
+     ],
+     "cids": [
+      33
+     ],
+     "contours": 1,
+     "points": 121,
+     "stages": {
+      "trace_max_px": 0.49624999999999986,
+      "trace_p95_px": 0.49531249999999893,
+      "curve_max_px": 0.005000000000000948,
+      "quant_bound_px": 0.008056640625
+     },
+     "budget_ok": true
+    },
+    {
+     "gid": 34,
+     "text": [
+      ":"
+     ],
+     "cids": [
+      38
+     ],
+     "contours": 3,
+     "points": 107,
+     "stages": {
+      "trace_max_px": 0.4962500000000001,
+      "trace_p95_px": 0.48875,
+      "curve_max_px": 0.0037037037037024045,
+      "quant_bound_px": 0.008056640625
+     },
+     "budget_ok": true
+    },
+    {
+     "gid": 35,
+     "text": [
+      "J"
+     ],
+     "cids": [
+      39
+     ],
+     "contours": 1,
+     "points": 65,
+     "stages": {
+      "trace_max_px": 0.4962500000000034,
+      "trace_p95_px": 0.4953124999999998,
+      "curve_max_px": 0.0053703703703745775,
+      "quant_bound_px": 0.008056640625
+     },
+     "budget_ok": true
+    },
+    {
+     "gid": 36,
+     "text": [
+      "G"
+     ],
+     "cids": [
+      40
+     ],
+     "contours": 1,
+     "points": 297,
+     "stages": {
+      "trace_max_px": 0.4962500000000001,
+      "trace_p95_px": 0.49531250000000426,
+      "curve_max_px": 0.002037037037039391,
+      "quant_bound_px": 0.008056640625
+     },
+     "budget_ok": true
+    },
+    {
+     "gid": 37,
+     "text": [
+      "f"
+     ],
+     "cids": [
+      41
+     ],
+     "contours": 1,
+     "points": 81,
+     "stages": {
+      "trace_max_px": 0.4962500000000001,
+      "trace_p95_px": 0.4951388888888877,
+      "curve_max_px": 0.003148148148149288,
+      "quant_bound_px": 0.008056640625
+     },
+     "budget_ok": true
+    },
+    {
+     "gid": 38,
+     "text": [
+      "IN"
+     ],
+     "cids": [
+      42
+     ],
+     "contours": 2,
+     "points": 226,
+     "stages": {
+      "trace_max_px": 0.49624999999999986,
+      "trace_p95_px": 0.4953124999999998,
+      "curve_max_px": 0.004814814814815049,
+      "quant_bound_px": 0.008056640625
+     },
+     "budget_ok": true
+    },
+    {
+     "gid": 39,
+     "text": [
+      "V"
+     ],
+     "cids": [
+      43
+     ],
+     "contours": 1,
+     "points": 305,
+     "stages": {
+      "trace_max_px": 0.4962500000000001,
+      "trace_p95_px": 0.49531249999999893,
+      "curve_max_px": 0.0009259259259294939,
+      "quant_bound_px": 0.008056640625
+     },
+     "budget_ok": true
+    },
+    {
+     "gid": 40,
+     "text": [
+      "-"
+     ],
+     "cids": [
+      44
+     ],
+     "contours": 1,
+     "points": 17,
+     "stages": {
+      "trace_max_px": 0.49513888888888885,
+      "trace_p95_px": 0.49236111111111125,
+      "curve_max_px": 0.0016666666666671354,
+      "quant_bound_px": 0.008056640625
+     },
+     "budget_ok": true
+    },
+    {
+     "gid": 41,
+     "text": [
+      "P"
+     ],
+     "cids": [
+      45
+     ],
+     "contours": 2,
+     "points": 138,
+     "stages": {
+      "trace_max_px": 0.4962500000000001,
+      "trace_p95_px": 0.49531249999999893,
+      "curve_max_px": 0.004814814814815049,
+      "quant_bound_px": 0.008056640625
+     },
+     "budget_ok": true
+    },
+    {
+     "gid": 42,
+     "text": [
+      "s"
+     ],
+     "cids": [
+      46
+     ],
+     "contours": 1,
+     "points": 241,
+     "stages": {
+      "trace_max_px": 0.4962500000000001,
+      "trace_p95_px": 0.49624999999999986,
+      "curve_max_px": 0.0018518518518516602,
+      "quant_bound_px": 0.008056640625
+     },
+     "budget_ok": true
+    },
+    {
+     "gid": 43,
+     "text": [
+      "p"
+     ],
+     "cids": [
+      47
+     ],
+     "contours": 2,
+     "points": 242,
+     "stages": {
+      "trace_max_px": 0.4962500000000001,
+      "trace_p95_px": 0.49624999999999986,
+      "curve_max_px": 0.005000000000000948,
+      "quant_bound_px": 0.008056640625
+     },
+     "budget_ok": true
+    },
+    {
+     "gid": 44,
+     "text": [
+      "y",
+      "s"
+     ],
+     "cids": [
+      48,
+      52
+     ],
+     "contours": 1,
+     "points": 297,
+     "stages": {
+      "trace_max_px": 0.4962500000000001,
+      "trace_p95_px": 0.4953124999999998,
+      "curve_max_px": 0.000925925925926746,
+      "quant_bound_px": 0.008056640625
+     },
+     "budget_ok": true
+    },
+    {
+     "gid": 45,
+     "text": [
+      "wi"
+     ],
+     "cids": [
+      49
+     ],
+     "contours": 1,
+     "points": 297,
+     "stages": {
+      "trace_max_px": 0.4962500000000001,
+      "trace_p95_px": 0.4951388888888868,
+      "curve_max_px": 0.000925925925927662,
+      "quant_bound_px": 0.008056640625
+     },
+     "budget_ok": true
+    },
+    {
+     "gid": 46,
+     "text": [
+      "t"
+     ],
+     "cids": [
+      50
+     ],
+     "contours": 3,
+     "points": 123,
+     "stages": {
+      "trace_max_px": 0.49624999999999986,
+      "trace_p95_px": 0.49343750000000064,
+      "curve_max_px": 0.0037037037037051523,
+      "quant_bound_px": 0.008056640625
+     },
+     "budget_ok": true
+    },
+    {
+     "gid": 47,
+     "text": [
+      "."
+     ],
+     "cids": [
+      53
+     ],
+     "contours": 2,
+     "points": 258,
+     "stages": {
+      "trace_max_px": 0.4962500000000001,
+      "trace_p95_px": 0.49624999999999986,
+      "curve_max_px": 0.0018518518518516602,
+      "quant_bound_px": 0.008056640625
+     },
+     "budget_ok": true
+    }
+   ]
+  },
+  "c01_page_01": {
+   "name": "c01_page_01",
+   "checks": {
+    "probe_build": true,
+    "qpdf": true,
+    "ots": true,
+    "fonttools_parse": true,
+    "hole_winding": true,
+    "extract_poppler": true,
+    "extract_pdfium": true,
+    "visual_poppler": false,
+    "visual_pdfium": false
+   },
+   "metrics": {
+    "poppler": {
+     "iou": 1.0,
+     "edge_p95": 0.5086580086580028,
+     "edge_max": 0.5316742081448069,
+     "mae": 0.0010806050927158193,
+     "mae_ink": 0.014004181193911572,
+     "topology_ok": true
+    },
+    "pdfium": {
+     "iou": 0.9868991989319092,
+     "edge_p95": 0.9957627118644155,
+     "edge_max": 1.0,
+     "mae": 0.001213312926980747,
+     "mae_ink": 0.01587050708133721,
+     "topology_ok": true
+    }
+   },
+   "fail": [
+    "poppler visual gate: iou=1.0000 p95=0.51 max=0.53 mae=0.0011 topo=True",
+    "pdfium visual gate: iou=0.9869 p95=1.00 max=1.00 mae=0.0012 topo=True"
+   ],
+   "pdf_bytes": 5852,
+   "ttf_bytes": 3856,
+   "font_glyphs": 1,
+   "font_contours": {
+    "six": {
+     "contours": 3,
+     "signed_areas": [
+      -2653653.0,
+      192742.0,
+      285604.0
+     ]
+    }
+   },
+   "extracted_poppler": "6",
+   "transport_poppler": {
+    "cardinality_ok": true,
+    "duplicates_ok": true,
+    "span_coverage_ok": true
+   },
+   "extracted_pdfium": "6",
+   "transport_pdfium": {
+    "cardinality_ok": true,
+    "duplicates_ok": true,
+    "span_coverage_ok": true
+   },
+   "unowned_components": 0,
+   "glyphs": [
+    {
+     "gid": 1,
+     "text": [
+      "6"
+     ],
+     "cids": [
+      0
+     ],
+     "contours": 3,
+     "points": 2083,
+     "stages": {
+      "trace_max_px": 0.4962500000000034,
+      "trace_p95_px": 0.49624999999999986,
+      "curve_max_px": 0.005000000000013605,
+      "quant_bound_px": 0.036865234375
+     },
+     "budget_ok": true
+    }
+   ]
+  },
+  "c02_page_01": {
+   "name": "c02_page_01",
    "checks": {
     "probe_build": true,
     "qpdf": true,
@@ -132,8 +1435,8 @@
     }
    ]
   },
-  "p02_wronglabel": {
-   "name": "p02_wronglabel",
+  "c03_page_01": {
+   "name": "c03_page_01",
    "checks": {
     "probe_build": true,
     "qpdf": true,
@@ -148,45 +1451,45 @@
    "metrics": {
     "poppler": {
      "iou": 1.0,
-     "edge_p95": 0.5086580086580028,
-     "edge_max": 0.5316742081448069,
-     "mae": 0.0010806050927158193,
-     "mae_ink": 0.014004181193911572,
+     "edge_p95": 0.5028464402418251,
+     "edge_max": 0.5326600781136648,
+     "mae": 0.00076016737201668,
+     "mae_ink": 0.009067541025065096,
      "topology_ok": true
     },
     "pdfium": {
-     "iou": 0.9868991989319092,
-     "edge_p95": 0.9957627118644155,
+     "iou": 0.992003367003367,
+     "edge_p95": 0.7435323735554675,
      "edge_max": 1.0,
-     "mae": 0.001213312926980747,
-     "mae_ink": 0.01587050708133721,
+     "mae": 0.0008332668574217016,
+     "mae_ink": 0.009691081204198853,
      "topology_ok": true
     }
    },
    "fail": [
-    "poppler visual gate: iou=1.0000 p95=0.51 max=0.53 mae=0.0011 topo=True",
-    "pdfium visual gate: iou=0.9869 p95=1.00 max=1.00 mae=0.0012 topo=True"
+    "poppler visual gate: iou=1.0000 p95=0.50 max=0.53 mae=0.0008 topo=True",
+    "pdfium visual gate: iou=0.9920 p95=0.74 max=1.00 mae=0.0008 topo=True"
    ],
-   "pdf_bytes": 5852,
+   "pdf_bytes": 5877,
    "ttf_bytes": 3856,
    "font_glyphs": 1,
    "font_contours": {
-    "six": {
+    "eight": {
      "contours": 3,
      "signed_areas": [
-      -2653653.0,
-      192742.0,
-      285604.0
+      -2647924.0,
+      193822.0,
+      286516.0
      ]
     }
    },
-   "extracted_poppler": "6",
+   "extracted_poppler": "8",
    "transport_poppler": {
     "cardinality_ok": true,
     "duplicates_ok": true,
     "span_coverage_ok": true
    },
-   "extracted_pdfium": "6",
+   "extracted_pdfium": "8",
    "transport_pdfium": {
     "cardinality_ok": true,
     "duplicates_ok": true,
@@ -197,7 +1500,7 @@
     {
      "gid": 1,
      "text": [
-      "6"
+      "8"
      ],
      "cids": [
       0
@@ -207,15 +1510,15 @@
      "stages": {
       "trace_max_px": 0.4962500000000034,
       "trace_p95_px": 0.49624999999999986,
-      "curve_max_px": 0.005000000000013605,
+      "curve_max_px": 0.004814814814826984,
       "quant_bound_px": 0.036865234375
      },
      "budget_ok": true
     }
    ]
   },
-  "p03_kana": {
-   "name": "p03_kana",
+  "c04_page_01": {
+   "name": "c04_page_01",
    "checks": {
     "probe_build": true,
     "qpdf": true,
@@ -295,1061 +1598,13 @@
      "budget_ok": true
     }
    ]
-  },
-  "p04_ligature": {
-   "name": "p04_ligature",
-   "checks": {
-    "probe_build": true,
-    "qpdf": true,
-    "ots": true,
-    "fonttools_parse": true,
-    "hole_winding": true,
-    "extract_poppler": true,
-    "extract_pdfium": true,
-    "visual_poppler": false,
-    "visual_pdfium": false
-   },
-   "metrics": {
-    "poppler": {
-     "iou": 0.9745322245322245,
-     "edge_p95": 1.0176211453744486,
-     "edge_max": 1.5110619469026574,
-     "mae": 0.0032693638541389405,
-     "mae_ink": 0.03628877746524806,
-     "topology_ok": true
-    },
-    "pdfium": {
-     "iou": 0.9763556926240041,
-     "edge_p95": 1.0,
-     "edge_max": 1.0,
-     "mae": 0.0026811951024753792,
-     "mae_ink": 0.02848579678594645,
-     "topology_ok": true
-    }
-   },
-   "fail": [
-    "poppler visual gate: iou=0.9745 p95=1.02 max=1.51 mae=0.0033 topo=True",
-    "pdfium visual gate: iou=0.9764 p95=1.00 max=1.00 mae=0.0027 topo=True"
-   ],
-   "pdf_bytes": 3385,
-   "ttf_bytes": 1304,
-   "font_glyphs": 2,
-   "font_contours": {
-    "f": {
-     "contours": 2,
-     "signed_areas": [
-      -2055287.0,
-      -189635.0
-     ]
-    },
-    "u1D400": {
-     "contours": 2,
-     "signed_areas": [
-      -1562551.0,
-      1047607.0
-     ]
-    }
-   },
-   "extracted_poppler": "fi\ud835\udc00",
-   "transport_poppler": {
-    "cardinality_ok": true,
-    "duplicates_ok": true,
-    "span_coverage_ok": true
-   },
-   "extracted_pdfium": "fi\ud835\udc00",
-   "transport_pdfium": {
-    "cardinality_ok": true,
-    "duplicates_ok": true,
-    "span_coverage_ok": true
-   },
-   "unowned_components": 0,
-   "glyphs": [
-    {
-     "gid": 1,
-     "text": [
-      "fi"
-     ],
-     "cids": [
-      0
-     ],
-     "contours": 2,
-     "points": 266,
-     "stages": {
-      "trace_max_px": 0.4962500000000034,
-      "trace_p95_px": 0.49531249999999716,
-      "curve_max_px": 0.02018518518519352,
-      "quant_bound_px": 0.037109375
-     },
-     "budget_ok": true
-    },
-    {
-     "gid": 2,
-     "text": [
-      "\ud835\udc00"
-     ],
-     "cids": [
-      1
-     ],
-     "contours": 2,
-     "points": 34,
-     "stages": {
-      "trace_max_px": 0.49921875000000426,
-      "trace_p95_px": 0.4555555555555486,
-      "curve_max_px": 0.022777777777797326,
-      "quant_bound_px": 0.037109375
-     },
-     "budget_ok": true
-    }
-   ]
-  },
-  "p05_colour": {
-   "name": "p05_colour",
-   "checks": {
-    "probe_build": true,
-    "qpdf": true,
-    "ots": true,
-    "fonttools_parse": true,
-    "hole_winding": true,
-    "extract_poppler": true,
-    "extract_pdfium": true,
-    "visual_poppler": false,
-    "visual_pdfium": false,
-    "counters_paper_colour": true
-   },
-   "metrics": {
-    "poppler": {
-     "iou": 1.0,
-     "edge_p95": 0.5028464402418251,
-     "edge_max": 0.5326600781136648,
-     "mae": 0.00076016737201668,
-     "mae_ink": 0.009067541025065096,
-     "topology_ok": true
-    },
-    "pdfium": {
-     "iou": 0.992003367003367,
-     "edge_p95": 0.7435323735554675,
-     "edge_max": 1.0,
-     "mae": 0.0008332668574217016,
-     "mae_ink": 0.009691081204198853,
-     "topology_ok": true
-    }
-   },
-   "fail": [
-    "poppler visual gate: iou=1.0000 p95=0.50 max=0.53 mae=0.0008 topo=True",
-    "pdfium visual gate: iou=0.9920 p95=0.74 max=1.00 mae=0.0008 topo=True"
-   ],
-   "pdf_bytes": 5877,
-   "ttf_bytes": 3856,
-   "font_glyphs": 1,
-   "font_contours": {
-    "eight": {
-     "contours": 3,
-     "signed_areas": [
-      -2647924.0,
-      193822.0,
-      286516.0
-     ]
-    }
-   },
-   "extracted_poppler": "8",
-   "transport_poppler": {
-    "cardinality_ok": true,
-    "duplicates_ok": true,
-    "span_coverage_ok": true
-   },
-   "extracted_pdfium": "8",
-   "transport_pdfium": {
-    "cardinality_ok": true,
-    "duplicates_ok": true,
-    "span_coverage_ok": true
-   },
-   "counter_colour": {
-    "mean": [
-     213.58157894736843,
-     197.77687969924813,
-     158.26240601503758
-    ],
-    "d_paper": 2.1263784461152873,
-    "d_white": 65.12637844611528
-   },
-   "unowned_components": 0,
-   "glyphs": [
-    {
-     "gid": 1,
-     "text": [
-      "8"
-     ],
-     "cids": [
-      0
-     ],
-     "contours": 3,
-     "points": 2083,
-     "stages": {
-      "trace_max_px": 0.4962500000000034,
-      "trace_p95_px": 0.49624999999999986,
-      "curve_max_px": 0.004814814814826984,
-      "quant_bound_px": 0.036865234375
-     },
-     "budget_ok": true
-    }
-   ]
-  },
-  "p06_degraded": {
-   "name": "p06_degraded",
-   "checks": {
-    "probe_build": true,
-    "qpdf": true,
-    "ots": true,
-    "fonttools_parse": true,
-    "hole_winding": true,
-    "extract_poppler": true,
-    "extract_pdfium": true,
-    "visual_poppler": false,
-    "visual_pdfium": false
-   },
-   "metrics": {
-    "poppler": {
-     "iou": 0.9930761622156281,
-     "edge_p95": 4.6097722286464435,
-     "edge_max": 11.869505843190904,
-     "mae": 0.010314679265371307,
-     "mae_ink": 0.12151879849558327,
-     "topology_ok": false,
-     "holes@55": [
-      6,
-      27
-     ],
-     "holes@65": [
-      46,
-      27
-     ]
-    },
-    "pdfium": {
-     "iou": 0.9691839310908146,
-     "edge_p95": 4.622561578991908,
-     "edge_max": 11.988147619737735,
-     "mae": 0.00999086150297223,
-     "mae_ink": 0.11690799732679884,
-     "topology_ok": false,
-     "holes@55": [
-      6,
-      15
-     ],
-     "holes@60": [
-      27,
-      17
-     ],
-     "holes@65": [
-      46,
-      18
-     ]
-    }
-   },
-   "fail": [
-    "poppler visual gate: iou=0.9931 p95=4.61 max=11.87 mae=0.0103 topo=False",
-    "pdfium visual gate: iou=0.9692 p95=4.62 max=11.99 mae=0.0100 topo=False"
-   ],
-   "pdf_bytes": 44373,
-   "ttf_bytes": 11484,
-   "font_glyphs": 6,
-   "font_contours": {
-    "eight": {
-     "contours": 268,
-     "signed_areas": [
-      -2660716.0,
-      182.0,
-      182.0,
-      169.0,
-      169.0,
-      182.0,
-      154738.0,
-      169.0,
-      182.0,
-      169.0,
-      182.0,
-      169.0,
-      182.0,
-      169.0,
-      169.0,
-      169.0,
-      182.0,
-      182.0,
-      239504.0,
-      169.0,
-      169.0,
-      169.0,
-      169.0,
-      169.0,
-      364.0,
-      169.0,
-      182.0,
-      169.0,
-      -378.0,
-      -196.0,
-      -182.0,
-      -182.0,
-      -182.0,
-      -182.0,
-      -196.0,
-      -182.0,
-      -182.0,
-      -338.0,
-      -169.0,
-      -182.0,
-      -182.0,
-      -378.0,
-      -364.0,
-      -169.0,
-      -182.0,
-      -169.0,
-      -182.0,
-      -182.0,
-      -182.0,
-      -182.0,
-      -169.0,
-      -351.0,
-      -169.0,
-      -182.0,
-      -196.0,
-      -182.0,
-      -182.0,
-      -169.0,
-      -169.0,
-      -182.0,
-      -169.0,
-      -169.0,
-      -169.0,
-      -196.0,
-      -338.0,
-      -169.0,
-      -378.0,
-      -364.0,
-      -182.0,
-      -169.0,
-      -169.0,
-      -182.0,
-      -169.0,
-      -169.0,
-      -169.0,
-      -169.0,
-      -196.0,
-      -182.0,
-      -182.0,
-      -169.0,
-      -182.0,
-      -169.0,
-      -169.0,
-      -378.0,
-      -182.0,
-      -196.0,
-      -169.0,
-      -169.0,
-      -351.0,
-      -338.0,
-      -338.0,
-      -169.0,
-      -169.0,
-      -196.0,
-      -182.0,
-      -364.0,
-      -169.0,
-      -182.0,
-      -169.0,
-      -182.0,
-      -182.0,
-      -169.0,
-      -169.0,
-      -196.0,
-      -182.0,
-      -169.0,
-      -169.0,
-      -196.0,
-      -169.0,
-      -169.0,
-      -351.0,
-      -169.0,
-      -169.0,
-      -182.0,
-      -182.0,
-      -169.0,
-      -169.0,
-      -182.0,
-      -169.0,
-      -169.0,
-      -182.0,
-      -182.0,
-      -182.0,
-      -169.0,
-      -169.0,
-      -182.0,
-      -182.0,
-      -169.0,
-      -169.0,
-      -196.0,
-      -351.0,
-      -169.0,
-      -182.0,
-      -182.0,
-      -182.0,
-      -182.0,
-      -169.0,
-      -182.0,
-      -196.0,
-      -196.0,
-      -169.0,
-      -169.0,
-      -169.0,
-      -169.0,
-      -182.0,
-      -169.0,
-      -169.0,
-      -547.0,
-      -182.0,
-      -169.0,
-      -182.0,
-      -182.0,
-      -182.0,
-      -169.0,
-      -169.0,
-      -169.0,
-      -169.0,
-      -169.0,
-      -182.0,
-      -378.0,
-      -378.0,
-      -182.0,
-      -169.0,
-      -182.0,
-      -169.0,
-      -169.0,
-      -169.0,
-      -182.0,
-      -364.0,
-      -169.0,
-      -169.0,
-      -182.0,
-      -182.0,
-      -169.0,
-      -182.0,
-      -182.0,
-      -169.0,
-      -169.0,
-      -169.0,
-      -169.0,
-      -182.0,
-      -182.0,
-      -169.0,
-      -169.0,
-      -182.0,
-      -182.0,
-      -182.0,
-      -169.0,
-      -182.0,
-      -182.0,
-      -196.0,
-      -196.0,
-      -169.0,
-      -182.0,
-      -169.0,
-      -196.0,
-      -182.0,
-      -182.0,
-      -169.0,
-      -169.0,
-      -182.0,
-      -196.0,
-      -182.0,
-      -182.0,
-      -182.0,
-      -196.0,
-      -182.0,
-      -169.0,
-      -169.0,
-      -169.0,
-      -182.0,
-      -169.0,
-      -169.0,
-      -182.0,
-      -182.0,
-      -169.0,
-      -169.0,
-      -169.0,
-      -196.0,
-      -182.0,
-      -182.0,
-      -169.0,
-      -182.0,
-      -169.0,
-      -182.0,
-      -169.0,
-      -196.0,
-      -169.0,
-      -182.0,
-      -560.0,
-      -182.0,
-      -169.0,
-      -351.0,
-      -182.0,
-      -169.0,
-      -169.0,
-      -169.0,
-      -182.0,
-      -169.0,
-      -169.0,
-      -169.0,
-      -182.0,
-      -182.0,
-      -169.0,
-      -169.0,
-      -169.0,
-      -169.0,
-      -169.0,
-      -169.0,
-      -169.0,
-      -182.0,
-      -182.0,
-      -169.0,
-      -169.0,
-      -182.0,
-      -169.0,
-      -182.0,
-      -169.0,
-      -169.0,
-      -182.0,
-      -182.0,
-      -182.0,
-      -196.0,
-      -182.0,
-      -182.0,
-      -182.0,
-      -182.0,
-      -196.0
-     ]
-    },
-    "glyph00002": {
-     "contours": 2,
-     "signed_areas": [
-      -182.0,
-      -182.0
-     ]
-    },
-    "glyph00003": {
-     "contours": 1,
-     "signed_areas": [
-      -169.0
-     ]
-    },
-    "glyph00004": {
-     "contours": 1,
-     "signed_areas": [
-      -351.0
-     ]
-    },
-    "glyph00005": {
-     "contours": 2,
-     "signed_areas": [
-      -196.0,
-      -169.0
-     ]
-    },
-    "glyph00006": {
-     "contours": 2,
-     "signed_areas": [
-      -182.0,
-      -351.0
-     ]
-    }
-   },
-   "extracted_poppler": "8",
-   "transport_poppler": {
-    "cardinality_ok": true,
-    "duplicates_ok": true,
-    "span_coverage_ok": true
-   },
-   "extracted_pdfium": "8",
-   "transport_pdfium": {
-    "cardinality_ok": true,
-    "duplicates_ok": true,
-    "span_coverage_ok": true
-   },
-   "unowned_components": 81,
-   "glyphs": [
-    {
-     "gid": 1,
-     "text": [
-      "8"
-     ],
-     "cids": [
-      0
-     ],
-     "contours": 268,
-     "points": 6612,
-     "stages": {
-      "trace_max_px": 0.4962500000000034,
-      "trace_p95_px": 0.4962500000000034,
-      "curve_max_px": 0.005740740740735384,
-      "quant_bound_px": 0.03759765625
-     },
-     "budget_ok": true
-    },
-    {
-     "gid": 2,
-     "text": [],
-     "cids": [],
-     "contours": 2,
-     "points": 34,
-     "stages": {
-      "trace_max_px": 0.4962500000000001,
-      "trace_p95_px": 0.4962500000000001,
-      "curve_max_px": 0.0001851851851855553,
-      "quant_bound_px": 0.03759765625
-     },
-     "budget_ok": true
-    },
-    {
-     "gid": 3,
-     "text": [],
-     "cids": [],
-     "contours": 1,
-     "points": 17,
-     "stages": {
-      "trace_max_px": 0.4962500000000001,
-      "trace_p95_px": 0.49624999999999997,
-      "curve_max_px": 0.00018518518518528815,
-      "quant_bound_px": 0.03759765625
-     },
-     "budget_ok": true
-    },
-    {
-     "gid": 4,
-     "text": [],
-     "cids": [],
-     "contours": 1,
-     "points": 17,
-     "stages": {
-      "trace_max_px": 0.4962500000000001,
-      "trace_p95_px": 0.49531250000000004,
-      "curve_max_px": 0.0003703703703705763,
-      "quant_bound_px": 0.03759765625
-     },
-     "budget_ok": true
-    },
-    {
-     "gid": 5,
-     "text": [],
-     "cids": [],
-     "contours": 2,
-     "points": 34,
-     "stages": {
-      "trace_max_px": 0.4962500000000001,
-      "trace_p95_px": 0.4962500000000001,
-      "curve_max_px": 0.0001851851851855553,
-      "quant_bound_px": 0.03759765625
-     },
-     "budget_ok": true
-    },
-    {
-     "gid": 6,
-     "text": [],
-     "cids": [],
-     "contours": 2,
-     "points": 34,
-     "stages": {
-      "trace_max_px": 0.4962500000000001,
-      "trace_p95_px": 0.49624999999999997,
-      "curve_max_px": 0.0003703703703705763,
-      "quant_bound_px": 0.03759765625
-     },
-     "budget_ok": true
-    }
-   ]
-  },
-  "p07_sharedcid": {
-   "name": "p07_sharedcid",
-   "checks": {
-    "probe_build": true,
-    "qpdf": true,
-    "ots": true,
-    "fonttools_parse": true,
-    "hole_winding": true,
-    "extract_poppler": true,
-    "extract_pdfium": true,
-    "visual_poppler": false,
-    "visual_pdfium": false
-   },
-   "metrics": {
-    "poppler": {
-     "iou": 0.9961678661557155,
-     "edge_p95": 0.5202702702702595,
-     "edge_max": 1.508658008658017,
-     "mae": 0.003767095073323447,
-     "mae_ink": 0.018669602619999302,
-     "topology_ok": true
-    },
-    "pdfium": {
-     "iou": 1.0,
-     "edge_p95": 0.5064655172413808,
-     "edge_max": 0.541474654377879,
-     "mae": 0.003187543252595156,
-     "mae_ink": 0.015454454479267944,
-     "topology_ok": true
-    }
-   },
-   "fail": [
-    "poppler visual gate: iou=0.9962 p95=0.52 max=1.51 mae=0.0038 topo=True",
-    "pdfium visual gate: iou=1.0000 p95=0.51 max=0.54 mae=0.0032 topo=True"
-   ],
-   "pdf_bytes": 8206,
-   "ttf_bytes": 5908,
-   "font_glyphs": 3,
-   "font_contours": {
-    "six": {
-     "contours": 3,
-     "signed_areas": [
-      -2653653.0,
-      192742.0,
-      285604.0
-     ]
-    },
-    "one": {
-     "contours": 1,
-     "signed_areas": [
-      -530087.0
-     ]
-    },
-    "glyph00003": {
-     "contours": 3,
-     "signed_areas": [
-      -963198.0,
-      63910.0,
-      99308.0
-     ]
-    }
-   },
-   "extracted_poppler": "86818",
-   "transport_poppler": {
-    "cardinality_ok": true,
-    "duplicates_ok": true,
-    "span_coverage_ok": true
-   },
-   "extracted_pdfium": "86818",
-   "transport_pdfium": {
-    "cardinality_ok": true,
-    "duplicates_ok": true,
-    "span_coverage_ok": true
-   },
-   "unowned_components": 0,
-   "glyphs": [
-    {
-     "gid": 1,
-     "text": [
-      "8",
-      "6"
-     ],
-     "cids": [
-      0,
-      1
-     ],
-     "contours": 3,
-     "points": 2083,
-     "stages": {
-      "trace_max_px": 0.4962500000000034,
-      "trace_p95_px": 0.49624999999999986,
-      "curve_max_px": 0.005000000000013605,
-      "quant_bound_px": 0.036865234375
-     },
-     "budget_ok": true
-    },
-    {
-     "gid": 2,
-     "text": [
-      "1"
-     ],
-     "cids": [
-      2
-     ],
-     "contours": 1,
-     "points": 105,
-     "stages": {
-      "trace_max_px": 0.4962500000000001,
-      "trace_p95_px": 0.48125000000000107,
-      "curve_max_px": 0.013148148148157845,
-      "quant_bound_px": 0.036865234375
-     },
-     "budget_ok": true
-    },
-    {
-     "gid": 3,
-     "text": [
-      "8"
-     ],
-     "cids": [
-      3
-     ],
-     "contours": 3,
-     "points": 1219,
-     "stages": {
-      "trace_max_px": 0.4962500000000034,
-      "trace_p95_px": 0.49624999999999986,
-      "curve_max_px": 0.003888888888889691,
-      "quant_bound_px": 0.036865234375
-     },
-     "budget_ok": true
-    }
-   ]
-  },
-  "p08_symbols": {
-   "name": "p08_symbols",
-   "checks": {
-    "probe_build": true,
-    "qpdf": true,
-    "ots": true,
-    "fonttools_parse": true,
-    "hole_winding": true,
-    "extract_poppler": true,
-    "extract_pdfium": false,
-    "visual_poppler": false,
-    "visual_pdfium": false
-   },
-   "metrics": {
-    "poppler": {
-     "iou": 0.957319997259711,
-     "edge_p95": 1.1025944669365728,
-     "edge_max": 1.5,
-     "mae": 0.00956479016946145,
-     "mae_ink": 0.055630823953887916,
-     "topology_ok": true
-    },
-    "pdfium": {
-     "iou": 0.9616283401632404,
-     "edge_p95": 1.0600000000000023,
-     "edge_max": 1.4668029164825498,
-     "mae": 0.0076593913583532965,
-     "mae_ink": 0.043674084935223796,
-     "topology_ok": true
-    }
-   },
-   "fail": [
-    "pdfium transport vs original OCR: cardinality=True duplicates=True coverage=False (got 16 chars, expected 16)",
-    "poppler visual gate: iou=0.9573 p95=1.10 max=1.50 mae=0.0096 topo=True",
-    "pdfium visual gate: iou=0.9616 p95=1.06 max=1.47 mae=0.0077 topo=True"
-   ],
-   "pdf_bytes": 13780,
-   "ttf_bytes": 11248,
-   "font_glyphs": 7,
-   "font_contours": {
-    "period": {
-     "contours": 1,
-     "signed_areas": [
-      -166400.0
-     ]
-    },
-    "comma": {
-     "contours": 1,
-     "signed_areas": [
-      -262912.0
-     ]
-    },
-    "hyphen": {
-     "contours": 1,
-     "signed_areas": [
-      -225280.0
-     ]
-    },
-    "dollar": {
-     "contours": 3,
-     "signed_areas": [
-      -1384448.0,
-      34304.0,
-      41472.0
-     ]
-    },
-    "percent": {
-     "contours": 5,
-     "signed_areas": [
-      -647168.0,
-      141312.0,
-      -424448.0,
-      -650240.0,
-      138752.0
-     ]
-    },
-    "one": {
-     "contours": 6,
-     "signed_areas": [
-      -488960.0,
-      -493312.0,
-      -427264.0,
-      -572160.0,
-      64000.0,
-      -110592.0
-     ]
-    },
-    "glyph00007": {
-     "contours": 7,
-     "signed_areas": [
-      -1992448.0,
-      85248.0,
-      31232.0,
-      11776.0,
-      48384.0,
-      4608.0,
-      -69632.0
-     ]
-    }
-   },
-   "extracted_poppler": ".,-$%1,234.56-42",
-   "transport_poppler": {
-    "cardinality_ok": true,
-    "duplicates_ok": true,
-    "span_coverage_ok": true
-   },
-   "extracted_pdfium": ".,-1,234.56$%-42",
-   "transport_pdfium": {
-    "cardinality_ok": true,
-    "duplicates_ok": true,
-    "span_coverage_ok": false
-   },
-   "unowned_components": 0,
-   "glyphs": [
-    {
-     "gid": 1,
-     "text": [
-      "."
-     ],
-     "cids": [
-      0
-     ],
-     "contours": 1,
-     "points": 17,
-     "stages": {
-      "trace_max_px": 0.4871238425925952,
-      "trace_p95_px": 0.43906250000000036,
-      "curve_max_px": 0.004814814814817936,
-      "quant_bound_px": 0.03125
-     },
-     "budget_ok": true
-    },
-    {
-     "gid": 2,
-     "text": [
-      ","
-     ],
-     "cids": [
-      1
-     ],
-     "contours": 1,
-     "points": 201,
-     "stages": {
-      "trace_max_px": 0.4962500000000034,
-      "trace_p95_px": 0.49624999999999986,
-      "curve_max_px": 0.004629629629627985,
-      "quant_bound_px": 0.03125
-     },
-     "budget_ok": true
-    },
-    {
-     "gid": 3,
-     "text": [
-      "-"
-     ],
-     "cids": [
-      2
-     ],
-     "contours": 1,
-     "points": 17,
-     "stages": {
-      "trace_max_px": 0.4973379629629662,
-      "trace_p95_px": 0.4637037037037075,
-      "curve_max_px": 0.008148148148155343,
-      "quant_bound_px": 0.03125
-     },
-     "budget_ok": true
-    },
-    {
-     "gid": 4,
-     "text": [
-      "$"
-     ],
-     "cids": [
-      3
-     ],
-     "contours": 3,
-     "points": 939,
-     "stages": {
-      "trace_max_px": 0.4962500000000034,
-      "trace_p95_px": 0.49531249999999893,
-      "curve_max_px": 0.003888888888891273,
-      "quant_bound_px": 0.03125
-     },
-     "budget_ok": true
-    },
-    {
-     "gid": 5,
-     "text": [
-      "%"
-     ],
-     "cids": [
-      4
-     ],
-     "contours": 5,
-     "points": 2397,
-     "stages": {
-      "trace_max_px": 0.4962500000000034,
-      "trace_p95_px": 0.49624999999999986,
-      "curve_max_px": 0.002962962962968163,
-      "quant_bound_px": 0.03125
-     },
-     "budget_ok": true
-    },
-    {
-     "gid": 6,
-     "text": [
-      "1,234.56"
-     ],
-     "cids": [
-      5
-     ],
-     "contours": 6,
-     "points": 1926,
-     "stages": {
-      "trace_max_px": 0.4962500000000034,
-      "trace_p95_px": 0.49624999999999986,
-      "curve_max_px": 0.010000000000005116,
-      "quant_bound_px": 0.03125
-     },
-     "budget_ok": true
-    },
-    {
-     "gid": 7,
-     "text": [
-      "-42"
-     ],
-     "cids": [
-      6
-     ],
-     "contours": 7,
-     "points": 1375,
-     "stages": {
-      "trace_max_px": 0.4962500000000034,
-      "trace_p95_px": 0.49624999999999986,
-      "curve_max_px": 0.010740740740743604,
-      "quant_bound_px": 0.03125
-     },
-     "budget_ok": true
-    }
-   ]
   }
  },
  "gates": {
-  "E1_same_outline_two_cids": true,
-  "E2_two_gids_one_string": true,
-  "E4_utf16_transport": true,
-  "E3_wronglabel_preservation": true,
-  "E5_kana": true,
-  "E6_span_cardinality_owners": true,
-  "E7_determinism": true,
-  "E0_key_property": true
+  "E1_same_outline_two_cids": null,
+  "E2_two_gids_one_string": null,
+  "E0_key_property": null,
+  "E7_determinism": null
  },
  "tools": {
   "qpdf": "qpdf version 12.4.2",
@@ -1358,60 +1613,9 @@
   "ots": "ots 9.3.0"
  },
  "eproofs": {
-  "E1_same_outline_two_cids": {
-   "cid1_gid": 1,
-   "cid2_gid": 1,
-   "reuse_proven": true,
-   "tounicode": {
-    "1": "8",
-    "2": "6"
-   }
-  },
-  "E2_two_gids_one_string": {
-   "gid_regular8": 1,
-   "gid_small8": 3,
-   "distinct_gids": true,
-   "strings": [
-    "8",
-    "8"
-   ],
-   "same_string": true
-  },
-  "E4_utf16_transport": {
-   "fi": "fi",
-   "supplementary": "\ud835\udc00",
-   "fi_ok": true,
-   "surrogate_ok": true
-  },
-  "E3_wronglabel_preservation": {
-   "visible_shape_iou_vs_source": 0.9868991989319092,
-   "extracted_text": "6",
-   "provenance": "ocr (unreviewed; recorded in normalized OCR)",
-   "visually_preserved": true
-  },
-  "E5_kana": {
-   "extracted_poppler": "\u30ac",
-   "extracted_pdfium": "\u30ac",
-   "ok": true
-  },
-  "E6_span_cardinality_owners": {
-   "multi_unit_spans": {
-    "g003": 2
-   },
-   "owners": [
-    "visible_tounicode"
-   ],
-   "ok": true
-  },
-  "E7_determinism": {
-   "pdf_equal": true,
-   "ttf_equal": true
-  },
-  "E0_key_property": {
-   "rust_property_test": "cargo test e0_four_part_key_property: ok",
-   "passed": true,
-   "same_glyph_same_string_single_cid": true,
-   "same_glyph_diff_string_multi_cid": true
-  }
+  "E1_same_outline_two_cids": "NOT_RUN (fixture page not in run)",
+  "E2_two_gids_one_string": "NOT_RUN (fixture page not in run)",
+  "E0_key_property": "NOT_RUN (fixture page not in run)",
+  "E7_determinism": "NOT_RUN (fixture page not in run)"
  }
 }
