@@ -63,20 +63,6 @@ EXPECTED = {
 }
 
 
-def has_intra_word_spaces(text: str) -> bool:
-    """Defect signature of ungrouped per-glyph placement: runs of >=3
-    single-character whitespace-separated tokens ('T o t a l', '1 , 2 3 4')."""
-    run = 0
-    for t in text.split():
-        if len(t) == 1 and not t.isspace():
-            run += 1
-            if run >= 3:
-                return True
-        else:
-            run = 0
-    return False
-
-
 def expected_from_ocr(name: str) -> list[str] | None:
     """Original OCR input (the normalized OCR JSON fixture) — the transport
     contract is verified against THIS source, not a hand-typed list. Returns

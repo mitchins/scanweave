@@ -144,6 +144,18 @@ def main() -> int:
         ren0 = np.asarray(doc0[0].render(scale=300 / 72.0).to_pil().convert("L"))[: src_gray.shape[0], : src_gray.shape[1]]
         mr0 = _fg(ren0)
         p09["B2_ink_iou"] = round(float((ms & mr0).sum() / (ms | mr0).sum()), 4)
+        # marked-content balance (BDC==EMC) as committed evidence — qpdf cannot
+        # check pairing, so the harness records it structurally
+        import subprocess as _sp
+        env_q = dict(os.environ, LD_LIBRARY_PATH=os.path.join(ROOT, "tools", "dist", "lib"))
+        qdf = os.path.join(d, "out.qdf.pdf")
+        _sp.run([os.path.join(ROOT, "tools", "dist", "bin", "qpdf"),
+                 "--qdf", "--object-streams=disable", os.path.join(d, "out.pdf"), qdf],
+                capture_output=True, env=env_q)
+        raw = open(qdf, "rb").read() if os.path.exists(qdf) else b""
+        bdc, emc = raw.count(b"BDC" + bytes([10])), raw.count(b"EMC" + bytes([10]))
+        p09["marked_content_balanced"] = (bdc == emc) and bdc > 0
+        p09["marked_content"] = {"bdc": bdc, "emc": emc}
         for label, f in (("ia_mrc", "ia.pdf"), ("ocrmypdf", "ocrm.pdf")):
             fp = os.path.join(d, f)
             if os.path.exists(fp):

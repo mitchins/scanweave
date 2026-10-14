@@ -102,14 +102,22 @@ realistic 300-dpi text page → hOCR (118 chars, 118 x_conf values) → `hocr2js
 
 **Comparative table — identical sources, same tesseract OCR:**
 
-Committed numbers from `measurements.json` (`pages.p09_realtext`, harness-executed):
+Committed numbers from `measurements.json` (`pages.p09_realtext`, harness-executed;
+regenerated on the final revision):
 
 | Tool (p09 single page) | bytes | ink IoU | transport |
 |---|---|---|---|
 | source PNG | 37,740 | — | — |
 | IA MRC (recode_pdf, JP2 `-r 500/750`) | 45,020 | 0.8452 | 118 chars |
-| OCRmyPDF 17.13 (`--force-ocr --output-type pdf --optimize 0`) | 40,118 | 0.7077 | 118 chars |
-| **ours B2 (reconstruction)** | **24,110** | **0.8307** | **118 chars (post-repair)** |
+| OCRmyPDF 17.13 (`--force-ocr --output-type pdf --optimize 0`) | 40,122 | 0.7077 | 118 chars |
+| **ours B2 (reconstruction)** | **25,005** | **0.8307** | **118 chars (post-repair)** |
+| ours B0 (searchable raster) | 51,236 | (render-neutrality verified) | 118 chars (post-repair) |
+
+(Earlier §4 revisions carried 24,058/40,121/113-char figures from before the
+item-2 repair and 24,110/40,119 from before the ActualText repair; those are
+superseded by the values above. OCRmyPDF's output bytes vary by a few bytes
+between runs (embedded timestamps) while ours are byte-deterministic across
+independent checkouts; the table shows the committed value.)
 | ours B0 (searchable raster) | 50,341 | (render-neutrality verified) | 118 chars (post-repair) |
 
 (Earlier §4 revisions carried 24,058/40,121/113-char figures from before the
@@ -117,14 +125,16 @@ item-2 repair; superseded by the values above, which match
 `measurements.json::pages.p09_realtext`.)
 
 **Repeated-text 4-page document (p10)** — committed harness numbers
-(`measurements.json` `pages.p10_multipage`): source 164,141 B; ours B2 (per-page sum)
-**100,490 B** = **0.59× OCRmyPDF (169,244 B)** and **0.53× IA MRC (189,213 B)**; B0
-216,592 B. Note: OCRmyPDF bytes vary by a few bytes between runs (embedded
-timestamps) while ours are byte-deterministic across independent checkouts; figures
-above are the committed values. Repeated-glyph sharing works on real OCR (e.g. `o` reused across contexts:
-gid2 cids [1,33]). Caveat: external tools ran on a true 4-page PDF; ours is a per-page
-sum (multi-page assembly is M1) — recorded as an approximation direction, and the same
-touching-character import loss (§4 ⚠) applies to our text layer on these 36-px pages.
+(`measurements.json` `pages.p10_multipage`, regenerated on the final revision):
+source 164,141 B; ours B2 (per-page sum) **104,698 B** =
+**0.6186× OCRmyPDF (169,241 B)** and
+**0.5533× IA MRC (189,213 B)**; B0 220,800 B.
+OCRmyPDF's bytes vary a few bytes per run (embedded timestamps); ours are
+byte-deterministic across checkouts. Repeated-glyph sharing works on real OCR
+(e.g. `o` reused across contexts: gid2 cids [1,33]). Caveat as before: external
+tools ran on a true 4-page PDF; ours is a per-page sum (multi-page assembly is
+M1) — recorded as an approximation direction, and the same touching-character
+import loss (§4 ⚠) applies to our text layer on these 36-px pages.
 
 **⚠ Known defect found and quantified (charter point 4's anti-fallback concern applies
 to fidelity, and this is a fidelity-side loss):** on 36-px kerned text, touching
@@ -242,8 +252,9 @@ real-corpus gate stays BLOCKED.
 External-comparison commands fail closed (`measure.py` `run_external`: prior
 outputs deleted, tool failure raises a precise reason instead of silently
 reusing stale outputs or reporting smaller totals). Measurements regenerated on
-the final revision: p09 B2=24,110 B / IA MRC 45,020 B / OCRmyPDF 40,118 B;
-p10 totals B2=100,490 B = 0.59× OCRmyPDF, 0.53× IA MRC. The
+the final revision: p09 B2=25,005 B / IA MRC 45,020 B /
+OCRmyPDF 40,122 B; p10 totals B2=104,698 B =
+0.6186× OCRmyPDF, 0.5533× IA MRC. The
 "non-quality-equivalent" mark for documents with missing OCR characters is
 SUPERSEDED by the item-2 repair: p09/p10 now transport 118/118(and p10's
 per-page sets) exactly in both engines, so the compression results above are
@@ -293,8 +304,8 @@ Poppler, in B2 AND the B0 baseline. Character transport remains exact and
 non-duplicated (118/118). `qualification/test_text_search.py` extends the gate:
 decimals, negative amounts (`-42`), invoice references, ligatures (`fi`), kana
 (`ガ` intact), supplementary-plane (`𝐀`), the `1,234.56` token across p08/p10, and a
-defect-signature guard. B2 size grew 24,110 → 25,005 B on p09 (the BDC wrappers;
-honest cost of a correct text layer; B2 still 0.62× the OCRmyPDF 40,119 B baseline).
+defect-signature guard. B2 size grew to 25,005 B on p09 (the BDC wrappers;
+honest cost of a correct text layer; B2 still ~0.62× the OCRmyPDF 40,122 B baseline).
 
 **Extracted verification (checks.py):** `word_boundary_ok` (every span text appears
 contiguously in the raw extraction) and `no_intra_word_spaces` (no multi-char span
@@ -332,7 +343,8 @@ run (fail-closed), guarding the evidence destination even against deliberate pat
   32/32 artifacts byte-identical against the committed `repro_hashcheck.json`
   (regenerated on this revision), pixel hash independently re-derived.
 - Baselines regenerated (fail-closed externals): p09 B2 25,005 B / IA MRC 45,020 B /
-  OCRmyPDF 40,119 B; p10 B2 totals with repeated-text ratios unchanged.
+  OCRmyPDF ~40,12 kB (varies a few bytes per run; committed value in measurements.json);
+  p10 B2 totals with repeated-text ratios in measurements.json.
 - Visual gates unchanged (honest margins); p08 pdfium transport FAIL preserved;
   p08's DEFECT-A fix evidence attached.
 - PROVISIONAL stands; M1 NOT authorized. m0-qual-1 remains a draft pending
