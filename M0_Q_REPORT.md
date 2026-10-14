@@ -113,16 +113,13 @@ regenerated on the final revision):
 | **ours B2 (reconstruction)** | **25,005** | **0.8307** | **118 chars (post-repair)** |
 | ours B0 (searchable raster) | 51,236 | (render-neutrality verified) | 118 chars (post-repair) |
 
-(Earlier §4 revisions carried 24,058/40,121/113-char figures from before the
-item-2 repair and 24,110/40,119 from before the ActualText repair; those are
-superseded by the values above. OCRmyPDF's output bytes vary by a few bytes
-between runs (embedded timestamps) while ours are byte-deterministic across
-independent checkouts; the table shows the committed value.)
-| ours B0 (searchable raster) | 50,341 | (render-neutrality verified) | 118 chars (post-repair) |
-
-(Earlier §4 revisions carried 24,058/40,121/113-char figures from before the
-item-2 repair; superseded by the values above, which match
-`measurements.json::pages.p09_realtext`.)
+(Historical: earlier §4 revisions carried 24,058/40,121/113-char figures from
+before the item-2 repair and 24,110/40,119/50,341 figures from before the
+ActualText repair; those are superseded by the values above, which match the
+committed `measurements.json::pages.p09_realtext`. OCRmyPDF's output bytes vary
+by a few bytes between runs (embedded timestamps) while ours are byte-
+deterministic across independent checkouts; the table shows the committed
+value.)
 
 **Repeated-text 4-page document (p10)** — committed harness numbers
 (`measurements.json` `pages.p10_multipage`, regenerated on the final revision):
