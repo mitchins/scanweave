@@ -257,3 +257,83 @@ margins (Poppler edge p95 ≈0.51 on 4 pages; pdfium ≈1.0 on all; p04/p06 as
 before); the `m0-qual-1` amendment is a draft pending independent approval;
 row 11 (corpus) remains BLOCKED. Disposition: PROVISIONAL unchanged. M1 not
 authorized.
+
+
+---
+
+## Appendix 2 — M0-Q final correctness correction (2026-10-14)
+
+Charter: repair demonstrated semantic-search and corpus-sealing defects against the
+DeepSeek-accepted baseline `086bf57`. Red-before-green evidence for both defects is
+recorded below; no architecture, threshold or M1 scope changes.
+
+### A. PDF text search — DEFECT REPRODUCED, REPAIRED, GATED
+
+**Red (recorded before repair):** the committed p09 artifact transported all 118
+characters but extracted as `'Tota l a m o u nt d u e : 1 , 2 3 4 . 5 6 EU R...'` —
+per-glyph `Tj` placements made both extractors insert intra-word whitespace;
+PDFium search for `Total`, `1,234.56`, `INV-2026-0042` all MISSED. (The whitespace-
+stripped transport check had masked this; that masking is itself the lesson that
+made word-boundary integrity a PRIMARY criterion.)
+
+**Repair (SPEC §6.2, no new layers):** each OCR span's glyphs are emitted as one
+marked-content run `BDC /Span << /ActualText (span text)>> … EMC` whose ActualText
+is the span's exact OCR text — the span's single semantic owner. The per-glyph
+ToUnicode entries remain as the per-glyph fallback and keep the VS-01
+wrong-label semantics; no duplicate invisible layer was introduced. Spans whose
+text contains non-BMP scalars are excluded from ActualText wrapping (PDFium drops
+astral scalars inside ActualText, measured: `fi` extracted, `𝐀` dropped) — those
+keep the ToUnicode owner, which transports astral scalars exactly. CID/GID/Unicode
+separation is unchanged (E-proofs 8/8 still pass).
+
+**Green (after repair):** raw PDFium text reads `Total amount due: 1,234.56 EUR /
+Invoice date: 13 October 2026 / Account holder: J. Garcia / Reference: INV-2026-0042
+/ Please pay within 30 days.` — all three required queries FOUND in PDFium and
+Poppler, in B2 AND the B0 baseline. Character transport remains exact and
+non-duplicated (118/118). `qualification/test_text_search.py` extends the gate:
+decimals, negative amounts (`-42`), invoice references, ligatures (`fi`), kana
+(`ガ` intact), supplementary-plane (`𝐀`), the `1,234.56` token across p08/p10, and a
+defect-signature guard. B2 size grew 24,110 → 25,005 B on p09 (the BDC wrappers;
+honest cost of a correct text layer; B2 still 0.62× the OCREmyPDF 40,121 B baseline).
+
+**Extracted verification (checks.py):** `word_boundary_ok` (every span text appears
+contiguously in the raw extraction) and `no_intra_word_spaces` (no multi-char span
+split by spaces) are now PRIMARY gates; whitespace-stripped cardinality remains a
+supplementary signal. p08's pdfium span-ordering FAIL is preserved with a precise
+cause (PDFium's span-merge artifact `\x02` plus layout order; cardinality=False,
+coverage=False; poppler now passes p08's transport).
+
+### B. Holdout sealing — DEFECTS REPRODUCED, REPAIRED, GATED
+
+**Red (recorded):** (B1) default ingestion wrote the holdout's normalized OCR into
+`bundle/normalized/receipts_holdout__holdout_zeta/` before excluding the document;
+(B2) the seal hash changed with `--out` because it hashed an output-dependent path
+(8ba9f7cb… vs 60b21ff3… on two different output directories).
+
+**Repair:** holdout documents are now identified at document level BEFORE any page
+processing and sealed from canonical relative identity + SHA-256 of the source
+raster and OCR file bytes (`scanweave-holdout-seal/1`) — no copying, parsing,
+normalization or rendering of holdout content occurs during ordinary development
+ingestion. Holdout pages are skipped entirely unless `--include-holdout`.
+
+**Green (after repair):** (B1) default ingestion produces no `normalized/` entry for
+the holdout and a recursive byte-leak scan of the whole output tree finds none of
+the holdout's bytes; (B2) the seal is identical across different `--out` paths
+(e9eec5488f47…), changes when any sealed source byte changes (7b5d2e68c5ca… on a
+mutated copy of the corpus, the original never touched), and `--include-holdout`
+materialization preserves the same development seal. Additionally (B7) an explicit
+`--out` can no longer target the committed gate artifact from a subset/overridden
+run (fail-closed), guarding the evidence destination even against deliberate paths.
+
+### C. Evidence
+
+- 38 cargo tests, all analytical/search/corpus suites green.
+- Reproduction on a fresh checkout at the final revision: 38 tests, 8/8 E-proofs,
+  32/32 artifacts byte-identical against the committed `repro_hashcheck.json`
+  (regenerated on this revision), pixel hash independently re-derived.
+- Baselines regenerated (fail-closed externals): p09 B2 25,005 B / IA MRC 45,020 B /
+  OCRmyPDF 40,121 B; p10 B2 totals with repeated-text ratios unchanged.
+- Visual gates unchanged (honest margins); p08 pdfium transport FAIL preserved;
+  p08's DEFECT-A fix evidence attached.
+- PROVISIONAL stands; M1 NOT authorized. m0-qual-1 remains a draft pending
+  independent approval; the real benign corpus remains sealed and unmounted.

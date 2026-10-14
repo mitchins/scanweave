@@ -194,3 +194,25 @@ statement: 32/8 everywhere, poppler p01 MAE 0.0038, p05 0.133 px / 86.7%, OCRmyP
 > either of the last two commits. The previously scoped BLOCKED items (benign corpus
 > not mounted, m0-qual-1 amendment review pending, MRC lossy matrix deferred) remain
 > open and are not waived; M1 remains NOT AUTHORIZED.
+
+## M0-Q final correctness correction — defects REVISE-repaired (2026-10-14)
+
+- A (semantic search): RED recorded (raw extraction 'Tota l a m o u nt...', all three
+  queries MISSING in PDFium). Repaired via per-span /ActualText marked-content runs
+  (SPEC §6.2, ToUnicode retained as per-glyph fallback; astral spans keep ToUnicode
+  since PDFium drops astral inside ActualText). GREEN: all three queries in PDFium +
+  Poppler for B2 and B0; 118/118 exact transport; test_text_search.py covers
+  decimals/negatives/refs/ligatures/kana/supplementary-plane + defect-signature
+  guard; checks.py word_boundary_ok + no_intra_word_spaces are now PRIMARY gates
+  (cardinality supplementary). p08 pdfium ordering FAIL preserved (cause: PDFium
+  \x02 span artifact + layout order).
+- B (holdout sealing): RED recorded (holdout normalized content written to the
+  bundle; seal varied with --out). Repaired: holdout identified pre-processing;
+  sealed from canonical identity + source-byte hashes (scanweave-holdout-seal/1);
+  never materialized without --include-holdout; seal byte-content-bound and
+  location-independent; --include-holdout preserves the development seal; explicit
+  --out to the canonical gate artifact refused (B7).
+- Tests: text_search (all), corpus_adapter (all incl. B1/B2/B7), subpixel analytical,
+  schema layer, 38 cargo tests. Reproduction: fresh checkout at final revision,
+  38 tests + 8/8 E-proofs + 32/32 artifacts byte-identical.
+- awaiting deepseek-reviewer sign-off of this correction.

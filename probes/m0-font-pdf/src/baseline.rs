@@ -26,6 +26,7 @@ pub fn assemble_raster(
     page_h_pt: f32,
     font_bytes: Vec<u8>,
     shapes: &[GlyphShape],
+    span_texts: &std::collections::HashMap<String, String>,
 ) -> Result<(Vec<u8>, Vec<(String, u64)>), String> {
     let upem = 2048.0f32;
     let mut pdf = Pdf::new();

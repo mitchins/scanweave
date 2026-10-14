@@ -35,7 +35,7 @@
     "poppler visual gate: iou=1.0000 p95=0.51 max=0.53 mae=0.0038 topo=True",
     "pdfium visual gate: iou=0.9837 p95=1.00 max=1.46 mae=0.0052 topo=True"
    ],
-   "pdf_bytes": 9817,
+   "pdf_bytes": 9969,
    "ttf_bytes": 7608,
    "font_glyphs": 3,
    "font_contours": {
@@ -66,13 +66,17 @@
    "transport_poppler": {
     "cardinality_ok": true,
     "duplicates_ok": true,
-    "span_coverage_ok": true
+    "span_coverage_ok": true,
+    "word_boundary_ok": true,
+    "no_intra_word_spaces": true
    },
    "extracted_pdfium": "868a",
    "transport_pdfium": {
     "cardinality_ok": true,
     "duplicates_ok": true,
-    "span_coverage_ok": true
+    "span_coverage_ok": true,
+    "word_boundary_ok": true,
+    "no_intra_word_spaces": true
    },
    "unowned_components": 0,
    "glyphs": [
@@ -167,7 +171,7 @@
     "poppler visual gate: iou=1.0000 p95=0.51 max=0.53 mae=0.0011 topo=True",
     "pdfium visual gate: iou=0.9869 p95=1.00 max=1.00 mae=0.0012 topo=True"
    ],
-   "pdf_bytes": 5852,
+   "pdf_bytes": 5890,
    "ttf_bytes": 3856,
    "font_glyphs": 1,
    "font_contours": {
@@ -184,13 +188,17 @@
    "transport_poppler": {
     "cardinality_ok": true,
     "duplicates_ok": true,
-    "span_coverage_ok": true
+    "span_coverage_ok": true,
+    "word_boundary_ok": true,
+    "no_intra_word_spaces": true
    },
    "extracted_pdfium": "6",
    "transport_pdfium": {
     "cardinality_ok": true,
     "duplicates_ok": true,
-    "span_coverage_ok": true
+    "span_coverage_ok": true,
+    "word_boundary_ok": true,
+    "no_intra_word_spaces": true
    },
    "unowned_components": 0,
    "glyphs": [
@@ -249,7 +257,7 @@
     "poppler visual gate: iou=1.0000 p95=0.52 max=0.54 mae=0.0014 topo=True",
     "pdfium visual gate: iou=0.9632 p95=1.00 max=1.00 mae=0.0017 topo=True"
    ],
-   "pdf_bytes": 6248,
+   "pdf_bytes": 6293,
    "ttf_bytes": 4244,
    "font_glyphs": 1,
    "font_contours": {
@@ -266,13 +274,17 @@
    "transport_poppler": {
     "cardinality_ok": true,
     "duplicates_ok": true,
-    "span_coverage_ok": true
+    "span_coverage_ok": true,
+    "word_boundary_ok": true,
+    "no_intra_word_spaces": true
    },
    "extracted_pdfium": "\u30ac",
    "transport_pdfium": {
     "cardinality_ok": true,
     "duplicates_ok": true,
-    "span_coverage_ok": true
+    "span_coverage_ok": true,
+    "word_boundary_ok": true,
+    "no_intra_word_spaces": true
    },
    "unowned_components": 0,
    "glyphs": [
@@ -331,7 +343,7 @@
     "poppler visual gate: iou=0.9745 p95=1.02 max=1.51 mae=0.0033 topo=True",
     "pdfium visual gate: iou=0.9764 p95=1.00 max=1.00 mae=0.0027 topo=True"
    ],
-   "pdf_bytes": 3385,
+   "pdf_bytes": 3428,
    "ttf_bytes": 1304,
    "font_glyphs": 2,
    "font_contours": {
@@ -354,13 +366,17 @@
    "transport_poppler": {
     "cardinality_ok": true,
     "duplicates_ok": true,
-    "span_coverage_ok": true
+    "span_coverage_ok": true,
+    "word_boundary_ok": true,
+    "no_intra_word_spaces": true
    },
    "extracted_pdfium": "fi\ud835\udc00",
    "transport_pdfium": {
     "cardinality_ok": true,
     "duplicates_ok": true,
-    "span_coverage_ok": true
+    "span_coverage_ok": true,
+    "word_boundary_ok": true,
+    "no_intra_word_spaces": true
    },
    "unowned_components": 0,
    "glyphs": [
@@ -438,7 +454,7 @@
     "poppler visual gate: iou=1.0000 p95=0.50 max=0.53 mae=0.0008 topo=True",
     "pdfium visual gate: iou=0.9920 p95=0.74 max=1.00 mae=0.0008 topo=True"
    ],
-   "pdf_bytes": 5877,
+   "pdf_bytes": 5915,
    "ttf_bytes": 3856,
    "font_glyphs": 1,
    "font_contours": {
@@ -455,13 +471,17 @@
    "transport_poppler": {
     "cardinality_ok": true,
     "duplicates_ok": true,
-    "span_coverage_ok": true
+    "span_coverage_ok": true,
+    "word_boundary_ok": true,
+    "no_intra_word_spaces": true
    },
    "extracted_pdfium": "8",
    "transport_pdfium": {
     "cardinality_ok": true,
     "duplicates_ok": true,
-    "span_coverage_ok": true
+    "span_coverage_ok": true,
+    "word_boundary_ok": true,
+    "no_intra_word_spaces": true
    },
    "counter_colour": {
     "mean": [
@@ -549,7 +569,7 @@
     "poppler visual gate: iou=0.9931 p95=4.61 max=11.87 mae=0.0103 topo=False",
     "pdfium visual gate: iou=0.9692 p95=4.62 max=11.99 mae=0.0100 topo=False"
    ],
-   "pdf_bytes": 44373,
+   "pdf_bytes": 44411,
    "ttf_bytes": 11484,
    "font_glyphs": 6,
    "font_contours": {
@@ -864,13 +884,17 @@
    "transport_poppler": {
     "cardinality_ok": true,
     "duplicates_ok": true,
-    "span_coverage_ok": true
+    "span_coverage_ok": true,
+    "word_boundary_ok": true,
+    "no_intra_word_spaces": true
    },
    "extracted_pdfium": "8",
    "transport_pdfium": {
     "cardinality_ok": true,
     "duplicates_ok": true,
-    "span_coverage_ok": true
+    "span_coverage_ok": true,
+    "word_boundary_ok": true,
+    "no_intra_word_spaces": true
    },
    "unowned_components": 81,
    "glyphs": [
@@ -999,7 +1023,7 @@
     "poppler visual gate: iou=0.9962 p95=0.52 max=1.51 mae=0.0038 topo=True",
     "pdfium visual gate: iou=1.0000 p95=0.51 max=0.54 mae=0.0032 topo=True"
    ],
-   "pdf_bytes": 8206,
+   "pdf_bytes": 8359,
    "ttf_bytes": 5908,
    "font_glyphs": 3,
    "font_contours": {
@@ -1030,13 +1054,17 @@
    "transport_poppler": {
     "cardinality_ok": true,
     "duplicates_ok": true,
-    "span_coverage_ok": true
+    "span_coverage_ok": true,
+    "word_boundary_ok": true,
+    "no_intra_word_spaces": true
    },
    "extracted_pdfium": "86818",
    "transport_pdfium": {
     "cardinality_ok": true,
     "duplicates_ok": true,
-    "span_coverage_ok": true
+    "span_coverage_ok": true,
+    "word_boundary_ok": true,
+    "no_intra_word_spaces": true
    },
    "unowned_components": 0,
    "glyphs": [
@@ -1130,11 +1158,11 @@
     }
    },
    "fail": [
-    "pdfium transport vs original OCR: cardinality=True duplicates=False coverage=False (got 16 chars, expected 16)",
+    "pdfium transport vs original OCR: words=True spaces=True cardinality=False duplicates=False coverage=False (got 16 chars, expected 16)",
     "poppler visual gate: iou=0.9573 p95=1.10 max=1.50 mae=0.0096 topo=True",
     "pdfium visual gate: iou=0.9616 p95=1.06 max=1.47 mae=0.0077 topo=True"
    ],
-   "pdf_bytes": 13780,
+   "pdf_bytes": 14055,
    "ttf_bytes": 11248,
    "font_glyphs": 7,
    "font_contours": {
@@ -1202,13 +1230,17 @@
    "transport_poppler": {
     "cardinality_ok": true,
     "duplicates_ok": true,
-    "span_coverage_ok": true
+    "span_coverage_ok": true,
+    "word_boundary_ok": true,
+    "no_intra_word_spaces": true
    },
-   "extracted_pdfium": ".,-1,234.56$%-42",
+   "extracted_pdfium": ".,\u00021,234.56$%-42",
    "transport_pdfium": {
-    "cardinality_ok": true,
+    "cardinality_ok": false,
     "duplicates_ok": false,
-    "span_coverage_ok": false
+    "span_coverage_ok": false,
+    "word_boundary_ok": true,
+    "no_intra_word_spaces": true
    },
    "unowned_components": 0,
    "glyphs": [

@@ -288,10 +288,16 @@ fn build(page_dir: &PathBuf, out_dir: &PathBuf) -> Result<TraceLog, String> {
     let page_w_pt = page.page.width_pt as f32;
     let page_h_pt = page.page.height_pt as f32;
     let paper = seg.paper;
+    let span_texts: std::collections::HashMap<String, String> = page
+        .spans
+        .iter()
+        .map(|s| (s.id.clone(), s.text.clone()))
+        .collect();
     let (pdf_bytes, breakdown) = m0_font_pdf::pdf::assemble(
         &shapes,
         &encodings,
         &occurrences,
+        &span_texts,
         &artwork,
         &contour_polylines,
         page_w_pt,
@@ -314,6 +320,7 @@ fn build(page_dir: &PathBuf, out_dir: &PathBuf) -> Result<TraceLog, String> {
         page_h_pt,
         font_bytes.clone(),
         &shapes,
+        &span_texts,
     )
     .map_err(|e| e.to_string())?;
     let (b0_notext_bytes, _) = m0_font_pdf::baseline::assemble_raster(
@@ -326,6 +333,7 @@ fn build(page_dir: &PathBuf, out_dir: &PathBuf) -> Result<TraceLog, String> {
         page_h_pt,
         font_bytes.clone(),
         &shapes,
+        &span_texts,
     )
     .map_err(|e| e.to_string())?;
 

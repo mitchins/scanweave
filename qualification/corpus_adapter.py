@@ -102,13 +102,57 @@ def normalize_and_validate_hocr(png: str, hocr: str, out_dir: str, dpi: float) -
     return out
 
 
+SEAL_VERSION = "scanweave-holdout-seal/1"
+
+# Preferred seal order: canonical relative identity + source-byte hashes.
+# No holdout content is copied, parsed, normalized or rendered to compute a seal:
+# only the source file bytes are hashed (decoded-image or parsed-text processing
+# is a development-ingestion activity, never a sealing one).
+def seal_material(corpus_root: str, doc_id: str) -> dict:
+    ddir = os.path.join(corpus_root, *doc_id.split("/"))
+    pages = []
+    for f in sorted(os.listdir(ddir)):
+        if f.lower().endswith((".png", ".tif", ".tiff", ".jpg", ".jpeg")):
+            stem = os.path.splitext(f)[0]
+            raster_bytes = open(os.path.join(ddir, f), "rb").read()
+            ocr_file = os.path.join(ddir, stem + ".hocr")
+            ocr_file2 = os.path.join(ddir, stem + ".ocr.json")
+            ocr_bytes = b""
+            ocr_kind = "absent"
+            if os.path.exists(ocr_file):
+                ocr_bytes = open(ocr_file, "rb").read()
+                ocr_kind = "hocr"
+            elif os.path.exists(ocr_file2):
+                ocr_bytes = open(ocr_file2, "rb").read()
+                ocr_kind = "ocr.json"
+            pages.append(
+                {
+                    "page": stem,
+                    "raster_sha256": hashlib.sha256(raster_bytes).hexdigest(),
+                    "raster_bytes": len(raster_bytes),
+                    "ocr_sha256": hashlib.sha256(ocr_bytes).hexdigest(),
+                    "ocr_bytes": len(ocr_bytes),
+                    "ocr_kind": ocr_kind,
+                }
+            )
+    material = {
+        "seal_version": SEAL_VERSION,
+        "document": doc_id,
+        "pages": pages,
+    }
+    canonical = json.dumps(material, sort_keys=True, separators=(",", ":"))
+    material["seal_sha256"] = hashlib.sha256(canonical.encode()).hexdigest()
+    return material
+
+
 def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--corpus", required=True)
     ap.add_argument("--out", required=True)
     ap.add_argument("--dpi", type=float, default=300.0)
     ap.add_argument("--include-holdout", action="store_true",
-                    help="materialize holdout documents (development only; sealed by default)")
+                    help="materialize holdout documents (authorized use only; "
+                         "the development seal for the document is unchanged)")
     args = ap.parse_args()
 
     if not os.path.isdir(args.corpus):
@@ -133,9 +177,16 @@ def main() -> int:
             if not os.path.isdir(ddir):
                 continue
             doc_id = f"{stratum}/{doc}"
-            is_holdout = stratum.endswith("_holdout") or doc.startswith("holdout_")
-            split = "holdout" if is_holdout else document_split(doc_id)
-            entry = {"document": doc_id, "stratum": stratum, "split": split, "pages": []}
+            # holdout identification happens BEFORE any page processing: sealed
+            # from source bytes and excluded (no copying, parsing, normalization
+            # or rendering of holdout content during ordinary development ingestion)
+            if stratum.endswith("_holdout") or doc.startswith("holdout_"):
+                seal = seal_material(args.corpus, doc_id)
+                holdout_seal.append(seal)
+                if not args.include_holdout:
+                    continue
+            entry = {"document": doc_id, "stratum": stratum,
+                     "split": document_split(doc_id), "pages": []}
             for f in sorted(os.listdir(ddir)):
                 if not f.lower().endswith((".png", ".tif", ".tiff", ".jpg", ".jpeg")):
                     continue
@@ -195,19 +246,6 @@ def main() -> int:
             if not entry["pages"]:
                 problems.append(f"{doc_id}: no usable pages")
                 continue
-            if split == "holdout":
-                # sealed holdouts are hashed, never materialized
-                seal = hashlib.sha256(
-                    json.dumps(entry, sort_keys=True).encode()).hexdigest()
-                holdout_seal.append(
-                    {
-                        "document": doc_id,
-                        "seal_sha256": seal,
-                        "pages": len(entry["pages"]),
-                    }
-                )
-                if not args.include_holdout:
-                    continue
             docs[doc_id] = entry
 
     os.makedirs(args.out, exist_ok=True)

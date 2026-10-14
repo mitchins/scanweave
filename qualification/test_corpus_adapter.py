@@ -151,6 +151,77 @@ def main() -> int:
     )
     check("missing corpus fails closed", r.returncode == 1 and "BLOCKED" in (r.stdout + r.stderr))
 
+    # --- Holdout sealing (M0-Q final correction B) ---
+    # B1: no holdout content in development outputs (no normalized dir, no bytes)
+    out_a = os.path.join(WORK, "sealout-a")
+    r = subprocess.run(
+        [venv, os.path.join(HERE, "corpus_adapter.py"),
+         "--corpus", corpus, "--out", out_a],
+        capture_output=True, text=True,
+    )
+    hold_src = os.path.join(corpus, "receipts_holdout", "holdout_zeta")
+    hold_bytes = []
+    for f in os.listdir(hold_src):
+        hold_bytes.append(open(os.path.join(hold_src, f), "rb").read())
+    leaks = []
+    for root, _dirs, files in os.walk(out_a):
+        for f in files:
+            content = open(os.path.join(root, f), "rb").read()
+            if any(hb in content for hb in hold_bytes if len(hb) > 64):
+                leaks.append(os.path.join(root, f))
+    hold_norm = os.path.join(out_a, "normalized", "receipts_holdout__holdout_zeta")
+    check("B1 holdout content not materialized",
+          not os.path.exists(hold_norm) and not leaks, f"leaks={leaks}")
+    # B2: seal stable across different --out, content-bound to source bytes
+    out_b = os.path.join(WORK, "sealout-b-different-name")
+    subprocess.run(
+        [venv, os.path.join(HERE, "corpus_adapter.py"),
+         "--corpus", corpus, "--out", out_b],
+        capture_output=True, text=True,
+    )
+    seal_a = json.load(open(os.path.join(out_a, "sealed_holdout.json")))[0]
+    seal_b = json.load(open(os.path.join(out_b, "sealed_holdout.json")))[0]
+    check("B2 seal stable across --out", seal_a["seal_sha256"] == seal_b["seal_sha256"],
+          f"{seal_a['seal_sha256'][:12]} vs {seal_b['seal_sha256'][:12]}")
+    # content-binding: flip one source byte (on a COPY; the original is never modified)
+    corpus_mut = os.path.join(WORK, "corpus-mutated")
+    shutil.rmtree(corpus_mut, ignore_errors=True)
+    shutil.copytree(corpus, corpus_mut)
+    victim = os.path.join(corpus_mut, "receipts_holdout", "holdout_zeta",
+                          sorted(os.listdir(os.path.join(corpus_mut, "receipts_holdout", "holdout_zeta")))[0])
+    data = bytearray(open(victim, "rb").read())
+    data[-1] ^= 0xFF
+    open(victim, "wb").write(bytes(data))
+    out_c = os.path.join(WORK, "sealout-c-mutated")
+    subprocess.run(
+        [venv, os.path.join(HERE, "corpus_adapter.py"),
+         "--corpus", corpus_mut, "--out", out_c],
+        capture_output=True, text=True,
+    )
+    seal_c = json.load(open(os.path.join(out_c, "sealed_holdout.json")))[0]
+    check("B2 seal changes when a sealed byte changes",
+          seal_c["seal_sha256"] != seal_a["seal_sha256"],
+          f"{seal_c['seal_sha256'][:12]}")
+    # authorized materialization does not change the development seal...
+    out_ho = os.path.join(WORK, "sealout-ho")
+    subprocess.run(
+        [venv, os.path.join(HERE, "corpus_adapter.py"),
+         "--corpus", corpus, "--out", out_ho, "--include-holdout"],
+        capture_output=True, text=True,
+    )
+    seal_ho = json.load(open(os.path.join(out_ho, "sealed_holdout.json")))[0]
+    check("B2 --include-holdout preserves the development seal",
+          seal_ho["seal_sha256"] == seal_a["seal_sha256"])
+    # explicit --out targeting the canonical gate artifact is refused
+    r = subprocess.run(
+        [venv, os.path.join(HERE, "checks.py"),
+         "--pages", "c00_page_01", "--fixtures-dir", probe_pages,
+         "--out", os.path.join(HERE, "probe_results.json")],
+        capture_output=True, text=True,
+    )
+    check("B7 explicit --out cannot target canonical gate artifact",
+          r.returncode != 0 and "may not target the committed gate artifact" in (r.stdout + r.stderr))
+
     if failures:
         print(f"FAILED: {failures}")
         return 1

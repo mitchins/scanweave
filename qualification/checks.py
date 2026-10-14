@@ -63,6 +63,20 @@ EXPECTED = {
 }
 
 
+def has_intra_word_spaces(text: str) -> bool:
+    """Defect signature of ungrouped per-glyph placement: runs of >=3
+    single-character whitespace-separated tokens ('T o t a l', '1 , 2 3 4')."""
+    run = 0
+    for t in text.split():
+        if len(t) == 1 and not t.isspace():
+            run += 1
+            if run >= 3:
+                return True
+        else:
+            run = 0
+    return False
+
+
 def expected_from_ocr(name: str) -> list[str] | None:
     """Original OCR input (the normalized OCR JSON fixture) — the transport
     contract is verified against THIS source, not a hand-typed list. Returns
@@ -383,19 +397,30 @@ def check_page(name: str) -> dict:
         # unexpected extra text leaves a remainder (or breaks cardinality);
         # string counting is confounded by nested spans ('8' inside "18").
         duplicates_ok = coverage_ok and pos == len(got)
-        ok = cardinality_ok and duplicates_ok and coverage_ok
+        # word-boundary integrity (primary semantic criteria): every span's text
+        # must appear CONTIGUOUSLY in the raw extraction, and no multi-character
+        # span may be split by spaces ('T o t a l' for 'Total' — the M0-Q-A defect
+        # signature). Single-character spans between tokens are legitimate
+        # separators. Whitespace-stripped cardinality stays supplementary.
+        words_ok = all(sv in text for sv in exp)
+        spaces_ok = not any(
+            " ".join(sv) in text for sv in exp if len(sv) > 1
+        )
+        ok = words_ok and spaces_ok and cardinality_ok and duplicates_ok and coverage_ok
         out["checks"][f"extract_{engine}"] = ok
         out[f"extracted_{engine}"] = got
         out[f"transport_{engine}"] = {
-            "cardinality_ok": cardinality_ok,
+            "cardinality_ok": cardinality_ok,          # supplementary
             "duplicates_ok": duplicates_ok,
             "span_coverage_ok": coverage_ok,
+            "word_boundary_ok": words_ok,              # primary: intact words/tokens
+            "no_intra_word_spaces": spaces_ok,         # primary: defect guard
         }
         if not ok:
             out["fail"].append(
-                f"{engine} transport vs original OCR: cardinality={cardinality_ok} "
-                f"duplicates={duplicates_ok} coverage={coverage_ok} "
-                f"(got {len(got)} chars, expected {len(expected)})"
+                f"{engine} transport vs original OCR: words={words_ok} spaces={spaces_ok} "
+                f"cardinality={cardinality_ok} duplicates={duplicates_ok} "
+                f"coverage={coverage_ok} (got {len(got)} chars, expected {len(expected)})"
             )
 
     # 6. renders + visual metrics vs source
@@ -742,6 +767,13 @@ def main() -> int:
     is_gate_run = (args.pages is None) and (not args.fixtures_dir)
     if args.out:
         results_path = os.path.abspath(args.out)
+        if not is_gate_run and results_path == os.path.abspath(canonical):
+            # an explicit --out must not be able to target the canonical gate
+            # artifact from a subset/overridden run either
+            raise SystemExit(
+                "non-gate run may not target the committed gate artifact via --out; "
+                "choose a distinct path"
+            )
     elif is_gate_run:
         results_path = canonical
     else:

@@ -19,6 +19,7 @@ pub fn assemble(
     shapes: &[GlyphShape],
     encodings: &[(usize, String)],
     occurrences: &[(usize, usize, [f64; 4], String, String, String)],
+    span_texts: &std::collections::HashMap<String, String>,
     artwork: &[(usize, [f64; 4])],
     contour_polylines: &std::collections::HashMap<String, Vec<Vec<[f64; 2]>>>,
     page_w_pt: f32,
@@ -204,32 +205,65 @@ pub fn assemble(
 
     content.begin_text();
     content.set_font(Name(b"F1"), 1.0);
-    for (glyph_idx, cid, bbox_px, _span, _symbol, _text) in occurrences {
-        let s = &shapes[*glyph_idx];
-        // source bbox px -> page pt (y flip)
-        let x0 = bbox_px[0] as f32 * 72.0 / 300.0;
-        let x1 = bbox_px[2] as f32 * 72.0 / 300.0;
-        let y0_px = bbox_px[1] as f32;
-        let y1_px = bbox_px[3] as f32;
-        let bottom_pt = page_h_pt - y1_px * 72.0 / 300.0;
-        let top_pt = page_h_pt - y0_px * 72.0 / 300.0;
-        let w_pt = x1 - x0;
-        let h_pt = top_pt - bottom_pt;
-        // glyph ink bbox in font units (baseline at ink bottom)
-        // SCALE from the construction box (ink touches the crop edges, so the
-        // ink size in font units is exactly cw*k x ch*k); TRANSLATION corrected
-        // by the outline's actual on-curve extremes (the traced contour may sit
-        // sub-pixel inside the construction box on a given edge). Renderers
-        // scale TrueType glyph units by unitsPerEm into the 1000-unit PDF
-        // glyph space (measured behaviour).
-        let gx_span = s.ink_span_fu[0] as f32;
-        let gy_span = s.ink_span_fu[1] as f32;
-        let sx = w_pt * upem / gx_span.max(1.0);
-        let sy = h_pt * upem / gy_span.max(1.0);
-        let tx = x0 - (s.anchor_bbox_fu[0] as f32) * sx / upem;
-        let ty = bottom_pt - (s.anchor_bbox_fu[1] as f32) * sy / upem;
-        content.set_text_matrix([sx, 0.0, 0.0, sy, tx, ty]);
-        content.show(Str(&cid_utf16be(*cid)));
+    // Span-grouped runs with /ActualText (SPEC §6.2): the span's exact OCR text
+    // OWNS extraction for the run, so extractors emit whole words/tokens
+    // instead of inserting intra-word spaces between individually-placed glyphs.
+    // The per-glyph ToUnicode entries remain the per-glyph fallback (and the
+    // VS-01 wrong-label semantics); /ActualText is NOT a second layer.
+    let mut groups: Vec<(String, String, Vec<usize>)> = Vec::new();
+    for (i, occ) in occurrences.iter().enumerate() {
+        if let Some(last) = groups.last_mut() {
+            if last.0 == occ.3 {
+                last.2.push(i);
+                continue;
+            }
+        }
+        let actual = span_texts
+            .get(&occ.3)
+            .cloned()
+            .unwrap_or_else(|| occurrences[i].5.clone());
+        groups.push((occ.3.clone(), actual, vec![i]));
+    }
+    for (_, actual, idxs) in &groups {
+        if actual.is_empty() {
+            continue;
+        }
+        // Non-BMP spans are NOT wrapped in /ActualText: PDFium decodes ActualText
+        // as UTF-16 but drops astral scalars in extraction (measured), while the
+        // per-glyph ToUnicode path transports them correctly. BMP word grouping
+        // via ActualText avoids intra-word spaces; astral spans keep the ToUnicode
+        // owner (exact transport wins over word grouping).
+        let astral = actual.chars().any(|c| (c as u32) > 0xFFFF);
+        if !astral {
+            let mut mc = content.begin_marked_content_with_properties(Name(b"Span"));
+            let mut pl = mc.properties();
+            pl.actual_text(TextStr(actual));
+        }
+        for &i in idxs {
+            let (glyph_idx, cid, bbox_px, _span, _symbol, _text) = &occurrences[i];
+            let s = &shapes[*glyph_idx];
+            // source bbox px -> page pt (y flip)
+            let x0 = bbox_px[0] as f32 * 72.0 / 300.0;
+            let x1 = bbox_px[2] as f32 * 72.0 / 300.0;
+            let y0_px = bbox_px[1] as f32;
+            let y1_px = bbox_px[3] as f32;
+            let bottom_pt = page_h_pt - y1_px * 72.0 / 300.0;
+            let top_pt = page_h_pt - y0_px * 72.0 / 300.0;
+            let w_pt = x1 - x0;
+            let h_pt = top_pt - bottom_pt;
+            // SCALE from the construction box (ink touches the crop edges, so
+            // the ink size in font units is exactly cw*k x ch*k); TRANSLATION
+            // corrected by the outline's on-curve extremes.
+            let gx_span = s.ink_span_fu[0] as f32;
+            let gy_span = s.ink_span_fu[1] as f32;
+            let sx = w_pt * upem / gx_span.max(1.0);
+            let sy = h_pt * upem / gy_span.max(1.0);
+            let tx = x0 - (s.anchor_bbox_fu[0] as f32) * sx / upem;
+            let ty = bottom_pt - (s.anchor_bbox_fu[1] as f32) * sy / upem;
+            content.set_text_matrix([sx, 0.0, 0.0, sy, tx, ty]);
+            content.show(Str(&cid_utf16be(*cid)));
+        }
+        content.end_marked_content();
     }
     content.end_text();
     let content_bytes = content.finish();
