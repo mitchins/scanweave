@@ -14,6 +14,14 @@ pub use scanweave_io::{
 pub use scanweave_io::convert::{convert, Input, Policy, Report};
 
 #[derive(Debug, Clone, serde::Serialize)]
+pub struct PatchRecord {
+    pub bbox_px: [f64; 4],
+    pub w: u32,
+    pub h: u32,
+    pub rgb_sha256: String,
+}
+
+#[derive(Debug, Clone, serde::Serialize)]
 pub struct GlyphStat {
     pub gid: usize,
     pub symbol_id: String,
@@ -215,6 +223,7 @@ pub fn build_page(page_dir: &PathBuf, out_dir: &PathBuf) -> Result<Report, Strin
     // legacy shim report fields (io Report mirrors the shim shape)
     let mut report = Report {
         glyph_stats: out.report.glyph_stats.clone(),
+        patches: out.report.patches.clone(),
         occurrences: out.report.occurrences.clone(),
         page_id: out.report.page_id.clone(),
         policy: out.report.policy.clone(),
@@ -235,6 +244,7 @@ pub fn build_page(page_dir: &PathBuf, out_dir: &PathBuf) -> Result<Report, Strin
         ownership_invariants: out.report.ownership_invariants.clone(),
         elapsed_ms: out.report.elapsed_ms,
     };
+    report.elapsed_ms = out.report.elapsed_ms;
     let _ = &mut report;
     Ok(report)
 }

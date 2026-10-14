@@ -1,0 +1,11 @@
+# M1-A deliverable manifest (sha1 of the exact bytes this build produces)
+# commands:
+# scanweave build qualification/fixtures/probe/p16_statement/p16_statement.png --ocr qualification/fixtures/probe/p16_statement/tess.hocr --dpi 300 --output clean.pdf --report clean.json
+# scanweave build qualification/fixtures/probe/p11_touching/p11_touching.png --ocr qualification/fixtures/probe/p11_touching/tess.hocr --dpi 300 --output touching.pdf --report touching.json
+# scanweave build qualification/fixtures/probe/p14_noisy/p14_noisy.png --ocr qualification/fixtures/probe/p14_noisy/tess.hocr --dpi 300 --output fallback.pdf --report fallback.json
+21cc83273253b1de0b724dfbfc7abb417e976440  work/m1a-final/clean.pdf
+71e3676272b3ce747201a9e4457c697d5c2d691f  work/m1a-final/fallback.pdf
+676bf03c8b59f8ca7e714c663be6de207243fe48  work/m1a-final/touching.pdf
+74a6bd00efb842233ebf0e01886aa14a2368c67a  work/m1a-final/clean.json
+d52e09e8539217fc4f71b52509293d2aa81a7881  work/m1a-final/fallback.json
+b025b8c2002b7b9ab07ad428c53b89001d1a5113  work/m1a-final/touching.json

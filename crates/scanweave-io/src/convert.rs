@@ -67,6 +67,16 @@ pub struct OccurrenceRecord {
 }
 
 #[derive(Debug, Clone, Serialize)]
+pub struct PatchRecord {
+    pub bbox_px: [f64; 4],
+    pub w: u32,
+    pub h: u32,
+    /// sha256 of the embedded RGB bytes (fidelity audits compare this against
+    /// the source crop so a paper-only patch cannot masquerade as a restore)
+    pub rgb_sha256: String,
+}
+
+#[derive(Debug, Clone, Serialize)]
 pub struct GlyphStat {
     pub gid: usize,
     pub stages: crate::units::StageMetrics,
@@ -79,6 +89,7 @@ pub struct GlyphStat {
 #[derive(Debug, Clone, Serialize)]
 pub struct Report {
     pub glyph_stats: Vec<GlyphStat>,
+    pub patches: Vec<PatchRecord>,
     pub occurrences: Vec<OccurrenceRecord>,
     pub page_id: String,
     pub policy: Policy,
@@ -97,6 +108,7 @@ pub struct Report {
     pub raster_bytes: usize,
     pub semantic_owner: BTreeMap<String, String>,
     pub ownership_invariants: BTreeMap<String, bool>,
+    #[serde(skip_serializing)]
     pub elapsed_ms: u128,
 }
 
@@ -240,6 +252,44 @@ pub fn convert(input: &Input, policy: &Policy) -> Result<Output, String> {
     }
     for (au, _) in &plan.artwork_units {
         coverage.other_ink_px += au.mask.iter().filter(|b| **b).count() as u64;
+    }
+    // honest page-level ink census: count how many owners claim each foreground
+    // pixel (units raster+vector and artwork, via their crop masks). unowned =
+    // fg ink claimed by nobody; multiply_owned = claimed more than once.
+    {
+        let mut claim: Vec<u8> = vec![0u8; (w as usize) * (h as usize)];
+        let mut stamp = |bbox: [f64; 4], mask: &[bool]| {
+            let (x0, y0) = (bbox[0].floor() as usize, bbox[1].floor() as usize);
+            let mw = (bbox[2].ceil() as usize).saturating_sub(x0);
+            for (i, on) in mask.iter().enumerate() {
+                if !*on {
+                    continue;
+                }
+                let (cx, cy) = (i % mw, i / mw);
+                let (px, py) = (x0 + cx, y0 + cy);
+                if px < w as usize && py < h as usize {
+                    claim[py * w as usize + px] = claim[py * w as usize + px].saturating_add(1);
+                }
+            }
+        };
+        for r in &regions {
+            for &ui in &r.units {
+                stamp(plan.owned[ui].unit.bbox_px, &plan.owned[ui].unit.mask);
+            }
+        }
+        for (au, _) in &plan.artwork_units {
+            stamp(au.bbox_px, &au.mask);
+        }
+        for (i, fg) in seg.fg.iter().enumerate() {
+            if !*fg {
+                continue;
+            }
+            match claim[i] {
+                0 => coverage.unowned_ink_px += 1,
+                1 => {}
+                _ => coverage.multiply_owned_ink_px += 1,
+            }
+        }
     }
 
     // tracing (vector regions only); failures → raster -------------------------
@@ -561,8 +611,18 @@ pub fn convert(input: &Input, policy: &Policy) -> Result<Output, String> {
         }
     }
     glyph_stats.retain(|st| !st.symbol_id.is_empty() || st.contours > 0);
+    let patch_records: Vec<PatchRecord> = patches
+        .iter()
+        .map(|p| PatchRecord {
+            bbox_px: p.bbox_px,
+            w: p.w,
+            h: p.h,
+            rgb_sha256: scanweave_core::hash_hex(&p.rgb),
+        })
+        .collect();
     let report = Report {
         glyph_stats,
+        patches: patch_records,
         occurrences: occ_records,
         page_id: input.page_id.clone(),
         policy: policy.clone(),

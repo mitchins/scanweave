@@ -108,6 +108,17 @@ def main() -> int:
         # NATIVE PDFium search (textpage.search + get_next) — operator-required gate
         check(f"pdfium NATIVE search {q!r}", pdfium_native_search(b2, q))
         check(f"pdfium B0 NATIVE search {q!r}", pdfium_native_search(b0, q))
+    # the operator's three required queries, verbatim, both engines
+    for q in (
+        "INV-2026-0042",
+        "Total amount due: 1,234.56 EUR",
+        "Please pay within 30 days.",
+    ):
+        check(f"pdfium B2 required query {q!r}", q in pt)
+        check(f"pdfium B0 required query {q!r}", q in pt_b0)
+        check(f"poppler B2 required query {q!r}", q in qt)
+        check(f"pdfium NATIVE required query {q!r}", pdfium_native_search(b2, q))
+        check(f"pdfium B0 NATIVE required query {q!r}", pdfium_native_search(b0, q))
 
     # intact words / no intra-word whitespace (both engines, B2 and B0)
     check("pdfium B2 no intra-word spaces", not has_intra_word_spaces(pt), repr(pt[:60]))

@@ -321,6 +321,30 @@ fn m1a09_pipeline_restores_raster_and_owner() {
             }
         }
         assert!(ink > 0, "fallback region {:?} must contain real source ink (its raster patch restores glyphs, not paper)", reg.id);
+        // fidelity: the patch covering this region must embed a sha of the
+        // SOURCE crop (not paper-only, not re-rendered) — compare sha of the
+        // source rgb inside the patch box to the reported patch sha
+        let patch = r
+            .patches
+            .iter()
+            .find(|p| {
+                p.bbox_px[0] <= b[0] + 1.0 && p.bbox_px[1] <= b[1] + 1.0 && p.bbox_px[2] >= b[2] - 1.0 && p.bbox_px[3] >= b[3] - 1.0
+            })
+            .expect("a patch must cover the fallback region");
+        let (px0, py0) = (patch.bbox_px[0] as usize, patch.bbox_px[1] as usize);
+        let (px1, py1) = (patch.bbox_px[2] as usize, patch.bbox_px[3] as usize);
+        let mut crop = Vec::with_capacity(((px1 - px0) * (py1 - py0)) * 3);
+        for yy in py0..py1.min(h as usize) {
+            for xx in px0..px1.min(w as usize) {
+                let i = ((yy * w as usize) + xx) * 3;
+                crop.extend_from_slice(&rgb[i..i + 3]);
+            }
+        }
+        let crop_sha = scanweave_core::hash_hex(&crop);
+        assert_eq!(
+            crop_sha, patch.rgb_sha256,
+            "restored raster patch must be byte-identical to the source crop (fidelity)"
+        );
     }
     for s in &r.semantic_owner {
         assert!(
