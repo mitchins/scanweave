@@ -252,3 +252,38 @@ Correction record (red→green):
   content materialized; seal content-bound and location-independent;
   --include-holdout preserves the development seal; --out to the canonical gate
   artifact refused.
+
+## Operator acceptance + carry-forward items (2026-10-14)
+
+- Operator ACCEPTED closure of the M0-Q final correctness correction at `392d42d`
+  (acceptance ledger `4c950da`). Disposition verified by the operator: 8/8 E-proofs,
+  32/32 reproduction hashes, 118/118 transport with intact word boundaries/identifiers,
+  holdout sealing corrected, 38 tests, existing FAILs retained. No fresh re-execution or
+  replacement baseline required.
+- Standing: **M0 PROVISIONAL; M0-Q CLOSED; M1 NOT AUTHORIZED.** No new baseline.
+
+### Carry-forward items for the NEXT qualification run (recorded, not executed — charter closed)
+
+1. **Native PDFium search assertion.** `qualification/test_text_search.py` verifies the
+   three queries ("Total", "1,234.56", "INV-2026-0042") by substring membership in the
+   extracted text, which establishes the extracted strings but not independently verified
+   native search behavior. Next run must assert via pypdfium2's native API:
+   `tp = page.get_textpage(); searcher = tp.search(q); assert searcher.get_next()`
+   (API surface verified against the installed pypdfium2 in this session; on the current
+   artifact all three queries return FOUND natively — attached as preliminary evidence,
+   but the assertion must live in the next run's suite per operator direction).
+   Apply the same native pattern to the extended token set (p08 '-42'/'1,234.56',
+   p04 'fi'/'𝐀', p03 'ガ', p10 'Page n of 4').
+2. **M1 ownership-solver brief correction.** The brief must acknowledge that the original
+   113/118 touching-character regression is ALREADY FIXED (red→green evidence at
+   `probes/m0-font-pdf/tests/transport_regression.rs`: 118/118 exact order in both
+   engines; merged components carried as single visual units with multi-character
+   ToUnicode). M1 generalizes the solution (nested/hierarchical ownership, multi-symbol
+   shared units under real scan noise); it must NOT implement it again.
+
+### Next milestone sequence (operator)
+
+1. Mount the benign development corpus, keeping the holdout sealed.
+2. Execute real-document qualification and characterize remaining visual failures.
+3. Independently adjudicate the `m0-qual-1` proposal.
+4. Make the M1 authorization decision based on that evidence.
