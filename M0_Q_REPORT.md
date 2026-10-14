@@ -242,7 +242,7 @@ real-corpus gate stays BLOCKED.
 External-comparison commands fail closed (`measure.py` `run_external`: prior
 outputs deleted, tool failure raises a precise reason instead of silently
 reusing stale outputs or reporting smaller totals). Measurements regenerated on
-the final revision: p09 B2=24,110 B / IA MRC 45,020 B / OCRmyPDF 40,120 B;
+the final revision: p09 B2=24,110 B / IA MRC 45,020 B / OCRmyPDF 40,118 B;
 p10 totals B2=100,490 B = 0.59× OCRmyPDF, 0.53× IA MRC. The
 "non-quality-equivalent" mark for documents with missing OCR characters is
 SUPERSEDED by the item-2 repair: p09/p10 now transport 118/118(and p10's
