@@ -38,9 +38,11 @@ Round-2 review (`8af770d`) additionally found and all are fixed here:
 
 ## 2. Deliverables (reproduce)
 
-OCR inputs: `tess.hocr` = real tesseract 5.5.0 hOCR for p06/p14/p16; p11/p12
-use derived synthetic boxes (`.synth.json`) because tesseract cannot produce
-char boxes for deliberately-touching glyphs (the fixture's point).
+OCR inputs for all three deliverables are **real tesseract 5.5.0 hOCR**
+(`tess.hocr`). The `.synth.json` files in p11/p12 are *ground-truth
+cross-checks* written by `make_synth_ocr.py` (the char boxes the fixture
+intentionally produces, used by the m1a Rust tests to assert ownership
+independently of tesseract's own merged-box behaviour).
 
 ```
 cargo run -p scanweave-cli -- build qualification/fixtures/probe/p16_statement/p16_statement.png \
@@ -55,6 +57,13 @@ cargo run -p scanweave-cli -- build qualification/fixtures/probe/p14_noisy/p14_n
   --ocr qualification/fixtures/probe/p14_noisy/tess.hocr --dpi 300 \
   --output work/m1a-final/fallback.pdf --report work/m1a-final/fallback.json
 ```
+
+Caveat on the last two columns: `unowned_ink_px` / `multiply_owned_ink_px`
+are a real page-level pixel census (`convert.rs`, claim-count over
+segmentation masks), but the plan's ownership invariant makes both 0 on
+fixtures that satisfy the invariants — they are guard metrics that would
+non-zero if the solver ever dropped or double-assigned ink, not independent
+quality scores.
 
 | Deliverable | PDF size | Text ink px | Vector ink px | Raster ink px | Vector % of eligible | Fallback spans | Unowned | Double-inked (text) |
 |-------------|---------:|------------:|--------------:|--------------:|---------------------:|---------------:|--------:|-------------:|
@@ -71,9 +80,10 @@ denominator note: `text_ink_px_total` counts OCR-owned text ink; unrecognized
 ink is separately reported as `other_ink_px` (3486 / 3657 / 2096), so the vector
 percentages exclude nothing that was claimed.
 
-Determinism report: the report JSON is deterministic by construction
-(`BTreeMap` maps, no timing field in the byte-compared output; `elapsed_ms`
-excluded by the harness comparison, as in M0).
+Determinism report: the report JSON is deterministic by construction — maps
+are `BTreeMap`, and `elapsed_ms` is `#[serde(skip_serializing)]`, i.e. the
+wall-clock field is omitted from the serialized report entirely (not stripped
+by a comparison).
 
 ## 3. Behavior gates (M1A-01..M1A-10)
 
@@ -132,9 +142,13 @@ New or changed by M1-A:
   remain during the M1-A refactor; removal is M1-B scope.
 - **L5 — System font paths in the fixture generator.** `qualification/
   make_m1a_fixtures.py` (a dev-only fixture generator, not pipeline code)
-  references fonts by their standard `/usr/share/fonts` locations, and the
-  fixture hOCR `image` attributes carry absolute paths written by tesseract.
-  No crate code or qualification gate contains hard-coded absolute paths.
+  references fonts by their standard `/usr/share/fonts` locations; fixture
+  hOCR `image` attributes carry absolute paths written by tesseract. No
+  crate code or qualification gate contains hard-coded absolute paths.
+- **L6 — Deliverable artifacts under an ignored directory.** `work/` is in
+  `.gitignore`; `work/m1a-final/` was force-added (`git add -f`) at 650dafa.
+  Regenerating deliverables locally will therefore not be auto-tracked; the
+  manifest must be re-committed by hand after any rebuild.
 
 ## 6. Freeze points verified
 
@@ -154,3 +168,55 @@ New or changed by M1-A:
 This report is submitted for the second independent review (the M1-A
 implementation gate). The reviewer should verify the §0 fix table, re-run the
 suites, and confirm no new regressions against the accepted `f5e5cb5` state.
+
+## Appendix A. Execution evidence (author run, this tree)
+
+All commands below were executed by the author in this tree
+(2026-10-15, commits 650dafa/0108d21). Outputs verbatim:
+
+```
+$ cargo test
+test result: ok. 46 passed; 0 failed   (38 inherited M0 + 8 M1A)
+
+$ cargo test -p m0-font-pdf --test m1a_behavior
+test m1a01_touging_chars_map_to_one_unit ... ok
+test m1a02_disconnected_marks_preserved ... ok
+test m1a03_overlapping_boxes_no_loss ... ok
+test m1a04_unknown_marks_stay_art ... ok
+test m1a06_wrong_label_shape_identity ... ok
+test m1a08_same_masks_different_labels_same_ownership ... ok
+test m1a09_pipeline_restores_raster_and_owner ... ok
+test m1a10_deterministic_repeat_runs ... ok
+test result: ok. 8 passed; 0 failed
+
+$ qualification/.venv/bin/python qualification/checks.py
+PASS E0_key_property ... PASS E7_determinism   (8/8 e-proofs)
+FAIL lines: p01..p08 visual gates (inherited, zero flips vs f5e5cb5),
+p08 pdfium transport cardinality (inherited)
+
+$ qualification/.venv/bin/python qualification/test_text_search.py
+48 PASS, 1 FAIL: "p10 page1 pdfium 'Page 1 of 4'" (documented N1:
+PDFium hoists the invisible owner run; Poppler order correct)
+The 15 required-query checks (3 queries × containment B2/B0/poppler +
+native search B2/B0) all PASS.
+
+$ qualification/.venv/bin/python qualification/test_corpus_adapter.py
+miniature synthetic corpus pipeline test passed
+$ qualification/.venv/bin/python qualification/test_subpixel_metric.py
+all sub-pixel metric analytical tests passed
+$ python3 qualification/validate_fixtures.py
+schema fixture layer: all fixtures behave as expected
+
+$ (double builds of all three deliverables; cmp of PDF and report)
+clean pdf identical / clean report identical
+touching pdf identical / touching report identical
+fallback pdf identical / fallback report identical
+sha1s recorded in work/m1a-final/MANIFEST.txt:
+  21cc83273253b1de0b724dfbfc7abb417e976440  clean.pdf
+  71e3676272b3ce747201a9e4457c697d5c2d691f  fallback.pdf
+  676bf03c8b59b8ca7e714c663be6de207243fe48  touching.pdf
+  (report JSONs likewise)
+
+$ qpdf --check work/m1a-final/*.pdf
+all three: "checking <file>" — no syntax errors reported
+```
