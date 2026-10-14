@@ -149,23 +149,60 @@ pub fn assemble_raster(
     content.begin_text();
     content.set_font(Name(b"F1"), 1.0);
     content.set_text_rendering_mode(TextRenderingMode::Invisible);
-    for (glyph_idx, cid, bbox_px, _span, _symbol, _text) in occurrences {
-        let s = &shapes[*glyph_idx];
-        let x0 = bbox_px[0] as f32 * 72.0 / 300.0;
-        let x1 = bbox_px[2] as f32 * 72.0 / 300.0;
-        let y0_px = bbox_px[1] as f32;
-        let y1_px = bbox_px[3] as f32;
-        let bottom_pt = page_h_pt - y1_px * 72.0 / 300.0;
-        let top_pt = page_h_pt - y0_px * 72.0 / 300.0;
-        let w_pt = x1 - x0;
-        let h_pt = top_pt - bottom_pt;
-        let gx_span = s.ink_span_fu[0];
-        let gy_span = s.ink_span_fu[1];
-        let sx = w_pt * upem / (gx_span as f32).max(1.0);
-        let sy = h_pt * upem / (gy_span as f32).max(1.0);
-        content.set_text_matrix([sx, 0.0, 0.0, sy, x0, bottom_pt]);
-        let c = cid + 1;
-        content.show(Str(&[(c >> 8) as u8, (c & 0xFF) as u8]));
+    // span-grouped /ActualText runs (same construction as the reconstruction):
+    // the span's exact OCR text owns extraction so the invisible layer searches
+    // as words; astral spans keep the per-glyph ToUnicode owner (PDFium drops
+    // astral scalars inside ActualText) and emit no mark at all
+    let mut groups: Vec<(String, String, Vec<usize>)> = Vec::new();
+    for (i, occ) in occurrences.iter().enumerate() {
+        if let Some(last) = groups.last_mut() {
+            if last.0 == occ.3 {
+                last.2.push(i);
+                continue;
+            }
+        }
+        let actual = span_texts
+            .get(&occ.3)
+            .cloned()
+            .unwrap_or_else(|| occurrences[i].5.clone());
+        groups.push((occ.3.clone(), actual, vec![i]));
+    }
+    for (_, actual, idxs) in &groups {
+        if actual.is_empty() {
+            continue;
+        }
+        let astral = actual.chars().any(|c| (c as u32) > 0xFFFF);
+        let mut opened_mark = false;
+        if !astral {
+            let mut mc = content.begin_marked_content_with_properties(Name(b"Span"));
+            let mut pl = mc.properties();
+            pl.actual_text(TextStr(actual));
+            opened_mark = true;
+        }
+        {
+            for &i in idxs {
+                let (glyph_idx, cid, bbox_px, _span, _symbol, _text) = &occurrences[i];
+                let s = &shapes[*glyph_idx];
+                let x0 = bbox_px[0] as f32 * 72.0 / 300.0;
+                let x1 = bbox_px[2] as f32 * 72.0 / 300.0;
+                let y0_px = bbox_px[1] as f32;
+                let y1_px = bbox_px[3] as f32;
+                let bottom_pt = page_h_pt - y1_px * 72.0 / 300.0;
+                let top_pt = page_h_pt - y0_px * 72.0 / 300.0;
+                let w_pt = x1 - x0;
+                let h_pt = top_pt - bottom_pt;
+                let gx_span = s.ink_span_fu[0];
+                let gy_span = s.ink_span_fu[1];
+                let sx = w_pt * upem / (gx_span as f32).max(1.0);
+                let sy = h_pt * upem / (gy_span as f32).max(1.0);
+                content.set_text_matrix([sx, 0.0, 0.0, sy, x0, bottom_pt]);
+                let c = cid + 1;
+                content.show(Str(&[(c >> 8) as u8, (c & 0xFF) as u8]));
+            }
+            if opened_mark {
+                content.end_marked_content();
+            }
+        }
     }
     content.end_text();
     let content_bytes = content.finish();

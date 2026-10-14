@@ -234,10 +234,12 @@ pub fn assemble(
         // via ActualText avoids intra-word spaces; astral spans keep the ToUnicode
         // owner (exact transport wins over word grouping).
         let astral = actual.chars().any(|c| (c as u32) > 0xFFFF);
+        let mut opened_mark = false;
         if !astral {
             let mut mc = content.begin_marked_content_with_properties(Name(b"Span"));
             let mut pl = mc.properties();
             pl.actual_text(TextStr(actual));
+            opened_mark = true;
         }
         for &i in idxs {
             let (glyph_idx, cid, bbox_px, _span, _symbol, _text) = &occurrences[i];
@@ -263,7 +265,9 @@ pub fn assemble(
             content.set_text_matrix([sx, 0.0, 0.0, sy, tx, ty]);
             content.show(Str(&cid_utf16be(*cid)));
         }
-        content.end_marked_content();
+        if opened_mark {
+            content.end_marked_content();
+        }
     }
     content.end_text();
     let content_bytes = content.finish();

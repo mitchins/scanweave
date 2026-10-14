@@ -294,7 +294,7 @@ non-duplicated (118/118). `qualification/test_text_search.py` extends the gate:
 decimals, negative amounts (`-42`), invoice references, ligatures (`fi`), kana
 (`ガ` intact), supplementary-plane (`𝐀`), the `1,234.56` token across p08/p10, and a
 defect-signature guard. B2 size grew 24,110 → 25,005 B on p09 (the BDC wrappers;
-honest cost of a correct text layer; B2 still 0.62× the OCREmyPDF 40,121 B baseline).
+honest cost of a correct text layer; B2 still 0.62× the OCRmyPDF 40,119 B baseline).
 
 **Extracted verification (checks.py):** `word_boundary_ok` (every span text appears
 contiguously in the raw extraction) and `no_intra_word_spaces` (no multi-char span
@@ -332,7 +332,7 @@ run (fail-closed), guarding the evidence destination even against deliberate pat
   32/32 artifacts byte-identical against the committed `repro_hashcheck.json`
   (regenerated on this revision), pixel hash independently re-derived.
 - Baselines regenerated (fail-closed externals): p09 B2 25,005 B / IA MRC 45,020 B /
-  OCRmyPDF 40,121 B; p10 B2 totals with repeated-text ratios unchanged.
+  OCRmyPDF 40,119 B; p10 B2 totals with repeated-text ratios unchanged.
 - Visual gates unchanged (honest margins); p08 pdfium transport FAIL preserved;
   p08's DEFECT-A fix evidence attached.
 - PROVISIONAL stands; M1 NOT authorized. m0-qual-1 remains a draft pending

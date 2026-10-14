@@ -295,12 +295,26 @@ def check_page(name: str) -> dict:
     out["pdf_bytes"] = os.path.getsize(pdf_path)
     out["ttf_bytes"] = os.path.getsize(ttf_path)
 
-    # 2. qpdf --check
+    # 2. qpdf --check + marked-content balance (qpdf does NOT check BDC/EMC
+    #    pairing — the astral fix regression was invisible to it, so it is
+    #    asserted structurally here)
     env = dict(os.environ, LD_LIBRARY_PATH=os.path.join(ROOT, "tools", "dist", "lib"))
     r = sh([QPDF, "--check", pdf_path], env=env)
     out["checks"]["qpdf"] = r.returncode == 0
     if r.returncode != 0:
         out["fail"].append(f"qpdf --check rc={r.returncode}: {r.stderr[:300]}")
+    qdf = os.path.join(out_dir, "out.qdf.pdf")
+    qr = sh([QPDF, "--qdf", "--object-streams=disable", pdf_path, qdf], env=env)
+    if qr.returncode == 0:
+        raw = open(qdf, "rb").read()
+        bdc, emc = raw.count(b"BDC\n"), raw.count(b"EMC\n")
+        out["checks"]["marked_content_balanced"] = bdc == emc
+        out["marked_content"] = {"bdc": bdc, "emc": emc}
+        if bdc != emc:
+            out["fail"].append(f"marked content unbalanced: BDC={bdc} EMC={emc}")
+    else:
+        out["checks"]["marked_content_balanced"] = False
+        out["fail"].append("qpdf --qdf failed; balance not checked")
 
     # 3. ots-sanitize
     r = sh([OTS, ttf_path])
