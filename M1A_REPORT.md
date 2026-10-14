@@ -143,7 +143,7 @@ by a comparison).
 |---|---|
 | `cargo test` | **46 passed, 0 failed** (38 M0 + 8 M1A) |
 | `checks.py` E0..E7 e-proofs | **8/8 PASS** (E0 four-part key, E1 outline+CIDs, E2 two GIDs one string, E3 wrong label, E4 UTF-16 transport, E5 kana, E6 span owners, E7 determinism) |
-| `checks.py` default 8 pages | visual gates: 8/8 pages FAIL — **inherited, unchanged from the accepted M0-Q baseline `f5e5cb5`** (verified by a full check-value diff: zero flips; only p06 MAE metrics improved 0.0103→0.0044). p08 pdfium transport cardinality FAIL — also unchanged/inherited. |
+| `checks.py` default 8 pages | visual gates: 8/8 pages FAIL — **inherited, unchanged from the accepted M0-Q baseline `f5e5cb5`** (verified by a full check-value diff: zero flips; only p06's raw metrics moved, and in both directions — MAE improved 0.0103→0.0044 while IoU worsened 0.9931→0.9419, disclosed in §5). p08 pdfium transport cardinality FAIL — also unchanged/inherited. |
 | `test_text_search.py` | All required gates PASS: three required queries found by NATIVE PDFium search in B2 and B0, astral `𝐀`, kana, p08 decimals, no intra-word spaces, qpdf `--check`. One FAIL (§5 N1). |
 | `test_corpus_adapter.py` | PASS |
 | `test_subpixel_metric.py` | PASS |
