@@ -109,7 +109,8 @@ def main() -> int:
     names = sorted(os.listdir(probe_pages))
     r = subprocess.run(
         [venv, os.path.join(HERE, "checks.py"),
-         "--pages", ",".join(names), "--fixtures-dir", probe_pages],
+         "--pages", ",".join(names), "--fixtures-dir", probe_pages,
+         "--out", os.path.join(WORK, "corpus_checks.json")],
         capture_output=True, text=True,
     )
     printed = r.stdout + r.stderr

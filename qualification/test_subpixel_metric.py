@@ -49,10 +49,11 @@ def ideal_edge_image(h, w, edge_x, ink=INK, paper=PAPER, vertical=True, invert=F
     cov = np.clip(np.arange(n) - (edge_x - 1.0), 0.0, 1.0)
     cov = 1.0 - cov if False else cov
     if invert:
-        # left side paper, right side ink: ink coverage ascends left->right
-        row = ink + (paper - ink) * cov
-    else:
+        # paper left, ink right
         row = ink + (paper - ink) * (1.0 - cov)
+    else:
+        # ink left, paper right
+        row = ink + (paper - ink) * cov
     if vertical:
         return np.tile(row, (h, 1))
     return np.tile(row.reshape(-1, 1), (1, w))

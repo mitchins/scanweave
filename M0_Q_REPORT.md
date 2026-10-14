@@ -152,7 +152,7 @@ expectation (when reconstruction helps) is what this table establishes on this m
 |---|---|---|---|
 | 1 | Pipeline end-to-end (synthetic, 8 gate pages) | PASS (qpdf/OTS/extraction/visual per page where applicable) | checks.py; probe_results.json |
 | 1b | p08 pdfium span-ordering transport | **FAIL (preserved per operator directive)** — scattered-symbol layout: cardinality ✓, duplicates ✓, span ORDER ✗ | probe_results.json transport_pdfium; M0_Q_REPORT §2 |
-| 2 | Independent reproduction (36 tests, 32/32 artifacts byte-equal, 8 pages) | PASS | REPRODUCTION.md; repro_hashcheck.json |
+| 2 | Independent reproduction (38 tests, 32/32 artifacts byte-equal, 8 pages) | PASS | REPRODUCTION.md; repro_hashcheck.json |
 | 3 | E0–E7 font-graph proofs | PASS (8/8) | probe_results.json + QDF re-parse (prior review) |
 | 4 | Six negative schema fixtures, dual layer | PASS | validate_fixtures.py + Rust tests |
 | 5 | B0 raster baseline (transport/neutral/qpdf) | PASS | measurements.json |
@@ -191,7 +191,7 @@ contour; AA-invariant), degenerate ramps skipped. New analytical tests
 (phases 0/0.25/0.5/0.75), horizontal/vertical/inverted polarity, low-contrast
 colour pairs, a known 0.3 px two-render offset, and a mirrored-implementation
 regression guard — all pass within the derived linear-interpolation bias bound
-((√2−1)/2 ≈ 0.086 px; tests assert 0.09 px). Regenerated visual results:
+((3/2−√2) = (√2−1)²/2 ≈ 0.086 px; tests assert 0.09 px). Regenerated visual results:
 Poppler p95 now measures 0.50–0.52 px (the old mirrored metric read low at
 0.25–0.29); pdfium 0.51–1.00 px. MAE: Poppler passes every page (p01 0.0038),
 pdfium also passes MAE; the remaining gate failures are (a) Poppler edge p95

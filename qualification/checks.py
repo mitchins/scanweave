@@ -127,7 +127,8 @@ def subpixel_boundary_points(gray: np.ndarray, m: np.ndarray, i50: float) -> np.
     each image independently of its rasterizer's anti-aliasing strength.
 
     Known bound: linear interpolation of an ideal area-coverage edge has a
-    phase-dependent bias of at most (sqrt(2)-1)/2 ~= 0.086 px; analytical tests
+    phase-dependent bias of at most (3/2 - sqrt(2)) = (sqrt(2)-1)^2/2 ~= 0.086 px;
+    analytical tests
     assert recovery within 0.09 px on that basis.
 
     Returns continuous points (pixel centres at x+0.5, y+0.5)."""
@@ -728,7 +729,24 @@ def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--pages", help="comma-separated page list")
     ap.add_argument("--fixtures-dir", help="override the probe fixtures root (corpus bundles)")
+    ap.add_argument("--out", help="results output path. Defaults to the committed "
+                                  "gate artifact qualification/probe_results.json ONLY for "
+                                  "default gate runs; non-gate runs MUST pass a distinct "
+                                  "path so gate evidence can never be overwritten")
     args = ap.parse_args()
+    pages_in_run = [p.strip() for p in args.pages.split(",") if p.strip()] if args.pages else list(DEFAULT_PAGES)
+    canonical = os.path.join(HERE, "probe_results.json")
+    is_gate_run = (not args.fixtures_dir) and set(pages_in_run) <= set(DEFAULT_PAGES)
+    if args.out:
+        results_path = os.path.abspath(args.out)
+    elif is_gate_run:
+        results_path = canonical
+    else:
+        # never silently overwrite (or dilute) the committed gate evidence
+        raise SystemExit(
+            "non-gate run requires --out <path>; the committed gate artifact "
+            f"{os.path.relpath(canonical, ROOT)} is protected"
+        )
     if args.fixtures_dir:
         global FIXTURES
         FIXTURES = os.path.abspath(args.fixtures_dir)
@@ -739,7 +757,7 @@ def main() -> int:
     results["tools"]["pdfium"] = "pypdfium2 bundled"
     results["tools"]["ots"] = sh([OTS, "--version"]).stdout.strip()
 
-    pages = [p.strip() for p in args.pages.split(",") if p.strip()] if args.pages else list(DEFAULT_PAGES)
+    pages = pages_in_run
     all_ok = True
     for name in pages:
         res = check_page(name)
@@ -750,9 +768,9 @@ def main() -> int:
 
     e_proofs(results)
 
-    with open(os.path.join(HERE, "probe_results.json"), "w") as f:
+    with open(results_path, "w") as f:
         json.dump(results, f, indent=1, default=str)
-    print("results written to qualification/probe_results.json")
+    print(f"results written to {os.path.relpath(results_path, ROOT)}")
     return 0 if all_ok else 1
 
 
