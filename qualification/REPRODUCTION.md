@@ -8,11 +8,13 @@ final review ("re-parsed but did not execute").
 ## Reproduction checkout
 
 - Frozen baseline tag `m0-provisional-baseline` → commit `3172a32` (operator-accepted).
-- Final-tree reproduction checkout: `597386f` (M0-Q REVISE repairs). The subsequent
-  commit `9c28819` adds ONLY the committed digest record
-  (`qualification/repro_hashcheck.json`) produced by this reproduction — no code.
-- Scope: 8 gate pages; 32 acceptance artifacts (8 × out.pdf / out.ttf / b0_raster.pdf /
-  b0_notext.pdf).
+- **Current reproduction checkout: the hardening-pass final revision (HEAD at time of
+  writing; the commit after "corpus test reads its own results file").** Committed
+  record from this reproduction: `repro_hashcheck.json` (32/32 byte-identical, full
+  digests, `all_equal: true`), 38 cargo tests, 8 gate pages, 8/8 E-proofs.
+- Earlier reproduction checkouts retain their own records: `597386f` (M0-Q REVISE
+  repairs; 36 tests — the transport-regression tests did not yet exist there;
+  LEDGER.md:134) and `9c28819` (digest record only).
 
 ## Environment (recorded)
 

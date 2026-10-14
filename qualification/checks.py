@@ -736,7 +736,10 @@ def main() -> int:
     args = ap.parse_args()
     pages_in_run = [p.strip() for p in args.pages.split(",") if p.strip()] if args.pages else list(DEFAULT_PAGES)
     canonical = os.path.join(HERE, "probe_results.json")
-    is_gate_run = (not args.fixtures_dir) and set(pages_in_run) <= set(DEFAULT_PAGES)
+    # ONLY the full default run (no --pages, no --fixtures-dir) writes the
+    # committed gate artifact; any subset or override must pass --out, so a
+    # partial run can never dilute the canonical evidence.
+    is_gate_run = (args.pages is None) and (not args.fixtures_dir)
     if args.out:
         results_path = os.path.abspath(args.out)
     elif is_gate_run:
