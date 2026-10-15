@@ -1,0 +1,10 @@
+# M1-B deliverable manifest — reproduce with:
+# scanweave build --bundle qualification/fixtures/documents/doc4_invoice/document.json --output doc4_invoice.pdf --report doc4_invoice.json
+# scanweave build qualification/fixtures/probe/p10_multipage/page1/p10_page1.png --ocr .../p10_page1.ocr.json --dpi 300 --output mixed_page1.pdf --report mixed_page1.json
+# scanweave build qualification/fixtures/probe/p14_noisy/p14_noisy.png --ocr .../p14_noisy/tess.hocr --dpi 300 --mode auto --output noisy_auto.pdf --report noisy_auto.json
+cb0384b28b3b4ba7660e1fe81653636cfd2cf2d4  work/m1b-deliverables/doc4_invoice.pdf
+fa8c3f720de218413f37bca65a9b9052059b448c  work/m1b-deliverables/mixed_page1.pdf
+ca0db29aa4ea77d911d96ccaa89de99a678e10f9  work/m1b-deliverables/noisy_auto.pdf
+379aef56b6ae51e14ff13f9a7a416b0c7c6f4ca3  work/m1b-deliverables/doc4_invoice.json
+7be4402f5a6b7c45608fe59b23d00f584ab3591d  work/m1b-deliverables/mixed_page1.json
+efc07ead8c3238f7a122f2f74ddd94d490c28c84  work/m1b-deliverables/noisy_auto.json
