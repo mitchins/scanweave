@@ -36,7 +36,7 @@
     "poppler visual gate: iou=1.0000 p95=0.51 max=0.53 mae=0.0038 topo=True",
     "pdfium visual gate: iou=0.9837 p95=1.00 max=1.46 mae=0.0052 topo=True"
    ],
-   "pdf_bytes": 10113,
+   "pdf_bytes": 10109,
    "ttf_bytes": 7632,
    "marked_content": {
     "bdc": 4,
@@ -286,7 +286,7 @@
     "poppler visual gate: iou=1.0000 p95=0.52 max=0.54 mae=0.0014 topo=True",
     "pdfium visual gate: iou=0.9632 p95=1.00 max=1.00 mae=0.0017 topo=True"
    ],
-   "pdf_bytes": 6437,
+   "pdf_bytes": 6427,
    "ttf_bytes": 4268,
    "marked_content": {
     "bdc": 1,
@@ -617,7 +617,7 @@
     "poppler visual gate: iou=0.9387 p95=4.24 max=11.95 mae=0.0042 topo=False",
     "pdfium visual gate: iou=0.9564 p95=1.41 max=11.94 mae=0.0027 topo=False"
    ],
-   "pdf_bytes": 22308,
+   "pdf_bytes": 22304,
    "ttf_bytes": 756,
    "marked_content": {
     "bdc": 1,
@@ -686,11 +686,11 @@
    },
    "metrics": {
     "poppler": {
-     "iou": 0.9961678661557155,
-     "edge_p95": 0.5202702702702595,
-     "edge_max": 1.508658008658017,
-     "mae": 0.003767095073323447,
-     "mae_ink": 0.018669602619999302,
+     "iou": 1.0,
+     "edge_p95": 0.5086580086580028,
+     "edge_max": 0.5316742081448069,
+     "mae": 0.0031859779205799963,
+     "mae_ink": 0.015452710090919357,
      "topology_ok": true
     },
     "pdfium": {
@@ -703,10 +703,10 @@
     }
    },
    "fail": [
-    "poppler visual gate: iou=0.9962 p95=0.52 max=1.51 mae=0.0038 topo=True",
+    "poppler visual gate: iou=1.0000 p95=0.51 max=0.53 mae=0.0032 topo=True",
     "pdfium visual gate: iou=1.0000 p95=0.51 max=0.54 mae=0.0032 topo=True"
    ],
-   "pdf_bytes": 8503,
+   "pdf_bytes": 8490,
    "ttf_bytes": 5932,
    "marked_content": {
     "bdc": 4,
@@ -847,11 +847,11 @@
    },
    "metrics": {
     "poppler": {
-     "iou": 0.957319997259711,
-     "edge_p95": 1.1025944669365728,
+     "iou": 0.9717056002208343,
+     "edge_p95": 1.072112179487169,
      "edge_max": 1.5,
-     "mae": 0.00956479016946145,
-     "mae_ink": 0.055630823953887916,
+     "mae": 0.0075698030343359065,
+     "mae_ink": 0.043729664668738344,
      "topology_ok": true
     },
     "pdfium": {
@@ -865,10 +865,10 @@
    },
    "fail": [
     "pdfium transport vs original OCR: words=True spaces=True cardinality=False duplicates=False coverage=False (got 16 chars, expected 16)",
-    "poppler visual gate: iou=0.9573 p95=1.10 max=1.50 mae=0.0096 topo=True",
+    "poppler visual gate: iou=0.9717 p95=1.07 max=1.50 mae=0.0076 topo=True",
     "pdfium visual gate: iou=0.9616 p95=1.06 max=1.47 mae=0.0077 topo=True"
    ],
-   "pdf_bytes": 14199,
+   "pdf_bytes": 14182,
    "ttf_bytes": 11272,
    "marked_content": {
     "bdc": 7,

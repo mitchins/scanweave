@@ -86,8 +86,25 @@ pub struct GlyphStat {
     pub budget_ok: bool,
 }
 
+/// Analytical fidelity accounting for a page (SPEC §5.6: min_ink_iou is a
+/// policy threshold the conversion must enforce, not a report decoration).
+#[derive(Debug, Clone, Default, serde::Serialize)]
+pub struct Fidelity {
+    /// per-unit analytical ink IoU of the vectorized glyphs (outline vs the
+    /// source ink mask, both on the unit's crop grid)
+    pub vector_ink_iou_min: Option<f64>,
+    pub vector_ink_iou_mean: Option<f64>,
+    /// raster ink is byte-exact from the source by construction (IoU 1.0)
+    pub raster_ink_px: u64,
+    /// units degraded to raster because their trace fell below min_ink_iou
+    pub units_below_policy: usize,
+    /// the policy threshold this page was checked against
+    pub min_ink_iou: f64,
+}
+
 #[derive(Debug, Clone, Serialize)]
 pub struct Report {
+    pub fidelity: Fidelity,
     pub glyph_stats: Vec<GlyphStat>,
     /// candidates actually serialized and measured (name, pdf bytes); auto mode
     /// selects the smallest that passes the semantic requirements
@@ -117,6 +134,15 @@ pub struct Report {
     pub elapsed_ms: u128,
 }
 
+/// A caller/preset/source protection polygon: the pixels inside must survive
+/// exactly (SPEC §4.4), so units touching it cannot be vectorized.
+#[derive(Debug, Clone)]
+pub struct ProtectedInput {
+    pub id: String,
+    pub polygon: Vec<[f64; 2]>,
+    pub reason: String,
+}
+
 #[derive(Debug, Clone)]
 pub struct SymbolInput {
     pub id: String,
@@ -141,6 +167,16 @@ pub struct Input {
     pub height: u32,
     pub page_id: String,
     pub spans: Vec<SpanInput>,
+    /// caller-provided protection polygons (SPEC §4.4); their pixels are never
+    /// vectorized — the regions they touch fall back to raster
+    pub protected_regions: Vec<ProtectedInput>,
+    /// authoritative raster→page-points affine [a b c d e f] from the normalized
+    /// OCR page (a 600 dpi scan must not be laid out at the bundle's 300 dpi
+    /// default); axis-aligned only (b == c == 0)
+    pub raster_to_page_pt: [f64; 6],
+    /// the canonical pixel hash the OCR page declares for this raster; the
+    /// conversion verifies it before working on the pixels (SPEC §4.2)
+    pub pixel_sha256: Option<String>,
 }
 
 pub struct Output {
@@ -185,6 +221,17 @@ pub fn input_from_ocr_page(
         height,
         page_id: page_id.to_string(),
         spans,
+        protected_regions: page
+            .protected_regions
+            .iter()
+            .map(|p| ProtectedInput {
+                id: p.id.clone(),
+                polygon: p.polygon.clone(),
+                reason: p.reason.clone(),
+            })
+            .collect(),
+        raster_to_page_pt: page.page.raster_to_page_pt,
+        pixel_sha256: Some(page.raster.pixel_sha256.clone()),
     }
 }
 
@@ -218,6 +265,16 @@ fn to_ocr_page(input: &Input) -> scanweave_core::ocr_page::OcrPage {
         granularity: Granularity::Symbol,
         reading_order_status: ReadingOrderStatus::Supplied,
         reading_order: input.spans.iter().map(|s| s.id.clone()).collect(),
+        protected_regions: input
+            .protected_regions
+            .iter()
+            .map(|p| ProtectedRegion {
+                id: p.id.clone(),
+                polygon: p.polygon.clone(),
+                reason: p.reason.clone(),
+                origin: ProtectedOrigin::Caller,
+            })
+            .collect(),
         spans: input
             .spans
             .iter()
@@ -245,7 +302,150 @@ fn to_ocr_page(input: &Input) -> scanweave_core::ocr_page::OcrPage {
                     .collect(),
             })
             .collect(),
-        protected_regions: vec![],
+    }
+}
+
+/// Analytical ink IoU between a traced glyph outline and the unit's source ink
+/// mask: the outline is rasterized over the crop grid (scanline fill at pixel
+/// centres) and compared with the mask. Empty/empty = 1, empty/nonempty = 0.
+fn glyph_ink_iou(g: &GlyphShape, crop_w: usize, crop_h: usize, mask: &[bool]) -> f64 {
+    if crop_w == 0 || crop_h == 0 {
+        return 1.0;
+    }
+    // flatten the path to line segments in crop-pixel coordinates. The path is
+    // expressed in the glyph's construction frame: the crop maps to
+    // [anchor_bbox_fu[0], +ink_span_fu[0]] x [anchor_bbox_fu[1], +ink_span_fu[1]]
+    // (the same frame page_pdf uses to place the run: tx = x0 - anchor*sx/upem).
+    let k = (g.ink_span_fu[0] / crop_w as f64).max(f64::EPSILON); // font units per px
+    let mut polys: Vec<Vec<[f64; 2]>> = Vec::new();
+    let mut cur: Vec<[f64; 2]> = Vec::new();
+    let mut start = [0.0f64, 0.0f64];
+    let mut last = [0.0f64, 0.0f64];
+    let flatten = |p0: [f64; 2], p1: [f64; 2], p2: [f64; 2], p3: [f64; 2], cur: &mut Vec<[f64; 2]>| {
+        const N: usize = 12;
+        for i in 1..=N {
+            let t = i as f64 / N as f64;
+            let u = 1.0 - t;
+            let x = u * u * u * p0[0] + 3.0 * u * u * t * p1[0] + 3.0 * u * t * t * p2[0] + t * t * t * p3[0];
+            let y = u * u * u * p0[1] + 3.0 * u * u * t * p1[1] + 3.0 * u * t * t * p2[1] + t * t * t * p3[1];
+            cur.push([x, y]);
+        }
+    };
+    for el in g.path.iter() {
+        match el {
+            kurbo::PathEl::MoveTo(p) => {
+                if cur.len() > 1 {
+                    polys.push(std::mem::take(&mut cur));
+                } else {
+                    cur.clear();
+                }
+                start = [p.x / k, crop_h as f64 - p.y / k];
+                last = start;
+                cur.push(start);
+            }
+            kurbo::PathEl::LineTo(p) => {
+                last = [p.x / k, crop_h as f64 - p.y / k];
+                cur.push(last);
+            }
+            kurbo::PathEl::QuadTo(c, p) => {
+                // raise the quad to a cubic and flatten
+                let (cx, cy, px, py) = (c.x / k, crop_h as f64 - c.y / k, p.x / k, crop_h as f64 - p.y / k);
+                let c1 = [last[0] + 2.0 / 3.0 * (cx - last[0]), last[1] + 2.0 / 3.0 * (cy - last[1])];
+                let c2 = [px + 2.0 / 3.0 * (cx - px), py + 2.0 / 3.0 * (cy - py)];
+                flatten(last, c1, c2, [px, py], &mut cur);
+                last = [px, py];
+            }
+            kurbo::PathEl::CurveTo(c1, c2, p) => {
+                let flip = |v: f64| crop_h as f64 - v / k;
+                flatten(
+                    last,
+                    [c1.x / k, flip(c1.y)],
+                    [c2.x / k, flip(c2.y)],
+                    [p.x / k, flip(p.y)],
+                    &mut cur,
+                );
+                last = [p.x / k, flip(p.y)];
+            }
+            kurbo::PathEl::ClosePath => {
+                if cur.len() > 1 {
+                    cur.push(start);
+                    polys.push(std::mem::take(&mut cur));
+                } else {
+                    cur.clear();
+                }
+                last = start;
+            }
+        }
+    }
+    if cur.len() > 1 {
+        polys.push(cur);
+    }
+    // scanline fill (even-odd) with sub-pixel coverage sampling: the fidelity
+    // measure must match the SPEC's mask definition as the qualification
+    // harness applies it (render, threshold at the paper/ink midpoint), so a
+    // pixel counts as foreground when its covered fraction reaches 0.5
+    const SUB: usize = 4;
+    let mut cover = vec![0u8; crop_w * crop_h];
+    for row in 0..crop_h {
+        for sub in 0..SUB {
+            let py = row as f64 + (sub as f64 + 0.5) / SUB as f64;
+            let mut xs: Vec<f64> = Vec::new();
+            for poly in &polys {
+                for w in poly.windows(2) {
+                    let (a, b) = (w[0], w[1]);
+                    let (y0, y1) = (a[1], b[1]); // crop-local px
+                    if (y0 <= py && y1 > py) || (y1 <= py && y0 > py) {
+                        let t = (py - y0) / (y1 - y0);
+                        xs.push(a[0] + t * (b[0] - a[0]));
+                    }
+                }
+            }
+            if xs.len() < 2 {
+                continue;
+            }
+            xs.sort_by(|a, b| a.partial_cmp(b).unwrap_or(std::cmp::Ordering::Equal));
+            let mut i = 0;
+            while i + 1 < xs.len() {
+                let (x0, x1) = (xs[i], xs[i + 1]);
+                // the sub-row's covered columns, weighted by the overlap length
+                let c0 = x0;
+                let c1 = x1;
+                let col_lo = (c0.floor() as isize).max(0);
+                let col_hi = ((c1.ceil() as isize).min(crop_w as isize)).max(col_lo);
+                for c in col_lo..col_hi {
+                    let col = c as usize;
+                    let lo = (col as f64).max(c0);
+                    let hi = ((col + 1) as f64).min(c1);
+                    let frac = (hi - lo).max(0.0);
+                    if frac > 0.0 {
+                        let idx = row * crop_w + col;
+                        // accumulate the sub-row's contribution as a count
+                        cover[idx] = cover[idx].saturating_add(if frac >= 0.5 { 2 } else { 1 });
+                    }
+                }
+                i += 2;
+            }
+        }
+    }
+    // foreground when at least half the sub-rows cover the pixel
+    let fill: Vec<bool> = cover.iter().map(|c| *c as usize >= (SUB + 1) / 2).collect();
+    let mut inter = 0usize;
+    let mut uni = 0usize;
+    for (i, m) in mask.iter().enumerate() {
+        if i >= fill.len() {
+            break;
+        }
+        if *m || fill[i] {
+            uni += 1;
+            if *m && fill[i] {
+                inter += 1;
+            }
+        }
+    }
+    if uni == 0 {
+        1.0
+    } else {
+        inter as f64 / uni as f64
     }
 }
 
@@ -286,19 +486,35 @@ pub fn convert(input: &Input, policy: &Policy) -> Result<Output, String> {
         &parts.owners,
         &parts.owner_cids,
         &parts.lines,
+        &parts.to_pt,
     )?;
     let b0 = baseline_one_page(&parts, policy)?;
 
     let mut candidates: Vec<(String, usize)> = Vec::new();
     candidates.push(("reconstruct".to_string(), pdf_bytes.len()));
     candidates.push(("raster_baseline".to_string(), b0.len()));
+    // the fidelity policy is a hard gate (SPEC §4.2 / policy note): the raster
+    // baseline reproduces the source pixels exactly, the reconstruction does
+    // not if its vector units measure below min_ink_iou
+    let recon_fidelity_ok = report
+        .fidelity
+        .vector_ink_iou_min
+        .map_or(true, |m| m >= policy.min_ink_iou);
     let selected = if policy.mode == "auto" {
-        if b0.len() < pdf_bytes.len() {
-            "raster_baseline"
-        } else {
+        if recon_fidelity_ok && pdf_bytes.len() <= b0.len() {
             "reconstruct"
+        } else {
+            "raster_baseline"
         }
         .to_string()
+    } else if !recon_fidelity_ok {
+        return Err(format!(
+            "fidelity policy violated: page {} measures vector ink IoU {} below min_ink_iou {} \
+             (use --mode auto to emit the searchable raster baseline, or lower the policy explicitly)",
+            input.page_id,
+            report.fidelity.vector_ink_iou_min.unwrap_or(0.0),
+            policy.min_ink_iou
+        ));
     } else {
         "reconstruct".to_string()
     };
@@ -308,6 +524,7 @@ pub fn convert(input: &Input, policy: &Policy) -> Result<Output, String> {
     report.candidates = candidates;
     report.selected = selected;
     report.pdf_bytes = pdf_bytes.len();
+    report.font_bytes = font_bytes.len();
     let raster_bytes: usize = parts.patches.iter().map(|p| p.rgb.len()).sum();
     report.raster_bytes = raster_bytes;
     Ok(Output {
@@ -328,6 +545,26 @@ pub fn convert_parts(
     let w = input.width;
     let h = input.height;
 
+    // SPEC §4.2: the OCR page declares a canonical pixel hash for this raster;
+    // refuse to work on pixels that do not match the declared binding
+    if let Some(declared) = &input.pixel_sha256 {
+        let computed = scanweave_core::pixel_hash::pixel_hash(
+            scanweave_core::pixel_hash::CanonicalFormat::Rgb8,
+            w as u64,
+            h as u64,
+            scanweave_core::pixel_hash::ColourTag::Srgb,
+            None,
+            &input.rgb,
+        )
+        .map_err(|e| e.to_string())?;
+        if &computed != declared {
+            return Err(format!(
+                "pixel binding mismatch for page {}: OCR page declares {declared}, raster computes {computed}",
+                input.page_id
+            ));
+        }
+    }
+
     // segmentation + ownership -------------------------------------------------
     let seg: Segmentation = segment(&input.rgb, w, h);
     let ocr = to_ocr_page(input);
@@ -335,8 +572,24 @@ pub fn convert_parts(
     let visual_ok = plan.visual_invariant_ok();
     let semantic_ok = plan.semantic_invariant_ok(&ocr);
 
-    // regions (non-text contact → raster) --------------------------------------
-    let mut regions = plan_regions(&plan, 512);
+    // SPEC §4.4: caller-provided protection polygons (their pixel boxes, clamped
+    // to the raster) are a distinct input to the visual planner
+    let protected_boxes: Vec<[f64; 4]> = input
+        .protected_regions
+        .iter()
+        .map(|p| {
+            let mut bb = span_bbox(&p.polygon);
+            bb[0] = bb[0].clamp(0.0, w as f64);
+            bb[1] = bb[1].clamp(0.0, h as f64);
+            bb[2] = bb[2].clamp(0.0, w as f64);
+            bb[3] = bb[3].clamp(0.0, h as f64);
+            bb
+        })
+        .filter(|bb| bb[2] > bb[0] && bb[3] > bb[1])
+        .collect();
+
+    // regions (protection / non-text contact → raster) -------------------------
+    let mut regions = plan_regions(&plan, &protected_boxes);
 
     let mut coverage = Coverage::default();
     let mut fallback_reasons: BTreeMap<String, usize> = BTreeMap::new();
@@ -454,6 +707,57 @@ pub fn convert_parts(
     }
     let shapes: Vec<GlyphShape> = build_glyph_shapes(&traced, units_per_px, &budget)?;
 
+    // policy fidelity gate (min_ink_iou): the traced outline must reproduce the
+    // unit's source ink mask to the policy's threshold. Raster regions are
+    // byte-exact from the source by construction; only vectorized units carry
+    // this risk, so this is where the advertised 0.98 is actually enforced.
+    let mut unit_ious: Vec<(String, f64)> = Vec::new();
+    {
+        for r in regions.iter() {
+            if !matches!(r.disposition, RegionDisposition::Vector) {
+                continue;
+            }
+            for &ui in &r.units {
+                let u = &plan.owned[ui].unit;
+                let Some(g) = shapes.iter().find(|s| s.shape_key == u.shape_key) else {
+                    continue;
+                };
+                let iou = glyph_ink_iou(g, u.crop_w, u.crop_h, &u.mask);
+                unit_ious.push((r.id.to_string(), iou));
+            }
+        }
+    }
+    let mut units_below_policy = 0usize;
+    if !unit_ious.is_empty() {
+        // regions whose WORST unit falls below the threshold degrade to raster
+        let mut worst_by_region: std::collections::BTreeMap<usize, f64> =
+            std::collections::BTreeMap::new();
+        for (rid, iou) in &unit_ious {
+            let e = worst_by_region.entry(rid.parse::<usize>().unwrap_or(0)).or_insert(1.0);
+            *e = e.min(*iou);
+        }
+        for r in regions.iter_mut() {
+            if !matches!(r.disposition, RegionDisposition::Vector) {
+                continue;
+            }
+            let worst = worst_by_region.get(&r.id).copied().unwrap_or(1.0);
+            if worst < policy.min_ink_iou {
+                r.disposition = RegionDisposition::Raster {
+                    reason: FallbackReason::FidelityBelowPolicy,
+                };
+                *fallback_reasons
+                    .entry(format!("{:?}", FallbackReason::FidelityBelowPolicy))
+                    .or_insert(0) += 1;
+                for &ui in &r.units {
+                    let ink = plan.owned[ui].unit.mask.iter().filter(|b| **b).count() as u64;
+                    coverage.text_ink_px_vector -= ink;
+                    coverage.text_ink_px_raster += ink;
+                }
+                units_below_policy += r.units.len();
+            }
+        }
+    }
+
     // encoding (four-part key) ---------------------------------------------------
     let mut keys: Vec<EncodingKey> = Vec::new();
     let mut occ: Vec<(usize, u32, [f64; 4], String, String, String)> = Vec::new();
@@ -570,7 +874,10 @@ pub fn convert_parts(
             if vector_spans.contains(&sid) {
                 continue; // visible ToUnicode already owns this span
             }
-            if owners.iter().any(|o| owner_span(&ocr, &o.text) == sid) {
+            // dedup by SPAN ID: two spans may carry identical OCR text (a
+            // repeated word where only one has visual components); text-based
+            // dedup would silently drop the other span's owner
+            if owners.iter().any(|o| o.span_id == sid) {
                 continue;
             }
             let text = ocr.spans.iter().find(|s| s.id == sid).map(|s| s.text.clone()).unwrap_or_default();
@@ -587,7 +894,7 @@ pub fn convert_parts(
         }
     }
     for s in &ocr.spans {
-        if vector_spans.contains(&s.id) || owners.iter().any(|o| o.text == s.text) {
+        if vector_spans.contains(&s.id) || owners.iter().any(|o| o.span_id == s.id) {
             continue;
         }
         let place = plan
@@ -728,8 +1035,37 @@ pub fn convert_parts(
         })
         .collect();
 
+    // authoritative page geometry: the OCR page's raster→pt affine, applied
+    // once at normalization. Axis-aligned only (b == c == 0): skews are
+    // unsupported geometry and must be rejected, not silently approximated
+    // with the CLI's --dpi default (a 600 dpi scan laid out at 300 dpi would
+    // get the wrong physical dimensions).
+    let m = input.raster_to_page_pt;
+    if m[1].abs() > 1e-9 || m[2].abs() > 1e-9 {
+        return Err(format!(
+            "unsupported geometry: raster_to_page_pt has skew (b={}, c={})",
+            m[1], m[2]
+        ));
+    }
+    if m[0] <= 0.0 || m[3] >= 0.0 {
+        return Err(format!(
+            "unsupported geometry: raster_to_page_pt scale must be positive in x and negative in y (d={})",
+            m[3]
+        ));
+    }
+    let to_pt = crate::page_pdf::PageTransform {
+        a: m[0],
+        d: m[3],
+        e: m[4],
+        f: m[5],
+    };
+    let (page_w_pt, page_h_pt) = (to_pt.page_w(w as f64), to_pt.page_h(h as f64));
+
     let parts = crate::page_pdf::PageParts {
         raster_baseline: false,
+        page_w_pt,
+        page_h_pt,
+        to_pt,
         source_rgb: input.rgb.clone(),
         source_w: w as usize,
         source_h: h as usize,
@@ -737,8 +1073,6 @@ pub fn convert_parts(
         encodings: all_encodings.clone(),
         occurrences: occ,
         span_texts,
-        page_w_pt: (w as f64 * 72.0 / policy.dpi) as f32,
-        page_h_pt: (h as f64 * 72.0 / policy.dpi) as f32,
         dpi: policy.dpi,
         paper: seg.paper,
         ink: seg.ink,
@@ -748,8 +1082,26 @@ pub fn convert_parts(
         lines,
     };
 
+    let mut unit_ious: Vec<f64> = unit_ious.into_iter().map(|(_, i)| i).collect();
+    unit_ious.sort_by(|a, b| a.partial_cmp(b).unwrap_or(std::cmp::Ordering::Equal));
+    let vector_units = unit_ious.len();
+    let raster_ink_px = coverage.text_ink_px_raster + coverage.other_ink_px;
+    let fidelity = Fidelity {
+        vector_ink_iou_min: unit_ious.first().copied(),
+        vector_ink_iou_mean: if unit_ious.is_empty() {
+            None
+        } else {
+            Some(unit_ious.iter().sum::<f64>() / unit_ious.len() as f64)
+        },
+        raster_ink_px,
+        units_below_policy,
+        min_ink_iou: policy.min_ink_iou,
+    };
+    let _ = vector_units;
+
     let report = Report {
         candidates: Vec::new(),
+        fidelity,
         selected: "reconstruct".into(),
         glyph_stats,
         patches: patch_records,
@@ -786,13 +1138,6 @@ pub fn convert_parts(
     Ok((parts, report))
 }
 
-fn owner_span(ocr: &scanweave_core::ocr_page::OcrPage, text: &str) -> String {
-    ocr.spans
-        .iter()
-        .find(|s| s.text == text)
-        .map(|s| s.id.clone())
-        .unwrap_or_default()
-}
 
 
 /// Source-pixel patches for non-text artwork (never dropped, never relabelled).

@@ -32,15 +32,22 @@ def check(name, cond, detail=""):
     results.append((name, bool(cond), detail))
 
 
-def build(doc: str, mode: str = "reconstruct"):
-    d = WORK / doc
+# The harness declares its policy (qualification/policy/m1b-operating.toml):
+# the reconstruction is requested at the development measurement floor 0.75 so
+# the harness can gate the render itself; auto runs at the SPEC default 0.98.
+MIN_IOU = "0.75"
+
+
+def build(doc: str, mode: str = "reconstruct", min_iou: str = MIN_IOU):
+    d = WORK / doc / mode
     d.mkdir(parents=True, exist_ok=True)
     r = subprocess.run(
         [str(CLI), "build", "--bundle", str(DOCS / doc / "document.json"),
-         "--mode", mode, "--output", str(d / "out.pdf"), "--report", str(d / "out.json")],
+         "--mode", mode, "--min-ink-iou", min_iou,
+         "--output", str(d / "out.pdf"), "--report", str(d / "out.json")],
         capture_output=True, text=True,
     )
-    assert r.returncode == 0, r.stderr[:400]
+    assert r.returncode == 0, (r.stderr or r.stdout)[:400]
     return d / "out.pdf", d / "out.json"
 
 

@@ -58,32 +58,7 @@ pub fn convert_input(
     page_id: &str,
     page: &scanweave_core::ocr_page::OcrPage,
 ) -> Input {
-    let spans = page
-        .spans
-        .iter()
-        .map(|s| scanweave_io::convert::SpanInput {
-            id: s.id.clone(),
-            text: s.text.clone(),
-            separator_after: s.separator_after.clone(),
-            polygon: s.polygon.clone(),
-            symbols: s
-                .symbols
-                .iter()
-                .map(|sym| scanweave_io::convert::SymbolInput {
-                    id: sym.id.clone(),
-                    range: (sym.text_range_utf8[0], sym.text_range_utf8[1]),
-                    polygon: symbol_polygon(sym),
-                })
-                .collect(),
-        })
-        .collect();
-    Input {
-        rgb: rgb.to_vec(),
-        width,
-        height,
-        page_id: page_id.to_string(),
-        spans,
-    }
+    scanweave_io::convert::input_from_ocr_page(rgb, width, height, page_id, page)
 }
 
 fn symbol_polygon(sym: &scanweave_core::ocr_page::Symbol) -> Vec<[f64; 2]> {
@@ -125,7 +100,10 @@ pub fn build_page(page_dir: &PathBuf, out_dir: &PathBuf) -> Result<Report, Strin
         .map_err(|e| e.to_string())?;
     page.verify_binding(img.as_raw()).map_err(|e| e.to_string())?;
     let input = convert_input(img.as_raw(), w, h, &page.page_id, &page);
-    let out = convert(&input, &Policy::default())?;
+    // the probe is the harness's measuring instrument: the converter-side
+    // fidelity gate is disabled so the harness applies the SPEC's own gates to
+    // the rendered output (the product CLI keeps the policy enforced)
+    let out = convert(&input, &Policy { min_ink_iou: 0.0, ..Policy::default() })?;
     std::fs::create_dir_all(out_dir).map_err(|e| e.to_string())?;
     std::fs::write(out_dir.join("out.pdf"), &out.pdf_bytes).map_err(|e| e.to_string())?;
     std::fs::write(out_dir.join("b0_raster.pdf"), &out.b0_bytes).map_err(|e| e.to_string())?;
@@ -223,6 +201,7 @@ pub fn build_page(page_dir: &PathBuf, out_dir: &PathBuf) -> Result<Report, Strin
         .map_err(|e| e.to_string())?;
     // legacy shim report fields (io Report mirrors the shim shape)
     let mut report = Report {
+        fidelity: out.report.fidelity.clone(),
         glyph_stats: out.report.glyph_stats.clone(),
         candidates: out.report.candidates.clone(),
         selected: out.report.selected.clone(),

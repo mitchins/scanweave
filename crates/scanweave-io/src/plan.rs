@@ -27,6 +27,11 @@ pub enum RegionDisposition {
 
 #[derive(Debug, Clone, PartialEq, Eq, serde::Serialize)]
 pub enum FallbackReason {
+    /// caller/preset/source protection polygon (SPEC §4.4): pixels preserved
+    Protected,
+    /// the traced outline reproduces the source ink below the policy's
+    /// min_ink_iou, so the unit is not vectorizable under that policy
+    FidelityBelowPolicy,
     ContactNonText,
     ImageTouchingText,
     OwnershipUnresolved,
@@ -71,6 +76,10 @@ fn union_bbox(units: &[usize], plan: &OwnershipPlan) -> [f64; 4] {
     bb
 }
 
+fn union(a: [f64; 4], b: [f64; 4]) -> [f64; 4] {
+    [a[0].min(b[0]), a[1].min(b[1]), a[2].max(b[2]), a[3].max(b[3])]
+}
+
 fn expand(bbox: &[f64; 4], m: f64) -> [f64; 4] {
     [bbox[0] - m, bbox[1] - m, bbox[2] + m, bbox[3] + m]
 }
@@ -85,7 +94,10 @@ fn intersects(a: &[f64; 4], b: &[f64; 4]) -> bool {
 /// Regions follow the OCR's own reading order: one region per span that owns
 /// units (plus any absorbed slots), in slot order. Proximity grouping would
 /// scramble reading order (observed: a row crossing into the next line).
-pub fn plan_regions(plan: &OwnershipPlan, _max_units_per_region: usize) -> Vec<Region> {
+pub fn plan_regions(
+    plan: &OwnershipPlan,
+    protected: &[[f64; 4]],
+) -> Vec<Region> {
     let mut regions = Vec::new();
     let mut uid = 0usize;
 
@@ -112,7 +124,7 @@ pub fn plan_regions(plan: &OwnershipPlan, _max_units_per_region: usize) -> Vec<R
     }
 
     for group in grouped {
-        let region_bbox = union_bbox(&group, plan);
+        let mut region_bbox = union_bbox(&group, plan);
         let mut touching_artwork: Vec<usize> = Vec::new();
         let probe = expand(&region_bbox, CONTACT_MARGIN_PX);
         for (ai, (au, _)) in plan.artwork_units.iter().enumerate() {
@@ -120,8 +132,26 @@ pub fn plan_regions(plan: &OwnershipPlan, _max_units_per_region: usize) -> Vec<R
                 touching_artwork.push(ai);
             }
         }
+        // SPEC §4.4: protection polygons have priority. Any unit whose expanded
+        // box meets a protected polygon forces the region to raster, and the
+        // region box grows to cover the protected pixels so the fallback patch
+        // reproduces them exactly.
+        let mut touching_protected: Vec<[f64; 4]> = Vec::new();
+        for pb in protected {
+            if intersects(&probe, pb) {
+                touching_protected.push(*pb);
+                region_bbox = union(region_bbox, *pb);
+            }
+        }
         let has_suspect = group.iter().any(|&ui| plan.owned[ui].suspect);
-        let (kind, disposition) = if !touching_artwork.is_empty() || has_suspect {
+        let (kind, disposition) = if !touching_protected.is_empty() {
+            (
+                RegionKind::Mixed,
+                RegionDisposition::Raster {
+                    reason: FallbackReason::Protected,
+                },
+            )
+        } else if !touching_artwork.is_empty() || has_suspect {
             (
                 RegionKind::Mixed,
                 RegionDisposition::Raster {

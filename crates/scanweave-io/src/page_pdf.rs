@@ -82,17 +82,24 @@ fn cid_to_gid_bytes(encodings: &[(usize, String)]) -> Vec<u8> {
 }
 
 /// Draw the paper fill and the raster patches (source-exact crops), in order.
-fn emit_patches(c: &mut Content, patches: &[Patch], page_w_pt: f32, page_h_pt: f32, dpi: f64, paper: [u8; 3]) {
+fn emit_patches(
+    c: &mut Content,
+    patches: &[Patch],
+    xf: &PageTransform,
+    page_w_pt: f32,
+    page_h_pt: f32,
+    paper: [u8; 3],
+) {
     c.set_fill_rgb(paper[0] as f32 / 255.0, paper[1] as f32 / 255.0, paper[2] as f32 / 255.0);
     c.rect(0.0, 0.0, page_w_pt, page_h_pt);
     c.fill_nonzero();
     for (i, patch) in patches.iter().enumerate() {
-        let x = patch.bbox_px[0] as f32 * 72.0 / dpi as f32;
-        let y_bot = page_h_pt - patch.bbox_px[3] as f32 * 72.0 / dpi as f32;
-        let w_pt = (patch.bbox_px[2] - patch.bbox_px[0]) as f32 * 72.0 / dpi as f32;
-        let h_pt = (patch.bbox_px[3] - patch.bbox_px[1]) as f32 * 72.0 / dpi as f32;
+        let x = xf.x(patch.bbox_px[0] as f64);
+        let y_bot = xf.y(patch.bbox_px[3] as f64);
+        let w_pt = (patch.bbox_px[2] - patch.bbox_px[0]) as f64 * xf.sx();
+        let h_pt = (patch.bbox_px[3] - patch.bbox_px[1]) as f64 * xf.sy();
         c.save_state();
-        c.transform([w_pt, 0.0, 0.0, h_pt, x, y_bot]);
+        c.transform([w_pt as f32, 0.0, 0.0, h_pt as f32, x, y_bot]);
         let name = format!("Im{i}");
         c.x_object(Name(name.as_bytes()));
         c.restore_state();
@@ -111,8 +118,7 @@ fn emit_text_runs(
     owners: &[Owner],
     owner_cids: &[u32],
     lines: &[LineSpec],
-    page_h_pt: f32,
-    dpi: f64,
+    xf: &PageTransform,
     ink: [u8; 3],
     raster_baseline: bool,
 ) {
@@ -169,10 +175,10 @@ fn emit_text_runs(
                 for &i in group {
                     let (gidx, cid, bbox_px, _, _, _) = &occurrences[i];
                     let g = &shapes[*gidx];
-                    let x0 = bbox_px[0] as f32 * 72.0 / dpi as f32;
-                    let bottom_pt = page_h_pt - bbox_px[3] as f32 * 72.0 / dpi as f32;
-                    let top_pt = page_h_pt - bbox_px[1] as f32 * 72.0 / dpi as f32;
-                    let w_pt = bbox_px[2] as f32 * 72.0 / dpi as f32 - x0;
+                    let x0 = xf.x(bbox_px[0] as f64);
+                    let bottom_pt = xf.y(bbox_px[3] as f64);
+                    let top_pt = xf.y(bbox_px[1] as f64);
+                    let w_pt = (bbox_px[2] as f64 * xf.sx()) as f32 - x0;
                     let h_pt = top_pt - bottom_pt;
                     let sx = w_pt * 2048.0 / g.ink_span_fu[0].max(1.0) as f32;
                     let sy = h_pt * 2048.0 / g.ink_span_fu[1].max(1.0) as f32;
@@ -193,10 +199,10 @@ fn emit_text_runs(
                     let mut pl = mc.properties();
                     pl.actual_text(TextStr(owner_text));
                 }
-                let x0 = owner.place_px[0] as f32 * 72.0 / dpi as f32;
-                let y_bot = page_h_pt - owner.place_px[3] as f32 * 72.0 / dpi as f32;
-                let h_pt =
-                    ((owner.place_px[3] - owner.place_px[1]) as f32 * 72.0 / dpi as f32).max(4.0);
+                let x0 = xf.x(owner.place_px[0] as f64);
+                let y_bot = xf.y(owner.place_px[3] as f64);
+                let h_pt = ((owner.place_px[3] - owner.place_px[1]) as f64 * xf.sy()) as f32;
+                let h_pt = h_pt.max(4.0);
                 let cx = *cid;
                 let bytes = Str(&[(cx >> 8) as u8, (cx & 0xFF) as u8]);
                 c.set_text_rendering_mode(TextRenderingMode::Invisible);
@@ -224,10 +230,10 @@ fn emit_text_runs(
         if !emitted_spans.contains(sid) {
             let (gidx, cid, bbox_px, _, _, _) = &occurrences[i];
             let g = &shapes[*gidx];
-            let x0 = bbox_px[0] as f32 * 72.0 / dpi as f32;
-            let bottom_pt = page_h_pt - bbox_px[3] as f32 * 72.0 / dpi as f32;
-            let top_pt = page_h_pt - bbox_px[1] as f32 * 72.0 / dpi as f32;
-            let w_pt = bbox_px[2] as f32 * 72.0 / dpi as f32 - x0;
+            let x0 = xf.x(bbox_px[0] as f64);
+            let bottom_pt = xf.y(bbox_px[3] as f64);
+            let top_pt = xf.y(bbox_px[1] as f64);
+            let w_pt = (bbox_px[2] as f64 * xf.sx()) as f32 - x0;
             let h_pt = top_pt - bottom_pt;
             let sx = w_pt * 2048.0 / g.ink_span_fu[0].max(1.0) as f32;
             let sy = h_pt * 2048.0 / g.ink_span_fu[1].max(1.0) as f32;
@@ -242,9 +248,9 @@ fn emit_text_runs(
         if emitted_spans.contains(owner.span_id.as_str()) {
             continue;
         }
-        let x0 = owner.place_px[0] as f32 * 72.0 / dpi as f32;
-        let y_bot = page_h_pt - owner.place_px[3] as f32 * 72.0 / dpi as f32;
-        let h_pt = ((owner.place_px[3] - owner.place_px[1]) as f32 * 72.0 / dpi as f32).max(4.0);
+        let x0 = xf.x(owner.place_px[0] as f64);
+        let y_bot = xf.y(owner.place_px[3] as f64);
+        let h_pt = (((owner.place_px[3] - owner.place_px[1]) as f64 * xf.sy()) as f32).max(4.0);
         let cx = *cid;
         let bytes = Str(&[(cx >> 8) as u8, (cx & 0xFF) as u8]);
         c.set_text_rendering_mode(TextRenderingMode::Invisible);
@@ -278,6 +284,7 @@ pub fn assemble(
     owners: &[Owner],
     owner_cids: &[u32],
     lines: &[LineSpec],
+    to_pt: &PageTransform,
 ) -> Result<Vec<u8>, String> {
     let _ = glyphless_bytes;
     let _ = glyphless_encodings;
@@ -433,8 +440,8 @@ pub fn assemble(
 
     // content
     let mut c = Content::new();
-    emit_patches(&mut c, patches, page_w_pt, page_h_pt, dpi, paper);
-    emit_text_runs(&mut c, shapes, occurrences, span_texts, owners, owner_cids, lines, page_h_pt, dpi, ink, false);
+    emit_patches(&mut c, patches, to_pt, page_w_pt, page_h_pt, paper);
+    emit_text_runs(&mut c, shapes, occurrences, span_texts, owners, owner_cids, lines, to_pt, ink, false);
 
     c.end_text();
     let content_bytes = c.finish();
@@ -474,6 +481,48 @@ fn g_free() -> i32 {
     0
 }
 
+/// The authoritative raster→page-points mapping (SPEC §4.1): the normalized
+/// OCR page's affine, restricted to the axis-aligned case applied once at
+/// normalization. A 600 dpi scan carries a = 72/600 here, so its physical
+/// dimensions come from the page's own geometry — never from a CLI default.
+#[derive(Debug, Clone, Copy)]
+pub struct PageTransform {
+    /// raster px → pt scale in x (a)
+    pub a: f64,
+    /// raster px → pt scale in y (d; negative = y-flip)
+    pub d: f64,
+    /// pt offset in x (e)
+    pub e: f64,
+    /// pt offset in y (f)
+    pub f: f64,
+}
+
+impl PageTransform {
+    pub fn x(&self, px: f64) -> f32 {
+        (self.a * px + self.e) as f32
+    }
+    pub fn y(&self, py: f64) -> f32 {
+        (self.d * py + self.f) as f32
+    }
+    /// pt per raster pixel in x
+    pub fn sx(&self) -> f64 {
+        self.a
+    }
+    /// pt per raster pixel in y (positive)
+    pub fn sy(&self) -> f64 {
+        -self.d
+    }
+    /// page extent in pt (the MediaBox), from the affine + raster size
+    pub fn page_w(&self, px: f64) -> f32 {
+        (self.a * px + self.e).max(0.0) as f32
+    }
+    pub fn page_h(&self, py: f64) -> f32 {
+        // d is negative (y-flip): the top edge sits at -d*py + f and the bottom
+        // at f, so the height is the scale times the raster height
+        ((-self.d) * py).max(0.0) as f32
+    }
+}
+
 /// One page's assembly inputs. `occurrences`/`owner_cids` use the CID space of
 /// the encodings slice inside the same struct (single-page use). For documents,
 /// the document builder remaps them onto the shared encoding space.
@@ -494,6 +543,8 @@ pub struct PageParts {
     pub page_w_pt: f32,
     pub page_h_pt: f32,
     pub dpi: f64,
+    /// the authoritative raster→pt affine (page geometry source of truth)
+    pub to_pt: PageTransform,
     pub paper: [u8; 3],
     pub ink: [u8; 3],
     pub patches: Vec<Patch>,
@@ -634,7 +685,7 @@ pub fn assemble_document(
         }
         // content
         let mut c = Content::new();
-        emit_patches(&mut c, &p.patches, p.page_w_pt, p.page_h_pt, p.dpi, p.paper);
+        emit_patches(&mut c, &p.patches, &p.to_pt, p.page_w_pt, p.page_h_pt, p.paper);
         emit_text_runs(
             &mut c,
             shapes,
@@ -643,8 +694,7 @@ pub fn assemble_document(
             &p.owners,
             &p.owner_cids,
             &p.lines,
-            p.page_h_pt,
-            p.dpi,
+            &p.to_pt,
             p.ink,
             p.raster_baseline,
         );

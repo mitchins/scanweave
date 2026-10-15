@@ -3,6 +3,7 @@ name = "scanweave-core"
 version.workspace = true
 edition.workspace = true
 license.workspace = true
+repository.workspace = true
 description = "Validated geometry/types, hashing, policy decisions, planning interfaces. No filesystem, network or process access."
 
 [dependencies]

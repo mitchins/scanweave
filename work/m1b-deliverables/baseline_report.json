@@ -1,9 +1,9 @@
 {
   "doc4_invoice": {
     "pages": 4,
-    "scanweave_reconstruct_bytes": 54592,
-    "scanweave_auto_bytes": 54592,
-    "ocrmypdf_bytes": 174552,
+    "scanweave_reconstruct_bytes": 48836,
+    "scanweave_auto_bytes": 168727,
+    "ocrmypdf_bytes": 174549,
     "ia_mrc_page_bytes": [
       38607,
       38809,
@@ -18,10 +18,10 @@
       0.9195
     ],
     "auto_ink_iou": [
-      0.9195,
-      0.9196,
-      0.9185,
-      0.9195
+      1.0,
+      1.0,
+      1.0,
+      1.0
     ],
     "ocrmypdf_ink_iou": [
       1.0,
@@ -35,21 +35,21 @@
       0.8313,
       0.8316
     ],
-    "iou_margin_vs_ocrmypdf": -0.0815,
-    "ocrmypdf_pages_with_search": 4
+    "auto_vs_ia_mrc_ratio": 1.089,
+    "policy_note": "reconstruct@min-ink-iou=0.75 (development floor, qualification/policy/m1b-operating.toml); auto@0.98 (SPEC default). OCRmyPDF carries English tessdata only, so its kana page is not semantically comparable; byte sizes still count."
   },
   "doc4_repeat": {
     "pages": 4,
-    "scanweave_reconstruct_bytes": 41781,
-    "scanweave_auto_bytes": 41781,
-    "ocrmypdf_bytes": 93299,
+    "scanweave_reconstruct_bytes": 39354,
+    "scanweave_auto_bytes": 92184,
+    "ocrmypdf_bytes": 93300,
     "ia_mrc_page_bytes": [
       23824,
       23824,
-      23824,
+      23823,
       23824
     ],
-    "ia_mrc_total_bytes": 95296,
+    "ia_mrc_total_bytes": 95295,
     "reconstruct_ink_iou": [
       0.7868,
       0.7868,
@@ -57,10 +57,10 @@
       0.7868
     ],
     "auto_ink_iou": [
-      0.7868,
-      0.7868,
-      0.7868,
-      0.7868
+      0.8757,
+      0.8757,
+      0.8757,
+      0.8757
     ],
     "ocrmypdf_ink_iou": [
       1.0,
@@ -74,14 +74,14 @@
       1.0,
       1.0
     ],
-    "iou_margin_vs_ocrmypdf": -0.2132,
-    "ocrmypdf_pages_with_search": 4
+    "auto_vs_ia_mrc_ratio": 0.967,
+    "policy_note": "reconstruct@min-ink-iou=0.75 (development floor, qualification/policy/m1b-operating.toml); auto@0.98 (SPEC default). OCRmyPDF carries English tessdata only, so its kana page is not semantically comparable; byte sizes still count."
   },
   "doc4_mixed": {
     "pages": 4,
-    "scanweave_reconstruct_bytes": 79175,
-    "scanweave_auto_bytes": 79175,
-    "ocrmypdf_bytes": 117246,
+    "scanweave_reconstruct_bytes": 78242,
+    "scanweave_auto_bytes": 117089,
+    "ocrmypdf_bytes": 117255,
     "ia_mrc_page_bytes": [
       23824,
       48648,
@@ -96,10 +96,10 @@
       0.7868
     ],
     "auto_ink_iou": [
-      0.7868,
+      0.8757,
       1.0,
-      0.995,
-      0.7868
+      1.0,
+      0.8757
     ],
     "ocrmypdf_ink_iou": [
       1.0,
@@ -113,14 +113,14 @@
       1.0,
       1.0
     ],
-    "iou_margin_vs_ocrmypdf": -0.2132,
-    "ocrmypdf_pages_with_search": 4
+    "auto_vs_ia_mrc_ratio": 1.018,
+    "policy_note": "reconstruct@min-ink-iou=0.75 (development floor, qualification/policy/m1b-operating.toml); auto@0.98 (SPEC default). OCRmyPDF carries English tessdata only, so its kana page is not semantically comparable; byte sizes still count."
   },
   "doc10_mixed": {
     "pages": 10,
-    "scanweave_reconstruct_bytes": 175297,
-    "scanweave_auto_bytes": 175297,
-    "ocrmypdf_bytes": 306797,
+    "scanweave_reconstruct_bytes": 170242,
+    "scanweave_auto_bytes": 300920,
+    "ocrmypdf_bytes": 306801,
     "ia_mrc_page_bytes": [
       23824,
       38607,
@@ -147,16 +147,16 @@
       0.7868
     ],
     "auto_ink_iou": [
-      0.7868,
-      0.9195,
+      0.8757,
       1.0,
-      0.7868,
-      0.995,
-      0.7868,
-      0.9196,
-      0.9407,
       1.0,
-      0.7868
+      0.8757,
+      1.0,
+      0.8757,
+      1.0,
+      0.9479,
+      1.0,
+      0.8757
     ],
     "ocrmypdf_ink_iou": [
       1.0,
@@ -182,13 +182,13 @@
       1.0,
       1.0
     ],
-    "iou_margin_vs_ocrmypdf": -0.2132,
-    "ocrmypdf_pages_with_search": 9
+    "auto_vs_ia_mrc_ratio": 0.996,
+    "policy_note": "reconstruct@min-ink-iou=0.75 (development floor, qualification/policy/m1b-operating.toml); auto@0.98 (SPEC default). OCRmyPDF carries English tessdata only, so its kana page is not semantically comparable; byte sizes still count."
   },
   "doc2_min": {
     "pages": 2,
-    "scanweave_reconstruct_bytes": 62057,
-    "scanweave_auto_bytes": 62057,
+    "scanweave_reconstruct_bytes": 61967,
+    "scanweave_auto_bytes": 74957,
     "ocrmypdf_bytes": 80760,
     "ia_mrc_page_bytes": [
       23824,
@@ -200,7 +200,7 @@
       1.0
     ],
     "auto_ink_iou": [
-      0.7868,
+      0.8757,
       1.0
     ],
     "ocrmypdf_ink_iou": [
@@ -211,7 +211,7 @@
       1.0,
       1.0
     ],
-    "iou_margin_vs_ocrmypdf": -0.2132,
-    "ocrmypdf_pages_with_search": 2
+    "auto_vs_ia_mrc_ratio": 1.034,
+    "policy_note": "reconstruct@min-ink-iou=0.75 (development floor, qualification/policy/m1b-operating.toml); auto@0.98 (SPEC default). OCRmyPDF carries English tessdata only, so its kana page is not semantically comparable; byte sizes still count."
   }
 }

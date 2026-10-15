@@ -71,7 +71,24 @@ EXT_ENV = dict(
 )
 
 
+# the harness declares its policy (qualification/policy/m1b-operating.toml):
+# reconstruction at the 0.75 development floor so the harness gates the render
+# itself; auto at the SPEC default 0.98
+MIN_IOU = "0.75"
+
+
 def build_scanweave(doc: str, mode: str):
+    d = WORK / doc / mode
+    d.mkdir(parents=True, exist_ok=True)
+    r = run([str(CLI), "build", "--bundle", str(DOCS / doc / "document.json"),
+             "--mode", mode, "--min-ink-iou", MIN_IOU,
+             "--output", str(d / "scanweave.pdf"), "--report", str(d / "scanweave.json")])
+    assert r.returncode == 0, r.stderr[:400]
+    return d / "scanweave.pdf"
+
+
+def build_scanweave_default(doc: str, mode: str):
+    """auto mode at the SPEC's default policy (no explicit --min-ink-iou)."""
     d = WORK / doc / mode
     d.mkdir(parents=True, exist_ok=True)
     r = run([str(CLI), "build", "--bundle", str(DOCS / doc / "document.json"),
@@ -138,7 +155,8 @@ def main() -> int:
         bundle = json.loads((DOCS / doc / "document.json").read_text())
         order = [p["page_id"] for p in bundle["pages"]]
         sw = build_scanweave(doc, "reconstruct")
-        swa = build_scanweave(doc, "auto")
+        # auto at the SPEC default policy (0.98): the fidelity gate decides
+        swa = build_scanweave_default(doc, "auto")
         ext, ocrm, ia_sizes = build_external(doc)
 
         entry = {
@@ -176,33 +194,55 @@ def main() -> int:
                 ia_ious.append(None)
         entry["ia_mrc_ink_iou"] = ia_ious
 
-        # ---- honest byte comparison: scanweave must not exceed either baseline
+        # ---- honest, policy-scoped byte comparisons ----
+        # (A) at the development measurement floor (0.75) the vectorized
+        #     reconstruction is compared with both external baselines
+        recon = entry["scanweave_reconstruct_bytes"]
         if entry["ocrmypdf_bytes"]:
-            check(f"{doc}: scanweave <= OCRmyPDF bytes",
-                  entry["scanweave_reconstruct_bytes"] <= entry["ocrmypdf_bytes"],
-                  f"{entry['scanweave_reconstruct_bytes']} vs {entry['ocrmypdf_bytes']}")
+            check(f"{doc}: reconstruct@0.75 <= OCRmyPDF", recon <= entry["ocrmypdf_bytes"],
+                  f"{recon} vs {entry['ocrmypdf_bytes']}")
         if entry["ia_mrc_total_bytes"]:
-            check(f"{doc}: scanweave <= IA MRC bytes",
-                  entry["scanweave_reconstruct_bytes"] <= entry["ia_mrc_total_bytes"],
-                  f"{entry['scanweave_reconstruct_bytes']} vs {entry['ia_mrc_total_bytes']}")
-        # ---- fidelity floor: scanweave's ink IoU must clear the measured
-        #      M1-A-accepted floor (0.75) on every page, and be reported next
-        #      to the external candidates' (not silently dropped)
+            check(f"{doc}: reconstruct@0.75 <= IA MRC", recon <= entry["ia_mrc_total_bytes"],
+                  f"{recon} vs {entry['ia_mrc_total_bytes']}")
+        # (B) at the SPEC default policy (0.98, enforced) auto emits the lossless
+        #     raster baseline. Against OCRmyPDF (also lossless at --optimize 0)
+        #     the comparison is apples-to-apples; against IA MRC (lossy MRC
+        #     coding) it is reported, not gated — IA is smaller on some pages
+        #     precisely because it is lossy.
+        auto_b = entry["scanweave_auto_bytes"]
+        if entry["ocrmypdf_bytes"]:
+            check(f"{doc}: auto@0.98 <= OCRmyPDF (both lossless)",
+                  auto_b <= entry["ocrmypdf_bytes"], f"{auto_b} vs {entry['ocrmypdf_bytes']}")
+        if entry["ia_mrc_total_bytes"]:
+            entry["auto_vs_ia_mrc_ratio"] = round(auto_b / entry["ia_mrc_total_bytes"], 3)
+
+        # ---- fidelity floor on the emitted reconstruction
         for i in range(len(order)):
             check(f"{doc}: page{i+1} ink IoU >= 0.75",
                   entry["reconstruct_ink_iou"][i] >= 0.75,
                   str(entry["reconstruct_ink_iou"][i]))
-            if entry.get("ocrmypdf_ink_iou"):
-                entry["iou_margin_vs_ocrmypdf"] = round(
-                    min(entry["reconstruct_ink_iou"]) - min(entry["ocrmypdf_ink_iou"]), 4)
-            d = pdfium.PdfDocument(str(ocrm))
-            found = 0
-            for i, pid in enumerate(order):
-                if d[i].get_textpage().search("Total").get_next() or d[i].get_textpage().search("Amount").get_next():
-                    found += 1
-            d.close()
-            entry["ocrmypdf_pages_with_search"] = found
-        print(f"{doc}: {entry}")
+
+        # ---- external fidelity (same engine, same threshold rule)
+        if ocrm:
+            entry["ocrmypdf_ink_iou"] = [
+                round(ink_iou(DOCS / doc / f"{pid}.png", ocrm, i), 4) for i, pid in enumerate(order)
+            ]
+        ia_ious = []
+        for i, pid in enumerate(order):
+            ia_pdf = ext / f"ia_{pid}.pdf"
+            if ia_pdf.exists():
+                ia_ious.append(round(ink_iou(DOCS / doc / f"{pid}.png", ia_pdf, 0), 4))
+            else:
+                ia_ious.append(None)
+        entry["ia_mrc_ink_iou"] = ia_ious
+        entry["policy_note"] = (
+            "reconstruct@min-ink-iou=0.75 (development floor, "
+            "qualification/policy/m1b-operating.toml); auto@0.98 (SPEC default). "
+            "OCRmyPDF carries English tessdata only, so its kana page is not "
+            "semantically comparable; byte sizes still count."
+        )
+
+    print(f"{doc}: {entry}")
 
     out_report = ROOT / "work" / "m1b-deliverables" / "baseline_report.json"
     out_report.parent.mkdir(parents=True, exist_ok=True)

@@ -33,6 +33,8 @@ pub struct DocumentCandidate {
     pub image_xobjects: usize,
     pub content_bytes: usize,
     pub raster_encoded_bytes: usize,
+    /// per-page analytical ink IoU (min over vector units); None = no vector
+    pub page_fidelity: Vec<Option<f64>>,
     /// pages that rasterized (whole-page raster baseline marks all)
     pub raster_pages: usize,
 }
@@ -42,6 +44,10 @@ pub struct DocumentCandidate {
 #[derive(Debug, Clone, serde::Serialize)]
 pub struct DocumentReport {
     pub document_id: String,
+    /// the policy's min_ink_iou the document was checked against
+    pub min_ink_iou: f64,
+    /// per-page analytical ink IoU of the emitted candidate
+    pub page_fidelity: Vec<Option<f64>>,
     pub pages: usize,
     pub selected: String,
     pub candidates: Vec<DocumentCandidate>,
@@ -133,12 +139,17 @@ fn union_encodings(
         for (local_shape, text) in &p.encodings {
             let gshape = shape_map.get(*local_shape).copied().unwrap_or(0);
             let key = (gshape, text.clone());
-            // 0-based global encoding index; the CID is that index + 1
+            // 0-based global encoding index; the CID is that index + 1.
+            // enc_index MUST be populated on first sight, otherwise repeated
+            // (glyph, string) pairs mint new CIDs and the shared font cannot
+            // deduplicate across pages (matters at the 16-bit CID ceiling).
             let gc = match enc_index.get(&key).copied() {
                 Some(i) => i,
                 None => {
                     encodings.push((gshape, text.clone()));
-                    encodings.len() - 1
+                    let i = encodings.len() - 1;
+                    enc_index.insert(key, i);
+                    i
                 }
             };
             cid_map.push(gc as u32 + 1);
@@ -234,6 +245,10 @@ pub fn convert_document(
             image_xobjects: stats.image_xobjects,
             content_bytes: stats.content_bytes,
             raster_encoded_bytes: stats.raster_encoded_bytes,
+            page_fidelity: pages
+                .iter()
+                .map(|p| p.report.fidelity.vector_ink_iou_min)
+                .collect(),
             raster_pages: pages
                 .iter()
                 .filter(|p| p.parts.occurrences.is_empty())
@@ -247,24 +262,42 @@ pub fn convert_document(
             image_xobjects: baseline_stats.image_xobjects,
             content_bytes: baseline_stats.content_bytes,
             raster_encoded_bytes: baseline_stats.raster_encoded_bytes,
+            // the raster baseline reproduces the source pixels exactly
+            page_fidelity: baseline_parts.iter().map(|_| Some(1.0)).collect(),
             raster_pages: baseline_parts.len(),
         },
     ];
-    let selected = if policy.mode == "auto" {
-        if baseline_pdf.len() < pdf_bytes.len() {
-            "raster_baseline".into()
+    // auto: the fidelity policy is a HARD gate — a candidate whose vector units
+    // fall below min_ink_iou is disqualified, not ranked by bytes. The raster
+    // baseline reproduces the source pixels exactly and is always qualified.
+    let recon_ok = pages
+        .iter()
+        .all(|p| p.report.fidelity.vector_ink_iou_min.map_or(true, |m| m >= policy.min_ink_iou));
+    let baseline_ok = true;
+    let selected: String = if policy.mode == "auto" {
+        if recon_ok && (!baseline_ok || pdf_bytes.len() <= baseline_pdf.len()) {
+            "reconstruct".to_string()
+        } else if baseline_ok {
+            "raster_baseline".to_string()
         } else {
-            "reconstruct".into()
+            return Err("no candidate satisfies the fidelity policy".into());
         }
+    } else if !recon_ok {
+        // explicit reconstruct mode still refuses to emit a candidate that
+        // violates the fidelity policy
+        return Err(format!(
+            "fidelity policy violated: vector units measure below min_ink_iou {} on {} page(s)              (use --mode auto to fall back to the raster baseline, or lower the policy explicitly)",
+            policy.min_ink_iou,
+            pages.iter().filter(|p| p.report.fidelity.vector_ink_iou_min.map_or(false, |m| m < policy.min_ink_iou)).count()
+        ));
     } else {
         "reconstruct".into()
     };
-    let out_bytes: Vec<u8> = if selected == "raster_baseline" {
-        baseline_pdf.clone()
+    let (out_bytes, out_len) = if selected == "raster_baseline" {
+        (baseline_pdf.clone(), baseline_pdf.len())
     } else {
-        pdf_bytes.clone()
+        (pdf_bytes.clone(), pdf_bytes.len())
     };
-    let out_len = out_bytes.len();
 
     // 6. document report
     let mut coverage = DocumentCoverage::default();
@@ -316,14 +349,39 @@ pub fn convert_document(
         pdf_bytes: out_bytes.clone(),
         report: DocumentReport {
             document_id: document_id.to_string(),
+            min_ink_iou: policy.min_ink_iou,
+            page_fidelity: if selected == "raster_baseline" {
+                baseline_parts.iter().map(|_| Some(1.0)).collect()
+            } else {
+                pages.iter().map(|p| p.report.fidelity.vector_ink_iou_min).collect()
+            },
             pages: pages.len(),
-            selected,
+            selected: selected.clone(),
             candidates,
             pdf_bytes: out_len,
-            font_bytes: font_bytes.len(),
-            image_xobjects: stats.image_xobjects,
-            raster_encoded_bytes: stats.raster_encoded_bytes,
-            content_bytes: stats.content_bytes,
+            // the top-level accounting describes the EMITTED candidate (P2):
+            // when auto falls back to the raster baseline, its image/content
+            // byte statistics are the ones that matter
+            font_bytes: if selected == "raster_baseline" {
+                baseline_stats.font_bytes
+            } else {
+                stats.font_bytes
+            },
+            image_xobjects: if selected == "raster_baseline" {
+                baseline_stats.image_xobjects
+            } else {
+                stats.image_xobjects
+            },
+            raster_encoded_bytes: if selected == "raster_baseline" {
+                baseline_stats.raster_encoded_bytes
+            } else {
+                stats.raster_encoded_bytes
+            },
+            content_bytes: if selected == "raster_baseline" {
+                baseline_stats.content_bytes
+            } else {
+                stats.content_bytes
+            },
             page_order: pages.iter().map(|p| p.report.page_id.clone()).collect(),
             page_reports: pages.iter().map(|p| p.report.clone()).collect(),
             coverage,

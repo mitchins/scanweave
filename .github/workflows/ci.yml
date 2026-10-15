@@ -1,0 +1,72 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+env:
+  CARGO_TERM_COLOR: always
+
+jobs:
+  rust:
+    name: Rust tests (cargo test)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+      - name: Cache cargo
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.cargo/registry
+            ~/.cargo/git
+            target
+          key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
+      - name: cargo test
+        run: cargo test --workspace
+      - name: cargo clippy (deny warnings on the library crates)
+        run: cargo clippy -p scanweave-core -p scanweave-io -p scanweave-cli -- -D warnings
+
+  publication-hygiene:
+    name: Publication hygiene
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: README and LICENSE exist
+        run: |
+          test -f README.md || { echo "README.md missing"; exit 1; }
+          test -f LICENSE-MIT || test -f LICENSE-APACHE || { echo "no license file"; exit 1; }
+      - name: No macOS junk or stray archives tracked
+        run: |
+          ! git ls-files | grep -E '(^|/)\.DS_Store$|(^|/)\._' && echo "clean" || { echo "junk files tracked"; exit 1; }
+      - name: Repository metadata is not the placeholder
+        run: |
+          ! grep -q 'example.invalid' Cargo.toml || { echo "placeholder repository URL in Cargo.toml"; exit 1; }
+
+  qualification:
+    name: Qualification gates (python)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: System tools
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y poppler-utils
+      - name: Python deps
+        run: |
+          python -m venv qualification/.venv
+          qualification/.venv/bin/pip install -q pypdfium2 numpy Pillow fontTools jsonschema
+      - name: Build the probe / CLI
+        run: cargo build --workspace
+      - name: Fixture schema layer
+        run: python3 qualification/validate_fixtures.py
+      - name: Text search gates
+        run: qualification/.venv/bin/python qualification/test_text_search.py
+      - name: Paint fidelity + M1A-05 regression
+        run: qualification/.venv/bin/python qualification/test_m1b_paint_fidelity.py
+      - name: Document-level search
+        run: qualification/.venv/bin/python qualification/test_m1b_document_search.py

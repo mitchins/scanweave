@@ -1,10 +1,10 @@
 # M1-B: searchable multi-page documents, economical fallback, honest measurement
 
 **Commit:** implementation frozen at `5462593`; review fixes at `358bada`,
-`7855601`, `170236e`; deliverables at `85e1564`. **Status: APPROVED** —
-independently approved by deepseek-reviewer at `170236e` (REVISE→REVISE→APPROVED
-across three rounds; every finding fixed or honestly corrected, no finding
-waived).
+`7855601`, `170236e`; deliverables at `85e1564`; operator-review corrections in
+the following commits. **Status:** M1-B approved at `170236e`; the operator's
+review of the pushed revision then found six implementation defects, all fixed
+in this revision (see §0b).
 
 ## 0. N1 — root cause and fix (the M1-A open defect)
 
@@ -53,6 +53,31 @@ commit history):
 **Verified:** `test_text_search.py` 49/49 pass (p10 page1 `Page 1 of 4` native
 search now passes); M1-A vs M1-B renders of p10 page1 are **pixel-identical
 (0 differing pixels)** — the owner run provably paints nothing.
+
+## 0b. Operator review of the pushed revision: six defects found and fixed
+
+An independent inspection of the pushed (approved) revision found correctness
+gaps the M1-B tests did not cover. All six are fixed here, each with a
+regression test (`regress_*` in `probes/m0-font-pdf/tests/m1b_behavior.rs`):
+
+| # | Defect | Fix | Regression |
+|---|---|---|---|
+| P0 | Protected regions were discarded: `input_from_ocr_page` kept spans but dropped `protected_regions` (the internal OCR page hardcoded `vec![]`), so caller-specified financial protection was never honoured | `Input` carries `protected_regions`; `plan_regions` treats a protection polygon as having priority (SPEC §4.4): any unit within the contact margin of a protected box forces the region to raster with reason `Protected`, and the region box grows to cover the protected pixels so the patch reproduces them exactly | `regress_protected_amount_stays_raster` |
+| P0 | The pixel binding was computed for reporting but never compared: `OcrPage::verify_binding` existed and was never called | The CLI (both OCR input forms) and the bundle path call `verify_binding` against the decoded canonical pixels before converting; `convert_parts` re-checks the declared hash itself (defence in depth) | `regress_pixel_binding_mismatch_is_refused` |
+| P1 | Page geometry came from `policy.dpi` instead of the page's affine, so a 600 dpi scan was laid out at the bundle's 300 dpi default | `PageTransform` is derived from the normalized page's `raster_to_page_pt` and drives every placement (MediaBox, patches, glyph runs, owner baselines); skew is refused as unsupported geometry. Verified pixel-identical on the 300 dpi fixtures | `regress_geometry_uses_the_page_affine` |
+| P1 | `min_ink_iou` (0.98) was never read: auto selected by bytes without any fidelity check | Per-occurrence analytical ink IoU (outline rasterized over the unit's crop vs the source ink mask — SPEC §4.2's mask definition on the candidate); units below the threshold degrade to raster (`FidelityBelowPolicy`); `reconstruct` refuses a violating candidate, `auto` falls back to the raster baseline; `--min-ink-iou` is an explicit operator decision recorded in `qualification/policy/m1b-operating.toml` | `regress_min_ink_iou_is_enforced` |
+| P1 | Shared CID deduplication was incomplete: `enc_index` was queried but never populated, so repeated (glyph, string) pairs minted new CIDs | The union now inserts into `enc_index` on first sight; doc4_repeat dropped 41,781 → 39,354 B | `regress_repeated_spans_keep_owners_and_cids_dedup` |
+| P1 | Owner dedup compared OCR *text* instead of span id, so a repeated word whose second occurrence lacked visual components lost its owner | Dedup by `span_id` everywhere (the text-based lookup `owner_span` was removed) | same test (two identical-text spans keep both owners) |
+| P2 | Auto reports could describe the wrong candidate: top-level image/content statistics came from the reconstruction even when the raster baseline was emitted | The document report's accounting follows the emitted candidate | `regress_auto_reports_the_selected_candidate` |
+
+Also fixed while re-running everything: `report.font_bytes` was left at 0 by the
+`convert`/`convert_parts` refactor (the PDF always embedded the font), and the
+probe's `b0_raster.pdf` path re-enforces the pixel binding.
+
+**Consequence of enforcing the fidelity policy (measured, not hidden):**
+`auto` at the SPEC's default 0.98 now emits the lossless raster baseline for
+these antialiased fixtures (their vector traces measure 0.80–0.996 per
+occurrence). Byte costs are honest in both policies — see §4.
 
 ## 1. Economical raster fallback
 
@@ -107,34 +132,48 @@ search now passes); M1-A vs M1-B renders of p10 page1 are **pixel-identical
 | `test_corpus_adapter.py`, `test_subpixel_metric.py`, `validate_fixtures.py` | pass |
 | Determinism | all 5 documents byte-identical (PDF **and** report) across repeat builds, both modes; single-page p10/p14/p16 identical (PDF+report); qpdf --check clean; OTS-sanitize clean |
 
-## 4. External baselines (document level, actual bytes)
+## 4. External baselines (document level, actual bytes, policy-scoped)
 
-| Document | scanweave (deterministic) | OCRmyPDF (±10 B) | IA MRC (per-page sum) |
-|---|---:|---:|---:|
-| doc4_invoice | **54,592 B** | ~174,55x B | 154,867 B |
-| doc4_repeat | **41,781 B** | ~93,29x B | 95,296 B |
-| doc4_mixed | **79,175 B** | ~117,24x B | 115,042 B |
-| doc10_mixed | **175,297 B** | ~306,79x B | 302,085 B |
-| doc2_min | **62,057 B** | ~80,76x B | 72,472 B |
+Exact numbers committed at `work/m1b-deliverables/baseline_report.json`
+(`qualification/test_m1b_baselines.py`, fails closed). Two scanweave policies
+are shown because the fidelity gate is now real:
 
-The OCRmyPDF column is a range because OCRmyPDF **embeds a creation
-timestamp** in every output, so its byte count varies by about ±10 B between
-runs (measured: 174,546–174,558 across runs of the same document); the numbers
-shown are the last digit ranges of one committed run. scanweave's bytes are
-deterministic (identical on every run — verified by double builds of all five
-documents and the three deliverables); IA MRC's are deterministic per page.
+- **reconstruct@0.75** — the development measurement floor
+  (`qualification/policy/m1b-operating.toml`): the vectorized pipeline the
+  M1-B work is about.
+- **auto@0.98** — the SPEC's default policy, enforced: the same documents with
+  the fidelity gate active (this is what `scanweave build --mode auto` emits by
+  default for these fixtures).
 
-scanweave is 1.2–3.2× smaller than both external baselines at equal content
-(the exact per-candidate numbers of one committed run are in
-`work/m1b-deliverables/baseline_report.json`, written by
-`qualification/test_m1b_baselines.py`, which now fails closed),
-with ink IoU 0.79–1.00 per page (OCRmyPDF at `--optimize 0` reaches 1.0 by
-embedding the source losslessly — at 2–3× the bytes; IA MRC is lossy on the
-noise-heavy pages). Gates: scanweave ≤ both baselines on every document, and
-scanweave's per-page ink IoU ≥ 0.75 everywhere. IA MRC is a per-page tool; the
-document number is the sum of per-page runs, stated as such.
+| Document | reconstruct@0.75 | auto@0.98 (enforced) | OCRmyPDF | IA MRC (per-page sum) |
+|---|---:|---:|---:|---:|
+| doc4_invoice | **48,836 B** | 168,727 B | 174,55x B | 154,867 B |
+| doc4_repeat | **39,354 B** | 92,184 B | 93,30x B | 95,295 B |
+| doc4_mixed | **78,242 B** | 117,089 B | 117,25x B | 115,042 B |
+| doc10_mixed | **170,242 B** | 300,920 B | 306,80x B | 302,085 B |
+| doc2_min | **61,967 B** | 74,957 B | 80,76x B | 72,472 B |
 
-## 5. Required demonstrations
+Reading this honestly (the earlier "1.2–3.2× smaller" framing was withdrawn):
+
+- At the development floor, scanweave's vectorized output is **1.2–2.4×
+  smaller than OCRmyPDF and IA MRC** at equal content, with ink IoU 0.79–1.00
+  per page (OCRmyPDF reaches 1.0 by embedding the source losslessly).
+- At the enforced SPEC default (0.98), scanweave's auto output is **lossless
+  raster**, so it is smaller than OCRmyPDF everywhere (also lossless at
+  `--optimize 0`) but **within ±9% of IA MRC's lossy MRC coding** — for
+  doc4_invoice IA MRC is 8.9% smaller. That is expected: IA MRC is lossy on the
+  noise-heavy pages, this pipeline is not ("no lossy background processing" is
+  M1-B scope discipline).
+- OCRmyPDF carries **English tessdata only** in this environment, so its kana
+  page is not semantically comparable; byte sizes for it still count.
+- OCRmyPDF embeds a creation timestamp, so its bytes vary ±10 between runs
+  (shown as ranges); scanweave's and IA MRC's are deterministic.
+
+Per-page ink IoU for scanweave's reconstruction ranges 0.7868–1.0 on these
+fixtures — the same figures the M1-B report already published, now measured
+against a policy that actually gates them.
+
+## 5. Required demonstrations## 5. Required demonstrations
 
 1. **Native PDFium search for `Page 1 of 4` on the mixed line** — PASS (single
    page and inside doc4_invoice page 1, both engines).
@@ -195,6 +234,15 @@ document number is the sum of per-page runs, stated as such.
   all documents compose already-qualified single-page fixtures.
 - **L6:** `work/m1b-deliverables/` was force-added past `.gitignore`; a
   regeneration is not auto-tracked (manifest must be re-committed).
+- **L7 (new, from enforcing the fidelity policy):** at the SPEC's default
+  `min_ink_iou = 0.98`, the vector traces of small antialiased text measure
+  0.80–0.996 per occurrence, so `--mode auto` emits the lossless raster
+  baseline for such pages (≈2–3× the bytes of the vectorized output). The
+  policy is enforced rather than relaxed; `--min-ink-iou` is the explicit
+  calibration knob and the calibration evidence/thresholds are recorded in
+  `qualification/policy/m1b-operating.toml`. Vectorizing antialiased text
+  inherently bolds the mask boundary (SPEC §4.2's note), which caps the
+  achievable ink IoU below 0.98 for small glyphs.
 
 ## 8. Instruction
 

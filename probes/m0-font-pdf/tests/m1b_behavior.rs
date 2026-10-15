@@ -3,9 +3,18 @@
 //! document assembly, and the M1A-05 contact regression.
 
 use m0_font_pdf::shim::{convert_input, convert_with};
+
+/// The behaviour tests exercise the reconstruction path, so the converter-side
+/// fidelity gate (min_ink_iou) is disabled here: the qualification harness
+/// applies the SPEC's own per-occurrence gates to the rendered output.
+fn measurement_policy() -> m0_font_pdf::Policy {
+    m0_font_pdf::Policy { min_ink_iou: 0.0, ..m0_font_pdf::Policy::default() }
+}
 use m0_font_pdf::convert as io_convert;
+use scanweave_io::convert::{convert, ProtectedInput};
 use m0_font_pdf::{Input, Policy};
 use scanweave_core::Limits;
+
 use scanweave_core::ocr_page::OcrPage;
 use std::path::PathBuf;
 
@@ -37,7 +46,10 @@ fn utf16be_hex(s: &str) -> String {
 fn build(dir: &str, stem: &str, policy: Option<&Policy>) -> scanweave_io::convert::Output {
     let (rgb, w, h, page) = fixture(dir, stem);
     let input = convert_input(&rgb, w, h, stem, &page);
-    convert_with(&input, policy).expect("conversion")
+    // the behaviour tests exercise the reconstruction path: the converter-side
+    // fidelity gate is disabled unless the test overrides it explicitly
+    let p = policy.cloned().unwrap_or_else(measurement_policy);
+    convert_with(&input, Some(&p)).expect("conversion")
 }
 
 /// M1B-01: a line mixing visible spans and a raster-fallback span must be
@@ -126,7 +138,7 @@ fn m1b01b_vector_lines_keep_per_span_marks() {
 fn m1b02_patch_coalescing_is_faithful_and_economical() {
     let (rgb, w, h, page) = fixture("p14_noisy", "p14_noisy");
     let input = convert_input(&rgb, w, h, "p14", &page);
-    let out = convert_with(&input, None).expect("convert");
+    let out = convert_with(&input, Some(&measurement_policy())).expect("convert");
     let r = &out.report;
     // fidelity: every patch still byte-identical to the source crop
     for p in &r.patches {
@@ -170,7 +182,7 @@ fn m1b02_patch_coalescing_is_faithful_and_economical() {
 fn m1b03_auto_selects_smallest_qualified_candidate() {
     let (rgb, w, h, page) = fixture("p14_noisy", "p14_noisy");
     let input = convert_input(&rgb, w, h, "p14", &page);
-    let out = convert_with(&input, Some(&Policy { mode: "auto".into(), ..Policy::default() }))
+    let out = convert_with(&input, Some(&Policy { mode: "auto".into(), min_ink_iou: 0.0, ..Policy::default() }))
         .expect("auto convert");
     let r = &out.report;
     assert_eq!(r.policy.mode, "auto");
@@ -179,7 +191,7 @@ fn m1b03_auto_selects_smallest_qualified_candidate() {
     // and it must not be larger than the reconstruct candidate on the same page
     let recon = convert_with(
         &Input { rgb: rgb.clone(), ..input.clone() },
-        Some(&Policy { mode: "reconstruct".into(), ..Policy::default() }),
+        Some(&Policy { mode: "reconstruct".into(), min_ink_iou: 0.0, ..Policy::default() }),
     )
     .expect("reconstruct convert");
     assert!(
@@ -212,7 +224,7 @@ fn m1b04_document_assembly_is_one_searchable_pdf() {
             img.as_raw(), w, h, &p.page_id, &ocr,
         ));
     }
-    let policy = Policy::default();
+    let policy = measurement_policy();
     let out = convert_document(&bundle.document_id, &inputs, &policy).expect("document");
     let pdf = String::from_utf8_lossy(&out.pdf_bytes);
 
@@ -272,10 +284,10 @@ fn m1b04b_font_reuse_reduces_bytes() {
         let ocr = OcrPage::parse_bytes(&std::fs::read(doc.join(&p.ocr_page_path)).unwrap()).unwrap();
         inputs.push(scanweave_io::convert::input_from_ocr_page(img.as_raw(), w, h, &p.page_id, &ocr));
     }
-    let out = convert_document(&bundle.document_id, &inputs, &Policy::default()).unwrap();
+    let out = convert_document(&bundle.document_id, &inputs, &measurement_policy()).unwrap();
     let separate: usize = inputs
         .iter()
-        .map(|i| io_convert(i, &Policy::default()).unwrap().pdf_bytes.len())
+        .map(|i| convert(i, &measurement_policy()).unwrap().pdf_bytes.len())
         .sum();
     assert!(
         out.pdf_bytes.len() < separate,
@@ -342,4 +354,281 @@ fn m1b05_text_touching_rule_stamp_barcode() {
             assert_eq!(scanweave_core::hash_hex(&crop), p.rgb_sha256, "{stem}: patch fidelity");
         }
     }
+}
+
+// ---------------------------------------------------------------------------
+// P0/P1/P2 regression set (operator review of the pushed M1-B revision):
+// mismatched OCR/image hashes, protected amounts, 600 DPI geometry,
+// repeated-span ownership, cross-page CID reuse, selected-candidate accounting.
+// ---------------------------------------------------------------------------
+
+/// Compute the canonical pixel hash the same way the binding declares it.
+fn pixel_hash(rgb: &[u8], w: u32, h: u32) -> String {
+    scanweave_core::pixel_hash::pixel_hash(
+        scanweave_core::pixel_hash::CanonicalFormat::Rgb8,
+        w as u64,
+        h as u64,
+        scanweave_core::pixel_hash::ColourTag::Srgb,
+        None,
+        rgb,
+    )
+    .unwrap()
+}
+
+/// Build a synthetic one-line page: "Amount 12.34 Amount 12.34" — two spans with
+/// IDENTICAL OCR text, only one of which has visual components (the second is
+/// covered by a solid block). Returns the OCR page JSON for it.
+fn repeated_span_page(w: u32, h: u32, block_x: u32) -> scanweave_core::ocr_page::OcrPage {
+    use scanweave_core::ocr_page::*;
+    let span = |id: &str, x0: u32, x1: u32, text: &str| Span {
+        id: id.into(),
+        text: text.into(),
+        separator_after: " ".into(),
+        polygon: vec![[x0 as f64, 40.0], [x1 as f64, 40.0], [x1 as f64, 110.0], [x0 as f64, 110.0]],
+        direction: Direction::Ltr,
+        role: Role::Body,
+        language: None,
+        confidence: Confidence { value: None, scale: ConfidenceScale::Unknown, calibrated: false },
+        baseline: None,
+        provenance: Provenance::SourceGenerated,
+        parent_span_id: None,
+        symbols: text
+            .chars()
+            .enumerate()
+            .map(|(i, c)| Symbol {
+                id: format!("{id}s{i:04}"),
+                text_range_utf8: [i, i + c.len_utf8()],
+                polygon: vec![
+                    [x0 as f64 + i as f64 * 8.0, 45.0],
+                    [x0 as f64 + i as f64 * 8.0 + 8.0, 45.0],
+                    [x0 as f64 + i as f64 * 8.0 + 8.0, 105.0],
+                    [x0 as f64 + i as f64 * 8.0 + 8.0, 105.0],
+                ],
+                confidence: Confidence { value: None, scale: ConfidenceScale::Unknown, calibrated: false },
+            })
+            .collect(),
+    };
+    OcrPage {
+        schema_version: SchemaVersion::V1,
+        page_id: "repeated".into(),
+        raster: RasterBinding {
+            asset_path: "repeated.png".into(),
+            file_sha256: String::new(),
+            pixel_sha256: String::new(),
+            width_px: w,
+            height_px: h,
+            canonical_format: scanweave_core::pixel_hash::CanonicalFormat::Rgb8,
+            colour_tag: scanweave_core::pixel_hash::ColourTag::Srgb,
+            icc_sha256: None,
+            orientation_policy: OrientationPolicy::AppliedOnce,
+            decoder_id: "test".into(),
+            dpi_x: Some(300.0),
+            dpi_y: Some(300.0),
+        },
+        page: PageGeometry {
+            width_pt: w as f64 * 72.0 / 300.0,
+            height_pt: h as f64 * 72.0 / 300.0,
+            raster_to_page_pt: [72.0 / 300.0, 0.0, 0.0, -72.0 / 300.0, 0.0, h as f64 * 72.0 / 300.0],
+        },
+        source_geometry: None,
+        producer: Producer { name: "test".into(), version: "1".into(), models: vec![], languages: vec![] },
+        granularity: Granularity::Symbol,
+        reading_order_status: ReadingOrderStatus::Supplied,
+        reading_order: vec!["w0".into(), "w1".into()],
+        spans: vec![
+            span("w0", 40, 150, "Amount 12.34"),
+            span("w1", block_x, block_x + 110, "Amount 12.34"),
+        ],
+        protected_regions: vec![],
+    }
+}
+
+/// P0-1: a pixel-hash mismatch between the OCR page and the raster must REFUSE.
+#[test]
+fn regress_pixel_binding_mismatch_is_refused() {
+    let (rgb, w, h, mut page) = fixture("p13_nontext", "p13_nontext");
+    let real = pixel_hash(&rgb, w, h);
+    // corrupt the declared hash: the conversion must refuse, not proceed
+    page.raster.pixel_sha256 = "0".repeat(64);
+    let mut input = convert_input(&rgb, w, h, "p13", &page);
+    assert_eq!(input.pixel_sha256.as_deref(), Some("0".repeat(64).as_str()));
+    input.pixel_sha256 = Some("0".repeat(64));
+    let err = convert(&input, &measurement_policy()).map(|_| ()).unwrap_err();
+    assert!(
+        err.contains("pixel binding mismatch"),
+        "expected a binding refusal, got: {err}"
+    );
+    // the real hash must be accepted through the same path
+    let mut ok = input.clone();
+    ok.pixel_sha256 = Some(real);
+    convert(&ok, &measurement_policy()).expect("matching binding converts");
+}
+
+/// P0-2: caller-protected regions must not be vectorized — the protected
+/// amount's pixels survive as exact raster, and the region reports Protected.
+#[test]
+fn regress_protected_amount_stays_raster() {
+    let (rgb, w, h, page) = fixture("p16_statement", "p16_statement");
+    // protect the "Amount" span's box: caller-provided protection has priority
+    let amount = page.spans.iter().find(|s| s.text == "Amount").expect("Amount span");
+    let mut input = convert_input(&rgb, w, h, "p16", &page);
+    input.protected_regions = vec![ProtectedInput {
+        id: "prot-amount".into(),
+        polygon: amount.polygon.clone(),
+        reason: "financial".into(),
+    }];
+    let out = convert(&input, &measurement_policy()).expect("conversion");
+    let r = &out.report;
+    assert!(
+        r.fallback_reasons.contains_key("Protected"),
+        "protected regions must force raster fallback, got {:?}",
+        r.fallback_reasons
+    );
+    // every span keeps exactly one owner (the protected span is overlaid)
+    assert!(r.semantic_owner.values().all(|o| o == "visible_tounicode" || o == "invisible"));
+    // the protection pixels are reproduced exactly: the fallback patch covering
+    // the protected box is byte-identical to the source crop
+    let xs: Vec<f64> = amount.polygon.iter().map(|p| p[0]).collect();
+    let ys: Vec<f64> = amount.polygon.iter().map(|p| p[1]).collect();
+    let (x0, y0) = (xs.iter().cloned().fold(f64::MAX, f64::min) as usize, ys.iter().cloned().fold(f64::MAX, f64::min) as usize);
+    let (x1, y1) = (xs.iter().cloned().fold(f64::MIN, f64::max) as usize, ys.iter().cloned().fold(f64::MIN, f64::max) as usize);
+    let covering = r.patches.iter().any(|p| {
+        p.bbox_px[0] <= x0 as f64 && p.bbox_px[1] <= y0 as f64 && p.bbox_px[2] >= x1 as f64 && p.bbox_px[3] >= y1 as f64
+    });
+    assert!(covering, "the protected box must be covered by an exact source patch");
+}
+
+/// P1-1: physical dimensions come from the page's affine, never from --dpi.
+/// A 600 dpi scan must not be laid out at the bundle's 300 dpi default.
+#[test]
+fn regress_geometry_uses_the_page_affine() {
+    let (rgb, w, h, mut page) = fixture("p13_nontext", "p13_nontext");
+    // re-declare the page as a 600 dpi scan: the affine is authoritative
+    let m = [72.0 / 600.0, 0.0, 0.0, -72.0 / 600.0, 0.0, h as f64 * 72.0 / 600.0];
+    page.page.raster_to_page_pt = m;
+    page.page.width_pt = w as f64 * 72.0 / 600.0;
+    page.page.height_pt = h as f64 * 72.0 / 600.0;
+    page.raster.dpi_x = Some(600.0);
+    page.raster.dpi_y = Some(600.0);
+    let input = convert_input(&rgb, w, h, "p13", &page);
+    // the same --dpi 300 the bundle default would pass: the affine must win
+    let policy = m0_font_pdf::Policy { min_ink_iou: 0.0, ..m0_font_pdf::Policy::default() };
+    let out = convert(&input, &policy).expect("conversion");
+    let want_w = (w as f64 * 72.0 / 600.0) as f32;
+    assert!(
+        (out.report.policy.dpi - 300.0).abs() < 1e-9,
+        "the CLI dpi is the sampling hint; the page affine is authoritative"
+    );
+    let pdf = String::from_utf8_lossy(&out.pdf_bytes);
+    assert!(
+        pdf.contains(&format!("[0 0 {want_w} ")),
+        "the MediaBox must use the page's 600 dpi geometry ({want_w}pt), not 300 dpi"
+    );
+    // a skew must be refused, not silently approximated
+    let mut skewed = input.clone();
+    skewed.raster_to_page_pt = [0.12, 0.01, 0.0, -0.12, 0.0, 100.0];
+    let err = convert(&skewed, &policy).map(|_| ()).unwrap_err();
+    assert!(err.contains("unsupported geometry"), "skew must be refused: {err}");
+}
+
+/// P1-2: min_ink_iou is enforced — a page whose vector units measure below the
+/// policy is refused in reconstruct mode, and auto emits the searchable raster
+/// baseline instead (fidelity is a hard gate, not a report decoration).
+#[test]
+fn regress_min_ink_iou_is_enforced() {
+    let (rgb, w, h, page) = fixture("p16_statement", "p16_statement");
+    let input = convert_input(&rgb, w, h, "p16", &page);
+    let strict = m0_font_pdf::Policy { min_ink_iou: 0.98, ..m0_font_pdf::Policy::default() };
+    let err = convert(&input, &strict).map(|_| ()).expect_err("0.98 must refuse this page's vector units");
+    assert!(err.contains("fidelity policy violated"), "{err}");
+    // auto mode emits the raster baseline, which reproduces the source exactly
+    let auto = m0_font_pdf::Policy { mode: "auto".into(), min_ink_iou: 0.98, ..m0_font_pdf::Policy::default() };
+    let out = convert(&input, &auto).expect("auto falls back");
+    assert_eq!(out.report.selected, "raster_baseline");
+    // an explicitly calibrated policy admits the vectors and reports the measure
+    let loose = m0_font_pdf::Policy { min_ink_iou: 0.5, ..m0_font_pdf::Policy::default() };
+    let out2 = convert(&input, &loose).expect("calibrated policy converts");
+    assert_eq!(out2.report.selected, "reconstruct");
+    let m = out2.report.fidelity.vector_ink_iou_min.expect("measured");
+    assert!(m >= 0.5, "the reported fidelity must satisfy the stated policy");
+}
+
+/// P1-3/P1-4: repeated identical OCR text keeps BOTH spans' owners, and the
+/// document-wide CID table deduplicates repeated (glyph, string) pairs.
+#[test]
+fn regress_repeated_spans_keep_owners_and_cids_dedup() {
+    // two spans with identical OCR text; the second is covered by a solid block
+    let (w, h) = (400u32, 150u32);
+    let mut rgb = vec![250u8; (w * h * 3) as usize];
+    let mut page = repeated_span_page(w, h, 220);
+    // draw "Amount 12.34" once (span 1); span 2's area stays blank (raster-fallback)
+    let draw_text = |rgb: &mut Vec<u8>, x0: u32| {
+        for gy in 45..105u32 {
+            for gx in x0..(x0 + 100) {
+                // crude glyph blocks: alternate ink columns so the tracer sees marks
+                if (gx + gy) % 7 < 3 {
+                    let i = ((gy * w + gx) * 3) as usize;
+                    rgb[i] = 20;
+                    rgb[i + 1] = 20;
+                    rgb[i + 2] = 20;
+                }
+            }
+        }
+    };
+    draw_text(&mut rgb, 40);
+    page.raster.file_sha256 = scanweave_core::hash_hex(&rgb);
+    page.raster.pixel_sha256 = pixel_hash(&rgb, w, h);
+    let input = convert_input(&rgb, w, h, "repeated", &page);
+    let out = convert(&input, &measurement_policy()).expect("conversion");
+    // BOTH spans (identical text) must keep exactly one owner each
+    let owners = &out.report.semantic_owner;
+    assert_eq!(owners.len(), 2, "both identical-text spans must be present: {owners:?}");
+    assert!(owners.contains_key("w0") && owners.contains_key("w1"));
+    // no unowned/double-owned ink
+    assert_eq!(out.report.coverage.unowned_ink_px, 0);
+    assert_eq!(out.report.coverage.multiply_owned_ink_px, 0);
+
+    // cross-page CID reuse: the same page twice in one document must not mint
+    // duplicate CIDs for the same (glyph, string) pairs
+    use scanweave_io::document::convert_document;
+    let inputs = vec![input.clone(), input.clone()];
+    let doc = convert_document("repeated-doc", &inputs, &measurement_policy()).expect("document");
+    let per_page = doc.report.page_reports.iter().map(|p| p.font_glyphs).collect::<Vec<_>>();
+    assert_eq!(per_page[0], per_page[1], "identical pages must trace identical glyphs");
+    // the document font must be no larger than one page's glyph set (reuse)
+    assert_eq!(
+        doc.report.font_bytes, out.report.font_bytes,
+        "the shared font must not duplicate the same page's glyphs"
+    );
+}
+
+/// P2: when auto selects the raster baseline, the top-level image/content
+/// accounting must describe the SELECTED candidate, not the reconstruction.
+#[test]
+fn regress_auto_reports_the_selected_candidate() {
+    use scanweave_io::document::convert_document;
+    let doc = PathBuf::from(env!("CARGO_MANIFEST_DIR"))
+        .join("../../qualification/fixtures/documents/doc4_invoice");
+    let bundle_bytes = std::fs::read(doc.join("document.json")).unwrap();
+    let bundle = scanweave_core::bundle::Bundle::parse_bytes(&bundle_bytes).unwrap();
+    bundle.verify_pairing(&doc, &Limits::m0_defaults()).unwrap();
+    let mut inputs = Vec::new();
+    for p in &bundle.pages {
+        let img = image::open(doc.join(format!("{}.png", p.page_id))).unwrap().to_rgb8();
+        let (w, h) = (img.width(), img.height());
+        let ocr = OcrPage::parse_bytes(&std::fs::read(doc.join(&p.ocr_page_path)).unwrap()).unwrap();
+        inputs.push(scanweave_io::convert::input_from_ocr_page(img.as_raw(), w, h, &p.page_id, &ocr));
+    }
+    // force auto to pick the raster baseline by setting an unreachable policy
+    let policy = m0_font_pdf::Policy { mode: "auto".into(), min_ink_iou: 1.0, ..m0_font_pdf::Policy::default() };
+    let out = convert_document("doc", &inputs, &policy).expect("auto Document");
+    assert_eq!(out.report.selected, "raster_baseline");
+    // the reported bytes are the emitted candidate's, and the accounting matches it
+    assert_eq!(out.report.pdf_bytes, out.pdf_bytes.len());
+    assert_eq!(out.report.image_xobjects, 4, "one whole-page patch per page");
+    assert_eq!(out.report.page_fidelity.len(), 4);
+    assert!(out.report.page_fidelity.iter().all(|f| f.map_or(false, |v| v >= 1.0)));
+    // the reconstruction candidate is still recorded for comparison
+    let recon = out.report.candidates.iter().find(|c| c.name == "reconstruct").unwrap();
+    assert!(recon.pdf_bytes > 0);
 }

@@ -5,11 +5,30 @@ use std::process::ExitCode;
 fn usage() -> ! {
     eprintln!(
         "scanweave build <input.png> --ocr <input.hocr> [--dpi N] [--mode reconstruct|auto] \
-         --output <out.pdf> --report <out.json>\n\
-         scanweave build --bundle <document.json> [--mode reconstruct|auto] \
+         [--min-ink-iou F] --output <out.pdf> --report <out.json>\n\
+         scanweave build --bundle <document.json> [--mode reconstruct|auto] [--min-ink-iou F] \
          --output <out.pdf> --report <out.json>"
     );
     std::process::exit(2);
+}
+
+/// Parse the optional fidelity policy threshold. The SPEC's conservative
+/// development default (0.98) applies when the flag is absent; lowering it is
+/// an explicit, recorded policy decision.
+fn arg_f64(args: &[String], flag: &str, default: f64) -> Result<f64, String> {
+    match arg_value(args, flag) {
+        Some(v) => v
+            .parse::<f64>()
+            .map_err(|_| format!("{flag} must be a number in [0,1]"))
+            .and_then(|f| {
+                if (0.0..=1.0).contains(&f) {
+                    Ok(f)
+                } else {
+                    Err(format!("{flag} must be within [0,1]"))
+                }
+            }),
+        None => Ok(default),
+    }
 }
 
 /// The bundle path: one document, N pages, one searchable PDF.
@@ -68,6 +87,10 @@ fn build_bundle(args: &[String]) -> Result<(), String> {
             .map_err(|e| format!("ocr {}: {e}", p.ocr_page_path))?;
         ocr.validate(&scanweave_core::Limits::m0_defaults())
             .map_err(|e| format!("ocr validate {}: {e}", p.ocr_page_path))?;
+        // SPEC §4.2 pixel binding: the OCR page's declared canonical hash must
+        // match the decoded source pixels before any reconstruction runs
+        ocr.verify_binding(img.as_raw())
+            .map_err(|e| format!("page {}: pixel binding: {e}", p.page_id))?;
         bindings.push(scanweave_io::document::PageBinding {
             page_id: p.page_id.clone(),
             source_sha256: src.file_sha256.clone(),
@@ -91,8 +114,8 @@ fn build_bundle(args: &[String]) -> Result<(), String> {
         ));
     }
 
-    let policy =
-        scanweave_io::convert::Policy { mode, dpi, ..scanweave_io::convert::Policy::default() };
+    let min_ink_iou = arg_f64(args, "--min-ink-iou", 0.98)?;
+    let policy = scanweave_io::convert::Policy { mode, dpi, min_ink_iou, ..scanweave_io::convert::Policy::default() };
     let mut out = scanweave_io::document::convert_document(&bundle.document_id, &inputs, &policy)
         .map_err(|e| e.to_string())?;
     out.report.bindings = bindings;
@@ -164,12 +187,12 @@ fn build(args: &[String]) -> Result<(), String> {
         .collect::<Vec<u8>>();
     let ocr_json = trimmed.first() == Some(&b'{');
 
-    let input = if ocr_json {
+    // --ocr accepts either foreign hOCR or the already-normalized ocr.json
+    // (sniffed by the leading '{'); both paths produce a normalized OcrPage
+    let page = if ocr_json {
         let page: scanweave_core::ocr_page::OcrPage =
             serde_json::from_slice(&ocr_bytes).map_err(|e| format!("parse {ocr}: {e}"))?;
-        page.validate(&scanweave_core::Limits::m0_defaults())
-            .map_err(|e| e.to_string())?;
-        scanweave_io::convert::input_from_ocr_page(img.as_raw(), w, h, &page.page_id, &page)
+        page
     } else {
         let doc = scanweave_io::hocr::parse_hocr(&ocr_bytes, w, h).map_err(|e| e.to_string())?;
         let file_sha = scanweave_core::hash_hex(&rgb_bytes);
@@ -190,43 +213,30 @@ fn build(args: &[String]) -> Result<(), String> {
             file_sha256: file_sha,
             pixel_sha256: pixel_sha,
         };
-        let page = scanweave_io::normalize::build_normalized_page(
+        scanweave_io::normalize::build_normalized_page(
             &scanweave_io::normalize::ImageMeta { width: w, height: h },
             &doc,
             Some(dpi),
             &binding,
         )
-        .map_err(|e| e.to_string())?;
-        page.validate(&scanweave_core::Limits::m0_defaults()).map_err(|e| e.to_string())?;
-        let spans: Vec<scanweave_io::convert::SpanInput> = page
-            .spans
-            .iter()
-            .map(|s| scanweave_io::convert::SpanInput {
-                id: s.id.clone(),
-                text: s.text.clone(),
-                separator_after: s.separator_after.clone(),
-                polygon: s.polygon.clone(),
-                symbols: s
-                    .symbols
-                    .iter()
-                    .map(|sym| scanweave_io::convert::SymbolInput {
-                        id: sym.id.clone(),
-                        range: (sym.text_range_utf8[0], sym.text_range_utf8[1]),
-                        polygon: sym.polygon.clone(),
-                    })
-                    .collect(),
-            })
-            .collect();
-        scanweave_io::convert::Input {
-            rgb: img.as_raw().to_vec(),
-            width: w,
-            height: h,
-            page_id: page.page_id.clone(),
-            spans,
-        }
+        .map_err(|e| e.to_string())?
     };
+    page.validate(&scanweave_core::Limits::m0_defaults())
+        .map_err(|e| e.to_string())?;
+    // SPEC §4.2: the OCR page declares a canonical pixel hash for this raster;
+    // refuse to work on pixels that do not match the declared binding
+    page.verify_binding(img.as_raw())
+        .map_err(|e| format!("binding {input}/{ocr}: {e}"))?;
+    let input = scanweave_io::convert::input_from_ocr_page(
+        img.as_raw(),
+        w,
+        h,
+        &page.page_id,
+        &page,
+    );
 
-    let policy = scanweave_io::convert::Policy { mode, dpi, ..scanweave_io::convert::Policy::default() };
+    let min_ink_iou = arg_f64(args, "--min-ink-iou", 0.98)?;
+    let policy = scanweave_io::convert::Policy { mode, dpi, min_ink_iou, ..scanweave_io::convert::Policy::default() };
     let out = scanweave_io::convert::convert(&input, &policy).map_err(|e| e.to_string())?;
 
     // atomic: temporary on the same filesystem, then rename

@@ -3,6 +3,7 @@ name = "m0-font-pdf"
 version.workspace = true
 edition.workspace = true
 license.workspace = true
+repository.workspace = true
 description = "M0 vertical probe: raster mask -> vtracer -> write-fonts TrueType -> pdf-writer Type0/CIDFontType2 -> independent checks."
 
 [dependencies]
