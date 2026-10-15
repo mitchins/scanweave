@@ -117,11 +117,19 @@ def main() -> int:
         capture_output=True, text=True,
     )
     printed = r.stdout + r.stderr
+    results_file = os.path.join(WORK, "corpus_checks.json")
     # interface criterion: every corpus page is PROCESSED (PASS/FAIL line) and
     # recorded in the RUN-SPECIFIC results file (never the committed gate
     # artifact — checks.py enforces this).
     processed = sum(1 for n in names if f"PASS {n}" in printed or f"FAIL {n}" in printed)
-    res = json.load(open(os.path.join(WORK, "corpus_checks.json")))
+    if not os.path.exists(results_file):
+        # never an opaque FileNotFoundError: checks.py could not even run
+        # (missing external tool, build failure, ...)
+        raise SystemExit(
+            "checks.py produced no results file for the corpus pages "
+            f"(rc={r.returncode}):\n{printed[-1500:]}"
+        )
+    res = json.load(open(results_file))
     recorded = sum(1 for n in names if n in res["pages"])
     # transport (correctness) must PASS on corpus pages; visual gates are reported
     transport_ok = all(
