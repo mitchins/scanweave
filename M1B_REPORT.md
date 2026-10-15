@@ -1,7 +1,10 @@
 # M1-B: searchable multi-page documents, economical fallback, honest measurement
 
-**Commit:** see `git log` — implementation frozen at `5462593` (+ deliverable commit
-`85e1564`, report commits after it). **Status: implementation complete; suites run.**
+**Commit:** implementation frozen at `5462593`; review fixes at `358bada`,
+`7855601`, `170236e`; deliverables at `85e1564`. **Status: APPROVED** —
+independently approved by deepseek-reviewer at `170236e` (REVISE→REVISE→APPROVED
+across three rounds; every finding fixed or honestly corrected, no finding
+waived).
 
 ## 0. N1 — root cause and fix (the M1-A open defect)
 
