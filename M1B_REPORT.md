@@ -99,22 +99,22 @@ search now passes); M1-A vs M1-B renders of p10 page1 are **pixel-identical
 | `checks.py` E0–E7 e-proofs | **8/8 PASS**, zero gate flips vs accepted M1-A |
 | `test_text_search.py` | **49/49 pass** (was 48/49; the N1 gate now passes) |
 | `test_m1b_paint_fidelity.py` | all pass (owner runs paint nothing — 0 px outside patches in both engines; patch reproduces source above measured M1-A baselines; **explicit M1A-05 rule/stamp/barcode regression**: every contacted-region label stays searchable in both engines, exactly as the OCR has it) |
-| `test_m1b_document_search.py` | **88/88 pass** (page count/order/dims, per-page native PDFium search incl. `Page N of 4`, kana intact, no duplicates, qpdf --check, report honesty) |
+| `test_m1b_document_search.py` | **86/86 pass** (page count/order/dims, per-page native PDFium search incl. `Page N of 4`, kana intact, no duplicates, qpdf --check, report honesty) |
 | `test_m1b_baselines.py` | all gates pass (see §4) |
 | `test_corpus_adapter.py`, `test_subpixel_metric.py`, `validate_fixtures.py` | pass |
 | Determinism | all 5 documents byte-identical (PDF **and** report) across repeat builds, both modes; single-page p10/p14/p16 identical (PDF+report); qpdf --check clean; OTS-sanitize clean |
 
 ## 4. External baselines (document level, actual bytes)
 
-| Document | scanweave | OCRmyPDF | IA MRC (per-page sum) |
+| Document | scanweave (deterministic) | OCRmyPDF (±10 B) | IA MRC (per-page sum) |
 |---|---:|---:|---:|
-| doc4_invoice | **54,592 B** | 174,550 B | 154,867 B |
-| doc4_repeat | **41,781 B** | 93,299 B | 95,295 B |
-| doc4_mixed | **79,175 B** | 117,248 B | 115,042 B |
-| doc10_mixed | **175,297 B** | 306,801 B | 302,085 B |
-| doc2_min | **62,057 B** | 80,760 B | 72,471 B |
+| doc4_invoice | **54,592 B** | ~174,55x B | 154,867 B |
+| doc4_repeat | **41,781 B** | ~93,29x B | 95,296 B |
+| doc4_mixed | **79,175 B** | ~117,25x B | 115,042 B |
+| doc10_mixed | **175,297 B** | ~306,79x B | 302,085 B |
+| doc2_min | **62,057 B** | ~80,76x B | 72,472 B |
 
-scanweave is 1.4–3.2× smaller than both external baselines at equal content
+scanweave is 1.2–3.2× smaller than both external baselines at equal content
 (the full comparison is committed at
 `work/m1b-deliverables/baseline_report.json`, written by
 `qualification/test_m1b_baselines.py`, which now fails closed),
