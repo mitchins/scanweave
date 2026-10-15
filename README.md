@@ -34,6 +34,7 @@ Scanned-document reconstruction is a research-grade pipeline. Milestone state:
 | M0 / M0-Q | PROVISIONAL (accepted baseline, known inherited visual-gate failures) | `M0_Q_REPORT.md` |
 | M1-A | CLOSED (independently approved) | `M1A_REPORT.md` |
 | M1-B | CLOSED (independently approved + operator-review corrections) | `M1B_REPORT.md` |
+| M1-C | RESEARCH (continue research; no promotion) | `M1C_REPORT.md` |
 
 **Honest limitations:** the 8 default fixtures still fail the strict visual
 gates (inherited, documented, thresholds never relaxed); PDFium appends an
