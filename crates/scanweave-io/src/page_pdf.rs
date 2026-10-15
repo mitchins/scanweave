@@ -29,6 +29,16 @@ pub struct Patch {
 pub struct Owner {
     pub text: String,
     pub bbox_px: [f64; 4],
+    /// the OCR span this owner overlays (line-level marks need the span id)
+    pub span_id: String,
+}
+
+/// A reading-order line of the OCR document: the exact line text (OCR's own
+/// separators verbatim — no invented whitespace) and its span ids in order.
+#[derive(Debug, Clone)]
+pub struct LineSpec {
+    pub text: String,
+    pub spans: Vec<String>,
 }
 
 fn to_unicode_stream(encodings: &[(usize, String)]) -> String {
@@ -81,6 +91,7 @@ pub fn assemble(
     patches: &[Patch],
     owners: &[Owner],
     owner_cids: &[u32],
+    lines: &[LineSpec],
 ) -> Result<Vec<u8>, String> {
     let _ = glyphless_bytes;
     let _ = glyphless_encodings;
@@ -260,88 +271,160 @@ pub fn assemble(
         .iter()
         .map(|(id, t)| (id.as_str(), t.as_str()))
         .collect();
+    let span_astral = |id: &str| {
+        span_map
+            .get(id)
+            .copied()
+            .unwrap_or("")
+            .chars()
+            .any(|c| (c as u32) > 0xFFFF)
+    };
+    let owner_by_span: std::collections::HashMap<&str, (&Owner, u32)> = owners
+        .iter()
+        .zip(owner_cids.iter())
+        .map(|(o, c)| (o.span_id.as_str(), (o, *c)))
+        .collect();
+    // visible occurrences grouped per span (reading order within a span)
+    let mut groups: Vec<Vec<usize>> = Vec::new();
+    {
+        let mut current: Option<&str> = None;
+        for (i, occ) in occurrences.iter().enumerate() {
+            if current != Some(occ.3.as_str()) {
+                groups.push(Vec::new());
+                current = Some(occ.3.as_str());
+            }
+            groups.last_mut().unwrap().push(i);
+        }
+    }
 
     c.begin_text();
-    // visible vector glyphs with per-span /ActualText
     c.set_font(Name(b"F1"), 1.0);
     c.set_fill_rgb(
         ink[0] as f32 / 255.0,
         ink[1] as f32 / 255.0,
         ink[2] as f32 / 255.0,
     );
-    {
-        let mut groups: Vec<Vec<usize>> = Vec::new();
-        for (i, occ) in occurrences.iter().enumerate() {
-            if let Some(last) = groups.last_mut() {
-                if last.first().map(|&f| occurrences[f].3 == occ.3).unwrap_or(false) {
-                    last.push(i);
-                    continue;
+
+    let mut emitted_spans: std::collections::HashSet<String> = std::collections::HashSet::new();
+    let mut covered = |span: &str, emitted: &mut std::collections::HashSet<String>| {
+        emitted.insert(span.to_string())
+    };
+
+    // Lines in reading order. A line that mixes visible spans with raster-fallback
+    // owners is wrapped in ONE line-level /ActualText carrying the OCR line text
+    // (OCR separators verbatim): native search then finds the whole line, and the
+    // fallback owner run rides inside the mark instead of being hoisted to the end
+    // of the extraction by PDFium's invisible-run ordering. Pure-vector lines keep
+    // the per-span marks of the accepted M0-Q/M1-A behaviour (astral spans keep the
+    // per-glyph ToUnicode owner).
+    for line in lines {
+        for sid in &line.spans {
+            covered(sid.as_str(), &mut emitted_spans);
+            let visible = groups
+                .iter()
+                .find(|g| occurrences[g[0]].3.as_str() == sid.as_str());
+            if let Some(group) = visible {
+                let span_id = occurrences[group[0]].3.as_str();
+                let actual = span_map.get(span_id).copied().unwrap_or("");
+                let astral = span_astral(span_id);
+                if !astral {
+                    let mut mc = c.begin_marked_content_with_properties(Name(b"Span"));
+                    let mut pl = mc.properties();
+                    pl.actual_text(TextStr(actual));
                 }
-            }
-            groups.push(vec![i]);
-        }
-        for group in &groups {
-            let span_id = occurrences[group[0]].3.as_str();
-            let actual = span_map.get(span_id).copied().unwrap_or("");
-            // Non-BMP spans are NOT wrapped in /ActualText: PDFium decodes
-            // ActualText as UTF-16 but drops astral scalars in extraction
-            // (measured in M0-Q), while the per-glyph ToUnicode path transports
-            // them correctly. BMP word grouping via ActualText avoids intra-word
-            // spaces; astral spans keep the ToUnicode owner (exact transport
-            // wins over word grouping).
-            let astral = actual.chars().any(|c| (c as u32) > 0xFFFF);
-            if !astral {
-                let mut mc = c.begin_marked_content_with_properties(Name(b"Span"));
-                let mut pl = mc.properties();
-                pl.actual_text(TextStr(actual));
-            }
-            for &i in group {
-                let (gidx, cid, bbox_px, _, _, _) = &occurrences[i];
-                let g = &shapes[*gidx];
-                let x0 = bbox_px[0] as f32 * 72.0 / dpi as f32;
-                let y1_px = bbox_px[3] as f32;
-                let y0_px = bbox_px[1] as f32;
-                let bottom_pt = page_h_pt - y1_px * 72.0 / dpi as f32;
-                let top_pt = page_h_pt - y0_px * 72.0 / dpi as f32;
-                let w_pt = bbox_px[2] as f32 * 72.0 / dpi as f32 - x0;
-                let h_pt = top_pt - bottom_pt;
-                let gx_span = g.ink_span_fu[0] as f32;
-                let gy_span = g.ink_span_fu[1] as f32;
-                let sx = w_pt * 2048.0 / gx_span.max(1.0);
-                let sy = h_pt * 2048.0 / gy_span.max(1.0);
-                let tx = x0 - (g.anchor_bbox_fu[0] as f32) * sx / 2048.0;
-                let ty = bottom_pt - (g.anchor_bbox_fu[1] as f32) * sy / 2048.0;
-                c.set_text_matrix([sx, 0.0, 0.0, sy, tx, ty]);
-                let cid = *cid + 1;
-                c.show(Str(&[(cid >> 8) as u8, (cid & 0xFF) as u8]));
-            }
-            if !astral {
-                c.end_marked_content();
+                for &i in group {
+                    let (gidx, cid, bbox_px, _, _, _) = &occurrences[i];
+                    let g = &shapes[*gidx];
+                    let x0 = bbox_px[0] as f32 * 72.0 / dpi as f32;
+                    let y1_px = bbox_px[3] as f32;
+                    let y0_px = bbox_px[1] as f32;
+                    let bottom_pt = page_h_pt - y1_px * 72.0 / dpi as f32;
+                    let top_pt = page_h_pt - y0_px * 72.0 / dpi as f32;
+                    let w_pt = bbox_px[2] as f32 * 72.0 / dpi as f32 - x0;
+                    let h_pt = top_pt - bottom_pt;
+                    let gx_span = g.ink_span_fu[0] as f32;
+                    let gy_span = g.ink_span_fu[1] as f32;
+                    let sx = w_pt * 2048.0 / gx_span.max(1.0);
+                    let sy = h_pt * 2048.0 / gy_span.max(1.0);
+                    let tx = x0 - (g.anchor_bbox_fu[0] as f32) * sx / 2048.0;
+                    let ty = bottom_pt - (g.anchor_bbox_fu[1] as f32) * sy / 2048.0;
+                    c.set_text_matrix([sx, 0.0, 0.0, sy, tx, ty]);
+                    let cid = *cid + 1;
+                    c.show(Str(&[(cid >> 8) as u8, (cid & 0xFF) as u8]));
+                }
+                if !astral {
+                    c.end_marked_content();
+                }
+            } else if let Some((owner, cid)) = owner_by_span.get(sid.as_str()) {
+                // Fallback-span owner run, drawn VISIBLY at the span's position:
+                // the owner CID references the font's EMPTY placeholder glyph,
+                // so nothing is painted (the raster patch already carries the
+                // pixels) while both extractors order the run inline like any
+                // other visible text. An invisible run is appended at the end of
+                // the text page by PDFium (measured, M1-A N1). /ActualText owns
+                // the span's label for word grouping; astral labels keep the
+                // per-glyph ToUnicode transport.
+                let owner_text = span_map.get(sid.as_str()).copied().unwrap_or("");
+                let astral = owner_text.chars().any(|c| (c as u32) > 0xFFFF);
+                if !astral {
+                    let mut mc = c.begin_marked_content_with_properties(Name(b"Span"));
+                    let mut pl = mc.properties();
+                    pl.actual_text(TextStr(owner_text));
+                }
+                let x0 = owner.bbox_px[0] as f32 * 72.0 / dpi as f32;
+                let y_bot = page_h_pt - owner.bbox_px[3] as f32 * 72.0 / dpi as f32;
+                let h_pt =
+                    ((owner.bbox_px[3] - owner.bbox_px[1]) as f32 * 72.0 / dpi as f32).max(4.0);
+                let cx = *cid;
+                let bytes = Str(&[(cx >> 8) as u8, (cx & 0xFF) as u8]);
+                c.set_font(Name(b"F1"), h_pt);
+                c.set_text_matrix([1.0, 0.0, 0.0, 1.0, x0, y_bot]);
+                c.show(bytes);
+                c.set_font(Name(b"F1"), 1.0);
+                if !astral {
+                    c.end_marked_content();
+                }
             }
         }
     }
-    // invisible owner text for raster/fallback spans: plain invisible runs of F1's
-    // owner CIDs (each CID's ToUnicode carries the span's exact label). Placed at
-    // the span's own box top. No /ActualText: PDFium drops astral scalars and the
-    // whole invisible run inside ActualText on some paths, while the per-glyph
-    // ToUnicode path transports the owner text exactly (measured in M0-Q, VS-01
-    // semantics: the visible run owns the span when it exists).
-    if !owners.is_empty() {
-        c.set_text_rendering_mode(TextRenderingMode::Invisible);
-        c.set_font(Name(b"F1"), 10.0);
-        for (owner, cid) in owners.iter().zip(owner_cids.iter()) {
-            let x0 = owner.bbox_px[0] as f32 * 72.0 / dpi as f32;
-            let y_bot = page_h_pt - owner.bbox_px[3] as f32 * 72.0 / dpi as f32;
-            let h_pt = ((owner.bbox_px[3] - owner.bbox_px[1]) as f32 * 72.0 / dpi as f32).max(4.0);
-            // owner_cids are already 1-based (CID 0 is .notdef); the visible
-            // occurrence path passes 0-based CIDs and adds 1 itself.
-            let cx = *cid;
-            let bytes = Str(&[(cx >> 8) as u8, (cx & 0xFF) as u8]);
-            c.set_font(Name(b"F1"), h_pt);
-            c.set_text_matrix([1.0, 0.0, 0.0, 1.0, x0, y_bot]);
-            c.show(bytes);
+
+    // defensive: any span not covered by a line (empty OCR text etc.)
+    for (i, occ) in occurrences.iter().enumerate() {
+        let sid = occ.3.as_str();
+        if !emitted_spans.contains(sid) {
+            let (gidx, cid, bbox_px, _, _, _) = &occurrences[i];
+            let g = &shapes[*gidx];
+            let x0 = bbox_px[0] as f32 * 72.0 / dpi as f32;
+            let y1_px = bbox_px[3] as f32;
+            let y0_px = bbox_px[1] as f32;
+            let bottom_pt = page_h_pt - y1_px * 72.0 / dpi as f32;
+            let top_pt = page_h_pt - y0_px * 72.0 / dpi as f32;
+            let w_pt = bbox_px[2] as f32 * 72.0 / dpi as f32 - x0;
+            let h_pt = top_pt - bottom_pt;
+            let sx = w_pt * 2048.0 / g.ink_span_fu[0].max(1.0) as f32;
+            let sy = h_pt * 2048.0 / g.ink_span_fu[1].max(1.0) as f32;
+            let tx = x0 - (g.anchor_bbox_fu[0] as f32) * sx / 2048.0;
+            let ty = bottom_pt - (g.anchor_bbox_fu[1] as f32) * sy / 2048.0;
+            c.set_text_matrix([sx, 0.0, 0.0, sy, tx, ty]);
+            let cid = *cid + 1;
+            c.show(Str(&[(cid >> 8) as u8, (cid & 0xFF) as u8]));
         }
+    }
+    for (owner, cid) in owners.iter().zip(owner_cids.iter()) {
+        if emitted_spans.contains(owner.span_id.as_str()) {
+            continue;
+        }
+        let x0 = owner.bbox_px[0] as f32 * 72.0 / dpi as f32;
+        let y_bot = page_h_pt - owner.bbox_px[3] as f32 * 72.0 / dpi as f32;
+        let h_pt = ((owner.bbox_px[3] - owner.bbox_px[1]) as f32 * 72.0 / dpi as f32).max(4.0);
+        let cx = *cid;
+        let bytes = Str(&[(cx >> 8) as u8, (cx & 0xFF) as u8]);
+        c.set_text_rendering_mode(TextRenderingMode::Invisible);
+        c.set_font(Name(b"F1"), h_pt);
+        c.set_text_matrix([1.0, 0.0, 0.0, 1.0, x0, y_bot]);
+        c.show(bytes);
         c.set_text_rendering_mode(TextRenderingMode::Fill);
+        c.set_font(Name(b"F1"), 1.0);
     }
 
     c.end_text();

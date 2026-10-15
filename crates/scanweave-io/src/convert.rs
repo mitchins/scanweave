@@ -89,6 +89,11 @@ pub struct GlyphStat {
 #[derive(Debug, Clone, Serialize)]
 pub struct Report {
     pub glyph_stats: Vec<GlyphStat>,
+    /// candidates actually serialized and measured (name, pdf bytes); auto mode
+    /// selects the smallest that passes the semantic requirements
+    pub candidates: Vec<(String, usize)>,
+    /// which candidate the reported pdf_bytes is ("reconstruct" | "raster_baseline")
+    pub selected: String,
     pub patches: Vec<PatchRecord>,
     pub occurrences: Vec<OccurrenceRecord>,
     pub page_id: String,
@@ -123,6 +128,8 @@ pub struct SymbolInput {
 pub struct SpanInput {
     pub id: String,
     pub text: String,
+    /// OCR-authoritative whitespace after this span (e.g. " " or "\n")
+    pub separator_after: String,
     pub polygon: Vec<[f64; 2]>,
     pub symbols: Vec<SymbolInput>,
 }
@@ -179,7 +186,7 @@ fn to_ocr_page(input: &Input) -> scanweave_core::ocr_page::OcrPage {
             .map(|s| Span {
                 id: s.id.clone(),
                 text: s.text.clone(),
-                separator_after: " ".into(),
+                separator_after: s.separator_after.clone(),
                 polygon: s.polygon.clone(),
                 direction: Direction::Ltr,
                 role: Role::Body,
@@ -439,6 +446,12 @@ pub fn convert(input: &Input, policy: &Policy) -> Result<Output, String> {
     // unrecognized/artwork ink is also restored as source raster pixels (VS-05:
     // preserve or invent nothing). Bucketed on a 32px grid to bound object count.
     patches.extend(artwork_patches(input, &plan));
+
+    // coalesce: merge overlapping or exactly-adjacent patches (the artwork
+    // buckets tile the page, so this collapses hundreds of 32x32 cells into a
+    // few large rects). Merged patches copy the full source rect of the union,
+    // so every emitted pixel stays byte-identical to the source.
+    let patches = coalesce_patches(input, patches);
     let raster_bytes: usize = patches.iter().map(|p| p.rgb.len()).sum();
 
     // invisible owners: exactly one per span that is NOT painted by a vector
@@ -464,14 +477,14 @@ pub fn convert(input: &Input, policy: &Policy) -> Result<Output, String> {
             }
             let text = ocr.spans.iter().find(|s| s.id == sid).map(|s| s.text.clone()).unwrap_or_default();
             let bbox = ocr.spans.iter().find(|s| s.id == sid).map(|s| span_bbox(&s.polygon)).unwrap_or([0.0, 0.0, 0.0, 0.0]);
-            owners.push(Owner { text, bbox_px: bbox });
+            owners.push(Owner { text, bbox_px: bbox, span_id: sid });
         }
     }
     for s in &ocr.spans {
         if vector_spans.contains(&s.id) || owners.iter().any(|o| o.text == s.text) {
             continue;
         }
-        owners.push(Owner { text: s.text.clone(), bbox_px: span_bbox(&s.polygon) });
+        owners.push(Owner { text: s.text.clone(), bbox_px: span_bbox(&s.polygon), span_id: s.id.clone() });
     }
     // clamp owner boxes to the canonical raster (OCR polygons may overrun it)
     for o in owners.iter_mut() {
@@ -485,6 +498,33 @@ pub fn convert(input: &Input, policy: &Policy) -> Result<Output, String> {
         .map(|o| (0usize, o.text.clone()))
         .collect();
     let span_texts: Vec<(String, String)> = ocr.spans.iter().map(|s| (s.id.clone(), s.text.clone())).collect();
+    // reading-order lines: OCR-authoritative separators, no invented whitespace
+    let mut lines: Vec<crate::page_pdf::LineSpec> = Vec::new();
+    {
+        let mut cur_text = String::new();
+        let mut cur_spans: Vec<String> = Vec::new();
+        for s in &ocr.spans {
+            if s.text.is_empty() {
+                continue;
+            }
+            cur_text.push_str(&s.text);
+            cur_text.push_str(&s.separator_after);
+            cur_spans.push(s.id.clone());
+            if s.separator_after.contains('\n') {
+                lines.push(crate::page_pdf::LineSpec {
+                    text: cur_text.trim_end().to_string(),
+                    spans: std::mem::take(&mut cur_spans),
+                });
+                cur_text.clear();
+            }
+        }
+        if !cur_spans.is_empty() {
+            lines.push(crate::page_pdf::LineSpec {
+                text: cur_text.trim_end().to_string(),
+                spans: cur_spans,
+            });
+        }
+    }
     // One font resource for everything: the vector CIDs plus an owner CID per
     // fallback span text (referencing GID1, drawn invisibly — the overlay the M0
     // baseline proved extractable). No second font, no second layer.
@@ -528,6 +568,7 @@ pub fn convert(input: &Input, policy: &Policy) -> Result<Output, String> {
         &patches,
         &owners,
         &owner_cids,
+        &lines,
     )?;
 
     // B0 baseline candidate: the canonical raster page (source pixels) plus the
@@ -620,7 +661,32 @@ pub fn convert(input: &Input, policy: &Policy) -> Result<Output, String> {
             rgb_sha256: scanweave_core::hash_hex(&p.rgb),
         })
         .collect();
+    // candidate selection: reconstruct (vector + coalesced raster + labels) vs
+    // the whole-page searchable raster baseline. Auto picks the smaller
+    // qualified candidate; both candidates pass the same semantic gates (both
+    // carry the OCR labels and the ownership invariants).
+    let mut candidates: Vec<(String, usize)> = Vec::new();
+    candidates.push(("reconstruct".to_string(), pdf_bytes.len()));
+    candidates.push(("raster_baseline".to_string(), b0_bytes.len()));
+    let selected = if policy.mode == "auto" {
+        if b0_bytes.len() < pdf_bytes.len() {
+            "raster_baseline"
+        } else {
+            "reconstruct"
+        }
+        .to_string()
+    } else {
+        "reconstruct".to_string()
+    };
+    let pdf_bytes = if selected == "raster_baseline" {
+        b0_bytes.clone()
+    } else {
+        pdf_bytes
+    };
+
     let report = Report {
+        candidates,
+        selected,
         glyph_stats,
         patches: patch_records,
         occurrences: occ_records,
@@ -671,6 +737,65 @@ fn owner_span(ocr: &scanweave_core::ocr_page::OcrPage, text: &str) -> String {
 
 
 /// Source-pixel patches for non-text artwork (never dropped, never relabelled).
+/// Merge overlapping or exactly-adjacent patches transitively (deterministic:
+/// creation order is the merge order). Each merged patch is re-copied from the
+/// source raster, so source fidelity is exact for every merged rect.
+fn coalesce_patches(input: &Input, mut patches: Vec<Patch>) -> Vec<Patch> {
+    fn merges(a: [f64; 4], b: [f64; 4]) -> bool {
+        // overlapping OR touching (gap == 0)
+        a[0] <= b[2] && b[0] <= a[2] && a[1] <= b[3] && b[1] <= a[3]
+    }
+    let mut out: Vec<Patch> = Vec::with_capacity(patches.len());
+    while !patches.is_empty() {
+        let mut base = patches.swap_remove(0);
+        let mut changed = true;
+        while changed {
+            changed = false;
+            let mut i = 0;
+            while i < patches.len() {
+                if merges(base.bbox_px, patches[i].bbox_px) {
+                    let union = [
+                        base.bbox_px[0].min(patches[i].bbox_px[0]),
+                        base.bbox_px[1].min(patches[i].bbox_px[1]),
+                        base.bbox_px[2].max(patches[i].bbox_px[2]),
+                        base.bbox_px[3].max(patches[i].bbox_px[3]),
+                    ];
+                    base = patch_from_source(input, union);
+                    patches.swap_remove(i);
+                    changed = true;
+                } else {
+                    i += 1;
+                }
+            }
+        }
+        out.push(base);
+    }
+    out
+}
+
+fn patch_from_source(input: &Input, bb: [f64; 4]) -> Patch {
+    let (w, h) = (input.width as usize, input.height as usize);
+    let x0 = bb[0].max(0.0) as usize;
+    let y0 = bb[1].max(0.0) as usize;
+    let x1 = ((bb[2] as usize).min(w)).max(x0 + 1);
+    let y1 = ((bb[3] as usize).min(h)).max(y0 + 1);
+    let (pw, ph) = (x1 - x0, y1 - y0);
+    let mut rgb = vec![0u8; pw * ph * 3];
+    for yy in 0..ph {
+        for xx in 0..pw {
+            let si = ((y0 + yy) * w + (x0 + xx)) * 3;
+            let di = (yy * pw + xx) * 3;
+            rgb[di..di + 3].copy_from_slice(&input.rgb[si..si + 3]);
+        }
+    }
+    Patch {
+        bbox_px: [x0 as f64, y0 as f64, x1 as f64, y1 as f64],
+        rgb,
+        w: pw as u32,
+        h: ph as u32,
+    }
+}
+
 fn artwork_patches(input: &Input, plan: &OwnershipPlan) -> Vec<Patch> {
     const CELL: usize = 32;
     let mut cells: std::collections::BTreeMap<(usize, usize), Vec<(usize, usize)>> =

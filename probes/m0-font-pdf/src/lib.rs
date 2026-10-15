@@ -64,6 +64,7 @@ pub fn convert_input(
         .map(|s| scanweave_io::convert::SpanInput {
             id: s.id.clone(),
             text: s.text.clone(),
+            separator_after: s.separator_after.clone(),
             polygon: s.polygon.clone(),
             symbols: s
                 .symbols
@@ -223,6 +224,8 @@ pub fn build_page(page_dir: &PathBuf, out_dir: &PathBuf) -> Result<Report, Strin
     // legacy shim report fields (io Report mirrors the shim shape)
     let mut report = Report {
         glyph_stats: out.report.glyph_stats.clone(),
+        candidates: out.report.candidates.clone(),
+        selected: out.report.selected.clone(),
         patches: out.report.patches.clone(),
         occurrences: out.report.occurrences.clone(),
         page_id: out.report.page_id.clone(),

@@ -32,8 +32,8 @@ fn build(args: &[String]) -> Result<(), String> {
     let output = arg_value(args, "--output").ok_or("missing --output")?;
     let report = arg_value(args, "--report").ok_or("missing --report")?;
     let mode = arg_value(args, "--mode").unwrap_or_else(|| "reconstruct".into());
-    if mode != "reconstruct" {
-        return Err(format!("unsupported --mode {mode} (M1-A: reconstruct only)"));
+    if mode != "reconstruct" && mode != "auto" {
+        return Err(format!("unsupported --mode {mode} (M1-B: reconstruct | auto)"));
     }
 
     let rgb_bytes = std::fs::read(&input).map_err(|e| format!("read {input}: {e}"))?;
@@ -76,6 +76,7 @@ fn build(args: &[String]) -> Result<(), String> {
         .map(|s| scanweave_io::convert::SpanInput {
             id: s.id.clone(),
             text: s.text.clone(),
+            separator_after: s.separator_after.clone(),
             polygon: s.polygon.clone(),
             symbols: s
                 .symbols
@@ -95,7 +96,8 @@ fn build(args: &[String]) -> Result<(), String> {
         page_id: page.page_id.clone(),
         spans,
     };
-    let out = scanweave_io::convert::convert(&input, &scanweave_io::convert::Policy::default()).map_err(|e| e.to_string())?;
+    let policy = scanweave_io::convert::Policy { mode, ..scanweave_io::convert::Policy::default() };
+    let out = scanweave_io::convert::convert(&input, &policy).map_err(|e| e.to_string())?;
 
     // atomic: temporary on the same filesystem, then rename
     let tmp = format!("{output}.tmp");
