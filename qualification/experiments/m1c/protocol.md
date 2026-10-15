@@ -13,3 +13,6 @@ Observation counts: N = 1,2,4,8,16,32.
 Arms: A single-observation, B visual-clustering observed medoid, C robust multi-observation, D oracle (evaluator only).
 Success thresholds: C vs B >=15% median reduction in boundary error on target degraded small-text subset; bootstrap 95% CI excludes zero; zero false merges on safety set; OCR-label mutations zero visual change.
 Negative controls: known glyphs intentionally excluded from fusion clusters; false-merge counts expected zero.
+
+## Independent review
+Obtained: yes (general reviewer, CONTINUE RESEARCH).

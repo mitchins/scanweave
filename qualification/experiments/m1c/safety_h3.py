@@ -31,9 +31,14 @@ for i,(li,ma) in enumerate(items):
         d=float(np.logical_and(a,b).sum()/max(1,np.logical_or(a,b).sum()))
         (within if same else cross).append(d)
 t = (np.median(within)+np.median(cross))/2 if within and cross else 0.5
-# false merges: negative pair with sim >= t; false splits: positive pair with sim < t
-fm = sum(1 for d in cross if d>=t)
-fs = sum(1 for d in within if d<t)
+# primary pre-registered threshold candidate 0.80
+for tt in (0.75,0.80,0.85):
+    fm=sum(1 for d in cross if d>=tt)
+    fs=sum(1 for d in within if d<tt)
+    print(f"threshold {tt:.2f}: false merges={fm}/{len(cross)} false splits={fs}/{len(within)}")
 print("within median IoU:", round(float(np.median(within)),3), "cross median IoU:", round(float(np.median(cross)),3))
-print("threshold:", round(t,3), "false merges:", fm, "false splits:", fs, "total neg:", len(cross), "pos:", len(within))
-json.dump({"within_median":float(np.median(within)),"cross_median":float(np.median(cross)),"threshold":float(t),"false_merges":fm,"false_splits":fs,"neg":len(cross),"pos":len(within)}, open(os.path.join(ROOT,"work/m1c","h3_safety.json"),"w"), indent=2)
+json.dump({"within_median":float(np.median(within)),"cross_median":float(np.median(cross)),
+           "t_0.80_false_merges":sum(1 for d in cross if d>=0.80),
+           "t_0.80_false_splits":sum(1 for d in within if d<0.80),
+           "neg":len(cross),"pos":len(within)},
+          open(os.path.join(ROOT,"work/m1c","h3_safety.json"),"w"), indent=2)
