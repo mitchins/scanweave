@@ -70,7 +70,7 @@ jobs:
         # from source and point the harness at it via SCANWEAVE_OTS
         run: |
           python -m pip install -q meson ninja
-          git clone --depth 1 https://github.com/khaledhosny/ots.git /tmp/ots
+          git clone --depth 1 --branch 9.3.0 https://github.com/khaledhosny/ots.git /tmp/ots
           meson setup /tmp/ots/build /tmp/ots > /dev/null
           ninja -C /tmp/ots/build
           /tmp/ots/build/ots-sanitize --version

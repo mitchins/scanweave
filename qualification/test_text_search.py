@@ -30,7 +30,6 @@ WORK = os.path.join(ROOT, "work", "m0-search")
 PROBE = os.path.join(ROOT, "target", "debug", "m0-font-pdf")
 from tools_env import qpdf_bin, qpdf_env  # noqa: E402
 
-QPDF = qpdf_bin()
 
 sys.path.insert(0, os.path.join(HERE, ".venv", "lib", "python3.12", "site-packages"))
 import pypdfium2 as pdfium  # noqa: E402
@@ -156,7 +155,7 @@ def main() -> int:
         check(f"p10 page{n} pdfium 'Page {n} of 4'", f"Page {n} of 4" in t10, repr(t10[:60]))
 
     # qpdf structural sanity on the repaired artifacts
-    r = subprocess.run([QPDF, "--check", b2], capture_output=True, text=True, env=qpdf_env())
+    r = subprocess.run([qpdf_bin(), "--check", b2], capture_output=True, text=True, env=qpdf_env())
     check("qpdf --check repaired p09", r.returncode == 0)
 
     if failures:
