@@ -15,7 +15,7 @@ ROOT = os.path.dirname(HERE)
 PROBE = os.path.join(ROOT, "target", "debug", "m0-font-pdf")
 FIXTURES = os.path.join(HERE, "fixtures", "probe")
 WORK = os.path.join(ROOT, "work", "m0-measure")
-from tools_env import qpdf_bin, version  # noqa: E402
+from tools_env import qpdf_bin, qpdf_env, version  # noqa: E402
 
 
 def QPDF() -> str:
@@ -81,7 +81,7 @@ def render_gray(pdf, scale=300 / 72.0):
 
 def main() -> int:
     os.makedirs(WORK, exist_ok=True)
-    env = dict(os.environ, LD_LIBRARY_PATH=os.path.join(ROOT, "tools", "dist", "lib"))
+    env = qpdf_env()
     out = {"pages": {}, "external_baselines": {}}
 
     # --- External baselines: executed with the pinned source-built tools ---
@@ -151,7 +151,7 @@ def main() -> int:
         # marked-content balance (BDC==EMC) as committed evidence — qpdf cannot
         # check pairing, so the harness records it structurally
         import subprocess as _sp
-        env_q = dict(os.environ, LD_LIBRARY_PATH=os.path.join(ROOT, "tools", "dist", "lib"))
+        env_q = qpdf_env()
         qdf = os.path.join(d, "out.qdf.pdf")
         _sp.run([QPDF(),
                  "--qdf", "--object-streams=disable", os.path.join(d, "out.pdf"), qdf],
