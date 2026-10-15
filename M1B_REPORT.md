@@ -110,12 +110,19 @@ search now passes); M1-A vs M1-B renders of p10 page1 are **pixel-identical
 |---|---:|---:|---:|
 | doc4_invoice | **54,592 B** | ~174,55x B | 154,867 B |
 | doc4_repeat | **41,781 B** | ~93,29x B | 95,296 B |
-| doc4_mixed | **79,175 B** | ~117,25x B | 115,042 B |
+| doc4_mixed | **79,175 B** | ~117,24x B | 115,042 B |
 | doc10_mixed | **175,297 B** | ~306,79x B | 302,085 B |
 | doc2_min | **62,057 B** | ~80,76x B | 72,472 B |
 
+The OCRmyPDF column is a range because OCRmyPDF **embeds a creation
+timestamp** in every output, so its byte count varies by about ±10 B between
+runs (measured: 174,546–174,558 across runs of the same document); the numbers
+shown are the last digit ranges of one committed run. scanweave's bytes are
+deterministic (identical on every run — verified by double builds of all five
+documents and the three deliverables); IA MRC's are deterministic per page.
+
 scanweave is 1.2–3.2× smaller than both external baselines at equal content
-(the full comparison is committed at
+(the exact per-candidate numbers of one committed run are in
 `work/m1b-deliverables/baseline_report.json`, written by
 `qualification/test_m1b_baselines.py`, which now fails closed),
 with ink IoU 0.79–1.00 per page (OCRmyPDF at `--optimize 0` reaches 1.0 by
