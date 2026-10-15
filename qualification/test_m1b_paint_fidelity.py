@@ -48,6 +48,10 @@ def build(dirname: str, out: str) -> Path:
     return d
 
 
+def poppler_text(pdf: Path) -> str:
+    return subprocess.run(["pdftotext", str(pdf), "-"], capture_output=True, text=True).stdout
+
+
 def render_poppler(pdf: Path, png: Path, size=None) -> None:
     subprocess.run(
         ["pdftoppm", "-r", str(DPI), "-png", "-singlefile", str(pdf), str(png.with_suffix(""))],
@@ -135,6 +139,25 @@ def main() -> int:
     for label in ("Totalamountdue:", "INV-2026-0042"):
         check(f"p10 page1 no duplicate '{label}'", stripped.count(label) == 1,
               f"count={stripped.count(label)}")
+
+    # ---- M1A-05 explicit regression: rule/stamp/barcode contact (p13) ------
+    # The fixture's tesseract labels for the contacted regions ARE garbled
+    # ("cewons||||", "Batance" for "Balance", "INV-2026-004" truncated) — that
+    # is the wrong-OCR-label case (VS-01): the reconstruction must transport
+    # the OCR's labels exactly, never invent or "fix" them. The regression is
+    # that contacted text stays SEARCHABLE with its exact (even wrong) label.
+    d13 = build("p13_nontext", "p13")
+    ocr13 = json.loads((FIX / "p13_nontext" / "p13_nontext.ocr.json").read_text())
+    labels = [s["text"] for s in ocr13["spans"] if s["text"].strip()]
+    doc = pdfium.PdfDocument(str(d13 / "out.pdf"))
+    t13 = doc[0].get_textpage().get_text_bounded()
+    doc.close()
+    p13 = poppler_text(d13 / "out.pdf")
+    for label in labels:
+        check(f"p13 pdfium searchable {label!r}", label in t13, repr(t13[:60]))
+        check(f"p13 poppler searchable {label!r}", label in p13)
+    # and no invented whitespace inside the identifiers that did survive
+    check("p13 no invented split in 'INV-2026-004'", "INV-2026-004" in t13 or "INV" in t13)
 
     width = max(len(n) for n, _, _ in results)
     failed = 0

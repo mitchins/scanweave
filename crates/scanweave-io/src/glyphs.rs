@@ -6,6 +6,7 @@
 use crate::trace::{Budget, TracedShape};
 use kurbo::{BezPath, CubicBez, PathEl, Point, QuadBez};
 
+#[derive(Debug, Clone)]
 pub struct GlyphShape {
     pub shape_key: String,
     pub path: BezPath,

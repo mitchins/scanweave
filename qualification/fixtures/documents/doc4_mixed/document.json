@@ -1,0 +1,60 @@
+{
+  "schema_version": "1.0",
+  "document_id": "doc4-mixed",
+  "sources": [
+    {
+      "source_id": "src000",
+      "asset_path": "page1.png",
+      "file_sha256": "13e35db7a72456751639fa918b36db59ebe8e2520a5f696de1f5e7f7cd188394",
+      "kind": "image"
+    },
+    {
+      "source_id": "src001",
+      "asset_path": "page2.png",
+      "file_sha256": "4e0422cb0fe2ed2dacd995ef801b215725c9c8f4e9ceaa9c4a5f1ff267d9e104",
+      "kind": "image"
+    },
+    {
+      "source_id": "src002",
+      "asset_path": "page3.png",
+      "file_sha256": "daac99b65b87f2f0f0c0ad23252de5117d6ebb1d0a5052cbb87142990d877d51",
+      "kind": "image"
+    },
+    {
+      "source_id": "src003",
+      "asset_path": "page4.png",
+      "file_sha256": "13e35db7a72456751639fa918b36db59ebe8e2520a5f696de1f5e7f7cd188394",
+      "kind": "image"
+    }
+  ],
+  "pages": [
+    {
+      "page_id": "page1",
+      "source_id": "src000",
+      "source_page_index": 0,
+      "ocr_page_path": "page1.ocr.json",
+      "ocr_page_sha256": "22ac958d35293f69064643b5691978fa188cc70323fc701479e27ac78eeef4e0"
+    },
+    {
+      "page_id": "page2",
+      "source_id": "src001",
+      "source_page_index": 0,
+      "ocr_page_path": "page2.ocr.json",
+      "ocr_page_sha256": "acc5f9356e8e442e5eb11872f194c1fd55185e95686775a2060e660572e6bc54"
+    },
+    {
+      "page_id": "page3",
+      "source_id": "src002",
+      "source_page_index": 0,
+      "ocr_page_path": "page3.ocr.json",
+      "ocr_page_sha256": "4a40134249e5d7df12782d533d8d2247c5f669821d2323375883f13fc86feac4"
+    },
+    {
+      "page_id": "page4",
+      "source_id": "src003",
+      "source_page_index": 0,
+      "ocr_page_path": "page4.ocr.json",
+      "ocr_page_sha256": "ff21e1b1e84111dade1f06d49ee1206c75a73c5a4e8c24079f2b25f34fa09b22"
+    }
+  ]
+}

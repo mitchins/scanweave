@@ -3,6 +3,7 @@
 //! (no second pipeline lives elsewhere).
 
 pub mod baseline;
+pub mod document;
 pub mod encoding;
 pub mod fontbuild;
 pub mod glyphs;

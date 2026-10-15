@@ -150,6 +150,44 @@ pub struct Output {
     pub font_bytes: Vec<u8>,
 }
 
+
+/// Build a page [`Input`] from a canonical raster and its normalized OCR page.
+/// (Shared by the single-page CLI and the document/bundle path.)
+pub fn input_from_ocr_page(
+    rgb: &[u8],
+    width: u32,
+    height: u32,
+    page_id: &str,
+    page: &scanweave_core::ocr_page::OcrPage,
+) -> Input {
+    let spans = page
+        .spans
+        .iter()
+        .map(|s| SpanInput {
+            id: s.id.clone(),
+            text: s.text.clone(),
+            separator_after: s.separator_after.clone(),
+            polygon: s.polygon.clone(),
+            symbols: s
+                .symbols
+                .iter()
+                .map(|sym| SymbolInput {
+                    id: sym.id.clone(),
+                    range: (sym.text_range_utf8[0], sym.text_range_utf8[1]),
+                    polygon: sym.polygon.clone(),
+                })
+                .collect(),
+        })
+        .collect();
+    Input {
+        rgb: rgb.to_vec(),
+        width,
+        height,
+        page_id: page_id.to_string(),
+        spans,
+    }
+}
+
 fn to_ocr_page(input: &Input) -> scanweave_core::ocr_page::OcrPage {
     use scanweave_core::ocr_page::*;
     let pt = |px: f64| px * 72.0 / 300.0;
@@ -226,6 +264,66 @@ fn span_bbox(poly: &[[f64; 2]]) -> [f64; 4] {
 }
 
 pub fn convert(input: &Input, policy: &Policy) -> Result<Output, String> {
+    let (parts, report) = convert_parts(input, policy)?;
+    // single-page PDF + the B0 searchable-raster baseline candidate (the
+    // document-level equivalent lives in crate::document)
+    let (shapes, encodings) = (&parts.shapes, parts.encodings.clone());
+    let font_bytes = build_font(&shapes, &encodings, policy.upem)?;
+    let pdf_bytes = crate::page_pdf::assemble(
+        &parts.shapes,
+        &encodings,
+        &parts.occurrences,
+        &parts.span_texts,
+        parts.page_w_pt,
+        parts.page_h_pt,
+        parts.dpi,
+        parts.paper,
+        parts.ink,
+        font_bytes.clone(),
+        Vec::new(),
+        &[],
+        &parts.patches,
+        &parts.owners,
+        &parts.owner_cids,
+        &parts.lines,
+    )?;
+    let b0 = baseline_one_page(&parts, policy)?;
+
+    let mut candidates: Vec<(String, usize)> = Vec::new();
+    candidates.push(("reconstruct".to_string(), pdf_bytes.len()));
+    candidates.push(("raster_baseline".to_string(), b0.len()));
+    let selected = if policy.mode == "auto" {
+        if b0.len() < pdf_bytes.len() {
+            "raster_baseline"
+        } else {
+            "reconstruct"
+        }
+        .to_string()
+    } else {
+        "reconstruct".to_string()
+    };
+    // the emitted candidate; the B0 is still returned separately for the harness
+    let pdf_bytes = if selected == "raster_baseline" { b0.clone() } else { pdf_bytes };
+    let mut report = report;
+    report.candidates = candidates;
+    report.selected = selected;
+    report.pdf_bytes = pdf_bytes.len();
+    let raster_bytes: usize = parts.patches.iter().map(|p| p.rgb.len()).sum();
+    report.raster_bytes = raster_bytes;
+    Ok(Output {
+        pdf_bytes,
+        b0_bytes: b0,
+        report,
+        font_bytes,
+    })
+}
+
+/// The page's assembly parts + its report facts. `convert` wraps this with the
+/// single-page PDF/B0 assembly; the document builder uses it directly.
+pub fn convert_parts(
+    input: &Input,
+    policy: &Policy,
+) -> Result<(crate::page_pdf::PageParts, Report), String> {
     let start = std::time::Instant::now();
     let w = input.width;
     let h = input.height;
@@ -566,56 +664,6 @@ pub fn convert(input: &Input, policy: &Policy) -> Result<Output, String> {
         all_encodings.push((glyph_idx, o.text.clone()));
         owner_cids.push(cid);
     }
-    let font_bytes = build_font(&shapes, &all_encodings, policy.upem)?;
-    let glyphless_bytes: Vec<u8> = Vec::new();
-    let owner_encodings: Vec<(usize, String)> =
-        owner_cids.iter().map(|cid| all_encodings[(*cid - 1) as usize].clone()).collect();
-
-    let pdf_bytes = assemble(
-        &shapes,
-        &all_encodings,
-        &occ,
-        &span_texts,
-        (w as f64 * 72.0 / policy.dpi) as f32,
-        (h as f64 * 72.0 / policy.dpi) as f32,
-        policy.dpi,
-        seg.paper,
-        seg.ink,
-        font_bytes.clone(),
-        glyphless_bytes,
-        &owner_encodings,
-        &patches,
-        &owners,
-        &owner_cids,
-        &lines,
-    )?;
-
-    // B0 baseline candidate: the canonical raster page (source pixels) plus the
-    // invisible per-glyph ToUnicode owner layer — the "restore everything as
-    // raster, keep text searchable" candidate the harness compares against.
-    let span_text_map: std::collections::HashMap<String, String> =
-        span_texts.iter().cloned().collect();
-    let occ_b0: Vec<(usize, usize, [f64; 4], String, String, String)> = occ
-        .iter()
-        .map(|(g, c, b, span, sym, t)| (*g, *c as usize, *b, span.clone(), sym.clone(), t.clone()))
-        .collect();
-    let (b0_bytes, _) = crate::baseline::assemble_raster(
-        input.rgb.as_slice(),
-        w,
-        h,
-        &all_encodings,
-        &occ_b0,
-        (w as f64 * 72.0 / policy.dpi) as f32,
-        (h as f64 * 72.0 / policy.dpi) as f32,
-        font_bytes.clone(),
-        &shapes,
-        &span_text_map,
-    )?;
-
-    let mut invariants: BTreeMap<String, bool> = BTreeMap::new();
-    invariants.insert("visual".into(), visual_ok);
-    invariants.insert("semantic".into(), semantic_ok);
-
     let mut occ_records: Vec<OccurrenceRecord> = Vec::new();
     for r in &regions {
         for &ui in &r.units {
@@ -643,8 +691,12 @@ pub fn convert(input: &Input, policy: &Policy) -> Result<Output, String> {
         });
     }
 
+    let mut invariants: BTreeMap<String, bool> = BTreeMap::new();
+    invariants.insert("visual".into(), visual_ok);
+    invariants.insert("semantic".into(), semantic_ok);
+
     // real outline statistics per glyph (contours/points traced for this shape)
-    let mut glyph_stats: Vec<GlyphStat> = shapes
+    let glyph_stats: Vec<GlyphStat> = shapes
         .iter()
         .enumerate()
         .map(|(gi, g)| GlyphStat {
@@ -657,20 +709,15 @@ pub fn convert(input: &Input, policy: &Policy) -> Result<Output, String> {
             stages: g.stages.clone(),
             contours: g.num_contours,
             points: g.num_points,
-            // the m0-probe-1 budget: per-stage error in pixels
             budget_ok: g.stages.trace_max_px <= crate::trace::Budget::from_m0_policy().trace_max
                 && g.stages.curve_max_px <= crate::trace::Budget::from_m0_policy().curve_max
                 && g.stages.quant_bound_px <= crate::trace::Budget::from_m0_policy().quant_max,
         })
         .collect();
-    for gi in 0..shapes.len() {
-        if let Some(st) = glyph_stats.iter_mut().find(|st| st.gid == gi) {
-            if st.symbol_id.is_empty() {
-                continue;
-            }
-        }
-    }
-    glyph_stats.retain(|st| !st.symbol_id.is_empty() || st.contours > 0);
+    let glyph_stats: Vec<GlyphStat> = glyph_stats
+        .into_iter()
+        .filter(|st| !st.symbol_id.is_empty() || st.contours > 0)
+        .collect();
     let patch_records: Vec<PatchRecord> = patches
         .iter()
         .map(|p| PatchRecord {
@@ -680,32 +727,30 @@ pub fn convert(input: &Input, policy: &Policy) -> Result<Output, String> {
             rgb_sha256: scanweave_core::hash_hex(&p.rgb),
         })
         .collect();
-    // candidate selection: reconstruct (vector + coalesced raster + labels) vs
-    // the whole-page searchable raster baseline. Auto picks the smaller
-    // qualified candidate; both candidates pass the same semantic gates (both
-    // carry the OCR labels and the ownership invariants).
-    let mut candidates: Vec<(String, usize)> = Vec::new();
-    candidates.push(("reconstruct".to_string(), pdf_bytes.len()));
-    candidates.push(("raster_baseline".to_string(), b0_bytes.len()));
-    let selected = if policy.mode == "auto" {
-        if b0_bytes.len() < pdf_bytes.len() {
-            "raster_baseline"
-        } else {
-            "reconstruct"
-        }
-        .to_string()
-    } else {
-        "reconstruct".to_string()
-    };
-    let pdf_bytes = if selected == "raster_baseline" {
-        b0_bytes.clone()
-    } else {
-        pdf_bytes
+
+    let parts = crate::page_pdf::PageParts {
+        raster_baseline: false,
+        source_rgb: input.rgb.clone(),
+        source_w: w as usize,
+        source_h: h as usize,
+        shapes,
+        encodings: all_encodings.clone(),
+        occurrences: occ,
+        span_texts,
+        page_w_pt: (w as f64 * 72.0 / policy.dpi) as f32,
+        page_h_pt: (h as f64 * 72.0 / policy.dpi) as f32,
+        dpi: policy.dpi,
+        paper: seg.paper,
+        ink: seg.ink,
+        patches,
+        owners,
+        owner_cids,
+        lines,
     };
 
     let report = Report {
-        candidates,
-        selected,
+        candidates: Vec::new(),
+        selected: "reconstruct".into(),
         glyph_stats,
         patches: patch_records,
         occurrences: occ_records,
@@ -729,21 +774,16 @@ pub fn convert(input: &Input, policy: &Policy) -> Result<Output, String> {
             .collect(),
         coverage,
         fallback_reasons,
-        font_glyphs: shapes.len() + 1,
-        font_bytes: font_bytes.len(),
-        pdf_bytes: pdf_bytes.len(),
+        font_glyphs: parts.shapes.len() + 1,
+        font_bytes: 0,
+        pdf_bytes: 0,
         raster_bytes,
         semantic_owner,
         ownership_invariants: invariants,
         elapsed_ms: start.elapsed().as_millis(),
     };
 
-    Ok(Output {
-        pdf_bytes,
-        b0_bytes,
-        report,
-        font_bytes,
-    })
+    Ok((parts, report))
 }
 
 fn owner_span(ocr: &scanweave_core::ocr_page::OcrPage, text: &str) -> String {
@@ -854,4 +894,46 @@ fn artwork_patches(input: &Input, plan: &OwnershipPlan) -> Vec<Patch> {
         });
     }
     patches
+}
+
+/// The one-page B0 candidate: the canonical source raster page plus the
+/// invisible per-glyph ToUnicode owner layer (the "restore everything as
+/// raster, keep text searchable" candidate the harness compares against).
+pub fn baseline_one_page(
+    parts: &crate::page_pdf::PageParts,
+    policy: &Policy,
+) -> Result<Vec<u8>, String> {
+    // the raster baseline keeps EVERY span's searchable text (visible glyph
+    // runs for vector spans, owner overlays for fallback spans), drawn
+    // invisibly over one whole-page source patch — the accepted M0-Q B0 shape
+    let encodings = parts.encodings.clone();
+    let font = build_font(&parts.shapes, &encodings, policy.upem)?;
+    let patch = whole_page_patch(parts, parts.source_w, parts.source_h)?;
+    let baseline = crate::page_pdf::PageParts {
+        raster_baseline: true,
+        patches: vec![patch],
+        ..parts.clone()
+    };
+    let doc = vec![baseline];
+    let (bytes, _stats) = crate::page_pdf::assemble_document(&doc, &parts.shapes, &encodings, &font)?;
+    Ok(bytes)
+}
+
+/// One exact source patch covering the whole canonical raster (the raster
+/// baseline candidate's pixels: byte-identical to the source page).
+pub fn whole_page_patch(
+    parts: &crate::page_pdf::PageParts,
+    _w_px: usize,
+    _h_px: usize,
+) -> Result<crate::page_pdf::Patch, String> {
+    let (w, h) = (parts.source_w, parts.source_h);
+    if w == 0 || h == 0 || parts.source_rgb.len() != w * h * 3 {
+        return Err("source raster missing from page parts".into());
+    }
+    Ok(crate::page_pdf::Patch {
+        bbox_px: [0.0, 0.0, w as f64, h as f64],
+        rgb: parts.source_rgb.clone(),
+        w: w as u32,
+        h: h as u32,
+    })
 }

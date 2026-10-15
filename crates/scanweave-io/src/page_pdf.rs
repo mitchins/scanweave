@@ -81,6 +81,175 @@ fn cid_to_gid_bytes(encodings: &[(usize, String)]) -> Vec<u8> {
     v
 }
 
+/// Draw the paper fill and the raster patches (source-exact crops), in order.
+fn emit_patches(c: &mut Content, patches: &[Patch], page_w_pt: f32, page_h_pt: f32, dpi: f64, paper: [u8; 3]) {
+    c.set_fill_rgb(paper[0] as f32 / 255.0, paper[1] as f32 / 255.0, paper[2] as f32 / 255.0);
+    c.rect(0.0, 0.0, page_w_pt, page_h_pt);
+    c.fill_nonzero();
+    for (i, patch) in patches.iter().enumerate() {
+        let x = patch.bbox_px[0] as f32 * 72.0 / dpi as f32;
+        let y_bot = page_h_pt - patch.bbox_px[3] as f32 * 72.0 / dpi as f32;
+        let w_pt = (patch.bbox_px[2] - patch.bbox_px[0]) as f32 * 72.0 / dpi as f32;
+        let h_pt = (patch.bbox_px[3] - patch.bbox_px[1]) as f32 * 72.0 / dpi as f32;
+        c.save_state();
+        c.transform([w_pt, 0.0, 0.0, h_pt, x, y_bot]);
+        let name = format!("Im{i}");
+        c.x_object(Name(name.as_bytes()));
+        c.restore_state();
+    }
+}
+
+/// Emit the page's text layer: visible vector glyph runs in reading order with
+/// per-span /ActualText (BMP only; astral spans keep per-glyph ToUnicode), and
+/// the invisible fallback owner runs inline in reading order on the span's
+/// traced ink baseline, each with its own per-span /ActualText.
+fn emit_text_runs(
+    c: &mut Content,
+    shapes: &[GlyphShape],
+    occurrences: &[(usize, u32, [f64; 4], String, String, String)],
+    span_texts: &[(String, String)],
+    owners: &[Owner],
+    owner_cids: &[u32],
+    lines: &[LineSpec],
+    page_h_pt: f32,
+    dpi: f64,
+    ink: [u8; 3],
+    raster_baseline: bool,
+) {
+    let span_map: std::collections::HashMap<&str, &str> = span_texts
+        .iter()
+        .map(|(id, t)| (id.as_str(), t.as_str()))
+        .collect();
+    let span_astral = |id: &str| {
+        span_map.get(id).copied().unwrap_or("").chars().any(|c| (c as u32) > 0xFFFF)
+    };
+    let owner_by_span: std::collections::HashMap<&str, (&Owner, u32)> = owners
+        .iter()
+        .zip(owner_cids.iter())
+        .map(|(o, c)| (o.span_id.as_str(), (o, *c)))
+        .collect();
+    let mut groups: Vec<Vec<usize>> = Vec::new();
+    {
+        let mut current: Option<&str> = None;
+        for (i, occ) in occurrences.iter().enumerate() {
+            if current != Some(occ.3.as_str()) {
+                groups.push(Vec::new());
+                current = Some(occ.3.as_str());
+            }
+            groups.last_mut().unwrap().push(i);
+        }
+    }
+
+    c.begin_text();
+    c.set_font(Name(b"F1"), 1.0);
+    c.set_fill_rgb(ink[0] as f32 / 255.0, ink[1] as f32 / 255.0, ink[2] as f32 / 255.0);
+    // raster-baseline candidates paint NO text: the whole-page source patch
+    // carries the pixels, the text layer only carries the searchable labels
+    if raster_baseline {
+        c.set_text_rendering_mode(TextRenderingMode::Invisible);
+    }
+
+    let mut emitted_spans: std::collections::HashSet<String> = std::collections::HashSet::new();
+
+    for line in lines {
+        for sid in &line.spans {
+            emitted_spans.insert(sid.clone());
+            let visible = groups
+                .iter()
+                .find(|g| occurrences[g[0]].3.as_str() == sid.as_str());
+            if let Some(group) = visible {
+                let span_id = occurrences[group[0]].3.as_str();
+                let actual = span_map.get(span_id).copied().unwrap_or("");
+                let astral = span_astral(span_id);
+                if !astral {
+                    let mut mc = c.begin_marked_content_with_properties(Name(b"Span"));
+                    let mut pl = mc.properties();
+                    pl.actual_text(TextStr(actual));
+                }
+                for &i in group {
+                    let (gidx, cid, bbox_px, _, _, _) = &occurrences[i];
+                    let g = &shapes[*gidx];
+                    let x0 = bbox_px[0] as f32 * 72.0 / dpi as f32;
+                    let bottom_pt = page_h_pt - bbox_px[3] as f32 * 72.0 / dpi as f32;
+                    let top_pt = page_h_pt - bbox_px[1] as f32 * 72.0 / dpi as f32;
+                    let w_pt = bbox_px[2] as f32 * 72.0 / dpi as f32 - x0;
+                    let h_pt = top_pt - bottom_pt;
+                    let sx = w_pt * 2048.0 / g.ink_span_fu[0].max(1.0) as f32;
+                    let sy = h_pt * 2048.0 / g.ink_span_fu[1].max(1.0) as f32;
+                    let tx = x0 - (g.anchor_bbox_fu[0] as f32) * sx / 2048.0;
+                    let ty = bottom_pt - (g.anchor_bbox_fu[1] as f32) * sy / 2048.0;
+                    c.set_text_matrix([sx, 0.0, 0.0, sy, tx, ty]);
+                    let cid = *cid + 1;
+                    c.show(Str(&[(cid >> 8) as u8, (cid & 0xFF) as u8]));
+                }
+                if !astral {
+                    c.end_marked_content();
+                }
+            } else if let Some((owner, cid)) = owner_by_span.get(sid.as_str()) {
+                let owner_text = span_map.get(sid.as_str()).copied().unwrap_or("");
+                let astral = owner_text.chars().any(|c| (c as u32) > 0xFFFF);
+                if !astral {
+                    let mut mc = c.begin_marked_content_with_properties(Name(b"Span"));
+                    let mut pl = mc.properties();
+                    pl.actual_text(TextStr(owner_text));
+                }
+                let x0 = owner.place_px[0] as f32 * 72.0 / dpi as f32;
+                let y_bot = page_h_pt - owner.place_px[3] as f32 * 72.0 / dpi as f32;
+                let h_pt =
+                    ((owner.place_px[3] - owner.place_px[1]) as f32 * 72.0 / dpi as f32).max(4.0);
+                let cx = *cid;
+                let bytes = Str(&[(cx >> 8) as u8, (cx & 0xFF) as u8]);
+                c.set_text_rendering_mode(TextRenderingMode::Invisible);
+                c.set_font(Name(b"F1"), h_pt);
+                c.set_text_matrix([1.0, 0.0, 0.0, 1.0, x0, y_bot]);
+                c.show(bytes);
+                c.set_text_rendering_mode(TextRenderingMode::Fill);
+                c.set_font(Name(b"F1"), 1.0);
+                if !astral {
+                    c.end_marked_content();
+                }
+            }
+        }
+    }
+
+    // defensive: any span not covered by a line (empty OCR text etc.)
+    for (i, occ) in occurrences.iter().enumerate() {
+        let sid = occ.3.as_str();
+        if !emitted_spans.contains(sid) {
+            let (gidx, cid, bbox_px, _, _, _) = &occurrences[i];
+            let g = &shapes[*gidx];
+            let x0 = bbox_px[0] as f32 * 72.0 / dpi as f32;
+            let bottom_pt = page_h_pt - bbox_px[3] as f32 * 72.0 / dpi as f32;
+            let top_pt = page_h_pt - bbox_px[1] as f32 * 72.0 / dpi as f32;
+            let w_pt = bbox_px[2] as f32 * 72.0 / dpi as f32 - x0;
+            let h_pt = top_pt - bottom_pt;
+            let sx = w_pt * 2048.0 / g.ink_span_fu[0].max(1.0) as f32;
+            let sy = h_pt * 2048.0 / g.ink_span_fu[1].max(1.0) as f32;
+            let tx = x0 - (g.anchor_bbox_fu[0] as f32) * sx / 2048.0;
+            let ty = bottom_pt - (g.anchor_bbox_fu[1] as f32) * sy / 2048.0;
+            c.set_text_matrix([sx, 0.0, 0.0, sy, tx, ty]);
+            let cid = *cid + 1;
+            c.show(Str(&[(cid >> 8) as u8, (cid & 0xFF) as u8]));
+        }
+    }
+    for (owner, cid) in owners.iter().zip(owner_cids.iter()) {
+        if emitted_spans.contains(owner.span_id.as_str()) {
+            continue;
+        }
+        let x0 = owner.place_px[0] as f32 * 72.0 / dpi as f32;
+        let y_bot = page_h_pt - owner.place_px[3] as f32 * 72.0 / dpi as f32;
+        let h_pt = ((owner.place_px[3] - owner.place_px[1]) as f32 * 72.0 / dpi as f32).max(4.0);
+        let cx = *cid;
+        let bytes = Str(&[(cx >> 8) as u8, (cx & 0xFF) as u8]);
+        c.set_text_rendering_mode(TextRenderingMode::Invisible);
+        c.set_font(Name(b"F1"), h_pt);
+        c.set_text_matrix([1.0, 0.0, 0.0, 1.0, x0, y_bot]);
+        c.show(bytes);
+        c.set_text_rendering_mode(TextRenderingMode::Fill);
+        c.set_font(Name(b"F1"), 1.0);
+    }
+}
+
 #[allow(clippy::too_many_arguments)]
 pub fn assemble(
     shapes: &[GlyphShape],
@@ -254,172 +423,8 @@ pub fn assemble(
 
     // content
     let mut c = Content::new();
-    c.set_fill_rgb(
-        paper[0] as f32 / 255.0,
-        paper[1] as f32 / 255.0,
-        paper[2] as f32 / 255.0,
-    );
-    c.rect(0.0, 0.0, page_w_pt, page_h_pt);
-    c.fill_nonzero();
-
-    let span_map: std::collections::HashMap<&str, &str> = span_texts
-        .iter()
-        .map(|(id, t)| (id.as_str(), t.as_str()))
-        .collect();
-    let span_astral = |id: &str| {
-        span_map
-            .get(id)
-            .copied()
-            .unwrap_or("")
-            .chars()
-            .any(|c| (c as u32) > 0xFFFF)
-    };
-    for (i, patch) in patches.iter().enumerate() {
-        let x = patch.bbox_px[0] as f32 * 72.0 / dpi as f32;
-        let y_bot = page_h_pt - patch.bbox_px[3] as f32 * 72.0 / dpi as f32;
-        let w_pt = (patch.bbox_px[2] - patch.bbox_px[0]) as f32 * 72.0 / dpi as f32;
-        let h_pt = (patch.bbox_px[3] - patch.bbox_px[1]) as f32 * 72.0 / dpi as f32;
-        c.save_state();
-        c.transform([w_pt, 0.0, 0.0, h_pt, x, y_bot]);
-        let name = format!("Im{i}");
-        c.x_object(Name(name.as_bytes()));
-        c.restore_state();
-    }
-
-    let owner_by_span: std::collections::HashMap<&str, (&Owner, u32)> = owners
-        .iter()
-        .zip(owner_cids.iter())
-        .map(|(o, c)| (o.span_id.as_str(), (o, *c)))
-        .collect();
-    // visible occurrences grouped per span (reading order within a span)
-    let mut groups: Vec<Vec<usize>> = Vec::new();
-    {
-        let mut current: Option<&str> = None;
-        for (i, occ) in occurrences.iter().enumerate() {
-            if current != Some(occ.3.as_str()) {
-                groups.push(Vec::new());
-                current = Some(occ.3.as_str());
-            }
-            groups.last_mut().unwrap().push(i);
-        }
-    }
-
-    c.begin_text();
-    c.set_font(Name(b"F1"), 1.0);
-    c.set_fill_rgb(
-        ink[0] as f32 / 255.0,
-        ink[1] as f32 / 255.0,
-        ink[2] as f32 / 255.0,
-    );
-
-    let mut emitted_spans: std::collections::HashSet<String> = std::collections::HashSet::new();
-    let mut covered = |span: &str, emitted: &mut std::collections::HashSet<String>| {
-        emitted.insert(span.to_string())
-    };
-
-    // Lines in reading order. A line that mixes visible spans with raster-fallback
-    // owners is wrapped in ONE line-level /ActualText carrying the OCR line text
-    // (OCR separators verbatim): native search then finds the whole line, and the
-    // fallback owner run rides inside the mark instead of being hoisted to the end
-    // of the extraction by PDFium's invisible-run ordering. Pure-vector lines keep
-    // the per-span marks of the accepted M0-Q/M1-A behaviour (astral spans keep the
-    // per-glyph ToUnicode owner).
-    for line in lines {
-        for sid in &line.spans {
-            covered(sid.as_str(), &mut emitted_spans);
-            let visible = groups
-                .iter()
-                .find(|g| occurrences[g[0]].3.as_str() == sid.as_str());
-            if let Some(group) = visible {
-                let span_id = occurrences[group[0]].3.as_str();
-                let actual = span_map.get(span_id).copied().unwrap_or("");
-                let astral = span_astral(span_id);
-                if !astral {
-                    let mut mc = c.begin_marked_content_with_properties(Name(b"Span"));
-                    let mut pl = mc.properties();
-                    pl.actual_text(TextStr(actual));
-                }
-                for &i in group {
-                    let (gidx, cid, bbox_px, _, _, _) = &occurrences[i];
-                    let g = &shapes[*gidx];
-                    let x0 = bbox_px[0] as f32 * 72.0 / dpi as f32;
-                    let y1_px = bbox_px[3] as f32;
-                    let y0_px = bbox_px[1] as f32;
-                    let bottom_pt = page_h_pt - y1_px * 72.0 / dpi as f32;
-                    let top_pt = page_h_pt - y0_px * 72.0 / dpi as f32;
-                    let w_pt = bbox_px[2] as f32 * 72.0 / dpi as f32 - x0;
-                    let h_pt = top_pt - bottom_pt;
-                    let gx_span = g.ink_span_fu[0] as f32;
-                    let gy_span = g.ink_span_fu[1] as f32;
-                    let sx = w_pt * 2048.0 / gx_span.max(1.0);
-                    let sy = h_pt * 2048.0 / gy_span.max(1.0);
-                    let tx = x0 - (g.anchor_bbox_fu[0] as f32) * sx / 2048.0;
-                    let ty = bottom_pt - (g.anchor_bbox_fu[1] as f32) * sy / 2048.0;
-                    c.set_text_matrix([sx, 0.0, 0.0, sy, tx, ty]);
-                    let cid = *cid + 1;
-                    c.show(Str(&[(cid >> 8) as u8, (cid & 0xFF) as u8]));
-                }
-                if !astral {
-                    c.end_marked_content();
-                }
-            } else if let Some((owner, cid)) = owner_by_span.get(sid.as_str()) {
-                // Fallback-span owner run: INVISIBLE (paints nothing — the raster
-                // patch carries the pixels) and placed on the span's traced INK
-                // baseline (place_px), not the OCR polygon box. Extractors merge
-                // runs into a line by baseline and then sort the line's chars by
-                // x, so matching the visible line's baseline is what makes the
-                // label land inline in reading order instead of forming its own
-                // line at the end (the real M1-A N1 mechanism). /ActualText owns
-                // the span's label for word grouping; astral labels keep the
-                // per-glyph ToUnicode transport.
-                let owner_text = span_map.get(sid.as_str()).copied().unwrap_or("");
-                let astral = owner_text.chars().any(|c| (c as u32) > 0xFFFF);
-                if !astral {
-                    let mut mc = c.begin_marked_content_with_properties(Name(b"Span"));
-                    let mut pl = mc.properties();
-                    pl.actual_text(TextStr(owner_text));
-                }
-                let x0 = owner.place_px[0] as f32 * 72.0 / dpi as f32;
-                let y_bot = page_h_pt - owner.place_px[3] as f32 * 72.0 / dpi as f32;
-                let h_pt =
-                    ((owner.place_px[3] - owner.place_px[1]) as f32 * 72.0 / dpi as f32).max(4.0);
-                let cx = *cid;
-                let bytes = Str(&[(cx >> 8) as u8, (cx & 0xFF) as u8]);
-                c.set_text_rendering_mode(TextRenderingMode::Invisible);
-                c.set_font(Name(b"F1"), h_pt);
-                c.set_text_matrix([1.0, 0.0, 0.0, 1.0, x0, y_bot]);
-                c.show(bytes);
-                c.set_text_rendering_mode(TextRenderingMode::Fill);
-                c.set_font(Name(b"F1"), 1.0);
-                if !astral {
-                    c.end_marked_content();
-                }
-            }
-        }
-    }
-
-    // defensive: any span not covered by a line (empty OCR text etc.)
-    for (i, occ) in occurrences.iter().enumerate() {
-        let sid = occ.3.as_str();
-        if !emitted_spans.contains(sid) {
-            let (gidx, cid, bbox_px, _, _, _) = &occurrences[i];
-            let g = &shapes[*gidx];
-            let x0 = bbox_px[0] as f32 * 72.0 / dpi as f32;
-            let y1_px = bbox_px[3] as f32;
-            let y0_px = bbox_px[1] as f32;
-            let bottom_pt = page_h_pt - y1_px * 72.0 / dpi as f32;
-            let top_pt = page_h_pt - y0_px * 72.0 / dpi as f32;
-            let w_pt = bbox_px[2] as f32 * 72.0 / dpi as f32 - x0;
-            let h_pt = top_pt - bottom_pt;
-            let sx = w_pt * 2048.0 / g.ink_span_fu[0].max(1.0) as f32;
-            let sy = h_pt * 2048.0 / g.ink_span_fu[1].max(1.0) as f32;
-            let tx = x0 - (g.anchor_bbox_fu[0] as f32) * sx / 2048.0;
-            let ty = bottom_pt - (g.anchor_bbox_fu[1] as f32) * sy / 2048.0;
-            c.set_text_matrix([sx, 0.0, 0.0, sy, tx, ty]);
-            let cid = *cid + 1;
-            c.show(Str(&[(cid >> 8) as u8, (cid & 0xFF) as u8]));
-        }
-    }
+    emit_patches(&mut c, patches, page_w_pt, page_h_pt, dpi, paper);
+    emit_text_runs(&mut c, shapes, occurrences, span_texts, owners, owner_cids, lines, page_h_pt, dpi, ink, false);
 
     c.end_text();
     let content_bytes = c.finish();
@@ -457,4 +462,214 @@ pub fn assemble(
 
 fn g_free() -> i32 {
     0
+}
+
+/// One page's assembly inputs. `occurrences`/`owner_cids` use the CID space of
+/// the encodings slice inside the same struct (single-page use). For documents,
+/// the document builder remaps them onto the shared encoding space.
+#[derive(Debug, Clone)]
+pub struct PageParts {
+    /// the canonical source raster (needed by the whole-page raster baseline)
+    pub source_rgb: Vec<u8>,
+    /// raster-baseline candidate: the text layer is drawn INVISIBLY over the
+    /// whole-page source patch (searchable text, source pixels, no vector ink)
+    pub raster_baseline: bool,
+    pub source_w: usize,
+    pub source_h: usize,
+    pub shapes: Vec<GlyphShape>,
+    /// (index into `shapes`, semantic string) — one entry per CID (1-based)
+    pub encodings: Vec<(usize, String)>,
+    pub occurrences: Vec<(usize, u32, [f64; 4], String, String, String)>,
+    pub span_texts: Vec<(String, String)>,
+    pub page_w_pt: f32,
+    pub page_h_pt: f32,
+    pub dpi: f64,
+    pub paper: [u8; 3],
+    pub ink: [u8; 3],
+    pub patches: Vec<Patch>,
+    pub owners: Vec<Owner>,
+    pub owner_cids: Vec<u32>,
+    pub lines: Vec<LineSpec>,
+}
+
+/// Assemble a multi-page document over ONE shared font resource.
+///
+/// `encodings` is the document-wide encoding table: `(index into `shapes`,
+/// semantic string)` in first-appearance order (page order, then slot order),
+/// so identical (shape, label) pairs across pages share one CID — the
+/// document-level font reuse. Every page's occurrences/owner CIDs must already
+/// be expressed in this table's 1-based CID space. Object numbers are assigned
+/// deterministically (catalog, pages, shared font, then page/content pairs,
+/// then per-page images in page order), so output bytes are a pure function of
+/// the inputs.
+#[allow(clippy::too_many_arguments)]
+pub fn assemble_document(
+    pages: &[PageParts],
+    shapes: &[GlyphShape],
+    encodings: &[(usize, String)],
+    font_bytes: &[u8],
+) -> Result<(Vec<u8>, AssemblyStats), String> {
+    if pages.is_empty() {
+        return Err("document has no pages".into());
+    }
+    if encodings.len() + 1 > u16::MAX as usize {
+        return Err(format!(
+            "document CID table exceeds the 16-bit Identity-H space ({} CIDs)",
+            encodings.len()
+        ));
+    }
+    let mut stats = AssemblyStats::default();
+    let mut pdf = Pdf::new();
+    pdf.set_version(1, 7);
+
+    let catalog = Ref::new(1);
+    let page_tree = Ref::new(2);
+    let font = Ref::new(3);
+    let desc = Ref::new(4);
+    let cidfont = Ref::new(5);
+    let fontfile = Ref::new(6);
+    let cid_map = Ref::new(7);
+    let to_uni = Ref::new(8);
+
+    // per-page: page object then content object
+    let page_refs: Vec<Ref> = (0..pages.len()).map(|i| Ref::new(9 + (i * 2) as i32)).collect();
+    let content_refs: Vec<Ref> = (0..pages.len()).map(|i| Ref::new(10 + (i * 2) as i32)).collect();
+    let mut next_image = 9 + (pages.len() * 2) as i32;
+    let mut image_refs: Vec<Vec<Ref>> = Vec::with_capacity(pages.len());
+    for p in pages {
+        let ids: Vec<Ref> = (0..p.patches.len())
+            .map(|j| {
+                let r = Ref::new(next_image);
+                next_image += 1;
+                let _ = j;
+                r
+            })
+            .collect();
+        image_refs.push(ids);
+    }
+
+    pdf.catalog(catalog).pages(page_tree);
+    let kids: Vec<Ref> = page_refs.clone();
+    pdf.pages(page_tree).kids(kids).count(pages.len() as i32);
+
+    // shared font program
+    let map_bytes = cid_to_gid_bytes(encodings);
+    let tu = to_unicode_stream(encodings);
+    pdf.stream(cid_map, &map_bytes).finish();
+    pdf.stream(to_uni, tu.as_bytes()).finish();
+    pdf.stream(fontfile, font_bytes)
+        .pair(Name(b"Length1"), font_bytes.len() as i32)
+        .finish();
+    pdf.font_descriptor(desc)
+        .name(Name(b"ScanWeaveDoc"))
+        .flags(pdf_writer::types::FontFlags::SYMBOLIC)
+        .bbox(Rect::new(0.0, -50.0, 4096.0, 4096.0))
+        .italic_angle(0.0)
+        .ascent(3800.0)
+        .descent(-500.0)
+        .cap_height(3600.0)
+        .stem_v(80.0)
+        .font_file2(fontfile);
+    {
+        let mut cid = pdf.cid_font(cidfont);
+        cid.subtype(CidFontType::Type2)
+            .base_font(Name(b"ScanWeaveDoc"))
+            .system_info(SystemInfo {
+                registry: Str(b"Adobe"),
+                ordering: Str(b"Identity"),
+                supplement: 0,
+            })
+            .font_descriptor(desc)
+            .default_width(1000.0)
+            .cid_to_gid_map_stream(cid_map);
+        {
+            let mut widths = cid.widths();
+            for (cid_index, (elem, _)) in encodings.iter().enumerate() {
+                let w = if *elem < shapes.len() {
+                    (shapes[*elem].ink_span_fu[0].ceil().max(1.0) + 2.0) * 1000.0 / 2048.0
+                } else {
+                    500.0
+                };
+                widths.consecutive(cid_index as u16 + 1, [w as f32]);
+            }
+            widths.finish();
+        }
+    }
+    let mut t0 = pdf.type0_font(font);
+    t0.base_font(Name(b"ScanWeaveDoc"))
+        .encoding_predefined(Name(b"Identity-H"))
+        .descendant_font(cidfont)
+        .to_unicode(to_uni);
+    t0.finish();
+
+    // pages
+    for (i, p) in pages.iter().enumerate() {
+        // images
+        for (j, patch) in p.patches.iter().enumerate() {
+            let mut enc = flate2::write::ZlibEncoder::new(Vec::new(), flate2::Compression::default());
+            use std::io::Write;
+            enc.write_all(&patch.rgb).map_err(|e| e.to_string())?;
+            let compressed = enc.finish().map_err(|e| e.to_string())?;
+            stats.image_xobjects += 1;
+            stats.raster_encoded_bytes += compressed.len();
+            let mut img = pdf.stream(image_refs[i][j], &compressed);
+            img.pair(Name(b"Type"), Name(b"XObject"));
+            img.pair(Name(b"Subtype"), Name(b"Image"));
+            img.pair(Name(b"Width"), patch.w as i32);
+            img.pair(Name(b"Height"), patch.h as i32);
+            img.pair(Name(b"ColorSpace"), Name(b"DeviceRGB"));
+            img.pair(Name(b"BitsPerComponent"), 8);
+            img.pair(Name(b"Filter"), Name(b"FlateDecode"));
+            img.finish();
+        }
+        // content
+        let mut c = Content::new();
+        emit_patches(&mut c, &p.patches, p.page_w_pt, p.page_h_pt, p.dpi, p.paper);
+        emit_text_runs(
+            &mut c,
+            shapes,
+            &p.occurrences,
+            &p.span_texts,
+            &p.owners,
+            &p.owner_cids,
+            &p.lines,
+            p.page_h_pt,
+            p.dpi,
+            p.ink,
+            p.raster_baseline,
+        );
+        let content_bytes = c.finish();
+        stats.content_bytes += content_bytes.len();
+        pdf.stream(content_refs[i], &content_bytes).finish();
+
+        let mut page = pdf.page(page_refs[i]);
+        page.parent(page_tree)
+            .media_box(Rect::new(0.0, 0.0, p.page_w_pt, p.page_h_pt))
+            .contents(content_refs[i]);
+        let mut res = page.resources();
+        res.fonts().pair(Name(b"F1"), font);
+        {
+            let mut xo = res.x_objects();
+            for (j, r) in image_refs[i].iter().enumerate() {
+                let name = format!("Im{j}");
+                xo.pair(Name(name.as_bytes()), *r);
+            }
+            xo.finish();
+        }
+        res.finish();
+        page.finish();
+    }
+
+    stats.font_bytes = font_bytes.len();
+    Ok((pdf.finish(), stats))
+}
+
+/// What the assembled document actually contains (honest byte accounting:
+/// object counts and the encoded sizes that end up in the file).
+#[derive(Debug, Clone, Default, serde::Serialize)]
+pub struct AssemblyStats {
+    pub image_xobjects: usize,
+    pub raster_encoded_bytes: usize,
+    pub content_bytes: usize,
+    pub font_bytes: usize,
 }

@@ -3,6 +3,7 @@
 //! document assembly, and the M1A-05 contact regression.
 
 use m0_font_pdf::shim::{convert_input, convert_with};
+use m0_font_pdf::convert as io_convert;
 use m0_font_pdf::{Input, Policy};
 use scanweave_core::Limits;
 use scanweave_core::ocr_page::OcrPage;
@@ -189,9 +190,114 @@ fn m1b03_auto_selects_smallest_qualified_candidate() {
     );
 }
 
-/// M1B-05: M1A-05 regression — text touching a rule / stamp / barcode must keep
-/// the ContactNonText fallback AND still be searchable via the owner overlay,
-/// with no unowned or double-owned ink.
+/// M1B-04: document assembly - N pages become ONE PDF: correct page count,
+/// order, per-page MediaBox, ONE shared font resource, deterministic bytes,
+/// and every page's searchable text present (per-page reports carried).
+#[test]
+fn m1b04_document_assembly_is_one_searchable_pdf() {
+    use scanweave_io::document::convert_document;
+    let doc = PathBuf::from(env!("CARGO_MANIFEST_DIR"))
+        .join("../../qualification/fixtures/documents/doc4_invoice");
+    let bundle_bytes = std::fs::read(doc.join("document.json")).unwrap();
+    let bundle = scanweave_core::bundle::Bundle::parse_bytes(&bundle_bytes).expect("bundle parses");
+    bundle
+        .verify_pairing(&doc, &Limits::m0_defaults())
+        .expect("bundle pairing");
+    let mut inputs = Vec::new();
+    for p in &bundle.pages {
+        let img = image::open(doc.join(format!("{}.png", p.page_id))).unwrap().to_rgb8();
+        let (w, h) = (img.width(), img.height());
+        let ocr = OcrPage::parse_bytes(&std::fs::read(doc.join(&p.ocr_page_path)).unwrap()).unwrap();
+        inputs.push(scanweave_io::convert::input_from_ocr_page(
+            img.as_raw(), w, h, &p.page_id, &ocr,
+        ));
+    }
+    let policy = Policy::default();
+    let out = convert_document(&bundle.document_id, &inputs, &policy).expect("document");
+    let pdf = String::from_utf8_lossy(&out.pdf_bytes);
+
+    // one PDF with N page objects and one shared font program
+    let page_objs = pdf.matches("/Type /Page").count() - pdf.matches("/Type /Pages").count();
+    assert!(page_objs >= 4, "document must carry one /Page per input page, got {page_objs}");
+    assert!(pdf.contains("/Count 4"), "the page tree must list 4 pages");
+    let fontfiles = pdf.matches("/FontFile2").count();
+    assert_eq!(fontfiles, 1, "exactly ONE shared font program (reuse), got {fontfiles}");
+
+    // deterministic: a second build is byte-identical
+    let out2 = convert_document(&bundle.document_id, &inputs, &policy).expect("document");
+    assert_eq!(out.pdf_bytes, out2.pdf_bytes, "document bytes deterministic");
+
+    // page order + per-page reports preserved
+    assert_eq!(out.report.page_order, vec!["page1", "page2", "page3", "page4"]);
+    assert_eq!(out.report.page_reports.len(), 4);
+    assert!(out.report.ownership_invariants["visual"] && out.report.ownership_invariants["semantic"]);
+
+    // every span of every page has a searchable owner (visible or overlay)
+    let search = &out.report.search;
+    assert_eq!(search.pages.len(), 4);
+    for ps in &search.pages {
+        assert!(!ps.lines.is_empty(), "page {} must have searchable lines", ps.page_id);
+        for l in &ps.lines {
+            assert_eq!(l.spans.len(), l.owners.len());
+            assert!(
+                l.owners.iter().all(|o| o == "visible_tounicode" || o == "invisible"),
+                "every span must have a defined searchable owner"
+            );
+        }
+    }
+    // the mixed raster-fallback line is present in the search plan
+    let p1 = &search.pages[0];
+    assert!(
+        p1.lines.iter().any(|l| l.text.contains("Page 1 of 4.")),
+        "the mixed line must be in the search plan"
+    );
+    // per-page MediaBox (dimensions) are the source page dims
+    assert!(pdf.contains("[ 0 0 216 124.8 ]") || pdf.contains("[0 0 216 124.8]"));
+}
+
+/// M1B-04b: font reuse actually reduces bytes - the shared-font document must
+/// be smaller than the concatenation of the same pages built separately.
+#[test]
+fn m1b04b_font_reuse_reduces_bytes() {
+    use scanweave_io::document::convert_document;
+    let doc = PathBuf::from(env!("CARGO_MANIFEST_DIR"))
+        .join("../../qualification/fixtures/documents/doc4_repeat");
+    let bundle_bytes = std::fs::read(doc.join("document.json")).unwrap();
+    let bundle = scanweave_core::bundle::Bundle::parse_bytes(&bundle_bytes).unwrap();
+    bundle.verify_pairing(&doc, &Limits::m0_defaults()).unwrap();
+    let mut inputs = Vec::new();
+    for p in &bundle.pages {
+        let img = image::open(doc.join(format!("{}.png", p.page_id))).unwrap().to_rgb8();
+        let (w, h) = (img.width(), img.height());
+        let ocr = OcrPage::parse_bytes(&std::fs::read(doc.join(&p.ocr_page_path)).unwrap()).unwrap();
+        inputs.push(scanweave_io::convert::input_from_ocr_page(img.as_raw(), w, h, &p.page_id, &ocr));
+    }
+    let out = convert_document(&bundle.document_id, &inputs, &Policy::default()).unwrap();
+    let separate: usize = inputs
+        .iter()
+        .map(|i| io_convert(i, &Policy::default()).unwrap().pdf_bytes.len())
+        .sum();
+    assert!(
+        out.pdf_bytes.len() < separate,
+        "shared-font document ({}B) must be smaller than {} separate page PDFs ({separate}B)",
+        out.pdf_bytes.len(),
+        inputs.len()
+    );
+    let font = out.report.font_bytes;
+    assert!(
+        separate - out.pdf_bytes.len() >= font * (inputs.len() - 1),
+        "saving must cover the {} duplicated fonts",
+        inputs.len() - 1
+    );
+}
+
+/// M1B-05 (explicit M1A-05 regression): text touching a RULE, a STAMP or a
+/// BARCODE must (a) fall back transactionally to raster for the contacted
+/// region, (b) keep every span's label searchable via the owner overlay,
+/// (c) introduce no unowned or double-owned ink, and (d) preserve the traced
+/// ownership invariants. The fixture p13_nontext carries all three contact
+/// types (rule across line 2, barcode bars beside line 1, rotated stamp over
+/// the lower block).
 #[test]
 fn m1b05_text_touching_rule_stamp_barcode() {
     for (dir, stem) in [
@@ -209,5 +315,31 @@ fn m1b05_text_touching_rule_stamp_barcode() {
             "{stem}: no unowned or double-owned ink"
         );
         assert!(r.ownership_invariants["visual"] && r.ownership_invariants["semantic"]);
+        // (b) every span keeps exactly one semantic owner (visible or overlay)
+        for (span, owner) in &r.semantic_owner {
+            assert!(
+                owner == "visible_tounicode" || owner == "invisible",
+                "{stem}: span {span} has unknown owner {owner}"
+            );
+        }
+        let owners = r.semantic_owner.len();
+        assert!(owners > 0, "{stem}: spans must be present");
+        // (c) the contacted spans are the raster ones and are still reported
+        let invisible = r.semantic_owner.values().filter(|o| *o == "invisible").count();
+        assert!(invisible > 0, "{stem}: contacted spans must be overlaid (invisible owners)");
+        // (d) raster fidelity: patches stay byte-exact source crops
+        let (rgb, w, h, _page) = fixture(dir, stem);
+        for p in &r.patches {
+            let (x0, y0) = (p.bbox_px[0] as usize, p.bbox_px[1] as usize);
+            let (x1, y1) = ((p.bbox_px[2] as usize).min(w as usize), (p.bbox_px[3] as usize).min(h as usize));
+            let mut crop = Vec::new();
+            for yy in y0..y1 {
+                for xx in x0..x1 {
+                    let i = ((yy * w as usize) + xx) * 3;
+                    crop.extend_from_slice(&rgb[i..i + 3]);
+                }
+            }
+            assert_eq!(scanweave_core::hash_hex(&crop), p.rgb_sha256, "{stem}: patch fidelity");
+        }
     }
 }

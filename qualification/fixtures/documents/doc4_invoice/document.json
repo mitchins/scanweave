@@ -1,0 +1,60 @@
+{
+  "schema_version": "1.0",
+  "document_id": "doc4-invoice",
+  "sources": [
+    {
+      "source_id": "src000",
+      "asset_path": "page1.png",
+      "file_sha256": "f29214dae11d28844511e34e17773f236ff1a588de91896e9b8af47ee3beabc1",
+      "kind": "image"
+    },
+    {
+      "source_id": "src001",
+      "asset_path": "page2.png",
+      "file_sha256": "01f02582f23f34b7a535ed490c7ec802e01d0353067796d3b67cf2229e913f76",
+      "kind": "image"
+    },
+    {
+      "source_id": "src002",
+      "asset_path": "page3.png",
+      "file_sha256": "f8d437e527af2aaff44c5ffb9c1eb1f35a01dcc91e83afcf6556ed00cc8f1018",
+      "kind": "image"
+    },
+    {
+      "source_id": "src003",
+      "asset_path": "page4.png",
+      "file_sha256": "6ae25c3fb0e228281627464e3ab04e6ece46767a28ec050c7d7679e32fc14d32",
+      "kind": "image"
+    }
+  ],
+  "pages": [
+    {
+      "page_id": "page1",
+      "source_id": "src000",
+      "source_page_index": 0,
+      "ocr_page_path": "page1.ocr.json",
+      "ocr_page_sha256": "ce4d9c270b97b421b8c22940be3e838318458885d1cb3e2f823839e4cc44cc80"
+    },
+    {
+      "page_id": "page2",
+      "source_id": "src001",
+      "source_page_index": 0,
+      "ocr_page_path": "page2.ocr.json",
+      "ocr_page_sha256": "5ef0c11dc54be93bed0e29be1fbf13475bc89d3a515be26b9031aea65748d782"
+    },
+    {
+      "page_id": "page3",
+      "source_id": "src002",
+      "source_page_index": 0,
+      "ocr_page_path": "page3.ocr.json",
+      "ocr_page_sha256": "77112f63a78a4f3229279f8cc26ed7bd8f4e8ec4b1a9c725daf07f8cd142a049"
+    },
+    {
+      "page_id": "page4",
+      "source_id": "src003",
+      "source_page_index": 0,
+      "ocr_page_path": "page4.ocr.json",
+      "ocr_page_sha256": "ce6b37ba0c46a8a31930dbbdcd1601c700a8eb3e1385e7f654d38158fa29c3e5"
+    }
+  ]
+}
