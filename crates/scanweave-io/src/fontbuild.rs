@@ -48,14 +48,12 @@ pub fn build_font(
     // to a glyph the font does not actually contain. Owner-only fonts (no vector
     // shapes) therefore get one placeholder glyph at GID1.
     if placeholder {
-        // GID1 for owner CIDs: the glyph must EXIST (PDFium drops runs whose CID
-        // has no glyph) and must stay a normal clockwise outer contour (the
-        // qualification harness flags degenerate contours). Owner runs are drawn
-        // VISIBLY but in the PAPER colour, before the raster patches: they then
-        // paint paper over paper (a no-op over the page fill, overwritten by
-        // the patches) while both extractors order the run inline like any
-        // other visible text. PDFium appends INVISIBLE runs at the end of the
-        // text page (measured), which broke native search for mixed lines.
+        // GID1 for owner CIDs: the glyph must EXIST in the font (PDFium drops
+        // runs whose CID has no glyph) and must stay a normal clockwise outer
+        // contour (the qualification harness flags degenerate contours). What
+        // the owner RUN paints is decided by the assembling rendering mode, not
+        // by this outline: owner runs are drawn INVISIBLE (see page_pdf.rs) on
+        // the span's traced ink baseline, so this box is never painted.
         let mut placeholder_path = kurbo::BezPath::new();
         placeholder_path.move_to(kurbo::Point::new(4.0, 4.0));
         placeholder_path.line_to(kurbo::Point::new(4.0, 200.0));

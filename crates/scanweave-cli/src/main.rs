@@ -150,66 +150,83 @@ fn build(args: &[String]) -> Result<(), String> {
     }
 
     let rgb_bytes = std::fs::read(&input).map_err(|e| format!("read {input}: {e}"))?;
-    let hocr_bytes = std::fs::read(&ocr).map_err(|e| format!("read {ocr}: {e}"))?;
+    let ocr_bytes = std::fs::read(&ocr).map_err(|e| format!("read {ocr}: {e}"))?;
     let img = image::load_from_memory(&rgb_bytes).map_err(|e| format!("decode {input}: {e}"))?;
     let img = img.to_rgb8();
     let (w, h) = (img.width(), img.height());
 
-    let doc = scanweave_io::hocr::parse_hocr(&hocr_bytes, w, h).map_err(|e| e.to_string())?;
-    let file_sha = scanweave_core::hash_hex(&rgb_bytes);
-    let pixel_sha = scanweave_core::pixel_hash::pixel_hash(
-        scanweave_core::pixel_hash::CanonicalFormat::Rgb8,
-        w as u64,
-        h as u64,
-        scanweave_core::pixel_hash::ColourTag::Srgb,
-        None,
-        img.as_raw(),
-    )
-    .map_err(|e| e.to_string())?;
-    let binding = scanweave_io::normalize::Binding {
-        asset_path: std::path::Path::new(&input)
-            .file_name()
-            .map(|s| s.to_string_lossy().to_string())
-            .unwrap_or_default(),
-        file_sha256: file_sha,
-        pixel_sha256: pixel_sha,
-    };
-    let page = scanweave_io::normalize::build_normalized_page(
-        &scanweave_io::normalize::ImageMeta { width: w, height: h },
-        &doc,
-        Some(dpi),
-        &binding,
-    )
-    .map_err(|e| e.to_string())?;
-    page.validate(&scanweave_core::Limits::m0_defaults()).map_err(|e| e.to_string())?;
-
-    let spans: Vec<scanweave_io::convert::SpanInput> = page
-        .spans
+    // --ocr accepts either foreign hOCR or the already-normalized ocr.json
+    // (sniffed by the leading '{')
+    let trimmed = ocr_bytes
         .iter()
-        .map(|s| scanweave_io::convert::SpanInput {
-            id: s.id.clone(),
-            text: s.text.clone(),
-            separator_after: s.separator_after.clone(),
-            polygon: s.polygon.clone(),
-            symbols: s
-                .symbols
-                .iter()
-                .map(|sym| scanweave_io::convert::SymbolInput {
-                    id: sym.id.clone(),
-                    range: (sym.text_range_utf8[0], sym.text_range_utf8[1]),
-                    polygon: sym.polygon.clone(),
-                })
-                .collect(),
-        })
-        .collect();
-    let input = scanweave_io::convert::Input {
-        rgb: img.as_raw().to_vec(),
-        width: w,
-        height: h,
-        page_id: page.page_id.clone(),
-        spans,
+        .copied()
+        .skip_while(|b| b.is_ascii_whitespace())
+        .collect::<Vec<u8>>();
+    let ocr_json = trimmed.first() == Some(&b'{');
+
+    let input = if ocr_json {
+        let page: scanweave_core::ocr_page::OcrPage =
+            serde_json::from_slice(&ocr_bytes).map_err(|e| format!("parse {ocr}: {e}"))?;
+        page.validate(&scanweave_core::Limits::m0_defaults())
+            .map_err(|e| e.to_string())?;
+        scanweave_io::convert::input_from_ocr_page(img.as_raw(), w, h, &page.page_id, &page)
+    } else {
+        let doc = scanweave_io::hocr::parse_hocr(&ocr_bytes, w, h).map_err(|e| e.to_string())?;
+        let file_sha = scanweave_core::hash_hex(&rgb_bytes);
+        let pixel_sha = scanweave_core::pixel_hash::pixel_hash(
+            scanweave_core::pixel_hash::CanonicalFormat::Rgb8,
+            w as u64,
+            h as u64,
+            scanweave_core::pixel_hash::ColourTag::Srgb,
+            None,
+            img.as_raw(),
+        )
+        .map_err(|e| e.to_string())?;
+        let binding = scanweave_io::normalize::Binding {
+            asset_path: std::path::Path::new(&input)
+                .file_name()
+                .map(|s| s.to_string_lossy().to_string())
+                .unwrap_or_default(),
+            file_sha256: file_sha,
+            pixel_sha256: pixel_sha,
+        };
+        let page = scanweave_io::normalize::build_normalized_page(
+            &scanweave_io::normalize::ImageMeta { width: w, height: h },
+            &doc,
+            Some(dpi),
+            &binding,
+        )
+        .map_err(|e| e.to_string())?;
+        page.validate(&scanweave_core::Limits::m0_defaults()).map_err(|e| e.to_string())?;
+        let spans: Vec<scanweave_io::convert::SpanInput> = page
+            .spans
+            .iter()
+            .map(|s| scanweave_io::convert::SpanInput {
+                id: s.id.clone(),
+                text: s.text.clone(),
+                separator_after: s.separator_after.clone(),
+                polygon: s.polygon.clone(),
+                symbols: s
+                    .symbols
+                    .iter()
+                    .map(|sym| scanweave_io::convert::SymbolInput {
+                        id: sym.id.clone(),
+                        range: (sym.text_range_utf8[0], sym.text_range_utf8[1]),
+                        polygon: sym.polygon.clone(),
+                    })
+                    .collect(),
+            })
+            .collect();
+        scanweave_io::convert::Input {
+            rgb: img.as_raw().to_vec(),
+            width: w,
+            height: h,
+            page_id: page.page_id.clone(),
+            spans,
+        }
     };
-    let policy = scanweave_io::convert::Policy { mode, ..scanweave_io::convert::Policy::default() };
+
+    let policy = scanweave_io::convert::Policy { mode, dpi, ..scanweave_io::convert::Policy::default() };
     let out = scanweave_io::convert::convert(&input, &policy).map_err(|e| e.to_string())?;
 
     // atomic: temporary on the same filesystem, then rename
@@ -225,7 +242,7 @@ fn build(args: &[String]) -> Result<(), String> {
     std::fs::rename(&tmp_report, &report).map_err(|e| format!("rename {report}: {e}"))?;
     println!(
         "build OK: {} | {}B pdf, {}B font, {} raster regions, {}B restored raster",
-        page.page_id,
+        out.report.page_id,
         out.report.pdf_bytes,
         out.report.font_bytes,
         out.report.fallback_reasons.values().sum::<usize>(),

@@ -203,7 +203,13 @@ fn emit_text_runs(
                 c.set_font(Name(b"F1"), h_pt);
                 c.set_text_matrix([1.0, 0.0, 0.0, 1.0, x0, y_bot]);
                 c.show(bytes);
-                c.set_text_rendering_mode(TextRenderingMode::Fill);
+                // restore the layer's mode: Fill normally, Invisible for the
+                // raster-baseline candidates (whose whole layer paints nothing)
+                c.set_text_rendering_mode(if raster_baseline {
+                    TextRenderingMode::Invisible
+                } else {
+                    TextRenderingMode::Fill
+                });
                 c.set_font(Name(b"F1"), 1.0);
                 if !astral {
                     c.end_marked_content();

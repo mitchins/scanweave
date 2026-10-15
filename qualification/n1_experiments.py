@@ -1,5 +1,15 @@
 #!/usr/bin/env python3
-"""M1-B N1 experiments: mixed visible/invisible line search in PDFium + Poppler.
+"""M1-B N1 mechanism experiments: mixed visible/invisible line search.
+
+SCOPE (stated honestly): these variants isolate PDF-LEVEL mechanisms — mark
+granularity, rendering mode, inline-vs-last emission, baseline placement — on
+a synthetic one-line page with a Type1 font. They do NOT reproduce the real
+failure: the real page uses a CID font whose owner CID references the empty
+placeholder glyph at the span's box height, and the real-page A/B is the
+discriminating evidence (M1-A build at 650dafa: native search False, owner
+label appended after the page's last line; M1-B build: native search True with
+pixel-identical rendering — asserted permanently by
+test_m1b_paint_fidelity.py).
 
 Builds a one-line page reproducing the p10 page1 failure geometry: three
 VISIBLE text runs ("Page", "of", "4.") plus one RASTER-FALLBACK span ("1")
@@ -83,6 +93,62 @@ def content_v3() -> bytes:
     return ("\n".join(c)).encode()
 
 
+def _mark(text: str) -> str:
+    """per-span /ActualText mark, as the shipped assembler emits for every span"""
+    utf16 = "".join(f"{ord(c):04X}" for c in text)
+    return f"/Span <</ActualText <FEFF{utf16}>> >> BDC"
+
+
+def content_v4_off_baseline() -> bytes:
+    """M1-A geometry: the owner run sits on the OCR POLYGON-BOX bottom, which
+    is ~1pt BELOW the visible line's glyph-ink baseline (as on the real page:
+    span box [143,299,161,341] → y_bot = page_h - 341*dpi-scale while the
+    visible glyph baseline sits at the ink bottom). Invisible run, emitted last
+    — exactly the M1-A content shape."""
+    c = ["BT /F1 11 Tf"]
+    c.append(_mark("Page"))
+    c.append("1 0 0 1 72 700 Tm (Page) Tj")
+    c.append("EMC")
+    c.append(_mark("of"))
+    c.append("1 0 0 1 130 700 Tm (of) Tj")
+    c.append("EMC")
+    c.append(_mark("4."))
+    c.append("1 0 0 1 190 700 Tm (4.) Tj")
+    c.append("EMC")
+    # owner: invisible, emitted LAST, on the polygon-box baseline (1pt below
+    # the visible line) — the M1-A content shape
+    c.append(_mark("1"))
+    c.append("3 Tr")
+    c.append("1 0 0 1 116 699 Tm (1) Tj")
+    c.append("0 Tr")
+    c.append("EMC")
+    c.append("ET")
+    return ("\n".join(c)).encode()
+
+
+def content_v5_ink_baseline() -> bytes:
+    """Shipped M1-B geometry: owner run invisible, INLINE in reading order, on
+    the span's traced INK baseline (exactly the visible line's baseline)."""
+    c = ["BT /F1 11 Tf"]
+    c.append(_mark("Page"))
+    c.append("1 0 0 1 72 700 Tm (Page) Tj")
+    c.append("EMC")
+    # owner: invisible, INLINE in reading order, on the line's baseline
+    c.append(_mark("1"))
+    c.append("3 Tr")
+    c.append("1 0 0 1 116 700 Tm (1) Tj")
+    c.append("0 Tr")
+    c.append("EMC")
+    c.append(_mark("of"))
+    c.append("1 0 0 1 130 700 Tm (of) Tj")
+    c.append("EMC")
+    c.append(_mark("4."))
+    c.append("1 0 0 1 190 700 Tm (4.) Tj")
+    c.append("EMC")
+    c.append("ET")
+    return ("\n".join(c)).encode()
+
+
 def build_pdf(content: bytes) -> bytes:
     objs = []
     objs.append(b"<< /Type /Catalog /Pages 2 0 R >>")
@@ -138,10 +204,11 @@ def main() -> int:
         workdir = Path(td)
         results = []
         for name, content in (
-            ("V0_shipped", content_v0()),
+            ("V0_m1a_geometry_off_baseline", content_v4_off_baseline()),
             ("V1_line_actualtext", content_v1()),
             ("V2_line_actualtext_visible_owner", content_v2()),
             ("V3_plain_visible", content_v3()),
+            ("V4_m1b_shipped_ink_baseline", content_v5_ink_baseline()),
         ):
             results.append(evaluate(name, content, workdir))
     width = max(len(r["variant"]) for r in results)

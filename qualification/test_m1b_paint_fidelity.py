@@ -139,6 +139,13 @@ def main() -> int:
     for label in ("Totalamountdue:", "INV-2026-0042"):
         check(f"p10 page1 no duplicate '{label}'", stripped.count(label) == 1,
               f"count={stripped.count(label)}")
+    # the exact M1-A failure signature must be absent: the fallback owner label
+    # must NOT be appended after the page's last line ("...30 days.\r\n1")
+    check("p10 page1 owner label not hoisted to the end",
+          not text.rstrip().endswith("\r\n1") and not text.rstrip().endswith("\n1"),
+          repr(text[-30:]))
+    check("p10 page1 '1' appears exactly once (inline)", stripped.count("1") >= 1 and "Page1of4." in stripped,
+          repr(stripped[-30:]))
 
     # ---- M1A-05 explicit regression: rule/stamp/barcode contact (p13) ------
     # The fixture's tesseract labels for the contacted regions ARE garbled

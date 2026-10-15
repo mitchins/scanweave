@@ -204,13 +204,15 @@ def main() -> int:
             entry["ocrmypdf_pages_with_search"] = found
         print(f"{doc}: {entry}")
 
-    (WORK / "baseline_report.json").write_text(json.dumps(report, indent=2))
+    out_report = ROOT / "work" / "m1b-deliverables" / "baseline_report.json"
+    out_report.parent.mkdir(parents=True, exist_ok=True)
+    out_report.write_text(json.dumps(report, indent=2))
     width = max(len(n) for n, _, _ in results) if results else 0
     for name, ok, detail in results:
         print(f"{'PASS' if ok else 'FAIL'} {name.ljust(width)} {detail}")
     print()
     print("FAILED:", [n for n, ok, _ in results if not ok] or "none")
-    return 0
+    return 1 if any(not ok for _, ok, _ in results) else 0
 
 
 if __name__ == "__main__":

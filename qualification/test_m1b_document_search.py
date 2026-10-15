@@ -82,9 +82,9 @@ def doc_gate(name: str, doc: str, pages: int, tokens: dict[int, list[str]], mode
                 if stripped.count(tok) > 1:
                     check(f"{name}: page{i+1} no duplicate {tok!r}", False, f"count={stripped.count(tok)}")
             # kana / astral sanity on JP pages
-            if i + 1 in (8, 9, 10) and doc == "doc10_mixed":
-                check(f"{name}: page{i+1} kana intact", "ガ" in text or "請求" in text or len(text) > 20,
-                      repr(text[:40]))
+            if doc == "doc10_mixed" and i + 1 == 8:
+                # p03_kana's own label is the single kana ガ; require it exactly
+                check("doc10_mixed: page8 kana 'ガ' intact", "ガ" in text, repr(text[:40]))
     d.close()
 
     # document-wide Poppler extraction keeps page order
