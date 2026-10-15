@@ -33,7 +33,7 @@ pub struct TracedShape {
     pub polylines: Vec<Vec<[f64; 2]>>,
     /// per-layer contours in traced image coordinates (y down):
     /// each layer = (outer, holes...) from vtracer Cutout hierarchy
-    pub layers: Vec<(Vec<[f64; 2]>, Vec<Vec<[f64; 2]>>)>,
+    pub layers: Vec<crate::glyphs::ContourLayer>,
     pub stage: StageRaw,
 }
 
@@ -46,17 +46,18 @@ pub struct StageRaw {
 pub const SS: usize = 2;
 
 fn vtracer_config() -> vtracer::Config {
-    let mut cfg = vtracer::Config::default();
-    cfg.color_mode = vtracer::ColorMode::Binary;
-    cfg.hierarchical = vtracer::Hierarchical::Cutout;
-    cfg.mode = visioncortex::PathSimplifyMode::Spline;
-    cfg.filter_speckle = 0; // never drop small marks (VS-05 discipline)
-    cfg.corner_threshold = 0; // no corner smoothing (measured: reduces deviation)
-    cfg.length_threshold = 1.0; // minimal reduction (0 disables reduction upstream — measured identical to 4.0)
-    cfg.max_iterations = 10;
-    cfg.splice_threshold = 45;
-    cfg.path_precision = None;
-    cfg
+    vtracer::Config {
+        color_mode: vtracer::ColorMode::Binary,
+        hierarchical: vtracer::Hierarchical::Cutout,
+        mode: visioncortex::PathSimplifyMode::Spline,
+        filter_speckle: 0, // never drop small marks (VS-05 discipline)
+        corner_threshold: 0, // no corner smoothing (measured: reduces deviation)
+        // minimal reduction (0 disables reduction upstream — measured identical to 4.0)
+        length_threshold: 1.0,
+        max_iterations: 10,
+        splice_threshold: 45,
+        ..Default::default()
+    }
 }
 
 /// Contours from one CompoundPath: element[0] outer, remaining elements holes.
@@ -168,7 +169,7 @@ pub fn trace_shape(unit: &Unit, _budget: &Budget, _units_per_px: f64) -> Result<
     img.pixels = pixels;
     (img.width, img.height) = (sw, sh);
 
-    let svg = vtracer::convert(img, vtracer_config()).map_err(|e| e)?;
+    let svg = vtracer::convert(img, vtracer_config())?;
     if svg.paths.is_empty() {
         return Err("vtracer produced no paths".into());
     }
@@ -186,7 +187,7 @@ pub fn trace_shape(unit: &Unit, _budget: &Budget, _units_per_px: f64) -> Result<
         };
         layers.push((
             scale_c(&cc[0]),
-            cc[1..].iter().map(|h| scale_c(h)).collect::<Vec<_>>(),
+            cc[1..].iter().map(scale_c).collect::<Vec<_>>(),
         ));    }
     if layers.is_empty() {
         return Err("vtracer produced no contours".into());

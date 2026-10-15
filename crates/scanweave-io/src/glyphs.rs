@@ -93,6 +93,9 @@ fn poly_dist(a: &[[f64; 2]], b: &[[f64; 2]]) -> f64 {
         .fold(0.0f64, f64::max)
 }
 
+/// One traced contour layer: an outer ring plus its holes, in source-pixel space.
+pub type ContourLayer = (Vec<[f64; 2]>, Vec<Vec<[f64; 2]>>);
+
 pub fn build_glyph_shapes(
     traced: &[TracedShape],
     units_per_px: f64,
@@ -113,7 +116,7 @@ pub fn build_glyph_shapes(
 
         // transform contours FIRST, then build cubics from font-unit points,
         // preserving the per-layer (outer, holes) structure
-        let transformed: Vec<(Vec<[f64; 2]>, Vec<Vec<[f64; 2]>>)> = t
+        let transformed: Vec<ContourLayer> = t
             .layers
             .iter()
             .map(|(o, hs)| {

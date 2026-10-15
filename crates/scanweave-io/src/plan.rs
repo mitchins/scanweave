@@ -8,7 +8,7 @@
 //! is retained as raster — text is never separated from the non-text element
 //! by force unless the separation is exact (disjoint bounding boxes).
 
-use crate::ownership::{OwnedUnit, OwnershipPlan};
+use crate::ownership::OwnershipPlan;
 
 pub const CONTACT_MARGIN_PX: f64 = 4.0;
 

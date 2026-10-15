@@ -233,7 +233,7 @@ pub fn convert_document(
         assemble_document(&baseline_parts, &shapes, &encodings, &font_bytes)?;
 
     // 5. candidate accounting + selection
-    let image_xobjects: usize = pages.iter().map(|p| p.parts.patches.len()).sum();
+    let _image_xobjects: usize = pages.iter().map(|p| p.parts.patches.len()).sum();
     // both candidates are ALWAYS reported (with their real serialized sizes);
     // auto mode only decides which one is emitted
     let candidates = vec![
@@ -272,7 +272,7 @@ pub fn convert_document(
     // baseline reproduces the source pixels exactly and is always qualified.
     let recon_ok = pages
         .iter()
-        .all(|p| p.report.fidelity.vector_ink_iou_min.map_or(true, |m| m >= policy.min_ink_iou));
+        .all(|p| p.report.fidelity.vector_ink_iou_min.is_none_or(|m| m >= policy.min_ink_iou));
     let baseline_ok = true;
     let selected: String = if policy.mode == "auto" {
         if recon_ok && (!baseline_ok || pdf_bytes.len() <= baseline_pdf.len()) {
@@ -288,7 +288,7 @@ pub fn convert_document(
         return Err(format!(
             "fidelity policy violated: vector units measure below min_ink_iou {} on {} page(s)              (use --mode auto to fall back to the raster baseline, or lower the policy explicitly)",
             policy.min_ink_iou,
-            pages.iter().filter(|p| p.report.fidelity.vector_ink_iou_min.map_or(false, |m| m < policy.min_ink_iou)).count()
+            pages.iter().filter(|p| p.report.fidelity.vector_ink_iou_min.is_some_and(|m| m < policy.min_ink_iou)).count()
         ));
     } else {
         "reconstruct".into()

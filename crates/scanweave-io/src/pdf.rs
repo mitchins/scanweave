@@ -3,6 +3,7 @@
 //! Different semantic strings over one shared glyph get distinct CIDs.
 
 use crate::glyphs::GlyphShape;
+use crate::baseline::BaselineOccurrence;
 use pdf_writer::{Content, Finish, Name, Pdf, Ref, Rect, Str, TextStr};
 use pdf_writer::types::{CidFontType, SystemInfo};
 
@@ -18,7 +19,7 @@ fn utf16be_hex(s: &str) -> String {
 pub fn assemble(
     shapes: &[GlyphShape],
     encodings: &[(usize, String)],
-    occurrences: &[(usize, usize, [f64; 4], String, String, String)],
+    occurrences: &[BaselineOccurrence],
     span_texts: &std::collections::HashMap<String, String>,
     artwork: &[(usize, [f64; 4])],
     contour_polylines: &std::collections::HashMap<String, Vec<Vec<[f64; 2]>>>,
@@ -27,7 +28,7 @@ pub fn assemble(
     paper: [u8; 3],
     ink: [u8; 3],
     font_bytes: Vec<u8>,
-) -> Result<(Vec<u8>, Vec<(String, u64)>), String> {
+) -> Result<(Vec<u8>, crate::baseline::BaselineBreakdown), String> {
     let upem = 2048.0f32;
     let mut breakdown: Vec<(String, u64)> = Vec::new();
     let mut pdf = Pdf::new();
@@ -141,7 +142,7 @@ pub fn assemble(
     }
     cmap.push_str("endcmap\nCMapName currentdict /CMap defineresource pop\nend end\n");
     pdf.stream(to_unicode_id, cmap.as_bytes()).finish();
-    breakdown.push(("to_unicode_cmap".into(), cmap.as_bytes().len() as u64));
+    breakdown.push(("to_unicode_cmap".into(), cmap.len() as u64));
 
     // Type 0 font
     let mut type0 = pdf.type0_font(font_id);

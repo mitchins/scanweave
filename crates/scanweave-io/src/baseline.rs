@@ -3,9 +3,17 @@
 //! OCR geometry. This is the utility's own safety baseline (SPEC §5.1, §6.2).
 
 use crate::glyphs::GlyphShape;
-use pdf_writer::{Chunk, Content, Finish, Name, Pdf, Ref, Rect, Str, TextStr};
 use pdf_writer::types::TextRenderingMode;
+use pdf_writer::{Content, Finish, Name, Pdf, Ref, Rect, Str, TextStr};
 use std::io::Write;
+
+/// A drawn glyph occurrence in the baseline builder (same shape as
+/// `page_pdf::Occurrence`; a separate alias keeps the M0-era module untouched
+/// in behaviour).
+pub type BaselineOccurrence = (usize, usize, [f64; 4], String, String, String);
+
+/// Per-stream encoded sizes of the baseline document.
+pub type BaselineBreakdown = Vec<(String, u64)>;
 
 fn utf16be_hex(s: &str) -> String {
     let mut out = String::new();
@@ -21,13 +29,13 @@ pub fn assemble_raster(
     width: u32,
     height: u32,
     encodings: &[(usize, String)],
-    occurrences: &[(usize, usize, [f64; 4], String, String, String)],
+    occurrences: &[BaselineOccurrence],
     page_w_pt: f32,
     page_h_pt: f32,
     font_bytes: Vec<u8>,
     shapes: &[GlyphShape],
     span_texts: &std::collections::HashMap<String, String>,
-) -> Result<(Vec<u8>, Vec<(String, u64)>), String> {
+) -> Result<(Vec<u8>, BaselineBreakdown), String> {
     let upem = 2048.0f32;
     let mut pdf = Pdf::new();
     pdf.set_version(1, 7);
@@ -227,7 +235,7 @@ pub fn assemble_raster(
     let bytes = pdf.finish();
     breakdown.push(("font_file2".into(), font_bytes.len() as u64));
     breakdown.push(("cid_to_gid_map".into(), map_bytes.len() as u64));
-    breakdown.push(("to_unicode_cmap".into(), cmap.as_bytes().len() as u64));
+    breakdown.push(("to_unicode_cmap".into(), cmap.len() as u64));
     breakdown.push(("content_stream".into(), content_bytes.len() as u64));
     let total = bytes.len() as u64;
     let streams: u64 = breakdown.iter().map(|(_, n)| n).sum();

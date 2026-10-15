@@ -15,7 +15,7 @@ use write_fonts::{
         os2::Os2,
         post::Post,
     },
-    types::{Fixed, FWord, GlyphId, LongDateTime, NameId, UfWord, Tag},
+    types::{Fixed, FWord, GlyphId, LongDateTime, NameId, UfWord},
     OffsetMarker,
     FontBuilder,
 };
@@ -129,7 +129,6 @@ pub fn build_font(
         caret_slope_run: 0,
         caret_offset: 0,
         number_of_h_metrics: num_glyphs.min(0x7FFF) as u16,
-        ..Default::default()
     };
 
     let maxp = Maxp {

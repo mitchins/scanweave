@@ -65,7 +65,7 @@ regression test (`regress_*` in `probes/m0-font-pdf/tests/m1b_behavior.rs`):
 | P0 | Protected regions were discarded: `input_from_ocr_page` kept spans but dropped `protected_regions` (the internal OCR page hardcoded `vec![]`), so caller-specified financial protection was never honoured | `Input` carries `protected_regions`; `plan_regions` treats a protection polygon as having priority (SPEC §4.4): any unit within the contact margin of a protected box forces the region to raster with reason `Protected`, and the region box grows to cover the protected pixels so the patch reproduces them exactly | `regress_protected_amount_stays_raster` |
 | P0 | The pixel binding was computed for reporting but never compared: `OcrPage::verify_binding` existed and was never called | The CLI (both OCR input forms) and the bundle path call `verify_binding` against the decoded canonical pixels before converting; `convert_parts` re-checks the declared hash itself (defence in depth) | `regress_pixel_binding_mismatch_is_refused` |
 | P1 | Page geometry came from `policy.dpi` instead of the page's affine, so a 600 dpi scan was laid out at the bundle's 300 dpi default | `PageTransform` is derived from the normalized page's `raster_to_page_pt` and drives every placement (MediaBox, patches, glyph runs, owner baselines); skew is refused as unsupported geometry. Verified pixel-identical on the 300 dpi fixtures | `regress_geometry_uses_the_page_affine` |
-| P1 | `min_ink_iou` (0.98) was never read: auto selected by bytes without any fidelity check | Per-occurrence analytical ink IoU (outline rasterized over the unit's crop vs the source ink mask — SPEC §4.2's mask definition on the candidate); units below the threshold degrade to raster (`FidelityBelowPolicy`); `reconstruct` refuses a violating candidate, `auto` falls back to the raster baseline; `--min-ink-iou` is an explicit operator decision recorded in `qualification/policy/m1b-operating.toml` | `regress_min_ink_iou_is_enforced` |
+| P1 | `min_ink_iou` (0.98) was never read: auto selected by bytes without any fidelity check | Per-occurrence analytical ink IoU (outline rasterized over the unit's crop vs the source ink mask — SPEC §4.2's mask definition on the candidate); **units below the threshold are not vectorized** — their region degrades to raster (`FidelityBelowPolicy`), so every emitted vector unit satisfies the policy; the report describes the *emitted* content (post-degradation min/mean, degraded count) and auto ranks the degraded reconstruction against the raster baseline by real bytes; `--min-ink-iou` is an explicit operator decision recorded in `qualification/policy/m1b-operating.toml` | `regress_min_ink_iou_is_enforced` |
 | P1 | Shared CID deduplication was incomplete: `enc_index` was queried but never populated, so repeated (glyph, string) pairs minted new CIDs | The union now inserts into `enc_index` on first sight; doc4_repeat dropped 41,781 → 39,354 B | `regress_repeated_spans_keep_owners_and_cids_dedup` |
 | P1 | Owner dedup compared OCR *text* instead of span id, so a repeated word whose second occurrence lacked visual components lost its owner | Dedup by `span_id` everywhere (the text-based lookup `owner_span` was removed) | same test (two identical-text spans keep both owners) |
 | P2 | Auto reports could describe the wrong candidate: top-level image/content statistics came from the reconstruction even when the raster baseline was emitted | The document report's accounting follows the emitted candidate | `regress_auto_reports_the_selected_candidate` |
@@ -75,9 +75,11 @@ Also fixed while re-running everything: `report.font_bytes` was left at 0 by the
 probe's `b0_raster.pdf` path re-enforces the pixel binding.
 
 **Consequence of enforcing the fidelity policy (measured, not hidden):**
-`auto` at the SPEC's default 0.98 now emits the lossless raster baseline for
-these antialiased fixtures (their vector traces measure 0.80–0.996 per
-occurrence). Byte costs are honest in both policies — see §4.
+these antialiased fixtures' vector traces measure 0.80–0.996 per occurrence, so
+at the SPEC's default 0.98 the below-threshold units are NOT vectorized — p16's
+45 small-text units all degrade to raster (the report says so), and a
+document-level run at 0.98 therefore selects the raster baseline by bytes.
+Byte costs are honest in both policies — see §4.
 
 ## 1. Economical raster fallback
 

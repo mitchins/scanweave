@@ -165,7 +165,7 @@ pub fn extract_units(
                             && *y as f64 <= bb[3]
                     })
                     .count();
-                if inside > 0 && best.map_or(true, |(bc, _)| inside > bc) {
+                if inside > 0 && best.is_none_or(|(bc, _)| inside > bc) {
                     best = Some((inside, li));
                 }
             }
@@ -221,8 +221,8 @@ pub fn extract_units(
             // (measured: 'w' and 'i' both at x0=258), which corrupts order.
             let mut semantics: Vec<(usize, String)> =
                 vec![(slot_idx, span.text[sym.text_range_utf8[0]..sym.text_range_utf8[1]].to_string())];
-            semantics.extend(absorbed_here.into_iter());
-            semantics.sort_by(|a, b| a.0.cmp(&b.0));
+            semantics.extend(absorbed_here);
+            semantics.sort_by_key(|a| a.0);
             let semantic_text: String = semantics.into_iter().map(|(_, t)| t).collect();
             units.push(Unit {
                 shape_key,

@@ -29,7 +29,7 @@
 use crate::mask::Segmentation;
 use crate::units::{polygon_bbox, Unit};
 use scanweave_core::ocr_page::OcrPage;
-use std::collections::{BTreeMap, HashMap};
+use std::collections::HashMap;
 
 /// One semantic slot: a symbol observation from the supplied OCR.
 #[derive(Debug, Clone, PartialEq)]

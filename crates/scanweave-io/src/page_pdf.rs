@@ -94,10 +94,10 @@ fn emit_patches(
     c.rect(0.0, 0.0, page_w_pt, page_h_pt);
     c.fill_nonzero();
     for (i, patch) in patches.iter().enumerate() {
-        let x = xf.x(patch.bbox_px[0] as f64);
-        let y_bot = xf.y(patch.bbox_px[3] as f64);
-        let w_pt = (patch.bbox_px[2] - patch.bbox_px[0]) as f64 * xf.sx();
-        let h_pt = (patch.bbox_px[3] - patch.bbox_px[1]) as f64 * xf.sy();
+        let x = xf.x(patch.bbox_px[0]);
+        let y_bot = xf.y(patch.bbox_px[3]);
+        let w_pt = (patch.bbox_px[2] - patch.bbox_px[0]) * xf.sx();
+        let h_pt = (patch.bbox_px[3] - patch.bbox_px[1]) * xf.sy();
         c.save_state();
         c.transform([w_pt as f32, 0.0, 0.0, h_pt as f32, x, y_bot]);
         let name = format!("Im{i}");
@@ -110,10 +110,11 @@ fn emit_patches(
 /// per-span /ActualText (BMP only; astral spans keep per-glyph ToUnicode), and
 /// the invisible fallback owner runs inline in reading order on the span's
 /// traced ink baseline, each with its own per-span /ActualText.
+#[allow(clippy::too_many_arguments)]
 fn emit_text_runs(
     c: &mut Content,
     shapes: &[GlyphShape],
-    occurrences: &[(usize, u32, [f64; 4], String, String, String)],
+    occurrences: &[Occurrence],
     span_texts: &[(String, String)],
     owners: &[Owner],
     owner_cids: &[u32],
@@ -175,10 +176,10 @@ fn emit_text_runs(
                 for &i in group {
                     let (gidx, cid, bbox_px, _, _, _) = &occurrences[i];
                     let g = &shapes[*gidx];
-                    let x0 = xf.x(bbox_px[0] as f64);
-                    let bottom_pt = xf.y(bbox_px[3] as f64);
-                    let top_pt = xf.y(bbox_px[1] as f64);
-                    let w_pt = (bbox_px[2] as f64 * xf.sx()) as f32 - x0;
+                    let x0 = xf.x(bbox_px[0]);
+                    let bottom_pt = xf.y(bbox_px[3]);
+                    let top_pt = xf.y(bbox_px[1]);
+                    let w_pt = (bbox_px[2] * xf.sx()) as f32 - x0;
                     let h_pt = top_pt - bottom_pt;
                     let sx = w_pt * 2048.0 / g.ink_span_fu[0].max(1.0) as f32;
                     let sy = h_pt * 2048.0 / g.ink_span_fu[1].max(1.0) as f32;
@@ -199,9 +200,9 @@ fn emit_text_runs(
                     let mut pl = mc.properties();
                     pl.actual_text(TextStr(owner_text));
                 }
-                let x0 = xf.x(owner.place_px[0] as f64);
-                let y_bot = xf.y(owner.place_px[3] as f64);
-                let h_pt = ((owner.place_px[3] - owner.place_px[1]) as f64 * xf.sy()) as f32;
+                let x0 = xf.x(owner.place_px[0]);
+                let y_bot = xf.y(owner.place_px[3]);
+                let h_pt = ((owner.place_px[3] - owner.place_px[1]) * xf.sy()) as f32;
                 let h_pt = h_pt.max(4.0);
                 let cx = *cid;
                 let bytes = Str(&[(cx >> 8) as u8, (cx & 0xFF) as u8]);
@@ -230,10 +231,10 @@ fn emit_text_runs(
         if !emitted_spans.contains(sid) {
             let (gidx, cid, bbox_px, _, _, _) = &occurrences[i];
             let g = &shapes[*gidx];
-            let x0 = xf.x(bbox_px[0] as f64);
-            let bottom_pt = xf.y(bbox_px[3] as f64);
-            let top_pt = xf.y(bbox_px[1] as f64);
-            let w_pt = (bbox_px[2] as f64 * xf.sx()) as f32 - x0;
+            let x0 = xf.x(bbox_px[0]);
+            let bottom_pt = xf.y(bbox_px[3]);
+            let top_pt = xf.y(bbox_px[1]);
+            let w_pt = (bbox_px[2] * xf.sx()) as f32 - x0;
             let h_pt = top_pt - bottom_pt;
             let sx = w_pt * 2048.0 / g.ink_span_fu[0].max(1.0) as f32;
             let sy = h_pt * 2048.0 / g.ink_span_fu[1].max(1.0) as f32;
@@ -248,9 +249,9 @@ fn emit_text_runs(
         if emitted_spans.contains(owner.span_id.as_str()) {
             continue;
         }
-        let x0 = xf.x(owner.place_px[0] as f64);
-        let y_bot = xf.y(owner.place_px[3] as f64);
-        let h_pt = (((owner.place_px[3] - owner.place_px[1]) as f64 * xf.sy()) as f32).max(4.0);
+        let x0 = xf.x(owner.place_px[0]);
+        let y_bot = xf.y(owner.place_px[3]);
+        let h_pt = (((owner.place_px[3] - owner.place_px[1]) * xf.sy()) as f32).max(4.0);
         let cx = *cid;
         let bytes = Str(&[(cx >> 8) as u8, (cx & 0xFF) as u8]);
         c.set_text_rendering_mode(TextRenderingMode::Invisible);
@@ -270,11 +271,10 @@ fn emit_text_runs(
 pub fn assemble(
     shapes: &[GlyphShape],
     encodings: &[(usize, String)],
-    occurrences: &[(usize, u32, [f64; 4], String, String, String)],
+    occurrences: &[Occurrence],
     span_texts: &[(String, String)],
     page_w_pt: f32,
     page_h_pt: f32,
-    dpi: f64,
     paper: [u8; 3],
     ink: [u8; 3],
     font_bytes: Vec<u8>,
@@ -318,8 +318,8 @@ pub fn assemble(
 
     let image_ids: Vec<Ref> = (0..patches.len())
         .map(|i| {
-            let r = Ref::new(next + i as i32);
-            r
+            
+            Ref::new(next + i as i32)
         })
         .collect();
 
@@ -477,10 +477,6 @@ pub fn assemble(
     Ok(pdf.finish())
 }
 
-fn g_free() -> i32 {
-    0
-}
-
 /// The authoritative raster→page-points mapping (SPEC §4.1): the normalized
 /// OCR page's affine, restricted to the axis-aligned case applied once at
 /// normalization. A 600 dpi scan carries a = 72/600 here, so its physical
@@ -522,6 +518,10 @@ impl PageTransform {
         ((-self.d) * py).max(0.0) as f32
     }
 }
+
+/// A drawn glyph occurrence: (shape index, 0-based CID, ink bbox in source px,
+/// span id, symbol id, semantic text).
+pub type Occurrence = (usize, u32, [f64; 4], String, String, String);
 
 /// One page's assembly inputs. `occurrences`/`owner_cids` use the CID space of
 /// the encodings slice inside the same struct (single-page use). For documents,

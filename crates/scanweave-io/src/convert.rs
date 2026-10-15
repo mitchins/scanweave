@@ -9,8 +9,8 @@ use crate::fontbuild::build_font;
 use crate::glyphs::{build_glyph_shapes, GlyphShape};
 use crate::mask::{segment, Segmentation};
 use crate::ownership::{build_plan, OwnershipPlan};
-use crate::page_pdf::{assemble, Owner, Patch};
-use crate::plan::{plan_regions, FallbackReason, Region, RegionDisposition, RegionKind};
+use crate::page_pdf::{Owner, Patch};
+use crate::plan::{plan_regions, FallbackReason, RegionDisposition, RegionKind};
 use crate::trace::{trace_shape, Budget, TracedShape};
 use serde::Serialize;
 use std::collections::BTreeMap;
@@ -428,7 +428,7 @@ fn glyph_ink_iou(g: &GlyphShape, crop_w: usize, crop_h: usize, mask: &[bool]) ->
         }
     }
     // foreground when at least half the sub-rows cover the pixel
-    let fill: Vec<bool> = cover.iter().map(|c| *c as usize >= (SUB + 1) / 2).collect();
+    let fill: Vec<bool> = cover.iter().map(|c| *c as usize >= SUB.div_ceil(2)).collect();
     let mut inter = 0usize;
     let mut uni = 0usize;
     for (i, m) in mask.iter().enumerate() {
@@ -468,7 +468,7 @@ pub fn convert(input: &Input, policy: &Policy) -> Result<Output, String> {
     // single-page PDF + the B0 searchable-raster baseline candidate (the
     // document-level equivalent lives in crate::document)
     let (shapes, encodings) = (&parts.shapes, parts.encodings.clone());
-    let font_bytes = build_font(&shapes, &encodings, policy.upem)?;
+    let font_bytes = build_font(shapes, &encodings, policy.upem)?;
     let pdf_bytes = crate::page_pdf::assemble(
         &parts.shapes,
         &encodings,
@@ -476,7 +476,6 @@ pub fn convert(input: &Input, policy: &Policy) -> Result<Output, String> {
         &parts.span_texts,
         parts.page_w_pt,
         parts.page_h_pt,
-        parts.dpi,
         parts.paper,
         parts.ink,
         font_bytes.clone(),
@@ -490,16 +489,17 @@ pub fn convert(input: &Input, policy: &Policy) -> Result<Output, String> {
     )?;
     let b0 = baseline_one_page(&parts, policy)?;
 
-    let mut candidates: Vec<(String, usize)> = Vec::new();
-    candidates.push(("reconstruct".to_string(), pdf_bytes.len()));
-    candidates.push(("raster_baseline".to_string(), b0.len()));
+    let candidates: Vec<(String, usize)> = vec![
+        ("reconstruct".to_string(), pdf_bytes.len()),
+        ("raster_baseline".to_string(), b0.len()),
+    ];
     // the fidelity policy is a hard gate (SPEC §4.2 / policy note): the raster
     // baseline reproduces the source pixels exactly, the reconstruction does
     // not if its vector units measure below min_ink_iou
     let recon_fidelity_ok = report
         .fidelity
         .vector_ink_iou_min
-        .map_or(true, |m| m >= policy.min_ink_iou);
+        .is_none_or(|m| m >= policy.min_ink_iou);
     let selected = if policy.mode == "auto" {
         if recon_fidelity_ok && pdf_bytes.len() <= b0.len() {
             "reconstruct"
@@ -711,7 +711,10 @@ pub fn convert_parts(
     // unit's source ink mask to the policy's threshold. Raster regions are
     // byte-exact from the source by construction; only vectorized units carry
     // this risk, so this is where the advertised 0.98 is actually enforced.
-    let mut unit_ious: Vec<(String, f64)> = Vec::new();
+    // measured per unit (symbol id → IoU), for every unit that was a vector
+    // candidate at measurement time; the post-degradation survivors are derived
+    // from the final regions below
+    let mut measured: Vec<(String, f64)> = Vec::new();
     {
         for r in regions.iter() {
             if !matches!(r.disposition, RegionDisposition::Vector) {
@@ -723,18 +726,28 @@ pub fn convert_parts(
                     continue;
                 };
                 let iou = glyph_ink_iou(g, u.crop_w, u.crop_h, &u.mask);
-                unit_ious.push((r.id.to_string(), iou));
+                measured.push((u.symbol_id.clone(), iou));
             }
         }
     }
     let mut units_below_policy = 0usize;
-    if !unit_ious.is_empty() {
+    if !measured.is_empty() {
         // regions whose WORST unit falls below the threshold degrade to raster
         let mut worst_by_region: std::collections::BTreeMap<usize, f64> =
             std::collections::BTreeMap::new();
-        for (rid, iou) in &unit_ious {
-            let e = worst_by_region.entry(rid.parse::<usize>().unwrap_or(0)).or_insert(1.0);
-            *e = e.min(*iou);
+        for r in &regions {
+            if !matches!(r.disposition, RegionDisposition::Vector) {
+                continue;
+            }
+            let worst = r
+                .units
+                .iter()
+                .filter_map(|&ui| {
+                    let sid = plan.owned[ui].unit.symbol_id.clone();
+                    measured.iter().find(|(k, _)| *k == sid).map(|(_, v)| *v)
+                })
+                .fold(1.0f64, f64::min);
+            worst_by_region.insert(r.id, worst);
         }
         for r in regions.iter_mut() {
             if !matches!(r.disposition, RegionDisposition::Vector) {
@@ -760,7 +773,7 @@ pub fn convert_parts(
 
     // encoding (four-part key) ---------------------------------------------------
     let mut keys: Vec<EncodingKey> = Vec::new();
-    let mut occ: Vec<(usize, u32, [f64; 4], String, String, String)> = Vec::new();
+    let mut occ: Vec<crate::page_pdf::Occurrence> = Vec::new();
     for r in &regions {
         if !matches!(r.disposition, RegionDisposition::Vector) {
             continue;
@@ -800,7 +813,7 @@ pub fn convert_parts(
             encodings.push((keys[k].visual_glyph_id, keys[k].semantic_string.clone()));
         }
     }
-    let font_bytes = build_font(&shapes, &encodings, policy.upem)?;
+    let _font_bytes = build_font(&shapes, &encodings, policy.upem)?;
 
 
     // raster patches (fallback regions) + artwork ------------------------------
@@ -917,7 +930,7 @@ pub fn convert_parts(
         o.bbox_px[2] = o.bbox_px[2].min(w as f64);
         o.bbox_px[3] = o.bbox_px[3].min(h as f64);
     }
-    let owner_encodings: Vec<(usize, String)> = owners
+    let _owner_encodings: Vec<(usize, String)> = owners
         .iter()
         .map(|o| (0usize, o.text.clone()))
         .collect();
@@ -955,7 +968,7 @@ pub fn convert_parts(
     let mut all_encodings = encodings.clone();
     let mut owner_cids: Vec<u32> = Vec::new();
     for o in &owners {
-        let glyph_idx = if let Some((_, t)) = encodings.iter().find(|(_, t)| t == &o.text) {
+        let glyph_idx = if let Some((_, _t)) = encodings.iter().find(|(_, t)| t == &o.text) {
             encodings.iter().position(|(_, t)| t == &o.text).unwrap()
         } else {
             0usize
@@ -1082,7 +1095,17 @@ pub fn convert_parts(
         lines,
     };
 
-    let mut unit_ious: Vec<f64> = unit_ious.into_iter().map(|(_, i)| i).collect();
+    // the report describes the EMITTED content: the units that remain vector
+    // after the policy gate (degraded units are raster, hence exact)
+    let mut unit_ious: Vec<f64> = regions
+        .iter()
+        .filter(|r| matches!(r.disposition, RegionDisposition::Vector))
+        .flat_map(|r| r.units.iter())
+        .filter_map(|&ui| {
+            let sid = plan.owned[ui].unit.symbol_id.clone();
+            measured.iter().find(|(k, _)| *k == sid).map(|(_, v)| *v)
+        })
+        .collect();
     unit_ious.sort_by(|a, b| a.partial_cmp(b).unwrap_or(std::cmp::Ordering::Equal));
     let vector_units = unit_ious.len();
     let raster_ink_px = coverage.text_ink_px_raster + coverage.other_ink_px;

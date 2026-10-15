@@ -10,7 +10,6 @@ use m0_font_pdf::shim::{convert_input, convert_with};
 fn measurement_policy() -> m0_font_pdf::Policy {
     m0_font_pdf::Policy { min_ink_iou: 0.0, ..m0_font_pdf::Policy::default() }
 }
-use m0_font_pdf::convert as io_convert;
 use scanweave_io::convert::{convert, ProtectedInput};
 use m0_font_pdf::{Input, Policy};
 use scanweave_core::Limits;
@@ -531,26 +530,59 @@ fn regress_geometry_uses_the_page_affine() {
     assert!(err.contains("unsupported geometry"), "skew must be refused: {err}");
 }
 
-/// P1-2: min_ink_iou is enforced — a page whose vector units measure below the
-/// policy is refused in reconstruct mode, and auto emits the searchable raster
-/// baseline instead (fidelity is a hard gate, not a report decoration).
+/// P1-2: min_ink_iou is enforced — units whose traced outline reproduces the
+/// source ink below the policy threshold are NOT vectorized: the region
+/// degrades to raster (`FidelityBelowPolicy`) and the report describes the
+/// EMITTED content (no surviving vector unit below the threshold). `auto`
+/// ranks the degraded reconstruction against the raster baseline by real bytes.
 #[test]
 fn regress_min_ink_iou_is_enforced() {
     let (rgb, w, h, page) = fixture("p16_statement", "p16_statement");
     let input = convert_input(&rgb, w, h, "p16", &page);
     let strict = m0_font_pdf::Policy { min_ink_iou: 0.98, ..m0_font_pdf::Policy::default() };
-    let err = convert(&input, &strict).map(|_| ()).expect_err("0.98 must refuse this page's vector units");
-    assert!(err.contains("fidelity policy violated"), "{err}");
-    // auto mode emits the raster baseline, which reproduces the source exactly
+    let out = convert(&input, &strict).expect("strict policy degrades, it does not fail");
+    let r = &out.report;
+    assert!(
+        r.fallback_reasons.contains_key("FidelityBelowPolicy"),
+        "below-threshold units must degrade to raster, got {:?}",
+        r.fallback_reasons
+    );
+    // the emitted reconstruction contains NO vector unit below the policy:
+    // on this page every unit degraded (small antialiased text), so no vector
+    // unit is emitted at all
+    assert_eq!(
+        r.fidelity.vector_ink_iou_min, None,
+        "no vector unit may remain below the policy threshold"
+    );
+    assert!(r.fidelity.units_below_policy >= 45,
+        "the small antialiased text units degraded: {}", r.fidelity.units_below_policy);
+    assert_eq!(r.fidelity.raster_ink_px, r.coverage.text_ink_px_raster + r.coverage.other_ink_px);
+
+    // auto at the same policy still ranks both candidates by real bytes
     let auto = m0_font_pdf::Policy { mode: "auto".into(), min_ink_iou: 0.98, ..m0_font_pdf::Policy::default() };
-    let out = convert(&input, &auto).expect("auto falls back");
-    assert_eq!(out.report.selected, "raster_baseline");
-    // an explicitly calibrated policy admits the vectors and reports the measure
+    let out2 = convert(&input, &auto).expect("auto");
+    assert_eq!(out2.report.candidates.len(), 2);
+    assert!(out2.report.candidates.iter().any(|(n, _)| n == "reconstruct"));
+    assert!(out2.report.candidates.iter().any(|(n, _)| n == "raster_baseline"));
+
+    // on a page where the traces meet the policy, units stay vectorized and the
+    // reported minimum satisfies the threshold
+    let (rgb1, w1, h1, page1) = fixture("p01_latin", "p01_latin");
+    let in1 = convert_input(&rgb1, w1, h1, "p01", &page1);
+    let o1 = convert(&in1, &strict).expect("p01 at 0.98");
+    let m1 = o1.report.fidelity.vector_ink_iou_min.expect("p01 keeps vectors");
+    assert!(m1 >= 0.98, "surviving vector units must satisfy the policy, min={m1}");
+    assert!(o1.report.coverage.text_ink_px_vector > 0, "p01 stays vectorized");
+
+    // a calibrated policy admits the vectors and reports the measure honestly
     let loose = m0_font_pdf::Policy { min_ink_iou: 0.5, ..m0_font_pdf::Policy::default() };
-    let out2 = convert(&input, &loose).expect("calibrated policy converts");
-    assert_eq!(out2.report.selected, "reconstruct");
-    let m = out2.report.fidelity.vector_ink_iou_min.expect("measured");
+    let out3 = convert(&input, &loose).expect("calibrated policy converts");
+    assert_eq!(out3.report.selected, "reconstruct");
+    let m = out3.report.fidelity.vector_ink_iou_min.expect("measured");
     assert!(m >= 0.5, "the reported fidelity must satisfy the stated policy");
+    assert_eq!(out3.report.fidelity.units_below_policy, 0, "nothing degraded at 0.5");
+    // the strict policy degrades strictly more than the calibrated one
+    assert!(r.coverage.text_ink_px_raster > out3.report.coverage.text_ink_px_raster);
 }
 
 /// P1-3/P1-4: repeated identical OCR text keeps BOTH spans' owners, and the
@@ -562,10 +594,15 @@ fn regress_repeated_spans_keep_owners_and_cids_dedup() {
     let mut rgb = vec![250u8; (w * h * 3) as usize];
     let mut page = repeated_span_page(w, h, 220);
     // draw "Amount 12.34" once (span 1); span 2's area stays blank (raster-fallback)
-    let draw_text = |rgb: &mut Vec<u8>, x0: u32| {
-        for gy in 45..105u32 {
-            for gx in x0..(x0 + 100) {
-                // crude glyph blocks: alternate ink columns so the tracer sees marks
+    // Make BOTH spans raster-fallback with IDENTICAL text — the exact case
+    // where text-based owner dedup silently dropped the second span's label
+    // (the pre-fix bug). Each span box gets glyph-like ink AND a solid rule
+    // crossing it, so the planner marks the region ContactNonText → raster and
+    // the (buggy) raster-region owner loop runs for both spans.
+    for x0 in [40u32, 220u32] {
+        // glyph-like ink
+        for gy in 50..100u32 {
+            for gx in x0..(x0 + 90) {
                 if (gx + gy) % 7 < 3 {
                     let i = ((gy * w + gx) * 3) as usize;
                     rgb[i] = 20;
@@ -574,8 +611,16 @@ fn regress_repeated_spans_keep_owners_and_cids_dedup() {
                 }
             }
         }
-    };
-    draw_text(&mut rgb, 40);
+        // a solid rule crossing the span box (non-text contact)
+        for gy in 58..66u32 {
+            for gx in x0.saturating_sub(10)..(x0 + 110).min(w) {
+                let i = ((gy * w + gx) * 3) as usize;
+                rgb[i] = 15;
+                rgb[i + 1] = 15;
+                rgb[i + 2] = 15;
+            }
+        }
+    }
     page.raster.file_sha256 = scanweave_core::hash_hex(&rgb);
     page.raster.pixel_sha256 = pixel_hash(&rgb, w, h);
     let input = convert_input(&rgb, w, h, "repeated", &page);
@@ -584,21 +629,51 @@ fn regress_repeated_spans_keep_owners_and_cids_dedup() {
     let owners = &out.report.semantic_owner;
     assert_eq!(owners.len(), 2, "both identical-text spans must be present: {owners:?}");
     assert!(owners.contains_key("w0") && owners.contains_key("w1"));
+    // both must be FALLBACK owners: that is the code path where the pre-fix
+    // text-based dedup dropped the second span
+    assert_eq!(owners["w0"], "invisible", "span w0 must be a raster fallback owner");
+    assert_eq!(owners["w1"], "invisible", "span w1 must be a raster fallback owner");
+    // and each owner run must be discoverable in the PDF: two ActualText marks
+    let pdf = String::from_utf8_lossy(&out.pdf_bytes);
+    assert_eq!(
+        pdf.matches("/ActualText (Amount 12.34)").count(),
+        2,
+        "both identical-text fallback spans must carry their own label mark"
+    );
     // no unowned/double-owned ink
     assert_eq!(out.report.coverage.unowned_ink_px, 0);
     assert_eq!(out.report.coverage.multiply_owned_ink_px, 0);
 
-    // cross-page CID reuse: the same page twice in one document must not mint
-    // duplicate CIDs for the same (glyph, string) pairs
+    // cross-page CID reuse: the same page twice in one document must NOT mint
+    // duplicate CIDs for the same (glyph, string) pairs. The font bytes alone
+    // cannot show this (fontbuild dedups its own cmap), so count the CIDs the
+    // document actually emits: the CIDToGIDMap + ToUnicode tables must cover
+    // exactly the distinct (glyph, string) pairs of ONE page, not two.
     use scanweave_io::document::convert_document;
     let inputs = vec![input.clone(), input.clone()];
     let doc = convert_document("repeated-doc", &inputs, &measurement_policy()).expect("document");
     let per_page = doc.report.page_reports.iter().map(|p| p.font_glyphs).collect::<Vec<_>>();
     assert_eq!(per_page[0], per_page[1], "identical pages must trace identical glyphs");
-    // the document font must be no larger than one page's glyph set (reuse)
-    assert_eq!(
-        doc.report.font_bytes, out.report.font_bytes,
-        "the shared font must not duplicate the same page's glyphs"
+    let pdf = String::from_utf8_lossy(&doc.pdf_bytes);
+    let bfchars = pdf.matches("beginbfchar").count();
+    assert!(bfchars >= 1, "the document font must carry a ToUnicode map");
+    // count the CID entries the document's maps declare
+    let declared: Vec<usize> = pdf
+        .match_indices("endbfchar")
+        .filter_map(|(i, _)| {
+            let head = &pdf[..i];
+            let seg = head.rsplit("beginbfchar").next()?;
+            Some(seg.matches('<').count())
+        })
+        .collect();
+    let total_declared: usize = declared.iter().sum();
+    // one page's distinct (glyph, string) pairs = its font glyphs; the document
+    // must not exceed one page's worth (the second page reuses every CID)
+    assert!(
+        total_declared <= per_page[0] + 1,
+        "document CID table ({total_declared}) must not exceed one page's ({}); \
+         cross-page CIDs are not being reused",
+        per_page[0] + 1
     );
 }
 

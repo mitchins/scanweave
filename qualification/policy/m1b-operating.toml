@@ -30,7 +30,7 @@ measured 0.7868 were reported as vectorized output while the policy claimed
 | Threshold | Value | Where it applies |
 |---|---|---|
 | SPEC §4.2 acceptance policy | **0.98** | `scanweave build` default (`Policy::default`), unchanged from the reviewed SPEC value |
-| Development measurement floor | **0.75** | the M0/M1-A qualification harness's own render-based gate (checks.py), unchanged |
+| Development measurement floor | **0.75** | the CLI `--min-ink-iou` used by the M1-B document/baseline harnesses (`test_m1b_document_search.py`, `test_m1b_baselines.py`) when they request the reconstruction, so the harness can gate the render itself |
 
 ## Calibration evidence (development fixtures)
 
@@ -57,8 +57,8 @@ material with an explicit policy revision — this file is that revision for the
 
 - The converter's default remains the SPEC's 0.98 (this revision does not
   relax it; operators lower it explicitly with `--min-ink-iou`).
-- The harness's render-based gates (MIN_IOU 0.98 / MAX_EDGE_P95 0.5 /
-  MAX_EDGE_MAX 1.0 / MAX_MAE 0.02) are untouched.
+- The harness's render-based gates in `checks.py` (MIN_IOU 0.98 /
+  MAX_EDGE_P95 0.5 / MAX_EDGE_MAX 1.0 / MAX_MAE 0.02) are untouched.
 - The probe (the harness's measuring instrument) disables the converter-side
   gate explicitly, so the independent render-based measurement is never
   pre-empted by a converter-side fallback.
