@@ -34,8 +34,15 @@ WORK = os.path.join(ROOT, "work", "m0-checks")
 # explicit override) so the harness runs on a clean checkout and in CI
 from tools_env import ots_bin, qpdf_bin, qpdf_env, version  # noqa: E402
 
-QPDF = qpdf_bin()
-OTS = ots_bin()
+
+def QPDF() -> str:
+    """qpdf, resolved on first use (a missing tool fails the gate, not the import)."""
+    return qpdf_bin()
+
+
+def OTS() -> str:
+    """The OpenType sanitizer, resolved on first use."""
+    return ots_bin()
 
 sys.path.insert(0, os.path.join(HERE, ".venv", "lib", "python3.12", "site-packages"))
 import pypdfium2 as pdfium  # noqa: E402
@@ -289,12 +296,12 @@ def check_page(name: str) -> dict:
     #    pairing — the astral fix regression was invisible to it, so it is
     #    asserted structurally here)
     env = qpdf_env()
-    r = sh([QPDF, "--check", pdf_path], env=env)
+    r = sh([QPDF(), "--check", pdf_path], env=env)
     out["checks"]["qpdf"] = r.returncode == 0
     if r.returncode != 0:
         out["fail"].append(f"qpdf --check rc={r.returncode}: {r.stderr[:300]}")
     qdf = os.path.join(out_dir, "out.qdf.pdf")
-    qr = sh([QPDF, "--qdf", "--object-streams=disable", pdf_path, qdf], env=env)
+    qr = sh([QPDF(), "--qdf", "--object-streams=disable", pdf_path, qdf], env=env)
     if qr.returncode == 0:
         raw = open(qdf, "rb").read()
         bdc, emc = raw.count(b"BDC\n"), raw.count(b"EMC\n")
@@ -307,7 +314,7 @@ def check_page(name: str) -> dict:
         out["fail"].append("qpdf --qdf failed; balance not checked")
 
     # 3. ots-sanitize
-    r = sh([OTS, ttf_path])
+    r = sh([OTS(), ttf_path])
     out["checks"]["ots"] = r.returncode == 0
     if r.returncode != 0:
         out["fail"].append(f"ots-sanitize rc={r.returncode}: {(r.stdout + r.stderr)[:300]}")
@@ -548,7 +555,7 @@ def check_page(name: str) -> dict:
 def qdf_of(pdf_path: str, tag: str) -> str:
     env = qpdf_env()
     out = os.path.join(WORK, f"{tag}.qdf.pdf")
-    r = sh([QPDF, "--qdf", "--object-streams=disable", pdf_path, out], env=env)
+    r = sh([QPDF(), "--qdf", "--object-streams=disable", pdf_path, out], env=env)
     assert r.returncode == 0, r.stderr
     return out
 
@@ -790,10 +797,10 @@ def main() -> int:
         global FIXTURES
         FIXTURES = os.path.abspath(args.fixtures_dir)
     os.makedirs(WORK, exist_ok=True)
-    results["tools"]["qpdf"] = sh([QPDF, "--version"], env=qpdf_env()).stdout.splitlines()[0]
+    results["tools"]["qpdf"] = version(QPDF())
     results["tools"]["poppler"] = sh(["pdftotext", "-v"]).stderr.splitlines()[0]
     results["tools"]["pdfium"] = "pypdfium2 bundled"
-    results["tools"]["ots"] = sh([OTS, "--version"]).stdout.strip()
+    results["tools"]["ots"] = sh([OTS(), "--version"]).stdout.strip()
 
     pages = pages_in_run
     all_ok = True

@@ -61,10 +61,6 @@ pub fn convert_input(
     scanweave_io::convert::input_from_ocr_page(rgb, width, height, page_id, page)
 }
 
-fn symbol_polygon(sym: &scanweave_core::ocr_page::Symbol) -> Vec<[f64; 2]> {
-    sym.polygon.clone()
-}
-
 /// Convert one page; `policy` override optional.
 pub fn convert_with(
     input: &Input,
@@ -80,7 +76,7 @@ pub fn build_page(page_dir: &PathBuf, out_dir: &PathBuf) -> Result<Report, Strin
     let png = std::fs::read_dir(page_dir)
         .map_err(|e| e.to_string())?
         .filter_map(|e| e.ok())
-        .find(|e| e.path().extension().map_or(false, |x| x == "png"))
+        .find(|e| e.path().extension().is_some_and(|x| x == "png"))
         .map(|e| e.path())
         .ok_or("no .png in page dir")?;
     let ocr_path = std::fs::read_dir(page_dir)

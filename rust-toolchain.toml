@@ -1,3 +1,5 @@
 [toolchain]
 channel = "1.99.0"
 profile = "minimal"
+# CI's clippy step runs against this pinned toolchain, not the action's `stable`
+components = ["clippy"]
