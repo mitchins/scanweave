@@ -28,8 +28,15 @@ pub struct Patch {
 #[derive(Debug, Default, Clone)]
 pub struct Owner {
     pub text: String,
+    /// the OCR span polygon box (reporting)
     pub bbox_px: [f64; 4],
-    /// the OCR span this owner overlays (line-level marks need the span id)
+    /// ink-derived placement box: the first traced unit's ink bbox of the span.
+    /// The owner run is placed on THIS baseline: extractors merge runs into a
+    /// line by baseline and then sort by x, so a span-box-derived baseline
+    /// (which sits off the glyph ink baseline) creates a separate line and the
+    /// label is appended out of order (the real M1-A N1 mechanism).
+    pub place_px: [f64; 4],
+    /// the OCR span this owner overlays (reading-order marks need the span id)
     pub span_id: String,
 }
 
@@ -255,18 +262,6 @@ pub fn assemble(
     c.rect(0.0, 0.0, page_w_pt, page_h_pt);
     c.fill_nonzero();
 
-    for (i, patch) in patches.iter().enumerate() {
-        let x = patch.bbox_px[0] as f32 * 72.0 / dpi as f32;
-        let y_bot = page_h_pt - patch.bbox_px[3] as f32 * 72.0 / dpi as f32;
-        let w_pt = (patch.bbox_px[2] - patch.bbox_px[0]) as f32 * 72.0 / dpi as f32;
-        let h_pt = (patch.bbox_px[3] - patch.bbox_px[1]) as f32 * 72.0 / dpi as f32;
-        c.save_state();
-        c.transform([w_pt, 0.0, 0.0, h_pt, x, y_bot]);
-        let name = format!("Im{i}");
-        c.x_object(Name(name.as_bytes()));
-        c.restore_state();
-    }
-
     let span_map: std::collections::HashMap<&str, &str> = span_texts
         .iter()
         .map(|(id, t)| (id.as_str(), t.as_str()))
@@ -279,6 +274,18 @@ pub fn assemble(
             .chars()
             .any(|c| (c as u32) > 0xFFFF)
     };
+    for (i, patch) in patches.iter().enumerate() {
+        let x = patch.bbox_px[0] as f32 * 72.0 / dpi as f32;
+        let y_bot = page_h_pt - patch.bbox_px[3] as f32 * 72.0 / dpi as f32;
+        let w_pt = (patch.bbox_px[2] - patch.bbox_px[0]) as f32 * 72.0 / dpi as f32;
+        let h_pt = (patch.bbox_px[3] - patch.bbox_px[1]) as f32 * 72.0 / dpi as f32;
+        c.save_state();
+        c.transform([w_pt, 0.0, 0.0, h_pt, x, y_bot]);
+        let name = format!("Im{i}");
+        c.x_object(Name(name.as_bytes()));
+        c.restore_state();
+    }
+
     let owner_by_span: std::collections::HashMap<&str, (&Owner, u32)> = owners
         .iter()
         .zip(owner_cids.iter())
@@ -356,12 +363,13 @@ pub fn assemble(
                     c.end_marked_content();
                 }
             } else if let Some((owner, cid)) = owner_by_span.get(sid.as_str()) {
-                // Fallback-span owner run, drawn VISIBLY at the span's position:
-                // the owner CID references the font's EMPTY placeholder glyph,
-                // so nothing is painted (the raster patch already carries the
-                // pixels) while both extractors order the run inline like any
-                // other visible text. An invisible run is appended at the end of
-                // the text page by PDFium (measured, M1-A N1). /ActualText owns
+                // Fallback-span owner run: INVISIBLE (paints nothing — the raster
+                // patch carries the pixels) and placed on the span's traced INK
+                // baseline (place_px), not the OCR polygon box. Extractors merge
+                // runs into a line by baseline and then sort the line's chars by
+                // x, so matching the visible line's baseline is what makes the
+                // label land inline in reading order instead of forming its own
+                // line at the end (the real M1-A N1 mechanism). /ActualText owns
                 // the span's label for word grouping; astral labels keep the
                 // per-glyph ToUnicode transport.
                 let owner_text = span_map.get(sid.as_str()).copied().unwrap_or("");
@@ -371,15 +379,17 @@ pub fn assemble(
                     let mut pl = mc.properties();
                     pl.actual_text(TextStr(owner_text));
                 }
-                let x0 = owner.bbox_px[0] as f32 * 72.0 / dpi as f32;
-                let y_bot = page_h_pt - owner.bbox_px[3] as f32 * 72.0 / dpi as f32;
+                let x0 = owner.place_px[0] as f32 * 72.0 / dpi as f32;
+                let y_bot = page_h_pt - owner.place_px[3] as f32 * 72.0 / dpi as f32;
                 let h_pt =
-                    ((owner.bbox_px[3] - owner.bbox_px[1]) as f32 * 72.0 / dpi as f32).max(4.0);
+                    ((owner.place_px[3] - owner.place_px[1]) as f32 * 72.0 / dpi as f32).max(4.0);
                 let cx = *cid;
                 let bytes = Str(&[(cx >> 8) as u8, (cx & 0xFF) as u8]);
+                c.set_text_rendering_mode(TextRenderingMode::Invisible);
                 c.set_font(Name(b"F1"), h_pt);
                 c.set_text_matrix([1.0, 0.0, 0.0, 1.0, x0, y_bot]);
                 c.show(bytes);
+                c.set_text_rendering_mode(TextRenderingMode::Fill);
                 c.set_font(Name(b"F1"), 1.0);
                 if !astral {
                     c.end_marked_content();
@@ -409,22 +419,6 @@ pub fn assemble(
             let cid = *cid + 1;
             c.show(Str(&[(cid >> 8) as u8, (cid & 0xFF) as u8]));
         }
-    }
-    for (owner, cid) in owners.iter().zip(owner_cids.iter()) {
-        if emitted_spans.contains(owner.span_id.as_str()) {
-            continue;
-        }
-        let x0 = owner.bbox_px[0] as f32 * 72.0 / dpi as f32;
-        let y_bot = page_h_pt - owner.bbox_px[3] as f32 * 72.0 / dpi as f32;
-        let h_pt = ((owner.bbox_px[3] - owner.bbox_px[1]) as f32 * 72.0 / dpi as f32).max(4.0);
-        let cx = *cid;
-        let bytes = Str(&[(cx >> 8) as u8, (cx & 0xFF) as u8]);
-        c.set_text_rendering_mode(TextRenderingMode::Invisible);
-        c.set_font(Name(b"F1"), h_pt);
-        c.set_text_matrix([1.0, 0.0, 0.0, 1.0, x0, y_bot]);
-        c.show(bytes);
-        c.set_text_rendering_mode(TextRenderingMode::Fill);
-        c.set_font(Name(b"F1"), 1.0);
     }
 
     c.end_text();

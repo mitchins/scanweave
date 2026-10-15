@@ -40,27 +40,27 @@ fn build(dir: &str, stem: &str, policy: Option<&Policy>) -> scanweave_io::conver
 }
 
 /// M1B-01: a line mixing visible spans and a raster-fallback span must be
-/// searchable natively: the fallback owner run is drawn VISIBLY (empty
-/// placeholder glyph paints nothing — the raster patch carries the pixels) at
-/// the span position, emitted INLINE in reading order, with its own per-span
-/// /ActualText carrying the OCR label. This is the PDFium native-search fix
-/// for N1 (invisible runs were hoisted to the end of the text page).
+/// natively searchable: the fallback owner run is emitted INLINE in reading
+/// order (between the visible spans of its line), INVISIBLE (it paints nothing;
+/// the raster patch carries the pixels), and placed on the span's traced INK
+/// baseline — extractors merge runs into a line by baseline and sort by x, so
+/// matching the visible line's baseline is what keeps the label in reading
+/// order. Its own per-span /ActualText carries the OCR label.
 #[test]
-fn m1b01_mixed_line_owner_run_is_visible_and_inline() {
+fn m1b01_mixed_line_owner_run_is_inline_on_ink_baseline() {
     let out = build("p10_multipage/page1", "p10_page1", None);
     let pdf = String::from_utf8_lossy(&out.pdf_bytes);
     let bt = pdf.find("BT\n").expect("text object");
     let et = pdf.rfind("ET\n").expect("text object end");
     let content = &pdf[bt..=et];
-    // the fallback span "1" carries its own per-span ActualText (pdf_writer
-    // emits ActualText as a literal PDF string, e.g. (1))
+    // the fallback span "1" carries its own per-span ActualText
     assert!(
         pdf.contains("/ActualText (1)"),
         "fallback span must carry its label via /ActualText"
     );
     // and its run sits between "Page"'s EMC and "of"'s BDC (inline, reading order)
-    let page_end = content.find("/ActualText (Page)").expect("Page mark");
-    let seg = &content[page_end..];
+    let page_at = content.find("/ActualText (Page)").expect("Page mark");
+    let seg = &content[page_at..];
     let page_emc = seg.find("EMC").expect("Page mark close");
     let owner_at = seg.find("/ActualText (1)").expect("owner mark");
     let of_bdc = seg.find("/ActualText (of)").expect("of mark");
@@ -68,11 +68,30 @@ fn m1b01_mixed_line_owner_run_is_visible_and_inline() {
         page_emc < owner_at && owner_at < of_bdc,
         "owner run must be emitted inline between the visible spans of its line"
     );
-    // the owner run is VISIBLE (no invisible rendering mode around it)
+    // the owner run is invisible (paints nothing)
     let owner_run = &seg[owner_at..of_bdc];
     assert!(
-        !owner_run.contains("3 Tr"),
-        "the owner run must not be invisible (PDFium hoists invisible runs)"
+        owner_run.contains("3 Tr"),
+        "the owner run must be invisible so it paints no pixels"
+    );
+    // and it is placed on the traced ink baseline: the same Tm y as the visible
+    // runs of its line (the 'of' span's runs), within a small tolerance
+    let owner_y = owner_run
+        .split("1 0 0 1 ")
+        .nth(1)
+        .and_then(|s| s.split_whitespace().nth(1))
+        .and_then(|v| v.parse::<f64>().ok())
+        .expect("owner Tm y");
+    let of_seg = &content[content.find("/ActualText (of)").unwrap()..];
+    let of_y = of_seg
+        .split(" Tm")
+        .next()
+        .and_then(|head| head.split_whitespace().last())
+        .and_then(|v| v.parse::<f64>().ok())
+        .expect("of Tm y");
+    assert!(
+        (owner_y - of_y).abs() < 1.0,
+        "owner baseline {owner_y} must match the line baseline {of_y}"
     );
     // no invented whitespace: identifiers/amounts stay contiguous ActualTexts
     for ident in ["INV-2026-0042", "1,234.56"] {

@@ -573,11 +573,11 @@
    },
    "metrics": {
     "poppler": {
-     "iou": 0.9418775750441436,
-     "edge_p95": 4.47993656260899,
-     "edge_max": 11.821020709407662,
-     "mae": 0.004436829030254635,
-     "mae_ink": 0.04818578402520514,
+     "iou": 0.9387006892506232,
+     "edge_p95": 4.242640687119285,
+     "edge_max": 11.95082611780287,
+     "mae": 0.004236602785910744,
+     "mae_ink": 0.044635950875437425,
      "topology_ok": false,
      "holes@55": [
       6,
@@ -593,11 +593,11 @@
      ]
     },
     "pdfium": {
-     "iou": 0.9465236686390532,
-     "edge_p95": 4.285622653063812,
-     "edge_max": 11.821020709407662,
-     "mae": 0.004081137432348505,
-     "mae_ink": 0.04533675600417682,
+     "iou": 0.9564444444444444,
+     "edge_p95": 1.4142135623730951,
+     "edge_max": 11.944847749347913,
+     "mae": 0.00273651406263863,
+     "mae_ink": 0.03154132171387073,
      "topology_ok": false,
      "holes@55": [
       6,
@@ -605,23 +605,23 @@
      ],
      "holes@60": [
       27,
-      2
+      4
      ],
      "holes@65": [
       46,
-      2
+      4
      ]
     }
    },
    "fail": [
-    "poppler visual gate: iou=0.9419 p95=4.48 max=11.82 mae=0.0044 topo=False",
-    "pdfium visual gate: iou=0.9465 p95=4.29 max=11.82 mae=0.0041 topo=False"
+    "poppler visual gate: iou=0.9387 p95=4.24 max=11.95 mae=0.0042 topo=False",
+    "pdfium visual gate: iou=0.9564 p95=1.41 max=11.94 mae=0.0027 topo=False"
    ],
-   "pdf_bytes": 37459,
+   "pdf_bytes": 22308,
    "ttf_bytes": 756,
    "marked_content": {
-    "bdc": 0,
-    "emc": 0
+    "bdc": 1,
+    "emc": 1
    },
    "font_glyphs": 1,
    "font_contours": {

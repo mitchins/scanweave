@@ -477,14 +477,33 @@ pub fn convert(input: &Input, policy: &Policy) -> Result<Output, String> {
             }
             let text = ocr.spans.iter().find(|s| s.id == sid).map(|s| s.text.clone()).unwrap_or_default();
             let bbox = ocr.spans.iter().find(|s| s.id == sid).map(|s| span_bbox(&s.polygon)).unwrap_or([0.0, 0.0, 0.0, 0.0]);
-            owners.push(Owner { text, bbox_px: bbox, span_id: sid });
+            // placement on the traced INK baseline: the first unit of the span
+            // (its traced glyph box), matching how visible runs are placed
+            let place = plan
+                .owned
+                .iter()
+                .find(|u| u.unit.span_id == sid)
+                .map(|u| u.unit.bbox_px)
+                .unwrap_or(bbox);
+            owners.push(Owner { text, bbox_px: bbox, place_px: place, span_id: sid });
         }
     }
     for s in &ocr.spans {
         if vector_spans.contains(&s.id) || owners.iter().any(|o| o.text == s.text) {
             continue;
         }
-        owners.push(Owner { text: s.text.clone(), bbox_px: span_bbox(&s.polygon), span_id: s.id.clone() });
+        let place = plan
+            .owned
+            .iter()
+            .find(|u| u.unit.span_id == s.id)
+            .map(|u| u.unit.bbox_px)
+            .unwrap_or_else(|| span_bbox(&s.polygon));
+        owners.push(Owner {
+            text: s.text.clone(),
+            bbox_px: span_bbox(&s.polygon),
+            place_px: place,
+            span_id: s.id.clone(),
+        });
     }
     // clamp owner boxes to the canonical raster (OCR polygons may overrun it)
     for o in owners.iter_mut() {
