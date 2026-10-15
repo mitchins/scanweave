@@ -99,6 +99,9 @@ def main() -> int:
     # 3. runner interface: checks.py --pages + --fixtures-dir work against the
     # ADAPTER's bundle layout (as the corpus harness would materialize it)
     probe_pages = os.path.join(WORK, "probe-pages")
+    # WORK was removed above; recreate it so the run-specific --out file has a
+    # parent on a clean checkout (work/ is git-ignored, so CI starts without it)
+    os.makedirs(WORK, exist_ok=True)
     for di, doc in enumerate(manifest["documents"]):
         for pg in doc["pages"]:
             name = f"c{di:02d}_{pg['page']}"
