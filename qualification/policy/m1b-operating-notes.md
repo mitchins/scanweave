@@ -1,0 +1,67 @@
+# m1b-operating policy notes
+
+Prose companion to `m1b-operating.toml` (the machine-readable policy). This
+file records *why* the thresholds are what they are and what evidence backs
+them; the TOML records the thresholds themselves.
+
+## What changed and why
+
+The converter's fidelity gate (`min_ink_iou`) was previously decorative: the
+field existed in `Policy` but was never read by the conversion. An independent
+review of the pushed M1-B revision confirmed this (pages whose rendered ink IoU
+measured 0.7868 were reported as vectorized output while the policy claimed
+0.98). M1-B makes the gate load-bearing:
+
+- `convert`/`convert_parts` compute a per-occurrence analytical ink IoU (the
+  traced outline rasterized over the unit's crop grid vs the unit's source ink
+  mask — SPEC §4.2's mask definition, computed on the candidate itself, never
+  with a separately tuned candidate threshold).
+- Vector units below `min_ink_iou` degrade to raster (`FidelityBelowPolicy`).
+- `--mode reconstruct` refuses to emit a candidate that violates the policy.
+- `--mode auto` may select the whole-page searchable raster baseline, which
+  reproduces the source pixels exactly and is therefore always qualified.
+- The reports carry the measured fidelity (`fidelity.vector_ink_iou_min/mean`,
+  `units_below_policy`, and per-page fidelity for documents).
+
+## The two thresholds in force (both explicit)
+
+| Threshold | Value | Where it applies |
+|---|---|---|
+| SPEC §4.2 acceptance policy | **0.98** | `scanweave build` default (`Policy::default`), unchanged from the reviewed SPEC value |
+| Development measurement floor | **0.75** | the CLI `--min-ink-iou` used by the M1-B document/baseline harnesses (`test_m1b_document_search.py`, `test_m1b_baselines.py`) when they request the reconstruction, so the harness can gate the render itself |
+
+## Calibration evidence (development fixtures)
+
+Analytical per-occurrence ink IoU of the current tracer on the synthetic
+fixtures (measured, committed in the reports under `work/m0-checks/`):
+
+| fixture | min | mean | note |
+|---|---:|---:|---|
+| p01_latin | 0.996 | 0.997 | large glyphs; vectorization is essentially exact |
+| p09_realtext | 0.852 | 0.946 | small antialiased text |
+| p16_statement | 0.800 | 0.924 | table text + thin rules |
+| p13_nontext | 0.913 | — | rule/stamp/barcode contact |
+
+The residual disagreement on small antialiased text is the mask-boundary
+effect described in SPEC §4.2's note: vectorizing antialiased ink bolds the
+boundary (a pixel at 40% source coverage becomes covered by the outline), so a
+fraction of boundary pixels disagree in each direction. The SPEC states its
+0.98 is "a deliberately conservative starting value, not a demonstrated
+universal perceptual threshold", and permits calibration on development
+material with an explicit policy revision — this file is that revision for the
+*measurement* threshold only.
+
+## What was NOT changed
+
+- The converter's default remains the SPEC's 0.98 (this revision does not
+  relax it; operators lower it explicitly with `--min-ink-iou`).
+- The harness's render-based gates in `checks.py` (MIN_IOU 0.98 /
+  MAX_EDGE_P95 0.5 / MAX_EDGE_MAX 1.0 / MAX_MAE 0.02) are untouched.
+- The probe (the harness's measuring instrument) disables the converter-side
+  gate explicitly, so the independent render-based measurement is never
+  pre-empted by a converter-side fallback.
+
+## Holdout
+
+Not applicable: no benign corpus is mounted. All numbers above are development
+fixtures; the holdout evaluation is a separate, sealed run.

@@ -30,8 +30,12 @@ ROOT = os.path.dirname(HERE)
 PROBE = os.path.join(ROOT, "target", "debug", "m0-font-pdf")
 FIXTURES = os.path.join(HERE, "fixtures", "probe")
 WORK = os.path.join(ROOT, "work", "m0-checks")
-QPDF = os.path.join(ROOT, "tools", "dist", "bin", "qpdf")
-OTS = os.path.join(HERE, "..", "tools", "src", "ots-bin", "ots-9.3.0-Linux", "ots-sanitize")
+# external tools resolve through the environment (local build, PATH, or an
+# explicit override) so the harness runs on a clean checkout and in CI
+from tools_env import ots_bin, qpdf_bin, qpdf_env, version  # noqa: E402
+
+QPDF = qpdf_bin()
+OTS = ots_bin()
 
 sys.path.insert(0, os.path.join(HERE, ".venv", "lib", "python3.12", "site-packages"))
 import pypdfium2 as pdfium  # noqa: E402
@@ -284,7 +288,7 @@ def check_page(name: str) -> dict:
     # 2. qpdf --check + marked-content balance (qpdf does NOT check BDC/EMC
     #    pairing — the astral fix regression was invisible to it, so it is
     #    asserted structurally here)
-    env = dict(os.environ, LD_LIBRARY_PATH=os.path.join(ROOT, "tools", "dist", "lib"))
+    env = qpdf_env()
     r = sh([QPDF, "--check", pdf_path], env=env)
     out["checks"]["qpdf"] = r.returncode == 0
     if r.returncode != 0:
@@ -542,7 +546,7 @@ def check_page(name: str) -> dict:
 
 
 def qdf_of(pdf_path: str, tag: str) -> str:
-    env = dict(os.environ, LD_LIBRARY_PATH=os.path.join(ROOT, "tools", "dist", "lib"))
+    env = qpdf_env()
     out = os.path.join(WORK, f"{tag}.qdf.pdf")
     r = sh([QPDF, "--qdf", "--object-streams=disable", pdf_path, out], env=env)
     assert r.returncode == 0, r.stderr
@@ -786,8 +790,7 @@ def main() -> int:
         global FIXTURES
         FIXTURES = os.path.abspath(args.fixtures_dir)
     os.makedirs(WORK, exist_ok=True)
-    env = dict(os.environ, LD_LIBRARY_PATH=os.path.join(ROOT, "tools", "dist", "lib"))
-    results["tools"]["qpdf"] = sh([QPDF, "--version"], env=env).stdout.splitlines()[0]
+    results["tools"]["qpdf"] = sh([QPDF, "--version"], env=qpdf_env()).stdout.splitlines()[0]
     results["tools"]["poppler"] = sh(["pdftotext", "-v"]).stderr.splitlines()[0]
     results["tools"]["pdfium"] = "pypdfium2 bundled"
     results["tools"]["ots"] = sh([OTS, "--version"]).stdout.strip()

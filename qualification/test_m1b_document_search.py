@@ -17,8 +17,10 @@ import subprocess
 import sys
 from pathlib import Path
 
+sys.path.insert(0, str(Path(__file__).resolve().parent))
 sys.path.insert(0, "qualification/.venv/lib/python3.12/site-packages")
 import pypdfium2 as pdfium  # noqa: E402
+from tools_env import qpdf_bin, qpdf_env  # noqa: E402
 
 ROOT = Path(__file__).resolve().parent.parent
 DOCS = ROOT / "qualification" / "fixtures" / "documents"
@@ -69,9 +71,9 @@ def doc_gate(name: str, doc: str, pages: int, tokens: dict[int, list[str]], mode
     n_pages = int([l for l in info.splitlines() if l.startswith("Pages:")][0].split()[1])
     check(f"{name}: page count", n_pages == pages, f"{n_pages} != {pages}")
     q = subprocess.run(
-        [str(ROOT / "tools/dist/bin/qpdf"), "--check", str(pdf)],
+        [qpdf_bin(), "--check", str(pdf)],
         capture_output=True, text=True,
-        env={"LD_LIBRARY_PATH": str(ROOT / "tools/dist/lib")},
+        env=qpdf_env(),
     )
     check(f"{name}: qpdf --check", q.returncode == 0, q.stdout.splitlines()[0] if q.stdout else q.stderr[:80])
 

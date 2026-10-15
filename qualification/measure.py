@@ -15,7 +15,9 @@ ROOT = os.path.dirname(HERE)
 PROBE = os.path.join(ROOT, "target", "debug", "m0-font-pdf")
 FIXTURES = os.path.join(HERE, "fixtures", "probe")
 WORK = os.path.join(ROOT, "work", "m0-measure")
-QPDF = os.path.join(ROOT, "tools", "dist", "bin", "qpdf")
+from tools_env import qpdf_bin, qpdf_env, version  # noqa: E402
+
+QPDF = qpdf_bin()
 
 sys.path.insert(0, os.path.join(HERE, ".venv", "lib", "python3.12", "site-packages"))
 import pypdfium2 as pdfium  # noqa: E402
@@ -149,7 +151,7 @@ def main() -> int:
         import subprocess as _sp
         env_q = dict(os.environ, LD_LIBRARY_PATH=os.path.join(ROOT, "tools", "dist", "lib"))
         qdf = os.path.join(d, "out.qdf.pdf")
-        _sp.run([os.path.join(ROOT, "tools", "dist", "bin", "qpdf"),
+        _sp.run([QPDF,
                  "--qdf", "--object-streams=disable", os.path.join(d, "out.pdf"), qdf],
                 capture_output=True, env=env_q)
         raw = open(qdf, "rb").read() if os.path.exists(qdf) else b""
