@@ -30,9 +30,10 @@ Before (`diagnostic.py` comprehension repeatedly reused `tx,ty`):
 After (`diagnostic.py` fixed per-observation truth):
 - Oracle corrects each observation's own `tx,ty`.
 - Runs succeeded against instrument gates:
-  - translation grid/oracle instrument: `max_disp=0.2179 px`, bias_x=-0.0094, bias_y=-0.0337, SD=0.0515.
+  - translation estimator: `max_disp=0.2179 px`, bias_x=-0.0094, bias_y=-0.0337, SD=0.0515.
   - generator phase sensitivity: `phase_diff=0.0299 > threshold`, `obs_diff=0.0211 > threshold`.
   - diagnostic mode leakage tests: PASS, no ground-truth leak to estimated arm.
+- 6 independent Monte Carlo repetitions (144 paired groups per N), seeded boundaries.
 
 ## 3. A-E boundary / IoU table (median over all font-glyph groups)
 
@@ -47,15 +48,21 @@ Full artifact: `work/m1c_r3/diag4/diagnostic_full.json` (not committed, generate
 
 ## 4. Interpretation and example evidence
 
-- D (oracle-aligned fusion) improves boundary error over A and over C at every N>1
-  (`N=8`: D 0.216 vs C 0.281).
-- C (unaligned fusion) often worsens alignment-stroke error because unregistered
-  translations average into thicker soup.
-- B medoid has surprisingly poor boundaries at N>=4 in this diagnostic, showing
-  selecting a good clear image is not enough.
-- E estimated arm barely improves and occasionally fails alignment entirely
-  (registration median 2.10 px, max 35.05 px); this isolates the estimator/register
-  problem.
+- D (oracle-aligned fusion) reduces boundary error against unaligned C at every N>1
+  (D-C: ~-0.03 median, bootstrap CI excluded zero at all N).
+- D does not beat A: D-A median ~0.000 with 95% CI crossing zero at every N.
+- C unaligned fusion worsens error versus single A by ~0.03–0.05 px.
+- B medoid is inconsistent/worse at larger N and should not be trusted.
+- E estimated arm performs worse than A for larger N; E-D is `+0.009 to +0.024`
+  boundary pixels, so E's registration adds harm.
+
+Aggregated pooled results (bootstrap over 144 paired groups per N):
+- N=2: boundary medians A=0.2312, B=0.2312, C=0.3198, D=0.2263, E=0.2444;
+  D-A=0.000 [-0.009,+0.004]; D-C=-0.036 [-0.086,-0.057].
+- N=4: boundary medians A=0.2464, B=0.2517, C=0.2842, D=0.2249, E=0.2533;
+  D-A=0.000 [-0.011,+0.006]; D-C=-0.034 [-0.052,-0.033].
+- N=8: boundary medians A=0.2280, B=0.2482, C=0.2676, D=0.2207, E=0.2510;
+  D-A=0.000 [-0.008,+0.008]; D-C=-0.027 [-0.044,-0.029].
 
 Improving case:
 - `work/m1c_r3/diag4/DejaVuSans-Bold.ttf_a_N4_diag4_.../D_oracle_mask.png`
@@ -83,14 +90,33 @@ Failing case:
 
 CI job `Instrument correctness tests (M1-C-R3)` contains the first three and passes for HEAD `3b0e2807`.
 
-## 7. Decision
+## 7. Exact tests and commands
 
-Instrument PASS; limited reconstruction improvement is now observable in `D`
-correct oracle propagation; no production promotion.
+- `qualification/.venv/bin/python qualification/experiments/m1c_r3/test_translation.py`
+- `qualification/.venv/bin/python qualification/experiments/m1c_r3/generator.py`
+- `qualification/.venv/bin/python qualification/experiments/m1c_r3/test_diagnostic_modes.py`
+- `qualification/.venv/bin/python qualification/experiments/m1c_r3/diagnostic.py --out work/m1c_r3/diag4 --ns 1 2 4 8`
 
-Specifically:
-- Oracle improves reconstruction: YES (modestly, and direction is consistent).
-- Estimated alignment improves reconstruction: NO as implemented (reg failing).
-- Production promotion: NO; the amplitude of failure is dominated by registration.
+CI job `Instrument correctness tests (M1-C-R3)` passed for HEAD `3b0e2807`.
 
-Continue research; focus on reference-correct estimator and validation.
+## 8. Decision
+
+Instrument PASS.
+
+- **Oracle-aligned versus a single observation (D-A): no statistical improvement**
+  at N=2, N=4, N=8 (bootstrap intervals cross zero at all tested N). So no demonstrated
+  recovery of subpixel detail by repeated observation, with this sampling model and metric.
+- **Estimated alignment versus a single observation (E-A): statistically worse or near worse**
+  under the same metric; - estimated boundaries are 0.007-0.024 pixels worse than single (depending on N).
+- **Oracle-aligned versus unaligned (D-C): robustly better** (~0.027-0.036 px lower
+  boundary uncertainty), so translation damage is already unregistered median fusion badly.
+- **Production promotion: NO.**
+
+Supported claims:
+- A naive fusion of unregistered data worsens fidelity.
+- Providing ground-truth registration removes most of that particular damage but does **not**
+  outperform simply keeping one clean observation.
+- The estimator destroys against representative glyphs, so a so-called estimator-dependent
+  reconstruction path is still barred.
+
+Continue research. Focus on improving the estimator and/or fusion objective; do not integrate.
