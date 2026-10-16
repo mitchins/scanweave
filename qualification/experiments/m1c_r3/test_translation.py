@@ -61,9 +61,9 @@ sd=float(np.std([r["disp_err"] for r in clean+noisy]))
 report={"clean_max_disp":max(r["disp_err"] for r in clean),"noisy_max_mse":max(r["residual_mse"] for r in noisy),
         "max_disp":max_disp,"max_res":max_res,"bias_x":bias_x,"bias_y":bias_y,"sd_disp":sd,
         "n_total":len(disp_all),"passed":(max_disp<0.6 and max_res<0.04 and abs(bias_x)<0.15 and abs(bias_y)<0.15)}
-os.makedirs('/data/coding/scanweave/work/m1c_r3',exist_ok=True)
-json.dump(report,open('/data/coding/scanweave/work/m1c_r3/instrument_translation_v2.json','w'),indent=2)
-json.dump({"clean":clean,"noisy":noisy},open('/data/coding/scanweave/work/m1c_r3/trials_v2.json','w'),indent=2)
+os.makedirs(os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))), 'work', 'm1c_r3'),exist_ok=True)
+json.dump(report,open(os.path.join(os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))), 'work', 'm1c_r3'),'instrument_translation_v2.json'),'w'),indent=2)
+json.dump({'clean':clean,'noisy':noisy},open(os.path.join(os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))), 'work', 'm1c_r3'),'trials_v2.json'),'w'),indent=2)
 print("max_disp",max_disp,"max_res",max_res,"bias_x",bias_x,"bias_y",bias_y,"sd",sd)
 print("PASS" if report["passed"] else "FAIL")
 if not report["passed"]:

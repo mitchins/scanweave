@@ -68,5 +68,5 @@ if __name__=='__main__':
     assert obs_diff > 1e-3, obs_diff
     print("phase-change coverage sensitivity: phase_diff =", phase_diff, "obs_diff =", obs_diff, "PASS")
     import json,os
-    os.makedirs('/data/coding/scanweave/work/m1c_r3',exist_ok=True)
-    json.dump({"phase_diff":phase_diff,"obs_diff":obs_diff,"passed":True}, open('/data/coding/scanweave/work/m1c_r3/generator_phase.json','w'), indent=2)
+    os.makedirs(os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))), 'work', 'm1c_r3'),exist_ok=True)
+    json.dump({'phase_diff':phase_diff,'obs_diff':obs_diff,'passed':True}, open(os.path.join(os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))), 'work', 'm1c_r3'),'generator_phase.json'),'w'), indent=2)
