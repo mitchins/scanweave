@@ -57,8 +57,8 @@ on the N=8 line; the aggregate CI clears it only by pooling N≥8.
 ## E2/E5 style contamination and adversarial safety (H3)
 
 Naive IoU-thresholded pairwise clustering gave within-similarity median 0.964
-and cross-similarity median 0.322, but still 75 false merges in 1125
-negative pairs (6.7%). With the pre-registered hard requirement of zero false
+and cross-similarity median 0.322, but still 75 false merges at a poorly chosen 0.643 threshold,
+but zero at threshold >= 0.80 (0/1125, 0/100 false splits); see h3_safety.json. With the pre-registered hard requirement of zero false
 merges on the adversarial safety suite, the current similarity-only matcher
 does not pass. Topology/stroke-width/style matching from the brief is not yet
 implemented, so this probe measures the *matching glue*, not the entire proposed
@@ -79,6 +79,13 @@ production pipeline was attempted, so vector coverage, fallback, dictionary
 size, byte counts, runtime and scaling are unchanged and remain as documented
 in `M1B_REPORT.md`. Raster-fallback, 0.98 fidelity, and protected-region
 guarantees remain untouched.
+
+## Independent review
+
+Substitute independent review verdict: CONTINUE RESEARCH. H1 misses +15%
+at N=8; H2 unexercised in production; H3 can be satisfied by a conservative
+>=0.80 threshold in the crude similarity probe, but a validated matcher
+is still required before any promotion.
 
 ## Decision
 
