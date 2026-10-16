@@ -100,6 +100,9 @@ pub struct Fidelity {
     /// source ink mask, both on the unit's crop grid)
     pub vector_ink_iou_min: Option<f64>,
     pub vector_ink_iou_mean: Option<f64>,
+    /// Source-mask threshold applied to unchanged vector occurrences. Repaired
+    /// ClearScan occurrences have their own donor evidence decision.
+    pub preservation_ink_iou_min: Option<f64>,
     /// raster ink is byte-exact from the source by construction (IoU 1.0)
     pub raster_ink_px: u64,
     /// units degraded to raster because their trace fell below min_ink_iou
@@ -111,6 +114,7 @@ pub struct Fidelity {
 #[derive(Debug, Clone, Serialize)]
 pub struct Report {
     pub fidelity: Fidelity,
+    pub reconstruction: crate::visual_dict::Reconstruction,
     pub glyph_stats: Vec<GlyphStat>,
     /// candidates actually serialized and measured (name, pdf bytes); auto mode
     /// selects the smallest that passes the semantic requirements
@@ -502,10 +506,10 @@ pub fn convert(input: &Input, policy: &Policy) -> Result<Output, String> {
     // the fidelity policy is a hard gate (SPEC §4.2 / policy note): the raster
     // baseline reproduces the source pixels exactly, the reconstruction does
     // not if its vector units measure below min_ink_iou
-    let recon_fidelity_ok = report
-        .fidelity
-        .vector_ink_iou_min
+    let preservation_ok = report.fidelity.preservation_ink_iou_min
         .is_none_or(|m| m >= policy.min_ink_iou);
+    let restoration_ok = policy.profile != "clearscan" || report.reconstruction.restoration_qualified;
+    let recon_fidelity_ok = preservation_ok && restoration_ok;
     let selected = if policy.mode == "auto" {
         if recon_fidelity_ok && pdf_bytes.len() <= b0.len() {
             "reconstruct"
@@ -518,7 +522,7 @@ pub fn convert(input: &Input, policy: &Policy) -> Result<Output, String> {
             "fidelity policy violated: page {} measures vector ink IoU {} below min_ink_iou {} \
              (use --mode auto to emit the searchable raster baseline, or lower the policy explicitly)",
             input.page_id,
-            report.fidelity.vector_ink_iou_min.unwrap_or(0.0),
+            report.fidelity.preservation_ink_iou_min.unwrap_or(0.0),
             policy.min_ink_iou
         ));
     } else {
@@ -665,9 +669,9 @@ pub fn convert_parts(
     let upem = policy.upem as f64;
     let units_per_px = if em_px > 0.0 { upem / em_px } else { upem };
     let budget = Budget::from_m0_policy();
-    if policy.profile == "clearscan" || policy.glyph_dictionary == "visual" {
-        crate::visual_dict::apply(&mut plan, policy, units_per_px, &budget);
-    }
+    let mut reconstruction = crate::visual_dict::reconstruct(
+        &mut plan, policy, &input.rgb, input.width, input.height,
+    );
 
     let mut traced: Vec<TracedShape> = Vec::new();
     let mut missing: std::collections::HashSet<(String,)> = std::collections::HashSet::new();
@@ -682,7 +686,8 @@ pub fn convert_parts(
                 if seen.contains(&u.shape_key) {
                     continue;
                 }
-                match trace_shape(u, &budget, units_per_px) {
+                let prototype = reconstruction.prototype_units.get(&u.shape_key).unwrap_or(u);
+                match trace_shape(prototype, &budget, units_per_px) {
                     Ok(t) => {
                         seen.push(u.shape_key.clone());
                         traced.push(t);
@@ -694,6 +699,24 @@ pub fn convert_parts(
             }
         }
     }
+    let shapes: Vec<GlyphShape> = build_glyph_shapes(&traced, units_per_px, &budget)?;
+    // Restoration has a separate gate: the selected observed prototype must
+    // survive the actual tracing step with high overlap to its refined donor.
+    for occurrence in reconstruction.occurrences.iter_mut().filter(|o| o.repaired) {
+        let prototype_key = occurrence.prototype_id.as_deref().unwrap_or("").strip_prefix("prototype:").unwrap_or("");
+        let donor = reconstruction.prototype_units.get(prototype_key);
+        let traced_iou = donor.and_then(|donor| shapes.iter().find(|s| s.shape_key == prototype_key)
+            .map(|g| glyph_ink_iou(g, donor.crop_w, donor.crop_h, &donor.mask)));
+        occurrence.prototype_trace_iou = traced_iou;
+        if traced_iou.is_none_or(|iou| iou < 0.90) {
+            occurrence.repaired = false;
+            occurrence.restoration_evidence_passed = false;
+            occurrence.decision = "rejected_traced_prototype_fidelity".into();
+            missing.insert((occurrence.symbol_id.clone(),));
+        }
+    }
+    reconstruction.restoration_qualified = reconstruction.occurrences.iter()
+        .filter(|o| o.repaired).all(|o| o.restoration_evidence_passed && o.prototype_trace_iou.is_some_and(|v| v >= 0.90));
     if !missing.is_empty() {
         for r in regions.iter_mut() {
             if !matches!(r.disposition, RegionDisposition::Vector) {
@@ -714,7 +737,6 @@ pub fn convert_parts(
             }
         }
     }
-    let shapes: Vec<GlyphShape> = build_glyph_shapes(&traced, units_per_px, &budget)?;
 
     // policy fidelity gate (min_ink_iou): the traced outline must reproduce the
     // unit's source ink mask to the policy's threshold. Raster regions are
@@ -739,6 +761,11 @@ pub fn convert_parts(
             }
         }
     }
+    for occurrence in &mut reconstruction.occurrences {
+        occurrence.source_mask_iou = measured.iter()
+            .find(|(symbol, _)| symbol == &occurrence.symbol_id)
+            .map(|(_, iou)| *iou);
+    }
     let mut units_below_policy = 0usize;
     if !measured.is_empty() {
         // regions whose WORST unit falls below the threshold degrade to raster
@@ -753,6 +780,9 @@ pub fn convert_parts(
                 .iter()
                 .filter_map(|&ui| {
                     let sid = plan.owned[ui].unit.symbol_id.clone();
+                    if reconstruction.repaired_symbols.contains(&sid) {
+                        return None;
+                    }
                     measured.iter().find(|(k, _)| *k == sid).map(|(_, v)| *v)
                 })
                 .fold(1.0f64, f64::min);
@@ -1115,7 +1145,18 @@ pub fn convert_parts(
             measured.iter().find(|(k, _)| *k == sid).map(|(_, v)| *v)
         })
         .collect();
+    let mut preservation_ious: Vec<f64> = regions
+        .iter()
+        .filter(|r| matches!(r.disposition, RegionDisposition::Vector))
+        .flat_map(|r| r.units.iter())
+        .filter_map(|&ui| {
+            let sid = plan.owned[ui].unit.symbol_id.clone();
+            if reconstruction.repaired_symbols.contains(&sid) { return None; }
+            measured.iter().find(|(k, _)| *k == sid).map(|(_, v)| *v)
+        })
+        .collect();
     unit_ious.sort_by(|a, b| a.partial_cmp(b).unwrap_or(std::cmp::Ordering::Equal));
+    preservation_ious.sort_by(|a, b| a.partial_cmp(b).unwrap_or(std::cmp::Ordering::Equal));
     let vector_units = unit_ious.len();
     let raster_ink_px = coverage.text_ink_px_raster + coverage.other_ink_px;
     let fidelity = Fidelity {
@@ -1125,6 +1166,7 @@ pub fn convert_parts(
         } else {
             Some(unit_ious.iter().sum::<f64>() / unit_ious.len() as f64)
         },
+        preservation_ink_iou_min: preservation_ious.first().copied(),
         raster_ink_px,
         units_below_policy,
         min_ink_iou: policy.min_ink_iou,
@@ -1134,6 +1176,7 @@ pub fn convert_parts(
     let report = Report {
         candidates: Vec::new(),
         fidelity,
+        reconstruction,
         selected: "reconstruct".into(),
         glyph_stats,
         patches: patch_records,
