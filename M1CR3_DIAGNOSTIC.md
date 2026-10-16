@@ -1,7 +1,7 @@
 # M1-C-R3 discriminating diagnostic report
 
-Baseline commit for report: `3b0e2807`.
-CI: latest run successful (HEAD `3b0e2807`).
+Baseline commit for report: `3b0e2807`; latest documentation commit: `13bc273`.
+CI: latest run successful (HEAD `13bc273`).
 
 ## 1. Experiment performed and limits
 
@@ -20,6 +20,14 @@ Limitations:
 - Median fusion only; no C robust alternatives in this pass.
 - Estimated registration still fails on most groups.
 - N limited to 1,2,4,8; no N=16/32 cross-family generalization yet.
+
+## 0. Small committed evidence bundle
+
+- `qualification/experiments/m1c_r3/evidence/` (one illustrative N=4 run):
+  source mask, unaligned (C), oracle-aligned (D), estimated-aligned (E).
+- `qualification/experiments/m1c_r3/test_translation.py`, `generator.py`, `test_diagnostic_modes.py`
+  are CI-owned instrument tests (`Instrument correctness tests (M1-C-R3)`).
+- Full high-volume outputs remain generated into `work/m1c_r3/` (git-ignored).
 
 ## 2. Corrected instrument (before/after)
 

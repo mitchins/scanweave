@@ -140,69 +140,6 @@ def evaluate(src_mask, pred_mask, pred_img):
     }
 
 
-def run(font, ch, n, outdir, tag):
-    src, obs, truths, metas = build_observation_set(font, ch, n, tag)
-    src_mask = (src >= 0.5).astype(np.uint8)
-    # non-leaking estimated arm
-    est_fused, est_relative = fuse_estimated(obs, "median")
-    # arms expressed in common source frame:
-    single = obs[0].copy(); t0 = truths[0]
-    single_src = shift_arr(single, -t0[0], -t0[1])
-    mid = medoid_selection(obs)
-    med_m = obs[mid].copy(); tm = truths[mid]
-    med_src = shift_arr(med_m, -tm[0], -tm[1])
-    # unaligned, place at centroid of true shifts for common coordinates
-    mean_tx = float(np.mean([t[0] for t in truths])); mean_ty = float(np.mean([t[1] for t in truths]))
-    unaligned_src = shift_arr(fuse_unaligned(obs), -mean_tx, -mean_ty)
-    # oracle and estimated
-    oracle_fused = fuse_oracle(obs, truths)
-    oracle_src = oracle_fused.copy()
-    # oracle ALREADY placed by true shifts per observation
-    est_fused_src = shift_arr(est_fused, -truths[0][0], -truths[0][1])
-    # metrics
-    masks = {
-        "A_single": (to_mask(single_src), single_src),
-        "B_medoid": (to_mask(med_src), med_src),
-        "C_unaligned": (to_mask(unaligned_src), unaligned_src),
-        "D_oracle": (to_mask(oracle_src), oracle_src),
-        "E_estimated": (to_mask(est_fused_src), est_fused_src),
-    }
-    out = {"n": n, "truths": truths, "metas": metas}
-    for k, (m, img) in masks.items():
-        out[k] = {"mask": m, "img": img}
-        out[k]["metrics"] = evaluate(src_mask, m, img)
-    # registration errors
-    errs = []
-    for o, (tx, ty) in zip(obs, truths):
-        # independent estimated shifts relative to first
-        # already calculated partially; store shifted
-        errs.append({"truth": [tx, ty], "truth_norm": float(np.hypot(tx, ty))})
-    # estimate to first observed:
-    for i in range(1, len(obs)):
-        sx, sy, err = phase_shift(obs[i], obs[0])
-        tdiff_x = sx - (truths[i][0] - truths[0][0])
-        tdiff_y = sy - (truths[i][1] - truths[0][1])
-        errs[i]["est_rel"] = [float(sx), float(sy)]
-        errs[i]["disp_err"] = float(np.hypot(tdiff_x, tdiff_y))
-    if len(errs[0]) == 2:
-        errs[0]["est_rel"] = [0.0, 0.0]
-        errs[0]["disp_err"] = 0.0
-    out["registration"] = errs
-    # save images
-    tagdir = os.path.join(outdir, f"{os.path.basename(font)}_{ch}_N{n}_{tag}")
-    os.makedirs(tagdir, exist_ok=True)
-    write_image(os.path.join(tagdir, "source.png"), src_mask, mask=True)
-    for k, (m, img) in masks.items():
-        write_image(os.path.join(tagdir, f"{k}_mask.png"), m, mask=True)
-        write_image(os.path.join(tagdir, f"{k}_gray.png"), img)
-    for j, o in enumerate(obs):
-        write_image(os.path.join(tagdir, f"obs_{j}.png"), o)
-    np.save(os.path.join(tagdir, "source.npy"), src)
-    np.save(os.path.join(tagdir, "truths.npy"), np.asarray(truths))
-    # serializable
-    serial = {key: {"metrics": masks[key][0] and out[key]["metrics"]} for key in masks}
-    return serial, os.path.basename(tagdir)
-
 
 def run(font, ch, n, outdir, tag):
     src, obs, truths, metas = build_observation_set(font, ch, n, tag)
@@ -295,12 +232,20 @@ def main():
                 "iou_median": float(np.median(io)),
                 "n_groups": len(bs),
             }
-    # registration stats
-    disp = [r.get("disp_err", np.nan) for r in reg_all if r.get("disp_err") is not None]
+    disp=[]; bx=[]; by=[]
+    for r in reg_all:
+        if "est_rel" not in r:
+            continue
+        disp.append(r.get("disp_err",np.nan))
+        t0=r["target_origin"]; tr=r["truth"]
+        bx.append(r["est_rel"][0]-(tr[0]-t0[0]))
+        by.append(r["est_rel"][1]-(tr[1]-t0[1]))
     final["registration"] = {
-        "median_disp_err": float(np.nanmedian(disp)),
-        "max_disp_err": float(np.nanmax(disp)),
-        "bias_x": float(np.nanmean([r["est_rel"][0] + r["truth"][0] for r in reg_all if "est_rel" in r])) if reg_all else float("nan"),
+        "median_disp_err": float(np.nanmedian(disp)) if disp else float("nan"),
+        "max_disp_err": float(np.nanmax(disp)) if disp else float("nan"),
+        "bias_x_px": float(np.nanmean(bx)) if bx else float("nan"),
+        "bias_y_px": float(np.nanmean(by)) if by else float("nan"),
+        "n": len(bx),
     }
     report["font_hashes"] = font_hashes
     report["environment"] = {
