@@ -86,6 +86,13 @@ jobs:
         run: qualification/.venv/bin/python qualification/validate_fixtures.py
       - name: Text search gates
         run: qualification/.venv/bin/python qualification/test_text_search.py
+      - name: Instrument correctness tests (M1-C-R3)
+        env:
+          M1CR3_REPORT: work/m1c_r3/diag4/diagnostic_full.json
+        run: |
+          qualification/.venv/bin/python qualification/experiments/m1c_r3/test_translation.py
+          qualification/.venv/bin/python qualification/experiments/m1c_r3/generator.py
+          qualification/.venv/bin/python qualification/experiments/m1c_r3/test_diagnostic_modes.py
       - name: Paint fidelity + M1A-05 regression
         run: qualification/.venv/bin/python qualification/test_m1b_paint_fidelity.py
       - name: Document-level search

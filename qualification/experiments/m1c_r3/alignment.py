@@ -80,12 +80,11 @@ def phase_shift(obs, ref, stage='low'):
             if e < best_e:
                 best_e = e; best = (float(x), float(y))
     sx,sy=best
-    for _ in range(8):
-        dx=refine_x(obs,ref,sx,sy,0.125)
-        dy=refine_y(obs,ref,sx,sy,0.125)
-        if abs(dx)<1e-8 and abs(dy)<1e-8:
-            break
-        sx=sx+dx; sy=sy+dy
+    sx0=sx; sy0=sy
+    dx=refine_x(obs,ref,sx,sy,0.125)
+    dy=refine_y(obs,ref,sx,sy,0.125)
+    sx=sx+max(-0.25,min(0.25,dx))
+    sy=sy+max(-0.25,min(0.25,dy))
     err=mse(shift_arr(obs,sx,sy),ref)
     return (sx,sy,err)
 
