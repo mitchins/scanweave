@@ -5,7 +5,8 @@ use std::process::ExitCode;
 fn usage() -> ! {
     eprintln!(
         "scanweave build <input.png> --ocr <input.hocr> [--dpi N] [--mode reconstruct|auto] \
-         [--min-ink-iou F] --output <out.pdf> --report <out.json>\n\
+         [--min-ink-iou F] [--profile faithful|clearscan]
+         [--glyph-dictionary off|visual] --output <out.pdf> --report <out.json>\n\
          scanweave build --bundle <document.json> [--mode reconstruct|auto] [--min-ink-iou F] \
          --output <out.pdf> --report <out.json>"
     );
@@ -115,7 +116,15 @@ fn build_bundle(args: &[String]) -> Result<(), String> {
     }
 
     let min_ink_iou = arg_f64(args, "--min-ink-iou", 0.98)?;
-    let policy = scanweave_io::convert::Policy { mode, dpi, min_ink_iou, ..scanweave_io::convert::Policy::default() };
+    let profile = arg_value(args, "--profile").unwrap_or_else(|| "faithful".into());
+    if profile != "faithful" && profile != "clearscan" {
+        return Err(format!("unsupported --profile {profile} (M1-D: faithful | clearscan)"));
+    }
+    let glyph_dictionary = arg_value(args, "--glyph-dictionary").unwrap_or_else(|| if profile == "clearscan" { "visual".into() } else { "off".into() });
+    if glyph_dictionary != "off" && glyph_dictionary != "visual" {
+        return Err(format!("unsupported --glyph-dictionary {glyph_dictionary} (M1-D: off | visual)"));
+    }
+    let policy = scanweave_io::convert::Policy { mode, dpi, min_ink_iou, profile, glyph_dictionary, ..scanweave_io::convert::Policy::default() };
     let mut out = scanweave_io::document::convert_document(&bundle.document_id, &inputs, &policy)
         .map_err(|e| e.to_string())?;
     out.report.bindings = bindings;
@@ -236,7 +245,9 @@ fn build(args: &[String]) -> Result<(), String> {
     );
 
     let min_ink_iou = arg_f64(args, "--min-ink-iou", 0.98)?;
-    let policy = scanweave_io::convert::Policy { mode, dpi, min_ink_iou, ..scanweave_io::convert::Policy::default() };
+    let profile = arg_value(args, "--profile").unwrap_or_else(|| "faithful".into());
+    let glyph_dictionary = arg_value(args, "--glyph-dictionary").unwrap_or_else(|| if profile == "clearscan" { "visual".into() } else { "off".into() });
+    let policy = scanweave_io::convert::Policy { mode, dpi, min_ink_iou, profile, glyph_dictionary, ..scanweave_io::convert::Policy::default() };
     let out = scanweave_io::convert::convert(&input, &policy).map_err(|e| e.to_string())?;
 
     // atomic: temporary on the same filesystem, then rename

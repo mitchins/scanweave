@@ -23,6 +23,10 @@ pub struct Policy {
     pub upem: u16,
     pub min_ink_iou: f64,
     pub contact_margin_px: f64,
+    /// Product profile: `faithful` (default) or `clearscan`.
+    pub profile: String,
+    /// Visual glyph dictionary mode: `off` (default) or `visual`.
+    pub glyph_dictionary: String,
 }
 
 impl Default for Policy {
@@ -34,6 +38,8 @@ impl Default for Policy {
             upem: 2048,
             min_ink_iou: 0.98,
             contact_margin_px: 4.0,
+            profile: "faithful".into(),
+            glyph_dictionary: "off".into(),
         }
     }
 }
@@ -308,7 +314,7 @@ fn to_ocr_page(input: &Input) -> scanweave_core::ocr_page::OcrPage {
 /// Analytical ink IoU between a traced glyph outline and the unit's source ink
 /// mask: the outline is rasterized over the crop grid (scanline fill at pixel
 /// centres) and compared with the mask. Empty/empty = 1, empty/nonempty = 0.
-fn glyph_ink_iou(g: &GlyphShape, crop_w: usize, crop_h: usize, mask: &[bool]) -> f64 {
+pub(crate) fn glyph_ink_iou(g: &GlyphShape, crop_w: usize, crop_h: usize, mask: &[bool]) -> f64 {
     if crop_w == 0 || crop_h == 0 {
         return 1.0;
     }
@@ -568,7 +574,7 @@ pub fn convert_parts(
     // segmentation + ownership -------------------------------------------------
     let seg: Segmentation = segment(&input.rgb, w, h);
     let ocr = to_ocr_page(input);
-    let (plan, _) = build_plan(&seg, w, h, &ocr);
+    let (mut plan, _) = build_plan(&seg, w, h, &ocr);
     let visual_ok = plan.visual_invariant_ok();
     let semantic_ok = plan.semantic_invariant_ok(&ocr);
 
@@ -659,6 +665,9 @@ pub fn convert_parts(
     let upem = policy.upem as f64;
     let units_per_px = if em_px > 0.0 { upem / em_px } else { upem };
     let budget = Budget::from_m0_policy();
+    if policy.profile == "clearscan" || policy.glyph_dictionary == "visual" {
+        crate::visual_dict::apply(&mut plan, policy, units_per_px, &budget);
+    }
 
     let mut traced: Vec<TracedShape> = Vec::new();
     let mut missing: std::collections::HashSet<(String,)> = std::collections::HashSet::new();

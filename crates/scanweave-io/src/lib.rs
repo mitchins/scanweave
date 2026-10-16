@@ -15,5 +15,6 @@ pub mod page_pdf;
 pub mod pdf;
 pub mod plan;
 pub mod convert;
+pub mod visual_dict;
 pub mod trace;
 pub mod units;
