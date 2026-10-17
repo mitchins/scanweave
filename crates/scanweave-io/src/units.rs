@@ -23,6 +23,8 @@ pub struct Unit {
     pub semantic_text: String,
     /// bbox in pixel-edge coords [x0, y0, x1, y1]
     pub bbox_px: [f64; 4],
+    /// original OCR geometry, retained separately from the observed ink crop
+    pub ocr_bbox_px: [f64; 4],
     /// crop size
     pub crop_w: usize,
     pub crop_h: usize,
@@ -47,12 +49,7 @@ pub fn polygon_bbox(poly: &[[f64; 2]]) -> [f64; 4] {
     bb
 }
 
-pub fn extract_units(
-    seg: &Segmentation,
-    w: u32,
-    h: u32,
-    page: &OcrPage,
-) -> (Vec<Unit>, usize) {
+pub fn extract_units(seg: &Segmentation, w: u32, h: u32, page: &OcrPage) -> (Vec<Unit>, usize) {
     // connected components, 8-connectivity
     let fg_image = image::GrayImage::from_fn(w, h, |x, y| {
         if seg.fg[(y as usize) * seg.width + (x as usize)] {
@@ -68,11 +65,7 @@ pub fn extract_units(
     );
 
     // collect component pixel sets + bboxes
-    let num_labels = labels
-        .pixels()
-        .map(|p| p.0[0])
-        .max()
-        .unwrap_or(0) as usize;
+    let num_labels = labels.pixels().map(|p| p.0[0]).max().unwrap_or(0) as usize;
     let mut comp_pixels: Vec<Vec<(usize, usize)>> = vec![Vec::new(); num_labels + 1];
     for y in 0..seg.height {
         for x in 0..seg.width {
@@ -90,10 +83,12 @@ pub fn extract_units(
     let poly_areas: Vec<f64> = page
         .spans
         .iter()
-        .flat_map(|sp| sp.symbols.iter().map(|sym| {
-            let bb = polygon_bbox(&sym.polygon);
-            (bb[2] - bb[0]) * (bb[3] - bb[1])
-        }))
+        .flat_map(|sp| {
+            sp.symbols.iter().map(|sym| {
+                let bb = polygon_bbox(&sym.polygon);
+                (bb[2] - bb[0]) * (bb[3] - bb[1])
+            })
+        })
         .collect();
     let mut units = Vec::new();
     // component index -> symbol slot (span_idx, sym_idx)
@@ -172,8 +167,8 @@ pub fn extract_units(
             if let Some((_, li)) = best {
                 match owner_of[li] {
                     Some(owner_slot) => {
-                        let text = span.text[sym.text_range_utf8[0]..sym.text_range_utf8[1]]
-                            .to_string();
+                        let text =
+                            span.text[sym.text_range_utf8[0]..sym.text_range_utf8[1]].to_string();
                         absorbed
                             .entry(owner_slot)
                             .or_default()
@@ -182,7 +177,10 @@ pub fn extract_units(
                     None => eprintln!("DBG absorb FAILED: best comp {} has NO owner", li),
                 }
             } else {
-                eprintln!("DBG absorb FAILED: no component intersects empty {} box {:?}", sym.id, bb);
+                eprintln!(
+                    "DBG absorb FAILED: no component intersects empty {} box {:?}",
+                    sym.id, bb
+                );
             }
             let _ = si;
         }
@@ -190,53 +188,60 @@ pub fn extract_units(
     let mut slot_idx = 0usize;
     for span in &page.spans {
         for sym in &span.symbols {
-        let mask_pixels = &slot_pixels[slot_idx];
-        let absorbed_here = absorbed.remove(&slot_idx).unwrap_or_default();
-        slot_idx += 1;
-        {
-            if mask_pixels.is_empty() {
-                // unabsorbed empty symbol: its ink is not attributable to any
-                // component (should not happen; counted as unowned ink instead)
-                continue;
+            let mask_pixels = &slot_pixels[slot_idx];
+            let absorbed_here = absorbed.remove(&slot_idx).unwrap_or_default();
+            slot_idx += 1;
+            {
+                if mask_pixels.is_empty() {
+                    // unabsorbed empty symbol: its ink is not attributable to any
+                    // component (should not happen; counted as unowned ink instead)
+                    continue;
+                }
+                let x0 = mask_pixels.iter().map(|p| p.0).min().unwrap();
+                let y0 = mask_pixels.iter().map(|p| p.1).min().unwrap();
+                let x1 = mask_pixels.iter().map(|p| p.0).max().unwrap() + 1;
+                let y1 = mask_pixels.iter().map(|p| p.1).max().unwrap() + 1;
+                let cw = x1 - x0;
+                let ch = y1 - y0;
+                let mut mask = vec![false; cw * ch];
+                for (x, y) in mask_pixels.iter() {
+                    mask[(y - y0) * cw + (x - x0)] = true;
+                }
+                // shape key: hash of the normalized mask bits
+                let packed: Vec<u8> = mask
+                    .chunks(8)
+                    .map(|c| {
+                        c.iter()
+                            .enumerate()
+                            .fold(0u8, |acc, (i, b)| acc | ((*b as u8) << i))
+                    })
+                    .collect();
+                let shape_key = scanweave_core::hash_hex(&packed);
+                // semantic ownership: own text-range text plus absorbed touching-
+                // character texts, ordered by the OCR slot index (reading sequence).
+                // Polygon x0 must NOT be used: hOCR boxes overlap horizontally
+                // (measured: 'w' and 'i' both at x0=258), which corrupts order.
+                let mut semantics: Vec<(usize, String)> = vec![(
+                    slot_idx,
+                    span.text[sym.text_range_utf8[0]..sym.text_range_utf8[1]].to_string(),
+                )];
+                semantics.extend(absorbed_here);
+                semantics.sort_by_key(|a| a.0);
+                let semantic_text: String = semantics.into_iter().map(|(_, t)| t).collect();
+                units.push(Unit {
+                    shape_key,
+                    span_id: span.id.clone(),
+                    symbol_id: sym.id.clone(),
+                    semantic_text,
+                    // exact INK bbox: placement maps ink to ink (the OCR polygon may
+                    // include font padding and is only a hint)
+                    bbox_px: [x0 as f64, y0 as f64, x1 as f64, y1 as f64],
+                    ocr_bbox_px: polygon_bbox(&sym.polygon),
+                    crop_w: cw,
+                    crop_h: ch,
+                    mask,
+                });
             }
-            let x0 = mask_pixels.iter().map(|p| p.0).min().unwrap();
-            let y0 = mask_pixels.iter().map(|p| p.1).min().unwrap();
-            let x1 = mask_pixels.iter().map(|p| p.0).max().unwrap() + 1;
-            let y1 = mask_pixels.iter().map(|p| p.1).max().unwrap() + 1;
-            let cw = x1 - x0;
-            let ch = y1 - y0;
-            let mut mask = vec![false; cw * ch];
-            for (x, y) in mask_pixels.iter() {
-                mask[(y - y0) * cw + (x - x0)] = true;
-            }
-            // shape key: hash of the normalized mask bits
-            let packed: Vec<u8> = mask
-                .chunks(8)
-                .map(|c| c.iter().enumerate().fold(0u8, |acc, (i, b)| acc | ((*b as u8) << i)))
-                .collect();
-            let shape_key = scanweave_core::hash_hex(&packed);
-            // semantic ownership: own text-range text plus absorbed touching-
-            // character texts, ordered by the OCR slot index (reading sequence).
-            // Polygon x0 must NOT be used: hOCR boxes overlap horizontally
-            // (measured: 'w' and 'i' both at x0=258), which corrupts order.
-            let mut semantics: Vec<(usize, String)> =
-                vec![(slot_idx, span.text[sym.text_range_utf8[0]..sym.text_range_utf8[1]].to_string())];
-            semantics.extend(absorbed_here);
-            semantics.sort_by_key(|a| a.0);
-            let semantic_text: String = semantics.into_iter().map(|(_, t)| t).collect();
-            units.push(Unit {
-                shape_key,
-                span_id: span.id.clone(),
-                symbol_id: sym.id.clone(),
-                semantic_text,
-                // exact INK bbox: placement maps ink to ink (the OCR polygon may
-                // include font padding and is only a hint)
-                bbox_px: [x0 as f64, y0 as f64, x1 as f64, y1 as f64],
-                crop_w: cw,
-                crop_h: ch,
-                mask,
-            });
-        }
         }
     }
 
@@ -260,7 +265,11 @@ pub fn extract_units(
         }
         let packed: Vec<u8> = mask
             .chunks(8)
-            .map(|c| c.iter().enumerate().fold(0u8, |acc, (i, b)| acc | ((*b as u8) << i)))
+            .map(|c| {
+                c.iter()
+                    .enumerate()
+                    .fold(0u8, |acc, (i, b)| acc | ((*b as u8) << i))
+            })
             .collect();
         artwork_units.push(Unit {
             shape_key: scanweave_core::hash_hex(&packed),
@@ -268,6 +277,7 @@ pub fn extract_units(
             symbol_id: format!("unowned{li}"),
             semantic_text: String::new(), // empty => artwork, no text encoding
             bbox_px: [x0 as f64, y0 as f64, x1 as f64, y1 as f64],
+            ocr_bbox_px: [x0 as f64, y0 as f64, x1 as f64, y1 as f64],
             crop_w: cw,
             crop_h: ch,
             mask,

@@ -4,7 +4,7 @@
     "vector_ink_iou_mean": 0.9334713962723006,
     "preservation_ink_iou_min": 0.9817351598173516,
     "raster_ink_px": 8781,
-    "units_below_policy": 22,
+    "units_below_policy": 21,
     "min_ink_iou": 0.98
   },
   "reconstruction": {
@@ -479,8 +479,10 @@
         "prototype_id": null,
         "similarity": null,
         "source_mask_iou": 0.9256410256410257,
+        "replacement_bbox_px": null,
         "prototype_trace_iou": null,
         "repaired": false,
+        "reused": false,
         "restoration_evidence_passed": false,
         "decision": "no_supported_donor"
       },
@@ -491,8 +493,10 @@
         "prototype_id": null,
         "similarity": null,
         "source_mask_iou": 0.9256410256410257,
+        "replacement_bbox_px": null,
         "prototype_trace_iou": null,
         "repaired": false,
+        "reused": false,
         "restoration_evidence_passed": false,
         "decision": "no_supported_donor"
       },
@@ -503,8 +507,10 @@
         "prototype_id": null,
         "similarity": null,
         "source_mask_iou": 0.9795918367346939,
+        "replacement_bbox_px": null,
         "prototype_trace_iou": null,
         "repaired": false,
+        "reused": false,
         "restoration_evidence_passed": false,
         "decision": "no_supported_donor"
       },
@@ -515,8 +521,10 @@
         "prototype_id": null,
         "similarity": null,
         "source_mask_iou": 0.9132791327913279,
+        "replacement_bbox_px": null,
         "prototype_trace_iou": null,
         "repaired": false,
+        "reused": false,
         "restoration_evidence_passed": false,
         "decision": "no_supported_donor"
       },
@@ -527,8 +535,10 @@
         "prototype_id": null,
         "similarity": null,
         "source_mask_iou": 0.8594164456233422,
+        "replacement_bbox_px": null,
         "prototype_trace_iou": null,
         "repaired": false,
+        "reused": false,
         "restoration_evidence_passed": false,
         "decision": "no_supported_donor"
       },
@@ -539,8 +549,10 @@
         "prototype_id": null,
         "similarity": null,
         "source_mask_iou": 0.9256410256410257,
+        "replacement_bbox_px": null,
         "prototype_trace_iou": null,
         "repaired": false,
+        "reused": false,
         "restoration_evidence_passed": false,
         "decision": "no_supported_donor"
       },
@@ -551,8 +563,10 @@
         "prototype_id": null,
         "similarity": null,
         "source_mask_iou": 0.9795918367346939,
+        "replacement_bbox_px": null,
         "prototype_trace_iou": null,
         "repaired": false,
+        "reused": false,
         "restoration_evidence_passed": false,
         "decision": "no_supported_donor"
       },
@@ -563,8 +577,10 @@
         "prototype_id": null,
         "similarity": null,
         "source_mask_iou": 0.9132791327913279,
+        "replacement_bbox_px": null,
         "prototype_trace_iou": null,
         "repaired": false,
+        "reused": false,
         "restoration_evidence_passed": false,
         "decision": "no_supported_donor"
       },
@@ -572,13 +588,20 @@
         "symbol_id": "s09",
         "text": "e",
         "source_shape_key": "d57ee6b620702d9d95353d15f7bec7a8a3714f6731f6bbbbd2486dae466f268d",
-        "prototype_id": null,
-        "similarity": null,
+        "prototype_id": "prototype:d57ee6b620702d9d95353d15f7bec7a8a3714f6731f6bbbbd2486dae466f268d",
+        "similarity": 1.0,
         "source_mask_iou": 0.8594164456233422,
-        "prototype_trace_iou": null,
+        "replacement_bbox_px": [
+          253.0,
+          120.0,
+          278.0,
+          147.0
+        ],
+        "prototype_trace_iou": 0.9098837209302325,
         "repaired": false,
+        "reused": false,
         "restoration_evidence_passed": false,
-        "decision": "no_supported_donor"
+        "decision": "rejected_unchanged_source_fidelity"
       },
       {
         "symbol_id": "s11",
@@ -587,8 +610,10 @@
         "prototype_id": null,
         "similarity": null,
         "source_mask_iou": 0.9795918367346939,
+        "replacement_bbox_px": null,
         "prototype_trace_iou": null,
         "repaired": false,
+        "reused": false,
         "restoration_evidence_passed": false,
         "decision": "no_supported_donor"
       },
@@ -599,8 +624,10 @@
         "prototype_id": null,
         "similarity": null,
         "source_mask_iou": 0.898989898989899,
+        "replacement_bbox_px": null,
         "prototype_trace_iou": null,
         "repaired": false,
+        "reused": false,
         "restoration_evidence_passed": false,
         "decision": "no_supported_donor"
       },
@@ -611,8 +638,10 @@
         "prototype_id": null,
         "similarity": null,
         "source_mask_iou": 0.90625,
+        "replacement_bbox_px": null,
         "prototype_trace_iou": null,
         "repaired": false,
+        "reused": false,
         "restoration_evidence_passed": false,
         "decision": "no_supported_donor"
       },
@@ -623,8 +652,10 @@
         "prototype_id": null,
         "similarity": null,
         "source_mask_iou": 0.9817351598173516,
+        "replacement_bbox_px": null,
         "prototype_trace_iou": null,
         "repaired": false,
+        "reused": false,
         "restoration_evidence_passed": false,
         "decision": "no_supported_donor"
       },
@@ -635,8 +666,15 @@
         "prototype_id": "prototype:d57ee6b620702d9d95353d15f7bec7a8a3714f6731f6bbbbd2486dae466f268d",
         "similarity": 0.6931216931216931,
         "source_mask_iou": 0.7043010752688172,
+        "replacement_bbox_px": [
+          43.0,
+          196.0,
+          67.0,
+          224.0
+        ],
         "prototype_trace_iou": 0.9098837209302325,
         "repaired": true,
+        "reused": false,
         "restoration_evidence_passed": true,
         "decision": "repaired_from_document_donors"
       },
@@ -647,8 +685,10 @@
         "prototype_id": null,
         "similarity": null,
         "source_mask_iou": 0.9046321525885559,
+        "replacement_bbox_px": null,
         "prototype_trace_iou": null,
         "repaired": false,
+        "reused": false,
         "restoration_evidence_passed": false,
         "decision": "no_supported_donor"
       },
@@ -659,8 +699,10 @@
         "prototype_id": null,
         "similarity": null,
         "source_mask_iou": 0.96900826446281,
+        "replacement_bbox_px": null,
         "prototype_trace_iou": null,
         "repaired": false,
+        "reused": false,
         "restoration_evidence_passed": false,
         "decision": "no_supported_donor"
       },
@@ -671,8 +713,10 @@
         "prototype_id": null,
         "similarity": null,
         "source_mask_iou": 0.9694501018329938,
+        "replacement_bbox_px": null,
         "prototype_trace_iou": null,
         "repaired": false,
+        "reused": false,
         "restoration_evidence_passed": false,
         "decision": "no_supported_donor"
       },
@@ -683,8 +727,10 @@
         "prototype_id": null,
         "similarity": null,
         "source_mask_iou": 0.9001919385796545,
+        "replacement_bbox_px": null,
         "prototype_trace_iou": null,
         "repaired": false,
+        "reused": false,
         "restoration_evidence_passed": false,
         "decision": "no_supported_donor"
       },
@@ -695,8 +741,10 @@
         "prototype_id": null,
         "similarity": null,
         "source_mask_iou": 1.0,
+        "replacement_bbox_px": null,
         "prototype_trace_iou": null,
         "repaired": false,
+        "reused": false,
         "restoration_evidence_passed": false,
         "decision": "no_supported_donor"
       },
@@ -707,8 +755,10 @@
         "prototype_id": null,
         "similarity": null,
         "source_mask_iou": 0.9951456310679612,
+        "replacement_bbox_px": null,
         "prototype_trace_iou": null,
         "repaired": false,
+        "reused": false,
         "restoration_evidence_passed": false,
         "decision": "no_supported_donor"
       },
@@ -719,8 +769,10 @@
         "prototype_id": null,
         "similarity": null,
         "source_mask_iou": 0.9861751152073732,
+        "replacement_bbox_px": null,
         "prototype_trace_iou": null,
         "repaired": false,
+        "reused": false,
         "restoration_evidence_passed": false,
         "decision": "no_supported_donor"
       },
@@ -731,8 +783,10 @@
         "prototype_id": null,
         "similarity": null,
         "source_mask_iou": 0.8989247311827957,
+        "replacement_bbox_px": null,
         "prototype_trace_iou": null,
         "repaired": false,
+        "reused": false,
         "restoration_evidence_passed": false,
         "decision": "no_supported_donor"
       },
@@ -743,8 +797,10 @@
         "prototype_id": null,
         "similarity": null,
         "source_mask_iou": 0.9671361502347418,
+        "replacement_bbox_px": null,
         "prototype_trace_iou": null,
         "repaired": false,
+        "reused": false,
         "restoration_evidence_passed": false,
         "decision": "no_supported_donor"
       },
@@ -755,8 +811,10 @@
         "prototype_id": null,
         "similarity": null,
         "source_mask_iou": 0.8839662447257384,
+        "replacement_bbox_px": null,
         "prototype_trace_iou": null,
         "repaired": false,
+        "reused": false,
         "restoration_evidence_passed": false,
         "decision": "no_supported_donor"
       },
@@ -767,8 +825,10 @@
         "prototype_id": null,
         "similarity": null,
         "source_mask_iou": 0.9650205761316872,
+        "replacement_bbox_px": null,
         "prototype_trace_iou": null,
         "repaired": false,
+        "reused": false,
         "restoration_evidence_passed": false,
         "decision": "no_supported_donor"
       },
@@ -779,8 +839,10 @@
         "prototype_id": null,
         "similarity": null,
         "source_mask_iou": 0.9735772357723578,
+        "replacement_bbox_px": null,
         "prototype_trace_iou": null,
         "repaired": false,
+        "reused": false,
         "restoration_evidence_passed": false,
         "decision": "no_supported_donor"
       },
@@ -791,8 +853,10 @@
         "prototype_id": null,
         "similarity": null,
         "source_mask_iou": 0.8913934426229508,
+        "replacement_bbox_px": null,
         "prototype_trace_iou": null,
         "repaired": false,
+        "reused": false,
         "restoration_evidence_passed": false,
         "decision": "no_supported_donor"
       }
@@ -1665,7 +1729,7 @@
       ],
       "disposition": {
         "Raster": {
-          "reason": "FidelityBelowPolicy"
+          "reason": "UnsupportedContent"
         }
       }
     },
@@ -1947,7 +2011,8 @@
     "multiply_owned_ink_px": 0
   },
   "fallback_reasons": {
-    "FidelityBelowPolicy": 22
+    "FidelityBelowPolicy": 21,
+    "UnsupportedContent": 1
   },
   "font_glyphs": 21,
   "font_bytes": 13572,
@@ -1985,38 +2050,5 @@
   "ownership_invariants": {
     "semantic": true,
     "visual": true
-  },
-  "evaluation": {
-    "observations": 27,
-    "prototypes": 2,
-    "repaired_occurrences": 1,
-    "repaired_symbols": [
-      "s00"
-    ],
-    "false_substitutions": [],
-    "damaged_vs_pristine_binary_iou": 0.8137254901960784,
-    "selected_prototype_vs_pristine_binary_iou": 0.9056603773584906,
-    "reconstructed_vs_pristine_binary_iou": 0.8368580060422961,
-    "faithful_output_vs_damaged_source_binary_iou": 0.7679180887372014,
-    "clearscan_output_vs_damaged_source_binary_iou": 0.6798780487804879,
-    "vector_ink_coverage": 0.13214073927653686,
-    "faithful_pdf_bytes": 52572,
-    "clearscan_pdf_bytes": 50832,
-    "embedded_font_bytes": 13572,
-    "fonttools_valid": true,
-    "ots_sanitizer": "File sanitized successfully!",
-    "qpdf": {
-      "faithful": "checking /data/coding/scanweave/qualification/evidence/m1d_reconstruction/faithful.pdf\nPDF Version: 1.7\nFile is not encrypted\nFile is not linearized\nNo syntax or stream encoding errors found; the file may still contain\nerrors that qpdf cannot detect",
-      "clearscan": "checking /data/coding/scanweave/qualification/evidence/m1d_reconstruction/clearscan.pdf\nPDF Version: 1.7\nFile is not encrypted\nFile is not linearized\nNo syntax or stream encoding errors found; the file may still contain\nerrors that qpdf cannot detect"
-    },
-    "native_pdfium_search_e": {
-      "faithful": true,
-      "clearscan": true
-    },
-    "poppler_text": {
-      "faithful": "e\n\ne\n\ne\n\ne\n\ne\n\ne\n\ne\n\ne\n\ne\n\ne\n\ne\n\ne\n\ne\n\ne\n\n6 6 6\n\ne\n\n88 8\n0 00\nO O O\n\n\f",
-      "clearscan": "e\n\ne\n\ne\n\ne\n\ne\n\ne\n\ne\n\ne\n\ne\n\ne\n\ne\n\ne\n\ne\n\ne\n\n6 6 6\n\ne\n\n88 8\n0 00\nO O O\n\n\f"
-    },
-    "faithful_and_clearscan_differ": true
   }
 }

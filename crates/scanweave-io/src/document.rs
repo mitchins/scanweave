@@ -11,7 +11,7 @@
 //! reconstruction against a whole-page searchable raster baseline document,
 //! and selects the smaller candidate that passes the same semantic gates.
 
-use crate::convert::{convert_parts, Input, Policy, Report};
+use crate::convert::{Input, Policy, Report};
 use crate::fontbuild::build_font;
 use crate::glyphs::GlyphShape;
 use crate::page_pdf::{assemble_document, PageParts};
@@ -107,16 +107,19 @@ pub struct PageBinding {
 
 pub struct DocumentOutput {
     pub pdf_bytes: Vec<u8>,
+    /// exact shared font program used by the emitted candidate
+    pub font_bytes: Vec<u8>,
+    /// searchable whole-page raster baseline candidate (MRC-comparable gate)
+    pub raster_baseline_pdf_bytes: Vec<u8>,
     pub report: DocumentReport,
 }
 
 /// Build the document-wide (shape, label) encoding table and remap every
 /// page's CIDs onto it. Deterministic: page order, then slot order.
-fn union_encodings(
-    pages: &[DocumentPage],
-) -> (Vec<GlyphShape>, Vec<(usize, String)>, Vec<Remap>) {
+fn union_encodings(pages: &[DocumentPage]) -> (Vec<GlyphShape>, Vec<(usize, String)>, Vec<Remap>) {
     let mut shapes: Vec<GlyphShape> = Vec::new();
-    let mut shape_index: std::collections::HashMap<String, usize> = std::collections::HashMap::new();
+    let mut shape_index: std::collections::HashMap<String, usize> =
+        std::collections::HashMap::new();
     let mut encodings: Vec<(usize, String)> = Vec::new();
     let mut enc_index: std::collections::HashMap<(usize, String), usize> =
         std::collections::HashMap::new();
@@ -192,10 +195,29 @@ pub fn convert_document(
     if inputs.is_empty() {
         return Err("document has no pages".into());
     }
-    // 1. per-page conversion into parts + reports
+    // 1. Collect only safe, unprotected single-glyph evidence across the
+    //    document, then convert pages with sibling-page observations available
+    //    to their local reconstruction dictionary.
+    let all_donors: Vec<Vec<crate::units::Unit>> = inputs
+        .iter()
+        .map(crate::convert::collect_document_donors)
+        .collect();
     let mut pages: Vec<DocumentPage> = Vec::with_capacity(inputs.len());
-    for input in inputs {
-        let (parts, report) = convert_parts(input, policy)?;
+    for (page_index, input) in inputs.iter().enumerate() {
+        let mut sibling_donors = Vec::new();
+        for (donor_page, donors) in all_donors.iter().enumerate() {
+            if donor_page == page_index {
+                continue;
+            }
+            for donor in donors {
+                let mut donor = donor.clone();
+                donor.symbol_id = format!("{}:{}", inputs[donor_page].page_id, donor.symbol_id);
+                donor.span_id = format!("{}:{}", inputs[donor_page].page_id, donor.span_id);
+                sibling_donors.push(donor);
+            }
+        }
+        let (parts, report) =
+            crate::convert::convert_parts_with_document_donors(input, policy, &sibling_donors)?;
         pages.push(DocumentPage { parts, report });
     }
 
@@ -270,9 +292,13 @@ pub fn convert_document(
     // auto: the fidelity policy is a HARD gate — a candidate whose vector units
     // fall below min_ink_iou is disqualified, not ranked by bytes. The raster
     // baseline reproduces the source pixels exactly and is always qualified.
-    let recon_ok = pages
-        .iter()
-        .all(|p| p.report.fidelity.vector_ink_iou_min.is_none_or(|m| m >= policy.min_ink_iou));
+    let recon_ok = pages.iter().all(|p| {
+        p.report
+            .fidelity
+            .preservation_ink_iou_min
+            .is_none_or(|m| m >= policy.min_ink_iou)
+            && (policy.profile != "clearscan" || p.report.reconstruction.restoration_qualified)
+    });
     let baseline_ok = true;
     let selected: String = if policy.mode == "auto" {
         if recon_ok && (!baseline_ok || pdf_bytes.len() <= baseline_pdf.len()) {
@@ -288,7 +314,10 @@ pub fn convert_document(
         return Err(format!(
             "fidelity policy violated: vector units measure below min_ink_iou {} on {} page(s)              (use --mode auto to fall back to the raster baseline, or lower the policy explicitly)",
             policy.min_ink_iou,
-            pages.iter().filter(|p| p.report.fidelity.vector_ink_iou_min.is_some_and(|m| m < policy.min_ink_iou)).count()
+            pages.iter().filter(|p| {
+                p.report.fidelity.preservation_ink_iou_min.is_some_and(|m| m < policy.min_ink_iou)
+                    || (policy.profile == "clearscan" && !p.report.reconstruction.restoration_qualified)
+            }).count()
         ));
     } else {
         "reconstruct".into()
@@ -347,13 +376,18 @@ pub fn convert_document(
 
     Ok(DocumentOutput {
         pdf_bytes: out_bytes.clone(),
+        font_bytes: font_bytes.clone(),
+        raster_baseline_pdf_bytes: baseline_pdf.clone(),
         report: DocumentReport {
             document_id: document_id.to_string(),
             min_ink_iou: policy.min_ink_iou,
             page_fidelity: if selected == "raster_baseline" {
                 baseline_parts.iter().map(|_| Some(1.0)).collect()
             } else {
-                pages.iter().map(|p| p.report.fidelity.vector_ink_iou_min).collect()
+                pages
+                    .iter()
+                    .map(|p| p.report.fidelity.vector_ink_iou_min)
+                    .collect()
             },
             pages: pages.len(),
             selected: selected.clone(),

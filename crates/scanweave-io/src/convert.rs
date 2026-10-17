@@ -196,7 +196,6 @@ pub struct Output {
     pub font_bytes: Vec<u8>,
 }
 
-
 /// Build a page [`Input`] from a canonical raster and its normalized OCR page.
 /// (Shared by the single-page CLI and the document/bundle path.)
 pub fn input_from_ocr_page(
@@ -268,10 +267,22 @@ fn to_ocr_page(input: &Input) -> scanweave_core::ocr_page::OcrPage {
         page: PageGeometry {
             width_pt: pt(input.width as f64),
             height_pt: pt(input.height as f64),
-            raster_to_page_pt: [72.0 / 300.0, 0.0, 0.0, -72.0 / 300.0, 0.0, pt(input.height as f64)],
+            raster_to_page_pt: [
+                72.0 / 300.0,
+                0.0,
+                0.0,
+                -72.0 / 300.0,
+                0.0,
+                pt(input.height as f64),
+            ],
         },
         source_geometry: None,
-        producer: Producer { name: "m1a".into(), version: "1".into(), models: vec![], languages: vec![] },
+        producer: Producer {
+            name: "m1a".into(),
+            version: "1".into(),
+            models: vec![],
+            languages: vec![],
+        },
         granularity: Granularity::Symbol,
         reading_order_status: ReadingOrderStatus::Supplied,
         reading_order: input.spans.iter().map(|s| s.id.clone()).collect(),
@@ -296,7 +307,11 @@ fn to_ocr_page(input: &Input) -> scanweave_core::ocr_page::OcrPage {
                 direction: Direction::Ltr,
                 role: Role::Body,
                 language: None,
-                confidence: Confidence { value: None, scale: ConfidenceScale::Unknown, calibrated: false },
+                confidence: Confidence {
+                    value: None,
+                    scale: ConfidenceScale::Unknown,
+                    calibrated: false,
+                },
                 provenance: Provenance::Ocr,
                 baseline: None,
                 parent_span_id: None,
@@ -307,12 +322,55 @@ fn to_ocr_page(input: &Input) -> scanweave_core::ocr_page::OcrPage {
                         id: sym.id.clone(),
                         text_range_utf8: [sym.range.0, sym.range.1],
                         polygon: sym.polygon.clone(),
-                        confidence: Confidence { value: None, scale: ConfidenceScale::Unknown, calibrated: false },
+                        confidence: Confidence {
+                            value: None,
+                            scale: ConfidenceScale::Unknown,
+                            calibrated: false,
+                        },
                     })
                     .collect(),
             })
             .collect(),
     }
+}
+
+/// Extract document-local donor observations without running tracing or
+/// altering the page. Protected, suspect, and non-single-symbol units are
+/// excluded; the caller supplies these only to sibling-page reconstruction.
+pub(crate) fn collect_document_donors(input: &Input) -> Vec<crate::units::Unit> {
+    let seg = segment(&input.rgb, input.width, input.height);
+    let ocr = to_ocr_page(input);
+    let (plan, _) = build_plan(&seg, input.width, input.height, &ocr);
+    let protected_boxes: Vec<[f64; 4]> = input
+        .protected_regions
+        .iter()
+        .map(|p| {
+            let mut bb = span_bbox(&p.polygon);
+            bb[0] = bb[0].clamp(0.0, input.width as f64);
+            bb[1] = bb[1].clamp(0.0, input.height as f64);
+            bb[2] = bb[2].clamp(0.0, input.width as f64);
+            bb[3] = bb[3].clamp(0.0, input.height as f64);
+            bb
+        })
+        .collect();
+    let regions = plan_regions(&plan, &protected_boxes);
+    let mut eligible = std::collections::BTreeSet::new();
+    for region in regions {
+        if !matches!(region.disposition, RegionDisposition::Vector) {
+            continue;
+        }
+        eligible.extend(region.units);
+    }
+    plan.owned
+        .into_iter()
+        .enumerate()
+        .filter_map(|(i, owned)| {
+            (eligible.contains(&i)
+                && !owned.suspect
+                && owned.unit.semantic_text.chars().count() == 1)
+                .then_some(owned.unit)
+        })
+        .collect()
 }
 
 /// Analytical ink IoU between a traced glyph outline and the unit's source ink
@@ -331,16 +389,23 @@ pub(crate) fn glyph_ink_iou(g: &GlyphShape, crop_w: usize, crop_h: usize, mask: 
     let mut cur: Vec<[f64; 2]> = Vec::new();
     let mut start = [0.0f64, 0.0f64];
     let mut last = [0.0f64, 0.0f64];
-    let flatten = |p0: [f64; 2], p1: [f64; 2], p2: [f64; 2], p3: [f64; 2], cur: &mut Vec<[f64; 2]>| {
-        const N: usize = 12;
-        for i in 1..=N {
-            let t = i as f64 / N as f64;
-            let u = 1.0 - t;
-            let x = u * u * u * p0[0] + 3.0 * u * u * t * p1[0] + 3.0 * u * t * t * p2[0] + t * t * t * p3[0];
-            let y = u * u * u * p0[1] + 3.0 * u * u * t * p1[1] + 3.0 * u * t * t * p2[1] + t * t * t * p3[1];
-            cur.push([x, y]);
-        }
-    };
+    let flatten =
+        |p0: [f64; 2], p1: [f64; 2], p2: [f64; 2], p3: [f64; 2], cur: &mut Vec<[f64; 2]>| {
+            const N: usize = 12;
+            for i in 1..=N {
+                let t = i as f64 / N as f64;
+                let u = 1.0 - t;
+                let x = u * u * u * p0[0]
+                    + 3.0 * u * u * t * p1[0]
+                    + 3.0 * u * t * t * p2[0]
+                    + t * t * t * p3[0];
+                let y = u * u * u * p0[1]
+                    + 3.0 * u * u * t * p1[1]
+                    + 3.0 * u * t * t * p2[1]
+                    + t * t * t * p3[1];
+                cur.push([x, y]);
+            }
+        };
     for el in g.path.iter() {
         match el {
             kurbo::PathEl::MoveTo(p) => {
@@ -359,8 +424,16 @@ pub(crate) fn glyph_ink_iou(g: &GlyphShape, crop_w: usize, crop_h: usize, mask: 
             }
             kurbo::PathEl::QuadTo(c, p) => {
                 // raise the quad to a cubic and flatten
-                let (cx, cy, px, py) = (c.x / k, crop_h as f64 - c.y / k, p.x / k, crop_h as f64 - p.y / k);
-                let c1 = [last[0] + 2.0 / 3.0 * (cx - last[0]), last[1] + 2.0 / 3.0 * (cy - last[1])];
+                let (cx, cy, px, py) = (
+                    c.x / k,
+                    crop_h as f64 - c.y / k,
+                    p.x / k,
+                    crop_h as f64 - p.y / k,
+                );
+                let c1 = [
+                    last[0] + 2.0 / 3.0 * (cx - last[0]),
+                    last[1] + 2.0 / 3.0 * (cy - last[1]),
+                ];
                 let c2 = [px + 2.0 / 3.0 * (cx - px), py + 2.0 / 3.0 * (cy - py)];
                 flatten(last, c1, c2, [px, py], &mut cur);
                 last = [px, py];
@@ -438,7 +511,10 @@ pub(crate) fn glyph_ink_iou(g: &GlyphShape, crop_w: usize, crop_h: usize, mask: 
         }
     }
     // foreground when at least half the sub-rows cover the pixel
-    let fill: Vec<bool> = cover.iter().map(|c| *c as usize >= SUB.div_ceil(2)).collect();
+    let fill: Vec<bool> = cover
+        .iter()
+        .map(|c| *c as usize >= SUB.div_ceil(2))
+        .collect();
     let mut inter = 0usize;
     let mut uni = 0usize;
     for (i, m) in mask.iter().enumerate() {
@@ -506,9 +582,12 @@ pub fn convert(input: &Input, policy: &Policy) -> Result<Output, String> {
     // the fidelity policy is a hard gate (SPEC §4.2 / policy note): the raster
     // baseline reproduces the source pixels exactly, the reconstruction does
     // not if its vector units measure below min_ink_iou
-    let preservation_ok = report.fidelity.preservation_ink_iou_min
+    let preservation_ok = report
+        .fidelity
+        .preservation_ink_iou_min
         .is_none_or(|m| m >= policy.min_ink_iou);
-    let restoration_ok = policy.profile != "clearscan" || report.reconstruction.restoration_qualified;
+    let restoration_ok =
+        policy.profile != "clearscan" || report.reconstruction.restoration_qualified;
     let recon_fidelity_ok = preservation_ok && restoration_ok;
     let selected = if policy.mode == "auto" {
         if recon_fidelity_ok && pdf_bytes.len() <= b0.len() {
@@ -529,7 +608,11 @@ pub fn convert(input: &Input, policy: &Policy) -> Result<Output, String> {
         "reconstruct".to_string()
     };
     // the emitted candidate; the B0 is still returned separately for the harness
-    let pdf_bytes = if selected == "raster_baseline" { b0.clone() } else { pdf_bytes };
+    let pdf_bytes = if selected == "raster_baseline" {
+        b0.clone()
+    } else {
+        pdf_bytes
+    };
     let mut report = report;
     report.candidates = candidates;
     report.selected = selected;
@@ -550,6 +633,14 @@ pub fn convert(input: &Input, policy: &Policy) -> Result<Output, String> {
 pub fn convert_parts(
     input: &Input,
     policy: &Policy,
+) -> Result<(crate::page_pdf::PageParts, Report), String> {
+    convert_parts_with_document_donors(input, policy, &[])
+}
+
+pub(crate) fn convert_parts_with_document_donors(
+    input: &Input,
+    policy: &Policy,
+    document_donors: &[crate::units::Unit],
 ) -> Result<(crate::page_pdf::PageParts, Report), String> {
     let start = std::time::Instant::now();
     let w = input.width;
@@ -669,12 +760,50 @@ pub fn convert_parts(
     let upem = policy.upem as f64;
     let units_per_px = if em_px > 0.0 { upem / em_px } else { upem };
     let budget = Budget::from_m0_policy();
-    let mut reconstruction = crate::visual_dict::reconstruct(
-        &mut plan, policy, &input.rgb, input.width, input.height,
-    );
+    // Add eligible observations from sibling pages only for dictionary
+    // evidence. They are removed immediately afterward and never participate
+    // in page ownership, placement, coverage, or Unicode reporting.
+    let local_units = plan.owned.len();
+    let source_masks: std::collections::HashMap<_, _> = plan
+        .owned
+        .iter()
+        .map(|owned| {
+            (
+                owned.unit.symbol_id.clone(),
+                (
+                    owned.unit.crop_w,
+                    owned.unit.crop_h,
+                    owned.unit.mask.clone(),
+                ),
+            )
+        })
+        .collect();
+    for donor in document_donors {
+        let mut donor = donor.clone();
+        donor.symbol_id = format!("__doc_donor:{}", donor.symbol_id);
+        donor.span_id = format!("__doc_donor:{}", donor.span_id);
+        plan.owned.push(crate::ownership::OwnedUnit {
+            unit: donor,
+            components: Vec::new(),
+            slots: Vec::new(),
+            suspect: false,
+        });
+    }
+    let mut reconstruction =
+        crate::visual_dict::reconstruct(&mut plan, policy, &input.rgb, input.width, input.height);
+    plan.owned.truncate(local_units);
+    reconstruction
+        .observations
+        .retain(|o| !o.symbol_id.starts_with("__doc_donor:"));
+    reconstruction
+        .occurrences
+        .retain(|o| !o.symbol_id.starts_with("__doc_donor:"));
 
     let mut traced: Vec<TracedShape> = Vec::new();
     let mut missing: std::collections::HashSet<(String,)> = std::collections::HashSet::new();
+    for symbol_id in &reconstruction.rejected_symbols {
+        missing.insert((symbol_id.clone(),));
+    }
     {
         let mut seen: Vec<String> = Vec::new();
         for r in regions.iter() {
@@ -686,7 +815,10 @@ pub fn convert_parts(
                 if seen.contains(&u.shape_key) {
                     continue;
                 }
-                let prototype = reconstruction.prototype_units.get(&u.shape_key).unwrap_or(u);
+                let prototype = reconstruction
+                    .prototype_units
+                    .get(&u.shape_key)
+                    .unwrap_or(u);
                 match trace_shape(prototype, &budget, units_per_px) {
                     Ok(t) => {
                         seen.push(u.shape_key.clone());
@@ -702,27 +834,69 @@ pub fn convert_parts(
     let shapes: Vec<GlyphShape> = build_glyph_shapes(&traced, units_per_px, &budget)?;
     // Restoration has a separate gate: the selected observed prototype must
     // survive the actual tracing step with high overlap to its refined donor.
-    for occurrence in reconstruction.occurrences.iter_mut().filter(|o| o.repaired) {
-        let prototype_key = occurrence.prototype_id.as_deref().unwrap_or("").strip_prefix("prototype:").unwrap_or("");
+    for occurrence in reconstruction
+        .occurrences
+        .iter_mut()
+        .filter(|o| o.repaired || o.reused)
+    {
+        let prototype_key = occurrence
+            .prototype_id
+            .as_deref()
+            .unwrap_or("")
+            .strip_prefix("prototype:")
+            .unwrap_or("");
         let donor = reconstruction.prototype_units.get(prototype_key);
-        let traced_iou = donor.and_then(|donor| shapes.iter().find(|s| s.shape_key == prototype_key)
-            .map(|g| glyph_ink_iou(g, donor.crop_w, donor.crop_h, &donor.mask)));
+        let traced_iou = donor.and_then(|donor| {
+            shapes
+                .iter()
+                .find(|s| s.shape_key == prototype_key)
+                .map(|g| glyph_ink_iou(g, donor.crop_w, donor.crop_h, &donor.mask))
+        });
         occurrence.prototype_trace_iou = traced_iou;
-        if traced_iou.is_none_or(|iou| iou < 0.90) {
+        let source_iou = source_masks
+            .get(&occurrence.symbol_id)
+            .and_then(|(w, h, mask)| {
+                shapes
+                    .iter()
+                    .find(|g| g.shape_key == prototype_key)
+                    .map(|g| glyph_ink_iou(g, *w, *h, mask))
+            });
+        occurrence.source_mask_iou = source_iou;
+        // Reuse cannot weaken the unchanged-text preservation gate. A
+        // document-supported prototype is reusable only when the traced
+        // outline still reproduces this occurrence at 0.98; damaged glyphs
+        // use their separate donor-supported restoration gate.
+        let source_gate_failed = occurrence.reused && source_iou.is_none_or(|iou| iou < 0.98);
+        if traced_iou.is_none_or(|iou| iou < 0.90) || source_gate_failed {
             occurrence.repaired = false;
+            occurrence.reused = false;
             occurrence.restoration_evidence_passed = false;
-            occurrence.decision = "rejected_traced_prototype_fidelity".into();
+            occurrence.decision = if source_gate_failed {
+                "rejected_unchanged_source_fidelity".into()
+            } else {
+                "rejected_traced_prototype_fidelity".into()
+            };
             missing.insert((occurrence.symbol_id.clone(),));
         }
     }
-    reconstruction.restoration_qualified = reconstruction.occurrences.iter()
-        .filter(|o| o.repaired).all(|o| o.restoration_evidence_passed && o.prototype_trace_iou.is_some_and(|v| v >= 0.90));
+    reconstruction.restoration_qualified = reconstruction
+        .occurrences
+        .iter()
+        .filter(|o| o.repaired || o.reused)
+        .all(|o| {
+            o.restoration_evidence_passed
+                && o.prototype_trace_iou.is_some_and(|v| v >= 0.90)
+                && (!o.reused || o.source_mask_iou.is_some_and(|v| v >= 0.98))
+        });
     if !missing.is_empty() {
         for r in regions.iter_mut() {
             if !matches!(r.disposition, RegionDisposition::Vector) {
                 continue;
             }
-            if r.units.iter().any(|ui| missing.contains(&(plan.owned[*ui].unit.symbol_id.clone(),))) {
+            if r.units
+                .iter()
+                .any(|ui| missing.contains(&(plan.owned[*ui].unit.symbol_id.clone(),)))
+            {
                 r.disposition = RegionDisposition::Raster {
                     reason: FallbackReason::UnsupportedContent,
                 };
@@ -762,9 +936,11 @@ pub fn convert_parts(
         }
     }
     for occurrence in &mut reconstruction.occurrences {
-        occurrence.source_mask_iou = measured.iter()
+        occurrence.source_mask_iou = measured
+            .iter()
             .find(|(symbol, _)| symbol == &occurrence.symbol_id)
-            .map(|(_, iou)| *iou);
+            .map(|(_, iou)| *iou)
+            .or(occurrence.source_mask_iou);
     }
     let mut units_below_policy = 0usize;
     if !measured.is_empty() {
@@ -780,7 +956,9 @@ pub fn convert_parts(
                 .iter()
                 .filter_map(|&ui| {
                     let sid = plan.owned[ui].unit.symbol_id.clone();
-                    if reconstruction.repaired_symbols.contains(&sid) {
+                    if reconstruction.repaired_symbols.contains(&sid)
+                        || reconstruction.reused_symbols.contains(&sid)
+                    {
                         return None;
                     }
                     measured.iter().find(|(k, _)| *k == sid).map(|(_, v)| *v)
@@ -822,17 +1000,29 @@ pub fn convert_parts(
             let Some(gidx) = shapes.iter().position(|s| s.shape_key == u.shape_key) else {
                 continue;
             };
-            let advance = (shapes[gidx].ink_span_fu[0].ceil() as u16).saturating_add(2).max(1);
+            let advance = (shapes[gidx].ink_span_fu[0].ceil() as u16)
+                .saturating_add(2)
+                .max(1);
             keys.push(EncodingKey {
                 visual_glyph_id: gidx,
                 semantic_string: u.semantic_text.clone(),
                 writing_mode: WritingMode::Horizontal,
-                required_metrics: MetricsKey { advance, units_per_em: policy.upem },
+                required_metrics: MetricsKey {
+                    advance,
+                    units_per_em: policy.upem,
+                },
             });
             occ.push((
                 gidx,
                 0,
-                u.bbox_px,
+                reconstruction
+                    .occurrences
+                    .iter()
+                    .find(|record| {
+                        record.symbol_id == u.symbol_id && (record.repaired || record.reused)
+                    })
+                    .and_then(|record| record.replacement_bbox_px)
+                    .unwrap_or(u.bbox_px),
                 u.span_id.clone(),
                 u.symbol_id.clone(),
                 u.semantic_text.clone(),
@@ -853,7 +1043,6 @@ pub fn convert_parts(
         }
     }
     let _font_bytes = build_font(&shapes, &encodings, policy.upem)?;
-
 
     // raster patches (fallback regions) + artwork ------------------------------
     let mut patches: Vec<Patch> = Vec::new();
@@ -893,7 +1082,10 @@ pub fn convert_parts(
     for r in &regions {
         if matches!(r.disposition, RegionDisposition::Vector) {
             for &ui in &r.units {
-                semantic_owner.insert(plan.owned[ui].unit.span_id.clone(), "visible_tounicode".into());
+                semantic_owner.insert(
+                    plan.owned[ui].unit.span_id.clone(),
+                    "visible_tounicode".into(),
+                );
             }
         }
     }
@@ -932,8 +1124,18 @@ pub fn convert_parts(
             if owners.iter().any(|o| o.span_id == sid) {
                 continue;
             }
-            let text = ocr.spans.iter().find(|s| s.id == sid).map(|s| s.text.clone()).unwrap_or_default();
-            let bbox = ocr.spans.iter().find(|s| s.id == sid).map(|s| span_bbox(&s.polygon)).unwrap_or([0.0, 0.0, 0.0, 0.0]);
+            let text = ocr
+                .spans
+                .iter()
+                .find(|s| s.id == sid)
+                .map(|s| s.text.clone())
+                .unwrap_or_default();
+            let bbox = ocr
+                .spans
+                .iter()
+                .find(|s| s.id == sid)
+                .map(|s| span_bbox(&s.polygon))
+                .unwrap_or([0.0, 0.0, 0.0, 0.0]);
             // placement on the traced INK baseline: the first unit of the span
             // (its traced glyph box), matching how visible runs are placed
             let place = plan
@@ -942,7 +1144,12 @@ pub fn convert_parts(
                 .find(|u| u.unit.span_id == sid)
                 .map(|u| u.unit.bbox_px)
                 .unwrap_or(bbox);
-            owners.push(Owner { text, bbox_px: bbox, place_px: place, span_id: sid });
+            owners.push(Owner {
+                text,
+                bbox_px: bbox,
+                place_px: place,
+                span_id: sid,
+            });
         }
     }
     for s in &ocr.spans {
@@ -969,11 +1176,13 @@ pub fn convert_parts(
         o.bbox_px[2] = o.bbox_px[2].min(w as f64);
         o.bbox_px[3] = o.bbox_px[3].min(h as f64);
     }
-    let _owner_encodings: Vec<(usize, String)> = owners
+    let _owner_encodings: Vec<(usize, String)> =
+        owners.iter().map(|o| (0usize, o.text.clone())).collect();
+    let span_texts: Vec<(String, String)> = ocr
+        .spans
         .iter()
-        .map(|o| (0usize, o.text.clone()))
+        .map(|s| (s.id.clone(), s.text.clone()))
         .collect();
-    let span_texts: Vec<(String, String)> = ocr.spans.iter().map(|s| (s.id.clone(), s.text.clone())).collect();
     // reading-order lines: OCR-authoritative separators, no invented whitespace
     let mut lines: Vec<crate::page_pdf::LineSpec> = Vec::new();
     {
@@ -1012,10 +1221,7 @@ pub fn convert_parts(
         } else {
             0usize
         };
-        if let Some(cid) = all_encodings
-            .iter()
-            .position(|(_, t)| t == &o.text)
-        {
+        if let Some(cid) = all_encodings.iter().position(|(_, t)| t == &o.text) {
             owner_cids.push(cid as u32 + 1);
             continue;
         }
@@ -1151,7 +1357,11 @@ pub fn convert_parts(
         .flat_map(|r| r.units.iter())
         .filter_map(|&ui| {
             let sid = plan.owned[ui].unit.symbol_id.clone();
-            if reconstruction.repaired_symbols.contains(&sid) { return None; }
+            if reconstruction.repaired_symbols.contains(&sid)
+                || reconstruction.reused_symbols.contains(&sid)
+            {
+                return None;
+            }
             measured.iter().find(|(k, _)| *k == sid).map(|(_, v)| *v)
         })
         .collect();
@@ -1212,8 +1422,6 @@ pub fn convert_parts(
 
     Ok((parts, report))
 }
-
-
 
 /// Source-pixel patches for non-text artwork (never dropped, never relabelled).
 /// Merge overlapping or exactly-adjacent patches transitively (deterministic:
@@ -1286,7 +1494,10 @@ fn artwork_patches(input: &Input, plan: &OwnershipPlan) -> Vec<Patch> {
             }
             let gx = au.bbox_px[0] as usize + (i % au.crop_w);
             let gy = au.bbox_px[1] as usize + (i / au.crop_w);
-            cells.entry((gx / CELL, gy / CELL)).or_default().push((gx, gy));
+            cells
+                .entry((gx / CELL, gy / CELL))
+                .or_default()
+                .push((gx, gy));
         }
     }
     let mut patches = Vec::new();
@@ -1335,7 +1546,8 @@ pub fn baseline_one_page(
         ..parts.clone()
     };
     let doc = vec![baseline];
-    let (bytes, _stats) = crate::page_pdf::assemble_document(&doc, &parts.shapes, &encodings, &font)?;
+    let (bytes, _stats) =
+        crate::page_pdf::assemble_document(&doc, &parts.shapes, &encodings, &font)?;
     Ok(bytes)
 }
 

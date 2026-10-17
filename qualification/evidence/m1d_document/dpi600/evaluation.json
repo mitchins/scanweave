@@ -1,0 +1,121 @@
+{
+  "dpi": 600,
+  "pages": 12,
+  "repaired_occurrences": 3,
+  "repaired_characters": [
+    "8",
+    "a",
+    "e"
+  ],
+  "glyphs": {
+    "e": {
+      "source_vs_pristine_iou": 0.8473317865429234,
+      "faithful_vs_pristine_iou": 0.8117752007136485,
+      "raster_baseline_vs_pristine_iou": 0.8472609099350047,
+      "clearscan_vs_pristine_iou": 0.9580918412839946,
+      "selected_donor_vs_pristine_iou": 1.0,
+      "repaired_error_reduction_vs_source": 0.1107600547410712,
+      "repair_accepted_by_pristine_eval": true,
+      "repaired": true
+    },
+    "a": {
+      "source_vs_pristine_iou": 0.8289775332416323,
+      "faithful_vs_pristine_iou": 0.8095446584938704,
+      "raster_baseline_vs_pristine_iou": 0.8307899461400359,
+      "clearscan_vs_pristine_iou": 0.9673629242819843,
+      "selected_donor_vs_pristine_iou": 1.0,
+      "repaired_error_reduction_vs_source": 0.13838539104035208,
+      "repair_accepted_by_pristine_eval": true,
+      "repaired": true
+    },
+    "8": {
+      "source_vs_pristine_iou": 0.9128712871287129,
+      "faithful_vs_pristine_iou": 0.843691733996271,
+      "raster_baseline_vs_pristine_iou": 0.9123847167325428,
+      "clearscan_vs_pristine_iou": 0.9181087762669963,
+      "selected_donor_vs_pristine_iou": 1.0,
+      "repaired_error_reduction_vs_source": 0.005237489138283369,
+      "repair_accepted_by_pristine_eval": true,
+      "repaired": true
+    }
+  },
+  "pdfium_independent_render": {
+    "e": {
+      "nominal_iou_vs_pristine": 0.8821260180025718,
+      "zoom4x_iou_vs_pristine": 0.9380169846696813
+    },
+    "a": {
+      "nominal_iou_vs_pristine": 0.8840151834668916,
+      "zoom4x_iou_vs_pristine": 0.9286561051837483
+    },
+    "8": {
+      "nominal_iou_vs_pristine": 0.906519065190652,
+      "zoom4x_iou_vs_pristine": 0.9372071227741331
+    }
+  },
+  "reused_occurrences": 0,
+  "reused_occurrence_mean_pristine_iou": null,
+  "reused_occurrences_below_raster_iou_by_0_02": 0,
+  "reused_outline_appearance_gate_passed": false,
+  "reused_source_mask_ious": [
+    0.9670672007120605,
+    0.9546044098573282,
+    0.962928055293748,
+    0.9670672007120605,
+    0.9546044098573282,
+    0.962928055293748,
+    0.9670672007120605,
+    0.9546044098573282,
+    0.962928055293748,
+    0.9670672007120605,
+    0.9546044098573282,
+    0.962928055293748,
+    0.9670672007120605,
+    0.9546044098573282,
+    0.962928055293748,
+    0.9670672007120605,
+    0.9546044098573282,
+    0.962928055293748,
+    0.9670672007120605,
+    0.9546044098573282,
+    0.962928055293748,
+    0.9389312977099237,
+    0.952220348510399,
+    0.944672131147541,
+    0.9389312977099237,
+    0.952220348510399,
+    0.944672131147541,
+    0.9389312977099237,
+    0.952220348510399,
+    0.944672131147541,
+    0.9670672007120605,
+    0.9546044098573282,
+    0.962928055293748
+  ],
+  "false_substitutions": [],
+  "unsafe_font_mixes": [],
+  "vector_ink_coverage": 0.039848918556174506,
+  "reused_occurrences_unsafe_vs_raster": 0,
+  "pdf_bytes": {
+    "clearscan": 173180,
+    "faithful": 32768,
+    "truth": 143266,
+    "raster-baseline": 143927
+  },
+  "font_bytes": 10920,
+  "compression_vs_faithful_bytes": -140412,
+  "fonttools_valid": true,
+  "ots": "File sanitized successfully!",
+  "qpdf": {
+    "clearscan": "checking /data/coding/scanweave/qualification/evidence/m1d_document/dpi600/clearscan.pdf\nPDF Version: 1.7\nFile is not encrypted\nFile is not linearized\nNo syntax or stream encoding errors found; the file may still contain\nerrors that qpdf cannot detect",
+    "faithful": "checking /data/coding/scanweave/qualification/evidence/m1d_document/dpi600/faithful.pdf\nPDF Version: 1.7\nFile is not encrypted\nFile is not linearized\nNo syntax or stream encoding errors found; the file may still contain\nerrors that qpdf cannot detect",
+    "truth": "checking /data/coding/scanweave/qualification/evidence/m1d_document/dpi600/truth.pdf\nPDF Version: 1.7\nFile is not encrypted\nFile is not linearized\nNo syntax or stream encoding errors found; the file may still contain\nerrors that qpdf cannot detect",
+    "raster-baseline": "checking /data/coding/scanweave/qualification/evidence/m1d_document/dpi600/raster-baseline.pdf\nPDF Version: 1.7\nFile is not encrypted\nFile is not linearized\nNo syntax or stream encoding errors found; the file may still contain\nerrors that qpdf cannot detect"
+  },
+  "pdfium_text_equal": true,
+  "pdfium_search": {
+    "faithful": true,
+    "clearscan": true
+  },
+  "compression_vs_searchable_raster_baseline_bytes": -29253
+}
