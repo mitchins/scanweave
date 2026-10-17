@@ -126,11 +126,18 @@ def main():
             x0, y0, x1, y1 = map(int, target["bbox"])
             region = (slice(y0, y1), slice(x0, x1))
             pristine = truth_page[region] < 128
+            # Keep direct raster measurements separate from end-to-end PDF
+            # measurements. Comparing raw PIL pixels to a PDF renderer mixed
+            # two sampling pipelines and produced a false fallback anomaly.
+            raw_source_iou = iou(source[region] < 128, truth_raster[region] < 128)
+            pdf_source_iou = iou(baseline_page[region] < 128, pristine)
             glyph = {
-                "source_vs_pristine_iou": iou(source[region] < 128, truth_raster[region] < 128),
-                "faithful_vs_pristine_iou": iou(faithful_page[region] < 128, pristine),
-                "raster_baseline_vs_pristine_iou": iou(baseline_page[region] < 128, pristine),
-                "clearscan_vs_pristine_iou": iou(source_page[region] < 128, pristine),
+                "direct_scan_vs_pristine_raster_iou": raw_source_iou,
+                "A1_raster_pdf_vs_A0_pristine_pdf_iou": pdf_source_iou,
+                "A2_faithful_pdf_vs_A0_pristine_pdf_iou": iou(faithful_page[region] < 128, pristine),
+                "A3_best_donor_pdf_vs_A0_pristine_pdf_iou": iou(source_page[region] < 128, pristine),
+                "A2_faithful_pdf_vs_A1_raster_pdf_iou": iou(faithful_page[region] < 128, baseline_page[region] < 128),
+                "A3_improvement_vs_A1": iou(source_page[region] < 128, pristine) - pdf_source_iou,
             }
             if occ["repaired"]:
                 proto = proto_by_id[occ["prototype_id"]]
@@ -144,10 +151,10 @@ def main():
             donor = np.asarray(Image.open(ROOT / donor_record["image"]).convert("L"))[dy0:dy1, dx0:dx1]
             donor = np.asarray(Image.fromarray(donor).resize((x1-x0, y1-y0), Image.Resampling.LANCZOS))
             glyph["selected_donor_vs_pristine_iou"] = iou(donor < 128, truth_raster[region] < 128)
-            glyph["repaired_error_reduction_vs_source"] = glyph["clearscan_vs_pristine_iou"] - glyph["source_vs_pristine_iou"]
+            glyph["donor_crop_vs_pristine_raster_iou"] = iou(donor < 128, truth_raster[region] < 128)
             glyph["repair_accepted_by_pristine_eval"] = (
-                glyph["clearscan_vs_pristine_iou"] > glyph["source_vs_pristine_iou"]
-                if occ["repaired"] else glyph["clearscan_vs_pristine_iou"] >= glyph["source_vs_pristine_iou"] - 0.01
+                glyph["A3_best_donor_pdf_vs_A0_pristine_pdf_iou"] > pdf_source_iou
+                if occ["repaired"] else glyph["A3_best_donor_pdf_vs_A0_pristine_pdf_iou"] >= pdf_source_iou - 0.01
             )
             glyph["repaired"] = occ["repaired"]
             if occ["repaired"]:
@@ -245,6 +252,14 @@ def main():
                   "vector_ink_coverage": coverage,
                   "reused_occurrences_unsafe_vs_raster": len(unsafe_reuses),
                   "pdf_bytes": {n: (folder / f"{n}.pdf").stat().st_size for n in ("clearscan", "faithful", "truth", "raster-baseline")},
+                  "comparison_arms": {
+                      "A0_pristine_oracle": "truth.pdf",
+                      "A1_degraded_searchable_raster": "raster-baseline.pdf",
+                      "A2_existing_faithful": "faithful.pdf",
+                      "A3_best_donor": "clearscan.pdf",
+                      "A4_evidence_fused": "not implemented; no fusion arm was run",
+                      "A5_calibrated_acceptance": "not implemented; auto falls back to A1 at the unchanged 0.98 policy",
+                  },
                   "font_bytes": (folder / "font.ttf").stat().st_size,
                   "compression_vs_faithful_bytes": (folder / "faithful.pdf").stat().st_size - (folder / "clearscan.pdf").stat().st_size,
                   "fonttools_valid": font_valid, "ots": ots, "qpdf": qpdf,
