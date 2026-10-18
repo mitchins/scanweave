@@ -232,15 +232,74 @@ pub fn convert_document(
     let stage_start = std::time::Instant::now();
     for (page_index, input) in inputs.iter().enumerate() {
         let mut sibling_donors = Vec::new();
-        for (donor_page, donors) in all_donors.iter().enumerate() {
-            if donor_page == page_index {
-                continue;
+        if policy.profile == "canonical-experimental" {
+            // Bound the experimental evidence set before page conversion.
+            // Repeated text-heavy documents can contain thousands of
+            // siblings; a deterministic page-stratified sample caps tracing
+            // work and avoids letting the first pages dominate.
+            let wanted: std::collections::BTreeSet<String> = input
+                .spans
+                .iter()
+                .flat_map(|span| span.text.chars().map(|c| c.to_string()))
+                .collect();
+            let mut by_label: std::collections::BTreeMap<
+                String,
+                std::collections::BTreeMap<usize, Vec<crate::units::Unit>>,
+            > = std::collections::BTreeMap::new();
+            for (donor_page, donors) in all_donors.iter().enumerate() {
+                if donor_page == page_index {
+                    continue;
+                }
+                for donor in donors {
+                    if !wanted.contains(&donor.semantic_text)
+                        || donor.semantic_text.chars().count() != 1
+                    {
+                        continue;
+                    }
+                    by_label
+                        .entry(donor.semantic_text.clone())
+                        .or_default()
+                        .entry(donor_page)
+                        .or_default()
+                        .push(donor.clone());
+                }
             }
-            for donor in donors {
-                let mut donor = donor.clone();
-                donor.symbol_id = format!("{}:{}", inputs[donor_page].page_id, donor.symbol_id);
-                donor.span_id = format!("{}:{}", inputs[donor_page].page_id, donor.span_id);
-                sibling_donors.push(donor);
+            // Round-robin across source pages, not the first N occurrences
+            // from the earliest pages.
+            for (_label, page_donors) in by_label {
+                let mut offsets: std::collections::BTreeMap<usize, usize> = page_donors
+                    .keys()
+                    .map(|&page| (page, 0))
+                    .collect();
+                for _ in 0..32 {
+                    let mut any = false;
+                    for (&donor_page, donors) in &page_donors {
+                        let offset = offsets.get_mut(&donor_page).unwrap();
+                        let Some(source) = donors.get(*offset) else { continue };
+                        *offset += 1;
+                        any = true;
+                        let mut donor = source.clone();
+                        donor.symbol_id = format!("{}:{}", inputs[donor_page].page_id, donor.symbol_id);
+                        donor.span_id = format!("{}:{}", inputs[donor_page].page_id, donor.span_id);
+                        sibling_donors.push(donor);
+                    }
+                    if !any {
+                        break;
+                    }
+                }
+            }
+        } else {
+            // Keep the existing faithful/ClearScan donor behaviour unchanged.
+            for (donor_page, donors) in all_donors.iter().enumerate() {
+                if donor_page == page_index {
+                    continue;
+                }
+                for donor in donors {
+                    let mut donor = donor.clone();
+                    donor.symbol_id = format!("{}:{}", inputs[donor_page].page_id, donor.symbol_id);
+                    donor.span_id = format!("{}:{}", inputs[donor_page].page_id, donor.span_id);
+                    sibling_donors.push(donor);
+                }
             }
         }
         let (parts, report) =
@@ -347,7 +406,8 @@ pub fn convert_document(
             .fidelity
             .preservation_ink_iou_min
             .is_none_or(|m| m >= policy.min_ink_iou)
-            && (policy.profile != "clearscan" || p.report.reconstruction.restoration_qualified)
+            && (!matches!(policy.profile.as_str(), "clearscan" | "canonical-experimental")
+                || p.report.reconstruction.restoration_qualified)
     });
     let baseline_ok = true;
     let selected: String = if policy.mode == "auto" {
@@ -366,7 +426,8 @@ pub fn convert_document(
             policy.min_ink_iou,
             pages.iter().filter(|p| {
                 p.report.fidelity.preservation_ink_iou_min.is_some_and(|m| m < policy.min_ink_iou)
-                    || (policy.profile == "clearscan" && !p.report.reconstruction.restoration_qualified)
+                    || (matches!(policy.profile.as_str(), "clearscan" | "canonical-experimental")
+                        && !p.report.reconstruction.restoration_qualified)
             }).count()
         ));
     } else {

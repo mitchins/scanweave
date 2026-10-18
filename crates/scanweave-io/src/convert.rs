@@ -591,7 +591,8 @@ pub fn convert(input: &Input, policy: &Policy) -> Result<Output, String> {
         .preservation_ink_iou_min
         .is_none_or(|m| m >= policy.min_ink_iou);
     let restoration_ok =
-        policy.profile != "clearscan" || report.reconstruction.restoration_qualified;
+        !matches!(policy.profile.as_str(), "clearscan" | "canonical-experimental")
+            || report.reconstruction.restoration_qualified;
     let recon_fidelity_ok = preservation_ok && restoration_ok;
     let selected = if policy.mode == "auto" {
         if recon_fidelity_ok && pdf_bytes.len() <= b0.len() {
@@ -870,7 +871,9 @@ pub(crate) fn convert_parts_with_document_donors(
         // document-supported prototype is reusable only when the traced
         // outline still reproduces this occurrence at 0.98; damaged glyphs
         // use their separate donor-supported restoration gate.
-        let source_gate_failed = occurrence.reused && source_iou.is_none_or(|iou| iou < 0.98);
+        let source_gate_failed = policy.profile != "canonical-experimental"
+            && occurrence.reused
+            && source_iou.is_none_or(|iou| iou < 0.98);
         if traced_iou.is_none_or(|iou| iou < 0.90) || source_gate_failed {
             occurrence.repaired = false;
             occurrence.reused = false;
@@ -890,7 +893,9 @@ pub(crate) fn convert_parts_with_document_donors(
         .all(|o| {
             o.restoration_evidence_passed
                 && o.prototype_trace_iou.is_some_and(|v| v >= 0.90)
-                && (!o.reused || o.source_mask_iou.is_some_and(|v| v >= 0.98))
+                && (policy.profile == "canonical-experimental"
+                    || !o.reused
+                    || o.source_mask_iou.is_some_and(|v| v >= 0.98))
         });
     if !missing.is_empty() {
         for r in regions.iter_mut() {
@@ -1095,13 +1100,35 @@ pub(crate) fn convert_parts_with_document_donors(
     }
     // unrecognized/artwork ink is also restored as source raster pixels (VS-05:
     // preserve or invent nothing). Bucketed on a 32px grid to bound object count.
-    patches.extend(artwork_patches(input, &plan));
+    let vector_owned_symbols: std::collections::BTreeSet<String> =
+        if policy.profile == "canonical-experimental" {
+            regions
+                .iter()
+                .filter(|r| matches!(r.disposition, RegionDisposition::Vector))
+                .flat_map(|r| r.units.iter().map(|&ui| plan.owned[ui].unit.symbol_id.clone()))
+                .filter(|sid| {
+                    reconstruction.repaired_symbols.contains(sid)
+                        || reconstruction.reused_symbols.contains(sid)
+                })
+                .collect()
+        } else {
+            std::collections::BTreeSet::new()
+        };
+    patches.extend(artwork_patches(input, &plan, &vector_owned_symbols, seg.paper));
 
     // coalesce: merge overlapping or exactly-adjacent patches (the artwork
     // buckets tile the page, so this collapses hundreds of 32x32 cells into a
     // few large rects). Merged patches copy the full source rect of the union,
     // so every emitted pixel stays byte-identical to the source.
-    let patches = coalesce_patches(input, patches);
+    // Coalescing rebuilds merged images from the unmodified source raster. Keep
+    // per-patch ownership when a vector replacement owns any source ink.
+    let patches = if policy.profile == "canonical-experimental" {
+        vec![residual_page_patch(input, &plan, &vector_owned_symbols)]
+    } else if vector_owned_symbols.is_empty() {
+        coalesce_patches(input, patches)
+    } else {
+        patches
+    };
     let raster_bytes: usize = patches.iter().map(|p| p.rgb.len()).sum();
 
     // invisible owners: exactly one per span that is NOT painted by a vector
@@ -1487,7 +1514,69 @@ fn patch_from_source(input: &Input, bb: [f64; 4]) -> Patch {
     }
 }
 
-fn artwork_patches(input: &Input, plan: &OwnershipPlan) -> Vec<Patch> {
+/// Full-resolution residual image for the canonical profile. The captured page
+/// remains the ownership source for paper, artwork, uncertain content and all
+/// fallback glyphs. Only binary ink pixels of occurrences whose vectors were
+/// accepted and emitted are replaced with a local ring median.
+fn residual_page_patch(
+    input: &Input,
+    plan: &OwnershipPlan,
+    vector_owned_symbols: &std::collections::BTreeSet<String>,
+) -> Patch {
+    let mut rgb = input.rgb.clone();
+    let w = input.width as usize;
+    let h = input.height as usize;
+    const RING: &[(isize, isize)] = &[
+        (-4, 0), (-3, -2), (0, -4), (3, -2), (4, 0), (3, 2), (0, 4), (-3, 2),
+    ];
+    for owned in &plan.owned {
+        if !vector_owned_symbols.contains(&owned.unit.symbol_id) {
+            continue;
+        }
+        for (i, ink) in owned.unit.mask.iter().enumerate() {
+            if !*ink {
+                continue;
+            }
+            let gx = owned.unit.bbox_px[0] as isize + (i % owned.unit.crop_w) as isize;
+            let gy = owned.unit.bbox_px[1] as isize + (i / owned.unit.crop_w) as isize;
+            if gx < 0 || gy < 0 || gx >= w as isize || gy >= h as isize {
+                continue;
+            }
+            let mut values: [Vec<u8>; 3] = std::array::from_fn(|_| Vec::with_capacity(RING.len()));
+            for &(dx, dy) in RING {
+                let x = gx + dx;
+                let y = gy + dy;
+                if x < 0 || y < 0 || x >= w as isize || y >= h as isize {
+                    continue;
+                }
+                let at = (y as usize * w + x as usize) * 3;
+                for c in 0..3 {
+                    values[c].push(input.rgb[at + c]);
+                }
+            }
+            let dst = (gy as usize * w + gx as usize) * 3;
+            for c in 0..3 {
+                values[c].sort_unstable();
+                if !values[c].is_empty() {
+                    rgb[dst + c] = values[c][values[c].len() / 2];
+                }
+            }
+        }
+    }
+    Patch {
+        bbox_px: [0.0, 0.0, input.width as f64, input.height as f64],
+        rgb,
+        w: input.width,
+        h: input.height,
+    }
+}
+
+fn artwork_patches(
+    input: &Input,
+    plan: &OwnershipPlan,
+    vector_owned_symbols: &std::collections::BTreeSet<String>,
+    paper: [u8; 3],
+) -> Vec<Patch> {
     const CELL: usize = 32;
     let mut cells: std::collections::BTreeMap<(usize, usize), Vec<(usize, usize)>> =
         std::collections::BTreeMap::new();
@@ -1513,12 +1602,31 @@ fn artwork_patches(input: &Input, plan: &OwnershipPlan) -> Vec<Patch> {
         if bw == 0 || bh == 0 {
             continue;
         }
-        // copy the full source bucket (paper + marks): no invented background
+        // Copy the full source bucket, except exact thresholded ink owned by a
+        // glyph that is actually emitted as vector. Those samples are replaced
+        // with the measured page paper color; antialias fringe stays raster.
         let mut rgb = vec![0u8; bw * bh * 3];
         for gy in by..by + bh {
             let si = gy * w + bx;
             let di = (gy - by) * bw;
             rgb[di * 3..di * 3 + bw * 3].copy_from_slice(&input.rgb[si * 3..si * 3 + bw * 3]);
+        }
+        for owned in &plan.owned {
+            if !vector_owned_symbols.contains(&owned.unit.symbol_id) {
+                continue;
+            }
+            for (i, ink) in owned.unit.mask.iter().enumerate() {
+                if !*ink {
+                    continue;
+                }
+                let gx = owned.unit.bbox_px[0] as usize + i % owned.unit.crop_w;
+                let gy = owned.unit.bbox_px[1] as usize + i / owned.unit.crop_w;
+                if gx < bx || gy < by || gx >= bx + bw || gy >= by + bh {
+                    continue;
+                }
+                let at = ((gy - by) * bw + gx - bx) * 3;
+                rgb[at..at + 3].copy_from_slice(&paper);
+            }
         }
         let _ = pixels;
         patches.push(Patch {

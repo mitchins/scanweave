@@ -207,16 +207,7 @@ pub fn extract_units(seg: &Segmentation, w: u32, h: u32, page: &OcrPage) -> (Vec
                 for (x, y) in mask_pixels.iter() {
                     mask[(y - y0) * cw + (x - x0)] = true;
                 }
-                // shape key: hash of the normalized mask bits
-                let packed: Vec<u8> = mask
-                    .chunks(8)
-                    .map(|c| {
-                        c.iter()
-                            .enumerate()
-                            .fold(0u8, |acc, (i, b)| acc | ((*b as u8) << i))
-                    })
-                    .collect();
-                let shape_key = scanweave_core::hash_hex(&packed);
+                let shape_key = mask_identity_key(&mask, cw, ch);
                 // semantic ownership: own text-range text plus absorbed touching-
                 // character texts, ordered by the OCR slot index (reading sequence).
                 // Polygon x0 must NOT be used: hOCR boxes overlap horizontally
@@ -286,4 +277,30 @@ pub fn extract_units(seg: &Segmentation, w: u32, h: u32, page: &OcrPage) -> (Vec
     units.extend(artwork_units);
 
     (units, unowned_count)
+}
+
+/// Exact binary mask identity: dimensions are part of the geometry, not
+/// recoverable from the packed row-major bit stream.
+fn mask_identity_key(mask: &[bool], width: usize, height: usize) -> String {
+    let mut packed: Vec<u8> = Vec::with_capacity(8 + (mask.len() + 7) / 8);
+    packed.extend_from_slice(&(width as u32).to_le_bytes());
+    packed.extend_from_slice(&(height as u32).to_le_bytes());
+    packed.extend(mask.chunks(8).map(|c| {
+        c.iter()
+            .enumerate()
+            .fold(0u8, |acc, (i, b)| acc | ((*b as u8) << i))
+    }));
+    scanweave_core::hash_hex(&packed)
+}
+
+#[cfg(test)]
+mod identity_tests {
+    use super::mask_identity_key;
+
+    #[test]
+    fn exact_mask_identity_includes_shape_dimensions() {
+        let bits = [true, false, false, true, false, false, true, false];
+        assert_ne!(mask_identity_key(&bits, 2, 4), mask_identity_key(&bits, 4, 2));
+        assert_eq!(mask_identity_key(&bits, 2, 4), mask_identity_key(&bits, 2, 4));
+    }
 }

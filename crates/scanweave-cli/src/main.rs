@@ -136,9 +136,9 @@ fn build_bundle(args: &[String]) -> Result<(), String> {
 
     let min_ink_iou = arg_f64(args, "--min-ink-iou", 0.98)?;
     let profile = arg_value(args, "--profile").unwrap_or_else(|| "faithful".into());
-    if profile != "faithful" && profile != "clearscan" {
+    if profile != "faithful" && profile != "clearscan" && profile != "canonical-experimental" {
         return Err(format!(
-            "unsupported --profile {profile} (M1-D: faithful | clearscan)"
+            "unsupported --profile {profile} (faithful | clearscan | canonical-experimental)"
         ));
     }
     let glyph_dictionary = arg_value(args, "--glyph-dictionary").unwrap_or_else(|| {

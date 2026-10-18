@@ -335,7 +335,7 @@ pub fn reconstruct(
     use std::collections::BTreeMap;
     let mut out = Reconstruction::default();
     let n = plan.owned.len();
-    if n == 0 || policy.profile != "clearscan" || policy.glyph_dictionary != "visual" {
+    if n == 0 || !matches!(policy.profile.as_str(), "clearscan" | "canonical-experimental") || policy.glyph_dictionary != "visual" {
         return out;
     }
     let evidence: Vec<ShapeEvidence> = plan
@@ -464,6 +464,16 @@ pub fn reconstruct(
                 representative = candidate;
             }
         }
+        if policy.profile == "canonical-experimental" {
+            // Among the robust central witnesses, prefer the impression with
+            // the most supported foreground. This is a bounded best-donor
+            // policy, not pixel union: every selected contour still comes
+            // from one observed impression.
+            representative = *canonical
+                .iter()
+                .max_by_key(|&&i| plan.owned[i].unit.mask.iter().filter(|b| **b).count())
+                .unwrap_or(&representative);
+        }
         unique_cohorts.insert(canonical, representative);
     }
     let cohorts: BTreeMap<usize, Vec<usize>> = unique_cohorts
@@ -507,15 +517,22 @@ pub fn reconstruct(
                 .iter()
                 .map(|&m| evidence[m].density)
                 .fold(f64::INFINITY, f64::min);
-            // Intact antialiasing variants remain their own observations. A
-            // repair is considered only when the target has measurable missing
-            // ink relative to the donor cohort.
-            if evidence[i].density >= min_donor_density - 0.01 {
+            // The experimental profile canonicalizes healthy impressions as
+            // well as damaged ones. The established ClearScan profile keeps
+            // its donor-only behavior until independently qualified.
+            if policy.profile != "canonical-experimental"
+                && evidence[i].density >= min_donor_density - 0.01
+            {
                 continue;
             }
             let score = normalized_iou(u, &plan.owned[rep].unit);
+            let score_ok = if policy.profile == "canonical-experimental" {
+                score >= 0.78
+            } else {
+                (0.62..0.94).contains(&score)
+            };
             if members.len() >= 3
-                && (0.62..0.94).contains(&score)
+                && score_ok
                 && best.map(|(_, b)| score > b).unwrap_or(true)
             {
                 best = Some((rep, score));
@@ -536,14 +553,23 @@ pub fn reconstruct(
             decision: "no_supported_donor".into(),
         };
         if let Some((rep, score)) = best {
+            let min_donor_density = cohorts
+                .get(&rep)
+                .into_iter()
+                .flatten()
+                .map(|&m| evidence[m].density)
+                .fold(f64::INFINITY, f64::min);
             let mut donor = plan.owned[rep].unit.clone();
             let donor_key = donor.shape_key.clone();
             if !donor.symbol_id.starts_with("__doc_donor:") {
                 let _threshold = refine_observed_mask(&mut donor, rgb, page_w, page_h);
             }
             let sid = u.symbol_id.clone();
-            record.restoration_evidence_passed =
-                restoration_gate(score, cohorts.get(&rep).map(Vec::len).unwrap_or(0));
+            record.restoration_evidence_passed = if policy.profile == "canonical-experimental" {
+                cohorts.get(&rep).is_some_and(|members| members.len() >= 3) && score >= 0.78
+            } else {
+                restoration_gate(score, cohorts.get(&rep).map(Vec::len).unwrap_or(0))
+            };
             record.similarity = Some(score);
             if record.restoration_evidence_passed {
                 record.replacement_bbox_px = Some(infer_replacement_bbox(
@@ -553,10 +579,21 @@ pub fn reconstruct(
                 ));
                 plan.owned[i].unit.shape_key = donor_key.clone();
                 out.prototype_units.insert(donor_key.clone(), donor);
-                out.repaired_symbols.insert(sid);
                 record.prototype_id = Some(format!("prototype:{donor_key}"));
-                record.repaired = true;
-                record.decision = "repaired_from_document_donors".into();
+                let source_is_damaged = evidence[i].density < min_donor_density - 0.01;
+                if source_is_damaged {
+                    out.repaired_symbols.insert(sid);
+                    record.repaired = true;
+                    record.decision = if policy.profile == "canonical-experimental" {
+                        "canonical_repair_from_document_witnesses".into()
+                    } else {
+                        "repaired_from_document_donors".into()
+                    };
+                } else {
+                    out.reused_symbols.insert(sid);
+                    record.reused = true;
+                    record.decision = "canonical_reuse_of_document_outline".into();
+                }
             } else {
                 record.decision = "rejected_restoration_gate".into();
                 out.rejected_symbols.insert(u.symbol_id.clone());
