@@ -292,6 +292,7 @@ fn emit_text_runs(
     xf: &PageTransform,
     ink: [u8; 3],
     raster_baseline: bool,
+    uniform_glyph_scale: bool,
 ) {
     let span_map: std::collections::HashMap<&str, &str> = span_texts
         .iter()
@@ -360,8 +361,18 @@ fn emit_text_runs(
                     let top_pt = xf.y(bbox_px[1]);
                     let w_pt = (bbox_px[2] * xf.sx()) as f32 - x0;
                     let h_pt = top_pt - bottom_pt;
-                    let sx = w_pt * 2048.0 / g.ink_span_fu[0].max(1.0) as f32;
-                    let sy = h_pt * 2048.0 / g.ink_span_fu[1].max(1.0) as f32;
+                    let (sx, sy, x0) = if uniform_glyph_scale {
+                        let scale = (w_pt * 2048.0 / g.ink_span_fu[0].max(1.0) as f32)
+                            .min(h_pt * 2048.0 / g.ink_span_fu[1].max(1.0) as f32);
+                        let fitted_width = g.ink_span_fu[0] as f32 * scale / 2048.0;
+                        (scale, scale, x0 + (w_pt - fitted_width) * 0.5)
+                    } else {
+                        (
+                            w_pt * 2048.0 / g.ink_span_fu[0].max(1.0) as f32,
+                            h_pt * 2048.0 / g.ink_span_fu[1].max(1.0) as f32,
+                            x0,
+                        )
+                    };
                     let tx = x0 - (g.anchor_bbox_fu[0] as f32) * sx / 2048.0;
                     let ty = bottom_pt - (g.anchor_bbox_fu[1] as f32) * sy / 2048.0;
                     c.set_text_matrix([sx, 0.0, 0.0, sy, tx, ty]);
@@ -415,8 +426,18 @@ fn emit_text_runs(
             let top_pt = xf.y(bbox_px[1]);
             let w_pt = (bbox_px[2] * xf.sx()) as f32 - x0;
             let h_pt = top_pt - bottom_pt;
-            let sx = w_pt * 2048.0 / g.ink_span_fu[0].max(1.0) as f32;
-            let sy = h_pt * 2048.0 / g.ink_span_fu[1].max(1.0) as f32;
+            let (sx, sy, x0) = if uniform_glyph_scale {
+                let scale = (w_pt * 2048.0 / g.ink_span_fu[0].max(1.0) as f32)
+                    .min(h_pt * 2048.0 / g.ink_span_fu[1].max(1.0) as f32);
+                let fitted_width = g.ink_span_fu[0] as f32 * scale / 2048.0;
+                (scale, scale, x0 + (w_pt - fitted_width) * 0.5)
+            } else {
+                (
+                    w_pt * 2048.0 / g.ink_span_fu[0].max(1.0) as f32,
+                    h_pt * 2048.0 / g.ink_span_fu[1].max(1.0) as f32,
+                    x0,
+                )
+            };
             let tx = x0 - (g.anchor_bbox_fu[0] as f32) * sx / 2048.0;
             let ty = bottom_pt - (g.anchor_bbox_fu[1] as f32) * sy / 2048.0;
             c.set_text_matrix([sx, 0.0, 0.0, sy, tx, ty]);
@@ -720,6 +741,7 @@ pub fn assemble_with_options(
         to_pt,
         ink,
         false,
+        false,
     );
 
     c.end_text();
@@ -812,6 +834,7 @@ pub struct PageParts {
     /// raster-baseline candidate: the text layer is drawn INVISIBLY over the
     /// whole-page source patch (searchable text, source pixels, no vector ink)
     pub raster_baseline: bool,
+    pub uniform_glyph_scale: bool,
     pub source_w: usize,
     pub source_h: usize,
     pub shapes: Vec<GlyphShape>,
@@ -1055,6 +1078,7 @@ pub fn assemble_document_with_options(
             &p.to_pt,
             p.ink,
             p.raster_baseline,
+            p.uniform_glyph_scale,
         );
         let content_bytes = c.finish();
         stats.content_bytes += content_bytes.len();
@@ -1107,6 +1131,7 @@ mod image_resource_tests {
         PageParts {
             source_rgb: vec![255; 3],
             raster_baseline: false,
+            uniform_glyph_scale: false,
             source_w: 1,
             source_h: 1,
             shapes: vec![],

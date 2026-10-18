@@ -25,6 +25,8 @@ pub struct Policy {
     pub contact_margin_px: f64,
     /// Product profile: `faithful` (default) or `clearscan`.
     pub profile: String,
+    /// Experimental placement ablation: preserve canonical outline aspect ratio.
+    pub gx_uniform_glyph_scale: bool,
     /// Visual glyph dictionary mode: `off` (default) or `visual`.
     pub glyph_dictionary: String,
     /// Lossless PDF image serialization controls; default is exact reuse plus
@@ -42,6 +44,7 @@ impl Default for Policy {
             min_ink_iou: 0.98,
             contact_margin_px: 4.0,
             profile: "faithful".into(),
+            gx_uniform_glyph_scale: false,
             glyph_dictionary: "off".into(),
             image_encoding: ImageEncodingOptions::default(),
         }
@@ -1352,6 +1355,7 @@ pub(crate) fn convert_parts_with_document_donors(
 
     let parts = crate::page_pdf::PageParts {
         raster_baseline: false,
+        uniform_glyph_scale: policy.gx_uniform_glyph_scale,
         page_w_pt,
         page_h_pt,
         to_pt,
@@ -1654,6 +1658,7 @@ pub fn baseline_one_page(
     let patch = whole_page_patch(parts, parts.source_w, parts.source_h)?;
     let baseline = crate::page_pdf::PageParts {
         raster_baseline: true,
+        uniform_glyph_scale: false,
         patches: vec![patch],
         ..parts.clone()
     };

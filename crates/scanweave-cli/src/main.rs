@@ -5,9 +5,11 @@ use std::process::ExitCode;
 fn usage() -> ! {
     eprintln!(
         "scanweave build <input.png> --ocr <input.hocr> [--dpi N] [--mode reconstruct|auto] \
-         [--min-ink-iou F] [--profile faithful|clearscan]
-         [--glyph-dictionary off|visual] --output <out.pdf> --report <out.json>\n\
+         [--min-ink-iou F] [--profile faithful|clearscan|canonical-experimental]
+         [--glyph-dictionary off|visual] [--gx-uniform-glyph-scale]
+         --output <out.pdf> --report <out.json>\n\
          scanweave build --bundle <document.json> [--mode reconstruct|auto] [--min-ink-iou F] \
+         [--glyph-dictionary off|visual] [--gx-uniform-glyph-scale] \
          --output <out.pdf> --report <out.json>"
     );
     std::process::exit(2);
@@ -154,11 +156,16 @@ fn build_bundle(args: &[String]) -> Result<(), String> {
         ));
     }
     let image_encoding = image_encoding(args)?;
+    let gx_uniform_glyph_scale = args.iter().any(|a| a == "--gx-uniform-glyph-scale");
+    if gx_uniform_glyph_scale && profile != "canonical-experimental" {
+        return Err("--gx-uniform-glyph-scale requires --profile canonical-experimental".into());
+    }
     let policy = scanweave_io::convert::Policy {
         mode,
         dpi,
         min_ink_iou,
         profile,
+        gx_uniform_glyph_scale,
         glyph_dictionary,
         image_encoding,
         ..scanweave_io::convert::Policy::default()
@@ -292,11 +299,16 @@ fn build(args: &[String]) -> Result<(), String> {
         }
     });
     let image_encoding = image_encoding(args)?;
+    let gx_uniform_glyph_scale = args.iter().any(|a| a == "--gx-uniform-glyph-scale");
+    if gx_uniform_glyph_scale && profile != "canonical-experimental" {
+        return Err("--gx-uniform-glyph-scale requires --profile canonical-experimental".into());
+    }
     let policy = scanweave_io::convert::Policy {
         mode,
         dpi,
         min_ink_iou,
         profile,
+        gx_uniform_glyph_scale,
         glyph_dictionary,
         image_encoding,
         ..scanweave_io::convert::Policy::default()

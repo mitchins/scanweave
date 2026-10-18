@@ -1,0 +1,1099 @@
+{
+  "schema": "scanweave-m1gx-run-manifest-v2",
+  "starting_head": "02a67e8779889336a76bf04cbe4724c695d6511a",
+  "head_at_manifest": "02a67e8779889336a76bf04cbe4724c695d6511a",
+  "working_tree": {
+    "rust_diff_against_starting_head_sha256": "c44fdf63011d653badeedfa6fdf0db9c3417e877dc7f85dd33eeda2d7c43a03e",
+    "note": "GX modifies three Rust files; unrelated pre-existing untracked M1-F/M1-G/Adobe research remains uncommitted and unmodified. Pages 08\u201311 exist as untracked fixture extras but are not referenced by the frozen 8-page document.json and were not consumed."
+  },
+  "fixture": {
+    "bundle": "qualification/experiments/m1g/fixture/dpi300/input/document.json",
+    "bundle_sha256": "f40c21503b98804ca0c8584dec4a9b39a3e382f1ece6013b88fce305adce8b33",
+    "dpi": 300,
+    "pages": 8,
+    "page_pixels": [
+      1800,
+      900
+    ],
+    "page_points": [
+      432,
+      216
+    ],
+    "used_inputs": [
+      {
+        "page_id": "p00",
+        "image": "qualification/experiments/m1g/fixture/dpi300/input/page00.png",
+        "image_sha256": "b7d47625d1dd0cc006efb64ea371728faddd8ecf98a0c72fd1f49759c0d455d5",
+        "ocr": "qualification/experiments/m1g/fixture/dpi300/input/page00.ocr.json",
+        "ocr_sha256": "7bb5f4f3502fe99e47fe2eaa60cccc2424eacf972736f1ad9a142186bf9e9b19"
+      },
+      {
+        "page_id": "p01",
+        "image": "qualification/experiments/m1g/fixture/dpi300/input/page01.png",
+        "image_sha256": "8257b009d774caedfe0408222c5640c1d3476f84078b9f657cd360d46f6f44fa",
+        "ocr": "qualification/experiments/m1g/fixture/dpi300/input/page01.ocr.json",
+        "ocr_sha256": "2ad85f7d8447358f23717b7d40970fd01b4e73f3b757d0ed6ecd17d63efeaba9"
+      },
+      {
+        "page_id": "p02",
+        "image": "qualification/experiments/m1g/fixture/dpi300/input/page02.png",
+        "image_sha256": "034a03f22465fa69d0aa3d1cc4c0355d527dc27812efdea7780c3d97e341b819",
+        "ocr": "qualification/experiments/m1g/fixture/dpi300/input/page02.ocr.json",
+        "ocr_sha256": "2b54338ed5b796f72a69eaf4463cdaa24b541997b83e85fa3f6ebc14f6c0de0f"
+      },
+      {
+        "page_id": "p03",
+        "image": "qualification/experiments/m1g/fixture/dpi300/input/page03.png",
+        "image_sha256": "fc48a06bf6b951218f7501cad540b48fe71912ac9aceecdfc4642774f40c2e4f",
+        "ocr": "qualification/experiments/m1g/fixture/dpi300/input/page03.ocr.json",
+        "ocr_sha256": "0076667e87eba707d21b19f6cef61ec2cb820f5859548202512f95f3840946ec"
+      },
+      {
+        "page_id": "p04",
+        "image": "qualification/experiments/m1g/fixture/dpi300/input/page04.png",
+        "image_sha256": "d0a3549ecc7b6602e666f0a88d49804815dedc50945e9c06f3c0ca8b3d21df00",
+        "ocr": "qualification/experiments/m1g/fixture/dpi300/input/page04.ocr.json",
+        "ocr_sha256": "d6ba8944e4a27e534ce3bf7d203a4b71b9f8cacc610a768b65207510d2f22747"
+      },
+      {
+        "page_id": "p05",
+        "image": "qualification/experiments/m1g/fixture/dpi300/input/page05.png",
+        "image_sha256": "0018c47b9394d14b9ecb1624ca3a5f0bb50cd2c6863353e48c4785a7ae526a49",
+        "ocr": "qualification/experiments/m1g/fixture/dpi300/input/page05.ocr.json",
+        "ocr_sha256": "699563012de3cb3e517ef86221e8c17c01b9f84603118bc984ed88af48705c26"
+      },
+      {
+        "page_id": "p06",
+        "image": "qualification/experiments/m1g/fixture/dpi300/input/page06.png",
+        "image_sha256": "aa84c14269467d4ac46166358ff2e0db83a6662fdfd6b636a5f338c8ddbe6168",
+        "ocr": "qualification/experiments/m1g/fixture/dpi300/input/page06.ocr.json",
+        "ocr_sha256": "45acccf1d531dfff8ab46801f1270e2a90bdd0312d62a86c82e519965f36ea24"
+      },
+      {
+        "page_id": "p07",
+        "image": "qualification/experiments/m1g/fixture/dpi300/input/page07.png",
+        "image_sha256": "16cdc1e703894f74cfaa94a286c57e8d2884a2d7c0c3a197c71b741259892aa5",
+        "ocr": "qualification/experiments/m1g/fixture/dpi300/input/page07.ocr.json",
+        "ocr_sha256": "003c07d46af01b3d209726da54a9f0b6a9d938be7860a749511edb8bec61b8d5"
+      }
+    ],
+    "oracle_truth": [
+      {
+        "path": "qualification/experiments/m1g/fixture/dpi300/oracle/page00.truth.json",
+        "sha256": "3e1683c3a7bf8fdbc93dfbfa3921ff9d116b964de1377c9c8cb91d186443bada"
+      },
+      {
+        "path": "qualification/experiments/m1g/fixture/dpi300/oracle/page01.truth.json",
+        "sha256": "8835dad368e467a8f324cb5b779c294343a6adfe01781e0cd24d4e72f6eb18ea"
+      },
+      {
+        "path": "qualification/experiments/m1g/fixture/dpi300/oracle/page02.truth.json",
+        "sha256": "475a6d47125587c9fbe70ad31de8299cf24eb3e7579389b49b0a255a8dc5b973"
+      },
+      {
+        "path": "qualification/experiments/m1g/fixture/dpi300/oracle/page03.truth.json",
+        "sha256": "3fd8865208de44309b67b05c7a307632f368eb4dabc6eb514263eeb686aac4e7"
+      },
+      {
+        "path": "qualification/experiments/m1g/fixture/dpi300/oracle/page04.truth.json",
+        "sha256": "811c663235038f88ae87161f514488a5fcbb888db532d9045daad2ef47a00901"
+      },
+      {
+        "path": "qualification/experiments/m1g/fixture/dpi300/oracle/page05.truth.json",
+        "sha256": "cf2d75b072ebef5b21a80b88d312c5a33ebfac6bca8fc29ed020b579047c7540"
+      },
+      {
+        "path": "qualification/experiments/m1g/fixture/dpi300/oracle/page06.truth.json",
+        "sha256": "c62eeec6de9ab046242936eedde67b59955544c531594448f3283b153956d9c9"
+      },
+      {
+        "path": "qualification/experiments/m1g/fixture/dpi300/oracle/page07.truth.json",
+        "sha256": "f3a2f833ee66b207776c8b6f24946df6a213c5308003f18649588a7ebe93c817"
+      }
+    ]
+  },
+  "arms": [
+    {
+      "file": "C0-source-under-vector.pdf",
+      "bytes": 4268441,
+      "sha256": "95166b6bd528c4f268bac5517c49e98c3c759feb2805071e2888bd049b777cb1"
+    },
+    {
+      "file": "C2-inferred-clean-background.pdf",
+      "bytes": 4227048,
+      "sha256": "9598ea4d656b16222d6ca2318c1e371797fa251d6f302db0a8dc82dbc69d4054"
+    },
+    {
+      "file": "O0-DeviceRGB-searchable.pdf",
+      "bytes": 6025721,
+      "sha256": "cb3c8a00728d401e1479f74cbc21f03307a3640864efad33c6a4772bbafed70a"
+    },
+    {
+      "file": "O0-source-searchable.pdf",
+      "bytes": 4184430,
+      "sha256": "2f59487c0c0a268bbdc1c058728d94717a1f14663844ce3df410810661b81498"
+    },
+    {
+      "file": "O1-oracle-outline-placement.pdf",
+      "bytes": 744566,
+      "sha256": "54651d53e4ccc15c800668fbaa7d2f706c488f5baf4c7fb8834d957def95e787"
+    },
+    {
+      "file": "O2-reconstructed-oracle-placement.pdf",
+      "bytes": 4112447,
+      "sha256": "4ee5de85f4e7a391defa97fe9dc9b04d23de1363814aa5c6721fbecba8f87538"
+    },
+    {
+      "file": "O3-oracle-identity-current-placement.pdf",
+      "bytes": 4112442,
+      "sha256": "f6ce1e24efff237a804cc5212340734ca21693c1bf7b38d907ddcad460ceb502"
+    },
+    {
+      "file": "O3-reconstructed-current-placement.pdf",
+      "bytes": 4149681,
+      "sha256": "8dd324111264a67b692f58e9db9f516b16ddf8c33d79e193e1a77175ee82badb"
+    },
+    {
+      "file": "O3-uniform-placement.pdf",
+      "bytes": 4149674,
+      "sha256": "e32a09fab0266d2989b5a7ffe4ab8b4d9230679a880f9a400a480a72a8112bde"
+    },
+    {
+      "file": "O4-current-m1g.pdf",
+      "bytes": 4184507,
+      "sha256": "9da8be9d2b147ea111d791efc9fb6b569e87c63288ece55643be8387d88b6e3d"
+    },
+    {
+      "file": "canonical-uniform-300.pdf",
+      "bytes": 4184811,
+      "sha256": "0764341568d07353d22f2a6231f3449b6c8e8e90736f5787885bc0a25346801d"
+    }
+  ],
+  "experiment_scripts_sha256": {
+    "trial.py": "83007083f2cf07928b319d3103a435f234272431580fbe86a3b14a1f2a794af2",
+    "measure.py": "6baf5671a9cfa056854a955ac719bb2412b01465c566ba947466f41498ab8402",
+    "actual_placement_check.py": "1f22f58a09566410049b4aff956b60740b52b09266ab81b22b64781304cb73e3",
+    "background_audit.py": "2bfcffc7f114c4468989ceaad785486cc8eaf10caf9d2bddd7927112129d9911",
+    "high_zoom_render.py": "1c99c08c5457d552878ddd71ef612ef5a9bdb91c68d87cbe8629d6f9ace15981",
+    "placement_audit.py": "77020bb7f7724e54946f0f924fa554752f989ea8249d70a0038513255e87bb7c",
+    "renderer_color_control.py": "6bdc8be86edd611b873bb883043b99aa3bbce55d378e7f47358c1f94080998d7",
+    "validate_pdfs.py": "f837a607617a2e3925444e04b693badf6cd8e1c8cc18046784e3db4cc407c1a4"
+  },
+  "commands": {
+    "arms": "qualification/.venv/bin/python qualification/experiments/m1gx/trial.py",
+    "metrics": "GX_RENDER_SET=final3 qualification/.venv/bin/python qualification/experiments/m1gx/measure.py",
+    "converter": "target/debug/scanweave-cli build --bundle qualification/experiments/m1g/fixture/dpi300/input/document.json --mode reconstruct --profile canonical-experimental --glyph-dictionary visual --gx-uniform-glyph-scale --output qualification/experiments/m1gx/300/canonical-uniform-300.pdf --report qualification/experiments/m1gx/300/canonical-uniform-300-report.json"
+  },
+  "measurement": {
+    "poppler": "pdftoppm -r 300; all ten arms freshly rendered into renders-final3",
+    "pdfium": "pypdfium2 5.14.0 (bundled library version not queried); all ten arms freshly rendered at 300/72 scale; 1801x901 result cropped at top-left to 1800x900 without resampling",
+    "crop_metric": "fixed source-truth glyph boxes, threshold 170 plus sweep at 64,96,128,160,192,224",
+    "renderer_output_hashes": [
+      {
+        "pdf": "C0-source-under-vector.pdf",
+        "pdf_sha256": "95166b6bd528c4f268bac5517c49e98c3c759feb2805071e2888bd049b777cb1",
+        "poppler": [
+          {
+            "page": 1,
+            "path": "qualification/experiments/m1gx/300/renders-final3/C0-source-under-vector/p-1.png",
+            "sha256": "0adab9dc0f3711440b7e8b36a0beb37ba2c11ad6880a4ab56210d0f41f555564"
+          },
+          {
+            "page": 2,
+            "path": "qualification/experiments/m1gx/300/renders-final3/C0-source-under-vector/p-2.png",
+            "sha256": "0d8a8cbcd477549ef548609ddac13c9a0fb5a86038405ece555d4fdcab0decc1"
+          },
+          {
+            "page": 3,
+            "path": "qualification/experiments/m1gx/300/renders-final3/C0-source-under-vector/p-3.png",
+            "sha256": "10c925a6e848fb68603dd011ff932e4afc9530e12629147b3dbe70f35c51e20b"
+          },
+          {
+            "page": 4,
+            "path": "qualification/experiments/m1gx/300/renders-final3/C0-source-under-vector/p-4.png",
+            "sha256": "7fec2439ae9d97321abaf4ade08227a8ca11bf4d2ae27f1de30f73c8878678fd"
+          },
+          {
+            "page": 5,
+            "path": "qualification/experiments/m1gx/300/renders-final3/C0-source-under-vector/p-5.png",
+            "sha256": "171985c34eb6c327dff127f10cc6e788ed8865322e98e712275e2613665c73e4"
+          },
+          {
+            "page": 6,
+            "path": "qualification/experiments/m1gx/300/renders-final3/C0-source-under-vector/p-6.png",
+            "sha256": "73e3866f649fd4fdc51346877dd8c2157ce0ec00917e900917cf1c510deb763f"
+          },
+          {
+            "page": 7,
+            "path": "qualification/experiments/m1gx/300/renders-final3/C0-source-under-vector/p-7.png",
+            "sha256": "581076e5eacb02685bdd13ad535d144f14c15e8c648334ac796ecb44e9778d2e"
+          },
+          {
+            "page": 8,
+            "path": "qualification/experiments/m1gx/300/renders-final3/C0-source-under-vector/p-8.png",
+            "sha256": "a760a25aa294847ce9538c86cd15fabdda69fc8098daa833ac90cfba42a91a07"
+          }
+        ],
+        "pdfium": [
+          {
+            "page": 1,
+            "path": "qualification/experiments/m1gx/300/renders-final3/C0-source-under-vector/pdfium/p-1.png",
+            "sha256": "f6f2257b0b2ec9d8db42a5a79c127d8783a708188e3928797d5bf3d22bc5e50d"
+          },
+          {
+            "page": 2,
+            "path": "qualification/experiments/m1gx/300/renders-final3/C0-source-under-vector/pdfium/p-2.png",
+            "sha256": "3f086f9cd17b75c7aea05e565fd74c8435743bbab3ef37c4553ce16285d3253d"
+          },
+          {
+            "page": 3,
+            "path": "qualification/experiments/m1gx/300/renders-final3/C0-source-under-vector/pdfium/p-3.png",
+            "sha256": "d98636933e234ece3e9ea8e6936673dd0e114527f2f6159e10061fdb6f944117"
+          },
+          {
+            "page": 4,
+            "path": "qualification/experiments/m1gx/300/renders-final3/C0-source-under-vector/pdfium/p-4.png",
+            "sha256": "29ba8c253d6f69bb1b915a18fc5aad1e94a23b2493a23a582a44b68557387db2"
+          },
+          {
+            "page": 5,
+            "path": "qualification/experiments/m1gx/300/renders-final3/C0-source-under-vector/pdfium/p-5.png",
+            "sha256": "940e9d51ea41869ffd657b8ea1476fbac6f852e8274a50e1db589d2bc3fe79de"
+          },
+          {
+            "page": 6,
+            "path": "qualification/experiments/m1gx/300/renders-final3/C0-source-under-vector/pdfium/p-6.png",
+            "sha256": "1cd36358fe0ff4ce35e26f1faf5fec780c2b397bb2e8c32b84176433a7910445"
+          },
+          {
+            "page": 7,
+            "path": "qualification/experiments/m1gx/300/renders-final3/C0-source-under-vector/pdfium/p-7.png",
+            "sha256": "72b874a18ef125e32b892c154c68885d516ec8b32ce132ae98a707f884fd1619"
+          },
+          {
+            "page": 8,
+            "path": "qualification/experiments/m1gx/300/renders-final3/C0-source-under-vector/pdfium/p-8.png",
+            "sha256": "9b28403d6cad1ec7dca809828be5100e51e68c5966e4101ec9a8170b049afcbf"
+          }
+        ]
+      },
+      {
+        "pdf": "C2-inferred-clean-background.pdf",
+        "pdf_sha256": "9598ea4d656b16222d6ca2318c1e371797fa251d6f302db0a8dc82dbc69d4054",
+        "poppler": [
+          {
+            "page": 1,
+            "path": "qualification/experiments/m1gx/300/renders-final3/C2-inferred-clean-background/p-1.png",
+            "sha256": "04b2396c6445b42649f3f5ebcb188002e6ce475340842792e4889b1796b5492e"
+          },
+          {
+            "page": 2,
+            "path": "qualification/experiments/m1gx/300/renders-final3/C2-inferred-clean-background/p-2.png",
+            "sha256": "462c53a15ea6beb5befadfd0063e8b8e115bd0c17e300dcc898f80062e550c74"
+          },
+          {
+            "page": 3,
+            "path": "qualification/experiments/m1gx/300/renders-final3/C2-inferred-clean-background/p-3.png",
+            "sha256": "c63923aa96218520af97501841d5ee008abed754792ed920274beffda2f598a4"
+          },
+          {
+            "page": 4,
+            "path": "qualification/experiments/m1gx/300/renders-final3/C2-inferred-clean-background/p-4.png",
+            "sha256": "96d0d3bcbd98c01dbaf59898322a242598767c130976f5b1bf03b77752e17ec2"
+          },
+          {
+            "page": 5,
+            "path": "qualification/experiments/m1gx/300/renders-final3/C2-inferred-clean-background/p-5.png",
+            "sha256": "5ea10441f67dc5c59585ca07b7abae41cadece043e4dfb57a4afaf6a36284563"
+          },
+          {
+            "page": 6,
+            "path": "qualification/experiments/m1gx/300/renders-final3/C2-inferred-clean-background/p-6.png",
+            "sha256": "d7ad04361606f8cc903ad5e84677a1a958e5066da967e4e2a3728889734b14c3"
+          },
+          {
+            "page": 7,
+            "path": "qualification/experiments/m1gx/300/renders-final3/C2-inferred-clean-background/p-7.png",
+            "sha256": "f3017e8eea76d95f6f0f5c4811a07a98590f387864481e4e19f86efaeb2670f4"
+          },
+          {
+            "page": 8,
+            "path": "qualification/experiments/m1gx/300/renders-final3/C2-inferred-clean-background/p-8.png",
+            "sha256": "45ca42e2550ab24c8b72d47c6d6425c77164a8b391994aab841e0bebda03e2fc"
+          }
+        ],
+        "pdfium": [
+          {
+            "page": 1,
+            "path": "qualification/experiments/m1gx/300/renders-final3/C2-inferred-clean-background/pdfium/p-1.png",
+            "sha256": "884c18f69422a851ab4b038b16fbb80ba50f8a0a01d49af7697da385266ce8f3"
+          },
+          {
+            "page": 2,
+            "path": "qualification/experiments/m1gx/300/renders-final3/C2-inferred-clean-background/pdfium/p-2.png",
+            "sha256": "6df81b9b0e488ccf23e3bdf84fa51fd5106692d6f9954529fe6f418a8a5f45fe"
+          },
+          {
+            "page": 3,
+            "path": "qualification/experiments/m1gx/300/renders-final3/C2-inferred-clean-background/pdfium/p-3.png",
+            "sha256": "7da8880ab14b703d26010076974b04110335f4e337be174a9e71646c28f006d6"
+          },
+          {
+            "page": 4,
+            "path": "qualification/experiments/m1gx/300/renders-final3/C2-inferred-clean-background/pdfium/p-4.png",
+            "sha256": "55ed405fb8624ee38e2b880e1ebed4dd8d3eb6b9e645f60643a1a167f392b1d2"
+          },
+          {
+            "page": 5,
+            "path": "qualification/experiments/m1gx/300/renders-final3/C2-inferred-clean-background/pdfium/p-5.png",
+            "sha256": "5d42a8d29e2516f39d5ea293155b0c026d41697263551c58d20cb5cbc478c55b"
+          },
+          {
+            "page": 6,
+            "path": "qualification/experiments/m1gx/300/renders-final3/C2-inferred-clean-background/pdfium/p-6.png",
+            "sha256": "66cce9b6b007835972781c4c898ddcb605f504129acb1a1dd20a56a618cd26ac"
+          },
+          {
+            "page": 7,
+            "path": "qualification/experiments/m1gx/300/renders-final3/C2-inferred-clean-background/pdfium/p-7.png",
+            "sha256": "1b8a5e0334e675bf4626ad756afe92cba052fd02f79449279415394dd54cfb40"
+          },
+          {
+            "page": 8,
+            "path": "qualification/experiments/m1gx/300/renders-final3/C2-inferred-clean-background/pdfium/p-8.png",
+            "sha256": "ea91c6771d3aef964b1b7e4a17b81c60d19fc955cd463eaf008a63a1bbe90c2e"
+          }
+        ]
+      },
+      {
+        "pdf": "O0-source-searchable.pdf",
+        "pdf_sha256": "2f59487c0c0a268bbdc1c058728d94717a1f14663844ce3df410810661b81498",
+        "poppler": [
+          {
+            "page": 1,
+            "path": "qualification/experiments/m1gx/300/renders-final3/O0-source-searchable/p-1.png",
+            "sha256": "4d5f9cd5906bf4751f3a11e35cd499ce2691aa33a603bf5fdddf0fc0adb2c9ab"
+          },
+          {
+            "page": 2,
+            "path": "qualification/experiments/m1gx/300/renders-final3/O0-source-searchable/p-2.png",
+            "sha256": "ff25adc2d32988c7eb173bf0cab735e4c788a7fa953c94a2cabe1a9114d6e09f"
+          },
+          {
+            "page": 3,
+            "path": "qualification/experiments/m1gx/300/renders-final3/O0-source-searchable/p-3.png",
+            "sha256": "b72f18bd5103282e49a873ca8b1f066a628918ef5e2ab4ecc1ebf85ec08aec7b"
+          },
+          {
+            "page": 4,
+            "path": "qualification/experiments/m1gx/300/renders-final3/O0-source-searchable/p-4.png",
+            "sha256": "17189c58d9ae16573bef4b56175c678746f0ce23ef909cb34e2f62c24eedf234"
+          },
+          {
+            "page": 5,
+            "path": "qualification/experiments/m1gx/300/renders-final3/O0-source-searchable/p-5.png",
+            "sha256": "1edbc602207a51235bf65492ff1c7e98ee52807a0aa01da065bfa73e689ba871"
+          },
+          {
+            "page": 6,
+            "path": "qualification/experiments/m1gx/300/renders-final3/O0-source-searchable/p-6.png",
+            "sha256": "dcfc2b13383e18c8cd188929faff8c8fd503e93bf5f8b95cb70d64ea6fca2839"
+          },
+          {
+            "page": 7,
+            "path": "qualification/experiments/m1gx/300/renders-final3/O0-source-searchable/p-7.png",
+            "sha256": "e6aac8ce3e2ce86e2ddbf2fc4a286c61dca9fb038a68b3abad5219729d803499"
+          },
+          {
+            "page": 8,
+            "path": "qualification/experiments/m1gx/300/renders-final3/O0-source-searchable/p-8.png",
+            "sha256": "8577542e6410870fd6f6d257a99d5e3347145038c5c05c4b6a1c68fbda69dd27"
+          }
+        ],
+        "pdfium": [
+          {
+            "page": 1,
+            "path": "qualification/experiments/m1gx/300/renders-final3/O0-source-searchable/pdfium/p-1.png",
+            "sha256": "457d6df5f861daddf97889673287094397abaf197290b6880566a4328e84c2ae"
+          },
+          {
+            "page": 2,
+            "path": "qualification/experiments/m1gx/300/renders-final3/O0-source-searchable/pdfium/p-2.png",
+            "sha256": "3fa2d5484e3dc767fbe49f81c247cf4b2ac636cacd060add6c563ed18e191b64"
+          },
+          {
+            "page": 3,
+            "path": "qualification/experiments/m1gx/300/renders-final3/O0-source-searchable/pdfium/p-3.png",
+            "sha256": "c4c8edb0dc33ef3ae133fe35cfa88e33920f69950fab3d7e73b12f4c06725601"
+          },
+          {
+            "page": 4,
+            "path": "qualification/experiments/m1gx/300/renders-final3/O0-source-searchable/pdfium/p-4.png",
+            "sha256": "4b6760f0423b0b77dcc5699a6ca7e8dabcdd68b72502df455b793b2a0b4b0464"
+          },
+          {
+            "page": 5,
+            "path": "qualification/experiments/m1gx/300/renders-final3/O0-source-searchable/pdfium/p-5.png",
+            "sha256": "6aa7f5da1f7dea841bf07354d36a6cc299e5f455806fa1ca88d708de0b4b0fbe"
+          },
+          {
+            "page": 6,
+            "path": "qualification/experiments/m1gx/300/renders-final3/O0-source-searchable/pdfium/p-6.png",
+            "sha256": "78bf6b6e07aaad3c7efe3195ae33c04f698e0946e452ea9c7481100fe5dfaae1"
+          },
+          {
+            "page": 7,
+            "path": "qualification/experiments/m1gx/300/renders-final3/O0-source-searchable/pdfium/p-7.png",
+            "sha256": "9a87d94b89744409f79d0a7067db17ea8185a5441ee898eb6682f48a73f33d66"
+          },
+          {
+            "page": 8,
+            "path": "qualification/experiments/m1gx/300/renders-final3/O0-source-searchable/pdfium/p-8.png",
+            "sha256": "549dc921238dae253fbd8e17ed73f02ce45ae59102f8f19b1541a63e8860f967"
+          }
+        ]
+      },
+      {
+        "pdf": "O1-oracle-outline-placement.pdf",
+        "pdf_sha256": "54651d53e4ccc15c800668fbaa7d2f706c488f5baf4c7fb8834d957def95e787",
+        "poppler": [
+          {
+            "page": 1,
+            "path": "qualification/experiments/m1gx/300/renders-final3/O1-oracle-outline-placement/p-1.png",
+            "sha256": "5abf108edafd7850d891b4e315196441f04efbc96e8dfec4e75dbda7e0173b68"
+          },
+          {
+            "page": 2,
+            "path": "qualification/experiments/m1gx/300/renders-final3/O1-oracle-outline-placement/p-2.png",
+            "sha256": "c511b245d72e6c17d9437169f04df3b8ec70345b84a3be7a3d6c6bd0d4604a4a"
+          },
+          {
+            "page": 3,
+            "path": "qualification/experiments/m1gx/300/renders-final3/O1-oracle-outline-placement/p-3.png",
+            "sha256": "c511b245d72e6c17d9437169f04df3b8ec70345b84a3be7a3d6c6bd0d4604a4a"
+          },
+          {
+            "page": 4,
+            "path": "qualification/experiments/m1gx/300/renders-final3/O1-oracle-outline-placement/p-4.png",
+            "sha256": "c511b245d72e6c17d9437169f04df3b8ec70345b84a3be7a3d6c6bd0d4604a4a"
+          },
+          {
+            "page": 5,
+            "path": "qualification/experiments/m1gx/300/renders-final3/O1-oracle-outline-placement/p-5.png",
+            "sha256": "c511b245d72e6c17d9437169f04df3b8ec70345b84a3be7a3d6c6bd0d4604a4a"
+          },
+          {
+            "page": 6,
+            "path": "qualification/experiments/m1gx/300/renders-final3/O1-oracle-outline-placement/p-6.png",
+            "sha256": "c511b245d72e6c17d9437169f04df3b8ec70345b84a3be7a3d6c6bd0d4604a4a"
+          },
+          {
+            "page": 7,
+            "path": "qualification/experiments/m1gx/300/renders-final3/O1-oracle-outline-placement/p-7.png",
+            "sha256": "963ae3fb1bf74562f5ee33ffc2b3b9bf3252f412f63f369797a27e2e06cc07d7"
+          },
+          {
+            "page": 8,
+            "path": "qualification/experiments/m1gx/300/renders-final3/O1-oracle-outline-placement/p-8.png",
+            "sha256": "963ae3fb1bf74562f5ee33ffc2b3b9bf3252f412f63f369797a27e2e06cc07d7"
+          }
+        ],
+        "pdfium": [
+          {
+            "page": 1,
+            "path": "qualification/experiments/m1gx/300/renders-final3/O1-oracle-outline-placement/pdfium/p-1.png",
+            "sha256": "a555a011a1006a161979ffd4439762856c94ff04697f6e49544abdb14a63801b"
+          },
+          {
+            "page": 2,
+            "path": "qualification/experiments/m1gx/300/renders-final3/O1-oracle-outline-placement/pdfium/p-2.png",
+            "sha256": "fd731fdc18d6ef4042c2fe173a6e2343eebe3e1c0ca051612515af514767eeb8"
+          },
+          {
+            "page": 3,
+            "path": "qualification/experiments/m1gx/300/renders-final3/O1-oracle-outline-placement/pdfium/p-3.png",
+            "sha256": "fd731fdc18d6ef4042c2fe173a6e2343eebe3e1c0ca051612515af514767eeb8"
+          },
+          {
+            "page": 4,
+            "path": "qualification/experiments/m1gx/300/renders-final3/O1-oracle-outline-placement/pdfium/p-4.png",
+            "sha256": "fd731fdc18d6ef4042c2fe173a6e2343eebe3e1c0ca051612515af514767eeb8"
+          },
+          {
+            "page": 5,
+            "path": "qualification/experiments/m1gx/300/renders-final3/O1-oracle-outline-placement/pdfium/p-5.png",
+            "sha256": "fd731fdc18d6ef4042c2fe173a6e2343eebe3e1c0ca051612515af514767eeb8"
+          },
+          {
+            "page": 6,
+            "path": "qualification/experiments/m1gx/300/renders-final3/O1-oracle-outline-placement/pdfium/p-6.png",
+            "sha256": "fd731fdc18d6ef4042c2fe173a6e2343eebe3e1c0ca051612515af514767eeb8"
+          },
+          {
+            "page": 7,
+            "path": "qualification/experiments/m1gx/300/renders-final3/O1-oracle-outline-placement/pdfium/p-7.png",
+            "sha256": "2064f163a16eca8db762ac387cd7d8fc527c861af958289ad154d1ca98ef0781"
+          },
+          {
+            "page": 8,
+            "path": "qualification/experiments/m1gx/300/renders-final3/O1-oracle-outline-placement/pdfium/p-8.png",
+            "sha256": "2064f163a16eca8db762ac387cd7d8fc527c861af958289ad154d1ca98ef0781"
+          }
+        ]
+      },
+      {
+        "pdf": "O2-reconstructed-oracle-placement.pdf",
+        "pdf_sha256": "4ee5de85f4e7a391defa97fe9dc9b04d23de1363814aa5c6721fbecba8f87538",
+        "poppler": [
+          {
+            "page": 1,
+            "path": "qualification/experiments/m1gx/300/renders-final3/O2-reconstructed-oracle-placement/p-1.png",
+            "sha256": "a90347dd50a78247f9441fcf1a7f3b80d3c013e7f584f370bb1f136bfdaf75cb"
+          },
+          {
+            "page": 2,
+            "path": "qualification/experiments/m1gx/300/renders-final3/O2-reconstructed-oracle-placement/p-2.png",
+            "sha256": "d173bbf6998a506293a62b97596caf23b80490ea6ec941f7b0af4d1b6b0f9182"
+          },
+          {
+            "page": 3,
+            "path": "qualification/experiments/m1gx/300/renders-final3/O2-reconstructed-oracle-placement/p-3.png",
+            "sha256": "33dbfd5bbbffe1ff837a3f247a6ae6be78d5d3f0777173f08df8f2e3321a4255"
+          },
+          {
+            "page": 4,
+            "path": "qualification/experiments/m1gx/300/renders-final3/O2-reconstructed-oracle-placement/p-4.png",
+            "sha256": "c6bcc5eccb067f0880c437bdbe4eb4bf6b67d448e638b8e124ee62b37428296c"
+          },
+          {
+            "page": 5,
+            "path": "qualification/experiments/m1gx/300/renders-final3/O2-reconstructed-oracle-placement/p-5.png",
+            "sha256": "a9c3a57b640d79786b7bfe9011fe2bf21806ee6f8e414e57c25dff29fcdbc40a"
+          },
+          {
+            "page": 6,
+            "path": "qualification/experiments/m1gx/300/renders-final3/O2-reconstructed-oracle-placement/p-6.png",
+            "sha256": "f1efb4ba8a79810808791caff259f80fdc83e6b236f552bad34ba86066c23eb4"
+          },
+          {
+            "page": 7,
+            "path": "qualification/experiments/m1gx/300/renders-final3/O2-reconstructed-oracle-placement/p-7.png",
+            "sha256": "fe017bb8d03ec7d76b914f09f2a1804f3862be4dd3e02aaa9a46dddb5ba767b0"
+          },
+          {
+            "page": 8,
+            "path": "qualification/experiments/m1gx/300/renders-final3/O2-reconstructed-oracle-placement/p-8.png",
+            "sha256": "d9e619e7109cd057e3e50e234b9bb0cdd5fc02b2da88ad88bf69fbed453f2075"
+          }
+        ],
+        "pdfium": [
+          {
+            "page": 1,
+            "path": "qualification/experiments/m1gx/300/renders-final3/O2-reconstructed-oracle-placement/pdfium/p-1.png",
+            "sha256": "2bd8f5e2945ff00275975e28bb1e2b6f5fcf4363d8250b517cdb17aa80f36a79"
+          },
+          {
+            "page": 2,
+            "path": "qualification/experiments/m1gx/300/renders-final3/O2-reconstructed-oracle-placement/pdfium/p-2.png",
+            "sha256": "17ed672ed2cd66b843d915e1d460e1162df8ce56e6ccab2e1047363cc5ab77ba"
+          },
+          {
+            "page": 3,
+            "path": "qualification/experiments/m1gx/300/renders-final3/O2-reconstructed-oracle-placement/pdfium/p-3.png",
+            "sha256": "f8b3cb3adefcaa61d6f74240c4992d44a3c4bcab5a3c169af8e134e8214a7fe6"
+          },
+          {
+            "page": 4,
+            "path": "qualification/experiments/m1gx/300/renders-final3/O2-reconstructed-oracle-placement/pdfium/p-4.png",
+            "sha256": "48bac2710d78b472b41bd94ca4a99e8cafbcb3b375d0df0fc50e3ff71f941909"
+          },
+          {
+            "page": 5,
+            "path": "qualification/experiments/m1gx/300/renders-final3/O2-reconstructed-oracle-placement/pdfium/p-5.png",
+            "sha256": "6cd8cc6ec63a2e3f0b8f4efbd607ed0a7c2535d4a45200eb8ef0bd6416b56285"
+          },
+          {
+            "page": 6,
+            "path": "qualification/experiments/m1gx/300/renders-final3/O2-reconstructed-oracle-placement/pdfium/p-6.png",
+            "sha256": "06c4b70633277f5134c456d241eee6c885fc76864055180e32cb5cbd70455818"
+          },
+          {
+            "page": 7,
+            "path": "qualification/experiments/m1gx/300/renders-final3/O2-reconstructed-oracle-placement/pdfium/p-7.png",
+            "sha256": "963c6fb50877bec37628743c8f80522ac6f80da1f73aca01cf10d5804fa7cdf0"
+          },
+          {
+            "page": 8,
+            "path": "qualification/experiments/m1gx/300/renders-final3/O2-reconstructed-oracle-placement/pdfium/p-8.png",
+            "sha256": "5f7a1f78ad41eda5c52fbddd59ba204ce4145851439bc72e694d45feaa1fdff6"
+          }
+        ]
+      },
+      {
+        "pdf": "O3-oracle-identity-current-placement.pdf",
+        "pdf_sha256": "f6ce1e24efff237a804cc5212340734ca21693c1bf7b38d907ddcad460ceb502",
+        "poppler": [
+          {
+            "page": 1,
+            "path": "qualification/experiments/m1gx/300/renders-final3/O3-oracle-identity-current-placement/p-1.png",
+            "sha256": "a90347dd50a78247f9441fcf1a7f3b80d3c013e7f584f370bb1f136bfdaf75cb"
+          },
+          {
+            "page": 2,
+            "path": "qualification/experiments/m1gx/300/renders-final3/O3-oracle-identity-current-placement/p-2.png",
+            "sha256": "d173bbf6998a506293a62b97596caf23b80490ea6ec941f7b0af4d1b6b0f9182"
+          },
+          {
+            "page": 3,
+            "path": "qualification/experiments/m1gx/300/renders-final3/O3-oracle-identity-current-placement/p-3.png",
+            "sha256": "33dbfd5bbbffe1ff837a3f247a6ae6be78d5d3f0777173f08df8f2e3321a4255"
+          },
+          {
+            "page": 4,
+            "path": "qualification/experiments/m1gx/300/renders-final3/O3-oracle-identity-current-placement/p-4.png",
+            "sha256": "c6bcc5eccb067f0880c437bdbe4eb4bf6b67d448e638b8e124ee62b37428296c"
+          },
+          {
+            "page": 5,
+            "path": "qualification/experiments/m1gx/300/renders-final3/O3-oracle-identity-current-placement/p-5.png",
+            "sha256": "a9c3a57b640d79786b7bfe9011fe2bf21806ee6f8e414e57c25dff29fcdbc40a"
+          },
+          {
+            "page": 6,
+            "path": "qualification/experiments/m1gx/300/renders-final3/O3-oracle-identity-current-placement/p-6.png",
+            "sha256": "f1efb4ba8a79810808791caff259f80fdc83e6b236f552bad34ba86066c23eb4"
+          },
+          {
+            "page": 7,
+            "path": "qualification/experiments/m1gx/300/renders-final3/O3-oracle-identity-current-placement/p-7.png",
+            "sha256": "7cf483e0b6f55e6ba9a1e307f3febdc4f52d2c4f4fd823e989d2a9469c466512"
+          },
+          {
+            "page": 8,
+            "path": "qualification/experiments/m1gx/300/renders-final3/O3-oracle-identity-current-placement/p-8.png",
+            "sha256": "128ca3d1534f533553deb6f1629384d723a0ec69a1618719d48f5bf6db75b742"
+          }
+        ],
+        "pdfium": [
+          {
+            "page": 1,
+            "path": "qualification/experiments/m1gx/300/renders-final3/O3-oracle-identity-current-placement/pdfium/p-1.png",
+            "sha256": "2bd8f5e2945ff00275975e28bb1e2b6f5fcf4363d8250b517cdb17aa80f36a79"
+          },
+          {
+            "page": 2,
+            "path": "qualification/experiments/m1gx/300/renders-final3/O3-oracle-identity-current-placement/pdfium/p-2.png",
+            "sha256": "17ed672ed2cd66b843d915e1d460e1162df8ce56e6ccab2e1047363cc5ab77ba"
+          },
+          {
+            "page": 3,
+            "path": "qualification/experiments/m1gx/300/renders-final3/O3-oracle-identity-current-placement/pdfium/p-3.png",
+            "sha256": "f8b3cb3adefcaa61d6f74240c4992d44a3c4bcab5a3c169af8e134e8214a7fe6"
+          },
+          {
+            "page": 4,
+            "path": "qualification/experiments/m1gx/300/renders-final3/O3-oracle-identity-current-placement/pdfium/p-4.png",
+            "sha256": "48bac2710d78b472b41bd94ca4a99e8cafbcb3b375d0df0fc50e3ff71f941909"
+          },
+          {
+            "page": 5,
+            "path": "qualification/experiments/m1gx/300/renders-final3/O3-oracle-identity-current-placement/pdfium/p-5.png",
+            "sha256": "6cd8cc6ec63a2e3f0b8f4efbd607ed0a7c2535d4a45200eb8ef0bd6416b56285"
+          },
+          {
+            "page": 6,
+            "path": "qualification/experiments/m1gx/300/renders-final3/O3-oracle-identity-current-placement/pdfium/p-6.png",
+            "sha256": "06c4b70633277f5134c456d241eee6c885fc76864055180e32cb5cbd70455818"
+          },
+          {
+            "page": 7,
+            "path": "qualification/experiments/m1gx/300/renders-final3/O3-oracle-identity-current-placement/pdfium/p-7.png",
+            "sha256": "b99657d53ca37ae1e1978d96ecadec14278082507bee5c95aaa0e23a76f179f3"
+          },
+          {
+            "page": 8,
+            "path": "qualification/experiments/m1gx/300/renders-final3/O3-oracle-identity-current-placement/pdfium/p-8.png",
+            "sha256": "cb6f7f0bfe3b8d15d9698da7325e9dd1b5f4fc2fe7a5bc3c96e2f728be1c6225"
+          }
+        ]
+      },
+      {
+        "pdf": "O3-reconstructed-current-placement.pdf",
+        "pdf_sha256": "8dd324111264a67b692f58e9db9f516b16ddf8c33d79e193e1a77175ee82badb",
+        "poppler": [
+          {
+            "page": 1,
+            "path": "qualification/experiments/m1gx/300/renders-final3/O3-reconstructed-current-placement/p-1.png",
+            "sha256": "5dcf4e39713f045a63cb6215acf44a3bcf137b77affffc48408a4e0e8d34c354"
+          },
+          {
+            "page": 2,
+            "path": "qualification/experiments/m1gx/300/renders-final3/O3-reconstructed-current-placement/p-2.png",
+            "sha256": "cec65bb4742a673b9561966af6c620b8e556a96020139f2a0c667be42ed51258"
+          },
+          {
+            "page": 3,
+            "path": "qualification/experiments/m1gx/300/renders-final3/O3-reconstructed-current-placement/p-3.png",
+            "sha256": "3e39ecfe9a76389d44815ae73696fcd438691fb77dadb6adea6fb03060050784"
+          },
+          {
+            "page": 4,
+            "path": "qualification/experiments/m1gx/300/renders-final3/O3-reconstructed-current-placement/p-4.png",
+            "sha256": "ba498e7384bada66f694bc87fb42574685344f970f6800c194a71666e218d227"
+          },
+          {
+            "page": 5,
+            "path": "qualification/experiments/m1gx/300/renders-final3/O3-reconstructed-current-placement/p-5.png",
+            "sha256": "b54d253e9e1e584fe06378c5d2626270c974e971299f6749704eb1ec816c13b5"
+          },
+          {
+            "page": 6,
+            "path": "qualification/experiments/m1gx/300/renders-final3/O3-reconstructed-current-placement/p-6.png",
+            "sha256": "3f851d154ed86fa72b879a58641a1c5a6df9e041b5ea295a0d1adc70000062bb"
+          },
+          {
+            "page": 7,
+            "path": "qualification/experiments/m1gx/300/renders-final3/O3-reconstructed-current-placement/p-7.png",
+            "sha256": "c321e8cc160e179d19d403944eb7928ab482f3c287791cfd826397656cd669cc"
+          },
+          {
+            "page": 8,
+            "path": "qualification/experiments/m1gx/300/renders-final3/O3-reconstructed-current-placement/p-8.png",
+            "sha256": "779c67930527302349cd73b8d4f7074d0eab4e1821ed42f94fb3f6724aa8900e"
+          }
+        ],
+        "pdfium": [
+          {
+            "page": 1,
+            "path": "qualification/experiments/m1gx/300/renders-final3/O3-reconstructed-current-placement/pdfium/p-1.png",
+            "sha256": "57cf6fdc4c4b4b86d51d9c4133dfa0e7808cec5757ff6f1a676a8b1074333bd0"
+          },
+          {
+            "page": 2,
+            "path": "qualification/experiments/m1gx/300/renders-final3/O3-reconstructed-current-placement/pdfium/p-2.png",
+            "sha256": "d4ae9c67b0c835412801bb0d9a15ada59c7898797d8877edfdaf11d664cd54e0"
+          },
+          {
+            "page": 3,
+            "path": "qualification/experiments/m1gx/300/renders-final3/O3-reconstructed-current-placement/pdfium/p-3.png",
+            "sha256": "90656a01efd1b9105506eaec68f87cf43afe2f37870b783e66e00bbdbe1da8ad"
+          },
+          {
+            "page": 4,
+            "path": "qualification/experiments/m1gx/300/renders-final3/O3-reconstructed-current-placement/pdfium/p-4.png",
+            "sha256": "05a2f3eed2310af29592eeccc5350b4347e0bb3adcb82d5533a06162a07a54fd"
+          },
+          {
+            "page": 5,
+            "path": "qualification/experiments/m1gx/300/renders-final3/O3-reconstructed-current-placement/pdfium/p-5.png",
+            "sha256": "b9710e8178a582da238262bfc25e3de658d67ea77945a77b3b7ea2c6b2906be0"
+          },
+          {
+            "page": 6,
+            "path": "qualification/experiments/m1gx/300/renders-final3/O3-reconstructed-current-placement/pdfium/p-6.png",
+            "sha256": "36bd1c3f0cd43a363cb937a8d249d38d91f410b0cdd476c2752fd7a4fa8c8b06"
+          },
+          {
+            "page": 7,
+            "path": "qualification/experiments/m1gx/300/renders-final3/O3-reconstructed-current-placement/pdfium/p-7.png",
+            "sha256": "a64786fabf88148be57bd6e7454871835c4b9de4c6eabd0ee9b7f92228928730"
+          },
+          {
+            "page": 8,
+            "path": "qualification/experiments/m1gx/300/renders-final3/O3-reconstructed-current-placement/pdfium/p-8.png",
+            "sha256": "e768a06b5dfd9074c12ad2e847c3f0d84f2fb5d137b68da674849587694af1bd"
+          }
+        ]
+      },
+      {
+        "pdf": "O3-uniform-placement.pdf",
+        "pdf_sha256": "e32a09fab0266d2989b5a7ffe4ab8b4d9230679a880f9a400a480a72a8112bde",
+        "poppler": [
+          {
+            "page": 1,
+            "path": "qualification/experiments/m1gx/300/renders-final3/O3-uniform-placement/p-1.png",
+            "sha256": "51fc9a1e4ca5052e4ba94a7b426b1b6028cd12a7e29f085f64647eb8d308bf34"
+          },
+          {
+            "page": 2,
+            "path": "qualification/experiments/m1gx/300/renders-final3/O3-uniform-placement/p-2.png",
+            "sha256": "a8a38b367ecbdf421991eb8e5ee31f3dc8cf8a63c8f57be5e0d02a8124ce6212"
+          },
+          {
+            "page": 3,
+            "path": "qualification/experiments/m1gx/300/renders-final3/O3-uniform-placement/p-3.png",
+            "sha256": "cd65bb1383f01dfa0fec87416d65b3b6930d1112ec35f6e8e5991c21915af01e"
+          },
+          {
+            "page": 4,
+            "path": "qualification/experiments/m1gx/300/renders-final3/O3-uniform-placement/p-4.png",
+            "sha256": "82fdfb07a9409596702a1c751b6ce1e417a29932ea8c1a657bdc33507cccd269"
+          },
+          {
+            "page": 5,
+            "path": "qualification/experiments/m1gx/300/renders-final3/O3-uniform-placement/p-5.png",
+            "sha256": "318d887f856082a08355a345e932c861a75ed1417c28d1ab086091381b2acf40"
+          },
+          {
+            "page": 6,
+            "path": "qualification/experiments/m1gx/300/renders-final3/O3-uniform-placement/p-6.png",
+            "sha256": "f3fc4f92ccfad6a75f7a62afe366d120d829f940cd30ee36f83778f68a486a98"
+          },
+          {
+            "page": 7,
+            "path": "qualification/experiments/m1gx/300/renders-final3/O3-uniform-placement/p-7.png",
+            "sha256": "d7af09bc39d41a9f0aded548ffa83d9f704ac9c67f552ee39c2a29662421a57c"
+          },
+          {
+            "page": 8,
+            "path": "qualification/experiments/m1gx/300/renders-final3/O3-uniform-placement/p-8.png",
+            "sha256": "8febcfbef5e687fbbdcaaf5f47e9ec29c863f4f5a5e7460f7976c4c06ec7ef1b"
+          }
+        ],
+        "pdfium": [
+          {
+            "page": 1,
+            "path": "qualification/experiments/m1gx/300/renders-final3/O3-uniform-placement/pdfium/p-1.png",
+            "sha256": "96c3f766100e8b46f906bd2fc77640d74a749c73124cc6a3c59813ec824029af"
+          },
+          {
+            "page": 2,
+            "path": "qualification/experiments/m1gx/300/renders-final3/O3-uniform-placement/pdfium/p-2.png",
+            "sha256": "2aa70e1cb1ef57b60767c2f24aaf87585cb98cc4828baae303b9fc21a5557845"
+          },
+          {
+            "page": 3,
+            "path": "qualification/experiments/m1gx/300/renders-final3/O3-uniform-placement/pdfium/p-3.png",
+            "sha256": "ca932479ab203bda85adee17c4a9da98519d39bc1a0bd91e23e9282ae579a0c1"
+          },
+          {
+            "page": 4,
+            "path": "qualification/experiments/m1gx/300/renders-final3/O3-uniform-placement/pdfium/p-4.png",
+            "sha256": "17780d1cfbeed3f03eceef289e852552ed40155a6f1894c5df49fd805c60eee8"
+          },
+          {
+            "page": 5,
+            "path": "qualification/experiments/m1gx/300/renders-final3/O3-uniform-placement/pdfium/p-5.png",
+            "sha256": "3abba0f3ae4522e6789073b34dd3e4077dbc7a2171228185e6cc62e585ea4204"
+          },
+          {
+            "page": 6,
+            "path": "qualification/experiments/m1gx/300/renders-final3/O3-uniform-placement/pdfium/p-6.png",
+            "sha256": "9dea748875dfc16e54cfcdff8f413fdb2cdece811e63c040c0c0f63ceb4b32a6"
+          },
+          {
+            "page": 7,
+            "path": "qualification/experiments/m1gx/300/renders-final3/O3-uniform-placement/pdfium/p-7.png",
+            "sha256": "6663ad9991b6b075583130549d34ecef8e217269590ec844e1dfe275b6a7eddb"
+          },
+          {
+            "page": 8,
+            "path": "qualification/experiments/m1gx/300/renders-final3/O3-uniform-placement/pdfium/p-8.png",
+            "sha256": "0b0367fd7c10cbfae8ba26b6b2c9bef690ecfbef3a9dced9796ae64ab4143cf9"
+          }
+        ]
+      },
+      {
+        "pdf": "O4-current-m1g.pdf",
+        "pdf_sha256": "9da8be9d2b147ea111d791efc9fb6b569e87c63288ece55643be8387d88b6e3d",
+        "poppler": [
+          {
+            "page": 1,
+            "path": "qualification/experiments/m1gx/300/renders-final3/O4-current-m1g/p-1.png",
+            "sha256": "33a553cc36e7cbeacb476c35b0f896eb5270b50716978d997134bb0051e25640"
+          },
+          {
+            "page": 2,
+            "path": "qualification/experiments/m1gx/300/renders-final3/O4-current-m1g/p-2.png",
+            "sha256": "3427629ef3420c2bc92e5ee6459171ff3f53892dafe1533eeaccea3385816157"
+          },
+          {
+            "page": 3,
+            "path": "qualification/experiments/m1gx/300/renders-final3/O4-current-m1g/p-3.png",
+            "sha256": "8b83c9925b92c4ecdb194f4ce942538ca7eb742944d5c0f4e011bdc38561aa24"
+          },
+          {
+            "page": 4,
+            "path": "qualification/experiments/m1gx/300/renders-final3/O4-current-m1g/p-4.png",
+            "sha256": "060f59b842b252fb079bff920969531e0c7f230c6d0b106b1119fd5174107c68"
+          },
+          {
+            "page": 5,
+            "path": "qualification/experiments/m1gx/300/renders-final3/O4-current-m1g/p-5.png",
+            "sha256": "3a9be2deed90a308ce3bcfc6d7fc94d8d101e874f434db995011cbc23b8f1ec0"
+          },
+          {
+            "page": 6,
+            "path": "qualification/experiments/m1gx/300/renders-final3/O4-current-m1g/p-6.png",
+            "sha256": "7bc0ff7e70b85eaccb7a82f09de3c6db0f2fb7fe63c6e2e9c4a76e8a14775873"
+          },
+          {
+            "page": 7,
+            "path": "qualification/experiments/m1gx/300/renders-final3/O4-current-m1g/p-7.png",
+            "sha256": "ab0117ceaa5ab9b6a3d8a51ba9797e16ce2ca8175d35f5c5519e3e4c7abcf1a5"
+          },
+          {
+            "page": 8,
+            "path": "qualification/experiments/m1gx/300/renders-final3/O4-current-m1g/p-8.png",
+            "sha256": "31013609d02cdacbc4c2dc64be4a9cd71ef8fe5be0a1de18d85cdd05c2989b79"
+          }
+        ],
+        "pdfium": [
+          {
+            "page": 1,
+            "path": "qualification/experiments/m1gx/300/renders-final3/O4-current-m1g/pdfium/p-1.png",
+            "sha256": "313f378cc3f2355077088bb98a5802f553de1079a606f363c39ac32ad5514359"
+          },
+          {
+            "page": 2,
+            "path": "qualification/experiments/m1gx/300/renders-final3/O4-current-m1g/pdfium/p-2.png",
+            "sha256": "c19d40ab7c7a73bba766676171506206be93b80ae84a5d93771687e86010a722"
+          },
+          {
+            "page": 3,
+            "path": "qualification/experiments/m1gx/300/renders-final3/O4-current-m1g/pdfium/p-3.png",
+            "sha256": "536c2c7cc622e7af9f3912a2476079b10a4fcc0c6e2a58b0e9ff93a6858cdc50"
+          },
+          {
+            "page": 4,
+            "path": "qualification/experiments/m1gx/300/renders-final3/O4-current-m1g/pdfium/p-4.png",
+            "sha256": "880b689e8d268d3b714611e811a780125982472d6d50a771d554677a731373a6"
+          },
+          {
+            "page": 5,
+            "path": "qualification/experiments/m1gx/300/renders-final3/O4-current-m1g/pdfium/p-5.png",
+            "sha256": "ca1c3e57269f12465439ac8acf618d99a04e8cc652870d3d40d4e0df1aba0399"
+          },
+          {
+            "page": 6,
+            "path": "qualification/experiments/m1gx/300/renders-final3/O4-current-m1g/pdfium/p-6.png",
+            "sha256": "4415938ff39d3917c1199b106adc80594a448a75ede0bafbd8f853130540c064"
+          },
+          {
+            "page": 7,
+            "path": "qualification/experiments/m1gx/300/renders-final3/O4-current-m1g/pdfium/p-7.png",
+            "sha256": "c39655546330485157b697f9b38b4173281850bcfe18e3be81cc54cd81106607"
+          },
+          {
+            "page": 8,
+            "path": "qualification/experiments/m1gx/300/renders-final3/O4-current-m1g/pdfium/p-8.png",
+            "sha256": "fb5c05a1279664660fd03172b09cf34a338317febe8adabe490bf050d00caebf"
+          }
+        ]
+      },
+      {
+        "pdf": "canonical-uniform-300.pdf",
+        "pdf_sha256": "0764341568d07353d22f2a6231f3449b6c8e8e90736f5787885bc0a25346801d",
+        "poppler": [
+          {
+            "page": 1,
+            "path": "qualification/experiments/m1gx/300/renders-final3/O5-pipeline-uniform-300/p-1.png",
+            "sha256": "33a553cc36e7cbeacb476c35b0f896eb5270b50716978d997134bb0051e25640"
+          },
+          {
+            "page": 2,
+            "path": "qualification/experiments/m1gx/300/renders-final3/O5-pipeline-uniform-300/p-2.png",
+            "sha256": "3427629ef3420c2bc92e5ee6459171ff3f53892dafe1533eeaccea3385816157"
+          },
+          {
+            "page": 3,
+            "path": "qualification/experiments/m1gx/300/renders-final3/O5-pipeline-uniform-300/p-3.png",
+            "sha256": "8b83c9925b92c4ecdb194f4ce942538ca7eb742944d5c0f4e011bdc38561aa24"
+          },
+          {
+            "page": 4,
+            "path": "qualification/experiments/m1gx/300/renders-final3/O5-pipeline-uniform-300/p-4.png",
+            "sha256": "060f59b842b252fb079bff920969531e0c7f230c6d0b106b1119fd5174107c68"
+          },
+          {
+            "page": 5,
+            "path": "qualification/experiments/m1gx/300/renders-final3/O5-pipeline-uniform-300/p-5.png",
+            "sha256": "3a9be2deed90a308ce3bcfc6d7fc94d8d101e874f434db995011cbc23b8f1ec0"
+          },
+          {
+            "page": 6,
+            "path": "qualification/experiments/m1gx/300/renders-final3/O5-pipeline-uniform-300/p-6.png",
+            "sha256": "7bc0ff7e70b85eaccb7a82f09de3c6db0f2fb7fe63c6e2e9c4a76e8a14775873"
+          },
+          {
+            "page": 7,
+            "path": "qualification/experiments/m1gx/300/renders-final3/O5-pipeline-uniform-300/p-7.png",
+            "sha256": "304d0f8eca9f6c59b050d3989d414b2d43ff013ac398a1df64a79fdc3fd6cef7"
+          },
+          {
+            "page": 8,
+            "path": "qualification/experiments/m1gx/300/renders-final3/O5-pipeline-uniform-300/p-8.png",
+            "sha256": "3dcd07c99342daf434b96f87b62ce93bc2d3668e61b574aab99639012501934f"
+          }
+        ],
+        "pdfium": [
+          {
+            "page": 1,
+            "path": "qualification/experiments/m1gx/300/renders-final3/O5-pipeline-uniform-300/pdfium/p-1.png",
+            "sha256": "313f378cc3f2355077088bb98a5802f553de1079a606f363c39ac32ad5514359"
+          },
+          {
+            "page": 2,
+            "path": "qualification/experiments/m1gx/300/renders-final3/O5-pipeline-uniform-300/pdfium/p-2.png",
+            "sha256": "c19d40ab7c7a73bba766676171506206be93b80ae84a5d93771687e86010a722"
+          },
+          {
+            "page": 3,
+            "path": "qualification/experiments/m1gx/300/renders-final3/O5-pipeline-uniform-300/pdfium/p-3.png",
+            "sha256": "536c2c7cc622e7af9f3912a2476079b10a4fcc0c6e2a58b0e9ff93a6858cdc50"
+          },
+          {
+            "page": 4,
+            "path": "qualification/experiments/m1gx/300/renders-final3/O5-pipeline-uniform-300/pdfium/p-4.png",
+            "sha256": "880b689e8d268d3b714611e811a780125982472d6d50a771d554677a731373a6"
+          },
+          {
+            "page": 5,
+            "path": "qualification/experiments/m1gx/300/renders-final3/O5-pipeline-uniform-300/pdfium/p-5.png",
+            "sha256": "ca1c3e57269f12465439ac8acf618d99a04e8cc652870d3d40d4e0df1aba0399"
+          },
+          {
+            "page": 6,
+            "path": "qualification/experiments/m1gx/300/renders-final3/O5-pipeline-uniform-300/pdfium/p-6.png",
+            "sha256": "4415938ff39d3917c1199b106adc80594a448a75ede0bafbd8f853130540c064"
+          },
+          {
+            "page": 7,
+            "path": "qualification/experiments/m1gx/300/renders-final3/O5-pipeline-uniform-300/pdfium/p-7.png",
+            "sha256": "042f5b59bdbf9b41dce92c48fa0811dfa192cf96ce215ca150974ffae92221df"
+          },
+          {
+            "page": 8,
+            "path": "qualification/experiments/m1gx/300/renders-final3/O5-pipeline-uniform-300/pdfium/p-8.png",
+            "sha256": "a41298634cf0ce8a0c9833b3e072eebed526df5a45803f677bc9d9b11e6d835b"
+          }
+        ]
+      }
+    ]
+  },
+  "tools": {
+    "pdftoppm": "pdftoppm version 24.02.0",
+    "pdfinfo": "pdfinfo version 24.02.0",
+    "qpdf": "qpdf version 12.4.2",
+    "ots": "ots 9.3.0",
+    "pypdfium2": "5.14.0"
+  },
+  "frozen_m1g_pdf": {
+    "path": "qualification/experiments/m1g/fixture/dpi300/output/canonical-experimental.pdf",
+    "sha256": "9da8be9d2b147ea111d791efc9fb6b569e87c63288ece55643be8387d88b6e3d"
+  },
+  "adobe_reference": {
+    "matched_to_gx_fixture": false,
+    "manifest": "qualification/competitors/adobe_xi/results/run-manifest.json",
+    "m1e_300dpi_clearscan_sha256": "6d2150c05e1102cd90a3cdc48f87aeff08af118bf63a5390a787f909589258fb",
+    "m1e_300dpi_bytes": 46213,
+    "m1e_600dpi_clearscan_sha256": "86e26797a02d2e6688c38f8cf6c3f668842da854bcdc177437ce002b3382e6e2",
+    "m1e_600dpi_bytes": 51429
+  },
+  "results": {
+    "metrics": "qualification/experiments/m1gx/300/gx_metrics.json",
+    "validation": "qualification/experiments/m1gx/300/pdf-validation.json",
+    "placement": "qualification/experiments/m1gx/300/actual-placement-check.json",
+    "background": "qualification/experiments/m1gx/300/background-audit.json"
+  }
+}
