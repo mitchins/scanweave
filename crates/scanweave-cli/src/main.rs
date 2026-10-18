@@ -32,6 +32,20 @@ fn arg_f64(args: &[String], flag: &str, default: f64) -> Result<f64, String> {
     }
 }
 
+fn image_encoding(args: &[String]) -> Result<scanweave_io::page_pdf::ImageEncodingOptions, String> {
+    use scanweave_io::page_pdf::ImageEncodingOptions;
+    let mut options = ImageEncodingOptions::default();
+    match arg_value(args, "--pdf-image-variant").as_deref().unwrap_or("optimized") {
+        "baseline" => { options.reuse_identical = false; options.grayscale_equal_channels = false; options.predictor = 1; }
+        "reuse" => { options.reuse_identical = true; options.grayscale_equal_channels = false; options.predictor = 1; }
+        "gray" | "optimized" => { options.reuse_identical = true; options.grayscale_equal_channels = true; options.predictor = 1; }
+        "gray-tiff" => { options.reuse_identical = true; options.grayscale_equal_channels = true; options.predictor = 2; }
+        "gray-up" => { options.reuse_identical = true; options.grayscale_equal_channels = true; options.predictor = 12; }
+        other => return Err(format!("unsupported --pdf-image-variant {other} (baseline | reuse | gray | gray-tiff | gray-up)")),
+    }
+    Ok(options)
+}
+
 /// The bundle path: one document, N pages, one searchable PDF.
 fn build_bundle(args: &[String]) -> Result<(), String> {
     let bundle_path = arg_value(args, "--bundle").ok_or("missing --bundle")?;
@@ -44,9 +58,12 @@ fn build_bundle(args: &[String]) -> Result<(), String> {
     let report = arg_value(args, "--report").ok_or("missing --report")?;
     let mode = arg_value(args, "--mode").unwrap_or_else(|| "reconstruct".into());
     if mode != "reconstruct" && mode != "auto" {
-        return Err(format!("unsupported --mode {mode} (M1-B: reconstruct | auto)"));
+        return Err(format!(
+            "unsupported --mode {mode} (M1-B: reconstruct | auto)"
+        ));
     }
-    let bundle_bytes = std::fs::read(&bundle_path).map_err(|e| format!("read {bundle_path}: {e}"))?;
+    let bundle_bytes =
+        std::fs::read(&bundle_path).map_err(|e| format!("read {bundle_path}: {e}"))?;
     let bundle = scanweave_core::bundle::Bundle::parse_bytes(&bundle_bytes)
         .map_err(|e| format!("bundle parse: {e}"))?;
     let root = std::path::Path::new(&bundle_path)
@@ -78,8 +95,10 @@ fn build_bundle(args: &[String]) -> Result<(), String> {
             ));
         }
         let asset = root.join(&src.asset_path);
-        let rgb_bytes = std::fs::read(&asset).map_err(|e| format!("read {}: {e}", asset.display()))?;
-        let img = image::load_from_memory(&rgb_bytes).map_err(|e| format!("decode {}: {e}", asset.display()))?;
+        let rgb_bytes =
+            std::fs::read(&asset).map_err(|e| format!("read {}: {e}", asset.display()))?;
+        let img = image::load_from_memory(&rgb_bytes)
+            .map_err(|e| format!("decode {}: {e}", asset.display()))?;
         let img = img.to_rgb8();
         let (w, h) = (img.width(), img.height());
         let ocr_bytes = std::fs::read(root.join(&p.ocr_page_path))
@@ -118,13 +137,32 @@ fn build_bundle(args: &[String]) -> Result<(), String> {
     let min_ink_iou = arg_f64(args, "--min-ink-iou", 0.98)?;
     let profile = arg_value(args, "--profile").unwrap_or_else(|| "faithful".into());
     if profile != "faithful" && profile != "clearscan" {
-        return Err(format!("unsupported --profile {profile} (M1-D: faithful | clearscan)"));
+        return Err(format!(
+            "unsupported --profile {profile} (M1-D: faithful | clearscan)"
+        ));
     }
-    let glyph_dictionary = arg_value(args, "--glyph-dictionary").unwrap_or_else(|| if profile == "clearscan" { "visual".into() } else { "off".into() });
+    let glyph_dictionary = arg_value(args, "--glyph-dictionary").unwrap_or_else(|| {
+        if profile == "clearscan" {
+            "visual".into()
+        } else {
+            "off".into()
+        }
+    });
     if glyph_dictionary != "off" && glyph_dictionary != "visual" {
-        return Err(format!("unsupported --glyph-dictionary {glyph_dictionary} (M1-D: off | visual)"));
+        return Err(format!(
+            "unsupported --glyph-dictionary {glyph_dictionary} (M1-D: off | visual)"
+        ));
     }
-    let policy = scanweave_io::convert::Policy { mode, dpi, min_ink_iou, profile, glyph_dictionary, ..scanweave_io::convert::Policy::default() };
+    let image_encoding = image_encoding(args)?;
+    let policy = scanweave_io::convert::Policy {
+        mode,
+        dpi,
+        min_ink_iou,
+        profile,
+        glyph_dictionary,
+        image_encoding,
+        ..scanweave_io::convert::Policy::default()
+    };
     let mut out = scanweave_io::document::convert_document(&bundle.document_id, &inputs, &policy)
         .map_err(|e| e.to_string())?;
     out.report.bindings = bindings;
@@ -178,7 +216,9 @@ fn build(args: &[String]) -> Result<(), String> {
     let report = arg_value(args, "--report").ok_or("missing --report")?;
     let mode = arg_value(args, "--mode").unwrap_or_else(|| "reconstruct".into());
     if mode != "reconstruct" && mode != "auto" {
-        return Err(format!("unsupported --mode {mode} (M1-B: reconstruct | auto)"));
+        return Err(format!(
+            "unsupported --mode {mode} (M1-B: reconstruct | auto)"
+        ));
     }
 
     let rgb_bytes = std::fs::read(&input).map_err(|e| format!("read {input}: {e}"))?;
@@ -223,7 +263,10 @@ fn build(args: &[String]) -> Result<(), String> {
             pixel_sha256: pixel_sha,
         };
         scanweave_io::normalize::build_normalized_page(
-            &scanweave_io::normalize::ImageMeta { width: w, height: h },
+            &scanweave_io::normalize::ImageMeta {
+                width: w,
+                height: h,
+            },
             &doc,
             Some(dpi),
             &binding,
@@ -236,18 +279,28 @@ fn build(args: &[String]) -> Result<(), String> {
     // refuse to work on pixels that do not match the declared binding
     page.verify_binding(img.as_raw())
         .map_err(|e| format!("binding {input}/{ocr}: {e}"))?;
-    let input = scanweave_io::convert::input_from_ocr_page(
-        img.as_raw(),
-        w,
-        h,
-        &page.page_id,
-        &page,
-    );
+    let input =
+        scanweave_io::convert::input_from_ocr_page(img.as_raw(), w, h, &page.page_id, &page);
 
     let min_ink_iou = arg_f64(args, "--min-ink-iou", 0.98)?;
     let profile = arg_value(args, "--profile").unwrap_or_else(|| "faithful".into());
-    let glyph_dictionary = arg_value(args, "--glyph-dictionary").unwrap_or_else(|| if profile == "clearscan" { "visual".into() } else { "off".into() });
-    let policy = scanweave_io::convert::Policy { mode, dpi, min_ink_iou, profile, glyph_dictionary, ..scanweave_io::convert::Policy::default() };
+    let glyph_dictionary = arg_value(args, "--glyph-dictionary").unwrap_or_else(|| {
+        if profile == "clearscan" {
+            "visual".into()
+        } else {
+            "off".into()
+        }
+    });
+    let image_encoding = image_encoding(args)?;
+    let policy = scanweave_io::convert::Policy {
+        mode,
+        dpi,
+        min_ink_iou,
+        profile,
+        glyph_dictionary,
+        image_encoding,
+        ..scanweave_io::convert::Policy::default()
+    };
     let out = scanweave_io::convert::convert(&input, &policy).map_err(|e| e.to_string())?;
 
     // atomic: temporary on the same filesystem, then rename

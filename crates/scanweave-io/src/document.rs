@@ -14,7 +14,7 @@
 use crate::convert::{Input, Policy, Report};
 use crate::fontbuild::build_font;
 use crate::glyphs::GlyphShape;
-use crate::page_pdf::{assemble_document, PageParts};
+use crate::page_pdf::PageParts;
 
 /// A page plus its document-global CID remap.
 pub struct DocumentPage {
@@ -31,12 +31,15 @@ pub struct DocumentCandidate {
     pub pdf_bytes: usize,
     pub font_bytes: usize,
     pub image_xobjects: usize,
+    pub image_references: usize,
     pub content_bytes: usize,
     pub raster_encoded_bytes: usize,
     /// per-page analytical ink IoU (min over vector units); None = no vector
     pub page_fidelity: Vec<Option<f64>>,
     /// pages that rasterized (whole-page raster baseline marks all)
     pub raster_pages: usize,
+    pub image_encoding_ms: u128,
+    pub assembly_ms: u128,
 }
 
 /// Document-level report: per-page reports + document totals + the measured
@@ -54,8 +57,14 @@ pub struct DocumentReport {
     pub pdf_bytes: usize,
     pub font_bytes: usize,
     pub image_xobjects: usize,
+    pub image_references: usize,
     pub raster_encoded_bytes: usize,
     pub content_bytes: usize,
+    pub image_encoding_ms: u128,
+    pub assembly_ms: u128,
+    /// Instrumented wall-time breakdown for the document pipeline. The
+    /// remainder covers candidate selection and report assembly.
+    pub stage_timings: DocumentStageTimings,
     pub page_order: Vec<String>,
     pub page_reports: Vec<Report>,
     pub coverage: DocumentCoverage,
@@ -63,6 +72,19 @@ pub struct DocumentReport {
     pub ownership_invariants: std::collections::BTreeMap<String, bool>,
     /// sha256 of every source asset and OCR page (binding, per page)
     pub bindings: Vec<PageBinding>,
+}
+
+#[derive(Debug, Clone, Default, serde::Serialize)]
+pub struct DocumentStageTimings {
+    pub total_ms: u128,
+    pub donor_collection_ms: u128,
+    pub page_conversion_ms: u128,
+    pub document_font_union_ms: u128,
+    pub font_build_ms: u128,
+    pub reconstruction_pdf_ms: u128,
+    pub raster_baseline_prepare_ms: u128,
+    pub raster_baseline_pdf_ms: u128,
+    pub remaining_pipeline_ms: u128,
 }
 
 #[derive(Debug, Clone, Default, serde::Serialize)]
@@ -192,17 +214,22 @@ pub fn convert_document(
     inputs: &[Input],
     policy: &Policy,
 ) -> Result<DocumentOutput, String> {
+    let total_start = std::time::Instant::now();
+    let mut stage_timings = DocumentStageTimings::default();
     if inputs.is_empty() {
         return Err("document has no pages".into());
     }
     // 1. Collect only safe, unprotected single-glyph evidence across the
     //    document, then convert pages with sibling-page observations available
     //    to their local reconstruction dictionary.
+    let stage_start = std::time::Instant::now();
     let all_donors: Vec<Vec<crate::units::Unit>> = inputs
         .iter()
         .map(crate::convert::collect_document_donors)
         .collect();
+    stage_timings.donor_collection_ms = stage_start.elapsed().as_millis();
     let mut pages: Vec<DocumentPage> = Vec::with_capacity(inputs.len());
+    let stage_start = std::time::Instant::now();
     for (page_index, input) in inputs.iter().enumerate() {
         let mut sibling_donors = Vec::new();
         for (donor_page, donors) in all_donors.iter().enumerate() {
@@ -220,26 +247,35 @@ pub fn convert_document(
             crate::convert::convert_parts_with_document_donors(input, policy, &sibling_donors)?;
         pages.push(DocumentPage { parts, report });
     }
+    stage_timings.page_conversion_ms = stage_start.elapsed().as_millis();
 
     // 2. document-wide font: union of (shape, label), remapped per page
+    let stage_start = std::time::Instant::now();
     let (shapes, encodings, remaps) = union_encodings(&pages);
     for (page, remap) in pages.iter_mut().zip(remaps.iter()) {
         apply_remap(page, remap);
     }
+    stage_timings.document_font_union_ms = stage_start.elapsed().as_millis();
+    let stage_start = std::time::Instant::now();
     let font_bytes = build_font(&shapes, &encodings, policy.upem)?;
+    stage_timings.font_build_ms = stage_start.elapsed().as_millis();
 
     // 3. the reconstruction candidate
-    let (pdf_bytes, stats) = assemble_document(
+    let stage_start = std::time::Instant::now();
+    let (pdf_bytes, stats) = crate::page_pdf::assemble_document_with_options(
         &pages.iter().map(|p| p.parts.clone()).collect::<Vec<_>>(),
         &shapes,
         &encodings,
         &font_bytes,
+        policy.image_encoding,
     )?;
+    stage_timings.reconstruction_pdf_ms = stage_start.elapsed().as_millis();
 
     // 4. the whole-page searchable raster baseline candidate (auto mode ranks
     //    it against the reconstruction by real bytes)
     // the raster-baseline candidate: the same pages with the whole-page source
     // patch and the text layer drawn invisibly (searchable, zero vector ink)
+    let stage_start = std::time::Instant::now();
     let mut baseline_parts: Vec<PageParts> = Vec::new();
     for p in &pages {
         let mut bp = p.parts.clone();
@@ -251,8 +287,16 @@ pub fn convert_document(
         )?];
         baseline_parts.push(bp);
     }
-    let (baseline_pdf, baseline_stats) =
-        assemble_document(&baseline_parts, &shapes, &encodings, &font_bytes)?;
+    stage_timings.raster_baseline_prepare_ms = stage_start.elapsed().as_millis();
+    let stage_start = std::time::Instant::now();
+    let (baseline_pdf, baseline_stats) = crate::page_pdf::assemble_document_with_options(
+        &baseline_parts,
+        &shapes,
+        &encodings,
+        &font_bytes,
+        policy.image_encoding,
+    )?;
+    stage_timings.raster_baseline_pdf_ms = stage_start.elapsed().as_millis();
 
     // 5. candidate accounting + selection
     let _image_xobjects: usize = pages.iter().map(|p| p.parts.patches.len()).sum();
@@ -265,6 +309,7 @@ pub fn convert_document(
             pdf_bytes: pdf_bytes.len(),
             font_bytes: font_bytes.len(),
             image_xobjects: stats.image_xobjects,
+            image_references: stats.image_references,
             content_bytes: stats.content_bytes,
             raster_encoded_bytes: stats.raster_encoded_bytes,
             page_fidelity: pages
@@ -275,6 +320,8 @@ pub fn convert_document(
                 .iter()
                 .filter(|p| p.parts.occurrences.is_empty())
                 .count(),
+            image_encoding_ms: stats.image_encoding_ms,
+            assembly_ms: stats.assembly_ms,
         },
         DocumentCandidate {
             name: "raster_baseline".into(),
@@ -282,11 +329,14 @@ pub fn convert_document(
             pdf_bytes: baseline_pdf.len(),
             font_bytes: font_bytes.len(),
             image_xobjects: baseline_stats.image_xobjects,
+            image_references: baseline_stats.image_references,
             content_bytes: baseline_stats.content_bytes,
             raster_encoded_bytes: baseline_stats.raster_encoded_bytes,
             // the raster baseline reproduces the source pixels exactly
             page_fidelity: baseline_parts.iter().map(|_| Some(1.0)).collect(),
             raster_pages: baseline_parts.len(),
+            image_encoding_ms: baseline_stats.image_encoding_ms,
+            assembly_ms: baseline_stats.assembly_ms,
         },
     ];
     // auto: the fidelity policy is a HARD gate — a candidate whose vector units
@@ -374,6 +424,15 @@ pub fn convert_document(
         search.pages.push(ps);
     }
 
+    stage_timings.total_ms = total_start.elapsed().as_millis();
+    let measured = stage_timings.donor_collection_ms
+        + stage_timings.page_conversion_ms
+        + stage_timings.document_font_union_ms
+        + stage_timings.font_build_ms
+        + stage_timings.reconstruction_pdf_ms
+        + stage_timings.raster_baseline_prepare_ms
+        + stage_timings.raster_baseline_pdf_ms;
+    stage_timings.remaining_pipeline_ms = stage_timings.total_ms.saturating_sub(measured);
     Ok(DocumentOutput {
         pdf_bytes: out_bytes.clone(),
         font_bytes: font_bytes.clone(),
@@ -406,6 +465,11 @@ pub fn convert_document(
             } else {
                 stats.image_xobjects
             },
+            image_references: if selected == "raster_baseline" {
+                baseline_stats.image_references
+            } else {
+                stats.image_references
+            },
             raster_encoded_bytes: if selected == "raster_baseline" {
                 baseline_stats.raster_encoded_bytes
             } else {
@@ -416,6 +480,17 @@ pub fn convert_document(
             } else {
                 stats.content_bytes
             },
+            image_encoding_ms: if selected == "raster_baseline" {
+                baseline_stats.image_encoding_ms
+            } else {
+                stats.image_encoding_ms
+            },
+            assembly_ms: if selected == "raster_baseline" {
+                baseline_stats.assembly_ms
+            } else {
+                stats.assembly_ms
+            },
+            stage_timings,
             page_order: pages.iter().map(|p| p.report.page_id.clone()).collect(),
             page_reports: pages.iter().map(|p| p.report.clone()).collect(),
             coverage,

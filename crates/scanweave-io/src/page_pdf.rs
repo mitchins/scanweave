@@ -14,6 +14,8 @@ use pdf_writer::types::CidFontType;
 use pdf_writer::types::SystemInfo;
 use pdf_writer::types::TextRenderingMode;
 use pdf_writer::{Content, Finish, Name, Pdf, Rect, Ref, Str, TextStr};
+use sha2::{Digest, Sha256};
+use std::collections::HashMap;
 
 use crate::glyphs::GlyphShape;
 
@@ -23,6 +25,170 @@ pub struct Patch {
     pub rgb: Vec<u8>,
     pub w: u32,
     pub h: u32,
+}
+
+/// Lossless raster serialization choices. Production assembly uses exact
+/// resource reuse and grayscale storage when the decoded RGB samples prove
+/// equal. The explicit switches also support reproducible ablation PDFs.
+#[derive(Debug, Clone, Copy, serde::Serialize)]
+pub struct ImageEncodingOptions {
+    pub reuse_identical: bool,
+    pub grayscale_equal_channels: bool,
+    pub compression_level: u32,
+    /// PDF predictor: 1 (none), 2 (TIFF), or 12 (PNG Up).
+    pub predictor: u8,
+}
+
+impl Default for ImageEncodingOptions {
+    fn default() -> Self {
+        Self {
+            reuse_identical: true,
+            grayscale_equal_channels: true,
+            compression_level: 6,
+            predictor: 1,
+        }
+    }
+}
+
+#[derive(Debug, Clone, Eq)]
+struct ImageResourceKey {
+    width: u32,
+    height: u32,
+    bits_per_component: u8,
+    color_space: u8, // 1 = DeviceGray, 3 = DeviceRGB
+    compression_level: u32,
+    predictor: u8,
+    sample_sha256: [u8; 32],
+    samples: Vec<u8>,
+}
+
+impl PartialEq for ImageResourceKey {
+    fn eq(&self, other: &Self) -> bool {
+        self.width == other.width
+            && self.height == other.height
+            && self.bits_per_component == other.bits_per_component
+            && self.color_space == other.color_space
+            && self.compression_level == other.compression_level
+            && self.predictor == other.predictor
+            && self.sample_sha256 == other.sample_sha256
+            && self.samples == other.samples
+    }
+}
+
+#[derive(Debug)]
+struct EncodedImageResource {
+    id: Ref,
+    key: ImageResourceKey,
+    compressed: Vec<u8>,
+}
+
+fn canonical_patch(
+    patch: &Patch,
+    options: ImageEncodingOptions,
+) -> Result<ImageResourceKey, String> {
+    let expected = (patch.w as usize)
+        .checked_mul(patch.h as usize)
+        .and_then(|n| n.checked_mul(3))
+        .ok_or_else(|| "image patch dimensions overflow addressable memory".to_string())?;
+    if patch.w == 0 || patch.h == 0 {
+        return Err("image patch dimensions must be nonzero".into());
+    }
+    if patch.rgb.len() != expected {
+        return Err(format!(
+            "image patch sample length mismatch: {}x{} requires {expected} RGB bytes, got {}",
+            patch.w,
+            patch.h,
+            patch.rgb.len()
+        ));
+    }
+    let is_gray = options.grayscale_equal_channels
+        && patch
+            .rgb
+            .chunks_exact(3)
+            .all(|p| p[0] == p[1] && p[1] == p[2]);
+    let samples = if is_gray {
+        patch.rgb.chunks_exact(3).map(|p| p[0]).collect::<Vec<_>>()
+    } else {
+        patch.rgb.clone()
+    };
+    if is_gray
+        && samples
+            .iter()
+            .zip(patch.rgb.chunks_exact(3))
+            .any(|(g, rgb)| *g != rgb[0] || rgb[0] != rgb[1] || rgb[1] != rgb[2])
+    {
+        return Err("DeviceGray expansion check failed".into());
+    }
+    let mut digest = Sha256::new();
+    digest.update(patch.w.to_be_bytes());
+    digest.update(patch.h.to_be_bytes());
+    digest.update([8, if is_gray { 1 } else { 3 }]);
+    digest.update(options.compression_level.min(9).to_be_bytes());
+    digest.update([options.predictor]);
+    digest.update(&samples);
+    let sample_sha256: [u8; 32] = digest.finalize().into();
+    Ok(ImageResourceKey {
+        width: patch.w,
+        height: patch.h,
+        bits_per_component: 8,
+        color_space: if is_gray { 1 } else { 3 },
+        compression_level: options.compression_level.min(9),
+        predictor: options.predictor,
+        sample_sha256,
+        samples,
+    })
+}
+
+fn encode_predictor(key: &ImageResourceKey) -> Result<Vec<u8>, String> {
+    let colors = key.color_space as usize;
+    let row_bytes = key.width as usize * colors;
+    match key.predictor {
+        1 => Ok(key.samples.clone()),
+        2 | 12 => {
+            if key.samples.len() != row_bytes * key.height as usize {
+                return Err("predictor input does not match image dimensions".into());
+            }
+            let mut out = Vec::with_capacity(
+                key.samples.len()
+                    + if key.predictor == 12 {
+                        key.height as usize
+                    } else {
+                        0
+                    },
+            );
+            for y in 0..key.height as usize {
+                let row = &key.samples[y * row_bytes..(y + 1) * row_bytes];
+                if key.predictor == 12 {
+                    out.push(2);
+                } // PNG Up row selector
+                for x in 0..row_bytes {
+                    let prior = if key.predictor == 2 && x >= colors {
+                        row[x - colors]
+                    } else if key.predictor == 12 && y > 0 {
+                        key.samples[(y - 1) * row_bytes + x]
+                    } else {
+                        0
+                    };
+                    out.push(row[x].wrapping_sub(prior));
+                }
+            }
+            Ok(out)
+        }
+        other => Err(format!(
+            "unsupported PDF image predictor {other}; supported values are 1, 2, 12"
+        )),
+    }
+}
+
+fn compress_samples(key: &ImageResourceKey) -> Result<Vec<u8>, String> {
+    let predicted = encode_predictor(key)?;
+    let mut enc = flate2::write::ZlibEncoder::new(
+        Vec::new(),
+        flate2::Compression::new(key.compression_level.min(9)),
+    );
+    use std::io::Write;
+    enc.write_all(&predicted).map_err(|e| e.to_string())?;
+    enc.finish().map_err(|e| e.to_string())
 }
 
 #[derive(Debug, Default, Clone)]
@@ -90,7 +256,11 @@ fn emit_patches(
     page_h_pt: f32,
     paper: [u8; 3],
 ) {
-    c.set_fill_rgb(paper[0] as f32 / 255.0, paper[1] as f32 / 255.0, paper[2] as f32 / 255.0);
+    c.set_fill_rgb(
+        paper[0] as f32 / 255.0,
+        paper[1] as f32 / 255.0,
+        paper[2] as f32 / 255.0,
+    );
     c.rect(0.0, 0.0, page_w_pt, page_h_pt);
     c.fill_nonzero();
     for (i, patch) in patches.iter().enumerate() {
@@ -128,7 +298,12 @@ fn emit_text_runs(
         .map(|(id, t)| (id.as_str(), t.as_str()))
         .collect();
     let span_astral = |id: &str| {
-        span_map.get(id).copied().unwrap_or("").chars().any(|c| (c as u32) > 0xFFFF)
+        span_map
+            .get(id)
+            .copied()
+            .unwrap_or("")
+            .chars()
+            .any(|c| (c as u32) > 0xFFFF)
     };
     let owner_by_span: std::collections::HashMap<&str, (&Owner, u32)> = owners
         .iter()
@@ -149,7 +324,11 @@ fn emit_text_runs(
 
     c.begin_text();
     c.set_font(Name(b"F1"), 1.0);
-    c.set_fill_rgb(ink[0] as f32 / 255.0, ink[1] as f32 / 255.0, ink[2] as f32 / 255.0);
+    c.set_fill_rgb(
+        ink[0] as f32 / 255.0,
+        ink[1] as f32 / 255.0,
+        ink[2] as f32 / 255.0,
+    );
     // raster-baseline candidates paint NO text: the whole-page source patch
     // carries the pixels, the text layer only carries the searchable labels
     if raster_baseline {
@@ -286,6 +465,47 @@ pub fn assemble(
     lines: &[LineSpec],
     to_pt: &PageTransform,
 ) -> Result<Vec<u8>, String> {
+    assemble_with_options(
+        shapes,
+        encodings,
+        occurrences,
+        span_texts,
+        page_w_pt,
+        page_h_pt,
+        paper,
+        ink,
+        font_bytes,
+        glyphless_bytes,
+        glyphless_encodings,
+        patches,
+        owners,
+        owner_cids,
+        lines,
+        to_pt,
+        ImageEncodingOptions::default(),
+    )
+}
+
+#[allow(clippy::too_many_arguments)]
+pub fn assemble_with_options(
+    shapes: &[GlyphShape],
+    encodings: &[(usize, String)],
+    occurrences: &[Occurrence],
+    span_texts: &[(String, String)],
+    page_w_pt: f32,
+    page_h_pt: f32,
+    paper: [u8; 3],
+    ink: [u8; 3],
+    font_bytes: Vec<u8>,
+    glyphless_bytes: Vec<u8>,
+    glyphless_encodings: &[(usize, String)],
+    patches: &[Patch],
+    owners: &[Owner],
+    owner_cids: &[u32],
+    lines: &[LineSpec],
+    to_pt: &PageTransform,
+    image_options: ImageEncodingOptions,
+) -> Result<Vec<u8>, String> {
     let _ = glyphless_bytes;
     let _ = glyphless_encodings;
     let mut pdf = Pdf::new();
@@ -316,12 +536,43 @@ pub fn assemble(
     let glyphless_tu = Ref::new(next);
     next += 1;
 
-    let image_ids: Vec<Ref> = (0..patches.len())
-        .map(|i| {
-            
-            Ref::new(next + i as i32)
-        })
-        .collect();
+    let mut image_resources: Vec<EncodedImageResource> = Vec::new();
+    let mut resource_lookup: HashMap<[u8; 32], Vec<usize>> = HashMap::new();
+    let mut image_ids = Vec::with_capacity(patches.len());
+    for patch in patches {
+        let key = canonical_patch(patch, image_options)?;
+        let existing = if image_options.reuse_identical {
+            resource_lookup
+                .get(&key.sample_sha256)
+                .and_then(|candidates| {
+                    candidates
+                        .iter()
+                        .copied()
+                        .find(|&i| image_resources[i].key == key)
+                })
+        } else {
+            None
+        };
+        let index = match existing {
+            Some(i) => i,
+            None => {
+                let compressed = compress_samples(&key)?;
+                let id = Ref::new(next + image_resources.len() as i32);
+                let digest = key.sample_sha256;
+                let i = image_resources.len();
+                image_resources.push(EncodedImageResource {
+                    id,
+                    key,
+                    compressed,
+                });
+                if image_options.reuse_identical {
+                    resource_lookup.entry(digest).or_default().push(i);
+                }
+                i
+            }
+        };
+        image_ids.push(image_resources[index].id);
+    }
 
     pdf.catalog(catalog).pages(page_tree);
     pdf.pages(page_tree).kids([page]).count(1);
@@ -394,7 +645,8 @@ pub fn assemble(
             .font_file2(glyphless_ff);
         {
             let mut gl_cid = pdf.cid_font(glyphless_cidfont);
-            gl_cid.subtype(CidFontType::Type2)
+            gl_cid
+                .subtype(CidFontType::Type2)
                 .base_font(Name(b"ScanWeaveM0ProbeGlyphless"))
                 .system_info(SystemInfo {
                     registry: Str(b"Adobe"),
@@ -421,27 +673,54 @@ pub fn assemble(
         .to_unicode(glyph_tu);
     t0.finish();
 
-    // patch images
-    for (i, patch) in patches.iter().enumerate() {
-        let mut enc = flate2::write::ZlibEncoder::new(Vec::new(), flate2::Compression::default());
-        use std::io::Write;
-        enc.write_all(&patch.rgb).map_err(|e| e.to_string())?;
-        let compressed = enc.finish().map_err(|e| e.to_string())?;
-        let mut img = pdf.stream(image_ids[i], &compressed);
+    // patch images; image_ids is placement-local and may repeat a resource.
+    for resource in &image_resources {
+        let mut img = pdf.stream(resource.id, &resource.compressed);
         img.pair(Name(b"Type"), Name(b"XObject"));
         img.pair(Name(b"Subtype"), Name(b"Image"));
-        img.pair(Name(b"Width"), patch.w as i32);
-        img.pair(Name(b"Height"), patch.h as i32);
-        img.pair(Name(b"ColorSpace"), Name(b"DeviceRGB"));
-        img.pair(Name(b"BitsPerComponent"), 8);
+        img.pair(Name(b"Width"), resource.key.width as i32);
+        img.pair(Name(b"Height"), resource.key.height as i32);
+        let color_space: &[u8] = if resource.key.color_space == 1 {
+            b"DeviceGray"
+        } else {
+            b"DeviceRGB"
+        };
+        img.pair(Name(b"ColorSpace"), Name(color_space));
+        img.pair(
+            Name(b"BitsPerComponent"),
+            resource.key.bits_per_component as i32,
+        );
         img.pair(Name(b"Filter"), Name(b"FlateDecode"));
+        if resource.key.predictor != 1 {
+            let predictor = match resource.key.predictor {
+                2 => pdf_writer::types::Predictor::Tiff,
+                12 => pdf_writer::types::Predictor::PngUp,
+                _ => unreachable!("validated by encoder"),
+            };
+            img.decode_parms()
+                .predictor(predictor)
+                .colors(resource.key.color_space as i32)
+                .bits_per_component(resource.key.bits_per_component as i32)
+                .columns(resource.key.width as i32);
+        }
         img.finish();
     }
 
     // content
     let mut c = Content::new();
     emit_patches(&mut c, patches, to_pt, page_w_pt, page_h_pt, paper);
-    emit_text_runs(&mut c, shapes, occurrences, span_texts, owners, owner_cids, lines, to_pt, ink, false);
+    emit_text_runs(
+        &mut c,
+        shapes,
+        occurrences,
+        span_texts,
+        owners,
+        owner_cids,
+        lines,
+        to_pt,
+        ink,
+        false,
+    );
 
     c.end_text();
     let content_bytes = c.finish();
@@ -469,7 +748,7 @@ pub fn assemble(
     res.finish();
     p.finish();
 
-    let info_id = Ref::new(next + patches.len() as i32);
+    let info_id = Ref::new(next + image_resources.len() as i32);
     let mut doc = pdf.document_info(info_id);
     doc.producer(TextStr("scanweave-m1a"));
     doc.finish();
@@ -570,6 +849,24 @@ pub fn assemble_document(
     encodings: &[(usize, String)],
     font_bytes: &[u8],
 ) -> Result<(Vec<u8>, AssemblyStats), String> {
+    assemble_document_with_options(
+        pages,
+        shapes,
+        encodings,
+        font_bytes,
+        ImageEncodingOptions::default(),
+    )
+}
+
+pub fn assemble_document_with_options(
+    pages: &[PageParts],
+    shapes: &[GlyphShape],
+    encodings: &[(usize, String)],
+    font_bytes: &[u8],
+    image_options: ImageEncodingOptions,
+) -> Result<(Vec<u8>, AssemblyStats), String> {
+    let assembly_started = std::time::Instant::now();
+    let image_started = std::time::Instant::now();
     if pages.is_empty() {
         return Err("document has no pages".into());
     }
@@ -593,21 +890,56 @@ pub fn assemble_document(
     let to_uni = Ref::new(8);
 
     // per-page: page object then content object
-    let page_refs: Vec<Ref> = (0..pages.len()).map(|i| Ref::new(9 + (i * 2) as i32)).collect();
-    let content_refs: Vec<Ref> = (0..pages.len()).map(|i| Ref::new(10 + (i * 2) as i32)).collect();
+    let page_refs: Vec<Ref> = (0..pages.len())
+        .map(|i| Ref::new(9 + (i * 2) as i32))
+        .collect();
+    let content_refs: Vec<Ref> = (0..pages.len())
+        .map(|i| Ref::new(10 + (i * 2) as i32))
+        .collect();
     let mut next_image = 9 + (pages.len() * 2) as i32;
     let mut image_refs: Vec<Vec<Ref>> = Vec::with_capacity(pages.len());
+    let mut image_resources: Vec<EncodedImageResource> = Vec::new();
+    let mut resource_lookup: HashMap<[u8; 32], Vec<usize>> = HashMap::new();
     for p in pages {
-        let ids: Vec<Ref> = (0..p.patches.len())
-            .map(|j| {
-                let r = Ref::new(next_image);
-                next_image += 1;
-                let _ = j;
-                r
-            })
-            .collect();
+        let mut ids = Vec::with_capacity(p.patches.len());
+        for patch in &p.patches {
+            let key = canonical_patch(patch, image_options)?;
+            let existing = if image_options.reuse_identical {
+                resource_lookup
+                    .get(&key.sample_sha256)
+                    .and_then(|candidates| {
+                        candidates
+                            .iter()
+                            .copied()
+                            .find(|&i| image_resources[i].key == key)
+                    })
+            } else {
+                None
+            };
+            let resource_index = match existing {
+                Some(i) => i,
+                None => {
+                    let compressed = compress_samples(&key)?;
+                    let id = Ref::new(next_image);
+                    next_image += 1;
+                    let i = image_resources.len();
+                    let digest = key.sample_sha256;
+                    image_resources.push(EncodedImageResource {
+                        id,
+                        key,
+                        compressed,
+                    });
+                    if image_options.reuse_identical {
+                        resource_lookup.entry(digest).or_default().push(i);
+                    }
+                    i
+                }
+            };
+            ids.push(image_resources[resource_index].id);
+        }
         image_refs.push(ids);
     }
+    stats.image_encoding_ms = image_started.elapsed().as_millis();
 
     pdf.catalog(catalog).pages(page_tree);
     let kids: Vec<Ref> = page_refs.clone();
@@ -663,29 +995,55 @@ pub fn assemble_document(
         .to_unicode(to_uni);
     t0.finish();
 
+    // Image streams are document-global; page-local content names refer to a
+    // shared XObject only when its complete decoded samples and parameters match.
+    stats.image_xobjects = image_resources.len();
+    stats.image_references = image_refs.iter().map(Vec::len).sum();
+    for resource in &image_resources {
+        stats.raster_encoded_bytes += resource.compressed.len();
+        let mut img = pdf.stream(resource.id, &resource.compressed);
+        img.pair(Name(b"Type"), Name(b"XObject"));
+        img.pair(Name(b"Subtype"), Name(b"Image"));
+        img.pair(Name(b"Width"), resource.key.width as i32);
+        img.pair(Name(b"Height"), resource.key.height as i32);
+        let color_space: &[u8] = if resource.key.color_space == 1 {
+            b"DeviceGray"
+        } else {
+            b"DeviceRGB"
+        };
+        img.pair(Name(b"ColorSpace"), Name(color_space));
+        img.pair(
+            Name(b"BitsPerComponent"),
+            resource.key.bits_per_component as i32,
+        );
+        img.pair(Name(b"Filter"), Name(b"FlateDecode"));
+        if resource.key.predictor != 1 {
+            let predictor = match resource.key.predictor {
+                2 => pdf_writer::types::Predictor::Tiff,
+                12 => pdf_writer::types::Predictor::PngUp,
+                _ => unreachable!("validated by encoder"),
+            };
+            img.decode_parms()
+                .predictor(predictor)
+                .colors(resource.key.color_space as i32)
+                .bits_per_component(resource.key.bits_per_component as i32)
+                .columns(resource.key.width as i32);
+        }
+        img.finish();
+    }
+
     // pages
     for (i, p) in pages.iter().enumerate() {
-        // images
-        for (j, patch) in p.patches.iter().enumerate() {
-            let mut enc = flate2::write::ZlibEncoder::new(Vec::new(), flate2::Compression::default());
-            use std::io::Write;
-            enc.write_all(&patch.rgb).map_err(|e| e.to_string())?;
-            let compressed = enc.finish().map_err(|e| e.to_string())?;
-            stats.image_xobjects += 1;
-            stats.raster_encoded_bytes += compressed.len();
-            let mut img = pdf.stream(image_refs[i][j], &compressed);
-            img.pair(Name(b"Type"), Name(b"XObject"));
-            img.pair(Name(b"Subtype"), Name(b"Image"));
-            img.pair(Name(b"Width"), patch.w as i32);
-            img.pair(Name(b"Height"), patch.h as i32);
-            img.pair(Name(b"ColorSpace"), Name(b"DeviceRGB"));
-            img.pair(Name(b"BitsPerComponent"), 8);
-            img.pair(Name(b"Filter"), Name(b"FlateDecode"));
-            img.finish();
-        }
         // content
         let mut c = Content::new();
-        emit_patches(&mut c, &p.patches, &p.to_pt, p.page_w_pt, p.page_h_pt, p.paper);
+        emit_patches(
+            &mut c,
+            &p.patches,
+            &p.to_pt,
+            p.page_w_pt,
+            p.page_h_pt,
+            p.paper,
+        );
         emit_text_runs(
             &mut c,
             shapes,
@@ -721,15 +1079,156 @@ pub fn assemble_document(
     }
 
     stats.font_bytes = font_bytes.len();
-    Ok((pdf.finish(), stats))
+    let result = pdf.finish();
+    stats.assembly_ms = assembly_started.elapsed().as_millis();
+    Ok((result, stats))
 }
 
 /// What the assembled document actually contains (honest byte accounting:
 /// object counts and the encoded sizes that end up in the file).
 #[derive(Debug, Clone, Default, serde::Serialize)]
 pub struct AssemblyStats {
+    /// Unique image resources serialized in the document.
     pub image_xobjects: usize,
+    /// Page-local image placements that reference those resources.
+    pub image_references: usize,
     pub raster_encoded_bytes: usize,
     pub content_bytes: usize,
     pub font_bytes: usize,
+    pub image_encoding_ms: u128,
+    pub assembly_ms: u128,
+}
+
+#[cfg(test)]
+mod image_resource_tests {
+    use super::*;
+
+    fn page(patches: Vec<Patch>) -> PageParts {
+        PageParts {
+            source_rgb: vec![255; 3],
+            raster_baseline: false,
+            source_w: 1,
+            source_h: 1,
+            shapes: vec![],
+            encodings: vec![],
+            occurrences: vec![],
+            span_texts: vec![],
+            page_w_pt: 72.0,
+            page_h_pt: 72.0,
+            dpi: 72.0,
+            to_pt: PageTransform {
+                a: 1.0,
+                d: -1.0,
+                e: 0.0,
+                f: 72.0,
+            },
+            paper: [255; 3],
+            ink: [0; 3],
+            patches,
+            owners: vec![],
+            owner_cids: vec![],
+            lines: vec![],
+        }
+    }
+
+    fn patch(bbox_px: [f64; 4], rgb: [u8; 3]) -> Patch {
+        Patch {
+            bbox_px,
+            rgb: rgb.to_vec(),
+            w: 1,
+            h: 1,
+        }
+    }
+
+    #[test]
+    fn exact_resources_are_shared_and_equal_channels_use_gray() {
+        let pages = [
+            page(vec![
+                patch([0.0, 0.0, 1.0, 1.0], [220; 3]),
+                patch([1.0, 0.0, 2.0, 1.0], [220; 3]),
+            ]),
+            page(vec![
+                patch([0.0, 0.0, 1.0, 1.0], [220; 3]),
+                patch([1.0, 0.0, 2.0, 1.0], [220, 219, 220]),
+            ]),
+        ];
+        let (pdf, stats) =
+            assemble_document_with_options(&pages, &[], &[], &[], ImageEncodingOptions::default())
+                .unwrap();
+        assert_eq!(stats.image_references, 4);
+        assert_eq!(
+            stats.image_xobjects, 2,
+            "identical Gray pixels share one resource; different RGB stays separate"
+        );
+        assert!(String::from_utf8_lossy(&pdf).contains("/DeviceGray"));
+        assert!(String::from_utf8_lossy(&pdf).contains("/DeviceRGB"));
+        let (pdf2, _) =
+            assemble_document_with_options(&pages, &[], &[], &[], ImageEncodingOptions::default())
+                .unwrap();
+        assert_eq!(
+            pdf, pdf2,
+            "object assignment and output must be deterministic"
+        );
+    }
+
+    #[test]
+    fn image_dimensions_and_sample_length_are_validated() {
+        let pages = [page(vec![Patch {
+            bbox_px: [0.0; 4],
+            rgb: vec![1, 2, 3],
+            w: 2,
+            h: 1,
+        }])];
+        assert!(assemble_document_with_options(
+            &pages,
+            &[],
+            &[],
+            &[],
+            ImageEncodingOptions::default()
+        )
+        .is_err());
+    }
+
+    #[test]
+    fn flate_predictor_control_pdfs_are_serialized_when_requested() {
+        let patches = vec![
+            Patch {
+                bbox_px: [0.0, 0.0, 2.0, 2.0],
+                w: 2,
+                h: 2,
+                rgb: vec![248, 248, 248, 250, 250, 250, 252, 252, 252, 255, 255, 255],
+            },
+            Patch {
+                bbox_px: [2.0, 0.0, 4.0, 2.0],
+                w: 2,
+                h: 2,
+                rgb: vec![255, 0, 0, 0, 255, 0, 0, 0, 255, 30, 60, 90],
+            },
+            Patch {
+                bbox_px: [4.0, 0.0, 6.0, 2.0],
+                w: 2,
+                h: 2,
+                rgb: vec![0, 0, 255, 255, 255, 0, 120, 20, 200, 10, 80, 30],
+            },
+        ];
+        let pages = [page(patches)];
+        let output_dir = std::env::var_os("M1F_CONTROL_DIR").map(std::path::PathBuf::from);
+        if let Some(dir) = &output_dir {
+            std::fs::create_dir_all(dir).unwrap();
+        }
+        for (name, predictor) in [("none", 1), ("tiff", 2), ("png_up", 12)] {
+            let options = ImageEncodingOptions {
+                predictor,
+                ..ImageEncodingOptions::default()
+            };
+            let (pdf, stats) =
+                assemble_document_with_options(&pages, &[], &[], &[], options).unwrap();
+            assert_eq!(stats.image_xobjects, 3);
+            assert!(String::from_utf8_lossy(&pdf).contains("/DeviceRGB"));
+            assert!(String::from_utf8_lossy(&pdf).contains("/DeviceGray"));
+            if let Some(dir) = &output_dir {
+                std::fs::write(dir.join(format!("predictor-{name}.pdf")), pdf).unwrap();
+            }
+        }
+    }
 }

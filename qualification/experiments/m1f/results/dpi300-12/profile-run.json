@@ -1,0 +1,26 @@
+{
+  "command": "/usr/bin/time -f M1F_PEAK_RSS_KIB=%M target/debug/scanweave-cli build --bundle qualification/competitors/adobe_xi/inputs/dpi300-12/document.json --mode auto --profile faithful --pdf-image-variant reuse --output qualification/experiments/m1f/results/dpi300-12/faithful/reuse.pdf --report qualification/experiments/m1f/results/dpi300-12/faithful/reuse.json",
+  "first_full_run_elapsed_seconds": 329.558,
+  "first_full_run_peak_rss_kib": 1376312,
+  "instrumented_repeat_peak_rss_kib": 1383596,
+  "instrumented_repeat_pdf_sha256": "22ee70a235a544ede1ee9df31490d245056ed0a8b80e9ab8ae1109e5cc0ad5b1",
+  "instrumented_repeat_pdf_bytes": 1227630,
+  "stage_timings": {
+    "total_ms": 169423,
+    "donor_collection_ms": 54524,
+    "page_conversion_ms": 90630,
+    "document_font_union_ms": 2,
+    "font_build_ms": 41,
+    "reconstruction_pdf_ms": 1692,
+    "raster_baseline_prepare_ms": 218,
+    "raster_baseline_pdf_ms": 22312,
+    "remaining_pipeline_ms": 4
+  },
+  "selected": "reconstruct",
+  "image_xobjects": 100,
+  "image_references": 400,
+  "raster_encoded_bytes": 972182,
+  "font_bytes": 142836,
+  "content_bytes": 73864,
+  "source_and_ocr_fingerprints_unchanged": true
+}

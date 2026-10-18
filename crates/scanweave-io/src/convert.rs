@@ -9,7 +9,7 @@ use crate::fontbuild::build_font;
 use crate::glyphs::{build_glyph_shapes, GlyphShape};
 use crate::mask::{segment, Segmentation};
 use crate::ownership::{build_plan, OwnershipPlan};
-use crate::page_pdf::{Owner, Patch};
+use crate::page_pdf::{ImageEncodingOptions, Owner, Patch};
 use crate::plan::{plan_regions, FallbackReason, RegionDisposition, RegionKind};
 use crate::trace::{trace_shape, Budget, TracedShape};
 use serde::Serialize;
@@ -27,6 +27,9 @@ pub struct Policy {
     pub profile: String,
     /// Visual glyph dictionary mode: `off` (default) or `visual`.
     pub glyph_dictionary: String,
+    /// Lossless PDF image serialization controls; default is exact reuse plus
+    /// grayscale storage for channel-equal source samples.
+    pub image_encoding: ImageEncodingOptions,
 }
 
 impl Default for Policy {
@@ -40,6 +43,7 @@ impl Default for Policy {
             contact_margin_px: 4.0,
             profile: "faithful".into(),
             glyph_dictionary: "off".into(),
+            image_encoding: ImageEncodingOptions::default(),
         }
     }
 }
@@ -140,7 +144,6 @@ pub struct Report {
     pub raster_bytes: usize,
     pub semantic_owner: BTreeMap<String, String>,
     pub ownership_invariants: BTreeMap<String, bool>,
-    #[serde(skip_serializing)]
     pub elapsed_ms: u128,
 }
 
@@ -555,7 +558,7 @@ pub fn convert(input: &Input, policy: &Policy) -> Result<Output, String> {
     // document-level equivalent lives in crate::document)
     let (shapes, encodings) = (&parts.shapes, parts.encodings.clone());
     let font_bytes = build_font(shapes, &encodings, policy.upem)?;
-    let pdf_bytes = crate::page_pdf::assemble(
+    let pdf_bytes = crate::page_pdf::assemble_with_options(
         &parts.shapes,
         &encodings,
         &parts.occurrences,
@@ -572,6 +575,7 @@ pub fn convert(input: &Input, policy: &Policy) -> Result<Output, String> {
         &parts.owner_cids,
         &parts.lines,
         &parts.to_pt,
+        policy.image_encoding,
     )?;
     let b0 = baseline_one_page(&parts, policy)?;
 
