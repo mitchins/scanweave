@@ -2,7 +2,7 @@
 
 ## Scope and code state
 
-This report records the product-path integration and runs from the local tree whose starting commit was `cfb5d240f04a01f0289ab9df470ceb3fd53b2a86`. The final code revision is recorded in `qualification/clearscan_product/run_manifest.json`; qualification output PDFs and input hashes are preserved alongside the measurement scripts. Existing unrelated untracked research and fixture material was left untouched.
+This report records the product-path integration and runs from the local tree whose starting commit was `cfb5d240f04a01f0289ab9df470ceb3fd53b2a86`. The implementation commit is `b76b9d638eff0c81c8c8f8204db72fd12a4ee6f9`; qualification output PDFs and input hashes are preserved alongside the measurement scripts. Existing unrelated untracked research and fixture material was left untouched.
 
 The `clearscan` profile now invokes document-wide observation collection, prototype/donor selection, font embedding, occurrence assignment, source-ink suppression and PDF assembly through the normal CLI/library path. The development-only `canonical-experimental` switch and uniform-scale experiment were removed from the user-facing profile selection. `faithful` retains its independent preservation behavior. ClearScan derives source DPI from the page raster-to-PDF transform, so bundle page geometry remains authoritative even if the command line's default DPI differs.
 
