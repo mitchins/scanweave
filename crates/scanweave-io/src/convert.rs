@@ -1253,29 +1253,9 @@ pub(crate) fn convert_parts_with_document_donors(
     let patch_source = clearscan_rgb.as_deref().unwrap_or(&input.rgb);
     patches.extend(artwork_patches(patch_source, w as usize, h as usize, &plan));
 
-    // A reduced paper layer cannot preserve an unresolved faint mark at a
-    // replaced glyph's boundary. Retain that small neighbourhood natively,
-    // using the cleaned source so coalescing cannot resurrect replaced ink.
-    // This also avoids a blurred copy of any fringe that lacked donor support.
+    // Compact backgrounds are supplemented by native residual-detail patches
+    // below. Explicit protection remains independent of OCR segmentation.
     if policy.profile == "clearscan" {
-        let padding = if policy.dpi >= 450.0 { 4.0 } else { 2.0 };
-        for owned in &plan.owned {
-            if !vector_owned_symbols.contains(&owned.unit.symbol_id) {
-                continue;
-            }
-            let b = owned.unit.bbox_px;
-            patches.push(patch_from_rgb(
-                patch_source,
-                w as usize,
-                h as usize,
-                [
-                    b[0] - padding,
-                    b[1] - padding,
-                    b[2] + padding,
-                    b[3] + padding,
-                ],
-            ));
-        }
         // Protection must work even when OCR finds no glyph in the polygon.
         for &protected in &protected_boxes {
             patches.push(patch_from_rgb(
@@ -2005,80 +1985,70 @@ fn residual_detail_patches(
     let small = image::RgbImage::from_raw(reduced.w, reduced.h, reduced.rgb.clone()).unwrap();
     let restored = image::imageops::resize(&small, w, h, image::imageops::FilterType::Lanczos3);
     let samples = restored.as_raw();
-    let mut out = Vec::new();
-    for y0 in (0..h as usize).step_by(32) {
-        for x0 in (0..w as usize).step_by(32) {
-            let x1 = (x0 + 32).min(w as usize);
-            let y1 = (y0 + 32).min(h as usize);
-            let tw = x1 - x0;
-            let th = y1 - y0;
-            let mut residual = vec![false; tw * th];
-            for y in y0..y1 {
-                for x in x0..x1 {
-                    let i = y * w as usize + x;
-                    residual[(y - y0) * tw + x - x0] = !covered[i]
-                        && (0..3)
-                            .any(|c| samples[3 * i + c].saturating_sub(source[3 * i + c]) >= 2);
-                }
-            }
-            // Preserve long thin residual ridges. Paper grain can form broad
-            // connected regions, so connectivity alone is insufficient.
-            let luma = |x: usize, y: usize| -> u16 {
-                let i = (y * w as usize + x) * 3;
-                (source[i] as u16 + source[i + 1] as u16 + source[i + 2] as u16) / 3
+    // Discover complete source-supported ridges before assigning 32px storage
+    // tiles. A tile seam must never truncate the evidence for a thin mark.
+    let luma = |x: usize, y: usize| -> u16 {
+        let i = (y * w as usize + x) * 3;
+        (source[i] as u16 + source[i + 1] as u16 + source[i + 2] as u16) / 3
+    };
+    let residual = |x: usize, y: usize| {
+        let i = y * w as usize + x;
+        (0..3).any(|c| samples[3 * i + c].saturating_sub(source[3 * i + c]) >= 2)
+    };
+    let mut tiles = std::collections::BTreeSet::new();
+    for y in 2..(h as usize).saturating_sub(2) {
+        let mut run = 0;
+        for x in 0..w as usize {
+            run = if residual(x, y) && luma(x, y) + 3 <= (luma(x, y - 2) + luma(x, y + 2)) / 2 {
+                run + 1
+            } else {
+                0
             };
-            let mut preserve = false;
-            for y in y0..y1 {
-                let mut run = 0;
-                for x in x0..x1 {
-                    let ridge = y >= 2
-                        && y + 2 < h as usize
-                        && luma(x, y) + 3 <= (luma(x, y - 2) + luma(x, y + 2)) / 2;
-                    run = if residual[(y - y0) * tw + x - x0] && ridge {
-                        run + 1
-                    } else {
-                        0
-                    };
-                    if run >= 8 {
-                        preserve = true;
-                        break;
+            if run == 8 {
+                for xx in x + 1 - 8..=x {
+                    if !covered[y * w as usize + xx] {
+                        tiles.insert((xx / 32, y / 32));
                     }
                 }
-                if preserve {
-                    break;
-                }
-            }
-            if !preserve {
-                for x in x0..x1 {
-                    let mut run = 0;
-                    for y in y0..y1 {
-                        let ridge = x >= 2
-                            && x + 2 < w as usize
-                            && luma(x, y) + 3 <= (luma(x - 2, y) + luma(x + 2, y)) / 2;
-                        run = if residual[(y - y0) * tw + x - x0] && ridge {
-                            run + 1
-                        } else {
-                            0
-                        };
-                        if run >= 8 {
-                            preserve = true;
-                            break;
-                        }
-                    }
-                    if preserve {
-                        break;
-                    }
-                }
-            }
-            if preserve {
-                out.push(patch_from_rgb(
-                    source,
-                    w as usize,
-                    h as usize,
-                    [x0 as f64, y0 as f64, x1 as f64, y1 as f64],
-                ));
+            } else if run > 8 && !covered[y * w as usize + x] {
+                tiles.insert((x / 32, y / 32));
             }
         }
+    }
+    for x in 2..(w as usize).saturating_sub(2) {
+        let mut run = 0;
+        for y in 0..h as usize {
+            run = if residual(x, y) && luma(x, y) + 3 <= (luma(x - 2, y) + luma(x + 2, y)) / 2 {
+                run + 1
+            } else {
+                0
+            };
+            if run == 8 {
+                for yy in y + 1 - 8..=y {
+                    if !covered[yy * w as usize + x] {
+                        tiles.insert((x / 32, yy / 32));
+                    }
+                }
+            } else if run > 8 && !covered[y * w as usize + x] {
+                tiles.insert((x / 32, y / 32));
+            }
+        }
+    }
+    let mut out = Vec::new();
+    for (cx, cy) in tiles {
+        let x0 = cx * 32;
+        let y0 = cy * 32;
+        out.push(patch_from_rgb(
+            source,
+            w as usize,
+            h as usize,
+            [
+                x0 as f64,
+                y0 as f64,
+                (x0 + 32).min(w as usize) as f64,
+                (y0 + 32).min(h as usize) as f64,
+            ],
+        ));
     }
     out
 }
@@ -2241,17 +2211,22 @@ mod contour_coverage_tests {
     fn compact_background_retains_a_faint_unowned_line_natively() {
         let (w, h) = (64u32, 64u32);
         let mut rgb = vec![250u8; (w * h * 3) as usize];
-        for y in 9..25 {
+        for y in 31..47 {
             for c in 0..3 {
                 rgb[(y * 64 + 17) * 3 + c] = 244;
             }
         }
         let background = downsampled_background_patch(&rgb, w, h, 600.0);
         let patches = residual_detail_patches(&rgb, w, h, &background, &[]);
-        assert!(patches.iter().any(|p| p.bbox_px[0] <= 17.0
-            && p.bbox_px[2] > 17.0
-            && p.bbox_px[1] <= 9.0
-            && p.bbox_px[3] >= 25.0));
+        for y in 31..47 {
+            assert!(
+                patches.iter().any(|p| p.bbox_px[0] <= 17.0
+                    && p.bbox_px[2] > 17.0
+                    && p.bbox_px[1] <= y as f64
+                    && p.bbox_px[3] > y as f64),
+                "line endpoint across a tile seam must survive"
+            );
+        }
         // Samples inside a retained tile are source exact, not estimated ink.
         for p in patches {
             let x = p.bbox_px[0] as usize;
