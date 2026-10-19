@@ -1370,7 +1370,14 @@ pub(crate) fn convert_parts_with_document_donors(
     // Coherent weak marks are native content even if OCR/segmentation missed
     // them. Copy the cleaned source so their strip cannot repaint vector ink.
     for bbox in weak_rules {
-        patches.push(patch_from_rgb(patch_source, w as usize, h as usize, bbox));
+        let cell = (8.0 * policy.dpi / 300.0).round().max(8.0);
+        let padded = [
+            (bbox[0] / cell).floor() * cell,
+            (bbox[1] / cell).floor() * cell,
+            ((bbox[2] / cell).ceil() * cell).min(w as f64),
+            ((bbox[3] / cell).ceil() * cell).min(h as f64),
+        ];
+        patches.push(patch_from_rgb(patch_source, w as usize, h as usize, padded));
     }
 
     // coalesce: merge overlapping or exactly-adjacent patches (the artwork
@@ -2293,6 +2300,7 @@ fn protect_weak_rules(
     let scale = (dpi / 300.0).round().max(1.0) as usize;
     let offset = 2 * scale;
     let minimum = 8 * scale;
+    let max_gap = 4 * scale;
     let light = paper.iter().map(|&v| v as u16).sum::<u16>() / 3;
     let lum: Vec<u16> = rgb
         .chunks_exact(3)
@@ -2300,58 +2308,56 @@ fn protect_weak_rules(
         .collect();
     let weak = |at: usize| lum[at] >= light.saturating_sub(32) && lum[at] + 3 <= light;
     let mut boxes = Vec::new();
-    for y in offset..h.saturating_sub(offset) {
-        let mut start = None;
-        let mut support = 0;
-        for x in 0..=w {
-            let connected = x < w && lum[y * w + x] + 3 <= light;
-            if connected {
-                if start.is_none() {
-                    start = Some(x);
+    for vertical in [false, true] {
+        let (lines, length) = if vertical { (w, h) } else { (h, w) };
+        for fixed in offset..lines.saturating_sub(offset) {
+            let at = |v: usize| {
+                if vertical {
+                    v * w + fixed
+                } else {
+                    fixed * w + v
                 }
-                if weak(y * w + x)
-                    && lum[y * w + x] + 3
-                        <= (lum[(y - offset) * w + x] + lum[(y + offset) * w + x]) / 2
-                {
-                    support += 1;
+            };
+            let mut start = None;
+            let mut support = 0;
+            let mut gap = 0;
+            let mut last = 0;
+            for v in 0..=length {
+                let connected = v < length && lum[at(v)] + 3 <= light;
+                if connected {
+                    if start.is_none() {
+                        start = Some(v);
+                    }
+                    let i = at(v);
+                    let delta = if vertical { offset } else { offset * w };
+                    let ridge = weak(i) && lum[i] + 3 <= (lum[i - delta] + lum[i + delta]) / 2;
+                    if ridge {
+                        support += 1;
+                        gap = 0;
+                        last = v + 1;
+                    } else if weak(i) {
+                        gap += 1;
+                    }
                 }
-            } else if let Some(left) = start.take() {
-                if support >= minimum {
-                    for xx in left..x {
-                        if weak(y * w + xx) {
-                            protected[y * w + xx] = true;
+                if !connected || gap > max_gap {
+                    if let Some(begin) = start.take() {
+                        if support >= minimum {
+                            for u in begin..last {
+                                if weak(at(u)) {
+                                    protected[at(u)] = true;
+                                }
+                            }
+                            boxes.push(if vertical {
+                                [fixed as f64, begin as f64, (fixed + 1) as f64, last as f64]
+                            } else {
+                                [begin as f64, fixed as f64, last as f64, (fixed + 1) as f64]
+                            });
                         }
                     }
-                    boxes.push([left as f64, y as f64, x as f64, (y + 1) as f64]);
+                    support = 0;
+                    gap = 0;
+                    last = 0;
                 }
-                support = 0;
-            }
-        }
-    }
-    for x in offset..w.saturating_sub(offset) {
-        let mut start = None;
-        let mut support = 0;
-        for y in 0..=h {
-            let connected = y < h && lum[y * w + x] + 3 <= light;
-            if connected {
-                if start.is_none() {
-                    start = Some(y);
-                }
-                if weak(y * w + x)
-                    && lum[y * w + x] + 3 <= (lum[y * w + x - offset] + lum[y * w + x + offset]) / 2
-                {
-                    support += 1;
-                }
-            } else if let Some(top) = start.take() {
-                if support >= minimum {
-                    for yy in top..y {
-                        if weak(yy * w + x) {
-                            protected[yy * w + x] = true;
-                        }
-                    }
-                    boxes.push([x as f64, top as f64, (x + 1) as f64, y as f64]);
-                }
-                support = 0;
             }
         }
     }
