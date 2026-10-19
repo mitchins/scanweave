@@ -412,15 +412,20 @@ pub(crate) fn trace_shape_clearscan(
     let mut objective = cost(&best, best_score);
     let mut fitted = Vec::new();
     let mut selected_level = None;
-    let mut binary = offset_coverage_contour(&best, 0.0);
-    for c in binary
-        .layers
-        .iter_mut()
-        .flat_map(|(o, h)| std::iter::once(o).chain(h))
-    {
-        *c = crate::curve_fit::fit_ring(&sample_spline(c, 6), 0.15);
+    // Local outlines retain their source-preservation floor. A bounded
+    // range lets small kana and punctuation lose staircase joints without
+    // lowering that floor or forcing a canonical assignment without donors.
+    for tolerance in [0.15, 0.3, 0.45] {
+        let mut binary = offset_coverage_contour(&best, 0.0);
+        for c in binary
+            .layers
+            .iter_mut()
+            .flat_map(|(o, h)| std::iter::once(o).chain(h))
+        {
+            *c = crate::curve_fit::fit_ring(&sample_spline(c, 6), tolerance);
+        }
+        fitted.push((binary, "regularized_binary_curve", None, tolerance));
     }
-    fitted.push((binary, "regularized_binary_curve", None));
     let substantial_holes = baseline
         .layers
         .iter()
@@ -446,10 +451,10 @@ pub(crate) fn trace_shape_clearscan(
             let mut t = best.clone();
             t.layers = layers;
             t.preserve_crop_frame = true;
-            fitted.push((t, "grayscale_subpixel_curve", Some(level)));
+            fitted.push((t, "grayscale_subpixel_curve", Some(level), 0.15));
         }
     }
-    for (mut candidate, method, level) in fitted {
+    for (mut candidate, method, level, tolerance) in fitted {
         candidate.compact_curves = true;
         for inset in [0.0, -0.15, 0.15] {
             let t = offset_coverage_contour(&candidate, inset);
@@ -459,7 +464,7 @@ pub(crate) fn trace_shape_clearscan(
                     objective = value;
                     best_score = loss;
                     best = t;
-                    choice = (method, 65, 0.15, inset);
+                    choice = (method, 65, tolerance, inset);
                     selected_level = level;
                 }
             }
