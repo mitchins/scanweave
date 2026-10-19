@@ -1,26 +1,28 @@
-# Matched current Adobe XI comparison
+# Adobe XI versus current ScanWeave
 
-Starting ScanWeave HEAD: `c20a8a91c1109c31bbf7cfdc5ff1b562f5f05986`. The authoritative document manifests reference eight pages, each 432 × 216 pt; extra fixture pages 08–11 are excluded. Identical source samples are assembled losslessly into `qualification/clearscan_competitive/{300,600}/source.pdf` for Adobe. Normal ScanWeave `build --bundle … --profile clearscan` consumes those exact images and the existing OCR bundle. Oracle images are evaluator-only.
+Matched eight-page inputs: genuine300/600DPI, exact image samples and432×216pt pages. Starting ScanWeave`c20a8a91c1109c31bbf7cfdc5ff1b562f5f05986`; measured current implementation`08431a7`. Full engineering findings, stage attribution and real-document evidence are in [CLEARSCAN_COMPETITIVE_REPORT.md](CLEARSCAN_COMPETITIVE_REPORT.md).
 
-Acrobat XI Pro 11.0.20, Wine 9.0 (Ubuntu), ClearScan output style, all pages. The runner needed repairs for a landscape selection miss and a settings-confirmation race. A shared display was also receiving unrelated application windows; accepted runs use dedicated Xvfb `:109`. Image-only and Searchable Image attempts were rejected, not counted as ClearScan. Accepted 300 DPI output contains embedded CID Type 0C font programs and reduced 150 DPI background images plus retained 300 DPI regions. The known producer string alone was insufficient verification.
+Acrobat XI Pro11.0.20 /Wine9.0, dedicated Xvfb109. Verified normal UI: English(US), ClearScan, Downsample To600dpi. Actual reduced background images are150dpi. Visible embedded CID Type0C text and image/content inspection verify genuine reconstruction. Adobe output fonts were measured only; no Adobe font programs/resources were transferred into ScanWeave.
 
-Full same-instance and per-family results are in `qualification/clearscan_competitive/{300,600}/{source,adobe,previous}/metrics.json`. Each includes default-DPI and source-controlled resolution measurements, Poppler and PDFium independently, exact stream accounting, extraction and the ten best/worst families. Commands are encoded in the run scripts and CLI time logs.
+| DPI | Source PDF B | Adobe B | Previous ScanWeave B | New ScanWeave B | Adobe PDFium glyph IoU | Previous IoU | New IoU | Raw scan IoU |
+|---|---:|---:|---:|---:|---:|---:|---:|---:|
+| 300 | 4,124,819 | 37,100 | 1,093,038 | 732,603 | 0.90255 | 0.89301 | 0.91080 | 0.94516 |
+| 600 | 16,263,472 | 50,779 | 889,147 | 1,334,401 | 0.94155 | 0.93798 | 0.94272 | 0.97807 |
 
-## Rendering control
+The source scan remains more accurate in aggregate than either reconstructed converter. New ScanWeave improves against the previous output on both exact-size renderers, strongly at300 and modestly at600;600 size grows50.1%. Do not read these results as aggregate recovery beyond the source or Adobe-level compression.
 
-Rendering a completely untouched full-page scan at `-r 300` introduces sampling error in Poppler. PDFium's `scale=300/72` rounds the page to 1801 × 901 rather than 1800 × 900. At `299.99999`, both source-only renders reproduce the original samples exactly. However, Poppler then quantizes small placed raster patches differently; this is independently reproduced in `patch_sampling_probe.json` and `review.json`. Consequently both settings are retained, and an unrendered source-to-pristine score must not be interpreted as an equal-renderer baseline for an emitted PDF. Translation-only alignment scores are diagnostic, never replacements for physical-position scores.
+## Rendering and reproducibility
 
-The earlier fallback `8` has byte-exact encoded samples and a mathematically correct placement. PDFium's controlled render is exact inside its native patch; Poppler's is not. The discrepancy is not proof of missing source pixels or a wrong vector glyph.
+Primary results isolate552 nonspace instances at fixed physical positions. Poppler uses integer physical DPI; PDFium uses`nextafter(dpi/72,0)` to avoid floating-point ceil. Ordinary-scale PDFium, raw padded windows, shape-alignment diagnostics, original image-only renders and all renderer-specific records remain available. Earlier fractional-DPI Poppler results were invalidated by a1pixel vector phase shift and preserved under`pre-grid-correction/`. They are not headline results. The frozen source PDF has exact decoded samples, but Poppler rendering of even that image-only file introduces resampling.
 
-Final tables and current implementation results are recorded in `CLEARSCAN_COMPETITIVE_REPORT.md` after the engineering reruns.
+The300 Adobe repeat differs37100→38295B, but all32rendered pages are pixel-identical, text agrees and raster/font/content payload sizes match. Other streams/overhead differ1195B. Valid repeated300 conversion97.91s;600 conversion98.82s. Shared-display interference and bounded landscape/dialog runner fixes are documented; invalid image-only/Searchable Image attempts are excluded.
 
-## Frozen starting-output measurements
+## Evidence and commands
 
-The source column below is the image-only PDF; ScanWeave also reports qualified searchable-raster candidates of 4,210,178 B and 16,320,387 B.
+- [Run manifest and exact source-image verification](qualification/clearscan_competitive/run-manifest.json).
+- [Reproduction commands, settings and measurement contracts](qualification/clearscan_competitive/README.md).
+- [Machine-readable common scorecard](qualification/clearscan_competitive/scorecard.json).
+- [300 DPI native/enlarged examples](qualification/clearscan_competitive/300/final-best-800pct.png) and [worst examples](qualification/clearscan_competitive/300/final-worst-800pct.png).
+- [Independent implementation review](qualification/clearscan_competitive/final-review.md) and [known-font control review](qualification/clearscan_competitive/oracle-control-review.md).
 
-| DPI | Source PDF B | Adobe PDF B | ScanWeave PDF B | Adobe font B | ScanWeave font B | Adobe raster B | ScanWeave raster B |
-|---|---:|---:|---:|---:|---:|---:|---:|
-| 300 | 4,124,819 | 37,100 | 1,093,038 | 5,963 | 35,332 | 17,411 | 917,473 |
-| 600 | 16,263,472 | 50,779 | 889,147 | 5,880 | 52,464 | 30,036 | 754,225 |
-
-At the source-controlled resolution, PDFium glyph-window IoU is 0.86728 Adobe versus 0.83911 ScanWeave at 300 DPI, and 0.86617 versus 0.86252 at 600 DPI. Poppler differs markedly: 0.63657 versus 0.66816 at 300 DPI; 0.74632 versus 0.69057 at 600 DPI. These reproduce the historical padded-window metric, including whitespace records; glyph isolation and stage diagnostics in the final report distinguish their limitations. Native-DPI results are preserved separately rather than averaged across renderers.
+The older frozen three-page benchmark is reported separately with same-input Adobe/current/previous results; it is never substituted for the eight-page comparison. Both Poppler and PDFium, OCR errors and visual identity diagnostics remain separate.

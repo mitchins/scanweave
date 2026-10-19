@@ -170,5 +170,316 @@
     "finding": "Likely contributor for the recurring g prototype, not a sufficient explanation for all three families. The worst g examples use prototype e733... represented by __doc_donor:p05:p05s0060 with outline_threshold_luma=0; visual_dict.rs assigns zero and skips refine_observed_mask for __doc_donor units. The worst 0 and semicolon examples use their same-page local representatives (thresholds 142 and 146 respectively), so the binary donor threshold skip is not the direct cause for those worst examples. Donor evidence still coexists in those cohorts, but prototype choice/local shape evidence is a broader cause to inspect.",
     "confidence": "moderate; attribution is based on occurrence-to-prototype traces, representative IDs and recorded thresholds, not font-outline raster tracing."
   },
-  "no_product_edits": true
+  "no_product_edits": true,
+  "latest_review": {
+    "baseline_commit": "59ceb2063ae88ebc9cfa1dc4f5a4ae05c54fb5e7",
+    "scope": "Read-only independent review of the final donor-witness fringe path and the requested actual faint-line negative. Only review artifacts were created.",
+    "corrected_donor_evidence": {
+      "prior_review_statement": "Sibling __doc_donor Units have no grayscale samples or halo.",
+      "correction": "That statement was wrong. document.rs bounded donor loop calls retain_grayscale on each cloned donor before adding it to sibling_donors. The Unit constructor starts with None for memory control, but the selected bounded donor has grayscale crop and 2-pixel gray halo before visual_dict skips refine_observed_mask for __doc_donor representatives. The selected p00 `a` witness is __doc_donor:p02:p02s0033; its canonical path is prototype:b405cf55c459732c125fb9cfaac417921bb72c8db3cf6bb1bad3b9734b7b1728.",
+      "source": "crates/scanweave-io/src/document.rs donor loop around line 280; crates/scanweave-io/src/units.rs Unit::retain_grayscale; prototype report in negative-report.json page p00."
+    },
+    "test_input": {
+      "path": "qualification/clearscan_competitive/review-negative/input/document.json",
+      "sha256": "d7b2d1be9127074b8b9e9e9f4d909b570213fae735740fa3d830ffa80d79e485",
+      "recipe": "Based on qualification/experiments/m1g/generate_fixture.py and exact dpi300 bundle; copied whole bundle, changed only RGB samples x=164,y=95..110 on page00, then recomputed page PNG/OCR/document hashes and canonical pixel binding.",
+      "manifest": "qualification/clearscan_competitive/review-negative/negative-input.json",
+      "manifest_sha256": "f02e326f403383eeec17ffa77f91fdd0e763e3d414bc43769101c2d568b8f839",
+      "changed_pixels": 16,
+      "pixel_edit": "vertical 1-pixel line, RGB=250 except y=107 RGB=252; no OCR or protected/artwork geometry changes. It is outside p00s0002 `a` ownership crop [140,92,163,116]."
+    },
+    "conversion": {
+      "command": "target/debug/scanweave-cli build --bundle qualification/clearscan_competitive/review-negative/input/document.json --profile clearscan --mode reconstruct --output qualification/clearscan_competitive/review-negative/negative.pdf --report qualification/clearscan_competitive/review-negative/negative-report.json",
+      "pdf": "qualification/clearscan_competitive/review-negative/negative.pdf",
+      "pdf_sha256": "24298dd2e68220a8a5c84f41f703c85cf64841d9edb6cdc57f0fce54286c50f1",
+      "pdf_bytes": 721064,
+      "report": "qualification/clearscan_competitive/review-negative/negative-report.json",
+      "report_sha256": "565f600476891e28d62740e9ebb6393f00ae641bc89c4e5d8ebcca29153ea5da",
+      "target_occurrence": "p00s0002 a, canonical_repair_from_document_witnesses; replacement bbox [140,92,163,116]."
+    },
+    "pdfium_measurement": {
+      "renderer": "PDFium via pypdfium2",
+      "scale": 4.166666527777778,
+      "page_size_px": [
+        1800,
+        900
+      ],
+      "matched_control_pdf": "qualification/clearscan_competitive/300/witness.pdf",
+      "control_pdf_sha256": "e107a907242273e35d78318226787bc466f4b145ad30710cf4163a0d040fc818",
+      "comparison": "At x=164,y=95..110 the negative renders gray 252-253 while matched control renders 254-255. All 16 line pixels remain 1-3 gray levels darker than control; mean modified-source pixel is 250.125 versus original local source background mean 254.8125 (contrast 4.6875), and mean final contrast versus matched PDFium control is 1.75 (37.3% of source contrast). The mark remains measurable but is materially weakened by full-page reduced-background/JPEG representation.",
+      "interpretation": "The line lies outside the glyph-mask one-pixel fringe loop (the owned crop ends at x=162), so this exact x=164 test does not exercise the classifier predicate. It demonstrates no full deletion by the classifier but exposes a background-layer fidelity weakness: unknown one-pixel low-contrast content receives no native-resolution patch and loses about 63% of its local contrast. A classifier-specific unowned-mark test must put a mark within a candidate fringe pixel while keeping it out of ownership; a mark with exactly donor-predicted grayscale coverage is intrinsically indistinguishable from genuine antialiasing from source intensities alone.",
+      "source_local_background_gray_mean": 254.8125,
+      "modified_line_gray_mean": 250.125,
+      "source_local_contrast": 4.6875,
+      "mean_final_contrast_vs_control": 1.75,
+      "contrast_retention_fraction": 0.37333333333333335
+    },
+    "rendered_artifacts": {
+      "page00": "qualification/clearscan_competitive/review-negative/negative-pdfium-page00.png",
+      "page00_sha256": "f6e09b9fdc594f25c5db5fb72af47b9d592332622065090dce6c9172c146c83e",
+      "crop": "qualification/clearscan_competitive/review-negative/line-comparison.png",
+      "crop_sha256": "5652a535e663f6b26227fb087acf344da76462bb90d9d3ab68aa1a2c8350ce93"
+    },
+    "projection_review": "No concrete projection or indexing defect found. Gray halo indexing is checked against crop+4 bounds; selected sibling witness grayscale is retained in document.rs before visual dictionary prototype handling.",
+    "code_edits_made": false,
+    "review_findings": [
+      {
+        "severity": "pass",
+        "finding": "Sibling grayscale evidence is retained correctly: document.rs clones each selected bounded donor and calls retain_grayscale before prefixing/adding it. __doc_donor prototypes skip threshold refinement but retain the preattached gray samples and 2px halo."
+      },
+      {
+        "severity": "fidelity_risk",
+        "finding": "The isolated unowned low-contrast line at x=164,y=95..110 is not erased by the vector-fringe classifier (it lies outside the accepted a mask and its one-pixel loop), but the full-page reduced background/JPEG layer weakens its local contrast from 4.6875 gray levels in source to 1.75 in PDFium relative to the matched control: about 37.3% retained. This is a concrete preservation risk for subthreshold unknown content that never becomes a native-resolution patch."
+      },
+      {
+        "severity": "classifier_limit",
+        "finding": "The classifier\u2019s per-pixel donor-intensity test cannot distinguish an unrelated mark from antialiasing if the mark lands within its fringe footprint and exactly matches predicted donor coverage. A hard-negative unit test at an actual candidate fringe pixel is needed to expose/document this irreducible ambiguity; the x=164 line test does not trigger that condition."
+      }
+    ],
+    "bounded_restoration_guard_followup": {
+      "scope": "Read-only review of the native cleaned-source glyph-neighborhood guards, direct caller-protected patch path, and latest 300-DPI residual ridge guard. No converter edits made.",
+      "current_binary": {
+        "path": "target/release/scanweave-cli",
+        "sha256": "d550e23b2ab8aafda3509ce0189c32b0cdd033ccd73e5b3fdf261b218ef7c9b7"
+      },
+      "ordinary_negative": {
+        "input_bundle": "qualification/clearscan_competitive/review-negative/input/document.json",
+        "input_bundle_sha256": "d7b2d1be9127074b8b9e9e9f4d909b570213fae735740fa3d830ffa80d79e485",
+        "base_raster": "qualification/experiments/m1g/fixture/dpi300/input/page00.png",
+        "base_raster_sha256": "b7d47625d1dd0cc006efb64ea371728faddd8ecf98a0c72fd1f49759c0d455d5",
+        "input_pixel_diff": "Exactly 16 samples changed: x=164,y=95..110; all remaining source pixels equal the frozen M1G raster.",
+        "command": "./target/release/scanweave-cli build --bundle qualification/clearscan_competitive/review-negative/input/document.json --profile clearscan --mode reconstruct --output qualification/clearscan_competitive/review-negative/ridge-negative.pdf --report qualification/clearscan_competitive/review-negative/ridge-negative-report.json",
+        "output_pdf": "qualification/clearscan_competitive/review-negative/ridge-negative.pdf",
+        "output_sha256": "6ca62fa90a89ef3bf6c086f270fe3541fbe7a5acc9711031fd2aeb8c7ee4e85f",
+        "output_bytes": 994593,
+        "output_report_sha256": "d3567b30843a4eeee01efc002bc3900a20656026888fb43a1aeac03eaa425453",
+        "pdfium_render": "qualification/clearscan_competitive/review-negative/ridge-negative-pdfium-page00.png",
+        "pdfium_render_sha256": "8c17e00029603fc88252f099da90d711b500863a576b13112794a9efcbf0ffe7",
+        "renderer": "PDFium via pypdfium2; scale 299.99999/72; output 1800x900; matched control qualification/clearscan_competitive/300/witness.pdf sha256 e107a907242273e35d78318226787bc466f4b145ad30710cf4163a0d040fc818",
+        "line_samples_y95_to_110_at_x164": [
+          250,
+          250,
+          250,
+          250,
+          250,
+          250,
+          250,
+          250,
+          250,
+          250,
+          250,
+          250,
+          250,
+          251,
+          250,
+          250
+        ],
+        "control_samples_y95_to_110_at_x164": [
+          255,
+          255,
+          255,
+          255,
+          255,
+          255,
+          254,
+          254,
+          254,
+          254,
+          255,
+          255,
+          254,
+          254,
+          254,
+          254
+        ],
+        "result": "All 16 pixels remain visible. Against the matched output control, mean local contrast is 4.4375 gray levels versus 4.6875 in source (94.7% retained); one naturally 252 source sample becomes 251, so no attenuation regression is observed for this target line.",
+        "limitation": "The latest guard is a bounded heuristic, not a guarantee for arbitrary unknown content: the source comment/code require source-vs-background dark residual >=2, horizontal/vertical ridge contrast >=3 against +/-2px neighbours, and run length >=8. Diagonal marks, runs shorter than 8, contrast below thresholds, or marks merged with protected/suppressed pixels have no general preservation guarantee. The earlier x=164 line is preserved by the coherent residual path; it is not proof for every faint mark."
+      },
+      "direct_protected_no_ocr": {
+        "test_bundle": "qualification/clearscan_competitive/review-negative/protected-no-ocr/document.json",
+        "test_bundle_sha256": "b0d8e18a48d71e398b0a51e295578f136fcda4f1b284f3d963ecc11624bbb25d",
+        "description": "Added caller-origin protection polygon [164,95]-[165,111] over the same 16-pixel line, with no OCR span for that line. Valid OCR schema and updated page/document binding hashes.",
+        "output_pdf": "qualification/clearscan_competitive/review-negative/ridge-protected-no-ocr.pdf",
+        "output_sha256": "1c4770564055509f229443a3b12176539c4a033bbc7e704239b3d4890933c8d3",
+        "output_bytes": 994922,
+        "pdfium_samples_y95_to_110_at_x164": [
+          250,
+          250,
+          250,
+          250,
+          250,
+          250,
+          250,
+          250,
+          250,
+          250,
+          250,
+          250,
+          252,
+          250,
+          250,
+          250
+        ],
+        "result": "Reran the caller-protected, no-OCR polygon under current post-ridge binary. All 16 samples remain at source line values except the naturally 252 sample renders 251. This confirms the direct protected path on the final guard implementation.",
+        "output_report_sha256": "d9894f0bf94f93c1f62f1925bd8f066f61de8c797dac61f320daa0b4f229d49e",
+        "pdfium_render": "qualification/clearscan_competitive/review-negative/ridge-protected-no-ocr-pdfium-page00.png",
+        "pdfium_render_sha256": "825cdb6dbf5c70c08e1acc1e385d3a5b7aea5649770ec44fef11a83eb1af5c71",
+        "current_binary_pixels_y95_to_110_at_x164": [
+          250,
+          250,
+          250,
+          250,
+          250,
+          250,
+          250,
+          250,
+          250,
+          250,
+          250,
+          250,
+          250,
+          251,
+          250,
+          250
+        ]
+      },
+      "implementation_review": {
+        "finding": "The in-bounds glyph-neighborhood, residual and explicit protected patches use source pixel coordinates and are composed above the reduced background. The line tests found no projection/indexing defect for in-bounds source coordinates.",
+        "risk": "The 32px tile ridge test resets run length at each tile boundary, so an axis-aligned coherent segment crossing a tile boundary can be split into two sub-8 runs and miss this residual guard. The separate glyph-neighborhood and explicit protected guards cover only their footprints. protected patches currently preserve their bbox rectangle, not polygon-exact shape, which is conservative for content but can cost more.",
+        "code_edits_made": false,
+        "critical_bounds_hazard": "Verified on pre-fix binary; resolved in current selective source and tested as recorded in edge_clamp_regression.",
+        "safe_fix": "Iterate already clamped, nonempty protected_boxes for unconditional raster patches, preserving one-to-one region mapping if IDs are needed; otherwise clamp and filter each polygon bbox before patch_from_rgb.",
+        "current_residual_seam_finding": "The seam-corrected implementation detects the full continuous ridge before assigning 32px storage cells. The saved crossing-seam regression now passes. In the ordinary negative, native patch resource /Im3 stores x164,y95=250 exactly; PDFium renders 252 at that pixel, indicating a residual renderer/placement discrepancy rather than an unowned sample."
+      },
+      "current_binary_at_final_protected_run": {
+        "path": "target/release/scanweave-cli",
+        "sha256": "9a5fe519f186a88792cc0ad516cf83425c7a60aa7437c2782ea16031e7eaefb2",
+        "mtime": "2026-10-19 13:09:40 +1100"
+      },
+      "no_product_edits": true,
+      "latest_selective_build": {
+        "binary_sha256": "3b843762e0e6b202fcc80958f2141419e2acad26c5eb2f6b70cba687ce75bbd1",
+        "source_change": "Removed unconditional per-vector glyph-neighborhood native patches; retained unconditional protected-region patches using clamped/nonempty protected_boxes and residual-detail patches.",
+        "negative_pdf": "qualification/clearscan_competitive/review-negative/selective-negative.pdf",
+        "negative_pdf_sha256": "d8f5b95a925dba9006e5f5f5de8877f5581c0bfbe082b201e778d14c7b3ba4a1",
+        "negative_pdf_bytes": 729070,
+        "negative_report_sha256": "515d93adbabc56c61abcbacb51578c541794532289983846e975df5f0fe2a5e0",
+        "renderer": "PDFium via pypdfium2; scale 299.99999/72; page 1800x900; control qualification/clearscan_competitive/300/witness.pdf sha256 e107a907242273e35d78318226787bc466f4b145ad30710cf4163a0d040fc818",
+        "line_samples_y95_to_110_at_x164": [
+          253,
+          250,
+          250,
+          250,
+          250,
+          250,
+          250,
+          250,
+          250,
+          250,
+          250,
+          250,
+          251,
+          250,
+          250,
+          250
+        ],
+        "control_samples_y95_to_110_at_x164": [
+          255,
+          255,
+          255,
+          255,
+          255,
+          255,
+          254,
+          254,
+          254,
+          254,
+          255,
+          255,
+          254,
+          254,
+          254,
+          254
+        ],
+        "result": "The 15px segment in the second 32px tile is retained at source intensity. The y=95 endpoint (source 250 vs clean control 255) becomes 253, retaining only 2 of 5 contrast levels (40%). It is a localized tile-seam miss; the other 15 samples match source values except y=107 source 252 renders 251. This does not justify restoring all glyph neighborhood guards. Recommend a bounded seam-aware ridge continuation or neighboring seam sample patch and rerun this negative.",
+        "render": "qualification/clearscan_competitive/review-negative/selective-negative-pdfium-page00.png",
+        "render_sha256": "da91912036059a3fe82c558f40e638ddcf7c0869e499fad4a2bdc8ca38dfc874"
+      },
+      "edge_clamp_regression": {
+        "prior_failure": "One-page schema-valid protected polygon at y=[900.25,900.5] on a 1800x900 page (within OCR validator boundary tolerance 2 px) panicked at convert.rs:1715 with slice index 4860300 > length 4860000; this run was on the pre-fix binary.",
+        "current_fix": "Protected emission now iterates already clamped and empty-filtered protected_boxes.",
+        "current_test_bundle": "qualification/clearscan_competitive/review-negative/edge-bottom-panic/document.json",
+        "current_test_bundle_sha256": "56c84596e4a5d407699977c0e5ce1f9badc8c9d2b89e5644f6b5625611f4d29d",
+        "current_binary_sha256": "3b843762e0e6b202fcc80958f2141419e2acad26c5eb2f6b70cba687ce75bbd1",
+        "current_output": "qualification/clearscan_competitive/review-negative/selective-edge-protected.pdf",
+        "current_output_sha256": "316a0d430e756118cd9420ff814f71f8ae41d77add471ac5b37c344925a4e688",
+        "current_result": "The same boundary-sliver bundle now completes successfully (1 page, 156093 bytes)."
+      },
+      "seam_corrected_final_verification": {
+        "commit": "5f88c66d402b6afbdc08179b66312160d5861bcd",
+        "binary_sha256": "f9eb91e942a789e083c6107bc7ed4913170bb1de786e4ed80cc89e53a6557ed2",
+        "source_change": "Residual ridge runs are detected continuously before mapping samples to 32px storage cells; the seam test covers the former 1+15 split.",
+        "negative_input_sha256": "d7b2d1be9127074b8b9e9e9f4d909b570213fae735740fa3d830ffa80d79e485",
+        "negative_pdf": "qualification/clearscan_competitive/review-negative/seam-final-negative.pdf",
+        "negative_pdf_sha256": "0f0e74288f68175cac6547ab846a3db2dc332138129bcc298c8b3a9dc9e91bd0",
+        "negative_pdf_bytes": 732320,
+        "negative_report_sha256": "e370a18374603439a5b9e42e3a46f2bf043fc455ca74884131a2df782aa19b1b",
+        "renderer": "PDFium via pypdfium2; scale 299.99999/72; page 1800x900; comparison control qualification/clearscan_competitive/300/witness.pdf sha256 e107a907242273e35d78318226787bc466f4b145ad30710cf4163a0d040fc818",
+        "line_samples_y95_to_110_at_x164": [
+          252,
+          250,
+          250,
+          250,
+          250,
+          250,
+          250,
+          250,
+          250,
+          250,
+          250,
+          250,
+          250,
+          251,
+          250,
+          250
+        ],
+        "control_samples_y95_to_110_at_x164": [
+          255,
+          255,
+          255,
+          255,
+          255,
+          255,
+          254,
+          254,
+          254,
+          254,
+          255,
+          255,
+          254,
+          254,
+          254,
+          254
+        ],
+        "render_sha256": "8c117e1ad5b0bbc7f4fef68603ee39396df6d22eff6151a86666b89710230ad8",
+        "result": "All 16 line samples are now covered by the detected continuous ridge; 15 render at source values and the exceptional source-252 sample renders 251. The endpoint y=95 renders 252 versus source 250 and clean control 255. Its contrast retention is 3/5=60%; mean contrast versus the control is 4.375 gray levels versus 4.4375 in source (about 98.6%). Compared with the previous selective output, endpoint improved 253\u2192252.",
+        "native_patch_evidence": {
+          "xobject": "/Im3",
+          "dimensions_px": [
+            32,
+            64
+          ],
+          "device_space": "DeviceGray, FlateDecode",
+          "mapped_source_bbox_px": [
+            160,
+            64,
+            192,
+            128
+          ],
+          "sample": "decoded row31,col4 (source x164,y95) equals 250 exactly; PDFium final at same target pixel equals 252"
+        },
+        "interpretation": "The earlier residual detection seam miss is resolved: the sample is covered and serialized exactly. The remaining 2-level endpoint discrepancy is between the stored lossless native sample and the PDFium-rendered page, so it lies in image placement/compositing/render sampling rather than residual selection. No broad rerun is warranted; preserve renderer-specific result."
+      }
+    }
+  }
 }

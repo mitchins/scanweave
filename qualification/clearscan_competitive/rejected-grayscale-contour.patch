@@ -1,0 +1,328 @@
+diff --git a/crates/scanweave-io/src/convert.rs b/crates/scanweave-io/src/convert.rs
+index f69dbf5..110cbea 100644
+--- a/crates/scanweave-io/src/convert.rs
++++ b/crates/scanweave-io/src/convert.rs
+@@ -411,7 +411,10 @@ pub(crate) fn glyph_ink_iou(g: &GlyphShape, crop_w: usize, crop_h: usize, mask:
+     // expressed in the glyph's construction frame: the crop maps to
+     // [anchor_bbox_fu[0], +ink_span_fu[0]] x [anchor_bbox_fu[1], +ink_span_fu[1]]
+     // (the same frame page_pdf uses to place the run: tx = x0 - anchor*sx/upem).
+-    let k = (g.ink_span_fu[0] / crop_w as f64).max(f64::EPSILON); // font units per px
++    let kx = (g.ink_span_fu[0] / crop_w as f64).max(f64::EPSILON);
++    let ky = (g.ink_span_fu[1] / crop_h as f64).max(f64::EPSILON);
++    let to_x = |x: f64| (x - g.anchor_bbox_fu[0]) / kx;
++    let to_y = |y: f64| crop_h as f64 - (y - g.anchor_bbox_fu[1]) / ky;
+     let mut polys: Vec<Vec<[f64; 2]>> = Vec::new();
+     let mut cur: Vec<[f64; 2]> = Vec::new();
+     let mut start = [0.0f64, 0.0f64];
+@@ -441,21 +444,21 @@ pub(crate) fn glyph_ink_iou(g: &GlyphShape, crop_w: usize, crop_h: usize, mask:
+                 } else {
+                     cur.clear();
+                 }
+-                start = [p.x / k, crop_h as f64 - p.y / k];
++                start = [to_x(p.x), to_y(p.y)];
+                 last = start;
+                 cur.push(start);
+             }
+             kurbo::PathEl::LineTo(p) => {
+-                last = [p.x / k, crop_h as f64 - p.y / k];
++                last = [to_x(p.x), to_y(p.y)];
+                 cur.push(last);
+             }
+             kurbo::PathEl::QuadTo(c, p) => {
+                 // raise the quad to a cubic and flatten
+                 let (cx, cy, px, py) = (
+-                    c.x / k,
+-                    crop_h as f64 - c.y / k,
+-                    p.x / k,
+-                    crop_h as f64 - p.y / k,
++                    to_x(c.x),
++                    to_y(c.y),
++                    to_x(p.x),
++                    to_y(p.y),
+                 );
+                 let c1 = [
+                     last[0] + 2.0 / 3.0 * (cx - last[0]),
+@@ -466,15 +469,15 @@ pub(crate) fn glyph_ink_iou(g: &GlyphShape, crop_w: usize, crop_h: usize, mask:
+                 last = [px, py];
+             }
+             kurbo::PathEl::CurveTo(c1, c2, p) => {
+-                let flip = |v: f64| crop_h as f64 - v / k;
++                let flip = to_y;
+                 flatten(
+                     last,
+-                    [c1.x / k, flip(c1.y)],
+-                    [c2.x / k, flip(c2.y)],
+-                    [p.x / k, flip(p.y)],
++                    [to_x(c1.x), flip(c1.y)],
++                    [to_x(c2.x), flip(c2.y)],
++                    [to_x(p.x), flip(p.y)],
+                     &mut cur,
+                 );
+-                last = [p.x / k, flip(p.y)];
++                last = [to_x(p.x), flip(p.y)];
+             }
+             kurbo::PathEl::ClosePath => {
+                 if cur.len() > 1 {
+@@ -495,7 +498,7 @@ pub(crate) fn glyph_ink_iou(g: &GlyphShape, crop_w: usize, crop_h: usize, mask:
+     // harness applies it (render, threshold at the paper/ink midpoint), so a
+     // pixel counts as foreground when its covered fraction reaches 0.5
+     const SUB: usize = 4;
+-    let mut cover = vec![0u8; crop_w * crop_h];
++    let mut cover = vec![0.0f64; crop_w * crop_h];
+     for row in 0..crop_h {
+         for sub in 0..SUB {
+             let py = row as f64 + (sub as f64 + 0.5) / SUB as f64;
+@@ -529,18 +532,20 @@ pub(crate) fn glyph_ink_iou(g: &GlyphShape, crop_w: usize, crop_h: usize, mask:
+                     let frac = (hi - lo).max(0.0);
+                     if frac > 0.0 {
+                         let idx = row * crop_w + col;
+-                        // accumulate the sub-row's contribution as a count
+-                        cover[idx] = cover[idx].saturating_add(if frac >= 0.5 { 2 } else { 1 });
++                        // Accumulate actual covered area. Counting every tiny
++                        // edge overlap as a whole sample dilated continuous
++                        // contours and made this gate disagree with PDF renders.
++                        cover[idx] += frac / SUB as f64;
+                     }
+                 }
+                 i += 2;
+             }
+         }
+     }
+-    // foreground when at least half the sub-rows cover the pixel
++    // Foreground at at least half a pixel of covered area.
+     let fill: Vec<bool> = cover
+         .iter()
+-        .map(|c| *c as usize >= SUB.div_ceil(2))
++        .map(|c| *c >= 0.5)
+         .collect();
+     let mut inter = 0usize;
+     let mut uni = 0usize;
+@@ -1884,3 +1889,33 @@ mod dpi_tests {
+         assert!(clearscan_source_dpi([0.0, 0.0, 0.0, -0.24, 0.0, 216.0], "invalid").is_err());
+     }
+ }
++
++#[cfg(test)]
++mod contour_coverage_tests {
++    use super::*;
++
++    #[test]
++    fn fidelity_uses_covered_area_and_the_pdf_construction_frame() {
++        // This rectangle covers 10% of column 0 and 90% of column 1.
++        // Only column 1 is foreground at half coverage, even with an offset,
++        // anisotropic font construction frame.
++        let mut path = kurbo::BezPath::new();
++        path.move_to((11.8, 20.0));
++        path.line_to((13.8, 20.0));
++        path.line_to((13.8, 24.0));
++        path.line_to((11.8, 24.0));
++        path.close_path();
++        let shape = GlyphShape {
++            shape_key: "area-regression".into(), path,
++            num_contours: 1, num_points: 4,
++            bbox_fu: [11.8, 20.0, 13.8, 24.0],
++            ink_span_fu: [6.0, 4.0],
++            anchor_bbox_fu: [10.0, 20.0, 16.0, 24.0],
++            stages: crate::units::StageMetrics {
++                trace_max_px: 0.0, trace_p95_px: 0.0,
++                curve_max_px: 0.0, quant_bound_px: 0.0,
++            },
++        };
++        assert_eq!(glyph_ink_iou(&shape, 3, 1, &[false, true, false]), 1.0);
++    }
++}
+diff --git a/crates/scanweave-io/src/glyphs.rs b/crates/scanweave-io/src/glyphs.rs
+index 6569a3e..bb95dfb 100644
+--- a/crates/scanweave-io/src/glyphs.rs
++++ b/crates/scanweave-io/src/glyphs.rs
+@@ -105,13 +105,13 @@ pub fn build_glyph_shapes(
+     for t in traced {
+         // transform: font units, y-up, baseline at ink bottom of the unit.
+         // v = (H - y) * k where H = unit ink height in px; k = units_per_px.
+-        let h_px = t
++        let h_px = if t.preserve_crop_frame { t.crop_h_px as f64 } else { t
+             .layers
+             .iter()
+             .flat_map(|(o, hs)| std::iter::once(o).chain(hs.iter()))
+             .flat_map(|c| c.iter())
+             .map(|p| p[1])
+-            .fold(f64::MIN, f64::max);
++            .fold(f64::MIN, f64::max) };
+         let tf = |p: &[f64; 2]| -> [f64; 2] { [p[0] * units_per_px, (h_px - p[1]) * units_per_px] };
+ 
+         // transform contours FIRST, then build cubics from font-unit points,
+@@ -215,12 +215,14 @@ pub fn build_glyph_shapes(
+                 ay.push(last.p3.y);
+             }
+         }
+-        let anchor_bbox_fu = [
++        let anchor_bbox_fu = if t.preserve_crop_frame {
++            [0.0, 0.0, t.crop_w_px as f64 * units_per_px, t.crop_h_px as f64 * units_per_px]
++        } else { [
+             ax.iter().cloned().fold(f64::INFINITY, f64::min),
+             ay.iter().cloned().fold(f64::INFINITY, f64::min),
+             ax.iter().cloned().fold(f64::NEG_INFINITY, f64::max),
+             ay.iter().cloned().fold(f64::NEG_INFINITY, f64::max),
+-        ];
++        ] };
+         let ink_span_fu = [t.crop_w_px as f64 * units_per_px, t.crop_h_px as f64 * units_per_px];
+ 
+         // bbox in font units (already transformed)
+diff --git a/crates/scanweave-io/src/trace.rs b/crates/scanweave-io/src/trace.rs
+index 9b3da13..0496b34 100644
+--- a/crates/scanweave-io/src/trace.rs
++++ b/crates/scanweave-io/src/trace.rs
+@@ -28,6 +28,8 @@ pub struct TracedShape {
+     /// so in font units the ink spans exactly [0, cw*k] x [0, ch*k]
+     pub crop_w_px: usize,
+     pub crop_h_px: usize,
++    /// Continuous contours retain the original pixel-edge construction frame.
++    pub preserve_crop_frame: bool,
+     /// dense sampled polylines per contour (crop-local, source-pixel space),
+     /// outer contours and holes in paint order
+     pub polylines: Vec<Vec<[f64; 2]>>,
+@@ -152,11 +154,31 @@ fn boundary_error(contours: &[Vec<[f64; 2]>], unit: &Unit) -> (f64, f64) {
+ 
+ pub fn trace_shape(unit: &Unit, _budget: &Budget, _units_per_px: f64) -> Result<TracedShape, String> {
+     // trace a SSx-upscaled mask: finer corner grid in source space
+-    let (sw, sh) = (unit.crop_w * SS, unit.crop_h * SS);
++    // Keep the original binary tracing contract for faithful. ClearScan
++    // witnesses retain grayscale samples so the contour follows subpixel
++    // coverage instead of replicating thresholded scanner-pixel stair steps.
++    let grayscale = unit.gray_samples.as_deref().filter(|samples| samples.len() == unit.mask.len());
++    let ss = if grayscale.is_some() { 4 } else { SS };
++    let (sw, sh) = (unit.crop_w * ss, unit.crop_h * ss);
+     let mut pixels = vec![255u8; sw * sh * 4];
+     for y in 0..sh {
+         for x in 0..sw {
+-            if unit.mask[(y / SS) * unit.crop_w + (x / SS)] {
++            let foreground = if let Some(gray) = grayscale {
++                let fx = (x as f64 + 0.5) / ss as f64 - 0.5;
++                let fy = (y as f64 + 0.5) / ss as f64 - 0.5;
++                let (ix, iy) = (fx.floor() as isize, fy.floor() as isize);
++                let sample = |x: isize, y: isize| -> f64 {
++                    if x < 0 || y < 0 || x >= unit.crop_w as isize || y >= unit.crop_h as isize { 255.0 }
++                    else { gray[y as usize * unit.crop_w + x as usize] as f64 }
++                };
++                let (dx, dy) = (fx - ix as f64, fy - iy as f64);
++                let value = sample(ix, iy) * (1.0-dx) * (1.0-dy)
++                    + sample(ix+1, iy) * dx * (1.0-dy)
++                    + sample(ix, iy+1) * (1.0-dx) * dy
++                    + sample(ix+1, iy+1) * dx * dy;
++                value <= unit.contour_threshold.unwrap_or(128) as f64
++            } else { unit.mask[(y / ss) * unit.crop_w + (x / ss)] };
++            if foreground {
+                 let i = (y * sw + x) * 4;
+                 pixels[i] = 0;
+                 pixels[i + 1] = 0;
+@@ -175,7 +197,7 @@ pub fn trace_shape(unit: &Unit, _budget: &Budget, _units_per_px: f64) -> Result<
+     }
+     // ALL path layers, preserving the Cutout hierarchy: layer = (outer, holes);
+     // coordinates divided back to source-pixel space
+-    let inv = 1.0 / SS as f64;
++    let inv = 1.0 / ss as f64;
+     let mut layers = Vec::new();
+     for sp in &svg.paths {
+         let cc = compound_contours(&sp.path);
+@@ -209,6 +231,7 @@ pub fn trace_shape(unit: &Unit, _budget: &Budget, _units_per_px: f64) -> Result<
+         shape_key: unit.shape_key.clone(),
+         crop_w_px: unit.crop_w,
+         crop_h_px: unit.crop_h,
++        preserve_crop_frame: grayscale.is_some(),
+         polylines,
+         layers,
+         stage: StageRaw {
+diff --git a/crates/scanweave-io/src/visual_dict.rs b/crates/scanweave-io/src/visual_dict.rs
+index 396d79a..cb5a180 100644
+--- a/crates/scanweave-io/src/visual_dict.rs
++++ b/crates/scanweave-io/src/visual_dict.rs
+@@ -493,11 +493,7 @@ pub fn reconstruct(
+     for (&rep, members) in &cohorts {
+         let unit = &plan.owned[rep].unit;
+         let mut prototype_unit = unit.clone();
+-        let threshold = if unit.symbol_id.starts_with("__doc_donor:") {
+-            0
+-        } else {
+-            refine_observed_mask(&mut prototype_unit, rgb, page_w, page_h)
+-        };
++        let threshold = refine_observed_mask(&mut prototype_unit, rgb, page_w, page_h);
+         out.prototype_units
+             .insert(unit.shape_key.clone(), prototype_unit);
+         out.prototypes.push(GlyphPrototype {
+@@ -570,9 +566,7 @@ pub fn reconstruct(
+                 .fold(f64::INFINITY, f64::min);
+             let mut donor = plan.owned[rep].unit.clone();
+             let donor_key = donor.shape_key.clone();
+-            if !donor.symbol_id.starts_with("__doc_donor:") {
+-                let _threshold = refine_observed_mask(&mut donor, rgb, page_w, page_h);
+-            }
++            let _threshold = refine_observed_mask(&mut donor, rgb, page_w, page_h);
+             let sid = u.symbol_id.clone();
+             record.restoration_evidence_passed = if policy.profile == "clearscan" {
+                 cohorts.get(&rep).is_some_and(|members| members.len() >= 3) && score >= 0.78
+@@ -627,9 +621,7 @@ pub fn reconstruct(
+                 let donor_members = cohorts.get(&rep).map(Vec::as_slice).unwrap_or(&[]);
+                 let mut donor = plan.owned[rep].unit.clone();
+                 let donor_key = donor.shape_key.clone();
+-                if !donor.symbol_id.starts_with("__doc_donor:") {
+-                    let _threshold = refine_observed_mask(&mut donor, rgb, page_w, page_h);
+-                }
++                let _threshold = refine_observed_mask(&mut donor, rgb, page_w, page_h);
+                 plan.owned[i].unit.shape_key = donor_key.clone();
+                 out.prototype_units.insert(donor_key.clone(), donor);
+                 out.reused_symbols.insert(sid);
+@@ -719,26 +711,15 @@ fn reuse_gate(similarity: f64, donor_support: usize) -> bool {
+ /// The source mask threshold is intentionally more permissive for ownership;
+ /// Otsu's local crop threshold removes antialias fringe before outline tracing.
+ fn refine_observed_mask(unit: &mut crate::units::Unit, rgb: &[u8], page_w: u32, page_h: u32) -> u8 {
+-    let (pw, ph) = (page_w as usize, page_h as usize);
+-    if rgb.len() != pw * ph * 3 || unit.mask.len() != unit.crop_w * unit.crop_h {
+-        return 128;
++    if unit.gray_samples.is_none() {
++        // A sibling's coordinates belong to its original page, never this page.
++        if unit.symbol_id.starts_with("__doc_donor:") { return 128; }
++        unit.retain_grayscale(rgb, page_w, page_h);
+     }
+-    let x0 = unit.bbox_px[0].floor().max(0.0) as usize;
+-    let y0 = unit.bbox_px[1].floor().max(0.0) as usize;
+-    let mut gray = Vec::with_capacity(unit.mask.len());
++    let Some(gray) = unit.gray_samples.as_ref() else { return 128; };
++    if gray.len() != unit.mask.len() { return 128; }
+     let mut hist = [0u64; 256];
+-    for y in 0..unit.crop_h {
+-        for x in 0..unit.crop_w {
+-            let px = (y0 + y).min(ph.saturating_sub(1)) * pw + (x0 + x).min(pw.saturating_sub(1));
+-            let at = px * 3;
+-            let luma = (0.2126 * rgb[at] as f64
+-                + 0.7152 * rgb[at + 1] as f64
+-                + 0.0722 * rgb[at + 2] as f64)
+-                .round() as u8;
+-            gray.push(luma);
+-            hist[luma as usize] += 1;
+-        }
+-    }
++    for &value in gray { hist[value as usize] += 1; }
+     let total = gray.len() as f64;
+     let total_mean = hist
+         .iter()
+@@ -764,11 +745,19 @@ fn refine_observed_mask(unit: &mut crate::units::Unit, rgb: &[u8], page_w: u32,
+             threshold = t as u8;
+         }
+     }
++    // The histogram split estimates cores; it is not the contour's coverage
++    // level. Use observed paper/ink endpoints to retain partial stroke edges.
++    let mut ordered = gray.clone();
++    ordered.sort_unstable();
++    let ink_level = ordered[ordered.len() / 20] as f64;
++    let paper_level = ordered[ordered.len() * 19 / 20] as f64;
++    threshold = (paper_level - (paper_level - ink_level) * 0.35).round() as u8;
+     // Otsu separates high-confidence ink from paper and antialias samples for
+     // this selected observed prototype.
+-    for (i, value) in gray.into_iter().enumerate() {
++    for (i, &value) in gray.iter().enumerate() {
+         unit.mask[i] = value <= threshold;
+     }
++    unit.contour_threshold = Some(threshold);
+     threshold
+ }
+ 

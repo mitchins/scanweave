@@ -1,0 +1,298 @@
+{
+  "schema": "scanweave.review_negative.v1",
+  "dpi": 300,
+  "source_manifest_recipe": "qualification/experiments/m1g/generate_fixture.py; copied complete dpi300 input bundle; changed only pixels [x=164,y=95:111) on page00 and recomputed PNG/OCR/document hash bindings.",
+  "page_pixels": {
+    "path": "page00.png",
+    "size_px": [
+      1800,
+      900
+    ],
+    "source_sha256": "0b5fca5d58209389dffaa17bdba6ffade04d48585e2e58cd2a5d5fe8c66d2114",
+    "pixel_sha256": "48379281bc7ed452a930e516eb5e45efc0e8e25d20d40f2da63286a5bbabc8b6"
+  },
+  "negative": {
+    "geometry": "vertical 1-pixel line x=164, y=95..110 inclusive",
+    "ownership": "outside p00s0002 observed crop [140,92,163,116]; no OCR or artwork manifest changes",
+    "treatment": "faint gray line, RGB 250 except y=107 RGB 252; matching projection test pixels y=96 (250) and y=107 (252)",
+    "pixels": [
+      {
+        "xy": [
+          164,
+          95
+        ],
+        "before_rgb": [
+          255,
+          255,
+          255
+        ],
+        "after_rgb": [
+          250,
+          250,
+          250
+        ],
+        "luma_delta": 5.0
+      },
+      {
+        "xy": [
+          164,
+          96
+        ],
+        "before_rgb": [
+          255,
+          255,
+          255
+        ],
+        "after_rgb": [
+          250,
+          250,
+          250
+        ],
+        "luma_delta": 5.0
+      },
+      {
+        "xy": [
+          164,
+          97
+        ],
+        "before_rgb": [
+          255,
+          255,
+          255
+        ],
+        "after_rgb": [
+          250,
+          250,
+          250
+        ],
+        "luma_delta": 5.0
+      },
+      {
+        "xy": [
+          164,
+          98
+        ],
+        "before_rgb": [
+          255,
+          255,
+          255
+        ],
+        "after_rgb": [
+          250,
+          250,
+          250
+        ],
+        "luma_delta": 5.0
+      },
+      {
+        "xy": [
+          164,
+          99
+        ],
+        "before_rgb": [
+          255,
+          255,
+          255
+        ],
+        "after_rgb": [
+          250,
+          250,
+          250
+        ],
+        "luma_delta": 5.0
+      },
+      {
+        "xy": [
+          164,
+          100
+        ],
+        "before_rgb": [
+          255,
+          255,
+          255
+        ],
+        "after_rgb": [
+          250,
+          250,
+          250
+        ],
+        "luma_delta": 5.0
+      },
+      {
+        "xy": [
+          164,
+          101
+        ],
+        "before_rgb": [
+          255,
+          255,
+          255
+        ],
+        "after_rgb": [
+          250,
+          250,
+          250
+        ],
+        "luma_delta": 5.0
+      },
+      {
+        "xy": [
+          164,
+          102
+        ],
+        "before_rgb": [
+          252,
+          252,
+          252
+        ],
+        "after_rgb": [
+          250,
+          250,
+          250
+        ],
+        "luma_delta": 2.0
+      },
+      {
+        "xy": [
+          164,
+          103
+        ],
+        "before_rgb": [
+          255,
+          255,
+          255
+        ],
+        "after_rgb": [
+          250,
+          250,
+          250
+        ],
+        "luma_delta": 5.0
+      },
+      {
+        "xy": [
+          164,
+          104
+        ],
+        "before_rgb": [
+          255,
+          255,
+          255
+        ],
+        "after_rgb": [
+          250,
+          250,
+          250
+        ],
+        "luma_delta": 5.0
+      },
+      {
+        "xy": [
+          164,
+          105
+        ],
+        "before_rgb": [
+          255,
+          255,
+          255
+        ],
+        "after_rgb": [
+          250,
+          250,
+          250
+        ],
+        "luma_delta": 5.0
+      },
+      {
+        "xy": [
+          164,
+          106
+        ],
+        "before_rgb": [
+          255,
+          255,
+          255
+        ],
+        "after_rgb": [
+          250,
+          250,
+          250
+        ],
+        "luma_delta": 5.0
+      },
+      {
+        "xy": [
+          164,
+          107
+        ],
+        "before_rgb": [
+          255,
+          255,
+          255
+        ],
+        "after_rgb": [
+          252,
+          252,
+          252
+        ],
+        "luma_delta": 3.0
+      },
+      {
+        "xy": [
+          164,
+          108
+        ],
+        "before_rgb": [
+          255,
+          255,
+          255
+        ],
+        "after_rgb": [
+          250,
+          250,
+          250
+        ],
+        "luma_delta": 5.0
+      },
+      {
+        "xy": [
+          164,
+          109
+        ],
+        "before_rgb": [
+          255,
+          255,
+          255
+        ],
+        "after_rgb": [
+          250,
+          250,
+          250
+        ],
+        "luma_delta": 5.0
+      },
+      {
+        "xy": [
+          164,
+          110
+        ],
+        "before_rgb": [
+          255,
+          255,
+          255
+        ],
+        "after_rgb": [
+          250,
+          250,
+          250
+        ],
+        "luma_delta": 5.0
+      }
+    ]
+  },
+  "modified_files": [
+    "page00.png",
+    "page00.ocr.json",
+    "document.json"
+  ]
+}
