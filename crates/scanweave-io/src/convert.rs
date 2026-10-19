@@ -901,13 +901,17 @@ pub(crate) fn convert_parts_with_document_donors(
                     .map(|g| glyph_ink_iou(g, *w, *h, mask))
             });
         occurrence.source_mask_iou = source_iou;
-        // Reuse cannot weaken the unchanged-text preservation gate. A
-        // document-supported prototype is reusable only when the traced
-        // outline still reproduces this occurrence at 0.98; damaged glyphs
-        // use their separate donor-supported restoration gate.
-        let source_gate_failed = policy.profile != "clearscan"
-            && occurrence.reused
-            && source_iou.is_none_or(|iou| iou < 0.98);
+        // A healthy occurrence should not be replaced by a visibly different
+        // document prototype. ClearScan allows modest raster variation, but
+        // rejects a reuse whose traced canonical outline poorly matches this
+        // witness. Damaged occurrences use their donor-supported repair gate.
+        let reuse_source_floor = if policy.profile == "clearscan" {
+            0.80
+        } else {
+            0.98
+        };
+        let source_gate_failed = occurrence.reused
+            && source_iou.is_none_or(|iou| iou < reuse_source_floor);
         if traced_iou.is_none_or(|iou| iou < 0.90) || source_gate_failed {
             occurrence.repaired = false;
             occurrence.reused = false;

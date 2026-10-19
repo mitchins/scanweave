@@ -4,7 +4,7 @@
 
 This report records the product-path integration and runs from the local tree whose starting commit was `cfb5d240f04a01f0289ab9df470ceb3fd53b2a86`. The implementation commit is `b76b9d638eff0c81c8c8f8204db72fd12a4ee6f9`; qualification output PDFs and input hashes are preserved alongside the measurement scripts. Existing unrelated untracked research and fixture material was left untouched.
 
-The `clearscan` profile now invokes document-wide observation collection, prototype/donor selection, font embedding, occurrence assignment, source-ink suppression and PDF assembly through the normal CLI/library path. The development-only `canonical-experimental` switch and uniform-scale experiment were removed from the user-facing profile selection. `faithful` retains its independent preservation behavior. ClearScan derives source DPI from the page raster-to-PDF transform, so bundle page geometry remains authoritative even if the command line's default DPI differs.
+The `clearscan` profile now invokes document-wide observation collection, prototype/donor selection, font embedding, occurrence assignment, source-ink suppression and PDF assembly through the normal CLI/library path. The development-only `canonical-experimental` switch and uniform-scale experiment were removed from the user-facing profile selection. `faithful` retains its independent preservation behavior. ClearScan derives source DPI from the page raster-to-PDF transform, so bundle page geometry remains authoritative even if the command line's default DPI differs. A final assignment guard rejects healthy outline reuse when traced-prototype/source-mask IoU is below 0.80; donor-supported repairs are not subject to this guard.
 
 Raster assembly now suppresses source ink only for occurrences whose vector glyph was actually emitted, removes a validated antialias fringe, and puts a compact low-resolution background beneath original-resolution fallback/artwork patches. A second background cleanup prevents recognized fallback text from remaining as a soft duplicate underneath its native-resolution patch. F1 image sharing and grayscale encoding remain in use. This is a real product path, but the synthetic accuracy results below show that its reconstruction policy is not yet good enough to claim source-faithful restoration.
 
@@ -17,36 +17,36 @@ The M1-G fixture contains eight pages, 552 scanned glyph observations and 600 pr
 | Canonical prototype IDs | 38 | 43 |
 | Accepted prototype IDs emitted | 27 | 41 |
 | Embedded font outlines (including `.notdef`) | 57 | 58 |
-| Accepted vector occurrences | 286 | 476 |
-| Segmented text ink owned by vectors | 62,183 / 130,344 (47.7%) | 507,072 / 544,428 (93.1%) |
-| Source-mask ink suppressed | 62,183 px | 507,072 px |
-| Fringe samples suppressed | 46,795 px | 343,543 px |
-| PDF bytes | 1,087,076 | 889,147 |
+| Accepted vector occurrences | 278 | 476 |
+| Segmented text ink owned by vectors | 60,611 / 130,344 (46.5%) | 507,072 / 544,428 (93.1%) |
+| Source-mask ink suppressed | 60,611 px | 507,072 px |
+| Fringe samples suppressed | 45,538 px | 343,543 px |
+| PDF bytes | 1,093,038 | 889,147 |
 | Searchable-raster PDF bytes | 4,210,019 | 16,320,387 |
-| Reduction against searchable raster | 74.2% | 94.6% |
+| Reduction against searchable raster | 74.0% | 94.6% |
 | Embedded font bytes | 35,332 | 52,464 |
-| Encoded image payload | 913,819 | 754,225 |
-| Content streams | 71,163 | 59,011 |
-| Image XObject references | 273 | 80 |
-| Reported conversion wall time | 32.6 s | 68.2 s |
-| Peak RSS (`/usr/bin/time -v`) | 201,752 KB | 727,076 KB |
+| Encoded image payload | 917,473 | 754,225 |
+| Content streams | 71,628 | 59,011 |
+| Image XObject references | 281 | 80 |
+| Reported conversion wall time | 30.4 s | 68.2 s |
+| Peak RSS (`/usr/bin/time -v`) | not measured on guarded rerun (pre-guard: 201,752 KB) | 727,076 KB |
 
-At 300 DPI, 264 accepted occurrences reused canonical prototypes and 22 were classified as repairs. At 600 DPI, 475 reused canonical prototypes and one was classified as a repair. The emitted typeface contains shared outlines, and the compositor removes corresponding original foreground pixels. PDF-size reduction is therefore not merely image-stream deduplication. However, the remaining patch/resource payload is still large relative to Adobe XI and needs care on dense or high-resolution pages.
+At 300 DPI, 256 accepted occurrences reused canonical prototypes and 22 were classified as repairs. At 600 DPI, 475 reused canonical prototypes and one was classified as a repair. The emitted typeface contains shared outlines, and the compositor removes corresponding original foreground pixels. PDF-size reduction is therefore not merely image-stream deduplication. The 300 DPI assignment guard increases bytes by 5,962 B relative to the pre-guard candidate while refusing eight poor healthy reuses. The remaining patch/resource payload is still large relative to Adobe XI and needs care on dense or high-resolution pages.
 
 ### Pristine-relative appearance
 
 Mean glyph IoU for source scan and final renders:
 
-| Resolution | Source | Final Poppler | Final PDFium |
+| Resolution | Source | Final Poppler | PDFium |
 |---|---:|---:|---:|
-| 300 DPI | 0.9053 | 0.8037 | 0.7912 |
+| 300 DPI | 0.9053 | 0.8044 | 0.7912 (pre-guard PDF only) |
 | 600 DPI | 0.8998 | 0.8487 | 0.8236 |
 
-For accepted substitutions alone, source-to-pristine IoU was 0.9413 at 300 DPI and 0.9785 at 600 DPI; final-render IoU was 0.9129 / 0.8930 and 0.9377 / 0.9081 (Poppler / PDFium). Thus accepted replacements are better than the whole output average, but on this fixture they still worsen the average versus retaining the source impressions. No robust improvement across damaged glyphs was demonstrated. Do not treat the “repair” label as proof of visual improvement.
+For the pre-guard accepted set, source-to-pristine IoU was 0.9413 at 300 DPI and 0.9785 at 600 DPI; final-render IoU was 0.9129 / 0.8930 and 0.9377 / 0.9081 (Poppler / PDFium). These values are retained as historical pre-guard measurements, not as scores for the final 300 DPI file. The final guarded 300 DPI file was measured with Poppler; a new PDFium render was unavailable after the environment reboot. The small Poppler gain does not establish robust improvement across damaged glyphs: the output still regresses against source impressions overall. Do not treat the “repair” label as proof of visual improvement.
 
-The 300 DPI `0` case `p06s0003` is a clear failure: source IoU 0.907, output IoU 0.584. It was assigned to a three-member prototype with similarity 0.903; the selected prototype's source-mask overlap was 0.751. The enlarged crop shows a heavier, irregular ring. This implicates prototype assignment/tracing and final rendering together; the current evidence does not isolate one as the sole cause. Existing GX geometry measurements found bbox scaling generally aligned well (P0 mean bbox IoU 0.972); uniform scaling regressed to 0.965 and is not used.
+The 300 DPI `0` case `p06s0003` is a clear failure: source IoU 0.907 and pre-guard output IoU 0.584. It was assigned to a three-member prototype with similarity 0.903; the selected prototype's source-mask overlap was 0.751. The guard rejects it; final Poppler output IoU rises to 0.714, but remains below the scan. The 800% crop is preserved. This implicates prototype assignment/tracing and final rendering together; the current evidence does not isolate one as the sole cause. Existing GX geometry measurements found bbox scaling generally aligned well (P0 mean bbox IoU 0.972); uniform scaling regressed to 0.965 and is not used.
 
-Poppler and PDFium sometimes disagree measurably (for example 300 DPI aggregate glyph IoU differs by 0.0125). We preserve renderer-specific numbers rather than averaging them. Actual PDF renders, crop comparisons at 800%, and detailed per-glyph metrics are in the resolution-specific `evaluation/` directories.
+Poppler and PDFium sometimes disagree measurably (for example 300 DPI aggregate glyph IoU differed by 0.0125 on the pre-guard PDF). We preserve renderer-specific numbers rather than averaging them. The guarded 300 DPI Poppler renders and metrics are in `300/evaluation/`; pre-guard Poppler and PDFium renders are in `300/pre_guard/evaluation/`. The 600 DPI final PDF is byte-identical to the pre-guard file and its two-renderer measurements remain applicable.
 
 ## Same-input Acrobat XI comparison
 
@@ -80,6 +80,6 @@ No genuine receipt or historical-book page was present in the checked-out sample
 
 ## Engineering conclusion
 
-The integrated path now performs document-wide canonical reuse and real raster-ink suppression through the normal ClearScan profile. It vectorizes a substantial share of text, preserves searchable text, and produces smaller PDFs than the matched searchable-raster outputs at both resolutions. It does **not** yet produce a generally more pristine glyph image on the M1-G fixture, its 300 DPI `0` assignment is demonstrably wrong, and the fallback `8` remains defective. In paired Adobe comparisons it is marginally closer by glyph IoU but 42–65 times larger.
+The integrated path now performs document-wide canonical reuse and real raster-ink suppression through the normal ClearScan profile. It vectorizes a substantial share of text, preserves searchable text, and produces smaller PDFs than the matched searchable-raster outputs at both resolutions. The final 300 DPI reuse guard rejects eight low-agreement healthy substitutions and produces a small Poppler improvement, but the output does **not** yet produce a generally more pristine glyph image on the M1-G fixture. The `0` assignment is still materially wrong and the fallback `8` remains defective. In paired Adobe comparisons (measured before the final guard) it is marginally closer by glyph IoU but 42–65 times larger.
 
 The largest current quality limit is canonical glyph assignment/shape selection as rendered: the `0` failure is concrete and the accepted set as a whole regresses against pristine truth. The largest size limit is the residual native-resolution image patch population and its encoded bytes. These should be handled as product defects within the existing pipeline; the current output PDFs make both problems inspectable. No release qualification or default-profile change is claimed.

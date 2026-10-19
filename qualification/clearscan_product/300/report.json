@@ -9,7 +9,7 @@
     0.8125,
     0.868421052631579,
     0.7295081967213115,
-    0.7862068965517242
+    0.803088803088803
   ],
   "pages": 8,
   "selected": "reconstruct",
@@ -17,12 +17,12 @@
     {
       "name": "reconstruct",
       "pages": 8,
-      "pdf_bytes": 1087076,
+      "pdf_bytes": 1093038,
       "font_bytes": 35332,
-      "image_xobjects": 273,
-      "image_references": 273,
-      "content_bytes": 71163,
-      "raster_encoded_bytes": 913819,
+      "image_xobjects": 281,
+      "image_references": 281,
+      "content_bytes": 71628,
+      "raster_encoded_bytes": 917473,
       "page_fidelity": [
         0.8267326732673267,
         0.8188976377952756,
@@ -31,20 +31,20 @@
         0.8125,
         0.868421052631579,
         0.7295081967213115,
-        0.7862068965517242
+        0.803088803088803
       ],
       "raster_pages": 0,
-      "image_encoding_ms": 87,
-      "assembly_ms": 88
+      "image_encoding_ms": 86,
+      "assembly_ms": 87
     },
     {
       "name": "raster_baseline",
       "pages": 8,
-      "pdf_bytes": 4210019,
+      "pdf_bytes": 4210178,
       "font_bytes": 35332,
       "image_xobjects": 8,
       "image_references": 8,
-      "content_bytes": 59899,
+      "content_bytes": 60028,
       "raster_encoded_bytes": 4107940,
       "page_fidelity": [
         1.0,
@@ -57,28 +57,28 @@
         1.0
       ],
       "raster_pages": 8,
-      "image_encoding_ms": 249,
-      "assembly_ms": 252
+      "image_encoding_ms": 454,
+      "assembly_ms": 466
     }
   ],
-  "pdf_bytes": 1087076,
+  "pdf_bytes": 1093038,
   "font_bytes": 35332,
-  "image_xobjects": 273,
-  "image_references": 273,
-  "raster_encoded_bytes": 913819,
-  "content_bytes": 71163,
-  "image_encoding_ms": 87,
-  "assembly_ms": 88,
+  "image_xobjects": 281,
+  "image_references": 281,
+  "raster_encoded_bytes": 917473,
+  "content_bytes": 71628,
+  "image_encoding_ms": 86,
+  "assembly_ms": 87,
   "stage_timings": {
-    "total_ms": 32616,
-    "donor_collection_ms": 377,
-    "page_conversion_ms": 31846,
+    "total_ms": 31440,
+    "donor_collection_ms": 382,
+    "page_conversion_ms": 30412,
     "document_font_union_ms": 0,
     "font_build_ms": 0,
-    "reconstruction_pdf_ms": 111,
-    "raster_baseline_prepare_ms": 27,
-    "raster_baseline_pdf_ms": 252,
-    "remaining_pipeline_ms": 3
+    "reconstruction_pdf_ms": 105,
+    "raster_baseline_prepare_ms": 71,
+    "raster_baseline_pdf_ms": 466,
+    "remaining_pipeline_ms": 4
   },
   "page_order": [
     "p00",
@@ -2392,7 +2392,7 @@
             "repaired": false,
             "reused": false,
             "restoration_evidence_passed": false,
-            "decision": "rejected_traced_prototype_fidelity"
+            "decision": "rejected_unchanged_source_fidelity"
           },
           {
             "symbol_id": "p00s0011",
@@ -6352,7 +6352,7 @@
         "semantic": false,
         "visual": true
       },
-      "elapsed_ms": 3940
+      "elapsed_ms": 3772
     },
     {
       "fidelity": {
@@ -8525,7 +8525,7 @@
             "repaired": false,
             "reused": false,
             "restoration_evidence_passed": false,
-            "decision": "rejected_traced_prototype_fidelity"
+            "decision": "rejected_unchanged_source_fidelity"
           },
           {
             "symbol_id": "p01s0011",
@@ -9161,7 +9161,7 @@
             "repaired": false,
             "reused": false,
             "restoration_evidence_passed": false,
-            "decision": "rejected_traced_prototype_fidelity"
+            "decision": "rejected_unchanged_source_fidelity"
           },
           {
             "symbol_id": "p01s0048",
@@ -9474,7 +9474,7 @@
             "repaired": false,
             "reused": false,
             "restoration_evidence_passed": false,
-            "decision": "rejected_traced_prototype_fidelity"
+            "decision": "rejected_unchanged_source_fidelity"
           },
           {
             "symbol_id": "p01s0067",
@@ -11856,7 +11856,7 @@
         "semantic": false,
         "visual": true
       },
-      "elapsed_ms": 4463
+      "elapsed_ms": 4133
     },
     {
       "fidelity": {
@@ -14670,7 +14670,7 @@
             "repaired": false,
             "reused": false,
             "restoration_evidence_passed": false,
-            "decision": "rejected_traced_prototype_fidelity"
+            "decision": "rejected_unchanged_source_fidelity"
           },
           {
             "symbol_id": "p02s0048",
@@ -17381,7 +17381,7 @@
         "semantic": false,
         "visual": true
       },
-      "elapsed_ms": 3632
+      "elapsed_ms": 3462
     },
     {
       "fidelity": {
@@ -19873,7 +19873,7 @@
             "repaired": false,
             "reused": false,
             "restoration_evidence_passed": false,
-            "decision": "rejected_traced_prototype_fidelity"
+            "decision": "rejected_unchanged_source_fidelity"
           },
           {
             "symbol_id": "p03s0030",
@@ -20196,7 +20196,7 @@
             "repaired": false,
             "reused": false,
             "restoration_evidence_passed": false,
-            "decision": "rejected_traced_prototype_fidelity"
+            "decision": "rejected_unchanged_source_fidelity"
           },
           {
             "symbol_id": "p03s0048",
@@ -22974,7 +22974,7 @@
         "semantic": false,
         "visual": true
       },
-      "elapsed_ms": 3791
+      "elapsed_ms": 3767
     },
     {
       "fidelity": {
@@ -26113,7 +26113,7 @@
             "repaired": false,
             "reused": false,
             "restoration_evidence_passed": false,
-            "decision": "rejected_traced_prototype_fidelity"
+            "decision": "rejected_unchanged_source_fidelity"
           },
           {
             "symbol_id": "p04s0067",
@@ -28508,7 +28508,7 @@
         "semantic": false,
         "visual": true
       },
-      "elapsed_ms": 4136
+      "elapsed_ms": 4420
     },
     {
       "fidelity": {
@@ -33986,14 +33986,14 @@
         "semantic": false,
         "visual": true
       },
-      "elapsed_ms": 3764
+      "elapsed_ms": 3501
     },
     {
       "fidelity": {
         "vector_ink_iou_min": 0.7295081967213115,
-        "vector_ink_iou_mean": 0.8755033475053338,
+        "vector_ink_iou_mean": 0.8893091998036011,
         "preservation_ink_iou_min": 0.9850187265917603,
-        "raster_ink_px": 1206,
+        "raster_ink_px": 2640,
         "units_below_policy": 7,
         "min_ink_iou": 0.98
       },
@@ -36024,9 +36024,9 @@
             ],
             "prototype_trace_iou": 0.9897959183673469,
             "repaired": false,
-            "reused": true,
-            "restoration_evidence_passed": true,
-            "decision": "canonical_reuse_of_document_outline"
+            "reused": false,
+            "restoration_evidence_passed": false,
+            "decision": "rejected_unchanged_source_fidelity"
           },
           {
             "symbol_id": "p06s0003",
@@ -36043,9 +36043,9 @@
             ],
             "prototype_trace_iou": 0.9478672985781991,
             "repaired": false,
-            "reused": true,
-            "restoration_evidence_passed": true,
-            "decision": "canonical_reuse_of_document_outline"
+            "reused": false,
+            "restoration_evidence_passed": false,
+            "decision": "rejected_unchanged_source_fidelity"
           },
           {
             "symbol_id": "p06s0004",
@@ -36152,9 +36152,9 @@
             ],
             "prototype_trace_iou": 0.9827586206896551,
             "repaired": false,
-            "reused": true,
-            "restoration_evidence_passed": true,
-            "decision": "canonical_reuse_of_document_outline"
+            "reused": false,
+            "restoration_evidence_passed": false,
+            "decision": "rejected_unchanged_source_fidelity"
           },
           {
             "symbol_id": "p06s0011",
@@ -36346,9 +36346,9 @@
             ],
             "prototype_trace_iou": 0.9478672985781991,
             "repaired": false,
-            "reused": true,
-            "restoration_evidence_passed": true,
-            "decision": "canonical_reuse_of_document_outline"
+            "reused": false,
+            "restoration_evidence_passed": false,
+            "decision": "rejected_unchanged_source_fidelity"
           },
           {
             "symbol_id": "p06s0023",
@@ -36512,9 +36512,9 @@
             ],
             "prototype_trace_iou": 0.9478672985781991,
             "repaired": false,
-            "reused": true,
-            "restoration_evidence_passed": true,
-            "decision": "canonical_reuse_of_document_outline"
+            "reused": false,
+            "restoration_evidence_passed": false,
+            "decision": "rejected_unchanged_source_fidelity"
           },
           {
             "symbol_id": "p06s0033",
@@ -36664,9 +36664,9 @@
             ],
             "prototype_trace_iou": 0.9478672985781991,
             "repaired": false,
-            "reused": true,
-            "restoration_evidence_passed": true,
-            "decision": "canonical_reuse_of_document_outline"
+            "reused": false,
+            "restoration_evidence_passed": false,
+            "decision": "rejected_unchanged_source_fidelity"
           },
           {
             "symbol_id": "p06s0041",
@@ -37143,9 +37143,9 @@
             ],
             "prototype_trace_iou": 0.9478672985781991,
             "repaired": false,
-            "reused": true,
-            "restoration_evidence_passed": true,
-            "decision": "canonical_reuse_of_document_outline"
+            "reused": false,
+            "restoration_evidence_passed": false,
+            "decision": "rejected_unchanged_source_fidelity"
           },
           {
             "symbol_id": "p06s0070",
@@ -37261,7 +37261,7 @@
             "curve_max_px": 0.0018518518518498284,
             "quant_bound_px": 0.007080078125
           },
-          "symbol_id": "p06s0002",
+          "symbol_id": "p06s0008",
           "contours": 2,
           "points": 266,
           "budget_ok": true
@@ -37274,7 +37274,7 @@
             "curve_max_px": 0.0022222222222230137,
             "quant_bound_px": 0.007080078125
           },
-          "symbol_id": "p06s0003",
+          "symbol_id": "",
           "contours": 7,
           "points": 439,
           "budget_ok": true
@@ -37326,7 +37326,7 @@
             "curve_max_px": 0.0007407407407415412,
             "quant_bound_px": 0.007080078125
           },
-          "symbol_id": "p06s0009",
+          "symbol_id": "p06s0028",
           "contours": 5,
           "points": 213,
           "budget_ok": true
@@ -37443,7 +37443,7 @@
             "curve_max_px": 0.0022222222222230137,
             "quant_bound_px": 0.007080078125
           },
-          "symbol_id": "p06s0032",
+          "symbol_id": "p06s0050",
           "contours": 7,
           "points": 439,
           "budget_ok": true
@@ -37530,14 +37530,25 @@
         },
         {
           "bbox_px": [
-            213.0,
-            86.0,
-            234.0,
+            126.0,
+            95.0,
+            146.0,
             115.0
+          ],
+          "w": 20,
+          "h": 20,
+          "rgb_sha256": "f8fbba10b47d23748c9fde8a0da3d6dc527b58230a27f4f388f3bc9ab47345a6"
+        },
+        {
+          "bbox_px": [
+            902.0,
+            264.0,
+            923.0,
+            293.0
           ],
           "w": 21,
           "h": 29,
-          "rgb_sha256": "bebad78c60351d8d945f9fd1009ce79a7b3f6fe771f1a1658b659eb75b682ca4"
+          "rgb_sha256": "da34c2ab3609a9b269097e25447dc4495f2a05cbb0b8e954ff8d6b7aa26d344d"
         },
         {
           "bbox_px": [
@@ -37563,6 +37574,28 @@
         },
         {
           "bbox_px": [
+            155.0,
+            264.0,
+            176.0,
+            293.0
+          ],
+          "w": 21,
+          "h": 29,
+          "rgb_sha256": "46607f35f1c32065389fba90c81cb434f51647653c1cb0782943a4a71a692d49"
+        },
+        {
+          "bbox_px": [
+            902.0,
+            86.0,
+            923.0,
+            115.0
+          ],
+          "w": 21,
+          "h": 29,
+          "rgb_sha256": "784606625db54942408b89a0c922df047631523ee8304dac8c279be68afa788d"
+        },
+        {
+          "bbox_px": [
             762.0,
             110.0,
             768.0,
@@ -37571,6 +37604,17 @@
           "w": 6,
           "h": 11,
           "rgb_sha256": "3bc9302aaf1030928c8a779d328b2a888063c5fb971699c973624758dbea8982"
+        },
+        {
+          "bbox_px": [
+            648.0,
+            86.0,
+            669.0,
+            115.0
+          ],
+          "w": 21,
+          "h": 29,
+          "rgb_sha256": "475ca7f15954cf7caf8a61dc3867425b721b6b19e0c953ec0fc470da72c21aa0"
         },
         {
           "bbox_px": [
@@ -37604,6 +37648,39 @@
           "w": 21,
           "h": 29,
           "rgb_sha256": "90dead19b92ca6f21f3f4e0462b5f9175569e3f9c966681cd5b58455fe63242a"
+        },
+        {
+          "bbox_px": [
+            316.0,
+            95.0,
+            326.0,
+            121.0
+          ],
+          "w": 10,
+          "h": 26,
+          "rgb_sha256": "03d42a815c95ee671db7312faf078330a84f429dd4bf18b5a04323316fe9b227"
+        },
+        {
+          "bbox_px": [
+            213.0,
+            86.0,
+            234.0,
+            115.0
+          ],
+          "w": 21,
+          "h": 29,
+          "rgb_sha256": "bebad78c60351d8d945f9fd1009ce79a7b3f6fe771f1a1658b659eb75b682ca4"
+        },
+        {
+          "bbox_px": [
+            155.0,
+            86.0,
+            176.0,
+            115.0
+          ],
+          "w": 21,
+          "h": 29,
+          "rgb_sha256": "431933cdfd3e9a9f359659d74b3df3a64400eca550b73051fb19fcfa6befeeb5"
         }
       ],
       "occurrences": [
@@ -37626,14 +37703,14 @@
           "span_id": "p06s0002",
           "symbol_id": "p06s0002",
           "semantic_text": "a",
-          "owner": "visible_tounicode"
+          "owner": "invisible"
         },
         {
           "page_id": "p06",
           "span_id": "p06s0003",
           "symbol_id": "p06s0003",
           "semantic_text": "0",
-          "owner": "visible_tounicode"
+          "owner": "invisible"
         },
         {
           "page_id": "p06",
@@ -37675,7 +37752,7 @@
           "span_id": "p06s0009",
           "symbol_id": "p06s0009",
           "semantic_text": ";",
-          "owner": "visible_tounicode"
+          "owner": "invisible"
         },
         {
           "page_id": "p06",
@@ -37752,7 +37829,7 @@
           "span_id": "p06s0022",
           "symbol_id": "p06s0022",
           "semantic_text": "0",
-          "owner": "visible_tounicode"
+          "owner": "invisible"
         },
         {
           "page_id": "p06",
@@ -37815,7 +37892,7 @@
           "span_id": "p06s0032",
           "symbol_id": "p06s0032",
           "semantic_text": "0",
-          "owner": "visible_tounicode"
+          "owner": "invisible"
         },
         {
           "page_id": "p06",
@@ -37871,7 +37948,7 @@
           "span_id": "p06s0040",
           "symbol_id": "p06s0040",
           "semantic_text": "0",
-          "owner": "visible_tounicode"
+          "owner": "invisible"
         },
         {
           "page_id": "p06",
@@ -38053,7 +38130,7 @@
           "span_id": "p06s0069",
           "symbol_id": "p06s0069",
           "semantic_text": "0",
-          "owner": "visible_tounicode"
+          "owner": "invisible"
         },
         {
           "page_id": "p06",
@@ -38142,7 +38219,11 @@
             146.0,
             115.0
           ],
-          "disposition": "Vector"
+          "disposition": {
+            "Raster": {
+              "reason": "UnsupportedContent"
+            }
+          }
         },
         {
           "id": 3,
@@ -38154,7 +38235,11 @@
             176.0,
             115.0
           ],
-          "disposition": "Vector"
+          "disposition": {
+            "Raster": {
+              "reason": "UnsupportedContent"
+            }
+          }
         },
         {
           "id": 4,
@@ -38230,7 +38315,11 @@
             326.0,
             121.0
           ],
-          "disposition": "Vector"
+          "disposition": {
+            "Raster": {
+              "reason": "UnsupportedContent"
+            }
+          }
         },
         {
           "id": 10,
@@ -38374,7 +38463,11 @@
             669.0,
             115.0
           ],
-          "disposition": "Vector"
+          "disposition": {
+            "Raster": {
+              "reason": "UnsupportedContent"
+            }
+          }
         },
         {
           "id": 21,
@@ -38486,7 +38579,11 @@
             923.0,
             115.0
           ],
-          "disposition": "Vector"
+          "disposition": {
+            "Raster": {
+              "reason": "UnsupportedContent"
+            }
+          }
         },
         {
           "id": 30,
@@ -38582,7 +38679,11 @@
             176.0,
             293.0
           ],
-          "disposition": "Vector"
+          "disposition": {
+            "Raster": {
+              "reason": "UnsupportedContent"
+            }
+          }
         },
         {
           "id": 38,
@@ -38902,7 +39003,11 @@
             923.0,
             293.0
           ],
-          "disposition": "Vector"
+          "disposition": {
+            "Raster": {
+              "reason": "UnsupportedContent"
+            }
+          }
         },
         {
           "id": 64,
@@ -38955,32 +39060,33 @@
       ],
       "coverage": {
         "text_ink_px_total": 12733,
-        "text_ink_px_vector": 11527,
-        "text_ink_px_raster": 1206,
+        "text_ink_px_vector": 10093,
+        "text_ink_px_raster": 2640,
         "other_ink_px": 0,
         "unowned_ink_px": 0,
         "multiply_owned_ink_px": 0
       },
-      "raster_ink_pixels_suppressed": 11527,
-      "antialias_fringe_pixels_suppressed": 9490,
+      "raster_ink_pixels_suppressed": 10093,
+      "antialias_fringe_pixels_suppressed": 8367,
       "fallback_reasons": {
-        "FidelityBelowPolicy": 7
+        "FidelityBelowPolicy": 7,
+        "UnsupportedContent": 7
       },
       "font_glyphs": 23,
       "font_bytes": 0,
       "pdf_bytes": 0,
-      "raster_bytes": 1224339,
+      "raster_bytes": 1235454,
       "semantic_owner": {
         "p06s0000": "visible_tounicode",
         "p06s0001": "visible_tounicode",
-        "p06s0002": "visible_tounicode",
-        "p06s0003": "visible_tounicode",
+        "p06s0002": "invisible",
+        "p06s0003": "invisible",
         "p06s0004": "visible_tounicode",
         "p06s0005": "invisible",
         "p06s0006": "visible_tounicode",
         "p06s0007": "visible_tounicode",
         "p06s0008": "visible_tounicode",
-        "p06s0009": "visible_tounicode",
+        "p06s0009": "invisible",
         "p06s0010": "invisible",
         "p06s0011": "visible_tounicode",
         "p06s0012": "visible_tounicode",
@@ -38993,7 +39099,7 @@
         "p06s0019": "visible_tounicode",
         "p06s0020": "visible_tounicode",
         "p06s0021": "invisible",
-        "p06s0022": "visible_tounicode",
+        "p06s0022": "invisible",
         "p06s0023": "visible_tounicode",
         "p06s0024": "visible_tounicode",
         "p06s0025": "visible_tounicode",
@@ -39003,7 +39109,7 @@
         "p06s0029": "invisible",
         "p06s0030": "visible_tounicode",
         "p06s0031": "visible_tounicode",
-        "p06s0032": "visible_tounicode",
+        "p06s0032": "invisible",
         "p06s0033": "visible_tounicode",
         "p06s0034": "visible_tounicode",
         "p06s0035": "visible_tounicode",
@@ -39011,7 +39117,7 @@
         "p06s0037": "visible_tounicode",
         "p06s0038": "visible_tounicode",
         "p06s0039": "visible_tounicode",
-        "p06s0040": "visible_tounicode",
+        "p06s0040": "invisible",
         "p06s0041": "visible_tounicode",
         "p06s0042": "visible_tounicode",
         "p06s0043": "visible_tounicode",
@@ -39040,7 +39146,7 @@
         "p06s0066": "invisible",
         "p06s0067": "visible_tounicode",
         "p06s0068": "visible_tounicode",
-        "p06s0069": "visible_tounicode",
+        "p06s0069": "invisible",
         "p06s0070": "visible_tounicode",
         "p06s0071": "visible_tounicode",
         "p06s0072": "visible_tounicode",
@@ -39050,14 +39156,14 @@
         "semantic": false,
         "visual": true
       },
-      "elapsed_ms": 3845
+      "elapsed_ms": 3347
     },
     {
       "fidelity": {
-        "vector_ink_iou_min": 0.7862068965517242,
-        "vector_ink_iou_mean": 0.8462038188531359,
+        "vector_ink_iou_min": 0.803088803088803,
+        "vector_ink_iou_mean": 0.8471873749564378,
         "preservation_ink_iou_min": null,
-        "raster_ink_px": 672,
+        "raster_ink_px": 810,
         "units_below_policy": 6,
         "min_ink_iou": 0.98
       },
@@ -42295,9 +42401,9 @@
             ],
             "prototype_trace_iou": 0.9173553719008265,
             "repaired": false,
-            "reused": true,
-            "restoration_evidence_passed": true,
-            "decision": "canonical_reuse_of_document_outline"
+            "reused": false,
+            "restoration_evidence_passed": false,
+            "decision": "rejected_unchanged_source_fidelity"
           }
         ],
         "restoration_qualified": true
@@ -42441,7 +42547,7 @@
             "curve_max_px": 0.0012962962962956848,
             "quant_bound_px": 0.007080078125
           },
-          "symbol_id": "p07s0073",
+          "symbol_id": "",
           "contours": 3,
           "points": 307,
           "budget_ok": true
@@ -42484,6 +42590,17 @@
           "w": 18,
           "h": 20,
           "rgb_sha256": "2ade60ad261e53a796b6fbdef4bd8c9050e9695da64f9041206cc618ea64e952"
+        },
+        {
+          "bbox_px": [
+            1023.0,
+            264.0,
+            1039.0,
+            293.0
+          ],
+          "w": 16,
+          "h": 29,
+          "rgb_sha256": "0da1903da21d84bcc40052a58dfa5a7955cddb6d457215642111ed728a839a7d"
         },
         {
           "bbox_px": [
@@ -43016,7 +43133,7 @@
           "span_id": "p07s0073",
           "symbol_id": "p07s0073",
           "semantic_text": "?",
-          "owner": "visible_tounicode"
+          "owner": "invisible"
         }
       ],
       "page_id": "p07",
@@ -43881,26 +43998,31 @@
             1039.0,
             293.0
           ],
-          "disposition": "Vector"
+          "disposition": {
+            "Raster": {
+              "reason": "UnsupportedContent"
+            }
+          }
         }
       ],
       "coverage": {
         "text_ink_px_total": 13265,
-        "text_ink_px_vector": 12593,
-        "text_ink_px_raster": 672,
+        "text_ink_px_vector": 12455,
+        "text_ink_px_raster": 810,
         "other_ink_px": 0,
         "unowned_ink_px": 0,
         "multiply_owned_ink_px": 0
       },
-      "raster_ink_pixels_suppressed": 12593,
-      "antialias_fringe_pixels_suppressed": 9545,
+      "raster_ink_pixels_suppressed": 12455,
+      "antialias_fringe_pixels_suppressed": 9411,
       "fallback_reasons": {
-        "FidelityBelowPolicy": 6
+        "FidelityBelowPolicy": 6,
+        "UnsupportedContent": 1
       },
       "font_glyphs": 13,
       "font_bytes": 0,
       "pdf_bytes": 0,
-      "raster_bytes": 1220433,
+      "raster_bytes": 1221825,
       "semantic_owner": {
         "p07s0000": "invisible",
         "p07s0001": "visible_tounicode",
@@ -43975,19 +44097,19 @@
         "p07s0070": "visible_tounicode",
         "p07s0071": "visible_tounicode",
         "p07s0072": "visible_tounicode",
-        "p07s0073": "visible_tounicode"
+        "p07s0073": "invisible"
       },
       "ownership_invariants": {
         "semantic": false,
         "visual": true
       },
-      "elapsed_ms": 4261
+      "elapsed_ms": 3997
     }
   ],
   "coverage": {
     "text_ink_px_total": 130344,
-    "text_ink_px_vector": 62183,
-    "text_ink_px_raster": 68161,
+    "text_ink_px_vector": 60611,
+    "text_ink_px_raster": 69733,
     "other_ink_px": 3234,
     "unowned_ink_px": 0,
     "multiply_owned_ink_px": 0
@@ -45066,28 +45188,15 @@
             "owners": [
               "visible_tounicode",
               "visible_tounicode",
-              "visible_tounicode",
-              "visible_tounicode",
-              "visible_tounicode",
               "invisible",
-              "visible_tounicode",
-              "visible_tounicode",
-              "visible_tounicode",
-              "visible_tounicode",
-              "invisible",
-              "visible_tounicode",
-              "visible_tounicode",
-              "invisible",
-              "visible_tounicode",
-              "visible_tounicode",
               "invisible",
               "visible_tounicode",
               "invisible",
               "visible_tounicode",
               "visible_tounicode",
+              "visible_tounicode",
               "invisible",
-              "visible_tounicode",
-              "visible_tounicode",
+              "invisible",
               "visible_tounicode",
               "visible_tounicode",
               "invisible",
@@ -45095,8 +45204,21 @@
               "visible_tounicode",
               "invisible",
               "visible_tounicode",
+              "invisible",
               "visible_tounicode",
               "visible_tounicode",
+              "invisible",
+              "invisible",
+              "visible_tounicode",
+              "visible_tounicode",
+              "visible_tounicode",
+              "invisible",
+              "visible_tounicode",
+              "visible_tounicode",
+              "invisible",
+              "visible_tounicode",
+              "visible_tounicode",
+              "invisible",
               "visible_tounicode",
               "visible_tounicode",
               "visible_tounicode",
@@ -45148,7 +45270,7 @@
               "visible_tounicode",
               "visible_tounicode",
               "visible_tounicode",
-              "visible_tounicode",
+              "invisible",
               "visible_tounicode",
               "visible_tounicode",
               "visible_tounicode",
@@ -45177,7 +45299,7 @@
               "invisible",
               "visible_tounicode",
               "visible_tounicode",
-              "visible_tounicode",
+              "invisible",
               "visible_tounicode",
               "visible_tounicode",
               "visible_tounicode",
@@ -45348,7 +45470,7 @@
               "visible_tounicode",
               "visible_tounicode",
               "visible_tounicode",
-              "visible_tounicode"
+              "invisible"
             ]
           }
         ]

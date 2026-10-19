@@ -1,23 +1,2 @@
-	Command being timed: "target/release/scanweave-cli build --bundle qualification/experiments/m1g/fixture/dpi300/input/document.json --dpi 300 --profile clearscan --mode reconstruct --glyph-dictionary visual --output qualification/clearscan_product/300/clearscan.pdf --report qualification/clearscan_product/300/report.json"
-	User time (seconds): 30.35
-	System time (seconds): 0.55
-	Percent of CPU this job got: 94%
-	Elapsed (wall clock) time (h:mm:ss or m:ss): 0:32.76
-	Average shared text size (kbytes): 0
-	Average unshared data size (kbytes): 0
-	Average stack size (kbytes): 0
-	Average total size (kbytes): 0
-	Maximum resident set size (kbytes): 201752
-	Average resident set size (kbytes): 0
-	Major (requiring I/O) page faults: 0
-	Minor (reclaiming a frame) page faults: 257765
-	Voluntary context switches: 138
-	Involuntary context switches: 5017
-	Swaps: 0
-	File system inputs: 0
-	File system outputs: 4862
-	Socket messages sent: 0
-	Socket messages received: 0
-	Signals delivered: 0
-	Page size (bytes): 4096
-	Exit status: 0
+Guarded ClearScan conversion: 30.399 s reported by the converter report (sum of page elapsed_ms).
+External peak RSS was not measured on this rerun. Pre-guard /usr/bin/time result is preserved in pre_guard/time.txt.

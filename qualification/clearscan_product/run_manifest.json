@@ -330,23 +330,28 @@
   "pdf_outputs": [
     {
       "path": "qualification/clearscan_product/300/clearscan.pdf",
+      "sha256": "2ef079a01801c0cbf6d128dee63fb4d262c6de0e1721caafdf32f3ce398e7228",
+      "bytes": 1093038
+    },
+    {
+      "path": "qualification/clearscan_product/300/pre_guard/clearscan.pdf",
       "sha256": "a08edbb1d6f3bd5e8abe134ca053b326f1135aaaa67c111d5c649a2c835531b2",
       "bytes": 1087076
+    },
+    {
+      "path": "qualification/clearscan_product/300/variants/max_coverage/clearscan.pdf",
+      "sha256": "87bba4f3b4c11d662c92b5912e4eb6fad601ca22c70883ac5f296a7ac0787949",
+      "bytes": 1136689
+    },
+    {
+      "path": "qualification/clearscan_product/300/variants/rgb_control/clearscan.pdf",
+      "sha256": "5a94ef3bc81d0a2d41d8f7ace2f07772397ea115b29c5b34cf94bbc7c4bbcd6b",
+      "bytes": 1574287
     },
     {
       "path": "qualification/clearscan_product/600/clearscan.pdf",
       "sha256": "fa9ddef01d21ab9c22540c035b3296f7fe79846b626b0417dc0e34340082dce8",
       "bytes": 889147
-    },
-    {
-      "path": "qualification/clearscan_product/adobe_300/clearscan.pdf",
-      "sha256": "039c2b49c6e31d29cd0dbae3264f514d49b1472d7d997ee0328837b58093c4c7",
-      "bytes": 1960987
-    },
-    {
-      "path": "qualification/clearscan_product/adobe_600/clearscan.pdf",
-      "sha256": "eb94a0eb0b2c30250c16c2454d66c1226265cd95c1826de704e78fa8b149d8d2",
-      "bytes": 3353502
     },
     {
       "path": "qualification/clearscan_product/adobe_300/clearscan.pdf",
@@ -364,5 +369,12 @@
     "Adobe outputs and exact input hashes are recorded in frozen_adobe_comparison.json.",
     "Run wall/RSS measurements are in each resolution time.txt."
   ],
-  "implementation_commit": "b76b9d638eff0c81c8c8f8204db72fd12a4ee6f9"
+  "implementation_commit": "b76b9d638eff0c81c8c8f8204db72fd12a4ee6f9",
+  "product_settings": {
+    "profile": "clearscan",
+    "glyph_dictionary": "visual",
+    "mode": "reconstruct",
+    "clear_reuse_source_mask_iou_floor": 0.8,
+    "clear_reuse_floor_applies_to": "healthy canonical reuse only; donor-supported repairs are exempt"
+  }
 }
