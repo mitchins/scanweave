@@ -2287,7 +2287,7 @@ fn protect_weak_rules(
     h: usize,
     dpi: f64,
     paper: [u8; 3],
-    ink: &[bool],
+    _ink: &[bool],
     protected: &mut [bool],
 ) -> Vec<[f64; 4]> {
     let scale = (dpi / 300.0).round().max(1.0) as usize;
@@ -2304,7 +2304,7 @@ fn protect_weak_rules(
         let mut start = None;
         let mut support = 0;
         for x in 0..=w {
-            let connected = x < w && (ink[y * w + x] || weak(y * w + x));
+            let connected = x < w && lum[y * w + x] + 3 <= light;
             if connected {
                 if start.is_none() {
                     start = Some(x);
@@ -2332,7 +2332,7 @@ fn protect_weak_rules(
         let mut start = None;
         let mut support = 0;
         for y in 0..=h {
-            let connected = y < h && (ink[y * w + x] || weak(y * w + x));
+            let connected = y < h && lum[y * w + x] + 3 <= light;
             if connected {
                 if start.is_none() {
                     start = Some(y);
