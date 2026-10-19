@@ -283,3 +283,30 @@ pub fn build_glyph_shapes(
 fn _els(p: &BezPath) -> Vec<PathEl> {
     p.elements().to_vec()
 }
+
+/// Stable geometry for invisible OCR characters. Their search/extraction boxes
+/// must not depend on the first reconstructed glyph or its contour refinement.
+/// It shares the existing embedded font and is never used for visible text.
+pub(crate) fn semantic_owner_shape() -> GlyphShape {
+    let mut path = BezPath::new();
+    path.move_to((4., 4.));
+    path.line_to((4., 200.));
+    path.line_to((200., 200.));
+    path.line_to((200., 4.));
+    path.close_path();
+    GlyphShape {
+        shape_key: "__semantic_owner_frame".into(),
+        path,
+        num_contours: 1,
+        num_points: 4,
+        bbox_fu: [4., 4., 200., 200.],
+        ink_span_fu: [196., 196.],
+        anchor_bbox_fu: [4., 4., 200., 200.],
+        stages: crate::units::StageMetrics {
+            trace_max_px: 0.,
+            trace_p95_px: 0.,
+            curve_max_px: 0.,
+            quant_bound_px: 0.,
+        },
+    }
+}

@@ -167,3 +167,17 @@ fn local_fit_preserves_the_existing_source_gate() {
     let iou = |g| crate::convert::reconstructed_glyph_ink_iou(&g, 8, 10, &u.mask);
     assert!(iou(glyph(fit)) + 1e-12 >= iou(glyph(base)).min(0.98));
 }
+
+#[test]
+fn invisible_owner_frame_is_independent_of_reconstructed_contours() {
+    let owner = crate::glyphs::semantic_owner_shape();
+    assert_eq!(owner.shape_key, "__semantic_owner_frame");
+    assert_eq!(owner.bbox_fu, [4., 4., 200., 200.]);
+    assert_eq!(owner.ink_span_fu, [196., 196.]);
+    // Source glyph transformations must never be used to place this label.
+    let mutated = offset_coverage_contour(&ring(), 0.15);
+    let b = Budget::from_m0_policy();
+    let observed = crate::glyphs::build_glyph_shapes(&[mutated], 64., &b).unwrap();
+    assert_ne!(observed[0].bbox_fu, owner.bbox_fu);
+    assert_eq!(crate::glyphs::semantic_owner_shape().path, owner.path);
+}

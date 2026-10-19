@@ -945,7 +945,7 @@ pub(crate) fn convert_parts_with_document_donors(
             }
         }
     }
-    let shapes: Vec<GlyphShape> = build_glyph_shapes(&traced, units_per_px, &budget)?;
+    let mut shapes: Vec<GlyphShape> = build_glyph_shapes(&traced, units_per_px, &budget)?;
     for shape in &shapes {
         if let Some(unit) = reconstruction.prototype_units.get(&shape.shape_key) {
             reconstruction
@@ -1532,6 +1532,10 @@ pub(crate) fn convert_parts_with_document_donors(
         // A many-character ToUnicode string on one fallback CID can trigger
         // PDFium's overlap suppression. Keep the original span as ActualText,
         // but give its characters independent CIDs and OCR character boxes.
+        let owner_shape_index = shapes.len();
+        if !owners.is_empty() {
+            shapes.push(crate::glyphs::semantic_owner_shape());
+        }
         for (owner_index, owner) in owners.iter_mut().enumerate() {
             let chars: Vec<_> = owner.text.char_indices().collect();
             let span = input.spans.iter().find(|s| s.id == owner.span_id);
@@ -1568,10 +1572,13 @@ pub(crate) fn convert_parts_with_document_donors(
                     continue;
                 }
                 let label = ch.to_string();
-                let cid = if let Some(index) = all_encodings.iter().position(|(_, t)| t == &label) {
+                let cid = if let Some(index) = all_encodings
+                    .iter()
+                    .position(|(g, t)| *g == owner_shape_index && t == &label)
+                {
                     index as u32 + 1
                 } else {
-                    all_encodings.push((0, label));
+                    all_encodings.push((owner_shape_index, label));
                     all_encodings.len() as u32
                 };
                 let mut b = owner.bbox_px;
