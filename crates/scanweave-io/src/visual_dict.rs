@@ -529,9 +529,7 @@ pub fn reconstruct(
                 .fold(f64::INFINITY, f64::min);
             // ClearScan canonicalizes healthy and damaged observations. The
             // faithful profile retains its source-preserving donor behavior.
-            if policy.profile != "clearscan"
-                && evidence[i].density >= min_donor_density - 0.01
-            {
+            if policy.profile != "clearscan" && evidence[i].density >= min_donor_density - 0.01 {
                 continue;
             }
             let score = normalized_iou(u, &plan.owned[rep].unit);
@@ -540,10 +538,7 @@ pub fn reconstruct(
             } else {
                 (0.62..0.94).contains(&score)
             };
-            if members.len() >= 3
-                && score_ok
-                && best.map(|(_, b)| score > b).unwrap_or(true)
-            {
+            if members.len() >= 3 && score_ok && best.map(|(_, b)| score > b).unwrap_or(true) {
                 best = Some((rep, score));
             }
         }
@@ -719,6 +714,7 @@ fn reuse_gate(similarity: f64, donor_support: usize) -> bool {
 /// The source mask threshold is intentionally more permissive for ownership;
 /// Otsu's local crop threshold removes antialias fringe before outline tracing.
 fn refine_observed_mask(unit: &mut crate::units::Unit, rgb: &[u8], page_w: u32, page_h: u32) -> u8 {
+    unit.retain_grayscale(rgb, page_w, page_h);
     let (pw, ph) = (page_w as usize, page_h as usize);
     if rgb.len() != pw * ph * 3 || unit.mask.len() != unit.crop_w * unit.crop_h {
         return 128;

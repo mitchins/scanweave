@@ -377,16 +377,8 @@ fn make_unit(mask_pixels: &[(usize, usize)], _page: &OcrPage, slot: &Slot, _si: 
     for (x, y) in mask_pixels {
         mask[(y - y0) * cw + (x - x0)] = true;
     }
-    let packed: Vec<u8> = mask
-        .chunks(8)
-        .map(|c| {
-            c.iter()
-                .enumerate()
-                .fold(0u8, |acc, (i, b)| acc | ((*b as u8) << i))
-        })
-        .collect();
     Unit {
-        shape_key: scanweave_core::hash_hex(&packed),
+        shape_key: crate::units::mask_identity_key(&mask, cw, ch),
         span_id: slot.span_id.clone(),
         symbol_id: slot.symbol_id.clone(),
         semantic_text: slot.text.clone(),
@@ -396,6 +388,7 @@ fn make_unit(mask_pixels: &[(usize, usize)], _page: &OcrPage, slot: &Slot, _si: 
         crop_h: ch,
         mask,
         gray_samples: None,
+        gray_halo: None,
         contour_threshold: None,
     }
 }
@@ -411,16 +404,8 @@ fn make_artwork_unit(pixels: &[(usize, usize)]) -> Unit {
     for (x, y) in pixels {
         mask[(y - y0) * cw + (x - x0)] = true;
     }
-    let packed: Vec<u8> = mask
-        .chunks(8)
-        .map(|c| {
-            c.iter()
-                .enumerate()
-                .fold(0u8, |acc, (i, b)| acc | ((*b as u8) << i))
-        })
-        .collect();
     Unit {
-        shape_key: scanweave_core::hash_hex(&packed),
+        shape_key: crate::units::mask_identity_key(&mask, cw, ch),
         span_id: "unowned".to_string(),
         symbol_id: "artwork".to_string(),
         semantic_text: String::new(),
@@ -430,6 +415,7 @@ fn make_artwork_unit(pixels: &[(usize, usize)]) -> Unit {
         crop_h: ch,
         mask,
         gray_samples: None,
+        gray_halo: None,
         contour_threshold: None,
     }
 }

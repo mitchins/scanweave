@@ -32,6 +32,8 @@ pub struct Unit {
     pub mask: Vec<bool>,
     /// Original grayscale crop, retained only for selected reconstruction witnesses.
     pub gray_samples: Option<Vec<u8>>,
+    /// Two source pixels around the crop, for witnessed antialias ownership.
+    pub gray_halo: Option<Vec<u8>>,
     /// Source intensity used for the canonical contour (not ownership).
     pub contour_threshold: Option<u8>,
 }
@@ -41,11 +43,40 @@ impl Unit {
         let (w, h) = (page_w as usize, page_h as usize);
         let x0 = self.bbox_px[0] as usize;
         let y0 = self.bbox_px[1] as usize;
-        if rgb.len() != w * h * 3 || x0 + self.crop_w > w || y0 + self.crop_h > h { return; }
-        self.gray_samples = Some((0..self.crop_h).flat_map(|y| (0..self.crop_w).map(move |x| {
-            let at = ((y0 + y) * w + x0 + x) * 3;
-            (0.2126 * rgb[at] as f64 + 0.7152 * rgb[at + 1] as f64 + 0.0722 * rgb[at + 2] as f64).round() as u8
-        })).collect());
+        if rgb.len() != w * h * 3 || x0 + self.crop_w > w || y0 + self.crop_h > h {
+            return;
+        }
+        self.gray_halo = Some(
+            (0..self.crop_h + 4)
+                .flat_map(|y| {
+                    (0..self.crop_w + 4).map(move |x| {
+                        let sx = x0 as isize + x as isize - 2;
+                        let sy = y0 as isize + y as isize - 2;
+                        if sx < 0 || sy < 0 || sx >= w as isize || sy >= h as isize {
+                            return 255;
+                        }
+                        let at = (sy as usize * w + sx as usize) * 3;
+                        (0.2126 * rgb[at] as f64
+                            + 0.7152 * rgb[at + 1] as f64
+                            + 0.0722 * rgb[at + 2] as f64)
+                            .round() as u8
+                    })
+                })
+                .collect(),
+        );
+        self.gray_samples = Some(
+            (0..self.crop_h)
+                .flat_map(|y| {
+                    (0..self.crop_w).map(move |x| {
+                        let at = ((y0 + y) * w + x0 + x) * 3;
+                        (0.2126 * rgb[at] as f64
+                            + 0.7152 * rgb[at + 1] as f64
+                            + 0.0722 * rgb[at + 2] as f64)
+                            .round() as u8
+                    })
+                })
+                .collect(),
+        );
     }
 
     pub fn height_px(&self) -> usize {
@@ -247,6 +278,7 @@ pub fn extract_units(seg: &Segmentation, w: u32, h: u32, page: &OcrPage) -> (Vec
                     crop_h: ch,
                     mask,
                     gray_samples: None,
+                    gray_halo: None,
                     contour_threshold: None,
                 });
             }
@@ -290,6 +322,7 @@ pub fn extract_units(seg: &Segmentation, w: u32, h: u32, page: &OcrPage) -> (Vec
             crop_h: ch,
             mask,
             gray_samples: None,
+            gray_halo: None,
             contour_threshold: None,
         });
     }
@@ -300,7 +333,7 @@ pub fn extract_units(seg: &Segmentation, w: u32, h: u32, page: &OcrPage) -> (Vec
 
 /// Exact binary mask identity: dimensions are part of the geometry, not
 /// recoverable from the packed row-major bit stream.
-fn mask_identity_key(mask: &[bool], width: usize, height: usize) -> String {
+pub(crate) fn mask_identity_key(mask: &[bool], width: usize, height: usize) -> String {
     let mut packed: Vec<u8> = Vec::with_capacity(8 + (mask.len() + 7) / 8);
     packed.extend_from_slice(&(width as u32).to_le_bytes());
     packed.extend_from_slice(&(height as u32).to_le_bytes());
@@ -319,7 +352,13 @@ mod identity_tests {
     #[test]
     fn exact_mask_identity_includes_shape_dimensions() {
         let bits = [true, false, false, true, false, false, true, false];
-        assert_ne!(mask_identity_key(&bits, 2, 4), mask_identity_key(&bits, 4, 2));
-        assert_eq!(mask_identity_key(&bits, 2, 4), mask_identity_key(&bits, 2, 4));
+        assert_ne!(
+            mask_identity_key(&bits, 2, 4),
+            mask_identity_key(&bits, 4, 2)
+        );
+        assert_eq!(
+            mask_identity_key(&bits, 2, 4),
+            mask_identity_key(&bits, 2, 4)
+        );
     }
 }

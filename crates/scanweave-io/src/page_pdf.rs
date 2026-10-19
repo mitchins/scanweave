@@ -25,6 +25,8 @@ pub struct Patch {
     pub rgb: Vec<u8>,
     pub w: u32,
     pub h: u32,
+    /// Only a reduced ClearScan background may use a bounded-error codec.
+    pub compact_background: bool,
 }
 
 /// Lossless raster serialization choices. Production assembly uses exact
@@ -58,6 +60,7 @@ struct ImageResourceKey {
     color_space: u8, // 1 = DeviceGray, 3 = DeviceRGB
     compression_level: u32,
     predictor: u8,
+    compact_background: bool,
     sample_sha256: [u8; 32],
     samples: Vec<u8>,
 }
@@ -70,6 +73,7 @@ impl PartialEq for ImageResourceKey {
             && self.color_space == other.color_space
             && self.compression_level == other.compression_level
             && self.predictor == other.predictor
+            && self.compact_background == other.compact_background
             && self.sample_sha256 == other.sample_sha256
             && self.samples == other.samples
     }
@@ -80,6 +84,7 @@ struct EncodedImageResource {
     id: Ref,
     key: ImageResourceKey,
     compressed: Vec<u8>,
+    jpeg: bool,
 }
 
 fn canonical_patch(
@@ -124,7 +129,7 @@ fn canonical_patch(
     digest.update(patch.h.to_be_bytes());
     digest.update([8, if is_gray { 1 } else { 3 }]);
     digest.update(options.compression_level.min(9).to_be_bytes());
-    digest.update([options.predictor]);
+    digest.update([options.predictor, patch.compact_background as u8]);
     digest.update(&samples);
     let sample_sha256: [u8; 32] = digest.finalize().into();
     Ok(ImageResourceKey {
@@ -134,6 +139,7 @@ fn canonical_patch(
         color_space: if is_gray { 1 } else { 3 },
         compression_level: options.compression_level.min(9),
         predictor: options.predictor,
+        compact_background: patch.compact_background,
         sample_sha256,
         samples,
     })
@@ -180,7 +186,7 @@ fn encode_predictor(key: &ImageResourceKey) -> Result<Vec<u8>, String> {
     }
 }
 
-fn compress_samples(key: &ImageResourceKey) -> Result<Vec<u8>, String> {
+fn compress_samples(key: &ImageResourceKey) -> Result<(Vec<u8>, bool), String> {
     let predicted = encode_predictor(key)?;
     let mut enc = flate2::write::ZlibEncoder::new(
         Vec::new(),
@@ -188,7 +194,46 @@ fn compress_samples(key: &ImageResourceKey) -> Result<Vec<u8>, String> {
     );
     use std::io::Write;
     enc.write_all(&predicted).map_err(|e| e.to_string())?;
-    enc.finish().map_err(|e| e.to_string())
+    let lossless = enc.finish().map_err(|e| e.to_string())?;
+    if key.compact_background {
+        // Test actual serialized savings and decoded sample errors. This is
+        // never used for native fallback/artwork or the faithful profile.
+        for quality in [95, 98, 100] {
+            let mut jpeg = Vec::new();
+            let color = if key.color_space == 1 {
+                image::ExtendedColorType::L8
+            } else {
+                image::ExtendedColorType::Rgb8
+            };
+            image::codecs::jpeg::JpegEncoder::new_with_quality(&mut jpeg, quality)
+                .encode(&key.samples, key.width, key.height, color)
+                .map_err(|e| e.to_string())?;
+            if jpeg.len() * 10 >= lossless.len() * 9 {
+                continue;
+            }
+            let decoded = image::load_from_memory_with_format(&jpeg, image::ImageFormat::Jpeg)
+                .map_err(|e| e.to_string())?;
+            let samples = if key.color_space == 1 {
+                decoded.to_luma8().into_raw()
+            } else {
+                decoded.to_rgb8().into_raw()
+            };
+            let mut max_error = 0u8;
+            let mut sum_error = 0u64;
+            for (&a, &b) in key.samples.iter().zip(&samples) {
+                let error = a.abs_diff(b);
+                max_error = max_error.max(error);
+                sum_error += error as u64;
+            }
+            if samples.len() == key.samples.len()
+                && max_error <= 3
+                && sum_error as f64 <= key.samples.len() as f64 * 0.25
+            {
+                return Ok((jpeg, true));
+            }
+        }
+    }
+    Ok((lossless, false))
 }
 
 #[derive(Debug, Default, Clone)]
@@ -357,9 +402,8 @@ fn emit_text_runs(
                     let g = &shapes[*gidx];
                     let x0 = xf.x(bbox_px[0]);
                     let bottom_pt = xf.y(bbox_px[3]);
-                    let top_pt = xf.y(bbox_px[1]);
-                    let w_pt = (bbox_px[2] * xf.sx()) as f32 - x0;
-                    let h_pt = top_pt - bottom_pt;
+                    let w_pt = ((bbox_px[2] - bbox_px[0]) * xf.sx()) as f32;
+                    let h_pt = ((bbox_px[3] - bbox_px[1]) * xf.sy()) as f32;
                     let sx = w_pt * 2048.0 / g.ink_span_fu[0].max(1.0) as f32;
                     let sy = h_pt * 2048.0 / g.ink_span_fu[1].max(1.0) as f32;
                     let tx = x0 - (g.anchor_bbox_fu[0] as f32) * sx / 2048.0;
@@ -412,9 +456,8 @@ fn emit_text_runs(
             let g = &shapes[*gidx];
             let x0 = xf.x(bbox_px[0]);
             let bottom_pt = xf.y(bbox_px[3]);
-            let top_pt = xf.y(bbox_px[1]);
-            let w_pt = (bbox_px[2] * xf.sx()) as f32 - x0;
-            let h_pt = top_pt - bottom_pt;
+            let w_pt = ((bbox_px[2] - bbox_px[0]) * xf.sx()) as f32;
+            let h_pt = ((bbox_px[3] - bbox_px[1]) * xf.sy()) as f32;
             let sx = w_pt * 2048.0 / g.ink_span_fu[0].max(1.0) as f32;
             let sy = h_pt * 2048.0 / g.ink_span_fu[1].max(1.0) as f32;
             let tx = x0 - (g.anchor_bbox_fu[0] as f32) * sx / 2048.0;
@@ -556,7 +599,7 @@ pub fn assemble_with_options(
         let index = match existing {
             Some(i) => i,
             None => {
-                let compressed = compress_samples(&key)?;
+                let (compressed, jpeg) = compress_samples(&key)?;
                 let id = Ref::new(next + image_resources.len() as i32);
                 let digest = key.sample_sha256;
                 let i = image_resources.len();
@@ -564,6 +607,7 @@ pub fn assemble_with_options(
                     id,
                     key,
                     compressed,
+                    jpeg,
                 });
                 if image_options.reuse_identical {
                     resource_lookup.entry(digest).or_default().push(i);
@@ -690,8 +734,15 @@ pub fn assemble_with_options(
             Name(b"BitsPerComponent"),
             resource.key.bits_per_component as i32,
         );
-        img.pair(Name(b"Filter"), Name(b"FlateDecode"));
-        if resource.key.predictor != 1 {
+        img.pair(
+            Name(b"Filter"),
+            Name(if resource.jpeg {
+                b"DCTDecode"
+            } else {
+                b"FlateDecode"
+            }),
+        );
+        if !resource.jpeg && resource.key.predictor != 1 {
             let predictor = match resource.key.predictor {
                 2 => pdf_writer::types::Predictor::Tiff,
                 12 => pdf_writer::types::Predictor::PngUp,
@@ -919,7 +970,7 @@ pub fn assemble_document_with_options(
             let resource_index = match existing {
                 Some(i) => i,
                 None => {
-                    let compressed = compress_samples(&key)?;
+                    let (compressed, jpeg) = compress_samples(&key)?;
                     let id = Ref::new(next_image);
                     next_image += 1;
                     let i = image_resources.len();
@@ -928,6 +979,7 @@ pub fn assemble_document_with_options(
                         id,
                         key,
                         compressed,
+                        jpeg,
                     });
                     if image_options.reuse_identical {
                         resource_lookup.entry(digest).or_default().push(i);
@@ -1016,8 +1068,15 @@ pub fn assemble_document_with_options(
             Name(b"BitsPerComponent"),
             resource.key.bits_per_component as i32,
         );
-        img.pair(Name(b"Filter"), Name(b"FlateDecode"));
-        if resource.key.predictor != 1 {
+        img.pair(
+            Name(b"Filter"),
+            Name(if resource.jpeg {
+                b"DCTDecode"
+            } else {
+                b"FlateDecode"
+            }),
+        );
+        if !resource.jpeg && resource.key.predictor != 1 {
             let predictor = match resource.key.predictor {
                 2 => pdf_writer::types::Predictor::Tiff,
                 12 => pdf_writer::types::Predictor::PngUp,
@@ -1133,6 +1192,7 @@ mod image_resource_tests {
 
     fn patch(bbox_px: [f64; 4], rgb: [u8; 3]) -> Patch {
         Patch {
+            compact_background: false,
             bbox_px,
             rgb: rgb.to_vec(),
             w: 1,
@@ -1174,6 +1234,7 @@ mod image_resource_tests {
     #[test]
     fn image_dimensions_and_sample_length_are_validated() {
         let pages = [page(vec![Patch {
+            compact_background: false,
             bbox_px: [0.0; 4],
             rgb: vec![1, 2, 3],
             w: 2,
@@ -1193,18 +1254,21 @@ mod image_resource_tests {
     fn flate_predictor_control_pdfs_are_serialized_when_requested() {
         let patches = vec![
             Patch {
+                compact_background: false,
                 bbox_px: [0.0, 0.0, 2.0, 2.0],
                 w: 2,
                 h: 2,
                 rgb: vec![248, 248, 248, 250, 250, 250, 252, 252, 252, 255, 255, 255],
             },
             Patch {
+                compact_background: false,
                 bbox_px: [2.0, 0.0, 4.0, 2.0],
                 w: 2,
                 h: 2,
                 rgb: vec![255, 0, 0, 0, 255, 0, 0, 0, 255, 30, 60, 90],
             },
             Patch {
+                compact_background: false,
                 bbox_px: [4.0, 0.0, 6.0, 2.0],
                 w: 2,
                 h: 2,

@@ -404,6 +404,20 @@ pub(crate) fn collect_document_donors(input: &Input) -> Vec<crate::units::Unit> 
 /// mask: the outline is rasterized over the crop grid (scanline fill at pixel
 /// centres) and compared with the mask. Empty/empty = 1, empty/nonempty = 0.
 pub(crate) fn glyph_ink_iou(g: &GlyphShape, crop_w: usize, crop_h: usize, mask: &[bool]) -> f64 {
+    glyph_ink_iou_contract(g, crop_w, crop_h, mask, false)
+}
+
+fn reconstructed_glyph_ink_iou(g: &GlyphShape, crop_w: usize, crop_h: usize, mask: &[bool]) -> f64 {
+    glyph_ink_iou_contract(g, crop_w, crop_h, mask, true)
+}
+
+fn glyph_ink_iou_contract(
+    g: &GlyphShape,
+    crop_w: usize,
+    crop_h: usize,
+    mask: &[bool],
+    clearscan: bool,
+) -> f64 {
     if crop_w == 0 || crop_h == 0 {
         return 1.0;
     }
@@ -411,7 +425,15 @@ pub(crate) fn glyph_ink_iou(g: &GlyphShape, crop_w: usize, crop_h: usize, mask: 
     // expressed in the glyph's construction frame: the crop maps to
     // [anchor_bbox_fu[0], +ink_span_fu[0]] x [anchor_bbox_fu[1], +ink_span_fu[1]]
     // (the same frame page_pdf uses to place the run: tx = x0 - anchor*sx/upem).
-    let k = (g.ink_span_fu[0] / crop_w as f64).max(f64::EPSILON); // font units per px
+    let kx = (g.ink_span_fu[0] / crop_w as f64).max(f64::EPSILON);
+    let ky = if clearscan {
+        (g.ink_span_fu[1] / crop_h as f64).max(f64::EPSILON)
+    } else {
+        kx
+    };
+    let to_x = |x: f64| (x - if clearscan { g.anchor_bbox_fu[0] } else { 0.0 }) / kx;
+    let to_y =
+        |y: f64| crop_h as f64 - (y - if clearscan { g.anchor_bbox_fu[1] } else { 0.0 }) / ky;
     let mut polys: Vec<Vec<[f64; 2]>> = Vec::new();
     let mut cur: Vec<[f64; 2]> = Vec::new();
     let mut start = [0.0f64, 0.0f64];
@@ -441,22 +463,17 @@ pub(crate) fn glyph_ink_iou(g: &GlyphShape, crop_w: usize, crop_h: usize, mask: 
                 } else {
                     cur.clear();
                 }
-                start = [p.x / k, crop_h as f64 - p.y / k];
+                start = [to_x(p.x), to_y(p.y)];
                 last = start;
                 cur.push(start);
             }
             kurbo::PathEl::LineTo(p) => {
-                last = [p.x / k, crop_h as f64 - p.y / k];
+                last = [to_x(p.x), to_y(p.y)];
                 cur.push(last);
             }
             kurbo::PathEl::QuadTo(c, p) => {
                 // raise the quad to a cubic and flatten
-                let (cx, cy, px, py) = (
-                    c.x / k,
-                    crop_h as f64 - c.y / k,
-                    p.x / k,
-                    crop_h as f64 - p.y / k,
-                );
+                let (cx, cy, px, py) = (to_x(c.x), to_y(c.y), to_x(p.x), to_y(p.y));
                 let c1 = [
                     last[0] + 2.0 / 3.0 * (cx - last[0]),
                     last[1] + 2.0 / 3.0 * (cy - last[1]),
@@ -466,15 +483,15 @@ pub(crate) fn glyph_ink_iou(g: &GlyphShape, crop_w: usize, crop_h: usize, mask: 
                 last = [px, py];
             }
             kurbo::PathEl::CurveTo(c1, c2, p) => {
-                let flip = |v: f64| crop_h as f64 - v / k;
+                let flip = to_y;
                 flatten(
                     last,
-                    [c1.x / k, flip(c1.y)],
-                    [c2.x / k, flip(c2.y)],
-                    [p.x / k, flip(p.y)],
+                    [to_x(c1.x), flip(c1.y)],
+                    [to_x(c2.x), flip(c2.y)],
+                    [to_x(p.x), flip(p.y)],
                     &mut cur,
                 );
-                last = [p.x / k, flip(p.y)];
+                last = [to_x(p.x), flip(p.y)];
             }
             kurbo::PathEl::ClosePath => {
                 if cur.len() > 1 {
@@ -495,7 +512,7 @@ pub(crate) fn glyph_ink_iou(g: &GlyphShape, crop_w: usize, crop_h: usize, mask: 
     // harness applies it (render, threshold at the paper/ink midpoint), so a
     // pixel counts as foreground when its covered fraction reaches 0.5
     const SUB: usize = 4;
-    let mut cover = vec![0u8; crop_w * crop_h];
+    let mut cover = vec![0.0f64; crop_w * crop_h];
     for row in 0..crop_h {
         for sub in 0..SUB {
             let py = row as f64 + (sub as f64 + 0.5) / SUB as f64;
@@ -529,18 +546,32 @@ pub(crate) fn glyph_ink_iou(g: &GlyphShape, crop_w: usize, crop_h: usize, mask: 
                     let frac = (hi - lo).max(0.0);
                     if frac > 0.0 {
                         let idx = row * crop_w + col;
-                        // accumulate the sub-row's contribution as a count
-                        cover[idx] = cover[idx].saturating_add(if frac >= 0.5 { 2 } else { 1 });
+                        // Accumulate actual covered area. Counting every tiny
+                        // edge overlap as a whole sample dilated continuous
+                        // contours and made this gate disagree with PDF renders.
+                        cover[idx] += if clearscan {
+                            frac / SUB as f64
+                        } else if frac >= 0.5 {
+                            2.0
+                        } else {
+                            1.0
+                        };
                     }
                 }
                 i += 2;
             }
         }
     }
-    // foreground when at least half the sub-rows cover the pixel
+    // Foreground at at least half a pixel of covered area.
     let fill: Vec<bool> = cover
         .iter()
-        .map(|c| *c as usize >= SUB.div_ceil(2))
+        .map(|c| {
+            *c >= if clearscan {
+                0.5
+            } else {
+                SUB.div_ceil(2) as f64
+            }
+        })
         .collect();
     let mut inter = 0usize;
     let mut uni = 0usize;
@@ -616,8 +647,7 @@ pub fn convert(input: &Input, policy: &Policy) -> Result<Output, String> {
             .preservation_ink_iou_min
             .is_none_or(|m| m >= policy.min_ink_iou);
     let restoration_ok =
-        policy.profile != "clearscan"
-            || report.reconstruction.restoration_qualified;
+        policy.profile != "clearscan" || report.reconstruction.restoration_qualified;
     let recon_fidelity_ok = preservation_ok && restoration_ok;
     let selected = if policy.mode == "auto" {
         if recon_fidelity_ok && pdf_bytes.len() <= b0.len() {
@@ -677,8 +707,7 @@ pub(crate) fn convert_parts_with_document_donors(
     // default for background reduction and pixel-sized restoration footprints.
     let mut effective_policy = policy.clone();
     if policy.profile == "clearscan" {
-        effective_policy.dpi =
-            clearscan_source_dpi(input.raster_to_page_pt, &input.page_id)?;
+        effective_policy.dpi = clearscan_source_dpi(input.raster_to_page_pt, &input.page_id)?;
     }
     let policy = &effective_policy;
     let start = std::time::Instant::now();
@@ -873,13 +902,20 @@ pub(crate) fn convert_parts_with_document_donors(
     let shapes: Vec<GlyphShape> = build_glyph_shapes(&traced, units_per_px, &budget)?;
     for shape in &shapes {
         if let Some(unit) = reconstruction.prototype_units.get(&shape.shape_key) {
-            reconstruction.canonical_geometry.push(crate::visual_dict::CanonicalGeometry {
-                prototype_id: format!("prototype:{}", shape.shape_key),
-                witness_symbol_id: unit.symbol_id.clone(), witness_bbox_px: unit.bbox_px,
-                width: unit.crop_w, height: unit.crop_h, mask: unit.mask.clone(),
-                grayscale: unit.gray_samples.clone(), path_svg: shape.path.to_svg(),
-                anchor_bbox_fu: shape.anchor_bbox_fu, ink_span_fu: shape.ink_span_fu,
-            });
+            reconstruction
+                .canonical_geometry
+                .push(crate::visual_dict::CanonicalGeometry {
+                    prototype_id: format!("prototype:{}", shape.shape_key),
+                    witness_symbol_id: unit.symbol_id.clone(),
+                    witness_bbox_px: unit.bbox_px,
+                    width: unit.crop_w,
+                    height: unit.crop_h,
+                    mask: unit.mask.clone(),
+                    grayscale: unit.gray_samples.clone(),
+                    path_svg: shape.path.to_svg(),
+                    anchor_bbox_fu: shape.anchor_bbox_fu,
+                    ink_span_fu: shape.ink_span_fu,
+                });
         }
     }
     // Restoration has a separate gate: the selected observed prototype must
@@ -900,7 +936,7 @@ pub(crate) fn convert_parts_with_document_donors(
             shapes
                 .iter()
                 .find(|s| s.shape_key == prototype_key)
-                .map(|g| glyph_ink_iou(g, donor.crop_w, donor.crop_h, &donor.mask))
+                .map(|g| reconstructed_glyph_ink_iou(g, donor.crop_w, donor.crop_h, &donor.mask))
         });
         occurrence.prototype_trace_iou = traced_iou;
         let source_iou = source_masks
@@ -909,7 +945,7 @@ pub(crate) fn convert_parts_with_document_donors(
                 shapes
                     .iter()
                     .find(|g| g.shape_key == prototype_key)
-                    .map(|g| glyph_ink_iou(g, *w, *h, mask))
+                    .map(|g| reconstructed_glyph_ink_iou(g, *w, *h, mask))
             });
         occurrence.source_mask_iou = source_iou;
         // A healthy occurrence should not be replaced by a visibly different
@@ -921,8 +957,8 @@ pub(crate) fn convert_parts_with_document_donors(
         } else {
             0.98
         };
-        let source_gate_failed = occurrence.reused
-            && source_iou.is_none_or(|iou| iou < reuse_source_floor);
+        let source_gate_failed =
+            occurrence.reused && source_iou.is_none_or(|iou| iou < reuse_source_floor);
         if traced_iou.is_none_or(|iou| iou < 0.90) || source_gate_failed {
             occurrence.repaired = false;
             occurrence.reused = false;
@@ -988,7 +1024,11 @@ pub(crate) fn convert_parts_with_document_donors(
                 let Some(g) = shapes.iter().find(|s| s.shape_key == u.shape_key) else {
                     continue;
                 };
-                let iou = glyph_ink_iou(g, u.crop_w, u.crop_h, &u.mask);
+                let iou = if policy.profile == "clearscan" {
+                    reconstructed_glyph_ink_iou(g, u.crop_w, u.crop_h, &u.mask)
+                } else {
+                    glyph_ink_iou(g, u.crop_w, u.crop_h, &u.mask)
+                };
                 measured.push((u.symbol_id.clone(), iou));
             }
         }
@@ -1104,19 +1144,27 @@ pub(crate) fn convert_parts_with_document_donors(
 
     // Derive suppression ownership from the final PDF occurrence list itself:
     // a symbol is cleaned only if an encoded glyph will actually be emitted.
-    let vector_owned_symbols: std::collections::BTreeSet<String> =
-        if policy.profile == "clearscan" {
-            occ.iter().map(|occurrence| occurrence.4.clone())
-                .collect()
-        } else {
-            std::collections::BTreeSet::new()
-        };
-    let (clearscan_rgb, raster_ink_pixels_suppressed, antialias_fringe_pixels_suppressed) = if policy.profile == "clearscan" {
-        let (rgb, ink_count, fringe_count) = clean_replaced_text(input, &plan, &vector_owned_symbols, policy.dpi, seg.paper);
-        (Some(rgb), ink_count, fringe_count)
+    let vector_owned_symbols: std::collections::BTreeSet<String> = if policy.profile == "clearscan"
+    {
+        occ.iter().map(|occurrence| occurrence.4.clone()).collect()
     } else {
-        (None, 0, 0)
+        std::collections::BTreeSet::new()
     };
+    let (clearscan_rgb, raster_ink_pixels_suppressed, antialias_fringe_pixels_suppressed) =
+        if policy.profile == "clearscan" {
+            let (rgb, ink_count, fringe_count) = clean_replaced_text(
+                input,
+                &plan,
+                &vector_owned_symbols,
+                &vector_owned_symbols,
+                &reconstruction,
+                policy.dpi,
+                seg.paper,
+            );
+            (Some(rgb), ink_count, fringe_count)
+        } else {
+            (None, 0, 0)
+        };
 
     // The compact page background sits below native-resolution fallback
     // patches. Remove every recognized text mask from that low-resolution
@@ -1128,7 +1176,18 @@ pub(crate) fn convert_parts_with_document_donors(
             .iter()
             .map(|owned| owned.unit.symbol_id.clone())
             .collect();
-        Some(clean_replaced_text(input, &plan, &all_text_symbols, policy.dpi, seg.paper).0)
+        Some(
+            clean_replaced_text(
+                input,
+                &plan,
+                &all_text_symbols,
+                &vector_owned_symbols,
+                &reconstruction,
+                policy.dpi,
+                seg.paper,
+            )
+            .0,
+        )
     } else {
         None
     };
@@ -1143,7 +1202,16 @@ pub(crate) fn convert_parts_with_document_donors(
         if !matches!(r.disposition, RegionDisposition::Raster { .. }) || r.units.is_empty() {
             continue;
         }
-        let bb = r.bbox_px;
+        let mut bb = r.bbox_px;
+        if policy.profile == "clearscan" {
+            let padding = if policy.dpi >= 450.0 { 2.0 } else { 1.0 };
+            bb = [
+                bb[0] - padding,
+                bb[1] - padding,
+                bb[2] + padding,
+                bb[3] + padding,
+            ];
+        }
         let x0 = bb[0].max(0.0) as usize;
         let y0 = bb[1].max(0.0) as usize;
         let x1 = (bb[2] as usize).min(w as usize).max(x0 + 1);
@@ -1160,6 +1228,7 @@ pub(crate) fn convert_parts_with_document_donors(
             }
         }
         patches.push(Patch {
+            compact_background: false,
             bbox_px: [x0 as f64, y0 as f64, x1 as f64, y1 as f64],
             rgb,
             w: pw as u32,
@@ -1539,7 +1608,12 @@ pub(crate) fn convert_parts_with_document_donors(
 /// creation order is the merge order). Each merged patch is re-copied from the
 /// source raster, so source fidelity is exact for every merged rect.
 fn coalesce_patches(input: &Input, patches: Vec<Patch>) -> Vec<Patch> {
-    coalesce_patches_rgb(&input.rgb, input.width as usize, input.height as usize, patches)
+    coalesce_patches_rgb(
+        &input.rgb,
+        input.width as usize,
+        input.height as usize,
+        patches,
+    )
 }
 
 fn coalesce_patches_rgb(
@@ -1595,6 +1669,7 @@ fn patch_from_rgb(source_rgb: &[u8], w: usize, h: usize, bb: [f64; 4]) -> Patch 
         }
     }
     Patch {
+        compact_background: false,
         bbox_px: [x0 as f64, y0 as f64, x1 as f64, y1 as f64],
         rgb,
         w: pw as u32,
@@ -1610,6 +1685,8 @@ fn clean_replaced_text(
     input: &Input,
     plan: &OwnershipPlan,
     vector_owned_symbols: &std::collections::BTreeSet<String>,
+    emitted_symbols: &std::collections::BTreeSet<String>,
+    reconstruction: &crate::visual_dict::Reconstruction,
     dpi: f64,
     fallback_paper: [u8; 3],
 ) -> (Vec<u8>, usize, usize) {
@@ -1652,35 +1729,122 @@ fn clean_replaced_text(
             }
         }
     }
-    let fringe = if dpi >= 450.0 { 2isize } else { 1isize };
     let mut erase: Vec<bool> = vector_ink
         .iter()
         .zip(&protected)
         .map(|(&vector, &keep)| vector && !keep)
         .collect();
-    // Glyph masks are sparse. Mark their small fringe directly instead of
-    // searching a neighborhood around every pixel on the entire page.
-    for (ink_at, &is_ink) in vector_ink.iter().enumerate() {
-        if !is_ink {
+    // A source neighbor is suppressed only when the selected independent
+    // document witness predicts matching antialias coverage at this position.
+    // Brightness alone cannot distinguish a fringe from faint punctuation.
+    let fringe = if dpi >= 450.0 { 2isize } else { 1isize };
+    for owned in &plan.owned {
+        let unit = &owned.unit;
+        if !vector_owned_symbols.contains(&unit.symbol_id) {
             continue;
         }
-        let (x, y) = ((ink_at % w) as isize, (ink_at / w) as isize);
-        for dy in -fringe..=fringe {
-            for dx in -fringe..=fringe {
-                let nx = x + dx;
-                let ny = y + dy;
-                if nx < 0 || ny < 0 || nx >= w as isize || ny >= h as isize {
-                    continue;
-                }
-                let idx = ny as usize * w + nx as usize;
-                if erase[idx] || protected[idx] {
-                    continue;
-                }
-                // A dark neighboring object is not an antialias fringe.
-                let p = idx * 3;
-                let luma = (rgb[p] as u16 + rgb[p + 1] as u16 + rgb[p + 2] as u16) / 3;
-                if luma >= 96 {
-                    erase[idx] = true;
+        let actual_vector = emitted_symbols.contains(&unit.symbol_id);
+        let record = reconstruction
+            .occurrences
+            .iter()
+            .find(|o| o.symbol_id == unit.symbol_id && (o.repaired || o.reused));
+        let witness = record
+            .and_then(|r| r.prototype_id.as_deref())
+            .and_then(|key| {
+                reconstruction
+                    .prototype_units
+                    .get(key.strip_prefix("prototype:").unwrap_or(key))
+            });
+        // Native fallback patches include the entire fringe. The base can be
+        // cleaned there because those exact source samples are painted above it.
+        if actual_vector && witness.and_then(|u| u.gray_halo.as_ref()).is_none() {
+            continue;
+        }
+        let target = record
+            .and_then(|r| r.replacement_bbox_px)
+            .unwrap_or(unit.bbox_px);
+        let mut source_ink: Vec<u8> = unit
+            .mask
+            .iter()
+            .enumerate()
+            .filter(|(_, ink)| **ink)
+            .map(|(i, _)| {
+                let at = ((unit.bbox_px[1] as usize + i / unit.crop_w) * w
+                    + unit.bbox_px[0] as usize
+                    + i % unit.crop_w)
+                    * 3;
+                ((input.rgb[at] as u16 + input.rgb[at + 1] as u16 + input.rgb[at + 2] as u16) / 3)
+                    as u8
+            })
+            .collect();
+        source_ink.sort_unstable();
+        let source_dark = source_ink.get(source_ink.len() / 20).copied().unwrap_or(0) as f64;
+        let paper = fallback_paper.iter().map(|&v| v as f64).sum::<f64>() / 3.0;
+        let witness_levels = witness.and_then(|u| u.gray_samples.as_ref()).map(|gray| {
+            let mut sorted = gray.clone();
+            sorted.sort_unstable();
+            (
+                sorted[sorted.len() / 20] as f64,
+                sorted[sorted.len() * 19 / 20] as f64,
+            )
+        });
+        for (i, &ink) in unit.mask.iter().enumerate() {
+            if !ink {
+                continue;
+            }
+            let x = unit.bbox_px[0] as isize + (i % unit.crop_w) as isize;
+            let y = unit.bbox_px[1] as isize + (i / unit.crop_w) as isize;
+            for dy in -fringe..=fringe {
+                for dx in -fringe..=fringe {
+                    let (nx, ny) = (x + dx, y + dy);
+                    if nx < 0 || ny < 0 || nx >= w as isize || ny >= h as isize {
+                        continue;
+                    }
+                    let at = ny as usize * w + nx as usize;
+                    if erase[at] || protected[at] {
+                        continue;
+                    }
+                    if !actual_vector {
+                        erase[at] = true;
+                        continue;
+                    }
+                    let Some(donor) = witness else {
+                        continue;
+                    };
+                    let Some(halo) = donor.gray_halo.as_ref() else {
+                        continue;
+                    };
+                    let Some((dark, light)) = witness_levels else {
+                        continue;
+                    };
+                    let wx = ((nx as f64 + 0.5 - target[0]) / (target[2] - target[0])
+                        * donor.crop_w as f64)
+                        .floor() as isize
+                        + 2;
+                    let wy = ((ny as f64 + 0.5 - target[1]) / (target[3] - target[1])
+                        * donor.crop_h as f64)
+                        .floor() as isize
+                        + 2;
+                    if wx < 0
+                        || wy < 0
+                        || wx >= donor.crop_w as isize + 4
+                        || wy >= donor.crop_h as isize + 4
+                    {
+                        continue;
+                    }
+                    let expected = (light
+                        - halo[wy as usize * (donor.crop_w + 4) + wx as usize] as f64)
+                        / (light - dark).max(1.0);
+                    let p = at * 3;
+                    let observed = (paper
+                        - (input.rgb[p] as f64
+                            + input.rgb[p + 1] as f64
+                            + input.rgb[p + 2] as f64)
+                            / 3.0)
+                        / (paper - source_dark).max(1.0);
+                    if (0.01..=0.45).contains(&expected) && (observed - expected).abs() <= 0.08 {
+                        erase[at] = true;
+                    }
                 }
             }
         }
@@ -1743,7 +1907,11 @@ fn clean_replaced_text(
             }
         }
     }
-    (rgb, raster_ink_pixels_suppressed, antialias_fringe_pixels_suppressed)
+    (
+        rgb,
+        raster_ink_pixels_suppressed,
+        antialias_fringe_pixels_suppressed,
+    )
 }
 
 /// The low-resolution base retains paper tone and broad scan variation after
@@ -1758,6 +1926,7 @@ fn downsampled_background_patch(source_rgb: &[u8], w: u32, h: u32, dpi: f64) -> 
         .expect("input raster dimensions were validated before ClearScan assembly");
     let reduced = image::imageops::resize(&source, bw, bh, image::imageops::FilterType::Lanczos3);
     Patch {
+        compact_background: true,
         bbox_px: [0.0, 0.0, w as f64, h as f64],
         rgb: reduced.into_raw(),
         w: bw,
@@ -1765,12 +1934,7 @@ fn downsampled_background_patch(source_rgb: &[u8], w: u32, h: u32, dpi: f64) -> 
     }
 }
 
-fn artwork_patches(
-    source_rgb: &[u8],
-    w: usize,
-    h: usize,
-    plan: &OwnershipPlan,
-) -> Vec<Patch> {
+fn artwork_patches(source_rgb: &[u8], w: usize, h: usize, plan: &OwnershipPlan) -> Vec<Patch> {
     const CELL: usize = 32;
     let mut cells: std::collections::BTreeMap<(usize, usize), Vec<(usize, usize)>> =
         std::collections::BTreeMap::new();
@@ -1806,6 +1970,7 @@ fn artwork_patches(
         }
         let _ = pixels;
         patches.push(Patch {
+            compact_background: false,
             bbox_px: [bx as f64, by as f64, (bx + bw) as f64, (by + bh) as f64],
             rgb,
             w: bw as u32,
@@ -1851,6 +2016,7 @@ pub fn whole_page_patch(
         return Err("source raster missing from page parts".into());
     }
     Ok(crate::page_pdf::Patch {
+        compact_background: false,
         bbox_px: [0.0, 0.0, w as f64, h as f64],
         rgb: parts.source_rgb.clone(),
         w: w as u32,
@@ -1864,23 +2030,61 @@ mod dpi_tests {
 
     #[test]
     fn derives_dpi_from_authoritative_page_affine() {
-        assert!((clearscan_source_dpi([0.24, 0.0, 0.0, -0.24, 0.0, 216.0], "p300")
-            .unwrap()
-            - 300.0)
-            .abs()
-            < 1e-9);
-        assert!((clearscan_source_dpi([0.12, 0.0, 0.0, -0.12, 0.0, 216.0], "p600")
-            .unwrap()
-            - 600.0)
-            .abs()
-            < 1e-9);
+        assert!(
+            (clearscan_source_dpi([0.24, 0.0, 0.0, -0.24, 0.0, 216.0], "p300").unwrap() - 300.0)
+                .abs()
+                < 1e-9
+        );
+        assert!(
+            (clearscan_source_dpi([0.12, 0.0, 0.0, -0.12, 0.0, 216.0], "p600").unwrap() - 600.0)
+                .abs()
+                < 1e-9
+        );
         // Conservative axis choice avoids claiming more detail than the
         // lower-resolution direction supports.
-        assert!((clearscan_source_dpi([0.12, 0.0, 0.0, -0.24, 0.0, 216.0], "anisotropic")
-            .unwrap()
-            - 300.0)
-            .abs()
-            < 1e-9);
+        assert!(
+            (clearscan_source_dpi([0.12, 0.0, 0.0, -0.24, 0.0, 216.0], "anisotropic").unwrap()
+                - 300.0)
+                .abs()
+                < 1e-9
+        );
         assert!(clearscan_source_dpi([0.0, 0.0, 0.0, -0.24, 0.0, 216.0], "invalid").is_err());
+    }
+}
+
+#[cfg(test)]
+mod contour_coverage_tests {
+    use super::*;
+
+    #[test]
+    fn fidelity_uses_covered_area_and_the_pdf_construction_frame() {
+        // This rectangle covers 10% of column 0 and 90% of column 1.
+        // Only column 1 is foreground at half coverage, even with an offset,
+        // anisotropic font construction frame.
+        let mut path = kurbo::BezPath::new();
+        path.move_to((11.8, 20.0));
+        path.line_to((13.8, 20.0));
+        path.line_to((13.8, 24.0));
+        path.line_to((11.8, 24.0));
+        path.close_path();
+        let shape = GlyphShape {
+            shape_key: "area-regression".into(),
+            path,
+            num_contours: 1,
+            num_points: 4,
+            bbox_fu: [11.8, 20.0, 13.8, 24.0],
+            ink_span_fu: [6.0, 4.0],
+            anchor_bbox_fu: [10.0, 20.0, 16.0, 24.0],
+            stages: crate::units::StageMetrics {
+                trace_max_px: 0.0,
+                trace_p95_px: 0.0,
+                curve_max_px: 0.0,
+                quant_bound_px: 0.0,
+            },
+        };
+        assert_eq!(
+            reconstructed_glyph_ink_iou(&shape, 3, 1, &[false, true, false]),
+            1.0
+        );
     }
 }
