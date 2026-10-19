@@ -407,7 +407,12 @@ pub(crate) fn glyph_ink_iou(g: &GlyphShape, crop_w: usize, crop_h: usize, mask: 
     glyph_ink_iou_contract(g, crop_w, crop_h, mask, false)
 }
 
-fn reconstructed_glyph_ink_iou(g: &GlyphShape, crop_w: usize, crop_h: usize, mask: &[bool]) -> f64 {
+pub(crate) fn reconstructed_glyph_ink_iou(
+    g: &GlyphShape,
+    crop_w: usize,
+    crop_h: usize,
+    mask: &[bool],
+) -> f64 {
     glyph_ink_iou_contract(g, crop_w, crop_h, mask, true)
 }
 
@@ -420,6 +425,53 @@ fn glyph_ink_iou_contract(
 ) -> f64 {
     if crop_w == 0 || crop_h == 0 {
         return 1.0;
+    }
+    let cover = glyph_coverage_contract(g, crop_w, crop_h, clearscan, 4);
+    const SUB: usize = 4;
+    // Foreground at at least half a pixel of covered area.
+    let fill: Vec<bool> = cover
+        .iter()
+        .map(|c| {
+            *c >= if clearscan {
+                0.5
+            } else {
+                SUB.div_ceil(2) as f64
+            }
+        })
+        .collect();
+    let mut inter = 0usize;
+    let mut uni = 0usize;
+    for (i, m) in mask.iter().enumerate() {
+        if i >= fill.len() {
+            break;
+        }
+        if *m || fill[i] {
+            uni += 1;
+            if *m && fill[i] {
+                inter += 1;
+            }
+        }
+    }
+    if uni == 0 {
+        1.0
+    } else {
+        inter as f64 / uni as f64
+    }
+}
+
+pub(crate) fn reconstructed_glyph_coverage(g: &GlyphShape, w: usize, h: usize) -> Vec<f64> {
+    glyph_coverage_contract(g, w, h, true, 4)
+}
+
+fn glyph_coverage_contract(
+    g: &GlyphShape,
+    crop_w: usize,
+    crop_h: usize,
+    clearscan: bool,
+    sub_rows: usize,
+) -> Vec<f64> {
+    if crop_w == 0 || crop_h == 0 {
+        return Vec::new();
     }
     // flatten the path to line segments in crop-pixel coordinates. The path is
     // expressed in the glyph's construction frame: the crop maps to
@@ -511,11 +563,10 @@ fn glyph_ink_iou_contract(
     // measure must match the SPEC's mask definition as the qualification
     // harness applies it (render, threshold at the paper/ink midpoint), so a
     // pixel counts as foreground when its covered fraction reaches 0.5
-    const SUB: usize = 4;
     let mut cover = vec![0.0f64; crop_w * crop_h];
     for row in 0..crop_h {
-        for sub in 0..SUB {
-            let py = row as f64 + (sub as f64 + 0.5) / SUB as f64;
+        for sub in 0..sub_rows {
+            let py = row as f64 + (sub as f64 + 0.5) / sub_rows as f64;
             let mut xs: Vec<f64> = Vec::new();
             for poly in &polys {
                 for w in poly.windows(2) {
@@ -550,7 +601,7 @@ fn glyph_ink_iou_contract(
                         // edge overlap as a whole sample dilated continuous
                         // contours and made this gate disagree with PDF renders.
                         cover[idx] += if clearscan {
-                            frac / SUB as f64
+                            frac / sub_rows as f64
                         } else if frac >= 0.5 {
                             2.0
                         } else {
@@ -562,35 +613,7 @@ fn glyph_ink_iou_contract(
             }
         }
     }
-    // Foreground at at least half a pixel of covered area.
-    let fill: Vec<bool> = cover
-        .iter()
-        .map(|c| {
-            *c >= if clearscan {
-                0.5
-            } else {
-                SUB.div_ceil(2) as f64
-            }
-        })
-        .collect();
-    let mut inter = 0usize;
-    let mut uni = 0usize;
-    for (i, m) in mask.iter().enumerate() {
-        if i >= fill.len() {
-            break;
-        }
-        if *m || fill[i] {
-            uni += 1;
-            if *m && fill[i] {
-                inter += 1;
-            }
-        }
-    }
-    if uni == 0 {
-        1.0
-    } else {
-        inter as f64 / uni as f64
-    }
+    cover
 }
 
 fn span_bbox(poly: &[[f64; 2]]) -> [f64; 4] {
@@ -738,6 +761,13 @@ pub(crate) fn convert_parts_with_document_donors(
     let seg: Segmentation = segment(&input.rgb, w, h);
     let ocr = to_ocr_page(input);
     let (mut plan, _) = build_plan(&seg, w, h, &ocr);
+    if policy.profile == "clearscan" {
+        // Non-canonical local vectors (notably disconnected kana) need the
+        // same original grayscale evidence as selected document witnesses.
+        for owned in &mut plan.owned {
+            owned.unit.retain_grayscale(&input.rgb, w, h);
+        }
+    }
     let visual_ok = plan.visual_invariant_ok();
     let semantic_ok = plan.semantic_invariant_ok(&ocr);
 
@@ -887,7 +917,23 @@ pub(crate) fn convert_parts_with_document_donors(
                     .prototype_units
                     .get(&u.shape_key)
                     .unwrap_or(u);
-                match trace_shape(prototype, &budget, units_per_px) {
+                match if policy.profile == "clearscan" {
+                    {
+                        let preserved_source = plan.owned.iter().map(|o| &o.unit).find(|other| {
+                            other.shape_key == u.shape_key
+                                && !reconstruction.repaired_symbols.contains(&other.symbol_id)
+                                && !reconstruction.reused_symbols.contains(&other.symbol_id)
+                        });
+                        crate::trace::trace_shape_clearscan(
+                            prototype,
+                            &budget,
+                            units_per_px,
+                            preserved_source.map(|source| (source, policy.min_ink_iou)),
+                        )
+                    }
+                } else {
+                    trace_shape(prototype, &budget, units_per_px)
+                } {
                     Ok(t) => {
                         seen.push(u.shape_key.clone());
                         traced.push(t);
@@ -905,6 +951,10 @@ pub(crate) fn convert_parts_with_document_donors(
             reconstruction
                 .canonical_geometry
                 .push(crate::visual_dict::CanonicalGeometry {
+                    contour_fit: traced
+                        .iter()
+                        .find(|t| t.shape_key == shape.shape_key)
+                        .and_then(|t| t.contour_fit.clone()),
                     prototype_id: format!("prototype:{}", shape.shape_key),
                     witness_symbol_id: unit.symbol_id.clone(),
                     witness_bbox_px: unit.bbox_px,

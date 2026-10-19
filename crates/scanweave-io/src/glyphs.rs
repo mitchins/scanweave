@@ -76,7 +76,9 @@ fn eval_quad(q: &QuadBez, t: f64) -> [f64; 2] {
 }
 
 fn sample_cubic(c: &CubicBez, n: usize) -> Vec<[f64; 2]> {
-    (0..=n).map(|i| eval_cubic(c, i as f64 / n as f64)).collect()
+    (0..=n)
+        .map(|i| eval_cubic(c, i as f64 / n as f64))
+        .collect()
 }
 
 fn sample_quad(q: &QuadBez, n: usize) -> Vec<[f64; 2]> {
@@ -105,13 +107,16 @@ pub fn build_glyph_shapes(
     for t in traced {
         // transform: font units, y-up, baseline at ink bottom of the unit.
         // v = (H - y) * k where H = unit ink height in px; k = units_per_px.
-        let h_px = t
-            .layers
-            .iter()
-            .flat_map(|(o, hs)| std::iter::once(o).chain(hs.iter()))
-            .flat_map(|c| c.iter())
-            .map(|p| p[1])
-            .fold(f64::MIN, f64::max);
+        let h_px = if t.preserve_crop_frame {
+            t.crop_h_px as f64
+        } else {
+            t.layers
+                .iter()
+                .flat_map(|(o, hs)| std::iter::once(o).chain(hs.iter()))
+                .flat_map(|c| c.iter())
+                .map(|p| p[1])
+                .fold(f64::MIN, f64::max)
+        };
         let tf = |p: &[f64; 2]| -> [f64; 2] { [p[0] * units_per_px, (h_px - p[1]) * units_per_px] };
 
         // transform contours FIRST, then build cubics from font-unit points,
@@ -122,9 +127,7 @@ pub fn build_glyph_shapes(
             .map(|(o, hs)| {
                 (
                     o.iter().map(tf).collect(),
-                    hs.iter()
-                        .map(|h| h.iter().map(tf).collect())
-                        .collect(),
+                    hs.iter().map(|h| h.iter().map(tf).collect()).collect(),
                 )
             })
             .collect();
@@ -162,10 +165,8 @@ pub fn build_glyph_shapes(
         let splines = kurbo::cubics_to_quadratic_splines(&all_cubics, acc_fu)
             .ok_or("cubics_to_quadratic_splines returned None (accuracy unattainable)")?;
         // each cubic maps to a spline of 1+ quads
-        let quads_per_cubic: Vec<Vec<QuadBez>> = splines
-            .iter()
-            .map(|s| s.to_quads().collect())
-            .collect();
+        let quads_per_cubic: Vec<Vec<QuadBez>> =
+            splines.iter().map(|s| s.to_quads().collect()).collect();
 
         // stage metric: max deviation cubic vs its quad chain (font units → px)
         let mut curve_max_fu = 0.0f64;
@@ -215,13 +216,25 @@ pub fn build_glyph_shapes(
                 ay.push(last.p3.y);
             }
         }
-        let anchor_bbox_fu = [
-            ax.iter().cloned().fold(f64::INFINITY, f64::min),
-            ay.iter().cloned().fold(f64::INFINITY, f64::min),
-            ax.iter().cloned().fold(f64::NEG_INFINITY, f64::max),
-            ay.iter().cloned().fold(f64::NEG_INFINITY, f64::max),
+        let anchor_bbox_fu = if t.preserve_crop_frame {
+            [
+                0.0,
+                0.0,
+                t.crop_w_px as f64 * units_per_px,
+                t.crop_h_px as f64 * units_per_px,
+            ]
+        } else {
+            [
+                ax.iter().cloned().fold(f64::INFINITY, f64::min),
+                ay.iter().cloned().fold(f64::INFINITY, f64::min),
+                ax.iter().cloned().fold(f64::NEG_INFINITY, f64::max),
+                ay.iter().cloned().fold(f64::NEG_INFINITY, f64::max),
+            ]
+        };
+        let ink_span_fu = [
+            t.crop_w_px as f64 * units_per_px,
+            t.crop_h_px as f64 * units_per_px,
         ];
-        let ink_span_fu = [t.crop_w_px as f64 * units_per_px, t.crop_h_px as f64 * units_per_px];
 
         // bbox in font units (already transformed)
         let xs: Vec<f64> = transformed

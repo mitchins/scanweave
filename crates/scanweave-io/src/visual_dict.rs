@@ -280,6 +280,7 @@ pub struct Reconstruction {
 /// Auditable pre-trace mask and actual emitted font path in their construction frame.
 #[derive(Debug, Clone, serde::Serialize)]
 pub struct CanonicalGeometry {
+    pub contour_fit: Option<crate::trace::ContourFit>,
     pub prototype_id: String,
     pub witness_symbol_id: String,
     pub witness_bbox_px: [f64; 4],
