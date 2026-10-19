@@ -238,6 +238,13 @@ fn compress_samples(key: &ImageResourceKey) -> Result<(Vec<u8>, bool), String> {
 }
 
 #[derive(Debug, Default, Clone)]
+pub struct OwnerCharacter {
+    pub cid: u32,
+    pub bbox_px: [f64; 4],
+    pub order: usize,
+}
+
+#[derive(Debug, Default, Clone)]
 pub struct Owner {
     pub text: String,
     /// the OCR span polygon box (reporting)
@@ -250,6 +257,45 @@ pub struct Owner {
     pub place_px: [f64; 4],
     /// the OCR span this owner overlays (reading-order marks need the span id)
     pub span_id: String,
+    pub characters: Vec<OwnerCharacter>,
+    pub visible_order: std::collections::BTreeMap<String, usize>,
+}
+
+fn cid_advance(shapes: &[GlyphShape], encodings: &[(usize, String)], cid: u32) -> f32 {
+    encodings
+        .get(cid.saturating_sub(1) as usize)
+        .and_then(|e| shapes.get(e.0))
+        .map(|g| ((g.ink_span_fu[0].ceil().max(1.0) + 2.0) / 2048.0) as f32)
+        .unwrap_or(0.5)
+}
+
+fn emit_owner_characters(
+    c: &mut Content,
+    characters: &[OwnerCharacter],
+    shapes: &[GlyphShape],
+    encodings: &[(usize, String)],
+    xf: &PageTransform,
+) {
+    c.set_text_rendering_mode(TextRenderingMode::Invisible);
+    for ch in characters {
+        let b = ch.bbox_px;
+        let height = ((b[3] - b[1]) * xf.sy()).max(0.1) as f32;
+        let width = ((b[2] - b[0]) * xf.sx()).max(0.01) as f32;
+        let glyph = encodings
+            .get(ch.cid.saturating_sub(1) as usize)
+            .and_then(|e| shapes.get(e.0));
+        // An observed glyph need not be one em tall: the first glyph may be a
+        // tiny punctuation mark. Fit its real font frame rather than assuming
+        // font size equals source ink height (which made native boxes vanish).
+        let frame = glyph.map(|g| g.bbox_fu).unwrap_or([4.0, 4.0, 200.0, 200.0]);
+        let horizontal = width / cid_advance(shapes, encodings, ch.cid).max(0.0001);
+        let vertical = height * 2048.0 / (frame[3] - frame[1]).max(1.0) as f32;
+        let tx = xf.x(b[0]) - frame[0] as f32 * horizontal / 2048.0;
+        let ty = xf.y(b[3]) - frame[1] as f32 * vertical / 2048.0;
+        c.set_font(Name(b"F1"), 1.0);
+        c.set_text_matrix([horizontal, 0.0, 0.0, vertical, tx, ty]);
+        c.show(Str(&[(ch.cid >> 8) as u8, (ch.cid & 0xff) as u8]));
+    }
 }
 
 /// A reading-order line of the OCR document: the exact line text (OCR's own
@@ -330,6 +376,7 @@ fn emit_patches(
 fn emit_text_runs(
     c: &mut Content,
     shapes: &[GlyphShape],
+    encodings: &[(usize, String)],
     occurrences: &[Occurrence],
     span_texts: &[(String, String)],
     owners: &[Owner],
@@ -398,8 +445,50 @@ fn emit_text_runs(
                     let mut pl = mc.properties();
                     pl.actual_text(TextStr(actual));
                 }
-                for &i in group {
+                let partial_owner = owner_by_span.get(span_id).map(|(owner, _)| *owner);
+                let missing = owner_by_span
+                    .get(span_id)
+                    .map(|(owner, _)| owner.characters.as_slice())
+                    .unwrap_or(&[]);
+                let mut missing_cursor = 0;
+                let mut ordered = group.clone();
+                if let Some(owner) = partial_owner {
+                    if !owner.visible_order.is_empty() {
+                        ordered.sort_by_key(|&i| {
+                            owner
+                                .visible_order
+                                .get(&occurrences[i].4)
+                                .copied()
+                                .unwrap_or(usize::MAX)
+                        });
+                    }
+                }
+                for &i in &ordered {
                     let (gidx, cid, bbox_px, _, _, _) = &occurrences[i];
+                    while missing_cursor < missing.len()
+                        && missing[missing_cursor].order
+                            < partial_owner
+                                .and_then(|o| o.visible_order.get(&occurrences[i].4))
+                                .copied()
+                                .unwrap_or(usize::MAX)
+                    {
+                        emit_owner_characters(
+                            c,
+                            &missing[missing_cursor..missing_cursor + 1],
+                            shapes,
+                            encodings,
+                            xf,
+                        );
+                        missing_cursor += 1;
+                    }
+                    if !missing.is_empty() {
+                        c.set_font(Name(b"F1"), 1.0);
+                        c.set_text_rendering_mode(if raster_baseline {
+                            TextRenderingMode::Invisible
+                        } else {
+                            TextRenderingMode::Fill
+                        });
+                    }
                     let g = &shapes[*gidx];
                     let x0 = xf.x(bbox_px[0]);
                     let bottom_pt = xf.y(bbox_px[3]);
@@ -413,6 +502,15 @@ fn emit_text_runs(
                     let cid = *cid + 1;
                     c.show(Str(&[(cid >> 8) as u8, (cid & 0xFF) as u8]));
                 }
+                if missing_cursor < missing.len() {
+                    emit_owner_characters(c, &missing[missing_cursor..], shapes, encodings, xf);
+                    c.set_font(Name(b"F1"), 1.0);
+                    c.set_text_rendering_mode(if raster_baseline {
+                        TextRenderingMode::Invisible
+                    } else {
+                        TextRenderingMode::Fill
+                    });
+                }
                 if !astral {
                     c.end_marked_content();
                 }
@@ -424,10 +522,23 @@ fn emit_text_runs(
                     let mut pl = mc.properties();
                     pl.actual_text(TextStr(owner_text));
                 }
-                let x0 = xf.x(owner.place_px[0]);
+                if !owner.characters.is_empty() {
+                    emit_owner_characters(c, &owner.characters, shapes, encodings, xf);
+                    c.set_text_rendering_mode(if raster_baseline {
+                        TextRenderingMode::Invisible
+                    } else {
+                        TextRenderingMode::Fill
+                    });
+                    c.set_font(Name(b"F1"), 1.0);
+                    if !astral {
+                        c.end_marked_content();
+                    }
+                    continue;
+                }
                 let y_bot = xf.y(owner.place_px[3]);
                 let h_pt = ((owner.place_px[3] - owner.place_px[1]) * xf.sy()) as f32;
                 let h_pt = h_pt.max(4.0);
+                let x0 = xf.x(owner.place_px[0]);
                 let cx = *cid;
                 let bytes = Str(&[(cx >> 8) as u8, (cx & 0xFF) as u8]);
                 c.set_text_rendering_mode(TextRenderingMode::Invisible);
@@ -472,9 +583,19 @@ fn emit_text_runs(
         if emitted_spans.contains(owner.span_id.as_str()) {
             continue;
         }
-        let x0 = xf.x(owner.place_px[0]);
+        if !owner.characters.is_empty() {
+            emit_owner_characters(c, &owner.characters, shapes, encodings, xf);
+            c.set_text_rendering_mode(if raster_baseline {
+                TextRenderingMode::Invisible
+            } else {
+                TextRenderingMode::Fill
+            });
+            c.set_font(Name(b"F1"), 1.0);
+            continue;
+        }
         let y_bot = xf.y(owner.place_px[3]);
         let h_pt = (((owner.place_px[3] - owner.place_px[1]) * xf.sy()) as f32).max(4.0);
+        let x0 = xf.x(owner.place_px[0]);
         let cx = *cid;
         let bytes = Str(&[(cx >> 8) as u8, (cx & 0xFF) as u8]);
         c.set_text_rendering_mode(TextRenderingMode::Invisible);
@@ -551,6 +672,7 @@ pub fn assemble_with_options(
     image_options: ImageEncodingOptions,
 ) -> Result<Vec<u8>, String> {
     let _ = glyphless_bytes;
+    validate_occurrence_geometry(occurrences)?;
     let _ = glyphless_encodings;
     let mut pdf = Pdf::new();
     pdf.set_version(1, 7);
@@ -764,6 +886,7 @@ pub fn assemble_with_options(
     emit_text_runs(
         &mut c,
         shapes,
+        encodings,
         occurrences,
         span_texts,
         owners,
@@ -854,6 +977,17 @@ impl PageTransform {
 /// span id, symbol id, semantic text).
 pub type Occurrence = (usize, u32, [f64; 4], String, String, String);
 
+fn validate_occurrence_geometry(occurrences: &[Occurrence]) -> Result<(), String> {
+    for (_, _, b, _, symbol, _) in occurrences {
+        if !b.iter().all(|v| v.is_finite()) || b[2] <= b[0] || b[3] <= b[1] {
+            return Err(format!(
+                "invalid glyph occurrence geometry for {symbol}: {b:?}"
+            ));
+        }
+    }
+    Ok(())
+}
+
 /// One page's assembly inputs. `occurrences`/`owner_cids` use the CID space of
 /// the encodings slice inside the same struct (single-page use). For documents,
 /// the document builder remaps them onto the shared encoding space.
@@ -917,6 +1051,9 @@ pub fn assemble_document_with_options(
     font_bytes: &[u8],
     image_options: ImageEncodingOptions,
 ) -> Result<(Vec<u8>, AssemblyStats), String> {
+    for page in pages {
+        validate_occurrence_geometry(&page.occurrences)?;
+    }
     let assembly_started = std::time::Instant::now();
     let image_started = std::time::Instant::now();
     if pages.is_empty() {
@@ -1107,6 +1244,7 @@ pub fn assemble_document_with_options(
         emit_text_runs(
             &mut c,
             shapes,
+            encodings,
             &p.occurrences,
             &p.span_texts,
             &p.owners,
@@ -1295,5 +1433,56 @@ mod image_resource_tests {
                 std::fs::write(dir.join(format!("predictor-{name}.pdf")), pdf).unwrap();
             }
         }
+    }
+}
+
+#[cfg(test)]
+mod owner_frame_tests {
+    use super::*;
+    #[test]
+    fn owner_only_cid_advance_matches_the_serialized_half_em_width() {
+        assert_eq!(cid_advance(&[], &[(0, "x".into())], 1), 0.5);
+        let mut content = Content::new();
+        content.begin_text();
+        emit_owner_characters(
+            &mut content,
+            &[OwnerCharacter {
+                cid: 1,
+                bbox_px: [10.0, 20.0, 30.0, 40.0],
+                order: 0,
+            }],
+            &[],
+            &[(0, "x".into())],
+            &PageTransform {
+                a: 1.0,
+                d: -1.0,
+                e: 0.0,
+                f: 100.0,
+            },
+        );
+        let stream = String::from_utf8(content.finish()).unwrap();
+        assert!(
+            stream.contains("40 0 0 "),
+            "half-em owner must advance the full 20pt span: {stream}"
+        );
+        assert!(
+            stream.contains("3 Tr"),
+            "semantic glyph must stay invisible: {stream}"
+        );
+    }
+
+    #[test]
+    fn a_reversed_replacement_box_cannot_be_serialized_as_a_mirrored_glyph() {
+        let o = (
+            0,
+            0,
+            [129.0, 936.0, 124.0, 940.0],
+            "word".into(),
+            "real-e".into(),
+            "e".into(),
+        );
+        assert!(validate_occurrence_geometry(&[o])
+            .unwrap_err()
+            .contains("real-e"));
     }
 }

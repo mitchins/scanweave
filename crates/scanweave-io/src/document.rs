@@ -206,6 +206,13 @@ fn apply_remap(page: &mut DocumentPage, remap: &Remap) {
             *c = g;
         }
     }
+    for owner in &mut page.parts.owners {
+        for ch in &mut owner.characters {
+            if let Some(&global) = remap.cid_map.get(ch.cid.saturating_sub(1) as usize) {
+                ch.cid = global;
+            }
+        }
+    }
 }
 
 /// Convert a bundle of pages into ONE document PDF.
@@ -267,20 +274,25 @@ pub fn convert_document(
             // Round-robin across source pages, not the first N occurrences
             // from the earliest pages.
             for (_label, page_donors) in by_label {
-                let mut offsets: std::collections::BTreeMap<usize, usize> = page_donors
-                    .keys()
-                    .map(|&page| (page, 0))
-                    .collect();
+                let mut offsets: std::collections::BTreeMap<usize, usize> =
+                    page_donors.keys().map(|&page| (page, 0)).collect();
                 for _ in 0..32 {
                     let mut any = false;
                     for (&donor_page, donors) in &page_donors {
                         let offset = offsets.get_mut(&donor_page).unwrap();
-                        let Some(source) = donors.get(*offset) else { continue };
+                        let Some(source) = donors.get(*offset) else {
+                            continue;
+                        };
                         *offset += 1;
                         any = true;
                         let mut donor = source.clone();
-                        donor.retain_grayscale(&inputs[donor_page].rgb, inputs[donor_page].width, inputs[donor_page].height);
-                        donor.symbol_id = format!("{}:{}", inputs[donor_page].page_id, donor.symbol_id);
+                        donor.retain_grayscale(
+                            &inputs[donor_page].rgb,
+                            inputs[donor_page].width,
+                            inputs[donor_page].height,
+                        );
+                        donor.symbol_id =
+                            format!("{}:{}", inputs[donor_page].page_id, donor.symbol_id);
                         donor.span_id = format!("{}:{}", inputs[donor_page].page_id, donor.span_id);
                         sibling_donors.push(donor);
                     }

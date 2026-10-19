@@ -959,11 +959,29 @@ pub(crate) fn convert_parts_with_document_donors(
         };
         let source_gate_failed =
             occurrence.reused && source_iou.is_none_or(|iou| iou < reuse_source_floor);
-        if traced_iou.is_none_or(|iou| iou < 0.90) || source_gate_failed {
+        let invalid_geometry = occurrence
+            .replacement_bbox_px
+            .is_some_and(|b| !b.iter().all(|v| v.is_finite()) || b[2] <= b[0] || b[3] <= b[1]);
+        let insufficient_donor = policy.profile == "clearscan"
+            && donor.is_some_and(|u| {
+                u.semantic_text.chars().any(char::is_alphanumeric)
+                    && (u.crop_h < 4
+                        || u.mask.iter().filter(|&&b| b).count() < 6
+                        || (u.crop_h as f64) < (u.ocr_bbox_px[3] - u.ocr_bbox_px[1]) * 0.3)
+            });
+        if traced_iou.is_none_or(|iou| iou < 0.90)
+            || source_gate_failed
+            || invalid_geometry
+            || insufficient_donor
+        {
             occurrence.repaired = false;
             occurrence.reused = false;
             occurrence.restoration_evidence_passed = false;
-            occurrence.decision = if source_gate_failed {
+            occurrence.decision = if invalid_geometry {
+                "rejected_invalid_replacement_geometry".into()
+            } else if insufficient_donor {
+                "rejected_insufficient_donor_extent".into()
+            } else if source_gate_failed {
                 "rejected_unchanged_source_fidelity".into()
             } else {
                 "rejected_traced_prototype_fidelity".into()
@@ -1307,11 +1325,12 @@ pub(crate) fn convert_parts_with_document_donors(
 
     // invisible owners: exactly one per span that is NOT painted by a vector
     // region (SPEC §6.2: never a duplicate layer under already-searchable text)
-    let vector_spans: std::collections::HashSet<String> = regions
+    let vector_spans: std::collections::HashSet<String> = occ.iter().map(|o| o.3.clone()).collect();
+    let visible_slots: std::collections::BTreeSet<String> = plan
+        .owned
         .iter()
-        .filter(|r| matches!(r.disposition, RegionDisposition::Vector))
-        .flat_map(|r| r.units.iter())
-        .map(|&ui| plan.owned[ui].unit.span_id.clone())
+        .filter(|u| vector_owned_symbols.contains(&u.unit.symbol_id))
+        .flat_map(|u| u.slots.iter().map(|s| s.symbol_id.clone()))
         .collect();
     let mut owners: Vec<Owner> = Vec::new();
     for r in &regions {
@@ -1350,6 +1369,8 @@ pub(crate) fn convert_parts_with_document_donors(
                 .map(|u| u.unit.bbox_px)
                 .unwrap_or(bbox);
             owners.push(Owner {
+                characters: Vec::new(),
+                visible_order: BTreeMap::new(),
                 text,
                 bbox_px: bbox,
                 place_px: place,
@@ -1358,7 +1379,12 @@ pub(crate) fn convert_parts_with_document_donors(
         }
     }
     for s in &ocr.spans {
-        if vector_spans.contains(&s.id) || owners.iter().any(|o| o.span_id == s.id) {
+        let complete_vector_span = vector_spans.contains(&s.id)
+            && (policy.profile != "clearscan"
+                || s.symbols
+                    .iter()
+                    .all(|symbol| visible_slots.contains(&symbol.id)));
+        if complete_vector_span || owners.iter().any(|o| o.span_id == s.id) {
             continue;
         }
         let place = plan
@@ -1368,6 +1394,8 @@ pub(crate) fn convert_parts_with_document_donors(
             .map(|u| u.unit.bbox_px)
             .unwrap_or_else(|| span_bbox(&s.polygon));
         owners.push(Owner {
+            characters: Vec::new(),
+            visible_order: BTreeMap::new(),
             text: s.text.clone(),
             bbox_px: span_bbox(&s.polygon),
             place_px: place,
@@ -1421,6 +1449,10 @@ pub(crate) fn convert_parts_with_document_donors(
     let mut all_encodings = encodings.clone();
     let mut owner_cids: Vec<u32> = Vec::new();
     for o in &owners {
+        if policy.profile == "clearscan" {
+            owner_cids.push(1);
+            continue;
+        }
         let glyph_idx = if let Some((_, _t)) = encodings.iter().find(|(_, t)| t == &o.text) {
             encodings.iter().position(|(_, t)| t == &o.text).unwrap()
         } else {
@@ -1433,6 +1465,90 @@ pub(crate) fn convert_parts_with_document_donors(
         let cid = all_encodings.len() as u32 + 1;
         all_encodings.push((glyph_idx, o.text.clone()));
         owner_cids.push(cid);
+    }
+    if policy.profile == "clearscan" {
+        // A many-character ToUnicode string on one fallback CID can trigger
+        // PDFium's overlap suppression. Keep the original span as ActualText,
+        // but give its characters independent CIDs and OCR character boxes.
+        for (owner_index, owner) in owners.iter_mut().enumerate() {
+            let chars: Vec<_> = owner.text.char_indices().collect();
+            let span = input.spans.iter().find(|s| s.id == owner.span_id);
+            if let Some(span) = span {
+                for u in plan.owned.iter().filter(|u| {
+                    u.unit.span_id == owner.span_id
+                        && vector_owned_symbols.contains(&u.unit.symbol_id)
+                }) {
+                    let order = u
+                        .slots
+                        .iter()
+                        .filter_map(|slot| {
+                            span.symbols
+                                .iter()
+                                .find(|s| s.id == slot.symbol_id)
+                                .map(|s| s.range.0)
+                        })
+                        .min();
+                    if let Some(order) = order {
+                        owner.visible_order.insert(u.unit.symbol_id.clone(), order);
+                    }
+                }
+            }
+            for (i, &(start, ch)) in chars.iter().enumerate() {
+                let end = start + ch.len_utf8();
+                if span
+                    .and_then(|s| {
+                        s.symbols
+                            .iter()
+                            .find(|s| s.range.0 <= start && s.range.1 >= end)
+                    })
+                    .is_some_and(|symbol| visible_slots.contains(&symbol.id))
+                {
+                    continue;
+                }
+                let label = ch.to_string();
+                let cid = if let Some(index) = all_encodings.iter().position(|(_, t)| t == &label) {
+                    index as u32 + 1
+                } else {
+                    all_encodings.push((0, label));
+                    all_encodings.len() as u32
+                };
+                let mut b = owner.bbox_px;
+                if let Some(symbol) = span.and_then(|s| {
+                    s.symbols
+                        .iter()
+                        .find(|s| s.range.0 <= start && s.range.1 >= end)
+                }) {
+                    b = span_bbox(&symbol.polygon);
+                    if let Some(text) = owner.text.get(symbol.range.0..symbol.range.1) {
+                        let n = text.chars().count().max(1);
+                        let k = owner
+                            .text
+                            .get(symbol.range.0..start)
+                            .map(|s| s.chars().count())
+                            .unwrap_or(0);
+                        let width = (b[2] - b[0]) / n as f64;
+                        b[0] += k as f64 * width;
+                        b[2] = b[0] + width;
+                    }
+                } else {
+                    let width = (b[2] - b[0]) / chars.len() as f64;
+                    b[0] += i as f64 * width;
+                    b[2] = b[0] + width;
+                }
+                b[0] = b[0].clamp(0.0, w as f64);
+                b[2] = b[2].clamp(b[0], w as f64);
+                b[1] = b[1].clamp(0.0, h as f64);
+                b[3] = b[3].clamp(b[1], h as f64);
+                owner.characters.push(crate::page_pdf::OwnerCharacter {
+                    cid,
+                    bbox_px: b,
+                    order: start,
+                });
+                if owner.characters.len() == 1 {
+                    owner_cids[owner_index] = cid;
+                }
+            }
+        }
     }
     let mut occ_records: Vec<OccurrenceRecord> = Vec::new();
     for r in &regions {
@@ -2290,5 +2406,83 @@ mod contour_coverage_tests {
             .patches
             .iter()
             .all(|p| p.bbox_px[2] <= 64.0 && p.bbox_px[3] <= 64.0));
+    }
+
+    #[test]
+    fn partially_observed_word_keeps_each_missing_unicode_range_once() {
+        let mut rgb = vec![255u8; 64 * 48 * 3];
+        for y in 10..30 {
+            for x in 20..30 {
+                rgb[(y * 64 + x) * 3..(y * 64 + x) * 3 + 3].fill(0);
+            }
+        }
+        let poly = |b: [f64; 4]| vec![[b[0], b[1]], [b[2], b[1]], [b[2], b[3]], [b[0], b[3]]];
+        let span = SpanInput {
+            id: "word".into(),
+            text: "aéb".into(),
+            separator_after: "".into(),
+            polygon: poly([4.0, 8.0, 47.0, 32.0]),
+            symbols: vec![
+                SymbolInput {
+                    id: "a".into(),
+                    range: (0, 1),
+                    polygon: poly([5.0, 10.0, 15.0, 30.0]),
+                },
+                SymbolInput {
+                    id: "eacute".into(),
+                    range: (1, 3),
+                    polygon: poly([20.0, 10.0, 30.0, 30.0]),
+                },
+                SymbolInput {
+                    id: "b".into(),
+                    range: (3, 4),
+                    polygon: poly([35.0, 10.0, 45.0, 30.0]),
+                },
+            ],
+        };
+        let input = Input {
+            rgb,
+            width: 64,
+            height: 48,
+            page_id: "partial".into(),
+            spans: vec![span],
+            protected_regions: vec![],
+            raster_to_page_pt: [0.24, 0.0, 0.0, -0.24, 0.0, 11.52],
+            pixel_sha256: None,
+        };
+        let (parts, _) = convert_parts(
+            &input,
+            &Policy {
+                profile: "clearscan".into(),
+                ..Policy::default()
+            },
+        )
+        .unwrap();
+        assert_eq!(
+            parts
+                .occurrences
+                .iter()
+                .map(|o| o.5.as_str())
+                .collect::<Vec<_>>(),
+            vec!["é"]
+        );
+        let owner = parts.owners.iter().find(|o| o.span_id == "word").unwrap();
+        assert_eq!(
+            owner
+                .characters
+                .iter()
+                .map(|ch| parts.encodings[ch.cid as usize - 1].1.as_str())
+                .collect::<Vec<_>>(),
+            vec!["a", "b"]
+        );
+        assert_eq!(
+            owner
+                .characters
+                .iter()
+                .map(|ch| ch.order)
+                .collect::<Vec<_>>(),
+            vec![0, 3]
+        );
+        assert_eq!(owner.visible_order.get("eacute"), Some(&1));
     }
 }
