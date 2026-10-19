@@ -1,0 +1,24 @@
+   Compiling m0-font-pdf v0.1.0 (/data/coding/scanweave/probes/m0-font-pdf)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 0.90s
+     Running tests/m1d_reconstruction.rs (target/debug/deps/m1d_reconstruction-0486b216a7065451)
+
+running 1 test
+test clearscan_repairs_a_damaged_glyph_from_same_document_donors ... FAILED
+
+failures:
+
+---- clearscan_repairs_a_damaged_glyph_from_same_document_donors stdout ----
+
+thread 'clearscan_repairs_a_damaged_glyph_from_same_document_donors' (3449376) panicked at probes/m0-font-pdf/tests/m1d_reconstruction.rs:62:5:
+assertion `left == right` failed: only the deliberately damaged e should be repaired
+  left: 0
+ right: 1
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+
+
+failures:
+    clearscan_repairs_a_damaged_glyph_from_same_document_donors
+
+test result: FAILED. 0 passed; 1 failed; 0 ignored; 0 measured; 0 filtered out; finished in 5.99s
+
+error: test failed, to rerun pass `-p m0-font-pdf --test m1d_reconstruction`

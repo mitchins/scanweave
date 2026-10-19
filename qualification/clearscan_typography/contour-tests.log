@@ -1,0 +1,20 @@
+   Compiling scanweave-io v0.1.0 (/data/coding/scanweave/crates/scanweave-io)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 4.39s
+     Running unittests src/lib.rs (target/debug/deps/scanweave_io-ba1881379c33891c)
+
+running 6 tests
+test trace::contour_tests::inset_reduces_ink_and_expands_the_counter ... ok
+test trace::contour_tests::topology_rejects_crossed_counters ... ok
+test trace::contour_tests::topology_keeps_disconnected_punctuation_components ... ok
+test trace::contour_tests::topology_rejects_hole_outside_its_parent ... ok
+test trace::contour_tests::faithful_trace_does_not_consume_grayscale_refinements ... ok
+test trace::contour_tests::zero_offset_preserves_existing_pdf_frame_without_rescaling ... ok
+
+test result: ok. 6 passed; 0 failed; 0 ignored; 0 measured; 14 filtered out; finished in 0.00s
+
+     Running tests/hocr.rs (target/debug/deps/hocr-c5e41fab3fc68667)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 6 filtered out; finished in 0.00s
+

@@ -1,0 +1,23 @@
+# Independent review: grayscale coverage fit and bounded contour offsets
+
+Reviewed the uncommitted implementation in `crates/scanweave-io/src/trace.rs`, `glyphs.rs`, and `convert.rs` against the completed 300 DPI `previous`, `smooth`, and `fit` outputs. No product code was changed.
+
+## 300 DPI evidence
+
+The current `fit.pdf` is materially better than the frozen previous arm on the benchmark's isolated 515-occurrence population: PDFium exact-size IoU is 0.93610 versus 0.91080, while Poppler integer-300 is 0.93046 versus 0.93046. Compared with the recorded smoothing-only arm, `fit` is 0.93610 versus 0.92656 in PDFium and 0.93046 versus 0.92618 in Poppler. The final output retains 515 painted occurrences, 55 used GIDs, and 51 distinct painted outline hashes. Its stage audit reports S4 0.94385, S5 0.94336 (delta −0.00049), substantially below the old −0.01829 composition delta. The ordinary non-isolated page summaries should not be confused with the isolated metric: the fit arm's PDFium exact page summary is 0.89763 while its truth-box-inset isolated mean is 0.93610.
+
+I independently parsed embedded TrueType outlines from `previous.pdf`, `smooth.pdf`, and `fit.pdf`: each contains 58 glyphs, and the ordered per-GID contour-count sequences are identical. This is evidence against a gross counter/component collapse in this fixture, but it does not establish equivalent contour nesting or exclude self-intersections.
+
+## Correctness review
+
+I found no obvious sign inversion in `offset_coverage_contour`. In source-image y-down coordinates, the `[dy, -dx]` normal points outward for positive-area outer loops; `c -= inset * normal` therefore moves a positive inset inward. The explicit hole sign reversal makes the same positive inset expand the hole, as required for shrinking filled glyph coverage. `glyphs.rs` flips y into font space, and the new crop-frame `anchor_bbox_fu` / `ink_span_fu` pair maps that path back into the source-pixel frame used by the scorer and PDF placement.
+
+There is one frame assumption to keep visible: `offset_coverage_contour` first translates every contour by the global minimum anchor x and maximum anchor y, then sets `preserve_crop_frame`. This preserves scale and relative component positions, but it is not literally the original crop origin unless the tight ink crop's traced extrema coincide with its edges. The inspected fit outline example stayed within roughly 0.15 px of the crop bounds, consistent with the expected supersampled contour phase. I recommend recording max per-unit origin shift (especially for disconnected dot/mark shapes) in the next trial manifest; do not describe the operation as preserving the exact source origin without that check.
+
+The topology guard is only a count check on `layers.len()` and total hole count, applied to alternate VTracer configurations. It does not check each hole's parent component, hole containment, self-intersections, or topology after the normal offset. The offset is small and the final fixture's embedded contour counts match the other arms, so I found no demonstrated failure here. Before promoting the method, add explicit counter/nested-loop and narrow-stroke controls that reject candidates if the offset changes containment or introduces a crossing; per-GID contour counts alone are insufficient.
+
+Candidate selection is evidence-led but can overfit witness appearance. It minimizes whole-crop MSE against normalized grayscale (`p90` paper and `p5` ink), with a 2% relative-improvement requirement and the existing ≥0.90 binary IoU gate. This includes the crop's background/noise pixels and tests the selected witness, not held-out occurrences of the visual family. The grayscale image is also gamma-encoded, so the score is an appearance proxy rather than physical ink coverage. Keep the binary gate and require held-out donor and pristine-relative results before generalizing. A small font-specific change can still alter a family member that happens to share the same binary `shape_key`.
+
+## Recommendation
+
+The 300 DPI evidence supports keeping this as an unpromoted ClearScan experiment: it improves both renderers versus the recorded smoothing-only arm, preserves occurrence and embedded contour counts in this fixture, and nearly eliminates the paired S4→S5 loss. I see no concrete blocker in the normal sign or the observed 300 DPI placement. Do not promote it based on the synthetic 300 DPI run alone. Next qualify 600 DPI and include explicit hole/counter and disconnected-mark containment checks plus held-out same-family donors. Preserve the prior outline path as the fallback whenever candidate topology or fidelity gates fail.

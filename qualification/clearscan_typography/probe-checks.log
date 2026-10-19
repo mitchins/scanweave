@@ -1,0 +1,33 @@
+'created' timestamp seems very low; regarding as unix timestamp
+'modified' timestamp seems very low; regarding as unix timestamp
+'created' timestamp seems very low; regarding as unix timestamp
+'modified' timestamp seems very low; regarding as unix timestamp
+'created' timestamp seems very low; regarding as unix timestamp
+'modified' timestamp seems very low; regarding as unix timestamp
+'created' timestamp seems very low; regarding as unix timestamp
+'modified' timestamp seems very low; regarding as unix timestamp
+'created' timestamp seems very low; regarding as unix timestamp
+'modified' timestamp seems very low; regarding as unix timestamp
+'created' timestamp seems very low; regarding as unix timestamp
+'modified' timestamp seems very low; regarding as unix timestamp
+'created' timestamp seems very low; regarding as unix timestamp
+'modified' timestamp seems very low; regarding as unix timestamp
+'created' timestamp seems very low; regarding as unix timestamp
+'modified' timestamp seems very low; regarding as unix timestamp
+FAIL p01_latin — ['poppler visual gate: iou=1.0000 p95=0.51 max=0.53 mae=0.0038 topo=True', 'pdfium visual gate: iou=0.9837 p95=1.00 max=1.46 mae=0.0052 topo=True']
+FAIL p02_wronglabel — ['poppler visual gate: iou=1.0000 p95=0.51 max=0.53 mae=0.0011 topo=True', 'pdfium visual gate: iou=0.9869 p95=1.00 max=1.00 mae=0.0012 topo=True']
+FAIL p03_kana — ['poppler visual gate: iou=1.0000 p95=0.52 max=0.54 mae=0.0014 topo=True', 'pdfium visual gate: iou=0.9632 p95=1.00 max=1.00 mae=0.0017 topo=True']
+FAIL p04_ligature — ['poppler visual gate: iou=0.9745 p95=1.02 max=1.51 mae=0.0033 topo=True', 'pdfium visual gate: iou=0.9764 p95=1.00 max=1.00 mae=0.0027 topo=True']
+FAIL p05_colour — ['poppler visual gate: iou=1.0000 p95=0.50 max=0.53 mae=0.0008 topo=True', 'pdfium visual gate: iou=0.9920 p95=0.74 max=1.00 mae=0.0008 topo=True']
+FAIL p06_degraded — ['poppler visual gate: iou=0.9387 p95=4.24 max=11.95 mae=0.0042 topo=False', 'pdfium visual gate: iou=0.9564 p95=1.41 max=11.94 mae=0.0027 topo=False']
+FAIL p07_sharedcid — ['poppler visual gate: iou=1.0000 p95=0.51 max=0.53 mae=0.0032 topo=True', 'pdfium visual gate: iou=1.0000 p95=0.51 max=0.54 mae=0.0032 topo=True']
+FAIL p08_symbols — ['pdfium transport vs original OCR: words=True spaces=True cardinality=False duplicates=False coverage=False (got 16 chars, expected 16)', 'poppler visual gate: iou=0.9717 p95=1.07 max=1.50 mae=0.0076 topo=True']
+PASS E1_same_outline_two_cids
+PASS E2_two_gids_one_string
+PASS E4_utf16_transport
+PASS E3_wronglabel_preservation
+PASS E5_kana
+PASS E6_span_cardinality_owners
+PASS E7_determinism
+PASS E0_key_property
+results written to qualification/clearscan_typography/probe-results.json

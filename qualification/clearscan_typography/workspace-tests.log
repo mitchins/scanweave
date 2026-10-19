@@ -1,0 +1,213 @@
+   Compiling scanweave-core v0.1.0 (/data/coding/scanweave/crates/scanweave-core)
+   Compiling scanweave-io v0.1.0 (/data/coding/scanweave/crates/scanweave-io)
+   Compiling m0-font-pdf v0.1.0 (/data/coding/scanweave/probes/m0-font-pdf)
+   Compiling scanweave-cli v0.1.0 (/data/coding/scanweave/crates/scanweave-cli)
+warning: unused import: `Chunk`
+ --> probes/m0-font-pdf/examples/font_isolate2.rs:1:18
+  |
+1 | use pdf_writer::{Chunk, Content, Finish, Name, Pdf, Ref, Rect, Str};
+  |                  ^^^^^
+  |
+  = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default
+
+warning: unused import: `Chunk`
+ --> probes/m0-font-pdf/examples/font_isolate.rs:2:18
+  |
+2 | use pdf_writer::{Chunk, Content, Finish, Name, Pdf, Ref, Rect, Str};
+  |                  ^^^^^
+  |
+  = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default
+
+warning: `m0-font-pdf` (example "font_isolate") generated 1 warning (run `cargo fix --example "font_isolate" -p m0-font-pdf` to apply 1 suggestion)
+warning: `m0-font-pdf` (example "font_isolate2") generated 1 warning (run `cargo fix --example "font_isolate2" -p m0-font-pdf` to apply 1 suggestion)
+warning: function `utf16be_hex` is never used
+  --> probes/m0-font-pdf/tests/m1b_behavior.rs:37:4
+   |
+37 | fn utf16be_hex(s: &str) -> String {
+   |    ^^^^^^^^^^^
+   |
+   = note: `#[warn(dead_code)]` (part of `#[warn(unused)]`) on by default
+
+warning: `m0-font-pdf` (test "m1b_behavior") generated 1 warning
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 10.26s
+     Running unittests src/lib.rs (target/debug/deps/m0_font_pdf-228cf305a2ab803a)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running unittests src/main.rs (target/debug/deps/m0_font_pdf-708002cff8dd9aec)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/m1a_behavior.rs (target/debug/deps/m1a_behavior-1345dc4497230460)
+
+running 8 tests
+test m1a02_disconnected_marks_preserved ... ok
+test m1a04_unknown_marks_stay_art ... ok
+test m1a03_overlapping_boxes_no_loss ... ok
+test m1a01_touging_chars_map_to_one_unit ... ok
+test m1a08_same_masks_different_labels_same_ownership ... ok
+test m1a06_wrong_label_shape_identity ... ok
+test m1a09_pipeline_restores_raster_and_owner ... ok
+test m1a10_deterministic_repeat_runs ... ok
+
+test result: ok. 8 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 1.43s
+
+     Running tests/m1b_behavior.rs (target/debug/deps/m1b_behavior-738898edceb32555)
+
+running 12 tests
+test regress_repeated_spans_keep_owners_and_cids_dedup ... ok
+test regress_protected_amount_stays_raster ... ok
+test regress_pixel_binding_mismatch_is_refused ... ok
+test m1b01_mixed_line_owner_run_is_inline_on_ink_baseline ... ok
+test m1b01b_vector_lines_keep_per_span_marks ... ok
+test m1b02_patch_coalescing_is_faithful_and_economical ... ok
+test regress_geometry_uses_the_page_affine ... ok
+test m1b03_auto_selects_smallest_qualified_candidate ... ok
+test m1b05_text_touching_rule_stamp_barcode ... ok
+test regress_min_ink_iou_is_enforced ... ok
+test m1b04b_font_reuse_reduces_bytes ... ok
+test m1b04_document_assembly_is_one_searchable_pdf ... ok
+
+test result: ok. 12 passed; 0 failed; 0 ignored; 0 measured; 1 filtered out; finished in 10.54s
+
+     Running tests/m1d_document.rs (target/debug/deps/m1d_document-abc3bb5f424ec901)
+
+running 1 test
+test document_dictionary_repairs_across_pages_at_300_and_600_dpi has been running for over 60 seconds
+test document_dictionary_repairs_across_pages_at_300_and_600_dpi ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 178.77s
+
+     Running tests/m1d_reconstruction.rs (target/debug/deps/m1d_reconstruction-0486b216a7065451)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 1 filtered out; finished in 0.00s
+
+     Running tests/transport_regression.rs (target/debug/deps/transport_regression-a59aa8aa116ad984)
+
+running 2 tests
+test p09_real_tesseract_118_chars_transport ... ok
+test p10_repeated_text_transport ... ok
+
+test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.74s
+
+     Running unittests src/main.rs (target/debug/deps/scanweave_cli-b30c080675afe3b1)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running unittests src/lib.rs (target/debug/deps/scanweave_core-99bb1e890a64ea1f)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/bundle_pairing.rs (target/debug/deps/bundle_pairing-7b88ee71f037643d)
+
+running 3 tests
+test path_escape_rejected ... ok
+test valid_bundle_pairs_with_matching_ocr_file ... ok
+test wrong_page_pairing_rejected ... ok
+
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s
+
+     Running tests/ocr_page_validation.rs (target/debug/deps/ocr_page_validation-19c82b596b0bab50)
+
+running 21 tests
+test duplicate_json_keys_rejected ... ok
+test nan_infinity_rejected ... ok
+test grapheme_splitting_range_rejected ... ok
+test empty_symbol_range_rejected ... ok
+test in03_stale_crop_rotation_rejected ... ok
+test in02_binding_mismatch_detected ... ok
+test mid_scalar_byte_range_rejected ... ok
+test in02_binding_match_accepted ... ok
+test nf01_unknown_property_rejected ... ok
+test nf02_malformed_hash_rejected ... ok
+test nf04_undersized_polygon_rejected ... ok
+test nf03_zero_physical_width_rejected ... ok
+test nf06_unsupported_direction_rejected ... ok
+test overlapping_symbol_ranges_rejected ... ok
+test positive_control_valid_page ... ok
+test nf05_duplicate_reading_order_rejected ... ok
+test positive_control_combining_sequence ... ok
+test oversize_page_pixels_resource_limit ... ok
+test stale_rotation_flag_rejected ... ok
+test unknown_schema_major_rejected ... ok
+test positive_control_word_only ... ok
+
+test result: ok. 21 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/pixel_hash.rs (target/debug/deps/pixel_hash-7d66e494d440bc15)
+
+running 5 tests
+test gray8_known_answer ... ok
+test icc_tag_requires_hash ... ok
+test mono1_msb_known_answer ... ok
+test rgb8_known_answer ... ok
+test rgba16be_icc_known_answer ... ok
+
+test result: ok. 5 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running unittests src/lib.rs (target/debug/deps/scanweave_io-1578f7df32e93481)
+
+running 20 tests
+test convert::contour_coverage_tests::fidelity_uses_covered_area_and_the_pdf_construction_frame ... ok
+test convert::dpi_tests::derives_dpi_from_authoritative_page_affine ... ok
+test encoding::tests::e0_four_part_key_property ... ok
+test page_pdf::image_resource_tests::image_dimensions_and_sample_length_are_validated ... ok
+test hocr::real_character_tests::preserves_space_characters_and_escaped_punctuation ... ok
+test page_pdf::owner_frame_tests::a_reversed_replacement_box_cannot_be_serialized_as_a_mirrored_glyph ... ok
+test page_pdf::owner_frame_tests::owner_only_cid_advance_matches_the_serialized_half_em_width ... ok
+test trace::contour_tests::inset_reduces_ink_and_expands_the_counter ... ok
+test trace::contour_tests::topology_keeps_disconnected_punctuation_components ... ok
+test trace::contour_tests::topology_rejects_crossed_counters ... ok
+test trace::contour_tests::topology_rejects_hole_outside_its_parent ... ok
+test units::identity_tests::exact_mask_identity_includes_shape_dimensions ... ok
+test trace::contour_tests::faithful_trace_does_not_consume_grayscale_refinements ... ok
+test page_pdf::image_resource_tests::exact_resources_are_shared_and_equal_channels_use_gray ... ok
+test trace::contour_tests::zero_offset_preserves_existing_pdf_frame_without_rescaling ... ok
+test page_pdf::image_resource_tests::flate_predictor_control_pdfs_are_serialized_when_requested ... ok
+test convert::contour_coverage_tests::compact_background_retains_a_faint_unowned_line_natively ... ok
+test convert::contour_coverage_tests::a_source_speck_is_not_a_character_sized_vector ... ok
+test convert::contour_coverage_tests::partially_observed_word_keeps_each_missing_unicode_range_once ... ok
+test convert::contour_coverage_tests::caller_protection_does_not_require_an_ocr_unit ... ok
+
+test result: ok. 20 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.02s
+
+     Running tests/hocr.rs (target/debug/deps/hocr-99a6f97c93f8f437)
+
+running 6 tests
+test in04_word_only_hocr_stays_word_level ... ok
+test in05_missing_dpi_is_explicit_error ... ok
+test in01_char_box_hocr_imports_symbol_geometry ... ok
+test in06_external_entity_not_fetched ... ok
+test in06_malformed_xml_bounded_rejection ... ok
+test in06_oversize_input_bounded ... ok
+
+test result: ok. 6 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s
+
+   Doc-tests m0_font_pdf
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+   Doc-tests scanweave_core
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+   Doc-tests scanweave_io
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
