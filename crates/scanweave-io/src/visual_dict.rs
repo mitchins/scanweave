@@ -335,7 +335,7 @@ pub fn reconstruct(
     use std::collections::BTreeMap;
     let mut out = Reconstruction::default();
     let n = plan.owned.len();
-    if n == 0 || !matches!(policy.profile.as_str(), "clearscan" | "canonical-experimental") || policy.glyph_dictionary != "visual" {
+    if n == 0 || policy.profile != "clearscan" || policy.glyph_dictionary != "visual" {
         return out;
     }
     let evidence: Vec<ShapeEvidence> = plan
@@ -464,16 +464,10 @@ pub fn reconstruct(
                 representative = candidate;
             }
         }
-        if policy.profile == "canonical-experimental" {
-            // Among the robust central witnesses, prefer the impression with
-            // the most supported foreground. This is a bounded best-donor
-            // policy, not pixel union: every selected contour still comes
-            // from one observed impression.
-            representative = *canonical
-                .iter()
-                .max_by_key(|&&i| plan.owned[i].unit.mask.iter().filter(|b| **b).count())
-                .unwrap_or(&representative);
-        }
+        // Keep the observed medoid selected above for ClearScan as well. A
+        // maximum-coverage impression can contain more ink because of blur,
+        // bleed or a neighboring mark; evidence support alone is not shape
+        // quality. Every selected outline remains traceable to one observation.
         unique_cohorts.insert(canonical, representative);
     }
     let cohorts: BTreeMap<usize, Vec<usize>> = unique_cohorts
@@ -517,16 +511,15 @@ pub fn reconstruct(
                 .iter()
                 .map(|&m| evidence[m].density)
                 .fold(f64::INFINITY, f64::min);
-            // The experimental profile canonicalizes healthy impressions as
-            // well as damaged ones. The established ClearScan profile keeps
-            // its donor-only behavior until independently qualified.
-            if policy.profile != "canonical-experimental"
+            // ClearScan canonicalizes healthy and damaged observations. The
+            // faithful profile retains its source-preserving donor behavior.
+            if policy.profile != "clearscan"
                 && evidence[i].density >= min_donor_density - 0.01
             {
                 continue;
             }
             let score = normalized_iou(u, &plan.owned[rep].unit);
-            let score_ok = if policy.profile == "canonical-experimental" {
+            let score_ok = if policy.profile == "clearscan" {
                 score >= 0.78
             } else {
                 (0.62..0.94).contains(&score)
@@ -565,7 +558,7 @@ pub fn reconstruct(
                 let _threshold = refine_observed_mask(&mut donor, rgb, page_w, page_h);
             }
             let sid = u.symbol_id.clone();
-            record.restoration_evidence_passed = if policy.profile == "canonical-experimental" {
+            record.restoration_evidence_passed = if policy.profile == "clearscan" {
                 cohorts.get(&rep).is_some_and(|members| members.len() >= 3) && score >= 0.78
             } else {
                 restoration_gate(score, cohorts.get(&rep).map(Vec::len).unwrap_or(0))
@@ -584,7 +577,7 @@ pub fn reconstruct(
                 if source_is_damaged {
                     out.repaired_symbols.insert(sid);
                     record.repaired = true;
-                    record.decision = if policy.profile == "canonical-experimental" {
+                    record.decision = if policy.profile == "clearscan" {
                         "canonical_repair_from_document_witnesses".into()
                     } else {
                         "repaired_from_document_donors".into()

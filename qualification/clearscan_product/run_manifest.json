@@ -1,0 +1,367 @@
+{
+  "schema": "scanweave-clearscan-product-run-v1",
+  "starting_commit": "cfb5d240f04a01f0289ab9df470ceb3fd53b2a86",
+  "code_revision_at_measurement": "working tree based on cfb5d240f04a01f0289ab9df470ceb3fd53b2a86",
+  "git_status_at_manifest_creation": [
+    " M crates/scanweave-cli/src/main.rs",
+    " M crates/scanweave-io/src/convert.rs",
+    " M crates/scanweave-io/src/document.rs",
+    " M crates/scanweave-io/src/page_pdf.rs",
+    " M crates/scanweave-io/src/visual_dict.rs",
+    " M probes/m0-font-pdf/src/lib.rs",
+    "?? CLEARSCAN_CONVERTER_REPORT.md",
+    "?? SCANWEAVE_M1F_RESEARCH_AND_MISSION.md",
+    "?? adobe-acrobat-sandbox/",
+    "?? qualification/clearscan_product/",
+    "?? qualification/competitors/",
+    "?? qualification/experiments/m1c_r4/",
+    "?? qualification/experiments/m1g/fixture/dpi300/input/page08.ocr.json",
+    "?? qualification/experiments/m1g/fixture/dpi300/input/page08.png",
+    "?? qualification/experiments/m1g/fixture/dpi300/input/page09.ocr.json",
+    "?? qualification/experiments/m1g/fixture/dpi300/input/page09.png",
+    "?? qualification/experiments/m1g/fixture/dpi300/input/page10.ocr.json",
+    "?? qualification/experiments/m1g/fixture/dpi300/input/page10.png",
+    "?? qualification/experiments/m1g/fixture/dpi300/input/page11.ocr.json",
+    "?? qualification/experiments/m1g/fixture/dpi300/input/page11.png",
+    "?? qualification/experiments/m1g/fixture/dpi300/oracle/page08.png",
+    "?? qualification/experiments/m1g/fixture/dpi300/oracle/page08.truth.json",
+    "?? qualification/experiments/m1g/fixture/dpi300/oracle/page09.png",
+    "?? qualification/experiments/m1g/fixture/dpi300/oracle/page09.truth.json",
+    "?? qualification/experiments/m1g/fixture/dpi300/oracle/page10.png",
+    "?? qualification/experiments/m1g/fixture/dpi300/oracle/page10.truth.json",
+    "?? qualification/experiments/m1g/fixture/dpi300/oracle/page11.png",
+    "?? qualification/experiments/m1g/fixture/dpi300/oracle/page11.truth.json",
+    "?? qualification/experiments/m1g/fixture/dpi300/output/evaluation-final.json",
+    "?? qualification/experiments/m1g/fixture/dpi300/output/evaluation-pre-residual.json",
+    "?? qualification/experiments/m1g/fixture/dpi300/output/pdfium/",
+    "?? qualification/experiments/m1g/fixture/dpi300/output/poppler/",
+    "?? qualification/experiments/m1g/fixture/dpi300/pre-final/",
+    "?? qualification/experiments/m1g/fixture/dpi600/input/page08.ocr.json",
+    "?? qualification/experiments/m1g/fixture/dpi600/input/page08.png",
+    "?? qualification/experiments/m1g/fixture/dpi600/input/page09.ocr.json",
+    "?? qualification/experiments/m1g/fixture/dpi600/input/page09.png",
+    "?? qualification/experiments/m1g/fixture/dpi600/input/page10.ocr.json",
+    "?? qualification/experiments/m1g/fixture/dpi600/input/page10.png",
+    "?? qualification/experiments/m1g/fixture/dpi600/input/page11.ocr.json",
+    "?? qualification/experiments/m1g/fixture/dpi600/input/page11.png",
+    "?? qualification/experiments/m1g/fixture/dpi600/oracle/page08.png",
+    "?? qualification/experiments/m1g/fixture/dpi600/oracle/page08.truth.json",
+    "?? qualification/experiments/m1g/fixture/dpi600/oracle/page09.png",
+    "?? qualification/experiments/m1g/fixture/dpi600/oracle/page09.truth.json",
+    "?? qualification/experiments/m1g/fixture/dpi600/oracle/page10.png",
+    "?? qualification/experiments/m1g/fixture/dpi600/oracle/page10.truth.json",
+    "?? qualification/experiments/m1g/fixture/dpi600/oracle/page11.png",
+    "?? qualification/experiments/m1g/fixture/dpi600/oracle/page11.truth.json",
+    "?? qualification/experiments/m1g/fixture/dpi600/output/pdfium/",
+    "?? qualification/experiments/m1g/fixture/dpi600/output/poppler/",
+    "?? qualification/experiments/m1gx/300/render/",
+    "?? qualification/experiments/m1gx/300/renders-exact/",
+    "?? qualification/experiments/m1gx/300/renders-final2/",
+    "?? qualification/experiments/m1gx/300/renders-final3/",
+    "?? qualification/experiments/m1gx/300/renders-oracle-id/",
+    "?? qualification/experiments/m1gx/300/renders-oracle-tight/",
+    "?? qualification/experiments/m1gx/300/renders-oraclefixed/",
+    "?? qualification/experiments/m1gx/300/renders-oracletrue/",
+    "?? qualification/experiments/m1gx/300/renders-pristine-exact/",
+    "?? qualification/experiments/m1gx/300/renders-rgb-control/",
+    "?? qualification/experiments/m1gx/300/renders-validated/",
+    "?? qualification/experiments/m1gx/300/renders/",
+    "?? scanweave_m1f_evidence.json",
+    "?? scanweave_m1f_evidence_probe.py"
+  ],
+  "commands": [
+    "cargo run --release -p scanweave-cli -- convert --profile clearscan --input-bundle <M1-G dpi300 bundle> --output qualification/clearscan_product/300/clearscan.pdf",
+    "cargo run --release -p scanweave-cli -- convert --profile clearscan --input-bundle <M1-G dpi600 bundle> --output qualification/clearscan_product/600/clearscan.pdf",
+    "python3 qualification/clearscan_product/measure.py <dpi>",
+    "python3 qualification/clearscan_product/compare_frozen_adobe.py"
+  ],
+  "synthetic_input_files": [
+    {
+      "path": "qualification/experiments/m1g/fixture/dpi300/input/document.json",
+      "sha256": "f40c21503b98804ca0c8584dec4a9b39a3e382f1ece6013b88fce305adce8b33",
+      "bytes": 3433
+    },
+    {
+      "path": "qualification/experiments/m1g/fixture/dpi300/input/page00.ocr.json",
+      "sha256": "7bb5f4f3502fe99e47fe2eaa60cccc2424eacf972736f1ad9a142186bf9e9b19",
+      "bytes": 93967
+    },
+    {
+      "path": "qualification/experiments/m1g/fixture/dpi300/input/page00.png",
+      "sha256": "b7d47625d1dd0cc006efb64ea371728faddd8ecf98a0c72fd1f49759c0d455d5",
+      "bytes": 851204
+    },
+    {
+      "path": "qualification/experiments/m1g/fixture/dpi300/input/page01.ocr.json",
+      "sha256": "2ad85f7d8447358f23717b7d40970fd01b4e73f3b757d0ed6ecd17d63efeaba9",
+      "bytes": 84809
+    },
+    {
+      "path": "qualification/experiments/m1g/fixture/dpi300/input/page01.png",
+      "sha256": "8257b009d774caedfe0408222c5640c1d3476f84078b9f657cd360d46f6f44fa",
+      "bytes": 893115
+    },
+    {
+      "path": "qualification/experiments/m1g/fixture/dpi300/input/page02.ocr.json",
+      "sha256": "2b54338ed5b796f72a69eaf4463cdaa24b541997b83e85fa3f6ebc14f6c0de0f",
+      "bytes": 84809
+    },
+    {
+      "path": "qualification/experiments/m1g/fixture/dpi300/input/page02.png",
+      "sha256": "034a03f22465fa69d0aa3d1cc4c0355d527dc27812efdea7780c3d97e341b819",
+      "bytes": 875929
+    },
+    {
+      "path": "qualification/experiments/m1g/fixture/dpi300/input/page03.ocr.json",
+      "sha256": "0076667e87eba707d21b19f6cef61ec2cb820f5859548202512f95f3840946ec",
+      "bytes": 84809
+    },
+    {
+      "path": "qualification/experiments/m1g/fixture/dpi300/input/page03.png",
+      "sha256": "fc48a06bf6b951218f7501cad540b48fe71912ac9aceecdfc4642774f40c2e4f",
+      "bytes": 809261
+    },
+    {
+      "path": "qualification/experiments/m1g/fixture/dpi300/input/page04.ocr.json",
+      "sha256": "d6ba8944e4a27e534ce3bf7d203a4b71b9f8cacc610a768b65207510d2f22747",
+      "bytes": 84809
+    },
+    {
+      "path": "qualification/experiments/m1g/fixture/dpi300/input/page04.png",
+      "sha256": "d0a3549ecc7b6602e666f0a88d49804815dedc50945e9c06f3c0ca8b3d21df00",
+      "bytes": 837661
+    },
+    {
+      "path": "qualification/experiments/m1g/fixture/dpi300/input/page05.ocr.json",
+      "sha256": "699563012de3cb3e517ef86221e8c17c01b9f84603118bc984ed88af48705c26",
+      "bytes": 84809
+    },
+    {
+      "path": "qualification/experiments/m1g/fixture/dpi300/input/page05.png",
+      "sha256": "0018c47b9394d14b9ecb1624ca3a5f0bb50cd2c6863353e48c4785a7ae526a49",
+      "bytes": 818008
+    },
+    {
+      "path": "qualification/experiments/m1g/fixture/dpi300/input/page06.ocr.json",
+      "sha256": "45acccf1d531dfff8ab46801f1270e2a90bdd0312d62a86c82e519965f36ea24",
+      "bytes": 84721
+    },
+    {
+      "path": "qualification/experiments/m1g/fixture/dpi300/input/page06.png",
+      "sha256": "aa84c14269467d4ac46166358ff2e0db83a6662fdfd6b636a5f338c8ddbe6168",
+      "bytes": 854395
+    },
+    {
+      "path": "qualification/experiments/m1g/fixture/dpi300/input/page07.ocr.json",
+      "sha256": "003c07d46af01b3d209726da54a9f0b6a9d938be7860a749511edb8bec61b8d5",
+      "bytes": 84721
+    },
+    {
+      "path": "qualification/experiments/m1g/fixture/dpi300/input/page07.png",
+      "sha256": "16cdc1e703894f74cfaa94a286c57e8d2884a2d7c0c3a197c71b741259892aa5",
+      "bytes": 846821
+    },
+    {
+      "path": "qualification/experiments/m1g/fixture/dpi300/input/page08.ocr.json",
+      "sha256": "968085d96ccb30b882eeb0faef8d2a3d66b6cab9b8985c5221da47f1d1387b43",
+      "bytes": 168633
+    },
+    {
+      "path": "qualification/experiments/m1g/fixture/dpi300/input/page08.png",
+      "sha256": "5886c4527761659b402255da23d2f378e0b9c8c530a7e98eaffa3763a4302ec8",
+      "bytes": 875339
+    },
+    {
+      "path": "qualification/experiments/m1g/fixture/dpi300/input/page09.ocr.json",
+      "sha256": "feafa4067a2494b984d3adac3ffd2b86b8b8d412b60e2061d7995f6e7156a634",
+      "bytes": 168633
+    },
+    {
+      "path": "qualification/experiments/m1g/fixture/dpi300/input/page09.png",
+      "sha256": "e25365803d996c7995ea79df7d92956773f38fed967859f37b6c84d363271e08",
+      "bytes": 958366
+    },
+    {
+      "path": "qualification/experiments/m1g/fixture/dpi300/input/page10.ocr.json",
+      "sha256": "2e2e12d61a55ca86c69cd69d59b4d3ea3db564cabf39ae73f92f0d885bd58530",
+      "bytes": 168809
+    },
+    {
+      "path": "qualification/experiments/m1g/fixture/dpi300/input/page10.png",
+      "sha256": "97c034280f04baab5b3ea2281fec973d388c1bc43436f1b701cea62686a3037e",
+      "bytes": 927153
+    },
+    {
+      "path": "qualification/experiments/m1g/fixture/dpi300/input/page11.ocr.json",
+      "sha256": "6a28efc089099ccbb9061d72d2686c6f992bc575aa53ec926960c813c32936df",
+      "bytes": 168809
+    },
+    {
+      "path": "qualification/experiments/m1g/fixture/dpi300/input/page11.png",
+      "sha256": "4fad8ee58eb8ab2e06efd70482b4c56bbd3dd70a6836406d013bfc9c9361dfc3",
+      "bytes": 965872
+    },
+    {
+      "path": "qualification/experiments/m1g/fixture/dpi600/input/document.json",
+      "sha256": "92e85c8ac3693ca61fee1576dbca1799f0aeacb8608e6d90c5e4b0cef80cdadb",
+      "bytes": 3433
+    },
+    {
+      "path": "qualification/experiments/m1g/fixture/dpi600/input/page00.ocr.json",
+      "sha256": "33266d130e5c4f401a005ab7128f0dfe586034a83e4f55e6846bcab5b478320b",
+      "bytes": 94452
+    },
+    {
+      "path": "qualification/experiments/m1g/fixture/dpi600/input/page00.png",
+      "sha256": "318e7cfb22591000af30c5a03e7e1a4dbc12ebda49347b4d03b9bc759e668305",
+      "bytes": 3332138
+    },
+    {
+      "path": "qualification/experiments/m1g/fixture/dpi600/input/page01.ocr.json",
+      "sha256": "9a04bb8cbdaa6613b66bf975d3850a831e35c136cb7093d2a88a23f1d16189d4",
+      "bytes": 85226
+    },
+    {
+      "path": "qualification/experiments/m1g/fixture/dpi600/input/page01.png",
+      "sha256": "afc6305358ab225f06fc20d80b9aae491781371e13ee41842c7be17f8313b6fe",
+      "bytes": 3114523
+    },
+    {
+      "path": "qualification/experiments/m1g/fixture/dpi600/input/page02.ocr.json",
+      "sha256": "7adc52d438f456dc1321c4d97ad25d92cc24cb2223165f4d96b0733444f9cc6a",
+      "bytes": 85226
+    },
+    {
+      "path": "qualification/experiments/m1g/fixture/dpi600/input/page02.png",
+      "sha256": "3d1d71a76c09664855e9033fcb073592fdf7fe52d68c5770a61607df1917f178",
+      "bytes": 3167422
+    },
+    {
+      "path": "qualification/experiments/m1g/fixture/dpi600/input/page03.ocr.json",
+      "sha256": "b0d370c3461fe74dc0e657c38e02fbbf128f16240a55ca04e2e473fce8c375d0",
+      "bytes": 85226
+    },
+    {
+      "path": "qualification/experiments/m1g/fixture/dpi600/input/page03.png",
+      "sha256": "5d4d9eb7d4c77c35d19a46f9dc0d16efef6b462e037129551e3aec4379da5a65",
+      "bytes": 3167458
+    },
+    {
+      "path": "qualification/experiments/m1g/fixture/dpi600/input/page04.ocr.json",
+      "sha256": "03ed97cfcb53808899571f31f232f31432a9c4af8196f74e513651b9c253f65a",
+      "bytes": 85226
+    },
+    {
+      "path": "qualification/experiments/m1g/fixture/dpi600/input/page04.png",
+      "sha256": "193a079a7eecfa2554a099e7d213e8dd31c4d8e6ab888820bde95a7cdf02311b",
+      "bytes": 3217694
+    },
+    {
+      "path": "qualification/experiments/m1g/fixture/dpi600/input/page05.ocr.json",
+      "sha256": "ab387f3e066027cd0068fb3cf3435f0f952c0911016d2d8b3cfbd02f49c8e3e2",
+      "bytes": 85226
+    },
+    {
+      "path": "qualification/experiments/m1g/fixture/dpi600/input/page05.png",
+      "sha256": "4803e04be02b2ceda268a50853a06cb847d6240b2a4d248f8206029f2e40322a",
+      "bytes": 3109872
+    },
+    {
+      "path": "qualification/experiments/m1g/fixture/dpi600/input/page06.ocr.json",
+      "sha256": "1deba25fedbb5317cd07bf887d8bd781be518bd1401ef608334f32ca4f8b8b28",
+      "bytes": 85178
+    },
+    {
+      "path": "qualification/experiments/m1g/fixture/dpi600/input/page06.png",
+      "sha256": "3c402e40672e028c0aba804f0030052d28735cc389bb74945a293ef2799fec94",
+      "bytes": 3062880
+    },
+    {
+      "path": "qualification/experiments/m1g/fixture/dpi600/input/page07.ocr.json",
+      "sha256": "fdffd8f0eea397cd7e0ff11cef8b541af3d2ca735367c61873b84048fa40a2c6",
+      "bytes": 85178
+    },
+    {
+      "path": "qualification/experiments/m1g/fixture/dpi600/input/page07.png",
+      "sha256": "34053259a9490f562cf0f124483394e57bd441774d90835f5bebdc34d998aeab",
+      "bytes": 3175380
+    },
+    {
+      "path": "qualification/experiments/m1g/fixture/dpi600/input/page08.ocr.json",
+      "sha256": "33c7a7a43314f8d7ae1123bf5256eb61b42c74a2c11e057c7fb91fe4bcc25667",
+      "bytes": 169714
+    },
+    {
+      "path": "qualification/experiments/m1g/fixture/dpi600/input/page08.png",
+      "sha256": "f919f3173b826d0bffa21364542a4cd2be24dbe4800adc982593d99bf3933d1d",
+      "bytes": 3275253
+    },
+    {
+      "path": "qualification/experiments/m1g/fixture/dpi600/input/page09.ocr.json",
+      "sha256": "fb8542bb7b9dc073cceec9d6bec8a3be48c50ce9a2c13d996029625723ccd7f8",
+      "bytes": 169714
+    },
+    {
+      "path": "qualification/experiments/m1g/fixture/dpi600/input/page09.png",
+      "sha256": "6ec5c874c3dcb9b6f82615d3ea31aeb3e284719e326a7a357535ebc17f1c5d0a",
+      "bytes": 3353864
+    },
+    {
+      "path": "qualification/experiments/m1g/fixture/dpi600/input/page10.ocr.json",
+      "sha256": "8877860d671e3a09c88e7d79b5b9e62cad0281ada93553c15318fbf63bfb12ff",
+      "bytes": 169810
+    },
+    {
+      "path": "qualification/experiments/m1g/fixture/dpi600/input/page10.png",
+      "sha256": "fd9b5cc4d1836ab09a4b93aea3bd16daa9b405175e5333328b8c6bf87cce8f96",
+      "bytes": 3388155
+    },
+    {
+      "path": "qualification/experiments/m1g/fixture/dpi600/input/page11.ocr.json",
+      "sha256": "38f191b710da47a632666529459f7ce6ab5d6e123dc9ceb822184699b03d5c5f",
+      "bytes": 169810
+    },
+    {
+      "path": "qualification/experiments/m1g/fixture/dpi600/input/page11.png",
+      "sha256": "9ae4aefb3e753bee08334030fadc39c939d5bd98cf7c40ef51c0091dbff57f1f",
+      "bytes": 3309080
+    }
+  ],
+  "pdf_outputs": [
+    {
+      "path": "qualification/clearscan_product/300/clearscan.pdf",
+      "sha256": "a08edbb1d6f3bd5e8abe134ca053b326f1135aaaa67c111d5c649a2c835531b2",
+      "bytes": 1087076
+    },
+    {
+      "path": "qualification/clearscan_product/600/clearscan.pdf",
+      "sha256": "fa9ddef01d21ab9c22540c035b3296f7fe79846b626b0417dc0e34340082dce8",
+      "bytes": 889147
+    },
+    {
+      "path": "qualification/clearscan_product/adobe_300/clearscan.pdf",
+      "sha256": "039c2b49c6e31d29cd0dbae3264f514d49b1472d7d997ee0328837b58093c4c7",
+      "bytes": 1960987
+    },
+    {
+      "path": "qualification/clearscan_product/adobe_600/clearscan.pdf",
+      "sha256": "eb94a0eb0b2c30250c16c2454d66c1226265cd95c1826de704e78fa8b149d8d2",
+      "bytes": 3353502
+    },
+    {
+      "path": "qualification/clearscan_product/adobe_300/clearscan.pdf",
+      "sha256": "039c2b49c6e31d29cd0dbae3264f514d49b1472d7d997ee0328837b58093c4c7",
+      "bytes": 1960987
+    },
+    {
+      "path": "qualification/clearscan_product/adobe_600/clearscan.pdf",
+      "sha256": "eb94a0eb0b2c30250c16c2454d66c1226265cd95c1826de704e78fa8b149d8d2",
+      "bytes": 3353502
+    }
+  ],
+  "notes": [
+    "Evaluator-only pristine oracle files were not passed to the converter.",
+    "Adobe outputs and exact input hashes are recorded in frozen_adobe_comparison.json.",
+    "Run wall/RSS measurements are in each resolution time.txt."
+  ]
+}

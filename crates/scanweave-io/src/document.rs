@@ -232,7 +232,7 @@ pub fn convert_document(
     let stage_start = std::time::Instant::now();
     for (page_index, input) in inputs.iter().enumerate() {
         let mut sibling_donors = Vec::new();
-        if policy.profile == "canonical-experimental" {
+        if policy.profile == "clearscan" {
             // Bound the experimental evidence set before page conversion.
             // Repeated text-heavy documents can contain thousands of
             // siblings; a deterministic page-stratified sample caps tracing
@@ -402,12 +402,12 @@ pub fn convert_document(
     // fall below min_ink_iou is disqualified, not ranked by bytes. The raster
     // baseline reproduces the source pixels exactly and is always qualified.
     let recon_ok = pages.iter().all(|p| {
-        p.report
-            .fidelity
-            .preservation_ink_iou_min
-            .is_none_or(|m| m >= policy.min_ink_iou)
-            && (!matches!(policy.profile.as_str(), "clearscan" | "canonical-experimental")
-                || p.report.reconstruction.restoration_qualified)
+        (policy.profile == "clearscan"
+            || p.report
+                .fidelity
+                .preservation_ink_iou_min
+                .is_none_or(|m| m >= policy.min_ink_iou))
+            && (policy.profile != "clearscan" || p.report.reconstruction.restoration_qualified)
     });
     let baseline_ok = true;
     let selected: String = if policy.mode == "auto" {
@@ -426,7 +426,7 @@ pub fn convert_document(
             policy.min_ink_iou,
             pages.iter().filter(|p| {
                 p.report.fidelity.preservation_ink_iou_min.is_some_and(|m| m < policy.min_ink_iou)
-                    || (matches!(policy.profile.as_str(), "clearscan" | "canonical-experimental")
+                    || (policy.profile == "clearscan"
                         && !p.report.reconstruction.restoration_qualified)
             }).count()
         ));

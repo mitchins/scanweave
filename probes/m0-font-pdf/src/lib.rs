@@ -214,6 +214,8 @@ pub fn build_page(page_dir: &PathBuf, out_dir: &PathBuf) -> Result<Report, Strin
         semantic_spans: out.report.semantic_spans,
         regions: out.report.regions.clone(),
         coverage: out.report.coverage.clone(),
+        raster_ink_pixels_suppressed: out.report.raster_ink_pixels_suppressed,
+        antialias_fringe_pixels_suppressed: out.report.antialias_fringe_pixels_suppressed,
         fallback_reasons: out.report.fallback_reasons.clone(),
         font_glyphs: out.report.font_glyphs,
         font_bytes: out.report.font_bytes,

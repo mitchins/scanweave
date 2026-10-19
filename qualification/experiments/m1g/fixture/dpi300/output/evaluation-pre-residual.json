@@ -1,0 +1,131 @@
+{
+  "dpi": 300,
+  "pdf_sha256": "a9105548ede9edc792b846311beff21656a45d3ee194d669bcbd864bd904789e",
+  "pdf_bytes": 312710,
+  "pages": 8,
+  "occurrences": 592,
+  "replaced_occurrences": 272,
+  "replacement_fraction": 0.4594594594594595,
+  "per_character": {
+    "e": {
+      "n": 96,
+      "source_iou": 0.9476654811675959,
+      "output_iou": 0.7559978191149366,
+      "replaced": 22,
+      "replaced_source_iou": 0.9338579348425707,
+      "replaced_output_iou": 0.8481586731500798
+    },
+    "8": {
+      "n": 64,
+      "source_iou": 0.9469857470591412,
+      "output_iou": 0.7806388947107723,
+      "replaced": 12,
+      "replaced_source_iou": 0.9358294173184937,
+      "replaced_output_iou": 0.8866651643615672
+    },
+    "a": {
+      "n": 96,
+      "source_iou": 0.9418403829792363,
+      "output_iou": 0.9106689230588693,
+      "replaced": 88,
+      "replaced_source_iou": 0.9437641941337009,
+      "replaced_output_iou": 0.9275517023437029
+    },
+    "0": {
+      "n": 64,
+      "source_iou": 0.9481110108482422,
+      "output_iou": 0.719637920082173,
+      "replaced": 12,
+      "replaced_source_iou": 0.937943236686511,
+      "replaced_output_iou": 0.58521460790949
+    },
+    "g": {
+      "n": 64,
+      "source_iou": 0.9481145258245306,
+      "output_iou": 0.9153963005325597,
+      "replaced": 61,
+      "replaced_source_iou": 0.9492588016695178,
+      "replaced_output_iou": 0.9266131387003899
+    },
+    "6": {
+      "n": 64,
+      "source_iou": 0.9443649723546208,
+      "output_iou": 0.7988825477374897,
+      "replaced": 13,
+      "replaced_source_iou": 0.9415853327134862,
+      "replaced_output_iou": 0.9170837479150377
+    },
+    ",": {
+      "n": 32,
+      "source_iou": 0.9324707854927357,
+      "output_iou": 0.8848201807608973,
+      "replaced": 29,
+      "replaced_source_iou": 0.9321040355917162,
+      "replaced_output_iou": 0.9098884869168844
+    },
+    ";": {
+      "n": 32,
+      "source_iou": 0.953293918918919,
+      "output_iou": 0.7513368922186053,
+      "replaced": 6,
+      "replaced_source_iou": 0.9487179487179488,
+      "replaced_output_iou": 0.8664835164835164
+    },
+    " ": {
+      "n": 48,
+      "source_iou": 0.453125,
+      "output_iou": 0.4626488095238095,
+      "replaced": 0,
+      "replaced_source_iou": 0.0,
+      "replaced_output_iou": 0.0
+    },
+    "!": {
+      "n": 16,
+      "source_iou": 0.9445635171916262,
+      "output_iou": 0.9193341178341179,
+      "replaced": 14,
+      "replaced_source_iou": 0.9405412167265881,
+      "replaced_output_iou": 0.9446664215235644
+    },
+    "?": {
+      "n": 16,
+      "source_iou": 0.9374350358421837,
+      "output_iou": 0.921948057570566,
+      "replaced": 15,
+      "replaced_source_iou": 0.9402570452246696,
+      "replaced_output_iou": 0.9353953883927307
+    }
+  },
+  "search_expected_chars": 592,
+  "search_extracted_chars": 827,
+  "search_mismatch": true,
+  "stage_timings": {
+    "total_ms": 184727,
+    "donor_collection_ms": 7528,
+    "page_conversion_ms": 172460,
+    "document_font_union_ms": 0,
+    "font_build_ms": 11,
+    "reconstruction_pdf_ms": 181,
+    "raster_baseline_prepare_ms": 61,
+    "raster_baseline_pdf_ms": 4482,
+    "remaining_pipeline_ms": 4
+  },
+  "candidate_sizes": [
+    {
+      "name": "reconstruct",
+      "pdf_bytes": 312710,
+      "font_bytes": 37296,
+      "raster_encoded_bytes": 139003,
+      "image_xobjects": 270,
+      "image_references": 270
+    },
+    {
+      "name": "raster_baseline",
+      "pdf_bytes": 4202852,
+      "font_bytes": 37296,
+      "raster_encoded_bytes": 4099577,
+      "image_xobjects": 8,
+      "image_references": 8
+    }
+  ]
+}

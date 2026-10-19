@@ -5,11 +5,11 @@ use std::process::ExitCode;
 fn usage() -> ! {
     eprintln!(
         "scanweave build <input.png> --ocr <input.hocr> [--dpi N] [--mode reconstruct|auto] \
-         [--min-ink-iou F] [--profile faithful|clearscan|canonical-experimental]
-         [--glyph-dictionary off|visual] [--gx-uniform-glyph-scale]
+         [--min-ink-iou F] [--profile faithful|clearscan]
+         [--glyph-dictionary off|visual]
          --output <out.pdf> --report <out.json>\n\
-         scanweave build --bundle <document.json> [--mode reconstruct|auto] [--min-ink-iou F] \
-         [--glyph-dictionary off|visual] [--gx-uniform-glyph-scale] \
+         scanweave build --bundle <document.json> [--dpi N] [--mode reconstruct|auto] [--min-ink-iou F] \
+         [--glyph-dictionary off|visual] \
          --output <out.pdf> --report <out.json>"
     );
     std::process::exit(2);
@@ -138,9 +138,9 @@ fn build_bundle(args: &[String]) -> Result<(), String> {
 
     let min_ink_iou = arg_f64(args, "--min-ink-iou", 0.98)?;
     let profile = arg_value(args, "--profile").unwrap_or_else(|| "faithful".into());
-    if profile != "faithful" && profile != "clearscan" && profile != "canonical-experimental" {
+    if profile != "faithful" && profile != "clearscan" {
         return Err(format!(
-            "unsupported --profile {profile} (faithful | clearscan | canonical-experimental)"
+            "unsupported --profile {profile} (faithful | clearscan)"
         ));
     }
     let glyph_dictionary = arg_value(args, "--glyph-dictionary").unwrap_or_else(|| {
@@ -156,16 +156,11 @@ fn build_bundle(args: &[String]) -> Result<(), String> {
         ));
     }
     let image_encoding = image_encoding(args)?;
-    let gx_uniform_glyph_scale = args.iter().any(|a| a == "--gx-uniform-glyph-scale");
-    if gx_uniform_glyph_scale && profile != "canonical-experimental" {
-        return Err("--gx-uniform-glyph-scale requires --profile canonical-experimental".into());
-    }
     let policy = scanweave_io::convert::Policy {
         mode,
         dpi,
         min_ink_iou,
         profile,
-        gx_uniform_glyph_scale,
         glyph_dictionary,
         image_encoding,
         ..scanweave_io::convert::Policy::default()
@@ -299,16 +294,11 @@ fn build(args: &[String]) -> Result<(), String> {
         }
     });
     let image_encoding = image_encoding(args)?;
-    let gx_uniform_glyph_scale = args.iter().any(|a| a == "--gx-uniform-glyph-scale");
-    if gx_uniform_glyph_scale && profile != "canonical-experimental" {
-        return Err("--gx-uniform-glyph-scale requires --profile canonical-experimental".into());
-    }
     let policy = scanweave_io::convert::Policy {
         mode,
         dpi,
         min_ink_iou,
         profile,
-        gx_uniform_glyph_scale,
         glyph_dictionary,
         image_encoding,
         ..scanweave_io::convert::Policy::default()

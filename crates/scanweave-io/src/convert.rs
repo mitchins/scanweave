@@ -25,8 +25,6 @@ pub struct Policy {
     pub contact_margin_px: f64,
     /// Product profile: `faithful` (default) or `clearscan`.
     pub profile: String,
-    /// Experimental placement ablation: preserve canonical outline aspect ratio.
-    pub gx_uniform_glyph_scale: bool,
     /// Visual glyph dictionary mode: `off` (default) or `visual`.
     pub glyph_dictionary: String,
     /// Lossless PDF image serialization controls; default is exact reuse plus
@@ -44,7 +42,6 @@ impl Default for Policy {
             min_ink_iou: 0.98,
             contact_margin_px: 4.0,
             profile: "faithful".into(),
-            gx_uniform_glyph_scale: false,
             glyph_dictionary: "off".into(),
             image_encoding: ImageEncodingOptions::default(),
         }
@@ -140,6 +137,10 @@ pub struct Report {
     pub semantic_spans: usize,
     pub regions: Vec<RegionRecord>,
     pub coverage: Coverage,
+    /// Source pixels removed because an emitted vector occurrence owns them.
+    pub raster_ink_pixels_suppressed: usize,
+    /// Bright antialias-fringe samples also removed around replaced source ink.
+    pub antialias_fringe_pixels_suppressed: usize,
     pub fallback_reasons: BTreeMap<String, usize>,
     pub font_glyphs: usize,
     pub font_bytes: usize,
@@ -148,6 +149,26 @@ pub struct Report {
     pub semantic_owner: BTreeMap<String, String>,
     pub ownership_invariants: BTreeMap<String, bool>,
     pub elapsed_ms: u128,
+}
+
+fn clearscan_source_dpi(raster_to_page_pt: [f64; 6], page_id: &str) -> Result<f64, String> {
+    let sx = raster_to_page_pt[0];
+    let sy = raster_to_page_pt[3];
+    if !sx.is_finite() || !sy.is_finite() || sx <= 0.0 || sy >= 0.0 {
+        return Err(format!(
+            "page {page_id} has invalid scale for ClearScan DPI inference"
+        ));
+    }
+    let dpi_x = 72.0 / sx;
+    let dpi_y = 72.0 / -sy;
+    if !dpi_x.is_finite() || !dpi_y.is_finite() || dpi_x <= 0.0 || dpi_y <= 0.0 {
+        return Err(format!(
+            "page {page_id} has non-finite ClearScan DPI inferred from its affine"
+        ));
+    }
+    // Use the lower axis when scans are anisotropic, keeping the image
+    // reduction bounded by the least-sampled direction.
+    Ok(dpi_x.min(dpi_y))
 }
 
 /// A caller/preset/source protection polygon: the pixels inside must survive
@@ -589,12 +610,13 @@ pub fn convert(input: &Input, policy: &Policy) -> Result<Output, String> {
     // the fidelity policy is a hard gate (SPEC §4.2 / policy note): the raster
     // baseline reproduces the source pixels exactly, the reconstruction does
     // not if its vector units measure below min_ink_iou
-    let preservation_ok = report
-        .fidelity
-        .preservation_ink_iou_min
-        .is_none_or(|m| m >= policy.min_ink_iou);
+    let preservation_ok = policy.profile == "clearscan"
+        || report
+            .fidelity
+            .preservation_ink_iou_min
+            .is_none_or(|m| m >= policy.min_ink_iou);
     let restoration_ok =
-        !matches!(policy.profile.as_str(), "clearscan" | "canonical-experimental")
+        policy.profile != "clearscan"
             || report.reconstruction.restoration_qualified;
     let recon_fidelity_ok = preservation_ok && restoration_ok;
     let selected = if policy.mode == "auto" {
@@ -650,6 +672,15 @@ pub(crate) fn convert_parts_with_document_donors(
     policy: &Policy,
     document_donors: &[crate::units::Unit],
 ) -> Result<(crate::page_pdf::PageParts, Report), String> {
+    // The OCR page affine is authoritative for the source raster resolution.
+    // In particular, bundled 600 DPI pages must not inherit the CLI's 300 DPI
+    // default for background reduction and pixel-sized restoration footprints.
+    let mut effective_policy = policy.clone();
+    if policy.profile == "clearscan" {
+        effective_policy.dpi =
+            clearscan_source_dpi(input.raster_to_page_pt, &input.page_id)?;
+    }
+    let policy = &effective_policy;
     let start = std::time::Instant::now();
     let w = input.width;
     let h = input.height;
@@ -874,7 +905,7 @@ pub(crate) fn convert_parts_with_document_donors(
         // document-supported prototype is reusable only when the traced
         // outline still reproduces this occurrence at 0.98; damaged glyphs
         // use their separate donor-supported restoration gate.
-        let source_gate_failed = policy.profile != "canonical-experimental"
+        let source_gate_failed = policy.profile != "clearscan"
             && occurrence.reused
             && source_iou.is_none_or(|iou| iou < 0.98);
         if traced_iou.is_none_or(|iou| iou < 0.90) || source_gate_failed {
@@ -896,7 +927,7 @@ pub(crate) fn convert_parts_with_document_donors(
         .all(|o| {
             o.restoration_evidence_passed
                 && o.prototype_trace_iou.is_some_and(|v| v >= 0.90)
-                && (policy.profile == "canonical-experimental"
+                && (policy.profile == "clearscan"
                     || !o.reused
                     || o.source_mask_iou.is_some_and(|v| v >= 0.98))
         });
@@ -1056,6 +1087,37 @@ pub(crate) fn convert_parts_with_document_donors(
     }
     let _font_bytes = build_font(&shapes, &encodings, policy.upem)?;
 
+    // Derive suppression ownership from the final PDF occurrence list itself:
+    // a symbol is cleaned only if an encoded glyph will actually be emitted.
+    let vector_owned_symbols: std::collections::BTreeSet<String> =
+        if policy.profile == "clearscan" {
+            occ.iter().map(|occurrence| occurrence.4.clone())
+                .collect()
+        } else {
+            std::collections::BTreeSet::new()
+        };
+    let (clearscan_rgb, raster_ink_pixels_suppressed, antialias_fringe_pixels_suppressed) = if policy.profile == "clearscan" {
+        let (rgb, ink_count, fringe_count) = clean_replaced_text(input, &plan, &vector_owned_symbols, policy.dpi, seg.paper);
+        (Some(rgb), ink_count, fringe_count)
+    } else {
+        (None, 0, 0)
+    };
+
+    // The compact page background sits below native-resolution fallback
+    // patches. Remove every recognized text mask from that low-resolution
+    // layer, including glyphs that remain raster, or their downsampled ink
+    // will show as a soft duplicate underneath the source-exact patch.
+    let clearscan_background = if policy.profile == "clearscan" {
+        let all_text_symbols: std::collections::BTreeSet<String> = plan
+            .owned
+            .iter()
+            .map(|owned| owned.unit.symbol_id.clone())
+            .collect();
+        Some(clean_replaced_text(input, &plan, &all_text_symbols, policy.dpi, seg.paper).0)
+    } else {
+        None
+    };
+
     // raster patches (fallback regions) + artwork ------------------------------
     let mut patches: Vec<Patch> = Vec::new();
     let mut semantic_owner: BTreeMap<String, String> = BTreeMap::new();
@@ -1078,7 +1140,8 @@ pub(crate) fn convert_parts_with_document_donors(
             for xx in 0..pw {
                 let si = ((y0 + yy) * w as usize + (x0 + xx)) * 3;
                 let di = (yy * pw + xx) * 3;
-                rgb[di..di + 3].copy_from_slice(&input.rgb[si..si + 3]);
+                let source = clearscan_rgb.as_deref().unwrap_or(&input.rgb);
+                rgb[di..di + 3].copy_from_slice(&source[si..si + 3]);
             }
         }
         patches.push(Patch {
@@ -1103,21 +1166,8 @@ pub(crate) fn convert_parts_with_document_donors(
     }
     // unrecognized/artwork ink is also restored as source raster pixels (VS-05:
     // preserve or invent nothing). Bucketed on a 32px grid to bound object count.
-    let vector_owned_symbols: std::collections::BTreeSet<String> =
-        if policy.profile == "canonical-experimental" {
-            regions
-                .iter()
-                .filter(|r| matches!(r.disposition, RegionDisposition::Vector))
-                .flat_map(|r| r.units.iter().map(|&ui| plan.owned[ui].unit.symbol_id.clone()))
-                .filter(|sid| {
-                    reconstruction.repaired_symbols.contains(sid)
-                        || reconstruction.reused_symbols.contains(sid)
-                })
-                .collect()
-        } else {
-            std::collections::BTreeSet::new()
-        };
-    patches.extend(artwork_patches(input, &plan, &vector_owned_symbols, seg.paper));
+    let patch_source = clearscan_rgb.as_deref().unwrap_or(&input.rgb);
+    patches.extend(artwork_patches(patch_source, w as usize, h as usize, &plan));
 
     // coalesce: merge overlapping or exactly-adjacent patches (the artwork
     // buckets tile the page, so this collapses hundreds of 32x32 cells into a
@@ -1125,8 +1175,18 @@ pub(crate) fn convert_parts_with_document_donors(
     // so every emitted pixel stays byte-identical to the source.
     // Coalescing rebuilds merged images from the unmodified source raster. Keep
     // per-patch ownership when a vector replacement owns any source ink.
-    let patches = if policy.profile == "canonical-experimental" {
-        vec![residual_page_patch(input, &plan, &vector_owned_symbols)]
+    let patches = if policy.profile == "clearscan" {
+        let mut layers = coalesce_patches_rgb(patch_source, w as usize, h as usize, patches);
+        layers.insert(
+            0,
+            downsampled_background_patch(
+                clearscan_background.as_deref().unwrap_or(patch_source),
+                w,
+                h,
+                policy.dpi,
+            ),
+        );
+        layers
     } else if vector_owned_symbols.is_empty() {
         coalesce_patches(input, patches)
     } else {
@@ -1355,7 +1415,6 @@ pub(crate) fn convert_parts_with_document_donors(
 
     let parts = crate::page_pdf::PageParts {
         raster_baseline: false,
-        uniform_glyph_scale: policy.gx_uniform_glyph_scale,
         page_w_pt,
         page_h_pt,
         to_pt,
@@ -1445,6 +1504,8 @@ pub(crate) fn convert_parts_with_document_donors(
             })
             .collect(),
         coverage,
+        raster_ink_pixels_suppressed,
+        antialias_fringe_pixels_suppressed,
         fallback_reasons,
         font_glyphs: parts.shapes.len() + 1,
         font_bytes: 0,
@@ -1462,7 +1523,16 @@ pub(crate) fn convert_parts_with_document_donors(
 /// Merge overlapping or exactly-adjacent patches transitively (deterministic:
 /// creation order is the merge order). Each merged patch is re-copied from the
 /// source raster, so source fidelity is exact for every merged rect.
-fn coalesce_patches(input: &Input, mut patches: Vec<Patch>) -> Vec<Patch> {
+fn coalesce_patches(input: &Input, patches: Vec<Patch>) -> Vec<Patch> {
+    coalesce_patches_rgb(&input.rgb, input.width as usize, input.height as usize, patches)
+}
+
+fn coalesce_patches_rgb(
+    source_rgb: &[u8],
+    w: usize,
+    h: usize,
+    mut patches: Vec<Patch>,
+) -> Vec<Patch> {
     fn merges(a: [f64; 4], b: [f64; 4]) -> bool {
         // overlapping OR touching (gap == 0)
         a[0] <= b[2] && b[0] <= a[2] && a[1] <= b[3] && b[1] <= a[3]
@@ -1482,7 +1552,7 @@ fn coalesce_patches(input: &Input, mut patches: Vec<Patch>) -> Vec<Patch> {
                         base.bbox_px[2].max(patches[i].bbox_px[2]),
                         base.bbox_px[3].max(patches[i].bbox_px[3]),
                     ];
-                    base = patch_from_source(input, union);
+                    base = patch_from_rgb(source_rgb, w, h, union);
                     patches.swap_remove(i);
                     changed = true;
                 } else {
@@ -1495,8 +1565,7 @@ fn coalesce_patches(input: &Input, mut patches: Vec<Patch>) -> Vec<Patch> {
     out
 }
 
-fn patch_from_source(input: &Input, bb: [f64; 4]) -> Patch {
-    let (w, h) = (input.width as usize, input.height as usize);
+fn patch_from_rgb(source_rgb: &[u8], w: usize, h: usize, bb: [f64; 4]) -> Patch {
     let x0 = bb[0].max(0.0) as usize;
     let y0 = bb[1].max(0.0) as usize;
     let x1 = ((bb[2] as usize).min(w)).max(x0 + 1);
@@ -1507,7 +1576,7 @@ fn patch_from_source(input: &Input, bb: [f64; 4]) -> Patch {
         for xx in 0..pw {
             let si = ((y0 + yy) * w + (x0 + xx)) * 3;
             let di = (yy * pw + xx) * 3;
-            rgb[di..di + 3].copy_from_slice(&input.rgb[si..si + 3]);
+            rgb[di..di + 3].copy_from_slice(&source_rgb[si..si + 3]);
         }
     }
     Patch {
@@ -1518,68 +1587,174 @@ fn patch_from_source(input: &Input, bb: [f64; 4]) -> Patch {
     }
 }
 
-/// Full-resolution residual image for the canonical profile. The captured page
-/// remains the ownership source for paper, artwork, uncertain content and all
-/// fallback glyphs. Only binary ink pixels of occurrences whose vectors were
-/// accepted and emitted are replaced with a local ring median.
-fn residual_page_patch(
+/// Remove scan ink only where an emitted visible vector owns it. The exact
+/// segmentation mask is authoritative; a one- or two-pixel antialias fringe is
+/// also cleared unless another OCR/artwork mask protects that sample. Each
+/// cleared sample receives a local median from unowned neighbours.
+fn clean_replaced_text(
     input: &Input,
     plan: &OwnershipPlan,
     vector_owned_symbols: &std::collections::BTreeSet<String>,
-) -> Patch {
+    dpi: f64,
+    fallback_paper: [u8; 3],
+) -> (Vec<u8>, usize, usize) {
     let mut rgb = input.rgb.clone();
     let w = input.width as usize;
     let h = input.height as usize;
-    const RING: &[(isize, isize)] = &[
-        (-4, 0), (-3, -2), (0, -4), (3, -2), (4, 0), (3, 2), (0, 4), (-3, 2),
-    ];
+    if rgb.len() != w.saturating_mul(h).saturating_mul(3) {
+        return (rgb, 0, 0);
+    }
+    let mut protected = vec![false; w * h];
+    let mut vector_ink = vec![false; w * h];
     for owned in &plan.owned {
-        if !vector_owned_symbols.contains(&owned.unit.symbol_id) {
-            continue;
-        }
+        let vector = vector_owned_symbols.contains(&owned.unit.symbol_id);
         for (i, ink) in owned.unit.mask.iter().enumerate() {
             if !*ink {
                 continue;
             }
-            let gx = owned.unit.bbox_px[0] as isize + (i % owned.unit.crop_w) as isize;
-            let gy = owned.unit.bbox_px[1] as isize + (i / owned.unit.crop_w) as isize;
-            if gx < 0 || gy < 0 || gx >= w as isize || gy >= h as isize {
+            let x = owned.unit.bbox_px[0].round() as isize + (i % owned.unit.crop_w) as isize;
+            let y = owned.unit.bbox_px[1].round() as isize + (i / owned.unit.crop_w) as isize;
+            if x < 0 || y < 0 || x >= w as isize || y >= h as isize {
                 continue;
             }
-            let mut values: [Vec<u8>; 3] = std::array::from_fn(|_| Vec::with_capacity(RING.len()));
-            for &(dx, dy) in RING {
-                let x = gx + dx;
-                let y = gy + dy;
-                if x < 0 || y < 0 || x >= w as isize || y >= h as isize {
+            let at = y as usize * w + x as usize;
+            if vector {
+                vector_ink[at] = true;
+            } else {
+                protected[at] = true;
+            }
+        }
+    }
+    for (unit, _) in &plan.artwork_units {
+        for (i, ink) in unit.mask.iter().enumerate() {
+            if !*ink {
+                continue;
+            }
+            let x = unit.bbox_px[0].round() as isize + (i % unit.crop_w) as isize;
+            let y = unit.bbox_px[1].round() as isize + (i / unit.crop_w) as isize;
+            if x >= 0 && y >= 0 && x < w as isize && y < h as isize {
+                protected[y as usize * w + x as usize] = true;
+            }
+        }
+    }
+    let fringe = if dpi >= 450.0 { 2isize } else { 1isize };
+    let mut erase: Vec<bool> = vector_ink
+        .iter()
+        .zip(&protected)
+        .map(|(&vector, &keep)| vector && !keep)
+        .collect();
+    // Glyph masks are sparse. Mark their small fringe directly instead of
+    // searching a neighborhood around every pixel on the entire page.
+    for (ink_at, &is_ink) in vector_ink.iter().enumerate() {
+        if !is_ink {
+            continue;
+        }
+        let (x, y) = ((ink_at % w) as isize, (ink_at / w) as isize);
+        for dy in -fringe..=fringe {
+            for dx in -fringe..=fringe {
+                let nx = x + dx;
+                let ny = y + dy;
+                if nx < 0 || ny < 0 || nx >= w as isize || ny >= h as isize {
                     continue;
                 }
-                let at = (y as usize * w + x as usize) * 3;
-                for c in 0..3 {
-                    values[c].push(input.rgb[at + c]);
+                let idx = ny as usize * w + nx as usize;
+                if erase[idx] || protected[idx] {
+                    continue;
                 }
-            }
-            let dst = (gy as usize * w + gx as usize) * 3;
-            for c in 0..3 {
-                values[c].sort_unstable();
-                if !values[c].is_empty() {
-                    rgb[dst + c] = values[c][values[c].len() / 2];
+                // A dark neighboring object is not an antialias fringe.
+                let p = idx * 3;
+                let luma = (rgb[p] as u16 + rgb[p + 1] as u16 + rgb[p + 2] as u16) / 3;
+                if luma >= 96 {
+                    erase[idx] = true;
                 }
             }
         }
     }
+    let original = input.rgb.as_slice();
+    let raster_ink_pixels_suppressed = vector_ink
+        .iter()
+        .zip(&protected)
+        .filter(|(ink, keep)| **ink && !**keep)
+        .count();
+    let antialias_fringe_pixels_suppressed = erase
+        .iter()
+        .zip(&vector_ink)
+        .filter(|(erased, ink)| **erased && !**ink)
+        .count();
+    let radius = if dpi >= 450.0 { 6isize } else { 4isize };
+    for index in 0..erase.len() {
+        if !erase[index] {
+            continue;
+        }
+        let (x, y) = ((index % w) as isize, (index / w) as isize);
+        // The largest 13x13 neighbourhood fits in these fixed buffers. This
+        // avoids three heap allocations for every cleared glyph/fringe pixel.
+        let mut samples = [[0u8; 169]; 3];
+        let mut sample_count = 0usize;
+        for dy in -radius..=radius {
+            for dx in -radius..=radius {
+                if dx.abs().max(dy.abs()) < 2 {
+                    continue;
+                }
+                let nx = x + dx;
+                let ny = y + dy;
+                if nx < 0 || ny < 0 || nx >= w as isize || ny >= h as isize {
+                    continue;
+                }
+                let ni = ny as usize * w + nx as usize;
+                if vector_ink[ni] || protected[ni] {
+                    continue;
+                }
+                let p = ni * 3;
+                let luma = (0.2126 * original[p] as f64
+                    + 0.7152 * original[p + 1] as f64
+                    + 0.0722 * original[p + 2] as f64) as u8;
+                if luma < 96 {
+                    continue;
+                }
+                for c in 0..3 {
+                    samples[c][sample_count] = original[p + c];
+                }
+                sample_count += 1;
+            }
+        }
+        let p = index * 3;
+        for c in 0..3 {
+            if sample_count > 0 {
+                samples[c][..sample_count].sort_unstable();
+                rgb[p + c] = samples[c][sample_count / 2];
+            } else {
+                rgb[p + c] = fallback_paper[c];
+            }
+        }
+    }
+    (rgb, raster_ink_pixels_suppressed, antialias_fringe_pixels_suppressed)
+}
+
+/// The low-resolution base retains paper tone and broad scan variation after
+/// replaced source ink has been removed. Native-resolution fallback and
+/// artwork patches are painted above it.
+fn downsampled_background_patch(source_rgb: &[u8], w: u32, h: u32, dpi: f64) -> Patch {
+    let target_dpi = dpi.min(150.0).max(72.0);
+    let scale = target_dpi / dpi.max(1.0);
+    let bw = ((w as f64 * scale).round() as u32).max(1);
+    let bh = ((h as f64 * scale).round() as u32).max(1);
+    let source = image::RgbImage::from_raw(w, h, source_rgb.to_vec())
+        .expect("input raster dimensions were validated before ClearScan assembly");
+    let reduced = image::imageops::resize(&source, bw, bh, image::imageops::FilterType::Lanczos3);
     Patch {
-        bbox_px: [0.0, 0.0, input.width as f64, input.height as f64],
-        rgb,
-        w: input.width,
-        h: input.height,
+        bbox_px: [0.0, 0.0, w as f64, h as f64],
+        rgb: reduced.into_raw(),
+        w: bw,
+        h: bh,
     }
 }
 
 fn artwork_patches(
-    input: &Input,
+    source_rgb: &[u8],
+    w: usize,
+    h: usize,
     plan: &OwnershipPlan,
-    vector_owned_symbols: &std::collections::BTreeSet<String>,
-    paper: [u8; 3],
 ) -> Vec<Patch> {
     const CELL: usize = 32;
     let mut cells: std::collections::BTreeMap<(usize, usize), Vec<(usize, usize)>> =
@@ -1598,7 +1773,6 @@ fn artwork_patches(
         }
     }
     let mut patches = Vec::new();
-    let (w, h) = (input.width as usize, input.height as usize);
     for ((cx, cy), pixels) in cells {
         let (bx, by) = (cx * CELL, cy * CELL);
         let bw = CELL.min(w.saturating_sub(bx));
@@ -1613,24 +1787,7 @@ fn artwork_patches(
         for gy in by..by + bh {
             let si = gy * w + bx;
             let di = (gy - by) * bw;
-            rgb[di * 3..di * 3 + bw * 3].copy_from_slice(&input.rgb[si * 3..si * 3 + bw * 3]);
-        }
-        for owned in &plan.owned {
-            if !vector_owned_symbols.contains(&owned.unit.symbol_id) {
-                continue;
-            }
-            for (i, ink) in owned.unit.mask.iter().enumerate() {
-                if !*ink {
-                    continue;
-                }
-                let gx = owned.unit.bbox_px[0] as usize + i % owned.unit.crop_w;
-                let gy = owned.unit.bbox_px[1] as usize + i / owned.unit.crop_w;
-                if gx < bx || gy < by || gx >= bx + bw || gy >= by + bh {
-                    continue;
-                }
-                let at = ((gy - by) * bw + gx - bx) * 3;
-                rgb[at..at + 3].copy_from_slice(&paper);
-            }
+            rgb[di * 3..di * 3 + bw * 3].copy_from_slice(&source_rgb[si * 3..si * 3 + bw * 3]);
         }
         let _ = pixels;
         patches.push(Patch {
@@ -1658,7 +1815,6 @@ pub fn baseline_one_page(
     let patch = whole_page_patch(parts, parts.source_w, parts.source_h)?;
     let baseline = crate::page_pdf::PageParts {
         raster_baseline: true,
-        uniform_glyph_scale: false,
         patches: vec![patch],
         ..parts.clone()
     };
@@ -1685,4 +1841,31 @@ pub fn whole_page_patch(
         w: w as u32,
         h: h as u32,
     })
+}
+
+#[cfg(test)]
+mod dpi_tests {
+    use super::clearscan_source_dpi;
+
+    #[test]
+    fn derives_dpi_from_authoritative_page_affine() {
+        assert!((clearscan_source_dpi([0.24, 0.0, 0.0, -0.24, 0.0, 216.0], "p300")
+            .unwrap()
+            - 300.0)
+            .abs()
+            < 1e-9);
+        assert!((clearscan_source_dpi([0.12, 0.0, 0.0, -0.12, 0.0, 216.0], "p600")
+            .unwrap()
+            - 600.0)
+            .abs()
+            < 1e-9);
+        // Conservative axis choice avoids claiming more detail than the
+        // lower-resolution direction supports.
+        assert!((clearscan_source_dpi([0.12, 0.0, 0.0, -0.24, 0.0, 216.0], "anisotropic")
+            .unwrap()
+            - 300.0)
+            .abs()
+            < 1e-9);
+        assert!(clearscan_source_dpi([0.0, 0.0, 0.0, -0.24, 0.0, 216.0], "invalid").is_err());
+    }
 }
