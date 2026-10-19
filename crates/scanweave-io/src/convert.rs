@@ -1277,12 +1277,12 @@ pub(crate) fn convert_parts_with_document_donors(
             ));
         }
         // Protection must work even when OCR finds no glyph in the polygon.
-        for protected in &input.protected_regions {
+        for &protected in &protected_boxes {
             patches.push(patch_from_rgb(
                 patch_source,
                 w as usize,
                 h as usize,
-                span_bbox(&protected.polygon),
+                protected,
             ));
         }
     }
@@ -2272,7 +2272,7 @@ mod contour_coverage_tests {
         let mut rgb = vec![250u8; 64 * 64 * 3];
         // Even a short mark below the coherent-residual criterion is protected.
         rgb[(20 * 64 + 20) * 3..(20 * 64 + 20) * 3 + 3].fill(247);
-        let input = Input {
+        let mut input = Input {
             rgb: rgb.clone(),
             width: 64,
             height: 64,
@@ -2299,5 +2299,21 @@ mod contour_coverage_tests {
             && p.bbox_px[1] <= 18.0
             && p.bbox_px[2] >= 23.0
             && p.bbox_px[3] >= 23.0));
+        // OCR polygons may lie in the permitted boundary tolerance sliver.
+        // A wholly off-raster protected box must be discarded before copying.
+        input.protected_regions[0].polygon =
+            vec![[64.25, 18.0], [65.0, 18.0], [65.0, 23.0], [64.25, 23.0]];
+        let (parts, _) = convert_parts(
+            &input,
+            &Policy {
+                profile: "clearscan".into(),
+                ..Policy::default()
+            },
+        )
+        .unwrap();
+        assert!(parts
+            .patches
+            .iter()
+            .all(|p| p.bbox_px[2] <= 64.0 && p.bbox_px[3] <= 64.0));
     }
 }
