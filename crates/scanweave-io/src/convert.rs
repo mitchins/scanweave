@@ -78,6 +78,7 @@ pub struct OccurrenceRecord {
 
 #[derive(Debug, Clone, Serialize)]
 pub struct PatchRecord {
+    pub compact_background: bool,
     pub bbox_px: [f64; 4],
     pub w: u32,
     pub h: u32,
@@ -139,7 +140,7 @@ pub struct Report {
     pub coverage: Coverage,
     /// Source pixels removed because an emitted vector occurrence owns them.
     pub raster_ink_pixels_suppressed: usize,
-    /// Bright antialias-fringe samples also removed around replaced source ink.
+    /// Bright antialias/fringe and donor-supported dropout samples removed.
     pub antialias_fringe_pixels_suppressed: usize,
     pub fallback_reasons: BTreeMap<String, usize>,
     pub font_glyphs: usize,
@@ -1375,6 +1376,12 @@ pub(crate) fn convert_parts_with_document_donors(
             h,
             policy.dpi,
         );
+        let (background, exceptions) = compact_paper_background(background, w, h, &layers);
+        layers.extend(
+            exceptions
+                .into_iter()
+                .map(|bbox| patch_from_rgb(patch_source, w as usize, h as usize, bbox)),
+        );
         let detail = residual_detail_patches(patch_source, w, h, &background, &layers);
         layers.extend(detail);
         let mut layers = coalesce_patches_rgb(patch_source, w as usize, h as usize, layers);
@@ -1691,6 +1698,7 @@ pub(crate) fn convert_parts_with_document_donors(
     let patch_records: Vec<PatchRecord> = patches
         .iter()
         .map(|p| PatchRecord {
+            compact_background: p.compact_background,
             bbox_px: p.bbox_px,
             w: p.w,
             h: p.h,
@@ -1906,9 +1914,9 @@ fn patch_from_rgb(source_rgb: &[u8], w: usize, h: usize, bb: [f64; 4]) -> Patch 
 
 /// Remove scan ink only where an emitted visible vector owns it. The exact
 /// segmentation mask is authoritative; a one- or two-pixel antialias fringe is
-/// cleared only with compatible donor grayscale support or a native fallback
+/// cleared only with local grayscale edge support or a native fallback
 /// patch covering the sample. Other OCR/artwork masks protect their pixels. Each
-/// cleared sample receives a local median from unowned neighbours.
+/// cleared sample receives local paper estimated outside all ink and fringes.
 fn clean_replaced_text(
     input: &Input,
     plan: &OwnershipPlan,
@@ -1957,14 +1965,51 @@ fn clean_replaced_text(
             }
         }
     }
+    // Caller protection is independent of OCR and segmentation. Use its
+    // conservative bounding box both for erasure and for paper sampling.
+    for region in &input.protected_regions {
+        let x0 = region
+            .polygon
+            .iter()
+            .map(|p| p[0])
+            .fold(f64::INFINITY, f64::min)
+            .floor()
+            .max(0.0) as usize;
+        let y0 = region
+            .polygon
+            .iter()
+            .map(|p| p[1])
+            .fold(f64::INFINITY, f64::min)
+            .floor()
+            .max(0.0) as usize;
+        let x1 = region
+            .polygon
+            .iter()
+            .map(|p| p[0])
+            .fold(f64::NEG_INFINITY, f64::max)
+            .ceil()
+            .max(0.0) as usize;
+        let y1 = region
+            .polygon
+            .iter()
+            .map(|p| p[1])
+            .fold(f64::NEG_INFINITY, f64::max)
+            .ceil()
+            .max(0.0) as usize;
+        for y in y0.min(h)..y1.min(h) {
+            for x in x0.min(w)..x1.min(w) {
+                protected[y * w + x] = true;
+            }
+        }
+    }
     let mut erase: Vec<bool> = vector_ink
         .iter()
         .zip(&protected)
         .map(|(&vector, &keep)| vector && !keep)
         .collect();
-    // A source neighbor is suppressed only when the selected independent
-    // document witness predicts matching antialias coverage at this position.
-    // Brightness alone cannot distinguish a fringe from faint punctuation.
+    // Antialias suppression still requires the original independent-donor
+    // two-sided coverage agreement. An unrecognized nearby mark must not
+    // validate its own removal through the source halo.
     let fringe = if dpi >= 450.0 { 2isize } else { 1isize };
     for owned in &plan.owned {
         let unit = &owned.unit;
@@ -2008,14 +2053,62 @@ fn clean_replaced_text(
         source_ink.sort_unstable();
         let source_dark = source_ink.get(source_ink.len() / 20).copied().unwrap_or(0) as f64;
         let paper = fallback_paper.iter().map(|&v| v as f64).sum::<f64>() / 3.0;
-        let witness_levels = witness.and_then(|u| u.gray_samples.as_ref()).map(|gray| {
-            let mut sorted = gray.clone();
-            sorted.sort_unstable();
-            (
-                sorted[sorted.len() / 20] as f64,
-                sorted[sorted.len() * 19 / 20] as f64,
-            )
+        let witness_levels = witness.and_then(|u| {
+            let halo = u.gray_halo.as_ref()?;
+            let gray = u.gray_samples.as_ref()?;
+            let mut ink: Vec<u8> = gray
+                .iter()
+                .zip(&u.mask)
+                .filter_map(|(&g, &m)| m.then_some(g))
+                .collect();
+            if ink.is_empty() {
+                return None;
+            }
+            ink.sort_unstable();
+            let mut paper = halo.clone();
+            paper.sort_unstable();
+            Some((
+                ink[ink.len() / 20] as f64,
+                paper[paper.len() * 19 / 20] as f64,
+            ))
         });
+        // Register the independent donor's soft edge to the observed ink.
+        // Only owned source pixels fit this small translation; an unknown
+        // outside mark cannot serve as evidence for erasing itself.
+        let mut shift = (0.0, 0.0);
+        if let (Some(donor), Some((dark, light))) = (witness, witness_levels) {
+            let mut best = f64::INFINITY;
+            let stride = unit.mask.len().div_ceil(256).max(1);
+            for sy in [-1.0, -0.5, 0.0, 0.5, 1.0] {
+                for sx in [-1.0, -0.5, 0.0, 0.5, 1.0] {
+                    let mut loss = 0.0;
+                    let mut n = 0;
+                    for i in (0..unit.mask.len()).step_by(stride) {
+                        if !unit.mask[i] {
+                            continue;
+                        }
+                        let x = unit.bbox_px[0] + (i % unit.crop_w) as f64 + 0.5;
+                        let y = unit.bbox_px[1] + (i / unit.crop_w) as f64 + 0.5;
+                        let at = ((y.floor() as usize) * w + x.floor() as usize) * 3;
+                        let observed = (paper
+                            - (input.rgb[at] as f64
+                                + input.rgb[at + 1] as f64
+                                + input.rgb[at + 2] as f64)
+                                / 3.0)
+                            / (paper - source_dark).max(1.0);
+                        let value = donor_edge_coverage(donor, target, x + sx, y + sy, dark, light);
+                        loss += (observed - value).powi(2).min(0.04);
+                        n += 1;
+                    }
+                    // Prefer the zero-phase solution on equally supported fits.
+                    let cost = loss / (n as f64).max(1.0) + 1e-6 * (sx * sx + sy * sy);
+                    if cost < best {
+                        best = cost;
+                        shift = (sx, sy);
+                    }
+                }
+            }
+        }
         for (i, &ink) in unit.mask.iter().enumerate() {
             if !ink {
                 continue;
@@ -2039,30 +2132,17 @@ fn clean_replaced_text(
                     let Some(donor) = witness else {
                         continue;
                     };
-                    let Some(halo) = donor.gray_halo.as_ref() else {
-                        continue;
-                    };
                     let Some((dark, light)) = witness_levels else {
                         continue;
                     };
-                    let wx = ((nx as f64 + 0.5 - target[0]) / (target[2] - target[0])
-                        * donor.crop_w as f64)
-                        .floor() as isize
-                        + 2;
-                    let wy = ((ny as f64 + 0.5 - target[1]) / (target[3] - target[1])
-                        * donor.crop_h as f64)
-                        .floor() as isize
-                        + 2;
-                    if wx < 0
-                        || wy < 0
-                        || wx >= donor.crop_w as isize + 4
-                        || wy >= donor.crop_h as isize + 4
-                    {
-                        continue;
-                    }
-                    let expected = (light
-                        - halo[wy as usize * (donor.crop_w + 4) + wx as usize] as f64)
-                        / (light - dark).max(1.0);
+                    let expected = donor_edge_coverage(
+                        donor,
+                        target,
+                        nx as f64 + 0.5 + shift.0,
+                        ny as f64 + 0.5 + shift.1,
+                        dark,
+                        light,
+                    );
                     let p = at * 3;
                     let observed = (paper
                         - (input.rgb[p] as f64
@@ -2070,7 +2150,15 @@ fn clean_replaced_text(
                             + input.rgb[p + 2] as f64)
                             / 3.0)
                         / (paper - source_dark).max(1.0);
-                    if (0.01..=0.45).contains(&expected) && (observed - expected).abs() <= 0.08 {
+                    let edge_agreement =
+                        (0.005..=0.50).contains(&expected) && (observed - expected).abs() <= 0.08;
+                    // Bright dropout samples inside a strongly supported donor
+                    // stroke are obsolete impressions too. They must not be
+                    // treated as paper merely because binarization omitted them.
+                    // Unlike a neighbourhood maximum, the registered donor
+                    // centre must itself support this interior classification.
+                    let supported_interior = expected >= 0.75 && (0.005..=0.50).contains(&observed);
+                    if edge_agreement || supported_interior {
                         erase[at] = true;
                     }
                 }
@@ -2088,15 +2176,21 @@ fn clean_replaced_text(
         .zip(&vector_ink)
         .filter(|(erased, ink)| **erased && !**ink)
         .count();
-    let radius = if dpi >= 450.0 { 6isize } else { 4isize };
+    // A paper estimate must not sample the same unresolved edge it replaces.
+    // Exclude the full source-ink neighbourhood, including protected content,
+    // before taking a local robust colour estimate. This preserves coloured
+    // paper and broad illumination instead of copying gray fringe into cores.
+    let radius = if dpi >= 450.0 { 12usize } else { 8usize };
+    let sample_guard =
+        dilated_ink_guard(&vector_ink, &protected, w, h, fringe as usize + 1, radius);
+    let radius = radius as isize;
     for index in 0..erase.len() {
         if !erase[index] {
             continue;
         }
         let (x, y) = ((index % w) as isize, (index / w) as isize);
-        // The largest 13x13 neighbourhood fits in these fixed buffers. This
-        // avoids three heap allocations for every cleared glyph/fringe pixel.
-        let mut samples = [[0u8; 169]; 3];
+        // Bounded 25x25 neighbourhood; no per-sample heap allocation.
+        let mut samples = [[0u8; 625]; 3];
         let mut sample_count = 0usize;
         for dy in -radius..=radius {
             for dx in -radius..=radius {
@@ -2109,7 +2203,7 @@ fn clean_replaced_text(
                     continue;
                 }
                 let ni = ny as usize * w + nx as usize;
-                if vector_ink[ni] || protected[ni] {
+                if sample_guard[ni] || erase[ni] {
                     continue;
                 }
                 let p = ni * 3;
@@ -2142,6 +2236,94 @@ fn clean_replaced_text(
     )
 }
 
+/// Bilinear grayscale coverage in a donor's pixel-centre frame, including
+/// its retained two-pixel halo. No observed outside pixel enters this model.
+fn donor_edge_coverage(
+    donor: &crate::units::Unit,
+    target: [f64; 4],
+    x: f64,
+    y: f64,
+    dark: f64,
+    light: f64,
+) -> f64 {
+    let Some(halo) = donor.gray_halo.as_ref() else {
+        return 0.0;
+    };
+    let xx = (x - target[0]) / (target[2] - target[0]) * donor.crop_w as f64 + 1.5;
+    let yy = (y - target[1]) / (target[3] - target[1]) * donor.crop_h as f64 + 1.5;
+    let sample = |x: isize, y: isize| {
+        if x < 0 || y < 0 || x >= donor.crop_w as isize + 4 || y >= donor.crop_h as isize + 4 {
+            light
+        } else {
+            halo[y as usize * (donor.crop_w + 4) + x as usize] as f64
+        }
+    };
+    let (ix, iy) = (xx.floor() as isize, yy.floor() as isize);
+    let (fx, fy) = (xx - xx.floor(), yy - yy.floor());
+    let value = (sample(ix, iy) * (1.0 - fx) + sample(ix + 1, iy) * fx) * (1.0 - fy)
+        + (sample(ix, iy + 1) * (1.0 - fx) + sample(ix + 1, iy + 1) * fx) * fy;
+    ((light - value) / (light - dark).max(1.0)).clamp(0.0, 1.0)
+}
+
+/// Separable bounded box dilation. Protect artwork over the entire paper
+/// sampling radius without quadratic work per artwork/source pixel.
+fn dilated_ink_guard(
+    ink: &[bool],
+    protected: &[bool],
+    w: usize,
+    h: usize,
+    ink_radius: usize,
+    protected_radius: usize,
+) -> Vec<bool> {
+    fn dilate(mask: &[bool], w: usize, h: usize, r: usize) -> Vec<bool> {
+        let mut horizontal = vec![false; w * h];
+        for y in 0..h {
+            let mut sum = 0usize;
+            for x in 0..w + r {
+                if x < w {
+                    sum += usize::from(mask[y * w + x]);
+                }
+                if x > 2 * r && x - 2 * r - 1 < w {
+                    sum -= usize::from(mask[y * w + x - 2 * r - 1]);
+                }
+                if x >= r {
+                    let xx = x - r;
+                    if xx < w {
+                        horizontal[y * w + xx] = sum > 0;
+                    }
+                }
+            }
+        }
+        let mut out = vec![false; w * h];
+        for x in 0..w {
+            let mut sum = 0usize;
+            for y in 0..h + r {
+                if y < h {
+                    sum += usize::from(horizontal[y * w + x]);
+                }
+                if y > 2 * r && y - 2 * r - 1 < h {
+                    sum -= usize::from(horizontal[(y - 2 * r - 1) * w + x]);
+                }
+                if y >= r {
+                    let yy = y - r;
+                    if yy < h {
+                        out[yy * w + x] = sum > 0;
+                    }
+                }
+            }
+        }
+        out
+    }
+    let mut guard = dilate(ink, w, h, ink_radius);
+    for (g, p) in guard
+        .iter_mut()
+        .zip(dilate(protected, w, h, protected_radius))
+    {
+        *g |= p;
+    }
+    guard
+}
+
 /// The low-resolution base retains paper tone and broad scan variation after
 /// replaced source ink has been removed. Native-resolution fallback and
 /// artwork patches are painted above it.
@@ -2160,6 +2342,112 @@ fn downsampled_background_patch(source_rgb: &[u8], w: u32, h: u32, dpi: f64) -> 
         w: bw,
         h: bh,
     }
+}
+
+/// Reduce only an already cleaned paper layer. Every exposed channel sample
+/// remains within three levels of the 150-DPI representation or receives a
+/// cleaned-source native exception tile. The candidate mean error is at most
+/// 0.5 and exception tiles cover at most 5% of the page. Native patch borders
+/// remain tested. This does not classify unknown content as disposable paper.
+/// The residual-detail pass still examines the original cleaned source after
+/// choosing this representation and restores coherent fine marks natively.
+fn compact_paper_background(
+    base: Patch,
+    w: u32,
+    h: u32,
+    native: &[Patch],
+) -> (Patch, Vec<[f64; 4]>) {
+    let image = image::RgbImage::from_raw(base.w, base.h, base.rgb.clone()).unwrap();
+    let mut covered = vec![false; (base.w * base.h) as usize];
+    for p in native {
+        // Ignore only samples fully inside an opaque native patch. Keep one
+        // reduced pixel at the boundary to constrain interpolation there.
+        let x0 = (p.bbox_px[0] * base.w as f64 / w as f64).ceil() as usize + 1;
+        let y0 = (p.bbox_px[1] * base.h as f64 / h as f64).ceil() as usize + 1;
+        let x1 = (p.bbox_px[2] * base.w as f64 / w as f64).floor() as usize;
+        let y1 = (p.bbox_px[3] * base.h as f64 / h as f64).floor() as usize;
+        for y in y0..y1.saturating_sub(1).min(base.h as usize) {
+            for x in x0..x1.saturating_sub(1).min(base.w as usize) {
+                covered[y * base.w as usize + x] = true;
+            }
+        }
+    }
+    let bw = base.w.div_ceil(2);
+    let bh = base.h.div_ceil(2);
+    let small = image::imageops::resize(&image, bw, bh, image::imageops::FilterType::Lanczos3);
+    let restored = image::imageops::resize(
+        &small,
+        base.w,
+        base.h,
+        image::imageops::FilterType::Lanczos3,
+    );
+    let mut error = 0u64;
+    let mut count = 0u64;
+    let mut exceptions = std::collections::BTreeSet::new();
+    // Four reduced samples per exception tile: unlike artwork buckets, small
+    // paper residuals must not inflate into 32px rectangles around whole words.
+    let cell = (4 * w).div_ceil(base.w).max(4);
+    for (i, (a, b)) in base
+        .rgb
+        .chunks_exact(3)
+        .zip(restored.as_raw().chunks_exact(3))
+        .enumerate()
+    {
+        if covered[i] {
+            continue;
+        }
+        let mut max = 0;
+        for c in 0..3 {
+            let d = a[c].abs_diff(b[c]);
+            max = max.max(d);
+            error += d as u64;
+            count += 1;
+        }
+        if max > 3 {
+            // Keep source-exact native tiles for exceptional samples instead
+            // of allowing one faint mark to force an entire noisy page native.
+            // Include a reduced pixel of margin for image interpolation.
+            let x = (i % base.w as usize) as u32;
+            let y = (i / base.w as usize) as u32;
+            let x0 = x.saturating_sub(1) * w / base.w;
+            let y0 = y.saturating_sub(1) * h / base.h;
+            let x1 = ((x + 2) * w).div_ceil(base.w).min(w);
+            let y1 = ((y + 2) * h).div_ceil(base.h).min(h);
+            for ty in y0 / cell..y1.div_ceil(cell) {
+                for tx in x0 / cell..x1.div_ceil(cell) {
+                    exceptions.insert((tx, ty));
+                }
+            }
+        }
+    }
+    let area: u64 = exceptions
+        .iter()
+        .map(|&(x, y)| (cell.min(w - x * cell) as u64) * (cell.min(h - y * cell) as u64))
+        .sum();
+    // This is a sparse paper-resource correction, not general page separation.
+    if count == 0 || error as f64 > count as f64 * 0.50 || area > w as u64 * h as u64 / 20 {
+        return (base, Vec::new());
+    }
+    let boxes = exceptions
+        .into_iter()
+        .map(|(x, y)| {
+            [
+                (x * cell) as f64,
+                (y * cell) as f64,
+                ((x * cell + cell).min(w)) as f64,
+                ((y * cell + cell).min(h)) as f64,
+            ]
+        })
+        .collect();
+    (
+        Patch {
+            rgb: small.into_raw(),
+            w: bw,
+            h: bh,
+            ..base
+        },
+        boxes,
+    )
 }
 
 /// Preserve source detail that the reduced layer cannot represent. This is a
@@ -2611,5 +2899,233 @@ mod contour_coverage_tests {
             && p.bbox_px[2] > 25.0
             && p.bbox_px[1] <= 20.0
             && p.bbox_px[3] > 20.0));
+    }
+    #[test]
+    fn paper_reconstruction_excludes_gray_fringe_and_preserves_adjacent_artwork() {
+        let paper = [240u8, 220, 190];
+        let mut rgb = paper.repeat(64 * 64);
+        for y in 20..32 {
+            for x in 20..24 {
+                rgb[(y * 64 + x) * 3..(y * 64 + x) * 3 + 3].fill(15);
+            }
+            for x in [19, 24] {
+                for c in 0..3 {
+                    rgb[(y * 64 + x) * 3 + c] = paper[c] - 12;
+                }
+            }
+        }
+        // An independent short faint mark adjacent to a replaced edge.
+        for c in 0..3 {
+            rgb[(25 * 64 + 19) * 3 + c] = paper[c] - 20;
+        }
+        // Broad coloured caller-protected material is not necessarily a
+        // segmentation/artwork component, and must not become paper evidence.
+        for y in 12..42 {
+            for x in 27..50 {
+                rgb[(y * 64 + x) * 3..(y * 64 + x) * 3 + 3].copy_from_slice(&[110, 170, 200]);
+            }
+        }
+        let input = Input {
+            rgb,
+            width: 64,
+            height: 64,
+            page_id: "paper".into(),
+            spans: vec![],
+            protected_regions: vec![ProtectedInput {
+                id: "colour".into(),
+                polygon: vec![[27.0, 12.0], [50.0, 12.0], [50.0, 42.0], [27.0, 42.0]],
+                reason: "illustration".into(),
+            }],
+            raster_to_page_pt: [0.24, 0.0, 0.0, -0.24, 0.0, 15.36],
+            pixel_sha256: None,
+        };
+        let mut unit = crate::units::Unit {
+            shape_key: "bar".into(),
+            span_id: "bar".into(),
+            symbol_id: "bar".into(),
+            semantic_text: "I".into(),
+            bbox_px: [20.0, 20.0, 24.0, 32.0],
+            ocr_bbox_px: [19.0, 19.0, 25.0, 33.0],
+            crop_w: 4,
+            crop_h: 12,
+            mask: vec![true; 48],
+            gray_samples: None,
+            gray_halo: None,
+        };
+        unit.retain_grayscale(&input.rgb, 64, 64);
+        let mut mark = unit.clone();
+        mark.symbol_id = "mark".into();
+        mark.bbox_px = [19.0, 25.0, 20.0, 26.0];
+        mark.crop_w = 1;
+        mark.crop_h = 1;
+        mark.mask = vec![true];
+        let plan = OwnershipPlan {
+            owned: vec![crate::ownership::OwnedUnit {
+                unit,
+                components: vec![],
+                slots: vec![],
+                suspect: false,
+            }],
+            artwork_units: vec![(mark, vec![])],
+            ..Default::default()
+        };
+        let ids = ["bar".to_string()].into_iter().collect();
+        let (clean, core, fringe) =
+            clean_replaced_text(&input, &plan, &ids, &ids, &Default::default(), 300.0, paper);
+        assert_eq!(core, 48);
+        assert_eq!(
+            fringe, 0,
+            "a locally traced glyph cannot validate fringe deletion using itself"
+        );
+        assert_eq!(
+            &clean[(22 * 64 + 19) * 3..(22 * 64 + 19) * 3 + 3],
+            &input.rgb[(22 * 64 + 19) * 3..(22 * 64 + 19) * 3 + 3]
+        );
+        assert_eq!(&clean[(22 * 64 + 21) * 3..(22 * 64 + 21) * 3 + 3], &paper);
+        assert_eq!(
+            &clean[(25 * 64 + 19) * 3..(25 * 64 + 19) * 3 + 3],
+            &input.rgb[(25 * 64 + 19) * 3..(25 * 64 + 19) * 3 + 3]
+        );
+        let empty = std::collections::BTreeSet::new();
+        let (unchanged, _, _) = clean_replaced_text(
+            &input,
+            &plan,
+            &empty,
+            &empty,
+            &Default::default(),
+            300.0,
+            paper,
+        );
+        assert_eq!(
+            unchanged, input.rgb,
+            "no emitted vector must mean no suppression"
+        );
+        let mut overlap = input.clone();
+        overlap.protected_regions.push(ProtectedInput {
+            id: "overlap".into(),
+            polygon: vec![[20.0, 20.0], [22.0, 20.0], [22.0, 22.0], [20.0, 22.0]],
+            reason: "unknown".into(),
+        });
+        let (kept, _, _) = clean_replaced_text(
+            &overlap,
+            &plan,
+            &ids,
+            &ids,
+            &Default::default(),
+            300.0,
+            paper,
+        );
+        assert_eq!(
+            &kept[(20 * 64 + 20) * 3..(20 * 64 + 20) * 3 + 3],
+            &input.rgb[(20 * 64 + 20) * 3..(20 * 64 + 20) * 3 + 3]
+        );
+        // An independent intact donor supports a bright source dropout inside
+        // the stroke. A disconnected counter/neighbor sample has no such ink
+        // support and must not become an erasure rectangle.
+        let mut faded = input.clone();
+        let mut faded_plan = plan.clone();
+        let hole = 5 * 4 + 1;
+        faded_plan.owned[0].unit.mask[hole] = false;
+        for c in 0..3 {
+            faded.rgb[(25 * 64 + 21) * 3 + c] = paper[c] - 20;
+        }
+        let mut reconstruction = crate::visual_dict::Reconstruction::default();
+        reconstruction
+            .prototype_units
+            .insert("donor".into(), plan.owned[0].unit.clone());
+        reconstruction
+            .occurrences
+            .push(crate::visual_dict::GlyphOccurrence {
+                symbol_id: "bar".into(),
+                text: "I".into(),
+                source_shape_key: "source".into(),
+                prototype_id: Some("prototype:donor".into()),
+                similarity: Some(0.99),
+                source_mask_iou: None,
+                replacement_bbox_px: Some([20.0, 20.0, 24.0, 32.0]),
+                prototype_trace_iou: None,
+                repaired: true,
+                reused: false,
+                restoration_evidence_passed: true,
+                decision: "test".into(),
+            });
+        let (filled, _, _) = clean_replaced_text(
+            &faded,
+            &faded_plan,
+            &ids,
+            &ids,
+            &reconstruction,
+            300.0,
+            paper,
+        );
+        assert_eq!(&filled[(25 * 64 + 21) * 3..(25 * 64 + 21) * 3 + 3], &paper);
+        faded.protected_regions.push(ProtectedInput {
+            id: "faint crossing mark".into(),
+            polygon: vec![[21.0, 25.0], [22.0, 25.0], [22.0, 26.0], [21.0, 26.0]],
+            reason: "unknown".into(),
+        });
+        let (retained, _, _) = clean_replaced_text(
+            &faded,
+            &faded_plan,
+            &ids,
+            &ids,
+            &reconstruction,
+            300.0,
+            paper,
+        );
+        assert_eq!(
+            &retained[(25 * 64 + 21) * 3..(25 * 64 + 21) * 3 + 3],
+            &faded.rgb[(25 * 64 + 21) * 3..(25 * 64 + 21) * 3 + 3]
+        );
+    }
+
+    #[test]
+    fn compact_paper_reduction_is_bounded_and_does_not_whiten_colour() {
+        let make = |rgb| Patch {
+            compact_background: true,
+            bbox_px: [0.0, 0.0, 128.0, 128.0],
+            rgb,
+            w: 64,
+            h: 64,
+        };
+        let tone = [230u8, 210, 180];
+        let (reduced, exceptions) =
+            compact_paper_background(make(tone.repeat(64 * 64)), 128, 128, &[]);
+        assert!(exceptions.is_empty());
+        assert_eq!((reduced.w, reduced.h), (32, 32));
+        assert!(reduced.rgb.chunks_exact(3).all(|p| p == tone));
+        let mut detail = tone.repeat(64 * 64);
+        for y in 8..56 {
+            detail[(y * 64 + 23) * 3..(y * 64 + 23) * 3 + 3].fill(180);
+        }
+        let original = make(detail.clone());
+        let (kept, _) = compact_paper_background(original, 128, 128, &[]);
+        assert_eq!((kept.w, kept.h), (64, 64));
+        assert_eq!(kept.rgb, detail);
+    }
+    #[test]
+    fn paper_sampling_guard_matches_bounded_neighbourhoods() {
+        let (w, h) = (7usize, 5usize);
+        let mut ink = vec![false; w * h];
+        ink[0] = true;
+        ink[3 * w + 4] = true;
+        let mut protected = vec![false; w * h];
+        protected[2 * w + 3] = true;
+        for r in [0usize, 1, 3, 12] {
+            let guard = dilated_ink_guard(&ink, &protected, w, h, 1, r);
+            for y in 0..h {
+                for x in 0..w {
+                    let expected = (0..h).any(|yy| {
+                        (0..w).any(|xx| {
+                            (ink[yy * w + xx] && x.abs_diff(xx) <= 1 && y.abs_diff(yy) <= 1)
+                                || (protected[yy * w + xx]
+                                    && x.abs_diff(xx) <= r
+                                    && y.abs_diff(yy) <= r)
+                        })
+                    });
+                    assert_eq!(guard[y * w + x], expected, "at {x},{y} radius {r}");
+                }
+            }
+        }
     }
 }
