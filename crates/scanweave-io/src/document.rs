@@ -574,3 +574,93 @@ pub fn convert_document(
         },
     })
 }
+
+#[cfg(test)]
+mod semantic_owner_union_tests {
+    use super::*;
+    use crate::convert::{convert_parts, SpanInput, SymbolInput};
+
+    #[test]
+    fn hidden_and_visible_same_unicode_keep_separate_cids_across_pages() {
+        let poly = |b: [f64; 4]| vec![[b[0], b[1]], [b[2], b[1]], [b[2], b[3]], [b[0], b[3]]];
+        let mut rgb = vec![255; 64 * 48 * 3];
+        for y in 10..30 {
+            for x in 20..30 {
+                rgb[(y * 64 + x) * 3..(y * 64 + x) * 3 + 3].fill(0);
+            }
+        }
+        let input = Input {
+            rgb,
+            width: 64,
+            height: 48,
+            page_id: "owner-a".into(),
+            spans: vec![SpanInput {
+                id: "word".into(),
+                text: "ééé".into(),
+                separator_after: "".into(),
+                polygon: poly([4., 8., 47., 32.]),
+                symbols: vec![
+                    SymbolInput {
+                        id: "left".into(),
+                        range: (0, 2),
+                        polygon: poly([5., 10., 15., 30.]),
+                    },
+                    SymbolInput {
+                        id: "middle".into(),
+                        range: (2, 4),
+                        polygon: poly([20., 10., 30., 30.]),
+                    },
+                    SymbolInput {
+                        id: "right".into(),
+                        range: (4, 6),
+                        polygon: poly([35., 10., 45., 30.]),
+                    },
+                ],
+            }],
+            protected_regions: vec![],
+            raster_to_page_pt: [0.24, 0., 0., -0.24, 0., 11.52],
+            pixel_sha256: None,
+        };
+        let policy = Policy {
+            profile: "clearscan".into(),
+            ..Policy::default()
+        };
+        let mut pages = Vec::new();
+        for n in 0..2 {
+            let mut input = input.clone();
+            input.page_id = format!("owner-{n}");
+            let (parts, report) = convert_parts(&input, &policy).unwrap();
+            assert_eq!(parts.occurrences.len(), 1);
+            let visible_shape = parts.occurrences[0].0;
+            let owner = parts.owners.iter().find(|o| o.span_id == "word").unwrap();
+            assert_eq!(owner.characters.len(), 2);
+            for ch in &owner.characters {
+                let (shape, text) = &parts.encodings[ch.cid as usize - 1];
+                assert_eq!(text, "é");
+                assert_ne!(*shape, visible_shape);
+                assert_eq!(parts.shapes[*shape].shape_key, "__semantic_owner_frame");
+            }
+            pages.push(DocumentPage { parts, report });
+        }
+        let (shapes, encodings, remaps) = union_encodings(&pages);
+        assert_eq!(
+            shapes
+                .iter()
+                .filter(|g| g.shape_key == "__semantic_owner_frame")
+                .count(),
+            1
+        );
+        for (page, remap) in pages.iter_mut().zip(&remaps) {
+            apply_remap(page, remap);
+            let visible_shape = page.parts.occurrences[0].0;
+            for owner in &page.parts.owners {
+                for ch in &owner.characters {
+                    let (shape, text) = &encodings[ch.cid as usize - 1];
+                    assert_eq!(text, "é");
+                    assert_ne!(*shape, visible_shape);
+                    assert_eq!(shapes[*shape].shape_key, "__semantic_owner_frame");
+                }
+            }
+        }
+    }
+}

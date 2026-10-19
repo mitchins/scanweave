@@ -172,8 +172,8 @@ fn local_fit_preserves_the_existing_source_gate() {
 fn invisible_owner_frame_is_independent_of_reconstructed_contours() {
     let owner = crate::glyphs::semantic_owner_shape();
     assert_eq!(owner.shape_key, "__semantic_owner_frame");
-    assert_eq!(owner.bbox_fu, [4., 4., 200., 200.]);
-    assert_eq!(owner.ink_span_fu, [196., 196.]);
+    assert_eq!(owner.bbox_fu, [0., 0., 1022., 2048.]);
+    assert_eq!(owner.ink_span_fu, [1022., 2048.]);
     // Source glyph transformations must never be used to place this label.
     let mutated = offset_coverage_contour(&ring(), 0.15);
     let b = Budget::from_m0_policy();

@@ -288,20 +288,23 @@ fn _els(p: &BezPath) -> Vec<PathEl> {
 /// must not depend on the first reconstructed glyph or its contour refinement.
 /// It shares the existing embedded font and is never used for visible text.
 pub(crate) fn semantic_owner_shape() -> GlyphShape {
+    // Half-em advance and full-em height keep native extractors' global font
+    // ascent/line boxes commensurate with each OCR character box. A tiny
+    // placeholder fitted with a huge text matrix creates overlapping lines.
     let mut path = BezPath::new();
-    path.move_to((4., 4.));
-    path.line_to((4., 200.));
-    path.line_to((200., 200.));
-    path.line_to((200., 4.));
+    path.move_to((0., 0.));
+    path.line_to((0., 2048.));
+    path.line_to((1022., 2048.));
+    path.line_to((1022., 0.));
     path.close_path();
     GlyphShape {
         shape_key: "__semantic_owner_frame".into(),
         path,
         num_contours: 1,
         num_points: 4,
-        bbox_fu: [4., 4., 200., 200.],
-        ink_span_fu: [196., 196.],
-        anchor_bbox_fu: [4., 4., 200., 200.],
+        bbox_fu: [0., 0., 1022., 2048.],
+        ink_span_fu: [1022., 2048.],
+        anchor_bbox_fu: [0., 0., 1022., 2048.],
         stages: crate::units::StageMetrics {
             trace_max_px: 0.,
             trace_p95_px: 0.,
