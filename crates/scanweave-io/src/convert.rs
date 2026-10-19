@@ -1246,21 +1246,25 @@ pub(crate) fn convert_parts_with_document_donors(
     } else {
         std::collections::BTreeSet::new()
     };
-    let (clearscan_rgb, raster_ink_pixels_suppressed, antialias_fringe_pixels_suppressed) =
-        if policy.profile == "clearscan" {
-            let (rgb, ink_count, fringe_count) = clean_replaced_text(
-                input,
-                &plan,
-                &vector_owned_symbols,
-                &vector_owned_symbols,
-                &reconstruction,
-                policy.dpi,
-                seg.paper,
-            );
-            (Some(rgb), ink_count, fringe_count)
-        } else {
-            (None, 0, 0)
-        };
+    let (
+        clearscan_rgb,
+        raster_ink_pixels_suppressed,
+        antialias_fringe_pixels_suppressed,
+        weak_rules,
+    ) = if policy.profile == "clearscan" {
+        let (rgb, ink_count, fringe_count, weak_rules) = clean_replaced_text(
+            input,
+            &plan,
+            &vector_owned_symbols,
+            &vector_owned_symbols,
+            &reconstruction,
+            policy.dpi,
+            seg.paper,
+        );
+        (Some(rgb), ink_count, fringe_count, weak_rules)
+    } else {
+        (None, 0, 0, Vec::new())
+    };
 
     // The compact page background sits below native-resolution fallback
     // patches. Remove every recognized text mask from that low-resolution
@@ -1361,6 +1365,12 @@ pub(crate) fn convert_parts_with_document_donors(
                 protected,
             ));
         }
+    }
+
+    // Coherent weak marks are native content even if OCR/segmentation missed
+    // them. Copy the cleaned source so their strip cannot repaint vector ink.
+    for bbox in weak_rules {
+        patches.push(patch_from_rgb(patch_source, w as usize, h as usize, bbox));
     }
 
     // coalesce: merge overlapping or exactly-adjacent patches (the artwork
@@ -1925,12 +1935,12 @@ fn clean_replaced_text(
     reconstruction: &crate::visual_dict::Reconstruction,
     dpi: f64,
     fallback_paper: [u8; 3],
-) -> (Vec<u8>, usize, usize) {
+) -> (Vec<u8>, usize, usize, Vec<[f64; 4]>) {
     let mut rgb = input.rgb.clone();
     let w = input.width as usize;
     let h = input.height as usize;
     if rgb.len() != w.saturating_mul(h).saturating_mul(3) {
-        return (rgb, 0, 0);
+        return (rgb, 0, 0, Vec::new());
     }
     let mut protected = vec![false; w * h];
     let mut vector_ink = vec![false; w * h];
@@ -2002,6 +2012,15 @@ fn clean_replaced_text(
             }
         }
     }
+    let weak_rules = protect_weak_rules(
+        &input.rgb,
+        w,
+        h,
+        dpi,
+        fallback_paper,
+        &vector_ink,
+        &mut protected,
+    );
     let mut erase: Vec<bool> = vector_ink
         .iter()
         .zip(&protected)
@@ -2158,7 +2177,29 @@ fn clean_replaced_text(
                     // Unlike a neighbourhood maximum, the registered donor
                     // centre must itself support this interior classification.
                     let supported_interior = expected >= 0.75 && (0.005..=0.50).contains(&observed);
-                    if edge_agreement || supported_interior {
+                    // Registration and differing scanner phases leave a
+                    // half-source-pixel edge uncertainty. Require corroboration
+                    // at three subpixel donor positions, never the target halo
+                    // itself or a single darkest neighbouring source sample.
+                    let mut support = 0;
+                    if (0.005..=0.50).contains(&observed) {
+                        for dy in [-0.5, 0.0, 0.5] {
+                            for dx in [-0.5, 0.0, 0.5] {
+                                let coverage = donor_edge_coverage(
+                                    donor,
+                                    target,
+                                    nx as f64 + 0.5 + shift.0 + dx,
+                                    ny as f64 + 0.5 + shift.1 + dy,
+                                    dark,
+                                    light,
+                                );
+                                if coverage >= 0.05 && coverage >= observed - 0.08 {
+                                    support += 1;
+                                }
+                            }
+                        }
+                    }
+                    if edge_agreement || supported_interior || support >= 3 {
                         erase[at] = true;
                     }
                 }
@@ -2233,7 +2274,88 @@ fn clean_replaced_text(
         rgb,
         raster_ink_pixels_suppressed,
         antialias_fringe_pixels_suppressed,
+        weak_rules,
     )
+}
+
+/// Preserve coherent faint rules independently of OCR segmentation. Weak
+/// ridge segments can connect through dark glyph cores, but only weak samples
+/// gain protection. Return native strips so reduction cannot attenuate them.
+fn protect_weak_rules(
+    rgb: &[u8],
+    w: usize,
+    h: usize,
+    dpi: f64,
+    paper: [u8; 3],
+    ink: &[bool],
+    protected: &mut [bool],
+) -> Vec<[f64; 4]> {
+    let scale = (dpi / 300.0).round().max(1.0) as usize;
+    let offset = 2 * scale;
+    let minimum = 8 * scale;
+    let light = paper.iter().map(|&v| v as u16).sum::<u16>() / 3;
+    let lum: Vec<u16> = rgb
+        .chunks_exact(3)
+        .map(|p| (p[0] as u16 + p[1] as u16 + p[2] as u16) / 3)
+        .collect();
+    let weak = |at: usize| lum[at] >= light.saturating_sub(32) && lum[at] + 3 <= light;
+    let mut boxes = Vec::new();
+    for y in offset..h.saturating_sub(offset) {
+        let mut start = None;
+        let mut support = 0;
+        for x in 0..=w {
+            let connected = x < w && (ink[y * w + x] || weak(y * w + x));
+            if connected {
+                if start.is_none() {
+                    start = Some(x);
+                }
+                if weak(y * w + x)
+                    && lum[y * w + x] + 3
+                        <= (lum[(y - offset) * w + x] + lum[(y + offset) * w + x]) / 2
+                {
+                    support += 1;
+                }
+            } else if let Some(left) = start.take() {
+                if support >= minimum {
+                    for xx in left..x {
+                        if weak(y * w + xx) {
+                            protected[y * w + xx] = true;
+                        }
+                    }
+                    boxes.push([left as f64, y as f64, x as f64, (y + 1) as f64]);
+                }
+                support = 0;
+            }
+        }
+    }
+    for x in offset..w.saturating_sub(offset) {
+        let mut start = None;
+        let mut support = 0;
+        for y in 0..=h {
+            let connected = y < h && (ink[y * w + x] || weak(y * w + x));
+            if connected {
+                if start.is_none() {
+                    start = Some(y);
+                }
+                if weak(y * w + x)
+                    && lum[y * w + x] + 3 <= (lum[y * w + x - offset] + lum[y * w + x + offset]) / 2
+                {
+                    support += 1;
+                }
+            } else if let Some(top) = start.take() {
+                if support >= minimum {
+                    for yy in top..y {
+                        if weak(yy * w + x) {
+                            protected[yy * w + x] = true;
+                        }
+                    }
+                    boxes.push([x as f64, top as f64, (x + 1) as f64, y as f64]);
+                }
+                support = 0;
+            }
+        }
+    }
+    boxes
 }
 
 /// Bilinear grayscale coverage in a donor's pixel-centre frame, including
@@ -2970,7 +3092,7 @@ mod contour_coverage_tests {
             ..Default::default()
         };
         let ids = ["bar".to_string()].into_iter().collect();
-        let (clean, core, fringe) =
+        let (clean, core, fringe, _) =
             clean_replaced_text(&input, &plan, &ids, &ids, &Default::default(), 300.0, paper);
         assert_eq!(core, 48);
         assert_eq!(
@@ -2987,7 +3109,7 @@ mod contour_coverage_tests {
             &input.rgb[(25 * 64 + 19) * 3..(25 * 64 + 19) * 3 + 3]
         );
         let empty = std::collections::BTreeSet::new();
-        let (unchanged, _, _) = clean_replaced_text(
+        let (unchanged, _, _, _) = clean_replaced_text(
             &input,
             &plan,
             &empty,
@@ -3006,7 +3128,7 @@ mod contour_coverage_tests {
             polygon: vec![[20.0, 20.0], [22.0, 20.0], [22.0, 22.0], [20.0, 22.0]],
             reason: "unknown".into(),
         });
-        let (kept, _, _) = clean_replaced_text(
+        let (kept, _, _, _) = clean_replaced_text(
             &overlap,
             &plan,
             &ids,
@@ -3049,7 +3171,7 @@ mod contour_coverage_tests {
                 restoration_evidence_passed: true,
                 decision: "test".into(),
             });
-        let (filled, _, _) = clean_replaced_text(
+        let (filled, _, _, _) = clean_replaced_text(
             &faded,
             &faded_plan,
             &ids,
@@ -3064,7 +3186,7 @@ mod contour_coverage_tests {
             polygon: vec![[21.0, 25.0], [22.0, 25.0], [22.0, 26.0], [21.0, 26.0]],
             reason: "unknown".into(),
         });
-        let (retained, _, _) = clean_replaced_text(
+        let (retained, _, _, _) = clean_replaced_text(
             &faded,
             &faded_plan,
             &ids,
@@ -3127,5 +3249,70 @@ mod contour_coverage_tests {
                 }
             }
         }
+    }
+    #[test]
+    fn weak_crossing_rule_survives_without_retaining_dark_glyph_cores() {
+        for scale in [1usize, 2] {
+            let (w, h) = (64 * scale, 48 * scale);
+            let mut rgb = vec![250u8; w * h * 3];
+            let mut ink = vec![false; w * h];
+            for y in 15 * scale..35 * scale {
+                for x in 24 * scale..28 * scale {
+                    rgb[(y * w + x) * 3..(y * w + x) * 3 + 3].fill(15);
+                    ink[y * w + x] = true;
+                }
+            }
+            for y in 25 * scale..26 * scale {
+                for x in 4 * scale..50 * scale {
+                    if !ink[y * w + x] {
+                        rgb[(y * w + x) * 3..(y * w + x) * 3 + 3].fill(244);
+                    }
+                }
+            }
+            rgb[(12 * scale * w + 52 * scale) * 3..(12 * scale * w + 52 * scale) * 3 + 3].fill(244);
+            let mut protected = vec![false; w * h];
+            protect_weak_rules(
+                &rgb,
+                w,
+                h,
+                300.0 * scale as f64,
+                [250; 3],
+                &ink,
+                &mut protected,
+            );
+            for y in 25 * scale..26 * scale {
+                for x in 4 * scale..50 * scale {
+                    assert_eq!(
+                        protected[y * w + x],
+                        !ink[y * w + x],
+                        "rule at {x},{y}, scale {scale}"
+                    );
+                }
+            }
+            assert!(
+                !protected[12 * scale * w + 52 * scale],
+                "isolated sample is not a coherent rule"
+            );
+        }
+    }
+    #[test]
+    fn weak_vertical_rule_requires_physical_support() {
+        let (w, h) = (24usize, 24usize);
+        let mut rgb = vec![250u8; w * h * 3];
+        for y in 2..22 {
+            rgb[(y * w + 10) * 3..(y * w + 10) * 3 + 3].fill(244);
+        }
+        let ink = vec![false; w * h];
+        let mut kept = vec![false; w * h];
+        let boxes = protect_weak_rules(&rgb, w, h, 300.0, [250; 3], &ink, &mut kept);
+        assert_eq!(boxes, vec![[10.0, 2.0, 11.0, 22.0]]);
+        assert_eq!(kept.iter().filter(|&&b| b).count(), 20);
+        let mut short = vec![250u8; w * h * 3];
+        for y in 3..10 {
+            short[(y * w + 10) * 3..(y * w + 10) * 3 + 3].fill(244);
+        }
+        let mut untouched = vec![false; w * h];
+        assert!(protect_weak_rules(&short, w, h, 300.0, [250; 3], &ink, &mut untouched).is_empty());
+        assert!(untouched.iter().all(|&b| !b));
     }
 }
