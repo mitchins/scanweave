@@ -964,10 +964,9 @@ pub(crate) fn convert_parts_with_document_donors(
             .is_some_and(|b| !b.iter().all(|v| v.is_finite()) || b[2] <= b[0] || b[3] <= b[1]);
         let insufficient_donor = policy.profile == "clearscan"
             && donor.is_some_and(|u| {
-                u.semantic_text.chars().any(char::is_alphanumeric)
-                    && (u.crop_h < 4
-                        || u.mask.iter().filter(|&&b| b).count() < 6
-                        || (u.crop_h as f64) < (u.ocr_bbox_px[3] - u.ocr_bbox_px[1]) * 0.3)
+                u.crop_h < 4
+                    || u.mask.iter().filter(|&&b| b).count() < 6
+                    || (u.crop_h as f64) < (u.ocr_bbox_px[3] - u.ocr_bbox_px[1]) * 0.3
             });
         if traced_iou.is_none_or(|iou| iou < 0.90)
             || source_gate_failed
@@ -1076,6 +1075,19 @@ pub(crate) fn convert_parts_with_document_donors(
                         || reconstruction.reused_symbols.contains(&sid)
                     {
                         return None;
+                    }
+                    let u = &plan.owned[ui].unit;
+                    if policy.profile == "clearscan"
+                        && (u.crop_h < 4
+                            || u.mask.iter().filter(|&&b| b).count() < 6
+                            || (u.crop_h as f64) < (u.ocr_bbox_px[3] - u.ocr_bbox_px[1]) * 0.3)
+                    {
+                        // A source speck can match its own mask perfectly but
+                        // cannot support a readable character-sized vector.
+                        // Preserve it natively and use the original OCR box for
+                        // its invisible label; a qualified healthy donor above
+                        // can still repair a genuinely damaged observation.
+                        return Some(0.0);
                     }
                     measured.iter().find(|(k, _)| *k == sid).map(|(_, v)| *v)
                 })
@@ -2484,5 +2496,48 @@ mod contour_coverage_tests {
             vec![0, 3]
         );
         assert_eq!(owner.visible_order.get("eacute"), Some(&1));
+    }
+
+    #[test]
+    fn a_source_speck_is_not_a_character_sized_vector() {
+        let mut rgb = vec![255u8; 64 * 48 * 3];
+        rgb[(20 * 64 + 25) * 3..(20 * 64 + 25) * 3 + 3].fill(0);
+        let polygon = vec![[20.0, 10.0], [30.0, 10.0], [30.0, 35.0], [20.0, 35.0]];
+        let input = Input {
+            rgb,
+            width: 64,
+            height: 48,
+            page_id: "micro".into(),
+            spans: vec![SpanInput {
+                id: "f".into(),
+                text: "f".into(),
+                separator_after: "".into(),
+                polygon: polygon.clone(),
+                symbols: vec![SymbolInput {
+                    id: "f-char".into(),
+                    range: (0, 1),
+                    polygon,
+                }],
+            }],
+            protected_regions: vec![],
+            raster_to_page_pt: [0.24, 0.0, 0.0, -0.24, 0.0, 11.52],
+            pixel_sha256: None,
+        };
+        let (parts, report) = convert_parts(
+            &input,
+            &Policy {
+                profile: "clearscan".into(),
+                ..Policy::default()
+            },
+        )
+        .unwrap();
+        assert!(parts.occurrences.is_empty());
+        assert_eq!(parts.owners[0].characters.len(), 1);
+        assert_eq!(report.raster_ink_pixels_suppressed, 0);
+        assert!(parts.patches.iter().any(|p| !p.compact_background
+            && p.bbox_px[0] <= 25.0
+            && p.bbox_px[2] > 25.0
+            && p.bbox_px[1] <= 20.0
+            && p.bbox_px[3] > 20.0));
     }
 }
