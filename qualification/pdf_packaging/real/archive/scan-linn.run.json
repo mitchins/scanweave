@@ -1,0 +1,22 @@
+{
+  "id": "scan-linn",
+  "arm": "archive",
+  "command": [
+    "/tmp/scanweave-competitive-venv/bin/recode_pdf",
+    "-P",
+    "/data/coding/scanweave/qualification/pdf_packaging/real/input/scan-linn.pdf",
+    "-T",
+    "/data/coding/scanweave/qualification/pdf_packaging/real/archive/scan-linn.hocr",
+    "-o",
+    "/data/coding/scanweave/qualification/pdf_packaging/real/archive/scan-linn.pdf",
+    "--mask-compression",
+    "ccitt",
+    "--threads",
+    "1"
+  ],
+  "seconds": 5.166486912989058,
+  "status": 0,
+  "error": null,
+  "ocr_status": 0,
+  "pdf_bytes": 261030
+}

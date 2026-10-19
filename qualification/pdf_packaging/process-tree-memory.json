@@ -1,0 +1,22 @@
+{
+  "command": [
+    "/data/coding/scanweave/target/release/scanweave",
+    "/data/coding/scanweave/qualification/pdf_packaging/real/receipt-three-pages.pdf",
+    "/data/coding/scanweave/qualification/pdf_packaging/real/receipt-three-pages-tree.pdf"
+  ],
+  "pages": 3,
+  "seconds": 10.189153843995882,
+  "status": 0,
+  "sample_interval_seconds": 0.05,
+  "sample_count": 198,
+  "peak_summed_rss_kib": 76480,
+  "peak_members": [
+    {
+      "pid": 1319421,
+      "name": "scanweave",
+      "rss_kib": 76480
+    }
+  ],
+  "pixel_and_byte_identical_to_previous": true,
+  "scope": "sampled sum of CLI and all descendants RSS; shared pages counted per process; not PSS"
+}

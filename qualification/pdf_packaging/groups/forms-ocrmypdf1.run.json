@@ -1,0 +1,18 @@
+{
+  "group": "forms",
+  "arm": "ocrmypdf1",
+  "command": [
+    "/tmp/scanweave-competitive-venv/bin/ocrmypdf",
+    "--jobs",
+    "1",
+    "--output-type",
+    "pdf",
+    "-O1",
+    "/data/coding/scanweave/qualification/pdf_packaging/groups/forms-input.pdf",
+    "/data/coding/scanweave/qualification/pdf_packaging/groups/forms-ocrmypdf1.pdf"
+  ],
+  "status": 0,
+  "error": null,
+  "seconds": 7.66419505799422,
+  "pdf_bytes": 1319579
+}

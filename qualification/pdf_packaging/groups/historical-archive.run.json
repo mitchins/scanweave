@@ -1,0 +1,21 @@
+{
+  "group": "historical",
+  "arm": "archive",
+  "command": [
+    "/tmp/scanweave-competitive-venv/bin/recode_pdf",
+    "-P",
+    "/data/coding/scanweave/qualification/pdf_packaging/groups/historical-input.pdf",
+    "-T",
+    "/data/coding/scanweave/qualification/pdf_packaging/groups/historical.hocr",
+    "-o",
+    "/data/coding/scanweave/qualification/pdf_packaging/groups/historical-archive.pdf",
+    "--mask-compression",
+    "ccitt",
+    "--threads",
+    "1"
+  ],
+  "status": 0,
+  "seconds": 17.604078325006412,
+  "timing_scope": "recode only; uses separately recorded Tesseract preparation",
+  "pdf_bytes": 616324
+}

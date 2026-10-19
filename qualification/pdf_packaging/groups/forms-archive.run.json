@@ -1,0 +1,21 @@
+{
+  "group": "forms",
+  "arm": "archive",
+  "command": [
+    "/tmp/scanweave-competitive-venv/bin/recode_pdf",
+    "-P",
+    "/data/coding/scanweave/qualification/pdf_packaging/groups/forms-input.pdf",
+    "-T",
+    "/data/coding/scanweave/qualification/pdf_packaging/groups/forms.hocr",
+    "-o",
+    "/data/coding/scanweave/qualification/pdf_packaging/groups/forms-archive.pdf",
+    "--mask-compression",
+    "ccitt",
+    "--threads",
+    "1"
+  ],
+  "status": 0,
+  "seconds": 8.414751758013153,
+  "timing_scope": "recode only; uses separately recorded Tesseract preparation",
+  "pdf_bytes": 400384
+}

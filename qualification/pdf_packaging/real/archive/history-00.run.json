@@ -1,0 +1,22 @@
+{
+  "id": "history-00",
+  "arm": "archive",
+  "command": [
+    "/tmp/scanweave-competitive-venv/bin/recode_pdf",
+    "-P",
+    "/data/coding/scanweave/qualification/pdf_packaging/real/input/history-00.pdf",
+    "-T",
+    "/data/coding/scanweave/qualification/pdf_packaging/real/archive/history-00.hocr",
+    "-o",
+    "/data/coding/scanweave/qualification/pdf_packaging/real/archive/history-00.pdf",
+    "--mask-compression",
+    "ccitt",
+    "--threads",
+    "1"
+  ],
+  "seconds": 4.162667323980713,
+  "status": 0,
+  "error": null,
+  "ocr_status": 0,
+  "pdf_bytes": 128772
+}

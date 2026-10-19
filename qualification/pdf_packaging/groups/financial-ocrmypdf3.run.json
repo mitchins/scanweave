@@ -1,0 +1,18 @@
+{
+  "group": "financial",
+  "arm": "ocrmypdf3",
+  "command": [
+    "/tmp/scanweave-competitive-venv/bin/ocrmypdf",
+    "--jobs",
+    "1",
+    "--output-type",
+    "pdf",
+    "-O3",
+    "/data/coding/scanweave/qualification/pdf_packaging/groups/financial-input.pdf",
+    "/data/coding/scanweave/qualification/pdf_packaging/groups/financial-ocrmypdf3.pdf"
+  ],
+  "status": 0,
+  "error": null,
+  "seconds": 43.92585251599667,
+  "pdf_bytes": 5166004
+}

@@ -1,0 +1,18 @@
+{
+  "group": "mixed",
+  "arm": "ocrmypdf1",
+  "command": [
+    "/tmp/scanweave-competitive-venv/bin/ocrmypdf",
+    "--jobs",
+    "1",
+    "--output-type",
+    "pdf",
+    "-O1",
+    "/data/coding/scanweave/qualification/pdf_packaging/groups/mixed-input.pdf",
+    "/data/coding/scanweave/qualification/pdf_packaging/groups/mixed-ocrmypdf1.pdf"
+  ],
+  "status": 0,
+  "error": null,
+  "seconds": 7.587766851007473,
+  "pdf_bytes": 4371276
+}

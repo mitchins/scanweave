@@ -1,0 +1,122 @@
+[
+  {
+    "id": "cord-00",
+    "psm": 3,
+    "word_spans": 0,
+    "hocr_sha256": "35cbb5da3031f28b98191afd3adbaaa186abf8ff17f69ece40f0e8fd53cbebf5",
+    "input": "direct decoded RGB of real/input/cord-00.pdf",
+    "command": [
+      "tesseract",
+      "input.png",
+      "stdout",
+      "--psm",
+      "3",
+      "--dpi",
+      "300",
+      "-c",
+      "hocr_char_boxes=1",
+      "hocr"
+    ],
+    "disposition": "diagnostic only; no PDF or integrated quality benefit claimed"
+  },
+  {
+    "id": "cord-00",
+    "psm": 11,
+    "word_spans": 1,
+    "hocr_sha256": "cb2b2bb620f58618d4399fabf6eedb71913b6a4c0b17ed55b9cf3b28986c1eae",
+    "input": "direct decoded RGB of real/input/cord-00.pdf",
+    "command": [
+      "tesseract",
+      "input.png",
+      "stdout",
+      "--psm",
+      "11",
+      "--dpi",
+      "300",
+      "-c",
+      "hocr_char_boxes=1",
+      "hocr"
+    ],
+    "disposition": "diagnostic only; no PDF or integrated quality benefit claimed"
+  },
+  {
+    "id": "cord-01",
+    "psm": 3,
+    "word_spans": 10,
+    "hocr_sha256": "aa194387eaa81f48a0a44ddc81211c8fc3785c716ce83e228cd5132530d07bbd",
+    "input": "direct decoded RGB of real/input/cord-01.pdf",
+    "command": [
+      "tesseract",
+      "input.png",
+      "stdout",
+      "--psm",
+      "3",
+      "--dpi",
+      "300",
+      "-c",
+      "hocr_char_boxes=1",
+      "hocr"
+    ],
+    "disposition": "diagnostic only; no PDF or integrated quality benefit claimed"
+  },
+  {
+    "id": "cord-01",
+    "psm": 11,
+    "word_spans": 73,
+    "hocr_sha256": "4694fe44929f97087d371c788d114bbf1ca5e84ffc5c074fad13e41b355dc61a",
+    "input": "direct decoded RGB of real/input/cord-01.pdf",
+    "command": [
+      "tesseract",
+      "input.png",
+      "stdout",
+      "--psm",
+      "11",
+      "--dpi",
+      "300",
+      "-c",
+      "hocr_char_boxes=1",
+      "hocr"
+    ],
+    "disposition": "diagnostic only; no PDF or integrated quality benefit claimed"
+  },
+  {
+    "id": "cord-03",
+    "psm": 3,
+    "word_spans": 18,
+    "hocr_sha256": "0c4a8264d13cab8ddf8f9a41eab973636becf2102480fbcab23092c8246125f9",
+    "input": "direct decoded RGB of real/input/cord-03.pdf",
+    "command": [
+      "tesseract",
+      "input.png",
+      "stdout",
+      "--psm",
+      "3",
+      "--dpi",
+      "300",
+      "-c",
+      "hocr_char_boxes=1",
+      "hocr"
+    ],
+    "disposition": "diagnostic only; no PDF or integrated quality benefit claimed"
+  },
+  {
+    "id": "cord-03",
+    "psm": 11,
+    "word_spans": 61,
+    "hocr_sha256": "a8a7e92750203a585f3a69f3e8b49ec0fdb822e84c13eb653360914484219858",
+    "input": "direct decoded RGB of real/input/cord-03.pdf",
+    "command": [
+      "tesseract",
+      "input.png",
+      "stdout",
+      "--psm",
+      "11",
+      "--dpi",
+      "300",
+      "-c",
+      "hocr_char_boxes=1",
+      "hocr"
+    ],
+    "disposition": "diagnostic only; no PDF or integrated quality benefit claimed"
+  }
+]

@@ -1,0 +1,20 @@
+   Compiling scanweave-cli v0.1.0 (/data/coding/scanweave/crates/scanweave-cli)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 1.80s
+     Running unittests src/main.rs (target/debug/deps/scanweave-c1471665d466e1da)
+
+running 3 tests
+test pdf_input::tests::validates_options_before_reading_input ... ok
+test pdf_input::tests::missing_dependency_has_install_hint ... ok
+test pdf_input::tests::report_cannot_overwrite_input ... ok
+
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running unittests src/legacy.rs (target/debug/deps/scanweave_cli-48c29cf0b6690c93)
+
+running 3 tests
+test pdf_input::tests::validates_options_before_reading_input ... ok
+test pdf_input::tests::missing_dependency_has_install_hint ... ok
+test pdf_input::tests::report_cannot_overwrite_input ... ok
+
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
