@@ -34,8 +34,6 @@ pub struct Unit {
     pub gray_samples: Option<Vec<u8>>,
     /// Two source pixels around the crop, for witnessed antialias ownership.
     pub gray_halo: Option<Vec<u8>>,
-    /// Source intensity used for the canonical contour (not ownership).
-    pub contour_threshold: Option<u8>,
 }
 
 impl Unit {
@@ -279,7 +277,6 @@ pub fn extract_units(seg: &Segmentation, w: u32, h: u32, page: &OcrPage) -> (Vec
                     mask,
                     gray_samples: None,
                     gray_halo: None,
-                    contour_threshold: None,
                 });
             }
         }
@@ -323,7 +320,6 @@ pub fn extract_units(seg: &Segmentation, w: u32, h: u32, page: &OcrPage) -> (Vec
             mask,
             gray_samples: None,
             gray_halo: None,
-            contour_threshold: None,
         });
     }
     units.extend(artwork_units);

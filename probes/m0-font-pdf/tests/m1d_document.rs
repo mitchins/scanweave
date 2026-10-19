@@ -130,10 +130,15 @@ fn run_document(dpi: u32) {
     assert_eq!(out.report.page_order.len(), 12);
     let first = &out.report.page_reports[0].reconstruction;
     let repaired: Vec<_> = first.occurrences.iter().filter(|o| o.repaired).collect();
+    // ClearScan uses the emitted anisotropic transform and true covered area.
+    // The old subrow hit-count gate accepted/rejected different repairs.
+    // Rendered 300 DPI proof: source 8 IoU .90975, repaired .96628;
+    // qualification/clearscan_competitive/m1d-regression/300-render-check.json.
+    // At 600 DPI a/8 remain unrepaired and their source outlines qualify.
     let expected = if dpi == 300 {
-        vec!["e", "a"]
-    } else {
         vec!["e", "a", "8"]
+    } else {
+        vec!["e"]
     };
     assert_eq!(repaired.iter().map(|o| o.text.as_str()).collect::<Vec<_>>(), expected,
         "only supported, visibly beneficial repairs should use sibling-page donors at {dpi} DPI: {repaired:?}");
@@ -143,13 +148,8 @@ fn run_document(dpi: u32) {
         .find(|o| o.symbol_id == "p00-s02")
         .unwrap();
     assert_eq!(
-        eight_owner.owner,
-        if dpi == 300 {
-            "invisible"
-        } else {
-            "visible_tounicode"
-        },
-        "a rejected 300-DPI repair must preserve its exact raster source"
+        eight_owner.owner, "visible_tounicode",
+        "both a qualified repair and a source-faithful unmodified outline own visible text"
     );
     assert!(repaired.iter().all(|o| o.similarity.unwrap_or(1.0) < 0.96));
     assert!(repaired.iter().all(|o| o.prototype_id.is_some()));
@@ -191,9 +191,13 @@ fn run_document(dpi: u32) {
         "OCR misrecognition cannot authorize a replacement"
     );
 
-    let evidence = PathBuf::from(env!("CARGO_MANIFEST_DIR")).join(format!(
-        "../../qualification/evidence/m1d_document/dpi{dpi}"
-    ));
+    let evidence = std::env::var_os("SCANWEAVE_M1D_EVIDENCE")
+        .map(PathBuf::from)
+        .unwrap_or_else(|| {
+            PathBuf::from(env!("CARGO_MANIFEST_DIR"))
+                .join("../../qualification/evidence/m1d_document")
+        })
+        .join(format!("dpi{dpi}"));
     std::fs::create_dir_all(&evidence).unwrap();
     std::fs::write(evidence.join("clearscan.pdf"), &out.pdf_bytes).unwrap();
     std::fs::write(evidence.join("faithful.pdf"), &faithful.pdf_bytes).unwrap();

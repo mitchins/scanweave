@@ -29,9 +29,10 @@ pub struct Patch {
     pub compact_background: bool,
 }
 
-/// Lossless raster serialization choices. Production assembly uses exact
+/// Native raster serialization choices. Assembly uses exact
 /// resource reuse and grayscale storage when the decoded RGB samples prove
-/// equal. The explicit switches also support reproducible ablation PDFs.
+/// equal. Reduced ClearScan backgrounds separately permit bounded-error JPEG.
+/// The explicit switches also support reproducible ablation PDFs.
 #[derive(Debug, Clone, Copy, serde::Serialize)]
 pub struct ImageEncodingOptions {
     pub reuse_identical: bool,

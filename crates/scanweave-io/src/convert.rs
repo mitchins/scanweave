@@ -1253,24 +1253,71 @@ pub(crate) fn convert_parts_with_document_donors(
     let patch_source = clearscan_rgb.as_deref().unwrap_or(&input.rgb);
     patches.extend(artwork_patches(patch_source, w as usize, h as usize, &plan));
 
+    // A reduced paper layer cannot preserve an unresolved faint mark at a
+    // replaced glyph's boundary. Retain that small neighbourhood natively,
+    // using the cleaned source so coalescing cannot resurrect replaced ink.
+    // This also avoids a blurred copy of any fringe that lacked donor support.
+    if policy.profile == "clearscan" {
+        let padding = if policy.dpi >= 450.0 { 4.0 } else { 2.0 };
+        for owned in &plan.owned {
+            if !vector_owned_symbols.contains(&owned.unit.symbol_id) {
+                continue;
+            }
+            let b = owned.unit.bbox_px;
+            patches.push(patch_from_rgb(
+                patch_source,
+                w as usize,
+                h as usize,
+                [
+                    b[0] - padding,
+                    b[1] - padding,
+                    b[2] + padding,
+                    b[3] + padding,
+                ],
+            ));
+        }
+        // Protection must work even when OCR finds no glyph in the polygon.
+        for protected in &input.protected_regions {
+            patches.push(patch_from_rgb(
+                patch_source,
+                w as usize,
+                h as usize,
+                span_bbox(&protected.polygon),
+            ));
+        }
+    }
+
     // coalesce: merge overlapping or exactly-adjacent patches (the artwork
     // buckets tile the page, so this collapses hundreds of 32x32 cells into a
     // few large rects). Merged patches copy the full source rect of the union,
     // so every emitted pixel stays byte-identical to the source.
-    // Coalescing rebuilds merged images from the unmodified source raster. Keep
-    // per-patch ownership when a vector replacement owns any source ink.
+    // ClearScan always rebuilds merged images from the cleaned source raster.
     let patches = if policy.profile == "clearscan" {
         let mut layers = coalesce_patches_rgb(patch_source, w as usize, h as usize, patches);
-        layers.insert(
-            0,
-            downsampled_background_patch(
-                clearscan_background.as_deref().unwrap_or(patch_source),
-                w,
-                h,
-                policy.dpi,
-            ),
+        let background = downsampled_background_patch(
+            clearscan_background.as_deref().unwrap_or(patch_source),
+            w,
+            h,
+            policy.dpi,
         );
-        layers
+        let detail = residual_detail_patches(patch_source, w, h, &background, &layers);
+        layers.extend(detail);
+        let mut layers = coalesce_patches_rgb(patch_source, w as usize, h as usize, layers);
+        let native_area: f64 = layers
+            .iter()
+            .map(|p| (p.bbox_px[2] - p.bbox_px[0]) * (p.bbox_px[3] - p.bbox_px[1]))
+            .sum();
+        if native_area > (w as f64 * h as f64) * 0.6 {
+            vec![patch_from_rgb(
+                patch_source,
+                w as usize,
+                h as usize,
+                [0.0, 0.0, w as f64, h as f64],
+            )]
+        } else {
+            layers.insert(0, background);
+            layers
+        }
     } else if vector_owned_symbols.is_empty() {
         coalesce_patches(input, patches)
     } else {
@@ -1679,7 +1726,8 @@ fn patch_from_rgb(source_rgb: &[u8], w: usize, h: usize, bb: [f64; 4]) -> Patch 
 
 /// Remove scan ink only where an emitted visible vector owns it. The exact
 /// segmentation mask is authoritative; a one- or two-pixel antialias fringe is
-/// also cleared unless another OCR/artwork mask protects that sample. Each
+/// cleared only with compatible donor grayscale support or a native fallback
+/// patch covering the sample. Other OCR/artwork masks protect their pixels. Each
 /// cleared sample receives a local median from unowned neighbours.
 fn clean_replaced_text(
     input: &Input,
@@ -1934,6 +1982,107 @@ fn downsampled_background_patch(source_rgb: &[u8], w: u32, h: u32, dpi: f64) -> 
     }
 }
 
+/// Preserve source detail that the reduced layer cannot represent. This is a
+/// conservative local residual check, not a foreground/meaning classifier.
+/// Existing native patches are excluded; returned tiles always use cleaned
+/// source samples. Dense residuals naturally coalesce to a native page.
+fn residual_detail_patches(
+    source: &[u8],
+    w: u32,
+    h: u32,
+    reduced: &Patch,
+    native: &[Patch],
+) -> Vec<Patch> {
+    let mut covered = vec![false; w as usize * h as usize];
+    for patch in native {
+        let [x0, y0, x1, y1] = patch.bbox_px;
+        for y in y0.max(0.0) as usize..(y1 as usize).min(h as usize) {
+            for x in x0.max(0.0) as usize..(x1 as usize).min(w as usize) {
+                covered[y * w as usize + x] = true;
+            }
+        }
+    }
+    let small = image::RgbImage::from_raw(reduced.w, reduced.h, reduced.rgb.clone()).unwrap();
+    let restored = image::imageops::resize(&small, w, h, image::imageops::FilterType::Lanczos3);
+    let samples = restored.as_raw();
+    let mut out = Vec::new();
+    for y0 in (0..h as usize).step_by(32) {
+        for x0 in (0..w as usize).step_by(32) {
+            let x1 = (x0 + 32).min(w as usize);
+            let y1 = (y0 + 32).min(h as usize);
+            let tw = x1 - x0;
+            let th = y1 - y0;
+            let mut residual = vec![false; tw * th];
+            for y in y0..y1 {
+                for x in x0..x1 {
+                    let i = y * w as usize + x;
+                    residual[(y - y0) * tw + x - x0] = !covered[i]
+                        && (0..3)
+                            .any(|c| samples[3 * i + c].saturating_sub(source[3 * i + c]) >= 2);
+                }
+            }
+            // Preserve long thin residual ridges. Paper grain can form broad
+            // connected regions, so connectivity alone is insufficient.
+            let luma = |x: usize, y: usize| -> u16 {
+                let i = (y * w as usize + x) * 3;
+                (source[i] as u16 + source[i + 1] as u16 + source[i + 2] as u16) / 3
+            };
+            let mut preserve = false;
+            for y in y0..y1 {
+                let mut run = 0;
+                for x in x0..x1 {
+                    let ridge = y >= 2
+                        && y + 2 < h as usize
+                        && luma(x, y) + 3 <= (luma(x, y - 2) + luma(x, y + 2)) / 2;
+                    run = if residual[(y - y0) * tw + x - x0] && ridge {
+                        run + 1
+                    } else {
+                        0
+                    };
+                    if run >= 8 {
+                        preserve = true;
+                        break;
+                    }
+                }
+                if preserve {
+                    break;
+                }
+            }
+            if !preserve {
+                for x in x0..x1 {
+                    let mut run = 0;
+                    for y in y0..y1 {
+                        let ridge = x >= 2
+                            && x + 2 < w as usize
+                            && luma(x, y) + 3 <= (luma(x - 2, y) + luma(x + 2, y)) / 2;
+                        run = if residual[(y - y0) * tw + x - x0] && ridge {
+                            run + 1
+                        } else {
+                            0
+                        };
+                        if run >= 8 {
+                            preserve = true;
+                            break;
+                        }
+                    }
+                    if preserve {
+                        break;
+                    }
+                }
+            }
+            if preserve {
+                out.push(patch_from_rgb(
+                    source,
+                    w as usize,
+                    h as usize,
+                    [x0 as f64, y0 as f64, x1 as f64, y1 as f64],
+                ));
+            }
+        }
+    }
+    out
+}
+
 fn artwork_patches(source_rgb: &[u8], w: usize, h: usize, plan: &OwnershipPlan) -> Vec<Patch> {
     const CELL: usize = 32;
     let mut cells: std::collections::BTreeMap<(usize, usize), Vec<(usize, usize)>> =
@@ -2086,5 +2235,69 @@ mod contour_coverage_tests {
             reconstructed_glyph_ink_iou(&shape, 3, 1, &[false, true, false]),
             1.0
         );
+    }
+
+    #[test]
+    fn compact_background_retains_a_faint_unowned_line_natively() {
+        let (w, h) = (64u32, 64u32);
+        let mut rgb = vec![250u8; (w * h * 3) as usize];
+        for y in 9..25 {
+            for c in 0..3 {
+                rgb[(y * 64 + 17) * 3 + c] = 244;
+            }
+        }
+        let background = downsampled_background_patch(&rgb, w, h, 600.0);
+        let patches = residual_detail_patches(&rgb, w, h, &background, &[]);
+        assert!(patches.iter().any(|p| p.bbox_px[0] <= 17.0
+            && p.bbox_px[2] > 17.0
+            && p.bbox_px[1] <= 9.0
+            && p.bbox_px[3] >= 25.0));
+        // Samples inside a retained tile are source exact, not estimated ink.
+        for p in patches {
+            let x = p.bbox_px[0] as usize;
+            let y = p.bbox_px[1] as usize;
+            for yy in 0..p.h as usize {
+                for xx in 0..p.w as usize {
+                    assert_eq!(
+                        &p.rgb[(yy * p.w as usize + xx) * 3..(yy * p.w as usize + xx) * 3 + 3],
+                        &rgb[((y + yy) * 64 + x + xx) * 3..((y + yy) * 64 + x + xx) * 3 + 3]
+                    );
+                }
+            }
+        }
+    }
+
+    #[test]
+    fn caller_protection_does_not_require_an_ocr_unit() {
+        let mut rgb = vec![250u8; 64 * 64 * 3];
+        // Even a short mark below the coherent-residual criterion is protected.
+        rgb[(20 * 64 + 20) * 3..(20 * 64 + 20) * 3 + 3].fill(247);
+        let input = Input {
+            rgb: rgb.clone(),
+            width: 64,
+            height: 64,
+            page_id: "protected-unknown".into(),
+            spans: vec![],
+            protected_regions: vec![ProtectedInput {
+                id: "faint".into(),
+                polygon: vec![[18.0, 18.0], [23.0, 18.0], [23.0, 23.0], [18.0, 23.0]],
+                reason: "unknown mark".into(),
+            }],
+            raster_to_page_pt: [0.24, 0.0, 0.0, -0.24, 0.0, 15.36],
+            pixel_sha256: None,
+        };
+        let (parts, _) = convert_parts(
+            &input,
+            &Policy {
+                profile: "clearscan".into(),
+                ..Policy::default()
+            },
+        )
+        .unwrap();
+        assert!(parts.patches.iter().any(|p| !p.compact_background
+            && p.bbox_px[0] <= 18.0
+            && p.bbox_px[1] <= 18.0
+            && p.bbox_px[2] >= 23.0
+            && p.bbox_px[3] >= 23.0));
     }
 }
