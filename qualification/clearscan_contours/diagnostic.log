@@ -1,0 +1,63 @@
+   Compiling scanweave-io v0.1.0 (/data/coding/scanweave/crates/scanweave-io)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 2.61s
+     Running unittests src/lib.rs (target/debug/deps/scanweave_io-ba1881379c33891c)
+
+running 1 test
+iou=0.9402390438247012 mse=0.029080745926092326 "__doc_donor:p02:p02s0031" 22x24 level=0.25 layers=1 holes=1 valid=true points=44
+iou=0.9369747899159664 mse=0.010489241908514456 "__doc_donor:p02:p02s0031" 22x24 level=0.4 layers=1 holes=2 valid=false points=36
+iou=0.8865546218487395 mse=0.007242462893131363 "__doc_donor:p02:p02s0031" 22x24 level=0.5 layers=1 holes=2 valid=false points=42
+iou=0.9504132231404959 mse=0.03365326716491665 "__doc_donor:p02:p02s0030" 22x33 level=0.25 layers=1 holes=2 valid=true points=72
+iou=0.9373219373219374 mse=0.01262042782681197 "__doc_donor:p02:p02s0030" 22x33 level=0.4 layers=1 holes=5 valid=true points=102
+iou=0.8628571428571429 mse=0.007184216027216919 "__doc_donor:p02:p02s0030" 22x33 level=0.5 layers=1 holes=5 valid=true points=111
+iou=0.9553903345724907 mse=0.031176591002724838 "__doc_donor:p02:p02s0033" 23x24 level=0.25 layers=1 holes=1 valid=true points=74
+iou=0.9457364341085271 mse=0.0099373695605509 "__doc_donor:p02:p02s0033" 23x24 level=0.4 layers=1 holes=2 valid=true points=87
+iou=0.8875968992248062 mse=0.006010774949553236 "__doc_donor:p02:p02s0033" 23x24 level=0.5 layers=1 holes=1 valid=true points=71
+iou=0.9542682926829268 mse=0.02883153032410186 "__doc_donor:p01:p01s0050" 22x33 level=0.25 layers=1 holes=2 valid=true points=60
+iou=0.8850931677018633 mse=0.010004428193337049 "__doc_donor:p01:p01s0050" 22x33 level=0.4 layers=1 holes=4 valid=true points=53
+iou=0.8481012658227848 mse=0.005542290150993326 "__doc_donor:p01:p01s0050" 22x33 level=0.5 layers=1 holes=2 valid=true points=78
+iou=0.9201101928374655 mse=0.02545996912527872 "__doc_donor:p05:p05s0060" 25x33 level=0.25 layers=1 holes=1 valid=true points=77
+iou=0.943952802359882 mse=0.008870508575177093 "__doc_donor:p05:p05s0060" 25x33 level=0.4 layers=1 holes=2 valid=true points=72
+iou=0.9026548672566371 mse=0.005121357868044022 "__doc_donor:p05:p05s0060" 25x33 level=0.5 layers=1 holes=3 valid=true points=79
+iou=0.9425981873111783 mse=0.029782663212932717 "__doc_donor:p05:p05s0005" 22x33 level=0.25 layers=1 holes=2 valid=true points=57
+iou=0.921875 mse=0.01064521853846974 "__doc_donor:p05:p05s0005" 22x33 level=0.4 layers=1 holes=2 valid=true points=75
+iou=0.8761904761904762 mse=0.005756442386049229 "__doc_donor:p05:p05s0005" 22x33 level=0.5 layers=1 holes=2 valid=true points=75
+iou=0.9019607843137255 mse=0.03905803253292221 "__doc_donor:p04:p04s0044" 8x11 level=0.25 layers=1 holes=0 valid=true points=19
+iou=0.9148936170212766 mse=0.010100451922722091 "__doc_donor:p04:p04s0044" 8x11 level=0.4 layers=1 holes=0 valid=false points=16
+iou=0.8085106382978723 mse=0.004951127326619865 "__doc_donor:p04:p04s0044" 8x11 level=0.5 layers=1 holes=0 valid=true points=16
+iou=0.9012345679012346 mse=0.021459675186054045 "__doc_donor:p05:p05s0046" 9x25 level=0.25 layers=2 holes=0 valid=true points=23
+iou=0.9078947368421053 mse=0.005445853322556182 "__doc_donor:p05:p05s0046" 9x25 level=0.4 layers=2 holes=0 valid=true points=17
+iou=0.963855421686747 mse=0.02820067940943959 "__doc_donor:p02:p02s0050" 22x33 level=0.25 layers=1 holes=1 valid=true points=32
+iou=0.9230769230769231 mse=0.00952620780526257 "__doc_donor:p02:p02s0050" 22x33 level=0.4 layers=1 holes=3 valid=true points=43
+iou=0.8452012383900929 mse=0.005178673038529482 "__doc_donor:p02:p02s0050" 22x33 level=0.5 layers=1 holes=3 valid=true points=61
+iou=0.9154078549848943 mse=0.005144848720463622 "__doc_donor:p01:p01s0041" 25x33 level=0.5 layers=1 holes=2 valid=true points=90
+iou=0.9406528189910979 mse=0.028818244145952424 "__doc_donor:p02:p02s0042" 22x33 level=0.25 layers=1 holes=1 valid=true points=47
+iou=0.9316770186335404 mse=0.01099534016196766 "__doc_donor:p02:p02s0042" 22x33 level=0.4 layers=1 holes=2 valid=true points=72
+iou=0.8660436137071651 mse=0.0058163922737005805 "__doc_donor:p02:p02s0042" 22x33 level=0.5 layers=1 holes=3 valid=true points=64
+iou=0.9541984732824428 mse=0.044095974326793214 "__doc_donor:p01:p01s0054" 6x32 level=0.25 layers=2 holes=0 valid=true points=29
+iou=0.9365079365079365 mse=0.011462997688742807 "__doc_donor:p01:p01s0054" 6x32 level=0.4 layers=2 holes=0 valid=false points=32
+iou=0.8174603174603174 mse=0.006526124297520278 "__doc_donor:p01:p01s0054" 6x32 level=0.5 layers=2 holes=0 valid=true points=29
+iou=0.9507575757575758 mse=0.038423332486530556 "__doc_donor:p04:p04s0064" 23x24 level=0.25 layers=1 holes=1 valid=true points=59
+iou=0.9294117647058824 mse=0.010334297243081792 "__doc_donor:p04:p04s0064" 23x24 level=0.4 layers=1 holes=2 valid=true points=81
+iou=0.8537549407114624 mse=0.006236483068390829 "__doc_donor:p04:p04s0064" 23x24 level=0.5 layers=2 holes=2 valid=true points=82
+iou=0.9232954545454546 mse=0.025441752097183343 "__doc_donor:p04:p04s0015" 25x33 level=0.25 layers=1 holes=1 valid=true points=62
+iou=0.9427710843373494 mse=0.009333858555031316 "__doc_donor:p04:p04s0015" 25x33 level=0.4 layers=1 holes=4 valid=true points=74
+iou=0.899390243902439 mse=0.005874706362626649 "__doc_donor:p04:p04s0015" 25x33 level=0.5 layers=1 holes=5 valid=true points=96
+iou=0.9406528189910979 mse=0.028818244145952424 "__doc_donor:p02:p02s0042" 22x33 level=0.25 layers=1 holes=1 valid=true points=47
+iou=0.9316770186335404 mse=0.01099534016196766 "__doc_donor:p02:p02s0042" 22x33 level=0.4 layers=1 holes=2 valid=true points=72
+iou=0.8660436137071651 mse=0.0058163922737005805 "__doc_donor:p02:p02s0042" 22x33 level=0.5 layers=1 holes=3 valid=true points=64
+iou=0.9536082474226805 mse=0.01748555349157795 "__doc_donor:p02:p02s0073" 19x33 level=0.25 layers=2 holes=0 valid=true points=56
+iou=0.9405405405405406 mse=0.004687468055028132 "__doc_donor:p02:p02s0073" 19x33 level=0.4 layers=2 holes=0 valid=false points=62
+iou=0.8864864864864865 mse=0.0027439234097379967 "__doc_donor:p02:p02s0073" 19x33 level=0.5 layers=2 holes=1 valid=true points=66
+iou=0.9504132231404959 mse=0.03365326716491665 "__doc_donor:p02:p02s0030" 22x33 level=0.25 layers=1 holes=2 valid=true points=72
+iou=0.9373219373219374 mse=0.01262042782681197 "__doc_donor:p02:p02s0030" 22x33 level=0.4 layers=1 holes=5 valid=true points=102
+iou=0.8628571428571429 mse=0.007184216027216919 "__doc_donor:p02:p02s0030" 22x33 level=0.5 layers=1 holes=5 valid=true points=111
+iou=0.9213483146067416 mse=0.02478431944933223 "__doc_donor:p04:p04s0041" 25x33 level=0.25 layers=1 holes=1 valid=true points=80
+iou=0.9397590361445783 mse=0.008720788760078221 "__doc_donor:p04:p04s0041" 25x33 level=0.4 layers=1 holes=1 valid=true points=74
+iou=0.8996960486322189 mse=0.004278563838071239 "__doc_donor:p04:p04s0041" 25x33 level=0.5 layers=1 holes=0 valid=true points=85
+iou=0.9392265193370166 mse=0.034619379158795885 "__doc_donor:p01:p01s0011" 22x33 level=0.25 layers=1 holes=2 valid=true points=48
+iou=0.9312320916905444 mse=0.011884672651814423 "__doc_donor:p01:p01s0011" 22x33 level=0.4 layers=1 holes=5 valid=true points=75
+iou=0.8595988538681948 mse=0.007057484085963528 "__doc_donor:p01:p01s0011" 22x33 level=0.5 layers=1 holes=6 valid=true points=85
+test curve_fit::diagnostics::actual_witness_contours ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 24 filtered out; finished in 0.73s
+

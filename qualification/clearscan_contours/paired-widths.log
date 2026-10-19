@@ -1,0 +1,42 @@
+{
+  "300": {
+    "common_intervals": 6050,
+    "source_units": "pixels at stated scan DPI",
+    "arms": {
+      "previous": {
+        "available_intervals": 6060,
+        "unpaired_intervals": 10,
+        "mean_signed_error_px": 0.2183548969629812,
+        "mean_absolute_error_px": 0.43300532968677224,
+        "error_std_px": 0.48900094413712003
+      },
+      "final": {
+        "available_intervals": 6146,
+        "unpaired_intervals": 96,
+        "mean_signed_error_px": 0.1118604022271604,
+        "mean_absolute_error_px": 0.2560755876285516,
+        "error_std_px": 0.3484805790361735
+      }
+    }
+  },
+  "600": {
+    "common_intervals": 2778,
+    "source_units": "pixels at stated scan DPI",
+    "arms": {
+      "previous": {
+        "available_intervals": 2778,
+        "unpaired_intervals": 0,
+        "mean_signed_error_px": 0.3539123543380759,
+        "mean_absolute_error_px": 0.479372010907336,
+        "error_std_px": 0.49216415358620685
+      },
+      "final": {
+        "available_intervals": 2782,
+        "unpaired_intervals": 4,
+        "mean_signed_error_px": 0.09670653159320934,
+        "mean_absolute_error_px": 0.41511575871408557,
+        "error_std_px": 0.5025992370426331
+      }
+    }
+  }
+}

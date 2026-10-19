@@ -1,0 +1,2364 @@
+{
+  "fidelity": {
+    "vector_ink_iou_min": null,
+    "vector_ink_iou_mean": null,
+    "preservation_ink_iou_min": null,
+    "raster_ink_px": 2665018,
+    "units_below_policy": 0,
+    "min_ink_iou": 0.98
+  },
+  "reconstruction": {
+    "observations": [
+      {
+        "symbol_id": "w000002s0000",
+        "text_hypothesis": "G",
+        "shape_key": "8d0078fa4b41656fd34e6eaac07088a36f132ba55dcccade8202cdab1450f04f",
+        "bbox_px": [
+          310.0,
+          420.0,
+          330.0,
+          445.0
+        ],
+        "width": 20,
+        "height": 25,
+        "ink_pixels": 350,
+        "components": 1,
+        "holes": 1
+      },
+      {
+        "symbol_id": "w000038s0003",
+        "text_hypothesis": "s",
+        "shape_key": "32ac6c03eac4f739a64b19f8b62ca35efecea24aec3a35291dc7fe1d4f643eec",
+        "bbox_px": [
+          904.0,
+          615.0,
+          910.0,
+          625.0
+        ],
+        "width": 6,
+        "height": 10,
+        "ink_pixels": 45,
+        "components": 1,
+        "holes": 0
+      },
+      {
+        "symbol_id": "w000045s0002",
+        "text_hypothesis": "s",
+        "shape_key": "30ea8c3d4345519c12afa16eff0e684115361ee46d6ce183c1c5fcd3ca1e5542",
+        "bbox_px": [
+          538.0,
+          678.0,
+          545.0,
+          689.0
+        ],
+        "width": 7,
+        "height": 11,
+        "ink_pixels": 52,
+        "components": 1,
+        "holes": 0
+      },
+      {
+        "symbol_id": "w000057s0002",
+        "text_hypothesis": "s",
+        "shape_key": "bbe170b48426b2ede2f7d246ab4a5ae89572391bc1b1e6eb4add1b659d857ff9",
+        "bbox_px": [
+          1029.0,
+          738.0,
+          1036.0,
+          749.0
+        ],
+        "width": 7,
+        "height": 11,
+        "ink_pixels": 60,
+        "components": 1,
+        "holes": 0
+      },
+      {
+        "symbol_id": "w000076s0002",
+        "text_hypothesis": "d",
+        "shape_key": "457ae9f4b8da170e21a28ad2b74bf3974305c00cc615e107c4d5a314473d4b08",
+        "bbox_px": [
+          265.0,
+          922.0,
+          272.0,
+          933.0
+        ],
+        "width": 7,
+        "height": 11,
+        "ink_pixels": 66,
+        "components": 1,
+        "holes": 0
+      },
+      {
+        "symbol_id": "w000119s0001",
+        "text_hypothesis": "s",
+        "shape_key": "c9ab7b7dd079824dc92753fa4a9641c313fe873e34d4b53a3abdc7f6e2298303",
+        "bbox_px": [
+          483.0,
+          1169.0,
+          490.0,
+          1179.0
+        ],
+        "width": 7,
+        "height": 10,
+        "ink_pixels": 44,
+        "components": 1,
+        "holes": 0
+      },
+      {
+        "symbol_id": "w000155s0009",
+        "text_hypothesis": "s",
+        "shape_key": "c2ea38f696e6bfa6f7f64f3f04f02efd71e9ad0a62228587606d8fc10205bce6",
+        "bbox_px": [
+          450.0,
+          1662.0,
+          457.0,
+          1673.0
+        ],
+        "width": 7,
+        "height": 11,
+        "ink_pixels": 54,
+        "components": 1,
+        "holes": 0
+      },
+      {
+        "symbol_id": "w000166s0002",
+        "text_hypothesis": "s",
+        "shape_key": "090416c335257dd8bc2b5873fd944e7845862853a4fb94b1d9a2c5820e34d580",
+        "bbox_px": [
+          477.0,
+          1724.0,
+          484.0,
+          1736.0
+        ],
+        "width": 7,
+        "height": 12,
+        "ink_pixels": 56,
+        "components": 1,
+        "holes": 0
+      },
+      {
+        "symbol_id": "w000174s0001",
+        "text_hypothesis": "d",
+        "shape_key": "99c6daf1f0dc275ecdf91d9a5faa10773ad4d0901c0f335c064592eebf395060",
+        "bbox_px": [
+          253.0,
+          1784.0,
+          260.0,
+          1795.0
+        ],
+        "width": 7,
+        "height": 11,
+        "ink_pixels": 61,
+        "components": 1,
+        "holes": 0
+      }
+    ],
+    "prototypes": [],
+    "occurrences": [
+      {
+        "symbol_id": "w000002s0000",
+        "text": "G",
+        "source_shape_key": "8d0078fa4b41656fd34e6eaac07088a36f132ba55dcccade8202cdab1450f04f",
+        "prototype_id": null,
+        "similarity": null,
+        "source_mask_iou": null,
+        "replacement_bbox_px": null,
+        "prototype_trace_iou": null,
+        "repaired": false,
+        "reused": false,
+        "restoration_evidence_passed": false,
+        "decision": "no_supported_donor"
+      },
+      {
+        "symbol_id": "w000038s0003",
+        "text": "s",
+        "source_shape_key": "32ac6c03eac4f739a64b19f8b62ca35efecea24aec3a35291dc7fe1d4f643eec",
+        "prototype_id": null,
+        "similarity": null,
+        "source_mask_iou": null,
+        "replacement_bbox_px": null,
+        "prototype_trace_iou": null,
+        "repaired": false,
+        "reused": false,
+        "restoration_evidence_passed": false,
+        "decision": "no_supported_donor"
+      },
+      {
+        "symbol_id": "w000045s0002",
+        "text": "s",
+        "source_shape_key": "30ea8c3d4345519c12afa16eff0e684115361ee46d6ce183c1c5fcd3ca1e5542",
+        "prototype_id": null,
+        "similarity": null,
+        "source_mask_iou": null,
+        "replacement_bbox_px": null,
+        "prototype_trace_iou": null,
+        "repaired": false,
+        "reused": false,
+        "restoration_evidence_passed": false,
+        "decision": "no_supported_donor"
+      },
+      {
+        "symbol_id": "w000057s0002",
+        "text": "s",
+        "source_shape_key": "bbe170b48426b2ede2f7d246ab4a5ae89572391bc1b1e6eb4add1b659d857ff9",
+        "prototype_id": null,
+        "similarity": null,
+        "source_mask_iou": null,
+        "replacement_bbox_px": null,
+        "prototype_trace_iou": null,
+        "repaired": false,
+        "reused": false,
+        "restoration_evidence_passed": false,
+        "decision": "no_supported_donor"
+      },
+      {
+        "symbol_id": "w000076s0002",
+        "text": "d",
+        "source_shape_key": "457ae9f4b8da170e21a28ad2b74bf3974305c00cc615e107c4d5a314473d4b08",
+        "prototype_id": null,
+        "similarity": null,
+        "source_mask_iou": null,
+        "replacement_bbox_px": null,
+        "prototype_trace_iou": null,
+        "repaired": false,
+        "reused": false,
+        "restoration_evidence_passed": false,
+        "decision": "no_supported_donor"
+      },
+      {
+        "symbol_id": "w000119s0001",
+        "text": "s",
+        "source_shape_key": "c9ab7b7dd079824dc92753fa4a9641c313fe873e34d4b53a3abdc7f6e2298303",
+        "prototype_id": null,
+        "similarity": null,
+        "source_mask_iou": null,
+        "replacement_bbox_px": null,
+        "prototype_trace_iou": null,
+        "repaired": false,
+        "reused": false,
+        "restoration_evidence_passed": false,
+        "decision": "no_supported_donor"
+      },
+      {
+        "symbol_id": "w000155s0009",
+        "text": "s",
+        "source_shape_key": "c2ea38f696e6bfa6f7f64f3f04f02efd71e9ad0a62228587606d8fc10205bce6",
+        "prototype_id": null,
+        "similarity": null,
+        "source_mask_iou": null,
+        "replacement_bbox_px": null,
+        "prototype_trace_iou": null,
+        "repaired": false,
+        "reused": false,
+        "restoration_evidence_passed": false,
+        "decision": "no_supported_donor"
+      },
+      {
+        "symbol_id": "w000166s0002",
+        "text": "s",
+        "source_shape_key": "090416c335257dd8bc2b5873fd944e7845862853a4fb94b1d9a2c5820e34d580",
+        "prototype_id": null,
+        "similarity": null,
+        "source_mask_iou": null,
+        "replacement_bbox_px": null,
+        "prototype_trace_iou": null,
+        "repaired": false,
+        "reused": false,
+        "restoration_evidence_passed": false,
+        "decision": "no_supported_donor"
+      },
+      {
+        "symbol_id": "w000174s0001",
+        "text": "d",
+        "source_shape_key": "99c6daf1f0dc275ecdf91d9a5faa10773ad4d0901c0f335c064592eebf395060",
+        "prototype_id": null,
+        "similarity": null,
+        "source_mask_iou": null,
+        "replacement_bbox_px": null,
+        "prototype_trace_iou": null,
+        "repaired": false,
+        "reused": false,
+        "restoration_evidence_passed": false,
+        "decision": "no_supported_donor"
+      }
+    ],
+    "restoration_qualified": true,
+    "canonical_geometry": []
+  },
+  "glyph_stats": [
+    {
+      "gid": 0,
+      "stages": {
+        "trace_max_px": 0.0,
+        "trace_p95_px": 0.0,
+        "curve_max_px": 0.0,
+        "quant_bound_px": 0.0
+      },
+      "symbol_id": "",
+      "contours": 1,
+      "points": 4,
+      "budget_ok": true
+    }
+  ],
+  "candidates": [
+    [
+      "reconstruct",
+      8188552
+    ],
+    [
+      "raster_baseline",
+      8188339
+    ]
+  ],
+  "selected": "reconstruct",
+  "patches": [
+    {
+      "bbox_px": [
+        0.0,
+        0.0,
+        1675.0,
+        2286.0
+      ],
+      "w": 1675,
+      "h": 2286,
+      "rgb_sha256": "e76e8802c9e6ea3485e3d9655fa4e4b0e71d28cb7f597b2c00c4fe865d4dad25"
+    }
+  ],
+  "occurrences": [
+    {
+      "page_id": "p000001",
+      "span_id": "w000002",
+      "symbol_id": "w000002s0000",
+      "semantic_text": "G",
+      "owner": "invisible"
+    },
+    {
+      "page_id": "p000001",
+      "span_id": "w000038",
+      "symbol_id": "w000038s0003",
+      "semantic_text": "s",
+      "owner": "invisible"
+    },
+    {
+      "page_id": "p000001",
+      "span_id": "w000045",
+      "symbol_id": "w000045s0002",
+      "semantic_text": "s",
+      "owner": "invisible"
+    },
+    {
+      "page_id": "p000001",
+      "span_id": "w000057",
+      "symbol_id": "w000057s0002",
+      "semantic_text": "s",
+      "owner": "invisible"
+    },
+    {
+      "page_id": "p000001",
+      "span_id": "w000076",
+      "symbol_id": "w000076s0002",
+      "semantic_text": "d",
+      "owner": "invisible"
+    },
+    {
+      "page_id": "p000001",
+      "span_id": "w000119",
+      "symbol_id": "w000119s0001",
+      "semantic_text": "s",
+      "owner": "invisible"
+    },
+    {
+      "page_id": "p000001",
+      "span_id": "w000155",
+      "symbol_id": "w000155s0009",
+      "semantic_text": "s",
+      "owner": "invisible"
+    },
+    {
+      "page_id": "p000001",
+      "span_id": "w000166",
+      "symbol_id": "w000166s0002",
+      "semantic_text": "s",
+      "owner": "invisible"
+    },
+    {
+      "page_id": "p000001",
+      "span_id": "w000174",
+      "symbol_id": "w000174s0001",
+      "semantic_text": "d",
+      "owner": "invisible"
+    },
+    {
+      "page_id": "p000001",
+      "span_id": "unowned",
+      "symbol_id": "artwork",
+      "semantic_text": "",
+      "owner": "unmapped"
+    },
+    {
+      "page_id": "p000001",
+      "span_id": "unowned",
+      "symbol_id": "artwork",
+      "semantic_text": "",
+      "owner": "unmapped"
+    },
+    {
+      "page_id": "p000001",
+      "span_id": "unowned",
+      "symbol_id": "artwork",
+      "semantic_text": "",
+      "owner": "unmapped"
+    },
+    {
+      "page_id": "p000001",
+      "span_id": "unowned",
+      "symbol_id": "artwork",
+      "semantic_text": "",
+      "owner": "unmapped"
+    },
+    {
+      "page_id": "p000001",
+      "span_id": "unowned",
+      "symbol_id": "artwork",
+      "semantic_text": "",
+      "owner": "unmapped"
+    },
+    {
+      "page_id": "p000001",
+      "span_id": "unowned",
+      "symbol_id": "artwork",
+      "semantic_text": "",
+      "owner": "unmapped"
+    },
+    {
+      "page_id": "p000001",
+      "span_id": "unowned",
+      "symbol_id": "artwork",
+      "semantic_text": "",
+      "owner": "unmapped"
+    },
+    {
+      "page_id": "p000001",
+      "span_id": "unowned",
+      "symbol_id": "artwork",
+      "semantic_text": "",
+      "owner": "unmapped"
+    },
+    {
+      "page_id": "p000001",
+      "span_id": "unowned",
+      "symbol_id": "artwork",
+      "semantic_text": "",
+      "owner": "unmapped"
+    },
+    {
+      "page_id": "p000001",
+      "span_id": "unowned",
+      "symbol_id": "artwork",
+      "semantic_text": "",
+      "owner": "unmapped"
+    },
+    {
+      "page_id": "p000001",
+      "span_id": "unowned",
+      "symbol_id": "artwork",
+      "semantic_text": "",
+      "owner": "unmapped"
+    },
+    {
+      "page_id": "p000001",
+      "span_id": "unowned",
+      "symbol_id": "artwork",
+      "semantic_text": "",
+      "owner": "unmapped"
+    },
+    {
+      "page_id": "p000001",
+      "span_id": "unowned",
+      "symbol_id": "artwork",
+      "semantic_text": "",
+      "owner": "unmapped"
+    },
+    {
+      "page_id": "p000001",
+      "span_id": "unowned",
+      "symbol_id": "artwork",
+      "semantic_text": "",
+      "owner": "unmapped"
+    },
+    {
+      "page_id": "p000001",
+      "span_id": "unowned",
+      "symbol_id": "artwork",
+      "semantic_text": "",
+      "owner": "unmapped"
+    },
+    {
+      "page_id": "p000001",
+      "span_id": "unowned",
+      "symbol_id": "artwork",
+      "semantic_text": "",
+      "owner": "unmapped"
+    },
+    {
+      "page_id": "p000001",
+      "span_id": "unowned",
+      "symbol_id": "artwork",
+      "semantic_text": "",
+      "owner": "unmapped"
+    },
+    {
+      "page_id": "p000001",
+      "span_id": "unowned",
+      "symbol_id": "artwork",
+      "semantic_text": "",
+      "owner": "unmapped"
+    },
+    {
+      "page_id": "p000001",
+      "span_id": "unowned",
+      "symbol_id": "artwork",
+      "semantic_text": "",
+      "owner": "unmapped"
+    },
+    {
+      "page_id": "p000001",
+      "span_id": "unowned",
+      "symbol_id": "artwork",
+      "semantic_text": "",
+      "owner": "unmapped"
+    },
+    {
+      "page_id": "p000001",
+      "span_id": "unowned",
+      "symbol_id": "artwork",
+      "semantic_text": "",
+      "owner": "unmapped"
+    },
+    {
+      "page_id": "p000001",
+      "span_id": "unowned",
+      "symbol_id": "artwork",
+      "semantic_text": "",
+      "owner": "unmapped"
+    },
+    {
+      "page_id": "p000001",
+      "span_id": "unowned",
+      "symbol_id": "artwork",
+      "semantic_text": "",
+      "owner": "unmapped"
+    },
+    {
+      "page_id": "p000001",
+      "span_id": "unowned",
+      "symbol_id": "artwork",
+      "semantic_text": "",
+      "owner": "unmapped"
+    },
+    {
+      "page_id": "p000001",
+      "span_id": "unowned",
+      "symbol_id": "artwork",
+      "semantic_text": "",
+      "owner": "unmapped"
+    },
+    {
+      "page_id": "p000001",
+      "span_id": "unowned",
+      "symbol_id": "artwork",
+      "semantic_text": "",
+      "owner": "unmapped"
+    },
+    {
+      "page_id": "p000001",
+      "span_id": "unowned",
+      "symbol_id": "artwork",
+      "semantic_text": "",
+      "owner": "unmapped"
+    },
+    {
+      "page_id": "p000001",
+      "span_id": "unowned",
+      "symbol_id": "artwork",
+      "semantic_text": "",
+      "owner": "unmapped"
+    },
+    {
+      "page_id": "p000001",
+      "span_id": "unowned",
+      "symbol_id": "artwork",
+      "semantic_text": "",
+      "owner": "unmapped"
+    },
+    {
+      "page_id": "p000001",
+      "span_id": "unowned",
+      "symbol_id": "artwork",
+      "semantic_text": "",
+      "owner": "unmapped"
+    },
+    {
+      "page_id": "p000001",
+      "span_id": "unowned",
+      "symbol_id": "artwork",
+      "semantic_text": "",
+      "owner": "unmapped"
+    },
+    {
+      "page_id": "p000001",
+      "span_id": "unowned",
+      "symbol_id": "artwork",
+      "semantic_text": "",
+      "owner": "unmapped"
+    },
+    {
+      "page_id": "p000001",
+      "span_id": "unowned",
+      "symbol_id": "artwork",
+      "semantic_text": "",
+      "owner": "unmapped"
+    },
+    {
+      "page_id": "p000001",
+      "span_id": "unowned",
+      "symbol_id": "artwork",
+      "semantic_text": "",
+      "owner": "unmapped"
+    },
+    {
+      "page_id": "p000001",
+      "span_id": "unowned",
+      "symbol_id": "artwork",
+      "semantic_text": "",
+      "owner": "unmapped"
+    },
+    {
+      "page_id": "p000001",
+      "span_id": "unowned",
+      "symbol_id": "artwork",
+      "semantic_text": "",
+      "owner": "unmapped"
+    },
+    {
+      "page_id": "p000001",
+      "span_id": "unowned",
+      "symbol_id": "artwork",
+      "semantic_text": "",
+      "owner": "unmapped"
+    },
+    {
+      "page_id": "p000001",
+      "span_id": "unowned",
+      "symbol_id": "artwork",
+      "semantic_text": "",
+      "owner": "unmapped"
+    },
+    {
+      "page_id": "p000001",
+      "span_id": "unowned",
+      "symbol_id": "artwork",
+      "semantic_text": "",
+      "owner": "unmapped"
+    },
+    {
+      "page_id": "p000001",
+      "span_id": "unowned",
+      "symbol_id": "artwork",
+      "semantic_text": "",
+      "owner": "unmapped"
+    },
+    {
+      "page_id": "p000001",
+      "span_id": "unowned",
+      "symbol_id": "artwork",
+      "semantic_text": "",
+      "owner": "unmapped"
+    },
+    {
+      "page_id": "p000001",
+      "span_id": "unowned",
+      "symbol_id": "artwork",
+      "semantic_text": "",
+      "owner": "unmapped"
+    },
+    {
+      "page_id": "p000001",
+      "span_id": "unowned",
+      "symbol_id": "artwork",
+      "semantic_text": "",
+      "owner": "unmapped"
+    },
+    {
+      "page_id": "p000001",
+      "span_id": "unowned",
+      "symbol_id": "artwork",
+      "semantic_text": "",
+      "owner": "unmapped"
+    },
+    {
+      "page_id": "p000001",
+      "span_id": "unowned",
+      "symbol_id": "artwork",
+      "semantic_text": "",
+      "owner": "unmapped"
+    },
+    {
+      "page_id": "p000001",
+      "span_id": "unowned",
+      "symbol_id": "artwork",
+      "semantic_text": "",
+      "owner": "unmapped"
+    },
+    {
+      "page_id": "p000001",
+      "span_id": "unowned",
+      "symbol_id": "artwork",
+      "semantic_text": "",
+      "owner": "unmapped"
+    },
+    {
+      "page_id": "p000001",
+      "span_id": "unowned",
+      "symbol_id": "artwork",
+      "semantic_text": "",
+      "owner": "unmapped"
+    },
+    {
+      "page_id": "p000001",
+      "span_id": "unowned",
+      "symbol_id": "artwork",
+      "semantic_text": "",
+      "owner": "unmapped"
+    },
+    {
+      "page_id": "p000001",
+      "span_id": "unowned",
+      "symbol_id": "artwork",
+      "semantic_text": "",
+      "owner": "unmapped"
+    },
+    {
+      "page_id": "p000001",
+      "span_id": "unowned",
+      "symbol_id": "artwork",
+      "semantic_text": "",
+      "owner": "unmapped"
+    },
+    {
+      "page_id": "p000001",
+      "span_id": "unowned",
+      "symbol_id": "artwork",
+      "semantic_text": "",
+      "owner": "unmapped"
+    },
+    {
+      "page_id": "p000001",
+      "span_id": "unowned",
+      "symbol_id": "artwork",
+      "semantic_text": "",
+      "owner": "unmapped"
+    },
+    {
+      "page_id": "p000001",
+      "span_id": "unowned",
+      "symbol_id": "artwork",
+      "semantic_text": "",
+      "owner": "unmapped"
+    },
+    {
+      "page_id": "p000001",
+      "span_id": "unowned",
+      "symbol_id": "artwork",
+      "semantic_text": "",
+      "owner": "unmapped"
+    },
+    {
+      "page_id": "p000001",
+      "span_id": "unowned",
+      "symbol_id": "artwork",
+      "semantic_text": "",
+      "owner": "unmapped"
+    },
+    {
+      "page_id": "p000001",
+      "span_id": "unowned",
+      "symbol_id": "artwork",
+      "semantic_text": "",
+      "owner": "unmapped"
+    },
+    {
+      "page_id": "p000001",
+      "span_id": "unowned",
+      "symbol_id": "artwork",
+      "semantic_text": "",
+      "owner": "unmapped"
+    },
+    {
+      "page_id": "p000001",
+      "span_id": "unowned",
+      "symbol_id": "artwork",
+      "semantic_text": "",
+      "owner": "unmapped"
+    },
+    {
+      "page_id": "p000001",
+      "span_id": "unowned",
+      "symbol_id": "artwork",
+      "semantic_text": "",
+      "owner": "unmapped"
+    },
+    {
+      "page_id": "p000001",
+      "span_id": "unowned",
+      "symbol_id": "artwork",
+      "semantic_text": "",
+      "owner": "unmapped"
+    },
+    {
+      "page_id": "p000001",
+      "span_id": "unowned",
+      "symbol_id": "artwork",
+      "semantic_text": "",
+      "owner": "unmapped"
+    },
+    {
+      "page_id": "p000001",
+      "span_id": "unowned",
+      "symbol_id": "artwork",
+      "semantic_text": "",
+      "owner": "unmapped"
+    },
+    {
+      "page_id": "p000001",
+      "span_id": "unowned",
+      "symbol_id": "artwork",
+      "semantic_text": "",
+      "owner": "unmapped"
+    },
+    {
+      "page_id": "p000001",
+      "span_id": "unowned",
+      "symbol_id": "artwork",
+      "semantic_text": "",
+      "owner": "unmapped"
+    },
+    {
+      "page_id": "p000001",
+      "span_id": "unowned",
+      "symbol_id": "artwork",
+      "semantic_text": "",
+      "owner": "unmapped"
+    },
+    {
+      "page_id": "p000001",
+      "span_id": "unowned",
+      "symbol_id": "artwork",
+      "semantic_text": "",
+      "owner": "unmapped"
+    },
+    {
+      "page_id": "p000001",
+      "span_id": "unowned",
+      "symbol_id": "artwork",
+      "semantic_text": "",
+      "owner": "unmapped"
+    },
+    {
+      "page_id": "p000001",
+      "span_id": "unowned",
+      "symbol_id": "artwork",
+      "semantic_text": "",
+      "owner": "unmapped"
+    },
+    {
+      "page_id": "p000001",
+      "span_id": "unowned",
+      "symbol_id": "artwork",
+      "semantic_text": "",
+      "owner": "unmapped"
+    },
+    {
+      "page_id": "p000001",
+      "span_id": "unowned",
+      "symbol_id": "artwork",
+      "semantic_text": "",
+      "owner": "unmapped"
+    },
+    {
+      "page_id": "p000001",
+      "span_id": "unowned",
+      "symbol_id": "artwork",
+      "semantic_text": "",
+      "owner": "unmapped"
+    },
+    {
+      "page_id": "p000001",
+      "span_id": "unowned",
+      "symbol_id": "artwork",
+      "semantic_text": "",
+      "owner": "unmapped"
+    },
+    {
+      "page_id": "p000001",
+      "span_id": "unowned",
+      "symbol_id": "artwork",
+      "semantic_text": "",
+      "owner": "unmapped"
+    },
+    {
+      "page_id": "p000001",
+      "span_id": "unowned",
+      "symbol_id": "artwork",
+      "semantic_text": "",
+      "owner": "unmapped"
+    },
+    {
+      "page_id": "p000001",
+      "span_id": "unowned",
+      "symbol_id": "artwork",
+      "semantic_text": "",
+      "owner": "unmapped"
+    },
+    {
+      "page_id": "p000001",
+      "span_id": "unowned",
+      "symbol_id": "artwork",
+      "semantic_text": "",
+      "owner": "unmapped"
+    },
+    {
+      "page_id": "p000001",
+      "span_id": "unowned",
+      "symbol_id": "artwork",
+      "semantic_text": "",
+      "owner": "unmapped"
+    },
+    {
+      "page_id": "p000001",
+      "span_id": "unowned",
+      "symbol_id": "artwork",
+      "semantic_text": "",
+      "owner": "unmapped"
+    },
+    {
+      "page_id": "p000001",
+      "span_id": "unowned",
+      "symbol_id": "artwork",
+      "semantic_text": "",
+      "owner": "unmapped"
+    },
+    {
+      "page_id": "p000001",
+      "span_id": "unowned",
+      "symbol_id": "artwork",
+      "semantic_text": "",
+      "owner": "unmapped"
+    },
+    {
+      "page_id": "p000001",
+      "span_id": "unowned",
+      "symbol_id": "artwork",
+      "semantic_text": "",
+      "owner": "unmapped"
+    },
+    {
+      "page_id": "p000001",
+      "span_id": "unowned",
+      "symbol_id": "artwork",
+      "semantic_text": "",
+      "owner": "unmapped"
+    },
+    {
+      "page_id": "p000001",
+      "span_id": "unowned",
+      "symbol_id": "artwork",
+      "semantic_text": "",
+      "owner": "unmapped"
+    }
+  ],
+  "page_id": "p000001",
+  "policy": {
+    "preset": "faithful",
+    "mode": "reconstruct",
+    "dpi": 300.0,
+    "upem": 2048,
+    "min_ink_iou": 0.98,
+    "contact_margin_px": 4.0,
+    "profile": "clearscan",
+    "glyph_dictionary": "visual",
+    "image_encoding": {
+      "reuse_identical": true,
+      "grayscale_equal_channels": true,
+      "compression_level": 6,
+      "predictor": 1
+    }
+  },
+  "supplied_chars": 861,
+  "components_total": 93,
+  "components_owned": 9,
+  "components_artwork": 84,
+  "visual_units": 9,
+  "semantic_spans": 194,
+  "regions": [
+    {
+      "id": 0,
+      "kind": "Mixed",
+      "units": 1,
+      "bbox_px": [
+        310.0,
+        420.0,
+        330.0,
+        445.0
+      ],
+      "disposition": {
+        "Raster": {
+          "reason": "ContactNonText"
+        }
+      }
+    },
+    {
+      "id": 1,
+      "kind": "Mixed",
+      "units": 1,
+      "bbox_px": [
+        904.0,
+        615.0,
+        910.0,
+        625.0
+      ],
+      "disposition": {
+        "Raster": {
+          "reason": "ContactNonText"
+        }
+      }
+    },
+    {
+      "id": 2,
+      "kind": "Mixed",
+      "units": 1,
+      "bbox_px": [
+        538.0,
+        678.0,
+        545.0,
+        689.0
+      ],
+      "disposition": {
+        "Raster": {
+          "reason": "ContactNonText"
+        }
+      }
+    },
+    {
+      "id": 3,
+      "kind": "Mixed",
+      "units": 1,
+      "bbox_px": [
+        1029.0,
+        738.0,
+        1036.0,
+        749.0
+      ],
+      "disposition": {
+        "Raster": {
+          "reason": "ContactNonText"
+        }
+      }
+    },
+    {
+      "id": 4,
+      "kind": "Mixed",
+      "units": 1,
+      "bbox_px": [
+        265.0,
+        922.0,
+        272.0,
+        933.0
+      ],
+      "disposition": {
+        "Raster": {
+          "reason": "ContactNonText"
+        }
+      }
+    },
+    {
+      "id": 5,
+      "kind": "Mixed",
+      "units": 1,
+      "bbox_px": [
+        483.0,
+        1169.0,
+        490.0,
+        1179.0
+      ],
+      "disposition": {
+        "Raster": {
+          "reason": "ContactNonText"
+        }
+      }
+    },
+    {
+      "id": 6,
+      "kind": "Mixed",
+      "units": 1,
+      "bbox_px": [
+        450.0,
+        1662.0,
+        457.0,
+        1673.0
+      ],
+      "disposition": {
+        "Raster": {
+          "reason": "ContactNonText"
+        }
+      }
+    },
+    {
+      "id": 7,
+      "kind": "Mixed",
+      "units": 1,
+      "bbox_px": [
+        477.0,
+        1724.0,
+        484.0,
+        1736.0
+      ],
+      "disposition": {
+        "Raster": {
+          "reason": "ContactNonText"
+        }
+      }
+    },
+    {
+      "id": 8,
+      "kind": "Mixed",
+      "units": 1,
+      "bbox_px": [
+        253.0,
+        1784.0,
+        260.0,
+        1795.0
+      ],
+      "disposition": {
+        "Raster": {
+          "reason": "ContactNonText"
+        }
+      }
+    },
+    {
+      "id": 9,
+      "kind": "NonText",
+      "units": 0,
+      "bbox_px": [
+        522.0,
+        105.0,
+        523.0,
+        106.0
+      ],
+      "disposition": "Vector"
+    },
+    {
+      "id": 10,
+      "kind": "NonText",
+      "units": 0,
+      "bbox_px": [
+        239.0,
+        106.0,
+        241.0,
+        108.0
+      ],
+      "disposition": "Vector"
+    },
+    {
+      "id": 11,
+      "kind": "NonText",
+      "units": 0,
+      "bbox_px": [
+        519.0,
+        106.0,
+        520.0,
+        107.0
+      ],
+      "disposition": "Vector"
+    },
+    {
+      "id": 12,
+      "kind": "NonText",
+      "units": 0,
+      "bbox_px": [
+        201.0,
+        108.0,
+        203.0,
+        109.0
+      ],
+      "disposition": "Vector"
+    },
+    {
+      "id": 13,
+      "kind": "NonText",
+      "units": 0,
+      "bbox_px": [
+        199.0,
+        118.0,
+        221.0,
+        128.0
+      ],
+      "disposition": "Vector"
+    },
+    {
+      "id": 14,
+      "kind": "NonText",
+      "units": 0,
+      "bbox_px": [
+        98.0,
+        120.0,
+        104.0,
+        122.0
+      ],
+      "disposition": "Vector"
+    },
+    {
+      "id": 15,
+      "kind": "NonText",
+      "units": 0,
+      "bbox_px": [
+        110.0,
+        120.0,
+        117.0,
+        122.0
+      ],
+      "disposition": "Vector"
+    },
+    {
+      "id": 16,
+      "kind": "NonText",
+      "units": 0,
+      "bbox_px": [
+        119.0,
+        120.0,
+        121.0,
+        121.0
+      ],
+      "disposition": "Vector"
+    },
+    {
+      "id": 17,
+      "kind": "NonText",
+      "units": 0,
+      "bbox_px": [
+        94.0,
+        121.0,
+        95.0,
+        122.0
+      ],
+      "disposition": "Vector"
+    },
+    {
+      "id": 18,
+      "kind": "NonText",
+      "units": 0,
+      "bbox_px": [
+        106.0,
+        121.0,
+        109.0,
+        122.0
+      ],
+      "disposition": "Vector"
+    },
+    {
+      "id": 19,
+      "kind": "NonText",
+      "units": 0,
+      "bbox_px": [
+        128.0,
+        121.0,
+        131.0,
+        123.0
+      ],
+      "disposition": "Vector"
+    },
+    {
+      "id": 20,
+      "kind": "NonText",
+      "units": 0,
+      "bbox_px": [
+        222.0,
+        122.0,
+        1104.0,
+        136.0
+      ],
+      "disposition": "Vector"
+    },
+    {
+      "id": 21,
+      "kind": "NonText",
+      "units": 0,
+      "bbox_px": [
+        143.0,
+        123.0,
+        146.0,
+        124.0
+      ],
+      "disposition": "Vector"
+    },
+    {
+      "id": 22,
+      "kind": "NonText",
+      "units": 0,
+      "bbox_px": [
+        170.0,
+        124.0,
+        185.0,
+        127.0
+      ],
+      "disposition": "Vector"
+    },
+    {
+      "id": 23,
+      "kind": "NonText",
+      "units": 0,
+      "bbox_px": [
+        195.0,
+        125.0,
+        196.0,
+        127.0
+      ],
+      "disposition": "Vector"
+    },
+    {
+      "id": 24,
+      "kind": "NonText",
+      "units": 0,
+      "bbox_px": [
+        280.0,
+        128.0,
+        281.0,
+        129.0
+      ],
+      "disposition": "Vector"
+    },
+    {
+      "id": 25,
+      "kind": "NonText",
+      "units": 0,
+      "bbox_px": [
+        1146.0,
+        128.0,
+        1220.0,
+        135.0
+      ],
+      "disposition": "Vector"
+    },
+    {
+      "id": 26,
+      "kind": "NonText",
+      "units": 0,
+      "bbox_px": [
+        395.0,
+        129.0,
+        397.0,
+        130.0
+      ],
+      "disposition": "Vector"
+    },
+    {
+      "id": 27,
+      "kind": "NonText",
+      "units": 0,
+      "bbox_px": [
+        410.0,
+        129.0,
+        411.0,
+        130.0
+      ],
+      "disposition": "Vector"
+    },
+    {
+      "id": 28,
+      "kind": "NonText",
+      "units": 0,
+      "bbox_px": [
+        1105.0,
+        129.0,
+        1139.0,
+        132.0
+      ],
+      "disposition": "Vector"
+    },
+    {
+      "id": 29,
+      "kind": "NonText",
+      "units": 0,
+      "bbox_px": [
+        1222.0,
+        130.0,
+        1232.0,
+        133.0
+      ],
+      "disposition": "Vector"
+    },
+    {
+      "id": 30,
+      "kind": "NonText",
+      "units": 0,
+      "bbox_px": [
+        1235.0,
+        130.0,
+        1333.0,
+        139.0
+      ],
+      "disposition": "Vector"
+    },
+    {
+      "id": 31,
+      "kind": "NonText",
+      "units": 0,
+      "bbox_px": [
+        623.0,
+        131.0,
+        624.0,
+        132.0
+      ],
+      "disposition": "Vector"
+    },
+    {
+      "id": 32,
+      "kind": "NonText",
+      "units": 0,
+      "bbox_px": [
+        650.0,
+        131.0,
+        652.0,
+        133.0
+      ],
+      "disposition": "Vector"
+    },
+    {
+      "id": 33,
+      "kind": "NonText",
+      "units": 0,
+      "bbox_px": [
+        685.0,
+        132.0,
+        688.0,
+        133.0
+      ],
+      "disposition": "Vector"
+    },
+    {
+      "id": 34,
+      "kind": "NonText",
+      "units": 0,
+      "bbox_px": [
+        691.0,
+        132.0,
+        693.0,
+        133.0
+      ],
+      "disposition": "Vector"
+    },
+    {
+      "id": 35,
+      "kind": "NonText",
+      "units": 0,
+      "bbox_px": [
+        698.0,
+        132.0,
+        702.0,
+        133.0
+      ],
+      "disposition": "Vector"
+    },
+    {
+      "id": 36,
+      "kind": "NonText",
+      "units": 0,
+      "bbox_px": [
+        1275.0,
+        132.0,
+        1279.0,
+        134.0
+      ],
+      "disposition": "Vector"
+    },
+    {
+      "id": 37,
+      "kind": "NonText",
+      "units": 0,
+      "bbox_px": [
+        859.0,
+        133.0,
+        860.0,
+        134.0
+      ],
+      "disposition": "Vector"
+    },
+    {
+      "id": 38,
+      "kind": "NonText",
+      "units": 0,
+      "bbox_px": [
+        861.0,
+        133.0,
+        864.0,
+        134.0
+      ],
+      "disposition": "Vector"
+    },
+    {
+      "id": 39,
+      "kind": "NonText",
+      "units": 0,
+      "bbox_px": [
+        896.0,
+        133.0,
+        897.0,
+        134.0
+      ],
+      "disposition": "Vector"
+    },
+    {
+      "id": 40,
+      "kind": "NonText",
+      "units": 0,
+      "bbox_px": [
+        919.0,
+        133.0,
+        920.0,
+        134.0
+      ],
+      "disposition": "Vector"
+    },
+    {
+      "id": 41,
+      "kind": "NonText",
+      "units": 0,
+      "bbox_px": [
+        921.0,
+        133.0,
+        931.0,
+        135.0
+      ],
+      "disposition": "Vector"
+    },
+    {
+      "id": 42,
+      "kind": "NonText",
+      "units": 0,
+      "bbox_px": [
+        1018.0,
+        133.0,
+        1039.0,
+        136.0
+      ],
+      "disposition": "Vector"
+    },
+    {
+      "id": 43,
+      "kind": "NonText",
+      "units": 0,
+      "bbox_px": [
+        1049.0,
+        133.0,
+        1066.0,
+        136.0
+      ],
+      "disposition": "Vector"
+    },
+    {
+      "id": 44,
+      "kind": "NonText",
+      "units": 0,
+      "bbox_px": [
+        1072.0,
+        133.0,
+        1092.0,
+        135.0
+      ],
+      "disposition": "Vector"
+    },
+    {
+      "id": 45,
+      "kind": "NonText",
+      "units": 0,
+      "bbox_px": [
+        1100.0,
+        133.0,
+        1114.0,
+        136.0
+      ],
+      "disposition": "Vector"
+    },
+    {
+      "id": 46,
+      "kind": "NonText",
+      "units": 0,
+      "bbox_px": [
+        1130.0,
+        133.0,
+        1154.0,
+        135.0
+      ],
+      "disposition": "Vector"
+    },
+    {
+      "id": 47,
+      "kind": "NonText",
+      "units": 0,
+      "bbox_px": [
+        1201.0,
+        133.0,
+        1220.0,
+        136.0
+      ],
+      "disposition": "Vector"
+    },
+    {
+      "id": 48,
+      "kind": "NonText",
+      "units": 0,
+      "bbox_px": [
+        1011.0,
+        134.0,
+        1012.0,
+        135.0
+      ],
+      "disposition": "Vector"
+    },
+    {
+      "id": 49,
+      "kind": "NonText",
+      "units": 0,
+      "bbox_px": [
+        1125.0,
+        134.0,
+        1127.0,
+        135.0
+      ],
+      "disposition": "Vector"
+    },
+    {
+      "id": 50,
+      "kind": "NonText",
+      "units": 0,
+      "bbox_px": [
+        1228.0,
+        134.0,
+        1233.0,
+        136.0
+      ],
+      "disposition": "Vector"
+    },
+    {
+      "id": 51,
+      "kind": "NonText",
+      "units": 0,
+      "bbox_px": [
+        1113.0,
+        140.0,
+        1115.0,
+        141.0
+      ],
+      "disposition": "Vector"
+    },
+    {
+      "id": 52,
+      "kind": "NonText",
+      "units": 0,
+      "bbox_px": [
+        1329.0,
+        156.0,
+        1330.0,
+        157.0
+      ],
+      "disposition": "Vector"
+    },
+    {
+      "id": 53,
+      "kind": "NonText",
+      "units": 0,
+      "bbox_px": [
+        1336.0,
+        156.0,
+        1337.0,
+        158.0
+      ],
+      "disposition": "Vector"
+    },
+    {
+      "id": 54,
+      "kind": "NonText",
+      "units": 0,
+      "bbox_px": [
+        580.0,
+        158.0,
+        583.0,
+        159.0
+      ],
+      "disposition": "Vector"
+    },
+    {
+      "id": 55,
+      "kind": "NonText",
+      "units": 0,
+      "bbox_px": [
+        598.0,
+        158.0,
+        600.0,
+        160.0
+      ],
+      "disposition": "Vector"
+    },
+    {
+      "id": 56,
+      "kind": "NonText",
+      "units": 0,
+      "bbox_px": [
+        609.0,
+        159.0,
+        614.0,
+        160.0
+      ],
+      "disposition": "Vector"
+    },
+    {
+      "id": 57,
+      "kind": "NonText",
+      "units": 0,
+      "bbox_px": [
+        617.0,
+        159.0,
+        626.0,
+        160.0
+      ],
+      "disposition": "Vector"
+    },
+    {
+      "id": 58,
+      "kind": "NonText",
+      "units": 0,
+      "bbox_px": [
+        628.0,
+        159.0,
+        630.0,
+        160.0
+      ],
+      "disposition": "Vector"
+    },
+    {
+      "id": 59,
+      "kind": "NonText",
+      "units": 0,
+      "bbox_px": [
+        632.0,
+        159.0,
+        644.0,
+        160.0
+      ],
+      "disposition": "Vector"
+    },
+    {
+      "id": 60,
+      "kind": "NonText",
+      "units": 0,
+      "bbox_px": [
+        647.0,
+        159.0,
+        649.0,
+        160.0
+      ],
+      "disposition": "Vector"
+    },
+    {
+      "id": 61,
+      "kind": "NonText",
+      "units": 0,
+      "bbox_px": [
+        653.0,
+        159.0,
+        657.0,
+        160.0
+      ],
+      "disposition": "Vector"
+    },
+    {
+      "id": 62,
+      "kind": "NonText",
+      "units": 0,
+      "bbox_px": [
+        670.0,
+        160.0,
+        671.0,
+        161.0
+      ],
+      "disposition": "Vector"
+    },
+    {
+      "id": 63,
+      "kind": "NonText",
+      "units": 0,
+      "bbox_px": [
+        684.0,
+        160.0,
+        685.0,
+        161.0
+      ],
+      "disposition": "Vector"
+    },
+    {
+      "id": 64,
+      "kind": "NonText",
+      "units": 0,
+      "bbox_px": [
+        693.0,
+        160.0,
+        694.0,
+        161.0
+      ],
+      "disposition": "Vector"
+    },
+    {
+      "id": 65,
+      "kind": "NonText",
+      "units": 0,
+      "bbox_px": [
+        1328.0,
+        160.0,
+        1332.0,
+        163.0
+      ],
+      "disposition": "Vector"
+    },
+    {
+      "id": 66,
+      "kind": "NonText",
+      "units": 0,
+      "bbox_px": [
+        699.0,
+        161.0,
+        701.0,
+        162.0
+      ],
+      "disposition": "Vector"
+    },
+    {
+      "id": 67,
+      "kind": "NonText",
+      "units": 0,
+      "bbox_px": [
+        706.0,
+        161.0,
+        712.0,
+        162.0
+      ],
+      "disposition": "Vector"
+    },
+    {
+      "id": 68,
+      "kind": "NonText",
+      "units": 0,
+      "bbox_px": [
+        713.0,
+        161.0,
+        716.0,
+        162.0
+      ],
+      "disposition": "Vector"
+    },
+    {
+      "id": 69,
+      "kind": "NonText",
+      "units": 0,
+      "bbox_px": [
+        719.0,
+        161.0,
+        734.0,
+        162.0
+      ],
+      "disposition": "Vector"
+    },
+    {
+      "id": 70,
+      "kind": "NonText",
+      "units": 0,
+      "bbox_px": [
+        737.0,
+        161.0,
+        743.0,
+        162.0
+      ],
+      "disposition": "Vector"
+    },
+    {
+      "id": 71,
+      "kind": "NonText",
+      "units": 0,
+      "bbox_px": [
+        744.0,
+        161.0,
+        931.0,
+        166.0
+      ],
+      "disposition": "Vector"
+    },
+    {
+      "id": 72,
+      "kind": "NonText",
+      "units": 0,
+      "bbox_px": [
+        934.0,
+        164.0,
+        983.0,
+        167.0
+      ],
+      "disposition": "Vector"
+    },
+    {
+      "id": 73,
+      "kind": "NonText",
+      "units": 0,
+      "bbox_px": [
+        1042.0,
+        164.0,
+        1337.0,
+        169.0
+      ],
+      "disposition": "Vector"
+    },
+    {
+      "id": 74,
+      "kind": "NonText",
+      "units": 0,
+      "bbox_px": [
+        244.0,
+        168.0,
+        245.0,
+        169.0
+      ],
+      "disposition": "Vector"
+    },
+    {
+      "id": 75,
+      "kind": "NonText",
+      "units": 0,
+      "bbox_px": [
+        1.0,
+        178.0,
+        3.0,
+        179.0
+      ],
+      "disposition": "Vector"
+    },
+    {
+      "id": 76,
+      "kind": "NonText",
+      "units": 0,
+      "bbox_px": [
+        1363.0,
+        1992.0,
+        1364.0,
+        1993.0
+      ],
+      "disposition": "Vector"
+    },
+    {
+      "id": 77,
+      "kind": "NonText",
+      "units": 0,
+      "bbox_px": [
+        1364.0,
+        2026.0,
+        1365.0,
+        2027.0
+      ],
+      "disposition": "Vector"
+    },
+    {
+      "id": 78,
+      "kind": "NonText",
+      "units": 0,
+      "bbox_px": [
+        1364.0,
+        2068.0,
+        1365.0,
+        2069.0
+      ],
+      "disposition": "Vector"
+    },
+    {
+      "id": 79,
+      "kind": "NonText",
+      "units": 0,
+      "bbox_px": [
+        1364.0,
+        2073.0,
+        1365.0,
+        2075.0
+      ],
+      "disposition": "Vector"
+    },
+    {
+      "id": 80,
+      "kind": "NonText",
+      "units": 0,
+      "bbox_px": [
+        1357.0,
+        2074.0,
+        1358.0,
+        2076.0
+      ],
+      "disposition": "Vector"
+    },
+    {
+      "id": 81,
+      "kind": "NonText",
+      "units": 0,
+      "bbox_px": [
+        1364.0,
+        2081.0,
+        1365.0,
+        2084.0
+      ],
+      "disposition": "Vector"
+    },
+    {
+      "id": 82,
+      "kind": "NonText",
+      "units": 0,
+      "bbox_px": [
+        1357.0,
+        2086.0,
+        1358.0,
+        2094.0
+      ],
+      "disposition": "Vector"
+    },
+    {
+      "id": 83,
+      "kind": "NonText",
+      "units": 0,
+      "bbox_px": [
+        1364.0,
+        2097.0,
+        1365.0,
+        2098.0
+      ],
+      "disposition": "Vector"
+    },
+    {
+      "id": 84,
+      "kind": "NonText",
+      "units": 0,
+      "bbox_px": [
+        1364.0,
+        2100.0,
+        1366.0,
+        2108.0
+      ],
+      "disposition": "Vector"
+    },
+    {
+      "id": 85,
+      "kind": "NonText",
+      "units": 0,
+      "bbox_px": [
+        1413.0,
+        2101.0,
+        1414.0,
+        2102.0
+      ],
+      "disposition": "Vector"
+    },
+    {
+      "id": 86,
+      "kind": "NonText",
+      "units": 0,
+      "bbox_px": [
+        1357.0,
+        2104.0,
+        1358.0,
+        2105.0
+      ],
+      "disposition": "Vector"
+    },
+    {
+      "id": 87,
+      "kind": "NonText",
+      "units": 0,
+      "bbox_px": [
+        1357.0,
+        2107.0,
+        1358.0,
+        2108.0
+      ],
+      "disposition": "Vector"
+    },
+    {
+      "id": 88,
+      "kind": "NonText",
+      "units": 0,
+      "bbox_px": [
+        1364.0,
+        2112.0,
+        1366.0,
+        2115.0
+      ],
+      "disposition": "Vector"
+    },
+    {
+      "id": 89,
+      "kind": "NonText",
+      "units": 0,
+      "bbox_px": [
+        1364.0,
+        2118.0,
+        1365.0,
+        2119.0
+      ],
+      "disposition": "Vector"
+    },
+    {
+      "id": 90,
+      "kind": "NonText",
+      "units": 0,
+      "bbox_px": [
+        1364.0,
+        2120.0,
+        1366.0,
+        2126.0
+      ],
+      "disposition": "Vector"
+    },
+    {
+      "id": 91,
+      "kind": "NonText",
+      "units": 0,
+      "bbox_px": [
+        1364.0,
+        2130.0,
+        1365.0,
+        2131.0
+      ],
+      "disposition": "Vector"
+    }
+  ],
+  "coverage": {
+    "text_ink_px_total": 788,
+    "text_ink_px_vector": 0,
+    "text_ink_px_raster": 788,
+    "other_ink_px": 2664230,
+    "unowned_ink_px": 0,
+    "multiply_owned_ink_px": 0
+  },
+  "raster_ink_pixels_suppressed": 0,
+  "antialias_fringe_pixels_suppressed": 0,
+  "fallback_reasons": {
+    "ContactNonText": 9
+  },
+  "font_glyphs": 2,
+  "font_bytes": 1012,
+  "pdf_bytes": 8188552,
+  "raster_bytes": 11487150,
+  "semantic_owner": {
+    "w000000": "invisible",
+    "w000001": "invisible",
+    "w000002": "invisible",
+    "w000003": "invisible",
+    "w000004": "invisible",
+    "w000005": "invisible",
+    "w000006": "invisible",
+    "w000007": "invisible",
+    "w000008": "invisible",
+    "w000009": "invisible",
+    "w000010": "invisible",
+    "w000011": "invisible",
+    "w000012": "invisible",
+    "w000013": "invisible",
+    "w000014": "invisible",
+    "w000015": "invisible",
+    "w000016": "invisible",
+    "w000017": "invisible",
+    "w000018": "invisible",
+    "w000019": "invisible",
+    "w000020": "invisible",
+    "w000021": "invisible",
+    "w000022": "invisible",
+    "w000023": "invisible",
+    "w000024": "invisible",
+    "w000025": "invisible",
+    "w000026": "invisible",
+    "w000027": "invisible",
+    "w000028": "invisible",
+    "w000029": "invisible",
+    "w000030": "invisible",
+    "w000031": "invisible",
+    "w000032": "invisible",
+    "w000033": "invisible",
+    "w000034": "invisible",
+    "w000035": "invisible",
+    "w000036": "invisible",
+    "w000037": "invisible",
+    "w000038": "invisible",
+    "w000039": "invisible",
+    "w000040": "invisible",
+    "w000041": "invisible",
+    "w000042": "invisible",
+    "w000043": "invisible",
+    "w000044": "invisible",
+    "w000045": "invisible",
+    "w000046": "invisible",
+    "w000047": "invisible",
+    "w000048": "invisible",
+    "w000049": "invisible",
+    "w000050": "invisible",
+    "w000051": "invisible",
+    "w000052": "invisible",
+    "w000053": "invisible",
+    "w000054": "invisible",
+    "w000055": "invisible",
+    "w000056": "invisible",
+    "w000057": "invisible",
+    "w000058": "invisible",
+    "w000059": "invisible",
+    "w000060": "invisible",
+    "w000061": "invisible",
+    "w000062": "invisible",
+    "w000063": "invisible",
+    "w000064": "invisible",
+    "w000065": "invisible",
+    "w000066": "invisible",
+    "w000067": "invisible",
+    "w000068": "invisible",
+    "w000069": "invisible",
+    "w000070": "invisible",
+    "w000071": "invisible",
+    "w000072": "invisible",
+    "w000073": "invisible",
+    "w000074": "invisible",
+    "w000075": "invisible",
+    "w000076": "invisible",
+    "w000077": "invisible",
+    "w000078": "invisible",
+    "w000079": "invisible",
+    "w000080": "invisible",
+    "w000081": "invisible",
+    "w000082": "invisible",
+    "w000083": "invisible",
+    "w000084": "invisible",
+    "w000085": "invisible",
+    "w000086": "invisible",
+    "w000087": "invisible",
+    "w000088": "invisible",
+    "w000089": "invisible",
+    "w000090": "invisible",
+    "w000091": "invisible",
+    "w000092": "invisible",
+    "w000093": "invisible",
+    "w000094": "invisible",
+    "w000095": "invisible",
+    "w000096": "invisible",
+    "w000097": "invisible",
+    "w000098": "invisible",
+    "w000099": "invisible",
+    "w000100": "invisible",
+    "w000101": "invisible",
+    "w000102": "invisible",
+    "w000103": "invisible",
+    "w000104": "invisible",
+    "w000105": "invisible",
+    "w000106": "invisible",
+    "w000107": "invisible",
+    "w000108": "invisible",
+    "w000109": "invisible",
+    "w000110": "invisible",
+    "w000111": "invisible",
+    "w000112": "invisible",
+    "w000113": "invisible",
+    "w000114": "invisible",
+    "w000115": "invisible",
+    "w000116": "invisible",
+    "w000117": "invisible",
+    "w000118": "invisible",
+    "w000119": "invisible",
+    "w000120": "invisible",
+    "w000121": "invisible",
+    "w000122": "invisible",
+    "w000123": "invisible",
+    "w000124": "invisible",
+    "w000125": "invisible",
+    "w000126": "invisible",
+    "w000127": "invisible",
+    "w000128": "invisible",
+    "w000129": "invisible",
+    "w000130": "invisible",
+    "w000131": "invisible",
+    "w000132": "invisible",
+    "w000133": "invisible",
+    "w000134": "invisible",
+    "w000135": "invisible",
+    "w000136": "invisible",
+    "w000137": "invisible",
+    "w000138": "invisible",
+    "w000139": "invisible",
+    "w000140": "invisible",
+    "w000141": "invisible",
+    "w000142": "invisible",
+    "w000143": "invisible",
+    "w000144": "invisible",
+    "w000145": "invisible",
+    "w000146": "invisible",
+    "w000147": "invisible",
+    "w000148": "invisible",
+    "w000149": "invisible",
+    "w000150": "invisible",
+    "w000151": "invisible",
+    "w000152": "invisible",
+    "w000153": "invisible",
+    "w000154": "invisible",
+    "w000155": "invisible",
+    "w000156": "invisible",
+    "w000157": "invisible",
+    "w000158": "invisible",
+    "w000159": "invisible",
+    "w000160": "invisible",
+    "w000161": "invisible",
+    "w000162": "invisible",
+    "w000163": "invisible",
+    "w000164": "invisible",
+    "w000165": "invisible",
+    "w000166": "invisible",
+    "w000167": "invisible",
+    "w000168": "invisible",
+    "w000169": "invisible",
+    "w000170": "invisible",
+    "w000171": "invisible",
+    "w000172": "invisible",
+    "w000173": "invisible",
+    "w000174": "invisible",
+    "w000175": "invisible",
+    "w000176": "invisible",
+    "w000177": "invisible",
+    "w000178": "invisible",
+    "w000179": "invisible",
+    "w000180": "invisible",
+    "w000181": "invisible",
+    "w000182": "invisible",
+    "w000183": "invisible",
+    "w000184": "invisible",
+    "w000185": "invisible",
+    "w000186": "invisible",
+    "w000187": "invisible",
+    "w000188": "invisible",
+    "w000189": "invisible",
+    "w000190": "invisible",
+    "w000191": "invisible",
+    "w000192": "invisible",
+    "w000193": "invisible"
+  },
+  "ownership_invariants": {
+    "semantic": false,
+    "visual": true
+  },
+  "elapsed_ms": 16534
+}

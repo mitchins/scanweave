@@ -1,0 +1,1417 @@
+[
+  {
+    "name": "cord-00",
+    "seconds": 0.9592499240097823,
+    "returncode": 0,
+    "error": null,
+    "command": [
+      "/usr/bin/time",
+      "-v",
+      "-o",
+      "/data/coding/scanweave/qualification/clearscan_contours/real/final/cord-00.time.txt",
+      "/data/coding/scanweave/target/release/scanweave-cli",
+      "build",
+      "/data/coding/scanweave/qualification/clearscan_competitive/real/cord-00.png",
+      "--ocr",
+      "/data/coding/scanweave/qualification/clearscan_competitive/real/cord-00.regions.hocr",
+      "--dpi",
+      "300",
+      "--profile",
+      "clearscan",
+      "--output",
+      "/data/coding/scanweave/qualification/clearscan_contours/real/final/cord-00.pdf",
+      "--report",
+      "/data/coding/scanweave/qualification/clearscan_contours/real/final/cord-00.json"
+    ],
+    "bytes": 1522334,
+    "sha256": "186d3c432baf5f7ba87bbe46f4b4305a4e4702f5729d33f7afb079bce32112de",
+    "streams": {
+      "other_stream": 1303,
+      "raster": 1489078,
+      "content": 28147,
+      "font": 1372,
+      "overhead": 2434
+    },
+    "images": [
+      {
+        "object": [
+          17,
+          0
+        ],
+        "width": 864,
+        "height": 1296,
+        "colour": "/DeviceRGB",
+        "filter": "/FlateDecode",
+        "bytes": 1489078,
+        "encoded_sha256": "e4b68182f08eaccd9b67bbf1d7bbdd72afa59ba18d12cc926ee76294bb41db83",
+        "samples_sha256": "402d7680c98518bfc4ac5fde11fc10d991a1bad0671dbaa1940d437afe7f7470"
+      }
+    ],
+    "unique_images": 1,
+    "text_show_operations": 424,
+    "font_outlines": 6,
+    "observations": 167,
+    "vector_ink_px": 0,
+    "source_ink_suppressed_px": 0,
+    "coverage": {
+      "text_ink_px_total": 906,
+      "text_ink_px_vector": 0,
+      "text_ink_px_raster": 906,
+      "other_ink_px": 312319,
+      "unowned_ink_px": 0,
+      "multiply_owned_ink_px": 0
+    },
+    "supplied_chars": 424,
+    "source_sha256": "83a0c8e2d12b3a6b2a9fc377eaca05b6f8e5efd9c62b18f0d8cc1073d4c75881",
+    "rss_kb": 49680,
+    "poppler_text": "4x Nasi Campur Bali 75,000\nix Bbk Bengil Nasi 125,000\nMx WMilkShake Sterwb 37,000\nTee Lemon Tea 24,000\nsi Ayam Dewata\n70,000\nee Ice Tea 6\njanic Green Sa 65,000\ne jea 18,000\nIce Orange 29,000\nyam Suir Bali 85,000\neer\nTahu Goreng $6,000\n| Sag Tempe Soreng 96,000\nP< Tahu jelor Asin 4G 000\nfx Wasi Goreng Samb 79,000\n3.x Bbk Fanggang Sain 366,000\nix Ayam Sambal Hija G2 000\n2x Hot Tea 44 ,000\ntx Ice Kopi 32,000\n{4 Tahu Teler Asin 40,000\n“1x Free Ice fea o\nix)\nBebek Street 44,000\nYiex\n Ice Tea ee: 15,0000\nSub-Total 1,346 4000:\n\f",
+    "pdfium_text": "4x Nasi Campur Bali 75,000\r\nix Bbk Bengil Nasi 125,000\r\nMx WMilkShake Sterwb 37,000\r\nTee Lemon Tea 24,000\r\nsi Ayam Dewata 70,000\r\nee Ice Tea 6\r\njanic Green Sa 65,000\r\ne jea 18,000\r\nIce\r\nOrange 29,000\r\nyam Suir Bali 85,000\r\neer Tahu Goreng $6,000\r\n| Sag Tempe Soreng 96,000\r\nP< Tahu jelor Asin 4G 000\r\nfx Wasi Goreng Samb 79,000\r\n3.x Bbk Fanggang Sain 366,000\r\nix Ayam Sambal Hija G2 000\r\n2x Hot Tea 44 ,000\r\ntx Ice Kopi 32,000\r\n{4 Tahu Teler Asin 40,000\r\n“1x\r\nFree Ice fea o\r\nix) Bebek Street 44,000 Yiex\r\n IceTea ee: 15,0000\r\nSub-Total 1,346 4000:",
+    "renderer_text_equal": true,
+    "native_search": [
+      {
+        "token": "Nasi",
+        "found": true
+      },
+      {
+        "token": "Campur",
+        "found": true
+      },
+      {
+        "token": "Bali",
+        "found": true
+      }
+    ],
+    "source_relative_mae_150dpi": {
+      "poppler": 3.448312142444526,
+      "pdfium": 1.1711521604268307
+    },
+    "renderer_mae_150dpi": 3.2686587169696733,
+    "actual_vector_occurrences": 0,
+    "actual_used_visible_font_gids": 0
+  },
+  {
+    "name": "cord-01",
+    "seconds": 1.523363893997157,
+    "returncode": 0,
+    "error": null,
+    "command": [
+      "/usr/bin/time",
+      "-v",
+      "-o",
+      "/data/coding/scanweave/qualification/clearscan_contours/real/final/cord-01.time.txt",
+      "/data/coding/scanweave/target/release/scanweave-cli",
+      "build",
+      "/data/coding/scanweave/qualification/clearscan_competitive/real/cord-01.png",
+      "--ocr",
+      "/data/coding/scanweave/qualification/clearscan_competitive/real/cord-01.regions.hocr",
+      "--dpi",
+      "300",
+      "--profile",
+      "clearscan",
+      "--output",
+      "/data/coding/scanweave/qualification/clearscan_contours/real/final/cord-01.pdf",
+      "--report",
+      "/data/coding/scanweave/qualification/clearscan_contours/real/final/cord-01.json"
+    ],
+    "bytes": 1338700,
+    "sha256": "8ce0335e1724c4cb554b73c2144d987c547746a0e63de9fc8dc1d0aa3f368345",
+    "streams": {
+      "other_stream": 1463,
+      "raster": 1297336,
+      "content": 10906,
+      "font": 26312,
+      "overhead": 2683
+    },
+    "images": [
+      {
+        "object": [
+          17,
+          0
+        ],
+        "width": 864,
+        "height": 1296,
+        "colour": "/DeviceRGB",
+        "filter": "/FlateDecode",
+        "bytes": 1297336,
+        "encoded_sha256": "0dc1b84ca9708cee4b32c4e8e79e217f6817a94898be228b3754b09d29374a69",
+        "samples_sha256": "2b0bfe5cf05279d836753b91c654a4210096a7af152b9a75b4826991bcd60445"
+      }
+    ],
+    "unique_images": 1,
+    "text_show_operations": 155,
+    "font_outlines": 94,
+    "observations": 133,
+    "vector_ink_px": 757,
+    "source_ink_suppressed_px": 757,
+    "coverage": {
+      "text_ink_px_total": 2142,
+      "text_ink_px_vector": 757,
+      "text_ink_px_raster": 1385,
+      "other_ink_px": 39097,
+      "unowned_ink_px": 0,
+      "multiply_owned_ink_px": 0
+    },
+    "supplied_chars": 155,
+    "source_sha256": "89bfef22a92fde606f8459430dcd103742860576a76e0f90e8e9b06190a69c50",
+    "rss_kb": 44540,
+    "poppler_text": "ri REAL\ns0LOGNASE 58.000\nus\nee\na 165,000\nHH Z\nNE\nove of ane\nBEYE 195,000\nHOT\n4\nELL\nN TEA 22 000\n® LYCHE 26 , 000\nANTEC 25 400\nAOWNIES 35,000\n5035, 000\nBo Oi5\nva ghee\n25, 100\nao oe Te os ae\nSA, 7d\nDOM, Fie\n\f",
+    "pdfium_text": "ri REAL\r\ns0LOGNASE 58.000\r\nus ee a 165,000\r\nHH Z\r\nNE\r\nove of ane\r\nBEYE 195,000 HOT\r\n4\r\nELL\r\nN TEA 22 000\r\n® LYCHE 26 , 000\r\nANTEC 25 400\r\nAOWNIES 35,000\r\n5035, 000 Bo Oi5 va ghee\r\n25, 100 ao oe Te os ae SA, 7d DOM, Fie",
+    "renderer_text_equal": true,
+    "native_search": [
+      {
+        "token": "REAL",
+        "found": true
+      },
+      {
+        "token": "s0LOGNASE",
+        "found": true
+      },
+      {
+        "token": "BEYE",
+        "found": true
+      }
+    ],
+    "source_relative_mae_150dpi": {
+      "poppler": 2.6813727757869925,
+      "pdfium": 1.055233906371026
+    },
+    "renderer_mae_150dpi": 2.5275196874210457,
+    "actual_vector_occurrences": 28,
+    "actual_used_visible_font_gids": 28
+  },
+  {
+    "name": "cord-02",
+    "seconds": 1.243707835994428,
+    "returncode": 0,
+    "error": null,
+    "command": [
+      "/usr/bin/time",
+      "-v",
+      "-o",
+      "/data/coding/scanweave/qualification/clearscan_contours/real/final/cord-02.time.txt",
+      "/data/coding/scanweave/target/release/scanweave-cli",
+      "build",
+      "/data/coding/scanweave/qualification/clearscan_competitive/real/cord-02.png",
+      "--ocr",
+      "/data/coding/scanweave/qualification/clearscan_competitive/real/cord-02.regions.hocr",
+      "--dpi",
+      "300",
+      "--profile",
+      "clearscan",
+      "--output",
+      "/data/coding/scanweave/qualification/clearscan_contours/real/final/cord-02.pdf",
+      "--report",
+      "/data/coding/scanweave/qualification/clearscan_contours/real/final/cord-02.json"
+    ],
+    "bytes": 371283,
+    "sha256": "2a792e9bfa1b84b41b8c315b4185e3507178397eed1f4a06d780650d8d1c69a6",
+    "streams": {
+      "other_stream": 1695,
+      "raster": 324383,
+      "content": 10969,
+      "font": 30184,
+      "overhead": 4052
+    },
+    "images": [
+      {
+        "object": [
+          17,
+          0
+        ],
+        "width": 360,
+        "height": 640,
+        "colour": "/DeviceRGB",
+        "filter": "/DCTDecode",
+        "bytes": 57111,
+        "encoded_sha256": "9a2c6446dd4e67583288fb0db75ecfcc6c46cec2d6639dd347040d937adaddaa",
+        "samples_sha256": "b834346c4beb794b8256f1a6d0fe1e5d941cfc93ca88bbfd12f046db76447682"
+      },
+      {
+        "object": [
+          18,
+          0
+        ],
+        "width": 544,
+        "height": 864,
+        "colour": "/DeviceRGB",
+        "filter": "/FlateDecode",
+        "bytes": 248805,
+        "encoded_sha256": "c5f750b64d174676f862b337c57ea7fe1f7948705bd820ca433fe9fecd76e9eb",
+        "samples_sha256": "1f81e3fc21b1cd6818142354768e2ed7113236a6a020f6ca32cb60e64b70cefa"
+      },
+      {
+        "object": [
+          19,
+          0
+        ],
+        "width": 320,
+        "height": 96,
+        "colour": "/DeviceRGB",
+        "filter": "/FlateDecode",
+        "bytes": 14525,
+        "encoded_sha256": "26efa408ce8474352a5f71e819f5e4cca98420796d6592f95632d5945a8d17ab",
+        "samples_sha256": "64523cef625c12023b74c2d6522946f1ebffc57ee9ba801fc140fd65da1426fc"
+      },
+      {
+        "object": [
+          20,
+          0
+        ],
+        "width": 64,
+        "height": 32,
+        "colour": "/DeviceRGB",
+        "filter": "/FlateDecode",
+        "bytes": 1146,
+        "encoded_sha256": "937f987b5352db015920df5f695b680fa1a874c1391299f412fa304e5496bd92",
+        "samples_sha256": "e62ea95df84c7b16dd19b3befa150855703552a0092ff786df1bd017c0613629"
+      },
+      {
+        "object": [
+          21,
+          0
+        ],
+        "width": 32,
+        "height": 32,
+        "colour": "/DeviceRGB",
+        "filter": "/FlateDecode",
+        "bytes": 1163,
+        "encoded_sha256": "3d81a1ac14c2b9148171b0e0ffbb6473945f52354ef2d2bf5d43a8825683ee23",
+        "samples_sha256": "58fafd299f0a9ed799bbd524d74287d575ea450f14eecd0f815bb8256411b3b0"
+      },
+      {
+        "object": [
+          22,
+          0
+        ],
+        "width": 128,
+        "height": 32,
+        "colour": "/DeviceRGB",
+        "filter": "/FlateDecode",
+        "bytes": 1633,
+        "encoded_sha256": "4d130ff478860fa67c4e0bef0e5397909e79f139d7d81da79fbcdb0c0b1825bc",
+        "samples_sha256": "b39f45ad3f89c46df81e9e5dc83d37c79697a0618bc066bcd420cc7c0b377b6c"
+      }
+    ],
+    "unique_images": 6,
+    "text_show_operations": 172,
+    "font_outlines": 143,
+    "observations": 157,
+    "vector_ink_px": 4739,
+    "source_ink_suppressed_px": 4739,
+    "coverage": {
+      "text_ink_px_total": 8940,
+      "text_ink_px_vector": 4739,
+      "text_ink_px_raster": 4201,
+      "other_ink_px": 150,
+      "unowned_ink_px": 0,
+      "multiply_owned_ink_px": 0
+    },
+    "supplied_chars": 174,
+    "source_sha256": "d06540139f2d3d18e366b203e154ca2a4277db0f0d3f6c4b7f50b5650090863b",
+    "rss_kb": 35672,
+    "poppler_text": "4 HAKAU UDANG 92,000\n4 SIAO MAI BABI 80,000\n3 CEKER AYAM 60,000\n2 BAKPAO BKR C 42,000\nCRISPY\n3 TAHU GORENG 60,000\nCRISPY ee\nSubtotal 334,000\nTotal 334,000\nCASH 350,000\nCash CHANGE -16,000\nTotal Item 5\nTotal Qty 16\n\f",
+    "pdfium_text": "4 HAKAU UDANG 92,000 4 SIAO MAI BABI 80,000\r\n3 CEKER AYAM 60,000 2 BAKPAO BKR C 42,000\r\nCRISPY\r\n3 TAHU GORENG 60,000 CRISPY ee\r\nSubtotal 334,000\r\nTotal 334,000\r\nCASH 350,000\r\nCash CHANGE -16,000\r\nTotal Item 5\r\nTotal Qty 16",
+    "renderer_text_equal": true,
+    "native_search": [
+      {
+        "token": "HAKAU",
+        "found": true
+      },
+      {
+        "token": "UDANG",
+        "found": true
+      },
+      {
+        "token": "SIAO",
+        "found": true
+      }
+    ],
+    "source_relative_mae_150dpi": {
+      "poppler": 2.1641090574370896,
+      "pdfium": 0.8188368531971196
+    },
+    "renderer_mae_150dpi": 1.9617863938934288,
+    "actual_vector_occurrences": 58,
+    "actual_used_visible_font_gids": 50
+  },
+  {
+    "name": "cord-03",
+    "seconds": 1.9655768340016948,
+    "returncode": 0,
+    "error": null,
+    "command": [
+      "/usr/bin/time",
+      "-v",
+      "-o",
+      "/data/coding/scanweave/qualification/clearscan_contours/real/final/cord-03.time.txt",
+      "/data/coding/scanweave/target/release/scanweave-cli",
+      "build",
+      "/data/coding/scanweave/qualification/clearscan_competitive/real/cord-03.png",
+      "--ocr",
+      "/data/coding/scanweave/qualification/clearscan_competitive/real/cord-03.regions.hocr",
+      "--dpi",
+      "300",
+      "--profile",
+      "clearscan",
+      "--output",
+      "/data/coding/scanweave/qualification/clearscan_contours/real/final/cord-03.pdf",
+      "--report",
+      "/data/coding/scanweave/qualification/clearscan_contours/real/final/cord-03.json"
+    ],
+    "bytes": 1944186,
+    "sha256": "eb86679ce59165b83ed1f7c721ead42bf0ba0bbf7d29cc344988898d025616f6",
+    "streams": {
+      "other_stream": 999,
+      "raster": 1925625,
+      "content": 7477,
+      "font": 7820,
+      "overhead": 2265
+    },
+    "images": [
+      {
+        "object": [
+          17,
+          0
+        ],
+        "width": 1108,
+        "height": 1478,
+        "colour": "/DeviceRGB",
+        "filter": "/FlateDecode",
+        "bytes": 1925625,
+        "encoded_sha256": "256ac7a780e8408d5eb0c94983d7eaddce41e9ad700de595a6828a5ff883084b",
+        "samples_sha256": "10be745bb35dc575b85ee6ad941131a24f4fee1c49d0b8b0da04d04f00556586"
+      }
+    ],
+    "unique_images": 1,
+    "text_show_operations": 114,
+    "font_outlines": 20,
+    "observations": 93,
+    "vector_ink_px": 135,
+    "source_ink_suppressed_px": 135,
+    "coverage": {
+      "text_ink_px_total": 7221,
+      "text_ink_px_vector": 135,
+      "text_ink_px_raster": 7086,
+      "other_ink_px": 481400,
+      "unowned_ink_px": 0,
+      "multiply_owned_ink_px": 0
+    },
+    "supplied_chars": 114,
+    "source_sha256": "8acb893d2cad4bcb41bf1967d9d50050a592661947f0b7f275103ffc73ce4423",
+    "rss_kb": 69000,
+    "poppler_text": "BintangBremer 1 59,000\nChicken H-H 4 190,000\nAdes 1 10,000\nSubTotal -—«259,000\nService 9,600\nTax 92,416\nDiscount 19,000\nTOTAL 302,016\n\f",
+    "pdfium_text": "Bintang Bremer 1 59,000\r\nChicken H-H 4 190,000\r\nAdes 1 10,000\r\nSubTotal -—«259,000\r\nService 9,600\r\nTax 92,416\r\nDiscount 19,000\r\nTOTAL 302,016",
+    "renderer_text_equal": true,
+    "native_search": [
+      {
+        "token": "Bintang",
+        "found": true
+      },
+      {
+        "token": "Bremer",
+        "found": true
+      },
+      {
+        "token": "Chicken",
+        "found": true
+      }
+    ],
+    "source_relative_mae_150dpi": {
+      "poppler": 6.401085139193247,
+      "pdfium": 3.6488239590942295
+    },
+    "renderer_mae_150dpi": 7.816629332034737,
+    "actual_vector_occurrences": 2,
+    "actual_used_visible_font_gids": 2
+  },
+  {
+    "name": "cord-04",
+    "seconds": 0.6375917389959795,
+    "returncode": 0,
+    "error": null,
+    "command": [
+      "/usr/bin/time",
+      "-v",
+      "-o",
+      "/data/coding/scanweave/qualification/clearscan_contours/real/final/cord-04.time.txt",
+      "/data/coding/scanweave/target/release/scanweave-cli",
+      "build",
+      "/data/coding/scanweave/qualification/clearscan_competitive/real/cord-04.png",
+      "--ocr",
+      "/data/coding/scanweave/qualification/clearscan_competitive/real/cord-04.regions.hocr",
+      "--dpi",
+      "300",
+      "--profile",
+      "clearscan",
+      "--output",
+      "/data/coding/scanweave/qualification/clearscan_contours/real/final/cord-04.pdf",
+      "--report",
+      "/data/coding/scanweave/qualification/clearscan_contours/real/final/cord-04.json"
+    ],
+    "bytes": 825909,
+    "sha256": "a7bbd7901004c3ff578c4e8a2dd933fc1bf90aeb9835c087104bc1e12a384314",
+    "streams": {
+      "other_stream": 903,
+      "raster": 805174,
+      "content": 5918,
+      "font": 11664,
+      "overhead": 2250
+    },
+    "images": [
+      {
+        "object": [
+          17,
+          0
+        ],
+        "width": 864,
+        "height": 1296,
+        "colour": "/DeviceRGB",
+        "filter": "/FlateDecode",
+        "bytes": 805174,
+        "encoded_sha256": "18b70e3372323565251231bf369007331703fa183d2585836a5c8f0c6acbd198",
+        "samples_sha256": "845ecceeaa9ab750d4dd41af4641d40af340e1e9c98d2d81797a83bb4c42d119"
+      }
+    ],
+    "unique_images": 1,
+    "text_show_operations": 87,
+    "font_outlines": 42,
+    "observations": 44,
+    "vector_ink_px": 316,
+    "source_ink_suppressed_px": 316,
+    "coverage": {
+      "text_ink_px_total": 676,
+      "text_ink_px_vector": 316,
+      "text_ink_px_raster": 360,
+      "other_ink_px": 14567,
+      "unowned_ink_px": 0,
+      "multiply_owned_ink_px": 0
+    },
+    "supplied_chars": 87,
+    "source_sha256": "08c99dd012e879bb3dc8579e21ab9563c8eb7f04d034aed77f345f8a4515cac1",
+    "rss_kb": 45388,
+    "poppler_text": "PASO BIH 143.6% 3.6%\nTOTAL 83.634\n-\nTAX 10.00 % 4.344\nGRAND TOTAL 48.000\nTUNAI a 50.000\nKENBALI\nZAEy\n2.000\n\f",
+    "pdfium_text": "PASO BIH 143.6% 3.6%\r\nTOTAL 83.634\r\n￾TAX 10.00 % 4.344\r\nGRAND TOTAL 48.000\r\nTUNAI a 50.000 KENBALI\r\nZA Ey 2.000",
+    "renderer_text_equal": false,
+    "native_search": [
+      {
+        "token": "PASO",
+        "found": true
+      },
+      {
+        "token": "TOTAL",
+        "found": true
+      },
+      {
+        "token": "GRAND",
+        "found": true
+      }
+    ],
+    "source_relative_mae_150dpi": {
+      "poppler": 2.4496204855933983,
+      "pdfium": 0.7388556564193626
+    },
+    "renderer_mae_150dpi": 2.3479338735141764,
+    "actual_vector_occurrences": 8,
+    "actual_used_visible_font_gids": 8
+  },
+  {
+    "name": "cord-05",
+    "seconds": 43.978850746003445,
+    "returncode": 0,
+    "error": null,
+    "command": [
+      "/usr/bin/time",
+      "-v",
+      "-o",
+      "/data/coding/scanweave/qualification/clearscan_contours/real/final/cord-05.time.txt",
+      "/data/coding/scanweave/target/release/scanweave-cli",
+      "build",
+      "/data/coding/scanweave/qualification/clearscan_competitive/real/cord-05.png",
+      "--ocr",
+      "/data/coding/scanweave/qualification/clearscan_competitive/real/cord-05.regions.hocr",
+      "--dpi",
+      "300",
+      "--profile",
+      "clearscan",
+      "--output",
+      "/data/coding/scanweave/qualification/clearscan_contours/real/final/cord-05.pdf",
+      "--report",
+      "/data/coding/scanweave/qualification/clearscan_contours/real/final/cord-05.json"
+    ],
+    "bytes": 6757805,
+    "sha256": "c900b799d2e89316904bd56ae95b1c778824b77776a8ab54bdb63e085781c91e",
+    "streams": {
+      "other_stream": 1079,
+      "raster": 6740433,
+      "content": 12982,
+      "font": 1004,
+      "overhead": 2307
+    },
+    "images": [
+      {
+        "object": [
+          17,
+          0
+        ],
+        "width": 2304,
+        "height": 4096,
+        "colour": "/DeviceRGB",
+        "filter": "/FlateDecode",
+        "bytes": 6740433,
+        "encoded_sha256": "e10544b8ee764ae3ecb5557268faba8b80b3ab887dd33988c04351264a4cff82",
+        "samples_sha256": "b61f3b26cb18c7f788bec80276b67db16d782a42129d52f38c27f50a9003ab5e"
+      }
+    ],
+    "unique_images": 1,
+    "text_show_operations": 189,
+    "font_outlines": 2,
+    "observations": 68,
+    "vector_ink_px": 0,
+    "source_ink_suppressed_px": 0,
+    "coverage": {
+      "text_ink_px_total": 763,
+      "text_ink_px_vector": 0,
+      "text_ink_px_raster": 763,
+      "other_ink_px": 5392969,
+      "unowned_ink_px": 0,
+      "multiply_owned_ink_px": 0
+    },
+    "supplied_chars": 189,
+    "source_sha256": "b257ae98087ca5cadac38b903ae468e43ba09aa97454a5191a0bf75a5ad371cf",
+    "rss_kb": 402792,
+    "poppler_text": "i Lasagna 4\n45,000\n1 Spaghetti ChickPesto 55,000\ni RarngRang Chick Wings 4? 000\n1 iced Capouccine 33, 000\ni Gypsy Gelato Ice Tea _\n39,000\nSUBTOTAL ~\n£21,006\nService |\naa\nPRI ea, Tae\nTOTAL 261,333\nCOLGP! ue 100,000\nBCA Card é\n161,333\n\f",
+    "pdfium_text": "i Lasagna 4 45,000\r\n1 Spaghetti ChickPesto 55,000\r\ni RarngRang Chick Wings 4? 000 1 iced Capouccine 33, 000\r\ni Gypsy Gelato Ice Tea _\r\n39,000\r\nSUBTOTAL ~\r\n£21,006\r\nService |\r\naa PRI ea, Tae\r\nTOTAL 261,333\r\nCOLGP! ue 100,000\r\nBCA Card é\r\n161,333",
+    "renderer_text_equal": true,
+    "native_search": [
+      {
+        "token": "Lasagna",
+        "found": true
+      },
+      {
+        "token": "Spaghetti",
+        "found": true
+      },
+      {
+        "token": "ChickPesto",
+        "found": true
+      }
+    ],
+    "source_relative_mae_150dpi": {
+      "poppler": 2.6241798456020526,
+      "pdfium": 0.5529500713717838
+    },
+    "renderer_mae_150dpi": 2.5523857035089623,
+    "actual_vector_occurrences": 0,
+    "actual_used_visible_font_gids": 0
+  },
+  {
+    "name": "cord-06",
+    "seconds": 1.0709643149893964,
+    "returncode": 0,
+    "error": null,
+    "command": [
+      "/usr/bin/time",
+      "-v",
+      "-o",
+      "/data/coding/scanweave/qualification/clearscan_contours/real/final/cord-06.time.txt",
+      "/data/coding/scanweave/target/release/scanweave-cli",
+      "build",
+      "/data/coding/scanweave/qualification/clearscan_competitive/real/cord-06.png",
+      "--ocr",
+      "/data/coding/scanweave/qualification/clearscan_competitive/real/cord-06.regions.hocr",
+      "--dpi",
+      "300",
+      "--profile",
+      "clearscan",
+      "--output",
+      "/data/coding/scanweave/qualification/clearscan_contours/real/final/cord-06.pdf",
+      "--report",
+      "/data/coding/scanweave/qualification/clearscan_contours/real/final/cord-06.json"
+    ],
+    "bytes": 1051794,
+    "sha256": "7b6b3d3c390746d0c0a78cdb1f1076af2ea81bee95d6235f74de14b3fd076c66",
+    "streams": {
+      "other_stream": 1015,
+      "raster": 1040267,
+      "content": 7261,
+      "font": 984,
+      "overhead": 2267
+    },
+    "images": [
+      {
+        "object": [
+          17,
+          0
+        ],
+        "width": 864,
+        "height": 1296,
+        "colour": "/DeviceRGB",
+        "filter": "/FlateDecode",
+        "bytes": 1040267,
+        "encoded_sha256": "3e2f006ec864de6dbdfdc40d17841aeeba6d4f618688e2d66bcad37804f48add",
+        "samples_sha256": "9d5910655d1b61d9f3a4a79b6b67d3c65161a7538dc6a07105740aab2ba3c4e3"
+      }
+    ],
+    "unique_images": 1,
+    "text_show_operations": 98,
+    "font_outlines": 2,
+    "observations": 1,
+    "vector_ink_px": 0,
+    "source_ink_suppressed_px": 0,
+    "coverage": {
+      "text_ink_px_total": 2,
+      "text_ink_px_vector": 0,
+      "text_ink_px_raster": 2,
+      "other_ink_px": 971723,
+      "unowned_ink_px": 0,
+      "multiply_owned_ink_px": 0
+    },
+    "supplied_chars": 98,
+    "source_sha256": "ba5587f7d159c139c5cc77cdcde2eb84ae2a33e40b36f7ae494cea856cc1c7e6",
+    "rss_kb": 51644,
+    "poppler_text": "peso. 144) 143.181 93,181\npe\nES JERUK 1 13,000 ay |\ncine : 86,181 >\n”\nret\nTAX 10.004\n.\nign\net ry amg\nTAL 7\na\ngers\nmet 4 FUNC baad\n\f",
+    "pdfium_text": "peso. 144) 143.181 93,181 pe\r\nES JERUK 1 13,000 ay | cine : 86,181 >\r\n” ret\r\nTAX 10.004 . ign\r\net ry amg\r\nTAL 7\r\na\r\ngers\r\nmet 4 FUNC baad",
+    "renderer_text_equal": true,
+    "native_search": [
+      {
+        "token": "peso",
+        "found": true
+      },
+      {
+        "token": "JERUK",
+        "found": true
+      },
+      {
+        "token": "cine",
+        "found": true
+      }
+    ],
+    "source_relative_mae_150dpi": {
+      "poppler": 2.5661258927395854,
+      "pdfium": 0.9581164128860532
+    },
+    "renderer_mae_150dpi": 2.4691863244335157,
+    "actual_vector_occurrences": 0,
+    "actual_used_visible_font_gids": 0
+  },
+  {
+    "name": "cord-07",
+    "seconds": 0.9302605650009355,
+    "returncode": 0,
+    "error": null,
+    "command": [
+      "/usr/bin/time",
+      "-v",
+      "-o",
+      "/data/coding/scanweave/qualification/clearscan_contours/real/final/cord-07.time.txt",
+      "/data/coding/scanweave/target/release/scanweave-cli",
+      "build",
+      "/data/coding/scanweave/qualification/clearscan_competitive/real/cord-07.png",
+      "--ocr",
+      "/data/coding/scanweave/qualification/clearscan_competitive/real/cord-07.regions.hocr",
+      "--dpi",
+      "300",
+      "--profile",
+      "clearscan",
+      "--output",
+      "/data/coding/scanweave/qualification/clearscan_contours/real/final/cord-07.pdf",
+      "--report",
+      "/data/coding/scanweave/qualification/clearscan_contours/real/final/cord-07.json"
+    ],
+    "bytes": 845125,
+    "sha256": "58bb11b1473caefd3da3ba08c2d37a9ce3dd1f9014dda8c4bfe6ec6bb6eca1a7",
+    "streams": {
+      "other_stream": 775,
+      "raster": 836098,
+      "content": 5218,
+      "font": 904,
+      "overhead": 2130
+    },
+    "images": [
+      {
+        "object": [
+          17,
+          0
+        ],
+        "width": 864,
+        "height": 1296,
+        "colour": "/DeviceRGB",
+        "filter": "/FlateDecode",
+        "bytes": 836098,
+        "encoded_sha256": "a496844ca118ec85798dc5b52a87a2310500b65f1f198dde45906275e0672c3f",
+        "samples_sha256": "eaa24cc9458a6f65df8e58b7543b3b1352da7c4449255bdec0cb0c6e2ade8b92"
+      }
+    ],
+    "unique_images": 1,
+    "text_show_operations": 76,
+    "font_outlines": 2,
+    "observations": 15,
+    "vector_ink_px": 0,
+    "source_ink_suppressed_px": 0,
+    "coverage": {
+      "text_ink_px_total": 2726,
+      "text_ink_px_vector": 0,
+      "text_ink_px_raster": 2726,
+      "other_ink_px": 634953,
+      "unowned_ink_px": 0,
+      "multiply_owned_ink_px": 0
+    },
+    "supplied_chars": 76,
+    "source_sha256": "282b8ad53f90be3d731bb196e2f4b736d8e34c77be250f00797f8b753bf74fe8",
+    "rss_kb": 49204,
+    "poppler_text": "PKT AYAM 33,000\n1.00xITEMS\nSUBTOTAL 33,000\nTAX 10% 3,300\nTOTAL 36, 300\nCASH 50,000\nCHANGE —\n\f",
+    "pdfium_text": "PKT AYAM 33,000\r\n1.00xITEMS\r\nSUBTOTAL 33,000\r\nTAX 10% 3,300\r\nTOTAL 36, 300\r\nCASH 50,000\r\nCHANGE —",
+    "renderer_text_equal": true,
+    "native_search": [
+      {
+        "token": "AYAM",
+        "found": true
+      },
+      {
+        "token": "00xITEMS",
+        "found": true
+      },
+      {
+        "token": "SUBTOTAL",
+        "found": true
+      }
+    ],
+    "source_relative_mae_150dpi": {
+      "poppler": 3.4324174931291225,
+      "pdfium": 1.0439012586427157
+    },
+    "renderer_mae_150dpi": 3.248260188292286,
+    "actual_vector_occurrences": 0,
+    "actual_used_visible_font_gids": 0
+  },
+  {
+    "name": "cord-08",
+    "seconds": 1.6990786080132239,
+    "returncode": 0,
+    "error": null,
+    "command": [
+      "/usr/bin/time",
+      "-v",
+      "-o",
+      "/data/coding/scanweave/qualification/clearscan_contours/real/final/cord-08.time.txt",
+      "/data/coding/scanweave/target/release/scanweave-cli",
+      "build",
+      "/data/coding/scanweave/qualification/clearscan_competitive/real/cord-08.png",
+      "--ocr",
+      "/data/coding/scanweave/qualification/clearscan_competitive/real/cord-08.regions.hocr",
+      "--dpi",
+      "300",
+      "--profile",
+      "clearscan",
+      "--output",
+      "/data/coding/scanweave/qualification/clearscan_contours/real/final/cord-08.pdf",
+      "--report",
+      "/data/coding/scanweave/qualification/clearscan_contours/real/final/cord-08.json"
+    ],
+    "bytes": 1321073,
+    "sha256": "c2bb89eb25c5982c6996b9f20d2be16a9592b096658dca9ffb822516e58d44a4",
+    "streams": {
+      "other_stream": 871,
+      "raster": 1310809,
+      "content": 6263,
+      "font": 944,
+      "overhead": 2186
+    },
+    "images": [
+      {
+        "object": [
+          17,
+          0
+        ],
+        "width": 864,
+        "height": 1296,
+        "colour": "/DeviceRGB",
+        "filter": "/FlateDecode",
+        "bytes": 1310809,
+        "encoded_sha256": "6adf30d0ed9046975ef1debeaa7457b54a4911e937f5f2c60995eb1e85967246",
+        "samples_sha256": "65e4df93dcf0065ce3774799885facbbd4c3b026c9b74dc033d7726676b7124e"
+      }
+    ],
+    "unique_images": 1,
+    "text_show_operations": 89,
+    "font_outlines": 2,
+    "observations": 46,
+    "vector_ink_px": 0,
+    "source_ink_suppressed_px": 0,
+    "coverage": {
+      "text_ink_px_total": 4607,
+      "text_ink_px_vector": 0,
+      "text_ink_px_raster": 4607,
+      "other_ink_px": 717014,
+      "unowned_ink_px": 0,
+      "multiply_owned_ink_px": 0
+    },
+    "supplied_chars": 89,
+    "source_sha256": "de605ce5bd714dc86190ce74e3cd4439b2874bc03a064c380da7fcc24bc7d00d",
+    "rss_kb": 54736,
+    "poppler_text": "1x 36.000 » 36.000\nKimchi p\n1x 0.000 Re0. 000\nFre ice grentea\n**I01AL Mf. 36.000\nCASH Re51. 000\nCHANGE 15. 000\n\f",
+    "pdfium_text": "1x 36.000 » 36.000\r\nKimchi p\r\n1x 0.000 Re0. 000\r\nFre ice grentea\r\n**I01AL Mf. 36.000\r\nCASH Re51. 000 CHANGE 15. 000",
+    "renderer_text_equal": true,
+    "native_search": [
+      {
+        "token": "Kimchi",
+        "found": true
+      },
+      {
+        "token": "grentea",
+        "found": true
+      },
+      {
+        "token": "I01AL",
+        "found": true
+      }
+    ],
+    "source_relative_mae_150dpi": {
+      "poppler": 2.5061651074490157,
+      "pdfium": 0.9725295385451177
+    },
+    "renderer_mae_150dpi": 2.425121374626209,
+    "actual_vector_occurrences": 0,
+    "actual_used_visible_font_gids": 0
+  },
+  {
+    "name": "cord-09",
+    "seconds": 2.1624158380000154,
+    "returncode": 0,
+    "error": null,
+    "command": [
+      "/usr/bin/time",
+      "-v",
+      "-o",
+      "/data/coding/scanweave/qualification/clearscan_contours/real/final/cord-09.time.txt",
+      "/data/coding/scanweave/target/release/scanweave-cli",
+      "build",
+      "/data/coding/scanweave/qualification/clearscan_competitive/real/cord-09.png",
+      "--ocr",
+      "/data/coding/scanweave/qualification/clearscan_competitive/real/cord-09.regions.hocr",
+      "--dpi",
+      "300",
+      "--profile",
+      "clearscan",
+      "--output",
+      "/data/coding/scanweave/qualification/clearscan_contours/real/final/cord-09.pdf",
+      "--report",
+      "/data/coding/scanweave/qualification/clearscan_contours/real/final/cord-09.json"
+    ],
+    "bytes": 1316276,
+    "sha256": "9e3c3a4159cdefd8b812e884ba27230ee793b5b0e0e0cb578b559bfc86e208a6",
+    "streams": {
+      "other_stream": 1175,
+      "raster": 1291643,
+      "content": 4901,
+      "font": 15996,
+      "overhead": 2561
+    },
+    "images": [
+      {
+        "object": [
+          17,
+          0
+        ],
+        "width": 864,
+        "height": 1296,
+        "colour": "/DeviceRGB",
+        "filter": "/FlateDecode",
+        "bytes": 1291643,
+        "encoded_sha256": "92a2c984a24a867e4b59419b112a18a02712d9b61f29ce0bad0c81b46fbc4954",
+        "samples_sha256": "311b1f5c63bbf029c6ddf976a18a7dceb9d047834a4f67fedc2975ab70b05089"
+      }
+    ],
+    "unique_images": 1,
+    "text_show_operations": 78,
+    "font_outlines": 40,
+    "observations": 78,
+    "vector_ink_px": 6280,
+    "source_ink_suppressed_px": 6280,
+    "coverage": {
+      "text_ink_px_total": 11865,
+      "text_ink_px_vector": 6280,
+      "text_ink_px_raster": 5585,
+      "other_ink_px": 107434,
+      "unowned_ink_px": 0,
+      "multiply_owned_ink_px": 0
+    },
+    "supplied_chars": 78,
+    "source_sha256": "7977f8c68cdb882439bdd57f60b35e52e46c9f5657b54e8de09533365e3c4986",
+    "rss_kb": 44304,
+    "poppler_text": "THAI ICED TEA\n2 €20,000 40.000\nSUB-TOTAL 40.000\nGRANDTOTAL 4.000\nCASH 100.000\nCHANGED 80000\n\f",
+    "pdfium_text": "THAI ICED TEA\r\n2 €20,000 40.000\r\nSUB-TOTAL 40.000\r\nGRANDTOTAL 4.000\r\nCASH 100.000\r\nCHANGED 80 000",
+    "renderer_text_equal": true,
+    "native_search": [
+      {
+        "token": "THAI",
+        "found": true
+      },
+      {
+        "token": "ICED",
+        "found": true
+      },
+      {
+        "token": "TOTAL",
+        "found": true
+      }
+    ],
+    "source_relative_mae_150dpi": {
+      "poppler": 3.944412615606885,
+      "pdfium": 1.4788357999693968
+    },
+    "renderer_mae_150dpi": 3.6233383271000212,
+    "actual_vector_occurrences": 33,
+    "actual_used_visible_font_gids": 33
+  },
+  {
+    "name": "history-00",
+    "seconds": 24.689436257001944,
+    "returncode": 0,
+    "error": null,
+    "command": [
+      "/usr/bin/time",
+      "-v",
+      "-o",
+      "/data/coding/scanweave/qualification/clearscan_contours/real/final/history-00.time.txt",
+      "/data/coding/scanweave/target/release/scanweave-cli",
+      "build",
+      "/data/coding/scanweave/qualification/clearscan_competitive/real/history-00.png",
+      "--ocr",
+      "/data/coding/scanweave/qualification/clearscan_competitive/real/history-00.regions.hocr",
+      "--dpi",
+      "300",
+      "--profile",
+      "clearscan",
+      "--output",
+      "/data/coding/scanweave/qualification/clearscan_contours/real/final/history-00.pdf",
+      "--report",
+      "/data/coding/scanweave/qualification/clearscan_contours/real/final/history-00.json"
+    ],
+    "bytes": 9630638,
+    "sha256": "b27d0b3e86386ebb4440b432ad1b0903ce16a3194cec3b29e2f2851386279319",
+    "streams": {
+      "other_stream": 1799,
+      "raster": 9547013,
+      "content": 66589,
+      "font": 12344,
+      "overhead": 2893
+    },
+    "images": [
+      {
+        "object": [
+          17,
+          0
+        ],
+        "width": 1737,
+        "height": 2354,
+        "colour": "/DeviceRGB",
+        "filter": "/FlateDecode",
+        "bytes": 9547013,
+        "encoded_sha256": "5b1e0b1887078a11edd0e2894578e1bff38c68f3f11037ddbace318e98a5499d",
+        "samples_sha256": "2b00662b31d30ec2430c1eab6ecaeeaadc9e0af7921d5fc0e50d2bb1c6fb8153"
+      }
+    ],
+    "unique_images": 1,
+    "text_show_operations": 998,
+    "font_outlines": 149,
+    "observations": 262,
+    "vector_ink_px": 2586,
+    "source_ink_suppressed_px": 2586,
+    "coverage": {
+      "text_ink_px_total": 3356927,
+      "text_ink_px_vector": 2586,
+      "text_ink_px_raster": 3354341,
+      "other_ink_px": 121823,
+      "unowned_ink_px": 0,
+      "multiply_owned_ink_px": 0
+    },
+    "supplied_chars": 998,
+    "source_sha256": "ab063bfc04dfb3e04857c3c94bc8ecd670424dfec81b6de4486cf4e21b7b3630",
+    "rss_kb": 208840,
+    "poppler_text": "_ Bacharias 0, coe\n‘|\noa\nSE fee eitses flegenden Breffi edder Boeck! devs twintichcferr Latrcly\ni= Hud tein clen breitr DWndhe fprack chomy! Datys de flocet) wetefer veh /\n| :\ngeitlauer Datgantgelandt 1 Wente alle Deve werden na diffe breve\n| fran gefprateny vnd alle meincedige werden na differs brene fram Gefpras s\nee bens ~—\n Oueefeick wilt herudy bringer\n1fprickedeHere Sebaoth;dat he\nden deen (chaleohufs famen/oidet\ndeby mine naraen falfeMliten fiverenz 2\n: eo\nSud fchalincre hfe blivens ond fehale vorteven / fampt fynem Holte ond\nflencn.\n:\n:\nou\nij. Det. |\n| BWBente\nfofeenrtflagen fine dem onflate der werle | Sorchdeerkentnis\nas\ndes Heren ondHeilandes Sefu Chriftis werden suerfewedderAmme inde\nee\neee\n_\nfillfften geflochten ond anerwunnen / fo ysmiten dat lefteerger gewordent\na - alfs dat erfte WBente yde were ci beter / Dat fe der weehder Gerechs\naS tichcitnicheerEandt\nhedber / alfe Datfeen erEennen 7 Ond fevers fickban dene\nee\n-\nHilligen Gebade / dat en gegeuenys/En ys wedderfaren de ware fprdtey\nif De Hunde frite wedder) dat he gefoyee heffe: Dud de Su weltert fick na\n!\n:\ndein fivemmende wedderim Drecke.\n- :\n| So\nFe\nx NS\neee hk\nAya os\nJ\ni : (Biblicth Regia)\n7\n|\nSop Re Tig|\nf :\nBerolinenfi\n\f",
+    "pdfium_text": "_ Bacharias 0, coe ‘|\r\noa\r\nSEfee eitses flegenden Breffi edder Boeck! devs twintich cferr Latrcly i= Hud tein clen breitr DWnd he fprack cho my! Datys de flocet) wetefer veh /\r\n| :\r\ngeitlauer Dat gantgelandt 1 Wente alle Deve werden na diffe breve | fran gefprateny vnd alle meincedige werden na differs brene fram Gefpras ee s\r\nee bens ~—\r\n Oueefeick wilt herudy bringer 1 fprickede Here Sebaoth ; dat he den deen (chal eohufs famen/oi det de by mine naraen falfeMliten fiverenz 2\r\n: eo\r\nSud fchal incre hfe blivens ond fehale vorteven / fampt fynem Holte ond flencn. :\r\n: ou ij. Det. |\r\n| BWBente\r\nfo fe enrtflagen fine dem onflate der werle | Sorch de erkentnis\r\nas des Heren ond Heilandes Sefu Chriftis werden suerfe wedderAmme inde ee eee _\r\nfillfften geflochten ond anerwunnen / fo ys miten dat lefteerger gewordent a - alfs dat erfte WBente yde were ci beter / Dat fe der weeh der Gerechs aS tichcit nicheerEandt hedber / alfe Dat feen erEennen\r\nee\r\nerEennen 7 Ond fevers fick ban dene ee ￾Hilligen Gebade / dat en gegeuenys / En ys wedderfaren de ware fprdtey if De Hunde frite wedder) dat he gefoyee heffe: Dud de Su weltert fick na !\r\n: dein fivemmende wedderim Drecke. - :\r\n| So\r\nFe\r\nx NS eee hk\r\nAya os J i : (Biblicth Regia) 7\r\n|\r\nf Sop Re Tig | :\r\nBerolinenfi",
+    "renderer_text_equal": false,
+    "native_search": [
+      {
+        "token": "Bacharias",
+        "found": true
+      },
+      {
+        "token": "SEfee",
+        "found": true
+      },
+      {
+        "token": "eitses",
+        "found": true
+      }
+    ],
+    "source_relative_mae_150dpi": {
+      "poppler": 9.337321876650496,
+      "pdfium": 2.286206719143901
+    },
+    "renderer_mae_150dpi": 8.584737903632833,
+    "actual_vector_occurrences": 30,
+    "actual_used_visible_font_gids": 30
+  },
+  {
+    "name": "history-01",
+    "seconds": 5.893881165990024,
+    "returncode": 0,
+    "error": null,
+    "command": [
+      "/usr/bin/time",
+      "-v",
+      "-o",
+      "/data/coding/scanweave/qualification/clearscan_contours/real/final/history-01.time.txt",
+      "/data/coding/scanweave/target/release/scanweave-cli",
+      "build",
+      "/data/coding/scanweave/qualification/clearscan_competitive/real/history-01.png",
+      "--ocr",
+      "/data/coding/scanweave/qualification/clearscan_competitive/real/history-01.regions.hocr",
+      "--dpi",
+      "300",
+      "--profile",
+      "clearscan",
+      "--output",
+      "/data/coding/scanweave/qualification/clearscan_contours/real/final/history-01.pdf",
+      "--report",
+      "/data/coding/scanweave/qualification/clearscan_contours/real/final/history-01.json"
+    ],
+    "bytes": 5098148,
+    "sha256": "dea881f2720044b276a59c429f02c6a9c7294b0e54fe08a0b46dabb4ee11ae5e",
+    "streams": {
+      "other_stream": 1543,
+      "raster": 5035593,
+      "content": 44739,
+      "font": 13608,
+      "overhead": 2665
+    },
+    "images": [
+      {
+        "object": [
+          17,
+          0
+        ],
+        "width": 1116,
+        "height": 1835,
+        "colour": "/DeviceRGB",
+        "filter": "/FlateDecode",
+        "bytes": 5035593,
+        "encoded_sha256": "4509e5c07718e594bd9f4317474d8e68273f1cb1fa8cdbb44875cdbf0888f2f7",
+        "samples_sha256": "e442a36925f8f32002233afa0c72fca7c3b777808a93da46b16fc7e69980cd23"
+      }
+    ],
+    "unique_images": 1,
+    "text_show_operations": 691,
+    "font_outlines": 146,
+    "observations": 240,
+    "vector_ink_px": 1697,
+    "source_ink_suppressed_px": 1697,
+    "coverage": {
+      "text_ink_px_total": 1721211,
+      "text_ink_px_vector": 1697,
+      "text_ink_px_raster": 1719514,
+      "other_ink_px": 142,
+      "unowned_ink_px": 0,
+      "multiply_owned_ink_px": 0
+    },
+    "supplied_chars": 691,
+    "source_sha256": "eb203b78e488dac22b7d99fea2731fae13d54e9488ee8674c3b743f243a78d7f",
+    "rss_kb": 106576,
+    "poppler_text": "ag\n4\ni\nLEONIS BAPTIST\nAE ;\nDE ALBERTIS, LIB. PRIMYVS\nRVDIMENTA,ae) E PicTvra hisbrevif® —\nKe ak| fimis commentartjs con\nat os f {cripturi,quo clarior no\nPy eeStra fit oratio, a Mathe- i\ncme ~maticisea primum,quz\n_\nadrem pertinere uidebuntut accipie-\nmus. Quibus quidé cognitis,\nquoad\ningenium fuppeditabic,\npituram ab\niplis natura principtjs exponemus.\nSedin omni noftra oratione fpectari\nilluduehementer peto, ndme ueMar44:\n8\nthematicum, fed ueluti piGoreé hifce\nde rebus loqui.lili enimfoloingenio,\nomni feiuncta\nmateriaylpecies8for.\n|\n_masreré metiuntur, Nos uerd,quod\nfub afpectu rem effepofita uolumus,\nPingutore idcirco, utaiunt, Miner-\nuaicribendo uremur, Acreequidépe\neff nobifcum a@um arbitramur , f\n_ quoquo pacto in hac planedifficiliet |\n_-@Nemine,quoduiderim, alio tradita\nBe\na 2_. literisee\n\f",
+    "pdfium_text": "ag 4 i LEONIS BAPTIST AE ;\r\nDE ALBERTIS, LIB. PRIMYVS RVDIMENTA, ae) E PicTvra hisbrevif® —\r\nKe ak | fimis commentartjs con at os f {cripturi,quo clarior no\r\nPy ee Stra fit oratio, a Mathe- i\r\ncme ~maticisea primum,quz _\r\nprimum,quz\r\nadrem pertinere uidebuntut acci pie- mus. Quibus quidé cognitis, quoad ingenium fuppeditabic, pituram ab iplis natura principtjs exponemus.\r\nSed in omni noftra oratione fpectari\r\nillud uehementer peto, nd me ueMar 44:\r\n8 thematicum, fed ueluti piGoreé hifce de rebus loqui. lili enim foloingenio,\r\nomni fei uncta materiaylpecies 8 for. | _masreré\r\nmetiuntur, Nos uerd,quod fub afpectu rem effe pofita uolumus,\r\nPingutore idcirco, utaiunt, Miner￾uaicribendo uremur, Acree quidé pe\r\neff nobifcum a@um arbitramur , f _ quoquo pacto in hac plane difficili et |\r\n_-@Nemine, quod uiderim, alio tradita\r\nBe a 2 _. literis ee",
+    "renderer_text_equal": false,
+    "native_search": [
+      {
+        "token": "LEONIS",
+        "found": true
+      },
+      {
+        "token": "BAPTIST",
+        "found": true
+      },
+      {
+        "token": "ALBERTIS",
+        "found": true
+      }
+    ],
+    "source_relative_mae_150dpi": {
+      "poppler": 7.614703149280421,
+      "pdfium": 2.383495625782505
+    },
+    "renderer_mae_150dpi": 7.131693750113878,
+    "actual_vector_occurrences": 17,
+    "actual_used_visible_font_gids": 17
+  },
+  {
+    "name": "history-02",
+    "seconds": 17.172636859002523,
+    "returncode": 0,
+    "error": null,
+    "command": [
+      "/usr/bin/time",
+      "-v",
+      "-o",
+      "/data/coding/scanweave/qualification/clearscan_contours/real/final/history-02.time.txt",
+      "/data/coding/scanweave/target/release/scanweave-cli",
+      "build",
+      "/data/coding/scanweave/qualification/clearscan_competitive/real/history-02.png",
+      "--ocr",
+      "/data/coding/scanweave/qualification/clearscan_competitive/real/history-02.regions.hocr",
+      "--dpi",
+      "300",
+      "--profile",
+      "clearscan",
+      "--output",
+      "/data/coding/scanweave/qualification/clearscan_contours/real/final/history-02.pdf",
+      "--report",
+      "/data/coding/scanweave/qualification/clearscan_contours/real/final/history-02.json"
+    ],
+    "bytes": 8188552,
+    "sha256": "132b8ec477d4f13e62aef0897a55f9ab1f722e5fcc88ac20c9c2d9a19dffd4e7",
+    "streams": {
+      "other_stream": 1223,
+      "raster": 8126207,
+      "content": 57723,
+      "font": 1012,
+      "overhead": 2387
+    },
+    "images": [
+      {
+        "object": [
+          17,
+          0
+        ],
+        "width": 1675,
+        "height": 2286,
+        "colour": "/DeviceRGB",
+        "filter": "/FlateDecode",
+        "bytes": 8126207,
+        "encoded_sha256": "b477b099ed5e9b7d3409fd7bb5e4404e7e723d209b30d904f1ce1489ffa783c1",
+        "samples_sha256": "e76e8802c9e6ea3485e3d9655fa4e4b0e71d28cb7f597b2c00c4fe865d4dad25"
+      }
+    ],
+    "unique_images": 1,
+    "text_show_operations": 861,
+    "font_outlines": 2,
+    "observations": 9,
+    "vector_ink_px": 0,
+    "source_ink_suppressed_px": 0,
+    "coverage": {
+      "text_ink_px_total": 788,
+      "text_ink_px_vector": 0,
+      "text_ink_px_raster": 788,
+      "other_ink_px": 2664230,
+      "unowned_ink_px": 0,
+      "multiply_owned_ink_px": 0
+    },
+    "supplied_chars": 861,
+    "source_sha256": "a4962458fc0fa24ab82d5e30b2f5423c52eb077b9cd1d80b909e62899a1045a2",
+    "rss_kb": 170704,
+    "poppler_text": "19\nnem Geift dufter, twie diefe Krduter, dem Geift jener |\nfcponen Vorwelf, in deren Ginn der Tempel hier gebaut\nift. —\nDein Geift fpridt ja die heilige Ordnung der\nGdhinheit aus tie er, und ob ic) ihm mwas bin, ob id\nihm was bleibe, das ift dann einerlei.\nYa fifer Freund! ob id) Dit was bin: mas foll\nid) Danad) fragen? —\nweiff ich dod), daf die Lerche\nnidt umfonft jubelnd auffteigt, dag der IMorgenwind\nnidt ungefible in den Bweigen [ifpelt, ja da die ganze\nNatur nist unbegriffen in ihe Sdhweigen verfunken ift;\ntwas follt’ id) gagen, von Dir nidjt verftanden nidjt ges )\nfable zu fein? — Drum will idp nidt fchwsren Dir ete\nwas gu fein; es ift mic gewif, daf id) Dir bin, was\nin einftimmender Gdinheit cin Ton der Matur, cine\ngeiftige Berihrung diefer finnliden Welt Dir fein Fann.\n3m Guli.\nDiefe Lage, viefe Gegenden fie tragen das Antlis\ndes Paradiefes,\nDie Fille lade midy an in der reifens\nden Frudt, das Leben jauchzt in mir, und einfam bin\nid) wie der erfte Wenfd); und id) [erne wie diefer herr-\nfen und. gebieten dem Glid: dag die Welt foll\n\f",
+    "pdfium_text": "19\r\nnem Geift dufter, twie diefe Krduter, dem Geift jener |\r\nfcponen Vorwelf, in deren Ginn der Tempel hier gebaut\r\nift. —\r\nDein Geift fpridt ja die heilige Ordnung der\r\nGdhinheit aus tie er, und ob ic) ihm mwas bin, ob id\r\nihm was bleibe, das ift dann einerlei.\r\nYa fifer Freund! ob id) Dit was bin: mas foll\r\nid) Danad) fragen? —\r\nweiff ich dod), daf die Lerche\r\nnidt umfonft jubelnd auffteigt, dag der IMorgenwind\r\nnidt ungefible in den Bweigen [ifpelt, ja da die ganze\r\nNatur nist unbegriffen in ihe Sdhweigen verfunken ift;\r\ntwas follt’ id) gagen, von Dir nidjt verftanden nidjt ges )\r\nfable zu fein? —\r\nDrum will idp nidt fchwsren Dir ete\r\nwas gu fein; es ift mic gewif, daf id) Dir bin, was\r\nin einftimmender Gdinheit cin Ton der Matur, cine\r\ngeiftige Berihrung diefer finnliden Welt Dir fein Fann.\r\n3m Guli.\r\nDiefe Lage, viefe Gegenden fie tragen das Antlis\r\ndes Paradiefes, Die Fille lade midy an in der reifens\r\nden Frudt, das Leben jauchzt in mir, und einfam bin\r\nid) wie der erfte Wenfd); und id) [erne wie diefer herr￾fen und. gebieten dem Glid: dag die Welt foll",
+    "renderer_text_equal": false,
+    "native_search": [
+      {
+        "token": "Geift",
+        "found": true
+      },
+      {
+        "token": "dufter",
+        "found": true
+      },
+      {
+        "token": "twie",
+        "found": true
+      }
+    ],
+    "source_relative_mae_150dpi": {
+      "poppler": 3.586867041073485,
+      "pdfium": 1.2301381494400587
+    },
+    "renderer_mae_150dpi": 3.432419012967939,
+    "actual_vector_occurrences": 0,
+    "actual_used_visible_font_gids": 0
+  },
+  {
+    "name": "history-03",
+    "seconds": 56.35955655600992,
+    "returncode": 0,
+    "error": null,
+    "command": [
+      "/usr/bin/time",
+      "-v",
+      "-o",
+      "/data/coding/scanweave/qualification/clearscan_contours/real/final/history-03.time.txt",
+      "/data/coding/scanweave/target/release/scanweave-cli",
+      "build",
+      "/data/coding/scanweave/qualification/clearscan_competitive/real/history-03.png",
+      "--ocr",
+      "/data/coding/scanweave/qualification/clearscan_competitive/real/history-03.regions.hocr",
+      "--dpi",
+      "300",
+      "--profile",
+      "clearscan",
+      "--output",
+      "/data/coding/scanweave/qualification/clearscan_contours/real/final/history-03.pdf",
+      "--report",
+      "/data/coding/scanweave/qualification/clearscan_contours/real/final/history-03.json"
+    ],
+    "bytes": 15238149,
+    "sha256": "65a0122da6ff5d073cd91c3645c79fffdc59f73ced857adfb41b54b572c43393",
+    "streams": {
+      "other_stream": 1207,
+      "raster": 15208177,
+      "content": 25378,
+      "font": 1004,
+      "overhead": 2383
+    },
+    "images": [
+      {
+        "object": [
+          17,
+          0
+        ],
+        "width": 2319,
+        "height": 3928,
+        "colour": "/DeviceRGB",
+        "filter": "/FlateDecode",
+        "bytes": 15208177,
+        "encoded_sha256": "3379917a9b9bd3872f903b1aa4ddf90b0729043630d4356a2c4dde2abca729dd",
+        "samples_sha256": "94c915a08c9d961b3ea8caed6654a20c7ca0825c486091b2fb1b3167bf50ec7e"
+      }
+    ],
+    "unique_images": 1,
+    "text_show_operations": 378,
+    "font_outlines": 2,
+    "observations": 165,
+    "vector_ink_px": 0,
+    "source_ink_suppressed_px": 0,
+    "coverage": {
+      "text_ink_px_total": 148051,
+      "text_ink_px_vector": 0,
+      "text_ink_px_raster": 148051,
+      "other_ink_px": 6699912,
+      "unowned_ink_px": 0,
+      "multiply_owned_ink_px": 0
+    },
+    "supplied_chars": 378,
+    "source_sha256": "0ec3a67d68fd3fd46d87c647c4b3ce9212e288c5611b3a5cec6ffa84de6b7de6",
+    "rss_kb": 449040,
+    "poppler_text": "wel )2( © )2( Ete\nDaurchlauchtighter/\nGropingehrighterChur-AEirft, —\nuiddiafterShurHarkundGer?\nRESNG\n<4 > AS\nDeeJ\niS,\nur, Sal\nO(N EL2S nit gegenivartigen bude unter\nET pNeChanigft gu ericheinen7: beeget\ncae(Sigh mich fo\nch eipa ee\nlg Sa FE und inal, alg auch fonderiichy\nSy enneerBentpreiiptire\nDighteHuldund Gnade, durchwelche iBdaco ausGott\nlicherdirection OERO gefamle unterthanen in\nung\nYanct-\nHerzog August Bibliothek Wolfenbiittel\n.\n\f",
+    "pdfium_text": "wel )2( © )2( Ete\r\nDaurchlauchtighter/\r\nGropingehrighter Chur-AEirft, —\r\nuiddiafter Shur Hark und Ger?\r\nRES<4\r\nRES\r\n> NG AS\r\nDee J\r\niS, ur, Sal O(N EL 2S nit gegenivartigen bude unter\r\nET pNe Chanigft gu ericheinen7: beeget cae (Sigh mich fo ch ei\r\nlg Sa FE und inal, algeiauch paauch pa ee fonderiichy Sy enneerBent preiiptire\r\nDighte Huld und Gnade, durch welche iB daco aus Gott\r\nlicher direction OERO gefamle unterthanen in ungYanct-ungYanct- ungYanct￾Herzog August Bibliothek Wolfenbiittel\r\n.",
+    "renderer_text_equal": false,
+    "native_search": [
+      {
+        "token": "Daurchlauchtighter",
+        "found": true
+      },
+      {
+        "token": "Gropingehrighter",
+        "found": true
+      },
+      {
+        "token": "Chur",
+        "found": true
+      }
+    ],
+    "source_relative_mae_150dpi": {
+      "poppler": 3.332110605847789,
+      "pdfium": 2.1534102348011332
+    },
+    "renderer_mae_150dpi": 4.447348391740993,
+    "actual_vector_occurrences": 0,
+    "actual_used_visible_font_gids": 0
+  },
+  {
+    "name": "history-04",
+    "seconds": 28.717813511000713,
+    "returncode": 0,
+    "error": null,
+    "command": [
+      "/usr/bin/time",
+      "-v",
+      "-o",
+      "/data/coding/scanweave/qualification/clearscan_contours/real/final/history-04.time.txt",
+      "/data/coding/scanweave/target/release/scanweave-cli",
+      "build",
+      "/data/coding/scanweave/qualification/clearscan_competitive/real/history-04.png",
+      "--ocr",
+      "/data/coding/scanweave/qualification/clearscan_competitive/real/history-04.regions.hocr",
+      "--dpi",
+      "300",
+      "--profile",
+      "clearscan",
+      "--output",
+      "/data/coding/scanweave/qualification/clearscan_contours/real/final/history-04.pdf",
+      "--report",
+      "/data/coding/scanweave/qualification/clearscan_contours/real/final/history-04.json"
+    ],
+    "bytes": 10417037,
+    "sha256": "caffe779b3f411ce36a9f163d6d7213eb65e3cf70178cbf94093e9949bf82ce1",
+    "streams": {
+      "other_stream": 1799,
+      "raster": 10284183,
+      "content": 96724,
+      "font": 31468,
+      "overhead": 2863
+    },
+    "images": [
+      {
+        "object": [
+          17,
+          0
+        ],
+        "width": 1756,
+        "height": 2440,
+        "colour": "/DeviceRGB",
+        "filter": "/FlateDecode",
+        "bytes": 10284183,
+        "encoded_sha256": "68e62a59f6643595b58a3a2d51bea3e470c489e0aa462e3e07a5e4f06fd1544a",
+        "samples_sha256": "1228483eb7a2d85eb23dd4dee25eaee05176746a6694bcc19bebffd8b801e59c"
+      }
+    ],
+    "unique_images": 1,
+    "text_show_operations": 1530,
+    "font_outlines": 291,
+    "observations": 529,
+    "vector_ink_px": 3685,
+    "source_ink_suppressed_px": 3685,
+    "coverage": {
+      "text_ink_px_total": 3378179,
+      "text_ink_px_vector": 3685,
+      "text_ink_px_raster": 3374494,
+      "other_ink_px": 1280,
+      "unowned_ink_px": 0,
+      "multiply_owned_ink_px": 0
+    },
+    "supplied_chars": 1530,
+    "source_sha256": "f0ab2fba265d9c2a822d80f701d82892849f9100b5d40e2388d6d8dbbc5f663f",
+    "rss_kb": 204800,
+    "poppler_text": "- FoannesAnentinusftudiolis, .\n«\n+. « Grammatice Saluteis.ctigensoslaborws.\n© ~ —\n2\n€Chusis mulesvariags 4doctiffimis\nadinfiitnédes puerosrndefos\nconfcriptafine:ullus cament\nadbuc mibiqiiders [atts fact orang.\nCeuAdoquidéSplurs,Gquefaale.apuerts ct rudiSus perapt qreane\ntradtics£cque ctismidlineauctortateacimitatione G preceptis Hifamié\nAue lidiontceaetreferuanda forent.CAaleindineciningeniaofruant\ndunt mibilpretermiittends cenfertt,\n2fudio grammratice\ndeterrent, Ze\ncerpertess loquor)\nindefperationéfeductt.\nO8 comune igitur fiudio[os\nrunt precipue Germanors vtilicatennvet ¢omisinfiieutto &facllina,\natsGrewiffinea effedeSet/ gramaticeprecepta tr enn ordinéquivalgo\npet figuras vocatury ra noffrisinventseffx<Spofisi.\nQuovi f(quilgs\n)\n&facillimes et a6(qsmagnolaBorey aunicteinvenire/intelligeres acises\nirorie cOmendare poffic.\nMeceruGivernacula lingualoqui/cumiddo2\nF\nctiffimos Seales facerevideam, etfepins aliquid vrio verBo tentonico\nSys radis acciplet/quod anBbacges in lingtta latina ideno6fanrins faceret,\nPericaldit huiuf{moditraditise nimirdfectmus. Mans printceps meses\nCeterigsingenuipucrimee fidelOmifficontinus\npofteagsDonatieles\nmentelegere (einerat-bocpacto ame/octo dittaratmsenfibus inftitutt\nBramaticerudiméetaadvigquertscallerit,\nFOgbatias vitrienntoadfes\ncutifriFent.\nSed ne plus equo verBofior\nfim.WaleteretequtForigsOs\nfulite. LiTonachy ludis FeSruards, Annofalutis. 9.D.r7.\nCehuadoquidéartaFabyfereentisinprimis/etaniteommisperibes\ndinare etconingare difceredDeBene,Ego omiffieque nibiladeruditios\nMelts pucrordfacie.\nASocto paraBuforationibusimnapto, fiasti Doras\ngusfedtvetSernigsprecipit,\nWe ee\nSonyek\nawa\nTe Sitar\nnage\nce\n.\na\\Bereiiesith7: <=\nee\nCi\nee\n\f",
+    "pdfium_text": "- Foannes Anentinus ftudiolis, . «\r\n+. « Grammatice Saluteis.ctigensoslaborws. © ~ —\r\n2\r\n€Chusis mules variags 4 doctiffimis ad infiitnédes puerosrndefos\r\nconfcripta fine: ullus cament adbuc mibi qiiders [atts fact orang.\r\nCeuAdoquidé Splurs, G que faale.a puerts ctrudiSus perapt qreane\r\ntradtics£c que ctis midline auctortate acimitatione G preceptis Hifamié\r\nAue lidiont ceaet referuanda forent.CAaleindine cin ingenia ofruant\r\ndunt mibil pretermiittends cenfertt, 2fudio grammratice deterrent, Ze\r\ncerpertess loquor) in defperationé feductt. O8 comune igitur fiudio[os\r\nrunt precipue Germanors vtilicatennvet ¢ omis infiieutto &facllina, ats Grewiffinea effedeSet/ gramatice precepta tr enn ordinéqui valgo\r\npet figuras vocatury ra noffris invents eff x<Spofisi. Quo vi f(quilgs )\r\n& facillimes et a6(qs magno laBorey aunicte invenire/ intelligeres acises\r\nirorie cOmendare poffic. MeceruGi vernacula lingua loqui/cumid do2\r\nF ctiffimos Seales facere videam, et fepins aliquid vrio verBo tentonico\r\nSys radis acciplet/quod anBbacges in lingtta latina iden o6fanrins faceret,\r\nPericald it huiuf{modi traditise nimird fectmus. Mans printceps meses\r\nCeterigs ingenui pucri mee fidel Omiffi continus pofteags Donati eles\r\nmente legere (einerat- boc pacto ame/octo dittarat msenfibus inftitutt\r\nBramatice rudiméeta ad vigquerts callerit, FO gbatias vi triennto adfes\r\ncuti friFent. Sed ne plus equo verBofior fim. Waleteret equt Forigs Os\r\nfulite. LiTonachy ludis FeSruards, Anno falutis. 9.D.r7.\r\nCehuadoquidé arta Faby fereentis in primis /etanite ommis peri bes\r\ndinare et coningare difcere dDeBene, Ego omiffieque nibil ad eruditios\r\nMelts pucrord facie. AS octo paraBuforationibus imnapto, fiasti Doras\r\ngusfedtvetSernigsprecipit, We ee\r\nSonyek awa\r\nTe Sitar nage\r\nce\r\n.\r\na\\ Bereiiesith 7: <=\r\nee\r\nCi\r\nee",
+    "renderer_text_equal": true,
+    "native_search": [
+      {
+        "token": "Foannes",
+        "found": true
+      },
+      {
+        "token": "Anentinus",
+        "found": true
+      },
+      {
+        "token": "ftudiolis",
+        "found": true
+      }
+    ],
+    "source_relative_mae_150dpi": {
+      "poppler": 15.754944764604586,
+      "pdfium": 8.948073444114959
+    },
+    "renderer_mae_150dpi": 10.647550308659245,
+    "actual_vector_occurrences": 27,
+    "actual_used_visible_font_gids": 27
+  }
+]
