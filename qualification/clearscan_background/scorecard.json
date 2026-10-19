@@ -1,0 +1,2820 @@
+{
+  "documents": [
+    {
+      "dpi": 300,
+      "arms": {
+        "previous": {
+          "pdf_bytes": 711770,
+          "sha256": "8c79d7874e86ca71983ce14aa3602ef50c1d1669834db4e3aeb081f741c36ce6",
+          "stream_bytes": {
+            "other_stream": 1383,
+            "raster": 615829,
+            "content": 54567,
+            "font": 25340,
+            "overhead": 14651
+          },
+          "glyph_iou": {
+            "source": 0.945163201851262,
+            "poppler": 0.9499441084225643,
+            "pdfium": 0.9563333865823164
+          },
+          "vector_occurrences": 531,
+          "distinct_painted_outlines": 52,
+          "resource_class_bytes": {
+            "paper_background": 583698,
+            "native_artwork_and_vector_surroundings": 17194,
+            "native_vector_surroundings": 5576,
+            "native_fallback": 9361
+          },
+          "background": {
+            "pdfium": {
+              "dpi": 300,
+              "arm": "previous",
+              "renderer": "pdfium",
+              "glyph_population": "new emitted page0 bbox +2 physical300px halo; source contrast>8 against paired paper",
+              "source_ink_pixels": 25428,
+              "ghost_contrast": 3.506073420910563,
+              "raw_inkband_dark_contrast": 4.096389806512506,
+              "common_ascii_inkband_dark_contrast": 3.7925767918088735,
+              "ghost_method": "Only common vectorized ASCII; per-glyph surrounding-paper residual median removed; kana excluded because Adobe retains it as legitimate raster",
+              "pdf_sha256": "8c79d7874e86ca71983ce14aa3602ef50c1d1669834db4e3aeb081f741c36ce6",
+              "paper_mae_owned": 2.582555908429271,
+              "paper_mae_common_ascii": 2.4327914280435987,
+              "paper_bias_owned": -2.353794495170041,
+              "paper_std_owned": 3.785399872590982,
+              "oracle_std_owned": 2.402550125526561,
+              "paper_mae_outside": 0.8758842328270315,
+              "vector_to_final_inkband_mae": 1.2264432908604688
+            },
+            "poppler": {
+              "dpi": 300,
+              "arm": "previous",
+              "renderer": "poppler",
+              "glyph_population": "new emitted page0 bbox +2 physical300px halo; source contrast>8 against paired paper",
+              "source_ink_pixels": 25428,
+              "ghost_contrast": 3.602168436206586,
+              "raw_inkband_dark_contrast": 4.192464999213465,
+              "common_ascii_inkband_dark_contrast": 3.902005119453925,
+              "ghost_method": "Only common vectorized ASCII; per-glyph surrounding-paper residual median removed; kana excluded because Adobe retains it as legitimate raster",
+              "pdf_sha256": "8c79d7874e86ca71983ce14aa3602ef50c1d1669834db4e3aeb081f741c36ce6",
+              "paper_mae_owned": 2.664896784438269,
+              "paper_mae_common_ascii": 2.5029188989469793,
+              "paper_bias_owned": -2.4357714701601165,
+              "paper_std_owned": 3.827854901598925,
+              "oracle_std_owned": 2.402550125526561,
+              "paper_mae_outside": 0.9671083342310316,
+              "vector_to_final_inkband_mae": 1.2132688375019662
+            }
+          },
+          "search": {
+            "poppler_matches_ocr": true,
+            "pdfium_matches_ocr": true
+          },
+          "observations": 552,
+          "accepted_canonical_ids": 37,
+          "canonical_replacements": 511,
+          "source_mask_pixels_superseded": 126838,
+          "additional_bright_samples_superseded": 71144,
+          "same_font_as_previous": null,
+          "same_text_placements_as_previous": null
+        },
+        "final": {
+          "pdf_bytes": 257972,
+          "sha256": "79b37c5cdda773f28fe1fe671d44c2843caf2910fd9b01c29f1818b33d506890",
+          "stream_bytes": {
+            "other_stream": 1383,
+            "raster": 118980,
+            "content": 61332,
+            "font": 25340,
+            "overhead": 50937
+          },
+          "glyph_iou": {
+            "source": 0.945163201851262,
+            "poppler": 0.9497289449087727,
+            "pdfium": 0.9566875086036682
+          },
+          "vector_occurrences": 531,
+          "distinct_painted_outlines": 52,
+          "resource_class_bytes": {
+            "paper_background": 46532,
+            "native_artwork_and_vector_surroundings": 18249,
+            "native_other_unknown": 31847,
+            "native_vector_surroundings": 11364,
+            "native_fallback": 10054,
+            "native_fallback_and_vector_surroundings": 934
+          },
+          "background": {
+            "pdfium": {
+              "dpi": 300,
+              "arm": "final",
+              "renderer": "pdfium",
+              "glyph_population": "new emitted page0 bbox +2 physical300px halo; source contrast>8 against paired paper",
+              "source_ink_pixels": 25428,
+              "ghost_contrast": 0.43782616519704876,
+              "raw_inkband_dark_contrast": 1.0601305647317918,
+              "common_ascii_inkband_dark_contrast": 0.4495733788395904,
+              "ghost_method": "Only common vectorized ASCII; per-glyph surrounding-paper residual median removed; kana excluded because Adobe retains it as legitimate raster",
+              "pdf_sha256": "79b37c5cdda773f28fe1fe671d44c2843caf2910fd9b01c29f1818b33d506890",
+              "paper_mae_owned": 0.9991564112743152,
+              "paper_mae_common_ascii": 0.7612968778865694,
+              "paper_bias_owned": -0.30456861188302237,
+              "paper_std_owned": 3.9291797182702974,
+              "oracle_std_owned": 2.402550125526561,
+              "paper_mae_outside": 0.8253720318246872,
+              "vector_to_final_inkband_mae": 1.2417807141733521
+            },
+            "poppler": {
+              "dpi": 300,
+              "arm": "final",
+              "renderer": "poppler",
+              "glyph_population": "new emitted page0 bbox +2 physical300px halo; source contrast>8 against paired paper",
+              "source_ink_pixels": 25428,
+              "ghost_contrast": 0.4237898146481915,
+              "raw_inkband_dark_contrast": 0.9401840490797546,
+              "common_ascii_inkband_dark_contrast": 0.42994880546075087,
+              "ghost_method": "Only common vectorized ASCII; per-glyph surrounding-paper residual median removed; kana excluded because Adobe retains it as legitimate raster",
+              "pdf_sha256": "79b37c5cdda773f28fe1fe671d44c2843caf2910fd9b01c29f1818b33d506890",
+              "paper_mae_owned": 1.084937806007675,
+              "paper_mae_common_ascii": 0.7755588398300388,
+              "paper_bias_owned": -0.3866779145163425,
+              "paper_std_owned": 3.2399384962042577,
+              "oracle_std_owned": 2.402550125526561,
+              "paper_mae_outside": 0.9171854080423508,
+              "vector_to_final_inkband_mae": 0.8909076608463111
+            }
+          },
+          "search": {
+            "poppler_matches_ocr": true,
+            "pdfium_matches_ocr": true
+          },
+          "observations": 552,
+          "accepted_canonical_ids": 37,
+          "canonical_replacements": 511,
+          "source_mask_pixels_superseded": 126838,
+          "additional_bright_samples_superseded": 81865,
+          "same_font_as_previous": true,
+          "same_text_placements_as_previous": true,
+          "vector_to_final_iou_loss": -0.00031221449688581814
+        },
+        "adobe": {
+          "pdf_bytes": 37100,
+          "sha256": "abf9ab35eb9230e1982a65ab30700fa65a128aba256c133688f2779ead65e490",
+          "stream_bytes": {
+            "other_stream": 6885,
+            "raster": 17411,
+            "content": 1547,
+            "font": 5963,
+            "overhead": 5294
+          },
+          "glyph_iou": {
+            "source": 0.945163201851262,
+            "poppler": 0.7506638042145692,
+            "pdfium": 0.9025490818205523
+          },
+          "vector_occurrences": 544,
+          "distinct_painted_outlines": 27,
+          "resource_class_bytes": {
+            "adobe_raster": 17411
+          },
+          "background": {
+            "pdfium": {
+              "dpi": 300,
+              "arm": "adobe",
+              "renderer": "pdfium",
+              "glyph_population": "new emitted page0 bbox +2 physical300px halo; source contrast>8 against paired paper",
+              "source_ink_pixels": 25428,
+              "ghost_contrast": 0.36836422530142165,
+              "raw_inkband_dark_contrast": 10.626750039326726,
+              "common_ascii_inkband_dark_contrast": 0.9305034129692833,
+              "ghost_method": "Only common vectorized ASCII; per-glyph surrounding-paper residual median removed; kana excluded because Adobe retains it as legitimate raster",
+              "pdf_sha256": "abf9ab35eb9230e1982a65ab30700fa65a128aba256c133688f2779ead65e490",
+              "paper_mae_owned": 5.425598782585682,
+              "paper_mae_common_ascii": 1.2339368187696287,
+              "paper_bias_owned": -4.734385338097129,
+              "paper_std_owned": 27.370788573698835,
+              "oracle_std_owned": 2.402550125526561,
+              "paper_mae_outside": 1.2664971299302874,
+              "vector_to_final_inkband_mae": 10.61436212049709
+            },
+            "poppler": {
+              "dpi": 300,
+              "arm": "adobe",
+              "renderer": "poppler",
+              "glyph_population": "new emitted page0 bbox +2 physical300px halo; source contrast>8 against paired paper",
+              "source_ink_pixels": 25428,
+              "ghost_contrast": 0.3682742486953392,
+              "raw_inkband_dark_contrast": 10.396413402548372,
+              "common_ascii_inkband_dark_contrast": 0.9304607508532423,
+              "ghost_method": "Only common vectorized ASCII; per-glyph surrounding-paper residual median removed; kana excluded because Adobe retains it as legitimate raster",
+              "pdf_sha256": "abf9ab35eb9230e1982a65ab30700fa65a128aba256c133688f2779ead65e490",
+              "paper_mae_owned": 5.589668519253672,
+              "paper_mae_common_ascii": 1.2332902272307409,
+              "paper_bias_owned": -4.951948524546778,
+              "paper_std_owned": 25.86512510324841,
+              "oracle_std_owned": 2.402550125526561,
+              "paper_mae_outside": 1.270834295152942,
+              "vector_to_final_inkband_mae": 10.617311624980337
+            }
+          },
+          "search": {
+            "poppler_matches_ocr": false,
+            "pdfium_matches_ocr": false
+          }
+        }
+      }
+    },
+    {
+      "dpi": 600,
+      "arms": {
+        "previous": {
+          "pdf_bytes": 1308145,
+          "sha256": "efd4bda213b95f6d44c2f0ee9c40201caf013284b8c9d666cc60693215a8b7da",
+          "stream_bytes": {
+            "other_stream": 1431,
+            "raster": 1158885,
+            "content": 62816,
+            "font": 32536,
+            "overhead": 52477
+          },
+          "glyph_iou": {
+            "source": 0.9780695561679971,
+            "poppler": 0.9617765314163709,
+            "pdfium": 0.9677154711370587
+          },
+          "vector_occurrences": 517,
+          "distinct_painted_outlines": 57,
+          "resource_class_bytes": {
+            "paper_background": 412049,
+            "native_artwork_and_vector_surroundings": 63153,
+            "native_vector_surroundings": 610259,
+            "native_fallback": 41379,
+            "native_fallback_and_vector_surroundings": 32045
+          },
+          "background": {
+            "pdfium": {
+              "dpi": 600,
+              "arm": "previous",
+              "renderer": "pdfium",
+              "glyph_population": "new emitted page0 bbox +2 physical300px halo; source contrast>8 against paired paper",
+              "source_ink_pixels": 97675,
+              "ghost_contrast": 2.3888000548233093,
+              "raw_inkband_dark_contrast": 2.8738162272843613,
+              "common_ascii_inkband_dark_contrast": 2.3452805134447274,
+              "ghost_method": "Only common vectorized ASCII; per-glyph surrounding-paper residual median removed; kana excluded because Adobe retains it as legitimate raster",
+              "pdf_sha256": "efd4bda213b95f6d44c2f0ee9c40201caf013284b8c9d666cc60693215a8b7da",
+              "paper_mae_owned": 1.528944483901029,
+              "paper_mae_common_ascii": 1.3584423436297681,
+              "paper_bias_owned": -1.2933489882464992,
+              "paper_std_owned": 4.554518468367423,
+              "oracle_std_owned": 2.2174010887411773,
+              "paper_mae_outside": 0.788206618131288,
+              "vector_to_final_inkband_mae": 1.251917071922191
+            },
+            "poppler": {
+              "dpi": 600,
+              "arm": "previous",
+              "renderer": "poppler",
+              "glyph_population": "new emitted page0 bbox +2 physical300px halo; source contrast>8 against paired paper",
+              "source_ink_pixels": 97675,
+              "ghost_contrast": 2.3689722913858877,
+              "raw_inkband_dark_contrast": 2.9393805989250064,
+              "common_ascii_inkband_dark_contrast": 2.509903729113644,
+              "ghost_method": "Only common vectorized ASCII; per-glyph surrounding-paper residual median removed; kana excluded because Adobe retains it as legitimate raster",
+              "pdf_sha256": "efd4bda213b95f6d44c2f0ee9c40201caf013284b8c9d666cc60693215a8b7da",
+              "paper_mae_owned": 1.7912409118713233,
+              "paper_mae_common_ascii": 1.5581372980103332,
+              "paper_bias_owned": -1.546285310792448,
+              "paper_std_owned": 4.0550185365233675,
+              "oracle_std_owned": 2.2174010887411773,
+              "paper_mae_outside": 0.840886580154329,
+              "vector_to_final_inkband_mae": 1.0244893780394164
+            }
+          },
+          "search": {
+            "poppler_matches_ocr": true,
+            "pdfium_matches_ocr": true
+          },
+          "observations": 552,
+          "accepted_canonical_ids": 43,
+          "canonical_replacements": 502,
+          "source_mask_pixels_superseded": 518716,
+          "additional_bright_samples_superseded": 233466,
+          "same_font_as_previous": null,
+          "same_text_placements_as_previous": null
+        },
+        "final": {
+          "pdf_bytes": 326692,
+          "sha256": "0432fdee917ab8814ef1effd122822530dea6dc1b2034046cb97ea894ebce636",
+          "stream_bytes": {
+            "other_stream": 1431,
+            "raster": 218200,
+            "content": 56233,
+            "font": 32536,
+            "overhead": 18292
+          },
+          "glyph_iou": {
+            "source": 0.9780695561679971,
+            "poppler": 0.9624495661920289,
+            "pdfium": 0.9682677792551962
+          },
+          "vector_occurrences": 517,
+          "distinct_painted_outlines": 57,
+          "resource_class_bytes": {
+            "paper_background": 50479,
+            "native_artwork_and_vector_surroundings": 76781,
+            "native_vector_surroundings": 31684,
+            "native_fallback": 53954,
+            "native_other_unknown": 4004,
+            "native_fallback_and_vector_surroundings": 1298
+          },
+          "background": {
+            "pdfium": {
+              "dpi": 600,
+              "arm": "final",
+              "renderer": "pdfium",
+              "glyph_population": "new emitted page0 bbox +2 physical300px halo; source contrast>8 against paired paper",
+              "source_ink_pixels": 97675,
+              "ghost_contrast": 0.2892157982502227,
+              "raw_inkband_dark_contrast": 0.8409828512925518,
+              "common_ascii_inkband_dark_contrast": 0.28998561469514217,
+              "ghost_method": "Only common vectorized ASCII; per-glyph surrounding-paper residual median removed; kana excluded because Adobe retains it as legitimate raster",
+              "pdf_sha256": "0432fdee917ab8814ef1effd122822530dea6dc1b2034046cb97ea894ebce636",
+              "paper_mae_owned": 0.9436053648183196,
+              "paper_mae_common_ascii": 0.6784196255175698,
+              "paper_bias_owned": -0.22708929458468638,
+              "paper_std_owned": 3.468756649441066,
+              "oracle_std_owned": 2.2174010887411773,
+              "paper_mae_outside": 0.7818563331196956,
+              "vector_to_final_inkband_mae": 0.8388533401586895
+            },
+            "poppler": {
+              "dpi": 600,
+              "arm": "final",
+              "renderer": "poppler",
+              "glyph_population": "new emitted page0 bbox +2 physical300px halo; source contrast>8 against paired paper",
+              "source_ink_pixels": 97675,
+              "ghost_contrast": 0.2892157982502227,
+              "raw_inkband_dark_contrast": 0.8018837983107243,
+              "common_ascii_inkband_dark_contrast": 0.28998561469514217,
+              "ghost_method": "Only common vectorized ASCII; per-glyph surrounding-paper residual median removed; kana excluded because Adobe retains it as legitimate raster",
+              "pdf_sha256": "0432fdee917ab8814ef1effd122822530dea6dc1b2034046cb97ea894ebce636",
+              "paper_mae_owned": 0.9767023691740528,
+              "paper_mae_common_ascii": 0.6784196255175698,
+              "paper_bias_owned": -0.26287938190461724,
+              "paper_std_owned": 3.2344211280309927,
+              "oracle_std_owned": 2.2174010887411773,
+              "paper_mae_outside": 0.8791657961074739,
+              "vector_to_final_inkband_mae": 0.7576452521115946
+            }
+          },
+          "search": {
+            "poppler_matches_ocr": true,
+            "pdfium_matches_ocr": true
+          },
+          "observations": 552,
+          "accepted_canonical_ids": 43,
+          "canonical_replacements": 502,
+          "source_mask_pixels_superseded": 518716,
+          "additional_bright_samples_superseded": 275068,
+          "same_font_as_previous": true,
+          "same_text_placements_as_previous": true,
+          "vector_to_final_iou_loss": -4.1448436510237394e-05
+        },
+        "adobe": {
+          "pdf_bytes": 50779,
+          "sha256": "9ed2e5df4bc497c55d775393faf93f074b622047e70bad78c870baa3696609b3",
+          "stream_bytes": {
+            "other_stream": 7272,
+            "raster": 30036,
+            "content": 1502,
+            "font": 5880,
+            "overhead": 6089
+          },
+          "glyph_iou": {
+            "source": 0.9780695561679971,
+            "poppler": 0.8831935769275069,
+            "pdfium": 0.9415495927807167
+          },
+          "vector_occurrences": 544,
+          "distinct_painted_outlines": 21,
+          "resource_class_bytes": {
+            "adobe_raster": 30036
+          },
+          "background": {
+            "pdfium": {
+              "dpi": 600,
+              "arm": "adobe",
+              "renderer": "pdfium",
+              "glyph_population": "new emitted page0 bbox +2 physical300px halo; source contrast>8 against paired paper",
+              "source_ink_pixels": 97675,
+              "ghost_contrast": 0.23845855129405852,
+              "raw_inkband_dark_contrast": 11.114645508062452,
+              "common_ascii_inkband_dark_contrast": 0.7944118623436981,
+              "ghost_method": "Only common vectorized ASCII; per-glyph surrounding-paper residual median removed; kana excluded because Adobe retains it as legitimate raster",
+              "pdf_sha256": "9ed2e5df4bc497c55d775393faf93f074b622047e70bad78c870baa3696609b3",
+              "paper_mae_owned": 5.381469454445434,
+              "paper_mae_common_ascii": 1.1196365102048293,
+              "paper_bias_owned": -4.709742309729172,
+              "paper_std_owned": 27.306813216694493,
+              "oracle_std_owned": 2.2174010887411773,
+              "paper_mae_outside": 1.2123627796940324,
+              "vector_to_final_inkband_mae": 11.059431789096493
+            },
+            "poppler": {
+              "dpi": 600,
+              "arm": "adobe",
+              "renderer": "poppler",
+              "glyph_population": "new emitted page0 bbox +2 physical300px halo; source contrast>8 against paired paper",
+              "source_ink_pixels": 97675,
+              "ghost_contrast": 0.23845855129405852,
+              "raw_inkband_dark_contrast": 11.13441515229076,
+              "common_ascii_inkband_dark_contrast": 0.7944118623436981,
+              "ghost_method": "Only common vectorized ASCII; per-glyph surrounding-paper residual median removed; kana excluded because Adobe retains it as legitimate raster",
+              "pdf_sha256": "9ed2e5df4bc497c55d775393faf93f074b622047e70bad78c870baa3696609b3",
+              "paper_mae_owned": 5.382007249976395,
+              "paper_mae_common_ascii": 1.1196365102048293,
+              "paper_bias_owned": -4.709721783182189,
+              "paper_std_owned": 27.308790839579768,
+              "oracle_std_owned": 2.2174010887411773,
+              "paper_mae_outside": 1.2188022185188825,
+              "vector_to_final_inkband_mae": 11.179339646787817
+            }
+          },
+          "search": {
+            "poppler_matches_ocr": false,
+            "pdfium_matches_ocr": false
+          }
+        }
+      }
+    }
+  ],
+  "selected_page": {
+    "A0": {
+      "pdf_bytes": 136141,
+      "raster_bytes": 116060,
+      "pdfium": {
+        "source_ink_band_residual_dark_contrast": 4.096389806512506,
+        "owned_background_mae": 2.582555908429271,
+        "owned_paper_dark_bias": 2.353794495170041,
+        "outside_mae": 0.8758842328270315,
+        "background_std_owned": 3.785399872590982,
+        "counterfactual_std_owned": 2.402550125526561,
+        "mean_final_minus_vector_coverage": 0.003995286961725071
+      },
+      "poppler": {
+        "source_ink_band_residual_dark_contrast": 4.192464999213465,
+        "owned_background_mae": 2.664896784438269,
+        "owned_paper_dark_bias": 2.4357714701601165,
+        "outside_mae": 0.9671083342310316,
+        "background_std_owned": 3.827854901598925,
+        "counterfactual_std_owned": 2.402550125526561,
+        "mean_final_minus_vector_coverage": 0.003933752201525568
+      }
+    },
+    "A1-native": {
+      "pdf_bytes": 518067,
+      "raster_bytes": 497976,
+      "pdfium": {
+        "source_ink_band_residual_dark_contrast": 0.006567563316029573,
+        "owned_background_mae": 0.011280931586608443,
+        "owned_paper_dark_bias": 0.0042014026730183935,
+        "outside_mae": 0.07112335400604279,
+        "background_std_owned": 2.403847628085102,
+        "counterfactual_std_owned": 2.402550125526561,
+        "mean_final_minus_vector_coverage": -0.0004549562470890511
+      },
+      "poppler": {
+        "source_ink_band_residual_dark_contrast": 0.5422369042000944,
+        "owned_background_mae": 0.6265879317189361,
+        "owned_paper_dark_bias": 0.4665707291253143,
+        "outside_mae": 0.9804769855804004,
+        "background_std_owned": 2.50203031290431,
+        "counterfactual_std_owned": 2.402550125526561,
+        "mean_final_minus_vector_coverage": 0.0001372579864099171
+      }
+    },
+    "A1": {
+      "pdf_bytes": 131501,
+      "raster_bytes": 111412,
+      "pdfium": {
+        "source_ink_band_residual_dark_contrast": 0.5464448639295265,
+        "owned_background_mae": 0.7549457456662697,
+        "owned_paper_dark_bias": 0.32785827709408494,
+        "outside_mae": 0.8663391350292137,
+        "background_std_owned": 2.3606682316944516,
+        "counterfactual_std_owned": 2.402550125526561,
+        "mean_final_minus_vector_coverage": -2.297914603941309e-05
+      },
+      "poppler": {
+        "source_ink_band_residual_dark_contrast": 0.5540349221330817,
+        "owned_background_mae": 0.7631004366812227,
+        "owned_paper_dark_bias": 0.3337633981738785,
+        "outside_mae": 0.9575940146606957,
+        "background_std_owned": 2.3608681059467567,
+        "counterfactual_std_owned": 2.402550125526561,
+        "mean_final_minus_vector_coverage": -1.002445968162316e-05
+      }
+    },
+    "A2": {
+      "pdf_bytes": 56044,
+      "raster_bytes": 33004,
+      "pdfium": {
+        "source_ink_band_residual_dark_contrast": 1.0601305647317918,
+        "owned_background_mae": 0.9991564112743152,
+        "owned_paper_dark_bias": 0.30456861188302237,
+        "outside_mae": 0.8253720318246872,
+        "background_std_owned": 3.9291797182702974,
+        "counterfactual_std_owned": 2.402550125526561,
+        "mean_final_minus_vector_coverage": 0.002244553633943746
+      },
+      "poppler": {
+        "source_ink_band_residual_dark_contrast": 0.9401840490797546,
+        "owned_background_mae": 1.084937806007675,
+        "owned_paper_dark_bias": 0.3866779145163425,
+        "outside_mae": 0.9171854080423508,
+        "background_std_owned": 3.2399384962042577,
+        "counterfactual_std_owned": 2.402550125526561,
+        "mean_final_minus_vector_coverage": 0.0008898635748148559
+      }
+    }
+  },
+  "hard_negative": [
+    {
+      "dpi": 300,
+      "added_rule_pixels": 330,
+      "rule_pixels_in_source_mask_fringe": 41,
+      "native_changed_rule_fringe": 0,
+      "changed_rule_outside_actual_vector": 0,
+      "rule_outside_vector_native_exact": 330,
+      "rule_outside_vector_without_native": 0,
+      "outside_vector_render_luma_mean": 249.5060606060606,
+      "pdfium_line_mean_abs_sample_error": 4.663636363636364,
+      "pdfium_line_max_sample_error": 21.0,
+      "pdfium_line_samples_lighter_than_252": 0,
+      "poppler_line_samples_lighter_than_252": 2,
+      "poppler_line_mean_abs_sample_error": 4.115151515151515,
+      "poppler_line_max_sample_error": 23.0,
+      "outside_vector_source_luma_mean": 245.0,
+      "render_extrema_without_native": null
+    },
+    {
+      "dpi": 600,
+      "added_rule_pixels": 1306,
+      "rule_pixels_in_source_mask_fringe": 192,
+      "native_changed_rule_fringe": 0,
+      "changed_rule_outside_actual_vector": 0,
+      "rule_outside_vector_native_exact": 1306,
+      "rule_outside_vector_without_native": 0,
+      "outside_vector_render_luma_mean": 247.09341500765697,
+      "pdfium_line_mean_abs_sample_error": 2.1776416539050536,
+      "pdfium_line_max_sample_error": 8.0,
+      "pdfium_line_samples_lighter_than_252": 0,
+      "poppler_line_samples_lighter_than_252": 2,
+      "poppler_line_mean_abs_sample_error": 2.16156202143951,
+      "poppler_line_max_sample_error": 12.0,
+      "outside_vector_source_luma_mean": 245.0,
+      "render_extrema_without_native": null
+    }
+  ],
+  "sampling_control": [
+    {
+      "dpi": 300,
+      "arm": "source-raster",
+      "renderer": "pdfium",
+      "source_pixels": 330,
+      "mean_luma": 245.0,
+      "mean_absolute_sample_error": 0.0,
+      "max_lightening": 0.0,
+      "max_darkening": -0.0,
+      "samples_lighter_than_252": 0
+    },
+    {
+      "dpi": 300,
+      "arm": "source-raster",
+      "renderer": "poppler",
+      "source_pixels": 330,
+      "mean_luma": 244.76666666666668,
+      "mean_absolute_sample_error": 1.2878787878787878,
+      "max_lightening": 1.0,
+      "max_darkening": 40.0,
+      "samples_lighter_than_252": 0
+    },
+    {
+      "dpi": 300,
+      "arm": "native-background",
+      "renderer": "pdfium",
+      "source_pixels": 330,
+      "mean_luma": 249.5090909090909,
+      "mean_absolute_sample_error": 4.666666666666667,
+      "max_lightening": 6.0,
+      "max_darkening": 21.0,
+      "samples_lighter_than_252": 0
+    },
+    {
+      "dpi": 300,
+      "arm": "native-background",
+      "renderer": "poppler",
+      "source_pixels": 330,
+      "mean_luma": 248.61818181818182,
+      "mean_absolute_sample_error": 4.115151515151515,
+      "max_lightening": 8.0,
+      "max_darkening": 23.0,
+      "samples_lighter_than_252": 2
+    },
+    {
+      "dpi": 300,
+      "arm": "final",
+      "renderer": "pdfium",
+      "source_pixels": 330,
+      "mean_luma": 249.5060606060606,
+      "mean_absolute_sample_error": 4.663636363636364,
+      "max_lightening": 6.0,
+      "max_darkening": 21.0,
+      "samples_lighter_than_252": 0
+    },
+    {
+      "dpi": 300,
+      "arm": "final",
+      "renderer": "poppler",
+      "source_pixels": 330,
+      "mean_luma": 248.61818181818182,
+      "mean_absolute_sample_error": 4.115151515151515,
+      "max_lightening": 8.0,
+      "max_darkening": 23.0,
+      "samples_lighter_than_252": 2
+    },
+    {
+      "dpi": 600,
+      "arm": "source-raster",
+      "renderer": "pdfium",
+      "source_pixels": 1306,
+      "mean_luma": 245.0,
+      "mean_absolute_sample_error": 0.0,
+      "max_lightening": 0.0,
+      "max_darkening": -0.0,
+      "samples_lighter_than_252": 0
+    },
+    {
+      "dpi": 600,
+      "arm": "source-raster",
+      "renderer": "poppler",
+      "source_pixels": 1306,
+      "mean_luma": 245.1508422664625,
+      "mean_absolute_sample_error": 0.48009188361408883,
+      "max_lightening": 1.0,
+      "max_darkening": 14.0,
+      "samples_lighter_than_252": 0
+    },
+    {
+      "dpi": 600,
+      "arm": "native-background",
+      "renderer": "pdfium",
+      "source_pixels": 1306,
+      "mean_luma": 247.09341500765697,
+      "mean_absolute_sample_error": 2.1776416539050536,
+      "max_lightening": 5.0,
+      "max_darkening": 8.0,
+      "samples_lighter_than_252": 0
+    },
+    {
+      "dpi": 600,
+      "arm": "native-background",
+      "renderer": "poppler",
+      "source_pixels": 1306,
+      "mean_luma": 246.9716692189893,
+      "mean_absolute_sample_error": 2.16156202143951,
+      "max_lightening": 9.0,
+      "max_darkening": 12.0,
+      "samples_lighter_than_252": 2
+    },
+    {
+      "dpi": 600,
+      "arm": "final",
+      "renderer": "pdfium",
+      "source_pixels": 1306,
+      "mean_luma": 247.09341500765697,
+      "mean_absolute_sample_error": 2.1776416539050536,
+      "max_lightening": 5.0,
+      "max_darkening": 8.0,
+      "samples_lighter_than_252": 0
+    },
+    {
+      "dpi": 600,
+      "arm": "final",
+      "renderer": "poppler",
+      "source_pixels": 1306,
+      "mean_luma": 246.9716692189893,
+      "mean_absolute_sample_error": 2.16156202143951,
+      "max_lightening": 9.0,
+      "max_darkening": 12.0,
+      "samples_lighter_than_252": 2
+    }
+  ],
+  "contour_trial": {
+    "method": "Rejected contour refinement, isolated from paper using actual vector PDFs.",
+    "n": 187,
+    "means": {
+      "before_pdfium": 0.9633872189470328,
+      "before_poppler": 0.9619107549800588,
+      "refined_pdfium": 0.9567697651216774,
+      "refined_poppler": 0.9577816516700753
+    },
+    "glyphs": [
+      {
+        "page": 0,
+        "id": "p00s0001",
+        "char": "8",
+        "before_pdfium": 0.9852507374631269,
+        "before_poppler": 0.9823008849557522,
+        "refined_pdfium": 0.9852507374631269,
+        "refined_poppler": 0.9823008849557522
+      },
+      {
+        "page": 0,
+        "id": "p00s0003",
+        "char": "0",
+        "before_pdfium": 0.9393939393939394,
+        "before_poppler": 0.9365558912386707,
+        "refined_pdfium": 0.9422492401215805,
+        "refined_poppler": 0.9451219512195121
+      },
+      {
+        "page": 0,
+        "id": "p00s0004",
+        "char": "g",
+        "before_pdfium": 0.975,
+        "before_poppler": 0.9719626168224299,
+        "refined_pdfium": 0.9483282674772037,
+        "refined_poppler": 0.9510703363914373
+      },
+      {
+        "page": 0,
+        "id": "p00s0011",
+        "char": "8",
+        "before_pdfium": 0.9852507374631269,
+        "before_poppler": 0.9823008849557522,
+        "refined_pdfium": 0.9852507374631269,
+        "refined_poppler": 0.9823008849557522
+      },
+      {
+        "page": 0,
+        "id": "p00s0013",
+        "char": "0",
+        "before_pdfium": 0.9680511182108626,
+        "before_poppler": 0.9710610932475884,
+        "refined_pdfium": 0.9680511182108626,
+        "refined_poppler": 0.9710610932475884
+      },
+      {
+        "page": 0,
+        "id": "p00s0015",
+        "char": "g",
+        "before_pdfium": 0.9722222222222222,
+        "before_poppler": 0.9752321981424149,
+        "refined_pdfium": 0.9722222222222222,
+        "refined_poppler": 0.9752321981424149
+      },
+      {
+        "page": 0,
+        "id": "p00s0020",
+        "char": "8",
+        "before_pdfium": 0.9852507374631269,
+        "before_poppler": 0.9823008849557522,
+        "refined_pdfium": 0.9852507374631269,
+        "refined_poppler": 0.9823008849557522
+      },
+      {
+        "page": 0,
+        "id": "p00s0022",
+        "char": "0",
+        "before_pdfium": 0.9680511182108626,
+        "before_poppler": 0.9710610932475884,
+        "refined_pdfium": 0.9680511182108626,
+        "refined_poppler": 0.9710610932475884
+      },
+      {
+        "page": 0,
+        "id": "p00s0023",
+        "char": "g",
+        "before_pdfium": 0.965625,
+        "before_poppler": 0.9626168224299065,
+        "refined_pdfium": 0.965625,
+        "refined_poppler": 0.9626168224299065
+      },
+      {
+        "page": 0,
+        "id": "p00s0030",
+        "char": "8",
+        "before_pdfium": 0.9852507374631269,
+        "before_poppler": 0.9823008849557522,
+        "refined_pdfium": 0.9852507374631269,
+        "refined_poppler": 0.9823008849557522
+      },
+      {
+        "page": 0,
+        "id": "p00s0032",
+        "char": "0",
+        "before_pdfium": 0.9680511182108626,
+        "before_poppler": 0.9710610932475884,
+        "refined_pdfium": 0.9680511182108626,
+        "refined_poppler": 0.9710610932475884
+      },
+      {
+        "page": 0,
+        "id": "p00s0034",
+        "char": "g",
+        "before_pdfium": 0.9722222222222222,
+        "before_poppler": 0.9752321981424149,
+        "refined_pdfium": 0.9722222222222222,
+        "refined_poppler": 0.9752321981424149
+      },
+      {
+        "page": 0,
+        "id": "p00s0038",
+        "char": "8",
+        "before_pdfium": 0.9852507374631269,
+        "before_poppler": 0.9823008849557522,
+        "refined_pdfium": 0.9852507374631269,
+        "refined_poppler": 0.9823008849557522
+      },
+      {
+        "page": 0,
+        "id": "p00s0040",
+        "char": "0",
+        "before_pdfium": 0.9680511182108626,
+        "before_poppler": 0.9710610932475884,
+        "refined_pdfium": 0.9680511182108626,
+        "refined_poppler": 0.9710610932475884
+      },
+      {
+        "page": 0,
+        "id": "p00s0041",
+        "char": "g",
+        "before_pdfium": 0.975,
+        "before_poppler": 0.9719626168224299,
+        "refined_pdfium": 0.9483282674772037,
+        "refined_poppler": 0.9510703363914373
+      },
+      {
+        "page": 0,
+        "id": "p00s0048",
+        "char": "8",
+        "before_pdfium": 0.9852507374631269,
+        "before_poppler": 0.9823008849557522,
+        "refined_pdfium": 0.9852507374631269,
+        "refined_poppler": 0.9823008849557522
+      },
+      {
+        "page": 0,
+        "id": "p00s0050",
+        "char": "0",
+        "before_pdfium": 0.9680511182108626,
+        "before_poppler": 0.9710610932475884,
+        "refined_pdfium": 0.9680511182108626,
+        "refined_poppler": 0.9710610932475884
+      },
+      {
+        "page": 0,
+        "id": "p00s0052",
+        "char": "g",
+        "before_pdfium": 0.9622641509433962,
+        "before_poppler": 0.9591194968553459,
+        "refined_pdfium": 0.9622641509433962,
+        "refined_poppler": 0.9591194968553459
+      },
+      {
+        "page": 0,
+        "id": "p00s0057",
+        "char": "8",
+        "before_pdfium": 0.9852507374631269,
+        "before_poppler": 0.9823008849557522,
+        "refined_pdfium": 0.9852507374631269,
+        "refined_poppler": 0.9823008849557522
+      },
+      {
+        "page": 0,
+        "id": "p00s0059",
+        "char": "0",
+        "before_pdfium": 0.9680511182108626,
+        "before_poppler": 0.9710610932475884,
+        "refined_pdfium": 0.9680511182108626,
+        "refined_poppler": 0.9710610932475884
+      },
+      {
+        "page": 0,
+        "id": "p00s0060",
+        "char": "g",
+        "before_pdfium": 0.975,
+        "before_poppler": 0.9719626168224299,
+        "refined_pdfium": 0.9483282674772037,
+        "refined_poppler": 0.9510703363914373
+      },
+      {
+        "page": 0,
+        "id": "p00s0067",
+        "char": "8",
+        "before_pdfium": 0.9735294117647059,
+        "before_poppler": 0.9793510324483776,
+        "refined_pdfium": 0.9735294117647059,
+        "refined_poppler": 0.9793510324483776
+      },
+      {
+        "page": 0,
+        "id": "p00s0069",
+        "char": "0",
+        "before_pdfium": 0.9680511182108626,
+        "before_poppler": 0.9710610932475884,
+        "refined_pdfium": 0.9680511182108626,
+        "refined_poppler": 0.9710610932475884
+      },
+      {
+        "page": 0,
+        "id": "p00s0071",
+        "char": "g",
+        "before_pdfium": 0.975,
+        "before_poppler": 0.9719626168224299,
+        "refined_pdfium": 0.9483282674772037,
+        "refined_poppler": 0.9510703363914373
+      },
+      {
+        "page": 1,
+        "id": "p01s0001",
+        "char": "8",
+        "before_pdfium": 0.9852941176470589,
+        "before_poppler": 0.9766081871345029,
+        "refined_pdfium": 0.9852941176470589,
+        "refined_poppler": 0.9766081871345029
+      },
+      {
+        "page": 1,
+        "id": "p01s0003",
+        "char": "0",
+        "before_pdfium": 0.9713375796178344,
+        "before_poppler": 0.9744408945686901,
+        "refined_pdfium": 0.9713375796178344,
+        "refined_poppler": 0.9744408945686901
+      },
+      {
+        "page": 1,
+        "id": "p01s0004",
+        "char": "g",
+        "before_pdfium": 0.9722222222222222,
+        "before_poppler": 0.9721362229102167,
+        "refined_pdfium": 0.9429429429429429,
+        "refined_poppler": 0.9427710843373494
+      },
+      {
+        "page": 1,
+        "id": "p01s0013",
+        "char": "0",
+        "before_pdfium": 0.9713375796178344,
+        "before_poppler": 0.9744408945686901,
+        "refined_pdfium": 0.9713375796178344,
+        "refined_poppler": 0.9744408945686901
+      },
+      {
+        "page": 1,
+        "id": "p01s0015",
+        "char": "g",
+        "before_pdfium": 0.9595015576323987,
+        "before_poppler": 0.9595015576323987,
+        "refined_pdfium": 0.9595015576323987,
+        "refined_poppler": 0.9595015576323987
+      },
+      {
+        "page": 1,
+        "id": "p01s0020",
+        "char": "8",
+        "before_pdfium": 0.9852941176470589,
+        "before_poppler": 0.9766081871345029,
+        "refined_pdfium": 0.9852941176470589,
+        "refined_poppler": 0.9766081871345029
+      },
+      {
+        "page": 1,
+        "id": "p01s0022",
+        "char": "0",
+        "before_pdfium": 0.9713375796178344,
+        "before_poppler": 0.9744408945686901,
+        "refined_pdfium": 0.9713375796178344,
+        "refined_poppler": 0.9744408945686901
+      },
+      {
+        "page": 1,
+        "id": "p01s0023",
+        "char": "g",
+        "before_pdfium": 0.9663608562691132,
+        "before_poppler": 0.9693251533742331,
+        "refined_pdfium": 0.9663608562691132,
+        "refined_poppler": 0.9693251533742331
+      },
+      {
+        "page": 1,
+        "id": "p01s0030",
+        "char": "8",
+        "before_pdfium": 0.9852941176470589,
+        "before_poppler": 0.9766081871345029,
+        "refined_pdfium": 0.9852941176470589,
+        "refined_poppler": 0.9766081871345029
+      },
+      {
+        "page": 1,
+        "id": "p01s0032",
+        "char": "0",
+        "before_pdfium": 0.9713375796178344,
+        "before_poppler": 0.9744408945686901,
+        "refined_pdfium": 0.9713375796178344,
+        "refined_poppler": 0.9744408945686901
+      },
+      {
+        "page": 1,
+        "id": "p01s0034",
+        "char": "g",
+        "before_pdfium": 0.9722222222222222,
+        "before_poppler": 0.9721362229102167,
+        "refined_pdfium": 0.9429429429429429,
+        "refined_poppler": 0.9427710843373494
+      },
+      {
+        "page": 1,
+        "id": "p01s0038",
+        "char": "8",
+        "before_pdfium": 0.9852941176470589,
+        "before_poppler": 0.9766081871345029,
+        "refined_pdfium": 0.9852941176470589,
+        "refined_poppler": 0.9766081871345029
+      },
+      {
+        "page": 1,
+        "id": "p01s0040",
+        "char": "0",
+        "before_pdfium": 0.9713375796178344,
+        "before_poppler": 0.9744408945686901,
+        "refined_pdfium": 0.9713375796178344,
+        "refined_poppler": 0.9744408945686901
+      },
+      {
+        "page": 1,
+        "id": "p01s0041",
+        "char": "g",
+        "before_pdfium": 0.9722222222222222,
+        "before_poppler": 0.9721362229102167,
+        "refined_pdfium": 0.9429429429429429,
+        "refined_poppler": 0.9427710843373494
+      },
+      {
+        "page": 1,
+        "id": "p01s0048",
+        "char": "8",
+        "before_pdfium": 0.9852941176470589,
+        "before_poppler": 0.9766081871345029,
+        "refined_pdfium": 0.9852941176470589,
+        "refined_poppler": 0.9766081871345029
+      },
+      {
+        "page": 1,
+        "id": "p01s0052",
+        "char": "g",
+        "before_pdfium": 0.9722222222222222,
+        "before_poppler": 0.9721362229102167,
+        "refined_pdfium": 0.9429429429429429,
+        "refined_poppler": 0.9427710843373494
+      },
+      {
+        "page": 1,
+        "id": "p01s0057",
+        "char": "8",
+        "before_pdfium": 0.9852941176470589,
+        "before_poppler": 0.9766081871345029,
+        "refined_pdfium": 0.9852941176470589,
+        "refined_poppler": 0.9766081871345029
+      },
+      {
+        "page": 1,
+        "id": "p01s0059",
+        "char": "0",
+        "before_pdfium": 0.9713375796178344,
+        "before_poppler": 0.9744408945686901,
+        "refined_pdfium": 0.9713375796178344,
+        "refined_poppler": 0.9744408945686901
+      },
+      {
+        "page": 1,
+        "id": "p01s0060",
+        "char": "g",
+        "before_pdfium": 0.9722222222222222,
+        "before_poppler": 0.9721362229102167,
+        "refined_pdfium": 0.9429429429429429,
+        "refined_poppler": 0.9427710843373494
+      },
+      {
+        "page": 1,
+        "id": "p01s0067",
+        "char": "8",
+        "before_pdfium": 0.9852941176470589,
+        "before_poppler": 0.9766081871345029,
+        "refined_pdfium": 0.9852941176470589,
+        "refined_poppler": 0.9766081871345029
+      },
+      {
+        "page": 1,
+        "id": "p01s0069",
+        "char": "0",
+        "before_pdfium": 0.9713375796178344,
+        "before_poppler": 0.9744408945686901,
+        "refined_pdfium": 0.9713375796178344,
+        "refined_poppler": 0.9744408945686901
+      },
+      {
+        "page": 1,
+        "id": "p01s0071",
+        "char": "g",
+        "before_pdfium": 0.9722222222222222,
+        "before_poppler": 0.9721362229102167,
+        "refined_pdfium": 0.9429429429429429,
+        "refined_poppler": 0.9427710843373494
+      },
+      {
+        "page": 2,
+        "id": "p02s0001",
+        "char": "8",
+        "before_pdfium": 0.9852507374631269,
+        "before_poppler": 0.9794721407624634,
+        "refined_pdfium": 0.9852507374631269,
+        "refined_poppler": 0.9794721407624634
+      },
+      {
+        "page": 2,
+        "id": "p02s0003",
+        "char": "0",
+        "before_pdfium": 0.9712460063897763,
+        "before_poppler": 0.9744408945686901,
+        "refined_pdfium": 0.9712460063897763,
+        "refined_poppler": 0.9744408945686901
+      },
+      {
+        "page": 2,
+        "id": "p02s0004",
+        "char": "g",
+        "before_pdfium": 0.9721362229102167,
+        "before_poppler": 0.9720496894409938,
+        "refined_pdfium": 0.9429429429429429,
+        "refined_poppler": 0.9513677811550152
+      },
+      {
+        "page": 2,
+        "id": "p02s0011",
+        "char": "8",
+        "before_pdfium": 0.9852507374631269,
+        "before_poppler": 0.9794721407624634,
+        "refined_pdfium": 0.9852507374631269,
+        "refined_poppler": 0.9794721407624634
+      },
+      {
+        "page": 2,
+        "id": "p02s0013",
+        "char": "0",
+        "before_pdfium": 0.9712460063897763,
+        "before_poppler": 0.9744408945686901,
+        "refined_pdfium": 0.9712460063897763,
+        "refined_poppler": 0.9744408945686901
+      },
+      {
+        "page": 2,
+        "id": "p02s0015",
+        "char": "g",
+        "before_pdfium": 0.9721362229102167,
+        "before_poppler": 0.9720496894409938,
+        "refined_pdfium": 0.9429429429429429,
+        "refined_poppler": 0.9513677811550152
+      },
+      {
+        "page": 2,
+        "id": "p02s0020",
+        "char": "8",
+        "before_pdfium": 0.9852507374631269,
+        "before_poppler": 0.9794721407624634,
+        "refined_pdfium": 0.9852507374631269,
+        "refined_poppler": 0.9794721407624634
+      },
+      {
+        "page": 2,
+        "id": "p02s0022",
+        "char": "0",
+        "before_pdfium": 0.9712460063897763,
+        "before_poppler": 0.9744408945686901,
+        "refined_pdfium": 0.9712460063897763,
+        "refined_poppler": 0.9744408945686901
+      },
+      {
+        "page": 2,
+        "id": "p02s0023",
+        "char": "g",
+        "before_pdfium": 0.9721362229102167,
+        "before_poppler": 0.9720496894409938,
+        "refined_pdfium": 0.9429429429429429,
+        "refined_poppler": 0.9513677811550152
+      },
+      {
+        "page": 2,
+        "id": "p02s0030",
+        "char": "8",
+        "before_pdfium": 0.9852507374631269,
+        "before_poppler": 0.9794721407624634,
+        "refined_pdfium": 0.9852507374631269,
+        "refined_poppler": 0.9794721407624634
+      },
+      {
+        "page": 2,
+        "id": "p02s0032",
+        "char": "0",
+        "before_pdfium": 0.9712460063897763,
+        "before_poppler": 0.9744408945686901,
+        "refined_pdfium": 0.9712460063897763,
+        "refined_poppler": 0.9744408945686901
+      },
+      {
+        "page": 2,
+        "id": "p02s0034",
+        "char": "g",
+        "before_pdfium": 0.956386292834891,
+        "before_poppler": 0.95625,
+        "refined_pdfium": 0.956386292834891,
+        "refined_poppler": 0.95625
+      },
+      {
+        "page": 2,
+        "id": "p02s0038",
+        "char": "8",
+        "before_pdfium": 0.9852507374631269,
+        "before_poppler": 0.9794721407624634,
+        "refined_pdfium": 0.9852507374631269,
+        "refined_poppler": 0.9794721407624634
+      },
+      {
+        "page": 2,
+        "id": "p02s0040",
+        "char": "0",
+        "before_pdfium": 0.9712460063897763,
+        "before_poppler": 0.9744408945686901,
+        "refined_pdfium": 0.9712460063897763,
+        "refined_poppler": 0.9744408945686901
+      },
+      {
+        "page": 2,
+        "id": "p02s0041",
+        "char": "g",
+        "before_pdfium": 0.963302752293578,
+        "before_poppler": 0.9723076923076923,
+        "refined_pdfium": 0.963302752293578,
+        "refined_poppler": 0.9723076923076923
+      },
+      {
+        "page": 2,
+        "id": "p02s0048",
+        "char": "8",
+        "before_pdfium": 0.9852507374631269,
+        "before_poppler": 0.9794721407624634,
+        "refined_pdfium": 0.9852507374631269,
+        "refined_poppler": 0.9794721407624634
+      },
+      {
+        "page": 2,
+        "id": "p02s0052",
+        "char": "g",
+        "before_pdfium": 0.963302752293578,
+        "before_poppler": 0.9723076923076923,
+        "refined_pdfium": 0.963302752293578,
+        "refined_poppler": 0.9723076923076923
+      },
+      {
+        "page": 2,
+        "id": "p02s0057",
+        "char": "8",
+        "before_pdfium": 0.9852507374631269,
+        "before_poppler": 0.9794721407624634,
+        "refined_pdfium": 0.9852507374631269,
+        "refined_poppler": 0.9794721407624634
+      },
+      {
+        "page": 2,
+        "id": "p02s0059",
+        "char": "0",
+        "before_pdfium": 0.9712460063897763,
+        "before_poppler": 0.9744408945686901,
+        "refined_pdfium": 0.9712460063897763,
+        "refined_poppler": 0.9744408945686901
+      },
+      {
+        "page": 2,
+        "id": "p02s0060",
+        "char": "g",
+        "before_pdfium": 0.956386292834891,
+        "before_poppler": 0.95625,
+        "refined_pdfium": 0.956386292834891,
+        "refined_poppler": 0.95625
+      },
+      {
+        "page": 2,
+        "id": "p02s0067",
+        "char": "8",
+        "before_pdfium": 0.9852507374631269,
+        "before_poppler": 0.9794721407624634,
+        "refined_pdfium": 0.9852507374631269,
+        "refined_poppler": 0.9794721407624634
+      },
+      {
+        "page": 2,
+        "id": "p02s0069",
+        "char": "0",
+        "before_pdfium": 0.9712460063897763,
+        "before_poppler": 0.9744408945686901,
+        "refined_pdfium": 0.9712460063897763,
+        "refined_poppler": 0.9744408945686901
+      },
+      {
+        "page": 2,
+        "id": "p02s0071",
+        "char": "g",
+        "before_pdfium": 0.9721362229102167,
+        "before_poppler": 0.9720496894409938,
+        "refined_pdfium": 0.9429429429429429,
+        "refined_poppler": 0.9513677811550152
+      },
+      {
+        "page": 3,
+        "id": "p03s0001",
+        "char": "8",
+        "before_pdfium": 0.9852507374631269,
+        "before_poppler": 0.9765395894428153,
+        "refined_pdfium": 0.9852507374631269,
+        "refined_poppler": 0.9765395894428153
+      },
+      {
+        "page": 3,
+        "id": "p03s0003",
+        "char": "0",
+        "before_pdfium": 0.9712460063897763,
+        "before_poppler": 0.9711538461538461,
+        "refined_pdfium": 0.9712460063897763,
+        "refined_poppler": 0.9711538461538461
+      },
+      {
+        "page": 3,
+        "id": "p03s0004",
+        "char": "g",
+        "before_pdfium": 0.9622641509433962,
+        "before_poppler": 0.9592476489028213,
+        "refined_pdfium": 0.9622641509433962,
+        "refined_poppler": 0.9592476489028213
+      },
+      {
+        "page": 3,
+        "id": "p03s0011",
+        "char": "8",
+        "before_pdfium": 0.9852507374631269,
+        "before_poppler": 0.9765395894428153,
+        "refined_pdfium": 0.9852507374631269,
+        "refined_poppler": 0.9765395894428153
+      },
+      {
+        "page": 3,
+        "id": "p03s0013",
+        "char": "0",
+        "before_pdfium": 0.9365558912386707,
+        "before_poppler": 0.9337349397590361,
+        "refined_pdfium": 0.9309309309309309,
+        "refined_poppler": 0.9393939393939394
+      },
+      {
+        "page": 3,
+        "id": "p03s0015",
+        "char": "g",
+        "before_pdfium": 0.9720496894409938,
+        "before_poppler": 0.9750778816199377,
+        "refined_pdfium": 0.945619335347432,
+        "refined_poppler": 0.9513677811550152
+      },
+      {
+        "page": 3,
+        "id": "p03s0020",
+        "char": "8",
+        "before_pdfium": 0.9852507374631269,
+        "before_poppler": 0.9765395894428153,
+        "refined_pdfium": 0.9852507374631269,
+        "refined_poppler": 0.9765395894428153
+      },
+      {
+        "page": 3,
+        "id": "p03s0022",
+        "char": "0",
+        "before_pdfium": 0.9365558912386707,
+        "before_poppler": 0.9337349397590361,
+        "refined_pdfium": 0.9309309309309309,
+        "refined_poppler": 0.9393939393939394
+      },
+      {
+        "page": 3,
+        "id": "p03s0023",
+        "char": "g",
+        "before_pdfium": 0.9720496894409938,
+        "before_poppler": 0.9750778816199377,
+        "refined_pdfium": 0.945619335347432,
+        "refined_poppler": 0.9513677811550152
+      },
+      {
+        "page": 3,
+        "id": "p03s0030",
+        "char": "8",
+        "before_pdfium": 0.9852507374631269,
+        "before_poppler": 0.9765395894428153,
+        "refined_pdfium": 0.9852507374631269,
+        "refined_poppler": 0.9765395894428153
+      },
+      {
+        "page": 3,
+        "id": "p03s0032",
+        "char": "0",
+        "before_pdfium": 0.9712460063897763,
+        "before_poppler": 0.9711538461538461,
+        "refined_pdfium": 0.9712460063897763,
+        "refined_poppler": 0.9711538461538461
+      },
+      {
+        "page": 3,
+        "id": "p03s0034",
+        "char": "g",
+        "before_pdfium": 0.9657320872274143,
+        "before_poppler": 0.9626168224299065,
+        "refined_pdfium": 0.9657320872274143,
+        "refined_poppler": 0.9626168224299065
+      },
+      {
+        "page": 3,
+        "id": "p03s0038",
+        "char": "8",
+        "before_pdfium": 0.9678362573099415,
+        "before_poppler": 0.9823008849557522,
+        "refined_pdfium": 0.9678362573099415,
+        "refined_poppler": 0.9823008849557522
+      },
+      {
+        "page": 3,
+        "id": "p03s0040",
+        "char": "0",
+        "before_pdfium": 0.9712460063897763,
+        "before_poppler": 0.9711538461538461,
+        "refined_pdfium": 0.9712460063897763,
+        "refined_poppler": 0.9711538461538461
+      },
+      {
+        "page": 3,
+        "id": "p03s0041",
+        "char": "g",
+        "before_pdfium": 0.9720496894409938,
+        "before_poppler": 0.9750778816199377,
+        "refined_pdfium": 0.945619335347432,
+        "refined_poppler": 0.9513677811550152
+      },
+      {
+        "page": 3,
+        "id": "p03s0048",
+        "char": "8",
+        "before_pdfium": 0.9852507374631269,
+        "before_poppler": 0.9765395894428153,
+        "refined_pdfium": 0.9852507374631269,
+        "refined_poppler": 0.9765395894428153
+      },
+      {
+        "page": 3,
+        "id": "p03s0050",
+        "char": "0",
+        "before_pdfium": 0.9712460063897763,
+        "before_poppler": 0.9711538461538461,
+        "refined_pdfium": 0.9712460063897763,
+        "refined_poppler": 0.9711538461538461
+      },
+      {
+        "page": 3,
+        "id": "p03s0052",
+        "char": "g",
+        "before_pdfium": 0.9720496894409938,
+        "before_poppler": 0.9750778816199377,
+        "refined_pdfium": 0.945619335347432,
+        "refined_poppler": 0.9513677811550152
+      },
+      {
+        "page": 3,
+        "id": "p03s0057",
+        "char": "8",
+        "before_pdfium": 0.9852507374631269,
+        "before_poppler": 0.9765395894428153,
+        "refined_pdfium": 0.9852507374631269,
+        "refined_poppler": 0.9765395894428153
+      },
+      {
+        "page": 3,
+        "id": "p03s0059",
+        "char": "0",
+        "before_pdfium": 0.9712460063897763,
+        "before_poppler": 0.9711538461538461,
+        "refined_pdfium": 0.9712460063897763,
+        "refined_poppler": 0.9711538461538461
+      },
+      {
+        "page": 3,
+        "id": "p03s0060",
+        "char": "g",
+        "before_pdfium": 0.9720496894409938,
+        "before_poppler": 0.9750778816199377,
+        "refined_pdfium": 0.945619335347432,
+        "refined_poppler": 0.9513677811550152
+      },
+      {
+        "page": 3,
+        "id": "p03s0067",
+        "char": "8",
+        "before_pdfium": 0.9852507374631269,
+        "before_poppler": 0.9765395894428153,
+        "refined_pdfium": 0.9852507374631269,
+        "refined_poppler": 0.9765395894428153
+      },
+      {
+        "page": 3,
+        "id": "p03s0069",
+        "char": "0",
+        "before_pdfium": 0.9712460063897763,
+        "before_poppler": 0.9711538461538461,
+        "refined_pdfium": 0.9712460063897763,
+        "refined_poppler": 0.9711538461538461
+      },
+      {
+        "page": 3,
+        "id": "p03s0071",
+        "char": "g",
+        "before_pdfium": 0.9720496894409938,
+        "before_poppler": 0.9750778816199377,
+        "refined_pdfium": 0.945619335347432,
+        "refined_poppler": 0.9513677811550152
+      },
+      {
+        "page": 4,
+        "id": "p04s0001",
+        "char": "8",
+        "before_pdfium": 0.9852507374631269,
+        "before_poppler": 0.9794721407624634,
+        "refined_pdfium": 0.9852507374631269,
+        "refined_poppler": 0.9794721407624634
+      },
+      {
+        "page": 4,
+        "id": "p04s0003",
+        "char": "0",
+        "before_pdfium": 0.9712460063897763,
+        "before_poppler": 0.9744408945686901,
+        "refined_pdfium": 0.9712460063897763,
+        "refined_poppler": 0.9744408945686901
+      },
+      {
+        "page": 4,
+        "id": "p04s0004",
+        "char": "g",
+        "before_pdfium": 0.963302752293578,
+        "before_poppler": 0.9723076923076923,
+        "refined_pdfium": 0.963302752293578,
+        "refined_poppler": 0.9723076923076923
+      },
+      {
+        "page": 4,
+        "id": "p04s0011",
+        "char": "8",
+        "before_pdfium": 0.9852507374631269,
+        "before_poppler": 0.9794721407624634,
+        "refined_pdfium": 0.9852507374631269,
+        "refined_poppler": 0.9794721407624634
+      },
+      {
+        "page": 4,
+        "id": "p04s0013",
+        "char": "0",
+        "before_pdfium": 0.9712460063897763,
+        "before_poppler": 0.9744408945686901,
+        "refined_pdfium": 0.9712460063897763,
+        "refined_poppler": 0.9744408945686901
+      },
+      {
+        "page": 4,
+        "id": "p04s0015",
+        "char": "g",
+        "before_pdfium": 0.9721362229102167,
+        "before_poppler": 0.9720496894409938,
+        "refined_pdfium": 0.9429429429429429,
+        "refined_poppler": 0.9513677811550152
+      },
+      {
+        "page": 4,
+        "id": "p04s0020",
+        "char": "8",
+        "before_pdfium": 0.9852507374631269,
+        "before_poppler": 0.9794721407624634,
+        "refined_pdfium": 0.9852507374631269,
+        "refined_poppler": 0.9794721407624634
+      },
+      {
+        "page": 4,
+        "id": "p04s0022",
+        "char": "0",
+        "before_pdfium": 0.9712460063897763,
+        "before_poppler": 0.9744408945686901,
+        "refined_pdfium": 0.9712460063897763,
+        "refined_poppler": 0.9744408945686901
+      },
+      {
+        "page": 4,
+        "id": "p04s0023",
+        "char": "g",
+        "before_pdfium": 0.9721362229102167,
+        "before_poppler": 0.9720496894409938,
+        "refined_pdfium": 0.9429429429429429,
+        "refined_poppler": 0.9513677811550152
+      },
+      {
+        "page": 4,
+        "id": "p04s0030",
+        "char": "8",
+        "before_pdfium": 0.9852507374631269,
+        "before_poppler": 0.9794721407624634,
+        "refined_pdfium": 0.9852507374631269,
+        "refined_poppler": 0.9794721407624634
+      },
+      {
+        "page": 4,
+        "id": "p04s0032",
+        "char": "0",
+        "before_pdfium": 0.9712460063897763,
+        "before_poppler": 0.9744408945686901,
+        "refined_pdfium": 0.9712460063897763,
+        "refined_poppler": 0.9744408945686901
+      },
+      {
+        "page": 4,
+        "id": "p04s0034",
+        "char": "g",
+        "before_pdfium": 0.963302752293578,
+        "before_poppler": 0.9723076923076923,
+        "refined_pdfium": 0.963302752293578,
+        "refined_poppler": 0.9723076923076923
+      },
+      {
+        "page": 4,
+        "id": "p04s0038",
+        "char": "8",
+        "before_pdfium": 0.9852507374631269,
+        "before_poppler": 0.9794721407624634,
+        "refined_pdfium": 0.9852507374631269,
+        "refined_poppler": 0.9794721407624634
+      },
+      {
+        "page": 4,
+        "id": "p04s0040",
+        "char": "0",
+        "before_pdfium": 0.9337349397590361,
+        "before_poppler": 0.9337349397590361,
+        "refined_pdfium": 0.9226190476190477,
+        "refined_poppler": 0.9337349397590361
+      },
+      {
+        "page": 4,
+        "id": "p04s0041",
+        "char": "g",
+        "before_pdfium": 0.963302752293578,
+        "before_poppler": 0.9723076923076923,
+        "refined_pdfium": 0.963302752293578,
+        "refined_poppler": 0.9723076923076923
+      },
+      {
+        "page": 4,
+        "id": "p04s0048",
+        "char": "8",
+        "before_pdfium": 0.9736842105263158,
+        "before_poppler": 0.9823008849557522,
+        "refined_pdfium": 0.9736842105263158,
+        "refined_poppler": 0.9823008849557522
+      },
+      {
+        "page": 4,
+        "id": "p04s0050",
+        "char": "0",
+        "before_pdfium": 0.9712460063897763,
+        "before_poppler": 0.9744408945686901,
+        "refined_pdfium": 0.9712460063897763,
+        "refined_poppler": 0.9744408945686901
+      },
+      {
+        "page": 4,
+        "id": "p04s0052",
+        "char": "g",
+        "before_pdfium": 0.963302752293578,
+        "before_poppler": 0.9723076923076923,
+        "refined_pdfium": 0.963302752293578,
+        "refined_poppler": 0.9723076923076923
+      },
+      {
+        "page": 4,
+        "id": "p04s0057",
+        "char": "8",
+        "before_pdfium": 0.9852507374631269,
+        "before_poppler": 0.9794721407624634,
+        "refined_pdfium": 0.9852507374631269,
+        "refined_poppler": 0.9794721407624634
+      },
+      {
+        "page": 4,
+        "id": "p04s0059",
+        "char": "0",
+        "before_pdfium": 0.9712460063897763,
+        "before_poppler": 0.9744408945686901,
+        "refined_pdfium": 0.9712460063897763,
+        "refined_poppler": 0.9744408945686901
+      },
+      {
+        "page": 4,
+        "id": "p04s0060",
+        "char": "g",
+        "before_pdfium": 0.9721362229102167,
+        "before_poppler": 0.9720496894409938,
+        "refined_pdfium": 0.9429429429429429,
+        "refined_poppler": 0.9513677811550152
+      },
+      {
+        "page": 4,
+        "id": "p04s0067",
+        "char": "8",
+        "before_pdfium": 0.9852507374631269,
+        "before_poppler": 0.9794721407624634,
+        "refined_pdfium": 0.9852507374631269,
+        "refined_poppler": 0.9794721407624634
+      },
+      {
+        "page": 4,
+        "id": "p04s0069",
+        "char": "0",
+        "before_pdfium": 0.9712460063897763,
+        "before_poppler": 0.9744408945686901,
+        "refined_pdfium": 0.9712460063897763,
+        "refined_poppler": 0.9744408945686901
+      },
+      {
+        "page": 4,
+        "id": "p04s0071",
+        "char": "g",
+        "before_pdfium": 0.963302752293578,
+        "before_poppler": 0.9723076923076923,
+        "refined_pdfium": 0.963302752293578,
+        "refined_poppler": 0.9723076923076923
+      },
+      {
+        "page": 5,
+        "id": "p05s0001",
+        "char": "8",
+        "before_pdfium": 0.9852507374631269,
+        "before_poppler": 0.9794721407624634,
+        "refined_pdfium": 0.9852507374631269,
+        "refined_poppler": 0.9794721407624634
+      },
+      {
+        "page": 5,
+        "id": "p05s0003",
+        "char": "0",
+        "before_pdfium": 0.9712460063897763,
+        "before_poppler": 0.9744408945686901,
+        "refined_pdfium": 0.9712460063897763,
+        "refined_poppler": 0.9744408945686901
+      },
+      {
+        "page": 5,
+        "id": "p05s0004",
+        "char": "g",
+        "before_pdfium": 0.9721362229102167,
+        "before_poppler": 0.9720496894409938,
+        "refined_pdfium": 0.9429429429429429,
+        "refined_poppler": 0.9513677811550152
+      },
+      {
+        "page": 5,
+        "id": "p05s0011",
+        "char": "8",
+        "before_pdfium": 0.9852507374631269,
+        "before_poppler": 0.9794721407624634,
+        "refined_pdfium": 0.9852507374631269,
+        "refined_poppler": 0.9794721407624634
+      },
+      {
+        "page": 5,
+        "id": "p05s0013",
+        "char": "0",
+        "before_pdfium": 0.9712460063897763,
+        "before_poppler": 0.9744408945686901,
+        "refined_pdfium": 0.9712460063897763,
+        "refined_poppler": 0.9744408945686901
+      },
+      {
+        "page": 5,
+        "id": "p05s0015",
+        "char": "g",
+        "before_pdfium": 0.9721362229102167,
+        "before_poppler": 0.9720496894409938,
+        "refined_pdfium": 0.9429429429429429,
+        "refined_poppler": 0.9513677811550152
+      },
+      {
+        "page": 5,
+        "id": "p05s0020",
+        "char": "8",
+        "before_pdfium": 0.9852507374631269,
+        "before_poppler": 0.9794721407624634,
+        "refined_pdfium": 0.9852507374631269,
+        "refined_poppler": 0.9794721407624634
+      },
+      {
+        "page": 5,
+        "id": "p05s0022",
+        "char": "0",
+        "before_pdfium": 0.9712460063897763,
+        "before_poppler": 0.9744408945686901,
+        "refined_pdfium": 0.9712460063897763,
+        "refined_poppler": 0.9744408945686901
+      },
+      {
+        "page": 5,
+        "id": "p05s0023",
+        "char": "g",
+        "before_pdfium": 0.9721362229102167,
+        "before_poppler": 0.9720496894409938,
+        "refined_pdfium": 0.9429429429429429,
+        "refined_poppler": 0.9513677811550152
+      },
+      {
+        "page": 5,
+        "id": "p05s0030",
+        "char": "8",
+        "before_pdfium": 0.9852507374631269,
+        "before_poppler": 0.9794721407624634,
+        "refined_pdfium": 0.9852507374631269,
+        "refined_poppler": 0.9794721407624634
+      },
+      {
+        "page": 5,
+        "id": "p05s0032",
+        "char": "0",
+        "before_pdfium": 0.9712460063897763,
+        "before_poppler": 0.9744408945686901,
+        "refined_pdfium": 0.9712460063897763,
+        "refined_poppler": 0.9744408945686901
+      },
+      {
+        "page": 5,
+        "id": "p05s0034",
+        "char": "g",
+        "before_pdfium": 0.963302752293578,
+        "before_poppler": 0.9723076923076923,
+        "refined_pdfium": 0.963302752293578,
+        "refined_poppler": 0.9723076923076923
+      },
+      {
+        "page": 5,
+        "id": "p05s0038",
+        "char": "8",
+        "before_pdfium": 0.9852507374631269,
+        "before_poppler": 0.9794721407624634,
+        "refined_pdfium": 0.9852507374631269,
+        "refined_poppler": 0.9794721407624634
+      },
+      {
+        "page": 5,
+        "id": "p05s0040",
+        "char": "0",
+        "before_pdfium": 0.9712460063897763,
+        "before_poppler": 0.9744408945686901,
+        "refined_pdfium": 0.9712460063897763,
+        "refined_poppler": 0.9744408945686901
+      },
+      {
+        "page": 5,
+        "id": "p05s0041",
+        "char": "g",
+        "before_pdfium": 0.9721362229102167,
+        "before_poppler": 0.9720496894409938,
+        "refined_pdfium": 0.9429429429429429,
+        "refined_poppler": 0.9513677811550152
+      },
+      {
+        "page": 5,
+        "id": "p05s0048",
+        "char": "8",
+        "before_pdfium": 0.9852507374631269,
+        "before_poppler": 0.9794721407624634,
+        "refined_pdfium": 0.9852507374631269,
+        "refined_poppler": 0.9794721407624634
+      },
+      {
+        "page": 5,
+        "id": "p05s0050",
+        "char": "0",
+        "before_pdfium": 0.9712460063897763,
+        "before_poppler": 0.9744408945686901,
+        "refined_pdfium": 0.9712460063897763,
+        "refined_poppler": 0.9744408945686901
+      },
+      {
+        "page": 5,
+        "id": "p05s0052",
+        "char": "g",
+        "before_pdfium": 0.9721362229102167,
+        "before_poppler": 0.9720496894409938,
+        "refined_pdfium": 0.9429429429429429,
+        "refined_poppler": 0.9513677811550152
+      },
+      {
+        "page": 5,
+        "id": "p05s0057",
+        "char": "8",
+        "before_pdfium": 0.9852507374631269,
+        "before_poppler": 0.9794721407624634,
+        "refined_pdfium": 0.9852507374631269,
+        "refined_poppler": 0.9794721407624634
+      },
+      {
+        "page": 5,
+        "id": "p05s0059",
+        "char": "0",
+        "before_pdfium": 0.9712460063897763,
+        "before_poppler": 0.9744408945686901,
+        "refined_pdfium": 0.9712460063897763,
+        "refined_poppler": 0.9744408945686901
+      },
+      {
+        "page": 5,
+        "id": "p05s0060",
+        "char": "g",
+        "before_pdfium": 0.963302752293578,
+        "before_poppler": 0.9723076923076923,
+        "refined_pdfium": 0.963302752293578,
+        "refined_poppler": 0.9723076923076923
+      },
+      {
+        "page": 5,
+        "id": "p05s0067",
+        "char": "8",
+        "before_pdfium": 0.9852507374631269,
+        "before_poppler": 0.9794721407624634,
+        "refined_pdfium": 0.9852507374631269,
+        "refined_poppler": 0.9794721407624634
+      },
+      {
+        "page": 5,
+        "id": "p05s0069",
+        "char": "0",
+        "before_pdfium": 0.9712460063897763,
+        "before_poppler": 0.9744408945686901,
+        "refined_pdfium": 0.9712460063897763,
+        "refined_poppler": 0.9744408945686901
+      },
+      {
+        "page": 5,
+        "id": "p05s0071",
+        "char": "g",
+        "before_pdfium": 0.963302752293578,
+        "before_poppler": 0.9723076923076923,
+        "refined_pdfium": 0.963302752293578,
+        "refined_poppler": 0.9723076923076923
+      },
+      {
+        "page": 6,
+        "id": "p06s0001",
+        "char": "8",
+        "before_pdfium": 0.9550561797752809,
+        "before_poppler": 0.951310861423221,
+        "refined_pdfium": 0.9400749063670412,
+        "refined_poppler": 0.9473684210526315
+      },
+      {
+        "page": 6,
+        "id": "p06s0004",
+        "char": "g",
+        "before_pdfium": 0.9176029962546817,
+        "before_poppler": 0.924812030075188,
+        "refined_pdfium": 0.9277566539923955,
+        "refined_poppler": 0.9239543726235742
+      },
+      {
+        "page": 6,
+        "id": "p06s0011",
+        "char": "8",
+        "before_pdfium": 0.9550561797752809,
+        "before_poppler": 0.951310861423221,
+        "refined_pdfium": 0.9400749063670412,
+        "refined_poppler": 0.9473684210526315
+      },
+      {
+        "page": 6,
+        "id": "p06s0013",
+        "char": "0",
+        "before_pdfium": 0.8906882591093117,
+        "before_poppler": 0.8906882591093117,
+        "refined_pdfium": 0.8906882591093117,
+        "refined_poppler": 0.8906882591093117
+      },
+      {
+        "page": 6,
+        "id": "p06s0015",
+        "char": "g",
+        "before_pdfium": 0.9176029962546817,
+        "before_poppler": 0.924812030075188,
+        "refined_pdfium": 0.9277566539923955,
+        "refined_poppler": 0.9239543726235742
+      },
+      {
+        "page": 6,
+        "id": "p06s0020",
+        "char": "8",
+        "before_pdfium": 0.9550561797752809,
+        "before_poppler": 0.951310861423221,
+        "refined_pdfium": 0.9400749063670412,
+        "refined_poppler": 0.9473684210526315
+      },
+      {
+        "page": 6,
+        "id": "p06s0023",
+        "char": "g",
+        "before_pdfium": 0.9210526315789473,
+        "before_poppler": 0.924812030075188,
+        "refined_pdfium": 0.9277566539923955,
+        "refined_poppler": 0.9239543726235742
+      },
+      {
+        "page": 6,
+        "id": "p06s0030",
+        "char": "8",
+        "before_pdfium": 0.9550561797752809,
+        "before_poppler": 0.951310861423221,
+        "refined_pdfium": 0.9400749063670412,
+        "refined_poppler": 0.9473684210526315
+      },
+      {
+        "page": 6,
+        "id": "p06s0032",
+        "char": "0",
+        "before_pdfium": 0.9264069264069265,
+        "before_poppler": 0.9004329004329005,
+        "refined_pdfium": 0.8983050847457628,
+        "refined_poppler": 0.902127659574468
+      },
+      {
+        "page": 6,
+        "id": "p06s0034",
+        "char": "g",
+        "before_pdfium": 0.9457364341085271,
+        "before_poppler": 0.9494163424124513,
+        "refined_pdfium": 0.9457364341085271,
+        "refined_poppler": 0.9494163424124513
+      },
+      {
+        "page": 6,
+        "id": "p06s0038",
+        "char": "8",
+        "before_pdfium": 0.9550561797752809,
+        "before_poppler": 0.951310861423221,
+        "refined_pdfium": 0.9400749063670412,
+        "refined_poppler": 0.9473684210526315
+      },
+      {
+        "page": 6,
+        "id": "p06s0040",
+        "char": "0",
+        "before_pdfium": 0.9264069264069265,
+        "before_poppler": 0.9004329004329005,
+        "refined_pdfium": 0.8983050847457628,
+        "refined_poppler": 0.902127659574468
+      },
+      {
+        "page": 6,
+        "id": "p06s0041",
+        "char": "g",
+        "before_pdfium": 0.9176029962546817,
+        "before_poppler": 0.924812030075188,
+        "refined_pdfium": 0.9277566539923955,
+        "refined_poppler": 0.9239543726235742
+      },
+      {
+        "page": 6,
+        "id": "p06s0048",
+        "char": "8",
+        "before_pdfium": 0.9550561797752809,
+        "before_poppler": 0.951310861423221,
+        "refined_pdfium": 0.9400749063670412,
+        "refined_poppler": 0.9473684210526315
+      },
+      {
+        "page": 6,
+        "id": "p06s0050",
+        "char": "0",
+        "before_pdfium": 0.9264069264069265,
+        "before_poppler": 0.9004329004329005,
+        "refined_pdfium": 0.8983050847457628,
+        "refined_poppler": 0.902127659574468
+      },
+      {
+        "page": 6,
+        "id": "p06s0052",
+        "char": "g",
+        "before_pdfium": 0.9176029962546817,
+        "before_poppler": 0.924812030075188,
+        "refined_pdfium": 0.9277566539923955,
+        "refined_poppler": 0.9239543726235742
+      },
+      {
+        "page": 6,
+        "id": "p06s0057",
+        "char": "8",
+        "before_pdfium": 0.9550561797752809,
+        "before_poppler": 0.951310861423221,
+        "refined_pdfium": 0.9400749063670412,
+        "refined_poppler": 0.9473684210526315
+      },
+      {
+        "page": 6,
+        "id": "p06s0059",
+        "char": "0",
+        "before_pdfium": 0.8930041152263375,
+        "before_poppler": 0.8930041152263375,
+        "refined_pdfium": 0.8930041152263375,
+        "refined_poppler": 0.8930041152263375
+      },
+      {
+        "page": 6,
+        "id": "p06s0060",
+        "char": "g",
+        "before_pdfium": 0.9210526315789473,
+        "before_poppler": 0.924812030075188,
+        "refined_pdfium": 0.9277566539923955,
+        "refined_poppler": 0.9239543726235742
+      },
+      {
+        "page": 6,
+        "id": "p06s0067",
+        "char": "8",
+        "before_pdfium": 0.89568345323741,
+        "before_poppler": 0.9028776978417267,
+        "refined_pdfium": 0.89568345323741,
+        "refined_poppler": 0.9028776978417267
+      },
+      {
+        "page": 6,
+        "id": "p06s0069",
+        "char": "0",
+        "before_pdfium": 0.9264069264069265,
+        "before_poppler": 0.9004329004329005,
+        "refined_pdfium": 0.8983050847457628,
+        "refined_poppler": 0.902127659574468
+      },
+      {
+        "page": 6,
+        "id": "p06s0071",
+        "char": "g",
+        "before_pdfium": 0.9457364341085271,
+        "before_poppler": 0.9494163424124513,
+        "refined_pdfium": 0.9457364341085271,
+        "refined_poppler": 0.9494163424124513
+      },
+      {
+        "page": 7,
+        "id": "p07s0001",
+        "char": "8",
+        "before_pdfium": 0.9550561797752809,
+        "before_poppler": 0.951310861423221,
+        "refined_pdfium": 0.9400749063670412,
+        "refined_poppler": 0.9438202247191011
+      },
+      {
+        "page": 7,
+        "id": "p07s0003",
+        "char": "0",
+        "before_pdfium": 0.9264069264069265,
+        "before_poppler": 0.9047619047619048,
+        "refined_pdfium": 0.8983050847457628,
+        "refined_poppler": 0.902127659574468
+      },
+      {
+        "page": 7,
+        "id": "p07s0004",
+        "char": "g",
+        "before_pdfium": 0.9176029962546817,
+        "before_poppler": 0.924812030075188,
+        "refined_pdfium": 0.9277566539923955,
+        "refined_poppler": 0.9204545454545454
+      },
+      {
+        "page": 7,
+        "id": "p07s0011",
+        "char": "8",
+        "before_pdfium": 0.9550561797752809,
+        "before_poppler": 0.951310861423221,
+        "refined_pdfium": 0.9400749063670412,
+        "refined_poppler": 0.9438202247191011
+      },
+      {
+        "page": 7,
+        "id": "p07s0013",
+        "char": "0",
+        "before_pdfium": 0.9264069264069265,
+        "before_poppler": 0.9047619047619048,
+        "refined_pdfium": 0.8983050847457628,
+        "refined_poppler": 0.902127659574468
+      },
+      {
+        "page": 7,
+        "id": "p07s0015",
+        "char": "g",
+        "before_pdfium": 0.9176029962546817,
+        "before_poppler": 0.924812030075188,
+        "refined_pdfium": 0.9277566539923955,
+        "refined_poppler": 0.9204545454545454
+      },
+      {
+        "page": 7,
+        "id": "p07s0020",
+        "char": "8",
+        "before_pdfium": 0.9550561797752809,
+        "before_poppler": 0.951310861423221,
+        "refined_pdfium": 0.9400749063670412,
+        "refined_poppler": 0.9438202247191011
+      },
+      {
+        "page": 7,
+        "id": "p07s0022",
+        "char": "0",
+        "before_pdfium": 0.9264069264069265,
+        "before_poppler": 0.9047619047619048,
+        "refined_pdfium": 0.8983050847457628,
+        "refined_poppler": 0.902127659574468
+      },
+      {
+        "page": 7,
+        "id": "p07s0023",
+        "char": "g",
+        "before_pdfium": 0.9176029962546817,
+        "before_poppler": 0.924812030075188,
+        "refined_pdfium": 0.9277566539923955,
+        "refined_poppler": 0.9204545454545454
+      },
+      {
+        "page": 7,
+        "id": "p07s0030",
+        "char": "8",
+        "before_pdfium": 0.9550561797752809,
+        "before_poppler": 0.951310861423221,
+        "refined_pdfium": 0.9400749063670412,
+        "refined_poppler": 0.9438202247191011
+      },
+      {
+        "page": 7,
+        "id": "p07s0032",
+        "char": "0",
+        "before_pdfium": 0.9264069264069265,
+        "before_poppler": 0.9047619047619048,
+        "refined_pdfium": 0.8983050847457628,
+        "refined_poppler": 0.902127659574468
+      },
+      {
+        "page": 7,
+        "id": "p07s0034",
+        "char": "g",
+        "before_pdfium": 0.9176029962546817,
+        "before_poppler": 0.924812030075188,
+        "refined_pdfium": 0.9277566539923955,
+        "refined_poppler": 0.9204545454545454
+      },
+      {
+        "page": 7,
+        "id": "p07s0038",
+        "char": "8",
+        "before_pdfium": 0.9550561797752809,
+        "before_poppler": 0.951310861423221,
+        "refined_pdfium": 0.9400749063670412,
+        "refined_poppler": 0.9438202247191011
+      },
+      {
+        "page": 7,
+        "id": "p07s0040",
+        "char": "0",
+        "before_pdfium": 0.9264069264069265,
+        "before_poppler": 0.9047619047619048,
+        "refined_pdfium": 0.8983050847457628,
+        "refined_poppler": 0.902127659574468
+      },
+      {
+        "page": 7,
+        "id": "p07s0041",
+        "char": "g",
+        "before_pdfium": 0.9176029962546817,
+        "before_poppler": 0.924812030075188,
+        "refined_pdfium": 0.9277566539923955,
+        "refined_poppler": 0.9204545454545454
+      },
+      {
+        "page": 7,
+        "id": "p07s0048",
+        "char": "8",
+        "before_pdfium": 0.9550561797752809,
+        "before_poppler": 0.951310861423221,
+        "refined_pdfium": 0.9400749063670412,
+        "refined_poppler": 0.9438202247191011
+      },
+      {
+        "page": 7,
+        "id": "p07s0050",
+        "char": "0",
+        "before_pdfium": 0.9264069264069265,
+        "before_poppler": 0.9047619047619048,
+        "refined_pdfium": 0.8983050847457628,
+        "refined_poppler": 0.902127659574468
+      },
+      {
+        "page": 7,
+        "id": "p07s0052",
+        "char": "g",
+        "before_pdfium": 0.9176029962546817,
+        "before_poppler": 0.924812030075188,
+        "refined_pdfium": 0.9277566539923955,
+        "refined_poppler": 0.9204545454545454
+      },
+      {
+        "page": 7,
+        "id": "p07s0057",
+        "char": "8",
+        "before_pdfium": 0.9550561797752809,
+        "before_poppler": 0.951310861423221,
+        "refined_pdfium": 0.9400749063670412,
+        "refined_poppler": 0.9438202247191011
+      },
+      {
+        "page": 7,
+        "id": "p07s0059",
+        "char": "0",
+        "before_pdfium": 0.9264069264069265,
+        "before_poppler": 0.9047619047619048,
+        "refined_pdfium": 0.8983050847457628,
+        "refined_poppler": 0.902127659574468
+      },
+      {
+        "page": 7,
+        "id": "p07s0060",
+        "char": "g",
+        "before_pdfium": 0.9176029962546817,
+        "before_poppler": 0.924812030075188,
+        "refined_pdfium": 0.9277566539923955,
+        "refined_poppler": 0.9204545454545454
+      },
+      {
+        "page": 7,
+        "id": "p07s0067",
+        "char": "8",
+        "before_pdfium": 0.9550561797752809,
+        "before_poppler": 0.951310861423221,
+        "refined_pdfium": 0.9400749063670412,
+        "refined_poppler": 0.9438202247191011
+      },
+      {
+        "page": 7,
+        "id": "p07s0069",
+        "char": "0",
+        "before_pdfium": 0.9264069264069265,
+        "before_poppler": 0.9047619047619048,
+        "refined_pdfium": 0.8983050847457628,
+        "refined_poppler": 0.902127659574468
+      },
+      {
+        "page": 7,
+        "id": "p07s0071",
+        "char": "g",
+        "before_pdfium": 0.9176029962546817,
+        "before_poppler": 0.924812030075188,
+        "refined_pdfium": 0.9277566539923955,
+        "refined_poppler": 0.9204545454545454
+      }
+    ],
+    "decision": "reject; keep existing canonical outlines"
+  },
+  "real": [
+    {
+      "name": "cord-02",
+      "command": [
+        "/usr/bin/time",
+        "-v",
+        "-o",
+        "/data/coding/scanweave/qualification/clearscan_background/real/final/cord-02.time.txt",
+        "/data/coding/scanweave/target/release/scanweave-cli",
+        "build",
+        "/data/coding/scanweave/qualification/clearscan_competitive/real/cord-02.png",
+        "--ocr",
+        "/data/coding/scanweave/qualification/clearscan_competitive/real/cord-02.regions.hocr",
+        "--dpi",
+        "300",
+        "--profile",
+        "clearscan",
+        "--output",
+        "/data/coding/scanweave/qualification/clearscan_background/real/final/cord-02.pdf",
+        "--report",
+        "/data/coding/scanweave/qualification/clearscan_background/real/final/cord-02.json"
+      ],
+      "status": 0,
+      "elapsed": 1.7390795090032043,
+      "returncode": 0,
+      "seconds": 1.7390795090032043,
+      "bytes": 419570,
+      "sha256": "2a66814dba6aa42650da0c4949c4499c58ac5b172549bf10cac1d89126715647",
+      "streams": {
+        "other_stream": 1695,
+        "raster": 369487,
+        "content": 11464,
+        "font": 30184,
+        "overhead": 6740
+      },
+      "images": [
+        {
+          "object": [
+            17,
+            0
+          ],
+          "width": 360,
+          "height": 640,
+          "colour": "/DeviceRGB",
+          "filter": "/FlateDecode",
+          "bytes": 115210,
+          "encoded_sha256": "ff79068521f50089374e1dc1d39c4e679bc1bd99067bcc5bc96d7e3e691e8a23",
+          "samples_sha256": "4142e4f325bc3a5ed75e9a9ad8651555b91158cc48830e941e9b4a409b5851aa"
+        },
+        {
+          "object": [
+            18,
+            0
+          ],
+          "width": 552,
+          "height": 552,
+          "colour": "/DeviceRGB",
+          "filter": "/FlateDecode",
+          "bytes": 154338,
+          "encoded_sha256": "8d05b7b35c8ea03b2c848046a60b7e874b65e23ca23412bf6e9968a191a1a172",
+          "samples_sha256": "8516f441121d64bf86b2b769882973d6439fac4dbea398bba43a5efa813654b6"
+        },
+        {
+          "object": [
+            19,
+            0
+          ],
+          "width": 160,
+          "height": 192,
+          "colour": "/DeviceRGB",
+          "filter": "/FlateDecode",
+          "bytes": 23895,
+          "encoded_sha256": "e78c0bff9918ec0165b3e3a08804283c61d154dfbf819bbcbee7d4c7b26cf55b",
+          "samples_sha256": "5d8bc2c447425a5d190852d74ba3d2cde4140198fb84837eeaee592193e94618"
+        },
+        {
+          "object": [
+            20,
+            0
+          ],
+          "width": 24,
+          "height": 8,
+          "colour": "/DeviceRGB",
+          "filter": "/FlateDecode",
+          "bytes": 58,
+          "encoded_sha256": "699a6d07a9b7428d530311fdd5ea1d48c388440b93344c4ad304a749819cf96a",
+          "samples_sha256": "4a63e81d6ec7b5ec13e3e840582ffb996d4abed227d7165e9b604b25ea768656"
+        },
+        {
+          "object": [
+            21,
+            0
+          ],
+          "width": 251,
+          "height": 256,
+          "colour": "/DeviceRGB",
+          "filter": "/FlateDecode",
+          "bytes": 48363,
+          "encoded_sha256": "51616a3725f1c50dc7d5f87aaaa1abdf1d90187b06507b9dec81c42ad35fca8b",
+          "samples_sha256": "ed2d7a1468c89cb51e0a85ee8deeb0f527ed78a1477f700cf2f26990e1c583c8"
+        },
+        {
+          "object": [
+            22,
+            0
+          ],
+          "width": 24,
+          "height": 8,
+          "colour": "/DeviceRGB",
+          "filter": "/FlateDecode",
+          "bytes": 104,
+          "encoded_sha256": "22670b21b3bf820f6d7c1266c13d77e04514927bdebf357d9ceb5730465273de",
+          "samples_sha256": "703fc22371022f6fce17d3c4d8b6e88b98a4497cb09cad9b5c41b6677e5a4f48"
+        },
+        {
+          "object": [
+            23,
+            0
+          ],
+          "width": 312,
+          "height": 80,
+          "colour": "/DeviceRGB",
+          "filter": "/FlateDecode",
+          "bytes": 12924,
+          "encoded_sha256": "56318824d73848dbaefda371d8e4c939360c6dd1952d57e5ffa6cc956ac1542c",
+          "samples_sha256": "067430469cecbe5cd994b733ac341fe7cc1be2dcf0d8981d9fcb7999dd82fedf"
+        },
+        {
+          "object": [
+            24,
+            0
+          ],
+          "width": 64,
+          "height": 40,
+          "colour": "/DeviceRGB",
+          "filter": "/FlateDecode",
+          "bytes": 1199,
+          "encoded_sha256": "16382a99a014aab6d4372808e9abd2aa100f0f35f4878baff583ae638880bda0",
+          "samples_sha256": "ee48c48fdcc358159c5de80799cabab3f14cf337dad34ba2cd90d23903152d38"
+        },
+        {
+          "object": [
+            25,
+            0
+          ],
+          "width": 109,
+          "height": 32,
+          "colour": "/DeviceRGB",
+          "filter": "/FlateDecode",
+          "bytes": 5860,
+          "encoded_sha256": "d46baa5ca8b3c7766fd3f0d3965fc3a81a95e1706af8ffd3d49f489973d89726",
+          "samples_sha256": "f599cef2052d03bd7d235f3efc2b1ca16baffee411821e9c8b0d80d366582506"
+        },
+        {
+          "object": [
+            26,
+            0
+          ],
+          "width": 40,
+          "height": 40,
+          "colour": "/DeviceRGB",
+          "filter": "/FlateDecode",
+          "bytes": 1329,
+          "encoded_sha256": "2c29fcaab4ae5572e90b58bb393c3e736af9e6f92865d66f6a94f248ac722cec",
+          "samples_sha256": "8831bdcb0e6a7214e9b9a42161ec472dae6226722719fb797df2c4577ef73535"
+        },
+        {
+          "object": [
+            27,
+            0
+          ],
+          "width": 8,
+          "height": 8,
+          "colour": "/DeviceRGB",
+          "filter": "/FlateDecode",
+          "bytes": 36,
+          "encoded_sha256": "28fb47eb9105ed50ce148d2eb81a6c07ae00ceab2b9dce5fcfecdf54f0505082",
+          "samples_sha256": "26937a49b5c59b2900f8eb3e3f1a58688d133e41b71349d5952ad30e002ca9fa"
+        },
+        {
+          "object": [
+            28,
+            0
+          ],
+          "width": 32,
+          "height": 8,
+          "colour": "/DeviceRGB",
+          "filter": "/FlateDecode",
+          "bytes": 63,
+          "encoded_sha256": "56abf1ef1f4b4bf48e502b00bf57c91c51b051ea4a2d19fae150a7b9a69cc2b7",
+          "samples_sha256": "c17bb0dc8d7528c366b0cfbbef03f735464e9ed96313a1548795b2f95703bf59"
+        },
+        {
+          "object": [
+            29,
+            0
+          ],
+          "width": 24,
+          "height": 8,
+          "colour": "/DeviceRGB",
+          "filter": "/FlateDecode",
+          "bytes": 48,
+          "encoded_sha256": "c74ab6c9e034364585ad60e1e5e11ce1afb420f6b0bf743aba53639063dae4a9",
+          "samples_sha256": "d757b1738cbe06fbefc1b214bc03430972fc279b8949bcfa711952581d3c7569"
+        },
+        {
+          "object": [
+            30,
+            0
+          ],
+          "width": 128,
+          "height": 40,
+          "colour": "/DeviceRGB",
+          "filter": "/FlateDecode",
+          "bytes": 1761,
+          "encoded_sha256": "54e90105923bf40731b33542f93030f186bac48a2012d3dbafdc494403151d33",
+          "samples_sha256": "34511d9d3d92ea1a313947bd0a15f91dbc1a8efbb3b6a399e652f0785e1ef8b7"
+        },
+        {
+          "object": [
+            31,
+            0
+          ],
+          "width": 152,
+          "height": 8,
+          "colour": "/DeviceRGB",
+          "filter": "/FlateDecode",
+          "bytes": 1027,
+          "encoded_sha256": "8fd26b8cccc6bba9f6b6d3c12249e5468aeddaa581f0138bc7897005fec78473",
+          "samples_sha256": "1d38657552a506f9d31069b87f2bb23133d1325d55a095a7075c3e48425be407"
+        },
+        {
+          "object": [
+            32,
+            0
+          ],
+          "width": 8,
+          "height": 8,
+          "colour": "/DeviceRGB",
+          "filter": "/FlateDecode",
+          "bytes": 117,
+          "encoded_sha256": "074b30f8246ac80311b7cb641735bfc44b917700512b3c7b85c3e0e83d66f185",
+          "samples_sha256": "3c64acbb52ee3559f60da84b2722b7d7059288d8850a98794ffe4847f7d2fb3a"
+        },
+        {
+          "object": [
+            33,
+            0
+          ],
+          "width": 320,
+          "height": 24,
+          "colour": "/DeviceRGB",
+          "filter": "/FlateDecode",
+          "bytes": 2223,
+          "encoded_sha256": "dcd4ac89b2c4f6caabbebdde2e74d17f483bb94026b680ea3b81d497a5593fb4",
+          "samples_sha256": "1675db9e6eec40a99499d0ae29907556d0402bc5e3659a641ad246ae0c23e172"
+        },
+        {
+          "object": [
+            34,
+            0
+          ],
+          "width": 16,
+          "height": 64,
+          "colour": "/DeviceRGB",
+          "filter": "/FlateDecode",
+          "bytes": 932,
+          "encoded_sha256": "63bb51574324f213e5ff3624a6565d84e31be0cd57aeaa27ac857c747393996b",
+          "samples_sha256": "e4e71657fde4d69431309c912a3d2aee92a1df428ce84a0c9aeaf6fa68126579"
+        }
+      ],
+      "unique_images": 18,
+      "text_show_operations": 172,
+      "font_outlines": 143,
+      "observations": 157,
+      "vector_ink_px": 4739,
+      "source_ink_suppressed_px": 4739,
+      "coverage": {
+        "text_ink_px_total": 8940,
+        "text_ink_px_vector": 4739,
+        "text_ink_px_raster": 4201,
+        "other_ink_px": 150,
+        "unowned_ink_px": 0,
+        "multiply_owned_ink_px": 0
+      },
+      "supplied_chars": 174,
+      "source_sha256": "d06540139f2d3d18e366b203e154ca2a4277db0f0d3f6c4b7f50b5650090863b",
+      "rss_kb": 35408,
+      "poppler_text": "4 HAKAU UDANG 92,000\n4 SIAO MAI BABI 80,000\n3 CEKER AYAM 60,000\n2 BAKPAO BKR C 42,000\nCRISPY\n3 TAHU GORENG 60,000\nCRISPY ee\nSubtotal 334,000\nTotal 334,000\nCASH 350,000\nCash CHANGE -16,000\nTotal Item 5\nTotal Qty 16\n\f",
+      "pdfium_text": "4 HAKAU UDANG 92,000 4 SIAO MAI BABI 80,000\r\n3 CEKER AYAM 60,000 2 BAKPAO BKR C 42,000\r\nCRISPY\r\n3 TAHU GORENG 60,000 CRISPY ee\r\nSubtotal 334,000\r\nTotal 334,000\r\nCASH 350,000\r\nCash CHANGE -16,000\r\nTotal Item 5\r\nTotal Qty 16",
+      "renderer_text_equal": true,
+      "native_search": [
+        {
+          "token": "HAKAU",
+          "found": true
+        },
+        {
+          "token": "UDANG",
+          "found": true
+        },
+        {
+          "token": "SIAO",
+          "found": true
+        }
+      ],
+      "source_relative_mae_150dpi": {
+        "poppler": 2.2905951141092733,
+        "pdfium": 1.087059548863949
+      },
+      "renderer_mae_150dpi": 2.0830823260631255,
+      "actual_vector_occurrences": 58,
+      "actual_used_visible_font_gids": 50
+    },
+    {
+      "name": "history-01",
+      "command": [
+        "/usr/bin/time",
+        "-v",
+        "-o",
+        "/data/coding/scanweave/qualification/clearscan_background/real/final/history-01.time.txt",
+        "/data/coding/scanweave/target/release/scanweave-cli",
+        "build",
+        "/data/coding/scanweave/qualification/clearscan_competitive/real/history-01.png",
+        "--ocr",
+        "/data/coding/scanweave/qualification/clearscan_competitive/real/history-01.regions.hocr",
+        "--dpi",
+        "300",
+        "--profile",
+        "clearscan",
+        "--output",
+        "/data/coding/scanweave/qualification/clearscan_background/real/final/history-01.pdf",
+        "--report",
+        "/data/coding/scanweave/qualification/clearscan_background/real/final/history-01.json"
+      ],
+      "status": 0,
+      "elapsed": 10.449650488008047,
+      "returncode": 0,
+      "seconds": 10.449650488008047,
+      "bytes": 5098148,
+      "sha256": "dea881f2720044b276a59c429f02c6a9c7294b0e54fe08a0b46dabb4ee11ae5e",
+      "streams": {
+        "other_stream": 1543,
+        "raster": 5035593,
+        "content": 44739,
+        "font": 13608,
+        "overhead": 2665
+      },
+      "images": [
+        {
+          "object": [
+            17,
+            0
+          ],
+          "width": 1116,
+          "height": 1835,
+          "colour": "/DeviceRGB",
+          "filter": "/FlateDecode",
+          "bytes": 5035593,
+          "encoded_sha256": "4509e5c07718e594bd9f4317474d8e68273f1cb1fa8cdbb44875cdbf0888f2f7",
+          "samples_sha256": "e442a36925f8f32002233afa0c72fca7c3b777808a93da46b16fc7e69980cd23"
+        }
+      ],
+      "unique_images": 1,
+      "text_show_operations": 691,
+      "font_outlines": 146,
+      "observations": 240,
+      "vector_ink_px": 1697,
+      "source_ink_suppressed_px": 1697,
+      "coverage": {
+        "text_ink_px_total": 1721211,
+        "text_ink_px_vector": 1697,
+        "text_ink_px_raster": 1719514,
+        "other_ink_px": 142,
+        "unowned_ink_px": 0,
+        "multiply_owned_ink_px": 0
+      },
+      "supplied_chars": 691,
+      "source_sha256": "eb203b78e488dac22b7d99fea2731fae13d54e9488ee8674c3b743f243a78d7f",
+      "rss_kb": 106656,
+      "poppler_text": "ag\n4\ni\nLEONIS BAPTIST\nAE ;\nDE ALBERTIS, LIB. PRIMYVS\nRVDIMENTA,ae) E PicTvra hisbrevif® —\nKe ak| fimis commentartjs con\nat os f {cripturi,quo clarior no\nPy eeStra fit oratio, a Mathe- i\ncme ~maticisea primum,quz\n_\nadrem pertinere uidebuntut accipie-\nmus. Quibus quidé cognitis,\nquoad\ningenium fuppeditabic,\npituram ab\niplis natura principtjs exponemus.\nSedin omni noftra oratione fpectari\nilluduehementer peto, ndme ueMar44:\n8\nthematicum, fed ueluti piGoreé hifce\nde rebus loqui.lili enimfoloingenio,\nomni feiuncta\nmateriaylpecies8for.\n|\n_masreré metiuntur, Nos uerd,quod\nfub afpectu rem effepofita uolumus,\nPingutore idcirco, utaiunt, Miner-\nuaicribendo uremur, Acreequidépe\neff nobifcum a@um arbitramur , f\n_ quoquo pacto in hac planedifficiliet |\n_-@Nemine,quoduiderim, alio tradita\nBe\na 2_. literisee\n\f",
+      "pdfium_text": "ag 4 i LEONIS BAPTIST AE ;\r\nDE ALBERTIS, LIB. PRIMYVS RVDIMENTA, ae) E PicTvra hisbrevif® —\r\nKe ak | fimis commentartjs con at os f {cripturi,quo clarior no\r\nPy ee Stra fit oratio, a Mathe- i\r\ncme ~maticisea primum,quz _\r\nprimum,quz\r\nadrem pertinere uidebuntut acci pie- mus. Quibus quidé cognitis, quoad ingenium fuppeditabic, pituram ab iplis natura principtjs exponemus.\r\nSed in omni noftra oratione fpectari\r\nillud uehementer peto, nd me ueMar 44:\r\n8 thematicum, fed ueluti piGoreé hifce de rebus loqui. lili enim foloingenio,\r\nomni fei uncta materiaylpecies 8 for. | _masreré\r\nmetiuntur, Nos uerd,quod fub afpectu rem effe pofita uolumus,\r\nPingutore idcirco, utaiunt, Miner￾uaicribendo uremur, Acree quidé pe\r\neff nobifcum a@um arbitramur , f _ quoquo pacto in hac plane difficili et |\r\n_-@Nemine, quod uiderim, alio tradita\r\nBe a 2 _. literis ee",
+      "renderer_text_equal": false,
+      "native_search": [
+        {
+          "token": "LEONIS",
+          "found": true
+        },
+        {
+          "token": "BAPTIST",
+          "found": true
+        },
+        {
+          "token": "ALBERTIS",
+          "found": true
+        }
+      ],
+      "source_relative_mae_150dpi": {
+        "poppler": 7.614703149280421,
+        "pdfium": 2.383495625782505
+      },
+      "renderer_mae_150dpi": 7.131693750113878,
+      "actual_vector_occurrences": 17,
+      "actual_used_visible_font_gids": 17
+    }
+  ],
+  "rust_tests_passed": 93,
+  "inherited_tests_skipped": [
+    "regress_auto_reports_the_selected_candidate",
+    "clearscan_repairs_a_damaged_glyph_from_same_document_donors"
+  ],
+  "deterministic_300": true
+}

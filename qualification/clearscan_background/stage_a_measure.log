@@ -1,0 +1,90 @@
+{
+  "A0": {
+    "pdf_bytes": 136141,
+    "raster_bytes": 116060,
+    "pdfium": {
+      "source_ink_band_residual_dark_contrast": 4.096389806512506,
+      "owned_background_mae": 2.582555908429271,
+      "owned_paper_dark_bias": 2.353794495170041,
+      "outside_mae": 0.8758842328270315,
+      "background_std_owned": 3.785399872590982,
+      "counterfactual_std_owned": 2.402550125526561,
+      "mean_final_minus_vector_coverage": 0.003995286961725071
+    },
+    "poppler": {
+      "source_ink_band_residual_dark_contrast": 4.192464999213465,
+      "owned_background_mae": 2.664896784438269,
+      "owned_paper_dark_bias": 2.4357714701601165,
+      "outside_mae": 0.9671083342310316,
+      "background_std_owned": 3.827854901598925,
+      "counterfactual_std_owned": 2.402550125526561,
+      "mean_final_minus_vector_coverage": 0.003933752201525568
+    }
+  },
+  "A1-native": {
+    "pdf_bytes": 518067,
+    "raster_bytes": 497976,
+    "pdfium": {
+      "source_ink_band_residual_dark_contrast": 0.006567563316029573,
+      "owned_background_mae": 0.011280931586608443,
+      "owned_paper_dark_bias": 0.0042014026730183935,
+      "outside_mae": 0.07112335400604279,
+      "background_std_owned": 2.403847628085102,
+      "counterfactual_std_owned": 2.402550125526561,
+      "mean_final_minus_vector_coverage": -0.0004549562470890511
+    },
+    "poppler": {
+      "source_ink_band_residual_dark_contrast": 0.5422369042000944,
+      "owned_background_mae": 0.6265879317189361,
+      "owned_paper_dark_bias": 0.4665707291253143,
+      "outside_mae": 0.9804769855804004,
+      "background_std_owned": 2.50203031290431,
+      "counterfactual_std_owned": 2.402550125526561,
+      "mean_final_minus_vector_coverage": 0.0001372579864099171
+    }
+  },
+  "A1": {
+    "pdf_bytes": 131501,
+    "raster_bytes": 111412,
+    "pdfium": {
+      "source_ink_band_residual_dark_contrast": 0.5464448639295265,
+      "owned_background_mae": 0.7549457456662697,
+      "owned_paper_dark_bias": 0.32785827709408494,
+      "outside_mae": 0.8663391350292137,
+      "background_std_owned": 2.3606682316944516,
+      "counterfactual_std_owned": 2.402550125526561,
+      "mean_final_minus_vector_coverage": -2.297914603941309e-05
+    },
+    "poppler": {
+      "source_ink_band_residual_dark_contrast": 0.5540349221330817,
+      "owned_background_mae": 0.7631004366812227,
+      "owned_paper_dark_bias": 0.3337633981738785,
+      "outside_mae": 0.9575940146606957,
+      "background_std_owned": 2.3608681059467567,
+      "counterfactual_std_owned": 2.402550125526561,
+      "mean_final_minus_vector_coverage": -1.002445968162316e-05
+    }
+  },
+  "A2": {
+    "pdf_bytes": 56044,
+    "raster_bytes": 33004,
+    "pdfium": {
+      "source_ink_band_residual_dark_contrast": 1.0601305647317918,
+      "owned_background_mae": 0.9991564112743152,
+      "owned_paper_dark_bias": 0.30456861188302237,
+      "outside_mae": 0.8253720318246872,
+      "background_std_owned": 3.9291797182702974,
+      "counterfactual_std_owned": 2.402550125526561,
+      "mean_final_minus_vector_coverage": 0.002244553633943746
+    },
+    "poppler": {
+      "source_ink_band_residual_dark_contrast": 0.9401840490797546,
+      "owned_background_mae": 1.084937806007675,
+      "owned_paper_dark_bias": 0.3866779145163425,
+      "outside_mae": 0.9171854080423508,
+      "background_std_owned": 3.2399384962042577,
+      "counterfactual_std_owned": 2.402550125526561,
+      "mean_final_minus_vector_coverage": 0.0008898635748148559
+    }
+  }
+}
