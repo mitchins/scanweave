@@ -279,6 +279,7 @@ pub fn convert_document(
                         *offset += 1;
                         any = true;
                         let mut donor = source.clone();
+                        donor.retain_grayscale(&inputs[donor_page].rgb, inputs[donor_page].width, inputs[donor_page].height);
                         donor.symbol_id = format!("{}:{}", inputs[donor_page].page_id, donor.symbol_id);
                         donor.span_id = format!("{}:{}", inputs[donor_page].page_id, donor.span_id);
                         sibling_donors.push(donor);

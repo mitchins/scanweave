@@ -30,9 +30,24 @@ pub struct Unit {
     pub crop_h: usize,
     /// binary ink mask within the crop (row-major)
     pub mask: Vec<bool>,
+    /// Original grayscale crop, retained only for selected reconstruction witnesses.
+    pub gray_samples: Option<Vec<u8>>,
+    /// Source intensity used for the canonical contour (not ownership).
+    pub contour_threshold: Option<u8>,
 }
 
 impl Unit {
+    pub(crate) fn retain_grayscale(&mut self, rgb: &[u8], page_w: u32, page_h: u32) {
+        let (w, h) = (page_w as usize, page_h as usize);
+        let x0 = self.bbox_px[0] as usize;
+        let y0 = self.bbox_px[1] as usize;
+        if rgb.len() != w * h * 3 || x0 + self.crop_w > w || y0 + self.crop_h > h { return; }
+        self.gray_samples = Some((0..self.crop_h).flat_map(|y| (0..self.crop_w).map(move |x| {
+            let at = ((y0 + y) * w + x0 + x) * 3;
+            (0.2126 * rgb[at] as f64 + 0.7152 * rgb[at + 1] as f64 + 0.0722 * rgb[at + 2] as f64).round() as u8
+        })).collect());
+    }
+
     pub fn height_px(&self) -> usize {
         self.crop_h
     }
@@ -231,6 +246,8 @@ pub fn extract_units(seg: &Segmentation, w: u32, h: u32, page: &OcrPage) -> (Vec
                     crop_w: cw,
                     crop_h: ch,
                     mask,
+                    gray_samples: None,
+                    contour_threshold: None,
                 });
             }
         }
@@ -272,6 +289,8 @@ pub fn extract_units(seg: &Segmentation, w: u32, h: u32, page: &OcrPage) -> (Vec
             crop_w: cw,
             crop_h: ch,
             mask,
+            gray_samples: None,
+            contour_threshold: None,
         });
     }
     units.extend(artwork_units);

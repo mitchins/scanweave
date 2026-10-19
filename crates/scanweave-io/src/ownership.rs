@@ -395,6 +395,8 @@ fn make_unit(mask_pixels: &[(usize, usize)], _page: &OcrPage, slot: &Slot, _si: 
         crop_w: cw,
         crop_h: ch,
         mask,
+        gray_samples: None,
+        contour_threshold: None,
     }
 }
 
@@ -427,5 +429,7 @@ fn make_artwork_unit(pixels: &[(usize, usize)]) -> Unit {
         crop_w: cw,
         crop_h: ch,
         mask,
+        gray_samples: None,
+        contour_threshold: None,
     }
 }

@@ -1,0 +1,174 @@
+{
+  "schema": "scanweave.adobe_clearscan_diagnostic.v1",
+  "purpose": "Read-only independent analysis of exact-scale raster fallback and vector replacement results; no reconstruction code changes.",
+  "inputs": {
+    "pdf": "qualification/clearscan_competitive/300/previous.pdf",
+    "pdf_sha256": "2ef079a01801c0cbf6d128dee63fb4d262c6de0e1721caafdf32f3ce398e7228",
+    "metrics": "qualification/clearscan_competitive/300/previous/metrics.json",
+    "metrics_sha256": "c9c4cd499386964ac19f48627987fe8004d1b30f8a03330fd0dc6dd05c777cbb",
+    "comparison_report": "qualification/clearscan_competitive/300/previous.json",
+    "comparison_report_sha256": "a4256d91694d4d99a5c4b3462537f06f7ac0a6fdc270af3912937a1e7c6fa8c9"
+  },
+  "render_geometry": {
+    "source_dpi": 300,
+    "comparison_scale": 299.99999,
+    "reason": "Avoids the 1-pixel PDF renderer output rounding mismatch; keep default-300 results separate. Source-only control at this scale reproduced source samples exactly in Poppler and PDFium."
+  },
+  "fallback_8": {
+    "occurrence": "p00s0001",
+    "decision": "rejected_traced_prototype_fidelity; raster fallback",
+    "image_xobject": "/Im49",
+    "samples": "DeviceGray patch exactly equals source crop [y=83:116,x=106:128]",
+    "placement_cm": [
+      5.28,
+      0,
+      0,
+      7.92,
+      25.44,
+      188.16
+    ],
+    "mapped_source_pixel_bounds": [
+      106,
+      83,
+      128,
+      116
+    ],
+    "overlapping_other_images": false,
+    "poppler_exact_crop": {
+      "mae": 31.49,
+      "changed_samples": 604,
+      "threshold_iou": 0.745
+    },
+    "pdfium_exact_crop": {
+      "mae": 0,
+      "iou": 1.0
+    },
+    "interpretation": "Fallback patch samples and placement are correct. Divergence is Poppler per-image device-space compositing/snap on the multipatch output, not a wrong emitted glyph or patch source. PDFium reproduces source crop exactly. A bounded mitigation to evaluate is integer-pixel-aligned tile composition for fallback/artwork patches, while retaining separate global exact/default comparisons."
+  },
+  "worst_vector_replaced_families_pdfium_exact": [
+    {
+      "text": "0",
+      "vector_replaced_occurrences": 9,
+      "pdfium_exact_mean_pristine_iou": 0.5700258085317059,
+      "raw_scan_mean_pristine_iou": 0.9536956486983252,
+      "pdfium_minus_raw_iou": -0.3836698401666192,
+      "poppler_exact_mean_pristine_iou": 0.4672088706194646,
+      "worst_occurrences": [
+        {
+          "id": "p07s0040",
+          "page": 7,
+          "pdfium_iou": 0.5131195335276968,
+          "raw_scan_iou": 0.9482071713147411,
+          "prototype_id": "prototype:f34986983865b622b87acd4e02da3bf3bfde970b02619b2bda772737cc929dd3"
+        },
+        {
+          "id": "p07s0003",
+          "page": 7,
+          "pdfium_iou": 0.5222551928783383,
+          "raw_scan_iou": 0.967741935483871,
+          "prototype_id": "prototype:f34986983865b622b87acd4e02da3bf3bfde970b02619b2bda772737cc929dd3"
+        },
+        {
+          "id": "p07s0069",
+          "page": 7,
+          "pdfium_iou": 0.5770491803278689,
+          "raw_scan_iou": 0.9635627530364372,
+          "prototype_id": "prototype:7e5e2b9adf2624fb768a7fd634cfe05a41ab40ead9e80e1ca50a9ec88806109b"
+        }
+      ]
+    },
+    {
+      "text": ";",
+      "vector_replaced_occurrences": 5,
+      "pdfium_exact_mean_pristine_iou": 0.8830769230769231,
+      "raw_scan_mean_pristine_iou": 0.9538461538461538,
+      "pdfium_minus_raw_iou": -0.0707692307692308,
+      "poppler_exact_mean_pristine_iou": 0.5443037974683544,
+      "worst_occurrences": [
+        {
+          "id": "p06s0028",
+          "page": 6,
+          "pdfium_iou": 0.8769230769230769,
+          "raw_scan_iou": 0.9076923076923077,
+          "prototype_id": "prototype:d4d134be180e9200a2c9454cb25e51c5202365d6a5e07d12c048a83c29178bea"
+        },
+        {
+          "id": "p06s0065",
+          "page": 6,
+          "pdfium_iou": 0.8769230769230769,
+          "raw_scan_iou": 0.9692307692307692,
+          "prototype_id": "prototype:d4d134be180e9200a2c9454cb25e51c5202365d6a5e07d12c048a83c29178bea"
+        },
+        {
+          "id": "p07s0009",
+          "page": 7,
+          "pdfium_iou": 0.8769230769230769,
+          "raw_scan_iou": 0.9846153846153847,
+          "prototype_id": "prototype:d4d134be180e9200a2c9454cb25e51c5202365d6a5e07d12c048a83c29178bea"
+        }
+      ]
+    },
+    {
+      "text": "g",
+      "vector_replaced_occurrences": 62,
+      "pdfium_exact_mean_pristine_iou": 0.892481208269455,
+      "raw_scan_mean_pristine_iou": 0.9501357741715261,
+      "pdfium_minus_raw_iou": -0.0576545659020711,
+      "poppler_exact_mean_pristine_iou": 0.712515965008039,
+      "worst_occurrences": [
+        {
+          "id": "p01s0004",
+          "page": 1,
+          "pdfium_iou": 0.7930174563591023,
+          "raw_scan_iou": 0.9688473520249221,
+          "prototype_id": "prototype:e733ce326582e30023be9708e45a7bf77fbc723c8acf23c50b1f4a6e538cefa2"
+        },
+        {
+          "id": "p01s0060",
+          "page": 1,
+          "pdfium_iou": 0.7930174563591023,
+          "raw_scan_iou": 0.9566563467492261,
+          "prototype_id": "prototype:e733ce326582e30023be9708e45a7bf77fbc723c8acf23c50b1f4a6e538cefa2"
+        },
+        {
+          "id": "p02s0023",
+          "page": 2,
+          "pdfium_iou": 0.7930174563591023,
+          "raw_scan_iou": 0.9843260188087775,
+          "prototype_id": "prototype:e733ce326582e30023be9708e45a7bf77fbc723c8acf23c50b1f4a6e538cefa2"
+        }
+      ]
+    }
+  ],
+  "prototype_evidence_for_worst_occurrences": [
+    {
+      "prototype_id": "prototype:7e5e2b9adf2624fb768a7fd634cfe05a41ab40ead9e80e1ca50a9ec88806109b",
+      "representative_symbol_id": "__doc_donor:p06:p06s0050",
+      "outline_threshold_luma": 0,
+      "member_count": 3
+    },
+    {
+      "prototype_id": "prototype:d4d134be180e9200a2c9454cb25e51c5202365d6a5e07d12c048a83c29178bea",
+      "representative_symbol_id": "p07s0028",
+      "outline_threshold_luma": 157,
+      "member_count": 7
+    },
+    {
+      "prototype_id": "prototype:e733ce326582e30023be9708e45a7bf77fbc723c8acf23c50b1f4a6e538cefa2",
+      "representative_symbol_id": "__doc_donor:p05:p05s0060",
+      "outline_threshold_luma": 0,
+      "member_count": 39
+    },
+    {
+      "prototype_id": "prototype:f34986983865b622b87acd4e02da3bf3bfde970b02619b2bda772737cc929dd3",
+      "representative_symbol_id": "p07s0069",
+      "outline_threshold_luma": 142,
+      "member_count": 14
+    }
+  ],
+  "donor_threshold_assessment": {
+    "finding": "Likely contributor for the recurring g prototype, not a sufficient explanation for all three families. The worst g examples use prototype e733... represented by __doc_donor:p05:p05s0060 with outline_threshold_luma=0; visual_dict.rs assigns zero and skips refine_observed_mask for __doc_donor units. The worst 0 and semicolon examples use their same-page local representatives (thresholds 142 and 146 respectively), so the binary donor threshold skip is not the direct cause for those worst examples. Donor evidence still coexists in those cohorts, but prototype choice/local shape evidence is a broader cause to inspect.",
+    "confidence": "moderate; attribution is based on occurrence-to-prototype traces, representative IDs and recorded thresholds, not font-outline raster tracing."
+  },
+  "no_product_edits": true
+}

@@ -871,6 +871,17 @@ pub(crate) fn convert_parts_with_document_donors(
         }
     }
     let shapes: Vec<GlyphShape> = build_glyph_shapes(&traced, units_per_px, &budget)?;
+    for shape in &shapes {
+        if let Some(unit) = reconstruction.prototype_units.get(&shape.shape_key) {
+            reconstruction.canonical_geometry.push(crate::visual_dict::CanonicalGeometry {
+                prototype_id: format!("prototype:{}", shape.shape_key),
+                witness_symbol_id: unit.symbol_id.clone(), witness_bbox_px: unit.bbox_px,
+                width: unit.crop_w, height: unit.crop_h, mask: unit.mask.clone(),
+                grayscale: unit.gray_samples.clone(), path_svg: shape.path.to_svg(),
+                anchor_bbox_fu: shape.anchor_bbox_fu, ink_span_fu: shape.ink_span_fu,
+            });
+        }
+    }
     // Restoration has a separate gate: the selected observed prototype must
     // survive the actual tracing step with high overlap to its refined donor.
     for occurrence in reconstruction

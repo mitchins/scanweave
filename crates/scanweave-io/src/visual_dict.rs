@@ -266,6 +266,7 @@ pub struct Reconstruction {
     pub prototypes: Vec<GlyphPrototype>,
     pub occurrences: Vec<GlyphOccurrence>,
     pub restoration_qualified: bool,
+    pub canonical_geometry: Vec<CanonicalGeometry>,
     #[serde(skip)]
     pub prototype_units: BTreeMap<String, crate::units::Unit>,
     #[serde(skip)]
@@ -274,6 +275,21 @@ pub struct Reconstruction {
     pub reused_symbols: std::collections::BTreeSet<String>,
     #[serde(skip)]
     pub rejected_symbols: std::collections::BTreeSet<String>,
+}
+
+/// Auditable pre-trace mask and actual emitted font path in their construction frame.
+#[derive(Debug, Clone, serde::Serialize)]
+pub struct CanonicalGeometry {
+    pub prototype_id: String,
+    pub witness_symbol_id: String,
+    pub witness_bbox_px: [f64; 4],
+    pub width: usize,
+    pub height: usize,
+    pub mask: Vec<bool>,
+    pub grayscale: Option<Vec<u8>>,
+    pub path_svg: String,
+    pub anchor_bbox_fu: [f64; 4],
+    pub ink_span_fu: [f64; 2],
 }
 
 #[derive(Debug, Clone, serde::Serialize)]
