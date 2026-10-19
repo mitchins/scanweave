@@ -225,3 +225,36 @@ fn semantic_owner_tracks_the_font_construction_scale() {
     assert_eq!((full.ink_span_fu[0] + 2.) / 2., compact.ink_span_fu[0] + 2.);
     assert_eq!(full.shape_key, compact.shape_key);
 }
+
+#[test]
+fn outlying_cubic_handles_do_not_become_true_type_side_bearings() {
+    let mut t = ring();
+    t.crop_w_px = 24;
+    t.crop_h_px = 24;
+    t.preserve_crop_frame = true;
+    t.compact_curves = true;
+    t.layers = vec![(
+        vec![
+            [2., 10.],
+            [-8., 0.],
+            [28., 0.],
+            [22., 10.],
+            [22., 24.],
+            [2., 24.],
+            [2., 10.],
+        ],
+        vec![],
+    )];
+    let shape = crate::glyphs::build_glyph_shapes(&[t], 64., &Budget::from_m0_policy())
+        .unwrap()
+        .pop()
+        .unwrap();
+    let actual = write_fonts::tables::glyf::SimpleGlyph::from_bezpath(&shape.path)
+        .unwrap()
+        .bbox;
+    assert_eq!(shape.bbox_fu[0], actual.x_min as f64);
+    assert!(
+        shape.bbox_fu[0] > -7. * 64.,
+        "the unused cubic handle is not an ink bearing"
+    );
+}
