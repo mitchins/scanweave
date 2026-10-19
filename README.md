@@ -39,8 +39,9 @@ Scanned-document reconstruction is a research-grade pipeline. Milestone state:
 **Honest limitations:** the 8 default fixtures still fail the strict visual
 gates (inherited, documented, thresholds never relaxed); PDFium appends an
 all-fallback line's owners at the end of its extraction order (mixed lines are
-fixed); single-image sources only; no benign corpus has been mounted (the
-corpus holdout is sealed). See the reports for the full list.
+fixed). PDF import and a public development corpus are now available; the
+independent corpus holdout remains sealed. See the current delivery report and
+historical milestone reports for their respective limitations.
 
 ## Build
 
@@ -54,6 +55,33 @@ additionally needs Python 3.12 with `pypdfium2`, `numpy`, `Pillow`,
 `pdftotext`/`pdftoppm`.
 
 ## Usage
+
+Convert an image-only scanned PDF directly:
+
+```bash
+./target/release/scanweave input.pdf output.pdf
+# Optional: --dpi 600 --lang eng+jpn --profile faithful
+```
+
+This path defaults to ClearScan and 300 DPI. Install Poppler (`pdfinfo`,
+`pdftoppm`), Tesseract and the requested language data first (for example,
+`apt install poppler-utils tesseract-ocr tesseract-ocr-eng`). The converter
+renders each cropped/rotated page, obtains Tesseract character boxes, and sends
+normalized, pixel-bound OCR to the existing document converter. It preserves
+physical page geometry; it does not reuse pre-existing PDF text. Pages where
+Tesseract finds no words remain images, with an explicit warning.
+
+`output.pdf.json` records the input hash, tool identities, raster/OCR hashes,
+hOCR, effective arguments and conversion results. Temporary inputs are removed
+automatically. Publication uses unique same-directory temporary files; PDF and
+report are two separate renames. The current document budget is 512 MiB of
+RGB page samples, with an 80-million-pixel per-page cap. Split larger documents.
+The established `scanweave-cli` binary remains an alias. The image/bundle CLI
+and library interfaces below remain available.
+
+See [PDF packaging and real-use results](CLEARSCAN_PACKAGING_REPORT.md) for
+current measured sizes and real-document limitations.
+
 
 One page (hOCR or the normalized OCR JSON):
 

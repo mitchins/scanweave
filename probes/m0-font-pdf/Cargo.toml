@@ -22,3 +22,6 @@ read-fonts = { workspace = true }
 pdf-writer = { workspace = true }
 pdfium-render = { workspace = true }
 flate2 = "1"
+
+[dev-dependencies]
+hayro = { workspace = true }

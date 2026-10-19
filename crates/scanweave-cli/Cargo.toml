@@ -4,10 +4,20 @@ version.workspace = true
 edition.workspace = true
 license.workspace = true
 repository.workspace = true
-description = "CLI/config, jobs, reports, atomic publication. Stub until M1."
+description = "Scanned PDF, image and normalized-bundle conversion CLI."
+default-run = "scanweave"
 
 [dependencies]
 scanweave-core = { workspace = true }
 scanweave-io = { workspace = true }
 serde_json = { workspace = true }
 image = { workspace = true }
+tempfile = "3"
+
+[[bin]]
+name = "scanweave"
+path = "src/main.rs"
+
+[[bin]]
+name = "scanweave-cli"
+path = "src/legacy.rs"

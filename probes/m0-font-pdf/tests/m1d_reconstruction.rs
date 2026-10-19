@@ -1,4 +1,6 @@
 use m0_font_pdf::Policy;
+mod support;
+
 use scanweave_io::convert::{convert, Input, SpanInput, SymbolInput};
 use serde::Deserialize;
 use std::path::PathBuf;
@@ -85,7 +87,7 @@ fn clearscan_repairs_a_damaged_glyph_from_same_document_donors() {
     let clear_s00 = clearscan.report.occurrences.iter().find(|o| o.symbol_id == "s00").unwrap();
     assert_eq!(faithful_s00.owner, "invisible", "faithful must preserve damaged raster text");
     assert_eq!(clear_s00.owner, "visible_tounicode", "ClearScan must paint the selected vector prototype");
-    let pdf = String::from_utf8_lossy(&clearscan.pdf_bytes);
+    let pdf = support::decoded_syntax(&clearscan.pdf_bytes);
     assert!(pdf.contains("/FontFile2"), "embedded TrueType font is required");
     assert_ne!(faithful.pdf_bytes, clearscan.pdf_bytes, "restoration must materially change the PDF");
 }

@@ -19,6 +19,16 @@ use std::collections::HashMap;
 
 use crate::glyphs::GlyphShape;
 
+/// Lossless representation only: decoded bytes and text ownership are unchanged.
+fn compressed_stream(pdf: &mut Pdf, id: Ref, data: &[u8], font: bool) -> Result<usize, String> {
+    let encoded = crate::serialization::deflate(data)?;
+    let mut stream = pdf.stream(id, &encoded);
+    stream.filter(pdf_writer::Filter::FlateDecode);
+    if font { stream.pair(Name(b"Length1"), data.len() as i32); }
+    stream.finish();
+    Ok(encoded.len())
+}
+
 #[derive(Debug, Default, Clone)]
 pub struct Patch {
     pub bbox_px: [f64; 4],
@@ -747,11 +757,9 @@ pub fn assemble_with_options(
     // glyph font (all streams before the CID-font writer)
     let map_bytes = cid_to_gid_bytes(encodings);
     let tu = to_unicode_stream(encodings);
-    pdf.stream(glyph_map, &map_bytes).finish();
-    pdf.stream(glyph_tu, tu.as_bytes()).finish();
-    pdf.stream(glyph_ff, &font_bytes)
-        .pair(Name(b"Length1"), font_bytes.len() as i32)
-        .finish();
+    compressed_stream(&mut pdf, glyph_map, &map_bytes, false)?;
+    compressed_stream(&mut pdf, glyph_tu, tu.as_bytes(), false)?;
+    compressed_stream(&mut pdf, glyph_ff, &font_bytes, true)?;
     pdf.font_descriptor(glyph_desc)
         .name(Name(b"ScanWeaveM0Probe"))
         .flags(pdf_writer::types::FontFlags::SYMBOLIC)
@@ -795,11 +803,9 @@ pub fn assemble_with_options(
     if !glyphless_bytes.is_empty() {
         let gl_map = cid_to_gid_bytes(glyphless_encodings);
         let gl_tu = to_unicode_stream(glyphless_encodings);
-        pdf.stream(glyphless_map, &gl_map).finish();
-        pdf.stream(glyphless_tu, gl_tu.as_bytes()).finish();
-        pdf.stream(glyphless_ff, &glyphless_bytes)
-            .pair(Name(b"Length1"), glyphless_bytes.len() as i32)
-            .finish();
+        compressed_stream(&mut pdf, glyphless_map, &gl_map, false)?;
+        compressed_stream(&mut pdf, glyphless_tu, gl_tu.as_bytes(), false)?;
+        compressed_stream(&mut pdf, glyphless_ff, &glyphless_bytes, true)?;
         pdf.font_descriptor(glyphless_desc)
             .name(Name(b"ScanWeaveM0ProbeGlyphless"))
             .flags(pdf_writer::types::FontFlags::SYMBOLIC)
@@ -899,7 +905,7 @@ pub fn assemble_with_options(
 
     c.end_text();
     let content_bytes = c.finish();
-    pdf.stream(content, &content_bytes).finish();
+    compressed_stream(&mut pdf, content, &content_bytes, false)?;
 
     let mut p = pdf.page(page);
     p.parent(page_tree)
@@ -928,7 +934,7 @@ pub fn assemble_with_options(
     doc.producer(TextStr("scanweave-m1a"));
     doc.finish();
 
-    Ok(pdf.finish())
+    crate::serialization::compact(pdf.finish())
 }
 
 /// The authoritative raster→page-points mapping (SPEC §4.1): the normalized
@@ -1138,11 +1144,9 @@ pub fn assemble_document_with_options(
     // shared font program
     let map_bytes = cid_to_gid_bytes(encodings);
     let tu = to_unicode_stream(encodings);
-    pdf.stream(cid_map, &map_bytes).finish();
-    pdf.stream(to_uni, tu.as_bytes()).finish();
-    pdf.stream(fontfile, font_bytes)
-        .pair(Name(b"Length1"), font_bytes.len() as i32)
-        .finish();
+    compressed_stream(&mut pdf, cid_map, &map_bytes, false)?;
+    compressed_stream(&mut pdf, to_uni, tu.as_bytes(), false)?;
+    stats.font_bytes = compressed_stream(&mut pdf, fontfile, font_bytes, true)?;
     pdf.font_descriptor(desc)
         .name(Name(b"ScanWeaveDoc"))
         .flags(pdf_writer::types::FontFlags::SYMBOLIC)
@@ -1256,8 +1260,7 @@ pub fn assemble_document_with_options(
         );
         c.end_text();
         let content_bytes = c.finish();
-        stats.content_bytes += content_bytes.len();
-        pdf.stream(content_refs[i], &content_bytes).finish();
+        stats.content_bytes += compressed_stream(&mut pdf, content_refs[i], &content_bytes, false)?;
 
         let mut page = pdf.page(page_refs[i]);
         page.parent(page_tree)
@@ -1277,8 +1280,7 @@ pub fn assemble_document_with_options(
         page.finish();
     }
 
-    stats.font_bytes = font_bytes.len();
-    let result = pdf.finish();
+    let result = crate::serialization::compact(pdf.finish())?;
     stats.assembly_ms = assembly_started.elapsed().as_millis();
     Ok((result, stats))
 }
