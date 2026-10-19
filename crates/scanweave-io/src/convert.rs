@@ -856,7 +856,22 @@ pub(crate) fn convert_parts_with_document_donors(
         .map(|u| u.unit.crop_h as f64)
         .fold(0.0f64, f64::max);
     let upem = policy.upem as f64;
-    let units_per_px = if em_px > 0.0 { upem / em_px } else { upem };
+    // A reconstructed ink box is not an em square. Reserve font-space
+    // headroom instead of filling the entire em with the tallest observed
+    // ink. Page placement uses ink_span_fu and exactly cancels this scale.
+    // Besides giving continuous curves an appropriate construction frame,
+    // this avoids the small-em text-bitmap path's origin/coverage artifacts.
+    // Faithful keeps its established font coordinates.
+    let outline_em = if policy.profile == "clearscan" {
+        upem * 0.5
+    } else {
+        upem
+    };
+    let units_per_px = if em_px > 0.0 {
+        outline_em / em_px
+    } else {
+        outline_em
+    };
     let budget = Budget::from_m0_policy();
     // Add eligible observations from sibling pages only for dictionary
     // evidence. They are removed immediately afterward and never participate
@@ -1534,7 +1549,7 @@ pub(crate) fn convert_parts_with_document_donors(
         // but give its characters independent CIDs and OCR character boxes.
         let owner_shape_index = shapes.len();
         if !owners.is_empty() {
-            shapes.push(crate::glyphs::semantic_owner_shape());
+            shapes.push(crate::glyphs::semantic_owner_shape(outline_em));
         }
         for (owner_index, owner) in owners.iter_mut().enumerate() {
             let chars: Vec<_> = owner.text.char_indices().collect();

@@ -21,6 +21,7 @@ fn ring() -> TracedShape {
         crop_w_px: 12,
         crop_h_px: 12,
         preserve_crop_frame: false,
+        compact_curves: false,
         contour_fit: None,
         polylines: Vec::new(),
         layers: vec![(rect(1., 1., 11., 11.), vec![rect(4., 4., 8., 8.)])],
@@ -170,7 +171,7 @@ fn local_fit_preserves_the_existing_source_gate() {
 
 #[test]
 fn invisible_owner_frame_is_independent_of_reconstructed_contours() {
-    let owner = crate::glyphs::semantic_owner_shape();
+    let owner = crate::glyphs::semantic_owner_shape(2048.);
     assert_eq!(owner.shape_key, "__semantic_owner_frame");
     assert_eq!(owner.bbox_fu, [0., 0., 1022., 2048.]);
     assert_eq!(owner.ink_span_fu, [1022., 2048.]);
@@ -179,5 +180,48 @@ fn invisible_owner_frame_is_independent_of_reconstructed_contours() {
     let b = Budget::from_m0_policy();
     let observed = crate::glyphs::build_glyph_shapes(&[mutated], 64., &b).unwrap();
     assert_ne!(observed[0].bbox_fu, owner.bbox_fu);
-    assert_eq!(crate::glyphs::semantic_owner_shape().path, owner.path);
+    assert_eq!(crate::glyphs::semantic_owner_shape(2048.).path, owner.path);
+}
+
+#[test]
+fn compact_font_frame_preserves_coverage_and_matches_serialized_bounds() {
+    let mut t = ring();
+    t.preserve_crop_frame = true;
+    let budget = Budget::from_m0_policy();
+    let original = crate::glyphs::build_glyph_shapes(&[t.clone()], 64., &budget)
+        .unwrap()
+        .pop()
+        .unwrap();
+    t.compact_curves = true;
+    let compact = crate::glyphs::build_glyph_shapes(&[t], 64., &budget)
+        .unwrap()
+        .pop()
+        .unwrap();
+    assert_eq!(compact.anchor_bbox_fu[0], 0.);
+    assert_eq!(
+        crate::convert::reconstructed_glyph_coverage(&original, 12, 12),
+        crate::convert::reconstructed_glyph_coverage(&compact, 12, 12)
+    );
+    let b = write_fonts::tables::glyf::SimpleGlyph::from_bezpath(&compact.path)
+        .unwrap()
+        .bbox;
+    assert_eq!(
+        compact.bbox_fu,
+        [
+            b.x_min as f64,
+            b.y_min as f64,
+            b.x_max as f64,
+            b.y_max as f64
+        ]
+    );
+}
+
+#[test]
+fn semantic_owner_tracks_the_font_construction_scale() {
+    let full = crate::glyphs::semantic_owner_shape(2048.);
+    let compact = crate::glyphs::semantic_owner_shape(1024.);
+    assert_eq!(full.bbox_fu, [0., 0., 1022., 2048.]);
+    assert_eq!(compact.bbox_fu, [0., 0., 510., 1024.]);
+    assert_eq!((full.ink_span_fu[0] + 2.) / 2., compact.ink_span_fu[0] + 2.);
+    assert_eq!(full.shape_key, compact.shape_key);
 }

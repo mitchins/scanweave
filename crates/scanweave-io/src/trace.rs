@@ -31,6 +31,7 @@ pub struct TracedShape {
     pub crop_h_px: usize,
     /// Keep the existing PDF construction frame fixed after contour fitting.
     pub preserve_crop_frame: bool,
+    pub compact_curves: bool,
     pub contour_fit: Option<ContourFit>,
     /// dense sampled polylines per contour (crop-local, source-pixel space),
     /// outer contours and holes in paint order
@@ -47,6 +48,8 @@ pub struct ContourFit {
     pub corner_degrees: i32,
     pub segment_length: f64,
     pub inset_px: f64,
+    /// Normalized observed coverage isocontour; absent for binary-derived curves.
+    pub coverage_level: Option<f64>,
     pub paper_luma: f64,
     pub ink_luma: f64,
     pub baseline_gray_mse: f64,
@@ -243,6 +246,7 @@ fn trace_shape_config(unit: &Unit, config: vtracer::Config) -> Result<TracedShap
         crop_w_px: unit.crop_w,
         crop_h_px: unit.crop_h,
         preserve_crop_frame: false,
+        compact_curves: false,
         contour_fit: None,
         polylines,
         layers,
@@ -337,9 +341,17 @@ pub(crate) fn trace_shape_clearscan(
                 / target.len() as f64,
         )
     };
-    let Some(mut best_score) = score(&baseline) else {
-        return Ok(baseline);
-    };
+    let old_shape = crate::glyphs::build_glyph_shapes(std::slice::from_ref(&baseline), k, budget)?
+        .pop()
+        .ok_or("missing baseline glyph")?;
+    let mut best_score = score(&baseline).unwrap_or_else(|| {
+        crate::convert::reconstructed_glyph_coverage(&old_shape, unit.crop_w, unit.crop_h)
+            .iter()
+            .zip(&target)
+            .map(|(c, t)| (c - t).powi(2))
+            .sum::<f64>()
+            / target.len() as f64
+    });
     let baseline_score = best_score;
     let baseline_points = baseline
         .layers
@@ -387,6 +399,72 @@ pub(crate) fn trace_shape_clearscan(
             }
         }
     }
+    // Fit supported grayscale edges with a compact, tangent-continuous cubic
+    // model. Complexity regularization rejects scanner-grid inflection chains.
+    let data_limit = best_score * 1.35 + 0.0005;
+    let cost = |t: &TracedShape, loss: f64| {
+        loss + 0.000025
+            * t.layers
+                .iter()
+                .map(|(o, h)| o.len() + h.iter().map(Vec::len).sum::<usize>())
+                .sum::<usize>() as f64
+    };
+    let mut objective = cost(&best, best_score);
+    let mut fitted = Vec::new();
+    let mut selected_level = None;
+    let mut binary = offset_coverage_contour(&best, 0.0);
+    for c in binary
+        .layers
+        .iter_mut()
+        .flat_map(|(o, h)| std::iter::once(o).chain(h))
+    {
+        *c = crate::curve_fit::fit_ring(&sample_spline(c, 6), 0.15);
+    }
+    fitted.push((binary, "regularized_binary_curve", None));
+    let substantial_holes = baseline
+        .layers
+        .iter()
+        .flat_map(|(_, h)| h)
+        .filter(|c| {
+            let p = sample_spline(c, 8);
+            p.windows(2)
+                .map(|w| w[0][0] * w[1][1] - w[1][0] * w[0][1])
+                .sum::<f64>()
+                .abs()
+                * 0.5
+                >= 1.5
+        })
+        .count();
+    for level in [0.3, 0.35, 0.4, 0.45] {
+        if let Some(layers) = crate::curve_fit::layers(unit, paper, ink, level) {
+            if layers.len() != components
+                || layers.iter().map(|(_, h)| h.len()).sum::<usize>() < substantial_holes
+                || layers.iter().map(|(_, h)| h.len()).sum::<usize>() > topology
+            {
+                continue;
+            }
+            let mut t = best.clone();
+            t.layers = layers;
+            t.preserve_crop_frame = true;
+            fitted.push((t, "grayscale_subpixel_curve", Some(level)));
+        }
+    }
+    for (mut candidate, method, level) in fitted {
+        candidate.compact_curves = true;
+        for inset in [0.0, -0.15, 0.15] {
+            let t = offset_coverage_contour(&candidate, inset);
+            if let Some(loss) = score(&t) {
+                let value = cost(&t, loss);
+                if loss <= data_limit && value < objective {
+                    objective = value;
+                    best_score = loss;
+                    best = t;
+                    choice = (method, 65, 0.15, inset);
+                    selected_level = level;
+                }
+            }
+        }
+    }
     let flat: Vec<_> = best
         .layers
         .iter()
@@ -403,6 +481,7 @@ pub(crate) fn trace_shape_clearscan(
         corner_degrees: choice.1,
         segment_length: choice.2,
         inset_px: choice.3,
+        coverage_level: selected_level,
         paper_luma: paper,
         ink_luma: ink,
         baseline_gray_mse: baseline_score,

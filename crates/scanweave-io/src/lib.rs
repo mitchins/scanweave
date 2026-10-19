@@ -20,3 +20,4 @@ pub mod units;
 pub mod visual_dict;
 
 mod contour_topology;
+mod curve_fit;

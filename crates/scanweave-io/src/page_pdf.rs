@@ -1254,6 +1254,7 @@ pub fn assemble_document_with_options(
             p.ink,
             p.raster_baseline,
         );
+        c.end_text();
         let content_bytes = c.finish();
         stats.content_bytes += content_bytes.len();
         pdf.stream(content_refs[i], &content_bytes).finish();

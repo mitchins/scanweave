@@ -162,8 +162,17 @@ pub fn build_glyph_shapes(
         for c in &contour_cubics {
             all_cubics.extend(c.iter().copied());
         }
-        let splines = kurbo::cubics_to_quadratic_splines(&all_cubics, acc_fu)
-            .ok_or("cubics_to_quadratic_splines returned None (accuracy unattainable)")?;
+        // Unrelated spans must not share a subdivision count. Kurbo's plural
+        // API is intended for compatible font masters, not an entire outline.
+        let splines = if t.compact_curves {
+            all_cubics
+                .iter()
+                .map(|c| c.approx_spline(acc_fu.min(0.05 * units_per_px)))
+                .collect::<Option<Vec<_>>>()
+        } else {
+            kurbo::cubics_to_quadratic_splines(&all_cubics, acc_fu)
+        }
+        .ok_or("cubic-to-quadratic approximation failed")?;
         // each cubic maps to a spline of 1+ quads
         let quads_per_cubic: Vec<Vec<QuadBez>> =
             splines.iter().map(|s| s.to_quads().collect()).collect();
@@ -256,6 +265,23 @@ pub fn build_glyph_shapes(
             ys.iter().cloned().fold(f64::NEG_INFINITY, f64::max),
         ];
 
+        // The TrueType side bearing must match the serialized glyph's xMin,
+        // not the cubic handles' bounds. Long handles can lie well outside
+        // the curve and would otherwise shift glyphs in native renderers.
+        let bbox_fu = if t.compact_curves {
+            let b = write_fonts::tables::glyf::SimpleGlyph::from_bezpath(&path)
+                .map_err(|e| format!("compact glyph: {e:?}"))?
+                .bbox;
+            [
+                b.x_min as f64,
+                b.y_min as f64,
+                b.x_max as f64,
+                b.y_max as f64,
+            ]
+        } else {
+            bbox_fu
+        };
+
         // quantization bound: from_bezpath rounds to integer font units
         let quant_bound_px = 0.5 / units_per_px;
 
@@ -287,24 +313,25 @@ fn _els(p: &BezPath) -> Vec<PathEl> {
 /// Stable geometry for invisible OCR characters. Their search/extraction boxes
 /// must not depend on the first reconstructed glyph or its contour refinement.
 /// It shares the existing embedded font and is never used for visible text.
-pub(crate) fn semantic_owner_shape() -> GlyphShape {
+pub(crate) fn semantic_owner_shape(height: f64) -> GlyphShape {
+    let width = (height * 0.5 - 2.0).max(1.0);
     // Half-em advance and full-em height keep native extractors' global font
     // ascent/line boxes commensurate with each OCR character box. A tiny
     // placeholder fitted with a huge text matrix creates overlapping lines.
     let mut path = BezPath::new();
     path.move_to((0., 0.));
-    path.line_to((0., 2048.));
-    path.line_to((1022., 2048.));
-    path.line_to((1022., 0.));
+    path.line_to((0., height));
+    path.line_to((width, height));
+    path.line_to((width, 0.));
     path.close_path();
     GlyphShape {
         shape_key: "__semantic_owner_frame".into(),
         path,
         num_contours: 1,
         num_points: 4,
-        bbox_fu: [0., 0., 1022., 2048.],
-        ink_span_fu: [1022., 2048.],
-        anchor_bbox_fu: [0., 0., 1022., 2048.],
+        bbox_fu: [0., 0., width, height],
+        ink_span_fu: [width, height],
+        anchor_bbox_fu: [0., 0., width, height],
         stages: crate::units::StageMetrics {
             trace_max_px: 0.,
             trace_p95_px: 0.,
