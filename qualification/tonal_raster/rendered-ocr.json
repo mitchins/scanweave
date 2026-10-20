@@ -1,0 +1,782 @@
+[
+  {
+    "id": "cord-00",
+    "renderer": "pdfium",
+    "arm": "baseline",
+    "command": [
+      "tesseract",
+      "/data/coding/scanweave/qualification/tonal_raster/renders/baseline/cord-00-pdfium.png",
+      "/data/coding/scanweave/qualification/tonal_raster/ocr/cord-00-pdfium-baseline",
+      "-l",
+      "eng",
+      "--dpi",
+      "300",
+      "--psm",
+      "3",
+      "txt",
+      "tsv"
+    ],
+    "seconds": 0.30067526100901887,
+    "text": "",
+    "baseline_sequence_similarity": 1.0,
+    "numeric_queries": [
+      {
+        "text": "75,000",
+        "found": false
+      },
+      {
+        "text": "125,000",
+        "found": false
+      },
+      {
+        "text": "37,000",
+        "found": false
+      },
+      {
+        "text": "24,000",
+        "found": false
+      },
+      {
+        "text": "70,000",
+        "found": false
+      }
+    ]
+  },
+  {
+    "id": "cord-00",
+    "renderer": "pdfium",
+    "arm": "q98",
+    "command": [
+      "tesseract",
+      "/data/coding/scanweave/qualification/tonal_raster/renders/q98/cord-00-pdfium.png",
+      "/data/coding/scanweave/qualification/tonal_raster/ocr/cord-00-pdfium-q98",
+      "-l",
+      "eng",
+      "--dpi",
+      "300",
+      "--psm",
+      "3",
+      "txt",
+      "tsv"
+    ],
+    "seconds": 0.3178113940230105,
+    "text": "",
+    "baseline_sequence_similarity": 1.0,
+    "numeric_queries": [
+      {
+        "text": "75,000",
+        "found": false
+      },
+      {
+        "text": "125,000",
+        "found": false
+      },
+      {
+        "text": "37,000",
+        "found": false
+      },
+      {
+        "text": "24,000",
+        "found": false
+      },
+      {
+        "text": "70,000",
+        "found": false
+      }
+    ]
+  },
+  {
+    "id": "cord-00",
+    "renderer": "pdfium",
+    "arm": "q100",
+    "command": [
+      "tesseract",
+      "/data/coding/scanweave/qualification/tonal_raster/renders/q100/cord-00-pdfium.png",
+      "/data/coding/scanweave/qualification/tonal_raster/ocr/cord-00-pdfium-q100",
+      "-l",
+      "eng",
+      "--dpi",
+      "300",
+      "--psm",
+      "3",
+      "txt",
+      "tsv"
+    ],
+    "seconds": 0.28581852102070116,
+    "text": "",
+    "baseline_sequence_similarity": 1.0,
+    "numeric_queries": [
+      {
+        "text": "75,000",
+        "found": false
+      },
+      {
+        "text": "125,000",
+        "found": false
+      },
+      {
+        "text": "37,000",
+        "found": false
+      },
+      {
+        "text": "24,000",
+        "found": false
+      },
+      {
+        "text": "70,000",
+        "found": false
+      }
+    ]
+  },
+  {
+    "id": "cord-00",
+    "renderer": "poppler",
+    "arm": "baseline",
+    "command": [
+      "tesseract",
+      "/data/coding/scanweave/qualification/tonal_raster/renders/baseline/cord-00-poppler.png",
+      "/data/coding/scanweave/qualification/tonal_raster/ocr/cord-00-poppler-baseline",
+      "-l",
+      "eng",
+      "--dpi",
+      "300",
+      "--psm",
+      "3",
+      "txt",
+      "tsv"
+    ],
+    "seconds": 0.3958142909978051,
+    "text": "",
+    "baseline_sequence_similarity": 1.0,
+    "numeric_queries": [
+      {
+        "text": "75,000",
+        "found": false
+      },
+      {
+        "text": "125,000",
+        "found": false
+      },
+      {
+        "text": "37,000",
+        "found": false
+      },
+      {
+        "text": "24,000",
+        "found": false
+      },
+      {
+        "text": "70,000",
+        "found": false
+      }
+    ]
+  },
+  {
+    "id": "cord-00",
+    "renderer": "poppler",
+    "arm": "q98",
+    "command": [
+      "tesseract",
+      "/data/coding/scanweave/qualification/tonal_raster/renders/q98/cord-00-poppler.png",
+      "/data/coding/scanweave/qualification/tonal_raster/ocr/cord-00-poppler-q98",
+      "-l",
+      "eng",
+      "--dpi",
+      "300",
+      "--psm",
+      "3",
+      "txt",
+      "tsv"
+    ],
+    "seconds": 0.2673600800044369,
+    "text": "",
+    "baseline_sequence_similarity": 1.0,
+    "numeric_queries": [
+      {
+        "text": "75,000",
+        "found": false
+      },
+      {
+        "text": "125,000",
+        "found": false
+      },
+      {
+        "text": "37,000",
+        "found": false
+      },
+      {
+        "text": "24,000",
+        "found": false
+      },
+      {
+        "text": "70,000",
+        "found": false
+      }
+    ]
+  },
+  {
+    "id": "cord-00",
+    "renderer": "poppler",
+    "arm": "q100",
+    "command": [
+      "tesseract",
+      "/data/coding/scanweave/qualification/tonal_raster/renders/q100/cord-00-poppler.png",
+      "/data/coding/scanweave/qualification/tonal_raster/ocr/cord-00-poppler-q100",
+      "-l",
+      "eng",
+      "--dpi",
+      "300",
+      "--psm",
+      "3",
+      "txt",
+      "tsv"
+    ],
+    "seconds": 0.370329463010421,
+    "text": "",
+    "baseline_sequence_similarity": 1.0,
+    "numeric_queries": [
+      {
+        "text": "75,000",
+        "found": false
+      },
+      {
+        "text": "125,000",
+        "found": false
+      },
+      {
+        "text": "37,000",
+        "found": false
+      },
+      {
+        "text": "24,000",
+        "found": false
+      },
+      {
+        "text": "70,000",
+        "found": false
+      }
+    ]
+  },
+  {
+    "id": "cord-05",
+    "renderer": "pdfium",
+    "arm": "baseline",
+    "command": [
+      "tesseract",
+      "/data/coding/scanweave/qualification/tonal_raster/renders/baseline/cord-05-pdfium.png",
+      "/data/coding/scanweave/qualification/tonal_raster/ocr/cord-05-pdfium-baseline",
+      "-l",
+      "eng",
+      "--dpi",
+      "300",
+      "--psm",
+      "3",
+      "txt",
+      "tsv"
+    ],
+    "seconds": 1.7174726229859516,
+    "text": "fine Sere cere miss tent Set One teed mee uate ween\nEPy Gete TOE WOT) nnd emed mabe Lowy game Dom Bae\n\nne ate: neon moar\n\n2908 SREY wRhe omeh met\n\nAte me Oe ne SeeS REE ond ake ep mee ome\n\n<1 VOR LEE HERE Lee mm stent Sty whee wee Dane\n\n",
+    "baseline_sequence_similarity": 1.0,
+    "numeric_queries": [
+      {
+        "text": "45,000",
+        "found": false
+      },
+      {
+        "text": "55,000",
+        "found": false
+      },
+      {
+        "text": "49,000",
+        "found": false
+      },
+      {
+        "text": "33,000",
+        "found": false
+      },
+      {
+        "text": "39,000",
+        "found": false
+      }
+    ]
+  },
+  {
+    "id": "cord-05",
+    "renderer": "pdfium",
+    "arm": "q98",
+    "command": [
+      "tesseract",
+      "/data/coding/scanweave/qualification/tonal_raster/renders/q98/cord-05-pdfium.png",
+      "/data/coding/scanweave/qualification/tonal_raster/ocr/cord-05-pdfium-q98",
+      "-l",
+      "eng",
+      "--dpi",
+      "300",
+      "--psm",
+      "3",
+      "txt",
+      "tsv"
+    ],
+    "seconds": 1.7289493159914855,
+    "text": "thee pert wee nies teed oe\n\nSane onan Fah Gand Soe DOW SUES daey WETy Gude TOOL WT) Snes ORAS mAbE Lowy game som Bae\n\nS idheetiiedead nite ie den tei\n\n<1 OVOR LENT HENS Le mem tet See ehte wenn peek\n\n",
+    "baseline_sequence_similarity": 0.18764302059496568,
+    "numeric_queries": [
+      {
+        "text": "45,000",
+        "found": false
+      },
+      {
+        "text": "55,000",
+        "found": false
+      },
+      {
+        "text": "49,000",
+        "found": false
+      },
+      {
+        "text": "33,000",
+        "found": false
+      },
+      {
+        "text": "39,000",
+        "found": false
+      }
+    ]
+  },
+  {
+    "id": "cord-05",
+    "renderer": "pdfium",
+    "arm": "q100",
+    "command": [
+      "tesseract",
+      "/data/coding/scanweave/qualification/tonal_raster/renders/q100/cord-05-pdfium.png",
+      "/data/coding/scanweave/qualification/tonal_raster/ocr/cord-05-pdfium-q100",
+      "-l",
+      "eng",
+      "--dpi",
+      "300",
+      "--psm",
+      "3",
+      "txt",
+      "tsv"
+    ],
+    "seconds": 1.7923242520191707,
+    "text": "fies pert were miss teed wy\nnan bean Gene Saws SF OFEE ney mETy GAbe THO VETO SEES wRES mabe Rony gums som Ane\n\nete ane eee\n\n<1 UR LOET MENS Bee mm teMt ste WRts ween Dene\n\n",
+    "baseline_sequence_similarity": 0.4585365853658537,
+    "numeric_queries": [
+      {
+        "text": "45,000",
+        "found": false
+      },
+      {
+        "text": "55,000",
+        "found": false
+      },
+      {
+        "text": "49,000",
+        "found": false
+      },
+      {
+        "text": "33,000",
+        "found": false
+      },
+      {
+        "text": "39,000",
+        "found": false
+      }
+    ]
+  },
+  {
+    "id": "cord-05",
+    "renderer": "poppler",
+    "arm": "baseline",
+    "command": [
+      "tesseract",
+      "/data/coding/scanweave/qualification/tonal_raster/renders/baseline/cord-05-poppler.png",
+      "/data/coding/scanweave/qualification/tonal_raster/ocr/cord-05-poppler-baseline",
+      "-l",
+      "eng",
+      "--dpi",
+      "300",
+      "--psm",
+      "3",
+      "txt",
+      "tsv"
+    ],
+    "seconds": 1.3862706779909786,
+    "text": "on snee >\n\n eedietead aii he ie tee\n\n",
+    "baseline_sequence_similarity": 1.0,
+    "numeric_queries": [
+      {
+        "text": "45,000",
+        "found": false
+      },
+      {
+        "text": "55,000",
+        "found": false
+      },
+      {
+        "text": "49,000",
+        "found": false
+      },
+      {
+        "text": "33,000",
+        "found": false
+      },
+      {
+        "text": "39,000",
+        "found": false
+      }
+    ]
+  },
+  {
+    "id": "cord-05",
+    "renderer": "poppler",
+    "arm": "q98",
+    "command": [
+      "tesseract",
+      "/data/coding/scanweave/qualification/tonal_raster/renders/q98/cord-05-poppler.png",
+      "/data/coding/scanweave/qualification/tonal_raster/ocr/cord-05-poppler-q98",
+      "-l",
+      "eng",
+      "--dpi",
+      "300",
+      "--psm",
+      "3",
+      "txt",
+      "tsv"
+    ],
+    "seconds": 1.4519682220125105,
+    "text": "Sine Fane cane nies tend nee HOHE Gate Mier Geet see tad Mee whde ood\nAs chem ome 48 ate oot 7 \u2018 .\n\nSEPy ate TOP WORD OnEs ORES HOOT LOW, gam DOM Bae! HE\u201d s\n\n2 90U CREF WROD one eet GES OEDE POND MORE wbee \u00ab\n\nmes MO Sete bHnd BOND MORE gunn Onl bere\n\n hieditetead aii ke ies tee\n\n",
+    "baseline_sequence_similarity": 0.006309148264984227,
+    "numeric_queries": [
+      {
+        "text": "45,000",
+        "found": false
+      },
+      {
+        "text": "55,000",
+        "found": false
+      },
+      {
+        "text": "49,000",
+        "found": false
+      },
+      {
+        "text": "33,000",
+        "found": false
+      },
+      {
+        "text": "39,000",
+        "found": false
+      }
+    ]
+  },
+  {
+    "id": "cord-05",
+    "renderer": "poppler",
+    "arm": "q100",
+    "command": [
+      "tesseract",
+      "/data/coding/scanweave/qualification/tonal_raster/renders/q100/cord-05-poppler.png",
+      "/data/coding/scanweave/qualification/tonal_raster/ocr/cord-05-poppler-q100",
+      "-l",
+      "eng",
+      "--dpi",
+      "300",
+      "--psm",
+      "3",
+      "txt",
+      "tsv"
+    ],
+    "seconds": 1.823556938994443,
+    "text": "Sint Sere cane nies tend nee HOHE Gate Mier Geet see td Mee whe ohn\na2 chee omen 48 te ast . \u201d * + bee ame &\nSEPy ae TOE WORD nnd ORES mEbE Bony gam Dom Bae\n\nOT CHRD One OREE wRhD cnet weet ene ms\n\nD eedietead aii ke et tee\n\n",
+    "baseline_sequence_similarity": 0.0,
+    "numeric_queries": [
+      {
+        "text": "45,000",
+        "found": false
+      },
+      {
+        "text": "55,000",
+        "found": false
+      },
+      {
+        "text": "49,000",
+        "found": false
+      },
+      {
+        "text": "33,000",
+        "found": false
+      },
+      {
+        "text": "39,000",
+        "found": false
+      }
+    ]
+  },
+  {
+    "id": "history-02",
+    "renderer": "pdfium",
+    "arm": "baseline",
+    "command": [
+      "tesseract",
+      "/data/coding/scanweave/qualification/tonal_raster/renders/baseline/history-02-pdfium.png",
+      "/data/coding/scanweave/qualification/tonal_raster/ocr/history-02-pdfium-baseline",
+      "-l",
+      "eng",
+      "--dpi",
+      "300",
+      "--psm",
+      "3",
+      "txt",
+      "tsv"
+    ],
+    "seconds": 1.5966402960184496,
+    "text": "19\n\nnem Geift dufter, twie diefe Krduter, dem Geift jener\nfchonen Vorwelt, in deren Ginn der Tempel hier gebaut\nift. \u2014 Dein Geift fpridt ja die heilige Ordnung der\nGdhinheit aus wie er, und ob ic) ihm was bin, ob id\nihm was bleibe, das ift dann einerlei.\n\nJa fiifer Freund! ob id Die was bin: mas foll\nid) Danad fragen? \u2014 meiff id) dod), daR die Lerdhe\nnidt umfonft. jubelnd, auffteigt, Daf der INorgenwind\nnidt ungefiblt in den Bweigen [ifpelt, ja Daf die ganze\nNatur nidj\u00e9 unbegriffen in ihr Gdweigen verfunken ift;\nwas follt\u2019 id) gagen, von Dic nidt verftanden nidjt ges\nfable zu fein? \u2014 Drum will idp nidt fcwodren Dir ets\nwas gu fein; es ift mic gewif, daf id) Dir bin, was\nin einftimmender Gd\u00e9nheit ein Don der Natur, cine\n\ngeiftige Berihrung diefer finnliden Welt Dir fein Fann.\n\n3m Juli.\n\nDiefe Lage, viefe Gegenden fie tragen das Antlis\ndes Paradiefes, Die Fille ladjt midy an in der reifens\nden Frudht, das Leben jauchgt in mir, und einfam bin\nid) wie der erfte Wienfd); und id) [erne wie diefer herrs\n\nfen und. gebieten dem Gli: dag die Welt foll\n\n",
+    "baseline_sequence_similarity": 1.0,
+    "numeric_queries": []
+  },
+  {
+    "id": "history-02",
+    "renderer": "pdfium",
+    "arm": "q98",
+    "command": [
+      "tesseract",
+      "/data/coding/scanweave/qualification/tonal_raster/renders/q98/history-02-pdfium.png",
+      "/data/coding/scanweave/qualification/tonal_raster/ocr/history-02-pdfium-q98",
+      "-l",
+      "eng",
+      "--dpi",
+      "300",
+      "--psm",
+      "3",
+      "txt",
+      "tsv"
+    ],
+    "seconds": 1.453097716002958,
+    "text": "19\n\nnem Geift dufter, tie diefe Krduter, dem Geift jener\nfcj\u00e9nen Vorwelt, in deren Ginn der Tempel hier gebaut\nift. \u2014 Dein Geift fpridt ja die heilige Ordnung der\nGhinheit aus wie er, und ob ic) ihm mwas bin, ob id\nihm was bleibe, das ijt dann einerlei.\n\nJa fiifer Freund! ob id) Die was bin: mas foll\nid) Danad) fragen? \u2014 wmeiff id) dod), dafR die Lerche\nnidt umfonft. jubelnd. auffteigt, Daf der IMNorgenwind\nnidt ungefiblt in den BSweigen [ifpelt, ja Daf die ganze\nNatur nidj\u00e9 unbegriffen in ihr Gdweigen verfunken ift;\nwas follt\u2019 id) gagen, von Dic nidt verftanden nidjt ges\nfable zu fein? \u2014 Drum will idp nidt fchwosren Dir ets\nwas gu fein; es ift mic gewif, dXaf id) Dir bin, was\nin einftimmender Gd\u00e9nheit ein Don dec Natur, cine\n\ngeiftige Berihrung diefer finnliden Welt Dir fein ann.\n\n3m Juli.\n\nDiefe Lage, viefe Gegenden fie tragen das Antlis\ndes Paradiefes, Die Fille ladjt midy an in der reifens\nden Frudt, das Leben jauchgt in mir, und einfam bin\nid) wie der erfte Nenfd); und id) [erne wie diefer herr-\n\nfen und. gebieten dem Glid: dag die Welt foll\n\n",
+    "baseline_sequence_similarity": 0.8186528497409327,
+    "numeric_queries": []
+  },
+  {
+    "id": "history-02",
+    "renderer": "pdfium",
+    "arm": "q100",
+    "command": [
+      "tesseract",
+      "/data/coding/scanweave/qualification/tonal_raster/renders/q100/history-02-pdfium.png",
+      "/data/coding/scanweave/qualification/tonal_raster/ocr/history-02-pdfium-q100",
+      "-l",
+      "eng",
+      "--dpi",
+      "300",
+      "--psm",
+      "3",
+      "txt",
+      "tsv"
+    ],
+    "seconds": 1.8462942389887758,
+    "text": "19\n\nnem Geift dufter, tie diefe Krduter, dem Geift jener\nfcjonen Vorwelt, in deren Ginn der Tempel hier gebaut\nift. \u2014 Dein Geift fpridt ja die heilige Ordnung der\nGdhinheit aus wie er, und ob ic) ihm was bin, ob id\nihm was bleibe, das ift dann einerlei.\n\nYa fifer Freund! ob id) Dir was bin: mas foll\nid) Danad fragen? \u2014 wmeiff id) dod), dafR die Lerdhe\nnidt umfonft. jubelnd, auffteigt, Daf der IMMorgenwind\nnidt ungefibl\u00a2 in den BSweigen [ifpelt, ja daf die ganze\nNatur nidj\u00e9 unbegriffen in ihr Gdweigen verfunken ift;\nwas follt\u2019 id) zagen, von Dic nidt verftanden nidjt ges\nfable zu fein? \u2014 Drum will idp nidt fcwosren Dir ets\nwas gu fein; es ift mic gewif, daf id) Dir bin, was\nin einftimmender Gdinheit ein Don dec Natur, cine\n\ngeiftige Berihrung diefer finnliden Welt Dir fein ann.\n\n3m Guli.\n\nDiefe Tage, viefe Gegenden fie tragen das Antlis\ndes Paradiefes. Die Fille ladjt midy an in der reifens\nden Frudt, das Leben jauchgt in mir, und einfam bin\nid) wie der erfte Nienfd); und id) [erne wie diefer herr-\n\nfen und. gebieten dem Olid; daf die Welt foll\n\n",
+    "baseline_sequence_similarity": 0.8037735849056604,
+    "numeric_queries": []
+  },
+  {
+    "id": "history-02",
+    "renderer": "poppler",
+    "arm": "baseline",
+    "command": [
+      "tesseract",
+      "/data/coding/scanweave/qualification/tonal_raster/renders/baseline/history-02-poppler.png",
+      "/data/coding/scanweave/qualification/tonal_raster/ocr/history-02-poppler-baseline",
+      "-l",
+      "eng",
+      "--dpi",
+      "300",
+      "--psm",
+      "3",
+      "txt",
+      "tsv"
+    ],
+    "seconds": 1.9947560369910207,
+    "text": "19\n\nnem Geift dufter, twie diefe Krduter, dem Geift jener\nfchonen Vorwelt, in deren Ginn der Tempel hier gebaut\nift. \u2014 Dein Geift fpridt ja die heilige Ordnung der\nGdhinheit aus wie er, und ob ic) ihm was bin, ob id\nihm was bleibe, das ift dann einerlei.\n\nJa fiifer Freund! ob id Die was bin: mas foll\nid) Danad fragen? \u2014 meiff id) dod), daR die Lerdhe\nnidt umfonft. jubelnd, auffteigt, Daf der INorgenwind\nnidt ungefiblt in den Bweigen [ifpelt, ja Daf die ganze\nNatur nidj\u00e9 unbegriffen in ihr Gdweigen verfunken ift;\nwas follt\u2019 id) gagen, von Dic nidt verftanden nidjt ges\nfable zu fein? \u2014 Drum will idp nidt fcwodren Dir ets\nwas gu fein; es ift mic gewif, daf id) Dir bin, was\nin einftimmender Gd\u00e9nheit ein Don der Natur, cine\n\ngeiftige Berihrung diefer finnliden Welt Dir fein Fann.\n\n3m Juli.\n\nDiefe Lage, viefe Gegenden fie tragen das Antlis\ndes Paradiefes, Die Fille lade mid) an in der reifens\nden Frudht, das Leben jauchgt in mir, und einfam bin\nid) wie der erfte Wienfd); und id) [erne wie diefer herrs\n\nfen und. gebieten dem Gli: dag die Welt foll\n\n",
+    "baseline_sequence_similarity": 1.0,
+    "numeric_queries": []
+  },
+  {
+    "id": "history-02",
+    "renderer": "poppler",
+    "arm": "q98",
+    "command": [
+      "tesseract",
+      "/data/coding/scanweave/qualification/tonal_raster/renders/q98/history-02-poppler.png",
+      "/data/coding/scanweave/qualification/tonal_raster/ocr/history-02-poppler-q98",
+      "-l",
+      "eng",
+      "--dpi",
+      "300",
+      "--psm",
+      "3",
+      "txt",
+      "tsv"
+    ],
+    "seconds": 1.9707960300147533,
+    "text": "19\n\nnem Geift dufter, tie diefe Krduter, dem Geift jener\nfcj\u00e9nen Vorwelt, in deren Ginn der Tempel hier gebaut\nift. \u2014 Dein Geift fpridt ja die heilige Ordnung der\nGhinheit aus wie er, und ob ic) ihm mwas bin, ob id\nihm was bleibe, das ijt dann einerlei.\n\nJa fiifer Freund! ob id) Die was bin: mas foll\nid) Danad) fragen? \u2014 wmeiff id) dod), dafR die Lerche\nnidt umfonft. jubelnd. auffteigt, Daf der IMNorgenwind\nnidt ungefiblt in den BSweigen [ifpelt, ja Daf die ganze\nNatur nidj\u00e9 unbegriffen in ihr Gdweigen verfunken ift;\nwas follt\u2019 id) gagen, von Dic nidt verftanden nidjt ges\nfable zu fein? \u2014 Drum will idp nidt fchwosren Dir ets\nwas gu fein; es ift mic gewif, dXaf id) Dir bin, was\nin einftimmender Gd\u00e9nheit ein Don dec Natur, cine\n\ngeiftige Berihrung diefer finnliden Welt Dir fein ann.\n\n3m Juli.\n\nDiefe Lage, viefe Gegenden fie tragen das Antlis\ndes Paradiefes, Die Fille ladjt midy an in der reifens\nden Frudt, das Leben jauchgt in mir, und einfam bin\nid) wie der erfte Nenfd); und id) [erne wie diefer herr-\n\nfen und. gebieten dem Glid: dag die Welt foll\n\n",
+    "baseline_sequence_similarity": 0.7766258246936852,
+    "numeric_queries": []
+  },
+  {
+    "id": "history-02",
+    "renderer": "poppler",
+    "arm": "q100",
+    "command": [
+      "tesseract",
+      "/data/coding/scanweave/qualification/tonal_raster/renders/q100/history-02-poppler.png",
+      "/data/coding/scanweave/qualification/tonal_raster/ocr/history-02-poppler-q100",
+      "-l",
+      "eng",
+      "--dpi",
+      "300",
+      "--psm",
+      "3",
+      "txt",
+      "tsv"
+    ],
+    "seconds": 1.4074560980079696,
+    "text": "19\n\nnem Geift dufter, tie diefe Krduter, dem Geift jener\nfcjonen Vorwelt, in deren Ginn der Tempel hier gebaut\nift. \u2014 Dein Geift fpridt ja die heilige Ordnung der\nGdhinheit aus wie er, und ob ic) ihm was bin, ob id\nihm was bleibe, das ift dann einerlei.\n\nYa fifer Freund! ob id) Dir was bin: mas foll\nid) Danad fragen? \u2014 wmeiff id) dod), dafR die Lerdhe\nnidt umfonft. jubelnd, auffteigt, Daf der IMMorgenwind\nnidt ungefibl\u00a2 in den BSweigen [ifpelt, ja daf die ganze\nNatur nidj\u00e9 unbegriffen in ihr Gdweigen verfunken ift;\nwas follt\u2019 id) zagen, von Dic nidt verftanden nidjt ges\nfable zu fein? \u2014 Drum will idp nidt fcwosren Dir ets\nwas gu fein; es ift mic gewif, daf id) Dir bin, was\nin einftimmender Gdinheit ein Don dec Natur, cine\n\ngeiftige Berihrung diefer finnliden Welt Dir fein ann.\n\n3m Guli.\n\nDiefe Tage, viefe Gegenden fie tragen das Antlis\ndes Paradiefes. Die Fille ladjt midy an in der reifens\nden Frudt, das Leben jauchgt in mir, und einfam bin\nid) wie der erfte Nienfd); und id) [erne wie diefer herr-\n\nfen und. gebieten dem Olid; daf die Welt foll\n\n",
+    "baseline_sequence_similarity": 0.7616800377536573,
+    "numeric_queries": []
+  },
+  {
+    "id": "history-03",
+    "renderer": "pdfium",
+    "arm": "baseline",
+    "command": [
+      "tesseract",
+      "/data/coding/scanweave/qualification/tonal_raster/renders/baseline/history-03-pdfium.png",
+      "/data/coding/scanweave/qualification/tonal_raster/ocr/history-03-pdfium-baseline",
+      "-l",
+      "eng",
+      "--dpi",
+      "300",
+      "--psm",
+      "3",
+      "txt",
+      "tsv"
+    ],
+    "seconds": 1.5554427009774372,
+    "text": "wel )2( \u00a9 )2( Ete\n\nPDuvrchlauchtiafter/\nGrofrindehtighter Chur -Airft/\n\nSnadiatter Shur arf und Ger.\n\n\"2-4\" mit gegeniwartigem budhe unter:\nHhanight gu, eticheinett7: beweget\nDec titicly fo wol Deffen'ganber sivect\nSund inhalty als auch fonderlich\noN : SHERODSEPBEN preipiitre\nDigfte Huld und Gnade/ durch welche bif daco aus Gott\n\nlicher direction OERO gefamle unterthanen in ange\nYantt-\n\nHerzog August Bibliothek Wolfenbiittel\n\n{!!')| Kodak\n| | | . codal i\n0 1 2 S 4\n\n",
+    "baseline_sequence_similarity": 1.0,
+    "numeric_queries": []
+  },
+  {
+    "id": "history-03",
+    "renderer": "pdfium",
+    "arm": "q98",
+    "command": [
+      "tesseract",
+      "/data/coding/scanweave/qualification/tonal_raster/renders/q98/history-03-pdfium.png",
+      "/data/coding/scanweave/qualification/tonal_raster/ocr/history-03-pdfium-q98",
+      "-l",
+      "eng",
+      "--dpi",
+      "300",
+      "--psm",
+      "3",
+      "txt",
+      "tsv"
+    ],
+    "seconds": 1.4127678700024262,
+    "text": "wel )2( \u00a9 )2( Ete\n\nPDurvrchlauchtiafter/\nGrofindchrigiter Chur -xarfe/\n\nKnidiatter Shur arf und Serr.\n\npag ENS es Gnade /durch welche bif daco aus Cites\n\nlicher direction OERO gefamle unterthanen in 4\nYan\n\nHerzog August Bibliothek Wolfenbiittel\n\nMe) a\nie ae SOB. Me eae\n\n",
+    "baseline_sequence_similarity": 0.5182186234817814,
+    "numeric_queries": []
+  },
+  {
+    "id": "history-03",
+    "renderer": "pdfium",
+    "arm": "q100",
+    "command": [
+      "tesseract",
+      "/data/coding/scanweave/qualification/tonal_raster/renders/q100/history-03-pdfium.png",
+      "/data/coding/scanweave/qualification/tonal_raster/ocr/history-03-pdfium-q100",
+      "-l",
+      "eng",
+      "--dpi",
+      "300",
+      "--psm",
+      "3",
+      "txt",
+      "tsv"
+    ],
+    "seconds": 1.8354128450155258,
+    "text": "welts )2( \u00a9 )2( Ete\n\nDuvdhlauchtigfter/\nGrofindchrigiter Chur -Barie/\n\nKnadiatter Shur aire und Ger2.\n\nc~\n\nSore w-Churf, Qurdl.\n\nSA -S mit geqgenivartigem buche unter\n\noN ia) Cos chanight gu, eticheinetty: beweget\nVk: Sig) tidy fo wok Beffen'ganber smect\nlm a APE und inhalty alg auch fonderlich\nSEEM SELS DERKOSEPBEN preihintir-\n\nDigite Huld und Gnade durch welche Hip daco aus Gott\n\nlicher direction OERO gefamle unterthanen in 4\nYantt-\n\nHerzog August Bibliothek Wolfenbiittel\n\n\u201ci\nah ee aes. ere\n\n",
+    "baseline_sequence_similarity": 0.06604747162022703,
+    "numeric_queries": []
+  },
+  {
+    "id": "history-03",
+    "renderer": "poppler",
+    "arm": "baseline",
+    "command": [
+      "tesseract",
+      "/data/coding/scanweave/qualification/tonal_raster/renders/baseline/history-03-poppler.png",
+      "/data/coding/scanweave/qualification/tonal_raster/ocr/history-03-poppler-baseline",
+      "-l",
+      "eng",
+      "--dpi",
+      "300",
+      "--psm",
+      "3",
+      "txt",
+      "tsv"
+    ],
+    "seconds": 1.6608631959825289,
+    "text": "wel )2( \u00a9 )2( Ete\n\nPDuvchlauchtighter/\nGropinndchrighter Chur =x arjc.\n\nKnadiater Shur air und Ger.\n\njor\u20acw. Churf, urd.\n\n\\ mit gegenivartigem bude unter:\nway) Co KO ehanniatt su eticheinetty: beiweget\nJ =2ntich fo wol Deffen ganber siece\nSiund inhalty als auch fonderlich\naN : SDEROSEPBEN preifitptis\nDigfte Huld und Gnade durch welche bif daco aus Gott\n\nlicher direction OERO gefamle unterthanen in 4\nYantt-\n\nHerzog August Bibliothek Wolfenbiittel\n\n0\n\n.\n\n2\n\nKodak\nGray Scale i\n3 \u201c\n\n",
+    "baseline_sequence_similarity": 1.0,
+    "numeric_queries": []
+  },
+  {
+    "id": "history-03",
+    "renderer": "poppler",
+    "arm": "q98",
+    "command": [
+      "tesseract",
+      "/data/coding/scanweave/qualification/tonal_raster/renders/q98/history-03-poppler.png",
+      "/data/coding/scanweave/qualification/tonal_raster/ocr/history-03-poppler-q98",
+      "-l",
+      "eng",
+      "--dpi",
+      "300",
+      "--psm",
+      "3",
+      "txt",
+      "tsv"
+    ],
+    "seconds": 1.559698461991502,
+    "text": "wel )2( \u00a9 )2( wets\n\nPDuvchlauchtigfter/\nGrofindchrighter Chur -xearfe/\n\nKnidiater Shur air und Ger.\n\njor\u20acw. Churf, urd.\n\nmit gegenivartigem bude unter:\n> KO ehanniatt su eticheinett7: beiweget\n\nHci fo wol Feffen'ganber sreck\nund infalty als auch fonderlich\noN : HDEROSGELBER preipiiwure\nDigfte Huld und Gnade/ durch welche bif daco aus Gott\n\nlicher direction OERO gefamele unterthanen in ange\nYanct-\n\nHerzog August Bibliothek Wolfenbiittel\n\n0\n\n.\n\n2\n\nKodak\nGray Scale i\n3 4\n\n",
+    "baseline_sequence_similarity": 0.46394984326018807,
+    "numeric_queries": []
+  },
+  {
+    "id": "history-03",
+    "renderer": "poppler",
+    "arm": "q100",
+    "command": [
+      "tesseract",
+      "/data/coding/scanweave/qualification/tonal_raster/renders/q100/history-03-poppler.png",
+      "/data/coding/scanweave/qualification/tonal_raster/ocr/history-03-poppler-q100",
+      "-l",
+      "eng",
+      "--dpi",
+      "300",
+      "--psm",
+      "3",
+      "txt",
+      "tsv"
+    ],
+    "seconds": 1.5445083850063384,
+    "text": "wel )2( \u00a9 )2( wet\n\nDuvdlauchtigfter/\nGrofindchtigfter Chur ivf\n\nSnadiatter Shur -airfkund Ger.\n\njor<w. Churf, urd.\n\nSAS mit gegenivartigem bude unter:\n\u2122\\ VII KO ehaniatt su eticheinett7: beiweget\n=m) fo wol Seffen ganber sec\nSiund inhalty als auch fonderlich\noN : SIDEROSEPBEN preifitvtis\nDigfte Huld und Gnade/ durch welche bif daco aus Gott\n\nlicher direction OERO gefamle unterthanen in ange\nYanct-\n\nHerzog August Bibliothek Wolfenbiittel\n\n|\nnl car a\n0 1 2 3 4\n\n",
+    "baseline_sequence_similarity": 0.3717001055966209,
+    "numeric_queries": []
+  }
+]

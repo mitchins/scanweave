@@ -23,17 +23,19 @@ def stats(a,b):
  return {'mae':total/(H*W*3),'max_channel_error':maximum,'changed_fraction':changed/(H*W),'dark_and_light_ridge_tests':dark,'lost_ridges':lost,'gradient_error_x':gxs/(H*(W-1)),'gradient_error_y':gys/((H-1)*W)}
 def streams(q):return sorted(hashlib.sha256(o.read_bytes()).hexdigest() for o in q.objects if isinstance(o,pikepdf.Stream) and str(o.get('/Subtype'))!='/Image' and str(o.get('/Type')) not in ['/ObjStm','/XRef'])
 for name,regions in controls['regions'].items():
- if any(r['id']==name for r in results):continue
+ existing=next((r for r in results if r['id']==name),None)
+ if existing and all((B/'renders'/a/f'{name}-{r}.png').exists() for a in ['baseline','q98','q100'] for r in ['pdfium','poppler']) and all(hashlib.sha256((B/a/f'{name}.pdf').read_bytes()).hexdigest()==existing['arms'][a]['pdf_sha256'] for a in ['baseline','q98','q100']):continue
+ results=[r for r in results if r['id']!=name]
  images={};docs={};row={'id':name,'arms':{},'regions':[]}
  baseline=pikepdf.open(B/'baseline'/f'{name}.pdf');base_streams=streams(baseline)
  for arm in ['baseline','q98','q100']:
   path=B/arm/f'{name}.pdf';q=pikepdf.open(path);assert streams(q)==base_streams;doc=pdfium.PdfDocument(str(path));docs[arm]=doc;pg=doc[0];w,h=pg.get_size();tp=pg.get_textpage();text=tp.get_text_range();native=pg.render(scale=300/72).to_pil().convert('RGB');(B/'renders'/arm).mkdir(parents=True,exist_ok=True);native.save(B/'renders'/arm/f'{name}-pdfium.png');images[(arm,'pdfium')]=native
-  dst=B/'renders'/arm/f'{name}-poppler';subprocess.run(['pdftoppm','-f','1','-l','1','-singlefile','-r','300','-png',str(path),str(dst)],check=True,capture_output=True);images[(arm,'poppler')]=Image.open(str(dst)+'.png').convert('RGB')
+  dst=B/'renders'/arm/f'{name}-poppler';subprocess.run(['pdftoppm','-f','1','-l','1','-singlefile','-r','300','-png',str(path),str(dst)],check=True,capture_output=True,timeout=300);images[(arm,'poppler')]=Image.open(str(dst)+'.png').convert('RGB')
   ims=[o for o in q.objects if isinstance(o,pikepdf.Stream) and o.get('/Subtype')==pikepdf.Name.Image];assert len(ims)==1
   raw=ims[0].read_raw_bytes();sampling=None
   if str(ims[0].get('/Filter'))=='/DCTDecode':
    im=Image.open(__import__('io').BytesIO(raw));sampling=im.layer if im.mode=='RGB' else 'gray';assert sampling=='gray' or all(c[1:3]==(1,1) for c in sampling)
-  report=json.load(open(str(path)+'.json'));row['arms'][arm]={'pdf_bytes':path.stat().st_size,'raster_bytes':len(raw),'filter':str(ims[0].get('/Filter')),'sampling':sampling,'pdf_sha256':hashlib.sha256(path.read_bytes()).hexdigest(),'pdfium_text':text,'poppler_text':subprocess.check_output(['pdftotext','-raw',str(path),'-']).decode(),'vector_occurrences':sum(o['owner'].startswith('visible') for o in report['conversion']['page_reports'][0]['occurrences'])}
+  report=json.load(open(str(path)+'.json'));row['arms'][arm]={'pdf_bytes':path.stat().st_size,'raster_bytes':len(raw),'filter':str(ims[0].get('/Filter')),'sampling':sampling,'pdf_sha256':hashlib.sha256(path.read_bytes()).hexdigest(),'pdfium_text':text,'poppler_text':subprocess.check_output(['pdftotext','-raw',str(path),'-'],timeout=300).decode(),'vector_occurrences':sum(o['owner'].startswith('visible') for o in report['conversion']['page_reports'][0]['occurrences'])}
  for renderer in ['pdfium','poppler']:
   for arm in ['q98','q100']:row['arms'][arm][renderer]=stats(images[('baseline',renderer)],images[(arm,renderer)])
   sheets=[]
@@ -45,7 +47,7 @@ for name,regions in controls['regions'].items():
     if renderer=='pdfium':
      pg=docs[arm][0];w,h=pg.get_size();zoom=pg.render(scale=900/72,crop=(w*x0,h*(1-y1),w*(1-x1),h*y0)).to_pil().convert('RGB')
     else:
-     path=B/arm/f'{name}.pdf';w,h=docs[arm][0].get_size();dst=B/'renders'/'crop';subprocess.run(['pdftoppm','-f','1','-l','1','-singlefile','-r','900','-x',str(round(x0*w*12.5)),'-y',str(round(y0*h*12.5)),'-W',str(round((x1-x0)*w*12.5)),'-H',str(round((y1-y0)*h*12.5)),'-png',str(path),str(dst)],check=True,capture_output=True);zoom=Image.open(str(dst)+'.png').convert('RGB')
+     path=B/arm/f'{name}.pdf';w,h=docs[arm][0].get_size();dst=B/'renders'/'crop';subprocess.run(['pdftoppm','-f','1','-l','1','-singlefile','-r','900','-x',str(round(x0*w*12.5)),'-y',str(round(y0*h*12.5)),'-W',str(round((x1-x0)*w*12.5)),'-H',str(round((y1-y0)*h*12.5)),'-png',str(path),str(dst)],check=True,capture_output=True,timeout=300);zoom=Image.open(str(dst)+'.png').convert('RGB')
     tile=Image.new('RGB',(zoom.width,zoom.height+24),'white');tile.paste(zoom,(0,24));ImageDraw.Draw(tile).text((3,4),arm+' '+label,fill='black');parts.append(tile)
    sheet=Image.new('RGB',(sum(t.width for t in parts),max(t.height for t in parts)),'white');offset=0
    for t in parts:sheet.paste(t,(offset,0));offset+=t.width
@@ -58,3 +60,16 @@ for name,regions in controls['regions'].items():
   assert row['arms'][arm]['pdfium_text']==row['arms']['baseline']['pdfium_text'];assert row['arms'][arm]['poppler_text']==row['arms']['baseline']['poppler_text']
  results.append(row);(B/'comparison.json').write_text(json.dumps(results,indent=2));print(name,[(a,d['pdf_bytes']) for a,d in row['arms'].items()],flush=True)
  for d in docs.values():d.close()
+
+# Refresh numeric controls uniformly after resuming a partially rendered run.
+for row in results:
+ name=row['id'];frames={}
+ for renderer in ['pdfium','poppler']:
+  for arm in ['baseline','q98','q100']:frames[arm]=Image.open(B/'renders'/arm/f'{name}-{renderer}.png').convert('RGB')
+  for arm in ['q98','q100']:row['arms'][arm][renderer]=stats(frames['baseline'],frames[arm])
+  for region in row['regions']:
+   if region['renderer']!=renderer:continue
+   x0,y0,x1,y1=region['fraction'];W,H=frames['baseline'].size;box=(round(x0*W),round(y0*H),round(x1*W),round(y1*H))
+   for arm in ['baseline','q98','q100']:region['arms'][arm]=stats(frames['baseline'].crop(box),frames[arm].crop(box))
+  frames.clear()
+(B/'comparison.json').write_text(json.dumps(results,indent=2))
