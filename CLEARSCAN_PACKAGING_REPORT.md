@@ -1,3 +1,5 @@
+> Frozen prior-round results at `80b2a42`/`b4387d4`. Current real-corpus implementation and measurements: [CLEARSCAN_REAL_DOCUMENT_REPORT.md](CLEARSCAN_REAL_DOCUMENT_REPORT.md).
+
 # ClearScan PDF packaging and real-use delivery
 
 Implementation: **`80b2a42`**. Starting HEAD: `b2ec997e5cce5923da2ad050fc289a5e731d7dce`; tracked tree was clean. Untracked work was recorded and preserved. The sealed holdout was not opened. The prior glyph, contour, paper reconstruction and faithful-profile behavior were retained.

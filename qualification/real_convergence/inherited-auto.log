@@ -1,0 +1,34 @@
+   Compiling scanweave-io v0.1.0 (/data/coding/scanweave/crates/scanweave-io)
+   Compiling m0-font-pdf v0.1.0 (/data/coding/scanweave/probes/m0-font-pdf)
+warning: function `utf16be_hex` is never used
+  --> probes/m0-font-pdf/tests/m1b_behavior.rs:39:4
+   |
+39 | fn utf16be_hex(s: &str) -> String {
+   |    ^^^^^^^^^^^
+   |
+   = note: `#[warn(dead_code)]` (part of `#[warn(unused)]`) on by default
+
+warning: `m0-font-pdf` (test "m1b_behavior") generated 1 warning
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 9.74s
+     Running tests/m1b_behavior.rs (target/debug/deps/m1b_behavior-b749148e7e458087)
+
+running 1 test
+test regress_auto_reports_the_selected_candidate ... FAILED
+
+failures:
+
+---- regress_auto_reports_the_selected_candidate stdout ----
+
+thread 'regress_auto_reports_the_selected_candidate' (1581341) panicked at probes/m0-font-pdf/tests/m1b_behavior.rs:702:5:
+assertion `left == right` failed
+  left: "reconstruct"
+ right: "raster_baseline"
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+
+
+failures:
+    regress_auto_reports_the_selected_candidate
+
+test result: FAILED. 0 passed; 1 failed; 0 ignored; 0 measured; 12 filtered out; finished in 3.63s
+
+error: test failed, to rerun pass `-p m0-font-pdf --test m1b_behavior`
