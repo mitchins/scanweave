@@ -96,7 +96,9 @@ Tesseract finds no words remain images, with an explicit warning.
 `output.pdf.json` records the input hash, tool identities, raster/OCR hashes,
 hOCR, effective arguments and conversion results. Temporary inputs are removed
 automatically. Publication uses unique same-directory temporary files; PDF and
-report are two separate renames. The current document budget is 512 MiB of
+report are two separate renames. Source-image hints have separate 512 MiB caps
+on aggregate decoded work and retained encoded bytes, checked before decoding.
+These are not a process peak-memory limit. The document budget is 512 MiB of
 RGB page samples, with an 80-million-pixel per-page cap. Split larger documents.
 The established `scanweave-cli` binary remains an alias. The image/bundle CLI
 and library interfaces below remain available.

@@ -22,6 +22,11 @@ pub fn simple_page_images(bytes: Vec<u8>) -> Vec<Option<EncodedSourceImage>> {
     let Ok(pdf) = Pdf::new(bytes) else {
         return Vec::new();
     };
+    // Bound source-hint decoding and retained encoded bytes before OCR's
+    // cumulative page budget is checked. Exhaustion simply disables hints;
+    // the ordinary raster import remains authoritative and checks its limit.
+    let mut remaining_samples = 512usize * 1024 * 1024;
+    let mut remaining_encoded = 512usize * 1024 * 1024;
     pdf.pages()
         .iter()
         .map(|page| {
@@ -35,6 +40,8 @@ pub fn simple_page_images(bytes: Vec<u8>) -> Vec<Option<EncodedSourceImage>> {
                 || page.raw().contains_key(b"UserUnit")
                 || page.raw().contains_key(b"Annots")
                 || page.raw().contains_key(b"Group")
+                || page.resources().color_spaces.contains_key(b"DefaultRGB")
+                || page.resources().color_spaces.contains_key(b"DefaultGray")
             {
                 return None;
             }
@@ -71,7 +78,7 @@ pub fn simple_page_images(bytes: Vec<u8>) -> Vec<Option<EncodedSourceImage>> {
             if &**end.operator != b"Q" || end.operands().count() != 0 || ops.next().is_some() {
                 return None;
             }
-            let mut image = extract(image)?;
+            let mut image = extract(image, &mut remaining_samples, &mut remaining_encoded)?;
             image.page_width = media.width();
             image.page_height = media.height();
             Some(image)
@@ -79,7 +86,7 @@ pub fn simple_page_images(bytes: Vec<u8>) -> Vec<Option<EncodedSourceImage>> {
         .collect()
 }
 
-fn extract(stream: Stream<'_>) -> Option<EncodedSourceImage> {
+fn extract(stream: Stream<'_>, remaining_samples: &mut usize, remaining_encoded: &mut usize) -> Option<EncodedSourceImage> {
     let d = stream.dict();
     // Reject optional interpretation/compositing properties rather than copy
     // opaque references. Only the listed self-contained subset is supported.
@@ -118,6 +125,15 @@ fn extract(stream: Stream<'_>) -> Option<EncodedSourceImage> {
     if width == 0 || height == 0 || width as u64 * height as u64 > 80_000_000 {
         return None;
     }
+    let decoded_bytes = (width as usize).checked_mul(height as usize)?.checked_mul(3)?;
+    let encoded_bytes = stream.raw_data().len();
+    if decoded_bytes > *remaining_samples || encoded_bytes > *remaining_encoded {
+        return None;
+    }
+    // Charge attempted decoding too: malformed streams must not bypass the
+    // aggregate work bound by repeatedly failing after allocation.
+    *remaining_samples -= decoded_bytes;
+    *remaining_encoded -= encoded_bytes;
     let mut predictor = 1;
     if d.contains_key(b"DecodeParms") {
         if jpeg {
@@ -265,7 +281,13 @@ mod tests {
         if kind == "rotate" {
             page.pair(N(b"Rotate"), 90);
         }
-        page.resources().x_objects().pair(N(b"Im"), Ref::new(5));
+        {
+            let mut resources = page.resources();
+            resources.x_objects().pair(N(b"Im"), Ref::new(5));
+            if kind.starts_with("default_") {
+                resources.color_spaces().pair(N(if kind == "default_rgb" {b"DefaultRGB"} else {b"DefaultGray"}), Ref::new(6));
+            }
+        }
         page.finish();
         let mut c = Content::new();
         c.save_state()
@@ -288,7 +310,32 @@ mod tests {
             im.pair(N(b"Decode"), pdf_writer::Str(b"unsupported"));
         }
         im.finish();
+        if kind == "default_rgb" {
+            p.color_space(Ref::new(6)).cal_rgb([0.9505, 1.0, 1.089], None, Some([2.2; 3]), None);
+        } else if kind == "default_gray" {
+            p.color_space(Ref::new(6)).cal_gray([0.9505, 1.0, 1.089], None, Some(2.2));
+        }
         p.finish()
+    }
+    #[test]
+    fn source_decode_is_bounded_before_allocation() {
+        let bytes = fixture("plain");
+        let pdf = Pdf::new(bytes).unwrap();
+        let stream = pdf.pages()[0].resources().get_x_object(&Name::new(b"Im").unwrap()).unwrap();
+        let mut samples = 11;
+        let mut encoded = 1024;
+        assert!(extract(stream.clone(), &mut samples, &mut encoded).is_none());
+        assert_eq!((samples, encoded), (11, 1024));
+        samples = 24;
+        assert!(extract(stream.clone(), &mut samples, &mut encoded).is_some());
+        assert_eq!(samples, 12);
+        assert!(extract(stream.clone(), &mut samples, &mut encoded).is_some());
+        assert_eq!(samples, 0);
+        assert!(extract(stream.clone(), &mut samples, &mut encoded).is_none());
+        samples = 24;
+        encoded = 0;
+        assert!(extract(stream, &mut samples, &mut encoded).is_none());
+        assert_eq!(samples, 24);
     }
     #[test]
     fn source_hint_is_bound_to_pixels_and_physical_geometry() {
@@ -315,7 +362,7 @@ mod tests {
         let found = simple_page_images(fixture("plain"));
         assert_eq!(found.len(), 1);
         assert_eq!(found[0].as_ref().unwrap().width, 2);
-        for kind in ["crop", "rotate", "extra", "mask", "decode"] {
+        for kind in ["crop", "rotate", "extra", "mask", "decode", "default_rgb", "default_gray"] {
             assert!(simple_page_images(fixture(kind))[0].is_none(), "{kind}");
         }
     }
