@@ -1,5 +1,11 @@
 # ClearScan targeted publication review
 
+> Closure update: PR #1 merged as `8b30a204339778f517704a317158d9b08e960be6`;
+> PR #4 merged as `20fe2d920b428f394b9d71042f24f71efcadd2da`.
+> PR #2/#3 are closed unmerged, with remote evidence branches retained.
+> Earlier draft/blocker/approval statements below are historical checkpoints.
+> The donor regression was repaired and unfiltered CI passed before merging.
+
 Review base: PR1 `0e82e6416a66e94839f52d0a922b02900180d44e`. Remote fetch confirmed PR2 `ecb149f`, PR3 `31efedb`; all three original heads have green GitHub Rust/Clippy/Python/publication checks. This review examines current runtime source, not the historical artifact diff. The catch-up CodeRabbit size skip is not approval.
 
 ## Disposition

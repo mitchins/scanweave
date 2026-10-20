@@ -35,9 +35,13 @@ profile.
 
 ClearScan retains native samples for verified full-page image inputs near the
 requested resolution. Other page graphics, crops and rotations use Poppler.
-Native fallback imagery stays lossless, with grayscale storage, exact resource
-reuse and measured Flate predictors. Unsupported text and artwork remain raster;
-only already-qualified paper backgrounds may use reduced-resolution encoding.
+Verified source JPEG resources remain reusable without recompression. Eligible
+unchanged whole-page tonal images may use quality-100, full-chroma JPEG when
+source-detail guards pass and the complete PDF becomes smaller; minor tonal
+differences are possible. Other native exceptions remain lossless, with grayscale
+storage, exact resource reuse and measured Flate predictors. Unsupported text and
+artwork remain raster; only already-qualified paper backgrounds may use
+reduced-resolution encoding. Faithful does not use the new lossy representation.
 Sparse OCR can retry Tesseract's block layout when confidence and character-box
 evidence support it. No new OCR model is required.
 
@@ -52,12 +56,19 @@ M1-C is not the current feature set. The independent holdout remains sealed.
 ### Measured real-document state
 
 On the fixed 32-page development corpus, current ClearScan outputs total
-59,599,260 bytes versus 81,309,831 previously and 81,969,566 input bytes.
+45,453,391 bytes versus a matched 59,534,496-byte pre-compaction baseline
+(23.65% smaller) and 81,969,566 input bytes. See the
+[tonal-raster report](CLEARSCAN_TONAL_RASTER_REPORT.md) for source-detail checks,
+limitations and the earlier frozen baseline distinction.
 Adobe XI totals 4,178,103 bytes on the same inputs: substantial tonal-raster
 and shaded-page limitations remain. CORD annotated numeric search is 17/49;
 some pages still yield no usable OCR or vector reconstruction.
 
-The accumulated implementation is under review in [PR #1](https://github.com/mitchins/scanweave/pull/1).
+The accumulated implementation and whole-page compaction are merged in
+[PR #1](https://github.com/mitchins/scanweave/pull/1) and
+[PR #4](https://github.com/mitchins/scanweave/pull/4). Rejected shaded-paper and
+fringe experiments (#2/#3) are closed unmerged; their evidence branches remain
+available. No rejected reconstruction path was promoted.
 The damaged-crossbar donor regression is now corrected by selecting a supported
 actual witness when a cohort medoid is unsuitable; all original assertions and
 thresholds remain. See [the repair evidence](qualification/pr_closure/DONOR_FIX.md)

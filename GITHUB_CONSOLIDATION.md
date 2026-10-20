@@ -1,5 +1,11 @@
 > Closure update: the donor-repair blocker recorded below is corrected in the follow-up PR #1 commits. See [repair evidence](qualification/pr_closure/DONOR_FIX.md); this checkpoint below is retained as historical CI evidence.
 
+> Closure update: PR #1 merged as `8b30a204339778f517704a317158d9b08e960be6`;
+> PR #4 merged as `20fe2d920b428f394b9d71042f24f71efcadd2da`.
+> PR #2/#3 are closed unmerged, with remote evidence branches retained.
+> Earlier draft/blocker/approval statements below are historical checkpoints.
+> The donor regression was repaired and unfiltered CI passed before merging.
+
 # GitHub consolidation checkpoint
 
 ## History and publication
