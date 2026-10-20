@@ -1717,8 +1717,15 @@ pub(crate) fn convert_parts_with_document_donors(
                 symbol_id: u.unit.symbol_id.clone(),
                 semantic_text: u.semantic_text(),
                 owner: match r.disposition {
-                    RegionDisposition::Vector => "visible_tounicode",
-                    RegionDisposition::Raster { .. } => "invisible",
+                    RegionDisposition::Vector
+                        if policy.profile != "clearscan"
+                            || vector_owned_symbols.contains(&u.unit.symbol_id) =>
+                    {
+                        "visible_tounicode"
+                    }
+                    // A region proposal is not proof that a glyph survived
+                    // encoding/tracing. Report only actual emitted ownership.
+                    _ => "invisible",
                 }
                 .into(),
             });

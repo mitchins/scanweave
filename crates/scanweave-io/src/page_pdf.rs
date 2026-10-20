@@ -414,6 +414,22 @@ fn emit_patches(
 /// per-span /ActualText (BMP only; astral spans keep per-glyph ToUnicode), and
 /// the invisible fallback owner runs inline in reading order on the span's
 /// traced ink baseline, each with its own per-span /ActualText.
+// A repaired/absorbed occurrence need not remain adjacent to its original
+// word's other occurrences. Group by semantic span identity, preserving first
+// appearance and per-span order; never silently paint only the first run.
+fn occurrence_groups(occurrences: &[Occurrence]) -> Vec<Vec<usize>> {
+    let mut groups: Vec<Vec<usize>> = Vec::new();
+    let mut indices = HashMap::new();
+    for (i, occurrence) in occurrences.iter().enumerate() {
+        let index = *indices.entry(occurrence.3.as_str()).or_insert_with(|| {
+            groups.push(Vec::new());
+            groups.len() - 1
+        });
+        groups[index].push(i);
+    }
+    groups
+}
+
 #[allow(clippy::too_many_arguments)]
 fn emit_text_runs(
     c: &mut Content,
@@ -445,17 +461,7 @@ fn emit_text_runs(
         .zip(owner_cids.iter())
         .map(|(o, c)| (o.span_id.as_str(), (o, *c)))
         .collect();
-    let mut groups: Vec<Vec<usize>> = Vec::new();
-    {
-        let mut current: Option<&str> = None;
-        for (i, occ) in occurrences.iter().enumerate() {
-            if current != Some(occ.3.as_str()) {
-                groups.push(Vec::new());
-                current = Some(occ.3.as_str());
-            }
-            groups.last_mut().unwrap().push(i);
-        }
-    }
+    let groups = occurrence_groups(occurrences);
 
     c.begin_text();
     c.set_font(Name(b"F1"), 1.0);
@@ -1556,6 +1562,27 @@ mod image_resource_tests {
 #[cfg(test)]
 mod owner_frame_tests {
     use super::*;
+    #[test]
+    fn noncontiguous_occurrences_of_a_span_are_all_emitted_once() {
+        let make = |span: &str| {
+            (
+                0,
+                0,
+                [0., 0., 1., 1.],
+                span.to_string(),
+                String::new(),
+                String::new(),
+            )
+        };
+        assert_eq!(
+            occurrence_groups(&[make("a"), make("b"), make("a")]),
+            vec![vec![0, 2], vec![1]]
+        );
+        assert_eq!(
+            occurrence_groups(&[make("a"), make("a"), make("b")]),
+            vec![vec![0, 1], vec![2]]
+        );
+    }
     #[test]
     fn owner_only_cid_advance_matches_the_serialized_half_em_width() {
         assert_eq!(cid_advance(&[], &[(0, "x".into())], 1), 0.5);
