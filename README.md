@@ -1,181 +1,34 @@
 # ScanWeave
 
-**A reconstruction pipeline for scanned documents: vectorize what is provably
-safe, raster-fallback what is not, and keep every page searchable.**
+ScanWeave reconstructs document-specific vector typography from scanned PDFs, rather than only adding invisible OCR text over page images.
 
-ScanWeave converts a page raster plus an OCR page (word/char boxes with a
-declared pixel binding) into a single searchable PDF whose text layer is bound
-to the *visual* evidence rather than to OCR labels alone. The pipeline is built
-around one question: **which ink can be safely turned into vector glyphs, and
-which must be preserved as exact source pixels?**
+This free, open-source, scriptable ClearScan-like converter has a working Rust CLI and reusable library components. It learns supported glyph shapes from repeated observations within your document; it does not require the original font.
 
-- **Ownership solver** — many-to-many mapping between connected ink components
-  and OCR symbol boxes. Touching characters merge into one unit that carries
-  every span involved; disconnected marks (dots, dakuten) stay attached; ink
-  that extends beyond its symbol boxes is *suspect* and never vectorized.
-- **Transactional fallback** — a region that is suspect, that touches non-text
-  (rules, stamps, barcodes), that is caller-protected, or whose traced outline
-  fails the fidelity policy degrades to an exact source raster patch plus an
-  invisible label overlay. No pixel is discarded and no label is lost.
-- **One shared font** — one CID per (glyph shape, semantic string) pair across
-  the whole document, so repeated content costs nothing extra. Wrong OCR labels
-  never corrupt the visual: the shape and the string travel independently.
-- **Honest measurement** — every run reports the candidates it actually
-  serialized and measured (vector vs whole-page searchable raster, ranked by
-  real bytes), the per-occurrence ink IoU, coverage denominators, and the
-  byte accounting of what was emitted.
+- Reuse reconstructed outlines for clearer, scalable text where the evidence supports replacement.
+- Produce searchable PDFs using Tesseract recognition and embedded Unicode fonts.
+- Reduce redundant raster storage while retaining unsupported text and artwork as images.
 
-## Current functionality
+## Build and convert
 
-`scanweave input.pdf output.pdf` runs Tesseract, collects document-wide glyph
-observations, reconstructs and reuses supported canonical outlines, removes
-superseded source ink, and assembles a searchable layered PDF. ClearScan is the
-PDF-to-PDF default. `--profile faithful` remains an independent preservation
-profile.
+Install [Rust with rustup](https://rustup.rs/), Git and the platform dependencies below. There are no prebuilt downloads to install.
 
-ClearScan retains native samples for verified full-page image inputs near the
-requested resolution. Other page graphics, crops and rotations use Poppler.
-Verified source JPEG resources remain reusable without recompression. Eligible
-unchanged whole-page tonal images may use quality-100, full-chroma JPEG when
-source-detail guards pass and the complete PDF becomes smaller; minor tonal
-differences are possible. Other native exceptions remain lossless, with grayscale
-storage, exact resource reuse and measured Flate predictors. Unsupported text and
-artwork remain raster; only already-qualified paper backgrounds may use
-reduced-resolution encoding. Faithful does not use the new lossy representation.
-Sparse OCR can retry Tesseract's block layout when confidence and character-box
-evidence support it. No new OCR model is required.
+```sh
+# Debian / Ubuntu
+sudo apt install build-essential pkg-config poppler-utils tesseract-ocr tesseract-ocr-eng
+# macOS, with Homebrew
+brew install poppler tesseract
 
-Real scans remain challenging: some receipts yield no usable OCR, historical
-styles may provide no accepted vectors, and preserved tonal imagery can remain
-much larger than Adobe/OCRmyPDF output. Search correctness depends on the supplied
-recognition. See [real-document results](CLEARSCAN_REAL_DOCUMENT_REPORT.md) and
-[packaging results](CLEARSCAN_PACKAGING_REPORT.md) for actual measurements and
-known failures. Earlier milestone reports document historical development;
-M1-C is not the current feature set. The independent holdout remains sealed.
-
-### Measured real-document state
-
-On the fixed 32-page development corpus, current ClearScan outputs total
-45,453,391 bytes versus a matched 59,534,496-byte pre-compaction baseline
-(23.65% smaller) and 81,969,566 input bytes. See the
-[tonal-raster report](CLEARSCAN_TONAL_RASTER_REPORT.md) for source-detail checks,
-limitations and the earlier frozen baseline distinction.
-Adobe XI totals 4,178,103 bytes on the same inputs: substantial tonal-raster
-and shaded-page limitations remain. CORD annotated numeric search is 17/49;
-some pages still yield no usable OCR or vector reconstruction.
-
-The accumulated implementation and whole-page compaction are merged in
-[PR #1](https://github.com/mitchins/scanweave/pull/1) and
-[PR #4](https://github.com/mitchins/scanweave/pull/4). Rejected shaded-paper and
-fringe experiments (#2/#3) are closed unmerged; their evidence branches remain
-available. No rejected reconstruction path was promoted.
-The damaged-crossbar donor regression is now corrected by selecting a supported
-actual witness when a cohort medoid is unsuitable; all original assertions and
-thresholds remain. See [the repair evidence](qualification/pr_closure/DONOR_FIX.md)
-and [publication status](GITHUB_CONSOLIDATION.md) for CI/review history. No skipped
-local test is presented as a green workspace run.
-
-## Build
-
-```bash
-cargo build --release
+git clone https://github.com/mitchins/scanweave.git
+cd scanweave
+cargo build --release --locked
+export PATH="$PWD/target/release:$PATH"
+scanweave input.pdf output.pdf
 ```
 
-Requires a Rust toolchain (2021 edition). The qualification harness
-additionally needs Python 3.12 with `pypdfium2`, `numpy`, `Pillow`,
-`fontTools`, `jsonschema` (see `qualification/.venv`), plus Poppler's
-`pdftotext`/`pdftoppm`.
+Conversion defaults to ClearScan at 300 DPI; the adjacent `output.pdf.json` records provenance and conversion results. Install additional Tesseract language data before selecting another language.
 
-## Usage
+Use `--profile faithful` for the independent preservation profile without ClearScan's guarded lossy whole-page encoding.
 
-Convert an image-only scanned PDF directly:
+OCR can fail, not every page vectorizes or becomes searchable, and ClearScan is not pixel-exact; real-document quality and size still vary.
 
-```bash
-./target/release/scanweave input.pdf output.pdf
-# Optional: --dpi 600 --lang eng+jpn --profile faithful
-```
-
-This path defaults to ClearScan and 300 DPI. Install Poppler (`pdfinfo`,
-`pdftoppm`), Tesseract and the requested language data first (for example,
-`apt install poppler-utils tesseract-ocr tesseract-ocr-eng`). The converter
-imports supported native full-page image samples or renders cropped/rotated
-pages, obtains Tesseract character boxes, and sends
-normalized, pixel-bound OCR to the existing document converter. It preserves
-physical page geometry; it does not reuse pre-existing PDF text. Pages where
-Tesseract finds no words remain images, with an explicit warning.
-
-`output.pdf.json` records the input hash, tool identities, raster/OCR hashes,
-hOCR, effective arguments and conversion results. Temporary inputs are removed
-automatically. Publication uses unique same-directory temporary files; PDF and
-report are two separate renames. Source-image hints have separate 512 MiB caps
-on aggregate decoded work and retained encoded bytes, checked before decoding.
-These are not a process peak-memory limit. The document budget is 512 MiB of
-RGB page samples, with an 80-million-pixel per-page cap. Split larger documents.
-The established `scanweave-cli` binary remains an alias. The image/bundle CLI
-and library interfaces below remain available.
-
-See [real-document results](CLEARSCAN_REAL_DOCUMENT_REPORT.md) for current
-measurements, representative PDFs and real-document limitations.
-
-
-One page (hOCR or the normalized OCR JSON):
-
-```bash
-scanweave build page.png --ocr page.hocr --dpi 300 \
-    --mode auto --output out.pdf --report out.json
-```
-
-A whole document from a hash-verified bundle (per-page source/OCR pairing):
-
-```bash
-scanweave build --bundle document.json \
-    --mode auto --output document.pdf --report document.report.json
-```
-
-Modes: `reconstruct` (vector + fallback patches) and `auto` (ranks the
-reconstruction against the whole-page searchable raster baseline by actual
-bytes, with the fidelity policy as a hard gate). `--min-ink-iou F` sets the
-fidelity threshold explicitly; the default is the SPEC's conservative 0.98.
-
-## Layout
-
-```
-crates/scanweave-core   # schema types: OCR page, bundle, limits, pixel hashing
-crates/scanweave-io     # ownership, planning, tracing, fonts, PDF assembly,
-                        # one-page convert + multi-page document convert
-crates/scanweave-cli    # `scanweave build` (single page and --bundle)
-probes/m0-font-pdf      # the qualification harness's measuring instrument
-qualification/          # gates, experiments, baseline comparisons, fixtures
-```
-
-## Qualification
-
-```bash
-cargo test                                            # unit + behaviour tests
-qualification/.venv/bin/python qualification/checks.py    # e-proofs + visual gates
-qualification/.venv/bin/python qualification/test_text_search.py
-qualification/.venv/bin/python qualification/test_m1b_paint_fidelity.py
-qualification/.venv/bin/python qualification/test_m1b_document_search.py
-qualification/.venv/bin/python qualification/test_m1b_baselines.py
-```
-
-The harness renders with two independent engines (Poppler and PDFium) and
-compares against the source raster at native scan DPI; search gates use native
-PDFium find. Nothing is gated on a renderer's own extraction order alone.
-
-## License
-
-Dual-licensed under either of
-
-- Apache License, Version 2.0 ([LICENSE-APACHE](LICENSE-APACHE))
-- MIT license ([LICENSE-MIT](LICENSE-MIT))
-
-at your option. Unless you explicitly state otherwise, any contribution
-intentionally submitted for inclusion in the work by you shall be dual licensed
-as above, without any additional terms or conditions.
-
-## Contributing
-
-This is a research codebase: behaviour changes come with a regression test and
-an independent review, and no threshold is ever relaxed to make a gate green.
-`qualification/policy/` records every policy revision explicitly.
+[Technical guide](docs/DEVELOPER_GUIDE.md) · [Measured results](CLEARSCAN_TONAL_RASTER_REPORT.md) · [MIT](LICENSE-MIT) / [Apache-2.0](LICENSE-APACHE)

@@ -287,3 +287,7 @@ Correction record (red→green):
 2. Execute real-document qualification and characterize remaining visual failures.
 3. Independently adjudicate the `m0-qual-1` proposal.
 4. Make the M1 authorization decision based on that evidence.
+
+## Deferred: OCR reconciliation (not implemented)
+
+Combine optical recognition hypotheses, repeated document-specific glyph shapes, and a lightweight language/context probability model. Calibrate influence by document/field type. Receipts, identifiers and other weak-language-prior documents may disable or sharply limit semantic correction. This is a future design item, not authorized implementation in the consolidation round.

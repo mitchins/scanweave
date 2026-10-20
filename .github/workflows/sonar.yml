@@ -1,0 +1,42 @@
+name: SonarCloud
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  analyze:
+    # Never provide repository secrets to fork pull requests or Dependabot.
+    if: >-
+      github.actor != 'dependabot[bot]' &&
+      (github.event_name == 'push' ||
+       github.event.pull_request.head.repo.full_name == github.repository)
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: dtolnay/rust-toolchain@683b588c487a69d01f6c6ddf40f036ff682cc2c8 # v1 (composite)
+        with:
+          toolchain: "1.99.0"
+          components: llvm-tools-preview
+      - name: Install pinned Rust coverage tool
+        run: cargo install cargo-llvm-cov --version 0.9.1 --locked
+      - name: Measure Rust workspace coverage
+        run: |
+          mkdir -p coverage
+          cargo llvm-cov --workspace --lcov --output-path coverage/lcov.info
+      - name: Require analysis credential
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        run: test -n "$SONAR_TOKEN" || { echo "SONAR_TOKEN is not configured"; exit 1; }
+      - name: Analyze and wait for server Quality Gate
+        uses: SonarSource/sonarqube-scan-action@d209202bc7d53ff1cc128f7f907dac145c9d6ae9 # v8.3.0
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
