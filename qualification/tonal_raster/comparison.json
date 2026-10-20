@@ -1,0 +1,1850 @@
+[
+  {
+    "id": "cord-00",
+    "arms": {
+      "baseline": {
+        "pdf_bytes": 898775,
+        "raster_bytes": 896799,
+        "filter": "/FlateDecode",
+        "sampling": null,
+        "pdf_sha256": "a0d57c12994d14af250fdb3d283ceb8f06f40e53c7fb8074e7461c556a18ff2b",
+        "pdfium_text": "",
+        "poppler_text": "\f",
+        "vector_occurrences": 0
+      },
+      "q98": {
+        "pdf_bytes": 360411,
+        "raster_bytes": 358532,
+        "filter": "/DCTDecode",
+        "sampling": [
+          [
+            1,
+            1,
+            1,
+            0
+          ],
+          [
+            2,
+            1,
+            1,
+            1
+          ],
+          [
+            3,
+            1,
+            1,
+            1
+          ]
+        ],
+        "pdf_sha256": "3092464c9d273e353801b058e6f045333d72f591e69d3cbdf63565f520b4d6d3",
+        "pdfium_text": "",
+        "poppler_text": "\f",
+        "vector_occurrences": 0,
+        "pdfium": {
+          "mae": 0.35521100271413353,
+          "max_channel_error": 6,
+          "changed_fraction": 0.3939059011235354,
+          "dark_and_light_ridge_tests": 20301,
+          "lost_ridges": 0,
+          "gradient_error_x": 0.5099490455007182,
+          "gradient_error_y": 0.5163338066312866
+        },
+        "poppler": {
+          "mae": 0.35541729108684794,
+          "max_channel_error": 6,
+          "changed_fraction": 0.39407336045100977,
+          "dark_and_light_ridge_tests": 20300,
+          "lost_ridges": 0,
+          "gradient_error_x": 0.5102548171899391,
+          "gradient_error_y": 0.5164840546154897
+        }
+      },
+      "q100": {
+        "pdf_bytes": 417835,
+        "raster_bytes": 415955,
+        "filter": "/DCTDecode",
+        "sampling": [
+          [
+            1,
+            1,
+            1,
+            0
+          ],
+          [
+            2,
+            1,
+            1,
+            1
+          ],
+          [
+            3,
+            1,
+            1,
+            1
+          ]
+        ],
+        "pdf_sha256": "6e9292bdb993ff552253be73f60b9d94fa50c3fff00368ee901aa3883bddcb39",
+        "pdfium_text": "",
+        "poppler_text": "\f",
+        "vector_occurrences": 0,
+        "pdfium": {
+          "mae": 0.2674281690517468,
+          "max_channel_error": 6,
+          "changed_fraction": 0.3228624527032146,
+          "dark_and_light_ridge_tests": 20301,
+          "lost_ridges": 0,
+          "gradient_error_x": 0.3798213093709509,
+          "gradient_error_y": 0.37585796099492436
+        },
+        "poppler": {
+          "mae": 0.2675845643331192,
+          "max_channel_error": 6,
+          "changed_fraction": 0.32299382716049385,
+          "dark_and_light_ridge_tests": 20300,
+          "lost_ridges": 0,
+          "gradient_error_x": 0.38003975711677734,
+          "gradient_error_y": 0.3759415098191968
+        }
+      }
+    },
+    "regions": [
+      {
+        "renderer": "pdfium",
+        "label": "faint item letters",
+        "fraction": [
+          0.26,
+          0.29,
+          0.57,
+          0.39
+        ],
+        "arms": {
+          "baseline": {
+            "mae": 0.0,
+            "max_channel_error": 0,
+            "changed_fraction": 0.0,
+            "dark_and_light_ridge_tests": 1465,
+            "lost_ridges": 0,
+            "gradient_error_x": 0.0,
+            "gradient_error_y": 0.0
+          },
+          "q98": {
+            "mae": 0.39484309223115194,
+            "max_channel_error": 4,
+            "changed_fraction": 0.4279563719862227,
+            "dark_and_light_ridge_tests": 1465,
+            "lost_ridges": 0,
+            "gradient_error_x": 0.5913123251415748,
+            "gradient_error_y": 0.6069739104613764
+          },
+          "q100": {
+            "mae": 0.2843379257558362,
+            "max_channel_error": 4,
+            "changed_fraction": 0.33978185993111365,
+            "dark_and_light_ridge_tests": 1465,
+            "lost_ridges": 0,
+            "gradient_error_x": 0.42081497618802444,
+            "gradient_error_y": 0.4172620171958838
+          }
+        }
+      },
+      {
+        "renderer": "pdfium",
+        "label": "amount punctuation",
+        "fraction": [
+          0.59,
+          0.28,
+          0.75,
+          0.4
+        ],
+        "arms": {
+          "baseline": {
+            "mae": 0.0,
+            "max_channel_error": 0,
+            "changed_fraction": 0.0,
+            "dark_and_light_ridge_tests": 681,
+            "lost_ridges": 0,
+            "gradient_error_x": 0.0,
+            "gradient_error_y": 0.0
+          },
+          "q98": {
+            "mae": 0.35482383324109945,
+            "max_channel_error": 4,
+            "changed_fraction": 0.37276332779929905,
+            "dark_and_light_ridge_tests": 681,
+            "lost_ridges": 0,
+            "gradient_error_x": 0.5440140479295859,
+            "gradient_error_y": 0.5427959025168978
+          },
+          "q100": {
+            "mae": 0.24600319744204635,
+            "max_channel_error": 3,
+            "changed_fraction": 0.2843571296808707,
+            "dark_and_light_ridge_tests": 681,
+            "lost_ridges": 0,
+            "gradient_error_x": 0.3719960995563917,
+            "gradient_error_y": 0.35970979390882457
+          }
+        }
+      },
+      {
+        "renderer": "pdfium",
+        "label": "financial total",
+        "fraction": [
+          0.29,
+          0.83,
+          0.79,
+          0.92
+        ],
+        "arms": {
+          "baseline": {
+            "mae": 0.0,
+            "max_channel_error": 0,
+            "changed_fraction": 0.0,
+            "dark_and_light_ridge_tests": 180,
+            "lost_ridges": 0,
+            "gradient_error_x": 0.0,
+            "gradient_error_y": 0.0
+          },
+          "q98": {
+            "mae": 0.31279267773520647,
+            "max_channel_error": 4,
+            "changed_fraction": 0.3564615261813538,
+            "dark_and_light_ridge_tests": 180,
+            "lost_ridges": 0,
+            "gradient_error_x": 0.4342356763541083,
+            "gradient_error_y": 0.45903705590780997
+          },
+          "q100": {
+            "mae": 0.24492470200085142,
+            "max_channel_error": 4,
+            "changed_fraction": 0.29749361430395915,
+            "dark_and_light_ridge_tests": 180,
+            "lost_ridges": 0,
+            "gradient_error_x": 0.34485133810704854,
+            "gradient_error_y": 0.3500765445727657
+          }
+        }
+      },
+      {
+        "renderer": "pdfium",
+        "label": "thin dashed rule",
+        "fraction": [
+          0.26,
+          0.259,
+          0.73,
+          0.281
+        ],
+        "arms": {
+          "baseline": {
+            "mae": 0.0,
+            "max_channel_error": 0,
+            "changed_fraction": 0.0,
+            "dark_and_light_ridge_tests": 320,
+            "lost_ridges": 0,
+            "gradient_error_x": 0.0,
+            "gradient_error_y": 0.0
+          },
+          "q98": {
+            "mae": 0.3036007506450856,
+            "max_channel_error": 3,
+            "changed_fraction": 0.31535890218156226,
+            "dark_and_light_ridge_tests": 320,
+            "lost_ridges": 0,
+            "gradient_error_x": 0.46674029637896824,
+            "gradient_error_y": 0.4868569404533844
+          },
+          "q100": {
+            "mae": 0.22709946047384472,
+            "max_channel_error": 3,
+            "changed_fraction": 0.24639338494018298,
+            "dark_and_light_ridge_tests": 320,
+            "lost_ridges": 0,
+            "gradient_error_x": 0.34828748484347444,
+            "gradient_error_y": 0.3477639551689929
+          }
+        }
+      },
+      {
+        "renderer": "pdfium",
+        "label": "fine woven background",
+        "fraction": [
+          0.02,
+          0.45,
+          0.18,
+          0.58
+        ],
+        "arms": {
+          "baseline": {
+            "mae": 0.0,
+            "max_channel_error": 0,
+            "changed_fraction": 0.0,
+            "dark_and_light_ridge_tests": 130,
+            "lost_ridges": 0,
+            "gradient_error_x": 0.0,
+            "gradient_error_y": 0.0
+          },
+          "q98": {
+            "mae": 0.3646796848235697,
+            "max_channel_error": 4,
+            "changed_fraction": 0.43066974991435425,
+            "dark_and_light_ridge_tests": 130,
+            "lost_ridges": 0,
+            "gradient_error_x": 0.4953063796354706,
+            "gradient_error_y": 0.5113788273273596
+          },
+          "q100": {
+            "mae": 0.302757793764988,
+            "max_channel_error": 4,
+            "changed_fraction": 0.38369304556354916,
+            "dark_and_light_ridge_tests": 130,
+            "lost_ridges": 0,
+            "gradient_error_x": 0.40640810064153887,
+            "gradient_error_y": 0.41282351761741803
+          }
+        }
+      },
+      {
+        "renderer": "poppler",
+        "label": "faint item letters",
+        "fraction": [
+          0.26,
+          0.29,
+          0.57,
+          0.39
+        ],
+        "arms": {
+          "baseline": {
+            "mae": 0.0,
+            "max_channel_error": 0,
+            "changed_fraction": 0.0,
+            "dark_and_light_ridge_tests": 1463,
+            "lost_ridges": 0,
+            "gradient_error_x": 0.0,
+            "gradient_error_y": 0.0
+          },
+          "q98": {
+            "mae": 0.3940954144008639,
+            "max_channel_error": 4,
+            "changed_fraction": 0.4276003702418142,
+            "dark_and_light_ridge_tests": 1463,
+            "lost_ridges": 0,
+            "gradient_error_x": 0.5902468685737917,
+            "gradient_error_y": 0.6053231082745453
+          },
+          "q100": {
+            "mae": 0.2842666512399244,
+            "max_channel_error": 4,
+            "changed_fraction": 0.3400728913571677,
+            "dark_and_light_ridge_tests": 1463,
+            "lost_ridges": 0,
+            "gradient_error_x": 0.4206756077012655,
+            "gradient_error_y": 0.41642758383679745
+          }
+        }
+      },
+      {
+        "renderer": "poppler",
+        "label": "amount punctuation",
+        "fraction": [
+          0.59,
+          0.28,
+          0.75,
+          0.4
+        ],
+        "arms": {
+          "baseline": {
+            "mae": 0.0,
+            "max_channel_error": 0,
+            "changed_fraction": 0.0,
+            "dark_and_light_ridge_tests": 681,
+            "lost_ridges": 0,
+            "gradient_error_x": 0.0,
+            "gradient_error_y": 0.0
+          },
+          "q98": {
+            "mae": 0.35607642917923726,
+            "max_channel_error": 4,
+            "changed_fraction": 0.3738686470178696,
+            "dark_and_light_ridge_tests": 681,
+            "lost_ridges": 0,
+            "gradient_error_x": 0.5459474140040614,
+            "gradient_error_y": 0.5447856735918084
+          },
+          "q100": {
+            "mae": 0.2466929682060803,
+            "max_channel_error": 3,
+            "changed_fraction": 0.28503132977488976,
+            "dark_and_light_ridge_tests": 681,
+            "lost_ridges": 0,
+            "gradient_error_x": 0.37302667832697817,
+            "gradient_error_y": 0.3607909836903205
+          }
+        }
+      },
+      {
+        "renderer": "poppler",
+        "label": "financial total",
+        "fraction": [
+          0.29,
+          0.83,
+          0.79,
+          0.92
+        ],
+        "arms": {
+          "baseline": {
+            "mae": 0.0,
+            "max_channel_error": 0,
+            "changed_fraction": 0.0,
+            "dark_and_light_ridge_tests": 185,
+            "lost_ridges": 0,
+            "gradient_error_x": 0.0,
+            "gradient_error_y": 0.0
+          },
+          "q98": {
+            "mae": 0.31253991060025543,
+            "max_channel_error": 4,
+            "changed_fraction": 0.3563218390804598,
+            "dark_and_light_ridge_tests": 185,
+            "lost_ridges": 0,
+            "gradient_error_x": 0.4343133388171054,
+            "gradient_error_y": 0.4597689273852657
+          },
+          "q100": {
+            "mae": 0.24400675819497658,
+            "max_channel_error": 4,
+            "changed_fraction": 0.296735312899106,
+            "dark_and_light_ridge_tests": 185,
+            "lost_ridges": 0,
+            "gradient_error_x": 0.3443745030852468,
+            "gradient_error_y": 0.349740055102657
+          }
+        }
+      },
+      {
+        "renderer": "poppler",
+        "label": "thin dashed rule",
+        "fraction": [
+          0.26,
+          0.259,
+          0.73,
+          0.281
+        ],
+        "arms": {
+          "baseline": {
+            "mae": 0.0,
+            "max_channel_error": 0,
+            "changed_fraction": 0.0,
+            "dark_and_light_ridge_tests": 320,
+            "lost_ridges": 0,
+            "gradient_error_x": 0.0,
+            "gradient_error_y": 0.0
+          },
+          "q98": {
+            "mae": 0.3036007506450856,
+            "max_channel_error": 3,
+            "changed_fraction": 0.31535890218156226,
+            "dark_and_light_ridge_tests": 320,
+            "lost_ridges": 0,
+            "gradient_error_x": 0.46674029637896824,
+            "gradient_error_y": 0.4868569404533844
+          },
+          "q100": {
+            "mae": 0.22709946047384472,
+            "max_channel_error": 3,
+            "changed_fraction": 0.24639338494018298,
+            "dark_and_light_ridge_tests": 320,
+            "lost_ridges": 0,
+            "gradient_error_x": 0.34828748484347444,
+            "gradient_error_y": 0.3477639551689929
+          }
+        }
+      },
+      {
+        "renderer": "poppler",
+        "label": "fine woven background",
+        "fraction": [
+          0.02,
+          0.45,
+          0.18,
+          0.58
+        ],
+        "arms": {
+          "baseline": {
+            "mae": 0.0,
+            "max_channel_error": 0,
+            "changed_fraction": 0.0,
+            "dark_and_light_ridge_tests": 132,
+            "lost_ridges": 0,
+            "gradient_error_x": 0.0,
+            "gradient_error_y": 0.0
+          },
+          "q98": {
+            "mae": 0.3645935322747719,
+            "max_channel_error": 4,
+            "changed_fraction": 0.4305052999020902,
+            "dark_and_light_ridge_tests": 132,
+            "lost_ridges": 0,
+            "gradient_error_x": 0.495230265582122,
+            "gradient_error_y": 0.5119449501782503
+          },
+          "q100": {
+            "mae": 0.30241369034949556,
+            "max_channel_error": 4,
+            "changed_fraction": 0.3831680217955813,
+            "dark_and_light_ridge_tests": 132,
+            "lost_ridges": 0,
+            "gradient_error_x": 0.4059388991868595,
+            "gradient_error_y": 0.41318018757427094
+          }
+        }
+      }
+    ]
+  },
+  {
+    "id": "cord-05",
+    "arms": {
+      "baseline": {
+        "pdf_bytes": 4452414,
+        "raster_bytes": 4447396,
+        "filter": "/FlateDecode",
+        "sampling": null,
+        "pdf_sha256": "71764c86c4fd0f260f495716e09781b8539ea6380d3c50b4f9dd02bd1804315d",
+        "pdfium_text": "fine Sere cere miss tent Set One\r\nteed mee uate ween\r\nEPy Gete TOE WOT) nnd emed mabe\r\nLowy game Dom Bae\r\nne ate:\r\nneon moar 2908 SREY wRhe omeh met\r\nAte\r\nme Oe ne SeeS REE ond ake ep mee ome <1 VOR LEE HERE Lee mm\r\nstent Sty whee wee Dane",
+        "poppler_text": "fine Sere cere miss tent Set One\nteed\nmee uate ween\nEPy Gete TOE WOT) nnd emed mabe Lowy game Dom Bae\nne ate: neon moar\n2908 SREY wRhe omeh met\nAte\nme Oe\nne SeeS REE ond\nake ep mee ome\n<1 VOR LEE HERE Lee mm\nstent\nSty whee wee Dane\n\f",
+        "vector_occurrences": 0
+      },
+      "q98": {
+        "pdf_bytes": 1701058,
+        "raster_bytes": 1696139,
+        "filter": "/DCTDecode",
+        "sampling": [
+          [
+            1,
+            1,
+            1,
+            0
+          ],
+          [
+            2,
+            1,
+            1,
+            1
+          ],
+          [
+            3,
+            1,
+            1,
+            1
+          ]
+        ],
+        "pdf_sha256": "d841c000b9001a086550078a86775e6a5ccbbccdbb3c43972edc9fa6165e96f0",
+        "pdfium_text": "fine Sere cere miss tent Set One\r\nteed mee uate ween\r\nEPy Gete TOE WOT) nnd emed mabe\r\nLowy game Dom Bae\r\nne ate:\r\nneon moar 2908 SREY wRhe omeh met\r\nAte\r\nme Oe ne SeeS REE ond ake ep mee ome <1 VOR LEE HERE Lee mm\r\nstent Sty whee wee Dane",
+        "poppler_text": "fine Sere cere miss tent Set One\nteed\nmee uate ween\nEPy Gete TOE WOT) nnd emed mabe Lowy game Dom Bae\nne ate: neon moar\n2908 SREY wRhe omeh met\nAte\nme Oe\nne SeeS REE ond\nake ep mee ome\n<1 VOR LEE HERE Lee mm\nstent\nSty whee wee Dane\n\f",
+        "vector_occurrences": 0,
+        "pdfium": {
+          "mae": 0.16875225958062184,
+          "max_channel_error": 8,
+          "changed_fraction": 0.20693306416079177,
+          "dark_and_light_ridge_tests": 39230,
+          "lost_ridges": 0,
+          "gradient_error_x": 0.2496316528154744,
+          "gradient_error_y": 0.20844994548865212
+        },
+        "poppler": {
+          "mae": 0.1624987213699906,
+          "max_channel_error": 6,
+          "changed_fraction": 0.21417321099175346,
+          "dark_and_light_ridge_tests": 20604,
+          "lost_ridges": 0,
+          "gradient_error_x": 0.2456614808626295,
+          "gradient_error_y": 0.17869506637206833
+        }
+      },
+      "q100": {
+        "pdf_bytes": 1885848,
+        "raster_bytes": 1880927,
+        "filter": "/DCTDecode",
+        "sampling": [
+          [
+            1,
+            1,
+            1,
+            0
+          ],
+          [
+            2,
+            1,
+            1,
+            1
+          ],
+          [
+            3,
+            1,
+            1,
+            1
+          ]
+        ],
+        "pdf_sha256": "f1c8d434c42cc5aa3105d4baeb6ee881240850602a98f591676e7b5f6b4adb59",
+        "pdfium_text": "fine Sere cere miss tent Set One\r\nteed mee uate ween\r\nEPy Gete TOE WOT) nnd emed mabe\r\nLowy game Dom Bae\r\nne ate:\r\nneon moar 2908 SREY wRhe omeh met\r\nAte\r\nme Oe ne SeeS REE ond ake ep mee ome <1 VOR LEE HERE Lee mm\r\nstent Sty whee wee Dane",
+        "poppler_text": "fine Sere cere miss tent Set One\nteed\nmee uate ween\nEPy Gete TOE WOT) nnd emed mabe Lowy game Dom Bae\nne ate: neon moar\n2908 SREY wRhe omeh met\nAte\nme Oe\nne SeeS REE ond\nake ep mee ome\n<1 VOR LEE HERE Lee mm\nstent\nSty whee wee Dane\n\f",
+        "vector_occurrences": 0,
+        "pdfium": {
+          "mae": 0.13666910983821404,
+          "max_channel_error": 6,
+          "changed_fraction": 0.17692315025081345,
+          "dark_and_light_ridge_tests": 39230,
+          "lost_ridges": 0,
+          "gradient_error_x": 0.2019490082230833,
+          "gradient_error_y": 0.1713718191229715
+        },
+        "poppler": {
+          "mae": 0.13315797735143592,
+          "max_channel_error": 5,
+          "changed_fraction": 0.18357382880316842,
+          "dark_and_light_ridge_tests": 20604,
+          "lost_ridges": 0,
+          "gradient_error_x": 0.2012387328286612,
+          "gradient_error_y": 0.1478648878052768
+        }
+      }
+    },
+    "regions": [
+      {
+        "renderer": "pdfium",
+        "label": "small dot-matrix words",
+        "fraction": [
+          0.19,
+          0.32,
+          0.58,
+          0.42
+        ],
+        "arms": {
+          "baseline": {
+            "mae": 0.0,
+            "max_channel_error": 0,
+            "changed_fraction": 0.0,
+            "dark_and_light_ridge_tests": 6972,
+            "lost_ridges": 0,
+            "gradient_error_x": 0.0,
+            "gradient_error_y": 0.0
+          },
+          "q98": {
+            "mae": 0.28896274317293597,
+            "max_channel_error": 6,
+            "changed_fraction": 0.3820680952212592,
+            "dark_and_light_ridge_tests": 6972,
+            "lost_ridges": 0,
+            "gradient_error_x": 0.3646807807718252,
+            "gradient_error_y": 0.31544904744846874
+          },
+          "q100": {
+            "mae": 0.2265462031977938,
+            "max_channel_error": 5,
+            "changed_fraction": 0.3328256606770359,
+            "dark_and_light_ridge_tests": 6972,
+            "lost_ridges": 0,
+            "gradient_error_x": 0.2888657700456495,
+            "gradient_error_y": 0.2530605625088606
+          }
+        }
+      },
+      {
+        "renderer": "pdfium",
+        "label": "decimal punctuation",
+        "fraction": [
+          0.64,
+          0.32,
+          0.81,
+          0.42
+        ],
+        "arms": {
+          "baseline": {
+            "mae": 0.0,
+            "max_channel_error": 0,
+            "changed_fraction": 0.0,
+            "dark_and_light_ridge_tests": 3567,
+            "lost_ridges": 0,
+            "gradient_error_x": 0.0,
+            "gradient_error_y": 0.0
+          },
+          "q98": {
+            "mae": 0.28703033780749465,
+            "max_channel_error": 7,
+            "changed_fraction": 0.3767339454119056,
+            "dark_and_light_ridge_tests": 3567,
+            "lost_ridges": 0,
+            "gradient_error_x": 0.3706178834822238,
+            "gradient_error_y": 0.3120954940203621
+          },
+          "q100": {
+            "mae": 0.2145414400479018,
+            "max_channel_error": 5,
+            "changed_fraction": 0.3203058729604311,
+            "dark_and_light_ridge_tests": 3567,
+            "lost_ridges": 0,
+            "gradient_error_x": 0.27386084282682754,
+            "gradient_error_y": 0.23580489019338205
+          }
+        }
+      },
+      {
+        "renderer": "pdfium",
+        "label": "faint digits",
+        "fraction": [
+          0.32,
+          0.52,
+          0.81,
+          0.57
+        ],
+        "arms": {
+          "baseline": {
+            "mae": 0.0,
+            "max_channel_error": 0,
+            "changed_fraction": 0.0,
+            "dark_and_light_ridge_tests": 2238,
+            "lost_ridges": 0,
+            "gradient_error_x": 0.0,
+            "gradient_error_y": 0.0
+          },
+          "q98": {
+            "mae": 0.17421273592718212,
+            "max_channel_error": 6,
+            "changed_fraction": 0.222653330164834,
+            "dark_and_light_ridge_tests": 2238,
+            "lost_ridges": 0,
+            "gradient_error_x": 0.24655724132665197,
+            "gradient_error_y": 0.20352117783284704
+          },
+          "q100": {
+            "mae": 0.13920801918382336,
+            "max_channel_error": 5,
+            "changed_fraction": 0.19246473244183282,
+            "dark_and_light_ridge_tests": 2238,
+            "lost_ridges": 0,
+            "gradient_error_x": 0.19555625209468516,
+            "gradient_error_y": 0.16054968448919094
+          }
+        }
+      },
+      {
+        "renderer": "pdfium",
+        "label": "thin horizontal rules",
+        "fraction": [
+          0.17,
+          0.59,
+          0.82,
+          0.61
+        ],
+        "arms": {
+          "baseline": {
+            "mae": 0.0,
+            "max_channel_error": 0,
+            "changed_fraction": 0.0,
+            "dark_and_light_ridge_tests": 2487,
+            "lost_ridges": 0,
+            "gradient_error_x": 0.0,
+            "gradient_error_y": 0.0
+          },
+          "q98": {
+            "mae": 0.28889467799884944,
+            "max_channel_error": 6,
+            "changed_fraction": 0.3630450356572992,
+            "dark_and_light_ridge_tests": 2487,
+            "lost_ridges": 0,
+            "gradient_error_x": 0.377450531143588,
+            "gradient_error_y": 0.33895296609471065
+          },
+          "q100": {
+            "mae": 0.21365614857750714,
+            "max_channel_error": 5,
+            "changed_fraction": 0.29759191116610767,
+            "dark_and_light_ridge_tests": 2487,
+            "lost_ridges": 0,
+            "gradient_error_x": 0.28351984711292505,
+            "gradient_error_y": 0.2568818449032867
+          }
+        }
+      },
+      {
+        "renderer": "pdfium",
+        "label": "paper texture and wood",
+        "fraction": [
+          0.04,
+          0.68,
+          0.32,
+          0.78
+        ],
+        "arms": {
+          "baseline": {
+            "mae": 0.0,
+            "max_channel_error": 0,
+            "changed_fraction": 0.0,
+            "dark_and_light_ridge_tests": 190,
+            "lost_ridges": 0,
+            "gradient_error_x": 0.0,
+            "gradient_error_y": 0.0
+          },
+          "q98": {
+            "mae": 0.12303103526391301,
+            "max_channel_error": 4,
+            "changed_fraction": 0.16233859397417505,
+            "dark_and_light_ridge_tests": 190,
+            "lost_ridges": 0,
+            "gradient_error_x": 0.19182086531303177,
+            "gradient_error_y": 0.14391599001099725
+          },
+          "q100": {
+            "mae": 0.108310050592766,
+            "max_channel_error": 4,
+            "changed_fraction": 0.1461413576984067,
+            "dark_and_light_ridge_tests": 190,
+            "lost_ridges": 0,
+            "gradient_error_x": 0.1727401006954292,
+            "gradient_error_y": 0.12910503572920531
+          }
+        }
+      },
+      {
+        "renderer": "poppler",
+        "label": "small dot-matrix words",
+        "fraction": [
+          0.19,
+          0.32,
+          0.58,
+          0.42
+        ],
+        "arms": {
+          "baseline": {
+            "mae": 0.0,
+            "max_channel_error": 0,
+            "changed_fraction": 0.0,
+            "dark_and_light_ridge_tests": 3599,
+            "lost_ridges": 0,
+            "gradient_error_x": 0.0,
+            "gradient_error_y": 0.0
+          },
+          "q98": {
+            "mae": 0.260655300286973,
+            "max_channel_error": 5,
+            "changed_fraction": 0.3940677735364107,
+            "dark_and_light_ridge_tests": 3599,
+            "lost_ridges": 0,
+            "gradient_error_x": 0.34279975791605677,
+            "gradient_error_y": 0.24660335117471527
+          },
+          "q100": {
+            "mae": 0.21004387182963863,
+            "max_channel_error": 4,
+            "changed_fraction": 0.34200968193377296,
+            "dark_and_light_ridge_tests": 3599,
+            "lost_ridges": 0,
+            "gradient_error_x": 0.28003746011690356,
+            "gradient_error_y": 0.2001722020880927
+          }
+        }
+      },
+      {
+        "renderer": "poppler",
+        "label": "decimal punctuation",
+        "fraction": [
+          0.64,
+          0.32,
+          0.81,
+          0.42
+        ],
+        "arms": {
+          "baseline": {
+            "mae": 0.0,
+            "max_channel_error": 0,
+            "changed_fraction": 0.0,
+            "dark_and_light_ridge_tests": 1720,
+            "lost_ridges": 0,
+            "gradient_error_x": 0.0,
+            "gradient_error_y": 0.0
+          },
+          "q98": {
+            "mae": 0.2593250332981072,
+            "max_channel_error": 5,
+            "changed_fraction": 0.39084161356686825,
+            "dark_and_light_ridge_tests": 1720,
+            "lost_ridges": 0,
+            "gradient_error_x": 0.34355317376996347,
+            "gradient_error_y": 0.24244053374201943
+          },
+          "q100": {
+            "mae": 0.19964273580166625,
+            "max_channel_error": 5,
+            "changed_fraction": 0.33286851468555956,
+            "dark_and_light_ridge_tests": 1720,
+            "lost_ridges": 0,
+            "gradient_error_x": 0.263946403487634,
+            "gradient_error_y": 0.18558034432471787
+          }
+        }
+      },
+      {
+        "renderer": "poppler",
+        "label": "faint digits",
+        "fraction": [
+          0.32,
+          0.52,
+          0.81,
+          0.57
+        ],
+        "arms": {
+          "baseline": {
+            "mae": 0.0,
+            "max_channel_error": 0,
+            "changed_fraction": 0.0,
+            "dark_and_light_ridge_tests": 1016,
+            "lost_ridges": 0,
+            "gradient_error_x": 0.0,
+            "gradient_error_y": 0.0
+          },
+          "q98": {
+            "mae": 0.16015179992366796,
+            "max_channel_error": 5,
+            "changed_fraction": 0.22684439067597054,
+            "dark_and_light_ridge_tests": 1016,
+            "lost_ridges": 0,
+            "gradient_error_x": 0.23462738422472323,
+            "gradient_error_y": 0.16294585736960307
+          },
+          "q100": {
+            "mae": 0.1301403501191788,
+            "max_channel_error": 4,
+            "changed_fraction": 0.1954243988852643,
+            "dark_and_light_ridge_tests": 1016,
+            "lost_ridges": 0,
+            "gradient_error_x": 0.190025392145336,
+            "gradient_error_y": 0.13063492539190721
+          }
+        }
+      },
+      {
+        "renderer": "poppler",
+        "label": "thin horizontal rules",
+        "fraction": [
+          0.17,
+          0.59,
+          0.82,
+          0.61
+        ],
+        "arms": {
+          "baseline": {
+            "mae": 0.0,
+            "max_channel_error": 0,
+            "changed_fraction": 0.0,
+            "dark_and_light_ridge_tests": 1128,
+            "lost_ridges": 0,
+            "gradient_error_x": 0.0,
+            "gradient_error_y": 0.0
+          },
+          "q98": {
+            "mae": 0.25756662376243,
+            "max_channel_error": 5,
+            "changed_fraction": 0.3897714127441876,
+            "dark_and_light_ridge_tests": 1128,
+            "lost_ridges": 0,
+            "gradient_error_x": 0.3500982612678525,
+            "gradient_error_y": 0.2555315588739207
+          },
+          "q100": {
+            "mae": 0.19668605503690306,
+            "max_channel_error": 4,
+            "changed_fraction": 0.3179774182511364,
+            "dark_and_light_ridge_tests": 1128,
+            "lost_ridges": 0,
+            "gradient_error_x": 0.27216785411503847,
+            "gradient_error_y": 0.195762151875768
+          }
+        }
+      },
+      {
+        "renderer": "poppler",
+        "label": "paper texture and wood",
+        "fraction": [
+          0.04,
+          0.68,
+          0.32,
+          0.78
+        ],
+        "arms": {
+          "baseline": {
+            "mae": 0.0,
+            "max_channel_error": 0,
+            "changed_fraction": 0.0,
+            "dark_and_light_ridge_tests": 118,
+            "lost_ridges": 0,
+            "gradient_error_x": 0.0,
+            "gradient_error_y": 0.0
+          },
+          "q98": {
+            "mae": 0.12116846284741917,
+            "max_channel_error": 4,
+            "changed_fraction": 0.1705312913594252,
+            "dark_and_light_ridge_tests": 118,
+            "lost_ridges": 0,
+            "gradient_error_x": 0.1942432261979719,
+            "gradient_error_y": 0.12886269791488977
+          },
+          "q100": {
+            "mae": 0.10733471985882649,
+            "max_channel_error": 3,
+            "changed_fraction": 0.15234637927774627,
+            "dark_and_light_ridge_tests": 118,
+            "lost_ridges": 0,
+            "gradient_error_x": 0.17448453355640953,
+            "gradient_error_y": 0.11508295931846559
+          }
+        }
+      }
+    ]
+  },
+  {
+    "id": "history-02",
+    "arms": {
+      "baseline": {
+        "pdf_bytes": 5186194,
+        "raster_bytes": 5171835,
+        "filter": "/FlateDecode",
+        "sampling": null,
+        "pdf_sha256": "8f14ae1e0831cafced4e9606c5924fd5b2dc1a5a8f09f252ff7ed3302bee072d",
+        "pdfium_text": "19\r\nnem Geift dufter, twie diefe Krduter, dem Geift jener\r\nfchonen Vorwelt, in deren Ginn der Tempel hier gebaut\r\nift. \u2014\r\nDein Geift fpridt ja die heilige Ordnung der\r\nGdhinheit aus wie er, und ob ic) ihm was bin, ob id\r\nihm was bleibe, das ift dann einerlei.\r\nJa fiifer Freund! ob id Die was bin: mas foll\r\nid) Danad fragen? \u2014\r\nmeiff id) dod), daR die Lerdhe\r\nnidt umfonft. jubelnd, auffteigt, Daf der INorgenwind\r\nnidt ungefiblt in den Bweigen [ifpelt, ja Daf die ganze\r\nNatur nidj\u00e9 unbegriffen in ihr Gdweigen verfunken ift;\r\nwas follt\u2019 id) gagen, von Dic nidt verftanden nidjt ges\r\nfable zu fein? \u2014\r\nDrum will idp nidt fcwodren Dir ets\r\nwas gu fein; es ift mic gewif, daf id) Dir bin, was\r\nin einftimmender Gd\u00e9nheit ein Don der Natur, cine\r\ngeiftige Berihrung diefer finnliden Welt Dir fein Fann.\r\n3m Juli.\r\nDiefe Lage, viefe Gegenden fie tragen das Antlis\r\ndes Paradiefes, Die Fille ladjt midy an in der reifens\r\nden Frudht, das Leben jauchgt in mir, und einfam bin\r\nid) wie der erfte Wienfd); und id) [erne wie diefer herrs\r\nfen und. gebieten dem Gli: dag die Welt foll",
+        "poppler_text": "19\nnem Geift dufter, twie diefe Krduter, dem Geift jener\nfchonen Vorwelt, in deren Ginn der Tempel hier gebaut\nift. \u2014\nDein Geift fpridt ja die heilige Ordnung der\nGdhinheit aus wie er, und ob ic) ihm was bin, ob id\nihm was bleibe, das ift dann einerlei.\nJa fiifer Freund! ob id Die was bin: mas foll\nid) Danad fragen? \u2014\nmeiff id) dod), daR die Lerdhe\nnidt umfonft. jubelnd, auffteigt, Daf der INorgenwind\nnidt ungefiblt in den Bweigen [ifpelt, ja Daf die ganze\nNatur nidj\u00e9 unbegriffen in ihr Gdweigen verfunken ift;\nwas follt\u2019 id) gagen, von Dic nidt verftanden nidjt ges\nfable zu fein? \u2014 Drum will idp nidt fcwodren Dir ets\nwas gu fein; es ift mic gewif, daf id) Dir bin, was\nin einftimmender Gd\u00e9nheit ein Don der Natur, cine\ngeiftige Berihrung diefer finnliden Welt Dir fein Fann.\n3m Juli.\nDiefe Lage, viefe Gegenden fie tragen das Antlis\ndes Paradiefes,\nDie Fille ladjt midy an in der reifens\nden Frudht, das Leben jauchgt in mir, und einfam bin\nid) wie der erfte Wienfd); und id) [erne wie diefer herrs\nfen und. gebieten dem Gli: dag die Welt foll\n\f",
+        "vector_occurrences": 0
+      },
+      "q98": {
+        "pdf_bytes": 1791549,
+        "raster_bytes": 1777290,
+        "filter": "/DCTDecode",
+        "sampling": [
+          [
+            1,
+            1,
+            1,
+            0
+          ],
+          [
+            2,
+            1,
+            1,
+            1
+          ],
+          [
+            3,
+            1,
+            1,
+            1
+          ]
+        ],
+        "pdf_sha256": "924b606223344b9cbebceb1b50beb32e18f5d80179bafe55162fa6b0fc0b9c37",
+        "pdfium_text": "19\r\nnem Geift dufter, twie diefe Krduter, dem Geift jener\r\nfchonen Vorwelt, in deren Ginn der Tempel hier gebaut\r\nift. \u2014\r\nDein Geift fpridt ja die heilige Ordnung der\r\nGdhinheit aus wie er, und ob ic) ihm was bin, ob id\r\nihm was bleibe, das ift dann einerlei.\r\nJa fiifer Freund! ob id Die was bin: mas foll\r\nid) Danad fragen? \u2014\r\nmeiff id) dod), daR die Lerdhe\r\nnidt umfonft. jubelnd, auffteigt, Daf der INorgenwind\r\nnidt ungefiblt in den Bweigen [ifpelt, ja Daf die ganze\r\nNatur nidj\u00e9 unbegriffen in ihr Gdweigen verfunken ift;\r\nwas follt\u2019 id) gagen, von Dic nidt verftanden nidjt ges\r\nfable zu fein? \u2014\r\nDrum will idp nidt fcwodren Dir ets\r\nwas gu fein; es ift mic gewif, daf id) Dir bin, was\r\nin einftimmender Gd\u00e9nheit ein Don der Natur, cine\r\ngeiftige Berihrung diefer finnliden Welt Dir fein Fann.\r\n3m Juli.\r\nDiefe Lage, viefe Gegenden fie tragen das Antlis\r\ndes Paradiefes, Die Fille ladjt midy an in der reifens\r\nden Frudht, das Leben jauchgt in mir, und einfam bin\r\nid) wie der erfte Wienfd); und id) [erne wie diefer herrs\r\nfen und. gebieten dem Gli: dag die Welt foll",
+        "poppler_text": "19\nnem Geift dufter, twie diefe Krduter, dem Geift jener\nfchonen Vorwelt, in deren Ginn der Tempel hier gebaut\nift. \u2014\nDein Geift fpridt ja die heilige Ordnung der\nGdhinheit aus wie er, und ob ic) ihm was bin, ob id\nihm was bleibe, das ift dann einerlei.\nJa fiifer Freund! ob id Die was bin: mas foll\nid) Danad fragen? \u2014\nmeiff id) dod), daR die Lerdhe\nnidt umfonft. jubelnd, auffteigt, Daf der INorgenwind\nnidt ungefiblt in den Bweigen [ifpelt, ja Daf die ganze\nNatur nidj\u00e9 unbegriffen in ihr Gdweigen verfunken ift;\nwas follt\u2019 id) gagen, von Dic nidt verftanden nidjt ges\nfable zu fein? \u2014 Drum will idp nidt fcwodren Dir ets\nwas gu fein; es ift mic gewif, daf id) Dir bin, was\nin einftimmender Gd\u00e9nheit ein Don der Natur, cine\ngeiftige Berihrung diefer finnliden Welt Dir fein Fann.\n3m Juli.\nDiefe Lage, viefe Gegenden fie tragen das Antlis\ndes Paradiefes,\nDie Fille ladjt midy an in der reifens\nden Frudht, das Leben jauchgt in mir, und einfam bin\nid) wie der erfte Wienfd); und id) [erne wie diefer herrs\nfen und. gebieten dem Gli: dag die Welt foll\n\f",
+        "vector_occurrences": 0,
+        "pdfium": {
+          "mae": 0.8830815904915855,
+          "max_channel_error": 8,
+          "changed_fraction": 0.95341757343833,
+          "dark_and_light_ridge_tests": 12672,
+          "lost_ridges": 0,
+          "gradient_error_x": 0.7423525572835429,
+          "gradient_error_y": 0.736388237843144
+        },
+        "poppler": {
+          "mae": 0.8831224455152061,
+          "max_channel_error": 8,
+          "changed_fraction": 0.9534315300139722,
+          "dark_and_light_ridge_tests": 12672,
+          "lost_ridges": 0,
+          "gradient_error_x": 0.7423716756834234,
+          "gradient_error_y": 0.7364017276854241
+        }
+      },
+      "q100": {
+        "pdf_bytes": 2727167,
+        "raster_bytes": 2712909,
+        "filter": "/DCTDecode",
+        "sampling": [
+          [
+            1,
+            1,
+            1,
+            0
+          ],
+          [
+            2,
+            1,
+            1,
+            1
+          ],
+          [
+            3,
+            1,
+            1,
+            1
+          ]
+        ],
+        "pdf_sha256": "b0a4dcb8c8cc411c2ce50525397ca1a45e5689e8795f73f0283cb8a043976dc3",
+        "pdfium_text": "19\r\nnem Geift dufter, twie diefe Krduter, dem Geift jener\r\nfchonen Vorwelt, in deren Ginn der Tempel hier gebaut\r\nift. \u2014\r\nDein Geift fpridt ja die heilige Ordnung der\r\nGdhinheit aus wie er, und ob ic) ihm was bin, ob id\r\nihm was bleibe, das ift dann einerlei.\r\nJa fiifer Freund! ob id Die was bin: mas foll\r\nid) Danad fragen? \u2014\r\nmeiff id) dod), daR die Lerdhe\r\nnidt umfonft. jubelnd, auffteigt, Daf der INorgenwind\r\nnidt ungefiblt in den Bweigen [ifpelt, ja Daf die ganze\r\nNatur nidj\u00e9 unbegriffen in ihr Gdweigen verfunken ift;\r\nwas follt\u2019 id) gagen, von Dic nidt verftanden nidjt ges\r\nfable zu fein? \u2014\r\nDrum will idp nidt fcwodren Dir ets\r\nwas gu fein; es ift mic gewif, daf id) Dir bin, was\r\nin einftimmender Gd\u00e9nheit ein Don der Natur, cine\r\ngeiftige Berihrung diefer finnliden Welt Dir fein Fann.\r\n3m Juli.\r\nDiefe Lage, viefe Gegenden fie tragen das Antlis\r\ndes Paradiefes, Die Fille ladjt midy an in der reifens\r\nden Frudht, das Leben jauchgt in mir, und einfam bin\r\nid) wie der erfte Wienfd); und id) [erne wie diefer herrs\r\nfen und. gebieten dem Gli: dag die Welt foll",
+        "poppler_text": "19\nnem Geift dufter, twie diefe Krduter, dem Geift jener\nfchonen Vorwelt, in deren Ginn der Tempel hier gebaut\nift. \u2014\nDein Geift fpridt ja die heilige Ordnung der\nGdhinheit aus wie er, und ob ic) ihm was bin, ob id\nihm was bleibe, das ift dann einerlei.\nJa fiifer Freund! ob id Die was bin: mas foll\nid) Danad fragen? \u2014\nmeiff id) dod), daR die Lerdhe\nnidt umfonft. jubelnd, auffteigt, Daf der INorgenwind\nnidt ungefiblt in den Bweigen [ifpelt, ja Daf die ganze\nNatur nidj\u00e9 unbegriffen in ihr Gdweigen verfunken ift;\nwas follt\u2019 id) gagen, von Dic nidt verftanden nidjt ges\nfable zu fein? \u2014 Drum will idp nidt fcwodren Dir ets\nwas gu fein; es ift mic gewif, daf id) Dir bin, was\nin einftimmender Gd\u00e9nheit ein Don der Natur, cine\ngeiftige Berihrung diefer finnliden Welt Dir fein Fann.\n3m Juli.\nDiefe Lage, viefe Gegenden fie tragen das Antlis\ndes Paradiefes,\nDie Fille ladjt midy an in der reifens\nden Frudht, das Leben jauchgt in mir, und einfam bin\nid) wie der erfte Wienfd); und id) [erne wie diefer herrs\nfen und. gebieten dem Gli: dag die Welt foll\n\f",
+        "vector_occurrences": 0,
+        "pdfium": {
+          "mae": 0.6529713447283755,
+          "max_channel_error": 6,
+          "changed_fraction": 0.9042992821311282,
+          "dark_and_light_ridge_tests": 12672,
+          "lost_ridges": 0,
+          "gradient_error_x": 0.6308688996534598,
+          "gradient_error_y": 0.6239143881533752
+        },
+        "poppler": {
+          "mae": 0.6529723212459139,
+          "max_channel_error": 6,
+          "changed_fraction": 0.9043057677491806,
+          "dark_and_light_ridge_tests": 12672,
+          "lost_ridges": 0,
+          "gradient_error_x": 0.6308265796669196,
+          "gradient_error_y": 0.6239138137267709
+        }
+      }
+    },
+    "regions": [
+      {
+        "renderer": "pdfium",
+        "label": "small blackletter and terminals",
+        "fraction": [
+          0.13,
+          0.18,
+          0.71,
+          0.225
+        ],
+        "arms": {
+          "baseline": {
+            "mae": 0.0,
+            "max_channel_error": 0,
+            "changed_fraction": 0.0,
+            "dark_and_light_ridge_tests": 1020,
+            "lost_ridges": 0,
+            "gradient_error_x": 0.0,
+            "gradient_error_y": 0.0
+          },
+          "q98": {
+            "mae": 0.8733335996910251,
+            "max_channel_error": 7,
+            "changed_fraction": 0.9523652563026889,
+            "dark_and_light_ridge_tests": 1020,
+            "lost_ridges": 0,
+            "gradient_error_x": 0.7662827269954906,
+            "gradient_error_y": 0.7776725804133382
+          },
+          "q100": {
+            "mae": 0.6479883335331016,
+            "max_channel_error": 6,
+            "changed_fraction": 0.9025530384753686,
+            "dark_and_light_ridge_tests": 1020,
+            "lost_ridges": 0,
+            "gradient_error_x": 0.64401619976903,
+            "gradient_error_y": 0.6434312480457718
+          }
+        }
+      },
+      {
+        "renderer": "pdfium",
+        "label": "faded show-through",
+        "fraction": [
+          0.25,
+          0.58,
+          0.77,
+          0.65
+        ],
+        "arms": {
+          "baseline": {
+            "mae": 0.0,
+            "max_channel_error": 0,
+            "changed_fraction": 0.0,
+            "dark_and_light_ridge_tests": 5,
+            "lost_ridges": 0,
+            "gradient_error_x": 0.0,
+            "gradient_error_y": 0.0
+          },
+          "q98": {
+            "mae": 0.7953444640720269,
+            "max_channel_error": 7,
+            "changed_fraction": 0.9417345717704713,
+            "dark_and_light_ridge_tests": 5,
+            "lost_ridges": 0,
+            "gradient_error_x": 0.674251115681447,
+            "gradient_error_y": 0.6563173626540998
+          },
+          "q100": {
+            "mae": 0.6221342146751002,
+            "max_channel_error": 5,
+            "changed_fraction": 0.8980497464242977,
+            "dark_and_light_ridge_tests": 5,
+            "lost_ridges": 0,
+            "gradient_error_x": 0.5946833929373676,
+            "gradient_error_y": 0.5858214352109017
+          }
+        }
+      },
+      {
+        "renderer": "pdfium",
+        "label": "shaded corner",
+        "fraction": [
+          0.01,
+          0.01,
+          0.2,
+          0.13
+        ],
+        "arms": {
+          "baseline": {
+            "mae": 0.0,
+            "max_channel_error": 0,
+            "changed_fraction": 0.0,
+            "dark_and_light_ridge_tests": 212,
+            "lost_ridges": 0,
+            "gradient_error_x": 0.0,
+            "gradient_error_y": 0.0
+          },
+          "q98": {
+            "mae": 0.9714303202803409,
+            "max_channel_error": 8,
+            "changed_fraction": 0.9619542762704861,
+            "dark_and_light_ridge_tests": 212,
+            "lost_ridges": 0,
+            "gradient_error_x": 0.8236140003655391,
+            "gradient_error_y": 0.8363599582782587
+          },
+          "q100": {
+            "mae": 0.6784036481047911,
+            "max_channel_error": 5,
+            "changed_fraction": 0.9087361704081164,
+            "dark_and_light_ridge_tests": 212,
+            "lost_ridges": 0,
+            "gradient_error_x": 0.6687886890006534,
+            "gradient_error_y": 0.6659533960536319
+          }
+        }
+      },
+      {
+        "renderer": "pdfium",
+        "label": "narrow punctuation",
+        "fraction": [
+          0.3,
+          0.3,
+          0.8,
+          0.35
+        ],
+        "arms": {
+          "baseline": {
+            "mae": 0.0,
+            "max_channel_error": 0,
+            "changed_fraction": 0.0,
+            "dark_and_light_ridge_tests": 441,
+            "lost_ridges": 0,
+            "gradient_error_x": 0.0,
+            "gradient_error_y": 0.0
+          },
+          "q98": {
+            "mae": 0.8144879900626666,
+            "max_channel_error": 6,
+            "changed_fraction": 0.9446782230038102,
+            "dark_and_light_ridge_tests": 441,
+            "lost_ridges": 0,
+            "gradient_error_x": 0.7059551460416273,
+            "gradient_error_y": 0.6970103207436585
+          },
+          "q100": {
+            "mae": 0.6299459866850898,
+            "max_channel_error": 5,
+            "changed_fraction": 0.8979818280785496,
+            "dark_and_light_ridge_tests": 441,
+            "lost_ridges": 0,
+            "gradient_error_x": 0.6122045729055314,
+            "gradient_error_y": 0.6049192002661203
+          }
+        }
+      },
+      {
+        "renderer": "poppler",
+        "label": "small blackletter and terminals",
+        "fraction": [
+          0.13,
+          0.18,
+          0.71,
+          0.225
+        ],
+        "arms": {
+          "baseline": {
+            "mae": 0.0,
+            "max_channel_error": 0,
+            "changed_fraction": 0.0,
+            "dark_and_light_ridge_tests": 1017,
+            "lost_ridges": 0,
+            "gradient_error_x": 0.0,
+            "gradient_error_y": 0.0
+          },
+          "q98": {
+            "mae": 0.8729065221521203,
+            "max_channel_error": 7,
+            "changed_fraction": 0.9522262105926229,
+            "dark_and_light_ridge_tests": 1017,
+            "lost_ridges": 0,
+            "gradient_error_x": 0.7662952907616856,
+            "gradient_error_y": 0.7773984931897578
+          },
+          "q100": {
+            "mae": 0.6478657774489316,
+            "max_channel_error": 6,
+            "changed_fraction": 0.9026426564546609,
+            "dark_and_light_ridge_tests": 1017,
+            "lost_ridges": 0,
+            "gradient_error_x": 0.6437800270243219,
+            "gradient_error_y": 0.6430395769597747
+          }
+        }
+      },
+      {
+        "renderer": "poppler",
+        "label": "faded show-through",
+        "fraction": [
+          0.25,
+          0.58,
+          0.77,
+          0.65
+        ],
+        "arms": {
+          "baseline": {
+            "mae": 0.0,
+            "max_channel_error": 0,
+            "changed_fraction": 0.0,
+            "dark_and_light_ridge_tests": 5,
+            "lost_ridges": 0,
+            "gradient_error_x": 0.0,
+            "gradient_error_y": 0.0
+          },
+          "q98": {
+            "mae": 0.7953549559892843,
+            "max_channel_error": 7,
+            "changed_fraction": 0.9417408151549943,
+            "dark_and_light_ridge_tests": 5,
+            "lost_ridges": 0,
+            "gradient_error_x": 0.6743619791666666,
+            "gradient_error_y": 0.6563094304872589
+          },
+          "q100": {
+            "mae": 0.621962303865289,
+            "max_channel_error": 5,
+            "changed_fraction": 0.8979549368541906,
+            "dark_and_light_ridge_tests": 5,
+            "lost_ridges": 0,
+            "gradient_error_x": 0.5945641107668822,
+            "gradient_error_y": 0.5858973766643921
+          }
+        }
+      },
+      {
+        "renderer": "poppler",
+        "label": "shaded corner",
+        "fraction": [
+          0.01,
+          0.01,
+          0.2,
+          0.13
+        ],
+        "arms": {
+          "baseline": {
+            "mae": 0.0,
+            "max_channel_error": 0,
+            "changed_fraction": 0.0,
+            "dark_and_light_ridge_tests": 212,
+            "lost_ridges": 0,
+            "gradient_error_x": 0.0,
+            "gradient_error_y": 0.0
+          },
+          "q98": {
+            "mae": 0.9714303202803409,
+            "max_channel_error": 8,
+            "changed_fraction": 0.9619542762704861,
+            "dark_and_light_ridge_tests": 212,
+            "lost_ridges": 0,
+            "gradient_error_x": 0.8236140003655391,
+            "gradient_error_y": 0.8363599582782587
+          },
+          "q100": {
+            "mae": 0.6784036481047911,
+            "max_channel_error": 5,
+            "changed_fraction": 0.9087361704081164,
+            "dark_and_light_ridge_tests": 212,
+            "lost_ridges": 0,
+            "gradient_error_x": 0.6687886890006534,
+            "gradient_error_y": 0.6659533960536319
+          }
+        }
+      },
+      {
+        "renderer": "poppler",
+        "label": "narrow punctuation",
+        "fraction": [
+          0.3,
+          0.3,
+          0.8,
+          0.35
+        ],
+        "arms": {
+          "baseline": {
+            "mae": 0.0,
+            "max_channel_error": 0,
+            "changed_fraction": 0.0,
+            "dark_and_light_ridge_tests": 442,
+            "lost_ridges": 0,
+            "gradient_error_x": 0.0,
+            "gradient_error_y": 0.0
+          },
+          "q98": {
+            "mae": 0.8144670546692906,
+            "max_channel_error": 6,
+            "changed_fraction": 0.9446258845203701,
+            "dark_and_light_ridge_tests": 442,
+            "lost_ridges": 0,
+            "gradient_error_x": 0.706127823759668,
+            "gradient_error_y": 0.6972763915876402
+          },
+          "q100": {
+            "mae": 0.6299599436140072,
+            "max_channel_error": 5,
+            "changed_fraction": 0.8979608926851735,
+            "dark_and_light_ridge_tests": 442,
+            "lost_ridges": 0,
+            "gradient_error_x": 0.6121678103188077,
+            "gradient_error_y": 0.6049944838770144
+          }
+        }
+      }
+    ]
+  },
+  {
+    "id": "history-03",
+    "arms": {
+      "baseline": {
+        "pdf_bytes": 9350337,
+        "raster_bytes": 9342292,
+        "filter": "/FlateDecode",
+        "sampling": null,
+        "pdf_sha256": "2770a8b33a6209195777fd682b7382b75b0d9f59e00f5076fee2ad28f87a9529",
+        "pdfium_text": "wee )2( \u00a9 )2( wet\r\nPDurvchlauchtigter/\r\nGropindchrighter Chur +x arjt.\r\nSnidiattee Chur -Saurlk und Ger,\r\norf. Churf, urd.\r\nWS =O? mit gegenipartigen Buche unters\r\n> \u2018CHhanigft gu erfcheinens, beweget\r\neas Si inich fo wol Defer ganiber\u2019 ;iece\r\nAves LABS und inhalty alg auc fonderlich 4FE VHERXDSELBERN Preipivure\r\nDigfte Huld und Gnade durch welche bif daco aus Gott\r\nlicher direction OERO gefamle unterthanen in angeYanct- angeYanct\ufffeHerzog August Bibliothek Wolfenbiittel\r\nKodak i MU UL |UL\r\nwe aa eee",
+        "poppler_text": "wee )2( \u00a9 )2( wet\nPDurvchlauchtigter/\nGropindchrighterChur\n+xarjt.\nSnidiatteeChur-SaurlkundGer,\norf.Churf, urd.\nWS =O? mit gegenipartigen Buche unters\n>\n\u2018CHhanigft gu erfcheinens, beweget\neas Si inich fo wol Defer ganiber\u2019 ;iece\nAves LABS und inhalty alg auc fonderlich\n4FE VHERXDSELBERN Preipivure\nDigfteHuldund Gnade durchwelche bifdaco ausGott\nlicherdirection OERO gefamle unterthanen in\nange\nYanct-\nHerzog August Bibliothek Wolfenbiittel\nKodak\ni\nMU UL\n|\nweaaeee\n\f",
+        "vector_occurrences": 0
+      },
+      "q98": {
+        "pdf_bytes": 3566007,
+        "raster_bytes": 3558061,
+        "filter": "/DCTDecode",
+        "sampling": [
+          [
+            1,
+            1,
+            1,
+            0
+          ],
+          [
+            2,
+            1,
+            1,
+            1
+          ],
+          [
+            3,
+            1,
+            1,
+            1
+          ]
+        ],
+        "pdf_sha256": "7448d12a61b13151be7b365458f0c34161b0a077a3ce7ac9571af875bd0a4912",
+        "pdfium_text": "wee )2( \u00a9 )2( wet\r\nPDurvchlauchtigter/\r\nGropindchrighter Chur +x arjt.\r\nSnidiattee Chur -Saurlk und Ger,\r\norf. Churf, urd.\r\nWS =O? mit gegenipartigen Buche unters\r\n> \u2018CHhanigft gu erfcheinens, beweget\r\neas Si inich fo wol Defer ganiber\u2019 ;iece\r\nAves LABS und inhalty alg auc fonderlich 4FE VHERXDSELBERN Preipivure\r\nDigfte Huld und Gnade durch welche bif daco aus Gott\r\nlicher direction OERO gefamle unterthanen in angeYanct- angeYanct\ufffeHerzog August Bibliothek Wolfenbiittel\r\nKodak i MU UL |UL\r\nwe aa eee",
+        "poppler_text": "wee )2( \u00a9 )2( wet\nPDurvchlauchtigter/\nGropindchrighterChur\n+xarjt.\nSnidiatteeChur-SaurlkundGer,\norf.Churf, urd.\nWS =O? mit gegenipartigen Buche unters\n>\n\u2018CHhanigft gu erfcheinens, beweget\neas Si inich fo wol Defer ganiber\u2019 ;iece\nAves LABS und inhalty alg auc fonderlich\n4FE VHERXDSELBERN Preipivure\nDigfteHuldund Gnade durchwelche bifdaco ausGott\nlicherdirection OERO gefamle unterthanen in\nange\nYanct-\nHerzog August Bibliothek Wolfenbiittel\nKodak\ni\nMU UL\n|\nweaaeee\n\f",
+        "vector_occurrences": 0,
+        "pdfium": {
+          "mae": 0.6206716952287942,
+          "max_channel_error": 9,
+          "changed_fraction": 0.8913613433348352,
+          "dark_and_light_ridge_tests": 8545,
+          "lost_ridges": 0,
+          "gradient_error_x": 0.6383177252492118,
+          "gradient_error_y": 0.5006147799980081
+        },
+        "poppler": {
+          "mae": 0.5572003333248436,
+          "max_channel_error": 8,
+          "changed_fraction": 0.8702810573066381,
+          "dark_and_light_ridge_tests": 6655,
+          "lost_ridges": 0,
+          "gradient_error_x": 0.49837615030948573,
+          "gradient_error_y": 0.4593152291886216
+        }
+      },
+      "q100": {
+        "pdf_bytes": 4577626,
+        "raster_bytes": 4569680,
+        "filter": "/DCTDecode",
+        "sampling": [
+          [
+            1,
+            1,
+            1,
+            0
+          ],
+          [
+            2,
+            1,
+            1,
+            1
+          ],
+          [
+            3,
+            1,
+            1,
+            1
+          ]
+        ],
+        "pdf_sha256": "ffb59c0aa3b887bcce3f1995282acb727995f82d0ae2d8d4d995948a65fb5521",
+        "pdfium_text": "wee )2( \u00a9 )2( wet\r\nPDurvchlauchtigter/\r\nGropindchrighter Chur +x arjt.\r\nSnidiattee Chur -Saurlk und Ger,\r\norf. Churf, urd.\r\nWS =O? mit gegenipartigen Buche unters\r\n> \u2018CHhanigft gu erfcheinens, beweget\r\neas Si inich fo wol Defer ganiber\u2019 ;iece\r\nAves LABS und inhalty alg auc fonderlich 4FE VHERXDSELBERN Preipivure\r\nDigfte Huld und Gnade durch welche bif daco aus Gott\r\nlicher direction OERO gefamle unterthanen in angeYanct- angeYanct\ufffeHerzog August Bibliothek Wolfenbiittel\r\nKodak i MU UL |UL\r\nwe aa eee",
+        "poppler_text": "wee )2( \u00a9 )2( wet\nPDurvchlauchtigter/\nGropindchrighterChur\n+xarjt.\nSnidiatteeChur-SaurlkundGer,\norf.Churf, urd.\nWS =O? mit gegenipartigen Buche unters\n>\n\u2018CHhanigft gu erfcheinens, beweget\neas Si inich fo wol Defer ganiber\u2019 ;iece\nAves LABS und inhalty alg auc fonderlich\n4FE VHERXDSELBERN Preipivure\nDigfteHuldund Gnade durchwelche bifdaco ausGott\nlicherdirection OERO gefamle unterthanen in\nange\nYanct-\nHerzog August Bibliothek Wolfenbiittel\nKodak\ni\nMU UL\n|\nweaaeee\n\f",
+        "vector_occurrences": 0,
+        "pdfium": {
+          "mae": 0.537611094863501,
+          "max_channel_error": 7,
+          "changed_fraction": 0.8585525882442833,
+          "dark_and_light_ridge_tests": 8545,
+          "lost_ridges": 0,
+          "gradient_error_x": 0.5445656076182656,
+          "gradient_error_y": 0.42602583219378937
+        },
+        "poppler": {
+          "mae": 0.493806367130997,
+          "max_channel_error": 7,
+          "changed_fraction": 0.836825252123387,
+          "dark_and_light_ridge_tests": 6655,
+          "lost_ridges": 0,
+          "gradient_error_x": 0.43888591137317046,
+          "gradient_error_y": 0.40384540709145
+        }
+      }
+    },
+    "regions": [
+      {
+        "renderer": "pdfium",
+        "label": "faint show-through",
+        "fraction": [
+          0.28,
+          0.35,
+          0.81,
+          0.49
+        ],
+        "arms": {
+          "baseline": {
+            "mae": 0.0,
+            "max_channel_error": 0,
+            "changed_fraction": 0.0,
+            "dark_and_light_ridge_tests": 21,
+            "lost_ridges": 0,
+            "gradient_error_x": 0.0,
+            "gradient_error_y": 0.0
+          },
+          "q98": {
+            "mae": 0.6114411815469586,
+            "max_channel_error": 6,
+            "changed_fraction": 0.8885657223167394,
+            "dark_and_light_ridge_tests": 21,
+            "lost_ridges": 0,
+            "gradient_error_x": 0.6356105091658647,
+            "gradient_error_y": 0.47525986667081654
+          },
+          "q100": {
+            "mae": 0.5294454718051138,
+            "max_channel_error": 5,
+            "changed_fraction": 0.8508425179377173,
+            "dark_and_light_ridge_tests": 21,
+            "lost_ridges": 0,
+            "gradient_error_x": 0.5525886800877258,
+            "gradient_error_y": 0.4180996663806225
+          }
+        }
+      },
+      {
+        "renderer": "pdfium",
+        "label": "fine decorated initial",
+        "fraction": [
+          0.25,
+          0.63,
+          0.55,
+          0.81
+        ],
+        "arms": {
+          "baseline": {
+            "mae": 0.0,
+            "max_channel_error": 0,
+            "changed_fraction": 0.0,
+            "dark_and_light_ridge_tests": 2428,
+            "lost_ridges": 0,
+            "gradient_error_x": 0.0,
+            "gradient_error_y": 0.0
+          },
+          "q98": {
+            "mae": 0.7063784898530963,
+            "max_channel_error": 7,
+            "changed_fraction": 0.914582845746034,
+            "dark_and_light_ridge_tests": 2428,
+            "lost_ridges": 0,
+            "gradient_error_x": 0.7208427414054188,
+            "gradient_error_y": 0.5919509293415126
+          },
+          "q100": {
+            "mae": 0.5608234204715435,
+            "max_channel_error": 7,
+            "changed_fraction": 0.8614736499343665,
+            "dark_and_light_ridge_tests": 2428,
+            "lost_ridges": 0,
+            "gradient_error_x": 0.5894848131552426,
+            "gradient_error_y": 0.4699603666924817
+          }
+        }
+      },
+      {
+        "renderer": "pdfium",
+        "label": "small blackletter",
+        "fraction": [
+          0.47,
+          0.66,
+          0.91,
+          0.84
+        ],
+        "arms": {
+          "baseline": {
+            "mae": 0.0,
+            "max_channel_error": 0,
+            "changed_fraction": 0.0,
+            "dark_and_light_ridge_tests": 1910,
+            "lost_ridges": 0,
+            "gradient_error_x": 0.0,
+            "gradient_error_y": 0.0
+          },
+          "q98": {
+            "mae": 0.7109089398471253,
+            "max_channel_error": 7,
+            "changed_fraction": 0.9117453195967653,
+            "dark_and_light_ridge_tests": 1910,
+            "lost_ridges": 0,
+            "gradient_error_x": 0.7164897361501528,
+            "gradient_error_y": 0.585759288245001
+          },
+          "q100": {
+            "mae": 0.5676521361840404,
+            "max_channel_error": 7,
+            "changed_fraction": 0.8592264872050515,
+            "dark_and_light_ridge_tests": 1910,
+            "lost_ridges": 0,
+            "gradient_error_x": 0.5896295010790739,
+            "gradient_error_y": 0.4704834099481377
+          }
+        }
+      },
+      {
+        "renderer": "pdfium",
+        "label": "ruler and fine marks",
+        "fraction": [
+          0.15,
+          0.93,
+          0.5,
+          0.98
+        ],
+        "arms": {
+          "baseline": {
+            "mae": 0.0,
+            "max_channel_error": 0,
+            "changed_fraction": 0.0,
+            "dark_and_light_ridge_tests": 2056,
+            "lost_ridges": 0,
+            "gradient_error_x": 0.0,
+            "gradient_error_y": 0.0
+          },
+          "q98": {
+            "mae": 0.5717196977313093,
+            "max_channel_error": 7,
+            "changed_fraction": 0.7825098019503368,
+            "dark_and_light_ridge_tests": 2056,
+            "lost_ridges": 0,
+            "gradient_error_x": 0.5949074055870807,
+            "gradient_error_y": 0.5045785078786157
+          },
+          "q100": {
+            "mae": 0.4666168191414497,
+            "max_channel_error": 7,
+            "changed_fraction": 0.7419950738916257,
+            "dark_and_light_ridge_tests": 2056,
+            "lost_ridges": 0,
+            "gradient_error_x": 0.4782938900937995,
+            "gradient_error_y": 0.3940436471753821
+          }
+        }
+      },
+      {
+        "renderer": "poppler",
+        "label": "faint show-through",
+        "fraction": [
+          0.28,
+          0.35,
+          0.81,
+          0.49
+        ],
+        "arms": {
+          "baseline": {
+            "mae": 0.0,
+            "max_channel_error": 0,
+            "changed_fraction": 0.0,
+            "dark_and_light_ridge_tests": 3,
+            "lost_ridges": 0,
+            "gradient_error_x": 0.0,
+            "gradient_error_y": 0.0
+          },
+          "q98": {
+            "mae": 0.5265803683704416,
+            "max_channel_error": 5,
+            "changed_fraction": 0.8560470448997707,
+            "dark_and_light_ridge_tests": 3,
+            "lost_ridges": 0,
+            "gradient_error_x": 0.4795248446522431,
+            "gradient_error_y": 0.4285242471981011
+          },
+          "q100": {
+            "mae": 0.4698631555588431,
+            "max_channel_error": 5,
+            "changed_fraction": 0.8205902803461794,
+            "dark_and_light_ridge_tests": 3,
+            "lost_ridges": 0,
+            "gradient_error_x": 0.43287864714428487,
+            "gradient_error_y": 0.3894909780301784
+          }
+        }
+      },
+      {
+        "renderer": "poppler",
+        "label": "fine decorated initial",
+        "fraction": [
+          0.25,
+          0.63,
+          0.55,
+          0.81
+        ],
+        "arms": {
+          "baseline": {
+            "mae": 0.0,
+            "max_channel_error": 0,
+            "changed_fraction": 0.0,
+            "dark_and_light_ridge_tests": 1862,
+            "lost_ridges": 0,
+            "gradient_error_x": 0.0,
+            "gradient_error_y": 0.0
+          },
+          "q98": {
+            "mae": 0.58268022074561,
+            "max_channel_error": 5,
+            "changed_fraction": 0.8810029204359285,
+            "dark_and_light_ridge_tests": 1862,
+            "lost_ridges": 0,
+            "gradient_error_x": 0.519710115357846,
+            "gradient_error_y": 0.508332607550645
+          },
+          "q100": {
+            "mae": 0.48372866063584774,
+            "max_channel_error": 5,
+            "changed_fraction": 0.8263653292359041,
+            "dark_and_light_ridge_tests": 1862,
+            "lost_ridges": 0,
+            "gradient_error_x": 0.445116482133431,
+            "gradient_error_y": 0.4280054448827623
+          }
+        }
+      },
+      {
+        "renderer": "poppler",
+        "label": "small blackletter",
+        "fraction": [
+          0.47,
+          0.66,
+          0.91,
+          0.84
+        ],
+        "arms": {
+          "baseline": {
+            "mae": 0.0,
+            "max_channel_error": 0,
+            "changed_fraction": 0.0,
+            "dark_and_light_ridge_tests": 1526,
+            "lost_ridges": 0,
+            "gradient_error_x": 0.0,
+            "gradient_error_y": 0.0
+          },
+          "q98": {
+            "mae": 0.6092938776263801,
+            "max_channel_error": 6,
+            "changed_fraction": 0.8853107344632768,
+            "dark_and_light_ridge_tests": 1526,
+            "lost_ridges": 0,
+            "gradient_error_x": 0.5463589291976458,
+            "gradient_error_y": 0.5204814382436143
+          },
+          "q100": {
+            "mae": 0.5045063882426793,
+            "max_channel_error": 6,
+            "changed_fraction": 0.8329206823972527,
+            "dark_and_light_ridge_tests": 1526,
+            "lost_ridges": 0,
+            "gradient_error_x": 0.46494863830164723,
+            "gradient_error_y": 0.4369579654262695
+          }
+        }
+      },
+      {
+        "renderer": "poppler",
+        "label": "ruler and fine marks",
+        "fraction": [
+          0.15,
+          0.93,
+          0.5,
+          0.98
+        ],
+        "arms": {
+          "baseline": {
+            "mae": 0.0,
+            "max_channel_error": 0,
+            "changed_fraction": 0.0,
+            "dark_and_light_ridge_tests": 1713,
+            "lost_ridges": 0,
+            "gradient_error_x": 0.0,
+            "gradient_error_y": 0.0
+          },
+          "q98": {
+            "mae": 0.5106418183036762,
+            "max_channel_error": 6,
+            "changed_fraction": 0.7697798331155122,
+            "dark_and_light_ridge_tests": 1713,
+            "lost_ridges": 0,
+            "gradient_error_x": 0.44061054287428597,
+            "gradient_error_y": 0.45160352623310596
+          },
+          "q100": {
+            "mae": 0.43358969203444925,
+            "max_channel_error": 6,
+            "changed_fraction": 0.7314956770885694,
+            "dark_and_light_ridge_tests": 1713,
+            "lost_ridges": 0,
+            "gradient_error_x": 0.3670611383810614,
+            "gradient_error_y": 0.3727623433947518
+          }
+        }
+      }
+    ]
+  }
+]

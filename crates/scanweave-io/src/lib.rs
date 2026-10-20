@@ -23,5 +23,6 @@ mod contour_topology;
 mod curve_fit;
 
 mod serialization;
+mod tonal_image;
 
 pub mod source_image;

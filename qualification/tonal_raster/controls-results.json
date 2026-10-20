@@ -1,0 +1,62 @@
+[
+  {
+    "id": "scan-linn",
+    "profile": "clearscan",
+    "arm": "before",
+    "seconds": 87.6373640249949,
+    "bytes": 666153,
+    "sha256": "3a14bcb970fe2831f19d1b2af940d94bb71dc0e0fb76bd8167f487fc9358ae87",
+    "command": [
+      "/tmp/scanweave-tonal-baseline",
+      "/data/coding/scanweave/qualification/pdf_packaging/real/input/scan-linn.pdf",
+      "/data/coding/scanweave/qualification/tonal_raster/control-runs/scan-linn-clearscan-before.pdf",
+      "--profile",
+      "clearscan"
+    ]
+  },
+  {
+    "id": "scan-linn",
+    "profile": "clearscan",
+    "arm": "after",
+    "seconds": 86.62520970299374,
+    "bytes": 666153,
+    "sha256": "3a14bcb970fe2831f19d1b2af940d94bb71dc0e0fb76bd8167f487fc9358ae87",
+    "command": [
+      "/tmp/scanweave-tonal-corpus",
+      "/data/coding/scanweave/qualification/pdf_packaging/real/input/scan-linn.pdf",
+      "/data/coding/scanweave/qualification/tonal_raster/control-runs/scan-linn-clearscan-after.pdf",
+      "--profile",
+      "clearscan"
+    ]
+  },
+  {
+    "id": "cord-00",
+    "profile": "faithful",
+    "arm": "before",
+    "seconds": 2.141168608010048,
+    "bytes": 1500534,
+    "sha256": "2da4ad09252e96bc236517a0f860636ef506e607371945a72695b27c6dc75aa0",
+    "command": [
+      "/tmp/scanweave-tonal-baseline",
+      "/data/coding/scanweave/qualification/pdf_packaging/real/input/cord-00.pdf",
+      "/data/coding/scanweave/qualification/tonal_raster/control-runs/cord-00-faithful-before.pdf",
+      "--profile",
+      "faithful"
+    ]
+  },
+  {
+    "id": "cord-00",
+    "profile": "faithful",
+    "arm": "after",
+    "seconds": 3.3884606559877284,
+    "bytes": 1500534,
+    "sha256": "2da4ad09252e96bc236517a0f860636ef506e607371945a72695b27c6dc75aa0",
+    "command": [
+      "/tmp/scanweave-tonal-corpus",
+      "/data/coding/scanweave/qualification/pdf_packaging/real/input/cord-00.pdf",
+      "/data/coding/scanweave/qualification/tonal_raster/control-runs/cord-00-faithful-after.pdf",
+      "--profile",
+      "faithful"
+    ]
+  }
+]
