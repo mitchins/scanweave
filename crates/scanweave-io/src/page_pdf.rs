@@ -1098,6 +1098,41 @@ pub fn assemble_document_with_options(
     font_bytes: &[u8],
     image_options: ImageEncodingOptions,
 ) -> Result<(Vec<u8>, AssemblyStats), String> {
+    assemble_document_impl(pages, shapes, encodings, font_bytes, image_options, false)
+}
+
+fn unchanged_whole_page(p: &PageParts) -> bool {
+    !p.raster_baseline && p.occurrences.is_empty() && p.patches.len()==1
+        && p.patches[0].w as usize==p.source_w && p.patches[0].h as usize==p.source_h
+        && p.patches[0].bbox_px==[0.0,0.0,p.source_w as f64,p.source_h as f64]
+        && !p.patches[0].compact_background && p.patches[0].rgb==p.source_rgb
+        && !p.encoded_source.as_ref().is_some_and(|s|s.jpeg)
+}
+
+/// ClearScan-only whole-page candidate, selected by actual complete PDF bytes.
+/// Existing public assembly and faithful retain their lossless behavior.
+pub(crate) fn assemble_document_with_tonal_fallback(
+    pages: &[PageParts], shapes: &[GlyphShape], encodings: &[(usize, String)],
+    font_bytes: &[u8], image_options: ImageEncodingOptions,
+) -> Result<(Vec<u8>, AssemblyStats), String> {
+    if !pages.iter().any(|p| unchanged_whole_page(p)
+        && crate::tonal_image::eligible(&p.source_rgb,p.source_w as u32,p.source_h as u32,3)) {
+        return assemble_document_with_options(pages,shapes,encodings,font_bytes,image_options);
+    }
+    let start = std::time::Instant::now();
+    let lossless = assemble_document_impl(pages, shapes, encodings, font_bytes, image_options, false)?;
+    let compact = assemble_document_impl(pages, shapes, encodings, font_bytes, image_options, true)?;
+    let encoding_ms = lossless.1.image_encoding_ms + compact.1.image_encoding_ms;
+    let mut selected = if compact.0.len() < lossless.0.len() {compact} else {lossless};
+    selected.1.image_encoding_ms = encoding_ms;
+    selected.1.assembly_ms = start.elapsed().as_millis();
+    Ok(selected)
+}
+
+fn assemble_document_impl(
+    pages: &[PageParts], shapes: &[GlyphShape], encodings: &[(usize, String)],
+    font_bytes: &[u8], image_options: ImageEncodingOptions, tonal_whole_pages: bool,
+) -> Result<(Vec<u8>, AssemblyStats), String> {
     for page in pages {
         validate_occurrence_geometry(&page.occurrences)?;
     }
@@ -1156,6 +1191,12 @@ pub fn assemble_document_with_options(
                 Some(i) => i,
                 None => {
                     let (mut compressed, mut jpeg, mut predictor) = compress_samples(&key)?;
+                    let tonal = if tonal_whole_pages && unchanged_whole_page(p) {
+                        // This is optional representation work. Encoder failure
+                        // retains the already-built lossless resource.
+                        crate::tonal_image::encode(&key.samples,key.width,key.height,key.color_space)
+                            .unwrap_or_else(|reason| {eprintln!("scanweave: retaining lossless whole-page image: {reason}");None})
+                    } else {None};
                     let mut key = key;
                     if p.occurrences.is_empty() && p.patches.len() == 1 {
                         if let Some(source) = &p.encoded_source {
@@ -1177,6 +1218,21 @@ pub fn assemble_document_with_options(
                                 key.samples = source.bytes.clone();
                             }
                         }
+                    }
+                    if let Some(tonal) = tonal.filter(|bytes|bytes.len()<compressed.len()) {
+                        // Encoded identity cannot alias a lossless native patch.
+                        key = canonical_patch(patch,image_options)?;
+                        let mut digest = Sha256::new();
+                        digest.update(b"whole-page-dct-v1");
+                        digest.update(&tonal);
+                        digest.update(key.width.to_be_bytes());
+                        digest.update(key.height.to_be_bytes());
+                        digest.update([key.color_space]);
+                        key.sample_sha256 = digest.finalize().into();
+                        key.samples = tonal.clone();
+                        compressed = tonal;
+                        jpeg = true;
+                        predictor = 1;
                     }
                     if image_options.reuse_identical {
                         if let Some(existing) =
@@ -1418,6 +1474,51 @@ mod image_resource_tests {
             w: 1,
             h: 1,
         }
+    }
+
+    #[test]
+    fn whole_page_eligibility_excludes_changed_native_and_raster_baseline_content() {
+        let p = page(vec![patch([0.0,0.0,1.0,1.0],[255;3])]);
+        assert!(unchanged_whole_page(&p));
+        let mut changed=p.clone();changed.patches[0].rgb[0]=254;
+        assert!(!unchanged_whole_page(&changed));
+        let mut native=p.clone();native.patches.push(p.patches[0].clone());
+        assert!(!unchanged_whole_page(&native));
+        let (before,_) = assemble_document_with_options(&[native.clone()],&[],&[],&[],ImageEncodingOptions::default()).unwrap();
+        let (after,_) = assemble_document_with_tonal_fallback(&[native],&[],&[],&[],ImageEncodingOptions::default()).unwrap();
+        assert_eq!(before,after);
+        let mut raster=p.clone();raster.raster_baseline=true;
+        assert!(!unchanged_whole_page(&raster));
+        let mut clipped=p.clone();clipped.patches[0].bbox_px[2]=0.9;
+        assert!(!unchanged_whole_page(&clipped));
+        let mut vector=p;vector.occurrences.push((0,1,[0.,0.,1.,1.],"span".into(),"symbol".into(),"a".into()));
+        assert!(!unchanged_whole_page(&vector));
+    }
+
+    #[test]
+    fn verified_source_jpeg_passes_through_without_reencoding() {
+        let mut jpeg=Vec::new();
+        image::codecs::jpeg::JpegEncoder::new_with_quality(&mut jpeg,100)
+            .encode(&vec![127;512*512*3],512,512,image::ExtendedColorType::Rgb8).unwrap();
+        let mut pdf=Pdf::new();pdf.catalog(Ref::new(1)).pages(Ref::new(2));
+        pdf.pages(Ref::new(2)).kids([Ref::new(3)]).count(1);
+        let mut pg=pdf.page(Ref::new(3));pg.parent(Ref::new(2)).media_box(Rect::new(0.,0.,72.,72.)).contents(Ref::new(4));
+        pg.resources().x_objects().pair(Name(b"Im"),Ref::new(5));pg.finish();
+        let mut c=Content::new();c.save_state().transform([72.,0.,0.,72.,0.,0.]).x_object(Name(b"Im")).restore_state();
+        pdf.stream(Ref::new(4),&c.finish());
+        let mut im=pdf.image_xobject(Ref::new(5),&jpeg);im.width(512).height(512).bits_per_component(8).pair(Name(b"ColorSpace"),Name(b"DeviceRGB"));im.filter(pdf_writer::Filter::DctDecode);im.finish();
+        let source=crate::source_image::simple_page_images(pdf.finish()).pop().unwrap().unwrap();
+        let rgb=source.decode_rgb().unwrap();
+        let patch=Patch {bbox_px:[0.,0.,512.,512.],rgb:rgb.clone(),w:512,h:512,compact_background:false};
+        let mut p=page(vec![patch]);p.source_w=512;p.source_h=512;p.source_rgb=rgb;p.encoded_source=Some(source);
+        p.to_pt.a=72./512.;p.to_pt.d= -72./512.;
+        assert!(!unchanged_whole_page(&p));
+        let (before,_) = assemble_document_with_options(&[p.clone()],&[],&[],&[],ImageEncodingOptions::default()).unwrap();
+        let (after,_) = assemble_document_with_tonal_fallback(&[p],&[],&[],&[],ImageEncodingOptions::default()).unwrap();
+        assert_eq!(before,after);
+        let parsed=hayro::hayro_syntax::Pdf::new(after).unwrap();
+        let image=parsed.pages()[0].resources().get_x_object(&hayro::hayro_syntax::object::Name::new(b"Im0").unwrap()).unwrap();
+        assert_eq!(image.raw_data().as_ref(),jpeg);
     }
 
     #[test]

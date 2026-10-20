@@ -357,7 +357,10 @@ pub fn convert_document_with_sources(
 
     // 3. the reconstruction candidate
     let stage_start = std::time::Instant::now();
-    let (pdf_bytes, stats) = crate::page_pdf::assemble_document_with_options(
+    let assemble = if policy.profile == "clearscan" {
+        crate::page_pdf::assemble_document_with_tonal_fallback
+    } else {crate::page_pdf::assemble_document_with_options};
+    let (pdf_bytes, stats) = assemble(
         &pages.iter().map(|p| p.parts.clone()).collect::<Vec<_>>(),
         &shapes,
         &encodings,

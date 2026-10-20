@@ -1,0 +1,11 @@
+{
+  "settings": [{"quality":98,"sampling":"4:4:4"},{"quality":100,"sampling":"4:4:4"}],
+  "frozen_before_candidate_encoding":true,
+  "runtime_detail_guards":{"maximum_channel_error":12,"dark_ridge_minimum_contrast":8,"ridge_retention":"original >=12: >=0.5*original-1; original 8..12: >=2","note":"Necessary source-feature checks, not a substitute for fixed-region two-renderer/independent visual inspection."},
+  "regions": {
+    "cord-00":[["faint item letters",0.26,0.29,0.57,0.39],["amount punctuation",0.59,0.28,0.75,0.40],["financial total",0.29,0.83,0.79,0.92],["thin dashed rule",0.26,0.259,0.73,0.281],["fine woven background",0.02,0.45,0.18,0.58]],
+    "cord-05":[["small dot-matrix words",0.19,0.32,0.58,0.42],["decimal punctuation",0.64,0.32,0.81,0.42],["faint digits",0.32,0.52,0.81,0.57],["thin horizontal rules",0.17,0.59,0.82,0.61],["paper texture and wood",0.04,0.68,0.32,0.78]],
+    "history-02":[["small blackletter and terminals",0.13,0.18,0.71,0.225],["faded show-through",0.25,0.58,0.77,0.65],["shaded corner",0.01,0.01,0.20,0.13],["narrow punctuation",0.30,0.30,0.80,0.35]],
+    "history-03":[["faint show-through",0.28,0.35,0.81,0.49],["fine decorated initial",0.25,0.63,0.55,0.81],["small blackletter",0.47,0.66,0.91,0.84],["ruler and fine marks",0.15,0.93,0.50,0.98]]
+  }
+}
