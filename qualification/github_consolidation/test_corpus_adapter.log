@@ -1,0 +1,19 @@
+PASS adapter fails closed on binding mismatch 
+  problem: receipts/doc-alpha/page_01.png: pixel-hash binding mismatch (declared 000000000000 != computed ca725ec2f2f3)
+PASS binding mismatch named in output 
+PASS adapter succeeds after repair manifest: 5 documents / 5 pages; 1 holdout sealed; problems: 0
+PASS holdout sealed 
+PASS seal recorded 
+PASS document-level splits {'receipts/doc-alpha': 'calibration', 'receipts/doc-beta': 'train', 'statements/doc-gamma': 'development', 'books/doc-delta': 'development', 'japanese_h/doc-epsilon': 'train'}
+PASS every page bound 
+PASS checks.py --pages/--fixtures-dir runs on adapter bundle 5/5 processed
+PASS corpus pages transport (both engines) 
+PASS adapter bundle carries validated OCR 
+PASS holdout materializes only with --include-holdout 
+PASS missing corpus fails closed 
+PASS B1 holdout content not materialized leaks=[]
+PASS B2 seal stable across --out e9eec5488f47 vs e9eec5488f47
+PASS B2 seal changes when a sealed byte changes 7b5d2e68c5ca
+PASS B2 --include-holdout preserves the development seal 
+PASS B7 explicit --out cannot target canonical gate artifact 
+miniature synthetic corpus pipeline test passed

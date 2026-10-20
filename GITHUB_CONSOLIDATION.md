@@ -24,3 +24,9 @@ GitHub Actions links and the latest head/check state can be retrieved with `gh p
 ## Separate shaded-paper work
 
 The accumulated implementation is now pushed and reviewable, satisfying the publication gate. Bounded shaded-paper ownership work starts from this published branch on a separate branch, with a separate stacked PR targeting this catch-up branch. It must not change the catch-up PR's glyph reconstruction behavior or conceal its donor-repair blocker.
+
+## Executed checkpoint at `8bc191e`
+
+GitHub run [39365240486](https://github.com/mitchins/scanweave/actions/runs/39365240486): publication hygiene passed, Python qualification passed, Rust failed on the retained M1-D donor-repair test. The corrected auto-accounting test passed. Local unfiltered workspace tests reproduce that donor failure; local Clippy with denied warnings passes, and all nine Python commands from CI passed. Logs and exact script statuses are committed under `qualification/github_consolidation/`. The CI Rust job stops before Clippy on failure; its local independent result is not misrepresented as a GitHub Clippy pass.
+
+CodeRabbit was explicitly requested but skipped the catch-up review because 1,242 changed files exceed its 150-file limit. Its successful status context means **skipped**, not reviewed. Independent read-only review of the test diagnosis is complete; previous source/evidence reviews remain linked in milestone reports. No GitHub approval or merge has occurred. PR #1 is conflict-free/mergeable but intentionally draft and blocked by the donor repair gap.

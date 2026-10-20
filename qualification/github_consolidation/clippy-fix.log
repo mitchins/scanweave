@@ -1,0 +1,52 @@
+    Checking scanweave-core v0.1.0 (/data/coding/scanweave/crates/scanweave-core)
+    Checking scanweave-io v0.1.0 (/data/coding/scanweave/crates/scanweave-io)
+       Fixed crates/scanweave-io/src/units.rs (1 fix)
+       Fixed crates/scanweave-io/src/convert.rs (2 fixes)
+       Fixed crates/scanweave-io/src/page_pdf.rs (2 fixes)
+       Fixed crates/scanweave-io/src/contour_topology.rs (1 fix)
+       Fixed crates/scanweave-io/src/curve_fit.rs (1 fix)
+warning: clamp-like pattern without using clamp function
+    --> crates/scanweave-io/src/convert.rs:2522:22
+     |
+2522 |     let target_dpi = dpi.min(150.0).max(72.0);
+     |                      ^^^^^^^^^^^^^^^^^^^^^^^^ help: replace with clamp: `dpi.clamp(72.0, 150.0)`
+     |
+     = note: clamp will panic if max < min, min.is_nan(), or max.is_nan()
+     = note: clamp returns NaN if the input is NaN
+     = help: for further information visit https://rust-lang.github.io/rust-clippy/rust-1.99.0/index.html#manual_clamp
+     = note: `-D clippy::manual-clamp` implied by `-D warnings`
+     = help: to override `-D warnings` add `#[allow(clippy::manual_clamp)]`
+     = note: the `clippy::manual_clamp` lint ignores `-D warnings`
+
+warning: using `chunks_exact` with a constant chunk size
+    --> crates/scanweave-io/src/convert.rs:2584:32
+     |
+2584 |         .zip(restored.as_raw().chunks_exact(3))
+     |                                ^^^^^^^^^^^^^^^
+     |
+help: consider using `as_chunks::<3>()` instead
+    --> crates/scanweave-io/src/convert.rs:2584:32
+     |
+2584 |         .zip(restored.as_raw().chunks_exact(3))
+     |                                ^^^^^^^^^^^^^^^
+     = help: for further information visit https://rust-lang.github.io/rust-clippy/rust-1.99.0/index.html#chunks_exact_to_as_chunks
+     = note: `-D clippy::chunks-exact-to-as-chunks` implied by `-D warnings`
+     = help: to override `-D warnings` add `#[allow(clippy::chunks_exact_to_as_chunks)]`
+     = note: the `clippy::chunks_exact_to_as_chunks` lint ignores `-D warnings`
+
+warning: using `chunks_exact` with a constant chunk size
+   --> crates/scanweave-io/src/page_pdf.rs:136:28
+    |
+136 |             .zip(patch.rgb.chunks_exact(3))
+    |                            ^^^^^^^^^^^^^^^
+    |
+help: consider using `as_chunks::<3>()` instead
+   --> crates/scanweave-io/src/page_pdf.rs:136:28
+    |
+136 |             .zip(patch.rgb.chunks_exact(3))
+    |                            ^^^^^^^^^^^^^^^
+    = help: for further information visit https://rust-lang.github.io/rust-clippy/rust-1.99.0/index.html#chunks_exact_to_as_chunks
+
+warning: `scanweave-io` (lib) generated 3 warnings
+    Checking scanweave-cli v0.1.0 (/data/coding/scanweave/crates/scanweave-cli)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 6.25s

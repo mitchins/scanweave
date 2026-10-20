@@ -1,0 +1,19 @@
+   Compiling scanweave-io v0.1.0 (/data/coding/scanweave/crates/scanweave-io)
+   Compiling m0-font-pdf v0.1.0 (/data/coding/scanweave/probes/m0-font-pdf)
+warning: function `utf16be_hex` is never used
+  --> probes/m0-font-pdf/tests/m1b_behavior.rs:39:4
+   |
+39 | fn utf16be_hex(s: &str) -> String {
+   |    ^^^^^^^^^^^
+   |
+   = note: `#[warn(dead_code)]` (part of `#[warn(unused)]`) on by default
+
+warning: `m0-font-pdf` (test "m1b_behavior") generated 1 warning
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 4.23s
+     Running tests/m1b_behavior.rs (target/debug/deps/m1b_behavior-b749148e7e458087)
+
+running 1 test
+test regress_auto_reports_the_selected_candidate ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 12 filtered out; finished in 4.90s
+
