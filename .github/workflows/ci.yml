@@ -74,7 +74,7 @@ jobs:
       - name: Python deps
         run: |
           python -m venv qualification/.venv
-          qualification/.venv/bin/pip install -q pypdfium2 numpy Pillow fontTools jsonschema
+          qualification/.venv/bin/pip install -q pypdfium2 numpy Pillow fontTools jsonschema lxml==6.1.3
       - name: Build the OpenType sanitizer (OTS)
         # tools/ (developer-local builds) is git-ignored; build the same OTS 9.3.0
         # from source and point the harness at it via SCANWEAVE_OTS
@@ -94,6 +94,8 @@ jobs:
       - name: Fixture schema layer
         # must run with the venv interpreter: jsonschema is not a system package
         run: qualification/.venv/bin/python qualification/validate_fixtures.py
+      - name: hOCR XML entity boundary
+        run: qualification/.venv/bin/python qualification/test_hocr_xml_security.py
       - name: Text search gates
         run: qualification/.venv/bin/python qualification/test_text_search.py
       - name: Instrument correctness tests (M1-C-R3)

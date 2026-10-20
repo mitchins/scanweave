@@ -14,7 +14,7 @@ for p in sorted(list(B.glob('cord-*.png'))+list(B.glob('history-*.png'))):
   annotation=json.loads(p.with_suffix('.truth.json').read_text());q=[word['quad'] for line in annotation['valid_line'] for word in line['words']];xs=[v for b in q for k,v in b.items() if k.startswith('x')];ys=[v for b in q for k,v in b.items() if k.startswith('y')]
   if xs:x0=max(0,min(xs)-12);y0=max(0,min(ys)-12);x1=min(w,max(xs)+12);y1=min(h,max(ys)+12)
  crop=B/(p.stem+'.ocr-crop.png');im.crop((x0,y0,x1,y1)).save(crop);stem=B/(p.stem+'.regions');cmd=['tesseract',str(crop),str(stem),'--dpi','300','-l','eng','--psm','6','-c','hocr_char_boxes=1','hocr'];start=time.monotonic();r=subprocess.run(cmd,capture_output=True,text=True,check=True)
- doc=etree.parse(str(stem)+'.hocr',etree.XMLParser(load_dtd=False,no_network=True));
+ doc=etree.parse(str(stem)+'.hocr',etree.XMLParser(load_dtd=False,no_network=True,resolve_entities=False));
  for elem in doc.iter():
   title=elem.get('title')
   if title:
