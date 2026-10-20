@@ -1,3 +1,5 @@
+> Closure update: the donor-repair blocker recorded below is corrected in the follow-up PR #1 commits. See [repair evidence](qualification/pr_closure/DONOR_FIX.md); this checkpoint below is retained as historical CI evidence.
+
 # GitHub consolidation checkpoint
 
 ## History and publication
