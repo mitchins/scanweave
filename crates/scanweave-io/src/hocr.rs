@@ -212,7 +212,10 @@ pub fn parse_hocr(
                 handle_start(true, name, title, class, &mut st, raster_w, raster_h)?;
             }
             Event::Text(t) => {
-                let text = String::from_utf8_lossy(t.as_ref()).to_string();
+                let text = t
+                    .unescape()
+                    .map_err(|e| invalid(format!("invalid hOCR text entity: {e}")))?
+                    .into_owned();
                 if st.cur_char.is_some() {
                     if let Some(c) = st.cur_char.as_mut() {
                         c.text.push_str(text.trim_matches('\n'));
@@ -226,10 +229,14 @@ pub fn parse_hocr(
                 if matches!(name.as_str(), "span" | "div" | "p" | "html") {
                     if let Some(class) = st.stack.pop() {
                         if class == "ocrx_cinfo" {
-                            if let Some(mut c) = st.cur_char.take() {
-                                c.text = c.text.trim().to_string();
-                                if let Some(w) = st.cur_word.as_mut() {
-                                    w.chars.push(c);
+                            if let Some(c) = st.cur_char.take() {
+                                // Tesseract can emit a genuine space cinfo.
+                                // Trimming it created an invalid empty Unicode
+                                // range and prevented real receipts from loading.
+                                if !c.text.is_empty() {
+                                    if let Some(w) = st.cur_word.as_mut() {
+                                        w.chars.push(c);
+                                    }
                                 }
                             }
                         } else if class == "ocrx_word" {
@@ -263,4 +270,17 @@ pub fn parse_hocr(
         page_bbox: st.page_bbox,
         producer_name: st.producer_name,
     })
+}
+
+#[cfg(test)]
+mod real_character_tests {
+    use super::*;
+    #[test]
+    fn preserves_space_characters_and_escaped_punctuation() {
+        let input = br#"<html><body><div class="ocr_page" title="bbox 0 0 100 40"><span class="ocr_line"><span class="ocrx_word" title="bbox 1 2 30 20"><span class="ocrx_cinfo" title="x_bboxes 1 2 4 20"> </span><span class="ocrx_cinfo" title="x_bboxes 5 2 15 20">&amp;</span></span></span></div></body></html>"#;
+        let doc = parse_hocr(input, 100, 40).unwrap();
+        assert_eq!(doc.words[0].text, " &");
+        assert_eq!(doc.words[0].chars[0].text, " ");
+        assert_eq!(doc.words[0].chars[1].text, "&");
+    }
 }

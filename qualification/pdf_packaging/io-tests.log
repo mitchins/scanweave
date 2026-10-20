@@ -1,0 +1,44 @@
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 0.18s
+     Running unittests src/lib.rs (target/debug/deps/scanweave_io-ba1881379c33891c)
+
+running 37 tests
+test convert::contour_coverage_tests::fidelity_uses_covered_area_and_the_pdf_construction_frame ... ok
+test convert::contour_coverage_tests::paper_sampling_guard_matches_bounded_neighbourhoods ... ok
+test convert::dpi_tests::derives_dpi_from_authoritative_page_affine ... ok
+test convert::contour_coverage_tests::weak_vertical_rule_requires_physical_support ... ok
+test curve_fit::tests::circle_is_compact_closed_and_has_shared_tangents ... ok
+test curve_fit::tests::square_keeps_sharp_terminals ... ok
+test convert::contour_coverage_tests::weak_crossing_rule_survives_without_retaining_dark_glyph_cores ... ok
+test page_pdf::owner_frame_tests::a_reversed_replacement_box_cannot_be_serialized_as_a_mirrored_glyph ... ok
+test hocr::real_character_tests::preserves_space_characters_and_escaped_punctuation ... ok
+test encoding::tests::e0_four_part_key_property ... ok
+test page_pdf::image_resource_tests::image_dimensions_and_sample_length_are_validated ... ok
+test page_pdf::owner_frame_tests::owner_only_cid_advance_matches_the_serialized_half_em_width ... ok
+test trace::contour_tests::inset_reduces_ink_and_expands_the_counter ... ok
+test trace::contour_tests::topology_keeps_disconnected_punctuation_components ... ok
+test trace::contour_tests::topology_rejects_crossed_counters ... ok
+test trace::contour_tests::semantic_owner_tracks_the_font_construction_scale ... ok
+test convert::contour_coverage_tests::compact_background_retains_a_faint_unowned_line_natively ... ok
+test units::identity_tests::exact_mask_identity_includes_shape_dimensions ... ok
+test trace::contour_tests::faithful_trace_does_not_consume_grayscale_refinements ... ok
+test page_pdf::image_resource_tests::exact_resources_are_shared_and_equal_channels_use_gray ... ok
+test trace::contour_tests::topology_rejects_hole_outside_its_parent ... ok
+test serialization::tests::xref_free_chain_and_bounded_object_groups ... ok
+test trace::contour_tests::zero_offset_preserves_existing_pdf_frame_without_rescaling ... ok
+test trace::contour_tests::compact_font_frame_preserves_coverage_and_matches_serialized_bounds ... ok
+test convert::contour_coverage_tests::paper_reconstruction_excludes_gray_fringe_and_preserves_adjacent_artwork ... ok
+test curve_fit::tests::grayscale_annulus_keeps_counter_and_subpixel_edges ... ok
+test trace::contour_tests::outlying_cubic_handles_do_not_become_true_type_side_bearings ... ok
+test trace::contour_tests::invisible_owner_frame_is_independent_of_reconstructed_contours ... ok
+test convert::contour_coverage_tests::a_source_speck_is_not_a_character_sized_vector ... ok
+test serialization::tests::deterministic_sparse_objects_and_binary_stream ... ok
+test page_pdf::image_resource_tests::flate_predictor_control_pdfs_are_serialized_when_requested ... ok
+test convert::contour_coverage_tests::compact_paper_reduction_is_bounded_and_does_not_whiten_colour ... ok
+test trace::contour_tests::local_fit_preserves_the_existing_source_gate ... ok
+test convert::contour_coverage_tests::caller_protection_does_not_require_an_ocr_unit ... ok
+test convert::contour_coverage_tests::partially_observed_word_keeps_each_missing_unicode_range_once ... ok
+test trace::contour_tests::grayscale_fit_never_uses_the_ocr_label ... ok
+test document::semantic_owner_union_tests::hidden_and_visible_same_unicode_keep_separate_cids_across_pages ... ok
+
+test result: ok. 37 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.06s
+

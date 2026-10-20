@@ -1,0 +1,1060 @@
+{
+  "implementation_head": "80b2a42dcc6b83c42fad7539cffdec2457b9a39c",
+  "baseline": "b2ec997e5cce5923da2ad050fc289a5e731d7dce",
+  "commands": [
+    {
+      "command": [
+        "rustc",
+        "--version"
+      ],
+      "status": 0,
+      "stdout": "rustc 1.99.0 (b940084d7 2026-09-28)\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "pdftoppm",
+        "-v"
+      ],
+      "status": 0,
+      "stdout": "",
+      "stderr": "pdftoppm version 24.02.0\nCopyright 2005-2024 The Poppler Developers - http://poppler.freedesktop.org\nCopyright 1996-2011, 2022 Glyph & Cog, LLC\n"
+    },
+    {
+      "command": [
+        "pdfinfo",
+        "-v"
+      ],
+      "status": 0,
+      "stdout": "",
+      "stderr": "pdfinfo version 24.02.0\nCopyright 2005-2024 The Poppler Developers - http://poppler.freedesktop.org\nCopyright 1996-2011, 2022 Glyph & Cog, LLC\n"
+    },
+    {
+      "command": [
+        "tesseract",
+        "--version"
+      ],
+      "status": 0,
+      "stdout": "tesseract 5.3.4\n leptonica-1.82.0\n  libgif 5.2.1 : libjpeg 8d (libjpeg-turbo 2.1.5) : libpng 1.6.43 : libtiff 4.5.1 : zlib 1.3 : libwebp 1.3.2 : libopenjp2 2.5.0\n Found AVX2\n Found AVX\n Found FMA\n Found SSE4.1\n Found OpenMP 201511\n Found libarchive 3.7.2 zlib/1.3 liblzma/5.4.5 bz2lib/1.0.8 liblz4/1.9.4 libzstd/1.5.5\n Found libcurl/8.5.0 OpenSSL/3.0.13 zlib/1.3 brotli/1.1.0 zstd/1.5.5 libidn2/2.3.7 libpsl/0.21.2 (+libidn2/2.3.7) libssh/0.10.6/openssl/zlib nghttp2/1.59.0 librtmp/2.3 OpenLDAP/2.6.10\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "tesseract",
+        "--list-langs"
+      ],
+      "status": 0,
+      "stdout": "List of available languages in \"/usr/share/tesseract-ocr/5/tessdata/\" (2):\neng\nosd\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "wine",
+        "--version"
+      ],
+      "status": 0,
+      "stdout": "wine-9.0 (Ubuntu 9.0~repack-4build3)\n",
+      "stderr": ""
+    }
+  ],
+  "python_packages": {
+    "pikepdf": "10.17.0",
+    "pypdfium2": "5.14.0",
+    "ocrmypdf": "17.13.0",
+    "archive-pdf-tools": "1.5.7",
+    "Pillow": "13.0.0",
+    "numpy": "2.5.4"
+  },
+  "artifacts": [
+    {
+      "path": "adobe-acrobat-sandbox/clearscan.sh",
+      "bytes": 7293,
+      "sha256": "2f17d8c631ef900b6c69b50d12407dd1b5a1ac9bfcd4af2a0381735012668c88"
+    },
+    {
+      "path": "qualification/pdf_packaging/300/final.pdf",
+      "bytes": 185119,
+      "sha256": "927cd3a82dd136b989740c4cf5a168bfe4aff6236986e90c00faebbf5de4268d"
+    },
+    {
+      "path": "qualification/pdf_packaging/600/final.pdf",
+      "bytes": 258890,
+      "sha256": "982157e50c97e17778cbe966a986c4e5e077fd3f7d8944ef6f8c2bc94c576730"
+    },
+    {
+      "path": "qualification/pdf_packaging/groups/financial-adobe.pdf",
+      "bytes": 718276,
+      "sha256": "0168c79a74237c1d2fe2a1bb1fd47ff3bb6fb73108be4087b5f689d7854fd452"
+    },
+    {
+      "path": "qualification/pdf_packaging/groups/financial-archive.pdf",
+      "bytes": 1283825,
+      "sha256": "3196182c43732a0cefb0b1d09bad0b8517106a2305799dc6dcd14fb87181f904"
+    },
+    {
+      "path": "qualification/pdf_packaging/groups/financial-input.pdf",
+      "bytes": 12861431,
+      "sha256": "206f0f669d0196bb5e3b8da64acbffe1e53b2611377450a71b1440622291ac6f"
+    },
+    {
+      "path": "qualification/pdf_packaging/groups/financial-ocrmypdf1.pdf",
+      "bytes": 12901665,
+      "sha256": "f3fac1e9ad78685b7e177bc692bb77900dbea55554583310fb7717890fea0d68"
+    },
+    {
+      "path": "qualification/pdf_packaging/groups/financial-ocrmypdf3.pdf",
+      "bytes": 5166004,
+      "sha256": "b0b539660282cf36b611a9d4efd8dac7b153b6ae077cc2e671d657e279e6e646"
+    },
+    {
+      "path": "qualification/pdf_packaging/groups/financial-scanweave.pdf",
+      "bytes": 10488347,
+      "sha256": "35878d5431c8967d2882c3b059bc748ede34f947db5854a17d535b0f062ea1de"
+    },
+    {
+      "path": "qualification/pdf_packaging/groups/forms-adobe.pdf",
+      "bytes": 625620,
+      "sha256": "b5b6ced31fef6c5d41aa4b58d38163223f059fe9834d75e47eddbab6e285a38e"
+    },
+    {
+      "path": "qualification/pdf_packaging/groups/forms-archive.pdf",
+      "bytes": 400384,
+      "sha256": "b854f9f1c1ac4b8a75eb54c0f5a916f4dd35755f54c89507a8969d6bca0c1b7e"
+    },
+    {
+      "path": "qualification/pdf_packaging/groups/forms-input.pdf",
+      "bytes": 1294232,
+      "sha256": "9d042396ccc23cdaf74f0e2c3abb86231afaa160aa29902f0ddf708cdabdbc28"
+    },
+    {
+      "path": "qualification/pdf_packaging/groups/forms-ocrmypdf1.pdf",
+      "bytes": 1319579,
+      "sha256": "fe7db134fa42449cd28546830e0ffb0a64bba0d7cc3247f1a2a39a0d8ffe9192"
+    },
+    {
+      "path": "qualification/pdf_packaging/groups/forms-ocrmypdf3.pdf",
+      "bytes": 515613,
+      "sha256": "2022672ea148522af582e285fea12701fd272bd75383641c1e3be6f146880038"
+    },
+    {
+      "path": "qualification/pdf_packaging/groups/forms-scanweave.pdf",
+      "bytes": 850313,
+      "sha256": "72b3c247e9e10b663f90b3c45c1a342848a68831be78fab736c8b5bb8c8ad0de"
+    },
+    {
+      "path": "qualification/pdf_packaging/groups/historical-adobe.pdf",
+      "bytes": 1682427,
+      "sha256": "0b5768a06e9f6507cf7c1d47e17b9367fa661bbf282c0b5cc6f0f053b54e4eda"
+    },
+    {
+      "path": "qualification/pdf_packaging/groups/historical-archive.pdf",
+      "bytes": 616324,
+      "sha256": "f09ef5a93ba45f0bfc696720289f8f8ab7adeae81c9da5c5bc03c5abf0d4237d"
+    },
+    {
+      "path": "qualification/pdf_packaging/groups/historical-input.pdf",
+      "bytes": 46826111,
+      "sha256": "53276a63753bba7801c73c8d91e2e52d310a70ca16efb93c1d69f52c462fce6f"
+    },
+    {
+      "path": "qualification/pdf_packaging/groups/historical-ocrmypdf1.pdf",
+      "bytes": 46850005,
+      "sha256": "b218214a36f797abdb78ed2e41dc99fc022c6c25233773cfc190d69733de3e58"
+    },
+    {
+      "path": "qualification/pdf_packaging/groups/historical-ocrmypdf3.pdf",
+      "bytes": 5802054,
+      "sha256": "dd297424ad3690870278e5ec4404fcc88e427d648010880c5db4725e000c6503"
+    },
+    {
+      "path": "qualification/pdf_packaging/groups/historical-scanweave.pdf",
+      "bytes": 47108340,
+      "sha256": "0e65e409815f70dc80cc6626fe09e60df1563939caa85464cb1c27b177d1e6cb"
+    },
+    {
+      "path": "qualification/pdf_packaging/groups/mixed-adobe.pdf",
+      "bytes": 235999,
+      "sha256": "c1f37db2a8ca8562964129f2392e5371b2871516a4c8a932809c1003a58c8060"
+    },
+    {
+      "path": "qualification/pdf_packaging/groups/mixed-archive.pdf",
+      "bytes": 358410,
+      "sha256": "6cffe8d2fafa59f83c3ef495c1ef190432af297978df425c6147570c0b242c8c"
+    },
+    {
+      "path": "qualification/pdf_packaging/groups/mixed-input.pdf",
+      "bytes": 4351051,
+      "sha256": "bea7a5ae2599dab57807bc256692ec36c656ff34d82af572c35fa3cd285f5e9f"
+    },
+    {
+      "path": "qualification/pdf_packaging/groups/mixed-ocrmypdf1.pdf",
+      "bytes": 4371276,
+      "sha256": "e92675ce79bdbea8925d7d118a47d47c80dadde801c6d55f7d2ecc50f5a13803"
+    },
+    {
+      "path": "qualification/pdf_packaging/groups/mixed-ocrmypdf3.pdf",
+      "bytes": 788537,
+      "sha256": "bfdf2e48984390db916d0d1a431198e14d119fe63efb5ec166c29516f9149f8c"
+    },
+    {
+      "path": "qualification/pdf_packaging/groups/mixed-scanweave.pdf",
+      "bytes": 4991909,
+      "sha256": "cb903e9dadad688005e7691512a321c9c7e4557af44c975ca85e166135e45c63"
+    },
+    {
+      "path": "qualification/pdf_packaging/groups/receipts-adobe.pdf",
+      "bytes": 915781,
+      "sha256": "74ee49edc9f1a4d22cd5316843715c623ac818f770174673c55de5d8c90f0c40"
+    },
+    {
+      "path": "qualification/pdf_packaging/groups/receipts-archive.pdf",
+      "bytes": 400705,
+      "sha256": "c288069a34e8ba5e894d754348f789e96d70bd8280ea9150d5b6eef6d39dcefd"
+    },
+    {
+      "path": "qualification/pdf_packaging/groups/receipts-input.pdf",
+      "bytes": 16636741,
+      "sha256": "72cf20dce418051d7dd5dbb236f4e3e15bf4af5280309029913415bb704d6a5d"
+    },
+    {
+      "path": "qualification/pdf_packaging/groups/receipts-ocrmypdf1.pdf",
+      "bytes": 16651046,
+      "sha256": "ec08fa866e43d992a84673286f424002f564eadac79a65a87690e1ccc508252e"
+    },
+    {
+      "path": "qualification/pdf_packaging/groups/receipts-ocrmypdf3.pdf",
+      "bytes": 3043695,
+      "sha256": "860cddc5e5942e4a1c200d2863a57a420e419cf8aa87d4e11618ba08cd3ceca5"
+    },
+    {
+      "path": "qualification/pdf_packaging/groups/receipts-scanweave.pdf",
+      "bytes": 17870922,
+      "sha256": "c048388557a04c726c3d867ecb69cd433b13d7df3975957bfd1e5f9738de7e7b"
+    },
+    {
+      "path": "qualification/pdf_packaging/real/adobe-all.pdf",
+      "bytes": 3600377,
+      "sha256": "0a67f4455729ba8db1529b343914e0590f5841e8a41d26e95a797b0774b6e577"
+    },
+    {
+      "path": "qualification/pdf_packaging/real/adobe-forms.pdf",
+      "bytes": 625616,
+      "sha256": "c93d12c66e0a233671dade14d28735ca9847270528bb908559be20538b241e16"
+    },
+    {
+      "path": "qualification/pdf_packaging/real/adobe-input-30.pdf",
+      "bytes": 80674410,
+      "sha256": "2cf54d9407660815c63a872e59891607d5e7e2f22b641d31b6b2be7ec718c727"
+    },
+    {
+      "path": "qualification/pdf_packaging/real/adobe-input-forms.pdf",
+      "bytes": 1294232,
+      "sha256": "c087eec214a3a78f983811ad12545b726d4f884d3bb030aab32207723ad6d07a"
+    },
+    {
+      "path": "qualification/pdf_packaging/real/archive/annual-011.pdf",
+      "bytes": 112397,
+      "sha256": "bc15e9660a405020e13d1bf99e524d68db947c85f2f96e385ee811e71351b9f0"
+    },
+    {
+      "path": "qualification/pdf_packaging/real/archive/annual-021.pdf",
+      "bytes": 97316,
+      "sha256": "57c5c8982bc855cd33d622f7db826d73ad6854b596a78bed3cc9cedeedae1e2a"
+    },
+    {
+      "path": "qualification/pdf_packaging/real/archive/annual-031.pdf",
+      "bytes": 107919,
+      "sha256": "ad78cb1d6fcb470540c07fc17f7c767d509ae35ce25fbd78d5dcad5cadb366f1"
+    },
+    {
+      "path": "qualification/pdf_packaging/real/archive/annual-041.pdf",
+      "bytes": 117762,
+      "sha256": "8a1c81b7492799cd247568073575e9738f368b82b59ba10f1bf023433e9c1bef"
+    },
+    {
+      "path": "qualification/pdf_packaging/real/archive/annual-051.pdf",
+      "bytes": 103016,
+      "sha256": "7377618a121f92e0a4780a21cfb68425fe325fdb3580498fd854db3f66c8ce52"
+    },
+    {
+      "path": "qualification/pdf_packaging/real/archive/annual-061.pdf",
+      "bytes": 109532,
+      "sha256": "16225b4bcca4bb60736f1c2ccc9905cc2ec9b65fbd759361459d6e67f1157315"
+    },
+    {
+      "path": "qualification/pdf_packaging/real/archive/annual-071.pdf",
+      "bytes": 106591,
+      "sha256": "a67d0e5a4449eb8cd2e908b6768e57c27ecbcf2c1a9854b9cfaba4e8c03d38a1"
+    },
+    {
+      "path": "qualification/pdf_packaging/real/archive/annual-081.pdf",
+      "bytes": 132217,
+      "sha256": "7e4372befde30cc24b5ae7681b1ca7c3c86810ad613015d239d3ce954bbcf253"
+    },
+    {
+      "path": "qualification/pdf_packaging/real/archive/annual-091.pdf",
+      "bytes": 112846,
+      "sha256": "ae0f7c572125718b9a5d509799b5fa43327d51104f5d2c4ad02215f8704ddb6f"
+    },
+    {
+      "path": "qualification/pdf_packaging/real/archive/annual-101.pdf",
+      "bytes": 102193,
+      "sha256": "e464d6965235424bc26822ece71e6ee3ce0e47d2b83f34943082092f361f8959"
+    },
+    {
+      "path": "qualification/pdf_packaging/real/archive/annual-111.pdf",
+      "bytes": 115873,
+      "sha256": "c49455ce50fa3b678edbb87fc0a8dd2821bf84fb558edbe03acaaf71a1c0640e"
+    },
+    {
+      "path": "qualification/pdf_packaging/real/archive/annual-121.pdf",
+      "bytes": 93925,
+      "sha256": "78bd88ac82a88e2ab740bf4ef4961bf51cd048a997c4a64ba4b369e331551539"
+    },
+    {
+      "path": "qualification/pdf_packaging/real/archive/annual-131.pdf",
+      "bytes": 115522,
+      "sha256": "b8a932a83f72377d214636cf5d67d750aed8c64837d11e17773e60c1be92e0a7"
+    },
+    {
+      "path": "qualification/pdf_packaging/real/archive/cord-00.pdf",
+      "bytes": 45443,
+      "sha256": "b6e4f11620523c118dcb8ce5d2cef7e7734bdc980008aa352074c6cad943dd77"
+    },
+    {
+      "path": "qualification/pdf_packaging/real/archive/cord-01.pdf",
+      "bytes": 38401,
+      "sha256": "819e2144873752130b4098e0a47b24b60d64c9944c4c71ab57daa29441ac6c04"
+    },
+    {
+      "path": "qualification/pdf_packaging/real/archive/cord-02.pdf",
+      "bytes": 30637,
+      "sha256": "9047cad7b760ea0950bd5af4eb401fcec24c0f0be773ed6fa59de91cc4daa733"
+    },
+    {
+      "path": "qualification/pdf_packaging/real/archive/cord-03.pdf",
+      "bytes": 48584,
+      "sha256": "366ab847fdcd87301c78363342ea9c07f3bfa75c62ad5403fbe0b9a2ed9cce89"
+    },
+    {
+      "path": "qualification/pdf_packaging/real/archive/cord-04.pdf",
+      "bytes": 34432,
+      "sha256": "fff6cb92edbea7c2f8ff7d8e3f37f4d3f95692f7dc59f75a74fd3d6db30b425e"
+    },
+    {
+      "path": "qualification/pdf_packaging/real/archive/cord-05.pdf",
+      "bytes": 159863,
+      "sha256": "bc249b53fb76c098eedaea8813e4703c0842fe50c97046d0119c0a0075e321ee"
+    },
+    {
+      "path": "qualification/pdf_packaging/real/archive/cord-06.pdf",
+      "bytes": 35636,
+      "sha256": "116d4e4b7c1befcb89d908c68f752a8eeb7553aee742cfc43b851c073c458f29"
+    },
+    {
+      "path": "qualification/pdf_packaging/real/archive/cord-07.pdf",
+      "bytes": 47379,
+      "sha256": "9f968101cddbc9ea6edbe4249b763f39cfb591cf302be0ba55318d2e283c7c98"
+    },
+    {
+      "path": "qualification/pdf_packaging/real/archive/cord-08.pdf",
+      "bytes": 35655,
+      "sha256": "64f16a1fc08c21de9fd85b66cd6631ef18e6dc3172b082a51d64ac6e2c66af95"
+    },
+    {
+      "path": "qualification/pdf_packaging/real/archive/cord-09.pdf",
+      "bytes": 32173,
+      "sha256": "54c6f22a6e95287d249af5236797be77af0cf717974e08c334dbbaa2f230a1ee"
+    },
+    {
+      "path": "qualification/pdf_packaging/real/archive/history-00.pdf",
+      "bytes": 128772,
+      "sha256": "381877b606efc0fe47cc1296d2244bdf3cc199286b43af024301a48ec45c2268"
+    },
+    {
+      "path": "qualification/pdf_packaging/real/archive/history-01.pdf",
+      "bytes": 83776,
+      "sha256": "728ac65937a9c8074429ee5ad90d1223546b71b01f0b84e987d64a1d4aec0bdd"
+    },
+    {
+      "path": "qualification/pdf_packaging/real/archive/history-02.pdf",
+      "bytes": 95969,
+      "sha256": "bd2372d4df39f997f9cef76ac8e1f1af41cf904ed2d02709ccf715857691796a"
+    },
+    {
+      "path": "qualification/pdf_packaging/real/archive/history-03.pdf",
+      "bytes": 194250,
+      "sha256": "9c78df65ca06cbfbd6b11f3675edbc732488008cdb0297527aa976c4a647db4a"
+    },
+    {
+      "path": "qualification/pdf_packaging/real/archive/history-04.pdf",
+      "bytes": 161388,
+      "sha256": "64e9025758b4bf0d164004989f72fffc8c5b00896a2825588bd90047b7f6e413"
+    },
+    {
+      "path": "qualification/pdf_packaging/real/archive/nara-form-01.pdf",
+      "bytes": 210730,
+      "sha256": "e75ace95313eea175b11a99d25f5472a7175e049a89ebb607b3f1eb3ae1c15e2"
+    },
+    {
+      "path": "qualification/pdf_packaging/real/archive/nara-form-02.pdf",
+      "bytes": 201613,
+      "sha256": "128e064b9c2cf1745ab13610023a6366a58b9b251e0589e32c1c349d5c687522"
+    },
+    {
+      "path": "qualification/pdf_packaging/real/archive/scan-c03-29.pdf",
+      "bytes": 109339,
+      "sha256": "b2e6e83c85abaf80b2dd9ac34ab0a2efefb89d058b913120ae270f9beed960d0"
+    },
+    {
+      "path": "qualification/pdf_packaging/real/archive/scan-linn.pdf",
+      "bytes": 261030,
+      "sha256": "1f1421ade50bf15cea38e8cb756cf5c7b2b72ac0660bc7ddd6db129c8f5fce26"
+    },
+    {
+      "path": "qualification/pdf_packaging/real/input/annual-011.pdf",
+      "bytes": 1016819,
+      "sha256": "2f31303d67e6f5bec2e9281e58ff5bb30d95026e3c1f33001ed0cd5b45928e6d"
+    },
+    {
+      "path": "qualification/pdf_packaging/real/input/annual-021.pdf",
+      "bytes": 756694,
+      "sha256": "b9e2410578434a0cb05ab1ee4eb6ed4df3145234e3e607d4d8434000cc4e3b86"
+    },
+    {
+      "path": "qualification/pdf_packaging/real/input/annual-031.pdf",
+      "bytes": 920392,
+      "sha256": "2c706fb403bbbcab28229b0b6649b820c1e0a63f408cdceec9cf6d1785be7304"
+    },
+    {
+      "path": "qualification/pdf_packaging/real/input/annual-041.pdf",
+      "bytes": 1121131,
+      "sha256": "520f5c3c7852f44ee8a6b9ea8cd11cdec5698caacb8bf3293d37be2941b1bf34"
+    },
+    {
+      "path": "qualification/pdf_packaging/real/input/annual-051.pdf",
+      "bytes": 939113,
+      "sha256": "84b0cf408bf770a90b1b74bc79663b0113548314aca64d38f23bbc602273169c"
+    },
+    {
+      "path": "qualification/pdf_packaging/real/input/annual-061.pdf",
+      "bytes": 1079283,
+      "sha256": "eb9e2538b22bd9739154da13e6ff7f6786368cfae804fcb9a1e52b4210d3ee36"
+    },
+    {
+      "path": "qualification/pdf_packaging/real/input/annual-071.pdf",
+      "bytes": 1022362,
+      "sha256": "9b93c0ad25077804192de206bd87646134e85cf20dce6d3cd7ca47a58ae4e4ea"
+    },
+    {
+      "path": "qualification/pdf_packaging/real/input/annual-081.pdf",
+      "bytes": 1274506,
+      "sha256": "d980de21bcc48a3e2bf84e5d8c840ff30030936b0e192a8a11b75033e53d0d52"
+    },
+    {
+      "path": "qualification/pdf_packaging/real/input/annual-091.pdf",
+      "bytes": 997685,
+      "sha256": "80ccaa3cb43e1b2038b722a5605ed9722413aa9189b40139f0d63997194f4a82"
+    },
+    {
+      "path": "qualification/pdf_packaging/real/input/annual-101.pdf",
+      "bytes": 873532,
+      "sha256": "42022f87ebeed4a2fa28730f4343feceb05eb83837ee0566d8bff3948ec7fd42"
+    },
+    {
+      "path": "qualification/pdf_packaging/real/input/annual-111.pdf",
+      "bytes": 1096891,
+      "sha256": "8373c8cdcece1dd788352508436d845c0cf0d61f0898058712c1989d251e7619"
+    },
+    {
+      "path": "qualification/pdf_packaging/real/input/annual-121.pdf",
+      "bytes": 712412,
+      "sha256": "ed25ccde6483fad3884fd5b400b7c85a9c018d04a6e1fda1549adeb1c8011961"
+    },
+    {
+      "path": "qualification/pdf_packaging/real/input/annual-131.pdf",
+      "bytes": 1054365,
+      "sha256": "95d79115307467c4f5416f5fb556a6ddc4ac8662bb2430655ddacc579ed0c98c"
+    },
+    {
+      "path": "qualification/pdf_packaging/real/input/cord-00.pdf",
+      "bytes": 1405410,
+      "sha256": "8236a4f23c5b81052a9d97e7b7c2b257edb5c268ee6a37a89c82e6f586f003e5"
+    },
+    {
+      "path": "qualification/pdf_packaging/real/input/cord-01.pdf",
+      "bytes": 1316081,
+      "sha256": "5e661139de19687653412b4968d52077d418e50d8cca8186740e427d90a92c47"
+    },
+    {
+      "path": "qualification/pdf_packaging/real/input/cord-02.pdf",
+      "bytes": 314955,
+      "sha256": "4b9929fd09b6ccc8dbae8fadfb394f999c945b14041389f48f3e1d2d8b7eec36"
+    },
+    {
+      "path": "qualification/pdf_packaging/real/input/cord-03.pdf",
+      "bytes": 1753253,
+      "sha256": "b58686f5d20833bdb9e7509b96ddd63c49fed683ddce7c8d9329a7ff30d41431"
+    },
+    {
+      "path": "qualification/pdf_packaging/real/input/cord-04.pdf",
+      "bytes": 807254,
+      "sha256": "8f5e1bbb16331f36b346cda5c42b7b6d015600cf09dd7b4a5bebccec12ae327a"
+    },
+    {
+      "path": "qualification/pdf_packaging/real/input/cord-05.pdf",
+      "bytes": 6651876,
+      "sha256": "c5f82d42075f99021aa7f0ab1bd636ea7607cfcf13ddacb417292c7032386c07"
+    },
+    {
+      "path": "qualification/pdf_packaging/real/input/cord-06.pdf",
+      "bytes": 1054293,
+      "sha256": "fdcf6d0dee72e9a5ae299d516523d8d2179b12284875fa4e7656eafe8f44d4d7"
+    },
+    {
+      "path": "qualification/pdf_packaging/real/input/cord-07.pdf",
+      "bytes": 816693,
+      "sha256": "bf2b348404a119325b63b8e95df22cbcbab563e03cc058c4831cfbc6d39725f3"
+    },
+    {
+      "path": "qualification/pdf_packaging/real/input/cord-08.pdf",
+      "bytes": 1313295,
+      "sha256": "a3372d159fd77eddee53871dc9f2b0a9432d1b674875c913e2c9036c43d34586"
+    },
+    {
+      "path": "qualification/pdf_packaging/real/input/cord-09.pdf",
+      "bytes": 1206449,
+      "sha256": "94b732c1f155b6744551fe183baec48c997c1e5d263e06a9769ad5a5eb2d44db"
+    },
+    {
+      "path": "qualification/pdf_packaging/real/input/history-00.pdf",
+      "bytes": 9302904,
+      "sha256": "0ad45b85dd6faa80cf5a891bc3a08c00656317221575931a1e081fb1850f3f05"
+    },
+    {
+      "path": "qualification/pdf_packaging/real/input/history-01.pdf",
+      "bytes": 5032486,
+      "sha256": "927880146d819f35e2689c1e0f166a50af72f205c0b6e0ab4b6c329f9020231a"
+    },
+    {
+      "path": "qualification/pdf_packaging/real/input/history-02.pdf",
+      "bytes": 7518558,
+      "sha256": "ed8e5910fd89db26f1fec91e242236df0d92f3e10b75488f47a74be797c87cf7"
+    },
+    {
+      "path": "qualification/pdf_packaging/real/input/history-03.pdf",
+      "bytes": 14785840,
+      "sha256": "c3c542317837570ef78b2319937c3d922aaa0145d7e0563dffaab8eb5764d7b3"
+    },
+    {
+      "path": "qualification/pdf_packaging/real/input/history-04.pdf",
+      "bytes": 10187582,
+      "sha256": "ae2a43eb4e52116c1a93970b399e01fe2bc51185f458fd8c5d4b08c01cfef04c"
+    },
+    {
+      "path": "qualification/pdf_packaging/real/input/nara-form-01.pdf",
+      "bytes": 691907,
+      "sha256": "ac8a37dc802e6f73778aa09549bd0fdbb4185c5c19189e2482c174b688cb119d"
+    },
+    {
+      "path": "qualification/pdf_packaging/real/input/nara-form-02.pdf",
+      "bytes": 602642,
+      "sha256": "6c0d90aa3dbaf86100e498440efaec373c7794ba854dee6cece611033f72258b"
+    },
+    {
+      "path": "qualification/pdf_packaging/real/input/scan-c03-29.pdf",
+      "bytes": 3908474,
+      "sha256": "3195060ef3d910cbbf02bf889e24459f2253c1f6d694fb370cd1b54f2c44d327"
+    },
+    {
+      "path": "qualification/pdf_packaging/real/input/scan-linn.pdf",
+      "bytes": 442895,
+      "sha256": "0806ad37f8df3f84e4828f8d536de24f3b282a38c08749662076ece53a4d34da"
+    },
+    {
+      "path": "qualification/pdf_packaging/real/ocrmypdf1/annual-011.pdf",
+      "bytes": 1026364,
+      "sha256": "1867bf20d803522b2e366f021c24ceebc6bc5b4b36402d64713f1ffa14393ae0"
+    },
+    {
+      "path": "qualification/pdf_packaging/real/ocrmypdf1/annual-021.pdf",
+      "bytes": 766041,
+      "sha256": "6b3411aeb05d71ec5fbdddbb90cdc921b21ba45bbc7bd76727d474e63b9aa486"
+    },
+    {
+      "path": "qualification/pdf_packaging/real/ocrmypdf1/annual-031.pdf",
+      "bytes": 929934,
+      "sha256": "d589ba55a64bcfb15cb00cb8900ff68abffc9552f89a0632805149f5073071ba"
+    },
+    {
+      "path": "qualification/pdf_packaging/real/ocrmypdf1/annual-041.pdf",
+      "bytes": 1131563,
+      "sha256": "3fc880cf49ecb27722a2cb0b9223e09b281d14923e7ab997c29a26f66c55521d"
+    },
+    {
+      "path": "qualification/pdf_packaging/real/ocrmypdf1/annual-051.pdf",
+      "bytes": 948131,
+      "sha256": "db3c37968b19de256096c4f4f5b9615b6dc39c80d36273ab27807c0859f553b0"
+    },
+    {
+      "path": "qualification/pdf_packaging/real/ocrmypdf1/annual-061.pdf",
+      "bytes": 1089719,
+      "sha256": "93c36d1add5872e7f9bba40e5ed60cdd88d577e17057cc1b01ccedbc490eee20"
+    },
+    {
+      "path": "qualification/pdf_packaging/real/ocrmypdf1/annual-071.pdf",
+      "bytes": 1032324,
+      "sha256": "221dd0a616aa92823292c00a33b25e5db81c9ce2844688b79d9309c1351c5bee"
+    },
+    {
+      "path": "qualification/pdf_packaging/real/ocrmypdf1/annual-081.pdf",
+      "bytes": 1285201,
+      "sha256": "362714f409d5337a18d5e67c83a528472bba9aa66d5b4f645ad7acc041b59c7e"
+    },
+    {
+      "path": "qualification/pdf_packaging/real/ocrmypdf1/annual-091.pdf",
+      "bytes": 1008181,
+      "sha256": "8e90a3f5378eece44fff310187d299eaff6ed48547ba2757017bcca431dbdd57"
+    },
+    {
+      "path": "qualification/pdf_packaging/real/ocrmypdf1/annual-101.pdf",
+      "bytes": 881957,
+      "sha256": "70a2990c3021c4a297ecc57c292f8be0e25214f635767aabb0055d5913486722"
+    },
+    {
+      "path": "qualification/pdf_packaging/real/ocrmypdf1/annual-111.pdf",
+      "bytes": 1107257,
+      "sha256": "99179787256406e2fe342fd8d7bad5cdefa4af07a9b211bfceb542d3b6881e0f"
+    },
+    {
+      "path": "qualification/pdf_packaging/real/ocrmypdf1/annual-121.pdf",
+      "bytes": 719990,
+      "sha256": "7f1e20f670cd0a7eab76ca4865997a5a3e750c763fc5c391ca5f165bea1d5753"
+    },
+    {
+      "path": "qualification/pdf_packaging/real/ocrmypdf1/annual-131.pdf",
+      "bytes": 1064495,
+      "sha256": "8d1ef08ba6ef79cb8e1db65e8c5fa6b68ef50454d70c99fd6d25925cdbe61496"
+    },
+    {
+      "path": "qualification/pdf_packaging/real/ocrmypdf1/cord-00.pdf",
+      "bytes": 1407533,
+      "sha256": "482857975d611841d8a6078f0dff3539035e16d64ad7cfb02864baff412fdecf"
+    },
+    {
+      "path": "qualification/pdf_packaging/real/ocrmypdf1/cord-01.pdf",
+      "bytes": 1318203,
+      "sha256": "ad8d766c9fc09b3b15104a8379a3f4c92d1721e07ae305afcf81e8804d0cbcde"
+    },
+    {
+      "path": "qualification/pdf_packaging/real/ocrmypdf1/cord-02.pdf",
+      "bytes": 321687,
+      "sha256": "cd6f8555cd7704c95bf1d88890ca971e06eaa286086ff6828c91b25a24b178f3"
+    },
+    {
+      "path": "qualification/pdf_packaging/real/ocrmypdf1/cord-03.pdf",
+      "bytes": 1760448,
+      "sha256": "62c898b09d7741b9194ceaa3e9e910e3a0014cd4de971199b33eea21d37d831d"
+    },
+    {
+      "path": "qualification/pdf_packaging/real/ocrmypdf1/cord-04.pdf",
+      "bytes": 808575,
+      "sha256": "795dd44c7d46817f27a22e4ae5130d1396d914e252b0a1016ed206b43ffa2679"
+    },
+    {
+      "path": "qualification/pdf_packaging/real/ocrmypdf1/cord-05.pdf",
+      "bytes": 6659156,
+      "sha256": "3adb40935b35600f7fb463ac23e62b07585aa11b14bde96b8a20adc1d67c175e"
+    },
+    {
+      "path": "qualification/pdf_packaging/real/ocrmypdf1/cord-06.pdf",
+      "bytes": 1056416,
+      "sha256": "ad3c86d82ca210af43b1516cbacdaa7ce3846735d8081c1ae9d6b70638b27e36"
+    },
+    {
+      "path": "qualification/pdf_packaging/real/ocrmypdf1/cord-07.pdf",
+      "bytes": 821718,
+      "sha256": "145f0aed4705947e1ef6993d7f51678b026adc83e107f344defa98a7efd21693"
+    },
+    {
+      "path": "qualification/pdf_packaging/real/ocrmypdf1/cord-08.pdf",
+      "bytes": 1321211,
+      "sha256": "29999cb40a4207c533a010b77f89c1247a3c95cc049a0a0022a9596541a484b6"
+    },
+    {
+      "path": "qualification/pdf_packaging/real/ocrmypdf1/cord-09.pdf",
+      "bytes": 1212223,
+      "sha256": "6f571135940f283b213bf11f6957f474b21fcc359b9a15e52c8504491831ae46"
+    },
+    {
+      "path": "qualification/pdf_packaging/real/ocrmypdf1/history-00.pdf",
+      "bytes": 9312866,
+      "sha256": "96e52711e92f31afc3eb30bd3cd5093153f843eac9bb4bb4cb69bf060a05c3f2"
+    },
+    {
+      "path": "qualification/pdf_packaging/real/ocrmypdf1/history-01.pdf",
+      "bytes": 5042321,
+      "sha256": "fbaabaa81a8a4942d42915cb5c1e890a0aac29809c484c429b7af29eaebb09d9"
+    },
+    {
+      "path": "qualification/pdf_packaging/real/ocrmypdf1/history-02.pdf",
+      "bytes": 7528410,
+      "sha256": "ba38899a9bd51cca827168e16552b292033444f97e7af3bab603fa2e7f4e2aec"
+    },
+    {
+      "path": "qualification/pdf_packaging/real/ocrmypdf1/history-03.pdf",
+      "bytes": 14795186,
+      "sha256": "41f996a90575697ae63f8ff597d4ea8cab2d64aa0b617e4ed4b4042998485592"
+    },
+    {
+      "path": "qualification/pdf_packaging/real/ocrmypdf1/history-04.pdf",
+      "bytes": 10200369,
+      "sha256": "16bf38f7d4b28e7d3b04ec4a35999951583c19e71dba72a099b2db6cf1b8341a"
+    },
+    {
+      "path": "qualification/pdf_packaging/real/ocrmypdf1/nara-form-01.pdf",
+      "bytes": 707896,
+      "sha256": "fe1d16dc61aa30dc53de6e1b84127842291c71ce6e29942d3d2b23b3e10c742e"
+    },
+    {
+      "path": "qualification/pdf_packaging/real/ocrmypdf1/nara-form-02.pdf",
+      "bytes": 619339,
+      "sha256": "386ddf7e121809f6554d84c0722a4837e4bdb49e86cebf8b11890a9b80de5bd7"
+    },
+    {
+      "path": "qualification/pdf_packaging/real/ocrmypdf1/scan-c03-29.pdf",
+      "bytes": 3918738,
+      "sha256": "40353c709b6dc9b76c1160e8e83181dd3e26bec34185aa6c7c4a85c388988fde"
+    },
+    {
+      "path": "qualification/pdf_packaging/real/ocrmypdf1/scan-linn.pdf",
+      "bytes": 458638,
+      "sha256": "559d32d0a6758c4cad33f5632a14480d71956436874b9f2039ade1da16715702"
+    },
+    {
+      "path": "qualification/pdf_packaging/real/ocrmypdf3/annual-011.pdf",
+      "bytes": 405852,
+      "sha256": "167e358fda895914d875efe7906779b853c774b75eb278fb26b1f53b30682348"
+    },
+    {
+      "path": "qualification/pdf_packaging/real/ocrmypdf3/annual-021.pdf",
+      "bytes": 370376,
+      "sha256": "a3da6fd197b2a7a19fca875d68fb4ea4e115393fb7438c46aecc606856430741"
+    },
+    {
+      "path": "qualification/pdf_packaging/real/ocrmypdf3/annual-031.pdf",
+      "bytes": 387931,
+      "sha256": "c9b3f5f7527070e62827bb1f673c3f9b6cca9a36a2c99738517a0d50877ded1d"
+    },
+    {
+      "path": "qualification/pdf_packaging/real/ocrmypdf3/annual-041.pdf",
+      "bytes": 413577,
+      "sha256": "e63d055added95a7564a2186c1be23409bed73197cdf9ca76c76f9688c6a36a8"
+    },
+    {
+      "path": "qualification/pdf_packaging/real/ocrmypdf3/annual-051.pdf",
+      "bytes": 369755,
+      "sha256": "49dcc294252a51abac84f4e27903c420ebb5531714748fb1abde6d6c48303bfa"
+    },
+    {
+      "path": "qualification/pdf_packaging/real/ocrmypdf3/annual-061.pdf",
+      "bytes": 391372,
+      "sha256": "34999eb6c2fc43663aac90732c1da7cdd0e099cbff78dc0b6572883922c37c14"
+    },
+    {
+      "path": "qualification/pdf_packaging/real/ocrmypdf3/annual-071.pdf",
+      "bytes": 400172,
+      "sha256": "9993e289aef3ad73fe9b0a6d4fc30f2cb4b000c8a92f7566a30152b0d9a815f5"
+    },
+    {
+      "path": "qualification/pdf_packaging/real/ocrmypdf3/annual-081.pdf",
+      "bytes": 514091,
+      "sha256": "6d4ba7eec8a19113eb284901dbb8028ceb005c5aa0b60ead51fa23438467fd22"
+    },
+    {
+      "path": "qualification/pdf_packaging/real/ocrmypdf3/annual-091.pdf",
+      "bytes": 412683,
+      "sha256": "f32767935c51e62173a80c8657c0263b01069d80b935914b3b0c17bda4a939e1"
+    },
+    {
+      "path": "qualification/pdf_packaging/real/ocrmypdf3/annual-101.pdf",
+      "bytes": 379920,
+      "sha256": "45f2f9dbd11a429bf135a7fcb302770219cf3e358d951bf713d813a5be7057f5"
+    },
+    {
+      "path": "qualification/pdf_packaging/real/ocrmypdf3/annual-111.pdf",
+      "bytes": 441267,
+      "sha256": "a7cae6e45d9b5c255b107e26dea9246dab6fbf2aec64eabf8dfa5923a09fabad"
+    },
+    {
+      "path": "qualification/pdf_packaging/real/ocrmypdf3/annual-121.pdf",
+      "bytes": 369014,
+      "sha256": "ca07182bbbf623acad94091631aae6eca8a270c654abadffd9be15eb83e11e84"
+    },
+    {
+      "path": "qualification/pdf_packaging/real/ocrmypdf3/annual-131.pdf",
+      "bytes": 399473,
+      "sha256": "ccaa9a00dcde8f9ebc595f168708f10bb95bfcc17119084e8d1cb534328c5d7f"
+    },
+    {
+      "path": "qualification/pdf_packaging/real/ocrmypdf3/cord-00.pdf",
+      "bytes": 187401,
+      "sha256": "d091b967faeec2cca2b6d5b57c97dec4dee8481efc9d4732a2c6a6e0c4cfa9d4"
+    },
+    {
+      "path": "qualification/pdf_packaging/real/ocrmypdf3/cord-01.pdf",
+      "bytes": 211690,
+      "sha256": "eeef46164b19e9ccd9295dc5784dd89e6f3d9a89078ea43d958e70742fc6a3d0"
+    },
+    {
+      "path": "qualification/pdf_packaging/real/ocrmypdf3/cord-02.pdf",
+      "bytes": 116366,
+      "sha256": "8e9f6684fecb32f51c89f03c7af1f485c1f23f90dfe51dbe3aab0ae9115ddb18"
+    },
+    {
+      "path": "qualification/pdf_packaging/real/ocrmypdf3/cord-03.pdf",
+      "bytes": 293085,
+      "sha256": "1e036aaeb701089dfe85f01a91cf16f3bf3f10d3764f594945432e06e46d7d6f"
+    },
+    {
+      "path": "qualification/pdf_packaging/real/ocrmypdf3/cord-04.pdf",
+      "bytes": 171613,
+      "sha256": "0bf6f606acce0950b4be26d87a9a8dbc5817d8cbf52eb4d1b1711d4951400038"
+    },
+    {
+      "path": "qualification/pdf_packaging/real/ocrmypdf3/cord-05.pdf",
+      "bytes": 1407859,
+      "sha256": "e31672c545ff3b72d1d7c3e5198f054aa4bf976e923de2d02bde7d3dc028ee91"
+    },
+    {
+      "path": "qualification/pdf_packaging/real/ocrmypdf3/cord-06.pdf",
+      "bytes": 164816,
+      "sha256": "99e44e1a84277e11d7c3923cb9ef7bb8d4cf5695dd42620747f725a9862b1f6e"
+    },
+    {
+      "path": "qualification/pdf_packaging/real/ocrmypdf3/cord-07.pdf",
+      "bytes": 119482,
+      "sha256": "c2a9d230739f362fe9b82ea4a2d3f7d6c7745723c8dee60f144a56af39f028b3"
+    },
+    {
+      "path": "qualification/pdf_packaging/real/ocrmypdf3/cord-08.pdf",
+      "bytes": 174026,
+      "sha256": "cd5d2d6ad48f1a19aece0a712779bed4609629c6a1ccc0222f2af83fd17bef32"
+    },
+    {
+      "path": "qualification/pdf_packaging/real/ocrmypdf3/cord-09.pdf",
+      "bytes": 233478,
+      "sha256": "d085704fb52777d3d1bf6e115cfc92fc92239f6e34f0975ce43b35e682308fad"
+    },
+    {
+      "path": "qualification/pdf_packaging/real/ocrmypdf3/history-00.pdf",
+      "bytes": 1229916,
+      "sha256": "3608ed6aff86f114052f9e1bd1af3da71e168680c99325084e40839ebc58a74b"
+    },
+    {
+      "path": "qualification/pdf_packaging/real/ocrmypdf3/history-01.pdf",
+      "bytes": 1034728,
+      "sha256": "e6fa508fc1d66d0973079e9cf1d4a43b64ff91dbfd79c53419f664366fa091db"
+    },
+    {
+      "path": "qualification/pdf_packaging/real/ocrmypdf3/history-02.pdf",
+      "bytes": 606642,
+      "sha256": "59bf71248ff59df359747cfd47f15f50a720161baf2dc2b0b761b5012223f30d"
+    },
+    {
+      "path": "qualification/pdf_packaging/real/ocrmypdf3/history-03.pdf",
+      "bytes": 1629057,
+      "sha256": "cc2f8233b43c2be078e9edf61a3dd7d825fb2f39beebcf034c7966cb4978d884"
+    },
+    {
+      "path": "qualification/pdf_packaging/real/ocrmypdf3/history-04.pdf",
+      "bytes": 1330868,
+      "sha256": "66ebd3946c54d95ba605eb2e908bfbe2c381c74d150ecdcfaefdc8e706f86066"
+    },
+    {
+      "path": "qualification/pdf_packaging/real/ocrmypdf3/nara-form-01.pdf",
+      "bytes": 279257,
+      "sha256": "79b01e3ce380f058627833b928b45cdfef201de53ff2617369cb8fa5d0b5d766"
+    },
+    {
+      "path": "qualification/pdf_packaging/real/ocrmypdf3/nara-form-02.pdf",
+      "bytes": 244014,
+      "sha256": "9b5eb1d54ca4501804702201717464ad1080eedb1987bd449b7f52dee1be2331"
+    },
+    {
+      "path": "qualification/pdf_packaging/real/ocrmypdf3/scan-c03-29.pdf",
+      "bytes": 492496,
+      "sha256": "9b25c28be184b4e62f845ff8044199b6a3e6ef88aef6d655631422e8e52567b9"
+    },
+    {
+      "path": "qualification/pdf_packaging/real/ocrmypdf3/scan-linn.pdf",
+      "bytes": 302136,
+      "sha256": "9a70c8f7a417d3d26effc037a3bda8002c35ef1051cedb1c9ae6f8f06e2ae5f0"
+    },
+    {
+      "path": "qualification/pdf_packaging/real/scanweave/annual-011.pdf",
+      "bytes": 816576,
+      "sha256": "b4cfbc316f7937f3d9a761f7ba9d006ac4230e023c4d77ed434d10173d31b063"
+    },
+    {
+      "path": "qualification/pdf_packaging/real/scanweave/annual-021.pdf",
+      "bytes": 724688,
+      "sha256": "39041932b37b7c07d0776f0ded4b7eeaaee4f2bced1989d1d0cc5b9696807d31"
+    },
+    {
+      "path": "qualification/pdf_packaging/real/scanweave/annual-031.pdf",
+      "bytes": 852772,
+      "sha256": "9e5627309e81a470c6a56ac6cab305e9abce7f6052a758ebedf38d6f20ea6405"
+    },
+    {
+      "path": "qualification/pdf_packaging/real/scanweave/annual-041.pdf",
+      "bytes": 977563,
+      "sha256": "57e57b8001b78d42fca814e36c1d9883e73dc539597264f159c8224f5e22455d"
+    },
+    {
+      "path": "qualification/pdf_packaging/real/scanweave/annual-051.pdf",
+      "bytes": 787660,
+      "sha256": "386db8c0dac6df52c55c249afeb02322fd30576dde321514655c8e17d47eda38"
+    },
+    {
+      "path": "qualification/pdf_packaging/real/scanweave/annual-061.pdf",
+      "bytes": 1062718,
+      "sha256": "abd76b98b8650c0bbe37030a7f78ffcde41546f976d94d6f00ffcd69f1b3ed3d"
+    },
+    {
+      "path": "qualification/pdf_packaging/real/scanweave/annual-071.pdf",
+      "bytes": 922516,
+      "sha256": "23fb38ed003d9978c5553276e7de701d2abf401f38444a5f95ad7fbadbd00d08"
+    },
+    {
+      "path": "qualification/pdf_packaging/real/scanweave/annual-081.pdf",
+      "bytes": 1181353,
+      "sha256": "8fd2e7483f1dcdcc3b440243a74b9c962b635d36c4b45efa1e53858ae37723a2"
+    },
+    {
+      "path": "qualification/pdf_packaging/real/scanweave/annual-091.pdf",
+      "bytes": 976277,
+      "sha256": "951a3e5f864a92968577fad0a5fd0cb68965c1dd3fb61ab412b6715da27f9f8d"
+    },
+    {
+      "path": "qualification/pdf_packaging/real/scanweave/annual-101.pdf",
+      "bytes": 785818,
+      "sha256": "8fdb66f0a36d975c8dfe7c3f06a3bca2def32a3898e013880c6a6391d7282719"
+    },
+    {
+      "path": "qualification/pdf_packaging/real/scanweave/annual-111.pdf",
+      "bytes": 854702,
+      "sha256": "615a426e7ebe12b01ad61a43e9e8cc858d74ccfc1d4497e19e01ffe5c7cc4027"
+    },
+    {
+      "path": "qualification/pdf_packaging/real/scanweave/annual-121.pdf",
+      "bytes": 666503,
+      "sha256": "4cd0f327b316581533ad897b7b47f060aa59dbea8f527655ed51ed05cf2ee865"
+    },
+    {
+      "path": "qualification/pdf_packaging/real/scanweave/annual-131.pdf",
+      "bytes": 948993,
+      "sha256": "b06fa8e25ca00cae4a08f343f8bbf2d42a4b6c086179d73d3b4aca59a5d6423f"
+    },
+    {
+      "path": "qualification/pdf_packaging/real/scanweave/cord-00.pdf",
+      "bytes": 1500534,
+      "sha256": "2da4ad09252e96bc236517a0f860636ef506e607371945a72695b27c6dc75aa0"
+    },
+    {
+      "path": "qualification/pdf_packaging/real/scanweave/cord-01.pdf",
+      "bytes": 1369419,
+      "sha256": "072b78ce0ee17b0fca89f65ba97e6f3ae00f20493298e8113f909cf8adcd2a5f"
+    },
+    {
+      "path": "qualification/pdf_packaging/real/scanweave/cord-02.pdf",
+      "bytes": 370013,
+      "sha256": "47d438a115c188647841c18e2fca530e67d529efc05214967d0e90b22c311799"
+    },
+    {
+      "path": "qualification/pdf_packaging/real/scanweave/cord-03.pdf",
+      "bytes": 1948104,
+      "sha256": "aeca37f2d4ae0fd20209f8f5765d8114d748d323e9465e6a9b798bfea8d59829"
+    },
+    {
+      "path": "qualification/pdf_packaging/real/scanweave/cord-04.pdf",
+      "bytes": 841008,
+      "sha256": "abf2b60e2261d5445b9c6aef4ad7e63163177a10fbd58849bd319a2a7f6f5238"
+    },
+    {
+      "path": "qualification/pdf_packaging/real/scanweave/cord-05.pdf",
+      "bytes": 7257909,
+      "sha256": "0ee9bc983b7f8dd93812e1dd47608300c36d72edfa4bf5cb846f9960d652998d"
+    },
+    {
+      "path": "qualification/pdf_packaging/real/scanweave/cord-06.pdf",
+      "bytes": 1091625,
+      "sha256": "f3b847435a30f4814fa8c40e8cba96ca7c8218f4ca250bab07cdaffef752260a"
+    },
+    {
+      "path": "qualification/pdf_packaging/real/scanweave/cord-07.pdf",
+      "bytes": 851061,
+      "sha256": "c8a6f52023aa6de23a9cf405381a256258f480f5a8fe288c61f76c696489845e"
+    },
+    {
+      "path": "qualification/pdf_packaging/real/scanweave/cord-08.pdf",
+      "bytes": 1385202,
+      "sha256": "4b6f65ac9de7cfc9ad11832277c07dc419b24e38af25ebc0ca87aaf2b3707c6d"
+    },
+    {
+      "path": "qualification/pdf_packaging/real/scanweave/cord-09.pdf",
+      "bytes": 1272661,
+      "sha256": "296307f31f86076f2323b8c46a13b8811722cbdb48134086769738dd05d292a2"
+    },
+    {
+      "path": "qualification/pdf_packaging/real/scanweave/history-00.pdf",
+      "bytes": 9283442,
+      "sha256": "7b2df69a0e3e44b1af9f8bcb4ffc2d46b948928a39a1fb2b0ec81e2f5299d601"
+    },
+    {
+      "path": "qualification/pdf_packaging/real/scanweave/history-01.pdf",
+      "bytes": 5051670,
+      "sha256": "76fd6136bb5a834c65904be978ba34ec77c87ff654e41d1b098fe823d765c968"
+    },
+    {
+      "path": "qualification/pdf_packaging/real/scanweave/history-02.pdf",
+      "bytes": 7581692,
+      "sha256": "8b5a6aac5396930709b15c8a0fff4dac2f20ec13a34540516aae9c8aaef220de"
+    },
+    {
+      "path": "qualification/pdf_packaging/real/scanweave/history-03.pdf",
+      "bytes": 14990381,
+      "sha256": "8f8cf831597aed689cc222f40ed9951907fe247895bb8296a1113322da49c7be"
+    },
+    {
+      "path": "qualification/pdf_packaging/real/scanweave/history-04.pdf",
+      "bytes": 10211098,
+      "sha256": "f873ad49b9fffce8362be4523cb540d24f22a6e4160002495236e3ce06c40770"
+    },
+    {
+      "path": "qualification/pdf_packaging/real/scanweave/nara-form-01.pdf",
+      "bytes": 449532,
+      "sha256": "bad1a2d574e547bb59fc1242eb2bc3b808f77394fd0cea5945965eb9d740d137"
+    },
+    {
+      "path": "qualification/pdf_packaging/real/scanweave/nara-form-02.pdf",
+      "bytes": 402476,
+      "sha256": "43d8cdd64f8a9b014547550b427681119280ebc03f73dfe41a59fc246c2a6fb8"
+    },
+    {
+      "path": "qualification/pdf_packaging/real/scanweave/scan-c03-29.pdf",
+      "bytes": 4127748,
+      "sha256": "d0d3258108c626e00444d911cb01ef368d2d3bee0c742c2344ce43deefece4c0"
+    },
+    {
+      "path": "qualification/pdf_packaging/real/scanweave/scan-linn.pdf",
+      "bytes": 863702,
+      "sha256": "e71874b2447cf4de241644d0020625618010900f504770ad0982be3e41c7614a"
+    },
+    {
+      "path": "target/release/scanweave",
+      "bytes": 7341176,
+      "sha256": "bdd03180164d644ed50fc451a73ccf9a7919fa564493791e70bb589da600e917"
+    }
+  ]
+}

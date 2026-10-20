@@ -1,0 +1,18 @@
+{
+  "group": "receipts",
+  "arm": "ocrmypdf1",
+  "command": [
+    "/tmp/scanweave-competitive-venv/bin/ocrmypdf",
+    "--jobs",
+    "1",
+    "--output-type",
+    "pdf",
+    "-O1",
+    "/data/coding/scanweave/qualification/pdf_packaging/groups/receipts-input.pdf",
+    "/data/coding/scanweave/qualification/pdf_packaging/groups/receipts-ocrmypdf1.pdf"
+  ],
+  "status": 0,
+  "error": null,
+  "seconds": 13.125873882003361,
+  "pdf_bytes": 16651046
+}

@@ -1,0 +1,3188 @@
+{
+  "document_id": "m1d-book-faithful-600",
+  "min_ink_iou": 0.98,
+  "page_fidelity": [
+    0.9844961240310077,
+    0.9887745556594949,
+    0.9887745556594949,
+    0.9887745556594949,
+    0.9887745556594949,
+    0.9887745556594949,
+    0.9887745556594949,
+    0.9887745556594949,
+    0.980040733197556,
+    0.980040733197556,
+    0.980040733197556,
+    0.9887745556594949
+  ],
+  "pages": 12,
+  "selected": "reconstruct",
+  "candidates": [
+    {
+      "name": "reconstruct",
+      "pages": 12,
+      "pdf_bytes": 32768,
+      "font_bytes": 15832,
+      "image_xobjects": 1,
+      "content_bytes": 7925,
+      "raster_encoded_bytes": 3467,
+      "page_fidelity": [
+        0.9844961240310077,
+        0.9887745556594949,
+        0.9887745556594949,
+        0.9887745556594949,
+        0.9887745556594949,
+        0.9887745556594949,
+        0.9887745556594949,
+        0.9887745556594949,
+        0.980040733197556,
+        0.980040733197556,
+        0.980040733197556,
+        0.9887745556594949
+      ],
+      "raster_pages": 0
+    },
+    {
+      "name": "raster_baseline",
+      "pages": 12,
+      "pdf_bytes": 147912,
+      "font_bytes": 15832,
+      "image_xobjects": 12,
+      "content_bytes": 8604,
+      "raster_encoded_bytes": 115375,
+      "page_fidelity": [
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "raster_pages": 12
+    }
+  ],
+  "pdf_bytes": 32768,
+  "font_bytes": 15832,
+  "image_xobjects": 1,
+  "raster_encoded_bytes": 3467,
+  "content_bytes": 7925,
+  "page_order": [
+    "p00",
+    "p01",
+    "p02",
+    "p03",
+    "p04",
+    "p05",
+    "p06",
+    "p07",
+    "p08",
+    "p09",
+    "p10",
+    "p11"
+  ],
+  "page_reports": [
+    {
+      "fidelity": {
+        "vector_ink_iou_min": 0.9844961240310077,
+        "vector_ink_iou_mean": 0.986599880574412,
+        "preservation_ink_iou_min": 0.9844961240310077,
+        "raster_ink_px": 2666,
+        "units_below_policy": 0,
+        "min_ink_iou": 0.98
+      },
+      "reconstruction": {
+        "observations": [],
+        "prototypes": [],
+        "occurrences": [],
+        "restoration_qualified": true
+      },
+      "glyph_stats": [
+        {
+          "gid": 0,
+          "stages": {
+            "trace_max_px": 0.4962500000000034,
+            "trace_p95_px": 0.49624999999999986,
+            "curve_max_px": 0.0037037037037049307,
+            "quant_bound_px": 0.025146484375000003
+          },
+          "symbol_id": "p00-s00",
+          "contours": 1,
+          "points": 1009,
+          "budget_ok": true
+        },
+        {
+          "gid": 1,
+          "stages": {
+            "trace_max_px": 0.4962500000000034,
+            "trace_p95_px": 0.49624999999999986,
+            "curve_max_px": 0.007222222222228903,
+            "quant_bound_px": 0.025146484375000003
+          },
+          "symbol_id": "p00-s01",
+          "contours": 1,
+          "points": 737,
+          "budget_ok": true
+        },
+        {
+          "gid": 2,
+          "stages": {
+            "trace_max_px": 0.4962500000000034,
+            "trace_p95_px": 0.49624999999999986,
+            "curve_max_px": 0.0035185185185239724,
+            "quant_bound_px": 0.025146484375000003
+          },
+          "symbol_id": "p00-s02",
+          "contours": 2,
+          "points": 1554,
+          "budget_ok": true
+        }
+      ],
+      "candidates": [],
+      "selected": "reconstruct",
+      "patches": [
+        {
+          "bbox_px": [
+            134.0,
+            336.0,
+            377.0,
+            399.0
+          ],
+          "w": 243,
+          "h": 63,
+          "rgb_sha256": "cd130755d474a13e721f80caad78611d581fc854b0990d706451feea6775172a"
+        }
+      ],
+      "occurrences": [
+        {
+          "page_id": "p00",
+          "span_id": "p00-s00",
+          "symbol_id": "p00-s00",
+          "semantic_text": "e",
+          "owner": "visible_tounicode"
+        },
+        {
+          "page_id": "p00",
+          "span_id": "p00-s01",
+          "symbol_id": "p00-s01",
+          "semantic_text": "a",
+          "owner": "visible_tounicode"
+        },
+        {
+          "page_id": "p00",
+          "span_id": "p00-s02",
+          "symbol_id": "p00-s02",
+          "semantic_text": "8",
+          "owner": "visible_tounicode"
+        },
+        {
+          "page_id": "p00",
+          "span_id": "p00-amount00",
+          "symbol_id": "p00-amount00",
+          "semantic_text": "$",
+          "owner": "invisible"
+        },
+        {
+          "page_id": "p00",
+          "span_id": "p00-amount01",
+          "symbol_id": "p00-amount01",
+          "semantic_text": "1",
+          "owner": "invisible"
+        },
+        {
+          "page_id": "p00",
+          "span_id": "p00-amount02",
+          "symbol_id": "p00-amount02",
+          "semantic_text": "2",
+          "owner": "invisible"
+        },
+        {
+          "page_id": "p00",
+          "span_id": "p00-amount03",
+          "symbol_id": "p00-amount03",
+          "semantic_text": "3",
+          "owner": "invisible"
+        },
+        {
+          "page_id": "p00",
+          "span_id": "p00-amount04",
+          "symbol_id": "p00-amount04",
+          "semantic_text": ".",
+          "owner": "invisible"
+        },
+        {
+          "page_id": "p00",
+          "span_id": "p00-amount05",
+          "symbol_id": "p00-amount05",
+          "semantic_text": "4",
+          "owner": "invisible"
+        },
+        {
+          "page_id": "p00",
+          "span_id": "p00-amount06",
+          "symbol_id": "p00-amount06",
+          "semantic_text": "5",
+          "owner": "invisible"
+        }
+      ],
+      "page_id": "p00",
+      "policy": {
+        "preset": "faithful",
+        "mode": "auto",
+        "dpi": 300.0,
+        "upem": 2048,
+        "min_ink_iou": 0.98,
+        "contact_margin_px": 4.0,
+        "profile": "faithful",
+        "glyph_dictionary": "off"
+      },
+      "supplied_chars": 10,
+      "components_total": 10,
+      "components_owned": 10,
+      "components_artwork": 0,
+      "visual_units": 10,
+      "semantic_spans": 10,
+      "regions": [
+        {
+          "id": 0,
+          "kind": "Text",
+          "units": 1,
+          "bbox_px": [
+            79.0,
+            122.0,
+            146.0,
+            197.0
+          ],
+          "disposition": "Vector"
+        },
+        {
+          "id": 1,
+          "kind": "Text",
+          "units": 1,
+          "bbox_px": [
+            322.0,
+            122.0,
+            389.0,
+            197.0
+          ],
+          "disposition": "Vector"
+        },
+        {
+          "id": 2,
+          "kind": "Text",
+          "units": 1,
+          "bbox_px": [
+            561.0,
+            94.0,
+            629.0,
+            197.0
+          ],
+          "disposition": "Vector"
+        },
+        {
+          "id": 3,
+          "kind": "Mixed",
+          "units": 1,
+          "bbox_px": [
+            134.0,
+            336.0,
+            377.921875,
+            399.0
+          ],
+          "disposition": {
+            "Raster": {
+              "reason": "Protected"
+            }
+          }
+        },
+        {
+          "id": 4,
+          "kind": "Mixed",
+          "units": 1,
+          "bbox_px": [
+            134.0,
+            336.0,
+            377.921875,
+            399.0
+          ],
+          "disposition": {
+            "Raster": {
+              "reason": "Protected"
+            }
+          }
+        },
+        {
+          "id": 5,
+          "kind": "Mixed",
+          "units": 1,
+          "bbox_px": [
+            134.0,
+            336.0,
+            377.921875,
+            399.0
+          ],
+          "disposition": {
+            "Raster": {
+              "reason": "Protected"
+            }
+          }
+        },
+        {
+          "id": 6,
+          "kind": "Mixed",
+          "units": 1,
+          "bbox_px": [
+            134.0,
+            336.0,
+            377.921875,
+            399.0
+          ],
+          "disposition": {
+            "Raster": {
+              "reason": "Protected"
+            }
+          }
+        },
+        {
+          "id": 7,
+          "kind": "Mixed",
+          "units": 1,
+          "bbox_px": [
+            134.0,
+            336.0,
+            377.921875,
+            399.0
+          ],
+          "disposition": {
+            "Raster": {
+              "reason": "Protected"
+            }
+          }
+        },
+        {
+          "id": 8,
+          "kind": "Mixed",
+          "units": 1,
+          "bbox_px": [
+            134.0,
+            336.0,
+            377.921875,
+            399.0
+          ],
+          "disposition": {
+            "Raster": {
+              "reason": "Protected"
+            }
+          }
+        },
+        {
+          "id": 9,
+          "kind": "Mixed",
+          "units": 1,
+          "bbox_px": [
+            134.0,
+            336.0,
+            377.921875,
+            399.0
+          ],
+          "disposition": {
+            "Raster": {
+              "reason": "Protected"
+            }
+          }
+        }
+      ],
+      "coverage": {
+        "text_ink_px_total": 9376,
+        "text_ink_px_vector": 6710,
+        "text_ink_px_raster": 2666,
+        "other_ink_px": 0,
+        "unowned_ink_px": 0,
+        "multiply_owned_ink_px": 0
+      },
+      "fallback_reasons": {
+        "Protected": 7
+      },
+      "font_glyphs": 4,
+      "font_bytes": 0,
+      "pdf_bytes": 0,
+      "raster_bytes": 45927,
+      "semantic_owner": {
+        "p00-amount00": "invisible",
+        "p00-amount01": "invisible",
+        "p00-amount02": "invisible",
+        "p00-amount03": "invisible",
+        "p00-amount04": "invisible",
+        "p00-amount05": "invisible",
+        "p00-amount06": "invisible",
+        "p00-s00": "visible_tounicode",
+        "p00-s01": "visible_tounicode",
+        "p00-s02": "visible_tounicode"
+      },
+      "ownership_invariants": {
+        "semantic": true,
+        "visual": true
+      }
+    },
+    {
+      "fidelity": {
+        "vector_ink_iou_min": 0.9887745556594949,
+        "vector_ink_iou_mean": 0.9905817162392078,
+        "preservation_ink_iou_min": 0.9887745556594949,
+        "raster_ink_px": 0,
+        "units_below_policy": 0,
+        "min_ink_iou": 0.98
+      },
+      "reconstruction": {
+        "observations": [],
+        "prototypes": [],
+        "occurrences": [],
+        "restoration_qualified": true
+      },
+      "glyph_stats": [
+        {
+          "gid": 0,
+          "stages": {
+            "trace_max_px": 0.4962500000000034,
+            "trace_p95_px": 0.49624999999999986,
+            "curve_max_px": 0.009814814814819495,
+            "quant_bound_px": 0.025146484375000003
+          },
+          "symbol_id": "p01-s00",
+          "contours": 2,
+          "points": 1002,
+          "budget_ok": true
+        },
+        {
+          "gid": 1,
+          "stages": {
+            "trace_max_px": 0.4962500000000034,
+            "trace_p95_px": 0.49624999999999986,
+            "curve_max_px": 0.007222222222228903,
+            "quant_bound_px": 0.025146484375000003
+          },
+          "symbol_id": "p01-s01",
+          "contours": 2,
+          "points": 842,
+          "budget_ok": true
+        },
+        {
+          "gid": 2,
+          "stages": {
+            "trace_max_px": 0.4962500000000034,
+            "trace_p95_px": 0.49624999999999986,
+            "curve_max_px": 0.0035185185185239724,
+            "quant_bound_px": 0.025146484375000003
+          },
+          "symbol_id": "p01-s02",
+          "contours": 3,
+          "points": 1603,
+          "budget_ok": true
+        }
+      ],
+      "candidates": [],
+      "selected": "reconstruct",
+      "patches": [],
+      "occurrences": [
+        {
+          "page_id": "p01",
+          "span_id": "p01-s00",
+          "symbol_id": "p01-s00",
+          "semantic_text": "e",
+          "owner": "visible_tounicode"
+        },
+        {
+          "page_id": "p01",
+          "span_id": "p01-s01",
+          "symbol_id": "p01-s01",
+          "semantic_text": "a",
+          "owner": "visible_tounicode"
+        },
+        {
+          "page_id": "p01",
+          "span_id": "p01-s02",
+          "symbol_id": "p01-s02",
+          "semantic_text": "8",
+          "owner": "visible_tounicode"
+        },
+        {
+          "page_id": "p01",
+          "span_id": "p01-s03",
+          "symbol_id": "p01-s03",
+          "semantic_text": "e",
+          "owner": "visible_tounicode"
+        },
+        {
+          "page_id": "p01",
+          "span_id": "p01-s04",
+          "symbol_id": "p01-s04",
+          "semantic_text": "a",
+          "owner": "visible_tounicode"
+        },
+        {
+          "page_id": "p01",
+          "span_id": "p01-s05",
+          "symbol_id": "p01-s05",
+          "semantic_text": "8",
+          "owner": "visible_tounicode"
+        }
+      ],
+      "page_id": "p01",
+      "policy": {
+        "preset": "faithful",
+        "mode": "auto",
+        "dpi": 300.0,
+        "upem": 2048,
+        "min_ink_iou": 0.98,
+        "contact_margin_px": 4.0,
+        "profile": "faithful",
+        "glyph_dictionary": "off"
+      },
+      "supplied_chars": 6,
+      "components_total": 6,
+      "components_owned": 6,
+      "components_artwork": 0,
+      "visual_units": 6,
+      "semantic_spans": 6,
+      "regions": [
+        {
+          "id": 0,
+          "kind": "Text",
+          "units": 1,
+          "bbox_px": [
+            71.0,
+            126.0,
+            138.0,
+            201.0
+          ],
+          "disposition": "Vector"
+        },
+        {
+          "id": 1,
+          "kind": "Text",
+          "units": 1,
+          "bbox_px": [
+            247.0,
+            126.0,
+            317.0,
+            201.0
+          ],
+          "disposition": "Vector"
+        },
+        {
+          "id": 2,
+          "kind": "Text",
+          "units": 1,
+          "bbox_px": [
+            425.0,
+            98.0,
+            494.0,
+            201.0
+          ],
+          "disposition": "Vector"
+        },
+        {
+          "id": 3,
+          "kind": "Text",
+          "units": 1,
+          "bbox_px": [
+            599.0,
+            126.0,
+            666.0,
+            201.0
+          ],
+          "disposition": "Vector"
+        },
+        {
+          "id": 4,
+          "kind": "Text",
+          "units": 1,
+          "bbox_px": [
+            775.0,
+            126.0,
+            845.0,
+            201.0
+          ],
+          "disposition": "Vector"
+        },
+        {
+          "id": 5,
+          "kind": "Text",
+          "units": 1,
+          "bbox_px": [
+            953.0,
+            98.0,
+            1022.0,
+            201.0
+          ],
+          "disposition": "Vector"
+        }
+      ],
+      "coverage": {
+        "text_ink_px_total": 15404,
+        "text_ink_px_vector": 15404,
+        "text_ink_px_raster": 0,
+        "other_ink_px": 0,
+        "unowned_ink_px": 0,
+        "multiply_owned_ink_px": 0
+      },
+      "fallback_reasons": {},
+      "font_glyphs": 4,
+      "font_bytes": 0,
+      "pdf_bytes": 0,
+      "raster_bytes": 0,
+      "semantic_owner": {
+        "p01-s00": "visible_tounicode",
+        "p01-s01": "visible_tounicode",
+        "p01-s02": "visible_tounicode",
+        "p01-s03": "visible_tounicode",
+        "p01-s04": "visible_tounicode",
+        "p01-s05": "visible_tounicode"
+      },
+      "ownership_invariants": {
+        "semantic": true,
+        "visual": true
+      }
+    },
+    {
+      "fidelity": {
+        "vector_ink_iou_min": 0.9887745556594949,
+        "vector_ink_iou_mean": 0.9905817162392078,
+        "preservation_ink_iou_min": 0.9887745556594949,
+        "raster_ink_px": 0,
+        "units_below_policy": 0,
+        "min_ink_iou": 0.98
+      },
+      "reconstruction": {
+        "observations": [],
+        "prototypes": [],
+        "occurrences": [],
+        "restoration_qualified": true
+      },
+      "glyph_stats": [
+        {
+          "gid": 0,
+          "stages": {
+            "trace_max_px": 0.4962500000000034,
+            "trace_p95_px": 0.49624999999999986,
+            "curve_max_px": 0.009814814814819495,
+            "quant_bound_px": 0.025146484375000003
+          },
+          "symbol_id": "p02-s00",
+          "contours": 2,
+          "points": 1002,
+          "budget_ok": true
+        },
+        {
+          "gid": 1,
+          "stages": {
+            "trace_max_px": 0.4962500000000034,
+            "trace_p95_px": 0.49624999999999986,
+            "curve_max_px": 0.007222222222228903,
+            "quant_bound_px": 0.025146484375000003
+          },
+          "symbol_id": "p02-s01",
+          "contours": 2,
+          "points": 842,
+          "budget_ok": true
+        },
+        {
+          "gid": 2,
+          "stages": {
+            "trace_max_px": 0.4962500000000034,
+            "trace_p95_px": 0.49624999999999986,
+            "curve_max_px": 0.0035185185185239724,
+            "quant_bound_px": 0.025146484375000003
+          },
+          "symbol_id": "p02-s02",
+          "contours": 3,
+          "points": 1603,
+          "budget_ok": true
+        }
+      ],
+      "candidates": [],
+      "selected": "reconstruct",
+      "patches": [],
+      "occurrences": [
+        {
+          "page_id": "p02",
+          "span_id": "p02-s00",
+          "symbol_id": "p02-s00",
+          "semantic_text": "e",
+          "owner": "visible_tounicode"
+        },
+        {
+          "page_id": "p02",
+          "span_id": "p02-s01",
+          "symbol_id": "p02-s01",
+          "semantic_text": "a",
+          "owner": "visible_tounicode"
+        },
+        {
+          "page_id": "p02",
+          "span_id": "p02-s02",
+          "symbol_id": "p02-s02",
+          "semantic_text": "8",
+          "owner": "visible_tounicode"
+        },
+        {
+          "page_id": "p02",
+          "span_id": "p02-s03",
+          "symbol_id": "p02-s03",
+          "semantic_text": "e",
+          "owner": "visible_tounicode"
+        },
+        {
+          "page_id": "p02",
+          "span_id": "p02-s04",
+          "symbol_id": "p02-s04",
+          "semantic_text": "a",
+          "owner": "visible_tounicode"
+        },
+        {
+          "page_id": "p02",
+          "span_id": "p02-s05",
+          "symbol_id": "p02-s05",
+          "semantic_text": "8",
+          "owner": "visible_tounicode"
+        }
+      ],
+      "page_id": "p02",
+      "policy": {
+        "preset": "faithful",
+        "mode": "auto",
+        "dpi": 300.0,
+        "upem": 2048,
+        "min_ink_iou": 0.98,
+        "contact_margin_px": 4.0,
+        "profile": "faithful",
+        "glyph_dictionary": "off"
+      },
+      "supplied_chars": 6,
+      "components_total": 6,
+      "components_owned": 6,
+      "components_artwork": 0,
+      "visual_units": 6,
+      "semantic_spans": 6,
+      "regions": [
+        {
+          "id": 0,
+          "kind": "Text",
+          "units": 1,
+          "bbox_px": [
+            71.0,
+            134.0,
+            138.0,
+            209.0
+          ],
+          "disposition": "Vector"
+        },
+        {
+          "id": 1,
+          "kind": "Text",
+          "units": 1,
+          "bbox_px": [
+            247.0,
+            134.0,
+            317.0,
+            209.0
+          ],
+          "disposition": "Vector"
+        },
+        {
+          "id": 2,
+          "kind": "Text",
+          "units": 1,
+          "bbox_px": [
+            425.0,
+            106.0,
+            494.0,
+            209.0
+          ],
+          "disposition": "Vector"
+        },
+        {
+          "id": 3,
+          "kind": "Text",
+          "units": 1,
+          "bbox_px": [
+            599.0,
+            134.0,
+            666.0,
+            209.0
+          ],
+          "disposition": "Vector"
+        },
+        {
+          "id": 4,
+          "kind": "Text",
+          "units": 1,
+          "bbox_px": [
+            775.0,
+            134.0,
+            845.0,
+            209.0
+          ],
+          "disposition": "Vector"
+        },
+        {
+          "id": 5,
+          "kind": "Text",
+          "units": 1,
+          "bbox_px": [
+            953.0,
+            106.0,
+            1022.0,
+            209.0
+          ],
+          "disposition": "Vector"
+        }
+      ],
+      "coverage": {
+        "text_ink_px_total": 15404,
+        "text_ink_px_vector": 15404,
+        "text_ink_px_raster": 0,
+        "other_ink_px": 0,
+        "unowned_ink_px": 0,
+        "multiply_owned_ink_px": 0
+      },
+      "fallback_reasons": {},
+      "font_glyphs": 4,
+      "font_bytes": 0,
+      "pdf_bytes": 0,
+      "raster_bytes": 0,
+      "semantic_owner": {
+        "p02-s00": "visible_tounicode",
+        "p02-s01": "visible_tounicode",
+        "p02-s02": "visible_tounicode",
+        "p02-s03": "visible_tounicode",
+        "p02-s04": "visible_tounicode",
+        "p02-s05": "visible_tounicode"
+      },
+      "ownership_invariants": {
+        "semantic": true,
+        "visual": true
+      }
+    },
+    {
+      "fidelity": {
+        "vector_ink_iou_min": 0.9887745556594949,
+        "vector_ink_iou_mean": 0.9905817162392078,
+        "preservation_ink_iou_min": 0.9887745556594949,
+        "raster_ink_px": 0,
+        "units_below_policy": 0,
+        "min_ink_iou": 0.98
+      },
+      "reconstruction": {
+        "observations": [],
+        "prototypes": [],
+        "occurrences": [],
+        "restoration_qualified": true
+      },
+      "glyph_stats": [
+        {
+          "gid": 0,
+          "stages": {
+            "trace_max_px": 0.4962500000000034,
+            "trace_p95_px": 0.49624999999999986,
+            "curve_max_px": 0.009814814814819495,
+            "quant_bound_px": 0.025146484375000003
+          },
+          "symbol_id": "p03-s00",
+          "contours": 2,
+          "points": 1002,
+          "budget_ok": true
+        },
+        {
+          "gid": 1,
+          "stages": {
+            "trace_max_px": 0.4962500000000034,
+            "trace_p95_px": 0.49624999999999986,
+            "curve_max_px": 0.007222222222228903,
+            "quant_bound_px": 0.025146484375000003
+          },
+          "symbol_id": "p03-s01",
+          "contours": 2,
+          "points": 842,
+          "budget_ok": true
+        },
+        {
+          "gid": 2,
+          "stages": {
+            "trace_max_px": 0.4962500000000034,
+            "trace_p95_px": 0.49624999999999986,
+            "curve_max_px": 0.0035185185185239724,
+            "quant_bound_px": 0.025146484375000003
+          },
+          "symbol_id": "p03-s02",
+          "contours": 3,
+          "points": 1603,
+          "budget_ok": true
+        }
+      ],
+      "candidates": [],
+      "selected": "reconstruct",
+      "patches": [],
+      "occurrences": [
+        {
+          "page_id": "p03",
+          "span_id": "p03-s00",
+          "symbol_id": "p03-s00",
+          "semantic_text": "e",
+          "owner": "visible_tounicode"
+        },
+        {
+          "page_id": "p03",
+          "span_id": "p03-s01",
+          "symbol_id": "p03-s01",
+          "semantic_text": "a",
+          "owner": "visible_tounicode"
+        },
+        {
+          "page_id": "p03",
+          "span_id": "p03-s02",
+          "symbol_id": "p03-s02",
+          "semantic_text": "8",
+          "owner": "visible_tounicode"
+        },
+        {
+          "page_id": "p03",
+          "span_id": "p03-s03",
+          "symbol_id": "p03-s03",
+          "semantic_text": "e",
+          "owner": "visible_tounicode"
+        },
+        {
+          "page_id": "p03",
+          "span_id": "p03-s04",
+          "symbol_id": "p03-s04",
+          "semantic_text": "a",
+          "owner": "visible_tounicode"
+        },
+        {
+          "page_id": "p03",
+          "span_id": "p03-s05",
+          "symbol_id": "p03-s05",
+          "semantic_text": "8",
+          "owner": "visible_tounicode"
+        }
+      ],
+      "page_id": "p03",
+      "policy": {
+        "preset": "faithful",
+        "mode": "auto",
+        "dpi": 300.0,
+        "upem": 2048,
+        "min_ink_iou": 0.98,
+        "contact_margin_px": 4.0,
+        "profile": "faithful",
+        "glyph_dictionary": "off"
+      },
+      "supplied_chars": 6,
+      "components_total": 6,
+      "components_owned": 6,
+      "components_artwork": 0,
+      "visual_units": 6,
+      "semantic_spans": 6,
+      "regions": [
+        {
+          "id": 0,
+          "kind": "Text",
+          "units": 1,
+          "bbox_px": [
+            71.0,
+            118.0,
+            138.0,
+            193.0
+          ],
+          "disposition": "Vector"
+        },
+        {
+          "id": 1,
+          "kind": "Text",
+          "units": 1,
+          "bbox_px": [
+            247.0,
+            118.0,
+            317.0,
+            193.0
+          ],
+          "disposition": "Vector"
+        },
+        {
+          "id": 2,
+          "kind": "Text",
+          "units": 1,
+          "bbox_px": [
+            425.0,
+            90.0,
+            494.0,
+            193.0
+          ],
+          "disposition": "Vector"
+        },
+        {
+          "id": 3,
+          "kind": "Text",
+          "units": 1,
+          "bbox_px": [
+            599.0,
+            118.0,
+            666.0,
+            193.0
+          ],
+          "disposition": "Vector"
+        },
+        {
+          "id": 4,
+          "kind": "Text",
+          "units": 1,
+          "bbox_px": [
+            775.0,
+            118.0,
+            845.0,
+            193.0
+          ],
+          "disposition": "Vector"
+        },
+        {
+          "id": 5,
+          "kind": "Text",
+          "units": 1,
+          "bbox_px": [
+            953.0,
+            90.0,
+            1022.0,
+            193.0
+          ],
+          "disposition": "Vector"
+        }
+      ],
+      "coverage": {
+        "text_ink_px_total": 15404,
+        "text_ink_px_vector": 15404,
+        "text_ink_px_raster": 0,
+        "other_ink_px": 0,
+        "unowned_ink_px": 0,
+        "multiply_owned_ink_px": 0
+      },
+      "fallback_reasons": {},
+      "font_glyphs": 4,
+      "font_bytes": 0,
+      "pdf_bytes": 0,
+      "raster_bytes": 0,
+      "semantic_owner": {
+        "p03-s00": "visible_tounicode",
+        "p03-s01": "visible_tounicode",
+        "p03-s02": "visible_tounicode",
+        "p03-s03": "visible_tounicode",
+        "p03-s04": "visible_tounicode",
+        "p03-s05": "visible_tounicode"
+      },
+      "ownership_invariants": {
+        "semantic": true,
+        "visual": true
+      }
+    },
+    {
+      "fidelity": {
+        "vector_ink_iou_min": 0.9887745556594949,
+        "vector_ink_iou_mean": 0.9905817162392078,
+        "preservation_ink_iou_min": 0.9887745556594949,
+        "raster_ink_px": 0,
+        "units_below_policy": 0,
+        "min_ink_iou": 0.98
+      },
+      "reconstruction": {
+        "observations": [],
+        "prototypes": [],
+        "occurrences": [],
+        "restoration_qualified": true
+      },
+      "glyph_stats": [
+        {
+          "gid": 0,
+          "stages": {
+            "trace_max_px": 0.4962500000000034,
+            "trace_p95_px": 0.49624999999999986,
+            "curve_max_px": 0.009814814814819495,
+            "quant_bound_px": 0.025146484375000003
+          },
+          "symbol_id": "p04-s00",
+          "contours": 2,
+          "points": 1002,
+          "budget_ok": true
+        },
+        {
+          "gid": 1,
+          "stages": {
+            "trace_max_px": 0.4962500000000034,
+            "trace_p95_px": 0.49624999999999986,
+            "curve_max_px": 0.007222222222228903,
+            "quant_bound_px": 0.025146484375000003
+          },
+          "symbol_id": "p04-s01",
+          "contours": 2,
+          "points": 842,
+          "budget_ok": true
+        },
+        {
+          "gid": 2,
+          "stages": {
+            "trace_max_px": 0.4962500000000034,
+            "trace_p95_px": 0.49624999999999986,
+            "curve_max_px": 0.0035185185185239724,
+            "quant_bound_px": 0.025146484375000003
+          },
+          "symbol_id": "p04-s02",
+          "contours": 3,
+          "points": 1603,
+          "budget_ok": true
+        }
+      ],
+      "candidates": [],
+      "selected": "reconstruct",
+      "patches": [],
+      "occurrences": [
+        {
+          "page_id": "p04",
+          "span_id": "p04-s00",
+          "symbol_id": "p04-s00",
+          "semantic_text": "e",
+          "owner": "visible_tounicode"
+        },
+        {
+          "page_id": "p04",
+          "span_id": "p04-s01",
+          "symbol_id": "p04-s01",
+          "semantic_text": "a",
+          "owner": "visible_tounicode"
+        },
+        {
+          "page_id": "p04",
+          "span_id": "p04-s02",
+          "symbol_id": "p04-s02",
+          "semantic_text": "8",
+          "owner": "visible_tounicode"
+        },
+        {
+          "page_id": "p04",
+          "span_id": "p04-s03",
+          "symbol_id": "p04-s03",
+          "semantic_text": "e",
+          "owner": "visible_tounicode"
+        },
+        {
+          "page_id": "p04",
+          "span_id": "p04-s04",
+          "symbol_id": "p04-s04",
+          "semantic_text": "a",
+          "owner": "visible_tounicode"
+        },
+        {
+          "page_id": "p04",
+          "span_id": "p04-s05",
+          "symbol_id": "p04-s05",
+          "semantic_text": "8",
+          "owner": "visible_tounicode"
+        }
+      ],
+      "page_id": "p04",
+      "policy": {
+        "preset": "faithful",
+        "mode": "auto",
+        "dpi": 300.0,
+        "upem": 2048,
+        "min_ink_iou": 0.98,
+        "contact_margin_px": 4.0,
+        "profile": "faithful",
+        "glyph_dictionary": "off"
+      },
+      "supplied_chars": 6,
+      "components_total": 6,
+      "components_owned": 6,
+      "components_artwork": 0,
+      "visual_units": 6,
+      "semantic_spans": 6,
+      "regions": [
+        {
+          "id": 0,
+          "kind": "Text",
+          "units": 1,
+          "bbox_px": [
+            71.0,
+            126.0,
+            138.0,
+            201.0
+          ],
+          "disposition": "Vector"
+        },
+        {
+          "id": 1,
+          "kind": "Text",
+          "units": 1,
+          "bbox_px": [
+            247.0,
+            126.0,
+            317.0,
+            201.0
+          ],
+          "disposition": "Vector"
+        },
+        {
+          "id": 2,
+          "kind": "Text",
+          "units": 1,
+          "bbox_px": [
+            425.0,
+            98.0,
+            494.0,
+            201.0
+          ],
+          "disposition": "Vector"
+        },
+        {
+          "id": 3,
+          "kind": "Text",
+          "units": 1,
+          "bbox_px": [
+            599.0,
+            126.0,
+            666.0,
+            201.0
+          ],
+          "disposition": "Vector"
+        },
+        {
+          "id": 4,
+          "kind": "Text",
+          "units": 1,
+          "bbox_px": [
+            775.0,
+            126.0,
+            845.0,
+            201.0
+          ],
+          "disposition": "Vector"
+        },
+        {
+          "id": 5,
+          "kind": "Text",
+          "units": 1,
+          "bbox_px": [
+            953.0,
+            98.0,
+            1022.0,
+            201.0
+          ],
+          "disposition": "Vector"
+        }
+      ],
+      "coverage": {
+        "text_ink_px_total": 15404,
+        "text_ink_px_vector": 15404,
+        "text_ink_px_raster": 0,
+        "other_ink_px": 0,
+        "unowned_ink_px": 0,
+        "multiply_owned_ink_px": 0
+      },
+      "fallback_reasons": {},
+      "font_glyphs": 4,
+      "font_bytes": 0,
+      "pdf_bytes": 0,
+      "raster_bytes": 0,
+      "semantic_owner": {
+        "p04-s00": "visible_tounicode",
+        "p04-s01": "visible_tounicode",
+        "p04-s02": "visible_tounicode",
+        "p04-s03": "visible_tounicode",
+        "p04-s04": "visible_tounicode",
+        "p04-s05": "visible_tounicode"
+      },
+      "ownership_invariants": {
+        "semantic": true,
+        "visual": true
+      }
+    },
+    {
+      "fidelity": {
+        "vector_ink_iou_min": 0.9887745556594949,
+        "vector_ink_iou_mean": 0.9905817162392078,
+        "preservation_ink_iou_min": 0.9887745556594949,
+        "raster_ink_px": 0,
+        "units_below_policy": 0,
+        "min_ink_iou": 0.98
+      },
+      "reconstruction": {
+        "observations": [],
+        "prototypes": [],
+        "occurrences": [],
+        "restoration_qualified": true
+      },
+      "glyph_stats": [
+        {
+          "gid": 0,
+          "stages": {
+            "trace_max_px": 0.4962500000000034,
+            "trace_p95_px": 0.49624999999999986,
+            "curve_max_px": 0.009814814814819495,
+            "quant_bound_px": 0.025146484375000003
+          },
+          "symbol_id": "p05-s00",
+          "contours": 2,
+          "points": 1002,
+          "budget_ok": true
+        },
+        {
+          "gid": 1,
+          "stages": {
+            "trace_max_px": 0.4962500000000034,
+            "trace_p95_px": 0.49624999999999986,
+            "curve_max_px": 0.007222222222228903,
+            "quant_bound_px": 0.025146484375000003
+          },
+          "symbol_id": "p05-s01",
+          "contours": 2,
+          "points": 842,
+          "budget_ok": true
+        },
+        {
+          "gid": 2,
+          "stages": {
+            "trace_max_px": 0.4962500000000034,
+            "trace_p95_px": 0.49624999999999986,
+            "curve_max_px": 0.0035185185185239724,
+            "quant_bound_px": 0.025146484375000003
+          },
+          "symbol_id": "p05-s02",
+          "contours": 3,
+          "points": 1603,
+          "budget_ok": true
+        }
+      ],
+      "candidates": [],
+      "selected": "reconstruct",
+      "patches": [],
+      "occurrences": [
+        {
+          "page_id": "p05",
+          "span_id": "p05-s00",
+          "symbol_id": "p05-s00",
+          "semantic_text": "e",
+          "owner": "visible_tounicode"
+        },
+        {
+          "page_id": "p05",
+          "span_id": "p05-s01",
+          "symbol_id": "p05-s01",
+          "semantic_text": "a",
+          "owner": "visible_tounicode"
+        },
+        {
+          "page_id": "p05",
+          "span_id": "p05-s02",
+          "symbol_id": "p05-s02",
+          "semantic_text": "8",
+          "owner": "visible_tounicode"
+        },
+        {
+          "page_id": "p05",
+          "span_id": "p05-s03",
+          "symbol_id": "p05-s03",
+          "semantic_text": "e",
+          "owner": "visible_tounicode"
+        },
+        {
+          "page_id": "p05",
+          "span_id": "p05-s04",
+          "symbol_id": "p05-s04",
+          "semantic_text": "a",
+          "owner": "visible_tounicode"
+        },
+        {
+          "page_id": "p05",
+          "span_id": "p05-s05",
+          "symbol_id": "p05-s05",
+          "semantic_text": "8",
+          "owner": "visible_tounicode"
+        }
+      ],
+      "page_id": "p05",
+      "policy": {
+        "preset": "faithful",
+        "mode": "auto",
+        "dpi": 300.0,
+        "upem": 2048,
+        "min_ink_iou": 0.98,
+        "contact_margin_px": 4.0,
+        "profile": "faithful",
+        "glyph_dictionary": "off"
+      },
+      "supplied_chars": 6,
+      "components_total": 6,
+      "components_owned": 6,
+      "components_artwork": 0,
+      "visual_units": 6,
+      "semantic_spans": 6,
+      "regions": [
+        {
+          "id": 0,
+          "kind": "Text",
+          "units": 1,
+          "bbox_px": [
+            71.0,
+            134.0,
+            138.0,
+            209.0
+          ],
+          "disposition": "Vector"
+        },
+        {
+          "id": 1,
+          "kind": "Text",
+          "units": 1,
+          "bbox_px": [
+            247.0,
+            134.0,
+            317.0,
+            209.0
+          ],
+          "disposition": "Vector"
+        },
+        {
+          "id": 2,
+          "kind": "Text",
+          "units": 1,
+          "bbox_px": [
+            425.0,
+            106.0,
+            494.0,
+            209.0
+          ],
+          "disposition": "Vector"
+        },
+        {
+          "id": 3,
+          "kind": "Text",
+          "units": 1,
+          "bbox_px": [
+            599.0,
+            134.0,
+            666.0,
+            209.0
+          ],
+          "disposition": "Vector"
+        },
+        {
+          "id": 4,
+          "kind": "Text",
+          "units": 1,
+          "bbox_px": [
+            775.0,
+            134.0,
+            845.0,
+            209.0
+          ],
+          "disposition": "Vector"
+        },
+        {
+          "id": 5,
+          "kind": "Text",
+          "units": 1,
+          "bbox_px": [
+            953.0,
+            106.0,
+            1022.0,
+            209.0
+          ],
+          "disposition": "Vector"
+        }
+      ],
+      "coverage": {
+        "text_ink_px_total": 15404,
+        "text_ink_px_vector": 15404,
+        "text_ink_px_raster": 0,
+        "other_ink_px": 0,
+        "unowned_ink_px": 0,
+        "multiply_owned_ink_px": 0
+      },
+      "fallback_reasons": {},
+      "font_glyphs": 4,
+      "font_bytes": 0,
+      "pdf_bytes": 0,
+      "raster_bytes": 0,
+      "semantic_owner": {
+        "p05-s00": "visible_tounicode",
+        "p05-s01": "visible_tounicode",
+        "p05-s02": "visible_tounicode",
+        "p05-s03": "visible_tounicode",
+        "p05-s04": "visible_tounicode",
+        "p05-s05": "visible_tounicode"
+      },
+      "ownership_invariants": {
+        "semantic": true,
+        "visual": true
+      }
+    },
+    {
+      "fidelity": {
+        "vector_ink_iou_min": 0.9887745556594949,
+        "vector_ink_iou_mean": 0.9905817162392078,
+        "preservation_ink_iou_min": 0.9887745556594949,
+        "raster_ink_px": 0,
+        "units_below_policy": 0,
+        "min_ink_iou": 0.98
+      },
+      "reconstruction": {
+        "observations": [],
+        "prototypes": [],
+        "occurrences": [],
+        "restoration_qualified": true
+      },
+      "glyph_stats": [
+        {
+          "gid": 0,
+          "stages": {
+            "trace_max_px": 0.4962500000000034,
+            "trace_p95_px": 0.49624999999999986,
+            "curve_max_px": 0.009814814814819495,
+            "quant_bound_px": 0.025146484375000003
+          },
+          "symbol_id": "p06-s00",
+          "contours": 2,
+          "points": 1002,
+          "budget_ok": true
+        },
+        {
+          "gid": 1,
+          "stages": {
+            "trace_max_px": 0.4962500000000034,
+            "trace_p95_px": 0.49624999999999986,
+            "curve_max_px": 0.007222222222228903,
+            "quant_bound_px": 0.025146484375000003
+          },
+          "symbol_id": "p06-s01",
+          "contours": 2,
+          "points": 842,
+          "budget_ok": true
+        },
+        {
+          "gid": 2,
+          "stages": {
+            "trace_max_px": 0.4962500000000034,
+            "trace_p95_px": 0.49624999999999986,
+            "curve_max_px": 0.0035185185185239724,
+            "quant_bound_px": 0.025146484375000003
+          },
+          "symbol_id": "p06-s02",
+          "contours": 3,
+          "points": 1603,
+          "budget_ok": true
+        }
+      ],
+      "candidates": [],
+      "selected": "reconstruct",
+      "patches": [],
+      "occurrences": [
+        {
+          "page_id": "p06",
+          "span_id": "p06-s00",
+          "symbol_id": "p06-s00",
+          "semantic_text": "e",
+          "owner": "visible_tounicode"
+        },
+        {
+          "page_id": "p06",
+          "span_id": "p06-s01",
+          "symbol_id": "p06-s01",
+          "semantic_text": "a",
+          "owner": "visible_tounicode"
+        },
+        {
+          "page_id": "p06",
+          "span_id": "p06-s02",
+          "symbol_id": "p06-s02",
+          "semantic_text": "8",
+          "owner": "visible_tounicode"
+        },
+        {
+          "page_id": "p06",
+          "span_id": "p06-s03",
+          "symbol_id": "p06-s03",
+          "semantic_text": "e",
+          "owner": "visible_tounicode"
+        },
+        {
+          "page_id": "p06",
+          "span_id": "p06-s04",
+          "symbol_id": "p06-s04",
+          "semantic_text": "a",
+          "owner": "visible_tounicode"
+        },
+        {
+          "page_id": "p06",
+          "span_id": "p06-s05",
+          "symbol_id": "p06-s05",
+          "semantic_text": "8",
+          "owner": "visible_tounicode"
+        }
+      ],
+      "page_id": "p06",
+      "policy": {
+        "preset": "faithful",
+        "mode": "auto",
+        "dpi": 300.0,
+        "upem": 2048,
+        "min_ink_iou": 0.98,
+        "contact_margin_px": 4.0,
+        "profile": "faithful",
+        "glyph_dictionary": "off"
+      },
+      "supplied_chars": 6,
+      "components_total": 6,
+      "components_owned": 6,
+      "components_artwork": 0,
+      "visual_units": 6,
+      "semantic_spans": 6,
+      "regions": [
+        {
+          "id": 0,
+          "kind": "Text",
+          "units": 1,
+          "bbox_px": [
+            71.0,
+            118.0,
+            138.0,
+            193.0
+          ],
+          "disposition": "Vector"
+        },
+        {
+          "id": 1,
+          "kind": "Text",
+          "units": 1,
+          "bbox_px": [
+            247.0,
+            118.0,
+            317.0,
+            193.0
+          ],
+          "disposition": "Vector"
+        },
+        {
+          "id": 2,
+          "kind": "Text",
+          "units": 1,
+          "bbox_px": [
+            425.0,
+            90.0,
+            494.0,
+            193.0
+          ],
+          "disposition": "Vector"
+        },
+        {
+          "id": 3,
+          "kind": "Text",
+          "units": 1,
+          "bbox_px": [
+            599.0,
+            118.0,
+            666.0,
+            193.0
+          ],
+          "disposition": "Vector"
+        },
+        {
+          "id": 4,
+          "kind": "Text",
+          "units": 1,
+          "bbox_px": [
+            775.0,
+            118.0,
+            845.0,
+            193.0
+          ],
+          "disposition": "Vector"
+        },
+        {
+          "id": 5,
+          "kind": "Text",
+          "units": 1,
+          "bbox_px": [
+            953.0,
+            90.0,
+            1022.0,
+            193.0
+          ],
+          "disposition": "Vector"
+        }
+      ],
+      "coverage": {
+        "text_ink_px_total": 15404,
+        "text_ink_px_vector": 15404,
+        "text_ink_px_raster": 0,
+        "other_ink_px": 0,
+        "unowned_ink_px": 0,
+        "multiply_owned_ink_px": 0
+      },
+      "fallback_reasons": {},
+      "font_glyphs": 4,
+      "font_bytes": 0,
+      "pdf_bytes": 0,
+      "raster_bytes": 0,
+      "semantic_owner": {
+        "p06-s00": "visible_tounicode",
+        "p06-s01": "visible_tounicode",
+        "p06-s02": "visible_tounicode",
+        "p06-s03": "visible_tounicode",
+        "p06-s04": "visible_tounicode",
+        "p06-s05": "visible_tounicode"
+      },
+      "ownership_invariants": {
+        "semantic": true,
+        "visual": true
+      }
+    },
+    {
+      "fidelity": {
+        "vector_ink_iou_min": 0.9887745556594949,
+        "vector_ink_iou_mean": 0.9905817162392078,
+        "preservation_ink_iou_min": 0.9887745556594949,
+        "raster_ink_px": 0,
+        "units_below_policy": 0,
+        "min_ink_iou": 0.98
+      },
+      "reconstruction": {
+        "observations": [],
+        "prototypes": [],
+        "occurrences": [],
+        "restoration_qualified": true
+      },
+      "glyph_stats": [
+        {
+          "gid": 0,
+          "stages": {
+            "trace_max_px": 0.4962500000000034,
+            "trace_p95_px": 0.49624999999999986,
+            "curve_max_px": 0.009814814814819495,
+            "quant_bound_px": 0.025146484375000003
+          },
+          "symbol_id": "p07-s00",
+          "contours": 2,
+          "points": 1002,
+          "budget_ok": true
+        },
+        {
+          "gid": 1,
+          "stages": {
+            "trace_max_px": 0.4962500000000034,
+            "trace_p95_px": 0.49624999999999986,
+            "curve_max_px": 0.007222222222228903,
+            "quant_bound_px": 0.025146484375000003
+          },
+          "symbol_id": "p07-s01",
+          "contours": 2,
+          "points": 842,
+          "budget_ok": true
+        },
+        {
+          "gid": 2,
+          "stages": {
+            "trace_max_px": 0.4962500000000034,
+            "trace_p95_px": 0.49624999999999986,
+            "curve_max_px": 0.0035185185185239724,
+            "quant_bound_px": 0.025146484375000003
+          },
+          "symbol_id": "p07-s02",
+          "contours": 3,
+          "points": 1603,
+          "budget_ok": true
+        }
+      ],
+      "candidates": [],
+      "selected": "reconstruct",
+      "patches": [],
+      "occurrences": [
+        {
+          "page_id": "p07",
+          "span_id": "p07-s00",
+          "symbol_id": "p07-s00",
+          "semantic_text": "e",
+          "owner": "visible_tounicode"
+        },
+        {
+          "page_id": "p07",
+          "span_id": "p07-s01",
+          "symbol_id": "p07-s01",
+          "semantic_text": "a",
+          "owner": "visible_tounicode"
+        },
+        {
+          "page_id": "p07",
+          "span_id": "p07-s02",
+          "symbol_id": "p07-s02",
+          "semantic_text": "8",
+          "owner": "visible_tounicode"
+        },
+        {
+          "page_id": "p07",
+          "span_id": "p07-s03",
+          "symbol_id": "p07-s03",
+          "semantic_text": "e",
+          "owner": "visible_tounicode"
+        },
+        {
+          "page_id": "p07",
+          "span_id": "p07-s04",
+          "symbol_id": "p07-s04",
+          "semantic_text": "a",
+          "owner": "visible_tounicode"
+        },
+        {
+          "page_id": "p07",
+          "span_id": "p07-s05",
+          "symbol_id": "p07-s05",
+          "semantic_text": "8",
+          "owner": "visible_tounicode"
+        }
+      ],
+      "page_id": "p07",
+      "policy": {
+        "preset": "faithful",
+        "mode": "auto",
+        "dpi": 300.0,
+        "upem": 2048,
+        "min_ink_iou": 0.98,
+        "contact_margin_px": 4.0,
+        "profile": "faithful",
+        "glyph_dictionary": "off"
+      },
+      "supplied_chars": 6,
+      "components_total": 6,
+      "components_owned": 6,
+      "components_artwork": 0,
+      "visual_units": 6,
+      "semantic_spans": 6,
+      "regions": [
+        {
+          "id": 0,
+          "kind": "Text",
+          "units": 1,
+          "bbox_px": [
+            71.0,
+            126.0,
+            138.0,
+            201.0
+          ],
+          "disposition": "Vector"
+        },
+        {
+          "id": 1,
+          "kind": "Text",
+          "units": 1,
+          "bbox_px": [
+            247.0,
+            126.0,
+            317.0,
+            201.0
+          ],
+          "disposition": "Vector"
+        },
+        {
+          "id": 2,
+          "kind": "Text",
+          "units": 1,
+          "bbox_px": [
+            425.0,
+            98.0,
+            494.0,
+            201.0
+          ],
+          "disposition": "Vector"
+        },
+        {
+          "id": 3,
+          "kind": "Text",
+          "units": 1,
+          "bbox_px": [
+            599.0,
+            126.0,
+            666.0,
+            201.0
+          ],
+          "disposition": "Vector"
+        },
+        {
+          "id": 4,
+          "kind": "Text",
+          "units": 1,
+          "bbox_px": [
+            775.0,
+            126.0,
+            845.0,
+            201.0
+          ],
+          "disposition": "Vector"
+        },
+        {
+          "id": 5,
+          "kind": "Text",
+          "units": 1,
+          "bbox_px": [
+            953.0,
+            98.0,
+            1022.0,
+            201.0
+          ],
+          "disposition": "Vector"
+        }
+      ],
+      "coverage": {
+        "text_ink_px_total": 15404,
+        "text_ink_px_vector": 15404,
+        "text_ink_px_raster": 0,
+        "other_ink_px": 0,
+        "unowned_ink_px": 0,
+        "multiply_owned_ink_px": 0
+      },
+      "fallback_reasons": {},
+      "font_glyphs": 4,
+      "font_bytes": 0,
+      "pdf_bytes": 0,
+      "raster_bytes": 0,
+      "semantic_owner": {
+        "p07-s00": "visible_tounicode",
+        "p07-s01": "visible_tounicode",
+        "p07-s02": "visible_tounicode",
+        "p07-s03": "visible_tounicode",
+        "p07-s04": "visible_tounicode",
+        "p07-s05": "visible_tounicode"
+      },
+      "ownership_invariants": {
+        "semantic": true,
+        "visual": true
+      }
+    },
+    {
+      "fidelity": {
+        "vector_ink_iou_min": 0.980040733197556,
+        "vector_ink_iou_mean": 0.9825502843843084,
+        "preservation_ink_iou_min": 0.980040733197556,
+        "raster_ink_px": 0,
+        "units_below_policy": 0,
+        "min_ink_iou": 0.98
+      },
+      "reconstruction": {
+        "observations": [],
+        "prototypes": [],
+        "occurrences": [],
+        "restoration_qualified": true
+      },
+      "glyph_stats": [
+        {
+          "gid": 0,
+          "stages": {
+            "trace_max_px": 0.4962500000000034,
+            "trace_p95_px": 0.49624999999999986,
+            "curve_max_px": 0.0024074074074137974,
+            "quant_bound_px": 0.022216796875
+          },
+          "symbol_id": "p08-s00",
+          "contours": 2,
+          "points": 954,
+          "budget_ok": true
+        },
+        {
+          "gid": 1,
+          "stages": {
+            "trace_max_px": 0.4962500000000034,
+            "trace_p95_px": 0.49624999999999986,
+            "curve_max_px": 0.003703703703705374,
+            "quant_bound_px": 0.022216796875
+          },
+          "symbol_id": "p08-s01",
+          "contours": 2,
+          "points": 866,
+          "budget_ok": true
+        },
+        {
+          "gid": 2,
+          "stages": {
+            "trace_max_px": 0.4962500000000034,
+            "trace_p95_px": 0.49624999999999986,
+            "curve_max_px": 0.0033333333333414035,
+            "quant_bound_px": 0.022216796875
+          },
+          "symbol_id": "p08-s02",
+          "contours": 3,
+          "points": 1315,
+          "budget_ok": true
+        }
+      ],
+      "candidates": [],
+      "selected": "reconstruct",
+      "patches": [],
+      "occurrences": [
+        {
+          "page_id": "p08",
+          "span_id": "p08-s00",
+          "symbol_id": "p08-s00",
+          "semantic_text": "e",
+          "owner": "visible_tounicode"
+        },
+        {
+          "page_id": "p08",
+          "span_id": "p08-s01",
+          "symbol_id": "p08-s01",
+          "semantic_text": "a",
+          "owner": "visible_tounicode"
+        },
+        {
+          "page_id": "p08",
+          "span_id": "p08-s02",
+          "symbol_id": "p08-s02",
+          "semantic_text": "8",
+          "owner": "visible_tounicode"
+        },
+        {
+          "page_id": "p08",
+          "span_id": "p08-s03",
+          "symbol_id": "p08-s03",
+          "semantic_text": "e",
+          "owner": "visible_tounicode"
+        },
+        {
+          "page_id": "p08",
+          "span_id": "p08-s04",
+          "symbol_id": "p08-s04",
+          "semantic_text": "a",
+          "owner": "visible_tounicode"
+        },
+        {
+          "page_id": "p08",
+          "span_id": "p08-s05",
+          "symbol_id": "p08-s05",
+          "semantic_text": "8",
+          "owner": "visible_tounicode"
+        }
+      ],
+      "page_id": "p08",
+      "policy": {
+        "preset": "faithful",
+        "mode": "auto",
+        "dpi": 300.0,
+        "upem": 2048,
+        "min_ink_iou": 0.98,
+        "contact_margin_px": 4.0,
+        "profile": "faithful",
+        "glyph_dictionary": "off"
+      },
+      "supplied_chars": 6,
+      "components_total": 6,
+      "components_owned": 6,
+      "components_artwork": 0,
+      "visual_units": 6,
+      "semantic_spans": 6,
+      "regions": [
+        {
+          "id": 0,
+          "kind": "Text",
+          "units": 1,
+          "bbox_px": [
+            68.0,
+            138.0,
+            122.0,
+            203.0
+          ],
+          "disposition": "Vector"
+        },
+        {
+          "id": 1,
+          "kind": "Text",
+          "units": 1,
+          "bbox_px": [
+            244.0,
+            138.0,
+            303.0,
+            203.0
+          ],
+          "disposition": "Vector"
+        },
+        {
+          "id": 2,
+          "kind": "Text",
+          "units": 1,
+          "bbox_px": [
+            419.0,
+            112.0,
+            483.0,
+            203.0
+          ],
+          "disposition": "Vector"
+        },
+        {
+          "id": 3,
+          "kind": "Text",
+          "units": 1,
+          "bbox_px": [
+            596.0,
+            138.0,
+            650.0,
+            203.0
+          ],
+          "disposition": "Vector"
+        },
+        {
+          "id": 4,
+          "kind": "Text",
+          "units": 1,
+          "bbox_px": [
+            772.0,
+            138.0,
+            831.0,
+            203.0
+          ],
+          "disposition": "Vector"
+        },
+        {
+          "id": 5,
+          "kind": "Text",
+          "units": 1,
+          "bbox_px": [
+            947.0,
+            112.0,
+            1011.0,
+            203.0
+          ],
+          "disposition": "Vector"
+        }
+      ],
+      "coverage": {
+        "text_ink_px_total": 11180,
+        "text_ink_px_vector": 11180,
+        "text_ink_px_raster": 0,
+        "other_ink_px": 0,
+        "unowned_ink_px": 0,
+        "multiply_owned_ink_px": 0
+      },
+      "fallback_reasons": {},
+      "font_glyphs": 4,
+      "font_bytes": 0,
+      "pdf_bytes": 0,
+      "raster_bytes": 0,
+      "semantic_owner": {
+        "p08-s00": "visible_tounicode",
+        "p08-s01": "visible_tounicode",
+        "p08-s02": "visible_tounicode",
+        "p08-s03": "visible_tounicode",
+        "p08-s04": "visible_tounicode",
+        "p08-s05": "visible_tounicode"
+      },
+      "ownership_invariants": {
+        "semantic": true,
+        "visual": true
+      }
+    },
+    {
+      "fidelity": {
+        "vector_ink_iou_min": 0.980040733197556,
+        "vector_ink_iou_mean": 0.9825502843843084,
+        "preservation_ink_iou_min": 0.980040733197556,
+        "raster_ink_px": 0,
+        "units_below_policy": 0,
+        "min_ink_iou": 0.98
+      },
+      "reconstruction": {
+        "observations": [],
+        "prototypes": [],
+        "occurrences": [],
+        "restoration_qualified": true
+      },
+      "glyph_stats": [
+        {
+          "gid": 0,
+          "stages": {
+            "trace_max_px": 0.4962500000000034,
+            "trace_p95_px": 0.49624999999999986,
+            "curve_max_px": 0.0024074074074137974,
+            "quant_bound_px": 0.022216796875
+          },
+          "symbol_id": "p09-s00",
+          "contours": 2,
+          "points": 954,
+          "budget_ok": true
+        },
+        {
+          "gid": 1,
+          "stages": {
+            "trace_max_px": 0.4962500000000034,
+            "trace_p95_px": 0.49624999999999986,
+            "curve_max_px": 0.003703703703705374,
+            "quant_bound_px": 0.022216796875
+          },
+          "symbol_id": "p09-s01",
+          "contours": 2,
+          "points": 866,
+          "budget_ok": true
+        },
+        {
+          "gid": 2,
+          "stages": {
+            "trace_max_px": 0.4962500000000034,
+            "trace_p95_px": 0.49624999999999986,
+            "curve_max_px": 0.0033333333333414035,
+            "quant_bound_px": 0.022216796875
+          },
+          "symbol_id": "p09-s02",
+          "contours": 3,
+          "points": 1315,
+          "budget_ok": true
+        }
+      ],
+      "candidates": [],
+      "selected": "reconstruct",
+      "patches": [],
+      "occurrences": [
+        {
+          "page_id": "p09",
+          "span_id": "p09-s00",
+          "symbol_id": "p09-s00",
+          "semantic_text": "e",
+          "owner": "visible_tounicode"
+        },
+        {
+          "page_id": "p09",
+          "span_id": "p09-s01",
+          "symbol_id": "p09-s01",
+          "semantic_text": "a",
+          "owner": "visible_tounicode"
+        },
+        {
+          "page_id": "p09",
+          "span_id": "p09-s02",
+          "symbol_id": "p09-s02",
+          "semantic_text": "8",
+          "owner": "visible_tounicode"
+        },
+        {
+          "page_id": "p09",
+          "span_id": "p09-s03",
+          "symbol_id": "p09-s03",
+          "semantic_text": "e",
+          "owner": "visible_tounicode"
+        },
+        {
+          "page_id": "p09",
+          "span_id": "p09-s04",
+          "symbol_id": "p09-s04",
+          "semantic_text": "a",
+          "owner": "visible_tounicode"
+        },
+        {
+          "page_id": "p09",
+          "span_id": "p09-s05",
+          "symbol_id": "p09-s05",
+          "semantic_text": "8",
+          "owner": "visible_tounicode"
+        }
+      ],
+      "page_id": "p09",
+      "policy": {
+        "preset": "faithful",
+        "mode": "auto",
+        "dpi": 300.0,
+        "upem": 2048,
+        "min_ink_iou": 0.98,
+        "contact_margin_px": 4.0,
+        "profile": "faithful",
+        "glyph_dictionary": "off"
+      },
+      "supplied_chars": 6,
+      "components_total": 6,
+      "components_owned": 6,
+      "components_artwork": 0,
+      "visual_units": 6,
+      "semantic_spans": 6,
+      "regions": [
+        {
+          "id": 0,
+          "kind": "Text",
+          "units": 1,
+          "bbox_px": [
+            68.0,
+            122.0,
+            122.0,
+            187.0
+          ],
+          "disposition": "Vector"
+        },
+        {
+          "id": 1,
+          "kind": "Text",
+          "units": 1,
+          "bbox_px": [
+            244.0,
+            122.0,
+            303.0,
+            187.0
+          ],
+          "disposition": "Vector"
+        },
+        {
+          "id": 2,
+          "kind": "Text",
+          "units": 1,
+          "bbox_px": [
+            419.0,
+            96.0,
+            483.0,
+            187.0
+          ],
+          "disposition": "Vector"
+        },
+        {
+          "id": 3,
+          "kind": "Text",
+          "units": 1,
+          "bbox_px": [
+            596.0,
+            122.0,
+            650.0,
+            187.0
+          ],
+          "disposition": "Vector"
+        },
+        {
+          "id": 4,
+          "kind": "Text",
+          "units": 1,
+          "bbox_px": [
+            772.0,
+            122.0,
+            831.0,
+            187.0
+          ],
+          "disposition": "Vector"
+        },
+        {
+          "id": 5,
+          "kind": "Text",
+          "units": 1,
+          "bbox_px": [
+            947.0,
+            96.0,
+            1011.0,
+            187.0
+          ],
+          "disposition": "Vector"
+        }
+      ],
+      "coverage": {
+        "text_ink_px_total": 11180,
+        "text_ink_px_vector": 11180,
+        "text_ink_px_raster": 0,
+        "other_ink_px": 0,
+        "unowned_ink_px": 0,
+        "multiply_owned_ink_px": 0
+      },
+      "fallback_reasons": {},
+      "font_glyphs": 4,
+      "font_bytes": 0,
+      "pdf_bytes": 0,
+      "raster_bytes": 0,
+      "semantic_owner": {
+        "p09-s00": "visible_tounicode",
+        "p09-s01": "visible_tounicode",
+        "p09-s02": "visible_tounicode",
+        "p09-s03": "visible_tounicode",
+        "p09-s04": "visible_tounicode",
+        "p09-s05": "visible_tounicode"
+      },
+      "ownership_invariants": {
+        "semantic": true,
+        "visual": true
+      }
+    },
+    {
+      "fidelity": {
+        "vector_ink_iou_min": 0.980040733197556,
+        "vector_ink_iou_mean": 0.9825502843843084,
+        "preservation_ink_iou_min": 0.980040733197556,
+        "raster_ink_px": 0,
+        "units_below_policy": 0,
+        "min_ink_iou": 0.98
+      },
+      "reconstruction": {
+        "observations": [],
+        "prototypes": [],
+        "occurrences": [],
+        "restoration_qualified": true
+      },
+      "glyph_stats": [
+        {
+          "gid": 0,
+          "stages": {
+            "trace_max_px": 0.4962500000000034,
+            "trace_p95_px": 0.49624999999999986,
+            "curve_max_px": 0.0024074074074137974,
+            "quant_bound_px": 0.022216796875
+          },
+          "symbol_id": "p10-s00",
+          "contours": 2,
+          "points": 954,
+          "budget_ok": true
+        },
+        {
+          "gid": 1,
+          "stages": {
+            "trace_max_px": 0.4962500000000034,
+            "trace_p95_px": 0.49624999999999986,
+            "curve_max_px": 0.003703703703705374,
+            "quant_bound_px": 0.022216796875
+          },
+          "symbol_id": "p10-s01",
+          "contours": 2,
+          "points": 866,
+          "budget_ok": true
+        },
+        {
+          "gid": 2,
+          "stages": {
+            "trace_max_px": 0.4962500000000034,
+            "trace_p95_px": 0.49624999999999986,
+            "curve_max_px": 0.0033333333333414035,
+            "quant_bound_px": 0.022216796875
+          },
+          "symbol_id": "p10-s02",
+          "contours": 3,
+          "points": 1315,
+          "budget_ok": true
+        }
+      ],
+      "candidates": [],
+      "selected": "reconstruct",
+      "patches": [],
+      "occurrences": [
+        {
+          "page_id": "p10",
+          "span_id": "p10-s00",
+          "symbol_id": "p10-s00",
+          "semantic_text": "e",
+          "owner": "visible_tounicode"
+        },
+        {
+          "page_id": "p10",
+          "span_id": "p10-s01",
+          "symbol_id": "p10-s01",
+          "semantic_text": "a",
+          "owner": "visible_tounicode"
+        },
+        {
+          "page_id": "p10",
+          "span_id": "p10-s02",
+          "symbol_id": "p10-s02",
+          "semantic_text": "8",
+          "owner": "visible_tounicode"
+        },
+        {
+          "page_id": "p10",
+          "span_id": "p10-s03",
+          "symbol_id": "p10-s03",
+          "semantic_text": "e",
+          "owner": "visible_tounicode"
+        },
+        {
+          "page_id": "p10",
+          "span_id": "p10-s04",
+          "symbol_id": "p10-s04",
+          "semantic_text": "a",
+          "owner": "visible_tounicode"
+        },
+        {
+          "page_id": "p10",
+          "span_id": "p10-s05",
+          "symbol_id": "p10-s05",
+          "semantic_text": "8",
+          "owner": "visible_tounicode"
+        }
+      ],
+      "page_id": "p10",
+      "policy": {
+        "preset": "faithful",
+        "mode": "auto",
+        "dpi": 300.0,
+        "upem": 2048,
+        "min_ink_iou": 0.98,
+        "contact_margin_px": 4.0,
+        "profile": "faithful",
+        "glyph_dictionary": "off"
+      },
+      "supplied_chars": 6,
+      "components_total": 6,
+      "components_owned": 6,
+      "components_artwork": 0,
+      "visual_units": 6,
+      "semantic_spans": 6,
+      "regions": [
+        {
+          "id": 0,
+          "kind": "Text",
+          "units": 1,
+          "bbox_px": [
+            68.0,
+            130.0,
+            122.0,
+            195.0
+          ],
+          "disposition": "Vector"
+        },
+        {
+          "id": 1,
+          "kind": "Text",
+          "units": 1,
+          "bbox_px": [
+            244.0,
+            130.0,
+            303.0,
+            195.0
+          ],
+          "disposition": "Vector"
+        },
+        {
+          "id": 2,
+          "kind": "Text",
+          "units": 1,
+          "bbox_px": [
+            419.0,
+            104.0,
+            483.0,
+            195.0
+          ],
+          "disposition": "Vector"
+        },
+        {
+          "id": 3,
+          "kind": "Text",
+          "units": 1,
+          "bbox_px": [
+            596.0,
+            130.0,
+            650.0,
+            195.0
+          ],
+          "disposition": "Vector"
+        },
+        {
+          "id": 4,
+          "kind": "Text",
+          "units": 1,
+          "bbox_px": [
+            772.0,
+            130.0,
+            831.0,
+            195.0
+          ],
+          "disposition": "Vector"
+        },
+        {
+          "id": 5,
+          "kind": "Text",
+          "units": 1,
+          "bbox_px": [
+            947.0,
+            104.0,
+            1011.0,
+            195.0
+          ],
+          "disposition": "Vector"
+        }
+      ],
+      "coverage": {
+        "text_ink_px_total": 11180,
+        "text_ink_px_vector": 11180,
+        "text_ink_px_raster": 0,
+        "other_ink_px": 0,
+        "unowned_ink_px": 0,
+        "multiply_owned_ink_px": 0
+      },
+      "fallback_reasons": {},
+      "font_glyphs": 4,
+      "font_bytes": 0,
+      "pdf_bytes": 0,
+      "raster_bytes": 0,
+      "semantic_owner": {
+        "p10-s00": "visible_tounicode",
+        "p10-s01": "visible_tounicode",
+        "p10-s02": "visible_tounicode",
+        "p10-s03": "visible_tounicode",
+        "p10-s04": "visible_tounicode",
+        "p10-s05": "visible_tounicode"
+      },
+      "ownership_invariants": {
+        "semantic": true,
+        "visual": true
+      }
+    },
+    {
+      "fidelity": {
+        "vector_ink_iou_min": 0.9887745556594949,
+        "vector_ink_iou_mean": 0.9909131151235293,
+        "preservation_ink_iou_min": 0.9887745556594949,
+        "raster_ink_px": 0,
+        "units_below_policy": 0,
+        "min_ink_iou": 0.98
+      },
+      "reconstruction": {
+        "observations": [],
+        "prototypes": [],
+        "occurrences": [],
+        "restoration_qualified": true
+      },
+      "glyph_stats": [
+        {
+          "gid": 0,
+          "stages": {
+            "trace_max_px": 0.4962500000000034,
+            "trace_p95_px": 0.49624999999999986,
+            "curve_max_px": 0.009814814814819495,
+            "quant_bound_px": 0.025146484375000003
+          },
+          "symbol_id": "p11-s00",
+          "contours": 2,
+          "points": 1002,
+          "budget_ok": true
+        },
+        {
+          "gid": 1,
+          "stages": {
+            "trace_max_px": 0.4962500000000034,
+            "trace_p95_px": 0.49624999999999986,
+            "curve_max_px": 0.007222222222228903,
+            "quant_bound_px": 0.025146484375000003
+          },
+          "symbol_id": "p11-s01",
+          "contours": 2,
+          "points": 842,
+          "budget_ok": true
+        },
+        {
+          "gid": 2,
+          "stages": {
+            "trace_max_px": 0.4962500000000034,
+            "trace_p95_px": 0.49624999999999986,
+            "curve_max_px": 0.0035185185185239724,
+            "quant_bound_px": 0.025146484375000003
+          },
+          "symbol_id": "p11-s02",
+          "contours": 3,
+          "points": 1603,
+          "budget_ok": true
+        }
+      ],
+      "candidates": [],
+      "selected": "reconstruct",
+      "patches": [],
+      "occurrences": [
+        {
+          "page_id": "p11",
+          "span_id": "p11-s00",
+          "symbol_id": "p11-s00",
+          "semantic_text": "e",
+          "owner": "visible_tounicode"
+        },
+        {
+          "page_id": "p11",
+          "span_id": "p11-s01",
+          "symbol_id": "p11-s01",
+          "semantic_text": "a",
+          "owner": "visible_tounicode"
+        },
+        {
+          "page_id": "p11",
+          "span_id": "p11-s02",
+          "symbol_id": "p11-s02",
+          "semantic_text": "8",
+          "owner": "visible_tounicode"
+        },
+        {
+          "page_id": "p11",
+          "span_id": "p11-s03",
+          "symbol_id": "p11-s03",
+          "semantic_text": "e",
+          "owner": "visible_tounicode"
+        },
+        {
+          "page_id": "p11",
+          "span_id": "p11-s04",
+          "symbol_id": "p11-s04",
+          "semantic_text": "a",
+          "owner": "visible_tounicode"
+        },
+        {
+          "page_id": "p11",
+          "span_id": "p11-s05",
+          "symbol_id": "p11-s05",
+          "semantic_text": "8",
+          "owner": "visible_tounicode"
+        },
+        {
+          "page_id": "p11",
+          "span_id": "p11-s06",
+          "symbol_id": "p11-s06",
+          "semantic_text": "c",
+          "owner": "visible_tounicode"
+        }
+      ],
+      "page_id": "p11",
+      "policy": {
+        "preset": "faithful",
+        "mode": "auto",
+        "dpi": 300.0,
+        "upem": 2048,
+        "min_ink_iou": 0.98,
+        "contact_margin_px": 4.0,
+        "profile": "faithful",
+        "glyph_dictionary": "off"
+      },
+      "supplied_chars": 7,
+      "components_total": 7,
+      "components_owned": 7,
+      "components_artwork": 0,
+      "visual_units": 7,
+      "semantic_spans": 7,
+      "regions": [
+        {
+          "id": 0,
+          "kind": "Text",
+          "units": 1,
+          "bbox_px": [
+            71.0,
+            134.0,
+            138.0,
+            209.0
+          ],
+          "disposition": "Vector"
+        },
+        {
+          "id": 1,
+          "kind": "Text",
+          "units": 1,
+          "bbox_px": [
+            247.0,
+            134.0,
+            317.0,
+            209.0
+          ],
+          "disposition": "Vector"
+        },
+        {
+          "id": 2,
+          "kind": "Text",
+          "units": 1,
+          "bbox_px": [
+            425.0,
+            106.0,
+            494.0,
+            209.0
+          ],
+          "disposition": "Vector"
+        },
+        {
+          "id": 3,
+          "kind": "Text",
+          "units": 1,
+          "bbox_px": [
+            599.0,
+            134.0,
+            666.0,
+            209.0
+          ],
+          "disposition": "Vector"
+        },
+        {
+          "id": 4,
+          "kind": "Text",
+          "units": 1,
+          "bbox_px": [
+            775.0,
+            134.0,
+            845.0,
+            209.0
+          ],
+          "disposition": "Vector"
+        },
+        {
+          "id": 5,
+          "kind": "Text",
+          "units": 1,
+          "bbox_px": [
+            953.0,
+            106.0,
+            1022.0,
+            209.0
+          ],
+          "disposition": "Vector"
+        },
+        {
+          "id": 6,
+          "kind": "Text",
+          "units": 1,
+          "bbox_px": [
+            1077.0,
+            318.0,
+            1144.0,
+            393.0
+          ],
+          "disposition": "Vector"
+        }
+      ],
+      "coverage": {
+        "text_ink_px_total": 17642,
+        "text_ink_px_vector": 17642,
+        "text_ink_px_raster": 0,
+        "other_ink_px": 0,
+        "unowned_ink_px": 0,
+        "multiply_owned_ink_px": 0
+      },
+      "fallback_reasons": {},
+      "font_glyphs": 4,
+      "font_bytes": 0,
+      "pdf_bytes": 0,
+      "raster_bytes": 0,
+      "semantic_owner": {
+        "p11-s00": "visible_tounicode",
+        "p11-s01": "visible_tounicode",
+        "p11-s02": "visible_tounicode",
+        "p11-s03": "visible_tounicode",
+        "p11-s04": "visible_tounicode",
+        "p11-s05": "visible_tounicode",
+        "p11-s06": "visible_tounicode"
+      },
+      "ownership_invariants": {
+        "semantic": true,
+        "visual": true
+      }
+    }
+  ],
+  "coverage": {
+    "text_ink_px_total": 168386,
+    "text_ink_px_vector": 165720,
+    "text_ink_px_raster": 2666,
+    "other_ink_px": 0,
+    "unowned_ink_px": 0,
+    "multiply_owned_ink_px": 0
+  },
+  "search": {
+    "pages": [
+      {
+        "page_id": "p00",
+        "lines": [
+          {
+            "text": "ea8$123.45",
+            "spans": [
+              "p00-s00",
+              "p00-s01",
+              "p00-s02",
+              "p00-amount00",
+              "p00-amount01",
+              "p00-amount02",
+              "p00-amount03",
+              "p00-amount04",
+              "p00-amount05",
+              "p00-amount06"
+            ],
+            "owners": [
+              "visible_tounicode",
+              "visible_tounicode",
+              "visible_tounicode",
+              "invisible",
+              "invisible",
+              "invisible",
+              "invisible",
+              "invisible",
+              "invisible",
+              "invisible"
+            ]
+          }
+        ]
+      },
+      {
+        "page_id": "p01",
+        "lines": [
+          {
+            "text": "ea8ea8",
+            "spans": [
+              "p01-s00",
+              "p01-s01",
+              "p01-s02",
+              "p01-s03",
+              "p01-s04",
+              "p01-s05"
+            ],
+            "owners": [
+              "visible_tounicode",
+              "visible_tounicode",
+              "visible_tounicode",
+              "visible_tounicode",
+              "visible_tounicode",
+              "visible_tounicode"
+            ]
+          }
+        ]
+      },
+      {
+        "page_id": "p02",
+        "lines": [
+          {
+            "text": "ea8ea8",
+            "spans": [
+              "p02-s00",
+              "p02-s01",
+              "p02-s02",
+              "p02-s03",
+              "p02-s04",
+              "p02-s05"
+            ],
+            "owners": [
+              "visible_tounicode",
+              "visible_tounicode",
+              "visible_tounicode",
+              "visible_tounicode",
+              "visible_tounicode",
+              "visible_tounicode"
+            ]
+          }
+        ]
+      },
+      {
+        "page_id": "p03",
+        "lines": [
+          {
+            "text": "ea8ea8",
+            "spans": [
+              "p03-s00",
+              "p03-s01",
+              "p03-s02",
+              "p03-s03",
+              "p03-s04",
+              "p03-s05"
+            ],
+            "owners": [
+              "visible_tounicode",
+              "visible_tounicode",
+              "visible_tounicode",
+              "visible_tounicode",
+              "visible_tounicode",
+              "visible_tounicode"
+            ]
+          }
+        ]
+      },
+      {
+        "page_id": "p04",
+        "lines": [
+          {
+            "text": "ea8ea8",
+            "spans": [
+              "p04-s00",
+              "p04-s01",
+              "p04-s02",
+              "p04-s03",
+              "p04-s04",
+              "p04-s05"
+            ],
+            "owners": [
+              "visible_tounicode",
+              "visible_tounicode",
+              "visible_tounicode",
+              "visible_tounicode",
+              "visible_tounicode",
+              "visible_tounicode"
+            ]
+          }
+        ]
+      },
+      {
+        "page_id": "p05",
+        "lines": [
+          {
+            "text": "ea8ea8",
+            "spans": [
+              "p05-s00",
+              "p05-s01",
+              "p05-s02",
+              "p05-s03",
+              "p05-s04",
+              "p05-s05"
+            ],
+            "owners": [
+              "visible_tounicode",
+              "visible_tounicode",
+              "visible_tounicode",
+              "visible_tounicode",
+              "visible_tounicode",
+              "visible_tounicode"
+            ]
+          }
+        ]
+      },
+      {
+        "page_id": "p06",
+        "lines": [
+          {
+            "text": "ea8ea8",
+            "spans": [
+              "p06-s00",
+              "p06-s01",
+              "p06-s02",
+              "p06-s03",
+              "p06-s04",
+              "p06-s05"
+            ],
+            "owners": [
+              "visible_tounicode",
+              "visible_tounicode",
+              "visible_tounicode",
+              "visible_tounicode",
+              "visible_tounicode",
+              "visible_tounicode"
+            ]
+          }
+        ]
+      },
+      {
+        "page_id": "p07",
+        "lines": [
+          {
+            "text": "ea8ea8",
+            "spans": [
+              "p07-s00",
+              "p07-s01",
+              "p07-s02",
+              "p07-s03",
+              "p07-s04",
+              "p07-s05"
+            ],
+            "owners": [
+              "visible_tounicode",
+              "visible_tounicode",
+              "visible_tounicode",
+              "visible_tounicode",
+              "visible_tounicode",
+              "visible_tounicode"
+            ]
+          }
+        ]
+      },
+      {
+        "page_id": "p08",
+        "lines": [
+          {
+            "text": "ea8ea8",
+            "spans": [
+              "p08-s00",
+              "p08-s01",
+              "p08-s02",
+              "p08-s03",
+              "p08-s04",
+              "p08-s05"
+            ],
+            "owners": [
+              "visible_tounicode",
+              "visible_tounicode",
+              "visible_tounicode",
+              "visible_tounicode",
+              "visible_tounicode",
+              "visible_tounicode"
+            ]
+          }
+        ]
+      },
+      {
+        "page_id": "p09",
+        "lines": [
+          {
+            "text": "ea8ea8",
+            "spans": [
+              "p09-s00",
+              "p09-s01",
+              "p09-s02",
+              "p09-s03",
+              "p09-s04",
+              "p09-s05"
+            ],
+            "owners": [
+              "visible_tounicode",
+              "visible_tounicode",
+              "visible_tounicode",
+              "visible_tounicode",
+              "visible_tounicode",
+              "visible_tounicode"
+            ]
+          }
+        ]
+      },
+      {
+        "page_id": "p10",
+        "lines": [
+          {
+            "text": "ea8ea8",
+            "spans": [
+              "p10-s00",
+              "p10-s01",
+              "p10-s02",
+              "p10-s03",
+              "p10-s04",
+              "p10-s05"
+            ],
+            "owners": [
+              "visible_tounicode",
+              "visible_tounicode",
+              "visible_tounicode",
+              "visible_tounicode",
+              "visible_tounicode",
+              "visible_tounicode"
+            ]
+          }
+        ]
+      },
+      {
+        "page_id": "p11",
+        "lines": [
+          {
+            "text": "ea8ea8c",
+            "spans": [
+              "p11-s00",
+              "p11-s01",
+              "p11-s02",
+              "p11-s03",
+              "p11-s04",
+              "p11-s05",
+              "p11-s06"
+            ],
+            "owners": [
+              "visible_tounicode",
+              "visible_tounicode",
+              "visible_tounicode",
+              "visible_tounicode",
+              "visible_tounicode",
+              "visible_tounicode",
+              "visible_tounicode"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "ownership_invariants": {
+    "semantic": true,
+    "visual": true
+  },
+  "bindings": []
+}

@@ -22,12 +22,17 @@ impl Budget {
     }
 }
 
+#[derive(Clone)]
 pub struct TracedShape {
     pub shape_key: String,
-    /// crop dims in px: the ink touches all four crop edges by construction,
-    /// so in font units the ink spans exactly [0, cw*k] x [0, ch*k]
+    /// Original construction dimensions. A grayscale-fitted contour may sit
+    /// inside them; it must not be rescaled to touch the crop edges.
     pub crop_w_px: usize,
     pub crop_h_px: usize,
+    /// Keep the existing PDF construction frame fixed after contour fitting.
+    pub preserve_crop_frame: bool,
+    pub compact_curves: bool,
+    pub contour_fit: Option<ContourFit>,
     /// dense sampled polylines per contour (crop-local, source-pixel space),
     /// outer contours and holes in paint order
     pub polylines: Vec<Vec<[f64; 2]>>,
@@ -37,6 +42,23 @@ pub struct TracedShape {
     pub stage: StageRaw,
 }
 
+#[derive(Clone, Debug, serde::Serialize)]
+pub struct ContourFit {
+    pub method: String,
+    pub corner_degrees: i32,
+    pub segment_length: f64,
+    pub inset_px: f64,
+    /// Normalized observed coverage isocontour; absent for binary-derived curves.
+    pub coverage_level: Option<f64>,
+    pub paper_luma: f64,
+    pub ink_luma: f64,
+    pub baseline_gray_mse: f64,
+    pub selected_gray_mse: f64,
+    pub baseline_control_points: usize,
+    pub selected_control_points: usize,
+}
+
+#[derive(Clone)]
 pub struct StageRaw {
     pub trace_max_px: f64,
     pub trace_p95_px: f64,
@@ -50,7 +72,7 @@ fn vtracer_config() -> vtracer::Config {
         color_mode: vtracer::ColorMode::Binary,
         hierarchical: vtracer::Hierarchical::Cutout,
         mode: visioncortex::PathSimplifyMode::Spline,
-        filter_speckle: 0, // never drop small marks (VS-05 discipline)
+        filter_speckle: 0,   // never drop small marks (VS-05 discipline)
         corner_threshold: 0, // no corner smoothing (measured: reduces deviation)
         // minimal reduction (0 disables reduction upstream — measured identical to 4.0)
         length_threshold: 1.0,
@@ -68,8 +90,7 @@ fn compound_contours(path: &visioncortex::CompoundPath) -> Vec<Vec<[f64; 2]>> {
     for el in path.iter() {
         match el {
             CompoundPathElement::Spline(s) => {
-                let contour: Vec<[f64; 2]> =
-                    s.points.iter().map(|p| [p.x, p.y]).collect();
+                let contour: Vec<[f64; 2]> = s.points.iter().map(|p| [p.x, p.y]).collect();
                 out.push(contour);
             }
             CompoundPathElement::PathF64(p) => {
@@ -96,8 +117,14 @@ pub(crate) fn sample_spline(points: &[[f64; 2]], per_segment: usize) -> Vec<[f64
             let t = k as f64 / per_segment as f64;
             let mt = 1.0 - t;
             out.push([
-                mt*mt*mt*p0[0] + 3.0*mt*mt*t*p1[0] + 3.0*mt*t*t*p2[0] + t*t*t*p3[0],
-                mt*mt*mt*p0[1] + 3.0*mt*mt*t*p1[1] + 3.0*mt*t*t*p2[1] + t*t*t*p3[1],
+                mt * mt * mt * p0[0]
+                    + 3.0 * mt * mt * t * p1[0]
+                    + 3.0 * mt * t * t * p2[0]
+                    + t * t * t * p3[0],
+                mt * mt * mt * p0[1]
+                    + 3.0 * mt * mt * t * p1[1]
+                    + 3.0 * mt * t * t * p2[1]
+                    + t * t * t * p3[1],
             ]);
         }
         i += 3;
@@ -150,7 +177,15 @@ fn boundary_error(contours: &[Vec<[f64; 2]>], unit: &Unit) -> (f64, f64) {
     (max, p95)
 }
 
-pub fn trace_shape(unit: &Unit, _budget: &Budget, _units_per_px: f64) -> Result<TracedShape, String> {
+pub fn trace_shape(
+    unit: &Unit,
+    _budget: &Budget,
+    _units_per_px: f64,
+) -> Result<TracedShape, String> {
+    trace_shape_config(unit, vtracer_config())
+}
+
+fn trace_shape_config(unit: &Unit, config: vtracer::Config) -> Result<TracedShape, String> {
     // trace a SSx-upscaled mask: finer corner grid in source space
     let (sw, sh) = (unit.crop_w * SS, unit.crop_h * SS);
     let mut pixels = vec![255u8; sw * sh * 4];
@@ -169,7 +204,7 @@ pub fn trace_shape(unit: &Unit, _budget: &Budget, _units_per_px: f64) -> Result<
     img.pixels = pixels;
     (img.width, img.height) = (sw, sh);
 
-    let svg = vtracer::convert(img, vtracer_config())?;
+    let svg = vtracer::convert(img, config)?;
     if svg.paths.is_empty() {
         return Err("vtracer produced no paths".into());
     }
@@ -188,7 +223,8 @@ pub fn trace_shape(unit: &Unit, _budget: &Budget, _units_per_px: f64) -> Result<
         layers.push((
             scale_c(&cc[0]),
             cc[1..].iter().map(scale_c).collect::<Vec<_>>(),
-        ));    }
+        ));
+    }
     if layers.is_empty() {
         return Err("vtracer produced no contours".into());
     }
@@ -209,6 +245,9 @@ pub fn trace_shape(unit: &Unit, _budget: &Budget, _units_per_px: f64) -> Result<
         shape_key: unit.shape_key.clone(),
         crop_w_px: unit.crop_w,
         crop_h_px: unit.crop_h,
+        preserve_crop_frame: false,
+        compact_curves: false,
+        contour_fit: None,
         polylines,
         layers,
         stage: StageRaw {
@@ -217,3 +256,323 @@ pub fn trace_shape(unit: &Unit, _budget: &Budget, _units_per_px: f64) -> Result<
         },
     })
 }
+
+/// Choose bounded smooth curves against the original grayscale impression.
+/// The binary mask supplies topology and ownership, not the sole fitting target.
+/// Faithful never calls this function. Candidate selection has no source-font
+/// or OCR-shape dependency and preserves the canonical identity and crop frame.
+pub(crate) fn trace_shape_clearscan(
+    unit: &Unit,
+    budget: &Budget,
+    k: f64,
+    preserved_source: Option<(&Unit, f64)>,
+) -> Result<TracedShape, String> {
+    let baseline = trace_shape(unit, budget, k)?;
+    let Some(gray) = unit
+        .gray_samples
+        .as_deref()
+        .filter(|g| g.len() == unit.mask.len() && !g.is_empty() && g.len() <= 16_384)
+    else {
+        return Ok(baseline);
+    };
+    let mut levels = gray.to_vec();
+    levels.sort_unstable();
+    let paper = levels[levels.len() * 9 / 10] as f64;
+    let ink = levels[levels.len() / 20] as f64;
+    if paper - ink < 48.0 {
+        return Ok(baseline);
+    }
+    let target: Vec<f64> = gray
+        .iter()
+        .map(|&v| ((paper - v as f64) / (paper - ink)).clamp(0.0, 1.0))
+        .collect();
+    // A local glyph without qualified canonical replacement still has the
+    // ordinary source-preservation contract. Fit must not make an already
+    // accepted source outline fail that contract. Exact shape keys include
+    // dimensions and identify the same source mask at every shared use.
+    let source_floor = if let Some((source, required)) = preserved_source {
+        let old = crate::glyphs::build_glyph_shapes(std::slice::from_ref(&baseline), k, budget)?;
+        Some((
+            source,
+            required.min(crate::convert::reconstructed_glyph_ink_iou(
+                &old[0],
+                source.crop_w,
+                source.crop_h,
+                &source.mask,
+            )),
+        ))
+    } else {
+        None
+    };
+    let score = |t: &TracedShape| -> Option<f64> {
+        if !crate::contour_topology::valid(&t.layers) {
+            return None;
+        }
+        let shape = crate::glyphs::build_glyph_shapes(std::slice::from_ref(t), k, budget)
+            .ok()?
+            .pop()?;
+        // This is the existing trace gate, applied before selecting a candidate
+        // so improved coverage fit cannot unexpectedly discard an occurrence.
+        if crate::convert::reconstructed_glyph_ink_iou(&shape, unit.crop_w, unit.crop_h, &unit.mask)
+            < 0.90
+        {
+            return None;
+        }
+        if let Some((source, floor)) = source_floor {
+            if crate::convert::reconstructed_glyph_ink_iou(
+                &shape,
+                source.crop_w,
+                source.crop_h,
+                &source.mask,
+            ) + 1e-12
+                < floor
+            {
+                return None;
+            }
+        }
+        let coverage =
+            crate::convert::reconstructed_glyph_coverage(&shape, unit.crop_w, unit.crop_h);
+        Some(
+            coverage
+                .iter()
+                .zip(&target)
+                .map(|(c, t)| (c - t).powi(2))
+                .sum::<f64>()
+                / target.len() as f64,
+        )
+    };
+    let old_shape = crate::glyphs::build_glyph_shapes(std::slice::from_ref(&baseline), k, budget)?
+        .pop()
+        .ok_or("missing baseline glyph")?;
+    let mut best_score = score(&baseline).unwrap_or_else(|| {
+        crate::convert::reconstructed_glyph_coverage(&old_shape, unit.crop_w, unit.crop_h)
+            .iter()
+            .zip(&target)
+            .map(|(c, t)| (c - t).powi(2))
+            .sum::<f64>()
+            / target.len() as f64
+    });
+    let baseline_score = best_score;
+    let baseline_points = baseline
+        .layers
+        .iter()
+        .map(|(o, h)| o.len() + h.iter().map(Vec::len).sum::<usize>())
+        .sum();
+    let mut choice = ("observed_corners", 0, 1.0, 0.0);
+    let mut best = baseline.clone();
+    let topology = best
+        .layers
+        .iter()
+        .map(|(_, holes)| holes.len())
+        .sum::<usize>();
+    let components = best.layers.len();
+    let mut candidates = vec![(baseline.clone(), "observed_corners", 0, 1.0)];
+    for (corner, length) in [(60, 2.0), (90, 3.0), (120, 4.0)] {
+        let mut config = vtracer_config();
+        config.corner_threshold = corner;
+        config.length_threshold = length;
+        let Ok(candidate) = trace_shape_config(unit, config) else {
+            continue;
+        };
+        if candidate.layers.len() == components
+            && candidate.layers.iter().map(|(_, h)| h.len()).sum::<usize>() == topology
+        {
+            candidates.push((candidate, "spline_smoothing", corner, length));
+        }
+    }
+    for (candidate, method, corner, length) in candidates {
+        if let Some(loss) = score(&candidate) {
+            if loss < best_score * 0.98 {
+                best_score = loss;
+                best = candidate.clone();
+                choice = (method, corner, length, 0.0);
+            }
+        }
+        for inset in [-0.15, -0.075, 0.075, 0.15] {
+            let adjusted = offset_coverage_contour(&candidate, inset);
+            if let Some(loss) = score(&adjusted) {
+                if loss < best_score * 0.98 {
+                    best_score = loss;
+                    best = adjusted;
+                    choice = (method, corner, length, inset);
+                }
+            }
+        }
+    }
+    // Fit supported grayscale edges with a compact, tangent-continuous cubic
+    // model. Complexity regularization rejects scanner-grid inflection chains.
+    let data_limit = best_score * 1.35 + 0.0005;
+    let cost = |t: &TracedShape, loss: f64| {
+        loss + 0.000025
+            * t.layers
+                .iter()
+                .map(|(o, h)| o.len() + h.iter().map(Vec::len).sum::<usize>())
+                .sum::<usize>() as f64
+    };
+    let mut objective = cost(&best, best_score);
+    let mut fitted = Vec::new();
+    let mut selected_level = None;
+    // Local outlines retain their source-preservation floor. A bounded
+    // range lets small kana and punctuation lose staircase joints without
+    // lowering that floor or forcing a canonical assignment without donors.
+    for tolerance in [0.15, 0.3, 0.45] {
+        let mut binary = offset_coverage_contour(&best, 0.0);
+        for c in binary
+            .layers
+            .iter_mut()
+            .flat_map(|(o, h)| std::iter::once(o).chain(h))
+        {
+            *c = crate::curve_fit::fit_ring(&sample_spline(c, 6), tolerance);
+        }
+        fitted.push((binary, "regularized_binary_curve", None, tolerance));
+    }
+    let substantial_holes = baseline
+        .layers
+        .iter()
+        .flat_map(|(_, h)| h)
+        .filter(|c| {
+            let p = sample_spline(c, 8);
+            p.windows(2)
+                .map(|w| w[0][0] * w[1][1] - w[1][0] * w[0][1])
+                .sum::<f64>()
+                .abs()
+                * 0.5
+                >= 1.5
+        })
+        .count();
+    for level in [0.3, 0.35, 0.4, 0.45] {
+        if let Some(layers) = crate::curve_fit::layers(unit, paper, ink, level) {
+            if layers.len() != components
+                || layers.iter().map(|(_, h)| h.len()).sum::<usize>() < substantial_holes
+                || layers.iter().map(|(_, h)| h.len()).sum::<usize>() > topology
+            {
+                continue;
+            }
+            let mut t = best.clone();
+            t.layers = layers;
+            t.preserve_crop_frame = true;
+            fitted.push((t, "grayscale_subpixel_curve", Some(level), 0.15));
+        }
+    }
+    for (mut candidate, method, level, tolerance) in fitted {
+        candidate.compact_curves = true;
+        for inset in [0.0, -0.15, 0.15] {
+            let t = offset_coverage_contour(&candidate, inset);
+            if let Some(loss) = score(&t) {
+                let value = cost(&t, loss);
+                if loss <= data_limit && value < objective {
+                    objective = value;
+                    best_score = loss;
+                    best = t;
+                    choice = (method, 65, tolerance, inset);
+                    selected_level = level;
+                }
+            }
+        }
+    }
+    let flat: Vec<_> = best
+        .layers
+        .iter()
+        .flat_map(|(o, h)| std::iter::once(o).chain(h))
+        .cloned()
+        .collect();
+    let (max, p95) = boundary_error(&flat, unit);
+    best.stage = StageRaw {
+        trace_max_px: max,
+        trace_p95_px: p95,
+    };
+    best.contour_fit = Some(ContourFit {
+        method: choice.0.into(),
+        corner_degrees: choice.1,
+        segment_length: choice.2,
+        inset_px: choice.3,
+        coverage_level: selected_level,
+        paper_luma: paper,
+        ink_luma: ink,
+        baseline_gray_mse: baseline_score,
+        selected_gray_mse: best_score,
+        baseline_control_points: baseline_points,
+        selected_control_points: best
+            .layers
+            .iter()
+            .map(|(o, h)| o.len() + h.iter().map(Vec::len).sum::<usize>())
+            .sum(),
+    });
+    Ok(best)
+}
+
+/// A bounded normal displacement of existing cubic contours. The original
+/// existing PDF construction frame remains fixed, so stroke fitting never
+/// rescales an inset outline back into the observed ink box.
+fn offset_coverage_contour(source: &TracedShape, inset: f64) -> TracedShape {
+    let mut out = source.clone();
+    let mut min_x = f64::INFINITY;
+    let mut max_y = f64::NEG_INFINITY;
+    if !source.preserve_crop_frame {
+        for c in source
+            .layers
+            .iter()
+            .flat_map(|(o, h)| std::iter::once(o).chain(h))
+        {
+            for (i, p) in c.iter().enumerate() {
+                if i % 3 == 0 {
+                    min_x = min_x.min(p[0]);
+                    max_y = max_y.max(p[1]);
+                }
+            }
+        }
+    } else {
+        min_x = 0.0;
+        max_y = source.crop_h_px as f64;
+    }
+    for (outer, holes) in &mut out.layers {
+        for (is_hole, c) in
+            std::iter::once((false, outer)).chain(holes.iter_mut().map(|h| (true, h)))
+        {
+            for p in c.iter_mut() {
+                p[0] -= min_x;
+                p[1] += source.crop_h_px as f64 - max_y;
+            }
+            let before = c.clone();
+            let n = (c.len() - 1) / 3;
+            let signed: f64 = sample_spline(&before, 4)
+                .windows(2)
+                .map(|w| w[0][0] * w[1][1] - w[1][0] * w[0][1])
+                .sum();
+            let sign = if signed >= 0.0 { 1.0 } else { -1.0 } * if is_hole { -1.0 } else { 1.0 };
+            let normals: Vec<[f64; 2]> = (0..n)
+                .map(|i| {
+                    let prev = before[if i == 0 { 3 * n - 1 } else { 3 * i - 1 }];
+                    let next = before[3 * i + 1];
+                    let dx = next[0] - prev[0];
+                    let dy = next[1] - prev[1];
+                    let len = dx.hypot(dy).max(1e-9);
+                    [sign * dy / len, -sign * dx / len]
+                })
+                .collect();
+            for i in 0..n {
+                for (j, normal) in [
+                    (3 * i, normals[i]),
+                    (3 * i + 1, normals[i]),
+                    (3 * i + 2, normals[(i + 1) % n]),
+                ] {
+                    c[j][0] -= inset * normal[0];
+                    c[j][1] -= inset * normal[1];
+                }
+            }
+            c[3 * n] = c[0];
+        }
+    }
+    out.preserve_crop_frame = true;
+    out.polylines = out
+        .layers
+        .iter()
+        .flat_map(|(o, h)| std::iter::once(o).chain(h))
+        .map(|c| sample_spline(c, 6))
+        .collect();
+    out
+}
+
+#[cfg(test)]
+#[path = "contour_tests.rs"]
+mod contour_tests;

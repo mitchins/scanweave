@@ -1,0 +1,562 @@
+Rust tests (cargo test)	cargo test	﻿2026-10-20T03:35:28.8230804Z ##[group]Run cargo test --workspace
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:28.8231155Z ^[[36;1mcargo test --workspace^[[0m
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:28.8294440Z shell: /usr/bin/bash -e {0}
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:28.8294718Z env:
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:28.8294924Z   CARGO_TERM_COLOR: always
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:28.8295179Z   CARGO_HOME: /home/runner/.cargo
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:28.8295447Z   CARGO_INCREMENTAL: 0
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:28.8295676Z ##[endgroup]
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:28.8426141Z info: syncing channel updates for 1.99.0-x86_64-unknown-linux-gnu
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:28.9520905Z info: latest update on 2026-10-01 for version 1.99.0 (b940084d7 2026-09-28)
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:28.9521633Z info: downloading 4 components
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:37.0169395Z warn: the missing active toolchain `1.99.0-x86_64-unknown-linux-gnu` has been auto-installed
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:37.0170320Z warn: this might cause rustup commands to take longer time to finish than expected
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:37.0170883Z info: you may opt out with `RUSTUP_AUTO_INSTALL=0` or `rustup set auto-install disable`
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:37.0493609Z ^[[1m^[[92m    Updating^[[0m crates.io index
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:37.0503553Z ^[[1m^[[92m    Updating^[[0m git repository `https://github.com/LaurenzV/hayro`
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:40.6837875Z ^[[1m^[[92m Downloading^[[0m crates ...
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:40.7522465Z ^[[1m^[[92m  Downloaded^[[0m aligned v0.4.3
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:40.7538366Z ^[[1m^[[92m  Downloaded^[[0m ab_glyph v0.2.32
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:40.7575206Z ^[[1m^[[92m  Downloaded^[[0m approx v0.5.1
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:40.7628599Z ^[[1m^[[92m  Downloaded^[[0m ab_glyph_rasterizer v0.1.10
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:40.7642868Z ^[[1m^[[92m  Downloaded^[[0m arg_enum_proc_macro v0.3.4
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:40.7657667Z ^[[1m^[[92m  Downloaded^[[0m adler2 v2.0.1
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:40.7672650Z ^[[1m^[[92m  Downloaded^[[0m alloc-no-stdlib v2.0.4
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:40.7690783Z ^[[1m^[[92m  Downloaded^[[0m adler v1.0.2
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:40.7705322Z ^[[1m^[[92m  Downloaded^[[0m as-slice v0.2.1
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:40.7722415Z ^[[1m^[[92m  Downloaded^[[0m bit_field v0.10.3
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:40.7792048Z ^[[1m^[[92m  Downloaded^[[0m aligned-vec v0.6.4
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:40.7801393Z ^[[1m^[[92m  Downloaded^[[0m atty v0.2.14
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:40.7811899Z ^[[1m^[[92m  Downloaded^[[0m num-complex v0.4.6
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:40.7825445Z ^[[1m^[[92m  Downloaded^[[0m alloc-stdlib v0.2.4
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:40.7837219Z ^[[1m^[[92m  Downloaded^[[0m itoa v1.0.18
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:40.7852169Z ^[[1m^[[92m  Downloaded^[[0m zerofrom-derive v0.1.8
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:40.7862247Z ^[[1m^[[92m  Downloaded^[[0m adler32 v1.2.0
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:40.7873520Z ^[[1m^[[92m  Downloaded^[[0m maybe-rayon v0.1.1
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:40.7880689Z ^[[1m^[[92m  Downloaded^[[0m new_debug_unreachable v1.0.6
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:40.7895242Z ^[[1m^[[92m  Downloaded^[[0m num v0.4.3
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:40.7906905Z ^[[1m^[[92m  Downloaded^[[0m y4m v0.8.0
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:40.7919109Z ^[[1m^[[92m  Downloaded^[[0m avif-serialize v0.8.9
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:40.7929944Z ^[[1m^[[92m  Downloaded^[[0m bytemuck_derive v1.12.1
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:40.7949930Z ^[[1m^[[92m  Downloaded^[[0m equator-macro v0.4.2
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:40.7961983Z ^[[1m^[[92m  Downloaded^[[0m color_quant v1.1.0
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:40.7968860Z ^[[1m^[[92m  Downloaded^[[0m errno v0.3.14
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:40.7984130Z ^[[1m^[[92m  Downloaded^[[0m yoke-derive v0.8.4
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:40.7996270Z ^[[1m^[[92m  Downloaded^[[0m block-buffer v0.10.4
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:40.8006889Z ^[[1m^[[92m  Downloaded^[[0m equator v0.4.2
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:40.8022892Z ^[[1m^[[92m  Downloaded^[[0m cpufeatures v0.2.17
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:40.8044882Z ^[[1m^[[92m  Downloaded^[[0m crypto-common v0.1.7
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:40.8046719Z ^[[1m^[[92m  Downloaded^[[0m equivalent v1.0.2
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:40.8059294Z ^[[1m^[[92m  Downloaded^[[0m zerofrom v0.1.8
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:40.8070746Z ^[[1m^[[92m  Downloaded^[[0m linebender_resource_handle v0.1.1
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:40.8083736Z ^[[1m^[[92m  Downloaded^[[0m maybe-owned v0.3.4
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:40.8097078Z ^[[1m^[[92m  Downloaded^[[0m bit-vec v0.6.3
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:40.8110063Z ^[[1m^[[92m  Downloaded^[[0m byteorder v1.5.0
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:40.8127103Z ^[[1m^[[92m  Downloaded^[[0m byteorder-lite v0.1.0
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:40.8141624Z ^[[1m^[[92m  Downloaded^[[0m autocfg v1.5.1
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:40.8161990Z ^[[1m^[[92m  Downloaded^[[0m noop_proc_macro v0.3.0
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:40.8172291Z ^[[1m^[[92m  Downloaded^[[0m ansi_term v0.12.1
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:40.8192996Z ^[[1m^[[92m  Downloaded^[[0m bitflags v1.3.2
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:40.8230643Z ^[[1m^[[92m  Downloaded^[[0m rustc-hash v2.1.3
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:40.8244826Z ^[[1m^[[92m  Downloaded^[[0m lebe v0.5.3
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:40.8258224Z ^[[1m^[[92m  Downloaded^[[0m generic-array v0.14.7
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:40.8274289Z ^[[1m^[[92m  Downloaded^[[0m loop9 v0.1.5
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:40.8282329Z ^[[1m^[[92m  Downloaded^[[0m phf_shared v0.13.1
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:40.8294281Z ^[[1m^[[92m  Downloaded^[[0m wasm-bindgen-shared v0.2.129
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:40.8305642Z ^[[1m^[[92m  Downloaded^[[0m paste v1.0.15
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:40.8340750Z ^[[1m^[[92m  Downloaded^[[0m pastey v0.1.1
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:40.8359257Z ^[[1m^[[92m  Downloaded^[[0m reborrow v0.5.5
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:40.8368100Z ^[[1m^[[92m  Downloaded^[[0m vecmath v1.0.0
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:40.8380550Z ^[[1m^[[92m  Downloaded^[[0m cfg-if v1.0.5
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:40.8397205Z ^[[1m^[[92m  Downloaded^[[0m crossbeam-deque v0.8.8
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:40.8414916Z ^[[1m^[[92m  Downloaded^[[0m digest v0.10.7
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:40.8432804Z ^[[1m^[[92m  Downloaded^[[0m fastrand v2.5.0
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:40.8446919Z ^[[1m^[[92m  Downloaded^[[0m foldhash v0.2.0
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:40.8460870Z ^[[1m^[[92m  Downloaded^[[0m font-types v0.9.0
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:40.8483879Z ^[[1m^[[92m  Downloaded^[[0m font-types v0.12.6
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:40.8503719Z ^[[1m^[[92m  Downloaded^[[0m anyhow v1.0.104
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:40.8546146Z ^[[1m^[[92m  Downloaded^[[0m fdeflate v0.3.7
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:40.8569771Z ^[[1m^[[92m  Downloaded^[[0m profiling-procmacros v1.0.18
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:40.8578191Z ^[[1m^[[92m  Downloaded^[[0m rand_chacha v0.3.1
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:40.8589351Z ^[[1m^[[92m  Downloaded^[[0m fax v0.2.7
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:40.8610401Z ^[[1m^[[92m  Downloaded^[[0m phf_generator v0.13.1
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:40.8623421Z ^[[1m^[[92m  Downloaded^[[0m either v1.19.0
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:40.8642435Z ^[[1m^[[92m  Downloaded^[[0m font-types v0.8.4
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:40.8664290Z ^[[1m^[[92m  Downloaded^[[0m guillotiere v0.7.0
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:40.8678400Z ^[[1m^[[92m  Downloaded^[[0m imgref v1.12.3
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:40.8700128Z ^[[1m^[[92m  Downloaded^[[0m textwrap v0.11.0
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:40.8710987Z ^[[1m^[[92m  Downloaded^[[0m vtracer v0.6.5
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:40.8731056Z ^[[1m^[[92m  Downloaded^[[0m wasm-bindgen-macro v0.2.129
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:40.8741392Z ^[[1m^[[92m  Downloaded^[[0m bitflags v2.13.2
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:40.8788120Z ^[[1m^[[92m  Downloaded^[[0m built v0.8.1
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:40.8813723Z ^[[1m^[[92m  Downloaded^[[0m crossbeam-utils v0.8.23
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:40.8847833Z ^[[1m^[[92m  Downloaded^[[0m iana-time-zone v0.1.65
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:40.8877121Z ^[[1m^[[92m  Downloaded^[[0m num-derive v0.4.2
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:40.8901695Z ^[[1m^[[92m  Downloaded^[[0m scoped_threadpool v0.1.9
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:40.8912116Z ^[[1m^[[92m  Downloaded^[[0m simd_helpers v0.1.0
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:40.8921533Z ^[[1m^[[92m  Downloaded^[[0m stable_deref_trait v1.2.1
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:40.8931235Z ^[[1m^[[92m  Downloaded^[[0m arrayvec v0.7.8
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:40.8952428Z ^[[1m^[[92m  Downloaded^[[0m bitstream-io v4.10.0
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:40.8990140Z ^[[1m^[[92m  Downloaded^[[0m bytemuck v1.25.2
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:40.9022399Z ^[[1m^[[92m  Downloaded^[[0m thiserror-impl v2.0.21
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:40.9038678Z ^[[1m^[[92m  Downloaded^[[0m v_frame v0.3.9
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:40.9059382Z ^[[1m^[[92m  Downloaded^[[0m av1-grain v0.2.5
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:40.9085488Z ^[[1m^[[92m  Downloaded^[[0m crossbeam-epoch v0.9.21
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:40.9109809Z ^[[1m^[[92m  Downloaded^[[0m deflate v0.8.6
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:40.9136852Z ^[[1m^[[92m  Downloaded^[[0m getrandom v0.2.17
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:40.9165601Z ^[[1m^[[92m  Downloaded^[[0m getrandom v0.4.3
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:40.9202959Z ^[[1m^[[92m  Downloaded^[[0m gif v0.14.2
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:40.9219508Z ^[[1m^[[92m  Downloaded^[[0m glifo v0.4.0
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:40.9240533Z ^[[1m^[[92m  Downloaded^[[0m libloading v0.9.0
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:40.9264746Z ^[[1m^[[92m  Downloaded^[[0m log v0.4.34
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:40.9288892Z ^[[1m^[[92m  Downloaded^[[0m matrixmultiply v0.3.11
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:40.9319549Z ^[[1m^[[92m  Downloaded^[[0m num-iter v0.1.46
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:40.9329020Z ^[[1m^[[92m  Downloaded^[[0m piston-float v1.0.1
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:40.9337258Z ^[[1m^[[92m  Downloaded^[[0m rawpointer v0.2.1
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:40.9345542Z ^[[1m^[[92m  Downloaded^[[0m crc32fast v1.5.2
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:40.9365351Z ^[[1m^[[92m  Downloaded^[[0m siphasher v1.0.4
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:40.9380085Z ^[[1m^[[92m  Downloaded^[[0m half v2.7.1
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:40.9405888Z ^[[1m^[[92m  Downloaded^[[0m owned_ttf_parser v0.25.1
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:40.9415437Z ^[[1m^[[92m  Downloaded^[[0m bytes v1.12.1
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:40.9449462Z ^[[1m^[[92m  Downloaded^[[0m pulp-wasm-simd-flag v0.1.1
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:40.9456048Z ^[[1m^[[92m  Downloaded^[[0m strsim v0.8.0
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:40.9468678Z ^[[1m^[[92m  Downloaded^[[0m weezl v0.1.12
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:40.9492560Z ^[[1m^[[92m  Downloaded^[[0m quick-error v2.0.1
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:40.9504991Z ^[[1m^[[92m  Downloaded^[[0m wasm-bindgen v0.2.129
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:40.9531435Z ^[[1m^[[92m  Downloaded^[[0m bumpalo v3.20.3
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:40.9556958Z ^[[1m^[[92m  Downloaded^[[0m color v0.3.3
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:40.9588004Z ^[[1m^[[92m  Downloaded^[[0m euclid v0.22.14
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:40.9619148Z ^[[1m^[[92m  Downloaded^[[0m flate2 v1.1.10
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:40.9667734Z ^[[1m^[[92m  Downloaded^[[0m image-webp v0.2.4
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:40.9689386Z ^[[1m^[[92m  Downloaded^[[0m ppv-lite86 v0.2.21
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:40.9701970Z ^[[1m^[[92m  Downloaded^[[0m profiling v1.0.18
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:40.9713532Z ^[[1m^[[92m  Downloaded^[[0m zune-inflate v0.2.54
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:40.9730114Z ^[[1m^[[92m  Downloaded^[[0m indexmap v2.14.2
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:40.9772490Z ^[[1m^[[92m  Downloaded^[[0m itertools v0.8.2
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:40.9821641Z ^[[1m^[[92m  Downloaded^[[0m version_check v0.9.5
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:40.9834343Z ^[[1m^[[92m  Downloaded^[[0m typenum v1.20.1
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:40.9868077Z ^[[1m^[[92m  Downloaded^[[0m vec_map v0.8.2
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:40.9877348Z ^[[1m^[[92m  Downloaded^[[0m wide v0.7.33
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:40.9925153Z ^[[1m^[[92m  Downloaded^[[0m memchr v2.8.3
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:40.9979419Z ^[[1m^[[92m  Downloaded^[[0m num-rational v0.4.2
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:40.9991739Z ^[[1m^[[92m  Downloaded^[[0m tiff v0.11.3
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:41.0034021Z ^[[1m^[[92m  Downloaded^[[0m unicode-segmentation v1.13.3
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:41.0062549Z ^[[1m^[[92m  Downloaded^[[0m zmij v1.0.23
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:41.0079827Z ^[[1m^[[92m  Downloaded^[[0m imageproc v0.25.1
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:41.0131096Z ^[[1m^[[92m  Downloaded^[[0m kurbo v0.11.3
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:41.0175484Z ^[[1m^[[92m  Downloaded^[[0m no_std_io2 v0.9.4
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:41.0194657Z ^[[1m^[[92m  Downloaded^[[0m num-integer v0.1.47
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:41.0210208Z ^[[1m^[[92m  Downloaded^[[0m peniko v0.6.1
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:41.0224221Z ^[[1m^[[92m  Downloaded^[[0m phf_macros v0.13.1
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:41.0234193Z ^[[1m^[[92m  Downloaded^[[0m polycool v0.4.0
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:41.0249888Z ^[[1m^[[92m  Downloaded^[[0m rand_core v0.6.4
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:41.0262972Z ^[[1m^[[92m  Downloaded^[[0m ravif v0.13.0
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:41.0274052Z ^[[1m^[[92m  Downloaded^[[0m rgb v0.8.53
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:41.0298204Z ^[[1m^[[92m  Downloaded^[[0m roots v0.0.6
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:41.0323144Z ^[[1m^[[92m  Downloaded^[[0m rustversion v1.0.23
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:41.0350490Z ^[[1m^[[92m  Downloaded^[[0m sha2 v0.10.9
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:41.0375431Z ^[[1m^[[92m  Downloaded^[[0m simd-adler32 v0.3.10
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:41.0393607Z ^[[1m^[[92m  Downloaded^[[0m smallvec v1.16.3
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:41.0406652Z ^[[1m^[[92m  Downloaded^[[0m synstructure v0.14.0
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:41.0416726Z ^[[1m^[[92m  Downloaded^[[0m wasm-bindgen-macro-support v0.2.129
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:41.0441678Z ^[[1m^[[92m  Downloaded^[[0m yoke v0.8.3
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:41.0459449Z ^[[1m^[[92m  Downloaded^[[0m zune-core v0.5.3
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:41.0481919Z ^[[1m^[[92m  Downloaded^[[0m itertools v0.12.1
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:41.0547584Z ^[[1m^[[92m  Downloaded^[[0m itertools v0.14.0
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:41.0616005Z ^[[1m^[[92m  Downloaded^[[0m libm v0.2.16
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:41.0727200Z ^[[1m^[[92m  Downloaded^[[0m vello_common v0.3.0
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:41.0777980Z ^[[1m^[[92m  Downloaded^[[0m hashbrown v0.17.1
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:41.0829141Z ^[[1m^[[92m  Downloaded^[[0m itertools v0.15.0
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:41.0900446Z ^[[1m^[[92m  Downloaded^[[0m kurbo v0.13.1
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:41.0951338Z ^[[1m^[[92m  Downloaded^[[0m brotli-decompressor v5.0.3
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:41.1006937Z ^[[1m^[[92m  Downloaded^[[0m ttf-parser v0.25.1
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:41.1100080Z ^[[1m^[[92m  Downloaded^[[0m clap v2.34.0
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:41.1159270Z ^[[1m^[[92m  Downloaded^[[0m image v0.23.14
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:41.1241104Z ^[[1m^[[92m  Downloaded^[[0m fearless_simd v0.7.0
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:41.1304782Z ^[[1m^[[92m  Downloaded^[[0m jpeg-decoder v0.1.22
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:41.1337174Z ^[[1m^[[92m  Downloaded^[[0m write-fonts v0.34.0
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:41.1422706Z ^[[1m^[[92m  Downloaded^[[0m chrono v0.4.45
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:41.1487094Z ^[[1m^[[92m  Downloaded^[[0m once_cell v1.21.4
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:41.1512157Z ^[[1m^[[92m  Downloaded^[[0m phf v0.13.1
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:41.1524384Z ^[[1m^[[92m  Downloaded^[[0m thiserror v2.0.21
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:41.1589543Z ^[[1m^[[92m  Downloaded^[[0m utf16string v0.2.0
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:41.1605068Z ^[[1m^[[92m  Downloaded^[[0m miniz_oxide v0.3.7
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:41.1621852Z ^[[1m^[[92m  Downloaded^[[0m exr v1.74.2
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:41.1726652Z ^[[1m^[[92m  Downloaded^[[0m image v0.25.10
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:41.1818145Z ^[[1m^[[92m  Downloaded^[[0m rand_distr v0.4.3
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:41.1846219Z ^[[1m^[[92m  Downloaded^[[0m ryu v1.0.23
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:41.1878652Z ^[[1m^[[92m  Downloaded^[[0m tempfile v3.27.0
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:41.1903642Z ^[[1m^[[92m  Downloaded^[[0m unicode-width v0.1.14
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:41.1956369Z ^[[1m^[[92m  Downloaded^[[0m miniz_oxide v0.4.4
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:41.1976108Z ^[[1m^[[92m  Downloaded^[[0m num-rational v0.3.2
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:41.1988137Z ^[[1m^[[92m  Downloaded^[[0m quote v1.0.47
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:41.2014572Z ^[[1m^[[92m  Downloaded^[[0m fearless_simd v1.1.0
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:41.2108617Z ^[[1m^[[92m  Downloaded^[[0m av-scenechange v0.14.1
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:41.2217336Z ^[[1m^[[92m  Downloaded^[[0m png v0.16.8
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:41.2240256Z ^[[1m^[[92m  Downloaded^[[0m simba v0.8.1
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:41.2268740Z ^[[1m^[[92m  Downloaded^[[0m unicode-ident v1.0.27
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:41.2295629Z ^[[1m^[[92m  Downloaded^[[0m num-traits v0.2.19
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:41.2321163Z ^[[1m^[[92m  Downloaded^[[0m proc-macro2 v1.0.107
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:41.2349536Z ^[[1m^[[92m  Downloaded^[[0m serde_core v1.0.229
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:41.2376251Z ^[[1m^[[92m  Downloaded^[[0m serde_derive v1.0.229
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:41.2405916Z ^[[1m^[[92m  Downloaded^[[0m miniz_oxide v0.8.9
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:41.2429724Z ^[[1m^[[92m  Downloaded^[[0m rayon-core v1.13.0
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:41.2465823Z ^[[1m^[[92m  Downloaded^[[0m miniz_oxide v0.9.1
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:41.2489989Z ^[[1m^[[92m  Downloaded^[[0m qoi v0.4.1
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:41.2517645Z ^[[1m^[[92m  Downloaded^[[0m zune-jpeg v0.5.15
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:41.2551512Z ^[[1m^[[92m  Downloaded^[[0m num-bigint v0.4.8
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:41.2597551Z ^[[1m^[[92m  Downloaded^[[0m safe_arch v0.7.4
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:41.2641567Z ^[[1m^[[92m  Downloaded^[[0m gif v0.11.4
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:41.2691909Z ^[[1m^[[92m  Downloaded^[[0m rand v0.8.8
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:41.2724114Z ^[[1m^[[92m  Downloaded^[[0m visioncortex v0.8.10
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:41.2764718Z ^[[1m^[[92m  Downloaded^[[0m brotli v8.0.4
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:41.2906048Z ^[[1m^[[92m  Downloaded^[[0m libc v0.2.190
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:41.3378688Z ^[[1m^[[92m  Downloaded^[[0m flo_curves v0.3.1
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:41.3477172Z ^[[1m^[[92m  Downloaded^[[0m tiff v0.6.1
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:41.3568657Z ^[[1m^[[92m  Downloaded^[[0m serde v1.0.229
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:41.3602411Z ^[[1m^[[92m  Downloaded^[[0m raw-cpuid v11.6.0
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:41.3635601Z ^[[1m^[[92m  Downloaded^[[0m vello_cpu v0.3.0
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:41.3686563Z ^[[1m^[[92m  Downloaded^[[0m zerocopy-derive v0.8.62
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:41.3809291Z ^[[1m^[[92m  Downloaded^[[0m nom v8.0.0
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:41.3861219Z ^[[1m^[[92m  Downloaded^[[0m png v0.18.1
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:41.3901520Z ^[[1m^[[92m  Downloaded^[[0m pulp v0.22.3
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:41.3950056Z ^[[1m^[[92m  Downloaded^[[0m serde_json v1.0.154
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:41.4023178Z ^[[1m^[[92m  Downloaded^[[0m moxcms v0.8.1
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:41.4124040Z ^[[1m^[[92m  Downloaded^[[0m linux-raw-sys v0.12.1
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:41.4732076Z ^[[1m^[[92m  Downloaded^[[0m quick-xml v0.36.2
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:41.4783056Z ^[[1m^[[92m  Downloaded^[[0m rayon v1.12.0
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:41.4876311Z ^[[1m^[[92m  Downloaded^[[0m zlib-rs v0.6.8
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:41.4930045Z ^[[1m^[[92m  Downloaded^[[0m pic-scale v0.7.12
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:41.5095670Z ^[[1m^[[92m  Downloaded^[[0m skrifa v0.44.0
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:41.5188262Z ^[[1m^[[92m  Downloaded^[[0m skrifa v0.46.2
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:41.5281256Z ^[[1m^[[92m  Downloaded^[[0m syn v2.0.119
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:41.5384405Z ^[[1m^[[92m  Downloaded^[[0m syn v3.0.9
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:41.5487908Z ^[[1m^[[92m  Downloaded^[[0m read-fonts v0.26.0
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:41.5622848Z ^[[1m^[[92m  Downloaded^[[0m zerocopy v0.8.62
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:41.5892565Z ^[[1m^[[92m  Downloaded^[[0m nalgebra v0.32.6
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:41.6116032Z ^[[1m^[[92m  Downloaded^[[0m read-fonts v0.33.1
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:41.6265542Z ^[[1m^[[92m  Downloaded^[[0m rustix v1.1.5
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:41.6535368Z ^[[1m^[[92m  Downloaded^[[0m read-fonts v0.41.0
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:41.6721175Z ^[[1m^[[92m  Downloaded^[[0m read-fonts v0.43.3
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:41.6914033Z ^[[1m^[[92m  Downloaded^[[0m pxfm v0.1.30
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:41.7157930Z ^[[1m^[[92m  Downloaded^[[0m rav1e v0.8.1
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:41.7481180Z ^[[1m^[[92m  Downloaded^[[0m pdf-writer v0.12.1
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:41.7581069Z ^[[1m^[[92m  Downloaded^[[0m pdfium-render v0.8.37
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:41.9003409Z ^[[1m^[[92m   Compiling^[[0m proc-macro2 v1.0.107
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:41.9004390Z ^[[1m^[[92m   Compiling^[[0m quote v1.0.47
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:41.9005164Z ^[[1m^[[92m   Compiling^[[0m unicode-ident v1.0.27
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:41.9005942Z ^[[1m^[[92m   Compiling^[[0m autocfg v1.5.1
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:41.9565351Z ^[[1m^[[92m   Compiling^[[0m cfg-if v1.0.5
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:41.9834819Z ^[[1m^[[92m   Compiling^[[0m libm v0.2.16
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:42.0710692Z ^[[1m^[[92m   Compiling^[[0m arrayvec v0.7.8
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:42.2000461Z ^[[1m^[[92m   Compiling^[[0m num-traits v0.2.19
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:42.2211179Z ^[[1m^[[92m   Compiling^[[0m smallvec v1.16.3
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:42.3610594Z ^[[1m^[[92m   Compiling^[[0m version_check v0.9.5
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:42.3879550Z ^[[1m^[[92m   Compiling^[[0m memchr v2.8.3
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:42.7050514Z ^[[1m^[[92m   Compiling^[[0m syn v3.0.9
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:42.7440435Z ^[[1m^[[92m   Compiling^[[0m syn v2.0.119
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:43.4200454Z ^[[1m^[[92m   Compiling^[[0m either v1.19.0
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:43.5790305Z ^[[1m^[[92m   Compiling^[[0m crossbeam-utils v0.8.23
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:43.7280597Z ^[[1m^[[92m   Compiling^[[0m crossbeam-epoch v0.9.21
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:43.7550733Z ^[[1m^[[92m   Compiling^[[0m libc v0.2.190
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:44.0600519Z ^[[1m^[[92m   Compiling^[[0m thiserror v2.0.21
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:44.2471017Z ^[[1m^[[92m   Compiling^[[0m crossbeam-deque v0.8.8
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:44.6160849Z ^[[1m^[[92m   Compiling^[[0m num-integer v0.1.47
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:44.9210690Z ^[[1m^[[92m   Compiling^[[0m rayon-core v1.13.0
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:45.0040794Z ^[[1m^[[92m   Compiling^[[0m simd-adler32 v0.3.10
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:45.1500696Z ^[[1m^[[92m   Compiling^[[0m crc32fast v1.5.2
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:45.4920636Z ^[[1m^[[92m   Compiling^[[0m bitflags v2.13.2
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:45.6601159Z ^[[1m^[[92m   Compiling^[[0m adler2 v2.0.1
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:45.7217059Z ^[[1m^[[92m   Compiling^[[0m typenum v1.20.1
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:45.7520964Z ^[[1m^[[92m   Compiling^[[0m bytemuck_derive v1.12.1
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:46.1370433Z ^[[1m^[[92m   Compiling^[[0m thiserror-impl v2.0.21
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:46.4090350Z ^[[1m^[[92m   Compiling^[[0m zerocopy v0.8.62
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:46.6460549Z ^[[1m^[[92m   Compiling^[[0m rayon v1.12.0
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:46.7410574Z ^[[1m^[[92m   Compiling^[[0m bytemuck v1.25.2
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:46.9360806Z ^[[1m^[[92m   Compiling^[[0m generic-array v0.14.7
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:47.0210899Z ^[[1m^[[92m   Compiling^[[0m paste v1.0.15
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:47.0781156Z ^[[1m^[[92m   Compiling^[[0m zerocopy-derive v0.8.62
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:47.1630797Z ^[[1m^[[92m   Compiling^[[0m foldhash v0.2.0
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:47.2020611Z ^[[1m^[[92m   Compiling^[[0m equator-macro v0.4.2
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:47.2610445Z ^[[1m^[[92m   Compiling^[[0m hashbrown v0.17.1
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:47.7260910Z ^[[1m^[[92m   Compiling^[[0m miniz_oxide v0.9.1
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:47.8110578Z ^[[1m^[[92m   Compiling^[[0m num-bigint v0.4.8
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:48.4231145Z ^[[1m^[[92m   Compiling^[[0m log v0.4.34
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:48.5390991Z ^[[1m^[[92m   Compiling^[[0m stable_deref_trait v1.2.1
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:48.5760703Z ^[[1m^[[92m   Compiling^[[0m zlib-rs v0.6.8
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:49.4330505Z ^[[1m^[[92m   Compiling^[[0m num-rational v0.4.2
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:49.4688641Z ^[[1m^[[92m   Compiling^[[0m equator v0.4.2
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:49.9386645Z ^[[1m^[[92m   Compiling^[[0m weezl v0.1.12
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:50.0090932Z ^[[1m^[[92m   Compiling^[[0m anyhow v1.0.104
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:50.1628563Z ^[[1m^[[92m   Compiling^[[0m serde_core v1.0.229
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:50.3389898Z ^[[1m^[[92m   Compiling^[[0m aligned-vec v0.6.4
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:50.3721674Z ^[[1m^[[92m   Compiling^[[0m num-complex v0.4.6
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:50.4790798Z ^[[1m^[[92m   Compiling^[[0m equivalent v1.0.2
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:50.5100498Z ^[[1m^[[92m   Compiling^[[0m zmij v1.0.23
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:50.6510483Z ^[[1m^[[92m   Compiling^[[0m indexmap v2.14.2
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:50.7550492Z ^[[1m^[[92m   Compiling^[[0m v_frame v0.3.9
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:51.2600514Z ^[[1m^[[92m   Compiling^[[0m block-buffer v0.10.4
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:51.3341067Z ^[[1m^[[92m   Compiling^[[0m crypto-common v0.1.7
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:51.3930910Z ^[[1m^[[92m   Compiling^[[0m as-slice v0.2.1
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:51.4240469Z ^[[1m^[[92m   Compiling^[[0m miniz_oxide v0.8.9
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:52.0230985Z ^[[1m^[[92m   Compiling^[[0m color_quant v1.1.0
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:52.1350700Z ^[[1m^[[92m   Compiling^[[0m serde_json v1.0.154
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:52.2280479Z ^[[1m^[[92m   Compiling^[[0m built v0.8.1
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:52.6477187Z ^[[1m^[[92m   Compiling^[[0m itoa v1.0.18
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:52.6590471Z ^[[1m^[[92m   Compiling^[[0m zune-core v0.5.3
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:52.7650969Z ^[[1m^[[92m   Compiling^[[0m av-scenechange v0.14.1
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:52.8427084Z ^[[1m^[[92m   Compiling^[[0m serde v1.0.229
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:52.8810645Z ^[[1m^[[92m   Compiling^[[0m zune-jpeg v0.5.15
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:53.0150884Z ^[[1m^[[92m   Compiling^[[0m rav1e v0.8.1
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:53.1250217Z ^[[1m^[[92m   Compiling^[[0m aligned v0.4.3
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:53.1820564Z ^[[1m^[[92m   Compiling^[[0m digest v0.10.7
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:53.3110935Z ^[[1m^[[92m   Compiling^[[0m flate2 v1.1.10
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:53.6584871Z ^[[1m^[[92m   Compiling^[[0m profiling-procmacros v1.0.18
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:53.6660281Z ^[[1m^[[92m   Compiling^[[0m arg_enum_proc_macro v0.3.4
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:53.7510932Z ^[[1m^[[92m   Compiling^[[0m serde_derive v1.0.229
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:53.7550105Z ^[[1m^[[92m   Compiling^[[0m fdeflate v0.3.7
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:53.8390632Z ^[[1m^[[92m   Compiling^[[0m no_std_io2 v0.9.4
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:53.8750444Z ^[[1m^[[92m   Compiling^[[0m nom v8.0.0
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:54.0210488Z ^[[1m^[[92m   Compiling^[[0m pulp v0.22.3
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:54.1630241Z ^[[1m^[[92m   Compiling^[[0m kurbo v0.11.3
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:54.1910928Z ^[[1m^[[92m   Compiling^[[0m quick-error v2.0.1
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:54.2290514Z ^[[1m^[[92m   Compiling^[[0m pxfm v0.1.30
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:55.4867110Z ^[[1m^[[92m   Compiling^[[0m y4m v0.8.0
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:55.6220371Z ^[[1m^[[92m   Compiling^[[0m pastey v0.1.1
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:55.9521001Z ^[[1m^[[92m   Compiling^[[0m cpufeatures v0.2.17
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:55.9830468Z ^[[1m^[[92m   Compiling^[[0m sha2 v0.10.9
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:56.5730585Z ^[[1m^[[92m   Compiling^[[0m av1-grain v0.2.5
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:56.9170789Z ^[[1m^[[92m   Compiling^[[0m png v0.18.1
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:57.1070633Z ^[[1m^[[92m   Compiling^[[0m bitstream-io v4.10.0
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:57.5720716Z ^[[1m^[[92m   Compiling^[[0m profiling v1.0.18
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:57.7057699Z ^[[1m^[[92m   Compiling^[[0m half v2.7.1
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:57.7554863Z ^[[1m^[[92m   Compiling^[[0m maybe-rayon v0.1.1
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:57.7890426Z ^[[1m^[[92m   Compiling^[[0m num-derive v0.4.2
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:58.0510920Z ^[[1m^[[92m   Compiling^[[0m raw-cpuid v11.6.0
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:58.2100760Z ^[[1m^[[92m   Compiling^[[0m synstructure v0.14.0
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:58.5110560Z ^[[1m^[[92m   Compiling^[[0m itertools v0.14.0
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:58.6260495Z ^[[1m^[[92m   Compiling^[[0m simd_helpers v0.1.0
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:58.7621011Z ^[[1m^[[92m   Compiling^[[0m polycool v0.4.0
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:58.9770620Z ^[[1m^[[92m   Compiling^[[0m byteorder v1.5.0
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:59.0876899Z ^[[1m^[[92m   Compiling^[[0m imgref v1.12.3
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:59.1400564Z ^[[1m^[[92m   Compiling^[[0m new_debug_unreachable v1.0.6
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:59.1704117Z ^[[1m^[[92m   Compiling^[[0m reborrow v0.5.5
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:59.2104235Z ^[[1m^[[92m   Compiling^[[0m noop_proc_macro v0.3.0
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:59.2140902Z ^[[1m^[[92m   Compiling^[[0m unicode-segmentation v1.13.3
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:59.3370560Z ^[[1m^[[92m   Compiling^[[0m alloc-no-stdlib v2.0.4
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:59.3935017Z ^[[1m^[[92m   Compiling^[[0m once_cell v1.21.4
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:59.5250557Z ^[[1m^[[92m   Compiling^[[0m siphasher v1.0.4
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:59.5770529Z ^[[1m^[[92m   Compiling^[[0m pulp-wasm-simd-flag v0.1.1
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:59.6030603Z ^[[1m^[[92m   Compiling^[[0m alloc-stdlib v0.2.4
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:59.6510467Z ^[[1m^[[92m   Compiling^[[0m phf_shared v0.13.1
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:59.6570131Z ^[[1m^[[92m   Compiling^[[0m loop9 v0.1.5
+Rust tests (cargo test)	cargo test	2026-10-20T03:35:59.6970554Z ^[[1m^[[92m   Compiling^[[0m kurbo v0.13.1
+Rust tests (cargo test)	cargo test	2026-10-20T03:36:00.2350414Z ^[[1m^[[92m   Compiling^[[0m moxcms v0.8.1
+Rust tests (cargo test)	cargo test	2026-10-20T03:36:01.1580559Z ^[[1m^[[92m   Compiling^[[0m getrandom v0.2.17
+Rust tests (cargo test)	cargo test	2026-10-20T03:36:01.2840418Z ^[[1m^[[92m   Compiling^[[0m zune-inflate v0.2.54
+Rust tests (cargo test)	cargo test	2026-10-20T03:36:01.5150503Z ^[[1m^[[92m   Compiling^[[0m avif-serialize v0.8.9
+Rust tests (cargo test)	cargo test	2026-10-20T03:36:01.9210561Z ^[[1m^[[92m   Compiling^[[0m miniz_oxide v0.4.4
+Rust tests (cargo test)	cargo test	2026-10-20T03:36:02.0130528Z ^[[1m^[[92m   Compiling^[[0m fastrand v2.5.0
+Rust tests (cargo test)	cargo test	2026-10-20T03:36:02.1060481Z ^[[1m^[[92m   Compiling^[[0m lebe v0.5.3
+Rust tests (cargo test)	cargo test	2026-10-20T03:36:02.2410316Z ^[[1m^[[92m   Compiling^[[0m fearless_simd v1.1.0
+Rust tests (cargo test)	cargo test	2026-10-20T03:36:03.0700382Z ^[[1m^[[92m   Compiling^[[0m rgb v0.8.53
+Rust tests (cargo test)	cargo test	2026-10-20T03:36:03.3440592Z ^[[1m^[[92m   Compiling^[[0m byteorder-lite v0.1.0
+Rust tests (cargo test)	cargo test	2026-10-20T03:36:03.5260672Z ^[[1m^[[92m   Compiling^[[0m adler32 v1.2.0
+Rust tests (cargo test)	cargo test	2026-10-20T03:36:03.5890527Z ^[[1m^[[92m   Compiling^[[0m bit_field v0.10.3
+Rust tests (cargo test)	cargo test	2026-10-20T03:36:03.6700492Z ^[[1m^[[92m   Compiling^[[0m fax v0.2.7
+Rust tests (cargo test)	cargo test	2026-10-20T03:36:03.8696479Z ^[[1m^[[92m   Compiling^[[0m tiff v0.11.3
+Rust tests (cargo test)	cargo test	2026-10-20T03:36:04.7726379Z ^[[1m^[[92m   Compiling^[[0m ravif v0.13.0
+Rust tests (cargo test)	cargo test	2026-10-20T03:36:05.5900912Z ^[[1m^[[92m   Compiling^[[0m exr v1.74.2
+Rust tests (cargo test)	cargo test	2026-10-20T03:36:09.6340575Z ^[[1m^[[92m   Compiling^[[0m image-webp v0.2.4
+Rust tests (cargo test)	cargo test	2026-10-20T03:36:09.7660507Z ^[[1m^[[92m   Compiling^[[0m phf_generator v0.13.1
+Rust tests (cargo test)	cargo test	2026-10-20T03:36:09.9340825Z ^[[1m^[[92m   Compiling^[[0m rand_core v0.6.4
+Rust tests (cargo test)	cargo test	2026-10-20T03:36:10.0740532Z ^[[1m^[[92m   Compiling^[[0m brotli-decompressor v5.0.3
+Rust tests (cargo test)	cargo test	2026-10-20T03:36:10.2349832Z ^[[1m^[[92m   Compiling^[[0m scanweave-core v0.1.0 (/home/runner/work/scanweave/scanweave/crates/scanweave-core)
+Rust tests (cargo test)	cargo test	2026-10-20T03:36:11.0070593Z ^[[1m^[[92m   Compiling^[[0m zerofrom-derive v0.1.8
+Rust tests (cargo test)	cargo test	2026-10-20T03:36:11.0810971Z ^[[1m^[[92m   Compiling^[[0m ppv-lite86 v0.2.21
+Rust tests (cargo test)	cargo test	2026-10-20T03:36:11.3810676Z ^[[1m^[[92m   Compiling^[[0m gif v0.14.2
+Rust tests (cargo test)	cargo test	2026-10-20T03:36:11.6280593Z ^[[1m^[[92m   Compiling^[[0m font-types v0.12.6
+Rust tests (cargo test)	cargo test	2026-10-20T03:36:11.8921024Z ^[[1m^[[92m   Compiling^[[0m color v0.3.3
+Rust tests (cargo test)	cargo test	2026-10-20T03:36:11.9615780Z ^[[1m^[[92m   Compiling^[[0m qoi v0.4.1
+Rust tests (cargo test)	cargo test	2026-10-20T03:36:12.0000924Z ^[[1m^[[92m   Compiling^[[0m safe_arch v0.7.4
+Rust tests (cargo test)	cargo test	2026-10-20T03:36:12.1261498Z ^[[1m^[[92m   Compiling^[[0m num-iter v0.1.46
+Rust tests (cargo test)	cargo test	2026-10-20T03:36:12.1309839Z ^[[1m^[[92m   Compiling^[[0m euclid v0.22.14
+Rust tests (cargo test)	cargo test	2026-10-20T03:36:12.1750906Z ^[[1m^[[92m   Compiling^[[0m num-rational v0.3.2
+Rust tests (cargo test)	cargo test	2026-10-20T03:36:12.2660648Z ^[[1m^[[92m   Compiling^[[0m matrixmultiply v0.3.11
+Rust tests (cargo test)	cargo test	2026-10-20T03:36:12.3160830Z ^[[1m^[[92m   Compiling^[[0m linebender_resource_handle v0.1.1
+Rust tests (cargo test)	cargo test	2026-10-20T03:36:12.3628799Z ^[[1m^[[92m   Compiling^[[0m hayro-ccitt v0.4.0 (https://github.com/LaurenzV/hayro#9c58d13a)
+Rust tests (cargo test)	cargo test	2026-10-20T03:36:12.3679982Z ^[[1m^[[92m   Compiling^[[0m bitflags v1.3.2
+Rust tests (cargo test)	cargo test	2026-10-20T03:36:12.4000460Z ^[[1m^[[92m   Compiling^[[0m adler v1.0.2
+Rust tests (cargo test)	cargo test	2026-10-20T03:36:12.5830579Z ^[[1m^[[92m   Compiling^[[0m peniko v0.6.1
+Rust tests (cargo test)	cargo test	2026-10-20T03:36:12.6630448Z ^[[1m^[[92m   Compiling^[[0m guillotiere v0.7.0
+Rust tests (cargo test)	cargo test	2026-10-20T03:36:12.8076195Z ^[[1m^[[92m   Compiling^[[0m hayro-jbig2 v0.3.1 (https://github.com/LaurenzV/hayro#9c58d13a)
+Rust tests (cargo test)	cargo test	2026-10-20T03:36:12.9020807Z ^[[1m^[[92m   Compiling^[[0m wide v0.7.33
+Rust tests (cargo test)	cargo test	2026-10-20T03:36:12.9120899Z ^[[1m^[[92m   Compiling^[[0m image v0.25.10
+Rust tests (cargo test)	cargo test	2026-10-20T03:36:13.0150805Z ^[[1m^[[92m   Compiling^[[0m read-fonts v0.43.3
+Rust tests (cargo test)	cargo test	2026-10-20T03:36:14.4100817Z ^[[1m^[[92m   Compiling^[[0m zerofrom v0.1.8
+Rust tests (cargo test)	cargo test	2026-10-20T03:36:14.4850411Z ^[[1m^[[92m   Compiling^[[0m rand_chacha v0.3.1
+Rust tests (cargo test)	cargo test	2026-10-20T03:36:14.8437251Z ^[[1m^[[92m   Compiling^[[0m brotli v8.0.4
+Rust tests (cargo test)	cargo test	2026-10-20T03:36:15.0940801Z ^[[1m^[[92m   Compiling^[[0m hayro-jpeg2000 v0.4.1 (https://github.com/LaurenzV/hayro#9c58d13a)
+Rust tests (cargo test)	cargo test	2026-10-20T03:36:17.7660442Z ^[[1m^[[92m   Compiling^[[0m phf_macros v0.13.1
+Rust tests (cargo test)	cargo test	2026-10-20T03:36:17.7823676Z ^[[1m^[[92m   Compiling^[[0m miniz_oxide v0.3.7
+Rust tests (cargo test)	cargo test	2026-10-20T03:36:18.3120691Z ^[[1m^[[92m   Compiling^[[0m deflate v0.8.6
+Rust tests (cargo test)	cargo test	2026-10-20T03:36:18.3400975Z ^[[1m^[[92m   Compiling^[[0m yoke-derive v0.8.4
+Rust tests (cargo test)	cargo test	2026-10-20T03:36:18.8490648Z ^[[1m^[[92m   Compiling^[[0m jpeg-decoder v0.1.22
+Rust tests (cargo test)	cargo test	2026-10-20T03:36:18.9570485Z ^[[1m^[[92m   Compiling^[[0m approx v0.5.1
+Rust tests (cargo test)	cargo test	2026-10-20T03:36:19.0310601Z ^[[1m^[[92m   Compiling^[[0m itertools v0.8.2
+Rust tests (cargo test)	cargo test	2026-10-20T03:36:19.6741184Z ^[[1m^[[92m   Compiling^[[0m fearless_simd v0.7.0
+Rust tests (cargo test)	cargo test	2026-10-20T03:36:19.7740618Z ^[[1m^[[92m   Compiling^[[0m ttf-parser v0.25.1
+Rust tests (cargo test)	cargo test	2026-10-20T03:36:22.5210821Z ^[[1m^[[92m   Compiling^[[0m hayro-postscript v0.1.0 (https://github.com/LaurenzV/hayro#9c58d13a)
+Rust tests (cargo test)	cargo test	2026-10-20T03:36:22.6850782Z ^[[1m^[[92m   Compiling^[[0m roots v0.0.6
+Rust tests (cargo test)	cargo test	2026-10-20T03:36:22.7546716Z ^[[1m^[[92m   Compiling^[[0m rawpointer v0.2.1
+Rust tests (cargo test)	cargo test	2026-10-20T03:36:22.7870564Z ^[[1m^[[92m   Compiling^[[0m unicode-width v0.1.14
+Rust tests (cargo test)	cargo test	2026-10-20T03:36:22.9550976Z ^[[1m^[[92m   Compiling^[[0m rustc-hash v2.1.3
+Rust tests (cargo test)	cargo test	2026-10-20T03:36:23.0015793Z ^[[1m^[[92m   Compiling^[[0m hayro-syntax v0.8.0 (https://github.com/LaurenzV/hayro#9c58d13a)
+Rust tests (cargo test)	cargo test	2026-10-20T03:36:23.0170529Z ^[[1m^[[92m   Compiling^[[0m textwrap v0.11.0
+Rust tests (cargo test)	cargo test	2026-10-20T03:36:23.1890486Z ^[[1m^[[92m   Compiling^[[0m flo_curves v0.3.1
+Rust tests (cargo test)	cargo test	2026-10-20T03:36:23.8620909Z ^[[1m^[[92m   Compiling^[[0m hayro-cmap v0.1.0 (https://github.com/LaurenzV/hayro#9c58d13a)
+Rust tests (cargo test)	cargo test	2026-10-20T03:36:23.9210748Z ^[[1m^[[92m   Compiling^[[0m owned_ttf_parser v0.25.1
+Rust tests (cargo test)	cargo test	2026-10-20T03:36:24.0530673Z ^[[1m^[[92m   Compiling^[[0m tiff v0.6.1
+Rust tests (cargo test)	cargo test	2026-10-20T03:36:24.2670542Z ^[[1m^[[92m   Compiling^[[0m skrifa v0.46.2
+Rust tests (cargo test)	cargo test	2026-10-20T03:36:24.6659861Z ^[[1m^[[92m   Compiling^[[0m simba v0.8.1
+Rust tests (cargo test)	cargo test	2026-10-20T03:36:25.0741130Z ^[[1m^[[92m   Compiling^[[0m vello_common v0.3.0
+Rust tests (cargo test)	cargo test	2026-10-20T03:36:27.0850931Z ^[[1m^[[92m   Compiling^[[0m yoke v0.8.3
+Rust tests (cargo test)	cargo test	2026-10-20T03:36:27.2330792Z ^[[1m^[[92m   Compiling^[[0m png v0.16.8
+Rust tests (cargo test)	cargo test	2026-10-20T03:36:27.8050822Z ^[[1m^[[92m   Compiling^[[0m phf v0.13.1
+Rust tests (cargo test)	cargo test	2026-10-20T03:36:27.8960593Z ^[[1m^[[92m   Compiling^[[0m rand v0.8.8
+Rust tests (cargo test)	cargo test	2026-10-20T03:36:28.5015502Z ^[[1m^[[92m   Compiling^[[0m gif v0.11.4
+Rust tests (cargo test)	cargo test	2026-10-20T03:36:28.5767107Z ^[[1m^[[92m   Compiling^[[0m font-types v0.8.4
+Rust tests (cargo test)	cargo test	2026-10-20T03:36:28.6370424Z ^[[1m^[[92m   Compiling^[[0m atty v0.2.14
+Rust tests (cargo test)	cargo test	2026-10-20T03:36:28.6780953Z ^[[1m^[[92m   Compiling^[[0m strsim v0.8.0
+Rust tests (cargo test)	cargo test	2026-10-20T03:36:28.8675330Z ^[[1m^[[92m   Compiling^[[0m ansi_term v0.12.1
+Rust tests (cargo test)	cargo test	2026-10-20T03:36:28.8900638Z ^[[1m^[[92m   Compiling^[[0m bit-vec v0.6.3
+Rust tests (cargo test)	cargo test	2026-10-20T03:36:29.0211155Z ^[[1m^[[92m   Compiling^[[0m vec_map v0.8.2
+Rust tests (cargo test)	cargo test	2026-10-20T03:36:29.0290723Z ^[[1m^[[92m   Compiling^[[0m scoped_threadpool v0.1.9
+Rust tests (cargo test)	cargo test	2026-10-20T03:36:29.0380489Z ^[[1m^[[92m   Compiling^[[0m ab_glyph_rasterizer v0.1.10
+Rust tests (cargo test)	cargo test	2026-10-20T03:36:29.1400451Z ^[[1m^[[92m   Compiling^[[0m image v0.23.14
+Rust tests (cargo test)	cargo test	2026-10-20T03:36:29.2900422Z ^[[1m^[[92m   Compiling^[[0m clap v2.34.0
+Rust tests (cargo test)	cargo test	2026-10-20T03:36:29.4020618Z ^[[1m^[[92m   Compiling^[[0m ab_glyph v0.2.32
+Rust tests (cargo test)	cargo test	2026-10-20T03:36:29.4610725Z ^[[1m^[[92m   Compiling^[[0m visioncortex v0.8.10
+Rust tests (cargo test)	cargo test	2026-10-20T03:36:29.8410463Z ^[[1m^[[92m   Compiling^[[0m read-fonts v0.26.0
+Rust tests (cargo test)	cargo test	2026-10-20T03:36:31.4170575Z ^[[1m^[[92m   Compiling^[[0m nalgebra v0.32.6
+Rust tests (cargo test)	cargo test	2026-10-20T03:36:33.1880826Z ^[[1m^[[92m   Compiling^[[0m rand_distr v0.4.3
+Rust tests (cargo test)	cargo test	2026-10-20T03:36:33.5660984Z ^[[1m^[[92m   Compiling^[[0m hayro-interpret v0.8.0 (https://github.com/LaurenzV/hayro#9c58d13a)
+Rust tests (cargo test)	cargo test	2026-10-20T03:36:35.9570735Z ^[[1m^[[92m   Compiling^[[0m vello_cpu v0.3.0
+Rust tests (cargo test)	cargo test	2026-10-20T03:36:37.2662663Z ^[[1m^[[92m   Compiling^[[0m num v0.4.3
+Rust tests (cargo test)	cargo test	2026-10-20T03:36:37.2990673Z ^[[1m^[[92m   Compiling^[[0m pic-scale v0.7.12
+Rust tests (cargo test)	cargo test	2026-10-20T03:36:37.5021334Z ^[[1m^[[92m   Compiling^[[0m font-types v0.9.0
+Rust tests (cargo test)	cargo test	2026-10-20T03:36:37.8050632Z ^[[1m^[[92m   Compiling^[[0m itertools v0.12.1
+Rust tests (cargo test)	cargo test	2026-10-20T03:36:39.1100506Z ^[[1m^[[92m   Compiling^[[0m ryu v1.0.23
+Rust tests (cargo test)	cargo test	2026-10-20T03:36:39.2310860Z ^[[1m^[[92m   Compiling^[[0m pdf-writer v0.12.1
+Rust tests (cargo test)	cargo test	2026-10-20T03:36:39.3473634Z ^[[1m^[[92m   Compiling^[[0m imageproc v0.25.1
+Rust tests (cargo test)	cargo test	2026-10-20T03:36:40.9500854Z ^[[1m^[[92m   Compiling^[[0m hayro v0.8.0 (https://github.com/LaurenzV/hayro#9c58d13a)
+Rust tests (cargo test)	cargo test	2026-10-20T03:36:42.4060528Z ^[[1m^[[92m   Compiling^[[0m read-fonts v0.33.1
+Rust tests (cargo test)	cargo test	2026-10-20T03:36:42.8997546Z ^[[1m^[[92m   Compiling^[[0m vtracer v0.6.5
+Rust tests (cargo test)	cargo test	2026-10-20T03:36:43.2220349Z ^[[1m^[[92m   Compiling^[[0m write-fonts v0.34.0
+Rust tests (cargo test)	cargo test	2026-10-20T03:36:43.2500488Z ^[[1m^[[92m   Compiling^[[0m quick-xml v0.36.2
+Rust tests (cargo test)	cargo test	2026-10-20T03:36:43.9760540Z ^[[1m^[[92m   Compiling^[[0m piston-float v1.0.1
+Rust tests (cargo test)	cargo test	2026-10-20T03:36:44.0251880Z ^[[1m^[[92m   Compiling^[[0m pdfium-render v0.8.37
+Rust tests (cargo test)	cargo test	2026-10-20T03:36:44.1110784Z ^[[1m^[[92m   Compiling^[[0m iana-time-zone v0.1.65
+Rust tests (cargo test)	cargo test	2026-10-20T03:36:44.2741375Z ^[[1m^[[92m   Compiling^[[0m chrono v0.4.45
+Rust tests (cargo test)	cargo test	2026-10-20T03:36:44.3100854Z ^[[1m^[[92m   Compiling^[[0m vecmath v1.0.0
+Rust tests (cargo test)	cargo test	2026-10-20T03:36:44.5000494Z ^[[1m^[[92m   Compiling^[[0m utf16string v0.2.0
+Rust tests (cargo test)	cargo test	2026-10-20T03:36:44.6500693Z ^[[1m^[[92m   Compiling^[[0m itertools v0.15.0
+Rust tests (cargo test)	cargo test	2026-10-20T03:36:45.8320842Z ^[[1m^[[92m   Compiling^[[0m libloading v0.9.0
+Rust tests (cargo test)	cargo test	2026-10-20T03:36:45.9650441Z ^[[1m^[[92m   Compiling^[[0m maybe-owned v0.3.4
+Rust tests (cargo test)	cargo test	2026-10-20T03:36:46.0756232Z ^[[1m^[[92m   Compiling^[[0m bytes v1.12.1
+Rust tests (cargo test)	cargo test	2026-10-20T03:36:46.1058696Z ^[[1m^[[92m   Compiling^[[0m getrandom v0.4.3
+Rust tests (cargo test)	cargo test	2026-10-20T03:36:46.2240503Z ^[[1m^[[92m   Compiling^[[0m rustix v1.1.5
+Rust tests (cargo test)	cargo test	2026-10-20T03:36:46.4830430Z ^[[1m^[[92m   Compiling^[[0m linux-raw-sys v0.12.1
+Rust tests (cargo test)	cargo test	2026-10-20T03:36:48.7041572Z ^[[1m^[[92m   Compiling^[[0m scanweave-io v0.1.0 (/home/runner/work/scanweave/scanweave/crates/scanweave-io)
+Rust tests (cargo test)	cargo test	2026-10-20T03:36:51.6531164Z ^[[1m^[[92m   Compiling^[[0m tempfile v3.27.0
+Rust tests (cargo test)	cargo test	2026-10-20T03:36:56.3450855Z ^[[1m^[[92m   Compiling^[[0m m0-font-pdf v0.1.0 (/home/runner/work/scanweave/scanweave/probes/m0-font-pdf)
+Rust tests (cargo test)	cargo test	2026-10-20T03:36:57.1831166Z ^[[1m^[[92m   Compiling^[[0m scanweave-cli v0.1.0 (/home/runner/work/scanweave/scanweave/crates/scanweave-cli)
+Rust tests (cargo test)	cargo test	2026-10-20T03:37:00.9980721Z ^[[1m^[[33mwarning^[[0m^[[1m: function `utf16be_hex` is never used^[[0m
+Rust tests (cargo test)	cargo test	2026-10-20T03:37:01.0010727Z   ^[[1m^[[94m--> ^[[0mprobes/m0-font-pdf/tests/m1b_behavior.rs:39:4
+Rust tests (cargo test)	cargo test	2026-10-20T03:37:01.0029683Z    ^[[1m^[[94m|^[[0m
+Rust tests (cargo test)	cargo test	2026-10-20T03:37:01.0040250Z ^[[1m^[[94m39^[[0m ^[[1m^[[94m|^[[0m fn utf16be_hex(s: &str) -> String {
+Rust tests (cargo test)	cargo test	2026-10-20T03:37:01.0069868Z    ^[[1m^[[94m|^[[0m    ^[[1m^[[33m^^^^^^^^^^^^[[0m
+Rust tests (cargo test)	cargo test	2026-10-20T03:37:01.0100660Z    ^[[1m^[[94m|^[[0m
+Rust tests (cargo test)	cargo test	2026-10-20T03:37:01.0101696Z    ^[[1m^[[94m= ^[[0m^[[1mnote^[[0m: `#[warn(dead_code)]` (part of `#[warn(unused)]`) on by default
+Rust tests (cargo test)	cargo test	2026-10-20T03:37:01.0102253Z 
+Rust tests (cargo test)	cargo test	2026-10-20T03:37:02.8662760Z ^[[1m^[[33mwarning^[[0m: `m0-font-pdf` (test "m1b_behavior") generated 1 warning
+Rust tests (cargo test)	cargo test	2026-10-20T03:37:03.4930507Z ^[[1m^[[33mwarning^[[0m^[[1m: unused import: `Chunk`^[[0m
+Rust tests (cargo test)	cargo test	2026-10-20T03:37:03.4990075Z  ^[[1m^[[94m--> ^[[0mprobes/m0-font-pdf/examples/font_isolate2.rs:1:18
+Rust tests (cargo test)	cargo test	2026-10-20T03:37:03.5049839Z   ^[[1m^[[94m|^[[0m
+Rust tests (cargo test)	cargo test	2026-10-20T03:37:03.5067136Z ^[[1m^[[94m1^[[0m ^[[1m^[[94m|^[[0m use pdf_writer::{Chunk, Content, Finish, Name, Pdf, Ref, Rect, Str};
+Rust tests (cargo test)	cargo test	2026-10-20T03:37:03.5068124Z   ^[[1m^[[94m|^[[0m                  ^[[1m^[[33m^^^^^^[[0m
+Rust tests (cargo test)	cargo test	2026-10-20T03:37:03.5068705Z   ^[[1m^[[94m|^[[0m
+Rust tests (cargo test)	cargo test	2026-10-20T03:37:03.5069871Z   ^[[1m^[[94m= ^[[0m^[[1mnote^[[0m: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default
+Rust tests (cargo test)	cargo test	2026-10-20T03:37:03.5070484Z 
+Rust tests (cargo test)	cargo test	2026-10-20T03:37:03.6271069Z ^[[1m^[[33mwarning^[[0m: `m0-font-pdf` (example "font_isolate2") generated 1 warning (run `cargo fix --example "font_isolate2" -p m0-font-pdf` to apply 1 suggestion)
+Rust tests (cargo test)	cargo test	2026-10-20T03:37:05.0121251Z ^[[1m^[[33mwarning^[[0m^[[1m: unused import: `Chunk`^[[0m
+Rust tests (cargo test)	cargo test	2026-10-20T03:37:05.0160195Z  ^[[1m^[[94m--> ^[[0mprobes/m0-font-pdf/examples/font_isolate.rs:2:18
+Rust tests (cargo test)	cargo test	2026-10-20T03:37:05.0169770Z   ^[[1m^[[94m|^[[0m
+Rust tests (cargo test)	cargo test	2026-10-20T03:37:05.0170903Z ^[[1m^[[94m2^[[0m ^[[1m^[[94m|^[[0m use pdf_writer::{Chunk, Content, Finish, Name, Pdf, Ref, Rect, Str};
+Rust tests (cargo test)	cargo test	2026-10-20T03:37:05.0172205Z   ^[[1m^[[94m|^[[0m                  ^[[1m^[[33m^^^^^^[[0m
+Rust tests (cargo test)	cargo test	2026-10-20T03:37:05.0172749Z   ^[[1m^[[94m|^[[0m
+Rust tests (cargo test)	cargo test	2026-10-20T03:37:05.0173490Z   ^[[1m^[[94m= ^[[0m^[[1mnote^[[0m: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default
+Rust tests (cargo test)	cargo test	2026-10-20T03:37:05.0174153Z 
+Rust tests (cargo test)	cargo test	2026-10-20T03:37:05.1338664Z ^[[1m^[[33mwarning^[[0m: `m0-font-pdf` (example "font_isolate") generated 1 warning (run `cargo fix --example "font_isolate" -p m0-font-pdf` to apply 1 suggestion)
+Rust tests (cargo test)	cargo test	2026-10-20T03:37:06.0093777Z ^[[1m^[[92m    Finished^[[0m `test` profile [unoptimized + debuginfo] target(s) in 1m 28s
+Rust tests (cargo test)	cargo test	2026-10-20T03:37:06.0491059Z ^[[1m^[[92m     Running^[[0m unittests src/lib.rs (target/debug/deps/m0_font_pdf-2216621d0e0c3e3b)
+Rust tests (cargo test)	cargo test	2026-10-20T03:37:06.0666096Z 
+Rust tests (cargo test)	cargo test	2026-10-20T03:37:06.0666553Z running 0 tests
+Rust tests (cargo test)	cargo test	2026-10-20T03:37:06.0666968Z 
+Rust tests (cargo test)	cargo test	2026-10-20T03:37:06.0667707Z test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+Rust tests (cargo test)	cargo test	2026-10-20T03:37:06.0668364Z 
+Rust tests (cargo test)	cargo test	2026-10-20T03:37:06.0669435Z ^[[1m^[[92m     Running^[[0m unittests src/main.rs (target/debug/deps/m0_font_pdf-c405854818321301)
+Rust tests (cargo test)	cargo test	2026-10-20T03:37:06.0687811Z 
+Rust tests (cargo test)	cargo test	2026-10-20T03:37:06.0688045Z running 0 tests
+Rust tests (cargo test)	cargo test	2026-10-20T03:37:06.0688235Z 
+Rust tests (cargo test)	cargo test	2026-10-20T03:37:06.0688517Z test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+Rust tests (cargo test)	cargo test	2026-10-20T03:37:06.0688873Z 
+Rust tests (cargo test)	cargo test	2026-10-20T03:37:06.0691074Z ^[[1m^[[92m     Running^[[0m tests/m1a_behavior.rs (target/debug/deps/m1a_behavior-fb8c74f4989f435b)
+Rust tests (cargo test)	cargo test	2026-10-20T03:37:06.0705681Z 
+Rust tests (cargo test)	cargo test	2026-10-20T03:37:06.0705815Z running 8 tests
+Rust tests (cargo test)	cargo test	2026-10-20T03:37:06.1899907Z test m1a02_disconnected_marks_preserved ... ok
+Rust tests (cargo test)	cargo test	2026-10-20T03:37:06.2095060Z test m1a01_touging_chars_map_to_one_unit ... ok
+Rust tests (cargo test)	cargo test	2026-10-20T03:37:06.2101352Z test m1a04_unknown_marks_stay_art ... ok
+Rust tests (cargo test)	cargo test	2026-10-20T03:37:06.2239943Z test m1a03_overlapping_boxes_no_loss ... ok
+Rust tests (cargo test)	cargo test	2026-10-20T03:37:06.4685584Z test m1a06_wrong_label_shape_identity ... ok
+Rust tests (cargo test)	cargo test	2026-10-20T03:37:06.4937016Z test m1a08_same_masks_different_labels_same_ownership ... ok
+Rust tests (cargo test)	cargo test	2026-10-20T03:37:07.0620229Z test m1a09_pipeline_restores_raster_and_owner ... ok
+Rust tests (cargo test)	cargo test	2026-10-20T03:37:07.7661001Z test m1a10_deterministic_repeat_runs ... ok
+Rust tests (cargo test)	cargo test	2026-10-20T03:37:07.7661413Z 
+Rust tests (cargo test)	cargo test	2026-10-20T03:37:07.7661831Z test result: ok. 8 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 1.70s
+Rust tests (cargo test)	cargo test	2026-10-20T03:37:07.7662401Z 
+Rust tests (cargo test)	cargo test	2026-10-20T03:37:07.7672598Z ^[[1m^[[92m     Running^[[0m tests/m1b_behavior.rs (target/debug/deps/m1b_behavior-51cd9f8d338fe876)
+Rust tests (cargo test)	cargo test	2026-10-20T03:37:07.7688232Z 
+Rust tests (cargo test)	cargo test	2026-10-20T03:37:07.7688414Z running 13 tests
+Rust tests (cargo test)	cargo test	2026-10-20T03:37:09.1570004Z test m1b01b_vector_lines_keep_per_span_marks ... ok
+Rust tests (cargo test)	cargo test	2026-10-20T03:37:09.2330030Z test m1b01_mixed_line_owner_run_is_inline_on_ink_baseline ... ok
+Rust tests (cargo test)	cargo test	2026-10-20T03:37:09.9030494Z test m1b02_patch_coalescing_is_faithful_and_economical ... ok
+Rust tests (cargo test)	cargo test	2026-10-20T03:37:12.2220031Z test m1b03_auto_selects_smallest_qualified_candidate ... ok
+Rust tests (cargo test)	cargo test	2026-10-20T03:37:13.1650117Z test m1b05_text_touching_rule_stamp_barcode ... ok
+Rust tests (cargo test)	cargo test	2026-10-20T03:37:16.4161313Z test regress_geometry_uses_the_page_affine ... ok
+Rust tests (cargo test)	cargo test	2026-10-20T03:37:17.1239890Z test m1b04b_font_reuse_reduces_bytes ... ok
+Rust tests (cargo test)	cargo test	2026-10-20T03:37:18.9438511Z test regress_pixel_binding_mismatch_is_refused ... ok
+Rust tests (cargo test)	cargo test	2026-10-20T03:37:19.7999877Z test regress_protected_amount_stays_raster ... ok
+Rust tests (cargo test)	cargo test	2026-10-20T03:37:20.1050051Z test regress_auto_reports_the_selected_candidate ... FAILED
+Rust tests (cargo test)	cargo test	2026-10-20T03:37:20.1896767Z test regress_repeated_spans_keep_owners_and_cids_dedup ... ok
+Rust tests (cargo test)	cargo test	2026-10-20T03:37:20.2992039Z test regress_min_ink_iou_is_enforced ... ok
+Rust tests (cargo test)	cargo test	2026-10-20T03:37:22.9951527Z test m1b04_document_assembly_is_one_searchable_pdf ... ok
+Rust tests (cargo test)	cargo test	2026-10-20T03:37:22.9956435Z 
+Rust tests (cargo test)	cargo test	2026-10-20T03:37:22.9956606Z failures:
+Rust tests (cargo test)	cargo test	2026-10-20T03:37:22.9956792Z 
+Rust tests (cargo test)	cargo test	2026-10-20T03:37:22.9957065Z ---- regress_auto_reports_the_selected_candidate stdout ----
+Rust tests (cargo test)	cargo test	2026-10-20T03:37:22.9957530Z 
+Rust tests (cargo test)	cargo test	2026-10-20T03:37:22.9958216Z thread 'regress_auto_reports_the_selected_candidate' (5852) panicked at probes/m0-font-pdf/tests/m1b_behavior.rs:702:5:
+Rust tests (cargo test)	cargo test	2026-10-20T03:37:22.9962444Z assertion `left == right` failed
+Rust tests (cargo test)	cargo test	2026-10-20T03:37:22.9963343Z   left: "reconstruct"
+Rust tests (cargo test)	cargo test	2026-10-20T03:37:22.9963614Z  right: "raster_baseline"
+Rust tests (cargo test)	cargo test	2026-10-20T03:37:22.9963968Z note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+Rust tests (cargo test)	cargo test	2026-10-20T03:37:22.9964293Z 
+Rust tests (cargo test)	cargo test	2026-10-20T03:37:22.9964300Z 
+Rust tests (cargo test)	cargo test	2026-10-20T03:37:22.9964380Z failures:
+Rust tests (cargo test)	cargo test	2026-10-20T03:37:22.9964609Z     regress_auto_reports_the_selected_candidate
+Rust tests (cargo test)	cargo test	2026-10-20T03:37:22.9964869Z 
+Rust tests (cargo test)	cargo test	2026-10-20T03:37:22.9965155Z test result: FAILED. 12 passed; 1 failed; 0 ignored; 0 measured; 0 filtered out; finished in 15.23s
+Rust tests (cargo test)	cargo test	2026-10-20T03:37:22.9965546Z 
+Rust tests (cargo test)	cargo test	2026-10-20T03:37:22.9973503Z ^[[1m^[[91merror^[[0m: test failed, to rerun pass `-p m0-font-pdf --test m1b_behavior`
+Rust tests (cargo test)	cargo test	2026-10-20T03:37:23.0091555Z ##[error]Process completed with exit code 101.

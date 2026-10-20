@@ -1,0 +1,134 @@
+{
+  "dpi": 300,
+  "pages": 12,
+  "repaired_occurrences": 2,
+  "repaired_characters": [
+    "a",
+    "e"
+  ],
+  "glyphs": {
+    "e": {
+      "direct_scan_vs_pristine_raster_iou": 0.8312387791741472,
+      "A1_raster_pdf_vs_A0_pristine_pdf_iou": 0.8285198555956679,
+      "A2_faithful_pdf_vs_A0_pristine_pdf_iou": 0.7646076794657763,
+      "A3_best_donor_pdf_vs_A0_pristine_pdf_iou": 0.9184692179700499,
+      "A2_faithful_pdf_vs_A1_raster_pdf_iou": 0.904950495049505,
+      "A3_improvement_vs_A1": 0.089949362374382,
+      "selected_donor_vs_pristine_iou": 1.0,
+      "donor_crop_vs_pristine_raster_iou": 1.0,
+      "repair_accepted_by_pristine_eval": true,
+      "repaired": true
+    },
+    "a": {
+      "direct_scan_vs_pristine_raster_iou": 0.8362989323843416,
+      "A1_raster_pdf_vs_A0_pristine_pdf_iou": 0.8333333333333334,
+      "A2_faithful_pdf_vs_A0_pristine_pdf_iou": 0.6740157480314961,
+      "A3_best_donor_pdf_vs_A0_pristine_pdf_iou": 0.9306930693069307,
+      "A2_faithful_pdf_vs_A1_raster_pdf_iou": 0.7859778597785978,
+      "A3_improvement_vs_A1": 0.09735973597359737,
+      "selected_donor_vs_pristine_iou": 1.0,
+      "donor_crop_vs_pristine_raster_iou": 1.0,
+      "repair_accepted_by_pristine_eval": true,
+      "repaired": true
+    },
+    "8": {
+      "direct_scan_vs_pristine_raster_iou": 0.911651728553137,
+      "A1_raster_pdf_vs_A0_pristine_pdf_iou": 0.9112801013941698,
+      "A2_faithful_pdf_vs_A0_pristine_pdf_iou": 0.7762711864406779,
+      "A3_best_donor_pdf_vs_A0_pristine_pdf_iou": 0.7316798196166855,
+      "A2_faithful_pdf_vs_A1_raster_pdf_iou": 0.8406862745098039,
+      "A3_improvement_vs_A1": -0.17960028177748433,
+      "selected_donor_vs_pristine_iou": 1.0,
+      "donor_crop_vs_pristine_raster_iou": 1.0,
+      "repair_accepted_by_pristine_eval": false,
+      "repaired": false
+    }
+  },
+  "pdfium_independent_render": {
+    "e": {
+      "nominal_iou_vs_pristine": 0.7842835130970724,
+      "zoom4x_iou_vs_pristine": 0.8812042310821806
+    },
+    "a": {
+      "nominal_iou_vs_pristine": 0.8027950310559007,
+      "zoom4x_iou_vs_pristine": 0.8925081433224755
+    },
+    "8": {
+      "nominal_iou_vs_pristine": 0.7675489067894131,
+      "zoom4x_iou_vs_pristine": 0.8620930232558139
+    }
+  },
+  "reused_occurrences": 0,
+  "reused_occurrence_mean_pristine_iou": null,
+  "reused_occurrences_below_raster_iou_by_0_02": 0,
+  "reused_outline_appearance_gate_passed": false,
+  "reused_source_mask_ious": [
+    0.9383333333333334,
+    0.9348534201954397,
+    0.9192618223760092,
+    0.9383333333333334,
+    0.9348534201954397,
+    0.9192618223760092,
+    0.9383333333333334,
+    0.9348534201954397,
+    0.9192618223760092,
+    0.9383333333333334,
+    0.9348534201954397,
+    0.9192618223760092,
+    0.9383333333333334,
+    0.9348534201954397,
+    0.9192618223760092,
+    0.9383333333333334,
+    0.9348534201954397,
+    0.9192618223760092,
+    0.9383333333333334,
+    0.9348534201954397,
+    0.9192618223760092,
+    0.8943298969072165,
+    0.90625,
+    0.9193798449612403,
+    0.8943298969072165,
+    0.90625,
+    0.9193798449612403,
+    0.8943298969072165,
+    0.90625,
+    0.9193798449612403,
+    0.9383333333333334,
+    0.9348534201954397,
+    0.9192618223760092
+  ],
+  "false_substitutions": [],
+  "unsafe_font_mixes": [],
+  "vector_ink_coverage": 0.02228319057815846,
+  "reused_occurrences_unsafe_vs_raster": 0,
+  "pdf_bytes": {
+    "clearscan": 104188,
+    "faithful": 62770,
+    "truth": 71046,
+    "raster-baseline": 72591
+  },
+  "comparison_arms": {
+    "A0_pristine_oracle": "truth.pdf",
+    "A1_degraded_searchable_raster": "raster-baseline.pdf",
+    "A2_existing_faithful": "faithful.pdf",
+    "A3_best_donor": "clearscan.pdf",
+    "A4_evidence_fused": "not implemented; no fusion arm was run",
+    "A5_calibrated_acceptance": "not implemented; auto falls back to A1 at the unchanged 0.98 policy"
+  },
+  "font_bytes": 7116,
+  "compression_vs_faithful_bytes": -41418,
+  "fonttools_valid": true,
+  "ots": "File sanitized successfully!",
+  "qpdf": {
+    "clearscan": "checking /data/coding/scanweave/qualification/evidence/m1d_document/dpi300/clearscan.pdf\nPDF Version: 1.7\nFile is not encrypted\nFile is not linearized\nNo syntax or stream encoding errors found; the file may still contain\nerrors that qpdf cannot detect",
+    "faithful": "checking /data/coding/scanweave/qualification/evidence/m1d_document/dpi300/faithful.pdf\nPDF Version: 1.7\nFile is not encrypted\nFile is not linearized\nNo syntax or stream encoding errors found; the file may still contain\nerrors that qpdf cannot detect",
+    "truth": "checking /data/coding/scanweave/qualification/evidence/m1d_document/dpi300/truth.pdf\nPDF Version: 1.7\nFile is not encrypted\nFile is not linearized\nNo syntax or stream encoding errors found; the file may still contain\nerrors that qpdf cannot detect",
+    "raster-baseline": "checking /data/coding/scanweave/qualification/evidence/m1d_document/dpi300/raster-baseline.pdf\nPDF Version: 1.7\nFile is not encrypted\nFile is not linearized\nNo syntax or stream encoding errors found; the file may still contain\nerrors that qpdf cannot detect"
+  },
+  "pdfium_text_equal": true,
+  "pdfium_search": {
+    "faithful": true,
+    "clearscan": true
+  },
+  "compression_vs_searchable_raster_baseline_bytes": -31597
+}

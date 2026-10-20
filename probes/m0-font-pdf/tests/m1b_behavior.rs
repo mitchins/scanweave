@@ -2,6 +2,8 @@
 //! (red→green): line-level search semantics, patch economy, auto selection,
 //! document assembly, and the M1A-05 contact regression.
 
+mod support;
+
 use m0_font_pdf::shim::{convert_input, convert_with};
 
 /// The behaviour tests exercise the reconstruction path, so the converter-side
@@ -61,7 +63,7 @@ fn build(dir: &str, stem: &str, policy: Option<&Policy>) -> scanweave_io::conver
 #[test]
 fn m1b01_mixed_line_owner_run_is_inline_on_ink_baseline() {
     let out = build("p10_multipage/page1", "p10_page1", None);
-    let pdf = String::from_utf8_lossy(&out.pdf_bytes);
+    let pdf = support::decoded_syntax(&out.pdf_bytes);
     let bt = pdf.find("BT\n").expect("text object");
     let et = pdf.rfind("ET\n").expect("text object end");
     let content = &pdf[bt..=et];
@@ -119,7 +121,7 @@ fn m1b01_mixed_line_owner_run_is_inline_on_ink_baseline() {
 #[test]
 fn m1b01b_vector_lines_keep_per_span_marks() {
     let out = build("p09_realtext", "p09_realtext", None);
-    let pdf = String::from_utf8_lossy(&out.pdf_bytes);
+    let pdf = support::decoded_syntax(&out.pdf_bytes);
     // 'Total' is a pure-vector span: it keeps its own per-span ActualText
     assert!(
         pdf.contains("/ActualText (Total)"),
@@ -162,7 +164,7 @@ fn m1b02_patch_coalescing_is_faithful_and_economical() {
         .windows(8)
         .filter(|w| w == b"/Subtype")
         .count();
-    let images = String::from_utf8_lossy(&out.pdf_bytes)
+    let images = support::decoded_syntax(&out.pdf_bytes)
         .matches("/Subtype /Image")
         .count();
     assert!(
@@ -225,7 +227,7 @@ fn m1b04_document_assembly_is_one_searchable_pdf() {
     }
     let policy = measurement_policy();
     let out = convert_document(&bundle.document_id, &inputs, &policy).expect("document");
-    let pdf = String::from_utf8_lossy(&out.pdf_bytes);
+    let pdf = support::decoded_syntax(&out.pdf_bytes);
 
     // one PDF with N page objects and one shared font program
     let page_objs = pdf.matches("/Type /Page").count() - pdf.matches("/Type /Pages").count();
@@ -518,7 +520,7 @@ fn regress_geometry_uses_the_page_affine() {
         (out.report.policy.dpi - 300.0).abs() < 1e-9,
         "the CLI dpi is the sampling hint; the page affine is authoritative"
     );
-    let pdf = String::from_utf8_lossy(&out.pdf_bytes);
+    let pdf = support::decoded_syntax(&out.pdf_bytes);
     assert!(
         pdf.contains(&format!("[0 0 {want_w} ")),
         "the MediaBox must use the page's 600 dpi geometry ({want_w}pt), not 300 dpi"
@@ -634,7 +636,7 @@ fn regress_repeated_spans_keep_owners_and_cids_dedup() {
     assert_eq!(owners["w0"], "invisible", "span w0 must be a raster fallback owner");
     assert_eq!(owners["w1"], "invisible", "span w1 must be a raster fallback owner");
     // and each owner run must be discoverable in the PDF: two ActualText marks
-    let pdf = String::from_utf8_lossy(&out.pdf_bytes);
+    let pdf = support::decoded_syntax(&out.pdf_bytes);
     assert_eq!(
         pdf.matches("/ActualText (Amount 12.34)").count(),
         2,
@@ -654,7 +656,7 @@ fn regress_repeated_spans_keep_owners_and_cids_dedup() {
     let doc = convert_document("repeated-doc", &inputs, &measurement_policy()).expect("document");
     let per_page = doc.report.page_reports.iter().map(|p| p.font_glyphs).collect::<Vec<_>>();
     assert_eq!(per_page[0], per_page[1], "identical pages must trace identical glyphs");
-    let pdf = String::from_utf8_lossy(&doc.pdf_bytes);
+    let pdf = support::decoded_syntax(&doc.pdf_bytes);
     let bfchars = pdf.matches("beginbfchar").count();
     assert!(bfchars >= 1, "the document font must carry a ToUnicode map");
     // count the CID entries the document's maps declare
@@ -677,8 +679,9 @@ fn regress_repeated_spans_keep_owners_and_cids_dedup() {
     );
 }
 
-/// P2: when auto selects the raster baseline, the top-level image/content
-/// accounting must describe the SELECTED candidate, not the reconstruction.
+/// P2: top-level accounting must describe the emitted candidate. A 1.0
+/// preservation requirement is not an instruction to select the baseline:
+/// low-fidelity units may fall back before the reconstruction is ranked.
 #[test]
 fn regress_auto_reports_the_selected_candidate() {
     use scanweave_io::document::convert_document;
@@ -694,16 +697,27 @@ fn regress_auto_reports_the_selected_candidate() {
         let ocr = OcrPage::parse_bytes(&std::fs::read(doc.join(&p.ocr_page_path)).unwrap()).unwrap();
         inputs.push(scanweave_io::convert::input_from_ocr_page(img.as_raw(), w, h, &p.page_id, &ocr));
     }
-    // force auto to pick the raster baseline by setting an unreachable policy
+    // Exercise strict preservation without assuming which serialized candidate wins.
     let policy = m0_font_pdf::Policy { mode: "auto".into(), min_ink_iou: 1.0, ..m0_font_pdf::Policy::default() };
     let out = convert_document("doc", &inputs, &policy).expect("auto Document");
-    assert_eq!(out.report.selected, "raster_baseline");
-    // the reported bytes are the emitted candidate's, and the accounting matches it
+    let selected = out.report.candidates.iter()
+        .find(|c| c.name == out.report.selected).expect("selected candidate is recorded");
+    let cheapest = out.report.candidates.iter().min_by_key(|c| c.pdf_bytes).unwrap();
+    assert_eq!(selected.pdf_bytes, cheapest.pdf_bytes, "both candidates satisfy strict preservation");
     assert_eq!(out.report.pdf_bytes, out.pdf_bytes.len());
-    assert_eq!(out.report.image_xobjects, 4, "one whole-page patch per page");
+    assert_eq!(out.report.pdf_bytes, selected.pdf_bytes);
+    assert_eq!(out.report.image_xobjects, selected.image_xobjects);
+    assert_eq!(out.report.content_bytes, selected.content_bytes);
+    assert_eq!(out.report.font_bytes, selected.font_bytes);
+    assert_eq!(out.report.raster_encoded_bytes, selected.raster_encoded_bytes);
+    assert_eq!(out.report.page_fidelity, selected.page_fidelity);
     assert_eq!(out.report.page_fidelity.len(), 4);
-    assert!(out.report.page_fidelity.iter().all(|f| f.map_or(false, |v| v >= 1.0)));
-    // the reconstruction candidate is still recorded for comparison
-    let recon = out.report.candidates.iter().find(|c| c.name == "reconstruct").unwrap();
-    assert!(recon.pdf_bytes > 0);
+    assert!(out.report.page_fidelity.iter().all(|f| f.is_none_or(|v| v >= 1.0)));
+    assert_eq!(out.report.candidates.len(), 2);
+    assert!(out.report.candidates.iter().all(|c| c.pdf_bytes > 0));
+    if out.report.selected == "raster_baseline" {
+        assert_eq!(out.pdf_bytes, out.raster_baseline_pdf_bytes);
+        assert_eq!(out.report.page_fidelity, vec![Some(1.0); 4]);
+    }
+
 }

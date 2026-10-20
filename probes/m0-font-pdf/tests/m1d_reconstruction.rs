@@ -1,4 +1,6 @@
 use m0_font_pdf::Policy;
+mod support;
+
 use scanweave_io::convert::{convert, Input, SpanInput, SymbolInput};
 use serde::Deserialize;
 use std::path::PathBuf;
@@ -70,6 +72,21 @@ fn clearscan_repairs_a_damaged_glyph_from_same_document_donors() {
     let prototype = clearscan.report.reconstruction.prototypes.iter()
         .find(|p| p.members.contains(&"s02".to_string())).unwrap();
     assert_eq!(prototype.members.len(), 10, "only intact cohort members should be donors");
+    // A repair must trace the matching observed witness, not overwrite the
+    // medoid under a key already remapped by earlier healthy occurrences.
+    let selected = clearscan.report.reconstruction.prototypes.iter()
+        .find(|p| Some(&p.prototype_id) == repaired[0].prototype_id.as_ref()).unwrap();
+    let witness = clearscan.report.reconstruction.observations.iter()
+        .find(|o| o.symbol_id == selected.representative_symbol_id).unwrap();
+    assert_eq!(selected.prototype_id, format!("prototype:{}", witness.shape_key));
+    let emitted = clearscan.report.reconstruction.canonical_geometry.iter()
+        .find(|g| g.prototype_id == selected.prototype_id).unwrap();
+    assert_eq!(emitted.witness_symbol_id, witness.symbol_id);
+    assert_eq!(selected.members, prototype.members);
+    assert!(selected.members.contains(&selected.representative_symbol_id));
+    assert!(repaired[0].similarity.unwrap() >= 0.78);
+    assert!(repaired[0].prototype_trace_iou.unwrap() >= 0.90);
+
     assert!(!prototype.members.contains(&"s00".to_string()));
     assert!(!prototype.members.contains(&"s01".to_string()));
     assert_eq!(repaired[0].text, "e", "the accepted occurrence must retain OCR Unicode");
@@ -85,7 +102,7 @@ fn clearscan_repairs_a_damaged_glyph_from_same_document_donors() {
     let clear_s00 = clearscan.report.occurrences.iter().find(|o| o.symbol_id == "s00").unwrap();
     assert_eq!(faithful_s00.owner, "invisible", "faithful must preserve damaged raster text");
     assert_eq!(clear_s00.owner, "visible_tounicode", "ClearScan must paint the selected vector prototype");
-    let pdf = String::from_utf8_lossy(&clearscan.pdf_bytes);
+    let pdf = support::decoded_syntax(&clearscan.pdf_bytes);
     assert!(pdf.contains("/FontFile2"), "embedded TrueType font is required");
     assert_ne!(faithful.pdf_bytes, clearscan.pdf_bytes, "restoration must materially change the PDF");
 }

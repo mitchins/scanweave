@@ -1,0 +1,10 @@
+positive combining_page.json: ok
+positive valid_page.json: ok
+positive word_only_page.json: ok
+negative nf01_unknown_property.json: ok
+negative nf02_malformed_hash.json: ok
+negative nf03_zero_physical_width.json: ok
+negative nf04_undersized_polygon.json: ok
+negative nf05_duplicate_reading_order.json: ok
+negative nf06_unsupported_direction.json: ok
+schema fixture layer: all fixtures behave as expected

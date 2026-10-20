@@ -1,0 +1,46 @@
+[
+  {
+    "case": "native-jpeg-passthrough",
+    "renderer": "pdfium",
+    "pixel_identical": true,
+    "input_bytes": 394783,
+    "output_bytes": 395865,
+    "image_encoded_bytes": 393986,
+    "source_stream_unchanged": true,
+    "note": "JPEG import control made from genuine receipt imagery; not added to the frozen corpus"
+  },
+  {
+    "case": "native-jpeg-passthrough",
+    "renderer": "poppler",
+    "pixel_identical": true,
+    "input_bytes": 394783,
+    "output_bytes": 395865,
+    "image_encoded_bytes": 393986,
+    "source_stream_unchanged": true,
+    "note": "JPEG import control made from genuine receipt imagery; not added to the frozen corpus"
+  },
+  {
+    "case": "crop-rotation-fallback",
+    "sizes": [
+      [
+        183.36000061035156,
+        263.0400085449219
+      ],
+      [
+        263.0400085449219,
+        183.36000061035156
+      ]
+    ],
+    "expected": [
+      [
+        183.360001,
+        263.040009
+      ],
+      [
+        263.040009,
+        183.360001
+      ]
+    ],
+    "native_copy_rejected": true
+  }
+]

@@ -1,0 +1,984 @@
+{
+  "starting_head": "903580f4911ce0ca15377781b70f2acedc960a99",
+  "implementation_head": "6495218a522a055b5641397a25e7bb5d04f06b3b",
+  "documents": {
+    "300": {
+      "previous": {
+        "bytes": 732603,
+        "sha256": "515294f52a947153357a30a518f6bf7fb9b4eeb4ed1ed44f9fefd966897df725",
+        "streams": {
+          "other_stream": 1303,
+          "raster": 622682,
+          "content": 55074,
+          "font": 35332,
+          "overhead": 18212
+        },
+        "legacy_padded_iou": {
+          "exact": {
+            "source": 0.9053150111739823,
+            "poppler": 0.8915329627938317,
+            "pdfium": 0.8606931380486981
+          },
+          "default": {
+            "source": 0.9053150111739823,
+            "poppler": 0.8915329627938317,
+            "pdfium": 0.8574877091787133
+          }
+        },
+        "isolated_iou": {
+          "exact": {
+            "source": 0.945163201851262,
+            "poppler": 0.9304563004318913,
+            "pdfium": 0.910803288109871
+          },
+          "default": {
+            "source": 0.945163201851262,
+            "poppler": 0.9304563004318913,
+            "pdfium": 0.8952109556156045
+          }
+        },
+        "image_resources": 62,
+        "embedded_outlines_all": 58,
+        "painted_occurrences": 515,
+        "used_font_gids": 55,
+        "distinct_painted_outline_hashes": 51,
+        "severity": {
+          "healthy": {
+            "n": 299,
+            "poppler": {
+              "mean_gain": -0.03850924178608129,
+              "improved": 23,
+              "regressed": 276
+            },
+            "pdfium": {
+              "mean_gain": -0.0670615313041975,
+              "improved": 16,
+              "regressed": 275
+            }
+          },
+          "moderate": {
+            "n": 253,
+            "poppler": {
+              "mean_gain": 0.013423137195832553,
+              "improved": 201,
+              "regressed": 52
+            },
+            "pdfium": {
+              "mean_gain": 0.004287452469198226,
+              "improved": 173,
+              "regressed": 77
+            }
+          },
+          "heavy": {
+            "n": 0,
+            "poppler": {
+              "mean_gain": null,
+              "improved": 0,
+              "regressed": 0
+            },
+            "pdfium": {
+              "mean_gain": null,
+              "improved": 0,
+              "regressed": 0
+            }
+          }
+        },
+        "search": {
+          "poppler_matches_ocr": true,
+          "pdfium_matches_ocr": true
+        },
+        "ocr_ground_truth_char_errors": {
+          "poppler": 1,
+          "pdfium": 1
+        },
+        "ground_truth_chars": 552,
+        "raster_byte_classes": {
+          "residual_background": 582949,
+          "native_fallback_artwork_unknown": 39733
+        },
+        "observations": 552,
+        "canonical_replacements": 495,
+        "canonical_id_count": 35,
+        "repaired_occurrences": 24,
+        "coverage": {
+          "text_ink_px_total": 130344,
+          "text_ink_px_vector": 123760,
+          "text_ink_px_raster": 6584,
+          "other_ink_px": 3234,
+          "unowned_ink_px": 0,
+          "multiply_owned_ink_px": 0
+        },
+        "suppressed_source_ink_px": 123760,
+        "suppressed_fringe_px": 69324,
+        "stage_timings": {
+          "total_ms": 35175,
+          "donor_collection_ms": 581,
+          "page_conversion_ms": 34033,
+          "document_font_union_ms": 0,
+          "font_build_ms": 0,
+          "reconstruction_pdf_ms": 227,
+          "raster_baseline_prepare_ms": 53,
+          "raster_baseline_pdf_ms": 278,
+          "remaining_pipeline_ms": 3
+        },
+        "qualified_searchable_raster_bytes": 4203546,
+        "wrong_witness_identity": 0,
+        "wrong_witness_typeface": 0,
+        "wall_seconds": 35.44,
+        "peak_rss_kb": 207412
+      },
+      "adobe": {
+        "bytes": 37100,
+        "sha256": "abf9ab35eb9230e1982a65ab30700fa65a128aba256c133688f2779ead65e490",
+        "streams": {
+          "other_stream": 6885,
+          "raster": 17411,
+          "content": 1547,
+          "font": 5963,
+          "overhead": 5294
+        },
+        "legacy_padded_iou": {
+          "exact": {
+            "source": 0.9053150111739823,
+            "poppler": 0.6919831551075314,
+            "pdfium": 0.8672813037654151
+          },
+          "default": {
+            "source": 0.9053150111739823,
+            "poppler": 0.6919831551075314,
+            "pdfium": 0.834899580375421
+          }
+        },
+        "isolated_iou": {
+          "exact": {
+            "source": 0.945163201851262,
+            "poppler": 0.7506638042145692,
+            "pdfium": 0.9025490818205523
+          },
+          "default": {
+            "source": 0.945163201851262,
+            "poppler": 0.7506638042145692,
+            "pdfium": 0.8819741934325385
+          }
+        },
+        "image_resources": 10,
+        "embedded_outlines_all": 35,
+        "painted_occurrences": 544,
+        "used_font_gids": 27,
+        "distinct_painted_outline_hashes": 27,
+        "severity": {
+          "healthy": {
+            "n": 299,
+            "poppler": {
+              "mean_gain": -0.22477255529835494,
+              "improved": 0,
+              "regressed": 299
+            },
+            "pdfium": {
+              "mean_gain": -0.06327184475852561,
+              "improved": 0,
+              "regressed": 299
+            }
+          },
+          "moderate": {
+            "n": 253,
+            "poppler": {
+              "mean_gain": -0.15872202949109215,
+              "improved": 14,
+              "regressed": 238
+            },
+            "pdfium": {
+              "mean_gain": -0.018200445352382126,
+              "improved": 85,
+              "regressed": 165
+            }
+          },
+          "heavy": {
+            "n": 0,
+            "poppler": {
+              "mean_gain": null,
+              "improved": 0,
+              "regressed": 0
+            },
+            "pdfium": {
+              "mean_gain": null,
+              "improved": 0,
+              "regressed": 0
+            }
+          }
+        },
+        "search": {
+          "poppler_matches_ocr": false,
+          "pdfium_matches_ocr": false
+        },
+        "ocr_ground_truth_char_errors": {
+          "poppler": 13,
+          "pdfium": 13
+        },
+        "ground_truth_chars": 552,
+        "raster_byte_classes": {}
+      },
+      "final": {
+        "bytes": 733974,
+        "sha256": "8e57afa9599f3be936f44a13b326e09b40b7e82cfdd57c32bd80666944d8cc4c",
+        "streams": {
+          "other_stream": 1351,
+          "raster": 622682,
+          "content": 54669,
+          "font": 37064,
+          "overhead": 18208
+        },
+        "legacy_padded_iou": {
+          "exact": {
+            "source": 0.9053150111739823,
+            "poppler": 0.8915329627938317,
+            "pdfium": 0.8927916310639277
+          },
+          "default": {
+            "source": 0.9053150111739823,
+            "poppler": 0.8915329627938317,
+            "pdfium": 0.8812289357028502
+          }
+        },
+        "isolated_iou": {
+          "exact": {
+            "source": 0.945163201851262,
+            "poppler": 0.9304563004318913,
+            "pdfium": 0.931140039174725
+          },
+          "default": {
+            "source": 0.945163201851262,
+            "poppler": 0.9304563004318913,
+            "pdfium": 0.9202788703724591
+          }
+        },
+        "image_resources": 62,
+        "embedded_outlines_all": 59,
+        "painted_occurrences": 515,
+        "used_font_gids": 55,
+        "distinct_painted_outline_hashes": 51,
+        "severity": {
+          "healthy": {
+            "n": 299,
+            "poppler": {
+              "mean_gain": -0.03850924178608129,
+              "improved": 23,
+              "regressed": 276
+            },
+            "pdfium": {
+              "mean_gain": -0.03707761996146113,
+              "improved": 21,
+              "regressed": 270
+            }
+          },
+          "moderate": {
+            "n": 253,
+            "poppler": {
+              "mean_gain": 0.013423137195832553,
+              "improved": 201,
+              "regressed": 52
+            },
+            "pdfium": {
+              "mean_gain": 0.013223014114736673,
+              "improved": 196,
+              "regressed": 54
+            }
+          },
+          "heavy": {
+            "n": 0,
+            "poppler": {
+              "mean_gain": null,
+              "improved": 0,
+              "regressed": 0
+            },
+            "pdfium": {
+              "mean_gain": null,
+              "improved": 0,
+              "regressed": 0
+            }
+          }
+        },
+        "search": {
+          "poppler_matches_ocr": true,
+          "pdfium_matches_ocr": true
+        },
+        "ocr_ground_truth_char_errors": {
+          "poppler": 1,
+          "pdfium": 1
+        },
+        "ground_truth_chars": 552,
+        "raster_byte_classes": {
+          "residual_background": 582949,
+          "native_fallback_artwork_unknown": 39733
+        },
+        "observations": 552,
+        "canonical_replacements": 495,
+        "canonical_id_count": 35,
+        "repaired_occurrences": 24,
+        "coverage": {
+          "text_ink_px_total": 130344,
+          "text_ink_px_vector": 123760,
+          "text_ink_px_raster": 6584,
+          "other_ink_px": 3234,
+          "unowned_ink_px": 0,
+          "multiply_owned_ink_px": 0
+        },
+        "suppressed_source_ink_px": 123760,
+        "suppressed_fringe_px": 69324,
+        "stage_timings": {
+          "total_ms": 32685,
+          "donor_collection_ms": 376,
+          "page_conversion_ms": 31807,
+          "document_font_union_ms": 0,
+          "font_build_ms": 0,
+          "reconstruction_pdf_ms": 194,
+          "raster_baseline_prepare_ms": 36,
+          "raster_baseline_pdf_ms": 267,
+          "remaining_pipeline_ms": 5
+        },
+        "qualified_searchable_raster_bytes": 4204917,
+        "wrong_witness_identity": 0,
+        "wrong_witness_typeface": 0,
+        "wall_seconds": 32.85,
+        "peak_rss_kb": 206192
+      },
+      "source_image_only_pdf_bytes": 4124819,
+      "raw_source_isolated_iou": 0.945163201851262,
+      "raw_source_padded_iou": 0.9053150111739823
+    },
+    "600": {
+      "previous": {
+        "bytes": 1334401,
+        "sha256": "759d97eee08018ed9cd356277df22aef435f11fe03d2b767e6650e1848950433",
+        "streams": {
+          "other_stream": 1335,
+          "raster": 1153207,
+          "content": 66286,
+          "font": 52464,
+          "overhead": 61109
+        },
+        "legacy_padded_iou": {
+          "exact": {
+            "source": 0.8998239916745573,
+            "poppler": 0.851679900214768,
+            "pdfium": 0.8669940613816668
+          },
+          "default": {
+            "source": 0.8998239916745573,
+            "poppler": 0.851679900214768,
+            "pdfium": 0.8227569039620537
+          }
+        },
+        "isolated_iou": {
+          "exact": {
+            "source": 0.9780695561679971,
+            "poppler": 0.926984852705939,
+            "pdfium": 0.9427212169174539
+          },
+          "default": {
+            "source": 0.9780695561679971,
+            "poppler": 0.926984852705939,
+            "pdfium": 0.8956068258084673
+          }
+        },
+        "image_resources": 250,
+        "embedded_outlines_all": 59,
+        "painted_occurrences": 460,
+        "used_font_gids": 50,
+        "distinct_painted_outline_hashes": 49,
+        "severity": {
+          "healthy": {
+            "n": 549,
+            "poppler": {
+              "mean_gain": -0.05127513430710076,
+              "improved": 1,
+              "regressed": 548
+            },
+            "pdfium": {
+              "mean_gain": -0.03545277903432088,
+              "improved": 1,
+              "regressed": 512
+            }
+          },
+          "moderate": {
+            "n": 3,
+            "poppler": {
+              "mean_gain": -0.01623585881924805,
+              "improved": 1,
+              "regressed": 2
+            },
+            "pdfium": {
+              "mean_gain": -0.01623585881924805,
+              "improved": 1,
+              "regressed": 2
+            }
+          },
+          "heavy": {
+            "n": 0,
+            "poppler": {
+              "mean_gain": null,
+              "improved": 0,
+              "regressed": 0
+            },
+            "pdfium": {
+              "mean_gain": null,
+              "improved": 0,
+              "regressed": 0
+            }
+          }
+        },
+        "search": {
+          "poppler_matches_ocr": true,
+          "pdfium_matches_ocr": true
+        },
+        "ocr_ground_truth_char_errors": {
+          "poppler": 1,
+          "pdfium": 1
+        },
+        "ground_truth_chars": 552,
+        "raster_byte_classes": {
+          "residual_background": 359328,
+          "native_fallback_artwork_unknown": 793879
+        },
+        "observations": 552,
+        "canonical_replacements": 445,
+        "canonical_id_count": 35,
+        "repaired_occurrences": 2,
+        "coverage": {
+          "text_ink_px_total": 544428,
+          "text_ink_px_vector": 479523,
+          "text_ink_px_raster": 64905,
+          "other_ink_px": 13764,
+          "unowned_ink_px": 0,
+          "multiply_owned_ink_px": 0
+        },
+        "suppressed_source_ink_px": 479523,
+        "suppressed_fringe_px": 212454,
+        "stage_timings": {
+          "total_ms": 86403,
+          "donor_collection_ms": 2338,
+          "page_conversion_ms": 82068,
+          "document_font_union_ms": 0,
+          "font_build_ms": 1,
+          "reconstruction_pdf_ms": 417,
+          "raster_baseline_prepare_ms": 279,
+          "raster_baseline_pdf_ms": 1295,
+          "remaining_pipeline_ms": 5
+        },
+        "qualified_searchable_raster_bytes": 16320330,
+        "wrong_witness_identity": 0,
+        "wrong_witness_typeface": 0,
+        "wall_seconds": 87.11,
+        "peak_rss_kb": 742876
+      },
+      "adobe": {
+        "bytes": 50779,
+        "sha256": "9ed2e5df4bc497c55d775393faf93f074b622047e70bad78c870baa3696609b3",
+        "streams": {
+          "other_stream": 7272,
+          "raster": 30036,
+          "content": 1502,
+          "font": 5880,
+          "overhead": 6089
+        },
+        "legacy_padded_iou": {
+          "exact": {
+            "source": 0.8998239916745573,
+            "poppler": 0.8087771363533891,
+            "pdfium": 0.8661722390455232
+          },
+          "default": {
+            "source": 0.8998239916745573,
+            "poppler": 0.8087771363533891,
+            "pdfium": 0.812480593573163
+          }
+        },
+        "isolated_iou": {
+          "exact": {
+            "source": 0.9780695561679971,
+            "poppler": 0.8831935769275069,
+            "pdfium": 0.9415495927807167
+          },
+          "default": {
+            "source": 0.9780695561679971,
+            "poppler": 0.8831935769275069,
+            "pdfium": 0.8833047617088808
+          }
+        },
+        "image_resources": 11,
+        "embedded_outlines_all": 27,
+        "painted_occurrences": 544,
+        "used_font_gids": 21,
+        "distinct_painted_outline_hashes": 21,
+        "severity": {
+          "healthy": {
+            "n": 549,
+            "poppler": {
+              "mean_gain": -0.09469544067589705,
+              "improved": 0,
+              "regressed": 549
+            },
+            "pdfium": {
+              "mean_gain": -0.03659438625863529,
+              "improved": 6,
+              "regressed": 543
+            }
+          },
+          "moderate": {
+            "n": 3,
+            "poppler": {
+              "mean_gain": -0.12791453656104165,
+              "improved": 0,
+              "regressed": 3
+            },
+            "pdfium": {
+              "mean_gain": -0.022900577929291233,
+              "improved": 0,
+              "regressed": 3
+            }
+          },
+          "heavy": {
+            "n": 0,
+            "poppler": {
+              "mean_gain": null,
+              "improved": 0,
+              "regressed": 0
+            },
+            "pdfium": {
+              "mean_gain": null,
+              "improved": 0,
+              "regressed": 0
+            }
+          }
+        },
+        "search": {
+          "poppler_matches_ocr": false,
+          "pdfium_matches_ocr": false
+        },
+        "ocr_ground_truth_char_errors": {
+          "poppler": 16,
+          "pdfium": 16
+        },
+        "ground_truth_chars": 552,
+        "raster_byte_classes": {}
+      },
+      "final": {
+        "bytes": 1338140,
+        "sha256": "d50600607aa48030cc26dc6755d6ae77877ed2e3f74f395e6ef92c39c7b3562e",
+        "streams": {
+          "other_stream": 1303,
+          "raster": 1153207,
+          "content": 65265,
+          "font": 57352,
+          "overhead": 61013
+        },
+        "legacy_padded_iou": {
+          "exact": {
+            "source": 0.8998239916745573,
+            "poppler": 0.8515459636467546,
+            "pdfium": 0.8668136937122222
+          },
+          "default": {
+            "source": 0.8998239916745573,
+            "poppler": 0.8515459636467546,
+            "pdfium": 0.8289534395936903
+          }
+        },
+        "isolated_iou": {
+          "exact": {
+            "source": 0.9780695561679971,
+            "poppler": 0.9268757691679188,
+            "pdfium": 0.9425652528976954
+          },
+          "default": {
+            "source": 0.9780695561679971,
+            "poppler": 0.9268757691679188,
+            "pdfium": 0.9023282629476524
+          }
+        },
+        "image_resources": 250,
+        "embedded_outlines_all": 60,
+        "painted_occurrences": 460,
+        "used_font_gids": 50,
+        "distinct_painted_outline_hashes": 49,
+        "severity": {
+          "healthy": {
+            "n": 549,
+            "poppler": {
+              "mean_gain": -0.05138481393002823,
+              "improved": 1,
+              "regressed": 548
+            },
+            "pdfium": {
+              "mean_gain": -0.03560959531648221,
+              "improved": 1,
+              "regressed": 512
+            }
+          },
+          "moderate": {
+            "n": 3,
+            "poppler": {
+              "mean_gain": -0.01623585881924805,
+              "improved": 1,
+              "regressed": 2
+            },
+            "pdfium": {
+              "mean_gain": -0.01623585881924805,
+              "improved": 1,
+              "regressed": 2
+            }
+          },
+          "heavy": {
+            "n": 0,
+            "poppler": {
+              "mean_gain": null,
+              "improved": 0,
+              "regressed": 0
+            },
+            "pdfium": {
+              "mean_gain": null,
+              "improved": 0,
+              "regressed": 0
+            }
+          }
+        },
+        "search": {
+          "poppler_matches_ocr": true,
+          "pdfium_matches_ocr": true
+        },
+        "ocr_ground_truth_char_errors": {
+          "poppler": 1,
+          "pdfium": 1
+        },
+        "ground_truth_chars": 552,
+        "raster_byte_classes": {
+          "residual_background": 359328,
+          "native_fallback_artwork_unknown": 793879
+        },
+        "observations": 552,
+        "canonical_replacements": 445,
+        "canonical_id_count": 35,
+        "repaired_occurrences": 2,
+        "coverage": {
+          "text_ink_px_total": 544428,
+          "text_ink_px_vector": 479523,
+          "text_ink_px_raster": 64905,
+          "other_ink_px": 13764,
+          "unowned_ink_px": 0,
+          "multiply_owned_ink_px": 0
+        },
+        "suppressed_source_ink_px": 479523,
+        "suppressed_fringe_px": 212454,
+        "stage_timings": {
+          "total_ms": 82668,
+          "donor_collection_ms": 3631,
+          "page_conversion_ms": 77478,
+          "document_font_union_ms": 0,
+          "font_build_ms": 1,
+          "reconstruction_pdf_ms": 275,
+          "raster_baseline_prepare_ms": 174,
+          "raster_baseline_pdf_ms": 1106,
+          "remaining_pipeline_ms": 3
+        },
+        "qualified_searchable_raster_bytes": 16324069,
+        "wrong_witness_identity": 0,
+        "wrong_witness_typeface": 0,
+        "wall_seconds": 83.51,
+        "peak_rss_kb": 744164
+      },
+      "source_image_only_pdf_bytes": 16263472,
+      "raw_source_isolated_iou": 0.9780695561679971,
+      "raw_source_padded_iou": 0.8998239916745573
+    }
+  },
+  "attempts": [
+    {
+      "arm": "smooth",
+      "bytes": 742233,
+      "sha256": "af8ce201ab057f5a54d5821d89500759e79390924a9d669de217e525f7392317",
+      "padded_iou": {
+        "exact": {
+          "source": 0.9053150111739823,
+          "poppler": 0.8850509048546549,
+          "pdfium": 0.8845854771655983
+        },
+        "default": {
+          "source": 0.9053150111739823,
+          "poppler": 0.8850509048546549,
+          "pdfium": 0.8228784938881804
+        }
+      },
+      "isolated_iou": {
+        "exact": {
+          "source": 0.945163201851262,
+          "poppler": 0.9261797349546868,
+          "pdfium": 0.9265610209968586
+        },
+        "default": {
+          "source": 0.945163201851262,
+          "poppler": 0.9261797349546868,
+          "pdfium": 0.8650437379044861
+        }
+      },
+      "streams": {
+        "other_stream": 1303,
+        "raster": 622682,
+        "content": 57556,
+        "font": 42480,
+        "overhead": 18212
+      }
+    },
+    {
+      "arm": "subpixel",
+      "bytes": 825815,
+      "sha256": "0e064055244890219a7e2f2edf07655f5cac8fa9a743deb899c83d91aaf762d3",
+      "padded_iou": {
+        "exact": {
+          "source": 0.9053150111739823,
+          "poppler": 0.8471833677267652,
+          "pdfium": 0.858140478328487
+        },
+        "default": {
+          "source": 0.9053150111739823,
+          "poppler": 0.8471833677267652,
+          "pdfium": 0.7937217885889917
+        }
+      },
+      "isolated_iou": {
+        "exact": {
+          "source": 0.945163201851262,
+          "poppler": 0.8914200128448253,
+          "pdfium": 0.904283232172014
+        },
+        "default": {
+          "source": 0.945163201851262,
+          "poppler": 0.8914200128448253,
+          "pdfium": 0.8375121922379014
+        }
+      },
+      "streams": {
+        "other_stream": 1335,
+        "raster": 671479,
+        "content": 65600,
+        "font": 46060,
+        "overhead": 41341
+      }
+    },
+    {
+      "arm": "fit",
+      "bytes": 735602,
+      "sha256": "f083d7243fa0fbbebc286ad830883db77243deb7d0c9dff37aaf9a8926e909ba",
+      "padded_iou": {
+        "exact": {
+          "source": 0.9053150111739823,
+          "poppler": 0.8915329627938317,
+          "pdfium": 0.8976332893581154
+        },
+        "default": {
+          "source": 0.9053150111739823,
+          "poppler": 0.8915329627938317,
+          "pdfium": 0.885088452304305
+        }
+      },
+      "isolated_iou": {
+        "exact": {
+          "source": 0.945163201851262,
+          "poppler": 0.9304563004318913,
+          "pdfium": 0.9360986427136175
+        },
+        "default": {
+          "source": 0.945163201851262,
+          "poppler": 0.9304563004318913,
+          "pdfium": 0.9243384244422199
+        }
+      },
+      "streams": {
+        "other_stream": 1303,
+        "raster": 622682,
+        "content": 55701,
+        "font": 37704,
+        "overhead": 18212
+      }
+    },
+    {
+      "arm": "fair",
+      "bytes": 763451,
+      "sha256": "d4a345fc830c4b8d97aeb95b64f93727b576d0433c162ab3f40a029cf8f8f3ca",
+      "padded_iou": {
+        "exact": {
+          "source": 0.9053150111739823,
+          "poppler": 0.8915329627938317,
+          "pdfium": 0.8974914396885352
+        },
+        "default": {
+          "source": 0.9053150111739823,
+          "poppler": 0.8915329627938317,
+          "pdfium": 0.8863688990191868
+        }
+      },
+      "isolated_iou": {
+        "exact": {
+          "source": 0.945163201851262,
+          "poppler": 0.9304563004318913,
+          "pdfium": 0.9360247499626095
+        },
+        "default": {
+          "source": 0.945163201851262,
+          "poppler": 0.9304563004318913,
+          "pdfium": 0.925345642963716
+        }
+      },
+      "streams": {
+        "other_stream": 1303,
+        "raster": 622682,
+        "content": 55710,
+        "font": 65544,
+        "overhead": 18212
+      }
+    },
+    {
+      "arm": "strong",
+      "bytes": 734538,
+      "sha256": "e14b463b4acf3f38fbe5f91a97c0bbc9981012da5aeb96810c5dffcccfe81868",
+      "padded_iou": {
+        "exact": {
+          "source": 0.9053150111739823,
+          "poppler": 0.8919020237821144,
+          "pdfium": 0.8854696347204394
+        },
+        "default": {
+          "source": 0.9053150111739823,
+          "poppler": 0.8919020237821144,
+          "pdfium": 0.8821631135191876
+        }
+      },
+      "isolated_iou": {
+        "exact": {
+          "source": 0.945163201851262,
+          "poppler": 0.9308796302428491,
+          "pdfium": 0.9321625958258589
+        },
+        "default": {
+          "source": 0.945163201851262,
+          "poppler": 0.9308796302428491,
+          "pdfium": 0.9206183266119916
+        }
+      },
+      "streams": {
+        "other_stream": 1303,
+        "raster": 622543,
+        "content": 55904,
+        "font": 36800,
+        "overhead": 17988
+      }
+    },
+    {
+      "arm": "edgefit",
+      "bytes": 809433,
+      "sha256": "fc536814edc2f4c16d82aabcbb4af73bd3e9221041a78fff529c50e96ea2921f",
+      "padded_iou": {
+        "exact": {
+          "source": 0.9053150111739823,
+          "poppler": 0.8872589526801331,
+          "pdfium": 0.8731883287143827
+        },
+        "default": {
+          "source": 0.9053150111739823,
+          "poppler": 0.8872589526801331,
+          "pdfium": 0.8321452050042549
+        }
+      },
+      "isolated_iou": {
+        "exact": {
+          "source": 0.945163201851262,
+          "poppler": 0.9275005695975965,
+          "pdfium": 0.9135213408414514
+        },
+        "default": {
+          "source": 0.945163201851262,
+          "poppler": 0.9275005695975965,
+          "pdfium": 0.8937090276435092
+        }
+      },
+      "streams": {
+        "other_stream": 1079,
+        "raster": 628027,
+        "content": 57405,
+        "font": 102668,
+        "overhead": 20254
+      }
+    },
+    {
+      "arm": "blur",
+      "bytes": 809719,
+      "sha256": "d7a1cd1925792c66482f83b5296984b920f4aa319f2efe6d3196bdf92443834e",
+      "padded_iou": {
+        "exact": {
+          "source": 0.9053150111739823,
+          "poppler": 0.8849971176530986,
+          "pdfium": 0.8755723535514585
+        },
+        "default": {
+          "source": 0.9053150111739823,
+          "poppler": 0.8849971176530986,
+          "pdfium": 0.8350467312750645
+        }
+      },
+      "isolated_iou": {
+        "exact": {
+          "source": 0.945163201851262,
+          "poppler": 0.9248392059283962,
+          "pdfium": 0.9161854302989902
+        },
+        "default": {
+          "source": 0.945163201851262,
+          "poppler": 0.9248392059283962,
+          "pdfium": 0.8955713224814589
+        }
+      },
+      "streams": {
+        "other_stream": 1095,
+        "raster": 627875,
+        "content": 57321,
+        "font": 103160,
+        "overhead": 20268
+      }
+    },
+    {
+      "arm": "continuous",
+      "bytes": 807103,
+      "sha256": "e02ec2186a3187b2b7d3a835fe7eb702851fce30f22001a6fe053bbb4b4a7703",
+      "padded_iou": {
+        "exact": {
+          "source": 0.9053150111739823,
+          "poppler": 0.8896301675764956,
+          "pdfium": 0.8743330702094958
+        },
+        "default": {
+          "source": 0.9053150111739823,
+          "poppler": 0.8896301675764956,
+          "pdfium": 0.832339488648177
+        }
+      },
+      "isolated_iou": {
+        "exact": {
+          "source": 0.945163201851262,
+          "poppler": 0.9294674064733027,
+          "pdfium": 0.9152718457348578
+        },
+        "default": {
+          "source": 0.945163201851262,
+          "poppler": 0.9294674064733027,
+          "pdfium": 0.8931119295140638
+        }
+      },
+      "streams": {
+        "other_stream": 1095,
+        "raster": 630413,
+        "content": 57908,
+        "font": 95836,
+        "overhead": 21851
+      }
+    }
+  ]
+}

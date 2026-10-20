@@ -1,0 +1,50 @@
+[
+  {
+    "name": "cord-02",
+    "command": [
+      "/usr/bin/time",
+      "-v",
+      "-o",
+      "/data/coding/scanweave/qualification/clearscan_background/real/final/cord-02.time.txt",
+      "/data/coding/scanweave/target/release/scanweave-cli",
+      "build",
+      "/data/coding/scanweave/qualification/clearscan_competitive/real/cord-02.png",
+      "--ocr",
+      "/data/coding/scanweave/qualification/clearscan_competitive/real/cord-02.regions.hocr",
+      "--dpi",
+      "300",
+      "--profile",
+      "clearscan",
+      "--output",
+      "/data/coding/scanweave/qualification/clearscan_background/real/final/cord-02.pdf",
+      "--report",
+      "/data/coding/scanweave/qualification/clearscan_background/real/final/cord-02.json"
+    ],
+    "status": 0,
+    "elapsed": 1.7390795090032043
+  },
+  {
+    "name": "history-01",
+    "command": [
+      "/usr/bin/time",
+      "-v",
+      "-o",
+      "/data/coding/scanweave/qualification/clearscan_background/real/final/history-01.time.txt",
+      "/data/coding/scanweave/target/release/scanweave-cli",
+      "build",
+      "/data/coding/scanweave/qualification/clearscan_competitive/real/history-01.png",
+      "--ocr",
+      "/data/coding/scanweave/qualification/clearscan_competitive/real/history-01.regions.hocr",
+      "--dpi",
+      "300",
+      "--profile",
+      "clearscan",
+      "--output",
+      "/data/coding/scanweave/qualification/clearscan_background/real/final/history-01.pdf",
+      "--report",
+      "/data/coding/scanweave/qualification/clearscan_background/real/final/history-01.json"
+    ],
+    "status": 0,
+    "elapsed": 10.449650488008047
+  }
+]

@@ -1,0 +1,18 @@
+{
+  "id": "cord-01",
+  "arm": "ocrmypdf3",
+  "command": [
+    "/tmp/scanweave-competitive-venv/bin/ocrmypdf",
+    "--output-type",
+    "pdf",
+    "--jobs",
+    "1",
+    "-O3",
+    "/data/coding/scanweave/qualification/pdf_packaging/real/input/cord-01.pdf",
+    "/data/coding/scanweave/qualification/pdf_packaging/real/ocrmypdf3/cord-01.pdf"
+  ],
+  "seconds": 2.0786169699858874,
+  "status": 0,
+  "error": null,
+  "pdf_bytes": 211690
+}

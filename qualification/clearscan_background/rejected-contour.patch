@@ -1,0 +1,20 @@
+diff --git a/crates/scanweave-io/src/trace.rs b/crates/scanweave-io/src/trace.rs
+index 46824d5..7446a02 100644
+--- a/crates/scanweave-io/src/trace.rs
++++ b/crates/scanweave-io/src/trace.rs
+@@ -451,6 +451,15 @@ pub(crate) fn trace_shape_clearscan(
+             let mut t = best.clone();
+             t.layers = layers;
+             t.preserve_crop_frame = true;
++            // Bounded contour-only trial for supported canonical counters.
++            // Preserve the same coverage/topology objective and assignments.
++            if preserved_source.is_none() && matches!(unit.semantic_text.as_str(), "8" | "0" | "g") {
++                let mut refined = t.clone();
++                for contour in refined.layers.iter_mut().flat_map(|(o,h)| std::iter::once(o).chain(h)) {
++                    *contour = crate::curve_fit::fit_ring(&sample_spline(contour, 8), 0.30);
++                }
++                fitted.push((refined, "regularized_grayscale_curve", Some(level), 0.30));
++            }
+             fitted.push((t, "grayscale_subpixel_curve", Some(level), 0.15));
+         }
+     }

@@ -1,0 +1,3 @@
+Guarded final PDF rendered with Poppler pdftoppm at 300 DPI; page renders are under evaluation/poppler/.
+Glyph IoU was recalculated with a temporary Rust checker using the workspace image decoder because the post-reboot Python environment lacks NumPy/PDFium packages. See evaluation/metrics.json.
+A new PDFium render was not run. Pre-guard PDFium renders are preserved under pre_guard/evaluation/pdfium/ and are identified by the pre-guard PDF hash.

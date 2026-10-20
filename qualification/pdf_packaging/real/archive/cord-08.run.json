@@ -1,0 +1,22 @@
+{
+  "id": "cord-08",
+  "arm": "archive",
+  "command": [
+    "/tmp/scanweave-competitive-venv/bin/recode_pdf",
+    "-P",
+    "/data/coding/scanweave/qualification/pdf_packaging/real/input/cord-08.pdf",
+    "-T",
+    "/data/coding/scanweave/qualification/pdf_packaging/real/archive/cord-08.hocr",
+    "-o",
+    "/data/coding/scanweave/qualification/pdf_packaging/real/archive/cord-08.pdf",
+    "--mask-compression",
+    "ccitt",
+    "--threads",
+    "1"
+  ],
+  "seconds": 1.8187040439806879,
+  "status": 0,
+  "error": null,
+  "ocr_status": 0,
+  "pdf_bytes": 35655
+}

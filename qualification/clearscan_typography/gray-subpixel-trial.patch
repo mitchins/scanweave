@@ -1,0 +1,248 @@
+diff --git a/crates/scanweave-io/src/convert.rs b/crates/scanweave-io/src/convert.rs
+index 94a52f5..e3dfc6b 100644
+--- a/crates/scanweave-io/src/convert.rs
++++ b/crates/scanweave-io/src/convert.rs
+@@ -412,14 +412,54 @@ fn reconstructed_glyph_ink_iou(g: &GlyphShape, crop_w: usize, crop_h: usize, mas
+ }
+ 
+ fn glyph_ink_iou_contract(
++    g: &GlyphShape, crop_w: usize, crop_h: usize, mask: &[bool], clearscan: bool,
++) -> f64 {
++    if crop_w == 0 || crop_h == 0 { return 1.0; }
++    let cover = glyph_coverage_contract(g, crop_w, crop_h, clearscan);
++    const SUB: usize = 4;
++    // Foreground at at least half a pixel of covered area.
++    let fill: Vec<bool> = cover
++        .iter()
++        .map(|c| {
++            *c >= if clearscan {
++                0.5
++            } else {
++                SUB.div_ceil(2) as f64
++            }
++        })
++        .collect();
++    let mut inter = 0usize;
++    let mut uni = 0usize;
++    for (i, m) in mask.iter().enumerate() {
++        if i >= fill.len() {
++            break;
++        }
++        if *m || fill[i] {
++            uni += 1;
++            if *m && fill[i] {
++                inter += 1;
++            }
++        }
++    }
++    if uni == 0 {
++        1.0
++    } else {
++        inter as f64 / uni as f64
++    }
++}
++
++pub(crate) fn reconstructed_glyph_coverage(g: &GlyphShape, w: usize, h: usize) -> Vec<f64> {
++    glyph_coverage_contract(g, w, h, true)
++}
++
++fn glyph_coverage_contract(
+     g: &GlyphShape,
+     crop_w: usize,
+     crop_h: usize,
+-    mask: &[bool],
+     clearscan: bool,
+-) -> f64 {
++) -> Vec<f64> {
+     if crop_w == 0 || crop_h == 0 {
+-        return 1.0;
++        return Vec::new();
+     }
+     // flatten the path to line segments in crop-pixel coordinates. The path is
+     // expressed in the glyph's construction frame: the crop maps to
+@@ -562,37 +602,10 @@ fn glyph_ink_iou_contract(
+             }
+         }
+     }
+-    // Foreground at at least half a pixel of covered area.
+-    let fill: Vec<bool> = cover
+-        .iter()
+-        .map(|c| {
+-            *c >= if clearscan {
+-                0.5
+-            } else {
+-                SUB.div_ceil(2) as f64
+-            }
+-        })
+-        .collect();
+-    let mut inter = 0usize;
+-    let mut uni = 0usize;
+-    for (i, m) in mask.iter().enumerate() {
+-        if i >= fill.len() {
+-            break;
+-        }
+-        if *m || fill[i] {
+-            uni += 1;
+-            if *m && fill[i] {
+-                inter += 1;
+-            }
+-        }
+-    }
+-    if uni == 0 {
+-        1.0
+-    } else {
+-        inter as f64 / uni as f64
+-    }
++    cover
+ }
+ 
++
+ fn span_bbox(poly: &[[f64; 2]]) -> [f64; 4] {
+     let mut bb = [f64::MAX, f64::MAX, f64::MIN, f64::MIN];
+     for [x, y] in poly {
+@@ -887,7 +900,9 @@ pub(crate) fn convert_parts_with_document_donors(
+                     .prototype_units
+                     .get(&u.shape_key)
+                     .unwrap_or(u);
+-                match trace_shape(prototype, &budget, units_per_px) {
++                match if policy.profile == "clearscan" {
++                    crate::trace::trace_shape_clearscan(prototype, &budget, units_per_px)
++                } else { trace_shape(prototype, &budget, units_per_px) } {
+                     Ok(t) => {
+                         seen.push(u.shape_key.clone());
+                         traced.push(t);
+diff --git a/crates/scanweave-io/src/glyphs.rs b/crates/scanweave-io/src/glyphs.rs
+index 6569a3e..c91eb93 100644
+--- a/crates/scanweave-io/src/glyphs.rs
++++ b/crates/scanweave-io/src/glyphs.rs
+@@ -105,13 +105,13 @@ pub fn build_glyph_shapes(
+     for t in traced {
+         // transform: font units, y-up, baseline at ink bottom of the unit.
+         // v = (H - y) * k where H = unit ink height in px; k = units_per_px.
+-        let h_px = t
++        let h_px = if t.preserve_crop_frame { t.crop_h_px as f64 } else { t
+             .layers
+             .iter()
+             .flat_map(|(o, hs)| std::iter::once(o).chain(hs.iter()))
+             .flat_map(|c| c.iter())
+             .map(|p| p[1])
+-            .fold(f64::MIN, f64::max);
++            .fold(f64::MIN, f64::max) };
+         let tf = |p: &[f64; 2]| -> [f64; 2] { [p[0] * units_per_px, (h_px - p[1]) * units_per_px] };
+ 
+         // transform contours FIRST, then build cubics from font-unit points,
+@@ -215,12 +215,13 @@ pub fn build_glyph_shapes(
+                 ay.push(last.p3.y);
+             }
+         }
+-        let anchor_bbox_fu = [
++        let anchor_bbox_fu = if t.preserve_crop_frame { [0.0, 0.0, t.crop_w_px as f64 * units_per_px, t.crop_h_px as f64 * units_per_px] } else { [
+             ax.iter().cloned().fold(f64::INFINITY, f64::min),
+             ay.iter().cloned().fold(f64::INFINITY, f64::min),
+             ax.iter().cloned().fold(f64::NEG_INFINITY, f64::max),
+             ay.iter().cloned().fold(f64::NEG_INFINITY, f64::max),
+-        ];
++        ]
++        };
+         let ink_span_fu = [t.crop_w_px as f64 * units_per_px, t.crop_h_px as f64 * units_per_px];
+ 
+         // bbox in font units (already transformed)
+diff --git a/crates/scanweave-io/src/lib.rs b/crates/scanweave-io/src/lib.rs
+index 5f4139a..e2a7d17 100644
+--- a/crates/scanweave-io/src/lib.rs
++++ b/crates/scanweave-io/src/lib.rs
+@@ -18,3 +18,5 @@ pub mod convert;
+ pub mod visual_dict;
+ pub mod trace;
+ pub mod units;
++
++mod gray_contour;
+diff --git a/crates/scanweave-io/src/trace.rs b/crates/scanweave-io/src/trace.rs
+index 9b3da13..ac0f77d 100644
+--- a/crates/scanweave-io/src/trace.rs
++++ b/crates/scanweave-io/src/trace.rs
+@@ -28,6 +28,7 @@ pub struct TracedShape {
+     /// so in font units the ink spans exactly [0, cw*k] x [0, ch*k]
+     pub crop_w_px: usize,
+     pub crop_h_px: usize,
++    pub preserve_crop_frame: bool,
+     /// dense sampled polylines per contour (crop-local, source-pixel space),
+     /// outer contours and holes in paint order
+     pub polylines: Vec<Vec<[f64; 2]>>,
+@@ -151,6 +152,10 @@ fn boundary_error(contours: &[Vec<[f64; 2]>], unit: &Unit) -> (f64, f64) {
+ }
+ 
+ pub fn trace_shape(unit: &Unit, _budget: &Budget, _units_per_px: f64) -> Result<TracedShape, String> {
++    trace_shape_config(unit, vtracer_config())
++}
++
++fn trace_shape_config(unit: &Unit, config: vtracer::Config) -> Result<TracedShape, String> {
+     // trace a SSx-upscaled mask: finer corner grid in source space
+     let (sw, sh) = (unit.crop_w * SS, unit.crop_h * SS);
+     let mut pixels = vec![255u8; sw * sh * 4];
+@@ -169,7 +174,7 @@ pub fn trace_shape(unit: &Unit, _budget: &Budget, _units_per_px: f64) -> Result<
+     img.pixels = pixels;
+     (img.width, img.height) = (sw, sh);
+ 
+-    let svg = vtracer::convert(img, vtracer_config())?;
++    let svg = vtracer::convert(img, config)?;
+     if svg.paths.is_empty() {
+         return Err("vtracer produced no paths".into());
+     }
+@@ -209,6 +214,7 @@ pub fn trace_shape(unit: &Unit, _budget: &Budget, _units_per_px: f64) -> Result<
+         shape_key: unit.shape_key.clone(),
+         crop_w_px: unit.crop_w,
+         crop_h_px: unit.crop_h,
++        preserve_crop_frame: false,
+         polylines,
+         layers,
+         stage: StageRaw {
+@@ -217,3 +223,48 @@ pub fn trace_shape(unit: &Unit, _budget: &Budget, _units_per_px: f64) -> Result<
+         },
+     })
+ }
++
++/// Choose bounded smooth curves against the original grayscale impression.
++/// The binary mask supplies topology and ownership, not the sole fitting target.
++/// Faithful never calls this function. Candidate selection has no source-font
++/// or OCR-shape dependency and preserves the canonical identity and crop frame.
++pub(crate) fn trace_shape_clearscan(unit: &Unit, budget: &Budget, k: f64) -> Result<TracedShape, String> {
++    let baseline = trace_shape(unit, budget, k)?;
++    let Some(gray) = unit.gray_samples.as_deref().filter(|g| g.len() == unit.mask.len()) else { return Ok(baseline); };
++    let mut levels = gray.to_vec(); levels.sort_unstable();
++    let paper = levels[levels.len() * 9 / 10] as f64;
++    let ink = levels[levels.len() / 20] as f64;
++    if paper - ink < 48.0 { return Ok(baseline); }
++    let target: Vec<f64> = gray.iter().map(|&v| ((paper-v as f64)/(paper-ink)).clamp(0.0,1.0)).collect();
++    let score = |t: &TracedShape| -> Option<f64> {
++        let shape = crate::glyphs::build_glyph_shapes(std::slice::from_ref(t), k, budget).ok()?.pop()?;
++        let coverage = crate::convert::reconstructed_glyph_coverage(&shape, unit.crop_w, unit.crop_h);
++        Some(coverage.iter().zip(&target).map(|(c,t)| (c-t).powi(2)).sum::<f64>() / target.len() as f64)
++    };
++    let Some(mut best_score) = score(&baseline) else { return Ok(baseline); };
++    let mut best = baseline;
++    let topology = best.layers.iter().map(|(_,holes)| holes.len()).sum::<usize>();
++    let components = best.layers.len();
++    for (corner, length) in [(60, 2.0), (90, 3.0), (120, 4.0)] {
++        let mut config = vtracer_config(); config.corner_threshold = corner; config.length_threshold = length;
++        let Ok(candidate) = trace_shape_config(unit, config) else { continue; };
++        if candidate.layers.len() != components || candidate.layers.iter().map(|(_,h)|h.len()).sum::<usize>() != topology { continue; }
++        if let Some(loss) = score(&candidate) {
++            if loss < best_score * 0.98 { best_score = loss; best = candidate; }
++        }
++    }
++    if let Some(layers) = crate::gray_contour::layers(unit, paper, ink) {
++        let candidate = TracedShape {
++            shape_key: unit.shape_key.clone(), crop_w_px: unit.crop_w, crop_h_px: unit.crop_h,
++            preserve_crop_frame: true,
++            polylines: layers.iter().flat_map(|(o, hs)| std::iter::once(o).chain(hs)).map(|c| sample_spline(c,6)).collect(),
++            stage: StageRaw {trace_max_px:0.0,trace_p95_px:0.0}, layers,
++        };
++        if candidate.layers.len() == components && candidate.layers.iter().map(|(_,h)|h.len()).sum::<usize>()==topology {
++            if let Some(loss) = score(&candidate) {
++                if loss < best_score * 0.98 { best = candidate; }
++            }
++        }
++    }
++    Ok(best)
++}

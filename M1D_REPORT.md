@@ -100,6 +100,31 @@ scanweave-cli build qualification/fixtures/probe/p01_latin/p01_latin.png \
 LD_LIBRARY_PATH=$PWD/tools/dist/lib tools/dist/bin/qpdf --check work/m1d-evidence/p01_latin.clearscan.pdf
 ```
 
-## Next
+## M1-D5 update (supersedes this report's earlier checkpoint)
 
-Implement a genuinely distinct ClearScan contour-restoration path and a dictionary that can safely merge near-duplicate glyphs beyond exact masks; then rerun this qualification matrix and update this report. Do not declare M1-D complete until the completion gate is met.
+The earlier checkpoint above predates the document-wide reconstruction work and
+must not be read as the current experimental result. Commit `c4a61ea` adds a
+12-page synthetic oracle demonstration at 300/600 DPI: donor-supported `e` and
+`a` repairs improve the matched final-PDF pristine IoU, and the 600-DPI `8`
+case has a small gain. The 300-DPI `8` is rejected and retained as raster, but
+its local PDF fallback rendering is materially worse than the whole-page raster
+baseline. The exact source crop is present in the PDF; the rendering discrepancy
+is still unresolved.
+
+M1-D remains **IN PROGRESS / NOT COMPLETE**. The current ClearScan candidate
+has 2.23%/3.98% text-ink vector coverage at 300/600 DPI, accepts no intact
+document-wide reuse candidates under the 0.98 faithful reuse gate, and is
+31,597/29,253 bytes larger than the searchable-raster baseline. The new
+best-donor path demonstrates reconstructed typography, but does not qualify
+compression or production acceptance. Evidence fusion (A4), risk-calibrated
+acceptance (A5), realistic degradation calibration, independent font/document
+FIT/DEV cohorts, and real-domain validation remain incomplete. No LOCKBOX was
+opened. See `qualification/evidence/m1d_document/qualification.md` and its
+machine-readable evaluation JSONs for the corrected matched-PDF metrics.
+
+The current independent review approves **CONTINUE RESEARCH**, not promotion.
+Keep faithful mode and the 0.98 threshold unchanged. Fix and regress the
+fallback rendering discrepancy, validate faithful-mode appearance against the
+source baseline, build realistic held-out synthetic and legally usable real
+scan cohorts, then qualify A4/A5 and document-wide reuse before requesting any
+LOCKBOX evaluation.

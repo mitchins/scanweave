@@ -1,0 +1,109 @@
+{
+  "schema": "scanweave-guarded-poppler-glyph-metrics-v1",
+  "dpi": 300,
+  "pdf": "qualification/clearscan_product/300/clearscan.pdf",
+  "pdf_sha256": "2ef079a01801c0cbf6d128dee63fb4d262c6de0e1721caafdf32f3ce398e7228",
+  "pdf_bytes": 1093038,
+  "renderer": "Poppler pdftoppm",
+  "glyph_count": 600,
+  "mean_glyph_iou": {
+    "source_vs_pristine": 0.905315,
+    "pre_guard_poppler_vs_pristine": 0.803692,
+    "guarded_poppler_vs_pristine": 0.804364
+  },
+  "per_character": {
+    "!": {
+      "n": 16,
+      "source": 0.9446,
+      "pre_guard_poppler": 0.9196,
+      "guarded_poppler": 0.9196
+    },
+    ",": {
+      "n": 32,
+      "source": 0.9325,
+      "pre_guard_poppler": 0.8966,
+      "guarded_poppler": 0.8966
+    },
+    "0": {
+      "n": 64,
+      "source": 0.9481,
+      "pre_guard_poppler": 0.7162,
+      "guarded_poppler": 0.7269
+    },
+    "6": {
+      "n": 64,
+      "source": 0.9444,
+      "pre_guard_poppler": 0.8029,
+      "guarded_poppler": 0.8029
+    },
+    "8": {
+      "n": 64,
+      "source": 0.947,
+      "pre_guard_poppler": 0.7993,
+      "guarded_poppler": 0.7992
+    },
+    ";": {
+      "n": 32,
+      "source": 0.9533,
+      "pre_guard_poppler": 0.7547,
+      "guarded_poppler": 0.7476
+    },
+    "?": {
+      "n": 16,
+      "source": 0.9374,
+      "pre_guard_poppler": 0.927,
+      "guarded_poppler": 0.9158
+    },
+    "a": {
+      "n": 96,
+      "source": 0.9418,
+      "pre_guard_poppler": 0.9368,
+      "guarded_poppler": 0.9363
+    },
+    "e": {
+      "n": 96,
+      "source": 0.9477,
+      "pre_guard_poppler": 0.7715,
+      "guarded_poppler": 0.773
+    },
+    "g": {
+      "n": 64,
+      "source": 0.9481,
+      "pre_guard_poppler": 0.9228,
+      "guarded_poppler": 0.9234
+    },
+    "\u304b": {
+      "n": 2,
+      "source": 0.8955,
+      "pre_guard_poppler": 0.6758,
+      "guarded_poppler": 0.6758
+    },
+    "\u306a": {
+      "n": 2,
+      "source": 0.8932,
+      "pre_guard_poppler": 0.6492,
+      "guarded_poppler": 0.6492
+    },
+    "\u30ab": {
+      "n": 2,
+      "source": 0.8908,
+      "pre_guard_poppler": 0.6476,
+      "guarded_poppler": 0.6476
+    },
+    "\u30ca": {
+      "n": 2,
+      "source": 0.9131,
+      "pre_guard_poppler": 0.6286,
+      "guarded_poppler": 0.6286
+    }
+  },
+  "baseline_pdf_sha256": "a08edbb1d6f3bd5e8abe134ca053b326f1135aaaa67c111d5c649a2c835531b2",
+  "pdfium_baseline_mean_glyph_iou": 0.7912,
+  "pdfium_baseline_pdf_sha256": "a08edbb1d6f3bd5e8abe134ca053b326f1135aaaa67c111d5c649a2c835531b2",
+  "pdfium_guarded_run": "not run: PDFium Python module unavailable after environment reboot",
+  "notes": [
+    "Full-document per-glyph IoU calculated with a temporary Rust checker using the workspace image decoder; Poppler rendered all eight pages.",
+    "Source and pristine IoUs use the M1-G evaluator crop convention (truth box plus four pixels).",
+    "The pre-guard PDFium renders are preserved under ../pre_guard/evaluation/pdfium and must not be treated as rendering the guarded PDF."
+  ]
+}

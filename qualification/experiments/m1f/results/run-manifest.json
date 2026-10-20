@@ -1,0 +1,86 @@
+{
+  "scanweave_head": "28c91b12a7212f0ee94daca3bef8c31e4c8044f1",
+  "branch": "main",
+  "starting_tracked_worktree": "clean",
+  "preexisting_untracked_preserved": [
+    "SCANWEAVE_M1F_RESEARCH_AND_MISSION.md",
+    "scanweave_m1f_evidence.json",
+    "scanweave_m1f_evidence_probe.py",
+    "adobe-acrobat-sandbox/",
+    "qualification/competitors/",
+    "qualification/experiments/m1c_r4/"
+  ],
+  "toolchain": {
+    "rustc": "1.99.0 (b940084d7 2026-09-28)",
+    "cargo": "1.99.0 (5f94df478 2026-08-27)",
+    "python": "3.12.3",
+    "qpdf": "not installed"
+  },
+  "m1e_source_manifest_sha256": "076e423f04bf545f65cd906bd04f6c4ec67eca59c53dbdd507f11ca0c48b62a5",
+  "m1e_comparison_sha256": "5c1fee7319e41aeb6efd426f0dc6d1f002e4f58a3044d4b5727ab63afdf9f752",
+  "f1_converter_settings": {
+    "mode": "auto",
+    "profile_300": "clearscan",
+    "profile_12page": "faithful",
+    "reuse_identical": true,
+    "grayscale_equal_channels": true,
+    "flate_level": 6,
+    "predictor": 1,
+    "lossy_codecs": false
+  },
+  "commands": [
+    "qualification/.venv/bin/python qualification/experiments/m1f/preflight.py",
+    "cargo test -p scanweave-io",
+    "cargo build -p scanweave-cli",
+    "qualification/.venv/bin/python qualification/experiments/m1f/summarize_measurements.py"
+  ],
+  "outputs": {
+    "300dpi_reuse": {
+      "path": "qualification/experiments/m1f/results/dpi300/clearscan/reuse.pdf",
+      "bytes": 1097352,
+      "sha256": "73328f07904a98108c6d1bd993c6fda7314d8d8cfecc566964e740459a1b56b4"
+    },
+    "300dpi_gray": {
+      "path": "qualification/experiments/m1f/results/dpi300/clearscan/gray.pdf",
+      "bytes": 767158,
+      "sha256": "91940beb64f8204e8cb9b91f4e0655e72c12ee03847ea895b3f854ae45dfc069"
+    },
+    "600dpi_gray_reencode": {
+      "path": "qualification/experiments/m1f/results/dpi600/clearscan-grayscale-reencoded.pdf",
+      "bytes": 2469094,
+      "sha256": "382a8174b3fbf88d5da83ea1137301ac4cf2aad16172e66437ca081b31221fc1"
+    },
+    "12page_reuse": {
+      "path": "qualification/experiments/m1f/results/dpi300-12/faithful/reuse.pdf",
+      "bytes": 1227630,
+      "sha256": "22ee70a235a544ede1ee9df31490d245056ed0a8b80e9ab8ae1109e5cc0ad5b1"
+    }
+  },
+  "renderer_engines": [
+    "Poppler (pdftoppm)",
+    "PDFium (pypdfium2)"
+  ],
+  "semantic_check": "pdftotext / PyMuPDF extracted-text SHA-256 against frozen baseline",
+  "poppler_validity_check": "pdfinfo, pdffonts, pdftotext and successful renders",
+  "renderer_harness": {
+    "algorithm": "render pages to files, compare one pair at a time",
+    "12page_elapsed_seconds": 42.65,
+    "12page_peak_rss_kib": 304504,
+    "old_retaining_all_pages_harness_peak_rss_kib": 14365752
+  },
+  "predictor_controls": {
+    "none": {
+      "pdf_bytes": 761516,
+      "pdf_sha256": "712d911c47969f26efcd1a0860f25e6d91c3cd1e1a7750fb92135d14800a587e"
+    },
+    "tiff": {
+      "pdf_bytes": 818190,
+      "pdf_sha256": "1d4c10cba85c048f6a53ef2ebfa657f236fea4cad78d6dbdf788230cdf2d1654"
+    },
+    "png_up": {
+      "pdf_bytes": 894831,
+      "pdf_sha256": "59514ab531e33fac9a3772036697194b227e8bf1bb714a45d18379f4622cd8ff"
+    }
+  },
+  "control_pdf_generation": "M1F_CONTROL_DIR=../../qualification/experiments/m1f/results/encoding-controls cargo test -p scanweave-io flate_predictor_control_pdfs_are_serialized_when_requested -- --nocapture"
+}

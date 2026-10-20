@@ -98,9 +98,7 @@ impl OwnershipPlan {
         let mut supplied = String::new();
         for span in &page.spans {
             for sym in &span.symbols {
-                supplied.push_str(
-                    &span.text[sym.text_range_utf8[0]..sym.text_range_utf8[1]],
-                );
+                supplied.push_str(&span.text[sym.text_range_utf8[0]..sym.text_range_utf8[1]]);
             }
         }
         let mut pairs: Vec<(usize, &str)> = Vec::new();
@@ -154,15 +152,12 @@ pub fn build_plan(
     h: u32,
     page: &OcrPage,
 ) -> (OwnershipPlan, (Vec<Unit>, usize)) {
-    let (_units_v0_units, unowned) = crate::units::extract_units(seg, w, h, page);
-
-    // Re-derive the assignment from components so we can expose it explicitly.
-    // (extract_units performs the same assignment internally; we re-run the
-    // component grouping here to publish the plan.)
+    // Construct the explicit ownership plan once. The former extract_units
+    // call computed and discarded another complete component assignment.
+    use image::GrayImage;
+    use image::Luma;
     use imageproc::region_labelling::connected_components;
     use imageproc::region_labelling::Connectivity;
-    use image::Luma;
-    use image::GrayImage;
 
     let fg_image = GrayImage::from_fn(w, h, |x, y| {
         if seg.fg[(y as usize) * seg.width + (x as usize)] {
@@ -216,14 +211,13 @@ pub fn build_plan(
         // containing wins; on ties, the lower-order slot)
         let mut best: Option<(usize, f64, String)> = None;
         for (si, slot) in slots.iter().enumerate() {
-            if cx >= slot.bbox[0] && cx <= slot.bbox[2] && cy >= slot.bbox[1] && cy <= slot.bbox[3] {
+            if cx >= slot.bbox[0] && cx <= slot.bbox[2] && cy >= slot.bbox[1] && cy <= slot.bbox[3]
+            {
                 let cand = (si, slot.area, slot.symbol_id.clone());
                 best = match best {
                     None => Some(cand),
                     Some((bsi, barea, bid)) => {
-                        if cand.1 < barea
-                            || (cand.1 == barea && cand.2 < bid)
-                        {
+                        if cand.1 < barea || (cand.1 == barea && cand.2 < bid) {
                             Some(cand)
                         } else {
                             Some((bsi, barea, bid))
@@ -267,7 +261,12 @@ pub fn build_plan(
         let suspect = unit_ink_exceeds_slots(&comp_pixels, comps, &slots[si], 6.0);
         unit_of_slot.insert(si, ui);
         plan.owned.push(OwnedUnit {
-            slots: vec![SlotRef { order: si, text: slots[si].text.clone(), symbol_id: slots[si].symbol_id.clone(), bbox: slots[si].bbox }],
+            slots: vec![SlotRef {
+                order: si,
+                text: slots[si].text.clone(),
+                symbol_id: slots[si].symbol_id.clone(),
+                bbox: slots[si].bbox,
+            }],
             components: comps.clone(),
             unit: u.clone(),
             suspect,
@@ -290,7 +289,11 @@ pub fn build_plan(
             let mut inside = 0usize;
             for &c in &ou.components {
                 for (x, y) in &comp_pixels[c] {
-                    if *x as f64 >= bb[0] && *x as f64 <= bb[2] && *y as f64 >= bb[1] && *y as f64 <= bb[3] {
+                    if *x as f64 >= bb[0]
+                        && *x as f64 <= bb[2]
+                        && *y as f64 >= bb[1]
+                        && *y as f64 <= bb[3]
+                    {
                         inside += 1;
                     }
                 }
@@ -300,9 +303,12 @@ pub fn build_plan(
             }
         }
         if let Some((cui, _)) = best {
-            plan.owned[cui]
-                .slots
-                .push(SlotRef { order: si, text: slots[si].text.clone(), symbol_id: slots[si].symbol_id.clone(), bbox: slots[si].bbox });
+            plan.owned[cui].slots.push(SlotRef {
+                order: si,
+                text: slots[si].text.clone(),
+                symbol_id: slots[si].symbol_id.clone(),
+                bbox: slots[si].bbox,
+            });
             let text_all = plan.owned[cui].semantic_text();
             plan.owned[cui].unit.semantic_text = text_all;
         } else {
@@ -328,7 +334,6 @@ pub fn build_plan(
 
     plan.suspect_units = plan.owned.iter().filter(|u| u.suspect).count();
     plan.notes.sort();
-    let _ = unowned;
     let n_art = plan.components_artwork;
     (plan, (units_out, n_art))
 }
@@ -368,19 +373,18 @@ fn make_unit(mask_pixels: &[(usize, usize)], _page: &OcrPage, slot: &Slot, _si: 
     for (x, y) in mask_pixels {
         mask[(y - y0) * cw + (x - x0)] = true;
     }
-    let packed: Vec<u8> = mask
-        .chunks(8)
-        .map(|c| c.iter().enumerate().fold(0u8, |acc, (i, b)| acc | ((*b as u8) << i)))
-        .collect();
     Unit {
-        shape_key: scanweave_core::hash_hex(&packed),
+        shape_key: crate::units::mask_identity_key(&mask, cw, ch),
         span_id: slot.span_id.clone(),
         symbol_id: slot.symbol_id.clone(),
         semantic_text: slot.text.clone(),
         bbox_px: [x0 as f64, y0 as f64, x1 as f64, y1 as f64],
+        ocr_bbox_px: slot.bbox,
         crop_w: cw,
         crop_h: ch,
         mask,
+        gray_samples: None,
+        gray_halo: None,
     }
 }
 
@@ -395,18 +399,17 @@ fn make_artwork_unit(pixels: &[(usize, usize)]) -> Unit {
     for (x, y) in pixels {
         mask[(y - y0) * cw + (x - x0)] = true;
     }
-    let packed: Vec<u8> = mask
-        .chunks(8)
-        .map(|c| c.iter().enumerate().fold(0u8, |acc, (i, b)| acc | ((*b as u8) << i)))
-        .collect();
     Unit {
-        shape_key: scanweave_core::hash_hex(&packed),
+        shape_key: crate::units::mask_identity_key(&mask, cw, ch),
         span_id: "unowned".to_string(),
         symbol_id: "artwork".to_string(),
         semantic_text: String::new(),
         bbox_px: [x0 as f64, y0 as f64, x1 as f64, y1 as f64],
+        ocr_bbox_px: [x0 as f64, y0 as f64, x1 as f64, y1 as f64],
         crop_w: cw,
         crop_h: ch,
         mask,
+        gray_samples: None,
+        gray_halo: None,
     }
 }

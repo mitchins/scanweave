@@ -1,0 +1,12 @@
+PASS vertical edge x=10.0 recovered 10.0000 err=0.0000
+PASS vertical edge x=10.25 recovered 10.1667 err=0.0833
+PASS vertical edge x=10.5 recovered 10.5000 err=0.0000
+PASS vertical edge x=10.75 recovered 10.8333 err=0.0833
+PASS horizontal edge y=20.25 recovered 20.1667
+PASS horizontal edge y=20.5 recovered 20.5000
+PASS inverted polarity edge x=15.3 recovered 15.2143 err=0.0857
+PASS low contrast edge x=12.5 recovered 12.5000
+PASS known 0.3px offset p95=0.2143 max=0.2143 (bias-bounded; direction preserved: b>a)
+PASS mid-ramp edge recovered (mirrored impl would fail) recovered 10.5000
+
+all sub-pixel metric analytical tests passed

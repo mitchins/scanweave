@@ -1,0 +1,18 @@
+
+The program 'jbig2' could not be executed or was not found on your
+system PATH.  This program is recommended when using the --optimize {2,3} arguments,
+but not required, so we will proceed.  For best results, install the program.
+
+
+On systems with the aptitude package manager (Debian, Ubuntu), try these
+commands:
+    sudo apt update
+    sudo apt install jbig2enc
+
+On RPM-based systems (Red Hat, Fedora), try this command:
+    sudo dnf install jbig2enc
+
+Parsing 5 pages with HocrParser
+Postprocessing...
+Image optimization ratio: 8.07 savings: 87.6%
+Total file size ratio: 8.07 savings: 87.6%

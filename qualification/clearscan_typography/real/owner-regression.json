@@ -1,0 +1,17 @@
+{
+  "method": "Native extraction regression: invisible owners use stable font geometry.",
+  "rows": [
+    {
+      "arm": "previous",
+      "pdfium_nonspace_chars": 467,
+      "poppler_nonspace_chars": 423,
+      "native_vs_poppler_nonspace_edit": 56
+    },
+    {
+      "arm": "final",
+      "pdfium_nonspace_chars": 423,
+      "poppler_nonspace_chars": 423,
+      "native_vs_poppler_nonspace_edit": 0
+    }
+  ]
+}

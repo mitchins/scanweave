@@ -1,0 +1,18 @@
+{
+  "command": [
+    "/tmp/scanweave-real-final",
+    "build",
+    "--bundle",
+    "/data/coding/scanweave/qualification/experiments/m1g/fixture/dpi300/input/document.json",
+    "--profile",
+    "clearscan",
+    "--output",
+    "/data/coding/scanweave/qualification/real_convergence/300/final.pdf",
+    "--report",
+    "/data/coding/scanweave/qualification/real_convergence/300/report.json"
+  ],
+  "status": 0,
+  "seconds": 49.12159396300558,
+  "input_sha256": "f40c21503b98804ca0c8584dec4a9b39a3e382f1ece6013b88fce305adce8b33",
+  "executable_sha256": "c5e1614e78b4f91dd94f32bb9ef0c943dde81f7021e726570684cd10bad0f671"
+}

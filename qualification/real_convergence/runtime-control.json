@@ -1,0 +1,62 @@
+[
+  {
+    "arm": "recompose",
+    "command": [
+      "/tmp/scanweave-no-fastpath",
+      "/data/coding/scanweave/qualification/pdf_packaging/real/input/cord-05.pdf",
+      "/data/coding/scanweave/qualification/real_convergence/runtime/recompose.pdf"
+    ],
+    "seconds": 139.48269784197328,
+    "pdf_sha256": "71764c86c4fd0f260f495716e09781b8539ea6380d3c50b4f9dd02bd1804315d",
+    "pdf_bytes": 4452414,
+    "text_sha256": "df5935d5e75abcd29bcec6c201270c3ff56a491d9de8d37b2f72d1363915c7a2",
+    "vectors": 0,
+    "page_stage_ms": {
+      "planning_matching_reconstruction": 28,
+      "raster_composition_and_owners": 130930,
+      "segmentation_ownership": 1045,
+      "tracing_placement_cleanup": 1021
+    },
+    "document_stage_ms": {
+      "total_ms": 136420,
+      "donor_collection_ms": 1200,
+      "page_conversion_ms": 133042,
+      "document_font_union_ms": 0,
+      "font_build_ms": 0,
+      "reconstruction_pdf_ms": 1089,
+      "raster_baseline_prepare_ms": 15,
+      "raster_baseline_pdf_ms": 1072,
+      "remaining_pipeline_ms": 2
+    }
+  },
+  {
+    "arm": "skip_unneeded",
+    "command": [
+      "/tmp/scanweave-real-reviewed",
+      "/data/coding/scanweave/qualification/pdf_packaging/real/input/cord-05.pdf",
+      "/data/coding/scanweave/qualification/real_convergence/runtime/skip_unneeded.pdf"
+    ],
+    "seconds": 6.315473592985654,
+    "pdf_sha256": "71764c86c4fd0f260f495716e09781b8539ea6380d3c50b4f9dd02bd1804315d",
+    "pdf_bytes": 4452414,
+    "text_sha256": "df5935d5e75abcd29bcec6c201270c3ff56a491d9de8d37b2f72d1363915c7a2",
+    "vectors": 0,
+    "page_stage_ms": {
+      "planning_matching_reconstruction": 20,
+      "raster_composition_and_owners": 52,
+      "segmentation_ownership": 647,
+      "tracing_placement_cleanup": 0
+    },
+    "document_stage_ms": {
+      "total_ms": 4743,
+      "donor_collection_ms": 666,
+      "page_conversion_ms": 736,
+      "document_font_union_ms": 0,
+      "font_build_ms": 0,
+      "reconstruction_pdf_ms": 1631,
+      "raster_baseline_prepare_ms": 29,
+      "raster_baseline_pdf_ms": 1678,
+      "remaining_pipeline_ms": 3
+    }
+  }
+]

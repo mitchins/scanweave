@@ -1,0 +1,18 @@
+   Compiling scanweave-io v0.1.0 (/data/coding/scanweave/crates/scanweave-io)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 2.04s
+     Running unittests src/lib.rs (target/debug/deps/scanweave_io-ba1881379c33891c)
+
+running 10 tests
+test convert::dpi_tests::derives_dpi_from_authoritative_page_affine ... ok
+test convert::contour_coverage_tests::fidelity_uses_covered_area_and_the_pdf_construction_frame ... ok
+test encoding::tests::e0_four_part_key_property ... ok
+test page_pdf::image_resource_tests::image_dimensions_and_sample_length_are_validated ... ok
+test hocr::real_character_tests::preserves_space_characters_and_escaped_punctuation ... ok
+test units::identity_tests::exact_mask_identity_includes_shape_dimensions ... ok
+test page_pdf::image_resource_tests::exact_resources_are_shared_and_equal_channels_use_gray ... ok
+test page_pdf::image_resource_tests::flate_predictor_control_pdfs_are_serialized_when_requested ... ok
+test convert::contour_coverage_tests::compact_background_retains_a_faint_unowned_line_natively ... ok
+test convert::contour_coverage_tests::caller_protection_does_not_require_an_ocr_unit ... ok
+
+test result: ok. 10 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.02s
+

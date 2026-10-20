@@ -1,0 +1,405 @@
+[
+  {
+    "name": "cord-02",
+    "command": [
+      "/usr/bin/time",
+      "-v",
+      "-o",
+      "/data/coding/scanweave/qualification/clearscan_background/real/final/cord-02.time.txt",
+      "/data/coding/scanweave/target/release/scanweave-cli",
+      "build",
+      "/data/coding/scanweave/qualification/clearscan_competitive/real/cord-02.png",
+      "--ocr",
+      "/data/coding/scanweave/qualification/clearscan_competitive/real/cord-02.regions.hocr",
+      "--dpi",
+      "300",
+      "--profile",
+      "clearscan",
+      "--output",
+      "/data/coding/scanweave/qualification/clearscan_background/real/final/cord-02.pdf",
+      "--report",
+      "/data/coding/scanweave/qualification/clearscan_background/real/final/cord-02.json"
+    ],
+    "status": 0,
+    "elapsed": 1.7390795090032043,
+    "returncode": 0,
+    "seconds": 1.7390795090032043,
+    "bytes": 419570,
+    "sha256": "2a66814dba6aa42650da0c4949c4499c58ac5b172549bf10cac1d89126715647",
+    "streams": {
+      "other_stream": 1695,
+      "raster": 369487,
+      "content": 11464,
+      "font": 30184,
+      "overhead": 6740
+    },
+    "images": [
+      {
+        "object": [
+          17,
+          0
+        ],
+        "width": 360,
+        "height": 640,
+        "colour": "/DeviceRGB",
+        "filter": "/FlateDecode",
+        "bytes": 115210,
+        "encoded_sha256": "ff79068521f50089374e1dc1d39c4e679bc1bd99067bcc5bc96d7e3e691e8a23",
+        "samples_sha256": "4142e4f325bc3a5ed75e9a9ad8651555b91158cc48830e941e9b4a409b5851aa"
+      },
+      {
+        "object": [
+          18,
+          0
+        ],
+        "width": 552,
+        "height": 552,
+        "colour": "/DeviceRGB",
+        "filter": "/FlateDecode",
+        "bytes": 154338,
+        "encoded_sha256": "8d05b7b35c8ea03b2c848046a60b7e874b65e23ca23412bf6e9968a191a1a172",
+        "samples_sha256": "8516f441121d64bf86b2b769882973d6439fac4dbea398bba43a5efa813654b6"
+      },
+      {
+        "object": [
+          19,
+          0
+        ],
+        "width": 160,
+        "height": 192,
+        "colour": "/DeviceRGB",
+        "filter": "/FlateDecode",
+        "bytes": 23895,
+        "encoded_sha256": "e78c0bff9918ec0165b3e3a08804283c61d154dfbf819bbcbee7d4c7b26cf55b",
+        "samples_sha256": "5d8bc2c447425a5d190852d74ba3d2cde4140198fb84837eeaee592193e94618"
+      },
+      {
+        "object": [
+          20,
+          0
+        ],
+        "width": 24,
+        "height": 8,
+        "colour": "/DeviceRGB",
+        "filter": "/FlateDecode",
+        "bytes": 58,
+        "encoded_sha256": "699a6d07a9b7428d530311fdd5ea1d48c388440b93344c4ad304a749819cf96a",
+        "samples_sha256": "4a63e81d6ec7b5ec13e3e840582ffb996d4abed227d7165e9b604b25ea768656"
+      },
+      {
+        "object": [
+          21,
+          0
+        ],
+        "width": 251,
+        "height": 256,
+        "colour": "/DeviceRGB",
+        "filter": "/FlateDecode",
+        "bytes": 48363,
+        "encoded_sha256": "51616a3725f1c50dc7d5f87aaaa1abdf1d90187b06507b9dec81c42ad35fca8b",
+        "samples_sha256": "ed2d7a1468c89cb51e0a85ee8deeb0f527ed78a1477f700cf2f26990e1c583c8"
+      },
+      {
+        "object": [
+          22,
+          0
+        ],
+        "width": 24,
+        "height": 8,
+        "colour": "/DeviceRGB",
+        "filter": "/FlateDecode",
+        "bytes": 104,
+        "encoded_sha256": "22670b21b3bf820f6d7c1266c13d77e04514927bdebf357d9ceb5730465273de",
+        "samples_sha256": "703fc22371022f6fce17d3c4d8b6e88b98a4497cb09cad9b5c41b6677e5a4f48"
+      },
+      {
+        "object": [
+          23,
+          0
+        ],
+        "width": 312,
+        "height": 80,
+        "colour": "/DeviceRGB",
+        "filter": "/FlateDecode",
+        "bytes": 12924,
+        "encoded_sha256": "56318824d73848dbaefda371d8e4c939360c6dd1952d57e5ffa6cc956ac1542c",
+        "samples_sha256": "067430469cecbe5cd994b733ac341fe7cc1be2dcf0d8981d9fcb7999dd82fedf"
+      },
+      {
+        "object": [
+          24,
+          0
+        ],
+        "width": 64,
+        "height": 40,
+        "colour": "/DeviceRGB",
+        "filter": "/FlateDecode",
+        "bytes": 1199,
+        "encoded_sha256": "16382a99a014aab6d4372808e9abd2aa100f0f35f4878baff583ae638880bda0",
+        "samples_sha256": "ee48c48fdcc358159c5de80799cabab3f14cf337dad34ba2cd90d23903152d38"
+      },
+      {
+        "object": [
+          25,
+          0
+        ],
+        "width": 109,
+        "height": 32,
+        "colour": "/DeviceRGB",
+        "filter": "/FlateDecode",
+        "bytes": 5860,
+        "encoded_sha256": "d46baa5ca8b3c7766fd3f0d3965fc3a81a95e1706af8ffd3d49f489973d89726",
+        "samples_sha256": "f599cef2052d03bd7d235f3efc2b1ca16baffee411821e9c8b0d80d366582506"
+      },
+      {
+        "object": [
+          26,
+          0
+        ],
+        "width": 40,
+        "height": 40,
+        "colour": "/DeviceRGB",
+        "filter": "/FlateDecode",
+        "bytes": 1329,
+        "encoded_sha256": "2c29fcaab4ae5572e90b58bb393c3e736af9e6f92865d66f6a94f248ac722cec",
+        "samples_sha256": "8831bdcb0e6a7214e9b9a42161ec472dae6226722719fb797df2c4577ef73535"
+      },
+      {
+        "object": [
+          27,
+          0
+        ],
+        "width": 8,
+        "height": 8,
+        "colour": "/DeviceRGB",
+        "filter": "/FlateDecode",
+        "bytes": 36,
+        "encoded_sha256": "28fb47eb9105ed50ce148d2eb81a6c07ae00ceab2b9dce5fcfecdf54f0505082",
+        "samples_sha256": "26937a49b5c59b2900f8eb3e3f1a58688d133e41b71349d5952ad30e002ca9fa"
+      },
+      {
+        "object": [
+          28,
+          0
+        ],
+        "width": 32,
+        "height": 8,
+        "colour": "/DeviceRGB",
+        "filter": "/FlateDecode",
+        "bytes": 63,
+        "encoded_sha256": "56abf1ef1f4b4bf48e502b00bf57c91c51b051ea4a2d19fae150a7b9a69cc2b7",
+        "samples_sha256": "c17bb0dc8d7528c366b0cfbbef03f735464e9ed96313a1548795b2f95703bf59"
+      },
+      {
+        "object": [
+          29,
+          0
+        ],
+        "width": 24,
+        "height": 8,
+        "colour": "/DeviceRGB",
+        "filter": "/FlateDecode",
+        "bytes": 48,
+        "encoded_sha256": "c74ab6c9e034364585ad60e1e5e11ce1afb420f6b0bf743aba53639063dae4a9",
+        "samples_sha256": "d757b1738cbe06fbefc1b214bc03430972fc279b8949bcfa711952581d3c7569"
+      },
+      {
+        "object": [
+          30,
+          0
+        ],
+        "width": 128,
+        "height": 40,
+        "colour": "/DeviceRGB",
+        "filter": "/FlateDecode",
+        "bytes": 1761,
+        "encoded_sha256": "54e90105923bf40731b33542f93030f186bac48a2012d3dbafdc494403151d33",
+        "samples_sha256": "34511d9d3d92ea1a313947bd0a15f91dbc1a8efbb3b6a399e652f0785e1ef8b7"
+      },
+      {
+        "object": [
+          31,
+          0
+        ],
+        "width": 152,
+        "height": 8,
+        "colour": "/DeviceRGB",
+        "filter": "/FlateDecode",
+        "bytes": 1027,
+        "encoded_sha256": "8fd26b8cccc6bba9f6b6d3c12249e5468aeddaa581f0138bc7897005fec78473",
+        "samples_sha256": "1d38657552a506f9d31069b87f2bb23133d1325d55a095a7075c3e48425be407"
+      },
+      {
+        "object": [
+          32,
+          0
+        ],
+        "width": 8,
+        "height": 8,
+        "colour": "/DeviceRGB",
+        "filter": "/FlateDecode",
+        "bytes": 117,
+        "encoded_sha256": "074b30f8246ac80311b7cb641735bfc44b917700512b3c7b85c3e0e83d66f185",
+        "samples_sha256": "3c64acbb52ee3559f60da84b2722b7d7059288d8850a98794ffe4847f7d2fb3a"
+      },
+      {
+        "object": [
+          33,
+          0
+        ],
+        "width": 320,
+        "height": 24,
+        "colour": "/DeviceRGB",
+        "filter": "/FlateDecode",
+        "bytes": 2223,
+        "encoded_sha256": "dcd4ac89b2c4f6caabbebdde2e74d17f483bb94026b680ea3b81d497a5593fb4",
+        "samples_sha256": "1675db9e6eec40a99499d0ae29907556d0402bc5e3659a641ad246ae0c23e172"
+      },
+      {
+        "object": [
+          34,
+          0
+        ],
+        "width": 16,
+        "height": 64,
+        "colour": "/DeviceRGB",
+        "filter": "/FlateDecode",
+        "bytes": 932,
+        "encoded_sha256": "63bb51574324f213e5ff3624a6565d84e31be0cd57aeaa27ac857c747393996b",
+        "samples_sha256": "e4e71657fde4d69431309c912a3d2aee92a1df428ce84a0c9aeaf6fa68126579"
+      }
+    ],
+    "unique_images": 18,
+    "text_show_operations": 172,
+    "font_outlines": 143,
+    "observations": 157,
+    "vector_ink_px": 4739,
+    "source_ink_suppressed_px": 4739,
+    "coverage": {
+      "text_ink_px_total": 8940,
+      "text_ink_px_vector": 4739,
+      "text_ink_px_raster": 4201,
+      "other_ink_px": 150,
+      "unowned_ink_px": 0,
+      "multiply_owned_ink_px": 0
+    },
+    "supplied_chars": 174,
+    "source_sha256": "d06540139f2d3d18e366b203e154ca2a4277db0f0d3f6c4b7f50b5650090863b",
+    "rss_kb": 35408,
+    "poppler_text": "4 HAKAU UDANG 92,000\n4 SIAO MAI BABI 80,000\n3 CEKER AYAM 60,000\n2 BAKPAO BKR C 42,000\nCRISPY\n3 TAHU GORENG 60,000\nCRISPY ee\nSubtotal 334,000\nTotal 334,000\nCASH 350,000\nCash CHANGE -16,000\nTotal Item 5\nTotal Qty 16\n\f",
+    "pdfium_text": "4 HAKAU UDANG 92,000 4 SIAO MAI BABI 80,000\r\n3 CEKER AYAM 60,000 2 BAKPAO BKR C 42,000\r\nCRISPY\r\n3 TAHU GORENG 60,000 CRISPY ee\r\nSubtotal 334,000\r\nTotal 334,000\r\nCASH 350,000\r\nCash CHANGE -16,000\r\nTotal Item 5\r\nTotal Qty 16",
+    "renderer_text_equal": true,
+    "native_search": [
+      {
+        "token": "HAKAU",
+        "found": true
+      },
+      {
+        "token": "UDANG",
+        "found": true
+      },
+      {
+        "token": "SIAO",
+        "found": true
+      }
+    ],
+    "source_relative_mae_150dpi": {
+      "poppler": 2.2905951141092733,
+      "pdfium": 1.087059548863949
+    },
+    "renderer_mae_150dpi": 2.0830823260631255,
+    "actual_vector_occurrences": 58,
+    "actual_used_visible_font_gids": 50
+  },
+  {
+    "name": "history-01",
+    "command": [
+      "/usr/bin/time",
+      "-v",
+      "-o",
+      "/data/coding/scanweave/qualification/clearscan_background/real/final/history-01.time.txt",
+      "/data/coding/scanweave/target/release/scanweave-cli",
+      "build",
+      "/data/coding/scanweave/qualification/clearscan_competitive/real/history-01.png",
+      "--ocr",
+      "/data/coding/scanweave/qualification/clearscan_competitive/real/history-01.regions.hocr",
+      "--dpi",
+      "300",
+      "--profile",
+      "clearscan",
+      "--output",
+      "/data/coding/scanweave/qualification/clearscan_background/real/final/history-01.pdf",
+      "--report",
+      "/data/coding/scanweave/qualification/clearscan_background/real/final/history-01.json"
+    ],
+    "status": 0,
+    "elapsed": 10.449650488008047,
+    "returncode": 0,
+    "seconds": 10.449650488008047,
+    "bytes": 5098148,
+    "sha256": "dea881f2720044b276a59c429f02c6a9c7294b0e54fe08a0b46dabb4ee11ae5e",
+    "streams": {
+      "other_stream": 1543,
+      "raster": 5035593,
+      "content": 44739,
+      "font": 13608,
+      "overhead": 2665
+    },
+    "images": [
+      {
+        "object": [
+          17,
+          0
+        ],
+        "width": 1116,
+        "height": 1835,
+        "colour": "/DeviceRGB",
+        "filter": "/FlateDecode",
+        "bytes": 5035593,
+        "encoded_sha256": "4509e5c07718e594bd9f4317474d8e68273f1cb1fa8cdbb44875cdbf0888f2f7",
+        "samples_sha256": "e442a36925f8f32002233afa0c72fca7c3b777808a93da46b16fc7e69980cd23"
+      }
+    ],
+    "unique_images": 1,
+    "text_show_operations": 691,
+    "font_outlines": 146,
+    "observations": 240,
+    "vector_ink_px": 1697,
+    "source_ink_suppressed_px": 1697,
+    "coverage": {
+      "text_ink_px_total": 1721211,
+      "text_ink_px_vector": 1697,
+      "text_ink_px_raster": 1719514,
+      "other_ink_px": 142,
+      "unowned_ink_px": 0,
+      "multiply_owned_ink_px": 0
+    },
+    "supplied_chars": 691,
+    "source_sha256": "eb203b78e488dac22b7d99fea2731fae13d54e9488ee8674c3b743f243a78d7f",
+    "rss_kb": 106656,
+    "poppler_text": "ag\n4\ni\nLEONIS BAPTIST\nAE ;\nDE ALBERTIS, LIB. PRIMYVS\nRVDIMENTA,ae) E PicTvra hisbrevif® —\nKe ak| fimis commentartjs con\nat os f {cripturi,quo clarior no\nPy eeStra fit oratio, a Mathe- i\ncme ~maticisea primum,quz\n_\nadrem pertinere uidebuntut accipie-\nmus. Quibus quidé cognitis,\nquoad\ningenium fuppeditabic,\npituram ab\niplis natura principtjs exponemus.\nSedin omni noftra oratione fpectari\nilluduehementer peto, ndme ueMar44:\n8\nthematicum, fed ueluti piGoreé hifce\nde rebus loqui.lili enimfoloingenio,\nomni feiuncta\nmateriaylpecies8for.\n|\n_masreré metiuntur, Nos uerd,quod\nfub afpectu rem effepofita uolumus,\nPingutore idcirco, utaiunt, Miner-\nuaicribendo uremur, Acreequidépe\neff nobifcum a@um arbitramur , f\n_ quoquo pacto in hac planedifficiliet |\n_-@Nemine,quoduiderim, alio tradita\nBe\na 2_. literisee\n\f",
+    "pdfium_text": "ag 4 i LEONIS BAPTIST AE ;\r\nDE ALBERTIS, LIB. PRIMYVS RVDIMENTA, ae) E PicTvra hisbrevif® —\r\nKe ak | fimis commentartjs con at os f {cripturi,quo clarior no\r\nPy ee Stra fit oratio, a Mathe- i\r\ncme ~maticisea primum,quz _\r\nprimum,quz\r\nadrem pertinere uidebuntut acci pie- mus. Quibus quidé cognitis, quoad ingenium fuppeditabic, pituram ab iplis natura principtjs exponemus.\r\nSed in omni noftra oratione fpectari\r\nillud uehementer peto, nd me ueMar 44:\r\n8 thematicum, fed ueluti piGoreé hifce de rebus loqui. lili enim foloingenio,\r\nomni fei uncta materiaylpecies 8 for. | _masreré\r\nmetiuntur, Nos uerd,quod fub afpectu rem effe pofita uolumus,\r\nPingutore idcirco, utaiunt, Miner￾uaicribendo uremur, Acree quidé pe\r\neff nobifcum a@um arbitramur , f _ quoquo pacto in hac plane difficili et |\r\n_-@Nemine, quod uiderim, alio tradita\r\nBe a 2 _. literis ee",
+    "renderer_text_equal": false,
+    "native_search": [
+      {
+        "token": "LEONIS",
+        "found": true
+      },
+      {
+        "token": "BAPTIST",
+        "found": true
+      },
+      {
+        "token": "ALBERTIS",
+        "found": true
+      }
+    ],
+    "source_relative_mae_150dpi": {
+      "poppler": 7.614703149280421,
+      "pdfium": 2.383495625782505
+    },
+    "renderer_mae_150dpi": 7.131693750113878,
+    "actual_vector_occurrences": 17,
+    "actual_used_visible_font_gids": 17
+  }
+]

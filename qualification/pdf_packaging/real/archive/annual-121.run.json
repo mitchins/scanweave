@@ -1,0 +1,22 @@
+{
+  "id": "annual-121",
+  "arm": "archive",
+  "command": [
+    "/tmp/scanweave-competitive-venv/bin/recode_pdf",
+    "-P",
+    "/data/coding/scanweave/qualification/pdf_packaging/real/input/annual-121.pdf",
+    "-T",
+    "/data/coding/scanweave/qualification/pdf_packaging/real/archive/annual-121.hocr",
+    "-o",
+    "/data/coding/scanweave/qualification/pdf_packaging/real/archive/annual-121.pdf",
+    "--mask-compression",
+    "ccitt",
+    "--threads",
+    "1"
+  ],
+  "seconds": 3.339406091021374,
+  "status": 0,
+  "error": null,
+  "ocr_status": 0,
+  "pdf_bytes": 93925
+}

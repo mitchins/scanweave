@@ -1,0 +1,134 @@
+[
+  {
+    "dpi": 300,
+    "arm": "source-raster",
+    "renderer": "pdfium",
+    "source_pixels": 330,
+    "mean_luma": 245.0,
+    "mean_absolute_sample_error": 0.0,
+    "max_lightening": 0.0,
+    "max_darkening": -0.0,
+    "samples_lighter_than_252": 0
+  },
+  {
+    "dpi": 300,
+    "arm": "source-raster",
+    "renderer": "poppler",
+    "source_pixels": 330,
+    "mean_luma": 244.76666666666668,
+    "mean_absolute_sample_error": 1.2878787878787878,
+    "max_lightening": 1.0,
+    "max_darkening": 40.0,
+    "samples_lighter_than_252": 0
+  },
+  {
+    "dpi": 300,
+    "arm": "native-background",
+    "renderer": "pdfium",
+    "source_pixels": 330,
+    "mean_luma": 249.5090909090909,
+    "mean_absolute_sample_error": 4.666666666666667,
+    "max_lightening": 6.0,
+    "max_darkening": 21.0,
+    "samples_lighter_than_252": 0
+  },
+  {
+    "dpi": 300,
+    "arm": "native-background",
+    "renderer": "poppler",
+    "source_pixels": 330,
+    "mean_luma": 248.61818181818182,
+    "mean_absolute_sample_error": 4.115151515151515,
+    "max_lightening": 8.0,
+    "max_darkening": 23.0,
+    "samples_lighter_than_252": 2
+  },
+  {
+    "dpi": 300,
+    "arm": "final",
+    "renderer": "pdfium",
+    "source_pixels": 330,
+    "mean_luma": 249.5060606060606,
+    "mean_absolute_sample_error": 4.663636363636364,
+    "max_lightening": 6.0,
+    "max_darkening": 21.0,
+    "samples_lighter_than_252": 0
+  },
+  {
+    "dpi": 300,
+    "arm": "final",
+    "renderer": "poppler",
+    "source_pixels": 330,
+    "mean_luma": 248.61818181818182,
+    "mean_absolute_sample_error": 4.115151515151515,
+    "max_lightening": 8.0,
+    "max_darkening": 23.0,
+    "samples_lighter_than_252": 2
+  },
+  {
+    "dpi": 600,
+    "arm": "source-raster",
+    "renderer": "pdfium",
+    "source_pixels": 1306,
+    "mean_luma": 245.0,
+    "mean_absolute_sample_error": 0.0,
+    "max_lightening": 0.0,
+    "max_darkening": -0.0,
+    "samples_lighter_than_252": 0
+  },
+  {
+    "dpi": 600,
+    "arm": "source-raster",
+    "renderer": "poppler",
+    "source_pixels": 1306,
+    "mean_luma": 245.1508422664625,
+    "mean_absolute_sample_error": 0.48009188361408883,
+    "max_lightening": 1.0,
+    "max_darkening": 14.0,
+    "samples_lighter_than_252": 0
+  },
+  {
+    "dpi": 600,
+    "arm": "native-background",
+    "renderer": "pdfium",
+    "source_pixels": 1306,
+    "mean_luma": 247.09341500765697,
+    "mean_absolute_sample_error": 2.1776416539050536,
+    "max_lightening": 5.0,
+    "max_darkening": 8.0,
+    "samples_lighter_than_252": 0
+  },
+  {
+    "dpi": 600,
+    "arm": "native-background",
+    "renderer": "poppler",
+    "source_pixels": 1306,
+    "mean_luma": 246.9716692189893,
+    "mean_absolute_sample_error": 2.16156202143951,
+    "max_lightening": 9.0,
+    "max_darkening": 12.0,
+    "samples_lighter_than_252": 2
+  },
+  {
+    "dpi": 600,
+    "arm": "final",
+    "renderer": "pdfium",
+    "source_pixels": 1306,
+    "mean_luma": 247.09341500765697,
+    "mean_absolute_sample_error": 2.1776416539050536,
+    "max_lightening": 5.0,
+    "max_darkening": 8.0,
+    "samples_lighter_than_252": 0
+  },
+  {
+    "dpi": 600,
+    "arm": "final",
+    "renderer": "poppler",
+    "source_pixels": 1306,
+    "mean_luma": 246.9716692189893,
+    "mean_absolute_sample_error": 2.16156202143951,
+    "max_lightening": 9.0,
+    "max_darkening": 12.0,
+    "samples_lighter_than_252": 2
+  }
+]

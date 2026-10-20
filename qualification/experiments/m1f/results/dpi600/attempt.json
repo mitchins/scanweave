@@ -1,0 +1,10 @@
+{
+  "input": "qualification/competitors/adobe_xi/inputs/dpi600/document.json",
+  "profile": "clearscan",
+  "variant": "reuse",
+  "status": "bounded_attempt_terminated_without_pdf",
+  "elapsed_seconds": 294,
+  "peak_rss_kib": 1477428,
+  "output_created": false,
+  "reason": "The ScanWeave conversion remained CPU- and memory-heavy and had not completed at the bounded stop. A separate lossless grayscale rewrite of the frozen PDF was used for the 600 DPI encoding comparison; it is not a new CLI conversion."
+}

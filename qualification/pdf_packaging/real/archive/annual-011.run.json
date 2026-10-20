@@ -1,0 +1,22 @@
+{
+  "id": "annual-011",
+  "arm": "archive",
+  "command": [
+    "/tmp/scanweave-competitive-venv/bin/recode_pdf",
+    "-P",
+    "/data/coding/scanweave/qualification/pdf_packaging/real/input/annual-011.pdf",
+    "-T",
+    "/data/coding/scanweave/qualification/pdf_packaging/real/archive/annual-011.hocr",
+    "-o",
+    "/data/coding/scanweave/qualification/pdf_packaging/real/archive/annual-011.pdf",
+    "--mask-compression",
+    "ccitt",
+    "--threads",
+    "1"
+  ],
+  "seconds": 3.5636628240172286,
+  "status": 0,
+  "error": null,
+  "ocr_status": 0,
+  "pdf_bytes": 112397
+}

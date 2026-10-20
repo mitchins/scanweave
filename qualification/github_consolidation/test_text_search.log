@@ -1,0 +1,51 @@
+PASS pdfium B2 search 'Total' 
+PASS pdfium B0 search 'Total' 
+PASS poppler B2 text 'Total' 
+PASS pdfium NATIVE search 'Total' 
+PASS pdfium B0 NATIVE search 'Total' 
+PASS pdfium B2 search '1,234.56' 
+PASS pdfium B0 search '1,234.56' 
+PASS poppler B2 text '1,234.56' 
+PASS pdfium NATIVE search '1,234.56' 
+PASS pdfium B0 NATIVE search '1,234.56' 
+PASS pdfium B2 search 'INV-2026-0042' 
+PASS pdfium B0 search 'INV-2026-0042' 
+PASS poppler B2 text 'INV-2026-0042' 
+PASS pdfium NATIVE search 'INV-2026-0042' 
+PASS pdfium B0 NATIVE search 'INV-2026-0042' 
+PASS pdfium B2 required query 'INV-2026-0042' 
+PASS pdfium B0 required query 'INV-2026-0042' 
+PASS poppler B2 required query 'INV-2026-0042' 
+PASS pdfium NATIVE required query 'INV-2026-0042' 
+PASS pdfium B0 NATIVE required query 'INV-2026-0042' 
+PASS pdfium B2 required query 'Total amount due: 1,234.56 EUR' 
+PASS pdfium B0 required query 'Total amount due: 1,234.56 EUR' 
+PASS poppler B2 required query 'Total amount due: 1,234.56 EUR' 
+PASS pdfium NATIVE required query 'Total amount due: 1,234.56 EUR' 
+PASS pdfium B0 NATIVE required query 'Total amount due: 1,234.56 EUR' 
+PASS pdfium B2 required query 'Please pay within 30 days.' 
+PASS pdfium B0 required query 'Please pay within 30 days.' 
+PASS poppler B2 required query 'Please pay within 30 days.' 
+PASS pdfium NATIVE required query 'Please pay within 30 days.' 
+PASS pdfium B0 NATIVE required query 'Please pay within 30 days.' 
+PASS pdfium B2 no intra-word spaces 'Total amount due: 1,234.56 EUR\r\nInvoice date: 13 October 202'
+PASS pdfium B0 no intra-word spaces 
+PASS poppler B2 no intra-word spaces 
+PASS pdfium B2 exact char transport 118 chars
+PASS p08 pdfium intact '1,234.56' '. , \x021,234.56\r\n$%\r\n-42'
+PASS p08 pdfium intact '-42' 
+PASS p08 no intra-word spaces 
+PASS p04 pdfium ligature 'fi' 
+PASS p04 pdfium supplementary U+1D400 
+PASS p03 pdfium kana 'ガ' intact 
+PASS p10 page1 pdfium '1,234.56' 
+PASS p10 page1 pdfium 'Page 1 of 4' 'Total amount due: 1,234.56 EUR\r\nInvoice date: 13 October 202'
+PASS p10 page2 pdfium '1,234.56' 
+PASS p10 page2 pdfium 'Page 2 of 4' 'Total amount due: 1,234.56 EUR\r\nInvoice date: 13 October 202'
+PASS p10 page3 pdfium '1,234.56' 
+PASS p10 page3 pdfium 'Page 3 of 4' 'Total amount due: 1,234.56 EUR\r\nInvoice date: 13 October 202'
+PASS p10 page4 pdfium '1,234.56' 
+PASS p10 page4 pdfium 'Page 4 of 4' 'Total amount due: 1,234.56 EUR\r\nInvoice date: 13 October 202'
+PASS qpdf --check repaired p09 
+
+all PDF text-search assertions passed

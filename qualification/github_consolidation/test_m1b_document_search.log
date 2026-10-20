@@ -1,0 +1,88 @@
+PASS doc4_invoice: page count                          4 != 4
+PASS doc4_invoice: qpdf --check                        checking /tmp/opencode/m1b_docsearch/doc4_invoice/reconstruct/out.pdf
+PASS doc4_invoice: page1 native search 'Total'         
+PASS doc4_invoice: page1 contains 'Total'              
+PASS doc4_invoice: page1 native search 'INV-2026-0042' 
+PASS doc4_invoice: page1 contains 'INV-2026-0042'      
+PASS doc4_invoice: page1 native search 'Page 1 of 4'   
+PASS doc4_invoice: page1 contains 'Page 1 of 4'        
+PASS doc4_invoice: page2 native search 'Page 2 of 4'   
+PASS doc4_invoice: page2 contains 'Page 2 of 4'        
+PASS doc4_invoice: page3 native search 'Page 3 of 4'   
+PASS doc4_invoice: page3 contains 'Page 3 of 4'        
+PASS doc4_invoice: page4 native search 'Page 4 of 4'   
+PASS doc4_invoice: page4 contains 'Page 4 of 4'        
+PASS doc4_invoice: pages in order (poppler)            
+PASS doc4_invoice: report page count                   4
+PASS doc4_invoice: report order                        
+PASS doc4_invoice: both candidates measured            ['reconstruct', 'raster_baseline']
+PASS doc4_invoice: search plan covers pages            
+PASS doc4_invoice: bindings present                    
+PASS doc4_invoice: page1 poppler mixed line            'ce: INV-2026-0042\nPage 1 of 4.\nPlease pay within 30 days.\n\n\x0c'
+PASS doc4_invoice: page1 poppler order                 
+PASS doc4_repeat: page count                           4 != 4
+PASS doc4_repeat: qpdf --check                         checking /tmp/opencode/m1b_docsearch/doc4_repeat/reconstruct/out.pdf
+PASS doc4_repeat: page1 native search 'Amount'         
+PASS doc4_repeat: page1 contains 'Amount'              
+PASS doc4_repeat: page2 native search 'Amount'         
+PASS doc4_repeat: page2 contains 'Amount'              
+PASS doc4_repeat: page3 native search 'Amount'         
+PASS doc4_repeat: page3 contains 'Amount'              
+PASS doc4_repeat: page4 native search 'Amount'         
+PASS doc4_repeat: page4 contains 'Amount'              
+PASS doc4_repeat: pages in order (poppler)             
+PASS doc4_repeat: report page count                    4
+PASS doc4_repeat: report order                         
+PASS doc4_repeat: both candidates measured             ['reconstruct', 'raster_baseline']
+PASS doc4_repeat: search plan covers pages             
+PASS doc4_repeat: bindings present                     
+PASS doc4_repeat: pages identical span counts          
+PASS doc4_mixed: page count                            4 != 4
+PASS doc4_mixed: qpdf --check                          checking /tmp/opencode/m1b_docsearch/doc4_mixed/reconstruct/out.pdf
+PASS doc4_mixed: page1 native search 'Amount'          
+PASS doc4_mixed: page1 contains 'Amount'               
+PASS doc4_mixed: page2 native search 'balance'         
+PASS doc4_mixed: page2 contains 'balance'              
+PASS doc4_mixed: page2 native search 'receipt'         
+PASS doc4_mixed: page2 contains 'receipt'              
+PASS doc4_mixed: page3 native search 'cafe'            
+PASS doc4_mixed: page3 contains 'cafe'                 
+PASS doc4_mixed: page3 native search '42.00'           
+PASS doc4_mixed: page3 contains '42.00'                
+PASS doc4_mixed: page4 native search 'Amount'          
+PASS doc4_mixed: page4 contains 'Amount'               
+PASS doc4_mixed: pages in order (poppler)              
+PASS doc4_mixed: report page count                     4
+PASS doc4_mixed: report order                          
+PASS doc4_mixed: both candidates measured              ['reconstruct', 'raster_baseline']
+PASS doc4_mixed: search plan covers pages              
+PASS doc4_mixed: bindings present                      
+PASS doc10_mixed: page count                           10 != 10
+PASS doc10_mixed: qpdf --check                         checking /tmp/opencode/m1b_docsearch/doc10_mixed/reconstruct/out.pdf
+PASS doc10_mixed: page1 native search 'Amount'         
+PASS doc10_mixed: page1 contains 'Amount'              
+PASS doc10_mixed: page8 native search 'ガ'              
+PASS doc10_mixed: page8 contains 'ガ'                   
+PASS doc10_mixed: page8 kana 'ガ' intact                'ガ'
+PASS doc10_mixed: page10 native search 'Amount'        
+PASS doc10_mixed: page10 contains 'Amount'             
+PASS doc10_mixed: pages in order (poppler)             
+PASS doc10_mixed: report page count                    10
+PASS doc10_mixed: report order                         
+PASS doc10_mixed: both candidates measured             ['reconstruct', 'raster_baseline']
+PASS doc10_mixed: search plan covers pages             
+PASS doc10_mixed: bindings present                     
+PASS doc2_min: page count                              2 != 2
+PASS doc2_min: qpdf --check                            checking /tmp/opencode/m1b_docsearch/doc2_min/reconstruct/out.pdf
+PASS doc2_min: page1 native search 'Amount'            
+PASS doc2_min: page1 contains 'Amount'                 
+PASS doc2_min: page2 native search 'balance'           
+PASS doc2_min: page2 contains 'balance'                
+PASS doc2_min: pages in order (poppler)                
+PASS doc2_min: report page count                       2
+PASS doc2_min: report order                            
+PASS doc2_min: both candidates measured                ['reconstruct', 'raster_baseline']
+PASS doc2_min: search plan covers pages                
+PASS doc2_min: bindings present                        
+
+FAILED: none

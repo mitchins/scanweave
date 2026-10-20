@@ -1,0 +1,25 @@
+{
+  "reference": {
+    "kind": "frozen Adobe XI ClearScan",
+    "300dpi_pdf": "qualification/competitors/adobe_xi/results/dpi300/adobe-clearscan-run1.pdf",
+    "600dpi_pdf": "qualification/competitors/adobe_xi/results/dpi600/adobe-clearscan-run1.pdf",
+    "12page_pdf": "qualification/competitors/adobe_xi/results/dpi300-12/adobe-clearscan.pdf"
+  },
+  "arms": [
+    {"arm":"A","name":"Frozen ScanWeave baseline","status":"measured","outputs":["qualification/competitors/adobe_xi/results/dpi300/scanweave-clearscan.pdf","qualification/competitors/adobe_xi/results/dpi600/scanweave-clearscan.pdf","qualification/competitors/adobe_xi/results/dpi300-12/scanweave-faithful.pdf"]},
+    {"arm":"B","name":"Exact resource reuse only","status":"measured","outputs":["qualification/experiments/m1f/results/dpi300/clearscan/reuse.pdf","qualification/experiments/m1f/results/dpi300-12/faithful/reuse.pdf"]},
+    {"arm":"C","name":"Reuse plus lossless grayscale","status":"measured","outputs":["qualification/experiments/m1f/results/dpi300/clearscan/gray.pdf","qualification/experiments/m1f/results/dpi600/clearscan-grayscale-reencoded.pdf"],"note":"600 DPI is a lossless PDF-level grayscale rewrite of frozen ScanWeave output; the Rust reconstruction run did not complete."},
+    {"arm":"D","name":"C plus qualified background normalization","status":"not_run_gate","reason":"F2 restoration gate remains closed pending isolation of the 300 DPI fallback 8 render discrepancy and hard-negative qualification."},
+    {"arm":"E","name":"C plus replaced-text suppression","status":"not_run_gate","reason":"Would erase source ink; no pilot was promoted while fallback/compositing behavior remains unresolved."},
+    {"arm":"F","name":"C plus adaptive background resolution","status":"not_run_gate","reason":"Would alter page content/resolution; F2 gate and hard-negative corpus are outstanding."},
+    {"arm":"G","name":"Best independently qualified combination","status":"f1_only","combination":"C at 300 DPI; B at repeated 12-page faithful; PDF-level C at 600 DPI","note":"No F2 combination is qualified. Frozen Adobe outputs are reference measurements, not a quality oracle."}
+  ],
+  "render_comparisons": [
+    "qualification/experiments/m1f/results/dpi300/baseline-reuse-render.json",
+    "qualification/experiments/m1f/results/dpi300/render-comparison.json",
+    "qualification/experiments/m1f/results/dpi300-12/render-comparison.json",
+    "qualification/experiments/m1f/results/dpi600/render-comparison.json",
+    "qualification/experiments/m1f/results/encoding-controls/none-vs-tiff.json",
+    "qualification/experiments/m1f/results/encoding-controls/none-vs-png-up.json"
+  ]
+}

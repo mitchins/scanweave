@@ -1,0 +1,42 @@
+{
+  "case": "p00-s02 / OCR '8' / 300 DPI",
+  "source_patch_bbox_px": [
+    316,
+    47,
+    351,
+    99
+  ],
+  "pdf_patch_bbox_pt": [
+    75.84,
+    11.28,
+    84.24,
+    23.76
+  ],
+  "pdf_transform_found": true,
+  "transform_bound_to_page1_im0": true,
+  "page1_im0_dimensions_match_crop": true,
+  "embedded_image_matches_source_crop": true,
+  "referenced_im0_decoded_pixels_match_source_crop": true,
+  "embedded_image_matches": [
+    {
+      "file": "im-000.png",
+      "exact_source_crop": true,
+      "sha256_rgb": "965fd7f6329a3fcc007c729155b6fd63505dfe0bc1a86b2678e8f02b860460ba"
+    }
+  ],
+  "raw_scan_vs_pristine_raster_iou": 0.911651728553137,
+  "poppler_pdf_vs_A0_iou": {
+    "raster": 0.9112801013941698,
+    "faithful": 0.7762711864406779,
+    "clearscan": 0.7316798196166855,
+    "truth": 1.0
+  },
+  "pdfium_pdf_vs_A0_iou": {
+    "raster-baseline": 0.9134860050890585,
+    "clearscan": 0.7675489067894131,
+    "truth": 1.0
+  },
+  "clearscan_to_pristine_after_diagnostic_up_one_px": 0.8220640569395018,
+  "source_patch_is_intact_in_pdf": true,
+  "interpretation": "the oracle score mixes no representations here; the remaining gap is in local XObject rasterization/placement relative to whole-page raster rendering; registration correction is diagnostic only"
+}

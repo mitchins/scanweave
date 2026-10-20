@@ -1,0 +1,47 @@
+{
+  "schema_version": "1.0",
+  "document_id": "adobe-xi-m1e-600",
+  "sources": [
+    {
+      "source_id": "src000",
+      "asset_path": "page1.png",
+      "file_sha256": "a10be1ae294bd3027a226e522ef82519100c9f007d1cefca9e55683e4c9e48e4",
+      "kind": "image"
+    },
+    {
+      "source_id": "src001",
+      "asset_path": "page2.png",
+      "file_sha256": "bc416ef73f991256b330889b075e9723be8adb57be79daeaf7ceb97ede0db4c5",
+      "kind": "image"
+    },
+    {
+      "source_id": "src002",
+      "asset_path": "page3.png",
+      "file_sha256": "4c0c3cee40524501e671d1eeaf967384466152943f2fdebe4cc2a65747ac1202",
+      "kind": "image"
+    }
+  ],
+  "pages": [
+    {
+      "page_id": "page1",
+      "source_id": "src000",
+      "source_page_index": 0,
+      "ocr_page_path": "page1.ocr.json",
+      "ocr_page_sha256": "6df23b3d465e663c73737a6d91608ae69b4cf60854f2a2d4df7984fa70478846"
+    },
+    {
+      "page_id": "page2",
+      "source_id": "src001",
+      "source_page_index": 0,
+      "ocr_page_path": "page2.ocr.json",
+      "ocr_page_sha256": "5da4dbc8bef16fd0ead2e8eeb7d880b6ade2bef09a4a9ad823af14bf5815f83e"
+    },
+    {
+      "page_id": "page3",
+      "source_id": "src002",
+      "source_page_index": 0,
+      "ocr_page_path": "page3.ocr.json",
+      "ocr_page_sha256": "cadecc1c67e1490b7a23e025a5cdbfb8a6792b1e75aad1be34730f80edfe1fd1"
+    }
+  ]
+}

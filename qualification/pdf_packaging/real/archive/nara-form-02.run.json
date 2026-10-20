@@ -1,0 +1,22 @@
+{
+  "id": "nara-form-02",
+  "arm": "archive",
+  "command": [
+    "/tmp/scanweave-competitive-venv/bin/recode_pdf",
+    "-P",
+    "/data/coding/scanweave/qualification/pdf_packaging/real/input/nara-form-02.pdf",
+    "-T",
+    "/data/coding/scanweave/qualification/pdf_packaging/real/archive/nara-form-02.hocr",
+    "-o",
+    "/data/coding/scanweave/qualification/pdf_packaging/real/archive/nara-form-02.pdf",
+    "--mask-compression",
+    "ccitt",
+    "--threads",
+    "1"
+  ],
+  "seconds": 4.842632159998175,
+  "status": 0,
+  "error": null,
+  "ocr_status": 0,
+  "pdf_bytes": 201613
+}

@@ -11,10 +11,10 @@
 //! reconstruction against a whole-page searchable raster baseline document,
 //! and selects the smaller candidate that passes the same semantic gates.
 
-use crate::convert::{convert_parts, Input, Policy, Report};
+use crate::convert::{Input, Policy, Report};
 use crate::fontbuild::build_font;
 use crate::glyphs::GlyphShape;
-use crate::page_pdf::{assemble_document, PageParts};
+use crate::page_pdf::PageParts;
 
 /// A page plus its document-global CID remap.
 pub struct DocumentPage {
@@ -31,12 +31,15 @@ pub struct DocumentCandidate {
     pub pdf_bytes: usize,
     pub font_bytes: usize,
     pub image_xobjects: usize,
+    pub image_references: usize,
     pub content_bytes: usize,
     pub raster_encoded_bytes: usize,
     /// per-page analytical ink IoU (min over vector units); None = no vector
     pub page_fidelity: Vec<Option<f64>>,
     /// pages that rasterized (whole-page raster baseline marks all)
     pub raster_pages: usize,
+    pub image_encoding_ms: u128,
+    pub assembly_ms: u128,
 }
 
 /// Document-level report: per-page reports + document totals + the measured
@@ -54,8 +57,14 @@ pub struct DocumentReport {
     pub pdf_bytes: usize,
     pub font_bytes: usize,
     pub image_xobjects: usize,
+    pub image_references: usize,
     pub raster_encoded_bytes: usize,
     pub content_bytes: usize,
+    pub image_encoding_ms: u128,
+    pub assembly_ms: u128,
+    /// Instrumented wall-time breakdown for the document pipeline. The
+    /// remainder covers candidate selection and report assembly.
+    pub stage_timings: DocumentStageTimings,
     pub page_order: Vec<String>,
     pub page_reports: Vec<Report>,
     pub coverage: DocumentCoverage,
@@ -63,6 +72,19 @@ pub struct DocumentReport {
     pub ownership_invariants: std::collections::BTreeMap<String, bool>,
     /// sha256 of every source asset and OCR page (binding, per page)
     pub bindings: Vec<PageBinding>,
+}
+
+#[derive(Debug, Clone, Default, serde::Serialize)]
+pub struct DocumentStageTimings {
+    pub total_ms: u128,
+    pub donor_collection_ms: u128,
+    pub page_conversion_ms: u128,
+    pub document_font_union_ms: u128,
+    pub font_build_ms: u128,
+    pub reconstruction_pdf_ms: u128,
+    pub raster_baseline_prepare_ms: u128,
+    pub raster_baseline_pdf_ms: u128,
+    pub remaining_pipeline_ms: u128,
 }
 
 #[derive(Debug, Clone, Default, serde::Serialize)]
@@ -107,16 +129,19 @@ pub struct PageBinding {
 
 pub struct DocumentOutput {
     pub pdf_bytes: Vec<u8>,
+    /// exact shared font program used by the emitted candidate
+    pub font_bytes: Vec<u8>,
+    /// searchable whole-page raster baseline candidate (MRC-comparable gate)
+    pub raster_baseline_pdf_bytes: Vec<u8>,
     pub report: DocumentReport,
 }
 
 /// Build the document-wide (shape, label) encoding table and remap every
 /// page's CIDs onto it. Deterministic: page order, then slot order.
-fn union_encodings(
-    pages: &[DocumentPage],
-) -> (Vec<GlyphShape>, Vec<(usize, String)>, Vec<Remap>) {
+fn union_encodings(pages: &[DocumentPage]) -> (Vec<GlyphShape>, Vec<(usize, String)>, Vec<Remap>) {
     let mut shapes: Vec<GlyphShape> = Vec::new();
-    let mut shape_index: std::collections::HashMap<String, usize> = std::collections::HashMap::new();
+    let mut shape_index: std::collections::HashMap<String, usize> =
+        std::collections::HashMap::new();
     let mut encodings: Vec<(usize, String)> = Vec::new();
     let mut enc_index: std::collections::HashMap<(usize, String), usize> =
         std::collections::HashMap::new();
@@ -181,6 +206,13 @@ fn apply_remap(page: &mut DocumentPage, remap: &Remap) {
             *c = g;
         }
     }
+    for owner in &mut page.parts.owners {
+        for ch in &mut owner.characters {
+            if let Some(&global) = remap.cid_map.get(ch.cid.saturating_sub(1) as usize) {
+                ch.cid = global;
+            }
+        }
+    }
 }
 
 /// Convert a bundle of pages into ONE document PDF.
@@ -189,35 +221,156 @@ pub fn convert_document(
     inputs: &[Input],
     policy: &Policy,
 ) -> Result<DocumentOutput, String> {
+    convert_document_with_sources(document_id, inputs, policy, &[])
+}
+
+/// Same converter with strictly validated source image hints from PDF import.
+/// Hints cannot supersede an emitted vector or alter the faithful profile.
+pub fn convert_document_with_sources(
+    document_id: &str,
+    inputs: &[Input],
+    policy: &Policy,
+    sources: &[Option<crate::source_image::EncodedSourceImage>],
+) -> Result<DocumentOutput, String> {
+    let mut effective_policy = policy.clone();
+    if policy.profile == "clearscan" && policy.image_encoding.predictor == 1 {
+        effective_policy.image_encoding.predictor = 0;
+    }
+    let policy = &effective_policy;
+    let total_start = std::time::Instant::now();
+    let mut stage_timings = DocumentStageTimings::default();
     if inputs.is_empty() {
         return Err("document has no pages".into());
     }
-    // 1. per-page conversion into parts + reports
+    // 1. Collect only safe, unprotected single-glyph evidence across the
+    //    document, then convert pages with sibling-page observations available
+    //    to their local reconstruction dictionary.
+    let stage_start = std::time::Instant::now();
+    let all_donors: Vec<Vec<crate::units::Unit>> = inputs
+        .iter()
+        .map(crate::convert::collect_document_donors)
+        .collect();
+    stage_timings.donor_collection_ms = stage_start.elapsed().as_millis();
     let mut pages: Vec<DocumentPage> = Vec::with_capacity(inputs.len());
-    for input in inputs {
-        let (parts, report) = convert_parts(input, policy)?;
+    let stage_start = std::time::Instant::now();
+    for (page_index, input) in inputs.iter().enumerate() {
+        let mut sibling_donors = Vec::new();
+        if policy.profile == "clearscan" {
+            // Bound the experimental evidence set before page conversion.
+            // Repeated text-heavy documents can contain thousands of
+            // siblings; a deterministic page-stratified sample caps tracing
+            // work and avoids letting the first pages dominate.
+            let wanted: std::collections::BTreeSet<String> = input
+                .spans
+                .iter()
+                .flat_map(|span| span.text.chars().map(|c| c.to_string()))
+                .collect();
+            let mut by_label: std::collections::BTreeMap<
+                String,
+                std::collections::BTreeMap<usize, Vec<crate::units::Unit>>,
+            > = std::collections::BTreeMap::new();
+            for (donor_page, donors) in all_donors.iter().enumerate() {
+                if donor_page == page_index {
+                    continue;
+                }
+                for donor in donors {
+                    if !wanted.contains(&donor.semantic_text)
+                        || donor.semantic_text.chars().count() != 1
+                    {
+                        continue;
+                    }
+                    by_label
+                        .entry(donor.semantic_text.clone())
+                        .or_default()
+                        .entry(donor_page)
+                        .or_default()
+                        .push(donor.clone());
+                }
+            }
+            // Round-robin across source pages, not the first N occurrences
+            // from the earliest pages.
+            for (_label, page_donors) in by_label {
+                let mut offsets: std::collections::BTreeMap<usize, usize> =
+                    page_donors.keys().map(|&page| (page, 0)).collect();
+                for _ in 0..32 {
+                    let mut any = false;
+                    for (&donor_page, donors) in &page_donors {
+                        let offset = offsets.get_mut(&donor_page).unwrap();
+                        let Some(source) = donors.get(*offset) else {
+                            continue;
+                        };
+                        *offset += 1;
+                        any = true;
+                        let mut donor = source.clone();
+                        donor.retain_grayscale(
+                            &inputs[donor_page].rgb,
+                            inputs[donor_page].width,
+                            inputs[donor_page].height,
+                        );
+                        donor.symbol_id =
+                            format!("{}:{}", inputs[donor_page].page_id, donor.symbol_id);
+                        donor.span_id = format!("{}:{}", inputs[donor_page].page_id, donor.span_id);
+                        sibling_donors.push(donor);
+                    }
+                    if !any {
+                        break;
+                    }
+                }
+            }
+        } else {
+            // Keep the existing faithful/ClearScan donor behaviour unchanged.
+            for (donor_page, donors) in all_donors.iter().enumerate() {
+                if donor_page == page_index {
+                    continue;
+                }
+                for donor in donors {
+                    let mut donor = donor.clone();
+                    donor.symbol_id = format!("{}:{}", inputs[donor_page].page_id, donor.symbol_id);
+                    donor.span_id = format!("{}:{}", inputs[donor_page].page_id, donor.span_id);
+                    sibling_donors.push(donor);
+                }
+            }
+        }
+        let (mut parts, report) =
+            crate::convert::convert_parts_with_document_donors(input, policy, &sibling_donors)?;
+        if policy.profile == "clearscan" && parts.occurrences.is_empty() {
+            parts.encoded_source = sources
+                .get(page_index)
+                .cloned()
+                .flatten()
+                .filter(|source| source.matches(input));
+        }
         pages.push(DocumentPage { parts, report });
     }
+    stage_timings.page_conversion_ms = stage_start.elapsed().as_millis();
 
     // 2. document-wide font: union of (shape, label), remapped per page
+    let stage_start = std::time::Instant::now();
     let (shapes, encodings, remaps) = union_encodings(&pages);
     for (page, remap) in pages.iter_mut().zip(remaps.iter()) {
         apply_remap(page, remap);
     }
+    stage_timings.document_font_union_ms = stage_start.elapsed().as_millis();
+    let stage_start = std::time::Instant::now();
     let font_bytes = build_font(&shapes, &encodings, policy.upem)?;
+    stage_timings.font_build_ms = stage_start.elapsed().as_millis();
 
     // 3. the reconstruction candidate
-    let (pdf_bytes, stats) = assemble_document(
+    let stage_start = std::time::Instant::now();
+    let (pdf_bytes, stats) = crate::page_pdf::assemble_document_with_options(
         &pages.iter().map(|p| p.parts.clone()).collect::<Vec<_>>(),
         &shapes,
         &encodings,
         &font_bytes,
+        policy.image_encoding,
     )?;
+    stage_timings.reconstruction_pdf_ms = stage_start.elapsed().as_millis();
 
     // 4. the whole-page searchable raster baseline candidate (auto mode ranks
     //    it against the reconstruction by real bytes)
     // the raster-baseline candidate: the same pages with the whole-page source
     // patch and the text layer drawn invisibly (searchable, zero vector ink)
+    let stage_start = std::time::Instant::now();
     let mut baseline_parts: Vec<PageParts> = Vec::new();
     for p in &pages {
         let mut bp = p.parts.clone();
@@ -229,8 +382,16 @@ pub fn convert_document(
         )?];
         baseline_parts.push(bp);
     }
-    let (baseline_pdf, baseline_stats) =
-        assemble_document(&baseline_parts, &shapes, &encodings, &font_bytes)?;
+    stage_timings.raster_baseline_prepare_ms = stage_start.elapsed().as_millis();
+    let stage_start = std::time::Instant::now();
+    let (baseline_pdf, baseline_stats) = crate::page_pdf::assemble_document_with_options(
+        &baseline_parts,
+        &shapes,
+        &encodings,
+        &font_bytes,
+        policy.image_encoding,
+    )?;
+    stage_timings.raster_baseline_pdf_ms = stage_start.elapsed().as_millis();
 
     // 5. candidate accounting + selection
     let _image_xobjects: usize = pages.iter().map(|p| p.parts.patches.len()).sum();
@@ -241,8 +402,9 @@ pub fn convert_document(
             name: "reconstruct".into(),
             pages: pages.len(),
             pdf_bytes: pdf_bytes.len(),
-            font_bytes: font_bytes.len(),
+            font_bytes: stats.font_bytes,
             image_xobjects: stats.image_xobjects,
+            image_references: stats.image_references,
             content_bytes: stats.content_bytes,
             raster_encoded_bytes: stats.raster_encoded_bytes,
             page_fidelity: pages
@@ -253,26 +415,36 @@ pub fn convert_document(
                 .iter()
                 .filter(|p| p.parts.occurrences.is_empty())
                 .count(),
+            image_encoding_ms: stats.image_encoding_ms,
+            assembly_ms: stats.assembly_ms,
         },
         DocumentCandidate {
             name: "raster_baseline".into(),
             pages: baseline_parts.len(),
             pdf_bytes: baseline_pdf.len(),
-            font_bytes: font_bytes.len(),
+            font_bytes: baseline_stats.font_bytes,
             image_xobjects: baseline_stats.image_xobjects,
+            image_references: baseline_stats.image_references,
             content_bytes: baseline_stats.content_bytes,
             raster_encoded_bytes: baseline_stats.raster_encoded_bytes,
             // the raster baseline reproduces the source pixels exactly
             page_fidelity: baseline_parts.iter().map(|_| Some(1.0)).collect(),
             raster_pages: baseline_parts.len(),
+            image_encoding_ms: baseline_stats.image_encoding_ms,
+            assembly_ms: baseline_stats.assembly_ms,
         },
     ];
     // auto: the fidelity policy is a HARD gate — a candidate whose vector units
     // fall below min_ink_iou is disqualified, not ranked by bytes. The raster
     // baseline reproduces the source pixels exactly and is always qualified.
-    let recon_ok = pages
-        .iter()
-        .all(|p| p.report.fidelity.vector_ink_iou_min.is_none_or(|m| m >= policy.min_ink_iou));
+    let recon_ok = pages.iter().all(|p| {
+        (policy.profile == "clearscan"
+            || p.report
+                .fidelity
+                .preservation_ink_iou_min
+                .is_none_or(|m| m >= policy.min_ink_iou))
+            && (policy.profile != "clearscan" || p.report.reconstruction.restoration_qualified)
+    });
     let baseline_ok = true;
     let selected: String = if policy.mode == "auto" {
         if recon_ok && (!baseline_ok || pdf_bytes.len() <= baseline_pdf.len()) {
@@ -288,7 +460,11 @@ pub fn convert_document(
         return Err(format!(
             "fidelity policy violated: vector units measure below min_ink_iou {} on {} page(s)              (use --mode auto to fall back to the raster baseline, or lower the policy explicitly)",
             policy.min_ink_iou,
-            pages.iter().filter(|p| p.report.fidelity.vector_ink_iou_min.is_some_and(|m| m < policy.min_ink_iou)).count()
+            pages.iter().filter(|p| {
+                p.report.fidelity.preservation_ink_iou_min.is_some_and(|m| m < policy.min_ink_iou)
+                    || (policy.profile == "clearscan"
+                        && !p.report.reconstruction.restoration_qualified)
+            }).count()
         ));
     } else {
         "reconstruct".into()
@@ -345,15 +521,29 @@ pub fn convert_document(
         search.pages.push(ps);
     }
 
+    stage_timings.total_ms = total_start.elapsed().as_millis();
+    let measured = stage_timings.donor_collection_ms
+        + stage_timings.page_conversion_ms
+        + stage_timings.document_font_union_ms
+        + stage_timings.font_build_ms
+        + stage_timings.reconstruction_pdf_ms
+        + stage_timings.raster_baseline_prepare_ms
+        + stage_timings.raster_baseline_pdf_ms;
+    stage_timings.remaining_pipeline_ms = stage_timings.total_ms.saturating_sub(measured);
     Ok(DocumentOutput {
         pdf_bytes: out_bytes.clone(),
+        font_bytes: font_bytes.clone(),
+        raster_baseline_pdf_bytes: baseline_pdf.clone(),
         report: DocumentReport {
             document_id: document_id.to_string(),
             min_ink_iou: policy.min_ink_iou,
             page_fidelity: if selected == "raster_baseline" {
                 baseline_parts.iter().map(|_| Some(1.0)).collect()
             } else {
-                pages.iter().map(|p| p.report.fidelity.vector_ink_iou_min).collect()
+                pages
+                    .iter()
+                    .map(|p| p.report.fidelity.vector_ink_iou_min)
+                    .collect()
             },
             pages: pages.len(),
             selected: selected.clone(),
@@ -372,6 +562,11 @@ pub fn convert_document(
             } else {
                 stats.image_xobjects
             },
+            image_references: if selected == "raster_baseline" {
+                baseline_stats.image_references
+            } else {
+                stats.image_references
+            },
             raster_encoded_bytes: if selected == "raster_baseline" {
                 baseline_stats.raster_encoded_bytes
             } else {
@@ -382,6 +577,17 @@ pub fn convert_document(
             } else {
                 stats.content_bytes
             },
+            image_encoding_ms: if selected == "raster_baseline" {
+                baseline_stats.image_encoding_ms
+            } else {
+                stats.image_encoding_ms
+            },
+            assembly_ms: if selected == "raster_baseline" {
+                baseline_stats.assembly_ms
+            } else {
+                stats.assembly_ms
+            },
+            stage_timings,
             page_order: pages.iter().map(|p| p.report.page_id.clone()).collect(),
             page_reports: pages.iter().map(|p| p.report.clone()).collect(),
             coverage,
@@ -390,4 +596,94 @@ pub fn convert_document(
             bindings: Vec::new(),
         },
     })
+}
+
+#[cfg(test)]
+mod semantic_owner_union_tests {
+    use super::*;
+    use crate::convert::{convert_parts, SpanInput, SymbolInput};
+
+    #[test]
+    fn hidden_and_visible_same_unicode_keep_separate_cids_across_pages() {
+        let poly = |b: [f64; 4]| vec![[b[0], b[1]], [b[2], b[1]], [b[2], b[3]], [b[0], b[3]]];
+        let mut rgb = vec![255; 64 * 48 * 3];
+        for y in 10..30 {
+            for x in 20..30 {
+                rgb[(y * 64 + x) * 3..(y * 64 + x) * 3 + 3].fill(0);
+            }
+        }
+        let input = Input {
+            rgb,
+            width: 64,
+            height: 48,
+            page_id: "owner-a".into(),
+            spans: vec![SpanInput {
+                id: "word".into(),
+                text: "ééé".into(),
+                separator_after: "".into(),
+                polygon: poly([4., 8., 47., 32.]),
+                symbols: vec![
+                    SymbolInput {
+                        id: "left".into(),
+                        range: (0, 2),
+                        polygon: poly([5., 10., 15., 30.]),
+                    },
+                    SymbolInput {
+                        id: "middle".into(),
+                        range: (2, 4),
+                        polygon: poly([20., 10., 30., 30.]),
+                    },
+                    SymbolInput {
+                        id: "right".into(),
+                        range: (4, 6),
+                        polygon: poly([35., 10., 45., 30.]),
+                    },
+                ],
+            }],
+            protected_regions: vec![],
+            raster_to_page_pt: [0.24, 0., 0., -0.24, 0., 11.52],
+            pixel_sha256: None,
+        };
+        let policy = Policy {
+            profile: "clearscan".into(),
+            ..Policy::default()
+        };
+        let mut pages = Vec::new();
+        for n in 0..2 {
+            let mut input = input.clone();
+            input.page_id = format!("owner-{n}");
+            let (parts, report) = convert_parts(&input, &policy).unwrap();
+            assert_eq!(parts.occurrences.len(), 1);
+            let visible_shape = parts.occurrences[0].0;
+            let owner = parts.owners.iter().find(|o| o.span_id == "word").unwrap();
+            assert_eq!(owner.characters.len(), 2);
+            for ch in &owner.characters {
+                let (shape, text) = &parts.encodings[ch.cid as usize - 1];
+                assert_eq!(text, "é");
+                assert_ne!(*shape, visible_shape);
+                assert_eq!(parts.shapes[*shape].shape_key, "__semantic_owner_frame");
+            }
+            pages.push(DocumentPage { parts, report });
+        }
+        let (shapes, encodings, remaps) = union_encodings(&pages);
+        assert_eq!(
+            shapes
+                .iter()
+                .filter(|g| g.shape_key == "__semantic_owner_frame")
+                .count(),
+            1
+        );
+        for (page, remap) in pages.iter_mut().zip(&remaps) {
+            apply_remap(page, remap);
+            let visible_shape = page.parts.occurrences[0].0;
+            for owner in &page.parts.owners {
+                for ch in &owner.characters {
+                    let (shape, text) = &encodings[ch.cid as usize - 1];
+                    assert_eq!(text, "é");
+                    assert_ne!(*shape, visible_shape);
+                    assert_eq!(shapes[*shape].shape_key, "__semantic_owner_frame");
+                }
+            }
+        }
+    }
 }

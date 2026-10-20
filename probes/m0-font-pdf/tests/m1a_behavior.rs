@@ -374,6 +374,7 @@ fn m1a10_deterministic_repeat_runs() {
     let strip = |r: &m0_font_pdf::shim::Report| -> String {
         let mut v = serde_json::to_value(r).unwrap();
         v.as_object_mut().unwrap().remove("elapsed_ms");
+        v.as_object_mut().unwrap().remove("stage_timings_ms");
         serde_json::to_string(&v).unwrap()
     };
     assert_eq!(strip(&a.report), strip(&b.report), "report must be byte-identical (excluding timing)");

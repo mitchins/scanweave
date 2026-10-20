@@ -1,0 +1,30 @@
+PASS p14 has raster patches                                1 patches
+PASS p14 poppler: owner runs paint nothing outside patches 0 px
+PASS p14 poppler: patch reproduces source (corr>0.85)      corr=0.8709
+PASS p14 pdfium: owner runs paint nothing outside patches  0 px
+PASS p14 pdfium: patch reproduces source (corr>0.78)       corr=0.8274
+PASS p10 page1 pdfium native search 'Page 1 of 4'          
+PASS p10 page1 pdfium contains 'Page 1 of 4.'              'ia\r\nReference: INV-2026-0042\r\nPage 1 of 4.\r\nPlease pay within 30 days.'
+PASS p10 page1 poppler 'Page 1 of 4.'                      
+PASS p10 page1 poppler order (Reference before Page)       
+PASS p10 page1 no duplicate 'Totalamountdue:'              count=1
+PASS p10 page1 no duplicate 'INV-2026-0042'                count=1
+PASS p10 page1 owner label not hoisted to the end          '4.\r\nPlease pay within 30 days.'
+PASS p10 page1 '1' appears exactly once (inline)           'age1of4.Pleasepaywithin30days.'
+PASS p13 pdfium searchable 'cewons||||'                    'cewons||||\r\n“Batance\r\n-4700 —_\r\ncewons||||\r\nRef INV-2026-004'
+PASS p13 poppler searchable 'cewons||||'                   
+PASS p13 pdfium searchable '“Batance'                      'cewons||||\r\n“Batance\r\n-4700 —_\r\ncewons||||\r\nRef INV-2026-004'
+PASS p13 poppler searchable '“Batance'                     
+PASS p13 pdfium searchable '-4700'                         'cewons||||\r\n“Batance\r\n-4700 —_\r\ncewons||||\r\nRef INV-2026-004'
+PASS p13 poppler searchable '-4700'                        
+PASS p13 pdfium searchable '—_'                            'cewons||||\r\n“Batance\r\n-4700 —_\r\ncewons||||\r\nRef INV-2026-004'
+PASS p13 poppler searchable '—_'                           
+PASS p13 pdfium searchable 'Ref'                           'cewons||||\r\n“Batance\r\n-4700 —_\r\ncewons||||\r\nRef INV-2026-004'
+PASS p13 poppler searchable 'Ref'                          
+PASS p13 pdfium searchable 'INV-2026-004'                  'cewons||||\r\n“Batance\r\n-4700 —_\r\ncewons||||\r\nRef INV-2026-004'
+PASS p13 poppler searchable 'INV-2026-004'                 
+PASS p13 pdfium searchable 'prio'                          'cewons||||\r\n“Batance\r\n-4700 —_\r\ncewons||||\r\nRef INV-2026-004'
+PASS p13 poppler searchable 'prio'                         
+PASS p13 no invented split in 'INV-2026-004'               
+
+FAILED: none

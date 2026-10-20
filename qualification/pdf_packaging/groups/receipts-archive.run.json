@@ -1,0 +1,21 @@
+{
+  "group": "receipts",
+  "arm": "archive",
+  "command": [
+    "/tmp/scanweave-competitive-venv/bin/recode_pdf",
+    "-P",
+    "/data/coding/scanweave/qualification/pdf_packaging/groups/receipts-input.pdf",
+    "-T",
+    "/data/coding/scanweave/qualification/pdf_packaging/groups/receipts.hocr",
+    "-o",
+    "/data/coding/scanweave/qualification/pdf_packaging/groups/receipts-archive.pdf",
+    "--mask-compression",
+    "ccitt",
+    "--threads",
+    "1"
+  ],
+  "status": 0,
+  "seconds": 11.297265700006392,
+  "timing_scope": "recode only; uses separately recorded Tesseract preparation",
+  "pdf_bytes": 400705
+}

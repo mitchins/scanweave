@@ -1,0 +1,18 @@
+{
+  "group": "historical",
+  "arm": "ocrmypdf3",
+  "command": [
+    "/tmp/scanweave-competitive-venv/bin/ocrmypdf",
+    "--jobs",
+    "1",
+    "--output-type",
+    "pdf",
+    "-O3",
+    "/data/coding/scanweave/qualification/pdf_packaging/groups/historical-input.pdf",
+    "/data/coding/scanweave/qualification/pdf_packaging/groups/historical-ocrmypdf3.pdf"
+  ],
+  "status": 0,
+  "error": null,
+  "seconds": 38.540427605010336,
+  "pdf_bytes": 5802054
+}
