@@ -330,7 +330,7 @@ pub fn extract_units(seg: &Segmentation, w: u32, h: u32, page: &OcrPage) -> (Vec
 /// Exact binary mask identity: dimensions are part of the geometry, not
 /// recoverable from the packed row-major bit stream.
 pub(crate) fn mask_identity_key(mask: &[bool], width: usize, height: usize) -> String {
-    let mut packed: Vec<u8> = Vec::with_capacity(8 + (mask.len() + 7) / 8);
+    let mut packed: Vec<u8> = Vec::with_capacity(8 + mask.len().div_ceil(8));
     packed.extend_from_slice(&(width as u32).to_le_bytes());
     packed.extend_from_slice(&(height as u32).to_le_bytes());
     packed.extend(mask.chunks(8).map(|c| {

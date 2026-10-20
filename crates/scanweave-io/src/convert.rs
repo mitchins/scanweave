@@ -2366,7 +2366,7 @@ fn protect_weak_rules(
     let max_gap = 4 * scale;
     let light = paper.iter().map(|&v| v as u16).sum::<u16>() / 3;
     let lum: Vec<u16> = rgb
-        .chunks_exact(3)
+        .as_chunks::<3>().0.iter()
         .map(|p| (p[0] as u16 + p[1] as u16 + p[2] as u16) / 3)
         .collect();
     let weak = |at: usize| lum[at] >= light.saturating_sub(32) && lum[at] + 3 <= light;
@@ -2519,7 +2519,7 @@ fn dilated_ink_guard(
 /// replaced source ink has been removed. Native-resolution fallback and
 /// artwork patches are painted above it.
 fn downsampled_background_patch(source_rgb: &[u8], w: u32, h: u32, dpi: f64) -> Patch {
-    let target_dpi = dpi.min(150.0).max(72.0);
+    let target_dpi = dpi.clamp(72.0, 150.0);
     let scale = target_dpi / dpi.max(1.0);
     let bw = ((w as f64 * scale).round() as u32).max(1);
     let bh = ((h as f64 * scale).round() as u32).max(1);
@@ -2580,8 +2580,8 @@ fn compact_paper_background(
     let cell = (4 * w).div_ceil(base.w).max(4);
     for (i, (a, b)) in base
         .rgb
-        .chunks_exact(3)
-        .zip(restored.as_raw().chunks_exact(3))
+        .as_chunks::<3>().0.iter()
+        .zip(restored.as_raw().as_chunks::<3>().0.iter())
         .enumerate()
     {
         if covered[i] {

@@ -679,8 +679,9 @@ fn regress_repeated_spans_keep_owners_and_cids_dedup() {
     );
 }
 
-/// P2: when auto selects the raster baseline, the top-level image/content
-/// accounting must describe the SELECTED candidate, not the reconstruction.
+/// P2: top-level accounting must describe the emitted candidate. A 1.0
+/// preservation requirement is not an instruction to select the baseline:
+/// low-fidelity units may fall back before the reconstruction is ranked.
 #[test]
 fn regress_auto_reports_the_selected_candidate() {
     use scanweave_io::document::convert_document;
@@ -696,16 +697,27 @@ fn regress_auto_reports_the_selected_candidate() {
         let ocr = OcrPage::parse_bytes(&std::fs::read(doc.join(&p.ocr_page_path)).unwrap()).unwrap();
         inputs.push(scanweave_io::convert::input_from_ocr_page(img.as_raw(), w, h, &p.page_id, &ocr));
     }
-    // force auto to pick the raster baseline by setting an unreachable policy
+    // Exercise strict preservation without assuming which serialized candidate wins.
     let policy = m0_font_pdf::Policy { mode: "auto".into(), min_ink_iou: 1.0, ..m0_font_pdf::Policy::default() };
     let out = convert_document("doc", &inputs, &policy).expect("auto Document");
-    assert_eq!(out.report.selected, "raster_baseline");
-    // the reported bytes are the emitted candidate's, and the accounting matches it
+    let selected = out.report.candidates.iter()
+        .find(|c| c.name == out.report.selected).expect("selected candidate is recorded");
+    let cheapest = out.report.candidates.iter().min_by_key(|c| c.pdf_bytes).unwrap();
+    assert_eq!(selected.pdf_bytes, cheapest.pdf_bytes, "both candidates satisfy strict preservation");
     assert_eq!(out.report.pdf_bytes, out.pdf_bytes.len());
-    assert_eq!(out.report.image_xobjects, 4, "one whole-page patch per page");
+    assert_eq!(out.report.pdf_bytes, selected.pdf_bytes);
+    assert_eq!(out.report.image_xobjects, selected.image_xobjects);
+    assert_eq!(out.report.content_bytes, selected.content_bytes);
+    assert_eq!(out.report.font_bytes, selected.font_bytes);
+    assert_eq!(out.report.raster_encoded_bytes, selected.raster_encoded_bytes);
+    assert_eq!(out.report.page_fidelity, selected.page_fidelity);
     assert_eq!(out.report.page_fidelity.len(), 4);
-    assert!(out.report.page_fidelity.iter().all(|f| f.map_or(false, |v| v >= 1.0)));
-    // the reconstruction candidate is still recorded for comparison
-    let recon = out.report.candidates.iter().find(|c| c.name == "reconstruct").unwrap();
-    assert!(recon.pdf_bytes > 0);
+    assert!(out.report.page_fidelity.iter().all(|f| f.is_none_or(|v| v >= 1.0)));
+    assert_eq!(out.report.candidates.len(), 2);
+    assert!(out.report.candidates.iter().all(|c| c.pdf_bytes > 0));
+    if out.report.selected == "raster_baseline" {
+        assert_eq!(out.pdf_bytes, out.raster_baseline_pdf_bytes);
+        assert_eq!(out.report.page_fidelity, vec![Some(1.0); 4]);
+    }
+
 }

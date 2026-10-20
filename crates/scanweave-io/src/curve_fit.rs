@@ -154,7 +154,7 @@ pub(crate) fn layers(unit: &Unit, paper: f64, ink: f64, level: f64) -> Option<Ve
         .collect();
     let mut output = Vec::new();
     for (i, r) in rings.iter().enumerate() {
-        if depths[i] % 2 != 0 {
+        if !depths[i].is_multiple_of(2) {
             continue;
         }
         let holes = rings

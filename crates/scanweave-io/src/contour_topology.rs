@@ -3,7 +3,7 @@
 use crate::glyphs::ContourLayer;
 type P = [f64; 2];
 fn polygon(c: &[P]) -> Vec<P> {
-    if c.len() < 4 || (c.len() - 1) % 3 != 0 {
+    if c.len() < 4 || !(c.len() - 1).is_multiple_of(3) {
         return Vec::new();
     }
     let mut path = kurbo::BezPath::new();

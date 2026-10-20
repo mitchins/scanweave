@@ -49,6 +49,19 @@ recognition. See [real-document results](CLEARSCAN_REAL_DOCUMENT_REPORT.md) and
 known failures. Earlier milestone reports document historical development;
 M1-C is not the current feature set. The independent holdout remains sealed.
 
+### Measured real-document state
+
+On the fixed 32-page development corpus, current ClearScan outputs total
+59,599,260 bytes versus 81,309,831 previously and 81,969,566 input bytes.
+Adobe XI totals 4,178,103 bytes on the same inputs: substantial tonal-raster
+and shaded-page limitations remain. CORD annotated numeric search is 17/49;
+some pages still yield no usable OCR or vector reconstruction.
+
+The accumulated implementation is under review in [PR #1](https://github.com/mitchins/scanweave/pull/1).
+It remains draft: the inherited damaged-crossbar donor-repair regression is
+unresolved. See [publication and CI status](GITHUB_CONSOLIDATION.md); no skipped
+local test is presented as a green workspace run.
+
 ## Build
 
 ```bash

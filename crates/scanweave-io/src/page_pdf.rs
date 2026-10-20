@@ -123,17 +123,17 @@ fn canonical_patch(
     let is_gray = options.grayscale_equal_channels
         && patch
             .rgb
-            .chunks_exact(3)
+            .as_chunks::<3>().0.iter()
             .all(|p| p[0] == p[1] && p[1] == p[2]);
     let samples = if is_gray {
-        patch.rgb.chunks_exact(3).map(|p| p[0]).collect::<Vec<_>>()
+        patch.rgb.as_chunks::<3>().0.iter().map(|p| p[0]).collect::<Vec<_>>()
     } else {
         patch.rgb.clone()
     };
     if is_gray
         && samples
             .iter()
-            .zip(patch.rgb.chunks_exact(3))
+            .zip(patch.rgb.as_chunks::<3>().0.iter())
             .any(|(g, rgb)| *g != rgb[0] || rgb[0] != rgb[1] || rgb[1] != rgb[2])
     {
         return Err("DeviceGray expansion check failed".into());
