@@ -15,6 +15,8 @@ The intact ten-witness cohort existed. Candidate discovery compared damaged `e` 
 
 See `qualification/pr_closure/DONOR_FIX.md`. Final evaluator-only pristine IoU improves .8137 source → .9712 Poppler / .9744 PDFium. The old standalone evaluator's faithful-to-source ordering assertion still fails from source-patch sampling; its failure is retained, not hidden. It is not an unfiltered CI failure. Inherited P01–P08 visual limitations remain recorded in prior reports and are not reclassified as passing by green CI.
 
+PR #3: https://github.com/mitchins/scanweave/pull/3 is the separate evidence-only closure PR, based on corrected PR1. CodeRabbit review was explicitly requested and completed. Its historical-audit reuse finding was addressed by excluding the nonmatched historical arm from the paired measurement script and regenerating the matched results. Independent review also completed; no candidate implementation is promoted. Latest CI status is available on the PR.
+
 ## Separate bounded handoff branch
 
 `fix/replacement-fringe-handoff` starts at corrected product `0e82e64`, not the rejected shaded-paper evidence branch. Segmentation and pixel-contact trial patches were reused unchanged: 792 observations, 495,223 foreground pixels, 73 visible occurrence records. The 12 fixed regions are preserved in `qualification/fringe_handoff/regions.json`. Faithful and the sealed holdout were untouched.
@@ -52,7 +54,7 @@ B-active wall time **22.93 s**, peak RSS **159,924 KiB**, including verbose pred
 
 ## Visual decision: reject both; product unchanged
 
-Actual native full page and twelve enlarged regions were inspected in PDFium and Poppler. The `G` retains a faint raster ring beside a rough stair-stepped vector contour. The `1`/`9` outlines remain visibly stair-stepped; several cleaned letters have heavy stem/edge artifacts. Adobe's corresponding outline is visibly smoother, but is not treated as original-font truth. A cleans some donor-supported pale traces; this does not fix unsupported local-vector quality or the seven no-halo regions.
+Actual native full page and twelve enlarged regions were inspected in PDFium and Poppler. The `G` retains a faint raster ring beside a rough stair-stepped vector contour. The `1`/`9` outlines remain visibly stair-stepped; several cleaned letters have heavy stem/edge artifacts. Adobe's corresponding outline is visibly smoother, but is not treated as original-font truth. A suppresses some donor-supported pale samples; this does not fix unsupported local-vector quality or the seven no-halo regions.
 
 [PDFium fixed-region sheet](qualification/fringe_handoff/pdfium-twelve.png), [Poppler sheet](qualification/fringe_handoff/poppler-twelve.png), [actual A/B PDF](qualification/fringe_handoff/a.pdf), [vector-only PDF](qualification/fringe_handoff/a-vector.pdf). The B-active PDF is byte-identical to the linked A PDF, SHA `540638347359a1ffb8f5dd6c0665d4db97f91fc432aab3444a881deb7375d585`. Raster-only layers and normal-size full pages are reproducible using `render.py`.
 

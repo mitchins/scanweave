@@ -20,12 +20,10 @@ def dilate(m):
  p=np.pad(m,1);return np.logical_or.reduce([p[y:y+h,x:x+w] for y in range(3) for x in range(3)])
 def core_mask(o):
  m=np.zeros((h,w),bool);idx=np.array(o['ink']);ys=idx//o['width']+int(o['bbox'][1]);xs=idx%o['width']+int(o['bbox'][0]);m[ys,xs]=True;return m
-regions=json.loads((B/'regions.json').read_text());rows=[];per=[];oldpath=R/'qualification/shaded_paper/b.pdf'
-for arm,base in [('previous_trial',oldpath),('control',B/'control.pdf'),('a',B/'a.pdf'),('b',B/'b-active.pdf')]:
+regions=json.loads((B/'regions.json').read_text());rows=[];per=[];
+for arm,base in [('control',B/'control.pdf'),('a',B/'a.pdf'),('b',B/'b-active.pdf')]:
  if not base.exists():continue
- if arm=='previous_trial':audit=json.loads((B/'a-ownership.json').read_text())
- else:
-  log=base.with_suffix('.log');records=[json.loads(s.split(' ',1)[1]) for s in log.read_text().splitlines() if s.startswith('FRINGE_SOURCE_AUDIT ')];assert len(records)==1;audit=records[0];(B/(arm+'-ownership.json')).write_text(json.dumps(audit,indent=2))
+ log=base.with_suffix('.log');records=[json.loads(s.split(' ',1)[1]) for s in log.read_text().splitlines() if s.startswith('FRINGE_SOURCE_AUDIT ')];assert len(records)==1;audit=records[0];(B/(arm+'-ownership.json')).write_text(json.dumps(audit,indent=2))
  assert int(foreground.sum())==audit['foreground_pixels']==495223
  owners={o['id']:o for o in audit['owners']};union=np.zeros((h,w),bool)
  for o in owners.values():union|=core_mask(o)
