@@ -29,7 +29,9 @@ jobs:
       - name: Install pinned Rust coverage tool
         run: cargo install cargo-llvm-cov --version 0.9.1 --locked
       - name: Measure Rust workspace coverage
-        run: cargo llvm-cov --workspace --lcov --output-path coverage/lcov.info
+        run: |
+          mkdir -p coverage
+          cargo llvm-cov --workspace --lcov --output-path coverage/lcov.info
       - name: Require analysis credential
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}

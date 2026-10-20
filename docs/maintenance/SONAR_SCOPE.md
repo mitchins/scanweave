@@ -16,10 +16,12 @@ Rust coverage is measured with pinned cargo-llvm-cov0.9.1 and llvm-tools-preview
 
 Every external action uses a full verified commit SHA. `action-pins.json` records the official tagged release and repository; JavaScript actions use Node24, while dtolnay v1 is composite. Rust1.99.0 selection is distinct from the action revision. Runners are ubuntu-24.04. Repository token permissions are contents:read; checkout credentials are not persisted. Sonar jobs run only on main pushes or same-repository PRs, excluding Dependabot; the secret is supplied only to credential validation and the official scanner. No pull_request_target, secret forwarding, custom privileged checkout or token output is used. Full Git history supports blame/new-code analysis. Missing credentials fail explicitly.
 
-Automatic analysis must be disabled in Sonar Administration → Analysis Method when adopting CI analysis. An operator check is pending; no administrative setting or Quality Gate is claimed changed. CI waits for server processing and the existing Quality Gate, without weakening it. Source-scope reductions and code remediation will be reported separately.
+Automatic analysis must be disabled in Sonar Administration → Analysis Method when adopting CI analysis. Public settings and the operator confirm automatic analysis is already disabled. No administrative setting or Quality Gate was changed. CI waits for server processing and the existing Quality Gate, without weakening it. Source-scope reductions and code remediation will be reported separately.
 
 ## Documentation and reproduction
 
 README prose185 words (~56 seconds at200 wpm). Debian package names are present in the development environment; macOS commands use officially verified Homebrew poppler/tesseract formulae, but were not executed on a macOS host. Rust is installed with rustup and its repository toolchain file selects1.99.0. Conversion command is the existing normal CLI, not an unpublished binary distribution. All prior README technical content is preserved in `docs/DEVELOPER_GUIDE.md`; root-relative technical links were adjusted. Deferred OCR reconciliation is recorded only in LEDGER.md, not implemented.
 
 Fresh scoped measurements, issue dispositions, review and CI results will be recorded after the first real PR analysis. No lower dashboard count is yet described as a code fix or successful Quality Gate.
+
+First real PR CI39513352555 passed all original contracts on ef70687. Instrumented tests also passed, but LCOV writing failed because coverage/ did not exist; confirmed CodeRabbit finding4331346845. The workflow now creates that directory explicitly. Python analysis is explicitly set to the tested3.12 version. A fresh run is required; the failed report is not counted as measured coverage.
