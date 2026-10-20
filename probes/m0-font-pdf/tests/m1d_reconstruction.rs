@@ -82,7 +82,8 @@ fn clearscan_repairs_a_damaged_glyph_from_same_document_donors() {
     let emitted = clearscan.report.reconstruction.canonical_geometry.iter()
         .find(|g| g.prototype_id == selected.prototype_id).unwrap();
     assert_eq!(emitted.witness_symbol_id, witness.symbol_id);
-    assert_eq!(selected.members.len(), 10);
+    assert_eq!(selected.members, prototype.members);
+    assert!(selected.members.contains(&selected.representative_symbol_id));
     assert!(repaired[0].similarity.unwrap() >= 0.78);
     assert!(repaired[0].prototype_trace_iou.unwrap() >= 0.90);
 

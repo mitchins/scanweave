@@ -513,7 +513,7 @@ pub fn reconstruct(
     }
 
     // Evidence keys must not follow earlier occurrences' prototype remapping.
-    let original_units: Vec<_> = plan.owned.iter().map(|o| o.unit.clone()).collect();
+    let original_keys: Vec<_> = plan.owned.iter().map(|o| o.unit.shape_key.clone()).collect();
     for i in 0..n {
         let u = &plan.owned[i].unit;
         let source_key = u.shape_key.clone();
@@ -587,11 +587,12 @@ pub fn reconstruct(
                 .flatten()
                 .map(|&m| evidence[m].density)
                 .fold(f64::INFINITY, f64::min);
-            let mut donor = if family_rep == rep {
-                plan.owned[rep].unit.clone()
-            } else {
-                original_units[rep].clone()
-            };
+            // Only shape_key is remapped in this loop; retain the original
+            // witness key without duplicating every mask/grayscale buffer.
+            let mut donor = plan.owned[rep].unit.clone();
+            if family_rep != rep {
+                donor.shape_key = original_keys[rep].clone();
+            }
             let donor_key = donor.shape_key.clone();
             let threshold = if !donor.symbol_id.starts_with("__doc_donor:") {
                 refine_observed_mask(&mut donor, rgb, page_w, page_h)

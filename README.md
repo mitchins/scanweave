@@ -58,8 +58,10 @@ and shaded-page limitations remain. CORD annotated numeric search is 17/49;
 some pages still yield no usable OCR or vector reconstruction.
 
 The accumulated implementation is under review in [PR #1](https://github.com/mitchins/scanweave/pull/1).
-It remains draft: the inherited damaged-crossbar donor-repair regression is
-unresolved. See [publication and CI status](GITHUB_CONSOLIDATION.md); no skipped
+The damaged-crossbar donor regression is now corrected by selecting a supported
+actual witness when a cohort medoid is unsuitable; all original assertions and
+thresholds remain. See [the repair evidence](qualification/pr_closure/DONOR_FIX.md)
+and [publication status](GITHUB_CONSOLIDATION.md) for CI/review history. No skipped
 local test is presented as a green workspace run.
 
 ## Build
