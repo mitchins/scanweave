@@ -1,0 +1,32 @@
+{
+  "actions/checkout": {
+    "repo": "actions/checkout",
+    "tag": "v7.0.1",
+    "sha": "3d3c42e5aac5ba805825da76410c181273ba90b1",
+    "release_url": "https://github.com/actions/checkout/releases/tag/v7.0.1"
+  },
+  "actions/cache": {
+    "repo": "actions/cache",
+    "tag": "v6.1.0",
+    "sha": "55cc8345863c7cc4c66a329aec7e433d2d1c52a9",
+    "release_url": "https://github.com/actions/cache/releases/tag/v6.1.0"
+  },
+  "actions/setup-python": {
+    "repo": "actions/setup-python",
+    "tag": "v7.0.0",
+    "sha": "5fda3b95a4ea91299a34e894583c3862153e4b97",
+    "release_url": "https://github.com/actions/setup-python/releases/tag/v7.0.0"
+  },
+  "SonarSource/sonarqube-scan-action": {
+    "repo": "SonarSource/sonarqube-scan-action",
+    "tag": "v8.3.0",
+    "sha": "d209202bc7d53ff1cc128f7f907dac145c9d6ae9",
+    "release_url": "https://github.com/SonarSource/sonarqube-scan-action/releases/tag/v8.3.0"
+  },
+  "dtolnay/rust-toolchain": {
+    "repo": "dtolnay/rust-toolchain",
+    "tag": "v1",
+    "sha": "683b588c487a69d01f6c6ddf40f036ff682cc2c8",
+    "runtime": "composite; Rust channel is selected separately"
+  }
+}
