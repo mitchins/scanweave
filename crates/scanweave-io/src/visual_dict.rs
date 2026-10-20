@@ -512,11 +512,13 @@ pub fn reconstruct(
         });
     }
 
+    // Evidence keys must not follow earlier occurrences' prototype remapping.
+    let original_units: Vec<_> = plan.owned.iter().map(|o| o.unit.clone()).collect();
     for i in 0..n {
         let u = &plan.owned[i].unit;
         let source_key = u.shape_key.clone();
         let target_ocr_bbox = u.ocr_bbox_px;
-        let mut best: Option<(usize, f64)> = None;
+        let mut best: Option<(usize, usize, f64)> = None;
         for (&rep, members) in &cohorts {
             if rep == i
                 || u.semantic_text != plan.owned[rep].unit.semantic_text
@@ -539,8 +541,29 @@ pub fn reconstruct(
             } else {
                 (0.62..0.94).contains(&score)
             };
-            if members.len() >= 3 && score_ok && best.map(|(_, b)| score > b).unwrap_or(true) {
-                best = Some((rep, score));
+            if members.len() >= 3 && score_ok && best.map(|(_, _, b)| score > b).unwrap_or(true) {
+                best = Some((rep, rep, score));
+            } else if policy.profile == "clearscan"
+                && !score_ok
+                && evidence[i].density < min_donor_density - 0.01
+            {
+                // A cohort medoid is not necessarily the best repair witness:
+                // sampling phase can hide a valid same-family donor match.
+                // Keep the original .78 test, require three agreeing witnesses,
+                // and trace the actual matching donor rather than reporting a
+                // good member score for an unsupported medoid outline.
+                let witnesses: Vec<(usize, f64)> = members.iter().copied()
+                    .filter(|&m| m != i && style_compatible(&evidence[i], &evidence[m]))
+                    .map(|m| (m, normalized_iou(u, &plan.owned[m].unit)))
+                    .filter(|(_, similarity)| *similarity >= 0.78)
+                    .collect();
+                if witnesses.len() >= 3 {
+                    let &(donor, similarity) = witnesses.iter()
+                        .max_by(|a,b| a.1.total_cmp(&b.1)).unwrap();
+                    if best.is_none_or(|(_, _, b)| similarity > b) {
+                        best = Some((rep, donor, similarity));
+                    }
+                }
             }
         }
         let mut record = GlyphOccurrence {
@@ -557,43 +580,53 @@ pub fn reconstruct(
             restoration_evidence_passed: false,
             decision: "no_supported_donor".into(),
         };
-        if let Some((rep, score)) = best {
+        if let Some((family_rep, rep, score)) = best {
             let min_donor_density = cohorts
-                .get(&rep)
+                .get(&family_rep)
                 .into_iter()
                 .flatten()
                 .map(|&m| evidence[m].density)
                 .fold(f64::INFINITY, f64::min);
-            let mut donor = plan.owned[rep].unit.clone();
+            let mut donor = if family_rep == rep {
+                plan.owned[rep].unit.clone()
+            } else {
+                original_units[rep].clone()
+            };
             let donor_key = donor.shape_key.clone();
-            if !donor.symbol_id.starts_with("__doc_donor:") {
-                let _threshold = refine_observed_mask(&mut donor, rgb, page_w, page_h);
-            }
+            let threshold = if !donor.symbol_id.starts_with("__doc_donor:") {
+                refine_observed_mask(&mut donor, rgb, page_w, page_h)
+            } else { 0 };
             let sid = u.symbol_id.clone();
             record.restoration_evidence_passed = if policy.profile == "clearscan" {
-                cohorts.get(&rep).is_some_and(|members| members.len() >= 3) && score >= 0.78
+                cohorts.get(&family_rep).is_some_and(|members| members.len() >= 3) && score >= 0.78
             } else {
-                restoration_gate(score, cohorts.get(&rep).map(Vec::len).unwrap_or(0))
+                restoration_gate(score, cohorts.get(&family_rep).map(Vec::len).unwrap_or(0))
             };
             record.similarity = Some(score);
             if record.restoration_evidence_passed {
                 record.replacement_bbox_px = Some(infer_replacement_bbox(
                     u.ocr_bbox_px,
-                    cohorts.get(&rep).map(Vec::as_slice).unwrap_or(&[]),
+                    cohorts.get(&family_rep).map(Vec::as_slice).unwrap_or(&[]),
                     &plan.owned,
                 ));
                 plan.owned[i].unit.shape_key = donor_key.clone();
+                let prototype_id = format!("prototype:{donor_key}");
+                if !out.prototypes.iter().any(|p| p.prototype_id == prototype_id) {
+                    out.prototypes.push(GlyphPrototype {
+                        prototype_id: prototype_id.clone(),
+                        representative_symbol_id: donor.symbol_id.clone(),
+                        members: cohorts[&family_rep].iter()
+                            .map(|&m| plan.owned[m].unit.symbol_id.clone()).collect(),
+                        outline_threshold_luma: threshold,
+                    });
+                }
                 out.prototype_units.insert(donor_key.clone(), donor);
-                record.prototype_id = Some(format!("prototype:{donor_key}"));
+                record.prototype_id = Some(prototype_id);
                 let source_is_damaged = evidence[i].density < min_donor_density - 0.01;
                 if source_is_damaged {
                     out.repaired_symbols.insert(sid);
                     record.repaired = true;
-                    record.decision = if policy.profile == "clearscan" {
-                        "canonical_repair_from_document_witnesses".into()
-                    } else {
-                        "repaired_from_document_donors".into()
-                    };
+                    record.decision = "repaired_from_document_donors".into();
                 } else {
                     out.reused_symbols.insert(sid);
                     record.reused = true;

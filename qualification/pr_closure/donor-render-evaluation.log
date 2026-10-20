@@ -1,0 +1,7 @@
+Traceback (most recent call last):
+  File "/data/coding/scanweave/qualification/evaluate_m1d_reconstruction.py", line 140, in <module>
+    main()
+  File "/data/coding/scanweave/qualification/evaluate_m1d_reconstruction.py", line 65, in main
+    assert faithful_source_iou > clear_source_iou, "faithful output does not retain the damaged source shape"
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: faithful output does not retain the damaged source shape

@@ -1,0 +1,49 @@
+{
+  "comparison": [
+    {
+      "renderer": "poppler",
+      "source_to_pristine_iou": 0.8137254901960784,
+      "faithful_to_pristine_iou": 0.6570605187319885,
+      "faithful_to_source_iou": 0.7679180887372014,
+      "clearscan_to_pristine_iou": 0.9711538461538461,
+      "clearscan_to_source_iou": 0.7942122186495176
+    },
+    {
+      "renderer": "pdfium",
+      "source_to_pristine_iou": 0.8137254901960784,
+      "pdfium_effective_dpi": 299.999991883623,
+      "faithful_to_pristine_iou": 0.7345679012345679,
+      "faithful_to_source_iou": 0.8634686346863468,
+      "clearscan_to_pristine_iou": 0.9743589743589743,
+      "clearscan_to_source_iou": 0.797427652733119
+    }
+  ],
+  "validity_search": [
+    {
+      "arm": "faithful",
+      "native_text": "e\r\ne\r\ne\r\ne\r\ne\r\ne\r\ne\r\ne\r\ne\r\ne\r\ne\r\ne\r\n6\r\n6\r\n6\r\ne\r\ne\r\ne\r\n8\r\n8\r\n8\r\n0\r\n0\r\n0\r\nO\r\nO\r\nO",
+      "poppler_text": "e e\ne e e\ne\ne e e e\n6 6 6\ne e\n8 8 8\ne e e\n0 0 0\nO O O\n\f",
+      "qpdf_status": 0,
+      "fonts": [
+        {
+          "glyphs": 22,
+          "ots_status": 0
+        }
+      ]
+    },
+    {
+      "arm": "clearscan",
+      "native_text": "e\r\ne\r\ne\r\ne\r\ne\r\ne\r\ne\r\ne\r\ne\r\ne\r\ne\r\ne\r\n6\r\n6\r\n6\r\ne\r\ne\r\ne\r\n8\r\n8\r\n8\r\n0\r\n0\r\n0\r\nO\r\nO\r\nO",
+      "poppler_text": "e e\ne e e\ne\ne e e e\n6 6 6\ne e\n8 8 8\ne e e\n0 0 0\nOOO\n\f",
+      "qpdf_status": 0,
+      "fonts": [
+        {
+          "glyphs": 17,
+          "ots_status": 0
+        }
+      ]
+    }
+  ],
+  "old_evaluator_failure": "faithful-to-source IoU is not necessarily larger than repaired-to-source IoU under source-patch sampling; old assertion retained and its failure logged, not weakened",
+  "note": "This evaluator reads pristine truth; the converter does not."
+}
