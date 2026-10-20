@@ -25,3 +25,7 @@ README prose185 words (~56 seconds at200 wpm). Debian package names are present 
 Fresh scoped measurements, issue dispositions, review and CI results will be recorded after the first real PR analysis. No lower dashboard count is yet described as a code fix or successful Quality Gate.
 
 First real PR CI39513352555 passed all original contracts on ef70687. Instrumented tests also passed, but LCOV writing failed because coverage/ did not exist; confirmed CodeRabbit finding4331346845. The workflow now creates that directory explicitly. Python analysis is explicitly set to the tested3.12 version. A fresh run is required; the failed report is not counted as measured coverage.
+
+## Frozen Rust evidence correction
+
+The first complete main scan correctly added Rust but also indexed eight archived implementation snapshots in qualification/clearscan_typography. These are rejected trial/baseline source copies, not Cargo targets or active qualification utilities. The exact eight paths and SHA-256 identities are in frozen-rust-evidence.json; only those paths are now excluded. All active Python scripts in that directory, all crates/probes Rust, tests and the C UI utility remain in scope. Their removal is an evidence-scope correction, not remediation of a production finding. No file is deleted or changed.
