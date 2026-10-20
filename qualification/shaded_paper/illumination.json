@@ -1,0 +1,61 @@
+{
+  "page_size": [
+    1676,
+    2287
+  ],
+  "paper_corner_rgb": [
+    41,
+    40,
+    43
+  ],
+  "page_median_gray": 183.0,
+  "global_foreground_fraction": 0.6974423769088122,
+  "candidate_foreground_fraction": 0.12919943897905878,
+  "regions": {
+    "dark_outer_margin": {
+      "bbox_px": [
+        1460,
+        300,
+        1650,
+        2100
+      ],
+      "global_foreground_fraction": 0.0,
+      "candidate_foreground_fraction": 0.0,
+      "median_gray": 42.0
+    },
+    "unprinted_top_paper": {
+      "bbox_px": [
+        300,
+        230,
+        1100,
+        320
+      ],
+      "global_foreground_fraction": 1.0,
+      "candidate_foreground_fraction": 0.0,
+      "median_gray": 191.0
+    },
+    "printed_text_and_interline": {
+      "bbox_px": [
+        220,
+        410,
+        1140,
+        1300
+      ],
+      "global_foreground_fraction": 0.9293893502686859,
+      "candidate_foreground_fraction": 0.1390779189057157,
+      "median_gray": 185.0
+    },
+    "showthrough_and_spots": {
+      "bbox_px": [
+        240,
+        1330,
+        1100,
+        1510
+      ],
+      "global_foreground_fraction": 0.99937338501292,
+      "candidate_foreground_fraction": 0.0017248062015503877,
+      "median_gray": 189.0
+    }
+  },
+  "note": "region fractions measure classification, not character accuracy"
+}

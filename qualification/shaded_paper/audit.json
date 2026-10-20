@@ -1,0 +1,92 @@
+[
+  {
+    "arm": "a",
+    "bytes": 5186191,
+    "raster_bytes": 5171835,
+    "font_bytes": 487,
+    "content_bytes": 11883,
+    "overhead_bytes": 1986,
+    "actual_glyph_draws": 0,
+    "unique_painted_gids": 0,
+    "visible_owner_records": 0,
+    "observations": 792,
+    "ocr_chars": 860,
+    "ink_suppressed_pixels": 0,
+    "antialias_suppressed_pixels": 0,
+    "text": {
+      "poppler": {
+        "equal_to_published": true,
+        "sha256": "3ce98fa520fc910aa7e7bc076d9073ad75e419dbd6385beb5a8551191dcda6e4",
+        "nonspace_characters": 860
+      },
+      "pdfium": {
+        "equal_to_published": true,
+        "sha256": "03deb76750f1bef8f78d067f8b3bd512ca4df62f7673e51dd27b453fcbf8eca2",
+        "nonspace_characters": 860
+      }
+    },
+    "stage_timings": {
+      "total_ms": 4740,
+      "donor_collection_ms": 397,
+      "page_conversion_ms": 2149,
+      "document_font_union_ms": 0,
+      "font_build_ms": 0,
+      "reconstruction_pdf_ms": 1094,
+      "raster_baseline_prepare_ms": 19,
+      "raster_baseline_pdf_ms": 1075,
+      "remaining_pipeline_ms": 6
+    },
+    "page_timings": {
+      "planning_matching_reconstruction": 1670,
+      "raster_composition_and_owners": 51,
+      "segmentation_ownership": 398,
+      "tracing_placement_cleanup": 1
+    },
+    "image_resources": 1
+  },
+  {
+    "arm": "b",
+    "bytes": 5245369,
+    "raster_bytes": 5163535,
+    "font_bytes": 67204,
+    "content_bytes": 12022,
+    "overhead_bytes": 2608,
+    "actual_glyph_draws": 73,
+    "unique_painted_gids": 63,
+    "visible_owner_records": 73,
+    "observations": 792,
+    "ocr_chars": 860,
+    "ink_suppressed_pixels": 16345,
+    "antialias_suppressed_pixels": 0,
+    "text": {
+      "poppler": {
+        "equal_to_published": false,
+        "sha256": "a8b9501b4832ddd4b2de7a0010d62943fad201a7c9d8b2625d117454e4475028",
+        "nonspace_characters": 860
+      },
+      "pdfium": {
+        "equal_to_published": false,
+        "sha256": "df2ef8a363596fc8292169a0efd908592c24d8dd336b8617b635c4eb864705f7",
+        "nonspace_characters": 860
+      }
+    },
+    "stage_timings": {
+      "total_ms": 31072,
+      "donor_collection_ms": 379,
+      "page_conversion_ms": 28510,
+      "document_font_union_ms": 2,
+      "font_build_ms": 6,
+      "reconstruction_pdf_ms": 1281,
+      "raster_baseline_prepare_ms": 23,
+      "raster_baseline_pdf_ms": 867,
+      "remaining_pipeline_ms": 4
+    },
+    "page_timings": {
+      "planning_matching_reconstruction": 1279,
+      "raster_composition_and_owners": 8003,
+      "segmentation_ownership": 305,
+      "tracing_placement_cleanup": 18917
+    },
+    "image_resources": 1
+  }
+]
