@@ -2,6 +2,11 @@
 import ast
 from pathlib import Path
 import tempfile
+import runpy
+import subprocess
+from unittest.mock import patch
+
+from PIL import Image
 import unittest
 
 from lxml import etree
@@ -45,6 +50,44 @@ class HocrXmlSecurity(unittest.TestCase):
                        '<html><body>&mark;</body></html>').encode()
             root = self.parse(payload)
             self.assertNotIn('LOCAL_FILE_SENTINEL', ''.join(root.itertext()))
+
+    def test_actual_region_script_preserves_text_without_entity_expansion(self):
+        # Exercise the production parser/coordinate rewrite. Only Tesseract is
+        # mocked; private images and hOCR keep this independent of the corpus.
+        original_resolve = Path.resolve
+        with tempfile.TemporaryDirectory() as folder:
+            root = Path(folder)
+            Image.new('L', (32, 32), 220).save(root / 'history-unit.png')
+
+            def resolve(path, *args, **kwargs):
+                if path == SOURCE:
+                    return root / 'region_ocr.py'
+                return original_resolve(path, *args, **kwargs)
+
+            def tesseract(command, **kwargs):
+                self.assertEqual(command[0], 'tesseract')
+                self.assertEqual(command[-1], 'hocr')
+                self.assertTrue(kwargs['check'])
+                Path(command[2] + '.hocr').write_bytes(
+                    b'<!DOCTYPE html [<!ENTITY mark "INJECTED_CONTENT">]>'
+                    b'<html><body><div class="ocr_page" title="bbox 0 0 32 32">'
+                    b'<span title="bbox 1 2 3 4">caf&#233; &amp; 8</span>'
+                    b'<span>&mark;</span></div></body></html>')
+                return subprocess.CompletedProcess(command, 0, '', '')
+
+            with patch.object(Path, 'resolve', resolve), patch(
+                    'subprocess.run', side_effect=tesseract) as runner:
+                runpy.run_path(str(SOURCE))
+            runner.assert_called_once()
+            output = root / 'history-unit.regions.hocr'
+            doc = etree.parse(str(output), etree.XMLParser(resolve_entities=False))
+            spans = doc.findall('.//span')
+            self.assertEqual(spans[0].text, 'caf\u00e9 & 8')
+            self.assertEqual(spans[0].get('title'), 'bbox 1 2 3 4')
+            self.assertNotIn('INJECTED_CONTENT', ''.join(doc.getroot().itertext()))
+            self.assertEqual(doc.find('.//div').get('title'),
+                             'bbox 0 0 32 32; scan_res 300 300')
+            self.assertTrue((root / 'region-ocr-manifest.json').is_file())
 
     def test_normal_namespaced_hocr_and_external_doctype_survive(self):
         class NoExternalAccess(etree.Resolver):
