@@ -29,3 +29,9 @@ First real PR CI39513352555 passed all original contracts on ef70687. Instrument
 ## Frozen Rust evidence correction
 
 The first complete main scan correctly added Rust but also indexed eight archived implementation snapshots in qualification/clearscan_typography. These are rejected trial/baseline source copies, not Cargo targets or active qualification utilities. The exact eight paths and SHA-256 identities are in frozen-rust-evidence.json; only those paths are now excluded. All active Python scripts in that directory, all crates/probes Rust, tests and the C UI utility remain in scope. Their removal is an evidence-scope correction, not remediation of a production finding. No file is deleted or changed.
+
+## Hash-locked qualification dependencies
+
+CI installs Python dependencies from `.github/requirements-ci.txt` with both `--require-hashes` and `--only-binary=:all:`. Exact direct versions are in the adjacent `.in`; the lock includes transitive versions and official PyPI artifact SHA-256 hashes. Regenerate with Python3.12 and pip-tools7.5.3 using `CUSTOM_COMPILE_COMMAND='pip-compile --generate-hashes --strip-extras .github/requirements-ci.in' pip-compile --index-url https://pypi.org/simple --no-emit-index-url --generate-hashes --strip-extras .github/requirements-ci.in`. OTS remains9.3.0, fetched at its verified immutable upstream commit884861e0103b41d7e9845fdaf9fd1e3c12819103 and built with the same locked Meson/Ninja environment. No unpinned secondary pip install remains. LCOV is retained for seven days to inspect actual import warnings; no credentials or corpus images are uploaded.
+
+Addresses githubactions:S8541 (AaFbZj5-2TNSduKvuG1M), S8544 (AaFbZj5-2TNSduKvuG1N), S8549 (AaFbZj5-2TNSduKvuG1O). Dependency locking does not claim to remediate unrelated source findings or change converter behavior.
