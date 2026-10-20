@@ -197,6 +197,8 @@ pub fn build_page(page_dir: &PathBuf, out_dir: &PathBuf) -> Result<Report, Strin
         .map_err(|e| e.to_string())?;
     // legacy shim report fields (io Report mirrors the shim shape)
     let mut report = Report {
+        segmentation_method: out.report.segmentation_method.clone(),
+        stage_timings_ms: out.report.stage_timings_ms.clone(),
         fidelity: out.report.fidelity.clone(),
         reconstruction: out.report.reconstruction.clone(),
         glyph_stats: out.report.glyph_stats.clone(),

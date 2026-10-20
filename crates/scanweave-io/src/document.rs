@@ -221,6 +221,22 @@ pub fn convert_document(
     inputs: &[Input],
     policy: &Policy,
 ) -> Result<DocumentOutput, String> {
+    convert_document_with_sources(document_id, inputs, policy, &[])
+}
+
+/// Same converter with strictly validated source image hints from PDF import.
+/// Hints cannot supersede an emitted vector or alter the faithful profile.
+pub fn convert_document_with_sources(
+    document_id: &str,
+    inputs: &[Input],
+    policy: &Policy,
+    sources: &[Option<crate::source_image::EncodedSourceImage>],
+) -> Result<DocumentOutput, String> {
+    let mut effective_policy = policy.clone();
+    if policy.profile == "clearscan" && policy.image_encoding.predictor == 1 {
+        effective_policy.image_encoding.predictor = 0;
+    }
+    let policy = &effective_policy;
     let total_start = std::time::Instant::now();
     let mut stage_timings = DocumentStageTimings::default();
     if inputs.is_empty() {
@@ -315,8 +331,15 @@ pub fn convert_document(
                 }
             }
         }
-        let (parts, report) =
+        let (mut parts, report) =
             crate::convert::convert_parts_with_document_donors(input, policy, &sibling_donors)?;
+        if policy.profile == "clearscan" && parts.occurrences.is_empty() {
+            parts.encoded_source = sources
+                .get(page_index)
+                .cloned()
+                .flatten()
+                .filter(|source| source.matches(input));
+        }
         pages.push(DocumentPage { parts, report });
     }
     stage_timings.page_conversion_ms = stage_start.elapsed().as_millis();

@@ -25,23 +25,29 @@ which must be preserved as exact source pixels?**
   real bytes), the per-occurrence ink IoU, coverage denominators, and the
   byte accounting of what was emitted.
 
-## Status
+## Current functionality
 
-Scanned-document reconstruction is a research-grade pipeline. Milestone state:
+`scanweave input.pdf output.pdf` runs Tesseract, collects document-wide glyph
+observations, reconstructs and reuses supported canonical outlines, removes
+superseded source ink, and assembles a searchable layered PDF. ClearScan is the
+PDF-to-PDF default. `--profile faithful` remains an independent preservation
+profile.
 
-| Milestone | State | Evidence |
-|---|---|---|
-| M0 / M0-Q | PROVISIONAL (accepted baseline, known inherited visual-gate failures) | `M0_Q_REPORT.md` |
-| M1-A | CLOSED (independently approved) | `M1A_REPORT.md` |
-| M1-B | CLOSED (independently approved + operator-review corrections) | `M1B_REPORT.md` |
-| M1-C | RESEARCH (continue research; no promotion) | `M1C_REPORT.md` |
+ClearScan retains native samples for verified full-page image inputs near the
+requested resolution. Other page graphics, crops and rotations use Poppler.
+Native fallback imagery stays lossless, with grayscale storage, exact resource
+reuse and measured Flate predictors. Unsupported text and artwork remain raster;
+only already-qualified paper backgrounds may use reduced-resolution encoding.
+Sparse OCR can retry Tesseract's block layout when confidence and character-box
+evidence support it. No new OCR model is required.
 
-**Honest limitations:** the 8 default fixtures still fail the strict visual
-gates (inherited, documented, thresholds never relaxed); PDFium appends an
-all-fallback line's owners at the end of its extraction order (mixed lines are
-fixed). PDF import and a public development corpus are now available; the
-independent corpus holdout remains sealed. See the current delivery report and
-historical milestone reports for their respective limitations.
+Real scans remain challenging: some receipts yield no usable OCR, historical
+styles may provide no accepted vectors, and preserved tonal imagery can remain
+much larger than Adobe/OCRmyPDF output. Search correctness depends on the supplied
+recognition. See [real-document results](CLEARSCAN_REAL_DOCUMENT_REPORT.md) and
+[packaging results](CLEARSCAN_PACKAGING_REPORT.md) for actual measurements and
+known failures. Earlier milestone reports document historical development;
+M1-C is not the current feature set. The independent holdout remains sealed.
 
 ## Build
 
@@ -66,7 +72,8 @@ Convert an image-only scanned PDF directly:
 This path defaults to ClearScan and 300 DPI. Install Poppler (`pdfinfo`,
 `pdftoppm`), Tesseract and the requested language data first (for example,
 `apt install poppler-utils tesseract-ocr tesseract-ocr-eng`). The converter
-renders each cropped/rotated page, obtains Tesseract character boxes, and sends
+imports supported native full-page image samples or renders cropped/rotated
+pages, obtains Tesseract character boxes, and sends
 normalized, pixel-bound OCR to the existing document converter. It preserves
 physical page geometry; it does not reuse pre-existing PDF text. Pages where
 Tesseract finds no words remain images, with an explicit warning.
@@ -79,8 +86,8 @@ RGB page samples, with an 80-million-pixel per-page cap. Split larger documents.
 The established `scanweave-cli` binary remains an alias. The image/bundle CLI
 and library interfaces below remain available.
 
-See [PDF packaging and real-use results](CLEARSCAN_PACKAGING_REPORT.md) for
-current measured sizes and real-document limitations.
+See [real-document results](CLEARSCAN_REAL_DOCUMENT_REPORT.md) for current
+measurements, representative PDFs and real-document limitations.
 
 
 One page (hOCR or the normalized OCR JSON):

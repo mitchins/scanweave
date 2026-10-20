@@ -152,11 +152,8 @@ pub fn build_plan(
     h: u32,
     page: &OcrPage,
 ) -> (OwnershipPlan, (Vec<Unit>, usize)) {
-    let (_units_v0_units, unowned) = crate::units::extract_units(seg, w, h, page);
-
-    // Re-derive the assignment from components so we can expose it explicitly.
-    // (extract_units performs the same assignment internally; we re-run the
-    // component grouping here to publish the plan.)
+    // Construct the explicit ownership plan once. The former extract_units
+    // call computed and discarded another complete component assignment.
     use image::GrayImage;
     use image::Luma;
     use imageproc::region_labelling::connected_components;
@@ -337,7 +334,6 @@ pub fn build_plan(
 
     plan.suspect_units = plan.owned.iter().filter(|u| u.suspect).count();
     plan.notes.sort();
-    let _ = unowned;
     let n_art = plan.components_artwork;
     (plan, (units_out, n_art))
 }

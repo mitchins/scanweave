@@ -23,6 +23,28 @@ fn run(program: &str, args: &[&std::ffi::OsStr]) -> Result<Vec<u8>, String> {
     Ok(output.stdout)
 }
 
+// Confidence alone cannot prove recognition. Require several multi-character
+// words with positive, page-bounded character boxes before accepting a retry.
+fn reliable_words(doc: &hocr::HocrDocument, width: u32, height: u32) -> usize {
+    doc.words
+        .iter()
+        .filter(|word| {
+            word.confidence.unwrap_or(0.0) >= 70.0
+                && word.text.chars().filter(|c| c.is_alphanumeric()).count() >= 3
+                && !word.chars.is_empty()
+                && word.chars.iter().all(|c| {
+                    let (x0, y0, x1, y1) = c.bbox;
+                    x0 >= 0
+                        && y0 >= 0
+                        && x1 > x0
+                        && y1 > y0
+                        && x1 <= width as i64
+                        && y1 <= height as i64
+                })
+        })
+        .count()
+}
+
 pub fn convert_pdf(args: &[String]) -> Result<(), String> {
     let input = args.first().ok_or("missing input PDF")?;
     let output = args.get(1).ok_or("usage: scanweave input.pdf output.pdf [--dpi 300] [--lang eng] [--profile clearscan|faithful]")?;
@@ -90,9 +112,17 @@ pub fn convert_pdf(args: &[String]) -> Result<(), String> {
         .next()
         .unwrap_or("unknown")
         .to_string();
+    let source_images = if profile == "clearscan" {
+        scanweave_io::source_image::simple_page_images(
+            std::fs::read(&input).map_err(|e| e.to_string())?,
+        )
+    } else {
+        Vec::new()
+    };
     let mut decoded_bytes = 0u64;
     let mut inputs = Vec::new();
     let mut provenance = Vec::new();
+    let import_started = std::time::Instant::now();
     let input_hash = scanweave_core::hash_hex(&std::fs::read(&input).map_err(|e| e.to_string())?);
     for page in 1..=pages {
         eprintln!("scanweave: rasterizing and recognizing page {page}/{pages}");
@@ -148,27 +178,47 @@ pub fn convert_pdf(args: &[String]) -> Result<(), String> {
         {
             return Err(format!("page {page} exceeds supported raster dimensions"));
         }
-        run(
-            "pdftoppm",
-            &[
-                "-f".as_ref(),
-                number.as_ref(),
-                "-l".as_ref(),
-                number.as_ref(),
-                "-singlefile".as_ref(),
-                "-cropbox".as_ref(),
-                "-r".as_ref(),
-                resolution.as_ref(),
-                "-png".as_ref(),
-                input.as_os_str(),
-                prefix.as_os_str(),
-            ],
-        )?;
         let png = prefix.with_extension("png");
+        let native = source_images
+            .get(page - 1)
+            .and_then(Option::as_ref)
+            .filter(|source| {
+                let (w, h) = source.dimensions();
+                // At nominal resolution, do not resample a 3301-pixel original to
+                // 3300 pixels merely because page points were rounded on import.
+                (w as f64 * 72.0 / width / dpi as f64 - 1.0).abs() < 0.01
+                    && (h as f64 * 72.0 / height / dpi as f64 - 1.0).abs() < 0.01
+            });
+        let image = if let Some(source) = native {
+            let (w, h) = source.dimensions();
+            let rgb = source.decode_rgb()?;
+            let image =
+                image::RgbImage::from_raw(w, h, rgb).ok_or("invalid native source image")?;
+            image.save(&png).map_err(|e| e.to_string())?;
+            image
+        } else {
+            run(
+                "pdftoppm",
+                &[
+                    "-f".as_ref(),
+                    number.as_ref(),
+                    "-l".as_ref(),
+                    number.as_ref(),
+                    "-singlefile".as_ref(),
+                    "-cropbox".as_ref(),
+                    "-r".as_ref(),
+                    resolution.as_ref(),
+                    "-png".as_ref(),
+                    input.as_os_str(),
+                    prefix.as_os_str(),
+                ],
+            )?;
+            let bytes = std::fs::read(&png).map_err(|e| e.to_string())?;
+            image::load_from_memory(&bytes)
+                .map_err(|e| e.to_string())?
+                .to_rgb8()
+        };
         let bytes = std::fs::read(&png).map_err(|e| e.to_string())?;
-        let image = image::load_from_memory(&bytes)
-            .map_err(|e| e.to_string())?
-            .to_rgb8();
         decoded_bytes += image.as_raw().len() as u64;
         if decoded_bytes > 512 * 1024 * 1024 {
             return Err(
@@ -191,12 +241,47 @@ pub fn convert_pdf(args: &[String]) -> Result<(), String> {
                 resolution.as_ref(),
                 "-c".as_ref(),
                 "hocr_char_boxes=1".as_ref(),
+                "--psm".as_ref(),
+                "3".as_ref(),
                 "hocr".as_ref(),
             ],
         )?;
-        let ocr_bytes = std::fs::read(prefix.with_extension("hocr")).map_err(|e| e.to_string())?;
-        let doc = hocr::parse_hocr(&ocr_bytes, image.width(), image.height())
+        let mut ocr_bytes =
+            std::fs::read(prefix.with_extension("hocr")).map_err(|e| e.to_string())?;
+        let mut doc = hocr::parse_hocr(&ocr_bytes, image.width(), image.height())
             .map_err(|e| e.to_string())?;
+        let mut selected_psm = 3;
+        let baseline_reliable = reliable_words(&doc, image.width(), image.height());
+        let mut retry_reliable = None;
+        if profile == "clearscan" && doc.words.len() <= 20 && baseline_reliable < 3 {
+            let retry = work.path().join(format!("retry-{page:06}"));
+            run(
+                "tesseract",
+                &[
+                    png.as_os_str(),
+                    retry.as_os_str(),
+                    "-l".as_ref(),
+                    lang.as_ref(),
+                    "--dpi".as_ref(),
+                    resolution.as_ref(),
+                    "--psm".as_ref(),
+                    "6".as_ref(),
+                    "-c".as_ref(),
+                    "hocr_char_boxes=1".as_ref(),
+                    "hocr".as_ref(),
+                ],
+            )?;
+            let bytes = std::fs::read(retry.with_extension("hocr")).map_err(|e| e.to_string())?;
+            let candidate = hocr::parse_hocr(&bytes, image.width(), image.height())
+                .map_err(|e| e.to_string())?;
+            let supported = reliable_words(&candidate, image.width(), image.height());
+            retry_reliable = Some(supported);
+            if supported >= 6 && supported >= baseline_reliable * 2 + 4 {
+                doc = candidate;
+                ocr_bytes = bytes;
+                selected_psm = 6;
+            }
+        }
         if doc.words.is_empty() {
             eprintln!("scanweave: page {page}: Tesseract recognized no words; preserving the page image without searchable text for this page");
         }
@@ -250,7 +335,7 @@ pub fn convert_pdf(args: &[String]) -> Result<(), String> {
             &normalized.page_id,
             &normalized,
         ));
-        provenance.push(serde_json::json!({"page":page,"width_pt":width,"height_pt":height,"raster_width":image.width(),"raster_height":image.height(),"raster_file_sha256":binding.file_sha256,"pixel_sha256":binding.pixel_sha256,"ocr_words":doc.words.len(),"ocr_granularity":normalized.granularity,"hocr_sha256":scanweave_core::hash_hex(&ocr_bytes),"hocr":String::from_utf8_lossy(&ocr_bytes),"rasterizer_args":["-f",number.as_str(),"-l",number.as_str(),"-singlefile","-cropbox","-r",resolution.as_str(),"-png"],"tesseract_args":["-l",lang.as_str(),"--dpi",resolution.as_str(),"-c","hocr_char_boxes=1","hocr"],"ocr":normalized.producer}));
+        provenance.push(serde_json::json!({"page":page,"width_pt":width,"height_pt":height,"raster_width":image.width(),"raster_height":image.height(),"raster_import":if native.is_some(){"native_source_samples"}else{"Poppler"},"raster_file_sha256":binding.file_sha256,"pixel_sha256":binding.pixel_sha256,"ocr_words":doc.words.len(),"selected_psm":selected_psm,"baseline_reliable_words":baseline_reliable,"retry_reliable_words":retry_reliable,"ocr_granularity":normalized.granularity,"hocr_sha256":scanweave_core::hash_hex(&ocr_bytes),"hocr":String::from_utf8_lossy(&ocr_bytes),"native_source":native.map(|source|source.provenance()),"rasterizer_args":if native.is_some(){serde_json::Value::Null}else{serde_json::json!(["-f",number.as_str(),"-l",number.as_str(),"-singlefile","-cropbox","-r",resolution.as_str(),"-png"])},"tesseract_args":["-l",lang.as_str(),"--dpi",resolution.as_str(),"--psm",selected_psm.to_string(),"-c","hocr_char_boxes=1","hocr"],"ocr":normalized.producer}));
     }
     let policy = convert::Policy {
         dpi: dpi as f64,
@@ -262,7 +347,9 @@ pub fn convert_pdf(args: &[String]) -> Result<(), String> {
         profile,
         ..Default::default()
     };
-    let converted = document::convert_document("pdf-input", &inputs, &policy)?;
+    let import_ms = import_started.elapsed().as_millis();
+    let converted =
+        document::convert_document_with_sources("pdf-input", &inputs, &policy, &source_images)?;
     // Unique, same-directory temporary publication avoids shared .tmp races.
     let parent = Path::new(output)
         .parent()
@@ -274,7 +361,7 @@ pub fn convert_pdf(args: &[String]) -> Result<(), String> {
         .write_all(&converted.pdf_bytes)
         .map_err(|e| e.to_string())?;
 
-    let report = serde_json::json!({"poppler_version":poppler_version,"input_sha256":input_hash,"rasterization_dpi":dpi,"ocr_language":lang,"pages":provenance,"conversion":converted.report});
+    let report = serde_json::json!({"import_ms":import_ms,"poppler_version":poppler_version,"input_sha256":input_hash,"rasterization_dpi":dpi,"ocr_language":lang,"pages":provenance,"conversion":converted.report});
     let mut staged_report = tempfile::NamedTempFile::new_in(parent).map_err(|e| e.to_string())?;
     staged_report
         .write_all(&serde_json::to_vec_pretty(&report).map_err(|e| e.to_string())?)
@@ -295,6 +382,27 @@ pub fn convert_pdf(args: &[String]) -> Result<(), String> {
 
 #[cfg(test)]
 mod tests {
+    #[test]
+    fn retry_support_rejects_border_artifacts_and_invalid_boxes() {
+        let mut doc = scanweave_io::hocr::HocrDocument::default();
+        doc.words.push(scanweave_io::hocr::HocrWord {
+            text: "145,000".into(),
+            bbox: (0, 0, 60, 20),
+            confidence: Some(90.),
+            line_index: 0,
+            chars: vec![scanweave_io::hocr::HocrChar {
+                text: "1".into(),
+                bbox: (0, 0, 8, 20),
+                confidence: Some(99.),
+            }],
+        });
+        assert_eq!(super::reliable_words(&doc, 100, 100), 1);
+        doc.words[0].chars[0].bbox = (0, 0, 0, 20);
+        assert_eq!(super::reliable_words(&doc, 100, 100), 0);
+        doc.words[0].chars[0].bbox = (0, 0, 8, 20);
+        doc.words[0].text = "|".into();
+        assert_eq!(super::reliable_words(&doc, 100, 100), 0);
+    }
     #[test]
     fn missing_dependency_has_install_hint() {
         let message = super::run("scanweave-nonexistent-test-dependency", &[]).unwrap_err();

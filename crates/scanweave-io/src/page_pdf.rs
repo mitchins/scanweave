@@ -24,7 +24,9 @@ fn compressed_stream(pdf: &mut Pdf, id: Ref, data: &[u8], font: bool) -> Result<
     let encoded = crate::serialization::deflate(data)?;
     let mut stream = pdf.stream(id, &encoded);
     stream.filter(pdf_writer::Filter::FlateDecode);
-    if font { stream.pair(Name(b"Length1"), data.len() as i32); }
+    if font {
+        stream.pair(Name(b"Length1"), data.len() as i32);
+    }
     stream.finish();
     Ok(encoded.len())
 }
@@ -48,7 +50,7 @@ pub struct ImageEncodingOptions {
     pub reuse_identical: bool,
     pub grayscale_equal_channels: bool,
     pub compression_level: u32,
-    /// PDF predictor: 1 (none), 2 (TIFF), or 12 (PNG Up).
+    /// PDF predictor: 0 (smallest of lossless variants), 1 (none), 2 (TIFF), or 12 (PNG Up).
     pub predictor: u8,
 }
 
@@ -96,6 +98,7 @@ struct EncodedImageResource {
     key: ImageResourceKey,
     compressed: Vec<u8>,
     jpeg: bool,
+    predictor: u8,
 }
 
 fn canonical_patch(
@@ -156,10 +159,10 @@ fn canonical_patch(
     })
 }
 
-fn encode_predictor(key: &ImageResourceKey) -> Result<Vec<u8>, String> {
+fn encode_predictor_value(key: &ImageResourceKey, predictor: u8) -> Result<Vec<u8>, String> {
     let colors = key.color_space as usize;
     let row_bytes = key.width as usize * colors;
-    match key.predictor {
+    match predictor {
         1 => Ok(key.samples.clone()),
         2 | 12 => {
             if key.samples.len() != row_bytes * key.height as usize {
@@ -167,7 +170,7 @@ fn encode_predictor(key: &ImageResourceKey) -> Result<Vec<u8>, String> {
             }
             let mut out = Vec::with_capacity(
                 key.samples.len()
-                    + if key.predictor == 12 {
+                    + if predictor == 12 {
                         key.height as usize
                     } else {
                         0
@@ -175,13 +178,13 @@ fn encode_predictor(key: &ImageResourceKey) -> Result<Vec<u8>, String> {
             );
             for y in 0..key.height as usize {
                 let row = &key.samples[y * row_bytes..(y + 1) * row_bytes];
-                if key.predictor == 12 {
+                if predictor == 12 {
                     out.push(2);
                 } // PNG Up row selector
                 for x in 0..row_bytes {
-                    let prior = if key.predictor == 2 && x >= colors {
+                    let prior = if predictor == 2 && x >= colors {
                         row[x - colors]
-                    } else if key.predictor == 12 && y > 0 {
+                    } else if predictor == 12 && y > 0 {
                         key.samples[(y - 1) * row_bytes + x]
                     } else {
                         0
@@ -197,18 +200,31 @@ fn encode_predictor(key: &ImageResourceKey) -> Result<Vec<u8>, String> {
     }
 }
 
-fn compress_samples(key: &ImageResourceKey) -> Result<(Vec<u8>, bool), String> {
-    let predicted = encode_predictor(key)?;
-    let mut enc = flate2::write::ZlibEncoder::new(
-        Vec::new(),
-        flate2::Compression::new(key.compression_level.min(9)),
-    );
-    use std::io::Write;
-    enc.write_all(&predicted).map_err(|e| e.to_string())?;
-    let lossless = enc.finish().map_err(|e| e.to_string())?;
+fn compress_samples(key: &ImageResourceKey) -> Result<(Vec<u8>, bool, u8), String> {
+    let candidates: &[u8] = if key.predictor == 0 {
+        &[1, 2, 12]
+    } else {
+        std::slice::from_ref(&key.predictor)
+    };
+    let mut lossless = Vec::new();
+    let mut selected_predictor = 1;
+    for &predictor in candidates {
+        let predicted = encode_predictor_value(key, predictor)?;
+        let mut enc = flate2::write::ZlibEncoder::new(
+            Vec::new(),
+            flate2::Compression::new(key.compression_level.min(9)),
+        );
+        use std::io::Write;
+        enc.write_all(&predicted).map_err(|e| e.to_string())?;
+        let encoded = enc.finish().map_err(|e| e.to_string())?;
+        if lossless.is_empty() || encoded.len() < lossless.len() {
+            lossless = encoded;
+            selected_predictor = predictor;
+        }
+    }
+    // Only the already-qualified reduced paper background may be lossy.
+    // Native text/artwork/unknown samples remain lossless.
     if key.compact_background {
-        // Test actual serialized savings and decoded sample errors. This is
-        // never used for native fallback/artwork or the faithful profile.
         for quality in [95, 98, 100] {
             let mut jpeg = Vec::new();
             let color = if key.color_space == 1 {
@@ -240,11 +256,27 @@ fn compress_samples(key: &ImageResourceKey) -> Result<(Vec<u8>, bool), String> {
                 && max_error <= 3
                 && sum_error as f64 <= key.samples.len() as f64 * 0.25
             {
-                return Ok((jpeg, true));
+                return Ok((jpeg, true, 1));
             }
         }
     }
-    Ok((lossless, false))
+    Ok((lossless, false, selected_predictor))
+}
+
+/// Compare actual lossless stream costs for two existing residual layouts.
+/// No resampling, atlas coordinates or new source pixels are introduced.
+pub(crate) fn lossless_patch_cost(patches: &[Patch]) -> Result<usize, String> {
+    let options = ImageEncodingOptions {
+        predictor: 0,
+        ..Default::default()
+    };
+    let mut cost = 0usize;
+    for patch in patches {
+        let mut key = canonical_patch(patch, options)?;
+        key.compact_background = false;
+        cost += compress_samples(&key)?.0.len();
+    }
+    Ok(cost)
 }
 
 #[derive(Debug, Default, Clone)]
@@ -732,7 +764,7 @@ pub fn assemble_with_options(
         let index = match existing {
             Some(i) => i,
             None => {
-                let (compressed, jpeg) = compress_samples(&key)?;
+                let (compressed, jpeg, predictor) = compress_samples(&key)?;
                 let id = Ref::new(next + image_resources.len() as i32);
                 let digest = key.sample_sha256;
                 let i = image_resources.len();
@@ -741,6 +773,7 @@ pub fn assemble_with_options(
                     key,
                     compressed,
                     jpeg,
+                    predictor,
                 });
                 if image_options.reuse_identical {
                     resource_lookup.entry(digest).or_default().push(i);
@@ -871,8 +904,8 @@ pub fn assemble_with_options(
                 b"FlateDecode"
             }),
         );
-        if !resource.jpeg && resource.key.predictor != 1 {
-            let predictor = match resource.key.predictor {
+        if !resource.jpeg && resource.predictor != 1 {
+            let predictor = match resource.predictor {
                 2 => pdf_writer::types::Predictor::Tiff,
                 12 => pdf_writer::types::Predictor::PngUp,
                 _ => unreachable!("validated by encoder"),
@@ -1004,6 +1037,8 @@ pub struct PageParts {
     /// raster-baseline candidate: the text layer is drawn INVISIBLY over the
     /// whole-page source patch (searchable text, source pixels, no vector ink)
     pub raster_baseline: bool,
+    /// Verified simple input image, available only for a zero-vector page.
+    pub encoded_source: Option<crate::source_image::EncodedSourceImage>,
     pub source_w: usize,
     pub source_h: usize,
     pub shapes: Vec<GlyphShape>,
@@ -1114,7 +1149,42 @@ pub fn assemble_document_with_options(
             let resource_index = match existing {
                 Some(i) => i,
                 None => {
-                    let (compressed, jpeg) = compress_samples(&key)?;
+                    let (mut compressed, mut jpeg, mut predictor) = compress_samples(&key)?;
+                    let mut key = key;
+                    if p.occurrences.is_empty() && p.patches.len() == 1 {
+                        if let Some(source) = &p.encoded_source {
+                            if source.jpeg || source.bytes.len() < compressed.len() {
+                                compressed = source.bytes.clone();
+                                jpeg = source.jpeg;
+                                predictor = source.predictor;
+                                key.width = source.width;
+                                key.height = source.height;
+                                key.color_space = source.colors;
+                                // Encoded source identity is distinct from normalized RGB.
+                                let mut digest = Sha256::new();
+                                digest.update(&source.bytes);
+                                digest.update(source.width.to_be_bytes());
+                                digest.update(source.height.to_be_bytes());
+                                digest.update([source.colors, source.jpeg as u8, source.predictor]);
+                                key.sample_sha256 = digest.finalize().into();
+                                // Retain bytes for a collision-checked equality test.
+                                key.samples = source.bytes.clone();
+                            }
+                        }
+                    }
+                    if image_options.reuse_identical {
+                        if let Some(existing) =
+                            resource_lookup.get(&key.sample_sha256).and_then(|items| {
+                                items
+                                    .iter()
+                                    .copied()
+                                    .find(|&i| image_resources[i].key == key)
+                            })
+                        {
+                            ids.push(image_resources[existing].id);
+                            continue;
+                        }
+                    }
                     let id = Ref::new(next_image);
                     next_image += 1;
                     let i = image_resources.len();
@@ -1124,6 +1194,7 @@ pub fn assemble_document_with_options(
                         key,
                         compressed,
                         jpeg,
+                        predictor,
                     });
                     if image_options.reuse_identical {
                         resource_lookup.entry(digest).or_default().push(i);
@@ -1218,8 +1289,8 @@ pub fn assemble_document_with_options(
                 b"FlateDecode"
             }),
         );
-        if !resource.jpeg && resource.key.predictor != 1 {
-            let predictor = match resource.key.predictor {
+        if !resource.jpeg && resource.predictor != 1 {
+            let predictor = match resource.predictor {
                 2 => pdf_writer::types::Predictor::Tiff,
                 12 => pdf_writer::types::Predictor::PngUp,
                 _ => unreachable!("validated by encoder"),
@@ -1308,6 +1379,7 @@ mod image_resource_tests {
         PageParts {
             source_rgb: vec![255; 3],
             raster_baseline: false,
+            encoded_source: None,
             source_w: 1,
             source_h: 1,
             shapes: vec![],
@@ -1371,6 +1443,48 @@ mod image_resource_tests {
             pdf, pdf2,
             "object assignment and output must be deterministic"
         );
+    }
+
+    #[test]
+    fn auto_predictor_selects_actual_smallest_lossless_stream() {
+        let patch = Patch {
+            bbox_px: [0., 0., 128., 128.],
+            w: 128,
+            h: 128,
+            compact_background: false,
+            rgb: (0..128 * 128)
+                .flat_map(|i| {
+                    let g = ((i % 128) * 2) as u8;
+                    [g, g, g]
+                })
+                .collect(),
+        };
+        let mut key = canonical_patch(
+            &patch,
+            ImageEncodingOptions {
+                predictor: 0,
+                ..Default::default()
+            },
+        )
+        .unwrap();
+        let best = compress_samples(&key).unwrap();
+        assert!(!best.1);
+        let minimum = [1, 2, 12]
+            .iter()
+            .map(|&p| {
+                key.predictor = p;
+                compress_samples(&key).unwrap().0.len()
+            })
+            .min()
+            .unwrap();
+        assert_eq!(best.0.len(), minimum);
+        // Faint samples, including a 1-level mark, are never sent to a native
+        // lossy codec. Decoding the chosen lossless predictor is exact.
+        key.predictor = best.2;
+        let mut reader = flate2::read::ZlibDecoder::new(best.0.as_slice());
+        let mut decoded = Vec::new();
+        std::io::Read::read_to_end(&mut reader, &mut decoded).unwrap();
+        assert_eq!(decoded, encode_predictor_value(&key, best.2).unwrap());
     }
 
     #[test]

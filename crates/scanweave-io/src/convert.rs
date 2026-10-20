@@ -118,6 +118,8 @@ pub struct Fidelity {
 
 #[derive(Debug, Clone, Serialize)]
 pub struct Report {
+    pub segmentation_method: String,
+    pub stage_timings_ms: BTreeMap<String, u128>,
     pub fidelity: Fidelity,
     pub reconstruction: crate::visual_dict::Reconstruction,
     pub glyph_stats: Vec<GlyphStat>,
@@ -735,6 +737,7 @@ pub(crate) fn convert_parts_with_document_donors(
     }
     let policy = &effective_policy;
     let start = std::time::Instant::now();
+    let mut stage_timings_ms = BTreeMap::new();
     let w = input.width;
     let h = input.height;
 
@@ -769,6 +772,8 @@ pub(crate) fn convert_parts_with_document_donors(
             owned.unit.retain_grayscale(&input.rgb, w, h);
         }
     }
+    stage_timings_ms.insert("segmentation_ownership".into(), start.elapsed().as_millis());
+    let evidence_started = std::time::Instant::now();
     let visual_ok = plan.visual_invariant_ok();
     let semantic_ok = plan.semantic_invariant_ok(&ocr);
 
@@ -913,6 +918,11 @@ pub(crate) fn convert_parts_with_document_donors(
         .occurrences
         .retain(|o| !o.symbol_id.starts_with("__doc_donor:"));
 
+    stage_timings_ms.insert(
+        "planning_matching_reconstruction".into(),
+        evidence_started.elapsed().as_millis(),
+    );
+    let tracing_started = std::time::Instant::now();
     let mut traced: Vec<TracedShape> = Vec::new();
     let mut missing: std::collections::HashSet<(String,)> = std::collections::HashSet::new();
     for symbol_id in &reconstruction.rejected_symbols {
@@ -1246,12 +1256,14 @@ pub(crate) fn convert_parts_with_document_donors(
     } else {
         std::collections::BTreeSet::new()
     };
+    let needs_raster_recomposition =
+        policy.profile != "clearscan" || !vector_owned_symbols.is_empty();
     let (
         clearscan_rgb,
         raster_ink_pixels_suppressed,
         antialias_fringe_pixels_suppressed,
         weak_rules,
-    ) = if policy.profile == "clearscan" {
+    ) = if policy.profile == "clearscan" && needs_raster_recomposition {
         let (rgb, ink_count, fringe_count, weak_rules) = clean_replaced_text(
             input,
             &plan,
@@ -1270,7 +1282,7 @@ pub(crate) fn convert_parts_with_document_donors(
     // patches. Remove every recognized text mask from that low-resolution
     // layer, including glyphs that remain raster, or their downsampled ink
     // will show as a soft duplicate underneath the source-exact patch.
-    let clearscan_background = if policy.profile == "clearscan" {
+    let clearscan_background = if policy.profile == "clearscan" && needs_raster_recomposition {
         let all_text_symbols: std::collections::BTreeSet<String> = plan
             .owned
             .iter()
@@ -1292,6 +1304,11 @@ pub(crate) fn convert_parts_with_document_donors(
         None
     };
 
+    stage_timings_ms.insert(
+        "tracing_placement_cleanup".into(),
+        tracing_started.elapsed().as_millis(),
+    );
+    let composition_started = std::time::Instant::now();
     // raster patches (fallback regions) + artwork ------------------------------
     let mut patches: Vec<Patch> = Vec::new();
     let mut semantic_owner: BTreeMap<String, String> = BTreeMap::new();
@@ -1299,7 +1316,10 @@ pub(crate) fn convert_parts_with_document_donors(
         semantic_owner.insert(s.id.clone(), "invisible".into());
     }
     for r in &regions {
-        if !matches!(r.disposition, RegionDisposition::Raster { .. }) || r.units.is_empty() {
+        if !needs_raster_recomposition
+            || !matches!(r.disposition, RegionDisposition::Raster { .. })
+            || r.units.is_empty()
+        {
             continue;
         }
         let mut bb = r.bbox_px;
@@ -1351,7 +1371,9 @@ pub(crate) fn convert_parts_with_document_donors(
     // unrecognized/artwork ink is also restored as source raster pixels (VS-05:
     // preserve or invent nothing). Bucketed on a 32px grid to bound object count.
     let patch_source = clearscan_rgb.as_deref().unwrap_or(&input.rgb);
-    patches.extend(artwork_patches(patch_source, w as usize, h as usize, &plan));
+    if needs_raster_recomposition {
+        patches.extend(artwork_patches(patch_source, w as usize, h as usize, &plan));
+    }
 
     // Compact backgrounds are supplemented by native residual-detail patches
     // below. Explicit protection remains independent of OCR segmentation.
@@ -1385,7 +1407,16 @@ pub(crate) fn convert_parts_with_document_donors(
     // few large rects). Merged patches copy the full source rect of the union,
     // so every emitted pixel stays byte-identical to the source.
     // ClearScan always rebuilds merged images from the cleaned source raster.
-    let patches = if policy.profile == "clearscan" {
+    let patches = if !needs_raster_recomposition {
+        // No emitted vector can supersede source ink: retain one whole-page
+        // image directly, avoiding cleanup, detail tiling and patch coalescing.
+        vec![patch_from_rgb(
+            &input.rgb,
+            w as usize,
+            h as usize,
+            [0.0, 0.0, w as f64, h as f64],
+        )]
+    } else if policy.profile == "clearscan" {
         let mut layers = coalesce_patches_rgb(patch_source, w as usize, h as usize, patches);
         let background = downsampled_background_patch(
             clearscan_background.as_deref().unwrap_or(patch_source),
@@ -1406,7 +1437,25 @@ pub(crate) fn convert_parts_with_document_donors(
             .iter()
             .map(|p| (p.bbox_px[2] - p.bbox_px[0]) * (p.bbox_px[3] - p.bbox_px[1]))
             .sum();
-        if native_area > (w as f64 * h as f64) * 0.6 {
+        // Fragmented native patches can cost more than a single cleaned
+        // residual page. Compare actual lossless streams, not area alone.
+        // Source ink has already been suppressed in patch_source.
+        let fragmented = layers.len() > 32 && native_area > (w as f64 * h as f64) * 0.2;
+        let prefer_whole = if fragmented {
+            let whole = patch_from_rgb(
+                patch_source,
+                w as usize,
+                h as usize,
+                [0.0, 0.0, w as f64, h as f64],
+            );
+            let whole_bytes = crate::page_pdf::lossless_patch_cost(std::slice::from_ref(&whole))?;
+            let layered_bytes = crate::page_pdf::lossless_patch_cost(&layers)?
+                + crate::page_pdf::lossless_patch_cost(std::slice::from_ref(&background))?;
+            whole_bytes * 10 < layered_bytes * 9
+        } else {
+            false
+        };
+        if prefer_whole || native_area > (w as f64 * h as f64) * 0.6 {
             vec![patch_from_rgb(
                 patch_source,
                 w as usize,
@@ -1751,6 +1800,7 @@ pub(crate) fn convert_parts_with_document_donors(
 
     let parts = crate::page_pdf::PageParts {
         raster_baseline: false,
+        encoded_source: None,
         page_w_pt,
         page_h_pt,
         to_pt,
@@ -1813,7 +1863,13 @@ pub(crate) fn convert_parts_with_document_donors(
     };
     let _ = vector_units;
 
+    stage_timings_ms.insert(
+        "raster_composition_and_owners".into(),
+        composition_started.elapsed().as_millis(),
+    );
     let report = Report {
+        segmentation_method: "global_corner_paper".into(),
+        stage_timings_ms,
         candidates: Vec::new(),
         fidelity,
         reconstruction,
