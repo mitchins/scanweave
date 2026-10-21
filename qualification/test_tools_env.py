@@ -57,6 +57,30 @@ class ComparisonTools(unittest.TestCase):
                 self.assertFalse(list(root.rglob('*.pdf')))
                 self.assertFalse(list(root.rglob('*.json')))
 
+    def test_actual_packaging_imports_use_explicit_environment(self):
+        original_resolve = Path.resolve
+        for name in ('pdf_packaging/run_corpus.py', 'pdf_packaging/run_groups.py'):
+            source = ROOT / name
+            with tempfile.TemporaryDirectory() as folder:
+                root = Path(folder)
+                (root / 'corpus.json').write_text('[]')
+
+                def resolve(path, *args, source=source, root=root, **kwargs):
+                    if path == source:
+                        return root / source.name
+                    return original_resolve(path, *args, **kwargs)
+
+                environment = {'PATH': '/caller/bin', 'LD_LIBRARY_PATH': '/caller/lib'}
+                with patch.object(Path, 'resolve', resolve), patch.object(
+                        sys, 'path', list(sys.path)), patch.dict(
+                        os.environ, environment, clear=True), patch(
+                        'subprocess.run', side_effect=AssertionError('Unexpected converter')):
+                    module = runpy.run_path(str(source))
+                self.assertEqual(module['env']['LD_LIBRARY_PATH'], '/caller/lib')
+                self.assertEqual(module['env']['PATH'],
+                                 str(Path(sys.executable).parent) + ':/caller/bin')
+                self.assertEqual(module['env']['OMP_THREAD_LIMIT'], '1')
+
     def test_environment_preserves_explicit_dependencies(self):
         original = {'PATH': '/caller/bin', 'LD_LIBRARY_PATH': '/caller/lib', 'EXTRA': 'yes'}
         with patch.dict(os.environ, original, clear=True):
@@ -84,7 +108,7 @@ class ComparisonTools(unittest.TestCase):
                 self.assertNotIn('dir', [k.arg for k in call.keywords])
                 options = {item.arg: ast.literal_eval(item.value) for item in call.keywords}
                 paths = []
-                with self.assertRaisesRegex(RuntimeError, 'control failure'):
+                def fail_inside_scratch(options=options, paths=paths):
                     with tempfile.TemporaryDirectory(**options) as first:
                         paths.append(Path(first))
                         with tempfile.TemporaryDirectory(**options) as second:
@@ -92,6 +116,9 @@ class ComparisonTools(unittest.TestCase):
                             self.assertNotEqual(first, second)
                             self.assertEqual(Path(first).stat().st_mode & 0o777, 0o700)
                             raise RuntimeError('control failure')
+
+                with self.assertRaisesRegex(RuntimeError, 'control failure'):
+                    fail_inside_scratch()
                 self.assertTrue(all(not p.exists() for p in paths))
 
 
