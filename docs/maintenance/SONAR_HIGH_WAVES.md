@@ -22,10 +22,10 @@ Quality Gate OK. There are 240 analyzed files and 24,397 non-comment lines.
 
 | Assignment | Unique keys | Boundary |
 |---|---:|---|
-| Wave 1 | 24 | Qualification utilities only: 16 literal, four correctness/contract and four bounded complexity findings |
+| Wave 1 | 22 | Qualification utilities only: 14 literal, four correctness/contract and four bounded complexity findings |
 | Wave 2 | 9 | Eight near-threshold production parsing/validation/encoding candidates plus explicit wildcard imports |
 | Wave 3 | 16 | Four identical auditors, four adjacent comparators and four adjacent stage analyzers (at most three implementation families) |
-| Deferred | 93 | Coupled production functions and qualification work beyond this bounded file/family budget |
+| Deferred | 95 | Coupled production functions and qualification work beyond this bounded file/family budget |
 
 Assignments are candidates, not advance claims of fixes. Each wave starts from
 latest verified main, with only one open PR, independent review, unchanged CI/
@@ -34,7 +34,7 @@ severities, source scope or Quality Gate thresholds change.
 
 ## Wave 1 implementation (narrowed after execution-coverage review)
 
-Twelve modules replace repeated literal tokens with local constants.
+Ten modules replace repeated literal tokens with local constants.
 At the **literal-only transformation stage**, before the separately tested
 helper extraction in `tonal_raster/compare.py`, expanding constants back yields
 **exact original AST equality**, including
@@ -86,7 +86,7 @@ renders and 800% labeled crops. JSON structures and numerical values match
 exactly. Nine alignment cases have equal arrays and exact floating tuples; 36
 tonal cases match exactly, including chunk boundaries at 127/128/129/257 rows.
 
-Ten permanent tests cover local constant values, ties/NaNs, alignment sampling,
+The ten initial permanent tests cover local constant values, ties/NaNs, alignment sampling,
 ridge preservation, chunk boundaries, ordered family statistics, open contours,
 sample-crop pixels and window matching/nonmatching behavior. They preserve an
 existing one-row metric exception and tiny alignment/uint8 sampling offset;
@@ -154,7 +154,7 @@ sufficient instrumented execution of their changed entry-point paths. Their
 edits were reverted, rather than adding a broad mock/corpus framework to this
 small PR. They remain open and in Sonar scope; no coverage settings,
 analysis-scope exclusions or thresholds changed. The measured new-code
-denominator does shrink because those edits were withdrawn. The retained 16 literal findings are accompanied
+denominator does shrink because those edits were withdrawn. The then-retained 16 literal findings are accompanied
 by exact-value controls and the existing, independently inspected helper tests.
 
 Two per-key false positives are separate from the 142-key HIGH intake:
@@ -171,3 +171,31 @@ Accepted or counted as code fixes. This narrow conclusion does not qualify
 separate metadata-derived image-read paths or malicious filesystem modification.
 No applicable SECURITY.md was found. The original 142 HIGH findings remain
 Maintainability-only; none were administratively closed by this action.
+
+### Second server result and focused execution tests
+
+At `57c7e2f`, all final-head CI and CodeRabbit checks passed. Sonar confirmed
+new Security/Reliability/Maintainability A and no open findings, but the unchanged
+gate still failed coverage (71.0%) and duplication (3.9%). The earlier projected
+coverage was not a server result and is not used as acceptance evidence.
+
+The exact duplicate block is the already-identical background/contour zoom
+scripts. Their two literal edits are withdrawn, not consolidated into a fourth
+analytical family. Current assignments are **22 / 9 / 16 / 95**; Wave 1 now has
+14 literal, four complexity and four correctness/contract keys. Ten literal
+modules remain. No original finding was closed administratively.
+
+Small temporary-fixture integration tests execute the actual packaging,
+outline-inventory and resumed-comparison top-level scripts and assert their
+JSON/CSV/manifests, real PDF enumeration and local image metrics. They write only
+inside scratch trees and require no historical or sealed corpus assets. These
+cover retained reporting paths rather than claiming constant-value tests alone
+exercise a full script. Fresh server analysis remains required before approval.
+
+The three added integration controls pass in the pinned CI Python environment
+(13 focused tests total). They use real tiny PDFs and both renderers, exercise
+first-run and cached/resumed reports, and assert exact resumed JSON bytes.
+Local instrumented coverage executes 70 of 85 changed source statements; that
+is a local receipt, not a claim that the next server gate passed. Existing
+ResourceWarnings from historical `json.load(open(...))` calls remain visible;
+file-lifetime cleanup is not silently bundled into this equivalence change.

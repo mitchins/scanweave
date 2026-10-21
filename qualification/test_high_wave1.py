@@ -6,6 +6,10 @@ constant assignments without running their corpus-writing top-level programs.
 Integration equality against 0816d8a is separately recorded in the wave report.
 """
 import ast
+from contextlib import chdir
+import csv
+import hashlib
+import io
 import json
 from pathlib import Path
 import subprocess
@@ -14,6 +18,7 @@ import unittest
 from unittest.mock import patch
 
 import numpy as np
+import pikepdf
 from PIL import Image
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -27,6 +32,34 @@ def definitions(relative):
     namespace = {'__file__': str(path), '__name__': 'wave1_control'}
     exec(compile(tree, str(path), 'exec'), namespace)
     return namespace
+
+
+def run_script(relative, scratch):
+    """Execute an actual historical entry point with only its output tree relocated."""
+    path = ROOT / 'qualification' / relative
+    relocated = scratch / 'qualification' / relative
+    relocated.parent.mkdir(parents=True, exist_ok=True)
+    namespace = {'__file__': str(relocated), '__name__': '__main__'}
+    with chdir(scratch):
+        exec(compile(path.read_text(), str(path), 'exec'), namespace)
+    return namespace
+
+
+def small_pdf(image=None):
+    """A real one-page PDF, optionally with one lossless RGB image resource."""
+    pdf = pikepdf.new()
+    page = pdf.add_blank_page(page_size=(72, 72) if image is None else (4.8, 3.84))
+    if image is not None:
+        stream = pdf.make_stream(image.tobytes())
+        stream.update({'/Type': pikepdf.Name.XObject, '/Subtype': pikepdf.Name.Image,
+                       '/Width': image.width, '/Height': image.height,
+                       '/ColorSpace': pikepdf.Name.DeviceRGB, '/BitsPerComponent': 8})
+        page.Resources = pikepdf.Dictionary(XObject=pikepdf.Dictionary(Im0=stream))
+        page.Contents = pdf.make_stream(b'q 4.8 0 0 3.84 0 0 cm /Im0 Do Q')
+    output = io.BytesIO()
+    pdf.save(output)
+    pdf.close()
+    return output.getvalue()
 
 
 class HighWave1Tests(unittest.TestCase):
@@ -158,6 +191,79 @@ class HighWave1Tests(unittest.TestCase):
                 with self.subTest(title=title):
                     result = subprocess.run(['bash', '-c', script, 'runner-test', str(tool), title], capture_output=True, text=True)
                     self.assertEqual((result.returncode, result.stdout), (status, stdout))
+
+
+    def test_real_result_packager_writes_exact_names_and_hashes(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            current = root/'qualification/real_convergence'
+            previous = root/'qualification/pdf_packaging'
+            current.mkdir(parents=True); previous.mkdir(parents=True)
+            resources = dict(pdf_bytes=101, raster_bytes=50, font_bytes=20,
+                             content_bytes=10, overhead_bytes=21)
+            measurement = [{'pdf': 'qualification/real_convergence/collections/case.pdf',
+                            'resources': resources, 'pages': [{'id': 'case', 'funnel': {'ocr_chars': 3}}],
+                            'native': [{'class': 'whole_page', 'bytes': 50, 'histogram': [1]+[0]*254+[1]}]}]
+            (current/'measurements.json').write_text(json.dumps(measurement))
+            (previous/'group-measurements.json').write_text(json.dumps([{'group': 'case', 'arm': 'scanweave', 'resources': resources}]))
+            (current/'outline-inventory.json').write_text(json.dumps([{'pdf': 'qualification/real_convergence/collections/case.pdf', 'pages': [{'draws': 2, 'unique_gids': 1}], 'unique_painted_gids': 1}]))
+            (current/'starting-head.txt').write_text('0816d8a\n')
+            pdf = small_pdf()
+            expected = set()
+            for directory in [current/'outputs', current/'collections', current/'300', current/'600', previous/'groups']:
+                directory.mkdir(); file = directory/'case.pdf'; file.write_bytes(pdf)
+                expected.add(str(file.relative_to(root)))
+            run_script('real_convergence/package_results.py', root)
+            manifest = json.loads((current/'run-manifest.json').read_text())
+            self.assertEqual({r['path'] for r in manifest['artifacts']}, expected)
+            self.assertTrue(all(r['sha256'] == hashlib.sha256(pdf).hexdigest() and r['bytes'] == len(pdf) for r in manifest['artifacts']))
+            totals = json.loads((current/'totals.json').read_text())
+            self.assertEqual(totals['pdf_bytes'], 101)
+            self.assertEqual(totals['strict_bitonal_objects'], {'whole_page': 1})
+            self.assertEqual(totals['actual_visible_draws'], 2)
+            with (current/'scorecard.csv').open() as file:
+                rows = list(csv.DictReader(file))
+            self.assertEqual([r['arm'] for r in rows], ['previous_scanweave', 'updated_scanweave'])
+            self.assertEqual(json.loads((current/'page-results.json').read_text())[0]['id'], 'case')
+
+    def test_outline_inventory_runs_on_real_pdf_in_all_glob_locations(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary); base = root/'qualification/tonal_raster'
+            pdf = small_pdf()
+            for name in ['collections', 'baseline-collections', '300', '600', 'control-runs']:
+                directory = base/name; directory.mkdir(parents=True)
+                (directory/('final.pdf' if name in ['300', '600'] else 'tiny.pdf')).write_bytes(pdf)
+            run_script('tonal_raster/outline_inventory.py', root)
+            rows = json.loads((base/'outline-inventory.json').read_text())
+            self.assertEqual(len(rows), 5)
+            self.assertTrue(all(r['visible_glyph_draws'] == 0 and r['pages'] == [{'draws': 0, 'unique_gids': 0}] for r in rows))
+            self.assertEqual({Path(r['pdf']).parent.name for r in rows}, {'collections', 'baseline-collections', '300', '600', 'control-runs'})
+
+    def test_tonal_full_and_resumed_report_paths_with_both_renderers(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary); base = root/'qualification/tonal_raster'
+            base.mkdir(parents=True)
+            (base/'controls.json').write_text(json.dumps({'regions': {'tiny': [['mark', 0, 0, 1, 1]]}}))
+            image = Image.new('RGB', (20, 16), 'white')
+            image.putpixel((7, 5), (100, 100, 100))
+            pdf = small_pdf(image)
+            for arm in ['baseline', 'q98', 'q100']:
+                directory = base/arm; directory.mkdir()
+                (directory/'tiny.pdf').write_bytes(pdf)
+                (directory/'tiny.pdf.json').write_text(json.dumps({'conversion': {'page_reports': [{'occurrences': []}]}}))
+            run_script('tonal_raster/compare.py', root)
+            first = (base/'comparison.json').read_bytes()
+            rows = json.loads(first)
+            self.assertEqual(len(rows), 1)
+            self.assertEqual(len(rows[0]['regions']), 2)
+            for arm in ['q98', 'q100']:
+                for renderer in ['pdfium', 'poppler']:
+                    self.assertEqual(rows[0]['arms'][arm][renderer]['mae'], 0.)
+                    self.assertEqual(rows[0]['arms'][arm][renderer]['changed_fraction'], 0.)
+                    self.assertEqual(rows[0]['arms'][arm][renderer]['lost_ridges'], 0)
+                    self.assertTrue((base/'renders'/arm/f'tiny-{renderer}.png').exists())
+            run_script('tonal_raster/compare.py', root)
+            self.assertEqual((base/'comparison.json').read_bytes(), first)
 
 
 if __name__ == '__main__':

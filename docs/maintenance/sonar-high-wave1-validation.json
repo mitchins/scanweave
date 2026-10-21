@@ -204,5 +204,20 @@
     "reporting_correction": "Replaced unsupported pdf_unchanged boolean with actual before/after source-PDF hash assertions; also assert serialized JSON bytes identical.",
     "limits": "Static and targeted execution review, not a new visual qualification or whole real-corpus run."
   },
-  "github_sonar": "Pending fresh PR workflow; no main issue closures claimed."
+  "github_sonar": "Pending fresh PR workflow; no main issue closures claimed.",
+  "narrowed_scope": {
+    "targeted_original_keys": 22,
+    "literal_modules": 10,
+    "literal_findings": 14,
+    "correctness_contract_findings": 4,
+    "complexity_findings": 4,
+    "deferred_original_keys": 95,
+    "focused_tests_passed": 13,
+    "local_instrumented_changed_statements": {
+      "covered": 70,
+      "total": 85
+    },
+    "fixture_output_scope": "Temporary roots only; real tiny PDFs rendered with Poppler and PDFium. Full and resumed JSON bytes asserted identical.",
+    "fresh_server_analysis": "Pending; first gates failed as documented, thresholds unchanged."
+  }
 }
