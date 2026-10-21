@@ -221,3 +221,34 @@ locations/statuses in its baseline columns and the original raw JSON.
 
 Fresh main has 121 unique OPEN HIGH keys, all Maintainability; HIGH Security
 and Reliability remain zero. Zero open PRs was verified before Wave 2 began.
+
+
+### Wave 2 merged-main reconciliation and Wave 3 intake
+
+PR #12 was approved at `2a1e7dc7cef4aef86c4e3f377ca81efa606ee253` and
+squash-merged as `825eb12b8eadd06cf7e8286800b34e949f6378b0`; the trees match.
+Fresh [main CI](https://github.com/mitchins/scanweave/actions/runs/39552023650)
+and [main Sonar](https://github.com/mitchins/scanweave/actions/runs/39552023736)
+passed. Server analysis `1bba90b3-0072-4aca-ba41-6ab600e6df4e` belongs to
+that exact revision and Quality Gate is OK.
+
+The [nine-key closure table](https://github.com/mitchins/scanweave/pull/12#issuecomment-6309266277)
+records **eight verified code fixes, zero reidentifications/new HIGH keys, and
+one unresolved original key**, `AaFbqryNDf3ZA7hnTDuV`. `convert_pdf` complexity
+fell from39 to32, still above30. It is not counted as fixed. Main has113 OPEN
+HIGH keys, all Maintainability; HIGH Security and Reliability are zero.
+
+Zero open PRs was verified after main CI and server processing. Only then did
+Wave3 branch from `825eb12`. Its [bounded scope and equivalence receipt](SONAR_HIGH_WAVE3.md)
+cover one auditor family and the explicitly authorized Wave1 product-measurement
+remainder. The other12 comparator/stage candidates stay open and deferred under
+the bounded family/qualification budget; they are not silently renamed as fixes.
+No fourth PR/wave follows automatically.
+
+The remaining CLI complexity is explicitly deferred, not mixed into Python-tool
+maintenance. A later decomposition needs ordinary PDF-to-PDF byte equality in
+both profiles, malformed input/multi-fault error precedence, page rotation and
+physical size tests, native source-image geometry/binding, subprocess failure
+ordering, numeric OCR/search and deterministic serialization. Existing parser
+private-decoder/escaped-key limitations also require a separate behavioral
+contract; zero-difference refactors do not qualify those semantics as correct.
