@@ -61,8 +61,8 @@ def features(source, candidate):
     return metrics
 
 
-def render_cached(path, index, renderer, dpi, name):
-    target = LOCAL/'renders'/f'{name}-{renderer}-{dpi}.png'
+def render_cached(path, index, renderer, dpi, name, source_sha256):
+    target = LOCAL/'renders'/f'{name}-{source_sha256}-p{index}-{renderer}-{dpi}.png'
     target.parent.mkdir(parents=True,exist_ok=True)
     if target.exists():
         return Image.open(target).convert('RGB')
@@ -92,14 +92,14 @@ def main():
         for index,name in enumerate(members):
             print(name,flush=True)
             for renderer in ('pdfium','poppler'):
-                images = {arm:render_cached(docs[(collection,arm)]['path'],index,renderer,100,f'{name}-{arm}') for arm in ARMS}
+                images = {arm:render_cached(docs[(collection,arm)]['path'],index,renderer,100,f'{name}-{arm}',docs[(collection,arm)]['sha256']) for arm in ARMS}
                 for arm,image in images.items():
                     results['pages'].append({'id':name,'arm':arm,'renderer':renderer,'dpi':100,
                                              'metrics':features(images['input'],image)})
                 sheet([images[a] for a in DISPLAY],list(DISPLAY),LOCAL/'sheets'/f'{name}-{renderer}-page.png')
                 if name not in regions:
                     continue
-                detailed = {arm:render_cached(docs[(collection,arm)]['path'],index,renderer,300,f'{name}-{arm}') for arm in DISPLAY}
+                detailed = {arm:render_cached(docs[(collection,arm)]['path'],index,renderer,300,f'{name}-{arm}',docs[(collection,arm)]['sha256']) for arm in DISPLAY}
                 # Crop every arm using source dimensions, never fit to candidate content.
                 width,height = detailed['input'].size
                 for rid,region in enumerate(regions[name]):

@@ -8,6 +8,7 @@ ROOT = Path(__file__).resolve().parents[2]
 BASE = Path(__file__).resolve().parent
 PACK = ROOT/'qualification/pdf_packaging'
 TONAL = ROOT/'qualification/tonal_raster'
+MUTABLE_TOOLS = {'target/release/scanweave'}
 
 
 def main():
@@ -18,12 +19,12 @@ def main():
         for item in json.loads(manifest.read_text())[key]:
             path = ROOT/item['path']
             if not path.exists():
-                if path.suffix.lower() in ('.pdf', '.png', '.jpg', '.jpeg', '.tif', '.tiff'):
+                if item['path'] not in MUTABLE_TOOLS:
                     raise FileNotFoundError('Required frozen artifact missing: '+str(path))
                 checks.append({'path': item['path'], 'status': 'MISSING_OPTIONAL_TOOL_OR_LOG'})
                 continue
             actual = digest(path.read_bytes())
-            if actual != item['sha256'] and path.suffix.lower() in ('.pdf', '.png', '.jpg', '.jpeg', '.tif', '.tiff'):
+            if actual != item['sha256'] and item['path'] not in MUTABLE_TOOLS:
                 raise ValueError('Frozen artifact mismatch: '+str(path))
             checks.append({'path': item['path'], 'status': 'MATCH' if actual == item['sha256'] else 'MUTABLE_TOOL_CHANGED', 'expected_sha256': item['sha256'], 'sha256': actual})
     (BASE/'provenance.json').write_text(json.dumps(checks, indent=2)+'\n')

@@ -1,0 +1,24 @@
+{
+  "instrument_tests": 5,
+  "tool_coverage_statements": 793,
+  "tool_coverage_missed": 58,
+  "tool_coverage_percent": 92.6860025220681,
+  "accounting_outputs_byte_identical_after_review": true,
+  "frozen_artifacts_checked": 218,
+  "matched_frozen_entries": 217,
+  "allowed_mutable_tool_drift": [
+    "target/release/scanweave"
+  ],
+  "production_crates_changed": false,
+  "sealed_holdout_accessed": false,
+  "review_corrections": [
+    "strict page/report pairing",
+    "nonnegative serialized residual",
+    "PDF hash/page render cache keys",
+    "allowlist-only mutable executable drift",
+    "single current receipt per collection with binary/input binding",
+    "committed placement/reuse producer",
+    "numeric/unit prose readability"
+  ],
+  "test_log_sha256": "5edb04e0378f519c28e2805d30bfbe486aea7da7f43587c4ee4e32283946bc3b"
+}

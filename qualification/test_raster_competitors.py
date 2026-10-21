@@ -68,7 +68,8 @@ def fixture(path, indexed=False, mask=False, jpeg=False, inline=False):
 class RasterPipelineTests(unittest.TestCase):
     def test_generated_pdf_pipeline(self):
         with tempfile.TemporaryDirectory() as directory, contextlib.ExitStack() as stack:
-            root=Path(directory);base=root/'qualification/raster_competitors';base.mkdir(parents=True)
+            root=Path(directory);(root/'target/release').mkdir(parents=True);(root/'target/release/scanweave').write_bytes(b'test-owned binary; never executed')
+            base=root/'qualification/raster_competitors';base.mkdir(parents=True)
             pack=root/'qualification/pdf_packaging';tonal=root/'qualification/tonal_raster'
             group={'historical':{'members':['history-00','history-01','history-02'], 'input':'qualification/pdf_packaging/groups/historical-input.pdf'}}
             records=[]
@@ -105,6 +106,28 @@ class RasterPipelineTests(unittest.TestCase):
             self.assertTrue(all(d['encoded_stream_bytes']['image']>0 for d in inventory))
             self.assertEqual(len(json.loads((base/'region-results.json').read_text())['pages']),36)
             self.assertTrue(all(v['ordered_replay_pixel_identical']for r in json.loads((base/'layer-results.json').read_text())for v in r['renderers'].values()))
+            # Review regressions fail before publishing inconsistent provenance/roles.
+            report_path=Path(str(tonal/'collections/historical.pdf')+'.json')
+            report_text=report_path.read_text()
+            report_path.write_text(json.dumps({'conversion':{'page_reports':[{'patches':[]}]}}))
+            with pikepdf.open(tonal/'collections/historical.pdf') as document:
+                with self.assertRaises(ValueError):
+                    account.image_categories(next(d for d in inventory if d['arm']=='scanweave'),document)
+            report_path.write_text(report_text)
+            bad_inventory=[dict(r)for r in inventory];bad_inventory[0]['pdf_bytes']=1
+            (base/'object-inventory.json').write_text(json.dumps(bad_inventory))
+            with self.assertRaisesRegex(ValueError,'Stream bytes exceed'):
+                account.main()
+            (base/'object-inventory.json').write_text(json.dumps(inventory))
+            manifest_path=pack/'run-manifest.json';manifest_text=manifest_path.read_text()
+            receipt_path=root/'frozen.run.json';receipt_path.write_text('changed receipt')
+            manifest_path.write_text(json.dumps({'artifacts':[{'path':'frozen.run.json','sha256':'wrong'}]}))
+            with self.assertRaisesRegex(ValueError,'Frozen artifact mismatch'):
+                run_inventory.main()
+            receipt_path.unlink()
+            with self.assertRaises(FileNotFoundError):
+                run_inventory.main()
+            manifest_path.write_text(manifest_text)
             # Current-command orchestration control: fake process only copies the
             # test input. It is not conversion/quality evidence.
             class Completed:
@@ -113,9 +136,24 @@ class RasterPipelineTests(unittest.TestCase):
                 destination=Path(command[-1]);destination.write_bytes((tonal/'collections/historical.pdf').read_bytes())
                 self.assertEqual(kwargs['timeout'],1800)
                 return Completed()
-            with patch.object(verify_current.subprocess,'run',side_effect=copy_command), contextlib.redirect_stdout(io.StringIO()):
+            with patch.object(verify_current.subprocess,'run',side_effect=copy_command) as runner, contextlib.redirect_stdout(io.StringIO()):
+                verify_current.main();verify_current.main()
+                self.assertEqual(runner.call_count,1)
+                (base/'local/current/historical.pdf').unlink()
                 verify_current.main()
-            self.assertTrue(json.loads((base/'current-verification.json').read_text())[0]['byte_identical'])
+                self.assertEqual(runner.call_count,2)
+                (root/'target/release/scanweave').write_bytes(b'changed test binary')
+                verify_current.main()
+                self.assertEqual(runner.call_count,3)
+            receipts=json.loads((base/'current-verification.json').read_text())
+            self.assertEqual(len(receipts),1)
+            self.assertTrue(receipts[0]['byte_identical'])
+
+    def test_render_cache_binds_pdf_hash_and_page(self):
+        with tempfile.TemporaryDirectory() as directory, patch.object(render_compare,'LOCAL',Path(directory)), patch.object(render_compare,'frame',return_value=Image.new('RGB',(10,10),'red')) as renderer:
+            for sha,index in [('0'*64,0),('0'*64,0),('1'*64,0),('1'*64,1)]:
+                render_compare.render_cached('test.pdf',index,'pdfium',100,'same-name',sha)
+            self.assertEqual(renderer.call_count,3)
 
     def test_grayscale_jpeg_metadata_and_geometry_metrics(self):
         with tempfile.TemporaryDirectory() as directory:

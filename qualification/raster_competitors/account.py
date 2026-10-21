@@ -19,7 +19,7 @@ def image_categories(record, pdf):
     report=Path(record['path']+'.json')
     if record['arm']=='scanweave' and report.exists():
         conversion=json.loads(report.read_text())['conversion']
-        for page,details in zip(pdf.pages,conversion['page_reports']):
+        for page,details in zip(pdf.pages,conversion['page_reports'],strict=True):
             for index,patch in enumerate(details['patches']):
                 image=page.Resources.XObject.get('/Im'+str(index))
                 if image is None:
@@ -61,6 +61,53 @@ def font_programs(font):
     return programs
 
 
+def write_resource_summaries(records, summaries):
+    """Produce placement evidence and compatible decoded-resource reuse counts."""
+    rows=[];reuse=[]
+    for record,summary in zip(records,summaries,strict=True):
+        categories={str(tuple(s['object'])):s['category']for s in summary['streams']}
+        groups=collections.defaultdict(list)
+        for image in record['images'].values():
+            if 'decoded_samples' not in image:
+                continue
+            identity=tuple(json.dumps(image.get(k),sort_keys=True)for k in
+                           ('Width','Height','BitsPerComponent','ColorSpace','Decode','SMask','Mask','decoded_samples'))
+            groups[identity].append(image)
+        duplicates=[v for v in groups.values()if len(v)>1]
+        reuse.append({'collection':record['collection'],'arm':record['arm'],'image_objects':len(record['images']),
+                      'duplicate_encoded_groups':sum(count>1 for count in collections.Counter(i['encoded_sha256']for i in record['images'].values()).values()),
+                      'compatible_decoded_duplicate_groups':len(duplicates),
+                      'redundant_encoded_bytes_if_compatible_decoded_groups_shared':
+                      sum(sum(i['encoded_bytes']for i in v)-min(i['encoded_bytes']for i in v)for v in duplicates)})
+        rows.extend(placement_rows(record,categories))
+    with (BASE/'page-layer-summary.csv').open('w')as stream:
+        writer=csv.DictWriter(stream,fieldnames=list(rows[0]));writer.writeheader();writer.writerows(rows)
+    (BASE/'reuse-accounting.json').write_text(json.dumps(reuse,indent=2)+'\n')
+
+
+def placement_rows(record,categories):
+    rows=[]
+    for page in record['pages']:
+        for node in nodes(page['paint_graph']):
+            if node['kind'] not in ('image','inline-image'):
+                continue
+            inline=node['kind']=='inline-image';state=record['graphics_states'][node['state_ref']]
+            image=node['dictionary'] if inline else record['images'][node['resource']]
+            rows.append({'collection':record['collection'],'arm':record['arm'],'member':record['members'][page['page']],
+                         'page':page['page'],'object':'inline:'+str(node['inline_id']) if inline else node['resource'],
+                         'role':'inline-stencil' if inline else categories.get(node['resource'],'unclassified'),
+                         'width':image.get('/Width')if inline else image['Width'],
+                         'height':image.get('/Height')if inline else image['Height'],
+                         'encoded_bytes':None if inline else image['encoded_bytes'],
+                         'filter':json.dumps(image.get('/Filter')if inline else image['filter']),
+                         'placed_dpi_x':node['effective_dpi'][0],'placed_dpi_y':node['effective_dpi'][1],
+                         'matched_input_placement_dpi':300,'original_capture_dpi':'unknown/not inferred',
+                         'ctm':json.dumps(state['ctm']),'clip_count':len(state['clips']),
+                         'mask':json.dumps(image.get('SMask'))if not inline else '',
+                         'colour_space':json.dumps(image.get('ColorSpace'))if not inline else 'stencil-current-colour'})
+    return rows
+
+
 def main():
     records=json.loads((BASE/'object-inventory.json').read_text())
     summaries=[];table=[]
@@ -100,11 +147,13 @@ def main():
                     category='other-stream-maps-profiles-etc'
                 size=len(obj.read_raw_bytes());counts[category]+=size
                 streams.append({'object':list(obj.objgen),'category':category,'encoded_bytes':size})
-            counts['serialized-residual']=record['pdf_bytes']-sum(counts.values())
-            assert sum(counts.values())==record['pdf_bytes']
+            residual=record['pdf_bytes']-sum(counts.values())
+            if residual<0:
+                raise ValueError('Stream bytes exceed PDF size: '+record['path'])
+            counts['serialized-residual']=residual
             summary={'collection':record['collection'],'arm':record['arm'],'pdf_bytes':record['pdf_bytes'],
                      'categories':dict(counts),'streams':streams,'pages':[]}
-            for page,name in zip(record['pages'],record['members']):
+            for page,name in zip(record['pages'],record['members'],strict=True):
                 keys=set(n['resource']for n in nodes(page['paint_graph'])if n['kind']=='image')
                 # Include dependencies even when masks are not directly placed by Do.
                 pending=list(keys)
@@ -121,7 +170,7 @@ def main():
             summaries.append(summary)
             for category,count in counts.items():
                 table.append({'collection':record['collection'],'arm':record['arm'],'scope':'unique-document-streams','page':'','member':'','category':category,'encoded_or_residual_bytes':count})
-    for summary,record in zip(summaries,records):
+    for summary,record in zip(summaries,records,strict=True):
         by_object={str(tuple(s['object'])):s['category']for s in summary['streams']}
         for page in summary['pages']:
             counts=collections.Counter()
@@ -134,6 +183,7 @@ def main():
     (BASE/'byte-accounting.json').write_text(json.dumps(summaries,indent=2)+'\n')
     with (BASE/'gap-accounting.csv').open('w') as stream:
         writer=csv.DictWriter(stream,fieldnames=list(table[0]));writer.writeheader();writer.writerows(table)
+    write_resource_summaries(records,summaries)
     totals={}
     for arm in dict.fromkeys(s['arm']for s in summaries):
         count=collections.Counter()

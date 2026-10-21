@@ -65,7 +65,7 @@ Actual structure is **64 JPX colour images plus 32 one-bit Flate soft masks**, a
 
 ### ScanWeave
 
-There are **2,385 indirect images**: eight DCT and 2,377 Flate. Existing reports bind resources to actual writer roles:
+There are **2,385 indirect images**: eight DCT and 2,377 Flate. Existing reports bind resources to actual writer roles. All 32 fresh-main patch/role records match the frozen sidecars exactly (`role-verification.json`); their hashes are recorded in `run-manifest.json`:
 
 | Role | Objects | Encoded bytes |
 |---|---:|---:|
@@ -155,8 +155,8 @@ A next bounded codec test can evaluate these exact resources without changing sa
 
 ## Validation and limitations
 
-Mechanical instrument tests exercise nested Forms, shared image resources, masks, inline stencils, CTM order, unchanged input bytes, real PDF rendering/ordered replay, page-size differences and generated pipeline outputs. CI uses small generated PDFs, not corpus/oracle access. Full corpus resource inventories, source-relative renders and independent review are separate evidence. Current product equivalence is checked against frozen collection hashes rather than asserted from green tests.
+Five mechanical instrument tests (approximately 93% measured tool coverage) exercise nested Forms, shared image resources, masks, inline stencils, CTM order, unchanged input bytes, real PDF rendering/ordered replay, page-size differences and generated pipeline outputs. CI uses small generated PDFs, not corpus/oracle access. Full corpus resource inventories, source-relative renders and independent review are separate evidence. Current product equivalence is checked against frozen collection hashes rather than asserted from green tests.
 
 Every numbered Adobe/OCRmyPDF question, causal gap and required conclusion has an explicit disposition in [questions.md](qualification/raster_competitors/questions.md), including unresolved exact preservation/causal attribution. The source is not pristine ground truth, and neither green CI nor isolated layers establish visual correctness on all documents. Existing P01–P08 limitations remain disclosed.
 
-Reproduction, exact version/command/hash records and local artifact references are in [the harness README](qualification/raster_competitors/README.md). Large renders/collection derivatives stay ignored and local. Only compact tooling, accounting, reports and representative evidence are committed. Review/CI receipts are published on the research PR; it is not automatically merged.
+Reproduction, exact version/command/hash records and local artifact references are in [the harness README](qualification/raster_competitors/README.md). Large renders/collection derivatives stay ignored and local. Only compact tooling, accounting, reports and representative evidence are committed. Review/CI receipts are published on [research PR #14](https://github.com/mitchins/scanweave/pull/14); it is not automatically merged.
