@@ -152,8 +152,9 @@ to 24 / 9 / 16 / 93. Original issue identities/locations remain frozen in JSON.
 The 31 literal findings in 11 historical modules had static AST proof but no
 sufficient instrumented execution of their changed entry-point paths. Their
 edits were reverted, rather than adding a broad mock/corpus framework to this
-small PR. They remain open and in Sonar scope; no coverage denominator,
-threshold or exclusion changed. The retained 16 literal findings are accompanied
+small PR. They remain open and in Sonar scope; no coverage settings,
+analysis-scope exclusions or thresholds changed. The measured new-code
+denominator does shrink because those edits were withdrawn. The retained 16 literal findings are accompanied
 by exact-value controls and the existing, independently inspected helper tests.
 
 Two per-key false positives are separate from the 142-key HIGH intake:
