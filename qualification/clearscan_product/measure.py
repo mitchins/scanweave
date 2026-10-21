@@ -50,6 +50,14 @@ def write_sample_crops(sample_by_char, manifest, oracle_dir, input_dir, poppler_
         canvas.save(crops_dir / f"{ord(ch):04x}-{ch}.png")
 
 
+def first_replaced_samples(all_glyphs):
+    sample_by_char = {}
+    for glyph in all_glyphs:
+        if glyph["replaced"] and glyph["text"] not in sample_by_char:
+            sample_by_char[glyph["text"]] = glyph
+    return sample_by_char
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--dpi", type=int, required=True)
@@ -117,10 +125,7 @@ def main():
                 for ch, vals in sorted(by_char.items())}
     crops_dir = a.out / "crops_800"
     crops_dir.mkdir(exist_ok=True)
-    sample_by_char = {}
-    for glyph in all_glyphs:
-        if glyph["replaced"] and glyph["text"] not in sample_by_char:
-            sample_by_char[glyph["text"]] = glyph
+    sample_by_char = first_replaced_samples(all_glyphs)
     write_sample_crops(sample_by_char, manifest, a.oracle_dir, a.input_dir, poppler_dir, pdfium_images, crops_dir)
     output = {
         "dpi": a.dpi,

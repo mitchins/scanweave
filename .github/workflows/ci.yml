@@ -103,6 +103,8 @@ jobs:
         run: qualification/.venv/bin/python qualification/test_reliability_indices.py
       - name: Qualification HIGH maintenance controls
         run: qualification/.venv/bin/python qualification/test_high_wave1.py
+      - name: Shared qualification auditor controls
+        run: qualification/.venv/bin/python qualification/test_high_wave3.py
       - name: Corpus source and diagnostic tag boundaries
         run: qualification/.venv/bin/python qualification/test_corpus_boundaries.py
       - name: hOCR XML entity boundary
