@@ -1,0 +1,402 @@
+[
+  {
+    "key": "AaFbZj3l2TNSduKvuGyx",
+    "rule": "pythonsecurity:S2083",
+    "file": "qualification/tonal_raster/ocr_rendered.py",
+    "line": 10,
+    "impacts": [
+      {
+        "softwareQuality": "SECURITY",
+        "severity": "BLOCKER"
+      }
+    ],
+    "status": "RESOLVED",
+    "resolution": "FALSE-POSITIVE",
+    "reason": "Receiver is literal B/rendered-ocr.json; OCR/report/PSM taint reaches serialized rows, not the output path. Loop identities are fixed constants.",
+    "review": "Parent source-to-sink trace plus independent per-finding review; no blanket class dismissal."
+  },
+  {
+    "key": "AaFbZj3p2TNSduKvuGy-",
+    "rule": "pythonsecurity:S2083",
+    "file": "qualification/tonal_raster/compare.py",
+    "line": 61,
+    "impacts": [
+      {
+        "softwareQuality": "SECURITY",
+        "severity": "BLOCKER"
+      }
+    ],
+    "status": "RESOLVED",
+    "resolution": "FALSE-POSITIVE",
+    "reason": "Receiver is literal B/comparison.json; measured document content reaches JSON body only, not the path.",
+    "review": "Parent source-to-sink trace plus independent per-finding review; no blanket class dismissal."
+  },
+  {
+    "key": "AaFbZj3p2TNSduKvuGy_",
+    "rule": "pythonsecurity:S2083",
+    "file": "qualification/tonal_raster/compare.py",
+    "line": 75,
+    "impacts": [
+      {
+        "softwareQuality": "SECURITY",
+        "severity": "BLOCKER"
+      }
+    ],
+    "status": "RESOLVED",
+    "resolution": "FALSE-POSITIVE",
+    "reason": "Receiver is literal B/comparison.json in the refresh write; OCR/render metrics affect JSON body, not the path.",
+    "review": "Parent source-to-sink trace plus independent per-finding review; no blanket class dismissal."
+  },
+  {
+    "key": "AaFbZj3j2TNSduKvuGyw",
+    "rule": "pythonsecurity:S2083",
+    "file": "qualification/tonal_raster/verify_results.py",
+    "line": 26,
+    "impacts": [
+      {
+        "softwareQuality": "SECURITY",
+        "severity": "BLOCKER"
+      }
+    ],
+    "status": "RESOLVED",
+    "resolution": "FALSE-POSITIVE",
+    "reason": "Receiver is literal B/paired-checks.json; source reports affect serialized check content only, not the destination.",
+    "review": "Parent source-to-sink trace plus independent per-finding review; no blanket class dismissal."
+  },
+  {
+    "key": "AaFbZj5r2TNSduKvuG0L",
+    "rule": "pythonsecurity:S2083",
+    "file": "qualification/pr_closure/evaluate_repair.py",
+    "line": 29,
+    "impacts": [
+      {
+        "softwareQuality": "SECURITY",
+        "severity": "BLOCKER"
+      }
+    ],
+    "status": "RESOLVED",
+    "resolution": "FALSE-POSITIVE",
+    "reason": "Receiver is constant /tmp/scanweave-closure-font.ttf; PDF font bytes affect file body, not the destination. The separate predictable-temporary-path S5443 issue remains valid and is NOT dismissed by this dataflow disposition.",
+    "review": "Parent source-to-sink trace plus independent per-finding review; no blanket class dismissal."
+  },
+  {
+    "key": "AaFbZj1R2TNSduKvuGuq",
+    "rule": "pythonsecurity:S2083",
+    "file": "qualification/real_convergence/runtime_control.py",
+    "line": 11,
+    "impacts": [
+      {
+        "softwareQuality": "SECURITY",
+        "severity": "BLOCKER"
+      }
+    ],
+    "status": "RESOLVED",
+    "resolution": "FALSE-POSITIVE",
+    "reason": "Receiver is literal B/runtime-control.json; timing/output metadata affects JSON body, not the path. Separate hard-coded temporary executable findings remain open.",
+    "review": "Parent source-to-sink trace plus independent per-finding review; no blanket class dismissal."
+  },
+  {
+    "key": "AaFbZj1S2TNSduKvuGur",
+    "rule": "pythonsecurity:S2083",
+    "file": "qualification/real_convergence/verify_synthetic.py",
+    "line": 27,
+    "impacts": [
+      {
+        "softwareQuality": "SECURITY",
+        "severity": "BLOCKER"
+      }
+    ],
+    "status": "RESOLVED",
+    "resolution": "FALSE-POSITIVE",
+    "reason": "Receiver is freshly created TemporaryDirectory()/font.ttf; untrusted PDF FontFile2 bytes are file content, not filename.",
+    "review": "Parent source-to-sink trace plus independent per-finding review; no blanket class dismissal."
+  },
+  {
+    "key": "AaFbZj212TNSduKvuGxa",
+    "rule": "pythonsecurity:S2083",
+    "file": "qualification/pdf_packaging/measure_groups.py",
+    "line": 20,
+    "impacts": [
+      {
+        "softwareQuality": "SECURITY",
+        "severity": "BLOCKER"
+      }
+    ],
+    "status": "RESOLVED",
+    "resolution": "FALSE-POSITIVE",
+    "reason": "Receiver is TemporaryDirectory()/numeric-index.ttf; font bytes are content, and the index is len(fonts), not a document-supplied pathname.",
+    "review": "Parent source-to-sink trace plus independent per-finding review; no blanket class dismissal."
+  },
+  {
+    "key": "AaFbZj3B2TNSduKvuGxu",
+    "rule": "pythonsecurity:S2083",
+    "file": "qualification/pdf_packaging/verify_serialization.py",
+    "line": 44,
+    "impacts": [
+      {
+        "softwareQuality": "SECURITY",
+        "severity": "BLOCKER"
+      }
+    ],
+    "status": "RESOLVED",
+    "resolution": "FALSE-POSITIVE",
+    "reason": "Receiver is TemporaryDirectory()/numeric-index.ttf; index is len(font), and FontFile2 bytes are file content only.",
+    "review": "Parent source-to-sink trace plus independent per-finding review; no blanket class dismissal."
+  },
+  {
+    "key": "AaFbZj1g2TNSduKvuGu5",
+    "rule": "pythonsecurity:S2083",
+    "file": "qualification/clearscan_background/validate.py",
+    "line": 19,
+    "impacts": [
+      {
+        "softwareQuality": "SECURITY",
+        "severity": "BLOCKER"
+      }
+    ],
+    "status": "RESOLVED",
+    "resolution": "FALSE-POSITIVE",
+    "reason": "Receiver is TemporaryDirectory()/len(fonts).ttf; PDF font stream bytes are content, not the path.",
+    "review": "Parent source-to-sink trace plus independent per-finding review; no blanket class dismissal."
+  },
+  {
+    "key": "AaFbZj3L2TNSduKvuGx3",
+    "rule": "pythonsecurity:S2083",
+    "file": "qualification/clearscan_contours/validate.py",
+    "line": 19,
+    "impacts": [
+      {
+        "softwareQuality": "SECURITY",
+        "severity": "BLOCKER"
+      }
+    ],
+    "status": "RESOLVED",
+    "resolution": "FALSE-POSITIVE",
+    "reason": "Receiver is TemporaryDirectory()/len(fonts).ttf; PDF font stream bytes are content, not the path.",
+    "review": "Parent source-to-sink trace plus independent per-finding review; no blanket class dismissal."
+  },
+  {
+    "key": "AaFbZj4U2TNSduKvuGzK",
+    "rule": "pythonsecurity:S2083",
+    "file": "qualification/clearscan_typography/validate.py",
+    "line": 19,
+    "impacts": [
+      {
+        "softwareQuality": "SECURITY",
+        "severity": "BLOCKER"
+      }
+    ],
+    "status": "RESOLVED",
+    "resolution": "FALSE-POSITIVE",
+    "reason": "Receiver is TemporaryDirectory()/len(fonts).ttf; PDF font stream bytes are content, not the path.",
+    "review": "Parent source-to-sink trace plus independent per-finding review; no blanket class dismissal."
+  },
+  {
+    "key": "AaFbZj1B2TNSduKvuGuh",
+    "rule": "pythonsecurity:S2083",
+    "file": "qualification/clearscan_competitive/validate.py",
+    "line": 20,
+    "impacts": [
+      {
+        "softwareQuality": "SECURITY",
+        "severity": "BLOCKER"
+      }
+    ],
+    "status": "RESOLVED",
+    "resolution": "FALSE-POSITIVE",
+    "reason": "Receiver is TemporaryDirectory()/len(fonts).ttf; PDF font stream bytes are content, not the path.",
+    "review": "Parent source-to-sink trace plus independent per-finding review; no blanket class dismissal."
+  },
+  {
+    "key": "AaFbZj4m2TNSduKvuGzz",
+    "rule": "pythonsecurity:S2083",
+    "file": "qualification/make_hocr.py",
+    "line": 39,
+    "impacts": [
+      {
+        "softwareQuality": "SECURITY",
+        "severity": "BLOCKER"
+      }
+    ],
+    "status": "RESOLVED",
+    "resolution": "FALSE-POSITIVE",
+    "reason": "OCR JSON text affects generated hOCR content, not out_path. Destination is supplied separately as explicit local CLI argv[2]; no HTTP service or privileged server boundary exists in this utility. This is the intended local conversion contract, not the reported OCR-content-to-path flow.",
+    "review": "Parent source-to-sink trace plus independent per-finding review; no blanket class dismissal."
+  },
+  {
+    "key": "AaFbZj2h2TNSduKvuGw0",
+    "rule": "python:S2245",
+    "file": "qualification/experiments/m1c_r2/run.py",
+    "line": 221,
+    "impacts": [
+      {
+        "softwareQuality": "SECURITY",
+        "severity": "MEDIUM"
+      }
+    ],
+    "status": "RESOLVED",
+    "resolution": "FALSE-POSITIVE",
+    "reason": "qualification/experiments/m1c_r2/run.py:221: PRNG supplies synthetic scanner/degradation parameters (DPI, blur, noise, ink and translation), not keys, credentials, authentication tokens or temporary filenames. Noncryptographic sampling is intentional fixture behavior. Parent inspected source use and independent reviewer traced this exact key. Historical hash-based seed reproducibility is a separate concern and is not dismissed by this security disposition.",
+    "review": "Parent source-to-sink trace plus independent per-finding review; no blanket class dismissal."
+  },
+  {
+    "key": "AaFbZj2j2TNSduKvuGxW",
+    "rule": "python:S2245",
+    "file": "qualification/experiments/m1c/run_ablation.py",
+    "line": 195,
+    "impacts": [
+      {
+        "softwareQuality": "SECURITY",
+        "severity": "MEDIUM"
+      }
+    ],
+    "status": "RESOLVED",
+    "resolution": "FALSE-POSITIVE",
+    "reason": "qualification/experiments/m1c/run_ablation.py:195: PRNG supplies synthetic scanner/degradation parameters (DPI, blur, noise, ink and translation), not keys, credentials, authentication tokens or temporary filenames. Noncryptographic sampling is intentional fixture behavior. Parent inspected source use and independent reviewer traced this exact key. Historical hash-based seed reproducibility is a separate concern and is not dismissed by this security disposition.",
+    "review": "Parent source-to-sink trace plus independent per-finding review; no blanket class dismissal."
+  },
+  {
+    "key": "AaFbZj4r2TNSduKvuGz3",
+    "rule": "python:S2245",
+    "file": "qualification/make_m1a_fixtures.py",
+    "line": 124,
+    "impacts": [
+      {
+        "softwareQuality": "SECURITY",
+        "severity": "MEDIUM"
+      }
+    ],
+    "status": "RESOLVED",
+    "resolution": "FALSE-POSITIVE",
+    "reason": "qualification/make_m1a_fixtures.py:124: PRNG supplies synthetic barcode widths/gaps or paper/ink speckle, not keys, credentials, authentication tokens or temporary filenames. Noncryptographic sampling is intentional fixture behavior. Parent inspected source use and independent reviewer traced this exact key. Historical hash-based seed reproducibility is a separate concern and is not dismissed by this security disposition.",
+    "review": "Parent source-to-sink trace plus independent per-finding review; no blanket class dismissal."
+  },
+  {
+    "key": "AaFbZj4r2TNSduKvuGz4",
+    "rule": "python:S2245",
+    "file": "qualification/make_m1a_fixtures.py",
+    "line": 126,
+    "impacts": [
+      {
+        "softwareQuality": "SECURITY",
+        "severity": "MEDIUM"
+      }
+    ],
+    "status": "RESOLVED",
+    "resolution": "FALSE-POSITIVE",
+    "reason": "qualification/make_m1a_fixtures.py:126: PRNG supplies synthetic barcode widths/gaps or paper/ink speckle, not keys, credentials, authentication tokens or temporary filenames. Noncryptographic sampling is intentional fixture behavior. Parent inspected source use and independent reviewer traced this exact key. Historical hash-based seed reproducibility is a separate concern and is not dismissed by this security disposition.",
+    "review": "Parent source-to-sink trace plus independent per-finding review; no blanket class dismissal."
+  },
+  {
+    "key": "AaFbZj4r2TNSduKvuGz5",
+    "rule": "python:S2245",
+    "file": "qualification/make_m1a_fixtures.py",
+    "line": 154,
+    "impacts": [
+      {
+        "softwareQuality": "SECURITY",
+        "severity": "MEDIUM"
+      }
+    ],
+    "status": "RESOLVED",
+    "resolution": "FALSE-POSITIVE",
+    "reason": "qualification/make_m1a_fixtures.py:154: PRNG supplies synthetic barcode widths/gaps or paper/ink speckle, not keys, credentials, authentication tokens or temporary filenames. Noncryptographic sampling is intentional fixture behavior. Parent inspected source use and independent reviewer traced this exact key. Historical hash-based seed reproducibility is a separate concern and is not dismissed by this security disposition.",
+    "review": "Parent source-to-sink trace plus independent per-finding review; no blanket class dismissal."
+  },
+  {
+    "key": "AaFbZj4r2TNSduKvuGz6",
+    "rule": "python:S2245",
+    "file": "qualification/make_m1a_fixtures.py",
+    "line": 154,
+    "impacts": [
+      {
+        "softwareQuality": "SECURITY",
+        "severity": "MEDIUM"
+      }
+    ],
+    "status": "RESOLVED",
+    "resolution": "FALSE-POSITIVE",
+    "reason": "qualification/make_m1a_fixtures.py:154: PRNG supplies synthetic barcode widths/gaps or paper/ink speckle, not keys, credentials, authentication tokens or temporary filenames. Noncryptographic sampling is intentional fixture behavior. Parent inspected source use and independent reviewer traced this exact key. Historical hash-based seed reproducibility is a separate concern and is not dismissed by this security disposition.",
+    "review": "Parent source-to-sink trace plus independent per-finding review; no blanket class dismissal."
+  },
+  {
+    "key": "AaFbZj4r2TNSduKvuGz7",
+    "rule": "python:S2245",
+    "file": "qualification/make_m1a_fixtures.py",
+    "line": 155,
+    "impacts": [
+      {
+        "softwareQuality": "SECURITY",
+        "severity": "MEDIUM"
+      }
+    ],
+    "status": "RESOLVED",
+    "resolution": "FALSE-POSITIVE",
+    "reason": "qualification/make_m1a_fixtures.py:155: PRNG supplies synthetic barcode widths/gaps or paper/ink speckle, not keys, credentials, authentication tokens or temporary filenames. Noncryptographic sampling is intentional fixture behavior. Parent inspected source use and independent reviewer traced this exact key. Historical hash-based seed reproducibility is a separate concern and is not dismissed by this security disposition.",
+    "review": "Parent source-to-sink trace plus independent per-finding review; no blanket class dismissal."
+  },
+  {
+    "key": "AaFbZj5u2TNSduKvuG0P",
+    "rule": "python:S2245",
+    "file": "qualification/make_fixtures.py",
+    "line": 324,
+    "impacts": [
+      {
+        "softwareQuality": "SECURITY",
+        "severity": "MEDIUM"
+      }
+    ],
+    "status": "RESOLVED",
+    "resolution": "FALSE-POSITIVE",
+    "reason": "qualification/make_fixtures.py:324: PRNG supplies synthetic light speckle positions and intensities, not keys, credentials, authentication tokens or temporary filenames. Noncryptographic sampling is intentional fixture behavior. Parent inspected source use and independent reviewer traced this exact key. Historical hash-based seed reproducibility is a separate concern and is not dismissed by this security disposition.",
+    "review": "Parent source-to-sink trace plus independent per-finding review; no blanket class dismissal."
+  },
+  {
+    "key": "AaFbZj5u2TNSduKvuG0Q",
+    "rule": "python:S2245",
+    "file": "qualification/make_fixtures.py",
+    "line": 324,
+    "impacts": [
+      {
+        "softwareQuality": "SECURITY",
+        "severity": "MEDIUM"
+      }
+    ],
+    "status": "RESOLVED",
+    "resolution": "FALSE-POSITIVE",
+    "reason": "qualification/make_fixtures.py:324: PRNG supplies synthetic light speckle positions and intensities, not keys, credentials, authentication tokens or temporary filenames. Noncryptographic sampling is intentional fixture behavior. Parent inspected source use and independent reviewer traced this exact key. Historical hash-based seed reproducibility is a separate concern and is not dismissed by this security disposition.",
+    "review": "Parent source-to-sink trace plus independent per-finding review; no blanket class dismissal."
+  },
+  {
+    "key": "AaFbZj5u2TNSduKvuG0R",
+    "rule": "python:S2245",
+    "file": "qualification/make_fixtures.py",
+    "line": 325,
+    "impacts": [
+      {
+        "softwareQuality": "SECURITY",
+        "severity": "MEDIUM"
+      }
+    ],
+    "status": "RESOLVED",
+    "resolution": "FALSE-POSITIVE",
+    "reason": "qualification/make_fixtures.py:325: PRNG supplies synthetic light speckle positions and intensities, not keys, credentials, authentication tokens or temporary filenames. Noncryptographic sampling is intentional fixture behavior. Parent inspected source use and independent reviewer traced this exact key. Historical hash-based seed reproducibility is a separate concern and is not dismissed by this security disposition.",
+    "review": "Parent source-to-sink trace plus independent per-finding review; no blanket class dismissal."
+  },
+  {
+    "key": "AaFbyxckuFkomy7jVtv0",
+    "rule": "pythonsecurity:S2083",
+    "file": "qualification/pr_closure/evaluate_repair.py",
+    "line": 31,
+    "impacts": [
+      {
+        "softwareQuality": "SECURITY",
+        "severity": "BLOCKER"
+      }
+    ],
+    "status": "RESOLVED",
+    "resolution": "FALSE-POSITIVE",
+    "reason": "Private TemporaryDirectory()/font.ttf is the destination; PDF FontFile2 bytes reach write_bytes body only, never the filename. Parent source trace and fresh independent per-key review of f4c3b49 confirm no filename/dataflow bypass. Predictable shared scratch S5443 is independently fixed, not dismissed. Source: https://github.com/mitchins/scanweave/blob/f4c3b49/qualification/pr_closure/evaluate_repair.py#L31",
+    "review": "Fresh independent source-to-sink review, plus parent trace."
+  }
+]
