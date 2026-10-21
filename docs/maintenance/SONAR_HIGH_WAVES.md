@@ -124,3 +124,17 @@ compositor invariants; a complexity score alone is insufficient justification.
 Wave 2 and Wave 3 outcomes will be appended only after their sequential review,
 qualification, operator disposition and fresh main analysis. No fourth wave is
 authorized by this plan.
+
+### Local CI receipt
+
+All 17 local contracts passed, including unfiltered workspace Rust tests,
+denied-warning Clippy, build, schema/corpus/security boundaries, subpixel and
+translation instruments, text search, paint fidelity and document search.
+The donor-repair regression passed. Detailed commands/timings and executed
+measurement hashes are in [the validation receipt](sonar-high-wave1-validation.json).
+Regenerated historical test outputs were backed up outside Git and restored to
+their initially clean bytes, rather than replacing published evidence.
+
+Wave 1 PR: https://github.com/mitchins/scanweave/pull/11 . GitHub CI/Sonar
+results and review dispositions will be recorded there against the final head.
+No merge is authorized without the operator's approval.
