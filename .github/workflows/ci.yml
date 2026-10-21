@@ -105,6 +105,8 @@ jobs:
         run: qualification/.venv/bin/python qualification/test_high_wave1.py
       - name: Shared qualification auditor controls
         run: qualification/.venv/bin/python qualification/test_high_wave3.py
+      - name: Raster forensic instrument controls
+        run: qualification/.venv/bin/python qualification/test_raster_competitors.py
       - name: Corpus source and diagnostic tag boundaries
         run: qualification/.venv/bin/python qualification/test_corpus_boundaries.py
       - name: hOCR XML entity boundary

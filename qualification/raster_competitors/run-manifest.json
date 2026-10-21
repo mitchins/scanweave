@@ -1,0 +1,980 @@
+{
+  "base_head": "0ca94aecd74c35ea1b28bcebe7e11e863aae7f08",
+  "python": "3.12.3 (main, Aug 31 2026, 10:18:26) [GCC 13.3.0]",
+  "python_executable": "/tmp/scanweave-competitive-venv/bin/python",
+  "packages": {
+    "pikepdf": "10.17.0",
+    "pypdfium2": "5.14.0",
+    "Pillow": "13.0.0",
+    "numpy": "2.5.4",
+    "scipy": "1.18.1",
+    "ocrmypdf": "17.13.0",
+    "archive-pdf-tools": "1.5.7"
+  },
+  "current_commands": [
+    {
+      "command": [
+        "pdftoppm",
+        "-v"
+      ],
+      "status": 0,
+      "stdout": "",
+      "stderr": "pdftoppm version 24.02.0\nCopyright 2005-2024 The Poppler Developers - http://poppler.freedesktop.org\nCopyright 1996-2011, 2022 Glyph & Cog, LLC\n"
+    },
+    {
+      "command": [
+        "tesseract",
+        "--version"
+      ],
+      "status": 0,
+      "stdout": "tesseract 5.3.4\n leptonica-1.82.0\n  libgif 5.2.1 : libjpeg 8d (libjpeg-turbo 2.1.5) : libpng 1.6.43 : libtiff 4.5.1 : zlib 1.3 : libwebp 1.3.2 : libopenjp2 2.5.0\n Found AVX2\n Found AVX\n Found FMA\n Found SSE4.1\n Found OpenMP 201511\n Found libarchive 3.7.2 zlib/1.3 liblzma/5.4.5 bz2lib/1.0.8 liblz4/1.9.4 libzstd/1.5.5\n Found libcurl/8.5.0 OpenSSL/3.0.13 zlib/1.3 brotli/1.1.0 zstd/1.5.5 libidn2/2.3.7 libpsl/0.21.2 (+libidn2/2.3.7) libssh/0.10.6/openssl/zlib nghttp2/1.59.0 librtmp/2.3 OpenLDAP/2.6.10\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "wine",
+        "--version"
+      ],
+      "status": 0,
+      "stdout": "wine-9.0 (Ubuntu 9.0~repack-4build3)\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "rustc",
+        "--version"
+      ],
+      "status": 0,
+      "stdout": "rustc 1.99.0 (b940084d7 2026-09-28)\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "git",
+        "rev-parse",
+        "HEAD"
+      ],
+      "status": 0,
+      "stdout": "0ca94aecd74c35ea1b28bcebe7e11e863aae7f08\n",
+      "stderr": ""
+    }
+  ],
+  "jbig2_current_available": false,
+  "historical_versions_and_commands": [
+    {
+      "command": [
+        "rustc",
+        "--version"
+      ],
+      "status": 0,
+      "stdout": "rustc 1.99.0 (b940084d7 2026-09-28)\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "pdftoppm",
+        "-v"
+      ],
+      "status": 0,
+      "stdout": "",
+      "stderr": "pdftoppm version 24.02.0\nCopyright 2005-2024 The Poppler Developers - http://poppler.freedesktop.org\nCopyright 1996-2011, 2022 Glyph & Cog, LLC\n"
+    },
+    {
+      "command": [
+        "pdfinfo",
+        "-v"
+      ],
+      "status": 0,
+      "stdout": "",
+      "stderr": "pdfinfo version 24.02.0\nCopyright 2005-2024 The Poppler Developers - http://poppler.freedesktop.org\nCopyright 1996-2011, 2022 Glyph & Cog, LLC\n"
+    },
+    {
+      "command": [
+        "tesseract",
+        "--version"
+      ],
+      "status": 0,
+      "stdout": "tesseract 5.3.4\n leptonica-1.82.0\n  libgif 5.2.1 : libjpeg 8d (libjpeg-turbo 2.1.5) : libpng 1.6.43 : libtiff 4.5.1 : zlib 1.3 : libwebp 1.3.2 : libopenjp2 2.5.0\n Found AVX2\n Found AVX\n Found FMA\n Found SSE4.1\n Found OpenMP 201511\n Found libarchive 3.7.2 zlib/1.3 liblzma/5.4.5 bz2lib/1.0.8 liblz4/1.9.4 libzstd/1.5.5\n Found libcurl/8.5.0 OpenSSL/3.0.13 zlib/1.3 brotli/1.1.0 zstd/1.5.5 libidn2/2.3.7 libpsl/0.21.2 (+libidn2/2.3.7) libssh/0.10.6/openssl/zlib nghttp2/1.59.0 librtmp/2.3 OpenLDAP/2.6.10\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "tesseract",
+        "--list-langs"
+      ],
+      "status": 0,
+      "stdout": "List of available languages in \"/usr/share/tesseract-ocr/5/tessdata/\" (2):\neng\nosd\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "wine",
+        "--version"
+      ],
+      "status": 0,
+      "stdout": "wine-9.0 (Ubuntu 9.0~repack-4build3)\n",
+      "stderr": ""
+    }
+  ],
+  "historical_packages": {
+    "pikepdf": "10.17.0",
+    "pypdfium2": "5.14.0",
+    "ocrmypdf": "17.13.0",
+    "archive-pdf-tools": "1.5.7",
+    "Pillow": "13.0.0",
+    "numpy": "2.5.4"
+  },
+  "historical_jbig2_evidence": [
+    "qualification/pdf_packaging/groups/forms-ocrmypdf3.log",
+    "qualification/pdf_packaging/groups/receipts-ocrmypdf3.log",
+    "qualification/pdf_packaging/groups/financial-ocrmypdf3.log",
+    "qualification/pdf_packaging/groups/historical-ocrmypdf3.log",
+    "qualification/pdf_packaging/groups/mixed-ocrmypdf3.log"
+  ],
+  "frozen_runs": [
+    {
+      "path": "qualification/pdf_packaging/groups/financial-adobe.run.json",
+      "sha256": "f412fe0bac408df7359ebb279a968e8074c7ee1f6d0f31645beb875df74f8ddf",
+      "record": {
+        "group": "financial",
+        "arm": "adobe",
+        "command": [
+          "/data/coding/scanweave/adobe-acrobat-sandbox/clearscan.sh",
+          "/data/coding/scanweave/qualification/pdf_packaging/groups/financial-input.pdf",
+          "/data/coding/scanweave/qualification/pdf_packaging/groups/financial-adobe.pdf"
+        ],
+        "status": 0,
+        "error": null,
+        "seconds": 82.92892631801078,
+        "pdf_bytes": 718276
+      }
+    },
+    {
+      "path": "qualification/pdf_packaging/groups/financial-archive.run.json",
+      "sha256": "ca5e4863e878f0d0337bb2a9b6c4dd62960832d371d78373782b05879f70237f",
+      "record": {
+        "group": "financial",
+        "arm": "archive",
+        "command": [
+          "/tmp/scanweave-competitive-venv/bin/recode_pdf",
+          "-P",
+          "/data/coding/scanweave/qualification/pdf_packaging/groups/financial-input.pdf",
+          "-T",
+          "/data/coding/scanweave/qualification/pdf_packaging/groups/financial.hocr",
+          "-o",
+          "/data/coding/scanweave/qualification/pdf_packaging/groups/financial-archive.pdf",
+          "--mask-compression",
+          "ccitt",
+          "--threads",
+          "1"
+        ],
+        "status": 0,
+        "seconds": 24.582824293000158,
+        "timing_scope": "recode only; uses separately recorded Tesseract preparation",
+        "pdf_bytes": 1283825
+      }
+    },
+    {
+      "path": "qualification/pdf_packaging/groups/financial-ocrmypdf1.run.json",
+      "sha256": "6f834bfa3aab0d37b60414b9dd04e178508cc489a490c0996f32baa1998174df",
+      "record": {
+        "group": "financial",
+        "arm": "ocrmypdf1",
+        "command": [
+          "/tmp/scanweave-competitive-venv/bin/ocrmypdf",
+          "--jobs",
+          "1",
+          "--output-type",
+          "pdf",
+          "-O1",
+          "/data/coding/scanweave/qualification/pdf_packaging/groups/financial-input.pdf",
+          "/data/coding/scanweave/qualification/pdf_packaging/groups/financial-ocrmypdf1.pdf"
+        ],
+        "status": 0,
+        "error": null,
+        "seconds": 19.58770358399488,
+        "pdf_bytes": 12901665
+      }
+    },
+    {
+      "path": "qualification/pdf_packaging/groups/financial-ocrmypdf3.run.json",
+      "sha256": "7fefc5e8a67d0d7f284943bbc9831c2eef7478fa3f838abb68425b04728c1149",
+      "record": {
+        "group": "financial",
+        "arm": "ocrmypdf3",
+        "command": [
+          "/tmp/scanweave-competitive-venv/bin/ocrmypdf",
+          "--jobs",
+          "1",
+          "--output-type",
+          "pdf",
+          "-O3",
+          "/data/coding/scanweave/qualification/pdf_packaging/groups/financial-input.pdf",
+          "/data/coding/scanweave/qualification/pdf_packaging/groups/financial-ocrmypdf3.pdf"
+        ],
+        "status": 0,
+        "error": null,
+        "seconds": 43.92585251599667,
+        "pdf_bytes": 5166004
+      }
+    },
+    {
+      "path": "qualification/pdf_packaging/groups/financial-scanweave.run.json",
+      "sha256": "6f08cae65f0ddc0dc9f93980459f3456b41c1389788d2c049909767677f47f92",
+      "record": {
+        "group": "financial",
+        "arm": "scanweave",
+        "command": [
+          "/data/coding/scanweave/target/release/scanweave",
+          "/data/coding/scanweave/qualification/pdf_packaging/groups/financial-input.pdf",
+          "/data/coding/scanweave/qualification/pdf_packaging/groups/financial-scanweave.pdf"
+        ],
+        "status": 0,
+        "error": null,
+        "seconds": 520.8380111379956,
+        "pdf_bytes": 10488347
+      }
+    },
+    {
+      "path": "qualification/pdf_packaging/groups/forms-adobe.run.json",
+      "sha256": "15b164dbe49306b2c0971068c12d69a8ed80669616e8596564d5b8fb4d236201",
+      "record": {
+        "group": "forms",
+        "arm": "adobe",
+        "command": [
+          "/data/coding/scanweave/adobe-acrobat-sandbox/clearscan.sh",
+          "/data/coding/scanweave/qualification/pdf_packaging/groups/forms-input.pdf",
+          "/data/coding/scanweave/qualification/pdf_packaging/groups/forms-adobe.pdf"
+        ],
+        "status": 0,
+        "error": null,
+        "seconds": 83.1410350149963,
+        "pdf_bytes": 625620
+      }
+    },
+    {
+      "path": "qualification/pdf_packaging/groups/forms-archive.run.json",
+      "sha256": "5b4cee55ecc4463d3d9dda4165ce3439021924d58005f09932418fc636fca8b4",
+      "record": {
+        "group": "forms",
+        "arm": "archive",
+        "command": [
+          "/tmp/scanweave-competitive-venv/bin/recode_pdf",
+          "-P",
+          "/data/coding/scanweave/qualification/pdf_packaging/groups/forms-input.pdf",
+          "-T",
+          "/data/coding/scanweave/qualification/pdf_packaging/groups/forms.hocr",
+          "-o",
+          "/data/coding/scanweave/qualification/pdf_packaging/groups/forms-archive.pdf",
+          "--mask-compression",
+          "ccitt",
+          "--threads",
+          "1"
+        ],
+        "status": 0,
+        "seconds": 8.414751758013153,
+        "timing_scope": "recode only; uses separately recorded Tesseract preparation",
+        "pdf_bytes": 400384
+      }
+    },
+    {
+      "path": "qualification/pdf_packaging/groups/forms-ocrmypdf1.run.json",
+      "sha256": "725b8bbaf7fbac328b5e64cf56471eba5543a0a3767c24785ed028b82976d2e3",
+      "record": {
+        "group": "forms",
+        "arm": "ocrmypdf1",
+        "command": [
+          "/tmp/scanweave-competitive-venv/bin/ocrmypdf",
+          "--jobs",
+          "1",
+          "--output-type",
+          "pdf",
+          "-O1",
+          "/data/coding/scanweave/qualification/pdf_packaging/groups/forms-input.pdf",
+          "/data/coding/scanweave/qualification/pdf_packaging/groups/forms-ocrmypdf1.pdf"
+        ],
+        "status": 0,
+        "error": null,
+        "seconds": 7.66419505799422,
+        "pdf_bytes": 1319579
+      }
+    },
+    {
+      "path": "qualification/pdf_packaging/groups/forms-ocrmypdf3.run.json",
+      "sha256": "edffc24eb4e6e4b07b6cc215aacf69d04d7f4f3fd4e60a85e0a6f70bcebc64ae",
+      "record": {
+        "group": "forms",
+        "arm": "ocrmypdf3",
+        "command": [
+          "/tmp/scanweave-competitive-venv/bin/ocrmypdf",
+          "--jobs",
+          "1",
+          "--output-type",
+          "pdf",
+          "-O3",
+          "/data/coding/scanweave/qualification/pdf_packaging/groups/forms-input.pdf",
+          "/data/coding/scanweave/qualification/pdf_packaging/groups/forms-ocrmypdf3.pdf"
+        ],
+        "status": 0,
+        "error": null,
+        "seconds": 9.074612814001739,
+        "pdf_bytes": 515613
+      }
+    },
+    {
+      "path": "qualification/pdf_packaging/groups/forms-scanweave.run.json",
+      "sha256": "ceebc2489cfa89742125d59e9ef09745300cd947b97034d0583d12e2cf43ef40",
+      "record": {
+        "group": "forms",
+        "arm": "scanweave",
+        "command": [
+          "/data/coding/scanweave/target/release/scanweave",
+          "/data/coding/scanweave/qualification/pdf_packaging/groups/forms-input.pdf",
+          "/data/coding/scanweave/qualification/pdf_packaging/groups/forms-scanweave.pdf"
+        ],
+        "status": 0,
+        "error": null,
+        "seconds": 57.74491025597672,
+        "pdf_bytes": 850313
+      }
+    },
+    {
+      "path": "qualification/pdf_packaging/groups/historical-adobe.run.json",
+      "sha256": "878144ae41c6b0b0baaa850e1ddfa435a109c362e832df7187f9e6a9bdd27e9a",
+      "record": {
+        "group": "historical",
+        "arm": "adobe",
+        "command": [
+          "/data/coding/scanweave/adobe-acrobat-sandbox/clearscan.sh",
+          "/data/coding/scanweave/qualification/pdf_packaging/groups/historical-input.pdf",
+          "/data/coding/scanweave/qualification/pdf_packaging/groups/historical-adobe.pdf"
+        ],
+        "status": 0,
+        "error": null,
+        "seconds": 83.80240909999702,
+        "pdf_bytes": 1682427
+      }
+    },
+    {
+      "path": "qualification/pdf_packaging/groups/historical-archive.run.json",
+      "sha256": "596c07ac85fdc6fe57962129b84e17be6c9530802b47b017d9c3894b32c6c0fb",
+      "record": {
+        "group": "historical",
+        "arm": "archive",
+        "command": [
+          "/tmp/scanweave-competitive-venv/bin/recode_pdf",
+          "-P",
+          "/data/coding/scanweave/qualification/pdf_packaging/groups/historical-input.pdf",
+          "-T",
+          "/data/coding/scanweave/qualification/pdf_packaging/groups/historical.hocr",
+          "-o",
+          "/data/coding/scanweave/qualification/pdf_packaging/groups/historical-archive.pdf",
+          "--mask-compression",
+          "ccitt",
+          "--threads",
+          "1"
+        ],
+        "status": 0,
+        "seconds": 17.604078325006412,
+        "timing_scope": "recode only; uses separately recorded Tesseract preparation",
+        "pdf_bytes": 616324
+      }
+    },
+    {
+      "path": "qualification/pdf_packaging/groups/historical-ocrmypdf1.run.json",
+      "sha256": "2267cab5e4274c81effe69c709874fa21aaeb27b50e4624d544a8f70e47e2696",
+      "record": {
+        "group": "historical",
+        "arm": "ocrmypdf1",
+        "command": [
+          "/tmp/scanweave-competitive-venv/bin/ocrmypdf",
+          "--jobs",
+          "1",
+          "--output-type",
+          "pdf",
+          "-O1",
+          "/data/coding/scanweave/qualification/pdf_packaging/groups/historical-input.pdf",
+          "/data/coding/scanweave/qualification/pdf_packaging/groups/historical-ocrmypdf1.pdf"
+        ],
+        "status": 0,
+        "error": null,
+        "seconds": 25.368709158006823,
+        "pdf_bytes": 46850005
+      }
+    },
+    {
+      "path": "qualification/pdf_packaging/groups/historical-ocrmypdf3.run.json",
+      "sha256": "54a2524f93254f43e18413f9cc482dd4de680ede831d588abe3c84e089b97634",
+      "record": {
+        "group": "historical",
+        "arm": "ocrmypdf3",
+        "command": [
+          "/tmp/scanweave-competitive-venv/bin/ocrmypdf",
+          "--jobs",
+          "1",
+          "--output-type",
+          "pdf",
+          "-O3",
+          "/data/coding/scanweave/qualification/pdf_packaging/groups/historical-input.pdf",
+          "/data/coding/scanweave/qualification/pdf_packaging/groups/historical-ocrmypdf3.pdf"
+        ],
+        "status": 0,
+        "error": null,
+        "seconds": 38.540427605010336,
+        "pdf_bytes": 5802054
+      }
+    },
+    {
+      "path": "qualification/pdf_packaging/groups/historical-scanweave.run.json",
+      "sha256": "e06a31d2e1c07853bcf103fc773bf65f4f56bd2dd12c4eb83d7ef673fcb2b75d",
+      "record": {
+        "group": "historical",
+        "arm": "scanweave",
+        "command": [
+          "/data/coding/scanweave/target/release/scanweave",
+          "/data/coding/scanweave/qualification/pdf_packaging/groups/historical-input.pdf",
+          "/data/coding/scanweave/qualification/pdf_packaging/groups/historical-scanweave.pdf"
+        ],
+        "status": 0,
+        "error": null,
+        "seconds": 391.71596583299106,
+        "pdf_bytes": 47108340
+      }
+    },
+    {
+      "path": "qualification/pdf_packaging/groups/mixed-adobe.run.json",
+      "sha256": "8036c3e3013d0ddeebea41ba4147e3168716940214e25b475a510d20d99fe2d9",
+      "record": {
+        "group": "mixed",
+        "arm": "adobe",
+        "command": [
+          "/data/coding/scanweave/adobe-acrobat-sandbox/clearscan.sh",
+          "/data/coding/scanweave/qualification/pdf_packaging/groups/mixed-input.pdf",
+          "/data/coding/scanweave/qualification/pdf_packaging/groups/mixed-adobe.pdf"
+        ],
+        "status": 0,
+        "error": null,
+        "seconds": 83.0884809679992,
+        "pdf_bytes": 235999
+      }
+    },
+    {
+      "path": "qualification/pdf_packaging/groups/mixed-archive.run.json",
+      "sha256": "2695d4be7c774650b9ac66918cf87334768fb6419ca710b26b911affe9e30214",
+      "record": {
+        "group": "mixed",
+        "arm": "archive",
+        "command": [
+          "/tmp/scanweave-competitive-venv/bin/recode_pdf",
+          "-P",
+          "/data/coding/scanweave/qualification/pdf_packaging/groups/mixed-input.pdf",
+          "-T",
+          "/data/coding/scanweave/qualification/pdf_packaging/groups/mixed.hocr",
+          "-o",
+          "/data/coding/scanweave/qualification/pdf_packaging/groups/mixed-archive.pdf",
+          "--mask-compression",
+          "ccitt",
+          "--threads",
+          "1"
+        ],
+        "status": 0,
+        "seconds": 8.922010244976263,
+        "timing_scope": "recode only; uses separately recorded Tesseract preparation",
+        "pdf_bytes": 358410
+      }
+    },
+    {
+      "path": "qualification/pdf_packaging/groups/mixed-ocrmypdf1.run.json",
+      "sha256": "d71f980b64c96ffd5993d9a3196323b41c6c8b8bb92b307963f516bb36d5b7a7",
+      "record": {
+        "group": "mixed",
+        "arm": "ocrmypdf1",
+        "command": [
+          "/tmp/scanweave-competitive-venv/bin/ocrmypdf",
+          "--jobs",
+          "1",
+          "--output-type",
+          "pdf",
+          "-O1",
+          "/data/coding/scanweave/qualification/pdf_packaging/groups/mixed-input.pdf",
+          "/data/coding/scanweave/qualification/pdf_packaging/groups/mixed-ocrmypdf1.pdf"
+        ],
+        "status": 0,
+        "error": null,
+        "seconds": 7.587766851007473,
+        "pdf_bytes": 4371276
+      }
+    },
+    {
+      "path": "qualification/pdf_packaging/groups/mixed-ocrmypdf3.run.json",
+      "sha256": "12d96c8b48c136c26a8e9a07a1892afaa68bb22c99979f1184e9782531d5f2ab",
+      "record": {
+        "group": "mixed",
+        "arm": "ocrmypdf3",
+        "command": [
+          "/tmp/scanweave-competitive-venv/bin/ocrmypdf",
+          "--jobs",
+          "1",
+          "--output-type",
+          "pdf",
+          "-O3",
+          "/data/coding/scanweave/qualification/pdf_packaging/groups/mixed-input.pdf",
+          "/data/coding/scanweave/qualification/pdf_packaging/groups/mixed-ocrmypdf3.pdf"
+        ],
+        "status": 0,
+        "error": null,
+        "seconds": 10.95067522698082,
+        "pdf_bytes": 788537
+      }
+    },
+    {
+      "path": "qualification/pdf_packaging/groups/mixed-scanweave.run.json",
+      "sha256": "147a535f6510cf1d20f732bb6390f64c394abab13b724671224969869ae1c936",
+      "record": {
+        "group": "mixed",
+        "arm": "scanweave",
+        "command": [
+          "/data/coding/scanweave/target/release/scanweave",
+          "/data/coding/scanweave/qualification/pdf_packaging/groups/mixed-input.pdf",
+          "/data/coding/scanweave/qualification/pdf_packaging/groups/mixed-scanweave.pdf"
+        ],
+        "status": 0,
+        "error": null,
+        "seconds": 103.97542267199606,
+        "pdf_bytes": 4991909
+      }
+    },
+    {
+      "path": "qualification/pdf_packaging/groups/receipts-adobe.run.json",
+      "sha256": "2e108ce068b828432b32da5e492526ef23cd809fd98534207db5f45ef3be9996",
+      "record": {
+        "group": "receipts",
+        "arm": "adobe",
+        "command": [
+          "/data/coding/scanweave/adobe-acrobat-sandbox/clearscan.sh",
+          "/data/coding/scanweave/qualification/pdf_packaging/groups/receipts-input.pdf",
+          "/data/coding/scanweave/qualification/pdf_packaging/groups/receipts-adobe.pdf"
+        ],
+        "status": 0,
+        "error": null,
+        "seconds": 83.40487460698932,
+        "pdf_bytes": 915781
+      }
+    },
+    {
+      "path": "qualification/pdf_packaging/groups/receipts-archive.run.json",
+      "sha256": "7cd4907ca8ae4b893468dd014afa779a558bae87338f035be79f40da7776c386",
+      "record": {
+        "group": "receipts",
+        "arm": "archive",
+        "command": [
+          "/tmp/scanweave-competitive-venv/bin/recode_pdf",
+          "-P",
+          "/data/coding/scanweave/qualification/pdf_packaging/groups/receipts-input.pdf",
+          "-T",
+          "/data/coding/scanweave/qualification/pdf_packaging/groups/receipts.hocr",
+          "-o",
+          "/data/coding/scanweave/qualification/pdf_packaging/groups/receipts-archive.pdf",
+          "--mask-compression",
+          "ccitt",
+          "--threads",
+          "1"
+        ],
+        "status": 0,
+        "seconds": 11.297265700006392,
+        "timing_scope": "recode only; uses separately recorded Tesseract preparation",
+        "pdf_bytes": 400705
+      }
+    },
+    {
+      "path": "qualification/pdf_packaging/groups/receipts-ocrmypdf1.run.json",
+      "sha256": "55a9972450618c35b7cc028d1a74c33fc8b63bfd4350444f9907e1d1482f1d32",
+      "record": {
+        "group": "receipts",
+        "arm": "ocrmypdf1",
+        "command": [
+          "/tmp/scanweave-competitive-venv/bin/ocrmypdf",
+          "--jobs",
+          "1",
+          "--output-type",
+          "pdf",
+          "-O1",
+          "/data/coding/scanweave/qualification/pdf_packaging/groups/receipts-input.pdf",
+          "/data/coding/scanweave/qualification/pdf_packaging/groups/receipts-ocrmypdf1.pdf"
+        ],
+        "status": 0,
+        "error": null,
+        "seconds": 13.125873882003361,
+        "pdf_bytes": 16651046
+      }
+    },
+    {
+      "path": "qualification/pdf_packaging/groups/receipts-ocrmypdf3.run.json",
+      "sha256": "52a014aa1ae71d8ce4409a48958606cc46f432af5955db368266bec9a9b4a554",
+      "record": {
+        "group": "receipts",
+        "arm": "ocrmypdf3",
+        "command": [
+          "/tmp/scanweave-competitive-venv/bin/ocrmypdf",
+          "--jobs",
+          "1",
+          "--output-type",
+          "pdf",
+          "-O3",
+          "/data/coding/scanweave/qualification/pdf_packaging/groups/receipts-input.pdf",
+          "/data/coding/scanweave/qualification/pdf_packaging/groups/receipts-ocrmypdf3.pdf"
+        ],
+        "status": 0,
+        "error": null,
+        "seconds": 20.913382507977076,
+        "pdf_bytes": 3043695
+      }
+    },
+    {
+      "path": "qualification/pdf_packaging/groups/receipts-scanweave.run.json",
+      "sha256": "ba069a9f382a5c22384506dce4de2bece636d4d799d900b0fbb975481e8fddb9",
+      "record": {
+        "group": "receipts",
+        "arm": "scanweave",
+        "command": [
+          "/data/coding/scanweave/target/release/scanweave",
+          "/data/coding/scanweave/qualification/pdf_packaging/groups/receipts-input.pdf",
+          "/data/coding/scanweave/qualification/pdf_packaging/groups/receipts-scanweave.pdf"
+        ],
+        "status": 0,
+        "error": null,
+        "seconds": 209.4842896159971,
+        "pdf_bytes": 17870922
+      }
+    }
+  ],
+  "source_pages": [
+    {
+      "id": "cord-00",
+      "source_path": "qualification/clearscan_competitive/real/cord-00.png",
+      "source_sha256": "83a0c8e2d12b3a6b2a9fc377eaca05b6f8e5efd9c62b18f0d8cc1073d4c75881",
+      "matched_pdf": "qualification/pdf_packaging/real/input/cord-00.pdf",
+      "matched_sha256": "8236a4f23c5b81052a9d97e7b7c2b257edb5c268ee6a37a89c82e6f586f003e5",
+      "origin_licence_record": "qualification/pdf_packaging/corpus.json",
+      "license": "CC-BY-4.0",
+      "dpi": "nominal 300; capture DPI unknown"
+    },
+    {
+      "id": "cord-01",
+      "source_path": "qualification/clearscan_competitive/real/cord-01.png",
+      "source_sha256": "89bfef22a92fde606f8459430dcd103742860576a76e0f90e8e9b06190a69c50",
+      "matched_pdf": "qualification/pdf_packaging/real/input/cord-01.pdf",
+      "matched_sha256": "5e661139de19687653412b4968d52077d418e50d8cca8186740e427d90a92c47",
+      "origin_licence_record": "qualification/pdf_packaging/corpus.json",
+      "license": "CC-BY-4.0",
+      "dpi": "nominal 300; capture DPI unknown"
+    },
+    {
+      "id": "cord-02",
+      "source_path": "qualification/clearscan_competitive/real/cord-02.png",
+      "source_sha256": "d06540139f2d3d18e366b203e154ca2a4277db0f0d3f6c4b7f50b5650090863b",
+      "matched_pdf": "qualification/pdf_packaging/real/input/cord-02.pdf",
+      "matched_sha256": "4b9929fd09b6ccc8dbae8fadfb394f999c945b14041389f48f3e1d2d8b7eec36",
+      "origin_licence_record": "qualification/pdf_packaging/corpus.json",
+      "license": "CC-BY-4.0",
+      "dpi": "nominal 300; capture DPI unknown"
+    },
+    {
+      "id": "cord-03",
+      "source_path": "qualification/clearscan_competitive/real/cord-03.png",
+      "source_sha256": "8acb893d2cad4bcb41bf1967d9d50050a592661947f0b7f275103ffc73ce4423",
+      "matched_pdf": "qualification/pdf_packaging/real/input/cord-03.pdf",
+      "matched_sha256": "b58686f5d20833bdb9e7509b96ddd63c49fed683ddce7c8d9329a7ff30d41431",
+      "origin_licence_record": "qualification/pdf_packaging/corpus.json",
+      "license": "CC-BY-4.0",
+      "dpi": "nominal 300; capture DPI unknown"
+    },
+    {
+      "id": "cord-04",
+      "source_path": "qualification/clearscan_competitive/real/cord-04.png",
+      "source_sha256": "08c99dd012e879bb3dc8579e21ab9563c8eb7f04d034aed77f345f8a4515cac1",
+      "matched_pdf": "qualification/pdf_packaging/real/input/cord-04.pdf",
+      "matched_sha256": "8f5e1bbb16331f36b346cda5c42b7b6d015600cf09dd7b4a5bebccec12ae327a",
+      "origin_licence_record": "qualification/pdf_packaging/corpus.json",
+      "license": "CC-BY-4.0",
+      "dpi": "nominal 300; capture DPI unknown"
+    },
+    {
+      "id": "cord-05",
+      "source_path": "qualification/clearscan_competitive/real/cord-05.png",
+      "source_sha256": "b257ae98087ca5cadac38b903ae468e43ba09aa97454a5191a0bf75a5ad371cf",
+      "matched_pdf": "qualification/pdf_packaging/real/input/cord-05.pdf",
+      "matched_sha256": "c5f82d42075f99021aa7f0ab1bd636ea7607cfcf13ddacb417292c7032386c07",
+      "origin_licence_record": "qualification/pdf_packaging/corpus.json",
+      "license": "CC-BY-4.0",
+      "dpi": "nominal 300; capture DPI unknown"
+    },
+    {
+      "id": "cord-06",
+      "source_path": "qualification/clearscan_competitive/real/cord-06.png",
+      "source_sha256": "ba5587f7d159c139c5cc77cdcde2eb84ae2a33e40b36f7ae494cea856cc1c7e6",
+      "matched_pdf": "qualification/pdf_packaging/real/input/cord-06.pdf",
+      "matched_sha256": "fdcf6d0dee72e9a5ae299d516523d8d2179b12284875fa4e7656eafe8f44d4d7",
+      "origin_licence_record": "qualification/pdf_packaging/corpus.json",
+      "license": "CC-BY-4.0",
+      "dpi": "nominal 300; capture DPI unknown"
+    },
+    {
+      "id": "cord-07",
+      "source_path": "qualification/clearscan_competitive/real/cord-07.png",
+      "source_sha256": "282b8ad53f90be3d731bb196e2f4b736d8e34c77be250f00797f8b753bf74fe8",
+      "matched_pdf": "qualification/pdf_packaging/real/input/cord-07.pdf",
+      "matched_sha256": "bf2b348404a119325b63b8e95df22cbcbab563e03cc058c4831cfbc6d39725f3",
+      "origin_licence_record": "qualification/pdf_packaging/corpus.json",
+      "license": "CC-BY-4.0",
+      "dpi": "nominal 300; capture DPI unknown"
+    },
+    {
+      "id": "cord-08",
+      "source_path": "qualification/clearscan_competitive/real/cord-08.png",
+      "source_sha256": "de605ce5bd714dc86190ce74e3cd4439b2874bc03a064c380da7fcc24bc7d00d",
+      "matched_pdf": "qualification/pdf_packaging/real/input/cord-08.pdf",
+      "matched_sha256": "a3372d159fd77eddee53871dc9f2b0a9432d1b674875c913e2c9036c43d34586",
+      "origin_licence_record": "qualification/pdf_packaging/corpus.json",
+      "license": "CC-BY-4.0",
+      "dpi": "nominal 300; capture DPI unknown"
+    },
+    {
+      "id": "cord-09",
+      "source_path": "qualification/clearscan_competitive/real/cord-09.png",
+      "source_sha256": "7977f8c68cdb882439bdd57f60b35e52e46c9f5657b54e8de09533365e3c4986",
+      "matched_pdf": "qualification/pdf_packaging/real/input/cord-09.pdf",
+      "matched_sha256": "94b732c1f155b6744551fe183baec48c997c1e5d263e06a9769ad5a5eb2d44db",
+      "origin_licence_record": "qualification/pdf_packaging/corpus.json",
+      "license": "CC-BY-4.0",
+      "dpi": "nominal 300; capture DPI unknown"
+    },
+    {
+      "id": "history-00",
+      "source_path": "qualification/clearscan_competitive/real/history-00.png",
+      "source_sha256": "ab063bfc04dfb3e04857c3c94bc8ecd670424dfec81b6de4486cf4e21b7b3630",
+      "matched_pdf": "qualification/pdf_packaging/real/input/history-00.pdf",
+      "matched_sha256": "0ad45b85dd6faa80cf5a891bc3a08c00656317221575931a1e081fb1850f3f05",
+      "origin_licence_record": "qualification/pdf_packaging/corpus.json",
+      "license": "CC-BY-SA-4.0",
+      "dpi": "nominal 300; capture DPI unknown"
+    },
+    {
+      "id": "history-01",
+      "source_path": "qualification/clearscan_competitive/real/history-01.png",
+      "source_sha256": "eb203b78e488dac22b7d99fea2731fae13d54e9488ee8674c3b743f243a78d7f",
+      "matched_pdf": "qualification/pdf_packaging/real/input/history-01.pdf",
+      "matched_sha256": "927880146d819f35e2689c1e0f166a50af72f205c0b6e0ab4b6c329f9020231a",
+      "origin_licence_record": "qualification/pdf_packaging/corpus.json",
+      "license": "CC-BY-SA-4.0",
+      "dpi": "nominal 300; capture DPI unknown"
+    },
+    {
+      "id": "history-02",
+      "source_path": "qualification/clearscan_competitive/real/history-02.png",
+      "source_sha256": "a4962458fc0fa24ab82d5e30b2f5423c52eb077b9cd1d80b909e62899a1045a2",
+      "matched_pdf": "qualification/pdf_packaging/real/input/history-02.pdf",
+      "matched_sha256": "ed8e5910fd89db26f1fec91e242236df0d92f3e10b75488f47a74be797c87cf7",
+      "origin_licence_record": "qualification/pdf_packaging/corpus.json",
+      "license": "CC-BY-SA-4.0",
+      "dpi": "nominal 300; capture DPI unknown"
+    },
+    {
+      "id": "history-03",
+      "source_path": "qualification/clearscan_competitive/real/history-03.png",
+      "source_sha256": "0ec3a67d68fd3fd46d87c647c4b3ce9212e288c5611b3a5cec6ffa84de6b7de6",
+      "matched_pdf": "qualification/pdf_packaging/real/input/history-03.pdf",
+      "matched_sha256": "c3c542317837570ef78b2319937c3d922aaa0145d7e0563dffaab8eb5764d7b3",
+      "origin_licence_record": "qualification/pdf_packaging/corpus.json",
+      "license": "CC-BY-SA-4.0",
+      "dpi": "nominal 300; capture DPI unknown"
+    },
+    {
+      "id": "history-04",
+      "source_path": "qualification/clearscan_competitive/real/history-04.png",
+      "source_sha256": "f0ab2fba265d9c2a822d80f701d82892849f9100b5d40e2388d6d8dbbc5f663f",
+      "matched_pdf": "qualification/pdf_packaging/real/input/history-04.pdf",
+      "matched_sha256": "ae2a43eb4e52116c1a93970b399e01fe2bc51185f458fd8c5d4b08c01cfef04c",
+      "origin_licence_record": "qualification/pdf_packaging/corpus.json",
+      "license": "CC-BY-SA-4.0",
+      "dpi": "nominal 300; capture DPI unknown"
+    },
+    {
+      "id": "annual-011",
+      "source_path": "qualification/pdf_packaging/corpus/annual-011.pdf",
+      "source_sha256": "3435bf37b262fd8d46ea669132ceb7fd51fbde7c556aeb07274f5cf8d920d86a",
+      "matched_pdf": "qualification/pdf_packaging/real/input/annual-011.pdf",
+      "matched_sha256": "2f31303d67e6f5bec2e9281e58ff5bb30d95026e3c1f33001ed0cd5b45928e6d",
+      "origin_licence_record": "qualification/pdf_packaging/corpus.json",
+      "license": "Public domain (1920 US government town report)",
+      "dpi": "PDF native physical geometry"
+    },
+    {
+      "id": "annual-021",
+      "source_path": "qualification/pdf_packaging/corpus/annual-021.pdf",
+      "source_sha256": "5796d734137368215dbf3423d0b5970825e70183983ecef5b956ef9bce8dbab0",
+      "matched_pdf": "qualification/pdf_packaging/real/input/annual-021.pdf",
+      "matched_sha256": "b9e2410578434a0cb05ab1ee4eb6ed4df3145234e3e607d4d8434000cc4e3b86",
+      "origin_licence_record": "qualification/pdf_packaging/corpus.json",
+      "license": "Public domain (1920 US government town report)",
+      "dpi": "PDF native physical geometry"
+    },
+    {
+      "id": "annual-031",
+      "source_path": "qualification/pdf_packaging/corpus/annual-031.pdf",
+      "source_sha256": "e46ba3642a2227691bb4fc8f48e709b2b3059e30b902aba1a13d3cc8008c9a53",
+      "matched_pdf": "qualification/pdf_packaging/real/input/annual-031.pdf",
+      "matched_sha256": "2c706fb403bbbcab28229b0b6649b820c1e0a63f408cdceec9cf6d1785be7304",
+      "origin_licence_record": "qualification/pdf_packaging/corpus.json",
+      "license": "Public domain (1920 US government town report)",
+      "dpi": "PDF native physical geometry"
+    },
+    {
+      "id": "annual-041",
+      "source_path": "qualification/pdf_packaging/corpus/annual-041.pdf",
+      "source_sha256": "d2df4f5c92ff783b74d71a66c2231338594a2a6cebc03738e0c16ccdfba1193d",
+      "matched_pdf": "qualification/pdf_packaging/real/input/annual-041.pdf",
+      "matched_sha256": "520f5c3c7852f44ee8a6b9ea8cd11cdec5698caacb8bf3293d37be2941b1bf34",
+      "origin_licence_record": "qualification/pdf_packaging/corpus.json",
+      "license": "Public domain (1920 US government town report)",
+      "dpi": "PDF native physical geometry"
+    },
+    {
+      "id": "annual-051",
+      "source_path": "qualification/pdf_packaging/corpus/annual-051.pdf",
+      "source_sha256": "6b5b96763b35955e551d853cce9b24efc796cfc6b5a7fbb22477082f46be93f8",
+      "matched_pdf": "qualification/pdf_packaging/real/input/annual-051.pdf",
+      "matched_sha256": "84b0cf408bf770a90b1b74bc79663b0113548314aca64d38f23bbc602273169c",
+      "origin_licence_record": "qualification/pdf_packaging/corpus.json",
+      "license": "Public domain (1920 US government town report)",
+      "dpi": "PDF native physical geometry"
+    },
+    {
+      "id": "annual-061",
+      "source_path": "qualification/pdf_packaging/corpus/annual-061.pdf",
+      "source_sha256": "6ae394c37858a15c62174febfccebc9e952779c08748625f6afbff056f34fc77",
+      "matched_pdf": "qualification/pdf_packaging/real/input/annual-061.pdf",
+      "matched_sha256": "eb9e2538b22bd9739154da13e6ff7f6786368cfae804fcb9a1e52b4210d3ee36",
+      "origin_licence_record": "qualification/pdf_packaging/corpus.json",
+      "license": "Public domain (1920 US government town report)",
+      "dpi": "PDF native physical geometry"
+    },
+    {
+      "id": "annual-071",
+      "source_path": "qualification/pdf_packaging/corpus/annual-071.pdf",
+      "source_sha256": "bdfbcf51c4e4e7fd6e5d17c8b2b9fb11f5c80095d267a94de2a3be54350cac1c",
+      "matched_pdf": "qualification/pdf_packaging/real/input/annual-071.pdf",
+      "matched_sha256": "9b93c0ad25077804192de206bd87646134e85cf20dce6d3cd7ca47a58ae4e4ea",
+      "origin_licence_record": "qualification/pdf_packaging/corpus.json",
+      "license": "Public domain (1920 US government town report)",
+      "dpi": "PDF native physical geometry"
+    },
+    {
+      "id": "annual-081",
+      "source_path": "qualification/pdf_packaging/corpus/annual-081.pdf",
+      "source_sha256": "417a3b4b02b108bf595715dab6c82836e61946053ce869d01cec4d7bdb52a8b4",
+      "matched_pdf": "qualification/pdf_packaging/real/input/annual-081.pdf",
+      "matched_sha256": "d980de21bcc48a3e2bf84e5d8c840ff30030936b0e192a8a11b75033e53d0d52",
+      "origin_licence_record": "qualification/pdf_packaging/corpus.json",
+      "license": "Public domain (1920 US government town report)",
+      "dpi": "PDF native physical geometry"
+    },
+    {
+      "id": "annual-091",
+      "source_path": "qualification/pdf_packaging/corpus/annual-091.pdf",
+      "source_sha256": "bfed65a3dd15c43174e8857b9cb038de7da93dddeceed2cc8b12b7191522b6ab",
+      "matched_pdf": "qualification/pdf_packaging/real/input/annual-091.pdf",
+      "matched_sha256": "80ccaa3cb43e1b2038b722a5605ed9722413aa9189b40139f0d63997194f4a82",
+      "origin_licence_record": "qualification/pdf_packaging/corpus.json",
+      "license": "Public domain (1920 US government town report)",
+      "dpi": "PDF native physical geometry"
+    },
+    {
+      "id": "annual-101",
+      "source_path": "qualification/pdf_packaging/corpus/annual-101.pdf",
+      "source_sha256": "80aafec70d59f9e855f257b2aa4a87d290414874bf62970a778f6cd19059c568",
+      "matched_pdf": "qualification/pdf_packaging/real/input/annual-101.pdf",
+      "matched_sha256": "42022f87ebeed4a2fa28730f4343feceb05eb83837ee0566d8bff3948ec7fd42",
+      "origin_licence_record": "qualification/pdf_packaging/corpus.json",
+      "license": "Public domain (1920 US government town report)",
+      "dpi": "PDF native physical geometry"
+    },
+    {
+      "id": "annual-111",
+      "source_path": "qualification/pdf_packaging/corpus/annual-111.pdf",
+      "source_sha256": "b3836fd6f109e809101c185509b1999e9cd0b6b1d3536c9f1f7434d267c90035",
+      "matched_pdf": "qualification/pdf_packaging/real/input/annual-111.pdf",
+      "matched_sha256": "8373c8cdcece1dd788352508436d845c0cf0d61f0898058712c1989d251e7619",
+      "origin_licence_record": "qualification/pdf_packaging/corpus.json",
+      "license": "Public domain (1920 US government town report)",
+      "dpi": "PDF native physical geometry"
+    },
+    {
+      "id": "annual-121",
+      "source_path": "qualification/pdf_packaging/corpus/annual-121.pdf",
+      "source_sha256": "79d99cd103b80ef10a39a58d0f4cb6afc39f664c9d39fde40498f8b63c5cdd73",
+      "matched_pdf": "qualification/pdf_packaging/real/input/annual-121.pdf",
+      "matched_sha256": "ed25ccde6483fad3884fd5b400b7c85a9c018d04a6e1fda1549adeb1c8011961",
+      "origin_licence_record": "qualification/pdf_packaging/corpus.json",
+      "license": "Public domain (1920 US government town report)",
+      "dpi": "PDF native physical geometry"
+    },
+    {
+      "id": "annual-131",
+      "source_path": "qualification/pdf_packaging/corpus/annual-131.pdf",
+      "source_sha256": "4291fc9cb575bb1e8eb4613b8d111ab9333caf7ca2f7f1cec3e8102c5266288c",
+      "matched_pdf": "qualification/pdf_packaging/real/input/annual-131.pdf",
+      "matched_sha256": "95d79115307467c4f5416f5fb556a6ddc4ac8662bb2430655ddacc579ed0c98c",
+      "origin_licence_record": "qualification/pdf_packaging/corpus.json",
+      "license": "Public domain (1920 US government town report)",
+      "dpi": "PDF native physical geometry"
+    },
+    {
+      "id": "scan-c03-29",
+      "source_path": "qualification/pdf_packaging/corpus/scan-c03-29.pdf",
+      "source_sha256": "579d3c747d12aa9946eed6d9ca42c00d898a2e6af6776d4bed61860f29dc66cb",
+      "matched_pdf": "qualification/pdf_packaging/real/input/scan-c03-29.pdf",
+      "matched_sha256": "3195060ef3d910cbbf02bf889e24459f2253c1f6d694fb370cd1b54f2c44d327",
+      "origin_licence_record": "qualification/pdf_packaging/corpus.json",
+      "license": "Public domain (Mark Twain source scan)",
+      "dpi": "PDF native physical geometry"
+    },
+    {
+      "id": "scan-linn",
+      "source_path": "qualification/pdf_packaging/corpus/scan-linn.pdf",
+      "source_sha256": "cc7f385041a59b86c3b851698a9ada7a9d077a0ee8a6108e57d1d2338c3ca2cb",
+      "matched_pdf": "qualification/pdf_packaging/real/input/scan-linn.pdf",
+      "matched_sha256": "0806ad37f8df3f84e4828f8d536de24f3b282a38c08749662076ece53a4d34da",
+      "origin_licence_record": "qualification/pdf_packaging/corpus.json",
+      "license": "CC-BY-SA-3.0; Forat Electronics (1985); see frozen REUSE.toml",
+      "dpi": "PDF native physical geometry"
+    },
+    {
+      "id": "nara-form-01",
+      "source_path": "qualification/pdf_packaging/corpus/nara-form-01.pdf",
+      "source_sha256": "c8a31aff66cdee91db9e50d3262825cd6981e8e666b225f48c8d65b8b33cfebe",
+      "matched_pdf": "qualification/pdf_packaging/real/input/nara-form-01.pdf",
+      "matched_sha256": "ac8a37dc802e6f73778aa09549bd0fdbb4185c5c19189e2482c174b688cb119d",
+      "origin_licence_record": "qualification/pdf_packaging/corpus.json",
+      "license": "US federal government record; public domain",
+      "dpi": "PDF native physical geometry"
+    },
+    {
+      "id": "nara-form-02",
+      "source_path": "qualification/pdf_packaging/corpus/nara-form-02.pdf",
+      "source_sha256": "5f577d0d3ba4465e24dc4400a7006cf9e1f94ae72289cdfc1fe2a089cdd6cc25",
+      "matched_pdf": "qualification/pdf_packaging/real/input/nara-form-02.pdf",
+      "matched_sha256": "6c0d90aa3dbaf86100e498440efaec373c7794ba854dee6cece611033f72258b",
+      "origin_licence_record": "qualification/pdf_packaging/corpus.json",
+      "license": "US federal government record; public domain",
+      "dpi": "PDF native physical geometry"
+    }
+  ],
+  "current_binary_sha256": "759cc26dc6c34fd10da365d7a09c57ed39f1546366d203c50527efd264b5b36e",
+  "adobe_reference": {
+    "version": "Acrobat XI Pro 11.0.20 Paper Capture",
+    "mode": "ClearScan",
+    "ui_downsample_selection_dpi": 600,
+    "source": "frozen engineering reports and sandbox runner; no Acrobat execution or binary inspection in this milestone"
+  }
+}

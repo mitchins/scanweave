@@ -1,0 +1,63 @@
+[
+  {
+    "collection": "receipts",
+    "command": [
+      "/data/coding/scanweave/target/release/scanweave",
+      "/data/coding/scanweave/qualification/pdf_packaging/groups/receipts-input.pdf",
+      "/data/coding/scanweave/qualification/raster_competitors/local/current/receipts.pdf"
+    ],
+    "seconds": 32.920378601003904,
+    "current_sha256": "9475bb3aafb7a00c30762971ec32773099631b21ac0fe980fbd4e5331b09d5c7",
+    "frozen_sha256": "9475bb3aafb7a00c30762971ec32773099631b21ac0fe980fbd4e5331b09d5c7",
+    "byte_identical": true,
+    "bytes": 6945090
+  },
+  {
+    "collection": "historical",
+    "current_sha256": "5919f6159ef6d26ec65abfc766ce98b03477f40ce6eb7db89aaa0a2ca2f5ea11",
+    "frozen_sha256": "5919f6159ef6d26ec65abfc766ce98b03477f40ce6eb7db89aaa0a2ca2f5ea11",
+    "byte_identical": true,
+    "bytes": 24637206,
+    "seconds": null,
+    "timing_note": "CLI completed; supervising process terminated before timing receipt. Recovered output verified by hash and completed CLI log."
+  },
+  {
+    "collection": "financial",
+    "command": [
+      "/data/coding/scanweave/target/release/scanweave",
+      "/data/coding/scanweave/qualification/pdf_packaging/groups/financial-input.pdf",
+      "/data/coding/scanweave/qualification/raster_competitors/local/current/financial.pdf"
+    ],
+    "seconds": 639.9549392859917,
+    "current_sha256": "53d5588e2c738a50784f5f7a5a031584c45851ca95c31df890673b064804b961",
+    "frozen_sha256": "53d5588e2c738a50784f5f7a5a031584c45851ca95c31df890673b064804b961",
+    "byte_identical": true,
+    "bytes": 9782629
+  },
+  {
+    "collection": "mixed",
+    "command": [
+      "/data/coding/scanweave/target/release/scanweave",
+      "/data/coding/scanweave/qualification/pdf_packaging/groups/mixed-input.pdf",
+      "/data/coding/scanweave/qualification/raster_competitors/local/current/mixed.pdf"
+    ],
+    "seconds": 132.65992470699712,
+    "current_sha256": "69c77bce51914fb874f43ac8ccca93dda96abbfa9aeba05f4a81f7ef686d4964",
+    "frozen_sha256": "69c77bce51914fb874f43ac8ccca93dda96abbfa9aeba05f4a81f7ef686d4964",
+    "byte_identical": true,
+    "bytes": 3228942
+  },
+  {
+    "collection": "forms",
+    "command": [
+      "/data/coding/scanweave/target/release/scanweave",
+      "/data/coding/scanweave/qualification/pdf_packaging/groups/forms-input.pdf",
+      "/data/coding/scanweave/qualification/raster_competitors/local/current/forms.pdf"
+    ],
+    "seconds": 62.84201124100946,
+    "current_sha256": "4529b78e522712a80e14d75d64476b24c9834d045699efdcc507e7136c489bbd",
+    "frozen_sha256": "4529b78e522712a80e14d75d64476b24c9834d045699efdcc507e7136c489bbd",
+    "byte_identical": true,
+    "bytes": 859524
+  }
+]
