@@ -12,6 +12,9 @@ import numpy as np
 from PIL import Image
 import pypdfium2 as pdfium
 
+CLEARSCAN_PDF = 'clearscan.pdf'
+
+
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "qualification"))
 from tools_env import qpdf_bin, qpdf_env
@@ -36,7 +39,7 @@ def main():
     with tempfile.TemporaryDirectory(prefix="m1d5-fallback-") as td:
         prefix = str(Path(td) / "im")
         subprocess.run(["pdfimages", "-f", "1", "-l", "1", "-png",
-                        str(OUT / "clearscan.pdf"), prefix], check=True,
+                        str(OUT / CLEARSCAN_PDF), prefix], check=True,
                        stdout=subprocess.PIPE, stderr=subprocess.PIPE)
         for file in Path(td).glob("im-*.png"):
             arr = np.asarray(Image.open(file).convert("RGB"))
@@ -46,7 +49,7 @@ def main():
         # Inspect decoded page content to confirm the crop's PDF point placement.
         qdf = Path(td) / "clear-qdf.pdf"
         subprocess.run([qpdf_bin(), "--qdf",
-                        "--object-streams=disable", str(OUT / "clearscan.pdf"),
+                        "--object-streams=disable", str(OUT / CLEARSCAN_PDF),
                         str(qdf)], check=True, env=qpdf_env(), stdout=subprocess.PIPE,
                        stderr=subprocess.PIPE)
         content = qdf.read_bytes().decode("latin-1")
@@ -81,7 +84,7 @@ def main():
                 raise RuntimeError("could not map QDF /Im0 object to its original PDF object")
             decoded_im0 = subprocess.run(
                 [qpdf_bin(), f"--show-object={original_id.group(1)}",
-                 "--filtered-stream-data", str(OUT / "clearscan.pdf")],
+                 "--filtered-stream-data", str(OUT / CLEARSCAN_PDF)],
                 check=True, env=qpdf_env(), stdout=subprocess.PIPE,
                 stderr=subprocess.PIPE,
             ).stdout

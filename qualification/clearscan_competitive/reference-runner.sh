@@ -55,7 +55,10 @@ input_wid() {
   local w t
   for w in $("$XDO" search --name "Adobe Acrobat Pro" 2>/dev/null); do
     t="$("$XDO" getwindowname "$w" 2>/dev/null || true)"
-    case "$t" in input.pdf*) echo "$w"; return 0;; esac
+    case "$t" in
+      input.pdf*) echo "$w"; return 0;;
+      *) continue;; # Other Acrobat windows are expected while searching.
+    esac
   done
   return 1
 }

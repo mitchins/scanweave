@@ -24,6 +24,32 @@ def iou(a, b):
     return float(np.logical_and(ma, mb).sum() / max(1, union))
 
 
+def write_sample_crops(sample_by_char, manifest, oracle_dir, input_dir, poppler_dir, pdfium_images, crops_dir):
+    sample_pages = {p["page_id"]: i for i, p in enumerate(manifest["pages"])}
+    for ch, glyph in sample_by_char.items():
+        pi = sample_pages[glyph["page"]]
+        truth = np.asarray(Image.open(oracle_dir / f"page{pi:02}.png").convert("L"))
+        source_name = next(x["asset_path"] for x in manifest["sources"] if x["source_id"] == manifest["pages"][pi]["source_id"])
+        src = np.asarray(Image.open(input_dir / source_name).convert("L"))
+        rec = next(r for r in json.loads((oracle_dir / f"page{pi:02}.truth.json").read_text())["records"] if r["id"] == glyph["symbol_id"])
+        x0, y0, x1, y1 = [int(v) for v in rec["bbox"]]
+        box = (max(0, x0 - 4), max(0, y0 - 4), min(src.shape[1], x1 + 4), min(src.shape[0], y1 + 4))
+        panels = [Image.fromarray(img[box[1]:box[3], box[0]:box[2]]).resize(((box[2]-box[0])*8, (box[3]-box[1])*8), Image.Resampling.NEAREST)
+                  for img in (src, truth,
+                              np.asarray(Image.open(poppler_dir / f"page-{pi + 1}.png").convert("L")),
+                              pdfium_images[pi])]
+        width = max(p.width for p in panels)
+        canvas = Image.new("L", (width, sum(p.height for p in panels) + 4 * 20), 255)
+        draw = ImageDraw.Draw(canvas)
+        y = 0
+        for label, panel in zip(("Source", "Pristine", "Poppler", "PDFium"), panels):
+            draw.text((0, y), label, fill=0)
+            y += 20
+            canvas.paste(panel, (0, y))
+            y += panel.height
+        canvas.save(crops_dir / f"{ord(ch):04x}-{ch}.png")
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--dpi", type=int, required=True)
@@ -95,29 +121,7 @@ def main():
     for glyph in all_glyphs:
         if glyph["replaced"] and glyph["text"] not in sample_by_char:
             sample_by_char[glyph["text"]] = glyph
-    sample_pages = {p["page_id"]: i for i, p in enumerate(manifest["pages"])}
-    for ch, glyph in sample_by_char.items():
-        pi = sample_pages[glyph["page"]]
-        truth = np.asarray(Image.open(a.oracle_dir / f"page{pi:02}.png").convert("L"))
-        source_name = next(x["asset_path"] for x in manifest["sources"] if x["source_id"] == manifest["pages"][pi]["source_id"])
-        src = np.asarray(Image.open(a.input_dir / source_name).convert("L"))
-        rec = next(r for r in json.loads((a.oracle_dir / f"page{pi:02}.truth.json").read_text())["records"] if r["id"] == glyph["symbol_id"])
-        x0, y0, x1, y1 = [int(v) for v in rec["bbox"]]
-        box = (max(0, x0 - 4), max(0, y0 - 4), min(src.shape[1], x1 + 4), min(src.shape[0], y1 + 4))
-        panels = [Image.fromarray(img[box[1]:box[3], box[0]:box[2]]).resize(((box[2]-box[0])*8, (box[3]-box[1])*8), Image.Resampling.NEAREST)
-                  for img in (src, truth,
-                              np.asarray(Image.open(poppler_dir / f"page-{pi + 1}.png").convert("L")),
-                              pdfium_images[pi])]
-        width = max(p.width for p in panels)
-        canvas = Image.new("L", (width, sum(p.height for p in panels) + 4 * 20), 255)
-        draw = ImageDraw.Draw(canvas)
-        y = 0
-        for label, panel in zip(("Source", "Pristine", "Poppler", "PDFium"), panels):
-            draw.text((0, y), label, fill=0)
-            y += 20
-            canvas.paste(panel, (0, y))
-            y += panel.height
-        canvas.save(crops_dir / f"{ord(ch):04x}-{ch}.png")
+    write_sample_crops(sample_by_char, manifest, a.oracle_dir, a.input_dir, poppler_dir, pdfium_images, crops_dir)
     output = {
         "dpi": a.dpi,
         "pdf": str(a.pdf),

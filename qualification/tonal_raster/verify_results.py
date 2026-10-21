@@ -1,6 +1,9 @@
 """Bind the completed corpus to its matched product baseline; no inferred byte savings."""
 from pathlib import Path
 import json,hashlib,collections,csv,pikepdf
+
+PDF_GLOB = '*.pdf'
+
 B=Path(__file__).resolve().parent;R=B.parents[1];groups=json.load(open(R/'qualification/pdf_packaging/groups.json'));measure=json.load(open(B/'measurements.json'));outline=json.load(open(B/'outline-inventory.json'));rows=[];changes=[];totals=collections.Counter();beforetotals=collections.Counter();checks=[]
 sha=lambda data:hashlib.sha256(data).hexdigest()
 def streams(q):return sorted(sha(o.read_bytes()) for o in q.objects if isinstance(o,pikepdf.Stream) and str(o.get('/Subtype'))!='/Image' and str(o.get('/Type')) not in ['/ObjStm','/XRef'])
@@ -28,6 +31,6 @@ with (B/'scorecard.csv').open('w') as f:
  w=csv.DictWriter(f,['document','pages','before_pdf_bytes','after_pdf_bytes','saved_bytes','saved_percent']);w.writeheader()
  for r in rows:w.writerow({'document':r['document'],'pages':r['pages'],'before_pdf_bytes':r['before']['pdf_bytes'],'after_pdf_bytes':r['after']['pdf_bytes'],'saved_bytes':r['saved_bytes'],'saved_percent':r['saved_percent']})
 manifest={'base':'99ec072','implementation':'5e6f4d9','files':[]}
-for path in list((B/'collections').glob('*.pdf'))+list((B/'baseline-collections').glob('*.pdf'))+list((B/'final').glob('*.pdf'))+list((B/'q98').glob('*.pdf'))+list((B/'300').glob('*.pdf'))+list((B/'600').glob('*.pdf')):
+for path in list((B/'collections').glob(PDF_GLOB))+list((B/'baseline-collections').glob(PDF_GLOB))+list((B/'final').glob(PDF_GLOB))+list((B/'q98').glob(PDF_GLOB))+list((B/'300').glob(PDF_GLOB))+list((B/'600').glob(PDF_GLOB)):
  manifest['files'].append({'path':str(path.relative_to(R)),'bytes':path.stat().st_size,'sha256':sha(path.read_bytes()),'storage':'local; reproducible using recorded commands'})
 (B/'run-manifest.json').write_text(json.dumps(manifest,indent=2));print('before',dict(beforetotals),'after',dict(totals));print('changed images',len(changes));print('docs',[(r['document'],r['saved_bytes']) for r in rows])

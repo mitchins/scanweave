@@ -1,0 +1,86 @@
+[
+  {
+    "file": "qualification/tonal_raster/compare.py",
+    "constants": {
+      "COMPARISON_JSON": "comparison.json"
+    },
+    "literal_replacement_ast_equivalent": true,
+    "baseline_source_sha256": "58c355031db97dcebcbaf5874d4792e4d8b98729ec2d83f44659ccbbc8e801bf"
+  },
+  {
+    "file": "qualification/tonal_raster/outline_inventory.py",
+    "constants": {
+      "PDF_GLOB": "*.pdf"
+    },
+    "literal_replacement_ast_equivalent": true,
+    "baseline_source_sha256": "e6f507d1da907f5c148c63f54d78b978afd66859e14ceef10a0304e3e9b0cf4e"
+  },
+  {
+    "file": "qualification/tonal_raster/verify_results.py",
+    "constants": {
+      "PDF_GLOB": "*.pdf"
+    },
+    "literal_replacement_ast_equivalent": true,
+    "baseline_source_sha256": "d778c8be918d187ebcef358f94ff532a0361a1d16f3fdfa6c89b2d3945ab2786"
+  },
+  {
+    "file": "qualification/real_convergence/package_results.py",
+    "constants": {
+      "PDF_GLOB": "*.pdf"
+    },
+    "literal_replacement_ast_equivalent": true,
+    "baseline_source_sha256": "c473c5c2fc6f6891f8e7ce0842665fadd7a3a6422f045ceeba8bd0a161f66a52"
+  },
+  {
+    "file": "qualification/clearscan_background/hard_negative_audit.py",
+    "constants": {
+      "POPPLER_IMAGE": "poppler.png"
+    },
+    "literal_replacement_ast_equivalent": true,
+    "baseline_source_sha256": "2f4edec01775d146c7a7902ccf5943034d731d3653f8e34ce6a4e45de76224c2"
+  },
+  {
+    "file": "qualification/clearscan_background/run.py",
+    "constants": {
+      "FINAL_PDF": "final.pdf",
+      "FINAL_JSON": "final.json"
+    },
+    "literal_replacement_ast_equivalent": true,
+    "baseline_source_sha256": "1c8c179ddf2fb616cc9f9995befe74c09042d92fd5bdadeda28f647ff81cf119"
+  },
+  {
+    "file": "qualification/clearscan_contours/run.py",
+    "constants": {
+      "FINAL_PDF": "final.pdf",
+      "FINAL_JSON": "final.json"
+    },
+    "literal_replacement_ast_equivalent": true,
+    "baseline_source_sha256": "7aa9818f8105c5383e7f28d474348403b92c87334500ccc0a4e8390a0c1b3308"
+  },
+  {
+    "file": "qualification/clearscan_typography/composition-review/paired_pixels.py",
+    "constants": {
+      "VECTOR_ONLY_PDF": "stages/S4-vector-only.pdf",
+      "COMPETITIVE_PDF": "qualification/clearscan_competitive/300/clearscan.pdf"
+    },
+    "literal_replacement_ast_equivalent": true,
+    "baseline_source_sha256": "bb5531edf0fe92a4a342b5d98b884366f2586db7faad74bf5d56e3cbf3297b61"
+  },
+  {
+    "file": "qualification/clearscan_typography/run.py",
+    "constants": {
+      "FINAL_PDF": "final.pdf",
+      "FINAL_JSON": "final.json"
+    },
+    "literal_replacement_ast_equivalent": true,
+    "baseline_source_sha256": "15badde5ed729586ede191032a4a55870513cf2e4bef68d38c5e6de6ee092bec"
+  },
+  {
+    "file": "qualification/diagnose_m1d5_fallback.py",
+    "constants": {
+      "CLEARSCAN_PDF": "clearscan.pdf"
+    },
+    "literal_replacement_ast_equivalent": true,
+    "baseline_source_sha256": "54a01842c26be608f84782e9576a974cbfd770f299412db491b6b9522b51e50c"
+  }
+]

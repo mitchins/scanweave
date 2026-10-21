@@ -143,7 +143,6 @@ def char_b():
         d[grown & (d > r)] = r
         cur2 = grown
     diff = np.abs(src.astype(float) - pop.astype(float))
-    ink_dilated = __import__("scipy_ndali", fromlist=["x"]) if False else None
     res = {}
     bands = {"edge_0_1px": (d <= 1), "near_2_3px": (d >= 2) & (d <= 3), "far_gt3": (d > 3) & (d < 99)}
     for label, msk in bands.items():

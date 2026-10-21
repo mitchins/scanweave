@@ -1,0 +1,3563 @@
+{
+  "main": "0816d8a229e08838117b1e104a9c005a3d3ba56a",
+  "retrieved_at_utc": "2026-10-21T03:17:50.964290+00:00",
+  "query": {
+    "componentKeys": "mitchins_scanweave",
+    "branch": "main",
+    "issueStatuses": "OPEN",
+    "impactSeverities": "HIGH"
+  },
+  "issues": [
+    {
+      "key": "AaFbZj3p2TNSduKvuGy8",
+      "rule": "python:S1192",
+      "component": "mitchins_scanweave:qualification/tonal_raster/compare.py",
+      "line": 6,
+      "hash": "ccb68bd6c591fff82096890c99d74dda",
+      "textRange": {
+        "startLine": 6,
+        "endLine": 6,
+        "startOffset": 144,
+        "endOffset": 161
+      },
+      "status": "OPEN",
+      "message": "Define a constant instead of duplicating this literal 'comparison.json' 4 times.",
+      "effort": "8min",
+      "creationDate": "2026-10-20T10:27:39+0000",
+      "updateDate": "2026-10-20T22:18:41+0000",
+      "impacts": [
+        {
+          "softwareQuality": "MAINTAINABILITY",
+          "severity": "HIGH"
+        }
+      ],
+      "issueStatus": "OPEN"
+    },
+    {
+      "key": "AaFbZj3r2TNSduKvuGzA",
+      "rule": "python:S1192",
+      "component": "mitchins_scanweave:qualification/tonal_raster/outline_inventory.py",
+      "line": 7,
+      "hash": "8187bd4daf5576dd4b97977da8db693a",
+      "textRange": {
+        "startLine": 7,
+        "endLine": 7,
+        "startOffset": 40,
+        "endOffset": 47
+      },
+      "status": "OPEN",
+      "message": "Define a constant instead of duplicating this literal '*.pdf' 3 times.",
+      "effort": "6min",
+      "creationDate": "2026-10-20T10:27:39+0000",
+      "updateDate": "2026-10-20T22:18:41+0000",
+      "impacts": [
+        {
+          "softwareQuality": "MAINTAINABILITY",
+          "severity": "HIGH"
+        }
+      ],
+      "issueStatus": "OPEN"
+    },
+    {
+      "key": "AaFbZj3j2TNSduKvuGyu",
+      "rule": "python:S1192",
+      "component": "mitchins_scanweave:qualification/tonal_raster/verify_results.py",
+      "line": 31,
+      "hash": "10600f472d177742673f8df15bc08c60",
+      "textRange": {
+        "startLine": 31,
+        "endLine": 31,
+        "startOffset": 40,
+        "endOffset": 47
+      },
+      "status": "OPEN",
+      "message": "Define a constant instead of duplicating this literal '*.pdf' 6 times.",
+      "effort": "12min",
+      "creationDate": "2026-10-20T10:27:39+0000",
+      "updateDate": "2026-10-20T22:18:41+0000",
+      "impacts": [
+        {
+          "softwareQuality": "MAINTAINABILITY",
+          "severity": "HIGH"
+        }
+      ],
+      "issueStatus": "OPEN"
+    },
+    {
+      "key": "AaFbqrvcDf3ZA7hnTDt5",
+      "rule": "rust:S3776",
+      "component": "mitchins_scanweave:crates/scanweave-io/src/document.rs",
+      "line": 229,
+      "hash": "145ae3b480f8ec86a4c1adbc6292f604",
+      "textRange": {
+        "startLine": 229,
+        "endLine": 229,
+        "startOffset": 7,
+        "endOffset": 36
+      },
+      "status": "OPEN",
+      "message": "Refactor this function to reduce its Cognitive Complexity from 96 to the 30 allowed.",
+      "effort": "6min",
+      "creationDate": "2026-10-20T09:55:56+0000",
+      "updateDate": "2026-10-20T23:33:32+0000",
+      "impacts": [
+        {
+          "softwareQuality": "MAINTAINABILITY",
+          "severity": "HIGH"
+        }
+      ],
+      "issueStatus": "OPEN"
+    },
+    {
+      "key": "AaFbqrvpDf3ZA7hnTDt8",
+      "rule": "rust:S3776",
+      "component": "mitchins_scanweave:crates/scanweave-io/src/page_pdf.rs",
+      "line": 1132,
+      "hash": "8da347a9c0c0a6f83bac237129ee2513",
+      "textRange": {
+        "startLine": 1132,
+        "endLine": 1132,
+        "startOffset": 3,
+        "endOffset": 25
+      },
+      "status": "OPEN",
+      "message": "Refactor this function to reduce its Cognitive Complexity from 73 to the 30 allowed.",
+      "effort": "6min",
+      "creationDate": "2026-10-20T09:55:56+0000",
+      "updateDate": "2026-10-20T23:33:32+0000",
+      "impacts": [
+        {
+          "softwareQuality": "MAINTAINABILITY",
+          "severity": "HIGH"
+        }
+      ],
+      "issueStatus": "OPEN"
+    },
+    {
+      "key": "AaFbqrvuDf3ZA7hnTDt9",
+      "rule": "rust:S3776",
+      "component": "mitchins_scanweave:crates/scanweave-io/src/tonal_image.rs",
+      "line": 35,
+      "hash": "5f2a60cb5adb21a971b07ce2e6b0c5be",
+      "textRange": {
+        "startLine": 35,
+        "endLine": 35,
+        "startOffset": 14,
+        "endOffset": 31
+      },
+      "status": "OPEN",
+      "message": "Refactor this function to reduce its Cognitive Complexity from 31 to the 30 allowed.",
+      "effort": "6min",
+      "creationDate": "2026-10-20T09:55:56+0000",
+      "updateDate": "2026-10-20T23:33:32+0000",
+      "impacts": [
+        {
+          "softwareQuality": "MAINTAINABILITY",
+          "severity": "HIGH"
+        }
+      ],
+      "issueStatus": "OPEN"
+    },
+    {
+      "key": "AaFbZj3p2TNSduKvuGy9",
+      "rule": "python:S3776",
+      "component": "mitchins_scanweave:qualification/tonal_raster/compare.py",
+      "line": 7,
+      "hash": "ab188e125408c2eb0f93e253c25620b1",
+      "textRange": {
+        "startLine": 7,
+        "endLine": 7,
+        "startOffset": 4,
+        "endOffset": 9
+      },
+      "status": "OPEN",
+      "message": "Refactor this function to reduce its Cognitive Complexity from 16 to the 15 allowed.",
+      "effort": "6min",
+      "creationDate": "2026-10-20T09:55:56+0000",
+      "updateDate": "2026-10-20T22:18:41+0000",
+      "impacts": [
+        {
+          "softwareQuality": "MAINTAINABILITY",
+          "severity": "HIGH"
+        }
+      ],
+      "issueStatus": "OPEN"
+    },
+    {
+      "key": "AaFbZj3n2TNSduKvuGy2",
+      "rule": "python:S3776",
+      "component": "mitchins_scanweave:qualification/tonal_raster/measure.py",
+      "line": 9,
+      "hash": "1085e8274efdd1fbbf13806867d5f329",
+      "textRange": {
+        "startLine": 9,
+        "endLine": 9,
+        "startOffset": 4,
+        "endOffset": 11
+      },
+      "status": "OPEN",
+      "message": "Refactor this function to reduce its Cognitive Complexity from 26 to the 15 allowed.",
+      "effort": "16min",
+      "creationDate": "2026-10-20T09:55:56+0000",
+      "updateDate": "2026-10-20T22:18:41+0000",
+      "impacts": [
+        {
+          "softwareQuality": "MAINTAINABILITY",
+          "severity": "HIGH"
+        }
+      ],
+      "issueStatus": "OPEN"
+    },
+    {
+      "key": "AaFbqrwVDf3ZA7hnTDuH",
+      "rule": "rust:S3776",
+      "component": "mitchins_scanweave:crates/scanweave-io/src/visual_dict.rs",
+      "line": 345,
+      "hash": "5508e851cff6991bb136cc68b8b7aff8",
+      "textRange": {
+        "startLine": 345,
+        "endLine": 345,
+        "startOffset": 7,
+        "endOffset": 18
+      },
+      "status": "OPEN",
+      "message": "Refactor this function to reduce its Cognitive Complexity from 106 to the 30 allowed.",
+      "effort": "6min",
+      "creationDate": "2026-10-20T05:55:11+0000",
+      "updateDate": "2026-10-20T23:33:32+0000",
+      "impacts": [
+        {
+          "softwareQuality": "MAINTAINABILITY",
+          "severity": "HIGH"
+        }
+      ],
+      "issueStatus": "OPEN"
+    },
+    {
+      "key": "AaFbqrwHDf3ZA7hnTDuC",
+      "rule": "rust:S3776",
+      "component": "mitchins_scanweave:crates/scanweave-io/src/curve_fit.rs",
+      "line": 32,
+      "hash": "cf6ca578575504ea1d69a4c4b60fe82e",
+      "textRange": {
+        "startLine": 32,
+        "endLine": 32,
+        "startOffset": 14,
+        "endOffset": 20
+      },
+      "status": "OPEN",
+      "message": "Refactor this function to reduce its Cognitive Complexity from 60 to the 30 allowed.",
+      "effort": "6min",
+      "creationDate": "2026-10-20T03:36:57+0000",
+      "updateDate": "2026-10-20T23:33:32+0000",
+      "impacts": [
+        {
+          "softwareQuality": "MAINTAINABILITY",
+          "severity": "HIGH"
+        }
+      ],
+      "issueStatus": "OPEN"
+    },
+    {
+      "key": "AaFbZj1H2TNSduKvuGui",
+      "rule": "python:S3776",
+      "component": "mitchins_scanweave:qualification/real_convergence/measure.py",
+      "line": 9,
+      "hash": "1085e8274efdd1fbbf13806867d5f329",
+      "textRange": {
+        "startLine": 9,
+        "endLine": 9,
+        "startOffset": 4,
+        "endOffset": 11
+      },
+      "status": "OPEN",
+      "message": "Refactor this function to reduce its Cognitive Complexity from 26 to the 15 allowed.",
+      "effort": "16min",
+      "creationDate": "2026-10-20T01:26:53+0000",
+      "updateDate": "2026-10-20T22:18:41+0000",
+      "impacts": [
+        {
+          "softwareQuality": "MAINTAINABILITY",
+          "severity": "HIGH"
+        }
+      ],
+      "issueStatus": "OPEN"
+    },
+    {
+      "key": "AaFbZj1H2TNSduKvuGun",
+      "rule": "python:S1192",
+      "component": "mitchins_scanweave:qualification/real_convergence/package_results.py",
+      "line": 26,
+      "hash": "7a7628aeaf35b959a333fd38cf3cea53",
+      "textRange": {
+        "startLine": 26,
+        "endLine": 26,
+        "startOffset": 30,
+        "endOffset": 37
+      },
+      "status": "OPEN",
+      "message": "Define a constant instead of duplicating this literal '*.pdf' 5 times.",
+      "effort": "10min",
+      "creationDate": "2026-10-20T01:26:53+0000",
+      "updateDate": "2026-10-20T22:18:41+0000",
+      "impacts": [
+        {
+          "softwareQuality": "MAINTAINABILITY",
+          "severity": "HIGH"
+        }
+      ],
+      "issueStatus": "OPEN"
+    },
+    {
+      "key": "AaFbqrwrDf3ZA7hnTDuL",
+      "rule": "rust:S3776",
+      "component": "mitchins_scanweave:crates/scanweave-io/src/convert.rs",
+      "line": 726,
+      "hash": "cefa4ff5f790105004e1a945011ea3a8",
+      "textRange": {
+        "startLine": 726,
+        "endLine": 726,
+        "startOffset": 14,
+        "endOffset": 48
+      },
+      "status": "OPEN",
+      "message": "Refactor this function to reduce its Cognitive Complexity from 294 to the 30 allowed.",
+      "effort": "6min",
+      "creationDate": "2026-10-20T01:21:19+0000",
+      "updateDate": "2026-10-20T23:33:32+0000",
+      "impacts": [
+        {
+          "softwareQuality": "MAINTAINABILITY",
+          "severity": "HIGH"
+        }
+      ],
+      "issueStatus": "OPEN"
+    },
+    {
+      "key": "AaFbqryNDf3ZA7hnTDuV",
+      "rule": "rust:S3776",
+      "component": "mitchins_scanweave:crates/scanweave-cli/src/pdf_input.rs",
+      "line": 48,
+      "hash": "4c940787a957ffe5c544f67ffb23259c",
+      "textRange": {
+        "startLine": 48,
+        "endLine": 48,
+        "startOffset": 7,
+        "endOffset": 18
+      },
+      "status": "OPEN",
+      "message": "Refactor this function to reduce its Cognitive Complexity from 39 to the 30 allowed.",
+      "effort": "6min",
+      "creationDate": "2026-10-20T01:00:09+0000",
+      "updateDate": "2026-10-20T23:33:32+0000",
+      "impacts": [
+        {
+          "softwareQuality": "MAINTAINABILITY",
+          "severity": "HIGH"
+        }
+      ],
+      "issueStatus": "OPEN"
+    },
+    {
+      "key": "AaFbqrvpDf3ZA7hnTDt7",
+      "rule": "rust:S3776",
+      "component": "mitchins_scanweave:crates/scanweave-io/src/page_pdf.rs",
+      "line": 703,
+      "hash": "26f3a1eac9a829c300bad567e63c5086",
+      "textRange": {
+        "startLine": 703,
+        "endLine": 703,
+        "startOffset": 7,
+        "endOffset": 28
+      },
+      "status": "OPEN",
+      "message": "Refactor this function to reduce its Cognitive Complexity from 32 to the 30 allowed.",
+      "effort": "6min",
+      "creationDate": "2026-10-20T01:00:09+0000",
+      "updateDate": "2026-10-20T23:33:32+0000",
+      "impacts": [
+        {
+          "softwareQuality": "MAINTAINABILITY",
+          "severity": "HIGH"
+        }
+      ],
+      "issueStatus": "OPEN"
+    },
+    {
+      "key": "AaFbqrwMDf3ZA7hnTDuD",
+      "rule": "rust:S3776",
+      "component": "mitchins_scanweave:crates/scanweave-io/src/source_image.rs",
+      "line": 189,
+      "hash": "bdb88268f7a9cc66513427559c5630f8",
+      "textRange": {
+        "startLine": 189,
+        "endLine": 189,
+        "startOffset": 11,
+        "endOffset": 21
+      },
+      "status": "OPEN",
+      "message": "Refactor this function to reduce its Cognitive Complexity from 31 to the 30 allowed.",
+      "effort": "6min",
+      "creationDate": "2026-10-20T01:00:09+0000",
+      "updateDate": "2026-10-20T23:33:32+0000",
+      "impacts": [
+        {
+          "softwareQuality": "MAINTAINABILITY",
+          "severity": "HIGH"
+        }
+      ],
+      "issueStatus": "OPEN"
+    },
+    {
+      "key": "AaFbZj3A2TNSduKvuGxt",
+      "rule": "python:S1192",
+      "component": "mitchins_scanweave:qualification/pdf_packaging/mask_control.py",
+      "line": 15,
+      "hash": "4a90fc18807c20b718ad7f74c69ae9bb",
+      "textRange": {
+        "startLine": 15,
+        "endLine": 15,
+        "startOffset": 250,
+        "endOffset": 260
+      },
+      "status": "OPEN",
+      "message": "Define a constant instead of duplicating this literal 'mask.pdf' 3 times.",
+      "effort": "6min",
+      "creationDate": "2026-10-19T23:04:59+0000",
+      "updateDate": "2026-10-20T22:18:41+0000",
+      "impacts": [
+        {
+          "softwareQuality": "MAINTAINABILITY",
+          "severity": "HIGH"
+        }
+      ],
+      "issueStatus": "OPEN"
+    },
+    {
+      "key": "AaFbZj3F2TNSduKvuGxv",
+      "rule": "python:S3776",
+      "component": "mitchins_scanweave:qualification/pdf_packaging/measure_real.py",
+      "line": 11,
+      "hash": "0d427fb6a584c9b0d3f8dd7c70b02ed8",
+      "textRange": {
+        "startLine": 11,
+        "endLine": 11,
+        "startOffset": 4,
+        "endOffset": 13
+      },
+      "status": "OPEN",
+      "message": "Refactor this function to reduce its Cognitive Complexity from 22 to the 15 allowed.",
+      "effort": "12min",
+      "creationDate": "2026-10-19T23:04:59+0000",
+      "updateDate": "2026-10-20T22:18:41+0000",
+      "impacts": [
+        {
+          "softwareQuality": "MAINTAINABILITY",
+          "severity": "HIGH"
+        }
+      ],
+      "issueStatus": "OPEN"
+    },
+    {
+      "key": "AaFbZj3F2TNSduKvuGxw",
+      "rule": "python:S3776",
+      "component": "mitchins_scanweave:qualification/pdf_packaging/measure_real.py",
+      "line": 37,
+      "hash": "36999f0b7d2b4dd75cc52066ae8a601f",
+      "textRange": {
+        "startLine": 37,
+        "endLine": 37,
+        "startOffset": 4,
+        "endOffset": 8
+      },
+      "status": "OPEN",
+      "message": "Refactor this function to reduce its Cognitive Complexity from 38 to the 15 allowed.",
+      "effort": "28min",
+      "creationDate": "2026-10-19T23:04:59+0000",
+      "updateDate": "2026-10-20T22:18:41+0000",
+      "impacts": [
+        {
+          "softwareQuality": "MAINTAINABILITY",
+          "severity": "HIGH"
+        }
+      ],
+      "issueStatus": "OPEN"
+    },
+    {
+      "key": "AaFbZj292TNSduKvuGxm",
+      "rule": "python:S3776",
+      "component": "mitchins_scanweave:qualification/pdf_packaging/native_inventory.py",
+      "line": 8,
+      "hash": "6d1f496fbf912920a140e1828b18b9bb",
+      "textRange": {
+        "startLine": 8,
+        "endLine": 8,
+        "startOffset": 4,
+        "endOffset": 13
+      },
+      "status": "OPEN",
+      "message": "Refactor this function to reduce its Cognitive Complexity from 39 to the 15 allowed.",
+      "effort": "29min",
+      "creationDate": "2026-10-19T23:04:59+0000",
+      "updateDate": "2026-10-20T22:18:41+0000",
+      "impacts": [
+        {
+          "softwareQuality": "MAINTAINABILITY",
+          "severity": "HIGH"
+        }
+      ],
+      "issueStatus": "OPEN"
+    },
+    {
+      "key": "AaFbZj2_2TNSduKvuGxq",
+      "rule": "python:S1192",
+      "component": "mitchins_scanweave:qualification/pdf_packaging/prepare_corpus.py",
+      "line": 32,
+      "hash": "1b2406640a0fb7fe8418cee972b4703f",
+      "textRange": {
+        "startLine": 32,
+        "endLine": 32,
+        "startOffset": 291,
+        "endOffset": 321
+      },
+      "status": "OPEN",
+      "message": "Define a constant instead of duplicating this literal 'PDF native physical geometry' 3 times.",
+      "effort": "6min",
+      "creationDate": "2026-10-19T23:04:59+0000",
+      "updateDate": "2026-10-20T22:18:41+0000",
+      "impacts": [
+        {
+          "softwareQuality": "MAINTAINABILITY",
+          "severity": "HIGH"
+        }
+      ],
+      "issueStatus": "OPEN"
+    },
+    {
+      "key": "AaFbZj2_2TNSduKvuGxr",
+      "rule": "python:S1192",
+      "component": "mitchins_scanweave:qualification/pdf_packaging/prepare_corpus.py",
+      "line": 38,
+      "hash": "06aed6b1f675adde61396b475beb1e61",
+      "textRange": {
+        "startLine": 38,
+        "endLine": 38,
+        "startOffset": 13,
+        "endOffset": 25
+      },
+      "status": "OPEN",
+      "message": "Define a constant instead of duplicating this literal 'c03-29.pdf' 3 times.",
+      "effort": "6min",
+      "creationDate": "2026-10-19T23:04:59+0000",
+      "updateDate": "2026-10-20T22:18:41+0000",
+      "impacts": [
+        {
+          "softwareQuality": "MAINTAINABILITY",
+          "severity": "HIGH"
+        }
+      ],
+      "issueStatus": "OPEN"
+    },
+    {
+      "key": "AaFbZj222TNSduKvuGxb",
+      "rule": "python:S3776",
+      "component": "mitchins_scanweave:qualification/pdf_packaging/resource_accounting.py",
+      "line": 5,
+      "hash": "ab3c68e27a42e7b08d02f989490e1fcf",
+      "textRange": {
+        "startLine": 5,
+        "endLine": 5,
+        "startOffset": 4,
+        "endOffset": 11
+      },
+      "status": "OPEN",
+      "message": "Refactor this function to reduce its Cognitive Complexity from 36 to the 15 allowed.",
+      "effort": "26min",
+      "creationDate": "2026-10-19T23:04:59+0000",
+      "updateDate": "2026-10-20T22:18:41+0000",
+      "impacts": [
+        {
+          "softwareQuality": "MAINTAINABILITY",
+          "severity": "HIGH"
+        }
+      ],
+      "issueStatus": "OPEN"
+    },
+    {
+      "key": "AaFbZj1d2TNSduKvuGu4",
+      "rule": "python:S3776",
+      "component": "mitchins_scanweave:qualification/clearscan_background/audit.py",
+      "line": 14,
+      "hash": "13a4cbcf0a38d4937bb9a6fdfd9c2526",
+      "textRange": {
+        "startLine": 14,
+        "endLine": 14,
+        "startOffset": 4,
+        "endOffset": 9
+      },
+      "status": "OPEN",
+      "message": "Refactor this function to reduce its Cognitive Complexity from 164 to the 15 allowed.",
+      "effort": "2h34min",
+      "creationDate": "2026-10-19T09:50:11+0000",
+      "updateDate": "2026-10-20T22:18:41+0000",
+      "impacts": [
+        {
+          "softwareQuality": "MAINTAINABILITY",
+          "severity": "HIGH"
+        }
+      ],
+      "issueStatus": "OPEN"
+    },
+    {
+      "key": "AaFbZj1i2TNSduKvuGu8",
+      "rule": "python:S3776",
+      "component": "mitchins_scanweave:qualification/clearscan_background/background_metrics.py",
+      "line": 8,
+      "hash": "58d83a9726dc884c6ce954153f779ab8",
+      "textRange": {
+        "startLine": 8,
+        "endLine": 8,
+        "startOffset": 4,
+        "endOffset": 9
+      },
+      "status": "OPEN",
+      "message": "Refactor this function to reduce its Cognitive Complexity from 16 to the 15 allowed.",
+      "effort": "6min",
+      "creationDate": "2026-10-19T09:50:11+0000",
+      "updateDate": "2026-10-20T22:18:41+0000",
+      "impacts": [
+        {
+          "softwareQuality": "MAINTAINABILITY",
+          "severity": "HIGH"
+        }
+      ],
+      "issueStatus": "OPEN"
+    },
+    {
+      "key": "AaFbZj1i2TNSduKvuGu_",
+      "rule": "python:S3776",
+      "component": "mitchins_scanweave:qualification/clearscan_background/background_metrics.py",
+      "line": 22,
+      "hash": "0149e10a01a84b727fd1f3db38d77bbd",
+      "textRange": {
+        "startLine": 22,
+        "endLine": 22,
+        "startOffset": 4,
+        "endOffset": 7
+      },
+      "status": "OPEN",
+      "message": "Refactor this function to reduce its Cognitive Complexity from 57 to the 15 allowed.",
+      "effort": "47min",
+      "creationDate": "2026-10-19T09:50:11+0000",
+      "updateDate": "2026-10-20T22:18:41+0000",
+      "impacts": [
+        {
+          "softwareQuality": "MAINTAINABILITY",
+          "severity": "HIGH"
+        }
+      ],
+      "issueStatus": "OPEN"
+    },
+    {
+      "key": "AaFbZj1m2TNSduKvuGvC",
+      "rule": "python:S3776",
+      "component": "mitchins_scanweave:qualification/clearscan_background/compare.py",
+      "line": 16,
+      "hash": "eb3f7b130fc04f041d599f7dbba76925",
+      "textRange": {
+        "startLine": 16,
+        "endLine": 16,
+        "startOffset": 4,
+        "endOffset": 14
+      },
+      "status": "OPEN",
+      "message": "Refactor this function to reduce its Cognitive Complexity from 60 to the 15 allowed.",
+      "effort": "50min",
+      "creationDate": "2026-10-19T09:50:11+0000",
+      "updateDate": "2026-10-20T22:18:41+0000",
+      "impacts": [
+        {
+          "softwareQuality": "MAINTAINABILITY",
+          "severity": "HIGH"
+        }
+      ],
+      "issueStatus": "OPEN"
+    },
+    {
+      "key": "AaFbZj1m2TNSduKvuGvD",
+      "rule": "python:S3776",
+      "component": "mitchins_scanweave:qualification/clearscan_background/compare.py",
+      "line": 53,
+      "hash": "ae66c3ea963ffbb70e7c886b13712e93",
+      "textRange": {
+        "startLine": 53,
+        "endLine": 53,
+        "startOffset": 4,
+        "endOffset": 12
+      },
+      "status": "OPEN",
+      "message": "Refactor this function to reduce its Cognitive Complexity from 83 to the 15 allowed.",
+      "effort": "1h13min",
+      "creationDate": "2026-10-19T09:50:11+0000",
+      "updateDate": "2026-10-20T22:18:41+0000",
+      "impacts": [
+        {
+          "softwareQuality": "MAINTAINABILITY",
+          "severity": "HIGH"
+        }
+      ],
+      "issueStatus": "OPEN"
+    },
+    {
+      "key": "AaFbZj1d2TNSduKvuGuz",
+      "rule": "python:S1192",
+      "component": "mitchins_scanweave:qualification/clearscan_background/hard_negative.py",
+      "line": 11,
+      "hash": "7085cb61f7d181e402d616e88c3a615c",
+      "textRange": {
+        "startLine": 11,
+        "endLine": 11,
+        "startOffset": 30,
+        "endOffset": 42
+      },
+      "status": "OPEN",
+      "message": "Define a constant instead of duplicating this literal 'page00.png' 5 times.",
+      "effort": "10min",
+      "creationDate": "2026-10-19T09:50:11+0000",
+      "updateDate": "2026-10-20T22:18:41+0000",
+      "impacts": [
+        {
+          "softwareQuality": "MAINTAINABILITY",
+          "severity": "HIGH"
+        }
+      ],
+      "issueStatus": "OPEN"
+    },
+    {
+      "key": "AaFbZj1d2TNSduKvuGu1",
+      "rule": "python:S1192",
+      "component": "mitchins_scanweave:qualification/clearscan_background/hard_negative.py",
+      "line": 15,
+      "hash": "4fa7da2c0260a0c35ecb44a80d7173f9",
+      "textRange": {
+        "startLine": 15,
+        "endLine": 15,
+        "startOffset": 357,
+        "endOffset": 372
+      },
+      "status": "OPEN",
+      "message": "Define a constant instead of duplicating this literal 'document.json' 3 times.",
+      "effort": "6min",
+      "creationDate": "2026-10-19T09:50:11+0000",
+      "updateDate": "2026-10-20T22:18:41+0000",
+      "impacts": [
+        {
+          "softwareQuality": "MAINTAINABILITY",
+          "severity": "HIGH"
+        }
+      ],
+      "issueStatus": "OPEN"
+    },
+    {
+      "key": "AaFbZj1d2TNSduKvuGuy",
+      "rule": "python:S1192",
+      "component": "mitchins_scanweave:qualification/clearscan_background/hard_negative.py",
+      "line": 15,
+      "hash": "4fa7da2c0260a0c35ecb44a80d7173f9",
+      "textRange": {
+        "startLine": 15,
+        "endLine": 15,
+        "startOffset": 62,
+        "endOffset": 79
+      },
+      "status": "OPEN",
+      "message": "Define a constant instead of duplicating this literal 'page00.ocr.json' 3 times.",
+      "effort": "6min",
+      "creationDate": "2026-10-19T09:50:11+0000",
+      "updateDate": "2026-10-20T22:18:41+0000",
+      "impacts": [
+        {
+          "softwareQuality": "MAINTAINABILITY",
+          "severity": "HIGH"
+        }
+      ],
+      "issueStatus": "OPEN"
+    },
+    {
+      "key": "AaFbZj1d2TNSduKvuGu0",
+      "rule": "python:S1192",
+      "component": "mitchins_scanweave:qualification/clearscan_background/hard_negative.py",
+      "line": 16,
+      "hash": "803576b8871693d1558fa93434f45837",
+      "textRange": {
+        "startLine": 16,
+        "endLine": 16,
+        "startOffset": 113,
+        "endOffset": 124
+      },
+      "status": "OPEN",
+      "message": "Define a constant instead of duplicating this literal 'final.pdf' 6 times.",
+      "effort": "12min",
+      "creationDate": "2026-10-19T09:50:11+0000",
+      "updateDate": "2026-10-20T22:18:41+0000",
+      "impacts": [
+        {
+          "softwareQuality": "MAINTAINABILITY",
+          "severity": "HIGH"
+        }
+      ],
+      "issueStatus": "OPEN"
+    },
+    {
+      "key": "AaFbZj1n2TNSduKvuGvI",
+      "rule": "python:S1192",
+      "component": "mitchins_scanweave:qualification/clearscan_background/hard_negative_audit.py",
+      "line": 23,
+      "hash": "abe00e800417482c825825787a62eacb",
+      "textRange": {
+        "startLine": 23,
+        "endLine": 23,
+        "startOffset": 732,
+        "endOffset": 745
+      },
+      "status": "OPEN",
+      "message": "Define a constant instead of duplicating this literal 'poppler.png' 3 times.",
+      "effort": "6min",
+      "creationDate": "2026-10-19T09:50:11+0000",
+      "updateDate": "2026-10-20T22:18:41+0000",
+      "impacts": [
+        {
+          "softwareQuality": "MAINTAINABILITY",
+          "severity": "HIGH"
+        }
+      ],
+      "issueStatus": "OPEN"
+    },
+    {
+      "key": "AaFbZj1i2TNSduKvuGu6",
+      "rule": "python:S1192",
+      "component": "mitchins_scanweave:qualification/clearscan_background/run.py",
+      "line": 15,
+      "hash": "79880df456d0be7df2f49964359abd65",
+      "textRange": {
+        "startLine": 15,
+        "endLine": 15,
+        "startOffset": 18,
+        "endOffset": 29
+      },
+      "status": "OPEN",
+      "message": "Define a constant instead of duplicating this literal 'final.pdf' 3 times.",
+      "effort": "6min",
+      "creationDate": "2026-10-19T09:50:11+0000",
+      "updateDate": "2026-10-20T22:18:41+0000",
+      "impacts": [
+        {
+          "softwareQuality": "MAINTAINABILITY",
+          "severity": "HIGH"
+        }
+      ],
+      "issueStatus": "OPEN"
+    },
+    {
+      "key": "AaFbZj1i2TNSduKvuGu7",
+      "rule": "python:S1192",
+      "component": "mitchins_scanweave:qualification/clearscan_background/run.py",
+      "line": 15,
+      "hash": "79880df456d0be7df2f49964359abd65",
+      "textRange": {
+        "startLine": 15,
+        "endLine": 15,
+        "startOffset": 47,
+        "endOffset": 59
+      },
+      "status": "OPEN",
+      "message": "Define a constant instead of duplicating this literal 'final.json' 3 times.",
+      "effort": "6min",
+      "creationDate": "2026-10-19T09:50:11+0000",
+      "updateDate": "2026-10-20T22:18:41+0000",
+      "impacts": [
+        {
+          "softwareQuality": "MAINTAINABILITY",
+          "severity": "HIGH"
+        }
+      ],
+      "issueStatus": "OPEN"
+    },
+    {
+      "key": "AaFbZj1a2TNSduKvuGux",
+      "rule": "python:S3776",
+      "component": "mitchins_scanweave:qualification/clearscan_background/stages.py",
+      "line": 13,
+      "hash": "36999f0b7d2b4dd75cc52066ae8a601f",
+      "textRange": {
+        "startLine": 13,
+        "endLine": 13,
+        "startOffset": 4,
+        "endOffset": 8
+      },
+      "status": "OPEN",
+      "message": "Refactor this function to reduce its Cognitive Complexity from 44 to the 15 allowed.",
+      "effort": "34min",
+      "creationDate": "2026-10-19T09:50:11+0000",
+      "updateDate": "2026-10-20T22:18:41+0000",
+      "impacts": [
+        {
+          "softwareQuality": "MAINTAINABILITY",
+          "severity": "HIGH"
+        }
+      ],
+      "issueStatus": "OPEN"
+    },
+    {
+      "key": "AaFbZj1n2TNSduKvuGvG",
+      "rule": "python:S1192",
+      "component": "mitchins_scanweave:qualification/clearscan_background/zooms.py",
+      "line": 14,
+      "hash": "92951e4b2f22f91e29053a08881d811b",
+      "textRange": {
+        "startLine": 14,
+        "endLine": 14,
+        "startOffset": 27,
+        "endOffset": 38
+      },
+      "status": "OPEN",
+      "message": "Define a constant instead of duplicating this literal 'final.pdf' 4 times.",
+      "effort": "8min",
+      "creationDate": "2026-10-19T09:50:11+0000",
+      "updateDate": "2026-10-20T22:18:41+0000",
+      "impacts": [
+        {
+          "softwareQuality": "MAINTAINABILITY",
+          "severity": "HIGH"
+        }
+      ],
+      "issueStatus": "OPEN"
+    },
+    {
+      "key": "AaFbqrwrDf3ZA7hnTDuN",
+      "rule": "rust:S3776",
+      "component": "mitchins_scanweave:crates/scanweave-io/src/convert.rs",
+      "line": 2354,
+      "hash": "7703b04ea9415da22ad585fc86d49d78",
+      "textRange": {
+        "startLine": 2354,
+        "endLine": 2354,
+        "startOffset": 3,
+        "endOffset": 21
+      },
+      "status": "OPEN",
+      "message": "Refactor this function to reduce its Cognitive Complexity from 77 to the 30 allowed.",
+      "effort": "6min",
+      "creationDate": "2026-10-19T09:20:46+0000",
+      "updateDate": "2026-10-20T23:33:32+0000",
+      "impacts": [
+        {
+          "softwareQuality": "MAINTAINABILITY",
+          "severity": "HIGH"
+        }
+      ],
+      "issueStatus": "OPEN"
+    },
+    {
+      "key": "AaFbqrwrDf3ZA7hnTDuM",
+      "rule": "rust:S3776",
+      "component": "mitchins_scanweave:crates/scanweave-io/src/convert.rs",
+      "line": 2000,
+      "hash": "18b2d4937829f6da8c3349e373e763b8",
+      "textRange": {
+        "startLine": 2000,
+        "endLine": 2000,
+        "startOffset": 3,
+        "endOffset": 22
+      },
+      "status": "OPEN",
+      "message": "Refactor this function to reduce its Cognitive Complexity from 174 to the 30 allowed.",
+      "effort": "6min",
+      "creationDate": "2026-10-19T09:12:29+0000",
+      "updateDate": "2026-10-20T23:33:32+0000",
+      "impacts": [
+        {
+          "softwareQuality": "MAINTAINABILITY",
+          "severity": "HIGH"
+        }
+      ],
+      "issueStatus": "OPEN"
+    },
+    {
+      "key": "AaFbqrwrDf3ZA7hnTDuO",
+      "rule": "rust:S3776",
+      "component": "mitchins_scanweave:crates/scanweave-io/src/convert.rs",
+      "line": 2461,
+      "hash": "205b4478072aa6ccc5af253d635a4a5e",
+      "textRange": {
+        "startLine": 2461,
+        "endLine": 2461,
+        "startOffset": 3,
+        "endOffset": 20
+      },
+      "status": "OPEN",
+      "message": "Refactor this function to reduce its Cognitive Complexity from 47 to the 30 allowed.",
+      "effort": "6min",
+      "creationDate": "2026-10-19T09:00:30+0000",
+      "updateDate": "2026-10-20T23:33:32+0000",
+      "impacts": [
+        {
+          "softwareQuality": "MAINTAINABILITY",
+          "severity": "HIGH"
+        }
+      ],
+      "issueStatus": "OPEN"
+    },
+    {
+      "key": "AaFbZj3T2TNSduKvuGyL",
+      "rule": "python:S3776",
+      "component": "mitchins_scanweave:qualification/clearscan_contours/audit.py",
+      "line": 14,
+      "hash": "13a4cbcf0a38d4937bb9a6fdfd9c2526",
+      "textRange": {
+        "startLine": 14,
+        "endLine": 14,
+        "startOffset": 4,
+        "endOffset": 9
+      },
+      "status": "OPEN",
+      "message": "Refactor this function to reduce its Cognitive Complexity from 164 to the 15 allowed.",
+      "effort": "2h34min",
+      "creationDate": "2026-10-19T07:44:13+0000",
+      "updateDate": "2026-10-20T22:18:41+0000",
+      "impacts": [
+        {
+          "softwareQuality": "MAINTAINABILITY",
+          "severity": "HIGH"
+        }
+      ],
+      "issueStatus": "OPEN"
+    },
+    {
+      "key": "AaFbZj3L2TNSduKvuGxz",
+      "rule": "python:S3776",
+      "component": "mitchins_scanweave:qualification/clearscan_contours/compare.py",
+      "line": 16,
+      "hash": "eb3f7b130fc04f041d599f7dbba76925",
+      "textRange": {
+        "startLine": 16,
+        "endLine": 16,
+        "startOffset": 4,
+        "endOffset": 14
+      },
+      "status": "OPEN",
+      "message": "Refactor this function to reduce its Cognitive Complexity from 60 to the 15 allowed.",
+      "effort": "50min",
+      "creationDate": "2026-10-19T07:44:13+0000",
+      "updateDate": "2026-10-20T22:18:41+0000",
+      "impacts": [
+        {
+          "softwareQuality": "MAINTAINABILITY",
+          "severity": "HIGH"
+        }
+      ],
+      "issueStatus": "OPEN"
+    },
+    {
+      "key": "AaFbZj3L2TNSduKvuGx0",
+      "rule": "python:S3776",
+      "component": "mitchins_scanweave:qualification/clearscan_contours/compare.py",
+      "line": 53,
+      "hash": "ae66c3ea963ffbb70e7c886b13712e93",
+      "textRange": {
+        "startLine": 53,
+        "endLine": 53,
+        "startOffset": 4,
+        "endOffset": 12
+      },
+      "status": "OPEN",
+      "message": "Refactor this function to reduce its Cognitive Complexity from 83 to the 15 allowed.",
+      "effort": "1h13min",
+      "creationDate": "2026-10-19T07:44:13+0000",
+      "updateDate": "2026-10-20T22:18:41+0000",
+      "impacts": [
+        {
+          "softwareQuality": "MAINTAINABILITY",
+          "severity": "HIGH"
+        }
+      ],
+      "issueStatus": "OPEN"
+    },
+    {
+      "key": "AaFbZj3Y2TNSduKvuGyW",
+      "rule": "python:S3776",
+      "component": "mitchins_scanweave:qualification/clearscan_contours/design_geometry.py",
+      "line": 111,
+      "hash": "a438f4b0830fd68c98ba2f76f162d1f6",
+      "textRange": {
+        "startLine": 111,
+        "endLine": 111,
+        "startOffset": 4,
+        "endOffset": 15
+      },
+      "status": "OPEN",
+      "message": "Refactor this function to reduce its Cognitive Complexity from 24 to the 15 allowed.",
+      "effort": "14min",
+      "creationDate": "2026-10-19T07:44:13+0000",
+      "updateDate": "2026-10-20T22:18:41+0000",
+      "impacts": [
+        {
+          "softwareQuality": "MAINTAINABILITY",
+          "severity": "HIGH"
+        }
+      ],
+      "issueStatus": "OPEN"
+    },
+    {
+      "key": "AaFbZj3Y2TNSduKvuGyd",
+      "rule": "python:S3776",
+      "component": "mitchins_scanweave:qualification/clearscan_contours/design_geometry.py",
+      "line": 146,
+      "hash": "40fc5e0ffa965a2491a95229e1eec8da",
+      "textRange": {
+        "startLine": 146,
+        "endLine": 146,
+        "startOffset": 4,
+        "endOffset": 15
+      },
+      "status": "OPEN",
+      "message": "Refactor this function to reduce its Cognitive Complexity from 16 to the 15 allowed.",
+      "effort": "6min",
+      "creationDate": "2026-10-19T07:44:13+0000",
+      "updateDate": "2026-10-20T22:18:41+0000",
+      "impacts": [
+        {
+          "softwareQuality": "MAINTAINABILITY",
+          "severity": "HIGH"
+        }
+      ],
+      "issueStatus": "OPEN"
+    },
+    {
+      "key": "AaFbZj3Y2TNSduKvuGyf",
+      "rule": "python:S3776",
+      "component": "mitchins_scanweave:qualification/clearscan_contours/design_geometry.py",
+      "line": 217,
+      "hash": "bfcaac8333223896bf5d4d0df7e0b783",
+      "textRange": {
+        "startLine": 217,
+        "endLine": 217,
+        "startOffset": 4,
+        "endOffset": 16
+      },
+      "status": "OPEN",
+      "message": "Refactor this function to reduce its Cognitive Complexity from 35 to the 15 allowed.",
+      "effort": "25min",
+      "creationDate": "2026-10-19T07:44:13+0000",
+      "updateDate": "2026-10-20T22:18:41+0000",
+      "impacts": [
+        {
+          "softwareQuality": "MAINTAINABILITY",
+          "severity": "HIGH"
+        }
+      ],
+      "issueStatus": "OPEN"
+    },
+    {
+      "key": "AaFbZj3P2TNSduKvuGyF",
+      "rule": "python:S1186",
+      "component": "mitchins_scanweave:qualification/clearscan_contours/font_render_control.py",
+      "line": 18,
+      "hash": "69bda8bb857edc2fd95f6ed9355d2a49",
+      "textRange": {
+        "startLine": 18,
+        "endLine": 18,
+        "startOffset": 5,
+        "endOffset": 13
+      },
+      "status": "OPEN",
+      "message": "Add a nested comment explaining why this method is empty, or complete the implementation.",
+      "effort": "5min",
+      "creationDate": "2026-10-19T07:44:13+0000",
+      "updateDate": "2026-10-20T22:18:41+0000",
+      "impacts": [
+        {
+          "softwareQuality": "MAINTAINABILITY",
+          "severity": "HIGH"
+        }
+      ],
+      "issueStatus": "OPEN"
+    },
+    {
+      "key": "AaFbZj3U2TNSduKvuGyM",
+      "rule": "python:S3776",
+      "component": "mitchins_scanweave:qualification/clearscan_contours/geometry.py",
+      "line": 12,
+      "hash": "ac8928bfe4dd979510e531e77c83f31d",
+      "textRange": {
+        "startLine": 12,
+        "endLine": 12,
+        "startOffset": 4,
+        "endOffset": 9
+      },
+      "status": "OPEN",
+      "message": "Refactor this function to reduce its Cognitive Complexity from 18 to the 15 allowed.",
+      "effort": "8min",
+      "creationDate": "2026-10-19T07:44:13+0000",
+      "updateDate": "2026-10-20T22:18:41+0000",
+      "impacts": [
+        {
+          "softwareQuality": "MAINTAINABILITY",
+          "severity": "HIGH"
+        }
+      ],
+      "issueStatus": "OPEN"
+    },
+    {
+      "key": "AaFbZj3N2TNSduKvuGx5",
+      "rule": "python:S1192",
+      "component": "mitchins_scanweave:qualification/clearscan_contours/run.py",
+      "line": 16,
+      "hash": "ae63d541250760d4c73949f31ea635bc",
+      "textRange": {
+        "startLine": 16,
+        "endLine": 16,
+        "startOffset": 219,
+        "endOffset": 230
+      },
+      "status": "OPEN",
+      "message": "Define a constant instead of duplicating this literal 'final.pdf' 4 times.",
+      "effort": "8min",
+      "creationDate": "2026-10-19T07:44:13+0000",
+      "updateDate": "2026-10-20T22:18:41+0000",
+      "impacts": [
+        {
+          "softwareQuality": "MAINTAINABILITY",
+          "severity": "HIGH"
+        }
+      ],
+      "issueStatus": "OPEN"
+    },
+    {
+      "key": "AaFbZj3N2TNSduKvuGx6",
+      "rule": "python:S1192",
+      "component": "mitchins_scanweave:qualification/clearscan_contours/run.py",
+      "line": 16,
+      "hash": "ae63d541250760d4c73949f31ea635bc",
+      "textRange": {
+        "startLine": 16,
+        "endLine": 16,
+        "startOffset": 244,
+        "endOffset": 256
+      },
+      "status": "OPEN",
+      "message": "Define a constant instead of duplicating this literal 'final.json' 3 times.",
+      "effort": "6min",
+      "creationDate": "2026-10-19T07:44:13+0000",
+      "updateDate": "2026-10-20T22:18:41+0000",
+      "impacts": [
+        {
+          "softwareQuality": "MAINTAINABILITY",
+          "severity": "HIGH"
+        }
+      ],
+      "issueStatus": "OPEN"
+    },
+    {
+      "key": "AaFbZj3V2TNSduKvuGyR",
+      "rule": "python:S3776",
+      "component": "mitchins_scanweave:qualification/clearscan_contours/stages.py",
+      "line": 13,
+      "hash": "36999f0b7d2b4dd75cc52066ae8a601f",
+      "textRange": {
+        "startLine": 13,
+        "endLine": 13,
+        "startOffset": 4,
+        "endOffset": 8
+      },
+      "status": "OPEN",
+      "message": "Refactor this function to reduce its Cognitive Complexity from 44 to the 15 allowed.",
+      "effort": "34min",
+      "creationDate": "2026-10-19T07:44:13+0000",
+      "updateDate": "2026-10-20T22:18:41+0000",
+      "impacts": [
+        {
+          "softwareQuality": "MAINTAINABILITY",
+          "severity": "HIGH"
+        }
+      ],
+      "issueStatus": "OPEN"
+    },
+    {
+      "key": "AaFbZj3Q2TNSduKvuGyH",
+      "rule": "python:S1192",
+      "component": "mitchins_scanweave:qualification/clearscan_contours/zooms.py",
+      "line": 14,
+      "hash": "92951e4b2f22f91e29053a08881d811b",
+      "textRange": {
+        "startLine": 14,
+        "endLine": 14,
+        "startOffset": 27,
+        "endOffset": 38
+      },
+      "status": "OPEN",
+      "message": "Define a constant instead of duplicating this literal 'final.pdf' 4 times.",
+      "effort": "8min",
+      "creationDate": "2026-10-19T07:44:13+0000",
+      "updateDate": "2026-10-20T22:18:41+0000",
+      "impacts": [
+        {
+          "softwareQuality": "MAINTAINABILITY",
+          "severity": "HIGH"
+        }
+      ],
+      "issueStatus": "OPEN"
+    },
+    {
+      "key": "AaFbqrwADf3ZA7hnTDuA",
+      "rule": "rust:S3776",
+      "component": "mitchins_scanweave:crates/scanweave-io/src/trace.rs",
+      "line": 264,
+      "hash": "bcc6269550f72d17fe0a47b7b34f47bb",
+      "textRange": {
+        "startLine": 264,
+        "endLine": 264,
+        "startOffset": 14,
+        "endOffset": 35
+      },
+      "status": "OPEN",
+      "message": "Refactor this function to reduce its Cognitive Complexity from 53 to the 30 allowed.",
+      "effort": "6min",
+      "creationDate": "2026-10-19T07:13:43+0000",
+      "updateDate": "2026-10-20T23:33:32+0000",
+      "impacts": [
+        {
+          "softwareQuality": "MAINTAINABILITY",
+          "severity": "HIGH"
+        }
+      ],
+      "issueStatus": "OPEN"
+    },
+    {
+      "key": "AaFbqrv0Df3ZA7hnTDt-",
+      "rule": "rust:S3776",
+      "component": "mitchins_scanweave:crates/scanweave-io/src/glyphs.rs",
+      "line": 101,
+      "hash": "1eca8b2bb781e91d5a1abbf540257900",
+      "textRange": {
+        "startLine": 101,
+        "endLine": 101,
+        "startOffset": 7,
+        "endOffset": 25
+      },
+      "status": "OPEN",
+      "message": "Refactor this function to reduce its Cognitive Complexity from 59 to the 30 allowed.",
+      "effort": "6min",
+      "creationDate": "2026-10-19T07:05:01+0000",
+      "updateDate": "2026-10-20T23:33:32+0000",
+      "impacts": [
+        {
+          "softwareQuality": "MAINTAINABILITY",
+          "severity": "HIGH"
+        }
+      ],
+      "issueStatus": "OPEN"
+    },
+    {
+      "key": "AaFbZj4h2TNSduKvuGzW",
+      "rule": "python:S3776",
+      "component": "mitchins_scanweave:qualification/clearscan_typography/audit.py",
+      "line": 14,
+      "hash": "13a4cbcf0a38d4937bb9a6fdfd9c2526",
+      "textRange": {
+        "startLine": 14,
+        "endLine": 14,
+        "startOffset": 4,
+        "endOffset": 9
+      },
+      "status": "OPEN",
+      "message": "Refactor this function to reduce its Cognitive Complexity from 164 to the 15 allowed.",
+      "effort": "2h34min",
+      "creationDate": "2026-10-19T05:13:55+0000",
+      "updateDate": "2026-10-20T22:18:41+0000",
+      "impacts": [
+        {
+          "softwareQuality": "MAINTAINABILITY",
+          "severity": "HIGH"
+        }
+      ],
+      "issueStatus": "OPEN"
+    },
+    {
+      "key": "AaFbZj4e2TNSduKvuGzQ",
+      "rule": "python:S3776",
+      "component": "mitchins_scanweave:qualification/clearscan_typography/compare.py",
+      "line": 16,
+      "hash": "eb3f7b130fc04f041d599f7dbba76925",
+      "textRange": {
+        "startLine": 16,
+        "endLine": 16,
+        "startOffset": 4,
+        "endOffset": 14
+      },
+      "status": "OPEN",
+      "message": "Refactor this function to reduce its Cognitive Complexity from 60 to the 15 allowed.",
+      "effort": "50min",
+      "creationDate": "2026-10-19T05:13:55+0000",
+      "updateDate": "2026-10-20T22:18:41+0000",
+      "impacts": [
+        {
+          "softwareQuality": "MAINTAINABILITY",
+          "severity": "HIGH"
+        }
+      ],
+      "issueStatus": "OPEN"
+    },
+    {
+      "key": "AaFbZj4e2TNSduKvuGzR",
+      "rule": "python:S3776",
+      "component": "mitchins_scanweave:qualification/clearscan_typography/compare.py",
+      "line": 53,
+      "hash": "ae66c3ea963ffbb70e7c886b13712e93",
+      "textRange": {
+        "startLine": 53,
+        "endLine": 53,
+        "startOffset": 4,
+        "endOffset": 12
+      },
+      "status": "OPEN",
+      "message": "Refactor this function to reduce its Cognitive Complexity from 83 to the 15 allowed.",
+      "effort": "1h13min",
+      "creationDate": "2026-10-19T05:13:55+0000",
+      "updateDate": "2026-10-20T22:18:41+0000",
+      "impacts": [
+        {
+          "softwareQuality": "MAINTAINABILITY",
+          "severity": "HIGH"
+        }
+      ],
+      "issueStatus": "OPEN"
+    },
+    {
+      "key": "AaFbZj4F2TNSduKvuGzB",
+      "rule": "python:S1192",
+      "component": "mitchins_scanweave:qualification/clearscan_typography/composition-review/paired_pixels.py",
+      "line": 23,
+      "hash": "43f89919aba20985653ab043ba19381f",
+      "textRange": {
+        "startLine": 23,
+        "endLine": 23,
+        "startOffset": 30,
+        "endOffset": 57
+      },
+      "status": "OPEN",
+      "message": "Define a constant instead of duplicating this literal 'stages/S4-vector-only.pdf' 3 times.",
+      "effort": "6min",
+      "creationDate": "2026-10-19T05:13:55+0000",
+      "updateDate": "2026-10-20T22:18:41+0000",
+      "impacts": [
+        {
+          "softwareQuality": "MAINTAINABILITY",
+          "severity": "HIGH"
+        }
+      ],
+      "issueStatus": "OPEN"
+    },
+    {
+      "key": "AaFbZj4F2TNSduKvuGzC",
+      "rule": "python:S1192",
+      "component": "mitchins_scanweave:qualification/clearscan_typography/composition-review/paired_pixels.py",
+      "line": 23,
+      "hash": "43f89919aba20985653ab043ba19381f",
+      "textRange": {
+        "startLine": 23,
+        "endLine": 23,
+        "startOffset": 70,
+        "endOffset": 125
+      },
+      "status": "OPEN",
+      "message": "Define a constant instead of duplicating this literal 'qualification/clearscan_competitive/300/clearscan.pdf' 3 times.",
+      "effort": "6min",
+      "creationDate": "2026-10-19T05:13:55+0000",
+      "updateDate": "2026-10-20T22:18:41+0000",
+      "impacts": [
+        {
+          "softwareQuality": "MAINTAINABILITY",
+          "severity": "HIGH"
+        }
+      ],
+      "issueStatus": "OPEN"
+    },
+    {
+      "key": "AaFbZj4j2TNSduKvuGza",
+      "rule": "python:S3776",
+      "component": "mitchins_scanweave:qualification/clearscan_typography/design_geometry.py",
+      "line": 111,
+      "hash": "a438f4b0830fd68c98ba2f76f162d1f6",
+      "textRange": {
+        "startLine": 111,
+        "endLine": 111,
+        "startOffset": 4,
+        "endOffset": 15
+      },
+      "status": "OPEN",
+      "message": "Refactor this function to reduce its Cognitive Complexity from 24 to the 15 allowed.",
+      "effort": "14min",
+      "creationDate": "2026-10-19T05:13:55+0000",
+      "updateDate": "2026-10-20T22:18:41+0000",
+      "impacts": [
+        {
+          "softwareQuality": "MAINTAINABILITY",
+          "severity": "HIGH"
+        }
+      ],
+      "issueStatus": "OPEN"
+    },
+    {
+      "key": "AaFbZj4j2TNSduKvuGzh",
+      "rule": "python:S3776",
+      "component": "mitchins_scanweave:qualification/clearscan_typography/design_geometry.py",
+      "line": 146,
+      "hash": "40fc5e0ffa965a2491a95229e1eec8da",
+      "textRange": {
+        "startLine": 146,
+        "endLine": 146,
+        "startOffset": 4,
+        "endOffset": 15
+      },
+      "status": "OPEN",
+      "message": "Refactor this function to reduce its Cognitive Complexity from 16 to the 15 allowed.",
+      "effort": "6min",
+      "creationDate": "2026-10-19T05:13:55+0000",
+      "updateDate": "2026-10-20T22:18:41+0000",
+      "impacts": [
+        {
+          "softwareQuality": "MAINTAINABILITY",
+          "severity": "HIGH"
+        }
+      ],
+      "issueStatus": "OPEN"
+    },
+    {
+      "key": "AaFbZj4j2TNSduKvuGzj",
+      "rule": "python:S3776",
+      "component": "mitchins_scanweave:qualification/clearscan_typography/design_geometry.py",
+      "line": 217,
+      "hash": "bfcaac8333223896bf5d4d0df7e0b783",
+      "textRange": {
+        "startLine": 217,
+        "endLine": 217,
+        "startOffset": 4,
+        "endOffset": 16
+      },
+      "status": "OPEN",
+      "message": "Refactor this function to reduce its Cognitive Complexity from 35 to the 15 allowed.",
+      "effort": "25min",
+      "creationDate": "2026-10-19T05:13:55+0000",
+      "updateDate": "2026-10-20T22:18:41+0000",
+      "impacts": [
+        {
+          "softwareQuality": "MAINTAINABILITY",
+          "severity": "HIGH"
+        }
+      ],
+      "issueStatus": "OPEN"
+    },
+    {
+      "key": "AaFbZj4l2TNSduKvuGzy",
+      "rule": "python:S3776",
+      "component": "mitchins_scanweave:qualification/clearscan_typography/geometry.py",
+      "line": 12,
+      "hash": "ac8928bfe4dd979510e531e77c83f31d",
+      "textRange": {
+        "startLine": 12,
+        "endLine": 12,
+        "startOffset": 4,
+        "endOffset": 9
+      },
+      "status": "OPEN",
+      "message": "Refactor this function to reduce its Cognitive Complexity from 18 to the 15 allowed.",
+      "effort": "8min",
+      "creationDate": "2026-10-19T05:13:55+0000",
+      "updateDate": "2026-10-20T22:18:41+0000",
+      "impacts": [
+        {
+          "softwareQuality": "MAINTAINABILITY",
+          "severity": "HIGH"
+        }
+      ],
+      "issueStatus": "OPEN"
+    },
+    {
+      "key": "AaFbZj4a2TNSduKvuGzN",
+      "rule": "python:S1192",
+      "component": "mitchins_scanweave:qualification/clearscan_typography/manifest.py",
+      "line": 14,
+      "hash": "d3edc39f9abe186f5d99a74444611e10",
+      "textRange": {
+        "startLine": 14,
+        "endLine": 14,
+        "startOffset": 86,
+        "endOffset": 101
+      },
+      "status": "OPEN",
+      "message": "Define a constant instead of duplicating this literal 'document.json' 3 times.",
+      "effort": "6min",
+      "creationDate": "2026-10-19T05:13:55+0000",
+      "updateDate": "2026-10-20T22:18:41+0000",
+      "impacts": [
+        {
+          "softwareQuality": "MAINTAINABILITY",
+          "severity": "HIGH"
+        }
+      ],
+      "issueStatus": "OPEN"
+    },
+    {
+      "key": "AaFbZj4l2TNSduKvuGzx",
+      "rule": "python:S1192",
+      "component": "mitchins_scanweave:qualification/clearscan_typography/package.py",
+      "line": 22,
+      "hash": "ca41da43f28760307d58685ad684801b",
+      "textRange": {
+        "startLine": 22,
+        "endLine": 22,
+        "startOffset": 16,
+        "endOffset": 23
+      },
+      "status": "OPEN",
+      "message": "Define a constant instead of duplicating this literal '.json' 6 times.",
+      "effort": "12min",
+      "creationDate": "2026-10-19T05:13:55+0000",
+      "updateDate": "2026-10-20T22:18:41+0000",
+      "impacts": [
+        {
+          "softwareQuality": "MAINTAINABILITY",
+          "severity": "HIGH"
+        }
+      ],
+      "issueStatus": "OPEN"
+    },
+    {
+      "key": "AaFbZj4l2TNSduKvuGzw",
+      "rule": "python:S1192",
+      "component": "mitchins_scanweave:qualification/clearscan_typography/package.py",
+      "line": 28,
+      "hash": "521cc4406c13fef61549c4517cb83122",
+      "textRange": {
+        "startLine": 28,
+        "endLine": 28,
+        "startOffset": 15,
+        "endOffset": 29
+      },
+      "status": "OPEN",
+      "message": "Define a constant instead of duplicating this literal 'metrics.json' 3 times.",
+      "effort": "6min",
+      "creationDate": "2026-10-19T05:13:55+0000",
+      "updateDate": "2026-10-20T22:18:41+0000",
+      "impacts": [
+        {
+          "softwareQuality": "MAINTAINABILITY",
+          "severity": "HIGH"
+        }
+      ],
+      "issueStatus": "OPEN"
+    },
+    {
+      "key": "AaFbZj4b2TNSduKvuGzO",
+      "rule": "python:S1192",
+      "component": "mitchins_scanweave:qualification/clearscan_typography/run.py",
+      "line": 12,
+      "hash": "3691edf243ea55766e091f9c5f8c8dc7",
+      "textRange": {
+        "startLine": 12,
+        "endLine": 12,
+        "startOffset": 218,
+        "endOffset": 229
+      },
+      "status": "OPEN",
+      "message": "Define a constant instead of duplicating this literal 'final.pdf' 3 times.",
+      "effort": "6min",
+      "creationDate": "2026-10-19T05:13:55+0000",
+      "updateDate": "2026-10-20T22:18:41+0000",
+      "impacts": [
+        {
+          "softwareQuality": "MAINTAINABILITY",
+          "severity": "HIGH"
+        }
+      ],
+      "issueStatus": "OPEN"
+    },
+    {
+      "key": "AaFbZj4b2TNSduKvuGzP",
+      "rule": "python:S1192",
+      "component": "mitchins_scanweave:qualification/clearscan_typography/run.py",
+      "line": 12,
+      "hash": "3691edf243ea55766e091f9c5f8c8dc7",
+      "textRange": {
+        "startLine": 12,
+        "endLine": 12,
+        "startOffset": 243,
+        "endOffset": 255
+      },
+      "status": "OPEN",
+      "message": "Define a constant instead of duplicating this literal 'final.json' 3 times.",
+      "effort": "6min",
+      "creationDate": "2026-10-19T05:13:55+0000",
+      "updateDate": "2026-10-20T22:18:41+0000",
+      "impacts": [
+        {
+          "softwareQuality": "MAINTAINABILITY",
+          "severity": "HIGH"
+        }
+      ],
+      "issueStatus": "OPEN"
+    },
+    {
+      "key": "AaFbZj4G2TNSduKvuGzI",
+      "rule": "python:S3776",
+      "component": "mitchins_scanweave:qualification/clearscan_typography/stages.py",
+      "line": 13,
+      "hash": "36999f0b7d2b4dd75cc52066ae8a601f",
+      "textRange": {
+        "startLine": 13,
+        "endLine": 13,
+        "startOffset": 4,
+        "endOffset": 8
+      },
+      "status": "OPEN",
+      "message": "Refactor this function to reduce its Cognitive Complexity from 44 to the 15 allowed.",
+      "effort": "34min",
+      "creationDate": "2026-10-19T05:13:55+0000",
+      "updateDate": "2026-10-20T22:18:41+0000",
+      "impacts": [
+        {
+          "softwareQuality": "MAINTAINABILITY",
+          "severity": "HIGH"
+        }
+      ],
+      "issueStatus": "OPEN"
+    },
+    {
+      "key": "AaFbqrvVDf3ZA7hnTDt4",
+      "rule": "rust:S3776",
+      "component": "mitchins_scanweave:crates/scanweave-io/src/contour_topology.rs",
+      "line": 52,
+      "hash": "5ee0ad682adacd5c12ab221ba1c85269",
+      "textRange": {
+        "startLine": 52,
+        "endLine": 52,
+        "startOffset": 14,
+        "endOffset": 19
+      },
+      "status": "OPEN",
+      "message": "Refactor this function to reduce its Cognitive Complexity from 41 to the 30 allowed.",
+      "effort": "6min",
+      "creationDate": "2026-10-19T04:38:17+0000",
+      "updateDate": "2026-10-20T23:33:32+0000",
+      "impacts": [
+        {
+          "softwareQuality": "MAINTAINABILITY",
+          "severity": "HIGH"
+        }
+      ],
+      "issueStatus": "OPEN"
+    },
+    {
+      "key": "AaFbqrwrDf3ZA7hnTDuK",
+      "rule": "rust:S3776",
+      "component": "mitchins_scanweave:crates/scanweave-io/src/convert.rs",
+      "line": 469,
+      "hash": "d166712a94193699b59f511fcc742415",
+      "textRange": {
+        "startLine": 469,
+        "endLine": 469,
+        "startOffset": 3,
+        "endOffset": 26
+      },
+      "status": "OPEN",
+      "message": "Refactor this function to reduce its Cognitive Complexity from 65 to the 30 allowed.",
+      "effort": "6min",
+      "creationDate": "2026-10-19T04:38:17+0000",
+      "updateDate": "2026-10-20T23:33:32+0000",
+      "impacts": [
+        {
+          "softwareQuality": "MAINTAINABILITY",
+          "severity": "HIGH"
+        }
+      ],
+      "issueStatus": "OPEN"
+    },
+    {
+      "key": "AaFbqrwADf3ZA7hnTDuB",
+      "rule": "rust:S3776",
+      "component": "mitchins_scanweave:crates/scanweave-io/src/trace.rs",
+      "line": 507,
+      "hash": "0f29001a40b34a75f907c78ffcbfbf76",
+      "textRange": {
+        "startLine": 507,
+        "endLine": 507,
+        "startOffset": 3,
+        "endOffset": 26
+      },
+      "status": "OPEN",
+      "message": "Refactor this function to reduce its Cognitive Complexity from 37 to the 30 allowed.",
+      "effort": "6min",
+      "creationDate": "2026-10-19T04:38:17+0000",
+      "updateDate": "2026-10-20T23:33:32+0000",
+      "impacts": [
+        {
+          "softwareQuality": "MAINTAINABILITY",
+          "severity": "HIGH"
+        }
+      ],
+      "issueStatus": "OPEN"
+    },
+    {
+      "key": "AaFbZj1A2TNSduKvuGug",
+      "rule": "python:S3776",
+      "component": "mitchins_scanweave:qualification/clearscan_competitive/audit.py",
+      "line": 14,
+      "hash": "13a4cbcf0a38d4937bb9a6fdfd9c2526",
+      "textRange": {
+        "startLine": 14,
+        "endLine": 14,
+        "startOffset": 4,
+        "endOffset": 9
+      },
+      "status": "OPEN",
+      "message": "Refactor this function to reduce its Cognitive Complexity from 164 to the 15 allowed.",
+      "effort": "2h34min",
+      "creationDate": "2026-10-19T03:37:43+0000",
+      "updateDate": "2026-10-20T22:18:41+0000",
+      "impacts": [
+        {
+          "softwareQuality": "MAINTAINABILITY",
+          "severity": "HIGH"
+        }
+      ],
+      "issueStatus": "OPEN"
+    },
+    {
+      "key": "AaFbZj022TNSduKvuGt7",
+      "rule": "python:S3776",
+      "component": "mitchins_scanweave:qualification/clearscan_competitive/compare.py",
+      "line": 16,
+      "hash": "eb3f7b130fc04f041d599f7dbba76925",
+      "textRange": {
+        "startLine": 16,
+        "endLine": 16,
+        "startOffset": 4,
+        "endOffset": 14
+      },
+      "status": "OPEN",
+      "message": "Refactor this function to reduce its Cognitive Complexity from 60 to the 15 allowed.",
+      "effort": "50min",
+      "creationDate": "2026-10-19T03:37:43+0000",
+      "updateDate": "2026-10-20T22:18:41+0000",
+      "impacts": [
+        {
+          "softwareQuality": "MAINTAINABILITY",
+          "severity": "HIGH"
+        }
+      ],
+      "issueStatus": "OPEN"
+    },
+    {
+      "key": "AaFbZj022TNSduKvuGt8",
+      "rule": "python:S3776",
+      "component": "mitchins_scanweave:qualification/clearscan_competitive/compare.py",
+      "line": 53,
+      "hash": "ae66c3ea963ffbb70e7c886b13712e93",
+      "textRange": {
+        "startLine": 53,
+        "endLine": 53,
+        "startOffset": 4,
+        "endOffset": 12
+      },
+      "status": "OPEN",
+      "message": "Refactor this function to reduce its Cognitive Complexity from 83 to the 15 allowed.",
+      "effort": "1h13min",
+      "creationDate": "2026-10-19T03:37:43+0000",
+      "updateDate": "2026-10-20T22:18:41+0000",
+      "impacts": [
+        {
+          "softwareQuality": "MAINTAINABILITY",
+          "severity": "HIGH"
+        }
+      ],
+      "issueStatus": "OPEN"
+    },
+    {
+      "key": "AaFbZj0r2TNSduKvuGtw",
+      "rule": "python:S3776",
+      "component": "mitchins_scanweave:qualification/clearscan_competitive/geometry.py",
+      "line": 12,
+      "hash": "ac8928bfe4dd979510e531e77c83f31d",
+      "textRange": {
+        "startLine": 12,
+        "endLine": 12,
+        "startOffset": 4,
+        "endOffset": 9
+      },
+      "status": "OPEN",
+      "message": "Refactor this function to reduce its Cognitive Complexity from 18 to the 15 allowed.",
+      "effort": "8min",
+      "creationDate": "2026-10-19T03:37:43+0000",
+      "updateDate": "2026-10-20T22:18:41+0000",
+      "impacts": [
+        {
+          "softwareQuality": "MAINTAINABILITY",
+          "severity": "HIGH"
+        }
+      ],
+      "issueStatus": "OPEN"
+    },
+    {
+      "key": "AaFbZj0v2TNSduKvuGt5",
+      "rule": "python:S3776",
+      "component": "mitchins_scanweave:qualification/clearscan_competitive/measure_source_font_control.py",
+      "line": 23,
+      "hash": "36999f0b7d2b4dd75cc52066ae8a601f",
+      "textRange": {
+        "startLine": 23,
+        "endLine": 23,
+        "startOffset": 4,
+        "endOffset": 8
+      },
+      "status": "OPEN",
+      "message": "Refactor this function to reduce its Cognitive Complexity from 16 to the 15 allowed.",
+      "effort": "6min",
+      "creationDate": "2026-10-19T03:37:43+0000",
+      "updateDate": "2026-10-20T22:18:41+0000",
+      "impacts": [
+        {
+          "softwareQuality": "MAINTAINABILITY",
+          "severity": "HIGH"
+        }
+      ],
+      "issueStatus": "OPEN"
+    },
+    {
+      "key": "AaFbZj0v2TNSduKvuGt4",
+      "rule": "python:S5797",
+      "component": "mitchins_scanweave:qualification/clearscan_competitive/measure_source_font_control.py",
+      "line": 30,
+      "hash": "db75af2fc05e0dbcb5badfcc6ee0637e",
+      "textRange": {
+        "startLine": 30,
+        "endLine": 30,
+        "startOffset": 50,
+        "endOffset": 55
+      },
+      "status": "OPEN",
+      "message": "Replace this expression; used as a condition it will always be constant.",
+      "effort": "2min",
+      "creationDate": "2026-10-19T03:37:43+0000",
+      "updateDate": "2026-10-20T22:18:41+0000",
+      "impacts": [
+        {
+          "softwareQuality": "MAINTAINABILITY",
+          "severity": "HIGH"
+        }
+      ],
+      "issueStatus": "OPEN"
+    },
+    {
+      "key": "AaFbZj072TNSduKvuGuT",
+      "rule": "python:S3776",
+      "component": "mitchins_scanweave:qualification/clearscan_competitive/oracle_assembly.py",
+      "line": 17,
+      "hash": "36999f0b7d2b4dd75cc52066ae8a601f",
+      "textRange": {
+        "startLine": 17,
+        "endLine": 17,
+        "startOffset": 4,
+        "endOffset": 8
+      },
+      "status": "OPEN",
+      "message": "Refactor this function to reduce its Cognitive Complexity from 37 to the 15 allowed.",
+      "effort": "27min",
+      "creationDate": "2026-10-19T03:37:43+0000",
+      "updateDate": "2026-10-20T22:18:41+0000",
+      "impacts": [
+        {
+          "softwareQuality": "MAINTAINABILITY",
+          "severity": "HIGH"
+        }
+      ],
+      "issueStatus": "OPEN"
+    },
+    {
+      "key": "AaFbZj052TNSduKvuGuG",
+      "rule": "shelldre:S131",
+      "component": "mitchins_scanweave:qualification/clearscan_competitive/reference-runner.sh",
+      "line": 58,
+      "hash": "146dc1774182a888745ac52ca8ca955c",
+      "textRange": {
+        "startLine": 58,
+        "endLine": 58,
+        "startOffset": 4,
+        "endOffset": 8
+      },
+      "status": "OPEN",
+      "message": "Add a default case (*) to handle unexpected values.",
+      "effort": "5min",
+      "creationDate": "2026-10-19T03:37:43+0000",
+      "updateDate": "2026-10-20T22:18:41+0000",
+      "impacts": [
+        {
+          "softwareQuality": "MAINTAINABILITY",
+          "severity": "HIGH"
+        }
+      ],
+      "issueStatus": "OPEN"
+    },
+    {
+      "key": "AaFbZj0_2TNSduKvuGuc",
+      "rule": "python:S3776",
+      "component": "mitchins_scanweave:qualification/clearscan_competitive/source_font_control.py",
+      "line": 97,
+      "hash": "36999f0b7d2b4dd75cc52066ae8a601f",
+      "textRange": {
+        "startLine": 97,
+        "endLine": 97,
+        "startOffset": 4,
+        "endOffset": 8
+      },
+      "status": "OPEN",
+      "message": "Refactor this function to reduce its Cognitive Complexity from 36 to the 15 allowed.",
+      "effort": "26min",
+      "creationDate": "2026-10-19T03:37:43+0000",
+      "updateDate": "2026-10-20T22:18:41+0000",
+      "impacts": [
+        {
+          "softwareQuality": "MAINTAINABILITY",
+          "severity": "HIGH"
+        }
+      ],
+      "issueStatus": "OPEN"
+    },
+    {
+      "key": "AaFbZj0s2TNSduKvuGt2",
+      "rule": "python:S3776",
+      "component": "mitchins_scanweave:qualification/clearscan_competitive/stages.py",
+      "line": 13,
+      "hash": "36999f0b7d2b4dd75cc52066ae8a601f",
+      "textRange": {
+        "startLine": 13,
+        "endLine": 13,
+        "startOffset": 4,
+        "endOffset": 8
+      },
+      "status": "OPEN",
+      "message": "Refactor this function to reduce its Cognitive Complexity from 44 to the 15 allowed.",
+      "effort": "34min",
+      "creationDate": "2026-10-19T03:37:43+0000",
+      "updateDate": "2026-10-20T22:18:41+0000",
+      "impacts": [
+        {
+          "softwareQuality": "MAINTAINABILITY",
+          "severity": "HIGH"
+        }
+      ],
+      "issueStatus": "OPEN"
+    },
+    {
+      "key": "AaFbZj3g2TNSduKvuGyr",
+      "rule": "python:S3776",
+      "component": "mitchins_scanweave:qualification/competitors/adobe_xi/generate_matched_fixture.py",
+      "line": 77,
+      "hash": "ef7f7afa76e75a51ad83ce9af1556e7f",
+      "textRange": {
+        "startLine": 77,
+        "endLine": 77,
+        "startOffset": 4,
+        "endOffset": 13
+      },
+      "status": "OPEN",
+      "message": "Refactor this function to reduce its Cognitive Complexity from 19 to the 15 allowed.",
+      "effort": "9min",
+      "creationDate": "2026-10-19T03:37:43+0000",
+      "updateDate": "2026-10-20T22:18:41+0000",
+      "impacts": [
+        {
+          "softwareQuality": "MAINTAINABILITY",
+          "severity": "HIGH"
+        }
+      ],
+      "issueStatus": "OPEN"
+    },
+    {
+      "key": "AaFbqrvpDf3ZA7hnTDt6",
+      "rule": "rust:S3776",
+      "component": "mitchins_scanweave:crates/scanweave-io/src/page_pdf.rs",
+      "line": 434,
+      "hash": "af4b55ac71ecb4c911c81dec829e8ea0",
+      "textRange": {
+        "startLine": 434,
+        "endLine": 434,
+        "startOffset": 3,
+        "endOffset": 17
+      },
+      "status": "OPEN",
+      "message": "Refactor this function to reduce its Cognitive Complexity from 100 to the 30 allowed.",
+      "effort": "6min",
+      "creationDate": "2026-10-19T02:42:27+0000",
+      "updateDate": "2026-10-20T23:33:32+0000",
+      "impacts": [
+        {
+          "softwareQuality": "MAINTAINABILITY",
+          "severity": "HIGH"
+        }
+      ],
+      "issueStatus": "OPEN"
+    },
+    {
+      "key": "AaFbqrwrDf3ZA7hnTDuP",
+      "rule": "rust:S3776",
+      "component": "mitchins_scanweave:crates/scanweave-io/src/convert.rs",
+      "line": 2648,
+      "hash": "b6d3814dc5e40694591d820b47fd7a01",
+      "textRange": {
+        "startLine": 2648,
+        "endLine": 2648,
+        "startOffset": 3,
+        "endOffset": 26
+      },
+      "status": "OPEN",
+      "message": "Refactor this function to reduce its Cognitive Complexity from 51 to the 30 allowed.",
+      "effort": "6min",
+      "creationDate": "2026-10-19T02:17:01+0000",
+      "updateDate": "2026-10-20T23:33:32+0000",
+      "impacts": [
+        {
+          "softwareQuality": "MAINTAINABILITY",
+          "severity": "HIGH"
+        }
+      ],
+      "issueStatus": "OPEN"
+    },
+    {
+      "key": "AaFbqrwwDf3ZA7hnTDuR",
+      "rule": "rust:S3776",
+      "component": "mitchins_scanweave:crates/scanweave-io/src/hocr.rs",
+      "line": 183,
+      "hash": "5f704860f202ff249a1fa2a50cfc78e6",
+      "textRange": {
+        "startLine": 183,
+        "endLine": 183,
+        "startOffset": 7,
+        "endOffset": 17
+      },
+      "status": "OPEN",
+      "message": "Refactor this function to reduce its Cognitive Complexity from 60 to the 30 allowed.",
+      "effort": "6min",
+      "creationDate": "2026-10-19T01:49:28+0000",
+      "updateDate": "2026-10-20T23:33:32+0000",
+      "impacts": [
+        {
+          "softwareQuality": "MAINTAINABILITY",
+          "severity": "HIGH"
+        }
+      ],
+      "issueStatus": "OPEN"
+    },
+    {
+      "key": "AaFbZj452TNSduKvuGz9",
+      "rule": "python:S3776",
+      "component": "mitchins_scanweave:qualification/clearscan_product/compare_frozen_adobe.py",
+      "line": 22,
+      "hash": "36999f0b7d2b4dd75cc52066ae8a601f",
+      "textRange": {
+        "startLine": 22,
+        "endLine": 22,
+        "startOffset": 4,
+        "endOffset": 8
+      },
+      "status": "OPEN",
+      "message": "Refactor this function to reduce its Cognitive Complexity from 24 to the 15 allowed.",
+      "effort": "14min",
+      "creationDate": "2026-10-19T00:16:31+0000",
+      "updateDate": "2026-10-20T22:18:41+0000",
+      "impacts": [
+        {
+          "softwareQuality": "MAINTAINABILITY",
+          "severity": "HIGH"
+        }
+      ],
+      "issueStatus": "OPEN"
+    },
+    {
+      "key": "AaFbZj482TNSduKvuGz-",
+      "rule": "python:S3776",
+      "component": "mitchins_scanweave:qualification/clearscan_product/measure.py",
+      "line": 27,
+      "hash": "36999f0b7d2b4dd75cc52066ae8a601f",
+      "textRange": {
+        "startLine": 27,
+        "endLine": 27,
+        "startOffset": 4,
+        "endOffset": 8
+      },
+      "status": "OPEN",
+      "message": "Refactor this function to reduce its Cognitive Complexity from 19 to the 15 allowed.",
+      "effort": "9min",
+      "creationDate": "2026-10-19T00:16:31+0000",
+      "updateDate": "2026-10-20T22:18:41+0000",
+      "impacts": [
+        {
+          "softwareQuality": "MAINTAINABILITY",
+          "severity": "HIGH"
+        }
+      ],
+      "issueStatus": "OPEN"
+    },
+    {
+      "key": "AaFbZj122TNSduKvuGvw",
+      "rule": "python:S3776",
+      "component": "mitchins_scanweave:qualification/experiments/m1gx/background_audit.py",
+      "line": 12,
+      "hash": "36999f0b7d2b4dd75cc52066ae8a601f",
+      "textRange": {
+        "startLine": 12,
+        "endLine": 12,
+        "startOffset": 4,
+        "endOffset": 8
+      },
+      "status": "OPEN",
+      "message": "Refactor this function to reduce its Cognitive Complexity from 24 to the 15 allowed.",
+      "effort": "14min",
+      "creationDate": "2026-10-18T23:02:47+0000",
+      "updateDate": "2026-10-20T22:18:41+0000",
+      "impacts": [
+        {
+          "softwareQuality": "MAINTAINABILITY",
+          "severity": "HIGH"
+        }
+      ],
+      "issueStatus": "OPEN"
+    },
+    {
+      "key": "AaFbZj1p2TNSduKvuGvM",
+      "rule": "python:S3776",
+      "component": "mitchins_scanweave:qualification/experiments/m1gx/measure.py",
+      "line": 18,
+      "hash": "36999f0b7d2b4dd75cc52066ae8a601f",
+      "textRange": {
+        "startLine": 18,
+        "endLine": 18,
+        "startOffset": 4,
+        "endOffset": 8
+      },
+      "status": "OPEN",
+      "message": "Refactor this function to reduce its Cognitive Complexity from 70 to the 15 allowed.",
+      "effort": "1h",
+      "creationDate": "2026-10-18T23:02:47+0000",
+      "updateDate": "2026-10-20T22:18:41+0000",
+      "impacts": [
+        {
+          "softwareQuality": "MAINTAINABILITY",
+          "severity": "HIGH"
+        }
+      ],
+      "issueStatus": "OPEN"
+    },
+    {
+      "key": "AaFbZj1z2TNSduKvuGva",
+      "rule": "python:S3776",
+      "component": "mitchins_scanweave:qualification/experiments/m1gx/renderer_color_control.py",
+      "line": 9,
+      "hash": "36999f0b7d2b4dd75cc52066ae8a601f",
+      "textRange": {
+        "startLine": 9,
+        "endLine": 9,
+        "startOffset": 4,
+        "endOffset": 8
+      },
+      "status": "OPEN",
+      "message": "Refactor this function to reduce its Cognitive Complexity from 26 to the 15 allowed.",
+      "effort": "16min",
+      "creationDate": "2026-10-18T23:02:47+0000",
+      "updateDate": "2026-10-20T22:18:41+0000",
+      "impacts": [
+        {
+          "softwareQuality": "MAINTAINABILITY",
+          "severity": "HIGH"
+        }
+      ],
+      "issueStatus": "OPEN"
+    },
+    {
+      "key": "AaFbZj112TNSduKvuGvb",
+      "rule": "python:S1192",
+      "component": "mitchins_scanweave:qualification/experiments/m1gx/trial.py",
+      "line": 112,
+      "hash": "fd453f38f54df94846931305223e1404",
+      "textRange": {
+        "startLine": 112,
+        "endLine": 112,
+        "startOffset": 41,
+        "endOffset": 90
+      },
+      "status": "OPEN",
+      "message": "Define a constant instead of duplicating this literal rb' 0 obj\\s*<<(.*?)>>\\s*stream\\n(.*?)\\nendstream' 3 times.",
+      "effort": "6min",
+      "creationDate": "2026-10-18T23:02:47+0000",
+      "updateDate": "2026-10-20T22:18:41+0000",
+      "impacts": [
+        {
+          "softwareQuality": "MAINTAINABILITY",
+          "severity": "HIGH"
+        }
+      ],
+      "issueStatus": "OPEN"
+    },
+    {
+      "key": "AaFbZj112TNSduKvuGvf",
+      "rule": "python:S3776",
+      "component": "mitchins_scanweave:qualification/experiments/m1gx/trial.py",
+      "line": 116,
+      "hash": "2142ac930223431418521cb559733fcb",
+      "textRange": {
+        "startLine": 116,
+        "endLine": 116,
+        "startOffset": 4,
+        "endOffset": 33
+      },
+      "status": "OPEN",
+      "message": "Refactor this function to reduce its Cognitive Complexity from 37 to the 15 allowed.",
+      "effort": "27min",
+      "creationDate": "2026-10-18T23:02:47+0000",
+      "updateDate": "2026-10-20T22:18:41+0000",
+      "impacts": [
+        {
+          "softwareQuality": "MAINTAINABILITY",
+          "severity": "HIGH"
+        }
+      ],
+      "issueStatus": "OPEN"
+    },
+    {
+      "key": "AaFbZj112TNSduKvuGvn",
+      "rule": "python:S3776",
+      "component": "mitchins_scanweave:qualification/experiments/m1gx/trial.py",
+      "line": 211,
+      "hash": "c4dbbd9388fc44e22cfd350122b8f98d",
+      "textRange": {
+        "startLine": 211,
+        "endLine": 211,
+        "startOffset": 4,
+        "endOffset": 13
+      },
+      "status": "OPEN",
+      "message": "Refactor this function to reduce its Cognitive Complexity from 26 to the 15 allowed.",
+      "effort": "16min",
+      "creationDate": "2026-10-18T23:02:47+0000",
+      "updateDate": "2026-10-20T22:18:41+0000",
+      "impacts": [
+        {
+          "softwareQuality": "MAINTAINABILITY",
+          "severity": "HIGH"
+        }
+      ],
+      "issueStatus": "OPEN"
+    },
+    {
+      "key": "AaFbZj112TNSduKvuGvt",
+      "rule": "python:S3776",
+      "component": "mitchins_scanweave:qualification/experiments/m1gx/trial.py",
+      "line": 258,
+      "hash": "36999f0b7d2b4dd75cc52066ae8a601f",
+      "textRange": {
+        "startLine": 258,
+        "endLine": 258,
+        "startOffset": 4,
+        "endOffset": 8
+      },
+      "status": "OPEN",
+      "message": "Refactor this function to reduce its Cognitive Complexity from 54 to the 15 allowed.",
+      "effort": "44min",
+      "creationDate": "2026-10-18T23:02:47+0000",
+      "updateDate": "2026-10-20T22:18:41+0000",
+      "impacts": [
+        {
+          "softwareQuality": "MAINTAINABILITY",
+          "severity": "HIGH"
+        }
+      ],
+      "issueStatus": "OPEN"
+    },
+    {
+      "key": "AaFbZj2Y2TNSduKvuGv4",
+      "rule": "python:S3776",
+      "component": "mitchins_scanweave:qualification/experiments/m1f/measure_pdf.py",
+      "line": 15,
+      "hash": "73e84bdc723dec6bcb8511940c9972e8",
+      "textRange": {
+        "startLine": 15,
+        "endLine": 15,
+        "startOffset": 4,
+        "endOffset": 11
+      },
+      "status": "OPEN",
+      "message": "Refactor this function to reduce its Cognitive Complexity from 18 to the 15 allowed.",
+      "effort": "8min",
+      "creationDate": "2026-10-18T10:11:13+0000",
+      "updateDate": "2026-10-20T22:18:41+0000",
+      "impacts": [
+        {
+          "softwareQuality": "MAINTAINABILITY",
+          "severity": "HIGH"
+        }
+      ],
+      "issueStatus": "OPEN"
+    },
+    {
+      "key": "AaFbZj2X2TNSduKvuGv1",
+      "rule": "python:S3776",
+      "component": "mitchins_scanweave:qualification/experiments/m1f/run_f1.py",
+      "line": 24,
+      "hash": "0987b568f974b4b87d2c013678467c7b",
+      "textRange": {
+        "startLine": 24,
+        "endLine": 24,
+        "startOffset": 4,
+        "endOffset": 8
+      },
+      "status": "OPEN",
+      "message": "Refactor this function to reduce its Cognitive Complexity from 16 to the 15 allowed.",
+      "effort": "6min",
+      "creationDate": "2026-10-18T10:11:13+0000",
+      "updateDate": "2026-10-20T22:18:41+0000",
+      "impacts": [
+        {
+          "softwareQuality": "MAINTAINABILITY",
+          "severity": "HIGH"
+        }
+      ],
+      "issueStatus": "OPEN"
+    },
+    {
+      "key": "AaFbZj572TNSduKvuG1C",
+      "rule": "python:S3776",
+      "component": "mitchins_scanweave:qualification/diagnose_m1d5_fallback.py",
+      "line": 29,
+      "hash": "36999f0b7d2b4dd75cc52066ae8a601f",
+      "textRange": {
+        "startLine": 29,
+        "endLine": 29,
+        "startOffset": 4,
+        "endOffset": 8
+      },
+      "status": "OPEN",
+      "message": "Refactor this function to reduce its Cognitive Complexity from 19 to the 15 allowed.",
+      "effort": "9min",
+      "creationDate": "2026-10-17T01:36:24+0000",
+      "updateDate": "2026-10-20T22:18:41+0000",
+      "impacts": [
+        {
+          "softwareQuality": "MAINTAINABILITY",
+          "severity": "HIGH"
+        }
+      ],
+      "issueStatus": "OPEN"
+    },
+    {
+      "key": "AaFbZj572TNSduKvuG1A",
+      "rule": "python:S1192",
+      "component": "mitchins_scanweave:qualification/diagnose_m1d5_fallback.py",
+      "line": 39,
+      "hash": "1012591520bebdd2a2909770c587c8d5",
+      "textRange": {
+        "startLine": 39,
+        "endLine": 39,
+        "startOffset": 34,
+        "endOffset": 49
+      },
+      "status": "OPEN",
+      "message": "Define a constant instead of duplicating this literal \"clearscan.pdf\" 3 times.",
+      "effort": "6min",
+      "creationDate": "2026-10-17T01:36:24+0000",
+      "updateDate": "2026-10-20T22:18:41+0000",
+      "impacts": [
+        {
+          "softwareQuality": "MAINTAINABILITY",
+          "severity": "HIGH"
+        }
+      ],
+      "issueStatus": "OPEN"
+    },
+    {
+      "key": "AaFbZj562TNSduKvuG0_",
+      "rule": "python:S3776",
+      "component": "mitchins_scanweave:qualification/evaluate_m1d_document.py",
+      "line": 42,
+      "hash": "36999f0b7d2b4dd75cc52066ae8a601f",
+      "textRange": {
+        "startLine": 42,
+        "endLine": 42,
+        "startOffset": 4,
+        "endOffset": 8
+      },
+      "status": "OPEN",
+      "message": "Refactor this function to reduce its Cognitive Complexity from 72 to the 15 allowed.",
+      "effort": "1h2min",
+      "creationDate": "2026-10-17T01:36:24+0000",
+      "updateDate": "2026-10-20T22:18:41+0000",
+      "impacts": [
+        {
+          "softwareQuality": "MAINTAINABILITY",
+          "severity": "HIGH"
+        }
+      ],
+      "issueStatus": "OPEN"
+    },
+    {
+      "key": "AaFbZj562TNSduKvuG08",
+      "rule": "python:S1192",
+      "component": "mitchins_scanweave:qualification/evaluate_m1d_document.py",
+      "line": 52,
+      "hash": "36a79d744ff58d1a833a782586900d52",
+      "textRange": {
+        "startLine": 52,
+        "endLine": 52,
+        "startOffset": 42,
+        "endOffset": 57
+      },
+      "status": "OPEN",
+      "message": "Define a constant instead of duplicating this literal \"clearscan.pdf\" 4 times.",
+      "effort": "8min",
+      "creationDate": "2026-10-17T01:36:24+0000",
+      "updateDate": "2026-10-20T22:18:41+0000",
+      "impacts": [
+        {
+          "softwareQuality": "MAINTAINABILITY",
+          "severity": "HIGH"
+        }
+      ],
+      "issueStatus": "OPEN"
+    },
+    {
+      "key": "AaFbZj562TNSduKvuG07",
+      "rule": "python:S1192",
+      "component": "mitchins_scanweave:qualification/evaluate_m1d_document.py",
+      "line": 53,
+      "hash": "40d064da471068ff6c969ccfef4fc145",
+      "textRange": {
+        "startLine": 53,
+        "endLine": 53,
+        "startOffset": 45,
+        "endOffset": 59
+      },
+      "status": "OPEN",
+      "message": "Define a constant instead of duplicating this literal \"faithful.pdf\" 3 times.",
+      "effort": "6min",
+      "creationDate": "2026-10-17T01:36:24+0000",
+      "updateDate": "2026-10-20T22:18:41+0000",
+      "impacts": [
+        {
+          "softwareQuality": "MAINTAINABILITY",
+          "severity": "HIGH"
+        }
+      ],
+      "issueStatus": "OPEN"
+    },
+    {
+      "key": "AaFbZj562TNSduKvuG06",
+      "rule": "python:S1192",
+      "component": "mitchins_scanweave:qualification/evaluate_m1d_document.py",
+      "line": 54,
+      "hash": "3741353ec5c4314d59c5d864c4440bd0",
+      "textRange": {
+        "startLine": 54,
+        "endLine": 54,
+        "startOffset": 42,
+        "endOffset": 53
+      },
+      "status": "OPEN",
+      "message": "Define a constant instead of duplicating this literal \"truth.pdf\" 3 times.",
+      "effort": "6min",
+      "creationDate": "2026-10-17T01:36:24+0000",
+      "updateDate": "2026-10-20T22:18:41+0000",
+      "impacts": [
+        {
+          "softwareQuality": "MAINTAINABILITY",
+          "severity": "HIGH"
+        }
+      ],
+      "issueStatus": "OPEN"
+    },
+    {
+      "key": "AaFbqrvLDf3ZA7hnTDt2",
+      "rule": "rust:S3776",
+      "component": "mitchins_scanweave:crates/scanweave-io/src/ownership.rs",
+      "line": 149,
+      "hash": "8e997cc5d80a7a14e50ec68b2c05b0ef",
+      "textRange": {
+        "startLine": 149,
+        "endLine": 149,
+        "startOffset": 7,
+        "endOffset": 17
+      },
+      "status": "OPEN",
+      "message": "Refactor this function to reduce its Cognitive Complexity from 73 to the 30 allowed.",
+      "effort": "6min",
+      "creationDate": "2026-10-17T00:17:32+0000",
+      "updateDate": "2026-10-20T23:33:32+0000",
+      "impacts": [
+        {
+          "softwareQuality": "MAINTAINABILITY",
+          "severity": "HIGH"
+        }
+      ],
+      "issueStatus": "OPEN"
+    },
+    {
+      "key": "AaFbqrvRDf3ZA7hnTDt3",
+      "rule": "rust:S3776",
+      "component": "mitchins_scanweave:crates/scanweave-io/src/units.rs",
+      "line": 96,
+      "hash": "6367deac8381c6b71dbdf47fa2a74ce9",
+      "textRange": {
+        "startLine": 96,
+        "endLine": 96,
+        "startOffset": 7,
+        "endOffset": 20
+      },
+      "status": "OPEN",
+      "message": "Refactor this function to reduce its Cognitive Complexity from 80 to the 30 allowed.",
+      "effort": "6min",
+      "creationDate": "2026-10-17T00:17:32+0000",
+      "updateDate": "2026-10-20T23:33:32+0000",
+      "impacts": [
+        {
+          "softwareQuality": "MAINTAINABILITY",
+          "severity": "HIGH"
+        }
+      ],
+      "issueStatus": "OPEN"
+    },
+    {
+      "key": "AaFbqrwVDf3ZA7hnTDuE",
+      "rule": "rust:S3776",
+      "component": "mitchins_scanweave:crates/scanweave-io/src/visual_dict.rs",
+      "line": 11,
+      "hash": "74b60636eedca51fc63a8ee4389cd39e",
+      "textRange": {
+        "startLine": 11,
+        "endLine": 11,
+        "startOffset": 7,
+        "endOffset": 19
+      },
+      "status": "OPEN",
+      "message": "Refactor this function to reduce its Cognitive Complexity from 36 to the 30 allowed.",
+      "effort": "6min",
+      "creationDate": "2026-10-17T00:17:32+0000",
+      "updateDate": "2026-10-20T23:33:32+0000",
+      "impacts": [
+        {
+          "softwareQuality": "MAINTAINABILITY",
+          "severity": "HIGH"
+        }
+      ],
+      "issueStatus": "OPEN"
+    },
+    {
+      "key": "AaFbqrwVDf3ZA7hnTDuI",
+      "rule": "rust:S3776",
+      "component": "mitchins_scanweave:crates/scanweave-io/src/visual_dict.rs",
+      "line": 856,
+      "hash": "be01deabbcce65e3a9f8a3d3958660a6",
+      "textRange": {
+        "startLine": 856,
+        "endLine": 856,
+        "startOffset": 3,
+        "endOffset": 16
+      },
+      "status": "OPEN",
+      "message": "Refactor this function to reduce its Cognitive Complexity from 67 to the 30 allowed.",
+      "effort": "6min",
+      "creationDate": "2026-10-17T00:17:32+0000",
+      "updateDate": "2026-10-20T23:33:32+0000",
+      "impacts": [
+        {
+          "softwareQuality": "MAINTAINABILITY",
+          "severity": "HIGH"
+        }
+      ],
+      "issueStatus": "OPEN"
+    },
+    {
+      "key": "AaFbZj562TNSduKvuG09",
+      "rule": "python:S1192",
+      "component": "mitchins_scanweave:qualification/evaluate_m1d_document.py",
+      "line": 96,
+      "hash": "b7b5b6a8d5a43925fa241badc3a83c4d",
+      "textRange": {
+        "startLine": 96,
+        "endLine": 96,
+        "startOffset": 48,
+        "endOffset": 62
+      },
+      "status": "OPEN",
+      "message": "Define a constant instead of duplicating this literal \"__doc_donor:\" 3 times.",
+      "effort": "6min",
+      "creationDate": "2026-10-17T00:17:32+0000",
+      "updateDate": "2026-10-20T22:18:41+0000",
+      "impacts": [
+        {
+          "softwareQuality": "MAINTAINABILITY",
+          "severity": "HIGH"
+        }
+      ],
+      "issueStatus": "OPEN"
+    },
+    {
+      "key": "AaFbZj562TNSduKvuG0-",
+      "rule": "python:S1192",
+      "component": "mitchins_scanweave:qualification/evaluate_m1d_document.py",
+      "line": 233,
+      "hash": "e5475149aced2b49060002a3aacddc69",
+      "textRange": {
+        "startLine": 233,
+        "endLine": 233,
+        "startOffset": 43,
+        "endOffset": 53
+      },
+      "status": "OPEN",
+      "message": "Define a constant instead of duplicating this literal \"font.ttf\" 3 times.",
+      "effort": "6min",
+      "creationDate": "2026-10-17T00:17:32+0000",
+      "updateDate": "2026-10-20T22:18:41+0000",
+      "impacts": [
+        {
+          "softwareQuality": "MAINTAINABILITY",
+          "severity": "HIGH"
+        }
+      ],
+      "issueStatus": "OPEN"
+    },
+    {
+      "key": "AaFbZj2f2TNSduKvuGwR",
+      "rule": "python:S3776",
+      "component": "mitchins_scanweave:qualification/experiments/m1d_document_fixture.py",
+      "line": 14,
+      "hash": "f4aea7cd01eb3183729af01dde1fdcf3",
+      "textRange": {
+        "startLine": 14,
+        "endLine": 14,
+        "startOffset": 4,
+        "endOffset": 9
+      },
+      "status": "OPEN",
+      "message": "Refactor this function to reduce its Cognitive Complexity from 30 to the 15 allowed.",
+      "effort": "20min",
+      "creationDate": "2026-10-17T00:17:32+0000",
+      "updateDate": "2026-10-20T22:18:41+0000",
+      "impacts": [
+        {
+          "softwareQuality": "MAINTAINABILITY",
+          "severity": "HIGH"
+        }
+      ],
+      "issueStatus": "OPEN"
+    },
+    {
+      "key": "AaFbZj5v2TNSduKvuG0S",
+      "rule": "python:S1192",
+      "component": "mitchins_scanweave:qualification/evaluate_m1d_reconstruction.py",
+      "line": 87,
+      "hash": "ee3498161380bccba3e5e79517bb973d",
+      "textRange": {
+        "startLine": 87,
+        "endLine": 87,
+        "startOffset": 48,
+        "endOffset": 58
+      },
+      "status": "OPEN",
+      "message": "Define a constant instead of duplicating this literal \"font.ttf\" 3 times.",
+      "effort": "6min",
+      "creationDate": "2026-10-16T22:37:52+0000",
+      "updateDate": "2026-10-20T22:18:41+0000",
+      "impacts": [
+        {
+          "softwareQuality": "MAINTAINABILITY",
+          "severity": "HIGH"
+        }
+      ],
+      "issueStatus": "OPEN"
+    },
+    {
+      "key": "AaFbqrwVDf3ZA7hnTDuF",
+      "rule": "rust:S3776",
+      "component": "mitchins_scanweave:crates/scanweave-io/src/visual_dict.rs",
+      "line": 165,
+      "hash": "22e09959ba268bea6c3e2f8a56c2efc8",
+      "textRange": {
+        "startLine": 165,
+        "endLine": 165,
+        "startOffset": 3,
+        "endOffset": 19
+      },
+      "status": "OPEN",
+      "message": "Refactor this function to reduce its Cognitive Complexity from 31 to the 30 allowed.",
+      "effort": "6min",
+      "creationDate": "2026-10-16T21:17:38+0000",
+      "updateDate": "2026-10-20T23:33:32+0000",
+      "impacts": [
+        {
+          "softwareQuality": "MAINTAINABILITY",
+          "severity": "HIGH"
+        }
+      ],
+      "issueStatus": "OPEN"
+    },
+    {
+      "key": "AaFbqrwVDf3ZA7hnTDuG",
+      "rule": "rust:S3776",
+      "component": "mitchins_scanweave:crates/scanweave-io/src/visual_dict.rs",
+      "line": 199,
+      "hash": "a3a2b6d7a8b49ce5f88c692fe5627e5d",
+      "textRange": {
+        "startLine": 199,
+        "endLine": 199,
+        "startOffset": 3,
+        "endOffset": 14
+      },
+      "status": "OPEN",
+      "message": "Refactor this function to reduce its Cognitive Complexity from 37 to the 30 allowed.",
+      "effort": "6min",
+      "creationDate": "2026-10-16T21:17:38+0000",
+      "updateDate": "2026-10-20T23:33:32+0000",
+      "impacts": [
+        {
+          "softwareQuality": "MAINTAINABILITY",
+          "severity": "HIGH"
+        }
+      ],
+      "issueStatus": "OPEN"
+    },
+    {
+      "key": "AaFbZj2c2TNSduKvuGwG",
+      "rule": "python:S3776",
+      "component": "mitchins_scanweave:qualification/experiments/m1c_r3/diagnostic.py",
+      "line": 209,
+      "hash": "36999f0b7d2b4dd75cc52066ae8a601f",
+      "textRange": {
+        "startLine": 209,
+        "endLine": 209,
+        "startOffset": 4,
+        "endOffset": 8
+      },
+      "status": "OPEN",
+      "message": "Refactor this function to reduce its Cognitive Complexity from 22 to the 15 allowed.",
+      "effort": "12min",
+      "creationDate": "2026-10-16T04:30:53+0000",
+      "updateDate": "2026-10-20T22:18:41+0000",
+      "impacts": [
+        {
+          "softwareQuality": "MAINTAINABILITY",
+          "severity": "HIGH"
+        }
+      ],
+      "issueStatus": "OPEN"
+    },
+    {
+      "key": "AaFbZj2e2TNSduKvuGwQ",
+      "rule": "python:S3776",
+      "component": "mitchins_scanweave:qualification/experiments/m1c_r3/alignment.py",
+      "line": 43,
+      "hash": "5b44de6546b5eff0062228a7c8f39a5c",
+      "textRange": {
+        "startLine": 43,
+        "endLine": 43,
+        "startOffset": 4,
+        "endOffset": 15
+      },
+      "status": "OPEN",
+      "message": "Refactor this function to reduce its Cognitive Complexity from 20 to the 15 allowed.",
+      "effort": "10min",
+      "creationDate": "2026-10-16T02:50:37+0000",
+      "updateDate": "2026-10-20T22:18:41+0000",
+      "impacts": [
+        {
+          "softwareQuality": "MAINTAINABILITY",
+          "severity": "HIGH"
+        }
+      ],
+      "issueStatus": "OPEN"
+    },
+    {
+      "key": "AaFbZj2h2TNSduKvuGwz",
+      "rule": "python:S3776",
+      "component": "mitchins_scanweave:qualification/experiments/m1c_r2/run.py",
+      "line": 164,
+      "hash": "36999f0b7d2b4dd75cc52066ae8a601f",
+      "textRange": {
+        "startLine": 164,
+        "endLine": 164,
+        "startOffset": 4,
+        "endOffset": 8
+      },
+      "status": "OPEN",
+      "message": "Refactor this function to reduce its Cognitive Complexity from 54 to the 15 allowed.",
+      "effort": "44min",
+      "creationDate": "2026-10-15T23:32:12+0000",
+      "updateDate": "2026-10-20T22:18:41+0000",
+      "impacts": [
+        {
+          "softwareQuality": "MAINTAINABILITY",
+          "severity": "HIGH"
+        }
+      ],
+      "issueStatus": "OPEN"
+    },
+    {
+      "key": "AaFbZj2j2TNSduKvuGxV",
+      "rule": "python:S3776",
+      "component": "mitchins_scanweave:qualification/experiments/m1c/run_ablation.py",
+      "line": 163,
+      "hash": "36999f0b7d2b4dd75cc52066ae8a601f",
+      "textRange": {
+        "startLine": 163,
+        "endLine": 163,
+        "startOffset": 4,
+        "endOffset": 8
+      },
+      "status": "OPEN",
+      "message": "Refactor this function to reduce its Cognitive Complexity from 50 to the 15 allowed.",
+      "effort": "40min",
+      "creationDate": "2026-10-15T11:28:34+0000",
+      "updateDate": "2026-10-20T22:18:41+0000",
+      "impacts": [
+        {
+          "softwareQuality": "MAINTAINABILITY",
+          "severity": "HIGH"
+        }
+      ],
+      "issueStatus": "OPEN"
+    },
+    {
+      "key": "AaFbZj532TNSduKvuG0x",
+      "rule": "python:S1192",
+      "component": "mitchins_scanweave:qualification/n1_experiments.py",
+      "line": 60,
+      "hash": "2fb0bc988c432dd9ed58eb64ce459920",
+      "textRange": {
+        "startLine": 60,
+        "endLine": 60,
+        "startOffset": 8,
+        "endOffset": 22
+      },
+      "status": "OPEN",
+      "message": "Define a constant instead of duplicating this literal \"BT /F1 11 Tf\" 4 times.",
+      "effort": "8min",
+      "creationDate": "2026-10-15T03:43:43+0000",
+      "updateDate": "2026-10-20T22:18:41+0000",
+      "impacts": [
+        {
+          "softwareQuality": "MAINTAINABILITY",
+          "severity": "HIGH"
+        }
+      ],
+      "issueStatus": "OPEN"
+    },
+    {
+      "key": "AaFbZj532TNSduKvuG0w",
+      "rule": "python:S1192",
+      "component": "mitchins_scanweave:qualification/n1_experiments.py",
+      "line": 62,
+      "hash": "1e665820c6f24915bd93fa572ab9bab2",
+      "textRange": {
+        "startLine": 62,
+        "endLine": 62,
+        "startOffset": 8,
+        "endOffset": 37
+      },
+      "status": "OPEN",
+      "message": "Define a constant instead of duplicating this literal \"1 0 0 1 72 700 Tm (Page) Tj\" 4 times.",
+      "effort": "8min",
+      "creationDate": "2026-10-15T03:43:43+0000",
+      "updateDate": "2026-10-20T22:18:41+0000",
+      "impacts": [
+        {
+          "softwareQuality": "MAINTAINABILITY",
+          "severity": "HIGH"
+        }
+      ],
+      "issueStatus": "OPEN"
+    },
+    {
+      "key": "AaFbZj532TNSduKvuG00",
+      "rule": "python:S1192",
+      "component": "mitchins_scanweave:qualification/n1_experiments.py",
+      "line": 64,
+      "hash": "56cba66f3ed1690e118e0e644c1f3f26",
+      "textRange": {
+        "startLine": 64,
+        "endLine": 64,
+        "startOffset": 8,
+        "endOffset": 35
+      },
+      "status": "OPEN",
+      "message": "Define a constant instead of duplicating this literal \"1 0 0 1 116 700 Tm (1) Tj\" 3 times.",
+      "effort": "6min",
+      "creationDate": "2026-10-15T03:43:43+0000",
+      "updateDate": "2026-10-20T22:18:41+0000",
+      "impacts": [
+        {
+          "softwareQuality": "MAINTAINABILITY",
+          "severity": "HIGH"
+        }
+      ],
+      "issueStatus": "OPEN"
+    },
+    {
+      "key": "AaFbZj532TNSduKvuG0y",
+      "rule": "python:S1192",
+      "component": "mitchins_scanweave:qualification/n1_experiments.py",
+      "line": 66,
+      "hash": "edc536ac247075063a4d69715a5bd5d6",
+      "textRange": {
+        "startLine": 66,
+        "endLine": 66,
+        "startOffset": 8,
+        "endOffset": 36
+      },
+      "status": "OPEN",
+      "message": "Define a constant instead of duplicating this literal \"1 0 0 1 130 700 Tm (of) Tj\" 4 times.",
+      "effort": "8min",
+      "creationDate": "2026-10-15T03:43:43+0000",
+      "updateDate": "2026-10-20T22:18:41+0000",
+      "impacts": [
+        {
+          "softwareQuality": "MAINTAINABILITY",
+          "severity": "HIGH"
+        }
+      ],
+      "issueStatus": "OPEN"
+    },
+    {
+      "key": "AaFbZj532TNSduKvuG0z",
+      "rule": "python:S1192",
+      "component": "mitchins_scanweave:qualification/n1_experiments.py",
+      "line": 67,
+      "hash": "792f5fe971947ea167d412ab7f9ff941",
+      "textRange": {
+        "startLine": 67,
+        "endLine": 67,
+        "startOffset": 8,
+        "endOffset": 36
+      },
+      "status": "OPEN",
+      "message": "Define a constant instead of duplicating this literal \"1 0 0 1 190 700 Tm (4.) Tj\" 4 times.",
+      "effort": "8min",
+      "creationDate": "2026-10-15T03:43:43+0000",
+      "updateDate": "2026-10-20T22:18:41+0000",
+      "impacts": [
+        {
+          "softwareQuality": "MAINTAINABILITY",
+          "severity": "HIGH"
+        }
+      ],
+      "issueStatus": "OPEN"
+    },
+    {
+      "key": "AaFbqrwrDf3ZA7hnTDuJ",
+      "rule": "rust:S2208",
+      "component": "mitchins_scanweave:crates/scanweave-io/src/convert.rs",
+      "line": 278,
+      "hash": "04892aacc9365cc057e699b6fe555cb7",
+      "textRange": {
+        "startLine": 278,
+        "endLine": 278,
+        "startOffset": 8,
+        "endOffset": 35
+      },
+      "status": "OPEN",
+      "message": "Remove this wildcard import and import each name explicitly.",
+      "effort": "5min",
+      "creationDate": "2026-10-14T13:06:33+0000",
+      "updateDate": "2026-10-20T23:33:32+0000",
+      "impacts": [
+        {
+          "softwareQuality": "MAINTAINABILITY",
+          "severity": "HIGH"
+        }
+      ],
+      "issueStatus": "OPEN"
+    },
+    {
+      "key": "AaFbqrv5Df3ZA7hnTDt_",
+      "rule": "rust:S3776",
+      "component": "mitchins_scanweave:crates/scanweave-io/src/pdf.rs",
+      "line": 19,
+      "hash": "26d80292b17db906a50d6edffa365cc5",
+      "textRange": {
+        "startLine": 19,
+        "endLine": 19,
+        "startOffset": 7,
+        "endOffset": 15
+      },
+      "status": "OPEN",
+      "message": "Refactor this function to reduce its Cognitive Complexity from 31 to the 30 allowed.",
+      "effort": "6min",
+      "creationDate": "2026-10-14T13:06:33+0000",
+      "updateDate": "2026-10-20T23:33:32+0000",
+      "impacts": [
+        {
+          "softwareQuality": "MAINTAINABILITY",
+          "severity": "HIGH"
+        }
+      ],
+      "issueStatus": "OPEN"
+    },
+    {
+      "key": "AaFbZj582TNSduKvuG1K",
+      "rule": "python:S3776",
+      "component": "mitchins_scanweave:qualification/measure.py",
+      "line": 82,
+      "hash": "47f3de9af82a33143787e17eca8c1ff4",
+      "textRange": {
+        "startLine": 82,
+        "endLine": 82,
+        "startOffset": 4,
+        "endOffset": 8
+      },
+      "status": "OPEN",
+      "message": "Refactor this function to reduce its Cognitive Complexity from 35 to the 15 allowed.",
+      "effort": "25min",
+      "creationDate": "2026-10-14T04:29:00+0000",
+      "updateDate": "2026-10-20T22:18:41+0000",
+      "impacts": [
+        {
+          "softwareQuality": "MAINTAINABILITY",
+          "severity": "HIGH"
+        }
+      ],
+      "issueStatus": "OPEN"
+    },
+    {
+      "key": "AaFbZj582TNSduKvuG1E",
+      "rule": "python:S1192",
+      "component": "mitchins_scanweave:qualification/measure.py",
+      "line": 116,
+      "hash": "6eeb6449a085e00e048f378fa95c2576",
+      "textRange": {
+        "startLine": 116,
+        "endLine": 116,
+        "startOffset": 32,
+        "endOffset": 41
+      },
+      "status": "OPEN",
+      "message": "Define a constant instead of duplicating this literal \"out.pdf\" 5 times.",
+      "effort": "10min",
+      "creationDate": "2026-10-14T04:29:00+0000",
+      "updateDate": "2026-10-20T22:18:41+0000",
+      "impacts": [
+        {
+          "softwareQuality": "MAINTAINABILITY",
+          "severity": "HIGH"
+        }
+      ],
+      "issueStatus": "OPEN"
+    },
+    {
+      "key": "AaFbZj5z2TNSduKvuG0d",
+      "rule": "python:S3776",
+      "component": "mitchins_scanweave:qualification/checks.py",
+      "line": 266,
+      "hash": "7b0bca6e9cf81c07c627668f2ce43ddc",
+      "textRange": {
+        "startLine": 266,
+        "endLine": 266,
+        "startOffset": 4,
+        "endOffset": 14
+      },
+      "status": "OPEN",
+      "message": "Refactor this function to reduce its Cognitive Complexity from 66 to the 15 allowed.",
+      "effort": "56min",
+      "creationDate": "2026-10-14T04:12:30+0000",
+      "updateDate": "2026-10-20T22:18:41+0000",
+      "impacts": [
+        {
+          "softwareQuality": "MAINTAINABILITY",
+          "severity": "HIGH"
+        }
+      ],
+      "issueStatus": "OPEN"
+    },
+    {
+      "key": "AaFbZj512TNSduKvuG0k",
+      "rule": "python:S3776",
+      "component": "mitchins_scanweave:qualification/corpus_adapter.py",
+      "line": 184,
+      "hash": "47f3de9af82a33143787e17eca8c1ff4",
+      "textRange": {
+        "startLine": 184,
+        "endLine": 184,
+        "startOffset": 4,
+        "endOffset": 8
+      },
+      "status": "OPEN",
+      "message": "Refactor this function to reduce its Cognitive Complexity from 60 to the 15 allowed.",
+      "effort": "50min",
+      "creationDate": "2026-10-14T03:44:43+0000",
+      "updateDate": "2026-10-21T02:50:57+0000",
+      "impacts": [
+        {
+          "softwareQuality": "MAINTAINABILITY",
+          "severity": "HIGH"
+        }
+      ],
+      "issueStatus": "OPEN"
+    },
+    {
+      "key": "AaFbZj5z2TNSduKvuG0g",
+      "rule": "python:S3776",
+      "component": "mitchins_scanweave:qualification/checks.py",
+      "line": 596,
+      "hash": "53f543568abd82138af79aff71ee4dd3",
+      "textRange": {
+        "startLine": 596,
+        "endLine": 596,
+        "startOffset": 4,
+        "endOffset": 12
+      },
+      "status": "OPEN",
+      "message": "Refactor this function to reduce its Cognitive Complexity from 29 to the 15 allowed.",
+      "effort": "19min",
+      "creationDate": "2026-10-14T01:41:47+0000",
+      "updateDate": "2026-10-20T22:18:41+0000",
+      "impacts": [
+        {
+          "softwareQuality": "MAINTAINABILITY",
+          "severity": "HIGH"
+        }
+      ],
+      "issueStatus": "OPEN"
+    },
+    {
+      "key": "AaFbZj5z2TNSduKvuG0W",
+      "rule": "python:S1192",
+      "component": "mitchins_scanweave:qualification/checks.py",
+      "line": 605,
+      "hash": "fd6146403ebfd748b7eef6936d244434",
+      "textRange": {
+        "startLine": 605,
+        "endLine": 605,
+        "startOffset": 20,
+        "endOffset": 55
+      },
+      "status": "OPEN",
+      "message": "Define a constant instead of duplicating this literal \"NOT_RUN (fixture page not in run)\" 4 times.",
+      "effort": "8min",
+      "creationDate": "2026-10-14T01:41:47+0000",
+      "updateDate": "2026-10-20T22:18:41+0000",
+      "impacts": [
+        {
+          "softwareQuality": "MAINTAINABILITY",
+          "severity": "HIGH"
+        }
+      ],
+      "issueStatus": "OPEN"
+    },
+    {
+      "key": "AaFbZj582TNSduKvuG1D",
+      "rule": "python:S1192",
+      "component": "mitchins_scanweave:qualification/measure.py",
+      "line": 124,
+      "hash": "118694d159a261de7b294591eb50e6a0",
+      "textRange": {
+        "startLine": 124,
+        "endLine": 124,
+        "startOffset": 81,
+        "endOffset": 91
+      },
+      "status": "OPEN",
+      "message": "Define a constant instead of duplicating this literal \"ocrm.pdf\" 6 times.",
+      "effort": "12min",
+      "creationDate": "2026-10-14T01:41:47+0000",
+      "updateDate": "2026-10-20T22:18:41+0000",
+      "impacts": [
+        {
+          "softwareQuality": "MAINTAINABILITY",
+          "severity": "HIGH"
+        }
+      ],
+      "issueStatus": "OPEN"
+    },
+    {
+      "key": "AaFbZj582TNSduKvuG1H",
+      "rule": "python:S1192",
+      "component": "mitchins_scanweave:qualification/measure.py",
+      "line": 128,
+      "hash": "2511d73496461e805d01f347fb7bfe28",
+      "textRange": {
+        "startLine": 128,
+        "endLine": 128,
+        "startOffset": 38,
+        "endOffset": 46
+      },
+      "status": "OPEN",
+      "message": "Define a constant instead of duplicating this literal \"ia.pdf\" 9 times.",
+      "effort": "18min",
+      "creationDate": "2026-10-14T01:41:47+0000",
+      "updateDate": "2026-10-20T22:18:41+0000",
+      "impacts": [
+        {
+          "softwareQuality": "MAINTAINABILITY",
+          "severity": "HIGH"
+        }
+      ],
+      "issueStatus": "OPEN"
+    },
+    {
+      "key": "AaFbZj582TNSduKvuG1G",
+      "rule": "python:S1192",
+      "component": "mitchins_scanweave:qualification/measure.py",
+      "line": 116,
+      "hash": "6eeb6449a085e00e048f378fa95c2576",
+      "textRange": {
+        "startLine": 116,
+        "endLine": 116,
+        "startOffset": 51,
+        "endOffset": 66
+      },
+      "status": "OPEN",
+      "message": "Define a constant instead of duplicating this literal \"b0_raster.pdf\" 3 times.",
+      "effort": "6min",
+      "creationDate": "2026-10-13T23:39:00+0000",
+      "updateDate": "2026-10-20T22:18:41+0000",
+      "impacts": [
+        {
+          "softwareQuality": "MAINTAINABILITY",
+          "severity": "HIGH"
+        }
+      ],
+      "issueStatus": "OPEN"
+    },
+    {
+      "key": "AaFbZj582TNSduKvuG1F",
+      "rule": "python:S1192",
+      "component": "mitchins_scanweave:qualification/measure.py",
+      "line": 120,
+      "hash": "3d9c5f7e9329637e89a16788296e199a",
+      "textRange": {
+        "startLine": 120,
+        "endLine": 120,
+        "startOffset": 63,
+        "endOffset": 74
+      },
+      "status": "OPEN",
+      "message": "Define a constant instead of duplicating this literal \"input.pdf\" 5 times.",
+      "effort": "10min",
+      "creationDate": "2026-10-13T23:39:00+0000",
+      "updateDate": "2026-10-20T22:18:41+0000",
+      "impacts": [
+        {
+          "softwareQuality": "MAINTAINABILITY",
+          "severity": "HIGH"
+        }
+      ],
+      "issueStatus": "OPEN"
+    },
+    {
+      "key": "AaFbZj4-2TNSduKvuGz_",
+      "rule": "python:S5797",
+      "component": "mitchins_scanweave:qualification/characterize_visuals.py",
+      "line": 146,
+      "hash": "0fe0627f57f28f3cbe24c4ae40aa161e",
+      "textRange": {
+        "startLine": 146,
+        "endLine": 146,
+        "startOffset": 63,
+        "endOffset": 68
+      },
+      "status": "OPEN",
+      "message": "Replace this expression; used as a condition it will always be constant.",
+      "effort": "2min",
+      "creationDate": "2026-10-13T23:18:07+0000",
+      "updateDate": "2026-10-20T22:18:41+0000",
+      "impacts": [
+        {
+          "softwareQuality": "MAINTAINABILITY",
+          "severity": "HIGH"
+        }
+      ],
+      "issueStatus": "OPEN"
+    },
+    {
+      "key": "AaFbZj5z2TNSduKvuG0V",
+      "rule": "python:S1192",
+      "component": "mitchins_scanweave:qualification/checks.py",
+      "line": 535,
+      "hash": "e030ea975b0fabd02131d3030300396f",
+      "textRange": {
+        "startLine": 535,
+        "endLine": 535,
+        "startOffset": 47,
+        "endOffset": 63
+      },
+      "status": "OPEN",
+      "message": "Define a constant instead of duplicating this literal \"trace_log.json\" 4 times.",
+      "effort": "8min",
+      "creationDate": "2026-10-13T22:03:40+0000",
+      "updateDate": "2026-10-20T22:18:41+0000",
+      "impacts": [
+        {
+          "softwareQuality": "MAINTAINABILITY",
+          "severity": "HIGH"
+        }
+      ],
+      "issueStatus": "OPEN"
+    },
+    {
+      "key": "AaFbZj5z2TNSduKvuG0T",
+      "rule": "python:S1192",
+      "component": "mitchins_scanweave:qualification/checks.py",
+      "line": 290,
+      "hash": "d1d11f3db832135c10f51ea5989f0891",
+      "textRange": {
+        "startLine": 290,
+        "endLine": 290,
+        "startOffset": 37,
+        "endOffset": 46
+      },
+      "status": "OPEN",
+      "message": "Define a constant instead of duplicating this literal \"out.pdf\" 5 times.",
+      "effort": "10min",
+      "creationDate": "2026-10-13T21:19:40+0000",
+      "updateDate": "2026-10-20T22:18:41+0000",
+      "impacts": [
+        {
+          "softwareQuality": "MAINTAINABILITY",
+          "severity": "HIGH"
+        }
+      ],
+      "issueStatus": "OPEN"
+    },
+    {
+      "key": "AaFbZj5z2TNSduKvuG0U",
+      "rule": "python:S1192",
+      "component": "mitchins_scanweave:qualification/checks.py",
+      "line": 291,
+      "hash": "0473e112a530596a18feba2fdc102f20",
+      "textRange": {
+        "startLine": 291,
+        "endLine": 291,
+        "startOffset": 37,
+        "endOffset": 46
+      },
+      "status": "OPEN",
+      "message": "Define a constant instead of duplicating this literal \"out.ttf\" 3 times.",
+      "effort": "6min",
+      "creationDate": "2026-10-13T21:19:40+0000",
+      "updateDate": "2026-10-20T22:18:41+0000",
+      "impacts": [
+        {
+          "softwareQuality": "MAINTAINABILITY",
+          "severity": "HIGH"
+        }
+      ],
+      "issueStatus": "OPEN"
+    },
+    {
+      "key": "AaFbZj5u2TNSduKvuG0N",
+      "rule": "python:S3776",
+      "component": "mitchins_scanweave:qualification/make_fixtures.py",
+      "line": 38,
+      "hash": "647f2661b0a35ba7ded3385be3b88c79",
+      "textRange": {
+        "startLine": 38,
+        "endLine": 38,
+        "startOffset": 4,
+        "endOffset": 13
+      },
+      "status": "OPEN",
+      "message": "Refactor this function to reduce its Cognitive Complexity from 17 to the 15 allowed.",
+      "effort": "7min",
+      "creationDate": "2026-10-13T21:19:40+0000",
+      "updateDate": "2026-10-20T22:18:41+0000",
+      "impacts": [
+        {
+          "softwareQuality": "MAINTAINABILITY",
+          "severity": "HIGH"
+        }
+      ],
+      "issueStatus": "OPEN"
+    },
+    {
+      "key": "AaFbZj5z2TNSduKvuG0a",
+      "rule": "python:S3776",
+      "component": "mitchins_scanweave:qualification/checks.py",
+      "line": 213,
+      "hash": "73adbd52ce517b00528505f3fd08bf95",
+      "textRange": {
+        "startLine": 213,
+        "endLine": 213,
+        "startOffset": 4,
+        "endOffset": 14
+      },
+      "status": "OPEN",
+      "message": "Refactor this function to reduce its Cognitive Complexity from 23 to the 15 allowed.",
+      "effort": "13min",
+      "creationDate": "2026-10-13T21:11:57+0000",
+      "updateDate": "2026-10-20T22:18:41+0000",
+      "impacts": [
+        {
+          "softwareQuality": "MAINTAINABILITY",
+          "severity": "HIGH"
+        }
+      ],
+      "issueStatus": "OPEN"
+    },
+    {
+      "key": "AaFbqryGDf3ZA7hnTDuU",
+      "rule": "rust:S3776",
+      "component": "mitchins_scanweave:crates/scanweave-core/src/json_util.rs",
+      "line": 222,
+      "hash": "e801c30d784f00465f0a0d61a9b34eed",
+      "textRange": {
+        "startLine": 222,
+        "endLine": 222,
+        "startOffset": 3,
+        "endOffset": 17
+      },
+      "status": "OPEN",
+      "message": "Refactor this function to reduce its Cognitive Complexity from 31 to the 30 allowed.",
+      "effort": "6min",
+      "creationDate": "2026-10-13T10:56:05+0000",
+      "updateDate": "2026-10-20T23:33:32+0000",
+      "impacts": [
+        {
+          "softwareQuality": "MAINTAINABILITY",
+          "severity": "HIGH"
+        }
+      ],
+      "issueStatus": "OPEN"
+    },
+    {
+      "key": "AaFbqryBDf3ZA7hnTDuS",
+      "rule": "rust:S3776",
+      "component": "mitchins_scanweave:crates/scanweave-core/src/ocr_page.rs",
+      "line": 511,
+      "hash": "c81300938a77c0e6cbe7caaad86fe419",
+      "textRange": {
+        "startLine": 511,
+        "endLine": 511,
+        "startOffset": 7,
+        "endOffset": 12
+      },
+      "status": "OPEN",
+      "message": "Refactor this function to reduce its Cognitive Complexity from 41 to the 30 allowed.",
+      "effort": "6min",
+      "creationDate": "2026-10-13T10:56:05+0000",
+      "updateDate": "2026-10-20T23:33:32+0000",
+      "impacts": [
+        {
+          "softwareQuality": "MAINTAINABILITY",
+          "severity": "HIGH"
+        }
+      ],
+      "issueStatus": "OPEN"
+    }
+  ],
+  "original_response_sha256": "eb7a36763d158376631a00bff4c5dc036978c99c2ddb6e29af5a357e8a6d83ea"
+}

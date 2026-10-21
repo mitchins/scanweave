@@ -3,7 +3,19 @@ from pathlib import Path
 import json,hashlib,subprocess,os
 import pikepdf,pypdfium2 as pdfium,numpy as np
 from PIL import Image,ImageDraw
-B=Path(__file__).resolve().parent;R=B.parents[1];controls=json.load(open(B/'controls.json'));results=json.load(open(B/'comparison.json')) if (B/'comparison.json').exists() else []
+
+COMPARISON_JSON = 'comparison.json'
+
+B=Path(__file__).resolve().parent;R=B.parents[1];controls=json.load(open(B/'controls.json'));results=json.load(open(B/COMPARISON_JSON)) if (B/COMPARISON_JSON).exists() else []
+def ridge_counts(ga,gb,first,last):
+ dark=lost=0
+ c=ga[first:last,1:-1];d=gb[first:last,1:-1]
+ for axis in [0,1]:
+  p,q=(ga[first-1:last-1,1:-1],ga[first+1:last+1,1:-1]) if axis==0 else (ga[first:last,:-2],ga[first:last,2:]);u,v=(gb[first-1:last-1,1:-1],gb[first+1:last+1,1:-1]) if axis==0 else (gb[first:last,:-2],gb[first:last,2:])
+  for contrast,retained in [(np.minimum(p,q)-c,np.minimum(u,v)-d),(c-np.maximum(p,q),d-np.maximum(u,v))]:
+   test=contrast>=8;limit=np.where(contrast>=12,contrast*.5-1,2);dark+=int(test.sum());lost+=int((test&(retained<limit)).sum())
+ return dark,lost
+
 def stats(a,b):
  a=np.asarray(a);b=np.asarray(b);H,W,_=a.shape;total=changed=maximum=dark=lost=gxs=gys=0
  for start in range(0,H,128):
@@ -15,11 +27,8 @@ def stats(a,b):
   if n>0:gys+=float(np.abs((ga[off+1:off+n+1]-ga[off:off+n])-(gb[off+1:off+n+1]-gb[off:off+n])).sum())
   first=max(1,start)-lo;last=min(end,H-1)-lo
   if last<=first:continue
-  c=ga[first:last,1:-1];d=gb[first:last,1:-1]
-  for axis in [0,1]:
-   p,q=(ga[first-1:last-1,1:-1],ga[first+1:last+1,1:-1]) if axis==0 else (ga[first:last,:-2],ga[first:last,2:]);u,v=(gb[first-1:last-1,1:-1],gb[first+1:last+1,1:-1]) if axis==0 else (gb[first:last,:-2],gb[first:last,2:])
-   for contrast,retained in [(np.minimum(p,q)-c,np.minimum(u,v)-d),(c-np.maximum(p,q),d-np.maximum(u,v))]:
-    test=contrast>=8;limit=np.where(contrast>=12,contrast*.5-1,2);dark+=int(test.sum());lost+=int((test&(retained<limit)).sum())
+  tested,missing=ridge_counts(ga,gb,first,last)
+  dark+=tested;lost+=missing
  return {'mae':total/(H*W*3),'max_channel_error':maximum,'changed_fraction':changed/(H*W),'dark_and_light_ridge_tests':dark,'lost_ridges':lost,'gradient_error_x':gxs/(H*(W-1)),'gradient_error_y':gys/((H-1)*W)}
 def streams(q):return sorted(hashlib.sha256(o.read_bytes()).hexdigest() for o in q.objects if isinstance(o,pikepdf.Stream) and str(o.get('/Subtype'))!='/Image' and str(o.get('/Type')) not in ['/ObjStm','/XRef'])
 for name,regions in controls['regions'].items():
@@ -58,7 +67,7 @@ for name,regions in controls['regions'].items():
   overview.thumbnail((2400,3600));overview.save(B/f'{name}-{renderer}-details.png')
  for arm in ['q98','q100']:
   assert row['arms'][arm]['pdfium_text']==row['arms']['baseline']['pdfium_text'];assert row['arms'][arm]['poppler_text']==row['arms']['baseline']['poppler_text']
- results.append(row);(B/'comparison.json').write_text(json.dumps(results,indent=2));print(name,[(a,d['pdf_bytes']) for a,d in row['arms'].items()],flush=True)
+ results.append(row);(B/COMPARISON_JSON).write_text(json.dumps(results,indent=2));print(name,[(a,d['pdf_bytes']) for a,d in row['arms'].items()],flush=True)
  for d in docs.values():d.close()
 
 # Refresh numeric controls uniformly after resuming a partially rendered run.
@@ -72,4 +81,4 @@ for row in results:
    x0,y0,x1,y1=region['fraction'];W,H=frames['baseline'].size;box=(round(x0*W),round(y0*H),round(x1*W),round(y1*H))
    for arm in ['baseline','q98','q100']:region['arms'][arm]=stats(frames['baseline'].crop(box),frames[arm].crop(box))
   frames.clear()
-(B/'comparison.json').write_text(json.dumps(results,indent=2))
+(B/COMPARISON_JSON).write_text(json.dumps(results,indent=2))

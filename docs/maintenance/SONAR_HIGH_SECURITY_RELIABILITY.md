@@ -20,16 +20,25 @@ never printed, persisted in these records or committed.
 |---|---:|---|
 | python:S6729 | 12 | Nine index calls corrected; two duplicate calls share the existing renderer; one unused index calculation removed |
 | shelldre:S7688 | 11 | Bash `[[ ]]`, with operands and quoting preserved |
-| pythonsecurity:S8707 | 31 | Five code fixes under the operator-adopted containment/tag contract; 26 reviewed false positives |
+| pythonsecurity:S8707 | 31 | Four corpus-containment code-fix findings; 27 reviewed false positives; separate genuine tag hardening |
 | pythonsecurity:S8705 | 1 | Independently reviewed false positive |
 
 All keys, original locations/status and dispositions are in
 [sonar-high-security-reliability.csv](sonar-high-security-reliability.csv).
-The 27 initial per-key false-positive reasons and three PR-only follow-ups are in
+The 28 original-cohort per-key false-positive reasons and three PR-only follow-ups are in
 [sonar-high-reviewed-paths.json](sonar-high-reviewed-paths.json).
 The initial transitions and comments were verified on Sonar; they are **not code fixes**.
-The other 28 findings must not be represented as fixed on `main` before merge
-and fresh analysis. No manual closure of the five containment findings was made.
+Fresh post-merge analysis verified **27 genuine code-fix findings** (23 Reliability,
+four Security). The other **28 original-cohort dispositions are reviewed false
+positives**, not code fixes. All 55 keys were reconciled; zero remained OPEN HIGH
+Security/Reliability. Server statuses were 30 FIXED / 25 FALSE_POSITIVE because
+three original reviewed-false-positive identifiers became FIXED through source
+reidentification; those are not additional code fixes.
+
+The originally misassociated `AaFbZj2c2TNSduKvuGwI` flow is operator-selected
+`--out`, not `--tag`. The operator approved FALSE_POSITIVE and a fresh server read
+confirmed it. Tag hardening remains a genuine separate improvement. See the
+[corrected PR #10 closure](https://github.com/mitchins/scanweave/pull/10#issuecomment-6306990400).
 
 ## Reliability changes
 
@@ -55,7 +64,7 @@ too; histogram entry points are source-reviewed but not fully integration-tested
 
 ## Adopted corpus and tag contracts
 
-The initial review found five boundary questions rather than an established
+The initial review found corpus/tag boundary questions rather than an established
 containment contract. The operator explicitly chose the following requirements
 before implementation:
 
@@ -90,7 +99,6 @@ bounded source containment, not a general filesystem sandbox.
 
 The genuine Security code-fix keys are:
 
-- `AaFbZj2c2TNSduKvuGwI` — diagnostic tag.
 - `AaFbZj512TNSduKvuG0r`, `AaFbZj512TNSduKvuG0n`,
   `AaFbZj512TNSduKvuG0o`, `AaFbZj512TNSduKvuG0s` — corpus/holdout reads.
 
@@ -117,8 +125,8 @@ They have separate keys/reasons in the JSON ledger, not extra claims against the
 original 55-finding cohort. The new repeated OCR suffix literal also uses one
 constant rather than adding duplicated configuration.
 
-The individually reasoned false-positive transitions leave the five genuine
-containment findings untouched. No Accepted transition, rule/severity change,
+The individually reasoned false-positive transitions leave the four genuine
+corpus-containment findings for automatic code-fix verification. No Accepted transition, rule/severity change,
 `NOSONAR` or analysis-scope exclusion was used. A future service accepting
 adversarial paths would need its own authority and argument boundaries; these
 verdicts do not certify such a service.
@@ -131,10 +139,15 @@ extended to the actual index/geometry helpers, identical rendering code was
 shared, and the subpixel tests were added to coverage. No threshold was weakened.
 
 Local unfiltered Rust tests (116 passed), denied-warning Clippy, existing Python
-qualification and the 26 focused tests pass. A diagnostic server analysis measures new
-coverage 91.8% and duplication 0.4%. GitHub CI and server-side Sonar for the
-final follow-up are pending at this write-up; final per-head results
-will be recorded on PR #10. Upload success alone is not a Quality Gate result.
+qualification and the 26 focused tests pass. Final PR CI and Sonar passed at
+`dabc925958fb8cb09182466f7a70a3b908390bdd`. Main CI
+[39534481112](https://github.com/mitchins/scanweave/actions/runs/39534481112)
+and Sonar [39534481005](https://github.com/mitchins/scanweave/actions/runs/39534481005)
+passed at merge `0816d8a229e08838117b1e104a9c005a3d3ba56a`.
+The server Quality Gate was OK; overall measured coverage 43.7%, new-code coverage
+88.6%, new-code duplication 0.2%. These are historical receipts, not promises for
+later revisions. This ledger correction was deferred as requested until the
+next substantive maintenance documentation update (Wave 1).
 
 Independent patch review found no source-backed regression in the reliability
 changes; late Bash condition tests addressed its coverage concern. A fresh

@@ -2,6 +2,10 @@
 """Reproduce the normal CLI conversion. Oracle paths go only to evaluators."""
 import argparse,subprocess,sys,os,hashlib,gzip
 from pathlib import Path
+
+FINAL_PDF = 'final.pdf'
+FINAL_JSON = 'final.json'
+
 B=Path(__file__).resolve().parent;ROOT=B.parents[1]
 # Frozen reports are stored compressed; the evaluator APIs read plain JSON.
 for archive in B.rglob('*.json.gz'):
@@ -13,11 +17,11 @@ def call(args,log,env=None):
 call(['cargo','build','--release','-p','scanweave-cli'],B/'reproduce-build.log')
 for dpi in a.dpi:
  d=B/str(dpi);d.mkdir(exist_ok=True)
- call(['/usr/bin/time','-v','-o',d/'final-time.txt',ROOT/'target/release/scanweave-cli','build','--bundle',ROOT/f'qualification/experiments/m1g/fixture/dpi{dpi}/input/document.json','--profile','clearscan','--output',d/'final.pdf','--report',d/'final.json'],d/'final.log')
+ call(['/usr/bin/time','-v','-o',d/'final-time.txt',ROOT/'target/release/scanweave-cli','build','--bundle',ROOT/f'qualification/experiments/m1g/fixture/dpi{dpi}/input/document.json','--profile','clearscan','--output',d/FINAL_PDF,'--report',d/FINAL_JSON],d/'final.log')
  if a.measure:
   for arm in ['adobe','previous','final']:call([sys.executable,B/'compare.py',dpi,arm,d/(arm+'.pdf')],d/(arm+'-metrics.log'))
-  call([sys.executable,B/'audit.py',dpi,'final',d/'final.pdf','--report',d/'final.json'],d/'final-audit.log')
-  call([sys.executable,B/'stages.py',dpi,'final',d/'final.pdf',d/'final.json'],d/'final-stages.log')
+  call([sys.executable,B/'audit.py',dpi,'final',d/FINAL_PDF,'--report',d/FINAL_JSON],d/'final-audit.log')
+  call([sys.executable,B/'stages.py',dpi,'final',d/FINAL_PDF,d/FINAL_JSON],d/'final-stages.log')
 if a.measure and set(a.dpi)=={300,600}:
  for script in ['ownership_audit.py','geometry.py','outline_audit.py','font_complexity.py','semantic_audit.py','text_order.py','validate.py','summarize.py']:
   call([sys.executable,B/script],B/(script.removesuffix('.py')+'.log'))
@@ -25,4 +29,4 @@ if a.measure and set(a.dpi)=={300,600}:
 if a.repeat:
  call([ROOT/'target/release/scanweave-cli','build','--bundle',ROOT/'qualification/experiments/m1g/fixture/dpi300/input/document.json','--profile','clearscan','--output',B/'300/repeat.pdf','--report',B/'300/repeat.json'],B/'determinism.log')
  assert (B/'300/final.pdf').read_bytes()==(B/'300/repeat.pdf').read_bytes()
-print('Completed normal ClearScan PDFs:',*[str(B/str(d)/'final.pdf') for d in a.dpi])
+print('Completed normal ClearScan PDFs:',*[str(B/str(d)/FINAL_PDF) for d in a.dpi])

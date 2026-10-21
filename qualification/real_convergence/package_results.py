@@ -1,5 +1,8 @@
 import json,csv,hashlib,collections,subprocess
 from pathlib import Path
+
+PDF_GLOB = '*.pdf'
+
 b=Path('qualification/real_convergence');p=Path('qualification/pdf_packaging')
 m=json.loads((b/'measurements.json').read_text());old=json.loads((p/'group-measurements.json').read_text());inv=json.loads((b/'outline-inventory.json').read_text())
 rows=[]
@@ -23,8 +26,8 @@ with (b/'page-results.csv').open('w') as f:w=csv.DictWriter(f,keys,lineterminato
 tot={k:sum(r['resources'][k] for r in m) for k in ['pdf_bytes','raster_bytes','font_bytes','content_bytes','overhead_bytes']};tot.update(raster_classes_bytes=dict(classes),raster_classes_objects=dict(counts),strict_bitonal_objects=dict(bitonal),actual_visible_draws=sum(r['actual_visible_glyph_draws'] for r in pages),unique_painted_gids_per_document_sum=sum(next(x for x in inv if x['pdf'].endswith('/collections/'+Path(r['pdf']).name))['unique_painted_gids'] for r in m))
 (b/'totals.json').write_text(json.dumps(tot,indent=2))
 manifest={'implementation_commits':['5998611','13288a8'],'starting_commit':(b/'starting-head.txt').read_text().strip(),'artifacts':[]}
-paths=list((b/'outputs').glob('*.pdf'))+list((b/'collections').glob('*.pdf'))+list((b/'300').glob('*.pdf'))+list((b/'600').glob('*.pdf'))
-paths+=list((p/'groups').glob('*.pdf'))
+paths=list((b/'outputs').glob(PDF_GLOB))+list((b/'collections').glob(PDF_GLOB))+list((b/'300').glob(PDF_GLOB))+list((b/'600').glob(PDF_GLOB))
+paths+=list((p/'groups').glob(PDF_GLOB))
 for x in paths:manifest['artifacts'].append({'path':str(x),'bytes':x.stat().st_size,'sha256':hashlib.sha256(x.read_bytes()).hexdigest(),'storage':'committed representative' if 'collections' not in str(x) and str(x).startswith(str(b)) else 'existing local artifact; reproduce with run.py'})
 (b/'run-manifest.json').write_text(json.dumps(manifest,indent=2))
 print(tot)
