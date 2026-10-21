@@ -41,6 +41,13 @@ jobs:
           qualification/.venv/bin/pip install --require-hashes --only-binary=:all: -r .github/requirements-ci.txt
           qualification/.venv/bin/coverage run --source=qualification -m unittest discover -s qualification -p test_hocr_xml_security.py
           qualification/.venv/bin/coverage xml -o coverage/python.xml
+      - name: Retain measured coverage for import diagnostics
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: rust-coverage
+          path: coverage/lcov.info
+          retention-days: 7
+          if-no-files-found: error
       - name: Require analysis credential
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
