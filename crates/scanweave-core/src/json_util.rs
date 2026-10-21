@@ -219,6 +219,33 @@ fn validate_number(lit: &[u8]) -> Result<(), ()> {
     Ok(())
 }
 
+// The caller owns escape cursor advancement. Keep the existing slice boundaries
+// and surrogate arithmetic unchanged; this extraction does not redefine parsing.
+fn append_unicode_escape(raw: &[u8], i: &mut usize, out: &mut String) -> Result<(), ()> {
+    if *i + 5 >= raw.len() {
+        return Err(());
+    }
+    let hex = std::str::from_utf8(&raw[*i + 1..*i + 5]).map_err(|_| ())?;
+    let cp = u32::from_str_radix(hex, 16).map_err(|_| ())?;
+    // surrogate pair handling
+    if (0xD800..0xDC00).contains(&cp) {
+        if raw.get(*i + 6) != Some(&b'\\') || raw.get(*i + 7) != Some(&b'u') {
+            return Err(());
+        }
+        let hex2 = std::str::from_utf8(&raw[*i + 8..*i + 12]).map_err(|_| ())?;
+        let lo = u32::from_str_radix(hex2, 16).map_err(|_| ())?;
+        if !(0xDC00..0xE000).contains(&lo) {
+            return Err(());
+        }
+        let c = 0x10000 + ((cp - 0xD800) << 10) + (lo - 0xDC00);
+        out.push(char::from_u32(c).ok_or(())?);
+        *i += 6;
+    } else {
+        out.push(char::from_u32(cp).ok_or(())?);
+    }
+    Ok(())
+}
+
 fn rebuild_string(raw: &[u8]) -> Result<String, ()> {
     let mut out = String::new();
     let mut i = 0;
@@ -235,27 +262,7 @@ fn rebuild_string(raw: &[u8]) -> Result<String, ()> {
                 Some(b'r') => out.push('\r'),
                 Some(b't') => out.push('\t'),
                 Some(b'u') => {
-                    if i + 5 >= raw.len() {
-                        return Err(());
-                    }
-                    let hex = std::str::from_utf8(&raw[i + 1..i + 5]).map_err(|_| ())?;
-                    let cp = u32::from_str_radix(hex, 16).map_err(|_| ())?;
-                    // surrogate pair handling
-                    if (0xD800..0xDC00).contains(&cp) {
-                        if raw.get(i + 6) != Some(&b'\\') || raw.get(i + 7) != Some(&b'u') {
-                            return Err(());
-                        }
-                        let hex2 = std::str::from_utf8(&raw[i + 8..i + 12]).map_err(|_| ())?;
-                        let lo = u32::from_str_radix(hex2, 16).map_err(|_| ())?;
-                        if !(0xDC00..0xE000).contains(&lo) {
-                            return Err(());
-                        }
-                        let c = 0x10000 + ((cp - 0xD800) << 10) + (lo - 0xDC00);
-                        out.push(char::from_u32(c).ok_or(())?);
-                        i += 6;
-                    } else {
-                        out.push(char::from_u32(cp).ok_or(())?);
-                    }
+                    append_unicode_escape(raw, &mut i, &mut out)?;
                 }
                 _ => return Err(()),
             }
@@ -285,4 +292,47 @@ pub fn assert_no_duplicate_keys(input: &[u8]) -> Result<(), ScanWeaveError> {
         });
     }
     Ok(())
+}
+
+#[cfg(test)]
+mod escape_tests {
+    #[test]
+    fn extracted_unicode_branch_preserves_cursor_and_error_boundaries() {
+        let mut at = 0;
+        let mut out = String::new();
+        super::append_unicode_escape(b"u0061x", &mut at, &mut out).unwrap();
+        assert_eq!((at, out.as_str()), (0, "a"));
+        super::append_unicode_escape(b"uD800x\\uDC00", &mut at, &mut out).unwrap();
+        assert_eq!((at, out.as_str()), (6, "a\u{10000}"));
+        for raw in [
+            &b"u"[..],
+            &b"uZZZZx"[..],
+            &b"uD800xx"[..],
+            &b"uD800x\\u0061"[..],
+            &b"uDC00x"[..],
+            &b"u\xff000x"[..],
+        ] {
+            let mut at = 0;
+            assert!(super::append_unicode_escape(raw, &mut at, &mut String::new()).is_err());
+        }
+    }
+
+    #[test]
+    fn simple_escape_rebuild_and_malformed_inputs_keep_their_contract() {
+        assert_eq!(
+            super::rebuild_string(br#"a\n\t\"\\\/"#).unwrap(),
+            "a\n\t\"\\/"
+        );
+        for input in [
+            &b"\\"[..],
+            &b"\\z"[..],
+            &b"\\u"[..],
+            &b"\\uZZZZx"[..],
+            &b"\xff"[..],
+        ] {
+            assert!(super::rebuild_string(input).is_err());
+        }
+        assert!(super::assert_no_duplicate_keys(br#"{"a":1,"a":2}"#).is_err());
+        assert!(super::assert_no_duplicate_keys(br#"{"a":"\u0061"}"#).is_ok());
+    }
 }

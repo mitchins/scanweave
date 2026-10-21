@@ -74,20 +74,28 @@ pub(crate) fn preserves_details(
                     (op.min(oq) - a, dp.min(dq) - b),
                     (a - op.max(oq), b - dp.max(dq)),
                 ] {
-                    if contrast < 8.0 {
-                        continue;
-                    }
-                    let minimum = if contrast >= 12.0 {
-                        contrast * 0.5 - 1.0
-                    } else {
-                        2.0
-                    };
-                    if retained < minimum {
+                    if !ridge_preserved(contrast, retained) {
                         return false;
                     }
                 }
             }
         }
+    }
+    true
+}
+
+// Keep the strict comparisons and arithmetic shared by dark and light ridges.
+fn ridge_preserved(contrast: f64, retained: f64) -> bool {
+    if contrast < 8.0 {
+        return true;
+    }
+    let minimum = if contrast >= 12.0 {
+        contrast * 0.5 - 1.0
+    } else {
+        2.0
+    };
+    if retained < minimum {
+        return false;
     }
     true
 }
@@ -130,6 +138,38 @@ pub(crate) fn encode(
 
 #[cfg(test)]
 mod tests {
+    #[test]
+    fn ridge_rule_retains_strict_boundary_and_float_behavior() {
+        for contrast in [
+            f64::NEG_INFINITY,
+            -1.0,
+            7.999,
+            8.0,
+            11.999,
+            12.0,
+            255.0,
+            f64::INFINITY,
+            f64::NAN,
+        ] {
+            for retained in [-1.0, 1.999, 2.0, 4.999, 5.0, 126.5, f64::NAN] {
+                let expected = if contrast < 8.0 {
+                    true
+                } else {
+                    let minimum = if contrast >= 12.0 {
+                        contrast * 0.5 - 1.0
+                    } else {
+                        2.0
+                    };
+                    !matches!(
+                        retained.partial_cmp(&minimum),
+                        Some(std::cmp::Ordering::Less)
+                    )
+                };
+                assert_eq!(super::ridge_preserved(contrast, retained), expected);
+            }
+        }
+    }
+
     use super::*;
     #[test]
     fn invalid_buffers_bitonal_and_oversized_pages_stay_lossless() {

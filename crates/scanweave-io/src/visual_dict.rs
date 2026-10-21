@@ -170,30 +170,35 @@ fn count_components(grid: &[u8], w: usize, h: usize, target: u8) -> usize {
             continue;
         }
         comps += 1;
-        let mut stack = vec![idx];
-        seen[idx] = true;
-        while let Some(i) = stack.pop() {
-            let (x, y) = (i % w, i / w);
-            for dy in -1i32..=1 {
-                for dx in -1i32..=1 {
-                    if dx == 0 && dy == 0 {
-                        continue;
-                    }
-                    let nx = x as i32 + dx;
-                    let ny = y as i32 + dy;
-                    if nx < 0 || ny < 0 || nx >= w as i32 || ny >= h as i32 {
-                        continue;
-                    }
-                    let j = ny as usize * w + nx as usize;
-                    if grid[j] == target && !seen[j] {
-                        seen[j] = true;
-                        stack.push(j);
-                    }
+        mark_component(grid, w, h, target, idx, &mut seen);
+    }
+    comps
+}
+
+// Preserve the existing LIFO traversal and dy-before-dx neighbor order.
+fn mark_component(grid: &[u8], w: usize, h: usize, target: u8, idx: usize, seen: &mut [bool]) {
+    let mut stack = vec![idx];
+    seen[idx] = true;
+    while let Some(i) = stack.pop() {
+        let (x, y) = (i % w, i / w);
+        for dy in -1i32..=1 {
+            for dx in -1i32..=1 {
+                if dx == 0 && dy == 0 {
+                    continue;
+                }
+                let nx = x as i32 + dx;
+                let ny = y as i32 + dy;
+                if nx < 0 || ny < 0 || nx >= w as i32 || ny >= h as i32 {
+                    continue;
+                }
+                let j = ny as usize * w + nx as usize;
+                if grid[j] == target && !seen[j] {
+                    seen[j] = true;
+                    stack.push(j);
                 }
             }
         }
     }
-    comps
 }
 
 fn count_holes(grid: &[u8], w: usize, h: usize) -> usize {
@@ -920,4 +925,52 @@ fn mask_topology(mask: &[bool], w: usize, h: usize) -> (usize, usize) {
         }
     }
     (components, holes)
+}
+
+#[cfg(test)]
+mod component_tests {
+    use super::count_components;
+
+    fn reference_components(grid: &[u8], target: u8) -> usize {
+        // Independent fixed-point labeling, without the production DFS.
+        let mut labels: Vec<usize> = (0..9).collect();
+        loop {
+            let before = labels.clone();
+            for i in 0..9 {
+                if grid[i] != target {
+                    continue;
+                }
+                for j in 0..9 {
+                    if grid[j] == target && (i % 3).abs_diff(j % 3) <= 1 && (i / 3).abs_diff(j / 3) <= 1
+                    {
+                        labels[i] = labels[i].min(before[j]);
+                    }
+                }
+            }
+            if labels == before {
+                break;
+            }
+        }
+        let distinct: std::collections::HashSet<_> = (0..9)
+            .filter(|&i| grid[i] == target)
+            .map(|i| labels[i])
+            .collect();
+        distinct.len()
+    }
+
+    #[test]
+    fn all_small_masks_match_eight_connected_partition() {
+        for bits in 0..512u16 {
+            let grid: Vec<u8> = (0..9).map(|i| ((bits >> i) & 1) as u8).collect();
+            for target in [0, 1] {
+                let expected = reference_components(&grid, target);
+                assert_eq!(
+                    count_components(&grid, 3, 3, target),
+                    expected,
+                    "mask {bits}, target {target}"
+                );
+            }
+        }
+        assert_eq!(count_components(&[], 0, 0, 1), 0);
+    }
 }

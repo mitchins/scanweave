@@ -101,6 +101,55 @@ struct EncodedImageResource {
     predictor: u8,
 }
 
+// Allocate in first-placement order; hash buckets still compare complete keys.
+fn image_resource_pool(
+    patches: &[Patch],
+    image_options: ImageEncodingOptions,
+    first_id: i32,
+) -> Result<(Vec<EncodedImageResource>, Vec<Ref>), String> {
+    let mut image_resources: Vec<EncodedImageResource> = Vec::new();
+    let mut resource_lookup: HashMap<[u8; 32], Vec<usize>> = HashMap::new();
+    let mut image_ids = Vec::with_capacity(patches.len());
+    for patch in patches {
+        let key = canonical_patch(patch, image_options)?;
+        let existing = if image_options.reuse_identical {
+            resource_lookup
+                .get(&key.sample_sha256)
+                .and_then(|candidates| {
+                    candidates
+                        .iter()
+                        .copied()
+                        .find(|&i| image_resources[i].key == key)
+                })
+        } else {
+            None
+        };
+        let index = match existing {
+            Some(i) => i,
+            None => {
+                let (compressed, jpeg, predictor) = compress_samples(&key)?;
+                let id = Ref::new(first_id + image_resources.len() as i32);
+                let digest = key.sample_sha256;
+                let i = image_resources.len();
+                image_resources.push(EncodedImageResource {
+                    id,
+                    key,
+                    compressed,
+                    jpeg,
+                    predictor,
+                });
+                if image_options.reuse_identical {
+                    resource_lookup.entry(digest).or_default().push(i);
+                }
+                i
+            }
+        };
+        image_ids.push(image_resources[index].id);
+    }
+
+    Ok((image_resources, image_ids))
+}
+
 fn canonical_patch(
     patch: &Patch,
     options: ImageEncodingOptions,
@@ -750,45 +799,7 @@ pub fn assemble_with_options(
     let glyphless_tu = Ref::new(next);
     next += 1;
 
-    let mut image_resources: Vec<EncodedImageResource> = Vec::new();
-    let mut resource_lookup: HashMap<[u8; 32], Vec<usize>> = HashMap::new();
-    let mut image_ids = Vec::with_capacity(patches.len());
-    for patch in patches {
-        let key = canonical_patch(patch, image_options)?;
-        let existing = if image_options.reuse_identical {
-            resource_lookup
-                .get(&key.sample_sha256)
-                .and_then(|candidates| {
-                    candidates
-                        .iter()
-                        .copied()
-                        .find(|&i| image_resources[i].key == key)
-                })
-        } else {
-            None
-        };
-        let index = match existing {
-            Some(i) => i,
-            None => {
-                let (compressed, jpeg, predictor) = compress_samples(&key)?;
-                let id = Ref::new(next + image_resources.len() as i32);
-                let digest = key.sample_sha256;
-                let i = image_resources.len();
-                image_resources.push(EncodedImageResource {
-                    id,
-                    key,
-                    compressed,
-                    jpeg,
-                    predictor,
-                });
-                if image_options.reuse_identical {
-                    resource_lookup.entry(digest).or_default().push(i);
-                }
-                i
-            }
-        };
-        image_ids.push(image_resources[index].id);
-    }
+    let (image_resources, image_ids) = image_resource_pool(patches, image_options, next)?;
 
     pdf.catalog(catalog).pages(page_tree);
     pdf.pages(page_tree).kids([page]).count(1);
@@ -1435,6 +1446,42 @@ pub struct AssemblyStats {
 
 #[cfg(test)]
 mod image_resource_tests {
+    #[test]
+    fn single_page_pool_preserves_ids_keys_and_error_order() {
+        let patches = [
+            patch([0., 0., 1., 1.], [220; 3]),
+            patch([1., 0., 2., 1.], [220; 3]),
+            patch([2., 0., 3., 1.], [220, 219, 220]),
+        ];
+        let (resources, ids) =
+            image_resource_pool(&patches, ImageEncodingOptions::default(), 17).unwrap();
+        assert_eq!(ids, vec![Ref::new(17), Ref::new(17), Ref::new(18)]);
+        assert_eq!(resources.len(), 2);
+        assert_eq!(resources[0].key.samples, [220]);
+        assert_eq!(resources[1].key.samples, [220, 219, 220]);
+        let options = ImageEncodingOptions {
+            reuse_identical: false,
+            grayscale_equal_channels: false,
+            ..Default::default()
+        };
+        let (resources, ids) = image_resource_pool(&patches, options, 17).unwrap();
+        assert_eq!(ids, vec![Ref::new(17), Ref::new(18), Ref::new(19)]);
+        assert_eq!(resources[0].key.samples, [220; 3]);
+        let mut malformed = patches[0].clone();
+        malformed.w = 0;
+        malformed.rgb.clear();
+        assert_eq!(
+            image_resource_pool(&[malformed], options, 17).unwrap_err(),
+            "image patch dimensions must be nonzero"
+        );
+        let mut malformed = patches[0].clone();
+        malformed.rgb.clear();
+        assert_eq!(
+            image_resource_pool(&[malformed], options, 17).unwrap_err(),
+            "image patch sample length mismatch: 1x1 requires 3 RGB bytes, got 0"
+        );
+    }
+
     use super::*;
 
     fn page(patches: Vec<Patch>) -> PageParts {

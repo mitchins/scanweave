@@ -15,6 +15,29 @@ fn utf16be_hex(s: &str) -> String {
     out
 }
 
+fn to_unicode_cmap(encodings: &[(usize, String)]) -> String {
+    let mut cmap = String::new();
+    cmap.push_str("/CIDInit /ProcSet findresource begin\n");
+    cmap.push_str("12 dict begin\nbegincmap\n");
+    cmap.push_str("/CIDSystemInfo << /Registry (Adobe) /Ordering (UCS) /Supplement 0 >> def\n");
+    cmap.push_str("/CMapName /Adobe-Identity-UCS def\n/CMapType 2 def\n");
+    // codespace must cover all allocated CIDs (1..=len); a range ending at 0000
+    // makes every real CID out-of-codespace and renderers drop the text
+    cmap.push_str(&format!(
+        "1 begincodespacerange\n<0000> <{:04X}>\nendcodespacerange\n",
+        encodings.len()
+    ));
+    if !encodings.is_empty() {
+        cmap.push_str(&format!("{} beginbfchar\n", encodings.len()));
+        for (cid, (_, semantic)) in encodings.iter().enumerate() {
+            cmap.push_str(&format!("<{:04X}> <{}>\n", cid + 1, utf16be_hex(semantic)));
+        }
+        cmap.push_str("endbfchar\n");
+    }
+    cmap.push_str("endcmap\nCMapName currentdict /CMap defineresource pop\nend end\n");
+    cmap
+}
+
 #[allow(clippy::too_many_arguments)]
 pub fn assemble(
     shapes: &[GlyphShape],
@@ -118,29 +141,7 @@ pub fn assemble(
     }
 
     // ToUnicode CMap (UTF-16BE, multi-codepoint and supplementary-plane safe)
-    let mut cmap = String::new();
-    cmap.push_str("/CIDInit /ProcSet findresource begin\n");
-    cmap.push_str("12 dict begin\nbegincmap\n");
-    cmap.push_str("/CIDSystemInfo << /Registry (Adobe) /Ordering (UCS) /Supplement 0 >> def\n");
-    cmap.push_str("/CMapName /Adobe-Identity-UCS def\n/CMapType 2 def\n");
-    // codespace must cover all allocated CIDs (1..=len); a range ending at 0000
-    // makes every real CID out-of-codespace and renderers drop the text
-    cmap.push_str(&format!(
-        "1 begincodespacerange\n<0000> <{:04X}>\nendcodespacerange\n",
-        encodings.len()
-    ));
-    if !encodings.is_empty() {
-        cmap.push_str(&format!("{} beginbfchar\n", encodings.len()));
-        for (cid, (_, semantic)) in encodings.iter().enumerate() {
-            cmap.push_str(&format!(
-                "<{:04X}> <{}>\n",
-                cid + 1,
-                utf16be_hex(semantic)
-            ));
-        }
-        cmap.push_str("endbfchar\n");
-    }
-    cmap.push_str("endcmap\nCMapName currentdict /CMap defineresource pop\nend end\n");
+    let cmap = to_unicode_cmap(encodings);
     pdf.stream(to_unicode_id, cmap.as_bytes()).finish();
     breakdown.push(("to_unicode_cmap".into(), cmap.len() as u64));
 
@@ -301,4 +302,20 @@ fn cid_utf16be(cid: usize) -> Vec<u8> {
     // Identity-H: 2-byte CIDs; +1 because CID 0 is reserved for .notdef
     let cid = cid + 1;
     vec![(cid >> 8) as u8, (cid & 0xFF) as u8]
+}
+
+#[cfg(test)]
+mod cmap_tests {
+    use super::to_unicode_cmap;
+
+    #[test]
+    fn cmap_preserves_empty_codespace_and_semantic_order() {
+        let prefix = "/CIDInit /ProcSet findresource begin\n12 dict begin\nbegincmap\n/CIDSystemInfo << /Registry (Adobe) /Ordering (UCS) /Supplement 0 >> def\n/CMapName /Adobe-Identity-UCS def\n/CMapType 2 def\n";
+        let suffix = "endcmap\nCMapName currentdict /CMap defineresource pop\nend end\n";
+        assert_eq!(
+            to_unicode_cmap(&[]),
+            format!("{prefix}1 begincodespacerange\n<0000> <0000>\nendcodespacerange\n{suffix}")
+        );
+        assert_eq!(to_unicode_cmap(&[(3, "e\u{301}".into()), (3, "😀".into())]), format!("{prefix}1 begincodespacerange\n<0000> <0002>\nendcodespacerange\n2 beginbfchar\n<0001> <00650301>\n<0002> <D83DDE00>\nendbfchar\n{suffix}"));
+    }
 }

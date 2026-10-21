@@ -543,9 +543,12 @@ impl<'a> Validator<'a> {
                 self.polygon(&sym.polygon, r, &format!("symbol {}", sym.id))?;
             }
         }
+        self.span_parents(page)
+    }
+
+    fn span_parents(&self, page: &OcrPage) -> Result<(), ScanWeaveError> {
         // parent references: must exist, not self, no cycles
-        let ids: std::collections::HashSet<&str> =
-            page.spans.iter().map(|s| s.id.as_str()).collect();
+        let ids: std::collections::HashSet<&str> = page.spans.iter().map(|s| s.id.as_str()).collect();
         for span in &page.spans {
             if let Some(pid) = &span.parent_span_id {
                 if !ids.contains(pid.as_str()) {
@@ -559,10 +562,9 @@ impl<'a> Validator<'a> {
                 let mut steps = 0;
                 while steps <= page.spans.len() {
                     if cur == span.id {
-                        return Err(self.bad(format!(
-                            "span {}: parent reference cycle detected",
-                            span.id
-                        )));
+                        return Err(
+                            self.bad(format!("span {}: parent reference cycle detected", span.id))
+                        );
                     }
                     let parent = page.spans.iter().find(|s| s.id == cur);
                     match parent.and_then(|s| s.parent_span_id.as_deref()) {

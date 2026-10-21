@@ -1,0 +1,344 @@
+{
+  "baseline_main": "22881dc49c57b9eaf642d583ea5c46a1e80b4642",
+  "baseline_executable_sha256": "70e6799443ef223943df60d751212331d8e53cc8346ab6fc19b60ef70c53d157",
+  "targeted_keys": [
+    {
+      "key": "AaFbqrv5Df3ZA7hnTDt_",
+      "rule": "rust:S3776",
+      "impacts": "[{\"severity\": \"HIGH\", \"softwareQuality\": \"MAINTAINABILITY\"}]",
+      "file": "crates/scanweave-io/src/pdf.rs",
+      "baseline_line": "19",
+      "baseline_status": "OPEN",
+      "message": "Refactor this function to reduce its Cognitive Complexity from 31 to the 30 allowed.",
+      "wave": "2",
+      "disposition": "OPEN_PENDING_REVIEW",
+      "rationale": "Candidate for contained production decomposition; must demonstrate exact PDF/error equivalence before inclusion."
+    },
+    {
+      "key": "AaFbqrvpDf3ZA7hnTDt7",
+      "rule": "rust:S3776",
+      "impacts": "[{\"severity\": \"HIGH\", \"softwareQuality\": \"MAINTAINABILITY\"}]",
+      "file": "crates/scanweave-io/src/page_pdf.rs",
+      "baseline_line": "703",
+      "baseline_status": "OPEN",
+      "message": "Refactor this function to reduce its Cognitive Complexity from 32 to the 30 allowed.",
+      "wave": "2",
+      "disposition": "OPEN_PENDING_REVIEW",
+      "rationale": "Candidate for contained production decomposition; must demonstrate exact PDF/error equivalence before inclusion."
+    },
+    {
+      "key": "AaFbqrvuDf3ZA7hnTDt9",
+      "rule": "rust:S3776",
+      "impacts": "[{\"severity\": \"HIGH\", \"softwareQuality\": \"MAINTAINABILITY\"}]",
+      "file": "crates/scanweave-io/src/tonal_image.rs",
+      "baseline_line": "35",
+      "baseline_status": "OPEN",
+      "message": "Refactor this function to reduce its Cognitive Complexity from 31 to the 30 allowed.",
+      "wave": "2",
+      "disposition": "OPEN_PENDING_REVIEW",
+      "rationale": "Candidate for contained production decomposition; must demonstrate exact PDF/error equivalence before inclusion."
+    },
+    {
+      "key": "AaFbqrwMDf3ZA7hnTDuD",
+      "rule": "rust:S3776",
+      "impacts": "[{\"severity\": \"HIGH\", \"softwareQuality\": \"MAINTAINABILITY\"}]",
+      "file": "crates/scanweave-io/src/source_image.rs",
+      "baseline_line": "189",
+      "baseline_status": "OPEN",
+      "message": "Refactor this function to reduce its Cognitive Complexity from 31 to the 30 allowed.",
+      "wave": "2",
+      "disposition": "OPEN_PENDING_REVIEW",
+      "rationale": "Candidate for contained production decomposition; must demonstrate exact PDF/error equivalence before inclusion."
+    },
+    {
+      "key": "AaFbqrwVDf3ZA7hnTDuF",
+      "rule": "rust:S3776",
+      "impacts": "[{\"severity\": \"HIGH\", \"softwareQuality\": \"MAINTAINABILITY\"}]",
+      "file": "crates/scanweave-io/src/visual_dict.rs",
+      "baseline_line": "165",
+      "baseline_status": "OPEN",
+      "message": "Refactor this function to reduce its Cognitive Complexity from 31 to the 30 allowed.",
+      "wave": "2",
+      "disposition": "OPEN_PENDING_REVIEW",
+      "rationale": "Candidate for contained production decomposition; must demonstrate exact PDF/error equivalence before inclusion."
+    },
+    {
+      "key": "AaFbqrwrDf3ZA7hnTDuJ",
+      "rule": "rust:S2208",
+      "impacts": "[{\"severity\": \"HIGH\", \"softwareQuality\": \"MAINTAINABILITY\"}]",
+      "file": "crates/scanweave-io/src/convert.rs",
+      "baseline_line": "278",
+      "baseline_status": "OPEN",
+      "message": "Remove this wildcard import and import each name explicitly.",
+      "wave": "2",
+      "disposition": "OPEN_PENDING_REVIEW",
+      "rationale": "Candidate for contained production decomposition; must demonstrate exact PDF/error equivalence before inclusion."
+    },
+    {
+      "key": "AaFbqryBDf3ZA7hnTDuS",
+      "rule": "rust:S3776",
+      "impacts": "[{\"severity\": \"HIGH\", \"softwareQuality\": \"MAINTAINABILITY\"}]",
+      "file": "crates/scanweave-core/src/ocr_page.rs",
+      "baseline_line": "511",
+      "baseline_status": "OPEN",
+      "message": "Refactor this function to reduce its Cognitive Complexity from 41 to the 30 allowed.",
+      "wave": "2",
+      "disposition": "OPEN_PENDING_REVIEW",
+      "rationale": "Candidate for contained production decomposition; must demonstrate exact PDF/error equivalence before inclusion."
+    },
+    {
+      "key": "AaFbqryGDf3ZA7hnTDuU",
+      "rule": "rust:S3776",
+      "impacts": "[{\"severity\": \"HIGH\", \"softwareQuality\": \"MAINTAINABILITY\"}]",
+      "file": "crates/scanweave-core/src/json_util.rs",
+      "baseline_line": "222",
+      "baseline_status": "OPEN",
+      "message": "Refactor this function to reduce its Cognitive Complexity from 31 to the 30 allowed.",
+      "wave": "2",
+      "disposition": "OPEN_PENDING_REVIEW",
+      "rationale": "Candidate for contained production decomposition; must demonstrate exact PDF/error equivalence before inclusion."
+    },
+    {
+      "key": "AaFbqryNDf3ZA7hnTDuV",
+      "rule": "rust:S3776",
+      "impacts": "[{\"severity\": \"HIGH\", \"softwareQuality\": \"MAINTAINABILITY\"}]",
+      "file": "crates/scanweave-cli/src/pdf_input.rs",
+      "baseline_line": "48",
+      "baseline_status": "OPEN",
+      "message": "Refactor this function to reduce its Cognitive Complexity from 39 to the 30 allowed.",
+      "wave": "2",
+      "disposition": "OPEN_PENDING_REVIEW",
+      "rationale": "Candidate for contained production decomposition; must demonstrate exact PDF/error equivalence before inclusion."
+    }
+  ],
+  "baseline": {
+    "300-clearscan": {
+      "bytes": 185119,
+      "sha256": "927cd3a82dd136b989740c4cf5a168bfe4aff6236986e90c00faebbf5de4268d",
+      "seconds": 36.207479728007456,
+      "poppler_text_sha256": "59cc7eb6994c3cb34f6bf9101c7b2934214768a6a519e7de479f57a323deb14f",
+      "poppler": [
+        "e608f689b27a6e963c54976e64ad2fdfa08d0b9578b8ff0ebc9489f26dd01137",
+        "e8c3209cf60350a38a87df942ea81cb2e0b7ee06bb45d3ecea8bce9b74f6e35b",
+        "e4c8f6ce0f227e9e03abbd626e7c28b110769a9a2151c5f1d86ef29d77856ba9",
+        "33fc058d8e542bfb9d2a18116b87d42b72a3fa1df682616e468f45a2ac056017",
+        "925f845f5b5b77548b7c26aa559d99b7f8567847c19b695500cabb702a82de85",
+        "f2b18cd46a8235fc93befc1715fc7f6ae0af56c109cb55b09d284a20a08c2898",
+        "3e2b7ab5e83a0c807051ebaea6c742b3d5deb838ddc82401dc4eb22f5e15e048",
+        "45c33b8427217c623c64a7a92eed2d65b5e2b4558f1ec7348acbf81c81d716cb"
+      ],
+      "pdfium": [
+        "9d8ba5a68922c299507df6e41ce30164e945cb0ed9b0a4dc742a6abb99870351",
+        "b56c6df9a85667e0d589dee23d7f4db17638da6da7ec0d36c0b6dbcdb73c4e15",
+        "27d20af9187e486f1456ce5107d8bcf9140e1994ed5dfa15ce9e0982c7b26f8b",
+        "be14c319e54719122bcb49650ecdef3c197c8c43a52739544130ca981189cce8",
+        "613bc37395de6ab0947d531ff39116cce105e9f502a62b8627cf2279b785aa4c",
+        "ac4aa94797fe1ac9cb3a04313f65ba27364c9ace7003d45225997320f661b6e4",
+        "f9d2ca7bcd7601f6bbb54acfe640b3f992e0c7cda9c1503b1c4ccc49dfe12711",
+        "97a1af9edfac2a6c79be872d9f5f39d726c581e341cf68d5fe56bf1c08b1f8fd"
+      ],
+      "pdfium_text_sha256": "516f1f35745b24cbce333d169e49c0a0b6e2a6c0f34c4f798513f26789df0cda"
+    },
+    "300-faithful": {
+      "bytes": 383603,
+      "sha256": "d5adc25097c5e67109dc3fa7256c6fc9f228128915201b9917ee139e7e9e6b93",
+      "seconds": 2.466488717996981,
+      "poppler_text_sha256": "93e8f765bea4f9d6d693d9fce4edb4a95e06c07388118d0d19372002c91eaf4a",
+      "poppler": [
+        "0973415a9aa8cfffbfe82731125fe37c60aa6c0347d283d5298096009d71402e",
+        "6628595a7945a02898ce77d5df0bf71641ee6ac9a23c7cd9a4af3260c9ea0ac4",
+        "8ca9a38a03edfd380478dc27d991836c96c2462c921a0e0474f139aa552875ac",
+        "ad9895c9cffe2b531b1c75d098e810aa7e45cbd7e416a7ef4b5e78a5d6068cff",
+        "f4a43e4f4ec709c0abae778a308fa0387a5b5bf48691882c487ac35bdb0dc5d0",
+        "ae6d34d3f45f65de7b66d91c18e7bdc86ab4284ebb5dd1f2bd794d61979fa205",
+        "707b687e8219890d0103efae083123e1ed16c0832ee84ad739f4b9c2e1c4cdd2",
+        "b24f73d9274891a26a799e050e41950490ca6d0d06a5c36d67d3259ca434b501"
+      ],
+      "pdfium": [
+        "8c2d195b91aa680d7b87a3e1d12a7363d5f03dfdaa373434bb3d71d7cc45b4a4",
+        "975864854b66b9ca2fdb7a24ba61ad2e64ddeeb88413655dba189b1a2b73ff6e",
+        "eb6b87cbf31cb6e81e69f2b04d689469769a5b9a3e4a80a49e001c2adacb5f0d",
+        "c860f6cbaac799d8c911f3d8ace5160b668d822771078108aea5a2d2c4b4f4df",
+        "5439e67a003ead728c9bd75b618dee8bba3086863a06623f1fd6130ba64cc9e2",
+        "c91e284f43de5ceb2f8c3f677b6dcf6911b5358c8b5cce68d8c89190e2cdec3b",
+        "905e8c004b70bbf9652710aec89ffaba93c56c5faa0e081655ae160a87418937",
+        "a0fafbc4ca837ccf80acf162cb6920589e1595a6631bce153820cf344e9d3d61"
+      ],
+      "pdfium_text_sha256": "5ea37b5ef89440e58a1aa2e53eff8338d112f78c99286cc2bf59cd10f1a8ebb7"
+    },
+    "600-clearscan": {
+      "bytes": 258720,
+      "sha256": "b497c6d3646d121e19df5f7672aa68e4b8bead9a4f9cb2f2f6e91703f2b7a79d",
+      "seconds": 82.4086393849866,
+      "poppler_text_sha256": "f3847f84154c19f4984fe6c04a4759e0c461108aa087164af3cde5cedeb64a1a",
+      "poppler": [
+        "df80e6b75c8009b730161ac367642c7c32014580e7b8efbe18d597a7eff16769",
+        "08e4b038374dc9b5538b4f41a9fca2ed6ec7077121a24388fa64ffc50c611b34",
+        "f69d3cd10dff9fccea025cd54b490e2a2dced2722769a3950a494ea4d399655f",
+        "e2c5cf5a0b996cee4525fe9aa4a7bb5ba3508d2ce061741f9954e983e40e3414",
+        "236d793a39eaca0c419f24368f2524bf4f7e242315d328636e86972afc719f25",
+        "07049d370591f4d802d69b3805ab28a50c8166e36e6d510e38134b8a94fa4046",
+        "34de6d64d0babed42a38c0bee4e40bbe9ed38a053a7bf26e0273804219665aea",
+        "d41df316ad02c9f0651c00a3c468f5e40ef6277d3944c8e32fcc731517c23366"
+      ],
+      "pdfium": [
+        "4980af1fb3d00b728c998a8d2dbb9290baae1e019cf24360a18406d74d241d1d",
+        "2af423422cdf01035523c48316ebf469a32f10993f25829bbc87d663c9b55681",
+        "933776e71a1bff54e9becfe28ec113a80541fa2f7a29595e9884d1b5cba512c4",
+        "03fe296dfcc6cdb1d8f48958ffa774baa8690e29c61939f5b473efffd05cb893",
+        "49f93953a59f69f1a4a2e207451c6d1221493063e6ab76ac7637c2fa8c40fabc",
+        "b2e04ad75e0d1b5875375fe3286cb08ea67b612310fb9924d06dcd67aed491f7",
+        "5c767709589d631caf374c9228e16dad5dfdae6d9b0f260d5dcaa997b4b58f34",
+        "8f111c381472a8c8ab0bded74b50ebc7c0567cc928e67f4c514b656ecab5b7c1"
+      ],
+      "pdfium_text_sha256": "1f5aa7e7acecfc0addd0db02a8aab7b920d1aec60e7c6e26920811457a1a3b57"
+    },
+    "600-faithful": {
+      "bytes": 577922,
+      "sha256": "8523cf3f97e5402b8068a582818216d1fbd5b7c3aa98e9b7ae995983840415a5",
+      "seconds": 7.678421423013788,
+      "poppler_text_sha256": "ec81e398575e7f32c06e24d358382fb89c7b3c64847c9ec4b6a57bf58e469b32",
+      "poppler": [
+        "3f595f9271464d043831da0ab60dc0806a9888d24a067108935e48f5e1cc2aeb",
+        "9c10774a8a415bfd81dc6cdef074d377ea692ee361d44d96aa8dc09984cbf371",
+        "92f50ae5e9bab6c1ae440de8055d91dcd0782909c7ae9c6b09e794e7f741602d",
+        "b056dec78687ce003224f779905be51a6b1a0c19824e5ee85e696c406f2911c5",
+        "3ddb19cb8f2ec11dc1e4e3054d01be821d86cc20043e5799e65c378d52ca3cd2",
+        "ecd6b13e33032a9c125ac31bb3b8c7aae02898e879c3e98e987d87a7965f1d5a",
+        "285969ffec818fa5fd81f13b2b915c76f03fcf177ceb80764701b7d153ad417a",
+        "7896c08dec16c1c0fb8cdf0cc699b836a58fe25d4dd05a33d1aff068817a2c36"
+      ],
+      "pdfium": [
+        "62385298a293a63ae78a7e8ec8d660de167330d8f9b3caa4119460b138f3e516",
+        "80aba17abcf6b5ef7a2892b3923a204c8173784298f67db933acd70f3d369b94",
+        "4f7043bb226ac2e36cde5e3ea7e434ca29669fbd1d844324eb645cfc4af3bc12",
+        "f268c5b527ab7bd086250ef002061d54619b03b2b34072ec709672a8ad3bd00b",
+        "ec84c4a4ffb3faf0b93b8cc1f40c720895469ff8d2f7bf862824ed8407fad1bc",
+        "29997368d099dc0c083aed2b3ace8eea6ce6c4f14ffc06e7a2602a58c2d87f10",
+        "a6b2813dd0203f919ab870a95dc3653a7b7435bb19288a4045405656c40f9b0f",
+        "1e616a9352df4461fc9461fc9c83903ad8a5ade201898c3effdaf8813dc898ea"
+      ],
+      "pdfium_text_sha256": "abc5fc0e98bd04b6c7b0ef312e735f733d204a114baf102e2698b43b8def767c"
+    }
+  },
+  "candidate": {
+    "300-clearscan": {
+      "bytes": 185119,
+      "sha256": "927cd3a82dd136b989740c4cf5a168bfe4aff6236986e90c00faebbf5de4268d",
+      "seconds": 35.94145285102422,
+      "poppler_text_sha256": "59cc7eb6994c3cb34f6bf9101c7b2934214768a6a519e7de479f57a323deb14f",
+      "poppler": [
+        "e608f689b27a6e963c54976e64ad2fdfa08d0b9578b8ff0ebc9489f26dd01137",
+        "e8c3209cf60350a38a87df942ea81cb2e0b7ee06bb45d3ecea8bce9b74f6e35b",
+        "e4c8f6ce0f227e9e03abbd626e7c28b110769a9a2151c5f1d86ef29d77856ba9",
+        "33fc058d8e542bfb9d2a18116b87d42b72a3fa1df682616e468f45a2ac056017",
+        "925f845f5b5b77548b7c26aa559d99b7f8567847c19b695500cabb702a82de85",
+        "f2b18cd46a8235fc93befc1715fc7f6ae0af56c109cb55b09d284a20a08c2898",
+        "3e2b7ab5e83a0c807051ebaea6c742b3d5deb838ddc82401dc4eb22f5e15e048",
+        "45c33b8427217c623c64a7a92eed2d65b5e2b4558f1ec7348acbf81c81d716cb"
+      ],
+      "pdfium": [
+        "9d8ba5a68922c299507df6e41ce30164e945cb0ed9b0a4dc742a6abb99870351",
+        "b56c6df9a85667e0d589dee23d7f4db17638da6da7ec0d36c0b6dbcdb73c4e15",
+        "27d20af9187e486f1456ce5107d8bcf9140e1994ed5dfa15ce9e0982c7b26f8b",
+        "be14c319e54719122bcb49650ecdef3c197c8c43a52739544130ca981189cce8",
+        "613bc37395de6ab0947d531ff39116cce105e9f502a62b8627cf2279b785aa4c",
+        "ac4aa94797fe1ac9cb3a04313f65ba27364c9ace7003d45225997320f661b6e4",
+        "f9d2ca7bcd7601f6bbb54acfe640b3f992e0c7cda9c1503b1c4ccc49dfe12711",
+        "97a1af9edfac2a6c79be872d9f5f39d726c581e341cf68d5fe56bf1c08b1f8fd"
+      ],
+      "pdfium_text_sha256": "516f1f35745b24cbce333d169e49c0a0b6e2a6c0f34c4f798513f26789df0cda"
+    },
+    "300-faithful": {
+      "bytes": 383603,
+      "sha256": "d5adc25097c5e67109dc3fa7256c6fc9f228128915201b9917ee139e7e9e6b93",
+      "seconds": 2.3175516610208433,
+      "poppler_text_sha256": "93e8f765bea4f9d6d693d9fce4edb4a95e06c07388118d0d19372002c91eaf4a",
+      "poppler": [
+        "0973415a9aa8cfffbfe82731125fe37c60aa6c0347d283d5298096009d71402e",
+        "6628595a7945a02898ce77d5df0bf71641ee6ac9a23c7cd9a4af3260c9ea0ac4",
+        "8ca9a38a03edfd380478dc27d991836c96c2462c921a0e0474f139aa552875ac",
+        "ad9895c9cffe2b531b1c75d098e810aa7e45cbd7e416a7ef4b5e78a5d6068cff",
+        "f4a43e4f4ec709c0abae778a308fa0387a5b5bf48691882c487ac35bdb0dc5d0",
+        "ae6d34d3f45f65de7b66d91c18e7bdc86ab4284ebb5dd1f2bd794d61979fa205",
+        "707b687e8219890d0103efae083123e1ed16c0832ee84ad739f4b9c2e1c4cdd2",
+        "b24f73d9274891a26a799e050e41950490ca6d0d06a5c36d67d3259ca434b501"
+      ],
+      "pdfium": [
+        "8c2d195b91aa680d7b87a3e1d12a7363d5f03dfdaa373434bb3d71d7cc45b4a4",
+        "975864854b66b9ca2fdb7a24ba61ad2e64ddeeb88413655dba189b1a2b73ff6e",
+        "eb6b87cbf31cb6e81e69f2b04d689469769a5b9a3e4a80a49e001c2adacb5f0d",
+        "c860f6cbaac799d8c911f3d8ace5160b668d822771078108aea5a2d2c4b4f4df",
+        "5439e67a003ead728c9bd75b618dee8bba3086863a06623f1fd6130ba64cc9e2",
+        "c91e284f43de5ceb2f8c3f677b6dcf6911b5358c8b5cce68d8c89190e2cdec3b",
+        "905e8c004b70bbf9652710aec89ffaba93c56c5faa0e081655ae160a87418937",
+        "a0fafbc4ca837ccf80acf162cb6920589e1595a6631bce153820cf344e9d3d61"
+      ],
+      "pdfium_text_sha256": "5ea37b5ef89440e58a1aa2e53eff8338d112f78c99286cc2bf59cd10f1a8ebb7"
+    },
+    "600-clearscan": {
+      "bytes": 258720,
+      "sha256": "b497c6d3646d121e19df5f7672aa68e4b8bead9a4f9cb2f2f6e91703f2b7a79d",
+      "seconds": 83.68701037700521,
+      "poppler_text_sha256": "f3847f84154c19f4984fe6c04a4759e0c461108aa087164af3cde5cedeb64a1a",
+      "poppler": [
+        "df80e6b75c8009b730161ac367642c7c32014580e7b8efbe18d597a7eff16769",
+        "08e4b038374dc9b5538b4f41a9fca2ed6ec7077121a24388fa64ffc50c611b34",
+        "f69d3cd10dff9fccea025cd54b490e2a2dced2722769a3950a494ea4d399655f",
+        "e2c5cf5a0b996cee4525fe9aa4a7bb5ba3508d2ce061741f9954e983e40e3414",
+        "236d793a39eaca0c419f24368f2524bf4f7e242315d328636e86972afc719f25",
+        "07049d370591f4d802d69b3805ab28a50c8166e36e6d510e38134b8a94fa4046",
+        "34de6d64d0babed42a38c0bee4e40bbe9ed38a053a7bf26e0273804219665aea",
+        "d41df316ad02c9f0651c00a3c468f5e40ef6277d3944c8e32fcc731517c23366"
+      ],
+      "pdfium": [
+        "4980af1fb3d00b728c998a8d2dbb9290baae1e019cf24360a18406d74d241d1d",
+        "2af423422cdf01035523c48316ebf469a32f10993f25829bbc87d663c9b55681",
+        "933776e71a1bff54e9becfe28ec113a80541fa2f7a29595e9884d1b5cba512c4",
+        "03fe296dfcc6cdb1d8f48958ffa774baa8690e29c61939f5b473efffd05cb893",
+        "49f93953a59f69f1a4a2e207451c6d1221493063e6ab76ac7637c2fa8c40fabc",
+        "b2e04ad75e0d1b5875375fe3286cb08ea67b612310fb9924d06dcd67aed491f7",
+        "5c767709589d631caf374c9228e16dad5dfdae6d9b0f260d5dcaa997b4b58f34",
+        "8f111c381472a8c8ab0bded74b50ebc7c0567cc928e67f4c514b656ecab5b7c1"
+      ],
+      "pdfium_text_sha256": "1f5aa7e7acecfc0addd0db02a8aab7b920d1aec60e7c6e26920811457a1a3b57"
+    },
+    "600-faithful": {
+      "bytes": 577922,
+      "sha256": "8523cf3f97e5402b8068a582818216d1fbd5b7c3aa98e9b7ae995983840415a5",
+      "seconds": 7.540065723005682,
+      "poppler_text_sha256": "ec81e398575e7f32c06e24d358382fb89c7b3c64847c9ec4b6a57bf58e469b32",
+      "poppler": [
+        "3f595f9271464d043831da0ab60dc0806a9888d24a067108935e48f5e1cc2aeb",
+        "9c10774a8a415bfd81dc6cdef074d377ea692ee361d44d96aa8dc09984cbf371",
+        "92f50ae5e9bab6c1ae440de8055d91dcd0782909c7ae9c6b09e794e7f741602d",
+        "b056dec78687ce003224f779905be51a6b1a0c19824e5ee85e696c406f2911c5",
+        "3ddb19cb8f2ec11dc1e4e3054d01be821d86cc20043e5799e65c378d52ca3cd2",
+        "ecd6b13e33032a9c125ac31bb3b8c7aae02898e879c3e98e987d87a7965f1d5a",
+        "285969ffec818fa5fd81f13b2b915c76f03fcf177ceb80764701b7d153ad417a",
+        "7896c08dec16c1c0fb8cdf0cc699b836a58fe25d4dd05a33d1aff068817a2c36"
+      ],
+      "pdfium": [
+        "62385298a293a63ae78a7e8ec8d660de167330d8f9b3caa4119460b138f3e516",
+        "80aba17abcf6b5ef7a2892b3923a204c8173784298f67db933acd70f3d369b94",
+        "4f7043bb226ac2e36cde5e3ea7e434ca29669fbd1d844324eb645cfc4af3bc12",
+        "f268c5b527ab7bd086250ef002061d54619b03b2b34072ec709672a8ad3bd00b",
+        "ec84c4a4ffb3faf0b93b8cc1f40c720895469ff8d2f7bf862824ed8407fad1bc",
+        "29997368d099dc0c083aed2b3ace8eea6ce6c4f14ffc06e7a2602a58c2d87f10",
+        "a6b2813dd0203f919ab870a95dc3653a7b7435bb19288a4045405656c40f9b0f",
+        "1e616a9352df4461fc9461fc9c83903ad8a5ade201898c3effdaf8813dc898ea"
+      ],
+      "pdfium_text_sha256": "abc5fc0e98bd04b6c7b0ef312e735f733d204a114baf102e2698b43b8def767c"
+    }
+  },
+  "parser_differential": {
+    "inputs": 25210,
+    "private_rebuild_panics_preserved": 8,
+    "differences": 0
+  },
+  "fixtures": {
+    "dpi300/document.json": "f40c21503b98804ca0c8584dec4a9b39a3e382f1ece6013b88fce305adce8b33",
+    "dpi600/document.json": "92e85c8ac3693ca61fee1576dbca1799f0aeacb8608e6d90c5e4b0cef80cdadb"
+  },
+  "status": "LOCAL_PDF_EQUALITY_CONFIRMED_CI_AND_REVIEW_PENDING"
+}
