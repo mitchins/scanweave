@@ -15,7 +15,9 @@ class Pen(BasePen):
  def _qCurveToOne(self,a,b):
   p=self._getCurrentPoint();self._curveToOne(tuple((p[i]+2*a[i])/3 for i in range(2)),tuple((b[i]+2*a[i])/3 for i in range(2)),b)
  def _closePath(self):self.add('h')
- def _endPath(self):pass
+ def _endPath(self):
+  # Open contours need no operator: the eventual PDF fill implicitly closes them.
+  pass
 src=Path(sys.argv[1]);dst=Path(sys.argv[2]);pdf=pikepdf.open(src);cache={}
 for pg in pdf.pages:
  ops=[];pending=[];mat=[1,0,0,1,0,0];mode=0;size=1;color='0 g';fname=None

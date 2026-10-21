@@ -14,6 +14,9 @@ from PIL import Image
 from fontTools.ttLib import TTFont
 from fontTools.pens.basePen import BasePen
 
+PDF_OBJECT_STREAM_RE = b' 0 obj\\s*<<(.*?)>>\\s*stream\\n(.*?)\\nendstream'
+
+
 ROOT=Path(__file__).resolve().parents[3]
 BASE=ROOT/"qualification/experiments/m1g/fixture/dpi300"
 OUT=ROOT/"qualification/experiments/m1gx/300"
@@ -109,7 +112,7 @@ def extract_embedded_font(pdf_path):
     subprocess.run([qpdf_bin(),"--qdf","--object-streams=disable",str(pdf_path),str(qdf)],env=qpdf_env(),check=True,stdout=subprocess.PIPE,stderr=subprocess.PIPE)
     data=qdf.read_bytes(); m=re.search(rb'/FontFile2\s+(\d+)\s+0\s+R',data)
     if not m: raise RuntimeError("frozen M1-G PDF has no embedded TrueType font")
-    n=m.group(1); obj=re.search(rb'\n'+n+rb' 0 obj\s*<<(.*?)>>\s*stream\n(.*?)\nendstream',data,re.S)
+    n=m.group(1); obj=re.search(rb'\n'+n+PDF_OBJECT_STREAM_RE,data,re.S)
     if not obj: raise RuntimeError("cannot extract M1-G FontFile2 stream")
     font=TTFont(BytesIO(obj.group(2))); qdf_data=data; qdf.unlink(); return font,qdf_data
 
@@ -117,14 +120,14 @@ def extracted_occurrence_mappings(qdf_data,report,obs,occs):
     import re
     fontref=re.search(rb'/CIDToGIDMap\s+(\d+)\s+0\s+R',qdf_data)
     if not fontref: raise RuntimeError("M1-G CIDToGIDMap missing")
-    n=fontref.group(1); obj=re.search(rb'\n'+n+rb' 0 obj\s*<<(.*?)>>\s*stream\n(.*?)\nendstream',qdf_data,re.S)
+    n=fontref.group(1); obj=re.search(rb'\n'+n+PDF_OBJECT_STREAM_RE,qdf_data,re.S)
     cmap=obj.group(2)
     def unescape_pdf_string(raw): return raw[1:-1].replace(b'\\(',b'(').replace(b'\\)',b')').replace(b'\\\\',b'\\').decode('utf-8','replace')
     matrices={}; occurrence_gids={}; proto_gids={}
     page_sections=re.findall(rb'%% Page \d+\n(.*?)endobj',qdf_data,re.S)
     if len(page_sections)!=len(report["page_reports"]): raise RuntimeError("qdf page count does not match report")
     for pi,(pr,section) in enumerate(zip(report["page_reports"],page_sections)):
-        cref=re.search(rb'/Contents\s+(\d+)',section); cobj=re.search(rb'\n'+cref.group(1)+rb' 0 obj\s*<<(.*?)>>\s*stream\n(.*?)\nendstream',qdf_data,re.S)
+        cref=re.search(rb'/Contents\s+(\d+)',section); cobj=re.search(rb'\n'+cref.group(1)+PDF_OBJECT_STREAM_RE,qdf_data,re.S)
         blocks=re.findall(rb'/Span\s*<<\s*/ActualText\s+(.*?)\s*>>\s*BDC(.*?)EMC',cobj.group(2),re.S)
         decoded=[]
         for actual,body in blocks:

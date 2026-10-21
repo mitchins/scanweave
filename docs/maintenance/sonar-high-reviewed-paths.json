@@ -214,5 +214,14 @@
     "scope": "pullRequest:10",
     "analysis_revision": "45bb54bc323066bc669e13a06e90a3ad6cbafa66",
     "reason": "The destination is exactly the deliberately arbitrary operator-selected --out plus fixed diagnostic_full.json. Neither tag nor report data enters the filename. The filename-only tag contract is separately enforced before generated per-run output. Independently traced by containment_patch_review and reconciled with parent source review after server analysis. No claim of protection against concurrent malicious output-path/symlink mutation."
+  },
+  {
+    "key": "AaFbZj2c2TNSduKvuGwI",
+    "rule": "pythonsecurity:S8707",
+    "file": "qualification/experiments/m1c_r3/diagnostic.py",
+    "line": 195,
+    "scope": "original-55-key-cohort",
+    "verified_issue_status": "FALSE_POSITIVE",
+    "reason": "Operator-approved FALSE_POSITIVE, verified by fresh Sonar API read after PR #10 merge. Actual flow: parse_args -> args.out -> run(outdir) -> join(outdir, validated tag) -> makedirs. The explicitly operator-selected --out is an authorized arbitrary destination; no lower-trust value crosses an unauthorized boundary. Separate filename-only --tag hardening is genuine but this key was not evidence of that defect. Applies only to the current operator-controlled CLI, not future service/LLM wrappers or concurrent malicious symlink replacement. Closure: https://github.com/mitchins/scanweave/pull/10#issuecomment-6306990400"
   }
 ]

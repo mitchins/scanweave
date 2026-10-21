@@ -3,8 +3,11 @@ import json,io
 from pathlib import Path
 import pikepdf
 from fontTools.ttLib import TTFont
+
+PDF_GLOB = '*.pdf'
+
 B=Path(__file__).resolve().parent;out=[]
-for path in list((B/'collections').glob('*.pdf'))+list((B/'baseline-collections').glob('*.pdf'))+list((B/'300').glob('final.pdf'))+list((B/'600').glob('final.pdf'))+list((B/'control-runs').glob('*.pdf')):
+for path in list((B/'collections').glob(PDF_GLOB))+list((B/'baseline-collections').glob(PDF_GLOB))+list((B/'300').glob('final.pdf'))+list((B/'600').glob('final.pdf'))+list((B/'control-runs').glob(PDF_GLOB)):
  q=pikepdf.open(path);painted=set();uses=0;fonts={};page_rows=[]
  for page in q.pages:
   page_start=uses;page_set=set();font=None;mode=0

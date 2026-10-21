@@ -13,6 +13,10 @@ import numpy as np
 from PIL import Image
 import pypdfium2 as pdfium
 
+VECTOR_ONLY_PDF = 'stages/S4-vector-only.pdf'
+COMPETITIVE_PDF = 'qualification/clearscan_competitive/300/clearscan.pdf'
+
+
 ROOT = Path(__file__).resolve().parents[3]
 BASE = ROOT / "qualification/clearscan_competitive/300/final"
 ORACLE = ROOT / "qualification/experiments/m1g/fixture/dpi300/oracle"
@@ -20,7 +24,7 @@ SOURCE = ROOT / "qualification/experiments/m1g/fixture/dpi300/input"
 STAGES = json.loads((BASE / "stages/stage-errors.json").read_text())['occurrences']
 OUT = Path(__file__).resolve().parent
 POP_TEMP = Path(tempfile.mkdtemp(prefix='scanweave-comp-poppler-'))
-for label,path in [('S4',BASE/'stages/S4-vector-only.pdf'),('S5',ROOT/'qualification/clearscan_competitive/300/clearscan.pdf')]:
+for label,path in [('S4',BASE/VECTOR_ONLY_PDF),('S5',ROOT/COMPETITIVE_PDF)]:
     subprocess.run(['pdftoppm','-r','300','-png','-gray',str(path),str(POP_TEMP/label)],check=True,stdout=subprocess.DEVNULL,stderr=subprocess.DEVNULL)
 
 def gray(path):
@@ -37,8 +41,8 @@ def sha(path):
 
 rows = []
 pdfs = {
- 'S4': pdfium.PdfDocument(str(BASE/'stages/S4-vector-only.pdf')),
- 'S5': pdfium.PdfDocument(str(ROOT/'qualification/clearscan_competitive/300/clearscan.pdf')),
+ 'S4': pdfium.PdfDocument(str(BASE/VECTOR_ONLY_PDF)),
+ 'S5': pdfium.PdfDocument(str(ROOT/COMPETITIVE_PDF)),
  'raster_only': pdfium.PdfDocument(str(BASE/'raster-only.pdf')),
 }
 for page in range(8):
@@ -110,8 +114,8 @@ def summarize(items):
 
 result={
  'inputs':{
-  'S4_pdf_sha256':sha(BASE/'stages/S4-vector-only.pdf'),
-  'S5_pdf_sha256':sha(ROOT/'qualification/clearscan_competitive/300/clearscan.pdf'),
+  'S4_pdf_sha256':sha(BASE/VECTOR_ONLY_PDF),
+  'S5_pdf_sha256':sha(ROOT/COMPETITIVE_PDF),
   'raster_only_pdf_sha256':sha(BASE/'raster-only.pdf'),
   'render_command':'PDFium scale=nextafter(300/72,0); cross-check Poppler pdftoppm -r 300', 'threshold':170,
   'crop':'pristine truth bbox inset 5 px (benchmark isolated glyph crop)',

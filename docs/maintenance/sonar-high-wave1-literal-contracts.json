@@ -1,0 +1,212 @@
+[
+  {
+    "file": "qualification/tonal_raster/compare.py",
+    "constants": {
+      "COMPARISON_JSON": "comparison.json"
+    },
+    "literal_replacement_ast_equivalent": true,
+    "baseline_source_sha256": "58c355031db97dcebcbaf5874d4792e4d8b98729ec2d83f44659ccbbc8e801bf"
+  },
+  {
+    "file": "qualification/tonal_raster/outline_inventory.py",
+    "constants": {
+      "PDF_GLOB": "*.pdf"
+    },
+    "literal_replacement_ast_equivalent": true,
+    "baseline_source_sha256": "e6f507d1da907f5c148c63f54d78b978afd66859e14ceef10a0304e3e9b0cf4e"
+  },
+  {
+    "file": "qualification/tonal_raster/verify_results.py",
+    "constants": {
+      "PDF_GLOB": "*.pdf"
+    },
+    "literal_replacement_ast_equivalent": true,
+    "baseline_source_sha256": "d778c8be918d187ebcef358f94ff532a0361a1d16f3fdfa6c89b2d3945ab2786"
+  },
+  {
+    "file": "qualification/real_convergence/package_results.py",
+    "constants": {
+      "PDF_GLOB": "*.pdf"
+    },
+    "literal_replacement_ast_equivalent": true,
+    "baseline_source_sha256": "c473c5c2fc6f6891f8e7ce0842665fadd7a3a6422f045ceeba8bd0a161f66a52"
+  },
+  {
+    "file": "qualification/pdf_packaging/mask_control.py",
+    "constants": {
+      "MASK_PDF": "mask.pdf"
+    },
+    "literal_replacement_ast_equivalent": true,
+    "baseline_source_sha256": "1c45951297c6d80b30ff3e5085d9d6096bd27d9a8c30b7988f5f7e0d8db663ec"
+  },
+  {
+    "file": "qualification/pdf_packaging/prepare_corpus.py",
+    "constants": {
+      "NATIVE_PDF_GEOMETRY": "PDF native physical geometry",
+      "LINN_SOURCE_PDF": "c03-29.pdf"
+    },
+    "literal_replacement_ast_equivalent": true,
+    "baseline_source_sha256": "ba709dbe9e7dc9f5da078452097e3cd45fc8e61981865fb93aed66116788f16b"
+  },
+  {
+    "file": "qualification/clearscan_background/hard_negative.py",
+    "constants": {
+      "PAGE_IMAGE": "page00.png",
+      "DOCUMENT_JSON": "document.json",
+      "PAGE_OCR_JSON": "page00.ocr.json",
+      "FINAL_PDF": "final.pdf"
+    },
+    "literal_replacement_ast_equivalent": true,
+    "baseline_source_sha256": "a0d24a3cf2067e218b06cc2995c263d0e6b8cd47f0d64f5374064f93a982c6ff"
+  },
+  {
+    "file": "qualification/clearscan_background/hard_negative_audit.py",
+    "constants": {
+      "POPPLER_IMAGE": "poppler.png"
+    },
+    "literal_replacement_ast_equivalent": true,
+    "baseline_source_sha256": "2f4edec01775d146c7a7902ccf5943034d731d3653f8e34ce6a4e45de76224c2"
+  },
+  {
+    "file": "qualification/clearscan_background/run.py",
+    "constants": {
+      "FINAL_PDF": "final.pdf",
+      "FINAL_JSON": "final.json"
+    },
+    "literal_replacement_ast_equivalent": true,
+    "baseline_source_sha256": "1c8c179ddf2fb616cc9f9995befe74c09042d92fd5bdadeda28f647ff81cf119"
+  },
+  {
+    "file": "qualification/clearscan_background/zooms.py",
+    "constants": {
+      "FINAL_PDF": "final.pdf"
+    },
+    "literal_replacement_ast_equivalent": true,
+    "baseline_source_sha256": "9618d9a4107a60e11a8b839a1c88d9a56d5c409d487d63fddd6823633046d02d"
+  },
+  {
+    "file": "qualification/clearscan_contours/run.py",
+    "constants": {
+      "FINAL_PDF": "final.pdf",
+      "FINAL_JSON": "final.json"
+    },
+    "literal_replacement_ast_equivalent": true,
+    "baseline_source_sha256": "7aa9818f8105c5383e7f28d474348403b92c87334500ccc0a4e8390a0c1b3308"
+  },
+  {
+    "file": "qualification/clearscan_contours/zooms.py",
+    "constants": {
+      "FINAL_PDF": "final.pdf"
+    },
+    "literal_replacement_ast_equivalent": true,
+    "baseline_source_sha256": "9618d9a4107a60e11a8b839a1c88d9a56d5c409d487d63fddd6823633046d02d"
+  },
+  {
+    "file": "qualification/clearscan_typography/composition-review/paired_pixels.py",
+    "constants": {
+      "VECTOR_ONLY_PDF": "stages/S4-vector-only.pdf",
+      "COMPETITIVE_PDF": "qualification/clearscan_competitive/300/clearscan.pdf"
+    },
+    "literal_replacement_ast_equivalent": true,
+    "baseline_source_sha256": "bb5531edf0fe92a4a342b5d98b884366f2586db7faad74bf5d56e3cbf3297b61"
+  },
+  {
+    "file": "qualification/clearscan_typography/manifest.py",
+    "constants": {
+      "DOCUMENT_JSON": "document.json"
+    },
+    "literal_replacement_ast_equivalent": true,
+    "baseline_source_sha256": "5f60b2709389a7cccead2ab2f07e936ef6f58570ab22641c4252b7f7084e019c"
+  },
+  {
+    "file": "qualification/clearscan_typography/package.py",
+    "constants": {
+      "JSON_SUFFIX": ".json",
+      "METRICS_JSON": "metrics.json"
+    },
+    "literal_replacement_ast_equivalent": true,
+    "baseline_source_sha256": "2823a88982453019c5e45f0e08a5214a66f1bfbf1b90fd9ee254511ca75af7d5"
+  },
+  {
+    "file": "qualification/clearscan_typography/run.py",
+    "constants": {
+      "FINAL_PDF": "final.pdf",
+      "FINAL_JSON": "final.json"
+    },
+    "literal_replacement_ast_equivalent": true,
+    "baseline_source_sha256": "15badde5ed729586ede191032a4a55870513cf2e4bef68d38c5e6de6ee092bec"
+  },
+  {
+    "file": "qualification/experiments/m1gx/trial.py",
+    "constants": {
+      "PDF_OBJECT_STREAM_RE": {
+        "bytes_hex": "2030206f626a5c732a3c3c282e2a3f293e3e5c732a73747265616d5c6e282e2a3f295c6e656e6473747265616d"
+      }
+    },
+    "literal_replacement_ast_equivalent": true,
+    "baseline_source_sha256": "a6959c43567ae6da181892ada235b1d0dbdef8f10b81fdd5b98f25efddefd19f"
+  },
+  {
+    "file": "qualification/diagnose_m1d5_fallback.py",
+    "constants": {
+      "CLEARSCAN_PDF": "clearscan.pdf"
+    },
+    "literal_replacement_ast_equivalent": true,
+    "baseline_source_sha256": "54a01842c26be608f84782e9576a974cbfd770f299412db491b6b9522b51e50c"
+  },
+  {
+    "file": "qualification/evaluate_m1d_document.py",
+    "constants": {
+      "CLEARSCAN_PDF": "clearscan.pdf",
+      "FAITHFUL_PDF": "faithful.pdf",
+      "TRUTH_PDF": "truth.pdf",
+      "DOCUMENT_DONOR_PREFIX": "__doc_donor:",
+      "FONT_TTF": "font.ttf"
+    },
+    "literal_replacement_ast_equivalent": true,
+    "baseline_source_sha256": "a11cfffbeed5218ac985e6d89131b9c72f69ad50275feb8f976db2ecd394b324"
+  },
+  {
+    "file": "qualification/evaluate_m1d_reconstruction.py",
+    "constants": {
+      "FONT_TTF": "font.ttf"
+    },
+    "literal_replacement_ast_equivalent": true,
+    "baseline_source_sha256": "1c90ab1b38fe63fd018828416081257a34ce4c29cdb874622feed5a2bf00b4f6"
+  },
+  {
+    "file": "qualification/n1_experiments.py",
+    "constants": {
+      "PAGE_TEXT_START": "BT /F1 11 Tf",
+      "PAGE_LABEL": "1 0 0 1 72 700 Tm (Page) Tj",
+      "PAGE_NUMBER_ONE": "1 0 0 1 116 700 Tm (1) Tj",
+      "PAGE_OF": "1 0 0 1 130 700 Tm (of) Tj",
+      "PAGE_COUNT": "1 0 0 1 190 700 Tm (4.) Tj"
+    },
+    "literal_replacement_ast_equivalent": true,
+    "baseline_source_sha256": "b32e421d62c1da2dc19b10f77aa52554cb440cfd32d30de6b965d033b714c67f"
+  },
+  {
+    "file": "qualification/measure.py",
+    "constants": {
+      "OUTPUT_PDF": "out.pdf",
+      "OCRMY_PDF": "ocrm.pdf",
+      "ARCHIVE_PDF": "ia.pdf",
+      "RASTER_BASELINE_PDF": "b0_raster.pdf",
+      "INPUT_PDF": "input.pdf"
+    },
+    "literal_replacement_ast_equivalent": true,
+    "baseline_source_sha256": "aeeee9b65296be9fd5e47abcf5f71dd330f44c81f1a6b3a6602ab2d254ae3e15"
+  },
+  {
+    "file": "qualification/checks.py",
+    "constants": {
+      "FIXTURE_NOT_RUN": "NOT_RUN (fixture page not in run)",
+      "TRACE_LOG_JSON": "trace_log.json",
+      "OUTPUT_PDF": "out.pdf",
+      "OUTPUT_FONT_TTF": "out.ttf"
+    },
+    "literal_replacement_ast_equivalent": true,
+    "baseline_source_sha256": "f55c5309c05c05c1b3d17ff9d1ea223a1e8722115ef1845ec9e9da236468cc1d"
+  }
+]

@@ -1,6 +1,10 @@
 """Reproduce the ordinary ClearScan path and reuse existing evaluators."""
 import argparse,subprocess,sys,os,json,gzip,shutil
 from pathlib import Path
+
+FINAL_PDF = 'final.pdf'
+FINAL_JSON = 'final.json'
+
 B=Path(__file__).resolve().parent;R=B.parents[1]
 for p in B.rglob('*.json.gz'):
  if not p.with_suffix('').exists():p.with_suffix('').write_bytes(gzip.decompress(p.read_bytes()))
@@ -12,15 +16,15 @@ def call(cmd,log,check=True):
  if check and r.returncode:raise RuntimeError((cmd,r.returncode))
 for dpi in [300,600]:
  d=B/str(dpi);d.mkdir(exist_ok=True)
- for old,new in [('final.pdf','previous.pdf'),('final.json','previous.json'),('adobe.pdf','adobe.pdf')]:
+ for old,new in [(FINAL_PDF,'previous.pdf'),(FINAL_JSON,'previous.json'),('adobe.pdf','adobe.pdf')]:
   if not (d/new).exists():shutil.copyfile(R/'qualification/clearscan_contours'/str(dpi)/old,d/new)
  if not a.measure_only:
   if dpi==300:call(['cargo','build','--release','-p','scanweave-cli'],'build.log')
-  call(['/usr/bin/time','-v','-o',d/'final-time.txt',R/'target/release/scanweave-cli','build','--bundle',R/f'qualification/experiments/m1g/fixture/dpi{dpi}/input/document.json','--profile','clearscan','--output',d/'final.pdf','--report',d/'final.json'],f'{dpi}/final.log')
+  call(['/usr/bin/time','-v','-o',d/'final-time.txt',R/'target/release/scanweave-cli','build','--bundle',R/f'qualification/experiments/m1g/fixture/dpi{dpi}/input/document.json','--profile','clearscan','--output',d/FINAL_PDF,'--report',d/FINAL_JSON],f'{dpi}/final.log')
  for arm in ['previous','adobe','final']:
   call([sys.executable,B/'compare.py',dpi,arm,d/(arm+'.pdf')],f'{dpi}/{arm}-metrics.log')
   call([sys.executable,B/'audit.py',dpi,arm,d/(arm+'.pdf')]+(['--report',d/(arm+'.json')] if arm!='adobe' else []),f'{dpi}/{arm}-audit.log')
- call([sys.executable,B/'stages.py',dpi,'final',d/'final.pdf',d/'final.json'],f'{dpi}/final-stages.log')
+ call([sys.executable,B/'stages.py',dpi,'final',d/FINAL_PDF,d/FINAL_JSON],f'{dpi}/final-stages.log')
 if not a.measure_only:
  call([sys.executable,B/'real/run.py'],'real/run.log')
  call([sys.executable,B/'hard_negative.py'],'hard-negative.log')

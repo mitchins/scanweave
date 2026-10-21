@@ -40,6 +40,16 @@ def refine_y(obs,ref,sx,sy,step=0.125):
         return 0.5*step*(left-right)/den
     return 0.0
 
+def best_grid_shift(obs, ref, xs, ys, best, best_e):
+    """Retain the original y-major search order and strict tie-breaking rule."""
+    for y in ys:
+        for x in xs:
+            e = mse(shift_arr(obs, float(x), float(y)), ref)
+            if e < best_e:
+                best_e = e
+                best = (float(x), float(y))
+    return best, best_e
+
 def phase_shift(obs, ref, stage='low'):
     """Estimate the shift to PASS to shift_arr(obs,...) so obs aligns with ref.
 
@@ -56,29 +66,17 @@ def phase_shift(obs, ref, stage='low'):
     xs = candidates(cx, 4.0, 1.0)
     ys = candidates(cy, 4.0, 1.0)
     best = (0.0, 0.0); best_e = mse(shift_arr(obs, 0.0, 0.0), ref)
-    for y in ys:
-        for x in xs:
-            e = mse(shift_arr(obs, float(x), float(y)), ref)
-            if e < best_e:
-                best_e = e; best = (float(x), float(y))
+    best, best_e = best_grid_shift(obs, ref, xs, ys, best, best_e)
     # finer
     x0, y0 = best
     xs = candidates(x0, 1.25, 0.25)
     ys = candidates(y0, 1.25, 0.25)
-    for y in ys:
-        for x in xs:
-            e = mse(shift_arr(obs, float(x), float(y)), ref)
-            if e < best_e:
-                best_e = e; best = (float(x), float(y))
+    best, best_e = best_grid_shift(obs, ref, xs, ys, best, best_e)
     # finest
     x0, y0 = best
     xs = candidates(x0, 0.5, 0.125)
     ys = candidates(y0, 0.5, 0.125)
-    for y in ys:
-        for x in xs:
-            e = mse(shift_arr(obs, float(x), float(y)), ref)
-            if e < best_e:
-                best_e = e; best = (float(x), float(y))
+    best, best_e = best_grid_shift(obs, ref, xs, ys, best, best_e)
     sx,sy=best
     sx0=sx; sy0=sy
     dx=refine_x(obs,ref,sx,sy,0.125)

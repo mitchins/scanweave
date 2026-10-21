@@ -25,6 +25,12 @@ from collections import Counter
 import numpy as np
 from PIL import Image
 
+FIXTURE_NOT_RUN = 'NOT_RUN (fixture page not in run)'
+TRACE_LOG_JSON = 'trace_log.json'
+OUTPUT_PDF = 'out.pdf'
+OUTPUT_FONT_TTF = 'out.ttf'
+
+
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(HERE)
 PROBE = os.path.join(ROOT, "target", "debug", "m0-font-pdf")
@@ -287,8 +293,8 @@ def check_page(name: str) -> dict:
     if r.returncode != 0:
         out["fail"].append(f"probe build failed: {r.stderr[:300]}")
         return out
-    pdf_path = os.path.join(out_dir, "out.pdf")
-    ttf_path = os.path.join(out_dir, "out.ttf")
+    pdf_path = os.path.join(out_dir, OUTPUT_PDF)
+    ttf_path = os.path.join(out_dir, OUTPUT_FONT_TTF)
     out["pdf_bytes"] = os.path.getsize(pdf_path)
     out["ttf_bytes"] = os.path.getsize(ttf_path)
 
@@ -532,7 +538,7 @@ def check_page(name: str) -> dict:
             out["fail"].append("no counter pixels found for colour check")
 
     # 8. trace log: budget + unowned accounting
-    log = json.load(open(os.path.join(out_dir, "trace_log.json")))
+    log = json.load(open(os.path.join(out_dir, TRACE_LOG_JSON)))
     out["unowned_components"] = log["unowned_components"]
     if name != "p06_degraded" and log["unowned_components"] != 0:
         out["fail"].append(f"unowned components {log['unowned_components']} (must be 0)")
@@ -602,12 +608,12 @@ def e_proofs(results: dict) -> None:
     if not have("p07_sharedcid"):
         for k in ("E1_same_outline_two_cids", "E2_two_gids_one_string",
                   "E0_key_property", "E7_determinism"):
-            ep[k] = "NOT_RUN (fixture page not in run)"
+            ep[k] = FIXTURE_NOT_RUN
         results["eproofs"] = ep
         results["gates"].update({k: None for k in ep})
         return
     work1 = os.path.join(WORK, "p07_sharedcid")
-    pdf7 = os.path.join(work1, "out.pdf")
+    pdf7 = os.path.join(work1, OUTPUT_PDF)
 
     # E1: identical shape, labels 8 and 6 -> two CIDs, ONE GID (glyph REUSE)
     g = parse_font_graph(pdf7, "e1")
@@ -638,11 +644,11 @@ def e_proofs(results: dict) -> None:
 
     # E4: multi-codepoint + supplementary-plane ToUnicode (UTF-16BE)
     if not have("p04_ligature"):
-        ep["E4_utf16_transport"] = "NOT_RUN (fixture page not in run)"
+        ep["E4_utf16_transport"] = FIXTURE_NOT_RUN
         results["eproofs"] = ep
         results["gates"].update({"E4_utf16_transport": None})
         return
-    g4 = parse_font_graph(os.path.join(WORK, "p04_ligature", "out.pdf"), "e4")
+    g4 = parse_font_graph(os.path.join(WORK, "p04_ligature", OUTPUT_PDF), "e4")
     tu4 = g4.get("tounicode", {})
     ep["E4_utf16_transport"] = {
         "fi": tu4.get(1),
@@ -654,8 +660,8 @@ def e_proofs(results: dict) -> None:
     # E3: wrong-label preservation — visible render matches the 8 SOURCE, extraction says 6
     p02 = results["pages"].get("p02_wronglabel", {})
     if not have("p02_wronglabel") or not have("p03_kana"):
-        ep["E3_wronglabel_preservation"] = "NOT_RUN (fixture page not in run)"
-        ep["E5_kana"] = "NOT_RUN (fixture page not in run)"
+        ep["E3_wronglabel_preservation"] = FIXTURE_NOT_RUN
+        ep["E5_kana"] = FIXTURE_NOT_RUN
         results["eproofs"] = ep
         results["gates"].update({"E3_wronglabel_preservation": None, "E5_kana": None})
         return
@@ -685,7 +691,7 @@ def e_proofs(results: dict) -> None:
     }
 
     # E6: span over multiple units + owner recording
-    log = json.load(open(os.path.join(WORK, "p07_sharedcid", "trace_log.json")))
+    log = json.load(open(os.path.join(WORK, "p07_sharedcid", TRACE_LOG_JSON)))
     span_ids = Counter(o["span_id"] for o in log["occurrences"] if o["span_id"] != "unowned")
     owners = {o["owner"] for o in log["occurrences"]}
     ep["E6_span_cardinality_owners"] = {
@@ -703,8 +709,8 @@ def e_proofs(results: dict) -> None:
 
     h = lambda p: _hl.sha256(open(p, "rb").read()).hexdigest()  # noqa: E731
     ep["E7_determinism"] = {
-        "pdf_equal": h(os.path.join(WORK, "p01_latin", "out.pdf")) == h(os.path.join(out2, "out.pdf")),
-        "ttf_equal": h(os.path.join(WORK, "p01_latin", "out.ttf")) == h(os.path.join(out2, "out.ttf")),
+        "pdf_equal": h(os.path.join(WORK, "p01_latin", OUTPUT_PDF)) == h(os.path.join(out2, OUTPUT_PDF)),
+        "ttf_equal": h(os.path.join(WORK, "p01_latin", OUTPUT_FONT_TTF)) == h(os.path.join(out2, OUTPUT_FONT_TTF)),
     }
 
     # E0: executable four-part-key mutation property test (encoding.rs Rust unit
@@ -719,14 +725,14 @@ def e_proofs(results: dict) -> None:
         ep["E0_key_property"] = {"passed": None, "note": "E1.pdf pages not in run"}
         results["eproofs"] = ep
         return
-    log1 = json.load(open(os.path.join(WORK, "p01_latin", "trace_log.json")))
+    log1 = json.load(open(os.path.join(WORK, "p01_latin", TRACE_LOG_JSON)))
     e0 = {
         "rust_property_test": "cargo test e0_four_part_key_property: ok" if e0_pass else r.stdout.strip()[-200:],
         "passed": e0_pass,
         "same_glyph_same_string_single_cid": any(len(g["cids"]) == 1 for g in log1["glyphs"]),
         "same_glyph_diff_string_multi_cid": any(
             len(g["cids"]) > 1
-            for g in json.load(open(os.path.join(WORK, "p07_sharedcid", "trace_log.json")))["glyphs"]
+            for g in json.load(open(os.path.join(WORK, "p07_sharedcid", TRACE_LOG_JSON)))["glyphs"]
         ),
     }
     ep["E0_key_property"] = e0

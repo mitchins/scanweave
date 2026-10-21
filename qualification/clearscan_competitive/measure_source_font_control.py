@@ -20,6 +20,13 @@ def render_pdfium(pdf,out,dpi):
     return ims
 def read_pngs(prefix,count):
     return [np.asarray(Image.open(f'{prefix}-{i+1}.png').convert('L')) for i in range(count)]
+def family_statistics(per,stats):
+    fam={}
+    for ch in sorted(set(r['text'] for r in per)):
+        rr=[r for r in per if r['text']==ch]
+        fam[ch]={k:stats(k,rr)['mean'] for k in ('source','control_poppler','control_pdfium','final_poppler','final_pdfium')};fam[ch]['n']=len(rr)
+    return fam
+
 def main():
     dpi=300; q=ROOT/'qualification/clearscan_competitive/300/source-font-control';q.mkdir(parents=True,exist_ok=True)
     base=ROOT/'qualification/experiments/m1g/fixture/dpi300';manifest=json.loads((base/'input/document.json').read_text())
@@ -27,7 +34,6 @@ def main():
     for arm in ('source-font-control','final'):
         p=q/arm;p.mkdir(exist_ok=True)
     render_poppler(pdf,q/'source-font-control',dpi);control_py=render_pdfium(pdf,q/'source-font-control',dpi)
-    render_poppler(final,q/'final-render',dpi) if False else None
     # Fresh final renderer images ensure same physical/rendering contract.
     final_dir=q/'final';final_dir.mkdir(exist_ok=True);render_poppler(final,final_dir,dpi);final_py=render_pdfium(final,final_dir,dpi)
     control_pop=read_pngs(q/'source-font-control'/'poppler',len(manifest['pages']))
@@ -52,10 +58,7 @@ def main():
                 'final_pdfium':iou(final_py[pi][sl],truth[pi][sl])})
     def stats(key,rows=per):
         vals=[r[key] for r in rows];return {'n':len(vals),'mean':float(np.mean(vals)) if vals else None}
-    fam={}
-    for ch in sorted(set(r['text'] for r in per)):
-        rr=[r for r in per if r['text']==ch]
-        fam[ch]={k:stats(k,rr)['mean'] for k in ('source','control_poppler','control_pdfium','final_poppler','final_pdfium')};fam[ch]['n']=len(rr)
+    fam=family_statistics(per,stats)
     input_text=''.join(s['text'] for pi in manifest['pages'] for s in json.loads((base/'input'/pi['ocr_page_path']).read_text())['spans'])
     norm=lambda x:re.sub(r'\s+','',x)
     poptext=subprocess.run(['pdftotext','-raw',str(pdf),'-'],check=True,capture_output=True,text=True).stdout
