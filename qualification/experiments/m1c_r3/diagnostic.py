@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """M1-C-R3 discriminating diagnostic — A-E arms, no ground-truth leakage in estimated arm."""
 import argparse, hashlib, json, os, random, sys
+from pathlib import PurePosixPath, PureWindowsPath
 import numpy as np
 from PIL import Image
 from alignment import phase_shift, shift_arr, mse
@@ -12,6 +13,15 @@ FONTS = [
     "/usr/share/fonts/opentype/urw-base35/URWGothic-Demi.otf",
 ]
 GLYPHS = ["a", "g", "8", "0", "6", "が", "パ", "4"]
+
+
+def output_tag(value):
+    """A diagnostic label is one filename component, never an output path."""
+    if (not value or value in (".", "..") or "/" in value or "\\" in value
+            or "\0" in value or PurePosixPath(value).is_absolute()
+            or PureWindowsPath(value).drive):
+        raise argparse.ArgumentTypeError("tag must be a nonempty single filename component")
+    return value
 
 
 def font_hash(path):
@@ -142,6 +152,7 @@ def evaluate(src_mask, pred_mask, pred_img):
 
 
 def run(font, ch, n, outdir, tag):
+    tag = output_tag(tag)
     src, obs, truths, metas = build_observation_set(font, ch, n, tag)
     src_mask = (src>=0.5).astype(np.uint8)
     single = obs[0].copy(); t0 = truths[0]
@@ -199,7 +210,7 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--out", default=os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))), "work", "m1c_r3", "diag"))
     ap.add_argument("--ns", nargs="+", type=int, default=[1, 2, 4, 8])
-    ap.add_argument("--tag", default="r3-diag")
+    ap.add_argument("--tag", type=output_tag, default="r3-diag")
     args = ap.parse_args()
     os.makedirs(args.out, exist_ok=True)
     report = {"runs": []}
@@ -253,7 +264,8 @@ def main():
         "command": " ".join(os.sys.argv),
     }
     report["final"] = final
-    json.dump(report, open(os.path.join(args.out, "diagnostic_full.json"), "w"), indent=2)
+    with open(os.path.join(args.out, "diagnostic_full.json"), "w") as output:
+        json.dump(report, output, indent=2)
     # print table
     print("\nD (oracle) vs C (unaligned) median boundary (lower better):")
     for n in args.ns:

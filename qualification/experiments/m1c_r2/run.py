@@ -7,7 +7,8 @@ import json, math, os, random, argparse
 import numpy as np
 import sys
 sys.path.insert(0, os.path.dirname(os.path.dirname(__file__))+"/m1c")
-from PIL import Image, ImageDraw, ImageFont, ImageFilter
+from PIL import Image, ImageFilter
+from run_ablation import render_glyph
 
 ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 OUT = os.path.join(ROOT, "work", "m1c_r2")
@@ -24,32 +25,6 @@ TARGET_DPI = 600
 RN = None
 SEED = 20261015
 random.seed(SEED); np.random.seed(SEED)
-
-def render_glyph(font, ch, dpi, antialias=True):
-    size_pt = 8.0
-    px = max(1, int(size_pt * dpi / 72.0))
-    f = ImageFont.truetype(font, px)
-    # render into temp large
-    pad = px * 2
-    bbox = f.getbbox(ch)  # left,top,right,bottom (uncertain)
-    w = max(1, bbox[2]-bbox[0]) + pad*2
-    h = max(1, bbox[3]-bbox[1]) + pad*2
-    img = Image.new("L", (w, h), 255)
-    d = ImageDraw.Draw(img)
-    x = pad - bbox[0]; y = pad - bbox[1]
-    d.text((x, y), ch, font=f, fill=0)
-    if not antialias:
-        img = img.point(lambda p: 0 if p < 128 else 255)
-    arr = 255.0 - np.asarray(img, dtype=np.float32)
-    arr = np.clip(arr / 255.0, 0, 1)
-    # crop bbox tightly to ink
-    rows = arr.max(axis=1); cols = arr.max(axis=0)
-    r0,r1 = np.nonzero(rows>0)[0][[0,-1]] if rows.any() else (0,len(rows)-1)
-    c0,c1 = np.nonzero(cols>0)[0][[0,-1]] if cols.any() else (0,len(cols)-1)
-    arr = arr[r0:r1+1, c0:c1+1]
-    return arr, (c0,r0)  # returned relative origin not used
-
-
 
 def phase_shift(a,b):
     # integer coarse peak

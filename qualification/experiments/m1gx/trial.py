@@ -11,7 +11,6 @@ from io import BytesIO
 
 import numpy as np
 from PIL import Image
-from skimage.measure import find_contours, approximate_polygon
 from fontTools.ttLib import TTFont
 from fontTools.pens.basePen import BasePen
 
@@ -178,6 +177,7 @@ def oracle_paths(page, truth, width, height):
     return records
 
 def trace_donor(rgb, bbox, threshold):
+    from skimage.measure import find_contours, approximate_polygon
     x0,y0,x1,y1=[int(round(x)) for x in bbox]
     crop=np.asarray(rgb)[max(0,y0):max(0,y1),max(0,x0):max(0,x1),:3]
     if crop.size==0: return []

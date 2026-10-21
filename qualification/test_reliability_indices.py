@@ -5,12 +5,15 @@ import os
 import re
 from pathlib import Path
 import subprocess
+import sys
 import tempfile
 import unittest
 from unittest.mock import patch
 
 import numpy as np
 from PIL import Image, ImageDraw, ImageFont
+from fontTools.fontBuilder import FontBuilder
+from fontTools.pens.ttGlyphPen import TTGlyphPen
 
 HERE = Path(__file__).resolve().parent
 
@@ -18,7 +21,8 @@ HERE = Path(__file__).resolve().parent
 def load_module(name, path):
     spec = importlib.util.spec_from_file_location(name, path)
     module = importlib.util.module_from_spec(spec)
-    spec.loader.exec_module(module)
+    with patch.object(sys, "path", [str(path.parent), *sys.path]):
+        spec.loader.exec_module(module)
     return module
 
 
@@ -48,7 +52,7 @@ class IndexRegressionTests(unittest.TestCase):
                                  if directory == "m1c" else HERE / "experiments" / directory / "run.py")
             for glyph in ("8", "g", " "):
                 with self.subTest(directory=directory, glyph=glyph):
-                    with patch.object(module.ImageFont, "truetype", return_value=font):
+                    with patch.object(ImageFont, "truetype", return_value=font):
                         actual, origin = module.render_glyph("unused-font", glyph, 300)
                     px = int(8 * 300 / 72)
                     pad = px * 2
@@ -66,6 +70,62 @@ class IndexRegressionTests(unittest.TestCase):
                         y1, x1 = samples.shape
                     self.assertEqual(tuple(origin), (x0, y0))
                     np.testing.assert_array_equal(actual, samples[y0:y1, x0:x1])
+
+    def test_embedded_outline_bounds_are_measured_from_actual_ink(self):
+        module = load_module("outline_indices", HERE / "characterize_visuals.py")
+        font = ImageFont.load_default(size=16)
+        with patch.object(ImageFont, "truetype", return_value=font):
+            result = module.char_c_outline_ground_truth()["p02_wronglabel"]
+        expected = Image.new("L", (200, 200), 255)
+        ImageDraw.Draw(expected).text((10, 10), "8", font=font, fill=0)
+        ink = [(y, x) for y, x in np.ndindex((200, 200)) if expected.getpixel((x, y)) < 128]
+        ys, xs = zip(*ink)
+        self.assertEqual(result["outline_render_ink"], len(ink))
+        self.assertEqual(result["bbox"], [min(xs), min(ys), max(xs), max(ys)])
+
+    def test_oracle_indices_preserve_source_coordinates(self):
+        module = load_module("oracle_indices", HERE / "experiments" / "m1gx" / "trial.py")
+        pixels = np.full((20, 20), 255, dtype=np.uint8)
+        pixels[6:9, 7:11] = 90
+        record = {"text": "e", "bbox": [0, 0, 20, 20]}
+        self.assertEqual(module.oracle_ink_box(pixels, record), [7, 6, 11, 9])
+        self.assertEqual(module.oracle_ink_box(np.full_like(pixels, 255), record), [5, 5, 15, 15])
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            (root / "oracle").mkdir()
+            Image.fromarray(pixels).save(root / "oracle" / "page00.png")
+            fontpath = root / "rectangle.ttf"
+            builder = FontBuilder(1000, isTTF=True)
+            builder.setupGlyphOrder([".notdef", "e"])
+            builder.setupCharacterMap({ord("e"): "e"})
+            empty = TTGlyphPen(None)
+            glyph = TTGlyphPen(None)
+            glyph.moveTo((0, 0))
+            glyph.lineTo((10, 0))
+            glyph.lineTo((10, 10))
+            glyph.lineTo((0, 10))
+            glyph.closePath()
+            builder.setupGlyf({".notdef": empty.glyph(), "e": glyph.glyph()})
+            builder.setupHorizontalMetrics({".notdef": (600, 0), "e": (600, 0)})
+            builder.setupHorizontalHeader(ascent=800, descent=-200)
+            builder.setupOS2(sTypoAscender=800, sTypoDescender=-200, usWinAscent=800, usWinDescent=200)
+            builder.setupNameTable({"familyName": "Index test", "styleName": "Regular"})
+            builder.setupPost()
+            builder.setupMaxp()
+            builder.save(fontpath)
+            with patch.object(module, "BASE", root):
+                paths = module.oracle_paths(0, {"font": str(fontpath), "records": [record]}, 20, 20)
+            self.assertEqual(len(paths), 1)
+            self.assertEqual(paths[0][1], ["1.6800 2.6400 m", "2.6400 2.6400 l",
+                                            "2.6400 3.3600 l", "1.6800 3.3600 l", "h"])
+
+    def test_oracle_bounds_do_not_require_optional_donor_tracing_package(self):
+        with patch.dict(sys.modules, {"skimage": None}):
+            module = load_module("oracle_without_skimage", HERE / "experiments" / "m1gx" / "trial.py")
+            # Existing index/accounting helpers stay usable without installing a
+            # tracing package. Actual donor tracing still requires that package.
+            with self.assertRaises(ModuleNotFoundError):
+                module.trace_donor(np.zeros((4, 4, 3)), [0, 0, 4, 4], 128)
 
 
 class ReferenceRunnerTests(unittest.TestCase):

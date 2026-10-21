@@ -517,7 +517,6 @@ def check_page(name: str) -> dict:
         crop = inv[70:200, 70:190]
         hole_mask = crop
         if hole_mask.any():
-            ys, xs = np.nonzero(hole_mask)
             counter_pixels = rend[70:200, 70:190][hole_mask]
             mean_counter = counter_pixels.mean(axis=0)
             paper_rgb = np.array([216, 200, 160])

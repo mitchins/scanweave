@@ -1,7 +1,7 @@
 # HIGH Security / Reliability remediation
 
 Baseline: `e8c0a652637cff4349d00b98609fef83a98f9da7` (`main`).
-Branch: `fix/sonar-high-security-reliability`.
+Branch: `fix/sonar-high-security-reliability`; [PR #10](https://github.com/mitchins/scanweave/pull/10).
 
 ## Exact intake
 
@@ -11,86 +11,130 @@ Authenticated SonarCloud API, project `mitchins_scanweave`, branch `main`:
 GET /api/issues/search?componentKeys=mitchins_scanweave&branch=main&issueStatuses=OPEN&impactSeverities=HIGH&impactSoftwareQualities=SECURITY,RELIABILITY&ps=500
 ```
 
-The response contained 55 unique keys. Each was also checked for a **single impact**
-with severity HIGH and software quality SECURITY or RELIABILITY; no HIGH-only
-Maintainability finding was admitted. Credentials were read privately, never
-printed, persisted in these records, or committed.
+The response contained 55 unique keys. Each also has a **single impact** whose
+severity is HIGH and whose software quality is SECURITY or RELIABILITY. No
+Maintainability-only finding was admitted. Credentials were read privately and
+never printed, persisted in these records or committed.
 
 | Rule | Findings | Treatment |
 |---|---:|---|
-| python:S6729 | 12 | Replace one-condition `np.where` with `np.nonzero` |
-| shelldre:S7688 | 11 | Use Bash `[[ ]]`, preserving operands and quoting |
-| pythonsecurity:S8707 | 31 | 26 independently reviewed false positives; 5 unresolved boundary questions |
+| python:S6729 | 12 | Nine index calls corrected; two duplicate calls share the existing renderer; one unused index calculation removed |
+| shelldre:S7688 | 11 | Bash `[[ ]]`, with operands and quoting preserved |
+| pythonsecurity:S8707 | 31 | Five code fixes under the operator-adopted containment/tag contract; 26 reviewed false positives |
 | pythonsecurity:S8705 | 1 | Independently reviewed false positive |
 
-The complete keyed inventory, original status and reasons are in
+All keys, original locations/status and dispositions are in
 [sonar-high-security-reliability.csv](sonar-high-security-reliability.csv).
-Reviewed path dispositions are in
+The 27 per-key false-positive reasons are in
 [sonar-high-reviewed-paths.json](sonar-high-reviewed-paths.json).
-Code fixes are not represented as fixed on `main` before merge and fresh analysis.
-False-positive dispositions are **not code fixes** or scope exclusions.
+Those transitions and comments were verified on Sonar; they are **not code fixes**.
+The other 28 findings must not be represented as fixed on `main` before merge
+and fresh analysis. No manual closure of the five containment findings was made.
 
-## Small reliability changes
+## Reliability changes
 
-Only the twelve one-argument NumPy calls change. Three-argument `np.where` remains
-unchanged; it selects samples rather than returning indices. Ordinary ndarray
-index order, empty results, crops and histogram classifications are preserved.
+One-condition NumPy index lookups use `np.nonzero`; three-argument `np.where`
+still selects samples. Index order, empty results, crops and histogram
+classification are preserved. The two identical historical `render_glyph`
+implementations now reuse the existing M1-C helper. The unused counter-coordinate
+calculation is removed; actual boolean counter-sample selection is unchanged.
 
-The reference runner already requires Bash. All eleven conditional tests now
-use `[[ ]]`. Literal string right-hand operands stay quoted, and numeric/file
-tests retain their operators. Wine automation, sleeps, output settings and
-reference PDFs do not change. This is not an Acrobat reconversion.
+The reference runner already requires Bash. All eleven tests now use `[[ ]]`.
+Literal string right-hand operands stay quoted; numeric and file operators stay
+unchanged. Wine automation, sleeps, conversion settings and reference PDFs do
+not change. No Acrobat reconversion was needed.
 
-Six focused unittest methods exercise boundary coordinates, blank/nonblank crops
-in both historical reconstruction scripts, runner syntax and early errors, and
-actual extracted late runner conditions (literal title/style equality, output
-size equality and numeric stability). They do not exercise every NumPy site or
-run the Wine GUI. The existing subpixel/corpus/search tests additionally exercise
-the modified `checks.py` paths. Source review establishes the unchanged index
-semantics at the remaining sites; a new fixture/corpus is unnecessary for these
-primitive substitutions.
+Nine focused tests exercise boundary coordinates, blank/nonblank crops through
+both callers, actual outline bounds, oracle ink coordinates and emitted oracle
+paths using a tiny generated test font. Donor-only scikit-image imports are lazy,
+so those independent index helpers can be tested without a new dependency.
+Runner tests check syntax, early errors and actual late conditions, including
+wildcard-like titles/styles, output-size equality and numeric stability. They do
+not claim a full Wine-GUI run. Existing analytical subpixel tests are instrumented
+too; histogram entry points are source-reviewed but not fully integration-tested.
 
-Both normal CI and instrumented Python coverage run the new tests. No test,
-source scope, rule, severity or Quality Gate is weakened.
+## Adopted corpus and tag contracts
 
-## Security boundaries and unresolved findings
+The initial review found five boundary questions rather than an established
+containment contract. The operator explicitly chose the following requirements
+before implementation:
 
-Parent source-to-sink review and an independent fresh read-only investigation
-examined all 32 security keys, direct callers and the actual probe argument
-parser. No applicable `SECURITY.md` was found. These are standalone qualification
-CLIs, not a repository-provided LLM tool or HTTP file service. An explicit input
-or output filename is generally the utility's intended authority. Restricting it
-to the current directory would silently change legitimate workflows.
+- `--corpus` is operator-selected and may itself resolve through a symlink.
+  Its canonical destination becomes the authorized source root.
+- Discovered directories, raster files and OCR files may follow symlinks only
+  when the resolved target remains inside that root. Reject external targets
+  explicitly, including during byte-only holdout sealing.
+- `--tag` is a nonempty filename component, never a path. `--out` remains an
+  arbitrary operator-selected destination.
 
-Two zoom scripts parse DPI as an integer before using it as a path component.
-The corpus adapter's subprocess uses a fixed probe executable and an argv list;
-joined paths cannot equal the exact option tokens parsed by `arg_of`, and DPI
-passes through Python `float`. No shell injection was established.
+`corpus_path()` checks canonical path ancestry before enumeration, raster decode,
+OCR existence checks/reads, and direct `seal_material()` reads. It rejects
+prefix-sibling escapes, dangling external links and resolution errors instead
+of silently skipping them. OCR companion names are exact filenames, not glob
+patterns. Files opened in this path now have explicit lifetimes.
 
-Five findings remain OPEN/needs-review, without suppression or an Accepted
-transition:
+Internal aliases into canonically named holdout documents are rejected from
+ordinary development materialization unless `--include-holdout` is given.
+Ordinary named holdouts still receive source-byte hashing only; they are not
+parsed, decoded or copied. All boundary tests use synthetic temporary material,
+not the real sealed holdout.
 
-- `AaFbZj2c2TNSduKvuGwI`: `diagnostic.py --tag` can escape `--out`. Both values
-  come from the same CLI caller. A filename-only contract or independently
-  lower-trust tag source must be established before restricting it.
+Tag validation runs both in argparse (before creating output directories) and
+at the direct `run()` entry point. It rejects empty/dot/dotdot labels, separators,
+absolute/drive-qualified paths and NUL. Ordinary spaces, Unicode and punctuation
+remain supported. Output-directory ownership is still the operator's concern.
+
+**Limit:** resolve/check/use is not protection against concurrent malicious
+symlink replacement. Corpus trees must remain stable during ingestion. This is
+bounded source containment, not a general filesystem sandbox.
+
+The genuine Security code-fix keys are:
+
+- `AaFbZj2c2TNSduKvuGwI` — diagnostic tag.
 - `AaFbZj512TNSduKvuG0r`, `AaFbZj512TNSduKvuG0n`,
-  `AaFbZj512TNSduKvuG0o`, `AaFbZj512TNSduKvuG0s`: corpus enumeration follows
-  symlinks outside the selected root. The adapter promises pixel binding,
-  document splits and holdout sealing, not a filesystem sandbox. External
-  symlinked datasets may be legitimate. Decide the supported corpus trust and
-  symlink contract before changing those reads. No sealed real holdout was opened.
+  `AaFbZj512TNSduKvuG0o`, `AaFbZj512TNSduKvuG0s` — corpus/holdout reads.
 
-A future service accepting adversarial paths must define and enforce its own
-filesystem/option boundary. The reviewed false positives do not certify such a
-service or imply that all local invocations are trustworthy.
+Seventeen boundary tests cover canonical root aliases, internal/external
+symlinks at each input layer, byte-only sealing, external holdout rejection,
+internal aliases into holdouts, direct seal calls, intelligible CLI errors,
+exact OCR names and both tag entry points. Negative holdout tests forbid opening
+the external target, rather than merely checking the eventual return code.
 
-## Product and review scope
+## Separately reviewed false positives
 
-No Rust product, OCR invocation, glyph reconstruction, font, Unicode, PDF writer,
-image encoding or faithful-profile code changes. Historical P01–P08 visual
-limitations remain. Local unfiltered Rust tests (116 passed), denied-warning Clippy, and the existing
-Python qualification contracts passed. GitHub CI and server-side Sonar are still
-pending at this write-up; their final per-head results will be recorded on PR #10.
-Independent patch review found no source-backed regression and identified test
-coverage gaps; late Bash condition tests were added in response. No broad style
-cleanup or reconstruction refactor is included.
+Parent tracing and a fresh independent investigation examined all 32 Security
+keys, their direct callers and the actual probe argument parser. No applicable
+`SECURITY.md` was present. Two zoom utilities parse integer DPI before forming a
+path component. Other reviewed paths implement explicit CLI input/output
+selection. No repository-provided HTTP/LLM file service or independently
+privileged caller was found. Corpus normalization invokes a fixed probe with an
+argv list; joined paths cannot equal exact option tokens and DPI is a float.
+
+The 27 individually reasoned false-positive transitions leave the five genuine
+containment findings untouched. No Accepted transition, rule/severity change,
+`NOSONAR` or analysis-scope exclusion was used. A future service accepting
+adversarial paths would need its own authority and argument boundaries; these
+verdicts do not certify such a service.
+
+## Validation and product scope
+
+The first PR analysis correctly failed its unchanged Quality Gate: new coverage
+41.7%, new duplication 3.9%, with no new Security/Reliability findings. Tests were
+extended to the actual index/geometry helpers, identical rendering code was
+shared, and the subpixel tests were added to coverage. No threshold was weakened.
+
+Local unfiltered Rust tests (116 passed), denied-warning Clippy, existing Python
+qualification and the 26 focused tests pass. GitHub CI and server-side Sonar for
+the final containment patch are pending at this write-up; final per-head results
+will be recorded on PR #10. Upload success alone is not a Quality Gate result.
+
+Independent patch review found no source-backed regression in the reliability
+changes; late Bash condition tests addressed its coverage concern. A fresh
+independent containment review found no blocking bypass or compatibility defect,
+under the documented stable-filesystem assumption. CodeRabbit's validation-wording
+comment was addressed; its follow-up was rate-limited, not an approval.
+
+No Rust product, faithful-profile, OCR engine/invocation, glyph reconstruction,
+font, Unicode, PDF writer or image encoding changes. Historical P01–P08 visual
+limitations remain. No full 32-page regeneration is necessary for these
+qualification utility changes.
