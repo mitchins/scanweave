@@ -12,7 +12,7 @@
 #   XDO        (default ~/.local/bin/xdotool)
 set -euo pipefail
 
-if [ $# -lt 2 ]; then
+if [[ $# -lt 2 ]]; then
   echo "usage: $0 INPUT.pdf OUTPUT.pdf [clearscan|searchable-exact]" >&2
   exit 2
 fi
@@ -20,7 +20,7 @@ fi
 INPUT="$(readlink -f "$1")"
 OUTPUT="$(readlink -f "$2")"
 STYLE="${3:-clearscan}"
-[ -f "$INPUT" ] || { echo "input not found: $INPUT" >&2; exit 1; }
+[[ -f "$INPUT" ]] || { echo "input not found: $INPUT" >&2; exit 1; }
 case "$STYLE" in
   clearscan|searchable-exact) ;;
   *) echo "unknown output style: $STYLE (use clearscan or searchable-exact)" >&2; exit 2 ;;
@@ -46,7 +46,7 @@ have_window() { xwininfo -root -tree -display "$DISPLAY" 2>/dev/null | grep -q -
 dlg_pos() {
   local wid
   wid="$("$XDO" search --name "$1" 2>/dev/null | head -1)"
-  [ -n "$wid" ] || return 1
+  [[ -n "$wid" ]] || return 1
   "$XDO" getwindowgeometry "$wid" | grep -oE 'Position: [0-9]+,[0-9]+' | sed 's/Position: //; s/,/ /'
 }
 
@@ -82,9 +82,9 @@ fi
 # --- 2. close every open document (discard changes) --------------------------
 for _ in $(seq 1 6); do
   STRAY="$("$XDO" search --name "Adobe Acrobat Pro" 2>/dev/null | head -1)"
-  [ -n "$STRAY" ] || break
+  [[ -n "$STRAY" ]] || break
   TITLE="$("$XDO" getwindowname "$STRAY" 2>/dev/null || true)"
-  [ "$TITLE" = "Adobe Acrobat Pro" ] && break     # no document open
+  [[ "$TITLE" = "Adobe Acrobat Pro" ]] && break     # no document open
   "$XDO" windowactivate "$STRAY" 2>/dev/null || "$XDO" windowfocus "$STRAY"
   sleep 1
   key ctrl+w; sleep 2
@@ -154,12 +154,12 @@ for _ in 1 2 3; do
   click $((DX + 132)) $((DY + 264)); sleep 3
   if have_window "General Settings"; then SETTINGS_OK=1; break; fi
 done
-[ "$SETTINGS_OK" = 1 ] || { log "ERROR: settings dialog did not open"; exit 1; }
+[[ "$SETTINGS_OK" = 1 ]] || { log "ERROR: settings dialog did not open"; exit 1; }
 
 read -r SX SY <<< "$(dlg_pos 'General Settings')"
 log "settings dialog at $SX,$SY"
 click $((SX + 174)) $((SY + 50)); sleep 1    # PDF Output Style dropdown
-if [ "$STYLE" = "clearscan" ]; then
+if [[ "$STYLE" = "clearscan" ]]; then
   key End; sleep 0.5                         # ClearScan (last item)
 else
   key Home; key Down; sleep 0.5
@@ -200,11 +200,11 @@ key Return                                    # Save (filename field is focused)
 LAST_SIZE=0
 STABLE=0
 for _ in $(seq 1 60); do
-  if [ -s "$WORK/output.pdf" ]; then
+  if [[ -s "$WORK/output.pdf" ]]; then
     CURRENT_SIZE="$(stat -c%s "$WORK/output.pdf")"
-    if [ "$CURRENT_SIZE" = "$LAST_SIZE" ]; then
+    if [[ "$CURRENT_SIZE" = "$LAST_SIZE" ]]; then
       STABLE=$((STABLE + 1))
-      [ "$STABLE" -ge 2 ] && break
+      [[ "$STABLE" -ge 2 ]] && break
     else
       STABLE=0
       LAST_SIZE="$CURRENT_SIZE"
@@ -213,6 +213,6 @@ for _ in $(seq 1 60); do
   sleep 1
 done
 
-[ -f "$WORK/output.pdf" ] || { log "ERROR: output.pdf was not saved"; exit 1; }
+[[ -f "$WORK/output.pdf" ]] || { log "ERROR: output.pdf was not saved"; exit 1; }
 cp "$WORK/output.pdf" "$OUTPUT"
 log "done: $OUTPUT"

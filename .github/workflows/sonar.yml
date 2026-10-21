@@ -41,6 +41,9 @@ jobs:
           qualification/.venv/bin/pip install --require-hashes --only-binary=:all: -r .github/requirements-ci.txt
           qualification/.venv/bin/coverage run --source=qualification -m unittest discover -s qualification -p test_hocr_xml_security.py
           qualification/.venv/bin/coverage run --append --source=qualification -m unittest discover -s qualification -p test_tools_env.py
+          qualification/.venv/bin/coverage run --append --source=qualification -m unittest discover -s qualification -p test_reliability_indices.py
+          qualification/.venv/bin/coverage run --append --source=qualification qualification/test_subpixel_metric.py
+          qualification/.venv/bin/coverage run --append --source=qualification -m unittest discover -s qualification -p test_corpus_boundaries.py
           qualification/.venv/bin/coverage xml -o coverage/python.xml
       - name: Retain measured coverage for import diagnostics
         uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2

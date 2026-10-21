@@ -11,7 +11,6 @@ from io import BytesIO
 
 import numpy as np
 from PIL import Image
-from skimage.measure import find_contours, approximate_polygon
 from fontTools.ttLib import TTFont
 from fontTools.pens.basePen import BasePen
 
@@ -42,7 +41,7 @@ def unpadded_box(rec):
 
 def oracle_ink_box(oracle, rec):
     bx0,by0,bx1,by1=map(int,unpadded_box(rec))
-    yy,xx=np.where(oracle[by0:by1,bx0:bx1]<170)
+    yy,xx=np.nonzero(oracle[by0:by1,bx0:bx1]<170)
     if not len(xx): return [bx0,by0,bx1,by1]
     return [bx0+int(xx.min()),by0+int(yy.min()),
             bx0+int(xx.max())+1,by0+int(yy.max())+1]
@@ -169,7 +168,7 @@ def oracle_paths(page, truth, width, height):
         # the pristine source ink bounds, while the vector shape itself comes
         # from the licensed source font outline.
         bx0,by0,bx1,by1=map(int,unpadded_box(rec))
-        yy,xx=np.where(oracle[by0:by1,bx0:bx1]<170)
+        yy,xx=np.nonzero(oracle[by0:by1,bx0:bx1]<170)
         if not len(xx): continue
         box=[bx0+int(xx.min()),by0+int(yy.min()),bx0+int(xx.max())+1,by0+int(yy.max())+1]
         pen=PDFOutlinePen(gs,box,height); pen.prepare(g); gs[gn].draw(pen)
@@ -178,6 +177,7 @@ def oracle_paths(page, truth, width, height):
     return records
 
 def trace_donor(rgb, bbox, threshold):
+    from skimage.measure import find_contours, approximate_polygon
     x0,y0,x1,y1=[int(round(x)) for x in bbox]
     crop=np.asarray(rgb)[max(0,y0):max(0,y1),max(0,x0):max(0,x1),:3]
     if crop.size==0: return []
