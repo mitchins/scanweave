@@ -44,3 +44,19 @@ shares, obsolete-fringe identity and safe attainable savings remain explicitly
 unresolved where evidence is insufficient. Conditional future spatial protection
 is not approved for product use. No production codec/ownership change is approved
 by this review. CI/CodeRabbit results are separately recorded on the research PR.
+
+## Final coordinate-contract review
+
+Self-review identified 35 numerically different CropBox/MediaBox cases (19 Adobe,
+16 archive). The former PDFium/Poppler default-box mismatch invalidated those
+fixed-coordinate comparisons. The reviewer inspected the correction: a temporary
+full-document copy retains the original crop as an explicit clip and renders on
+its MediaBox canvas; annotations in unsupported cases fail explicitly. No source
+PDF is changed. The cache contract is versioned.
+
+All 384 page and 304 region measurements, layer replay and individual-component
+views were rerun. The reviewer reinspected corrected history-02 corner and
+history-04 stamp sheets in both engines. Posterization/colour loss in O3 and
+softer Adobe texture/stamp detail remain supported. No new blocker was found for
+the actual corpus geometry. Earlier invalid comparisons are explicitly superseded
+and preserved locally, not silently treated as current evidence.

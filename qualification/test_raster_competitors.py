@@ -149,6 +149,25 @@ class RasterPipelineTests(unittest.TestCase):
             self.assertEqual(len(receipts),1)
             self.assertTrue(receipts[0]['byte_identical'])
 
+    def test_crop_clip_preserved_on_common_media_canvas(self):
+        with tempfile.TemporaryDirectory() as directory:
+            path=Path(directory)/'cropped.pdf'
+            pdf=pikepdf.Pdf.new();page=pdf.add_blank_page(page_size=(72,72))
+            page.CropBox=pikepdf.Array([12,18,60,54])
+            page.Contents=pikepdf.Stream(pdf,b'1 0 0 rg 0 0 72 72 re f')
+            pdf.save(path);before=path.read_bytes()
+            for renderer in ('pdfium','poppler'):
+                image=render_compare.frame(path,0,renderer,72)
+                self.assertEqual(image.size,(72,72))
+                self.assertEqual(image.getpixel((36,36)),(255,0,0))
+                self.assertEqual(image.getpixel((2,2)),(255,255,255))
+            self.assertEqual(path.read_bytes(),before)
+            with pikepdf.open(path,allow_overwriting_input=True) as document:
+                document.pages[0].Annots=pikepdf.Array([pikepdf.Dictionary(Subtype=pikepdf.Name.Link)])
+                document.save(path)
+            with self.assertRaisesRegex(ValueError,'annotations'):
+                render_compare.frame(path,0,'pdfium',72)
+
     def test_render_cache_binds_pdf_hash_and_page(self):
         with tempfile.TemporaryDirectory() as directory, patch.object(render_compare,'LOCAL',Path(directory)), patch.object(render_compare,'frame',return_value=Image.new('RGB',(10,10),'red')) as renderer:
             for sha,index in [('0'*64,0),('0'*64,0),('1'*64,0),('1'*64,1)]:

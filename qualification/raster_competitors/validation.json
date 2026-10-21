@@ -1,8 +1,8 @@
 {
-  "instrument_tests": 5,
-  "tool_coverage_statements": 793,
+  "instrument_tests": 6,
+  "tool_coverage_statements": 819,
   "tool_coverage_missed": 58,
-  "tool_coverage_percent": 92.6860025220681,
+  "tool_coverage_percent": 92.91819291819291,
   "accounting_outputs_byte_identical_after_review": true,
   "frozen_artifacts_checked": 218,
   "matched_frozen_entries": 217,
@@ -18,7 +18,11 @@
     "allowlist-only mutable executable drift",
     "single current receipt per collection with binary/input binding",
     "committed placement/reuse producer",
-    "numeric/unit prose readability"
+    "numeric/unit prose readability",
+    "common MediaBox canvas with original CropBox clipping; all affected measurements rerun"
   ],
-  "test_log_sha256": "5edb04e0378f519c28e2805d30bfbe486aea7da7f43587c4ee4e32283946bc3b"
+  "test_log_sha256": "75cc449cee351240d0cdd9ea6a3c7289c577b4eb1641d38b5695bb9a154b091e",
+  "render_contract": "mediabox-original-clip-v1",
+  "nonstandard_cropbox_pages": 35,
+  "ordered_layer_cases_two_renderers": 32
 }

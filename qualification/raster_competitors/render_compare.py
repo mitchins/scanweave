@@ -1,11 +1,13 @@
 """Fixed-coordinate source-relative comparisons; no pristine references or crop alignment."""
 import hashlib
+import io
 import json
 import subprocess
 import tempfile
 from pathlib import Path
 
 import numpy as np
+import pikepdf
 import pypdfium2 as pdfium
 from PIL import Image, ImageDraw, ImageOps
 from scipy import ndimage
@@ -17,15 +19,48 @@ DISPLAY = ('input', 'adobe', 'ocrmypdf3', 'scanweave')
 LOCAL = BASE/'local'
 
 
+RENDER_CONTRACT = 'mediabox-original-clip-v1'
+
+
+def media_canvas_copy(path, index):
+    """Preserve visible CropBox as a clip, align both engines to MediaBox.
+
+    Keep full document resources/output intents. No source bytes are written.
+    Annotations need their own clipping contract and are rejected if present.
+    """
+    with pikepdf.open(path) as pdf:
+        page=pdf.pages[index]
+        media=page.MediaBox
+        crop=page.get('/CropBox',media)
+        if list(map(float,crop))==list(map(float,media)):
+            return None
+        if page.get('/Annots'):
+            raise ValueError('Nonstandard CropBox with annotations needs explicit rendering support')
+        left,bottom,right,top=crop
+        clip=f'q {left} {bottom} {right-left} {top-bottom} re W n\n'.encode()
+        contents=page.get('/Contents',[])
+        streams=list(contents) if isinstance(contents,pikepdf.Array) else [contents]
+        page.Contents=pikepdf.Array([pikepdf.Stream(pdf,clip),*streams,pikepdf.Stream(pdf,b'\nQ')])
+        page.CropBox=pikepdf.Array(media)
+        buffer=io.BytesIO()
+        pdf.save(buffer,deterministic_id=True)
+        return buffer.getvalue()
+
+
 def frame(path, index, renderer, dpi):
+    payload=media_canvas_copy(path,index)
     if renderer == 'pdfium':
-        with pdfium.PdfDocument(str(path)) as doc:
+        with pdfium.PdfDocument(payload if payload is not None else str(path)) as doc:
             page = doc[index]
             return page.render(scale=dpi/72).to_pil().convert('RGB')
     with tempfile.TemporaryDirectory() as temp:
         stem = Path(temp)/'page'
+        source=Path(path)
+        if payload is not None:
+            source=Path(temp)/'clipped-media-canvas.pdf'
+            source.write_bytes(payload)
         subprocess.run(['pdftoppm', '-f', str(index+1), '-l', str(index+1),
-                        '-singlefile', '-r', str(dpi), '-png', str(path), str(stem)],
+                        '-singlefile', '-r', str(dpi), '-png', str(source), str(stem)],
                        check=True, capture_output=True, timeout=180)
         return Image.open(stem.with_suffix('.png')).convert('RGB')
 
@@ -62,7 +97,7 @@ def features(source, candidate):
 
 
 def render_cached(path, index, renderer, dpi, name, source_sha256):
-    target = LOCAL/'renders'/f'{name}-{source_sha256}-p{index}-{renderer}-{dpi}.png'
+    target = LOCAL/'renders'/f'{name}-{source_sha256}-p{index}-{renderer}-{dpi}-{RENDER_CONTRACT}.png'
     target.parent.mkdir(parents=True,exist_ok=True)
     if target.exists():
         return Image.open(target).convert('RGB')
@@ -86,7 +121,7 @@ def main():
     inventory = json.loads((BASE/'object-inventory.json').read_text())
     docs = {(d['collection'],d['arm']):d for d in inventory}
     regions = json.loads((BASE/'regions.json').read_text())
-    results = {'contract':'100 DPI whole pages; 300 DPI detailed regions; top-left normalized page fractions fixed before comparison; no candidate realignment', 'pages':[], 'regions':[]}
+    results = {'contract':'MediaBox canvas with original CropBox preserved as explicit clip in derivative only; 100 DPI pages / 300 DPI regions; fixed source physical coordinates, no candidate alignment', 'pages':[], 'regions':[]}
     for collection in dict.fromkeys(d['collection'] for d in inventory):
         members = docs[(collection,'input')]['members']
         for index,name in enumerate(members):
