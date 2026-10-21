@@ -1,7 +1,6 @@
 """Same image-only page PDFs to all ordinary converters; resumable bounded runs."""
 import os,json,time,subprocess,concurrent.futures,hashlib,sys
 from pathlib import Path
-import sys
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 from tools_env import comparison_environment
 import pikepdf,pypdfium2 as pdfium

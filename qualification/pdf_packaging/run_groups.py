@@ -3,7 +3,6 @@ Single-page diagnostics are supplementary; collection serialized bytes are the f
 """
 import json,os,sys,time,subprocess,concurrent.futures,hashlib
 from pathlib import Path
-import sys
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 from tools_env import comparison_environment
 import pikepdf
