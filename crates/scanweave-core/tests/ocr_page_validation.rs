@@ -256,3 +256,50 @@ fn stale_rotation_flag_rejected() {
     let e = OcrPage::parse_bytes(&serde_json::to_vec(&v).unwrap()).unwrap_err();
     assert_eq!(kind(&e), "InvalidInput");
 }
+
+#[test]
+fn span_content_errors_precede_parent_reference_errors() {
+    let mut page = parse_and_validate("positive/valid_page.json").unwrap();
+    page.spans[0].parent_span_id = Some("missing-parent".into());
+    let first_id = page.spans[0].id.clone();
+    // A later span's baseline still wins over an earlier span's missing parent.
+    let mut later = page.spans[0].clone();
+    later.id = "later-span".into();
+    later.parent_span_id = None;
+    for (i, symbol) in later.symbols.iter_mut().enumerate() {
+        symbol.id = format!("later-symbol-{i}");
+    }
+    later.baseline = Some(vec![[f64::NAN, 0.0]]);
+    page.reading_order.push(later.id.clone());
+    page.spans.push(later);
+    assert_eq!(
+        page.validate(&Limits::m0_defaults()).unwrap_err(),
+        ScanWeaveError::InvalidInput {
+            context: "span later-span: baseline out of range".into(),
+        }
+    );
+    page.spans.last_mut().unwrap().baseline = None;
+    assert_eq!(
+        page.validate(&Limits::m0_defaults()).unwrap_err(),
+        ScanWeaveError::InvalidInput {
+            context: format!("span {first_id}: parent_span_id missing-parent does not exist"),
+        }
+    );
+    page.spans[0].parent_span_id = Some(first_id.clone());
+    assert_eq!(
+        page.validate(&Limits::m0_defaults()).unwrap_err(),
+        ScanWeaveError::InvalidInput {
+            context: format!("span {first_id}: parent reference cycle detected"),
+        }
+    );
+    page.spans[0].parent_span_id = Some("later-span".into());
+    page.spans.last_mut().unwrap().parent_span_id = Some(first_id.clone());
+    assert_eq!(
+        page.validate(&Limits::m0_defaults()).unwrap_err(),
+        ScanWeaveError::InvalidInput {
+            context: format!("span {first_id}: parent reference cycle detected"),
+        }
+    );
+    page.spans.last_mut().unwrap().parent_span_id = None;
+    page.validate(&Limits::m0_defaults()).unwrap();
+}

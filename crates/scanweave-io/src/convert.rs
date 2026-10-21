@@ -275,7 +275,11 @@ pub fn input_from_ocr_page(
 }
 
 fn to_ocr_page(input: &Input) -> scanweave_core::ocr_page::OcrPage {
-    use scanweave_core::ocr_page::*;
+    use scanweave_core::ocr_page::{
+        Confidence, ConfidenceScale, Direction, Granularity, OcrPage, OrientationPolicy,
+        PageGeometry, Producer, ProtectedOrigin, ProtectedRegion, Provenance,
+        RasterBinding, ReadingOrderStatus, Role, SchemaVersion, Span, Symbol,
+    };
     let pt = |px: f64| px * 72.0 / 300.0;
     OcrPage {
         schema_version: SchemaVersion::V1,

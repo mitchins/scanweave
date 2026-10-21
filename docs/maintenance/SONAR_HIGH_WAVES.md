@@ -29,7 +29,8 @@ Quality Gate OK. There are 240 analyzed files and 24,397 non-comment lines.
 
 Assignments are candidates, not advance claims of fixes. Each wave starts from
 latest verified main, with only one open PR, independent review, unchanged CI/
-Sonar gates, and operator merge approval. Wave 2 has not started. No rules,
+Sonar gates, and operator merge approval. Wave 2 starts from verified main
+`22881dc`; see [its bounded implementation receipt](SONAR_HIGH_WAVE2.md). No rules,
 severities, source scope or Quality Gate thresholds change.
 
 ## Wave 1 implementation (narrowed after execution-coverage review)
@@ -199,3 +200,24 @@ Local instrumented coverage executes 70 of 85 changed source statements; that
 is a local receipt, not a claim that the next server gate passed. Existing
 ResourceWarnings from historical `json.load(open(...))` calls remain visible;
 file-lifetime cleanup is not silently bundled into this equivalence change.
+
+
+### Wave 1 merged-main reconciliation
+
+PR #11 was operator-approved at `4beadc4` and squash-merged under repository
+policy as `22881dc49c57b9eaf642d583ea5c46a1e80b4642`. Its tree exactly matches
+the approved head. Fresh main [CI](https://github.com/mitchins/scanweave/actions/runs/39545260892)
+and [Sonar](https://github.com/mitchins/scanweave/actions/runs/39545260958) passed.
+Analysis `1aa7c660-c3e1-4c68-81cd-249cd8cb991a` is attributed to that revision;
+Quality Gate OK, overall coverage 44.9%, new-code coverage 85.9%.
+
+The [exact 22-key closure table](https://github.com/mitchins/scanweave/pull/11#issuecomment-6308334111)
+records **21 server-verified code fixes, zero reidentified open HIGH keys, and
+one still-open key**: `AaFbZj482TNSduKvuGz-`, product measurement `main()`.
+Its complexity fell from 19 to 16, still above 15. It is not counted as fixed
+or administratively closed and is outside production-Rust Wave 2.
+The CSV now records these verified dispositions, preserving original baseline
+locations/statuses in its baseline columns and the original raw JSON.
+
+Fresh main has 121 unique OPEN HIGH keys, all Maintainability; HIGH Security
+and Reliability remain zero. Zero open PRs was verified before Wave 2 began.

@@ -188,21 +188,7 @@ impl EncodedSourceImage {
     /// samples and rejecting malformed or oversized buffers.
     pub fn decode_rgb(&self) -> Result<Vec<u8>, String> {
         if self.jpeg {
-            let size = image::ImageReader::with_format(
-                std::io::Cursor::new(&self.bytes),
-                image::ImageFormat::Jpeg,
-            )
-            .into_dimensions()
-            .map_err(|e| e.to_string())?;
-            if size != (self.width, self.height) {
-                return Err("source JPEG header dimensions disagree with image dictionary".into());
-            }
-            let image = image::load_from_memory_with_format(&self.bytes, image::ImageFormat::Jpeg)
-                .map_err(|e| e.to_string())?;
-            if image.width() != self.width || image.height() != self.height {
-                return Err("source JPEG dimensions disagree with image dictionary".into());
-            }
-            return Ok(image.to_rgb8().into_raw());
+            return self.decode_jpeg_rgb();
         }
         use std::io::Read;
         let row = self.width as usize * self.colors as usize;
@@ -249,6 +235,24 @@ impl EncodedSourceImage {
             Ok(samples)
         }
     }
+    fn decode_jpeg_rgb(&self) -> Result<Vec<u8>, String> {
+        let size = image::ImageReader::with_format(
+            std::io::Cursor::new(&self.bytes),
+            image::ImageFormat::Jpeg,
+        )
+        .into_dimensions()
+        .map_err(|e| e.to_string())?;
+        if size != (self.width, self.height) {
+            return Err("source JPEG header dimensions disagree with image dictionary".into());
+        }
+        let image = image::load_from_memory_with_format(&self.bytes, image::ImageFormat::Jpeg)
+            .map_err(|e| e.to_string())?;
+        if image.width() != self.width || image.height() != self.height {
+            return Err("source JPEG dimensions disagree with image dictionary".into());
+        }
+        Ok(image.to_rgb8().into_raw())
+    }
+
     pub(crate) fn matches(&self, input: &crate::convert::Input) -> bool {
         let t = input.raster_to_page_pt;
         self.width == input.width
@@ -265,6 +269,44 @@ impl EncodedSourceImage {
 
 #[cfg(test)]
 mod tests {
+    #[test]
+    fn jpeg_header_is_checked_before_decode_and_rgb_samples_are_unchanged() {
+        let mut bytes = Vec::new();
+        image::codecs::jpeg::JpegEncoder::new_with_quality(&mut bytes, 100)
+            .encode(&[90; 12], 2, 2, image::ExtendedColorType::Rgb8)
+            .unwrap();
+        let mut source = super::EncodedSourceImage {
+            bytes,
+            width: 2,
+            height: 2,
+            colors: 3,
+            jpeg: true,
+            predictor: 1,
+            rgb_sha256: String::new(),
+            page_width: 2.0,
+            page_height: 2.0,
+        };
+        let expected = image::load_from_memory_with_format(&source.bytes, image::ImageFormat::Jpeg)
+            .unwrap()
+            .to_rgb8()
+            .into_raw();
+        assert_eq!(source.decode_rgb().unwrap(), expected);
+        source.width = 3;
+        assert_eq!(
+            source.decode_rgb().unwrap_err(),
+            "source JPEG header dimensions disagree with image dictionary"
+        );
+        source.bytes.clear();
+        let header_error = image::ImageReader::with_format(
+            std::io::Cursor::new(&source.bytes),
+            image::ImageFormat::Jpeg,
+        )
+        .into_dimensions()
+        .unwrap_err()
+        .to_string();
+        assert_eq!(source.decode_rgb().unwrap_err(), header_error);
+    }
+
     use super::*;
     use pdf_writer::{Content, Finish, Name as N, Pdf as Writer, Rect, Ref};
     fn fixture(kind: &str) -> Vec<u8> {

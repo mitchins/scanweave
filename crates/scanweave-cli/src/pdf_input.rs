@@ -45,6 +45,49 @@ fn reliable_words(doc: &hocr::HocrDocument, width: u32, height: u32) -> usize {
         .count()
 }
 
+// Parse and validate Poppler's physical geometry before any page rasterization.
+fn physical_page_size(details: &str, dpi: u32, page: usize) -> Result<(f64, f64), String> {
+    let size = details
+        .lines()
+        .find(|l| l.contains(" size:"))
+        .ok_or("pdfinfo did not report physical page size")?;
+    let values: Vec<_> = size
+        .split_once("size:")
+        .unwrap()
+        .1
+        .split_whitespace()
+        .collect();
+    let mut width: f64 = values
+        .first()
+        .ok_or("missing page width")?
+        .parse()
+        .map_err(|_| "invalid page width")?;
+    let mut height: f64 = values
+        .get(2)
+        .ok_or("missing page height")?
+        .parse()
+        .map_err(|_| "invalid page height")?;
+    let rotation: i32 = details
+        .lines()
+        .find(|l| l.contains(" rot:"))
+        .and_then(|l| l.split_once("rot:"))
+        .and_then(|(_, v)| v.trim().parse().ok())
+        .unwrap_or(0);
+    if rotation.rem_euclid(180) == 90 {
+        std::mem::swap(&mut width, &mut height);
+    }
+    if !width.is_finite()
+        || !height.is_finite()
+        || width <= 0.0
+        || height <= 0.0
+        || width * height * (dpi as f64 / 72.0).powi(2)
+            > scanweave_core::Limits::m0_defaults().max_page_pixels as f64
+    {
+        return Err(format!("page {page} exceeds supported raster dimensions"));
+    }
+    Ok((width, height))
+}
+
 pub fn convert_pdf(args: &[String]) -> Result<(), String> {
     let input = args.first().ok_or("missing input PDF")?;
     let output = args.get(1).ok_or("usage: scanweave input.pdf output.pdf [--dpi 300] [--lang eng] [--profile clearscan|faithful]")?;
@@ -140,44 +183,7 @@ pub fn convert_pdf(args: &[String]) -> Result<(), String> {
             ],
         )?;
         let details = String::from_utf8_lossy(&details);
-        let size = details
-            .lines()
-            .find(|l| l.contains(" size:"))
-            .ok_or("pdfinfo did not report physical page size")?;
-        let values: Vec<_> = size
-            .split_once("size:")
-            .unwrap()
-            .1
-            .split_whitespace()
-            .collect();
-        let mut width: f64 = values
-            .first()
-            .ok_or("missing page width")?
-            .parse()
-            .map_err(|_| "invalid page width")?;
-        let mut height: f64 = values
-            .get(2)
-            .ok_or("missing page height")?
-            .parse()
-            .map_err(|_| "invalid page height")?;
-        let rotation: i32 = details
-            .lines()
-            .find(|l| l.contains(" rot:"))
-            .and_then(|l| l.split_once("rot:"))
-            .and_then(|(_, v)| v.trim().parse().ok())
-            .unwrap_or(0);
-        if rotation.rem_euclid(180) == 90 {
-            std::mem::swap(&mut width, &mut height);
-        }
-        if !width.is_finite()
-            || !height.is_finite()
-            || width <= 0.0
-            || height <= 0.0
-            || width * height * (dpi as f64 / 72.0).powi(2)
-                > scanweave_core::Limits::m0_defaults().max_page_pixels as f64
-        {
-            return Err(format!("page {page} exceeds supported raster dimensions"));
-        }
+        let (width, height) = physical_page_size(&details, dpi, page)?;
         let png = prefix.with_extension("png");
         let native = source_images
             .get(page - 1)
@@ -382,6 +388,40 @@ pub fn convert_pdf(args: &[String]) -> Result<(), String> {
 
 #[cfg(test)]
 mod tests {
+    #[test]
+    fn physical_geometry_preserves_rotation_and_error_precedence() {
+        use super::physical_page_size as parse;
+        assert_eq!(
+            parse("Page 1 size: 100 x 200 pts\nPage 1 rot: 90", 300, 1).unwrap(),
+            (200., 100.)
+        );
+        assert_eq!(
+            parse("Page 1 size: 100 x 200 pts\nPage 1 rot: -90", 300, 1).unwrap(),
+            (200., 100.)
+        );
+        assert_eq!(
+            parse("Page 1 size: 100 x 200 pts\nPage 1 rot: invalid", 300, 1).unwrap(),
+            (100., 200.)
+        );
+        for (input, expected) in [
+            ("", "pdfinfo did not report physical page size"),
+            ("Page size:", "missing page width"),
+            ("Page size: invalid", "invalid page width"),
+            ("Page size: 100", "missing page height"),
+            ("Page size: 100 x invalid", "invalid page height"),
+            (
+                "Page size: NaN x 100",
+                "page 7 exceeds supported raster dimensions",
+            ),
+            (
+                "Page size: -1 x 100",
+                "page 7 exceeds supported raster dimensions",
+            ),
+        ] {
+            assert_eq!(parse(input, 300, 7).unwrap_err(), expected);
+        }
+    }
+
     #[test]
     fn retry_support_rejects_border_artifacts_and_invalid_boxes() {
         let mut doc = scanweave_io::hocr::HocrDocument::default();
