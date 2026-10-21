@@ -10,13 +10,6 @@ from PIL import Image
 import pypdfium2 as pdfium
 from fontTools.ttLib import TTFont
 
-CLEARSCAN_PDF = 'clearscan.pdf'
-FAITHFUL_PDF = 'faithful.pdf'
-TRUTH_PDF = 'truth.pdf'
-DOCUMENT_DONOR_PREFIX = '__doc_donor:'
-FONT_TTF = 'font.ttf'
-
-
 ROOT = Path(__file__).resolve().parents[1]
 FIXTURE = ROOT / "qualification/fixtures/m1d_document"
 EVIDENCE = ROOT / "qualification/evidence/m1d_document"
@@ -56,14 +49,14 @@ def main():
         truth_raster = np.asarray(Image.open(ROOT / page0["truth_image"]).convert("L"))
         reports = {name: json.loads((folder / f"{name}-report.json").read_text())
                    for name in ("clearscan", "faithful")}
-        clear_pages = render_all(folder / CLEARSCAN_PDF, folder / "clearscan-render", dpi, 12)
-        faithful_pages = render_all(folder / FAITHFUL_PDF, folder / "faithful-render", dpi, 12)
-        truth_pages = render_all(folder / TRUTH_PDF, folder / "truth-render", dpi, 12)
+        clear_pages = render_all(folder / "clearscan.pdf", folder / "clearscan-render", dpi, 12)
+        faithful_pages = render_all(folder / "faithful.pdf", folder / "faithful-render", dpi, 12)
+        truth_pages = render_all(folder / "truth.pdf", folder / "truth-render", dpi, 12)
         baseline_pages = render_all(folder / "raster-baseline.pdf", folder / "raster-render", dpi, 12)
         # Independent PDFium renders at output resolution and 4x zoom validate
         # that the outlines survive another renderer and remain vector-sharp.
-        pdfium_clear_doc = pdfium.PdfDocument(str(folder / CLEARSCAN_PDF))
-        pdfium_truth_doc = pdfium.PdfDocument(str(folder / TRUTH_PDF))
+        pdfium_clear_doc = pdfium.PdfDocument(str(folder / "clearscan.pdf"))
+        pdfium_truth_doc = pdfium.PdfDocument(str(folder / "truth.pdf"))
         pdfium_clear = np.asarray(
             pdfium_clear_doc[0].render(scale=dpi / 72).to_pil().convert("L")
         )
@@ -100,7 +93,7 @@ def main():
             for prototype in page["reconstruction"]["prototypes"]:
                 styles = set()
                 for member in prototype["members"]:
-                    parts = member.removeprefix(DOCUMENT_DONOR_PREFIX).split(":", 1)
+                    parts = member.removeprefix("__doc_donor:").split(":", 1)
                     if len(parts) == 2 and (parts[0], parts[1]) in observations_by_id:
                         styles.add(observations_by_id[(parts[0], parts[1])]["source"])
                 if len(styles) > 1:
@@ -112,7 +105,7 @@ def main():
                 if not prototype:
                     false_substitutions.append({"symbol": occurrence["symbol_id"], "reason": "missing_prototype"})
                     continue
-                rep = prototype["representative_symbol_id"].removeprefix(DOCUMENT_DONOR_PREFIX).split(":", 1)
+                rep = prototype["representative_symbol_id"].removeprefix("__doc_donor:").split(":", 1)
                 donor = observations_by_id.get(tuple(rep)) if len(rep) == 2 else None
                 if not donor or donor["text"] != occurrence["text"]:
                     false_substitutions.append({"symbol": occurrence["symbol_id"], "reason": "identity_mismatch"})
@@ -148,7 +141,7 @@ def main():
             }
             if occ["repaired"]:
                 proto = proto_by_id[occ["prototype_id"]]
-                rep = proto["representative_symbol_id"].removeprefix(DOCUMENT_DONOR_PREFIX)
+                rep = proto["representative_symbol_id"].removeprefix("__doc_donor:")
             else:
                 rep = f"p01:p01-s{target_index:02}"
             donor_page, donor_id = rep.split(":", 1)
@@ -237,8 +230,8 @@ def main():
         from tools_env import ots_bin, qpdf_bin, qpdf_env
         qpdf = {name: run([qpdf_bin(), "--check", str(folder / f"{name}.pdf")], env=qpdf_env())
                 for name in ("clearscan", "faithful", "truth", "raster-baseline")}
-        ots = run([ots_bin(), str(folder / FONT_TTF), str(folder / "font-sanitized.ttf")])
-        font = TTFont(str(folder / FONT_TTF), recalcBBoxes=False, recalcTimestamp=False)
+        ots = run([ots_bin(), str(folder / "font.ttf"), str(folder / "font-sanitized.ttf")])
+        font = TTFont(str(folder / "font.ttf"), recalcBBoxes=False, recalcTimestamp=False)
         font_valid = all(tag in font for tag in ("cmap", "glyf", "head", "hhea", "hmtx", "maxp"))
         font.close()
         assert font_valid
@@ -260,15 +253,15 @@ def main():
                   "reused_occurrences_unsafe_vs_raster": len(unsafe_reuses),
                   "pdf_bytes": {n: (folder / f"{n}.pdf").stat().st_size for n in ("clearscan", "faithful", "truth", "raster-baseline")},
                   "comparison_arms": {
-                      "A0_pristine_oracle": TRUTH_PDF,
+                      "A0_pristine_oracle": "truth.pdf",
                       "A1_degraded_searchable_raster": "raster-baseline.pdf",
-                      "A2_existing_faithful": FAITHFUL_PDF,
-                      "A3_best_donor": CLEARSCAN_PDF,
+                      "A2_existing_faithful": "faithful.pdf",
+                      "A3_best_donor": "clearscan.pdf",
                       "A4_evidence_fused": "not implemented; no fusion arm was run",
                       "A5_calibrated_acceptance": "not implemented; auto falls back to A1 at the unchanged 0.98 policy",
                   },
-                  "font_bytes": (folder / FONT_TTF).stat().st_size,
-                  "compression_vs_faithful_bytes": (folder / FAITHFUL_PDF).stat().st_size - (folder / CLEARSCAN_PDF).stat().st_size,
+                  "font_bytes": (folder / "font.ttf").stat().st_size,
+                  "compression_vs_faithful_bytes": (folder / "faithful.pdf").stat().st_size - (folder / "clearscan.pdf").stat().st_size,
                   "fonttools_valid": font_valid, "ots": ots, "qpdf": qpdf,
                   "pdfium_text_equal": True, "pdfium_search": {name: all(v.values()) for name,v in search.items()}}
         result["compression_vs_searchable_raster_baseline_bytes"] = (

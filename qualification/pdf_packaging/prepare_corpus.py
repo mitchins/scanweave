@@ -3,10 +3,6 @@ import json,urllib.request,hashlib,subprocess,shutil
 from pathlib import Path
 import pikepdf
 from PIL import Image
-
-NATIVE_PDF_GEOMETRY = 'PDF native physical geometry'
-LINN_SOURCE_PDF = 'c03-29.pdf'
-
 B=Path(__file__).resolve().parent;R=B.parents[1];D=B/'corpus';D.mkdir(exist_ok=True);rows=[]
 def fetch(url,name):
  p=D/name
@@ -33,23 +29,23 @@ u='https://archive.org/download/annualreport1920ipsw/annualreport1920ipsw.pdf';a
 for index in [10,20,30,40,50,60,70,80,90,100,110,120,130]:
  if index>=len(q.pages):continue
  out=D/f'annual-{index+1:03}.pdf';t=pikepdf.Pdf.new();t.pages.append(q.pages[index]);t.save(out)
- rows.append({'id':out.stem,'kind':'historical annual report / financial statement','source_pdf_page':index+1,'origin':u,'license':'Public domain (1920 US government town report)','rights_reference':'https://commons.wikimedia.org/wiki/File:Annual_report_(IA_annualreport1920ipsw).pdf','dpi':NATIVE_PDF_GEOMETRY})
+ rows.append({'id':out.stem,'kind':'historical annual report / financial statement','source_pdf_page':index+1,'origin':u,'license':'Public domain (1920 US government town report)','rights_reference':'https://commons.wikimedia.org/wiki/File:Annual_report_(IA_annualreport1920ipsw).pdf','dpi':'PDF native physical geometry'})
 # Scanned pages in OCRmyPDF development resources, explicitly licensed per REUSE.
 base='https://raw.githubusercontent.com/ocrmypdf/OCRmyPDF/main/'
 for name in ['REUSE.toml','tests/resources/README.rst']:
  try:fetch(base+name,Path(name).name)
  except Exception as e:print(name,str(e))
-for name in [LINN_SOURCE_PDF,'linn.pdf']:
+for name in ['c03-29.pdf','linn.pdf']:
  try:
   p=fetch(base+'tests/resources/'+name,'ocrmypdf-'+name);q=pikepdf.open(p);t=pikepdf.Pdf.new();t.pages.append(q.pages[0]);out=D/('scan-'+Path(name).stem+'.pdf');t.save(out)
-  rows.append({'id':out.stem,'kind':'illustrated book' if name==LINN_SOURCE_PDF else 'scanned mixed-artwork product brochure','origin':base+'tests/resources/'+name,'license':'Public domain (Mark Twain source scan)' if name==LINN_SOURCE_PDF else 'CC-BY-SA-3.0; Forat Electronics (1985); see frozen REUSE.toml','dpi':NATIVE_PDF_GEOMETRY})
+  rows.append({'id':out.stem,'kind':'illustrated book' if name=='c03-29.pdf' else 'scanned mixed-artwork product brochure','origin':base+'tests/resources/'+name,'license':'Public domain (Mark Twain source scan)' if name=='c03-29.pdf' else 'CC-BY-SA-3.0; Forat Electronics (1985); see frozen REUSE.toml','dpi':'PDF native physical geometry'})
  except Exception as e:print(name,str(e))
 # Genuine scanned federal procurement form, not a born-digital form fixture.
 u='https://www.archives.gov/files/foia/pdf/1940-census.pdf'
 p=fetch(u,'nara-1940-census.pdf');q=pikepdf.open(p)
 for index in [0,1]:
  out=D/f'nara-form-{index+1:02}.pdf';t=pikepdf.Pdf.new();t.pages.append(q.pages[index]);t.save(out)
- rows.append({'id':out.stem,'kind':'scanned completed procurement form','source_pdf_page':index+1,'origin':u,'license':'US federal government record; public domain','dpi':NATIVE_PDF_GEOMETRY})
+ rows.append({'id':out.stem,'kind':'scanned completed procurement form','source_pdf_page':index+1,'origin':u,'license':'US federal government record; public domain','dpi':'PDF native physical geometry'})
 for row in rows:
  p=D/(row['id']+'.pdf');row.update(input_pdf=str(p.relative_to(R)),input_bytes=p.stat().st_size,sha256=hashlib.sha256(p.read_bytes()).hexdigest())
 (B/'corpus.json').write_text(json.dumps(rows,indent=2));print('pages',len(rows))

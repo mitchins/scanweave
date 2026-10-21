@@ -10,9 +10,6 @@ from PIL import Image
 import pypdfium2 as pdfium
 from fontTools.ttLib import TTFont
 
-FONT_TTF = 'font.ttf'
-
-
 ROOT = Path(__file__).resolve().parents[1]
 EVIDENCE = ROOT / "qualification/evidence/m1d_reconstruction"
 FIXTURE = ROOT / "qualification/fixtures/m1d_damage"
@@ -87,8 +84,8 @@ def main():
     qpdf_output = {name: run([qpdf_bin(), "--check", str(EVIDENCE / f"{name}.pdf")], env=qpdf_env()).strip()
                    for name in ("faithful", "clearscan")}
     ots_out = EVIDENCE / "font-sanitized.ttf"
-    ots_output = run([ots_bin(), str(EVIDENCE / FONT_TTF), str(ots_out)]).strip()
-    font = TTFont(str(EVIDENCE / FONT_TTF), recalcBBoxes=False, recalcTimestamp=False)
+    ots_output = run([ots_bin(), str(EVIDENCE / "font.ttf"), str(ots_out)]).strip()
+    font = TTFont(str(EVIDENCE / "font.ttf"), recalcBBoxes=False, recalcTimestamp=False)
     font_ok = all(tag in font for tag in ("cmap", "glyf", "head", "hhea", "hmtx", "maxp"))
     assert font_ok
     font.close()
@@ -126,7 +123,7 @@ def main():
         "vector_ink_coverage": coverage,
         "faithful_pdf_bytes": faithful.stat().st_size,
         "clearscan_pdf_bytes": clearscan.stat().st_size,
-        "embedded_font_bytes": (EVIDENCE / FONT_TTF).stat().st_size,
+        "embedded_font_bytes": (EVIDENCE / "font.ttf").stat().st_size,
         "fonttools_valid": font_ok,
         "ots_sanitizer": ots_output,
         "qpdf": qpdf_output,

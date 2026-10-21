@@ -10,13 +10,6 @@ import os
 import subprocess
 import sys
 
-OUTPUT_PDF = 'out.pdf'
-OCRMY_PDF = 'ocrm.pdf'
-ARCHIVE_PDF = 'ia.pdf'
-RASTER_BASELINE_PDF = 'b0_raster.pdf'
-INPUT_PDF = 'input.pdf'
-
-
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(HERE)
 PROBE = os.path.join(ROOT, "target", "debug", "m0-font-pdf")
@@ -120,38 +113,38 @@ def main() -> int:
         p09 = {"probe_rc": r.returncode}
         png = os.path.join(p09_dir, "p09_realtext.png")
         p09["source_png"] = os.path.getsize(png)
-        for label, f in (("B2", OUTPUT_PDF), ("B0", RASTER_BASELINE_PDF)):
+        for label, f in (("B2", "out.pdf"), ("B0", "b0_raster.pdf")):
             p09[label] = os.path.getsize(os.path.join(d, f))
         # external: make a 1-page PDF input, run ocrmypdf + ia recode_pdf
         from PIL import Image as PILImage
-        PILImage.open(png).convert("RGB").save(os.path.join(d, INPUT_PDF), "PDF", resolution=300.0)
+        PILImage.open(png).convert("RGB").save(os.path.join(d, "input.pdf"), "PDF", resolution=300.0)
         hocr = os.path.join(d, "tess.hocr")
         sh([tess_bin, png, hocr[:-5], "-c", "hocr_char_boxes=1", "hocr"], env=ext_env)
         q = sh([ocrmypdf_bin, "--output-type", "pdf", "--force-ocr", "-l", "eng",
-                "--optimize", "0", os.path.join(d, INPUT_PDF), os.path.join(d, OCRMY_PDF)],
+                "--optimize", "0", os.path.join(d, "input.pdf"), os.path.join(d, "ocrm.pdf")],
                env=ext_env)
-        p09["ocrmypdf_bytes"] = os.path.getsize(os.path.join(d, OCRMY_PDF)) if q.returncode == 0 else None
-        q = sh([recode, "-P", os.path.join(d, INPUT_PDF), "-T", hocr,
-                "-o", os.path.join(d, ARCHIVE_PDF), "-m", "0",
+        p09["ocrmypdf_bytes"] = os.path.getsize(os.path.join(d, "ocrm.pdf")) if q.returncode == 0 else None
+        q = sh([recode, "-P", os.path.join(d, "input.pdf"), "-T", hocr,
+                "-o", os.path.join(d, "ia.pdf"), "-m", "0",
                 "--bg-compression-flags=-r", "500", "--fg-compression-flags=-r", "750",
                 "--hq-bg-compression-flags=-r", "500", "--hq-fg-compression-flags=-r", "750"],
                env=ext_env)
         # recode_pdf needs the flags as separate argv items; rerun with sh instead
-        if q.returncode != 0 or not os.path.exists(os.path.join(d, ARCHIVE_PDF)):
+        if q.returncode != 0 or not os.path.exists(os.path.join(d, "ia.pdf")):
             q = sh(
-                [recode, "-P", os.path.join(d, INPUT_PDF), "-T", hocr,
-                 "-o", os.path.join(d, ARCHIVE_PDF), "-m", "0",
+                [recode, "-P", os.path.join(d, "input.pdf"), "-T", hocr,
+                 "-o", os.path.join(d, "ia.pdf"), "-m", "0",
                  "--bg-compression-flags=-r 500", "--fg-compression-flags=-r 750",
                  "--hq-bg-compression-flags=-r 500", "--hq-fg-compression-flags=-r 750"],
                 env=ext_env,
             )
-        p09["ia_mrc_bytes"] = os.path.getsize(os.path.join(d, ARCHIVE_PDF)) if os.path.exists(os.path.join(d, ARCHIVE_PDF)) else None
+        p09["ia_mrc_bytes"] = os.path.getsize(os.path.join(d, "ia.pdf")) if os.path.exists(os.path.join(d, "ia.pdf")) else None
         # fidelity: ink IoU for every candidate (same threshold rule)
         src_gray = np.asarray(PILImage.open(png).convert("L"))
         def _fg(a, p=255.0, t=60.0):
             return np.abs(a.astype(float) - p) > t
         ms = _fg(src_gray)
-        doc0 = pdfium.PdfDocument(os.path.join(d, OUTPUT_PDF))
+        doc0 = pdfium.PdfDocument(os.path.join(d, "out.pdf"))
         ren0 = np.asarray(doc0[0].render(scale=300 / 72.0).to_pil().convert("L"))[: src_gray.shape[0], : src_gray.shape[1]]
         mr0 = _fg(ren0)
         p09["B2_ink_iou"] = round(float((ms & mr0).sum() / (ms | mr0).sum()), 4)
@@ -161,13 +154,13 @@ def main() -> int:
         env_q = qpdf_env()
         qdf = os.path.join(d, "out.qdf.pdf")
         _sp.run([QPDF(),
-                 "--qdf", "--object-streams=disable", os.path.join(d, OUTPUT_PDF), qdf],
+                 "--qdf", "--object-streams=disable", os.path.join(d, "out.pdf"), qdf],
                 capture_output=True, env=env_q)
         raw = open(qdf, "rb").read() if os.path.exists(qdf) else b""
         bdc, emc = raw.count(b"BDC" + bytes([10])), raw.count(b"EMC" + bytes([10]))
         p09["marked_content_balanced"] = (bdc == emc) and bdc > 0
         p09["marked_content"] = {"bdc": bdc, "emc": emc}
-        for label, f in (("ia_mrc", ARCHIVE_PDF), ("ocrmypdf", OCRMY_PDF)):
+        for label, f in (("ia_mrc", "ia.pdf"), ("ocrmypdf", "ocrm.pdf")):
             fp = os.path.join(d, f)
             if os.path.exists(fp):
                 dd = pdfium.PdfDocument(fp)
@@ -187,23 +180,23 @@ def main() -> int:
             os.makedirs(d, exist_ok=True)
             png = os.path.join(p10_dir, f"p10_page{n}.png")
             sh([PROBE, "build", "--page", os.path.join(p10_dir, f"page{n}"), "--out", d])
-            ipdf = os.path.join(d, INPUT_PDF)
+            ipdf = os.path.join(d, "input.pdf")
             PILImage.open(png).convert("RGB").save(ipdf, "PDF", resolution=300.0)
             hocr = os.path.join(d, "tess.hocr")
             sh([tess_bin, png, hocr[:-5], "-c", "hocr_char_boxes=1", "hocr"], env=ext_env)
             run_external([ocrmypdf_bin, "--output-type", "pdf", "--force-ocr", "-l", "eng",
-                          "--optimize", "0", ipdf, os.path.join(d, OCRMY_PDF)],
-                         os.path.join(d, OCRMY_PDF), ext_env, "ocrmypdf")
-            run_external([recode, "-P", ipdf, "-T", hocr, "-o", os.path.join(d, ARCHIVE_PDF), "-m", "0",
+                          "--optimize", "0", ipdf, os.path.join(d, "ocrm.pdf")],
+                         os.path.join(d, "ocrm.pdf"), ext_env, "ocrmypdf")
+            run_external([recode, "-P", ipdf, "-T", hocr, "-o", os.path.join(d, "ia.pdf"), "-m", "0",
                           "--bg-compression-flags=-r 500", "--fg-compression-flags=-r 750",
                           "--hq-bg-compression-flags=-r 500", "--hq-fg-compression-flags=-r 750"],
-                         os.path.join(d, ARCHIVE_PDF), ext_env, "ia recode_pdf")
+                         os.path.join(d, "ia.pdf"), ext_env, "ia recode_pdf")
             row = {
                 "src": os.path.getsize(png),
-                "B0": os.path.getsize(os.path.join(d, RASTER_BASELINE_PDF)),
-                "B2": os.path.getsize(os.path.join(d, OUTPUT_PDF)),
-                "ocrmypdf": os.path.getsize(os.path.join(d, OCRMY_PDF)),
-                "ia_mrc": os.path.getsize(os.path.join(d, ARCHIVE_PDF)),
+                "B0": os.path.getsize(os.path.join(d, "b0_raster.pdf")),
+                "B2": os.path.getsize(os.path.join(d, "out.pdf")),
+                "ocrmypdf": os.path.getsize(os.path.join(d, "ocrm.pdf")),
+                "ia_mrc": os.path.getsize(os.path.join(d, "ia.pdf")),
             }
             p10["pages"][n] = row
             for k in tot:
@@ -225,8 +218,8 @@ def main() -> int:
             continue
 
         src_png = os.path.join(page_dir, f"{name}.png")
-        b2 = os.path.join(out_dir, OUTPUT_PDF)
-        b0 = os.path.join(out_dir, RASTER_BASELINE_PDF)
+        b2 = os.path.join(out_dir, "out.pdf")
+        b0 = os.path.join(out_dir, "b0_raster.pdf")
 
         sizes = {
             "source_png": os.path.getsize(src_png),

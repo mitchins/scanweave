@@ -38,13 +38,6 @@ import sys
 import tempfile
 from pathlib import Path
 
-PAGE_TEXT_START = 'BT /F1 11 Tf'
-PAGE_LABEL = '1 0 0 1 72 700 Tm (Page) Tj'
-PAGE_NUMBER_ONE = '1 0 0 1 116 700 Tm (1) Tj'
-PAGE_OF = '1 0 0 1 130 700 Tm (of) Tj'
-PAGE_COUNT = '1 0 0 1 190 700 Tm (4.) Tj'
-
-
 sys.path.insert(0, "qualification/.venv/lib/python3.12/site-packages")
 import pypdfium2 as pdfium  # noqa: E402
 
@@ -64,14 +57,14 @@ def content_v0() -> bytes:
 def content_v1() -> bytes:
     # one line-level ActualText enclosing all runs, in reading order
     c = [
-        PAGE_TEXT_START,
+        "BT /F1 11 Tf",
         "/Span <</ActualText <FEFF0050006100670065002000310020006F006600200034002E> >> BDC",
-        PAGE_LABEL,
+        "1 0 0 1 72 700 Tm (Page) Tj",
         "3 Tr",
-        PAGE_NUMBER_ONE,
+        "1 0 0 1 116 700 Tm (1) Tj",
         "0 Tr",
-        PAGE_OF,
-        PAGE_COUNT,
+        "1 0 0 1 130 700 Tm (of) Tj",
+        "1 0 0 1 190 700 Tm (4.) Tj",
         "EMC",
         "ET",
     ]
@@ -81,12 +74,12 @@ def content_v1() -> bytes:
 def content_v2() -> bytes:
     # line-level ActualText, but the owner run is visible (control for V1)
     c = [
-        PAGE_TEXT_START,
+        "BT /F1 11 Tf",
         "/Span <</ActualText <FEFF0050006100670065002000310020006F006600200034002E> >> BDC",
-        PAGE_LABEL,
-        PAGE_NUMBER_ONE,
-        PAGE_OF,
-        PAGE_COUNT,
+        "1 0 0 1 72 700 Tm (Page) Tj",
+        "1 0 0 1 116 700 Tm (1) Tj",
+        "1 0 0 1 130 700 Tm (of) Tj",
+        "1 0 0 1 190 700 Tm (4.) Tj",
         "EMC",
         "ET",
     ]
@@ -112,15 +105,15 @@ def content_v4_off_baseline() -> bytes:
     span box [143,299,161,341] → y_bot = page_h - 341*dpi-scale while the
     visible glyph baseline sits at the ink bottom). Invisible run, emitted last
     — exactly the M1-A content shape."""
-    c = [PAGE_TEXT_START]
+    c = ["BT /F1 11 Tf"]
     c.append(_mark("Page"))
-    c.append(PAGE_LABEL)
+    c.append("1 0 0 1 72 700 Tm (Page) Tj")
     c.append("EMC")
     c.append(_mark("of"))
-    c.append(PAGE_OF)
+    c.append("1 0 0 1 130 700 Tm (of) Tj")
     c.append("EMC")
     c.append(_mark("4."))
-    c.append(PAGE_COUNT)
+    c.append("1 0 0 1 190 700 Tm (4.) Tj")
     c.append("EMC")
     # owner: invisible, emitted LAST, on the polygon-box baseline (1pt below
     # the visible line) — the M1-A content shape
@@ -136,21 +129,21 @@ def content_v4_off_baseline() -> bytes:
 def content_v5_ink_baseline() -> bytes:
     """Shipped M1-B geometry: owner run invisible, INLINE in reading order, on
     the span's traced INK baseline (exactly the visible line's baseline)."""
-    c = [PAGE_TEXT_START]
+    c = ["BT /F1 11 Tf"]
     c.append(_mark("Page"))
-    c.append(PAGE_LABEL)
+    c.append("1 0 0 1 72 700 Tm (Page) Tj")
     c.append("EMC")
     # owner: invisible, INLINE in reading order, on the line's baseline
     c.append(_mark("1"))
     c.append("3 Tr")
-    c.append(PAGE_NUMBER_ONE)
+    c.append("1 0 0 1 116 700 Tm (1) Tj")
     c.append("0 Tr")
     c.append("EMC")
     c.append(_mark("of"))
-    c.append(PAGE_OF)
+    c.append("1 0 0 1 130 700 Tm (of) Tj")
     c.append("EMC")
     c.append(_mark("4."))
-    c.append(PAGE_COUNT)
+    c.append("1 0 0 1 190 700 Tm (4.) Tj")
     c.append("EMC")
     c.append("ET")
     return ("\n".join(c)).encode()

@@ -22,19 +22,19 @@ Quality Gate OK. There are 240 analyzed files and 24,397 non-comment lines.
 
 | Assignment | Unique keys | Boundary |
 |---|---:|---|
-| Wave 1 | 55 | Qualification utilities only: 47 literal, four correctness/contract and four bounded complexity findings |
+| Wave 1 | 24 | Qualification utilities only: 16 literal, four correctness/contract and four bounded complexity findings |
 | Wave 2 | 9 | Eight near-threshold production parsing/validation/encoding candidates plus explicit wildcard imports |
 | Wave 3 | 16 | Four identical auditors, four adjacent comparators and four adjacent stage analyzers (at most three implementation families) |
-| Deferred | 62 | Coupled production functions and qualification work beyond this bounded file/family budget |
+| Deferred | 93 | Coupled production functions and qualification work beyond this bounded file/family budget |
 
 Assignments are candidates, not advance claims of fixes. Each wave starts from
 latest verified main, with only one open PR, independent review, unchanged CI/
 Sonar gates, and operator merge approval. Wave 2 has not started. No rules,
 severities, source scope or Quality Gate thresholds change.
 
-## Wave 1 implementation
+## Wave 1 implementation (narrowed after execution-coverage review)
 
-Twenty-three modules replace repeated literal tokens with local constants.
+Twelve modules replace repeated literal tokens with local constants.
 At the **literal-only transformation stage**, before the separately tested
 helper extraction in `tonal_raster/compare.py`, expanding constants back yields
 **exact original AST equality**, including
@@ -140,3 +140,33 @@ their initially clean bytes, rather than replacing published evidence.
 Wave 1 PR: https://github.com/mitchins/scanweave/pull/11 . GitHub CI/Sonar
 results and review dispositions will be recorded there against the final head.
 No merge is authorized without the operator's approval.
+
+### First server analysis and bounded scope correction
+
+At `2916de8`, Rust/Python CI passed and CodeRabbit generated no actionable
+comments. Sonar correctly failed the unchanged gate: new coverage 49.2%,
+duplication 2.6%, and two newly identified BLOCKER Security findings. The first
+intake assignment was 55 / 9 / 16 / 62; the current CSV transparently revises it
+to 24 / 9 / 16 / 93. Original issue identities/locations remain frozen in JSON.
+
+The 31 literal findings in 11 historical modules had static AST proof but no
+sufficient instrumented execution of their changed entry-point paths. Their
+edits were reverted, rather than adding a broad mock/corpus framework to this
+small PR. They remain open and in Sonar scope; no coverage denominator,
+threshold or exclusion changed. The retained 16 literal findings are accompanied
+by exact-value controls and the existing, independently inspected helper tests.
+
+Two per-key false positives are separate from the 142-key HIGH intake:
+
+- `AaFcjOOaBNAmuu9Ye-Uy`, compare.py write at then-line 70.
+- `AaFcjOOaBNAmuu9Ye-Uz`, compare.py write at then-line 84.
+
+For each, static triage and independent review verified that `Path.write_text`
+opens its receiver, fixed `B / COMPARISON_JSON` (`comparison.json`). JSON-derived
+content flows only into its data argument through `json.dumps(results)`. Even
+hostile metadata cannot select the output filename at these reported sinks.
+Both were individually marked FALSE_POSITIVE and freshly server-verified, not
+Accepted or counted as code fixes. This narrow conclusion does not qualify
+separate metadata-derived image-read paths or malicious filesystem modification.
+No applicable SECURITY.md was found. The original 142 HIGH findings remain
+Maintainability-only; none were administratively closed by this action.
