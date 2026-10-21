@@ -10,7 +10,8 @@ from clearscan_audit import audit as _audit, main as _main
 
 
 def audit(dpi, arm, path, report_path=None):
-    return _audit(dpi, arm, path, report_path, root=ROOT)
+    """Retain the historical arm argument; accounting is arm-independent."""
+    return _audit(dpi, path, report_path, root=ROOT)
 
 
 if __name__ == '__main__':

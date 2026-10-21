@@ -99,7 +99,7 @@ class SharedAuditorTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)
             pdf, report, _ = fixture(root)
-            result = audit(300, 'control', pdf, report, root=root)
+            result = audit(300, pdf, report, root=root)
             self.assertEqual(result['shown_character_codes'], 3)
             self.assertEqual(result['painted_occurrences'], 2)
             self.assertEqual(result['used_font_gids'], 1)
@@ -122,7 +122,7 @@ class SharedAuditorTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)
             pdf, _, _ = fixture(root, cff=True)
-            result = audit(300, 'control', pdf, root=root)
+            result = audit(300, pdf, root=root)
             self.assertEqual(result['shown_character_codes'], 3)
             self.assertEqual(result['painted_occurrences'], 2)
             self.assertEqual(result['distinct_painted_outline_hashes'], 1)
@@ -141,11 +141,11 @@ class SharedAuditorTests(unittest.TestCase):
             reconstruction = data['page_reports'][0]['reconstruction']
             reconstruction['canonical_geometry'][0]['witness_symbol_id'] = 'doc:g01000'
             report.write_text(json.dumps(data))
-            result = audit(300, 'control', pdf, report, root=root)
+            result = audit(300, pdf, report, root=root)
             self.assertEqual((result['wrong_witness_identity'], result['wrong_witness_typeface']), (2, 2))
             reconstruction['canonical_geometry'] = []
             report.write_text(json.dumps(data))
-            self.assertEqual(audit(300, 'control', pdf, report, root=root)['assignments'], [])
+            self.assertEqual(audit(300, pdf, report, root=root)['assignments'], [])
 
     def test_all_historic_command_entry_points_write_identical_schema(self):
         with tempfile.TemporaryDirectory() as directory:
@@ -161,6 +161,15 @@ class SharedAuditorTests(unittest.TestCase):
                 self.assertEqual(json.loads(output)['painted_occurrences'], 2)
             self.assertEqual(len(set(hashes)), 1)
 
+    def test_historical_keyword_arm_is_preserved(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            pdf, _, _ = fixture(root)
+            for name in ENTRY_POINTS:
+                namespace = runpy.run_path(str(ROOT / 'qualification' / name / 'audit.py'))
+                result = namespace['audit'](dpi=300, arm='legacy-label', path=pdf)
+                self.assertEqual(result['painted_occurrences'], 2)
+
     def test_blank_pdf_and_nonembedded_font_keep_original_defaults(self):
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)
@@ -168,13 +177,13 @@ class SharedAuditorTests(unittest.TestCase):
             page = pdf.add_blank_page(page_size=(72, 72))
             path = root / 'blank.pdf'
             pdf.save(path)
-            self.assertIsNone(audit(300, 'control', path, root=root)['distinct_painted_outline_hashes'])
+            self.assertIsNone(audit(300, path, root=root)['distinct_painted_outline_hashes'])
             page.Resources = pikepdf.Dictionary(Font=pikepdf.Dictionary(
                 F1=pdf.make_indirect(pikepdf.Dictionary(Subtype=pikepdf.Name.Type1))))
             page.Contents = pdf.make_stream(b'BT /F1 10 Tf (A) Tj ET')
             pdf.save(path)
             pdf.close()
-            result = audit(300, 'control', path, root=root)
+            result = audit(300, path, root=root)
             self.assertEqual(result['painted_occurrences'], 1)
             self.assertIsNone(result['distinct_painted_outline_hashes'])
 

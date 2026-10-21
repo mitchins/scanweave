@@ -78,7 +78,7 @@ def ttf_outline(row, ttf, gid, context, state):
     row['outline_hash'] = digest
     glyph = ttf['glyf'][name]
     if glyph.numberOfContours and context.matrix:
-        a, b, c, d, e, f = context.matrix
+        a, _, _, d, e, f = context.matrix
         u = ttf['head'].unitsPerEm
         dpi = context.dpi
         row['bbox_px'] = [(e+a*glyph.xMin/u)*dpi/72,
@@ -211,7 +211,7 @@ def summarize(state):
             'scope': 'Assignment checks known source identity/style of selected witnesses, not a complete visual-identity classifier. Byte classes cannot split already encoded mixed-content streams.'}
 
 
-def audit(dpi, arm, path, report_path=None, *, root):
+def audit(dpi, path, report_path=None, *, root):
     document = pikepdf.open(path)
     state = AuditState()
     report = json.loads(report_path.read_text()) if report_path else None
@@ -230,7 +230,7 @@ def main(base, root):
     parser.add_argument('pdf', type=Path)
     parser.add_argument('--report', type=Path)
     args = parser.parse_args()
-    result = audit(args.dpi, args.arm, args.pdf, args.report, root=root)
+    result = audit(args.dpi, args.pdf, args.report, root=root)
     output = base / str(args.dpi) / args.arm / 'audit.json'
     output.parent.mkdir(exist_ok=True, parents=True)
     output.write_text(json.dumps(result, indent=2))

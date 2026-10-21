@@ -95,9 +95,10 @@ reclassified by green maintenance CI.
 
 ## Tests, coverage and review
 
-Six fast PDF-backed controls exercise TrueType/CFF accounting, empty outlines,
+Seven fast PDF-backed controls exercise TrueType/CFF accounting, empty outlines,
 Tj/TJ, invisible text, Unicode-owner ordering, native/shared image classification,
 wrong witnesses, absent reports, nonembedded fonts, all four real entry points,
+legacy keyword `arm` calls,
 and product sample identity/order. These minimal containers test accounting;
 they are **not** a claim of independent renderer validity. The unchanged actual
 product renders provide the Poppler/PDFium evidence.
@@ -113,3 +114,17 @@ Main's five original keys remain OPEN until an approved merge and fresh main
 analysis verify closure and check for reidentification. Moving code alone is not
 reported as five verified fixes. No production interfaces, OCR, reconstructed
 fonts, Unicode ownership, faithful behavior or serialized PDF bytes change.
+
+
+### First server result and small cleanup
+
+At `0124487`, CI and Sonar passed (97.1% new-code coverage, zero duplication).
+Sonar also reported two new LOW unused matrix bindings and one MEDIUM unused
+parameter in the new shared implementation. Those are not HIGH target closures.
+The backend now takes only the inputs it uses; the legacy `arm` parameter stays
+in every historical wrapper's exact signature, including keyword calls. Its
+pre-existing unused-parameter findings remain old compatibility debt, not claimed
+fixes. Matrix unpacking explicitly ignores the same two unused components and
+preserves all numerical operations. Seven controls and all16 historical CLI
+comparisons pass again with exact output bytes. Independent review cleared the
+small delta. Fresh final-head CI/server results are recorded on the PR.
