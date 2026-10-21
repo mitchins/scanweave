@@ -1,6 +1,8 @@
 """Historical comparison inputs are intentional; scratch files are private."""
 import ast
 import os
+import runpy
+import sys
 from pathlib import Path
 import tempfile
 import unittest
@@ -34,6 +36,26 @@ class ComparisonTools(unittest.TestCase):
                 before.unlink()
                 with self.assertRaises(RuntimeError):
                     comparison_binary('SCANWEAVE_BASELINE_BIN')
+
+    def test_actual_historical_scripts_fail_before_measurement_without_overrides(self):
+        original_resolve = Path.resolve
+        for name in ('tonal_raster/baseline.py', 'tonal_raster/check_controls.py',
+                     'real_convergence/runtime_control.py'):
+            source = ROOT / name
+            with tempfile.TemporaryDirectory() as folder:
+                root = Path(folder)
+
+                def resolve(path, *args, **kwargs):
+                    if path == source:
+                        return root / source.name
+                    return original_resolve(path, *args, **kwargs)
+
+                with patch.object(Path, 'resolve', resolve), patch.object(
+                        sys, 'path', list(sys.path)), patch.dict(os.environ, {}, clear=True):
+                    with self.assertRaisesRegex(RuntimeError, 'absolute historical executable'):
+                        runpy.run_path(str(source))
+                self.assertFalse(list(root.rglob('*.pdf')))
+                self.assertFalse(list(root.rglob('*.json')))
 
     def test_environment_preserves_explicit_dependencies(self):
         original = {'PATH': '/caller/bin', 'LD_LIBRARY_PATH': '/caller/lib', 'EXTRA': 'yes'}
