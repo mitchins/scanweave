@@ -35,7 +35,9 @@ severities, source scope or Quality Gate thresholds change.
 ## Wave 1 implementation
 
 Twenty-three modules replace repeated literal tokens with local constants.
-Expanding those constants back yields **exact original AST equality**, including
+At the **literal-only transformation stage**, before the separately tested
+helper extraction in `tonal_raster/compare.py`, expanding constants back yields
+**exact original AST equality**, including
 PDF operation strings, regex bytes, fixture names, output paths and iteration
 order. A [literal contract manifest](sonar-high-wave1-literal-contracts.json)
 records original source SHA-256 values and exact constant values. No global
@@ -94,7 +96,7 @@ corpus-writing top-level programs. This is not a claim of executing every
 historical entry point.
 
 Independent read-only review found no blocking code difference; it separately
-verified constant-expanded AST equality, numerical/ordering invariants, shell
+verified literal-stage constant-expanded AST equality, numerical/ordering invariants, shell
 search semantics and contour closure. Execution qualification and fresh server
 results are recorded on the PR before merge approval.
 
