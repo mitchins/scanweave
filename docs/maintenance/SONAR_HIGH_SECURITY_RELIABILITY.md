@@ -25,9 +25,9 @@ never printed, persisted in these records or committed.
 
 All keys, original locations/status and dispositions are in
 [sonar-high-security-reliability.csv](sonar-high-security-reliability.csv).
-The 27 per-key false-positive reasons are in
+The 27 initial per-key false-positive reasons and three PR-only follow-ups are in
 [sonar-high-reviewed-paths.json](sonar-high-reviewed-paths.json).
-Those transitions and comments were verified on Sonar; they are **not code fixes**.
+The initial transitions and comments were verified on Sonar; they are **not code fixes**.
 The other 28 findings must not be represented as fixed on `main` before merge
 and fresh analysis. No manual closure of the five containment findings was made.
 
@@ -110,7 +110,14 @@ selection. No repository-provided HTTP/LLM file service or independently
 privileged caller was found. Corpus normalization invokes a fixed probe with an
 argv list; joined paths cannot equal exact option tokens and DPI is a float.
 
-The 27 individually reasoned false-positive transitions leave the five genuine
+A fresh analysis identified three PR-only repetitions at explicit output writes
+and rereads after context-manager changes. Independent review traced their
+constructed paths and both OCR branches: no OCR data chooses an output path.
+They have separate keys/reasons in the JSON ledger, not extra claims against the
+original 55-finding cohort. The new repeated OCR suffix literal also uses one
+constant rather than adding duplicated configuration.
+
+The individually reasoned false-positive transitions leave the five genuine
 containment findings untouched. No Accepted transition, rule/severity change,
 `NOSONAR` or analysis-scope exclusion was used. A future service accepting
 adversarial paths would need its own authority and argument boundaries; these
@@ -124,8 +131,9 @@ extended to the actual index/geometry helpers, identical rendering code was
 shared, and the subpixel tests were added to coverage. No threshold was weakened.
 
 Local unfiltered Rust tests (116 passed), denied-warning Clippy, existing Python
-qualification and the 26 focused tests pass. GitHub CI and server-side Sonar for
-the final containment patch are pending at this write-up; final per-head results
+qualification and the 26 focused tests pass. A diagnostic server analysis measures new
+coverage 91.8% and duplication 0.4%. GitHub CI and server-side Sonar for the
+final follow-up are pending at this write-up; final per-head results
 will be recorded on PR #10. Upload success alone is not a Quality Gate result.
 
 Independent patch review found no source-backed regression in the reliability

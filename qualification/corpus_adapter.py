@@ -40,6 +40,7 @@ STRATA = [
 ]
 
 SPLIT_FRACTIONS = [("train", 0.6), ("development", 0.2), ("calibration", 0.2)]
+OCR_JSON_SUFFIX = ".ocr.json"
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(HERE)
@@ -149,7 +150,7 @@ def seal_material(corpus_root: str, doc_id: str) -> dict:
             with open(source, "rb") as raster:
                 raster_bytes = raster.read()
             ocr_file = corpus_path(corpus_root, os.path.join(ddir, stem + ".hocr"))
-            ocr_file2 = corpus_path(corpus_root, os.path.join(ddir, stem + ".ocr.json"))
+            ocr_file2 = corpus_path(corpus_root, os.path.join(ddir, stem + OCR_JSON_SUFFIX))
             ocr_bytes = b""
             ocr_kind = "absent"
             if os.path.exists(ocr_file):
@@ -250,7 +251,7 @@ def main() -> int:
                     ocr_rel = normalize_and_validate_hocr(png, hocr, normalized_dir, args.dpi)
                     ocr_mode = "hocr_imported"
                 else:
-                    ocr_json = corpus_path(args.corpus, os.path.join(ddir, stem + ".ocr.json"),
+                    ocr_json = corpus_path(args.corpus, os.path.join(ddir, stem + OCR_JSON_SUFFIX),
                                            allow_holdout=args.include_holdout)
                     if not os.path.exists(ocr_json):
                         problems.append(f"{doc_id}/{f}: no OCR (hocr or ocr.json)")
@@ -261,7 +262,7 @@ def main() -> int:
                     if errs:
                         problems.append(f"{doc_id}/{f}: OCR validation: {errs[:2]}")
                         continue
-                    dest = os.path.join(normalized_dir, stem + ".ocr.json")
+                    dest = os.path.join(normalized_dir, stem + OCR_JSON_SUFFIX)
                     with open(dest, "w") as output:
                         json.dump(obj, output)
                     ocr_rel = dest

@@ -187,5 +187,32 @@
     "file": "qualification/corpus_adapter.py",
     "line": 259,
     "reason": "qualification/corpus_adapter.py:259: The --out argument intentionally selects the bundle destination. Derived child names are constructed from os.listdir basenames and fixed normalized/manifests suffixes, not an LLM/HTTP request. This verdict does not assert that corpus or output symlinks are sandboxed. Independently source-traced by high_boundary_review and reconciled with parent review at e8c0a652. A future untrusted service wrapper would require a separate authority boundary."
+  },
+  {
+    "key": "AaFcSIF7MAqcI2jED2Tv",
+    "rule": "pythonsecurity:S8707",
+    "file": "qualification/corpus_adapter.py",
+    "line": 265,
+    "scope": "pullRequest:10",
+    "analysis_revision": "45bb54bc323066bc669e13a06e90a3ad6cbafa66",
+    "reason": "dest is operator-selected --out/normalized plus a flattened document identity and a directory-entry basename with fixed OCR suffix. os.listdir names cannot contain directory separators or equal dot/dotdot. Parsed OCR fields do not choose the output. Restricting --out would contradict the explicit operator contract. Independently traced by containment_patch_review and reconciled with parent source review after server analysis. No claim of protection against concurrent malicious output-path/symlink mutation."
+  },
+  {
+    "key": "AaFcSIF7MAqcI2jED2Tw",
+    "rule": "pythonsecurity:S8707",
+    "file": "qualification/corpus_adapter.py",
+    "line": 271,
+    "scope": "pullRequest:10",
+    "analysis_revision": "45bb54bc323066bc669e13a06e90a3ad6cbafa66",
+    "reason": "The prenormalized branch reads the same locally constructed dest; the hOCR branch returns out_dir/normalized.ocr.json from normalize_and_validate_hocr, not OCR content or subprocess output. This is authorized output rereading, not an unchecked source-corpus read. Independently traced by containment_patch_review and reconciled with parent source review after server analysis. No claim of protection against concurrent malicious output-path/symlink mutation."
+  },
+  {
+    "key": "AaFcSH55MAqcI2jED2Tt",
+    "rule": "pythonsecurity:S8707",
+    "file": "qualification/experiments/m1c_r3/diagnostic.py",
+    "line": 267,
+    "scope": "pullRequest:10",
+    "analysis_revision": "45bb54bc323066bc669e13a06e90a3ad6cbafa66",
+    "reason": "The destination is exactly the deliberately arbitrary operator-selected --out plus fixed diagnostic_full.json. Neither tag nor report data enters the filename. The filename-only tag contract is separately enforced before generated per-run output. Independently traced by containment_patch_review and reconciled with parent source review after server analysis. No claim of protection against concurrent malicious output-path/symlink mutation."
   }
 ]
