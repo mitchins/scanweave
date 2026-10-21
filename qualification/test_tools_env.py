@@ -45,7 +45,7 @@ class ComparisonTools(unittest.TestCase):
             with tempfile.TemporaryDirectory() as folder:
                 root = Path(folder)
 
-                def resolve(path, *args, **kwargs):
+                def resolve(path, *args, source=source, root=root, **kwargs):
                     if path == source:
                         return root / source.name
                     return original_resolve(path, *args, **kwargs)
@@ -69,7 +69,7 @@ class ComparisonTools(unittest.TestCase):
             self.assertEqual(comparison_environment('/chosen/bin')['PATH'], '/chosen/bin')
 
     def test_private_scratch_lifetime_in_actual_utilities(self):
-        # Execute each actual context-manager expression in isolation, including
+        # Exercise each actual context-manager configuration in isolation, including
         # an exception path. No corpus/PDF generation is necessary for this bound.
         for name in ('tonal_raster/check_synthetic_renders.py',
                      'pr_closure/evaluate_repair.py', 'n1_experiments.py'):
@@ -82,12 +82,12 @@ class ComparisonTools(unittest.TestCase):
             self.assertTrue(calls, name)
             for call in calls:
                 self.assertNotIn('dir', [k.arg for k in call.keywords])
-                expression = compile(ast.Expression(call), str(ROOT / name), 'eval')
+                options = {item.arg: ast.literal_eval(item.value) for item in call.keywords}
                 paths = []
                 with self.assertRaisesRegex(RuntimeError, 'control failure'):
-                    with eval(expression, {'tempfile': tempfile}) as first:
+                    with tempfile.TemporaryDirectory(**options) as first:
                         paths.append(Path(first))
-                        with eval(expression, {'tempfile': tempfile}) as second:
+                        with tempfile.TemporaryDirectory(**options) as second:
                             paths.append(Path(second))
                             self.assertNotEqual(first, second)
                             self.assertEqual(Path(first).stat().st_mode & 0o777, 0o700)
