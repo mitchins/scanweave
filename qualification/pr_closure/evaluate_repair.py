@@ -1,6 +1,6 @@
 """Evaluator-only pristine reference; exact physical placement, no glyph alignment."""
 from pathlib import Path
-import json,subprocess,math,io,sys
+import json,subprocess,math,io,sys,tempfile
 import numpy as np,pypdfium2 as pdfium,pikepdf
 from PIL import Image
 from fontTools.ttLib import TTFont
@@ -26,7 +26,9 @@ for arm in ['faithful','clearscan']:
  row={'arm':arm,'native_text':txt,'poppler_text':subprocess.check_output(['pdftotext','-raw',str(path),'-']).decode(),'qpdf_status':subprocess.run([qpdf_bin(),'--check',str(path)],env=qpdf_env(),capture_output=True).returncode,'fonts':[]};q=pikepdf.open(path)
  for obj in q.objects:
   if isinstance(obj,pikepdf.Dictionary) and '/FontFile2' in obj:
-   data=obj.FontFile2.read_bytes();f=TTFont(io.BytesIO(data));tmp=Path('/tmp/scanweave-closure-font.ttf');tmp.write_bytes(data);row['fonts'].append({'glyphs':f['maxp'].numGlyphs,'ots_status':subprocess.run([ots_bin(),str(tmp)],capture_output=True).returncode})
+   data=obj.FontFile2.read_bytes();f=TTFont(io.BytesIO(data))
+   with tempfile.TemporaryDirectory(prefix='scanweave-closure-font-') as folder:
+    tmp=Path(folder)/'font.ttf';tmp.write_bytes(data);row['fonts'].append({'glyphs':f['maxp'].numGlyphs,'ots_status':subprocess.run([ots_bin(),str(tmp)],capture_output=True).returncode})
  valid.append(row)
 assert valid[0]['native_text']==valid[1]['native_text']
 out={'comparison':rows,'validity_search':valid,'old_evaluator_failure':'faithful-to-source IoU is not necessarily larger than repaired-to-source IoU under source-patch sampling; old assertion retained and its failure logged, not weakened','note':'This evaluator reads pristine truth; the converter does not.'};(B/'repair-evaluation.json').write_text(json.dumps(out,indent=2));print(rows)

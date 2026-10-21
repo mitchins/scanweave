@@ -32,9 +32,9 @@ jobs:
             target
           key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
       - name: cargo test
-        run: cargo test --workspace
+        run: cargo test --workspace --locked
       - name: cargo clippy (deny warnings on the library crates)
-        run: cargo clippy -p scanweave-core -p scanweave-io -p scanweave-cli -- -D warnings
+        run: cargo clippy --locked -p scanweave-core -p scanweave-io -p scanweave-cli -- -D warnings
 
   publication-hygiene:
     name: Publication hygiene
@@ -89,7 +89,7 @@ jobs:
           "$ots_src/build/ots-sanitize" --version
           echo "SCANWEAVE_OTS=$ots_src/build/ots-sanitize" >> "$GITHUB_ENV"
       - name: Build the probe / CLI
-        run: cargo build --workspace
+        run: cargo build --workspace --locked
       - name: Sub-pixel metric analytical tests
         run: qualification/.venv/bin/python qualification/test_subpixel_metric.py
       - name: Corpus adapter
@@ -97,6 +97,8 @@ jobs:
       - name: Fixture schema layer
         # must run with the venv interpreter: jsonschema is not a system package
         run: qualification/.venv/bin/python qualification/validate_fixtures.py
+      - name: Qualification tool and scratch boundaries
+        run: qualification/.venv/bin/python qualification/test_tools_env.py
       - name: hOCR XML entity boundary
         run: qualification/.venv/bin/python qualification/test_hocr_xml_security.py
       - name: Text search gates

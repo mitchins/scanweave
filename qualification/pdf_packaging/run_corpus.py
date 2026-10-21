@@ -1,11 +1,13 @@
 """Same image-only page PDFs to all ordinary converters; resumable bounded runs."""
 import os,json,time,subprocess,concurrent.futures,hashlib,sys
 from pathlib import Path
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+from tools_env import comparison_environment
 import pikepdf,pypdfium2 as pdfium
 from PIL import Image
 B=Path(__file__).resolve().parent;R=B.parents[1];V=Path(sys.executable).parent
 rows=json.loads((B/'corpus.json').read_text());OUT=B/'real';OUT.mkdir(exist_ok=True)
-env=dict(os.environ,OMP_THREAD_LIMIT='1',PATH='/tmp/scanweave-packaging-deps/root/usr/bin:'+str(V)+':'+os.environ['PATH'],LD_LIBRARY_PATH='/tmp/scanweave-packaging-deps/root/usr/lib/x86_64-linux-gnu')
+env=comparison_environment(str(V))
 # Strip pre-existing text by rendering once, losslessly packaging these exact
 # shared samples at the PDF's physical size. This is corpus preparation only.
 for row in rows:

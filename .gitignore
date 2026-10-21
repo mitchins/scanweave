@@ -11,3 +11,8 @@ tools/
 
 # local secrets / environment
 .env
+
+# Measured CI/local analysis outputs (never source or credentials)
+.coverage
+coverage/
+.scannerwork/

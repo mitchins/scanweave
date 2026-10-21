@@ -1,8 +1,11 @@
 """One evaluator-only disabled-fastpath build, same final source/encoding/OCR."""
 import json,hashlib,os,subprocess,time
 from pathlib import Path
+import sys
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+from tools_env import comparison_binary
 B=Path(__file__).resolve().parent;R=B.parents[1];D=B/'runtime';D.mkdir(exist_ok=True);out=[]
-for name,exe in [('recompose','/tmp/scanweave-no-fastpath'),('skip_unneeded','/tmp/scanweave-real-reviewed')]:
+for name,exe in [('recompose',comparison_binary('SCANWEAVE_RECOMPOSE_BIN')),('skip_unneeded',comparison_binary('SCANWEAVE_BIN'))]:
  dst=D/f'{name}.pdf';cmd=[exe,str(R/'qualification/pdf_packaging/real/input/cord-05.pdf'),str(dst)];start=time.monotonic()
  with (D/f'{name}.log').open('w') as f:p=subprocess.run(['/usr/bin/time','-v','-o',str(D/f'{name}.time.txt')]+cmd,stdout=f,stderr=subprocess.STDOUT,env=dict(os.environ,OMP_THREAD_LIMIT='1'))
  if p.returncode:raise RuntimeError(name)
