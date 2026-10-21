@@ -1,0 +1,191 @@
+[
+  {
+    "key": "AaFbZj1n2TNSduKvuGvH",
+    "rule": "pythonsecurity:S8707",
+    "file": "qualification/clearscan_background/zooms.py",
+    "line": 32,
+    "reason": "qualification/clearscan_background/zooms.py:32: argparse parses --dpi as int before constructing a numeric path component under fixed B. Path separators and parent traversal cannot survive this conversion; output report destination is fixed B/zoom-renders.json. Independently source-traced by high_boundary_review and reconciled with parent review at e8c0a652. A future untrusted service wrapper would require a separate authority boundary."
+  },
+  {
+    "key": "AaFbZj3Q2TNSduKvuGyI",
+    "rule": "pythonsecurity:S8707",
+    "file": "qualification/clearscan_contours/zooms.py",
+    "line": 32,
+    "reason": "qualification/clearscan_contours/zooms.py:32: argparse parses --dpi as int before constructing a numeric path component under fixed B. Path separators and parent traversal cannot survive this conversion; output report destination is fixed B/zoom-renders.json. Independently source-traced by high_boundary_review and reconciled with parent review at e8c0a652. A future untrusted service wrapper would require a separate authority boundary."
+  },
+  {
+    "key": "AaFbZj2L2TNSduKvuGvz",
+    "rule": "pythonsecurity:S8707",
+    "file": "qualification/experiments/m1g/hash_artifacts.py",
+    "line": 77,
+    "reason": "qualification/experiments/m1g/hash_artifacts.py:77: The optional positional argument explicitly selects the inventory output file. No independent document or LLM input selects this output. Restricting it to cwd would break the documented inventory CLI. Independently source-traced by high_boundary_review and reconciled with parent review at e8c0a652. A future untrusted service wrapper would require a separate authority boundary."
+  },
+  {
+    "key": "AaFbZj2W2TNSduKvuGv0",
+    "rule": "pythonsecurity:S8707",
+    "file": "qualification/experiments/m1f/compare_renderers.py",
+    "line": 31,
+    "reason": "qualification/experiments/m1f/compare_renderers.py:31: The fourth positional argument explicitly selects the render-output directory. Its mkdir is the requested operation, not a crossing into an independently privileged file service. No repository LLM/HTTP caller exists. Independently source-traced by high_boundary_review and reconciled with parent review at e8c0a652. A future untrusted service wrapper would require a separate authority boundary."
+  },
+  {
+    "key": "AaFbZj2Z2TNSduKvuGv6",
+    "rule": "pythonsecurity:S8707",
+    "file": "qualification/experiments/m1f/encode_predictor_variants.py",
+    "line": 7,
+    "reason": "qualification/experiments/m1f/encode_predictor_variants.py:7: The caller explicitly selects input PDF and output directory; derived output names are fixed predictor variants and predictor-variants.json. PDF content supplies stream data, not output path components. No independently privileged caller exists. Independently source-traced by high_boundary_review and reconciled with parent review at e8c0a652. A future untrusted service wrapper would require a separate authority boundary."
+  },
+  {
+    "key": "AaFbZj2Z2TNSduKvuGv8",
+    "rule": "pythonsecurity:S8707",
+    "file": "qualification/experiments/m1f/encode_predictor_variants.py",
+    "line": 53,
+    "reason": "qualification/experiments/m1f/encode_predictor_variants.py:53: The caller explicitly selects input PDF and output directory; derived output names are fixed predictor variants and predictor-variants.json. PDF content supplies stream data, not output path components. No independently privileged caller exists. Independently source-traced by high_boundary_review and reconciled with parent review at e8c0a652. A future untrusted service wrapper would require a separate authority boundary."
+  },
+  {
+    "key": "AaFbZj2Z2TNSduKvuGv7",
+    "rule": "pythonsecurity:S8707",
+    "file": "qualification/experiments/m1f/encode_predictor_variants.py",
+    "line": 54,
+    "reason": "qualification/experiments/m1f/encode_predictor_variants.py:54: The caller explicitly selects input PDF and output directory; derived output names are fixed predictor variants and predictor-variants.json. PDF content supplies stream data, not output path components. No independently privileged caller exists. Independently source-traced by high_boundary_review and reconciled with parent review at e8c0a652. A future untrusted service wrapper would require a separate authority boundary."
+  },
+  {
+    "key": "AaFbZj2Z2TNSduKvuGv9",
+    "rule": "pythonsecurity:S8707",
+    "file": "qualification/experiments/m1f/encode_predictor_variants.py",
+    "line": 54,
+    "reason": "qualification/experiments/m1f/encode_predictor_variants.py:54: The caller explicitly selects input PDF and output directory; derived output names are fixed predictor variants and predictor-variants.json. PDF content supplies stream data, not output path components. No independently privileged caller exists. Independently source-traced by high_boundary_review and reconciled with parent review at e8c0a652. A future untrusted service wrapper would require a separate authority boundary."
+  },
+  {
+    "key": "AaFbZj2Y2TNSduKvuGv5",
+    "rule": "pythonsecurity:S8707",
+    "file": "qualification/experiments/m1f/measure_pdf.py",
+    "line": 16,
+    "reason": "qualification/experiments/m1f/measure_pdf.py:16: The CLI intentionally accepts PDF input paths for read-only accounting. The input path is selected by the invoking operator; there is no repository service granting a different actor filesystem authority. Independently source-traced by high_boundary_review and reconciled with parent review at e8c0a652. A future untrusted service wrapper would require a separate authority boundary."
+  },
+  {
+    "key": "AaFbZj2c2TNSduKvuGwK",
+    "rule": "pythonsecurity:S8707",
+    "file": "qualification/experiments/m1c_r3/diagnostic.py",
+    "line": 204,
+    "reason": "qualification/experiments/m1c_r3/diagnostic.py:204: The --out argument intentionally selects the report directory; fixed diagnostic_full.json/table.md destinations and mkdir implement that request. This is distinct from the separately unresolved --tag containment question. Independently source-traced by high_boundary_review and reconciled with parent review at e8c0a652. A future untrusted service wrapper would require a separate authority boundary."
+  },
+  {
+    "key": "AaFbZj2c2TNSduKvuGwL",
+    "rule": "pythonsecurity:S8707",
+    "file": "qualification/experiments/m1c_r3/diagnostic.py",
+    "line": 256,
+    "reason": "qualification/experiments/m1c_r3/diagnostic.py:256: The --out argument intentionally selects the report directory; fixed diagnostic_full.json/table.md destinations and mkdir implement that request. This is distinct from the separately unresolved --tag containment question. Independently source-traced by high_boundary_review and reconciled with parent review at e8c0a652. A future untrusted service wrapper would require a separate authority boundary."
+  },
+  {
+    "key": "AaFbZj2c2TNSduKvuGwJ",
+    "rule": "pythonsecurity:S8707",
+    "file": "qualification/experiments/m1c_r3/diagnostic.py",
+    "line": 263,
+    "reason": "qualification/experiments/m1c_r3/diagnostic.py:263: The --out argument intentionally selects the report directory; fixed diagnostic_full.json/table.md destinations and mkdir implement that request. This is distinct from the separately unresolved --tag containment question. Independently source-traced by high_boundary_review and reconciled with parent review at e8c0a652. A future untrusted service wrapper would require a separate authority boundary."
+  },
+  {
+    "key": "AaFbZj2h2TNSduKvuGw3",
+    "rule": "pythonsecurity:S8707",
+    "file": "qualification/experiments/m1c_r2/run.py",
+    "line": 194,
+    "reason": "qualification/experiments/m1c_r2/run.py:194: The --out argument intentionally selects the result JSON file; parent mkdir and open implement this caller-selected output. No independently privileged LLM/service caller exists. Independently source-traced by high_boundary_review and reconciled with parent review at e8c0a652. A future untrusted service wrapper would require a separate authority boundary."
+  },
+  {
+    "key": "AaFbZj2h2TNSduKvuGw1",
+    "rule": "pythonsecurity:S8707",
+    "file": "qualification/experiments/m1c_r2/run.py",
+    "line": 289,
+    "reason": "qualification/experiments/m1c_r2/run.py:289: The --out argument intentionally selects the result JSON file; parent mkdir and open implement this caller-selected output. No independently privileged LLM/service caller exists. Independently source-traced by high_boundary_review and reconciled with parent review at e8c0a652. A future untrusted service wrapper would require a separate authority boundary."
+  },
+  {
+    "key": "AaFbZj2h2TNSduKvuGw2",
+    "rule": "pythonsecurity:S8707",
+    "file": "qualification/experiments/m1c_r2/run.py",
+    "line": 290,
+    "reason": "qualification/experiments/m1c_r2/run.py:290: The --out argument intentionally selects the result JSON file; parent mkdir and open implement this caller-selected output. No independently privileged LLM/service caller exists. Independently source-traced by high_boundary_review and reconciled with parent review at e8c0a652. A future untrusted service wrapper would require a separate authority boundary."
+  },
+  {
+    "key": "AaFbZj2j2TNSduKvuGxZ",
+    "rule": "pythonsecurity:S8707",
+    "file": "qualification/experiments/m1c/run_ablation.py",
+    "line": 168,
+    "reason": "qualification/experiments/m1c/run_ablation.py:168: The --out argument intentionally selects the result JSON file; parent mkdir and open implement this caller-selected output. No independently privileged LLM/service caller exists. Independently source-traced by high_boundary_review and reconciled with parent review at e8c0a652. A future untrusted service wrapper would require a separate authority boundary."
+  },
+  {
+    "key": "AaFbZj2j2TNSduKvuGxX",
+    "rule": "pythonsecurity:S8707",
+    "file": "qualification/experiments/m1c/run_ablation.py",
+    "line": 251,
+    "reason": "qualification/experiments/m1c/run_ablation.py:251: The --out argument intentionally selects the result JSON file; parent mkdir and open implement this caller-selected output. No independently privileged LLM/service caller exists. Independently source-traced by high_boundary_review and reconciled with parent review at e8c0a652. A future untrusted service wrapper would require a separate authority boundary."
+  },
+  {
+    "key": "AaFbZj2j2TNSduKvuGxY",
+    "rule": "pythonsecurity:S8707",
+    "file": "qualification/experiments/m1c/run_ablation.py",
+    "line": 252,
+    "reason": "qualification/experiments/m1c/run_ablation.py:252: The --out argument intentionally selects the result JSON file; parent mkdir and open implement this caller-selected output. No independently privileged LLM/service caller exists. Independently source-traced by high_boundary_review and reconciled with parent review at e8c0a652. A future untrusted service wrapper would require a separate authority boundary."
+  },
+  {
+    "key": "AaFbZj4m2TNSduKvuGz1",
+    "rule": "pythonsecurity:S8707",
+    "file": "qualification/make_hocr.py",
+    "line": 15,
+    "reason": "qualification/make_hocr.py:15: Two positional arguments intentionally select the input OCR JSON and output hOCR. Callers and tests invoke this standalone transformation as the same user; OCR text affects escaped output body, not destination authority. Independently source-traced by high_boundary_review and reconciled with parent review at e8c0a652. A future untrusted service wrapper would require a separate authority boundary."
+  },
+  {
+    "key": "AaFbZj4m2TNSduKvuGz0",
+    "rule": "pythonsecurity:S8707",
+    "file": "qualification/make_hocr.py",
+    "line": 39,
+    "reason": "qualification/make_hocr.py:39: Two positional arguments intentionally select the input OCR JSON and output hOCR. Callers and tests invoke this standalone transformation as the same user; OCR text affects escaped output body, not destination authority. Independently source-traced by high_boundary_review and reconciled with parent review at e8c0a652. A future untrusted service wrapper would require a separate authority boundary."
+  },
+  {
+    "key": "AaFbZj512TNSduKvuG0l",
+    "rule": "pythonsecurity:S8705",
+    "file": "qualification/corpus_adapter.py",
+    "line": 95,
+    "reason": "qualification/corpus_adapter.py:95: normalize_and_validate_hocr uses a fixed repository probe executable and an argv list, no shell. Joined PNG/hOCR paths contain directory separators; output ends normalized.ocr.json; these cannot equal the exact flag tokens parsed by arg_of in probes/m0-font-pdf/src/main.rs. DPI is parsed as float. No demonstrated argument injection or privileged LLM caller. Independently source-traced by high_boundary_review and reconciled with parent review at e8c0a652. A future untrusted service wrapper would require a separate authority boundary."
+  },
+  {
+    "key": "AaFbZj512TNSduKvuG0v",
+    "rule": "pythonsecurity:S8707",
+    "file": "qualification/corpus_adapter.py",
+    "line": 204,
+    "reason": "qualification/corpus_adapter.py:204: The --out argument intentionally selects the bundle destination. Derived child names are constructed from os.listdir basenames and fixed normalized/manifests suffixes, not an LLM/HTTP request. This verdict does not assert that corpus or output symlinks are sandboxed. Independently source-traced by high_boundary_review and reconciled with parent review at e8c0a652. A future untrusted service wrapper would require a separate authority boundary."
+  },
+  {
+    "key": "AaFbZj512TNSduKvuG0q",
+    "rule": "pythonsecurity:S8707",
+    "file": "qualification/corpus_adapter.py",
+    "line": 220,
+    "reason": "qualification/corpus_adapter.py:220: The --out argument intentionally selects the bundle destination. Derived child names are constructed from os.listdir basenames and fixed normalized/manifests suffixes, not an LLM/HTTP request. This verdict does not assert that corpus or output symlinks are sandboxed. Independently source-traced by high_boundary_review and reconciled with parent review at e8c0a652. A future untrusted service wrapper would require a separate authority boundary."
+  },
+  {
+    "key": "AaFbZj512TNSduKvuG0t",
+    "rule": "pythonsecurity:S8707",
+    "file": "qualification/corpus_adapter.py",
+    "line": 225,
+    "reason": "qualification/corpus_adapter.py:225: The --out argument intentionally selects the bundle destination. Derived child names are constructed from os.listdir basenames and fixed normalized/manifests suffixes, not an LLM/HTTP request. This verdict does not assert that corpus or output symlinks are sandboxed. Independently source-traced by high_boundary_review and reconciled with parent review at e8c0a652. A future untrusted service wrapper would require a separate authority boundary."
+  },
+  {
+    "key": "AaFbZj512TNSduKvuG0p",
+    "rule": "pythonsecurity:S8707",
+    "file": "qualification/corpus_adapter.py",
+    "line": 261,
+    "reason": "qualification/corpus_adapter.py:261: The --out argument intentionally selects the bundle destination. Derived child names are constructed from os.listdir basenames and fixed normalized/manifests suffixes, not an LLM/HTTP request. This verdict does not assert that corpus or output symlinks are sandboxed. Independently source-traced by high_boundary_review and reconciled with parent review at e8c0a652. A future untrusted service wrapper would require a separate authority boundary."
+  },
+  {
+    "key": "AaFbZj512TNSduKvuG0u",
+    "rule": "pythonsecurity:S8707",
+    "file": "qualification/corpus_adapter.py",
+    "line": 251,
+    "reason": "qualification/corpus_adapter.py:251: The --out argument intentionally selects the bundle destination. Derived child names are constructed from os.listdir basenames and fixed normalized/manifests suffixes, not an LLM/HTTP request. This verdict does not assert that corpus or output symlinks are sandboxed. Independently source-traced by high_boundary_review and reconciled with parent review at e8c0a652. A future untrusted service wrapper would require a separate authority boundary."
+  },
+  {
+    "key": "AaFbZj512TNSduKvuG0m",
+    "rule": "pythonsecurity:S8707",
+    "file": "qualification/corpus_adapter.py",
+    "line": 259,
+    "reason": "qualification/corpus_adapter.py:259: The --out argument intentionally selects the bundle destination. Derived child names are constructed from os.listdir basenames and fixed normalized/manifests suffixes, not an LLM/HTTP request. This verdict does not assert that corpus or output symlinks are sandboxed. Independently source-traced by high_boundary_review and reconciled with parent review at e8c0a652. A future untrusted service wrapper would require a separate authority boundary."
+  }
+]

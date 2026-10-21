@@ -42,7 +42,7 @@ def unpadded_box(rec):
 
 def oracle_ink_box(oracle, rec):
     bx0,by0,bx1,by1=map(int,unpadded_box(rec))
-    yy,xx=np.where(oracle[by0:by1,bx0:bx1]<170)
+    yy,xx=np.nonzero(oracle[by0:by1,bx0:bx1]<170)
     if not len(xx): return [bx0,by0,bx1,by1]
     return [bx0+int(xx.min()),by0+int(yy.min()),
             bx0+int(xx.max())+1,by0+int(yy.max())+1]
@@ -169,7 +169,7 @@ def oracle_paths(page, truth, width, height):
         # the pristine source ink bounds, while the vector shape itself comes
         # from the licensed source font outline.
         bx0,by0,bx1,by1=map(int,unpadded_box(rec))
-        yy,xx=np.where(oracle[by0:by1,bx0:bx1]<170)
+        yy,xx=np.nonzero(oracle[by0:by1,bx0:bx1]<170)
         if not len(xx): continue
         box=[bx0+int(xx.min()),by0+int(yy.min()),bx0+int(xx.max())+1,by0+int(yy.max())+1]
         pen=PDFOutlinePen(gs,box,height); pen.prepare(g); gs[gn].draw(pen)

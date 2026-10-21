@@ -28,7 +28,7 @@ def inspect(path,ids,source,previous):
    item={'page':i,'object':image.objgen,'bytes':len(raw),'sha256':sha(raw),'width':int(image.Width),'height':int(image.Height),'filter':str(image.Filter),'predictor':int(image.get('/DecodeParms',{}).get('/Predictor',1)),'class':'paper' if background else ('native_whole_page' if whole else 'native_exception')}
    samples=np.asarray(pikepdf.PdfImage(image).as_pil_image().convert('RGB'));gray=bool(np.all(samples[:,:,0]==samples[:,:,1]) and np.all(samples[:,:,1]==samples[:,:,2]));item['gray']=gray
    if gray:
-    hist=np.bincount(samples[:,:,0].reshape(-1),minlength=256);item['histogram']=hist.tolist();item['strict_bitonal']=bool(set(np.where(hist)[0])=={0,255});item['gray_levels']=int((hist>0).sum())
+    hist=np.bincount(samples[:,:,0].reshape(-1),minlength=256);item['histogram']=hist.tolist();item['strict_bitonal']=bool(set(np.nonzero(hist)[0])=={0,255});item['gray_levels']=int((hist>0).sum())
    record['native'].append(item)
  return record
 

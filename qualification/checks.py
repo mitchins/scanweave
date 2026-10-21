@@ -147,7 +147,7 @@ def subpixel_boundary_points(gray: np.ndarray, m: np.ndarray, i50: float) -> np.
     H, W = m.shape
     g = gray
     for dy, dx in ((0, 1), (0, -1), (1, 0), (-1, 0)):
-        ys, xs = np.where(m)
+        ys, xs = np.nonzero(m)
         qy, qx = ys + dy, xs + dx
         ok = (qy >= 0) & (qy < H) & (qx >= 0) & (qx < W)
         ys, xs, qy, qx = ys[ok], xs[ok], qy[ok], qx[ok]
@@ -517,7 +517,7 @@ def check_page(name: str) -> dict:
         crop = inv[70:200, 70:190]
         hole_mask = crop
         if hole_mask.any():
-            ys, xs = np.where(hole_mask)
+            ys, xs = np.nonzero(hole_mask)
             counter_pixels = rend[70:200, 70:190][hole_mask]
             mean_counter = counter_pixels.mean(axis=0)
             paper_rgb = np.array([216, 200, 160])

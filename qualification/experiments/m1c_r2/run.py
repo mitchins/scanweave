@@ -44,8 +44,8 @@ def render_glyph(font, ch, dpi, antialias=True):
     arr = np.clip(arr / 255.0, 0, 1)
     # crop bbox tightly to ink
     rows = arr.max(axis=1); cols = arr.max(axis=0)
-    r0,r1 = np.where(rows>0)[0][[0,-1]] if rows.any() else (0,len(rows)-1)
-    c0,c1 = np.where(cols>0)[0][[0,-1]] if cols.any() else (0,len(cols)-1)
+    r0,r1 = np.nonzero(rows>0)[0][[0,-1]] if rows.any() else (0,len(rows)-1)
+    c0,c1 = np.nonzero(cols>0)[0][[0,-1]] if cols.any() else (0,len(cols)-1)
     arr = arr[r0:r1+1, c0:c1+1]
     return arr, (c0,r0)  # returned relative origin not used
 

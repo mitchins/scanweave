@@ -63,7 +63,7 @@ def boundary_points_mask(m):
     """Integer boundary pixels (centres +0.5)."""
     er = m & np.roll(m, 1, 0) & np.roll(m, -1, 0) & np.roll(m, 1, 1) & np.roll(m, -1, 1)
     b = m & ~er
-    ys, xs = np.where(b)
+    ys, xs = np.nonzero(b)
     return np.stack([xs + 0.5, ys + 0.5], axis=1).astype(np.float64)
 
 
@@ -173,7 +173,7 @@ def char_c_outline_ground_truth():
             d.text((10, 10), "8", font=font, fill=0)
             a = np.asarray(img)
             m = a < 128
-            ys, xs = np.where(m)
+            ys, xs = np.nonzero(m)
             out[name] = {
                 "outline_render_ink": int(m.sum()),
                 "bbox": [int(xs.min()), int(ys.min()), int(xs.max()), int(ys.max())] if len(xs) else None,
