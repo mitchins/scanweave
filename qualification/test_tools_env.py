@@ -43,7 +43,8 @@ class ComparisonTools(unittest.TestCase):
                      'real_convergence/runtime_control.py'):
             source = ROOT / name
             with tempfile.TemporaryDirectory() as folder:
-                root = Path(folder)
+                root = Path(folder) / 'qualification' / source.parent.name
+                root.mkdir(parents=True)
 
                 def resolve(path, *args, source=source, root=root, **kwargs):
                     if path == source:
@@ -62,7 +63,8 @@ class ComparisonTools(unittest.TestCase):
         for name in ('pdf_packaging/run_corpus.py', 'pdf_packaging/run_groups.py'):
             source = ROOT / name
             with tempfile.TemporaryDirectory() as folder:
-                root = Path(folder)
+                root = Path(folder) / 'qualification' / source.parent.name
+                root.mkdir(parents=True)
                 (root / 'corpus.json').write_text('[]')
 
                 def resolve(path, *args, source=source, root=root, **kwargs):
