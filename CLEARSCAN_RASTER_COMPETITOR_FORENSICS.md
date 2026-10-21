@@ -55,7 +55,7 @@ Font-only/non-font renderings show that substantial printed ink is superseded, r
 
 O1 preserves all **32 matched-input Flate image streams byte-for-byte**, totaling **81,951,978 B**. It adds invisible OCR through 32 Form XObjects. O3 likewise has one full-page image per page and an invisible OCR layer, but changes the images to **Indexed DeviceRGB palettes with 5–40 colours**, using **29 four-bit and three eight-bit** index images, Flate and PNG-style predictor 15. Dimensions and 300-DPI image placements remain unchanged.
 
-O3 raster payload is **15,169,365 B**. This is not DCT re-encoding, resolution reduction, visible font reconstruction or JBIG2. A major causal change is fewer represented colours/tones; packing palette indices also helps. The installed frozen-version open-source optimizer defaults O3 PNG quality to 30 (quantizer range 20–40); the emitted palettes and source-relative images provide direct evidence independent of that implementation detail. This is normal PDF output, not a PDF/A conversion comparison.
+O3 raster payload is **15,169,365 B**. This is not DCT re-encoding, resolution reduction, visible font reconstruction or JBIG2. A major causal change is fewer represented colours/tones; the Indexed/predictor representation provides same-sample savings. The installed frozen-version open-source optimizer defaults O3 PNG quality to 30 (quantizer range 20–40); the emitted palettes and source-relative images provide direct evidence independent of that implementation detail. This is normal PDF output, not a PDF/A conversion comparison.
 
 PDFium reports zero paintable non-space text characters for O1/O3/archive and invisible text for all three. O1/O3 have identical extracted-text hashes per renderer; native Poppler/PDFium extraction differs on nine pages in both arms. Those are existing transport/reading-order differences, not evidence that visible text disappeared. No annotation was passed to conversion.
 
@@ -76,7 +76,7 @@ There are **2,385 indirect images**: eight DCT and 2,377 Flate. Existing reports
 
 Whole-page resources alone are 78.68% of complete PDF bytes. Reduced paper placements are 75 DPI on nine pages and 150 DPI on four; native placements are 300 DPI. These are roles from compositor provenance, not semantic classifications inferred from area. Whole-page and exception resources include unreconstructed text and meaningful marks.
 
-All 2,385 encoded image hashes are distinct within their documents: **zero duplicate encoded payload bytes** are demonstrated. Further exact-resource deduplication cannot close this corpus gap. Fragmentation has overhead, but the entire remaining serialized residual is 511,687 B, far smaller than whole-page raster cost; it cannot be attributed entirely to patches.
+All 2,385 encoded image hashes are distinct within their documents: **zero duplicate encoded payload bytes** are demonstrated. Matching decoded sample hashes with dimensions, bit depth, colour interpretation, Decode and mask properties also finds zero compatible duplicate groups (`reuse-accounting.json`). Further exact-resource deduplication cannot close this corpus gap. Fragmentation has overhead, but the entire remaining serialized residual is 511,687 B, far smaller than whole-page raster cost; it cannot be attributed entirely to patches.
 
 Exact colour inspection finds **973 native exceptions containing at most 16 RGB colours**, encoded cost **239,570 B**, including **47 two-colour exceptions totaling 1,097 B**. These are existing exact samples, not binarization candidates. All whole-page resources have more than 16 colours. Lossless small-palette packing might help a subset, but even erasing the entire 239,570-B budget would save only 0.53% of the document total. No measured codec saving for those actual patches is claimed.
 
@@ -106,16 +106,16 @@ The measured raster difference is **40,372,511 B**. Font-program difference is *
 
 ## Two completed shadow controls
 
-Both use `history-02`, preserve current font resources/placements/searchable operators, and emit actual one-page PDFs. They are **not product modes**. Both renderers are measured at 300 DPI in fixed coordinates.
+Both use `history-02`, preserve current font resources/placements/searchable operators, and emit actual one-page PDFs. They are **not product modes**. Both renderers are measured at 300 DPI in fixed coordinates. All four PDFs pass qpdf; decoded non-image streams, page geometry and both native text extractions are identical (`control-validation.json`).
 
 | Control PDF | Complete bytes | Raster bytes |
 |---|---:|---:|
 | Current page, reserialized common writer | 2,743,006 | 2,712,909 |
-| E1: O3 palette pixels, expanded RGB/Flate | 756,401 | 726,306 |
-| E1: identical pixels, Indexed/Flate | 626,075 | 595,816 |
+| E1: O3 palette pixels, expanded RGB/plain Flate | 756,401 | 726,306 |
+| E1: identical pixels, Indexed/Flate predictor15 | 626,075 | 595,816 |
 | E2: current whole-page raster reduced to 150 DPI, Q100 4:4:4 | 1,042,477 | 1,012,382 |
 
-**E1:** indexed packing saves **130,326 complete-PDF bytes** (17.23%) versus expanded RGB, with pixel-identical Poppler and PDFium results. That is a genuine same-information storage gain **after** O3's quantization. The remaining large reduction versus the current page comes with already-quantized image information. The book corner becomes posterized, with dark tonal gradients and green spine colour damaged. **Reject blanket source palette reduction.**
+**E1:** Indexed plus PNG predictor15 saves **130,326 complete-PDF bytes** (17.23%) versus expanded RGB with plain Flate, with pixel-identical Poppler and PDFium results. The predictor differs: this isolates a same-information representation/encoding combination, **not the palette-only contribution**. That is a genuine same-information storage gain **after** O3's quantization. The remaining large reduction versus the current page comes with already-quantized image information. The book corner becomes posterized, with dark tonal gradients and green spine colour damaged. **Reject blanket source palette reduction.**
 
 **E2:** the complete page saves **1,700,529 B** (62.0%), but softens small text/book-edge detail. Fixed text-region dark-contrast witnesses below half rise from 0 in baseline to 40 in PDFium and 600 in Poppler; these counts indicate sampling sensitivity, not 600 erased letters. **Reject blanket whole-page downsampling.** At 1,012,382 raster bytes it still does not approach Adobe's 88,569 image bytes on that page. No source-ownership assumption was used to erase content.
 
@@ -147,7 +147,7 @@ Required changes would be limited residual-resource/ownership selection and seri
 
 ### 2. Exact small-palette packing — small, intrinsically preservation-safe candidate
 
-Target the **973 ≤16-colour exception resources / 239,570 B budget** recorded by object. Retain every RGB value, location, mask, Decode and placement; represent exact samples using Indexed RGB and the minimum legal index bit depth plus existing Flate/predictors. This is independent of fonts and spatial segmentation. E1 establishes actual identical-sample packing benefit, but on a larger already-quantized image; it is not a measured saving for these exceptions.
+Target the **973 ≤16-colour exception resources / 239,570 B budget** recorded by object. Retain every RGB value, location, mask, Decode and placement; represent exact samples using Indexed RGB and the minimum legal index bit depth plus existing Flate/predictors. This is independent of fonts and spatial segmentation. E1 establishes an actual identical-sample representation/encoding benefit, but on a larger already-quantized image; it is not a measured saving for these exceptions.
 
 A next bounded codec test can evaluate these exact resources without changing samples, using whole-PDF size as selection. Reject any renderer pixel difference, Unicode/placement change, unsupported colour-space/mask interpretation, or size increase. Encoding needs a bounded colour lookup and packed-index buffer; actual runtime/peak memory and net bytes must be measured before implementation approval. Its maximum resource budget is only 0.53% of current PDFs, so it cannot be sold as the main gap closure.
 

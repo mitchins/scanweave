@@ -31,7 +31,7 @@ Findings:
 - No obvious amount/decimal disappearance was visible in the inspected cord05
   crop. This is bounded evidence, not all-number certification.
 - Exact Indexed/expanded-RGB experiment images look identical and are pixel-identical
-  in both engines. This validates packing **after quantization**, not safe source
+  in both engines. This validates the representation/encoding combination **after quantization** (Indexed/predictor15 versus RGB/plainFlate), not safe source
   quantization.
 - Whole-page150Q100 softens source detail and does not justify blanket adoption.
 
