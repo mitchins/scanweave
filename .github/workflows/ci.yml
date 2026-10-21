@@ -74,17 +74,20 @@ jobs:
       - name: Python deps
         run: |
           python -m venv qualification/.venv
-          qualification/.venv/bin/pip install -q pypdfium2 numpy Pillow fontTools jsonschema
+          qualification/.venv/bin/pip install --require-hashes --only-binary=:all: -r .github/requirements-ci.txt
       - name: Build the OpenType sanitizer (OTS)
         # tools/ (developer-local builds) is git-ignored; build the same OTS 9.3.0
         # from source and point the harness at it via SCANWEAVE_OTS
         run: |
-          python -m pip install -q meson ninja
-          git clone --depth 1 --branch v9.3.0 https://github.com/khaledhosny/ots.git /tmp/ots
-          meson setup /tmp/ots/build /tmp/ots > /dev/null
-          ninja -C /tmp/ots/build
-          /tmp/ots/build/ots-sanitize --version
-          echo "SCANWEAVE_OTS=/tmp/ots/build/ots-sanitize" >> "$GITHUB_ENV"
+          ots_src="$RUNNER_TEMP/ots"
+          git init "$ots_src"
+          git -C "$ots_src" remote add origin https://github.com/khaledhosny/ots.git
+          git -C "$ots_src" fetch --depth 1 origin 884861e0103b41d7e9845fdaf9fd1e3c12819103 # v9.3.0
+          git -C "$ots_src" checkout --detach FETCH_HEAD
+          qualification/.venv/bin/meson setup "$ots_src/build" "$ots_src" > /dev/null
+          qualification/.venv/bin/ninja -C "$ots_src/build"
+          "$ots_src/build/ots-sanitize" --version
+          echo "SCANWEAVE_OTS=$ots_src/build/ots-sanitize" >> "$GITHUB_ENV"
       - name: Build the probe / CLI
         run: cargo build --workspace
       - name: Sub-pixel metric analytical tests
@@ -94,6 +97,8 @@ jobs:
       - name: Fixture schema layer
         # must run with the venv interpreter: jsonschema is not a system package
         run: qualification/.venv/bin/python qualification/validate_fixtures.py
+      - name: hOCR XML entity boundary
+        run: qualification/.venv/bin/python qualification/test_hocr_xml_security.py
       - name: Text search gates
         run: qualification/.venv/bin/python qualification/test_text_search.py
       - name: Instrument correctness tests (M1-C-R3)
