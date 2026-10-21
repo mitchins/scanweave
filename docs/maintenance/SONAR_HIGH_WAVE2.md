@@ -18,7 +18,7 @@ coverage settings or Quality Gate thresholds change. Wave 3 has not begun.
 | `AaFbqrwrDf3ZA7hnTDuJ` | `convert::to_ocr_page`: explicit OCR type imports | n/a |
 | `AaFbqryBDf3ZA7hnTDuS` | `Validator::spans`: separate parent-reference validation after all span checks | 41 |
 | `AaFbqryGDf3ZA7hnTDuU` | `json_util::rebuild_string`: separate existing Unicode escape branch | 31 |
-| `AaFbqryNDf3ZA7hnTDuV` | `pdf_input::convert_pdf`: separate physical-page geometry parsing | 39 |
+| `AaFbqryNDf3ZA7hnTDuV` | `pdf_input::convert_pdf`: separate page-count and physical-page geometry parsing | 39 |
 
 These are extractions of existing logical units, with unchanged public interfaces.
 No changes to `convert_parts`, `clean_replaced_text`, canonical reconstruction,

@@ -88,6 +88,20 @@ fn physical_page_size(details: &str, dpi: u32, page: usize) -> Result<(f64, f64)
     Ok((width, height))
 }
 
+fn pdf_page_count(info: &str) -> Result<usize, String> {
+    let pages: usize = info
+        .lines()
+        .find_map(|l| l.strip_prefix("Pages:"))
+        .ok_or("pdfinfo did not report page count")?
+        .trim()
+        .parse()
+        .map_err(|_| "invalid PDF page count")?;
+    if pages == 0 || pages > 1000 {
+        return Err("PDF must contain 1..1000 pages".into());
+    }
+    Ok(pages)
+}
+
 pub fn convert_pdf(args: &[String]) -> Result<(), String> {
     let input = args.first().ok_or("missing input PDF")?;
     let output = args.get(1).ok_or("usage: scanweave input.pdf output.pdf [--dpi 300] [--lang eng] [--profile clearscan|faithful]")?;
@@ -139,16 +153,7 @@ pub fn convert_pdf(args: &[String]) -> Result<(), String> {
     .to_string();
     let info = run("pdfinfo", &[input.as_os_str()])?;
     let info = String::from_utf8_lossy(&info);
-    let pages: usize = info
-        .lines()
-        .find_map(|l| l.strip_prefix("Pages:"))
-        .ok_or("pdfinfo did not report page count")?
-        .trim()
-        .parse()
-        .map_err(|_| "invalid PDF page count")?;
-    if pages == 0 || pages > 1000 {
-        return Err("PDF must contain 1..1000 pages".into());
-    }
+    let pages = pdf_page_count(&info)?;
     let work = tempfile::tempdir().map_err(|e| format!("create temporary workspace: {e}"))?;
     let tesseract_version = String::from_utf8_lossy(&run("tesseract", &["--version".as_ref()])?)
         .lines()
@@ -388,6 +393,22 @@ pub fn convert_pdf(args: &[String]) -> Result<(), String> {
 
 #[cfg(test)]
 mod tests {
+    #[test]
+    fn page_count_keeps_first_match_and_existing_errors() {
+        use super::pdf_page_count as parse;
+        assert_eq!(parse("Pages: 2\nPages: 3").unwrap(), 2);
+        assert_eq!(parse("Pages: 1000").unwrap(), 1000);
+        for (input, error) in [
+            ("", "pdfinfo did not report page count"),
+            ("Pages: invalid", "invalid PDF page count"),
+            ("Pages: -1", "invalid PDF page count"),
+            ("Pages: 0", "PDF must contain 1..1000 pages"),
+            ("Pages: 1001", "PDF must contain 1..1000 pages"),
+        ] {
+            assert_eq!(parse(input).unwrap_err(), error);
+        }
+    }
+
     #[test]
     fn physical_geometry_preserves_rotation_and_error_precedence() {
         use super::physical_page_size as parse;
