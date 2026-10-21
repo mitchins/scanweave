@@ -3,6 +3,9 @@ Single-page diagnostics are supplementary; collection serialized bytes are the f
 """
 import json,os,sys,time,subprocess,concurrent.futures,hashlib
 from pathlib import Path
+import sys
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+from tools_env import comparison_environment
 import pikepdf
 B=Path(__file__).resolve().parent;R=B.parents[1];V=Path(sys.executable).parent;D=B/'groups';D.mkdir(exist_ok=True)
 rows=json.loads((B/'corpus.json').read_text());groups={}
@@ -14,7 +17,7 @@ for name,prefix in [('receipts','cord-'),('historical','history-'),('financial',
  if not inp.exists():q.save(inp,deterministic_id=True)
  groups[name]={'members':[r['id'] for r in members],'input':str(inp.relative_to(R))}
 (B/'groups.json').write_text(json.dumps(groups,indent=2))
-env=dict(os.environ,OMP_THREAD_LIMIT='1',PATH='/tmp/scanweave-packaging-deps/root/usr/bin:'+str(V)+':'+os.environ['PATH'],LD_LIBRARY_PATH='/tmp/scanweave-packaging-deps/root/usr/lib/x86_64-linux-gnu')
+env=comparison_environment(str(V))
 def run(job):
  name,arm=job;rec=D/f'{name}-{arm}.run.json'
  if rec.exists() and json.loads(rec.read_text()).get('status')==0:return

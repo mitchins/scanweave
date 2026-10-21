@@ -1,7 +1,10 @@
 """Frozen real development inputs; normal CLI, no OCR/ownership modifications."""
 from pathlib import Path
+import sys
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+from tools_env import comparison_binary
 import subprocess,os,json,hashlib,time
-B=Path(__file__).resolve().parent;R=B.parents[1];rows=[];binary=Path('/tmp/scanweave-tonal-baseline')
+B=Path(__file__).resolve().parent;R=B.parents[1];rows=[];binary=Path(comparison_binary('SCANWEAVE_BASELINE_BIN'))
 for name in ['cord-00','cord-05','history-02','history-03']:
  d=B/'baseline';d.mkdir(exist_ok=True);inp=R/'qualification/pdf_packaging/real/input'/f'{name}.pdf';out=d/f'{name}.pdf';cmd=[str(binary),str(inp),str(out)];t=time.monotonic()
  try:

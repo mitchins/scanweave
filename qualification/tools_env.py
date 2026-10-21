@@ -87,3 +87,27 @@ def version(binary: str) -> str:
     except OSError as e:  # pragma: no cover - environment failure
         return f"unavailable: {e}"
     return (r.stdout or r.stderr).splitlines()[0] if (r.stdout or r.stderr) else "unknown"
+
+
+def comparison_binary(variable: str) -> str:
+    """Require an intentional binary choice for a historical comparison arm.
+
+    An explicit path is caller authority, not a sandbox guarantee. Never infer
+    a historical build from a predictable shared temporary filename or silently
+    substitute today's converter for a recorded baseline.
+    """
+    value = os.environ.get(variable)
+    if not value or not os.path.isabs(value):
+        raise RuntimeError(f"Set {variable} to an absolute historical executable path")
+    if not os.path.isfile(value) or not os.access(value, os.X_OK):
+        raise RuntimeError(f"{variable} is not an executable file: {value}")
+    return value
+
+
+def comparison_environment(python_bin: str) -> dict:
+    """Use the caller's selected dependencies without implicit shared /tmp code."""
+    env = dict(os.environ)
+    env['OMP_THREAD_LIMIT'] = '1'
+    existing = env.get('PATH', '')
+    env['PATH'] = python_bin + (os.pathsep + existing if existing else '')
+    return env

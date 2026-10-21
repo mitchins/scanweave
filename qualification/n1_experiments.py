@@ -200,7 +200,7 @@ def evaluate(name: str, content: bytes, workdir: Path) -> dict:
 
 
 def main() -> int:
-    with tempfile.TemporaryDirectory(dir="/tmp/opencode") as td:
+    with tempfile.TemporaryDirectory(prefix="scanweave-n1-") as td:
         workdir = Path(td)
         results = []
         for name, content in (

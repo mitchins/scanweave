@@ -1,0 +1,11 @@
+# Qualification resource boundaries
+
+This patch addresses the thirteen Sonar python:S5443 findings listed in private-resources-issues.json. Historical qualification scripts previously executed predictable shared `/tmp` binaries or injected shared `/tmp` executable/library paths. A different local user could prepopulate those paths. Three other controls used predictable shared scratch locations for PNGs, font data, or a temporary parent.
+
+Historical arms now require explicit absolute executable selections: `SCANWEAVE_BASELINE_BIN` for tonal baseline, `SCANWEAVE_BIN` for candidate, `SCANWEAVE_RECOMPOSE_BIN` for disabled-fastpath runtime control. Missing/relative/non-executable selections fail clearly. These overrides preserve distinct historical builds; the utility never silently substitutes the current converter. Callers must select trusted binaries and retain commands/hashes. An explicit override is authority, not a security sandbox or a guarantee against later changes to caller-controlled files.
+
+Packaging comparisons preserve the caller environment and chosen Python venv but no longer inject implicit shared temporary dependencies into PATH/LD_LIBRARY_PATH. Existing qpdf/OTS resolution and explicit overrides are unchanged. Users requiring non-system dependencies must deliberately configure their own environment.
+
+Synthetic render PNGs, extracted OTS fonts and N1 scratch use private TemporaryDirectory contexts with exception cleanup. Hashing, subprocess use and reads remain within their contexts. Source samples, vector reconstruction, faithful behavior and PDF serialization are not modified.
+
+Validation: four focused tests cover missing/relative/non-executable selections, distinct executable arms, preserved caller environment, actual utility temporary expressions, isolation/0700 permissions and failure cleanup. Python syntax checks pass. Existing synthetic 300/600 render/hash control passes unchanged. Existing donor evaluator still passes both renderers, qpdf, OTS and Unicode search; local pre-existing evidence PDFs differ from the recorded historical evaluator PDF (21 versus17 font glyphs), so their regenerated numerical result is retained outside the commit rather than misrepresented as matching historical output. No full expensive corpus regeneration is warranted for explicit tool selection and scratch lifetimes.
