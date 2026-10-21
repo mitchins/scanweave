@@ -88,8 +88,9 @@ service or imply that all local invocations are trustworthy.
 
 No Rust product, OCR invocation, glyph reconstruction, font, Unicode, PDF writer,
 image encoding or faithful-profile code changes. Historical P01–P08 visual
-limitations remain. The full Rust workspace and existing Python qualification
-contracts are checked; CI and server-side Sonar results are recorded on the PR.
+limitations remain. Local unfiltered Rust tests (116 passed), denied-warning Clippy, and the existing
+Python qualification contracts passed. GitHub CI and server-side Sonar are still
+pending at this write-up; their final per-head results will be recorded on PR #10.
 Independent patch review found no source-backed regression and identified test
 coverage gaps; late Bash condition tests were added in response. No broad style
 cleanup or reconstruction refactor is included.
