@@ -1,0 +1,425 @@
+[
+  {
+    "group": "receipts",
+    "page": 0,
+    "arms": {
+      "acr04": {
+        "command": [
+          "tesseract",
+          "qualification/acr05/local/rerender-ocr/receipts-0-acr04.png",
+          "stdout",
+          "-l",
+          "eng",
+          "--dpi",
+          "300",
+          "--psm",
+          "3"
+        ],
+        "text": "",
+        "number_tokens": []
+      },
+      "acr05": {
+        "command": [
+          "tesseract",
+          "qualification/acr05/local/rerender-ocr/receipts-0-acr05.png",
+          "stdout",
+          "-l",
+          "eng",
+          "--dpi",
+          "300",
+          "--psm",
+          "3"
+        ],
+        "text": "",
+        "number_tokens": []
+      }
+    }
+  },
+  {
+    "group": "receipts",
+    "page": 2,
+    "arms": {
+      "acr04": {
+        "command": [
+          "tesseract",
+          "qualification/acr05/local/rerender-ocr/receipts-2-acr04.png",
+          "stdout",
+          "-l",
+          "eng",
+          "--dpi",
+          "300",
+          "--psm",
+          "3"
+        ],
+        "text": "ae ss\n= teph Gives tt,\nae Las\n\n=\n4 HAKAU UDANG 92,000\n4 SIAO MAI BABI 80,000\n3 CEKER AYAM 60,000\n2 BAKPAO BKR C 42,000\nCRISPY\n3 TAHU GORENG 60,000\nCRISPY\nSubtotal 334,000\n\nTotal 334,000\n\nCASH 350,000\n\nCash CHANGE -16,000\nTotal Item 5\n\nTotal Qty 16\n\n",
+        "number_tokens": [
+          "4",
+          "92,000",
+          "4",
+          "80,000",
+          "3",
+          "60,000",
+          "2",
+          "42,000",
+          "3",
+          "60,000",
+          "334,000",
+          "334,000",
+          "350,000",
+          "-16,000",
+          "5",
+          "16"
+        ]
+      },
+      "acr05": {
+        "command": [
+          "tesseract",
+          "qualification/acr05/local/rerender-ocr/receipts-2-acr05.png",
+          "stdout",
+          "-l",
+          "eng",
+          "--dpi",
+          "300",
+          "--psm",
+          "3"
+        ],
+        "text": "ae ss\n= teph Gives tt,\nae Las\n\n=\n4 HAKAU UDANG 92,000\n4 SIAO MAI BABI 80,000\n3 CEKER AYAM 60,000\n2 BAKPAO BKR C 42,000\nCRISPY\n3 TAHU GORENG 60,000\nCRISPY\nSubtotal 334,000\n\nTotal 334,000\n\nCASH 350,000\n\nCash CHANGE -16,000\nTotal Item 5\n\nTotal Qty 16\n\n",
+        "number_tokens": [
+          "4",
+          "92,000",
+          "4",
+          "80,000",
+          "3",
+          "60,000",
+          "2",
+          "42,000",
+          "3",
+          "60,000",
+          "334,000",
+          "334,000",
+          "350,000",
+          "-16,000",
+          "5",
+          "16"
+        ]
+      }
+    }
+  },
+  {
+    "group": "receipts",
+    "page": 5,
+    "arms": {
+      "acr04": {
+        "command": [
+          "tesseract",
+          "qualification/acr05/local/rerender-ocr/receipts-5-acr04.png",
+          "stdout",
+          "-l",
+          "eng",
+          "--dpi",
+          "300",
+          "--psm",
+          "3"
+        ],
+        "text": "OnE POPe many SORE end Sine SeEE Lebe Mies Gret one teed mune nto eoey\n\n alinadhandiiedieenl aie ied ieee\n\n<0 017K KOE GORD Bae lem end ORte ebte wore pent\n\n",
+        "number_tokens": [
+          "0",
+          "017"
+        ]
+      },
+      "acr05": {
+        "command": [
+          "tesseract",
+          "qualification/acr05/local/rerender-ocr/receipts-5-acr05.png",
+          "stdout",
+          "-l",
+          "eng",
+          "--dpi",
+          "300",
+          "--psm",
+          "3"
+        ],
+        "text": "OnE POPe many SORE end Sine SeEE Lebe Mies Gret one teed mune nto eoey\n\n alinadhandiiedieenl aie ied ieee\n\n<0 017K KOE GORD Bae lem end ORte ebte wore pent\n\n",
+        "number_tokens": [
+          "0",
+          "017"
+        ]
+      }
+    }
+  },
+  {
+    "group": "financial",
+    "page": 0,
+    "arms": {
+      "acr04": {
+        "command": [
+          "tesseract",
+          "qualification/acr05/local/rerender-ocr/financial-0-acr04.png",
+          "stdout",
+          "-l",
+          "eng",
+          "--dpi",
+          "300",
+          "--psm",
+          "3"
+        ],
+        "text": "IPSWICH TOWN REPORT. ss)\n\nTOWN OFFICERS, 1920.\n\nSELECTMEN\n\nEben B Moulton, Chairman Term expires 1921\nJohn A \u2018Brown Term expires 1922\n- John H Cameron Term expires 1923\nASSESSORS\n\nJohn W Nourse, Chairman Term expires 1922\nG\u00e9orge Fall Term expires 1921\nRichard R Glasier Term expires 19238\n\nOVERSEERS OF THE POOR\nFrank T Goodhue, Chairman Term expires 1922\nCharles G@ Hull, Agent Term expires 1921\nJohn G Sperling Term expires 1923\nTOWN CLERK\nCharles W Bamford Term expires 1923\n\" TREASURER AND COLLECTOR\nWilliam J Riley Term expires 1921\nTOWN ACCOUNTANT\nFrederick S Witham Term expires 1922\nSCHOOL COMMITTEE\n\nHerbert W Mason, Chairman - Term expires 1922\nGeorge E MacArthur Term expires 1922\nWilliam J Riley Term expires 1921\nCharles H Galligan Term expires 1921\nLuther Wait Term expires 1923\n\nLeslie C Millard Term expires 1923\n",
+        "number_tokens": [
+          "1920.",
+          "1921",
+          "1922",
+          "1923",
+          "1922",
+          "1921",
+          "19238",
+          "1922",
+          "1921",
+          "1923",
+          "1923",
+          "1921",
+          "1922",
+          "1922",
+          "1922",
+          "1921",
+          "1921",
+          "1923",
+          "1923"
+        ]
+      },
+      "acr05": {
+        "command": [
+          "tesseract",
+          "qualification/acr05/local/rerender-ocr/financial-0-acr05.png",
+          "stdout",
+          "-l",
+          "eng",
+          "--dpi",
+          "300",
+          "--psm",
+          "3"
+        ],
+        "text": "IPSWICH TOWN REPORT.\n\nTOWN OFFICERS, 1920.\n\nSELECTMEN\nKben B Moulton, Chairman Term expires\nJohn A \u2018Brown Term expires\n- John H Cameron Term expires\nASSESSORS\nJohn W Nourse, Chairman Term expires\nG\u00e9orge Fall Term expires\nRichard R Glasier Term expires\nOVERSEERS OF THE POOR\nFrank T Goodhue, Chairman Term expires\nCharles G Hull, Agent Term expires\nJohn G Sperling Term expires\n, TOWN CLERK\nCharles W Bamford Term expires\n\" TREASURER AND COLLECTOR\nWilliam J Riley Term expires\nTOWN ACCOUNTANT\nFrederick S Witham Term expires\nSCHOOL COMMITTEE\nHerbert W Mason, Chairman Term expires\nGeorge E MacArthur Term expires\nWilliam J Riley Term expires\nCharles H Galligan Term expires\nLuther Wait Term expires\n\nLeslhe C Millard Term expires\n\n1921\n1922\n1923\n\n1922\n1921\n1923\n\n1922\n1921\n1923\n\n1923\n1921\n1922\n\n1922\n1922\n1921\n1921\n1923\n1923\n",
+        "number_tokens": [
+          "1920.",
+          "1921",
+          "1922",
+          "1923",
+          "1922",
+          "1921",
+          "1923",
+          "1922",
+          "1921",
+          "1923",
+          "1923",
+          "1921",
+          "1922",
+          "1922",
+          "1922",
+          "1921",
+          "1921",
+          "1923",
+          "1923"
+        ]
+      }
+    }
+  },
+  {
+    "group": "financial",
+    "page": 6,
+    "arms": {
+      "acr04": {
+        "command": [
+          "tesseract",
+          "qualification/acr05/local/rerender-ocr/financial-6-acr04.png",
+          "stdout",
+          "-l",
+          "eng",
+          "--dpi",
+          "300",
+          "--psm",
+          "3"
+        ],
+        "text": "IPSWICH TOWN REPORT.\n\n65\n\nCEMETERIES.\n\nChas Jewett, labor\nEdward C Brooks, labor\nEdward N Martel, labor\nHoward Blake, labor\nHoward J Blake, labor\nWim M Davey, labor\nChas E Kent, labor\nDalbert E Kent, labor\nWm F Rutherford, labor\nJames H Hull, Jr, labor\nGeorge Burbidge, labor -\nMaurice A Norman, labor\nDavid A Low, labor\nEdw N Martel, Jr, labor\nL A Lord, labor\n\nWm B Richards, labor\nStar Princewood, labor\nJoseph P Martel, labor\nEdw J Martel, labor\nOrrie M Hills, labor\nPhilip E Clarke, labor\nWater Dept., water\n\nL A Lord, use of team\n\nA J Barton & Son, setting stones\n\n$92\n149\n299\n437\n166\n23\n18\n27\n32\n33\n22\n\n18\n20\n295\n28\n10\n20\n16\n\n25\n00\n50\n24\n30\n00\n00\n25\n75\n15\n\n00\n50\n00\n30\n00\n18\n00\n00\n\n56 30\n\n75\n\n00\n\n33 00\n\n43\n\n80\n\n12 88\n",
+        "number_tokens": [
+          "65",
+          "92",
+          "149",
+          "299",
+          "437",
+          "166",
+          "23",
+          "18",
+          "27",
+          "32",
+          "33",
+          "22",
+          "18",
+          "20",
+          "295",
+          "28",
+          "10",
+          "20",
+          "16",
+          "25",
+          "00",
+          "50",
+          "24",
+          "30",
+          "00",
+          "00",
+          "25",
+          "75",
+          "15",
+          "00",
+          "50",
+          "00",
+          "30",
+          "00",
+          "18",
+          "00",
+          "00",
+          "56",
+          "30",
+          "75",
+          "00",
+          "33",
+          "00",
+          "43",
+          "80",
+          "12",
+          "88"
+        ]
+      },
+      "acr05": {
+        "command": [
+          "tesseract",
+          "qualification/acr05/local/rerender-ocr/financial-6-acr05.png",
+          "stdout",
+          "-l",
+          "eng",
+          "--dpi",
+          "300",
+          "--psm",
+          "3"
+        ],
+        "text": "IPSWICH TOWN REPORT.\n\n65\n\nCEMETERIES.\n\nChas Jewett, labor\nEdward C Brooks, labor\nEdward N Martel, labor\nHoward Blake, labor\nHoward J Blake, labor\nWim M Davey, labor\nChas E Kent, labor\nDalbert E Kent, labor\nWm F Rutherford, labor\nJames H Hull, Jr, labor\nGeorge Burbidge, labor -\nMaurice A Norman, labor\nDavid A Low, labor\nEdw N Martel, Jr, labor\nL A Lord, labor\n\nWm B Richards, labor\nStar Princewood, labor\nJoseph P Martel, labor\nEdw J Martel, labor\nOrrie M Hills, labor\nPhilip E Clarke, labor\nWater Dept., water\n\nL A Lord, use of team\n\nA J Barton & Son, setting stones\n\n$92\n149\n299\n437\n166\n23\n18\n27\n32\n33\n22\n\n18\n20\n295\n28\n10\n20\n16\n\n25\n00\n50\n24\n30\n00\n00\n25\n75\n15\n\n00\n50\n00\n30\n00\n18\n00\n00\n\n56 30\n\n75\n\n00\n\n33 00\n\n43\n\n80\n\n12 88\n",
+        "number_tokens": [
+          "65",
+          "92",
+          "149",
+          "299",
+          "437",
+          "166",
+          "23",
+          "18",
+          "27",
+          "32",
+          "33",
+          "22",
+          "18",
+          "20",
+          "295",
+          "28",
+          "10",
+          "20",
+          "16",
+          "25",
+          "00",
+          "50",
+          "24",
+          "30",
+          "00",
+          "00",
+          "25",
+          "75",
+          "15",
+          "00",
+          "50",
+          "00",
+          "30",
+          "00",
+          "18",
+          "00",
+          "00",
+          "56",
+          "30",
+          "75",
+          "00",
+          "33",
+          "00",
+          "43",
+          "80",
+          "12",
+          "88"
+        ]
+      }
+    }
+  },
+  {
+    "group": "financial",
+    "page": 10,
+    "arms": {
+      "acr04": {
+        "command": [
+          "tesseract",
+          "qualification/acr05/local/rerender-ocr/financial-10-acr04.png",
+          "stdout",
+          "-l",
+          "eng",
+          "--dpi",
+          "300",
+          "--psm",
+          "3"
+        ],
+        "text": "IPSWICH TOWN REPORT. 105\n\nREPORT OF TOWN CLERK\n\nI present herewith the annual report of the doings of\nthe office of the Town Clerk. Some progress has been made\nalong the line of preserving the old records and putting\nthem in shape for the binding of those volumes and papers .\nthat need to be done; but the high cost of all that is needed\nfor that work has caused the Clerk to hesitate about doing\nmuch in that line. Some of the books that were needed for\n\u2018onstant use were after a great deal of trouble repaired and\nrebound but the fact that the book binders were unable to\nobtain the help needed for that work greatly retarded the\nplacing of any more work although much required. I shall\nask that any money remaining from the amount appro-\npriated one year ago be allowed for me to continue the\nwork of repairs.\n\nVITAL STATISTICS\nThe whole number of births reported to the Town Clerk\nand recorded is 204, as follows:\n\nParents residing in Ipswich, 185\n2? > . 99 Essex 5\nia ae \u201d? Gloucester 1\n\u201d \u00bb\u201d \u201d? Hamilton 7\n9? 99 >? Rowley 4\nad a >? Taunton 1\n99 \u00bb? 9? Wenham 1\n\n204 .\n",
+        "number_tokens": [
+          "105",
+          "204,",
+          "185",
+          "2",
+          "99",
+          "5",
+          "1",
+          "7",
+          "9",
+          "99",
+          "4",
+          "1",
+          "99",
+          "9",
+          "1",
+          "204"
+        ]
+      },
+      "acr05": {
+        "command": [
+          "tesseract",
+          "qualification/acr05/local/rerender-ocr/financial-10-acr05.png",
+          "stdout",
+          "-l",
+          "eng",
+          "--dpi",
+          "300",
+          "--psm",
+          "3"
+        ],
+        "text": "IPSWICH TOWN REPORT. 105\n\nREPORT OF TOWN CLERK\n\nI present herewith the annual report of the doings of\nthe office of the Town Clerk. Some progress has been made\nalong the line of preserving the old records and putting\nthem in shape for the binding of those volumes and papers .\nthat need to be done; but the high cost of all that is needed\nfor that work has caused the Clerk to hesitate about doing\nmuch in that line. Some of the books that were needed for\n\u2018onstant use were after a great deal of trouble repaired and\nrebound but the fact that the book binders were unable to\nobtain the help needed for that work greatly retarded the\nplacing of any more work although much required. I shall\nask that any money remaining from the amount appro-\npriated one year ago be allowed for me to continue the\nwork of repairs.\n\nVITAL STATISTICS\nThe whole number of births reported to the Town Clerk\nand recorded is 204, as follows:\n\nParents residing in Ipswich, 185\n2? 9 A thee Essex 5\n\u2018a \u201d \u201d? Gloucester 1\n\u201d \u00bb\u201d \u201d? Hamilton %\n9? b>) 9? Rowley 4.\nio a \u201d? Taunton 1\nme oe \u2019? Wenham 1\n\n204 |\n",
+        "number_tokens": [
+          "105",
+          "204,",
+          "185",
+          "2",
+          "9",
+          "5",
+          "1",
+          "9",
+          "9",
+          "4.",
+          "1",
+          "1",
+          "204"
+        ]
+      }
+    }
+  }
+]

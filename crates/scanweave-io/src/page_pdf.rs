@@ -312,20 +312,37 @@ fn compress_samples(key: &ImageResourceKey) -> Result<(Vec<u8>, bool, u8), Strin
     Ok((lossless, false, selected_predictor))
 }
 
-/// Compare actual lossless stream costs for two existing residual layouts.
-/// No resampling, atlas coordinates or new source pixels are introduced.
-pub(crate) fn lossless_patch_cost(patches: &[Patch]) -> Result<usize, String> {
-    let options = ImageEncodingOptions {
-        predictor: 0,
-        ..Default::default()
+/// Estimate the existing ClearScan representations, using the same codecs and
+/// eligibility gates as assembly. This is a layout decision, not new ink cleanup.
+/// Object overhead and cross-page reuse are measured separately on the final PDF.
+pub(crate) fn coherent_residual_is_smaller(
+    whole: &Patch,
+    native: &[Patch],
+    background: &Patch,
+    page_size: [f32; 2],
+    options: ImageEncodingOptions,
+) -> Result<bool, String> {
+    let key = canonical_patch(whole, options)?;
+    let candidate = crate::tonal_image::encode_residual(
+        &key.samples, key.width, key.height, key.color_space,
+        page_size[0], page_size[1],
+    );
+    let Ok(Some(candidate)) = candidate else {
+        return Ok(false);
     };
-    let mut cost = 0usize;
-    for patch in patches {
-        let mut key = canonical_patch(patch, options)?;
-        key.compact_background = false;
-        cost += compress_samples(&key)?.0.len();
+    let mut layered = compress_samples(&canonical_patch(background, options)?)?.0.len();
+    for patch in native {
+        let key = canonical_patch(patch, options)?;
+        let lossless = compress_samples(&key)?.0.len();
+        let compact = if lossless >= 512 {
+            crate::tonal_image::encode_native(&key.samples, key.width, key.height, key.color_space)
+                .ok().flatten().filter(|bytes| (bytes.len() as f64) < lossless as f64 * 0.95)
+        } else {
+            None
+        };
+        layered = layered.saturating_add(compact.map_or(lossless, |bytes| bytes.len()));
     }
-    Ok(cost)
+    Ok(candidate.bytes.len() < layered)
 }
 
 #[derive(Debug, Default, Clone)]
@@ -1869,5 +1886,51 @@ mod owner_frame_tests {
         assert!(validate_occurrence_geometry(&[o])
             .unwrap_err()
             .contains("real-e"));
+    }
+}
+
+#[cfg(test)]
+mod coherent_residual_tests {
+    use super::*;
+
+    fn tonal_page() -> Patch {
+        let mut rgb = Vec::new();
+        let mut seed = 17u32;
+        for _ in 0..512 * 512 {
+            seed = seed.wrapping_mul(1_664_525).wrapping_add(1_013_904_223);
+            let value = 128 + ((seed >> 24) & 127) as u8;
+            rgb.extend([value; 3]);
+        }
+        Patch { bbox_px: [0.0, 0.0, 512.0, 512.0], rgb, w: 512, h: 512, compact_background: false }
+    }
+
+    #[test]
+    fn fragmented_tonal_layout_can_use_one_cleaned_residual() {
+        let whole = tonal_page();
+        let mut native = Vec::new();
+        for y in (0..512usize).step_by(64) {
+            for x in (0..512usize).step_by(64) {
+                let mut rgb = Vec::new();
+                for yy in y..y + 64 {
+                    rgb.extend_from_slice(&whole.rgb[(yy * 512 + x) * 3..(yy * 512 + x + 64) * 3]);
+                }
+                native.push(Patch { bbox_px: [x as f64, y as f64, (x + 64) as f64, (y + 64) as f64], rgb, w: 64, h: 64, compact_background: false });
+            }
+        }
+        let paper = Patch { bbox_px: whole.bbox_px, rgb: vec![255; 128 * 128 * 3], w: 128, h: 128, compact_background: true };
+        let before = whole.rgb.clone();
+        let decide = || coherent_residual_is_smaller(&whole, &native, &paper, [122.88, 122.88], ImageEncodingOptions::default()).unwrap();
+        assert!(decide());
+        assert_eq!(decide(), decide());
+        assert_eq!(whole.rgb, before, "layout costing must not clean or change source samples");
+    }
+
+    #[test]
+    fn cheap_or_ineligible_layout_keeps_existing_patches() {
+        let whole = tonal_page();
+        let paper = Patch { bbox_px: whole.bbox_px, rgb: vec![255; 16 * 16 * 3], w: 16, h: 16, compact_background: true };
+        assert!(!coherent_residual_is_smaller(&whole, &[], &paper, [122.88, 122.88], ImageEncodingOptions::default()).unwrap());
+        let binary = Patch { rgb: vec![255; 512 * 512 * 3], ..whole };
+        assert!(!coherent_residual_is_smaller(&binary, &[], &paper, [122.88, 122.88], ImageEncodingOptions::default()).unwrap());
     }
 }
