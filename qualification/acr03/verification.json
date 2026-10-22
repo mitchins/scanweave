@@ -1,0 +1,485 @@
+{
+  "checks": [
+    {
+      "case": "logo",
+      "path": "qualification/acr03/local/logo-crops/complete.pdf",
+      "equality": {
+        "font_programs": true,
+        "unicode_maps": true,
+        "text_operators": true,
+        "page_boxes": true,
+        "pdfium_text_sha256": true,
+        "poppler_text_sha256": true
+      },
+      "mode": "crops",
+      "accounting": {
+        "pdf_bytes": 536703,
+        "sha256": "37dce28cd480c7e6d8f2ff84c0a47a84762b26f6b5b5adda54c2323c91515783",
+        "encoded_font_program_bytes": 15030,
+        "content_stream_bytes": 20867,
+        "image_mask_objects": 181,
+        "encoded_raster_bytes": 456147
+      }
+    },
+    {
+      "case": "logo",
+      "path": "qualification/acr03/local/logo-masked/complete.pdf",
+      "equality": {
+        "font_programs": true,
+        "unicode_maps": true,
+        "text_operators": true,
+        "page_boxes": true,
+        "pdfium_text_sha256": true,
+        "poppler_text_sha256": true
+      },
+      "mode": "masked",
+      "accounting": {
+        "pdf_bytes": 523099,
+        "sha256": "ec86bb19dd833ab1f6291acc4c53a452156fba6cd853e1f1f9573b727b06ed1c",
+        "encoded_font_program_bytes": 15030,
+        "content_stream_bytes": 19664,
+        "image_mask_objects": 70,
+        "encoded_raster_bytes": 472161
+      }
+    },
+    {
+      "case": "logo",
+      "path": "qualification/acr03/local/logo-crops-oracle/complete.pdf",
+      "equality": {
+        "font_programs": true,
+        "unicode_maps": true,
+        "text_operators": true,
+        "page_boxes": true,
+        "pdfium_text_sha256": true,
+        "poppler_text_sha256": true
+      },
+      "mode": "crops-oracle",
+      "accounting": {
+        "pdf_bytes": 536707,
+        "sha256": "7692b4689f6b67251ff9b1c94d11508b814904fd4afa870f593e1cf2dd954fde",
+        "encoded_font_program_bytes": 15030,
+        "content_stream_bytes": 20864,
+        "image_mask_objects": 181,
+        "encoded_raster_bytes": 456155
+      }
+    },
+    {
+      "case": "annotation",
+      "path": "qualification/acr03/local/annotation-crops/complete.pdf",
+      "equality": {
+        "font_programs": true,
+        "unicode_maps": true,
+        "text_operators": true,
+        "page_boxes": true,
+        "pdfium_text_sha256": true,
+        "poppler_text_sha256": true
+      },
+      "mode": "crops",
+      "accounting": {
+        "pdf_bytes": 725937,
+        "sha256": "4a8464f0a1c9237809c83c7d1a8a3b44a9a3e2f71c65ed41a79bd6bf47ac3157",
+        "encoded_font_program_bytes": 15030,
+        "content_stream_bytes": 20787,
+        "image_mask_objects": 140,
+        "encoded_raster_bytes": 655472
+      }
+    },
+    {
+      "case": "annotation",
+      "path": "qualification/acr03/local/annotation-masked/complete.pdf",
+      "equality": {
+        "font_programs": true,
+        "unicode_maps": true,
+        "text_operators": true,
+        "page_boxes": true,
+        "pdfium_text_sha256": true,
+        "poppler_text_sha256": true
+      },
+      "mode": "masked",
+      "accounting": {
+        "pdf_bytes": 556096,
+        "sha256": "155e199569da1270ecebb4174f6ac7fe67ccb78e469c2f777d21b7be0d4a9339",
+        "encoded_font_program_bytes": 15030,
+        "content_stream_bytes": 20038,
+        "image_mask_objects": 81,
+        "encoded_raster_bytes": 502185
+      }
+    },
+    {
+      "case": "annotation",
+      "path": "qualification/acr03/local/annotation-crops-oracle/complete.pdf",
+      "equality": {
+        "font_programs": true,
+        "unicode_maps": true,
+        "text_operators": true,
+        "page_boxes": true,
+        "pdfium_text_sha256": true,
+        "poppler_text_sha256": true
+      },
+      "mode": "crops-oracle",
+      "accounting": {
+        "pdf_bytes": 725947,
+        "sha256": "aa287a7a090c0ba889767adb0cbd6637e815dc22620fc7e8bde18fa630fda09b",
+        "encoded_font_program_bytes": 15030,
+        "content_stream_bytes": 20788,
+        "image_mask_objects": 140,
+        "encoded_raster_bytes": 655481
+      }
+    },
+    {
+      "case": "seal",
+      "path": "qualification/acr03/local/seal-crops/complete.pdf",
+      "equality": {
+        "font_programs": true,
+        "unicode_maps": true,
+        "text_operators": true,
+        "page_boxes": true,
+        "pdfium_text_sha256": true,
+        "poppler_text_sha256": true
+      },
+      "mode": "crops",
+      "accounting": {
+        "pdf_bytes": 6045921,
+        "sha256": "095c84eb835560fd8a9a8862fe9c22a16c14daa8a4bfafbe0fd8f0a4775f26ec",
+        "encoded_font_program_bytes": 15428,
+        "content_stream_bytes": 61894,
+        "image_mask_objects": 111,
+        "encoded_raster_bytes": 5944722
+      }
+    },
+    {
+      "case": "seal",
+      "path": "qualification/acr03/local/seal-masked/complete.pdf",
+      "equality": {
+        "font_programs": true,
+        "unicode_maps": true,
+        "text_operators": true,
+        "page_boxes": true,
+        "pdfium_text_sha256": true,
+        "poppler_text_sha256": true
+      },
+      "mode": "masked",
+      "accounting": {
+        "pdf_bytes": 5114421,
+        "sha256": "50fdf5b980fb804315300b7fe6eeef0d489ef6088b7011ee5acf080a95fd6407",
+        "encoded_font_program_bytes": 15428,
+        "content_stream_bytes": 60428,
+        "image_mask_objects": 5,
+        "encoded_raster_bytes": 5034620
+      }
+    },
+    {
+      "case": "financial",
+      "path": "qualification/acr03/local/financial-crops/complete.pdf",
+      "equality": {
+        "font_programs": true,
+        "unicode_maps": true,
+        "text_operators": true,
+        "page_boxes": true,
+        "pdfium_text_sha256": true,
+        "poppler_text_sha256": true
+      },
+      "mode": "crops",
+      "accounting": {
+        "pdf_bytes": 8960135,
+        "sha256": "d3683e551a03ef6be68938edf39fa84c3b54b647748719a871697f6bb7d5a91c",
+        "encoded_font_program_bytes": 1065434,
+        "content_stream_bytes": 155423,
+        "image_mask_objects": 2137,
+        "encoded_raster_bytes": 7264981
+      }
+    },
+    {
+      "case": "financial",
+      "path": "qualification/acr03/local/financial-masked/complete.pdf",
+      "equality": {
+        "font_programs": true,
+        "unicode_maps": true,
+        "text_operators": true,
+        "page_boxes": true,
+        "pdfium_text_sha256": true,
+        "poppler_text_sha256": true
+      },
+      "mode": "masked",
+      "accounting": {
+        "pdf_bytes": 8890476,
+        "sha256": "89907ca5685d43ec4ac9037dec5ce4bc2307e1c27e9699bf32945c4cfaf74501",
+        "encoded_font_program_bytes": 1065434,
+        "content_stream_bytes": 149662,
+        "image_mask_objects": 1680,
+        "encoded_raster_bytes": 7312831
+      }
+    },
+    {
+      "case": "shade",
+      "path": "qualification/acr03/local/shade-crops/complete.pdf",
+      "equality": {
+        "font_programs": true,
+        "unicode_maps": true,
+        "text_operators": true,
+        "page_boxes": true,
+        "pdfium_text_sha256": true,
+        "poppler_text_sha256": true
+      },
+      "mode": "crops",
+      "accounting": {
+        "pdf_bytes": 6078494,
+        "sha256": "58078943978155fa441696b2dcd2fe04d925331bd0c662bc1fc6c305cc00d291",
+        "encoded_font_program_bytes": 15428,
+        "content_stream_bytes": 74281,
+        "image_mask_objects": 1268,
+        "encoded_raster_bytes": 5670926
+      }
+    },
+    {
+      "case": "shade",
+      "path": "qualification/acr03/local/shade-masked/complete.pdf",
+      "equality": {
+        "font_programs": true,
+        "unicode_maps": true,
+        "text_operators": true,
+        "page_boxes": true,
+        "pdfium_text_sha256": true,
+        "poppler_text_sha256": true
+      },
+      "mode": "masked",
+      "accounting": {
+        "pdf_bytes": 5114421,
+        "sha256": "50fdf5b980fb804315300b7fe6eeef0d489ef6088b7011ee5acf080a95fd6407",
+        "encoded_font_program_bytes": 15428,
+        "content_stream_bytes": 60428,
+        "image_mask_objects": 5,
+        "encoded_raster_bytes": 5034620
+      }
+    },
+    {
+      "case": "financial-all",
+      "path": "qualification/acr03/local/financial-all-masked/complete.pdf",
+      "equality": {
+        "font_programs": true,
+        "unicode_maps": true,
+        "text_operators": true,
+        "page_boxes": true,
+        "pdfium_text_sha256": true,
+        "poppler_text_sha256": true
+      },
+      "accounting": {
+        "pdf_bytes": 8442537,
+        "sha256": "1d70720bbe12b46fd45137db926fe8b56ccdcadba371fa4bd4754f702832a0fb",
+        "encoded_font_program_bytes": 1065434,
+        "content_stream_bytes": 151027,
+        "image_mask_objects": 563,
+        "encoded_raster_bytes": 7094398
+      }
+    }
+  ],
+  "frozen_hashes": [
+    {
+      "path": "qualification/pdf_packaging/groups/financial-adobe.pdf",
+      "unchanged": true
+    },
+    {
+      "path": "qualification/pdf_packaging/groups/financial-archive.pdf",
+      "unchanged": true
+    },
+    {
+      "path": "qualification/pdf_packaging/groups/financial-input.pdf",
+      "unchanged": true
+    },
+    {
+      "path": "qualification/pdf_packaging/groups/financial-ocrmypdf1.pdf",
+      "unchanged": true
+    },
+    {
+      "path": "qualification/pdf_packaging/groups/financial-ocrmypdf3.pdf",
+      "unchanged": true
+    },
+    {
+      "path": "qualification/pdf_packaging/groups/financial-scanweave.pdf",
+      "unchanged": true
+    },
+    {
+      "path": "qualification/pdf_packaging/groups/forms-adobe.pdf",
+      "unchanged": true
+    },
+    {
+      "path": "qualification/pdf_packaging/groups/forms-archive.pdf",
+      "unchanged": true
+    },
+    {
+      "path": "qualification/pdf_packaging/groups/forms-input.pdf",
+      "unchanged": true
+    },
+    {
+      "path": "qualification/pdf_packaging/groups/forms-ocrmypdf1.pdf",
+      "unchanged": true
+    },
+    {
+      "path": "qualification/pdf_packaging/groups/forms-ocrmypdf3.pdf",
+      "unchanged": true
+    },
+    {
+      "path": "qualification/pdf_packaging/groups/forms-scanweave.pdf",
+      "unchanged": true
+    },
+    {
+      "path": "qualification/pdf_packaging/groups/historical-adobe.pdf",
+      "unchanged": true
+    },
+    {
+      "path": "qualification/pdf_packaging/groups/historical-archive.pdf",
+      "unchanged": true
+    },
+    {
+      "path": "qualification/pdf_packaging/groups/historical-input.pdf",
+      "unchanged": true
+    },
+    {
+      "path": "qualification/pdf_packaging/groups/historical-ocrmypdf1.pdf",
+      "unchanged": true
+    },
+    {
+      "path": "qualification/pdf_packaging/groups/historical-ocrmypdf3.pdf",
+      "unchanged": true
+    },
+    {
+      "path": "qualification/pdf_packaging/groups/historical-scanweave.pdf",
+      "unchanged": true
+    },
+    {
+      "path": "qualification/pdf_packaging/groups/mixed-adobe.pdf",
+      "unchanged": true
+    },
+    {
+      "path": "qualification/pdf_packaging/groups/mixed-archive.pdf",
+      "unchanged": true
+    },
+    {
+      "path": "qualification/pdf_packaging/groups/mixed-input.pdf",
+      "unchanged": true
+    },
+    {
+      "path": "qualification/pdf_packaging/groups/mixed-ocrmypdf1.pdf",
+      "unchanged": true
+    },
+    {
+      "path": "qualification/pdf_packaging/groups/mixed-ocrmypdf3.pdf",
+      "unchanged": true
+    },
+    {
+      "path": "qualification/pdf_packaging/groups/mixed-scanweave.pdf",
+      "unchanged": true
+    },
+    {
+      "path": "qualification/pdf_packaging/groups/receipts-adobe.pdf",
+      "unchanged": true
+    },
+    {
+      "path": "qualification/pdf_packaging/groups/receipts-archive.pdf",
+      "unchanged": true
+    },
+    {
+      "path": "qualification/pdf_packaging/groups/receipts-input.pdf",
+      "unchanged": true
+    },
+    {
+      "path": "qualification/pdf_packaging/groups/receipts-ocrmypdf1.pdf",
+      "unchanged": true
+    },
+    {
+      "path": "qualification/pdf_packaging/groups/receipts-ocrmypdf3.pdf",
+      "unchanged": true
+    },
+    {
+      "path": "qualification/pdf_packaging/groups/receipts-scanweave.pdf",
+      "unchanged": true
+    },
+    {
+      "path": "qualification/tonal_raster/collections/receipts.pdf",
+      "unchanged": true
+    },
+    {
+      "path": "qualification/tonal_raster/collections/historical.pdf",
+      "unchanged": true
+    },
+    {
+      "path": "qualification/tonal_raster/collections/mixed.pdf",
+      "unchanged": true
+    },
+    {
+      "path": "qualification/tonal_raster/collections/financial.pdf",
+      "unchanged": true
+    },
+    {
+      "path": "qualification/tonal_raster/collections/forms.pdf",
+      "unchanged": true
+    }
+  ],
+  "qpdf": [
+    {
+      "path": "qualification/acr03/local/logo-crops/complete.pdf",
+      "exit": 0
+    },
+    {
+      "path": "qualification/acr03/local/logo-masked/complete.pdf",
+      "exit": 0
+    },
+    {
+      "path": "qualification/acr03/local/logo-crops-oracle/complete.pdf",
+      "exit": 0
+    },
+    {
+      "path": "qualification/acr03/local/annotation-crops/complete.pdf",
+      "exit": 0
+    },
+    {
+      "path": "qualification/acr03/local/annotation-masked/complete.pdf",
+      "exit": 0
+    },
+    {
+      "path": "qualification/acr03/local/annotation-crops-oracle/complete.pdf",
+      "exit": 0
+    },
+    {
+      "path": "qualification/acr03/local/seal-crops/complete.pdf",
+      "exit": 0
+    },
+    {
+      "path": "qualification/acr03/local/seal-masked/complete.pdf",
+      "exit": 0
+    },
+    {
+      "path": "qualification/acr03/local/financial-crops/complete.pdf",
+      "exit": 0
+    },
+    {
+      "path": "qualification/acr03/local/financial-masked/complete.pdf",
+      "exit": 0
+    },
+    {
+      "path": "qualification/acr03/local/shade-crops/complete.pdf",
+      "exit": 0
+    },
+    {
+      "path": "qualification/acr03/local/shade-masked/complete.pdf",
+      "exit": 0
+    },
+    {
+      "path": "qualification/acr03/local/financial-all-masked/complete.pdf",
+      "exit": 0
+    }
+  ],
+  "save_control_equality": {
+    "font_programs": true,
+    "unicode_maps": true,
+    "text_operators": true,
+    "page_boxes": true,
+    "pdfium_text_sha256": true,
+    "poppler_text_sha256": true
+  },
+  "save_control_page10_render_equality": {
+    "pdfium": true,
+    "poppler": true
+  },
+  "full_local_evidence_sha256": "0146b3befb48af6837c62fc4634803189b712cc95b69afe0f95dbc8b596ebd6d"
+}

@@ -1,0 +1,441 @@
+{
+  "product_baseline": "8f14cd329493ad0cc226e480d152d7a464fb4731",
+  "remote_main": "0ca94aecd74c35ea1b28bcebe7e11e863aae7f08",
+  "research_reference": "38cc218f8f1e50e56679fd12d5d72c1d4a44a697",
+  "inspector_reference": "ffa604ebd4ab47a6af67d2696a5c8fc15fbf3f2e",
+  "python": "3.12.3",
+  "packages": {
+    "pikepdf": "10.17.0",
+    "numpy": "2.5.4",
+    "scipy": "1.18.1",
+    "Pillow": "13.0.0",
+    "pypdfium2": "5.14.0",
+    "fonttools": "4.67.0"
+  },
+  "poppler": "pdftoppm version 24.02.0",
+  "reference_exports": [
+    {
+      "revision": "38cc218f8f1e50e56679fd12d5d72c1d4a44a697",
+      "path": "qualification/acr03/local/reference/qualification/acr02/anatomy.py",
+      "sha256": "19b1a7b92fbdcd59a2bafbf776e75d7d4d0f0f7e3857152aa491eb12603bcc04"
+    },
+    {
+      "revision": "38cc218f8f1e50e56679fd12d5d72c1d4a44a697",
+      "path": "qualification/acr03/local/reference/qualification/acr02/fixtures.py",
+      "sha256": "3624428b938cbf6b7056f42743e0c098714d889027d9021b80bf8c9f4fd27e41"
+    },
+    {
+      "revision": "38cc218f8f1e50e56679fd12d5d72c1d4a44a697",
+      "path": "qualification/acr03/local/reference/qualification/acr02/prepare_prototypes.py",
+      "sha256": "7471a4480aa5febd3c64031612b03c6fe3a7f09b81360e39cacc2a103f146c9b"
+    },
+    {
+      "revision": "ffa604ebd4ab47a6af67d2696a5c8fc15fbf3f2e",
+      "path": "qualification/residual_resolution/local/qualification/raster_competitors/inspect_pdf.py",
+      "sha256": "1ad3d9101529aa304f54eb512d74f3d6524e85b457cc0bd0813dad8ddd734a65"
+    },
+    {
+      "revision": "ffa604ebd4ab47a6af67d2696a5c8fc15fbf3f2e",
+      "path": "qualification/residual_resolution/local/qualification/raster_competitors/render_compare.py",
+      "sha256": "554ebc3aad4cc70dba86cf89eb6f12d8535d5c1ffc1d72b7621fe22a296d2832"
+    }
+  ],
+  "evaluator_only_inputs": [
+    {
+      "path": "qualification/acr02/local/sources/flat-logo-white.png",
+      "sha256": "0b6118f4aed484a91b29af90ee16c7304e5453511750b803f58d1d9649c3ddc1"
+    },
+    {
+      "path": "qualification/acr02/local/sources/flat-logo-white-paper.png",
+      "sha256": "04079a883d3e1e1d09ecfc17a362ca33c25b846f86596a215a30a179d8ef7939"
+    },
+    {
+      "path": "qualification/acr02/local/sources/statement-annotation.png",
+      "sha256": "bc39b23b9799a56443c6f81a30fe709b2742116385073b03a1d7ee0383bbdf17"
+    },
+    {
+      "path": "qualification/acr02/local/sources/statement-white.png",
+      "sha256": "9514446b425383b0c2bee4f959622f0bae183e9b89603531ac6ed229236b7d82"
+    }
+  ],
+  "layer_evidence": [
+    {
+      "path": "qualification/acr03/local/logo-crops/object-mask.png",
+      "sha256": "8a614895ea828dff4f5b0368610753e6fdb6ae6aec81b268bb306623e02d2ddd"
+    },
+    {
+      "path": "qualification/acr03/local/logo-crops/retained-ink-mask.png",
+      "sha256": "213482cfb1b5ace4babf3ae8f0dfbef3ab7202f7a83f7ff6f2fb620bec83a651"
+    },
+    {
+      "path": "qualification/acr03/local/logo-crops/paper.png",
+      "sha256": "6057477adc69e2cc7277284126f7362e7acb51f91bea4e432371f211fe77e75d"
+    },
+    {
+      "path": "qualification/acr03/local/annotation-crops/object-mask.png",
+      "sha256": "163f949565c9a1ff383912f3b0a7994c500c72e2507ea5a0ed8bf8e97312b372"
+    },
+    {
+      "path": "qualification/acr03/local/annotation-crops/retained-ink-mask.png",
+      "sha256": "ef8b2b93b892cc9ac31eccef6bc0876a88659ab909f45c8fc507056d0fd391ae"
+    },
+    {
+      "path": "qualification/acr03/local/annotation-crops/paper.png",
+      "sha256": "6057477adc69e2cc7277284126f7362e7acb51f91bea4e432371f211fe77e75d"
+    },
+    {
+      "path": "qualification/acr03/local/seal-crops/object-mask.png",
+      "sha256": "47c729abadabd6e4aa1c5959d059a21d1cb1e6a3a2d0ea3cc981e6e3aaab855c"
+    },
+    {
+      "path": "qualification/acr03/local/seal-crops/retained-ink-mask.png",
+      "sha256": "9c0b5651089bf6e2513061b0ed0712b9909827808ec2f2f12538eb84946eca26"
+    },
+    {
+      "path": "qualification/acr03/local/seal-crops/paper.png",
+      "sha256": "03814a286ac7c73298549e3641e6ac4ea69e665e5ddf2654ab3b9204b363bbc9"
+    },
+    {
+      "path": "qualification/acr03/local/financial-crops/object-mask.png",
+      "sha256": "123e0c5f40b6aca5d41a36a6d2d0fd3ee13a6a29ae7ae25a074ed387ec9ec1c1"
+    },
+    {
+      "path": "qualification/acr03/local/financial-crops/retained-ink-mask.png",
+      "sha256": "1f3e74439bbf4e978ec9e53bcc83df46b30e9311f19bfac1fdb289dbd59ba8b5"
+    },
+    {
+      "path": "qualification/acr03/local/financial-crops/paper.png",
+      "sha256": "81702c20268de0196ce4f4b87acd603a7857cefa96c94570bbb515277b22c8e0"
+    },
+    {
+      "path": "qualification/acr03/local/shade-crops/object-mask.png",
+      "sha256": "96d6b7d810ef01e0e7c89a960dd83b836e2c8d40429848a062a732800d015dc5"
+    },
+    {
+      "path": "qualification/acr03/local/shade-crops/retained-ink-mask.png",
+      "sha256": "932d067b58aa8990817a581bd5252ba36e0970acf0e7068d5ec639aafb1d53e4"
+    },
+    {
+      "path": "qualification/acr03/local/shade-crops/paper.png",
+      "sha256": "8bbfc24cb00c9e5aa2b2c868eb0998040530e43195101e8bec9daa87e1b18904"
+    },
+    {
+      "path": "qualification/acr03/local/logo-masked/object-mask.png",
+      "sha256": "8a614895ea828dff4f5b0368610753e6fdb6ae6aec81b268bb306623e02d2ddd"
+    },
+    {
+      "path": "qualification/acr03/local/logo-masked/retained-ink-mask.png",
+      "sha256": "213482cfb1b5ace4babf3ae8f0dfbef3ab7202f7a83f7ff6f2fb620bec83a651"
+    },
+    {
+      "path": "qualification/acr03/local/logo-masked/paper.png",
+      "sha256": "6057477adc69e2cc7277284126f7362e7acb51f91bea4e432371f211fe77e75d"
+    },
+    {
+      "path": "qualification/acr03/local/annotation-masked/object-mask.png",
+      "sha256": "163f949565c9a1ff383912f3b0a7994c500c72e2507ea5a0ed8bf8e97312b372"
+    },
+    {
+      "path": "qualification/acr03/local/annotation-masked/retained-ink-mask.png",
+      "sha256": "ef8b2b93b892cc9ac31eccef6bc0876a88659ab909f45c8fc507056d0fd391ae"
+    },
+    {
+      "path": "qualification/acr03/local/annotation-masked/paper.png",
+      "sha256": "6057477adc69e2cc7277284126f7362e7acb51f91bea4e432371f211fe77e75d"
+    },
+    {
+      "path": "qualification/acr03/local/financial-masked/object-mask.png",
+      "sha256": "123e0c5f40b6aca5d41a36a6d2d0fd3ee13a6a29ae7ae25a074ed387ec9ec1c1"
+    },
+    {
+      "path": "qualification/acr03/local/financial-masked/retained-ink-mask.png",
+      "sha256": "1f3e74439bbf4e978ec9e53bcc83df46b30e9311f19bfac1fdb289dbd59ba8b5"
+    },
+    {
+      "path": "qualification/acr03/local/financial-masked/paper.png",
+      "sha256": "81702c20268de0196ce4f4b87acd603a7857cefa96c94570bbb515277b22c8e0"
+    },
+    {
+      "path": "qualification/acr03/local/rejected/seal-masked/object-mask.png",
+      "sha256": "47c729abadabd6e4aa1c5959d059a21d1cb1e6a3a2d0ea3cc981e6e3aaab855c"
+    },
+    {
+      "path": "qualification/acr03/local/rejected/seal-masked/retained-ink-mask.png",
+      "sha256": "9c0b5651089bf6e2513061b0ed0712b9909827808ec2f2f12538eb84946eca26"
+    },
+    {
+      "path": "qualification/acr03/local/rejected/seal-masked/paper.png",
+      "sha256": "03814a286ac7c73298549e3641e6ac4ea69e665e5ddf2654ab3b9204b363bbc9"
+    },
+    {
+      "path": "qualification/acr03/local/rejected/shade-masked/object-mask.png",
+      "sha256": "96d6b7d810ef01e0e7c89a960dd83b836e2c8d40429848a062a732800d015dc5"
+    },
+    {
+      "path": "qualification/acr03/local/rejected/shade-masked/retained-ink-mask.png",
+      "sha256": "932d067b58aa8990817a581bd5252ba36e0970acf0e7068d5ec639aafb1d53e4"
+    },
+    {
+      "path": "qualification/acr03/local/rejected/shade-masked/paper.png",
+      "sha256": "8bbfc24cb00c9e5aa2b2c868eb0998040530e43195101e8bec9daa87e1b18904"
+    }
+  ],
+  "scripts": [
+    {
+      "path": "qualification/acr03/account.py",
+      "sha256": "c8daa2b915739ba1e06e685546984068c9a72fa89f106b6e90b8f4e3a11d95a8"
+    },
+    {
+      "path": "qualification/acr03/compare.py",
+      "sha256": "ffe99e17f48060477a211f3ad8ad76fc733dbc17d695ca3d4a9acac2b36e2e6d"
+    },
+    {
+      "path": "qualification/acr03/diagnostics.py",
+      "sha256": "9f15e7ef9e526508ffa0dbfb0071bff72bbc1f9465ced79b21a92afdc3811218"
+    },
+    {
+      "path": "qualification/acr03/layers.py",
+      "sha256": "ab11e7b2ea032ca234c03c39cf0d81f44d85ed4309aadafe21cd966d63967fd9"
+    },
+    {
+      "path": "qualification/acr03/prepare_reference.py",
+      "sha256": "14802b14e4956fda8473ac9c0000ef17d61bc5ecefe5c743c702bc7904010a79"
+    },
+    {
+      "path": "qualification/acr03/prototype.py",
+      "sha256": "4a8d7fb27129e264fb02f57d3077e8ca9024eb0039fa1408dd998555924e1899"
+    },
+    {
+      "path": "qualification/acr03/review_render.py",
+      "sha256": "f9ac004581546de708639e0e9f37a7a477fc1bef93648e34769246d5c0452c7f"
+    },
+    {
+      "path": "qualification/acr03/test_prototype.py",
+      "sha256": "337db2af4086b5dc8965ad4f8a984227fc3ba72511ea47d97ff7c98411e5b481"
+    },
+    {
+      "path": "qualification/acr03/verify_acr03.py",
+      "sha256": "d35924eca10104e1295fb4e42afc271e646154fcbcc99ec613ed4b9a328740fb"
+    }
+  ],
+  "inputs": [
+    {
+      "path": "qualification/acr01/local/product/financial.pdf",
+      "bytes": 9018954,
+      "sha256": "3c63e63ba50ca5fb52872e35ee42e35765d73e4150711072dd1ba89ba07deea4"
+    },
+    {
+      "path": "qualification/acr01/local/product/historical.pdf",
+      "bytes": 5114421,
+      "sha256": "50fdf5b980fb804315300b7fe6eeef0d489ef6088b7011ee5acf080a95fd6407"
+    },
+    {
+      "path": "qualification/acr02/local/financial-full13-indexed16.pdf",
+      "bytes": 6912445,
+      "sha256": "84f64b67d5cacbdc6e6a5a91bf0f89606daa06831bb71110b4de774b7af05310"
+    },
+    {
+      "path": "qualification/acr02/local/history-indexed16.pdf",
+      "bytes": 5638094,
+      "sha256": "5ed8d8b96c589f2ecc74ba698cc547f4c9a36f2a323fc2f1e0121aeaaec9ad9b"
+    },
+    {
+      "path": "qualification/acr02/local/prototype-acr01.pdf",
+      "bytes": 431287,
+      "sha256": "3c164b3bf8d01d004e78f380d48d47d9baa10264ef0f215a94bd0157706b15fb"
+    },
+    {
+      "path": "qualification/acr02/local/prototype-adobe.pdf",
+      "bytes": 144913,
+      "sha256": "37cf68b18273d6c47ee9cfa565e8e35279de53e1666bb6f1bd6c1024f3319f95"
+    },
+    {
+      "path": "qualification/acr02/local/prototype-controlled-indexed.pdf",
+      "bytes": 392624,
+      "sha256": "2f89637c38fcde356711b6c23a5a65a03e236f168452584aacfd9893465dc06c"
+    },
+    {
+      "path": "qualification/acr02/local/prototype-input.pdf",
+      "bytes": 658396,
+      "sha256": "5b27798d1c987e50a969136788c833291f27b01e98b0e428dbd987f969f6c6e6"
+    },
+    {
+      "path": "qualification/pdf_packaging/groups/financial-adobe.pdf",
+      "bytes": 718276,
+      "sha256": "0168c79a74237c1d2fe2a1bb1fd47ff3bb6fb73108be4087b5f689d7854fd452"
+    },
+    {
+      "path": "qualification/pdf_packaging/groups/financial-input.pdf",
+      "bytes": 12861431,
+      "sha256": "206f0f669d0196bb5e3b8da64acbffe1e53b2611377450a71b1440622291ac6f"
+    },
+    {
+      "path": "qualification/pdf_packaging/groups/financial-ocrmypdf3.pdf",
+      "bytes": 5166004,
+      "sha256": "b0b539660282cf36b611a9d4efd8dac7b153b6ae077cc2e671d657e279e6e646"
+    },
+    {
+      "path": "qualification/pdf_packaging/groups/historical-adobe.pdf",
+      "bytes": 1682427,
+      "sha256": "0b5768a06e9f6507cf7c1d47e17b9367fa661bbf282c0b5cc6f0f053b54e4eda"
+    },
+    {
+      "path": "qualification/pdf_packaging/groups/historical-input.pdf",
+      "bytes": 46826111,
+      "sha256": "53276a63753bba7801c73c8d91e2e52d310a70ca16efb93c1d69f52c462fce6f"
+    },
+    {
+      "path": "qualification/pdf_packaging/groups/historical-ocrmypdf3.pdf",
+      "bytes": 5802054,
+      "sha256": "dd297424ad3690870278e5ec4404fcc88e427d648010880c5db4725e000c6503"
+    }
+  ],
+  "outputs": [
+    {
+      "path": "qualification/acr03/local/annotation-crops/complete.pdf",
+      "bytes": 725937,
+      "sha256": "4a8464f0a1c9237809c83c7d1a8a3b44a9a3e2f71c65ed41a79bd6bf47ac3157"
+    },
+    {
+      "path": "qualification/acr03/local/annotation-crops-oracle/complete.pdf",
+      "bytes": 725947,
+      "sha256": "aa287a7a090c0ba889767adb0cbd6637e815dc22620fc7e8bde18fa630fda09b"
+    },
+    {
+      "path": "qualification/acr03/local/annotation-inferred/complete.pdf",
+      "bytes": 726660,
+      "sha256": "d7089f331ed9c173beb6db5d2de045d4762c70b46d7f5c2516b7928d51959253"
+    },
+    {
+      "path": "qualification/acr03/local/annotation-masked/complete.pdf",
+      "bytes": 556096,
+      "sha256": "155e199569da1270ecebb4174f6ac7fe67ccb78e469c2f777d21b7be0d4a9339"
+    },
+    {
+      "path": "qualification/acr03/local/annotation-oracle/complete.pdf",
+      "bytes": 726671,
+      "sha256": "5a222d0642ff45e6c328f8e05eda062c4c85f1586953b0a9cdef3699d79604ba"
+    },
+    {
+      "path": "qualification/acr03/local/controlled-save-control.pdf",
+      "bytes": 430263,
+      "sha256": "22c58d23ebcd1cf8b50b1d6ab609a9d7a74f74ab673be06bcce150fa8eb62815"
+    },
+    {
+      "path": "qualification/acr03/local/financial-all-masked/complete.pdf",
+      "bytes": 8442537,
+      "sha256": "1d70720bbe12b46fd45137db926fe8b56ccdcadba371fa4bd4754f702832a0fb"
+    },
+    {
+      "path": "qualification/acr03/local/financial-crops/complete.pdf",
+      "bytes": 8960135,
+      "sha256": "d3683e551a03ef6be68938edf39fa84c3b54b647748719a871697f6bb7d5a91c"
+    },
+    {
+      "path": "qualification/acr03/local/financial-inferred/complete.pdf",
+      "bytes": 8963017,
+      "sha256": "21106d7244a214908c90d1c1c2ba1aed8fdb4b4288857103b4b787119df6298e"
+    },
+    {
+      "path": "qualification/acr03/local/financial-masked/complete.pdf",
+      "bytes": 8890476,
+      "sha256": "89907ca5685d43ec4ac9037dec5ce4bc2307e1c27e9699bf32945c4cfaf74501"
+    },
+    {
+      "path": "qualification/acr03/local/financial-save-control.pdf",
+      "bytes": 8971229,
+      "sha256": "0345d737e41d04eabab8127ea6d64eb5e5693ddcf6bdf6cbeca245b5f7a2e050"
+    },
+    {
+      "path": "qualification/acr03/local/historical-fallback/complete.pdf",
+      "bytes": 5114421,
+      "sha256": "50fdf5b980fb804315300b7fe6eeef0d489ef6088b7011ee5acf080a95fd6407"
+    },
+    {
+      "path": "qualification/acr03/local/historical-save-control.pdf",
+      "bytes": 5114364,
+      "sha256": "22a83de73bd2ac2adceebd62cbfab1dc8feb95d75fcfd571d727e64415672089"
+    },
+    {
+      "path": "qualification/acr03/local/logo-crops/complete.pdf",
+      "bytes": 536703,
+      "sha256": "37dce28cd480c7e6d8f2ff84c0a47a84762b26f6b5b5adda54c2323c91515783"
+    },
+    {
+      "path": "qualification/acr03/local/logo-crops-oracle/complete.pdf",
+      "bytes": 536707,
+      "sha256": "7692b4689f6b67251ff9b1c94d11508b814904fd4afa870f593e1cf2dd954fde"
+    },
+    {
+      "path": "qualification/acr03/local/logo-inferred/complete.pdf",
+      "bytes": 537780,
+      "sha256": "0344a2d851509f51e299f7e0728cadcf2944e0e10b489e0c76c3cfb9eda4ea33"
+    },
+    {
+      "path": "qualification/acr03/local/logo-masked/complete.pdf",
+      "bytes": 523099,
+      "sha256": "ec86bb19dd833ab1f6291acc4c53a452156fba6cd853e1f1f9573b727b06ed1c"
+    },
+    {
+      "path": "qualification/acr03/local/logo-oracle/complete.pdf",
+      "bytes": 537789,
+      "sha256": "84308ef351622f16e2303cc0b558e8687b7edbe11eb0379f7082a5549e13fe10"
+    },
+    {
+      "path": "qualification/acr03/local/rejected/seal-masked/complete.pdf",
+      "bytes": 6113664,
+      "sha256": "80442d5b96e074acb3d46ca67966c37d21af0245bde5b0036273e92ceef1d373"
+    },
+    {
+      "path": "qualification/acr03/local/rejected/shade-masked/complete.pdf",
+      "bytes": 5562872,
+      "sha256": "a88aae16f6f357e0ac037c009bd6eb579fedb99c9df8e77ac848fea0e3286b96"
+    },
+    {
+      "path": "qualification/acr03/local/seal-crops/complete.pdf",
+      "bytes": 6045921,
+      "sha256": "095c84eb835560fd8a9a8862fe9c22a16c14daa8a4bfafbe0fd8f0a4775f26ec"
+    },
+    {
+      "path": "qualification/acr03/local/seal-inferred/complete.pdf",
+      "bytes": 6047728,
+      "sha256": "0d262002a3eecaab7d7fa9b303f92df4ff196bec9b21eee6ebed684e4dd62476"
+    },
+    {
+      "path": "qualification/acr03/local/seal-masked/complete.pdf",
+      "bytes": 5114421,
+      "sha256": "50fdf5b980fb804315300b7fe6eeef0d489ef6088b7011ee5acf080a95fd6407"
+    },
+    {
+      "path": "qualification/acr03/local/shade-crops/complete.pdf",
+      "bytes": 6078494,
+      "sha256": "58078943978155fa441696b2dcd2fe04d925331bd0c662bc1fc6c305cc00d291"
+    },
+    {
+      "path": "qualification/acr03/local/shade-inferred/complete.pdf",
+      "bytes": 6135551,
+      "sha256": "bf42ef3d13297a361fd0817480fe019ed5965fef7f2cdaa4a2ea263834fd66c2"
+    },
+    {
+      "path": "qualification/acr03/local/shade-masked/complete.pdf",
+      "bytes": 5114421,
+      "sha256": "50fdf5b980fb804315300b7fe6eeef0d489ef6088b7011ee5acf080a95fd6407"
+    }
+  ],
+  "reviews": [
+    {
+      "path": "qualification/acr03/local/financial-all-review.md",
+      "sha256": "05713531d8614fb30c3aae3f76a9f39c1cf9b21cd1b15df9a73b431751f64b43"
+    },
+    {
+      "path": "qualification/acr03/local/independent-code-review.md",
+      "sha256": "d56d6e1ce61b5586594b376d23faf477573508360967e82cff00aabdb8e88b30"
+    },
+    {
+      "path": "qualification/acr03/local/independent-visual-review.md",
+      "sha256": "eeff306803351be6a55c7688b8c16fb67c4456f6f082f9d00c9aecbd86e03503"
+    }
+  ],
+  "production_changed": false,
+  "holdout_opened": false
+}
