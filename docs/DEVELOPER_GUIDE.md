@@ -11,7 +11,7 @@ ScanWeave converts a page raster plus an OCR page (word/char boxes with a
 declared pixel binding) into a single searchable PDF whose text layer is bound
 to the *visual* evidence rather than to OCR labels alone. The pipeline is built
 around one question: **which ink can be safely turned into vector glyphs, and
-which must be preserved as exact source pixels?**
+which must remain visible as raster content?**
 
 - **Ownership solver** — many-to-many mapping between connected ink components
   and OCR symbol boxes. Touching characters merge into one unit that carries
@@ -19,8 +19,10 @@ which must be preserved as exact source pixels?**
   that extends beyond its symbol boxes is *suspect* and never vectorized.
 - **Transactional fallback** — a region that is suspect, that touches non-text
   (rules, stamps, barcodes), that is caller-protected, or whose traced outline
-  fails the fidelity policy degrades to an exact source raster patch plus an
-  invisible label overlay. No pixel is discarded and no label is lost.
+  fails the fidelity policy retains a source raster patch plus an invisible
+  label overlay. Samples are exact before encoding; eligible ClearScan images
+  may subsequently use the lossy encoding described below. Faithful remains
+  independent. Raster fallback does not discard the OCR label.
 - **One shared font** — one CID per (glyph shape, semantic string) pair across
   the whole document, so repeated content costs nothing extra. Wrong OCR labels
   never corrupt the visual: the shape and the string travel independently.
@@ -41,14 +43,15 @@ ClearScan retains native samples for verified full-page image inputs near the
 requested resolution. Other page graphics, crops and rotations use Poppler.
 Verified source JPEG resources remain reusable without recompression. Eligible
 whole-page tonal residuals, including pages with emitted vectors, may use
-quality-85, native-resolution, full-chroma JPEG when the complete PDF becomes
-smaller. Paper grain and small tonal differences are intentionally permitted in
-ClearScan; this is not a pixel-preservation guarantee. The encoder uses the
-already-cleaned residual, so source ink is not restored beneath vector glyphs. Separately serialized native exception resources remain lossless, with grayscale
-storage, exact resource reuse and measured Flate predictors. Unsupported text and
-artwork remain raster; only already-qualified paper backgrounds may use
-reduced-resolution encoding. Faithful does not use the new lossy representation.
-See [ACR-01 measurements](../ACR_01_REPORT.md) for the current quality–size trade-off.
+optimized Q85 4:2:0 JPEG at approximately 200 DPI when encoded savings justify
+reduction. Eligible tonal native exceptions may use source-resolution Q90 4:4:4;
+binary and tiny resources retain lossless encoding. Complete PDF size selects
+the beneficial candidate. Verified source JPEG passthrough remains unchanged.
+Paper grain and small tonal differences are intentionally permitted; this is not
+a pixel-preservation guarantee. Encoding uses already-cleaned residual pixels,
+so this change does not restore source ink beneath vector glyphs. Faithful does
+not use these lossy representations. See [ACR-04 measurements](../ACR_04_REPORT.md)
+for exact eligibility, quality evidence and limitations.
 Sparse OCR can retry Tesseract's block layout when confidence and character-box
 evidence support it. No new OCR model is required.
 
@@ -63,11 +66,10 @@ M1-C is not the current feature set. The independent holdout remains sealed.
 ### Measured real-document state
 
 On the fixed 32-page development corpus, current ClearScan outputs total
-18,556,766 bytes versus the matched 45,453,391-byte Q100 baseline
-(59.17% smaller) and 81,969,566 input bytes. See the
-[ACR-01 report](../ACR_01_REPORT.md) for source-detail checks and limitations.
-Whole-page residuals may include folded unresolved detail and use guarded lossy
-encoding; only separately serialized native exception resources remain lossless.
+12,454,682 bytes versus matched ACR-01's 18,556,766 bytes (32.88% smaller).
+See the [ACR-04 report](../ACR_04_REPORT.md) for source-detail checks and limits.
+Whole-page residuals and eligible native exceptions can use lossy JPEG;
+faithful remains independent and unchanged.
 Adobe XI totals 4,178,103 bytes on the same inputs: substantial tonal-raster
 and shaded-page limitations remain. CORD annotated numeric search is 17/49;
 some pages still yield no usable OCR or vector reconstruction.

@@ -1,0 +1,533 @@
+{
+  "baseline_commit": "8f14cd329493ad0cc226e480d152d7a464fb4731",
+  "binary_sha256": "dde0d1da4fc94e69ad291edcc7cc96d9ad52b57b7acbe2e1f9d753b996401556",
+  "collections": [
+    {
+      "group": "historical",
+      "baseline": {
+        "pdf_bytes": 5114421,
+        "raster_bytes": 5034620,
+        "font_bytes": 15428,
+        "content_bytes": 60428,
+        "unique_images": 5,
+        "other_bytes": 3945
+      },
+      "candidate": {
+        "pdf_bytes": 2278050,
+        "raster_bytes": 2198254,
+        "font_bytes": 15428,
+        "content_bytes": 60428,
+        "unique_images": 5,
+        "other_bytes": 3940
+      },
+      "raster_by_role": {
+        "whole": 2198254
+      },
+      "sha256": "6ac0255df4d4470c6ca3b8892e83b3f8aa2de575c25a5925043037bece1e8d82",
+      "input_sha256": "53276a63753bba7801c73c8d91e2e52d310a70ca16efb93c1d69f52c462fce6f",
+      "wall_seconds": 67.75821940094465,
+      "peak_rss_kib": 721912,
+      "stage_timings": {
+        "total_ms": 61294,
+        "donor_collection_ms": 5715,
+        "page_conversion_ms": 40865,
+        "document_font_union_ms": 0,
+        "font_build_ms": 1,
+        "reconstruction_pdf_ms": 10374,
+        "raster_baseline_prepare_ms": 36,
+        "raster_baseline_pdf_ms": 4299,
+        "remaining_pipeline_ms": 4
+      }
+    },
+    {
+      "group": "receipts",
+      "baseline": {
+        "pdf_bytes": 2208177,
+        "raster_bytes": 2144916,
+        "font_bytes": 33656,
+        "content_bytes": 18047,
+        "unique_images": 31,
+        "other_bytes": 11558
+      },
+      "candidate": {
+        "pdf_bytes": 1288188,
+        "raster_bytes": 1225629,
+        "font_bytes": 33656,
+        "content_bytes": 18047,
+        "unique_images": 31,
+        "other_bytes": 10856
+      },
+      "raster_by_role": {
+        "whole": 1057153,
+        "paper": 100997,
+        "exception": 67479
+      },
+      "sha256": "f34f8dc38e91f1aa4f2b5fa06ba4d16c5ae0282c43434649a6d78d0ebd77ee6e",
+      "input_sha256": "72cf20dce418051d7dd5dbb236f4e3e15bf4af5280309029913415bb704d6a5d",
+      "wall_seconds": 28.806230070011225,
+      "peak_rss_kib": 538604,
+      "stage_timings": {
+        "total_ms": 24351,
+        "donor_collection_ms": 946,
+        "page_conversion_ms": 14858,
+        "document_font_union_ms": 0,
+        "font_build_ms": 1,
+        "reconstruction_pdf_ms": 6097,
+        "raster_baseline_prepare_ms": 44,
+        "raster_baseline_pdf_ms": 2401,
+        "remaining_pipeline_ms": 4
+      }
+    },
+    {
+      "group": "financial",
+      "baseline": {
+        "pdf_bytes": 9018954,
+        "raster_bytes": 7350457,
+        "font_bytes": 1065434,
+        "content_bytes": 149888,
+        "unique_images": 1892,
+        "other_bytes": 453175
+      },
+      "candidate": {
+        "pdf_bytes": 6898862,
+        "raster_bytes": 5275473,
+        "font_bytes": 1065434,
+        "content_bytes": 149888,
+        "unique_images": 1892,
+        "other_bytes": 408067
+      },
+      "raster_by_role": {
+        "paper": 1479568,
+        "exception": 3461535,
+        "whole": 334370
+      },
+      "sha256": "8a8d5d32b710177c37b2fff4b2ad472ffc462f355626b5ac98f10d11bcae4182",
+      "input_sha256": "206f0f669d0196bb5e3b8da64acbffe1e53b2611377450a71b1440622291ac6f",
+      "wall_seconds": 477.10911697195843,
+      "peak_rss_kib": 1371484,
+      "stage_timings": {
+        "total_ms": 465384,
+        "donor_collection_ms": 1314,
+        "page_conversion_ms": 455708,
+        "document_font_union_ms": 9,
+        "font_build_ms": 35,
+        "reconstruction_pdf_ms": 5391,
+        "raster_baseline_prepare_ms": 82,
+        "raster_baseline_pdf_ms": 2840,
+        "remaining_pipeline_ms": 5
+      }
+    },
+    {
+      "group": "mixed",
+      "baseline": {
+        "pdf_bytes": 1355690,
+        "raster_bytes": 732257,
+        "font_bytes": 461334,
+        "content_bytes": 62155,
+        "unique_images": 455,
+        "other_bytes": 99944
+      },
+      "candidate": {
+        "pdf_bytes": 1130058,
+        "raster_bytes": 506626,
+        "font_bytes": 461334,
+        "content_bytes": 62155,
+        "unique_images": 455,
+        "other_bytes": 99943
+      },
+      "raster_by_role": {
+        "whole": 252659,
+        "paper": 8763,
+        "exception": 245204
+      },
+      "sha256": "ce168de72e2ae33a00ab9e6be018eb553bee00abbca3e0ef059d58e8dbc15925",
+      "input_sha256": "bea7a5ae2599dab57807bc256692ec36c656ff34d82af572c35fa3cd285f5e9f",
+      "wall_seconds": 108.44956531800563,
+      "peak_rss_kib": 298468,
+      "stage_timings": {
+        "total_ms": 104041,
+        "donor_collection_ms": 2670,
+        "page_conversion_ms": 99360,
+        "document_font_union_ms": 3,
+        "font_build_ms": 16,
+        "reconstruction_pdf_ms": 1377,
+        "raster_baseline_prepare_ms": 12,
+        "raster_baseline_pdf_ms": 600,
+        "remaining_pipeline_ms": 3
+      }
+    },
+    {
+      "group": "forms",
+      "baseline": {
+        "pdf_bytes": 859524,
+        "raster_bytes": 736983,
+        "font_bytes": 56968,
+        "content_bytes": 59461,
+        "unique_images": 2,
+        "other_bytes": 6112
+      },
+      "candidate": {
+        "pdf_bytes": 859524,
+        "raster_bytes": 736983,
+        "font_bytes": 56968,
+        "content_bytes": 59461,
+        "unique_images": 2,
+        "other_bytes": 6112
+      },
+      "raster_by_role": {
+        "whole": 736983
+      },
+      "sha256": "4529b78e522712a80e14d75d64476b24c9834d045699efdcc507e7136c489bbd",
+      "input_sha256": "9d042396ccc23cdaf74f0e2c3abb86231afaa160aa29902f0ddf708cdabdbc28",
+      "wall_seconds": 42.94182364200242,
+      "peak_rss_kib": 433472,
+      "stage_timings": {
+        "total_ms": 38207,
+        "donor_collection_ms": 937,
+        "page_conversion_ms": 35847,
+        "document_font_union_ms": 0,
+        "font_build_ms": 3,
+        "reconstruction_pdf_ms": 1154,
+        "raster_baseline_prepare_ms": 57,
+        "raster_baseline_pdf_ms": 204,
+        "remaining_pipeline_ms": 5
+      }
+    }
+  ],
+  "pages": [
+    {
+      "group": "historical",
+      "name": "history-00",
+      "painted_vectors": 0,
+      "referenced_raster_bytes": {
+        "whole": 451336
+      },
+      "semantics_glyphs_ownership_unchanged": true,
+      "image_placements": 1
+    },
+    {
+      "group": "historical",
+      "name": "history-01",
+      "painted_vectors": 25,
+      "referenced_raster_bytes": {
+        "whole": 306301
+      },
+      "semantics_glyphs_ownership_unchanged": true,
+      "image_placements": 1
+    },
+    {
+      "group": "historical",
+      "name": "history-02",
+      "painted_vectors": 0,
+      "referenced_raster_bytes": {
+        "whole": 252220
+      },
+      "semantics_glyphs_ownership_unchanged": true,
+      "image_placements": 1
+    },
+    {
+      "group": "historical",
+      "name": "history-03",
+      "painted_vectors": 0,
+      "referenced_raster_bytes": {
+        "whole": 629404
+      },
+      "semantics_glyphs_ownership_unchanged": true,
+      "image_placements": 1
+    },
+    {
+      "group": "historical",
+      "name": "history-04",
+      "painted_vectors": 36,
+      "referenced_raster_bytes": {
+        "whole": 558993
+      },
+      "semantics_glyphs_ownership_unchanged": true,
+      "image_placements": 1
+    },
+    {
+      "group": "receipts",
+      "name": "cord-00",
+      "painted_vectors": 0,
+      "referenced_raster_bytes": {
+        "whole": 83699
+      },
+      "semantics_glyphs_ownership_unchanged": true,
+      "image_placements": 1
+    },
+    {
+      "group": "receipts",
+      "name": "cord-01",
+      "painted_vectors": 12,
+      "referenced_raster_bytes": {
+        "whole": 66397
+      },
+      "semantics_glyphs_ownership_unchanged": true,
+      "image_placements": 1
+    },
+    {
+      "group": "receipts",
+      "name": "cord-02",
+      "painted_vectors": 28,
+      "referenced_raster_bytes": {
+        "paper": 100997,
+        "exception": 67479
+      },
+      "semantics_glyphs_ownership_unchanged": true,
+      "image_placements": 22
+    },
+    {
+      "group": "receipts",
+      "name": "cord-03",
+      "painted_vectors": 7,
+      "referenced_raster_bytes": {
+        "whole": 122528
+      },
+      "semantics_glyphs_ownership_unchanged": true,
+      "image_placements": 1
+    },
+    {
+      "group": "receipts",
+      "name": "cord-04",
+      "painted_vectors": 7,
+      "referenced_raster_bytes": {
+        "whole": 48912
+      },
+      "semantics_glyphs_ownership_unchanged": true,
+      "image_placements": 1
+    },
+    {
+      "group": "receipts",
+      "name": "cord-05",
+      "painted_vectors": 0,
+      "referenced_raster_bytes": {
+        "whole": 485445
+      },
+      "semantics_glyphs_ownership_unchanged": true,
+      "image_placements": 1
+    },
+    {
+      "group": "receipts",
+      "name": "cord-06",
+      "painted_vectors": 0,
+      "referenced_raster_bytes": {
+        "whole": 60807
+      },
+      "semantics_glyphs_ownership_unchanged": true,
+      "image_placements": 1
+    },
+    {
+      "group": "receipts",
+      "name": "cord-07",
+      "painted_vectors": 0,
+      "referenced_raster_bytes": {
+        "whole": 58362
+      },
+      "semantics_glyphs_ownership_unchanged": true,
+      "image_placements": 1
+    },
+    {
+      "group": "receipts",
+      "name": "cord-08",
+      "painted_vectors": 0,
+      "referenced_raster_bytes": {
+        "whole": 59408
+      },
+      "semantics_glyphs_ownership_unchanged": true,
+      "image_placements": 1
+    },
+    {
+      "group": "receipts",
+      "name": "cord-09",
+      "painted_vectors": 28,
+      "referenced_raster_bytes": {
+        "whole": 71595
+      },
+      "semantics_glyphs_ownership_unchanged": true,
+      "image_placements": 1
+    },
+    {
+      "group": "financial",
+      "name": "annual-011",
+      "painted_vectors": 281,
+      "referenced_raster_bytes": {
+        "paper": 93675,
+        "exception": 356796
+      },
+      "semantics_glyphs_ownership_unchanged": true,
+      "image_placements": 214
+    },
+    {
+      "group": "financial",
+      "name": "annual-021",
+      "painted_vectors": 197,
+      "referenced_raster_bytes": {
+        "paper": 90869,
+        "exception": 247370
+      },
+      "semantics_glyphs_ownership_unchanged": true,
+      "image_placements": 159
+    },
+    {
+      "group": "financial",
+      "name": "annual-031",
+      "painted_vectors": 244,
+      "referenced_raster_bytes": {
+        "paper": 100518,
+        "exception": 339130
+      },
+      "semantics_glyphs_ownership_unchanged": true,
+      "image_placements": 136
+    },
+    {
+      "group": "financial",
+      "name": "annual-041",
+      "painted_vectors": 345,
+      "referenced_raster_bytes": {
+        "paper": 235658,
+        "exception": 321822
+      },
+      "semantics_glyphs_ownership_unchanged": true,
+      "image_placements": 128
+    },
+    {
+      "group": "financial",
+      "name": "annual-051",
+      "painted_vectors": 182,
+      "referenced_raster_bytes": {
+        "paper": 96671,
+        "exception": 321092
+      },
+      "semantics_glyphs_ownership_unchanged": true,
+      "image_placements": 183
+    },
+    {
+      "group": "financial",
+      "name": "annual-061",
+      "painted_vectors": 207,
+      "referenced_raster_bytes": {
+        "paper": 278600,
+        "exception": 344405
+      },
+      "semantics_glyphs_ownership_unchanged": true,
+      "image_placements": 120
+    },
+    {
+      "group": "financial",
+      "name": "annual-071",
+      "painted_vectors": 235,
+      "referenced_raster_bytes": {
+        "whole": 144818
+      },
+      "semantics_glyphs_ownership_unchanged": true,
+      "image_placements": 1
+    },
+    {
+      "group": "financial",
+      "name": "annual-081",
+      "painted_vectors": 437,
+      "referenced_raster_bytes": {
+        "whole": 189552
+      },
+      "semantics_glyphs_ownership_unchanged": true,
+      "image_placements": 1
+    },
+    {
+      "group": "financial",
+      "name": "annual-091",
+      "painted_vectors": 329,
+      "referenced_raster_bytes": {
+        "paper": 230360,
+        "exception": 290690
+      },
+      "semantics_glyphs_ownership_unchanged": true,
+      "image_placements": 124
+    },
+    {
+      "group": "financial",
+      "name": "annual-101",
+      "painted_vectors": 280,
+      "referenced_raster_bytes": {
+        "paper": 90823,
+        "exception": 267714
+      },
+      "semantics_glyphs_ownership_unchanged": true,
+      "image_placements": 187
+    },
+    {
+      "group": "financial",
+      "name": "annual-111",
+      "painted_vectors": 420,
+      "referenced_raster_bytes": {
+        "paper": 91810,
+        "exception": 372825
+      },
+      "semantics_glyphs_ownership_unchanged": true,
+      "image_placements": 255
+    },
+    {
+      "group": "financial",
+      "name": "annual-121",
+      "painted_vectors": 215,
+      "referenced_raster_bytes": {
+        "paper": 84067,
+        "exception": 232625
+      },
+      "semantics_glyphs_ownership_unchanged": true,
+      "image_placements": 140
+    },
+    {
+      "group": "financial",
+      "name": "annual-131",
+      "painted_vectors": 345,
+      "referenced_raster_bytes": {
+        "paper": 86517,
+        "exception": 367066
+      },
+      "semantics_glyphs_ownership_unchanged": true,
+      "image_placements": 244
+    },
+    {
+      "group": "mixed",
+      "name": "scan-c03-29",
+      "painted_vectors": 482,
+      "referenced_raster_bytes": {
+        "whole": 252659
+      },
+      "semantics_glyphs_ownership_unchanged": true,
+      "image_placements": 1
+    },
+    {
+      "group": "mixed",
+      "name": "scan-linn",
+      "painted_vectors": 784,
+      "referenced_raster_bytes": {
+        "paper": 8763,
+        "exception": 245204
+      },
+      "semantics_glyphs_ownership_unchanged": true,
+      "image_placements": 454
+    },
+    {
+      "group": "forms",
+      "name": "nara-form-01",
+      "painted_vectors": 297,
+      "referenced_raster_bytes": {
+        "whole": 386621
+      },
+      "semantics_glyphs_ownership_unchanged": true,
+      "image_placements": 1
+    },
+    {
+      "group": "forms",
+      "name": "nara-form-02",
+      "painted_vectors": 207,
+      "referenced_raster_bytes": {
+        "whole": 350362
+      },
+      "semantics_glyphs_ownership_unchanged": true,
+      "image_placements": 1
+    }
+  ],
+  "full_local_inventory_sha256": "444fbcc78898b7d6ca854580578d57d0c96527aa97eba48fa70edb909b402ab0"
+}
