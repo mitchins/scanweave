@@ -1,0 +1,82 @@
+[
+  {
+    "split": "validation",
+    "arm": "deterministic",
+    "pairs": 5701,
+    "candidate_only": 468,
+    "sha256": "c0792bc464de2b902b9fb37c2a8739bd74bb742e395c96dcc381c8036b0af400",
+    "product_authorized": false
+  },
+  {
+    "split": "validation",
+    "arm": "linear",
+    "pairs": 5701,
+    "candidate_only": 555,
+    "sha256": "67538ed335e58723f0e33480ab9ffdcde2294a20b7eeee74a145b0f24cb89c7f",
+    "product_authorized": false
+  },
+  {
+    "split": "validation",
+    "arm": "CNN",
+    "pairs": 5701,
+    "candidate_only": 220,
+    "sha256": "e067808f5b45beb3a880c2b52039bc3741baecb9f9cd31e61b969600dd32cc70",
+    "product_authorized": false
+  },
+  {
+    "split": "validation",
+    "arm": "hybrid",
+    "pairs": 5701,
+    "candidate_only": 469,
+    "sha256": "3cf29d49775a770981196c15a9de14ef0a474f8decd26d48c951bda62101f45e",
+    "product_authorized": false
+  },
+  {
+    "split": "validation",
+    "arm": "context",
+    "pairs": 5701,
+    "candidate_only": 711,
+    "sha256": "b2d6fad5d2b7bf816a87d7663cb73fe58c8cb3fe92869e5e661ee64910f5822f",
+    "product_authorized": false
+  },
+  {
+    "split": "test",
+    "arm": "deterministic",
+    "pairs": 5744,
+    "candidate_only": 620,
+    "sha256": "c045734a8fc5faf360ef9ba3f7f0299414b41d9927a218ae393d49e96dfd111c",
+    "product_authorized": false
+  },
+  {
+    "split": "test",
+    "arm": "linear",
+    "pairs": 5744,
+    "candidate_only": 758,
+    "sha256": "01a430f8ab0f5a3928d847bed55625f44d8049e732575899f879107b3fad79cd",
+    "product_authorized": false
+  },
+  {
+    "split": "test",
+    "arm": "CNN",
+    "pairs": 5744,
+    "candidate_only": 193,
+    "sha256": "7cac66426558f615f281ad9d15ce4a7bd337bed1d1b60434ea55a956809fa6f7",
+    "product_authorized": false
+  },
+  {
+    "split": "test",
+    "arm": "hybrid",
+    "pairs": 5744,
+    "candidate_only": 510,
+    "sha256": "8d7a898d319013f796f1c39db714d35078e8360b2d91a1cd32998ad576f4b6df",
+    "product_authorized": false
+  },
+  {
+    "split": "test",
+    "arm": "context",
+    "pairs": 5744,
+    "candidate_only": 733,
+    "sha256": "b0e2937f6af8e5662a61ee91bbe2da8525d82ca78bbc5667e91c6b9f0ceb272a",
+    "product_authorized": false
+  }
+]

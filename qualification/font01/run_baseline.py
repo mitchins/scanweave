@@ -12,7 +12,7 @@ from pathlib import Path
 import numpy as np
 
 from .benchmark import verify_frozen_document
-from .evaluation import pair_metrics, threshold_at_fpr
+from .evaluation import decision_ledger, pair_metrics, threshold_at_fpr
 from .linear_metric import fit_metric
 from .pair_data import build_pairs
 from .registration import deterministic_score
@@ -53,6 +53,8 @@ def run(corpus, output, frozen_path=Path(__file__).with_name('fixture-manifest.j
                           for arm, score, _ in arms}
         results = []
         for arm, scores, probability in arms:
+            ledger = decision_ledger(pairs, scores, thresholds[arm])
+            (output/(name+'-'+arm+'-decisions.json')).write_text(json.dumps(ledger, indent=2)+'\n')
             results.append({'arm': arm, 'threshold': thresholds[arm],
                             'healthy': pair_metrics(y[healthy], scores[healthy], thresholds[arm],
                                                     probabilities=probability),

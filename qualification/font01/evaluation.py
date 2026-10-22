@@ -72,3 +72,16 @@ def false_merge_at_recall(labels, scores, recall):
     positive = np.sort(scores[labels])[::-1]
     index = int(np.ceil(recall*len(positive)))-1
     return pair_metrics(labels, scores, float(positive[index]))
+
+
+def decision_ledger(pairs, scores, threshold):
+    """Evidence proposals, never product authorization or inferred font identity."""
+    scores = np.asarray(scores, dtype=float)
+    if scores.shape != (len(pairs),) or not np.isfinite(scores).all() or not np.isfinite(threshold):
+        raise ValueError('Decision evidence must cover finite pair scores and threshold')
+    return [{'a': pair['a'], 'b': pair['b'], 'character': pair['character'],
+             'score': float(score), 'threshold': float(threshold),
+             'decision': 'candidate_only' if score >= threshold else 'abstain',
+             'reason': 'unqualified_research_arm' if score >= threshold else 'insufficient_same_face_evidence',
+             'authorized_for_product': False}
+            for pair, score in zip(pairs, scores)]

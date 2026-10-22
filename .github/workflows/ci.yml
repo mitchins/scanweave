@@ -75,6 +75,10 @@ jobs:
         run: |
           python -m venv qualification/.venv
           qualification/.venv/bin/pip install --require-hashes --only-binary=:all: -r .github/requirements-ci.txt
+      - name: CPU-only FONT-01 research test dependencies
+        # Training/test tooling only; ordinary Rust conversion has no model dependency.
+        run: |
+          qualification/.venv/bin/pip install --index-url https://download.pytorch.org/whl/cpu --require-hashes --only-binary=:all: -r .github/requirements-font01-cpu.txt
       - name: Build the OpenType sanitizer (OTS)
         # tools/ (developer-local builds) is git-ignored; build the same OTS 9.3.0
         # from source and point the harness at it via SCANWEAVE_OTS
@@ -109,6 +113,8 @@ jobs:
         run: |
           qualification/.venv/bin/python qualification/test_font01_benchmark.py
           qualification/.venv/bin/python qualification/test_font01_statistics.py
+          qualification/.venv/bin/python qualification/test_font01_challenger.py
+          qualification/.venv/bin/python qualification/test_font01_analysis.py
       - name: Corpus source and diagnostic tag boundaries
         run: qualification/.venv/bin/python qualification/test_corpus_boundaries.py
       - name: hOCR XML entity boundary
