@@ -1,0 +1,246 @@
+{
+  "base": "8f14cd329493ad0cc226e480d152d7a464fb4731",
+  "product_main": "0ca94aecd74c35ea1b28bcebe7e11e863aae7f08",
+  "research_helper_revision": "ffa604ebd4ab47a6af67d2696a5c8fc15fbf3f2e",
+  "production_changed": false,
+  "frozen_hashes_verified": 35,
+  "scanweave_binary_sha256": "e53ef152c9256b89fabcf4fa4ceed23e247fd8826927f444e7a5345c01565417",
+  "acrobat_runner_sha256": "2f17d8c631ef900b6c69b50d12407dd1b5a1ac9bfcd4af2a0381735012668c88",
+  "tools": {
+    "python": "3.12.3",
+    "Pillow": "13.0.0",
+    "numpy": "2.5.4",
+    "scipy": "1.18.1",
+    "pikepdf": "10.17.0",
+    "pdfium": "156.0.8076.0",
+    "wine": "wine-9.0 (Ubuntu 9.0~repack-4build3)",
+    "acrobat": "11.0.20 Paper Capture Plug-in with ClearScan (PDF Producer)",
+    "acrobat_settings": "ClearScan explicitly selected by existing runner; sticky downsampling selector not reasserted; effective output resolution measured per object"
+  },
+  "files": [
+    {
+      "path": "qualification/acr02/anatomy.py",
+      "sha256": "fc07d5da67f0ff5d07eefc9b8f9c53e265d57518585e36e1455b308935f923da"
+    },
+    {
+      "path": "qualification/acr02/fixtures.py",
+      "sha256": "ffad9212924d70cb831ef367ede4f228c7667c6e575765f78b5a41e938797afa"
+    },
+    {
+      "path": "qualification/acr02/test_anatomy.py",
+      "sha256": "3f680aae80e4818042044debce1c89b898dfa68663cc0eb125308ef449c16c45"
+    },
+    {
+      "path": "qualification/acr02/compare.py",
+      "sha256": "727874bf65c1bc05fcf3922b174f05df2ba9262763de3808638a39f9a53bad10"
+    },
+    {
+      "path": "qualification/acr02/paper_measure.py",
+      "sha256": "74171fe06a33721e89725cfd803b7982bd095a5d551a7e20bc5e35d65109ad46"
+    },
+    {
+      "path": "qualification/acr02/prepare_prototypes.py",
+      "sha256": "7471a4480aa5febd3c64031612b03c6fe3a7f09b81360e39cacc2a103f146c9b"
+    },
+    {
+      "path": "qualification/acr02/compare_controlled.py",
+      "sha256": "c4237f6625ba67ee1329b850ffb404620beb5212bd1e2ea427bf593cc5477967"
+    },
+    {
+      "path": "qualification/acr02/anatomy_summary.py",
+      "sha256": "99a3caae88cff8fe67d3d9c11ac3b04bb8a4586fadf400640183a554786c9930"
+    },
+    {
+      "path": "qualification/acr02/verify.py",
+      "sha256": "1281132b1f19fe7750a3ddeb3ab0c1e91ac995785559f47fb4983e2127268852"
+    },
+    {
+      "path": "qualification/acr02/prototypes.py",
+      "sha256": "68377c3e91b094c861999fc828ac74052e4f9f1b5d5947873e5038218bd87027"
+    },
+    {
+      "path": "qualification/acr02/account.py",
+      "sha256": "77a25193eade253fb565f309266dc966fdf382494c82493b298c2cd58e1f4b0c"
+    },
+    {
+      "path": "qualification/acr02/local/fixtures.json",
+      "sha256": "4ee5ca6077788a32479385d073abeb8a9121b4da77fccaee1275975211998d31"
+    },
+    {
+      "path": "qualification/acr02/local/prototype-membership.json",
+      "sha256": "17322a392ff419267e571db9204838eabefff9837864189696c2dc545c58602d"
+    },
+    {
+      "path": "qualification/acr02/local/verification.json",
+      "sha256": "171e7e1d80590529a629ef45cb993eb4a37d2de7cbfdf945e008810302235f3c"
+    },
+    {
+      "path": "qualification/acr02/local/anatomy-summary.json",
+      "sha256": "1b120c7497b2f99f288e2ee2c99b27f8b9581881a5fdff84e92926b314cd7981"
+    },
+    {
+      "path": "qualification/acr02/local/independent-code-review.md",
+      "sha256": "faac7d76b748981a59a4bb080c0b1613c0a032eed190fb2292ef190701809cbc"
+    },
+    {
+      "path": "qualification/acr02/local/independent-visual-review.md",
+      "sha256": "5431b0cecb4faa45cc806475ec18618fefa2cb90ac78d5f45a0a59938381e9f9"
+    }
+  ],
+  "results": [
+    {
+      "pdf": "controlled-input.pdf",
+      "sha256": "12dad72488709c977c2507e06002b3abfd85b2d036645e5557c950d0f4f0cc89",
+      "pdf_bytes": 16361746,
+      "raster_bytes": 16350469,
+      "font_program_bytes": 0,
+      "other_stream_bytes": 1984,
+      "serialized_residual_bytes": 9293,
+      "images": 36,
+      "pages": 36
+    },
+    {
+      "pdf": "controlled-adobe.pdf",
+      "sha256": "900b3144a7da1c873b416b24db99c8eafd43102bef800825a402e6c74717f5dc",
+      "pdf_bytes": 738212,
+      "raster_bytes": 560548,
+      "font_program_bytes": 19375,
+      "other_stream_bytes": 119987,
+      "serialized_residual_bytes": 38302,
+      "images": 65,
+      "pages": 36
+    },
+    {
+      "pdf": "prototype-input.pdf",
+      "sha256": "5b27798d1c987e50a969136788c833291f27b01e98b0e428dbd987f969f6c6e6",
+      "pdf_bytes": 658396,
+      "raster_bytes": 656650,
+      "font_program_bytes": 0,
+      "other_stream_bytes": 384,
+      "serialized_residual_bytes": 1362,
+      "images": 4,
+      "pages": 4
+    },
+    {
+      "pdf": "prototype-adobe.pdf",
+      "sha256": "37cf68b18273d6c47ee9cfa565e8e35279de53e1666bb6f1bd6c1024f3319f95",
+      "pdf_bytes": 144913,
+      "raster_bytes": 101446,
+      "font_program_bytes": 17698,
+      "other_stream_bytes": 18733,
+      "serialized_residual_bytes": 7036,
+      "images": 12,
+      "pages": 4
+    },
+    {
+      "pdf": "prototype-acr01.pdf",
+      "sha256": "3c164b3bf8d01d004e78f380d48d47d9baa10264ef0f215a94bd0157706b15fb",
+      "pdf_bytes": 431287,
+      "raster_bytes": 382124,
+      "font_program_bytes": 15030,
+      "other_stream_bytes": 22389,
+      "serialized_residual_bytes": 11744,
+      "images": 57,
+      "pages": 4
+    },
+    {
+      "pdf": "prototype-controlled-jpeg.pdf",
+      "sha256": "255f81f4d9afd76d9feed7e3b4ecb87aca3170ba6402ba59b2ea1e72f79c6b53",
+      "pdf_bytes": 743860,
+      "raster_bytes": 703350,
+      "font_program_bytes": 15030,
+      "other_stream_bytes": 21421,
+      "serialized_residual_bytes": 4059,
+      "images": 12,
+      "pages": 4
+    },
+    {
+      "pdf": "prototype-controlled-indexed.pdf",
+      "sha256": "2f89637c38fcde356711b6c23a5a65a03e236f168452584aacfd9893465dc06c",
+      "pdf_bytes": 392624,
+      "raster_bytes": 351350,
+      "font_program_bytes": 15030,
+      "other_stream_bytes": 21419,
+      "serialized_residual_bytes": 4825,
+      "images": 12,
+      "pages": 4
+    },
+    {
+      "pdf": "history-jpeg256-final.pdf",
+      "sha256": "453bdc11e8f701b6ca599ef4cc13fe23b3205a941b90c32290e35263cbe395be",
+      "pdf_bytes": 9866686,
+      "raster_bytes": 9784989,
+      "font_program_bytes": 15428,
+      "other_stream_bytes": 62557,
+      "serialized_residual_bytes": 3712,
+      "images": 11,
+      "pages": 5
+    },
+    {
+      "pdf": "history-indexed16.pdf",
+      "sha256": "5ed8d8b96c589f2ecc74ba698cc547f4c9a36f2a323fc2f1e0121aeaaec9ad9b",
+      "pdf_bytes": 5638094,
+      "raster_bytes": 5555819,
+      "font_program_bytes": 15428,
+      "other_stream_bytes": 62558,
+      "serialized_residual_bytes": 4289,
+      "images": 11,
+      "pages": 5
+    },
+    {
+      "pdf": "financial-jpeg256-final.pdf",
+      "sha256": "4e5f292763753bfb3e10b8f3bc314ec61263c2acd911f56dc13cbc6c70323420",
+      "pdf_bytes": 9329947,
+      "raster_bytes": 7759907,
+      "font_program_bytes": 1065434,
+      "other_stream_bytes": 184241,
+      "serialized_residual_bytes": 320365,
+      "images": 1640,
+      "pages": 13
+    },
+    {
+      "pdf": "financial-indexed16.pdf",
+      "sha256": "f8d3d526cff0d0c1e7760f215bd078678db5d9524b0ac88856315e74f59ea9ce",
+      "pdf_bytes": 8718722,
+      "raster_bytes": 7148491,
+      "font_program_bytes": 1065434,
+      "other_stream_bytes": 184239,
+      "serialized_residual_bytes": 320558,
+      "images": 1640,
+      "pages": 13
+    },
+    {
+      "pdf": "financial-all-indexed16-final.pdf",
+      "sha256": "bd574b379ba613707c2ceb8c7f13017effd56ee9e2e129334c9818666b90cc0b",
+      "pdf_bytes": 7142992,
+      "raster_bytes": 5846502,
+      "font_program_bytes": 1065434,
+      "other_stream_bytes": 172782,
+      "serialized_residual_bytes": 58274,
+      "images": 280,
+      "pages": 13
+    },
+    {
+      "pdf": "financial-full13-indexed16.pdf",
+      "sha256": "84f64b67d5cacbdc6e6a5a91bf0f89606daa06831bb71110b4de774b7af05310",
+      "pdf_bytes": 6912445,
+      "raster_bytes": 5661984,
+      "font_program_bytes": 1065434,
+      "other_stream_bytes": 170641,
+      "serialized_residual_bytes": 14386,
+      "images": 39,
+      "pages": 13
+    }
+  ],
+  "full36_scanweave": {
+    "status": "stopped; no output used",
+    "wall_seconds": 905.46,
+    "peak_rss_kib": 689136,
+    "reason": "bounded runtime after OCR; four-page prototypes separately named and converted as complete documents"
+  },
+  "commands": {
+    "anatomy": "anatomy.py controlled-adobe.pdf local/adobe-layers --pages 0,...,35",
+    "prototype": "prototypes.py SOURCE OUT --pages INDICES --coverage-levels 256|16 --foreground jpeg|indexed16",
+    "financial_all": "prototypes.py qualification/acr01/local/product/financial.pdf local/financial-full13-indexed16.pdf --pages 0,1,2,3,4,5,6,7,8,9,10,11,12 --coverage-levels 16 --foreground indexed16"
+  }
+}
