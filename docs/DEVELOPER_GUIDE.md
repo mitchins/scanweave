@@ -11,7 +11,7 @@ ScanWeave converts a page raster plus an OCR page (word/char boxes with a
 declared pixel binding) into a single searchable PDF whose text layer is bound
 to the *visual* evidence rather than to OCR labels alone. The pipeline is built
 around one question: **which ink can be safely turned into vector glyphs, and
-which must be preserved as exact source pixels?**
+which must remain visible as raster content?**
 
 - **Ownership solver** — many-to-many mapping between connected ink components
   and OCR symbol boxes. Touching characters merge into one unit that carries
@@ -19,8 +19,10 @@ which must be preserved as exact source pixels?**
   that extends beyond its symbol boxes is *suspect* and never vectorized.
 - **Transactional fallback** — a region that is suspect, that touches non-text
   (rules, stamps, barcodes), that is caller-protected, or whose traced outline
-  fails the fidelity policy degrades to an exact source raster patch plus an
-  invisible label overlay. No pixel is discarded and no label is lost.
+  fails the fidelity policy retains a source raster patch plus an invisible
+  label overlay. Samples are exact before encoding; eligible ClearScan images
+  may subsequently use the lossy encoding described below. Faithful remains
+  independent. Raster fallback does not discard the OCR label.
 - **One shared font** — one CID per (glyph shape, semantic string) pair across
   the whole document, so repeated content costs nothing extra. Wrong OCR labels
   never corrupt the visual: the shape and the string travel independently.
