@@ -1,0 +1,185 @@
+{
+  "source_archive": {
+    "path": "local/reproduction-source.tar.gz",
+    "sha256": "51422f2e1be7a1668d2c2042d5426acca06dc6cb36d1f291b86a11ba497bdff3",
+    "bytes": 16654,
+    "files": [
+      "local/overlap.py",
+      "local/controls.py",
+      "local/verify_product.py",
+      "local/instrument_baseline.py",
+      "local/enrich-ledger.py",
+      "local/search_controls.py",
+      "local/probes.py",
+      "local/layers.py",
+      "local/boundaries.py",
+      "local/unified.py",
+      "local/cleaned-binding.py",
+      "local/mixed-protected.py",
+      "local/synthetic_evaluator.py",
+      "local/run_product.py",
+      "local/ledger.py",
+      "local/baseline-review/render-crops.py",
+      "local/baseline-review/render-baseline.py",
+      "local/final-review/render-details.py",
+      "local/final-review/render-pages.py"
+    ]
+  },
+  "frozen_sources": [
+    {
+      "path": "qualification/pdf_packaging/groups/financial-adobe.pdf",
+      "sha256": "0168c79a74237c1d2fe2a1bb1fd47ff3bb6fb73108be4087b5f689d7854fd452"
+    },
+    {
+      "path": "qualification/pdf_packaging/groups/financial-archive.pdf",
+      "sha256": "3196182c43732a0cefb0b1d09bad0b8517106a2305799dc6dcd14fb87181f904"
+    },
+    {
+      "path": "qualification/pdf_packaging/groups/financial-input.pdf",
+      "sha256": "206f0f669d0196bb5e3b8da64acbffe1e53b2611377450a71b1440622291ac6f"
+    },
+    {
+      "path": "qualification/pdf_packaging/groups/financial-ocrmypdf1.pdf",
+      "sha256": "f3fac1e9ad78685b7e177bc692bb77900dbea55554583310fb7717890fea0d68"
+    },
+    {
+      "path": "qualification/pdf_packaging/groups/financial-ocrmypdf3.pdf",
+      "sha256": "b0b539660282cf36b611a9d4efd8dac7b153b6ae077cc2e671d657e279e6e646"
+    },
+    {
+      "path": "qualification/pdf_packaging/groups/financial-scanweave.pdf",
+      "sha256": "35878d5431c8967d2882c3b059bc748ede34f947db5854a17d535b0f062ea1de"
+    },
+    {
+      "path": "qualification/pdf_packaging/groups/forms-adobe.pdf",
+      "sha256": "b5b6ced31fef6c5d41aa4b58d38163223f059fe9834d75e47eddbab6e285a38e"
+    },
+    {
+      "path": "qualification/pdf_packaging/groups/forms-archive.pdf",
+      "sha256": "b854f9f1c1ac4b8a75eb54c0f5a916f4dd35755f54c89507a8969d6bca0c1b7e"
+    },
+    {
+      "path": "qualification/pdf_packaging/groups/forms-input.pdf",
+      "sha256": "9d042396ccc23cdaf74f0e2c3abb86231afaa160aa29902f0ddf708cdabdbc28"
+    },
+    {
+      "path": "qualification/pdf_packaging/groups/forms-ocrmypdf1.pdf",
+      "sha256": "fe7db134fa42449cd28546830e0ffb0a64bba0d7cc3247f1a2a39a0d8ffe9192"
+    },
+    {
+      "path": "qualification/pdf_packaging/groups/forms-ocrmypdf3.pdf",
+      "sha256": "2022672ea148522af582e285fea12701fd272bd75383641c1e3be6f146880038"
+    },
+    {
+      "path": "qualification/pdf_packaging/groups/forms-scanweave.pdf",
+      "sha256": "72b3c247e9e10b663f90b3c45c1a342848a68831be78fab736c8b5bb8c8ad0de"
+    },
+    {
+      "path": "qualification/pdf_packaging/groups/historical-adobe.pdf",
+      "sha256": "0b5768a06e9f6507cf7c1d47e17b9367fa661bbf282c0b5cc6f0f053b54e4eda"
+    },
+    {
+      "path": "qualification/pdf_packaging/groups/historical-archive.pdf",
+      "sha256": "f09ef5a93ba45f0bfc696720289f8f8ab7adeae81c9da5c5bc03c5abf0d4237d"
+    },
+    {
+      "path": "qualification/pdf_packaging/groups/historical-input.pdf",
+      "sha256": "53276a63753bba7801c73c8d91e2e52d310a70ca16efb93c1d69f52c462fce6f"
+    },
+    {
+      "path": "qualification/pdf_packaging/groups/historical-ocrmypdf1.pdf",
+      "sha256": "b218214a36f797abdb78ed2e41dc99fc022c6c25233773cfc190d69733de3e58"
+    },
+    {
+      "path": "qualification/pdf_packaging/groups/historical-ocrmypdf3.pdf",
+      "sha256": "dd297424ad3690870278e5ec4404fcc88e427d648010880c5db4725e000c6503"
+    },
+    {
+      "path": "qualification/pdf_packaging/groups/historical-scanweave.pdf",
+      "sha256": "0e65e409815f70dc80cc6626fe09e60df1563939caa85464cb1c27b177d1e6cb"
+    },
+    {
+      "path": "qualification/pdf_packaging/groups/mixed-adobe.pdf",
+      "sha256": "c1f37db2a8ca8562964129f2392e5371b2871516a4c8a932809c1003a58c8060"
+    },
+    {
+      "path": "qualification/pdf_packaging/groups/mixed-archive.pdf",
+      "sha256": "6cffe8d2fafa59f83c3ef495c1ef190432af297978df425c6147570c0b242c8c"
+    },
+    {
+      "path": "qualification/pdf_packaging/groups/mixed-input.pdf",
+      "sha256": "bea7a5ae2599dab57807bc256692ec36c656ff34d82af572c35fa3cd285f5e9f"
+    },
+    {
+      "path": "qualification/pdf_packaging/groups/mixed-ocrmypdf1.pdf",
+      "sha256": "e92675ce79bdbea8925d7d118a47d47c80dadde801c6d55f7d2ecc50f5a13803"
+    },
+    {
+      "path": "qualification/pdf_packaging/groups/mixed-ocrmypdf3.pdf",
+      "sha256": "bfdf2e48984390db916d0d1a431198e14d119fe63efb5ec166c29516f9149f8c"
+    },
+    {
+      "path": "qualification/pdf_packaging/groups/mixed-scanweave.pdf",
+      "sha256": "cb903e9dadad688005e7691512a321c9c7e4557af44c975ca85e166135e45c63"
+    },
+    {
+      "path": "qualification/pdf_packaging/groups/receipts-adobe.pdf",
+      "sha256": "74ee49edc9f1a4d22cd5316843715c623ac818f770174673c55de5d8c90f0c40"
+    },
+    {
+      "path": "qualification/pdf_packaging/groups/receipts-archive.pdf",
+      "sha256": "c288069a34e8ba5e894d754348f789e96d70bd8280ea9150d5b6eef6d39dcefd"
+    },
+    {
+      "path": "qualification/pdf_packaging/groups/receipts-input.pdf",
+      "sha256": "72cf20dce418051d7dd5dbb236f4e3e15bf4af5280309029913415bb704d6a5d"
+    },
+    {
+      "path": "qualification/pdf_packaging/groups/receipts-ocrmypdf1.pdf",
+      "sha256": "ec08fa866e43d992a84673286f424002f564eadac79a65a87690e1ccc508252e"
+    },
+    {
+      "path": "qualification/pdf_packaging/groups/receipts-ocrmypdf3.pdf",
+      "sha256": "860cddc5e5942e4a1c200d2863a57a420e419cf8aa87d4e11618ba08cd3ceca5"
+    },
+    {
+      "path": "qualification/pdf_packaging/groups/receipts-scanweave.pdf",
+      "sha256": "c048388557a04c726c3d867ecb69cd433b13d7df3975957bfd1e5f9738de7e7b"
+    },
+    {
+      "path": "qualification/tonal_raster/collections/receipts.pdf",
+      "sha256": "9475bb3aafb7a00c30762971ec32773099631b21ac0fe980fbd4e5331b09d5c7"
+    },
+    {
+      "path": "qualification/tonal_raster/collections/historical.pdf",
+      "sha256": "5919f6159ef6d26ec65abfc766ce98b03477f40ce6eb7db89aaa0a2ca2f5ea11"
+    },
+    {
+      "path": "qualification/tonal_raster/collections/mixed.pdf",
+      "sha256": "69c77bce51914fb874f43ac8ccca93dda96abbfa9aeba05f4a81f7ef686d4964"
+    },
+    {
+      "path": "qualification/tonal_raster/collections/financial.pdf",
+      "sha256": "53d5588e2c738a50784f5f7a5a031584c45851ca95c31df890673b064804b961"
+    },
+    {
+      "path": "qualification/tonal_raster/collections/forms.pdf",
+      "sha256": "4529b78e522712a80e14d75d64476b24c9834d045699efdcc507e7136c489bbd"
+    }
+  ],
+  "baseline_instrumented_pdf_identical": true,
+  "baseline_instrumented_sha256": "8a8d5d32b710177c37b2fff4b2ad472ffc462f355626b5ac98f10d11bcae4182",
+  "helper_revisions": {
+    "fixed_physical_rendering": "ffa604ebd4ab47a6af67d2696a5c8fc15fbf3f2e",
+    "read_only_ablation": "38cc218f8f1e50e56679fd12d5d72c1d4a44a697"
+  },
+  "qualified_binary_sha256": "20a7952335e7cb41106b642733f8849a36eb842a7e22d7e2d9d42c7d4337e621",
+  "final_corpus_matches_reviewed_initial_pdfs": {
+    "historical": true,
+    "receipts": true,
+    "financial": true,
+    "mixed": true,
+    "forms": true
+  },
+  "mixed_protected_regression_sha256": "2b7703772b397f706b867a7a7605f562fb7e5748f1ddd1a87921c9e377b7e195"
+}

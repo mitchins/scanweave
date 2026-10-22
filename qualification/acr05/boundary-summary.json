@@ -1,0 +1,25 @@
+{
+  "contract": "300DPI fixed physical coordinates; source-selected paper mask alpha<.03; 3pixel strips; >=12 valid positions; excess step relative to source; diagnostic only",
+  "summary": {
+    "pdfium": {
+      "acr04": {
+        "mean": 0.36833385650269224,
+        "p95": 1.3079133510168002
+      },
+      "acr05": {
+        "mean": 0.7135321799132786,
+        "p95": 2.4865079365079357
+      }
+    },
+    "poppler": {
+      "acr04": {
+        "mean": 1.623849026918552,
+        "p95": 7.478835978835979
+      },
+      "acr05": {
+        "mean": 1.2949428816296127,
+        "p95": 4.5838779956427
+      }
+    }
+  }
+}

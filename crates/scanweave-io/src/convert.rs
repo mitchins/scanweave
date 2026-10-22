@@ -736,13 +736,16 @@ pub fn convert_parts(
     input: &Input,
     policy: &Policy,
 ) -> Result<(crate::page_pdf::PageParts, Report), String> {
-    convert_parts_with_document_donors(input, policy, &[])
+    convert_parts_with_document_donors(
+        input, policy, &[], policy.profile == "clearscan" && input.protected_regions.is_empty(),
+    )
 }
 
 pub(crate) fn convert_parts_with_document_donors(
     input: &Input,
     policy: &Policy,
     document_donors: &[crate::units::Unit],
+    tonal_document: bool,
 ) -> Result<(crate::page_pdf::PageParts, Report), String> {
     // The OCR page affine is authoritative for the source raster resolution.
     // In particular, bundled 600 DPI pages must not inherit the CLI's 300 DPI
@@ -1453,21 +1456,29 @@ pub(crate) fn convert_parts_with_document_donors(
             .iter()
             .map(|p| (p.bbox_px[2] - p.bbox_px[0]) * (p.bbox_px[3] - p.bbox_px[1]))
             .sum();
-        // Fragmented native patches can cost more than a single cleaned
-        // residual page. Compare actual lossless streams, not area alone.
-        // Source ink has already been suppressed in patch_source.
-        let fragmented = layers.len() > 32 && native_area > (w as f64 * h as f64) * 0.2;
-        let prefer_whole = if fragmented {
+        // Opaque native crops can expose a different paper/resampling tone
+        // than the reduced base. Prefer one coherent cleaned residual when
+        // its existing ClearScan codec costs less than the fragmented layout.
+        // Compare encoded costs, not lossless estimates or protected area.
+        // Never restore input.rgb: vector-owned ink is already suppressed.
+        let fragmented = layers.len() > 32;
+        let prefer_whole = if fragmented && native_area <= (w as f64 * h as f64) * 0.6 {
             let whole = patch_from_rgb(
                 patch_source,
                 w as usize,
                 h as usize,
                 [0.0, 0.0, w as f64, h as f64],
             );
-            let whole_bytes = crate::page_pdf::lossless_patch_cost(std::slice::from_ref(&whole))?;
-            let layered_bytes = crate::page_pdf::lossless_patch_cost(&layers)?
-                + crate::page_pdf::lossless_patch_cost(std::slice::from_ref(&background))?;
-            whole_bytes * 10 < layered_bytes * 9
+            let transform = crate::page_pdf::PageTransform {
+                a: input.raster_to_page_pt[0], d: input.raster_to_page_pt[3],
+                e: input.raster_to_page_pt[4], f: input.raster_to_page_pt[5],
+            };
+            crate::page_pdf::coherent_residual_is_smaller(
+                &whole, &layers, &background,
+                [transform.page_w(w as f64), transform.page_h(h as f64)],
+                policy.image_encoding,
+                tonal_document && input.protected_regions.is_empty(),
+            )?
         } else {
             false
         };

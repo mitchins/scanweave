@@ -1,0 +1,44 @@
+{
+  "note": "Same genuine page duplicated for regression, not independent glyph witnesses or a new benchmark",
+  "runs": [
+    {
+      "name": "acr04",
+      "binary_sha256": "dde0d1da4fc94e69ad291edcc7cc96d9ad52b57b7acbe2e1f9d753b996401556",
+      "command": [
+        "qualification/acr04/local/scanweave-candidate",
+        "build",
+        "--bundle",
+        "qualification/acr05/local/mixed-protected/document.json",
+        "--profile",
+        "clearscan",
+        "--output",
+        "qualification/acr05/local/mixed-protected/acr04.pdf",
+        "--report",
+        "qualification/acr05/local/mixed-protected/acr04.json"
+      ],
+      "seconds": 44.701517637993675,
+      "bytes": 756289,
+      "sha256": "dc1ccb2d80ecd636b845af3194a0f30b5922e453d917d4196c19b833868fb84c"
+    },
+    {
+      "name": "acr05",
+      "binary_sha256": "20a7952335e7cb41106b642733f8849a36eb842a7e22d7e2d9d42c7d4337e621",
+      "command": [
+        "qualification/acr05/local/scanweave-candidate",
+        "build",
+        "--bundle",
+        "qualification/acr05/local/mixed-protected/document.json",
+        "--profile",
+        "clearscan",
+        "--output",
+        "qualification/acr05/local/mixed-protected/acr05.pdf",
+        "--report",
+        "qualification/acr05/local/mixed-protected/acr05.json"
+      ],
+      "seconds": 44.81047240796033,
+      "bytes": 756289,
+      "sha256": "dc1ccb2d80ecd636b845af3194a0f30b5922e453d917d4196c19b833868fb84c"
+    }
+  ],
+  "byte_identical": true
+}

@@ -52,6 +52,11 @@ a pixel-preservation guarantee. Encoding uses already-cleaned residual pixels,
 so this change does not restore source ink beneath vector glyphs. Faithful does
 not use these lossy representations. See [ACR-04 measurements](../ACR_04_REPORT.md)
 for exact eligibility, quality evidence and limitations.
+Fragmented ClearScan layouts may use one coherent cleaned residual when its
+existing JPEG stream is cheaper than the reduced base and opaque exception
+crops. This avoids independently sampled paper boundaries; unsupported raster
+text may be softer. Caller protection and faithful remain separate. See
+[ACR-05](../ACR_05_REPORT.md) for visual evidence and the stream-cost limitation.
 Sparse OCR can retry Tesseract's block layout when confidence and character-box
 evidence support it. No new OCR model is required.
 
@@ -66,8 +71,8 @@ M1-C is not the current feature set. The independent holdout remains sealed.
 ### Measured real-document state
 
 On the fixed 32-page development corpus, current ClearScan outputs total
-12,454,682 bytes versus matched ACR-01's 18,556,766 bytes (32.88% smaller).
-See the [ACR-04 report](../ACR_04_REPORT.md) for source-detail checks and limits.
+8,743,391 bytes versus matched ACR-04's 12,454,682 bytes (29.80% smaller).
+See the [ACR-05 report](../ACR_05_REPORT.md) for source-detail checks and limits.
 Whole-page residuals and eligible native exceptions can use lossy JPEG;
 faithful remains independent and unchanged.
 Adobe XI totals 4,178,103 bytes on the same inputs: substantial tonal-raster
