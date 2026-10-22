@@ -106,7 +106,9 @@ jobs:
       - name: Shared qualification auditor controls
         run: qualification/.venv/bin/python qualification/test_high_wave3.py
       - name: FONT-01 deterministic benchmark contracts
-        run: qualification/.venv/bin/python qualification/test_font01_benchmark.py
+        run: |
+          qualification/.venv/bin/python qualification/test_font01_benchmark.py
+          qualification/.venv/bin/python qualification/test_font01_statistics.py
       - name: Corpus source and diagnostic tag boundaries
         run: qualification/.venv/bin/python qualification/test_corpus_boundaries.py
       - name: hOCR XML entity boundary

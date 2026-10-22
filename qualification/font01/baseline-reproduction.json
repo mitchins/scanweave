@@ -1,0 +1,87 @@
+{
+  "fixture_manifest_sha256": "83089bafa130bc9785e9df879416c31ecc33531d2834abab170ffe1dc1a30a6b",
+  "records": [
+    {
+      "split": "train",
+      "pairs": 9344,
+      "feature_values_identical": true,
+      "labels_identical": true,
+      "array_sha256": "a92c7b3c65dd79b503cfbe312acf4bc59794d3f010e356b59bb59891caccbaec",
+      "pair_metadata_sha256": "90086d5346368f9ee3caae300d73754079e66399bff93e7ac6f730ee8e1dbfcc"
+    },
+    {
+      "split": "validation",
+      "pairs": 5701,
+      "feature_values_identical": true,
+      "labels_identical": true,
+      "array_sha256": "ab6bfdd2788969e00d3a10d93d7998bb9bdb6a0574c6285cb20e6d270aa78a96",
+      "pair_metadata_sha256": "6fd6386b4335df1b151b23a58dae6e208675ef2a42743b60ef7a328f5213d443"
+    },
+    {
+      "split": "test",
+      "pairs": 5744,
+      "feature_values_identical": true,
+      "labels_identical": true,
+      "array_sha256": "3f9224b9d97301b1eee11be57429aa2d683cd101cadc57ea6f468d14195c207f",
+      "pair_metadata_sha256": "4fdc4f41adf2e0d8853c527c71fda7e9e720c06a88c1f234be19b9e70470839d"
+    }
+  ],
+  "arms": [
+    {
+      "arm": "deterministic",
+      "threshold": -0.3428281526306414,
+      "healthy": {
+        "pairs": 2144,
+        "positives": 944,
+        "roc_auc": 0.7099435028248589,
+        "pr_auc": 0.7185349685770781,
+        "precision": 0.8756756756756757,
+        "recall": 0.3432203389830508,
+        "false_merge_rate": 0.03833333333333333,
+        "false_merges": 46,
+        "ece": null
+      },
+      "all": {
+        "pairs": 5744,
+        "positives": 2744,
+        "roc_auc": 0.656112609329446,
+        "pr_auc": 0.6811963381657127,
+        "precision": 0.8790322580645161,
+        "recall": 0.19861516034985421,
+        "false_merge_rate": 0.025,
+        "false_merges": 75,
+        "ece": null
+      },
+      "qualified_for_product": false
+    },
+    {
+      "arm": "linear",
+      "threshold": 0.7564016431509275,
+      "healthy": {
+        "pairs": 2144,
+        "positives": 944,
+        "roc_auc": 0.7619006002824859,
+        "pr_auc": 0.7473362034105804,
+        "precision": 0.8963730569948186,
+        "recall": 0.3665254237288136,
+        "false_merge_rate": 0.03333333333333333,
+        "false_merges": 40,
+        "ece": 0.09161963628894458
+      },
+      "all": {
+        "pairs": 5744,
+        "positives": 2744,
+        "roc_auc": 0.7070807823129251,
+        "pr_auc": 0.7115923817654012,
+        "precision": 0.8773087071240105,
+        "recall": 0.2423469387755102,
+        "false_merge_rate": 0.031,
+        "false_merges": 93,
+        "ece": 0.055814496548468796
+      },
+      "qualified_for_product": false
+    }
+  ],
+  "no_product_activation": true,
+  "linear_model_sha256": "b3568c8bc48ff21901cf245e0a7fe794efb3600da98fc917cd26b9bb8413e8f8"
+}

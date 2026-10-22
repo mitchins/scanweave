@@ -39,3 +39,28 @@ contract, not secrecy or protection against an adversary choosing to read labels
 
 Review [the prior art](../../FONT_01_PRIOR_ART.md) and
 [frozen evaluation contract](../../FONT_01_BENCHMARK.md) before fitting models.
+
+## Statistical baseline (research API only)
+
+SciPy is pinned in CI requirements. After strict fixture reproduction:
+
+```sh
+python -m qualification.font01.run_baseline qualification/font01/local/corpus-v1 \
+  qualification/font01/local/baseline-v1
+PYTHONPATH=qualification python qualification/test_font01_statistics.py
+```
+
+The runner checks the frozen three-split manifest before output, before test and
+at completion. It fits only on training, selects thresholds only on validation,
+and writes model/validation/fixture hashes before opening test pairs. Source-only
+loading rejects evaluator labels, validates image hashes and contains discovered
+symlinks inside the selected corpus root. Labels enter only the explicit evaluator
+join. Outputs include features, pair identities, registration transforms, timing,
+thresholds and metrics. Non-probability scores have no claimed calibration error.
+
+Complete-link groups prevent similarity chaining; character cannot-links apply to
+canonical glyph groups, not font cohorts. Separate purity/completeness and ARI are
+provided. No model or cohort classifier is enabled in Rust or ordinary conversion.
+`product_control.make_bundle` supplies only public character labels and page boxes
+to the existing converter; it is a controlled OCR-input experiment, not evidence
+of real OCR accuracy. The caller must use the verified frozen fixture.
