@@ -43,10 +43,10 @@ Actual completed financial PDF:
 `qualification/acr05/local/product/financial.pdf`, SHA-256
 `32b7c13e664b32fadeea41b99d9299479f129bfac3bd20debbbf481a6f885e51`.
 The ordinary corpus run used binary SHA-256
-`2c29c89f6f9eeb9bd2445afdeb10d5aa0d20545b3deee3592a93dfdf44aafe7f`.
-A later test-fixture-only correction/rebuild changes the executable hash, with no
-non-test algorithm change; the rebuilt executable is retained separately and
-its synthetic300 output is checked against the corpus-build executable.
+`20a7952335e7cb41106b642733f8849a36eb842a7e22d7e2d9d42c7d4337e621`.
+After the protection/performance review corrections, the full32-page CLI run was
+repeated with this final build. All five PDFs match the independently reviewed
+initial candidate hashes exactly, so that visual evidence remains artifact-bound.
 See [manifest](qualification/acr05/manifest.json), [results](qualification/acr05/results.json)
 and the local hash-bound reproduction archive for commands, binaries and scripts.
 Tools match ACR-04's pinned Cargo dependencies and qualification environment
@@ -88,7 +88,11 @@ Broader decoded-paper selection finds local blue-channel differences up to8.67.
 These populations differ and are not one additive error budget. The principal
 supported boundary mechanism here is **resampling/encoding of opaque source paper**,
 not wholesale duplicated dark glyphs or a newly discovered global cleanup defect.
-Faint glyph-shaped remnants are a separate, inherited issue.
+Faint glyph-shaped remnants are a separate, inherited issue. Native overlap is limited:
+pages1/2/11/13 have1/0/2/2 intersecting crop pairs, respectively. Opaque overlap
+occludes rather than adds ink; it is not evidence of a second dark glyph layer.
+The ledger marks earlier overlap and later occlusion, and base-colour deltas are
+explicitly comparisons with the reduced base, not all prior overlapping crops.
 
 [Patch provenance](qualification/acr05/patch-provenance.json) includes selected worst
 objects, coordinates, actual bytes, fallback reasons, paint order, colour deltas
@@ -139,9 +143,19 @@ any ownership, glyph acceptance or protected-pixel threshold. On qualifying page
 it emits a full-page patch copied from **cleaned `patch_source`, never `input.rgb`**.
 The existing writer supplies approximately200DPI Q85/4:2:0 and keeps physical extent.
 
-Explicit caller-protected inputs skip this new comparison. Non-tonal/ineligible,
-non-beneficial or failed optional encodings retain the earlier layout. Existing
-whole-page area fallback is unchanged. No new public option or dependency.
+A shared document-wide encoding gate now controls both layout costing and final
+assembly: if any page has caller protection, every page retains ACR-04's old
+20%-area/lossless-90% layout decision. This corrects an integration edge case
+found during final review, where an unprotected page could otherwise budget JPEG
+inside a document using the existing protected-output assembler. Focused mixed-document policy and cost
+tests cover it. A direct two-page mixed-protection regression (the same genuine
+development page duplicated, not independent reconstruction evidence) is also
+byte-identical to ACR-04:756,289bytes, SHA
+`dc1ccb2d80ecd636b845af3194a0f30b5922e453d917d4196c19b833868fb84c`.
+Non-tonal/ineligible, non-beneficial or failed optional encodings
+retain the earlier layout. Existing whole-page area fallback is unchanged; its
+>60% case now avoids unnecessary cost encoding, addressing CodeRabbit's valid
+performance note. No new public option or dependency.
 
 The chooser estimates image-stream cost, **not** complete alternative-layout PDF
 cost or cross-page reuse. Final assembly compares lossless/tonal PDFs of the
@@ -220,13 +234,13 @@ reads15 while visible75 was previously confirmed. No OCR repair is claimed.
 Other rerendered optical token differences remain in `rerender-ocr.json`, separate
 from unchanged native semantics.
 
-Financial conversion:467.40s, peak RSS1,467,936KiB, versus archived ACR04 477.11s /
+Financial conversion:452.17s, peak RSS1,468,236KiB, versus archived ACR04 477.11s /
 1,371,484KiB. Concurrent qualification differs; no causal speedup is asserted.
 New layout costing does additional encoding work and can increase memory.
 
 ## Verification and remaining limitation
 
-* Unfiltered locked Rust workspace:138tests pass, including donor repair; denied
+* Unfiltered locked Rust workspace:139tests pass, including donor repair; denied
   warning Clippy and15existing Python CI scripts pass.
 * E0–E7 pass. Historical P01–P08 failures remain separately disclosed and unchanged;
   green CI does not establish that those visual failures disappeared.

@@ -736,13 +736,16 @@ pub fn convert_parts(
     input: &Input,
     policy: &Policy,
 ) -> Result<(crate::page_pdf::PageParts, Report), String> {
-    convert_parts_with_document_donors(input, policy, &[])
+    convert_parts_with_document_donors(
+        input, policy, &[], policy.profile == "clearscan" && input.protected_regions.is_empty(),
+    )
 }
 
 pub(crate) fn convert_parts_with_document_donors(
     input: &Input,
     policy: &Policy,
     document_donors: &[crate::units::Unit],
+    tonal_document: bool,
 ) -> Result<(crate::page_pdf::PageParts, Report), String> {
     // The OCR page affine is authoritative for the source raster resolution.
     // In particular, bundled 600 DPI pages must not inherit the CLI's 300 DPI
@@ -1459,7 +1462,7 @@ pub(crate) fn convert_parts_with_document_donors(
         // Compare encoded costs, not lossless estimates or protected area.
         // Never restore input.rgb: vector-owned ink is already suppressed.
         let fragmented = layers.len() > 32;
-        let prefer_whole = if fragmented && input.protected_regions.is_empty() {
+        let prefer_whole = if fragmented && native_area <= (w as f64 * h as f64) * 0.6 {
             let whole = patch_from_rgb(
                 patch_source,
                 w as usize,
@@ -1474,6 +1477,7 @@ pub(crate) fn convert_parts_with_document_donors(
                 &whole, &layers, &background,
                 [transform.page_w(w as f64), transform.page_h(h as f64)],
                 policy.image_encoding,
+                tonal_document && input.protected_regions.is_empty(),
             )?
         } else {
             false

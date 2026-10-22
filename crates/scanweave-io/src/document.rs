@@ -215,6 +215,12 @@ fn apply_remap(page: &mut DocumentPage, remap: &Remap) {
     }
 }
 
+// The layout chooser and writer must share the document-wide encoding gate.
+fn allows_tonal_images(inputs: &[Input], policy: &Policy) -> bool {
+    policy.profile == "clearscan"
+        && inputs.iter().all(|input| input.protected_regions.is_empty())
+}
+
 /// Convert a bundle of pages into ONE document PDF.
 pub fn convert_document(
     document_id: &str,
@@ -242,6 +248,7 @@ pub fn convert_document_with_sources(
     if inputs.is_empty() {
         return Err("document has no pages".into());
     }
+    let tonal_document = allows_tonal_images(inputs, policy);
     // 1. Collect only safe, unprotected single-glyph evidence across the
     //    document, then convert pages with sibling-page observations available
     //    to their local reconstruction dictionary.
@@ -332,7 +339,7 @@ pub fn convert_document_with_sources(
             }
         }
         let (mut parts, report) =
-            crate::convert::convert_parts_with_document_donors(input, policy, &sibling_donors)?;
+            crate::convert::convert_parts_with_document_donors(input, policy, &sibling_donors, tonal_document)?;
         if policy.profile == "clearscan" && parts.occurrences.is_empty() {
             parts.encoded_source = sources
                 .get(page_index)
@@ -360,9 +367,7 @@ pub fn convert_document_with_sources(
     // Explicit caller-native preservation is independent of ClearScan's lossy
     // paper policy. Conservatively retain the existing document encoding when
     // any page has caller protection; no new per-page ownership flags are needed.
-    let assemble = if policy.profile == "clearscan"
-        && inputs.iter().all(|input| input.protected_regions.is_empty())
-    {
+    let assemble = if tonal_document {
         crate::page_pdf::assemble_document_with_tonal_fallback
     } else {crate::page_pdf::assemble_document_with_options};
     let (pdf_bytes, stats) = assemble(
@@ -693,5 +698,27 @@ mod semantic_owner_union_tests {
                 }
             }
         }
+    }
+}
+
+#[cfg(test)]
+mod tonal_protection_tests {
+    use super::*;
+
+    #[test]
+    fn one_protected_page_disables_tonal_layout_and_assembly_document_wide() {
+        let page = Input {
+            page_id: "unprotected".into(), width: 2, height: 2, rgb: vec![255; 12],
+            spans: vec![], protected_regions: vec![], pixel_sha256: None,
+            raster_to_page_pt: [0.24, 0.0, 0.0, -0.24, 0.0, 0.48],
+        };
+        let clear = Policy { profile: "clearscan".into(), ..Policy::default() };
+        assert!(allows_tonal_images(&[page.clone(), page.clone()], &clear));
+        let mut protected = page.clone();
+        protected.protected_regions.push(crate::convert::ProtectedInput {
+            id: "mark".into(), polygon: vec![[0.0, 0.0], [1.0, 0.0], [1.0, 1.0]], reason: "caller".into(),
+        });
+        assert!(!allows_tonal_images(&[page.clone(), protected], &clear));
+        assert!(!allows_tonal_images(&[page], &Policy::default()));
     }
 }

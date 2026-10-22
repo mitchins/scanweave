@@ -312,6 +312,22 @@ fn compress_samples(key: &ImageResourceKey) -> Result<(Vec<u8>, bool, u8), Strin
     Ok((lossless, false, selected_predictor))
 }
 
+/// Compare actual lossless stream costs for two existing residual layouts.
+/// No resampling, atlas coordinates or new source pixels are introduced.
+pub(crate) fn lossless_patch_cost(patches: &[Patch]) -> Result<usize, String> {
+    let options = ImageEncodingOptions {
+        predictor: 0,
+        ..Default::default()
+    };
+    let mut cost = 0usize;
+    for patch in patches {
+        let mut key = canonical_patch(patch, options)?;
+        key.compact_background = false;
+        cost += compress_samples(&key)?.0.len();
+    }
+    Ok(cost)
+}
+
 /// Estimate the existing ClearScan representations, using the same codecs and
 /// eligibility gates as assembly. This is a layout decision, not new ink cleanup.
 /// Object overhead and cross-page reuse are measured separately on the final PDF.
@@ -321,7 +337,21 @@ pub(crate) fn coherent_residual_is_smaller(
     background: &Patch,
     page_size: [f32; 2],
     options: ImageEncodingOptions,
+    tonal_document: bool,
 ) -> Result<bool, String> {
+    if !tonal_document {
+        // Any protected page disables lossy assembly for the entire document.
+        // Preserve ACR-04's original lossless layout decision on every page.
+        let area: f64 = native.iter().map(|p|
+            (p.bbox_px[2] - p.bbox_px[0]) * (p.bbox_px[3] - p.bbox_px[1])
+        ).sum();
+        if area <= f64::from(whole.w) * f64::from(whole.h) * 0.2 {
+            return Ok(false);
+        }
+        let whole_cost = lossless_patch_cost(std::slice::from_ref(whole))?;
+        let layered = lossless_patch_cost(native)? + lossless_patch_cost(std::slice::from_ref(background))?;
+        return Ok(whole_cost * 10 < layered * 9);
+    }
     let key = canonical_patch(whole, options)?;
     let candidate = crate::tonal_image::encode_residual(
         &key.samples, key.width, key.height, key.color_space,
@@ -1919,8 +1949,9 @@ mod coherent_residual_tests {
         }
         let paper = Patch { bbox_px: whole.bbox_px, rgb: vec![255; 128 * 128 * 3], w: 128, h: 128, compact_background: true };
         let before = whole.rgb.clone();
-        let decide = || coherent_residual_is_smaller(&whole, &native, &paper, [122.88, 122.88], ImageEncodingOptions::default()).unwrap();
+        let decide = || coherent_residual_is_smaller(&whole, &native, &paper, [122.88, 122.88], ImageEncodingOptions::default(), true).unwrap();
         assert!(decide());
+        assert!(!coherent_residual_is_smaller(&whole, &native, &paper, [122.88, 122.88], ImageEncodingOptions::default(), false).unwrap(), "protected documents must not use JPEG layout costs");
         assert_eq!(decide(), decide());
         assert_eq!(whole.rgb, before, "layout costing must not clean or change source samples");
     }
@@ -1929,8 +1960,8 @@ mod coherent_residual_tests {
     fn cheap_or_ineligible_layout_keeps_existing_patches() {
         let whole = tonal_page();
         let paper = Patch { bbox_px: whole.bbox_px, rgb: vec![255; 16 * 16 * 3], w: 16, h: 16, compact_background: true };
-        assert!(!coherent_residual_is_smaller(&whole, &[], &paper, [122.88, 122.88], ImageEncodingOptions::default()).unwrap());
+        assert!(!coherent_residual_is_smaller(&whole, &[], &paper, [122.88, 122.88], ImageEncodingOptions::default(), true).unwrap());
         let binary = Patch { rgb: vec![255; 512 * 512 * 3], ..whole };
-        assert!(!coherent_residual_is_smaller(&binary, &[], &paper, [122.88, 122.88], ImageEncodingOptions::default()).unwrap());
+        assert!(!coherent_residual_is_smaller(&binary, &[], &paper, [122.88, 122.88], ImageEncodingOptions::default(), true).unwrap());
     }
 }

@@ -1,9 +1,10 @@
 {
   "source_archive": {
     "path": "local/reproduction-source.tar.gz",
-    "sha256": "3a406d792087b914daeb020dd1121281a199bd7de4453fc16bda872a86930368",
-    "bytes": 15342,
+    "sha256": "51422f2e1be7a1668d2c2042d5426acca06dc6cb36d1f291b86a11ba497bdff3",
+    "bytes": 16654,
     "files": [
+      "local/overlap.py",
       "local/controls.py",
       "local/verify_product.py",
       "local/instrument_baseline.py",
@@ -14,6 +15,7 @@
       "local/boundaries.py",
       "local/unified.py",
       "local/cleaned-binding.py",
+      "local/mixed-protected.py",
       "local/synthetic_evaluator.py",
       "local/run_product.py",
       "local/ledger.py",
@@ -171,9 +173,13 @@
     "fixed_physical_rendering": "ffa604ebd4ab47a6af67d2696a5c8fc15fbf3f2e",
     "read_only_ablation": "38cc218f8f1e50e56679fd12d5d72c1d4a44a697"
   },
-  "rebuilt_binary": {
-    "sha256": "557f947acab7aa31877301401624c8c51c0a3d85800d911452252eab4629be49",
-    "reason": "test-fixture-only edit after corpus build; production logic unchanged",
-    "synthetic300_output_sha256": "cd5cf6f4e26577bfdd52292a5eb90ead28258d40d9a3a220bbeac96562f3cc91"
-  }
+  "qualified_binary_sha256": "20a7952335e7cb41106b642733f8849a36eb842a7e22d7e2d9d42c7d4337e621",
+  "final_corpus_matches_reviewed_initial_pdfs": {
+    "historical": true,
+    "receipts": true,
+    "financial": true,
+    "mixed": true,
+    "forms": true
+  },
+  "mixed_protected_regression_sha256": "2b7703772b397f706b867a7a7605f562fb7e5748f1ddd1a87921c9e377b7e195"
 }

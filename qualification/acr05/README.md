@@ -24,8 +24,10 @@ The runner expects its immutable executable at `local/scanweave-candidate`,
 records exact binary/source/output hashes and RSS, and resumes only matching runs.
 Temporary ACR04 dump instrumentation was removed before implementation; the
 captured baseline PDF was byte-identical. It supplies evidence only, never a
-runtime dependency. Two final executable hashes differ after an inactive test
-fixture edit; the rebuilt executable reproduces the same synthetic300 PDF.
+runtime dependency. After review fixes, the final executable repeated the full
+corpus with exact PDF equivalence to the independently reviewed candidate.
+`mixed-protected-results.json` additionally binds the baseline/final two-page
+serialized regression; duplicate pages are not independent glyph witnesses.
 
 `results.json` has exact collection bytes and page references, `pages.csv` lists
 actual vector counts, and `decision-audit.json` records old coverage/cost gating.
