@@ -21,8 +21,9 @@ the manifest records the exact font hash. No downloaded binary release is assume
 ```sh
 qualification/.venv/bin/python qualification/acr02/fixtures.py
 adobe-acrobat-sandbox/clearscan.sh qualification/acr02/local/controlled-input.pdf qualification/acr02/local/controlled-adobe.pdf
-qualification/.venv/bin/python qualification/acr02/anatomy.py qualification/acr02/local/controlled-adobe.pdf qualification/acr02/local/adobe-layers --pages 0,1,2,3,4,5,6,12,18,24,28,35
+qualification/.venv/bin/python qualification/acr02/anatomy.py qualification/acr02/local/controlled-adobe.pdf qualification/acr02/local/adobe-layers --pages 0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35
 qualification/.venv/bin/python qualification/acr02/anatomy_summary.py
+qualification/.venv/bin/python qualification/acr02/paper_measure.py
 qualification/.venv/bin/python qualification/acr02/test_anatomy.py
 ```
 
@@ -49,6 +50,23 @@ qualification/.venv/bin/python qualification/acr02/prototypes.py qualification/a
 qualification/.venv/bin/python qualification/acr02/compare.py
 qualification/.venv/bin/python qualification/acr02/verify.py
 ```
+
+For the complete historical control ledger, also reproduce these retained settings:
+
+```sh
+qualification/.venv/bin/python qualification/acr02/prototypes.py qualification/acr01/local/product/historical.pdf qualification/acr02/local/history-jpeg256-final.pdf --pages 1,2,4 --coverage-levels 256
+qualification/.venv/bin/python qualification/acr02/prototypes.py qualification/acr01/local/product/financial.pdf qualification/acr02/local/financial-jpeg256-final.pdf --pages 10 --coverage-levels 256
+qualification/.venv/bin/python qualification/acr02/prototypes.py qualification/acr01/local/product/financial.pdf qualification/acr02/local/financial-indexed16.pdf --pages 10 --coverage-levels 16 --foreground indexed16
+qualification/.venv/bin/python qualification/acr02/prototypes.py qualification/acr01/local/product/financial.pdf qualification/acr02/local/financial-all-indexed16-final.pdf --pages 0,1,2,3,4,5,6,7,8,9,10,11 --coverage-levels 16 --foreground indexed16
+qualification/.venv/bin/python qualification/acr02/account.py
+```
+
+`account.py` regenerates the versioned CSV and run manifest. It requires the existing
+ACR-01 frozen-hash manifest and binary, and the local independent-review records
+from this run's operator-held evidence bundle. Reviews are human/agent inspection
+records, not script-generated approval. Missing prerequisites must not be replaced
+with invented review text. Numerical/visual outputs are reproducible independently;
+new executions require their own review. Full-resolution PDFs/renders remain local.
 
 `prototypes.py` is a temporary derivative experiment, **not normal CLI integration**.
 It isolates the already-cleaned emitted non-font page, estimates paper with a31px

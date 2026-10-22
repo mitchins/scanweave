@@ -86,7 +86,15 @@ def main():
     for row in baseline:
         if digest(Path(row['path'])) != row['sha256']:
             raise ValueError(f"Frozen hash mismatch: {row['path']}")
-    metadata = {'base': '8f14cd329493ad0cc226e480d152d7a464fb4731',
+    comparators = {}
+    for arm in ('adobe', 'ocrmypdf3'):
+        path = Path(f'qualification/pdf_packaging/groups/financial-{arm}.pdf')
+        inv = resource_account(path)
+        comparators[arm] = {'path': str(path), 'sha256': digest(path),
+                           'pdf_bytes': path.stat().st_size,
+                           'encoded_stream_bytes': inv['encoded_stream_bytes'],
+                           'serialized_residual_bytes': inv['serialized_residual_bytes']}
+    metadata = {'financial_comparators': comparators, 'base': '8f14cd329493ad0cc226e480d152d7a464fb4731',
                 'product_main': '0ca94aecd74c35ea1b28bcebe7e11e863aae7f08',
                 'research_helper_revision': 'ffa604ebd4ab47a6af67d2696a5c8fc15fbf3f2e',
                 'production_changed': False, 'frozen_hashes_verified': len(baseline),

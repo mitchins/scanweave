@@ -186,7 +186,12 @@ With identical ScanWeave fonts/semantics, recomposition can reduce financial byt
 by23.36%, demonstrating a real composition opportunity. The experiment does **not**
 isolate how much of Adobe's remaining gap comes from its higher font coverage,
 object classification, crop encoding or discarded detail; no additive waterfall
-is invented. Adobe's financial font/raster breakdown remains in the frozen forensic
+is invented. One hard floor is already measurable: financial ScanWeave font
+programs alone cost1,065,434 B, versus Adobe's297,667 B fonts and718,276 B **entire
+PDF**. The final shadow's raster5,661,984 B versus Adobe274,998 B remains the larger
+difference. OCRmyPDF-O3 stores5,117,580 B raster and5,489 B fonts. Thus even perfect
+raster removal cannot make this fixed ScanWeave font dictionary match Adobe's
+complete size; this mission does not authorize a font-architecture change. Adobe's financial font/raster breakdown remains in the frozen forensic
 inventory and must be compared with specific matched counterfactuals.
 
 The next bounded operation, if authorized, should identify **broad flat-colour and
@@ -196,3 +201,22 @@ Use the existing native JPEG fallback wherever that separation is uncertain. Do
 not begin another global mask/threshold sweep. Until this operation is sound,
 smaller low-frequency paper plus coverage layers will keep producing false edges
 or colour damage. That is the demonstrated blocker, not a missing lossless codec.
+
+
+## Publication / tool-quality checkpoint
+
+[PR16](https://github.com/mitchins/scanweave/pull/16) is a **draft research PR**
+stacked on unmerged PR15, not a production implementation PR. Initial unfiltered
+Rust/Clippy, Python qualification and publication checks passed. CodeRabbit's five
+valid measurement/reproduction findings were corrected and its threads resolved;
+manual review was requested because automatic review skips this base branch.
+
+The first server-side Sonar gate **failed**:0% measured new Python coverage and
+four security-taint findings in the new research utilities (operator paths and
+manifest-file paths). Those findings have not been bulk-dispositioned, excluded
+or counted as fixed; no thresholds or scope changed. Subsequent CI/gate results
+are linked on the PR. The tooling is **not merge-ready** while its quality gate is
+blocked. This does not invalidate the independently inspected negative prototype
+result or change the unchanged product. Do not turn this failed representation
+into a production path merely to close a PR, and do not launch a new broad Sonar
+remediation programme as part of ACR-02.

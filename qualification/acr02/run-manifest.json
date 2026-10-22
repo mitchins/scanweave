@@ -1,4 +1,28 @@
 {
+  "financial_comparators": {
+    "adobe": {
+      "path": "qualification/pdf_packaging/groups/financial-adobe.pdf",
+      "sha256": "0168c79a74237c1d2fe2a1bb1fd47ff3bb6fb73108be4087b5f689d7854fd452",
+      "pdf_bytes": 718276,
+      "encoded_stream_bytes": {
+        "image": 274998,
+        "font_program": 297667,
+        "other_stream": 118542
+      },
+      "serialized_residual_bytes": 27069
+    },
+    "ocrmypdf3": {
+      "path": "qualification/pdf_packaging/groups/financial-ocrmypdf3.pdf",
+      "sha256": "b0b539660282cf36b611a9d4efd8dac7b153b6ae077cc2e671d657e279e6e646",
+      "pdf_bytes": 5166004,
+      "encoded_stream_bytes": {
+        "image": 5117580,
+        "font_program": 5489,
+        "other_stream": 31978
+      },
+      "serialized_residual_bytes": 10957
+    }
+  },
   "base": "8f14cd329493ad0cc226e480d152d7a464fb4731",
   "product_main": "0ca94aecd74c35ea1b28bcebe7e11e863aae7f08",
   "research_helper_revision": "ffa604ebd4ab47a6af67d2696a5c8fc15fbf3f2e",
@@ -60,7 +84,7 @@
     },
     {
       "path": "qualification/acr02/account.py",
-      "sha256": "d2f9452080b5a2d14e8652f0a61d3dad3a36117f8ec927c48af064283a7a50d6"
+      "sha256": "8d6faa74872c9d229ae0ba05a48be96f825d2388c9ef2f57b553ef6d25f78670"
     },
     {
       "path": "qualification/acr02/local/fixtures.json",
@@ -80,7 +104,7 @@
     },
     {
       "path": "qualification/acr02/local/independent-code-review.md",
-      "sha256": "faac7d76b748981a59a4bb080c0b1613c0a032eed190fb2292ef190701809cbc"
+      "sha256": "57be88899281bc88caccce9c7eca5cdd698915d00133c6b5552bfd4b9c01280c"
     },
     {
       "path": "qualification/acr02/local/independent-visual-review.md",
