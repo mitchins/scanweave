@@ -214,3 +214,17 @@ digit. Receipt2 changed mistaken `36,000` to visible `-16,000`; receipt5's spars
 `70`/`0`/`017` tokens were not reliable truth. Native PDF text was not changed.
 The selected candidate is accepted with this limitation, not an OCR-invariance
 claim. Exact strings and independent supplemental sheets remain reproducible.
+
+### Candidate ranking and publication
+
+The size-focused whole-page probe was reduced Q85/4:2:0; the native4:4:4 Q85
+control retained the most source sampling. Independent selected-view review did
+not establish a reliable visual ranking among the four acceptable arms. The best
+balanced **integrated** candidate combines reduced Q85 whole-page imagery with
+native-resolution Q90 exceptions, rather than claiming native sampling always
+looks better. Encoder settings are policies qualified on this corpus, not inferred
+Adobe internals. Exact software versions are in `qualification/acr04/tool-versions.json`.
+
+Implementation PR: https://github.com/mitchins/scanweave/pull/17, stacked on #15.
+The initial publication is commit `50eb752`; later documentation/review corrections
+are separate commits. No merge is authorized or performed.
