@@ -246,3 +246,7 @@ inconsistent reconstructed-versus-raster stroke shape/sharpness remain after
 paper rectangles are removed. This mission does not justify wider ink erasure or
 another font redesign. Any later repair must qualify those specific footprints
 and glyph appearances together; paper alpha alone was demonstrably insufficient.
+
+Implementation and review: https://github.com/mitchins/scanweave/pull/18
+(stacked on ACR-04 PR#17). CI and completed server-side Sonar status are recorded
+in the PR discussion; no merge is performed by this mission.
