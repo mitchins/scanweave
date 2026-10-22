@@ -83,7 +83,9 @@ The CPU CNN has63,696 encoder parameters, four small convolutional blocks and a
 with cross-character supervised contrastive loss. One hybrid adds CNN distance to
 registered features; one context challenger adds geometry-derived line evidence
 excluding the query character. No oracle line IDs are features. Mixed-face lines
-remain in the benchmark. There was no architecture search.
+remain in the benchmark. There was no architecture search. The CNN used mixed-face minibatches and competing
+related style classes, but no separate nearest-negative mining pass. This bounds
+the negative result; it is not evidence that every learned metric will fail.
 
 All thresholds and checkpoint selection used validation only. Model/validation
 hashes were frozen before test. The strict packaged baseline reproduced every

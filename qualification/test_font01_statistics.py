@@ -209,6 +209,19 @@ class PairDataTests(unittest.TestCase):
                 pair_data.evaluator_labels(root)
 
 
+class LedgerTests(unittest.TestCase):
+    def test_proposals_are_never_product_authorization(self):
+        pairs = [{'a': 'source-a', 'b': 'source-b', 'character': 'e'}]*2
+        rows = evaluation.decision_ledger(pairs, [.4, .8], .7)
+        self.assertEqual([row['decision'] for row in rows], ['abstain', 'candidate_only'])
+        self.assertEqual(rows[0]['reason'], 'insufficient_same_face_evidence')
+        self.assertEqual(rows[1]['reason'], 'unqualified_research_arm')
+        self.assertTrue(all(not row['authorized_for_product'] for row in rows))
+        for scores, threshold in [([.5], .7), ([float('nan'), .8], .7), ([.4, .8], float('nan'))]:
+            with self.assertRaises(ValueError):
+                evaluation.decision_ledger(pairs, scores, threshold)
+
+
 class RunnerTests(unittest.TestCase):
     def test_input_binding_and_pretest_freeze_order(self):
         with tempfile.TemporaryDirectory() as directory:
@@ -216,7 +229,7 @@ class RunnerTests(unittest.TestCase):
             output = root/'run'
             x = np.zeros((4, 11))
             y = np.asarray([True, False, True, False])
-            pairs = [{'severity': 0} for _ in y]
+            pairs = [{'severity': 0, 'a': 'left', 'b': 'right', 'character': 'e'} for _ in y]
             model = linear_metric.LinearMetric(np.zeros(11), np.ones(11), np.zeros(11), 0.)
             calls = []
             def build(path, count, seed):

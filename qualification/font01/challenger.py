@@ -16,7 +16,7 @@ import torch
 from torch import nn
 
 from .context import context_vectors
-from .evaluation import pair_metrics, threshold_at_fpr
+from .evaluation import decision_ledger, pair_metrics, threshold_at_fpr
 from .metric_encoder import Encoder, training_loss
 from .observations import load_observations
 from .pair_data import evaluator_labels, validate_evaluator_join
@@ -25,6 +25,8 @@ from .linear_metric import load_metric
 from .run_baseline import verify_corpus
 
 SEED = 10303
+ENCODER_FILE = 'encoder.pt'
+EMBEDDINGS_SUFFIX = '-embeddings.npy'
 
 
 def source_tensor(corpus, split):
@@ -53,7 +55,7 @@ def pair_inputs(baseline, split, rows):
 def train_encoder(images, targets, characters, weights, validation_images, validation, output, epochs=30):
     model = Encoder()
     head = nn.Linear(48, int(targets.max())+1)
-    optimizer = torch.optim.Adam([*model.parameters(), *head.parameters()], lr=.001)
+    optimizer = torch.optim.Adam([*model.parameters(), *head.parameters()], lr=.001, weight_decay=0.)
     scheduler = torch.optim.lr_scheduler.CosineAnnealingLR(optimizer, epochs)
     _, truth, _, left, right, healthy = validation
     best, history, started = -1., [], time.monotonic()
@@ -78,9 +80,10 @@ def train_encoder(images, targets, characters, weights, validation_images, valid
             history.append(record)
             if metrics['recall'] > best:
                 best = metrics['recall']
-                torch.save(model.state_dict(), output/'encoder.pt')
+                torch.save(model.state_dict(), output/ENCODER_FILE)
                 (output/'selected.json').write_text(json.dumps(record, indent=2)+'\n')
-    model.load_state_dict(torch.load(output/'encoder.pt', weights_only=True))
+    model.load_state_dict(torch.load(output/ENCODER_FILE, weights_only=True))
+    model.eval()
     (output/'history.json').write_text(json.dumps(history, indent=2)+'\n')
     return model
 
@@ -173,7 +176,7 @@ def run(corpus, baseline, output):
     extra = {}
     for split, (rows, images, pairs) in data.items():
         embeddings = embed(model, images)
-        np.save(output/(split+'-embeddings.npy'), embeddings)
+        np.save(output/(split+EMBEDDINGS_SUFFIX), embeddings)
         extra[split] = extended_features(rows, embeddings, pairs)
     extended = {name: fit_extended(extra['train'][index], train_pairs[1])
                 for index, name in enumerate(['hybrid', 'context'])}
@@ -184,17 +187,17 @@ def run(corpus, baseline, output):
         if split == 'test':
             verify_corpus(corpus, frozen)
             freeze = {'thresholds': thresholds, 'models': extended, 'baseline_files': baseline_hashes,
-                      'encoder_sha256': hashlib.sha256((output/'encoder.pt').read_bytes()).hexdigest()}
+                      'encoder_sha256': hashlib.sha256((output/ENCODER_FILE).read_bytes()).hexdigest()}
             (output/'pretest-freeze.json').write_text(json.dumps(freeze, indent=2)+'\n')
             rows, images = source_tensor(corpus, split)
             pairs = pair_inputs(baseline, split, rows)
             data[split] = (rows, images, pairs)
             embeddings = embed(model, images)
-            np.save(output/(split+'-embeddings.npy'), embeddings)
+            np.save(output/(split+EMBEDDINGS_SUFFIX), embeddings)
             extra[split] = extended_features(rows, embeddings, pairs)
         rows, images, pairs = data[split]
-        x, y, _, left, right, healthy = pairs
-        embeddings = np.load(output/(split+'-embeddings.npy'))
+        x, y, metadata, left, right, healthy = pairs
+        embeddings = np.load(output/(split+EMBEDDINGS_SUFFIX))
         scores = {'deterministic': deterministic_score(x), 'linear': linear.scores(x),
                   'CNN': (embeddings[left]*embeddings[right]).sum(1),
                   **{name: predict_extended(extended[name], extra[split][index])
@@ -202,6 +205,8 @@ def run(corpus, baseline, output):
         if split == 'validation':
             thresholds = {name: threshold_at_fpr(y[healthy], score[healthy]) for name, score in scores.items()}
         for name, score in scores.items():
+            ledger = decision_ledger(metadata, score, thresholds[name])
+            (output/(split+'-'+name+'-decisions.json')).write_text(json.dumps(ledger, indent=2)+'\n')
             results.append({'split': split, 'arm': name, 'threshold': thresholds[name],
                             'healthy': pair_metrics(y[healthy], score[healthy], thresholds[name],
                                                     probabilities=name not in ['CNN', 'deterministic']),

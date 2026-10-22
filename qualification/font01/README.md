@@ -112,3 +112,9 @@ Measured negative results, exact product baseline and independent visual finding
 [FONT_01_RECONSTRUCTION.md](../../FONT_01_RECONSTRUCTION.md).
 Large local evidence is under `qualification/font01/local/`; compact
 `results.json` records source/output hashes and per-arm diagnostics.
+
+Pair decision ledgers explicitly record source IDs, scores, frozen thresholds,
+candidate-only proposals and abstention reasons. Every proposal remains
+`authorized_for_product: false`; a high research score is not permission to merge
+a face or alter a PDF. These exports use the already frozen predictions, without
+retraining or threshold changes.

@@ -32,7 +32,7 @@ class ChallengerTests(unittest.TestCase):
         self.assertTrue(torch.isfinite(loss))
         no_positive = training_loss(vectors, torch.zeros(8, 2), targets, torch.zeros(8), weights)
         self.assertTrue(torch.isfinite(no_positive))
-        pairs = (np.zeros((4, 11)), np.array([True, False, True, False]), [],
+        pairs = (np.zeros((4, 11)), np.array([True, False, True, False]), [{'a': 'left', 'b': 'right', 'character': 'e'}]*4,
                  np.array([0, 0, 2, 2]), np.array([1, 2, 3, 0]), np.ones(4, bool))
         with tempfile.TemporaryDirectory() as directory:
             output = Path(directory)
@@ -106,7 +106,7 @@ class ChallengerTests(unittest.TestCase):
             output = root/'output'
             rows = [Observation(str(i), char, {'character': char, 'page': 0, 'bbox': [i*8, 0, i*8+6, 10]},
                                 {'image': np.ones((48, 48), np.float32)*i/10}) for i, char in enumerate('abcd')]
-            pairs = (np.zeros((4, 11)), np.array([True, False, True, False]), [],
+            pairs = (np.zeros((4, 11)), np.array([True, False, True, False]), [{'a': 'left', 'b': 'right', 'character': 'e'}]*4,
                      np.array([0, 0, 1, 1]), np.array([1, 2, 2, 3]), np.ones(4, bool))
             def sources(corpus, split):
                 if split == 'test':

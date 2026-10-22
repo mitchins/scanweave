@@ -23,7 +23,7 @@ Poppler7/8/9 differ despite PDFium equality. The user was corrected immediately,
 changed pixels measured, and a head.flags control failed to remove the discrepancy.
 The font packing shadow is unqualified and no production code is promoted.
 
-Parent qualification:27 focused FONT tests, ~97% local measured source coverage;
+Parent qualification:28 focused FONT tests, ~97% local measured source coverage;
 strict baseline tensors/targets and all three CNN embedding arrays reproduced
 exactly. The full research run is51.68s wall, peak773268KiB RSS. Test pairs share
 masters/faces, so population confidence and general font-cohort success are not
@@ -33,3 +33,10 @@ failed model gates. Sealed holdout remains unopened.
 Final independent code/evidence check found no remaining blocker and reconciled
 pair counts, failed gates and shadow limitations against results.json. The reviewer
 did not rerun tests; execution evidence is from the parent.
+
+Final export ledgers include57,225 frozen validation/test proposals with scores,
+thresholds and abstention reasons; every row remains unauthorized for product.
+Independent review found no issue in this export. Four Sonar clarity findings in
+the new trainer are addressed with local filename constants, explicit Adam
+weight_decay=0 (the existing default), and explicit eval mode after checkpoint
+load. No feature, weight, threshold or inference arithmetic changes.
