@@ -89,7 +89,8 @@ class MetricTests(unittest.TestCase):
         metric = linear_metric.fit_metric(x, y)
         self.assertLess(float(metric.scores(x[0])), .2)
         self.assertGreater(float(metric.scores(x[-1])), .8)
-        np.testing.assert_array_equal(metric.scores(x), [metric.scores(row) for row in x])
+        np.testing.assert_allclose(metric.scores(x), [metric.scores(row) for row in x],
+                                   rtol=1e-12, atol=1e-12)
         with tempfile.TemporaryDirectory() as directory:
             path = Path(directory)/'model.json'
             metric.save(path)

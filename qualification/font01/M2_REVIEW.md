@@ -27,3 +27,7 @@ share source masters and fonts; these counts are not independent population tria
 No Rust, PDF/font programs, Unicode, faithful or ACR-05 output behavior changes.
 Large corpora, tensors and model files remain ignored. CNN challenger results and
 canonical recovery are subsequent research evidence, not claims of this API PR.
+
+CodeRabbit identified a cross-BLAS batch-versus-single dot-product test fragility.
+That score-only parity check now uses rtol/atol1e-12; frozen registration features
+and full-corpus reproduction comparisons remain exact. No model gate was relaxed.
