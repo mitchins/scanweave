@@ -1,17 +1,45 @@
-//! ClearScan-only whole-page tonal encoding; never used for separately serialized native exceptions.
-//! ACR-01 uses native-resolution JPEG85 after real-document visual qualification.
-//! Tonal/noise differences are intentional. The older Q100 path below retains
-//! its stricter sample checks; neither path alters font or Unicode ownership.
+//! ClearScan residual image encoding. Whole pages may use 200-DPI JPEG85 with
+//! 4:2:0 chroma; tonal native exceptions retain full resolution and 4:4:4 JPEG90.
+//! The caller selects actual byte savings; faithful and legacy Q100 stay separate.
 
 pub(crate) const QUALITY: u8 = 100;
-/// ACR-01: full-resolution 4:4:4 JPEG, selected on seven real page classes.
-/// ClearScan permits tonal/noise changes; this is not a pixel-preservation claim.
 const COMPACT_QUALITY: u8 = 85;
+const NATIVE_QUALITY: u8 = 90;
 
-/// Compact an eligible complete tonal residual, including already-cleaned pages
-/// carrying visible vectors. Never called for individual native exceptions.
-/// The caller retains lossless/source encoding unless the complete PDF shrinks.
-/// Bitonal pages, tiny buffers and oversized inputs retain their existing path.
+fn optimized_jpeg(
+    samples: &[u8],
+    width: u32,
+    height: u32,
+    colors: u8,
+    quality: u8,
+    sampling: jpeg_encoder::SamplingFactor,
+) -> Result<Vec<u8>, String> {
+    let mut bytes = Vec::new();
+    let mut encoder = jpeg_encoder::Encoder::new(&mut bytes, quality);
+    encoder.set_sampling_factor(sampling);
+    encoder.set_optimized_huffman_tables(true);
+    // Optimized baseline RGB uses separate sequential scans that our current
+    // JPEG decoder does not reliably reconstruct. Progressive scans preserve
+    // the quantized coefficients and round-trip through that decoder correctly.
+    if colors == 3 {
+        encoder.set_progressive(true);
+    }
+    encoder
+        .encode(
+            samples,
+            u16::try_from(width).map_err(|_| "JPEG width exceeds 16-bit dimensions")?,
+            u16::try_from(height).map_err(|_| "JPEG height exceeds 16-bit dimensions")?,
+            if colors == 1 {
+                jpeg_encoder::ColorType::Luma
+            } else {
+                jpeg_encoder::ColorType::Rgb
+            },
+        )
+        .map_err(|error| error.to_string())?;
+    Ok(bytes)
+}
+
+/// Native-size candidate, retaining ACR-01 if the optional encoder fails/grows.
 pub(crate) fn encode_compact(
     samples: &[u8],
     width: u32,
@@ -21,16 +49,143 @@ pub(crate) fn encode_compact(
     if !eligible(samples, width, height, colors) {
         return Ok(None);
     }
-    let color = if colors == 1 {
-        image::ExtendedColorType::L8
+    let mut legacy = Vec::new();
+    image::codecs::jpeg::JpegEncoder::new_with_quality(&mut legacy, COMPACT_QUALITY)
+        .encode(
+            samples,
+            width,
+            height,
+            if colors == 1 {
+                image::ExtendedColorType::L8
+            } else {
+                image::ExtendedColorType::Rgb8
+            },
+        )
+        .map_err(|error| error.to_string())?;
+    if let Ok(compact) = optimized_jpeg(
+        samples,
+        width,
+        height,
+        colors,
+        COMPACT_QUALITY,
+        jpeg_encoder::SamplingFactor::R_4_2_0,
+    ) {
+        if compact.len() < legacy.len() {
+            return Ok(Some(compact));
+        }
+    }
+    Ok(Some(legacy))
+}
+
+/// Sample dimensions are independent of the unchanged PDF placement transform.
+pub(crate) struct CompactImage {
+    pub bytes: Vec<u8>,
+    pub width: u32,
+    pub height: u32,
+}
+
+fn resized_samples(
+    samples: &[u8],
+    width: u32,
+    height: u32,
+    colors: u8,
+    w: u32,
+    h: u32,
+) -> Result<Vec<u8>, String> {
+    let filter = image::imageops::FilterType::Lanczos3;
+    if colors == 1 {
+        let image = image::GrayImage::from_raw(width, height, samples.to_vec())
+            .ok_or("invalid grayscale residual")?;
+        Ok(image::imageops::resize(&image, w, h, filter).into_raw())
     } else {
-        image::ExtendedColorType::Rgb8
+        let image = image::RgbImage::from_raw(width, height, samples.to_vec())
+            .ok_or("invalid RGB residual")?;
+        Ok(image::imageops::resize(&image, w, h, filter).into_raw())
+    }
+}
+
+/// Qualified whole-page residual. Never upscale; require 5% encoded savings for
+/// reducing resolution. Native exceptions and verified source JPEGs do not enter.
+pub(crate) fn encode_residual(
+    samples: &[u8],
+    width: u32,
+    height: u32,
+    colors: u8,
+    page_width_pt: f32,
+    page_height_pt: f32,
+) -> Result<Option<CompactImage>, String> {
+    let Some(bytes) = encode_compact(samples, width, height, colors)? else {
+        return Ok(None);
     };
-    let mut jpeg = Vec::new();
-    image::codecs::jpeg::JpegEncoder::new_with_quality(&mut jpeg, COMPACT_QUALITY)
-        .encode(samples, width, height, color)
-        .map_err(|e| e.to_string())?;
-    Ok(Some(jpeg))
+    let native = CompactImage {
+        bytes,
+        width,
+        height,
+    };
+    if !page_width_pt.is_finite()
+        || !page_height_pt.is_finite()
+        || page_width_pt <= 0.0
+        || page_height_pt <= 0.0
+    {
+        return Ok(Some(native));
+    }
+    let scale = (200.0 * f64::from(page_width_pt) / (72.0 * f64::from(width)))
+        .min(200.0 * f64::from(page_height_pt) / (72.0 * f64::from(height)))
+        .min(1.0);
+    let w = (f64::from(width) * scale).round().max(1.0) as u32;
+    let h = (f64::from(height) * scale).round().max(1.0) as u32;
+    if w == width && h == height {
+        return Ok(Some(native));
+    }
+    let samples = resized_samples(samples, width, height, colors, w, h)?;
+    match optimized_jpeg(
+        &samples,
+        w,
+        h,
+        colors,
+        COMPACT_QUALITY,
+        jpeg_encoder::SamplingFactor::R_4_2_0,
+    ) {
+        Ok(bytes) if (bytes.len() as f64) < native.bytes.len() as f64 * 0.95 => {
+            Ok(Some(CompactImage {
+                bytes,
+                width: w,
+                height: h,
+            }))
+        }
+        _ => Ok(Some(native)),
+    }
+}
+
+/// Source-resolution tonal exception only. Binary ink and tiny resources retain
+/// Flate; callers separately require a material encoded-size saving.
+pub(crate) fn native_candidate(samples: &[u8], width: u32, height: u32, colors: u8) -> bool {
+    width >= 16
+        && height >= 16
+        && width <= u16::MAX as u32
+        && height <= u16::MAX as u32
+        && tonal_samples(samples, width, height, colors)
+}
+
+pub(crate) fn encode_native(
+    samples: &[u8],
+    width: u32,
+    height: u32,
+    colors: u8,
+) -> Result<Option<Vec<u8>>, String> {
+    if !native_candidate(samples, width, height, colors) {
+        return Ok(None);
+    }
+    // Fine coloured edges are not subsampled in native exception crops.
+    optimized_jpeg(
+        samples,
+        width,
+        height,
+        colors,
+        NATIVE_QUALITY,
+        jpeg_encoder::SamplingFactor::R_4_4_4,
+    )
+    .map(Some)
 }
 
 fn luminance(rgb: &[u8]) -> f64 {
@@ -38,9 +193,11 @@ fn luminance(rgb: &[u8]) -> f64 {
 }
 
 pub(crate) fn eligible(samples: &[u8], width: u32, height: u32, colors: u8) -> bool {
-    if width < 512
-        || height < 512
-        || width as u64 * height as u64 > 16_000_000
+    width >= 512 && height >= 512 && tonal_samples(samples, width, height, colors)
+}
+
+fn tonal_samples(samples: &[u8], width: u32, height: u32, colors: u8) -> bool {
+    if width as u64 * height as u64 > 16_000_000
         || ![1, 3].contains(&colors)
         || (width as usize)
             .checked_mul(height as usize)
@@ -50,14 +207,14 @@ pub(crate) fn eligible(samples: &[u8], width: u32, height: u32, colors: u8) -> b
         return false;
     }
     let mut levels = [false; 256];
-    for p in samples.chunks_exact(colors as usize) {
+    for pixel in samples.chunks_exact(colors as usize) {
         levels[if colors == 1 {
-            p[0]
+            pixel[0]
         } else {
-            luminance(p).round() as u8
+            luminance(pixel).round() as u8
         } as usize] = true;
     }
-    levels.iter().filter(|&&v| v).count() >= 64
+    levels.iter().filter(|&&present| present).count() >= 64
 }
 
 /// Inspect every source pixel, including faint isolated dark/light ridges and thin
@@ -180,27 +337,101 @@ mod tests {
                 rgb.extend(if ink { [20; 3] } else { [background; 3] });
             }
         }
-        let encoded = encode_compact(&rgb, w as u32, h as u32, 3).unwrap().unwrap();
-        assert_eq!(encoded, encode_compact(&rgb, w as u32, h as u32, 3).unwrap().unwrap());
+        let encoded = encode_compact(&rgb, w as u32, h as u32, 3)
+            .unwrap()
+            .unwrap();
+        assert_eq!(
+            encoded,
+            encode_compact(&rgb, w as u32, h as u32, 3)
+                .unwrap()
+                .unwrap()
+        );
         let decoded = image::load_from_memory(&encoded).unwrap().to_rgb8();
         assert_eq!(decoded.dimensions(), (512, 512));
         for x in 110..390 {
             assert!(decoded.get_pixel(x, 250)[0] < 80, "thin rule lost at {x}");
         }
-        assert!(decoded.get_pixel(311, 281)[0] < 80, "decimal-sized mark lost");
-        let at = encoded.windows(2).position(|w| w == [0xff, 0xc0]).unwrap();
+        assert!(
+            decoded.get_pixel(311, 281)[0] < 80,
+            "decimal-sized mark lost"
+        );
+        let at = encoded.windows(2).position(|w| w == [0xff, 0xc2]).unwrap();
         let sof = &encoded[at + 2..];
         assert_eq!(sof[7], 3);
-        for c in 0..3 {
-            assert_eq!(sof[9 + c * 3], 0x11);
+        assert_eq!(sof[9], 0x22);
+        assert_eq!(sof[12], 0x11);
+        assert_eq!(sof[15], 0x11);
+    }
+
+    #[test]
+    fn progressive_native_colour_roundtrips_partial_mcu_edges() {
+        let (w, h) = (63usize, 79usize);
+        let mut samples = Vec::new();
+        for y in 0..h {
+            for x in 0..w {
+                samples.extend(if (25..28).contains(&x) && (20..60).contains(&y) {
+                    [20, 85, 150]
+                } else if (40..55).contains(&x) && (45..65).contains(&y) {
+                    [160, 25, 30]
+                } else if (8..20).contains(&x) && (8..20).contains(&y) {
+                    [250; 3]
+                } else {
+                    [(128 + (x + y) % 128) as u8; 3]
+                });
+            }
         }
+        let jpeg = encode_native(&samples, w as u32, h as u32, 3)
+            .unwrap()
+            .unwrap();
+        assert_eq!(
+            jpeg,
+            encode_native(&samples, w as u32, h as u32, 3)
+                .unwrap()
+                .unwrap()
+        );
+        let image = image::load_from_memory(&jpeg).unwrap().to_rgb8();
+        assert_eq!(image.dimensions(), (63, 79));
+        assert!(image.get_pixel(14, 14).0.iter().all(|&v| v > 240));
+        let blue = image.get_pixel(26, 35).0;
+        assert!(blue[2] > blue[0] + 80 && blue[1] > blue[0] + 30);
+        let red = image.get_pixel(48, 55).0;
+        assert!(red[0] > red[1] + 80);
+    }
+
+    #[test]
+    fn native_exception_rejects_binary_tiny_and_malformed_samples() {
+        assert!(encode_native(&[255; 32 * 32], 32, 32, 1).unwrap().is_none());
+        assert!(encode_native(&[0; 3], 16, 16, 3).unwrap().is_none());
+        assert!(encode_native(&[], u32::MAX, 32, 3).unwrap().is_none());
+        assert!(encode_native(&[0; 8 * 8 * 3], 8, 8, 3).unwrap().is_none());
+    }
+
+    #[test]
+    fn residual_resolution_uses_page_points_and_never_upscales() {
+        let samples: Vec<_> = (0..512 * 512).map(|i| (i % 256) as u8).collect();
+        let high = encode_residual(&samples, 512, 512, 1, 72., 72.)
+            .unwrap()
+            .unwrap();
+        assert_eq!((high.width, high.height), (200, 200));
+        let low = encode_residual(&samples, 512, 512, 1, 512., 512.)
+            .unwrap()
+            .unwrap();
+        assert_eq!((low.width, low.height), (512, 512));
+        let invalid = encode_residual(&samples, 512, 512, 1, f32::NAN, 72.)
+            .unwrap()
+            .unwrap();
+        assert_eq!((invalid.width, invalid.height), (512, 512));
     }
 
     #[test]
     fn compact_encoder_rejects_invalid_bitonal_and_patch_sized_inputs() {
         assert!(encode_compact(&[], 512, 512, 3).unwrap().is_none());
-        assert!(encode_compact(&vec![255; 512 * 512], 512, 512, 1).unwrap().is_none());
-        assert!(encode_compact(&vec![128; 32 * 32 * 3], 32, 32, 3).unwrap().is_none());
+        assert!(encode_compact(&vec![255; 512 * 512], 512, 512, 1)
+            .unwrap()
+            .is_none());
+        assert!(encode_compact(&vec![128; 32 * 32 * 3], 32, 32, 3)
+            .unwrap()
+            .is_none());
         assert!(encode_compact(&[], u32::MAX, 1, 3).unwrap().is_none());
     }
 

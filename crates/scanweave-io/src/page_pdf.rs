@@ -1123,14 +1123,16 @@ fn whole_page_tonal_candidate(p: &PageParts) -> bool {
         && !p.encoded_source.as_ref().is_some_and(|s|s.jpeg)
 }
 
-/// ClearScan-only whole-page candidate, selected by actual complete PDF bytes.
+/// ClearScan-only residual/native candidates, selected by actual complete PDF bytes.
 /// Existing public assembly and faithful retain their lossless behavior.
 pub(crate) fn assemble_document_with_tonal_fallback(
     pages: &[PageParts], shapes: &[GlyphShape], encodings: &[(usize, String)],
     font_bytes: &[u8], image_options: ImageEncodingOptions,
 ) -> Result<(Vec<u8>, AssemblyStats), String> {
     if !pages.iter().any(|p| whole_page_tonal_candidate(p)
-        && crate::tonal_image::eligible(&p.patches[0].rgb,p.source_w as u32,p.source_h as u32,3)) {
+        && crate::tonal_image::eligible(&p.patches[0].rgb,p.source_w as u32,p.source_h as u32,3)
+        || (!p.raster_baseline && p.patches.len()>1 && p.patches.iter().any(|patch|
+            !patch.compact_background && crate::tonal_image::native_candidate(&patch.rgb,patch.w,patch.h,3)))) {
         return assemble_document_with_options(pages,shapes,encodings,font_bytes,image_options);
     }
     let start = std::time::Instant::now();
@@ -1208,14 +1210,34 @@ fn assemble_document_impl(
                     let tonal = if tonal_whole_pages && whole_page_tonal_candidate(p) {
                         // This is optional representation work. Encoder failure
                         // retains the already-built lossless resource.
-                        crate::tonal_image::encode_compact(&key.samples,key.width,key.height,key.color_space)
+                        crate::tonal_image::encode_residual(&key.samples,key.width,key.height,key.color_space,p.page_w_pt,p.page_h_pt)
                             .and_then(|compact| match compact {
                                 Some(bytes) => Ok(Some(bytes)),
-                                None => crate::tonal_image::encode(&key.samples,key.width,key.height,key.color_space),
+                                None => crate::tonal_image::encode(&key.samples,key.width,key.height,key.color_space).map(|bytes|bytes.map(|bytes|crate::tonal_image::CompactImage {bytes,width:key.width,height:key.height})),
                             })
                             .unwrap_or_else(|reason| {eprintln!("scanweave: retaining lossless whole-page image: {reason}");None})
                     } else {None};
                     let mut key = key;
+                    if tonal_whole_pages && !p.raster_baseline && p.patches.len()>1
+                        && !patch.compact_background && compressed.len()>=512 {
+                        match crate::tonal_image::encode_native(&key.samples,key.width,key.height,key.color_space) {
+                            Ok(Some(bytes)) if (bytes.len() as f64) < compressed.len() as f64 * 0.95 => {
+                                let mut digest=Sha256::new();
+                                digest.update(b"native-patch-dct-acr04");
+                                digest.update(&bytes);
+                                digest.update(key.width.to_be_bytes());
+                                digest.update(key.height.to_be_bytes());
+                                digest.update([key.color_space]);
+                                key.sample_sha256=digest.finalize().into();
+                                key.samples=bytes.clone();
+                                compressed=bytes;
+                                jpeg=true;
+                                predictor=1;
+                            }
+                            Err(reason)=>eprintln!("scanweave: retaining lossless native image: {reason}"),
+                            _=>{}
+                        }
+                    }
                     if p.occurrences.is_empty() && p.patches.len() == 1 {
                         if let Some(source) = &p.encoded_source {
                             if source.jpeg || source.bytes.len() < compressed.len() {
@@ -1237,18 +1259,20 @@ fn assemble_document_impl(
                             }
                         }
                     }
-                    if let Some(tonal) = tonal.filter(|bytes|bytes.len()<compressed.len()) {
+                    if let Some(tonal) = tonal.filter(|image|image.bytes.len()<compressed.len()) {
                         // Encoded identity cannot alias a lossless native patch.
                         key = canonical_patch(patch,image_options)?;
                         let mut digest = Sha256::new();
                         digest.update(b"whole-page-dct-v1");
-                        digest.update(&tonal);
+                        key.width = tonal.width;
+                        key.height = tonal.height;
+                        digest.update(&tonal.bytes);
                         digest.update(key.width.to_be_bytes());
                         digest.update(key.height.to_be_bytes());
                         digest.update([key.color_space]);
                         key.sample_sha256 = digest.finalize().into();
-                        key.samples = tonal.clone();
-                        compressed = tonal;
+                        key.samples = tonal.bytes.clone();
+                        compressed = tonal.bytes;
                         jpeg = true;
                         predictor = 1;
                     }
@@ -1561,10 +1585,35 @@ mod image_resource_tests {
         assert!(compact.len() < lossless.len());
         let start = compact.windows(3).position(|w| w == [0xff, 0xd8, 0xff]).unwrap();
         let decoded = image::load_from_memory_with_format(&compact[start..], image::ImageFormat::Jpeg).unwrap().to_rgb8();
-        assert_eq!(decoded.dimensions(), (512, 512));
-        assert!(decoded.get_pixel(230, 230).0.iter().all(|&v| v > 240));
+        assert_eq!(decoded.dimensions(), (200, 200));
+        assert!(decoded.get_pixel(90, 90).0.iter().all(|&v| v > 240), "cleaned center: {:?}", decoded.get_pixel(90,90));
         assert_eq!(compact, assemble_document_with_tonal_fallback(&[p.clone()], &[], &[], &[], options).unwrap().0);
         assert_eq!(lossless, assemble_document_with_options(&[p], &[], &[], &[], options).unwrap().0);
+    }
+
+    #[test]
+    fn native_tonal_exceptions_are_optional_deterministic_and_shared() {
+        let mut state=17u32;
+        let mut rgb=Vec::new();
+        for _ in 0..96*96 {
+            state=state.wrapping_mul(1664525).wrapping_add(1013904223);
+            rgb.extend([(state>>24) as u8;3]);
+        }
+        let first=Patch {bbox_px:[10.,10.,106.,106.],rgb:rgb.clone(),w:96,h:96,compact_background:false};
+        let second=Patch {bbox_px:[130.,10.,226.,106.],..first.clone()};
+        let mut p=page(vec![first,second]);
+        p.source_w=256;p.source_h=128;p.page_w_pt=256.;p.page_h_pt=128.;p.to_pt.f=128.;
+        let options=ImageEncodingOptions::default();
+        let (lossless,_)=assemble_document_with_options(&[p.clone()],&[],&[],&[],options).unwrap();
+        let (compact,stats)=assemble_document_with_tonal_fallback(&[p.clone()],&[],&[],&[],options).unwrap();
+        assert!(compact.len()<lossless.len());
+        assert_eq!(stats.image_xobjects,1);
+        assert_eq!(stats.image_references,2);
+        assert_eq!(compact,assemble_document_with_tonal_fallback(&[p.clone()],&[],&[],&[],options).unwrap().0);
+        assert_eq!(lossless,assemble_document_with_options(&[p.clone()],&[],&[],&[],options).unwrap().0);
+        p.raster_baseline=true;
+        assert_eq!(assemble_document_with_options(&[p.clone()],&[],&[],&[],options).unwrap().0,
+            assemble_document_with_tonal_fallback(&[p],&[],&[],&[],options).unwrap().0);
     }
 
     #[test]

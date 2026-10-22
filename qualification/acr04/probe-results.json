@@ -1,0 +1,1385 @@
+[
+  {
+    "group": "historical",
+    "setting": "save-only",
+    "baseline_sha256": "50fdf5b980fb804315300b7fe6eeef0d489ef6088b7011ee5acf080a95fd6407",
+    "path": "qualification/acr04/local/save-only/historical.pdf",
+    "bytes": 5114364,
+    "sha256": "22a83de73bd2ac2adceebd62cbfab1dc8feb95d75fcfd571d727e64415672089",
+    "seconds": 0.05509518599137664,
+    "changes": [],
+    "note": "all settings decode identical ACR01 residual streams; not pristine raw encoder input"
+  },
+  {
+    "group": "historical",
+    "setting": "444-85",
+    "baseline_sha256": "50fdf5b980fb804315300b7fe6eeef0d489ef6088b7011ee5acf080a95fd6407",
+    "path": "qualification/acr04/local/444-85/historical.pdf",
+    "bytes": 4978215,
+    "sha256": "6c4e70f6fd0e88e8f7ab9915311e1e4505cd6e5ed71c7017bdd1af157995d759",
+    "seconds": 0.4383089250186458,
+    "changes": [
+      {
+        "object": [
+          19,
+          0
+        ],
+        "decoded_input_sha256": "ea0fb9829b9ce5be7dd9be00edd4fedb319d6cc29c3f1a9316349f72d1d26647",
+        "old_bytes": 1149863,
+        "new_bytes": 1126354,
+        "dimensions": [
+          1738,
+          2355
+        ]
+      },
+      {
+        "object": [
+          20,
+          0
+        ],
+        "decoded_input_sha256": "0d942c86b2cfd6a3ae2d0024a50342b83554154b81c0682c455c30efbcf87c77",
+        "old_bytes": 849913,
+        "new_bytes": 822097,
+        "dimensions": [
+          1116,
+          1835
+        ]
+      },
+      {
+        "object": [
+          21,
+          0
+        ],
+        "decoded_input_sha256": "51b83f9b9d84de2875605eed21f8cb24fe1366216cadcfcb760f31420e0656bd",
+        "old_bytes": 531744,
+        "new_bytes": 511124,
+        "dimensions": [
+          1676,
+          2287
+        ]
+      },
+      {
+        "object": [
+          22,
+          0
+        ],
+        "decoded_input_sha256": "7a5bcab98dace46d6f141aea101fe85dd003bcbaafaa8cb511ddc22d16444a2f",
+        "old_bytes": 1297401,
+        "new_bytes": 1262440,
+        "dimensions": [
+          2319,
+          3928
+        ]
+      },
+      {
+        "object": [
+          23,
+          0
+        ],
+        "decoded_input_sha256": "889d2015cb01d114899f7a67403f7900be029eb8ab6206e952247384a9024ce7",
+        "old_bytes": 1205699,
+        "new_bytes": 1176456,
+        "dimensions": [
+          1757,
+          2440
+        ]
+      }
+    ],
+    "note": "all settings decode identical ACR01 residual streams; not pristine raw encoder input"
+  },
+  {
+    "group": "historical",
+    "setting": "420-85",
+    "baseline_sha256": "50fdf5b980fb804315300b7fe6eeef0d489ef6088b7011ee5acf080a95fd6407",
+    "path": "qualification/acr04/local/420-85/historical.pdf",
+    "bytes": 3913499,
+    "sha256": "1a7dbe6454e5a61d41878ad1a6317d6d96046fcffe9f5a48ca11e3821c2d9ed9",
+    "seconds": 0.3305393080227077,
+    "changes": [
+      {
+        "object": [
+          19,
+          0
+        ],
+        "decoded_input_sha256": "ea0fb9829b9ce5be7dd9be00edd4fedb319d6cc29c3f1a9316349f72d1d26647",
+        "old_bytes": 1149863,
+        "new_bytes": 829747,
+        "dimensions": [
+          1738,
+          2355
+        ]
+      },
+      {
+        "object": [
+          20,
+          0
+        ],
+        "decoded_input_sha256": "0d942c86b2cfd6a3ae2d0024a50342b83554154b81c0682c455c30efbcf87c77",
+        "old_bytes": 849913,
+        "new_bytes": 540000,
+        "dimensions": [
+          1116,
+          1835
+        ]
+      },
+      {
+        "object": [
+          21,
+          0
+        ],
+        "decoded_input_sha256": "51b83f9b9d84de2875605eed21f8cb24fe1366216cadcfcb760f31420e0656bd",
+        "old_bytes": 531744,
+        "new_bytes": 423182,
+        "dimensions": [
+          1676,
+          2287
+        ]
+      },
+      {
+        "object": [
+          22,
+          0
+        ],
+        "decoded_input_sha256": "7a5bcab98dace46d6f141aea101fe85dd003bcbaafaa8cb511ddc22d16444a2f",
+        "old_bytes": 1297401,
+        "new_bytes": 1043747,
+        "dimensions": [
+          2319,
+          3928
+        ]
+      },
+      {
+        "object": [
+          23,
+          0
+        ],
+        "decoded_input_sha256": "889d2015cb01d114899f7a67403f7900be029eb8ab6206e952247384a9024ce7",
+        "old_bytes": 1205699,
+        "new_bytes": 997081,
+        "dimensions": [
+          1757,
+          2440
+        ]
+      }
+    ],
+    "note": "all settings decode identical ACR01 residual streams; not pristine raw encoder input"
+  },
+  {
+    "group": "historical",
+    "setting": "420-80",
+    "baseline_sha256": "50fdf5b980fb804315300b7fe6eeef0d489ef6088b7011ee5acf080a95fd6407",
+    "path": "qualification/acr04/local/420-80/historical.pdf",
+    "bytes": 3585050,
+    "sha256": "bdf7a9063091d2064885328a1b60cb4b6b8ab829a475f45a503219597e5dcc6a",
+    "seconds": 0.3026689359685406,
+    "changes": [
+      {
+        "object": [
+          19,
+          0
+        ],
+        "decoded_input_sha256": "ea0fb9829b9ce5be7dd9be00edd4fedb319d6cc29c3f1a9316349f72d1d26647",
+        "old_bytes": 1149863,
+        "new_bytes": 756985,
+        "dimensions": [
+          1738,
+          2355
+        ]
+      },
+      {
+        "object": [
+          20,
+          0
+        ],
+        "decoded_input_sha256": "0d942c86b2cfd6a3ae2d0024a50342b83554154b81c0682c455c30efbcf87c77",
+        "old_bytes": 849913,
+        "new_bytes": 484841,
+        "dimensions": [
+          1116,
+          1835
+        ]
+      },
+      {
+        "object": [
+          21,
+          0
+        ],
+        "decoded_input_sha256": "51b83f9b9d84de2875605eed21f8cb24fe1366216cadcfcb760f31420e0656bd",
+        "old_bytes": 531744,
+        "new_bytes": 389788,
+        "dimensions": [
+          1676,
+          2287
+        ]
+      },
+      {
+        "object": [
+          22,
+          0
+        ],
+        "decoded_input_sha256": "7a5bcab98dace46d6f141aea101fe85dd003bcbaafaa8cb511ddc22d16444a2f",
+        "old_bytes": 1297401,
+        "new_bytes": 964673,
+        "dimensions": [
+          2319,
+          3928
+        ]
+      },
+      {
+        "object": [
+          23,
+          0
+        ],
+        "decoded_input_sha256": "889d2015cb01d114899f7a67403f7900be029eb8ab6206e952247384a9024ce7",
+        "old_bytes": 1205699,
+        "new_bytes": 909022,
+        "dimensions": [
+          1757,
+          2440
+        ]
+      }
+    ],
+    "note": "all settings decode identical ACR01 residual streams; not pristine raw encoder input"
+  },
+  {
+    "group": "historical",
+    "setting": "420-85-200",
+    "baseline_sha256": "50fdf5b980fb804315300b7fe6eeef0d489ef6088b7011ee5acf080a95fd6407",
+    "path": "qualification/acr04/local/420-85-200/historical.pdf",
+    "bytes": 2148786,
+    "sha256": "d7a69072843a0539f318fb1aa8081008862684ed393eddd8902fe2422548b8c1",
+    "seconds": 0.5381193929933943,
+    "changes": [
+      {
+        "object": [
+          19,
+          0
+        ],
+        "decoded_input_sha256": "ea0fb9829b9ce5be7dd9be00edd4fedb319d6cc29c3f1a9316349f72d1d26647",
+        "old_bytes": 1149863,
+        "new_bytes": 426579,
+        "dimensions": [
+          1159,
+          1570
+        ]
+      },
+      {
+        "object": [
+          20,
+          0
+        ],
+        "decoded_input_sha256": "0d942c86b2cfd6a3ae2d0024a50342b83554154b81c0682c455c30efbcf87c77",
+        "old_bytes": 849913,
+        "new_bytes": 287428,
+        "dimensions": [
+          744,
+          1223
+        ]
+      },
+      {
+        "object": [
+          21,
+          0
+        ],
+        "decoded_input_sha256": "51b83f9b9d84de2875605eed21f8cb24fe1366216cadcfcb760f31420e0656bd",
+        "old_bytes": 531744,
+        "new_bytes": 234056,
+        "dimensions": [
+          1117,
+          1525
+        ]
+      },
+      {
+        "object": [
+          22,
+          0
+        ],
+        "decoded_input_sha256": "7a5bcab98dace46d6f141aea101fe85dd003bcbaafaa8cb511ddc22d16444a2f",
+        "old_bytes": 1297401,
+        "new_bytes": 582054,
+        "dimensions": [
+          1546,
+          2619
+        ]
+      },
+      {
+        "object": [
+          23,
+          0
+        ],
+        "decoded_input_sha256": "889d2015cb01d114899f7a67403f7900be029eb8ab6206e952247384a9024ce7",
+        "old_bytes": 1205699,
+        "new_bytes": 538929,
+        "dimensions": [
+          1171,
+          1627
+        ]
+      }
+    ],
+    "note": "all settings decode identical ACR01 residual streams; not pristine raw encoder input"
+  },
+  {
+    "group": "receipts",
+    "setting": "save-only",
+    "baseline_sha256": "da93cf92cc239589bda256110d802fe2b74119e5386e2c1bbdca4a02221f9a42",
+    "path": "qualification/acr04/local/save-only/receipts.pdf",
+    "bytes": 2207235,
+    "sha256": "0606eb872fa9d6240e915deeffd0fd4e2d04c0ca8d2a9a5a547e5d0913a36d29",
+    "seconds": 0.015385189966764301,
+    "changes": [],
+    "note": "all settings decode identical ACR01 residual streams; not pristine raw encoder input"
+  },
+  {
+    "group": "receipts",
+    "setting": "444-85",
+    "baseline_sha256": "da93cf92cc239589bda256110d802fe2b74119e5386e2c1bbdca4a02221f9a42",
+    "path": "qualification/acr04/local/444-85/receipts.pdf",
+    "bytes": 2017029,
+    "sha256": "fd9ef281aa81bd516323b1ea11b3a7de59fe05f76995ddcacceffe8ad9b26003",
+    "seconds": 0.2416252699913457,
+    "changes": [
+      {
+        "object": [
+          29,
+          0
+        ],
+        "decoded_input_sha256": "27397f03be88d59f4e28736f69e817eb34bd43fe489b798ba83e55198043c78a",
+        "old_bytes": 157273,
+        "new_bytes": 149875,
+        "dimensions": [
+          865,
+          1297
+        ]
+      },
+      {
+        "object": [
+          30,
+          0
+        ],
+        "decoded_input_sha256": "36e4de460baa2e525416963505299f34ffe92395740ba1c50d709faff9880644",
+        "old_bytes": 127580,
+        "new_bytes": 119806,
+        "dimensions": [
+          865,
+          1297
+        ]
+      },
+      {
+        "object": [
+          53,
+          0
+        ],
+        "decoded_input_sha256": "ea7b6fe0d4b579e9fe65eee2124433c1172f0ae4b4c3db58c75c306fc71a2356",
+        "old_bytes": 224712,
+        "new_bytes": 211998,
+        "dimensions": [
+          1109,
+          1479
+        ]
+      },
+      {
+        "object": [
+          54,
+          0
+        ],
+        "decoded_input_sha256": "fefa9e5a193a5def1c9fd2799cd17ff9ada0313b3e564f27391e3ffad569d22f",
+        "old_bytes": 98956,
+        "new_bytes": 89448,
+        "dimensions": [
+          865,
+          1297
+        ]
+      },
+      {
+        "object": [
+          55,
+          0
+        ],
+        "decoded_input_sha256": "05229ade500370447d81ca0786fc467d2c75a7a71ce98e1ce7fc4b2e72f28574",
+        "old_bytes": 766574,
+        "new_bytes": 652966,
+        "dimensions": [
+          2305,
+          4096
+        ]
+      },
+      {
+        "object": [
+          56,
+          0
+        ],
+        "decoded_input_sha256": "76858fd6b7e9c7f25410a4cf0d5a4dc7bd73f2212d8693afa2645938a7cc5667",
+        "old_bytes": 117630,
+        "new_bytes": 108787,
+        "dimensions": [
+          865,
+          1297
+        ]
+      },
+      {
+        "object": [
+          57,
+          0
+        ],
+        "decoded_input_sha256": "7958c6f0b1bff9e4600211136926c6e3c32a8d04a5c01c1f074790a7a3ad323d",
+        "old_bytes": 112254,
+        "new_bytes": 101205,
+        "dimensions": [
+          865,
+          1297
+        ]
+      },
+      {
+        "object": [
+          58,
+          0
+        ],
+        "decoded_input_sha256": "9e90912d2989f1089e86953aa65f702ed7dd3fb241412f3008981eda697b365b",
+        "old_bytes": 118885,
+        "new_bytes": 109479,
+        "dimensions": [
+          865,
+          1297
+        ]
+      },
+      {
+        "object": [
+          59,
+          0
+        ],
+        "decoded_input_sha256": "21334d3b0b2fd0a7debca6052878b6895b19be60c408086b9cc7e2570e16b9dd",
+        "old_bytes": 155310,
+        "new_bytes": 145403,
+        "dimensions": [
+          865,
+          1297
+        ]
+      }
+    ],
+    "note": "all settings decode identical ACR01 residual streams; not pristine raw encoder input"
+  },
+  {
+    "group": "receipts",
+    "setting": "420-85",
+    "baseline_sha256": "da93cf92cc239589bda256110d802fe2b74119e5386e2c1bbdca4a02221f9a42",
+    "path": "qualification/acr04/local/420-85/receipts.pdf",
+    "bytes": 1845212,
+    "sha256": "fe1ab0e3c7b36352f95acb2c47fd64889f3bbaa9af85d2c54c21480bcaec4801",
+    "seconds": 0.19031847000587732,
+    "changes": [
+      {
+        "object": [
+          29,
+          0
+        ],
+        "decoded_input_sha256": "27397f03be88d59f4e28736f69e817eb34bd43fe489b798ba83e55198043c78a",
+        "old_bytes": 157273,
+        "new_bytes": 138201,
+        "dimensions": [
+          865,
+          1297
+        ]
+      },
+      {
+        "object": [
+          30,
+          0
+        ],
+        "decoded_input_sha256": "36e4de460baa2e525416963505299f34ffe92395740ba1c50d709faff9880644",
+        "old_bytes": 127580,
+        "new_bytes": 105652,
+        "dimensions": [
+          865,
+          1297
+        ]
+      },
+      {
+        "object": [
+          53,
+          0
+        ],
+        "decoded_input_sha256": "ea7b6fe0d4b579e9fe65eee2124433c1172f0ae4b4c3db58c75c306fc71a2356",
+        "old_bytes": 224712,
+        "new_bytes": 198620,
+        "dimensions": [
+          1109,
+          1479
+        ]
+      },
+      {
+        "object": [
+          54,
+          0
+        ],
+        "decoded_input_sha256": "fefa9e5a193a5def1c9fd2799cd17ff9ada0313b3e564f27391e3ffad569d22f",
+        "old_bytes": 98956,
+        "new_bytes": 77660,
+        "dimensions": [
+          865,
+          1297
+        ]
+      },
+      {
+        "object": [
+          55,
+          0
+        ],
+        "decoded_input_sha256": "05229ade500370447d81ca0786fc467d2c75a7a71ce98e1ce7fc4b2e72f28574",
+        "old_bytes": 766574,
+        "new_bytes": 572753,
+        "dimensions": [
+          2305,
+          4096
+        ]
+      },
+      {
+        "object": [
+          56,
+          0
+        ],
+        "decoded_input_sha256": "76858fd6b7e9c7f25410a4cf0d5a4dc7bd73f2212d8693afa2645938a7cc5667",
+        "old_bytes": 117630,
+        "new_bytes": 97318,
+        "dimensions": [
+          865,
+          1297
+        ]
+      },
+      {
+        "object": [
+          57,
+          0
+        ],
+        "decoded_input_sha256": "7958c6f0b1bff9e4600211136926c6e3c32a8d04a5c01c1f074790a7a3ad323d",
+        "old_bytes": 112254,
+        "new_bytes": 93374,
+        "dimensions": [
+          865,
+          1297
+        ]
+      },
+      {
+        "object": [
+          58,
+          0
+        ],
+        "decoded_input_sha256": "9e90912d2989f1089e86953aa65f702ed7dd3fb241412f3008981eda697b365b",
+        "old_bytes": 118885,
+        "new_bytes": 96606,
+        "dimensions": [
+          865,
+          1297
+        ]
+      },
+      {
+        "object": [
+          59,
+          0
+        ],
+        "decoded_input_sha256": "21334d3b0b2fd0a7debca6052878b6895b19be60c408086b9cc7e2570e16b9dd",
+        "old_bytes": 155310,
+        "new_bytes": 136967,
+        "dimensions": [
+          865,
+          1297
+        ]
+      }
+    ],
+    "note": "all settings decode identical ACR01 residual streams; not pristine raw encoder input"
+  },
+  {
+    "group": "receipts",
+    "setting": "420-80",
+    "baseline_sha256": "da93cf92cc239589bda256110d802fe2b74119e5386e2c1bbdca4a02221f9a42",
+    "path": "qualification/acr04/local/420-80/receipts.pdf",
+    "bytes": 1743965,
+    "sha256": "01777487c04ed81d22237bbf225faa75a4a73b6970fabfcfec0f7d60b8bcbb81",
+    "seconds": 0.20322668796870857,
+    "changes": [
+      {
+        "object": [
+          29,
+          0
+        ],
+        "decoded_input_sha256": "27397f03be88d59f4e28736f69e817eb34bd43fe489b798ba83e55198043c78a",
+        "old_bytes": 157273,
+        "new_bytes": 128433,
+        "dimensions": [
+          865,
+          1297
+        ]
+      },
+      {
+        "object": [
+          30,
+          0
+        ],
+        "decoded_input_sha256": "36e4de460baa2e525416963505299f34ffe92395740ba1c50d709faff9880644",
+        "old_bytes": 127580,
+        "new_bytes": 97778,
+        "dimensions": [
+          865,
+          1297
+        ]
+      },
+      {
+        "object": [
+          53,
+          0
+        ],
+        "decoded_input_sha256": "ea7b6fe0d4b579e9fe65eee2124433c1172f0ae4b4c3db58c75c306fc71a2356",
+        "old_bytes": 224712,
+        "new_bytes": 183890,
+        "dimensions": [
+          1109,
+          1479
+        ]
+      },
+      {
+        "object": [
+          54,
+          0
+        ],
+        "decoded_input_sha256": "fefa9e5a193a5def1c9fd2799cd17ff9ada0313b3e564f27391e3ffad569d22f",
+        "old_bytes": 98956,
+        "new_bytes": 72311,
+        "dimensions": [
+          865,
+          1297
+        ]
+      },
+      {
+        "object": [
+          55,
+          0
+        ],
+        "decoded_input_sha256": "05229ade500370447d81ca0786fc467d2c75a7a71ce98e1ce7fc4b2e72f28574",
+        "old_bytes": 766574,
+        "new_bytes": 538660,
+        "dimensions": [
+          2305,
+          4096
+        ]
+      },
+      {
+        "object": [
+          56,
+          0
+        ],
+        "decoded_input_sha256": "76858fd6b7e9c7f25410a4cf0d5a4dc7bd73f2212d8693afa2645938a7cc5667",
+        "old_bytes": 117630,
+        "new_bytes": 90410,
+        "dimensions": [
+          865,
+          1297
+        ]
+      },
+      {
+        "object": [
+          57,
+          0
+        ],
+        "decoded_input_sha256": "7958c6f0b1bff9e4600211136926c6e3c32a8d04a5c01c1f074790a7a3ad323d",
+        "old_bytes": 112254,
+        "new_bytes": 87224,
+        "dimensions": [
+          865,
+          1297
+        ]
+      },
+      {
+        "object": [
+          58,
+          0
+        ],
+        "decoded_input_sha256": "9e90912d2989f1089e86953aa65f702ed7dd3fb241412f3008981eda697b365b",
+        "old_bytes": 118885,
+        "new_bytes": 89796,
+        "dimensions": [
+          865,
+          1297
+        ]
+      },
+      {
+        "object": [
+          59,
+          0
+        ],
+        "decoded_input_sha256": "21334d3b0b2fd0a7debca6052878b6895b19be60c408086b9cc7e2570e16b9dd",
+        "old_bytes": 155310,
+        "new_bytes": 127405,
+        "dimensions": [
+          865,
+          1297
+        ]
+      }
+    ],
+    "note": "all settings decode identical ACR01 residual streams; not pristine raw encoder input"
+  },
+  {
+    "group": "receipts",
+    "setting": "420-85-200",
+    "baseline_sha256": "da93cf92cc239589bda256110d802fe2b74119e5386e2c1bbdca4a02221f9a42",
+    "path": "qualification/acr04/local/420-85-200/receipts.pdf",
+    "bytes": 1303273,
+    "sha256": "32a8c07985d30195c9d856c84497563c87659700b5bf25fb71a78ddae314db2f",
+    "seconds": 0.3951319030020386,
+    "changes": [
+      {
+        "object": [
+          29,
+          0
+        ],
+        "decoded_input_sha256": "27397f03be88d59f4e28736f69e817eb34bd43fe489b798ba83e55198043c78a",
+        "old_bytes": 157273,
+        "new_bytes": 79232,
+        "dimensions": [
+          577,
+          865
+        ]
+      },
+      {
+        "object": [
+          30,
+          0
+        ],
+        "decoded_input_sha256": "36e4de460baa2e525416963505299f34ffe92395740ba1c50d709faff9880644",
+        "old_bytes": 127580,
+        "new_bytes": 61500,
+        "dimensions": [
+          577,
+          865
+        ]
+      },
+      {
+        "object": [
+          53,
+          0
+        ],
+        "decoded_input_sha256": "ea7b6fe0d4b579e9fe65eee2124433c1172f0ae4b4c3db58c75c306fc71a2356",
+        "old_bytes": 224712,
+        "new_bytes": 114943,
+        "dimensions": [
+          739,
+          986
+        ]
+      },
+      {
+        "object": [
+          54,
+          0
+        ],
+        "decoded_input_sha256": "fefa9e5a193a5def1c9fd2799cd17ff9ada0313b3e564f27391e3ffad569d22f",
+        "old_bytes": 98956,
+        "new_bytes": 44682,
+        "dimensions": [
+          577,
+          865
+        ]
+      },
+      {
+        "object": [
+          55,
+          0
+        ],
+        "decoded_input_sha256": "05229ade500370447d81ca0786fc467d2c75a7a71ce98e1ce7fc4b2e72f28574",
+        "old_bytes": 766574,
+        "new_bytes": 442246,
+        "dimensions": [
+          1537,
+          2731
+        ]
+      },
+      {
+        "object": [
+          56,
+          0
+        ],
+        "decoded_input_sha256": "76858fd6b7e9c7f25410a4cf0d5a4dc7bd73f2212d8693afa2645938a7cc5667",
+        "old_bytes": 117630,
+        "new_bytes": 56293,
+        "dimensions": [
+          577,
+          865
+        ]
+      },
+      {
+        "object": [
+          57,
+          0
+        ],
+        "decoded_input_sha256": "7958c6f0b1bff9e4600211136926c6e3c32a8d04a5c01c1f074790a7a3ad323d",
+        "old_bytes": 112254,
+        "new_bytes": 53938,
+        "dimensions": [
+          577,
+          865
+        ]
+      },
+      {
+        "object": [
+          58,
+          0
+        ],
+        "decoded_input_sha256": "9e90912d2989f1089e86953aa65f702ed7dd3fb241412f3008981eda697b365b",
+        "old_bytes": 118885,
+        "new_bytes": 54774,
+        "dimensions": [
+          577,
+          865
+        ]
+      },
+      {
+        "object": [
+          59,
+          0
+        ],
+        "decoded_input_sha256": "21334d3b0b2fd0a7debca6052878b6895b19be60c408086b9cc7e2570e16b9dd",
+        "old_bytes": 155310,
+        "new_bytes": 67617,
+        "dimensions": [
+          577,
+          865
+        ]
+      }
+    ],
+    "note": "all settings decode identical ACR01 residual streams; not pristine raw encoder input"
+  },
+  {
+    "group": "financial",
+    "setting": "save-only",
+    "baseline_sha256": "3c63e63ba50ca5fb52872e35ee42e35765d73e4150711072dd1ba89ba07deea4",
+    "path": "qualification/acr04/local/save-only/financial.pdf",
+    "bytes": 8971229,
+    "sha256": "0345d737e41d04eabab8127ea6d64eb5e5693ddcf6bdf6cbeca245b5f7a2e050",
+    "seconds": 0.13623741903575137,
+    "changes": [],
+    "note": "all settings decode identical ACR01 residual streams; not pristine raw encoder input"
+  },
+  {
+    "group": "financial",
+    "setting": "444-85",
+    "baseline_sha256": "3c63e63ba50ca5fb52872e35ee42e35765d73e4150711072dd1ba89ba07deea4",
+    "path": "qualification/acr04/local/444-85/financial.pdf",
+    "bytes": 8242338,
+    "sha256": "bc6a486cc624bfeb0aa081bbffcc37d4ace2d59f7cfc856c490c07c8663c52ff",
+    "seconds": 0.2996653240406886,
+    "changes": [
+      {
+        "object": [
+          544,
+          0
+        ],
+        "decoded_input_sha256": "f18dbd44b147d60c0afc40a33414a0ee547babb37e09fb4b5ce7a58ac2ae85d7",
+        "old_bytes": 235658,
+        "new_bytes": 33874,
+        "dimensions": [
+          906,
+          1327
+        ]
+      },
+      {
+        "object": [
+          855,
+          0
+        ],
+        "decoded_input_sha256": "2ee1dff16268b1b754bb7808aee2900fe1b86145e61b0434a9ed0041cba1a364",
+        "old_bytes": 278600,
+        "new_bytes": 40150,
+        "dimensions": [
+          906,
+          1327
+        ]
+      },
+      {
+        "object": [
+          975,
+          0
+        ],
+        "decoded_input_sha256": "c6c7fe73f5b34d14e349a5f80a8a7a9f78a6045246804ba46cb9e604a90ebcfd",
+        "old_bytes": 334130,
+        "new_bytes": 284061,
+        "dimensions": [
+          1813,
+          2655
+        ]
+      },
+      {
+        "object": [
+          976,
+          0
+        ],
+        "decoded_input_sha256": "f1f00b14d9215b11c7ffd7e97c886fee6bc2c1e059f9b70ecf5ae20a3e5b446e",
+        "old_bytes": 404900,
+        "new_bytes": 359888,
+        "dimensions": [
+          1813,
+          2655
+        ]
+      },
+      {
+        "object": [
+          977,
+          0
+        ],
+        "decoded_input_sha256": "8ad0b1fab05ebbd2dbc5f7ab0feeef56b3342d1e633ec0565e73b1d93d424b2a",
+        "old_bytes": 230360,
+        "new_bytes": 37040,
+        "dimensions": [
+          906,
+          1327
+        ]
+      }
+    ],
+    "note": "all settings decode identical ACR01 residual streams; not pristine raw encoder input"
+  },
+  {
+    "group": "financial",
+    "setting": "420-85",
+    "baseline_sha256": "3c63e63ba50ca5fb52872e35ee42e35765d73e4150711072dd1ba89ba07deea4",
+    "path": "qualification/acr04/local/420-85/financial.pdf",
+    "bytes": 8115768,
+    "sha256": "b9e7757e63a0a05652f15814c069c066d5c4c3a68bfc54de347cb3e4e3e381c7",
+    "seconds": 0.25726345198927447,
+    "changes": [
+      {
+        "object": [
+          544,
+          0
+        ],
+        "decoded_input_sha256": "f18dbd44b147d60c0afc40a33414a0ee547babb37e09fb4b5ce7a58ac2ae85d7",
+        "old_bytes": 235658,
+        "new_bytes": 24450,
+        "dimensions": [
+          906,
+          1327
+        ]
+      },
+      {
+        "object": [
+          855,
+          0
+        ],
+        "decoded_input_sha256": "2ee1dff16268b1b754bb7808aee2900fe1b86145e61b0434a9ed0041cba1a364",
+        "old_bytes": 278600,
+        "new_bytes": 30370,
+        "dimensions": [
+          906,
+          1327
+        ]
+      },
+      {
+        "object": [
+          975,
+          0
+        ],
+        "decoded_input_sha256": "c6c7fe73f5b34d14e349a5f80a8a7a9f78a6045246804ba46cb9e604a90ebcfd",
+        "old_bytes": 334130,
+        "new_bytes": 237328,
+        "dimensions": [
+          1813,
+          2655
+        ]
+      },
+      {
+        "object": [
+          976,
+          0
+        ],
+        "decoded_input_sha256": "f1f00b14d9215b11c7ffd7e97c886fee6bc2c1e059f9b70ecf5ae20a3e5b446e",
+        "old_bytes": 404900,
+        "new_bytes": 309034,
+        "dimensions": [
+          1813,
+          2655
+        ]
+      },
+      {
+        "object": [
+          977,
+          0
+        ],
+        "decoded_input_sha256": "8ad0b1fab05ebbd2dbc5f7ab0feeef56b3342d1e633ec0565e73b1d93d424b2a",
+        "old_bytes": 230360,
+        "new_bytes": 27258,
+        "dimensions": [
+          906,
+          1327
+        ]
+      }
+    ],
+    "note": "all settings decode identical ACR01 residual streams; not pristine raw encoder input"
+  },
+  {
+    "group": "financial",
+    "setting": "420-80",
+    "baseline_sha256": "3c63e63ba50ca5fb52872e35ee42e35765d73e4150711072dd1ba89ba07deea4",
+    "path": "qualification/acr04/local/420-80/financial.pdf",
+    "bytes": 8060990,
+    "sha256": "4d602c8904a87ee53ccfe8a00ef9427bce9d9e8e051fa90a133cc3be935e02e0",
+    "seconds": 0.2598691610037349,
+    "changes": [
+      {
+        "object": [
+          544,
+          0
+        ],
+        "decoded_input_sha256": "f18dbd44b147d60c0afc40a33414a0ee547babb37e09fb4b5ce7a58ac2ae85d7",
+        "old_bytes": 235658,
+        "new_bytes": 19897,
+        "dimensions": [
+          906,
+          1327
+        ]
+      },
+      {
+        "object": [
+          855,
+          0
+        ],
+        "decoded_input_sha256": "2ee1dff16268b1b754bb7808aee2900fe1b86145e61b0434a9ed0041cba1a364",
+        "old_bytes": 278600,
+        "new_bytes": 24831,
+        "dimensions": [
+          906,
+          1327
+        ]
+      },
+      {
+        "object": [
+          975,
+          0
+        ],
+        "decoded_input_sha256": "c6c7fe73f5b34d14e349a5f80a8a7a9f78a6045246804ba46cb9e604a90ebcfd",
+        "old_bytes": 334130,
+        "new_bytes": 220248,
+        "dimensions": [
+          1813,
+          2655
+        ]
+      },
+      {
+        "object": [
+          976,
+          0
+        ],
+        "decoded_input_sha256": "f1f00b14d9215b11c7ffd7e97c886fee6bc2c1e059f9b70ecf5ae20a3e5b446e",
+        "old_bytes": 404900,
+        "new_bytes": 286545,
+        "dimensions": [
+          1813,
+          2655
+        ]
+      },
+      {
+        "object": [
+          977,
+          0
+        ],
+        "decoded_input_sha256": "8ad0b1fab05ebbd2dbc5f7ab0feeef56b3342d1e633ec0565e73b1d93d424b2a",
+        "old_bytes": 230360,
+        "new_bytes": 22151,
+        "dimensions": [
+          906,
+          1327
+        ]
+      }
+    ],
+    "note": "all settings decode identical ACR01 residual streams; not pristine raw encoder input"
+  },
+  {
+    "group": "financial",
+    "setting": "420-85-200",
+    "baseline_sha256": "3c63e63ba50ca5fb52872e35ee42e35765d73e4150711072dd1ba89ba07deea4",
+    "path": "qualification/acr04/local/420-85-200/financial.pdf",
+    "bytes": 7829797,
+    "sha256": "0f296f33ef0067dcd0ba599b0e1285fa1b8734bf6b7baf24dc5d9c31f7dd9737",
+    "seconds": 0.3939807840506546,
+    "changes": [
+      {
+        "object": [
+          544,
+          0
+        ],
+        "decoded_input_sha256": "f18dbd44b147d60c0afc40a33414a0ee547babb37e09fb4b5ce7a58ac2ae85d7",
+        "old_bytes": 235658,
+        "new_bytes": 12327,
+        "dimensions": [
+          604,
+          885
+        ]
+      },
+      {
+        "object": [
+          855,
+          0
+        ],
+        "decoded_input_sha256": "2ee1dff16268b1b754bb7808aee2900fe1b86145e61b0434a9ed0041cba1a364",
+        "old_bytes": 278600,
+        "new_bytes": 15709,
+        "dimensions": [
+          604,
+          885
+        ]
+      },
+      {
+        "object": [
+          975,
+          0
+        ],
+        "decoded_input_sha256": "c6c7fe73f5b34d14e349a5f80a8a7a9f78a6045246804ba46cb9e604a90ebcfd",
+        "old_bytes": 334130,
+        "new_bytes": 129947,
+        "dimensions": [
+          1209,
+          1770
+        ]
+      },
+      {
+        "object": [
+          976,
+          0
+        ],
+        "decoded_input_sha256": "f1f00b14d9215b11c7ffd7e97c886fee6bc2c1e059f9b70ecf5ae20a3e5b446e",
+        "old_bytes": 404900,
+        "new_bytes": 171095,
+        "dimensions": [
+          1209,
+          1770
+        ]
+      },
+      {
+        "object": [
+          977,
+          0
+        ],
+        "decoded_input_sha256": "8ad0b1fab05ebbd2dbc5f7ab0feeef56b3342d1e633ec0565e73b1d93d424b2a",
+        "old_bytes": 230360,
+        "new_bytes": 13397,
+        "dimensions": [
+          604,
+          885
+        ]
+      }
+    ],
+    "note": "all settings decode identical ACR01 residual streams; not pristine raw encoder input"
+  },
+  {
+    "group": "mixed",
+    "setting": "save-only",
+    "baseline_sha256": "ee7ca6439d586b94c009407d6b241ecde27a99608f9b68ab5665a570ad9eb84e",
+    "path": "qualification/acr04/local/save-only/mixed.pdf",
+    "bytes": 1347256,
+    "sha256": "743a5c61a5edf1d4c6a3c3b94ff698632edb40824b17e97c704bfe2c634c6105",
+    "seconds": 0.04911407601321116,
+    "changes": [],
+    "note": "all settings decode identical ACR01 residual streams; not pristine raw encoder input"
+  },
+  {
+    "group": "mixed",
+    "setting": "444-85",
+    "baseline_sha256": "ee7ca6439d586b94c009407d6b241ecde27a99608f9b68ab5665a570ad9eb84e",
+    "path": "qualification/acr04/local/444-85/mixed.pdf",
+    "bytes": 1320524,
+    "sha256": "ba77a18de3581773b2d07d2256a172aaf468db1f7271788f8741f19ecc215f1a",
+    "seconds": 0.08629276201827452,
+    "changes": [
+      {
+        "object": [
+          13,
+          0
+        ],
+        "decoded_input_sha256": "71888d47cef46ee27248475abd1601fff9c2c5159c681b3acd42a087520ed2d8",
+        "old_bytes": 478290,
+        "new_bytes": 455769,
+        "dimensions": [
+          1541,
+          1991
+        ]
+      },
+      {
+        "object": [
+          14,
+          0
+        ],
+        "decoded_input_sha256": "78772589fea63f55f96e25d79a8d3dfffe644fa7922e6374b44bf6d3b4fac1d5",
+        "old_bytes": 8763,
+        "new_bytes": 4546,
+        "dimensions": [
+          638,
+          826
+        ]
+      }
+    ],
+    "note": "all settings decode identical ACR01 residual streams; not pristine raw encoder input"
+  },
+  {
+    "group": "mixed",
+    "setting": "420-85",
+    "baseline_sha256": "ee7ca6439d586b94c009407d6b241ecde27a99608f9b68ab5665a570ad9eb84e",
+    "path": "qualification/acr04/local/420-85/mixed.pdf",
+    "bytes": 1293183,
+    "sha256": "fccd1597256eb0329e42e4166b01879671aad9561384987f543434bc045d9f38",
+    "seconds": 0.08029351296136156,
+    "changes": [
+      {
+        "object": [
+          13,
+          0
+        ],
+        "decoded_input_sha256": "71888d47cef46ee27248475abd1601fff9c2c5159c681b3acd42a087520ed2d8",
+        "old_bytes": 478290,
+        "new_bytes": 428429,
+        "dimensions": [
+          1541,
+          1991
+        ]
+      },
+      {
+        "object": [
+          14,
+          0
+        ],
+        "decoded_input_sha256": "78772589fea63f55f96e25d79a8d3dfffe644fa7922e6374b44bf6d3b4fac1d5",
+        "old_bytes": 8763,
+        "new_bytes": 4546,
+        "dimensions": [
+          638,
+          826
+        ]
+      }
+    ],
+    "note": "all settings decode identical ACR01 residual streams; not pristine raw encoder input"
+  },
+  {
+    "group": "mixed",
+    "setting": "420-80",
+    "baseline_sha256": "ee7ca6439d586b94c009407d6b241ecde27a99608f9b68ab5665a570ad9eb84e",
+    "path": "qualification/acr04/local/420-80/mixed.pdf",
+    "bytes": 1263663,
+    "sha256": "d13fe9111ded6a88c8f8a6c0f8251795c6d935a2a0d15b3e4da2ab51e6fdcf21",
+    "seconds": 0.08211408898932859,
+    "changes": [
+      {
+        "object": [
+          13,
+          0
+        ],
+        "decoded_input_sha256": "71888d47cef46ee27248475abd1601fff9c2c5159c681b3acd42a087520ed2d8",
+        "old_bytes": 478290,
+        "new_bytes": 399538,
+        "dimensions": [
+          1541,
+          1991
+        ]
+      },
+      {
+        "object": [
+          14,
+          0
+        ],
+        "decoded_input_sha256": "78772589fea63f55f96e25d79a8d3dfffe644fa7922e6374b44bf6d3b4fac1d5",
+        "old_bytes": 8763,
+        "new_bytes": 3925,
+        "dimensions": [
+          638,
+          826
+        ]
+      }
+    ],
+    "note": "all settings decode identical ACR01 residual streams; not pristine raw encoder input"
+  },
+  {
+    "group": "mixed",
+    "setting": "420-85-200",
+    "baseline_sha256": "ee7ca6439d586b94c009407d6b241ecde27a99608f9b68ab5665a570ad9eb84e",
+    "path": "qualification/acr04/local/420-85-200/mixed.pdf",
+    "bytes": 1100185,
+    "sha256": "6afad0efc0ddd3ae5dc82beadf723821464172f7dfc19daea15ede1a01a4dc33",
+    "seconds": 0.12219795200508088,
+    "changes": [
+      {
+        "object": [
+          13,
+          0
+        ],
+        "decoded_input_sha256": "71888d47cef46ee27248475abd1601fff9c2c5159c681b3acd42a087520ed2d8",
+        "old_bytes": 478290,
+        "new_bytes": 237739,
+        "dimensions": [
+          1027,
+          1327
+        ]
+      },
+      {
+        "object": [
+          14,
+          0
+        ],
+        "decoded_input_sha256": "78772589fea63f55f96e25d79a8d3dfffe644fa7922e6374b44bf6d3b4fac1d5",
+        "old_bytes": 8763,
+        "new_bytes": 2232,
+        "dimensions": [
+          425,
+          551
+        ]
+      }
+    ],
+    "note": "all settings decode identical ACR01 residual streams; not pristine raw encoder input"
+  },
+  {
+    "group": "forms",
+    "setting": "save-only",
+    "baseline_sha256": "4529b78e522712a80e14d75d64476b24c9834d045699efdcc507e7136c489bbd",
+    "path": "qualification/acr04/local/save-only/forms.pdf",
+    "bytes": 859484,
+    "sha256": "c090d5ea057de13b1f7c222bf9c39152451a0dcde05d9458b8899d2eb27563b2",
+    "seconds": 0.04138771799625829,
+    "changes": [],
+    "note": "all settings decode identical ACR01 residual streams; not pristine raw encoder input"
+  },
+  {
+    "group": "forms",
+    "setting": "444-85",
+    "baseline_sha256": "4529b78e522712a80e14d75d64476b24c9834d045699efdcc507e7136c489bbd",
+    "path": "qualification/acr04/local/444-85/forms.pdf",
+    "bytes": 859484,
+    "sha256": "c090d5ea057de13b1f7c222bf9c39152451a0dcde05d9458b8899d2eb27563b2",
+    "seconds": 0.15432216395856813,
+    "changes": [],
+    "note": "all settings decode identical ACR01 residual streams; not pristine raw encoder input"
+  },
+  {
+    "group": "forms",
+    "setting": "420-85",
+    "baseline_sha256": "4529b78e522712a80e14d75d64476b24c9834d045699efdcc507e7136c489bbd",
+    "path": "qualification/acr04/local/420-85/forms.pdf",
+    "bytes": 859484,
+    "sha256": "c090d5ea057de13b1f7c222bf9c39152451a0dcde05d9458b8899d2eb27563b2",
+    "seconds": 0.15260497602866963,
+    "changes": [],
+    "note": "all settings decode identical ACR01 residual streams; not pristine raw encoder input"
+  },
+  {
+    "group": "forms",
+    "setting": "420-80",
+    "baseline_sha256": "4529b78e522712a80e14d75d64476b24c9834d045699efdcc507e7136c489bbd",
+    "path": "qualification/acr04/local/420-80/forms.pdf",
+    "bytes": 859484,
+    "sha256": "c090d5ea057de13b1f7c222bf9c39152451a0dcde05d9458b8899d2eb27563b2",
+    "seconds": 0.14834159496240318,
+    "changes": [],
+    "note": "all settings decode identical ACR01 residual streams; not pristine raw encoder input"
+  },
+  {
+    "group": "forms",
+    "setting": "420-85-200",
+    "baseline_sha256": "4529b78e522712a80e14d75d64476b24c9834d045699efdcc507e7136c489bbd",
+    "path": "qualification/acr04/local/420-85-200/forms.pdf",
+    "bytes": 859484,
+    "sha256": "c090d5ea057de13b1f7c222bf9c39152451a0dcde05d9458b8899d2eb27563b2",
+    "seconds": 0.21208920900244266,
+    "changes": [],
+    "note": "all settings decode identical ACR01 residual streams; not pristine raw encoder input"
+  }
+]
