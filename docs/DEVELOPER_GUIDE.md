@@ -40,12 +40,15 @@ profile.
 ClearScan retains native samples for verified full-page image inputs near the
 requested resolution. Other page graphics, crops and rotations use Poppler.
 Verified source JPEG resources remain reusable without recompression. Eligible
-unchanged whole-page tonal images may use quality-100, full-chroma JPEG when
-source-detail guards pass and the complete PDF becomes smaller; minor tonal
-differences are possible. Other native exceptions remain lossless, with grayscale
+whole-page tonal residuals, including pages with emitted vectors, may use
+quality-85, native-resolution, full-chroma JPEG when the complete PDF becomes
+smaller. Paper grain and small tonal differences are intentionally permitted in
+ClearScan; this is not a pixel-preservation guarantee. The encoder uses the
+already-cleaned residual, so source ink is not restored beneath vector glyphs. Other native exceptions remain lossless, with grayscale
 storage, exact resource reuse and measured Flate predictors. Unsupported text and
 artwork remain raster; only already-qualified paper backgrounds may use
 reduced-resolution encoding. Faithful does not use the new lossy representation.
+See [ACR-01 measurements](../ACR_01_REPORT.md) for the current quality–size trade-off.
 Sparse OCR can retry Tesseract's block layout when confidence and character-box
 evidence support it. No new OCR model is required.
 

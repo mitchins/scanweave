@@ -1,7 +1,37 @@
-//! Bounded whole-page tonal representation. Never used for native exceptions.
-//! Fixed source-feature checks supplement independently inspected real pages.
+//! ClearScan-only whole-page tonal encoding; never used for native exceptions.
+//! ACR-01 uses native-resolution JPEG85 after real-document visual qualification.
+//! Tonal/noise differences are intentional. The older Q100 path below retains
+//! its stricter sample checks; neither path alters font or Unicode ownership.
 
 pub(crate) const QUALITY: u8 = 100;
+/// ACR-01: full-resolution 4:4:4 JPEG, selected on seven real page classes.
+/// ClearScan permits tonal/noise changes; this is not a pixel-preservation claim.
+const COMPACT_QUALITY: u8 = 85;
+
+/// Compact an eligible complete tonal residual, including already-cleaned pages
+/// carrying visible vectors. Never called for individual native exceptions.
+/// The caller retains lossless/source encoding unless the complete PDF shrinks.
+/// Bitonal pages, tiny buffers and oversized inputs retain their existing path.
+pub(crate) fn encode_compact(
+    samples: &[u8],
+    width: u32,
+    height: u32,
+    colors: u8,
+) -> Result<Option<Vec<u8>>, String> {
+    if !eligible(samples, width, height, colors) {
+        return Ok(None);
+    }
+    let color = if colors == 1 {
+        image::ExtendedColorType::L8
+    } else {
+        image::ExtendedColorType::Rgb8
+    };
+    let mut jpeg = Vec::new();
+    image::codecs::jpeg::JpegEncoder::new_with_quality(&mut jpeg, COMPACT_QUALITY)
+        .encode(samples, width, height, color)
+        .map_err(|e| e.to_string())?;
+    Ok(Some(jpeg))
+}
 
 fn luminance(rgb: &[u8]) -> f64 {
     (54.0 * rgb[0] as f64 + 183.0 * rgb[1] as f64 + 19.0 * rgb[2] as f64) / 256.0
@@ -138,6 +168,42 @@ pub(crate) fn encode(
 
 #[cfg(test)]
 mod tests {
+    #[test]
+    fn compact_encoder_keeps_native_dimensions_sampling_and_thin_dark_details() {
+        let (w, h) = (512usize, 512usize);
+        let mut rgb = Vec::with_capacity(w * h * 3);
+        for y in 0..h {
+            for x in 0..w {
+                let background = ((x + y) % 128 + 128) as u8;
+                let ink = (y == 250 && (100..400).contains(&x))
+                    || ((280..283).contains(&y) && (310..313).contains(&x));
+                rgb.extend(if ink { [20; 3] } else { [background; 3] });
+            }
+        }
+        let encoded = encode_compact(&rgb, w as u32, h as u32, 3).unwrap().unwrap();
+        assert_eq!(encoded, encode_compact(&rgb, w as u32, h as u32, 3).unwrap().unwrap());
+        let decoded = image::load_from_memory(&encoded).unwrap().to_rgb8();
+        assert_eq!(decoded.dimensions(), (512, 512));
+        for x in 110..390 {
+            assert!(decoded.get_pixel(x, 250)[0] < 80, "thin rule lost at {x}");
+        }
+        assert!(decoded.get_pixel(311, 281)[0] < 80, "decimal-sized mark lost");
+        let at = encoded.windows(2).position(|w| w == [0xff, 0xc0]).unwrap();
+        let sof = &encoded[at + 2..];
+        assert_eq!(sof[7], 3);
+        for c in 0..3 {
+            assert_eq!(sof[9 + c * 3], 0x11);
+        }
+    }
+
+    #[test]
+    fn compact_encoder_rejects_invalid_bitonal_and_patch_sized_inputs() {
+        assert!(encode_compact(&[], 512, 512, 3).unwrap().is_none());
+        assert!(encode_compact(&vec![255; 512 * 512], 512, 512, 1).unwrap().is_none());
+        assert!(encode_compact(&vec![128; 32 * 32 * 3], 32, 32, 3).unwrap().is_none());
+        assert!(encode_compact(&[], u32::MAX, 1, 3).unwrap().is_none());
+    }
+
     #[test]
     fn ridge_rule_retains_strict_boundary_and_float_behavior() {
         for contrast in [

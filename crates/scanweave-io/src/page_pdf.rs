@@ -1112,11 +1112,14 @@ pub fn assemble_document_with_options(
     assemble_document_impl(pages, shapes, encodings, font_bytes, image_options, false)
 }
 
-fn unchanged_whole_page(p: &PageParts) -> bool {
-    !p.raster_baseline && p.occurrences.is_empty() && p.patches.len()==1
+// A complete cleaned residual is eligible even when fonts already replace ink.
+// Use the emitted patch samples, never restore source_rgb beneath those fonts.
+// Verified source JPEGs retain the existing passthrough path.
+fn whole_page_tonal_candidate(p: &PageParts) -> bool {
+    !p.raster_baseline && p.patches.len()==1
         && p.patches[0].w as usize==p.source_w && p.patches[0].h as usize==p.source_h
         && p.patches[0].bbox_px==[0.0,0.0,p.source_w as f64,p.source_h as f64]
-        && !p.patches[0].compact_background && p.patches[0].rgb==p.source_rgb
+        && !p.patches[0].compact_background
         && !p.encoded_source.as_ref().is_some_and(|s|s.jpeg)
 }
 
@@ -1126,8 +1129,8 @@ pub(crate) fn assemble_document_with_tonal_fallback(
     pages: &[PageParts], shapes: &[GlyphShape], encodings: &[(usize, String)],
     font_bytes: &[u8], image_options: ImageEncodingOptions,
 ) -> Result<(Vec<u8>, AssemblyStats), String> {
-    if !pages.iter().any(|p| unchanged_whole_page(p)
-        && crate::tonal_image::eligible(&p.source_rgb,p.source_w as u32,p.source_h as u32,3)) {
+    if !pages.iter().any(|p| whole_page_tonal_candidate(p)
+        && crate::tonal_image::eligible(&p.patches[0].rgb,p.source_w as u32,p.source_h as u32,3)) {
         return assemble_document_with_options(pages,shapes,encodings,font_bytes,image_options);
     }
     let start = std::time::Instant::now();
@@ -1202,10 +1205,14 @@ fn assemble_document_impl(
                 Some(i) => i,
                 None => {
                     let (mut compressed, mut jpeg, mut predictor) = compress_samples(&key)?;
-                    let tonal = if tonal_whole_pages && unchanged_whole_page(p) {
+                    let tonal = if tonal_whole_pages && whole_page_tonal_candidate(p) {
                         // This is optional representation work. Encoder failure
                         // retains the already-built lossless resource.
-                        crate::tonal_image::encode(&key.samples,key.width,key.height,key.color_space)
+                        crate::tonal_image::encode_compact(&key.samples,key.width,key.height,key.color_space)
+                            .and_then(|compact| match compact {
+                                Some(bytes) => Ok(Some(bytes)),
+                                None => crate::tonal_image::encode(&key.samples,key.width,key.height,key.color_space),
+                            })
                             .unwrap_or_else(|reason| {eprintln!("scanweave: retaining lossless whole-page image: {reason}");None})
                     } else {None};
                     let mut key = key;
@@ -1524,22 +1531,59 @@ mod image_resource_tests {
     }
 
     #[test]
-    fn whole_page_eligibility_excludes_changed_native_and_raster_baseline_content() {
+    fn compact_document_uses_cleaned_samples_and_keeps_lossless_entry_point() {
+        let mut rgb = Vec::with_capacity(512 * 512 * 3);
+        for y in 0..512 {
+            for x in 0..512 {
+                let pixel = if (200..264).contains(&x) && (200..264).contains(&y) {
+                    [250; 3]
+                } else {
+                    [(x % 256) as u8, (y % 256) as u8, ((x + y) % 256) as u8]
+                };
+                rgb.extend(pixel);
+            }
+        }
+        let native = Patch {
+            compact_background: false,
+            bbox_px: [0.0, 0.0, 512.0, 512.0],
+            rgb,
+            w: 512,
+            h: 512,
+        };
+        let mut p = page(vec![native]);
+        p.source_w = 512;
+        p.source_h = 512;
+        // Original ink must never be substituted for the cleaned patch.
+        p.source_rgb = vec![0; 512 * 512 * 3];
+        let options = ImageEncodingOptions::default();
+        let (lossless, _) = assemble_document_with_options(&[p.clone()], &[], &[], &[], options).unwrap();
+        let (compact, _) = assemble_document_with_tonal_fallback(&[p.clone()], &[], &[], &[], options).unwrap();
+        assert!(compact.len() < lossless.len());
+        let start = compact.windows(3).position(|w| w == [0xff, 0xd8, 0xff]).unwrap();
+        let decoded = image::load_from_memory_with_format(&compact[start..], image::ImageFormat::Jpeg).unwrap().to_rgb8();
+        assert_eq!(decoded.dimensions(), (512, 512));
+        assert!(decoded.get_pixel(230, 230).0.iter().all(|&v| v > 240));
+        assert_eq!(compact, assemble_document_with_tonal_fallback(&[p.clone()], &[], &[], &[], options).unwrap().0);
+        assert_eq!(lossless, assemble_document_with_options(&[p], &[], &[], &[], options).unwrap().0);
+    }
+
+    #[test]
+    fn whole_page_eligibility_allows_cleaned_vectors_but_excludes_native_exceptions() {
         let p = page(vec![patch([0.0,0.0,1.0,1.0],[255;3])]);
-        assert!(unchanged_whole_page(&p));
+        assert!(whole_page_tonal_candidate(&p));
         let mut changed=p.clone();changed.patches[0].rgb[0]=254;
-        assert!(!unchanged_whole_page(&changed));
+        assert!(whole_page_tonal_candidate(&changed));
         let mut native=p.clone();native.patches.push(p.patches[0].clone());
-        assert!(!unchanged_whole_page(&native));
+        assert!(!whole_page_tonal_candidate(&native));
         let (before,_) = assemble_document_with_options(&[native.clone()],&[],&[],&[],ImageEncodingOptions::default()).unwrap();
         let (after,_) = assemble_document_with_tonal_fallback(&[native],&[],&[],&[],ImageEncodingOptions::default()).unwrap();
         assert_eq!(before,after);
         let mut raster=p.clone();raster.raster_baseline=true;
-        assert!(!unchanged_whole_page(&raster));
+        assert!(!whole_page_tonal_candidate(&raster));
         let mut clipped=p.clone();clipped.patches[0].bbox_px[2]=0.9;
-        assert!(!unchanged_whole_page(&clipped));
+        assert!(!whole_page_tonal_candidate(&clipped));
         let mut vector=p;vector.occurrences.push((0,1,[0.,0.,1.,1.],"span".into(),"symbol".into(),"a".into()));
-        assert!(!unchanged_whole_page(&vector));
+        assert!(whole_page_tonal_candidate(&vector));
     }
 
     #[test]
@@ -1559,7 +1603,7 @@ mod image_resource_tests {
         let patch=Patch {bbox_px:[0.,0.,512.,512.],rgb:rgb.clone(),w:512,h:512,compact_background:false};
         let mut p=page(vec![patch]);p.source_w=512;p.source_h=512;p.source_rgb=rgb;p.encoded_source=Some(source);
         p.to_pt.a=72./512.;p.to_pt.d= -72./512.;
-        assert!(!unchanged_whole_page(&p));
+        assert!(!whole_page_tonal_candidate(&p));
         let (before,_) = assemble_document_with_options(&[p.clone()],&[],&[],&[],ImageEncodingOptions::default()).unwrap();
         let (after,_) = assemble_document_with_tonal_fallback(&[p],&[],&[],&[],ImageEncodingOptions::default()).unwrap();
         assert_eq!(before,after);

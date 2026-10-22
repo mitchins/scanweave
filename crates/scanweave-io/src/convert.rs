@@ -643,25 +643,37 @@ pub fn convert(input: &Input, policy: &Policy) -> Result<Output, String> {
     // document-level equivalent lives in crate::document)
     let (shapes, encodings) = (&parts.shapes, parts.encodings.clone());
     let font_bytes = build_font(shapes, &encodings, policy.upem)?;
-    let pdf_bytes = crate::page_pdf::assemble_with_options(
-        &parts.shapes,
-        &encodings,
-        &parts.occurrences,
-        &parts.span_texts,
-        parts.page_w_pt,
-        parts.page_h_pt,
-        parts.paper,
-        parts.ink,
-        font_bytes.clone(),
-        Vec::new(),
-        &[],
-        &parts.patches,
-        &parts.owners,
-        &parts.owner_cids,
-        &parts.lines,
-        &parts.to_pt,
-        policy.image_encoding,
-    )?;
+    let pdf_bytes = if policy.profile == "clearscan" && input.protected_regions.is_empty() {
+        crate::page_pdf::assemble_document_with_tonal_fallback(
+            std::slice::from_ref(&parts),
+            shapes,
+            &encodings,
+            &font_bytes,
+            policy.image_encoding,
+        )?
+        .0
+    } else {
+        crate::page_pdf::assemble_with_options(
+            &parts.shapes,
+            &encodings,
+            &parts.occurrences,
+            &parts.span_texts,
+            parts.page_w_pt,
+            parts.page_h_pt,
+            parts.paper,
+            parts.ink,
+            font_bytes.clone(),
+            Vec::new(),
+            &[],
+            &parts.patches,
+            &parts.owners,
+            &parts.owner_cids,
+            &parts.lines,
+            &parts.to_pt,
+            policy.image_encoding,
+        )?
+    };
+
     let b0 = baseline_one_page(&parts, policy)?;
 
     let candidates: Vec<(String, usize)> = vec![
@@ -2923,6 +2935,41 @@ mod contour_coverage_tests {
                 }
             }
         }
+    }
+
+    #[test]
+    fn single_page_and_document_compaction_respect_explicit_caller_protection() {
+        // Grain makes this a useful JPEG candidate even with the document
+        // writer's adaptive lossless predictors (a smooth ramp compresses
+        // better losslessly and correctly should not select JPEG there).
+        let mut rgb = Vec::with_capacity(512 * 512 * 3);
+        let mut noise = 1u32;
+        for _ in 0..512 * 512 {
+            noise = noise.wrapping_mul(1_664_525).wrapping_add(1_013_904_223);
+            rgb.extend([160 + ((noise >> 24) & 63) as u8; 3]);
+        }
+        let mut input = Input {
+            rgb, width: 512, height: 512, page_id: "tonal-caller-contract".into(),
+            spans: vec![], protected_regions: vec![],
+            raster_to_page_pt: [0.24, 0.0, 0.0, -0.24, 0.0, 122.88],
+            pixel_sha256: None,
+        };
+        let policy = Policy { profile: "clearscan".into(), ..Policy::default() };
+        let single = convert(&input, &policy).unwrap();
+        let document = crate::document::convert_document("tonal", std::slice::from_ref(&input), &policy).unwrap();
+        let has_jpeg = |pdf: &[u8]| pdf.windows(3).any(|bytes| bytes == [0xff, 0xd8, 0xff]);
+        assert!(has_jpeg(&single.pdf_bytes));
+        assert!(has_jpeg(&document.pdf_bytes));
+        input.protected_regions.push(ProtectedInput {
+            id: "caller-detail".into(), reason: "explicit native preservation".into(),
+            polygon: vec![[18.0, 18.0], [23.0, 18.0], [23.0, 23.0], [18.0, 23.0]],
+        });
+        let protected_single = convert(&input, &policy).unwrap();
+        let protected_document = crate::document::convert_document("tonal", std::slice::from_ref(&input), &policy).unwrap();
+        assert!(!has_jpeg(&protected_single.pdf_bytes));
+        assert!(!has_jpeg(&protected_document.pdf_bytes));
+        assert!(single.pdf_bytes.len() < protected_single.pdf_bytes.len());
+        assert!(document.pdf_bytes.len() < protected_document.pdf_bytes.len());
     }
 
     #[test]
