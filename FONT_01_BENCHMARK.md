@@ -17,6 +17,10 @@ character identity, scan DPI, page geometry and grayscale samples. The separate
 `oracle/` directory contains font/style/family, pristine shape, damage mask,
 transform, document/line/word identity and split labels. Training/evaluation joins
 labels explicitly; the inference API never opens `oracle/`.
+Exact authoring baseline, point size and nominal font height are oracle-only:
+inference must estimate geometry from the scan, not receive pristine metrics.
+Provided character labels/bounds are a controlled observation-extraction arm,
+not evidence of successful OCR or segmentation on real scans.
 
 ## Faces and splits
 

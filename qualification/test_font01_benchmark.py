@@ -94,6 +94,8 @@ class FontBenchmarkTests(unittest.TestCase):
             for row in public:
                 self.assertNotIn('face', row)
                 self.assertNotIn('master_id', row)
+                self.assertNotIn('baseline', row)
+                self.assertNotIn('nominal_height_px', row)
                 sample = Image.open(root/'a'/row['image'])
                 self.assertEqual(sample.tobytes(), page.crop(row['bbox']).tobytes())
                 self.assertEqual(b.digest((root/'a'/row['image']).read_bytes()), row['image_sha256'])
@@ -109,6 +111,21 @@ class FontBenchmarkTests(unittest.TestCase):
             self.assertEqual(generate.call_count, 3)
             for call in generate.call_args_list:
                 self.assertEqual(len({f['split'] for f in call.args[1]}), 1)
+
+    def test_geometry_does_not_depend_on_degradation_draw_count(self):
+        faces = b.font_manifest(b.installed_faces()[:1])
+        original = b.degrade
+        def extra_draws(pristine, severity, rng):
+            rng.random(100)
+            return original(pristine, severity, rng)
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            b.generate_document(root/'a', faces, 42, dpis=(200,))
+            with patch.object(b, 'degrade', side_effect=extra_draws):
+                b.generate_document(root/'b', faces, 42, dpis=(200,))
+            first = [json.loads(line)['transform'] for line in (root/'a/oracle/labels.jsonl').read_text().splitlines()]
+            second = [json.loads(line)['transform'] for line in (root/'b/oracle/labels.jsonl').read_text().splitlines()]
+            self.assertEqual(first, second)
 
     def test_per_face_character_damage_coverage_and_frozen_asset_gate(self):
         labels = [dict(font_sha256='a', character='e', severity=0),

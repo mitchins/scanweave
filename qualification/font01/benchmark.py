@@ -161,7 +161,8 @@ def save_observation(root, scan, pristine, damage, public, truth):
     truth['id'] = identifier
 
 
-def line_observations(root, page, faces, line, page_number, dpi, rng, assignment, severity_plan):
+def line_observations(root, page, faces, line, page_number, dpi, rng, damage_rng,
+                      assignment, severity_plan):
     """Mixed within-line context; source face is absent from public records."""
     primary, phrase_index = assignment
     text = PHRASES[phrase_index]
@@ -178,18 +179,18 @@ def line_observations(root, page, faces, line, page_number, dpi, rng, assignment
             continue
         pristine, transform = geometry(source, rng)
         severity = severity_plan[(page_number, line, index)]
-        scan, damage = degrade(pristine, severity, rng)
+        scan, damage = degrade(pristine, severity, damage_rng)
         origin = (round(x + metrics['bearing'][0]), round(baseline + metrics['bearing'][1]))
         box = (*origin, origin[0]+scan.width, origin[1]+scan.height)
         page.paste(ImageChops.darker(page.crop(box), scan), origin)
         opaque = digest(f"{face['split']}:{page_number}:{line}:{index}".encode())[:24]
         public = {'id': opaque, 'character': character, 'dpi': dpi,
-                  'page': page_number, 'bbox': [*origin, origin[0]+scan.width, origin[1]+scan.height],
-                  'baseline': baseline, 'nominal_height_px': point_size*dpi/72}
+                  'page': page_number, 'bbox': [*origin, origin[0]+scan.width, origin[1]+scan.height]}
         truth = {'font_sha256': face['sha256'], 'face': face['name'], 'family': face['family'],
                  'character': character,
                  'split': face['split'], 'document': face['split'], 'line': line,
                  'word': sum(c.isspace() for c in text[:index]), 'point_size': point_size,
+                 'baseline': baseline, 'nominal_height_px': point_size*dpi/72,
                  'severity': severity, 'transform': transform, 'metrics': metrics,
                  'master_id': digest((face['sha256'] + ':' + character).encode())}
         save_observation(root, scan, pristine, damage, public, truth)
@@ -205,6 +206,7 @@ def generate_document(root, faces, seed, dpis=DPIS):
     (root / 'images').mkdir()
     (root / 'oracle').mkdir()
     rng = np.random.default_rng(seed)
+    damage_rng = np.random.default_rng(seed + 47000)
     schedules = [page_schedule(len(faces), np.random.default_rng(seed + 17000 + i))
                  for i in range(len(dpis))]
     severity_plan = plan_damage(len(faces), schedules, seed + 31000)
@@ -212,7 +214,8 @@ def generate_document(root, faces, seed, dpis=DPIS):
     for page_number, dpi in enumerate(dpis):
         page = Image.new('L', (6*dpi, 9*dpi), 255)
         for line, assignment in enumerate(schedules[page_number]):
-            observations, labels = line_observations(root, page, faces, line, page_number, dpi, rng,
+            observations, labels = line_observations(root, page, faces, line, page_number, dpi,
+                                                    rng, damage_rng,
                                                     assignment, severity_plan)
             public.extend(observations)
             truth.extend(labels)
