@@ -40,12 +40,15 @@ profile.
 ClearScan retains native samples for verified full-page image inputs near the
 requested resolution. Other page graphics, crops and rotations use Poppler.
 Verified source JPEG resources remain reusable without recompression. Eligible
-unchanged whole-page tonal images may use quality-100, full-chroma JPEG when
-source-detail guards pass and the complete PDF becomes smaller; minor tonal
-differences are possible. Other native exceptions remain lossless, with grayscale
+whole-page tonal residuals, including pages with emitted vectors, may use
+quality-85, native-resolution, full-chroma JPEG when the complete PDF becomes
+smaller. Paper grain and small tonal differences are intentionally permitted in
+ClearScan; this is not a pixel-preservation guarantee. The encoder uses the
+already-cleaned residual, so source ink is not restored beneath vector glyphs. Separately serialized native exception resources remain lossless, with grayscale
 storage, exact resource reuse and measured Flate predictors. Unsupported text and
 artwork remain raster; only already-qualified paper backgrounds may use
 reduced-resolution encoding. Faithful does not use the new lossy representation.
+See [ACR-01 measurements](../ACR_01_REPORT.md) for the current quality–size trade-off.
 Sparse OCR can retry Tesseract's block layout when confidence and character-box
 evidence support it. No new OCR model is required.
 
@@ -60,10 +63,11 @@ M1-C is not the current feature set. The independent holdout remains sealed.
 ### Measured real-document state
 
 On the fixed 32-page development corpus, current ClearScan outputs total
-45,453,391 bytes versus a matched 59,534,496-byte pre-compaction baseline
-(23.65% smaller) and 81,969,566 input bytes. See the
-[tonal-raster report](../CLEARSCAN_TONAL_RASTER_REPORT.md) for source-detail checks,
-limitations and the earlier frozen baseline distinction.
+18,556,766 bytes versus the matched 45,453,391-byte Q100 baseline
+(59.17% smaller) and 81,969,566 input bytes. See the
+[ACR-01 report](../ACR_01_REPORT.md) for source-detail checks and limitations.
+Whole-page residuals may include folded unresolved detail and use guarded lossy
+encoding; only separately serialized native exception resources remain lossless.
 Adobe XI totals 4,178,103 bytes on the same inputs: substantial tonal-raster
 and shaded-page limitations remain. CORD annotated numeric search is 17/49;
 some pages still yield no usable OCR or vector reconstruction.

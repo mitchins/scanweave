@@ -357,7 +357,12 @@ pub fn convert_document_with_sources(
 
     // 3. the reconstruction candidate
     let stage_start = std::time::Instant::now();
-    let assemble = if policy.profile == "clearscan" {
+    // Explicit caller-native preservation is independent of ClearScan's lossy
+    // paper policy. Conservatively retain the existing document encoding when
+    // any page has caller protection; no new per-page ownership flags are needed.
+    let assemble = if policy.profile == "clearscan"
+        && inputs.iter().all(|input| input.protected_regions.is_empty())
+    {
         crate::page_pdf::assemble_document_with_tonal_fallback
     } else {crate::page_pdf::assemble_document_with_options};
     let (pdf_bytes, stats) = assemble(

@@ -1,0 +1,340 @@
+{
+  "base_product": "0ca94aecd74c35ea1b28bcebe7e11e863aae7f08",
+  "branch": "product/adobe-competitive-raster",
+  "research_reference": "ffa604ebd4ab47a6af67d2696a5c8fc15fbf3f2e",
+  "winning_family": "native-resolution JPEG85 4:4:4, eligible whole-page tonal residuals only",
+  "matrix": [
+    {
+      "id": "jpeg70",
+      "family": "JPEG",
+      "quality": 70,
+      "dpi": 300,
+      "subsampling": "4:4:4"
+    },
+    {
+      "id": "jpeg85",
+      "family": "JPEG",
+      "quality": 85,
+      "dpi": 300,
+      "subsampling": "4:4:4"
+    },
+    {
+      "id": "jpeg85-200",
+      "family": "JPEG",
+      "quality": 85,
+      "dpi": 200,
+      "subsampling": "4:4:4",
+      "resampler": "Lanczos"
+    },
+    {
+      "id": "indexed16",
+      "family": "Indexed/Flate",
+      "palette": 16,
+      "index_bits": 8,
+      "predictor": 15,
+      "dither": false
+    },
+    {
+      "id": "indexed32",
+      "family": "Indexed/Flate",
+      "palette": 32,
+      "index_bits": 8,
+      "predictor": 15,
+      "dither": false
+    },
+    {
+      "id": "layered100-75",
+      "family": "MRC probe only",
+      "mask_dpi": 300,
+      "mask_bits": 1,
+      "background_dpi": 100,
+      "foreground_colour_dpi": 75,
+      "jpeg_quality": 85,
+      "mask": "luma < Gaussian sigma12 local luma -10; source-only",
+      "colour_estimation": "Gaussian weighted foreground sigma4/background sigma8"
+    }
+  ],
+  "cases": [
+    "history-01",
+    "history-02",
+    "history-04",
+    "cord-05",
+    "annual-111",
+    "scan-linn",
+    "nara-form-01"
+  ],
+  "versions": {
+    "Pillow": "13.0.0",
+    "numpy": "2.5.4",
+    "scipy": "1.18.1",
+    "pikepdf": "10.17.0",
+    "pypdfium2": "5.14.0",
+    "fonttools": "4.67.0"
+  },
+  "local_scripts": [
+    {
+      "path": "qualification/acr01/local/check_strokes.py",
+      "sha256": "5d06d2b6b2952fc3c84ddd8e0528a8e783f6c402f7c947389f618532f7a9208f"
+    },
+    {
+      "path": "qualification/acr01/local/compare_probes.py",
+      "sha256": "265d2e173c72a48f5cfe74f9f4208e17d1b2b7d63b6553f263e502111a3c2731"
+    },
+    {
+      "path": "qualification/acr01/local/controls.py",
+      "sha256": "a4164a6de060ff39b77eb9731050418552f985b70704e135b1768a551dcecf03"
+    },
+    {
+      "path": "qualification/acr01/local/full_pages.py",
+      "sha256": "aa61519e6c0116a890be9e4bab2a58ee0340220e98e5bbce0c65ee397e5ff9a7"
+    },
+    {
+      "path": "qualification/acr01/local/index_controls.py",
+      "sha256": "0e62f0d8fc8c7c66449a22e4fa1620322225274dc512539f3b909476ff4a8b87"
+    },
+    {
+      "path": "qualification/acr01/local/local_checks.py",
+      "sha256": "e0eba13758a1734c69db59d0373746b7b0a81e64222b452d625372c8e9a63b7e"
+    },
+    {
+      "path": "qualification/acr01/local/package_results.py",
+      "sha256": "ba029b8018c999326b85bbd838ae9e94d6635f2161e7fe4f8530ceede26ad31f"
+    },
+    {
+      "path": "qualification/acr01/local/probes.py",
+      "sha256": "a8476d9a7a5c42ec64cafa2eff84f45acd0360b04b0d156a215fa5ec1dc1734f"
+    },
+    {
+      "path": "qualification/acr01/local/run_product.py",
+      "sha256": "c59ea491b99abd0c0c1d17f89dbe3e657e102d8a4bd993983a2268c1bc42126c"
+    },
+    {
+      "path": "qualification/acr01/local/verify_product.py",
+      "sha256": "ece7e7ec6e70fa030b19a241a4ed7674be0b8093f74424d0110d243180969700"
+    }
+  ],
+  "product_artifacts": [
+    {
+      "group": "financial",
+      "command": [
+        "/data/coding/scanweave/target/release/scanweave",
+        "qualification/pdf_packaging/groups/financial-input.pdf",
+        "qualification/acr01/local/product/financial.pdf"
+      ],
+      "status": 0,
+      "seconds": 446.20814645901555,
+      "binary_sha256": "2949ecfd2672a93b662fa588ed0bee5909215f9ea2405525f6cfe44f1653281c",
+      "input_sha256": "206f0f669d0196bb5e3b8da64acbffe1e53b2611377450a71b1440622291ac6f",
+      "bytes": 9018954,
+      "sha256": "3c63e63ba50ca5fb52872e35ee42e35765d73e4150711072dd1ba89ba07deea4"
+    },
+    {
+      "group": "historical",
+      "command": [
+        "/data/coding/scanweave/target/release/scanweave",
+        "qualification/pdf_packaging/groups/historical-input.pdf",
+        "qualification/acr01/local/product/historical.pdf"
+      ],
+      "status": 0,
+      "seconds": 61.668772705015726,
+      "binary_sha256": "2949ecfd2672a93b662fa588ed0bee5909215f9ea2405525f6cfe44f1653281c",
+      "input_sha256": "53276a63753bba7801c73c8d91e2e52d310a70ca16efb93c1d69f52c462fce6f",
+      "bytes": 5114421,
+      "sha256": "50fdf5b980fb804315300b7fe6eeef0d489ef6088b7011ee5acf080a95fd6407"
+    },
+    {
+      "group": "receipts",
+      "command": [
+        "/data/coding/scanweave/target/release/scanweave",
+        "qualification/pdf_packaging/groups/receipts-input.pdf",
+        "qualification/acr01/local/product/receipts.pdf"
+      ],
+      "status": 0,
+      "seconds": 28.517161422001664,
+      "binary_sha256": "2949ecfd2672a93b662fa588ed0bee5909215f9ea2405525f6cfe44f1653281c",
+      "input_sha256": "72cf20dce418051d7dd5dbb236f4e3e15bf4af5280309029913415bb704d6a5d",
+      "bytes": 2208177,
+      "sha256": "da93cf92cc239589bda256110d802fe2b74119e5386e2c1bbdca4a02221f9a42"
+    },
+    {
+      "group": "mixed",
+      "command": [
+        "/data/coding/scanweave/target/release/scanweave",
+        "qualification/pdf_packaging/groups/mixed-input.pdf",
+        "qualification/acr01/local/product/mixed.pdf"
+      ],
+      "status": 0,
+      "seconds": 99.31096230703406,
+      "binary_sha256": "2949ecfd2672a93b662fa588ed0bee5909215f9ea2405525f6cfe44f1653281c",
+      "input_sha256": "bea7a5ae2599dab57807bc256692ec36c656ff34d82af572c35fa3cd285f5e9f",
+      "bytes": 1355690,
+      "sha256": "ee7ca6439d586b94c009407d6b241ecde27a99608f9b68ab5665a570ad9eb84e"
+    },
+    {
+      "group": "forms",
+      "command": [
+        "/data/coding/scanweave/target/release/scanweave",
+        "qualification/pdf_packaging/groups/forms-input.pdf",
+        "qualification/acr01/local/product/forms.pdf"
+      ],
+      "status": 0,
+      "seconds": 39.878075880988035,
+      "binary_sha256": "2949ecfd2672a93b662fa588ed0bee5909215f9ea2405525f6cfe44f1653281c",
+      "input_sha256": "9d042396ccc23cdaf74f0e2c3abb86231afaa160aa29902f0ddf708cdabdbc28",
+      "bytes": 859524,
+      "sha256": "4529b78e522712a80e14d75d64476b24c9834d045699efdcc507e7136c489bbd"
+    }
+  ],
+  "synthetic_and_faithful": [
+    {
+      "name": "synthetic-300-new",
+      "command": [
+        "/data/coding/scanweave/target/release/scanweave",
+        "build",
+        "--bundle",
+        "qualification/experiments/m1g/fixture/dpi300/input/document.json",
+        "--profile",
+        "clearscan",
+        "--output",
+        "qualification/acr01/local/controls/synthetic-300-new.pdf",
+        "--report",
+        "qualification/acr01/local/controls/synthetic-300-new.json"
+      ],
+      "seconds": 32.911983541969676,
+      "bytes": 185119,
+      "sha256": "927cd3a82dd136b989740c4cf5a168bfe4aff6236986e90c00faebbf5de4268d"
+    },
+    {
+      "name": "synthetic-600-new",
+      "command": [
+        "/data/coding/scanweave/target/release/scanweave",
+        "build",
+        "--bundle",
+        "qualification/experiments/m1g/fixture/dpi600/input/document.json",
+        "--profile",
+        "clearscan",
+        "--output",
+        "qualification/acr01/local/controls/synthetic-600-new.pdf",
+        "--report",
+        "qualification/acr01/local/controls/synthetic-600-new.json"
+      ],
+      "seconds": 75.17747698101448,
+      "bytes": 258720,
+      "sha256": "b497c6d3646d121e19df5f7672aa68e4b8bead9a4f9cb2f2f6e91703f2b7a79d"
+    },
+    {
+      "name": "faithful-forms-old",
+      "command": [
+        "/data/coding/scanweave/qualification/acr01/local/baseline-scanweave",
+        "qualification/pdf_packaging/groups/forms-input.pdf",
+        "qualification/acr01/local/controls/faithful-forms-old.pdf",
+        "--profile",
+        "faithful"
+      ],
+      "seconds": 19.49891847401159,
+      "bytes": 855127,
+      "sha256": "5f17cd97caa7caa79f931edc63692fe2551235f4aa658072cf24482f0f78188c"
+    },
+    {
+      "name": "faithful-forms-new",
+      "command": [
+        "/data/coding/scanweave/target/release/scanweave",
+        "qualification/pdf_packaging/groups/forms-input.pdf",
+        "qualification/acr01/local/controls/faithful-forms-new.pdf",
+        "--profile",
+        "faithful"
+      ],
+      "seconds": 19.39737735199742,
+      "bytes": 855127,
+      "sha256": "5f17cd97caa7caa79f931edc63692fe2551235f4aa658072cf24482f0f78188c"
+    }
+  ],
+  "source_manifests": [
+    {
+      "path": "qualification/pdf_packaging/groups.json",
+      "sha256": "0b0954fbca9368b17afa7c966219b7789f2be918dce0f849e0928af9e0f0c9e7"
+    },
+    {
+      "path": "qualification/pdf_packaging/corpus.json",
+      "sha256": "666c1a8e3cfe4fe26507dcc8fa0536e6719ac3d1697ad42f70950d9f99f30cf1"
+    }
+  ],
+  "reproduction_source_bundle": {
+    "path": "qualification/acr01/local/reproduction-source.tar.gz",
+    "sha256": "ee921ba2f166dfb853b92945aa1e1504bb74d2629762d893a2c805fb9ea99ae4",
+    "bytes": 11085,
+    "acquisition": "Operator-provided local evidence bundle; not distributed in Git. See README."
+  },
+  "final_build_reproduction": [
+    {
+      "group": "receipts",
+      "command": [
+        "/data/coding/scanweave/target/release/scanweave",
+        "qualification/pdf_packaging/groups/receipts-input.pdf",
+        "qualification/acr01/local/product/receipts.pdf"
+      ],
+      "status": 0,
+      "seconds": 27.910942564019933,
+      "binary_sha256": "e53ef152c9256b89fabcf4fa4ceed23e247fd8826927f444e7a5345c01565417",
+      "input_sha256": "72cf20dce418051d7dd5dbb236f4e3e15bf4af5280309029913415bb704d6a5d",
+      "bytes": 2208177,
+      "sha256": "da93cf92cc239589bda256110d802fe2b74119e5386e2c1bbdca4a02221f9a42"
+    },
+    {
+      "group": "historical",
+      "command": [
+        "/data/coding/scanweave/target/release/scanweave",
+        "qualification/pdf_packaging/groups/historical-input.pdf",
+        "qualification/acr01/local/product/historical.pdf"
+      ],
+      "status": 0,
+      "seconds": 66.8467966169701,
+      "binary_sha256": "e53ef152c9256b89fabcf4fa4ceed23e247fd8826927f444e7a5345c01565417",
+      "input_sha256": "53276a63753bba7801c73c8d91e2e52d310a70ca16efb93c1d69f52c462fce6f",
+      "bytes": 5114421,
+      "sha256": "50fdf5b980fb804315300b7fe6eeef0d489ef6088b7011ee5acf080a95fd6407"
+    },
+    {
+      "group": "financial",
+      "command": [
+        "/data/coding/scanweave/target/release/scanweave",
+        "qualification/pdf_packaging/groups/financial-input.pdf",
+        "qualification/acr01/local/product/financial.pdf"
+      ],
+      "status": 0,
+      "seconds": 452.73104716604576,
+      "binary_sha256": "e53ef152c9256b89fabcf4fa4ceed23e247fd8826927f444e7a5345c01565417",
+      "input_sha256": "206f0f669d0196bb5e3b8da64acbffe1e53b2611377450a71b1440622291ac6f",
+      "bytes": 9018954,
+      "sha256": "3c63e63ba50ca5fb52872e35ee42e35765d73e4150711072dd1ba89ba07deea4"
+    },
+    {
+      "group": "mixed",
+      "command": [
+        "/data/coding/scanweave/target/release/scanweave",
+        "qualification/pdf_packaging/groups/mixed-input.pdf",
+        "qualification/acr01/local/product/mixed.pdf"
+      ],
+      "status": 0,
+      "seconds": 104.39076761697652,
+      "binary_sha256": "e53ef152c9256b89fabcf4fa4ceed23e247fd8826927f444e7a5345c01565417",
+      "input_sha256": "bea7a5ae2599dab57807bc256692ec36c656ff34d82af572c35fa3cd285f5e9f",
+      "bytes": 1355690,
+      "sha256": "ee7ca6439d586b94c009407d6b241ecde27a99608f9b68ab5665a570ad9eb84e"
+    },
+    {
+      "group": "forms",
+      "command": [
+        "/data/coding/scanweave/target/release/scanweave",
+        "qualification/pdf_packaging/groups/forms-input.pdf",
+        "qualification/acr01/local/product/forms.pdf"
+      ],
+      "status": 0,
+      "seconds": 42.08168366499012,
+      "binary_sha256": "e53ef152c9256b89fabcf4fa4ceed23e247fd8826927f444e7a5345c01565417",
+      "input_sha256": "9d042396ccc23cdaf74f0e2c3abb86231afaa160aa29902f0ddf708cdabdbc28",
+      "bytes": 859524,
+      "sha256": "4529b78e522712a80e14d75d64476b24c9834d045699efdcc507e7136c489bbd"
+    }
+  ]
+}

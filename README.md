@@ -31,4 +31,4 @@ Use `--profile faithful` for the independent preservation profile without ClearS
 
 OCR can fail, not every page vectorizes or becomes searchable, and ClearScan is not pixel-exact; real-document quality and size still vary.
 
-[Technical guide](docs/DEVELOPER_GUIDE.md) · [Measured results](CLEARSCAN_TONAL_RASTER_REPORT.md) · [MIT](LICENSE-MIT) / [Apache-2.0](LICENSE-APACHE)
+[Technical guide](docs/DEVELOPER_GUIDE.md) · [Measured results](ACR_01_REPORT.md) · [MIT](LICENSE-MIT) / [Apache-2.0](LICENSE-APACHE)
