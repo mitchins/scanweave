@@ -8,10 +8,11 @@ from anatomy import HELPERS, atlas
 from render_compare import frame, features
 
 ROOT = Path('qualification/acr02/local')
-CASES = [('history-01', 'historical', 1, 'history-indexed16.pdf'),
-         ('history-02', 'historical', 2, 'history-indexed16.pdf'),
-         ('history-04', 'historical', 4, 'history-indexed16.pdf'),
-         ('annual-111', 'financial', 10, 'financial-indexed16.pdf')]
+HISTORICAL_CANDIDATE = 'history-indexed16.pdf'
+CASES = [('history-01', 'historical', 1, HISTORICAL_CANDIDATE),
+         ('history-02', 'historical', 2, HISTORICAL_CANDIDATE),
+         ('history-04', 'historical', 4, HISTORICAL_CANDIDATE),
+         ('annual-111', 'financial', 10, 'financial-full13-indexed16.pdf')]
 
 
 def main():
@@ -41,6 +42,7 @@ def main():
                     sheet.paste(crop, (i * crop.width, 25)); draw.text((i * crop.width, 3), labels[i], fill='black')
                 sheet.save(canvas_path)
                 rows.append({'id': name, 'renderer': engine, 'region': number, 'source_box_fraction': box,
+                             'candidate_pdf': str(paths[-1]),
                              'candidate': features(crops[0], crops[-1]), 'acr01': features(crops[0], crops[2])})
     (ROOT / 'region-results.json').write_text(json.dumps(rows, indent=2) + '\n')
 

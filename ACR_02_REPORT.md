@@ -113,10 +113,13 @@ Both PDFium and Poppler show the following in fixed physical-coordinate sheets:
 
 **Causal diagnostic:** in the logo prototype, paper image **23 0** contains RGB
 (20,85,149) at source pixel(1230,270), while coverage mask **30 0** is **zero** there.
-That is the interior of the blue logo, not paper. The31px paper estimator treats
+That is the interior of the blue logo, not paper. This proves incomplete object/paper
+separation. The relative contributions of paper estimation, resampling and palette
+reduction to each ripple were not separately isolated. The31px paper estimator treats
 broad foreground colour as illumination; mismatched-resolution paper/colour and
 coverage then produce artificial structure. Foreground palette reduction adds
-colour damage. This is not repaired by changing the font or further JPEG tuning.
+colour damage. The font is unchanged; accepting scan-pixel differences does not excuse these
+demonstrated layer/colour errors.
 
 A separate inherited issue is visible: the blue logo's `S` is black already in
 ACR-01, whereas source/Adobe keep it blue. The prototypes preserve that existing
@@ -137,8 +140,10 @@ sampling phase. No page-wide MAE/SSIM threshold decides acceptance.
   was modified. Text operators survive; only non-font composition is replaced.
 - qpdf validates the four qualified mechanical comparisons. Native searchable
   content equality is not claimed to prove that every newly rendered mark is right.
-- Two new ablation tests pass: nested Form/clipping/path separation in both engines,
-  and explicit rejection of unsupported text-clipping modes. Source bytes remain
+- Five new ablation/contract tests pass: nested Form/clipping/path separation in both engines,
+  explicit rejection of unsupported text-clipping modes, and rejection of unsupported
+  recomposition page geometry/annotations/Form resources. Additional checks validate
+  paper-strip placement selection and persistence of failed verification results. Source bytes remain
   unchanged. Both-renderer ordered replay passes on all36 controlled Adobe pages.
 - All35 frozen input/comparator collection hashes were revalidated unchanged.
   The holdout remains sealed. No production or faithful code changed; established

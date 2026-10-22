@@ -39,6 +39,14 @@ adobe-acrobat-sandbox/clearscan.sh qualification/acr02/local/prototype-input.pdf
 qualification/.venv/bin/python qualification/acr02/prototypes.py qualification/acr02/local/prototype-acr01.pdf qualification/acr02/local/prototype-controlled-indexed.pdf --pages 0,1,2,3 --coverage-levels 16 --foreground indexed16
 qualification/.venv/bin/python qualification/acr02/prototypes.py qualification/acr02/local/prototype-acr01.pdf qualification/acr02/local/prototype-controlled-jpeg.pdf --pages 0,1,2,3 --coverage-levels 256
 qualification/.venv/bin/python qualification/acr02/compare_controlled.py
+```
+
+Prepare the full real-document comparisons separately before the combined verifier:
+
+```sh
+qualification/.venv/bin/python qualification/acr02/prototypes.py qualification/acr01/local/product/historical.pdf qualification/acr02/local/history-indexed16.pdf --pages 1,2,4 --coverage-levels 16 --foreground indexed16
+qualification/.venv/bin/python qualification/acr02/prototypes.py qualification/acr01/local/product/financial.pdf qualification/acr02/local/financial-full13-indexed16.pdf --pages 0,1,2,3,4,5,6,7,8,9,10,11,12 --coverage-levels 16 --foreground indexed16
+qualification/.venv/bin/python qualification/acr02/compare.py
 qualification/.venv/bin/python qualification/acr02/verify.py
 ```
 

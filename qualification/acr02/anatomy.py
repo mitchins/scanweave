@@ -21,6 +21,29 @@ sys.path.insert(0, str(HELPERS))
 from inspect_pdf import PAINT_OPS, TEXT_OPS, inspect  # noqa: E402
 
 
+def update_text_mode(op, args, rendering, stack):
+    if op == 'q':
+        stack.append(rendering)
+    elif op == 'Q':
+        rendering = stack.pop()
+    elif op == 'Tr':
+        rendering = int(args[0])
+        if rendering not in (0, 3):
+            raise ValueError('Text stroke/clip mode requires explicit handling')
+    return rendering
+
+
+def include_object(pdf, resources, name, mode, seen):
+    obj = resources.XObject[name]
+    if obj.get('/Subtype') == pikepdf.Name.Form:
+        if obj.objgen not in seen:
+            seen.add(obj.objgen)
+            obj.write(pikepdf.unparse_content_stream(rewrite(pdf, obj, obj.get('/Resources', resources), mode, seen)))
+    elif obj.get('/Subtype') == pikepdf.Name.Image:
+        return mode in ('all', 'images', 'nonfont') or mode == 'image:' + ':'.join(map(str, obj.objgen))
+    return True
+
+
 def rewrite(pdf, container, resources, mode, seen):
     result = []
     rendering = 0
@@ -32,24 +55,9 @@ def rewrite(pdf, container, resources, mode, seen):
             continue
         args, operator = item
         op = str(operator)
-        if op == 'q':
-            stack.append(rendering)
-        elif op == 'Q':
-            rendering = stack.pop()
-        elif op == 'Tr':
-            rendering = int(args[0])
-            if rendering not in (0, 3):
-                raise ValueError('Text stroke/clip mode requires explicit handling')
-        if op == 'Do':
-            obj = resources.XObject[args[0]]
-            if obj.get('/Subtype') == pikepdf.Name.Form:
-                if obj.objgen not in seen:
-                    seen.add(obj.objgen)
-                    obj.write(pikepdf.unparse_content_stream(rewrite(pdf, obj, obj.get('/Resources', resources), mode, seen)))
-            elif obj.get('/Subtype') == pikepdf.Name.Image:
-                keep = mode in ('all', 'images', 'nonfont') or mode == 'image:' + ':'.join(map(str, obj.objgen))
-                if not keep:
-                    continue
+        rendering = update_text_mode(op, args, rendering, stack)
+        if op == 'Do' and not include_object(pdf, resources, args[0], mode, seen):
+            continue
         if op in PAINT_OPS and mode not in ('all', 'paths', 'nonfont'):
             # n ends the path while retaining an already specified W/W* clip.
             result.append(pikepdf.ContentStreamInstruction([], pikepdf.Operator('n')))

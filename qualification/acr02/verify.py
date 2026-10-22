@@ -29,6 +29,12 @@ def font_hashes(path):
     return sorted(rows)
 
 
+def save_results(records, destination):
+    destination.write_text(json.dumps(records, indent=2) + '\n')
+    if not all(row['passed'] for row in records):
+        raise SystemExit('Verification failed; see verification.json')
+
+
 def main():
     pairs = [('prototype-acr01.pdf', 'prototype-controlled-jpeg.pdf'),
              ('prototype-acr01.pdf', 'prototype-controlled-indexed.pdf'),
@@ -46,9 +52,10 @@ def main():
                'poppler_text_equal': before == after, 'pdfium_text_equal': pdfium_text(source) == pdfium_text(out),
                'font_program_and_tounicode_hashes_equal': font_hashes(source) == font_hashes(out),
                'qpdf_exit': q.returncode, 'qpdf_log': q.stdout + q.stderr}
-        assert row['poppler_text_equal'] and row['pdfium_text_equal'] and row['font_program_and_tounicode_hashes_equal'] and q.returncode == 0, row
+        row['passed'] = (row['poppler_text_equal'] and row['pdfium_text_equal']
+                         and row['font_program_and_tounicode_hashes_equal'] and q.returncode == 0)
         records.append(row)
-    (ROOT / 'verification.json').write_text(json.dumps(records, indent=2) + '\n')
+    save_results(records, ROOT / 'verification.json')
     print([(r['candidate'], r['bytes_before'], r['bytes_after']) for r in records])
 
 

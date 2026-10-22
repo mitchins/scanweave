@@ -25,23 +25,31 @@ def digest(path):
     return hashlib.sha256(path.read_bytes()).hexdigest()
 
 
+def font_streams(pdf):
+    fonts = set()
+    for obj in pdf.objects:
+        if isinstance(obj, pikepdf.Dictionary):
+            for key in ('/FontFile', '/FontFile2', '/FontFile3'):
+                if key in obj:
+                    fonts.add(obj[key].objgen)
+    return fonts
+
+
 def resource_account(path):
     # Paint/clip forensics use the full inspector separately. Size accounting
     # does not need to decode thousands of unchanged historical image patches.
     with pikepdf.open(path) as pdf:
-        fonts = set()
-        for obj in pdf.objects:
-            if isinstance(obj, pikepdf.Dictionary):
-                for key in ('/FontFile', '/FontFile2', '/FontFile3'):
-                    if key in obj:
-                        fonts.add(obj[key].objgen)
-        totals = dict(image=0, font_program=0, other_stream=0)
+        fonts = font_streams(pdf)
+        totals = {'image': 0, 'font_program': 0, 'other_stream': 0}
         images = []
         for obj in pdf.objects:
             if not isinstance(obj, pikepdf.Stream):
                 continue
-            category = ('image' if obj.get('/Subtype') == pikepdf.Name.Image else
-                        'font_program' if obj.objgen in fonts else 'other_stream')
+            category = 'other_stream'
+            if obj.objgen in fonts:
+                category = 'font_program'
+            if obj.get('/Subtype') == pikepdf.Name.Image:
+                category = 'image'
             size = len(obj.read_raw_bytes())
             totals[category] += size
             if category == 'image':
@@ -76,7 +84,8 @@ def main():
              ROOT / 'independent-visual-review.md']
     baseline = json.loads(Path('qualification/acr01/local/frozen-hashes.json').read_text())
     for row in baseline:
-        assert digest(Path(row['path'])) == row['sha256'], row['path']
+        if digest(Path(row['path'])) != row['sha256']:
+            raise ValueError(f"Frozen hash mismatch: {row['path']}")
     metadata = {'base': '8f14cd329493ad0cc226e480d152d7a464fb4731',
                 'product_main': '0ca94aecd74c35ea1b28bcebe7e11e863aae7f08',
                 'research_helper_revision': 'ffa604ebd4ab47a6af67d2696a5c8fc15fbf3f2e',

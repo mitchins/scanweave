@@ -67,6 +67,19 @@ def layers(image, coverage_levels):
     return background, color, mask
 
 
+def validate_page(page):
+    """This shadow path is deliberately limited to normal ScanWeave pages."""
+    if int(page.get('/Rotate', 0)) % 360:
+        raise ValueError('Prototype does not support rotated page coordinates')
+    if list(page.get('/CropBox', page.MediaBox)) != list(page.MediaBox):
+        raise ValueError('Prototype requires CropBox equal to MediaBox')
+    if page.get('/Annots'):
+        raise ValueError('Prototype does not recompose PDF annotations')
+    objects = page.Resources.get('/XObject', {})
+    if any(obj.get('/Subtype') == pikepdf.Name.Form for obj in objects.values()):
+        raise ValueError('Prototype rejects shared/nested Form resources')
+
+
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument('source', type=Path)
@@ -79,6 +92,7 @@ def main():
     rows = []
     with pikepdf.open(args.source) as pdf:
         for index in map(int, args.pages.split(',')):
+            validate_page(pdf.pages[index])
             started = time.monotonic()
             residual_pdf = args.out.with_name(f'{args.out.stem}-p{index}-residual.pdf')
             derivative(args.source, index, 'nonfont', residual_pdf)

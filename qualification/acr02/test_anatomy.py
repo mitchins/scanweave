@@ -1,4 +1,5 @@
 """Mechanical contracts for derivative-only ablation; no external corpus required."""
+import json
 import tempfile
 import unittest
 from pathlib import Path
@@ -7,6 +8,9 @@ import numpy as np
 import pikepdf
 
 from anatomy import derivative, render
+from prototypes import validate_page
+from paper_measure import measurement_image
+from verify import save_results
 
 
 class AblationTests(unittest.TestCase):
@@ -49,6 +53,49 @@ class AblationTests(unittest.TestCase):
                 self.assertTrue((fonts == 255).all())
             self.assertEqual(original_hash, source.read_bytes())
 
+    def test_shadow_recomposition_rejects_unsupported_page_contracts(self):
+        with tempfile.TemporaryDirectory() as directory:
+            source = Path(directory) / 'source.pdf'
+            self.fixture(source)
+            with pikepdf.open(source) as pdf:
+                page = pdf.pages[0]
+                with self.assertRaisesRegex(ValueError, 'Form resources'):
+                    validate_page(page)
+                del page.Resources.XObject['/Fm']
+                validate_page(page)
+                page.Rotate = 90
+                with self.assertRaisesRegex(ValueError, 'rotated'):
+                    validate_page(page)
+                page.Rotate = 0
+                page.CropBox = pikepdf.Array([0, 0, 60, 60])
+                with self.assertRaisesRegex(ValueError, 'CropBox'):
+                    validate_page(page)
+                page.CropBox = page.MediaBox
+                page.Annots = pikepdf.Array([pikepdf.Dictionary(Type=pikepdf.Name.Annot)])
+                with self.assertRaisesRegex(ValueError, 'annotations'):
+                    validate_page(page)
+
+    def test_paper_strip_selects_covering_placement_and_rejects_missing(self):
+        inventory = {'graphics_states': {'crop': {'ctm': [1, 0, 0, 1, 0, 0], 'clips': []},
+                                        'whole': {'ctm': [360, 0, 0, 432, 0, 0], 'clips': []}},
+                     'images': {'im': {'Width': 1500, 'Height': 1800}}}
+        page = {'paint_graph': [{'kind': 'image', 'state_ref': 'crop', 'resource': 'im'},
+                                {'kind': 'image', 'state_ref': 'whole', 'resource': 'im'}]}
+        draw, _, box = measurement_image(inventory, page)
+        self.assertEqual(draw['state_ref'], 'whole')
+        self.assertEqual(box, (100, 430, 1400, 460))
+        page['paint_graph'].pop()
+        with self.assertRaisesRegex(ValueError, 'No supported image'):
+            measurement_image(inventory, page)
+
+    def test_failed_verification_is_persisted_before_nonzero_exit(self):
+        with tempfile.TemporaryDirectory() as directory:
+            output = Path(directory) / 'results.json'
+            records = [{'passed': True}, {'passed': False}]
+            with self.assertRaises(SystemExit):
+                save_results(records, output)
+            self.assertEqual(json.loads(output.read_text()), records)
+
     def test_text_clipping_is_rejected(self):
         with tempfile.TemporaryDirectory() as directory:
             source = Path(directory) / 'clip.pdf'
@@ -56,8 +103,9 @@ class AblationTests(unittest.TestCase):
             with pikepdf.open(source, allow_overwriting_input=True) as pdf:
                 pdf.pages[0].Contents = pikepdf.Stream(pdf, b'BT 7 Tr ET')
                 pdf.save(source)
+            output = source.with_name('out.pdf')
             with self.assertRaisesRegex(ValueError, 'Text stroke/clip'):
-                derivative(source, 0, 'fonts', source.with_name('out.pdf'))
+                derivative(source, 0, 'fonts', output)
 
 
 if __name__ == '__main__':

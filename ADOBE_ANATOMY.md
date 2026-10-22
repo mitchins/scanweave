@@ -60,8 +60,8 @@ Decoded first-image measurements (`local/paper-measurements.json`) show:
   strip; the input texture has independently sampled SD≈2. High-frequency grain
   is removed in the emitted result.
 - Yellow input RGB239/224/184 becomes239/225/186: colour is retained approximately.
-- The shaded mono-logo strip retains an illumination gradient (mean219.21,
-  SD17.93). Adobe does **not** universally whiten or flatten shading.
+- The shaded mono-logo strip retains an illumination gradient (mean219.29,
+  SD17.82). Adobe does **not** universally whiten or flatten shading.
 
 These are output observations. Whether smoothing precedes JPEG, follows a paper
 estimate or results partly from compression cannot be inferred from PDF structure.
