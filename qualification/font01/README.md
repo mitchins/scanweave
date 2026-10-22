@@ -64,3 +64,51 @@ provided. No model or cohort classifier is enabled in Rust or ordinary conversio
 `product_control.make_bundle` supplies only public character labels and page boxes
 to the existing converter; it is a controlled OCR-input experiment, not evidence
 of real OCR accuracy. The caller must use the verified frozen fixture.
+
+## Learned challenger and recovery controls
+
+Research training additionally requires the official CPU-only wheel lock; it is
+not installed or used by ordinary Rust conversion:
+
+```sh
+python3 -m pip install --index-url https://download.pytorch.org/whl/cpu \
+  --require-hashes --only-binary=:all: -r .github/requirements-font01-cpu.txt
+python3 -m qualification.font01.challenger qualification/font01/local/corpus-v1 \
+  qualification/font01/local/baseline-v1 qualification/font01/local/challenger-v1
+PYTHONPATH=qualification python3 -m unittest discover -s qualification -p 'test_font01_*.py'
+```
+
+The challenger requires exact frozen baseline tensor/pair/model hashes and the
+same fixture manifest, uses train/validation only for fitting/selection, and
+freezes thresholds/weights before test. Its exported state is **not qualified**
+for Rust or normal PDF conversion. Torch uses two CPU threads; no GPU, cloud,
+pretrained weights or conversion-time downloads are involved.
+
+Canonical grouping and leave-target-out recovery can be reproduced through the
+read-only evaluator API (each output directory must be new):
+
+```python
+from pathlib import Path
+import json
+from qualification.font01.analysis import canonical_clusters, recovery
+from qualification.font01.run_baseline import verify_corpus
+corpus = Path('qualification/font01/local/corpus-v1')
+verify_corpus(corpus, Path('qualification/font01/fixture-manifest.json'))
+maximum = -json.loads(Path('qualification/font01/local/baseline-v1/validation.json').read_text())['arms'][0]['threshold']
+for split in ['validation', 'test']:
+    out = Path('qualification/font01/local/groups-v1') / split
+    canonical_clusters(corpus / split, out, maximum)
+    recovery(corpus / split, out)
+```
+
+Recovery's oracle-cohort arm is evaluator-only. Its registered48×48 shape IoU is
+not PDF-placement fidelity. Complete ledgers include every group and scored
+recovery target; insufficient groups remain unmodified. The pathological
+actual-page crops include neighboring pixels: normalizing a neighbor fragment
+into a full glyph is a failure to abstain, not evidence of a repaired character.
+
+Measured negative results, exact product baseline and independent visual findings:
+[FONT_01_RESULTS.md](../../FONT_01_RESULTS.md) and
+[FONT_01_RECONSTRUCTION.md](../../FONT_01_RECONSTRUCTION.md).
+Large local evidence is under `qualification/font01/local/`; compact
+`results.json` records source/output hashes and per-arm diagnostics.
