@@ -77,7 +77,8 @@ jobs:
           qualification/.venv/bin/pip install --require-hashes --only-binary=:all: -r .github/requirements-ci.txt
       - name: CPU-only FONT-01 research test dependencies
         # Training/test tooling only; ordinary Rust conversion has no model dependency.
-        run: qualification/.venv/bin/pip install --index-url https://download.pytorch.org/whl/cpu --require-hashes --only-binary=:all: -r .github/requirements-font01-cpu.txt
+        run: |
+          qualification/.venv/bin/pip install --index-url https://download.pytorch.org/whl/cpu --require-hashes --only-binary=:all: -r .github/requirements-font01-cpu.txt
       - name: Build the OpenType sanitizer (OTS)
         # tools/ (developer-local builds) is git-ignored; build the same OTS 9.3.0
         # from source and point the harness at it via SCANWEAVE_OTS
