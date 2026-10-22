@@ -61,7 +61,11 @@ multi-page witnesses and font context.
   tonal candidate for the document. This preserves the caller's native contract
   without a new ownership system. Verified source JPEG passthrough remains intact.
 
-Native exception patches and reduced-paper machinery are unchanged. A large
+Separately serialized native exception patches and reduced-paper machinery are unchanged.
+Detail already folded into a whole-page residual can undergo JPEG85 tonal changes.
+This is intentional under ACR-01, not a claim of lossless preservation of all
+exception-origin pixels. Explicit caller-protected regions bypass compaction;
+faithful retains its existing contract. A large
 unresolved component may still yield a full-page image, but that image need not
 remain lossless RGB. Unsupported text stays visibly represented independently of
 OCR. No OCR, glyph grouping, canonical outlines, raster cleanup or Unicode logic
@@ -147,6 +151,8 @@ results; independent rendering is also checked through existing controls.
 Measured native collection runs (two conversion workers, not isolated timing):
 receipts28.52s/458,964KiB peak RSS; historical61.67s/725,740KiB;
 financial446.21s/1,424,792KiB; mixed99.31s/302,128KiB; forms39.88s/379,108KiB.
+The final published-code build reproduced all five PDF hashes exactly; its
+collection times were 27.91, 66.85, 452.73, 104.39 and 42.08 seconds respectively.
 Do not infer a controlled runtime speedup from older archived runs. Financial
 processing and document memory remain operational costs, not solved by this codec.
 

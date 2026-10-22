@@ -258,5 +258,83 @@
       "path": "qualification/pdf_packaging/corpus.json",
       "sha256": "666c1a8e3cfe4fe26507dcc8fa0536e6719ac3d1697ad42f70950d9f99f30cf1"
     }
+  ],
+  "reproduction_source_bundle": {
+    "path": "qualification/acr01/local/reproduction-source.tar.gz",
+    "sha256": "ee921ba2f166dfb853b92945aa1e1504bb74d2629762d893a2c805fb9ea99ae4",
+    "bytes": 11085,
+    "acquisition": "Operator-provided local evidence bundle; not distributed in Git. See README."
+  },
+  "final_build_reproduction": [
+    {
+      "group": "receipts",
+      "command": [
+        "/data/coding/scanweave/target/release/scanweave",
+        "qualification/pdf_packaging/groups/receipts-input.pdf",
+        "qualification/acr01/local/product/receipts.pdf"
+      ],
+      "status": 0,
+      "seconds": 27.910942564019933,
+      "binary_sha256": "e53ef152c9256b89fabcf4fa4ceed23e247fd8826927f444e7a5345c01565417",
+      "input_sha256": "72cf20dce418051d7dd5dbb236f4e3e15bf4af5280309029913415bb704d6a5d",
+      "bytes": 2208177,
+      "sha256": "da93cf92cc239589bda256110d802fe2b74119e5386e2c1bbdca4a02221f9a42"
+    },
+    {
+      "group": "historical",
+      "command": [
+        "/data/coding/scanweave/target/release/scanweave",
+        "qualification/pdf_packaging/groups/historical-input.pdf",
+        "qualification/acr01/local/product/historical.pdf"
+      ],
+      "status": 0,
+      "seconds": 66.8467966169701,
+      "binary_sha256": "e53ef152c9256b89fabcf4fa4ceed23e247fd8826927f444e7a5345c01565417",
+      "input_sha256": "53276a63753bba7801c73c8d91e2e52d310a70ca16efb93c1d69f52c462fce6f",
+      "bytes": 5114421,
+      "sha256": "50fdf5b980fb804315300b7fe6eeef0d489ef6088b7011ee5acf080a95fd6407"
+    },
+    {
+      "group": "financial",
+      "command": [
+        "/data/coding/scanweave/target/release/scanweave",
+        "qualification/pdf_packaging/groups/financial-input.pdf",
+        "qualification/acr01/local/product/financial.pdf"
+      ],
+      "status": 0,
+      "seconds": 452.73104716604576,
+      "binary_sha256": "e53ef152c9256b89fabcf4fa4ceed23e247fd8826927f444e7a5345c01565417",
+      "input_sha256": "206f0f669d0196bb5e3b8da64acbffe1e53b2611377450a71b1440622291ac6f",
+      "bytes": 9018954,
+      "sha256": "3c63e63ba50ca5fb52872e35ee42e35765d73e4150711072dd1ba89ba07deea4"
+    },
+    {
+      "group": "mixed",
+      "command": [
+        "/data/coding/scanweave/target/release/scanweave",
+        "qualification/pdf_packaging/groups/mixed-input.pdf",
+        "qualification/acr01/local/product/mixed.pdf"
+      ],
+      "status": 0,
+      "seconds": 104.39076761697652,
+      "binary_sha256": "e53ef152c9256b89fabcf4fa4ceed23e247fd8826927f444e7a5345c01565417",
+      "input_sha256": "bea7a5ae2599dab57807bc256692ec36c656ff34d82af572c35fa3cd285f5e9f",
+      "bytes": 1355690,
+      "sha256": "ee7ca6439d586b94c009407d6b241ecde27a99608f9b68ab5665a570ad9eb84e"
+    },
+    {
+      "group": "forms",
+      "command": [
+        "/data/coding/scanweave/target/release/scanweave",
+        "qualification/pdf_packaging/groups/forms-input.pdf",
+        "qualification/acr01/local/product/forms.pdf"
+      ],
+      "status": 0,
+      "seconds": 42.08168366499012,
+      "binary_sha256": "e53ef152c9256b89fabcf4fa4ceed23e247fd8826927f444e7a5345c01565417",
+      "input_sha256": "9d042396ccc23cdaf74f0e2c3abb86231afaa160aa29902f0ddf708cdabdbc28",
+      "bytes": 859524,
+      "sha256": "4529b78e522712a80e14d75d64476b24c9834d045699efdcc507e7136c489bbd"
+    }
   ]
 }

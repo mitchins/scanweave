@@ -8,7 +8,36 @@ Large data, temporary raster probes and comparison images remain under ignored
 `local/`. They are deliberately absent from the product PR. Source licences and
 attribution remain in the existing corpus documentation; no new data was acquired.
 
-The local reproducibility scripts, SHA-bound in `run-manifest.json`, are:
+## Obtain the local research sources
+
+A fresh checkout contains the product, not the licensed corpus or ignored research
+scripts. Obtain the existing frozen corpus and `reproduction-source.tar.gz` from
+the operator's evidence workspace (`qualification/acr01/local/`). The bundle's
+SHA-256 and size are recorded in `run-manifest.json`; verify them before extraction.
+This is an operator-provided local artifact, not a publicly downloadable release.
+Extract from the repository root:
+
+```sh
+tar -xzf /path/to/reproduction-source.tar.gz
+mkdir -p qualification/residual_resolution/local
+git fetch origin refs/pull/14/head
+git archive ffa604ebd4ab47a6af67d2696a5c8fc15fbf3f2e qualification/raster_competitors | tar -x -C qualification/residual_resolution/local
+```
+
+The archive contains the ACR probe/measurement scripts and the reused R1 inventory
+helper. The separate exact PR14 export supplies rendering and resource inspection.
+Neither research implementation enters the product binary. Without this local
+bundle the research matrix commands below are unavailable; ordinary product
+reproduction only needs a build and the input PDFs:
+
+```sh
+cargo build --release --locked
+for group in historical receipts financial mixed forms; do
+  target/release/scanweave "qualification/pdf_packaging/groups/$group-input.pdf" "/tmp/$group-acr01.pdf"
+done
+```
+
+With the evidence prerequisites installed, the local reproduction commands are:
 
 ```sh
 cargo build --release --locked

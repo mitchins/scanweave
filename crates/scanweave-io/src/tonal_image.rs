@@ -1,4 +1,4 @@
-//! ClearScan-only whole-page tonal encoding; never used for native exceptions.
+//! ClearScan-only whole-page tonal encoding; never used for separately serialized native exceptions.
 //! ACR-01 uses native-resolution JPEG85 after real-document visual qualification.
 //! Tonal/noise differences are intentional. The older Q100 path below retains
 //! its stricter sample checks; neither path alters font or Unicode ownership.
