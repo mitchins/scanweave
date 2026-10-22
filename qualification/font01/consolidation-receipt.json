@@ -1,0 +1,273 @@
+{
+  "final_main": "10b5d9318581717b45b018c3bf51b24525499295",
+  "prs": [
+    {
+      "headRefOid": "ffa604ebd4ab47a6af67d2696a5c8fc15fbf3f2e",
+      "mergeCommit": null,
+      "mergedAt": null,
+      "number": 14,
+      "state": "CLOSED",
+      "url": "https://github.com/mitchins/scanweave/pull/14"
+    },
+    {
+      "headRefOid": "8f14cd329493ad0cc226e480d152d7a464fb4731",
+      "mergeCommit": {
+        "oid": "7dc3b5f68e16f44be64d0236d6f0420eb72f349e"
+      },
+      "mergedAt": "2026-10-22T20:48:45Z",
+      "number": 15,
+      "state": "MERGED",
+      "url": "https://github.com/mitchins/scanweave/pull/15"
+    },
+    {
+      "headRefOid": "38cc218f8f1e50e56679fd12d5d72c1d4a44a697",
+      "mergeCommit": null,
+      "mergedAt": null,
+      "number": 16,
+      "state": "CLOSED",
+      "url": "https://github.com/mitchins/scanweave/pull/16"
+    },
+    {
+      "headRefOid": "f26d8e4a1959ab2e7139c2c5d39cea3c45ed5cd2",
+      "mergeCommit": {
+        "oid": "fc74b1a5c9c172123b7fa051928fc9acf040fde0"
+      },
+      "mergedAt": "2026-10-22T21:00:42Z",
+      "number": 17,
+      "state": "MERGED",
+      "url": "https://github.com/mitchins/scanweave/pull/17"
+    },
+    {
+      "headRefOid": "95be40dd97e6e7009741e79aef40f3eb3a68c6d6",
+      "mergeCommit": {
+        "oid": "10b5d9318581717b45b018c3bf51b24525499295"
+      },
+      "mergedAt": "2026-10-22T21:11:56Z",
+      "number": 18,
+      "state": "MERGED",
+      "url": "https://github.com/mitchins/scanweave/pull/18"
+    }
+  ],
+  "ci": "https://github.com/mitchins/scanweave/actions/runs/39855276014",
+  "sonar": "https://github.com/mitchins/scanweave/actions/runs/39855276026",
+  "server_gate": "OK",
+  "main_new_code_coverage": 95.7,
+  "open_prs_at_checkpoint": 0,
+  "reproduction": [
+    {
+      "group": "financial",
+      "main_sha": "10b5d9318581717b45b018c3bf51b24525499295",
+      "command": [
+        "/data/coding/scanweave/target/release/scanweave",
+        "qualification/pdf_packaging/groups/financial-input.pdf",
+        "qualification/acr05/local/main-reproduction/financial.pdf"
+      ],
+      "binary_sha256": "4bff3d88f5b5be493a0344cdfa4287f4a3a89e108abd80ab6d694b84a4f51284",
+      "bytes": 3187571,
+      "sha256": "32b7c13e664b32fadeea41b99d9299479f129bfac3bd20debbbf481a6f885e51",
+      "seconds": 511.5836797960219
+    },
+    {
+      "group": "historical",
+      "main_sha": "10b5d9318581717b45b018c3bf51b24525499295",
+      "command": [
+        "/data/coding/scanweave/target/release/scanweave",
+        "qualification/pdf_packaging/groups/historical-input.pdf",
+        "qualification/acr05/local/main-reproduction/historical.pdf"
+      ],
+      "binary_sha256": "4bff3d88f5b5be493a0344cdfa4287f4a3a89e108abd80ab6d694b84a4f51284",
+      "bytes": 2278050,
+      "sha256": "6ac0255df4d4470c6ca3b8892e83b3f8aa2de575c25a5925043037bece1e8d82",
+      "seconds": 69.68100870505441
+    },
+    {
+      "group": "receipts",
+      "main_sha": "10b5d9318581717b45b018c3bf51b24525499295",
+      "command": [
+        "/data/coding/scanweave/target/release/scanweave",
+        "qualification/pdf_packaging/groups/receipts-input.pdf",
+        "qualification/acr05/local/main-reproduction/receipts.pdf"
+      ],
+      "binary_sha256": "4bff3d88f5b5be493a0344cdfa4287f4a3a89e108abd80ab6d694b84a4f51284",
+      "bytes": 1288188,
+      "sha256": "f34f8dc38e91f1aa4f2b5fa06ba4d16c5ae0282c43434649a6d78d0ebd77ee6e",
+      "seconds": 28.932784544012975
+    },
+    {
+      "group": "mixed",
+      "main_sha": "10b5d9318581717b45b018c3bf51b24525499295",
+      "command": [
+        "/data/coding/scanweave/target/release/scanweave",
+        "qualification/pdf_packaging/groups/mixed-input.pdf",
+        "qualification/acr05/local/main-reproduction/mixed.pdf"
+      ],
+      "binary_sha256": "4bff3d88f5b5be493a0344cdfa4287f4a3a89e108abd80ab6d694b84a4f51284",
+      "bytes": 1130058,
+      "sha256": "ce168de72e2ae33a00ab9e6be018eb553bee00abbca3e0ef059d58e8dbc15925",
+      "seconds": 109.02734725701157
+    },
+    {
+      "group": "forms",
+      "main_sha": "10b5d9318581717b45b018c3bf51b24525499295",
+      "command": [
+        "/data/coding/scanweave/target/release/scanweave",
+        "qualification/pdf_packaging/groups/forms-input.pdf",
+        "qualification/acr05/local/main-reproduction/forms.pdf"
+      ],
+      "binary_sha256": "4bff3d88f5b5be493a0344cdfa4287f4a3a89e108abd80ab6d694b84a4f51284",
+      "bytes": 859524,
+      "sha256": "4529b78e522712a80e14d75d64476b24c9834d045699efdcc507e7136c489bbd",
+      "seconds": 49.53308034403017
+    }
+  ],
+  "controls": [
+    {
+      "name": "synthetic-300",
+      "bytes": 141085,
+      "sha256": "cd5cf6f4e26577bfdd52292a5eb90ead28258d40d9a3a220bbeac96562f3cc91",
+      "accepted_byte_identical": true
+    },
+    {
+      "name": "synthetic-600",
+      "bytes": 189052,
+      "sha256": "68bce8176bd358a749f5f56575e68a92c0c11172a62e182a5b0955a0abaf5ed9",
+      "accepted_byte_identical": true
+    },
+    {
+      "name": "faithful",
+      "bytes": 855127,
+      "sha256": "5f17cd97caa7caa79f931edc63692fe2551235f4aa658072cf24482f0f78188c",
+      "accepted_byte_identical": true
+    }
+  ],
+  "render_parity": [
+    {
+      "group": "financial",
+      "page": 1,
+      "engine": "PDFium",
+      "dpi": 150,
+      "render_sha256": "bdede150b85d74e994a43ccb0481fcf5aacd9860ec3d5077d477b23be76fb6ff",
+      "matches_accepted": true
+    },
+    {
+      "group": "financial",
+      "page": 11,
+      "engine": "PDFium",
+      "dpi": 150,
+      "render_sha256": "1a8833d6d9ac26fd51f966226dda0182567c0a58d2dba2bf26d1e936b042439c",
+      "matches_accepted": true
+    },
+    {
+      "group": "financial",
+      "page": 13,
+      "engine": "PDFium",
+      "dpi": 150,
+      "render_sha256": "fc4bc534b6a1a93a604af11a5c5d62fe7550ed1bc57903e4866be62caba8a865",
+      "matches_accepted": true
+    },
+    {
+      "group": "financial",
+      "page": 1,
+      "engine": "Poppler",
+      "dpi": 150,
+      "render_sha256": "324e8f2f45af44d928417a66b8fbed60583cd9257528d9331558ab28344f279b",
+      "matches_accepted": true
+    },
+    {
+      "group": "financial",
+      "page": 11,
+      "engine": "Poppler",
+      "dpi": 150,
+      "render_sha256": "580c34bc1320ce907b028ab5b4b0a0dae8cb0dd1b1c5934473046aa3b91f5209",
+      "matches_accepted": true
+    },
+    {
+      "group": "financial",
+      "page": 13,
+      "engine": "Poppler",
+      "dpi": 150,
+      "render_sha256": "a0f47d90f558dbe46a233196a7a2e4f700b345296b0cca1dc49d79ea26ffdb10",
+      "matches_accepted": true
+    },
+    {
+      "group": "historical",
+      "page": 2,
+      "engine": "PDFium",
+      "dpi": 150,
+      "render_sha256": "7400607f4904093289eca37d51207542b6233e75fe095e84c460b5b69c2c1746",
+      "matches_accepted": true
+    },
+    {
+      "group": "historical",
+      "page": 5,
+      "engine": "PDFium",
+      "dpi": 150,
+      "render_sha256": "b979e5565614c2a84851161c14dcc15f7cbc2ba14160678cb9c962a26a684c38",
+      "matches_accepted": true
+    },
+    {
+      "group": "historical",
+      "page": 2,
+      "engine": "Poppler",
+      "dpi": 150,
+      "render_sha256": "726918431c653de9f5eca58dccd516c53e76902e88cb41112d12f96e1f757294",
+      "matches_accepted": true
+    },
+    {
+      "group": "historical",
+      "page": 5,
+      "engine": "Poppler",
+      "dpi": 150,
+      "render_sha256": "29d3dfc4c95bc75f8a47e70a50c0b252f508054def2efea3957de51644c263bc",
+      "matches_accepted": true
+    },
+    {
+      "group": "receipts",
+      "page": 6,
+      "engine": "PDFium",
+      "dpi": 150,
+      "render_sha256": "a11455ff119b2042c2aefb853a3833fbf78b2563d3840fcdacd4e224435b31f1",
+      "matches_accepted": true
+    },
+    {
+      "group": "receipts",
+      "page": 6,
+      "engine": "Poppler",
+      "dpi": 150,
+      "render_sha256": "71236c7dfb5eee5c45bb1726db1b7fc46d29d7788a62af4c439a21fbcf3813a5",
+      "matches_accepted": true
+    },
+    {
+      "group": "mixed",
+      "page": 1,
+      "engine": "PDFium",
+      "dpi": 150,
+      "render_sha256": "615b2a60cddd056593895a2999f3e87105dee495f30da7191fb7e41a23963377",
+      "matches_accepted": true
+    },
+    {
+      "group": "mixed",
+      "page": 1,
+      "engine": "Poppler",
+      "dpi": 150,
+      "render_sha256": "b7823f9bb6c4246b18b28405c1875f87737b5313730c607c2a021aa9ca2dea20",
+      "matches_accepted": true
+    },
+    {
+      "group": "forms",
+      "page": 1,
+      "engine": "PDFium",
+      "dpi": 150,
+      "render_sha256": "02bc649dc2db958e989e4cfd26e9c350fff129a2bcbeb90f2ed3eb96cab8a89c",
+      "matches_accepted": true
+    },
+    {
+      "group": "forms",
+      "page": 1,
+      "engine": "Poppler",
+      "dpi": 150,
+      "render_sha256": "ae011dae5f3083037eea9538a681849311c320007a4b668b45f47c9b3cfcd638",
+      "matches_accepted": true
+    }
+  ]
+}

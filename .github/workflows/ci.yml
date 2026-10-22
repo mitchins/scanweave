@@ -70,7 +70,7 @@ jobs:
         # present and falls back to PATH (or SCANWEAVE_QPDF)
         run: |
           sudo apt-get update
-          sudo apt-get install -y poppler-utils qpdf
+          sudo apt-get install -y poppler-utils qpdf fonts-dejavu-core fonts-freefont-ttf fonts-urw-base35 fonts-liberation
       - name: Python deps
         run: |
           python -m venv qualification/.venv
@@ -105,6 +105,8 @@ jobs:
         run: qualification/.venv/bin/python qualification/test_high_wave1.py
       - name: Shared qualification auditor controls
         run: qualification/.venv/bin/python qualification/test_high_wave3.py
+      - name: FONT-01 deterministic benchmark contracts
+        run: qualification/.venv/bin/python qualification/test_font01_benchmark.py
       - name: Corpus source and diagnostic tag boundaries
         run: qualification/.venv/bin/python qualification/test_corpus_boundaries.py
       - name: hOCR XML entity boundary

@@ -27,7 +27,8 @@ exception; URW Base35 is AGPL-3 with document embedding exception; Liberation is
 SIL OFL1.1. Rendered document fixtures do not redistribute the font software.
 The manifest records the exact notice as well as each font hash.
 
-Training: eight DejaVu/FreeSerif faces. Validation: six C059/NimbusMono faces.
+Training: eight DejaVu/FreeSerif faces. Validation: seven C059/NimbusMono/Z003 faces,
+including the deliberately distinctive calligraphic Z003 Medium Italic.
 Unseen test: eight Liberation Serif/Sans/Mono faces. All styles of a family remain
 in one split. Test fonts, documents and pristine source identities never appear
 in training or threshold calibration. A further related-face stress arm may be
@@ -72,6 +73,18 @@ Report ROC/PR AUC, precision/recall, false merges at 50/80% same-face recall,
 calibration error for probabilities, and fixed validation-selected threshold
 results on untouched test. Report by character, DPI, severity and related-face
 negative. Fix threshold using validation only; no test-score tuning.
+
+For a merge-recommending arm, choose the lowest validation threshold giving at
+most 0.5% different-face false merges on D0/D1 pairs, and report achieved recall
+and binomial uncertainty. A model that cannot retain 50% same-face recall at that
+operating point abstains rather than becoming a product default. On unseen test
+families, require no more than 1% different-face false merges and report the
+sample count/confidence interval; this is a research shortlist, not permission to
+change PDF typography. D2–D4 are separate challenge strata, not diluted into the
+healthy aggregate. Select between qualifying arms by held-out validation recall,
+then complexity/runtime; never by test score. A CNN is justified only if the
+registered deterministic/linear arms leave a demonstrated unresolved separation
+problem. All training arms must use the same split/master boundaries.
 
 Report canonical-template clustering separately from face-cohort discovery:
 ARI, purity, completeness, cohort counts, over/under-splitting, contamination,
