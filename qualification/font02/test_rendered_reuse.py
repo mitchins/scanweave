@@ -19,12 +19,14 @@ from qualification.font02.rendered_reuse import (
 
 class RenderedReuseTests(unittest.TestCase):
     def test_identical_coverage_is_safe(self):
+        """Identical native-coordinate samples must have zero measured degradation."""
         image = np.eye(7)
         metrics = coverage_metrics(image, image)
         self.assertEqual(metrics, {"mse": 0.0, "iou": 1.0, "area": 0.0})
         self.assertEqual(renderer_outcome(metrics, metrics), {"safe": True, "material": False})
 
     def test_dot_to_sliver_is_not_preserved(self):
+        """Reject shape distortion even when total foreground area remains unchanged."""
         source = np.zeros((12, 12))
         source[4:8, 4:8] = 1
         sliver = np.zeros_like(source)
@@ -35,10 +37,12 @@ class RenderedReuseTests(unittest.TestCase):
         self.assertTrue(result["material"])
 
     def test_mismatched_geometry_rejected(self):
+        """Refuse accidental comparison of differently shaped evaluation regions."""
         with self.assertRaises(ValueError):
             coverage_metrics(np.zeros((2, 3)), np.zeros((3, 2)))
 
     def test_both_renderers_required(self):
+        """A single good renderer cannot conceal a second-renderer regression."""
         record = {"renderer": "pdfium", "source_gate": True, "safe": True, "material": False}
         with self.assertRaises(ValueError):
             summarize_pair("a", "b", [record])
@@ -48,6 +52,7 @@ class RenderedReuseTests(unittest.TestCase):
         self.assertTrue(result["material"])
 
     def test_frozen_source_artifacts_cannot_change(self):
+        """Detect modified source decisions before consulting pristine references."""
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)
             frozen = {}
@@ -65,10 +70,12 @@ class RenderedReuseTests(unittest.TestCase):
 
 
     def test_nonfinite_coverage_rejected(self):
+        """Nonfinite arrays must not silently produce an ambiguous outcome."""
         with self.assertRaises(ValueError):
             coverage_metrics(np.ones((1, 1)), np.array([[np.nan]]))
 
     def test_complete_frozen_evaluation(self):
+        """Exercise a frozen two-renderer split and reject invalid oracle geometry."""
         from PIL import Image
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)

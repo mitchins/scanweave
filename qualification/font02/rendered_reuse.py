@@ -41,6 +41,7 @@ def renderer_outcome(baseline: dict, candidate: dict) -> dict:
 
 
 def verify_freeze(root: Path, split: str) -> dict:
+    """Reject source-decision or rendered-array changes before opening oracle data."""
     frozen = json.loads((root / f"{split}-pre-oracle-freeze.json").read_text())
     names = {
         "source-decisions.json": "decision_sha256",
@@ -69,6 +70,7 @@ def pristine_region(corpus: Path, identifier: str, row: dict, bounds: list) -> n
 
 
 def score_record(record: dict, rows: dict, maps, corpus: Path) -> dict:
+    """Score one renderer at the original target frame without fitting to the oracle."""
     target, donor, engine = record["target"], record["donor"], record["renderer"]
     pristine = pristine_region(corpus, target, rows[target], record["bounds"])
     baseline = coverage_metrics(pristine, maps[f"{engine}-{target}-baseline"])
@@ -83,6 +85,7 @@ def score_record(record: dict, rows: dict, maps, corpus: Path) -> dict:
 
 
 def summarize_pair(target: str, donor: str, records: list) -> dict:
+    """Require both renderers and retain every substitution outcome independently."""
     if sorted(r["renderer"] for r in records) != ["pdfium", "poppler"]:
         raise ValueError("Each substitution requires one result from each renderer")
     return {
@@ -96,6 +99,7 @@ def summarize_pair(target: str, donor: str, records: list) -> dict:
 
 
 def evaluate(root: Path, corpus: Path, split: str) -> dict:
+    """Evaluate one frozen family-disjoint split without using font identity labels."""
     frozen = verify_freeze(root, split)
     decisions = json.loads((root / f"{split}-source-decisions.json").read_text())
     rows = {
@@ -123,6 +127,7 @@ def evaluate(root: Path, corpus: Path, split: str) -> dict:
 
 
 def main() -> None:
+    """Write the read-only evaluation to the explicit operator-selected destination."""
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--artifacts", type=Path, required=True)
     parser.add_argument("--corpus", type=Path, required=True)
