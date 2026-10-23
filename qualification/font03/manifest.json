@@ -1,0 +1,480 @@
+{
+  "base": "c10e3dff93ca12ac410c0f6626a4ef74ce34e0c1",
+  "branch": "research/font03-consensus",
+  "product_activated": false,
+  "scope": "Source-only fitting; pristine files evaluator-only, no production dependency. Test families previously inspected development.",
+  "versions": {
+    "python": "3.12.3 (main, Aug 31 2026, 10:18:26) [GCC 13.3.0]",
+    "packages": {
+      "numpy": "2.5.4",
+      "scipy": "1.18.1",
+      "Pillow": "13.0.0",
+      "fonttools": "4.67.0",
+      "pikepdf": "10.17.0",
+      "pypdfium2": "5.14.0"
+    },
+    "rust": [
+      "rustc 1.99.0 (b940084d7 2026-09-28)"
+    ],
+    "poppler": [
+      "pdftoppm version 24.02.0",
+      "Copyright 2005-2024 The Poppler Developers - http://poppler.freedesktop.org"
+    ],
+    "qpdf": [
+      "qpdf version 12.4.2",
+      "Run qpdf --copyright to see copyright and license information."
+    ],
+    "ots": [
+      "ots 9.3.0"
+    ]
+  },
+  "files": {
+    "qualification/font01/local/corpus-font01-v1/test/observations.jsonl": {
+      "bytes": 430924,
+      "sha256": "d9e54b5c9f946e331250805ce5ee8327c4d000d986822ba46071c1798457e3b8"
+    },
+    "qualification/font01/local/corpus-font01-v1/test/oracle/labels.jsonl": {
+      "bytes": 1227914,
+      "sha256": "0516231730ad54c368974d32d4efeae652017b7b129767e4ce640ed0d35b8c6b"
+    },
+    "qualification/font01/local/corpus-font01-v1/train/observations.jsonl": {
+      "bytes": 430871,
+      "sha256": "f578f26255f5b15452af43515cb0afa80ff28a8210ac4bb46965dd75d50facec"
+    },
+    "qualification/font01/local/corpus-font01-v1/train/oracle/labels.jsonl": {
+      "bytes": 1211279,
+      "sha256": "94b315e4cedfac1b11ea3ffbaa1b88328bb1bb1acaa613568daa2921db05b970"
+    },
+    "qualification/font01/local/corpus-font01-v1/validation/observations.jsonl": {
+      "bytes": 376921,
+      "sha256": "4edfc3d319883cc5ed0c4b602300ba08077398b1e8021b454bfd78f7ce6ff689"
+    },
+    "qualification/font01/local/corpus-font01-v1/validation/oracle/labels.jsonl": {
+      "bytes": 1069796,
+      "sha256": "3b3d2761d1a41afca96ee24d07fe71569c0f45af0ccd4ed916b10f7bf5a4b107"
+    },
+    "qualification/font02/local/financial-required.pdf": {
+      "bytes": 2849237,
+      "sha256": "74c31136d00a18dbf05fba2d7fba59c85cc201a57ae65d77999a025a692fab0f"
+    },
+    "qualification/font03/local/affine-refinement/structural-calibration.json": {
+      "bytes": 10946,
+      "sha256": "97d6a16aba3a7fefb75b728ebde7afb5605c5b16ca2ffe61ba6b6b3f65853a35"
+    },
+    "qualification/font03/local/affine-refinement/test-ABCD.pdf": {
+      "bytes": 371220,
+      "sha256": "2a2b14bd21493672c6abb66e0cc8652cc29fc697d3ffa3d1d837be4a0dcb73cb"
+    },
+    "qualification/font03/local/affine-refinement/test-bindings.json": {
+      "bytes": 145507,
+      "sha256": "992bf10401b6e248a631325f748d7c50a0716f342a3d73b86a1ec58c329f0ddc"
+    },
+    "qualification/font03/local/affine-refinement/test-canvases.npy": {
+      "bytes": 17629312,
+      "sha256": "395da4098db075f8f8b558ead1afe41df955c68ace04c7f03a3ad1c216b1ead6"
+    },
+    "qualification/font03/local/affine-refinement/test-consensus-plan.json": {
+      "bytes": 89814,
+      "sha256": "efb53e4b37e6c76d5c0f0993296bcff1ed4dd9af6274ea38cd28cc56d9826d02"
+    },
+    "qualification/font03/local/affine-refinement/test-evaluate.log": {
+      "bytes": 1055,
+      "sha256": "d783596f7ddc2c0d392fea0bf38c0f032a1d7c39d5fb21c1397247b3981b7f8e"
+    },
+    "qualification/font03/local/affine-refinement/test-evaluated.json": {
+      "bytes": 645404,
+      "sha256": "3f15d2142540949ae831bd82c9d4bdb1f44015fd4f85cc8e0ff535bb44c26741"
+    },
+    "qualification/font03/local/affine-refinement/test-evaluation-labels.json": {
+      "bytes": 495092,
+      "sha256": "abcd7ae23fd7a7b7e97156267399b38172315d788bfc63004502809bb4330684"
+    },
+    "qualification/font03/local/affine-refinement/test-final-decisions.json": {
+      "bytes": 49086,
+      "sha256": "a6b5298642bb554fa96f3a1613008b9fc12597891f073290ee6592703eafb038"
+    },
+    "qualification/font03/local/affine-refinement/test-measure.log": {
+      "bytes": 50,
+      "sha256": "ca18ec7bc72e0d2e7e3f2ea886a36481fd5c858c55d122394f22eb32a2dbcbca"
+    },
+    "qualification/font03/local/affine-refinement/test-native-coverages.npz": {
+      "bytes": 989683,
+      "sha256": "0541b8ff88cf42db6b531831b9d025edae07305570c7e7fa2b5a73810ff056fd"
+    },
+    "qualification/font03/local/affine-refinement/test-render-plan.json": {
+      "bytes": 233599,
+      "sha256": "84d573f74cdb4e917ad478f3167db1f6c8f08b8b1dcbf0f13896f95b70f06857"
+    },
+    "qualification/font03/local/affine-refinement/test-source-freeze.json": {
+      "bytes": 356,
+      "sha256": "d1e3887f64de1e9d784a6e66f6588d9f6ef8b9a279193cb32ccdaf1b3b53ba7c"
+    },
+    "qualification/font03/local/affine-refinement/test-source-rendered.json": {
+      "bytes": 335783,
+      "sha256": "8524b7c2da3637e06ae074d6aa1c87a92ddc3ba6f39f89d7c2a9b8099dbd5897"
+    },
+    "qualification/font03/local/affine-refinement/test-sources.json": {
+      "bytes": 9144013,
+      "sha256": "dfe2d750e9f0a4ff9ac57b6b770ff54e7e8e353645f04cb0e5d0fc15580999e8"
+    },
+    "qualification/font03/local/affine-refinement/test-trace-input.json": {
+      "bytes": 3656024,
+      "sha256": "cfcf66c0338e58c29e892dcc0a16d02ae3c50a3a3caaf24f91301af2649a29ec"
+    },
+    "qualification/font03/local/affine-refinement/test-trace.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "qualification/font03/local/affine-refinement/training-noise-calibration.json": {
+      "bytes": 308,
+      "sha256": "1522f10fc62a3508c56f08fa06f1917d49d59c47147e44818cadc60dc1b0b372"
+    },
+    "qualification/font03/local/affine-refinement/validation-ABCD.pdf": {
+      "bytes": 342452,
+      "sha256": "50d5f54392523d8af882625857216150fbbd364f37d2a29ee3b30fba12f7d261"
+    },
+    "qualification/font03/local/affine-refinement/validation-bindings.json": {
+      "bytes": 127256,
+      "sha256": "a3ec50f9fb19794c656b04ec0668e8dabf8583ead0eca016426957c130d96ee6"
+    },
+    "qualification/font03/local/affine-refinement/validation-canvases.npy": {
+      "bytes": 15270016,
+      "sha256": "e08da7d7b38f326c27c0c9c709b8affe6dd998d4550821bc8168d4556b807e14"
+    },
+    "qualification/font03/local/affine-refinement/validation-consensus-plan.json": {
+      "bytes": 54419,
+      "sha256": "405458648ef232131d5fd1e06fb1a1384b35fd9ca74bcaf8619c82865d840129"
+    },
+    "qualification/font03/local/affine-refinement/validation-evaluate.log": {
+      "bytes": 1056,
+      "sha256": "f0dfa58a38382016981a98dac4dab6cac3cb65146bbfee250270ab4002a409e5"
+    },
+    "qualification/font03/local/affine-refinement/validation-evaluated.json": {
+      "bytes": 376842,
+      "sha256": "dce2a4e6ec3599e2c2f0d4d59e42c0ef87b681ce64d432751b17edf9a402acf5"
+    },
+    "qualification/font03/local/affine-refinement/validation-evaluation-labels.json": {
+      "bytes": 431974,
+      "sha256": "cb6dcbb05504473ba661d6d8465e03415c54ccfcdb8689fe357337b436df0616"
+    },
+    "qualification/font03/local/affine-refinement/validation-final-decisions.json": {
+      "bytes": 28876,
+      "sha256": "abd3d310d5bdb118b04c7e42d66c39b0f31f6ff951d0eda75c17f4a0e73c5c81"
+    },
+    "qualification/font03/local/affine-refinement/validation-measure.log": {
+      "bytes": 63,
+      "sha256": "918192846804c877d20ca38cad3487b9f61e572a34c5f770d91f0e5a1f8c7706"
+    },
+    "qualification/font03/local/affine-refinement/validation-native-coverages.npz": {
+      "bytes": 537193,
+      "sha256": "d89070c15cd929bfa2895cd4bfd403f71b88a4c60eac0792600dfabbc9454944"
+    },
+    "qualification/font03/local/affine-refinement/validation-render-plan.json": {
+      "bytes": 139175,
+      "sha256": "a38009a603e424af6751faec8c84250d9936b98da21ef21e76b089e32fe9b48f"
+    },
+    "qualification/font03/local/affine-refinement/validation-source-freeze.json": {
+      "bytes": 356,
+      "sha256": "2df8eefc8fe2f9772277c8502f5521ae29ec371a955870ddcff692dc16c7e686"
+    },
+    "qualification/font03/local/affine-refinement/validation-source-rendered.json": {
+      "bytes": 195361,
+      "sha256": "7ae49a6f57d4f0db4285388007973ad4e5ac18062573ee4b9d9a2eff8ffa884e"
+    },
+    "qualification/font03/local/affine-refinement/validation-sources.json": {
+      "bytes": 7337232,
+      "sha256": "96c3f64e0becd71a61a1eda5689a8cebb3faadb68e3a178df615a1a6533a879d"
+    },
+    "qualification/font03/local/affine-refinement/validation-trace-input.json": {
+      "bytes": 2384653,
+      "sha256": "09d60ebf690578631299786aaaf108d7ab0020622824acb1410e864bb1489ddc"
+    },
+    "qualification/font03/local/affine-refinement/validation-trace.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "qualification/font03/local/construction-inventory.json": {
+      "bytes": 1270,
+      "sha256": "997d28d55f4a62360f1466da211b667281b0d1d7905ce5bd7acecba9f277ddc1"
+    },
+    "qualification/font03/local/construction-verification.json": {
+      "bytes": 8156,
+      "sha256": "77e69fbeff90b2e573fdd0b306df7498df0964e401cb8b30a95e94834cf50ff2"
+    },
+    "qualification/font03/local/final-review/blind-key.json": {
+      "bytes": 8969,
+      "sha256": "27f742aa85fe8dd36ccc34a606f76c69359c4bc2d487789d1f1b8cf7409942fc"
+    },
+    "qualification/font03/local/financial-preunion.pdf": {
+      "bytes": 2849982,
+      "sha256": "ba0eefad8fda388838e05fe6e06aba23324557e182a2b976b5c42dd557c87e81"
+    },
+    "qualification/font03/local/financial-preunion.pdf.json": {
+      "bytes": 154986455,
+      "sha256": "27cc6a3eb2bcefead34143462fc48a96aae3e69e648bc361365e1f137b5f4da2"
+    },
+    "qualification/font03/local/repair/test-evaluated.json": {
+      "bytes": 1235,
+      "sha256": "80b77fa23055be8ef106218825f52c71728e66cfdbea74d0a59ff80d99f6ebe8"
+    },
+    "qualification/font03/local/repair/test-provenance.json": {
+      "bytes": 8192,
+      "sha256": "469237b17dfb51902bc5bc7bff88b047de7935092a48d779dec948bfd32d4bb7"
+    },
+    "qualification/font03/local/repair/test-source-decisions.json": {
+      "bytes": 8355,
+      "sha256": "0a3a5166848e4a057cce90a960527e6f0dc8a35b6474bb10230cdca0fd1e97f6"
+    },
+    "qualification/font03/local/repair/validation-evaluated.json": {
+      "bytes": 508,
+      "sha256": "f62fd17776c8510ca5d01c840f106017958e0b8b58ac1c79dd19257461fc99ae"
+    },
+    "qualification/font03/local/repair/validation-provenance.json": {
+      "bytes": 5830,
+      "sha256": "250f2f6d7bae604dd851e77df47ce21f0870f6a66a296857ddfe72f891807526"
+    },
+    "qualification/font03/local/repair/validation-source-decisions.json": {
+      "bytes": 7480,
+      "sha256": "fa181e5a0a40011cac541c0ce8b27fecc6d7025a3371972a64566f74e855c854"
+    },
+    "qualification/font03/local/scanweave-main": {
+      "bytes": 14259160,
+      "sha256": "43a61c3eb68c2d719680f79decf9ff4b0537484a970c21ca8fcb7f2f199e1483"
+    },
+    "qualification/font03/local/scanweave-preunion": {
+      "bytes": 14925624,
+      "sha256": "c513d3989f6a294d72f61e28840b20095036514b56e9a9ac088237092a8f5082"
+    },
+    "qualification/font03/local/test-ABCD.pdf": {
+      "bytes": 395317,
+      "sha256": "ad039d7f46cddf2697b90625f5414ae7c6e644c167fcb586c4d7029bcf95fd41"
+    },
+    "qualification/font03/local/test-bindings.json": {
+      "bytes": 145507,
+      "sha256": "992bf10401b6e248a631325f748d7c50a0716f342a3d73b86a1ec58c329f0ddc"
+    },
+    "qualification/font03/local/test-canvases.npy": {
+      "bytes": 17629312,
+      "sha256": "395da4098db075f8f8b558ead1afe41df955c68ace04c7f03a3ad1c216b1ead6"
+    },
+    "qualification/font03/local/test-consensus-plan.json": {
+      "bytes": 92900,
+      "sha256": "fca335cd7cfe419fbc032138acfa4d108f25b6338897d98a1b4bd1662edff797"
+    },
+    "qualification/font03/local/test-evaluate.log": {
+      "bytes": 1051,
+      "sha256": "10415bee66736de6028bf71bf97e9d150958b802422fd74e31ecb552f030e63c"
+    },
+    "qualification/font03/local/test-evaluated.json": {
+      "bytes": 793654,
+      "sha256": "f717ff18a5507aabc2707ddb595d3a00b6ac29448fc6ec50dd005903930d1022"
+    },
+    "qualification/font03/local/test-evaluation-labels.json": {
+      "bytes": 495092,
+      "sha256": "abcd7ae23fd7a7b7e97156267399b38172315d788bfc63004502809bb4330684"
+    },
+    "qualification/font03/local/test-frozen.json": {
+      "bytes": 18425,
+      "sha256": "9833910e5273d571d725f6822551b729c457dcf77e36ac100bf8386fbc0c2aef"
+    },
+    "qualification/font03/local/test-groups.json": {
+      "bytes": 41350,
+      "sha256": "4906d5a78fcf5fe7e6230453cb680a440da51b2b72a0cbdf6c3992a90181884b"
+    },
+    "qualification/font03/local/test-measure.log": {
+      "bytes": 51,
+      "sha256": "9f15a07422009c598d6a99000fd2189858626a4b6ad46964871ce7a7235a449e"
+    },
+    "qualification/font03/local/test-native-coverages.npz": {
+      "bytes": 1135521,
+      "sha256": "d9d21988e705ecb20b0404d83ebe18d271b182fc3ef1d45a872a99761a5529e4"
+    },
+    "qualification/font03/local/test-render-plan.json": {
+      "bytes": 255744,
+      "sha256": "fbdfbe6b11d057570d5b7585fc68754c30a1f183a59462560fb92f3ccb14b140"
+    },
+    "qualification/font03/local/test-source-freeze.json": {
+      "bytes": 356,
+      "sha256": "a8049318e99d0df03ac89ffc9c7a76e198f55552fe77e570217f91f198ae65e7"
+    },
+    "qualification/font03/local/test-source-rendered.json": {
+      "bytes": 415419,
+      "sha256": "cee1740ebe41dc60b9d808be3c55c125736bb15724da1c1600a36957dfc8dc2a"
+    },
+    "qualification/font03/local/test-sources.json": {
+      "bytes": 9144013,
+      "sha256": "dfe2d750e9f0a4ff9ac57b6b770ff54e7e8e353645f04cb0e5d0fc15580999e8"
+    },
+    "qualification/font03/local/test-summary.json": {
+      "bytes": 196,
+      "sha256": "a3fe02f0f1e0d0f62a0e8c4cfe16a82273a83a82baf5058d39844beb46817c5a"
+    },
+    "qualification/font03/local/test-templates.npy": {
+      "bytes": 983168,
+      "sha256": "140006f38c2fa3123aa4e2e1e2d66cfba87b25790d53b7146de94745dcf9c2c3"
+    },
+    "qualification/font03/local/test-trace-input.json": {
+      "bytes": 7595208,
+      "sha256": "62b1bc60c39b6297821062f476c1a350246ce1edd9eb7668814f3161ceddf266"
+    },
+    "qualification/font03/local/test-trace.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "qualification/font03/local/town-affine/field-decisions.json": {
+      "bytes": 14069,
+      "sha256": "fb29cdf46a381bb2069739ad71b29b4a9e94c34903c37fd61b02edaa1e7f02a1"
+    },
+    "qualification/font03/local/town-affine/native-decisions.json": {
+      "bytes": 3502,
+      "sha256": "5a12c44212eb998cb591a3ad97b079cecd4d0498bd29e2052805f02c9f9d74c4"
+    },
+    "qualification/font03/local/town-affine/preunion-plan.json": {
+      "bytes": 203609,
+      "sha256": "530cbc45a29c6140b5c3147f8b4f63fd35eb0c9ad9c9ca3d455e499bd9235557"
+    },
+    "qualification/font03/local/town-affine/template-outlines.json": {
+      "bytes": 20658,
+      "sha256": "6edf418d7d54db2a9632de12d1762fdc8dd0dc9fa0f59056425297e5c9976f45"
+    },
+    "qualification/font03/local/town-affine/town-groups.json": {
+      "bytes": 5133,
+      "sha256": "e2fa54be53a7e3de443b0f031de909f31f3b2f1cb53d1256ca6ef2dea50632a0"
+    },
+    "qualification/font03/local/town-affine/town-placement.json": {
+      "bytes": 12208,
+      "sha256": "6579105b0eb280ea664cb193e999f3d1af83f14d25910a16a0f89fb37ba3e47f"
+    },
+    "qualification/font03/local/town-affine/town-render-results.json": {
+      "bytes": 147916,
+      "sha256": "4f7ed373374f49db42513b84267aba6365554d1c58be13781228c2ee51e8401f"
+    },
+    "qualification/font03/local/town-affine/town-trace-input.json": {
+      "bytes": 104155,
+      "sha256": "3dbd0a92cfb92c6f6ff919b22fb1d82a7fb632f02dbc3cffc2df99cf9e522e80"
+    },
+    "qualification/font03/local/train-0-owned.json": {
+      "bytes": 5819771,
+      "sha256": "00f420c17fe1881d5cd4ab1ba42ac978f20f5304c30f0facce05c135efbcc4f7"
+    },
+    "qualification/font03/local/train-1-owned.json": {
+      "bytes": 6289696,
+      "sha256": "9fb151c2840ac952e6f1fc142b3106e754937cc2a9624755f9a532f5dc656eb0"
+    },
+    "qualification/font03/local/train-2-owned.json": {
+      "bytes": 8692178,
+      "sha256": "5a220c8db090c1dcd360a31e585c7fc1ce953fde4e3bbdd4e78bea7b57662c6b"
+    },
+    "qualification/font03/local/train-canvases.npy": {
+      "bytes": 17891456,
+      "sha256": "113252514093b20cbb14bfc8231cdce2641c38e6ff6ee7a50331e6ae5213b777"
+    },
+    "qualification/font03/local/train-evaluation-labels.json": {
+      "bytes": 490125,
+      "sha256": "1a9c1b5114b35069ad78fb2438ab61b9242cfb14d920a3b80a162b1978ee1894"
+    },
+    "qualification/font03/local/train-frozen.json": {
+      "bytes": 18426,
+      "sha256": "d3b305b77d8efb3bcccb27b85b33459a030320897e4e090723b3a5ac9937fdc8"
+    },
+    "qualification/font03/local/train-groups.json": {
+      "bytes": 42206,
+      "sha256": "89adaa126bd4d66e3e41cf4e2048d8938984af7f5aacf81c8a7ee0151305da5e"
+    },
+    "qualification/font03/local/train-sources.json": {
+      "bytes": 10337697,
+      "sha256": "1092490fab6b733f345596956ee9ce7e3ec0369fdc098dc6b90492a60b2dff38"
+    },
+    "qualification/font03/local/train-templates.npy": {
+      "bytes": 1114240,
+      "sha256": "e214da8d0776c5d77512a128863025f7088115cac8601c86ed5ce61920e083e6"
+    },
+    "qualification/font03/local/validation-ABCD.pdf": {
+      "bytes": 360625,
+      "sha256": "872fe228e91e1ca4a6cfad994c28ce248b1c881f5366ce14f4e45be0c8896d98"
+    },
+    "qualification/font03/local/validation-bindings.json": {
+      "bytes": 127256,
+      "sha256": "a3ec50f9fb19794c656b04ec0668e8dabf8583ead0eca016426957c130d96ee6"
+    },
+    "qualification/font03/local/validation-canvases.npy": {
+      "bytes": 15270016,
+      "sha256": "e08da7d7b38f326c27c0c9c709b8affe6dd998d4550821bc8168d4556b807e14"
+    },
+    "qualification/font03/local/validation-consensus-plan.json": {
+      "bytes": 54729,
+      "sha256": "9b8ad2d864db1634c1f6c67d0b1b0c773fa98b5ac636825a2481b36c9c7f073e"
+    },
+    "qualification/font03/local/validation-evaluate.log": {
+      "bytes": 1052,
+      "sha256": "1ce00d773ce69cf009fb5bb8295ec8e8b63ad15c096ba379bc68e0018a5d20ba"
+    },
+    "qualification/font03/local/validation-evaluated.json": {
+      "bytes": 470892,
+      "sha256": "f5bed234c8a0b61e8fa46f854b0e196f4f587359f286a6058695403be87e78aa"
+    },
+    "qualification/font03/local/validation-evaluation-labels.json": {
+      "bytes": 431974,
+      "sha256": "cb6dcbb05504473ba661d6d8465e03415c54ccfcdb8689fe357337b436df0616"
+    },
+    "qualification/font03/local/validation-frozen.json": {
+      "bytes": 16223,
+      "sha256": "7a50d28b17bfef9ad275a8583d1fe335158d87be086475d226b982ae430f34e0"
+    },
+    "qualification/font03/local/validation-groups.json": {
+      "bytes": 28329,
+      "sha256": "fa4c62c155da6313884099a8414e28670d9f7095c2da7cdd793d133f012b41f9"
+    },
+    "qualification/font03/local/validation-measure.log": {
+      "bytes": 63,
+      "sha256": "1280a4dc45240d5e9ebc2716cf1e6b151229a66c3e1009e6afeaa717a5d3bc00"
+    },
+    "qualification/font03/local/validation-native-coverages.npz": {
+      "bytes": 670697,
+      "sha256": "855776765410b9f02388bf06b5263e5d49802da553e5066c9b74bffd20ee0d6f"
+    },
+    "qualification/font03/local/validation-render-plan.json": {
+      "bytes": 152290,
+      "sha256": "4afdf563af006c76cec443472ad11862c1bfc0d7e4be516d4ad15abba24a89fe"
+    },
+    "qualification/font03/local/validation-source-freeze.json": {
+      "bytes": 356,
+      "sha256": "8a1e61a238aff6a02f9ece4fc799ab2701f4df9042122dff968464ceea244e5e"
+    },
+    "qualification/font03/local/validation-source-rendered.json": {
+      "bytes": 245470,
+      "sha256": "b162ff1879922dc1424a9dfe264db7b48377ae2cbf6cb0452eb469bfdb634007"
+    },
+    "qualification/font03/local/validation-sources.json": {
+      "bytes": 7337232,
+      "sha256": "96c3f64e0becd71a61a1eda5689a8cebb3faadb68e3a178df615a1a6533a879d"
+    },
+    "qualification/font03/local/validation-templates.npy": {
+      "bytes": 655488,
+      "sha256": "8d698ea496e3358d17ab6432d1f3890dd149b9c1200e8ad9b2c07941add2e06f"
+    },
+    "qualification/font03/local/validation-trace-input.json": {
+      "bytes": 4843007,
+      "sha256": "16099f1c51cb6e88071ea136102a9816839027b85187c5bad7c398d7a5549b7a"
+    },
+    "qualification/font03/local/validation-trace.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "qualification/pdf_packaging/groups/financial-input.pdf": {
+      "bytes": 12861431,
+      "sha256": "206f0f669d0196bb5e3b8da64acbffe1e53b2611377450a71b1440622291ac6f"
+    },
+    "target/release/font03_templates": {
+      "bytes": 2202808,
+      "sha256": "233f69b59f0dc2fbb324610f9af7ed6bc286e19568c705f99e2ed6450c8622d5"
+    }
+  },
+  "performance": {
+    "baseline_seconds": 496.86,
+    "baseline_peak_kib": 1466412,
+    "construction_seconds": 469.9,
+    "construction_peak_kib": 1489120,
+    "note": "Unpaired, concurrent qualification. No performance improvement claimed."
+  }
+}

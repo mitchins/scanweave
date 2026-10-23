@@ -1,0 +1,52 @@
+diff --git a/crates/scanweave-io/src/document.rs b/crates/scanweave-io/src/document.rs
+index a9a0963..0139e4f 100644
+--- a/crates/scanweave-io/src/document.rs
++++ b/crates/scanweave-io/src/document.rs
+@@ -421,6 +421,7 @@ pub fn convert_document_with_sources(
+     }
+     stage_timings.page_conversion_ms = stage_start.elapsed().as_millis();
+ 
++    if policy.profile == "clearscan" { font03_construction_control(&mut pages)?; }
+     // 2. document-wide font: union of (shape, label), remapped per page
+     let stage_start = std::time::Instant::now();
+     let (mut shapes, mut encodings, remaps) = union_encodings(&pages);
+@@ -832,3 +833,39 @@ mod tonal_protection_tests {
+         assert!(!allows_tonal_images(&[page], &Policy::default()));
+     }
+ }
++
++// FONT-03 construction-only intervention. Not a deployable canonicalizer.
++fn font03_construction_control(pages: &mut [DocumentPage]) -> Result<(), String> {
++    use sha2::{Digest, Sha256};
++    let plan: serde_json::Value = serde_json::from_str(include_str!("font03_plan.json")).map_err(|e| e.to_string())?;
++    for page in pages {
++        let p = &mut page.parts;
++        if p.source_w != plan["width"].as_u64().unwrap() as usize
++            || p.source_h != plan["height"].as_u64().unwrap() as usize
++            || format!("{:x}", Sha256::digest(&p.source_rgb)) != plan["rgb_sha256"].as_str().unwrap() { continue; }
++        let mut mappings = Vec::new();
++        for item in plan["templates"].as_array().unwrap() {
++            let side = item["size"].as_u64().unwrap() as usize;
++            let cov: Vec<f64> = item["coverage"].as_array().unwrap().iter().map(|v|v.as_f64().unwrap()).collect();
++            let ink: Vec<usize> = cov.iter().enumerate().filter_map(|(i,v)|(*v>0.5).then_some(i)).collect();
++            let x0=ink.iter().map(|i|i%side).min().unwrap();let y0=ink.iter().map(|i|i/side).min().unwrap();
++            let x1=ink.iter().map(|i|i%side).max().unwrap()+1;let y1=ink.iter().map(|i|i/side).max().unwrap()+1;
++            let(w,h)=(x1-x0,y1-y0);let coverage:Vec<f64>=(y0..y1).flat_map(|y|(x0..x1).map(move|x|(x,y))).map(|(x,y)|cov[y*side+x]).collect();
++            let key=item["key"].as_str().unwrap().to_owned();
++            let unit=crate::units::Unit{shape_key:key.clone(),span_id:key.clone(),symbol_id:key.clone(),semantic_text:"e".into(),bbox_px:[0.,0.,w as f64,h as f64],ocr_bbox_px:[0.,0.,w as f64,h as f64],crop_w:w,crop_h:h,mask:coverage.iter().map(|v|*v>0.5).collect(),gray_samples:Some(coverage.iter().map(|v|((1.-v.clamp(0.,1.))*255.).round()as u8).collect()),gray_halo:None};
++            let mut traced=crate::trace::trace_shape_clearscan(&unit,&crate::trace::Budget::from_m0_policy(),16.,None)?;
++            traced.preserve_crop_frame=true;
++            let shape=crate::glyphs::build_glyph_shapes(&[traced],16.,&crate::trace::Budget::from_m0_policy())?.remove(0);
++            let si=p.shapes.len();p.shapes.push(shape);let cid=p.encodings.len() as u32;p.encodings.push((si,"e".into()));mappings.push((si,cid));
++        }
++        let mut replaced=0;
++        for row in plan["occurrences"].as_array().unwrap() {
++            let id=row["symbol_id"].as_str().unwrap();
++            let occurrence=p.occurrences.iter_mut().find(|o|o.4==id&&o.5=="e").ok_or_else(||format!("FONT03 missing occurrence {id}"))?;
++            let (si,cid)=mappings[row["group"].as_u64().unwrap()as usize];
++            occurrence.0=si;occurrence.1=cid;occurrence.2=std::array::from_fn(|i|row["bbox"][i].as_f64().unwrap());replaced+=1;
++        }
++        eprintln!("FONT03 preunion construction intervention: {replaced} occurrences");
++    }
++    Ok(())
++}
