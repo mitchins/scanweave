@@ -1,0 +1,1908 @@
+{
+  "schema": "font04-native-frontier-v1",
+  "selected": {
+    "grouping": "star",
+    "error_scale": 1.0,
+    "remapped": 124,
+    "added": 29,
+    "retired_visible_candidates": 36,
+    "net_visible_candidates": -7,
+    "designs": 148,
+    "mean_source_error": 0.020916730080554682,
+    "material_defects": null,
+    "pristine_error": null
+  },
+  "points": [
+    {
+      "grouping": "star",
+      "error_scale": 0.5,
+      "remapped": 6,
+      "added": 3,
+      "retired_visible_candidates": 0,
+      "net_visible_candidates": 3,
+      "designs": 158,
+      "mean_source_error": 0.01163862065092069,
+      "material_defects": null,
+      "pristine_error": null,
+      "native_source": {
+        "pdfium": {
+          "error": {
+            "mean": 0.06931331848348075,
+            "p95": 0.14707609911496078
+          },
+          "iou": {
+            "mean": 0.8009379639846629,
+            "p95": 0.9103607035881855
+          },
+          "contour_distance": {
+            "mean": 0.2706498937324631,
+            "p95": 0.5191054659089349
+          },
+          "rigid_contour_distance": {
+            "mean": 0.2866063098857281,
+            "p95": 0.6150718915198834
+          },
+          "area_bias": {
+            "mean": 0.021321153744743953,
+            "p95": 0.17152044622344248
+          }
+        },
+        "poppler": {
+          "error": {
+            "mean": 0.1550672379410897,
+            "p95": 0.21545171787841177
+          },
+          "iou": {
+            "mean": 0.6560773142747146,
+            "p95": 0.7269882441327425
+          },
+          "contour_distance": {
+            "mean": 0.491702446690252,
+            "p95": 0.6777003991821547
+          },
+          "rigid_contour_distance": {
+            "mean": 0.4755093182665908,
+            "p95": 0.638080705984106
+          },
+          "area_bias": {
+            "mean": -0.04797922874591959,
+            "p95": 0.1327283622337364
+          }
+        },
+        "analytic": {
+          "error": {
+            "mean": 0.06457796701704745,
+            "p95": 0.12601212328995975
+          },
+          "iou": {
+            "mean": 0.7759482898783711,
+            "p95": 0.848028789769818
+          },
+          "contour_distance": {
+            "mean": 0.2714317997350185,
+            "p95": 0.4807034140906201
+          },
+          "rigid_contour_distance": {
+            "mean": 0.30528807957176823,
+            "p95": 0.6285319840892083
+          },
+          "area_bias": {
+            "mean": 0.011741724829898381,
+            "p95": 0.14812963610617724
+          }
+        }
+      },
+      "program_accounting": {
+        "added": 3,
+        "retired": 0,
+        "net": 3,
+        "verified_scope": "All old e programs have only visible same-label users; selected point independently checked against compiled complete PDF programs."
+      },
+      "pristine_status": "P3 has no pristine reference; P1 causal pristine metrics are reported separately.",
+      "material_status": "Independent blinded review pending; do not infer zero defects.",
+      "measurement_pdf": "qualification/font04/local/prime-frontier/star-0.5.pdf",
+      "measurement_pdf_sha256": "18a7c39aa31b81fe2fb6661d119f1581f04857e1afe913e2601d13b8c4bb2079"
+    },
+    {
+      "grouping": "star",
+      "error_scale": 0.75,
+      "remapped": 50,
+      "added": 15,
+      "retired_visible_candidates": 15,
+      "net_visible_candidates": 0,
+      "designs": 155,
+      "mean_source_error": 0.017269236999432003,
+      "material_defects": null,
+      "pristine_error": null,
+      "native_source": {
+        "pdfium": {
+          "error": {
+            "mean": 0.06412279429959353,
+            "p95": 0.14707609911496078
+          },
+          "iou": {
+            "mean": 0.809782069229278,
+            "p95": 0.9101259936468983
+          },
+          "contour_distance": {
+            "mean": 0.25686048608717005,
+            "p95": 0.5232536782798789
+          },
+          "rigid_contour_distance": {
+            "mean": 0.2733926170622036,
+            "p95": 0.613136975231179
+          },
+          "area_bias": {
+            "mean": 0.020665986170807844,
+            "p95": 0.14927329575558776
+          }
+        },
+        "poppler": {
+          "error": {
+            "mean": 0.14912139536309463,
+            "p95": 0.21044586750421218
+          },
+          "iou": {
+            "mean": 0.6627110386965139,
+            "p95": 0.7396944248472024
+          },
+          "contour_distance": {
+            "mean": 0.4811031232298789,
+            "p95": 0.670081057269266
+          },
+          "rigid_contour_distance": {
+            "mean": 0.4685386982665988,
+            "p95": 0.638080705984106
+          },
+          "area_bias": {
+            "mean": -0.04860162063265346,
+            "p95": 0.1295166368158588
+          }
+        },
+        "analytic": {
+          "error": {
+            "mean": 0.060408386631076914,
+            "p95": 0.11749138915583032
+          },
+          "iou": {
+            "mean": 0.782621801294852,
+            "p95": 0.8533904448933097
+          },
+          "contour_distance": {
+            "mean": 0.25625759511465324,
+            "p95": 0.47218276096923295
+          },
+          "rigid_contour_distance": {
+            "mean": 0.29363330472109733,
+            "p95": 0.6253176430508105
+          },
+          "area_bias": {
+            "mean": 0.011128100496015684,
+            "p95": 0.1427898375470794
+          }
+        }
+      },
+      "program_accounting": {
+        "added": 15,
+        "retired": 15,
+        "net": 0,
+        "verified_scope": "All old e programs have only visible same-label users; selected point independently checked against compiled complete PDF programs."
+      },
+      "pristine_status": "P3 has no pristine reference; P1 causal pristine metrics are reported separately.",
+      "material_status": "Independent blinded review pending; do not infer zero defects.",
+      "measurement_pdf": "qualification/font04/local/prime-frontier/star-0.75.pdf",
+      "measurement_pdf_sha256": "705d7b6c463a4efff6fc4f75658fa1543a09f33edd6792dda3854f4558547317"
+    },
+    {
+      "grouping": "star",
+      "error_scale": 1.0,
+      "remapped": 124,
+      "added": 29,
+      "retired_visible_candidates": 36,
+      "net_visible_candidates": -7,
+      "designs": 148,
+      "mean_source_error": 0.020916730080554682,
+      "material_defects": null,
+      "pristine_error": null,
+      "native_source": {
+        "pdfium": {
+          "error": {
+            "mean": 0.05979303861666521,
+            "p95": 0.13105859457261326
+          },
+          "iou": {
+            "mean": 0.8164489597992651,
+            "p95": 0.9092143274584634
+          },
+          "contour_distance": {
+            "mean": 0.24613365986152602,
+            "p95": 0.4986950496117863
+          },
+          "rigid_contour_distance": {
+            "mean": 0.2682250669116448,
+            "p95": 0.602568583843762
+          },
+          "area_bias": {
+            "mean": 0.02003357844851154,
+            "p95": 0.12438237875354796
+          }
+        },
+        "poppler": {
+          "error": {
+            "mean": 0.1410086884119962,
+            "p95": 0.2044224236109414
+          },
+          "iou": {
+            "mean": 0.6706669705597859,
+            "p95": 0.7464924767571246
+          },
+          "contour_distance": {
+            "mean": 0.46697532551550924,
+            "p95": 0.6430668189213598
+          },
+          "rigid_contour_distance": {
+            "mean": 0.4565307820285812,
+            "p95": 0.6283422859131733
+          },
+          "area_bias": {
+            "mean": -0.049201412345551844,
+            "p95": 0.12756330600801402
+          }
+        },
+        "analytic": {
+          "error": {
+            "mean": 0.05614815690227513,
+            "p95": 0.10571844040323747
+          },
+          "iou": {
+            "mean": 0.7891189302332714,
+            "p95": 0.8533904448933097
+          },
+          "contour_distance": {
+            "mean": 0.24313789953036258,
+            "p95": 0.45575959063459065
+          },
+          "rigid_contour_distance": {
+            "mean": 0.2832354163443132,
+            "p95": 0.6253176430508105
+          },
+          "area_bias": {
+            "mean": 0.010571433271890973,
+            "p95": 0.12356621541866136
+          }
+        }
+      },
+      "program_accounting": {
+        "added": 29,
+        "retired": 36,
+        "net": -7,
+        "verified_scope": "All old e programs have only visible same-label users; selected point independently checked against compiled complete PDF programs."
+      },
+      "pristine_status": "P3 has no pristine reference; P1 causal pristine metrics are reported separately.",
+      "material_status": "Independent blinded review pending; do not infer zero defects.",
+      "measurement_pdf": "qualification/font04/local/prime-frontier/star-1.0.pdf",
+      "measurement_pdf_sha256": "a1137c328a3f0644566661853b918835a81bdd674902afb64100f05ac86aa312"
+    },
+    {
+      "grouping": "star",
+      "error_scale": 1.25,
+      "remapped": 154,
+      "added": 23,
+      "retired_visible_candidates": 55,
+      "net_visible_candidates": -32,
+      "designs": 123,
+      "mean_source_error": 0.02762469793570597,
+      "material_defects": null,
+      "pristine_error": null,
+      "native_source": {
+        "pdfium": {
+          "error": {
+            "mean": 0.05929279788341773,
+            "p95": 0.13105859457261326
+          },
+          "iou": {
+            "mean": 0.8153003238610955,
+            "p95": 0.9087035681485789
+          },
+          "contour_distance": {
+            "mean": 0.248033780794011,
+            "p95": 0.4917045680889969
+          },
+          "rigid_contour_distance": {
+            "mean": 0.2740299482563124,
+            "p95": 0.6310215552644506
+          },
+          "area_bias": {
+            "mean": 0.01613821575476272,
+            "p95": 0.11471715268222453
+          }
+        },
+        "poppler": {
+          "error": {
+            "mean": 0.14044252949146693,
+            "p95": 0.19911687421305937
+          },
+          "iou": {
+            "mean": 0.6710007328289092,
+            "p95": 0.744903299699171
+          },
+          "contour_distance": {
+            "mean": 0.46335206097192777,
+            "p95": 0.6296740757785504
+          },
+          "rigid_contour_distance": {
+            "mean": 0.46140869205331914,
+            "p95": 0.6630504027558806
+          },
+          "area_bias": {
+            "mean": -0.05260499149072574,
+            "p95": 0.12552870288964274
+          }
+        },
+        "analytic": {
+          "error": {
+            "mean": 0.05587615486431203,
+            "p95": 0.10694461114013708
+          },
+          "iou": {
+            "mean": 0.7881796826608681,
+            "p95": 0.8453916073802197
+          },
+          "contour_distance": {
+            "mean": 0.24529837451347025,
+            "p95": 0.43345368125910255
+          },
+          "rigid_contour_distance": {
+            "mean": 0.29683427353917885,
+            "p95": 0.6265832694218236
+          },
+          "area_bias": {
+            "mean": 0.0067145098688400915,
+            "p95": 0.1055934628379718
+          }
+        }
+      },
+      "program_accounting": {
+        "added": 23,
+        "retired": 55,
+        "net": -32,
+        "verified_scope": "All old e programs have only visible same-label users; selected point independently checked against compiled complete PDF programs."
+      },
+      "pristine_status": "P3 has no pristine reference; P1 causal pristine metrics are reported separately.",
+      "material_status": "Independent blinded review pending; do not infer zero defects.",
+      "measurement_pdf": "qualification/font04/local/prime-frontier/star-1.25.pdf",
+      "measurement_pdf_sha256": "159282267a293e93bb1fc7dbfcdfb62b378b72c7b4a75b1decd08a70e291ab52"
+    },
+    {
+      "grouping": "star",
+      "error_scale": 1.5,
+      "remapped": 154,
+      "added": 21,
+      "retired_visible_candidates": 54,
+      "net_visible_candidates": -33,
+      "designs": 122,
+      "mean_source_error": 0.03062628770724931,
+      "material_defects": null,
+      "pristine_error": null,
+      "native_source": {
+        "pdfium": {
+          "error": {
+            "mean": 0.06142593179491629,
+            "p95": 0.13105859457261326
+          },
+          "iou": {
+            "mean": 0.8113163287924544,
+            "p95": 0.9099037352790672
+          },
+          "contour_distance": {
+            "mean": 0.25316680760409593,
+            "p95": 0.49691146733691854
+          },
+          "rigid_contour_distance": {
+            "mean": 0.2881691537158847,
+            "p95": 0.6068198701614945
+          },
+          "area_bias": {
+            "mean": 0.015258260423292204,
+            "p95": 0.12198872620358661
+          }
+        },
+        "poppler": {
+          "error": {
+            "mean": 0.14092867280945048,
+            "p95": 0.19816840891850024
+          },
+          "iou": {
+            "mean": 0.6710170280994951,
+            "p95": 0.74353357133129
+          },
+          "contour_distance": {
+            "mean": 0.4693516138690782,
+            "p95": 0.6355847354655038
+          },
+          "rigid_contour_distance": {
+            "mean": 0.4684609204470169,
+            "p95": 0.7182208711562799
+          },
+          "area_bias": {
+            "mean": -0.05347446868526362,
+            "p95": 0.1299831357062395
+          }
+        },
+        "analytic": {
+          "error": {
+            "mean": 0.058360114141910856,
+            "p95": 0.10576153298273483
+          },
+          "iou": {
+            "mean": 0.7841535636982522,
+            "p95": 0.8497687498031817
+          },
+          "contour_distance": {
+            "mean": 0.2530220817786105,
+            "p95": 0.413924935445958
+          },
+          "rigid_contour_distance": {
+            "mean": 0.3008983039978695,
+            "p95": 0.6395291244070695
+          },
+          "area_bias": {
+            "mean": 0.005893523256640515,
+            "p95": 0.1181110530187858
+          }
+        }
+      },
+      "program_accounting": {
+        "added": 21,
+        "retired": 54,
+        "net": -33,
+        "verified_scope": "All old e programs have only visible same-label users; selected point independently checked against compiled complete PDF programs."
+      },
+      "pristine_status": "P3 has no pristine reference; P1 causal pristine metrics are reported separately.",
+      "material_status": "Independent blinded review pending; do not infer zero defects.",
+      "measurement_pdf": "qualification/font04/local/prime-frontier/star-1.5.pdf",
+      "measurement_pdf_sha256": "28e5eb0c8ab961f61fd85fdf639191c600a2c40c6fce7f8d296392bb0e050aef"
+    },
+    {
+      "grouping": "star",
+      "error_scale": 2.0,
+      "remapped": 179,
+      "added": 16,
+      "retired_visible_candidates": 68,
+      "net_visible_candidates": -52,
+      "designs": 103,
+      "mean_source_error": 0.03350661542576637,
+      "material_defects": null,
+      "pristine_error": null,
+      "native_source": {
+        "pdfium": {
+          "error": {
+            "mean": 0.0641723418139549,
+            "p95": 0.12969781279892195
+          },
+          "iou": {
+            "mean": 0.806332682290179,
+            "p95": 0.9084431921852862
+          },
+          "contour_distance": {
+            "mean": 0.2649289100236147,
+            "p95": 0.4917045680889969
+          },
+          "rigid_contour_distance": {
+            "mean": 0.30771147227065904,
+            "p95": 0.6638291642415186
+          },
+          "area_bias": {
+            "mean": 0.0248265040040969,
+            "p95": 0.13810892653660567
+          }
+        },
+        "poppler": {
+          "error": {
+            "mean": 0.14109807433643934,
+            "p95": 0.205698041884151
+          },
+          "iou": {
+            "mean": 0.670256160843482,
+            "p95": 0.7476734744061477
+          },
+          "contour_distance": {
+            "mean": 0.4723619141483833,
+            "p95": 0.6296740757785504
+          },
+          "rigid_contour_distance": {
+            "mean": 0.4709472707784776,
+            "p95": 0.6880631233626215
+          },
+          "area_bias": {
+            "mean": -0.04445832587796631,
+            "p95": 0.13290072403795072
+          }
+        },
+        "analytic": {
+          "error": {
+            "mean": 0.06077768198574102,
+            "p95": 0.10576153298273483
+          },
+          "iou": {
+            "mean": 0.780248092878955,
+            "p95": 0.8429388862611045
+          },
+          "contour_distance": {
+            "mean": 0.26313940699944866,
+            "p95": 0.4479821084530981
+          },
+          "rigid_contour_distance": {
+            "mean": 0.3209848722490161,
+            "p95": 0.6779108133591802
+          },
+          "area_bias": {
+            "mean": 0.015473244696590215,
+            "p95": 0.1397434171665978
+          }
+        }
+      },
+      "program_accounting": {
+        "added": 16,
+        "retired": 68,
+        "net": -52,
+        "verified_scope": "All old e programs have only visible same-label users; selected point independently checked against compiled complete PDF programs."
+      },
+      "pristine_status": "P3 has no pristine reference; P1 causal pristine metrics are reported separately.",
+      "material_status": "Independent blinded review pending; do not infer zero defects.",
+      "measurement_pdf": "qualification/font04/local/prime-frontier/star-2.0.pdf",
+      "measurement_pdf_sha256": "5e5cd2e516314cddd38512f829044e8d85ec8bfd785be11657b3074a21bc3cf7"
+    },
+    {
+      "grouping": "star",
+      "error_scale": 3.0,
+      "remapped": 193,
+      "added": 16,
+      "retired_visible_candidates": 72,
+      "net_visible_candidates": -56,
+      "designs": 99,
+      "mean_source_error": 0.03513720257919324,
+      "material_defects": null,
+      "pristine_error": null,
+      "native_source": {
+        "pdfium": {
+          "error": {
+            "mean": 0.06574274997886605,
+            "p95": 0.12969781279892195
+          },
+          "iou": {
+            "mean": 0.8034093096150545,
+            "p95": 0.9025446708156448
+          },
+          "contour_distance": {
+            "mean": 0.26839448961368556,
+            "p95": 0.48180096024733976
+          },
+          "rigid_contour_distance": {
+            "mean": 0.3116724242740964,
+            "p95": 0.6551754644699177
+          },
+          "area_bias": {
+            "mean": 0.024345459962451053,
+            "p95": 0.1448311149683571
+          }
+        },
+        "poppler": {
+          "error": {
+            "mean": 0.1419360013883212,
+            "p95": 0.20906320683544102
+          },
+          "iou": {
+            "mean": 0.6701884817647116,
+            "p95": 0.7622723450112086
+          },
+          "contour_distance": {
+            "mean": 0.4675012578437858,
+            "p95": 0.6262792810506753
+          },
+          "rigid_contour_distance": {
+            "mean": 0.45585425922443357,
+            "p95": 0.6730398736700373
+          },
+          "area_bias": {
+            "mean": -0.04482400920886603,
+            "p95": 0.13823797998547394
+          }
+        },
+        "analytic": {
+          "error": {
+            "mean": 0.06077987043558214,
+            "p95": 0.10332237681107068
+          },
+          "iou": {
+            "mean": 0.7799922642307755,
+            "p95": 0.8433584623066641
+          },
+          "contour_distance": {
+            "mean": 0.26241397988221693,
+            "p95": 0.413924935445958
+          },
+          "rigid_contour_distance": {
+            "mean": 0.3238054736363583,
+            "p95": 0.6674789798332166
+          },
+          "area_bias": {
+            "mean": 0.014961338668610392,
+            "p95": 0.14378920071663653
+          }
+        }
+      },
+      "program_accounting": {
+        "added": 16,
+        "retired": 72,
+        "net": -56,
+        "verified_scope": "All old e programs have only visible same-label users; selected point independently checked against compiled complete PDF programs."
+      },
+      "pristine_status": "P3 has no pristine reference; P1 causal pristine metrics are reported separately.",
+      "material_status": "Independent blinded review pending; do not infer zero defects.",
+      "measurement_pdf": "qualification/font04/local/prime-frontier/star-3.0.pdf",
+      "measurement_pdf_sha256": "ffb062aed02f9b615bfdacc66bbb8080349c9979c52117ebc6f19b413b7052d9"
+    },
+    {
+      "grouping": "complete",
+      "error_scale": 0.5,
+      "remapped": 2,
+      "added": 1,
+      "retired_visible_candidates": 0,
+      "net_visible_candidates": 1,
+      "designs": 156,
+      "mean_source_error": 0.012064487095435804,
+      "material_defects": null,
+      "pristine_error": null,
+      "native_source": {
+        "pdfium": {
+          "error": {
+            "mean": 0.069646257032522,
+            "p95": 0.14707609911496078
+          },
+          "iou": {
+            "mean": 0.8002415116952598,
+            "p95": 0.9103607035881855
+          },
+          "contour_distance": {
+            "mean": 0.27201969331751313,
+            "p95": 0.5191054659089349
+          },
+          "rigid_contour_distance": {
+            "mean": 0.2879761094707782,
+            "p95": 0.6150718915198834
+          },
+          "area_bias": {
+            "mean": 0.02091383862006473,
+            "p95": 0.17152044622344248
+          }
+        },
+        "poppler": {
+          "error": {
+            "mean": 0.1556985757594791,
+            "p95": 0.21402458715114264
+          },
+          "iou": {
+            "mean": 0.6553719560204995,
+            "p95": 0.7248985799938499
+          },
+          "contour_distance": {
+            "mean": 0.49304989511865377,
+            "p95": 0.6778200905721822
+          },
+          "rigid_contour_distance": {
+            "mean": 0.4769999390767641,
+            "p95": 0.6490664433215189
+          },
+          "area_bias": {
+            "mean": -0.04833270134942358,
+            "p95": 0.1327283622337364
+          }
+        },
+        "analytic": {
+          "error": {
+            "mean": 0.06500298953663222,
+            "p95": 0.12601212328995975
+          },
+          "iou": {
+            "mean": 0.7751638731156878,
+            "p95": 0.846410381455011
+          },
+          "contour_distance": {
+            "mean": 0.27361522801939714,
+            "p95": 0.4807034140906201
+          },
+          "rigid_contour_distance": {
+            "mean": 0.3073592512696635,
+            "p95": 0.6285319840892083
+          },
+          "area_bias": {
+            "mean": 0.011346059020923683,
+            "p95": 0.14812963610617724
+          }
+        }
+      },
+      "program_accounting": {
+        "added": 1,
+        "retired": 0,
+        "net": 1,
+        "verified_scope": "All old e programs have only visible same-label users; selected point independently checked against compiled complete PDF programs."
+      },
+      "pristine_status": "P3 has no pristine reference; P1 causal pristine metrics are reported separately.",
+      "material_status": "Independent blinded review pending; do not infer zero defects.",
+      "measurement_pdf": "qualification/font04/local/prime-frontier/complete-0.5.pdf",
+      "measurement_pdf_sha256": "ce9624eef4ab65624b7ce7cff32c89491f25a6d7de8eac15423b7ff719dabddf"
+    },
+    {
+      "grouping": "complete",
+      "error_scale": 0.75,
+      "remapped": 5,
+      "added": 2,
+      "retired_visible_candidates": 1,
+      "net_visible_candidates": 1,
+      "designs": 156,
+      "mean_source_error": 0.019747240398369965,
+      "material_defects": null,
+      "pristine_error": null,
+      "native_source": {
+        "pdfium": {
+          "error": {
+            "mean": 0.06950172530643149,
+            "p95": 0.14707609911496078
+          },
+          "iou": {
+            "mean": 0.8004966265636807,
+            "p95": 0.9101259936468983
+          },
+          "contour_distance": {
+            "mean": 0.2715396512348619,
+            "p95": 0.5191054659089349
+          },
+          "rigid_contour_distance": {
+            "mean": 0.28871543837603736,
+            "p95": 0.6166540011660435
+          },
+          "area_bias": {
+            "mean": 0.021072942231535396,
+            "p95": 0.17152044622344248
+          }
+        },
+        "poppler": {
+          "error": {
+            "mean": 0.15540869045761496,
+            "p95": 0.21402458715114264
+          },
+          "iou": {
+            "mean": 0.6557140600562725,
+            "p95": 0.7259558445410643
+          },
+          "contour_distance": {
+            "mean": 0.4928616907885614,
+            "p95": 0.6778200905721822
+          },
+          "rigid_contour_distance": {
+            "mean": 0.47645462354436713,
+            "p95": 0.6549925017879591
+          },
+          "area_bias": {
+            "mean": -0.048202285864410686,
+            "p95": 0.1327283622337364
+          }
+        },
+        "analytic": {
+          "error": {
+            "mean": 0.0648927848318524,
+            "p95": 0.12601212328995975
+          },
+          "iou": {
+            "mean": 0.7753216216398233,
+            "p95": 0.8463121928449218
+          },
+          "contour_distance": {
+            "mean": 0.273489217925149,
+            "p95": 0.4807034140906201
+          },
+          "rigid_contour_distance": {
+            "mean": 0.3072279150660602,
+            "p95": 0.6285319840892083
+          },
+          "area_bias": {
+            "mean": 0.011508757982962978,
+            "p95": 0.14812963610617724
+          }
+        }
+      },
+      "program_accounting": {
+        "added": 2,
+        "retired": 1,
+        "net": 1,
+        "verified_scope": "All old e programs have only visible same-label users; selected point independently checked against compiled complete PDF programs."
+      },
+      "pristine_status": "P3 has no pristine reference; P1 causal pristine metrics are reported separately.",
+      "material_status": "Independent blinded review pending; do not infer zero defects.",
+      "measurement_pdf": "qualification/font04/local/prime-frontier/complete-0.75.pdf",
+      "measurement_pdf_sha256": "36739bfb17a07a999620b39e120be8b445baa64c7f67014d8b92839a62c15942"
+    },
+    {
+      "grouping": "complete",
+      "error_scale": 1.0,
+      "remapped": 35,
+      "added": 16,
+      "retired_visible_candidates": 7,
+      "net_visible_candidates": 9,
+      "designs": 164,
+      "mean_source_error": 0.018494040480584072,
+      "material_defects": null,
+      "pristine_error": null,
+      "native_source": {
+        "pdfium": {
+          "error": {
+            "mean": 0.0675267706568201,
+            "p95": 0.14707609911496078
+          },
+          "iou": {
+            "mean": 0.8038796608529936,
+            "p95": 0.9092079969522118
+          },
+          "contour_distance": {
+            "mean": 0.266322038099189,
+            "p95": 0.5232536782798789
+          },
+          "rigid_contour_distance": {
+            "mean": 0.2834374990827959,
+            "p95": 0.6212218499995568
+          },
+          "area_bias": {
+            "mean": 0.0209164058904812,
+            "p95": 0.17152044622344248
+          }
+        },
+        "poppler": {
+          "error": {
+            "mean": 0.1528225764270697,
+            "p95": 0.21319069309900274
+          },
+          "iou": {
+            "mean": 0.6582494286534933,
+            "p95": 0.7383936513468518
+          },
+          "contour_distance": {
+            "mean": 0.490195551934339,
+            "p95": 0.6813994567513826
+          },
+          "rigid_contour_distance": {
+            "mean": 0.470471702658086,
+            "p95": 0.6557592131748827
+          },
+          "area_bias": {
+            "mean": -0.048399982473000897,
+            "p95": 0.1314637915353295
+          }
+        },
+        "analytic": {
+          "error": {
+            "mean": 0.06317133787107976,
+            "p95": 0.12601212328995975
+          },
+          "iou": {
+            "mean": 0.7783052710928346,
+            "p95": 0.8505396031546438
+          },
+          "contour_distance": {
+            "mean": 0.2665765566006189,
+            "p95": 0.4807034140906201
+          },
+          "rigid_contour_distance": {
+            "mean": 0.30164787772792995,
+            "p95": 0.6285319840892083
+          },
+          "area_bias": {
+            "mean": 0.011326256080691986,
+            "p95": 0.14812963610617724
+          }
+        }
+      },
+      "program_accounting": {
+        "added": 16,
+        "retired": 7,
+        "net": 9,
+        "verified_scope": "All old e programs have only visible same-label users; selected point independently checked against compiled complete PDF programs."
+      },
+      "pristine_status": "P3 has no pristine reference; P1 causal pristine metrics are reported separately.",
+      "material_status": "Independent blinded review pending; do not infer zero defects.",
+      "measurement_pdf": "qualification/font04/local/prime-frontier/complete-1.0.pdf",
+      "measurement_pdf_sha256": "898e6d06f1c9f9e30e945e0967087920d826fe61907d9e5a3237c1de90337cfe"
+    },
+    {
+      "grouping": "complete",
+      "error_scale": 1.25,
+      "remapped": 73,
+      "added": 30,
+      "retired_visible_candidates": 17,
+      "net_visible_candidates": 13,
+      "designs": 168,
+      "mean_source_error": 0.019557847593975577,
+      "material_defects": null,
+      "pristine_error": null,
+      "native_source": {
+        "pdfium": {
+          "error": {
+            "mean": 0.06400569197666832,
+            "p95": 0.1405167076648846
+          },
+          "iou": {
+            "mean": 0.8093301572695245,
+            "p95": 0.9077716448708568
+          },
+          "contour_distance": {
+            "mean": 0.25563804642295773,
+            "p95": 0.5105682363886509
+          },
+          "rigid_contour_distance": {
+            "mean": 0.2796606739508202,
+            "p95": 0.6147190848773393
+          },
+          "area_bias": {
+            "mean": 0.019896175069735993,
+            "p95": 0.14921408540556397
+          }
+        },
+        "poppler": {
+          "error": {
+            "mean": 0.14658427858757156,
+            "p95": 0.2105273539310002
+          },
+          "iou": {
+            "mean": 0.6649939795623876,
+            "p95": 0.7420075056723998
+          },
+          "contour_distance": {
+            "mean": 0.47646491307586003,
+            "p95": 0.6731153159256942
+          },
+          "rigid_contour_distance": {
+            "mean": 0.46237134713926986,
+            "p95": 0.6557592131748827
+          },
+          "area_bias": {
+            "mean": -0.049358287309817506,
+            "p95": 0.12914601300379103
+          }
+        },
+        "analytic": {
+          "error": {
+            "mean": 0.05956367318063338,
+            "p95": 0.11259497673633323
+          },
+          "iou": {
+            "mean": 0.7839564239594198,
+            "p95": 0.8525716756550157
+          },
+          "contour_distance": {
+            "mean": 0.2527331973142508,
+            "p95": 0.47218276096923295
+          },
+          "rigid_contour_distance": {
+            "mean": 0.290760030485269,
+            "p95": 0.6303972926143996
+          },
+          "area_bias": {
+            "mean": 0.01034910629053738,
+            "p95": 0.1427898375470794
+          }
+        }
+      },
+      "program_accounting": {
+        "added": 30,
+        "retired": 17,
+        "net": 13,
+        "verified_scope": "All old e programs have only visible same-label users; selected point independently checked against compiled complete PDF programs."
+      },
+      "pristine_status": "P3 has no pristine reference; P1 causal pristine metrics are reported separately.",
+      "material_status": "Independent blinded review pending; do not infer zero defects.",
+      "measurement_pdf": "qualification/font04/local/prime-frontier/complete-1.25.pdf",
+      "measurement_pdf_sha256": "316b2e6401fa596ba5adf02b57ebab77dd643bc45f64cc99418de08321399e0f"
+    },
+    {
+      "grouping": "complete",
+      "error_scale": 1.5,
+      "remapped": 91,
+      "added": 35,
+      "retired_visible_candidates": 24,
+      "net_visible_candidates": 11,
+      "designs": 166,
+      "mean_source_error": 0.023059105804831784,
+      "material_defects": null,
+      "pristine_error": null,
+      "native_source": {
+        "pdfium": {
+          "error": {
+            "mean": 0.06288566616788795,
+            "p95": 0.13369566078679174
+          },
+          "iou": {
+            "mean": 0.8105626747996022,
+            "p95": 0.9065586967563007
+          },
+          "contour_distance": {
+            "mean": 0.25128521465295933,
+            "p95": 0.5014895024470865
+          },
+          "rigid_contour_distance": {
+            "mean": 0.26918399479163524,
+            "p95": 0.6147190848773393
+          },
+          "area_bias": {
+            "mean": 0.01992975795463782,
+            "p95": 0.13105793565115945
+          }
+        },
+        "poppler": {
+          "error": {
+            "mean": 0.14432374296409659,
+            "p95": 0.21173219767627702
+          },
+          "iou": {
+            "mean": 0.6679938016795439,
+            "p95": 0.7470506853967414
+          },
+          "contour_distance": {
+            "mean": 0.47023510045082895,
+            "p95": 0.6646548324965671
+          },
+          "rigid_contour_distance": {
+            "mean": 0.4591430448359787,
+            "p95": 0.6413490118812089
+          },
+          "area_bias": {
+            "mean": -0.04930324734817338,
+            "p95": 0.12728449615744836
+          }
+        },
+        "analytic": {
+          "error": {
+            "mean": 0.05860465952826023,
+            "p95": 0.11168993655678047
+          },
+          "iou": {
+            "mean": 0.7854834662430352,
+            "p95": 0.8525716756550157
+          },
+          "contour_distance": {
+            "mean": 0.2487128989465566,
+            "p95": 0.4606614005409656
+          },
+          "rigid_contour_distance": {
+            "mean": 0.2889500912060813,
+            "p95": 0.6294843432301362
+          },
+          "area_bias": {
+            "mean": 0.010405959122288738,
+            "p95": 0.13902693684587225
+          }
+        }
+      },
+      "program_accounting": {
+        "added": 35,
+        "retired": 24,
+        "net": 11,
+        "verified_scope": "All old e programs have only visible same-label users; selected point independently checked against compiled complete PDF programs."
+      },
+      "pristine_status": "P3 has no pristine reference; P1 causal pristine metrics are reported separately.",
+      "material_status": "Independent blinded review pending; do not infer zero defects.",
+      "measurement_pdf": "qualification/font04/local/prime-frontier/complete-1.5.pdf",
+      "measurement_pdf_sha256": "0e167a5a0641d77c1aed61323bd97619ca851806826c3ffb9a12552783757a21"
+    },
+    {
+      "grouping": "complete",
+      "error_scale": 2.0,
+      "remapped": 113,
+      "added": 43,
+      "retired_visible_candidates": 36,
+      "net_visible_candidates": 7,
+      "designs": 162,
+      "mean_source_error": 0.02759729889586701,
+      "material_defects": null,
+      "pristine_error": null,
+      "native_source": {
+        "pdfium": {
+          "error": {
+            "mean": 0.0616101000926649,
+            "p95": 0.13050141096347176
+          },
+          "iou": {
+            "mean": 0.8122506342194037,
+            "p95": 0.9065586967563007
+          },
+          "contour_distance": {
+            "mean": 0.24807715535776917,
+            "p95": 0.4917045680889969
+          },
+          "rigid_contour_distance": {
+            "mean": 0.27025353773355115,
+            "p95": 0.6306741732811508
+          },
+          "area_bias": {
+            "mean": 0.017593033382316436,
+            "p95": 0.12571695690463075
+          }
+        },
+        "poppler": {
+          "error": {
+            "mean": 0.14272601314357322,
+            "p95": 0.20491782406031234
+          },
+          "iou": {
+            "mean": 0.6691683125713213,
+            "p95": 0.7465113342135415
+          },
+          "contour_distance": {
+            "mean": 0.46826320970868157,
+            "p95": 0.6646548324965671
+          },
+          "rigid_contour_distance": {
+            "mean": 0.45675045547990073,
+            "p95": 0.6563633532168467
+          },
+          "area_bias": {
+            "mean": -0.051602772155118375,
+            "p95": 0.12862406889074804
+          }
+        },
+        "analytic": {
+          "error": {
+            "mean": 0.05828767760738254,
+            "p95": 0.11168993655678047
+          },
+          "iou": {
+            "mean": 0.785349249990499,
+            "p95": 0.8514481270288303
+          },
+          "contour_distance": {
+            "mean": 0.2487394791189931,
+            "p95": 0.4606614005409656
+          },
+          "rigid_contour_distance": {
+            "mean": 0.29520366681505206,
+            "p95": 0.6667945336615696
+          },
+          "area_bias": {
+            "mean": 0.008088155931535558,
+            "p95": 0.11280632880940386
+          }
+        }
+      },
+      "program_accounting": {
+        "added": 43,
+        "retired": 36,
+        "net": 7,
+        "verified_scope": "All old e programs have only visible same-label users; selected point independently checked against compiled complete PDF programs."
+      },
+      "pristine_status": "P3 has no pristine reference; P1 causal pristine metrics are reported separately.",
+      "material_status": "Independent blinded review pending; do not infer zero defects.",
+      "measurement_pdf": "qualification/font04/local/prime-frontier/complete-2.0.pdf",
+      "measurement_pdf_sha256": "6121f6516aa8e8f1b0b94077475ad561e052b9e4e634b74f41fa48ee030b932e"
+    },
+    {
+      "grouping": "complete",
+      "error_scale": 3.0,
+      "remapped": 134,
+      "added": 46,
+      "retired_visible_candidates": 43,
+      "net_visible_candidates": 3,
+      "designs": 158,
+      "mean_source_error": 0.027680275703519143,
+      "material_defects": null,
+      "pristine_error": null,
+      "native_source": {
+        "pdfium": {
+          "error": {
+            "mean": 0.06140958055024385,
+            "p95": 0.13050141096347176
+          },
+          "iou": {
+            "mean": 0.8122553573729123,
+            "p95": 0.9059262916941307
+          },
+          "contour_distance": {
+            "mean": 0.24865344082498123,
+            "p95": 0.4917045680889969
+          },
+          "rigid_contour_distance": {
+            "mean": 0.2701556572034448,
+            "p95": 0.6304756958401289
+          },
+          "area_bias": {
+            "mean": 0.015367503541994962,
+            "p95": 0.12571695690463075
+          }
+        },
+        "poppler": {
+          "error": {
+            "mean": 0.1416387354976302,
+            "p95": 0.2044224236109414
+          },
+          "iou": {
+            "mean": 0.6705838661811937,
+            "p95": 0.7578999457206947
+          },
+          "contour_distance": {
+            "mean": 0.4628367960577518,
+            "p95": 0.660750680948877
+          },
+          "rigid_contour_distance": {
+            "mean": 0.45426512662698415,
+            "p95": 0.633478382741256
+          },
+          "area_bias": {
+            "mean": -0.053708134714427466,
+            "p95": 0.13088407747134606
+          }
+        },
+        "analytic": {
+          "error": {
+            "mean": 0.058156612847028714,
+            "p95": 0.10694461114013708
+          },
+          "iou": {
+            "mean": 0.7852389048540812,
+            "p95": 0.8454575083962842
+          },
+          "contour_distance": {
+            "mean": 0.24667716271943071,
+            "p95": 0.41740446165864753
+          },
+          "rigid_contour_distance": {
+            "mean": 0.29664195049315184,
+            "p95": 0.6743398842585342
+          },
+          "area_bias": {
+            "mean": 0.0058495752440802075,
+            "p95": 0.11625495207863554
+          }
+        }
+      },
+      "program_accounting": {
+        "added": 46,
+        "retired": 43,
+        "net": 3,
+        "verified_scope": "All old e programs have only visible same-label users; selected point independently checked against compiled complete PDF programs."
+      },
+      "pristine_status": "P3 has no pristine reference; P1 causal pristine metrics are reported separately.",
+      "material_status": "Independent blinded review pending; do not infer zero defects.",
+      "measurement_pdf": "qualification/font04/local/prime-frontier/complete-3.0.pdf",
+      "measurement_pdf_sha256": "c70cbc0d9e02f8cd859c5ef331bb631894417a062c1e306cadd078f1a4e7c873"
+    },
+    {
+      "grouping": "cover",
+      "error_scale": 0.5,
+      "remapped": 6,
+      "added": 3,
+      "retired_visible_candidates": 0,
+      "net_visible_candidates": 3,
+      "designs": 158,
+      "mean_source_error": 0.011129950241706058,
+      "material_defects": null,
+      "pristine_error": null,
+      "native_source": {
+        "pdfium": {
+          "error": {
+            "mean": 0.06930584601931147,
+            "p95": 0.14707609911496078
+          },
+          "iou": {
+            "mean": 0.8009541264866514,
+            "p95": 0.9103607035881855
+          },
+          "contour_distance": {
+            "mean": 0.2708267005408445,
+            "p95": 0.5191054659089349
+          },
+          "rigid_contour_distance": {
+            "mean": 0.28678311669410955,
+            "p95": 0.6150718915198834
+          },
+          "area_bias": {
+            "mean": 0.021274116563206644,
+            "p95": 0.17152044622344248
+          }
+        },
+        "poppler": {
+          "error": {
+            "mean": 0.15498727036239604,
+            "p95": 0.21402458715114264
+          },
+          "iou": {
+            "mean": 0.6561692448684949,
+            "p95": 0.7269882441327425
+          },
+          "contour_distance": {
+            "mean": 0.49172064301456775,
+            "p95": 0.6778200905721822
+          },
+          "rigid_contour_distance": {
+            "mean": 0.4755000511212339,
+            "p95": 0.638080705984106
+          },
+          "area_bias": {
+            "mean": -0.04802604735780169,
+            "p95": 0.1327283622337364
+          }
+        },
+        "analytic": {
+          "error": {
+            "mean": 0.06457025356670094,
+            "p95": 0.12601212328995975
+          },
+          "iou": {
+            "mean": 0.7759802661476571,
+            "p95": 0.8501326614144127
+          },
+          "contour_distance": {
+            "mean": 0.27144269309752256,
+            "p95": 0.4807034140906201
+          },
+          "rigid_contour_distance": {
+            "mean": 0.3052989729342723,
+            "p95": 0.6285319840892083
+          },
+          "area_bias": {
+            "mean": 0.011696479654514676,
+            "p95": 0.14812963610617724
+          }
+        }
+      },
+      "program_accounting": {
+        "added": 3,
+        "retired": 0,
+        "net": 3,
+        "verified_scope": "All old e programs have only visible same-label users; selected point independently checked against compiled complete PDF programs."
+      },
+      "pristine_status": "P3 has no pristine reference; P1 causal pristine metrics are reported separately.",
+      "material_status": "Independent blinded review pending; do not infer zero defects.",
+      "measurement_pdf": "qualification/font04/local/prime-frontier/cover-0.5.pdf",
+      "measurement_pdf_sha256": "f586bf98de5fa8b1987c557c57af7647cddbcd3de882fc118154e91ee198181c"
+    },
+    {
+      "grouping": "cover",
+      "error_scale": 0.75,
+      "remapped": 52,
+      "added": 16,
+      "retired_visible_candidates": 16,
+      "net_visible_candidates": 0,
+      "designs": 155,
+      "mean_source_error": 0.01718260328227361,
+      "material_defects": null,
+      "pristine_error": null,
+      "native_source": {
+        "pdfium": {
+          "error": {
+            "mean": 0.0638971945318173,
+            "p95": 0.14707609911496078
+          },
+          "iou": {
+            "mean": 0.8102501890334204,
+            "p95": 0.9101259936468983
+          },
+          "contour_distance": {
+            "mean": 0.25604650229344694,
+            "p95": 0.5232536782798789
+          },
+          "rigid_contour_distance": {
+            "mean": 0.2737980042563909,
+            "p95": 0.6150718915198834
+          },
+          "area_bias": {
+            "mean": 0.020370946807808703,
+            "p95": 0.14927329575558776
+          }
+        },
+        "poppler": {
+          "error": {
+            "mean": 0.14960876307487242,
+            "p95": 0.21044586750421218
+          },
+          "iou": {
+            "mean": 0.6620971372595106,
+            "p95": 0.7396944248472024
+          },
+          "contour_distance": {
+            "mean": 0.48344431949274336,
+            "p95": 0.6710708709131239
+          },
+          "rigid_contour_distance": {
+            "mean": 0.46773935715079046,
+            "p95": 0.6490664433215189
+          },
+          "area_bias": {
+            "mean": -0.048865732662923704,
+            "p95": 0.12756330600801402
+          }
+        },
+        "analytic": {
+          "error": {
+            "mean": 0.060238373802029295,
+            "p95": 0.11749138915583032
+          },
+          "iou": {
+            "mean": 0.7828431832655534,
+            "p95": 0.8533904448933097
+          },
+          "contour_distance": {
+            "mean": 0.2564209971352676,
+            "p95": 0.47218276096923295
+          },
+          "rigid_contour_distance": {
+            "mean": 0.2909165416094059,
+            "p95": 0.6231840244349796
+          },
+          "area_bias": {
+            "mean": 0.01083557038726657,
+            "p95": 0.1427898375470794
+          }
+        }
+      },
+      "program_accounting": {
+        "added": 16,
+        "retired": 16,
+        "net": 0,
+        "verified_scope": "All old e programs have only visible same-label users; selected point independently checked against compiled complete PDF programs."
+      },
+      "pristine_status": "P3 has no pristine reference; P1 causal pristine metrics are reported separately.",
+      "material_status": "Independent blinded review pending; do not infer zero defects.",
+      "measurement_pdf": "qualification/font04/local/prime-frontier/cover-0.75.pdf",
+      "measurement_pdf_sha256": "e7b0c0ede886b4fd2d7139847d863f13935a5c7e3b996007e495bd27df02d179"
+    },
+    {
+      "grouping": "cover",
+      "error_scale": 1.0,
+      "remapped": 124,
+      "added": 30,
+      "retired_visible_candidates": 35,
+      "net_visible_candidates": -5,
+      "designs": 150,
+      "mean_source_error": 0.021445180105031977,
+      "material_defects": null,
+      "pristine_error": null,
+      "native_source": {
+        "pdfium": {
+          "error": {
+            "mean": 0.060024780517830806,
+            "p95": 0.13105859457261326
+          },
+          "iou": {
+            "mean": 0.8156620993577214,
+            "p95": 0.9092143274584634
+          },
+          "contour_distance": {
+            "mean": 0.24654162956603654,
+            "p95": 0.4986950496117863
+          },
+          "rigid_contour_distance": {
+            "mean": 0.2663579724786237,
+            "p95": 0.602568583843762
+          },
+          "area_bias": {
+            "mean": 0.01954795899136709,
+            "p95": 0.12438237875354796
+          }
+        },
+        "poppler": {
+          "error": {
+            "mean": 0.14046856811519715,
+            "p95": 0.20231095655989859
+          },
+          "iou": {
+            "mean": 0.6714508253477761,
+            "p95": 0.7474831694610153
+          },
+          "contour_distance": {
+            "mean": 0.46530814809962767,
+            "p95": 0.6430668189213598
+          },
+          "rigid_contour_distance": {
+            "mean": 0.454404728338665,
+            "p95": 0.6283422859131733
+          },
+          "area_bias": {
+            "mean": -0.049689259598300596,
+            "p95": 0.12756330600801402
+          }
+        },
+        "analytic": {
+          "error": {
+            "mean": 0.05640551105498599,
+            "p95": 0.10571844040323747
+          },
+          "iou": {
+            "mean": 0.7886226942531099,
+            "p95": 0.8539328742509626
+          },
+          "contour_distance": {
+            "mean": 0.24491389219098755,
+            "p95": 0.45575959063459065
+          },
+          "rigid_contour_distance": {
+            "mean": 0.28526144217935645,
+            "p95": 0.6165780983383671
+          },
+          "area_bias": {
+            "mean": 0.010084929230257486,
+            "p95": 0.12356621541866136
+          }
+        }
+      },
+      "program_accounting": {
+        "added": 30,
+        "retired": 35,
+        "net": -5,
+        "verified_scope": "All old e programs have only visible same-label users; selected point independently checked against compiled complete PDF programs."
+      },
+      "pristine_status": "P3 has no pristine reference; P1 causal pristine metrics are reported separately.",
+      "material_status": "Independent blinded review pending; do not infer zero defects.",
+      "measurement_pdf": "qualification/font04/local/prime-frontier/cover-1.0.pdf",
+      "measurement_pdf_sha256": "94731f47e81233c60a9786b82a36994a052d62ae8f5a45c79ee7cbcf62b3c085"
+    },
+    {
+      "grouping": "cover",
+      "error_scale": 1.25,
+      "remapped": 155,
+      "added": 25,
+      "retired_visible_candidates": 54,
+      "net_visible_candidates": -29,
+      "designs": 126,
+      "mean_source_error": 0.026990512731319714,
+      "material_defects": null,
+      "pristine_error": null,
+      "native_source": {
+        "pdfium": {
+          "error": {
+            "mean": 0.05874307887300657,
+            "p95": 0.13332412105482047
+          },
+          "iou": {
+            "mean": 0.8162694915948354,
+            "p95": 0.9101259936468983
+          },
+          "contour_distance": {
+            "mean": 0.24530954848117068,
+            "p95": 0.49691146733691854
+          },
+          "rigid_contour_distance": {
+            "mean": 0.2786377508405231,
+            "p95": 0.6257613571817817
+          },
+          "area_bias": {
+            "mean": 0.013829438124652274,
+            "p95": 0.12195706227225878
+          }
+        },
+        "poppler": {
+          "error": {
+            "mean": 0.1396860300724873,
+            "p95": 0.2018640659596138
+          },
+          "iou": {
+            "mean": 0.6719712678944331,
+            "p95": 0.7486127710683549
+          },
+          "contour_distance": {
+            "mean": 0.4623695121001012,
+            "p95": 0.6529568795967531
+          },
+          "rigid_contour_distance": {
+            "mean": 0.46175845661877024,
+            "p95": 0.6625828383743755
+          },
+          "area_bias": {
+            "mean": -0.05476371305833069,
+            "p95": 0.12721718904850937
+          }
+        },
+        "analytic": {
+          "error": {
+            "mean": 0.05547206312458842,
+            "p95": 0.10571844040323747
+          },
+          "iou": {
+            "mean": 0.7887661971476888,
+            "p95": 0.8497687498031817
+          },
+          "contour_distance": {
+            "mean": 0.2416243037211513,
+            "p95": 0.413924935445958
+          },
+          "rigid_contour_distance": {
+            "mean": 0.2930278556786007,
+            "p95": 0.6363975487562826
+          },
+          "area_bias": {
+            "mean": 0.0044297666330845855,
+            "p95": 0.10748964251479912
+          }
+        }
+      },
+      "program_accounting": {
+        "added": 25,
+        "retired": 54,
+        "net": -29,
+        "verified_scope": "All old e programs have only visible same-label users; selected point independently checked against compiled complete PDF programs."
+      },
+      "pristine_status": "P3 has no pristine reference; P1 causal pristine metrics are reported separately.",
+      "material_status": "Independent blinded review pending; do not infer zero defects.",
+      "measurement_pdf": "qualification/font04/local/prime-frontier/cover-1.25.pdf",
+      "measurement_pdf_sha256": "03e6f8be5dea6e36cbc13c3103cc1a4b78926dfcb74e29b8d612e31a87874e59"
+    },
+    {
+      "grouping": "cover",
+      "error_scale": 1.5,
+      "remapped": 162,
+      "added": 22,
+      "retired_visible_candidates": 57,
+      "net_visible_candidates": -35,
+      "designs": 120,
+      "mean_source_error": 0.03028467746848316,
+      "material_defects": null,
+      "pristine_error": null,
+      "native_source": {
+        "pdfium": {
+          "error": {
+            "mean": 0.060528071391205106,
+            "p95": 0.13105859457261326
+          },
+          "iou": {
+            "mean": 0.8128841619267455,
+            "p95": 0.9082789640385349
+          },
+          "contour_distance": {
+            "mean": 0.2511858150562457,
+            "p95": 0.4917045680889969
+          },
+          "rigid_contour_distance": {
+            "mean": 0.28463614050785957,
+            "p95": 0.6241714081589333
+          },
+          "area_bias": {
+            "mean": 0.017170741316744093,
+            "p95": 0.12192406985443602
+          }
+        },
+        "poppler": {
+          "error": {
+            "mean": 0.137528991395799,
+            "p95": 0.19595314452331175
+          },
+          "iou": {
+            "mean": 0.6747233542997961,
+            "p95": 0.7440564091310227
+          },
+          "contour_distance": {
+            "mean": 0.46436268616906795,
+            "p95": 0.6296740757785504
+          },
+          "rigid_contour_distance": {
+            "mean": 0.46779926833887986,
+            "p95": 0.6557213573565821
+          },
+          "area_bias": {
+            "mean": -0.05179898414573631,
+            "p95": 0.1261571979731759
+          }
+        },
+        "analytic": {
+          "error": {
+            "mean": 0.057324398394521914,
+            "p95": 0.10571844040323747
+          },
+          "iou": {
+            "mean": 0.7855654947149524,
+            "p95": 0.8455383458705633
+          },
+          "contour_distance": {
+            "mean": 0.25243660599915985,
+            "p95": 0.413924935445958
+          },
+          "rigid_contour_distance": {
+            "mean": 0.30321246757427034,
+            "p95": 0.6434685057226084
+          },
+          "area_bias": {
+            "mean": 0.007790613881735788,
+            "p95": 0.10748964251479912
+          }
+        }
+      },
+      "program_accounting": {
+        "added": 22,
+        "retired": 57,
+        "net": -35,
+        "verified_scope": "All old e programs have only visible same-label users; selected point independently checked against compiled complete PDF programs."
+      },
+      "pristine_status": "P3 has no pristine reference; P1 causal pristine metrics are reported separately.",
+      "material_status": "Independent blinded review pending; do not infer zero defects.",
+      "measurement_pdf": "qualification/font04/local/prime-frontier/cover-1.5.pdf",
+      "measurement_pdf_sha256": "d164423feddb403473de8fb298114900965c0777e5772ade83a58fc538e62d2e"
+    },
+    {
+      "grouping": "cover",
+      "error_scale": 2.0,
+      "remapped": 176,
+      "added": 15,
+      "retired_visible_candidates": 69,
+      "net_visible_candidates": -54,
+      "designs": 101,
+      "mean_source_error": 0.032722011244182975,
+      "material_defects": null,
+      "pristine_error": null,
+      "native_source": {
+        "pdfium": {
+          "error": {
+            "mean": 0.06555831929569393,
+            "p95": 0.13105859457261326
+          },
+          "iou": {
+            "mean": 0.8047877934917378,
+            "p95": 0.9063022248188303
+          },
+          "contour_distance": {
+            "mean": 0.2674738378671771,
+            "p95": 0.49209490052430543
+          },
+          "rigid_contour_distance": {
+            "mean": 0.31844627929715597,
+            "p95": 0.7220616331320326
+          },
+          "area_bias": {
+            "mean": 0.02622975112249403,
+            "p95": 0.14176875746094364
+          }
+        },
+        "poppler": {
+          "error": {
+            "mean": 0.13960216982533388,
+            "p95": 0.20423049364984322
+          },
+          "iou": {
+            "mean": 0.6726248922018774,
+            "p95": 0.7474192329472314
+          },
+          "contour_distance": {
+            "mean": 0.46938822216122866,
+            "p95": 0.6296740757785504
+          },
+          "rigid_contour_distance": {
+            "mean": 0.4726778769941366,
+            "p95": 0.7179015710822567
+          },
+          "area_bias": {
+            "mean": -0.04334597151822481,
+            "p95": 0.13331142812822167
+          }
+        },
+        "analytic": {
+          "error": {
+            "mean": 0.06152413379888288,
+            "p95": 0.10571844040323747
+          },
+          "iou": {
+            "mean": 0.779905168700127,
+            "p95": 0.8446392728989986
+          },
+          "contour_distance": {
+            "mean": 0.2641923684061351,
+            "p95": 0.4479821084530981
+          },
+          "rigid_contour_distance": {
+            "mean": 0.32573022316078015,
+            "p95": 0.678798455569749
+          },
+          "area_bias": {
+            "mean": 0.016823887855821507,
+            "p95": 0.14138509086199066
+          }
+        }
+      },
+      "program_accounting": {
+        "added": 15,
+        "retired": 69,
+        "net": -54,
+        "verified_scope": "All old e programs have only visible same-label users; selected point independently checked against compiled complete PDF programs."
+      },
+      "pristine_status": "P3 has no pristine reference; P1 causal pristine metrics are reported separately.",
+      "material_status": "Independent blinded review pending; do not infer zero defects.",
+      "measurement_pdf": "qualification/font04/local/prime-frontier/cover-2.0.pdf",
+      "measurement_pdf_sha256": "ff70ea9de35985d24789e691808ccf245472c1d162988e1443b28ecc2654f03f"
+    },
+    {
+      "grouping": "cover",
+      "error_scale": 3.0,
+      "remapped": 195,
+      "added": 15,
+      "retired_visible_candidates": 71,
+      "net_visible_candidates": -56,
+      "designs": 99,
+      "mean_source_error": 0.03395930395664945,
+      "material_defects": null,
+      "pristine_error": null,
+      "native_source": {
+        "pdfium": {
+          "error": {
+            "mean": 0.06448022309621626,
+            "p95": 0.12908719669479396
+          },
+          "iou": {
+            "mean": 0.805260023865917,
+            "p95": 0.8996422608615352
+          },
+          "contour_distance": {
+            "mean": 0.26873584811334356,
+            "p95": 0.4934881503638646
+          },
+          "rigid_contour_distance": {
+            "mean": 0.30904139559855276,
+            "p95": 0.6638291642415186
+          },
+          "area_bias": {
+            "mean": 0.024871971925040384,
+            "p95": 0.13463386879004102
+          }
+        },
+        "poppler": {
+          "error": {
+            "mean": 0.13936250190873772,
+            "p95": 0.20684632959599464
+          },
+          "iou": {
+            "mean": 0.672148276025229,
+            "p95": 0.7532101297951534
+          },
+          "contour_distance": {
+            "mean": 0.464304377477031,
+            "p95": 0.6296740757785504
+          },
+          "rigid_contour_distance": {
+            "mean": 0.46081087577485325,
+            "p95": 0.7179015710822567
+          },
+          "area_bias": {
+            "mean": -0.04435907353741773,
+            "p95": 0.13400960715214266
+          }
+        },
+        "analytic": {
+          "error": {
+            "mean": 0.05996966135205739,
+            "p95": 0.09756040120033241
+          },
+          "iou": {
+            "mean": 0.7813915602394657,
+            "p95": 0.8419437045762579
+          },
+          "contour_distance": {
+            "mean": 0.26129046311867116,
+            "p95": 0.413924935445958
+          },
+          "rigid_contour_distance": {
+            "mean": 0.32500150130259975,
+            "p95": 0.6869944647437118
+          },
+          "area_bias": {
+            "mean": 0.01553320265074401,
+            "p95": 0.1373852631504794
+          }
+        }
+      },
+      "program_accounting": {
+        "added": 15,
+        "retired": 71,
+        "net": -56,
+        "verified_scope": "All old e programs have only visible same-label users; selected point independently checked against compiled complete PDF programs."
+      },
+      "pristine_status": "P3 has no pristine reference; P1 causal pristine metrics are reported separately.",
+      "material_status": "Independent blinded review pending; do not infer zero defects.",
+      "measurement_pdf": "qualification/font04/local/prime-frontier/cover-3.0.pdf",
+      "measurement_pdf_sha256": "98960133b12300a389349316272f1f0809b7646c5bda51d6027935780da54214"
+    }
+  ],
+  "scope": "B1 e only; measurement PDFs contain only glyph layers, not complete financial deliverables."
+}

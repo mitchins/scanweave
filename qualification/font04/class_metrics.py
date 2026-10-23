@@ -1,0 +1,109 @@
+"""Class-isolated scoring with original MediaBoxes, transforms and sampling grids.
+One draw per original-size page prevents adjacent ownership layers overwriting
+each other. Bitmap cropping preserves the renderers' original full-page rounding.
+"""
+from pathlib import Path
+import io,json,sys
+import numpy as np
+import pikepdf
+from fontTools.ttLib import TTFont
+from scipy.optimize import linear_sum_assignment
+from qualification.font04.metrics import inspect,matrix,operands,render,measure,sha
+from qualification.font04.planner import local_source
+from qualification.font04.prime_metrics import analytic,direct,headline
+ROOT=Path('qualification/font04/local')
+
+
+def bind(snapshot,inv):
+    result={}
+    for pi in range(13):
+        for char in sorted({r['character'] for r in snapshot['rows'] if r['page']==pi}):
+            rows=[r for r in snapshot['rows'] if r['page']==pi and r['character']==char]
+            draws=[d for d in inv['draws'] if d['page']==pi and d['character']==char]
+            if len(rows)!=len(draws):raise ValueError(('class binding count',pi,char,len(rows),len(draws)))
+            a=np.array([[(r['bbox'][0]+r['bbox'][2])/2,(r['bbox'][1]+r['bbox'][3])/2] for r in rows]);b=np.array([[d['center'][0]*300/72,(rows[0]['page_height']-d['center'][1])*300/72] for d in draws])
+            cost=np.linalg.norm(a[:,None]-b[None],axis=2);ii,jj=linear_sum_assignment(cost)
+            for i,j in zip(ii,jj):
+                if cost[i,j]>10:raise ValueError(('ambiguous class binding',pi,char,float(cost[i,j])))
+                result[rows[i]['index']]=draws[j]
+    return result
+
+
+def isolated_pages(path,snap,basebound,bound):
+    art=Path(str(path)+'.font04');rows=snap['rows'];geometry=json.loads((ROOT/'financial-default.pdf.json').read_text())['pages']
+    for name,inputpath,draws in [('default',ROOT/'financial-default.pdf',basebound),('candidate',path,bound),('source',ROOT/'financial-default.pdf',None)]:
+        with pikepdf.open(inputpath) as original:
+            pdf=pikepdf.Pdf.new()
+            for r in rows:
+                i=r['index'];pdf.pages.append(original.pages[r['page']]);page=pdf.pages[-1]
+                if draws is not None:
+                    d=draws[i];commands='BT 0 Tr 0 g /F1 1 Tf '+' '.join(map(str,d['matrix']))+f" Tm <{d['cid']:04x}> Tj ET\n"
+                elif r['source'] is not None:
+                    ss=r['source'];cov=local_source(ss,r['paper']);pixels=np.round((1-cov)*255).astype('uint8');h,w=pixels.shape;g=geometry[r['page']];sx=g['width_pt']/g['raster_width'];sy=g['height_pt']/g['raster_height'];x,y=ss['bbox'][:2]
+                    obj=pdf.make_stream(pixels.tobytes());obj.Type=pikepdf.Name.XObject;obj.Subtype=pikepdf.Name.Image;obj.Width=w;obj.Height=h;obj.ColorSpace=pikepdf.Name.DeviceGray;obj.BitsPerComponent=8
+                    page.Resources=pikepdf.Dictionary(XObject=pikepdf.Dictionary(I=obj))
+                    commands=f'q {w*sx:.12f} 0 0 {h*sy:.12f} {(x-2)*sx:.12f} {g["height_pt"]-(y-2+h)*sy:.12f} cm /I Do Q\n'
+                else:commands=''
+                page.Contents=pdf.make_stream(commands.encode())
+            pdf.save(art/f'class-isolated-{name}.pdf',deterministic_id=True)
+
+def crop_render(path,doc,page,bounds,engine):
+    import math,subprocess,tempfile
+    from PIL import Image
+    x,y,xx,yy=bounds
+    if engine=='poppler':
+        with tempfile.TemporaryDirectory() as temp:
+            subprocess.run(['pdftoppm','-f',str(page+1),'-l',str(page+1),'-singlefile','-r','300','-x',str(x),'-y',str(y),'-W',str(xx-x),'-H',str(yy-y),'-gray','-png',str(path),temp+'/crop'],check=True,stdout=subprocess.DEVNULL,stderr=subprocess.DEVNULL)
+            with Image.open(temp+'/crop.png') as im:return 1-np.asarray(im.convert('L'),float)/255
+    if engine=='pdfium':
+        p=doc[page];bitmap=p.render(scale=300/72)
+        a=np.asarray(bitmap.to_pil().convert('L'),float)[y:yy,x:xx].copy()
+        bitmap.close();p.close();return 1-a/255
+    k=4 if engine=='analytic' else 1;scale=300*k/72;p=doc[page]
+    width=math.ceil(p.get_width()*scale);height=math.ceil(p.get_height()*scale)
+    # pypdfium rounds full-page dimensions before cropping. Keep those exact
+    # dimensions and integer crop offsets; an atlas would change hinting phase.
+    crop=tuple(max(0,v/scale-1e-9) for v in [x*k,height-yy*k,width-xx*k,y*k])
+    bitmap=p.render(scale=scale,crop=crop,**({'grayscale':True} if k==4 else {}));a=np.asarray(bitmap.to_pil().convert('L'),float)
+    if k==4:a=a.reshape(yy-y,k,xx-x,k).mean((1,3))
+    bitmap.close();p.close();return 1-a/255
+
+
+def main(path):
+    art=Path(str(path)+'.font04');snap=json.loads((art/'source.json').read_text());rows=snap['rows'];plan=json.loads((art/'plan.json').read_text());acc={r['member'] for r in plan['assignments']};inv=inspect(path);baseinv=inspect(ROOT/'financial-default.pdf');basebound=bind(snap,baseinv);bound=bind(snap,inv)
+    (art/'emitted-bindings.json').write_text(json.dumps(basebound));isolated_pages(path,snap,basebound,bound);records=[];crops={};fonts={}
+    for name,p in [('default',ROOT/'financial-default.pdf'),('candidate',path)]:
+        with pikepdf.open(p) as pdf:fonts[name]=TTFont(io.BytesIO(pdf.pages[0].Resources.Font.F1.DescendantFonts[0].FontDescriptor.FontFile2.read_bytes()))
+    import pypdfium2 as pdfium
+    docs={name:pdfium.PdfDocument(art/f'class-isolated-{name}.pdf') for name in ['source','default','candidate']}
+    for r in rows:
+        i=r['index']
+        if r['source'] is None:continue
+        x,y,xx,yy=map(int,r['source']['bbox']);bounds=[x-4,y-4,xx+4,yy+4]
+        for engine in ['pdfium','poppler','analytic']:
+            arrays={name:crop_render(art/f'class-isolated-{name}.pdf',doc,i,bounds,engine) for name,doc in docs.items()}
+            for name,value in arrays.items():crops[f'{i}-{engine}-{name}']=value
+            records.append(dict(member=i,character=r['character'],page=r['page'],metric=engine,accepted=i in acc,default=measure(arrays['source'],arrays['default']),candidate=measure(arrays['source'],arrays['candidate'])))
+        a=direct(fonts['default'],basebound[i],bounds,r['page_height']);b=direct(fonts['candidate'],bound[i],bounds,r['page_height']);src=crops[f'{i}-analytic-source'];crops[f'{i}-direct-default']=a;crops[f'{i}-direct-candidate']=b
+        records.append(dict(member=i,character=r['character'],page=r['page'],metric='direct',accepted=i in acc,default=measure(src,a),candidate=measure(src,b)))
+        if i%25==0:print(path.name,i,flush=True)
+    for doc in docs.values():doc.close()
+    byclass={}
+    for char in sorted({r['character'] for r in rows}):
+        rr=[r for r in records if r['character']==char];byclass[char]={engine:{subset:headline(rr,path.name,engine,subset) for subset in ['all','substituted']} for engine in ['analytic','direct','pdfium','poppler']}
+        byclass[char]['population']=dict(total_visible=sum(r['character']==char for r in rows),with_owned_source=sum(r['character']==char and r['source'] is not None for r in rows),substituted=sum(rows[i]['character']==char for i in acc))
+        byclass[char]['renderer_floors']={}
+        for engine in ['pdfium','poppler','analytic']:
+            values={}
+            for ref in ['analytic','direct']:
+                vv=[measure(crops[f"{r['member']}-{ref}-default"],crops[f"{r['member']}-{engine}-default"])['error'] for r in rr if r['metric']=='direct']
+                values[ref]=dict(mean=float(np.mean(vv)),p95=float(np.quantile(vv,.95))) if vv else None
+            byclass[char]['renderer_floors'][engine]=values
+    floors={}
+    for engine in ['pdfium','poppler','analytic']:
+        vals=[measure(crops[f"{r['member']}-analytic-default"],crops[f"{r['member']}-{engine}-default"])['error'] for r in records if r['metric']=='direct'];floors[engine]=dict(mean=float(np.mean(vals)),p95=float(np.quantile(vals,.95)))
+    result=dict(pdf=str(path),sha256=sha(path),bytes=path.stat().st_size,substituted=len(acc),classes=byclass,renderer_vs_analytic_floors=floors,records=records)
+    (art/'class-metrics.json').write_text(json.dumps(result,indent=2)+'\n');np.savez_compressed(art/'class-crops.npz',**crops)
+    Path('qualification/font04/'+path.stem+'-class-scorecard.json').write_text(json.dumps({k:v for k,v in result.items() if k!='records'},indent=2)+'\n')
+
+if __name__=='__main__':main(Path(sys.argv[1]))

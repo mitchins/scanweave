@@ -53,17 +53,27 @@ def main(experiment):
         cache=artifact/f'{engine}-{arm}-{page}.npy'
         if not cache.exists():np.save(cache,render(ROOT/'financial-default.pdf' if arm=='default' else experiment,page,300,engine))
         return np.load(cache)
+    is_b2=plan.get('scope')=='all 55 frequent classes'
     randomizer=random.Random(40411);accepted=sorted(assignments);rejects=sorted(rejected)
-    sample=set(randomizer.sample(accepted,min(50,len(accepted))));random_rejected=randomizer.sample(rejects,min(50,len(rejects)))
+    sample=set(randomizer.sample(accepted,min(50,len(accepted))));random_rejected=randomizer.sample(rejects,min(150 if is_b2 else 50,len(rejects)))
+    if is_b2:
+        for char in sorted({r['character'] for r in rows}):
+            population=[i for i in accepted if rows[i]['character']==char]
+            sample.update(randomizer.sample(population,min(3,len(population))))
+        if len(sample)<min(100,len(accepted)):sample.update(randomizer.sample(sorted(set(accepted)-sample),min(100,len(accepted))-len(sample)))
     ownership=plan.get('ownership_veto')
     if ownership:random_rejected=sorted(set(random_rejected)|set(ownership['exceptions']))
+    if is_b2:
+        measured=[dict(member=r['member'],character=r['character'],renderer=r['metric'],accepted=r['accepted'],experimental=r['candidate']) for r in json.loads((artifact/'class-metrics.json').read_text())['records'] if r['metric'] in ('pdfium','poppler')]
     for engine in ['pdfium','poppler']:
         selected=[r for r in measured if r['accepted']and r['renderer']==engine]
-        for metric in ['error','area_bias','contour_distance']:
-            sample.update(r['member']for r in sorted(selected,key=lambda r:abs(r['experimental'][metric]),reverse=True)[:10])
+        for char in sorted({r.get('character','e') for r in selected}):
+            for metric in ['error','area_bias','contour_distance']:
+                sample.update(r['member']for r in sorted([r for r in selected if r.get('character','e')==char],key=lambda r:abs(r['experimental'][metric]),reverse=True)[:10])
     for metric in ['area','elongation','counter_difference']:
         candidates=[p for p in pairs if p['member']in assignments and p['canonical']==assignments[p['member']]['canonical']]
-        sample.update(p['member']for p in sorted(candidates,key=lambda p:p['checks'].get(metric,{}).get('value',0),reverse=True)[:10])
+        for char in sorted({rows[p['member']].get('character','e') for p in candidates}):
+            sample.update(p['member']for p in sorted([p for p in candidates if rows[p['member']].get('character','e')==char],key=lambda p:p['checks'].get(metric,{}).get('value',0),reverse=True)[:10])
     # Cross-page/style probes: retain an example from every canonical group and page.
     groups=collections.defaultdict(list)
     for i,a in assignments.items():groups[(a['canonical'],a['page'])].append(i)
@@ -94,7 +104,7 @@ def main(experiment):
             bb=source['bbox'];cx=(bb[0]+bb[2])/2;cy=(bb[1]+bb[3])/2;left=int(cx)-35;top=int(cy)-28;right=left+70;bottom=top+56;page=row['page']
             a=page_render(engine,'default',page);b=page_render(engine,'experimental',page)if i in assignments else proposed[page]
             panel_id=f'glyph-{i:03}-{engine}'
-            panels.append(dict(id=panel_id,type='accepted'if i in assignments else'rejected',member=i,page=page,renderer=engine,bounds=[left,top,right,bottom],source=sources[engine][page][top:bottom,left:right],current=a[top:bottom,left:right],candidate=b[top:bottom,left:right],selection='random rejected'if i in random_rejected else'accepted random/tail/cross-page'))
+            panels.append(dict(id=panel_id,type='accepted'if i in assignments else'rejected',member=i,page=page,renderer=engine,bounds=[left,top,right,bottom],source=sources[engine][page][top:bottom,left:right],current=a[top:bottom,left:right],candidate=b[top:bottom,left:right],character=row.get('character','e'),selection='random rejected'if i in random_rejected else'accepted random/tail/cross-page'))
     report=json.loads((ROOT/'financial-default.pdf.json').read_text());words=collections.defaultdict(list)
     for pi,page in enumerate(report['pages']):
         document=ET.fromstring(page['hocr'])

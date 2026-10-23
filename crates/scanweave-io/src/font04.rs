@@ -109,13 +109,26 @@ pub fn trace_batch(request: &Value) -> Result<(Value, Vec<GlyphShape>, Vec<u8>),
 
 /// Snapshot only source observations and emitted glyphs, never oracle metadata.
 pub fn snapshot(pages: &[DocumentPage], donors: &[Vec<Unit>]) -> Value {
+    let scope = std::env::var("FONT04_SCOPE").unwrap_or_else(|_| "B1".into());
+    let mut frequencies = std::collections::BTreeMap::<String, usize>::new();
+    for page in pages {
+        for o in &page.parts.occurrences {
+            *frequencies.entry(o.5.clone()).or_default() += 1;
+        }
+    }
     let mut rows = Vec::new();
     for (pi, page) in pages.iter().enumerate() {
         let p = &page.parts;
-        for (oi, o) in p.occurrences.iter().enumerate().filter(|(_, o)| o.5 == "e") {
+        for (oi, o) in p.occurrences.iter().enumerate().filter(|(_, o)| {
+            if scope == "B2" {
+                frequencies[&o.5] >= 10
+            } else {
+                o.5 == "e"
+            }
+        }) {
             let source = donors[pi]
                 .iter()
-                .find(|u| u.symbol_id == o.4 && u.semantic_text == "e")
+                .find(|u| u.symbol_id == o.4 && u.semantic_text == o.5)
                 .cloned()
                 .map(|mut u| {
                     u.retain_grayscale(&p.source_rgb, p.source_w as u32, p.source_h as u32);
@@ -132,7 +145,7 @@ pub fn snapshot(pages: &[DocumentPage], donors: &[Vec<Unit>]) -> Value {
                 "width":u.crop_w,"height":u.crop_h,"mask":u.mask,"gray":u.gray_samples,"halo":u.gray_halo}));
             rows.push(
                 json!({"index":rows.len(),"page":pi,"occurrence":oi,"id":o.4,"span_id":o.3,
-                "character":"e","bbox":o.2,"shape_key":g.shape_key,"path":g.path.to_svg(),
+                "character":o.5,"bbox":o.2,"shape_key":g.shape_key,"path":g.path.to_svg(),
                 "anchor":g.anchor_bbox_fu,"ink_span":g.ink_span_fu,"points":g.num_points,
                 "dpi":p.dpi,"page_width":p.page_w_pt,"page_height":p.page_h_pt,
                 "source":source,"paper":p.paper,"line_units":line_units}),
@@ -157,7 +170,9 @@ pub fn apply(
         let shape = shapes.get(si).ok_or("canonical out of bounds")?;
         let p = &mut pages.get_mut(pi).ok_or("page out of bounds")?.parts;
         let o = p.occurrences.get(oi).ok_or("occurrence out of bounds")?;
-        if o.5 != "e" || row["id"].as_str() != Some(o.4.as_str()) {
+        if row["character"].as_str().unwrap_or("e") != o.5
+            || row["id"].as_str() != Some(o.4.as_str())
+        {
             return Err("label/identity mismatch".into());
         }
         let bbox: [f64; 4] =
@@ -165,10 +180,11 @@ pub fn apply(
         if bbox.iter().any(|v| !v.is_finite()) || bbox[2] <= bbox[0] || bbox[3] <= bbox[1] {
             return Err("invalid fitted bbox".into());
         }
+        let character = o.5.clone();
         let local_shape = p.shapes.len();
         p.shapes.push(shape.clone());
         let cid = p.encodings.len() as u32;
-        p.encodings.push((local_shape, "e".into()));
+        p.encodings.push((local_shape, character));
         let o = &mut p.occurrences[oi];
         o.0 = local_shape;
         o.1 = cid;

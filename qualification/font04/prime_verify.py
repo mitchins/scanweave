@@ -30,6 +30,12 @@ def main(paths):
         result=dict(pdf=str(path),stats=stats(inv),added=sum(added.values()),retired=sum(retired.values()),net_retired=sum(retired.values())-sum(added.values()),programs=dict(added=dict(added),retired=dict(retired)),text_equal=t==t0,search_equal=s==s0,poppler_text_equal=subprocess.check_output(['pdftotext','-layout',str(path),'-'])==p0,validation=check_pdf(path))
         assert result['text_equal'] and result['search_equal'] and result['poppler_text_equal']
         assert all(v['returncode']==0 for v in result['validation'].values())
+        if path.stem.endswith('-PV'):
+            from qualification.font04.b1_audit import bindings
+            snap=json.loads(Path(str(path)+'.font04/source.json').read_text())
+            old=bindings(snap,base)[277];new=bindings(snap,inv)[277]
+            assert old['program']==new['program'] and old['matrix']==new['matrix'], 'glyph-277 mark was not retained'
+            result['glyph_277_regression']='PASS: exact current program and physical matrix retained'
         results[path.stem]=result;print(path.name,result['net_retired'],result['stats']['bytes'],flush=True)
     out=dict(default=stats(base),default_matches_main=sha(default)==sha(ROOT/'financial-main.pdf'),arms=results)
     Path('qualification/font04/prime-verification.json').write_text(json.dumps(out,indent=2)+'\n')

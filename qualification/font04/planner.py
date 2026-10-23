@@ -68,12 +68,17 @@ def crop_request(key,character,image,**options):
 
 
 def prepare(snapshot,directory):
+    if os.environ.get('FONT04_SCOPE','B1')=='B2':
+        gate=json.loads(Path('qualification/font04/checkpoint-B1prime.json').read_text())
+        if not all(gate['B2_conditions'].get(k) is True for k in ('a','b','c')):
+            raise ValueError('B2 is not authorized by the completed B1-prime checkpoint')
+        if len({r['character'] for r in snapshot['rows']})!=55:raise ValueError('B2 requires exactly 55 frequent classes')
     items=[];frames=[];fields=[];origins=[];errors=[]
     for row in snapshot['rows']:
         try:
             if row['source'] is None:raise ValueError('no_safe_owned_witness')
             field,frame=source_frame(row)
-            item,origin=crop_request('font04-e-'+str(row['index']),'e',field)
+            item,origin=crop_request('font04-e-'+str(row['index']),row.get('character','e'),field)
             frames.append(frame);fields.append(field);origins.append(origin);items.append(item)
         except ValueError as error:
             frames.append(None);fields.append(np.zeros((64,64)));origins.append(None);errors.append(dict(index=row['index'],reason=str(error)))
@@ -114,6 +119,13 @@ def hard_checks(a,b):
 
 
 def choose(matrix,errors,scale,method,rows=None):
+    if rows is not None and len({r.get('character','e') for r in rows})>1:
+        groups=[]
+        for char in sorted({r.get('character','e') for r in rows}):
+            indices=[i for i,r in enumerate(rows) if r.get('character','e')==char]
+            sub=choose(matrix[np.ix_(indices,indices)],errors[np.ix_(indices,indices)],scale,method,[rows[i] for i in indices])
+            groups.extend(dict(canonical=indices[g['canonical']],members=[indices[i] for i in g['members']]) for g in sub)
+        return groups
     valid=matrix & (errors<=scale)
     admissible_self=np.diag(valid).copy()
     valid[:,~admissible_self]=False
@@ -182,7 +194,7 @@ def plan(data,directory):
     # A source-only shortlist bounds expensive fits; all exclusions are ledgered.
     for i in range(n):
         if frames[i] is None:continue
-        distances=np.array([mse(fields[i],candidate[j]) if j in shape_indices and j!=i else np.inf for j in range(n)])
+        distances=np.array([mse(fields[i],candidate[j]) if j in shape_indices and j!=i and rows[j].get('character','e')==rows[i].get('character','e') else np.inf for j in range(n)])
         shortlist=np.argsort(distances)[:min(24,n-1)]
         for j in shortlist:
             j=int(j)
@@ -230,10 +242,10 @@ def plan(data,directory):
             frontier.append(item);choices.append((item,groups))
     # Conservative discovery point 1.0: within the independently measured floor.
     eligible=[(v,g) for v,g in choices if v['error_scale']==1.]
-    chosen,groups=min(eligible,key=lambda pair:(pair[0]['designs'],pair[0]['grouping']))
+    chosen,groups=next((v,g) for v,g in eligible if v['grouping']=='star')
     ownership=None
     if arm=='PV':
-        ledger_path=Path('qualification/font04/owned-component-ledger.json')
+        ledger_path=Path(os.environ.get('FONT04_OWNERSHIP_LEDGER','qualification/font04/owned-component-ledger.json'))
         ownership=json.loads(ledger_path.read_text())
         reference=Path(str(ownership['source_pdf'])+'.font04')
         if json.loads((reference/'source.json').read_text())!=data['snapshot']:
@@ -251,6 +263,7 @@ def plan(data,directory):
     for g in groups:
         j=g['canonical'];o=lookup['font04-e-'+str(j)];x,y=origins[j]
         for i in g['members']:
+            if rows[i].get('character','e')!=rows[j].get('character','e'):raise ValueError('cross-label canonical forbidden')
             # Even the canonical member must pass its actual traced self gates.
             if i==j:
                 p,aligned=register(fields[i],candidate[j]);reasons,values=hard_checks(fields[i],aligned)
@@ -259,7 +272,7 @@ def plan(data,directory):
             frame=frames[i];dx,dy,s=p
             # warp() applies a forward uniform scale about (32,48), then translation.
             bb=frame_bbox(frame,(x,y),(o['width'],o['height']),p)
-            assignments.append(dict(page=rows[i]['page'],occurrence=rows[i]['occurrence'],id=rows[i]['id'],member=i,canonical=j,shape=shape_indices[j],bbox=bb,parameters=list(map(float,p))))
+            assignments.append(dict(character=rows[i].get('character','e'),page=rows[i]['page'],occurrence=rows[i]['occurrence'],id=rows[i]['id'],member=i,canonical=j,shape=shape_indices[j],bbox=bb,parameters=list(map(float,p))))
             accepted.add(i);canonical_for[i]=j
     # Reject records include an attempted candidate even if no admissible match.
     rejection=[]
@@ -276,9 +289,9 @@ def plan(data,directory):
         if not best['reasons']:best['reasons']=['grouping_exception']
         rejection.append(best)
     unique=collections.Counter(p['reasons'][0] for p in pairs if len(p['reasons'])==1)
-    result=dict(schema='font04-b1-plan-v1',scope='all visible e only',selected=chosen,assignments=assignments,
+    result=dict(schema='font04-b1-plan-v1',scope='all 55 frequent classes' if os.environ.get('FONT04_SCOPE')=='B2' else 'all visible e only',selected=chosen,assignments=assignments,
         rejection_ledger=rejection,noise_floor=noise,noise_support=noise_support,frontier=frontier,unique_pair_rejections=dict(unique),
-        arm=arm,ownership_veto=ownership,self_checks=self_checks,total_pair_attempts=len(pairs),shortlist=24,shortlist_exclusions=n*(n-1)-len(pairs),runtime_seconds=time.monotonic()-started,
+        arm=arm,ownership_veto=ownership,self_checks=self_checks,total_pair_attempts=len(pairs),shortlist=24,shortlist_exclusions=sum(v*(v-1) for v in collections.Counter(r.get('character','e') for r in rows).values())-len(pairs),cross_label_forbidden=n*(n-1)-sum(v*(v-1) for v in collections.Counter(r.get('character','e') for r in rows).values()),runtime_seconds=time.monotonic()-started,
         defects_status='pending blinded independent review',inference_inputs='source only; no pristine or face labels')
     (directory/'outlines.json').write_text(json.dumps(data['outlines']))
     (directory/'plan.json').write_text(json.dumps(result,indent=2));(directory/'pair-ledger.json').write_text(json.dumps(pairs))

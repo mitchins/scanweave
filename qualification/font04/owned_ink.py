@@ -26,13 +26,14 @@ def components(source,current,candidate,member):
 
 def main(path):
     artifact=Path(str(path)+'.font04');plan=json.loads((artifact/'plan.json').read_text());ledger=[]
-    with np.load(artifact/'prime-crops.npz') as crops:
+    is_b2=plan.get('scope')=='all 55 frequent classes'
+    with np.load(artifact/('class-crops.npz' if is_b2 else 'prime-crops.npz')) as crops:
         for a in plan['assignments']:
             i=a['member'];ledger.extend(components(crops[f'{i}-analytic-source'],crops[f'{i}-analytic-default'],crops[f'{i}-analytic-candidate'],i))
     fired=sorted({r['member'] for r in ledger if r['fires']})
-    assert 277 in fired, 'glyph-277 owned mark must veto the substitution'
-    result=dict(schema='font04-owned-components-v1',source_pdf=str(path),source_pdf_sha256=__import__('hashlib').sha256(path.read_bytes()).hexdigest(),exceptions=fired,components=ledger,policy=dict(halo_pixels=HALO,min_area=MIN_AREA,min_mass=MIN_MASS,source_threshold=.25,default_ownership_threshold=.15,candidate_footprint_threshold=.10),regression_glyph_277='PASS: default retained; owned mark survives')
-    Path('qualification/font04/owned-component-ledger.json').write_text(json.dumps(result,indent=2)+'\n')
+    if not is_b2:assert 277 in fired, 'glyph-277 owned mark must veto the substitution'
+    result=dict(schema='font04-owned-components-v1',source_pdf=str(path),source_pdf_sha256=__import__('hashlib').sha256(path.read_bytes()).hexdigest(),exceptions=fired,components=ledger,policy=dict(halo_pixels=HALO,min_area=MIN_AREA,min_mass=MIN_MASS,source_threshold=.25,default_ownership_threshold=.15,candidate_footprint_threshold=.10),regression_glyph_277='PV complete-output regression pending class_verify' if is_b2 else 'PASS: default retained; owned mark survives')
+    Path('qualification/font04/'+('b2-owned-component-ledger.json' if is_b2 else 'owned-component-ledger.json')).write_text(json.dumps(result,indent=2)+'\n')
     print('ownership veto:',fired)
 
 def test():
