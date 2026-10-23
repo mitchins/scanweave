@@ -7,6 +7,7 @@ import numpy as np
 import pikepdf
 import pypdfium2 as pdfium
 from PIL import Image, ImageDraw
+from qualification.font03.research_checks import require_construction_verification
 from qualification.tools_env import qpdf_bin, qpdf_env, ots_bin
 
 root = Path("qualification/font03/local")
@@ -75,7 +76,11 @@ for engine in ["pdfium", "poppler"]:
     )
 path = paths[1]
 check = subprocess.run(
-    [qpdf_bin(), "--check", str(path)], env=qpdf_env(), capture_output=True, text=True
+    [qpdf_bin(), "--check", str(path)],
+    env=qpdf_env(),
+    capture_output=True,
+    text=True,
+    check=False,
 )
 result["qpdf"] = dict(
     returncode=check.returncode, stdout=check.stdout, stderr=check.stderr
@@ -91,6 +96,7 @@ ots = subprocess.run(
     [ots_bin(), str(root / "preunion.ttf"), str(root / "preunion-sanitized.ttf")],
     capture_output=True,
     text=True,
+    check=False,
 )
 result["ots"] = dict(returncode=ots.returncode, stdout=ots.stdout, stderr=ots.stderr)
 (root / "construction-verification.json").write_text(json.dumps(result, indent=2))
@@ -107,6 +113,7 @@ print(
     )
 )
 print("validators", check.returncode, ots.returncode)
+require_construction_verification(result)
 # Show exact fixed source boxes around the four planned substitutions.
 meta = json.loads(
     Path("qualification/font02/local/reuse-study/registered-pairs.json").read_text()

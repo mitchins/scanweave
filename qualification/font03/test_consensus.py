@@ -153,5 +153,60 @@ class ContourDiagnostics(unittest.TestCase):
         self.assertEqual(contour_error(ring(), moved), contour_error(moved, ring()))
 
 
+class ResearchEntryPointContracts(unittest.TestCase):
+    def test_declared_manifest_sources_are_mandatory(self):
+        import tempfile
+        from pathlib import Path
+        from qualification.font03.research_checks import require_files
+
+        with tempfile.TemporaryDirectory() as directory:
+            source = Path(directory) / "source.pdf"
+            with self.assertRaises(FileNotFoundError):
+                require_files([source])
+            source.write_bytes(b"source fixture")
+            require_files([source])
+
+    def test_repair_requires_an_actual_competing_cohort(self):
+        from qualification.font03.research_checks import repair_margin_supported
+
+        self.assertFalse(repair_margin_supported(None))
+        self.assertFalse(repair_margin_supported(0.0149))
+        self.assertTrue(repair_margin_supported(0.015))
+
+    def test_failed_validation_cannot_exit_successfully(self):
+        from qualification.font03.research_checks import (
+            require_construction_verification,
+        )
+        import copy
+
+        result = dict(
+            qpdf=dict(returncode=0),
+            ots=dict(returncode=0),
+            pdfium=dict(
+                extraction_identical=True,
+                pages=[dict(page=1, equal=False), dict(page=2, equal=True)],
+            ),
+            poppler=dict(
+                extraction_identical=True,
+                pages=[dict(page=1, equal=False), dict(page=2, equal=True)],
+            ),
+        )
+        require_construction_verification(result)
+        for engine in ["qpdf", "ots"]:
+            bad = copy.deepcopy(result)
+            bad[engine]["returncode"] = 1
+            with self.assertRaises(RuntimeError):
+                require_construction_verification(bad)
+        for engine in ["pdfium", "poppler"]:
+            bad = copy.deepcopy(result)
+            bad[engine]["extraction_identical"] = False
+            with self.assertRaises(RuntimeError):
+                require_construction_verification(bad)
+            bad = copy.deepcopy(result)
+            bad[engine]["pages"][1]["equal"] = False
+            with self.assertRaises(RuntimeError):
+                require_construction_verification(bad)
+
+
 if __name__ == "__main__":
     unittest.main()

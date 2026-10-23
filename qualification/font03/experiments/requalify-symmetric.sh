@@ -5,6 +5,7 @@ py=qualification/.venv/bin/python
 root=qualification/font03/local/affine-refinement
 $py qualification/font03/experiments/affine_refinement.py
 for split in validation test; do
+  mkdir -p "$root/$split-curves"
   target/release/font03_templates "$root/$split-trace-input.json" "$root/$split-curves"
 done
 $py qualification/font03/experiments/synthetic_pdfs.py "$root"

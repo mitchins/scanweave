@@ -5,6 +5,7 @@ import subprocess
 import sys
 import importlib.metadata as md
 from qualification.tools_env import qpdf_bin, ots_bin, qpdf_env
+from qualification.font03.research_checks import require_files
 
 root = Path("qualification/font03/local")
 paths = [
@@ -18,8 +19,10 @@ paths = [
     root / "scanweave-preunion",
     Path("target/release/font03_templates"),
 ]
+required_sources = paths[:2].copy()
 for split in ["train", "validation", "test"]:
     base = Path("qualification/font01/local/corpus-font01-v1") / split
+    required_sources.extend([base / "observations.jsonl", base / "oracle/labels.jsonl"])
     paths.extend([base / "observations.jsonl", base / "oracle/labels.jsonl"])
     paths.extend(root.glob(f"{split}-*.*"))
     paths.extend((root / "affine-refinement").glob(f"{split}-*.*"))
@@ -27,6 +30,7 @@ paths.extend((root / "affine-refinement").glob("*calibration.json"))
 paths.extend((root / "town-affine").glob("*.json"))
 paths.extend((root / "repair").glob("*.json"))
 paths.extend((root / "final-review").glob("*.json"))
+require_files(required_sources)
 files = {
     str(p): dict(
         bytes=p.stat().st_size, sha256=hashlib.sha256(p.read_bytes()).hexdigest()

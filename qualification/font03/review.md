@@ -84,3 +84,23 @@ native-pixel distances and the linear `300/source-DPI` aggregation. No empty
 contours occurred in either arm. Saved values match the report. The optional
 source-decision hash check was added before oracle access, alongside the existing
 native-array binding check. No acceptance thresholds or decisions changed.
+
+## CodeRabbit reproduction findings
+
+Five valid comments were addressed without changing any measured admission:
+
+1. Required corpus manifests and financial source PDFs now fail explicitly when
+   absent; optional generated outputs can still be absent during a partial run.
+2. Repair requires a real best/next margin. None of the seven recorded acceptances
+   had an absent margin, so rerunning the frozen rejected arm preserves its exact
+   outcomes. Source-only repair groups are frozen separately from healthy regrouping.
+3. Symmetric requalification creates fresh tracer output directories.
+4. `prepare_town.py` explicitly produces the original three-parameter uniform
+   inputs; the five-parameter affine path remains separate. Recomputed uniform
+   coverage is byte-identical, rather than silently changing the historical arm.
+5. PDF/font validation and semantic/uninvolved-page failures now cause nonzero
+   verification exits after diagnostics are written. Unit tests exercise failures.
+
+The extended contract suite contains 20 passing tests. The actual complete PDF
+was rechecked with the fail-closed verification command; no visual or measurement
+change is introduced by these reproduction repairs.

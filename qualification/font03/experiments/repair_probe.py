@@ -4,6 +4,7 @@ import time
 import numpy as np
 from scipy import optimize, ndimage
 from PIL import Image
+from qualification.font03.research_checks import repair_margin_supported
 from qualification.font03.consensus import register_affine, robust_template, affine_warp
 
 root = Path("qualification/font03/local")
@@ -13,7 +14,9 @@ for split in ["validation", "test"]:
     rows = json.loads((root / f"{split}-sources.json").read_text())["records"]
     images = np.load(root / f"{split}-canvases.npy")
     labels = json.loads((root / f"{split}-evaluation-labels.json").read_text())
-    groups = json.loads((root / f"{split}-groups.json").read_text())["fitted"]
+    groups = json.loads(Path("qualification/font03/repair-control.json").read_text())[
+        "groups"
+    ][split]
     prototypes = []
     start = time.monotonic()
     for n, g in enumerate(groups):
@@ -107,7 +110,7 @@ for split in ["validation", "test"]:
         accepted = (
             best["missing"] <= 0.10
             and 0.4 <= best["coverage"] <= 1.1
-            and (margin is None or margin >= 0.015)
+            and repair_margin_supported(margin)
         )
         decisions.append(
             dict(

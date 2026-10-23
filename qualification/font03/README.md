@@ -46,9 +46,14 @@ qualification environment, plus Poppler. No training or new OCR engine is used.
    Repeat step 4 with that directory as the optional root argument. In this
    refinement **C and D are identical controls**, not independent candidates.
    Run `native_budget.py` and `structural_calibration.py` for the final gates.
-6. `repair_probe.py` is a separate, rejected damaged-ink experiment. Its
+6. `repair_probe.py` uses frozen source-only groups in `repair-control.json`
+   for the separate, rejected pre-review damaged-ink experiment. Its
    normalized comparisons are not complete-PDF repair qualification.
-7. `town_pdf.py` and the `town_affine*` scripts generate source-bound real-page
+7. `prepare_town.py` produces the frozen **three-parameter uniform** source
+   groups and fields; trace that input into the local root before `town_pdf.py`.
+   `town_affine.py` separately produces **five-parameter** records under
+   `town-affine/`; trace there and use `town_affine_pdf.py`. Never interchange
+   the two formats. `town_pdf.py` and the `town_affine*` scripts generate source-bound real-page
    probes from the existing Town Officer coverage, group and placement records.
    Full shadow PDFs retain original fonts and cannot demonstrate font savings.
    `construction-control.json` freezes the pre-review real intervention. Run
