@@ -1,0 +1,267 @@
+{
+  "validation": {
+    "summary": {
+      "pairs": 279,
+      "accepted": 26,
+      "safe": 20,
+      "material": 1,
+      "ambiguous": 5
+    },
+    "by_character": {
+      "e": {
+        "pairs": 50,
+        "source_accepted": 1,
+        "safe": 0,
+        "material": 0,
+        "ambiguous": 1
+      },
+      "1": {
+        "pairs": 28,
+        "source_accepted": 4,
+        "safe": 1,
+        "material": 0,
+        "ambiguous": 3
+      },
+      "a": {
+        "pairs": 36,
+        "source_accepted": 0,
+        "safe": 0,
+        "material": 0,
+        "ambiguous": 0
+      },
+      "8": {
+        "pairs": 50,
+        "source_accepted": 0,
+        "safe": 0,
+        "material": 0,
+        "ambiguous": 0
+      },
+      ".": {
+        "pairs": 45,
+        "source_accepted": 21,
+        "safe": 19,
+        "material": 1,
+        "ambiguous": 1
+      },
+      "!": {
+        "pairs": 70,
+        "source_accepted": 0,
+        "safe": 0,
+        "material": 0,
+        "ambiguous": 0
+      }
+    },
+    "diagnostic_auc": {
+      "current_normalized_iou": 0.8556224899598394,
+      "registered_iou": 0.7668005354752343
+    },
+    "current_score_only_gates": {
+      "0.78": {
+        "pairs": 27,
+        "safe": 13,
+        "material": 12
+      },
+      "0.96": {
+        "pairs": 0,
+        "safe": 0,
+        "material": 0
+      }
+    },
+    "failures": [
+      {
+        "target": "63b2dcde0e849e5222565197",
+        "donor": "07926c30046a8f676f3d77d7",
+        "character": ".",
+        "target_face": "NimbusMonoPS-Regular",
+        "donor_face": "Z003-MediumItalic",
+        "renderers": [
+          {
+            "renderer": "pdfium",
+            "source_gate": true,
+            "safe": false,
+            "material": true,
+            "baseline": {
+              "mse": 1.020982874608292,
+              "iou": 0.4329896907216495,
+              "area": 1.162608869846494
+            },
+            "candidate": {
+              "mse": 0.5857918946238704,
+              "iou": 0.35714285714285715,
+              "area": -0.2182335176496707
+            }
+          },
+          {
+            "renderer": "poppler",
+            "source_gate": true,
+            "safe": true,
+            "material": false,
+            "baseline": {
+              "mse": 1.0441516311166117,
+              "iou": 0.4,
+              "area": 1.1523902639521575
+            },
+            "candidate": {
+              "mse": 0.2435578460113279,
+              "iou": 0.6170212765957447,
+              "area": -0.2211657636475347
+            }
+          }
+        ]
+      }
+    ]
+  },
+  "test": {
+    "summary": {
+      "pairs": 562,
+      "accepted": 48,
+      "safe": 38,
+      "material": 2,
+      "ambiguous": 8
+    },
+    "by_character": {
+      "e": {
+        "pairs": 84,
+        "source_accepted": 3,
+        "safe": 2,
+        "material": 0,
+        "ambiguous": 1
+      },
+      "1": {
+        "pairs": 112,
+        "source_accepted": 4,
+        "safe": 3,
+        "material": 0,
+        "ambiguous": 1
+      },
+      "a": {
+        "pairs": 84,
+        "source_accepted": 13,
+        "safe": 10,
+        "material": 0,
+        "ambiguous": 3
+      },
+      "8": {
+        "pairs": 98,
+        "source_accepted": 3,
+        "safe": 2,
+        "material": 0,
+        "ambiguous": 1
+      },
+      ".": {
+        "pairs": 104,
+        "source_accepted": 25,
+        "safe": 21,
+        "material": 2,
+        "ambiguous": 2
+      },
+      "!": {
+        "pairs": 80,
+        "source_accepted": 0,
+        "safe": 0,
+        "material": 0,
+        "ambiguous": 0
+      }
+    },
+    "diagnostic_auc": {
+      "current_normalized_iou": 0.6765770252324037,
+      "registered_iou": 0.6919986719787516
+    },
+    "current_score_only_gates": {
+      "0.78": {
+        "pairs": 85,
+        "safe": 21,
+        "material": 59
+      },
+      "0.96": {
+        "pairs": 1,
+        "safe": 0,
+        "material": 1
+      }
+    },
+    "failures": [
+      {
+        "target": "19cd4c24dfa2a4254effdb2a",
+        "donor": "1d16f73299b12b21e3d18f04",
+        "character": ".",
+        "target_face": "LiberationSans-Regular",
+        "donor_face": "LiberationSans-Regular",
+        "renderers": [
+          {
+            "renderer": "pdfium",
+            "source_gate": true,
+            "safe": false,
+            "material": true,
+            "baseline": {
+              "mse": 0.511788251604863,
+              "iou": 0.5517241379310345,
+              "area": 0.3955468700536344
+            },
+            "candidate": {
+              "mse": 0.22310309844961668,
+              "iou": 0.5,
+              "area": -0.22898928324381496
+            }
+          },
+          {
+            "renderer": "poppler",
+            "source_gate": true,
+            "safe": false,
+            "material": false,
+            "baseline": {
+              "mse": 0.5691368032093647,
+              "iou": 0.5172413793103449,
+              "area": 0.3676052680574531
+            },
+            "candidate": {
+              "mse": 0.2538892523585209,
+              "iou": 0.4782608695652174,
+              "area": -0.256275910213248
+            }
+          }
+        ]
+      },
+      {
+        "target": "2d707b7763ba0e265bd83c10",
+        "donor": "1d16f73299b12b21e3d18f04",
+        "character": ".",
+        "target_face": "LiberationSerif-Italic",
+        "donor_face": "LiberationSans-Regular",
+        "renderers": [
+          {
+            "renderer": "pdfium",
+            "source_gate": true,
+            "safe": false,
+            "material": true,
+            "baseline": {
+              "mse": 0.7610313297349347,
+              "iou": 0.5396825396825397,
+              "area": 0.8470353126922527
+            },
+            "candidate": {
+              "mse": 0.5130633754786228,
+              "iou": 0.38235294117647056,
+              "area": -0.6169185281444418
+            }
+          },
+          {
+            "renderer": "poppler",
+            "source_gate": true,
+            "safe": false,
+            "material": true,
+            "baseline": {
+              "mse": 0.7548040110631948,
+              "iou": 0.5431309904153354,
+              "area": 0.8443550079189159
+            },
+            "candidate": {
+              "mse": 0.5322993417440038,
+              "iou": 0.3764705882352941,
+              "area": -0.6229723873902637
+            }
+          }
+        ]
+      }
+    ]
+  }
+}

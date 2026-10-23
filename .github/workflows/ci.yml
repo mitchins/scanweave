@@ -115,6 +115,8 @@ jobs:
           qualification/.venv/bin/python qualification/test_font01_statistics.py
           qualification/.venv/bin/python qualification/test_font01_challenger.py
           qualification/.venv/bin/python qualification/test_font01_analysis.py
+      - name: FONT-02 rendered reuse evaluation contracts
+        run: qualification/.venv/bin/python -m unittest qualification.font02.test_rendered_reuse
       - name: Corpus source and diagnostic tag boundaries
         run: qualification/.venv/bin/python qualification/test_corpus_boundaries.py
       - name: hOCR XML entity boundary

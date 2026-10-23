@@ -1,0 +1,184 @@
+{
+  "base": "790a2f978af6c01fd699cb74ed05b457488bc3d2",
+  "branch": "research/font02-rendered-reuse",
+  "tools": {
+    "numpy": "2.5.4",
+    "scipy": "1.18.1",
+    "Pillow": "13.0.0",
+    "pikepdf": "10.17.0",
+    "pypdfium2": "5.14.0",
+    "fonttools": "4.67.0"
+  },
+  "artifacts": [
+    {
+      "path": "qualification/font02/local/rendered-reuse-reproduction.tar.gz",
+      "bytes": 36411,
+      "sha256": "68d9c8934ea3089ae6c1578ff4d53e7caea5f132086135a080099843416f3ac9"
+    },
+    {
+      "path": "qualification/font02/local/reuse-study/town-source.png",
+      "bytes": 920385,
+      "sha256": "d259c039cecd778b692eb563ac508bd680304634af6916331da32831b90e63b8"
+    },
+    {
+      "path": "qualification/font02/local/reuse-study/town.hocr",
+      "bytes": 84834,
+      "sha256": "44d3f5c19c1483b89947e7dcd30a339ad043ce989ea2933660318bc613ba7cbb"
+    },
+    {
+      "path": "qualification/font02/local/reuse-study/rust-owned.json",
+      "bytes": 3544028,
+      "sha256": "a2c663232b8f3c536d008e57a5e663c87b38244aa1234c46c7d36e075ef4fa66"
+    },
+    {
+      "path": "qualification/font02/local/reuse-study/individual.pdf",
+      "bytes": 13002,
+      "sha256": "c6e50dc7a00518da53b2dcec74cda85406542b62118833eb4649ba48fe055a8d"
+    },
+    {
+      "path": "qualification/font02/local/reuse-study/individual.ttf",
+      "bytes": 19700,
+      "sha256": "345fc416898e72442bba8d8038cd22ee468e17116b9a6d538ad4de60aa9f8b16"
+    },
+    {
+      "path": "qualification/font02/local/reuse-study/substitution-plan.json",
+      "bytes": 186413,
+      "sha256": "c225d74a08fb885facf74938c62e91ca029126df404580c0cc83ebd674ea7e01"
+    },
+    {
+      "path": "qualification/font02/local/reuse-study/registered-pairs.json",
+      "bytes": 334207,
+      "sha256": "ac1418a68c6cfc623fb137b63ec91c60d88a0515da2919c6acf47fb6ecb275ba"
+    },
+    {
+      "path": "qualification/font02/local/reuse-study/rendered-substitution-results.json",
+      "bytes": 1195247,
+      "sha256": "923edf5695a07076fa8d248265c7a25c5b69d7dc36ff44fbda3940bdf2a9751c"
+    },
+    {
+      "path": "qualification/font02/local/reuse-study/added-missing-ink-maps.npz",
+      "bytes": 1988859,
+      "sha256": "77f86dd40c5f17e99987538e99187fd9c142fd0de132307f891da44995b219ea"
+    },
+    {
+      "path": "qualification/font02/local/reuse-study/financial-reuse-shadow.pdf",
+      "bytes": 2849041,
+      "sha256": "af1fa617e81ace0e114ab32e90d3b76292934186e12762f213fd44211ced3e26"
+    },
+    {
+      "path": "qualification/font02/local/reuse-study/no-rotation/financial-reuse-shadow.pdf",
+      "bytes": 2848946,
+      "sha256": "e2c8f89487dc818863c9a29ccdbc172dcafb0131ed957940211fd350c73f37f6"
+    },
+    {
+      "path": "qualification/font02/local/reuse-study/no-rotation/financial-healthy-only-shadow.pdf",
+      "bytes": 2848921,
+      "sha256": "ca105ba6cabb1a619d65c019903e04fcde0de203cf89691e2c13c4e9f3825100"
+    },
+    {
+      "path": "qualification/font02/local/reuse-study/no-rotation/healthy-only-verification.json",
+      "bytes": 2347,
+      "sha256": "f1db2e93da863b7429d42e0516f814ae509b9465cb7d32b3c215ed947838fe5c"
+    },
+    {
+      "path": "qualification/font02/local/hard-negatives/validation-frozen.json",
+      "bytes": 14735,
+      "sha256": "31f83feb97a5cc26f1673223d52c59b441c4c6292de06dda65ddab4ab27e08f9"
+    },
+    {
+      "path": "qualification/font02/local/hard-negatives/validation-sources.json",
+      "bytes": 2830755,
+      "sha256": "3f49248bada0dc6a354ddcfbd7b6f4094c25da51e0add84e0b5a4e0f9cca403a"
+    },
+    {
+      "path": "qualification/font02/local/hard-negatives/validation-pre-oracle-freeze.json",
+      "bytes": 279,
+      "sha256": "3045722328b3dee71cdf2805232f64ed1304585fd51e38f2ee49d0721a83e5f7"
+    },
+    {
+      "path": "qualification/font02/local/hard-negatives/validation-source-decisions.json",
+      "bytes": 586919,
+      "sha256": "d054b2b77e21a55b717d9b1dc25c4420a1589da3e01dd6d023664c6450215eef"
+    },
+    {
+      "path": "qualification/font02/local/hard-negatives/validation-oracle-results.json",
+      "bytes": 307137,
+      "sha256": "ed7b8c5595afaed119375e662987100ef2c17a4247fb63cf65b08bb6e7c312f3"
+    },
+    {
+      "path": "qualification/font02/local/hard-negatives/validation-probes.pdf",
+      "bytes": 343799,
+      "sha256": "7e8418828b6708e303a89dd1407e95b84a0e45d9c69f48bd88055fdaad2962dd"
+    },
+    {
+      "path": "qualification/font02/local/hard-negatives/validation-rendered-coverage.npz",
+      "bytes": 718065,
+      "sha256": "90f9474560a268cd6bf85f6d560181247c0f45e04e5c286a08857ea8bb04e783"
+    },
+    {
+      "path": "qualification/font02/local/hard-negatives/test-frozen.json",
+      "bytes": 16713,
+      "sha256": "c253aed514352aa717e4ec367bfef491f381192e6b3983837a66d4d2a9ccd7e6"
+    },
+    {
+      "path": "qualification/font02/local/hard-negatives/test-sources.json",
+      "bytes": 3292270,
+      "sha256": "5a578f2ac2744de19b826b4de67a1b9ddd431893d6977da6a9081dc030e2863c"
+    },
+    {
+      "path": "qualification/font02/local/hard-negatives/test-pre-oracle-freeze.json",
+      "bytes": 279,
+      "sha256": "18b08e1c91ed3b3cdbf079e1fc4d8c03f138388faeb5c674afdb61ede6603c2f"
+    },
+    {
+      "path": "qualification/font02/local/hard-negatives/test-source-decisions.json",
+      "bytes": 1170463,
+      "sha256": "9fd3186d4155a576be23abf772a36ce479d9f89d27f59eb1ec164741a26e2b72"
+    },
+    {
+      "path": "qualification/font02/local/hard-negatives/test-oracle-results.json",
+      "bytes": 619107,
+      "sha256": "bf9b95fff3bfad1b3c78a2daea1b6a75727614e0b87fa84a254309d62ddf466a"
+    },
+    {
+      "path": "qualification/font02/local/hard-negatives/test-probes.pdf",
+      "bytes": 373387,
+      "sha256": "735ad56fc73e90a222b2ce8adcd441c7b7190bf339d762d7e88dfe17d32c7f99"
+    },
+    {
+      "path": "qualification/font02/local/hard-negatives/test-rendered-coverage.npz",
+      "bytes": 1270183,
+      "sha256": "896dc083ff81d6bda41ae2b350dc35fb9f0611e7a31360d6c83a993aafe0d90e"
+    },
+    {
+      "path": "qualification/font02/reuse-review.md",
+      "bytes": 3395,
+      "sha256": "c563905b67be4c9bdde235d3b9e438641d5a9c8117671b93696653ea38e5708d"
+    },
+    {
+      "path": "qualification/font02/current-score-parity.json",
+      "bytes": 219,
+      "sha256": "c2216a1ed495956d6bb61b5b2b9f17ec2741df586201b1f429562815ac48e987"
+    },
+    {
+      "path": "qualification/font02/healthy-shadow-verification.json",
+      "bytes": 2347,
+      "sha256": "f1db2e93da863b7429d42e0516f814ae509b9465cb7d32b3c215ed947838fe5c"
+    },
+    {
+      "path": "qualification/font02/local/research-workspace-tests.log",
+      "bytes": 15083,
+      "sha256": "ec5e5eea326df5020a5bf6fd05b1c19432412ff0a60ffac0f86edd99c5341a4f"
+    },
+    {
+      "path": "qualification/font02/local/research-clippy.log",
+      "bytes": 230,
+      "sha256": "cb0a9d02c02a6826add5cd4f13f026df59e306030f43f5953394fcc9e31beea4"
+    },
+    {
+      "path": "qualification/font02/local/research-python-ci.log",
+      "bytes": 18896,
+      "sha256": "c1a5da776f0dd30c49fbc3a001bbf242c504e0c1957e3be12612384a3d8af952"
+    }
+  ]
+}
