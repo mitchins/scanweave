@@ -2,18 +2,9 @@ diff --git a/crates/scanweave-io/src/document.rs b/crates/scanweave-io/src/docum
 index a9a0963..0139e4f 100644
 --- a/crates/scanweave-io/src/document.rs
 +++ b/crates/scanweave-io/src/document.rs
-@@ -421,6 +421,7 @@ pub fn convert_document_with_sources(
-     }
-     stage_timings.page_conversion_ms = stage_start.elapsed().as_millis();
- 
+@@ -423,0 +424 @@ pub fn convert_document_with_sources(
 +    if policy.profile == "clearscan" { font03_construction_control(&mut pages)?; }
-     // 2. document-wide font: union of (shape, label), remapped per page
-     let stage_start = std::time::Instant::now();
-     let (mut shapes, mut encodings, remaps) = union_encodings(&pages);
-@@ -832,3 +833,39 @@ mod tonal_protection_tests {
-         assert!(!allows_tonal_images(&[page], &Policy::default()));
-     }
- }
+@@ -834,0 +836,36 @@ mod tonal_protection_tests {
 +
 +// FONT-03 construction-only intervention. Not a deployable canonicalizer.
 +fn font03_construction_control(pages: &mut [DocumentPage]) -> Result<(), String> {

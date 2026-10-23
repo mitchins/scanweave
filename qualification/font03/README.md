@@ -51,6 +51,9 @@ qualification environment, plus Poppler. No training or new OCR engine is used.
 7. `town_pdf.py` and the `town_affine*` scripts generate source-bound real-page
    probes from the existing Town Officer coverage, group and placement records.
    Full shadow PDFs retain original fonts and cannot demonstrate font savings.
+   `construction-control.json` freezes the pre-review real intervention. Run
+   `town_native_budget.py` after its native rendering to reproduce the exact
+   four source-bound targets; do not substitute regenerated symmetric limits.
 
 The original initial real cohort record and adjudicated source health are kept
 in the hash manifest. Their manual health decisions are not an automatic
@@ -61,7 +64,8 @@ FONT-01/02 and remains development evidence, not a pristine final holdout.
 
 This is a **fixed-plan scientific intervention**, not product inference.
 `preunion_plan.py` generates the four accepted source-bound real substitutions.
-Apply `construction-control.patch` in a detached temporary checkout of `c10e3df`,
+Apply `construction-control.patch` using `git apply --unidiff-zero` in a detached
+temporary checkout of `c10e3df`,
 copy the generated plan to `crates/scanweave-io/src/font03_plan.json`, build its CLI,
 and convert the original 13-page financial input normally. The hook checks the
 exact source RGB hash, size, supplied `e` identities and symbol IDs, then inserts
