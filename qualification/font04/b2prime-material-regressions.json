@@ -1,0 +1,278 @@
+{
+  "material_cases_only": true,
+  "n": 16,
+  "regressions": [
+    {
+      "review": "qualification/font04/review_b1prime/key-decoded-rejected.json",
+      "review_sha256": "627b0d1a6280b833d97936a269cd557398e4c60b9179627d891932a9d04beb18",
+      "member": 48,
+      "canonical": 101,
+      "judgment": "material: neighbour m altered to nt",
+      "hygiene": [
+        "outside_independent_class_footprint",
+        "class_unsupported_topology"
+      ],
+      "retained_hard_vetoes": [
+        "centroid"
+      ],
+      "pass_regression": true
+    },
+    {
+      "review": "qualification/font04/review_b1prime/key-decoded-rejected.json",
+      "review_sha256": "627b0d1a6280b833d97936a269cd557398e4c60b9179627d891932a9d04beb18",
+      "member": 73,
+      "canonical": 111,
+      "judgment": "material: neighbour l altered",
+      "hygiene": [
+        "outside_independent_class_footprint",
+        "class_unsupported_topology"
+      ],
+      "retained_hard_vetoes": [
+        "area",
+        "centroid",
+        "height"
+      ],
+      "pass_regression": true
+    },
+    {
+      "review": "qualification/font04/review_b1prime/key-decoded-rejected.json",
+      "review_sha256": "627b0d1a6280b833d97936a269cd557398e4c60b9179627d891932a9d04beb18",
+      "member": 85,
+      "canonical": 238,
+      "judgment": "material: neighbour altered",
+      "hygiene": [
+        "outside_independent_class_footprint",
+        "unsupported_component",
+        "class_unsupported_topology"
+      ],
+      "retained_hard_vetoes": [
+        "area",
+        "centroid",
+        "counter_band_0.35",
+        "counter_band_0.65",
+        "height",
+        "topology"
+      ],
+      "pass_regression": true
+    },
+    {
+      "review": "qualification/font04/review_b1prime/key-decoded-rejected.json",
+      "review_sha256": "627b0d1a6280b833d97936a269cd557398e4c60b9179627d891932a9d04beb18",
+      "member": 87,
+      "canonical": 78,
+      "judgment": "material: neighbours altered",
+      "hygiene": [
+        "outside_independent_class_footprint",
+        "class_unsupported_topology"
+      ],
+      "retained_hard_vetoes": [
+        "counter_band_0.35",
+        "counter_band_0.65",
+        "counter_difference"
+      ],
+      "pass_regression": true
+    },
+    {
+      "review": "qualification/font04/review_b1prime/key-decoded-rejected.json",
+      "review_sha256": "627b0d1a6280b833d97936a269cd557398e4c60b9179627d891932a9d04beb18",
+      "member": 140,
+      "canonical": 30,
+      "judgment": "material: broken e",
+      "hygiene": [
+        "class_unsupported_topology"
+      ],
+      "retained_hard_vetoes": [
+        "counter_band_0.65",
+        "topology"
+      ],
+      "pass_regression": true
+    },
+    {
+      "review": "qualification/font04/review_b1prime/key-decoded-rejected.json",
+      "review_sha256": "627b0d1a6280b833d97936a269cd557398e4c60b9179627d891932a9d04beb18",
+      "member": 234,
+      "canonical": 105,
+      "judgment": "material: neighbour l altered",
+      "hygiene": [
+        "outside_independent_class_footprint",
+        "unsupported_component",
+        "class_unsupported_topology"
+      ],
+      "retained_hard_vetoes": [
+        "area",
+        "centroid",
+        "cross_moment",
+        "height",
+        "stroke"
+      ],
+      "pass_regression": true
+    },
+    {
+      "review": "qualification/font04/review_b1prime/key-decoded-rejected.json",
+      "review_sha256": "627b0d1a6280b833d97936a269cd557398e4c60b9179627d891932a9d04beb18",
+      "member": 238,
+      "canonical": 105,
+      "judgment": "material: neighbour w altered",
+      "hygiene": [
+        "outside_independent_class_footprint",
+        "unsupported_component",
+        "class_unsupported_topology"
+      ],
+      "retained_hard_vetoes": [
+        "centroid",
+        "counter_band_0.65",
+        "cross_moment"
+      ],
+      "pass_regression": true
+    },
+    {
+      "review": "qualification/font04/review_b1prime/key-decoded-rejected.json",
+      "review_sha256": "627b0d1a6280b833d97936a269cd557398e4c60b9179627d891932a9d04beb18",
+      "member": 275,
+      "canonical": 95,
+      "judgment": "material: ink added to neighbour w",
+      "hygiene": [
+        "outside_independent_class_footprint",
+        "class_unsupported_topology"
+      ],
+      "retained_hard_vetoes": [
+        "counter_band_0.65"
+      ],
+      "pass_regression": true
+    },
+    {
+      "review": "qualification/font04/review_b1prime/key-decoded-rejected.json",
+      "review_sha256": "627b0d1a6280b833d97936a269cd557398e4c60b9179627d891932a9d04beb18",
+      "member": 288,
+      "canonical": 112,
+      "judgment": "material: counter dot lost",
+      "hygiene": [],
+      "retained_hard_vetoes": [
+        "counter_band_0.35"
+      ],
+      "pass_regression": true
+    },
+    {
+      "review": "qualification/font04/review_b2/key-decoded.json",
+      "review_sha256": "7aa39a51bdc3fdb002e00cde29255f071da6bc1942e687d9d6792ad6b44898ad",
+      "member": 3072,
+      "canonical": 1598,
+      "judgment": "neighbour w altered",
+      "hygiene": [
+        "outside_independent_class_footprint",
+        "unsupported_component",
+        "class_unsupported_topology"
+      ],
+      "retained_hard_vetoes": [
+        "centroid",
+        "counter_band_0.65",
+        "cross_moment"
+      ],
+      "pass_regression": true
+    },
+    {
+      "review": "qualification/font04/review_b2/key-decoded.json",
+      "review_sha256": "7aa39a51bdc3fdb002e00cde29255f071da6bc1942e687d9d6792ad6b44898ad",
+      "member": 2997,
+      "canonical": 1427,
+      "judgment": "s altered to t",
+      "hygiene": [
+        "outside_independent_class_footprint",
+        "unsupported_component",
+        "class_unsupported_topology"
+      ],
+      "retained_hard_vetoes": [
+        "centroid",
+        "counter_band_0.35",
+        "stroke",
+        "topology"
+      ],
+      "pass_regression": true
+    },
+    {
+      "review": "qualification/font04/review_b2/key-decoded.json",
+      "review_sha256": "7aa39a51bdc3fdb002e00cde29255f071da6bc1942e687d9d6792ad6b44898ad",
+      "member": 488,
+      "canonical": 460,
+      "judgment": "u drawn as capital U",
+      "hygiene": [],
+      "retained_hard_vetoes": [
+        "area",
+        "counter_band_0.65",
+        "stroke",
+        "width"
+      ],
+      "pass_regression": true
+    },
+    {
+      "review": "qualification/font04/review_b2/key-decoded.json",
+      "review_sha256": "7aa39a51bdc3fdb002e00cde29255f071da6bc1942e687d9d6792ad6b44898ad",
+      "member": 591,
+      "canonical": 9,
+      "judgment": "c replaced by FI-like ink",
+      "hygiene": [
+        "outside_independent_class_footprint",
+        "unsupported_component",
+        "class_unsupported_topology"
+      ],
+      "retained_hard_vetoes": [
+        "area",
+        "centroid",
+        "counter_band_0.65",
+        "cross_moment",
+        "height",
+        "width"
+      ],
+      "pass_regression": true
+    },
+    {
+      "review": "qualification/font04/review_b2/key-decoded.json",
+      "review_sha256": "7aa39a51bdc3fdb002e00cde29255f071da6bc1942e687d9d6792ad6b44898ad",
+      "member": 1040,
+      "canonical": 724,
+      "judgment": "c replaced by dotless-i-like shape",
+      "hygiene": [],
+      "retained_hard_vetoes": [
+        "area",
+        "centroid",
+        "elongation",
+        "width"
+      ],
+      "pass_regression": true
+    },
+    {
+      "review": "qualification/font04/review_b2/key-decoded.json",
+      "review_sha256": "7aa39a51bdc3fdb002e00cde29255f071da6bc1942e687d9d6792ad6b44898ad",
+      "member": 3110,
+      "canonical": 1610,
+      "judgment": "m altered to o-like",
+      "hygiene": [],
+      "retained_hard_vetoes": [
+        "counter_band_0.35",
+        "counter_band_0.65",
+        "counter_difference",
+        "topology",
+        "width"
+      ],
+      "pass_regression": true
+    },
+    {
+      "review": "qualification/font04/review_b2/key-decoded.json",
+      "review_sha256": "7aa39a51bdc3fdb002e00cde29255f071da6bc1942e687d9d6792ad6b44898ad",
+      "member": 1405,
+      "canonical": 510,
+      "judgment": "y altered to n",
+      "hygiene": [
+        "outside_independent_class_footprint"
+      ],
+      "retained_hard_vetoes": [
+        "centroid",
+        "counter_band_0.65",
+        "cross_moment",
+        "stroke"
+      ],
+      "pass_regression": true
+    }
+  ],
+  "note": "A valid canonical paired with a wrong-label/contaminated target may pass hygiene; the unchanged member hard veto remains mandatory. No minor/repair/current-side judgments used as material cases."
+}

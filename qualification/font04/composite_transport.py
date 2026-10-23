@@ -47,6 +47,9 @@ def emit(destination,plan,control=CONTROL):
                 glyph=Glyph();glyph.numberOfContours=-1;glyph.components=[c];glyf.glyphs[name]=glyph;metrics[name]=metrics[tt.getGlyphOrder()[mapping[d['cid']]]];stub_names[key]=name;order.append(name)
             instances[i]=stub_names[key];instance_ledger.append(dict(member=i,canonical=j,cid=d['cid'],stub=instances[i],transform=t.tolist(),quantized_linear=quant.tolist(),offset=offset.tolist()))
         tt.setGlyphOrder(order)
+        # Side bearings must describe the new program, while PDF W/advance stays fixed.
+        for name in list(canonical_names.values())+list(stub_names.values()):
+            glyf[name].recalcBounds(glyf);metrics[name]=(metrics[name][0],glyf[name].xMin)
         # Allocate variant maps; every unassigned occurrence uses the original map.
         variants=[];draw_variant={};needed={'.notdef'};all_draws={}
         for pi,page in enumerate(pdf.pages):
@@ -66,10 +69,11 @@ def emit(destination,plan,control=CONTROL):
         tt['head'].modified=0;tt['head'].created=0;buffer=io.BytesIO();tt.save(buffer,reorderTables=False);data=buffer.getvalue();neworder=tt.getGlyphOrder();gids={name:i for i,name in enumerate(neworder)}
         stream=pdf.make_stream(data);stream.Length1=len(data);descriptor=pikepdf.Dictionary(desc.FontDescriptor);descriptor.FontFile2=stream;descriptor=pdf.make_indirect(descriptor)
         fonts=[];widths=pdf.make_indirect(desc.W)
-        for v in variants:
-            child=pikepdf.Dictionary(desc);child.FontDescriptor=descriptor;child.W=widths
-            mapbytes=b''.join(gids.get(v.get(cid,order[oldgid]),0).to_bytes(2,'big') for cid,oldgid in enumerate(mapping));child.CIDToGIDMap=pdf.make_stream(mapbytes)
-            font=pikepdf.Dictionary(parent);font.DescendantFonts=pikepdf.Array([pdf.make_indirect(child)]);fonts.append(pdf.make_indirect(font))
+        for variant_index,v in enumerate(variants):
+            variant_descriptor=pikepdf.Dictionary(descriptor);variant_descriptor.FontName=pikepdf.Name(f'/ScanWeaveDocV{variant_index}')
+            child=pikepdf.Dictionary(desc);child.FontDescriptor=pdf.make_indirect(variant_descriptor);child.W=widths
+            mapbytes=b''.join((gids[v[cid]] if cid in v else 0).to_bytes(2,'big') for cid,oldgid in enumerate(mapping));child.CIDToGIDMap=pdf.make_stream(mapbytes)
+            font=pikepdf.Dictionary(parent);font.BaseFont=pikepdf.Name(f'/ScanWeaveDocV{variant_index}');child.BaseFont=font.BaseFont;font.DescendantFonts=pikepdf.Array([pdf.make_indirect(child)]);fonts.append(pdf.make_indirect(font))
         for pi,page in enumerate(pdf.pages):
             resources=pikepdf.Dictionary(page.Resources);fr=pikepdf.Dictionary(resources.Font)
             for k,f in enumerate(fonts):fr[f'/F04V{k}']=f
@@ -84,7 +88,7 @@ def emit(destination,plan,control=CONTROL):
                 instructions.append((args,op))
             page.Contents=pdf.make_stream(pikepdf.unparse_content_stream(instructions))
             del page.Resources.Font['/F1']
-        pdf.save(destination,deterministic_id=True,compress_streams=True)
+        pdf.save(destination,deterministic_id=True,compress_streams=True,object_stream_mode=pikepdf.ObjectStreamMode.generate)
         kept=set(neworder);retired=[dict(program=name,bytes=count) for name,count in before.items() if name not in kept]
         added=[dict(program=name,kind='canonical' if name in canonical_names.values() else 'stub',bytes=len(tt['glyf'][name].compile(tt['glyf'])),points=(len(tt['glyf'][name].coordinates) if tt['glyf'][name].numberOfContours>0 else 0)) for name in neworder if name in canonical_names.values() or name in stub_names.values()]
         return dict(pdf=str(destination),sha256=sha(destination),bytes=destination.stat().st_size,decoded_font_bytes=len(data),encoded_font_bytes=None,canonical_count=len(canonical_names),stub_count=len(stub_names),font_resource_variants=len(variants),retired_programs=retired,added_programs=added,instances=instance_ledger,transport='CID/Tm/W/ActualText preserved; shared embedded TrueType composite font; metric-identical resource variants for conflicting CID transforms')

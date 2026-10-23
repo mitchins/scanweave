@@ -1,0 +1,88 @@
+{
+  "serial_parallel_exact": true,
+  "pdf_sha256": "19fea6a7983290ceffc1c11e1de6599988372f2b30910565f30562008bd897c4",
+  "members": [
+    {
+      "member": 0,
+      "max_abs_difference": 0.0,
+      "arrays": 11
+    },
+    {
+      "member": 28,
+      "max_abs_difference": 0.0,
+      "arrays": 11
+    },
+    {
+      "member": 75,
+      "max_abs_difference": 0.0,
+      "arrays": 11
+    },
+    {
+      "member": 277,
+      "max_abs_difference": 0.0,
+      "arrays": 11
+    },
+    {
+      "member": 488,
+      "max_abs_difference": 0.0,
+      "arrays": 11
+    },
+    {
+      "member": 716,
+      "max_abs_difference": 0.0,
+      "arrays": 11
+    },
+    {
+      "member": 1128,
+      "max_abs_difference": 0.0,
+      "arrays": 11
+    },
+    {
+      "member": 1233,
+      "max_abs_difference": 0.0,
+      "arrays": 11
+    },
+    {
+      "member": 1405,
+      "max_abs_difference": 0.0,
+      "arrays": 11
+    },
+    {
+      "member": 1529,
+      "max_abs_difference": 0.0,
+      "arrays": 11
+    },
+    {
+      "member": 2000,
+      "max_abs_difference": 0.0,
+      "arrays": 11
+    },
+    {
+      "member": 2500,
+      "max_abs_difference": 0.0,
+      "arrays": 11
+    },
+    {
+      "member": 2997,
+      "max_abs_difference": 0.0,
+      "arrays": 11
+    },
+    {
+      "member": 3110,
+      "max_abs_difference": 0.0,
+      "arrays": 11
+    },
+    {
+      "member": 3422,
+      "max_abs_difference": 0.0,
+      "arrays": 11
+    },
+    {
+      "member": 3500,
+      "max_abs_difference": 0.0,
+      "arrays": 11
+    }
+  ],
+  "reason": "Each worker opens its own PDFium file handles after fork; source/default caches are materialized before fork.",
+  "discarded_failure": "An initial parallel probe inherited seekable PDFium files and produced false missing glyphs; all affected measurements discarded and rerun."
+}

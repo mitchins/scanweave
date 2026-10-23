@@ -70,6 +70,35 @@ def crop_render(path,doc,page,bounds,engine):
     bitmap.close();p.close();return 1-a/255
 
 
+_ROW_CONTEXT=None
+def _init_measure_worker():
+    # PDFium callbacks hold seekable file descriptors. Reopen after fork so
+    # processes cannot race on one inherited open-file description.
+    global _ROW_CONTEXT
+    art,cached,acc,docs,fonts,basebound,bound,path=_ROW_CONTEXT
+    names=list(docs)
+    for doc in docs.values():doc.close()
+    import pypdfium2 as pdfium
+    docs={name:pdfium.PdfDocument(art/f'class-isolated-{name}.pdf') for name in names}
+    _ROW_CONTEXT=(art,cached,acc,docs,fonts,basebound,bound,path)
+
+def _measure_row(r):
+    art,cached,acc,docs,fonts,basebound,bound,path=_ROW_CONTEXT
+    records=[];crops={}
+    i=r['index']
+    if r['source'] is None:return [],{}
+    x,y,xx,yy=map(int,r['source']['bbox']);bounds=[x-4,y-4,xx+4,yy+4]
+    for engine in ['pdfium','poppler','analytic']:
+        arrays={name:(cached[f'{i}-{engine}-default'] if cached is not None and i not in acc and name=='candidate' else crop_render(art/f'class-isolated-{name}.pdf',doc,i,bounds,engine)) for name,doc in docs.items()}
+        if cached is not None:arrays.update(source=cached[f'{i}-{engine}-source'],default=cached[f'{i}-{engine}-default'])
+        for name,value in arrays.items():crops[f'{i}-{engine}-{name}']=value
+        records.append(dict(member=i,character=r['character'],page=r['page'],metric=engine,accepted=i in acc,default=measure(arrays['source'],arrays['default']),candidate=measure(arrays['source'],arrays['candidate'])))
+    a=cached[f'{i}-direct-default'] if cached is not None else direct(fonts['default'],basebound[i],bounds,r['page_height']);b=(a if cached is not None and i not in acc else direct(fonts['candidate'],bound[i],bounds,r['page_height']));src=crops[f'{i}-analytic-source'];crops[f'{i}-direct-default']=a;crops[f'{i}-direct-candidate']=b
+    records.append(dict(member=i,character=r['character'],page=r['page'],metric='direct',accepted=i in acc,default=measure(src,a),candidate=measure(src,b)))
+    if i%25==0:print(path.name,i,flush=True)
+    return records,crops
+
+
 def main(path):
     art=Path(str(path)+'.font04');snap=json.loads((art/'source.json').read_text());rows=snap['rows'];plan=json.loads((art/'plan.json').read_text());acc={r['member'] for r in plan['assignments']};inv=inspect(path);baseinv=inspect(ROOT/'financial-default.pdf');basebound=bind(snap,baseinv);bound=bind(snap,inv)
     (art/'emitted-bindings.json').write_text(json.dumps(basebound))
@@ -85,20 +114,20 @@ def main(path):
         with pikepdf.open(p) as pdf:fonts[name]=TTFont(io.BytesIO(next(iter(pdf.pages[0].Resources.Font.values())).DescendantFonts[0].FontDescriptor.FontFile2.read_bytes()))
     import pypdfium2 as pdfium
     docs={name:pdfium.PdfDocument(art/f'class-isolated-{name}.pdf') for name in (['candidate'] if reference else ['source','default','candidate'])}
-    for r in rows:
-        i=r['index']
-        if r['source'] is None:continue
-        x,y,xx,yy=map(int,r['source']['bbox']);bounds=[x-4,y-4,xx+4,yy+4]
-        for engine in ['pdfium','poppler','analytic']:
-            arrays={name:(cached[f'{i}-{engine}-default'] if cached is not None and i not in acc and name=='candidate' else crop_render(art/f'class-isolated-{name}.pdf',doc,i,bounds,engine)) for name,doc in docs.items()}
-            if cached is not None:arrays.update(source=cached[f'{i}-{engine}-source'],default=cached[f'{i}-{engine}-default'])
-            for name,value in arrays.items():crops[f'{i}-{engine}-{name}']=value
-            records.append(dict(member=i,character=r['character'],page=r['page'],metric=engine,accepted=i in acc,default=measure(arrays['source'],arrays['default']),candidate=measure(arrays['source'],arrays['candidate'])))
-        a=cached[f'{i}-direct-default'] if cached is not None else direct(fonts['default'],basebound[i],bounds,r['page_height']);b=(a if cached is not None and i not in acc else direct(fonts['candidate'],bound[i],bounds,r['page_height']));src=crops[f'{i}-analytic-source'];crops[f'{i}-direct-default']=a;crops[f'{i}-direct-candidate']=b
-        records.append(dict(member=i,character=r['character'],page=r['page'],metric='direct',accepted=i in acc,default=measure(src,a),candidate=measure(src,b)))
-        if i%25==0:print(path.name,i,flush=True)
+    global _ROW_CONTEXT
+    if cached is not None:
+        cache_arrays={key:cached[key] for key in cached.files};cached.close();cached=cache_arrays
+    _ROW_CONTEXT=(art,cached,acc,docs,fonts,basebound,bound,path)
+    workers=max(1,min(8,int(os.environ.get('FONT04_METRIC_WORKERS','1'))))
+    if workers>1:
+        import multiprocessing
+        with multiprocessing.get_context('fork').Pool(workers,initializer=_init_measure_worker) as pool:
+            for rr,cc in pool.imap(_measure_row,rows,chunksize=4):records.extend(rr);crops.update(cc)
+    else:
+        for row in rows:
+            rr,cc=_measure_row(row);records.extend(rr);crops.update(cc)
     for doc in docs.values():doc.close()
-    if cached is not None:cached.close()
+    if cached is not None and hasattr(cached,'close'):cached.close()
     byclass={}
     for char in sorted({r['character'] for r in rows}):
         rr=[r for r in records if r['character']==char];byclass[char]={engine:{subset:headline(rr,path.name,engine,subset) for subset in ['all','substituted']} for engine in ['analytic','direct','pdfium','poppler']}
