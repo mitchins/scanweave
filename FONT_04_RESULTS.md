@@ -1,8 +1,8 @@
-# FONT-04 results — stopped at Checkpoint B2
+# FONT-04 results — stopped at Checkpoint B2′
 
-**Status: B1′ gates passed; B2 complete and stopped for independent review.** Default output is byte-identical. Final B2 P/PV retire 24/16 programs; the substantially higher reuse objective remains unachieved. No promotion or main merge; P2 remains untouched. Earlier A/B1 sections are historical pre-fix measurements, superseded by the corrected checkpoints.
+**Status: B2′ complete; stopped for independent review.** Default remains byte-identical to current main. All tested points are reviewer-pending; no operating point is selected or promoted. P2 is unopened. Earlier A/B1/B2 sections are historical and retained with their qualifications.
 
-Contract: `06f24b122e1cd1cd879880166b8240c7e75747ed`. Product baseline: `c10e3dff93ca12ac410c0f6626a4ef74ce34e0c1`. The preregistration retains SHA-256 `a4f9ccd3a7e51d719946be80f7cc9a297de7ca22285e8755e5e26e415e7db466`.
+Contract: `9c2e9963aebce439495a409ac9588a5b38321fc3`. Product baseline: `c10e3dff93ca12ac410c0f6626a4ef74ce34e0c1`. The preregistration retains SHA-256 `a4f9ccd3a7e51d719946be80f7cc9a297de7ca22285e8755e5e26e415e7db466`.
 
 ## Checkpoint A
 
@@ -164,3 +164,37 @@ Economy is modest under the fixed method and exact text contract; it is not pres
 Complete PDFs: `qualification/font04/local/financial-B2-default.pdf`, `financial-B2-P.pdf`, `financial-B2-PV.pdf`; diagnostic `financial-B2-P-initial.pdf` and deterministic `financial-B2-PV-repeat.pdf` are retained in the same directory. Current review: `qualification/font04/local/financial-B2-PV-review/blinded-review.pdf`. See [checkpoint-B2.json](qualification/font04/checkpoint-B2.json) and [b2-artifact-manifest.json](qualification/font04/b2-artifact-manifest.json).
 
 Runtime and sampled process-tree RSS/PSS are reported on the same machine. RSS sums repeat shared pages; PSS apportions them. Runs overlapped other discovery work; no isolated performance improvement is claimed. **STOP: no B3, P2, product promotion, main merge or force-push.**
+
+## Checkpoint B2′ — composite transport, canonical hygiene and complete frontier
+
+**STOP: independent review pending. No operating point selected or promoted.** Contract pinned at `9c2e9963aebce439495a409ac9588a5b38321fc3`. Current remote main remains `c10e3dff…`; the rebuilt binary is unchanged and the fresh default PDF is byte-identical to main (`74c31136…`, 2,849,237 bytes). P2 remains unopened.
+
+Frozen P-initial membership (1,209 substitutions) now preserves each default CID, Tm, W and ActualText through TrueType composites. Conflicting instances use metric-identical CID-map resources sharing one embedded font. Native extraction and search, including amounts/dates, pass in PDFium and Poppler (Poppler literal searches over identical extraction); qpdf, OTS, raster, invisible-user and unchanged-glyph contracts pass with **zero functional-veto rejections**. Analytic/direct transport mean changes are about 0.00005; Poppler mean changes +0.00468 and p95 −0.02491, both below measured renderer floors. Native pixels are not asserted identical.
+
+The orthogonal source-supported canonical footprint/component screen excludes 861 of 3,524 offers before soft acceptance. All 9 B1′ and 7 B2 candidate-side material cases remain blocked by hygiene or unchanged hard vetoes; valid canonicals paired with wrong-label/contaminated members still require those member vetoes. Minor/repair/current-side judgments were not used as material regressions. Weight bands separate lighter/heavier source impressions.
+
+Witness counts are diagnostic only. The first complete sweep inadvertently left 378 members without a fallback floor; it is retained with full PDFs/scores as `support-initial`. Final source-only leave-one-out estimates cover every member. No hard structural veto was relaxed.
+
+| Tested point | Substituted | Net primitive outlines retired | Composite stubs | Analytic mean / p95 | Complete PDF bytes | Saving vs default |
+|---|---:|---:|---:|---:|---:|---:|
+| default | 0 | 0 | 0 | 0.065575 / 0.132734 | 2849237 | 0 |
+| star-1.0 | 1304 | 34 | 1300 | 0.055816 / 0.116897 | 2872954 | -23717 |
+| star-1.0-net | 936 | 138 | 932 | 0.058918 / 0.124255 | 2837175 | +12062 |
+| star-1.5 | 1653 | 235 | 1649 | 0.056386 / 0.113179 | 2827139 | +22098 |
+| star-2.0 | 1728 | 292 | 1724 | 0.057495 / 0.114547 | 2813092 | +36145 |
+| cover-1.0 | 1360 | 68 | 1354 | 0.055560 / 0.116553 | 2864314 | -15077 |
+| cover-1.5 | 1695 | 286 | 1690 | 0.056598 / 0.113615 | 2812469 | +36768 |
+| cover-2.0 | 1750 | 327 | 1746 | 0.057419 / 0.113946 | 2804135 | +45102 |
+| star-1.0-slot-net | 0 | 0 | 0 | 0.065575 / 0.132734 | 2860050 | -10813 |
+
+All 3,524 frequent draws and substituted subsets have per-class analytic-primary, direct, PDFium and Poppler mean/p95/worst-ten scorecards with renderer floors. Primitive outline reuse is distinct from CID→GID slot economy: per-occurrence stubs increase total required slots. Byte attribution lists every added canonical, stub and retired program, point counts, encoded/decoded fonts, content/CID-map/raster/other bytes, and the matched save-only control (2,848,780 bytes). Fidelity-only groups are exposed by the separate outline net-retirement control; the literal all-slot rule including stubs is also tested.
+
+Owned-ink significance separates attached boundary discrepancies from detached marks; calibration retains 21 of the 44 reviewed firings conservatively. Glyph-277 (B1 index, B2 member 3422), glyph-3422 and glyph-1233 retain their exact default programs and matrices. Actual unmasked-halo audits find zero remaining unexplained owned components among final substitutions; every point repeats deterministically. Scanner dirt absent from default is never promoted.
+
+The sealed review contains 17440 panels in both renderers, 100% and 400%, including every newly admitted member or a random ≥200 per point, all protocol tails, ≥150 random rejected members, all ownership exceptions, material regressions, repeated words and amounts/dates. Each glyph candidate replaces only its target in identical default page context. Public files contain opaque IDs and Source/U/V only; the key is separately held and unopened. Materiality and over-rejection remain **unknown**, not zero.
+
+Review: `qualification/font04/local/B2prime-blind-review/blinded-review.pdf`. Complete PDFs, repeats, scorecards, audits and hashes: [checkpoint-B2prime.json](qualification/font04/checkpoint-B2prime.json), [frontier](qualification/font04/b2prime-frontier.json), [byte attribution](qualification/font04/b2prime-byte-attribution.json), [artifact manifest](qualification/font04/b2prime-artifact-manifest.json).
+
+The experimental measurements reuse frozen OCR, outlines and pair fits; baseline full-conversion runtime, incremental emission and measurement time/RSS/PSS are reported separately. No end-to-end speed gain is claimed. The bounded frontier improves outline reuse, while complete-PDF savings remain modest and newly admitted typography awaits independent review. No opportunity is declared falsified.
+
+**STOP at B2′. No B3, P2, operating-point promotion, merge, new product PR, or PR #24 state change. No security finding was dismissed.**

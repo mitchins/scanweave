@@ -1,0 +1,2043 @@
+{
+  "schema": "font04-b2prime-artifacts-v1",
+  "artifacts": [
+    {
+      "path": "qualification/font04/local/B2prime-actual-audit.log",
+      "bytes": 480,
+      "sha256": "4e5a2bb6eaf026438ee64beabe1ce4378fe63427e2d4e072ca8b4d2eec132c2e"
+    },
+    {
+      "path": "qualification/font04/local/B2prime-binary-after.sha256",
+      "bytes": 91,
+      "sha256": "d7e2a1b615af433c04bc693ea38a988974e2d49153cd16940cbde4c96e2107a7"
+    },
+    {
+      "path": "qualification/font04/local/B2prime-binary-before.sha256",
+      "bytes": 91,
+      "sha256": "d7e2a1b615af433c04bc693ea38a988974e2d49153cd16940cbde4c96e2107a7"
+    },
+    {
+      "path": "qualification/font04/local/B2prime-blind-review/blinded-review.pdf",
+      "bytes": 722138153,
+      "sha256": "f108bb19bcb936573182fe8cd29a2fb24eb8d7d31fd710103773d9695e6b19ae"
+    },
+    {
+      "path": "qualification/font04/local/B2prime-blind-review/judgments-template.json",
+      "bytes": 4011256,
+      "sha256": "f4cee32a81c0f85ad2f54400dda4372b2529b9a030763d1d0350559e918469a7"
+    },
+    {
+      "path": "qualification/font04/local/B2prime-blind-review/panels.json",
+      "bytes": 1299283,
+      "sha256": "c170f03727d1b6c36fb1ba967986d7ac4eee60744918225925035bb0d42b9595"
+    },
+    {
+      "path": "qualification/font04/local/B2prime-blind-review/seal-receipt.json",
+      "bytes": 396,
+      "sha256": "79645971b4d9dd2a0f568d4a22ad7795681665bb22dc4d711e8f86a67619d2f9"
+    },
+    {
+      "path": "qualification/font04/local/B2prime-build.log",
+      "bytes": 140,
+      "sha256": "5cc463fd52f21a91237a838aa7a153ba25e718bdd15d25fe8fa40b4b6106e43a"
+    },
+    {
+      "path": "qualification/font04/local/B2prime-context-null-control.pdf",
+      "bytes": 1861982,
+      "sha256": "81bd4080ffac9a7e89d91c219ba46546d35d7800e7999f55a93dbbdbffc0045c"
+    },
+    {
+      "path": "qualification/font04/local/B2prime-context-null.log",
+      "bytes": 149,
+      "sha256": "19c4efe5ff792291d24d5c1cda19c44dce2169b4a2345b3f1fc1c705c364edad"
+    },
+    {
+      "path": "qualification/font04/local/B2prime-cover-1.0-metrics-profile.json",
+      "bytes": 818,
+      "sha256": "51394e889c8a0e10c64c6cf2063a233928e183316df78eb26b3fb2beecc5a4c0"
+    },
+    {
+      "path": "qualification/font04/local/B2prime-cover-1.0-metrics.log",
+      "bytes": 6204,
+      "sha256": "45db1c7803b3f6887baff7a14f72f8726555fef21cbf905ea6f3ea9d4ef6ebdf"
+    },
+    {
+      "path": "qualification/font04/local/B2prime-cover-1.0-owned.json",
+      "bytes": 686159,
+      "sha256": "04832ab4455ad9c8d2fd3ede1f6f9e8456ada2ef8d341f229b455a5e9d9fb59f"
+    },
+    {
+      "path": "qualification/font04/local/B2prime-cover-1.0-ownership-control.pdf",
+      "bytes": 1614655,
+      "sha256": "dc35ec67467d69ce2032e5d5acb9cdf126fd7549da19f7e4b37b6949f1ac6fa4"
+    },
+    {
+      "path": "qualification/font04/local/B2prime-cover-1.0-verification.log",
+      "bytes": 455,
+      "sha256": "45b4b25feac484c3d4dc8147758e8be233e3bb5b74d9f08acfd2b9029b044ce5"
+    },
+    {
+      "path": "qualification/font04/local/B2prime-cover-1.5-metrics-profile.json",
+      "bytes": 819,
+      "sha256": "09a8c9c483c7fafba5338b0e9164368483d3ff5899b0367e0550c1ecdb56b8ce"
+    },
+    {
+      "path": "qualification/font04/local/B2prime-cover-1.5-metrics.log",
+      "bytes": 6204,
+      "sha256": "7ac926346b1a4943eeb00ee84ca98535ea7a86d636a5941404ee0e2adfa34a85"
+    },
+    {
+      "path": "qualification/font04/local/B2prime-cover-1.5-owned.json",
+      "bytes": 861273,
+      "sha256": "6396492de0824ac8ccc3fe564cdb2db9a594e4ca90b2c99755ac06cc031c21ea"
+    },
+    {
+      "path": "qualification/font04/local/B2prime-cover-1.5-ownership-control.pdf",
+      "bytes": 1744932,
+      "sha256": "4970665e8b3a03a68ad6f687365ab1938252f1c7c71dc1ef40feb021fee69385"
+    },
+    {
+      "path": "qualification/font04/local/B2prime-cover-1.5-verification.log",
+      "bytes": 455,
+      "sha256": "1f9d086b814b1c9f22e76050953aedffe84282fad6434181f1cddf2ca357b4ca"
+    },
+    {
+      "path": "qualification/font04/local/B2prime-cover-2.0-metrics-profile.json",
+      "bytes": 819,
+      "sha256": "efa216f308400bacd6cdfc9cf23ff21bea7e74c2377a5b3e6b8563dd5012cf53"
+    },
+    {
+      "path": "qualification/font04/local/B2prime-cover-2.0-metrics.log",
+      "bytes": 6204,
+      "sha256": "9d7c412eb8a1048449ec2aecbb7de14aa6449cd0e55684549e9fd4d66a61da5b"
+    },
+    {
+      "path": "qualification/font04/local/B2prime-cover-2.0-owned.json",
+      "bytes": 888773,
+      "sha256": "57da82a7fca80bda50fa0053cb3d7b7598740ab7af2d68548080df1b389251f3"
+    },
+    {
+      "path": "qualification/font04/local/B2prime-cover-2.0-ownership-control.pdf",
+      "bytes": 1767091,
+      "sha256": "d1f2b1b99eff42616255df9270bf883ff89bf20a686998b054eed0600dba0b59"
+    },
+    {
+      "path": "qualification/font04/local/B2prime-cover-2.0-verification.log",
+      "bytes": 455,
+      "sha256": "03dfcf2a9cb63fd6562c66273655c0df08e7f4a17147d09f1f1d4f81cd3f58d9"
+    },
+    {
+      "path": "qualification/font04/local/B2prime-default-profile.json",
+      "bytes": 852,
+      "sha256": "e66bd88ab34751415d184019a27e3699b2adf43837278003eb51deeaa29bba73"
+    },
+    {
+      "path": "qualification/font04/local/B2prime-default.log",
+      "bytes": 811,
+      "sha256": "97e5221657b48f4b14d0dd4be9255a4e53aa5d45c41ad8fadaa2918240c2b842"
+    },
+    {
+      "path": "qualification/font04/local/B2prime-fidelity-only.log",
+      "bytes": 34,
+      "sha256": "5c8256b6b382d52a2e280cda5042a848a12893adc92a9591da2c70cde9cedd3d"
+    },
+    {
+      "path": "qualification/font04/local/B2prime-final-resume.log",
+      "bytes": 1200,
+      "sha256": "da2778e6a92ab46fb2c11c2368ffe23e2661df24e3ec23c02d2348fd59b50c23"
+    },
+    {
+      "path": "qualification/font04/local/B2prime-final-run.log",
+      "bytes": 1466,
+      "sha256": "013c6fde79a4e11241c725157a089b3056b9741442b28dbd3e3641318c759851"
+    },
+    {
+      "path": "qualification/font04/local/B2prime-finalize.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "qualification/font04/local/B2prime-frontier-profile.json",
+      "bytes": 760,
+      "sha256": "1243661486f4f6d4a09f07c9bfa51647576d8641a310a0362763d8369fcf73fa"
+    },
+    {
+      "path": "qualification/font04/local/B2prime-frontier.log",
+      "bytes": 160,
+      "sha256": "ec6dcd6276458eecc00b69d67019b0b31f85776d069bb681d0c93c4064ae1d52"
+    },
+    {
+      "path": "qualification/font04/local/B2prime-measurement-equivalence.log",
+      "bytes": 592,
+      "sha256": "f3e9848356b15c35fcc63ad8e8d87f708cd91051502448ce1233911c1554e585"
+    },
+    {
+      "path": "qualification/font04/local/B2prime-program-point-audit.log",
+      "bytes": 166,
+      "sha256": "8feb53d50aecd61a5980569974664115190387b67214696c795cf3ca8073c206"
+    },
+    {
+      "path": "qualification/font04/local/B2prime-public-assets-manifest.json",
+      "bytes": 11690990,
+      "sha256": "3900dca5c7d1b808af6bcb80cb2ef0878c536094bee4a98deb66a2db90d6db0a"
+    },
+    {
+      "path": "qualification/font04/local/B2prime-review-private-staging/context-common-attempts.pdf",
+      "bytes": 5731476,
+      "sha256": "da1f2436bf367f9442d5869f97424ebe4ea96c0a2a3fa5e4ae9b9e32ea4da785"
+    },
+    {
+      "path": "qualification/font04/local/B2prime-review-private-staging/context-cover-1.0.pdf",
+      "bytes": 14944349,
+      "sha256": "da425ee63e12a372c9600775b0ab4e035d4f21f606a6cf7775eec1cf435bfd91"
+    },
+    {
+      "path": "qualification/font04/local/B2prime-review-private-staging/context-cover-1.5.pdf",
+      "bytes": 16725951,
+      "sha256": "984fda52dfc3284c1cb2979b22d538056ae44d4d6d34403dc62776723282243c"
+    },
+    {
+      "path": "qualification/font04/local/B2prime-review-private-staging/context-cover-2.0.pdf",
+      "bytes": 16732658,
+      "sha256": "f9ed58507b6d57ffd40281a7df7ddf0f5fc1ca11c6521dcc9b4a547f1d001880"
+    },
+    {
+      "path": "qualification/font04/local/B2prime-review-private-staging/context-star-1.0-net.pdf",
+      "bytes": 12131135,
+      "sha256": "ee403f75958cc8cbafe43880331e0ddb780c179e9ab8ef720675a35decd9568b"
+    },
+    {
+      "path": "qualification/font04/local/B2prime-review-private-staging/context-star-1.0.pdf",
+      "bytes": 14718096,
+      "sha256": "24b52c9abe330229ace00d6d4949f08bb76f829b8ccee41006ee3df21bec16f3"
+    },
+    {
+      "path": "qualification/font04/local/B2prime-review-private-staging/context-star-1.5.pdf",
+      "bytes": 16473374,
+      "sha256": "b0b4c8b85d6c212c8d32d680509abfc6d1b460ce9574d61012270a4a1a3639d3"
+    },
+    {
+      "path": "qualification/font04/local/B2prime-review-private-staging/context-star-2.0.pdf",
+      "bytes": 16588671,
+      "sha256": "22b44ce29681e20afee7f3925cea37e5b1e4be0c8daba7ceb08c751906ab1369"
+    },
+    {
+      "path": "qualification/font04/local/B2prime-review-private-staging/panels.json",
+      "bytes": 6489127,
+      "sha256": "e13883145ae241039189bd44a6b5798fc008e2d932521a5c16b3beff7fa36273"
+    },
+    {
+      "path": "qualification/font04/local/B2prime-review-private-staging/rejected-attempts-account.json",
+      "bytes": 192514,
+      "sha256": "d4be8d05ae9ab4515436a7e694e883b2549ef7ac3346746385d31864ac750522"
+    },
+    {
+      "path": "qualification/font04/local/B2prime-review-private-staging/rejected-attempts-metric-transport.pdf",
+      "bytes": 2875757,
+      "sha256": "4ec6e7f3761ddc7b57cf357da0a7b981ed28929249ef77de0688a49e3e4b5f91"
+    },
+    {
+      "path": "qualification/font04/local/B2prime-review-private-staging/selection.json",
+      "bytes": 120361,
+      "sha256": "a4cffb13f8cbb772aca5d3fcfef5e331b84ed9c5b4432ed1cace09fde96d38ea"
+    },
+    {
+      "path": "qualification/font04/local/B2prime-review.log",
+      "bytes": 3144,
+      "sha256": "fbe414e2d5417e6b1d8f8152d9794e622ced62f79eb0e8f58cc49682bfa093ae"
+    },
+    {
+      "path": "qualification/font04/local/B2prime-score.log",
+      "bytes": 168,
+      "sha256": "51308d19142548f55ba1302662c4af4e1e6836cc99641009d7eb680de9b3e4ee"
+    },
+    {
+      "path": "qualification/font04/local/B2prime-serialization-equivalence.log",
+      "bytes": 857,
+      "sha256": "f0d10755c3d29d60d9018f5a0d5c420c6bafc66b40dc6f442a6766cbfab2c4e2"
+    },
+    {
+      "path": "qualification/font04/local/B2prime-sheet-test.log",
+      "bytes": 28,
+      "sha256": "e64bcdd862ebd16a8862bcdc514e1fc328396ddc9f73c4a906ab2a16e7619229"
+    },
+    {
+      "path": "qualification/font04/local/B2prime-slot-rule.log",
+      "bytes": 2589,
+      "sha256": "e0799a7efe891fa13b1428e683e5cba90a19ff7148423042b7fe969194b2b192"
+    },
+    {
+      "path": "qualification/font04/local/B2prime-soft-support.log",
+      "bytes": 132,
+      "sha256": "d97b4d6b0fed00de5471821e994c7575c150c9f2e59ddffb2d5c3d55a603ef9f"
+    },
+    {
+      "path": "qualification/font04/local/B2prime-star-1.0-metrics-profile.json",
+      "bytes": 818,
+      "sha256": "65ddb7199dd013f05148219db3802ca8e11ed4670ade18bb9f569ff447d18c2d"
+    },
+    {
+      "path": "qualification/font04/local/B2prime-star-1.0-metrics.log",
+      "bytes": 6063,
+      "sha256": "12cf328c1ee3ea7e7f7e6df86eca35e1ea884e8f359e6aae284bc4f3c3761656"
+    },
+    {
+      "path": "qualification/font04/local/B2prime-star-1.0-net-metrics-profile.json",
+      "bytes": 820,
+      "sha256": "e32ef89e4e9509bd538aef630755192f87d412158f0b2564893d55cf5ef715eb"
+    },
+    {
+      "path": "qualification/font04/local/B2prime-star-1.0-net-metrics.log",
+      "bytes": 6627,
+      "sha256": "586ab0484533423bdb6b96c7523366a715c9d6294ccff031925613a8cd9ca354"
+    },
+    {
+      "path": "qualification/font04/local/B2prime-star-1.0-net-verification.log",
+      "bytes": 1726,
+      "sha256": "d56d66bfdaef5120109c4d83964dcc072446e0462e8d808b793603e16c15bf0b"
+    },
+    {
+      "path": "qualification/font04/local/B2prime-star-1.0-owned.json",
+      "bytes": 658620,
+      "sha256": "d40f0be52419c2960480eed96ceddc033b40cafea207b62dd5a64ee517d3dd71"
+    },
+    {
+      "path": "qualification/font04/local/B2prime-star-1.0-ownership-control.pdf",
+      "bytes": 1593224,
+      "sha256": "68daa78b961ba55d6cc20832306f50e03775b95c24bf373cdb7d619ea58d16f0"
+    },
+    {
+      "path": "qualification/font04/local/B2prime-star-1.0-slot-net-metrics-profile.json",
+      "bytes": 820,
+      "sha256": "4d5b4cb0194d08e7980065bf8352a4c7d0fedefc642a0b5a7ce3d2b5368f2adb"
+    },
+    {
+      "path": "qualification/font04/local/B2prime-star-1.0-slot-net-metrics.log",
+      "bytes": 6558,
+      "sha256": "28007fe74b77803bdceca38b694b3239384d26fc38d8a067389fa40cff0ad307"
+    },
+    {
+      "path": "qualification/font04/local/B2prime-star-1.0-verification.log",
+      "bytes": 1722,
+      "sha256": "f6a20804316050ac7fc25fae0c7471a3f689dd9bcd26141d4c070dea160f27be"
+    },
+    {
+      "path": "qualification/font04/local/B2prime-star-1.5-metrics-profile.json",
+      "bytes": 817,
+      "sha256": "c0071b62f1564d832bcbf2924479b571e2edac0d76b64815e2402dca6133b9a1"
+    },
+    {
+      "path": "qualification/font04/local/B2prime-star-1.5-metrics.log",
+      "bytes": 6063,
+      "sha256": "7e8c105c1e3825b32400455778c43ac136cf0ac6fcc8c4bc66ac44a09cde570b"
+    },
+    {
+      "path": "qualification/font04/local/B2prime-star-1.5-owned.json",
+      "bytes": 839201,
+      "sha256": "db148fa75abdd96027d4a6fd6ae0372e473d88aa8347ac00a0e66fb0d31d61bb"
+    },
+    {
+      "path": "qualification/font04/local/B2prime-star-1.5-ownership-control.pdf",
+      "bytes": 1729074,
+      "sha256": "e8bc406b4709ea9e70dbefc5b0c19bbdb4309aaada915c6b2e94e8e66b0d6920"
+    },
+    {
+      "path": "qualification/font04/local/B2prime-star-1.5-verification.log",
+      "bytes": 454,
+      "sha256": "d5087fc8c5a2c96010caec82c737e8b9ba82ae9cdb1956993a121f622ae03139"
+    },
+    {
+      "path": "qualification/font04/local/B2prime-star-2.0-metrics-profile.json",
+      "bytes": 818,
+      "sha256": "13dd869736afddf9ce444e69d1eba89b8addf59a73a060486f81aff47a5f8e15"
+    },
+    {
+      "path": "qualification/font04/local/B2prime-star-2.0-metrics.log",
+      "bytes": 6063,
+      "sha256": "bfb1805f070e2031f1cc453dad8d5bcefa65dc6c979110a866fe13fa93aa1df0"
+    },
+    {
+      "path": "qualification/font04/local/B2prime-star-2.0-owned.json",
+      "bytes": 878043,
+      "sha256": "9a86c800c9a65c9619fc622967784a793845843c36a26e59410f0b2fdcdd208a"
+    },
+    {
+      "path": "qualification/font04/local/B2prime-star-2.0-ownership-control.pdf",
+      "bytes": 1758341,
+      "sha256": "dc7c7b90babd75d17fba5d5c05eeb94d6ae8bbf3fd8fbd8775bf7a50f8872aa0"
+    },
+    {
+      "path": "qualification/font04/local/B2prime-star-2.0-verification.log",
+      "bytes": 454,
+      "sha256": "d6f7ded4d11eaeb05f6762748c2044e0f455f9b9fab1cebe09922e316ade7bc3"
+    },
+    {
+      "path": "qualification/font04/local/B2prime-support-archive.log",
+      "bytes": 33,
+      "sha256": "b56103e0af036a0a3f1f35fbee7daa84b323bc02658bd0ec4d43b6de9b4d97d1"
+    },
+    {
+      "path": "qualification/font04/local/B2prime-support-initial-cover-1.0-metrics-profile.json",
+      "bytes": 818,
+      "sha256": "61975100f7e4fe8b5071c256c34e020d365123e6cd42674d5ad7a942fb119bb4"
+    },
+    {
+      "path": "qualification/font04/local/B2prime-support-initial-cover-1.0-metrics.log",
+      "bytes": 6204,
+      "sha256": "cc277e75bc3a28ac5e1e319f8d2b07bc0b5ca1ef51cec78b170aaef3bce69087"
+    },
+    {
+      "path": "qualification/font04/local/B2prime-support-initial-cover-1.0-owned.json",
+      "bytes": 666550,
+      "sha256": "668227f48c3002ca75a64b2e10bd93c318321ef82b2daf20d8d1f70288b92052"
+    },
+    {
+      "path": "qualification/font04/local/B2prime-support-initial-cover-1.0-ownership-control.pdf",
+      "bytes": 1602728,
+      "sha256": "a08f6072331a8fbd2f62f66f8bb3a14bbad2c54db52211b81abd1ce0898620cc"
+    },
+    {
+      "path": "qualification/font04/local/B2prime-support-initial-cover-1.0-verification.log",
+      "bytes": 455,
+      "sha256": "72f59f46c5b27c85fac3a8bbed6d346fdb9d70be034c42a42bc28da9538147ec"
+    },
+    {
+      "path": "qualification/font04/local/B2prime-support-initial-cover-1.5-metrics-profile.json",
+      "bytes": 818,
+      "sha256": "19a490662c73b25268bdce8e73a64c5d5bdd7c28456e6bf914c74ddc9ce63b4e"
+    },
+    {
+      "path": "qualification/font04/local/B2prime-support-initial-cover-1.5-metrics.log",
+      "bytes": 6204,
+      "sha256": "afdab4182add1c225336f24ad33eb1c74b435f2c64925b1a9a1e34d2a2af5f6e"
+    },
+    {
+      "path": "qualification/font04/local/B2prime-support-initial-cover-1.5-owned.json",
+      "bytes": 838448,
+      "sha256": "c68b69d145426532466796adc58da73b86ce3bcf534cc8416cbe1ec3c97bd366"
+    },
+    {
+      "path": "qualification/font04/local/B2prime-support-initial-cover-1.5-ownership-control.pdf",
+      "bytes": 1730842,
+      "sha256": "aa2fc20361e363e08627e952a6160a53faea98bd80f784cee83c0933570ca9f6"
+    },
+    {
+      "path": "qualification/font04/local/B2prime-support-initial-cover-1.5-verification.log",
+      "bytes": 455,
+      "sha256": "d7f4e1c7760d082529533fab59065e5f2afcbff6f6497cc27f5b1eb57ff2f8ac"
+    },
+    {
+      "path": "qualification/font04/local/B2prime-support-initial-cover-2.0-metrics-profile.json",
+      "bytes": 819,
+      "sha256": "9c5ca6c38e2f3ccaa6fbc073ce454933ff67824efc99336f1ee01f727fbe5669"
+    },
+    {
+      "path": "qualification/font04/local/B2prime-support-initial-cover-2.0-metrics.log",
+      "bytes": 6204,
+      "sha256": "7103d0cb3a7dfeefe3ae78d93e906a43a0293d6682dd9257130b7699156620ee"
+    },
+    {
+      "path": "qualification/font04/local/B2prime-support-initial-cover-2.0-owned.json",
+      "bytes": 864642,
+      "sha256": "fd816286e46b079135222100d73058e5f8511c75bc7dbdf460cec65fc5ff3625"
+    },
+    {
+      "path": "qualification/font04/local/B2prime-support-initial-cover-2.0-ownership-control.pdf",
+      "bytes": 1752280,
+      "sha256": "c855364aea0ad9d68bcca81f3af72d3cd674c6d9b5030477fe62ebb4f496edc6"
+    },
+    {
+      "path": "qualification/font04/local/B2prime-support-initial-cover-2.0-verification.log",
+      "bytes": 455,
+      "sha256": "6ed144bbc53fd698199fb6a4a70d1d37bda821785cc9fdfb382c294bbc80ab12"
+    },
+    {
+      "path": "qualification/font04/local/B2prime-support-initial-star-1.0-metrics-profile.json",
+      "bytes": 814,
+      "sha256": "f722c5b8771ee597847294e6e35aeb500f4c087c7136eb6fb8999651fb0920ec"
+    },
+    {
+      "path": "qualification/font04/local/B2prime-support-initial-star-1.0-metrics.log",
+      "bytes": 6063,
+      "sha256": "23c684899ee329ec70d3c80a17b8634225ee976d120bfd7235d63c265cf5ae46"
+    },
+    {
+      "path": "qualification/font04/local/B2prime-support-initial-star-1.0-net-metrics-profile.json",
+      "bytes": 821,
+      "sha256": "9c389ce8294353e5eeb8525ea15d5dbe3cdfec41cd60357ad918679c334eb1b2"
+    },
+    {
+      "path": "qualification/font04/local/B2prime-support-initial-star-1.0-net-metrics.log",
+      "bytes": 6627,
+      "sha256": "b3ed7e049f2be16c539d92fdd61751084ed6cbd249be916087b608211898f3fb"
+    },
+    {
+      "path": "qualification/font04/local/B2prime-support-initial-star-1.0-net-verification.log",
+      "bytes": 458,
+      "sha256": "fccd6bff7ada0ebeb6aefafb6d096cbc57dc3512811a7a402ce35ca06af85f61"
+    },
+    {
+      "path": "qualification/font04/local/B2prime-support-initial-star-1.0-owned.json",
+      "bytes": 638972,
+      "sha256": "d587e6d924647b37422d7cfa349749f67108c8132a3d8c740a6f9f6272060162"
+    },
+    {
+      "path": "qualification/font04/local/B2prime-support-initial-star-1.0-ownership-control.pdf",
+      "bytes": 1581659,
+      "sha256": "09270657855628a8eddbee9629d36abeb04dc3bf7d234d1bcc5378f18b048210"
+    },
+    {
+      "path": "qualification/font04/local/B2prime-support-initial-star-1.0-verification.log",
+      "bytes": 454,
+      "sha256": "e25fbf9be62bedebde369d75874851c4307f0d6bfe6c6f28409ad44b76f1dfc8"
+    },
+    {
+      "path": "qualification/font04/local/B2prime-support-initial-star-1.5-metrics-profile.json",
+      "bytes": 818,
+      "sha256": "ff9a677b0dd4b31c1f8e8f5e8b84565a603d00084173f07bbab7d6bc4063e8ee"
+    },
+    {
+      "path": "qualification/font04/local/B2prime-support-initial-star-1.5-metrics.log",
+      "bytes": 6063,
+      "sha256": "ed5d558e6506f3b8ff4a9653ed21a6c0dfd43bc7c8caaf82ead6f2f05aed3c0d"
+    },
+    {
+      "path": "qualification/font04/local/B2prime-support-initial-star-1.5-owned.json",
+      "bytes": 818620,
+      "sha256": "4b569d9aba1a6f7351905906f715da112aa73e7971cb9b9eb3553766827b2dca"
+    },
+    {
+      "path": "qualification/font04/local/B2prime-support-initial-star-1.5-ownership-control.pdf",
+      "bytes": 1716789,
+      "sha256": "5c15800be296ed9e13bc2b2aa7451c3e2a765742354fdbdf41e2511f5ede9329"
+    },
+    {
+      "path": "qualification/font04/local/B2prime-support-initial-star-1.5-verification.log",
+      "bytes": 454,
+      "sha256": "485af8756d3081f36ceede4934ec238441574118e1a2910387a884078c184eee"
+    },
+    {
+      "path": "qualification/font04/local/B2prime-support-initial-star-2.0-metrics-profile.json",
+      "bytes": 816,
+      "sha256": "38291bfa952b5e01bc06795ee0798481e1e3f7a5adda9becdf90641fbb1680f7"
+    },
+    {
+      "path": "qualification/font04/local/B2prime-support-initial-star-2.0-metrics.log",
+      "bytes": 6063,
+      "sha256": "fd07b24342d9b71b881b0acd81b5f7a4a2e353e492895185365d94e4c349cef8"
+    },
+    {
+      "path": "qualification/font04/local/B2prime-support-initial-star-2.0-owned.json",
+      "bytes": 856156,
+      "sha256": "c3b95b1cb69c059518d33f6b528bedfea70d0ae02fc9eb448f729b5a14cf4a8d"
+    },
+    {
+      "path": "qualification/font04/local/B2prime-support-initial-star-2.0-ownership-control.pdf",
+      "bytes": 1745335,
+      "sha256": "74e9ff48337e762d2dc778aef81d063ea102112fd932f168461159ceb7d0040d"
+    },
+    {
+      "path": "qualification/font04/local/B2prime-support-initial-star-2.0-verification.log",
+      "bytes": 454,
+      "sha256": "60a6e8511c8175ce327e91e2f525c6be2596233d14bdcd10d492fcefb8106e48"
+    },
+    {
+      "path": "qualification/font04/local/B2prime-transport-failed-v1-metrics.json",
+      "bytes": 9396252,
+      "sha256": "260ebbcfec15dfcebafae3e66f7392cb8f2e16fa3f1f6f70b548a9166e0ddd95"
+    },
+    {
+      "path": "qualification/font04/local/B2prime-transport-metrics.log",
+      "bytes": 6462,
+      "sha256": "e7c319b79c0f1b0fe9f8c72cefc5dae687f3f8fde932ba994b565227f7c08575"
+    },
+    {
+      "path": "qualification/font04/local/B2prime-transport-serialization.log",
+      "bytes": 464,
+      "sha256": "5905dbe2d2fd9427b99f981725356f0783c0adfb2d2aa90d86a9b770b069fae1"
+    },
+    {
+      "path": "qualification/font04/local/B2prime-transport-verification.log",
+      "bytes": 2394,
+      "sha256": "19d75024fff8737cc25c7e625f371fa9b46fb30dacb1e358b402a524d6eae7f3"
+    },
+    {
+      "path": "qualification/font04/local/B2prime-transport.log",
+      "bytes": 453,
+      "sha256": "8e98eb8b517d6ada2ee756a271fa0206e6e22571669c1d5989b17a2b85431081"
+    },
+    {
+      "path": "qualification/font04/local/B2prime-unchanged-render-audit.log",
+      "bytes": 3036,
+      "sha256": "0df0f8db617d4ce05437dda11fedebaa1188e8f5abe671090a25aeef7cfebea3"
+    },
+    {
+      "path": "qualification/font04/local/financial-B2prime-cover-1.0-repeat.pdf",
+      "bytes": 2864314,
+      "sha256": "15020e01c38c73fb7f5b1f2d39e9109fd91eeb03092961f998c73c324d426677"
+    },
+    {
+      "path": "qualification/font04/local/financial-B2prime-cover-1.0.pdf",
+      "bytes": 2864314,
+      "sha256": "15020e01c38c73fb7f5b1f2d39e9109fd91eeb03092961f998c73c324d426677"
+    },
+    {
+      "path": "qualification/font04/local/financial-B2prime-cover-1.0.pdf.font04/actual-owned-audit.json",
+      "bytes": 580741,
+      "sha256": "21f22d87b90bdefe5fc68cae08c9cfe3d789ad689c072a65bd28eafee256d583"
+    },
+    {
+      "path": "qualification/font04/local/financial-B2prime-cover-1.0.pdf.font04/byte-attribution.json",
+      "bytes": 1029493,
+      "sha256": "7f41dfaab408f8dcae7a575edfa96c7ccaad92fb1d325c9ef0f0057dd9bf51ee"
+    },
+    {
+      "path": "qualification/font04/local/financial-B2prime-cover-1.0.pdf.font04/canonical.ttf",
+      "bytes": 1767024,
+      "sha256": "3cd4c0279c234f2fc0632908007fb6e26ab182f0640365b47bf6d39d49a741dc"
+    },
+    {
+      "path": "qualification/font04/local/financial-B2prime-cover-1.0.pdf.font04/class-crops.npz",
+      "bytes": 48380353,
+      "sha256": "541c6f74730e27e63629ad11c920a887087f4f020d2f6c5167c09d66321c1613"
+    },
+    {
+      "path": "qualification/font04/local/financial-B2prime-cover-1.0.pdf.font04/class-isolated-candidate.pdf",
+      "bytes": 4788895,
+      "sha256": "50c2c6c9de2b5c1e6f97eb0d56d90e8cadeca075798c314082c39cf9e0ce9bd8"
+    },
+    {
+      "path": "qualification/font04/local/financial-B2prime-cover-1.0.pdf.font04/class-metrics.json",
+      "bytes": 9455949,
+      "sha256": "dc8d2f2c66de7c6e7ac3a1f974272be7b3e16391ff98b1b9966846cedae86091"
+    },
+    {
+      "path": "qualification/font04/local/financial-B2prime-cover-1.0.pdf.font04/emitted-bindings.json",
+      "bytes": 1318470,
+      "sha256": "998d9bd6027ca8a83c9112e000574754579ab9878e8093514ae8f503ffc9ba71"
+    },
+    {
+      "path": "qualification/font04/local/financial-B2prime-cover-1.0.pdf.font04/fields.npy",
+      "bytes": 115474560,
+      "sha256": "3510404d24ec449923f77a5b0cbd088965fec0db6e5fd8550223adf54505c490"
+    },
+    {
+      "path": "qualification/font04/local/financial-B2prime-cover-1.0.pdf.font04/frames.json",
+      "bytes": 312607,
+      "sha256": "82fff6d31018f3aff3c20b7829a973cc0659e3b54c5c9b22239bbb1456681374"
+    },
+    {
+      "path": "qualification/font04/local/financial-B2prime-cover-1.0.pdf.font04/outlines.json",
+      "bytes": 60343624,
+      "sha256": "596b98642bae52e7a3fc48b6b9ff20bb2441419810d8f3577203a3086338b8b1"
+    },
+    {
+      "path": "qualification/font04/local/financial-B2prime-cover-1.0.pdf.font04/pair-ledger.json",
+      "bytes": 79168214,
+      "sha256": "b570b735eacc663e1ea994a252faa6a7cc1b54f000a462da848cf504a8b3879a"
+    },
+    {
+      "path": "qualification/font04/local/financial-B2prime-cover-1.0.pdf.font04/plan.json",
+      "bytes": 11794117,
+      "sha256": "aece8bd641bcb1214650926f52cd954b07045c3725a4862be80c3f3de964c717"
+    },
+    {
+      "path": "qualification/font04/local/financial-B2prime-cover-1.0.pdf.font04/source.json",
+      "bytes": 94868322,
+      "sha256": "a311e570d8214156690f0bff0baf2efd9aef9a476eceb7c1bbd2a890977d3ce9"
+    },
+    {
+      "path": "qualification/font04/local/financial-B2prime-cover-1.0.pdf.font04/verification.json",
+      "bytes": 52099,
+      "sha256": "04e2d4d9a8dbce9efc4e727c4c069b930580fe6a9b9f1774377f1b6318094bfb"
+    },
+    {
+      "path": "qualification/font04/local/financial-B2prime-cover-1.0.pdf.ttf",
+      "bytes": 1278116,
+      "sha256": "34328a81196f1e236804e8640fba061f367fe51f6261371a0a3f3389ce6ef1a6"
+    },
+    {
+      "path": "qualification/font04/local/financial-B2prime-cover-1.0.pdf.ttf.sanitized",
+      "bytes": 1283440,
+      "sha256": "c7ea686f45c3eb7b402ef1ef96b55df1fa4a8ff36ecefb2289f9e4139485fe27"
+    },
+    {
+      "path": "qualification/font04/local/financial-B2prime-cover-1.5-repeat.pdf",
+      "bytes": 2812469,
+      "sha256": "700ad687dbf64b0e5efcc4c06e1a1fbdd84e49ab12a5cd0b4b205cb3c57fcb8d"
+    },
+    {
+      "path": "qualification/font04/local/financial-B2prime-cover-1.5.pdf",
+      "bytes": 2812469,
+      "sha256": "700ad687dbf64b0e5efcc4c06e1a1fbdd84e49ab12a5cd0b4b205cb3c57fcb8d"
+    },
+    {
+      "path": "qualification/font04/local/financial-B2prime-cover-1.5.pdf.font04/actual-owned-audit.json",
+      "bytes": 723311,
+      "sha256": "719710d433d66fd4137a735ff31f1eefcebe45fa725b6514e5cd65fb856e7d69"
+    },
+    {
+      "path": "qualification/font04/local/financial-B2prime-cover-1.5.pdf.font04/byte-attribution.json",
+      "bytes": 1272068,
+      "sha256": "afa2b542c9d276872b53a54d4fe3662d761a120387dcd6970019e7d3c9bd58b7"
+    },
+    {
+      "path": "qualification/font04/local/financial-B2prime-cover-1.5.pdf.font04/canonical.ttf",
+      "bytes": 1767024,
+      "sha256": "3cd4c0279c234f2fc0632908007fb6e26ab182f0640365b47bf6d39d49a741dc"
+    },
+    {
+      "path": "qualification/font04/local/financial-B2prime-cover-1.5.pdf.font04/class-crops.npz",
+      "bytes": 48392271,
+      "sha256": "d2717366cb24f0317955394bb183fb1c23462716646c7ae32c320c833c2cfa9c"
+    },
+    {
+      "path": "qualification/font04/local/financial-B2prime-cover-1.5.pdf.font04/class-isolated-candidate.pdf",
+      "bytes": 4857843,
+      "sha256": "c30c5a50c8da84a9515190612cb8b0ae24f56e301e74d75729d2636e29db006d"
+    },
+    {
+      "path": "qualification/font04/local/financial-B2prime-cover-1.5.pdf.font04/class-metrics.json",
+      "bytes": 9465696,
+      "sha256": "7b3cf2c838ac0a4f427e49f86a423f48e388d06ff450bb4340fa77266fdf1dda"
+    },
+    {
+      "path": "qualification/font04/local/financial-B2prime-cover-1.5.pdf.font04/emitted-bindings.json",
+      "bytes": 1318470,
+      "sha256": "998d9bd6027ca8a83c9112e000574754579ab9878e8093514ae8f503ffc9ba71"
+    },
+    {
+      "path": "qualification/font04/local/financial-B2prime-cover-1.5.pdf.font04/fields.npy",
+      "bytes": 115474560,
+      "sha256": "3510404d24ec449923f77a5b0cbd088965fec0db6e5fd8550223adf54505c490"
+    },
+    {
+      "path": "qualification/font04/local/financial-B2prime-cover-1.5.pdf.font04/frames.json",
+      "bytes": 312607,
+      "sha256": "82fff6d31018f3aff3c20b7829a973cc0659e3b54c5c9b22239bbb1456681374"
+    },
+    {
+      "path": "qualification/font04/local/financial-B2prime-cover-1.5.pdf.font04/outlines.json",
+      "bytes": 60343624,
+      "sha256": "596b98642bae52e7a3fc48b6b9ff20bb2441419810d8f3577203a3086338b8b1"
+    },
+    {
+      "path": "qualification/font04/local/financial-B2prime-cover-1.5.pdf.font04/pair-ledger.json",
+      "bytes": 79168214,
+      "sha256": "b570b735eacc663e1ea994a252faa6a7cc1b54f000a462da848cf504a8b3879a"
+    },
+    {
+      "path": "qualification/font04/local/financial-B2prime-cover-1.5.pdf.font04/plan.json",
+      "bytes": 11341316,
+      "sha256": "f2506ba01eb1bc48e43e33a997448875362756b1da4bf0b7e87e36ee88e180fa"
+    },
+    {
+      "path": "qualification/font04/local/financial-B2prime-cover-1.5.pdf.font04/source.json",
+      "bytes": 94868322,
+      "sha256": "a311e570d8214156690f0bff0baf2efd9aef9a476eceb7c1bbd2a890977d3ce9"
+    },
+    {
+      "path": "qualification/font04/local/financial-B2prime-cover-1.5.pdf.font04/verification.json",
+      "bytes": 52029,
+      "sha256": "b658783e58810288e714973315d3231fb19dac84bd745299d74c85446c6d8aa7"
+    },
+    {
+      "path": "qualification/font04/local/financial-B2prime-cover-1.5.pdf.ttf",
+      "bytes": 1182312,
+      "sha256": "26aa29abd2d4140ae85af043fb280874e0f715cd6ce37a38fe275f36279e5ab6"
+    },
+    {
+      "path": "qualification/font04/local/financial-B2prime-cover-1.5.pdf.ttf.sanitized",
+      "bytes": 1187724,
+      "sha256": "39f582309ddc0c6148dc7079dfd949b55bc6a17e3f05c694678df472771142b7"
+    },
+    {
+      "path": "qualification/font04/local/financial-B2prime-cover-2.0-repeat.pdf",
+      "bytes": 2804135,
+      "sha256": "d4d0b26211ec643709ffa534525aed14e3fa09a91190e2aa7cf149c31c3b2563"
+    },
+    {
+      "path": "qualification/font04/local/financial-B2prime-cover-2.0.pdf",
+      "bytes": 2804135,
+      "sha256": "d4d0b26211ec643709ffa534525aed14e3fa09a91190e2aa7cf149c31c3b2563"
+    },
+    {
+      "path": "qualification/font04/local/financial-B2prime-cover-2.0.pdf.font04/actual-owned-audit.json",
+      "bytes": 744567,
+      "sha256": "f103eff438f3910dd762ad71ad10afc085266766400bc879154d393bf8f5b30d"
+    },
+    {
+      "path": "qualification/font04/local/financial-B2prime-cover-2.0.pdf.font04/byte-attribution.json",
+      "bytes": 1310567,
+      "sha256": "4547aec0b38dc99d4f082c6888e64402df037bc4941754e60371f0be44f11626"
+    },
+    {
+      "path": "qualification/font04/local/financial-B2prime-cover-2.0.pdf.font04/canonical.ttf",
+      "bytes": 1767024,
+      "sha256": "3cd4c0279c234f2fc0632908007fb6e26ab182f0640365b47bf6d39d49a741dc"
+    },
+    {
+      "path": "qualification/font04/local/financial-B2prime-cover-2.0.pdf.font04/class-crops.npz",
+      "bytes": 48383897,
+      "sha256": "4386d65a1348c274476593da146270732c8d97285f838e413ca3fa5e2ba61b72"
+    },
+    {
+      "path": "qualification/font04/local/financial-B2prime-cover-2.0.pdf.font04/class-isolated-candidate.pdf",
+      "bytes": 4788979,
+      "sha256": "0ca313c751cc097aba0bed96ec0226f888f995c88985a9568644c766f0dbd5ed"
+    },
+    {
+      "path": "qualification/font04/local/financial-B2prime-cover-2.0.pdf.font04/class-metrics.json",
+      "bytes": 9469094,
+      "sha256": "9e6749f4c5ba1f2068579e719dac944bce4e8a2d7ddbf723f9fe4eea2badd0d1"
+    },
+    {
+      "path": "qualification/font04/local/financial-B2prime-cover-2.0.pdf.font04/emitted-bindings.json",
+      "bytes": 1318470,
+      "sha256": "998d9bd6027ca8a83c9112e000574754579ab9878e8093514ae8f503ffc9ba71"
+    },
+    {
+      "path": "qualification/font04/local/financial-B2prime-cover-2.0.pdf.font04/fields.npy",
+      "bytes": 115474560,
+      "sha256": "3510404d24ec449923f77a5b0cbd088965fec0db6e5fd8550223adf54505c490"
+    },
+    {
+      "path": "qualification/font04/local/financial-B2prime-cover-2.0.pdf.font04/frames.json",
+      "bytes": 312607,
+      "sha256": "82fff6d31018f3aff3c20b7829a973cc0659e3b54c5c9b22239bbb1456681374"
+    },
+    {
+      "path": "qualification/font04/local/financial-B2prime-cover-2.0.pdf.font04/outlines.json",
+      "bytes": 60343624,
+      "sha256": "596b98642bae52e7a3fc48b6b9ff20bb2441419810d8f3577203a3086338b8b1"
+    },
+    {
+      "path": "qualification/font04/local/financial-B2prime-cover-2.0.pdf.font04/pair-ledger.json",
+      "bytes": 79168214,
+      "sha256": "b570b735eacc663e1ea994a252faa6a7cc1b54f000a462da848cf504a8b3879a"
+    },
+    {
+      "path": "qualification/font04/local/financial-B2prime-cover-2.0.pdf.font04/plan.json",
+      "bytes": 11266825,
+      "sha256": "5d656f22f8b2976bd3b8239053b71b2e6924e85669ea18d15b99dddfd456eb2f"
+    },
+    {
+      "path": "qualification/font04/local/financial-B2prime-cover-2.0.pdf.font04/source.json",
+      "bytes": 94868322,
+      "sha256": "a311e570d8214156690f0bff0baf2efd9aef9a476eceb7c1bbd2a890977d3ce9"
+    },
+    {
+      "path": "qualification/font04/local/financial-B2prime-cover-2.0.pdf.font04/verification.json",
+      "bytes": 52010,
+      "sha256": "fb92d61830ce54e69718e7cede43049c773590cea2635fecc1610fa880221f4e"
+    },
+    {
+      "path": "qualification/font04/local/financial-B2prime-cover-2.0.pdf.ttf",
+      "bytes": 1165644,
+      "sha256": "bc2f8f019b5153b0436be8dc8ee40430c806af1b396c6a06719ee4585cc6478d"
+    },
+    {
+      "path": "qualification/font04/local/financial-B2prime-cover-2.0.pdf.ttf.sanitized",
+      "bytes": 1171080,
+      "sha256": "9b6ea6dcada94e8155ddee0f5ad8c8e0d11596ba2714b3f08eeafd4c94cda1f7"
+    },
+    {
+      "path": "qualification/font04/local/financial-B2prime-default.pdf",
+      "bytes": 2849237,
+      "sha256": "74c31136d00a18dbf05fba2d7fba59c85cc201a57ae65d77999a025a692fab0f"
+    },
+    {
+      "path": "qualification/font04/local/financial-B2prime-default.pdf.json",
+      "bytes": 154986457,
+      "sha256": "38f78f89829912f0729ad864e7cecf064681b48d2e1703e0be939a01172edabb"
+    },
+    {
+      "path": "qualification/font04/local/financial-B2prime-default.pdf.ttf",
+      "bytes": 1303200,
+      "sha256": "80160bb2c371bb4bfdb1f0edcee5e451d217abd2bd2030b0e5543cfcfcedee14"
+    },
+    {
+      "path": "qualification/font04/local/financial-B2prime-default.pdf.ttf.sanitized",
+      "bytes": 1305824,
+      "sha256": "577c1730681964ed0bfe0ccc7a95cfc35600c3f3787f3130b9a408c1a427489d"
+    },
+    {
+      "path": "qualification/font04/local/financial-B2prime-save-only.pdf",
+      "bytes": 2848780,
+      "sha256": "1f09a446071fc8a868bbba03c2f3a0179321745547eec8333d7c8db509e9a90e"
+    },
+    {
+      "path": "qualification/font04/local/financial-B2prime-save-only.pdf.ttf",
+      "bytes": 1303200,
+      "sha256": "80160bb2c371bb4bfdb1f0edcee5e451d217abd2bd2030b0e5543cfcfcedee14"
+    },
+    {
+      "path": "qualification/font04/local/financial-B2prime-save-only.pdf.ttf.sanitized",
+      "bytes": 1305824,
+      "sha256": "577c1730681964ed0bfe0ccc7a95cfc35600c3f3787f3130b9a408c1a427489d"
+    },
+    {
+      "path": "qualification/font04/local/financial-B2prime-star-1.0-net-repeat.pdf",
+      "bytes": 2837175,
+      "sha256": "fe172b2ae0d335a84fd9458f42ab1360d4dd16e15065b9e04057f106939cc813"
+    },
+    {
+      "path": "qualification/font04/local/financial-B2prime-star-1.0-net.pdf",
+      "bytes": 2837175,
+      "sha256": "fe172b2ae0d335a84fd9458f42ab1360d4dd16e15065b9e04057f106939cc813"
+    },
+    {
+      "path": "qualification/font04/local/financial-B2prime-star-1.0-net.pdf.font04/actual-owned-audit.json",
+      "bytes": 395068,
+      "sha256": "c648050e3f3c4dc66bc40f7a5cce5527aeed72f33adc1d1afe494631af2e12d9"
+    },
+    {
+      "path": "qualification/font04/local/financial-B2prime-star-1.0-net.pdf.font04/byte-attribution.json",
+      "bytes": 712481,
+      "sha256": "c58ea3acf9877feb6decc0d50b225457a13f2f2ed171c12ebb0fc1112ddb0840"
+    },
+    {
+      "path": "qualification/font04/local/financial-B2prime-star-1.0-net.pdf.font04/canonical.ttf",
+      "bytes": 1767024,
+      "sha256": "3cd4c0279c234f2fc0632908007fb6e26ab182f0640365b47bf6d39d49a741dc"
+    },
+    {
+      "path": "qualification/font04/local/financial-B2prime-star-1.0-net.pdf.font04/class-crops.npz",
+      "bytes": 48394929,
+      "sha256": "9b839e9179707ef2c3f71668ed5bb5453f3c9c6bd0453157b035b2eb8c224a62"
+    },
+    {
+      "path": "qualification/font04/local/financial-B2prime-star-1.0-net.pdf.font04/class-isolated-candidate.pdf",
+      "bytes": 4701930,
+      "sha256": "919c8b399563240f5b3a30fc9c1997606a7d0963202409b17107d8cf4cd968d1"
+    },
+    {
+      "path": "qualification/font04/local/financial-B2prime-star-1.0-net.pdf.font04/class-metrics.json",
+      "bytes": 9415218,
+      "sha256": "ca568b0352b1996f9fa5cd589d7e62d4ae2005115766292bb7ceb554b1d7b1ae"
+    },
+    {
+      "path": "qualification/font04/local/financial-B2prime-star-1.0-net.pdf.font04/emitted-bindings.json",
+      "bytes": 1318470,
+      "sha256": "998d9bd6027ca8a83c9112e000574754579ab9878e8093514ae8f503ffc9ba71"
+    },
+    {
+      "path": "qualification/font04/local/financial-B2prime-star-1.0-net.pdf.font04/fields.npy",
+      "bytes": 115474560,
+      "sha256": "3510404d24ec449923f77a5b0cbd088965fec0db6e5fd8550223adf54505c490"
+    },
+    {
+      "path": "qualification/font04/local/financial-B2prime-star-1.0-net.pdf.font04/frames.json",
+      "bytes": 312607,
+      "sha256": "82fff6d31018f3aff3c20b7829a973cc0659e3b54c5c9b22239bbb1456681374"
+    },
+    {
+      "path": "qualification/font04/local/financial-B2prime-star-1.0-net.pdf.font04/outlines.json",
+      "bytes": 60343624,
+      "sha256": "596b98642bae52e7a3fc48b6b9ff20bb2441419810d8f3577203a3086338b8b1"
+    },
+    {
+      "path": "qualification/font04/local/financial-B2prime-star-1.0-net.pdf.font04/pair-ledger.json",
+      "bytes": 79168214,
+      "sha256": "b570b735eacc663e1ea994a252faa6a7cc1b54f000a462da848cf504a8b3879a"
+    },
+    {
+      "path": "qualification/font04/local/financial-B2prime-star-1.0-net.pdf.font04/plan.json",
+      "bytes": 12367103,
+      "sha256": "e056326f345fb8e937b680c25e8663febc3a918b67d799732097e979118d744b"
+    },
+    {
+      "path": "qualification/font04/local/financial-B2prime-star-1.0-net.pdf.font04/source.json",
+      "bytes": 94868322,
+      "sha256": "a311e570d8214156690f0bff0baf2efd9aef9a476eceb7c1bbd2a890977d3ce9"
+    },
+    {
+      "path": "qualification/font04/local/financial-B2prime-star-1.0-net.pdf.font04/verification.json",
+      "bytes": 51978,
+      "sha256": "4e55b44dd7432bb56e7b10b7cc8f7d37c9f56bf1049fd7b754ca2e356b04f01c"
+    },
+    {
+      "path": "qualification/font04/local/financial-B2prime-star-1.0-net.pdf.ttf",
+      "bytes": 1238484,
+      "sha256": "2fe2befbb044afcaf9e33eb40d6af9f199a66ece64216f6e52d4796b4575f287"
+    },
+    {
+      "path": "qualification/font04/local/financial-B2prime-star-1.0-net.pdf.ttf.sanitized",
+      "bytes": 1243196,
+      "sha256": "2a883da2ec95f0fa7aafcbb08dccc8962adfa794372f1316f59f04f923e595e1"
+    },
+    {
+      "path": "qualification/font04/local/financial-B2prime-star-1.0-repeat.pdf",
+      "bytes": 2872954,
+      "sha256": "1145c6fd1816d93e33e9b523a34a53d11618bfdc9647b9864390b914d5b5cd4b"
+    },
+    {
+      "path": "qualification/font04/local/financial-B2prime-star-1.0-slot-net-repeat.pdf",
+      "bytes": 2860050,
+      "sha256": "b7c8bd14c83989318dd3ef1c8c092cb8b18c3d01ce002bf296ba6f761bfca592"
+    },
+    {
+      "path": "qualification/font04/local/financial-B2prime-star-1.0-slot-net.pdf",
+      "bytes": 2860050,
+      "sha256": "b7c8bd14c83989318dd3ef1c8c092cb8b18c3d01ce002bf296ba6f761bfca592"
+    },
+    {
+      "path": "qualification/font04/local/financial-B2prime-star-1.0-slot-net.pdf.font04/actual-owned-audit.json",
+      "bytes": 222,
+      "sha256": "623c1599e457fbc4ce5a32c858ce3a064d638e4d3cc8fee994aec71811714d2e"
+    },
+    {
+      "path": "qualification/font04/local/financial-B2prime-star-1.0-slot-net.pdf.font04/byte-attribution.json",
+      "bytes": 1197,
+      "sha256": "5aa69180b7ad6b7574a7750b8062351e02fa924733d3c7dcffc949ae48fc5dbe"
+    },
+    {
+      "path": "qualification/font04/local/financial-B2prime-star-1.0-slot-net.pdf.font04/canonical.ttf",
+      "bytes": 1767024,
+      "sha256": "3cd4c0279c234f2fc0632908007fb6e26ab182f0640365b47bf6d39d49a741dc"
+    },
+    {
+      "path": "qualification/font04/local/financial-B2prime-star-1.0-slot-net.pdf.font04/class-crops.npz",
+      "bytes": 48383312,
+      "sha256": "ab1a5ac9fad4731695fda95aab56795b27771f09ab4d1be95b811c2efbebe96a"
+    },
+    {
+      "path": "qualification/font04/local/financial-B2prime-star-1.0-slot-net.pdf.font04/class-isolated-candidate.pdf",
+      "bytes": 4092335,
+      "sha256": "c1c27a32e4a1586ade9a3a139c23e1d72d6cdbc3c5615447cef5c514df87f346"
+    },
+    {
+      "path": "qualification/font04/local/financial-B2prime-star-1.0-slot-net.pdf.font04/class-metrics.json",
+      "bytes": 9169434,
+      "sha256": "009aa49940d03744595bc6d2b6105d689ba7ca1c162a17aae40f56e6af8e065b"
+    },
+    {
+      "path": "qualification/font04/local/financial-B2prime-star-1.0-slot-net.pdf.font04/emitted-bindings.json",
+      "bytes": 1318470,
+      "sha256": "998d9bd6027ca8a83c9112e000574754579ab9878e8093514ae8f503ffc9ba71"
+    },
+    {
+      "path": "qualification/font04/local/financial-B2prime-star-1.0-slot-net.pdf.font04/fields.npy",
+      "bytes": 115474560,
+      "sha256": "3510404d24ec449923f77a5b0cbd088965fec0db6e5fd8550223adf54505c490"
+    },
+    {
+      "path": "qualification/font04/local/financial-B2prime-star-1.0-slot-net.pdf.font04/frames.json",
+      "bytes": 312607,
+      "sha256": "82fff6d31018f3aff3c20b7829a973cc0659e3b54c5c9b22239bbb1456681374"
+    },
+    {
+      "path": "qualification/font04/local/financial-B2prime-star-1.0-slot-net.pdf.font04/outlines.json",
+      "bytes": 60343624,
+      "sha256": "596b98642bae52e7a3fc48b6b9ff20bb2441419810d8f3577203a3086338b8b1"
+    },
+    {
+      "path": "qualification/font04/local/financial-B2prime-star-1.0-slot-net.pdf.font04/pair-ledger.json",
+      "bytes": 79168214,
+      "sha256": "b570b735eacc663e1ea994a252faa6a7cc1b54f000a462da848cf504a8b3879a"
+    },
+    {
+      "path": "qualification/font04/local/financial-B2prime-star-1.0-slot-net.pdf.font04/plan.json",
+      "bytes": 11993762,
+      "sha256": "092a4c4f7a0c0ad973fd081a3840e1d6080a7cdfe30acefa7e4ecf1d858a1108"
+    },
+    {
+      "path": "qualification/font04/local/financial-B2prime-star-1.0-slot-net.pdf.font04/source.json",
+      "bytes": 94868322,
+      "sha256": "a311e570d8214156690f0bff0baf2efd9aef9a476eceb7c1bbd2a890977d3ce9"
+    },
+    {
+      "path": "qualification/font04/local/financial-B2prime-star-1.0-slot-net.pdf.font04/verification.json",
+      "bytes": 45287,
+      "sha256": "8d2c9a5a0385424cfe2f69253fdb3591529babe79c6d7143c835c0f94af6eb9e"
+    },
+    {
+      "path": "qualification/font04/local/financial-B2prime-star-1.0-slot-net.pdf.ttf",
+      "bytes": 1302084,
+      "sha256": "eaf14aab0fd4619bab3e2222b9d37a22310c10192f82be001a169bc3dd838b44"
+    },
+    {
+      "path": "qualification/font04/local/financial-B2prime-star-1.0-slot-net.pdf.ttf.sanitized",
+      "bytes": 1305824,
+      "sha256": "5cf0638ef2537b5cbda269e3c41a38b408f70d35050cd2e5504cb64be216fe77"
+    },
+    {
+      "path": "qualification/font04/local/financial-B2prime-star-1.0.pdf",
+      "bytes": 2872954,
+      "sha256": "1145c6fd1816d93e33e9b523a34a53d11618bfdc9647b9864390b914d5b5cd4b"
+    },
+    {
+      "path": "qualification/font04/local/financial-B2prime-star-1.0.pdf.font04/actual-owned-audit.json",
+      "bytes": 557210,
+      "sha256": "018976b7ee25eeacbdea312bc630686416d468736109de86ff29423f0f88edd4"
+    },
+    {
+      "path": "qualification/font04/local/financial-B2prime-star-1.0.pdf.font04/byte-attribution.json",
+      "bytes": 987537,
+      "sha256": "f763510bbe5ba84bfe34d133ba706481735d63461b8eaff5307f20f11311ce4a"
+    },
+    {
+      "path": "qualification/font04/local/financial-B2prime-star-1.0.pdf.font04/canonical.ttf",
+      "bytes": 1767024,
+      "sha256": "3cd4c0279c234f2fc0632908007fb6e26ab182f0640365b47bf6d39d49a741dc"
+    },
+    {
+      "path": "qualification/font04/local/financial-B2prime-star-1.0.pdf.font04/class-crops.npz",
+      "bytes": 48390694,
+      "sha256": "7eeb48b0ee8503e363cdf0567c8c3a12ef3d165414f68806352a2c5ed8437330"
+    },
+    {
+      "path": "qualification/font04/local/financial-B2prime-star-1.0.pdf.font04/class-isolated-candidate.pdf",
+      "bytes": 4797567,
+      "sha256": "2bfc56a4a7da58432097ee6dd3faee4e1dfa77924485b9a7057fae70d02a8f2c"
+    },
+    {
+      "path": "qualification/font04/local/financial-B2prime-star-1.0.pdf.font04/class-metrics.json",
+      "bytes": 9445894,
+      "sha256": "a36006b901b06ca446adc4ee32296ba3220c02a7f9a4cea96f09916df4d2c619"
+    },
+    {
+      "path": "qualification/font04/local/financial-B2prime-star-1.0.pdf.font04/emitted-bindings.json",
+      "bytes": 1318470,
+      "sha256": "998d9bd6027ca8a83c9112e000574754579ab9878e8093514ae8f503ffc9ba71"
+    },
+    {
+      "path": "qualification/font04/local/financial-B2prime-star-1.0.pdf.font04/fields.npy",
+      "bytes": 115474560,
+      "sha256": "3510404d24ec449923f77a5b0cbd088965fec0db6e5fd8550223adf54505c490"
+    },
+    {
+      "path": "qualification/font04/local/financial-B2prime-star-1.0.pdf.font04/frames.json",
+      "bytes": 312607,
+      "sha256": "82fff6d31018f3aff3c20b7829a973cc0659e3b54c5c9b22239bbb1456681374"
+    },
+    {
+      "path": "qualification/font04/local/financial-B2prime-star-1.0.pdf.font04/outlines.json",
+      "bytes": 60343624,
+      "sha256": "596b98642bae52e7a3fc48b6b9ff20bb2441419810d8f3577203a3086338b8b1"
+    },
+    {
+      "path": "qualification/font04/local/financial-B2prime-star-1.0.pdf.font04/pair-ledger.json",
+      "bytes": 79168214,
+      "sha256": "b570b735eacc663e1ea994a252faa6a7cc1b54f000a462da848cf504a8b3879a"
+    },
+    {
+      "path": "qualification/font04/local/financial-B2prime-star-1.0.pdf.font04/plan.json",
+      "bytes": 11869845,
+      "sha256": "6596eba861e03c8edeacb1917c2c875f8ee17a141fd1e77cb09d6d113ac4d7fd"
+    },
+    {
+      "path": "qualification/font04/local/financial-B2prime-star-1.0.pdf.font04/source.json",
+      "bytes": 94868322,
+      "sha256": "a311e570d8214156690f0bff0baf2efd9aef9a476eceb7c1bbd2a890977d3ce9"
+    },
+    {
+      "path": "qualification/font04/local/financial-B2prime-star-1.0.pdf.font04/verification.json",
+      "bytes": 52089,
+      "sha256": "e557dbe6ece3e2fb669cfd269ec48fc37bcc8ba75c181d7b9b5a468253a36059"
+    },
+    {
+      "path": "qualification/font04/local/financial-B2prime-star-1.0.pdf.ttf",
+      "bytes": 1295576,
+      "sha256": "45501b3fc0874f4f291b5d3a487c93cf83b19e33ab07d54ebad88ae1e16d60ac"
+    },
+    {
+      "path": "qualification/font04/local/financial-B2prime-star-1.0.pdf.ttf.sanitized",
+      "bytes": 1300892,
+      "sha256": "a929227766d262e78603334a98e5266fdceeee0edcd765aa2a20504e88c6f25e"
+    },
+    {
+      "path": "qualification/font04/local/financial-B2prime-star-1.5-repeat.pdf",
+      "bytes": 2827139,
+      "sha256": "29078c71c61a3216f792b4a88064012b3fc909c02d24ec8847f4d30193a94e1d"
+    },
+    {
+      "path": "qualification/font04/local/financial-B2prime-star-1.5.pdf",
+      "bytes": 2827139,
+      "sha256": "29078c71c61a3216f792b4a88064012b3fc909c02d24ec8847f4d30193a94e1d"
+    },
+    {
+      "path": "qualification/font04/local/financial-B2prime-star-1.5.pdf.font04/actual-owned-audit.json",
+      "bytes": 704266,
+      "sha256": "c293f4dd6edc0ffbf7c52537a663086b90449b756559965faead7ae4e8886e5c"
+    },
+    {
+      "path": "qualification/font04/local/financial-B2prime-star-1.5.pdf.font04/byte-attribution.json",
+      "bytes": 1240699,
+      "sha256": "0b5bd9b1a3113abdd49f8c5360b68a8f0ee231f304da0df225b0b92ed034f3c0"
+    },
+    {
+      "path": "qualification/font04/local/financial-B2prime-star-1.5.pdf.font04/canonical.ttf",
+      "bytes": 1767024,
+      "sha256": "3cd4c0279c234f2fc0632908007fb6e26ab182f0640365b47bf6d39d49a741dc"
+    },
+    {
+      "path": "qualification/font04/local/financial-B2prime-star-1.5.pdf.font04/class-crops.npz",
+      "bytes": 48394658,
+      "sha256": "5b7eae3423c1cdbaf73a9437f85bbd1e3a349519e953d157d925e749cc62b406"
+    },
+    {
+      "path": "qualification/font04/local/financial-B2prime-star-1.5.pdf.font04/class-isolated-candidate.pdf",
+      "bytes": 4872494,
+      "sha256": "7b1be6b185fbcd3bbaf1377580775f28c14c17e30fd25d0b708b90bb4754b7fa"
+    },
+    {
+      "path": "qualification/font04/local/financial-B2prime-star-1.5.pdf.font04/class-metrics.json",
+      "bytes": 9458845,
+      "sha256": "78de7c85c8782e07a205c9d181053c4d5d18b28df4d02339a2433361668b959c"
+    },
+    {
+      "path": "qualification/font04/local/financial-B2prime-star-1.5.pdf.font04/emitted-bindings.json",
+      "bytes": 1318470,
+      "sha256": "998d9bd6027ca8a83c9112e000574754579ab9878e8093514ae8f503ffc9ba71"
+    },
+    {
+      "path": "qualification/font04/local/financial-B2prime-star-1.5.pdf.font04/fields.npy",
+      "bytes": 115474560,
+      "sha256": "3510404d24ec449923f77a5b0cbd088965fec0db6e5fd8550223adf54505c490"
+    },
+    {
+      "path": "qualification/font04/local/financial-B2prime-star-1.5.pdf.font04/frames.json",
+      "bytes": 312607,
+      "sha256": "82fff6d31018f3aff3c20b7829a973cc0659e3b54c5c9b22239bbb1456681374"
+    },
+    {
+      "path": "qualification/font04/local/financial-B2prime-star-1.5.pdf.font04/outlines.json",
+      "bytes": 60343624,
+      "sha256": "596b98642bae52e7a3fc48b6b9ff20bb2441419810d8f3577203a3086338b8b1"
+    },
+    {
+      "path": "qualification/font04/local/financial-B2prime-star-1.5.pdf.font04/pair-ledger.json",
+      "bytes": 79168214,
+      "sha256": "b570b735eacc663e1ea994a252faa6a7cc1b54f000a462da848cf504a8b3879a"
+    },
+    {
+      "path": "qualification/font04/local/financial-B2prime-star-1.5.pdf.font04/plan.json",
+      "bytes": 11397917,
+      "sha256": "1b9da34cf9d3fbd817b7498e72d5b603f763029a3074841f770a8d757c90550d"
+    },
+    {
+      "path": "qualification/font04/local/financial-B2prime-star-1.5.pdf.font04/source.json",
+      "bytes": 94868322,
+      "sha256": "a311e570d8214156690f0bff0baf2efd9aef9a476eceb7c1bbd2a890977d3ce9"
+    },
+    {
+      "path": "qualification/font04/local/financial-B2prime-star-1.5.pdf.font04/verification.json",
+      "bytes": 52043,
+      "sha256": "0d33267d1d5708e6219fe48cebb013b083aac561422b79bacbab594b79097344"
+    },
+    {
+      "path": "qualification/font04/local/financial-B2prime-star-1.5.pdf.ttf",
+      "bytes": 1207340,
+      "sha256": "1db8b073c06a74c62fac669c38d20eb48bcbfef732c2746d9910e1410d79c8e2"
+    },
+    {
+      "path": "qualification/font04/local/financial-B2prime-star-1.5.pdf.ttf.sanitized",
+      "bytes": 1212784,
+      "sha256": "3fe684fe032abfbc4064ed9ad6f22d5a642a2a443f1baf0718d15869a5f8ec3f"
+    },
+    {
+      "path": "qualification/font04/local/financial-B2prime-star-2.0-repeat.pdf",
+      "bytes": 2813092,
+      "sha256": "b0bb7e1721491205354d36d4e7be2002544e28556d78085cca17407acf703221"
+    },
+    {
+      "path": "qualification/font04/local/financial-B2prime-star-2.0.pdf",
+      "bytes": 2813092,
+      "sha256": "b0bb7e1721491205354d36d4e7be2002544e28556d78085cca17407acf703221"
+    },
+    {
+      "path": "qualification/font04/local/financial-B2prime-star-2.0.pdf.font04/actual-owned-audit.json",
+      "bytes": 735043,
+      "sha256": "341b2fc29a4b4a240a9bed5899ac1b1227bd4d8398aebba6d6151e3911f74184"
+    },
+    {
+      "path": "qualification/font04/local/financial-B2prime-star-2.0.pdf.font04/byte-attribution.json",
+      "bytes": 1295248,
+      "sha256": "4308cd1e35c2d9d3567489a3bca7aca0acccdee305c11a350baa0a566e64b60c"
+    },
+    {
+      "path": "qualification/font04/local/financial-B2prime-star-2.0.pdf.font04/canonical.ttf",
+      "bytes": 1767024,
+      "sha256": "3cd4c0279c234f2fc0632908007fb6e26ab182f0640365b47bf6d39d49a741dc"
+    },
+    {
+      "path": "qualification/font04/local/financial-B2prime-star-2.0.pdf.font04/class-crops.npz",
+      "bytes": 48393130,
+      "sha256": "b0769724e099bc13aec9ea1d2bb6891d7522ea2bfea8cf8dc2dc7c2628ae03a8"
+    },
+    {
+      "path": "qualification/font04/local/financial-B2prime-star-2.0.pdf.font04/class-isolated-candidate.pdf",
+      "bytes": 4797920,
+      "sha256": "07be1c650fd2c0f4a7ea4ac57d664cc328913cf6fa2779f14d3f5824575d4972"
+    },
+    {
+      "path": "qualification/font04/local/financial-B2prime-star-2.0.pdf.font04/class-metrics.json",
+      "bytes": 9462647,
+      "sha256": "e7a8b53738127790da2eac764fa2a9ceae0323a4f77f2c81ae72a5103b5cd022"
+    },
+    {
+      "path": "qualification/font04/local/financial-B2prime-star-2.0.pdf.font04/emitted-bindings.json",
+      "bytes": 1318470,
+      "sha256": "998d9bd6027ca8a83c9112e000574754579ab9878e8093514ae8f503ffc9ba71"
+    },
+    {
+      "path": "qualification/font04/local/financial-B2prime-star-2.0.pdf.font04/fields.npy",
+      "bytes": 115474560,
+      "sha256": "3510404d24ec449923f77a5b0cbd088965fec0db6e5fd8550223adf54505c490"
+    },
+    {
+      "path": "qualification/font04/local/financial-B2prime-star-2.0.pdf.font04/frames.json",
+      "bytes": 312607,
+      "sha256": "82fff6d31018f3aff3c20b7829a973cc0659e3b54c5c9b22239bbb1456681374"
+    },
+    {
+      "path": "qualification/font04/local/financial-B2prime-star-2.0.pdf.font04/outlines.json",
+      "bytes": 60343624,
+      "sha256": "596b98642bae52e7a3fc48b6b9ff20bb2441419810d8f3577203a3086338b8b1"
+    },
+    {
+      "path": "qualification/font04/local/financial-B2prime-star-2.0.pdf.font04/pair-ledger.json",
+      "bytes": 79168214,
+      "sha256": "b570b735eacc663e1ea994a252faa6a7cc1b54f000a462da848cf504a8b3879a"
+    },
+    {
+      "path": "qualification/font04/local/financial-B2prime-star-2.0.pdf.font04/plan.json",
+      "bytes": 11296711,
+      "sha256": "ba5c141bf9810b7a2eceefba5512dfc5f1cad4fd7ae98a325b314dca3642b6ee"
+    },
+    {
+      "path": "qualification/font04/local/financial-B2prime-star-2.0.pdf.font04/source.json",
+      "bytes": 94868322,
+      "sha256": "a311e570d8214156690f0bff0baf2efd9aef9a476eceb7c1bbd2a890977d3ce9"
+    },
+    {
+      "path": "qualification/font04/local/financial-B2prime-star-2.0.pdf.font04/verification.json",
+      "bytes": 51998,
+      "sha256": "f78a6405c37276e378fcfa9265a42c9990f1fad0bed052dae6ab6cd082ffe640"
+    },
+    {
+      "path": "qualification/font04/local/financial-B2prime-star-2.0.pdf.ttf",
+      "bytes": 1183116,
+      "sha256": "e96af227f0c8c5665a97c46131270908a027db8e66915a6f4655a2118da7a506"
+    },
+    {
+      "path": "qualification/font04/local/financial-B2prime-star-2.0.pdf.ttf.sanitized",
+      "bytes": 1188576,
+      "sha256": "4bcf0cec2e3f5f4dd348d5234a829a95b6aeaebf896b73033e68b90d9fbcb83b"
+    },
+    {
+      "path": "qualification/font04/local/financial-B2prime-support-initial-cover-1.0-expanded-verification.log",
+      "bytes": 471,
+      "sha256": "304ac74655759c4474b53c538e41b11cf7ca98f93d9d7cd3690c3a15c9e867ca"
+    },
+    {
+      "path": "qualification/font04/local/financial-B2prime-support-initial-cover-1.0-repeat.pdf",
+      "bytes": 2865162,
+      "sha256": "452aaceaeecaf0b8ff9fe94e57158908d9ed640ae3a2b26fc8763b8abbac6fd1"
+    },
+    {
+      "path": "qualification/font04/local/financial-B2prime-support-initial-cover-1.0.pdf",
+      "bytes": 2865162,
+      "sha256": "452aaceaeecaf0b8ff9fe94e57158908d9ed640ae3a2b26fc8763b8abbac6fd1"
+    },
+    {
+      "path": "qualification/font04/local/financial-B2prime-support-initial-cover-1.0.pdf.font04/actual-owned-audit.json",
+      "bytes": 564485,
+      "sha256": "9a1d6345717c4b7fbefdef3f50d962b42ba468ac8a3ed1e926f4ec0841979d72"
+    },
+    {
+      "path": "qualification/font04/local/financial-B2prime-support-initial-cover-1.0.pdf.font04/byte-attribution.json",
+      "bytes": 1004871,
+      "sha256": "3712a51954effda311347263084af91f9b6389fc53cabc7339bd7902f3435b9b"
+    },
+    {
+      "path": "qualification/font04/local/financial-B2prime-support-initial-cover-1.0.pdf.font04/canonical.ttf",
+      "bytes": 1767024,
+      "sha256": "3cd4c0279c234f2fc0632908007fb6e26ab182f0640365b47bf6d39d49a741dc"
+    },
+    {
+      "path": "qualification/font04/local/financial-B2prime-support-initial-cover-1.0.pdf.font04/class-crops.npz",
+      "bytes": 48376107,
+      "sha256": "d4cdca6b60587eba10303dedfdd39c4c9b7383eaaee2f4fd508224566171a04f"
+    },
+    {
+      "path": "qualification/font04/local/financial-B2prime-support-initial-cover-1.0.pdf.font04/class-isolated-candidate.pdf",
+      "bytes": 4789745,
+      "sha256": "0f13a1b8878024420522fd990ad7a1585fc5d9998c5c34b61d7d62a52e5045ad"
+    },
+    {
+      "path": "qualification/font04/local/financial-B2prime-support-initial-cover-1.0.pdf.font04/class-metrics.json",
+      "bytes": 9440269,
+      "sha256": "17ecc434348dc078f99905bda99f3fb0167ab09327440bfda3b692a130a89ade"
+    },
+    {
+      "path": "qualification/font04/local/financial-B2prime-support-initial-cover-1.0.pdf.font04/emitted-bindings.json",
+      "bytes": 1318470,
+      "sha256": "998d9bd6027ca8a83c9112e000574754579ab9878e8093514ae8f503ffc9ba71"
+    },
+    {
+      "path": "qualification/font04/local/financial-B2prime-support-initial-cover-1.0.pdf.font04/fields.npy",
+      "bytes": 115474560,
+      "sha256": "3510404d24ec449923f77a5b0cbd088965fec0db6e5fd8550223adf54505c490"
+    },
+    {
+      "path": "qualification/font04/local/financial-B2prime-support-initial-cover-1.0.pdf.font04/frames.json",
+      "bytes": 312607,
+      "sha256": "82fff6d31018f3aff3c20b7829a973cc0659e3b54c5c9b22239bbb1456681374"
+    },
+    {
+      "path": "qualification/font04/local/financial-B2prime-support-initial-cover-1.0.pdf.font04/outlines.json",
+      "bytes": 60343624,
+      "sha256": "596b98642bae52e7a3fc48b6b9ff20bb2441419810d8f3577203a3086338b8b1"
+    },
+    {
+      "path": "qualification/font04/local/financial-B2prime-support-initial-cover-1.0.pdf.font04/pair-ledger.json",
+      "bytes": 79168214,
+      "sha256": "b570b735eacc663e1ea994a252faa6a7cc1b54f000a462da848cf504a8b3879a"
+    },
+    {
+      "path": "qualification/font04/local/financial-B2prime-support-initial-cover-1.0.pdf.font04/plan.json",
+      "bytes": 11836187,
+      "sha256": "d0e931e498e26c9bd4f0013eede060339897067d87570ccd5deb6c8f34c5c998"
+    },
+    {
+      "path": "qualification/font04/local/financial-B2prime-support-initial-cover-1.0.pdf.font04/source.json",
+      "bytes": 94868322,
+      "sha256": "a311e570d8214156690f0bff0baf2efd9aef9a476eceb7c1bbd2a890977d3ce9"
+    },
+    {
+      "path": "qualification/font04/local/financial-B2prime-support-initial-cover-1.0.pdf.font04/verification.json",
+      "bytes": 52075,
+      "sha256": "7d5cd6fb0d54d9c7d334ea7f5a21c464e76304972176ecaeab0a892ae91774ae"
+    },
+    {
+      "path": "qualification/font04/local/financial-B2prime-support-initial-cover-1.0.pdf.ttf",
+      "bytes": 1280064,
+      "sha256": "edb71e8ae00a9a777417877b6b299f78512222d3a516f735d4bb451cc4697d43"
+    },
+    {
+      "path": "qualification/font04/local/financial-B2prime-support-initial-cover-1.0.pdf.ttf.sanitized",
+      "bytes": 1285360,
+      "sha256": "0f41b876fb39b3c050c1c2b9a1a5b0bb694f2d7d34d83330f44edade0babd0e2"
+    },
+    {
+      "path": "qualification/font04/local/financial-B2prime-support-initial-cover-1.5-expanded-verification.log",
+      "bytes": 471,
+      "sha256": "2439e26dd08ffac11212c6b6c07f03de632fbb3ebd9fc8e4b4575aa500ccdabe"
+    },
+    {
+      "path": "qualification/font04/local/financial-B2prime-support-initial-cover-1.5-repeat.pdf",
+      "bytes": 2814299,
+      "sha256": "8a0d1047067c21047397abb94a309835e4b8a75d60558a0c8482be215c2c59d5"
+    },
+    {
+      "path": "qualification/font04/local/financial-B2prime-support-initial-cover-1.5.pdf",
+      "bytes": 2814299,
+      "sha256": "8a0d1047067c21047397abb94a309835e4b8a75d60558a0c8482be215c2c59d5"
+    },
+    {
+      "path": "qualification/font04/local/financial-B2prime-support-initial-cover-1.5.pdf.font04/actual-owned-audit.json",
+      "bytes": 704259,
+      "sha256": "21ba78c2c5cc7b94c4b6d3ef6f751c1bb6e246127c177bbcf8db6fea90d39ac0"
+    },
+    {
+      "path": "qualification/font04/local/financial-B2prime-support-initial-cover-1.5.pdf.font04/byte-attribution.json",
+      "bytes": 1242569,
+      "sha256": "2a953423cf89ab9834626a4e8ae6386fabfb586dbd50077937254440021cd99f"
+    },
+    {
+      "path": "qualification/font04/local/financial-B2prime-support-initial-cover-1.5.pdf.font04/canonical.ttf",
+      "bytes": 1767024,
+      "sha256": "3cd4c0279c234f2fc0632908007fb6e26ab182f0640365b47bf6d39d49a741dc"
+    },
+    {
+      "path": "qualification/font04/local/financial-B2prime-support-initial-cover-1.5.pdf.font04/class-crops.npz",
+      "bytes": 48388411,
+      "sha256": "1756731557d8c13dbd380ff566f196550047a8d083b9fb273ac2a081afb19933"
+    },
+    {
+      "path": "qualification/font04/local/financial-B2prime-support-initial-cover-1.5.pdf.font04/class-isolated-candidate.pdf",
+      "bytes": 4859681,
+      "sha256": "87b064839a743a6187a3b1a1b2ec7be690d7f38384350d0b01dba22eb0c57df0"
+    },
+    {
+      "path": "qualification/font04/local/financial-B2prime-support-initial-cover-1.5.pdf.font04/class-metrics.json",
+      "bytes": 9448818,
+      "sha256": "e8ee1fbf14f81bdc4ef37517c9d6ebf95ff393843aa5b84e2fbc51f6294848ad"
+    },
+    {
+      "path": "qualification/font04/local/financial-B2prime-support-initial-cover-1.5.pdf.font04/emitted-bindings.json",
+      "bytes": 1318470,
+      "sha256": "998d9bd6027ca8a83c9112e000574754579ab9878e8093514ae8f503ffc9ba71"
+    },
+    {
+      "path": "qualification/font04/local/financial-B2prime-support-initial-cover-1.5.pdf.font04/fields.npy",
+      "bytes": 115474560,
+      "sha256": "3510404d24ec449923f77a5b0cbd088965fec0db6e5fd8550223adf54505c490"
+    },
+    {
+      "path": "qualification/font04/local/financial-B2prime-support-initial-cover-1.5.pdf.font04/frames.json",
+      "bytes": 312607,
+      "sha256": "82fff6d31018f3aff3c20b7829a973cc0659e3b54c5c9b22239bbb1456681374"
+    },
+    {
+      "path": "qualification/font04/local/financial-B2prime-support-initial-cover-1.5.pdf.font04/outlines.json",
+      "bytes": 60343624,
+      "sha256": "596b98642bae52e7a3fc48b6b9ff20bb2441419810d8f3577203a3086338b8b1"
+    },
+    {
+      "path": "qualification/font04/local/financial-B2prime-support-initial-cover-1.5.pdf.font04/pair-ledger.json",
+      "bytes": 79168214,
+      "sha256": "b570b735eacc663e1ea994a252faa6a7cc1b54f000a462da848cf504a8b3879a"
+    },
+    {
+      "path": "qualification/font04/local/financial-B2prime-support-initial-cover-1.5.pdf.font04/plan.json",
+      "bytes": 11391481,
+      "sha256": "f1207e91399fcc52b5dd02955c29e9a77eb841009e3148ce71b959fbb1c06547"
+    },
+    {
+      "path": "qualification/font04/local/financial-B2prime-support-initial-cover-1.5.pdf.font04/source.json",
+      "bytes": 94868322,
+      "sha256": "a311e570d8214156690f0bff0baf2efd9aef9a476eceb7c1bbd2a890977d3ce9"
+    },
+    {
+      "path": "qualification/font04/local/financial-B2prime-support-initial-cover-1.5.pdf.font04/verification.json",
+      "bytes": 52018,
+      "sha256": "616c8300bab4503a44f45ded71f9a189997c3ea82a4a69438d7029a13735db45"
+    },
+    {
+      "path": "qualification/font04/local/financial-B2prime-support-initial-cover-1.5.pdf.ttf",
+      "bytes": 1185532,
+      "sha256": "9c3f53ec9baf10cc929a4d3c70bd93a528a5abecfe1823d9ad3038a89f1a906a"
+    },
+    {
+      "path": "qualification/font04/local/financial-B2prime-support-initial-cover-1.5.pdf.ttf.sanitized",
+      "bytes": 1190912,
+      "sha256": "c98d289cfc3d401a51bf8948b1b5df31c580fa52f77206948991e695503d0d9a"
+    },
+    {
+      "path": "qualification/font04/local/financial-B2prime-support-initial-cover-2.0-expanded-verification.log",
+      "bytes": 471,
+      "sha256": "a358712a2d482545cf68b6577bfbf079565c0fb68f2a59e5b26ee147403bc015"
+    },
+    {
+      "path": "qualification/font04/local/financial-B2prime-support-initial-cover-2.0-repeat.pdf",
+      "bytes": 2806344,
+      "sha256": "d86ee597790462496687d85c40ae55a23c1d8fbb9b5f606ef1acf634e73173d1"
+    },
+    {
+      "path": "qualification/font04/local/financial-B2prime-support-initial-cover-2.0.pdf",
+      "bytes": 2806344,
+      "sha256": "d86ee597790462496687d85c40ae55a23c1d8fbb9b5f606ef1acf634e73173d1"
+    },
+    {
+      "path": "qualification/font04/local/financial-B2prime-support-initial-cover-2.0.pdf.font04/actual-owned-audit.json",
+      "bytes": 724377,
+      "sha256": "00e2371f5d90fcad829c3dea6539bb40143ae149a689932f2d748ba05756406b"
+    },
+    {
+      "path": "qualification/font04/local/financial-B2prime-support-initial-cover-2.0.pdf.font04/byte-attribution.json",
+      "bytes": 1279576,
+      "sha256": "cc7cc58e2db199362f264dbec7837be6f25399c928904e4f43958232e4381c63"
+    },
+    {
+      "path": "qualification/font04/local/financial-B2prime-support-initial-cover-2.0.pdf.font04/canonical.ttf",
+      "bytes": 1767024,
+      "sha256": "3cd4c0279c234f2fc0632908007fb6e26ab182f0640365b47bf6d39d49a741dc"
+    },
+    {
+      "path": "qualification/font04/local/financial-B2prime-support-initial-cover-2.0.pdf.font04/class-crops.npz",
+      "bytes": 48379766,
+      "sha256": "8d6e2c012796dcb39c67403ebaee55c94ea9e0e2d13d834ad2a417085f1092f8"
+    },
+    {
+      "path": "qualification/font04/local/financial-B2prime-support-initial-cover-2.0.pdf.font04/class-isolated-candidate.pdf",
+      "bytes": 4791193,
+      "sha256": "05388c4541d36191725a9c0bf8709e5bdd9eb5c75fa8fb1e4da8590b0b378442"
+    },
+    {
+      "path": "qualification/font04/local/financial-B2prime-support-initial-cover-2.0.pdf.font04/class-metrics.json",
+      "bytes": 9451045,
+      "sha256": "34e42c376b6537ffab9f08ce8e417d6351ed5caea220531d8a00729d8688c055"
+    },
+    {
+      "path": "qualification/font04/local/financial-B2prime-support-initial-cover-2.0.pdf.font04/emitted-bindings.json",
+      "bytes": 1318470,
+      "sha256": "998d9bd6027ca8a83c9112e000574754579ab9878e8093514ae8f503ffc9ba71"
+    },
+    {
+      "path": "qualification/font04/local/financial-B2prime-support-initial-cover-2.0.pdf.font04/fields.npy",
+      "bytes": 115474560,
+      "sha256": "3510404d24ec449923f77a5b0cbd088965fec0db6e5fd8550223adf54505c490"
+    },
+    {
+      "path": "qualification/font04/local/financial-B2prime-support-initial-cover-2.0.pdf.font04/frames.json",
+      "bytes": 312607,
+      "sha256": "82fff6d31018f3aff3c20b7829a973cc0659e3b54c5c9b22239bbb1456681374"
+    },
+    {
+      "path": "qualification/font04/local/financial-B2prime-support-initial-cover-2.0.pdf.font04/outlines.json",
+      "bytes": 60343624,
+      "sha256": "596b98642bae52e7a3fc48b6b9ff20bb2441419810d8f3577203a3086338b8b1"
+    },
+    {
+      "path": "qualification/font04/local/financial-B2prime-support-initial-cover-2.0.pdf.font04/pair-ledger.json",
+      "bytes": 79168214,
+      "sha256": "b570b735eacc663e1ea994a252faa6a7cc1b54f000a462da848cf504a8b3879a"
+    },
+    {
+      "path": "qualification/font04/local/financial-B2prime-support-initial-cover-2.0.pdf.font04/plan.json",
+      "bytes": 11319699,
+      "sha256": "71f0374a4477e28d147b0d1b9fcc4718503e9803a428dbcbfdf353aa59c21b0e"
+    },
+    {
+      "path": "qualification/font04/local/financial-B2prime-support-initial-cover-2.0.pdf.font04/source.json",
+      "bytes": 94868322,
+      "sha256": "a311e570d8214156690f0bff0baf2efd9aef9a476eceb7c1bbd2a890977d3ce9"
+    },
+    {
+      "path": "qualification/font04/local/financial-B2prime-support-initial-cover-2.0.pdf.font04/verification.json",
+      "bytes": 52028,
+      "sha256": "5e1eeaceee658f104387cb1cd212c72bc17b949734fa7b87ca0bf4ae565c3293"
+    },
+    {
+      "path": "qualification/font04/local/financial-B2prime-support-initial-cover-2.0.pdf.ttf",
+      "bytes": 1169380,
+      "sha256": "e99fed0605e25b3431b11878a0b6d43c5e818ef4aa5ae52fc100745262140a1d"
+    },
+    {
+      "path": "qualification/font04/local/financial-B2prime-support-initial-cover-2.0.pdf.ttf.sanitized",
+      "bytes": 1174784,
+      "sha256": "d58dbf388c66bec197fdeaa988e9f132b1484dedf54ef09f971a9f3793e7cf24"
+    },
+    {
+      "path": "qualification/font04/local/financial-B2prime-support-initial-star-1.0-expanded-verification.log",
+      "bytes": 470,
+      "sha256": "67b385df118a5e4c56e3d0430c82b424ec9303cd0416f1feaf0e497dfa28c73e"
+    },
+    {
+      "path": "qualification/font04/local/financial-B2prime-support-initial-star-1.0-net-expanded-verification.log",
+      "bytes": 474,
+      "sha256": "dc6d222d7992b2218c998d4c15f4695d94137b25287d4fa92fbb34ec0e3fe2d0"
+    },
+    {
+      "path": "qualification/font04/local/financial-B2prime-support-initial-star-1.0-net-repeat.pdf",
+      "bytes": 2839079,
+      "sha256": "a25deabde4c255003c5ad36ea1fdeac8256c75fcf72344ab517e977aa2e75ae4"
+    },
+    {
+      "path": "qualification/font04/local/financial-B2prime-support-initial-star-1.0-net.pdf",
+      "bytes": 2839079,
+      "sha256": "a25deabde4c255003c5ad36ea1fdeac8256c75fcf72344ab517e977aa2e75ae4"
+    },
+    {
+      "path": "qualification/font04/local/financial-B2prime-support-initial-star-1.0-net.pdf.font04/actual-owned-audit.json",
+      "bytes": 386139,
+      "sha256": "77d5444d2cbb6efb566c59c11858c723ad1e8e50872636163912b34ca24747b4"
+    },
+    {
+      "path": "qualification/font04/local/financial-B2prime-support-initial-star-1.0-net.pdf.font04/byte-attribution.json",
+      "bytes": 697974,
+      "sha256": "59f85931fd77e7be723f2acfcc54cbd087ecbcea4b62404ecf620e0fc918487b"
+    },
+    {
+      "path": "qualification/font04/local/financial-B2prime-support-initial-star-1.0-net.pdf.font04/canonical.ttf",
+      "bytes": 1767024,
+      "sha256": "3cd4c0279c234f2fc0632908007fb6e26ab182f0640365b47bf6d39d49a741dc"
+    },
+    {
+      "path": "qualification/font04/local/financial-B2prime-support-initial-star-1.0-net.pdf.font04/class-crops.npz",
+      "bytes": 48389829,
+      "sha256": "824c3c4f841528102525e4c1b297ed942f3092e18c7a8a181992c7db498f4003"
+    },
+    {
+      "path": "qualification/font04/local/financial-B2prime-support-initial-star-1.0-net.pdf.font04/class-isolated-candidate.pdf",
+      "bytes": 4703841,
+      "sha256": "86a329473cefe18bbaf5c4039b06aa2b8ac35cd4a937fdef77fc95a226892c61"
+    },
+    {
+      "path": "qualification/font04/local/financial-B2prime-support-initial-star-1.0-net.pdf.font04/class-metrics.json",
+      "bytes": 9405496,
+      "sha256": "1cab088cdbbab35b33df9a9449e63cb2a5cd52bff8a7ff0c0ff7ae40031dedcd"
+    },
+    {
+      "path": "qualification/font04/local/financial-B2prime-support-initial-star-1.0-net.pdf.font04/emitted-bindings.json",
+      "bytes": 1318470,
+      "sha256": "998d9bd6027ca8a83c9112e000574754579ab9878e8093514ae8f503ffc9ba71"
+    },
+    {
+      "path": "qualification/font04/local/financial-B2prime-support-initial-star-1.0-net.pdf.font04/fields.npy",
+      "bytes": 115474560,
+      "sha256": "3510404d24ec449923f77a5b0cbd088965fec0db6e5fd8550223adf54505c490"
+    },
+    {
+      "path": "qualification/font04/local/financial-B2prime-support-initial-star-1.0-net.pdf.font04/frames.json",
+      "bytes": 312607,
+      "sha256": "82fff6d31018f3aff3c20b7829a973cc0659e3b54c5c9b22239bbb1456681374"
+    },
+    {
+      "path": "qualification/font04/local/financial-B2prime-support-initial-star-1.0-net.pdf.font04/outlines.json",
+      "bytes": 60343624,
+      "sha256": "596b98642bae52e7a3fc48b6b9ff20bb2441419810d8f3577203a3086338b8b1"
+    },
+    {
+      "path": "qualification/font04/local/financial-B2prime-support-initial-star-1.0-net.pdf.font04/pair-ledger.json",
+      "bytes": 79168214,
+      "sha256": "b570b735eacc663e1ea994a252faa6a7cc1b54f000a462da848cf504a8b3879a"
+    },
+    {
+      "path": "qualification/font04/local/financial-B2prime-support-initial-star-1.0-net.pdf.font04/plan.json",
+      "bytes": 12391507,
+      "sha256": "ce35f32287d54dacd3c872a06bca9a2995b43246348aefd06cc47be786cca26d"
+    },
+    {
+      "path": "qualification/font04/local/financial-B2prime-support-initial-star-1.0-net.pdf.font04/source.json",
+      "bytes": 94868322,
+      "sha256": "a311e570d8214156690f0bff0baf2efd9aef9a476eceb7c1bbd2a890977d3ce9"
+    },
+    {
+      "path": "qualification/font04/local/financial-B2prime-support-initial-star-1.0-net.pdf.font04/verification.json",
+      "bytes": 51989,
+      "sha256": "440f58bbe5b3587aeccd5d2c48b97a108c48f396fa022f5140cc72090d5e5782"
+    },
+    {
+      "path": "qualification/font04/local/financial-B2prime-support-initial-star-1.0-net.pdf.ttf",
+      "bytes": 1242412,
+      "sha256": "e64576ed247a36f3f122cd65f9fab6dfa7da3fc268e02fa0f2900285981f4290"
+    },
+    {
+      "path": "qualification/font04/local/financial-B2prime-support-initial-star-1.0-net.pdf.ttf.sanitized",
+      "bytes": 1247112,
+      "sha256": "82f85c29e23395bff507976646477c35c50752aa7b5bd7e548b51fa1ca828b64"
+    },
+    {
+      "path": "qualification/font04/local/financial-B2prime-support-initial-star-1.0-repeat.pdf",
+      "bytes": 2873860,
+      "sha256": "922913826e8b352b1daf03ff0fb3479072df6f272daa8770a5c76e3628596f6e"
+    },
+    {
+      "path": "qualification/font04/local/financial-B2prime-support-initial-star-1.0.pdf",
+      "bytes": 2873860,
+      "sha256": "922913826e8b352b1daf03ff0fb3479072df6f272daa8770a5c76e3628596f6e"
+    },
+    {
+      "path": "qualification/font04/local/financial-B2prime-support-initial-star-1.0.pdf.font04/actual-owned-audit.json",
+      "bytes": 542463,
+      "sha256": "ca0081d1d4e8bffa392a5e8b8fbddf6ef68602fb9a26df65ac51931064fc3500"
+    },
+    {
+      "path": "qualification/font04/local/financial-B2prime-support-initial-star-1.0.pdf.font04/byte-attribution.json",
+      "bytes": 965323,
+      "sha256": "9b62f6d764d4fdf911e406fcb744d1befb28e2975c9ea888f52d93714e7bb827"
+    },
+    {
+      "path": "qualification/font04/local/financial-B2prime-support-initial-star-1.0.pdf.font04/canonical.ttf",
+      "bytes": 1767024,
+      "sha256": "3cd4c0279c234f2fc0632908007fb6e26ab182f0640365b47bf6d39d49a741dc"
+    },
+    {
+      "path": "qualification/font04/local/financial-B2prime-support-initial-star-1.0.pdf.font04/class-crops.npz",
+      "bytes": 48385730,
+      "sha256": "8babc7387c26846a490c7b56c5b7934b78357c0d02d068d5b5b97d22ad1a869a"
+    },
+    {
+      "path": "qualification/font04/local/financial-B2prime-support-initial-star-1.0.pdf.font04/class-isolated-candidate.pdf",
+      "bytes": 4798486,
+      "sha256": "e4a734ddf7e8ed7d610ff7b8c6e8107d400defc8883670ed4a8a26cdfe6c5a86"
+    },
+    {
+      "path": "qualification/font04/local/financial-B2prime-support-initial-star-1.0.pdf.font04/class-metrics.json",
+      "bytes": 9432087,
+      "sha256": "a725047da564390ae516acf57168e206a9fc4675f6cc864f76699464a47a5fd2"
+    },
+    {
+      "path": "qualification/font04/local/financial-B2prime-support-initial-star-1.0.pdf.font04/emitted-bindings.json",
+      "bytes": 1318470,
+      "sha256": "998d9bd6027ca8a83c9112e000574754579ab9878e8093514ae8f503ffc9ba71"
+    },
+    {
+      "path": "qualification/font04/local/financial-B2prime-support-initial-star-1.0.pdf.font04/fields.npy",
+      "bytes": 115474560,
+      "sha256": "3510404d24ec449923f77a5b0cbd088965fec0db6e5fd8550223adf54505c490"
+    },
+    {
+      "path": "qualification/font04/local/financial-B2prime-support-initial-star-1.0.pdf.font04/frames.json",
+      "bytes": 312607,
+      "sha256": "82fff6d31018f3aff3c20b7829a973cc0659e3b54c5c9b22239bbb1456681374"
+    },
+    {
+      "path": "qualification/font04/local/financial-B2prime-support-initial-star-1.0.pdf.font04/outlines.json",
+      "bytes": 60343624,
+      "sha256": "596b98642bae52e7a3fc48b6b9ff20bb2441419810d8f3577203a3086338b8b1"
+    },
+    {
+      "path": "qualification/font04/local/financial-B2prime-support-initial-star-1.0.pdf.font04/pair-ledger.json",
+      "bytes": 79168214,
+      "sha256": "b570b735eacc663e1ea994a252faa6a7cc1b54f000a462da848cf504a8b3879a"
+    },
+    {
+      "path": "qualification/font04/local/financial-B2prime-support-initial-star-1.0.pdf.font04/plan.json",
+      "bytes": 11907792,
+      "sha256": "0345c80e6238adf592d041fdbd25d6ac0886f46629b46bd6911361c4ca641e53"
+    },
+    {
+      "path": "qualification/font04/local/financial-B2prime-support-initial-star-1.0.pdf.font04/source.json",
+      "bytes": 94868322,
+      "sha256": "a311e570d8214156690f0bff0baf2efd9aef9a476eceb7c1bbd2a890977d3ce9"
+    },
+    {
+      "path": "qualification/font04/local/financial-B2prime-support-initial-star-1.0.pdf.font04/verification.json",
+      "bytes": 52064,
+      "sha256": "8721ffd44a8f74cff1df668a2ed3cfeb1b934abca609bcba4bd17387d018674f"
+    },
+    {
+      "path": "qualification/font04/local/financial-B2prime-support-initial-star-1.0.pdf.ttf",
+      "bytes": 1296852,
+      "sha256": "02240d82787bd2cb0eab59db100b98ee3a0299b9624d80520594b4043af2b074"
+    },
+    {
+      "path": "qualification/font04/local/financial-B2prime-support-initial-star-1.0.pdf.ttf.sanitized",
+      "bytes": 1302144,
+      "sha256": "f783325ad2b0486a29b5387c66f908b3850e121f79d192e43f8a6a77334356c2"
+    },
+    {
+      "path": "qualification/font04/local/financial-B2prime-support-initial-star-1.5-expanded-verification.log",
+      "bytes": 470,
+      "sha256": "219d01bedbd08036ff280e9c1c222ae6b1ad9e2efa48b9a0cb30dc6d74d4bdb9"
+    },
+    {
+      "path": "qualification/font04/local/financial-B2prime-support-initial-star-1.5-repeat.pdf",
+      "bytes": 2828210,
+      "sha256": "f49d5a13ab25d1099249e3e08a093aa31211ba2a35f66969ffc35e3bcbabc26a"
+    },
+    {
+      "path": "qualification/font04/local/financial-B2prime-support-initial-star-1.5.pdf",
+      "bytes": 2828210,
+      "sha256": "f49d5a13ab25d1099249e3e08a093aa31211ba2a35f66969ffc35e3bcbabc26a"
+    },
+    {
+      "path": "qualification/font04/local/financial-B2prime-support-initial-star-1.5.pdf.font04/actual-owned-audit.json",
+      "bytes": 688706,
+      "sha256": "ccbb9fbee38368edfa7e3174891b4ddb0d36a74509f430e081942866a7c5dcae"
+    },
+    {
+      "path": "qualification/font04/local/financial-B2prime-support-initial-star-1.5.pdf.font04/byte-attribution.json",
+      "bytes": 1216906,
+      "sha256": "e0f20f7e13a1e71c27bdbc117cab224491da0da2172f8008b23f3c1faebcf8ef"
+    },
+    {
+      "path": "qualification/font04/local/financial-B2prime-support-initial-star-1.5.pdf.font04/canonical.ttf",
+      "bytes": 1767024,
+      "sha256": "3cd4c0279c234f2fc0632908007fb6e26ab182f0640365b47bf6d39d49a741dc"
+    },
+    {
+      "path": "qualification/font04/local/financial-B2prime-support-initial-star-1.5.pdf.font04/class-crops.npz",
+      "bytes": 48390028,
+      "sha256": "771d990d9703877d175ad338b824db1824cdb70532f5fae73664eb971c1cc6dd"
+    },
+    {
+      "path": "qualification/font04/local/financial-B2prime-support-initial-star-1.5.pdf.font04/class-isolated-candidate.pdf",
+      "bytes": 4873567,
+      "sha256": "0cd1a84acbe94d0f68839975a2a9817f0009d66dcd669ab5a1e1c83b5309e65b"
+    },
+    {
+      "path": "qualification/font04/local/financial-B2prime-support-initial-star-1.5.pdf.font04/class-metrics.json",
+      "bytes": 9444249,
+      "sha256": "f8bcbec361b4f2fc047c78537f9592912b31a9d92c1148df90c40de4cf345193"
+    },
+    {
+      "path": "qualification/font04/local/financial-B2prime-support-initial-star-1.5.pdf.font04/emitted-bindings.json",
+      "bytes": 1318470,
+      "sha256": "998d9bd6027ca8a83c9112e000574754579ab9878e8093514ae8f503ffc9ba71"
+    },
+    {
+      "path": "qualification/font04/local/financial-B2prime-support-initial-star-1.5.pdf.font04/fields.npy",
+      "bytes": 115474560,
+      "sha256": "3510404d24ec449923f77a5b0cbd088965fec0db6e5fd8550223adf54505c490"
+    },
+    {
+      "path": "qualification/font04/local/financial-B2prime-support-initial-star-1.5.pdf.font04/frames.json",
+      "bytes": 312607,
+      "sha256": "82fff6d31018f3aff3c20b7829a973cc0659e3b54c5c9b22239bbb1456681374"
+    },
+    {
+      "path": "qualification/font04/local/financial-B2prime-support-initial-star-1.5.pdf.font04/outlines.json",
+      "bytes": 60343624,
+      "sha256": "596b98642bae52e7a3fc48b6b9ff20bb2441419810d8f3577203a3086338b8b1"
+    },
+    {
+      "path": "qualification/font04/local/financial-B2prime-support-initial-star-1.5.pdf.font04/pair-ledger.json",
+      "bytes": 79168214,
+      "sha256": "b570b735eacc663e1ea994a252faa6a7cc1b54f000a462da848cf504a8b3879a"
+    },
+    {
+      "path": "qualification/font04/local/financial-B2prime-support-initial-star-1.5.pdf.font04/plan.json",
+      "bytes": 11438568,
+      "sha256": "83c041b35f1513974dfe99e2363c7be05e5a696b3e025fc7db400289e3e66707"
+    },
+    {
+      "path": "qualification/font04/local/financial-B2prime-support-initial-star-1.5.pdf.font04/source.json",
+      "bytes": 94868322,
+      "sha256": "a311e570d8214156690f0bff0baf2efd9aef9a476eceb7c1bbd2a890977d3ce9"
+    },
+    {
+      "path": "qualification/font04/local/financial-B2prime-support-initial-star-1.5.pdf.font04/verification.json",
+      "bytes": 52028,
+      "sha256": "c193fb39b0bda9db48c0780961829549fd69f43f11c00b2426ac8a91e2b8da52"
+    },
+    {
+      "path": "qualification/font04/local/financial-B2prime-support-initial-star-1.5.pdf.ttf",
+      "bytes": 1209488,
+      "sha256": "282f274946d7fed99fd9b97d22703d77c2ca1165ebf3708bacb943a0823ab85b"
+    },
+    {
+      "path": "qualification/font04/local/financial-B2prime-support-initial-star-1.5.pdf.ttf.sanitized",
+      "bytes": 1214908,
+      "sha256": "dac5d3fed2d6781d386467876f4d7191ac703aeee1daa83528813d34f09bc8bb"
+    },
+    {
+      "path": "qualification/font04/local/financial-B2prime-support-initial-star-2.0-expanded-verification.log",
+      "bytes": 470,
+      "sha256": "5169619212f4f0b21d3ebd6a84c7c17c25ac7023c18ed7e9346ba760efde91cb"
+    },
+    {
+      "path": "qualification/font04/local/financial-B2prime-support-initial-star-2.0-repeat.pdf",
+      "bytes": 2814774,
+      "sha256": "5c9e671bfff4e38568ef02ccf50bf05efcbec4a47f0e5254bee3e11fb30ebdcc"
+    },
+    {
+      "path": "qualification/font04/local/financial-B2prime-support-initial-star-2.0.pdf",
+      "bytes": 2814774,
+      "sha256": "5c9e671bfff4e38568ef02ccf50bf05efcbec4a47f0e5254bee3e11fb30ebdcc"
+    },
+    {
+      "path": "qualification/font04/local/financial-B2prime-support-initial-star-2.0.pdf.font04/actual-owned-audit.json",
+      "bytes": 718345,
+      "sha256": "8de5fb05eb555a93b9fc3362ecbd8864be7b96dbf5d9a4c98db41e90c3aa59b1"
+    },
+    {
+      "path": "qualification/font04/local/financial-B2prime-support-initial-star-2.0.pdf.font04/byte-attribution.json",
+      "bytes": 1269962,
+      "sha256": "b5db909b53d6860e23cfd018cebb4e8f44cf10e2f50bd1dc818bbe8aed24bc91"
+    },
+    {
+      "path": "qualification/font04/local/financial-B2prime-support-initial-star-2.0.pdf.font04/canonical.ttf",
+      "bytes": 1767024,
+      "sha256": "3cd4c0279c234f2fc0632908007fb6e26ab182f0640365b47bf6d39d49a741dc"
+    },
+    {
+      "path": "qualification/font04/local/financial-B2prime-support-initial-star-2.0.pdf.font04/class-crops.npz",
+      "bytes": 48388229,
+      "sha256": "ea310b8c34a7869fa2bfd8d93414a6a8ed012291e0a8c63112408ee9b820238a"
+    },
+    {
+      "path": "qualification/font04/local/financial-B2prime-support-initial-star-2.0.pdf.font04/class-isolated-candidate.pdf",
+      "bytes": 4799604,
+      "sha256": "69edeaec2f62db2c445bd912f89044ce445b9580106c239c8c6cb34688f59d8e"
+    },
+    {
+      "path": "qualification/font04/local/financial-B2prime-support-initial-star-2.0.pdf.font04/class-metrics.json",
+      "bytes": 9446885,
+      "sha256": "6ef858452fab4ff16b9e08fb39f08ac2f3388cfcb84eeb49b563d709fc93de6f"
+    },
+    {
+      "path": "qualification/font04/local/financial-B2prime-support-initial-star-2.0.pdf.font04/emitted-bindings.json",
+      "bytes": 1318470,
+      "sha256": "998d9bd6027ca8a83c9112e000574754579ab9878e8093514ae8f503ffc9ba71"
+    },
+    {
+      "path": "qualification/font04/local/financial-B2prime-support-initial-star-2.0.pdf.font04/fields.npy",
+      "bytes": 115474560,
+      "sha256": "3510404d24ec449923f77a5b0cbd088965fec0db6e5fd8550223adf54505c490"
+    },
+    {
+      "path": "qualification/font04/local/financial-B2prime-support-initial-star-2.0.pdf.font04/frames.json",
+      "bytes": 312607,
+      "sha256": "82fff6d31018f3aff3c20b7829a973cc0659e3b54c5c9b22239bbb1456681374"
+    },
+    {
+      "path": "qualification/font04/local/financial-B2prime-support-initial-star-2.0.pdf.font04/outlines.json",
+      "bytes": 60343624,
+      "sha256": "596b98642bae52e7a3fc48b6b9ff20bb2441419810d8f3577203a3086338b8b1"
+    },
+    {
+      "path": "qualification/font04/local/financial-B2prime-support-initial-star-2.0.pdf.font04/pair-ledger.json",
+      "bytes": 79168214,
+      "sha256": "b570b735eacc663e1ea994a252faa6a7cc1b54f000a462da848cf504a8b3879a"
+    },
+    {
+      "path": "qualification/font04/local/financial-B2prime-support-initial-star-2.0.pdf.font04/plan.json",
+      "bytes": 11340071,
+      "sha256": "5a0967b6904384fd6e5dcb3f5baf764f923c3cfe027e586ed6f126387db1563c"
+    },
+    {
+      "path": "qualification/font04/local/financial-B2prime-support-initial-star-2.0.pdf.font04/source.json",
+      "bytes": 94868322,
+      "sha256": "a311e570d8214156690f0bff0baf2efd9aef9a476eceb7c1bbd2a890977d3ce9"
+    },
+    {
+      "path": "qualification/font04/local/financial-B2prime-support-initial-star-2.0.pdf.font04/verification.json",
+      "bytes": 52007,
+      "sha256": "d28822db65553f26cdf0942c3727acb2eb6e5c33354fe14cbc437844e41c9f06"
+    },
+    {
+      "path": "qualification/font04/local/financial-B2prime-support-initial-star-2.0.pdf.ttf",
+      "bytes": 1185780,
+      "sha256": "3d4526e8b63596c0c836aa71ecb40cef856cb79c5f7322deb4f9686bec313fd7"
+    },
+    {
+      "path": "qualification/font04/local/financial-B2prime-support-initial-star-2.0.pdf.ttf.sanitized",
+      "bytes": 1191216,
+      "sha256": "ec37c686d5578a6ac82dffa08e6b3400cab1da2a64e86ba0a95f5cb5e62dd428"
+    },
+    {
+      "path": "qualification/font04/local/financial-B2prime-transport-dense-maps.pdf",
+      "bytes": 2943369,
+      "sha256": "19fea6a7983290ceffc1c11e1de6599988372f2b30910565f30562008bd897c4"
+    },
+    {
+      "path": "qualification/font04/local/financial-B2prime-transport-failed-v1.pdf",
+      "bytes": 2939478,
+      "sha256": "cd44d8639f0eaab56dbf3abc1090fc9ff2e4b077a212608c29d0405fd089f53a"
+    },
+    {
+      "path": "qualification/font04/local/financial-B2prime-transport-serialized.pdf",
+      "bytes": 2855194,
+      "sha256": "e16639267a89d08360bfbd4703478e959f45fc7a96d80dd37efa3c1e985223ff"
+    },
+    {
+      "path": "qualification/font04/local/financial-B2prime-transport-serialized.pdf.transport.json",
+      "bytes": 903149,
+      "sha256": "2d3cf4dffdf29e4335528060d938bfa25a19f6827e9d0eaaaf091e509a59c597"
+    },
+    {
+      "path": "qualification/font04/local/financial-B2prime-transport.pdf",
+      "bytes": 2855194,
+      "sha256": "e16639267a89d08360bfbd4703478e959f45fc7a96d80dd37efa3c1e985223ff"
+    },
+    {
+      "path": "qualification/font04/local/financial-B2prime-transport.pdf.transport.json",
+      "bytes": 903205,
+      "sha256": "53e8f0cf70080b54c21235c43048bb1bf38c1cc9f4ff5eb026a88a0640cd5e09"
+    },
+    {
+      "path": "qualification/font04/local/financial-B2prime-transport.pdf.ttf",
+      "bytes": 1267348,
+      "sha256": "b037b2d9ca8c4c8fe110694717728f71ca832b157ca9a95f1995187d5eceb369"
+    },
+    {
+      "path": "qualification/font04/local/financial-B2prime-transport.pdf.ttf.sanitized",
+      "bytes": 1272436,
+      "sha256": "d52678b433b5ed98b5c4de00fe345c63caf58ea395dce77902b01945162a4fa2"
+    }
+  ],
+  "key_policy": "Separate private key; integrity SHA in public seal receipt. Public filenames are opaque panel IDs plus Source/U/V. No decoded key or judgments.",
+  "diagnostics": "support-initial PDFs are complete superseded support-gating controls; dense-map and failed-v1 probes are diagnostic only.",
+  "public_asset_inventory": {
+    "path": "qualification/font04/local/B2prime-public-assets-manifest.json",
+    "sha256": "3900dca5c7d1b808af6bcb80cb2ef0878c536094bee4a98deb66a2db90d6db0a",
+    "files": 52320
+  },
+  "default_main_commit": "c10e3dff93ca12ac410c0f6626a4ef74ce34e0c1"
+}
