@@ -19,7 +19,7 @@
   },
   "product_change_branch": null,
   "merged_in_launch": [],
-  "B2_started": false,
+  "B2_started": true,
   "P2_generated_rendered_inspected": false,
   "P2_preregistration_sha256": "a4f9ccd3a7e51d719946be80f7cc9a297de7ca22285e8755e5e26e415e7db466",
   "tests": {
@@ -33,6 +33,17 @@
     ],
     "failed": 0,
     "log": "qualification/font04/local/tests-final.log",
-    "sha256": "2da028cf4444b38a019a18215d98929002d2c23aeff0a80c0a8b1e6c09f091f9"
-  }
+    "sha256": "2da028cf4444b38a019a18215d98929002d2c23aeff0a80c0a8b1e6c09f091f9",
+    "scope": "Historical baseline test receipt; launch checks are recorded in checkpoint-B1prime.json and checkpoint-B2.json"
+  },
+  "B2_completed": true,
+  "stop": "Checkpoint B2; independent review pending",
+  "reviewed_launch_contract": "b85f138a4938251447ea597d8e8ea0143c10b0c5",
+  "launch_commits": [
+    "28341e02e3ee05bdef581ffab9892622fc8d93d3",
+    "94f648863494d21b62ebf7594d49b225cd17c549",
+    "6033634496bca6a93aabf8bedbf8023038afe31f",
+    "443cc99482d9abf81cfe54625026409f1b16dd48",
+    "c20079de4b13a0e923301909a92196dcb3cee013"
+  ]
 }

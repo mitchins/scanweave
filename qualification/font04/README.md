@@ -1,4 +1,4 @@
-# FONT-04 discovery (A and B1 only)
+# FONT-04 discovery — stopped at B2
 
 Contract baseline: `06f24b122e1cd1cd879880166b8240c7e75747ed`;
 product baseline: `c10e3dff93ca12ac410c0f6626a4ef74ce34e0c1`.
@@ -60,3 +60,23 @@ The 24-candidate shortlist and sparse star ordering are explicit limitations;
 untested pairs are not rejections. No B2 or P2 generation entry point is present.
 The 15% error-only objective is met for `e`; independent visual rejection rates
 and material-defect counts are pending review. See `FONT_04_RESULTS.md`.
+
+## B1′ / B2 handoff
+
+Current results: `checkpoint-B1prime.json`, `checkpoint-B2.json` and
+`../../FONT_04_RESULTS.md`. Earlier A/B1 measurements are historical.
+Large artifacts stay ignored in `local/`, hashed in the prime/B2 manifests.
+Use current review manifests: B1 colour-faithful `*-review-v2/` and B2
+`financial-B2-PV-review/`. Keys remain separate and unopened.
+
+Reproduction modules under `qualification.font04`: `coordinate_roundtrip`,
+`rerun_phase_a`, `phase_a_analytic`, `prime_metrics`, `class_metrics`,
+`class_verify`, `class_frontier`, `support_breakdown`, `raw_owned_probe`,
+`finalize_owned_audit`, `functional_guard`, `review_sheets`, `finalize_prime`,
+then `finalize_b2`. Use `qualification/.venv/bin/python -m` and read each
+module's argparse options; hashes guard exact cached-fit replay.
+B2 starts only after all B1′ gates pass. Initial full B2 P fails extraction/layout.
+Final P/PV retain existing groups on exact functional failure; normal CLI replay
+builds complete PDFs. No glyph veto is relaxed. Raw source-halo auditing precedes
+fit-mask exclusions; final PV has zero unexplained owned components among
+substitutions. No reviewer judgments entered. Stop: no B3, P2 or promotion.

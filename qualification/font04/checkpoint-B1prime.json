@@ -10,17 +10,19 @@
   "B2_decision": "AUTHORIZED: proceed with same star grouping, operating point 1.0, original hard vetoes plus ownership-aware veto; stop at Checkpoint B2.",
   "reviewer_state": "PENDING: corrected accepted/rejected sheets issued sealed; no visual defect or false-rejection rate is imputed.",
   "review": {
-    "panels": 334,
+    "panels": 332,
     "random_rejected_members": 51,
-    "accepted_members": 96,
+    "rejected_population": 168,
+    "reviewable_rejected_population": 168,
+    "accepted_members": 95,
     "both_renderers": true,
-    "rejected_context": "exact default page with only the target glyph replaced; all neighbours unchanged",
+    "rejected_context": "exact default page with only the target glyph replaced; original ink colour and all neighbours unchanged",
     "source_and_randomized_UV": true,
     "reading_size_and_400_percent": true,
-    "review_pdf": "qualification/font04/local/financial-B1prime-PV-review/blinded-review.pdf",
-    "review_pdf_sha256": "35dd819c376a8d9c226d08a713a337870f5fb4ce7a7cb8195557114a13ead425",
-    "judgments": "qualification/font04/local/financial-B1prime-PV-review/judgments-template.json",
-    "key": "qualification/font04/local/financial-B1prime-PV-review/sealed-key.json",
+    "review_pdf": "qualification/font04/local/financial-B1prime-PV-review-v2/blinded-review.pdf",
+    "review_pdf_sha256": "853594d3bad6317cb0d6258c361f546e04e40a86b00a4a1012e0887716ba8cee",
+    "judgments": "qualification/font04/local/financial-B1prime-PV-review-v2/judgments-template.json",
+    "key": "qualification/font04/local/financial-B1prime-PV-review-v2/sealed-key.json",
     "status": "awaiting independent judgments; key not revealed"
   },
   "metrics": {
@@ -2556,15 +2558,18 @@
   "deterministic_PV_repeat_sha256": "cce50ad6267aaa47749b0359ce3b6001864267012052748228c29ecb71776b96",
   "coordinate_test": {
     "path": "qualification/font04/coordinate-roundtrip.json",
-    "sha256": "dd1b4e01bb0d2b767cfb4446fde2ac520f8a23fac05b20905b9d6f305988a1fc"
+    "sha256": "cd6ed05de8c722a89ef70cb67fd848ecae098d8227db47648067c3ea7c20d7ea"
   },
   "noise_support": {
     "calibrated": 203,
-    "fewer_than_k_witnesses": 88,
+    "fewer_than_k_eligible_witnesses": 79,
+    "source_pair_calibration_failure": 9,
     "insufficient_support_rejections": 88,
-    "fewer_than_k": 88,
-    "calibration_failures": 0,
-    "k": 2
+    "fewer_than_k": 79,
+    "calibration_failures": 9,
+    "numerical_calibration_errors": 0,
+    "k": 2,
+    "definition": "Eligible-witness shortfall versus source-pair hard-check calibration failure; see prime-noise-support.json"
   },
   "frontier": {
     "path": "qualification/font04/prime-frontier.json",
@@ -2631,6 +2636,10 @@
     "financial-B1prime-P": true,
     "financial-B1prime-PV": true
   },
+  "negative_review_manifests": [
+    "qualification/font04/prime-negative-review-manifest.json",
+    "qualification/font04/prime-negative-extension-review-manifest.json"
+  ],
   "calibration": {
     "primary": "qualification/font04/prime-calibration.json",
     "extension": "qualification/font04/prime-calibration-extension.json",
@@ -2639,9 +2648,13 @@
       "caught": 3
     }
   },
+  "blinding_null_control": {
+    "path": "qualification/font04/context-null-control.json",
+    "result": "unchanged target replacement is pixel-identical in PDFium and Poppler; earlier sheets superseded by fresh v2 keys preserving original ink colour"
+  },
   "rejection_ledgers": {
     "path": "qualification/font04/prime-rejection-ledgers.json",
-    "sha256": "7072facbb1daea71f2c073a1906beba4d198ef93219ea5250dfc9726656c503e"
+    "sha256": "d4d7947102433ad6c5f640b1fe793d08f79531f1b4a33eb57b77214b389dadbf"
   },
   "P2": "not generated, rendered, inspected as a population, or modified; preregistration hash unchanged"
 }

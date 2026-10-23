@@ -1,6 +1,6 @@
-# FONT-04 results — Checkpoints A and B1
+# FONT-04 results — stopped at Checkpoint B2
 
-**Status: discovery checkpoint, unqualified. Stop at B1.** The experimental complete PDF is 175 bytes smaller and uses seven fewer programs, but native financial fidelity is mixed. No product change is promoted, nothing is merged, B2 is not started, and P2 data remains untouched.
+**Status: B1′ gates passed; B2 complete and stopped for independent review.** Default output is byte-identical. Final B2 P/PV retire 24/16 programs; the substantially higher reuse objective remains unachieved. No promotion or main merge; P2 remains untouched. Earlier A/B1 sections are historical pre-fix measurements, superseded by the corrected checkpoints.
 
 Contract: `06f24b122e1cd1cd879880166b8240c7e75747ed`. Product baseline: `c10e3dff93ca12ac410c0f6626a4ef74ce34e0c1`. The preregistration retains SHA-256 `a4f9ccd3a7e51d719946be80f7cc9a297de7ca22285e8755e5e26e415e7db466`.
 
@@ -128,14 +128,39 @@ P0 freezes all B1 membership and canonical assignments. Independently recomputed
 
 The scorecards report both all 291 members and the actually substituted subset under PDFium, Poppler, 4× supersampled analytic and direct 16× winding coverage, including mean, p95 and worst-ten regression IDs. Native screens are accompanied by measured identical-outline floors; differences below those floors do not rank arms. The primary analytic and independent direct-outline metrics improve.
 
-All 88 insufficient-noise-support cases have fewer than k=2 witnesses; none failed calibration. The fixed frontier is remeasured at all 21 pre-existing grouping/threshold points. Star/1.0 remains fixed; the larger retirement at higher thresholds is a reviewer question, not an operating-point change.
+Of 88 insufficient-noise-support cases, 79 have fewer than k=2 eligible witnesses and 9 have at least k eligible candidates but fail source-pair hard-check calibration; none is a numerical optimizer error. The earlier 88/0 summary counted only surviving witnesses and is superseded by this stage-aware breakdown. The fixed frontier is remeasured at all 21 pre-existing grouping/threshold points. Star/1.0 remains fixed; the larger retirement at higher thresholds is a reviewer question, not an operating-point change.
 
 Corrected Phase A line-frame arms and floor controls were rerun on frozen cohorts/traces; [Checkpoint A](qualification/font04/checkpoint-A.md) supersedes the pre-fix shares and F-self/F-medoid conclusions. No product promotion follows without independent review.
 
-PV sealed sheets contain 96 accepted and 51 rejected members (including every veto firing), repeated words containing e, both renderers, reading size and 400%. Rejected candidates replace their current glyph in full page context. The key remains separate and unopened. **Reviewer pending:** material defects and over-rejection remain unresolved.
+PV sealed sheets contain 95 accepted and 51 rejected members (including every veto firing), repeated words containing e, both renderers, reading size and 400%. Rejected candidates replace their current glyph in full page context. The key remains separate and unopened. **Reviewer pending:** material defects and over-rejection remain unresolved.
 
 Default is byte-identical to main; PV repeats deterministically. qpdf, OTS, extraction and native search checks pass for all arms. PV retires six net programs but grows the complete PDF by 89 bytes; P/P0 save 217 bytes. This byte tradeoff is retained for B2 diagnosis.
 
 **B2 conditions: (a) PASS, (b) PASS, (c) PASS.** Proceed to all 55 frequent classes with the same method and stop at Checkpoint B2. P2 remains sealed; no default promotion or merge is authorized.
 
-Complete PDFs: `qualification/font04/local/financial-experimental-v2.pdf`, `financial-B1prime-P0.pdf`, `financial-B1prime-P.pdf`, `financial-B1prime-PV.pdf`, and `financial-B1prime-default.pdf` in the same directory. Corrected chosen review: `qualification/font04/local/financial-B1prime-PV-review/blinded-review.pdf`. See [checkpoint-B1prime.json](qualification/font04/checkpoint-B1prime.json), [prime-artifact-manifest.json](qualification/font04/prime-artifact-manifest.json) and per-arm scorecards for hashes, tails, floors and runtime.
+Complete PDFs: `qualification/font04/local/financial-experimental-v2.pdf`, `financial-B1prime-P0.pdf`, `financial-B1prime-P.pdf`, `financial-B1prime-PV.pdf`, and `financial-B1prime-default.pdf` in the same directory. Corrected chosen review: `qualification/font04/local/financial-B1prime-PV-review-v2/blinded-review.pdf`. See [checkpoint-B1prime.json](qualification/font04/checkpoint-B1prime.json), [prime-artifact-manifest.json](qualification/font04/prime-artifact-manifest.json) and per-arm scorecards for hashes, tails, floors and runtime.
+
+## Checkpoint B2 — all 55 frequent classes
+
+**Stopped at B2 for independent review.** B1′ conditions (a), (b), (c) passed. All 3,524 frequent-class draws were measured under every reference; no population filtering. Default remains byte-identical; P2 is untouched.
+
+| Complete arm | Substituted | Analytic mean / p95 | Net programs retired | PDF bytes |
+|---|---:|---:|---:|---:|
+| default | 0 | 0.065575 / 0.132734 | 0 | 2849237 |
+| P-initial (failed functional control) | 1209 | 0.057588 / 0.121816 | 91 | 2829943 |
+| P | 710 | 0.060489 / 0.126508 | 24 | 2848833 |
+| PV | 707 | 0.060390 / 0.126508 | 16 | 2851630 |
+
+The initial full P output preserves Unicode but changes native extraction/layout. It is retained only as a failed diagnostic. Normalized canonicals change extractor font-size/layout heuristics. A deterministic group-level functional veto retains current outlines whenever either engine’s text/search differs. Final complete P/PV are rebuilt through the normal CLI and checked independently; no OCR, Unicode, raster or compositor change and no glyph-veto relaxation.
+
+The owned-ink veto fires on 44 proposed members; every firing appears in the sealed rejected sample. All owned-ink exceptions retain their exact current programs and matrices, including glyph-277. Review covers 644 accepted and 192 rejected members, both renderers, full page context with original ink colour, primary/native tails, repeated words and amounts/dates. Keys remain unopened; material defects and over-rejection remain reviewer-pending.
+
+Source-support breakdown: {'calibrated': 1705, 'fewer_than_k_eligible_witnesses': 1523, 'source_pair_calibration_failure': 296}. Eligibility shortage and source-pair calibration failure are distinct. The current-program witness exclusion is retained, not assumed to prove physical absence of independent impressions.
+
+The potential 21-point class frontier is measured with direct coverage at fitted physical positions. These pre-functional controls are not qualified complete-output savings; actual final P/PV economy is reported separately. [Class headlines](qualification/font04/b2-class-headlines.md) and scorecards contain all 55 classes, all/substituted means, p95, worst-ten regression IDs and renderer floors. Native differences below measured floors do not rank arms.
+
+Economy is modest under the fixed method and exact text contract; it is not presented as the substantially higher reuse objective being achieved. Functional transport, eligibility, grouping and serialization remain review questions. No broader reuse opportunity is falsified and nothing is promoted.
+
+Complete PDFs: `qualification/font04/local/financial-B2-default.pdf`, `financial-B2-P.pdf`, `financial-B2-PV.pdf`; diagnostic `financial-B2-P-initial.pdf` and deterministic `financial-B2-PV-repeat.pdf` are retained in the same directory. Current review: `qualification/font04/local/financial-B2-PV-review/blinded-review.pdf`. See [checkpoint-B2.json](qualification/font04/checkpoint-B2.json) and [b2-artifact-manifest.json](qualification/font04/b2-artifact-manifest.json).
+
+Runtime and sampled process-tree RSS/PSS are reported on the same machine. RSS sums repeat shared pages; PSS apportions them. Runs overlapped other discovery work; no isolated performance improvement is claimed. **STOP: no B3, P2, product promotion, main merge or force-push.**
