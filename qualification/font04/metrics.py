@@ -24,7 +24,7 @@ def operands(m):return [float(m[0,0]),float(m[1,0]),float(m[0,1]),float(m[1,1]),
 
 
 def inspect(path):
-    draws=[];programs={};fonts={};users=[]
+    draws=[];programs={};fonts={};users=[];font_cache={}
     with pikepdf.open(path) as pdf:
         for pi,page in enumerate(pdf.pages):
             resources={}
@@ -32,18 +32,20 @@ def inspect(path):
                 if str(font.Subtype)!='/Type0':continue
                 desc=font.DescendantFonts[0]
                 if '/FontFile2' not in desc.FontDescriptor:continue
-                data=desc.FontDescriptor.FontFile2.read_bytes();tt=TTFont(io.BytesIO(data));order=tt.getGlyphOrder();upem=tt['head'].unitsPerEm
-                identifier=hashlib.sha256(data).hexdigest();cmap=desc.CIDToGIDMap
+                data=desc.FontDescriptor.FontFile2.read_bytes();identifier=hashlib.sha256(data).hexdigest()
+                if identifier not in font_cache:
+                    tt=TTFont(io.BytesIO(data));font_cache[identifier]=(tt,tt.getGlyphOrder(),tt['head'].unitsPerEm)
+                tt,order,upem=font_cache[identifier];cmap=desc.CIDToGIDMap
                 mapping=None if isinstance(cmap,pikepdf.Name) else cmap.read_bytes()
                 unicode={}
                 for block in re.findall(rb'beginbfchar(.*?)endbfchar',font.ToUnicode.read_bytes(),re.S):
                     for a,b in re.findall(rb'<([0-9a-fA-F]+)>\s*<([0-9a-fA-F]+)>',block):unicode[int(a,16)]=bytes.fromhex(b.decode()).decode('utf-16-be')
                 hashes=[];points=0
-                for gid,name_g in enumerate(order):
-                    g=tt['glyf'][name_g];blob=g.compile(tt);h=hashlib.sha256(blob).hexdigest();hashes.append(h)
+                for gid,name_g in (enumerate(order) if identifier not in fonts else []):
+                    g=tt['glyf'][name_g];blob=g.compile(tt['glyf']);h=hashlib.sha256(blob).hexdigest();hashes.append(h)
                     if g.numberOfContours>0:points+=len(g.coordinates)
                     programs[(identifier,gid)]=h
-                fonts[identifier]=dict(slots=len(order),decoded_bytes=len(data),encoded_bytes=len(desc.FontDescriptor.FontFile2.read_raw_bytes()),outline_points=points,hashes=hashes)
+                if identifier not in fonts:fonts[identifier]=dict(slots=len(order),decoded_bytes=len(data),encoded_bytes=len(desc.FontDescriptor.FontFile2.read_raw_bytes()),outline_points=points,hashes=hashes)
                 resources[str(name)]=(identifier,tt,order,upem,mapping,unicode)
             state=dict(mode=0,font=None,m=np.eye(3),size=1.);stack=[]
             for args,op in pikepdf.parse_content_stream(page):

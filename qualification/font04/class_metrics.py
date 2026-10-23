@@ -38,7 +38,7 @@ def isolated_pages(path,snap,basebound,bound,only_candidate=False):
             for r in rows:
                 i=r['index'];pdf.pages.append(original.pages[r['page']]);page=pdf.pages[-1]
                 if draws is not None:
-                    d=draws[i];commands='BT 0 Tr 0 g /F1 1 Tf '+' '.join(map(str,d['matrix']))+f" Tm <{d['cid']:04x}> Tj ET\n"
+                    d=draws[i];commands='BT 0 Tr 0 g '+d['font']+' 1 Tf '+' '.join(map(str,d['matrix']))+f" Tm <{d['cid']:04x}> Tj ET\n"
                 elif r['source'] is not None:
                     ss=r['source'];cov=local_source(ss,r['paper']);pixels=np.round((1-cov)*255).astype('uint8');h,w=pixels.shape;g=geometry[r['page']];sx=g['width_pt']/g['raster_width'];sy=g['height_pt']/g['raster_height'];x,y=ss['bbox'][:2]
                     obj=pdf.make_stream(pixels.tobytes());obj.Type=pikepdf.Name.XObject;obj.Subtype=pikepdf.Name.Image;obj.Width=w;obj.Height=h;obj.ColorSpace=pikepdf.Name.DeviceGray;obj.BitsPerComponent=8
@@ -82,7 +82,7 @@ def main(path):
         cached=np.load(ref/'class-crops.npz')
     isolated_pages(path,snap,basebound,bound,only_candidate=bool(reference));records=[];crops={};fonts={}
     for name,p in [('default',ROOT/'financial-default.pdf'),('candidate',path)]:
-        with pikepdf.open(p) as pdf:fonts[name]=TTFont(io.BytesIO(pdf.pages[0].Resources.Font.F1.DescendantFonts[0].FontDescriptor.FontFile2.read_bytes()))
+        with pikepdf.open(p) as pdf:fonts[name]=TTFont(io.BytesIO(next(iter(pdf.pages[0].Resources.Font.values())).DescendantFonts[0].FontDescriptor.FontFile2.read_bytes()))
     import pypdfium2 as pdfium
     docs={name:pdfium.PdfDocument(art/f'class-isolated-{name}.pdf') for name in (['candidate'] if reference else ['source','default','candidate'])}
     for r in rows:
@@ -90,11 +90,11 @@ def main(path):
         if r['source'] is None:continue
         x,y,xx,yy=map(int,r['source']['bbox']);bounds=[x-4,y-4,xx+4,yy+4]
         for engine in ['pdfium','poppler','analytic']:
-            arrays={name:crop_render(art/f'class-isolated-{name}.pdf',doc,i,bounds,engine) for name,doc in docs.items()}
+            arrays={name:(cached[f'{i}-{engine}-default'] if cached is not None and i not in acc and name=='candidate' else crop_render(art/f'class-isolated-{name}.pdf',doc,i,bounds,engine)) for name,doc in docs.items()}
             if cached is not None:arrays.update(source=cached[f'{i}-{engine}-source'],default=cached[f'{i}-{engine}-default'])
             for name,value in arrays.items():crops[f'{i}-{engine}-{name}']=value
             records.append(dict(member=i,character=r['character'],page=r['page'],metric=engine,accepted=i in acc,default=measure(arrays['source'],arrays['default']),candidate=measure(arrays['source'],arrays['candidate'])))
-        a=cached[f'{i}-direct-default'] if cached is not None else direct(fonts['default'],basebound[i],bounds,r['page_height']);b=direct(fonts['candidate'],bound[i],bounds,r['page_height']);src=crops[f'{i}-analytic-source'];crops[f'{i}-direct-default']=a;crops[f'{i}-direct-candidate']=b
+        a=cached[f'{i}-direct-default'] if cached is not None else direct(fonts['default'],basebound[i],bounds,r['page_height']);b=(a if cached is not None and i not in acc else direct(fonts['candidate'],bound[i],bounds,r['page_height']));src=crops[f'{i}-analytic-source'];crops[f'{i}-direct-default']=a;crops[f'{i}-direct-candidate']=b
         records.append(dict(member=i,character=r['character'],page=r['page'],metric='direct',accepted=i in acc,default=measure(src,a),candidate=measure(src,b)))
         if i%25==0:print(path.name,i,flush=True)
     for doc in docs.values():doc.close()
