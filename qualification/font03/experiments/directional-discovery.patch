@@ -1,0 +1,6 @@
+diff --git a/qualification/font03/consensus.py b/qualification/font03/consensus.py
+--- a/qualification/font03/consensus.py
++++ b/qualification/font03/consensus.py
+@@ -157 +157 @@
+-                    pairs[key] = symmetric_compatible(images[j], image, limits)
++                    pairs[key] = compatible(images[j], image, limits)

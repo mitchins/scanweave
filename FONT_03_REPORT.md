@@ -63,7 +63,9 @@ Arms:
 - **B:** a source-supported representative/medoid outline; held-out target is not
   used as its own donor.
 - **C:** aligned coverage fitted by 12 Huber IRLS iterations, delta 0.12. Residual
-  confidence/uncertainty is retained; no pixel median is used as the outline.
+  weights limit outliers; the helper returns per-pixel uncertainty, but that map
+  is not an independently calibrated acceptance probability. No pixel median
+  is used as the outline.
 - **D:** robust signed-distance fitting plus limited spatial regularization,
   addressing coverage-fit broadening. This control uses C's target placement,
   so it does **not** establish that every independently registered distance-field
@@ -229,6 +231,22 @@ acceptances are predominantly `e`; the study does not demonstrate safe healthy
 reuse of every tested numeral or punctuation class. No production activation
 follows from favourable averages or this finite visual review.
 
+Additional **post-decision evaluator-only** diagnostics corroborate the fitting
+result; they were not used to readmit observations:
+
+| Final accepted subset | Validation A → E | Test A → E |
+|---|---:|---:|
+| Mean pristine IoU | 0.76524 → 0.85214 | 0.65934 → 0.82988 |
+| IoU lower 5th percentile | 0.62572 → 0.71422 | 0.43987 → 0.74823 |
+| Mean signed ink-area bias | +0.99% → −1.14% | −6.72% → −2.78% |
+| 95th percentile absolute area bias | 13.21% → 5.89% | 32.30% → 6.55% |
+| Mean symmetric contour distance, 300-DPI-equivalent pixels | 0.52848 → 0.30189 | 0.64592 → 0.30647 |
+
+Boundaries are extracted identically at half coverage; native distances are
+scaled by 300/source-DPI only for aggregation. Raw native distances remain in
+the ledger. Empty contours remain explicitly unresolved. These are finite,
+development-selected results, not a general safety probability.
+
 ## Actual real-page font construction (H4; pre-review fixed-plan control)
 
 Initial complete financial B/C shadow PDFs retain old programs. Their sizes
@@ -277,7 +295,11 @@ of two targets is insufficient to make this document smaller.
 The hook runs after individual page tracing but before union, so no tracing-work
 saving is demonstrated. Timing is unpaired and overlapped with qualification;
 **no speedup is claimed**. Canonical tracing points for the three initial corrected
-real fields are 180, 158 and 168. There is no proven compact-font product result.
+real fields are 180, 158 and 168. The affine fields have 200/160/166 path points;
+actual serialized TrueType coordinate counts are 136/110/114 (360 total).
+A direct glyph-program comparison confirms all old programs remain and exactly
+these three programs are added; path-point and serialized-coordinate counts
+are deliberately distinguished. There is no proven compact-font product result.
 
 The actual control PDF is
 `qualification/font03/local/financial-preunion.pdf`, SHA-256
@@ -350,7 +372,7 @@ remaining counter/repair caveats. Example U/V labels remain the original blind
 panels; `review.md` records attribution after judgment.
 
 - 141 unfiltered workspace Rust tests pass, including 300/600-DPI document and
-  genuine donor-repair regressions. Fourteen new research unit contracts pass.
+  genuine donor-repair regressions. Seventeen new research unit contracts pass.
 - The repository's exact denied-warning Clippy contract passes. An additional
   `--all-targets` run exposes inherited test warnings and two unrelated untracked
   example imports; they are disclosed, not suppressed or fixed in this mission.
@@ -368,3 +390,23 @@ illustrates size/centroid guards, correlation/rank-Hausdorff classification and
 composite templates. Those ideas informed the comparison; no implementation was
 copied. This prototype deliberately remains small, inspectable and separate from
 production.
+
+## Publication checkpoint
+
+Research/evidence PR: [#24](https://github.com/mitchins/scanweave/pull/24).
+No conditional **product** PR is justified by the measured construction result.
+The normal converter remains on remote main
+`c10e3dff93ca12ac410c0f6626a4ef74ce34e0c1`.
+
+The first PR head passed GitHub Rust tests, Python qualification and publication
+hygiene. CodeRabbit and server-side Sonar analysis were still processing at this
+report checkpoint; their final status belongs to the PR's exact-head checks and
+closure discussion, not an inferred green status. Independent code/evidence and
+blinded visual review are complete as recorded above. No unqualified merge is
+claimed or authorized by these measurements.
+
+Extraction metadata was corrected to describe all six selected character classes
+and the actual 35-evaluation registration bound; an inherited zero-tolerance
+label was removed. This description correction changes no source coverage,
+fit, rendering, acceptance decision or historical benchmark measurement. Prior
+metadata is preserved locally.

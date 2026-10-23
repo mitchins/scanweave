@@ -76,3 +76,11 @@ Final independent visual judgment: **no confirmed material canonical regression
 in this finite 52-case healthy cohort**. Limited visual pass with explicit
 counter-rounding/weight caveats; not a pristine-accuracy win in every example,
 not blanket production qualification and not damaged-repair approval.
+
+## Post-decision contour diagnostics
+
+The independent reviewer verified half-coverage boundary extraction, symmetric
+native-pixel distances and the linear `300/source-DPI` aggregation. No empty
+contours occurred in either arm. Saved values match the report. The optional
+source-decision hash check was added before oracle access, alongside the existing
+native-array binding check. No acceptance thresholds or decisions changed.

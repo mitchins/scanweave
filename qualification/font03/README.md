@@ -76,3 +76,10 @@ Never ship this fixed plan or describe its result as a standalone Rust
 canonicalizer. It tests construction causality only. Normal ClearScan and
 faithful are unchanged. The phase-2 source/native decisions and hashes must be
 retained with any rebuilt output.
+
+To reproduce the original **rejected directional discovery** controls, apply
+`experiments/directional-discovery.patch` with `git apply --unidiff-zero` only
+in a temporary checkout, then rerun the original uniform/affine sequence. This
+intentionally fails the new symmetry regression and must never replace the
+maintained grouping implementation. It explains the historical tables rather
+than providing a second supported policy.

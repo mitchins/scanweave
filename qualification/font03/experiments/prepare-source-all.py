@@ -42,8 +42,8 @@ for split in ["train", "validation", "test"]:
             "grid": 64,
             "xheight_grid": 32,
             "baseline_grid": 48,
-            "max_nfev": 30,
-            "healthy_candidate_gate": "No worse source-coverage MSE than current glyph in BOTH renderers; no character rewriting. Oracle evaluation only after decisions.",
+            "max_nfev": 35,
+            "healthy_candidate_gate": "Source/native gates and trained error allowances are recorded in each experiment protocol; no character rewriting. Pristine evaluation follows frozen source decisions.",
         },
     }
     (root / (split + "-frozen.json")).write_text(json.dumps(frozen, indent=2))

@@ -135,5 +135,23 @@ class FittingDiagnostics(unittest.TestCase):
         self.assertIn("empty_ink", reasons)
 
 
+class ContourDiagnostics(unittest.TestCase):
+    def test_contour_identity_has_zero_distance(self):
+        from qualification.font03.experiments.evaluate_contours import contour_error
+
+        self.assertEqual(contour_error(ring(), ring()), {"mean": 0.0, "p95": 0.0})
+
+    def test_missing_contour_is_explicitly_unresolved(self):
+        from qualification.font03.experiments.evaluate_contours import contour_error
+
+        self.assertIsNone(contour_error(ring(), np.zeros((64, 64))))
+
+    def test_contour_difference_is_symmetric(self):
+        from qualification.font03.experiments.evaluate_contours import contour_error
+
+        moved = c.warp(ring(), [1.0, 0.0, 1.0])
+        self.assertEqual(contour_error(ring(), moved), contour_error(moved, ring()))
+
+
 if __name__ == "__main__":
     unittest.main()
