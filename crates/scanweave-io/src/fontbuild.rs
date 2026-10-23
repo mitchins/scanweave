@@ -25,6 +25,28 @@ pub fn build_font(
     encodings: &[(usize, String)],
     upem: u16,
 ) -> Result<Vec<u8>, String> {
+    build_font_impl(shapes, encodings, upem, None, false)
+}
+
+/// Keep the document design frame stable when unused programs are removed.
+/// A conservative head bounding box is valid; tightening it can change
+/// Poppler/FreeType rasterization even when every referenced outline is equal.
+pub(crate) fn build_font_with_bounds(
+    shapes: &[GlyphShape],
+    encodings: &[(usize, String)],
+    upem: u16,
+    design_bounds: Option<[i16; 4]>,
+) -> Result<Vec<u8>, String> {
+    build_font_impl(shapes, encodings, upem, design_bounds, true)
+}
+
+fn build_font_impl(
+    shapes: &[GlyphShape],
+    encodings: &[(usize, String)],
+    upem: u16,
+    design_bounds: Option<[i16; 4]>,
+    include_mandatory_metrics: bool,
+) -> Result<Vec<u8>, String> {
     let placeholder = shapes.is_empty() && !encodings.is_empty();
     let num_glyphs = shapes.len() + 1 + usize::from(placeholder);
 
@@ -80,7 +102,7 @@ pub fn build_font(
     if x_min > x_max {
         (x_min, y_min, x_max, y_max) = (0, 0, 0, 0);
     }
-    if placeholder {
+    if placeholder || include_mandatory_metrics {
         x_min = x_min.min(4);
         y_min = y_min.min(4);
         x_max = x_max.max(200);
@@ -95,6 +117,12 @@ pub fn build_font(
         }))
         .collect();
 
+    // Preserve only the design envelope, not removed glyph programs or their
+    // hmtx/maxp/hhea metrics. Enlarge rather than clip any required outline.
+    let head_bounds = design_bounds.map_or([x_min, y_min, x_max, y_max], |b| {
+        [b[0].min(x_min), b[1].min(y_min), b[2].max(x_max), b[3].max(y_max)]
+    });
+
     let head = Head {
         font_revision: Fixed::from_i32(0),
         checksum_adjustment: 0,
@@ -103,10 +131,10 @@ pub fn build_font(
         units_per_em: upem,
         created: LongDateTime::new(0),
         modified: LongDateTime::new(0),
-        x_min,
-        y_min,
-        x_max,
-        y_max,
+        x_min: head_bounds[0],
+        y_min: head_bounds[1],
+        x_max: head_bounds[2],
+        y_max: head_bounds[3],
         mac_style: Default::default(),
         lowest_rec_ppem: 8,
         font_direction_hint: 2,
@@ -133,13 +161,15 @@ pub fn build_font(
 
     let maxp = Maxp {
         num_glyphs: num_glyphs as u16,
-        max_points: Some(shapes.iter().map(|s| s.num_points as u16).max().unwrap_or(0)),
+        max_points: Some(shapes.iter().map(|s| s.num_points as u16).max().unwrap_or(0)
+            .max(if include_mandatory_metrics { 4 } else { 0 })),
         max_contours: Some(
             shapes
                 .iter()
                 .map(|s| s.num_contours as u16)
                 .max()
-                .unwrap_or(0),
+                .unwrap_or(0)
+                .max(u16::from(include_mandatory_metrics)),
         ),
         max_composite_points: Some(0),
         max_composite_contours: Some(0),
@@ -184,6 +214,11 @@ pub fn build_font(
                 mappings.push((ch, gid));
             }
         }
+    }
+    if include_mandatory_metrics && mappings.is_empty() {
+        // OTS requires a cmap subtable even when the PDF has no text CIDs.
+        // U+0000 resolves to .notdef; this adds no semantic PDF ownership.
+        mappings.push(('\0', GlyphId::new(0)));
     }
     let cmap = Cmap::from_mappings(mappings).map_err(|e| e.to_string())?;
 
@@ -241,4 +276,36 @@ pub fn build_font(
     fb.add_table(&glyf).map_err(|e| e.to_string())?;
     fb.add_table(&loca).map_err(|e| e.to_string())?;
     Ok(fb.build())
+}
+
+#[cfg(test)]
+mod required_font_tests {
+    use super::*;
+    use read_fonts::{FontRef, TableProvider};
+
+    #[test]
+    fn empty_and_owner_only_fonts_include_mandatory_glyph_metrics() {
+        for encodings in [vec![], vec![(0, "owner".into())]] {
+            let bytes = build_font_with_bounds(&[], &encodings, 2048, None).unwrap();
+            let font = FontRef::new(&bytes).unwrap();
+            let maxp = font.maxp().unwrap();
+            assert!(!font.cmap().unwrap().encoding_records().is_empty());
+            assert!(font.head().unwrap().x_max() >= 200);
+            assert!(font.head().unwrap().y_max() >= 200);
+            assert_eq!(maxp.max_points(), Some(4));
+            assert_eq!(maxp.max_contours(), Some(1));
+            assert_eq!(maxp.num_glyphs(), if encodings.is_empty() { 1 } else { 2 });
+            assert_eq!(bytes, build_font_with_bounds(&[], &encodings, 2048, None).unwrap());
+        }
+    }
+
+    #[test]
+    fn conservative_design_bounds_survive_without_unused_programs() {
+        let bounds = [-5, -31, 4660, 2048];
+        let bytes = build_font_with_bounds(&[], &[], 2048, Some(bounds)).unwrap();
+        let font = FontRef::new(&bytes).unwrap();
+        let head = font.head().unwrap();
+        assert_eq!([head.x_min(), head.y_min(), head.x_max(), head.y_max()], bounds);
+        assert_eq!(font.maxp().unwrap().num_glyphs(), 1);
+    }
 }
