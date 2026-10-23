@@ -32,7 +32,7 @@ def main():
                     if row['page']!=pi:continue
                     if i not in assigned:draw=bindings[str(i)];m=draw['matrix'];gid=draw['cid'];font='B'
                     else:
-                        j=assigned[i];o=lookup['font04-e-'+str(j)];x,y=meta['origins'][j];dx,dy,s=params[i,j];f=meta['frames'][i];left=32+s*(x-32)+dx;top=48+s*(y-48)+dy;bb=[f['cx']+(left-32)/f['scale'],f['baseline']+(top-48)/f['scale'],f['cx']+(left+s*o['width']-32)/f['scale'],f['baseline']+(top+s*o['height']-48)/f['scale']];g=geometry[pi];r=dict(row,pixel_x_pt=g['width_pt']/g['raster_width'],pixel_y_pt=g['height_pt']/g['raster_height']);matrix=glyph_matrix(r,o,bb);m=[matrix[0,0],matrix[1,0],matrix[0,1],matrix[1,1],matrix[0,2],matrix[1,2]];gid=o['gid'];font='C'
+                        j=assigned[i];o=lookup['font04-e-'+str(j)];x,y=meta['origins'][j];dx,dy,s=params[i,j];f=meta['frames'][i];left=32+s*(x-.5-32)+dx;top=48+s*(y-.5-48)+dy;bb=[f['cx']+(left-32)/f['scale'],f['baseline']+(top-48)/f['scale'],f['cx']+(left+s*o['width']-32)/f['scale'],f['baseline']+(top+s*o['height']-48)/f['scale']];g=geometry[pi];r=dict(row,pixel_x_pt=g['width_pt']/g['raster_width'],pixel_y_pt=g['height_pt']/g['raster_height']);matrix=glyph_matrix(r,o,bb);m=[matrix[0,0],matrix[1,0],matrix[0,1],matrix[1,1],matrix[0,2],matrix[1,2]];gid=o['gid'];font='C'
                     commands.append('BT 0 Tr 0 g /'+font+' 1 Tf '+' '.join(map(str,m))+f' Tm <{gid:04x}> Tj ET')
                 page.Contents=pdf.make_stream(('\n'.join(commands)+'\n').encode())
             path=directory/f'{method}-{threshold}.pdf';pdf.save(path,deterministic_id=True)

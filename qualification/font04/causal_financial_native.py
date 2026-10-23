@@ -35,7 +35,7 @@ def main():
                         kind={'A2':'native-off','A3':'native-local','A4':'line-local','F-self':'line-local','F-medoid':'line-local','R-floor':'line-floor','R-normalization':'line-crop','R-frame':'native-local','cap-current':'native-off','cap-raised':'native-cap'}[arm]
                         donor=byid[decision['donor']];o=lookup[donor['page']][donor['trace'][kind]['key']];font='C'+str(donor['page']);gid=o['gid']
                         if arm=='F-medoid':
-                            x,y=donor['trace'][kind]['origin'];f=row['frame'];bbox=[f['cx']+(x-32)/f['scale'],f['baseline']+(y-48)/f['scale'],f['cx']+(x+o['width']-32)/f['scale'],f['baseline']+(y+o['height']-48)/f['scale']]
+                            x,y=donor['trace'][kind]['origin'];f=row['frame'];bbox=[f['cx']+(x-.5-32)/f['scale'],f['baseline']+(y-.5-48)/f['scale'],f['cx']+(x+o['width']-.5-32)/f['scale'],f['baseline']+(y+o['height']-.5-48)/f['scale']]
                         else:bbox=row['trace'][kind]['bbox']
                         if arm in ['F-self','F-medoid','R-floor','R-normalization','R-frame']:bbox=fit_bbox(row,bbox,parameters)
                         m=glyph_matrix(row,o,bbox)

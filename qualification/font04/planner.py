@@ -7,6 +7,7 @@ orthogonal to the single swept noise-floor error criterion. No oracle IO here.
 from pathlib import Path
 import collections
 import json
+import os
 import sys
 import time
 import numpy as np
@@ -46,6 +47,16 @@ def source_frame(row):
     scale=32/xh; yy,xx=np.mgrid[:64,:64]
     canvas=ndimage.map_coordinates(evidence,[base+(yy-48)/scale-s['bbox'][1]+1.5,cx+(xx-32)/scale-s['bbox'][0]+1.5],order=1,mode='constant',prefilter=False)
     return canvas,dict(xheight=xh,baseline=base,cx=cx,scale=scale)
+
+
+def frame_bbox(frame, origin, size, parameters=(0., 0., 1.)):
+    """Convert canvas centre indices to physical pixel edges, then fit."""
+    x,y=origin;w,h=size;dx,dy,s=parameters
+    left=32+s*(x-.5-32)+dx;top=48+s*(y-.5-48)+dy
+    return [frame['cx']+(left-32)/frame['scale'],
+            frame['baseline']+(top-48)/frame['scale'],
+            frame['cx']+(left+s*w-32)/frame['scale'],
+            frame['baseline']+(top+s*h-48)/frame['scale']]
 
 
 def crop_request(key,character,image,**options):
@@ -151,6 +162,22 @@ def plan(data,directory):
     for si,o in enumerate(successful):
         j=int(o['key'].rsplit('-',1)[1]);x,y=origins[j];h,w=o['height'],o['width']
         candidate[j,y:y+h,x:x+w]=np.array(o['coverage']).reshape(h,w);shape_indices[j]=si
+    arm=os.environ.get('FONT04_ARM','P')
+    if arm not in ('P0','P','PV'):raise ValueError('unknown FONT04_ARM')
+    if arm=='P0':
+        frozen=Path('qualification/font04/local/financial-experimental-v2.pdf.font04')
+        old_snapshot=json.loads((frozen/'source.json').read_text())
+        if data['snapshot']!=old_snapshot:raise ValueError('frozen B1 source changed')
+        if data['outlines']!=json.loads((frozen/'outlines.json').read_text()):raise ValueError('frozen B1 outlines changed')
+        result=json.loads((frozen/'plan.json').read_text())
+        for a in result['assignments']:
+            j=a['canonical'];o=lookup['font04-e-'+str(j)]
+            a['bbox']=frame_bbox(frames[a['member']],origins[j],(o['width'],o['height']),a['parameters'])
+        result['arm']='B1-prime-P0';result['membership']='frozen B1 accepted set and canonical mapping'
+        (directory/'outlines.json').write_text(json.dumps(data['outlines']))
+        (directory/'pair-ledger.json').write_bytes((frozen/'pair-ledger.json').read_bytes())
+        (directory/'plan.json').write_text(json.dumps(result,indent=2))
+        return result
     errors=np.full((n,n),np.inf);veto=np.zeros((n,n),bool);pairs=[];parameters={}
     # A source-only shortlist bounds expensive fits; all exclusions are ledgered.
     for i in range(n):
@@ -167,7 +194,7 @@ def plan(data,directory):
         if i%25==0:print(f'FONT04 fitted {i}/{n}',file=sys.stderr,flush=True)
     # Noise floor uses non-target source impressions, not current self outlines.
     # Nearest structurally compatible independent impressions; LOO per member.
-    noise=[]
+    noise=[];noise_support=[]
     for i in range(n):
         peers=[]
         for j in np.argsort(errors[i]):
@@ -177,6 +204,7 @@ def plan(data,directory):
             if not reasons:peers.append(mse(fields[i],aligned))
             if len(peers)>=5:break
         noise.append(float(np.quantile(peers,.85)) if len(peers)>=2 else None)
+        noise_support.append(dict(member=i,witnesses=len(peers),required_k=2,status='fewer_than_k_witnesses' if len(peers)<2 else 'calibrated',calibration_failure=False))
     normalized=np.full_like(errors,np.inf)
     for i,level in enumerate(noise):
         if level is not None:normalized[i]=errors[i]/max(level,1e-6)
@@ -203,6 +231,22 @@ def plan(data,directory):
     # Conservative discovery point 1.0: within the independently measured floor.
     eligible=[(v,g) for v,g in choices if v['error_scale']==1.]
     chosen,groups=min(eligible,key=lambda pair:(pair[0]['designs'],pair[0]['grouping']))
+    ownership=None
+    if arm=='PV':
+        ledger_path=Path('qualification/font04/owned-component-ledger.json')
+        ownership=json.loads(ledger_path.read_text())
+        reference=Path(str(ownership['source_pdf'])+'.font04')
+        if json.loads((reference/'source.json').read_text())!=data['snapshot']:
+            raise ValueError('ownership veto evidence has different source snapshot')
+        prior=json.loads((reference/'plan.json').read_text())
+        if prior['selected']!=chosen:raise ValueError('ownership evidence has different operating point')
+        proposed={(i,g['canonical']) for g in groups for i in g['members']}
+        if proposed!={(a['member'],a['canonical']) for a in prior['assignments']}:
+            raise ValueError('ownership evidence has different candidate assignments')
+        exceptions=set(ownership['exceptions'])
+        groups=[dict(g,members=[i for i in g['members'] if i not in exceptions])
+                for g in groups if g['canonical'] not in exceptions]
+        groups=[g for g in groups if len(g['members'])>=2]
     assignments=[];accepted=set();canonical_for={}
     for g in groups:
         j=g['canonical'];o=lookup['font04-e-'+str(j)];x,y=origins[j]
@@ -214,9 +258,7 @@ def plan(data,directory):
             else:p=np.array(parameters[(i,j)])
             frame=frames[i];dx,dy,s=p
             # warp() applies a forward uniform scale about (32,48), then translation.
-            left=32+s*(x-32)+dx;top=48+s*(y-48)+dy
-            right=left+s*o['width'];bottom=top+s*o['height']
-            bb=[frame['cx']+(left-32)/frame['scale'],frame['baseline']+(top-48)/frame['scale'],frame['cx']+(right-32)/frame['scale'],frame['baseline']+(bottom-48)/frame['scale']]
+            bb=frame_bbox(frame,(x,y),(o['width'],o['height']),p)
             assignments.append(dict(page=rows[i]['page'],occurrence=rows[i]['occurrence'],id=rows[i]['id'],member=i,canonical=j,shape=shape_indices[j],bbox=bb,parameters=list(map(float,p))))
             accepted.add(i);canonical_for[i]=j
     # Reject records include an attempted candidate even if no admissible match.
@@ -230,12 +272,13 @@ def plan(data,directory):
         if noise[i] is None:best['reasons'].append('insufficient_noise_witnesses')
         elif best['error']>noise[i]:
             best['reasons'].append('noise_floor');best['checks']=dict(best['checks'],noise_floor=dict(value=best['error'],limit=noise[i]))
+        if ownership is not None and i in ownership['exceptions']:best['reasons'].append('unexplained_owned_ink')
         if not best['reasons']:best['reasons']=['grouping_exception']
         rejection.append(best)
     unique=collections.Counter(p['reasons'][0] for p in pairs if len(p['reasons'])==1)
     result=dict(schema='font04-b1-plan-v1',scope='all visible e only',selected=chosen,assignments=assignments,
-        rejection_ledger=rejection,noise_floor=noise,frontier=frontier,unique_pair_rejections=dict(unique),
-        self_checks=self_checks,total_pair_attempts=len(pairs),shortlist=24,shortlist_exclusions=n*(n-1)-len(pairs),runtime_seconds=time.monotonic()-started,
+        rejection_ledger=rejection,noise_floor=noise,noise_support=noise_support,frontier=frontier,unique_pair_rejections=dict(unique),
+        arm=arm,ownership_veto=ownership,self_checks=self_checks,total_pair_attempts=len(pairs),shortlist=24,shortlist_exclusions=n*(n-1)-len(pairs),runtime_seconds=time.monotonic()-started,
         defects_status='pending blinded independent review',inference_inputs='source only; no pristine or face labels')
     (directory/'outlines.json').write_text(json.dumps(data['outlines']))
     (directory/'plan.json').write_text(json.dumps(result,indent=2));(directory/'pair-ledger.json').write_text(json.dumps(pairs))

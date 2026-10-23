@@ -88,7 +88,7 @@ def prep(split):
             item,origin=crop_request(identifier+':'+kind,p['character'],field,floor=floor)
             item['local']=local_target;items.append(item)
             x,y=origin;w,h=item['width'],item['height'];f=frame
-            bb=[f['cx']+(x-32)/f['scale'],f['baseline']+(y-48)/f['scale'],f['cx']+(x+w-32)/f['scale'],f['baseline']+(y+h-48)/f['scale']]
+            bb=[f['cx']+(x-.5-32)/f['scale'],f['baseline']+(y-.5-48)/f['scale'],f['cx']+(x+w-.5-32)/f['scale'],f['baseline']+(y+h-.5-48)/f['scale']]
             row['trace'][kind]=dict(key=item['key'],bbox=bb,origin=origin)
         rows.append(row)
     (destination/'source.json').write_text(json.dumps(dict(rows=rows,abstentions=abstentions,selected=sum(p['character'] in CLASSES for p in public),public_sha256=sha(CORPUS/split/'observations.jsonl'),baseline_sha256=sha(BASELINES[split]))))
@@ -203,7 +203,7 @@ def make_atlases(split):
                         if arm=='F-medoid' and i in donors:
                             donor=donors[i]['donor'];donor_row=rows[donor];donor_page=donor_row['page']
                             ds=json.loads((destination/f'curves-{donor_page}/outlines.json').read_text())['records'];o=next(o for o in ds if o['key']==donor_row['trace'][kind]['key']);origin=donor_row['trace'][kind]['origin'];f=row['frame']
-                            bbox=[f['cx']+(origin[0]-32)/f['scale'],f['baseline']+(origin[1]-48)/f['scale'],f['cx']+(origin[0]+o['width']-32)/f['scale'],f['baseline']+(origin[1]+o['height']-48)/f['scale']]
+                            bbox=[f['cx']+(origin[0]-.5-32)/f['scale'],f['baseline']+(origin[1]-.5-48)/f['scale'],f['cx']+(origin[0]+o['width']-.5-32)/f['scale'],f['baseline']+(origin[1]+o['height']-.5-48)/f['scale']]
                             canvas=np.zeros((64,64));x,y=origin;canvas[y:y+o['height'],x:x+o['width']]=np.array(o['coverage']).reshape(o['height'],o['width'])
                         else:
                             key=row['trace'][kind]['key'];o=lookup.get(key)
@@ -273,7 +273,7 @@ def prep_financial():
             items.append(item);row['trace'][kind]=dict(key=item['key'],bbox=source['bbox'])
         for kind,floor,local_target in [('line-local',False,True),('line-floor',True,True),('line-crop',False,False)]:
             item,origin=crop_request(identifier+':'+kind,'e',field,floor=floor);item['local']=local_target;items.append(item);x,y=origin;w,h=item['width'],item['height'];f=frame
-            bb=[f['cx']+(x-32)/f['scale'],f['baseline']+(y-48)/f['scale'],f['cx']+(x+w-32)/f['scale'],f['baseline']+(y+h-48)/f['scale']]
+            bb=[f['cx']+(x-.5-32)/f['scale'],f['baseline']+(y-.5-48)/f['scale'],f['cx']+(x+w-.5-32)/f['scale'],f['baseline']+(y+h-.5-48)/f['scale']]
             row['trace'][kind]=dict(key=item['key'],bbox=bb,origin=origin)
         rows.append(row)
     (destination/'source.json').write_text(json.dumps(dict(rows=rows,abstentions=abstentions,selected=291,baseline_sha256=sha(BASELINES[split]))));np.save(destination/'fields.npy',fields)
