@@ -190,3 +190,16 @@ Everything else stays fixed:
 
 **Stop at Checkpoint B2′.** No pre-authorized continuation: the next operating point is chosen
 only after the newly admitted members are reviewed.
+
+## 7. B2′ authorization
+
+The project owner accepted this review on 2026-10-24 and authorized B2′ as specified in §6, with
+no further refinements. These standing rules carry over unchanged:
+- default ClearScan stays byte-identical, and nothing is promoted on B2 or B2′ measurements alone;
+- P2 stays sealed;
+- no merges, no new product PRs, PR #24 stays draft;
+- stage explicit paths only, and never commit untracked ACR-02/03/04 or other local artifacts;
+- stop at Checkpoint B2′ for independent review.
+
+**Objective.** The aim is substantially higher document-wide outline reuse, with typography at
+least as good as today's output. Passing a gate or saving a few bytes is not the objective.
