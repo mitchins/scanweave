@@ -12,7 +12,7 @@
 //! and selects the smaller candidate that passes the same semantic gates.
 
 use crate::convert::{Input, Policy, Report};
-use crate::fontbuild::build_font;
+use crate::fontbuild::{build_font, build_font_with_bounds};
 use crate::glyphs::GlyphShape;
 use crate::page_pdf::PageParts;
 
@@ -215,6 +215,76 @@ fn apply_remap(page: &mut DocumentPage, remap: &Remap) {
     }
 }
 
+/// Remove programs before font construction, retaining every visible and
+/// invisible reference (including per-character semantic owners). The tables
+/// are already document-global; order is retained and no outline is rewritten.
+fn retain_required_font_entries(
+    pages: &mut [DocumentPage],
+    shapes: &mut Vec<GlyphShape>,
+    encodings: &mut Vec<(usize, String)>,
+) {
+    let mut required_shapes = vec![false; shapes.len()];
+    let mut required_cids = vec![false; encodings.len()];
+    for page in pages.iter() {
+        for (shape, cid, ..) in &page.parts.occurrences {
+            if let Some(required) = required_shapes.get_mut(*shape) {
+                *required = true;
+            }
+            if let Some(required) = required_cids.get_mut(*cid as usize) {
+                *required = true;
+            }
+        }
+        for cid in page.parts.owner_cids.iter().copied().chain(
+            page.parts.owners.iter().flat_map(|o| o.characters.iter().map(|ch| ch.cid)),
+        ) {
+            if let Some(required) = required_cids.get_mut(cid.saturating_sub(1) as usize) {
+                *required = true;
+            }
+        }
+    }
+    for ((shape, _), required) in encodings.iter().zip(&required_cids) {
+        if *required {
+            if let Some(required) = required_shapes.get_mut(*shape) {
+                *required = true;
+            }
+        }
+    }
+    let mut shape_map = vec![0; shapes.len()];
+    let mut next = 0;
+    for (index, required) in required_shapes.iter().enumerate() {
+        if *required {
+            shape_map[index] = next;
+            next += 1;
+        }
+    }
+    let mut index = 0;
+    shapes.retain(|_| {
+        let required = required_shapes[index];
+        index += 1;
+        required
+    });
+    let mut cid_map = vec![0; encodings.len()];
+    let mut retained = Vec::new();
+    for (index, (shape, text)) in encodings.iter().enumerate() {
+        if required_cids[index] {
+            retained.push((shape_map.get(*shape).copied().unwrap_or(0), text.clone()));
+            cid_map[index] = retained.len() as u32;
+        }
+    }
+    *encodings = retained;
+    let remap = Remap { shape_map, cid_map };
+    for page in pages {
+        apply_remap(page, &remap);
+    }
+}
+
+fn document_design_bounds(shapes: &[GlyphShape]) -> Option<[i16; 4]> {
+    shapes.iter().map(|s| [
+        s.bbox_fu[0].floor() as i16, s.bbox_fu[1].floor() as i16,
+        s.bbox_fu[2].ceil() as i16, s.bbox_fu[3].ceil() as i16,
+    ]).reduce(|a, b| [a[0].min(b[0]), a[1].min(b[1]), a[2].max(b[2]), a[3].max(b[3])])
+}
+
 // The layout chooser and writer must share the document-wide encoding gate.
 fn allows_tonal_images(inputs: &[Input], policy: &Policy) -> bool {
     policy.profile == "clearscan"
@@ -353,13 +423,21 @@ pub fn convert_document_with_sources(
 
     // 2. document-wide font: union of (shape, label), remapped per page
     let stage_start = std::time::Instant::now();
-    let (shapes, encodings, remaps) = union_encodings(&pages);
+    let (mut shapes, mut encodings, remaps) = union_encodings(&pages);
     for (page, remap) in pages.iter_mut().zip(remaps.iter()) {
         apply_remap(page, remap);
     }
+    let design_bounds = document_design_bounds(&shapes);
+    if policy.profile == "clearscan" {
+        retain_required_font_entries(&mut pages, &mut shapes, &mut encodings);
+    }
     stage_timings.document_font_union_ms = stage_start.elapsed().as_millis();
     let stage_start = std::time::Instant::now();
-    let font_bytes = build_font(&shapes, &encodings, policy.upem)?;
+    let font_bytes = if policy.profile == "clearscan" {
+        build_font_with_bounds(&shapes, &encodings, policy.upem, design_bounds)?
+    } else {
+        build_font(&shapes, &encodings, policy.upem)?
+    };
     stage_timings.font_build_ms = stage_start.elapsed().as_millis();
 
     // 3. the reconstruction candidate
@@ -678,7 +756,7 @@ mod semantic_owner_union_tests {
             }
             pages.push(DocumentPage { parts, report });
         }
-        let (shapes, encodings, remaps) = union_encodings(&pages);
+        let (mut shapes, mut encodings, remaps) = union_encodings(&pages);
         assert_eq!(
             shapes
                 .iter()
@@ -694,6 +772,38 @@ mod semantic_owner_union_tests {
                     let (shape, text) = &encodings[ch.cid as usize - 1];
                     assert_eq!(text, "é");
                     assert_ne!(*shape, visible_shape);
+                    assert_eq!(shapes[*shape].shape_key, "__semantic_owner_frame");
+                }
+            }
+        }
+        // Put an abandoned trace and encoding ahead of all required entries:
+        // pruning must remap visible occurrences and invisible character owners.
+        let expected_encodings = encodings.clone();
+        let expected_keys: Vec<_> = shapes.iter().map(|s| s.shape_key.clone()).collect();
+        let expected_occurrences: Vec<_> = pages.iter().map(|p| p.parts.occurrences.clone()).collect();
+        let shift = Remap {
+            shape_map: (1..=shapes.len()).collect(),
+            cid_map: (2..=encodings.len() as u32 + 1).collect(),
+        };
+        for page in &mut pages {
+            apply_remap(page, &shift);
+        }
+        for (shape, _) in &mut encodings {
+            *shape += 1;
+        }
+        let mut unused = shapes[0].clone();
+        unused.shape_key = "unused trace".into();
+        shapes.insert(0, unused);
+        encodings.insert(0, (0, "unused label".into()));
+        retain_required_font_entries(&mut pages, &mut shapes, &mut encodings);
+        assert_eq!(encodings, expected_encodings);
+        assert_eq!(shapes.iter().map(|s| s.shape_key.clone()).collect::<Vec<_>>(), expected_keys);
+        for (page, expected) in pages.iter().zip(&expected_occurrences) {
+            assert_eq!(&page.parts.occurrences, expected);
+            for owner in &page.parts.owners {
+                for ch in &owner.characters {
+                    let (shape, text) = &encodings[ch.cid as usize - 1];
+                    assert_eq!(text, "é");
                     assert_eq!(shapes[*shape].shape_key, "__semantic_owner_frame");
                 }
             }
