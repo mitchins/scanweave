@@ -64,7 +64,7 @@ def emit(destination,plan,control=CONTROL):
                 variants[variant][cid]=name;draw_variant[pi,mode,oi,cid]=variant
                 if mode!=3:oi+=1
         # Subset removes old programs only when no visible/invisible owner needs them.
-        before={name:len(glyf[name].compile(glyf)) for name in order if name not in canonical_names.values() and name not in stub_names.values()}
+        before={name:dict(bytes=len(glyf[name].compile(glyf)),points=len(glyf[name].coordinates) if glyf[name].numberOfContours>0 else 0) for name in order if name not in canonical_names.values() and name not in stub_names.values()}
         options=subset.Options();options.recalc_timestamp=False;options.notdef_outline=True;options.layout_features=[];options.name_IDs=['*'];sub=subset.Subsetter(options=options);sub.populate(glyphs=needed);sub.subset(tt)
         tt['head'].modified=0;tt['head'].created=0;buffer=io.BytesIO();tt.save(buffer,reorderTables=False);data=buffer.getvalue();neworder=tt.getGlyphOrder();gids={name:i for i,name in enumerate(neworder)}
         stream=pdf.make_stream(data);stream.Length1=len(data);descriptor=pikepdf.Dictionary(desc.FontDescriptor);descriptor.FontFile2=stream;descriptor=pdf.make_indirect(descriptor)
@@ -89,7 +89,7 @@ def emit(destination,plan,control=CONTROL):
             page.Contents=pdf.make_stream(pikepdf.unparse_content_stream(instructions))
             del page.Resources.Font['/F1']
         pdf.save(destination,deterministic_id=True,compress_streams=True,object_stream_mode=pikepdf.ObjectStreamMode.generate)
-        kept=set(neworder);retired=[dict(program=name,bytes=count) for name,count in before.items() if name not in kept]
+        kept=set(neworder);retired=[dict(program=name,**counts) for name,counts in before.items() if name not in kept]
         added=[dict(program=name,kind='canonical' if name in canonical_names.values() else 'stub',bytes=len(tt['glyf'][name].compile(tt['glyf'])),points=(len(tt['glyf'][name].coordinates) if tt['glyf'][name].numberOfContours>0 else 0)) for name in neworder if name in canonical_names.values() or name in stub_names.values()]
         return dict(pdf=str(destination),sha256=sha(destination),bytes=destination.stat().st_size,decoded_font_bytes=len(data),encoded_font_bytes=None,canonical_count=len(canonical_names),stub_count=len(stub_names),font_resource_variants=len(variants),retired_programs=retired,added_programs=added,instances=instance_ledger,transport='CID/Tm/W/ActualText preserved; shared embedded TrueType composite font; metric-identical resource variants for conflicting CID transforms')
 
