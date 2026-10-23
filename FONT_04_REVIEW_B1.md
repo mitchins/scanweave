@@ -154,3 +154,58 @@ review. If (a) fails, stop at B1′ for review.
   source fit and visual review are the evidence.
 - Over-rejection. It cannot be measured until rejected panels are re-issued blind.
 - Font-economy scale. B1 is one class; B2 measures it.
+
+## 8. B1′ authorization (accepted by the project owner, with three refinements)
+
+The review is accepted. B1′ runs as specified in §6, with the conditional B2 authorization
+unchanged, plus the refinements below. Where they add to §6, they govern.
+
+**R1. Isolate the coordinate fix from any change in acceptance.** Report these arms on the
+same 291 `e`, each as a complete financial PDF:
+
+| Arm | Placement | Membership / vetoes |
+|---|---|---|
+| B1 (as shipped) | buggy inverse | B1 acceptance |
+| B1′-P0 | fixed inverse | **B1's accepted set, frozen** (pure placement effect) |
+| B1′-P | fixed inverse | B1 vetoes re-applied, no new veto |
+| B1′-PV | fixed inverse | B1 vetoes + ownership-aware unexplained-ink veto |
+
+Test the pixel-centre convention against **independently established physical
+coordinates**, not against the planner's own frame. Use synthetic outlines placed at known
+PDF coordinates, at 200/300/600 DPI, at least four x-heights, and subpixel offsets
+{0, 0.25, 0.5, 0.75} px on both axes. Run frame → bbox → emitted PDF → analytic render, and
+require |centroid offset| < 0.05 px in every cell. Also show that the old inverse fails the
+same test by the predicted 0.5/scale.
+
+**R2. The unexplained-ink veto is ownership-aware.**
+- Ink the current default output does not reproduce is never newly preserved. Unrelated
+  scanner dirt is not promoted into glyphs.
+- Significant source ink that the current output reproduces, and that this draw owns, must
+  not vanish silently. Either keep the member as an exception or retain the residual; the
+  choice is Codex's, with tests.
+- Ambiguous components (detached specks inside the ownership halo) are logged in a
+  component ledger: member, area, contrast, distance, decision. Every firing appears in the
+  blinded sheets.
+- glyph-277 is a mandatory regression test: its mark must survive.
+
+**R3. Report fidelity separately** for all 291 `e` **and** for the actually substituted
+subset. For each arm, give mean, p95 and the worst 10 regressions with member IDs, under:
+- PDFium;
+- Poppler;
+- the supersampled analytic reference;
+- a direct-outline coverage reference.
+
+Report each renderer-vs-reference floor alongside.
+
+**Also:**
+- The rejected-sample review stays **unresolved** until the corrected, genuinely blinded
+  sheets have been assessed. B2 condition (c) requires only that they are issued.
+- Re-run the affected Phase A line-frame arms.
+- Default ClearScan stays byte-identical. Nothing is promoted on pre-fix measurements.
+- Stage only explicit paths. Untracked ACR-02/03/04 and other local artifacts must never be
+  committed.
+- If B2 runs, it **stops at Checkpoint B2** for independent review.
+
+**Objective.** The aim is substantially higher document-wide outline reuse, with typography
+at least as good as today's output. Passing a gate or saving a few bytes is not the
+objective.
