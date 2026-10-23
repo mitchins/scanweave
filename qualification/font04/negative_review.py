@@ -9,6 +9,7 @@ import numpy as np
 import pikepdf
 from PIL import Image
 from qualification.font04.causal import ROOT,CORPUS,glyph_matrix,fit_bbox
+from qualification.font04.planner import frame_bbox
 from qualification.font04.geometry import register
 from qualification.font04.metrics import render,matrix,operands,sha
 from qualification.font04.pdf_helpers import font_resource
@@ -51,7 +52,7 @@ def main():
             for k,control in enumerate(selected):
                 i,target=byid[control['target']];j,donor=byid[control['donor']];o=lookups[donor['page']][donor['trace']['line-local']['key']]
                 # Fit the completed traced candidate, not an evaluator font.
-                x,y=donor['trace']['line-local']['origin'];candidate=np.zeros((64,64));candidate[y:y+o['height'],x:x+o['width']]=np.array(o['coverage']).reshape(o['height'],o['width']);parameters,_=register(fields[i],candidate);f=target['frame'];bbox=[f['cx']+(x-32)/f['scale'],f['baseline']+(y-48)/f['scale'],f['cx']+(x+o['width']-32)/f['scale'],f['baseline']+(y+o['height']-48)/f['scale']];bbox=fit_bbox(target,bbox,parameters)
+                x,y=donor['trace']['line-local']['origin'];candidate=np.zeros((64,64));candidate[y:y+o['height'],x:x+o['width']]=np.array(o['coverage']).reshape(o['height'],o['width']);parameters,_=register(fields[i],candidate);f=target['frame'];bbox=frame_bbox(f,(x,y),(o['width'],o['height']));bbox=fit_bbox(target,bbox,parameters)
                 bb=target['source']['bbox'];left=int((bb[0]+bb[2])/2)-80;top=int((bb[1]+bb[3])/2)-80;cell=k*2
                 for arm,m,gid,font in [('current',matrix(target['current']['matrix']),target['current']['cid'],'B'),('candidate',glyph_matrix(target,o,bbox),o['gid'],'C'+str(donor['page']))]:
                     c=cell+(arm=='candidate');cx=(c%10)*160;cy=(c//10)*160;tf=np.array([[1.,0,(cx-left)*72/dpi],[0,1.,1600*72/dpi-648-(cy-top)*72/dpi],[0,0,1.]])

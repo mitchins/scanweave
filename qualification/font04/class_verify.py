@@ -1,6 +1,6 @@
 """Complete frequent-class PDF checks and non-duplicated program attribution."""
 from pathlib import Path
-import collections,io,json,subprocess,sys
+import collections,hashlib,io,json,subprocess,sys
 import pikepdf
 from fontTools.ttLib import TTFont
 from qualification.font04.metrics import inspect,sha
@@ -33,20 +33,53 @@ def font_details(path):
                     g=tt['glyf'][name];result[fid].append(dict(points=len(g.coordinates) if g.numberOfContours>0 else 0,bytes=len(g.compile(tt))))
     return result
 
+def raster_signature(path):
+    result=[]
+    with pikepdf.open(path) as pdf:
+        for page in pdf.pages:
+            images=[]
+            for obj in page.Resources.XObject.values():
+                if str(obj.get('/Subtype'))!='/Image':continue
+                images.append((int(obj.Width),int(obj.Height),hashlib.sha256(obj.read_raw_bytes()).hexdigest()))
+            result.append(sorted(images))
+    return result
+
+def actual_text_signature(path):
+    result=[]
+    with pikepdf.open(path) as pdf:
+        for page in pdf.pages:
+            values=[]
+            for args,op in pikepdf.parse_content_stream(page):
+                if str(op)=='BDC' and len(args)>1 and isinstance(args[1],pikepdf.Dictionary) and '/ActualText' in args[1]:values.append(bytes(args[1].ActualText).hex())
+            result.append(values)
+    return result
+
 def main(path):
     art=Path(str(path)+'.font04');snap=json.loads((art/'source.json').read_text());plan=json.loads((art/'plan.json').read_text());base=inspect(ROOT/'financial-default.pdf');inv=inspect(path);added=programs(inv)-programs(base);retired=programs(base)-programs(inv);before=owners(base);after=owners(inv);classes={};bf=font_details(ROOT/'financial-default.pdf');ef=font_details(path)
     for char in sorted({r['character'] for r in snap['rows']}):
         aa=sum(n for h,n in added.items() if after[h]=={char});rr=sum(n for h,n in retired.items() if before[h]=={char});classes[char]=dict(default=class_stats(base,char,bf),experimental=class_stats(inv,char,ef),added_programs=aa,retired_programs=rr,net_retired=rr-aa,substituted=sum(a.get('character','e')==char for a in plan['assignments']))
     shared=dict(added=[dict(program=h,count=n,owners=sorted(after[h])) for h,n in added.items() if len(after[h])!=1],retired=[dict(program=h,count=n,owners=sorted(before[h])) for h,n in retired.items() if len(before[h])!=1])
     t0,s0=text(ROOT/'financial-default.pdf');t,s=text(path);pop0=subprocess.check_output(['pdftotext','-layout',str(ROOT/'financial-default.pdf'),'-']);pop=subprocess.check_output(['pdftotext','-layout',str(path),'-']);validation=check_pdf(path)
-    assert t0==t and s0==s and pop0==pop
-    assert all(v['returncode']==0 for v in validation.values())
-    glyph277=next(r for r in snap['rows'] if r['page']==12 and r['id']=='w000133s0002' and r['character']=='e');i=glyph277['index'];a=bind(snap,base)[i];b=bind(snap,inv)[i]
+    basebound=bind(snap,base);newbound=bind(snap,inv)
+    assigned={(a['page'],a['occurrence']) for a in plan['assignments']};unchanged=True
+    for pi in range(13):
+        aa=[d for d in base['draws'] if d['page']==pi];bb=[d for d in inv['draws'] if d['page']==pi];assert len(aa)==len(bb)
+        for oi,(old,new) in enumerate(zip(aa,bb)):
+            assert old['character']==new['character']
+            if (pi,oi) not in assigned:unchanged &= old['program']==new['program'] and old['matrix']==new['matrix']
+    invisible_before=[(d['page'],d['character'],d['program'],d['matrix']) for d in base['users'] if d['invisible']];invisible_after=[(d['page'],d['character'],d['program'],d['matrix']) for d in inv['users'] if d['invisible']]
+    raster_equal=raster_signature(ROOT/'financial-default.pdf')==raster_signature(path)
+    actual_text_equal=actual_text_signature(ROOT/'financial-default.pdf')==actual_text_signature(path)
+    assert unchanged and invisible_before==invisible_after and raster_equal and actual_text_equal
+    glyph277=next(r for r in snap['rows'] if r['page']==12 and r['id']=='w000133s0002' and r['character']=='e');i=glyph277['index'];a=basebound[i];b=newbound[i]
     regression='not an ownership-veto arm'
     if plan.get('ownership_veto'):
+        assert all(basebound[j]['program']==newbound[j]['program'] and basebound[j]['matrix']==newbound[j]['matrix'] for j in plan['ownership_veto']['exceptions']), 'owned-ink exception changed'
         assert a['program']==b['program'] and a['matrix']==b['matrix'];regression='PASS: default owned mark program and placement retained'
-    result=dict(pdf=str(path),sha256=sha(path),default=stats(base),experimental=stats(inv),added=sum(added.values()),retired=sum(retired.values()),net_retired=sum(retired.values())-sum(added.values()),classes=classes,shared_program_deltas=shared,validation=validation,text_equal=True,search_equal=True,poppler_text_equal=True,glyph_277_regression=regression,class_counts=len(classes),source_rows=len(snap['rows']),review_status='independent blinded review pending')
+    result=dict(pdf=str(path),sha256=sha(path),default=stats(base),experimental=stats(inv),added=sum(added.values()),retired=sum(retired.values()),net_retired=sum(retired.values())-sum(added.values()),classes=classes,shared_program_deltas=shared,validation=validation,text_equal=t0==t,search_equal=s0==s,poppler_text_equal=pop0==pop,glyph_277_regression=regression,actual_text_payloads_identical=actual_text_equal,owned_ink_exceptions_preserved=len(plan['ownership_veto']['exceptions']) if plan.get('ownership_veto') else 0,non_substituted_programs_and_placements_identical=unchanged,invisible_owners_identical=invisible_before==invisible_after,raster_streams_identical=raster_equal,class_counts=len(classes),source_rows=len(snap['rows']),review_status='independent blinded review pending')
     (art/'class-verification.json').write_text(json.dumps(result,indent=2)+'\n');Path('qualification/font04/'+path.stem+'-verification.json').write_text(json.dumps(result,indent=2)+'\n')
-    print(path.name,'net retired',result['net_retired'],'bytes',result['experimental']['bytes'])
+    print(path.name,'net retired',result['net_retired'],'bytes',result['experimental']['bytes'],flush=True)
+    assert result['text_equal'] and result['search_equal'] and result['poppler_text_equal'], 'functional identity failed; diagnostic results saved'
+    assert all(v['returncode']==0 for v in validation.values())
 
 if __name__=='__main__':main(Path(sys.argv[1]))

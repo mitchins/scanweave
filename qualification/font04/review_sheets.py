@@ -7,6 +7,7 @@ actual attempted substitution, not the unchanged exception in the complete PDF.
 from pathlib import Path
 import collections
 import json
+import os
 import random
 import re
 import subprocess
@@ -41,7 +42,7 @@ def source_pages():
 
 
 def main(experiment):
-    artifact=Path(str(experiment)+'.font04');directory=ROOT/(experiment.stem+'-review');directory.mkdir(exist_ok=True)
+    artifact=Path(str(experiment)+'.font04');directory=Path(os.environ.get('FONT04_REVIEW_DIR',str(ROOT/(experiment.stem+'-review'))));directory.mkdir(exist_ok=True)
     snapshot=json.loads((artifact/'source.json').read_text());rows=snapshot['rows'];plan=json.loads((artifact/'plan.json').read_text());meta=json.loads((artifact/'frames.json').read_text());outlines=json.loads((artifact/'outlines.json').read_text())['records'];lookup={o['key']:o for o in outlines if 'gid'in o}
     page_geometry=json.loads((ROOT/'financial-default.pdf.json').read_text())['pages']
     for row in rows:
@@ -66,14 +67,14 @@ def main(experiment):
     ownership=plan.get('ownership_veto')
     if ownership:random_rejected=sorted(set(random_rejected)|set(ownership['exceptions']))
     if is_b2:
-        measured=[dict(member=r['member'],character=r['character'],renderer=r['metric'],accepted=r['accepted'],experimental=r['candidate']) for r in json.loads((artifact/'class-metrics.json').read_text())['records'] if r['metric'] in ('pdfium','poppler')]
-    for engine in ['pdfium','poppler']:
+        measured=[dict(member=r['member'],character=r['character'],renderer=r['metric'],accepted=r['accepted'],experimental=r['candidate']) for r in json.loads((artifact/'class-metrics.json').read_text())['records'] if r['metric'] in ('pdfium','poppler','analytic','direct')]
+    for engine in (['analytic','direct','pdfium','poppler'] if is_b2 else ['pdfium','poppler']):
         selected=[r for r in measured if r['accepted']and r['renderer']==engine]
         for char in sorted({r.get('character','e') for r in selected}):
             for metric in ['error','area_bias','contour_distance']:
                 sample.update(r['member']for r in sorted([r for r in selected if r.get('character','e')==char],key=lambda r:abs(r['experimental'][metric]),reverse=True)[:10])
     for metric in ['area','elongation','counter_difference']:
-        candidates=[p for p in pairs if p['member']in assignments and p['canonical']==assignments[p['member']]['canonical']]
+        candidates=[p for p in pairs+[dict(c,canonical=c['member']) for c in plan['self_checks']] if p['member']in assignments and p['canonical']==assignments[p['member']]['canonical']]
         for char in sorted({rows[p['member']].get('character','e') for p in candidates}):
             sample.update(p['member']for p in sorted([p for p in candidates if rows[p['member']].get('character','e')==char],key=lambda p:p['checks'].get(metric,{}).get('value',0),reverse=True)[:10])
     # Cross-page/style probes: retain an example from every canonical group and page.
@@ -87,7 +88,9 @@ def main(experiment):
         attempted=[p for p in pairs if p['member']==i]
         if not attempted:continue
         r=rejected[i];j=r.get('canonical',min(attempted,key=lambda p:p['error'])['canonical'])
-        pair=next(p for p in attempted if p['canonical']==j);o=lookup.get('font04-e-'+str(j));frame=meta['frames'][i]
+        pair=next((p for p in attempted if p['canonical']==j),None)
+        if pair is None or 'parameters' not in pair:pair=dict(parameters=r['parameters'])
+        o=lookup.get('font04-e-'+str(j));frame=meta['frames'][i]
         if o is None or frame is None:continue
         x,y=meta['origins'][j];dx,dy,s=pair['parameters'];left=32+s*(x-.5-32)+dx;top=48+s*(y-.5-48)+dy
         bb=[frame['cx']+(left-32)/frame['scale'],frame['baseline']+(top-48)/frame['scale'],frame['cx']+(left+s*o['width']-32)/frame['scale'],frame['baseline']+(top+s*o['height']-48)/frame['scale']]
@@ -104,6 +107,7 @@ def main(experiment):
             row=rows[i];source=row['source']
             if source is None or i not in proposals:continue
             bb=source['bbox'];cx=(bb[0]+bb[2])/2;cy=(bb[1]+bb[3])/2;left=int(cx)-35;top=int(cy)-28;right=left+70;bottom=top+56;page=row['page']
+            if is_b2:left=max(0,min(left,int(bb[0])-25));top=max(0,min(top,int(bb[1])-16));right=min(sources[engine][page].shape[1],max(right,int(bb[2])+25));bottom=min(sources[engine][page].shape[0],max(bottom,int(bb[3])+16))
             a=page_render(engine,'default',page);b=page_render(engine,'experimental',page)if i in assignments else proposed[i]
             panel_id=f'glyph-{i:03}-{engine}'
             panels.append(dict(id=panel_id,type='accepted'if i in assignments else'rejected',member=i,page=page,renderer=engine,bounds=[left,top,right,bottom],source=sources[engine][page][top:bottom,left:right],current=a[top:bottom,left:right],candidate=b[top:bottom,left:right],character=row.get('character','e'),selection='random rejected'if i in random_rejected else'accepted random/tail/cross-page'))
@@ -113,16 +117,18 @@ def main(experiment):
         for element in document.iter():
             if 'ocrx_word'not in element.attrib.get('class','').split():continue
             text=''.join(''.join(element.itertext()).split()).lower();match=re.search(r'\bbbox (\d+) (\d+) (\d+) (\d+)',element.attrib.get('title',''))
-            if match and 'e' in text and re.fullmatch('[a-z]{4,}',text):words[text].append((pi,list(map(int,match.groups()))))
+            if match and ((not is_b2 and 'e' in text and re.fullmatch('[a-z]{4,}',text)) or (is_b2 and (re.fullmatch('[a-z]{4,}',text) or re.fullmatch(r'[$€£]?[0-9][0-9,./:-]*',text)))):words[text].append((pi,list(map(int,match.groups()))))
     frequent=[(word,instances)for word,instances in words.items()if len({p for p,b in instances})>=2]
     frequent.sort(key=lambda pair:(pair[0]!='expires',-len({p for p,b in pair[1]}),pair[0]))
+    chosen_words=frequent[:10]
+    if is_b2:chosen_words=[p for p in frequent if re.fullmatch('[a-z]{4,}',p[0])][:10]+[p for p in frequent if re.search('[0-9]',p[0])][:10]
     word_selection=[]
-    for word,instances in frequent[:10]:
+    for token_index,(word,instances) in enumerate(chosen_words):
         for page,bb in [min(instances),max(instances)]:
             x,y,xx,yy=bb;bounds=[x-3,y-3,xx+3,yy+3];word_selection.append(dict(word=word,page=page,bounds=bounds))
             for engine in ['pdfium','poppler']:
                 a=page_render(engine,'default',page);b=page_render(engine,'experimental',page);x,y,xx,yy=bounds
-                panels.append(dict(id=f'word-{word}-{page}-{engine}',type='repeated-word',page=page,renderer=engine,bounds=bounds,source=sources[engine][page][y:yy,x:xx],current=a[y:yy,x:xx],candidate=b[y:yy,x:xx],selection='same word on distant pages'))
+                panels.append(dict(id=f'word-{token_index:02}-{page}-{engine}' if is_b2 else f'word-{word}-{page}-{engine}',type='repeated-word',page=page,renderer=engine,bounds=bounds,source=sources[engine][page][y:yy,x:xx],current=a[y:yy,x:xx],candidate=b[y:yy,x:xx],selection='same word on distant pages'))
     rendered_rejected={p['member'] for p in panels if p['type']=='rejected'}
     assert len(rendered_rejected)>=(150 if is_b2 else 50), 'insufficient genuinely rendered rejected panels'
     ids=[p['id']for p in panels];key_process(ids,directory/'sealed-key.json')
@@ -134,7 +140,7 @@ def main(experiment):
     (directory/'panels.json').write_text(json.dumps(metadata,indent=2))
     (directory/'selection.json').write_text(json.dumps(dict(seed=40411,accepted=sorted(sample),random_rejected=random_rejected,mandatory_rejected_n=len(random_rejected),repeated_words=word_selection,key_policy='Do not reveal until all judgments are saved.'),indent=2))
     subprocess.run([sys.executable,str(Path(__file__).with_name('review_key.py')),'render',str(directory)],check=True)
-    compact=dict(panels=len(panels),random_rejected_members=len(rendered_rejected),rejected_population=len(rejects),reviewable_rejected_population=len(reviewable_rejects),accepted_members=len(sample),both_renderers=True,rejected_context='exact default page with only the target glyph replaced; all neighbours unchanged',source_and_randomized_UV=True,reading_size_and_400_percent=True,review_pdf=str(directory/'blinded-review.pdf'),review_pdf_sha256=sha(directory/'blinded-review.pdf'),judgments=str(directory/'judgments-template.json'),key=str(directory/'sealed-key.json'),status='awaiting independent judgments; key not revealed')
+    compact=dict(panels=len(panels),random_rejected_members=len(rendered_rejected),rejected_population=len(rejects),reviewable_rejected_population=len(reviewable_rejects),accepted_members=len(sample),both_renderers=True,rejected_context='exact default page with only the target glyph replaced; original ink colour and all neighbours unchanged',source_and_randomized_UV=True,reading_size_and_400_percent=True,review_pdf=str(directory/'blinded-review.pdf'),review_pdf_sha256=sha(directory/'blinded-review.pdf'),judgments=str(directory/'judgments-template.json'),key=str(directory/'sealed-key.json'),status='awaiting independent judgments; key not revealed')
     Path('qualification/font04/'+experiment.stem+'-review-manifest.json').write_text(json.dumps(compact,indent=2));print(compact)
 
 

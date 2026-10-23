@@ -11,7 +11,7 @@ from fontTools.ttLib import TTFont
 from qualification.font04.planner import choose,frame_bbox
 from qualification.font04.geometry import register
 from qualification.font04.causal import glyph_matrix
-from qualification.font04.metrics import operands,measure,sha
+from qualification.font04.metrics import operands,measure,sha,inspect
 from qualification.font04.prime_metrics import direct
 
 
@@ -31,14 +31,19 @@ def main(path):
             r=rows[i];o=lookup[j];bbox=frame_bbox(meta['frames'][i],meta['origins'][j],(o['width'],o['height']),p);g=geometry[r['page']];rr=dict(r,pixel_x_pt=g['width_pt']/g['raster_width'],pixel_y_pt=g['height_pt']/g['raster_height']);m=glyph_matrix(rr,o,bbox);x,y,xx,yy=map(int,r['source']['bbox']);draw=dict(gid=o['gid'],matrix=operands(m));candidate=direct(font,draw,[x-4,y-4,xx+4,yy+4],r['page_height']);fidelity[i,j]=measure(crops[f'{i}-analytic-source'],candidate)['error']
             if count%250==0:print('frontier pairs',count,len(parameters),flush=True)
     (art/'frontier-pair-coverage.json').write_text(json.dumps([dict(member=i,canonical=j,error=e) for (i,j),e in fidelity.items()]))
+    inventory=inspect(Path('qualification/font04/local/financial-default.pdf'));bindings=json.loads((art/'emitted-bindings.json').read_text());source_occ={(r['page'],r['occurrence']) for r in rows};outside={(u['font_hash'],u['gid']) for u in inventory['users'] if u['invisible']}
+    for pi in range(13):
+        for oi,d in enumerate(u for u in inventory['draws'] if u['page']==pi):
+            if (pi,oi) not in source_occ:outside.add((d['font_hash'],d['gid']))
+    held={r['shape_key'] for r in rows if (bindings[str(r['index'])]['font_hash'],bindings[str(r['index'])]['gid']) in outside}
     points=[]
     for point in plan['frontier']:
         groups=choose(allowed,ratios,point['error_scale'],point['grouping'],rows);assigned={i:g['canonical'] for g in groups for i in g['members']};classes={}
         for char in sorted({r['character'] for r in rows}):
-            indices=[i for i,r in enumerate(rows) if r['character']==char and i in current];vals=[(i,fidelity[i,assigned[i]] if i in assigned else current[i]) for i in indices];old={rows[i]['shape_key'] for i in indices};retained={rows[i]['shape_key'] for i in indices if i not in assigned};added=len({assigned[i] for i in indices if i in assigned})
-            classes[char]=dict(n=len(vals),substituted=sum(i in assigned for i in indices),mean=float(np.mean([e for i,e in vals])) if vals else None,p95=float(np.quantile([e for i,e in vals],.95)) if vals else None,added=added,retired_visible_candidates=len(old-retained),net_retired_visible_candidates=len(old-retained)-added,worst_10_regressions=[dict(member=i,error=e,delta=e-current[i]) for i,e in sorted(vals,key=lambda v:v[1]-current[v[0]],reverse=True)[:10]])
+            all_indices=[i for i,r in enumerate(rows) if r['character']==char];indices=[i for i in all_indices if i in current];vals=[(i,fidelity[i,assigned[i]] if i in assigned else current[i]) for i in indices];old={rows[i]['shape_key'] for i in all_indices};retained={rows[i]['shape_key'] for i in all_indices if i not in assigned};added=len({assigned[i] for i in all_indices if i in assigned})
+            classes[char]=dict(n=len(vals),substituted=sum(i in assigned for i in indices),mean=float(np.mean([e for i,e in vals])) if vals else None,p95=float(np.quantile([e for i,e in vals],.95)) if vals else None,added=added,retired_visible_designs=len(old-retained),retired_required_programs=len(old-retained-held),net_retired_required_programs=len(old-retained-held)-added,held_by_other_users=len((old-retained)&held),worst_10_regressions=[dict(member=i,error=e,delta=e-current[i]) for i,e in sorted(vals,key=lambda v:v[1]-current[v[0]],reverse=True)[:10]])
         points.append(dict(grouping=point['grouping'],error_scale=point['error_scale'],classes=classes));print('frontier point',point['grouping'],point['error_scale'],flush=True)
-    result=dict(reference='direct 16x winding coverage at fitted physical coordinates against isolated analytic source',scope='P controls; ownership-aware PV selected complete output is measured separately',input_pdf=str(path),input_sha256=sha(path),points=points)
+    result=dict(reference='direct 16x winding coverage at fitted physical coordinates against isolated analytic source',scope='Pre-functional glyph-admissibility controls only: potential retirement/fidelity, not valid complete-output candidates. Actual functionally qualified P/PV complete outputs are measured separately.',input_pdf=str(path),input_sha256=sha(path),original_programs_held_by_invisible_or_rare_users=sorted(held),retirement_method='Original programme retires only when every user is remapped; invisible/rare users explicitly hold it. Added canonical slots counted per selected group.',points=points)
     Path('qualification/font04/b2-frontier.json').write_text(json.dumps(result,indent=2)+'\n')
 
 if __name__=='__main__':main(Path(sys.argv[1]))

@@ -199,30 +199,43 @@ def plan(data,directory):
         (directory/'pair-ledger.json').write_bytes((frozen/'pair-ledger.json').read_bytes())
         (directory/'plan.json').write_text(json.dumps(result,indent=2))
         return result
-    if arm=='PV' and os.environ.get('FONT04_REUSE_FITS')=='1':
+    if os.environ.get('FONT04_REUSE_FITS')=='1' and arm in ('P','PV'):
         import hashlib
-        ledger_path=Path(os.environ.get('FONT04_OWNERSHIP_LEDGER','qualification/font04/owned-component-ledger.json'))
-        ownership=json.loads(ledger_path.read_text());control=Path(ownership['source_pdf']);reference=Path(str(control)+'.font04')
-        if hashlib.sha256(control.read_bytes()).hexdigest()!=ownership['source_pdf_sha256']:raise ValueError('changed ownership control PDF')
+        ownership=json.loads(Path(os.environ.get('FONT04_OWNERSHIP_LEDGER','qualification/font04/owned-component-ledger.json')).read_text()) if arm=='PV' else None
+        functional_path=os.environ.get('FONT04_FUNCTIONAL_LEDGER')
+        functional=json.loads(Path(functional_path).read_text()) if functional_path else None
+        control=Path(ownership['source_pdf'] if ownership else os.environ['FONT04_FIT_CONTROL']);reference=Path(str(control)+'.font04');control_sha=hashlib.sha256(control.read_bytes()).hexdigest()
+        if ownership and control_sha!=ownership['source_pdf_sha256']:raise ValueError('changed ownership control PDF')
+        if functional and (functional['control_sha256']!=control_sha or not functional['final_counterfactual_text_search_equal']):raise ValueError('changed functional control PDF')
         if data['snapshot']!=json.loads((reference/'source.json').read_text()):raise ValueError('cached fits source mismatch')
         if data['outlines']!=json.loads((reference/'outlines.json').read_text()):raise ValueError('cached fits outlines mismatch')
         result=json.loads((reference/'plan.json').read_text())
         if result['selected']['grouping']!='star' or result['selected']['error_scale']!=1.:raise ValueError('cached operating point mismatch')
-        exceptions=set(ownership['exceptions']);groups=collections.defaultdict(list)
+        exceptions=set(ownership['exceptions']) if ownership else set();allowed=set(functional['accepted_members']) if functional else None;groups=collections.defaultdict(list)
         for a in result['assignments']:groups[a['canonical']].append(a)
         accepted=[];removed=[]
         for j,members in groups.items():
             survivors=[a for a in members if a['member'] not in exceptions] if j not in exceptions else []
+            if allowed is not None:survivors=[a for a in survivors if a['member'] in allowed]
             if len(survivors)<2:survivors=[]
-            kept={a['member'] for a in survivors};accepted.extend(survivors)
-            removed.extend(a for a in members if a['member'] not in kept)
+            kept={a['member'] for a in survivors};accepted.extend(survivors);removed.extend(a for a in members if a['member'] not in kept)
         for a in accepted:a['character']=rows[a['member']].get('character','e')
         for a in removed:
-            i=a['member'];result['rejection_ledger'].append(dict(member=i,canonical=a['canonical'],reasons=['unexplained_owned_ink' if i in exceptions else 'ownership_group_exception'],checks=dict(unexplained_owned_ink=dict(value=[r for r in ownership['components'] if r['member']==i and r['fires']],limit=ownership['policy'])) if i in exceptions else dict(ownership_group=dict(value=dict(canonical=a['canonical'],canonical_veto=a['canonical'] in exceptions,remaining_members=sum(x['member'] not in exceptions for x in groups[a['canonical']])),limit=dict(canonical_veto=False,minimum_members=2))),parameters=a['parameters']))
-        result.update(assignments=accepted,arm='PV',ownership_veto=ownership,runtime_seconds=time.monotonic()-started,fit_reuse=dict(control_pdf=str(control),sha256=ownership['source_pdf_sha256'],verification='Exact source snapshot and traced outline equality; identical post-group ownership veto; no refitting or acceptance change.'))
-        (directory/'outlines.json').write_text(json.dumps(data['outlines']))
-        (directory/'pair-ledger.json').write_bytes((reference/'pair-ledger.json').read_bytes())
-        (directory/'plan.json').write_text(json.dumps(result,indent=2));return result
+            i=a['member'];j=a['canonical']
+            if i in exceptions:
+                reason='unexplained_owned_ink';checks=dict(unexplained_owned_ink=dict(value=[r for r in ownership['components'] if r['member']==i and r['fires']],limit=ownership['policy']))
+            elif j in exceptions or sum(x['member'] not in exceptions for x in groups[j])<2:
+                reason='ownership_group_exception';checks=dict(ownership_group=dict(value=dict(canonical=j,canonical_veto=j in exceptions,remaining_members=sum(x['member'] not in exceptions for x in groups[j])),limit=dict(canonical_veto=False,minimum_members=2)))
+            else:
+                reason='functional_text_identity';failure=next((r for r in functional['rejected_groups'] if r['canonical']==j),None) if functional else None
+                checks=dict(functional_text_identity=dict(value=failure['value'] if failure else 'group not retained',limit=dict(pdfium_text=True,pdfium_search=True,poppler_layout=True)))
+            result['rejection_ledger'].append(dict(member=i,canonical=j,reasons=[reason],checks=checks,parameters=a['parameters']))
+        if functional and functional.get('ownership_ledger')!=(os.environ.get('FONT04_OWNERSHIP_LEDGER') if ownership else None):raise ValueError('functional/ownership policy mismatch')
+        old_selected=dict(result['selected']);remapped={a['member'] for a in accepted};original={r['shape_key'] for r in rows};retired=original-{rows[i]['shape_key'] for i in range(n) if i not in remapped};added=len({a['canonical'] for a in accepted})
+        actual=dict(old_selected,remapped=len(accepted),added=added,retired_visible_candidates=len(retired),net_visible_candidates=added-len(retired),designs=len(original)-len(retired)+added,mean_source_error=float(np.mean([mse(fields[a['member']],warp(candidate[a['canonical']],a['parameters'])) for a in accepted if a['member']!=a['canonical']])) if any(a['member']!=a['canonical'] for a in accepted) else None)
+        result['pre_veto_selected']=old_selected;result['selected']=actual
+        result.update(assignments=accepted,arm=arm,fit_control_workers=result.get('fit_workers',1),fit_workers=0,ownership_veto=ownership,functional_veto=functional,runtime_seconds=time.monotonic()-started,fit_reuse=dict(control_pdf=str(control),sha256=control_sha,verification='Exact source snapshot and traced outline equality; existing groups only; orthogonal owned-ink and mandatory functional-identity vetoes.'))
+        (directory/'outlines.json').write_text(json.dumps(data['outlines']));(directory/'pair-ledger.json').write_bytes((reference/'pair-ledger.json').read_bytes());(directory/'plan.json').write_text(json.dumps(result,indent=2));return result
     errors=np.full((n,n),np.inf);veto=np.zeros((n,n),bool);pairs=[];parameters={}
     # Fits are independent. Optional process parallelism preserves job/result order
     # and is checked against the serial B1 ledger; no decision rule changes.
@@ -263,7 +276,9 @@ def plan(data,directory):
             if not reasons:peers.append(mse(fields[i],aligned))
             if len(peers)>=5:break
         noise.append(float(np.quantile(peers,.85)) if len(peers)>=2 else None)
-        noise_support.append(dict(member=i,witnesses=len(peers),required_k=2,status='fewer_than_k_witnesses' if len(peers)<2 else 'calibrated',calibration_failure=False))
+        eligible_count=sum(bool(veto[i,j]) and rows[i]['shape_key']!=rows[j]['shape_key'] for j in indices)
+        calibration_failure=eligible_count>=2 and len(peers)<2
+        noise_support.append(dict(member=i,witnesses=len(peers),eligible_witnesses=eligible_count,required_k=2,status='calibrated' if len(peers)>=2 else ('source_pair_calibration_failure' if calibration_failure else 'fewer_than_k_eligible_witnesses'),calibration_failure=calibration_failure,numerical_calibration_error=False))
     normalized=np.full_like(errors,np.inf)
     for i,level in enumerate(noise):
         if level is not None:normalized[i]=errors[i]/max(level,1e-6)

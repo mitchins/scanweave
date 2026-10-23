@@ -12,6 +12,8 @@ def components(source,current,candidate,member):
     # Source components first: default agreement establishes ownership. Scanner
     # dirt absent from the current output cannot trigger retention.
     labels,n=ndimage.label(source>.25)
+    current_distance=ndimage.distance_transform_edt(~(current>.15))
+    body=max(range(1,n+1),key=lambda k:int(((labels==k)&(current>.15)).sum()),default=0)
     footprint=candidate>.10
     distance=ndimage.distance_transform_edt(~footprint)
     ledger=[]
@@ -21,7 +23,7 @@ def components(source,current,candidate,member):
         unexplained=owned & (distance>HALO)
         area=int(unexplained.sum());mass=float(source[unexplained].sum())
         firing=area>=MIN_AREA and mass>=MIN_MASS
-        ledger.append(dict(member=member,component=label,source_area=int(component.sum()),owned_area=int(owned.sum()),area=area,contrast=float(source[unexplained].mean()) if area else 0.,mass=mass,distance=float(distance[owned].max()) if owned.any() else None,halo=HALO,decision='keep_default_exception' if firing else ('unowned_dirt_ignored' if not owned.any() else 'covered_or_below_significance'),fires=bool(firing)))
+        ledger.append(dict(member=member,component=label,source_area=int(component.sum()),component_area=int(component.sum()),component_contrast=float(source[component].mean()),component_peak_contrast=float(source[component].max()),distance_to_current=float(current_distance[component].min()),distance_to_canonical=float(distance[component].min()),detached_in_ownership_halo=bool(label!=body and current_distance[component].min()<=1.5),owned_area=int(owned.sum()),area=area,contrast=float(source[unexplained].mean()) if area else 0.,mass=mass,distance=float(distance[owned].max()) if owned.any() else None,halo=HALO,decision='keep_default_exception' if firing else ('unowned_dirt_ignored' if not owned.any() else 'covered_or_below_significance'),fires=bool(firing)))
     return ledger
 
 def main(path):
