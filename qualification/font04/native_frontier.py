@@ -1,6 +1,7 @@
 """Native original-page fidelity for all bounded B1 grouping/error sweep points."""
 from pathlib import Path
 import json
+import os
 import numpy as np
 import pikepdf
 from qualification.font04.planner import choose
@@ -11,7 +12,7 @@ from qualification.font04.pdf_helpers import font_resource
 
 
 def main():
-    root=Path('qualification/font04/local');artifact=root/'financial-experimental-v2.pdf.font04';directory=root/'frontier';directory.mkdir(exist_ok=True)
+    root=Path('qualification/font04/local');artifact=Path(os.environ.get('FONT04_FRONTIER_ARTIFACT',str(root/'financial-experimental-v2.pdf.font04')));directory=root/os.environ.get('FONT04_FRONTIER_DIRECTORY','frontier');directory.mkdir(exist_ok=True)
     snapshot=json.loads((artifact/'source.json').read_text());rows=snapshot['rows'];plan=json.loads((artifact/'plan.json').read_text());pairs=json.loads((artifact/'pair-ledger.json').read_text());meta=json.loads((artifact/'frames.json').read_text());outlines=json.loads((artifact/'outlines.json').read_text())['records'];lookup={o['key']:o for o in outlines if'gid'in o};fields=np.load(artifact/'fields.npy');geometry=json.loads((root/'financial-default.pdf.json').read_text())['pages'];bindings=json.loads((artifact/'emitted-bindings.json').read_text());n=len(rows);errors=np.full((n,n),np.inf);allowed=np.zeros((n,n),bool);params={}
     for p in pairs:
         i,j=p['member'],p['canonical'];errors[i,j]=p['error'];allowed[i,j]=not p['reasons'];params[i,j]=p['parameters']
@@ -20,7 +21,10 @@ def main():
     ratios=np.full_like(errors,np.inf)
     for i,level in enumerate(plan['noise_floor']):
         if level is not None:ratios[i]=errors[i]/max(level,1e-6)
-    sources={(e,pi):1-render(root/'financial-source-owned.pdf',pi,300,e).astype(float)/255 for e in ['pdfium','poppler']for pi in range(13)}
+    from qualification.font04.prime_metrics import analytic
+    def coverage(path,pi,e):return 1-(analytic(path,pi) if e=='analytic' else render(path,pi,300,e)).astype(float)/255
+    engines=['pdfium','poppler','analytic']
+    sources={(e,pi):coverage(root/'financial-source-owned.pdf',pi,e) for e in engines for pi in range(13)}
     result=[]
     for point in plan['frontier']:
         method=point['grouping'];threshold=point['error_scale'];groups=choose(allowed,ratios,threshold,method,rows);assigned={i:g['canonical']for g in groups for i in g['members']}
@@ -37,17 +41,17 @@ def main():
                 page.Contents=pdf.make_stream(('\n'.join(commands)+'\n').encode())
             path=directory/f'{method}-{threshold}.pdf';pdf.save(path,deterministic_id=True)
         metrics={}
-        for engine in ['pdfium','poppler']:
+        for engine in engines:
             values=[]
             for pi in range(13):
-                actual=1-render(path,pi,300,engine).astype(float)/255;source=sources[engine,pi]
+                actual=coverage(path,pi,engine);source=sources[engine,pi]
                 for row in rows:
                     if row['page']!=pi or row['source']is None:continue
                     x,y,xx,yy=map(int,row['source']['bbox']);x-=4;y-=4;xx+=4;yy+=4;values.append(measure(source[y:yy,x:xx],actual[y:yy,x:xx]))
             metrics[engine]=summary(values)
         record=dict(point,native_source=metrics,program_accounting=dict(added=point['added'],retired=point['retired_visible_candidates'],net=point['net_visible_candidates'],verified_scope='All old e programs have only visible same-label users; selected point independently checked against compiled complete PDF programs.'),pristine_error=None,pristine_status='P3 has no pristine reference; P1 causal pristine metrics are reported separately.',material_defects=None,material_status='Independent blinded review pending; do not infer zero defects.',measurement_pdf=str(path),measurement_pdf_sha256=sha(path))
         result.append(record);print(method,threshold,{e:m['error']['mean']for e,m in metrics.items()},flush=True)
-    Path('qualification/font04/reuse-fidelity-frontier.json').write_text(json.dumps(dict(schema='font04-native-frontier-v1',selected=plan['selected'],points=result,scope='B1 e only; measurement PDFs contain only glyph layers, not complete financial deliverables.'),indent=2))
+    Path(os.environ.get('FONT04_FRONTIER_OUTPUT','qualification/font04/reuse-fidelity-frontier.json')).write_text(json.dumps(dict(schema='font04-native-frontier-v1',selected=plan['selected'],points=result,scope='B1 e only; measurement PDFs contain only glyph layers, not complete financial deliverables.'),indent=2))
     try:
         import matplotlib
         matplotlib.use('Agg')
