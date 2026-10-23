@@ -34,7 +34,8 @@ def main():
     for name,p in a['populations'].items():
         p['scorecard_scope']=dict(quality='Per-class means, p95, worst ten, both native engines, DPI/damage strata and translation-independent contour metric.',complete_candidate_pdf=None,reason='Causal glyph probes, not a proposed complete product conversion. Product economy/text qualification is not claimed for individual arms.',financial_classes=['e']if name=='financial'else list(a['classes']),material_defects=None,blinded_review='pending; see review-A-manifest.json')
         p['grayscale_cap']=dict(active_selected_native_crops=0,conclusion='The 16,384-sample cap cannot explain the measured gain on this selected P1/P3 population; large-crop extrapolation remains untested.')
-    a['failure_classifications'].append(dict(classification='algorithm',finding='Financial OCR IDs are page-local; the first causal export reused keys across pages.',next='Fixed by page-scoped IDs before all final native financial measurements.'))
+    if not any(r['finding'].startswith('Financial OCR IDs are page-local;')for r in a['failure_classifications']):
+        a['failure_classifications'].append(dict(classification='algorithm',finding='Financial OCR IDs are page-local; the first causal export reused keys across pages.',next='Fixed by page-scoped IDs before all final native financial measurements.'))
     a['classification_notes']='No broad falsification: B1 covers only e, and independent review plus native-placement resolution remain outstanding. No product branch is qualified.'
     (ROOT/'checkpoint-A.json').write_text(json.dumps(a,separators=(',',':')))
     tests=(LOCAL/'tests-final.log').read_text();counts=[int(x)for x in re.findall(r'test result: ok\. (\d+) passed',tests)]
