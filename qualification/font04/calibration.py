@@ -73,7 +73,7 @@ def main():
             known.append(dict(category='retained FONT-02 source-accepted controls (includes dot/sliver, italic punctuation, counters)',split=split,target=pair['target'],donor=pair['donor'],character=row['character'],prior_material=pair['material'],prior_safe=pair['safe'],caught=any(p['hard_reasons']for p in per),renderers=per))
     # Retain the FONT-03 damage-repair identity failure as a forbidden-operation
     # control; the experimental interface has no repair operation at all.
-    Path('qualification/font04/local/calibration-work.json').write_text(json.dumps(dict(positive=positive,style_negative=style_negative,known=known)))
+    Path(os.environ.get('FONT04_CALIBRATION_WORK','qualification/font04/local/calibration-work.json')).write_text(json.dumps(dict(positive=positive,style_negative=style_negative,known=known)))
     repair=[]
     for split in ['validation','test']:
         path=Path('qualification/font03/local/repair')/f'{split}-evaluated.json';data=json.loads(path.read_text());repair.append(dict(split=split,artifact=str(path),sha256=sha(path),enforcement='No damage-repair input or path exists in the FONT-04 planner; damaged members are exceptions.',prior_evaluation=data.get('summary',None) if isinstance(data,dict) else dict(records=len(data))))

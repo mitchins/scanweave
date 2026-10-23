@@ -111,3 +111,31 @@ Draft [PR #25](https://github.com/mitchins/scanweave/pull/25), commit `480a281e7
 Research implementation increments: `1ab7f83`, `62d63e2`; final evidence commit follows this report. No product branch qualified and no merge occurred. See [git-receipt.json](qualification/font04/git-receipt.json) and [manifest.json](qualification/font04/manifest.json). Existing local research files were preserved.
 
 **Reviewer decisions requested:** assess the sealed materiality/false-rejection results; explain the native renderer/placement discrepancy; choose whether to resolve native placement in B1 before authorizing B2. Nothing here authorizes B2, P2 generation, a product merge, or a default-mode change.
+
+## Checkpoint B1′ — corrected placement and owned-ink veto
+
+This checkpoint supersedes the pre-fix line-frame conclusions above. The independent B1 native/analytic and centroid/best-translation numbers were reproduced before edits. The physical inverse test passes 192 cells per arm (200/300/600 DPI × four x-heights × 16 phases), maximum fixed offset 0.015625 px; the old inverse fails every cell by the predicted 0.5/scale.
+
+| Complete arm | Substituted e | Analytic mean | Analytic p95 | Net programs retired | PDF bytes |
+|---|---:|---:|---:|---:|---:|
+| default | 0 | 0.065304 | 0.126012 | 0 | 2849237 |
+| B1 | 124 | 0.083563 | 0.139535 | 7 | 2849062 |
+| P0 | 124 | 0.056148 | 0.105718 | 7 | 2849020 |
+| P | 124 | 0.056148 | 0.105718 | 7 | 2849020 |
+| PV | 123 | 0.056236 | 0.105718 | 6 | 2849326 |
+
+P0 freezes all B1 membership and canonical assignments. Independently recomputed P has exactly the same assignments and byte-identical complete output. PV vetoes only glyph-277; the original default program and physical matrix are retained. Every connected source component is logged with area, contrast, distance and decision. Dirt not reproduced by default cannot trigger retention.
+
+The scorecards report both all 291 members and the actually substituted subset under PDFium, Poppler, 4× supersampled analytic and direct 16× winding coverage, including mean, p95 and worst-ten regression IDs. Native screens are accompanied by measured identical-outline floors; differences below those floors do not rank arms. The primary analytic and independent direct-outline metrics improve.
+
+All 88 insufficient-noise-support cases have fewer than k=2 witnesses; none failed calibration. The fixed frontier is remeasured at all 21 pre-existing grouping/threshold points. Star/1.0 remains fixed; the larger retirement at higher thresholds is a reviewer question, not an operating-point change.
+
+Corrected Phase A line-frame arms and floor controls were rerun on frozen cohorts/traces; [Checkpoint A](qualification/font04/checkpoint-A.md) supersedes the pre-fix shares and F-self/F-medoid conclusions. No product promotion follows without independent review.
+
+PV sealed sheets contain 96 accepted and 51 rejected members (including every veto firing), repeated words containing e, both renderers, reading size and 400%. Rejected candidates replace their current glyph in full page context. The key remains separate and unopened. **Reviewer pending:** material defects and over-rejection remain unresolved.
+
+Default is byte-identical to main; PV repeats deterministically. qpdf, OTS, extraction and native search checks pass for all arms. PV retires six net programs but grows the complete PDF by 89 bytes; P/P0 save 217 bytes. This byte tradeoff is retained for B2 diagnosis.
+
+**B2 conditions: (a) PASS, (b) PASS, (c) PASS.** Proceed to all 55 frequent classes with the same method and stop at Checkpoint B2. P2 remains sealed; no default promotion or merge is authorized.
+
+Complete PDFs: `qualification/font04/local/financial-experimental-v2.pdf`, `financial-B1prime-P0.pdf`, `financial-B1prime-P.pdf`, `financial-B1prime-PV.pdf`, and `financial-B1prime-default.pdf` in the same directory. Corrected chosen review: `qualification/font04/local/financial-B1prime-PV-review/blinded-review.pdf`. See [checkpoint-B1prime.json](qualification/font04/checkpoint-B1prime.json), [prime-artifact-manifest.json](qualification/font04/prime-artifact-manifest.json) and per-arm scorecards for hashes, tails, floors and runtime.

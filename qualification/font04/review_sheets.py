@@ -55,7 +55,9 @@ def main(experiment):
         return np.load(cache)
     is_b2=plan.get('scope')=='all 55 frequent classes'
     randomizer=random.Random(40411);accepted=sorted(assignments);rejects=sorted(rejected)
-    sample=set(randomizer.sample(accepted,min(50,len(accepted))));random_rejected=randomizer.sample(rejects,min(150 if is_b2 else 50,len(rejects)))
+    attempted_members={p['member'] for p in pairs}
+    reviewable_rejects=[i for i in rejects if rows[i]['source'] is not None and i in attempted_members]
+    sample=set(randomizer.sample(accepted,min(50,len(accepted))));random_rejected=randomizer.sample(reviewable_rejects,min(150 if is_b2 else 50,len(reviewable_rejects)))
     if is_b2:
         for char in sorted({r['character'] for r in rows}):
             population=[i for i in accepted if rows[i]['character']==char]
@@ -94,15 +96,15 @@ def main(experiment):
     # neighbouring ink and all other page content are identical on both sides.
     from qualification.font04.context_proposals import contextual_pdf
     proposal_pdf=directory/'attempted-substitutions.pdf'
-    contextual_pdf(ROOT/'financial-default.pdf',proposal_pdf,rows,proposals,bound,outlines,artifact/'canonical.ttf')
+    proposal_pages=contextual_pdf(ROOT/'financial-default.pdf',proposal_pdf,rows,{i:p for i,p in proposals.items() if i not in assignments},bound,outlines,artifact/'canonical.ttf')
     sources={engine:[render(Path('qualification/pdf_packaging/groups/financial-input.pdf'),page,300,engine)for page in range(13)]for engine in ['pdfium','poppler']}
     for engine in ['pdfium','poppler']:
-        proposed={pi:render(proposal_pdf,pi,300,engine)for pi in sorted({rows[i]['page']for i in proposals})}
+        proposed={i:render(proposal_pdf,pi,300,engine)for i,pi in proposal_pages.items()}
         for i in selected:
             row=rows[i];source=row['source']
             if source is None or i not in proposals:continue
             bb=source['bbox'];cx=(bb[0]+bb[2])/2;cy=(bb[1]+bb[3])/2;left=int(cx)-35;top=int(cy)-28;right=left+70;bottom=top+56;page=row['page']
-            a=page_render(engine,'default',page);b=page_render(engine,'experimental',page)if i in assignments else proposed[page]
+            a=page_render(engine,'default',page);b=page_render(engine,'experimental',page)if i in assignments else proposed[i]
             panel_id=f'glyph-{i:03}-{engine}'
             panels.append(dict(id=panel_id,type='accepted'if i in assignments else'rejected',member=i,page=page,renderer=engine,bounds=[left,top,right,bottom],source=sources[engine][page][top:bottom,left:right],current=a[top:bottom,left:right],candidate=b[top:bottom,left:right],character=row.get('character','e'),selection='random rejected'if i in random_rejected else'accepted random/tail/cross-page'))
     report=json.loads((ROOT/'financial-default.pdf.json').read_text());words=collections.defaultdict(list)
@@ -121,6 +123,8 @@ def main(experiment):
             for engine in ['pdfium','poppler']:
                 a=page_render(engine,'default',page);b=page_render(engine,'experimental',page);x,y,xx,yy=bounds
                 panels.append(dict(id=f'word-{word}-{page}-{engine}',type='repeated-word',page=page,renderer=engine,bounds=bounds,source=sources[engine][page][y:yy,x:xx],current=a[y:yy,x:xx],candidate=b[y:yy,x:xx],selection='same word on distant pages'))
+    rendered_rejected={p['member'] for p in panels if p['type']=='rejected'}
+    assert len(rendered_rejected)>=(150 if is_b2 else 50), 'insufficient genuinely rendered rejected panels'
     ids=[p['id']for p in panels];key_process(ids,directory/'sealed-key.json')
     # Rendering U/V is delegated so this authoring process never reads the key.
     metadata=[];assets=directory/'assets';assets.mkdir(exist_ok=True)
@@ -130,7 +134,7 @@ def main(experiment):
     (directory/'panels.json').write_text(json.dumps(metadata,indent=2))
     (directory/'selection.json').write_text(json.dumps(dict(seed=40411,accepted=sorted(sample),random_rejected=random_rejected,mandatory_rejected_n=len(random_rejected),repeated_words=word_selection,key_policy='Do not reveal until all judgments are saved.'),indent=2))
     subprocess.run([sys.executable,str(Path(__file__).with_name('review_key.py')),'render',str(directory)],check=True)
-    compact=dict(panels=len(panels),random_rejected_members=len(random_rejected),accepted_members=len(sample),both_renderers=True,source_and_randomized_UV=True,reading_size_and_400_percent=True,review_pdf=str(directory/'blinded-review.pdf'),review_pdf_sha256=sha(directory/'blinded-review.pdf'),judgments=str(directory/'judgments-template.json'),key=str(directory/'sealed-key.json'),status='awaiting independent judgments; key not revealed')
+    compact=dict(panels=len(panels),random_rejected_members=len(rendered_rejected),rejected_population=len(rejects),reviewable_rejected_population=len(reviewable_rejects),accepted_members=len(sample),both_renderers=True,rejected_context='exact default page with only the target glyph replaced; all neighbours unchanged',source_and_randomized_UV=True,reading_size_and_400_percent=True,review_pdf=str(directory/'blinded-review.pdf'),review_pdf_sha256=sha(directory/'blinded-review.pdf'),judgments=str(directory/'judgments-template.json'),key=str(directory/'sealed-key.json'),status='awaiting independent judgments; key not revealed')
     Path('qualification/font04/'+experiment.stem+'-review-manifest.json').write_text(json.dumps(compact,indent=2));print(compact)
 
 

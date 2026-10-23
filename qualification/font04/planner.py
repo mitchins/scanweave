@@ -166,6 +166,15 @@ def choose(matrix,errors,scale,method,rows=None):
     return groups
 
 
+_FIT_CONTEXT=None
+
+def _fit_pair(pair):
+    i,j=pair;fields,candidate=_FIT_CONTEXT
+    p,aligned=register(fields[i],candidate[j]);err=mse(fields[i],aligned)
+    reasons,values=hard_checks(fields[i],aligned)
+    return dict(member=i,canonical=j,error=err,reasons=reasons,checks=values,parameters=p.tolist())
+
+
 def plan(data,directory):
     started=time.monotonic();rows=data['snapshot']['rows'];n=len(rows)
     fields=np.load(directory/'fields.npy');meta=json.loads((directory/'frames.json').read_text());frames=meta['frames'];origins=meta['origins']
@@ -190,27 +199,65 @@ def plan(data,directory):
         (directory/'pair-ledger.json').write_bytes((frozen/'pair-ledger.json').read_bytes())
         (directory/'plan.json').write_text(json.dumps(result,indent=2))
         return result
+    if arm=='PV' and os.environ.get('FONT04_REUSE_FITS')=='1':
+        import hashlib
+        ledger_path=Path(os.environ.get('FONT04_OWNERSHIP_LEDGER','qualification/font04/owned-component-ledger.json'))
+        ownership=json.loads(ledger_path.read_text());control=Path(ownership['source_pdf']);reference=Path(str(control)+'.font04')
+        if hashlib.sha256(control.read_bytes()).hexdigest()!=ownership['source_pdf_sha256']:raise ValueError('changed ownership control PDF')
+        if data['snapshot']!=json.loads((reference/'source.json').read_text()):raise ValueError('cached fits source mismatch')
+        if data['outlines']!=json.loads((reference/'outlines.json').read_text()):raise ValueError('cached fits outlines mismatch')
+        result=json.loads((reference/'plan.json').read_text())
+        if result['selected']['grouping']!='star' or result['selected']['error_scale']!=1.:raise ValueError('cached operating point mismatch')
+        exceptions=set(ownership['exceptions']);groups=collections.defaultdict(list)
+        for a in result['assignments']:groups[a['canonical']].append(a)
+        accepted=[];removed=[]
+        for j,members in groups.items():
+            survivors=[a for a in members if a['member'] not in exceptions] if j not in exceptions else []
+            if len(survivors)<2:survivors=[]
+            kept={a['member'] for a in survivors};accepted.extend(survivors)
+            removed.extend(a for a in members if a['member'] not in kept)
+        for a in accepted:a['character']=rows[a['member']].get('character','e')
+        for a in removed:
+            i=a['member'];result['rejection_ledger'].append(dict(member=i,canonical=a['canonical'],reasons=['unexplained_owned_ink' if i in exceptions else 'ownership_group_exception'],checks=dict(unexplained_owned_ink=dict(value=[r for r in ownership['components'] if r['member']==i and r['fires']],limit=ownership['policy'])) if i in exceptions else dict(ownership_group=dict(value=dict(canonical=a['canonical'],canonical_veto=a['canonical'] in exceptions,remaining_members=sum(x['member'] not in exceptions for x in groups[a['canonical']])),limit=dict(canonical_veto=False,minimum_members=2))),parameters=a['parameters']))
+        result.update(assignments=accepted,arm='PV',ownership_veto=ownership,runtime_seconds=time.monotonic()-started,fit_reuse=dict(control_pdf=str(control),sha256=ownership['source_pdf_sha256'],verification='Exact source snapshot and traced outline equality; identical post-group ownership veto; no refitting or acceptance change.'))
+        (directory/'outlines.json').write_text(json.dumps(data['outlines']))
+        (directory/'pair-ledger.json').write_bytes((reference/'pair-ledger.json').read_bytes())
+        (directory/'plan.json').write_text(json.dumps(result,indent=2));return result
     errors=np.full((n,n),np.inf);veto=np.zeros((n,n),bool);pairs=[];parameters={}
-    # A source-only shortlist bounds expensive fits; all exclusions are ledgered.
+    # Fits are independent. Optional process parallelism preserves job/result order
+    # and is checked against the serial B1 ledger; no decision rule changes.
+    global _FIT_CONTEXT
+    _FIT_CONTEXT=(fields,candidate)
+    jobs=[];label_indices={}
+    for i,row in enumerate(rows):label_indices.setdefault(row.get('character','e'),[]).append(i)
     for i in range(n):
         if frames[i] is None:continue
-        distances=np.array([mse(fields[i],candidate[j]) if j in shape_indices and j!=i and rows[j].get('character','e')==rows[i].get('character','e') else np.inf for j in range(n)])
-        shortlist=np.argsort(distances)[:min(24,n-1)]
-        for j in shortlist:
-            j=int(j)
-            if not np.isfinite(distances[j]):continue
-            p,aligned=register(fields[i],candidate[j]);err=mse(fields[i],aligned)
-            reasons,values=hard_checks(fields[i],aligned)
-            errors[i,j]=err;veto[i,j]=not reasons;parameters[(i,j)]=p.tolist()
-            pairs.append(dict(member=i,canonical=j,error=err,reasons=reasons,checks=values,parameters=p.tolist()))
-        if i%25==0:print(f'FONT04 fitted {i}/{n}',file=sys.stderr,flush=True)
+        indices=label_indices[rows[i].get('character','e')]
+        distances=np.array([mse(fields[i],candidate[j]) if j in shape_indices and j!=i else np.inf for j in indices])
+        jobs.extend((i,indices[j]) for j in np.argsort(distances)[:min(24,len(indices)-1)] if np.isfinite(distances[j]))
+    workers=max(1,min(16,int(os.environ.get('FONT04_FIT_WORKERS','1'))))
+    executor=None
+    if workers>1:
+        import concurrent.futures,multiprocessing
+        executor=concurrent.futures.ProcessPoolExecutor(max_workers=workers,mp_context=multiprocessing.get_context('fork'))
+        fitted=executor.map(_fit_pair,jobs,chunksize=32)
+    else:fitted=map(_fit_pair,jobs)
+    try:
+        previous=None
+        for pair in fitted:
+            i,j=pair['member'],pair['canonical'];errors[i,j]=pair['error'];veto[i,j]=not pair['reasons'];parameters[i,j]=pair['parameters'];pairs.append(pair)
+            if i!=previous and i%25==0:print(f'FONT04 fitted {i}/{n}',file=sys.stderr,flush=True)
+            previous=i
+    finally:
+        if executor is not None:executor.shutdown()
     # Noise floor uses non-target source impressions, not current self outlines.
     # Nearest structurally compatible independent impressions; LOO per member.
     noise=[];noise_support=[]
     for i in range(n):
         peers=[]
-        for j in np.argsort(errors[i]):
-            j=int(j)
+        indices=label_indices[rows[i].get('character','e')]
+        for local_j in np.argsort(errors[i,indices]):
+            j=indices[int(local_j)]
             if not veto[i,j] or rows[i]['shape_key']==rows[j]['shape_key']:continue
             p,aligned=register(fields[i],fields[j]);reasons,_=hard_checks(fields[i],aligned)
             if not reasons:peers.append(mse(fields[i],aligned))
@@ -282,16 +329,18 @@ def plan(data,directory):
         if not attempted:rejection.append(dict(member=i,reasons=['no_safe_owned_witness'],checks={}));continue
         best=min(attempted,key=lambda p:(len(p['reasons']),p['error']))
         best=dict(best);best['reasons']=list(best['reasons'])
-        if noise[i] is None:best['reasons'].append('insufficient_noise_witnesses')
+        if noise[i] is None:
+            best['reasons'].append('insufficient_noise_witnesses');best['checks']=dict(best['checks'],noise_witnesses=dict(value=noise_support[i]['witnesses'],limit=2))
         elif best['error']>noise[i]:
             best['reasons'].append('noise_floor');best['checks']=dict(best['checks'],noise_floor=dict(value=best['error'],limit=noise[i]))
-        if ownership is not None and i in ownership['exceptions']:best['reasons'].append('unexplained_owned_ink')
+        if ownership is not None and i in ownership['exceptions']:
+            best['reasons'].append('unexplained_owned_ink');best['checks']=dict(best['checks'],unexplained_owned_ink=dict(value=[r for r in ownership['components'] if r['member']==i and r['fires']],limit=ownership['policy']))
         if not best['reasons']:best['reasons']=['grouping_exception']
         rejection.append(best)
     unique=collections.Counter(p['reasons'][0] for p in pairs if len(p['reasons'])==1)
     result=dict(schema='font04-b1-plan-v1',scope='all 55 frequent classes' if os.environ.get('FONT04_SCOPE')=='B2' else 'all visible e only',selected=chosen,assignments=assignments,
         rejection_ledger=rejection,noise_floor=noise,noise_support=noise_support,frontier=frontier,unique_pair_rejections=dict(unique),
-        arm=arm,ownership_veto=ownership,self_checks=self_checks,total_pair_attempts=len(pairs),shortlist=24,shortlist_exclusions=sum(v*(v-1) for v in collections.Counter(r.get('character','e') for r in rows).values())-len(pairs),cross_label_forbidden=n*(n-1)-sum(v*(v-1) for v in collections.Counter(r.get('character','e') for r in rows).values()),runtime_seconds=time.monotonic()-started,
+        arm=arm,fit_workers=workers,ownership_veto=ownership,self_checks=self_checks,total_pair_attempts=len(pairs),shortlist=24,shortlist_exclusions=sum(v*(v-1) for v in collections.Counter(r.get('character','e') for r in rows).values())-len(pairs),cross_label_forbidden=n*(n-1)-sum(v*(v-1) for v in collections.Counter(r.get('character','e') for r in rows).values()),runtime_seconds=time.monotonic()-started,
         defects_status='pending blinded independent review',inference_inputs='source only; no pristine or face labels')
     (directory/'outlines.json').write_text(json.dumps(data['outlines']))
     (directory/'plan.json').write_text(json.dumps(result,indent=2));(directory/'pair-ledger.json').write_text(json.dumps(pairs))
