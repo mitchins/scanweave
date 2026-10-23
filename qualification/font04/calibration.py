@@ -7,6 +7,7 @@ Pristine evaluation stays separate. P2 is not a valid input.
 from pathlib import Path
 import collections
 import json
+import os
 import sys
 import numpy as np
 from scipy import ndimage
@@ -81,7 +82,7 @@ def main():
         subset=[r for r in positive if r['character']==char];byclass[char]=dict(n=len(subset),hard_only_rejection_rate=float(np.mean([bool(r['hard_reasons'])for r in subset])),sweep={str(t):dict(error_only_rejection_rate=float(np.mean([r['ratio']>t for r in subset])),family_wise_rejection_rate=float(np.mean([bool(r['hard_reasons'])or r['ratio']>t for r in subset])))for t in [.5,.75,1.,1.25,1.5,2.,3.]})
     e=[r for r in positive if r['character']=='e'];finite=[r['ratio']for r in e]
     result=dict(schema='font04-calibration-negatives-v1',known_design_healthy=dict(scope='All P1 development splits; D0/D1; known face/label diagnostic pairs, independent LOO noise samples; no pristine fitting',samples=len(positive),per_class=byclass,records=positive,e_error_scale_q85=float(np.quantile(finite,.85))if finite else None),curated_negatives=dict(retained_font02=known,style_pairs=style_negative,repair_identity_failure=repair,cross_label_controls=[dict(pair=p,caught=True,reason='cross-label candidates are never generated')for p in ['3/8','5/6','1/7','0/O']],grayscale_counter_bands='Checked at 0.35, 0.50 and 0.65 for every pair.',pending_review='Curated style cases require blinded materiality judgments; do not equate oracle face mismatch with a visible defect.'),known_material_harm_catch=dict(n=sum(r['prior_material']for r in known),caught=sum(r['prior_material']and r['caught']for r in known)),failure_classification='measurement'if any(v['hard_only_rejection_rate']>.15 for v in byclass.values())else'algorithm',next='Inspect unique structural rejections and blinded rejected samples; hard vetoes remain unchanged. Error-only false rejection objective and hard-veto rejection are reported separately.')
-    Path('qualification/font04/calibration-and-negatives.json').write_text(json.dumps(result,indent=2));print('e calibration',byclass.get('e'));print('harm catch',result['known_material_harm_catch'])
+    Path(os.environ.get('FONT04_CALIBRATION_OUTPUT','qualification/font04/calibration-and-negatives.json')).write_text(json.dumps(result,separators=(',',':')));print('e calibration',byclass.get('e'));print('harm catch',result['known_material_harm_catch'])
 
 
 if __name__=='__main__':main()

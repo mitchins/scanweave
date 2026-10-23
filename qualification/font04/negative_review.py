@@ -1,6 +1,7 @@
 """Retain every curated FONT-02 native negative and render P1 style probes."""
 from pathlib import Path
 import json
+import os
 import random
 import subprocess
 import sys
@@ -26,8 +27,8 @@ def save_panel(directory,metadata,identifier,source,current,candidate,details):
 
 
 def main():
-    directory=Path('qualification/font04/local/review-negatives');directory.mkdir(exist_ok=True);data=json.loads(Path('qualification/font04/calibration-and-negatives.json').read_text());metadata=[]
-    for split in ['validation','test']:
+    directory=Path(os.environ.get('FONT04_NEGATIVE_REVIEW_DIR','qualification/font04/local/review-negatives'));directory.mkdir(exist_ok=True);data=json.loads(Path(os.environ.get('FONT04_CALIBRATION_OUTPUT','qualification/font04/calibration-and-negatives.json')).read_text());metadata=[]
+    for split in ([] if os.environ.get('FONT04_SKIP_LEGACY_NEGATIVES') else ['validation','test']):
         root=Path('qualification/font02/local/hard-negatives');maps=np.load(root/f'{split}-rendered-coverage.npz');decisions=json.loads((root/f'{split}-source-decisions.json').read_text())['records'];by_pair={(r['target'],r['donor'],r['renderer']):r for r in decisions};pages={}
         for index,control in enumerate(data['curated_negatives']['retained_font02']):
             if control['split']!=split:continue
@@ -67,8 +68,8 @@ def main():
                     identifier=f'style-{split}-{page}-{k}-{engine}'
                     save_panel(directory,metadata,identifier,source[y:yy,x:xx],parts[0],parts[1],dict(renderer=engine,dpi=dpi,split=split,target=control['target'],donor=control['donor'],category=control['category']))
     (directory/'panels.json').write_text(json.dumps(metadata,indent=2));key_process([r['id']for r in metadata],directory/'sealed-key.json');subprocess.run([sys.executable,str(Path(__file__).with_name('review_key.py')),'render',str(directory)],check=True)
-    manifest=dict(status='blinded judgments pending',panels=len(metadata),all_74_retained_font02_pairs=True,style_pairs=len(data['curated_negatives']['style_pairs']),pdf=str(directory/'blinded-review.pdf'),sha256=sha(directory/'blinded-review.pdf'),repair_failure='Preserved original artifact and prohibition recorded in calibration-and-negatives.json; no new repair performed.',cross_label='Rejected structurally by label partition before grouping; no cross-label font substitution is generated.')
-    Path('qualification/font04/negative-review-manifest.json').write_text(json.dumps(manifest,indent=2));print(manifest)
+    manifest=dict(status='blinded judgments pending',panels=len(metadata),all_74_retained_font02_pairs=not bool(os.environ.get('FONT04_SKIP_LEGACY_NEGATIVES')),style_pairs=len(data['curated_negatives']['style_pairs']),pdf=str(directory/'blinded-review.pdf'),sha256=sha(directory/'blinded-review.pdf'),repair_failure='Preserved original artifact and prohibition recorded in calibration-and-negatives.json; no new repair performed.',cross_label='Rejected structurally by label partition before grouping; no cross-label font substitution is generated.')
+    Path(os.environ.get('FONT04_NEGATIVE_MANIFEST','qualification/font04/negative-review-manifest.json')).write_text(json.dumps(manifest,indent=2));print(manifest)
 
 
 if __name__=='__main__':main()

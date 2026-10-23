@@ -1,0 +1,231 @@
+{
+  "schema": "font04-local-artifacts-v1",
+  "inputs": {
+    "financial": {
+      "path": "qualification/pdf_packaging/groups/financial-input.pdf",
+      "sha256": "206f0f669d0196bb5e3b8da64acbffe1e53b2611377450a71b1440622291ac6f"
+    },
+    "P1": {
+      "train": {
+        "public_sha256": "f578f26255f5b15452af43515cb0afa80ff28a8210ac4bb46965dd75d50facec",
+        "labels_sha256": "94b315e4cedfac1b11ea3ffbaa1b88328bb1bb1acaa613568daa2921db05b970"
+      },
+      "validation": {
+        "public_sha256": "4edfc3d319883cc5ed0c4b602300ba08077398b1e8021b454bfd78f7ce6ff689",
+        "labels_sha256": "3b3d2761d1a41afca96ee24d07fe71569c0f45af0ccd4ed916b10f7bf5a4b107"
+      },
+      "test": {
+        "public_sha256": "d9e54b5c9f946e331250805ce5ee8327c4d000d986822ba46071c1798457e3b8",
+        "labels_sha256": "0516231730ad54c368974d32d4efeae652017b7b129767e4ce640ed0d35b8c6b"
+      }
+    }
+  },
+  "artifacts": [
+    {
+      "path": "qualification/font04/local/financial-main.pdf",
+      "bytes": 2849237,
+      "sha256": "74c31136d00a18dbf05fba2d7fba59c85cc201a57ae65d77999a025a692fab0f"
+    },
+    {
+      "path": "qualification/font04/local/financial-default.pdf",
+      "bytes": 2849237,
+      "sha256": "74c31136d00a18dbf05fba2d7fba59c85cc201a57ae65d77999a025a692fab0f"
+    },
+    {
+      "path": "qualification/font04/local/financial-experimental-v2.pdf",
+      "bytes": 2849062,
+      "sha256": "1020b7dd78e69afbf3659d14cb11169426c315c588bcd5792fe2dfe03cbbfca4"
+    },
+    {
+      "path": "qualification/font04/local/financial-experimental-repeat.pdf",
+      "bytes": 2849062,
+      "sha256": "1020b7dd78e69afbf3659d14cb11169426c315c588bcd5792fe2dfe03cbbfca4"
+    },
+    {
+      "path": "qualification/font04/local/financial-round1.pdf",
+      "bytes": 2850912,
+      "sha256": "f60bd4064388845ed438434ec293950a36e162cc406e72b1d493d437abe1acd5"
+    },
+    {
+      "path": "qualification/font04/local/frontier/frontier.png",
+      "bytes": 199698,
+      "sha256": "13ccbd132ebeb85e611dd98ad2d339da40c5c3045bc54117746b59d20e57e17c"
+    },
+    {
+      "path": "qualification/font04/local/frontier/frontier.svg",
+      "bytes": 96099,
+      "sha256": "2e9865f0802a196629373e5086949c12b36e2ae8d3ff5bcd92273ff0355b505f"
+    },
+    {
+      "path": "qualification/font04/local/review/blinded-review.pdf",
+      "bytes": 13145918,
+      "sha256": "f5da49ac8d035b05a277d4348b2c7352c719c9159d57e8588702c9b688949132"
+    },
+    {
+      "path": "qualification/font04/local/review-A/blinded-review.pdf",
+      "bytes": 4125492,
+      "sha256": "cb7cb870d46ba84a1150212df08c2e77e02eb0755ab5e856b0b66530e5b191d3"
+    },
+    {
+      "path": "qualification/font04/local/review-negatives/blinded-review.pdf",
+      "bytes": 7064360,
+      "sha256": "b17c40740a0885e7c6f1dfe7b0afb7ff5af15fcd4b75b264c8a366c31e2b1984"
+    },
+    {
+      "path": "qualification/font04/local/review-negatives-extension/blinded-review.pdf",
+      "bytes": 3348730,
+      "sha256": "067b4c2d1f6100b7fcf2796994f12e2bc526340720e13547a1ae351245c78131"
+    },
+    {
+      "path": "qualification/font04/local/checkpoint-B1-full.json",
+      "bytes": 687523,
+      "sha256": "0e6f698515e25cbcf8781053794e7a0ec3e01ee269eda0643dd8260777b092cd"
+    },
+    {
+      "path": "qualification/font04/local/tests-final.log",
+      "bytes": 8536,
+      "sha256": "2da028cf4444b38a019a18215d98929002d2c23aeff0a80c0a8b1e6c09f091f9"
+    },
+    {
+      "path": "qualification/font04/local/causal/train/source.json",
+      "bytes": 12591782,
+      "sha256": "5925acec55036258bacc63c2d9db6cfba8585904bb09cb9d5c089bd5c2682f07"
+    },
+    {
+      "path": "qualification/font04/local/causal/train/decisions.json",
+      "bytes": 1815559,
+      "sha256": "2d44319c3cdf0a38564a9cc1b4dbb3d2a7d836f04318d4839315e6b6877e4d56"
+    },
+    {
+      "path": "qualification/font04/local/causal/train/evaluated.json",
+      "bytes": 6442334,
+      "sha256": "81dda1a25843bfae238d8dfe68f80cec0808647bb6ff230adf58e28285c82a07"
+    },
+    {
+      "path": "qualification/font04/local/causal/train/floor-control-evaluated.json",
+      "bytes": 542993,
+      "sha256": "f50923b868398363002ea93c22b4b407782237950dfd85bc5d97f701e487a61b"
+    },
+    {
+      "path": "qualification/font04/local/causal/validation/source.json",
+      "bytes": 9321571,
+      "sha256": "06e97570702de176ac32145b13900df12133f4c803e63db6481618d82371b575"
+    },
+    {
+      "path": "qualification/font04/local/causal/validation/decisions.json",
+      "bytes": 1569670,
+      "sha256": "b53e5bf531ac7012b274a6fd0e03927020452e4a9064060ad61b0e8c8bb39b7d"
+    },
+    {
+      "path": "qualification/font04/local/causal/validation/evaluated.json",
+      "bytes": 5573476,
+      "sha256": "30a3449bf0a1ce33a89b488287d011d0f5b7b41c66ef3b357949b7ae4e02e833"
+    },
+    {
+      "path": "qualification/font04/local/causal/validation/floor-control-evaluated.json",
+      "bytes": 469567,
+      "sha256": "240deaea2cf7e2d54362a9cfee3312666b71066b7f99d10bf2d03fc907b007f7"
+    },
+    {
+      "path": "qualification/font04/local/causal/test/source.json",
+      "bytes": 11022116,
+      "sha256": "8b0e315c1a59f81ac48ae7330f60bee55680852abe3b51e03cd8fb6b049e10dd"
+    },
+    {
+      "path": "qualification/font04/local/causal/test/decisions.json",
+      "bytes": 1808712,
+      "sha256": "ea3a871533f409c392b29ac7ef672a27398f15368d01f06e69a8fd407a7e69e0"
+    },
+    {
+      "path": "qualification/font04/local/causal/test/evaluated.json",
+      "bytes": 6412775,
+      "sha256": "f65788d65556ab6f639222eb28c44936a53f73ce155f219eccc7684262bf9237"
+    },
+    {
+      "path": "qualification/font04/local/causal/test/floor-control-evaluated.json",
+      "bytes": 540499,
+      "sha256": "6087cff983825a026ad051659e7dafb7a31bb747defcea76e7531c9d288e8a58"
+    },
+    {
+      "path": "qualification/font04/local/causal/financial/source.json",
+      "bytes": 6426755,
+      "sha256": "2a88e3120a2bb9e06a01a7fc6d6ba9bc54ee05bfaaced968ab6d20e14389c6aa"
+    },
+    {
+      "path": "qualification/font04/local/causal/financial/decisions.json",
+      "bytes": 982787,
+      "sha256": "5b27e0439eb77db0c10b5fe9b3886b0cf914d497efdbc00fb3dea602e6bd7d2a"
+    },
+    {
+      "path": "qualification/font04/local/causal/financial/evaluated.json",
+      "bytes": 2137034,
+      "sha256": "58282eceebef1935bcd33e1b529e2855b73902903e866c09b9b41739678b9340"
+    },
+    {
+      "path": "qualification/font04/local/causal/financial/floor-control-evaluated.json",
+      "bytes": 189464,
+      "sha256": "2d246d5c7aef6a31932f3e572f17a19c0c73462331eada23e45fb41a82de9c1a"
+    },
+    {
+      "path": "qualification/font04/local/causal-extension/train/source.json",
+      "bytes": 10239817,
+      "sha256": "c2220b425cebab12f91a41bdc9f728086716ac70493eb7be5f8661ad9c3391b3"
+    },
+    {
+      "path": "qualification/font04/local/causal-extension/train/decisions.json",
+      "bytes": 1360861,
+      "sha256": "c5905737b93af71944508c4d086bce9769359807efc48afacd42d1d997ebd28d"
+    },
+    {
+      "path": "qualification/font04/local/causal-extension/train/evaluated.json",
+      "bytes": 4845230,
+      "sha256": "b41efae5da1c25925e008c236db9790c65f6c971889f73b9b599e754906e0db0"
+    },
+    {
+      "path": "qualification/font04/local/causal-extension/train/floor-control-evaluated.json",
+      "bytes": 408021,
+      "sha256": "621447661112d6d9ae4aeb28898309cd47dff3962ae2e1a9333c576ed86aa288"
+    },
+    {
+      "path": "qualification/font04/local/causal-extension/validation/source.json",
+      "bytes": 8128690,
+      "sha256": "96c5b3aa1ee95f9ace62da27c7f9232be42679c38353e4cdc7b77b72521a5ec2"
+    },
+    {
+      "path": "qualification/font04/local/causal-extension/validation/decisions.json",
+      "bytes": 1189950,
+      "sha256": "e1cf7573844c19e4c99e6bba8701ffd462f8a2b0541034b1749056c65451c55c"
+    },
+    {
+      "path": "qualification/font04/local/causal-extension/validation/evaluated.json",
+      "bytes": 4240363,
+      "sha256": "7cb917dc3610079e355672bdeb7b14591e6e99f0a7b1536c8e1841ed5a5beaf3"
+    },
+    {
+      "path": "qualification/font04/local/causal-extension/validation/floor-control-evaluated.json",
+      "bytes": 357047,
+      "sha256": "1df811c9f44daa7bf5dc34cba60193826c114711668a0c85b92e452c149eeb71"
+    },
+    {
+      "path": "qualification/font04/local/causal-extension/test/source.json",
+      "bytes": 9522294,
+      "sha256": "437598790251ae25760ded154934f88f5e0f47293c66fc1097134b1b61961a46"
+    },
+    {
+      "path": "qualification/font04/local/causal-extension/test/decisions.json",
+      "bytes": 1364193,
+      "sha256": "3443817ee4247bc2aab8ed41cb6a234202584bfadc6f2dda51dd582e3ce9c601"
+    },
+    {
+      "path": "qualification/font04/local/causal-extension/test/evaluated.json",
+      "bytes": 4857067,
+      "sha256": "76e24541fdd76f71733a13f59adf2d51e6fcf155d8692eaeefa3047effbae376"
+    },
+    {
+      "path": "qualification/font04/local/causal-extension/test/floor-control-evaluated.json",
+      "bytes": 409076,
+      "sha256": "3ccc6094086795c1d16852b232e098d68cf244dbae5f856af4cdbd077574ec07"
+    }
+  ],
+  "sealed_review_keys": "Local only, never hashed, read or revealed by this receipt. Reveal only after every judgment is saved."
+}

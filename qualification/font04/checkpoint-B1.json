@@ -1,0 +1,970 @@
+{
+  "schema": "font04-checkpoint-b1-v1",
+  "population": "P3 financial, 13 pages, every visible e",
+  "baseline_commit": "c10e3dff93ca12ac410c0f6626a4ef74ce34e0c1",
+  "pdfs": {
+    "default": "qualification/font04/local/financial-default.pdf",
+    "experimental": "qualification/font04/local/financial-experimental-v2.pdf"
+  },
+  "scorecard": {
+    "default": {
+      "complete_pdf_bytes": 2849237,
+      "sha256": "74c31136d00a18dbf05fba2d7fba59c85cc201a57ae65d77999a025a692fab0f",
+      "visible_draws": 3717,
+      "visible_designs": 2236,
+      "e_draws": 291,
+      "e_designs": 155,
+      "e_draws_per_design": 1.8774193548387097,
+      "required_slots": 2238,
+      "encoded_font_bytes": 727259,
+      "decoded_font_bytes": 1303200,
+      "outline_points": 449268,
+      "validation": {
+        "qpdf": {
+          "returncode": 0,
+          "output": "checking qualification/font04/local/financial-default.pdf\nPDF Version: 1.7\nFile is not encrypted\nFile is not linearized\nNo syntax or stream encoding errors found; the file may still contain\nerrors that qpdf cannot detect\n"
+        },
+        "ots": {
+          "returncode": 0,
+          "output": "File sanitized successfully!\n"
+        }
+      }
+    },
+    "experimental": {
+      "complete_pdf_bytes": 2849062,
+      "sha256": "1020b7dd78e69afbf3659d14cb11169426c315c588bcd5792fe2dfe03cbbfca4",
+      "visible_draws": 3717,
+      "visible_designs": 2229,
+      "e_draws": 291,
+      "e_designs": 148,
+      "e_draws_per_design": 1.9662162162162162,
+      "required_slots": 2231,
+      "encoded_font_bytes": 725422,
+      "decoded_font_bytes": 1299032,
+      "outline_points": 447873,
+      "validation": {
+        "qpdf": {
+          "returncode": 0,
+          "output": "checking qualification/font04/local/financial-experimental-v2.pdf\nPDF Version: 1.7\nFile is not encrypted\nFile is not linearized\nNo syntax or stream encoding errors found; the file may still contain\nerrors that qpdf cannot detect\n"
+        },
+        "ots": {
+          "returncode": 0,
+          "output": "File sanitized successfully!\n"
+        }
+      }
+    }
+  },
+  "program_accounting": {
+    "added": 29,
+    "retired": 36,
+    "net": -7,
+    "method": "multiset of compiled glyf programs, all required font slots, checked against all visible and invisible users",
+    "added_programs": {
+      "9824751d078d1fd4f26f8cc4c368034d1a640692651bb70d900e14583eb6fdf3": 1,
+      "d78a364fd5e4453a51c86826f646a3a37f18688d3df723fbf849229bf60214e5": 1,
+      "57a3bab62ad3c43d4777d75a35df8db301d0c63c3942471e72a7da637a974bb0": 1,
+      "fa661121b34ffce98570c319b15ceb93dc44d99843c34bea58447627b18b997e": 1,
+      "0d3451e961e48acfe031a3da5bc3587dc21986ebc78f6f660c12bcf9d88a58b5": 1,
+      "f07780b2313158dbcc985d3fbd7b3aa521756fa92e295321f7ac9c49975e5dba": 1,
+      "869641662af38cb217df7aa1bc405f20146282705e94892746e004491bba4549": 1,
+      "61d63ea3b848a08b13a7ab070c073ad3a64b8b07a13c0be76d79b6952aeebe2c": 1,
+      "00b8e4ac5932f6b913dfc7dd230505057caf61cecd68d730346ba8776c5f8254": 1,
+      "32f2e8072426e049c18ef9edbf2c29967c5913e04791b3adc4b275f5f62437a6": 1,
+      "1c59f9f5dee380fc71bd37e1f99e19c989f426e8dd75c75151852888bed655cd": 1,
+      "cfe2212ea0295ad72f8fc2c913f8f41cda83937c6ff2d134778ae6353f530cd0": 1,
+      "89eb99bb31739b2ac9f4e3bd89a1190541c800a68ef32e1a81b64a68edde6c77": 1,
+      "a5bd1ed904abd1c847fdb59d3283db1ada18e24241ad2f1686fcda5c909b7fb8": 1,
+      "45b962124236f845534fa7b42e46ddaa02c4e529b8e017cf41f5006b1d202cba": 1,
+      "d6330b27594e709c424c4ed28b8345b76fd3025f6a6b20997afb6cb70ff26c5e": 1,
+      "f8b25f11c3911934cb8db9a26e750e637765455b29238df65be8bc51016e6297": 1,
+      "6f43a939e6f0c7a04baa7df9b224522c17f77bc0555e86d80866de9f55326c7f": 1,
+      "68f6c712827ee584ca2551fb8b09dc832413ea4e3c384e567791d21cce009b26": 1,
+      "6383fbee4833e26f796eff96353adb97b1d7b51aa1480f2f3ab9243842fad28c": 1,
+      "cb21f5054cc57766ba5b859ccb36bad5e5c4516421a7ea611ac884167a0f37b7": 1,
+      "e4c4d28a19c3a6572040a77e2a3dcf769f2762755e8f414bf692588e05990a74": 1,
+      "4ff2e898b2a1b44edbbab5c7265228d67f1cf9aee8f532362dd5f7da7047ccdf": 1,
+      "2ab27483a7731c0147629e2fc5654555874c63df74265c151ba804c71f3fb802": 1,
+      "0b6fd2149c70d43f55915f538e93bdbe141b284df4ca0334c29b314c70b72c26": 1,
+      "a2df822a22a24585b9e4c8903d595c04e00bd0beed1a896abe843451604713d6": 1,
+      "9182602a9ee996761a1b1bbd4c86cfda4d0fc0ae58ed9588cfe2062ab9463d2b": 1,
+      "fffbddf7e7b49df4b9ec5866f4598548e96ca031facf366b580a1145f43b1fc2": 1,
+      "d050c7a900c30da96a222e332443dbd90dbcd5391e82d2c88397bfbd29ddce08": 1
+    },
+    "retired_programs": {
+      "dd7746bbcd1de97800ba7ade011345ca39de2ee2386fe738d7a5b7c28b70558b": 1,
+      "9cbadbd0d73b46d260a1232e72de5f819c44c1a54c5b2f500d086204ead28684": 1,
+      "4a514ba354e906849361f15d48c00503529b9cae197f4616f35911f4393233e2": 1,
+      "89c4a6be503b1445ff3368b840009feeac5bff1c220194778b9891c898227d75": 1,
+      "cb6c692dfc69316ab953e00515406ad34e899d08a2196101c55402ac7eab6840": 1,
+      "269b452de191519105ac601fc4250fe93a97e1b9126b7da6c7d54c829ce84df9": 1,
+      "31d0a4a9c0d519dd12079d3a6ccbfab68a8ac8dcc468c1949e5898d137e46744": 1,
+      "db6812d575b0edb5309ce015f483408cb46038a5f838376d8341e19778b196c5": 1,
+      "df36f29aea06317d003670c0819929e7863805fbabd49d536873e665ec794ab0": 1,
+      "192b436558d0f0956518833d357741a692424f7a40e0a009a1a8a9ee9ee463b6": 1,
+      "44ab681a7a6a561092c53fb36fb79efe71570dcddac29f0dbdffb2b2d860f1b1": 1,
+      "c922a06b0e18180478391ebf35cfb1b30d4fad1efa409b86fcdc3e64e51e871b": 1,
+      "be28284d0a82b580365f7eee37ad278ac27ef89a0231d0d3d23d9dd8d1934ce3": 1,
+      "514b1af30997ced5b3435e4882be496129e12e9fb69ee9d9835a78c2eab6e49f": 1,
+      "8fff5b21b1bcd384ddc710cc4b2ebeacae0fd95d29c6de3c9d0f32be7c5aa78c": 1,
+      "5e7c0c1e1fdde411ef029a8fe10f00fbcbd3910f9476a568195c272bbbec4a45": 1,
+      "06481537a44df09c1a24780b994d58626d162b1c6f0599af22c99bf25e6a9a20": 1,
+      "5485aafc939ad1eca91b312c251ed8db39678c20b52341d57b2d2e392352f8d5": 1,
+      "584c5438e7bf170052f963676b29fcf60e613de75b2007a2c27cb401912d1deb": 1,
+      "544d08797fde066463f9fd7a31de20dbb2c94f0ad389c4a856ce54704c482940": 1,
+      "f09b81e93c0de7f80ceee9aca8b534859b05ebb40e7aad53a3185cbbc3f277a4": 1,
+      "a901327b2cb6f7f0f1517ce5010a623174075905d0855194ec4b74528e9cb371": 1,
+      "4678bd7e92f90b92977190096dded0717876e56ec6b303b1cf2b84151829d4f7": 1,
+      "6107faed84e7c3ea74152521baf51f9f94236cc58e737fa9da83665aa3ce471d": 1,
+      "20975fc77f7476aa4d89bed58fe4a78feaf975516fe5b2457485788920d40c3d": 1,
+      "39e39263590351909fcf9b0313ef5293363c913c401d1768ec470a09b882cf32": 1,
+      "560bc87cd017d8f24f63a5505f90c9bee80f70edfb89656b6ae1bfcef679bca5": 1,
+      "29783b5041322b50eba5dfdd4140b321822fcadff7a2efe8390dacaa28441a05": 1,
+      "f7fb16cd89c3c4f0c88613c8ee954f4aa2e672ab90fcb63032e9e58b45c6aa0e": 1,
+      "17342b2c4f7b7658b76df33c808036e7df881ad6accc80c8946122ae20d369b1": 1,
+      "98f30eff2767a56d68009106704131acd2ae5972322a3dd834bf024db3aab9df": 1,
+      "97adef1ba7956a90dbe04cda74d9c3905581bf898c746ab8d0ccf2fbca5fd716": 1,
+      "c014a64c838f5de2304071a68a026140e27b69f530eb8fdd4b8b214bd1798567": 1,
+      "1751787cb1a4b32158523b7a3c1f6a0f9596c7327f0467c0a102a1d1777ce299": 1,
+      "07dff288fa40c1745e82247251bb1389cfd1db02ee5eea114ab6f8e96e1657b5": 1,
+      "e3a7a13bfa52754da7ec6a62724e90dc0538b48aa1d1cdb3c3ac31a95e211628": 1
+    }
+  },
+  "default_matches_current_main": true,
+  "source_metric_method": "Native isolated emitted e programs, original MediaBox and authoritative raster-to-page transform, black normalized ink against an ownership-normalized source layer rendered by the same engine; complete PDF renders separately checked and retained for review.",
+  "source_error": {
+    "pdfium": {
+      "baseline": {
+        "error": {
+          "mean": 0.06990844038356084,
+          "p95": 0.14707609911496078
+        },
+        "iou": {
+          "mean": 0.7997705927420664,
+          "p95": 0.9103607035881855
+        },
+        "contour_distance": {
+          "mean": 0.2734270279434929,
+          "p95": 0.5191054659089349
+        },
+        "rigid_contour_distance": {
+          "mean": 0.28938344409675787,
+          "p95": 0.6150718915198834
+        },
+        "area_bias": {
+          "mean": 0.02097445023140812,
+          "p95": 0.17152044622344248
+        }
+      },
+      "experimental": {
+        "error": {
+          "mean": 0.09274736611647139,
+          "p95": 0.1768436945830454
+        },
+        "iou": {
+          "mean": 0.7595395353241242,
+          "p95": 0.9037647253136176
+        },
+        "contour_distance": {
+          "mean": 0.34393952503540337,
+          "p95": 0.5660447751589348
+        },
+        "rigid_contour_distance": {
+          "mean": 0.3462904659673468,
+          "p95": 0.5920550855694999
+        },
+        "area_bias": {
+          "mean": 0.020033544789612317,
+          "p95": 0.12438237875354796
+        }
+      }
+    },
+    "poppler": {
+      "baseline": {
+        "error": {
+          "mean": 0.1553262047131855,
+          "p95": 0.21402458715114264
+        },
+        "iou": {
+          "mean": 0.6558665042184866,
+          "p95": 0.7248985799938499
+        },
+        "contour_distance": {
+          "mean": 0.4922172346894184,
+          "p95": 0.6727905621621696
+        },
+        "rigid_contour_distance": {
+          "mean": 0.47896532832026656,
+          "p95": 0.6526556785112101
+        },
+        "area_bias": {
+          "mean": -0.04828931132358806,
+          "p95": 0.1327283622337364
+        }
+      },
+      "experimental": {
+        "error": {
+          "mean": 0.13518124410529575,
+          "p95": 0.20000175802313433
+        },
+        "iou": {
+          "mean": 0.6773966338688018,
+          "p95": 0.7477078206592807
+        },
+        "contour_distance": {
+          "mean": 0.46167787830630924,
+          "p95": 0.6370489591678465
+        },
+        "rigid_contour_distance": {
+          "mean": 0.4566658384304282,
+          "p95": 0.6283422859131733
+        },
+        "area_bias": {
+          "mean": -0.049201412345551844,
+          "p95": 0.12756330600801402
+        }
+      }
+    }
+  },
+  "render_changes": [
+    {
+      "renderer": "pdfium",
+      "page": 0,
+      "changed_pixels": 3399
+    },
+    {
+      "renderer": "pdfium",
+      "page": 1,
+      "changed_pixels": 1228
+    },
+    {
+      "renderer": "pdfium",
+      "page": 2,
+      "changed_pixels": 1329
+    },
+    {
+      "renderer": "pdfium",
+      "page": 3,
+      "changed_pixels": 1899
+    },
+    {
+      "renderer": "pdfium",
+      "page": 4,
+      "changed_pixels": 442
+    },
+    {
+      "renderer": "pdfium",
+      "page": 5,
+      "changed_pixels": 664
+    },
+    {
+      "renderer": "pdfium",
+      "page": 6,
+      "changed_pixels": 922
+    },
+    {
+      "renderer": "pdfium",
+      "page": 7,
+      "changed_pixels": 1600
+    },
+    {
+      "renderer": "pdfium",
+      "page": 8,
+      "changed_pixels": 2508
+    },
+    {
+      "renderer": "pdfium",
+      "page": 9,
+      "changed_pixels": 4890
+    },
+    {
+      "renderer": "pdfium",
+      "page": 10,
+      "changed_pixels": 2078
+    },
+    {
+      "renderer": "pdfium",
+      "page": 11,
+      "changed_pixels": 2290
+    },
+    {
+      "renderer": "pdfium",
+      "page": 12,
+      "changed_pixels": 4990
+    },
+    {
+      "renderer": "poppler",
+      "page": 0,
+      "changed_pixels": 3362
+    },
+    {
+      "renderer": "poppler",
+      "page": 1,
+      "changed_pixels": 1330
+    },
+    {
+      "renderer": "poppler",
+      "page": 2,
+      "changed_pixels": 1414
+    },
+    {
+      "renderer": "poppler",
+      "page": 3,
+      "changed_pixels": 2092
+    },
+    {
+      "renderer": "poppler",
+      "page": 4,
+      "changed_pixels": 513
+    },
+    {
+      "renderer": "poppler",
+      "page": 5,
+      "changed_pixels": 704
+    },
+    {
+      "renderer": "poppler",
+      "page": 6,
+      "changed_pixels": 1053
+    },
+    {
+      "renderer": "poppler",
+      "page": 7,
+      "changed_pixels": 1684
+    },
+    {
+      "renderer": "poppler",
+      "page": 8,
+      "changed_pixels": 2893
+    },
+    {
+      "renderer": "poppler",
+      "page": 9,
+      "changed_pixels": 4992
+    },
+    {
+      "renderer": "poppler",
+      "page": 10,
+      "changed_pixels": 2190
+    },
+    {
+      "renderer": "poppler",
+      "page": 11,
+      "changed_pixels": 2534
+    },
+    {
+      "renderer": "poppler",
+      "page": 12,
+      "changed_pixels": 5131
+    }
+  ],
+  "text_search": {
+    "pdfium": {
+      "extraction_equal": true,
+      "search_equal": true
+    },
+    "poppler": {
+      "extraction_equal": true,
+      "search_equal": true,
+      "search_method": "Equal Poppler extraction implies equal literal query counts; CLI exposes no independent Find API."
+    }
+  },
+  "serialization_control": {
+    "default": {
+      "bytes": 2848780,
+      "sha256": "1f09a446071fc8a868bbba03c2f3a0179321745547eec8333d7c8db509e9a90e"
+    },
+    "experimental": {
+      "bytes": 2848584,
+      "sha256": "26dee459b05b711b05d4a4bb91d6152d7a4123dd2ccefbe6fb4bb26de485a1e8"
+    }
+  },
+  "runtime": {
+    "main": {
+      "User time (seconds)": 473.49,
+      "System time (seconds)": 3.96,
+      "Maximum resident set size (kbytes)": 1488760.0,
+      "wall_time": "7:45.10"
+    },
+    "default": {
+      "User time (seconds)": 477.57,
+      "System time (seconds)": 3.87,
+      "Maximum resident set size (kbytes)": 1459020.0,
+      "wall_time": "7:48.95"
+    },
+    "experimental": {
+      "User time (seconds)": 601.8,
+      "System time (seconds)": 4.35,
+      "Maximum resident set size (kbytes)": 1494436.0,
+      "wall_time": "9:46.70"
+    }
+  },
+  "runtime_limit": "Runs overlapped other discovery jobs; wall-time differences are not isolated performance evidence.",
+  "blinded_review": {
+    "status": "prepared; independent judgments pending",
+    "material_defects": null
+  },
+  "frontier": {
+    "path": "qualification/font04/reuse-fidelity-frontier.json",
+    "sha256": "f67d50a159c242cb24ff36073c177b5738c061e590a90e0763703eab54eb531d",
+    "points": 21,
+    "native_both_renderers": true
+  },
+  "unique_rejections": {
+    "stroke": 1700,
+    "counter_band_0.35": 15,
+    "counter_band_0.65": 469,
+    "centroid": 4,
+    "topology": 2,
+    "width": 1,
+    "area": 1
+  },
+  "plan_selected": {
+    "grouping": "star",
+    "error_scale": 1.0,
+    "remapped": 124,
+    "added": 29,
+    "retired_visible_candidates": 36,
+    "net_visible_candidates": -7,
+    "designs": 148,
+    "mean_source_error": 0.020916730080554682,
+    "material_defects": null,
+    "pristine_error": null
+  },
+  "per_member_artifact": {
+    "path": "qualification/font04/local/checkpoint-B1-full.json",
+    "sha256": "0e6f698515e25cbcf8781053794e7a0ec3e01ee269eda0643dd8260777b092cd"
+  },
+  "determinism": {
+    "byte_identical": true,
+    "repeat_pdf": "qualification/font04/local/financial-experimental-repeat.pdf",
+    "sha256": "1020b7dd78e69afbf3659d14cb11169426c315c588bcd5792fe2dfe03cbbfca4"
+  },
+  "unchanged_non_e": true,
+  "calibration": {
+    "path": "qualification/font04/calibration-and-negatives.json",
+    "sha256": "2a599c6441d7612dca39aa41db0bc7c932ceb324c9c9337de71d7cd08f97c6a9",
+    "e": {
+      "n": 193,
+      "hard_only_rejection_rate": 0.04145077720207254,
+      "sweep": {
+        "0.5": {
+          "error_only_rejection_rate": 0.6373056994818653,
+          "family_wise_rejection_rate": 0.6373056994818653
+        },
+        "0.75": {
+          "error_only_rejection_rate": 0.3626943005181347,
+          "family_wise_rejection_rate": 0.37823834196891193
+        },
+        "1.0": {
+          "error_only_rejection_rate": 0.13471502590673576,
+          "family_wise_rejection_rate": 0.16580310880829016
+        },
+        "1.25": {
+          "error_only_rejection_rate": 0.06217616580310881,
+          "family_wise_rejection_rate": 0.09844559585492228
+        },
+        "1.5": {
+          "error_only_rejection_rate": 0.031088082901554404,
+          "family_wise_rejection_rate": 0.06735751295336788
+        },
+        "2.0": {
+          "error_only_rejection_rate": 0.0051813471502590676,
+          "family_wise_rejection_rate": 0.04145077720207254
+        },
+        "3.0": {
+          "error_only_rejection_rate": 0.0,
+          "family_wise_rejection_rate": 0.04145077720207254
+        }
+      }
+    },
+    "known_material_harm_catch": {
+      "n": 3,
+      "caught": 3
+    }
+  },
+  "tails": {
+    "pdfium": [
+      {
+        "member": 141,
+        "id": "w000036s0003",
+        "page": 8,
+        "baseline": {
+          "error": 0.5797582495987003,
+          "iou": 0.25947050194003046,
+          "contour_distance": 1.412581577486467,
+          "rigid_contour_distance": 0.8989362466859329,
+          "area_bias": 0.165177834869305
+        },
+        "experimental": {
+          "error": 0.5797582495987003,
+          "iou": 0.25947050194003046,
+          "contour_distance": 1.412581577486467,
+          "rigid_contour_distance": 0.8989362466859329,
+          "area_bias": 0.165177834869305
+        }
+      },
+      {
+        "member": 143,
+        "id": "w000040s0003",
+        "page": 8,
+        "baseline": {
+          "error": 0.5431986547028698,
+          "iou": 0.310363965648186,
+          "contour_distance": 1.5540346029711078,
+          "rigid_contour_distance": 1.3081699358710612,
+          "area_bias": 0.06942842644277332
+        },
+        "experimental": {
+          "error": 0.5431986547028698,
+          "iou": 0.310363965648186,
+          "contour_distance": 1.5540346029711078,
+          "rigid_contour_distance": 1.3081699358710612,
+          "area_bias": 0.06942842644277332
+        }
+      },
+      {
+        "member": 142,
+        "id": "w000040s0001",
+        "page": 8,
+        "baseline": {
+          "error": 0.5355068450764148,
+          "iou": 0.3103948115604172,
+          "contour_distance": 1.4226977784299246,
+          "rigid_contour_distance": 1.1908928796526195,
+          "area_bias": 0.07381042474694927
+        },
+        "experimental": {
+          "error": 0.5355068450764148,
+          "iou": 0.3103948115604172,
+          "contour_distance": 1.4226977784299246,
+          "rigid_contour_distance": 1.1908928796526195,
+          "area_bias": 0.07381042474694927
+        }
+      },
+      {
+        "member": 124,
+        "id": "w000008s0003",
+        "page": 8,
+        "baseline": {
+          "error": 0.49392739461007373,
+          "iou": 0.37421703517318916,
+          "contour_distance": 1.00600661980316,
+          "rigid_contour_distance": 0.9931108938468939,
+          "area_bias": 0.37254140786749473
+        },
+        "experimental": {
+          "error": 0.49392739461007373,
+          "iou": 0.37421703517318916,
+          "contour_distance": 1.00600661980316,
+          "rigid_contour_distance": 0.9931108938468939,
+          "area_bias": 0.37254140786749473
+        }
+      },
+      {
+        "member": 138,
+        "id": "w000029s0003",
+        "page": 8,
+        "baseline": {
+          "error": 0.10501094575731645,
+          "iou": 0.7308427304811914,
+          "contour_distance": 0.4000318112683191,
+          "rigid_contour_distance": 0.3237636525875054,
+          "area_bias": 0.01273273273273276
+        },
+        "experimental": {
+          "error": 0.20831847697766184,
+          "iou": 0.5935912212067594,
+          "contour_distance": 0.6160397889302653,
+          "rigid_contour_distance": 0.36065573770491804,
+          "area_bias": -0.03463463463463462
+        }
+      },
+      {
+        "member": 247,
+        "id": "w000057s0002",
+        "page": 11,
+        "baseline": {
+          "error": 0.06588818708044837,
+          "iou": 0.7817728793830933,
+          "contour_distance": 0.2668275336550673,
+          "rigid_contour_distance": 0.2668275336550673,
+          "area_bias": -0.048115237488045755
+        },
+        "experimental": {
+          "error": 0.2009459816960827,
+          "iou": 0.6038635745266562,
+          "contour_distance": 0.5481548314598099,
+          "rigid_contour_distance": 0.3838422636194866,
+          "area_bias": -0.0034467644246093973
+        }
+      },
+      {
+        "member": 214,
+        "id": "w000118s0001",
+        "page": 10,
+        "baseline": {
+          "error": 0.08192012590989571,
+          "iou": 0.7774486383182035,
+          "contour_distance": 0.26136363636363635,
+          "rigid_contour_distance": 0.2844460227272727,
+          "area_bias": -0.04853910580336062
+        },
+        "experimental": {
+          "error": 0.19344313497093654,
+          "iou": 0.6235148514851486,
+          "contour_distance": 0.5738641484611164,
+          "rigid_contour_distance": 0.2429611071343355,
+          "area_bias": -0.05034008847545952
+        }
+      },
+      {
+        "member": 211,
+        "id": "w000113s0001",
+        "page": 10,
+        "baseline": {
+          "error": 0.08172571972819156,
+          "iou": 0.7845339016748047,
+          "contour_distance": 0.26631083015267176,
+          "rigid_contour_distance": 0.29720300572519087,
+          "area_bias": -0.05830333656375469
+        },
+        "experimental": {
+          "error": 0.1917419354101968,
+          "iou": 0.6333973966978247,
+          "contour_distance": 0.578484637663658,
+          "rigid_contour_distance": 0.2556350303540302,
+          "area_bias": -0.05854561816419788
+        }
+      },
+      {
+        "member": 106,
+        "id": "w000010s0003",
+        "page": 7,
+        "baseline": {
+          "error": 0.07884159297210545,
+          "iou": 0.7556611068154203,
+          "contour_distance": 0.24070247933884298,
+          "rigid_contour_distance": 0.24070247933884298,
+          "area_bias": 0.07773759205194129
+        },
+        "experimental": {
+          "error": 0.1827175136057193,
+          "iou": 0.6102354611918579,
+          "contour_distance": 0.49630249760494227,
+          "rigid_contour_distance": 0.4209593407517779,
+          "area_bias": 0.0010240097607739059
+        }
+      },
+      {
+        "member": 190,
+        "id": "w000052s0001",
+        "page": 10,
+        "baseline": {
+          "error": 0.13455394802485374,
+          "iou": 0.709745566692367,
+          "contour_distance": 0.5174600171707149,
+          "rigid_contour_distance": 0.5174600171707149,
+          "area_bias": -0.029518918054346286
+        },
+        "experimental": {
+          "error": 0.1825939060095151,
+          "iou": 0.6311907893764501,
+          "contour_distance": 0.5215972027258492,
+          "rigid_contour_distance": 0.3252307692307692,
+          "area_bias": -0.038564751461728566
+        }
+      }
+    ],
+    "poppler": [
+      {
+        "member": 141,
+        "id": "w000036s0003",
+        "page": 8,
+        "baseline": {
+          "error": 0.6042260715268561,
+          "iou": 0.1993160723009282,
+          "contour_distance": 1.5355401001739388,
+          "rigid_contour_distance": 0.8339575057891929,
+          "area_bias": -0.0240374157058952
+        },
+        "experimental": {
+          "error": 0.6042260715268561,
+          "iou": 0.1993160723009282,
+          "contour_distance": 1.5355401001739388,
+          "rigid_contour_distance": 0.8339575057891929,
+          "area_bias": -0.0240374157058952
+        }
+      },
+      {
+        "member": 143,
+        "id": "w000040s0003",
+        "page": 8,
+        "baseline": {
+          "error": 0.5665631284324507,
+          "iou": 0.2357477969121967,
+          "contour_distance": 1.5170253048852445,
+          "rigid_contour_distance": 1.4160858824779634,
+          "area_bias": -0.10804186115906812
+        },
+        "experimental": {
+          "error": 0.5665631284324507,
+          "iou": 0.2357477969121967,
+          "contour_distance": 1.5170253048852445,
+          "rigid_contour_distance": 1.4160858824779634,
+          "area_bias": -0.10804186115906812
+        }
+      },
+      {
+        "member": 142,
+        "id": "w000040s0001",
+        "page": 8,
+        "baseline": {
+          "error": 0.5543931532236662,
+          "iou": 0.2438776095434733,
+          "contour_distance": 1.4328376185392728,
+          "rigid_contour_distance": 1.4328376185392728,
+          "area_bias": -0.10620183806675537
+        },
+        "experimental": {
+          "error": 0.5543931532236662,
+          "iou": 0.2438776095434733,
+          "contour_distance": 1.4328376185392728,
+          "rigid_contour_distance": 1.4328376185392728,
+          "area_bias": -0.10620183806675537
+        }
+      },
+      {
+        "member": 124,
+        "id": "w000008s0003",
+        "page": 8,
+        "baseline": {
+          "error": 0.4958015146641951,
+          "iou": 0.3330084837045168,
+          "contour_distance": 1.1154323246029674,
+          "rigid_contour_distance": 0.8152385418972483,
+          "area_bias": 0.2267290424292276
+        },
+        "experimental": {
+          "error": 0.4958015146641951,
+          "iou": 0.3330084837045168,
+          "contour_distance": 1.1154323246029674,
+          "rigid_contour_distance": 0.8152385418972483,
+          "area_bias": 0.2267290424292276
+        }
+      },
+      {
+        "member": 244,
+        "id": "w000054s0001",
+        "page": 11,
+        "baseline": {
+          "error": 0.21988649661578963,
+          "iou": 0.5610189858207161,
+          "contour_distance": 0.6098975356141484,
+          "rigid_contour_distance": 0.4412863886703383,
+          "area_bias": -0.04563416444346386
+        },
+        "experimental": {
+          "error": 0.21988649661578963,
+          "iou": 0.5610189858207161,
+          "contour_distance": 0.6098975356141484,
+          "rigid_contour_distance": 0.4412863886703383,
+          "area_bias": -0.04563416444346386
+        }
+      },
+      {
+        "member": 81,
+        "id": "w000022s0003",
+        "page": 4,
+        "baseline": {
+          "error": 0.21856284125350742,
+          "iou": 0.5847720103240608,
+          "contour_distance": 0.6704228333343858,
+          "rigid_contour_distance": 0.39931044980115116,
+          "area_bias": -0.013551888996728904
+        },
+        "experimental": {
+          "error": 0.21856284125350742,
+          "iou": 0.5847720103240608,
+          "contour_distance": 0.6704228333343858,
+          "rigid_contour_distance": 0.39931044980115116,
+          "area_bias": -0.013551888996728904
+        }
+      },
+      {
+        "member": 38,
+        "id": "w000128s0005",
+        "page": 0,
+        "baseline": {
+          "error": 0.21459861501195757,
+          "iou": 0.6108511813083026,
+          "contour_distance": 0.7604827293058016,
+          "rigid_contour_distance": 0.7604827293058016,
+          "area_bias": 0.014647088754815579
+        },
+        "experimental": {
+          "error": 0.21459861501195757,
+          "iou": 0.6108511813083026,
+          "contour_distance": 0.7604827293058016,
+          "rigid_contour_distance": 0.7604827293058016,
+          "area_bias": 0.014647088754815579
+        }
+      },
+      {
+        "member": 120,
+        "id": "w000065s0001",
+        "page": 7,
+        "baseline": {
+          "error": 0.21293082690767776,
+          "iou": 0.5902531624304937,
+          "contour_distance": 0.510191444465875,
+          "rigid_contour_distance": 0.6059043875299236,
+          "area_bias": -0.13732512150488974
+        },
+        "experimental": {
+          "error": 0.21293082690767776,
+          "iou": 0.5902531624304937,
+          "contour_distance": 0.510191444465875,
+          "rigid_contour_distance": 0.6059043875299236,
+          "area_bias": -0.13732512150488974
+        }
+      },
+      {
+        "member": 239,
+        "id": "w000043s0003",
+        "page": 11,
+        "baseline": {
+          "error": 0.21053356844487628,
+          "iou": 0.5754010356458535,
+          "contour_distance": 0.610846249594438,
+          "rigid_contour_distance": 0.5073313782991202,
+          "area_bias": -0.07632067445278067
+        },
+        "experimental": {
+          "error": 0.21053356844487628,
+          "iou": 0.5754010356458535,
+          "contour_distance": 0.610846249594438,
+          "rigid_contour_distance": 0.5073313782991202,
+          "area_bias": -0.07632067445278067
+        }
+      },
+      {
+        "member": 250,
+        "id": "w000066s0002",
+        "page": 11,
+        "baseline": {
+          "error": 0.2103705955913003,
+          "iou": 0.5896790329303877,
+          "contour_distance": 0.6240786753925045,
+          "rigid_contour_distance": 0.5325401548369387,
+          "area_bias": -0.09375187443766865
+        },
+        "experimental": {
+          "error": 0.2103705955913003,
+          "iou": 0.5896790329303877,
+          "contour_distance": 0.6240786753925045,
+          "rigid_contour_distance": 0.5325401548369387,
+          "area_bias": -0.09375187443766865
+        }
+      }
+    ]
+  },
+  "relative_error": {
+    "pdfium": {
+      "mean_ratio": 1.3266976863966942,
+      "mean_change": 0.022838925732910548
+    },
+    "poppler": {
+      "mean_ratio": 0.8703054604013017,
+      "mean_change": -0.020144960607889756
+    }
+  },
+  "failure_classifications": [
+    {
+      "classification": "algorithm",
+      "finding": "Canonical self-admission was initially omitted from grouping estimates.",
+      "disposition": "Fixed; selected predicted 29 added/36 retired matches emitted complete PDF."
+    },
+    {
+      "classification": "algorithm",
+      "finding": "Two OCR line associations selected far-away baselines.",
+      "disposition": "Fixed by source-only local vertical support; all 291 observations now have source frames."
+    },
+    {
+      "classification": "measurement",
+      "finding": "Raw complete-page crop errors included gray paper/neighbour ink; nominal-DPI atlas transforms did not preserve real page geometry.",
+      "disposition": "Superseded by normalized isolated glyph/source layers with original MediaBox and authoritative 1813\u00d72655\u2192435\u00d7637pt transform."
+    },
+    {
+      "classification": "algorithm",
+      "finding": "Analytic source acceptance does not predict native renderer fidelity: selected sharing worsens PDFium source error while improving Poppler.",
+      "disposition": "Unresolved. Native closed-loop placement/calibration is the next B1 experiment; no qualification or broader falsification claim."
+    },
+    {
+      "classification": "data",
+      "finding": "Independent accepted/rejected/style material-defect and actual visual false-rejection judgments are pending.",
+      "disposition": "Sealed lossless sheets supplied; no zero-defect claim."
+    },
+    {
+      "classification": "data",
+      "finding": "88 rejected members have fewer than two structurally compatible independent noise witnesses.",
+      "disposition": "Remain on current outlines; support bounds recorded. No repair or veto relaxation."
+    }
+  ],
+  "review": {
+    "review-manifest.json": {
+      "panels": 324,
+      "random_rejected_members": 50,
+      "accepted_members": 92,
+      "both_renderers": true,
+      "source_and_randomized_UV": true,
+      "reading_size_and_400_percent": true,
+      "review_pdf": "qualification/font04/local/review/blinded-review.pdf",
+      "review_pdf_sha256": "f5da49ac8d035b05a277d4348b2c7352c719c9159d57e8588702c9b688949132",
+      "judgments": "qualification/font04/local/review/judgments-template.json",
+      "key": "qualification/font04/local/review/sealed-key.json",
+      "status": "awaiting independent judgments; key not revealed",
+      "encoding": "lossless RGB Flate, no JPEG"
+    },
+    "review-A-manifest.json": {
+      "status": "independent judgments pending; key sealed",
+      "members": 87,
+      "panels": 174,
+      "pdf": "qualification/font04/local/review-A/blinded-review.pdf",
+      "sha256": "cb7cb870d46ba84a1150212df08c2e77e02eb0755ab5e856b0b66530e5b191d3",
+      "both_renderers": true,
+      "encoding": "lossless RGB Flate",
+      "scale": "100% and 400% physical",
+      "comparison": "A0 emitted geometry versus F-self, ownership-normalized source at exact original page transform"
+    },
+    "negative-review-manifest.json": {
+      "status": "blinded judgments pending",
+      "panels": 260,
+      "all_74_retained_font02_pairs": true,
+      "style_pairs": 56,
+      "pdf": "qualification/font04/local/review-negatives/blinded-review.pdf",
+      "sha256": "b17c40740a0885e7c6f1dfe7b0afb7ff5af15fcd4b75b264c8a366c31e2b1984",
+      "repair_failure": "Preserved original artifact and prohibition recorded in calibration-and-negatives.json; no new repair performed.",
+      "cross_label": "Rejected structurally by label partition before grouping; no cross-label font substitution is generated.",
+      "encoding": "lossless RGB Flate, no JPEG"
+    },
+    "negative-review-extension-manifest.json": {
+      "status": "blinded judgments pending",
+      "panels": 112,
+      "all_74_retained_font02_pairs": false,
+      "style_pairs": 56,
+      "pdf": "qualification/font04/local/review-negatives-extension/blinded-review.pdf",
+      "sha256": "067b4c2d1f6100b7fcf2796994f12e2bc526340720e13547a1ae351245c78131",
+      "repair_failure": "Preserved original artifact and prohibition recorded in calibration-and-negatives.json; no new repair performed.",
+      "cross_label": "Rejected structurally by label partition before grouping; no cross-label font substitution is generated."
+    }
+  },
+  "scientific_decision": "Stop at B1 for independent review. Economy is demonstrated but small; fidelity is mixed and unqualified. B2 and P2 are not authorized or started.",
+  "candidate_search_scope": {
+    "evaluated_directed_pairs": 6984,
+    "shortlist_per_member": 24,
+    "untested_directed_pairs": 77406,
+    "star_ordering": "Support-first sparse star control; median ordering contains infinite missing comparisons. This is not a complete-matrix medoid search.",
+    "replacement_rationale": "Use eligible source-witness coverage to target economy directly; complete-link and cost-aware cover remain controls.",
+    "limitation": "Untested candidate pairs are not classified unsafe. Improve finite candidate ordering and native closed-loop placement before stronger opportunity claims."
+  }
+}

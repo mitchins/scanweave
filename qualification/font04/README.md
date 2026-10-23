@@ -30,3 +30,33 @@ Three grouping alternatives share one source-noise error family.
 
 Large artifacts live under ignored `local/`; compact results and hashes are
 committed. Independent blinded judgments remain distinct from automated metrics.
+
+## Checkpoint reproduction
+
+1. Build the CLI plus `font04_trace` and `font04_owned` examples. Run the normal
+   default and explicit experimental financial commands above; compare against
+   `financial-main.pdf` and the hashes in `manifest.json`. A complete experimental
+   repeat was measured byte-identical.
+2. `python -m qualification.font04.b1_audit <experimental.pdf>` performs native
+   CID/GID/program, source, text and validity measurement. `native_frontier` sweeps
+   the recorded sparse candidate matrix; its PDFs are glyph controls, not complete
+   document deliverables. `verify_checkpoint` checks the final complete outputs.
+3. Phase A freezes source inputs before `causal.py evaluate` opens P1 oracle data.
+   The retained FONT-03 eight-class cohort is under `local/causal`; the full-ownership
+   eight-class addition is under `local/causal-extension` (`run_extension.sh`).
+   `floor_control` adds the fresh native floor-on self trace without reselecting
+   cohorts. `causal_financial_native` supersedes nominal-DPI financial atlas
+   measurements with the original MediaBox and raster-to-page transform.
+4. `checkpoint_a`, `calibration`, `review_sheets`, `negative_review`, `review_a`
+   and `finalize` produce summaries and review artifacts. The two negative/style
+   populations and all cohort input hashes remain distinct. Raw input freezes,
+   trace requests and native control PDFs are retained locally.
+5. `review_key.py reveal <directory> <saved-judgments.json>` refuses to reveal
+   incomplete judgments. Do not open the sealed key before saving all judgments.
+
+The selected point is an unqualified discovery result. It saves seven net programs
+and 175 complete-PDF bytes, but source fidelity directions differ by renderer.
+The 24-candidate shortlist and sparse star ordering are explicit limitations;
+untested pairs are not rejections. No B2 or P2 generation entry point is present.
+The 15% error-only objective is met for `e`; independent visual rejection rates
+and material-defect counts are pending review. See `FONT_04_RESULTS.md`.

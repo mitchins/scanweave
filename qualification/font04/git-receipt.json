@@ -1,0 +1,38 @@
+{
+  "research_branch": "research/font04-document-fonts",
+  "contract_commit": "06f24b122e1cd1cd879880166b8240c7e75747ed",
+  "product_baseline": "c10e3dff93ca12ac410c0f6626a4ef74ce34e0c1",
+  "implementation_commits": [
+    "1ab7f832802a943f67ff12213c2182747d1bcd32",
+    "62d63e2f4710e6ce147f44e90d6f7eb38a369d8c"
+  ],
+  "scope_proposal": {
+    "branch": "research/research-scope-proposal",
+    "commit": "480a281e780d28827e9ee8bd950fd0fb71a41da1",
+    "pr": "https://github.com/mitchins/scanweave/pull/25",
+    "state": "draft, unmerged, documentation only"
+  },
+  "font03": {
+    "commit": "7ebc09ec7ec19d9c4ff260da621fcfbb021d909d",
+    "pr": "https://github.com/mitchins/scanweave/pull/24",
+    "decision": "Keep draft/unmerged pending independent acceptance and refreshed live Sonar."
+  },
+  "product_change_branch": null,
+  "merged_in_launch": [],
+  "B2_started": false,
+  "P2_generated_rendered_inspected": false,
+  "P2_preregistration_sha256": "a4f9ccd3a7e51d719946be80f7cc9a297de7ca22285e8755e5e26e415e7db466",
+  "tests": {
+    "passed": 84,
+    "groups": [
+      6,
+      6,
+      66,
+      6,
+      0
+    ],
+    "failed": 0,
+    "log": "qualification/font04/local/tests-final.log",
+    "sha256": "2da028cf4444b38a019a18215d98929002d2c23aeff0a80c0a8b1e6c09f091f9"
+  }
+}
