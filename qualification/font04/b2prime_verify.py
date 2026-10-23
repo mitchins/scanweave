@@ -6,7 +6,9 @@ from fontTools.ttLib import TTFont
 from qualification.font04.metrics import sha,inspect
 from qualification.font04.prime_verify import text,stats
 from qualification.font04.class_verify import raster_signature,actual_text_signature
-from qualification.font04.finalize_b2 import aggregate
+from qualification.font04.prime_metrics import headline
+
+def aggregate(records,metric,subset):return headline(records,'B2prime',metric,subset)
 BASE=Path('qualification/font04');ROOT=BASE/'local';DEFAULT=ROOT/'financial-default.pdf'
 
 def text_geometry(path):
@@ -26,6 +28,18 @@ def text_geometry(path):
                 elif name=='Tj':rows.append(dict(page=pi,mode=mode,cid=bytes(args[0]).hex(),matrix=tm,size=size,**font_info[key]))
     return rows
 
+def all_token_search(path):
+    import pypdfium2 as pdfium
+    doc=pdfium.PdfDocument(path);result=[]
+    for page in doc:
+        textpage=page.get_textpage();tokens=sorted(set(re.findall(r'\S+',textpage.get_text_range())));counts={}
+        for token in tokens:
+            query=textpage.search(token);n=0
+            while query.get_next() is not None:n+=1
+            query.close();counts[token]=n
+        result.append(counts);textpage.close();page.close()
+    doc.close();return result
+
 def validate(path):
     with pikepdf.open(path) as pdf:
         data=next(iter(pdf.pages[0].Resources.Font.values())).DescendantFonts[0].FontDescriptor.FontFile2.read_bytes()
@@ -41,13 +55,28 @@ def verify(path,transport=False):
         for oi,(a,b) in enumerate(zip(bypage[p],newpage[p])):
             if (p,oi) not in assigned:unchanged &= a['program']==b['program'] and a['matrix']==b['matrix']
     invisible=lambda x:[(d['page'],d['cid'],d['character'],d['program'],d['matrix']) for d in x['users'] if d['invisible']]
-    t0,s0=text(DEFAULT);t,s=text(path);pop={}
+    t0,s0=text(DEFAULT);t,s=text(path);tokens0=all_token_search(DEFAULT);tokens=all_token_search(path);pop={}
     for mode,flags in [('layout',['-layout']),('reading',[]),('raw',['-raw'])]:
         a=subprocess.check_output(['pdftotext',*flags,str(DEFAULT),'-']);b=subprocess.check_output(['pdftotext',*flags,str(path),'-']);tokens=set(re.findall(rb'\S+',a));pop[mode]=dict(extraction_equal=a==b,literal_search_equal=all(a.count(w)==b.count(w) for w in tokens),queries=len(tokens))
     validation=validate(path);metrics=json.loads((art/'class-metrics.json').read_text());classes={}
+    with pikepdf.open(path) as pdf:
+        data=next(iter(pdf.pages[0].Resources.Font.values())).DescendantFonts[0].FontDescriptor.FontFile2.read_bytes()
+    tt=TTFont(io.BytesIO(data));order=tt.getGlyphOrder()
+    def leaves(gid):
+        glyph=tt['glyf'][order[gid]]
+        if not glyph.isComposite():return {gid}
+        return set().union(*(leaves(tt.getGlyphID(c.glyphName)) for c in glyph.components))
+    attribution_path=art/'byte-attribution.json';attribution=json.loads(attribution_path.read_text()) if attribution_path.exists() else None
+    with pikepdf.open(DEFAULT) as pdf:
+        oldtt=TTFont(io.BytesIO(pdf.pages[0].Resources.Font.F1.DescendantFonts[0].FontDescriptor.FontFile2.read_bytes()))
+    oldorder=oldtt.getGlyphOrder();oldowners=collections.defaultdict(set)
+    for d in base['users']:oldowners[oldorder[d['gid']]].add(d['character'])
+    leaf_visible=set().union(*(leaves(d['gid']) for d in inv['draws']))
+    outline_economy=dict(before_visible_outlines=len({d['gid'] for d in base['draws']}),after_visible_leaf_outlines=len(leaf_visible),draws_per_leaf_outline=len(inv['draws'])/len(leaf_visible),visible_CID_to_GID_slots=len({d['gid'] for d in inv['draws']}),required_slots_including_stubs=sum(f['slots'] for f in inv['fonts'].values()),stub_slots=sum(tt['glyf'][name].isComposite() for name in order),outline_slots=sum(not tt['glyf'][name].isComposite() for name in order))
     for c in sorted({r['character'] for r in rows}):
-        a=[d for d in base['draws'] if d['character']==c];b=[d for d in inv['draws'] if d['character']==c];classes[c]=dict(draws=len(a),before_required_visible_programs=len({d['gid'] for d in a}),after_visible_stub_or_outline_slots=len({d['gid'] for d in b}),substituted=sum(x['character']==c for x in plan['assignments']))
-    result=dict(pdf=str(path),sha256=sha(path),default=stats(base),experimental=stats(inv),text_geometry_equal=text_geometry(DEFAULT)==text_geometry(path),actual_text_equal=actual_text_signature(DEFAULT)==actual_text_signature(path),pdfium_text_equal=t0==t,pdfium_search_equal=s0==s,poppler=pop,validation=validation,raster_equal=raster_signature(DEFAULT)==raster_signature(path),unsubstituted_programs_and_matrices_equal=bool(unchanged),invisible_users_equal=invisible(base)==invisible(inv),functional_veto_rejections=0,metrics={m:{ss:aggregate(metrics['records'],m,ss) for ss in ['all','substituted']} for m in ['analytic','direct','pdfium','poppler']},renderer_floors=metrics['renderer_vs_analytic_floors'],classes=classes,reviewer_pending=True)
+        a=[d for d in base['draws'] if d['character']==c];b=[d for d in inv['draws'] if d['character']==c];leafs=set().union(*(leaves(d['gid']) for d in b));required={d['gid'] for d in inv['users'] if d['character']==c};added=[r for r in attribution['added_programs'] if r['kind']=='canonical' and rows[int(r['program'].removeprefix('canonical'))]['character']==c] if attribution else [];retired=[r for r in attribution['retired_programs'] if oldowners[r['program']]=={c}] if attribution else []
+        classes[c]=dict(draws=len(a),before_required_visible_programs=len({d['gid'] for d in a}),after_visible_stub_or_outline_slots=len({d['gid'] for d in b}),visible_leaf_outlines=len(leafs),draws_per_leaf_outline=len(b)/len(leafs),required_slots=len(required),outline_points=sum(len(tt['glyf'][order[gid]].coordinates) if tt['glyf'][order[gid]].numberOfContours>0 else 0 for gid in set().union(*(leaves(gid) for gid in required))),decoded_glyf_bytes=sum(len(tt['glyf'][order[gid]].compile(tt['glyf'])) for gid in required|set().union(*(leaves(gid) for gid in required))),encoded_font_bytes=None,encoded_font_note='Shared compression; complete font bytes reported globally, no arbitrary per-class allocation.',added_outlines=len(added),retired_outlines=len(retired),net_retired_outlines=len(retired)-len(added),added_outline_glyf_bytes=sum(r['bytes'] for r in added),retired_outline_glyf_bytes=sum(r['bytes'] for r in retired),substituted=sum(x['character']==c for x in plan['assignments']))
+    result=dict(pdf=str(path),sha256=sha(path),default=stats(base),experimental=stats(inv),text_geometry_equal=text_geometry(DEFAULT)==text_geometry(path),actual_text_equal=actual_text_signature(DEFAULT)==actual_text_signature(path),pdfium_text_equal=t0==t,pdfium_search_equal=s0==s and tokens0==tokens,pdfium_all_token_queries=sum(len(p) for p in tokens0),pdfium_search_scope='Every non-whitespace token, including amounts, dates, punctuation and short labels; native PDFium Find counts.',poppler=pop,validation=validation,raster_equal=raster_signature(DEFAULT)==raster_signature(path),unsubstituted_programs_and_matrices_equal=bool(unchanged),invisible_users_equal=invisible(base)==invisible(inv),functional_veto_rejections=0,metrics={m:{ss:aggregate(metrics['records'],m,ss) for ss in ['all','substituted']} for m in ['analytic','direct','pdfium','poppler']},renderer_floors=metrics['renderer_vs_analytic_floors'],classes=classes,reviewer_pending=True,outline_economy=outline_economy)
     if transport:
         old=json.loads((ROOT/'financial-B2-P-initial.pdf.font04/class-metrics.json').read_text());deltas={}
         for m in ['analytic','direct','pdfium','poppler']:

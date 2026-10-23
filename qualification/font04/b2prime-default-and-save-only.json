@@ -1,0 +1,35 @@
+{
+  "default_sha256": "74c31136d00a18dbf05fba2d7fba59c85cc201a57ae65d77999a025a692fab0f",
+  "main_sha256": "74c31136d00a18dbf05fba2d7fba59c85cc201a57ae65d77999a025a692fab0f",
+  "default_byte_identical": true,
+  "default_validation": {
+    "qpdf": {
+      "returncode": 0,
+      "output": "checking qualification/font04/local/financial-B2prime-default.pdf\nPDF Version: 1.7\nFile is not encrypted\nFile is not linearized\nNo syntax or stream encoding errors found; the file may still contain\nerrors that qpdf cannot detect\n"
+    },
+    "ots": {
+      "returncode": 0,
+      "output": "File sanitized successfully!\n"
+    }
+  },
+  "save_only_validation": {
+    "qpdf": {
+      "returncode": 0,
+      "output": "checking qualification/font04/local/financial-B2prime-save-only.pdf\nPDF Version: 1.7\nFile is not encrypted\nFile is not linearized\nNo syntax or stream encoding errors found; the file may still contain\nerrors that qpdf cannot detect\n"
+    },
+    "ots": {
+      "returncode": 0,
+      "output": "File sanitized successfully!\n"
+    }
+  },
+  "save_only": {
+    "pdf": "qualification/font04/local/financial-B2prime-save-only.pdf",
+    "sha256": "1f09a446071fc8a868bbba03c2f3a0179321745547eec8333d7c8db509e9a90e",
+    "bytes": 2848780,
+    "text_geometry_equal": true,
+    "native_text_search_equal": true,
+    "raster_equal": true,
+    "actual_text_equal": true
+  },
+  "owned_rules_synthetic_regressions": true
+}

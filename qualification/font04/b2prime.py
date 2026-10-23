@@ -57,9 +57,9 @@ def frontier():
     for i,f in enumerate(fields):
         g=geometry(f);weight=(float(f.sum())/max(1.,float(((f>.5)^__import__('scipy').ndimage.binary_erosion(f>.5)).sum()))) if g else 0.
         bands.append(int(np.floor(np.log(max(weight,.1))/np.log(1.3))))
-    levels={}
-    for i,r in enumerate(rows):
-        key=(r['character'],bands[i]);values=[level for k,level in enumerate(plan['noise_floor']) if level is not None and (rows[k]['character'],bands[k])==key and rows[k]['shape_key']!=r['shape_key']];levels[i]=plan['noise_floor'][i] if plan['noise_floor'][i] is not None else (float(np.median(values)) if values else None)
+    support=json.loads((BASE/'b2prime-soft-support.json').read_text());assert support['no_missing_floors'] and support['source_snapshot_sha256']==sha(ART/'source.json')
+    assert [r['band'] for r in support['members']]==bands
+    levels={r['member']:r['floor'] for r in support['members']};assert all(v is not None and np.isfinite(v) for v in levels.values())
     excluded=set(hygiene['excluded']);pp=pairs+[dict(r,canonical=r['member'],parameters=next((a['parameters'] for a in plan['assignments'] if a['member']==r['member'] and a['canonical']==r['member']),None)) for r in plan['self_checks']]
     # Self fits are deterministic; regenerate only missing self fit parameters.
     from qualification.font04.geometry import register
@@ -84,16 +84,17 @@ def frontier():
                 if g['canonical'] not in exceptions and len(aa)>=2:survivors.extend(aa)
             variants=[(tag,survivors,False)]
             if method=='star' and scale==1.:
-                kept=survivors[:];users=collections.defaultdict(set)
-                for i,r in enumerate(rows):users[r['shape_key']].add(i)
+                kept=survivors[:];users=collections.defaultdict(set);held=set(json.loads((BASE/'b2-frontier.json').read_text())['original_programs_held_by_invisible_or_rare_users'])
+                for i,r in enumerate(rows):
+                    if r['shape_key'] not in held:users[r['shape_key']].add(i)
                 removed=[]
                 while kept:
                     by=collections.defaultdict(list)
                     for a in kept:by[a['canonical']].append(a['member'])
-                    allmembers={a['member'] for a in kept};credits=collections.Counter()
+                    allmembers={a['member'] for a in kept};member_group={a['member']:a['canonical'] for a in kept};credits=collections.Counter()
                     for key,u in users.items():
                         if u<=allmembers:
-                            c=collections.Counter(a['canonical'] for a in kept if a['member'] in u);credits[min(c,key=lambda j:(-c[j],j))]+=1
+                            c=collections.Counter(member_group[i] for i in u);credits[min(c,key=lambda j:(-c[j],j))]+=1
                     bad={j for j in by if credits[j]<1}
                     if not bad:break
                     removed.extend(sorted(bad));kept=[a for a in kept if a['canonical'] not in bad]
@@ -110,10 +111,17 @@ def frontier():
                     if i in exceptions:r['reasons'].append('unexplained_owned_ink')
                     if not r['reasons']:r['reasons']=['ranking_or_economy_exception']
                     rejections.append(r)
-                candidate_plan=dict(plan,assignments=aa,rejection_ledger=rejections,ownership_veto=dict(exceptions=sorted(exceptions-accepted),policy=owned['policy']),selected=dict(grouping=method,error_scale=scale,weight_bands=True,net_retirement_rule=net),soft_support='Witness count is diagnostic; unavailable LOO floor uses independent class/weight-band median. No inferred floor => abstain as inadequate data, not rejected witness count.',hygiene=str(BASE/'b2prime-canonical-hygiene.json'),weight_band=bands)
+                candidate_plan=dict(plan,assignments=aa,rejection_ledger=rejections,ownership_veto=dict(exceptions=sorted(exceptions-accepted),policy=owned['policy']),selected=dict(grouping=method,error_scale=scale,weight_bands=True,net_retirement_rule=net),soft_support=dict(path=str(BASE/'b2prime-soft-support.json'),sha256=sha(BASE/'b2prime-soft-support.json'),no_missing_floors=True,witness_count_gates=False),hygiene=str(BASE/'b2prime-canonical-hygiene.json'),weight_band=bands)
                 path=ROOT/f'financial-B2prime-{label}.pdf';art=prepare_art(path,candidate_plan);started=time.monotonic();account=emit(path,candidate_plan);account['wall_seconds']=time.monotonic()-started;(art/'byte-attribution.json').write_text(json.dumps(account,indent=2)+'\n');manifest.append(dict(label=label,pdf=str(path),sha256=sha(path),substituted=len(aa),ownership_control=owned['control_pdf'],net_rule=net));print(label,len(aa),account['bytes'],flush=True)
     (BASE/'b2prime-points.json').write_text(json.dumps(dict(points=manifest,soft_gate_change_after_transport_sha256=sha(BASE/'b2prime-transport-verification.json'),hygiene_before_soft=True),indent=2)+'\n')
 
+def transport():
+    path=ROOT/'financial-B2prime-transport.pdf';plan=json.loads((ART/'plan.json').read_text());art=prepare_art(path,plan);account=emit(path,plan);(art/'byte-attribution.json').write_text(json.dumps(account,indent=2)+'\n')
+    env=dict(os.environ,FONT04_METRIC_WORKERS='6',FONT04_CLASS_REFERENCE=str(CONTROL))
+    subprocess.run([sys.executable,'-m','qualification.font04.class_metrics',str(path)],env=env,check=True)
+    subprocess.run([sys.executable,'-m','qualification.font04.b2prime_verify',str(path),'--transport'],check=True)
+
 if __name__=='__main__':
-    if sys.argv[1]=='calibration':print(calibration())
+    if sys.argv[1]=='transport':transport()
+    elif sys.argv[1]=='calibration':print(calibration())
     elif sys.argv[1]=='frontier':frontier()
