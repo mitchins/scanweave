@@ -6,7 +6,7 @@ use std::process::ExitCode;
 
 fn usage() -> ! {
     eprintln!(
-        "scanweave input.pdf output.pdf [--dpi 300] [--lang eng] [--profile clearscan|faithful]\n\nscanweave build <input.png> --ocr <input.hocr> [--dpi N] [--mode reconstruct|auto] \
+        "scanweave input.pdf output.pdf [--dpi 300] [--lang eng] [--profile clearscan|faithful] [--glyph-sharing off|experimental]\n\nscanweave build <input.png> --ocr <input.hocr> [--dpi N] [--mode reconstruct|auto] \
          [--min-ink-iou F] [--profile faithful|clearscan]
          [--glyph-dictionary off|visual]
          --output <out.pdf> --report <out.json>\n\

@@ -36,7 +36,10 @@ def local_source(source, paper_rgb=(255,255,255)):
 def source_frame(row):
     s=row['source']; evidence=local_source(s,row['paper'])
     # Source line geometry only; fall back explicitly to the owned impression.
-    line=[u['bbox'] for u in row.get('line_units',[]) if u['text'] in 'ace' and u['bbox'][3]-u['bbox'][1]>=4]
+    own_center=(s['bbox'][1]+s['bbox'][3])/2
+    own_height=s['bbox'][3]-s['bbox'][1]
+    line=[u['bbox'] for u in row.get('line_units',[]) if u['text'] in 'ace' and u['bbox'][3]-u['bbox'][1]>=4
+          and (not row.get('geometric_line_filter',True) or abs((u['bbox'][1]+u['bbox'][3])/2-own_center)<=.65*max(own_height,u['bbox'][3]-u['bbox'][1]))]
     if not line: line=[s['bbox']]
     xh=float(np.median([b[3]-b[1] for b in line]));base=float(np.median([b[3] for b in line]))
     cx=(s['ocr_bbox'][0]+s['ocr_bbox'][2])/2
@@ -99,30 +102,44 @@ def hard_checks(a,b):
     return sorted(set(reasons)),values
 
 
-def choose(matrix,errors,scale,method):
+def choose(matrix,errors,scale,method,rows=None):
     valid=matrix & (errors<=scale)
+    admissible_self=np.diag(valid).copy()
+    valid[:,~admissible_self]=False
     np.fill_diagonal(valid,False)
     n=len(matrix);remaining=set(range(n));groups=[]
+    remapped=set()
     while remaining:
+        if not any(admissible_self[j] for j in remaining):break
         if method=='complete':
-            seed=min(remaining);members=[seed]
+            seed=min(j for j in remaining if admissible_self[j]);members=[seed]
             for i in sorted(remaining-{seed}):
                 if all(valid[i,j] and valid[j,i] for j in members):members.append(i)
-            canonical=min(members,key=lambda j:sum(errors[i,j] for i in members if i!=j))
+            canonical=min((j for j in members if admissible_self[j]),key=lambda j:sum(errors[i,j] for i in members if i!=j))
         else:
             # Greedy set cover: candidate chosen for maximum uncovered support.
             # Star control uses aggregate pair distance to choose the next center.
             candidates=[]
             for j in sorted(remaining):
+                if not admissible_self[j]:continue
                 members=[i for i in sorted(remaining) if valid[i,j]]
                 members=sorted(set(members+[j]))
                 priority=(-len(members),float(sum(errors[i,j] for i in members if i!=j)),j)
                 if method=='star':priority=(float(np.median(errors[j,[i for i in remaining if i!=j]])) if len(remaining)>1 else 0.,-len(members),j)
+                if method=='cover' and rows is not None:
+                    users={}
+                    for i,row in enumerate(rows):users.setdefault(row['shape_key'],set()).add(i)
+                    before=sum(u<=remapped for u in users.values())
+                    retired=sum(u<=(remapped|set(members)) for u in users.values())-before
+                    # Cost-aware set cover is the justified third alternative:
+                    # retire whole old programs, rather than maximizing draws.
+                    priority=(-(retired-1),-len(members),priority[1],j)
                 candidates.append((priority,j,members))
             _,canonical,members=min(candidates)
         # A singleton remains on its old outline; two is sufficient for economy.
         if len(members)>=2:groups.append(dict(canonical=canonical,members=members))
         remaining-=set(members)
+        if len(members)>=2:remapped.update(members)
     return groups
 
 
@@ -146,7 +163,7 @@ def plan(data,directory):
             p,aligned=register(fields[i],candidate[j]);err=mse(fields[i],aligned)
             reasons,values=hard_checks(fields[i],aligned)
             errors[i,j]=err;veto[i,j]=not reasons;parameters[(i,j)]=p.tolist()
-            pairs.append(dict(member=i,canonical=j,error=err,reasons=reasons,checks=values))
+            pairs.append(dict(member=i,canonical=j,error=err,reasons=reasons,checks=values,parameters=p.tolist()))
         if i%25==0:print(f'FONT04 fitted {i}/{n}',file=sys.stderr,flush=True)
     # Noise floor uses non-target source impressions, not current self outlines.
     # Nearest structurally compatible independent impressions; LOO per member.
@@ -163,12 +180,19 @@ def plan(data,directory):
     normalized=np.full_like(errors,np.inf)
     for i,level in enumerate(noise):
         if level is not None:normalized[i]=errors[i]/max(level,1e-6)
+    self_checks=[]
+    for i in shape_indices:
+        p,aligned=register(fields[i],candidate[i]);reasons,values=hard_checks(fields[i],aligned)
+        err=mse(fields[i],aligned);errors[i,i]=err;veto[i,i]=not reasons
+        normalized[i,i]=err/max(noise[i],1e-6) if noise[i] is not None else np.inf
+        parameters[(i,i)]=p.tolist()
+        self_checks.append(dict(member=i,error=err,reasons=reasons,checks=values))
     frontier=[]
     original={r['shape_key'] for r in rows}
     choices=[]
     for method in ['star','complete','cover']:
         for scale in SWEEP:
-            groups=choose(veto,normalized,scale,method)
+            groups=choose(veto,normalized,scale,method,rows)
             remapped={i for g in groups for i in g['members']}
             retired=original-{rows[i]['shape_key'] for i in range(n) if i not in remapped}
             added=len(groups);retained=len(original)-len(retired)
@@ -186,7 +210,7 @@ def plan(data,directory):
             # Even the canonical member must pass its actual traced self gates.
             if i==j:
                 p,aligned=register(fields[i],candidate[j]);reasons,values=hard_checks(fields[i],aligned)
-                if reasons or noise[i] is None or mse(fields[i],aligned)>noise[i]:continue
+                if reasons or noise[i] is None or mse(fields[i],aligned)>noise[i]*chosen['error_scale']:raise ValueError('inconsistent canonical self-admission')
             else:p=np.array(parameters[(i,j)])
             frame=frames[i];dx,dy,s=p
             # warp() applies a forward uniform scale about (32,48), then translation.
@@ -211,7 +235,7 @@ def plan(data,directory):
     unique=collections.Counter(p['reasons'][0] for p in pairs if len(p['reasons'])==1)
     result=dict(schema='font04-b1-plan-v1',scope='all visible e only',selected=chosen,assignments=assignments,
         rejection_ledger=rejection,noise_floor=noise,frontier=frontier,unique_pair_rejections=dict(unique),
-        total_pair_attempts=len(pairs),shortlist=24,shortlist_exclusions=n*(n-1)-len(pairs),runtime_seconds=time.monotonic()-started,
+        self_checks=self_checks,total_pair_attempts=len(pairs),shortlist=24,shortlist_exclusions=n*(n-1)-len(pairs),runtime_seconds=time.monotonic()-started,
         defects_status='pending blinded independent review',inference_inputs='source only; no pristine or face labels')
     (directory/'outlines.json').write_text(json.dumps(data['outlines']))
     (directory/'plan.json').write_text(json.dumps(result,indent=2));(directory/'pair-ledger.json').write_text(json.dumps(pairs))
