@@ -723,5 +723,20 @@
     "bytes": 855127,
     "sha256": "5f17cd97caa7caa79f931edc63692fe2551235f4aa658072cf24482f0f78188c",
     "byte_identical": true
+  },
+  "final_binary_repeat": {
+    "binary_sha256": "43a61c3eb68c2d719680f79decf9ff4b0537484a970c21ca8fcb7f2f199e1483",
+    "pdf_sha256": "74c31136d00a18dbf05fba2d7fba59c85cc201a57ae65d77999a025a692fab0f",
+    "bytes": 2849237,
+    "same_as_first_cli": true,
+    "command": [
+      "target/release/scanweave",
+      "qualification/pdf_packaging/groups/financial-input.pdf",
+      "qualification/font02/local/financial-required-repeat.pdf"
+    ]
+  },
+  "final_workspace_tests": {
+    "passed": 141,
+    "failed": 0
   }
 }

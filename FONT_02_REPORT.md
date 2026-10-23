@@ -69,14 +69,15 @@ Machine-readable measurements: [required-glyph-results.json](qualification/font0
 * Synthetic 600 DPI: **189,052 B**, byte-identical; both engines checked at 600 DPI.
 * Faithful forms: **855,127 B**, SHA-256
   `5f17cd97caa7caa79f931edc63692fe2551235f4aa658072cf24482f0f78188c`, byte-identical.
-* Initial complete workspace tests and configured denied-warning Clippy passed;
+* Final unfiltered workspace tests: **141 passed**, zero failed; configured denied-warning Clippy passed;
   final clean-build CI and Sonar status will be recorded in the PR closure.
 * Independent code review found a mandatory-glyph maxp edge case; it was fixed
   and covered by empty/owner-only table tests. No remaining mapping/bounds blocker.
 
 The first financial CLI run took 496.86 seconds, peak RSS 1,466,412 KiB.
 This is an operational measurement, not a speedup claim. A final-binary repeat
-is running to verify deterministic serialization.
+produced the exact same PDF hash. Executable SHA-256:
+`43a61c3eb68c2d719680f79decf9ff4b0537484a970c21ca8fcb7f2f199e1483`.
 
 ### Reproduction
 
@@ -84,7 +85,8 @@ is running to verify deterministic serialization.
 cargo test --workspace --locked
 cargo clippy --locked -p scanweave-core -p scanweave-io -p scanweave-cli -- -D warnings
 cargo build --release --locked -p scanweave-cli
-target/release/scanweave qualification/pdf_packaging/groups/financial-input.pdf financial.pdf
+mkdir -p qualification/font02/local
+target/release/scanweave qualification/pdf_packaging/groups/financial-input.pdf qualification/font02/local/financial-required.pdf
 # Existing matched synthetic bundles, with their document-wide donor context:
 target/release/scanweave build --bundle qualification/experiments/m1g/fixture/dpi300/input/document.json --profile clearscan --output synthetic-300.pdf --report synthetic-300.json
 target/release/scanweave build --bundle qualification/experiments/m1g/fixture/dpi600/input/document.json --profile clearscan --output synthetic-600.pdf --report synthetic-600.json

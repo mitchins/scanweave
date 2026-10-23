@@ -16,7 +16,6 @@ and text-matrix records, graphics operations, image streams and extraction.
 Font program counts/bytes match the report. No remaining code or evidence
 blocker was found in the measured output.
 
-Final-binary repeat is a separate outstanding qualification step: its PDF hash
-must be bound to the recorded executable SHA before claiming deterministic
-final-binary reproduction. GitHub CI, Sonar and CodeRabbit results are recorded
+The final-binary repeat subsequently reproduced the exact PDF hash; its
+executable/output binding is recorded in required-glyph-results.json. GitHub CI, Sonar and CodeRabbit results are recorded
 in the product PR, not inferred from this independent review.
