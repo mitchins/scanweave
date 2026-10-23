@@ -153,6 +153,26 @@ class ContourDiagnostics(unittest.TestCase):
         self.assertEqual(contour_error(ring(), moved), contour_error(moved, ring()))
 
 
+class EmptyCohortDiagnostics(unittest.TestCase):
+    def test_all_rejected_split_has_undefined_metrics(self):
+        from qualification.font03.experiments.evaluate_contours import summarize
+
+        result = summarize([])
+        self.assertEqual(result.pop("targets"), 0)
+        self.assertTrue(all(value is None for value in result.values()))
+
+    def test_unresolved_contours_do_not_become_nan(self):
+        from qualification.font03.experiments.evaluate_contours import summarize
+
+        result = summarize(
+            [dict(target="one", iou=0.8, area=-0.1, dpi=300, contour_native_px=None)]
+        )
+        self.assertEqual(result["targets"], 1)
+        self.assertEqual(result["mean_iou"], 0.8)
+        self.assertEqual(result["abs_area_p95"], 0.1)
+        self.assertIsNone(result["mean_contour_300dpi_equiv"])
+
+
 class ResearchEntryPointContracts(unittest.TestCase):
     def test_declared_manifest_sources_are_mandatory(self):
         import tempfile

@@ -117,3 +117,9 @@ Final causal disposition: **no demonstrated robust multi-observation advantage
 over matched fresh single-witness tracing**. The earlier improvement against A/B
 must not be attributed solely to consensus. No code/causal blocker was found,
 but production remains unqualified. This control changed no admission decision.
+
+CodeRabbit's sixth comment correctly identified an empty accepted-split failure
+in contour aggregation. A valid zero-target outcome now records null metrics;
+all-unresolved contours also remain null instead of NaN. Two new unit contracts
+cover these cases (22 total). Rerunning the real 24/28 summaries preserves every
+previous numerical value exactly. No acceptance or scientific conclusion changes.

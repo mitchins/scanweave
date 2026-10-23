@@ -414,7 +414,7 @@ remaining counter/repair caveats. Example U/V labels remain the original blind
 panels; `review.md` records attribution after judgment.
 
 - 141 unfiltered workspace Rust tests pass, including 300/600-DPI document and
-  genuine donor-repair regressions. Twenty new research unit contracts pass.
+  genuine donor-repair regressions. Twenty-two new research unit contracts pass.
 - The repository's exact denied-warning Clippy contract passes. An additional
   `--all-targets` run exposes inherited test warnings and two unrelated untracked
   example imports; they are disclosed, not suppressed or fixed in this mission.

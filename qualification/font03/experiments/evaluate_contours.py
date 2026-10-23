@@ -24,6 +24,32 @@ def contour_error(reference, candidate):
     return dict(mean=float(distances.mean()), p95=float(np.quantile(distances, 0.95)))
 
 
+def summarize(selected):
+    """A valid all-rejected cohort has undefined quality, never NaN or a crash."""
+    metrics = [
+        "mean_iou",
+        "iou_p05",
+        "mean_signed_area",
+        "abs_area_p95",
+        "mean_contour_300dpi_equiv",
+    ]
+    if not selected:
+        return dict(targets=0, **dict.fromkeys(metrics))
+    contours = [
+        r["contour_native_px"]["mean"] * 300 / r["dpi"]
+        for r in selected
+        if r["contour_native_px"] is not None
+    ]
+    return dict(
+        targets=len({r["target"] for r in selected}),
+        mean_iou=float(np.mean([r["iou"] for r in selected])),
+        iou_p05=float(np.quantile([r["iou"] for r in selected], 0.05)),
+        mean_signed_area=float(np.mean([r["area"] for r in selected])),
+        abs_area_p95=float(np.quantile([abs(r["area"]) for r in selected], 0.95)),
+        mean_contour_300dpi_equiv=float(np.mean(contours)) if contours else None,
+    )
+
+
 def evaluate(split):
     folder = ROOT / "affine-refinement"
     frozen = json.loads((folder / f"{split}-source-freeze.json").read_text())
@@ -79,24 +105,9 @@ def evaluate(split):
                 **record["pristine"],
             )
         )
-    summary = {}
-    for arm in ["A", "C"]:
-        selected = [r for r in results if r["arm"] == arm]
-        summary[arm] = dict(
-            mean_iou=float(np.mean([r["iou"] for r in selected])),
-            iou_p05=float(np.quantile([r["iou"] for r in selected], 0.05)),
-            mean_signed_area=float(np.mean([r["area"] for r in selected])),
-            abs_area_p95=float(np.quantile([abs(r["area"]) for r in selected], 0.95)),
-            mean_contour_300dpi_equiv=float(
-                np.mean(
-                    [
-                        r["contour_native_px"]["mean"] * 300 / r["dpi"]
-                        for r in selected
-                        if r["contour_native_px"]
-                    ]
-                )
-            ),
-        )
+    summary = {
+        arm: summarize([r for r in results if r["arm"] == arm]) for arm in ["A", "C"]
+    }
     return dict(records=results, summary=summary)
 
 
