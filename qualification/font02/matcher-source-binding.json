@@ -1,0 +1,12 @@
+{
+  "source": "crates/scanweave-io/src/visual_dict.rs",
+  "source_sha256": "d277313dc62b1b645de65b35a5aa40c1e2d31cd99dd417e76f8e991ad0572494",
+  "exact_function_hashes": {
+    "struct ShapeEvidence {": "35f440141fcb46844ff6b8664eb4fa9defb3ec5bc63ffcc4bed47179c88fa998",
+    "fn normalized_iou(": "83cf32b40873670a707f2a2a7d606a61854d634974fea0b4aee0f6b00d2f4abb",
+    "fn style_compatible(": "c5f6013b41bce2b437ce4563a1ae580aedaa9c79ea9beb9e058d926ada27cc54",
+    "fn mask_topology(": "1dcab82346eb25ab50831c6cf8cd85d92c18659c2f9d7dfa09b42107c6b815d2",
+    "fn reuse_gate(": "b7e8505889478e2143c042861e2cf394fbebf4f06ab0ed97c7b95fb25d4a6a78"
+  },
+  "change": "Extract byte-identical private comparison functions; append read-only wrapper. Ownership uses production library."
+}

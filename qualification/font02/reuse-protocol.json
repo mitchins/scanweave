@@ -1,0 +1,14 @@
+{
+  "frozen_before_oracle_pixel_scoring": true,
+  "purpose": "Evaluate actual rendered substitution quality, not face-label agreement.",
+  "source_decision": "Both Poppler and PDFium candidate source-owned grayscale MSE <= current baseline + 1e-8, with unchanged thresholded topology; same character; source-supported emitted donor. No oracle images used.",
+  "oracle_outcome": {
+    "safe_relative": "Both renderers pristine MSE increase <= 0.002 normalized by pristine ink mass; binary core IoU decline <= 0.01; absolute ink-area bias increase <= 0.02.",
+    "material_regression_flag": "Either renderer pristine MSE increase > 0.02 OR binary core IoU decline > 0.05. Flag for independent visual inspection, not automatic proof of changed character.",
+    "ambiguous": "Anything between safe_relative and material_regression_flag; abstain from automatic promotion. Topology mismatches recorded separately because one antialiased pixel can open a counter.",
+    "absolute_quality": "Baseline and candidate pristine errors are both reported; relative non-regression does not establish pristine or correct typography."
+  },
+  "face_labels": "Diagnostic only. Different-face substitutions are not counted wrong when rendered shapes are interchangeable.",
+  "damage": "D0/D1 healthy reuse only here. D2-D4 preserved for a separate repair arm.",
+  "clarification_after_independent_review": "Topology refers to candidate-versus-current baseline in frozen source-decision files. Pristine-relative topology was not measured. This clarification does not change the frozen limits or decisions; the original pre-oracle protocol remains hash-addressed locally."
+}

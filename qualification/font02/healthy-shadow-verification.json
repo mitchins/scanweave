@@ -1,0 +1,100 @@
+{
+  "checks": [
+    {
+      "engine": "pdfium",
+      "dpi": 300,
+      "unparse_only_changed_pixels": 0
+    },
+    {
+      "engine": "pdfium",
+      "dpi": 600,
+      "unparse_only_changed_pixels": 0
+    },
+    {
+      "engine": "pdfium",
+      "path": "qualification/font02/local/financial-required.pdf",
+      "native_text_sha256": "44299414554a547bb01947851a63d5fde34c03937a3c7804c1172eb2026fe5aa"
+    },
+    {
+      "engine": "pdfium",
+      "path": "qualification/font02/local/reuse-study/no-rotation/financial-healthy-only-shadow.pdf",
+      "native_text_sha256": "44299414554a547bb01947851a63d5fde34c03937a3c7804c1172eb2026fe5aa"
+    },
+    {
+      "engine": "poppler",
+      "dpi": 300,
+      "unparse_only_changed_pixels": 0
+    },
+    {
+      "engine": "poppler",
+      "dpi": 600,
+      "unparse_only_changed_pixels": 0
+    },
+    {
+      "engine": "poppler",
+      "path": "qualification/font02/local/financial-required.pdf",
+      "native_text_sha256": "7f866f93c38ec5f1661783c4cdf52f661aa66e6dfe1f8628cc3e607f0369fbbd"
+    },
+    {
+      "engine": "poppler",
+      "path": "qualification/font02/local/reuse-study/no-rotation/financial-healthy-only-shadow.pdf",
+      "native_text_sha256": "7f866f93c38ec5f1661783c4cdf52f661aa66e6dfe1f8628cc3e607f0369fbbd"
+    },
+    {
+      "changed_operations": [
+        [
+          0,
+          653,
+          "Tm"
+        ],
+        [
+          0,
+          654,
+          "Tj"
+        ],
+        [
+          0,
+          1428,
+          "Tm"
+        ],
+        [
+          0,
+          1429,
+          "Tj"
+        ],
+        [
+          0,
+          1656,
+          "Tm"
+        ],
+        [
+          0,
+          1657,
+          "Tj"
+        ],
+        [
+          0,
+          1896,
+          "Tm"
+        ],
+        [
+          0,
+          1897,
+          "Tj"
+        ],
+        [
+          0,
+          2189,
+          "Tm"
+        ],
+        [
+          0,
+          2190,
+          "Tj"
+        ]
+      ]
+    }
+  ],
+  "qpdf": "checking qualification/font02/local/reuse-study/no-rotation/financial-healthy-only-shadow.pdf\nPDF Version: 1.7\nFile is not encrypted\nFile is not linearized\nNo syntax or stream encoding errors found; the file may still contain\nerrors that qpdf cannot detect\n",
+  "candidate_sha256": "ca105ba6cabb1a619d65c019903e04fcde0de203cf89691e2c13c4e9f3825100"
+}
