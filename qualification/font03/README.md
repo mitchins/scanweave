@@ -88,3 +88,14 @@ in a temporary checkout, then rerun the original uniform/affine sequence. This
 intentionally fails the new symmetry regression and must never replace the
 maintained grouping implementation. It explains the historical tables rather
 than providing a second supported policy.
+
+## Matched singleton attribution control
+
+`single-witness-control.sh` runs the complete matched-control sequence.
+`single_witness_control.py prepare SPLIT` writes source-only fields for the
+same non-target medoids used by arm B. Trace those into
+`local/single-witness-control/SPLIT-curves/`, then run its `pdf SPLIT` and
+`evaluate SPLIT` commands. The supplied character, independent witness IDs,
+line frame and source-fitted placement are checked/reused. No oracle is read
+until evaluation. Its near-equality with E is the final attribution result;
+it must not be omitted when citing the earlier gain against current outlines.

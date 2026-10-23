@@ -77,6 +77,14 @@
       "bytes": 89814,
       "sha256": "efb53e4b37e6c76d5c0f0993296bcff1ed4dd9af6274ea38cd28cc56d9826d02"
     },
+    "qualification/font03/local/affine-refinement/test-curves/template-outlines.json": {
+      "bytes": 498832,
+      "sha256": "50a2f9bb5efbbb0efd9e1a0ba1089fdc6bb0b2e3d91890286c30cbff3f824961"
+    },
+    "qualification/font03/local/affine-refinement/test-curves/templates.ttf": {
+      "bytes": 26584,
+      "sha256": "9246a4b697099228034d4c5ca68b35a48aec154747ebdb3366a70530e90b7f27"
+    },
     "qualification/font03/local/affine-refinement/test-evaluate.log": {
       "bytes": 1055,
       "sha256": "d783596f7ddc2c0d392fea0bf38c0f032a1d7c39d5fb21c1397247b3981b7f8e"
@@ -145,6 +153,14 @@
       "bytes": 54419,
       "sha256": "405458648ef232131d5fd1e06fb1a1384b35fd9ca74bcaf8619c82865d840129"
     },
+    "qualification/font03/local/affine-refinement/validation-curves/template-outlines.json": {
+      "bytes": 308098,
+      "sha256": "1d05177d87d7d5ca1b7ec786a3a95706d41d8d084895ca7b97b1a263e0413696"
+    },
+    "qualification/font03/local/affine-refinement/validation-curves/templates.ttf": {
+      "bytes": 16600,
+      "sha256": "5039b22b5fced0a6a60be6dfef98f874c1d18d92bf0f51a9a64a13bcf34cb5e6"
+    },
     "qualification/font03/local/affine-refinement/validation-evaluate.log": {
       "bytes": 1056,
       "sha256": "f0dfa58a38382016981a98dac4dab6cac3cb65146bbfee250270ab4002a409e5"
@@ -198,8 +214,8 @@
       "sha256": "997d28d55f4a62360f1466da211b667281b0d1d7905ce5bd7acecba9f277ddc1"
     },
     "qualification/font03/local/construction-verification.json": {
-      "bytes": 8156,
-      "sha256": "77e69fbeff90b2e573fdd0b306df7498df0964e401cb8b30a95e94834cf50ff2"
+      "bytes": 8250,
+      "sha256": "8c55e43b70cf28f80b710ac96575e5c175b1f3a2a3624bf2c7b6f8c30adff39d"
     },
     "qualification/font03/local/final-review/blind-key.json": {
       "bytes": 8969,
@@ -245,6 +261,62 @@
       "bytes": 14925624,
       "sha256": "c513d3989f6a294d72f61e28840b20095036514b56e9a9ac088237092a8f5082"
     },
+    "qualification/font03/local/single-witness-control/font-metric-control.json": {
+      "bytes": 722,
+      "sha256": "38e00019abae03129a2e98b470f377d9628fe52d02415cda4dd03beeae547807"
+    },
+    "qualification/font03/local/single-witness-control/test-F.pdf": {
+      "bytes": 17666,
+      "sha256": "daef5820d8c056613704ee201c849cfe3722b258263d06228f4d8a61a8d2250a"
+    },
+    "qualification/font03/local/single-witness-control/test-curves/template-outlines.json": {
+      "bytes": 528064,
+      "sha256": "0e0b227ad4f67644a8e6b532017d4beb1b8dd2cfd109ad62db68da00056fb0b9"
+    },
+    "qualification/font03/local/single-witness-control/test-curves/templates.ttf": {
+      "bytes": 28492,
+      "sha256": "4150648c21a021cced659643ca482b7279bc4d06c7ddf2b12cc318ccadc3a468"
+    },
+    "qualification/font03/local/single-witness-control/test-evaluated.json": {
+      "bytes": 78788,
+      "sha256": "b211f36228572e7889252eb1b45b2ce4ef147f57abb643606c24b81247f24fb6"
+    },
+    "qualification/font03/local/single-witness-control/test-sanitized.ttf": {
+      "bytes": 28732,
+      "sha256": "7521b642de3c8eaf5f1ca1844e9fcb74da773d92449002c6c6713858a31593e9"
+    },
+    "qualification/font03/local/single-witness-control/test-trace-input.json": {
+      "bytes": 3295457,
+      "sha256": "ecc00638519bd255f332f17ea382f2c6b552ea700387656bc80174b46914b30c"
+    },
+    "qualification/font03/local/single-witness-control/validation-F.pdf": {
+      "bytes": 11690,
+      "sha256": "2d98dcbba05ac840827b033f6f1affb9c76e0058f90883b12fa970ceef121c8c"
+    },
+    "qualification/font03/local/single-witness-control/validation-curves/template-outlines.json": {
+      "bytes": 337089,
+      "sha256": "422057d41cc89d2f02094de246e174610dbf4d19893cdd0648ac0d2d26a0884e"
+    },
+    "qualification/font03/local/single-witness-control/validation-curves/templates.ttf": {
+      "bytes": 18484,
+      "sha256": "79060dcc815c9316908ba89bb38a18b027559993e7266661967efe80da6402f2"
+    },
+    "qualification/font03/local/single-witness-control/validation-evaluated.json": {
+      "bytes": 46317,
+      "sha256": "757627e8062c4a1223a8647105749fbb0b4ee298e2db4ac8a2e305426b37091c"
+    },
+    "qualification/font03/local/single-witness-control/validation-sanitized.ttf": {
+      "bytes": 18688,
+      "sha256": "c678626fd85fbc339cb0567162473ee3382657cdedf22ba586b17d0249f801ba"
+    },
+    "qualification/font03/local/single-witness-control/validation-trace-input.json": {
+      "bytes": 2179546,
+      "sha256": "c17020f4abb00a6a57711863ab99763c84aa6c121d02439af87e10a644ed9dcd"
+    },
+    "qualification/font03/local/single-witness-control/validation.json": {
+      "bytes": 190,
+      "sha256": "591ff5354f29d04e8ce564378f4f0875e3c1f8834c4a704eab1b9e8822069dc4"
+    },
     "qualification/font03/local/test-ABCD.pdf": {
       "bytes": 395317,
       "sha256": "ad039d7f46cddf2697b90625f5414ae7c6e644c167fcb586c4d7029bcf95fd41"
@@ -260,6 +332,14 @@
     "qualification/font03/local/test-consensus-plan.json": {
       "bytes": 92900,
       "sha256": "fca335cd7cfe419fbc032138acfa4d108f25b6338897d98a1b4bd1662edff797"
+    },
+    "qualification/font03/local/test-curves/template-outlines.json": {
+      "bytes": 1312832,
+      "sha256": "0888ccea1e745ac563ddbd97edce7e1284883a8fe68057848be2ee7c343d708e"
+    },
+    "qualification/font03/local/test-curves/templates.ttf": {
+      "bytes": 70332,
+      "sha256": "0a710da7a52e884a866669196ecaba023a0210112467dae8640c134c89b42adc"
     },
     "qualification/font03/local/test-evaluate.log": {
       "bytes": 1051,
@@ -404,6 +484,14 @@
     "qualification/font03/local/validation-consensus-plan.json": {
       "bytes": 54729,
       "sha256": "9b8ad2d864db1634c1f6c67d0b1b0c773fa98b5ac636825a2481b36c9c7f073e"
+    },
+    "qualification/font03/local/validation-curves/template-outlines.json": {
+      "bytes": 872571,
+      "sha256": "97f63fca62c1be04671be538d0906c85272843d30a872e595747fea1179f3e3c"
+    },
+    "qualification/font03/local/validation-curves/templates.ttf": {
+      "bytes": 46980,
+      "sha256": "929aeb26b62c4f768f0515793e4c270f5e70bc5c0d410e10fb7999d37dea2bf2"
     },
     "qualification/font03/local/validation-evaluate.log": {
       "bytes": 1052,

@@ -184,10 +184,12 @@ class ResearchEntryPointContracts(unittest.TestCase):
             ots=dict(returncode=0),
             pdfium=dict(
                 extraction_identical=True,
+                page_counts=[13, 13],
                 pages=[dict(page=1, equal=False), dict(page=2, equal=True)],
             ),
             poppler=dict(
                 extraction_identical=True,
+                page_counts=[13, 13],
                 pages=[dict(page=1, equal=False), dict(page=2, equal=True)],
             ),
         )
@@ -198,6 +200,10 @@ class ResearchEntryPointContracts(unittest.TestCase):
             with self.assertRaises(RuntimeError):
                 require_construction_verification(bad)
         for engine in ["pdfium", "poppler"]:
+            bad = copy.deepcopy(result)
+            bad[engine]["page_counts"] = [13, 12]
+            with self.assertRaises(RuntimeError):
+                require_construction_verification(bad)
             bad = copy.deepcopy(result)
             bad[engine]["extraction_identical"] = False
             with self.assertRaises(RuntimeError):

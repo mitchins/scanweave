@@ -2,8 +2,8 @@
 
 ## Decision
 
-**Multi-observation fitting is promising; the tested automatic reuse policy is
-not qualified for production.** A robust common coverage field improves average
+**No production change qualifies. Matched single-witness tracing nearly matches
+multi-observation fitting, and the real pre-union control grows the font.** A robust common coverage field improves average
 and tail pristine-reference error substantially. Earlier source-only gates admit structural counterexamples. The final directional
 49-case blinded review finds no confirmed material canonical defect, but retains
 minor contour caveats; a grouping-symmetry defect then requires regeneration. The
@@ -12,8 +12,10 @@ construction control grows the font rather than retiring programs. No converter,
 OCR, ownership, font dictionary, faithful or raster-composition behaviour changes
 in this research branch.
 
-This is not a rejection of canonical reconstruction. It separates a positive
-fitting result from unresolved acceptance and cohort-support problems. It also
+This is not a rejection of canonical reconstruction. It separates improvement
+over existing output from an incremental benefit of combining observations.
+The matched control does not establish that incremental benefit in this healthy
+cohort; cohort support is also insufficient for actual font economy. It also
 measures actual pre-union font construction rather than attributing savings to
 post-generation reference edits.
 
@@ -247,6 +249,43 @@ scaled by 300/source-DPI only for aggregation. Raw native distances remain in
 the ledger. Empty contours remain explicitly unresolved. These are finite,
 development-selected results, not a general safety probability.
 
+## Matched single-witness control — central attribution result
+
+The original B arm uses a medoid's **existing embedded** outline. That confounds
+multi-observation fitting with the new source-coverage/frame/tracing path. One
+additional causal control F therefore freshly traces the exact non-target medoid
+through the same source-owned 64-pixel line frame, Rust grayscale tracer/font
+builder and source-fitted bounded placement as E. It changes no groups, noise
+limits or admission decisions. Source inputs and complete three-page F glyph
+probe PDFs are saved before pristine evaluation, with both renderers at native
+DPI. These are glyph-study PDFs, not an integrated product improvement. Their
+11,690/17,666-byte totals paint only selected study characters on white and are
+not complete-source-document compression measurements. qpdf and OTS pass both.
+
+| All fixed targets | F single mean / p95 error | E multi mean / p95 error | Mean IoU F / E |
+|---|---:|---:|---:|
+| Validation, 65 | **0.09169 / 0.19771** | 0.09194 / 0.19735 | 0.80670 / 0.80680 |
+| Test, 111 | 0.09969 / 0.20788 | **0.09885 / 0.20532** | 0.81260 / 0.81411 |
+
+The independent reviewer verified donor exclusion, source-only preparation,
+placement, rendering/evaluation bounds and these values. Post hoc filtering to
+the **unchanged** 24/28 accepted subsets also gives mixed small differences:
+validation mean F/E 0.07108/0.07385, test 0.08337/0.08058. Renderer directions are
+mixed. These subset results do not readmit observations or tune policy.
+
+The single and multi fonts have identical forced head boxes and 2048 UPEM;
+source-derived hhea metrics naturally differ and are recorded. No exact
+pixel-equivalence claim is made between different outlines.
+
+**H2 does not establish a robust multi-observation advantage over a matched fresh
+single witness.** Differences in mean error are below 1% here, without an
+independent-family significance claim. Most of the large gain over old A/B is
+reproduced by the source-singleton path. This experiment does not isolate how
+much comes from source normalization, fresh tracing, existing reuse or placement.
+It would be incorrect to credit that entire gain to consensus denoising.
+D0/D1 strong medoids need not benefit from more witnesses; damaged recovery has
+separate identity/safety failures as reported below.
+
 ## Actual real-page font construction (H4; pre-review fixed-plan control)
 
 Initial complete financial B/C shadow PDFs retain old programs. Their sizes
@@ -353,16 +392,19 @@ threshold relaxation. Town repeated-word sheets show no convincing general
 reading-size improvement, and inherited broken `s` typography remains untouched.
 
 **Production decision: unchanged.** H1 provides useful but incomplete safeguards;
-H2 has positive average reconstruction evidence; H3 has a limited healthy-cohort visual pass, but is not a broadly validated
+H2 improves existing-output error but shows no robust incremental advantage
+over matched fresh single-witness tracing; H3 has a limited healthy-cohort visual pass, but is not a broadly validated
 per-occurrence acceptance model; H4's actual pre-union control fails economy.
 No full 32-page rerun is justified for an unqualified, unactivated research arm.
 
-The next focused question is whether a render-grounded structural acceptance
-model can retain the demonstrated fitting gain while rejecting counter, terminal
-and phase-dependent changes—and whether it supports a sufficiently large shared
-cohort to retire existing designs. That must be measured against one common
-final outline per cohort, not inferred from favourable leave-one-out averages.
-A new OCR/font-recognition architecture is not established as necessary here.
+The most immediate font-economy blocker is **insufficient document-wide support
+to retire existing designs**: the accepted real remaps split two currently shared
+designs into three and leave the old programs referenced. Further averaging alone
+is not justified by the matched control. A subsequent focused investigation
+should first isolate why source-singleton re-tracing differs from the existing
+embedded outline/placement, and require one common design to cover enough of an
+existing program's occurrences to remove it. These are observed limitations,
+not evidence that nominal font classification or a new architecture is required.
 
 ## Validation and limits
 
@@ -410,3 +452,22 @@ and the actual 35-evaluation registration bound; an inherited zero-tolerance
 label was removed. This description correction changes no source coverage,
 fit, rendering, acceptance decision or historical benchmark measurement. Prior
 metadata is preserved locally.
+
+### Research Quality Gate blocker
+
+The completed server analysis for research revision `1878b96` returned **ERROR**,
+not a successful gate: new security rating E, measured new-code coverage 14.2%
+(required 80%) and duplication 11.7% (maximum 3%). Reliability and maintainability
+ratings passed. The exact snapshot is
+[quality-checkpoint.json](qualification/font03/quality-checkpoint.json), with its
+[workflow](https://github.com/mitchins/scanweave/actions/runs/39902698234).
+
+Its 95 open findings include CLI/file-path reports requiring source-to-sink
+triage; no security resolution is inferred from green tests. Some reported
+sources describe HTTP/LLM flows absent from this operator-run research tooling,
+but none is bulk-dismissed, accepted or suppressed here. No scope exclusion,
+coverage/duplication threshold change or Quality Gate weakening is made.
+This is an explicit blocker to merging the combined research infrastructure;
+it does not describe remote main's already verified passing gate. Later exact-
+head checks in PR #24 remain authoritative. A general Sonar cleanup is outside
+this bounded font experiment.

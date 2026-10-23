@@ -104,3 +104,16 @@ Five valid comments were addressed without changing any measured admission:
 The extended contract suite contains 20 passing tests. The actual complete PDF
 was rechecked with the fail-closed verification command; no visual or measurement
 change is introduced by these reproduction repairs.
+
+## Matched fresh-singleton attribution
+
+The independent reviewer checked `single_witness_control.py`: each donor is a
+non-target witness, source preparation and bounded placement are shared with E,
+and pristine pixels enter only after complete probe PDFs are generated. Both
+engines use identical physical bounds and metrics. All-target and fixed-final-
+subset figures match the saved records; renderer directions are mixed.
+
+Final causal disposition: **no demonstrated robust multi-observation advantage
+over matched fresh single-witness tracing**. The earlier improvement against A/B
+must not be attributed solely to consensus. No code/causal blocker was found,
+but production remains unqualified. This control changed no admission decision.

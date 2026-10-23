@@ -20,6 +20,7 @@ renders = {}
 for engine in ["pdfium", "poppler"]:
     records = []
     texts = []
+    page_counts = []
     for number, path in enumerate(paths):
         with tempfile.TemporaryDirectory() as t:
             if engine == "poppler":
@@ -30,6 +31,7 @@ for engine in ["pdfium", "poppler"]:
                     stderr=subprocess.DEVNULL,
                 )
             d = pdfium.PdfDocument(path)
+            page_counts.append(len(d))
             text = []
             for pi in range(len(d)):
                 p = d[pi]
@@ -71,6 +73,7 @@ for engine in ["pdfium", "poppler"]:
                 texts.append("\n".join(text).encode())
     result[engine] = dict(
         pages=records,
+        page_counts=page_counts,
         extraction_identical=texts[0] == texts[1],
         extraction_hashes=[hashlib.sha256(t).hexdigest() for t in texts],
     )

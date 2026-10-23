@@ -30,6 +30,11 @@ paths.extend((root / "affine-refinement").glob("*calibration.json"))
 paths.extend((root / "town-affine").glob("*.json"))
 paths.extend((root / "repair").glob("*.json"))
 paths.extend((root / "final-review").glob("*.json"))
+paths.extend((root / "single-witness-control").glob("*.*"))
+for folder in [root, root / "affine-refinement", root / "single-witness-control"]:
+    for split in ["validation", "test"]:
+        paths.extend((folder / f"{split}-curves").glob("templates.ttf"))
+        paths.extend((folder / f"{split}-curves").glob("template-outlines.json"))
 require_files(required_sources)
 files = {
     str(p): dict(

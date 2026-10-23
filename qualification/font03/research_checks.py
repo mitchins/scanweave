@@ -23,6 +23,9 @@ def require_construction_verification(result):
         )
     for engine in ("pdfium", "poppler"):
         data = result[engine]
+        counts = data["page_counts"]
+        if len(counts) != 2 or counts[0] != counts[1]:
+            raise RuntimeError(engine + " page count changed")
         if not data["extraction_identical"]:
             raise RuntimeError(engine + " native extraction changed")
         if any(not row["equal"] for row in data["pages"] if row["page"] != 1):
