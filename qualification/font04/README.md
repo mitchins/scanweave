@@ -1,82 +1,76 @@
-# FONT-04 discovery — stopped at B2
+# FONT-04 discovery — Checkpoint B2′
 
-Contract baseline: `06f24b122e1cd1cd879880166b8240c7e75747ed`;
-product baseline: `c10e3dff93ca12ac410c0f6626a4ef74ce34e0c1`.
-P2 preregistration SHA-256: `a4f9ccd3a7e51d719946be80f7cc9a297de7ca22285e8755e5e26e415e7db466`.
-P2 is not generated, rendered, inspected, or modified by these discovery tools.
+Contract: `9c2e9963aebce439495a409ac9588a5b38321fc3`.
+Product/main baseline: `c10e3dff93ca12ac410c0f6626a4ef74ce34e0c1`.
+Default PDF SHA-256: `74c31136d00a18dbf05fba2d7fba59c85cc201a57ae65d77999a025a692fab0f`.
 
-Build: `cargo build --release -p scanweave-cli --bin scanweave -p scanweave-io --example font04_trace`.
-Experimental complete-document conversion:
+B2′ stops for independent review. No operating point is selected or promoted;
+P2 is unopened, PR #24 remains draft, and no merge or product PR is authorized.
+Earlier checkpoints remain historical evidence in `FONT_04_RESULTS.md`.
+
+The B2′ compositor is an explicit offline research tool. It takes the complete
+ordinary default PDF and the frozen source-only B2 trace/fit ledger and emits
+complete financial PDFs. It does not hook or modify default conversion. Each
+occurrence retains its CID, Tm, W and ActualText; TrueType composites reference
+shared outlines, with metric-identical CID-map resources resolving repeated-CID
+instance conflicts. Primitive outlines, composite stubs and total required slots
+are counted separately.
+
+## Reproduction
+
+Use `qualification/.venv/bin/python -m` for the modules below. Dependencies are
+NumPy, SciPy, Pillow, fontTools, pikepdf, pypdfium2, Poppler, qpdf and OTS.
+Large inputs/outputs remain ignored in `local/`, hashed in the artifact manifests.
+The prior `b2-artifact-manifest.json` freezes the cached B2 source observations,
+traces and fits; these are prerequisites, not freshly inferred pristine data.
+The pinned commit's README describes the earlier B1/B2 preparation workflow.
+
+1. Build with `cargo build --release -p scanweave-cli --bin scanweave -p scanweave-io --example font04_trace`.
+2. Run the normal default financial conversion and compare it to independently
+   generated main. B2′ records the fresh run in `B2prime-default-profile.json`.
+3. `qualification.font04.b2prime transport` re-emits frozen P-initial membership,
+   scores all four references and requires exact text/search/structural contracts.
+4. `qualification.font04.measurement_equivalence` checks serial/parallel coverage;
+   `qualification.font04.canonical_hygiene` screens offers and runs all 16
+   candidate-side material regressions before any soft-criterion change.
+5. `qualification.font04.soft_support` calculates source-only LOO fallback floors
+   for every member. Witness count is diagnostic; hard member vetoes stay fixed.
+6. `qualification.font04.run_b2prime` emits star/cover × 1.0/1.5/2.0, the outline
+   retirement control, and the literal all-slot retirement control. It scores,
+   validates, repeats, audits actual raw owned ink, separates fidelity-only groups,
+   and seals the review. `--resume` reuses exact completed outputs and validations.
+7. `qualification.font04.finalize_b2prime` verifies all deliverables, writes
+   `checkpoint-B2prime.json` and the hashed manifest, and updates the results.
+
+`support-initial` outputs retain the complete first sweep, whose missing fallback
+floors indirectly gated 378 members. They are explicitly superseded diagnostics.
+The final sweep has no missing floors. Sparse CID maps and matched generated
+object streams remove serializer overhead; the save-only control is separate.
+
+The four references retain B2's physical coordinate grids: supersampled analytic
+primary, independent direct winding coverage, native PDFium and native Poppler.
+Workers reopen PDFium input files independently after fork; 16 serial replays
+match the corrected parallel arrays exactly. Native differences below measured
+renderer floors do not rank arms. Cached OCR/trace/fit emission timings are not
+an end-to-end conversion benchmark.
+
+## Independent review
+
+Open only `local/B2prime-blind-review/` for grading. It contains a lossless PDF,
+opaque-ID Source/U/V assets, blank judgments and an integrity receipt. The key
+and private selection/context data are outside that directory. No filename
+encodes the arm, stratum or current/candidate mapping. Every glyph comparison
+uses identical full default page context with only the target draw replaced.
+
+Save every U/V judgment first. Only then may the independent reviewer run:
 
 ```sh
-target/release/scanweave qualification/pdf_packaging/groups/financial-input.pdf qualification/font04/local/financial-experimental.pdf --dpi 300 --profile clearscan --glyph-sharing experimental
+qualification/.venv/bin/python -m qualification.font04.seal_b2prime_review reveal qualification/font04/local/B2prime-blind-review qualification/font04/local/B2prime-review-keys/key.json saved-judgments.json
 ```
 
-Omit `--glyph-sharing` for the default. The opt-in CLI requires the scientific
-Python environment `qualification/.venv/bin/python` (override with
-`SCANWEAVE_RESEARCH_PYTHON`), with NumPy, SciPy and Pillow. Analysis additionally
-uses pikepdf, pypdfium2 and fontTools, and Poppler/qpdf/OTS executables.
-The experimental planner executes the checked-out `planner.py`; this is a
-research dependency, not a distributable product feature. It exports its
-source-only snapshot, fitted decisions and rejection ledger alongside the PDF
-in `<output>.font04/`. It modifies only visible `e` occurrences, before font
-union and required-program construction. Raster and semantic owners are untouched.
+The command refuses missing, duplicate or incomplete judgments and checks the
+sealed key hash before decoding. Materiality/false-rejection fields remain null
+until that review. The authoring run does not reveal the key.
 
-`geometry.py` and `pdf_helpers.py` are copied with attribution from FONT-03
-`7ebc09ec7ec19d9c4ff260da621fcfbb021d909d`; all other FONT-04 code is new.
-The inherited structural veto limits are retained. Added orthogonal checks
-cover effective stroke, cross moment and multi-threshold counter topology.
-Three grouping alternatives share one source-noise error family.
-
-Large artifacts live under ignored `local/`; compact results and hashes are
-committed. Independent blinded judgments remain distinct from automated metrics.
-
-## Checkpoint reproduction
-
-1. Build the CLI plus `font04_trace` and `font04_owned` examples. Run the normal
-   default and explicit experimental financial commands above; compare against
-   `financial-main.pdf` and the hashes in `manifest.json`. A complete experimental
-   repeat was measured byte-identical.
-2. `python -m qualification.font04.b1_audit <experimental.pdf>` performs native
-   CID/GID/program, source, text and validity measurement. `native_frontier` sweeps
-   the recorded sparse candidate matrix; its PDFs are glyph controls, not complete
-   document deliverables. `verify_checkpoint` checks the final complete outputs.
-3. Phase A freezes source inputs before `causal.py evaluate` opens P1 oracle data.
-   The retained FONT-03 eight-class cohort is under `local/causal`; the full-ownership
-   eight-class addition is under `local/causal-extension` (`run_extension.sh`).
-   `floor_control` adds the fresh native floor-on self trace without reselecting
-   cohorts. `causal_financial_native` supersedes nominal-DPI financial atlas
-   measurements with the original MediaBox and raster-to-page transform.
-4. `checkpoint_a`, `calibration`, `review_sheets`, `negative_review`, `review_a`
-   and `finalize` produce summaries and review artifacts. The two negative/style
-   populations and all cohort input hashes remain distinct. Raw input freezes,
-   trace requests and native control PDFs are retained locally.
-5. `review_key.py reveal <directory> <saved-judgments.json>` refuses to reveal
-   incomplete judgments. Do not open the sealed key before saving all judgments.
-
-The selected point is an unqualified discovery result. It saves seven net programs
-and 175 complete-PDF bytes, but source fidelity directions differ by renderer.
-The 24-candidate shortlist and sparse star ordering are explicit limitations;
-untested pairs are not rejections. No B2 or P2 generation entry point is present.
-The 15% error-only objective is met for `e`; independent visual rejection rates
-and material-defect counts are pending review. See `FONT_04_RESULTS.md`.
-
-## B1′ / B2 handoff
-
-Current results: `checkpoint-B1prime.json`, `checkpoint-B2.json` and
-`../../FONT_04_RESULTS.md`. Earlier A/B1 measurements are historical.
-Large artifacts stay ignored in `local/`, hashed in the prime/B2 manifests.
-Use current review manifests: B1 colour-faithful `*-review-v2/` and B2
-`financial-B2-PV-review/`. Keys remain separate and unopened.
-
-Reproduction modules under `qualification.font04`: `coordinate_roundtrip`,
-`rerun_phase_a`, `phase_a_analytic`, `prime_metrics`, `class_metrics`,
-`class_verify`, `class_frontier`, `support_breakdown`, `raw_owned_probe`,
-`finalize_owned_audit`, `functional_guard`, `review_sheets`, `finalize_prime`,
-then `finalize_b2`. Use `qualification/.venv/bin/python -m` and read each
-module's argparse options; hashes guard exact cached-fit replay.
-B2 starts only after all B1′ gates pass. Initial full B2 P fails extraction/layout.
-Final P/PV retain existing groups on exact functional failure; normal CLI replay
-builds complete PDFs. No glyph veto is relaxed. Raw source-halo auditing precedes
-fit-mask exclusions; final PV has zero unexplained owned components among
-substitutions. No reviewer judgments entered. Stop: no B3, P2 or promotion.
+`geometry.py` and `pdf_helpers.py` retain FONT-03 `7ebc09e` attribution. All hard
+structural checks, ownership rules and existing security analysis remain active.

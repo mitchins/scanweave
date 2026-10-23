@@ -1,0 +1,1566 @@
+{
+  "pdf": "qualification/font04/local/financial-B2prime-cover-1.0.pdf",
+  "sha256": "15020e01c38c73fb7f5b1f2d39e9109fd91eeb03092961f998c73c324d426677",
+  "default": {
+    "bytes": 2849237,
+    "sha256": "74c31136d00a18dbf05fba2d7fba59c85cc201a57ae65d77999a025a692fab0f",
+    "draws": 3717,
+    "designs": 2236,
+    "e_draws": 291,
+    "e_designs": 155,
+    "e_draws_per_design": 1.8774193548387097,
+    "required_slots": 2238,
+    "encoded_font_bytes": 727259,
+    "decoded_font_bytes": 1303200,
+    "outline_points": 449268
+  },
+  "experimental": {
+    "bytes": 2864314,
+    "sha256": "15020e01c38c73fb7f5b1f2d39e9109fd91eeb03092961f998c73c324d426677",
+    "draws": 3717,
+    "designs": 3175,
+    "e_draws": 291,
+    "e_designs": 248,
+    "e_draws_per_design": 1.1733870967741935,
+    "required_slots": 3524,
+    "encoded_font_bytes": 734114,
+    "decoded_font_bytes": 1278116,
+    "outline_points": 428259
+  },
+  "text_geometry_equal": true,
+  "actual_text_equal": true,
+  "pdfium_text_equal": true,
+  "pdfium_search_equal": true,
+  "pdfium_all_token_queries": 1393,
+  "pdfium_search_scope": "Every non-whitespace token, including amounts, dates, punctuation and short labels; native PDFium Find counts.",
+  "poppler": {
+    "layout": {
+      "extraction_equal": true,
+      "literal_search_equal": true,
+      "queries": 990
+    },
+    "reading": {
+      "extraction_equal": true,
+      "literal_search_equal": true,
+      "queries": 987
+    },
+    "raw": {
+      "extraction_equal": true,
+      "literal_search_equal": true,
+      "queries": 986
+    }
+  },
+  "validation": {
+    "qpdf": {
+      "returncode": 0,
+      "output": "checking qualification/font04/local/financial-B2prime-cover-1.0.pdf\nPDF Version: 1.7\nFile is not encrypted\nFile is not linearized\nNo syntax or stream encoding errors found; the file may still contain\nerrors that qpdf cannot detect\n"
+    },
+    "ots": {
+      "returncode": 0,
+      "output": "File sanitized successfully!\n"
+    }
+  },
+  "raster_equal": true,
+  "unsubstituted_programs_and_matrices_equal": true,
+  "invisible_users_equal": true,
+  "functional_veto_rejections": 0,
+  "metrics": {
+    "analytic": {
+      "all": {
+        "default_mean": 0.0655751251242746,
+        "default_p95": 0.13273420579160458,
+        "n": 3524,
+        "mean": 0.05555953044128401,
+        "p95": 0.1165530825833697,
+        "worst_10_regressions": [
+          {
+            "member": 140,
+            "delta": 0.13374214400434142,
+            "error": 0.15871260793826075
+          },
+          {
+            "member": 604,
+            "delta": 0.09679050334191268,
+            "error": 0.1171891409632433
+          },
+          {
+            "member": 428,
+            "delta": 0.08707196449331679,
+            "error": 0.16111647671305063
+          },
+          {
+            "member": 455,
+            "delta": 0.08405808543528565,
+            "error": 0.11487507155019148
+          },
+          {
+            "member": 3251,
+            "delta": 0.07351282080834329,
+            "error": 0.13189863453544493
+          },
+          {
+            "member": 1750,
+            "delta": 0.07207018000160759,
+            "error": 0.09545726474443954
+          },
+          {
+            "member": 1529,
+            "delta": 0.06615578121458926,
+            "error": 0.089921834320786
+          },
+          {
+            "member": 689,
+            "delta": 0.06492976972889261,
+            "error": 0.1039201449758874
+          },
+          {
+            "member": 2233,
+            "delta": 0.05912336216014908,
+            "error": 0.09890037726585879
+          },
+          {
+            "member": 108,
+            "delta": 0.05686573673524123,
+            "error": 0.09329436315060714
+          }
+        ]
+      },
+      "substituted": {
+        "default_mean": 0.06638234357656261,
+        "default_p95": 0.13067127594202285,
+        "n": 1360,
+        "mean": 0.04043017029504876,
+        "p95": 0.0704273494927014,
+        "worst_10_regressions": [
+          {
+            "member": 140,
+            "delta": 0.13374214400434142,
+            "error": 0.15871260793826075
+          },
+          {
+            "member": 604,
+            "delta": 0.09679050334191268,
+            "error": 0.1171891409632433
+          },
+          {
+            "member": 428,
+            "delta": 0.08707196449331679,
+            "error": 0.16111647671305063
+          },
+          {
+            "member": 455,
+            "delta": 0.08405808543528565,
+            "error": 0.11487507155019148
+          },
+          {
+            "member": 3251,
+            "delta": 0.07351282080834329,
+            "error": 0.13189863453544493
+          },
+          {
+            "member": 1750,
+            "delta": 0.07207018000160759,
+            "error": 0.09545726474443954
+          },
+          {
+            "member": 1529,
+            "delta": 0.06615578121458926,
+            "error": 0.089921834320786
+          },
+          {
+            "member": 689,
+            "delta": 0.06492976972889261,
+            "error": 0.1039201449758874
+          },
+          {
+            "member": 2233,
+            "delta": 0.05912336216014908,
+            "error": 0.09890037726585879
+          },
+          {
+            "member": 108,
+            "delta": 0.05686573673524123,
+            "error": 0.09329436315060714
+          }
+        ]
+      }
+    },
+    "direct": {
+      "all": {
+        "default_mean": 0.07021848842469061,
+        "default_p95": 0.1455420217070963,
+        "n": 3524,
+        "mean": 0.06027654258410484,
+        "p95": 0.12744906194234268,
+        "worst_10_regressions": [
+          {
+            "member": 140,
+            "delta": 0.11700360210624222,
+            "error": 0.15628154853110804
+          },
+          {
+            "member": 604,
+            "delta": 0.104983479666283,
+            "error": 0.12509689345481992
+          },
+          {
+            "member": 428,
+            "delta": 0.08976415969730692,
+            "error": 0.16843164439771843
+          },
+          {
+            "member": 455,
+            "delta": 0.07648861806621599,
+            "error": 0.11345371484779586
+          },
+          {
+            "member": 3251,
+            "delta": 0.07177239191851678,
+            "error": 0.13374775708927936
+          },
+          {
+            "member": 108,
+            "delta": 0.0693529964407198,
+            "error": 0.1253124399209205
+          },
+          {
+            "member": 1750,
+            "delta": 0.0685188895642316,
+            "error": 0.09091591121086219
+          },
+          {
+            "member": 345,
+            "delta": 0.06662156538888522,
+            "error": 0.12879529706355966
+          },
+          {
+            "member": 730,
+            "delta": 0.06586714492488552,
+            "error": 0.12160490550525287
+          },
+          {
+            "member": 1529,
+            "delta": 0.06516465271257041,
+            "error": 0.08938176466958625
+          }
+        ]
+      },
+      "substituted": {
+        "default_mean": 0.07166637716267486,
+        "default_p95": 0.1465853750603518,
+        "n": 1360,
+        "mean": 0.045905041028686436,
+        "p95": 0.0799098343666634,
+        "worst_10_regressions": [
+          {
+            "member": 140,
+            "delta": 0.11700360210624222,
+            "error": 0.15628154853110804
+          },
+          {
+            "member": 604,
+            "delta": 0.104983479666283,
+            "error": 0.12509689345481992
+          },
+          {
+            "member": 428,
+            "delta": 0.08976415969730692,
+            "error": 0.16843164439771843
+          },
+          {
+            "member": 455,
+            "delta": 0.07648861806621599,
+            "error": 0.11345371484779586
+          },
+          {
+            "member": 3251,
+            "delta": 0.07177239191851678,
+            "error": 0.13374775708927936
+          },
+          {
+            "member": 108,
+            "delta": 0.0693529964407198,
+            "error": 0.1253124399209205
+          },
+          {
+            "member": 1750,
+            "delta": 0.0685188895642316,
+            "error": 0.09091591121086219
+          },
+          {
+            "member": 345,
+            "delta": 0.06662156538888522,
+            "error": 0.12879529706355966
+          },
+          {
+            "member": 730,
+            "delta": 0.06586714492488552,
+            "error": 0.12160490550525287
+          },
+          {
+            "member": 1529,
+            "delta": 0.06516465271257041,
+            "error": 0.08938176466958625
+          }
+        ]
+      }
+    },
+    "pdfium": {
+      "all": {
+        "default_mean": 0.07616736863551683,
+        "default_p95": 0.1627209298422766,
+        "n": 3524,
+        "mean": 0.06472001757635935,
+        "p95": 0.14655743109969174,
+        "worst_10_regressions": [
+          {
+            "member": 140,
+            "delta": 0.17152884575914346,
+            "error": 0.17808547743075187
+          },
+          {
+            "member": 604,
+            "delta": 0.1053172407102993,
+            "error": 0.11368778319654886
+          },
+          {
+            "member": 3251,
+            "delta": 0.09939527880659571,
+            "error": 0.18297001254943387
+          },
+          {
+            "member": 3311,
+            "delta": 0.09904609910135201,
+            "error": 0.1160645561861575
+          },
+          {
+            "member": 1208,
+            "delta": 0.08205414105734013,
+            "error": 0.16634617805501656
+          },
+          {
+            "member": 1750,
+            "delta": 0.08039670319037653,
+            "error": 0.08712352989509196
+          },
+          {
+            "member": 428,
+            "delta": 0.07929483255035936,
+            "error": 0.15279865219636773
+          },
+          {
+            "member": 2233,
+            "delta": 0.07787017357588331,
+            "error": 0.10631133382685118
+          },
+          {
+            "member": 1181,
+            "delta": 0.06927278150483854,
+            "error": 0.09435922574471473
+          },
+          {
+            "member": 1234,
+            "delta": 0.06765522194843629,
+            "error": 0.07571051372321154
+          }
+        ]
+      },
+      "substituted": {
+        "default_mean": 0.07616770750988663,
+        "default_p95": 0.16285007900996976,
+        "n": 1360,
+        "mean": 0.04650560079483441,
+        "p95": 0.10619717803113705,
+        "worst_10_regressions": [
+          {
+            "member": 140,
+            "delta": 0.17152884575914346,
+            "error": 0.17808547743075187
+          },
+          {
+            "member": 604,
+            "delta": 0.1053172407102993,
+            "error": 0.11368778319654886
+          },
+          {
+            "member": 3251,
+            "delta": 0.09939527880659571,
+            "error": 0.18297001254943387
+          },
+          {
+            "member": 3311,
+            "delta": 0.09904609910135201,
+            "error": 0.1160645561861575
+          },
+          {
+            "member": 1208,
+            "delta": 0.08205414105734013,
+            "error": 0.16634617805501656
+          },
+          {
+            "member": 1750,
+            "delta": 0.08039670319037653,
+            "error": 0.08712352989509196
+          },
+          {
+            "member": 428,
+            "delta": 0.07929483255035936,
+            "error": 0.15279865219636773
+          },
+          {
+            "member": 2233,
+            "delta": 0.07787017357588331,
+            "error": 0.10631133382685118
+          },
+          {
+            "member": 1181,
+            "delta": 0.06927278150483854,
+            "error": 0.09435922574471473
+          },
+          {
+            "member": 1234,
+            "delta": 0.06765522194843629,
+            "error": 0.07571051372321154
+          }
+        ]
+      }
+    },
+    "poppler": {
+      "all": {
+        "default_mean": 0.14275545017500715,
+        "default_p95": 0.2177704317124522,
+        "n": 3524,
+        "mean": 0.13426058800002583,
+        "p95": 0.20175641561624388,
+        "worst_10_regressions": [
+          {
+            "member": 604,
+            "delta": 0.10757287644183484,
+            "error": 0.21239558269012068
+          },
+          {
+            "member": 345,
+            "delta": 0.10186753781837635,
+            "error": 0.23921973550861245
+          },
+          {
+            "member": 428,
+            "delta": 0.09826546916496029,
+            "error": 0.2370119417746227
+          },
+          {
+            "member": 1750,
+            "delta": 0.08915820508474194,
+            "error": 0.18504806622879122
+          },
+          {
+            "member": 2975,
+            "delta": 0.08702925382874172,
+            "error": 0.22847121401250894
+          },
+          {
+            "member": 1847,
+            "delta": 0.07965858049615081,
+            "error": 0.1978117944132966
+          },
+          {
+            "member": 1351,
+            "delta": 0.07884077569245973,
+            "error": 0.21184849227809313
+          },
+          {
+            "member": 3251,
+            "delta": 0.07835190333103426,
+            "error": 0.2554876389763047
+          },
+          {
+            "member": 343,
+            "delta": 0.07451321426708378,
+            "error": 0.1341194221398602
+          },
+          {
+            "member": 3199,
+            "delta": 0.0743599455618286,
+            "error": 0.20820113853181865
+          }
+        ]
+      },
+      "substituted": {
+        "default_mean": 0.14187243976079622,
+        "default_p95": 0.2197663048298715,
+        "n": 1360,
+        "mean": 0.11986075277209467,
+        "p95": 0.15857691272587054,
+        "worst_10_regressions": [
+          {
+            "member": 604,
+            "delta": 0.10757287644183484,
+            "error": 0.21239558269012068
+          },
+          {
+            "member": 345,
+            "delta": 0.10186753781837635,
+            "error": 0.23921973550861245
+          },
+          {
+            "member": 428,
+            "delta": 0.09826546916496029,
+            "error": 0.2370119417746227
+          },
+          {
+            "member": 1750,
+            "delta": 0.08915820508474194,
+            "error": 0.18504806622879122
+          },
+          {
+            "member": 2975,
+            "delta": 0.08702925382874172,
+            "error": 0.22847121401250894
+          },
+          {
+            "member": 1847,
+            "delta": 0.07965858049615081,
+            "error": 0.1978117944132966
+          },
+          {
+            "member": 1351,
+            "delta": 0.07884077569245973,
+            "error": 0.21184849227809313
+          },
+          {
+            "member": 3251,
+            "delta": 0.07835190333103426,
+            "error": 0.2554876389763047
+          },
+          {
+            "member": 343,
+            "delta": 0.07451321426708378,
+            "error": 0.1341194221398602
+          },
+          {
+            "member": 3199,
+            "delta": 0.0743599455618286,
+            "error": 0.20820113853181865
+          }
+        ]
+      }
+    }
+  },
+  "renderer_floors": {
+    "pdfium": {
+      "mean": 0.037275590754064,
+      "p95": 0.08588646617342122
+    },
+    "poppler": {
+      "mean": 0.21858405589947658,
+      "p95": 0.3062837561924952
+    },
+    "analytic": {
+      "mean": 0.0,
+      "p95": 0.0
+    }
+  },
+  "classes": {
+    "$": {
+      "draws": 17,
+      "before_required_visible_programs": 13,
+      "after_visible_stub_or_outline_slots": 15,
+      "visible_leaf_outlines": 13,
+      "draws_per_leaf_outline": 1.3076923076923077,
+      "required_slots": 16,
+      "outline_points": 4086,
+      "decoded_glyf_bytes": 11786,
+      "encoded_font_bytes": null,
+      "encoded_font_note": "Shared compression; complete font bytes reported globally, no arbitrary per-class allocation.",
+      "added_outlines": 1,
+      "retired_outlines": 1,
+      "net_retired_outlines": 0,
+      "added_outline_glyf_bytes": 809,
+      "retired_outline_glyf_bytes": 1231,
+      "substituted": 3
+    },
+    "&": {
+      "draws": 13,
+      "before_required_visible_programs": 13,
+      "after_visible_stub_or_outline_slots": 13,
+      "visible_leaf_outlines": 13,
+      "draws_per_leaf_outline": 1.0,
+      "required_slots": 13,
+      "outline_points": 4616,
+      "decoded_glyf_bytes": 12795,
+      "encoded_font_bytes": null,
+      "encoded_font_note": "Shared compression; complete font bytes reported globally, no arbitrary per-class allocation.",
+      "added_outlines": 0,
+      "retired_outlines": 0,
+      "net_retired_outlines": 0,
+      "added_outline_glyf_bytes": 0,
+      "retired_outline_glyf_bytes": 0,
+      "substituted": 0
+    },
+    ",": {
+      "draws": 47,
+      "before_required_visible_programs": 35,
+      "after_visible_stub_or_outline_slots": 46,
+      "visible_leaf_outlines": 33,
+      "draws_per_leaf_outline": 1.4242424242424243,
+      "required_slots": 47,
+      "outline_points": 5682,
+      "decoded_glyf_bytes": 16661,
+      "encoded_font_bytes": null,
+      "encoded_font_note": "Shared compression; complete font bytes reported globally, no arbitrary per-class allocation.",
+      "added_outlines": 4,
+      "retired_outlines": 6,
+      "net_retired_outlines": 2,
+      "added_outline_glyf_bytes": 651,
+      "retired_outline_glyf_bytes": 1282,
+      "substituted": 17
+    },
+    ".": {
+      "draws": 24,
+      "before_required_visible_programs": 18,
+      "after_visible_stub_or_outline_slots": 22,
+      "visible_leaf_outlines": 19,
+      "draws_per_leaf_outline": 1.263157894736842,
+      "required_slots": 23,
+      "outline_points": 2346,
+      "decoded_glyf_bytes": 6831,
+      "encoded_font_bytes": null,
+      "encoded_font_note": "Shared compression; complete font bytes reported globally, no arbitrary per-class allocation.",
+      "added_outlines": 2,
+      "retired_outlines": 1,
+      "net_retired_outlines": -1,
+      "added_outline_glyf_bytes": 146,
+      "retired_outline_glyf_bytes": 72,
+      "substituted": 5
+    },
+    "0": {
+      "draws": 234,
+      "before_required_visible_programs": 81,
+      "after_visible_stub_or_outline_slots": 194,
+      "visible_leaf_outlines": 91,
+      "draws_per_leaf_outline": 2.5714285714285716,
+      "required_slots": 195,
+      "outline_points": 17814,
+      "decoded_glyf_bytes": 55104,
+      "encoded_font_bytes": null,
+      "encoded_font_note": "Shared compression; complete font bytes reported globally, no arbitrary per-class allocation.",
+      "added_outlines": 26,
+      "retired_outlines": 16,
+      "net_retired_outlines": -10,
+      "added_outline_glyf_bytes": 11922,
+      "retired_outline_glyf_bytes": 9130,
+      "substituted": 129
+    },
+    "1": {
+      "draws": 120,
+      "before_required_visible_programs": 53,
+      "after_visible_stub_or_outline_slots": 104,
+      "visible_leaf_outlines": 55,
+      "draws_per_leaf_outline": 2.1818181818181817,
+      "required_slots": 105,
+      "outline_points": 6104,
+      "decoded_glyf_bytes": 19046,
+      "encoded_font_bytes": null,
+      "encoded_font_note": "Shared compression; complete font bytes reported globally, no arbitrary per-class allocation.",
+      "added_outlines": 18,
+      "retired_outlines": 16,
+      "net_retired_outlines": -2,
+      "added_outline_glyf_bytes": 5282,
+      "retired_outline_glyf_bytes": 5306,
+      "substituted": 67
+    },
+    "2": {
+      "draws": 108,
+      "before_required_visible_programs": 54,
+      "after_visible_stub_or_outline_slots": 100,
+      "visible_leaf_outlines": 50,
+      "draws_per_leaf_outline": 2.16,
+      "required_slots": 101,
+      "outline_points": 10389,
+      "decoded_glyf_bytes": 31463,
+      "encoded_font_bytes": null,
+      "encoded_font_note": "Shared compression; complete font bytes reported globally, no arbitrary per-class allocation.",
+      "added_outlines": 12,
+      "retired_outlines": 16,
+      "net_retired_outlines": 4,
+      "added_outline_glyf_bytes": 6141,
+      "retired_outline_glyf_bytes": 10615,
+      "substituted": 63
+    },
+    "3": {
+      "draws": 66,
+      "before_required_visible_programs": 38,
+      "after_visible_stub_or_outline_slots": 52,
+      "visible_leaf_outlines": 34,
+      "draws_per_leaf_outline": 1.9411764705882353,
+      "required_slots": 53,
+      "outline_points": 7847,
+      "decoded_glyf_bytes": 22402,
+      "encoded_font_bytes": null,
+      "encoded_font_note": "Shared compression; complete font bytes reported globally, no arbitrary per-class allocation.",
+      "added_outlines": 5,
+      "retired_outlines": 9,
+      "net_retired_outlines": 4,
+      "added_outline_glyf_bytes": 2487,
+      "retired_outline_glyf_bytes": 5975,
+      "substituted": 23
+    },
+    "4": {
+      "draws": 65,
+      "before_required_visible_programs": 39,
+      "after_visible_stub_or_outline_slots": 54,
+      "visible_leaf_outlines": 37,
+      "draws_per_leaf_outline": 1.7567567567567568,
+      "required_slots": 55,
+      "outline_points": 7548,
+      "decoded_glyf_bytes": 22098,
+      "encoded_font_bytes": null,
+      "encoded_font_note": "Shared compression; complete font bytes reported globally, no arbitrary per-class allocation.",
+      "added_outlines": 6,
+      "retired_outlines": 8,
+      "net_retired_outlines": 2,
+      "added_outline_glyf_bytes": 2978,
+      "retired_outline_glyf_bytes": 4721,
+      "substituted": 23
+    },
+    "5": {
+      "draws": 97,
+      "before_required_visible_programs": 59,
+      "after_visible_stub_or_outline_slots": 91,
+      "visible_leaf_outlines": 45,
+      "draws_per_leaf_outline": 2.1555555555555554,
+      "required_slots": 92,
+      "outline_points": 10127,
+      "decoded_glyf_bytes": 30272,
+      "encoded_font_bytes": null,
+      "encoded_font_note": "Shared compression; complete font bytes reported globally, no arbitrary per-class allocation.",
+      "added_outlines": 12,
+      "retired_outlines": 26,
+      "net_retired_outlines": 14,
+      "added_outline_glyf_bytes": 5922,
+      "retired_outline_glyf_bytes": 17393,
+      "substituted": 58
+    },
+    "6": {
+      "draws": 55,
+      "before_required_visible_programs": 23,
+      "after_visible_stub_or_outline_slots": 36,
+      "visible_leaf_outlines": 23,
+      "draws_per_leaf_outline": 2.391304347826087,
+      "required_slots": 37,
+      "outline_points": 5105,
+      "decoded_glyf_bytes": 15214,
+      "encoded_font_bytes": null,
+      "encoded_font_note": "Shared compression; complete font bytes reported globally, no arbitrary per-class allocation.",
+      "added_outlines": 3,
+      "retired_outlines": 3,
+      "net_retired_outlines": 0,
+      "added_outline_glyf_bytes": 1253,
+      "retired_outline_glyf_bytes": 1909,
+      "substituted": 17
+    },
+    "7": {
+      "draws": 37,
+      "before_required_visible_programs": 22,
+      "after_visible_stub_or_outline_slots": 28,
+      "visible_leaf_outlines": 21,
+      "draws_per_leaf_outline": 1.7619047619047619,
+      "required_slots": 29,
+      "outline_points": 3279,
+      "decoded_glyf_bytes": 9861,
+      "encoded_font_bytes": null,
+      "encoded_font_note": "Shared compression; complete font bytes reported globally, no arbitrary per-class allocation.",
+      "added_outlines": 1,
+      "retired_outlines": 2,
+      "net_retired_outlines": 1,
+      "added_outline_glyf_bytes": 320,
+      "retired_outline_glyf_bytes": 974,
+      "substituted": 8
+    },
+    "8": {
+      "draws": 66,
+      "before_required_visible_programs": 38,
+      "after_visible_stub_or_outline_slots": 51,
+      "visible_leaf_outlines": 40,
+      "draws_per_leaf_outline": 1.65,
+      "required_slots": 52,
+      "outline_points": 9779,
+      "decoded_glyf_bytes": 28166,
+      "encoded_font_bytes": null,
+      "encoded_font_note": "Shared compression; complete font bytes reported globally, no arbitrary per-class allocation.",
+      "added_outlines": 6,
+      "retired_outlines": 4,
+      "net_retired_outlines": -2,
+      "added_outline_glyf_bytes": 2667,
+      "retired_outline_glyf_bytes": 2896,
+      "substituted": 18
+    },
+    "9": {
+      "draws": 65,
+      "before_required_visible_programs": 31,
+      "after_visible_stub_or_outline_slots": 54,
+      "visible_leaf_outlines": 33,
+      "draws_per_leaf_outline": 1.9696969696969697,
+      "required_slots": 55,
+      "outline_points": 6373,
+      "decoded_glyf_bytes": 19229,
+      "encoded_font_bytes": null,
+      "encoded_font_note": "Shared compression; complete font bytes reported globally, no arbitrary per-class allocation.",
+      "added_outlines": 9,
+      "retired_outlines": 7,
+      "net_retired_outlines": -2,
+      "added_outline_glyf_bytes": 4327,
+      "retired_outline_glyf_bytes": 4799,
+      "substituted": 31
+    },
+    "A": {
+      "draws": 33,
+      "before_required_visible_programs": 27,
+      "after_visible_stub_or_outline_slots": 31,
+      "visible_leaf_outlines": 26,
+      "draws_per_leaf_outline": 1.2692307692307692,
+      "required_slots": 32,
+      "outline_points": 6630,
+      "decoded_glyf_bytes": 19004,
+      "encoded_font_bytes": null,
+      "encoded_font_note": "Shared compression; complete font bytes reported globally, no arbitrary per-class allocation.",
+      "added_outlines": 3,
+      "retired_outlines": 4,
+      "net_retired_outlines": 1,
+      "added_outline_glyf_bytes": 2117,
+      "retired_outline_glyf_bytes": 2546,
+      "substituted": 8
+    },
+    "B": {
+      "draws": 18,
+      "before_required_visible_programs": 12,
+      "after_visible_stub_or_outline_slots": 15,
+      "visible_leaf_outlines": 13,
+      "draws_per_leaf_outline": 1.3846153846153846,
+      "required_slots": 16,
+      "outline_points": 3560,
+      "decoded_glyf_bytes": 10219,
+      "encoded_font_bytes": null,
+      "encoded_font_note": "Shared compression; complete font bytes reported globally, no arbitrary per-class allocation.",
+      "added_outlines": 2,
+      "retired_outlines": 1,
+      "net_retired_outlines": -1,
+      "added_outline_glyf_bytes": 1352,
+      "retired_outline_glyf_bytes": 828,
+      "substituted": 4
+    },
+    "C": {
+      "draws": 41,
+      "before_required_visible_programs": 33,
+      "after_visible_stub_or_outline_slots": 37,
+      "visible_leaf_outlines": 30,
+      "draws_per_leaf_outline": 1.3666666666666667,
+      "required_slots": 38,
+      "outline_points": 7648,
+      "decoded_glyf_bytes": 21770,
+      "encoded_font_bytes": null,
+      "encoded_font_note": "Shared compression; complete font bytes reported globally, no arbitrary per-class allocation.",
+      "added_outlines": 3,
+      "retired_outlines": 6,
+      "net_retired_outlines": 3,
+      "added_outline_glyf_bytes": 1649,
+      "retired_outline_glyf_bytes": 4477,
+      "substituted": 10
+    },
+    "D": {
+      "draws": 22,
+      "before_required_visible_programs": 18,
+      "after_visible_stub_or_outline_slots": 20,
+      "visible_leaf_outlines": 17,
+      "draws_per_leaf_outline": 1.2941176470588236,
+      "required_slots": 21,
+      "outline_points": 3912,
+      "decoded_glyf_bytes": 11462,
+      "encoded_font_bytes": null,
+      "encoded_font_note": "Shared compression; complete font bytes reported globally, no arbitrary per-class allocation.",
+      "added_outlines": 1,
+      "retired_outlines": 2,
+      "net_retired_outlines": 1,
+      "added_outline_glyf_bytes": 668,
+      "retired_outline_glyf_bytes": 1365,
+      "substituted": 4
+    },
+    "E": {
+      "draws": 45,
+      "before_required_visible_programs": 34,
+      "after_visible_stub_or_outline_slots": 36,
+      "visible_leaf_outlines": 31,
+      "draws_per_leaf_outline": 1.4516129032258065,
+      "required_slots": 37,
+      "outline_points": 8026,
+      "decoded_glyf_bytes": 22822,
+      "encoded_font_bytes": null,
+      "encoded_font_note": "Shared compression; complete font bytes reported globally, no arbitrary per-class allocation.",
+      "added_outlines": 3,
+      "retired_outlines": 6,
+      "net_retired_outlines": 3,
+      "added_outline_glyf_bytes": 2180,
+      "retired_outline_glyf_bytes": 4321,
+      "substituted": 8
+    },
+    "F": {
+      "draws": 20,
+      "before_required_visible_programs": 19,
+      "after_visible_stub_or_outline_slots": 19,
+      "visible_leaf_outlines": 17,
+      "draws_per_leaf_outline": 1.1764705882352942,
+      "required_slots": 20,
+      "outline_points": 4204,
+      "decoded_glyf_bytes": 11721,
+      "encoded_font_bytes": null,
+      "encoded_font_note": "Shared compression; complete font bytes reported globally, no arbitrary per-class allocation.",
+      "added_outlines": 1,
+      "retired_outlines": 3,
+      "net_retired_outlines": 2,
+      "added_outline_glyf_bytes": 591,
+      "retired_outline_glyf_bytes": 1774,
+      "substituted": 3
+    },
+    "G": {
+      "draws": 15,
+      "before_required_visible_programs": 10,
+      "after_visible_stub_or_outline_slots": 14,
+      "visible_leaf_outlines": 9,
+      "draws_per_leaf_outline": 1.6666666666666667,
+      "required_slots": 15,
+      "outline_points": 2454,
+      "decoded_glyf_bytes": 7056,
+      "encoded_font_bytes": null,
+      "encoded_font_note": "Shared compression; complete font bytes reported globally, no arbitrary per-class allocation.",
+      "added_outlines": 1,
+      "retired_outlines": 2,
+      "net_retired_outlines": 1,
+      "added_outline_glyf_bytes": 790,
+      "retired_outline_glyf_bytes": 1601,
+      "substituted": 6
+    },
+    "H": {
+      "draws": 31,
+      "before_required_visible_programs": 24,
+      "after_visible_stub_or_outline_slots": 30,
+      "visible_leaf_outlines": 19,
+      "draws_per_leaf_outline": 1.631578947368421,
+      "required_slots": 31,
+      "outline_points": 5062,
+      "decoded_glyf_bytes": 14462,
+      "encoded_font_bytes": null,
+      "encoded_font_note": "Shared compression; complete font bytes reported globally, no arbitrary per-class allocation.",
+      "added_outlines": 3,
+      "retired_outlines": 8,
+      "net_retired_outlines": 5,
+      "added_outline_glyf_bytes": 1956,
+      "retired_outline_glyf_bytes": 5879,
+      "substituted": 14
+    },
+    "I": {
+      "draws": 27,
+      "before_required_visible_programs": 21,
+      "after_visible_stub_or_outline_slots": 24,
+      "visible_leaf_outlines": 17,
+      "draws_per_leaf_outline": 1.588235294117647,
+      "required_slots": 25,
+      "outline_points": 3196,
+      "decoded_glyf_bytes": 9264,
+      "encoded_font_bytes": null,
+      "encoded_font_note": "Shared compression; complete font bytes reported globally, no arbitrary per-class allocation.",
+      "added_outlines": 3,
+      "retired_outlines": 7,
+      "net_retired_outlines": 4,
+      "added_outline_glyf_bytes": 925,
+      "retired_outline_glyf_bytes": 2162,
+      "substituted": 10
+    },
+    "J": {
+      "draws": 34,
+      "before_required_visible_programs": 23,
+      "after_visible_stub_or_outline_slots": 29,
+      "visible_leaf_outlines": 22,
+      "draws_per_leaf_outline": 1.5454545454545454,
+      "required_slots": 30,
+      "outline_points": 4469,
+      "decoded_glyf_bytes": 12736,
+      "encoded_font_bytes": null,
+      "encoded_font_note": "Shared compression; complete font bytes reported globally, no arbitrary per-class allocation.",
+      "added_outlines": 1,
+      "retired_outlines": 2,
+      "net_retired_outlines": 1,
+      "added_outline_glyf_bytes": 437,
+      "retired_outline_glyf_bytes": 946,
+      "substituted": 8
+    },
+    "L": {
+      "draws": 29,
+      "before_required_visible_programs": 18,
+      "after_visible_stub_or_outline_slots": 26,
+      "visible_leaf_outlines": 19,
+      "draws_per_leaf_outline": 1.5263157894736843,
+      "required_slots": 27,
+      "outline_points": 3459,
+      "decoded_glyf_bytes": 9742,
+      "encoded_font_bytes": null,
+      "encoded_font_note": "Shared compression; complete font bytes reported globally, no arbitrary per-class allocation.",
+      "added_outlines": 3,
+      "retired_outlines": 2,
+      "net_retired_outlines": -1,
+      "added_outline_glyf_bytes": 1543,
+      "retired_outline_glyf_bytes": 995,
+      "substituted": 10
+    },
+    "M": {
+      "draws": 17,
+      "before_required_visible_programs": 16,
+      "after_visible_stub_or_outline_slots": 16,
+      "visible_leaf_outlines": 16,
+      "draws_per_leaf_outline": 1.0625,
+      "required_slots": 17,
+      "outline_points": 5956,
+      "decoded_glyf_bytes": 16596,
+      "encoded_font_bytes": null,
+      "encoded_font_note": "Shared compression; complete font bytes reported globally, no arbitrary per-class allocation.",
+      "added_outlines": 0,
+      "retired_outlines": 0,
+      "net_retired_outlines": 0,
+      "added_outline_glyf_bytes": 0,
+      "retired_outline_glyf_bytes": 0,
+      "substituted": 0
+    },
+    "N": {
+      "draws": 23,
+      "before_required_visible_programs": 18,
+      "after_visible_stub_or_outline_slots": 20,
+      "visible_leaf_outlines": 17,
+      "draws_per_leaf_outline": 1.3529411764705883,
+      "required_slots": 21,
+      "outline_points": 4251,
+      "decoded_glyf_bytes": 12137,
+      "encoded_font_bytes": null,
+      "encoded_font_note": "Shared compression; complete font bytes reported globally, no arbitrary per-class allocation.",
+      "added_outlines": 2,
+      "retired_outlines": 3,
+      "net_retired_outlines": 1,
+      "added_outline_glyf_bytes": 1181,
+      "retired_outline_glyf_bytes": 2189,
+      "substituted": 5
+    },
+    "O": {
+      "draws": 36,
+      "before_required_visible_programs": 16,
+      "after_visible_stub_or_outline_slots": 32,
+      "visible_leaf_outlines": 19,
+      "draws_per_leaf_outline": 1.894736842105263,
+      "required_slots": 33,
+      "outline_points": 4410,
+      "decoded_glyf_bytes": 13431,
+      "encoded_font_bytes": null,
+      "encoded_font_note": "Shared compression; complete font bytes reported globally, no arbitrary per-class allocation.",
+      "added_outlines": 5,
+      "retired_outlines": 2,
+      "net_retired_outlines": -3,
+      "added_outline_glyf_bytes": 2182,
+      "retired_outline_glyf_bytes": 1287,
+      "substituted": 18
+    },
+    "P": {
+      "draws": 27,
+      "before_required_visible_programs": 17,
+      "after_visible_stub_or_outline_slots": 21,
+      "visible_leaf_outlines": 15,
+      "draws_per_leaf_outline": 1.8,
+      "required_slots": 22,
+      "outline_points": 3149,
+      "decoded_glyf_bytes": 9150,
+      "encoded_font_bytes": null,
+      "encoded_font_note": "Shared compression; complete font bytes reported globally, no arbitrary per-class allocation.",
+      "added_outlines": 4,
+      "retired_outlines": 6,
+      "net_retired_outlines": 2,
+      "added_outline_glyf_bytes": 1923,
+      "retired_outline_glyf_bytes": 3586,
+      "substituted": 10
+    },
+    "R": {
+      "draws": 25,
+      "before_required_visible_programs": 24,
+      "after_visible_stub_or_outline_slots": 24,
+      "visible_leaf_outlines": 21,
+      "draws_per_leaf_outline": 1.1904761904761905,
+      "required_slots": 25,
+      "outline_points": 5628,
+      "decoded_glyf_bytes": 16176,
+      "encoded_font_bytes": null,
+      "encoded_font_note": "Shared compression; complete font bytes reported globally, no arbitrary per-class allocation.",
+      "added_outlines": 3,
+      "retired_outlines": 6,
+      "net_retired_outlines": 3,
+      "added_outline_glyf_bytes": 1907,
+      "retired_outline_glyf_bytes": 4306,
+      "substituted": 6
+    },
+    "S": {
+      "draws": 22,
+      "before_required_visible_programs": 16,
+      "after_visible_stub_or_outline_slots": 22,
+      "visible_leaf_outlines": 13,
+      "draws_per_leaf_outline": 1.6923076923076923,
+      "required_slots": 23,
+      "outline_points": 3725,
+      "decoded_glyf_bytes": 10830,
+      "encoded_font_bytes": null,
+      "encoded_font_note": "Shared compression; complete font bytes reported globally, no arbitrary per-class allocation.",
+      "added_outlines": 3,
+      "retired_outlines": 6,
+      "net_retired_outlines": 3,
+      "added_outline_glyf_bytes": 2296,
+      "retired_outline_glyf_bytes": 5347,
+      "substituted": 12
+    },
+    "T": {
+      "draws": 61,
+      "before_required_visible_programs": 35,
+      "after_visible_stub_or_outline_slots": 53,
+      "visible_leaf_outlines": 33,
+      "draws_per_leaf_outline": 1.8484848484848484,
+      "required_slots": 54,
+      "outline_points": 6558,
+      "decoded_glyf_bytes": 18836,
+      "encoded_font_bytes": null,
+      "encoded_font_note": "Shared compression; complete font bytes reported globally, no arbitrary per-class allocation.",
+      "added_outlines": 5,
+      "retired_outlines": 7,
+      "net_retired_outlines": 2,
+      "added_outline_glyf_bytes": 2430,
+      "retired_outline_glyf_bytes": 3636,
+      "substituted": 26
+    },
+    "W": {
+      "draws": 32,
+      "before_required_visible_programs": 28,
+      "after_visible_stub_or_outline_slots": 28,
+      "visible_leaf_outlines": 25,
+      "draws_per_leaf_outline": 1.28,
+      "required_slots": 29,
+      "outline_points": 9575,
+      "decoded_glyf_bytes": 26701,
+      "encoded_font_bytes": null,
+      "encoded_font_note": "Shared compression; complete font bytes reported globally, no arbitrary per-class allocation.",
+      "added_outlines": 1,
+      "retired_outlines": 4,
+      "net_retired_outlines": 3,
+      "added_outline_glyf_bytes": 849,
+      "retired_outline_glyf_bytes": 3519,
+      "substituted": 4
+    },
+    "a": {
+      "draws": 159,
+      "before_required_visible_programs": 91,
+      "after_visible_stub_or_outline_slots": 116,
+      "visible_leaf_outlines": 93,
+      "draws_per_leaf_outline": 1.7096774193548387,
+      "required_slots": 117,
+      "outline_points": 17160,
+      "decoded_glyf_bytes": 50635,
+      "encoded_font_bytes": null,
+      "encoded_font_note": "Shared compression; complete font bytes reported globally, no arbitrary per-class allocation.",
+      "added_outlines": 14,
+      "retired_outlines": 12,
+      "net_retired_outlines": -2,
+      "added_outline_glyf_bytes": 7454,
+      "retired_outline_glyf_bytes": 6507,
+      "substituted": 37
+    },
+    "b": {
+      "draws": 41,
+      "before_required_visible_programs": 24,
+      "after_visible_stub_or_outline_slots": 39,
+      "visible_leaf_outlines": 21,
+      "draws_per_leaf_outline": 1.9523809523809523,
+      "required_slots": 40,
+      "outline_points": 4041,
+      "decoded_glyf_bytes": 12074,
+      "encoded_font_bytes": null,
+      "encoded_font_note": "Shared compression; complete font bytes reported globally, no arbitrary per-class allocation.",
+      "added_outlines": 4,
+      "retired_outlines": 7,
+      "net_retired_outlines": 3,
+      "added_outline_glyf_bytes": 2242,
+      "retired_outline_glyf_bytes": 3911,
+      "substituted": 22
+    },
+    "c": {
+      "draws": 38,
+      "before_required_visible_programs": 23,
+      "after_visible_stub_or_outline_slots": 37,
+      "visible_leaf_outlines": 21,
+      "draws_per_leaf_outline": 1.8095238095238095,
+      "required_slots": 38,
+      "outline_points": 3056,
+      "decoded_glyf_bytes": 9438,
+      "encoded_font_bytes": null,
+      "encoded_font_note": "Shared compression; complete font bytes reported globally, no arbitrary per-class allocation.",
+      "added_outlines": 7,
+      "retired_outlines": 9,
+      "net_retired_outlines": 2,
+      "added_outline_glyf_bytes": 3023,
+      "retired_outline_glyf_bytes": 3857,
+      "substituted": 23
+    },
+    "d": {
+      "draws": 61,
+      "before_required_visible_programs": 42,
+      "after_visible_stub_or_outline_slots": 52,
+      "visible_leaf_outlines": 40,
+      "draws_per_leaf_outline": 1.525,
+      "required_slots": 53,
+      "outline_points": 8297,
+      "decoded_glyf_bytes": 24514,
+      "encoded_font_bytes": null,
+      "encoded_font_note": "Shared compression; complete font bytes reported globally, no arbitrary per-class allocation.",
+      "added_outlines": 5,
+      "retired_outlines": 7,
+      "net_retired_outlines": 2,
+      "added_outline_glyf_bytes": 3116,
+      "retired_outline_glyf_bytes": 4423,
+      "substituted": 17
+    },
+    "e": {
+      "draws": 291,
+      "before_required_visible_programs": 155,
+      "after_visible_stub_or_outline_slots": 248,
+      "visible_leaf_outlines": 153,
+      "draws_per_leaf_outline": 1.9019607843137254,
+      "required_slots": 249,
+      "outline_points": 25735,
+      "decoded_glyf_bytes": 76761,
+      "encoded_font_bytes": null,
+      "encoded_font_note": "Shared compression; complete font bytes reported globally, no arbitrary per-class allocation.",
+      "added_outlines": 33,
+      "retired_outlines": 35,
+      "net_retired_outlines": 2,
+      "added_outline_glyf_bytes": 15174,
+      "retired_outline_glyf_bytes": 16835,
+      "substituted": 128
+    },
+    "f": {
+      "draws": 36,
+      "before_required_visible_programs": 18,
+      "after_visible_stub_or_outline_slots": 29,
+      "visible_leaf_outlines": 14,
+      "draws_per_leaf_outline": 2.5714285714285716,
+      "required_slots": 30,
+      "outline_points": 2303,
+      "decoded_glyf_bytes": 7004,
+      "encoded_font_bytes": null,
+      "encoded_font_note": "Shared compression; complete font bytes reported globally, no arbitrary per-class allocation.",
+      "added_outlines": 3,
+      "retired_outlines": 7,
+      "net_retired_outlines": 4,
+      "added_outline_glyf_bytes": 1437,
+      "retired_outline_glyf_bytes": 3274,
+      "substituted": 18
+    },
+    "g": {
+      "draws": 22,
+      "before_required_visible_programs": 15,
+      "after_visible_stub_or_outline_slots": 17,
+      "visible_leaf_outlines": 16,
+      "draws_per_leaf_outline": 1.375,
+      "required_slots": 18,
+      "outline_points": 4551,
+      "decoded_glyf_bytes": 13122,
+      "encoded_font_bytes": null,
+      "encoded_font_note": "Shared compression; complete font bytes reported globally, no arbitrary per-class allocation.",
+      "added_outlines": 1,
+      "retired_outlines": 0,
+      "net_retired_outlines": -1,
+      "added_outline_glyf_bytes": 780,
+      "retired_outline_glyf_bytes": 0,
+      "substituted": 2
+    },
+    "h": {
+      "draws": 92,
+      "before_required_visible_programs": 54,
+      "after_visible_stub_or_outline_slots": 79,
+      "visible_leaf_outlines": 52,
+      "draws_per_leaf_outline": 1.7692307692307692,
+      "required_slots": 80,
+      "outline_points": 9490,
+      "decoded_glyf_bytes": 27529,
+      "encoded_font_bytes": null,
+      "encoded_font_note": "Shared compression; complete font bytes reported globally, no arbitrary per-class allocation.",
+      "added_outlines": 8,
+      "retired_outlines": 10,
+      "net_retired_outlines": 2,
+      "added_outline_glyf_bytes": 4361,
+      "retired_outline_glyf_bytes": 4999,
+      "substituted": 35
+    },
+    "i": {
+      "draws": 93,
+      "before_required_visible_programs": 50,
+      "after_visible_stub_or_outline_slots": 84,
+      "visible_leaf_outlines": 46,
+      "draws_per_leaf_outline": 2.0217391304347827,
+      "required_slots": 85,
+      "outline_points": 6142,
+      "decoded_glyf_bytes": 18698,
+      "encoded_font_bytes": null,
+      "encoded_font_note": "Shared compression; complete font bytes reported globally, no arbitrary per-class allocation.",
+      "added_outlines": 15,
+      "retired_outlines": 19,
+      "net_retired_outlines": 4,
+      "added_outline_glyf_bytes": 4153,
+      "retired_outline_glyf_bytes": 5470,
+      "substituted": 53
+    },
+    "k": {
+      "draws": 16,
+      "before_required_visible_programs": 5,
+      "after_visible_stub_or_outline_slots": 13,
+      "visible_leaf_outlines": 7,
+      "draws_per_leaf_outline": 2.2857142857142856,
+      "required_slots": 14,
+      "outline_points": 1486,
+      "decoded_glyf_bytes": 4525,
+      "encoded_font_bytes": null,
+      "encoded_font_note": "Shared compression; complete font bytes reported globally, no arbitrary per-class allocation.",
+      "added_outlines": 3,
+      "retired_outlines": 1,
+      "net_retired_outlines": -2,
+      "added_outline_glyf_bytes": 1888,
+      "retired_outline_glyf_bytes": 821,
+      "substituted": 9
+    },
+    "l": {
+      "draws": 92,
+      "before_required_visible_programs": 58,
+      "after_visible_stub_or_outline_slots": 88,
+      "visible_leaf_outlines": 53,
+      "draws_per_leaf_outline": 1.7358490566037736,
+      "required_slots": 89,
+      "outline_points": 6820,
+      "decoded_glyf_bytes": 20501,
+      "encoded_font_bytes": null,
+      "encoded_font_note": "Shared compression; complete font bytes reported globally, no arbitrary per-class allocation.",
+      "added_outlines": 9,
+      "retired_outlines": 14,
+      "net_retired_outlines": 5,
+      "added_outline_glyf_bytes": 2061,
+      "retired_outline_glyf_bytes": 3200,
+      "substituted": 44
+    },
+    "m": {
+      "draws": 45,
+      "before_required_visible_programs": 36,
+      "after_visible_stub_or_outline_slots": 36,
+      "visible_leaf_outlines": 36,
+      "draws_per_leaf_outline": 1.25,
+      "required_slots": 37,
+      "outline_points": 8906,
+      "decoded_glyf_bytes": 24679,
+      "encoded_font_bytes": null,
+      "encoded_font_note": "Shared compression; complete font bytes reported globally, no arbitrary per-class allocation.",
+      "added_outlines": 0,
+      "retired_outlines": 0,
+      "net_retired_outlines": 0,
+      "added_outline_glyf_bytes": 0,
+      "retired_outline_glyf_bytes": 0,
+      "substituted": 0
+    },
+    "n": {
+      "draws": 133,
+      "before_required_visible_programs": 74,
+      "after_visible_stub_or_outline_slots": 106,
+      "visible_leaf_outlines": 75,
+      "draws_per_leaf_outline": 1.7733333333333334,
+      "required_slots": 107,
+      "outline_points": 12885,
+      "decoded_glyf_bytes": 37735,
+      "encoded_font_bytes": null,
+      "encoded_font_note": "Shared compression; complete font bytes reported globally, no arbitrary per-class allocation.",
+      "added_outlines": 15,
+      "retired_outlines": 14,
+      "net_retired_outlines": -1,
+      "added_outline_glyf_bytes": 7547,
+      "retired_outline_glyf_bytes": 7455,
+      "substituted": 46
+    },
+    "o": {
+      "draws": 179,
+      "before_required_visible_programs": 84,
+      "after_visible_stub_or_outline_slots": 152,
+      "visible_leaf_outlines": 83,
+      "draws_per_leaf_outline": 2.1566265060240966,
+      "required_slots": 153,
+      "outline_points": 13070,
+      "decoded_glyf_bytes": 39958,
+      "encoded_font_bytes": null,
+      "encoded_font_note": "Shared compression; complete font bytes reported globally, no arbitrary per-class allocation.",
+      "added_outlines": 21,
+      "retired_outlines": 22,
+      "net_retired_outlines": 1,
+      "added_outline_glyf_bytes": 9201,
+      "retired_outline_glyf_bytes": 10007,
+      "substituted": 90
+    },
+    "p": {
+      "draws": 46,
+      "before_required_visible_programs": 26,
+      "after_visible_stub_or_outline_slots": 30,
+      "visible_leaf_outlines": 25,
+      "draws_per_leaf_outline": 1.84,
+      "required_slots": 31,
+      "outline_points": 4990,
+      "decoded_glyf_bytes": 14615,
+      "encoded_font_bytes": null,
+      "encoded_font_note": "Shared compression; complete font bytes reported globally, no arbitrary per-class allocation.",
+      "added_outlines": 3,
+      "retired_outlines": 4,
+      "net_retired_outlines": 1,
+      "added_outline_glyf_bytes": 1837,
+      "retired_outline_glyf_bytes": 2394,
+      "substituted": 8
+    },
+    "r": {
+      "draws": 198,
+      "before_required_visible_programs": 121,
+      "after_visible_stub_or_outline_slots": 156,
+      "visible_leaf_outlines": 119,
+      "draws_per_leaf_outline": 1.6638655462184875,
+      "required_slots": 157,
+      "outline_points": 17143,
+      "decoded_glyf_bytes": 50131,
+      "encoded_font_bytes": null,
+      "encoded_font_note": "Shared compression; complete font bytes reported globally, no arbitrary per-class allocation.",
+      "added_outlines": 16,
+      "retired_outlines": 18,
+      "net_retired_outlines": 2,
+      "added_outline_glyf_bytes": 6080,
+      "retired_outline_glyf_bytes": 6772,
+      "substituted": 54
+    },
+    "s": {
+      "draws": 127,
+      "before_required_visible_programs": 85,
+      "after_visible_stub_or_outline_slots": 119,
+      "visible_leaf_outlines": 76,
+      "draws_per_leaf_outline": 1.6710526315789473,
+      "required_slots": 120,
+      "outline_points": 14239,
+      "decoded_glyf_bytes": 40997,
+      "encoded_font_bytes": null,
+      "encoded_font_note": "Shared compression; complete font bytes reported globally, no arbitrary per-class allocation.",
+      "added_outlines": 12,
+      "retired_outlines": 21,
+      "net_retired_outlines": 9,
+      "added_outline_glyf_bytes": 5955,
+      "retired_outline_glyf_bytes": 11129,
+      "substituted": 55
+    },
+    "t": {
+      "draws": 149,
+      "before_required_visible_programs": 79,
+      "after_visible_stub_or_outline_slots": 123,
+      "visible_leaf_outlines": 85,
+      "draws_per_leaf_outline": 1.7529411764705882,
+      "required_slots": 124,
+      "outline_points": 12186,
+      "decoded_glyf_bytes": 36137,
+      "encoded_font_bytes": null,
+      "encoded_font_note": "Shared compression; complete font bytes reported globally, no arbitrary per-class allocation.",
+      "added_outlines": 15,
+      "retired_outlines": 9,
+      "net_retired_outlines": -6,
+      "added_outline_glyf_bytes": 5249,
+      "retired_outline_glyf_bytes": 3357,
+      "substituted": 53
+    },
+    "u": {
+      "draws": 54,
+      "before_required_visible_programs": 25,
+      "after_visible_stub_or_outline_slots": 44,
+      "visible_leaf_outlines": 24,
+      "draws_per_leaf_outline": 2.25,
+      "required_slots": 45,
+      "outline_points": 3849,
+      "decoded_glyf_bytes": 11419,
+      "encoded_font_bytes": null,
+      "encoded_font_note": "Shared compression; complete font bytes reported globally, no arbitrary per-class allocation.",
+      "added_outlines": 6,
+      "retired_outlines": 7,
+      "net_retired_outlines": 1,
+      "added_outline_glyf_bytes": 2603,
+      "retired_outline_glyf_bytes": 3185,
+      "substituted": 26
+    },
+    "w": {
+      "draws": 40,
+      "before_required_visible_programs": 37,
+      "after_visible_stub_or_outline_slots": 37,
+      "visible_leaf_outlines": 36,
+      "draws_per_leaf_outline": 1.1111111111111112,
+      "required_slots": 38,
+      "outline_points": 9071,
+      "decoded_glyf_bytes": 24494,
+      "encoded_font_bytes": null,
+      "encoded_font_note": "Shared compression; complete font bytes reported globally, no arbitrary per-class allocation.",
+      "added_outlines": 1,
+      "retired_outlines": 2,
+      "net_retired_outlines": 1,
+      "added_outline_glyf_bytes": 254,
+      "retired_outline_glyf_bytes": 580,
+      "substituted": 2
+    },
+    "x": {
+      "draws": 16,
+      "before_required_visible_programs": 8,
+      "after_visible_stub_or_outline_slots": 11,
+      "visible_leaf_outlines": 9,
+      "draws_per_leaf_outline": 1.7777777777777777,
+      "required_slots": 12,
+      "outline_points": 1750,
+      "decoded_glyf_bytes": 4999,
+      "encoded_font_bytes": null,
+      "encoded_font_note": "Shared compression; complete font bytes reported globally, no arbitrary per-class allocation.",
+      "added_outlines": 2,
+      "retired_outlines": 1,
+      "net_retired_outlines": -1,
+      "added_outline_glyf_bytes": 1162,
+      "retired_outline_glyf_bytes": 568,
+      "substituted": 4
+    },
+    "y": {
+      "draws": 24,
+      "before_required_visible_programs": 19,
+      "after_visible_stub_or_outline_slots": 21,
+      "visible_leaf_outlines": 17,
+      "draws_per_leaf_outline": 1.411764705882353,
+      "required_slots": 22,
+      "outline_points": 3967,
+      "decoded_glyf_bytes": 11354,
+      "encoded_font_bytes": null,
+      "encoded_font_note": "Shared compression; complete font bytes reported globally, no arbitrary per-class allocation.",
+      "added_outlines": 2,
+      "retired_outlines": 4,
+      "net_retired_outlines": 2,
+      "added_outline_glyf_bytes": 1298,
+      "retired_outline_glyf_bytes": 2648,
+      "substituted": 6
+    }
+  },
+  "reviewer_pending": true,
+  "outline_economy": {
+    "before_visible_outlines": 2236,
+    "after_visible_leaf_outlines": 2168,
+    "draws_per_leaf_outline": 1.7144833948339484,
+    "visible_CID_to_GID_slots": 3175,
+    "required_slots_including_stubs": 3524,
+    "stub_slots": 1354,
+    "outline_slots": 2170
+  },
+  "pass": true
+}

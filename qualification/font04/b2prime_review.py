@@ -1,12 +1,12 @@
 """Identical-context B2-prime panels; private staging, separate blinding process."""
 from pathlib import Path
-import collections,json,multiprocessing,os,random,re,subprocess,sys
+import collections,json,multiprocessing,os,random,re,subprocess,sys,math,shutil
 import numpy as np,pypdfium2 as pdfium
 from PIL import Image
 from qualification.font04.metrics import inspect,render,sha
 from qualification.font04.class_metrics import bind,crop_render
 from qualification.font04.context_instances import contextual_instances
-from qualification.font04.context_proposals import contextual_pdf
+from qualification.font04.composite_transport import emit
 from qualification.font04.planner import frame_bbox
 from qualification.font04.b2prime import BASE,ROOT,ART
 CTX=None
@@ -23,11 +23,12 @@ def write_panels(staging,cache,context_pdf,jobs,metadata):
     # workers have separately opened PDFium files, never inherited seek state.
     with multiprocessing.get_context('spawn').Pool(8,initializer=init_worker,initargs=(cache,str(context_pdf))) as pool:
         for meta,(source,current,candidate) in zip(metadata,pool.imap(panel_worker,jobs,chunksize=2)):
+            assert source.shape==current.shape==candidate.shape,(meta,source.shape,current.shape,candidate.shape)
             for name,array in [('source',source),('current',current),('candidate',candidate)]:Image.fromarray(array).save(staging/'assets'/(meta['asset']+'-'+name+'.png'))
     return metadata
 
 def bounds_for(r):
-    x,y,xx,yy=map(int,r['source']['bbox']);return [max(0,x-25),max(0,y-16),xx+25,yy+16]
+    x,y,xx,yy=map(int,r['source']['bbox']);return [max(0,x-25),max(0,y-16),min(math.ceil(r['page_width']*300/72),xx+25),min(math.ceil(r['page_height']*300/72),yy+16)]
 
 def main():
     points=json.loads((BASE/'b2prime-points.json').read_text())['points'];snapshot=json.loads((ART/'source.json').read_text());rows=snapshot['rows'];old=json.loads((ROOT/'financial-B2-PV.pdf.font04/plan.json').read_text());pv={a['member'] for a in old['assignments']};rng=random.Random(241024);staging=ROOT/'B2prime-review-private-staging';assert not staging.exists();staging.mkdir(mode=0o700);(staging/'assets').mkdir();cache=ROOT/'B2prime-review-page-cache';cache.mkdir(exist_ok=True)
@@ -53,7 +54,7 @@ def main():
             pp=[pairlookup[i,a['canonical']] for i,a in assignments.items() if rows[i]['character']==char and (i,a['canonical']) in pairlookup]
             for key in ['area','elongation','counter_difference']:
                 selected.update(p['member'] for p in sorted(pp,key=lambda p:p['checks'].get(key,{}).get('value',0),reverse=True)[:10])
-        selection[label]=dict(substituted=len(aa),newly_admitted=len(new),random_newly_admitted=sorted(random_new),reviewed_accepted=sorted(selected),random_seed=241024)
+        selection[label]=dict(pdf_sha256=sha(path),substituted=len(aa),newly_admitted=len(new),random_newly_admitted=sorted(random_new),reviewed_accepted=sorted(selected),random_seed=241024)
         if not selected:continue
         bound=bind(snapshot,inspect(path));context=staging/f'context-{label}.pdf';page_map=contextual_instances(ROOT/'financial-default.pdf',path,context,rows,selected,bound);jobs=[];meta=[]
         for i,review_page in page_map.items():
@@ -87,7 +88,10 @@ def main():
     geometry=json.loads((ROOT/'financial-default.pdf.json').read_text())['pages']
     for r in rows:
         g=geometry[r['page']];r.update(pixel_x_pt=g['width_pt']/g['raster_width'],pixel_y_pt=g['height_pt']/g['raster_height'])
-    baseline_bound=json.loads((ART/'emitted-bindings.json').read_text());context=staging/'context-common-attempts.pdf';page_map=contextual_pdf(ROOT/'financial-default.pdf',context,rows,proposals,baseline_bound,out,ART/'canonical.ttf');jobs=[];panelmeta=[]
+    baseline_bound=json.loads((ART/'emitted-bindings.json').read_text());attempt_plan=dict(assignments=[dict(p,member=i,page=rows[i]['page'],occurrence=rows[i]['occurrence'],id=rows[i]['id'],character=rows[i]['character']) for i,p in proposals.items()]);attempt_pdf=staging/'rejected-attempts-metric-transport.pdf';attempt_account=emit(attempt_pdf,attempt_plan);(staging/'rejected-attempts-account.json').write_text(json.dumps(attempt_account,indent=2)+'\n')
+    # This is a review-only counterfactual containing vetoed attempts, never an
+    # admitted operating point. The real metric-preserving compositor is used.
+    attempted_bound=bind(snapshot,inspect(attempt_pdf));context=staging/'context-common-attempts.pdf';page_map=contextual_instances(ROOT/'financial-default.pdf',attempt_pdf,context,rows,set(proposals),attempted_bound);jobs=[];panelmeta=[]
     for i,review_page in page_map.items():
         b=bounds_for(rows[i])
         for engine in ['pdfium','poppler']:
@@ -115,6 +119,6 @@ def main():
     (staging/'panels.json').write_text(json.dumps(allmeta,indent=2)+'\n');selection['rejected']=dict(common_population=len(common),random_members=sorted(random_rejected),reviewed_members=sorted(page_map),all_owned_exceptions_included=owned<=set(page_map),material_cases=16)
     (staging/'selection.json').write_text(json.dumps(selection,indent=2)+'\n');public=ROOT/'B2prime-blind-review';key=ROOT/'B2prime-review-keys'/'key.json';subprocess.run([sys.executable,'-m','qualification.font04.seal_b2prime_review',str(staging),str(public),str(key)],check=True)
     manifest=dict(status='reviewer-pending; key never opened by analysis',review_pdf=str(public/'blinded-review.pdf'),sha256=sha(public/'blinded-review.pdf'),public_directory=str(public),key_separate=str(key),selection_private=str(staging/'selection.json'),points={label:{k:v for k,v in d.items() if k not in ['random_newly_admitted','reviewed_accepted']}|dict(random_new_review_n=len(d['random_newly_admitted']),accepted_review_n=len(d['reviewed_accepted'])) for label,d in selection.items() if label!='rejected'},rejected_members=len(page_map),random_rejected_members=150,both_renderers=True,context='Every glyph comparison uses identical complete default page context; only the target draw is replaced using its exact emitted composite. Rejected attempts also replace only the target.',blinding='Separate process, cryptographic random opaque panel IDs and order, random U/V; public assets contain Source/U/V only. Key and private arm-labelled staging are outside the public directory.',panels=len(allmeta),material_regressions=16)
-    (BASE/'b2prime-review-manifest.json').write_text(json.dumps(manifest,indent=2)+'\n');print('REVIEW SEALED',len(allmeta),flush=True)
+    (BASE/'b2prime-review-manifest.json').write_text(json.dumps(manifest,indent=2)+'\n');shutil.rmtree(staging/'assets');print('REVIEW SEALED',len(allmeta),flush=True)
 
 if __name__=='__main__':main()

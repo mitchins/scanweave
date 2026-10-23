@@ -84,5 +84,6 @@
     }
   ],
   "reason": "Each worker opens its own PDFium file handles after fork; source/default caches are materialized before fork.",
-  "discarded_failure": "An initial parallel probe inherited seekable PDFium files and produced false missing glyphs; all affected measurements discarded and rerun."
+  "discarded_failure": "An initial parallel probe inherited seekable PDFium files and produced false missing glyphs; all affected measurements discarded and rerun.",
+  "serialization_replay_sha256": "e16639267a89d08360bfbd4703478e959f45fc7a96d80dd37efa3c1e985223ff"
 }
