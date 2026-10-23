@@ -1,0 +1,1690 @@
+{
+  "schema_version": "triage-finding/v0",
+  "repository": {
+    "path": "/data/coding/scanweave",
+    "revision": "7ebc09ec7ec19d9c4ff260da621fcfbb021d909d"
+  },
+  "findings": [
+    {
+      "triage_item_id": "triage-001",
+      "input_id": "AaFnHEeZtFH_uhPxeYeI",
+      "source_type": "scanner_ticket",
+      "title": "Path Traversal via command-line argument",
+      "normalized_input": {
+        "vulnerable_component": "qualification/font03/experiments/bindings.py",
+        "claimed_source": "command-line arguments (scanner flow incorrectly labels these HTTP request content)",
+        "claimed_sink": "filesystem access",
+        "claimed_control": "path containment",
+        "affected_version_or_path": "qualification/font03/experiments/bindings.py",
+        "preconditions": [
+          "Researcher runs local experiment with existing qualification evidence"
+        ],
+        "impact": "Path traversal read/write",
+        "references": [
+          "qualification/font03/local/pr24-sonar-issues.json",
+          "pythonsecurity:S8707",
+          "SonarCloud project mitchins_scanweave PR24; reported line 186"
+        ]
+      },
+      "verdict": "not_actionable",
+      "confidence": "high",
+      "affected_locations": [
+        {
+          "label": "sink",
+          "path": "qualification/font03/experiments/bindings.py",
+          "lines": "186",
+          "detail": "The researcher supplies split through sys.argv[1]; the exact output is root/(split+\"-bindings.json\"). The documented local researcher runs this script directly and already has the same filesystem authority; no network/API or converter caller invokes it. Missing split validation is a misuse-hardening opportunity, not an established lower-trust path."
+        }
+      ],
+      "reachable_path": [
+        "Documented repository-root research invocation",
+        "qualification/font03/experiments/bindings.py:186"
+      ],
+      "boundary_assessment": {
+        "product_surface": "CLI",
+        "source_trust": "trusted_operator",
+        "boundary_crossed": false,
+        "policy_basis": "No applicable SECURITY.md found by resolver. qualification/font03/README.md lines 3-4, 20-23, 42-49 documents research-only direct invocation and explicit root override; Cargo.toml workspace excludes Python; CI executes test_consensus, not these experiment entrypoints."
+      },
+      "exploitability_stack_rank": {
+        "rank_queue": null,
+        "rank": null,
+        "rationale": "Claim defeated by fixed destination or established same-privilege researcher input.",
+        "drivers": []
+      },
+      "evidence": [
+        "The researcher supplies split through sys.argv[1]; the exact output is root/(split+\"-bindings.json\"). The documented local researcher runs this script directly and already has the same filesystem authority; no network/API or converter caller invokes it. Missing split validation is a misuse-hardening opportunity, not an established lower-trust path.",
+        "Reviewed immutable source 7ebc09ec7ec19d9c4ff260da621fcfbb021d909d"
+      ],
+      "counterevidence": [
+        "No converter imports this package (README lines 3-4); research requalify-symmetric.sh selects literal roots and splits."
+      ],
+      "proof_gaps": [
+        "Static review only; no runtime validation, live Sonar refresh, or filesystem symlink threat-model assessment."
+      ],
+      "recommended_next_step": "Reviewer may accept this individual false-positive disposition; keep Security analysis enabled. Reassess if a privileged service or external request wrapper is introduced.",
+      "fix_finding_handoff": null
+    },
+    {
+      "triage_item_id": "triage-002",
+      "input_id": "AaFnHEeVtFH_uhPxeYeB",
+      "source_type": "scanner_ticket",
+      "title": "Path Traversal via command-line argument",
+      "normalized_input": {
+        "vulnerable_component": "qualification/font03/experiments/synthetic_evaluate.py",
+        "claimed_source": "command-line arguments (scanner flow incorrectly labels these HTTP request content)",
+        "claimed_sink": "filesystem access",
+        "claimed_control": "path containment",
+        "affected_version_or_path": "qualification/font03/experiments/synthetic_evaluate.py",
+        "preconditions": [
+          "Researcher runs local experiment with existing qualification evidence"
+        ],
+        "impact": "Path traversal read/write",
+        "references": [
+          "qualification/font03/local/pr24-sonar-issues.json",
+          "pythonsecurity:S8707",
+          "SonarCloud project mitchins_scanweave PR24; reported line 13"
+        ]
+      },
+      "verdict": "not_actionable",
+      "confidence": "high",
+      "affected_locations": [
+        {
+          "label": "sink",
+          "path": "qualification/font03/experiments/synthetic_evaluate.py",
+          "lines": "13",
+          "detail": "The SHA-256 read targets researcher-selected root/(split+\"-source-rendered.json\"). Both root and split are direct CLI selections, explicitly supported for separate affine-refinement output roots; no document-supplied value chooses this path."
+        }
+      ],
+      "reachable_path": [
+        "Documented repository-root research invocation",
+        "qualification/font03/experiments/synthetic_evaluate.py:13"
+      ],
+      "boundary_assessment": {
+        "product_surface": "CLI",
+        "source_trust": "trusted_operator",
+        "boundary_crossed": false,
+        "policy_basis": "No applicable SECURITY.md found by resolver. qualification/font03/README.md lines 3-4, 20-23, 42-49 documents research-only direct invocation and explicit root override; Cargo.toml workspace excludes Python; CI executes test_consensus, not these experiment entrypoints."
+      },
+      "exploitability_stack_rank": {
+        "rank_queue": null,
+        "rank": null,
+        "rationale": "Claim defeated by fixed destination or established same-privilege researcher input.",
+        "drivers": []
+      },
+      "evidence": [
+        "The SHA-256 read targets researcher-selected root/(split+\"-source-rendered.json\"). Both root and split are direct CLI selections, explicitly supported for separate affine-refinement output roots; no document-supplied value chooses this path.",
+        "Reviewed immutable source 7ebc09ec7ec19d9c4ff260da621fcfbb021d909d"
+      ],
+      "counterevidence": [
+        "No converter imports this package (README lines 3-4); research requalify-symmetric.sh selects literal roots and splits."
+      ],
+      "proof_gaps": [
+        "Static review only; no runtime validation, live Sonar refresh, or filesystem symlink threat-model assessment."
+      ],
+      "recommended_next_step": "Reviewer may accept this individual false-positive disposition; keep Security analysis enabled. Reassess if a privileged service or external request wrapper is introduced.",
+      "fix_finding_handoff": null
+    },
+    {
+      "triage_item_id": "triage-003",
+      "input_id": "AaFnHEeVtFH_uhPxeYeC",
+      "source_type": "scanner_ticket",
+      "title": "Path Traversal via command-line argument",
+      "normalized_input": {
+        "vulnerable_component": "qualification/font03/experiments/synthetic_evaluate.py",
+        "claimed_source": "command-line arguments (scanner flow incorrectly labels these HTTP request content)",
+        "claimed_sink": "filesystem access",
+        "claimed_control": "path containment",
+        "affected_version_or_path": "qualification/font03/experiments/synthetic_evaluate.py",
+        "preconditions": [
+          "Researcher runs local experiment with existing qualification evidence"
+        ],
+        "impact": "Path traversal read/write",
+        "references": [
+          "qualification/font03/local/pr24-sonar-issues.json",
+          "pythonsecurity:S8707",
+          "SonarCloud project mitchins_scanweave PR24; reported line 17"
+        ]
+      },
+      "verdict": "not_actionable",
+      "confidence": "high",
+      "affected_locations": [
+        {
+          "label": "sink",
+          "path": "qualification/font03/experiments/synthetic_evaluate.py",
+          "lines": "17",
+          "detail": "The SHA-256 read targets researcher-selected root/(split+\"-native-coverages.npz\"). The researcher already selects this evidence directory on the command line; no lower-trust request can select it through a shipped caller."
+        }
+      ],
+      "reachable_path": [
+        "Documented repository-root research invocation",
+        "qualification/font03/experiments/synthetic_evaluate.py:17"
+      ],
+      "boundary_assessment": {
+        "product_surface": "CLI",
+        "source_trust": "trusted_operator",
+        "boundary_crossed": false,
+        "policy_basis": "No applicable SECURITY.md found by resolver. qualification/font03/README.md lines 3-4, 20-23, 42-49 documents research-only direct invocation and explicit root override; Cargo.toml workspace excludes Python; CI executes test_consensus, not these experiment entrypoints."
+      },
+      "exploitability_stack_rank": {
+        "rank_queue": null,
+        "rank": null,
+        "rationale": "Claim defeated by fixed destination or established same-privilege researcher input.",
+        "drivers": []
+      },
+      "evidence": [
+        "The SHA-256 read targets researcher-selected root/(split+\"-native-coverages.npz\"). The researcher already selects this evidence directory on the command line; no lower-trust request can select it through a shipped caller.",
+        "Reviewed immutable source 7ebc09ec7ec19d9c4ff260da621fcfbb021d909d"
+      ],
+      "counterevidence": [
+        "No converter imports this package (README lines 3-4); research requalify-symmetric.sh selects literal roots and splits."
+      ],
+      "proof_gaps": [
+        "Static review only; no runtime validation, live Sonar refresh, or filesystem symlink threat-model assessment."
+      ],
+      "recommended_next_step": "Reviewer may accept this individual false-positive disposition; keep Security analysis enabled. Reassess if a privileged service or external request wrapper is introduced.",
+      "fix_finding_handoff": null
+    },
+    {
+      "triage_item_id": "triage-004",
+      "input_id": "AaFnHEeVtFH_uhPxeYeA",
+      "source_type": "scanner_ticket",
+      "title": "Path Traversal via command-line argument",
+      "normalized_input": {
+        "vulnerable_component": "qualification/font03/experiments/synthetic_evaluate.py",
+        "claimed_source": "command-line arguments (scanner flow incorrectly labels these HTTP request content)",
+        "claimed_sink": "filesystem access",
+        "claimed_control": "path containment",
+        "affected_version_or_path": "qualification/font03/experiments/synthetic_evaluate.py",
+        "preconditions": [
+          "Researcher runs local experiment with existing qualification evidence"
+        ],
+        "impact": "Path traversal read/write",
+        "references": [
+          "qualification/font03/local/pr24-sonar-issues.json",
+          "pythonsecurity:S8707",
+          "SonarCloud project mitchins_scanweave PR24; reported line 91"
+        ]
+      },
+      "verdict": "not_actionable",
+      "confidence": "high",
+      "affected_locations": [
+        {
+          "label": "sink",
+          "path": "qualification/font03/experiments/synthetic_evaluate.py",
+          "lines": "91",
+          "detail": "The evaluated JSON destination derives only from researcher-selected CLI root and split. The README and reproduction shell deliberately select the affine-refinement directory; there is no supported remote write surface."
+        }
+      ],
+      "reachable_path": [
+        "Documented repository-root research invocation",
+        "qualification/font03/experiments/synthetic_evaluate.py:91"
+      ],
+      "boundary_assessment": {
+        "product_surface": "CLI",
+        "source_trust": "trusted_operator",
+        "boundary_crossed": false,
+        "policy_basis": "No applicable SECURITY.md found by resolver. qualification/font03/README.md lines 3-4, 20-23, 42-49 documents research-only direct invocation and explicit root override; Cargo.toml workspace excludes Python; CI executes test_consensus, not these experiment entrypoints."
+      },
+      "exploitability_stack_rank": {
+        "rank_queue": null,
+        "rank": null,
+        "rationale": "Claim defeated by fixed destination or established same-privilege researcher input.",
+        "drivers": []
+      },
+      "evidence": [
+        "The evaluated JSON destination derives only from researcher-selected CLI root and split. The README and reproduction shell deliberately select the affine-refinement directory; there is no supported remote write surface.",
+        "Reviewed immutable source 7ebc09ec7ec19d9c4ff260da621fcfbb021d909d"
+      ],
+      "counterevidence": [
+        "No converter imports this package (README lines 3-4); research requalify-symmetric.sh selects literal roots and splits."
+      ],
+      "proof_gaps": [
+        "Static review only; no runtime validation, live Sonar refresh, or filesystem symlink threat-model assessment."
+      ],
+      "recommended_next_step": "Reviewer may accept this individual false-positive disposition; keep Security analysis enabled. Reassess if a privileged service or external request wrapper is introduced.",
+      "fix_finding_handoff": null
+    },
+    {
+      "triage_item_id": "triage-005",
+      "input_id": "AaFnHEd6tFH_uhPxeYdH",
+      "source_type": "scanner_ticket",
+      "title": "Path Traversal via command-line argument",
+      "normalized_input": {
+        "vulnerable_component": "qualification/font03/experiments/synthetic_measure.py",
+        "claimed_source": "command-line arguments (scanner flow incorrectly labels these HTTP request content)",
+        "claimed_sink": "filesystem access",
+        "claimed_control": "path containment",
+        "affected_version_or_path": "qualification/font03/experiments/synthetic_measure.py",
+        "preconditions": [
+          "Researcher runs local experiment with existing qualification evidence"
+        ],
+        "impact": "Path traversal read/write",
+        "references": [
+          "qualification/font03/local/pr24-sonar-issues.json",
+          "pythonsecurity:S8707",
+          "SonarCloud project mitchins_scanweave PR24; reported line 152"
+        ]
+      },
+      "verdict": "not_actionable",
+      "confidence": "high",
+      "affected_locations": [
+        {
+          "label": "sink",
+          "path": "qualification/font03/experiments/synthetic_measure.py",
+          "lines": "152",
+          "detail": "output is assigned root/(split+\"-source-rendered.json\") at line 151, solely from direct researcher CLI arguments. Source document content affects serialized records, not the destination path."
+        }
+      ],
+      "reachable_path": [
+        "Documented repository-root research invocation",
+        "qualification/font03/experiments/synthetic_measure.py:152"
+      ],
+      "boundary_assessment": {
+        "product_surface": "CLI",
+        "source_trust": "trusted_operator",
+        "boundary_crossed": false,
+        "policy_basis": "No applicable SECURITY.md found by resolver. qualification/font03/README.md lines 3-4, 20-23, 42-49 documents research-only direct invocation and explicit root override; Cargo.toml workspace excludes Python; CI executes test_consensus, not these experiment entrypoints."
+      },
+      "exploitability_stack_rank": {
+        "rank_queue": null,
+        "rank": null,
+        "rationale": "Claim defeated by fixed destination or established same-privilege researcher input.",
+        "drivers": []
+      },
+      "evidence": [
+        "output is assigned root/(split+\"-source-rendered.json\") at line 151, solely from direct researcher CLI arguments. Source document content affects serialized records, not the destination path.",
+        "Reviewed immutable source 7ebc09ec7ec19d9c4ff260da621fcfbb021d909d"
+      ],
+      "counterevidence": [
+        "No converter imports this package (README lines 3-4); research requalify-symmetric.sh selects literal roots and splits."
+      ],
+      "proof_gaps": [
+        "Static review only; no runtime validation, live Sonar refresh, or filesystem symlink threat-model assessment."
+      ],
+      "recommended_next_step": "Reviewer may accept this individual false-positive disposition; keep Security analysis enabled. Reassess if a privileged service or external request wrapper is introduced.",
+      "fix_finding_handoff": null
+    },
+    {
+      "triage_item_id": "triage-006",
+      "input_id": "AaFnHEd6tFH_uhPxeYdF",
+      "source_type": "scanner_ticket",
+      "title": "Path Traversal via command-line argument",
+      "normalized_input": {
+        "vulnerable_component": "qualification/font03/experiments/synthetic_measure.py",
+        "claimed_source": "command-line arguments (scanner flow incorrectly labels these HTTP request content)",
+        "claimed_sink": "filesystem access",
+        "claimed_control": "path containment",
+        "affected_version_or_path": "qualification/font03/experiments/synthetic_measure.py",
+        "preconditions": [
+          "Researcher runs local experiment with existing qualification evidence"
+        ],
+        "impact": "Path traversal read/write",
+        "references": [
+          "qualification/font03/local/pr24-sonar-issues.json",
+          "pythonsecurity:S8707",
+          "SonarCloud project mitchins_scanweave PR24; reported line 155"
+        ]
+      },
+      "verdict": "not_actionable",
+      "confidence": "high",
+      "affected_locations": [
+        {
+          "label": "sink",
+          "path": "qualification/font03/experiments/synthetic_measure.py",
+          "lines": "155",
+          "detail": "The freeze JSON write destination is root/(split+\"-source-freeze.json\"), chosen by researcher CLI arguments. No parsed PDF/JSON field controls the write path."
+        }
+      ],
+      "reachable_path": [
+        "Documented repository-root research invocation",
+        "qualification/font03/experiments/synthetic_measure.py:155"
+      ],
+      "boundary_assessment": {
+        "product_surface": "CLI",
+        "source_trust": "trusted_operator",
+        "boundary_crossed": false,
+        "policy_basis": "No applicable SECURITY.md found by resolver. qualification/font03/README.md lines 3-4, 20-23, 42-49 documents research-only direct invocation and explicit root override; Cargo.toml workspace excludes Python; CI executes test_consensus, not these experiment entrypoints."
+      },
+      "exploitability_stack_rank": {
+        "rank_queue": null,
+        "rank": null,
+        "rationale": "Claim defeated by fixed destination or established same-privilege researcher input.",
+        "drivers": []
+      },
+      "evidence": [
+        "The freeze JSON write destination is root/(split+\"-source-freeze.json\"), chosen by researcher CLI arguments. No parsed PDF/JSON field controls the write path.",
+        "Reviewed immutable source 7ebc09ec7ec19d9c4ff260da621fcfbb021d909d"
+      ],
+      "counterevidence": [
+        "No converter imports this package (README lines 3-4); research requalify-symmetric.sh selects literal roots and splits."
+      ],
+      "proof_gaps": [
+        "Static review only; no runtime validation, live Sonar refresh, or filesystem symlink threat-model assessment."
+      ],
+      "recommended_next_step": "Reviewer may accept this individual false-positive disposition; keep Security analysis enabled. Reassess if a privileged service or external request wrapper is introduced.",
+      "fix_finding_handoff": null
+    },
+    {
+      "triage_item_id": "triage-007",
+      "input_id": "AaFnHEd6tFH_uhPxeYdG",
+      "source_type": "scanner_ticket",
+      "title": "Path Traversal via command-line argument",
+      "normalized_input": {
+        "vulnerable_component": "qualification/font03/experiments/synthetic_measure.py",
+        "claimed_source": "command-line arguments (scanner flow incorrectly labels these HTTP request content)",
+        "claimed_sink": "filesystem access",
+        "claimed_control": "path containment",
+        "affected_version_or_path": "qualification/font03/experiments/synthetic_measure.py",
+        "preconditions": [
+          "Researcher runs local experiment with existing qualification evidence"
+        ],
+        "impact": "Path traversal read/write",
+        "references": [
+          "qualification/font03/local/pr24-sonar-issues.json",
+          "pythonsecurity:S8707",
+          "SonarCloud project mitchins_scanweave PR24; reported line 158"
+        ]
+      },
+      "verdict": "not_actionable",
+      "confidence": "high",
+      "affected_locations": [
+        {
+          "label": "sink",
+          "path": "qualification/font03/experiments/synthetic_measure.py",
+          "lines": "158",
+          "detail": "The digest reads output, assigned at line 151 from researcher root and split; this is the same evidence JSON just written at lines 152-154, not a document-selected path."
+        }
+      ],
+      "reachable_path": [
+        "Documented repository-root research invocation",
+        "qualification/font03/experiments/synthetic_measure.py:158"
+      ],
+      "boundary_assessment": {
+        "product_surface": "CLI",
+        "source_trust": "trusted_operator",
+        "boundary_crossed": false,
+        "policy_basis": "No applicable SECURITY.md found by resolver. qualification/font03/README.md lines 3-4, 20-23, 42-49 documents research-only direct invocation and explicit root override; Cargo.toml workspace excludes Python; CI executes test_consensus, not these experiment entrypoints."
+      },
+      "exploitability_stack_rank": {
+        "rank_queue": null,
+        "rank": null,
+        "rationale": "Claim defeated by fixed destination or established same-privilege researcher input.",
+        "drivers": []
+      },
+      "evidence": [
+        "The digest reads output, assigned at line 151 from researcher root and split; this is the same evidence JSON just written at lines 152-154, not a document-selected path.",
+        "Reviewed immutable source 7ebc09ec7ec19d9c4ff260da621fcfbb021d909d"
+      ],
+      "counterevidence": [
+        "No converter imports this package (README lines 3-4); research requalify-symmetric.sh selects literal roots and splits."
+      ],
+      "proof_gaps": [
+        "Static review only; no runtime validation, live Sonar refresh, or filesystem symlink threat-model assessment."
+      ],
+      "recommended_next_step": "Reviewer may accept this individual false-positive disposition; keep Security analysis enabled. Reassess if a privileged service or external request wrapper is introduced.",
+      "fix_finding_handoff": null
+    },
+    {
+      "triage_item_id": "triage-008",
+      "input_id": "AaFnHEd6tFH_uhPxeYdI",
+      "source_type": "scanner_ticket",
+      "title": "Path Traversal via command-line argument",
+      "normalized_input": {
+        "vulnerable_component": "qualification/font03/experiments/synthetic_measure.py",
+        "claimed_source": "command-line arguments (scanner flow incorrectly labels these HTTP request content)",
+        "claimed_sink": "filesystem access",
+        "claimed_control": "path containment",
+        "affected_version_or_path": "qualification/font03/experiments/synthetic_measure.py",
+        "preconditions": [
+          "Researcher runs local experiment with existing qualification evidence"
+        ],
+        "impact": "Path traversal read/write",
+        "references": [
+          "qualification/font03/local/pr24-sonar-issues.json",
+          "pythonsecurity:S8707",
+          "SonarCloud project mitchins_scanweave PR24; reported line 160"
+        ]
+      },
+      "verdict": "not_actionable",
+      "confidence": "high",
+      "affected_locations": [
+        {
+          "label": "sink",
+          "path": "qualification/font03/experiments/synthetic_measure.py",
+          "lines": "160",
+          "detail": "The coverage digest reads root/(split+\"-native-coverages.npz\"), an archive this script writes at line 149. Its path is selected by the invoking researcher, not an HTTP request or parsed document."
+        }
+      ],
+      "reachable_path": [
+        "Documented repository-root research invocation",
+        "qualification/font03/experiments/synthetic_measure.py:160"
+      ],
+      "boundary_assessment": {
+        "product_surface": "CLI",
+        "source_trust": "trusted_operator",
+        "boundary_crossed": false,
+        "policy_basis": "No applicable SECURITY.md found by resolver. qualification/font03/README.md lines 3-4, 20-23, 42-49 documents research-only direct invocation and explicit root override; Cargo.toml workspace excludes Python; CI executes test_consensus, not these experiment entrypoints."
+      },
+      "exploitability_stack_rank": {
+        "rank_queue": null,
+        "rank": null,
+        "rationale": "Claim defeated by fixed destination or established same-privilege researcher input.",
+        "drivers": []
+      },
+      "evidence": [
+        "The coverage digest reads root/(split+\"-native-coverages.npz\"), an archive this script writes at line 149. Its path is selected by the invoking researcher, not an HTTP request or parsed document.",
+        "Reviewed immutable source 7ebc09ec7ec19d9c4ff260da621fcfbb021d909d"
+      ],
+      "counterevidence": [
+        "No converter imports this package (README lines 3-4); research requalify-symmetric.sh selects literal roots and splits."
+      ],
+      "proof_gaps": [
+        "Static review only; no runtime validation, live Sonar refresh, or filesystem symlink threat-model assessment."
+      ],
+      "recommended_next_step": "Reviewer may accept this individual false-positive disposition; keep Security analysis enabled. Reassess if a privileged service or external request wrapper is introduced.",
+      "fix_finding_handoff": null
+    },
+    {
+      "triage_item_id": "triage-009",
+      "input_id": "AaFnHEd6tFH_uhPxeYdJ",
+      "source_type": "scanner_ticket",
+      "title": "Path Traversal via command-line argument",
+      "normalized_input": {
+        "vulnerable_component": "qualification/font03/experiments/synthetic_measure.py",
+        "claimed_source": "command-line arguments (scanner flow incorrectly labels these HTTP request content)",
+        "claimed_sink": "filesystem access",
+        "claimed_control": "path containment",
+        "affected_version_or_path": "qualification/font03/experiments/synthetic_measure.py",
+        "preconditions": [
+          "Researcher runs local experiment with existing qualification evidence"
+        ],
+        "impact": "Path traversal read/write",
+        "references": [
+          "qualification/font03/local/pr24-sonar-issues.json",
+          "pythonsecurity:S8707",
+          "SonarCloud project mitchins_scanweave PR24; reported line 163"
+        ]
+      },
+      "verdict": "not_actionable",
+      "confidence": "high",
+      "affected_locations": [
+        {
+          "label": "sink",
+          "path": "qualification/font03/experiments/synthetic_measure.py",
+          "lines": "163",
+          "detail": "The protocol digest reads root/\"initial-protocol.json\". The suffix is literal; root is an intentional CLI evidence-directory selection made by the researcher."
+        }
+      ],
+      "reachable_path": [
+        "Documented repository-root research invocation",
+        "qualification/font03/experiments/synthetic_measure.py:163"
+      ],
+      "boundary_assessment": {
+        "product_surface": "CLI",
+        "source_trust": "trusted_operator",
+        "boundary_crossed": false,
+        "policy_basis": "No applicable SECURITY.md found by resolver. qualification/font03/README.md lines 3-4, 20-23, 42-49 documents research-only direct invocation and explicit root override; Cargo.toml workspace excludes Python; CI executes test_consensus, not these experiment entrypoints."
+      },
+      "exploitability_stack_rank": {
+        "rank_queue": null,
+        "rank": null,
+        "rationale": "Claim defeated by fixed destination or established same-privilege researcher input.",
+        "drivers": []
+      },
+      "evidence": [
+        "The protocol digest reads root/\"initial-protocol.json\". The suffix is literal; root is an intentional CLI evidence-directory selection made by the researcher.",
+        "Reviewed immutable source 7ebc09ec7ec19d9c4ff260da621fcfbb021d909d"
+      ],
+      "counterevidence": [
+        "No converter imports this package (README lines 3-4); research requalify-symmetric.sh selects literal roots and splits."
+      ],
+      "proof_gaps": [
+        "Static review only; no runtime validation, live Sonar refresh, or filesystem symlink threat-model assessment."
+      ],
+      "recommended_next_step": "Reviewer may accept this individual false-positive disposition; keep Security analysis enabled. Reassess if a privileged service or external request wrapper is introduced.",
+      "fix_finding_handoff": null
+    },
+    {
+      "triage_item_id": "triage-010",
+      "input_id": "AaFnHEd6tFH_uhPxeYdK",
+      "source_type": "scanner_ticket",
+      "title": "Path Traversal via command-line argument",
+      "normalized_input": {
+        "vulnerable_component": "qualification/font03/experiments/synthetic_measure.py",
+        "claimed_source": "command-line arguments (scanner flow incorrectly labels these HTTP request content)",
+        "claimed_sink": "filesystem access",
+        "claimed_control": "path containment",
+        "affected_version_or_path": "qualification/font03/experiments/synthetic_measure.py",
+        "preconditions": [
+          "Researcher runs local experiment with existing qualification evidence"
+        ],
+        "impact": "Path traversal read/write",
+        "references": [
+          "qualification/font03/local/pr24-sonar-issues.json",
+          "pythonsecurity:S8707",
+          "SonarCloud project mitchins_scanweave PR24; reported line 166"
+        ]
+      },
+      "verdict": "not_actionable",
+      "confidence": "high",
+      "affected_locations": [
+        {
+          "label": "sink",
+          "path": "qualification/font03/experiments/synthetic_measure.py",
+          "lines": "166",
+          "detail": "The noise digest reads root/\"training-noise-calibration.json\". The filename is fixed; researcher CLI root selects the calibration directory with the same process authority."
+        }
+      ],
+      "reachable_path": [
+        "Documented repository-root research invocation",
+        "qualification/font03/experiments/synthetic_measure.py:166"
+      ],
+      "boundary_assessment": {
+        "product_surface": "CLI",
+        "source_trust": "trusted_operator",
+        "boundary_crossed": false,
+        "policy_basis": "No applicable SECURITY.md found by resolver. qualification/font03/README.md lines 3-4, 20-23, 42-49 documents research-only direct invocation and explicit root override; Cargo.toml workspace excludes Python; CI executes test_consensus, not these experiment entrypoints."
+      },
+      "exploitability_stack_rank": {
+        "rank_queue": null,
+        "rank": null,
+        "rationale": "Claim defeated by fixed destination or established same-privilege researcher input.",
+        "drivers": []
+      },
+      "evidence": [
+        "The noise digest reads root/\"training-noise-calibration.json\". The filename is fixed; researcher CLI root selects the calibration directory with the same process authority.",
+        "Reviewed immutable source 7ebc09ec7ec19d9c4ff260da621fcfbb021d909d"
+      ],
+      "counterevidence": [
+        "No converter imports this package (README lines 3-4); research requalify-symmetric.sh selects literal roots and splits."
+      ],
+      "proof_gaps": [
+        "Static review only; no runtime validation, live Sonar refresh, or filesystem symlink threat-model assessment."
+      ],
+      "recommended_next_step": "Reviewer may accept this individual false-positive disposition; keep Security analysis enabled. Reassess if a privileged service or external request wrapper is introduced.",
+      "fix_finding_handoff": null
+    },
+    {
+      "triage_item_id": "triage-011",
+      "input_id": "AaFnHEeStFH_uhPxeYd6",
+      "source_type": "scanner_ticket",
+      "title": "Path Traversal via command-line argument",
+      "normalized_input": {
+        "vulnerable_component": "qualification/font03/experiments/synthetic_pdfs.py",
+        "claimed_source": "command-line arguments (scanner flow incorrectly labels these HTTP request content)",
+        "claimed_sink": "filesystem access",
+        "claimed_control": "path containment",
+        "affected_version_or_path": "qualification/font03/experiments/synthetic_pdfs.py",
+        "preconditions": [
+          "Researcher runs local experiment with existing qualification evidence"
+        ],
+        "impact": "Path traversal read/write",
+        "references": [
+          "qualification/font03/local/pr24-sonar-issues.json",
+          "pythonsecurity:S8707",
+          "SonarCloud project mitchins_scanweave PR24; reported line 103"
+        ]
+      },
+      "verdict": "not_actionable",
+      "confidence": "high",
+      "affected_locations": [
+        {
+          "label": "sink",
+          "path": "qualification/font03/experiments/synthetic_pdfs.py",
+          "lines": "103",
+          "detail": "The render-plan write uses root/f\"{split}-render-plan.json\". root is the documented optional researcher CLI argument; split is the fixed loop tuple validation/test at line 18. No external document supplies either component."
+        }
+      ],
+      "reachable_path": [
+        "Documented repository-root research invocation",
+        "qualification/font03/experiments/synthetic_pdfs.py:103"
+      ],
+      "boundary_assessment": {
+        "product_surface": "CLI",
+        "source_trust": "trusted_operator",
+        "boundary_crossed": false,
+        "policy_basis": "No applicable SECURITY.md found by resolver. qualification/font03/README.md lines 3-4, 20-23, 42-49 documents research-only direct invocation and explicit root override; Cargo.toml workspace excludes Python; CI executes test_consensus, not these experiment entrypoints."
+      },
+      "exploitability_stack_rank": {
+        "rank_queue": null,
+        "rank": null,
+        "rationale": "Claim defeated by fixed destination or established same-privilege researcher input.",
+        "drivers": []
+      },
+      "evidence": [
+        "The render-plan write uses root/f\"{split}-render-plan.json\". root is the documented optional researcher CLI argument; split is the fixed loop tuple validation/test at line 18. No external document supplies either component.",
+        "Reviewed immutable source 7ebc09ec7ec19d9c4ff260da621fcfbb021d909d"
+      ],
+      "counterevidence": [
+        "No converter imports this package (README lines 3-4); research requalify-symmetric.sh selects literal roots and splits."
+      ],
+      "proof_gaps": [
+        "Static review only; no runtime validation, live Sonar refresh, or filesystem symlink threat-model assessment."
+      ],
+      "recommended_next_step": "Reviewer may accept this individual false-positive disposition; keep Security analysis enabled. Reassess if a privileged service or external request wrapper is introduced.",
+      "fix_finding_handoff": null
+    },
+    {
+      "triage_item_id": "triage-012",
+      "input_id": "AaFnHEeStFH_uhPxeYd7",
+      "source_type": "scanner_ticket",
+      "title": "Path Traversal via command-line argument",
+      "normalized_input": {
+        "vulnerable_component": "qualification/font03/experiments/synthetic_pdfs.py",
+        "claimed_source": "command-line arguments (scanner flow incorrectly labels these HTTP request content)",
+        "claimed_sink": "filesystem access",
+        "claimed_control": "path containment",
+        "affected_version_or_path": "qualification/font03/experiments/synthetic_pdfs.py",
+        "preconditions": [
+          "Researcher runs local experiment with existing qualification evidence"
+        ],
+        "impact": "Path traversal read/write",
+        "references": [
+          "qualification/font03/local/pr24-sonar-issues.json",
+          "pythonsecurity:S8707",
+          "SonarCloud project mitchins_scanweave PR24; reported line 109"
+        ]
+      },
+      "verdict": "not_actionable",
+      "confidence": "high",
+      "affected_locations": [
+        {
+          "label": "sink",
+          "path": "qualification/font03/experiments/synthetic_pdfs.py",
+          "lines": "109",
+          "detail": "The PDF digest reads path set at line 96 to root/f\"{split}-ABCD.pdf\", saved by this script at line 97. split is a fixed loop value and root is explicitly researcher-selected."
+        }
+      ],
+      "reachable_path": [
+        "Documented repository-root research invocation",
+        "qualification/font03/experiments/synthetic_pdfs.py:109"
+      ],
+      "boundary_assessment": {
+        "product_surface": "CLI",
+        "source_trust": "trusted_operator",
+        "boundary_crossed": false,
+        "policy_basis": "No applicable SECURITY.md found by resolver. qualification/font03/README.md lines 3-4, 20-23, 42-49 documents research-only direct invocation and explicit root override; Cargo.toml workspace excludes Python; CI executes test_consensus, not these experiment entrypoints."
+      },
+      "exploitability_stack_rank": {
+        "rank_queue": null,
+        "rank": null,
+        "rationale": "Claim defeated by fixed destination or established same-privilege researcher input.",
+        "drivers": []
+      },
+      "evidence": [
+        "The PDF digest reads path set at line 96 to root/f\"{split}-ABCD.pdf\", saved by this script at line 97. split is a fixed loop value and root is explicitly researcher-selected.",
+        "Reviewed immutable source 7ebc09ec7ec19d9c4ff260da621fcfbb021d909d"
+      ],
+      "counterevidence": [
+        "No converter imports this package (README lines 3-4); research requalify-symmetric.sh selects literal roots and splits."
+      ],
+      "proof_gaps": [
+        "Static review only; no runtime validation, live Sonar refresh, or filesystem symlink threat-model assessment."
+      ],
+      "recommended_next_step": "Reviewer may accept this individual false-positive disposition; keep Security analysis enabled. Reassess if a privileged service or external request wrapper is introduced.",
+      "fix_finding_handoff": null
+    },
+    {
+      "triage_item_id": "triage-013",
+      "input_id": "AaFnHEeJtFH_uhPxeYd0",
+      "source_type": "scanner_ticket",
+      "title": "Path Traversal via file content",
+      "normalized_input": {
+        "vulnerable_component": "qualification/font03/experiments/verify_construction.py",
+        "claimed_source": "file content",
+        "claimed_sink": "filesystem access",
+        "claimed_control": "path containment",
+        "affected_version_or_path": "qualification/font03/experiments/verify_construction.py",
+        "preconditions": [
+          "Researcher runs local experiment with existing qualification evidence"
+        ],
+        "impact": "Path traversal read/write",
+        "references": [
+          "qualification/font03/local/pr24-sonar-issues.json",
+          "pythonsecurity:S2083",
+          "SonarCloud project mitchins_scanweave PR24; reported line 89"
+        ]
+      },
+      "verdict": "not_actionable",
+      "confidence": "high",
+      "affected_locations": [
+        {
+          "label": "sink",
+          "path": "qualification/font03/experiments/verify_construction.py",
+          "lines": "97",
+          "detail": "PDF font bytes reach the content argument of write_bytes, not its destination. The destination is the literal root/\"preunion.ttf\" with root fixed to qualification/font03/local at line 13. Arbitrary font bytes cannot change that path; no archive extraction or filename decoding occurs."
+        }
+      ],
+      "reachable_path": [
+        "Documented repository-root research invocation",
+        "qualification/font03/experiments/verify_construction.py:97"
+      ],
+      "boundary_assessment": {
+        "product_surface": "CLI",
+        "source_trust": "local_only",
+        "boundary_crossed": false,
+        "policy_basis": "No applicable SECURITY.md found by resolver. qualification/font03/README.md lines 3-4, 20-23, 42-49 documents research-only direct invocation and explicit root override; Cargo.toml workspace excludes Python; CI executes test_consensus, not these experiment entrypoints."
+      },
+      "exploitability_stack_rank": {
+        "rank_queue": null,
+        "rank": null,
+        "rationale": "Claim defeated by fixed destination or established same-privilege researcher input.",
+        "drivers": []
+      },
+      "evidence": [
+        "PDF font bytes reach the content argument of write_bytes, not its destination. The destination is the literal root/\"preunion.ttf\" with root fixed to qualification/font03/local at line 13. Arbitrary font bytes cannot change that path; no archive extraction or filename decoding occurs.",
+        "Reviewed immutable source 7ebc09ec7ec19d9c4ff260da621fcfbb021d909d"
+      ],
+      "counterevidence": [
+        "Untrusted bytes are content, not destination path."
+      ],
+      "proof_gaps": [
+        "Static review only; no runtime validation, live Sonar refresh, or filesystem symlink threat-model assessment.",
+        "Earlier snapshot line 89 maps to current sink line 97; original snapshot revision not recorded."
+      ],
+      "recommended_next_step": "Reviewer may accept this individual false-positive disposition; keep Security analysis enabled. Reassess if a privileged service or external request wrapper is introduced.",
+      "fix_finding_handoff": null
+    },
+    {
+      "triage_item_id": "triage-014",
+      "input_id": "AaFnK7SaHRN4GnH8gFMi",
+      "source_type": "scanner_ticket",
+      "title": "Path Traversal via file content",
+      "normalized_input": {
+        "vulnerable_component": "qualification/font03/experiments/prepare_town.py",
+        "claimed_source": "file content",
+        "claimed_sink": "filesystem access",
+        "claimed_control": "path containment",
+        "affected_version_or_path": "qualification/font03/experiments/prepare_town.py",
+        "preconditions": [
+          "Researcher runs local experiment with existing qualification evidence"
+        ],
+        "impact": "Path traversal read/write",
+        "references": [
+          "qualification/font03/local/final-sonar-issues.json",
+          "pythonsecurity:S2083",
+          "SonarCloud project mitchins_scanweave PR24; reported line 19"
+        ]
+      },
+      "verdict": "not_actionable",
+      "confidence": "high",
+      "affected_locations": [
+        {
+          "label": "sink",
+          "path": "qualification/font03/experiments/prepare_town.py",
+          "lines": "19",
+          "detail": "Parsed JSON groups reach json.dumps and the content argument of write_text. The destination is fixed root/\"town-groups.json\", with literal root at line 8; JSON strings cannot change a separate pathlib receiver."
+        }
+      ],
+      "reachable_path": [
+        "Documented repository-root research invocation",
+        "qualification/font03/experiments/prepare_town.py:19"
+      ],
+      "boundary_assessment": {
+        "product_surface": "CLI",
+        "source_trust": "local_only",
+        "boundary_crossed": false,
+        "policy_basis": "No applicable SECURITY.md found by resolver. qualification/font03/README.md lines 3-4, 20-23, 42-49 documents research-only direct invocation and explicit root override; Cargo.toml workspace excludes Python; CI executes test_consensus, not these experiment entrypoints."
+      },
+      "exploitability_stack_rank": {
+        "rank_queue": null,
+        "rank": null,
+        "rationale": "Claim defeated by fixed destination or established same-privilege researcher input.",
+        "drivers": []
+      },
+      "evidence": [
+        "Parsed JSON groups reach json.dumps and the content argument of write_text. The destination is fixed root/\"town-groups.json\", with literal root at line 8; JSON strings cannot change a separate pathlib receiver.",
+        "Reviewed immutable source 7ebc09ec7ec19d9c4ff260da621fcfbb021d909d"
+      ],
+      "counterevidence": [
+        "Untrusted bytes are content, not destination path."
+      ],
+      "proof_gaps": [
+        "Static review only; no runtime validation, live Sonar refresh, or filesystem symlink threat-model assessment."
+      ],
+      "recommended_next_step": "Reviewer may accept this individual false-positive disposition; keep Security analysis enabled. Reassess if a privileged service or external request wrapper is introduced.",
+      "fix_finding_handoff": null
+    },
+    {
+      "triage_item_id": "triage-015",
+      "input_id": "AaFnK7SaHRN4GnH8gFMh",
+      "source_type": "scanner_ticket",
+      "title": "Path Traversal via file content",
+      "normalized_input": {
+        "vulnerable_component": "qualification/font03/experiments/prepare_town.py",
+        "claimed_source": "file content",
+        "claimed_sink": "filesystem access",
+        "claimed_control": "path containment",
+        "affected_version_or_path": "qualification/font03/experiments/prepare_town.py",
+        "preconditions": [
+          "Researcher runs local experiment with existing qualification evidence"
+        ],
+        "impact": "Path traversal read/write",
+        "references": [
+          "qualification/font03/local/final-sonar-issues.json",
+          "pythonsecurity:S2083",
+          "SonarCloud project mitchins_scanweave PR24; reported line 21"
+        ]
+      },
+      "verdict": "not_actionable",
+      "confidence": "high",
+      "affected_locations": [
+        {
+          "label": "sink",
+          "path": "qualification/font03/experiments/prepare_town.py",
+          "lines": "21",
+          "detail": "Config-derived coverage content is serialized into write_text. The destination is fixed root/\"town-trace-input.json\"; no config value is interpolated into that receiver, so the scanner source-to-path claim is defeated."
+        }
+      ],
+      "reachable_path": [
+        "Documented repository-root research invocation",
+        "qualification/font03/experiments/prepare_town.py:21"
+      ],
+      "boundary_assessment": {
+        "product_surface": "CLI",
+        "source_trust": "local_only",
+        "boundary_crossed": false,
+        "policy_basis": "No applicable SECURITY.md found by resolver. qualification/font03/README.md lines 3-4, 20-23, 42-49 documents research-only direct invocation and explicit root override; Cargo.toml workspace excludes Python; CI executes test_consensus, not these experiment entrypoints."
+      },
+      "exploitability_stack_rank": {
+        "rank_queue": null,
+        "rank": null,
+        "rationale": "Claim defeated by fixed destination or established same-privilege researcher input.",
+        "drivers": []
+      },
+      "evidence": [
+        "Config-derived coverage content is serialized into write_text. The destination is fixed root/\"town-trace-input.json\"; no config value is interpolated into that receiver, so the scanner source-to-path claim is defeated.",
+        "Reviewed immutable source 7ebc09ec7ec19d9c4ff260da621fcfbb021d909d"
+      ],
+      "counterevidence": [
+        "Untrusted bytes are content, not destination path."
+      ],
+      "proof_gaps": [
+        "Static review only; no runtime validation, live Sonar refresh, or filesystem symlink threat-model assessment."
+      ],
+      "recommended_next_step": "Reviewer may accept this individual false-positive disposition; keep Security analysis enabled. Reassess if a privileged service or external request wrapper is introduced.",
+      "fix_finding_handoff": null
+    },
+    {
+      "triage_item_id": "triage-016",
+      "input_id": "AaFnHEeZtFH_uhPxeYeI",
+      "source_type": "scanner_ticket",
+      "title": "Path Traversal via command-line argument",
+      "normalized_input": {
+        "vulnerable_component": "qualification/font03/experiments/bindings.py",
+        "claimed_source": "command-line arguments (scanner flow incorrectly labels these HTTP request content)",
+        "claimed_sink": "filesystem access",
+        "claimed_control": "path containment",
+        "affected_version_or_path": "qualification/font03/experiments/bindings.py",
+        "preconditions": [
+          "Researcher runs local experiment with existing qualification evidence"
+        ],
+        "impact": "Path traversal read/write",
+        "references": [
+          "qualification/font03/local/final-sonar-issues.json",
+          "pythonsecurity:S8707",
+          "SonarCloud project mitchins_scanweave PR24; reported line 186"
+        ]
+      },
+      "verdict": "not_actionable",
+      "confidence": "high",
+      "affected_locations": [
+        {
+          "label": "sink",
+          "path": "qualification/font03/experiments/bindings.py",
+          "lines": "186",
+          "detail": "The researcher supplies split through sys.argv[1]; the exact output is root/(split+\"-bindings.json\"). The documented local researcher runs this script directly and already has the same filesystem authority; no network/API or converter caller invokes it. Missing split validation is a misuse-hardening opportunity, not an established lower-trust path."
+        }
+      ],
+      "reachable_path": [
+        "Documented repository-root research invocation",
+        "qualification/font03/experiments/bindings.py:186"
+      ],
+      "boundary_assessment": {
+        "product_surface": "CLI",
+        "source_trust": "trusted_operator",
+        "boundary_crossed": false,
+        "policy_basis": "No applicable SECURITY.md found by resolver. qualification/font03/README.md lines 3-4, 20-23, 42-49 documents research-only direct invocation and explicit root override; Cargo.toml workspace excludes Python; CI executes test_consensus, not these experiment entrypoints."
+      },
+      "exploitability_stack_rank": {
+        "rank_queue": null,
+        "rank": null,
+        "rationale": "Claim defeated by fixed destination or established same-privilege researcher input.",
+        "drivers": []
+      },
+      "evidence": [
+        "The researcher supplies split through sys.argv[1]; the exact output is root/(split+\"-bindings.json\"). The documented local researcher runs this script directly and already has the same filesystem authority; no network/API or converter caller invokes it. Missing split validation is a misuse-hardening opportunity, not an established lower-trust path.",
+        "Reviewed immutable source 7ebc09ec7ec19d9c4ff260da621fcfbb021d909d"
+      ],
+      "counterevidence": [
+        "No converter imports this package (README lines 3-4); research requalify-symmetric.sh selects literal roots and splits."
+      ],
+      "proof_gaps": [
+        "Static review only; no runtime validation, live Sonar refresh, or filesystem symlink threat-model assessment."
+      ],
+      "recommended_next_step": "Reviewer may accept this individual false-positive disposition; keep Security analysis enabled. Reassess if a privileged service or external request wrapper is introduced.",
+      "fix_finding_handoff": null
+    },
+    {
+      "triage_item_id": "triage-017",
+      "input_id": "AaFnHEeVtFH_uhPxeYeB",
+      "source_type": "scanner_ticket",
+      "title": "Path Traversal via command-line argument",
+      "normalized_input": {
+        "vulnerable_component": "qualification/font03/experiments/synthetic_evaluate.py",
+        "claimed_source": "command-line arguments (scanner flow incorrectly labels these HTTP request content)",
+        "claimed_sink": "filesystem access",
+        "claimed_control": "path containment",
+        "affected_version_or_path": "qualification/font03/experiments/synthetic_evaluate.py",
+        "preconditions": [
+          "Researcher runs local experiment with existing qualification evidence"
+        ],
+        "impact": "Path traversal read/write",
+        "references": [
+          "qualification/font03/local/final-sonar-issues.json",
+          "pythonsecurity:S8707",
+          "SonarCloud project mitchins_scanweave PR24; reported line 13"
+        ]
+      },
+      "verdict": "not_actionable",
+      "confidence": "high",
+      "affected_locations": [
+        {
+          "label": "sink",
+          "path": "qualification/font03/experiments/synthetic_evaluate.py",
+          "lines": "13",
+          "detail": "The SHA-256 read targets researcher-selected root/(split+\"-source-rendered.json\"). Both root and split are direct CLI selections, explicitly supported for separate affine-refinement output roots; no document-supplied value chooses this path."
+        }
+      ],
+      "reachable_path": [
+        "Documented repository-root research invocation",
+        "qualification/font03/experiments/synthetic_evaluate.py:13"
+      ],
+      "boundary_assessment": {
+        "product_surface": "CLI",
+        "source_trust": "trusted_operator",
+        "boundary_crossed": false,
+        "policy_basis": "No applicable SECURITY.md found by resolver. qualification/font03/README.md lines 3-4, 20-23, 42-49 documents research-only direct invocation and explicit root override; Cargo.toml workspace excludes Python; CI executes test_consensus, not these experiment entrypoints."
+      },
+      "exploitability_stack_rank": {
+        "rank_queue": null,
+        "rank": null,
+        "rationale": "Claim defeated by fixed destination or established same-privilege researcher input.",
+        "drivers": []
+      },
+      "evidence": [
+        "The SHA-256 read targets researcher-selected root/(split+\"-source-rendered.json\"). Both root and split are direct CLI selections, explicitly supported for separate affine-refinement output roots; no document-supplied value chooses this path.",
+        "Reviewed immutable source 7ebc09ec7ec19d9c4ff260da621fcfbb021d909d"
+      ],
+      "counterevidence": [
+        "No converter imports this package (README lines 3-4); research requalify-symmetric.sh selects literal roots and splits."
+      ],
+      "proof_gaps": [
+        "Static review only; no runtime validation, live Sonar refresh, or filesystem symlink threat-model assessment."
+      ],
+      "recommended_next_step": "Reviewer may accept this individual false-positive disposition; keep Security analysis enabled. Reassess if a privileged service or external request wrapper is introduced.",
+      "fix_finding_handoff": null
+    },
+    {
+      "triage_item_id": "triage-018",
+      "input_id": "AaFnHEeVtFH_uhPxeYeC",
+      "source_type": "scanner_ticket",
+      "title": "Path Traversal via command-line argument",
+      "normalized_input": {
+        "vulnerable_component": "qualification/font03/experiments/synthetic_evaluate.py",
+        "claimed_source": "command-line arguments (scanner flow incorrectly labels these HTTP request content)",
+        "claimed_sink": "filesystem access",
+        "claimed_control": "path containment",
+        "affected_version_or_path": "qualification/font03/experiments/synthetic_evaluate.py",
+        "preconditions": [
+          "Researcher runs local experiment with existing qualification evidence"
+        ],
+        "impact": "Path traversal read/write",
+        "references": [
+          "qualification/font03/local/final-sonar-issues.json",
+          "pythonsecurity:S8707",
+          "SonarCloud project mitchins_scanweave PR24; reported line 17"
+        ]
+      },
+      "verdict": "not_actionable",
+      "confidence": "high",
+      "affected_locations": [
+        {
+          "label": "sink",
+          "path": "qualification/font03/experiments/synthetic_evaluate.py",
+          "lines": "17",
+          "detail": "The SHA-256 read targets researcher-selected root/(split+\"-native-coverages.npz\"). The researcher already selects this evidence directory on the command line; no lower-trust request can select it through a shipped caller."
+        }
+      ],
+      "reachable_path": [
+        "Documented repository-root research invocation",
+        "qualification/font03/experiments/synthetic_evaluate.py:17"
+      ],
+      "boundary_assessment": {
+        "product_surface": "CLI",
+        "source_trust": "trusted_operator",
+        "boundary_crossed": false,
+        "policy_basis": "No applicable SECURITY.md found by resolver. qualification/font03/README.md lines 3-4, 20-23, 42-49 documents research-only direct invocation and explicit root override; Cargo.toml workspace excludes Python; CI executes test_consensus, not these experiment entrypoints."
+      },
+      "exploitability_stack_rank": {
+        "rank_queue": null,
+        "rank": null,
+        "rationale": "Claim defeated by fixed destination or established same-privilege researcher input.",
+        "drivers": []
+      },
+      "evidence": [
+        "The SHA-256 read targets researcher-selected root/(split+\"-native-coverages.npz\"). The researcher already selects this evidence directory on the command line; no lower-trust request can select it through a shipped caller.",
+        "Reviewed immutable source 7ebc09ec7ec19d9c4ff260da621fcfbb021d909d"
+      ],
+      "counterevidence": [
+        "No converter imports this package (README lines 3-4); research requalify-symmetric.sh selects literal roots and splits."
+      ],
+      "proof_gaps": [
+        "Static review only; no runtime validation, live Sonar refresh, or filesystem symlink threat-model assessment."
+      ],
+      "recommended_next_step": "Reviewer may accept this individual false-positive disposition; keep Security analysis enabled. Reassess if a privileged service or external request wrapper is introduced.",
+      "fix_finding_handoff": null
+    },
+    {
+      "triage_item_id": "triage-019",
+      "input_id": "AaFnHEeVtFH_uhPxeYeA",
+      "source_type": "scanner_ticket",
+      "title": "Path Traversal via command-line argument",
+      "normalized_input": {
+        "vulnerable_component": "qualification/font03/experiments/synthetic_evaluate.py",
+        "claimed_source": "command-line arguments (scanner flow incorrectly labels these HTTP request content)",
+        "claimed_sink": "filesystem access",
+        "claimed_control": "path containment",
+        "affected_version_or_path": "qualification/font03/experiments/synthetic_evaluate.py",
+        "preconditions": [
+          "Researcher runs local experiment with existing qualification evidence"
+        ],
+        "impact": "Path traversal read/write",
+        "references": [
+          "qualification/font03/local/final-sonar-issues.json",
+          "pythonsecurity:S8707",
+          "SonarCloud project mitchins_scanweave PR24; reported line 91"
+        ]
+      },
+      "verdict": "not_actionable",
+      "confidence": "high",
+      "affected_locations": [
+        {
+          "label": "sink",
+          "path": "qualification/font03/experiments/synthetic_evaluate.py",
+          "lines": "91",
+          "detail": "The evaluated JSON destination derives only from researcher-selected CLI root and split. The README and reproduction shell deliberately select the affine-refinement directory; there is no supported remote write surface."
+        }
+      ],
+      "reachable_path": [
+        "Documented repository-root research invocation",
+        "qualification/font03/experiments/synthetic_evaluate.py:91"
+      ],
+      "boundary_assessment": {
+        "product_surface": "CLI",
+        "source_trust": "trusted_operator",
+        "boundary_crossed": false,
+        "policy_basis": "No applicable SECURITY.md found by resolver. qualification/font03/README.md lines 3-4, 20-23, 42-49 documents research-only direct invocation and explicit root override; Cargo.toml workspace excludes Python; CI executes test_consensus, not these experiment entrypoints."
+      },
+      "exploitability_stack_rank": {
+        "rank_queue": null,
+        "rank": null,
+        "rationale": "Claim defeated by fixed destination or established same-privilege researcher input.",
+        "drivers": []
+      },
+      "evidence": [
+        "The evaluated JSON destination derives only from researcher-selected CLI root and split. The README and reproduction shell deliberately select the affine-refinement directory; there is no supported remote write surface.",
+        "Reviewed immutable source 7ebc09ec7ec19d9c4ff260da621fcfbb021d909d"
+      ],
+      "counterevidence": [
+        "No converter imports this package (README lines 3-4); research requalify-symmetric.sh selects literal roots and splits."
+      ],
+      "proof_gaps": [
+        "Static review only; no runtime validation, live Sonar refresh, or filesystem symlink threat-model assessment."
+      ],
+      "recommended_next_step": "Reviewer may accept this individual false-positive disposition; keep Security analysis enabled. Reassess if a privileged service or external request wrapper is introduced.",
+      "fix_finding_handoff": null
+    },
+    {
+      "triage_item_id": "triage-020",
+      "input_id": "AaFnHEd6tFH_uhPxeYdH",
+      "source_type": "scanner_ticket",
+      "title": "Path Traversal via command-line argument",
+      "normalized_input": {
+        "vulnerable_component": "qualification/font03/experiments/synthetic_measure.py",
+        "claimed_source": "command-line arguments (scanner flow incorrectly labels these HTTP request content)",
+        "claimed_sink": "filesystem access",
+        "claimed_control": "path containment",
+        "affected_version_or_path": "qualification/font03/experiments/synthetic_measure.py",
+        "preconditions": [
+          "Researcher runs local experiment with existing qualification evidence"
+        ],
+        "impact": "Path traversal read/write",
+        "references": [
+          "qualification/font03/local/final-sonar-issues.json",
+          "pythonsecurity:S8707",
+          "SonarCloud project mitchins_scanweave PR24; reported line 152"
+        ]
+      },
+      "verdict": "not_actionable",
+      "confidence": "high",
+      "affected_locations": [
+        {
+          "label": "sink",
+          "path": "qualification/font03/experiments/synthetic_measure.py",
+          "lines": "152",
+          "detail": "output is assigned root/(split+\"-source-rendered.json\") at line 151, solely from direct researcher CLI arguments. Source document content affects serialized records, not the destination path."
+        }
+      ],
+      "reachable_path": [
+        "Documented repository-root research invocation",
+        "qualification/font03/experiments/synthetic_measure.py:152"
+      ],
+      "boundary_assessment": {
+        "product_surface": "CLI",
+        "source_trust": "trusted_operator",
+        "boundary_crossed": false,
+        "policy_basis": "No applicable SECURITY.md found by resolver. qualification/font03/README.md lines 3-4, 20-23, 42-49 documents research-only direct invocation and explicit root override; Cargo.toml workspace excludes Python; CI executes test_consensus, not these experiment entrypoints."
+      },
+      "exploitability_stack_rank": {
+        "rank_queue": null,
+        "rank": null,
+        "rationale": "Claim defeated by fixed destination or established same-privilege researcher input.",
+        "drivers": []
+      },
+      "evidence": [
+        "output is assigned root/(split+\"-source-rendered.json\") at line 151, solely from direct researcher CLI arguments. Source document content affects serialized records, not the destination path.",
+        "Reviewed immutable source 7ebc09ec7ec19d9c4ff260da621fcfbb021d909d"
+      ],
+      "counterevidence": [
+        "No converter imports this package (README lines 3-4); research requalify-symmetric.sh selects literal roots and splits."
+      ],
+      "proof_gaps": [
+        "Static review only; no runtime validation, live Sonar refresh, or filesystem symlink threat-model assessment."
+      ],
+      "recommended_next_step": "Reviewer may accept this individual false-positive disposition; keep Security analysis enabled. Reassess if a privileged service or external request wrapper is introduced.",
+      "fix_finding_handoff": null
+    },
+    {
+      "triage_item_id": "triage-021",
+      "input_id": "AaFnHEd6tFH_uhPxeYdF",
+      "source_type": "scanner_ticket",
+      "title": "Path Traversal via command-line argument",
+      "normalized_input": {
+        "vulnerable_component": "qualification/font03/experiments/synthetic_measure.py",
+        "claimed_source": "command-line arguments (scanner flow incorrectly labels these HTTP request content)",
+        "claimed_sink": "filesystem access",
+        "claimed_control": "path containment",
+        "affected_version_or_path": "qualification/font03/experiments/synthetic_measure.py",
+        "preconditions": [
+          "Researcher runs local experiment with existing qualification evidence"
+        ],
+        "impact": "Path traversal read/write",
+        "references": [
+          "qualification/font03/local/final-sonar-issues.json",
+          "pythonsecurity:S8707",
+          "SonarCloud project mitchins_scanweave PR24; reported line 155"
+        ]
+      },
+      "verdict": "not_actionable",
+      "confidence": "high",
+      "affected_locations": [
+        {
+          "label": "sink",
+          "path": "qualification/font03/experiments/synthetic_measure.py",
+          "lines": "155",
+          "detail": "The freeze JSON write destination is root/(split+\"-source-freeze.json\"), chosen by researcher CLI arguments. No parsed PDF/JSON field controls the write path."
+        }
+      ],
+      "reachable_path": [
+        "Documented repository-root research invocation",
+        "qualification/font03/experiments/synthetic_measure.py:155"
+      ],
+      "boundary_assessment": {
+        "product_surface": "CLI",
+        "source_trust": "trusted_operator",
+        "boundary_crossed": false,
+        "policy_basis": "No applicable SECURITY.md found by resolver. qualification/font03/README.md lines 3-4, 20-23, 42-49 documents research-only direct invocation and explicit root override; Cargo.toml workspace excludes Python; CI executes test_consensus, not these experiment entrypoints."
+      },
+      "exploitability_stack_rank": {
+        "rank_queue": null,
+        "rank": null,
+        "rationale": "Claim defeated by fixed destination or established same-privilege researcher input.",
+        "drivers": []
+      },
+      "evidence": [
+        "The freeze JSON write destination is root/(split+\"-source-freeze.json\"), chosen by researcher CLI arguments. No parsed PDF/JSON field controls the write path.",
+        "Reviewed immutable source 7ebc09ec7ec19d9c4ff260da621fcfbb021d909d"
+      ],
+      "counterevidence": [
+        "No converter imports this package (README lines 3-4); research requalify-symmetric.sh selects literal roots and splits."
+      ],
+      "proof_gaps": [
+        "Static review only; no runtime validation, live Sonar refresh, or filesystem symlink threat-model assessment."
+      ],
+      "recommended_next_step": "Reviewer may accept this individual false-positive disposition; keep Security analysis enabled. Reassess if a privileged service or external request wrapper is introduced.",
+      "fix_finding_handoff": null
+    },
+    {
+      "triage_item_id": "triage-022",
+      "input_id": "AaFnHEd6tFH_uhPxeYdG",
+      "source_type": "scanner_ticket",
+      "title": "Path Traversal via command-line argument",
+      "normalized_input": {
+        "vulnerable_component": "qualification/font03/experiments/synthetic_measure.py",
+        "claimed_source": "command-line arguments (scanner flow incorrectly labels these HTTP request content)",
+        "claimed_sink": "filesystem access",
+        "claimed_control": "path containment",
+        "affected_version_or_path": "qualification/font03/experiments/synthetic_measure.py",
+        "preconditions": [
+          "Researcher runs local experiment with existing qualification evidence"
+        ],
+        "impact": "Path traversal read/write",
+        "references": [
+          "qualification/font03/local/final-sonar-issues.json",
+          "pythonsecurity:S8707",
+          "SonarCloud project mitchins_scanweave PR24; reported line 158"
+        ]
+      },
+      "verdict": "not_actionable",
+      "confidence": "high",
+      "affected_locations": [
+        {
+          "label": "sink",
+          "path": "qualification/font03/experiments/synthetic_measure.py",
+          "lines": "158",
+          "detail": "The digest reads output, assigned at line 151 from researcher root and split; this is the same evidence JSON just written at lines 152-154, not a document-selected path."
+        }
+      ],
+      "reachable_path": [
+        "Documented repository-root research invocation",
+        "qualification/font03/experiments/synthetic_measure.py:158"
+      ],
+      "boundary_assessment": {
+        "product_surface": "CLI",
+        "source_trust": "trusted_operator",
+        "boundary_crossed": false,
+        "policy_basis": "No applicable SECURITY.md found by resolver. qualification/font03/README.md lines 3-4, 20-23, 42-49 documents research-only direct invocation and explicit root override; Cargo.toml workspace excludes Python; CI executes test_consensus, not these experiment entrypoints."
+      },
+      "exploitability_stack_rank": {
+        "rank_queue": null,
+        "rank": null,
+        "rationale": "Claim defeated by fixed destination or established same-privilege researcher input.",
+        "drivers": []
+      },
+      "evidence": [
+        "The digest reads output, assigned at line 151 from researcher root and split; this is the same evidence JSON just written at lines 152-154, not a document-selected path.",
+        "Reviewed immutable source 7ebc09ec7ec19d9c4ff260da621fcfbb021d909d"
+      ],
+      "counterevidence": [
+        "No converter imports this package (README lines 3-4); research requalify-symmetric.sh selects literal roots and splits."
+      ],
+      "proof_gaps": [
+        "Static review only; no runtime validation, live Sonar refresh, or filesystem symlink threat-model assessment."
+      ],
+      "recommended_next_step": "Reviewer may accept this individual false-positive disposition; keep Security analysis enabled. Reassess if a privileged service or external request wrapper is introduced.",
+      "fix_finding_handoff": null
+    },
+    {
+      "triage_item_id": "triage-023",
+      "input_id": "AaFnHEd6tFH_uhPxeYdI",
+      "source_type": "scanner_ticket",
+      "title": "Path Traversal via command-line argument",
+      "normalized_input": {
+        "vulnerable_component": "qualification/font03/experiments/synthetic_measure.py",
+        "claimed_source": "command-line arguments (scanner flow incorrectly labels these HTTP request content)",
+        "claimed_sink": "filesystem access",
+        "claimed_control": "path containment",
+        "affected_version_or_path": "qualification/font03/experiments/synthetic_measure.py",
+        "preconditions": [
+          "Researcher runs local experiment with existing qualification evidence"
+        ],
+        "impact": "Path traversal read/write",
+        "references": [
+          "qualification/font03/local/final-sonar-issues.json",
+          "pythonsecurity:S8707",
+          "SonarCloud project mitchins_scanweave PR24; reported line 160"
+        ]
+      },
+      "verdict": "not_actionable",
+      "confidence": "high",
+      "affected_locations": [
+        {
+          "label": "sink",
+          "path": "qualification/font03/experiments/synthetic_measure.py",
+          "lines": "160",
+          "detail": "The coverage digest reads root/(split+\"-native-coverages.npz\"), an archive this script writes at line 149. Its path is selected by the invoking researcher, not an HTTP request or parsed document."
+        }
+      ],
+      "reachable_path": [
+        "Documented repository-root research invocation",
+        "qualification/font03/experiments/synthetic_measure.py:160"
+      ],
+      "boundary_assessment": {
+        "product_surface": "CLI",
+        "source_trust": "trusted_operator",
+        "boundary_crossed": false,
+        "policy_basis": "No applicable SECURITY.md found by resolver. qualification/font03/README.md lines 3-4, 20-23, 42-49 documents research-only direct invocation and explicit root override; Cargo.toml workspace excludes Python; CI executes test_consensus, not these experiment entrypoints."
+      },
+      "exploitability_stack_rank": {
+        "rank_queue": null,
+        "rank": null,
+        "rationale": "Claim defeated by fixed destination or established same-privilege researcher input.",
+        "drivers": []
+      },
+      "evidence": [
+        "The coverage digest reads root/(split+\"-native-coverages.npz\"), an archive this script writes at line 149. Its path is selected by the invoking researcher, not an HTTP request or parsed document.",
+        "Reviewed immutable source 7ebc09ec7ec19d9c4ff260da621fcfbb021d909d"
+      ],
+      "counterevidence": [
+        "No converter imports this package (README lines 3-4); research requalify-symmetric.sh selects literal roots and splits."
+      ],
+      "proof_gaps": [
+        "Static review only; no runtime validation, live Sonar refresh, or filesystem symlink threat-model assessment."
+      ],
+      "recommended_next_step": "Reviewer may accept this individual false-positive disposition; keep Security analysis enabled. Reassess if a privileged service or external request wrapper is introduced.",
+      "fix_finding_handoff": null
+    },
+    {
+      "triage_item_id": "triage-024",
+      "input_id": "AaFnHEd6tFH_uhPxeYdJ",
+      "source_type": "scanner_ticket",
+      "title": "Path Traversal via command-line argument",
+      "normalized_input": {
+        "vulnerable_component": "qualification/font03/experiments/synthetic_measure.py",
+        "claimed_source": "command-line arguments (scanner flow incorrectly labels these HTTP request content)",
+        "claimed_sink": "filesystem access",
+        "claimed_control": "path containment",
+        "affected_version_or_path": "qualification/font03/experiments/synthetic_measure.py",
+        "preconditions": [
+          "Researcher runs local experiment with existing qualification evidence"
+        ],
+        "impact": "Path traversal read/write",
+        "references": [
+          "qualification/font03/local/final-sonar-issues.json",
+          "pythonsecurity:S8707",
+          "SonarCloud project mitchins_scanweave PR24; reported line 163"
+        ]
+      },
+      "verdict": "not_actionable",
+      "confidence": "high",
+      "affected_locations": [
+        {
+          "label": "sink",
+          "path": "qualification/font03/experiments/synthetic_measure.py",
+          "lines": "163",
+          "detail": "The protocol digest reads root/\"initial-protocol.json\". The suffix is literal; root is an intentional CLI evidence-directory selection made by the researcher."
+        }
+      ],
+      "reachable_path": [
+        "Documented repository-root research invocation",
+        "qualification/font03/experiments/synthetic_measure.py:163"
+      ],
+      "boundary_assessment": {
+        "product_surface": "CLI",
+        "source_trust": "trusted_operator",
+        "boundary_crossed": false,
+        "policy_basis": "No applicable SECURITY.md found by resolver. qualification/font03/README.md lines 3-4, 20-23, 42-49 documents research-only direct invocation and explicit root override; Cargo.toml workspace excludes Python; CI executes test_consensus, not these experiment entrypoints."
+      },
+      "exploitability_stack_rank": {
+        "rank_queue": null,
+        "rank": null,
+        "rationale": "Claim defeated by fixed destination or established same-privilege researcher input.",
+        "drivers": []
+      },
+      "evidence": [
+        "The protocol digest reads root/\"initial-protocol.json\". The suffix is literal; root is an intentional CLI evidence-directory selection made by the researcher.",
+        "Reviewed immutable source 7ebc09ec7ec19d9c4ff260da621fcfbb021d909d"
+      ],
+      "counterevidence": [
+        "No converter imports this package (README lines 3-4); research requalify-symmetric.sh selects literal roots and splits."
+      ],
+      "proof_gaps": [
+        "Static review only; no runtime validation, live Sonar refresh, or filesystem symlink threat-model assessment."
+      ],
+      "recommended_next_step": "Reviewer may accept this individual false-positive disposition; keep Security analysis enabled. Reassess if a privileged service or external request wrapper is introduced.",
+      "fix_finding_handoff": null
+    },
+    {
+      "triage_item_id": "triage-025",
+      "input_id": "AaFnHEd6tFH_uhPxeYdK",
+      "source_type": "scanner_ticket",
+      "title": "Path Traversal via command-line argument",
+      "normalized_input": {
+        "vulnerable_component": "qualification/font03/experiments/synthetic_measure.py",
+        "claimed_source": "command-line arguments (scanner flow incorrectly labels these HTTP request content)",
+        "claimed_sink": "filesystem access",
+        "claimed_control": "path containment",
+        "affected_version_or_path": "qualification/font03/experiments/synthetic_measure.py",
+        "preconditions": [
+          "Researcher runs local experiment with existing qualification evidence"
+        ],
+        "impact": "Path traversal read/write",
+        "references": [
+          "qualification/font03/local/final-sonar-issues.json",
+          "pythonsecurity:S8707",
+          "SonarCloud project mitchins_scanweave PR24; reported line 166"
+        ]
+      },
+      "verdict": "not_actionable",
+      "confidence": "high",
+      "affected_locations": [
+        {
+          "label": "sink",
+          "path": "qualification/font03/experiments/synthetic_measure.py",
+          "lines": "166",
+          "detail": "The noise digest reads root/\"training-noise-calibration.json\". The filename is fixed; researcher CLI root selects the calibration directory with the same process authority."
+        }
+      ],
+      "reachable_path": [
+        "Documented repository-root research invocation",
+        "qualification/font03/experiments/synthetic_measure.py:166"
+      ],
+      "boundary_assessment": {
+        "product_surface": "CLI",
+        "source_trust": "trusted_operator",
+        "boundary_crossed": false,
+        "policy_basis": "No applicable SECURITY.md found by resolver. qualification/font03/README.md lines 3-4, 20-23, 42-49 documents research-only direct invocation and explicit root override; Cargo.toml workspace excludes Python; CI executes test_consensus, not these experiment entrypoints."
+      },
+      "exploitability_stack_rank": {
+        "rank_queue": null,
+        "rank": null,
+        "rationale": "Claim defeated by fixed destination or established same-privilege researcher input.",
+        "drivers": []
+      },
+      "evidence": [
+        "The noise digest reads root/\"training-noise-calibration.json\". The filename is fixed; researcher CLI root selects the calibration directory with the same process authority.",
+        "Reviewed immutable source 7ebc09ec7ec19d9c4ff260da621fcfbb021d909d"
+      ],
+      "counterevidence": [
+        "No converter imports this package (README lines 3-4); research requalify-symmetric.sh selects literal roots and splits."
+      ],
+      "proof_gaps": [
+        "Static review only; no runtime validation, live Sonar refresh, or filesystem symlink threat-model assessment."
+      ],
+      "recommended_next_step": "Reviewer may accept this individual false-positive disposition; keep Security analysis enabled. Reassess if a privileged service or external request wrapper is introduced.",
+      "fix_finding_handoff": null
+    },
+    {
+      "triage_item_id": "triage-026",
+      "input_id": "AaFnHEeStFH_uhPxeYd6",
+      "source_type": "scanner_ticket",
+      "title": "Path Traversal via command-line argument",
+      "normalized_input": {
+        "vulnerable_component": "qualification/font03/experiments/synthetic_pdfs.py",
+        "claimed_source": "command-line arguments (scanner flow incorrectly labels these HTTP request content)",
+        "claimed_sink": "filesystem access",
+        "claimed_control": "path containment",
+        "affected_version_or_path": "qualification/font03/experiments/synthetic_pdfs.py",
+        "preconditions": [
+          "Researcher runs local experiment with existing qualification evidence"
+        ],
+        "impact": "Path traversal read/write",
+        "references": [
+          "qualification/font03/local/final-sonar-issues.json",
+          "pythonsecurity:S8707",
+          "SonarCloud project mitchins_scanweave PR24; reported line 103"
+        ]
+      },
+      "verdict": "not_actionable",
+      "confidence": "high",
+      "affected_locations": [
+        {
+          "label": "sink",
+          "path": "qualification/font03/experiments/synthetic_pdfs.py",
+          "lines": "103",
+          "detail": "The render-plan write uses root/f\"{split}-render-plan.json\". root is the documented optional researcher CLI argument; split is the fixed loop tuple validation/test at line 18. No external document supplies either component."
+        }
+      ],
+      "reachable_path": [
+        "Documented repository-root research invocation",
+        "qualification/font03/experiments/synthetic_pdfs.py:103"
+      ],
+      "boundary_assessment": {
+        "product_surface": "CLI",
+        "source_trust": "trusted_operator",
+        "boundary_crossed": false,
+        "policy_basis": "No applicable SECURITY.md found by resolver. qualification/font03/README.md lines 3-4, 20-23, 42-49 documents research-only direct invocation and explicit root override; Cargo.toml workspace excludes Python; CI executes test_consensus, not these experiment entrypoints."
+      },
+      "exploitability_stack_rank": {
+        "rank_queue": null,
+        "rank": null,
+        "rationale": "Claim defeated by fixed destination or established same-privilege researcher input.",
+        "drivers": []
+      },
+      "evidence": [
+        "The render-plan write uses root/f\"{split}-render-plan.json\". root is the documented optional researcher CLI argument; split is the fixed loop tuple validation/test at line 18. No external document supplies either component.",
+        "Reviewed immutable source 7ebc09ec7ec19d9c4ff260da621fcfbb021d909d"
+      ],
+      "counterevidence": [
+        "No converter imports this package (README lines 3-4); research requalify-symmetric.sh selects literal roots and splits."
+      ],
+      "proof_gaps": [
+        "Static review only; no runtime validation, live Sonar refresh, or filesystem symlink threat-model assessment."
+      ],
+      "recommended_next_step": "Reviewer may accept this individual false-positive disposition; keep Security analysis enabled. Reassess if a privileged service or external request wrapper is introduced.",
+      "fix_finding_handoff": null
+    },
+    {
+      "triage_item_id": "triage-027",
+      "input_id": "AaFnHEeStFH_uhPxeYd7",
+      "source_type": "scanner_ticket",
+      "title": "Path Traversal via command-line argument",
+      "normalized_input": {
+        "vulnerable_component": "qualification/font03/experiments/synthetic_pdfs.py",
+        "claimed_source": "command-line arguments (scanner flow incorrectly labels these HTTP request content)",
+        "claimed_sink": "filesystem access",
+        "claimed_control": "path containment",
+        "affected_version_or_path": "qualification/font03/experiments/synthetic_pdfs.py",
+        "preconditions": [
+          "Researcher runs local experiment with existing qualification evidence"
+        ],
+        "impact": "Path traversal read/write",
+        "references": [
+          "qualification/font03/local/final-sonar-issues.json",
+          "pythonsecurity:S8707",
+          "SonarCloud project mitchins_scanweave PR24; reported line 109"
+        ]
+      },
+      "verdict": "not_actionable",
+      "confidence": "high",
+      "affected_locations": [
+        {
+          "label": "sink",
+          "path": "qualification/font03/experiments/synthetic_pdfs.py",
+          "lines": "109",
+          "detail": "The PDF digest reads path set at line 96 to root/f\"{split}-ABCD.pdf\", saved by this script at line 97. split is a fixed loop value and root is explicitly researcher-selected."
+        }
+      ],
+      "reachable_path": [
+        "Documented repository-root research invocation",
+        "qualification/font03/experiments/synthetic_pdfs.py:109"
+      ],
+      "boundary_assessment": {
+        "product_surface": "CLI",
+        "source_trust": "trusted_operator",
+        "boundary_crossed": false,
+        "policy_basis": "No applicable SECURITY.md found by resolver. qualification/font03/README.md lines 3-4, 20-23, 42-49 documents research-only direct invocation and explicit root override; Cargo.toml workspace excludes Python; CI executes test_consensus, not these experiment entrypoints."
+      },
+      "exploitability_stack_rank": {
+        "rank_queue": null,
+        "rank": null,
+        "rationale": "Claim defeated by fixed destination or established same-privilege researcher input.",
+        "drivers": []
+      },
+      "evidence": [
+        "The PDF digest reads path set at line 96 to root/f\"{split}-ABCD.pdf\", saved by this script at line 97. split is a fixed loop value and root is explicitly researcher-selected.",
+        "Reviewed immutable source 7ebc09ec7ec19d9c4ff260da621fcfbb021d909d"
+      ],
+      "counterevidence": [
+        "No converter imports this package (README lines 3-4); research requalify-symmetric.sh selects literal roots and splits."
+      ],
+      "proof_gaps": [
+        "Static review only; no runtime validation, live Sonar refresh, or filesystem symlink threat-model assessment."
+      ],
+      "recommended_next_step": "Reviewer may accept this individual false-positive disposition; keep Security analysis enabled. Reassess if a privileged service or external request wrapper is introduced.",
+      "fix_finding_handoff": null
+    },
+    {
+      "triage_item_id": "triage-028",
+      "input_id": "AaFnHEeJtFH_uhPxeYd0",
+      "source_type": "scanner_ticket",
+      "title": "Path Traversal via file content",
+      "normalized_input": {
+        "vulnerable_component": "qualification/font03/experiments/verify_construction.py",
+        "claimed_source": "file content",
+        "claimed_sink": "filesystem access",
+        "claimed_control": "path containment",
+        "affected_version_or_path": "qualification/font03/experiments/verify_construction.py",
+        "preconditions": [
+          "Researcher runs local experiment with existing qualification evidence"
+        ],
+        "impact": "Path traversal read/write",
+        "references": [
+          "qualification/font03/local/final-sonar-issues.json",
+          "pythonsecurity:S2083",
+          "SonarCloud project mitchins_scanweave PR24; reported line 97"
+        ]
+      },
+      "verdict": "not_actionable",
+      "confidence": "high",
+      "affected_locations": [
+        {
+          "label": "sink",
+          "path": "qualification/font03/experiments/verify_construction.py",
+          "lines": "97",
+          "detail": "PDF font bytes reach the content argument of write_bytes, not its destination. The destination is the literal root/\"preunion.ttf\" with root fixed to qualification/font03/local at line 13. Arbitrary font bytes cannot change that path; no archive extraction or filename decoding occurs."
+        }
+      ],
+      "reachable_path": [
+        "Documented repository-root research invocation",
+        "qualification/font03/experiments/verify_construction.py:97"
+      ],
+      "boundary_assessment": {
+        "product_surface": "CLI",
+        "source_trust": "local_only",
+        "boundary_crossed": false,
+        "policy_basis": "No applicable SECURITY.md found by resolver. qualification/font03/README.md lines 3-4, 20-23, 42-49 documents research-only direct invocation and explicit root override; Cargo.toml workspace excludes Python; CI executes test_consensus, not these experiment entrypoints."
+      },
+      "exploitability_stack_rank": {
+        "rank_queue": null,
+        "rank": null,
+        "rationale": "Claim defeated by fixed destination or established same-privilege researcher input.",
+        "drivers": []
+      },
+      "evidence": [
+        "PDF font bytes reach the content argument of write_bytes, not its destination. The destination is the literal root/\"preunion.ttf\" with root fixed to qualification/font03/local at line 13. Arbitrary font bytes cannot change that path; no archive extraction or filename decoding occurs.",
+        "Reviewed immutable source 7ebc09ec7ec19d9c4ff260da621fcfbb021d909d"
+      ],
+      "counterevidence": [
+        "Untrusted bytes are content, not destination path."
+      ],
+      "proof_gaps": [
+        "Static review only; no runtime validation, live Sonar refresh, or filesystem symlink threat-model assessment."
+      ],
+      "recommended_next_step": "Reviewer may accept this individual false-positive disposition; keep Security analysis enabled. Reassess if a privileged service or external request wrapper is introduced.",
+      "fix_finding_handoff": null
+    }
+  ]
+}

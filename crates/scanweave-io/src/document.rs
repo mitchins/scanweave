@@ -235,7 +235,10 @@ fn retain_required_font_entries(
             }
         }
         for cid in page.parts.owner_cids.iter().copied().chain(
-            page.parts.owners.iter().flat_map(|o| o.characters.iter().map(|ch| ch.cid)),
+            page.parts
+                .owners
+                .iter()
+                .flat_map(|o| o.characters.iter().map(|ch| ch.cid)),
         ) {
             if let Some(required) = required_cids.get_mut(cid.saturating_sub(1) as usize) {
                 *required = true;
@@ -279,16 +282,32 @@ fn retain_required_font_entries(
 }
 
 fn document_design_bounds(shapes: &[GlyphShape]) -> Option<[i16; 4]> {
-    shapes.iter().map(|s| [
-        s.bbox_fu[0].floor() as i16, s.bbox_fu[1].floor() as i16,
-        s.bbox_fu[2].ceil() as i16, s.bbox_fu[3].ceil() as i16,
-    ]).reduce(|a, b| [a[0].min(b[0]), a[1].min(b[1]), a[2].max(b[2]), a[3].max(b[3])])
+    shapes
+        .iter()
+        .map(|s| {
+            [
+                s.bbox_fu[0].floor() as i16,
+                s.bbox_fu[1].floor() as i16,
+                s.bbox_fu[2].ceil() as i16,
+                s.bbox_fu[3].ceil() as i16,
+            ]
+        })
+        .reduce(|a, b| {
+            [
+                a[0].min(b[0]),
+                a[1].min(b[1]),
+                a[2].max(b[2]),
+                a[3].max(b[3]),
+            ]
+        })
 }
 
 // The layout chooser and writer must share the document-wide encoding gate.
 fn allows_tonal_images(inputs: &[Input], policy: &Policy) -> bool {
     policy.profile == "clearscan"
-        && inputs.iter().all(|input| input.protected_regions.is_empty())
+        && inputs
+            .iter()
+            .all(|input| input.protected_regions.is_empty())
 }
 
 /// Convert a bundle of pages into ONE document PDF.
@@ -307,6 +326,20 @@ pub fn convert_document_with_sources(
     inputs: &[Input],
     policy: &Policy,
     sources: &[Option<crate::source_image::EncodedSourceImage>],
+) -> Result<DocumentOutput, String> {
+    convert_document_with_transform(document_id, inputs, policy, sources, None)
+}
+
+/// Experimental pre-union intervention. `None` is the unchanged product path.
+#[allow(clippy::type_complexity)]
+pub fn convert_document_with_transform(
+    document_id: &str,
+    inputs: &[Input],
+    policy: &Policy,
+    sources: &[Option<crate::source_image::EncodedSourceImage>],
+    mut transform: Option<
+        &mut dyn FnMut(&mut [DocumentPage], &[Vec<crate::units::Unit>]) -> Result<(), String>,
+    >,
 ) -> Result<DocumentOutput, String> {
     let mut effective_policy = policy.clone();
     if policy.profile == "clearscan" && policy.image_encoding.predictor == 1 {
@@ -408,8 +441,12 @@ pub fn convert_document_with_sources(
                 }
             }
         }
-        let (mut parts, report) =
-            crate::convert::convert_parts_with_document_donors(input, policy, &sibling_donors, tonal_document)?;
+        let (mut parts, report) = crate::convert::convert_parts_with_document_donors(
+            input,
+            policy,
+            &sibling_donors,
+            tonal_document,
+        )?;
         if policy.profile == "clearscan" && parts.occurrences.is_empty() {
             parts.encoded_source = sources
                 .get(page_index)
@@ -420,6 +457,10 @@ pub fn convert_document_with_sources(
         pages.push(DocumentPage { parts, report });
     }
     stage_timings.page_conversion_ms = stage_start.elapsed().as_millis();
+
+    if let Some(transform) = transform.as_mut() {
+        transform(&mut pages, &all_donors)?;
+    }
 
     // 2. document-wide font: union of (shape, label), remapped per page
     let stage_start = std::time::Instant::now();
@@ -447,7 +488,9 @@ pub fn convert_document_with_sources(
     // any page has caller protection; no new per-page ownership flags are needed.
     let assemble = if tonal_document {
         crate::page_pdf::assemble_document_with_tonal_fallback
-    } else {crate::page_pdf::assemble_document_with_options};
+    } else {
+        crate::page_pdf::assemble_document_with_options
+    };
     let (pdf_bytes, stats) = assemble(
         &pages.iter().map(|p| p.parts.clone()).collect::<Vec<_>>(),
         &shapes,
@@ -780,7 +823,8 @@ mod semantic_owner_union_tests {
         // pruning must remap visible occurrences and invisible character owners.
         let expected_encodings = encodings.clone();
         let expected_keys: Vec<_> = shapes.iter().map(|s| s.shape_key.clone()).collect();
-        let expected_occurrences: Vec<_> = pages.iter().map(|p| p.parts.occurrences.clone()).collect();
+        let expected_occurrences: Vec<_> =
+            pages.iter().map(|p| p.parts.occurrences.clone()).collect();
         let shift = Remap {
             shape_map: (1..=shapes.len()).collect(),
             cid_map: (2..=encodings.len() as u32 + 1).collect(),
@@ -797,7 +841,13 @@ mod semantic_owner_union_tests {
         encodings.insert(0, (0, "unused label".into()));
         retain_required_font_entries(&mut pages, &mut shapes, &mut encodings);
         assert_eq!(encodings, expected_encodings);
-        assert_eq!(shapes.iter().map(|s| s.shape_key.clone()).collect::<Vec<_>>(), expected_keys);
+        assert_eq!(
+            shapes
+                .iter()
+                .map(|s| s.shape_key.clone())
+                .collect::<Vec<_>>(),
+            expected_keys
+        );
         for (page, expected) in pages.iter().zip(&expected_occurrences) {
             assert_eq!(&page.parts.occurrences, expected);
             for owner in &page.parts.owners {
@@ -818,16 +868,28 @@ mod tonal_protection_tests {
     #[test]
     fn one_protected_page_disables_tonal_layout_and_assembly_document_wide() {
         let page = Input {
-            page_id: "unprotected".into(), width: 2, height: 2, rgb: vec![255; 12],
-            spans: vec![], protected_regions: vec![], pixel_sha256: None,
+            page_id: "unprotected".into(),
+            width: 2,
+            height: 2,
+            rgb: vec![255; 12],
+            spans: vec![],
+            protected_regions: vec![],
+            pixel_sha256: None,
             raster_to_page_pt: [0.24, 0.0, 0.0, -0.24, 0.0, 0.48],
         };
-        let clear = Policy { profile: "clearscan".into(), ..Policy::default() };
+        let clear = Policy {
+            profile: "clearscan".into(),
+            ..Policy::default()
+        };
         assert!(allows_tonal_images(&[page.clone(), page.clone()], &clear));
         let mut protected = page.clone();
-        protected.protected_regions.push(crate::convert::ProtectedInput {
-            id: "mark".into(), polygon: vec![[0.0, 0.0], [1.0, 0.0], [1.0, 1.0]], reason: "caller".into(),
-        });
+        protected
+            .protected_regions
+            .push(crate::convert::ProtectedInput {
+                id: "mark".into(),
+                polygon: vec![[0.0, 0.0], [1.0, 0.0], [1.0, 1.0]],
+                reason: "caller".into(),
+            });
         assert!(!allows_tonal_images(&[page.clone(), protected], &clear));
         assert!(!allows_tonal_images(&[page], &Policy::default()));
     }

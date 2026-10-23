@@ -26,3 +26,6 @@ mod serialization;
 mod tonal_image;
 
 pub mod source_image;
+
+#[doc(hidden)]
+pub mod font04;

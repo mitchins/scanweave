@@ -1,3 +1,4 @@
+mod font04;
 mod pdf_input;
 // ScanWeave CLI: image/bundle conversion and ordinary PDF-to-PDF import.
 
@@ -352,7 +353,10 @@ fn main() -> ExitCode {
         }
         Some(input) if !input.starts_with('-') => match pdf_input::convert_pdf(&args) {
             Ok(()) => ExitCode::SUCCESS,
-            Err(e) => { eprintln!("scanweave: {e}"); ExitCode::from(2) }
+            Err(e) => {
+                eprintln!("scanweave: {e}");
+                ExitCode::from(2)
+            }
         },
         _ => usage(),
     }

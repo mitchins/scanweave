@@ -106,7 +106,12 @@ pub fn convert_pdf(args: &[String]) -> Result<(), String> {
     let input = args.first().ok_or("missing input PDF")?;
     let output = args.get(1).ok_or("usage: scanweave input.pdf output.pdf [--dpi 300] [--lang eng] [--profile clearscan|faithful]")?;
     for pair in args[2..].chunks(2) {
-        if pair.len() != 2 || !matches!(pair[0].as_str(), "--dpi" | "--lang" | "--profile") {
+        if pair.len() != 2
+            || !matches!(
+                pair[0].as_str(),
+                "--dpi" | "--lang" | "--profile" | "--glyph-sharing"
+            )
+        {
             return Err(format!("unknown or incomplete option: {}", pair[0]));
         }
     }
@@ -121,6 +126,12 @@ pub fn convert_pdf(args: &[String]) -> Result<(), String> {
     let profile = super::arg_value(args, "--profile").unwrap_or_else(|| "clearscan".into());
     if profile != "faithful" && profile != "clearscan" {
         return Err("--profile must be clearscan or faithful".into());
+    }
+    let sharing = super::arg_value(args, "--glyph-sharing").unwrap_or_else(|| "off".into());
+    if !matches!(sharing.as_str(), "off" | "experimental")
+        || (sharing == "experimental" && profile != "clearscan")
+    {
+        return Err("--glyph-sharing must be off or experimental (ClearScan only)".into());
     }
     let input = std::fs::canonicalize(input).map_err(|e| format!("read input PDF: {e}"))?;
     if Path::new(output).canonicalize().ok().as_ref() == Some(&input) {
@@ -359,8 +370,22 @@ pub fn convert_pdf(args: &[String]) -> Result<(), String> {
         ..Default::default()
     };
     let import_ms = import_started.elapsed().as_millis();
-    let converted =
-        document::convert_document_with_sources("pdf-input", &inputs, &policy, &source_images)?;
+    let converted = if sharing == "experimental" {
+        let directory = std::path::PathBuf::from(format!("{output}.font04"));
+        let mut intervention =
+            |pages: &mut [document::DocumentPage], donors: &[Vec<scanweave_io::units::Unit>]| {
+                super::font04::experiment(pages, donors, &directory)
+            };
+        document::convert_document_with_transform(
+            "pdf-input",
+            &inputs,
+            &policy,
+            &source_images,
+            Some(&mut intervention),
+        )?
+    } else {
+        document::convert_document_with_sources("pdf-input", &inputs, &policy, &source_images)?
+    };
     // Unique, same-directory temporary publication avoids shared .tmp races.
     let parent = Path::new(output)
         .parent()

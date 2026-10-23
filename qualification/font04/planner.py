@@ -1,0 +1,225 @@
+"""FONT-04 source-only discovery planner, called only by explicit CLI mode.
+
+Geometry implementation copied from FONT-03 7ebc09e (geometry.py). Hard vetoes
+are unchanged. Added effective-stroke, counter-band and baseline checks remain
+orthogonal to the single swept noise-floor error criterion. No oracle IO here.
+"""
+from pathlib import Path
+import collections
+import json
+import sys
+import time
+import numpy as np
+from scipy import ndimage
+
+sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
+from qualification.font04.geometry import geometry, geometry_rejections, register, warp, structural_distances
+
+SWEEP = [0.5, 0.75, 1., 1.25, 1.5, 2., 3.]
+
+
+def local_source(source, paper_rgb=(255,255,255)):
+    h,w=source['height'],source['width']
+    mask=np.array(source['mask'],bool).reshape(h,w)
+    halo=np.array(source['halo'],float).reshape(h+4,w+4)
+    owned=np.pad(mask,2)
+    paper=float(np.quantile(halo[~owned],.8))
+    ink=float(np.quantile(halo[owned],.15))
+    if paper-ink<30: raise ValueError('insufficient_contrast')
+    distance=ndimage.distance_transform_edt(~owned)
+    foreign=(np.abs(halo-np.dot(paper_rgb,[.2126,.7152,.0722]))>60)&~owned
+    fd=ndimage.distance_transform_edt(~foreign) if foreign.any() else np.full(halo.shape,100.)
+    support=(distance<=1.5)&(distance<fd)
+    return np.clip((paper-halo)/(paper-ink),0,1)*support
+
+
+def source_frame(row):
+    s=row['source']; evidence=local_source(s,row['paper'])
+    # Source line geometry only; fall back explicitly to the owned impression.
+    line=[u['bbox'] for u in row.get('line_units',[]) if u['text'] in 'ace' and u['bbox'][3]-u['bbox'][1]>=4]
+    if not line: line=[s['bbox']]
+    xh=float(np.median([b[3]-b[1] for b in line]));base=float(np.median([b[3] for b in line]))
+    cx=(s['ocr_bbox'][0]+s['ocr_bbox'][2])/2
+    scale=32/xh; yy,xx=np.mgrid[:64,:64]
+    canvas=ndimage.map_coordinates(evidence,[base+(yy-48)/scale-s['bbox'][1]+1.5,cx+(xx-32)/scale-s['bbox'][0]+1.5],order=1,mode='constant',prefilter=False)
+    return canvas,dict(xheight=xh,baseline=base,cx=cx,scale=scale)
+
+
+def crop_request(key,character,image,**options):
+    yy,xx=np.nonzero(image>.5)
+    if not len(xx):raise ValueError('empty_coverage')
+    x0,x1=int(xx.min()),int(xx.max()+1);y0,y1=int(yy.min()),int(yy.max()+1)
+    crop=image[y0:y1,x0:x1]
+    return dict(key=key,character=character,width=x1-x0,height=y1-y0,coverage=crop.ravel().tolist(),local=True,preserve_frame=True,**options),[x0,y0]
+
+
+def prepare(snapshot,directory):
+    items=[];frames=[];fields=[];origins=[];errors=[]
+    for row in snapshot['rows']:
+        try:
+            if row['source'] is None:raise ValueError('no_safe_owned_witness')
+            field,frame=source_frame(row)
+            item,origin=crop_request('font04-e-'+str(row['index']),'e',field)
+            frames.append(frame);fields.append(field);origins.append(origin);items.append(item)
+        except ValueError as error:
+            frames.append(None);fields.append(np.zeros((64,64)));origins.append(None);errors.append(dict(index=row['index'],reason=str(error)))
+    np.save(directory/'fields.npy',fields)
+    (directory/'source.json').write_text(json.dumps(snapshot))
+    (directory/'frames.json').write_text(json.dumps(dict(frames=frames,origins=origins,errors=errors)))
+    return dict(items=items)
+
+
+def mse(a,b):
+    return float(np.square(a-b).sum()/max(1.,np.maximum(a,b).sum()))
+
+
+def hard_checks(a,b):
+    reasons=geometry_rejections(a,b)
+    ga,gb=geometry(a),geometry(b)
+    distances=structural_distances(a,b)
+    values={}
+    if ga is None or gb is None:return ['empty_ink'],dict(empty_ink=dict(value=1,limit=0))
+    for key,limit in [('area',1.25),('width',1.18),('height',1.18),('elongation',1.5),('stroke',1.3)]:
+        ratio=max(ga[key]/max(gb[key],1e-8),gb[key]/max(ga[key],1e-8))
+        values[key]=dict(value=float(ratio),limit=limit)
+    values['topology']=dict(value=list(gb['topology']),limit=list(ga['topology']))
+    values['centroid']=dict(value=float(np.linalg.norm(np.array(ga['centroid'])-gb['centroid'])),limit=2.)
+    values['orientation']=dict(value=float(abs(np.dot(ga['axis'],gb['axis']))),limit=float(np.cos(np.deg2rad(15))))
+    if distances:
+        for key,limit in [('stroke_log',float(np.log(1.3))),('counter_difference',.35),('cross_moment',.08)]:
+            values[key]=dict(value=distances[key],limit=limit)
+            if distances[key]>limit:reasons.append(key)
+    # Multi-threshold topology catches grayscale counter closures/openings.
+    for threshold in [.35,.65]:
+        from qualification.font04.geometry import topology
+        ta,tb=topology(a>threshold),topology(b>threshold)
+        key='counter_band_'+str(threshold)
+        values[key]=dict(value=list(tb),limit=list(ta))
+        if ta!=tb:reasons.append(key)
+    return sorted(set(reasons)),values
+
+
+def choose(matrix,errors,scale,method):
+    valid=matrix & (errors<=scale)
+    np.fill_diagonal(valid,False)
+    n=len(matrix);remaining=set(range(n));groups=[]
+    while remaining:
+        if method=='complete':
+            seed=min(remaining);members=[seed]
+            for i in sorted(remaining-{seed}):
+                if all(valid[i,j] and valid[j,i] for j in members):members.append(i)
+            canonical=min(members,key=lambda j:sum(errors[i,j] for i in members if i!=j))
+        else:
+            # Greedy set cover: candidate chosen for maximum uncovered support.
+            # Star control uses aggregate pair distance to choose the next center.
+            candidates=[]
+            for j in sorted(remaining):
+                members=[i for i in sorted(remaining) if valid[i,j]]
+                members=sorted(set(members+[j]))
+                priority=(-len(members),float(sum(errors[i,j] for i in members if i!=j)),j)
+                if method=='star':priority=(float(np.median(errors[j,[i for i in remaining if i!=j]])) if len(remaining)>1 else 0.,-len(members),j)
+                candidates.append((priority,j,members))
+            _,canonical,members=min(candidates)
+        # A singleton remains on its old outline; two is sufficient for economy.
+        if len(members)>=2:groups.append(dict(canonical=canonical,members=members))
+        remaining-=set(members)
+    return groups
+
+
+def plan(data,directory):
+    started=time.monotonic();rows=data['snapshot']['rows'];n=len(rows)
+    fields=np.load(directory/'fields.npy');meta=json.loads((directory/'frames.json').read_text());frames=meta['frames'];origins=meta['origins']
+    outlines=data['outlines']['records'];lookup={o['key']:o for o in outlines if 'gid' in o}
+    candidate=np.zeros_like(fields);shape_indices={};successful=[o for o in outlines if 'gid'in o]
+    for si,o in enumerate(successful):
+        j=int(o['key'].rsplit('-',1)[1]);x,y=origins[j];h,w=o['height'],o['width']
+        candidate[j,y:y+h,x:x+w]=np.array(o['coverage']).reshape(h,w);shape_indices[j]=si
+    errors=np.full((n,n),np.inf);veto=np.zeros((n,n),bool);pairs=[];parameters={}
+    # A source-only shortlist bounds expensive fits; all exclusions are ledgered.
+    for i in range(n):
+        if frames[i] is None:continue
+        distances=np.array([mse(fields[i],candidate[j]) if j in shape_indices and j!=i else np.inf for j in range(n)])
+        shortlist=np.argsort(distances)[:min(24,n-1)]
+        for j in shortlist:
+            j=int(j)
+            if not np.isfinite(distances[j]):continue
+            p,aligned=register(fields[i],candidate[j]);err=mse(fields[i],aligned)
+            reasons,values=hard_checks(fields[i],aligned)
+            errors[i,j]=err;veto[i,j]=not reasons;parameters[(i,j)]=p.tolist()
+            pairs.append(dict(member=i,canonical=j,error=err,reasons=reasons,checks=values))
+        if i%25==0:print(f'FONT04 fitted {i}/{n}',file=sys.stderr,flush=True)
+    # Noise floor uses non-target source impressions, not current self outlines.
+    # Nearest structurally compatible independent impressions; LOO per member.
+    noise=[]
+    for i in range(n):
+        peers=[]
+        for j in np.argsort(errors[i]):
+            j=int(j)
+            if not veto[i,j] or rows[i]['shape_key']==rows[j]['shape_key']:continue
+            p,aligned=register(fields[i],fields[j]);reasons,_=hard_checks(fields[i],aligned)
+            if not reasons:peers.append(mse(fields[i],aligned))
+            if len(peers)>=5:break
+        noise.append(float(np.quantile(peers,.85)) if len(peers)>=2 else None)
+    normalized=np.full_like(errors,np.inf)
+    for i,level in enumerate(noise):
+        if level is not None:normalized[i]=errors[i]/max(level,1e-6)
+    frontier=[]
+    original={r['shape_key'] for r in rows}
+    choices=[]
+    for method in ['star','complete','cover']:
+        for scale in SWEEP:
+            groups=choose(veto,normalized,scale,method)
+            remapped={i for g in groups for i in g['members']}
+            retired=original-{rows[i]['shape_key'] for i in range(n) if i not in remapped}
+            added=len(groups);retained=len(original)-len(retired)
+            item=dict(grouping=method,error_scale=scale,remapped=len(remapped),added=added,retired_visible_candidates=len(retired),net_visible_candidates=added-len(retired),designs=retained+added,
+                mean_source_error=float(np.mean([errors[i,g['canonical']] for g in groups for i in g['members'] if i!=g['canonical']])) if groups else None,
+                material_defects=None,pristine_error=None)
+            frontier.append(item);choices.append((item,groups))
+    # Conservative discovery point 1.0: within the independently measured floor.
+    eligible=[(v,g) for v,g in choices if v['error_scale']==1.]
+    chosen,groups=min(eligible,key=lambda pair:(pair[0]['designs'],pair[0]['grouping']))
+    assignments=[];accepted=set();canonical_for={}
+    for g in groups:
+        j=g['canonical'];o=lookup['font04-e-'+str(j)];x,y=origins[j]
+        for i in g['members']:
+            # Even the canonical member must pass its actual traced self gates.
+            if i==j:
+                p,aligned=register(fields[i],candidate[j]);reasons,values=hard_checks(fields[i],aligned)
+                if reasons or noise[i] is None or mse(fields[i],aligned)>noise[i]:continue
+            else:p=np.array(parameters[(i,j)])
+            frame=frames[i];dx,dy,s=p
+            # warp() applies a forward uniform scale about (32,48), then translation.
+            left=32+s*(x-32)+dx;top=48+s*(y-48)+dy
+            right=left+s*o['width'];bottom=top+s*o['height']
+            bb=[frame['cx']+(left-32)/frame['scale'],frame['baseline']+(top-48)/frame['scale'],frame['cx']+(right-32)/frame['scale'],frame['baseline']+(bottom-48)/frame['scale']]
+            assignments.append(dict(page=rows[i]['page'],occurrence=rows[i]['occurrence'],id=rows[i]['id'],member=i,canonical=j,shape=shape_indices[j],bbox=bb,parameters=list(map(float,p))))
+            accepted.add(i);canonical_for[i]=j
+    # Reject records include an attempted candidate even if no admissible match.
+    rejection=[]
+    for i in range(n):
+        attempted=sorted([p for p in pairs if p['member']==i],key=lambda p:p['error'])
+        if i in accepted:continue
+        if not attempted:rejection.append(dict(member=i,reasons=['no_safe_owned_witness'],checks={}));continue
+        best=min(attempted,key=lambda p:(len(p['reasons']),p['error']))
+        best=dict(best);best['reasons']=list(best['reasons'])
+        if noise[i] is None:best['reasons'].append('insufficient_noise_witnesses')
+        elif best['error']>noise[i]:
+            best['reasons'].append('noise_floor');best['checks']=dict(best['checks'],noise_floor=dict(value=best['error'],limit=noise[i]))
+        if not best['reasons']:best['reasons']=['grouping_exception']
+        rejection.append(best)
+    unique=collections.Counter(p['reasons'][0] for p in pairs if len(p['reasons'])==1)
+    result=dict(schema='font04-b1-plan-v1',scope='all visible e only',selected=chosen,assignments=assignments,
+        rejection_ledger=rejection,noise_floor=noise,frontier=frontier,unique_pair_rejections=dict(unique),
+        total_pair_attempts=len(pairs),shortlist=24,shortlist_exclusions=n*(n-1)-len(pairs),runtime_seconds=time.monotonic()-started,
+        defects_status='pending blinded independent review',inference_inputs='source only; no pristine or face labels')
+    (directory/'outlines.json').write_text(json.dumps(data['outlines']))
+    (directory/'plan.json').write_text(json.dumps(result,indent=2));(directory/'pair-ledger.json').write_text(json.dumps(pairs))
+    return result
+
+
+if __name__=='__main__':
+    stage,destination=sys.argv[1:];directory=Path(destination);directory.mkdir(parents=True,exist_ok=True)
+    data=json.load(sys.stdin)
+    result={'prepare':prepare,'plan':plan}[stage](data,directory)
+    json.dump(result,sys.stdout,allow_nan=False)
