@@ -159,6 +159,7 @@ def main(final):
         basebindings = bind(rows,inspect(default),geometry)
         data[group] = dict(default=default,candidate=candidate,rows=rows,observations=obs,plan=plan,report=report,proposals=proposals,bindings=bindings,basebindings=basebindings)
     aa,rr = stratified(accepted,300,rng),stratified(rejected,150,rng)
+    random_rejected = {g: sorted(ids) for g,ids in rr.items()}
     assert sum(map(len,rr.values())) >= 150
     mixed_tail, financial_tail = worse_draws('mixed'), worse_draws('financial')
     assert len(financial_tail) >= len(mixed_tail), ('insufficient financial tail', len(mixed_tail), len(financial_tail))
@@ -248,15 +249,17 @@ def main(final):
                     arrays['candidate'] = render(item['candidate'],row['page'],300,engine)[y:yy,x:xx]
                     for name,array in arrays.items():Image.fromarray(array).save(staging/'assets'/f'{asset}-{name}.png')
                     metadata.append(dict(asset=asset,document=group,type='repeated-word',word=word,draws=ids,renderer=engine,page=row['page']))
-        selection[group] = dict(accepted_population=len(accepted[group]),random_accepted=sorted(aa[group]),rejected_population=len(rejected[group]),random_rejected=sorted(rr[group]),cross_style_members=sorted(cross),repeated_words=[word for word,_ in repeated],tail_draws=sorted(tail),fixture_members=sorted(fixture_members),all_mixed_substitutions=group=='mixed')
+        selection[group] = dict(accepted_population=len(accepted[group]),random_accepted=sorted(aa[group]),rejected_population=len(rejected[group]),random_rejected=random_rejected[group],all_rejected=sorted(rr[group]),cross_style_members=sorted(cross),repeated_words=[word for word,_ in repeated],tail_draws=sorted(tail),fixture_members=sorted(fixture_members),all_mixed_substitutions=group=='mixed')
         print('review assets',group,len(metadata),flush=True)
     (staging/'panels.json').write_text(json.dumps(metadata,indent=2)+'\n')
     (staging/'selection.json').write_text(json.dumps(dict(seed=SEED,documents=selection),indent=2)+'\n')
+    rule = (ROOT/'FONT_04_REVIEW_R2A_STOP.md').read_text().split('4. **Decision rule, fixed now, before grading.**',1)[1].rstrip()
+    assert ('4. **Decision rule, fixed now, before grading.**'+rule) in (ROOT/'qualification/font04/R2A_BLIND_README.md').read_text()
     (staging/'README.md').write_text((ROOT/'qualification/font04/R2A_BLIND_README.md').read_text())
     subprocess.run([sys.executable,'-m','qualification.font04.r2a_seal_review',staging,public,key],check=True,env=dict(os.environ,FONT04_REVIEW_TITLE='FONT-04 R2a corpus blind review: Source / U / V'))
     receipt = json.loads((public/'seal-receipt.json').read_text())
     result = dict(schema='font04-R2a-blind-review-v1',status='SEALED; independent judgments pending',review_pdf=str(public/'blinded-review.pdf'),key_path=str(key),key_revealed=False,
-                  selection=selection,random_accepted=sum(map(len,aa.values())),random_rejected_minimum=150,total_rejected=sum(map(len,rr.values())),mixed_tail=len(mixed_tail),financial_tail_population=len(financial_tail),matched_financial_tail=len(matched_financial),regression_fixtures=23,receipt=receipt)
+                  selection=selection,random_accepted=sum(map(len,aa.values())),random_rejected_minimum=150,total_rejected=sum(map(len,rr.values())),mixed_tail=len(mixed_tail),financial_tail_population=len(financial_tail),matched_financial_tail=len(matched_financial),regression_fixtures=23,registered_fixture_members=selection['financial']['fixture_members'],receipt=receipt)
     (ROOT/'qualification/font04/r2a-blind-review.json').write_text(json.dumps(result,indent=2)+'\n')
 
 
