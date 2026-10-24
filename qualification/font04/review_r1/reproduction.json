@@ -1,0 +1,12 @@
+{
+  "product_commit": "3fcd4ea60aceae6336754ad212d5bd7744344c72",
+  "input": "qualification/pdf_packaging/groups/financial-input.pdf",
+  "input_sha256": "206f0f669d0196bb5e3b8da64acbffe1e53b2611377450a71b1440622291ac6f",
+  "pdfium": "tools/src/pdfium/lib/libpdfium.so (chromium/8100)",
+  "cover-2.0": {"sha256": "b007a27dd111937d5fb4bb75abb6cd41245635e679100f7de952cbb0509d20bc", "bytes": 2796345, "wall": "20:47.25", "max_rss_kb": 1933052},
+  "default": {"sha256": "74c31136d00a18dbf05fba2d7fba59c85cc201a57ae65d77999a025a692fab0f", "wall": "7:56.07", "max_rss_kb": 1467048},
+  "text_extraction_equal": {"poppler_default": true, "poppler_layout": true, "poppler_raw": true, "pdfium": true},
+  "parity_recomputed": {"decision_divergences": [174, 1307], "canonical_divergences": [133, 138, 2092, 3131], "safety_superset_violations": [], "owned_ink_vetoes": {"oracle": 52, "native": 52, "member_3422_vetoed": true}},
+  "blind_judgments_sha256": "1f2eaea839fdcf8e83b127e7ebc90f66850dbca51cb420823b3c788a673fe474",
+  "blind_result": "12/12 panels indistinguishable (6 divergent members, PDFium and Poppler)"
+}
