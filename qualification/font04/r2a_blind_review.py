@@ -125,9 +125,9 @@ def bounds(row, rows):
 def worse_draws(group):
     metrics = json.loads((LOCAL/f'metrics/{group}/metrics.json').read_text())
     # Same source-normalized squared ink error as the stop review table.
-    # "Any isolated metric" is the union of analytic, PDFium and Poppler error.
+    # "Any isolated metric" also includes the independent direct-outline score.
     return {r['draw'] for r in metrics['records'] if r['substituted']
-            and r['metric'] in ('analytic', 'pdfium', 'poppler')
+            and r['metric'] in ('analytic', 'direct', 'pdfium', 'poppler')
             and r['candidate']['error']-r['default']['error'] > .02}
 
 
@@ -189,16 +189,22 @@ def main(final):
             selected.update(lookup[obs[i]['page'],obs[i]['occurrence']] for i in accepted[group])
             selected.add(lookup[obs[518]['page'],obs[518]['occurrence']])
         fixture_members = set()
+        fixture_requests = []
         if group == 'financial':
             # B1 IDs are mapped through their registered financial B2 identity.
             old_rows = json.loads((LOCAL.parent/'financial-B1prime-PV.pdf.font04/source.json').read_text())['rows']
-            fixture_members.update(c['member'] for c in fixtures if 'B1prime' not in c['source'])
-            for c in fixtures:
-                if 'B1prime' in c['source']:
-                    old = old_rows[c['member']]
-                    matches = [o['member'] for o in obs if (o['page'], o['id']) == (old['page'], old['id'])]
-                    assert len(matches) == 1
-                    fixture_members.add(matches[0])
+            def native_member(case, index):
+                if 'B1prime' not in case['source']:
+                    return index
+                old = old_rows[index]
+                matches = [o['member'] for o in obs if (o['page'], o['id']) == (old['page'], old['id'])]
+                assert len(matches) == 1
+                return matches[0]
+            for case in fixtures:
+                member = native_member(case, case['member'])
+                canonical = native_member(case, case['canonical'])
+                fixture_members.add(member)
+                fixture_requests.append((case, member, canonical))
             selected.update(lookup[obs[i]['page'],obs[i]['occurrence']] for i in fixture_members if i not in rejected[group])
             rr[group].update(i for i in fixture_members if i in rejected[group])
         directory = staging/group
@@ -207,17 +213,24 @@ def main(final):
         if selected:
             path = directory/'accepted-context.pdf'
             mapping = contextual_instances(item['default'],item['candidate'],path,rows,selected,dict(enumerate(item['bindings'])))
-            contexts.append(('accepted',path,mapping))
+            contexts.append(('accepted',path,mapping,None))
         if rr[group]:
             path = directory/'rejected-context.pdf'
             mapping = rejected_context(item['default'],path,rows,item['basebindings'],obs,item['proposals'],rr[group],directory,LOCAL/'export/font04_r2a_review')
-            contexts.append(('rejected',path,mapping))
+            contexts.append(('rejected',path,mapping,None))
+        for case_index, (case, member, canonical) in enumerate(fixture_requests):
+            fixture_dir = directory/f'fixture-{case_index:02}'
+            fixture_dir.mkdir()
+            path = fixture_dir/'context.pdf'
+            pair = dict(member=member,canonical=canonical,parameters=case['parameters'])
+            mapping = rejected_context(item['default'],path,rows,item['basebindings'],obs,{member:pair},{member},fixture_dir,LOCAL/'export/font04_r2a_review')
+            contexts.append(('registered-regression-fixture',path,mapping,dict(case_index=case_index,source=case['source'],member=case['member'],canonical=case['canonical'],native_member=member,native_canonical=canonical,parameters=case['parameters'])))
         cache = {}
         for engine in ('pdfium','poppler'):
             for name,path in [('source',ROOT/f'qualification/pdf_packaging/groups/{group}-input.pdf'),('current',item['default'])]:
                 for pi in range(len(json.loads(Path(str(item['default'])+'.json').read_text())['pages'])):
                     cache[engine,name,pi] = render(path,pi,300,engine)
-        for kind,path,mapping in contexts:
+        for kind,path,mapping,registered_case in contexts:
             doc = pdfium.PdfDocument(path)
             for i,page in mapping.items():
                 row = rows[i]
@@ -228,7 +241,7 @@ def main(final):
                     arrays['candidate'] = np.rint((1-crop_render(path,doc,page,crop,engine))*255).astype('uint8')
                     assert len({a.shape for a in arrays.values()})==1
                     for name,array in arrays.items():Image.fromarray(array).save(staging/'assets'/f'{asset}-{name}.png')
-                    metadata.append(dict(asset=asset,document=group,draw=i,member=next((o['member'] for o in obs if (o['page'],o['occurrence'])==(row['page'],row['occurrence'])),None),type=kind,renderer=engine,page=row['page'],bounds=crop,cross_style_probe=i in {lookup[obs[k]['page'],obs[k]['occurrence']] for k in cross},identical_default_context=True,tail_stratum=i in tail,registered_member518=group=='mixed' and i==lookup[obs[518]['page'],obs[518]['occurrence']],registered_fixture=group=='financial' and any(i==lookup[obs[k]['page'],obs[k]['occurrence']] for k in fixture_members)))
+                    metadata.append(dict(asset=asset,document=group,draw=i,member=next((o['member'] for o in obs if (o['page'],o['occurrence'])==(row['page'],row['occurrence'])),None),type=kind,registered_case=registered_case,renderer=engine,page=row['page'],bounds=crop,cross_style_probe=i in {lookup[obs[k]['page'],obs[k]['occurrence']] for k in cross},identical_default_context=True,tail_stratum=i in tail,registered_member518=group=='mixed' and i==lookup[obs[518]['page'],obs[518]['occurrence']],registered_fixture=group=='financial' and any(i==lookup[obs[k]['page'],obs[k]['occurrence']] for k in fixture_members)))
             doc.close()
         # Repeated words are complete final-output crops, not isolated letters.
         spans = defaultdict(list)

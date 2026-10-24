@@ -19,7 +19,7 @@ all panel grades and the adjudication. Count unique substitutions, not panels.
 Every mixed substitution is included so the first rule has its full denominator.
 
 The tail definition is source-normalized squared ink error for each of the
-three isolated measurements: analytic, PDFium and Poppler. A substituted draw
+four isolated measurements: analytic, direct-outline, PDFium and Poppler. A substituted draw
 enters the stratum when candidate error minus current error exceeds 0.02 in
 any of those measurements. The same definition and measurement code select
 both documents. The financial stratum is an equal-sized random sample without

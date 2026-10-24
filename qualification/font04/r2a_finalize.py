@@ -28,7 +28,7 @@ def runs(directory):
         if group == 'financial' and directory.name != 'paired-final': labels.insert(2,'cover-1.5')
         result[group] = {}
         for label in labels:
-            stem = directory/f'{group}-{label}'
+            stem = directory/f'{group}-{label}.pdf'
             row = load(stem.with_suffix('.run.json'))
             assert row['returncode'] == 0 and row['byte_identical_to_baseline']
             assert row['sha256'] == sha(stem.with_suffix('.pdf')) == row['expected_sha256']
@@ -134,7 +134,7 @@ def write_results(corpus,checkpoint):
     lines += [f"| Total / max peak | {a['wall_seconds']:.2f} / {a['peak_rss_kib']/1024:.1f} | {b['wall_seconds']:.2f} / {b['peak_rss_kib']/1024:.1f} | {b['wall_seconds']/a['wall_seconds']:.3f}× |",'',
         'Final paired runs were serial after other FONT-04 qualification jobs finished. Peak is GNU time maximum RSS, not a process-tree sum. Pipeline milliseconds and nested sharing/planner seconds, reporting-build profiles, optimization byte checks and repeats are retained in [r2a-profile.json](qualification/font04/r2a-profile.json). Earlier overlapping qualification timings are not claimed as isolated benchmarks.', '']
     blind=checkpoint['blind_review']
-    lines += [f"The sealed package contains **{blind['receipt']['panels']} panels**, ≥300 random accepted and ≥150 random rejected members stratified by document, repeated words, cross-style probes, all registered regression cases, and member 518. All 326 mixed substitutions are included, including all **{blind['mixed_tail']}** mixed isolated-error tail draws, matched to **{blind['matched_financial_tail']}** financial tail draws using the same >0.02 error definition. Full-word contexts use randomized A/B/C source/current/candidate arms in both renderers at 100% and 400%. The key is held separately and has not been read. The review decision rule was copied verbatim into the README before sealing.", '',
+    lines += [f"The sealed package contains **{blind['receipt']['panels']} panels**, ≥300 random accepted and ≥150 random rejected members stratified by document, repeated words, cross-style probes, all registered regression cases, and member 518. All 326 mixed substitutions are included, including all **{blind['mixed_tail']}** mixed isolated-error tail draws, matched to **{blind['matched_financial_tail']}** financial tail draws using the same >0.02 error definition across analytic, direct-outline, PDFium and Poppler. Full-word contexts use randomized A/B/C source/current/candidate arms in both renderers at 100% and 400%. The key is held separately and has not been read. The review decision rule was copied verbatim into the README before sealing.", '',
         f"Review: `{blind['review_pdf']}`. [Seal receipt and selection](qualification/font04/r2a-blind-review.json); [checkpoint and artifact hashes](qualification/font04/checkpoint-R2a.json). The earlier member-518 diagnostics remain in [r2a-stop-evidence](qualification/font04/r2a-stop-evidence/README.md); the review upheld that defect and deferred its materiality to blind grading.", '',
         '**STOP.** P2 was not opened, generated or rendered. Adobe Reader remains **BLOCKED-ON-OWNER**. Neither `~/.wine-acrobat-xi` nor display `:99` was touched. No product PR, merge, or PR #24/#25 action.']
     target.write_text(prefix+'\n'.join(lines)+'\n')
