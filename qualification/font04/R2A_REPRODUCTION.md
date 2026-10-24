@@ -32,8 +32,8 @@ snapshots, observations, planner fits, and exact post-union native
 page/occurrence/CID/matrix bindings. The complete output PDF must reproduce its
 baseline hash. This instrumented executable is never shipped. The
 counterfactual font helper uses the frozen product serializer; its retained
-binary is `local/R2a/export/font04_r2a_review` and its source is retained at
-`local/R2a/uncompleted-review-font.rs` from the stopped run.
+binary is `local/R2a/export/font04_r2a_review` and its research-only source is `r2a_review_font.rs`. Build it as an example in
+the isolated instrumented checkout, never on the product branch.
 
 For financial, the original visible-only geometry inference encounters an
 invisible earlier union program. The exact binding export comes from a
