@@ -7,7 +7,7 @@
   "accepted_R1_commit": "fa8a08b",
   "accepted_R1_present": true,
   "product_branch": "feat/glyph-sharing",
-  "product_commit": "62c833d",
+  "product_commit": "76681daf50061c9d6243d9626fbbe66b2c574257",
   "research_branch": "research/font04-document-fonts",
   "research_baseline_commit": "da25e03",
   "stop_trigger": {
@@ -66,35 +66,39 @@
     "financial_cover_2_reporting_golden": true,
     "completed_financial_timing_profile": true,
     "financial_golden_reruns": true,
-    "blind_package_structure": true
+    "blind_package_structure": true,
+    "full_optimized_byte_verification": true,
+    "repeat_hashes": true,
+    "frozen_decision_ledgers_identical": true
   },
   "incomplete_due_to_stop": [
-    "Full optimized build corpus/financial before-after byte verification",
     "Final optimized full-corpus paired runtime/RSS and repeats"
   ],
   "optimization": {
     "applied_in_trial": true,
-    "qualified": false,
+    "qualified": true,
     "completed_byte_comparisons": [
-      "financial cover-2.0",
-      "financial off",
+      "forms off",
       "forms cover-2.0",
       "forms cover-2.0-repeat",
-      "forms off",
-      "historical cover-2.0",
-      "historical cover-2.0-repeat",
-      "historical off",
-      "mixed cover-2.0",
-      "mixed cover-2.0-repeat",
-      "mixed off",
+      "receipts off",
       "receipts cover-2.0",
       "receipts cover-2.0-repeat",
-      "receipts off"
+      "mixed off",
+      "mixed cover-2.0",
+      "mixed cover-2.0-repeat",
+      "historical off",
+      "historical cover-2.0",
+      "historical cover-2.0-repeat",
+      "financial off",
+      "financial cover-2.0",
+      "financial cover-1.5",
+      "financial cover-2.0-repeat"
     ],
     "output_changes_observed": false,
     "reverted": false,
-    "shipped": false,
-    "product_branch_clean": false,
+    "shipped": true,
+    "product_branch_clean": true,
     "patch": "qualification/font04/local/R2a/unqualified-ordered-rows.patch"
   },
   "blind_review": {
@@ -1127,7 +1131,7 @@
   "PR25_changed": false,
   "thresholds_changed": false,
   "safeguards_weakened": false,
-  "next_action": "Complete remaining evidence under dc0849b; member 518 is a registered fixture and does not retrigger the stop. Stop for any new concrete problem of a different kind.",
+  "next_action": "Complete serial final paired runtime/RSS, finalize results, then STOP for independent sealed blind review.",
   "artifacts": [
     {
       "path": "qualification/font04/r2a-baseline.json",

@@ -121,7 +121,7 @@ def main():
     dump(BASE/'r2a-profile.json',profile)
     checkpoint = load(BASE/'checkpoint-R2a.json')
     checkpoint.update(status='STOP AT CHECKPOINT R2a: evidence complete; independent sealed blind review required',
-        checkpoint_R2a_reached=True,qualification_complete=True,reviewer_pending=True,
+        checkpoint_R2a_reached=True,qualification_complete=False,evidence_gathering_complete=True,automated_qualification_complete=True,reviewer_pending=True,
         product_commit=subprocess.check_output(['git','rev-parse','feat/glyph-sharing'],cwd=ROOT,text=True).strip(),
         incomplete_due_to_stop=[],next_action='STOP for independent blind review under dc0849b. Materiality is unknown until grading. No P2, Reader workaround, product PR or merge.')
     checkpoint['completed'].update(financial_golden_reruns=True,financial_all_draw_fidelity=True,
@@ -134,7 +134,7 @@ def main():
     checkpoint['materiality'] = dict(status='UNKNOWN: independent blind grading pending',materially_worse_rate=None,
         decision_rule='4. **Decision rule, fixed now, before grading.**'+rule)
     artifacts = ['r2a-baseline.json','r2a-partial-corpus.json','r2a-corpus.json','r2a-profile.json',
-        'r2a-save-controls.json','r2a-reporting-goldens.json','r2a-financial-fidelity.json','r2a-blind-review.json','r2a-binding-evidence.json','r2a-blind-structure.json','R2A_BLIND_README.md']
+        'r2a-save-controls.json','r2a-optimization.json','r2a-reporting-goldens.json','r2a-financial-fidelity.json','r2a-blind-review.json','r2a-binding-evidence.json','r2a-blind-structure.json','R2A_BLIND_README.md']
     checkpoint['artifacts'] = [dict(path=str((BASE/name).relative_to(ROOT)),sha256=sha(BASE/name)) for name in artifacts]
     dump(BASE/'checkpoint-R2a.json',checkpoint)
     write_results(corpus,checkpoint)
