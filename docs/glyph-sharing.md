@@ -42,7 +42,10 @@ The existing per-page tracing reports describe reconstruction before document
 sharing. The `glyph_sharing` report describes substitutions and actual font
 economy; the R1 scorecards measure the emitted shared output independently.
 
-Numerical reductions run serially in member/pixel order. Group priorities use
+Independent planner rows run on scoped workers (up to eight by default, or the
+positive `RAYON_NUM_THREADS` setting, limited to available CPUs). Each fit keeps
+its serial pixel/evaluation order, and row results are collected in original
+member order before floors and groups are reduced. Group priorities use
 explicit index tie breaks. The bounded Huber trust-region fit retains the frozen
 35 evaluations, `.001` relative differences and `1e-5` stopping tolerances; its
 three-dimensional dense subproblem uses a deterministic symmetric eigensystem.
