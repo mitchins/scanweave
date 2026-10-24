@@ -101,3 +101,29 @@ finding. P2 stays closed until a Reader result exists. The owner chooses the rou
 2. Codex: fix the package defects in §2. Harness only; no product or method change.
 3. After a Reader pass: P2 once, through the guarded generator, with the frozen product
    `76681da`.
+
+## Addendum: package fix accepted (`6dde420`)
+
+The package defects had one cause, in the review harness only. pikepdf `copy_foreign` reused the
+imported font, so installing the probe font also replaced the page's default `/F1`. That produced
+the knocked-out candidate arms, the garbled reference arms and the "bor" counterfactual. No product
+code, PDF, method or threshold changed.
+
+The v2 package (`local/R2a/blind-review-v2/`) passes Codex's checks on all 4,884 arms:
+- no changes outside the target window;
+- no black arms;
+- ink in every source glyph box.
+
+My spot check agrees: full word context appears in all three arms.
+
+**Re-checked after the fix.** Both default defects I cited in §1 are real in the shipped PDFs, not
+harness artifacts:
+- the oversized "TO" appears in `forms-off.pdf` page 2 at 300 dpi;
+- "b()dy" appears in `mixed-off.pdf` page 1.
+
+**The verdict stands.** The R2a decision depended only on admitted substitutions, and those arms
+were already correct:
+- member 518's measured shrink matches Codex's unblinded evidence;
+- the shipped mixed PDF renders correctly.
+
+The v2 format becomes the template for the P2 package. I am not re-grading R2a on v2.
