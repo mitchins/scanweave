@@ -1,7 +1,7 @@
 {
   "schema": "font04-checkpoint-R2a-v1",
-  "status": "RESUMED: evidence gathering only; frozen method; independent blind review pending",
-  "checkpoint_R2a_reached": false,
+  "status": "STOP AT CHECKPOINT R2a: evidence complete; independent sealed blind review required",
+  "checkpoint_R2a_reached": true,
   "qualification_complete": false,
   "reviewer_pending": true,
   "accepted_R1_commit": "fa8a08b",
@@ -69,11 +69,11 @@
     "blind_package_structure": true,
     "full_optimized_byte_verification": true,
     "repeat_hashes": true,
-    "frozen_decision_ledgers_identical": true
+    "frozen_decision_ledgers_identical": true,
+    "final_paired_runtime_RSS": true,
+    "all_outputs_byte_identical": true
   },
-  "incomplete_due_to_stop": [
-    "Final optimized full-corpus paired runtime/RSS and repeats"
-  ],
+  "incomplete_due_to_stop": [],
   "optimization": {
     "applied_in_trial": true,
     "qualified": true,
@@ -99,7 +99,8 @@
     "reverted": false,
     "shipped": true,
     "product_branch_clean": true,
-    "patch": "qualification/font04/local/R2a/unqualified-ordered-rows.patch"
+    "patch": "qualification/font04/local/R2a/unqualified-ordered-rows.patch",
+    "description": "Independent row workers; unchanged numerical evaluation order within each row; ordered joins before reductions"
   },
   "blind_review": {
     "schema": "font04-R2a-blind-review-v1",
@@ -1131,7 +1132,7 @@
   "PR25_changed": false,
   "thresholds_changed": false,
   "safeguards_weakened": false,
-  "next_action": "Complete serial final paired runtime/RSS, finalize results, then STOP for independent sealed blind review.",
+  "next_action": "STOP for independent blind review under dc0849b. Materiality is unknown until grading. No P2, Reader workaround, product PR or merge.",
   "artifacts": [
     {
       "path": "qualification/font04/r2a-baseline.json",
@@ -1142,31 +1143,54 @@
       "sha256": "f260885fe639ff6cbecd1a467de8d7deb009827ef3093598bab8e8c674f5b0f5"
     },
     {
+      "path": "qualification/font04/r2a-corpus.json",
+      "sha256": "8eec0b45bfb29e8ac58f60ddd4f834d7cb0324237730bca1c8ed3a01f7f1ecf1"
+    },
+    {
       "path": "qualification/font04/r2a-profile.json",
-      "sha256": "32b3682b2a987777c8df721fcca9f7ef377ae0cac06145bb7da54e67b07261c9"
+      "sha256": "d78e6078dbf5deea4f3bb13312a2d8f14cd1e45cf3cdcb9512c4f8569019b309"
     },
     {
-      "path": "qualification/font04/r2a-stop-evidence/case.json",
-      "sha256": "4964c0311a6a13b9a36e962fe4c68233c8d4aba447695e722eb28f9f472a6567"
+      "path": "qualification/font04/r2a-save-controls.json",
+      "sha256": "67cd7c2cf12ea16d5c977359ac7d06ce8009ec6ffb8ac7263c67d7fc0f1b572b"
     },
     {
-      "path": "qualification/font04/r2a-stop-evidence/README.md",
-      "sha256": "0a68565dadb2fb24542c57452628fe016f6900996734458f98549e8b22317b3a"
+      "path": "qualification/font04/r2a-optimization.json",
+      "sha256": "43b771d58870f5541bfe7cff4dd2bde1ea8201ee7c9626974ea53d0e9de24d63"
     },
     {
-      "path": "qualification/font04/r2a-stop-evidence/mixed-member518-context.png",
-      "sha256": "9f9557accd103ca65791d388bd50bbfdc11af22be3ee435e19cf3d475ffa5ef3"
+      "path": "qualification/font04/r2a-reporting-goldens.json",
+      "sha256": "2156ff79d3a5372987b4dca13cc7e8fcf9d73df9c5b176a6296dfd4675b297f2"
     },
     {
-      "path": "qualification/font04/r2a-stop-evidence/mixed-canonical838-context.png",
-      "sha256": "ec885f4e213bfef2ff542bb82d3585d7580de53c005261e89ef693d0c41225f1"
+      "path": "qualification/font04/r2a-financial-fidelity.json",
+      "sha256": "0c19d8298492cc05379030b1b1faf8eaed00f028005962cccb6fbb3141c9a9ad"
     },
     {
-      "path": "qualification/font04/r2a-stop-evidence/mixed-worst-delta.png",
-      "sha256": "4f92a51b9ef174844ed59e5b8d9048ce96e41684df2453be869efd8ffe071045"
+      "path": "qualification/font04/r2a-blind-review.json",
+      "sha256": "42c1434354cb9ace82eff9cccc0a7c1fd11cd6fa67fd6a0fa8d10d93433a8120"
+    },
+    {
+      "path": "qualification/font04/r2a-binding-evidence.json",
+      "sha256": "06318047b54397a5ff380ad53aecb6afcd9fc6f9037bb97ffe4d546792da50cb"
+    },
+    {
+      "path": "qualification/font04/r2a-blind-structure.json",
+      "sha256": "ea3f78c562bed121f8e7f35be6a41c4b8d9ea2c85b39023423d12ec81de89cf7"
+    },
+    {
+      "path": "qualification/font04/R2A_BLIND_README.md",
+      "sha256": "12b3ab7ef45eb10f39c123b2c2b43d234672c54cef8a119b97418183c267566f"
     }
   ],
   "review_stop_decision_commit": "dc0849b",
   "review_stop_decision_present": true,
-  "method_frozen": true
+  "method_frozen": true,
+  "evidence_gathering_complete": true,
+  "automated_qualification_complete": true,
+  "materiality": {
+    "status": "UNKNOWN: independent blind grading pending",
+    "materially_worse_rate": null,
+    "decision_rule": "4. **Decision rule, fixed now, before grading.** The reviewer grades blind. The mixed\n   document is a **concrete problem** if either of these holds:\n   - more than 5% of all its substitutions are graded materially worse;\n   - its materially-worse rate in the >0.02 stratum exceeds financial's in the same stratum\n     by more than 10 percentage points.\n\n   If neither holds, the tail is accepted as immaterial. A concrete problem goes to the\n   owner, with candidate remedies, as a method change requiring a new freeze."
+  }
 }
