@@ -1,8 +1,8 @@
-# FONT-04 results — stopped at Checkpoint B2′
+# FONT-04 results — Checkpoint R1
 
-**Status: B2′ complete; stopped for independent review.** Default remains byte-identical to current main. All tested points are reviewer-pending; no operating point is selected or promoted. P2 is unopened. Earlier A/B1/B2 sections are historical and retained with their qualifications.
+**Status: stopped at Checkpoint R1 for independent review.** B2′ is accepted and cover-2.0 is frozen. Native parity, fidelity, available-consumer compatibility and local coverage pass; current Windows Reader is BLOCKED-ON-OWNER. Default remains byte-identical. P2 is unopened; earlier checkpoint sections are historical.
 
-Contract: `9c2e9963aebce439495a409ac9588a5b38321fc3`. Product baseline: `c10e3dff93ca12ac410c0f6626a4ef74ce34e0c1`. The preregistration retains SHA-256 `a4f9ccd3a7e51d719946be80f7cc9a297de7ca22285e8755e5e26e415e7db466`.
+Historical research contract: `9c2e9963aebce439495a409ac9588a5b38321fc3`. Current product contract: `3610e009b89aa3a5f97aea65af6df87477295656`. Product baseline: `c10e3dff93ca12ac410c0f6626a4ef74ce34e0c1`. The preregistration retains SHA-256 `a4f9ccd3a7e51d719946be80f7cc9a297de7ca22285e8755e5e26e415e7db466`.
 
 ## Checkpoint A
 
@@ -199,7 +199,7 @@ The experimental measurements reuse frozen OCR, outlines and pair fits; baseline
 
 **STOP at B2′. No B3, P2, operating-point promotion, merge, new product PR, or PR #24 state change. No security finding was dismissed.**
 
-## Checkpoint R1
+## Historical R0 stop before Clarification 1
 
 **Blocked before R0 method freeze; Checkpoint R1 has not been reached.** Contract
 `7c92f294dedc06fac20d226142a13362daa5f042` is present and research HEAD started
@@ -229,3 +229,102 @@ Reader is separately **BLOCKED-ON-OWNER**: the root contains the incomplete macO
 prefix or display was touched. PDFKit kit preparation remains outstanding; macOS
 execution stays deferred to R3. P2 remains unopened, R2 was not run, no product PR
 was opened, no merge occurred, and no security finding was dismissed.
+
+
+## Checkpoint R1
+
+**STOP — independent review pending.** Contract `3610e009b89aa3a5f97aea65af6df87477295656`
+and Clarification 1 are verified. Research started exactly there and contains only
+this session's commits above it. Method freeze: `5356255e14d713316b641607f093e64a44555a0d`;
+complete dependency/default inventory: `4c51ac53cace6d469c798b0353c1ca7b28cb838c`.
+Both freeze commits reference preregistration SHA-256
+`a4f9ccd3a7e51d719946be80f7cc9a297de7ca22285e8755e5e26e415e7db466`.
+No threshold or safeguard was relaxed. `net_retirement_rule` remains **false**;
+aggregate document retirement and font non-growth are enforced, with default fallback.
+
+Product branch: `feat/glyph-sharing`, HEAD `3fcd4ea60aceae6336754ad212d5bd7744344c72`, based directly on
+remote main `c10e3dff93ca12ac410c0f6626a4ef74ce34e0c1`. Qualified native build:
+`a0584c8dac8ec9d1698bc7d79a240f270a02b976`; later commits change tests/documentation
+only, with runtime source equality verified. The native Rust flag is
+`--glyph-sharing cover-2.0` (default `off`; `cover-1.5` is the fixed comparison).
+No Python process is used by conversion. Both opt-in runs succeeded with an invalid
+research-Python path. Four-thread and one-thread cover-2.0 repeats are byte-identical.
+
+| Quantity | Default | Native cover-2.0 |
+|---|---:|---:|
+| Complete PDF bytes | 2,849,237 | 2,796,345 |
+| Encoded font bytes | 727,259 | 664,549 |
+| Retired / added primitive outlines | — | 594 / 268 |
+| Net primitive outlines retired | 0 | **326** |
+| Composite stubs (separate from primitives) | 0 | 1,746 |
+| Stored outline points | 449,268 | 387,541 |
+| Analytic source error, mean | 0.065575 | **0.0573865** |
+| Analytic source error, p95 | 0.132734 | **0.1136152** |
+
+The font saves 62,710 bytes; the complete PDF saves 52,892 bytes. Retirement is
+99.69% of the 327 reference, exceeding the required minimum of 311. All 3,524
+candidate draws were measured, including unchanged draws. The frozen cover-2.0
+oracle mean/p95 are 0.0574194/0.1139455. Only hash-identical
+source/default controls were reused. Source-error mean and p95 both improve and
+are within the published renderer floor. Exact raster streams/placements,
+CID/Tm/W/ActualText, unassigned glyph programs and invisible users are preserved.
+Actual emitted owned-ink audit: **zero firings**. The mandatory owned marks retain
+default. The 54 zero-credit groups are reported separately: 24,086 canonical
+outline bytes plus 3,268 stub bytes, before compression. They are not filtered out.
+
+Membership agreement is **3,522/3,524 = 99.94%**. Canonical agreement is
+**1,745/1,750 = 99.71%** over all native accepted members (99.77% on common accepted
+members). There are no safety-superset violations. Member **174** is the only
+Rust-only acceptance; research rejected it solely as a ranking/economy exception.
+Member **1307** now retains default; centre 138's directed pair fails
+`counter_band_0.65`, and no next-best-canonical retry occurs. Common accepted
+canonical differences: **133, 138, 2092, 3131**. The native planner exactly matches
+membership/canonicals when supplied frozen preparation inputs; the bounded source
+audit localizes end-to-end differences to ulp-scale normalization, trace-gray
+quantization/fresh tracing and the resulting shortlist/cover choices. No tuning
+was used to recover membership. All differences and numerical evidence are in
+[r1-parity.json](qualification/font04/r1-parity.json) and
+[r1-numerical-source-audit.json](qualification/font04/r1-numerical-source-audit.json).
+The one-outline retirement difference is independently explained in
+[r1-retention-difference.json](qualification/font04/r1-retention-difference.json).
+
+The sealed native review includes all six divergent members: **12 panels**, both
+PDFium/Poppler, at 100%/400%, with only the target substituted in identical default
+context. It includes every Rust-only acceptance. Judgments remain blank; the
+separate key is unopened. Materiality remains **reviewer-pending**, not zero.
+Review: `qualification/font04/local/R1-blind-review/blinded-review.pdf`.
+
+PDFium, Poppler and MuPDF render every page of default, cover-2.0 and cover-1.5.
+PDFium and MuPDF extraction, and Poppler default/`-layout`/`-raw`, match default
+exactly. qpdf and OTS pass for all three. Reader is **BLOCKED-ON-OWNER**: supply the
+official **Windows x64 Adobe Acrobat Reader build 26.00221.901** installer (`.exe`
+or matching `.msi`); the root only has an incomplete macOS DMG. No Wine prefix or
+Xvfb display was used, and `~/.wine-acrobat-xi` was untouched. The Swift PDFKit kit
+is prepared in `qualification/font04/pdfkit/`; macOS execution remains deferred to R3.
+
+Tests: workspace **151 passed**, zero failed; the ignored financial golden test
+was run explicitly and passes the full `74c31136…ab0f` hash. The latest six native
+integration tests pass, including all 23 safety fixtures, eight exact source-frame/
+trace cases, independent hygiene/weight checks and composite range/quantization.
+Local added Rust source coverage is **2,094/2,203 = 95.05%**, above the unchanged
+Sonar 80% minimum. CI now supplies its existing hash-pinned PDFium test library
+before measuring Rust coverage; no analysis exclusion or gate was weakened.
+Server CI/Sonar acceptance remains pending because no product PR was opened.
+Legacy per-page trace diagnostics are pre-sharing; the native ledger and these
+independent scorecards describe the final shared output.
+
+Complete PDFs (all under ignored `qualification/font04/local/R1-native/`):
+- `default.pdf`: `74c31136d00a18dbf05fba2d7fba59c85cc201a57ae65d77999a025a692fab0f`.
+- `cover-2.0.pdf` and its one-thread repeat: `b007a27dd111937d5fb4bb75abb6cd41245635e679100f7de952cbb0509d20bc`.
+- `cover-1.5.pdf`: `dbdf30d38444985e9dd2839288329676865d93b0dd272cd69746a032aef8fb11`.
+
+Receipts: [checkpoint-R1.json](qualification/font04/checkpoint-R1.json),
+[artifact manifest](qualification/font04/r1-artifact-manifest.json),
+[compatibility](qualification/font04/r1-compatibility.json),
+[tests](qualification/font04/r1-tests.json), [coverage](qualification/font04/r1-coverage.json),
+[Git receipt](qualification/font04/r1-git-receipt.json), and
+[reproduction notes](qualification/font04/R1_REPRODUCTION.md).
+
+**STOP at R1.** Product branch pushed; no product PR or merge. P2 remains unopened;
+R2 corpus qualification was not run. PR #24 stays draft and untouched. No security
+finding was dismissed. Independent R1 acceptance is required before any P2 work.

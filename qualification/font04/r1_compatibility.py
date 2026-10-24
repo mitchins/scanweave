@@ -64,12 +64,13 @@ def compare(results):
 
 
 if __name__=='__main__':
-    parser=argparse.ArgumentParser();parser.add_argument('--default-only',action='store_true');args=parser.parse_args()
-    paths=[DEFAULT] if args.default_only else [DEFAULT,LOCAL/'financial-R1-rust-cover-2.0.pdf',LOCAL/'financial-R1-rust-cover-1.5.pdf']
+    parser=argparse.ArgumentParser();parser.add_argument('--default-only',action='store_true');parser.add_argument('--native-final',action='store_true');args=parser.parse_args()
+    paths=([LOCAL/'R1-native/default.pdf',LOCAL/'R1-native/cover-2.0.pdf',LOCAL/'R1-native/cover-1.5.pdf'] if args.native_final else [DEFAULT,LOCAL/'financial-R1-rust-cover-2.0.pdf',LOCAL/'financial-R1-rust-cover-1.5.pdf'])
+    if args.default_only:paths=paths[:1]
     if any(not p.is_file() for p in paths):raise SystemExit('Required Rust output missing; no comparison output is substituted.')
     results=[]
     for path in paths:
         cached=LOCAL/'R1-compatibility'/path.stem/'consumer-results.json'
         if cached.exists() and json.loads(cached.read_text())['sha256']==hashlib.sha256(path.read_bytes()).hexdigest():results.append(json.loads(cached.read_text()))
         else:results.append(inspect(path))
-    result=compare(results);destination=BASE/('r1-default-compatibility.json' if args.default_only else 'r1-compatibility.json');destination.write_text(json.dumps(result,indent=2)+'\n');assert result['pass_all']
+    result=compare(results);destination=BASE/('r1-default-compatibility.json' if args.default_only else ('r1-compatibility.json' if args.native_final else 'r1-initial-compatibility.json'));destination.write_text(json.dumps(result,indent=2)+'\n');assert result['pass_all']

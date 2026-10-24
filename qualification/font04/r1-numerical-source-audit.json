@@ -1,0 +1,129 @@
+{
+  "schema": "font04-R1-numerical-source-audit-v1",
+  "scope": "Only divergent members and their actual selected canonicals; no alternative canonical search or threshold change.",
+  "cause": "Bilinear reduction order differs by float64 ulps. Fresh tracing/coverage and bounded registration amplify some numerical differences; the 24-nearest shortlist and cover priorities can consequently differ. Frozen policy thresholds are unchanged.",
+  "members": [
+    {
+      "member": 133,
+      "character": "C",
+      "source_field_max_abs_delta": 1.1102230246251565e-16,
+      "source_threshold_0_5_pixel_differences": 0,
+      "canonical_canvas_max_abs_delta": 0.6470911492469131,
+      "canonical_path_equal": false,
+      "origin_equal": true,
+      "dimensions_equal": true,
+      "trace_gray_quantization_pixel_differences": 1
+    },
+    {
+      "member": 138,
+      "character": "C",
+      "source_field_max_abs_delta": 2.220446049250313e-16,
+      "source_threshold_0_5_pixel_differences": 0,
+      "canonical_canvas_max_abs_delta": 0.0,
+      "canonical_path_equal": true,
+      "origin_equal": true,
+      "dimensions_equal": true,
+      "trace_gray_quantization_pixel_differences": 0
+    },
+    {
+      "member": 174,
+      "character": "C",
+      "source_field_max_abs_delta": 2.220446049250313e-16,
+      "source_threshold_0_5_pixel_differences": 0,
+      "canonical_canvas_max_abs_delta": 0.0,
+      "canonical_path_equal": true,
+      "origin_equal": true,
+      "dimensions_equal": true,
+      "trace_gray_quantization_pixel_differences": 0
+    },
+    {
+      "member": 701,
+      "character": "e",
+      "source_field_max_abs_delta": 3.3306690738754696e-16,
+      "source_threshold_0_5_pixel_differences": 0,
+      "canonical_canvas_max_abs_delta": 0.0,
+      "canonical_path_equal": true,
+      "origin_equal": true,
+      "dimensions_equal": true,
+      "trace_gray_quantization_pixel_differences": 2
+    },
+    {
+      "member": 1307,
+      "character": "C",
+      "source_field_max_abs_delta": 2.220446049250313e-16,
+      "source_threshold_0_5_pixel_differences": 0,
+      "canonical_canvas_max_abs_delta": 0.0,
+      "canonical_path_equal": true,
+      "origin_equal": true,
+      "dimensions_equal": true,
+      "trace_gray_quantization_pixel_differences": 0
+    },
+    {
+      "member": 2092,
+      "character": "e",
+      "source_field_max_abs_delta": 2.220446049250313e-16,
+      "source_threshold_0_5_pixel_differences": 0,
+      "canonical_canvas_max_abs_delta": 0.0,
+      "canonical_path_equal": true,
+      "origin_equal": true,
+      "dimensions_equal": true,
+      "trace_gray_quantization_pixel_differences": 0
+    },
+    {
+      "member": 2528,
+      "character": "e",
+      "source_field_max_abs_delta": 2.220446049250313e-16,
+      "source_threshold_0_5_pixel_differences": 0,
+      "canonical_canvas_max_abs_delta": 0.0,
+      "canonical_path_equal": true,
+      "origin_equal": true,
+      "dimensions_equal": true,
+      "trace_gray_quantization_pixel_differences": 0
+    },
+    {
+      "member": 3023,
+      "character": "e",
+      "source_field_max_abs_delta": 2.220446049250313e-16,
+      "source_threshold_0_5_pixel_differences": 0,
+      "canonical_canvas_max_abs_delta": 0.0,
+      "canonical_path_equal": true,
+      "origin_equal": true,
+      "dimensions_equal": true,
+      "trace_gray_quantization_pixel_differences": 0
+    },
+    {
+      "member": 3131,
+      "character": "e",
+      "source_field_max_abs_delta": 2.220446049250313e-16,
+      "source_threshold_0_5_pixel_differences": 0,
+      "canonical_canvas_max_abs_delta": 0.0,
+      "canonical_path_equal": true,
+      "origin_equal": true,
+      "dimensions_equal": true,
+      "trace_gray_quantization_pixel_differences": 0
+    }
+  ],
+  "directed_shortlist_examples": [
+    {
+      "member": 2092,
+      "canonical": 701,
+      "present_in_native_frozen_field_probe": false,
+      "hard_reasons": null,
+      "error": null
+    },
+    {
+      "member": 3131,
+      "canonical": 3023,
+      "present_in_native_frozen_field_probe": false,
+      "hard_reasons": null,
+      "error": null
+    }
+  ],
+  "interpretation": "Audited source fields differ by at most 3.33e-16. This changes one trace-gray sample in canonical 133 and two in 701; 133 takes a different fresh trace. Normal directed-shortlist/cover choices can then change. For e members 2092/3131, their new directed pairs are absent in both the research and native frozen-input probes, but present after native source preparation. Policy thresholds and grouping stages are unchanged; no alternate-canonical retries are used.",
+  "controlled_stage_comparison": {
+    "frozen_fields_and_traces_native_planner_membership_agreement": 1.0,
+    "frozen_fields_and_traces_native_planner_canonical_agreement": 1.0,
+    "report": "qualification/font04/local/native-fit/planner-comparison.json",
+    "interpretation": "With frozen preparation inputs, native planning exactly reproduces research membership/canonicals. End-to-end divergences therefore originate in native source normalization/fresh tracing, before the normal directed-shortlist/cover stages."
+  }
+}

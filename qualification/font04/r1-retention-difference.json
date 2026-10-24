@@ -1,0 +1,52 @@
+{
+  "schema": "font04-R1-retention-difference-v1",
+  "extra_retained_program_hashes": {
+    "c9c5eb0730e53ede6d3f3dd7ca819d7797f616327b7f88255678c15a48e3a6b4": 1
+  },
+  "reference_only_retained_program_hashes": {},
+  "extra_retained_program_users": [
+    {
+      "page": 0,
+      "gid": 30,
+      "cid": 125,
+      "character": "C",
+      "invisible": false
+    },
+    {
+      "page": 3,
+      "gid": 221,
+      "cid": 752,
+      "character": "C",
+      "invisible": false
+    },
+    {
+      "page": 5,
+      "gid": 221,
+      "cid": 752,
+      "character": "C",
+      "invisible": false
+    },
+    {
+      "page": 6,
+      "gid": 30,
+      "cid": 125,
+      "character": "C",
+      "invisible": false
+    }
+  ],
+  "member_1307_default_binding": {
+    "page": 5,
+    "gid": 221,
+    "cid": 752,
+    "character": "C",
+    "program": "c9c5eb0730e53ede6d3f3dd7ca819d7797f616327b7f88255678c15a48e3a6b4"
+  },
+  "member_174_default_binding": {
+    "page": 0,
+    "gid": 212,
+    "cid": 153,
+    "character": "C",
+    "program": "9ae6d679e30291a7c3d85f2db11229ae8213d7a0e09f8dd44ea1ded9df2c1cd2"
+  },
+  "explanation": "Native 1307 retains its default C program after the selected centre changes to 138 (the 1307\u2192138 pair fails counter_band_0.65). The added 174 acceptance does not retire the corresponding old program completely. Distinct default GIDs may have the same compiled geometry hash; retirement counts GIDs/program slots, not unique hashes."
+}

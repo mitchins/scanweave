@@ -1,0 +1,43 @@
+{
+  "schema": "font04-R1-issue-dispositions-v1",
+  "issues": [
+    {
+      "classification": "implementation",
+      "issue": "Sharing initially passed permission for tonal encoding rather than the representation selected by default.",
+      "resolution": "Propagate the exact default representation choice. Tonal/lossless identity regressions pass; final raster streams and placements match default.",
+      "commit": "2045b1155a871adada1ce77e96dcd9382367b522"
+    },
+    {
+      "classification": "implementation",
+      "issue": "Canonical scaling needed compiled integer coordinates and matching composite bounds/side bearings.",
+      "resolution": "Quantize canonical first, scale integer points, compute bounds and side bearings from emitted points. Scaling/range tests and OTS pass.",
+      "commit": "2045b1155a871adada1ce77e96dcd9382367b522"
+    },
+    {
+      "classification": "implementation",
+      "issue": "Repeated inline W arrays and dense maps inflated PDF representation overhead.",
+      "resolution": "One shared indirect W array, sparse CID maps, and ordinary document draw-order allocation; no policy change.",
+      "commit": "945a753e8bc08e2e497b763e09a9bb69175471d8"
+    },
+    {
+      "classification": "implementation",
+      "issue": "Eligible label with zero or one safe source could abort variation estimation.",
+      "resolution": "Retain default when no directed two-member source group can form. Unused diagnostic floor sentinel is not an admission estimate; no witness-count gate added.",
+      "commit": "a0584c8dac8ec9d1698bc7d79a240f270a02b976"
+    },
+    {
+      "classification": "data",
+      "issue": "Qualification raw-owned-source control was referenced from an output-artifact folder that does not contain it.",
+      "resolution": "Use the frozen financial-B2-P-initial raw-source control; preserve hash-matched completed all-draw measurements. No output or method changed."
+    },
+    {
+      "classification": "numerical",
+      "issue": "Two member decisions and four common-accepted canonical choices differ from research after native source preparation.",
+      "resolution": "Within specified parity; all safety rejections retained. No tuning. Every divergence is recorded and included in the sealed package; independent judgments pending.",
+      "evidence": "r1-numerical-source-audit.json"
+    }
+  ],
+  "thresholds_changed": false,
+  "safety_checks_weakened": false,
+  "security_findings_dismissed": false
+}

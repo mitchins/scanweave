@@ -1,0 +1,863 @@
+{
+  "schema": "font04-R1-native-parity-v1",
+  "membership_agreement": 0.9994324631101021,
+  "membership_divergences": [
+    {
+      "member": 174,
+      "oracle": "reject",
+      "native": "accept",
+      "oracle_canonical": 138,
+      "native_canonical": 138,
+      "oracle_reasons": [
+        "ranking_or_economy_exception"
+      ],
+      "native_reasons": [],
+      "cause": "Native fresh tracing changes canonical 133 after ulp-scale source sampling differences; cover chooses 138. Member 174 has a safe recorded directed fit to 138 and is admitted; the oracle rejected it only as a ranking/economy exception."
+    },
+    {
+      "member": 1307,
+      "oracle": "accept",
+      "native": "reject",
+      "oracle_canonical": 133,
+      "native_canonical": 10,
+      "oracle_reasons": [],
+      "native_reasons": [
+        "stroke_weight_band"
+      ],
+      "cause": "Cover chooses centre 138 instead of 133. The frozen 1307\u2192138 pair fails counter_band_0.65, so 1307 retains default; no next-best-canonical retry occurs. Its native canonical=10/weight-band reason is the diagnostic attempt, not a changed member weight band."
+    }
+  ],
+  "canonical_agreement_over_all_native_accepted": 0.9971428571428571,
+  "canonical_matches": 1745,
+  "native_accepted": 1750,
+  "canonical_divergences": [
+    {
+      "member": 133,
+      "oracle_canonical": 133,
+      "native_canonical": 138,
+      "oracle_transform": [
+        0.06248352282708889,
+        0.1203344421717791,
+        1.0000801065363016
+      ],
+      "native_transform": [
+        -0.4663022921748265,
+        0.10921336425845364,
+        1.0014469579265959
+      ],
+      "cause": "C cover centre changes 133\u2192138 after ulp-scale source normalization changes fresh tracing of 133; both members pass unchanged checks against 138."
+    },
+    {
+      "member": 138,
+      "oracle_canonical": 133,
+      "native_canonical": 138,
+      "oracle_transform": [
+        0.4701464162353058,
+        -0.030525002463663325,
+        0.9977562856882536
+      ],
+      "native_transform": [
+        0.09760280334561271,
+        0.08230472170791327,
+        1.003695620936971
+      ],
+      "cause": "C cover centre changes 133\u2192138 after ulp-scale source normalization changes fresh tracing of 133; both members pass unchanged checks against 138."
+    },
+    {
+      "member": 2092,
+      "oracle_canonical": 3023,
+      "native_canonical": 701,
+      "oracle_transform": [
+        0.11729530783821922,
+        -0.39106955362603735,
+        0.9978220616334137
+      ],
+      "native_transform": [
+        0.1861231214906962,
+        0.4625323421554845,
+        1.0026950275558149
+      ],
+      "cause": "The new directed pair is absent in both research and native frozen-input shortlists. Native end-to-end source normalization/fresh tracing changes the preparation inputs, so the ordinary 24-nearest/cover stages offer and select this pair. The controlled frozen-input native planner otherwise reproduces all assignments exactly. No alternate-canonical retry or threshold change is used."
+    },
+    {
+      "member": 3131,
+      "oracle_canonical": 2528,
+      "native_canonical": 3023,
+      "oracle_transform": [
+        0.14690196495438435,
+        -0.4695322556609059,
+        1.00001146321388
+      ],
+      "native_transform": [
+        -0.35742350929423533,
+        0.6620536074859685,
+        1.0032545856492636
+      ],
+      "cause": "The new directed pair is absent in both research and native frozen-input shortlists. Native end-to-end source normalization/fresh tracing changes the preparation inputs, so the ordinary 24-nearest/cover stages offer and select this pair. The controlled frozen-input native planner otherwise reproduces all assignments exactly. No alternate-canonical retry or threshold change is used."
+    }
+  ],
+  "rust_only_acceptances": [
+    174
+  ],
+  "safety_superset_violations": [],
+  "thresholds_changed": false,
+  "status": "PASS; independent review pending",
+  "native_build": {
+    "product_commit": "a0584c8dac8ec9d1698bc7d79a240f270a02b976",
+    "binary": "qualification/font04/local/R1-native/scanweave",
+    "binary_sha256": "165103b9d1fa30cb752bd4b1cbfdf72096c509fa954df1e4c95a62fd1c9eec30",
+    "rustc": "rustc 1.99.0 (b940084d7 2026-09-28)",
+    "thresholds_changed": false,
+    "p2_opened": false,
+    "prior_diagnostic_build": {
+      "product_commit": "945a753e8bc08e2e497b763e09a9bb69175471d8",
+      "binary": "qualification/font04/local/scanweave-R1-945a753",
+      "binary_sha256": "d504234ae8c80f67024ac79e53151e9823176aebbef7bdd0e463d524b807a087",
+      "rustc": "rustc 1.99.0 (b940084d7 2026-09-28)",
+      "thresholds_changed": false,
+      "p2_opened": false
+    }
+  },
+  "default_sha256": "74c31136d00a18dbf05fba2d7fba59c85cc201a57ae65d77999a025a692fab0f",
+  "native_pdf_sha256": "b007a27dd111937d5fb4bb75abb6cd41245635e679100f7de952cbb0509d20bc",
+  "comparison_pdf_sha256": "dbdf30d38444985e9dd2839288329676865d93b0dd272cd69746a032aef8fb11",
+  "determinism": {
+    "repeat_sha256": "b007a27dd111937d5fb4bb75abb6cd41245635e679100f7de952cbb0509d20bc",
+    "byte_identical": true,
+    "rayon_threads": [
+      4,
+      1
+    ],
+    "research_python_path": "/nonexistent-font04-python"
+  },
+  "analytic_source_error": {
+    "native": {
+      "n": 3524,
+      "mean": 0.05738652999596341,
+      "p95": 0.11361518640987071
+    },
+    "oracle": {
+      "n": 3524,
+      "mean": 0.057419371008159574,
+      "p95": 0.1139455342271864
+    },
+    "measured_renderer_floor": {
+      "mean": 0.037275590754064,
+      "p95": 0.08588646617342122
+    },
+    "within_floor": true,
+    "all_native_draws_measured": true
+  },
+  "economy": {
+    "independent": {
+      "default_slots": 2238,
+      "retained_default_programs": 1644,
+      "retired_outlines": 594,
+      "added_canonicals": 268,
+      "net_outlines_retired": 326,
+      "composite_stubs": 1746,
+      "retained_default_programs_exact": true,
+      "default_outline_points": 449268,
+      "native_outline_points": 387541
+    },
+    "native_report": {
+      "method": "cover-2.0 frozen at research 5356255",
+      "multiplier": 2.0,
+      "net_retirement_rule": false,
+      "fallback": null,
+      "proposed_members": 1811,
+      "substituted": 1750,
+      "retired_outlines": 594,
+      "added_canonicals": 268,
+      "net_outlines_retired": 326,
+      "encoded_font_bytes_before": 727259,
+      "encoded_font_bytes_after": 664549,
+      "zero_credit_groups": [
+        {
+          "canonical": 27,
+          "members": [
+            27,
+            35,
+            742
+          ],
+          "credited_retirements": 0,
+          "canonical_outline_bytes": 554,
+          "composite_stub_bytes": 58
+        },
+        {
+          "canonical": 61,
+          "members": [
+            61,
+            147,
+            248
+          ],
+          "credited_retirements": 0,
+          "canonical_outline_bytes": 304,
+          "composite_stub_bytes": 56
+        },
+        {
+          "canonical": 170,
+          "members": [
+            170,
+            601
+          ],
+          "credited_retirements": 0,
+          "canonical_outline_bytes": 332,
+          "composite_stub_bytes": 36
+        },
+        {
+          "canonical": 259,
+          "members": [
+            129,
+            154,
+            259
+          ],
+          "credited_retirements": 0,
+          "canonical_outline_bytes": 290,
+          "composite_stub_bytes": 56
+        },
+        {
+          "canonical": 384,
+          "members": [
+            23,
+            384,
+            946
+          ],
+          "credited_retirements": 0,
+          "canonical_outline_bytes": 680,
+          "composite_stub_bytes": 56
+        },
+        {
+          "canonical": 388,
+          "members": [
+            388,
+            611,
+            897,
+            1054,
+            2951
+          ],
+          "credited_retirements": 0,
+          "canonical_outline_bytes": 606,
+          "composite_stub_bytes": 92
+        },
+        {
+          "canonical": 475,
+          "members": [
+            103,
+            475,
+            929
+          ],
+          "credited_retirements": 0,
+          "canonical_outline_bytes": 426,
+          "composite_stub_bytes": 56
+        },
+        {
+          "canonical": 577,
+          "members": [
+            577,
+            894
+          ],
+          "credited_retirements": 0,
+          "canonical_outline_bytes": 376,
+          "composite_stub_bytes": 36
+        },
+        {
+          "canonical": 598,
+          "members": [
+            598,
+            1279
+          ],
+          "credited_retirements": 0,
+          "canonical_outline_bytes": 530,
+          "composite_stub_bytes": 36
+        },
+        {
+          "canonical": 623,
+          "members": [
+            623,
+            1917
+          ],
+          "credited_retirements": 0,
+          "canonical_outline_bytes": 344,
+          "composite_stub_bytes": 36
+        },
+        {
+          "canonical": 828,
+          "members": [
+            350,
+            828,
+            1243
+          ],
+          "credited_retirements": 0,
+          "canonical_outline_bytes": 622,
+          "composite_stub_bytes": 60
+        },
+        {
+          "canonical": 877,
+          "members": [
+            845,
+            877
+          ],
+          "credited_retirements": 0,
+          "canonical_outline_bytes": 486,
+          "composite_stub_bytes": 38
+        },
+        {
+          "canonical": 923,
+          "members": [
+            923,
+            1340
+          ],
+          "credited_retirements": 0,
+          "canonical_outline_bytes": 550,
+          "composite_stub_bytes": 38
+        },
+        {
+          "canonical": 944,
+          "members": [
+            836,
+            944,
+            971
+          ],
+          "credited_retirements": 0,
+          "canonical_outline_bytes": 298,
+          "composite_stub_bytes": 58
+        },
+        {
+          "canonical": 1063,
+          "members": [
+            1063,
+            1213
+          ],
+          "credited_retirements": 0,
+          "canonical_outline_bytes": 250,
+          "composite_stub_bytes": 40
+        },
+        {
+          "canonical": 1101,
+          "members": [
+            1094,
+            1101
+          ],
+          "credited_retirements": 0,
+          "canonical_outline_bytes": 404,
+          "composite_stub_bytes": 36
+        },
+        {
+          "canonical": 1131,
+          "members": [
+            1131,
+            1324
+          ],
+          "credited_retirements": 0,
+          "canonical_outline_bytes": 430,
+          "composite_stub_bytes": 38
+        },
+        {
+          "canonical": 1139,
+          "members": [
+            1139,
+            1147,
+            1150
+          ],
+          "credited_retirements": 0,
+          "canonical_outline_bytes": 400,
+          "composite_stub_bytes": 54
+        },
+        {
+          "canonical": 1143,
+          "members": [
+            1126,
+            1130,
+            1142,
+            1143,
+            1580
+          ],
+          "credited_retirements": 0,
+          "canonical_outline_bytes": 270,
+          "composite_stub_bytes": 96
+        },
+        {
+          "canonical": 1144,
+          "members": [
+            1140,
+            1141,
+            1144,
+            1151,
+            1152,
+            1154,
+            1160,
+            1161,
+            1165,
+            1167
+          ],
+          "credited_retirements": 0,
+          "canonical_outline_bytes": 298,
+          "composite_stub_bytes": 196
+        },
+        {
+          "canonical": 1301,
+          "members": [
+            660,
+            1301
+          ],
+          "credited_retirements": 0,
+          "canonical_outline_bytes": 378,
+          "composite_stub_bytes": 40
+        },
+        {
+          "canonical": 1364,
+          "members": [
+            1121,
+            1162,
+            1163,
+            1364,
+            1366
+          ],
+          "credited_retirements": 0,
+          "canonical_outline_bytes": 450,
+          "composite_stub_bytes": 94
+        },
+        {
+          "canonical": 1473,
+          "members": [
+            345,
+            734,
+            1473
+          ],
+          "credited_retirements": 0,
+          "canonical_outline_bytes": 504,
+          "composite_stub_bytes": 56
+        },
+        {
+          "canonical": 1534,
+          "members": [
+            789,
+            1534
+          ],
+          "credited_retirements": 0,
+          "canonical_outline_bytes": 440,
+          "composite_stub_bytes": 38
+        },
+        {
+          "canonical": 1648,
+          "members": [
+            276,
+            386,
+            1632,
+            1648,
+            2090
+          ],
+          "credited_retirements": 0,
+          "canonical_outline_bytes": 400,
+          "composite_stub_bytes": 94
+        },
+        {
+          "canonical": 1732,
+          "members": [
+            1732,
+            1747
+          ],
+          "credited_retirements": 0,
+          "canonical_outline_bytes": 448,
+          "composite_stub_bytes": 36
+        },
+        {
+          "canonical": 1766,
+          "members": [
+            1766,
+            3310
+          ],
+          "credited_retirements": 0,
+          "canonical_outline_bytes": 68,
+          "composite_stub_bytes": 36
+        },
+        {
+          "canonical": 1790,
+          "members": [
+            1783,
+            1790,
+            1857,
+            1933
+          ],
+          "credited_retirements": 0,
+          "canonical_outline_bytes": 412,
+          "composite_stub_bytes": 74
+        },
+        {
+          "canonical": 1816,
+          "members": [
+            1779,
+            1816,
+            1821,
+            1871,
+            3511,
+            3522
+          ],
+          "credited_retirements": 0,
+          "canonical_outline_bytes": 320,
+          "composite_stub_bytes": 112
+        },
+        {
+          "canonical": 1891,
+          "members": [
+            1875,
+            1885,
+            1891,
+            2284
+          ],
+          "credited_retirements": 0,
+          "canonical_outline_bytes": 460,
+          "composite_stub_bytes": 72
+        },
+        {
+          "canonical": 2008,
+          "members": [
+            269,
+            452,
+            685,
+            691,
+            2008,
+            3183
+          ],
+          "credited_retirements": 0,
+          "canonical_outline_bytes": 334,
+          "composite_stub_bytes": 112
+        },
+        {
+          "canonical": 2242,
+          "members": [
+            1813,
+            1971,
+            2242
+          ],
+          "credited_retirements": 0,
+          "canonical_outline_bytes": 378,
+          "composite_stub_bytes": 58
+        },
+        {
+          "canonical": 2264,
+          "members": [
+            435,
+            630,
+            634,
+            652,
+            1889,
+            2264
+          ],
+          "credited_retirements": 0,
+          "canonical_outline_bytes": 486,
+          "composite_stub_bytes": 110
+        },
+        {
+          "canonical": 2308,
+          "members": [
+            1907,
+            2308
+          ],
+          "credited_retirements": 0,
+          "canonical_outline_bytes": 380,
+          "composite_stub_bytes": 38
+        },
+        {
+          "canonical": 2411,
+          "members": [
+            2411,
+            2432,
+            2453
+          ],
+          "credited_retirements": 0,
+          "canonical_outline_bytes": 512,
+          "composite_stub_bytes": 54
+        },
+        {
+          "canonical": 2425,
+          "members": [
+            1496,
+            2425
+          ],
+          "credited_retirements": 0,
+          "canonical_outline_bytes": 542,
+          "composite_stub_bytes": 38
+        },
+        {
+          "canonical": 2434,
+          "members": [
+            2434,
+            2577
+          ],
+          "credited_retirements": 0,
+          "canonical_outline_bytes": 462,
+          "composite_stub_bytes": 38
+        },
+        {
+          "canonical": 2457,
+          "members": [
+            2360,
+            2457
+          ],
+          "credited_retirements": 0,
+          "canonical_outline_bytes": 516,
+          "composite_stub_bytes": 38
+        },
+        {
+          "canonical": 2532,
+          "members": [
+            2532,
+            2587
+          ],
+          "credited_retirements": 0,
+          "canonical_outline_bytes": 538,
+          "composite_stub_bytes": 38
+        },
+        {
+          "canonical": 2608,
+          "members": [
+            2608,
+            3189
+          ],
+          "credited_retirements": 0,
+          "canonical_outline_bytes": 232,
+          "composite_stub_bytes": 40
+        },
+        {
+          "canonical": 2641,
+          "members": [
+            2641,
+            2772
+          ],
+          "credited_retirements": 0,
+          "canonical_outline_bytes": 780,
+          "composite_stub_bytes": 38
+        },
+        {
+          "canonical": 2785,
+          "members": [
+            468,
+            600,
+            1061,
+            2726,
+            2741,
+            2748,
+            2785,
+            2788,
+            2804,
+            2916,
+            2944
+          ],
+          "credited_retirements": 0,
+          "canonical_outline_bytes": 472,
+          "composite_stub_bytes": 204
+        },
+        {
+          "canonical": 2871,
+          "members": [
+            2871,
+            2876
+          ],
+          "credited_retirements": 0,
+          "canonical_outline_bytes": 368,
+          "composite_stub_bytes": 36
+        },
+        {
+          "canonical": 2985,
+          "members": [
+            625,
+            632,
+            639,
+            677,
+            1217,
+            2985
+          ],
+          "credited_retirements": 0,
+          "canonical_outline_bytes": 452,
+          "composite_stub_bytes": 118
+        },
+        {
+          "canonical": 3074,
+          "members": [
+            3074,
+            3155
+          ],
+          "credited_retirements": 0,
+          "canonical_outline_bytes": 534,
+          "composite_stub_bytes": 38
+        },
+        {
+          "canonical": 3101,
+          "members": [
+            3096,
+            3101
+          ],
+          "credited_retirements": 0,
+          "canonical_outline_bytes": 488,
+          "composite_stub_bytes": 36
+        },
+        {
+          "canonical": 3284,
+          "members": [
+            3280,
+            3284
+          ],
+          "credited_retirements": 0,
+          "canonical_outline_bytes": 348,
+          "composite_stub_bytes": 40
+        },
+        {
+          "canonical": 3303,
+          "members": [
+            3235,
+            3253,
+            3303
+          ],
+          "credited_retirements": 0,
+          "canonical_outline_bytes": 546,
+          "composite_stub_bytes": 54
+        },
+        {
+          "canonical": 3306,
+          "members": [
+            2631,
+            3306
+          ],
+          "credited_retirements": 0,
+          "canonical_outline_bytes": 686,
+          "composite_stub_bytes": 38
+        },
+        {
+          "canonical": 3340,
+          "members": [
+            2568,
+            3340
+          ],
+          "credited_retirements": 0,
+          "canonical_outline_bytes": 474,
+          "composite_stub_bytes": 36
+        },
+        {
+          "canonical": 3377,
+          "members": [
+            29,
+            113,
+            443,
+            3198,
+            3299,
+            3377
+          ],
+          "credited_retirements": 0,
+          "canonical_outline_bytes": 658,
+          "composite_stub_bytes": 112
+        },
+        {
+          "canonical": 3459,
+          "members": [
+            2438,
+            3459
+          ],
+          "credited_retirements": 0,
+          "canonical_outline_bytes": 582,
+          "composite_stub_bytes": 40
+        },
+        {
+          "canonical": 3483,
+          "members": [
+            3410,
+            3483
+          ],
+          "credited_retirements": 0,
+          "canonical_outline_bytes": 508,
+          "composite_stub_bytes": 36
+        },
+        {
+          "canonical": 3493,
+          "members": [
+            3084,
+            3372,
+            3493
+          ],
+          "credited_retirements": 0,
+          "canonical_outline_bytes": 480,
+          "composite_stub_bytes": 54
+        }
+      ],
+      "owned_exceptions": [
+        4,
+        5,
+        7,
+        8,
+        10,
+        68,
+        85,
+        237,
+        286,
+        316,
+        401,
+        428,
+        454,
+        552,
+        587,
+        603,
+        607,
+        671,
+        694,
+        695,
+        1070,
+        1080,
+        1112,
+        1113,
+        1204,
+        1233,
+        1236,
+        1237,
+        1311,
+        1331,
+        1350,
+        1469,
+        1514,
+        1518,
+        1572,
+        1892,
+        1957,
+        2401,
+        2464,
+        2550,
+        2639,
+        2808,
+        2926,
+        2928,
+        2992,
+        3109,
+        3178,
+        3188,
+        3190,
+        3353,
+        3422,
+        3426
+      ]
+    },
+    "minimum_net_outlines": 310.65,
+    "passes": true
+  },
+  "invariants": {
+    "raster_streams_and_placements_equal": true,
+    "text_geometry_equal": true,
+    "actual_text_equal": true,
+    "unsubstituted_program_divergences": [],
+    "invisible_users_equal": true
+  },
+  "actual_owned_audit": {
+    "firing_members": [],
+    "ledger": "qualification/font04/local/R1-native/cover-2.0.pdf.font04/actual-owned-audit.json",
+    "sha256": "cbcada0ab85fde8e318f6909809ccb8baaa7f9a5e5fd2087af754fd3d25ba0dc"
+  },
+  "compatibility": "qualification/font04/r1-compatibility.json",
+  "pass_all": true,
+  "reviewer_pending": true,
+  "numerical_source_audit": "qualification/font04/r1-numerical-source-audit.json",
+  "canonical_agreement_on_common_accepted_only": 0.9977129788450543,
+  "frozen_input_native_planner_control": {
+    "membership_agreement": 1.0,
+    "canonical_agreement": 1.0,
+    "report": "qualification/font04/local/native-fit/planner-comparison.json"
+  }
+}

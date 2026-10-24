@@ -1,0 +1,27 @@
+{
+  "schema": "font04-R1-sealed-review-v1",
+  "status": "SEALED; reviewer pending; key not revealed",
+  "rust_only_acceptances": [
+    174
+  ],
+  "all_rust_only_included": true,
+  "other_parity_divergences_included": true,
+  "members": 6,
+  "panels": 12,
+  "review_pdf": "qualification/font04/local/R1-blind-review/blinded-review.pdf",
+  "review_sha256": "53d4ad89dc906c703367f2987cd1594af653b3166ea85571e16b3dafebd6076d",
+  "judgments": "qualification/font04/local/R1-blind-review/judgments-template.json",
+  "key_path": "qualification/font04/local/R1-blind-private/sealed-key.json",
+  "key_sha256": "5d787a2d83169a549f101087075b9586c3f037391cac242855f2bee88f26f835",
+  "key_revealed": false,
+  "consumer_renderers": [
+    "PDFium",
+    "Poppler"
+  ],
+  "scales": [
+    "100%",
+    "400%"
+  ],
+  "source": "original scanned financial input",
+  "context": "Only the target draw is replaced in identical default context"
+}

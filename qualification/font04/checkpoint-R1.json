@@ -1,50 +1,238 @@
 {
-  "schema": "font04-checkpoint-R1-v1",
-  "status": "BLOCKED-BEFORE-METHOD-FREEZE",
-  "checkpoint_R1_reached": false,
+  "schema": "font04-checkpoint-R1-v2",
+  "status": "STOP AT CHECKPOINT R1 \u2014 INDEPENDENT REVIEW PENDING",
+  "checkpoint_R1_reached": true,
   "reviewer_pending": true,
-  "contract_sha": "7c92f294dedc06fac20d226142a13362daa5f042",
-  "research_start_sha": "7c92f294dedc06fac20d226142a13362daa5f042",
-  "remote_main_sha": "c10e3dff93ca12ac410c0f6626a4ef74ce34e0c1",
-  "freeze_commit_sha": null,
-  "product_branch": null,
-  "rust_branch_sha": null,
+  "contract_sha": "3610e009b89aa3a5f97aea65af6df87477295656",
+  "research_start_sha": "3610e009b89aa3a5f97aea65af6df87477295656",
+  "contract_and_clarification_verified": true,
+  "research_descends_from_contract_with_only_session_commits": true,
+  "freeze_commit_sha": "5356255e14d713316b641607f093e64a44555a0d",
+  "freeze_inventory_completion_commit_sha": "4c51ac53cace6d469c798b0353c1ca7b28cb838c",
+  "method_freeze_sha256": "6adab26c4923593a58ef8fc8d2b7be7cb417a601c40ada68dffca15a6f9b9fc8",
   "p2_preregistration_sha256": "a4f9ccd3a7e51d719946be80f7cc9a297de7ca22285e8755e5e26e415e7db466",
-  "P2_opened": false,
-  "R2_run": false,
-  "blocker": {
-    "classification": "implementation / contract mismatch",
-    "evidence": "qualification/font04/r0-net-retirement-audit.json",
-    "summary": "Accepted cover-2.0 disables per-group net retirement; 54 of 268 groups have zero retirement credit, although aggregate retirement is +327. Resolve aggregate versus per-group safeguard before freezing."
+  "reference_oracle": {
+    "path": "qualification/font04/reference-oracle.json",
+    "sha256": "4a288539d97b732d440d8adb32bed83b4c70d2ec090c341e129c7b8d7bf583c6",
+    "members": 3524,
+    "accepted": 1750,
+    "rejected": 1774
   },
-  "R0": {
-    "method_freeze": "blocked pending safeguard interpretation",
-    "oracle": "not built",
-    "regression_fixtures": "not built"
+  "regression_fixtures": {
+    "cases": 23,
+    "new_review_members": [
+      3013,
+      2466,
+      63,
+      1450
+    ],
+    "owned_mark_cases": [
+      "B1 glyph-277 = B2 member 3422",
+      "glyph-3422",
+      "glyph-1233"
+    ],
+    "status": "PASS"
   },
-  "R1": {
-    "native_port": "not started",
-    "parity": "NOT RUN",
-    "divergence_ledger": null,
-    "default_byte_identity_on_product_branch": "NOT RUN",
-    "tests": "NOT RUN",
-    "coverage": "NOT RUN; Sonar gate remains required"
+  "remote_main_base_sha": "c10e3dff93ca12ac410c0f6626a4ef74ce34e0c1",
+  "product_branch": "feat/glyph-sharing",
+  "rust_branch_sha": "3fcd4ea60aceae6336754ad212d5bd7744344c72",
+  "qualified_runtime_build_sha": "a0584c8dac8ec9d1698bc7d79a240f270a02b976",
+  "runtime_sources_equal_to_delivered_branch": true,
+  "flag": "--glyph-sharing off|cover-2.0|cover-1.5",
+  "python_at_runtime": false,
+  "net_retirement_rule": false,
+  "aggregate_economy_guard": "Per document: net primitive outlines retired >=0 and encoded font bytes <= default; otherwise emit default and report.",
+  "PDFs": {
+    "default": {
+      "path": "qualification/font04/local/R1-native/default.pdf",
+      "sha256": "74c31136d00a18dbf05fba2d7fba59c85cc201a57ae65d77999a025a692fab0f",
+      "bytes": 2849237
+    },
+    "cover-2.0": {
+      "path": "qualification/font04/local/R1-native/cover-2.0.pdf",
+      "sha256": "b007a27dd111937d5fb4bb75abb6cd41245635e679100f7de952cbb0509d20bc",
+      "bytes": 2796345
+    },
+    "cover-1.5": {
+      "path": "qualification/font04/local/R1-native/cover-1.5.pdf",
+      "sha256": "dbdf30d38444985e9dd2839288329676865d93b0dd272cd69746a032aef8fb11",
+      "bytes": 2805547
+    },
+    "cover-2.0-repeat": {
+      "path": "qualification/font04/local/R1-native/cover-2.0-repeat.pdf",
+      "sha256": "b007a27dd111937d5fb4bb75abb6cd41245635e679100f7de952cbb0509d20bc",
+      "bytes": 2796345
+    }
+  },
+  "parity": {
+    "status": "PASS",
+    "membership_agreement": 0.9994324631101021,
+    "canonical_agreement_over_all_native_accepted": 0.9971428571428571,
+    "safety_superset_violations": [],
+    "membership_divergences": [
+      174,
+      1307
+    ],
+    "canonical_divergences": [
+      133,
+      138,
+      2092,
+      3131
+    ],
+    "rust_only_acceptances": [
+      174
+    ],
+    "report": "qualification/font04/r1-parity.json"
+  },
+  "economy": {
+    "net_outlines_retired": 326,
+    "reference": 327,
+    "required_minimum": 311,
+    "retired": 594,
+    "added_canonicals": 268,
+    "composite_stubs": 1746,
+    "font_bytes_before": 727259,
+    "font_bytes_after": 664549,
+    "zero_credit_groups": 54,
+    "zero_credit_canonical_outline_bytes": 24086,
+    "zero_credit_stub_bytes": 3268,
+    "report": "qualification/font04/r1-byte-accounting.json"
+  },
+  "fidelity": {
+    "native": {
+      "n": 3524,
+      "mean": 0.05738652999596341,
+      "p95": 0.11361518640987071
+    },
+    "oracle": {
+      "n": 3524,
+      "mean": 0.057419371008159574,
+      "p95": 0.1139455342271864
+    },
+    "measured_renderer_floor": {
+      "mean": 0.037275590754064,
+      "p95": 0.08588646617342122
+    },
+    "within_floor": true,
+    "all_native_draws_measured": true
+  },
+  "invariants": {
+    "raster_streams_and_placements_equal": true,
+    "text_geometry_equal": true,
+    "actual_text_equal": true,
+    "unsubstituted_program_divergences": [],
+    "invisible_users_equal": true
+  },
+  "actual_owned_ink_firings": 0,
+  "determinism": {
+    "repeat_sha256": "b007a27dd111937d5fb4bb75abb6cd41245635e679100f7de952cbb0509d20bc",
+    "byte_identical": true,
+    "rayon_threads": [
+      4,
+      1
+    ],
+    "research_python_path": "/nonexistent-font04-python"
+  },
+  "blind_review": {
+    "schema": "font04-R1-sealed-review-v1",
+    "status": "SEALED; reviewer pending; key not revealed",
+    "rust_only_acceptances": [
+      174
+    ],
+    "all_rust_only_included": true,
+    "other_parity_divergences_included": true,
+    "members": 6,
+    "panels": 12,
+    "review_pdf": "qualification/font04/local/R1-blind-review/blinded-review.pdf",
+    "review_sha256": "53d4ad89dc906c703367f2987cd1594af653b3166ea85571e16b3dafebd6076d",
+    "judgments": "qualification/font04/local/R1-blind-review/judgments-template.json",
+    "key_path": "qualification/font04/local/R1-blind-private/sealed-key.json",
+    "key_sha256": "5d787a2d83169a549f101087075b9586c3f037391cac242855f2bee88f26f835",
+    "key_revealed": false,
+    "consumer_renderers": [
+      "PDFium",
+      "Poppler"
+    ],
+    "scales": [
+      "100%",
+      "400%"
+    ],
+    "source": "original scanned financial input",
+    "context": "Only the target draw is replaced in identical default context"
   },
   "compatibility": {
-    "PDFium": "NOT RUN on Rust outputs; no Rust outputs exist",
-    "Poppler_default_layout_raw": "NOT RUN on Rust outputs",
-    "MuPDF": "NOT RUN on Rust outputs",
+    "PDFium": "PASS: all 13 pages of all 3 PDFs; extraction identical",
+    "Poppler": "PASS: all pages; default/-layout/-raw extraction identical",
+    "MuPDF": "PASS: all pages; extraction identical",
+    "qpdf_OTS": "PASS on all 3 final PDFs",
     "AdobeReader": {
       "status": "BLOCKED-ON-OWNER",
-      "required": "Official Adobe Acrobat Reader Windows installer for owner-specified build AdobeReader 26.00221.901; Windows .exe or .msi, not AdobeReader2600221901.dmg",
-      "observed_root_download": "AdobeReader2600221901.dmg.crdownload",
+      "required": "Official Windows .exe or .msi installer for AdobeReader 26.00221.901; the macOS AdobeReader2600221901.dmg is not usable in Wine",
       "wine_prefix_touched": false,
       "display_used": null
     },
-    "PDFKit": "kit not prepared; execution deferred to R3"
+    "PDFKit": {
+      "status": "KIT PREPARED; execution deferred to R3",
+      "path": "qualification/font04/pdfkit/"
+    }
   },
+  "tests": {
+    "schema": "font04-R1-tests-v1",
+    "qualified_runtime_build": "a0584c8dac8ec9d1698bc7d79a240f270a02b976",
+    "product_head": "3fcd4ea60aceae6336754ad212d5bd7744344c72",
+    "runtime_sources_equal_to_qualified_build": true,
+    "workspace": {
+      "status": "PASS",
+      "passed": 151,
+      "failed": 0,
+      "ignored": 1,
+      "log": "qualification/font04/local/R1-workspace-tests.log",
+      "note": "Financial default golden test is deliberately ignored in ordinary CI and was run explicitly below; subsequent two stage/serialization integration tests also passed."
+    },
+    "latest_native_integration": {
+      "status": "PASS",
+      "passed": 6,
+      "log": "qualification/font04/local/R1-native-tests.log",
+      "regression_cases": 23,
+      "source_frame_trace_cases": 8
+    },
+    "research_oracle": {
+      "status": "PASS",
+      "tests": 2,
+      "registered_regression_cases": 23
+    },
+    "financial_default_byte_identity": {
+      "status": "PASS",
+      "seconds": 495.66,
+      "expected_sha256": "74c31136d00a18dbf05fba2d7fba59c85cc201a57ae65d77999a025a692fab0f",
+      "actual_sha256": "74c31136d00a18dbf05fba2d7fba59c85cc201a57ae65d77999a025a692fab0f",
+      "log": "qualification/font04/local/R1-native/default-test.log"
+    },
+    "qpdf_OTS_all_final_outputs": "PASS",
+    "consumer_checks": "r1-compatibility.json",
+    "coverage": "r1-coverage.json",
+    "CI_Sonar": "Server analysis pending; no product PR opened; gates unchanged",
+    "P2_opened": false,
+    "R2_run": false
+  },
+  "coverage": {
+    "status": "PASS local added-line measurement",
+    "covered": 2094,
+    "total": 2203,
+    "percent": 95.05220154334998,
+    "sonar_minimum": 80,
+    "server_gate": "PENDING; no product PR opened",
+    "report": "qualification/font04/r1-coverage.json"
+  },
+  "implementation_issue_record": "qualification/font04/r1-implementation-issues.json",
+  "artifacts": "qualification/font04/r1-artifact-manifest.json",
+  "git_receipt": "qualification/font04/r1-git-receipt.json",
+  "P2_opened": false,
+  "R2_run": false,
   "product_PR_opened": false,
   "merged": false,
+  "PR24_changed": false,
   "thresholds_changed": false,
-  "security_findings_dismissed": false
+  "security_findings_dismissed": false,
+  "next_action": "STOP. Independent R1 acceptance is required before P2; no R2, product PR or merge in this task."
 }

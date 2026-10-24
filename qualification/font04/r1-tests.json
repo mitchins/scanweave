@@ -1,0 +1,39 @@
+{
+  "schema": "font04-R1-tests-v1",
+  "qualified_runtime_build": "a0584c8dac8ec9d1698bc7d79a240f270a02b976",
+  "product_head": "3fcd4ea60aceae6336754ad212d5bd7744344c72",
+  "runtime_sources_equal_to_qualified_build": true,
+  "workspace": {
+    "status": "PASS",
+    "passed": 151,
+    "failed": 0,
+    "ignored": 1,
+    "log": "qualification/font04/local/R1-workspace-tests.log",
+    "note": "Financial default golden test is deliberately ignored in ordinary CI and was run explicitly below; subsequent two stage/serialization integration tests also passed."
+  },
+  "latest_native_integration": {
+    "status": "PASS",
+    "passed": 6,
+    "log": "qualification/font04/local/R1-native-tests.log",
+    "regression_cases": 23,
+    "source_frame_trace_cases": 8
+  },
+  "research_oracle": {
+    "status": "PASS",
+    "tests": 2,
+    "registered_regression_cases": 23
+  },
+  "financial_default_byte_identity": {
+    "status": "PASS",
+    "seconds": 495.66,
+    "expected_sha256": "74c31136d00a18dbf05fba2d7fba59c85cc201a57ae65d77999a025a692fab0f",
+    "actual_sha256": "74c31136d00a18dbf05fba2d7fba59c85cc201a57ae65d77999a025a692fab0f",
+    "log": "qualification/font04/local/R1-native/default-test.log"
+  },
+  "qpdf_OTS_all_final_outputs": "PASS",
+  "consumer_checks": "r1-compatibility.json",
+  "coverage": "r1-coverage.json",
+  "CI_Sonar": "Server analysis pending; no product PR opened; gates unchanged",
+  "P2_opened": false,
+  "R2_run": false
+}

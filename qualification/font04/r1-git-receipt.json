@@ -1,0 +1,39 @@
+{
+  "schema": "font04-R1-git-receipt-v1",
+  "contract": "3610e009b89aa3a5f97aea65af6df87477295656",
+  "research_start_exactly_contract": true,
+  "research_ancestor_verified": true,
+  "research_head_before_checkpoint": "4c51ac53cace6d469c798b0353c1ca7b28cb838c",
+  "research_commits_before_checkpoint": [
+    "4c51ac53cace6d469c798b0353c1ca7b28cb838c FONT-04: complete frozen dependency inventory; P2 SHA-256 a4f9ccd3a7e51d719946be80f7cc9a297de7ca22285e8755e5e26e415e7db466",
+    "4bff243f9d0daf33ae6ec19057ea48b5873d2966 FONT-04: prepare owner PDFKit rendering and exact text check kit for R3",
+    "afe765ea770b28902a0fb99fdee7d815b8859d4b FONT-04: seal per-member research oracle and replay 23 safety regressions",
+    "5356255e14d713316b641607f093e64a44555a0d FONT-04: freeze accepted cover-2.0; P2 preregistration SHA-256 a4f9ccd3a7e51d719946be80f7cc9a297de7ca22285e8755e5e26e415e7db466"
+  ],
+  "all_intervening_research_commits_created_in_this_session": true,
+  "product_base": "c10e3dff93ca12ac410c0f6626a4ef74ce34e0c1",
+  "product_branch": "feat/glyph-sharing",
+  "product_head": "3fcd4ea60aceae6336754ad212d5bd7744344c72",
+  "qualified_runtime_build": "a0584c8dac8ec9d1698bc7d79a240f270a02b976",
+  "product_commits": [
+    "3fcd4ea60aceae6336754ad212d5bd7744344c72 Clarify pre-sharing page diagnostics and final sharing qualification metrics",
+    "76cacdb00cbc4e9cf949d2f8e2be9a5fec6ef0a1 Test independent hygiene and weight stages plus compiled-canonical scaling bounds",
+    "a0584c8dac8ec9d1698bc7d79a240f270a02b976 Retain default when an eligible label has no other safe source impression",
+    "bfd8193b56417b0b40d6e95bf85ef4d58f53a90b Run native sharing coverage with the existing hash-pinned PDFium test library",
+    "945a753e8bc08e2e497b763e09a9bb69175471d8 Match frozen transport with sparse draw-ordered CID maps and shared PDF widths",
+    "2045b1155a871adada1ce77e96dcd9382367b522 Preserve exact default raster choice and quantize canonical points before composite scaling",
+    "f2ce573527da8660c6e517bf3497c98a6d320751 Wire opt-in native glyph sharing with document economy fallback and end-to-end fixture",
+    "397347ba289377c8d6f79866de97436c6081301d Port frozen cover planner, source tracing, owned-ink preflight and composite transport to Rust",
+    "5bbca3d15012f938f06b24c141e865ae427f8a89 Add native frozen glyph-sharing safety primitives and 23 regression cases"
+  ],
+  "product_worktree": "/tmp/scanweave-font04-product",
+  "product_worktree_clean": true,
+  "runtime_sources_equal_to_qualified_build": true,
+  "publication": "This research receipt is published by the checkpoint commit containing this file.",
+  "explicit_path_staging_only": true,
+  "force_push": false,
+  "product_PR_opened": false,
+  "merged": false,
+  "PR24_changed": false,
+  "security_findings_dismissed": false
+}
