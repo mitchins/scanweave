@@ -1,0 +1,38 @@
+{
+ "judgments_sha256": "8d961953246050467183a5042b760928b67e6a0bb3d38d91c023a4fc959739d2",
+ "adjudication": "member grade = worst candidate grade across its two renderer panels",
+ "counts": {
+  "mixed:all": {
+   "indistinguishable": 324,
+   "minor": 2
+  },
+  "mixed:tail": {
+   "indistinguishable": 87,
+   "minor": 1
+  },
+  "financial:all": {
+   "indistinguishable": 255
+  },
+  "financial:tail": {
+   "indistinguishable": 88
+  }
+ },
+ "minor_members": [
+  {
+   "document": "mixed",
+   "member": 390,
+   "draw": 431
+  },
+  {
+   "document": "mixed",
+   "member": 518,
+   "draw": 595
+  }
+ ],
+ "rule1_mixed_material_rate": 0.0,
+ "rule2_tail_material_rates": {
+  "mixed": 0.0,
+  "financial": 0.0
+ },
+ "verdict": "tail immaterial; both rules pass"
+}
