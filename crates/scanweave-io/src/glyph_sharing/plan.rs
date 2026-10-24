@@ -23,6 +23,42 @@ pub struct Plan {
     pub hygiene: Vec<Vec<String>>,
 }
 
+// Each row keeps its original numerical evaluation order. Join contiguous row
+// chunks in input order, so scheduling never changes fitting or reduction order.
+fn ordered_rows<T: Send, F: Fn(usize) -> T + Sync>(n: usize, operation: F) -> Vec<T> {
+    if n == 0 {
+        return Vec::new();
+    }
+    let available = std::thread::available_parallelism().map_or(1, usize::from);
+    let requested = std::env::var("RAYON_NUM_THREADS")
+        .ok()
+        .and_then(|value| value.parse::<usize>().ok())
+        .filter(|&value| value > 0)
+        .unwrap_or(available.min(8));
+    let workers = requested.min(available).min(n);
+    if workers == 1 {
+        return (0..n).map(operation).collect();
+    }
+    let chunk = n.div_ceil(workers);
+    std::thread::scope(|scope| {
+        let operation = &operation;
+        let handles: Vec<_> = (0..n)
+            .step_by(chunk)
+            .map(|start| {
+                scope.spawn(move || {
+                    (start..(start + chunk).min(n))
+                        .map(operation)
+                        .collect::<Vec<_>>()
+                })
+            })
+            .collect();
+        handles
+            .into_iter()
+            .flat_map(|handle| handle.join().expect("sharing row worker panicked"))
+            .collect()
+    })
+}
+
 /// Compute all frozen stages through cover grouping. Ownership must be checked
 /// against raw source and default emission before these groups can be emitted.
 pub fn plan(
@@ -56,14 +92,13 @@ pub fn plan(
     let bands: Vec<i32> = fields.iter().map(|f| weight_band(f)).collect();
     stage_seconds.insert("planning_prepare".into(), stage.elapsed().as_secs_f64());
     let stage = std::time::Instant::now();
-    let mut fits = Vec::new();
-    let mut by_member: Vec<Vec<usize>> = vec![Vec::new(); n];
-    for i in 0..n {
+    let fitted_rows = ordered_rows(n, |i| {
+        let mut row_fits = Vec::new();
         if i % 100 == 0 {
             eprintln!("scanweave: glyph sharing fitting {i}/{n}");
         }
         if fields[i].iter().sum::<f64>() <= 0. {
-            continue;
+            return row_fits;
         }
         let indices = &labels[rows[i].label.as_str()];
         let mut nearest: Vec<(f64, usize)> = indices
@@ -89,8 +124,7 @@ pub fn plan(
             let (p, aligned) = register(&fields[i], candidates[j].as_ref().unwrap());
             let error = mse(&fields[i], &aligned);
             let reasons = hard_checks(&fields[i], &aligned);
-            by_member[i].push(fits.len());
-            fits.push(Fit {
+            row_fits.push(Fit {
                 member: i,
                 canonical: j,
                 error,
@@ -98,6 +132,13 @@ pub fn plan(
                 parameters: p,
             });
         }
+        row_fits
+    });
+    let mut fits = Vec::new();
+    let mut by_member = Vec::with_capacity(n);
+    for row in fitted_rows {
+        by_member.push((fits.len()..fits.len() + row.len()).collect::<Vec<_>>());
+        fits.extend(row);
     }
     stage_seconds.insert(
         "planning_candidate_fits".into(),
@@ -105,8 +146,7 @@ pub fn plan(
     );
     let stage = std::time::Instant::now();
     eprintln!("scanweave: glyph sharing source variation estimates");
-    let mut original_floors = vec![None; n];
-    for i in 0..n {
+    let original_floors = ordered_rows(n, |i| {
         let mut ordered = by_member[i].clone();
         ordered.sort_by(|&a, &b| {
             fits[a]
@@ -129,15 +169,11 @@ pub fn plan(
                 break;
             }
         }
-        if values.len() >= 2 {
-            original_floors[i] = Some(quantile(&values, 0.85));
-        }
-    }
-    let mut floors = vec![0.; n];
-    for i in 0..n {
+        (values.len() >= 2).then(|| quantile(&values, 0.85))
+    });
+    let floors = ordered_rows(n, |i| {
         if let Some(level) = original_floors[i] {
-            floors[i] = level;
-            continue;
+            return level;
         }
         let peers: Vec<f64> = labels[rows[i].label.as_str()]
             .iter()
@@ -145,8 +181,7 @@ pub fn plan(
             .filter_map(|&j| original_floors[j])
             .collect();
         if !peers.is_empty() {
-            floors[i] = quantile(&peers, 0.5);
-            continue;
+            return quantile(&peers, 0.5);
         }
         let available: Vec<usize> = labels[rows[i].label.as_str()]
             .iter()
@@ -186,47 +221,45 @@ pub fn plan(
             // No other source impression exists in this eligible label. No
             // directed two-member group can form; retain default. Zero is an
             // unused diagnostic sentinel, never an admission estimate.
-            floors[i] = 0.;
-            continue;
+            return 0.;
         }
-        floors[i] = quantile(&values, 0.85);
-    }
+        quantile(&values, 0.85)
+    });
     stage_seconds.insert(
         "planning_source_floors".into(),
         stage.elapsed().as_secs_f64(),
     );
     let stage = std::time::Instant::now();
-    for i in 0..n {
-        if let Some(c) = &candidates[i] {
+    let self_fits = ordered_rows(n, |i| {
+        candidates[i].as_ref().map(|c| {
             let (p, aligned) = register(&fields[i], c);
-            fits.push(Fit {
+            Fit {
                 member: i,
                 canonical: i,
                 error: mse(&fields[i], &aligned),
                 reasons: hard_checks(&fields[i], &aligned),
                 parameters: p,
-            });
-        }
-    }
+            }
+        })
+    });
+    fits.extend(self_fits.into_iter().flatten());
     stage_seconds.insert("planning_self_fits".into(), stage.elapsed().as_secs_f64());
     let stage = std::time::Instant::now();
     eprintln!("scanweave: glyph sharing canonical hygiene");
-    let screens: Vec<Vec<String>> = (0..n)
-        .map(|j| {
-            if let Some(c) = &candidates[j] {
-                let independent: Vec<&[f64]> = labels[rows[j].label.as_str()]
-                    .iter()
-                    .filter(|&&i| {
-                        rows[i].shape_key != rows[j].shape_key && fields[i].iter().sum::<f64>() > 0.
-                    })
-                    .map(|&i| fields[i].as_slice())
-                    .collect();
-                hygiene(c, &independent)
-            } else {
-                vec!["no_trace".into()]
-            }
-        })
-        .collect();
+    let screens: Vec<Vec<String>> = ordered_rows(n, |j| {
+        if let Some(c) = &candidates[j] {
+            let independent: Vec<&[f64]> = labels[rows[j].label.as_str()]
+                .iter()
+                .filter(|&&i| {
+                    rows[i].shape_key != rows[j].shape_key && fields[i].iter().sum::<f64>() > 0.
+                })
+                .map(|&i| fields[i].as_slice())
+                .collect();
+            hygiene(c, &independent)
+        } else {
+            vec!["no_trace".into()]
+        }
+    });
     stage_seconds.insert("planning_hygiene".into(), stage.elapsed().as_secs_f64());
     let stage = std::time::Instant::now();
     let ranked: Vec<Member> = rows
