@@ -36,6 +36,17 @@ def runs(directory):
             assert row['returncode'] == 0 and row['byte_identical_to_baseline']
             assert row['binary_sha256'] == expected_binary and row['pdfium_library_sha256'] == pinned_pdfium
             assert row['sha256'] == sha(stem.with_suffix('.pdf')) == row['expected_sha256']
+            if row['mode'] != 'off':
+                baseline_report = LOCAL/f"baseline/{group}-{row['mode']}.pdf.json"
+                if row['mode'] == 'cover-1.5':
+                    baseline_report = BASE/'local/R1-native/cover-1.5.pdf.json'
+                old = load(baseline_report)['conversion']['glyph_sharing']
+                current = load(Path(str(stem)+'.json'))['conversion']['glyph_sharing']
+                frozen = ('method','multiplier','net_retirement_rule','fallback','proposed_members','substituted',
+                          'retired_outlines','added_canonicals','net_outlines_retired','encoded_font_bytes_before',
+                          'encoded_font_bytes_after','zero_credit_groups','decisions','owned_exceptions')
+                assert all(old[k] == current[k] for k in frozen), ('STOP: frozen decision change', stem)
+                row['frozen_decisions_identical_to_baseline'] = True
             timing = stem.with_suffix('.time').read_text()
             row['peak_rss_kib'] = int(next(line.split(':',1)[1] for line in timing.splitlines() if 'Maximum resident set size (kbytes)' in line))
             result[group][label] = row
@@ -65,6 +76,10 @@ def main():
     assert blind['random_accepted'] >= 300 and blind['total_rejected'] >= 150
     judgments = load(public/'judgments-template.json')['judgments']
     assert len(judgments) == len(panels) and all(all(p[k] is None for k in ('A','B','C')) for p in judgments)
+    structure = load(BASE/'r2a-blind-structure.json')
+    assert structure['sealed_review_qpdf'] == 'PASS' and len(structure['counterfactual_fonts']) == 26
+    assert all(f['OTS'] == 'PASS' for f in structure['counterfactual_fonts'])
+    assert structure['sealed_review_sha256'] == blind['receipt']['review_sha256']
     save = load(BASE/'r2a-save-controls.json')
     corpus = load(BASE/'r2a-partial-corpus.json')
     aggregates = {'metrics': ([],[]), 'context-metrics': ([],[])}
@@ -98,7 +113,7 @@ def main():
         optimization='Independent row workers; unchanged numerical evaluation order within each row; ordered joins before reductions',
         profiling_limit='Reporting and byte-qualification runs overlapped other qualification jobs; final paired runs are serial with no other FONT-04 jobs.',
         rss_definition='GNU time -v Maximum resident set size in KiB; maximum for a run, not a sum across documents or processes',
-        stage_definition='stage_timings are pipeline milliseconds; sharing_stage_seconds are seconds. planning_* are nested within planning, and sharing stages within sharing_total; do not sum nested timings.',
+        stage_definition='stage_timings are pipeline milliseconds; sharing_stage_seconds are seconds. planning_* are nested within planning. sharing_total excludes source_snapshot: source_snapshot falls in remaining_pipeline_ms, while sharing_total falls in reconstruction_pdf_ms. Other sharing substages are nested within sharing_total. Do not sum overlapping timings.',
         all_outputs_byte_identical=True)
     financial_default = paired['financial']['off']['wall_seconds']
     financial_sharing = paired['financial']['cover-2.0']['wall_seconds']
@@ -119,7 +134,7 @@ def main():
     checkpoint['materiality'] = dict(status='UNKNOWN: independent blind grading pending',materially_worse_rate=None,
         decision_rule='4. **Decision rule, fixed now, before grading.**'+rule)
     artifacts = ['r2a-baseline.json','r2a-partial-corpus.json','r2a-corpus.json','r2a-profile.json',
-        'r2a-save-controls.json','r2a-financial-fidelity.json','r2a-blind-review.json','r2a-binding-evidence.json','R2A_BLIND_README.md']
+        'r2a-save-controls.json','r2a-reporting-goldens.json','r2a-financial-fidelity.json','r2a-blind-review.json','r2a-binding-evidence.json','r2a-blind-structure.json','R2A_BLIND_README.md']
     checkpoint['artifacts'] = [dict(path=str((BASE/name).relative_to(ROOT)),sha256=sha(BASE/name)) for name in artifacts]
     dump(BASE/'checkpoint-R2a.json',checkpoint)
     write_results(corpus,checkpoint)
@@ -132,7 +147,7 @@ def write_results(corpus,checkpoint):
     lines = ['## Checkpoint R2a','',
         '**STOP for independent sealed blind review. Evidence gathering is complete; materiality remains unknown.**',
         'The stop decision `dc0849b` and R1 acceptance `fa8a08b` were verified and read. The method stayed frozen: no threshold, floor, scale-bound, guard or membership changes; member 518 was not fixed.', '',
-        f"Product `{checkpoint['product_commit']}` on `feat/glyph-sharing` adds ordered planner-row workers with serial numerical evaluation inside each row and ordered joins. Reporting-build financial default, cover-2.0 and cover-1.5 reruns reproduce `74c31136…`, `b007a27d…` and `dbdf30d3…`. Every corpus output, both financial sharing arms, final paired runs and repeats are byte-identical to their baselines. Five native unit tests and six integration tests pass, including the 23 regression cases. The changed Rust file passes rustfmt; the full workspace check reports pre-existing formatting differences outside this change.", '',
+        f"Product `{checkpoint['product_commit']}` on `feat/glyph-sharing` adds ordered planner-row workers with serial numerical evaluation inside each row and ordered joins. Reporting-build financial default, cover-2.0 and cover-1.5 reruns reproduce `74c31136…`, `b007a27d…` and `dbdf30d3…`. Every corpus output, both financial sharing arms, final paired runs and repeats are byte-identical to their baselines. Sharing decision ledgers also match exactly, including transforms, floors, reasons, guards and economy. Five native unit tests and six integration tests pass, including the 23 regression cases. The changed Rust file passes rustfmt; the full workspace check reports pre-existing formatting differences outside this change.", '',
         'All runs use pinned PDFium chromium/8100, SHA-256 `b8784cbd652ad2993332b7695e2c80f3a797f877fc47d9be97b66bca9639539e`. Its canonical loaded path and SHA-256 are reported; the runtime exposes no version query.', '',
         '| Document | Font B default → sharing | Retired / added / net | PDF B default → sharing | Saving vs save-only B |',
         '|---|---:|---:|---:|---:|']
