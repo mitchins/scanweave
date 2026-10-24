@@ -25,6 +25,16 @@ from qualification.font04.r1_class_metrics import crop_render
 CONTEXT = None
 
 
+def load_snapshot(path):
+    snapshot = json.loads(path.read_text())
+    native = path.with_name('native-bindings.json')
+    if native.exists():
+        bindings = {(r['page'], r['occurrence']): r for r in json.loads(native.read_text())}
+        for row in snapshot['rows']:
+            row['_native_binding'] = bindings[row['page'], row['occurrence']]
+    return snapshot
+
+
 def bind(rows, inventory, geometry):
     """Bind by native f32 placement origin and label; require a bijection.
 
@@ -49,7 +59,10 @@ def bind(rows, inventory, geometry):
         tx = f(f(a*x)-f(f(shape['anchor'][0])*sx)/f(2048))
         ty = f(f(g['height_pt']-d*yy)-f(f(shape['anchor'][1])*sy)/f(2048))
         expected = [sx, 0, 0, sy, tx, ty]
-        matches = [(i, draw) for i, draw in enumerate(inventory['draws']) if i not in used and draw['page'] == row['page'] and draw['character'] == row['character'] and np.allclose(draw['matrix'][4:], expected[4:], rtol=1e-6, atol=1e-4)]
+        native = row.get('_native_binding')
+        matches = [(i, draw) for i, draw in enumerate(inventory['draws']) if i not in used and draw['page'] == row['page'] and draw['character'] == row['character'] and (
+            draw['cid'] == native['cid'] and np.allclose(draw['matrix'], native['matrix'], rtol=1e-6, atol=1e-4)
+            if native else np.allclose(draw['matrix'][4:], expected[4:], rtol=1e-6, atol=1e-4))]
         assert len(matches) == 1, ('ambiguous native placement', row['index'], len(matches), expected)
         i, draw = matches[0]
         used.add(i)
@@ -161,7 +174,7 @@ def summaries(records, floors):
 
 def main(default, candidate, source, directory):
     directory.mkdir(parents=True, exist_ok=True)
-    snapshot = json.loads(source.read_text())
+    snapshot = load_snapshot(source)
     bindings = isolate(default, candidate, snapshot, directory)
     rows = snapshot['rows']
     report = json.loads(Path(str(candidate)+'.json').read_text())['conversion']['glyph_sharing']

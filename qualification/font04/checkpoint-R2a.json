@@ -1,6 +1,6 @@
 {
   "schema": "font04-checkpoint-R2a-v1",
-  "status": "STOP-CORPUS-DEFECT; independent review required",
+  "status": "RESUMED: evidence gathering only; frozen method; independent blind review pending",
   "checkpoint_R2a_reached": false,
   "qualification_complete": false,
   "reviewer_pending": true,
@@ -21,7 +21,8 @@
     "description": "The accepted w in with becomes 10.14% narrower and 8.61% shorter at unchanged text placement; visible in both renderers. Analytic source error rises 0.01893446 to 0.13930203 against a 0.00242792 independent outline floor.",
     "present_in_accepted_R1_baseline": true,
     "introduced_by_optimization": false,
-    "evidence": "qualification/font04/r2a-stop-evidence/case.json"
+    "evidence": "qualification/font04/r2a-stop-evidence/case.json",
+    "disposition": "Stop independently upheld; materiality deferred to sealed blind review under dc0849b."
   },
   "completed": {
     "pdfium_identity_reporting": true,
@@ -82,7 +83,7 @@
     "patch": "qualification/font04/local/R2a/unqualified-ordered-rows.patch"
   },
   "blind_review": {
-    "status": "NOT SEALED: qualification stopped on concrete accepted-member defect",
+    "status": "IN PREPARATION: exhaustive mixed substitutions plus matched isolated-error tails; materiality unknown",
     "key_generated": false,
     "diagnostic_images_unblinded": true
   },
@@ -101,7 +102,7 @@
   "PR25_changed": false,
   "thresholds_changed": false,
   "safeguards_weakened": false,
-  "next_action": "STOP. Independent review/owner decision on the corpus defect is required; do not tune or resume qualification automatically.",
+  "next_action": "Complete remaining evidence under dc0849b; member 518 is a registered fixture and does not retrigger the stop. Stop for any new concrete problem of a different kind.",
   "artifacts": [
     {
       "path": "qualification/font04/r2a-baseline.json",
@@ -135,5 +136,8 @@
       "path": "qualification/font04/r2a-stop-evidence/mixed-worst-delta.png",
       "sha256": "4f92a51b9ef174844ed59e5b8d9048ce96e41684df2453be869efd8ffe071045"
     }
-  ]
+  ],
+  "review_stop_decision_commit": "dc0849b",
+  "review_stop_decision_present": true,
+  "method_frozen": true
 }

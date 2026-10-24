@@ -44,6 +44,11 @@ def prepare(checkout):
 '''
     assert needle in text
     doc.write_text(text.replace(needle, hook+needle, 1))
+    text = doc.read_text()
+    needle = '    stage_timings.document_font_union_ms = stage_start.elapsed().as_millis();'
+    hook = '    if let Some(directory) = std::env::var_os("FONT04_R2A_EXPORT") {\n        let mut bindings = Vec::new();\n        for (pi, page) in pages.iter().enumerate() {\n            for (oi, o) in page.parts.occurrences.iter().enumerate() {\n                bindings.push(serde_json::json!({"page":pi,"occurrence":oi,"cid":o.1+1,\n                    "matrix":crate::glyph_sharing::ownership::default_matrix(&page.parts,&shapes[o.0],o.2)}));\n            }\n        }\n        std::fs::write(std::path::Path::new(&directory).join("native-bindings.json"),serde_json::to_vec(&bindings).unwrap()).map_err(|e|e.to_string())?;\n    }\n'
+    assert needle in text
+    doc.write_text(text.replace(needle, hook+needle, 1))
     plan = src/'glyph_sharing/plan.rs'
     text = plan.read_text()
     needle = '    Ok(Plan {'
