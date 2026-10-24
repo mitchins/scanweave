@@ -166,7 +166,7 @@ pub fn build(
             advance: hmtx
                 .advance(GlyphId::new(instance.original_gid as u32))
                 .ok_or("missing original advance")?,
-            side_bearing: bbox.x0.round() as i16,
+            side_bearing: glyph.bbox.x_min,
         });
     }
     let (glyf, loca, format) = builder.build();

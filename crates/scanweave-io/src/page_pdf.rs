@@ -1992,6 +1992,6 @@ fn select_sharing_font(c:&mut Content,occurrence:usize,variants:Option<&[Option<
     if let Some(variants)=variants {if let Some(index)=variants[occurrence]{let name=format!("F04V{index}");c.set_font(Name(name.as_bytes()),1.);}else{c.set_font(Name(b"F1"),1.);}}
 }
 pub(crate) fn assemble_document_with_sharing(pages:&[PageParts],shapes:&[GlyphShape],encodings:&[(usize,String)],font_bytes:&[u8],image_options:ImageEncodingOptions,tonal:bool,sharing:&SharingResources)->Result<(Vec<u8>,AssemblyStats),String>{
-    if sharing.occurrence_variants.len()!=pages.len()||pages.iter().zip(&sharing.occurrence_variants).any(|(p,v)|p.occurrences.len()!=v.len())||sharing.cid_maps.is_empty(){return Err("invalid sharing resource dimensions".into());}
+    if sharing.occurrence_variants.len()!=pages.len()||pages.iter().zip(&sharing.occurrence_variants).any(|(p,v)|p.occurrences.len()!=v.len())||sharing.cid_maps.is_empty()||sharing.cid_maps.iter().any(|m|m.len()!=2*(encodings.len()+1))||sharing.occurrence_variants.iter().flatten().flatten().any(|&v|v==0||v>=sharing.cid_maps.len()){return Err("invalid sharing resource dimensions".into());}
     assemble_document_impl(pages,shapes,encodings,font_bytes,image_options,tonal,Some(sharing))
 }

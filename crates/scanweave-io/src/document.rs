@@ -72,6 +72,8 @@ pub struct DocumentReport {
     pub ownership_invariants: std::collections::BTreeMap<String, bool>,
     /// sha256 of every source asset and OCR page (binding, per page)
     pub bindings: Vec<PageBinding>,
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub glyph_sharing:Option<crate::glyph_sharing::transport::SharingReport>,
 }
 
 #[derive(Debug, Clone, Default, serde::Serialize)]
@@ -308,6 +310,15 @@ pub fn convert_document_with_sources(
     policy: &Policy,
     sources: &[Option<crate::source_image::EncodedSourceImage>],
 ) -> Result<DocumentOutput, String> {
+    convert_document_with_sources_and_sharing(document_id,inputs,policy,sources,None)
+}
+
+/// Opt-in frozen native glyph sharing. None retains the default conversion path.
+pub fn convert_document_with_sources_and_sharing(
+    document_id:&str,inputs:&[Input],policy:&Policy,
+    sources:&[Option<crate::source_image::EncodedSourceImage>],sharing:Option<f64>,
+)->Result<DocumentOutput,String>{
+    if sharing.is_some() && policy.profile != "clearscan" {return Err("glyph sharing requires ClearScan".into());}
     let mut effective_policy = policy.clone();
     if policy.profile == "clearscan" && policy.image_encoding.predictor == 1 {
         effective_policy.image_encoding.predictor = 0;
@@ -421,6 +432,8 @@ pub fn convert_document_with_sources(
     }
     stage_timings.page_conversion_ms = stage_start.elapsed().as_millis();
 
+    let observations=sharing.map(|_|crate::glyph_sharing::source::snapshot(&pages,&all_donors));
+
     // 2. document-wide font: union of (shape, label), remapped per page
     let stage_start = std::time::Instant::now();
     let (mut shapes, mut encodings, remaps) = union_encodings(&pages);
@@ -433,7 +446,7 @@ pub fn convert_document_with_sources(
     }
     stage_timings.document_font_union_ms = stage_start.elapsed().as_millis();
     let stage_start = std::time::Instant::now();
-    let font_bytes = if policy.profile == "clearscan" {
+    let mut font_bytes = if policy.profile == "clearscan" {
         build_font_with_bounds(&shapes, &encodings, policy.upem, design_bounds)?
     } else {
         build_font(&shapes, &encodings, policy.upem)?
@@ -448,13 +461,21 @@ pub fn convert_document_with_sources(
     let assemble = if tonal_document {
         crate::page_pdf::assemble_document_with_tonal_fallback
     } else {crate::page_pdf::assemble_document_with_options};
-    let (pdf_bytes, stats) = assemble(
+    let (mut pdf_bytes, mut stats) = assemble(
         &pages.iter().map(|p| p.parts.clone()).collect::<Vec<_>>(),
         &shapes,
         &encodings,
         &font_bytes,
         policy.image_encoding,
     )?;
+    let baseline_font=sharing.map(|_|font_bytes.clone());
+    let mut sharing_report=None;
+    if let (Some(multiplier),Some(rows))=(sharing,observations.as_ref()) {
+        let parts:Vec<_>=pages.iter().map(|p|p.parts.clone()).collect();
+        let(candidate,report)=crate::glyph_sharing::transport::share(rows,&parts,&shapes,&encodings,&font_bytes,policy.image_encoding,tonal_document,multiplier)?;
+        if let Some(candidate)=candidate {font_bytes=candidate.font;pdf_bytes=candidate.pdf;stats=candidate.stats;}
+        sharing_report=Some(report);
+    }
     stage_timings.reconstruction_pdf_ms = stage_start.elapsed().as_millis();
 
     // 4. the whole-page searchable raster baseline candidate (auto mode ranks
@@ -479,7 +500,7 @@ pub fn convert_document_with_sources(
         &baseline_parts,
         &shapes,
         &encodings,
-        &font_bytes,
+        baseline_font.as_deref().unwrap_or(&font_bytes),
         policy.image_encoding,
     )?;
     stage_timings.raster_baseline_pdf_ms = stage_start.elapsed().as_millis();
@@ -623,7 +644,7 @@ pub fn convert_document_with_sources(
     stage_timings.remaining_pipeline_ms = stage_timings.total_ms.saturating_sub(measured);
     Ok(DocumentOutput {
         pdf_bytes: out_bytes.clone(),
-        font_bytes: font_bytes.clone(),
+        font_bytes: if selected=="raster_baseline" {baseline_font.unwrap_or_else(||font_bytes.clone())}else{font_bytes.clone()},
         raster_baseline_pdf_bytes: baseline_pdf.clone(),
         report: DocumentReport {
             document_id: document_id.to_string(),
@@ -685,6 +706,7 @@ pub fn convert_document_with_sources(
             search,
             ownership_invariants,
             bindings: Vec::new(),
+            glyph_sharing:sharing_report,
         },
     })
 }

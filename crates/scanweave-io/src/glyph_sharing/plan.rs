@@ -54,6 +54,9 @@ pub fn plan(
     let mut fits = Vec::new();
     let mut by_member: Vec<Vec<usize>> = vec![Vec::new(); n];
     for i in 0..n {
+        if i % 100 == 0 {
+            eprintln!("scanweave: glyph sharing fitting {i}/{n}");
+        }
         if fields[i].iter().sum::<f64>() <= 0. {
             continue;
         }
@@ -91,6 +94,7 @@ pub fn plan(
             });
         }
     }
+    eprintln!("scanweave: glyph sharing source variation estimates");
     let mut original_floors = vec![None; n];
     for i in 0..n {
         let mut ordered = by_member[i].clone();
@@ -185,6 +189,7 @@ pub fn plan(
             });
         }
     }
+    eprintln!("scanweave: glyph sharing canonical hygiene");
     let screens: Vec<Vec<String>> = (0..n)
         .map(|j| {
             if let Some(c) = &candidates[j] {
