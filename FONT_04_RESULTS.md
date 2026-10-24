@@ -418,3 +418,34 @@ hashes and output paths were taken from the public reporting receipt without
 accessing R2a local directories. The R2a blind package/key, Acrobat XI prefix,
 and display :99 were untouched. P2 was not opened, generated or rendered.
 No product code, PR or merge action. **STOP.**
+
+## Review package fix
+
+R2a remains accepted. The repair changes only the review harness. The new package is
+`qualification/font04/local/R2a/blind-review-v2/`, with a separate new seal/key;
+the original package and seal are preserved. P2 remains unopened.
+
+The cause was pikepdf's memoized `copy_foreign` import: installing the reduced
+counterfactual font also replaced the copied page's `/F1` font and CID-to-GID map.
+The generator now clones the probe font dictionary first, preserving the full
+default page context. This also explains mixed member 36's “but” → “bor”: the
+target and canonical are both **b**; the neighboring **u** and **t** were rendered
+through unrelated probe GIDs. Both neighbors now match current pixels in both
+renderers. The decoded key puts all 30 reported black/collage “references” in
+**candidate** arms; their actual source arms match raw scan crops exactly.
+
+Source remains the raw matched scan crop, retaining every word glyph rather than
+an isolated ownership layer. All arms now render full pages before cropping;
+Poppler region rendering introduced unrelated antialias changes. Candidate
+presentation preserves current pixels outside the target bounds plus 2 px
+(the union of member windows for repeated words). The package records the 4,043
+restored context pixels across 64 panels; canonical fonts and transforms are unchanged.
+
+Three generator regressions pass. All **1,628 panels / 4,884 arms** pass validation:
+maximum black coverage **28.2%**, **zero** changed pixels outside target windows,
+and ink in all **7,754** checked source glyph boxes. Existing product PDF hashes
+match accepted R2a evidence. No product code, method, threshold, or product PDF
+changed; no product PR or merge.
+
+Receipt and reproducible audit: [r2a-package-fix.json](qualification/font04/r2a-package-fix.json)
+and [r2a_package_fix.py](qualification/font04/r2a_package_fix.py). **STOP.**

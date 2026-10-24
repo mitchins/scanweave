@@ -19,6 +19,12 @@ def render_sheet(task):
 
 def main(staging,directory,keypath):
     assert not directory.exists() and not keypath.exists(), 'Never overwrite a sealed review'
+    # Real corpus exports must pass pixel checks before any public package/key
+    # is created. Small synthetic sealer smoke tests have no selection manifest.
+    if (staging/'selection.json').exists():
+        from qualification.font04.r2a_package_checks import validate
+        validation = validate(staging, Path(__file__).resolve().parent/'local/R2a/export')
+        assert validation['pass_all'], 'Review pixel invariants failed; see pixel-validation.json'
     directory.mkdir(mode=0o755,parents=True);assets=directory/'assets';assets.mkdir();keypath.parent.mkdir(mode=0o700,parents=True,exist_ok=True);metadata=json.loads((staging/'panels.json').read_text());secrets.SystemRandom().shuffle(metadata);key={};panels=[]
     for p in metadata:
         token='panel-'+secrets.token_hex(10)

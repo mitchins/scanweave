@@ -10,15 +10,13 @@ import sys
 
 import numpy as np
 import pikepdf
-import pypdfium2 as pdfium
 from PIL import Image
 
 from qualification.font04.context_instances import contextual_instances
 from qualification.font04.context_proposals import draw_key
 from qualification.font04.metrics import inspect, render, sha
-from qualification.font04.r1_class_metrics import crop_render
 from qualification.font04.r2a_metrics import bind, load_snapshot
-from qualification.font04.geometry import warp
+from qualification.font04.r2a_package_checks import candidate_arm
 
 ROOT = Path(__file__).resolve().parents[2]
 LOCAL = ROOT/'qualification/font04/local/R2a'
@@ -77,7 +75,11 @@ def rejected_context(default, destination, rows, bindings, observations, pairs, 
     result = {}
     with pikepdf.open(default) as original:
         pdf = pikepdf.Pdf.new()
-        parent = pdf.copy_foreign(original.pages[0].Resources.Font.F1)
+        # copy_foreign caches imports: mutating that object also changes /F1
+        # on every subsequently imported page. Clone the font dictionary before
+        # installing the reduced counterfactual program and Identity GID map.
+        imported = pdf.copy_foreign(original.pages[0].Resources.Font.F1)
+        parent = pdf.make_indirect(pikepdf.Dictionary(imported))
         child = pikepdf.Dictionary(parent.DescendantFonts[0])
         descriptor = pikepdf.Dictionary(child.FontDescriptor)
         descriptor.FontFile2 = pdf.make_stream(newfont.read_bytes())
@@ -110,6 +112,13 @@ def rejected_context(default, destination, rows, bindings, observations, pairs, 
     return result
 
 
+def context_crop(path, page, crop, engine):
+    # Poppler region rendering changes antialias phase outside the target.
+    # Render all arms as complete pages, then take the identical bitmap crop.
+    x, y, xx, yy = crop
+    return render(path, page, 300, engine)[y:yy, x:xx]
+
+
 def bounds(row, rows):
     # Native span IDs identify the OCR word, including all its visible draws.
     word = [r for r in rows if (r['page'], r['span_id']) == (row['page'], row['span_id'])]
@@ -132,9 +141,9 @@ def worse_draws(group):
 
 
 def main(final):
-    staging = LOCAL/'blind-private-staging'
-    public = LOCAL/'blind-review'
-    key = LOCAL/'blind-private/sealed-key.json'
+    staging = LOCAL/'blind-private-staging-v2'
+    public = LOCAL/'blind-review-v2'
+    key = LOCAL/'blind-private-v2/sealed-key.json'
     assert not staging.exists() and not public.exists() and not key.exists(),'Never overwrite a sealed review'
     staging.mkdir(mode=0o700)
     (staging/'assets').mkdir()
@@ -227,23 +236,24 @@ def main(final):
             contexts.append(('registered-regression-fixture',path,mapping,dict(case_index=case_index,source=case['source'],member=case['member'],canonical=case['canonical'],native_member=member,native_canonical=canonical,parameters=case['parameters'])))
         cache = {}
         for engine in ('pdfium','poppler'):
+            # The frozen image-only matched input is the raw scan, not the
+            # compositor's isolated ownership layer or knocked-out background.
             for name,path in [('source',ROOT/f'qualification/pdf_packaging/groups/{group}-input.pdf'),('current',item['default'])]:
                 for pi in range(len(json.loads(Path(str(item['default'])+'.json').read_text())['pages'])):
                     cache[engine,name,pi] = render(path,pi,300,engine)
         for kind,path,mapping,registered_case in contexts:
-            doc = pdfium.PdfDocument(path)
             for i,page in mapping.items():
                 row = rows[i]
                 x,y,xx,yy = crop = bounds(row, rows)
                 for engine in ('pdfium','poppler'):
                     asset = f'item{len(metadata):06}'
                     arrays = {name:cache[engine,name,row['page']][y:yy,x:xx] for name in ('source','current')}
-                    arrays['candidate'] = np.rint((1-crop_render(path,doc,page,crop,engine))*255).astype('uint8')
+                    proposed = context_crop(path, page, crop, engine)
+                    arrays['candidate'], presentation = candidate_arm(arrays['current'], proposed, crop, [row])
                     assert len({a.shape for a in arrays.values()})==1
                     for name,array in arrays.items():Image.fromarray(array).save(staging/'assets'/f'{asset}-{name}.png')
-                    metadata.append(dict(asset=asset,document=group,draw=i,member=next((o['member'] for o in obs if (o['page'],o['occurrence'])==(row['page'],row['occurrence'])),None),type=kind,registered_case=registered_case,renderer=engine,page=row['page'],bounds=crop,cross_style_probe=i in {lookup[obs[k]['page'],obs[k]['occurrence']] for k in cross},identical_default_context=True,tail_stratum=i in tail,registered_member518=group=='mixed' and i==lookup[obs[518]['page'],obs[518]['occurrence']],registered_fixture=group=='financial' and any(i==lookup[obs[k]['page'],obs[k]['occurrence']] for k in fixture_members)))
-            doc.close()
-        # Repeated words are complete final-output crops, not isolated letters.
+                    metadata.append(dict(asset=asset,presentation=presentation,document=group,draw=i,member=next((o['member'] for o in obs if (o['page'],o['occurrence'])==(row['page'],row['occurrence'])),None),type=kind,registered_case=registered_case,renderer=engine,page=row['page'],bounds=crop,cross_style_probe=i in {lookup[obs[k]['page'],obs[k]['occurrence']] for k in cross},identical_default_context=True,tail_stratum=i in tail,registered_member518=group=='mixed' and i==lookup[obs[518]['page'],obs[518]['occurrence']],registered_fixture=group=='financial' and any(i==lookup[obs[k]['page'],obs[k]['occurrence']] for k in fixture_members)))
+        # Show complete word proposals in the same default surrounding context.
         spans = defaultdict(list)
         for i,row in enumerate(rows):spans[row['page'],row['span_id']].append(i)
         words = defaultdict(list)
@@ -259,21 +269,22 @@ def main(final):
                 for engine in ('pdfium','poppler'):
                     asset = f'item{len(metadata):06}'
                     arrays = {name:cache[engine,name,row['page']][y:yy,x:xx] for name in ('source','current')}
-                    arrays['candidate'] = render(item['candidate'],row['page'],300,engine)[y:yy,x:xx]
+                    proposed = render(item['candidate'],row['page'],300,engine)[y:yy,x:xx]
+                    arrays['candidate'], presentation = candidate_arm(arrays['current'], proposed, [x,y,xx,yy], [rows[i] for i in ids])
                     for name,array in arrays.items():Image.fromarray(array).save(staging/'assets'/f'{asset}-{name}.png')
-                    metadata.append(dict(asset=asset,document=group,type='repeated-word',word=word,draws=ids,renderer=engine,page=row['page']))
+                    metadata.append(dict(asset=asset,presentation=presentation,document=group,type='repeated-word',word=word,draws=ids,renderer=engine,page=row['page'],bounds=[x,y,xx,yy]))
         selection[group] = dict(accepted_population=len(accepted[group]),random_accepted=sorted(aa[group]),rejected_population=len(rejected[group]),random_rejected=random_rejected[group],all_rejected=sorted(rr[group]),cross_style_members=sorted(cross),repeated_words=[word for word,_ in repeated],tail_draws=sorted(tail),fixture_members=sorted(fixture_members),all_mixed_substitutions=group=='mixed')
         print('review assets',group,len(metadata),flush=True)
     (staging/'panels.json').write_text(json.dumps(metadata,indent=2)+'\n')
     (staging/'selection.json').write_text(json.dumps(dict(seed=SEED,documents=selection),indent=2)+'\n')
     rule = (ROOT/'FONT_04_REVIEW_R2A_STOP.md').read_text().split('4. **Decision rule, fixed now, before grading.**',1)[1].rstrip()
     assert ('4. **Decision rule, fixed now, before grading.**'+rule) in (ROOT/'qualification/font04/R2A_BLIND_README.md').read_text()
-    (staging/'README.md').write_text((ROOT/'qualification/font04/R2A_BLIND_README.md').read_text())
+    (staging/'README.md').write_text((ROOT/'qualification/font04/R2A_BLIND_README.md').read_text() + '\nReview package v2: the reference is the raw matched scan crop. Each single-member proposal is displayed in default page context, restricted to the target bounds plus 2 px. Repeated-word proposals use the union of the word members\' bounds plus 2 px, with default surrounding context. Frozen canonicals and transforms are unchanged.\n')
     subprocess.run([sys.executable,'-m','qualification.font04.r2a_seal_review',staging,public,key],check=True,env=dict(os.environ,FONT04_REVIEW_TITLE='FONT-04 R2a corpus blind review: Source / U / V'))
     receipt = json.loads((public/'seal-receipt.json').read_text())
-    result = dict(schema='font04-R2a-blind-review-v1',status='SEALED; independent judgments pending',review_pdf=str(public/'blinded-review.pdf'),key_path=str(key),key_revealed=False,
+    result = dict(schema='font04-R2a-blind-review-v2',status='SEALED; independent judgments pending',review_pdf=str(public/'blinded-review.pdf'),key_path=str(key),key_revealed=False,
                   selection=selection,random_accepted=sum(map(len,aa.values())),random_rejected_minimum=150,total_rejected=sum(map(len,rr.values())),mixed_tail=len(mixed_tail),financial_tail_population=len(financial_tail),matched_financial_tail=len(matched_financial),regression_fixtures=23,registered_fixture_members=selection['financial']['fixture_members'],receipt=receipt)
-    (ROOT/'qualification/font04/r2a-blind-review.json').write_text(json.dumps(result,indent=2)+'\n')
+    (staging/'build-result.json').write_text(json.dumps(result,indent=2)+'\n')
 
 
 if __name__=='__main__':main(Path(sys.argv[1]))
