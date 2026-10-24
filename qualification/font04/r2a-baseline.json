@@ -1,0 +1,383 @@
+{
+  "schema": "font04-R2a-pre-optimization-baseline-v1",
+  "accepted_R1_commit": "fa8a08b",
+  "product_baseline": "3fcd4ea60aceae6336754ad212d5bd7744344c72",
+  "reporting_product_commit": "62c833d",
+  "P2_opened": false,
+  "optimization_applied": false,
+  "pdfium_library": "tools/src/pdfium/lib/libpdfium.so",
+  "pdfium_sha256": "b8784cbd652ad2993332b7695e2c80f3a797f877fc47d9be97b66bca9639539e",
+  "documents": {
+    "forms": {
+      "off": {
+        "pdf": "qualification/font04/local/R2a/baseline/forms-off.pdf",
+        "sha256": "691d7fe020990cd54d095c417113ad9acfdd897d0ee29ac824a5b0469c472fc8",
+        "bytes": 843699,
+        "run": {
+          "group": "forms",
+          "mode": "off",
+          "command": [
+            "/data/coding/scanweave/qualification/font04/local/R1-native/scanweave",
+            "/data/coding/scanweave/qualification/pdf_packaging/groups/forms-input.pdf",
+            "/data/coding/scanweave/qualification/font04/local/R2a/baseline/forms-off.pdf",
+            "--dpi",
+            "300",
+            "--profile",
+            "clearscan",
+            "--glyph-sharing",
+            "off"
+          ],
+          "returncode": 0,
+          "seconds": 42.19465990300523,
+          "sha256": "691d7fe020990cd54d095c417113ad9acfdd897d0ee29ac824a5b0469c472fc8",
+          "bytes": 843699
+        },
+        "sharing": null
+      },
+      "cover-2.0": {
+        "pdf": "qualification/font04/local/R2a/baseline/forms-cover-2.0.pdf",
+        "sha256": "691d7fe020990cd54d095c417113ad9acfdd897d0ee29ac824a5b0469c472fc8",
+        "bytes": 843699,
+        "run": {
+          "group": "forms",
+          "mode": "cover-2.0",
+          "command": [
+            "/data/coding/scanweave/qualification/font04/local/R1-native/scanweave",
+            "/data/coding/scanweave/qualification/pdf_packaging/groups/forms-input.pdf",
+            "/data/coding/scanweave/qualification/font04/local/R2a/baseline/forms-cover-2.0.pdf",
+            "--dpi",
+            "300",
+            "--profile",
+            "clearscan",
+            "--glyph-sharing",
+            "cover-2.0"
+          ],
+          "returncode": 0,
+          "seconds": 92.61677644005977,
+          "sha256": "691d7fe020990cd54d095c417113ad9acfdd897d0ee29ac824a5b0469c472fc8",
+          "bytes": 843699
+        },
+        "sharing": {
+          "method": "cover-2.0 frozen at research 5356255",
+          "multiplier": 2.0,
+          "net_retirement_rule": false,
+          "fallback": "aggregate economy: negative net outline retirement or encoded font growth",
+          "proposed_members": 118,
+          "substituted": 0,
+          "retired_outlines": 19,
+          "added_canonicals": 27,
+          "net_outlines_retired": -8,
+          "encoded_font_bytes_before": 41147,
+          "encoded_font_bytes_after": 46879,
+          "owned_exceptions": [
+            45
+          ]
+        }
+      }
+    },
+    "receipts": {
+      "off": {
+        "pdf": "qualification/font04/local/R2a/baseline/receipts-off.pdf",
+        "sha256": "6b5d58175089652177e8942af97c630df6c423682af7146bd2cba2726b8e400b",
+        "bytes": 1271232,
+        "run": {
+          "group": "receipts",
+          "mode": "off",
+          "command": [
+            "/data/coding/scanweave/qualification/font04/local/R1-native/scanweave",
+            "/data/coding/scanweave/qualification/pdf_packaging/groups/receipts-input.pdf",
+            "/data/coding/scanweave/qualification/font04/local/R2a/baseline/receipts-off.pdf",
+            "--dpi",
+            "300",
+            "--profile",
+            "clearscan",
+            "--glyph-sharing",
+            "off"
+          ],
+          "returncode": 0,
+          "seconds": 28.332102656015195,
+          "sha256": "6b5d58175089652177e8942af97c630df6c423682af7146bd2cba2726b8e400b",
+          "bytes": 1271232
+        },
+        "sharing": null
+      },
+      "cover-2.0": {
+        "pdf": "qualification/font04/local/R2a/baseline/receipts-cover-2.0.pdf",
+        "sha256": "6b5d58175089652177e8942af97c630df6c423682af7146bd2cba2726b8e400b",
+        "bytes": 1271232,
+        "run": {
+          "group": "receipts",
+          "mode": "cover-2.0",
+          "command": [
+            "/data/coding/scanweave/qualification/font04/local/R1-native/scanweave",
+            "/data/coding/scanweave/qualification/pdf_packaging/groups/receipts-input.pdf",
+            "/data/coding/scanweave/qualification/font04/local/R2a/baseline/receipts-cover-2.0.pdf",
+            "--dpi",
+            "300",
+            "--profile",
+            "clearscan",
+            "--glyph-sharing",
+            "cover-2.0"
+          ],
+          "returncode": 0,
+          "seconds": 27.69182354793884,
+          "sha256": "6b5d58175089652177e8942af97c630df6c423682af7146bd2cba2726b8e400b",
+          "bytes": 1271232
+        },
+        "sharing": {
+          "method": "cover-2.0 frozen at research 5356255",
+          "multiplier": 2.0,
+          "net_retirement_rule": false,
+          "fallback": "no surviving cover groups",
+          "proposed_members": 0,
+          "substituted": 0,
+          "retired_outlines": 0,
+          "added_canonicals": 0,
+          "net_outlines_retired": 0,
+          "encoded_font_bytes_before": 16712,
+          "encoded_font_bytes_after": 16712,
+          "owned_exceptions": []
+        }
+      }
+    },
+    "mixed": {
+      "off": {
+        "pdf": "qualification/font04/local/R2a/baseline/mixed-off.pdf",
+        "sha256": "c3f224bf18e5d2aeeba6e03de20000b84ff31893fc945e14882719b114d616d9",
+        "bytes": 917603,
+        "run": {
+          "group": "mixed",
+          "mode": "off",
+          "command": [
+            "/data/coding/scanweave/qualification/font04/local/R1-native/scanweave",
+            "/data/coding/scanweave/qualification/pdf_packaging/groups/mixed-input.pdf",
+            "/data/coding/scanweave/qualification/font04/local/R2a/baseline/mixed-off.pdf",
+            "--dpi",
+            "300",
+            "--profile",
+            "clearscan",
+            "--glyph-sharing",
+            "off"
+          ],
+          "returncode": 0,
+          "seconds": 104.54676650301553,
+          "sha256": "c3f224bf18e5d2aeeba6e03de20000b84ff31893fc945e14882719b114d616d9",
+          "bytes": 917603
+        },
+        "sharing": null
+      },
+      "cover-2.0": {
+        "pdf": "qualification/font04/local/R2a/baseline/mixed-cover-2.0.pdf",
+        "sha256": "6389a7c7662bda1d4012ecbcfe876587cc8fc96e48149ead33f8e9f791306b89",
+        "bytes": 914696,
+        "run": {
+          "group": "mixed",
+          "mode": "cover-2.0",
+          "command": [
+            "/data/coding/scanweave/qualification/font04/local/R1-native/scanweave",
+            "/data/coding/scanweave/qualification/pdf_packaging/groups/mixed-input.pdf",
+            "/data/coding/scanweave/qualification/font04/local/R2a/baseline/mixed-cover-2.0.pdf",
+            "--dpi",
+            "300",
+            "--profile",
+            "clearscan",
+            "--glyph-sharing",
+            "cover-2.0"
+          ],
+          "returncode": 0,
+          "seconds": 298.2859248169698,
+          "sha256": "6389a7c7662bda1d4012ecbcfe876587cc8fc96e48149ead33f8e9f791306b89",
+          "bytes": 914696
+        },
+        "sharing": {
+          "method": "cover-2.0 frozen at research 5356255",
+          "multiplier": 2.0,
+          "net_retirement_rule": false,
+          "fallback": null,
+          "proposed_members": 335,
+          "substituted": 326,
+          "retired_outlines": 145,
+          "added_canonicals": 57,
+          "net_outlines_retired": 88,
+          "encoded_font_bytes_before": 249013,
+          "encoded_font_bytes_after": 242854,
+          "owned_exceptions": [
+            12,
+            228,
+            414,
+            417,
+            436,
+            438,
+            439,
+            714
+          ]
+        }
+      }
+    },
+    "historical": {
+      "off": {
+        "pdf": "qualification/font04/local/R2a/baseline/historical-off.pdf",
+        "sha256": "9263905f899815097b74fb8b6a802a75d0439756ac32d84b278f3b54a26f716e",
+        "bytes": 2266058,
+        "run": {
+          "group": "historical",
+          "mode": "off",
+          "command": [
+            "/data/coding/scanweave/qualification/font04/local/R1-native/scanweave",
+            "/data/coding/scanweave/qualification/pdf_packaging/groups/historical-input.pdf",
+            "/data/coding/scanweave/qualification/font04/local/R2a/baseline/historical-off.pdf",
+            "--dpi",
+            "300",
+            "--profile",
+            "clearscan",
+            "--glyph-sharing",
+            "off"
+          ],
+          "returncode": 0,
+          "seconds": 95.42723040108103,
+          "sha256": "9263905f899815097b74fb8b6a802a75d0439756ac32d84b278f3b54a26f716e",
+          "bytes": 2266058
+        },
+        "sharing": null
+      },
+      "cover-2.0": {
+        "pdf": "qualification/font04/local/R2a/baseline/historical-cover-2.0.pdf",
+        "sha256": "9263905f899815097b74fb8b6a802a75d0439756ac32d84b278f3b54a26f716e",
+        "bytes": 2266058,
+        "run": {
+          "group": "historical",
+          "mode": "cover-2.0",
+          "command": [
+            "/data/coding/scanweave/qualification/font04/local/R1-native/scanweave",
+            "/data/coding/scanweave/qualification/pdf_packaging/groups/historical-input.pdf",
+            "/data/coding/scanweave/qualification/font04/local/R2a/baseline/historical-cover-2.0.pdf",
+            "--dpi",
+            "300",
+            "--profile",
+            "clearscan",
+            "--glyph-sharing",
+            "cover-2.0"
+          ],
+          "returncode": 0,
+          "seconds": 75.78867702104617,
+          "sha256": "9263905f899815097b74fb8b6a802a75d0439756ac32d84b278f3b54a26f716e",
+          "bytes": 2266058
+        },
+        "sharing": {
+          "method": "cover-2.0 frozen at research 5356255",
+          "multiplier": 2.0,
+          "net_retirement_rule": false,
+          "fallback": "no surviving cover groups",
+          "proposed_members": 0,
+          "substituted": 0,
+          "retired_outlines": 0,
+          "added_canonicals": 0,
+          "net_outlines_retired": 0,
+          "encoded_font_bytes_before": 3472,
+          "encoded_font_bytes_after": 3472,
+          "owned_exceptions": []
+        }
+      }
+    },
+    "financial": {
+      "off": {
+        "pdf": "qualification/font04/local/R2a/baseline/financial-off.pdf",
+        "sha256": "74c31136d00a18dbf05fba2d7fba59c85cc201a57ae65d77999a025a692fab0f",
+        "bytes": 2849237,
+        "run": {
+          "group": "financial",
+          "mode": "off",
+          "returncode": 0,
+          "sha256": "74c31136d00a18dbf05fba2d7fba59c85cc201a57ae65d77999a025a692fab0f",
+          "bytes": 2849237,
+          "reused_accepted_R1": "qualification/font04/local/R1-native/default.pdf",
+          "timing_reused": false
+        },
+        "sharing": null
+      },
+      "cover-2.0": {
+        "pdf": "qualification/font04/local/R2a/baseline/financial-cover-2.0.pdf",
+        "sha256": "b007a27dd111937d5fb4bb75abb6cd41245635e679100f7de952cbb0509d20bc",
+        "bytes": 2796345,
+        "run": {
+          "group": "financial",
+          "mode": "cover-2.0",
+          "returncode": 0,
+          "sha256": "b007a27dd111937d5fb4bb75abb6cd41245635e679100f7de952cbb0509d20bc",
+          "bytes": 2796345,
+          "reused_accepted_R1": "qualification/font04/local/R1-native/cover-2.0.pdf",
+          "timing_reused": false
+        },
+        "sharing": {
+          "method": "cover-2.0 frozen at research 5356255",
+          "multiplier": 2.0,
+          "net_retirement_rule": false,
+          "fallback": null,
+          "proposed_members": 1811,
+          "substituted": 1750,
+          "retired_outlines": 594,
+          "added_canonicals": 268,
+          "net_outlines_retired": 326,
+          "encoded_font_bytes_before": 727259,
+          "encoded_font_bytes_after": 664549,
+          "owned_exceptions": [
+            4,
+            5,
+            7,
+            8,
+            10,
+            68,
+            85,
+            237,
+            286,
+            316,
+            401,
+            428,
+            454,
+            552,
+            587,
+            603,
+            607,
+            671,
+            694,
+            695,
+            1070,
+            1080,
+            1112,
+            1113,
+            1204,
+            1233,
+            1236,
+            1237,
+            1311,
+            1331,
+            1350,
+            1469,
+            1514,
+            1518,
+            1572,
+            1892,
+            1957,
+            2401,
+            2464,
+            2550,
+            2639,
+            2808,
+            2926,
+            2928,
+            2992,
+            3109,
+            3178,
+            3188,
+            3190,
+            3353,
+            3422,
+            3426
+          ]
+        }
+      }
+    }
+  },
+  "comparison_financial_sha256": "dbdf30d38444985e9dd2839288329676865d93b0dd272cd69746a032aef8fb11",
+  "status": "Baselines captured; R2a qualification and independent review incomplete"
+}
