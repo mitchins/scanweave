@@ -361,7 +361,13 @@ pub fn share(
         .iter()
         .map(|p| vec![None; p.occurrences.len()])
         .collect();
-    for (k, &i) in instance_members.iter().enumerate() {
+    let mut draw_order: Vec<usize> = (0..instance_members.len()).collect();
+    draw_order.sort_by_key(|&k| {
+        let r = &rows[instance_members[k]];
+        (r.page, r.occurrence)
+    });
+    for k in draw_order {
+        let i = instance_members[k];
         let r = &rows[i];
         let cid = pages[r.page].occurrences[r.occurrence].1 as usize + 1;
         let gid = shared.instance_gids[k];
@@ -377,7 +383,7 @@ pub fn share(
     }
     let mut cid_maps = vec![base_map.iter().flat_map(|gid| gid.to_be_bytes()).collect()];
     for map in &maps {
-        let mut values = base_map.clone();
+        let mut values = vec![0u16; base_map.len()];
         for (&cid, &gid) in map {
             values[cid] = gid;
         }
