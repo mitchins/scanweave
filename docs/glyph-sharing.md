@@ -25,6 +25,10 @@ that fallback in its JSON report. Candidate economy figures remain in the report
 when fallback occurs; `substituted` is zero and member decisions retain default.
 Zero-credit groups and their canonical/stub bytes are reported separately.
 
+The existing per-page tracing reports describe reconstruction before document
+sharing. The `glyph_sharing` report describes substitutions and actual font
+economy; the R1 scorecards measure the emitted shared output independently.
+
 Numerical reductions run serially in member/pixel order. Group priorities use
 explicit index tie breaks. The bounded Huber trust-region fit retains the frozen
 35 evaluations, `.001` relative differences and `1e-5` stopping tolerances; its
