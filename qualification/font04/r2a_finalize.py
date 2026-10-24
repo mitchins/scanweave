@@ -100,6 +100,9 @@ def main():
         rss_definition='GNU time -v Maximum resident set size in KiB; maximum for a run, not a sum across documents or processes',
         stage_definition='stage_timings are pipeline milliseconds; sharing_stage_seconds are seconds. planning_* are nested within planning, and sharing stages within sharing_total; do not sum nested timings.',
         all_outputs_byte_identical=True)
+    financial_default = paired['financial']['off']['wall_seconds']
+    financial_sharing = paired['financial']['cover-2.0']['wall_seconds']
+    profile['financial_runtime_target'] = dict(target='sharing overhead <= 1x default wall; sharing wall <= 2x default',default_seconds=financial_default,sharing_seconds=financial_sharing,overhead_seconds=financial_sharing-financial_default,met=financial_sharing <= 2*financial_default,gate=False)
     dump(BASE/'r2a-profile.json',profile)
     checkpoint = load(BASE/'checkpoint-R2a.json')
     checkpoint.update(status='STOP AT CHECKPOINT R2a: evidence complete; independent sealed blind review required',
@@ -149,6 +152,11 @@ def write_results(corpus,checkpoint):
     a,b=t['runtime']['off'],t['runtime']['cover-2.0']
     lines += [f"| Total / max peak | {a['wall_seconds']:.2f} / {a['peak_rss_kib']/1024:.1f} | {b['wall_seconds']:.2f} / {b['peak_rss_kib']/1024:.1f} | {b['wall_seconds']/a['wall_seconds']:.3f}× |",'',
         'Final paired runs were serial after other FONT-04 qualification jobs finished. Peak is GNU time maximum RSS, not a process-tree sum. Pipeline milliseconds and nested sharing/planner seconds, reporting-build profiles, optimization byte checks and repeats are retained in [r2a-profile.json](qualification/font04/r2a-profile.json). Earlier overlapping qualification timings are not claimed as isolated benchmarks.', '']
+    old = load(LOCAL/'resume-reporting/financial-cover-2.0.run.json')['sharing_stage_seconds']
+    final = corpus['documents']['financial']['runtime']['cover-2.0']['sharing_stage_seconds']
+    default_wall = corpus['documents']['financial']['runtime']['off']['wall_seconds']
+    shared_wall = corpus['documents']['financial']['runtime']['cover-2.0']['wall_seconds']
+    lines += [f"Financial stage profiling identified candidate fitting as the main planner cost: {old['planning_candidate_fits']:.2f} s of {old['planning']:.2f} s planning in the reporting run. The final row-worker run records {final['planning_candidate_fits']:.2f} s candidate fitting, {final['planning']:.2f} s planning and {final['source_snapshot']:.2f} s source snapshot. The reporting profile overlapped other qualification jobs; these stage observations are not a paired speedup estimate. The final financial sharing/default wall ratio is {shared_wall/default_wall:.3f}×; the non-gating target of sharing overhead no greater than default wall time is {'met' if shared_wall <= 2*default_wall else 'not met'}.", '']
     blind=checkpoint['blind_review']
     lines += [f"The sealed package contains **{blind['receipt']['panels']} panels**, ≥300 random accepted and ≥150 random rejected members stratified by document, repeated words, cross-style probes, all registered regression cases, and member 518. All 326 mixed substitutions are included, including all **{blind['mixed_tail']}** mixed isolated-error tail draws, matched to **{blind['matched_financial_tail']}** financial tail draws using the same >0.02 error definition across analytic, direct-outline, PDFium and Poppler. Full-word contexts use randomized A/B/C source/current/candidate arms in both renderers at 100% and 400%. The key is held separately and has not been read. The review decision rule was copied verbatim into the README before sealing.", '',
         f"Review: `{blind['review_pdf']}`. [Seal receipt and selection](qualification/font04/r2a-blind-review.json); [checkpoint and artifact hashes](qualification/font04/checkpoint-R2a.json). The earlier member-518 diagnostics remain in [r2a-stop-evidence](qualification/font04/r2a-stop-evidence/README.md); the review upheld that defect and deferred its materiality to blind grading.", '',

@@ -16,7 +16,7 @@ def digest(path):
     return hashlib.sha256(path.read_bytes()).hexdigest()
 
 
-def run(binary, directory, groups=GROUPS, include_repeat=True, include_comparison=True):
+def run(binary, directory, groups=GROUPS, include_repeat=True, include_comparison=True, labels=None):
     directory.mkdir(parents=True,exist_ok=True)
     baseline = LOCAL/'baseline'
     golden = json.loads((ROOT/'qualification/font04/checkpoint-R1.json').read_text())['PDFs']
@@ -25,6 +25,7 @@ def run(binary, directory, groups=GROUPS, include_repeat=True, include_compariso
         modes = [('off','off',4),('cover-2.0','cover-2.0',4)]
         if group == 'financial' and include_comparison:modes.append(('cover-1.5','cover-1.5',4))
         if include_repeat:modes.append(('cover-2.0-repeat','cover-2.0',8))
+        if labels is not None:modes=[m for m in modes if m[0] in labels]
         for label,mode,threads in modes:
             output = directory/f'{group}-{label}.pdf'
             receipt = output.with_suffix('.run.json')
@@ -64,5 +65,6 @@ if __name__=='__main__':
     parser.add_argument('--groups',nargs='+',choices=GROUPS,default=GROUPS)
     parser.add_argument('--no-repeat',action='store_true')
     parser.add_argument('--no-comparison',action='store_true')
+    parser.add_argument('--labels',nargs='+',choices=('off','cover-2.0','cover-1.5','cover-2.0-repeat'))
     args = parser.parse_args()
-    run(args.binary.resolve(),args.directory.resolve(),args.groups,not args.no_repeat,not args.no_comparison)
+    run(args.binary.resolve(),args.directory.resolve(),args.groups,not args.no_repeat,not args.no_comparison,args.labels)

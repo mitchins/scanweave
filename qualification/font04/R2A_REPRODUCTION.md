@@ -22,7 +22,10 @@ reused only with the same binary and expected PDF hash. Any other existing
 receipt fails instead of being overwritten. Reporting financial reruns use
 `--groups financial`. Final serial benchmarks use
 `--no-repeat --no-comparison`; the full optimization qualification already
-covers comparison and repeat outputs. Preserve GNU time `.time` files beside
+covers comparison and repeat outputs. `--labels cover-1.5` and
+`--labels cover-2.0-repeat` can qualify the two remaining financial outputs
+concurrently on disjoint paths; these timings are not final benchmarks.
+Preserve GNU time `.time` files beside
 all `.run.json` files. Do not run the final benchmark alongside other FONT-04
 qualification jobs.
 
