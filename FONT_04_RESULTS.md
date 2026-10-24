@@ -371,3 +371,50 @@ The sealed package contains **1628 panels**, ≥300 random accepted and ≥150 r
 Review: `/data/coding/scanweave/qualification/font04/local/R2a/blind-review/blinded-review.pdf`. [Seal receipt and selection](qualification/font04/r2a-blind-review.json); [checkpoint and artifact hashes](qualification/font04/checkpoint-R2a.json). The earlier member-518 diagnostics remain in [r2a-stop-evidence](qualification/font04/r2a-stop-evidence/README.md); the review upheld that defect and deferred its materiality to blind grading.
 
 **STOP.** P2 was not opened, generated or rendered. Adobe Reader remains **BLOCKED-ON-OWNER**. Neither `~/.wine-acrobat-xi` nor display `:99` was touched. No product PR, merge, or PR #24/#25 action.
+
+## Reader check
+
+**BLOCKED (2026-10-25): current Reader could not be installed and run under Wine 9.0.**
+The owner-supplied Windows x64 installer for **26.002.22031** was verified before
+execution: SHA-256 `86e98feb3f2afa66656a85cbbc6fb71d6a3217ebf8fdc21f4d1a54d21cb45028`.
+This supersedes the historical BLOCKED-ON-OWNER installer request; the remaining
+blocker is the Wine installation/runtime failure.
+
+A fresh 64-bit prefix at `qualification/font04/local/reader/prefix` used Xvfb
+**:117**, 1600×1200, with Windows 10 compatibility. Updater installation was
+disabled with `DISABLE_ARM_SERVICE_INSTALL=1`; Adobe policy values `bUpdater=0`
+and `bUsageMeasurement=0` were set. No winetricks components or installer
+downloads were added. The first background X server ended with its launching
+shell; the retry kept a dedicated X server alive. Both the supplied bootstrap
+and extracted setup were tried. A final sequential retry stopped only this
+prefix's Wine server, installed the supplied base MSI successfully (exit 0),
+then applied the bundled `AcroRdrDCx64Upd2600222031.msp`.
+
+The current-version update reproducibly failed:
+
+- `ACTION_PatchFiles Failed to apply patch to file: L"AcroPDF.dll"`.
+- `PatchFiles` and `InstallExecute` returned MSI **1603**; the sequential patch
+  process exited **69**.
+- After rollback, launching `Acrobat.exe` without a PDF produced an unhandled
+  null-read page fault at `000000014005D30F` and Wine's “serious problem” dialog.
+  Wine also reported missing `ntlm_auth` and no NTLM support. This warning is
+  recorded, not established as the cause of the patch or launch failure.
+
+The remaining executable's file version is **21.1.20135.27840**, the bundled
+older base, so its crash is not a test of an installed current Reader.
+**All five PDFs and all 43 pages remain untested in Reader**: financial default,
+cover-2.0 and cover-1.5, plus mixed default and cover-2.0. Fixed-zoom renders,
+dense crops (including mixed page 2 “with” / member 518), glyph checks, copied
+text equality, ten-word searches and matched PDFium/default controls are all
+explicitly unavailable, not passes. No substitute viewer was used and no PDF
+compatibility defect was established.
+
+Receipt: [reader-check.json](qualification/font04/reader-check.json).
+Evidence: [crash dialog crop](qualification/font04/reader-evidence/acrobat-launch-crash.png)
+and [exact error transcript](qualification/font04/reader-evidence/wine-failure-log.txt).
+Full desktop captures, verbose MSI logs and prefix remain ignored under
+`qualification/font04/local/reader/`. Financial hashes were reverified; mixed
+hashes and output paths were taken from the public reporting receipt without
+accessing R2a local directories. The R2a blind package/key, Acrobat XI prefix,
+and display :99 were untouched. P2 was not opened, generated or rendered.
+No product code, PR or merge action. **STOP.**

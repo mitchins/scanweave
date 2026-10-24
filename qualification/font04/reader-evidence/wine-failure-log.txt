@@ -1,0 +1,139 @@
+=== wineboot.log ===
+wine: created the configuration directory '/data/coding/scanweave/qualification/font04/local/reader/prefix'
+004c:err:ole:StdMarshalImpl_MarshalInterface Failed to create ifstub, hr 0x80004002
+004c:err:ole:CoMarshalInterface Failed to marshal the interface {6d5140c1-7436-11ce-8034-00aa006009fa}, hr 0x80004002
+004c:err:ole:apartment_get_local_server_stream Failed: 0x80004002
+0054:err:ole:StdMarshalImpl_MarshalInterface Failed to create ifstub, hr 0x80004002
+0054:err:ole:CoMarshalInterface Failed to marshal the interface {6d5140c1-7436-11ce-8034-00aa006009fa}, hr 0x80004002
+0054:err:ole:apartment_get_local_server_stream Failed: 0x80004002
+0054:err:ole:start_rpcss Failed to open RpcSs service
+wine: configuration in L"/data/coding/scanweave/qualification/font04/local/reader/prefix" has been updated.
+wine: configuration in L"/data/coding/scanweave/qualification/font04/local/reader/prefix" has been updated.
+X connection to :117 broken (explicit kill or server shutdown).
+X connection to :117 broken (explicit kill or server shutdown).
+
+
+=== install.log ===
+0120:err:msidb:TransformView_set_row trying to modify existing table
+0120:err:msidb:TransformView_set_row trying to modify existing column
+0120:err:msidb:TransformView_set_row trying to modify existing column
+0120:err:msidb:TransformView_set_row trying to modify existing column
+0120:err:msidb:TransformView_set_row trying to modify existing column
+0120:err:msidb:TransformView_set_row trying to modify existing column
+0120:err:msidb:TransformView_set_row trying to modify existing column
+0120:err:msi:iterate_load_verb Verb unable to find loaded extension L"ps"
+0120:err:msi:iterate_load_verb Verb unable to find loaded extension L"NewExtension1"
+0120:err:msi:ACTION_PatchFiles Failed to apply patch to file: L"AcroPDF.dll"
+0120:err:msi:execute_script Execution of script 0 halted; action L"PatchFiles" returned 1603
+0120:err:msi:ITERATE_Actions Execution halted, action L"InstallExecute" returned 1603
+
+
+=== setup-interactive.log ===
+0170:err:msidb:TransformView_set_row trying to modify existing table
+0170:err:msidb:TransformView_set_row trying to modify existing column
+0170:err:msidb:TransformView_set_row trying to modify existing column
+0170:err:msidb:TransformView_set_row trying to modify existing column
+0170:err:msidb:TransformView_set_row trying to modify existing column
+0170:err:msidb:TransformView_set_row trying to modify existing column
+0170:err:msidb:TransformView_set_row trying to modify existing column
+
+
+=== msiexec.log ===
+0310:err:msi:iterate_load_verb Verb unable to find loaded extension L"ps"
+0310:err:msi:iterate_load_verb Verb unable to find loaded extension L"NewExtension1"
+
+
+=== sequential-console.log ===
+0110:err:msi:iterate_load_verb Verb unable to find loaded extension L"ps"
+0110:err:msi:iterate_load_verb Verb unable to find loaded extension L"NewExtension1"
+03b0:err:msidb:TransformView_set_row trying to modify existing table
+03b0:err:msidb:TransformView_set_row trying to modify existing column
+03b0:err:msidb:TransformView_set_row trying to modify existing column
+03b0:err:msidb:TransformView_set_row trying to modify existing column
+03b0:err:msidb:TransformView_set_row trying to modify existing column
+03b0:err:msidb:TransformView_set_row trying to modify existing column
+03b0:err:msidb:TransformView_set_row trying to modify existing column
+03b0:err:msi:iterate_load_verb Verb unable to find loaded extension L"ps"
+03b0:err:msi:iterate_load_verb Verb unable to find loaded extension L"NewExtension1"
+03b0:err:msi:ACTION_PatchFiles Failed to apply patch to file: L"AcroPDF.dll"
+03b0:err:msi:execute_script Execution of script 0 halted; action L"PatchFiles" returned 1603
+03b0:err:msi:ITERATE_Actions Execution halted, action L"InstallExecute" returned 1603
+0558:err:menubuilder:InvokeShellLinker failed to extract icon from L"C:\\windows\\Installer\\{AC76BA86-1033-1033-7760-BC15014EA700}\\_SC_Acrobat.ico"
+0560:err:menubuilder:InvokeShellLinker failed to extract icon from L"C:\\windows\\Installer\\{AC76BA86-1033-1033-7760-BC15014EA700}\\_SC_Acrobat.ico"
+
+
+=== launch.log ===
+wine: Unhandled page fault on read access to 0000000000000000 at address 000000014005D30F (thread 0594), starting debugger...
+05bc:err:winediag:ntlm_check_version ntlm_auth was not found. Make sure that ntlm_auth >= 3.0.25 is in your path. Usually, you can find it in the winbind package of your distribution.
+05bc:err:ntlm:ntlm_LsaApInitializePackage no NTLM support, expect problems
+
+
+=== sequential-patch.log relevant lines ===
+Action 10:11:52: AllowAppLaunch_Rollback.
+Action start 10:11:52: AllowAppLaunch_Rollback.
+Action ended 10:11:52: AllowAppLaunch_Rollback. Return value 1.
+Action 10:11:52: RegisterProperties_Rollback. Writing system registry values
+Action start 10:11:52: RegisterProperties_Rollback.
+Action ended 10:11:52: RegisterProperties_Rollback. Return value 1.
+Action 10:11:52: InstallCEF_Rollback.
+Action start 10:11:52: InstallCEF_Rollback.
+Action ended 10:11:52: InstallCEF_Rollback. Return value 1.
+Action 10:11:52: CleanupPatchCache_Rollback.
+Action start 10:11:52: CleanupPatchCache_Rollback.
+Action ended 10:11:52: CleanupPatchCache_Rollback. Return value 1.
+Action 10:11:52: PatchFiles. Patching files
+Action start 10:11:52: PatchFiles.
+Action ended 10:11:52: PatchFiles. Return value 1.
+1: {AC76BA86-1033-1033-7760-BC15014EA700} 2: {8AFB1443-BF63-43C1-ABC6-41E439BFAB69} 3: C:\Program Files\Common Files\Adobe\Acrobat\ActiveX\AcroPDF.dll
+File: AcroPDF.dll
+File: AcroPDF.dll Size: 517024 bytes
+File: 76426a0a.png Size: 1603 bytes
+File: a92ba8a3.png Size: 1603 bytes
+File: c1171f46.png Size: 1603 bytes
+File: ef1b2520.png Size: 1603 bytes
+Action 10:11:59: PatchFiles. Patching files
+Action start 10:11:59: PatchFiles.
+Action ended 10:12:03: PatchFiles. Return value 0.
+File: AcroPDF.dll
+File: AcroPDF.dll Size: 517024 bytes
+File: 76426a0a.png Size: 1603 bytes
+File: a92ba8a3.png Size: 1603 bytes
+File: c1171f46.png Size: 1603 bytes
+File: ef1b2520.png Size: 1603 bytes
+Key: HKEY_CLASSES_ROOT\CLSID\{CA8A9780-280D-11CF-A24D-444553540000}\ToolboxBitmap32, Name: , Value: C:\PROG~FBU\COMM~CP1\Adobe\Acrobat\ActiveX\AcroPDF.dll, 102
+Key: HKEY_CLASSES_ROOT\CLSID\{CA8A9780-280D-11CF-A24D-444553540000}\InprocServer32, Name: , Value: C:\Program Files\Common Files\Adobe\Acrobat\ActiveX\AcroPDF.dll
+Key: HKEY_CLASSES_ROOT\CLSID\{EE5A151A-AD2A-4CEE-AD65-228B59F5B4AD}\InProcServer32, Name: , Value: C:\Program Files\Common Files\Adobe\Acrobat\ActiveX\AcroPDF.dll
+Key: HKEY_CLASSES_ROOT\TypeLib\{05BFD3F1-6319-4F30-B752-C7A22889BCC4}\1.0\0\win32, Name: , Value: C:\Program Files\Common Files\Adobe\Acrobat\ActiveX\AcroPDF.dll
+Key: HKEY_CLASSES_ROOT\CLSID\{24DA047B-40C0-4018-841B-6B7409F730FC}\InprocServer32, Name: , Value: C:\Program Files\Common Files\Adobe\Acrobat\ActiveX\AcroPDF.dll
+Key: HKEY_CLASSES_ROOT\CLSID\{CA8A9780-280D-11CF-A24D-444553540000}\ToolboxBitmap32, Name: , Value: C:\Program Files\Common Files\Adobe\Acrobat\ActiveX\AcroPDF.dll, 102
+1: {AC76BA86-1033-1033-7760-BC15014EA700} 2: {8AFB1443-BF63-43C1-ABC6-41E439BFAB69} 3: C:\Program Files\Common Files\Adobe\Acrobat\ActiveX\AcroPDF.dll
+Action 10:12:08: CleanupPatchCache_Rollback.
+Action start 10:12:08: CleanupPatchCache_Rollback.
+ADelRCP logging: : CleanupPatchCache_Rollback:: Checking value of PatchFiles_SUCCESS, found =
+ADelRCP logging: : CleanupPatchCache_Rollback:: GUIDToPackedGUID :: 68AB67CA330133017706CB5110E47A00
+ADelRCP logging: : CleanupPatchCache_Rollback::Going to perform cleanup in directory :: C:\Windows\Installer\$PatchCache$\Managed\68AB67CA330133017706CB5110E47A00
+ADelRCP logging: : PatchUpdateRollback:: PatchUpdateRollback registry set to 1
+Action ended 10:12:08: CleanupPatchCache_Rollback. Return value 1.
+File: AcroPDF.dll
+Action 10:12:10: InstallCEF_Rollback.
+Action start 10:12:10: InstallCEF_Rollback.
+ADelRCP logging: : Begin: InstallCEF_Rollback
+Action ended 10:12:10: InstallCEF_Rollback. Return value 1.
+File: AcroPDF.dll Size: 517024 bytes
+File: 76426a0a.png Size: 1603 bytes
+File: a92ba8a3.png Size: 1603 bytes
+File: c1171f46.png Size: 1603 bytes
+File: ef1b2520.png Size: 1603 bytes
+Key: HKEY_CLASSES_ROOT\CLSID\{CA8A9780-280D-11CF-A24D-444553540000}\ToolboxBitmap32, Name: , Value: C:\PROG~FBU\COMM~CP1\Adobe\Acrobat\ActiveX\AcroPDF.dll, 102
+Key: HKEY_CLASSES_ROOT\CLSID\{CA8A9780-280D-11CF-A24D-444553540000}\InprocServer32, Name: , Value: C:\Program Files\Common Files\Adobe\Acrobat\ActiveX\AcroPDF.dll
+Key: HKEY_CLASSES_ROOT\CLSID\{EE5A151A-AD2A-4CEE-AD65-228B59F5B4AD}\InProcServer32, Name: , Value: C:\Program Files\Common Files\Adobe\Acrobat\ActiveX\AcroPDF.dll
+Key: HKEY_CLASSES_ROOT\TypeLib\{05BFD3F1-6319-4F30-B752-C7A22889BCC4}\1.0\0\win32, Name: , Value: C:\Program Files\Common Files\Adobe\Acrobat\ActiveX\AcroPDF.dll
+Key: HKEY_CLASSES_ROOT\CLSID\{24DA047B-40C0-4018-841B-6B7409F730FC}\InprocServer32, Name: , Value: C:\Program Files\Common Files\Adobe\Acrobat\ActiveX\AcroPDF.dll
+Key: HKEY_CLASSES_ROOT\CLSID\{CA8A9780-280D-11CF-A24D-444553540000}\ToolboxBitmap32, Name: , Value: C:\Program Files\Common Files\Adobe\Acrobat\ActiveX\AcroPDF.dll, 102
+1: {AC76BA86-1033-1033-7760-BC15014EA700} 2: {8AFB1443-BF63-43C1-ABC6-41E439BFAB69} 3: C:\Program Files\Common Files\Adobe\Acrobat\ActiveX\AcroPDF.dll
+Action 10:12:10: RegisterProperties_Rollback. Writing system registry values
+Action start 10:12:10: RegisterProperties_Rollback.
+Action ended 10:12:10: RegisterProperties_Rollback. Return value 1.
+Action 10:12:10: AllowAppLaunch_Rollback.
+Action start 10:12:10: AllowAppLaunch_Rollback.
+Action ended 10:12:10: AllowAppLaunch_Rollback. Return value 1.
