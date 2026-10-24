@@ -22,6 +22,9 @@ def dump(path, data):
 
 def runs(directory):
     result = {}
+    binary = LOCAL/('reporting/scanweave' if directory.name == 'resume-reporting' else 'resume-optimized/scanweave')
+    expected_binary = sha(binary)
+    pinned_pdfium = sha(ROOT/'tools/src/pdfium/lib/libpdfium.so')
     for group in GROUPS if directory.name != 'resume-reporting' else ('financial',):
         labels = ['off','cover-2.0']
         if directory.name == 'resume-optimized': labels.append('cover-2.0-repeat')
@@ -31,6 +34,7 @@ def runs(directory):
             stem = directory/f'{group}-{label}.pdf'
             row = load(stem.with_suffix('.run.json'))
             assert row['returncode'] == 0 and row['byte_identical_to_baseline']
+            assert row['binary_sha256'] == expected_binary and row['pdfium_library_sha256'] == pinned_pdfium
             assert row['sha256'] == sha(stem.with_suffix('.pdf')) == row['expected_sha256']
             timing = stem.with_suffix('.time').read_text()
             row['peak_rss_kib'] = int(next(line.split(':',1)[1] for line in timing.splitlines() if 'Maximum resident set size (kbytes)' in line))
@@ -49,6 +53,18 @@ def main():
     assert sha(public/'README.md') == blind['receipt']['readme_sha256']
     rule = (ROOT/'FONT_04_REVIEW_R2A_STOP.md').read_text().split('4. **Decision rule, fixed now, before grading.**',1)[1].rstrip()
     assert '4. **Decision rule, fixed now, before grading.**'+rule in (public/'README.md').read_text()
+    panels = load(LOCAL/'blind-private-staging/panels.json')
+    assert len(panels) == blind['receipt']['panels']
+    registered = [p for p in panels if p['type'] == 'registered-regression-fixture']
+    assert len(registered) == 46 and {p['registered_case']['case_index'] for p in registered} == set(range(23))
+    mixed = {p['draw'] for p in panels if p.get('document') == 'mixed' and p['type'] == 'accepted'}
+    assert len(mixed) == 326
+    assert sum(bool(p.get('registered_member518')) for p in panels) == 2
+    tails = {g:{p['draw'] for p in panels if p.get('document') == g and p.get('tail_stratum')} for g in ('mixed','financial')}
+    assert len(tails['mixed']) == len(tails['financial']) == blind['mixed_tail'] == 88
+    assert blind['random_accepted'] >= 300 and blind['total_rejected'] >= 150
+    judgments = load(public/'judgments-template.json')['judgments']
+    assert len(judgments) == len(panels) and all(all(p[k] is None for k in ('A','B','C')) for p in judgments)
     save = load(BASE/'r2a-save-controls.json')
     corpus = load(BASE/'r2a-partial-corpus.json')
     aggregates = {'metrics': ([],[]), 'context-metrics': ([],[])}
@@ -100,7 +116,7 @@ def main():
     checkpoint['materiality'] = dict(status='UNKNOWN: independent blind grading pending',materially_worse_rate=None,
         decision_rule='4. **Decision rule, fixed now, before grading.**'+rule)
     artifacts = ['r2a-baseline.json','r2a-partial-corpus.json','r2a-corpus.json','r2a-profile.json',
-        'r2a-save-controls.json','r2a-blind-review.json','r2a-binding-evidence.json','R2A_BLIND_README.md']
+        'r2a-save-controls.json','r2a-financial-fidelity.json','r2a-blind-review.json','r2a-binding-evidence.json','R2A_BLIND_README.md']
     checkpoint['artifacts'] = [dict(path=str((BASE/name).relative_to(ROOT)),sha256=sha(BASE/name)) for name in artifacts]
     dump(BASE/'checkpoint-R2a.json',checkpoint)
     write_results(corpus,checkpoint)

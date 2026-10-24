@@ -50,7 +50,8 @@
       "forms",
       "receipts",
       "mixed",
-      "historical"
+      "historical",
+      "financial"
     ],
     "fidelity_definition": "Complete-page contextual all-draw scores plus isolated owned-source scores with explicit unavailable-witness counts; mean/p95/worst10 and floors retained.",
     "reporting_tests": {
@@ -58,28 +59,39 @@
       "integration_tests_passed": 6,
       "regression_cases": 23
     },
-    "optimization_trial_integration_tests_passed": 6
+    "optimization_trial_integration_tests_passed": 6,
+    "financial_all_draw_fidelity": true,
+    "save_only_controls": true
   },
   "incomplete_due_to_stop": [
     "Reporting-only financial cover-2.0 and cover-1.5 golden reruns",
     "Completed financial timing profile",
     "Full optimized build corpus/financial before-after byte verification",
     "Final optimized full-corpus paired runtime/RSS and repeats",
-    "Financial all-draw fidelity",
-    "Save-only control comparisons",
     "Sealed corpus blind review and separate key"
   ],
   "optimization": {
     "applied_in_trial": true,
     "qualified": false,
     "completed_byte_comparisons": [
+      "financial off",
+      "forms cover-2.0",
+      "forms cover-2.0-repeat",
       "forms off",
-      "forms cover-2.0"
+      "historical cover-2.0",
+      "historical cover-2.0-repeat",
+      "historical off",
+      "mixed cover-2.0",
+      "mixed cover-2.0-repeat",
+      "mixed off",
+      "receipts cover-2.0",
+      "receipts cover-2.0-repeat",
+      "receipts off"
     ],
     "output_changes_observed": false,
-    "reverted": true,
+    "reverted": false,
     "shipped": false,
-    "product_branch_clean": true,
+    "product_branch_clean": false,
     "patch": "qualification/font04/local/R2a/unqualified-ordered-rows.patch"
   },
   "blind_review": {
