@@ -1376,6 +1376,10 @@ fn assemble_document_impl(
     let kids: Vec<Ref> = page_refs.clone();
     pdf.pages(page_tree).kids(kids).count(pages.len() as i32);
 
+    // Sharing resources use one indirect W array, preserving every default width.
+    let sharing_widths=if sharing.is_some_and(|s|s.cid_maps.len()>1){let id=Ref::new(next_image);next_image+=1;Some(id)}else{None};
+    if let Some(id)=sharing_widths {let mut widths=pdf.indirect(id).start::<pdf_writer::writers::Widths>();for (cid_index,(elem,_))in encodings.iter().enumerate(){let w=if *elem<shapes.len(){(shapes[*elem].ink_span_fu[0].ceil().max(1.)+2.)*1000./2048.}else{500.};widths.consecutive(cid_index as u16+1,[w as f32]);}widths.finish();}
+
     // shared font program
     let map_bytes = sharing.map_or_else(||cid_to_gid_bytes(encodings),|s|s.cid_maps[0].clone());
     let tu = to_unicode_stream(encodings);
@@ -1404,6 +1408,7 @@ fn assemble_document_impl(
             .font_descriptor(desc)
             .default_width(1000.0)
             .cid_to_gid_map_stream(cid_map);
+        if let Some(id)=sharing_widths {cid.pair(Name(b"W"),id);}else {
         {
             let mut widths = cid.widths();
             for (cid_index, (elem, _)) in encodings.iter().enumerate() {
@@ -1415,7 +1420,8 @@ fn assemble_document_impl(
                 widths.consecutive(cid_index as u16 + 1, [w as f32]);
             }
             widths.finish();
-        }
+        }        }
+
     }
     let mut t0 = pdf.type0_font(font);
     t0.base_font(Name(b"ScanWeaveDoc"))
@@ -1432,7 +1438,7 @@ fn assemble_document_impl(
             compressed_stream(&mut pdf,map_ref,map,false)?;
             pdf.font_descriptor(descriptor).name(Name(name.as_bytes())).flags(pdf_writer::types::FontFlags::SYMBOLIC).bbox(Rect::new(0.,-50.,4096.,4096.)).italic_angle(0.).ascent(3800.).descent(-500.).cap_height(3600.).stem_v(80.).font_file2(fontfile);
             let mut cid=pdf.cid_font(child);cid.subtype(CidFontType::Type2).base_font(Name(name.as_bytes())).system_info(SystemInfo{registry:Str(b"Adobe"),ordering:Str(b"Identity"),supplement:0}).font_descriptor(descriptor).default_width(1000.).cid_to_gid_map_stream(map_ref);
-            {let mut widths=cid.widths();for (cid_index,(elem,_)) in encodings.iter().enumerate(){let w=if *elem<shapes.len(){(shapes[*elem].ink_span_fu[0].ceil().max(1.)+2.)*1000./2048.}else{500.};widths.consecutive(cid_index as u16+1,[w as f32]);}widths.finish();}cid.finish();
+            if let Some(id)=sharing_widths {cid.pair(Name(b"W"),id);}cid.finish();
             pdf.type0_font(font_ref).base_font(Name(name.as_bytes())).encoding_predefined(Name(b"Identity-H")).descendant_font(child).to_unicode(to_uni);
             sharing_fonts.push((index,font_ref));
         }
