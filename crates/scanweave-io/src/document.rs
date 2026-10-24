@@ -432,7 +432,10 @@ pub fn convert_document_with_sources_and_sharing(
     }
     stage_timings.page_conversion_ms = stage_start.elapsed().as_millis();
 
+    let snapshot_start = std::time::Instant::now();
     let observations=sharing.map(|_|crate::glyph_sharing::source::snapshot(&pages,&all_donors));
+
+    let snapshot_seconds = snapshot_start.elapsed().as_secs_f64();
 
     // 2. document-wide font: union of (shape, label), remapped per page
     let stage_start = std::time::Instant::now();
@@ -468,7 +471,8 @@ pub fn convert_document_with_sources_and_sharing(
     let baseline_font=sharing.map(|_|font_bytes.clone());
     let mut sharing_report=None;
     if let (Some(multiplier),Some(rows))=(sharing,observations.as_ref()) {
-        let(candidate,report)=crate::glyph_sharing::transport::share(rows,&parts,&shapes,&encodings,&font_bytes,policy.image_encoding,raster_choice,multiplier)?;
+        let(candidate,mut report)=crate::glyph_sharing::transport::share(rows,&parts,&shapes,&encodings,&font_bytes,policy.image_encoding,raster_choice,multiplier)?;
+        report.stage_seconds.insert("source_snapshot".into(), snapshot_seconds);
         if let Some(candidate)=candidate {font_bytes=candidate.font;pdf_bytes=candidate.pdf;stats=candidate.stats;}
         sharing_report=Some(report);
     }

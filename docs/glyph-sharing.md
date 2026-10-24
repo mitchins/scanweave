@@ -15,6 +15,19 @@ available to the system loader, or set `SCANWEAVE_PDFIUM_LIBRARY` to its full pa
 The default conversion does not load PDFium. A missing library during an opt-in
 ownership check is an explicit error, not a skipped check.
 
+The conversion JSON records the loaded library's canonical file path and SHA-256
+in `conversion.glyph_sharing.pdfium`. `version` is null because PDFium has no
+runtime build-version query (the PDF file-version API describes the document).
+The identity is null when no assignments require loading PDFium. Qualification
+uses the pinned `tools/src/pdfium/lib/libpdfium.so` (chromium/8100).
+
+`conversion.glyph_sharing.stage_seconds` reports source snapshot, field preparation,
+planning, assignment preparation, owned-ink preflight, decision ledger, font/economy,
+and transport/assembly wall times. The `planning_*` entries subdivide `planning`;
+`sharing_total` includes the sharing stages but excludes `source_snapshot`.
+These nested totals should not be added together. Existing document stage timings
+cover the rest of conversion; the CLI report also records import time.
+
 Sharing preserves each occurrence's CID, text matrix, PDF width and ActualText.
 TrueType composite stubs retain original advances and reference source-traced
 canonicals. Separate CID-map resources resolve repeated-CID placements. Invisible

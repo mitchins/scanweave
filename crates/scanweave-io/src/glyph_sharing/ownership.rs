@@ -199,13 +199,46 @@ fn crop(
     Ok(result)
 }
 
+/// Identity of the library used by the ownership renderer. PDFium exposes no
+/// runtime build-version API; its PDF file version API is unrelated.
+#[derive(Debug, Clone, serde::Serialize)]
+pub struct PdfiumIdentity {
+    pub library_path: String,
+    pub sha256: String,
+    pub version: Option<String>,
+}
+
+fn loaded_identity() -> Result<PdfiumIdentity, String> {
+    use sha2::{Digest, Sha256};
+    // On Linux use the mapped file, including when the system loader selected it.
+    // An explicit path is also available on the other supported platforms.
+    let mapped = std::fs::read_to_string("/proc/self/maps")
+        .ok()
+        .and_then(|maps| {
+            maps.lines().find_map(|line| {
+                let path = line.split_whitespace().nth(5)?;
+                (path.ends_with("/libpdfium.so")).then(|| std::path::PathBuf::from(path))
+            })
+        });
+    let path = mapped
+        .or_else(|| std::env::var_os("SCANWEAVE_PDFIUM_LIBRARY").map(Into::into))
+        .ok_or("cannot identify loaded PDFium library; set SCANWEAVE_PDFIUM_LIBRARY")?;
+    let path = std::fs::canonicalize(path).map_err(|e| format!("PDFium identity: {e}"))?;
+    let bytes = std::fs::read(&path).map_err(|e| format!("PDFium identity: {e}"))?;
+    Ok(PdfiumIdentity {
+        library_path: path.to_string_lossy().into_owned(),
+        sha256: format!("{:x}", Sha256::digest(bytes)),
+        version: None,
+    })
+}
+
 pub fn preflight(
     rows: &[Observation],
     pages: &[PageParts],
     shapes: &[GlyphShape],
     default_font: &[u8],
     assignments: &[(usize, usize, [f64; 4])],
-) -> Result<BTreeSet<usize>, String> {
+) -> Result<(BTreeSet<usize>, PdfiumIdentity), String> {
     let library = std::env::var_os("SCANWEAVE_PDFIUM_LIBRARY");
     let bindings = if let Some(path) = library {
         Pdfium::bind_to_library(path)
@@ -214,6 +247,7 @@ pub fn preflight(
     }
     .map_err(|e| format!("glyph sharing requires PDFium for its frozen owned-ink check: {e}"))?;
     let pdfium = Pdfium::new(bindings);
+    let identity = loaded_identity()?;
     let bindings = pdfium.bindings();
     let mut trace_shapes = Vec::new();
     let mut encodings = Vec::new();
@@ -352,5 +386,5 @@ pub fn preflight(
             exceptions.insert(i);
         }
     }
-    Ok(exceptions)
+    Ok((exceptions, identity))
 }
