@@ -221,3 +221,27 @@ After R2 is accepted:
   - parity fails;
   - a renderer shows a genuine defect;
   - P2 or corpus results fail.
+
+## Clarification 1 (2026-10-24): net retirement is an aggregate accounting rule, not a per-group gate
+
+Codex stopped at R0 (`033641f`, `r0-net-retirement-audit.json`). The accepted cover-2.0 runs
+with `net_retirement_rule: false`. 54 of its 268 groups get zero retirement credit.
+
+**Resolution.** Listing "outline-level net retirement" under *Safeguards* above was a drafting
+error. Freeze cover-2.0 **exactly as accepted**, with `net_retirement_rule: false`.
+- Net retirement is an **economy accounting rule**. It is measured at outline level, in
+  aggregate per document, and reported. It is not a safety check, and the per-group filter
+  (`star-1.0-net`) is not part of the release method.
+- Zero-credit groups are fidelity substitutions. They were inside the accepted population
+  and went through my blind review: 0 of 244 accepted panels were worse. Every safety check
+  still applies to them.
+- Product requirement: per document, aggregate net outlines retired must be ≥ 0, and font
+  bytes must not grow. If they would, emit default for that document and report it. Also
+  report the zero-credit groups and their outline bytes separately in R1 and R2.
+
+The safeguards that must not weaken are therefore:
+- the hard structural checks;
+- the canonical hygiene screen;
+- the stroke-weight band;
+- the ownership-aware unexplained-ink veto;
+- text identity.
