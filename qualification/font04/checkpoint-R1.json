@@ -1,0 +1,50 @@
+{
+  "schema": "font04-checkpoint-R1-v1",
+  "status": "BLOCKED-BEFORE-METHOD-FREEZE",
+  "checkpoint_R1_reached": false,
+  "reviewer_pending": true,
+  "contract_sha": "7c92f294dedc06fac20d226142a13362daa5f042",
+  "research_start_sha": "7c92f294dedc06fac20d226142a13362daa5f042",
+  "remote_main_sha": "c10e3dff93ca12ac410c0f6626a4ef74ce34e0c1",
+  "freeze_commit_sha": null,
+  "product_branch": null,
+  "rust_branch_sha": null,
+  "p2_preregistration_sha256": "a4f9ccd3a7e51d719946be80f7cc9a297de7ca22285e8755e5e26e415e7db466",
+  "P2_opened": false,
+  "R2_run": false,
+  "blocker": {
+    "classification": "implementation / contract mismatch",
+    "evidence": "qualification/font04/r0-net-retirement-audit.json",
+    "summary": "Accepted cover-2.0 disables per-group net retirement; 54 of 268 groups have zero retirement credit, although aggregate retirement is +327. Resolve aggregate versus per-group safeguard before freezing."
+  },
+  "R0": {
+    "method_freeze": "blocked pending safeguard interpretation",
+    "oracle": "not built",
+    "regression_fixtures": "not built"
+  },
+  "R1": {
+    "native_port": "not started",
+    "parity": "NOT RUN",
+    "divergence_ledger": null,
+    "default_byte_identity_on_product_branch": "NOT RUN",
+    "tests": "NOT RUN",
+    "coverage": "NOT RUN; Sonar gate remains required"
+  },
+  "compatibility": {
+    "PDFium": "NOT RUN on Rust outputs; no Rust outputs exist",
+    "Poppler_default_layout_raw": "NOT RUN on Rust outputs",
+    "MuPDF": "NOT RUN on Rust outputs",
+    "AdobeReader": {
+      "status": "BLOCKED-ON-OWNER",
+      "required": "Official Adobe Acrobat Reader Windows installer for owner-specified build AdobeReader 26.00221.901; Windows .exe or .msi, not AdobeReader2600221901.dmg",
+      "observed_root_download": "AdobeReader2600221901.dmg.crdownload",
+      "wine_prefix_touched": false,
+      "display_used": null
+    },
+    "PDFKit": "kit not prepared; execution deferred to R3"
+  },
+  "product_PR_opened": false,
+  "merged": false,
+  "thresholds_changed": false,
+  "security_findings_dismissed": false
+}

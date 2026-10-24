@@ -1,0 +1,529 @@
+{
+  "schema": "font04-net-retirement-contract-audit-v1",
+  "classification": "implementation / contract mismatch; no numerical or compatibility failure established",
+  "method_changed": false,
+  "reference_selected": {
+    "grouping": "cover",
+    "error_scale": 2.0,
+    "weight_bands": true,
+    "net_retirement_rule": false
+  },
+  "reference_hashes": {
+    "plan.json": "5d656f22f8b2976bd3b8239053b71b2e6924e85669ea18d15b99dddfd456eb2f",
+    "source.json": "a311e570d8214156690f0bff0baf2efd9aef9a476eceb7c1bbd2a890977d3ce9",
+    "emitted-bindings.json": "998d9bd6027ca8a83c9112e000574754579ab9878e8093514ae8f503ffc9ba71"
+  },
+  "pdf_sha256": "d4d0b26211ec643709ffa534525aed14e3fa09a91190e2aa7cf149c31c3b2563",
+  "accounting": "Same retirement-credit rule as b2prime.py star-1.0-net: exclude invisible/rare-held programs; credit each fully retired program to the group with the most users, canonical index breaks ties.",
+  "canonical_groups": 268,
+  "retired_outlines": 595,
+  "added_canonicals": 268,
+  "net_retired_outlines": 327,
+  "zero_credit_groups": [
+    {
+      "canonical": 27,
+      "members": [
+        27,
+        35,
+        742
+      ],
+      "credited_retirements": 0
+    },
+    {
+      "canonical": 61,
+      "members": [
+        61,
+        147,
+        248
+      ],
+      "credited_retirements": 0
+    },
+    {
+      "canonical": 170,
+      "members": [
+        170,
+        601
+      ],
+      "credited_retirements": 0
+    },
+    {
+      "canonical": 259,
+      "members": [
+        129,
+        154,
+        259
+      ],
+      "credited_retirements": 0
+    },
+    {
+      "canonical": 384,
+      "members": [
+        23,
+        384,
+        946
+      ],
+      "credited_retirements": 0
+    },
+    {
+      "canonical": 388,
+      "members": [
+        388,
+        611,
+        897,
+        1054,
+        2951
+      ],
+      "credited_retirements": 0
+    },
+    {
+      "canonical": 475,
+      "members": [
+        103,
+        475,
+        929
+      ],
+      "credited_retirements": 0
+    },
+    {
+      "canonical": 577,
+      "members": [
+        577,
+        894
+      ],
+      "credited_retirements": 0
+    },
+    {
+      "canonical": 598,
+      "members": [
+        598,
+        1279
+      ],
+      "credited_retirements": 0
+    },
+    {
+      "canonical": 623,
+      "members": [
+        623,
+        1917
+      ],
+      "credited_retirements": 0
+    },
+    {
+      "canonical": 828,
+      "members": [
+        350,
+        828,
+        1243
+      ],
+      "credited_retirements": 0
+    },
+    {
+      "canonical": 877,
+      "members": [
+        845,
+        877
+      ],
+      "credited_retirements": 0
+    },
+    {
+      "canonical": 923,
+      "members": [
+        923,
+        1340
+      ],
+      "credited_retirements": 0
+    },
+    {
+      "canonical": 944,
+      "members": [
+        836,
+        944,
+        971
+      ],
+      "credited_retirements": 0
+    },
+    {
+      "canonical": 1063,
+      "members": [
+        1063,
+        1213
+      ],
+      "credited_retirements": 0
+    },
+    {
+      "canonical": 1101,
+      "members": [
+        1094,
+        1101
+      ],
+      "credited_retirements": 0
+    },
+    {
+      "canonical": 1131,
+      "members": [
+        1131,
+        1324
+      ],
+      "credited_retirements": 0
+    },
+    {
+      "canonical": 1139,
+      "members": [
+        1139,
+        1147,
+        1150
+      ],
+      "credited_retirements": 0
+    },
+    {
+      "canonical": 1143,
+      "members": [
+        1126,
+        1130,
+        1142,
+        1143,
+        1580
+      ],
+      "credited_retirements": 0
+    },
+    {
+      "canonical": 1144,
+      "members": [
+        1140,
+        1141,
+        1144,
+        1151,
+        1152,
+        1154,
+        1160,
+        1161,
+        1165,
+        1167
+      ],
+      "credited_retirements": 0
+    },
+    {
+      "canonical": 1301,
+      "members": [
+        660,
+        1301
+      ],
+      "credited_retirements": 0
+    },
+    {
+      "canonical": 1364,
+      "members": [
+        1121,
+        1162,
+        1163,
+        1364,
+        1366
+      ],
+      "credited_retirements": 0
+    },
+    {
+      "canonical": 1473,
+      "members": [
+        345,
+        734,
+        1473
+      ],
+      "credited_retirements": 0
+    },
+    {
+      "canonical": 1534,
+      "members": [
+        789,
+        1534
+      ],
+      "credited_retirements": 0
+    },
+    {
+      "canonical": 1648,
+      "members": [
+        276,
+        386,
+        1632,
+        1648,
+        2090
+      ],
+      "credited_retirements": 0
+    },
+    {
+      "canonical": 1732,
+      "members": [
+        1732,
+        1747
+      ],
+      "credited_retirements": 0
+    },
+    {
+      "canonical": 1766,
+      "members": [
+        1766,
+        3310
+      ],
+      "credited_retirements": 0
+    },
+    {
+      "canonical": 1790,
+      "members": [
+        1783,
+        1790,
+        1857,
+        1933
+      ],
+      "credited_retirements": 0
+    },
+    {
+      "canonical": 1816,
+      "members": [
+        1779,
+        1816,
+        1821,
+        1871,
+        3511,
+        3522
+      ],
+      "credited_retirements": 0
+    },
+    {
+      "canonical": 1891,
+      "members": [
+        1875,
+        1885,
+        1891,
+        2284
+      ],
+      "credited_retirements": 0
+    },
+    {
+      "canonical": 2008,
+      "members": [
+        269,
+        452,
+        685,
+        691,
+        2008,
+        3183
+      ],
+      "credited_retirements": 0
+    },
+    {
+      "canonical": 2242,
+      "members": [
+        1813,
+        1971,
+        2242
+      ],
+      "credited_retirements": 0
+    },
+    {
+      "canonical": 2264,
+      "members": [
+        435,
+        630,
+        634,
+        652,
+        1889,
+        2264
+      ],
+      "credited_retirements": 0
+    },
+    {
+      "canonical": 2308,
+      "members": [
+        1907,
+        2308
+      ],
+      "credited_retirements": 0
+    },
+    {
+      "canonical": 2411,
+      "members": [
+        2411,
+        2432,
+        2453
+      ],
+      "credited_retirements": 0
+    },
+    {
+      "canonical": 2425,
+      "members": [
+        1496,
+        2425
+      ],
+      "credited_retirements": 0
+    },
+    {
+      "canonical": 2434,
+      "members": [
+        2434,
+        2577
+      ],
+      "credited_retirements": 0
+    },
+    {
+      "canonical": 2457,
+      "members": [
+        2360,
+        2457
+      ],
+      "credited_retirements": 0
+    },
+    {
+      "canonical": 2532,
+      "members": [
+        2532,
+        2587
+      ],
+      "credited_retirements": 0
+    },
+    {
+      "canonical": 2608,
+      "members": [
+        2608,
+        3189
+      ],
+      "credited_retirements": 0
+    },
+    {
+      "canonical": 2641,
+      "members": [
+        2641,
+        2772
+      ],
+      "credited_retirements": 0
+    },
+    {
+      "canonical": 2785,
+      "members": [
+        468,
+        600,
+        1061,
+        2726,
+        2741,
+        2748,
+        2785,
+        2788,
+        2804,
+        2916,
+        2944
+      ],
+      "credited_retirements": 0
+    },
+    {
+      "canonical": 2871,
+      "members": [
+        2871,
+        2876
+      ],
+      "credited_retirements": 0
+    },
+    {
+      "canonical": 2985,
+      "members": [
+        625,
+        632,
+        639,
+        677,
+        1217,
+        2985
+      ],
+      "credited_retirements": 0
+    },
+    {
+      "canonical": 3074,
+      "members": [
+        3074,
+        3155
+      ],
+      "credited_retirements": 0
+    },
+    {
+      "canonical": 3101,
+      "members": [
+        3096,
+        3101
+      ],
+      "credited_retirements": 0
+    },
+    {
+      "canonical": 3284,
+      "members": [
+        3280,
+        3284
+      ],
+      "credited_retirements": 0
+    },
+    {
+      "canonical": 3303,
+      "members": [
+        3235,
+        3253,
+        3303
+      ],
+      "credited_retirements": 0
+    },
+    {
+      "canonical": 3306,
+      "members": [
+        2631,
+        3306
+      ],
+      "credited_retirements": 0
+    },
+    {
+      "canonical": 3340,
+      "members": [
+        2568,
+        3340
+      ],
+      "credited_retirements": 0
+    },
+    {
+      "canonical": 3377,
+      "members": [
+        29,
+        113,
+        443,
+        3198,
+        3299,
+        3377
+      ],
+      "credited_retirements": 0
+    },
+    {
+      "canonical": 3459,
+      "members": [
+        2438,
+        3459
+      ],
+      "credited_retirements": 0
+    },
+    {
+      "canonical": 3483,
+      "members": [
+        3410,
+        3483
+      ],
+      "credited_retirements": 0
+    },
+    {
+      "canonical": 3493,
+      "members": [
+        3084,
+        3372,
+        3493
+      ],
+      "credited_retirements": 0
+    }
+  ],
+  "source_evidence": {
+    "qualification/font04/b2prime.py": {
+      "sha256": "903dca4ca96df6c90aa43945bbebbc1e6d8d077c976d9fa45114addc2cb9b543",
+      "explanation": "Only method==star and scale==1 enters the iterative retirement-credit filter; cover-2.0 is emitted with net_retirement_rule=False."
+    }
+  },
+  "decision_needed": "Confirm whether the accepted cover-2.0 aggregate net saving satisfies the product safeguard, or require the per-group filter. The latter changes frozen membership and must not be silently introduced."
+}

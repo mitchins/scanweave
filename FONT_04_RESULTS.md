@@ -198,3 +198,34 @@ Review: `qualification/font04/local/B2prime-blind-review/blinded-review.pdf`. Co
 The experimental measurements reuse frozen OCR, outlines and pair fits; baseline full-conversion runtime, incremental emission and measurement time/RSS/PSS are reported separately. No end-to-end speed gain is claimed. The bounded frontier improves outline reuse, while complete-PDF savings remain modest and newly admitted typography awaits independent review. No opportunity is declared falsified.
 
 **STOP at B2′. No B3, P2, operating-point promotion, merge, new product PR, or PR #24 state change. No security finding was dismissed.**
+
+## Checkpoint R1
+
+**Blocked before R0 method freeze; Checkpoint R1 has not been reached.** Contract
+`7c92f294dedc06fac20d226142a13362daa5f042` is present and research HEAD started
+exactly there, with no intervening commits or tracked modifications. Remote main
+was verified as `c10e3dff93ca12ac410c0f6626a4ef74ce34e0c1`.
+
+An implementation/contract mismatch needs resolution before the freeze: accepted
+cover-2.0 records `net_retirement_rule: false`. Under the research implementation's
+retirement-credit accounting, 54 of 268 canonical groups receive zero retirement
+credit. Aggregate retirement remains 595 old outlines minus 268 added canonicals
+= **327 net**. The iterative per-group filter exists only for `star-1.0-net`.
+This is not evidence that aggregate economy fails. The unresolved question is
+whether aggregate economy satisfies the product safeguard, or whether the
+per-group rule must apply. Adding that filter would change accepted membership;
+freezing without resolving its meaning could misstate the safeguard. No rule or
+threshold was changed.
+
+Evidence: [retirement audit](qualification/font04/r0-net-retirement-audit.json).
+Machine status: [checkpoint-R1.json](qualification/font04/checkpoint-R1.json).
+No freeze commit or product branch exists yet; oracle, fixtures, native port,
+parity, Rust PDFs, tests, coverage and compatibility remain uncompleted. No
+parity or compatibility failure is claimed. Independent review is pending.
+
+Reader is separately **BLOCKED-ON-OWNER**: the root contains the incomplete macOS
+`AdobeReader2600221901.dmg.crdownload`. The required input is an official Windows
+`.exe` or `.msi` installer for owner-specified AdobeReader **26.00221.901**. No Wine
+prefix or display was touched. PDFKit kit preparation remains outstanding; macOS
+execution stays deferred to R3. P2 remains unopened, R2 was not run, no product PR
+was opened, no merge occurred, and no security finding was dismissed.
