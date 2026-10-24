@@ -232,6 +232,22 @@ fn opt_in_document_fixture() {
         report.decisions.len(),
         fixture["expected_visible_draws"].as_u64().unwrap() as usize
     );
+    let identity = report.pdfium.as_ref().expect("loaded PDFium identity");
+    use sha2::{Digest, Sha256};
+    let library = std::fs::read(std::env::var_os("SCANWEAVE_PDFIUM_LIBRARY").unwrap()).unwrap();
+    assert_eq!(identity.sha256, format!("{:x}", Sha256::digest(library)));
+    assert!(std::path::Path::new(&identity.library_path).is_absolute());
+    for name in [
+        "source_snapshot",
+        "planning",
+        "planning_candidate_fits",
+        "planning_source_floors",
+        "owned_ink_preflight",
+        "sharing_total",
+    ] {
+        let seconds = report.stage_seconds[name];
+        assert!(seconds.is_finite() && seconds >= 0., "{name}");
+    }
     assert_eq!(report.substituted, 7);
     assert_eq!(report.net_outlines_retired, 1);
     assert!(report.fallback.is_none());

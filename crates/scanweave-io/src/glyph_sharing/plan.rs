@@ -15,6 +15,7 @@ pub struct Fit {
 }
 #[derive(Debug)]
 pub struct Plan {
+    pub stage_seconds: BTreeMap<String, f64>,
     pub fits: Vec<Fit>,
     pub groups: Vec<Group>,
     pub floors: Vec<f64>,
@@ -33,6 +34,8 @@ pub fn plan(
     if !matches!(multiplier, 1.5 | 2.0) {
         return Err("unsupported frozen operating point".into());
     }
+    let mut stage_seconds = BTreeMap::new();
+    let stage = std::time::Instant::now();
     let n = rows.len();
     if fields.len() != n
         || candidates.len() != n
@@ -51,6 +54,8 @@ pub fn plan(
         labels.entry(&row.label).or_default().push(i);
     }
     let bands: Vec<i32> = fields.iter().map(|f| weight_band(f)).collect();
+    stage_seconds.insert("planning_prepare".into(), stage.elapsed().as_secs_f64());
+    let stage = std::time::Instant::now();
     let mut fits = Vec::new();
     let mut by_member: Vec<Vec<usize>> = vec![Vec::new(); n];
     for i in 0..n {
@@ -94,6 +99,11 @@ pub fn plan(
             });
         }
     }
+    stage_seconds.insert(
+        "planning_candidate_fits".into(),
+        stage.elapsed().as_secs_f64(),
+    );
+    let stage = std::time::Instant::now();
     eprintln!("scanweave: glyph sharing source variation estimates");
     let mut original_floors = vec![None; n];
     for i in 0..n {
@@ -181,6 +191,11 @@ pub fn plan(
         }
         floors[i] = quantile(&values, 0.85);
     }
+    stage_seconds.insert(
+        "planning_source_floors".into(),
+        stage.elapsed().as_secs_f64(),
+    );
+    let stage = std::time::Instant::now();
     for i in 0..n {
         if let Some(c) = &candidates[i] {
             let (p, aligned) = register(&fields[i], c);
@@ -193,6 +208,8 @@ pub fn plan(
             });
         }
     }
+    stage_seconds.insert("planning_self_fits".into(), stage.elapsed().as_secs_f64());
+    let stage = std::time::Instant::now();
     eprintln!("scanweave: glyph sharing canonical hygiene");
     let screens: Vec<Vec<String>> = (0..n)
         .map(|j| {
@@ -210,6 +227,8 @@ pub fn plan(
             }
         })
         .collect();
+    stage_seconds.insert("planning_hygiene".into(), stage.elapsed().as_secs_f64());
+    let stage = std::time::Instant::now();
     let ranked: Vec<Member> = rows
         .iter()
         .enumerate()
@@ -231,7 +250,9 @@ pub fn plan(
         })
         .collect();
     let groups = cover(&ranked, &pairs, multiplier);
+    stage_seconds.insert("planning_cover".into(), stage.elapsed().as_secs_f64());
     Ok(Plan {
+        stage_seconds,
         fits,
         groups,
         floors,

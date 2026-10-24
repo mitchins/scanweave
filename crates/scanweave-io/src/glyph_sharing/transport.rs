@@ -34,6 +34,8 @@ pub struct ZeroCreditGroup {
 }
 #[derive(Debug, Clone, serde::Serialize)]
 pub struct SharingReport {
+    pub pdfium: Option<super::ownership::PdfiumIdentity>,
+    pub stage_seconds: BTreeMap<String, f64>,
     pub method: String,
     pub multiplier: f64,
     pub net_retirement_rule: bool,
@@ -65,6 +67,8 @@ pub fn share(
     tonal: bool,
     multiplier: f64,
 ) -> Result<(Option<Candidate>, SharingReport), String> {
+    let started = std::time::Instant::now();
+    let mut stage_seconds = BTreeMap::new();
     let fields: Vec<_> = rows.iter().map(|r| r.field.clone()).collect();
     let candidates: Vec<_> = rows
         .iter()
@@ -78,7 +82,12 @@ pub fn share(
             band: 0,
         })
         .collect();
+    stage_seconds.insert("prepare_fields".into(), started.elapsed().as_secs_f64());
+    let stage = std::time::Instant::now();
     let plan = plan::plan(&members, &fields, &candidates, multiplier)?;
+    stage_seconds.insert("planning".into(), stage.elapsed().as_secs_f64());
+    stage_seconds.extend(plan.stage_seconds.clone());
+    let stage = std::time::Instant::now();
     drop(fields);
     drop(candidates);
     let fits: BTreeMap<(usize, usize), &Fit> = plan
@@ -106,11 +115,16 @@ pub fn share(
         "scanweave: glyph sharing ownership preflight on {} members",
         assignments.len()
     );
-    let exceptions = if assignments.is_empty() {
-        BTreeSet::new()
+    stage_seconds.insert("assignments".into(), stage.elapsed().as_secs_f64());
+    let stage = std::time::Instant::now();
+    let (exceptions, pdfium) = if assignments.is_empty() {
+        (BTreeSet::new(), None)
     } else {
-        preflight(rows, pages, shapes, default_font, &assignments)?
+        let (exceptions, identity) = preflight(rows, pages, shapes, default_font, &assignments)?;
+        (exceptions, Some(identity))
     };
+    stage_seconds.insert("owned_ink_preflight".into(), stage.elapsed().as_secs_f64());
+    let stage = std::time::Instant::now();
     let mut surviving = BTreeMap::new();
     let mut groups = BTreeMap::new();
     for g in &plan.groups {
@@ -191,7 +205,11 @@ pub fn share(
         });
     }
     let before = crate::serialization::deflate(default_font)?.len();
+    stage_seconds.insert("decision_ledger".into(), stage.elapsed().as_secs_f64());
+    let stage = std::time::Instant::now();
     let mut report = SharingReport {
+        pdfium,
+        stage_seconds,
         method: format!("cover-{multiplier:.1} frozen at research 5356255"),
         multiplier,
         net_retirement_rule: false,
@@ -209,6 +227,12 @@ pub fn share(
     };
     if surviving.is_empty() {
         report.fallback = Some("no surviving cover groups".into());
+        report
+            .stage_seconds
+            .insert("font_and_economy".into(), stage.elapsed().as_secs_f64());
+        report
+            .stage_seconds
+            .insert("sharing_total".into(), started.elapsed().as_secs_f64());
         return Ok((None, report));
     }
     let mut required = BTreeSet::new();
@@ -345,8 +369,18 @@ pub fn share(
                 d.reasons = vec!["document_economy_fallback".into()];
             }
         }
+        report
+            .stage_seconds
+            .insert("font_and_economy".into(), stage.elapsed().as_secs_f64());
+        report
+            .stage_seconds
+            .insert("sharing_total".into(), started.elapsed().as_secs_f64());
         return Ok((None, report));
     }
+    report
+        .stage_seconds
+        .insert("font_and_economy".into(), stage.elapsed().as_secs_f64());
+    let stage = std::time::Instant::now();
     let base_map: Vec<u16> = std::iter::once(0)
         .chain(encodings.iter().map(|(shape, _)| {
             shared
@@ -402,6 +436,13 @@ pub fn share(
         tonal,
         &resources,
     )?;
+    report.stage_seconds.insert(
+        "transport_and_assembly".into(),
+        stage.elapsed().as_secs_f64(),
+    );
+    report
+        .stage_seconds
+        .insert("sharing_total".into(), started.elapsed().as_secs_f64());
     Ok((
         Some(Candidate {
             font: shared.bytes,
