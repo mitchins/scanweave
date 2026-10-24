@@ -1,0 +1,2425 @@
+{
+  "schema": "font04-method-freeze-v1",
+  "contract": "3610e009b89aa3a5f97aea65af6df87477295656",
+  "method": "cover-2.0",
+  "selected": {
+    "grouping": "cover",
+    "error_scale": 2.0,
+    "weight_bands": true,
+    "net_retirement_rule": false
+  },
+  "class_eligibility": ">=10 visible draws of a label in this document",
+  "p2_preregistration_sha256": "a4f9ccd3a7e51d719946be80f7cc9a297de7ca22285e8755e5e26e415e7db466",
+  "p2_opened": false,
+  "stages": [
+    {
+      "stage": "snapshot",
+      "source": "crates/scanweave-io/src/font04.rs:121",
+      "rule": "Visible draws; eligibility is >=10 visible draws of a label per document; all other draws retain default."
+    },
+    {
+      "stage": "eligibility",
+      "source": "qualification/font04/planner.py:19",
+      "rule": "Safe owned source, contrast >=30; line-local a/c/e x-height, baseline and OCR center; 64x64 frame."
+    },
+    {
+      "stage": "weight band",
+      "source": "qualification/font04/b2prime.py:57",
+      "rule": "floor(log(max(mass / max(1, 4-connected eroded boundary pixels), .1)) / log(1.3)); separate labels and bands."
+    },
+    {
+      "stage": "hygiene",
+      "source": "qualification/font04/canonical_hygiene.py:12",
+      "rule": "Independent current-program class support; footprint, unsupported components and topology screen before offering canonical."
+    },
+    {
+      "stage": "cover grouping",
+      "source": "qualification/font04/planner.py:124",
+      "rule": "Directed 24-nearest candidate shortlist; self-admission mandatory; cost-aware greedy cover, tuple tie breaks by index; >=2 members. Soft multiplier 2.0; no witness-count gate. LOO fallback: soft_support.py."
+    },
+    {
+      "stage": "canonical trace",
+      "source": "crates/scanweave-io/src/font04.rs:76",
+      "rule": "Fresh native source-field trace with floor off; preserve crop frame; existing 16384 sample cap and 16-unit trace policy. Trace occurs before fitting/grouping; no group retracing."
+    },
+    {
+      "stage": "placement fit",
+      "source": "qualification/font04/geometry.py:39",
+      "rule": "Bounded SciPy TRF Huber least squares; isotropic scale and translation only; original source frame inverse."
+    },
+    {
+      "stage": "hard checks",
+      "source": "qualification/font04/planner.py:98",
+      "rule": "Area, extents, elongation, median EDT stroke, 8-connected ink/background topology, centroid, major-axis orientation, effective stroke, counter XOR, cross moment, .35/.65 topology."
+    },
+    {
+      "stage": "owned-ink veto",
+      "source": "qualification/font04/b2prime.py:19",
+      "rule": "Raw source and default establish ownership; detached and attached significance; veto canonical/group if canonical fires or fewer than 2 survivors."
+    },
+    {
+      "stage": "net-retirement",
+      "source": "FONT_04_PRODUCT_MISSION.md:244",
+      "rule": "net_retirement_rule=false; aggregate document net outlines retired >=0 and encoded font bytes <= default, otherwise emit default; report zero-credit groups separately."
+    },
+    {
+      "stage": "composite stub",
+      "source": "qualification/font04/composite_transport.py:43",
+      "rule": "Round-to-even integer offsets and F2Dot14 matrix; ROUND_XY_TO_GRID | UNSCALED_COMPONENT_OFFSET. Preserve default metrics and CID/Tm/W/ActualText."
+    },
+    {
+      "stage": "font-variant emission",
+      "source": "qualification/font04/composite_transport.py:55",
+      "rule": "First compatible CID map per draw; shared embedded font; keep visible and invisible owners; subset unreachable old programs."
+    }
+  ],
+  "numeric_literal_inventory_scope": "All numeric literals in listed Python sources; includes inactive comparison helpers, not additional release gates.",
+  "constants": [
+    {
+      "source": "qualification/font04/b2prime.py:24",
+      "value": 3,
+      "expression": "return component['area']>=3 and component['mass']>=1.5"
+    },
+    {
+      "source": "qualification/font04/b2prime.py:24",
+      "value": 1.5,
+      "expression": "return component['area']>=3 and component['mass']>=1.5"
+    },
+    {
+      "source": "qualification/font04/b2prime.py:25",
+      "value": 4,
+      "expression": "return component['area']>=4 and component['mass']>=3."
+    },
+    {
+      "source": "qualification/font04/b2prime.py:25",
+      "value": 3.0,
+      "expression": "return component['area']>=4 and component['mass']>=3."
+    },
+    {
+      "source": "qualification/font04/b2prime.py:29",
+      "value": 1233,
+      "expression": "for i in [1233,3422]:assert i in fired"
+    },
+    {
+      "source": "qualification/font04/b2prime.py:29",
+      "value": 3422,
+      "expression": "for i in [1233,3422]:assert i in fired"
+    },
+    {
+      "source": "qualification/font04/b2prime.py:30",
+      "value": 277,
+      "expression": "rows=json.loads((ART/'source.json').read_text())['rows'];b1=json.loads((ROOT/'financial-B1prime-PV.pdf.font04/source.json').read_text())['rows'][277];mark=next(r['index'] for r in rows if (r['page'],r['id'])==(b1['page'],b1['id']));assert mark==3422"
+    },
+    {
+      "source": "qualification/font04/b2prime.py:30",
+      "value": 3422,
+      "expression": "rows=json.loads((ART/'source.json').read_text())['rows'];b1=json.loads((ROOT/'financial-B1prime-PV.pdf.font04/source.json').read_text())['rows'][277];mark=next(r['index'] for r in rows if (r['page'],r['id'])==(b1['page'],b1['id']));assert mark==3422"
+    },
+    {
+      "source": "qualification/font04/b2prime.py:31",
+      "value": 44,
+      "expression": "result=dict(policy=dict(detached_min_area=3,detached_min_mass=1.5,attached_min_area=4,attached_min_mass=3.,halo=1.,source_threshold=.25,default_threshold=.15,candidate_threshold=.10),calibration_population=old['exceptions'],n=44,previously_firing=44,calibrated_firing=len(set(old['exceptions'])&fired),retained=sorted(fired),mandatory=dict(B1_glyph_277_global_member=mark,glyph_3422=3422,glyph_1233=1233),rule='Calibrated attached-boundary noise significance; detached owned components remain under a stricter threshold. Unowned scanner dirt always ignored.',review='44 reviewed B2 firings; 42 indistinguishable, two minor missing marks. Conservative threshold retains some reviewed immaterial ink.')"
+    },
+    {
+      "source": "qualification/font04/b2prime.py:31",
+      "value": 44,
+      "expression": "result=dict(policy=dict(detached_min_area=3,detached_min_mass=1.5,attached_min_area=4,attached_min_mass=3.,halo=1.,source_threshold=.25,default_threshold=.15,candidate_threshold=.10),calibration_population=old['exceptions'],n=44,previously_firing=44,calibrated_firing=len(set(old['exceptions'])&fired),retained=sorted(fired),mandatory=dict(B1_glyph_277_global_member=mark,glyph_3422=3422,glyph_1233=1233),rule='Calibrated attached-boundary noise significance; detached owned components remain under a stricter threshold. Unowned scanner dirt always ignored.',review='44 reviewed B2 firings; 42 indistinguishable, two minor missing marks. Conservative threshold retains some reviewed immaterial ink.')"
+    },
+    {
+      "source": "qualification/font04/b2prime.py:31",
+      "value": 3,
+      "expression": "result=dict(policy=dict(detached_min_area=3,detached_min_mass=1.5,attached_min_area=4,attached_min_mass=3.,halo=1.,source_threshold=.25,default_threshold=.15,candidate_threshold=.10),calibration_population=old['exceptions'],n=44,previously_firing=44,calibrated_firing=len(set(old['exceptions'])&fired),retained=sorted(fired),mandatory=dict(B1_glyph_277_global_member=mark,glyph_3422=3422,glyph_1233=1233),rule='Calibrated attached-boundary noise significance; detached owned components remain under a stricter threshold. Unowned scanner dirt always ignored.',review='44 reviewed B2 firings; 42 indistinguishable, two minor missing marks. Conservative threshold retains some reviewed immaterial ink.')"
+    },
+    {
+      "source": "qualification/font04/b2prime.py:31",
+      "value": 1.5,
+      "expression": "result=dict(policy=dict(detached_min_area=3,detached_min_mass=1.5,attached_min_area=4,attached_min_mass=3.,halo=1.,source_threshold=.25,default_threshold=.15,candidate_threshold=.10),calibration_population=old['exceptions'],n=44,previously_firing=44,calibrated_firing=len(set(old['exceptions'])&fired),retained=sorted(fired),mandatory=dict(B1_glyph_277_global_member=mark,glyph_3422=3422,glyph_1233=1233),rule='Calibrated attached-boundary noise significance; detached owned components remain under a stricter threshold. Unowned scanner dirt always ignored.',review='44 reviewed B2 firings; 42 indistinguishable, two minor missing marks. Conservative threshold retains some reviewed immaterial ink.')"
+    },
+    {
+      "source": "qualification/font04/b2prime.py:31",
+      "value": 4,
+      "expression": "result=dict(policy=dict(detached_min_area=3,detached_min_mass=1.5,attached_min_area=4,attached_min_mass=3.,halo=1.,source_threshold=.25,default_threshold=.15,candidate_threshold=.10),calibration_population=old['exceptions'],n=44,previously_firing=44,calibrated_firing=len(set(old['exceptions'])&fired),retained=sorted(fired),mandatory=dict(B1_glyph_277_global_member=mark,glyph_3422=3422,glyph_1233=1233),rule='Calibrated attached-boundary noise significance; detached owned components remain under a stricter threshold. Unowned scanner dirt always ignored.',review='44 reviewed B2 firings; 42 indistinguishable, two minor missing marks. Conservative threshold retains some reviewed immaterial ink.')"
+    },
+    {
+      "source": "qualification/font04/b2prime.py:31",
+      "value": 3.0,
+      "expression": "result=dict(policy=dict(detached_min_area=3,detached_min_mass=1.5,attached_min_area=4,attached_min_mass=3.,halo=1.,source_threshold=.25,default_threshold=.15,candidate_threshold=.10),calibration_population=old['exceptions'],n=44,previously_firing=44,calibrated_firing=len(set(old['exceptions'])&fired),retained=sorted(fired),mandatory=dict(B1_glyph_277_global_member=mark,glyph_3422=3422,glyph_1233=1233),rule='Calibrated attached-boundary noise significance; detached owned components remain under a stricter threshold. Unowned scanner dirt always ignored.',review='44 reviewed B2 firings; 42 indistinguishable, two minor missing marks. Conservative threshold retains some reviewed immaterial ink.')"
+    },
+    {
+      "source": "qualification/font04/b2prime.py:31",
+      "value": 1.0,
+      "expression": "result=dict(policy=dict(detached_min_area=3,detached_min_mass=1.5,attached_min_area=4,attached_min_mass=3.,halo=1.,source_threshold=.25,default_threshold=.15,candidate_threshold=.10),calibration_population=old['exceptions'],n=44,previously_firing=44,calibrated_firing=len(set(old['exceptions'])&fired),retained=sorted(fired),mandatory=dict(B1_glyph_277_global_member=mark,glyph_3422=3422,glyph_1233=1233),rule='Calibrated attached-boundary noise significance; detached owned components remain under a stricter threshold. Unowned scanner dirt always ignored.',review='44 reviewed B2 firings; 42 indistinguishable, two minor missing marks. Conservative threshold retains some reviewed immaterial ink.')"
+    },
+    {
+      "source": "qualification/font04/b2prime.py:31",
+      "value": 0.25,
+      "expression": "result=dict(policy=dict(detached_min_area=3,detached_min_mass=1.5,attached_min_area=4,attached_min_mass=3.,halo=1.,source_threshold=.25,default_threshold=.15,candidate_threshold=.10),calibration_population=old['exceptions'],n=44,previously_firing=44,calibrated_firing=len(set(old['exceptions'])&fired),retained=sorted(fired),mandatory=dict(B1_glyph_277_global_member=mark,glyph_3422=3422,glyph_1233=1233),rule='Calibrated attached-boundary noise significance; detached owned components remain under a stricter threshold. Unowned scanner dirt always ignored.',review='44 reviewed B2 firings; 42 indistinguishable, two minor missing marks. Conservative threshold retains some reviewed immaterial ink.')"
+    },
+    {
+      "source": "qualification/font04/b2prime.py:31",
+      "value": 0.15,
+      "expression": "result=dict(policy=dict(detached_min_area=3,detached_min_mass=1.5,attached_min_area=4,attached_min_mass=3.,halo=1.,source_threshold=.25,default_threshold=.15,candidate_threshold=.10),calibration_population=old['exceptions'],n=44,previously_firing=44,calibrated_firing=len(set(old['exceptions'])&fired),retained=sorted(fired),mandatory=dict(B1_glyph_277_global_member=mark,glyph_3422=3422,glyph_1233=1233),rule='Calibrated attached-boundary noise significance; detached owned components remain under a stricter threshold. Unowned scanner dirt always ignored.',review='44 reviewed B2 firings; 42 indistinguishable, two minor missing marks. Conservative threshold retains some reviewed immaterial ink.')"
+    },
+    {
+      "source": "qualification/font04/b2prime.py:31",
+      "value": 0.1,
+      "expression": "result=dict(policy=dict(detached_min_area=3,detached_min_mass=1.5,attached_min_area=4,attached_min_mass=3.,halo=1.,source_threshold=.25,default_threshold=.15,candidate_threshold=.10),calibration_population=old['exceptions'],n=44,previously_firing=44,calibrated_firing=len(set(old['exceptions'])&fired),retained=sorted(fired),mandatory=dict(B1_glyph_277_global_member=mark,glyph_3422=3422,glyph_1233=1233),rule='Calibrated attached-boundary noise significance; detached owned components remain under a stricter threshold. Unowned scanner dirt always ignored.',review='44 reviewed B2 firings; 42 indistinguishable, two minor missing marks. Conservative threshold retains some reviewed immaterial ink.')"
+    },
+    {
+      "source": "qualification/font04/b2prime.py:31",
+      "value": 3422,
+      "expression": "result=dict(policy=dict(detached_min_area=3,detached_min_mass=1.5,attached_min_area=4,attached_min_mass=3.,halo=1.,source_threshold=.25,default_threshold=.15,candidate_threshold=.10),calibration_population=old['exceptions'],n=44,previously_firing=44,calibrated_firing=len(set(old['exceptions'])&fired),retained=sorted(fired),mandatory=dict(B1_glyph_277_global_member=mark,glyph_3422=3422,glyph_1233=1233),rule='Calibrated attached-boundary noise significance; detached owned components remain under a stricter threshold. Unowned scanner dirt always ignored.',review='44 reviewed B2 firings; 42 indistinguishable, two minor missing marks. Conservative threshold retains some reviewed immaterial ink.')"
+    },
+    {
+      "source": "qualification/font04/b2prime.py:31",
+      "value": 1233,
+      "expression": "result=dict(policy=dict(detached_min_area=3,detached_min_mass=1.5,attached_min_area=4,attached_min_mass=3.,halo=1.,source_threshold=.25,default_threshold=.15,candidate_threshold=.10),calibration_population=old['exceptions'],n=44,previously_firing=44,calibrated_firing=len(set(old['exceptions'])&fired),retained=sorted(fired),mandatory=dict(B1_glyph_277_global_member=mark,glyph_3422=3422,glyph_1233=1233),rule='Calibrated attached-boundary noise significance; detached owned components remain under a stricter threshold. Unowned scanner dirt always ignored.',review='44 reviewed B2 firings; 42 indistinguishable, two minor missing marks. Conservative threshold retains some reviewed immaterial ink.')"
+    },
+    {
+      "source": "qualification/font04/b2prime.py:32",
+      "value": 2,
+      "expression": "(BASE/'b2prime-owned-calibration.json').write_text(json.dumps(result,indent=2)+'\\n');return result"
+    },
+    {
+      "source": "qualification/font04/b2prime.py:39",
+      "value": 1,
+      "expression": "i=a['member'];r=dict(rows[i]);g=geometry_pages[r['page']];r.update(pixel_x_pt=g['width_pt']/g['raster_width'],pixel_y_pt=g['height_pt']/g['raster_height']);o=lookup[a['canonical']];m=glyph_matrix(r,o,a['bbox']);pdf.pages.append(original.pages[r['page']]);page=pdf.pages[-1];page.Resources=pikepdf.Dictionary(Font=pikepdf.Dictionary(F04=font));cmd='BT 0 Tr 0 g /F04 1 Tf '+' '.join(map(str,operands(m)))+f\" Tm <{o['gid']:04x}> Tj ET\";page.Contents=pdf.make_stream(cmd.encode());x,y,xx,yy=map(int,r['source']['bbox']);bounds[i]=[x-4,y-4,xx+4,yy+4]"
+    },
+    {
+      "source": "qualification/font04/b2prime.py:39",
+      "value": 4,
+      "expression": "i=a['member'];r=dict(rows[i]);g=geometry_pages[r['page']];r.update(pixel_x_pt=g['width_pt']/g['raster_width'],pixel_y_pt=g['height_pt']/g['raster_height']);o=lookup[a['canonical']];m=glyph_matrix(r,o,a['bbox']);pdf.pages.append(original.pages[r['page']]);page=pdf.pages[-1];page.Resources=pikepdf.Dictionary(Font=pikepdf.Dictionary(F04=font));cmd='BT 0 Tr 0 g /F04 1 Tf '+' '.join(map(str,operands(m)))+f\" Tm <{o['gid']:04x}> Tj ET\";page.Contents=pdf.make_stream(cmd.encode());x,y,xx,yy=map(int,r['source']['bbox']);bounds[i]=[x-4,y-4,xx+4,yy+4]"
+    },
+    {
+      "source": "qualification/font04/b2prime.py:39",
+      "value": 4,
+      "expression": "i=a['member'];r=dict(rows[i]);g=geometry_pages[r['page']];r.update(pixel_x_pt=g['width_pt']/g['raster_width'],pixel_y_pt=g['height_pt']/g['raster_height']);o=lookup[a['canonical']];m=glyph_matrix(r,o,a['bbox']);pdf.pages.append(original.pages[r['page']]);page=pdf.pages[-1];page.Resources=pikepdf.Dictionary(Font=pikepdf.Dictionary(F04=font));cmd='BT 0 Tr 0 g /F04 1 Tf '+' '.join(map(str,operands(m)))+f\" Tm <{o['gid']:04x}> Tj ET\";page.Contents=pdf.make_stream(cmd.encode());x,y,xx,yy=map(int,r['source']['bbox']);bounds[i]=[x-4,y-4,xx+4,yy+4]"
+    },
+    {
+      "source": "qualification/font04/b2prime.py:39",
+      "value": 4,
+      "expression": "i=a['member'];r=dict(rows[i]);g=geometry_pages[r['page']];r.update(pixel_x_pt=g['width_pt']/g['raster_width'],pixel_y_pt=g['height_pt']/g['raster_height']);o=lookup[a['canonical']];m=glyph_matrix(r,o,a['bbox']);pdf.pages.append(original.pages[r['page']]);page=pdf.pages[-1];page.Resources=pikepdf.Dictionary(Font=pikepdf.Dictionary(F04=font));cmd='BT 0 Tr 0 g /F04 1 Tf '+' '.join(map(str,operands(m)))+f\" Tm <{o['gid']:04x}> Tj ET\";page.Contents=pdf.make_stream(cmd.encode());x,y,xx,yy=map(int,r['source']['bbox']);bounds[i]=[x-4,y-4,xx+4,yy+4]"
+    },
+    {
+      "source": "qualification/font04/b2prime.py:39",
+      "value": 4,
+      "expression": "i=a['member'];r=dict(rows[i]);g=geometry_pages[r['page']];r.update(pixel_x_pt=g['width_pt']/g['raster_width'],pixel_y_pt=g['height_pt']/g['raster_height']);o=lookup[a['canonical']];m=glyph_matrix(r,o,a['bbox']);pdf.pages.append(original.pages[r['page']]);page=pdf.pages[-1];page.Resources=pikepdf.Dictionary(Font=pikepdf.Dictionary(F04=font));cmd='BT 0 Tr 0 g /F04 1 Tf '+' '.join(map(str,operands(m)))+f\" Tm <{o['gid']:04x}> Tj ET\";page.Contents=pdf.make_stream(cmd.encode());x,y,xx,yy=map(int,r['source']['bbox']);bounds[i]=[x-4,y-4,xx+4,yy+4]"
+    },
+    {
+      "source": "qualification/font04/b2prime.py:51",
+      "value": 2,
+      "expression": "(art/'plan.json').write_text(json.dumps(plan,indent=2)+'\\n');return art"
+    },
+    {
+      "source": "qualification/font04/b2prime.py:55",
+      "value": 16,
+      "expression": "hygiene=json.loads((BASE/'b2prime-canonical-hygiene.json').read_text());assert json.loads((BASE/'b2prime-material-regressions.json').read_text())['n']==16"
+    },
+    {
+      "source": "qualification/font04/b2prime.py:56",
+      "value": 1,
+      "expression": "calibration();rows=json.loads((ART/'source.json').read_text())['rows'];plan=json.loads((ART/'plan.json').read_text());pairs=json.loads((ART/'pair-ledger.json').read_text());fields=np.load(ART/'fields.npy');meta=json.loads((ART/'frames.json').read_text());frames=meta['frames'];out=json.loads((ART/'outlines.json').read_text())['records'];lookup={int(o['key'].rsplit('-',1)[1]):o for o in out if 'gid'in o};n=len(rows);veto=np.zeros((n,n),bool);errors=np.full((n,n),np.inf);params={};bands=[]"
+    },
+    {
+      "source": "qualification/font04/b2prime.py:56",
+      "value": 1,
+      "expression": "calibration();rows=json.loads((ART/'source.json').read_text())['rows'];plan=json.loads((ART/'plan.json').read_text());pairs=json.loads((ART/'pair-ledger.json').read_text());fields=np.load(ART/'fields.npy');meta=json.loads((ART/'frames.json').read_text());frames=meta['frames'];out=json.loads((ART/'outlines.json').read_text())['records'];lookup={int(o['key'].rsplit('-',1)[1]):o for o in out if 'gid'in o};n=len(rows);veto=np.zeros((n,n),bool);errors=np.full((n,n),np.inf);params={};bands=[]"
+    },
+    {
+      "source": "qualification/font04/b2prime.py:58",
+      "value": 0.0,
+      "expression": "g=geometry(f);weight=(float(f.sum())/max(1.,float(((f>.5)^__import__('scipy').ndimage.binary_erosion(f>.5)).sum()))) if g else 0."
+    },
+    {
+      "source": "qualification/font04/b2prime.py:58",
+      "value": 1.0,
+      "expression": "g=geometry(f);weight=(float(f.sum())/max(1.,float(((f>.5)^__import__('scipy').ndimage.binary_erosion(f>.5)).sum()))) if g else 0."
+    },
+    {
+      "source": "qualification/font04/b2prime.py:58",
+      "value": 0.5,
+      "expression": "g=geometry(f);weight=(float(f.sum())/max(1.,float(((f>.5)^__import__('scipy').ndimage.binary_erosion(f>.5)).sum()))) if g else 0."
+    },
+    {
+      "source": "qualification/font04/b2prime.py:58",
+      "value": 0.5,
+      "expression": "g=geometry(f);weight=(float(f.sum())/max(1.,float(((f>.5)^__import__('scipy').ndimage.binary_erosion(f>.5)).sum()))) if g else 0."
+    },
+    {
+      "source": "qualification/font04/b2prime.py:59",
+      "value": 1.3,
+      "expression": "bands.append(int(np.floor(np.log(max(weight,.1))/np.log(1.3))))"
+    },
+    {
+      "source": "qualification/font04/b2prime.py:59",
+      "value": 0.1,
+      "expression": "bands.append(int(np.floor(np.log(max(weight,.1))/np.log(1.3))))"
+    },
+    {
+      "source": "qualification/font04/b2prime.py:69",
+      "value": 64,
+      "expression": "o=lookup[j];a=np.zeros((64,64));x,y=meta['origins'][j];a[y:y+o['height'],x:x+o['width']]=np.array(o['coverage']).reshape(o['height'],o['width']);p=dict(p,parameters=register(fields[i],a)[0].tolist())"
+    },
+    {
+      "source": "qualification/font04/b2prime.py:69",
+      "value": 64,
+      "expression": "o=lookup[j];a=np.zeros((64,64));x,y=meta['origins'][j];a[y:y+o['height'],x:x+o['width']]=np.array(o['coverage']).reshape(o['height'],o['width']);p=dict(p,parameters=register(fields[i],a)[0].tolist())"
+    },
+    {
+      "source": "qualification/font04/b2prime.py:69",
+      "value": 0,
+      "expression": "o=lookup[j];a=np.zeros((64,64));x,y=meta['origins'][j];a[y:y+o['height'],x:x+o['width']]=np.array(o['coverage']).reshape(o['height'],o['width']);p=dict(p,parameters=register(fields[i],a)[0].tolist())"
+    },
+    {
+      "source": "qualification/font04/b2prime.py:70",
+      "value": 1e-06,
+      "expression": "params[i,j]=p['parameters'];level=levels[i];errors[i,j]=p['error']/max(1e-6,level) if level is not None else np.inf;veto[i,j]=not p['reasons'] and j not in excluded and bands[i]==bands[j]"
+    },
+    {
+      "source": "qualification/font04/b2prime.py:74",
+      "value": 1.0,
+      "expression": "for scale in [1.,1.5,2.]:"
+    },
+    {
+      "source": "qualification/font04/b2prime.py:74",
+      "value": 1.5,
+      "expression": "for scale in [1.,1.5,2.]:"
+    },
+    {
+      "source": "qualification/font04/b2prime.py:74",
+      "value": 2.0,
+      "expression": "for scale in [1.,1.5,2.]:"
+    },
+    {
+      "source": "qualification/font04/b2prime.py:84",
+      "value": 2,
+      "expression": "if g['canonical'] not in exceptions and len(aa)>=2:survivors.extend(aa)"
+    },
+    {
+      "source": "qualification/font04/b2prime.py:86",
+      "value": 1.0,
+      "expression": "if method=='star' and scale==1.:"
+    },
+    {
+      "source": "qualification/font04/b2prime.py:97",
+      "value": 1,
+      "expression": "c=collections.Counter(member_group[i] for i in u);credits[min(c,key=lambda j:(-c[j],j))]+=1"
+    },
+    {
+      "source": "qualification/font04/b2prime.py:98",
+      "value": 1,
+      "expression": "bad={j for j in by if credits[j]<1}"
+    },
+    {
+      "source": "qualification/font04/b2prime.py:115",
+      "value": 2,
+      "expression": "path=ROOT/f'financial-B2prime-{label}.pdf';art=prepare_art(path,candidate_plan);started=time.monotonic();account=emit(path,candidate_plan);account['wall_seconds']=time.monotonic()-started;(art/'byte-attribution.json').write_text(json.dumps(account,indent=2)+'\\n');manifest.append(dict(label=label,pdf=str(path),sha256=sha(path),substituted=len(aa),ownership_control=owned['control_pdf'],net_rule=net));print(label,len(aa),account['bytes'],flush=True)"
+    },
+    {
+      "source": "qualification/font04/b2prime.py:116",
+      "value": 2,
+      "expression": "(BASE/'b2prime-points.json').write_text(json.dumps(dict(points=manifest,soft_gate_change_after_transport_sha256=sha(BASE/'b2prime-transport-verification.json'),hygiene_before_soft=True),indent=2)+'\\n')"
+    },
+    {
+      "source": "qualification/font04/b2prime.py:119",
+      "value": 2,
+      "expression": "path=ROOT/'financial-B2prime-transport.pdf';plan=json.loads((ART/'plan.json').read_text());art=prepare_art(path,plan);account=emit(path,plan);(art/'byte-attribution.json').write_text(json.dumps(account,indent=2)+'\\n')"
+    },
+    {
+      "source": "qualification/font04/b2prime.py:125",
+      "value": 1,
+      "expression": "if sys.argv[1]=='transport':transport()"
+    },
+    {
+      "source": "qualification/font04/b2prime.py:126",
+      "value": 1,
+      "expression": "elif sys.argv[1]=='calibration':print(calibration())"
+    },
+    {
+      "source": "qualification/font04/b2prime.py:127",
+      "value": 1,
+      "expression": "elif sys.argv[1]=='frontier':frontier()"
+    },
+    {
+      "source": "qualification/font04/canonical_hygiene.py:9",
+      "value": 0.25,
+      "expression": "POLICY=dict(source_threshold=.25,class_support_fraction=.20,footprint_halo=2,unsupported_fraction=.05,unsupported_mass=4.,unsupported_component_mass=3.,rare_topology_fraction=.10)"
+    },
+    {
+      "source": "qualification/font04/canonical_hygiene.py:9",
+      "value": 0.2,
+      "expression": "POLICY=dict(source_threshold=.25,class_support_fraction=.20,footprint_halo=2,unsupported_fraction=.05,unsupported_mass=4.,unsupported_component_mass=3.,rare_topology_fraction=.10)"
+    },
+    {
+      "source": "qualification/font04/canonical_hygiene.py:9",
+      "value": 2,
+      "expression": "POLICY=dict(source_threshold=.25,class_support_fraction=.20,footprint_halo=2,unsupported_fraction=.05,unsupported_mass=4.,unsupported_component_mass=3.,rare_topology_fraction=.10)"
+    },
+    {
+      "source": "qualification/font04/canonical_hygiene.py:9",
+      "value": 0.05,
+      "expression": "POLICY=dict(source_threshold=.25,class_support_fraction=.20,footprint_halo=2,unsupported_fraction=.05,unsupported_mass=4.,unsupported_component_mass=3.,rare_topology_fraction=.10)"
+    },
+    {
+      "source": "qualification/font04/canonical_hygiene.py:9",
+      "value": 4.0,
+      "expression": "POLICY=dict(source_threshold=.25,class_support_fraction=.20,footprint_halo=2,unsupported_fraction=.05,unsupported_mass=4.,unsupported_component_mass=3.,rare_topology_fraction=.10)"
+    },
+    {
+      "source": "qualification/font04/canonical_hygiene.py:9",
+      "value": 3.0,
+      "expression": "POLICY=dict(source_threshold=.25,class_support_fraction=.20,footprint_halo=2,unsupported_fraction=.05,unsupported_mass=4.,unsupported_component_mass=3.,rare_topology_fraction=.10)"
+    },
+    {
+      "source": "qualification/font04/canonical_hygiene.py:9",
+      "value": 0.1,
+      "expression": "POLICY=dict(source_threshold=.25,class_support_fraction=.20,footprint_halo=2,unsupported_fraction=.05,unsupported_mass=4.,unsupported_component_mass=3.,rare_topology_fraction=.10)"
+    },
+    {
+      "source": "qualification/font04/canonical_hygiene.py:15",
+      "value": 1,
+      "expression": "j=int(o['key'].rsplit('-',1)[1]);row=rows[j];indices=[i for i,r in enumerate(rows) if r['character']==row['character'] and r['shape_key']!=row['shape_key'] and fields[i].sum()>0]"
+    },
+    {
+      "source": "qualification/font04/canonical_hygiene.py:15",
+      "value": 1,
+      "expression": "j=int(o['key'].rsplit('-',1)[1]);row=rows[j];indices=[i for i,r in enumerate(rows) if r['character']==row['character'] and r['shape_key']!=row['shape_key'] and fields[i].sum()>0]"
+    },
+    {
+      "source": "qualification/font04/canonical_hygiene.py:15",
+      "value": 0,
+      "expression": "j=int(o['key'].rsplit('-',1)[1]);row=rows[j];indices=[i for i,r in enumerate(rows) if r['character']==row['character'] and r['shape_key']!=row['shape_key'] and fields[i].sum()>0]"
+    },
+    {
+      "source": "qualification/font04/canonical_hygiene.py:19",
+      "value": 64,
+      "expression": "a=np.zeros((64,64));x,y=meta['origins'][j];a[y:y+o['height'],x:x+o['width']]=np.array(o['coverage']).reshape(o['height'],o['width'])"
+    },
+    {
+      "source": "qualification/font04/canonical_hygiene.py:19",
+      "value": 64,
+      "expression": "a=np.zeros((64,64));x,y=meta['origins'][j];a[y:y+o['height'],x:x+o['width']]=np.array(o['coverage']).reshape(o['height'],o['width'])"
+    },
+    {
+      "source": "qualification/font04/canonical_hygiene.py:20",
+      "value": 0,
+      "expression": "support=(fields[indices]>.25).mean(0);footprint=ndimage.binary_dilation(support>=.2,iterations=2);mass=float((a*~footprint).sum());fraction=mass/max(1.,float(a.sum()));labels,n=ndimage.label(a>.25);component=[]"
+    },
+    {
+      "source": "qualification/font04/canonical_hygiene.py:20",
+      "value": 0.2,
+      "expression": "support=(fields[indices]>.25).mean(0);footprint=ndimage.binary_dilation(support>=.2,iterations=2);mass=float((a*~footprint).sum());fraction=mass/max(1.,float(a.sum()));labels,n=ndimage.label(a>.25);component=[]"
+    },
+    {
+      "source": "qualification/font04/canonical_hygiene.py:20",
+      "value": 2,
+      "expression": "support=(fields[indices]>.25).mean(0);footprint=ndimage.binary_dilation(support>=.2,iterations=2);mass=float((a*~footprint).sum());fraction=mass/max(1.,float(a.sum()));labels,n=ndimage.label(a>.25);component=[]"
+    },
+    {
+      "source": "qualification/font04/canonical_hygiene.py:20",
+      "value": 1.0,
+      "expression": "support=(fields[indices]>.25).mean(0);footprint=ndimage.binary_dilation(support>=.2,iterations=2);mass=float((a*~footprint).sum());fraction=mass/max(1.,float(a.sum()));labels,n=ndimage.label(a>.25);component=[]"
+    },
+    {
+      "source": "qualification/font04/canonical_hygiene.py:20",
+      "value": 0.25,
+      "expression": "support=(fields[indices]>.25).mean(0);footprint=ndimage.binary_dilation(support>=.2,iterations=2);mass=float((a*~footprint).sum());fraction=mass/max(1.,float(a.sum()));labels,n=ndimage.label(a>.25);component=[]"
+    },
+    {
+      "source": "qualification/font04/canonical_hygiene.py:20",
+      "value": 0.25,
+      "expression": "support=(fields[indices]>.25).mean(0);footprint=ndimage.binary_dilation(support>=.2,iterations=2);mass=float((a*~footprint).sum());fraction=mass/max(1.,float(a.sum()));labels,n=ndimage.label(a>.25);component=[]"
+    },
+    {
+      "source": "qualification/font04/canonical_hygiene.py:21",
+      "value": 1,
+      "expression": "for k in range(1,n+1):"
+    },
+    {
+      "source": "qualification/font04/canonical_hygiene.py:21",
+      "value": 1,
+      "expression": "for k in range(1,n+1):"
+    },
+    {
+      "source": "qualification/font04/canonical_hygiene.py:22",
+      "value": 3,
+      "expression": "mask=labels==k;unsupported=float(a[mask&~footprint].sum());total=float(a[mask].sum());bad=unsupported>=3 and unsupported/max(1,total)>.5"
+    },
+    {
+      "source": "qualification/font04/canonical_hygiene.py:22",
+      "value": 0.5,
+      "expression": "mask=labels==k;unsupported=float(a[mask&~footprint].sum());total=float(a[mask].sum());bad=unsupported>=3 and unsupported/max(1,total)>.5"
+    },
+    {
+      "source": "qualification/font04/canonical_hygiene.py:22",
+      "value": 1,
+      "expression": "mask=labels==k;unsupported=float(a[mask&~footprint].sum());total=float(a[mask].sum());bad=unsupported>=3 and unsupported/max(1,total)>.5"
+    },
+    {
+      "source": "qualification/font04/canonical_hygiene.py:24",
+      "value": 4,
+      "expression": "if mass>4 and fraction>.05:reasons.append('outside_independent_class_footprint')"
+    },
+    {
+      "source": "qualification/font04/canonical_hygiene.py:24",
+      "value": 0.05,
+      "expression": "if mass>4 and fraction>.05:reasons.append('outside_independent_class_footprint')"
+    },
+    {
+      "source": "qualification/font04/canonical_hygiene.py:26",
+      "value": 0.5,
+      "expression": "tops=collections.Counter(topology(fields[i]>.5) for i in indices);t=topology(a>.5);frequency=tops[t]/len(indices)"
+    },
+    {
+      "source": "qualification/font04/canonical_hygiene.py:26",
+      "value": 0.5,
+      "expression": "tops=collections.Counter(topology(fields[i]>.5) for i in indices);t=topology(a>.5);frequency=tops[t]/len(indices)"
+    },
+    {
+      "source": "qualification/font04/canonical_hygiene.py:27",
+      "value": 0.1,
+      "expression": "if frequency<.1:reasons.append('class_unsupported_topology')"
+    },
+    {
+      "source": "qualification/font04/canonical_hygiene.py:37",
+      "value": 1,
+      "expression": "i=r['member'] if 'member'in r else int(r['id'].split('-')[1]);p=rejected[i];hard=[x for x in p['reasons'] if x not in ['insufficient_noise_witnesses','noise_floor','grouping_exception','functional_text_identity']];hygiene=hr[p['canonical']]['reasons'];assert hard or hygiene"
+    },
+    {
+      "source": "qualification/font04/canonical_hygiene.py:39",
+      "value": 16,
+      "expression": "assert len(results)==16"
+    },
+    {
+      "source": "qualification/font04/canonical_hygiene.py:40",
+      "value": 16,
+      "expression": "result=dict(material_cases_only=True,n=16,regressions=results,note='A valid canonical paired with a wrong-label/contaminated target may pass hygiene; the unchanged member hard veto remains mandatory. No minor/repair/current-side judgments used as material cases.')"
+    },
+    {
+      "source": "qualification/font04/canonical_hygiene.py:41",
+      "value": 2,
+      "expression": "(BASE/'b2prime-material-regressions.json').write_text(json.dumps(result,indent=2)+'\\n');return result"
+    },
+    {
+      "source": "qualification/font04/canonical_hygiene.py:44",
+      "value": 2,
+      "expression": "h=screen(ROOT/'financial-B2-P-initial.pdf.font04');(BASE/'b2prime-canonical-hygiene.json').write_text(json.dumps(h,indent=2)+'\\n');print('hygiene',len(h['excluded']),'of',len(h['records']),'excluded; material regressions',regressions()['n'])"
+    },
+    {
+      "source": "qualification/font04/composite_transport.py:23",
+      "value": 1,
+      "expression": "art=Path(str(control)+'.font04');snap=json.loads((art/'source.json').read_text());rows=snap['rows'];outlines=json.loads((art/'outlines.json').read_text())['records'];lookup={int(o['key'].rsplit('-',1)[1]):o for o in outlines if 'gid'in o};geometry=json.loads((ROOT/'financial-default.pdf.json').read_text())['pages']"
+    },
+    {
+      "source": "qualification/font04/composite_transport.py:23",
+      "value": 1,
+      "expression": "art=Path(str(control)+'.font04');snap=json.loads((art/'source.json').read_text());rows=snap['rows'];outlines=json.loads((art/'outlines.json').read_text())['records'];lookup={int(o['key'].rsplit('-',1)[1]):o for o in outlines if 'gid'in o};geometry=json.loads((ROOT/'financial-default.pdf.json').read_text())['pages']"
+    },
+    {
+      "source": "qualification/font04/composite_transport.py:27",
+      "value": 0,
+      "expression": "parent=pdf.pages[0].Resources.Font.F1;desc=parent.DescendantFonts[0];original_data=desc.FontDescriptor.FontFile2.read_bytes();tt=TTFont(io.BytesIO(original_data),recalcTimestamp=False);order=list(tt.getGlyphOrder());glyf=tt['glyf'];metrics=tt['hmtx'].metrics"
+    },
+    {
+      "source": "qualification/font04/composite_transport.py:27",
+      "value": 0,
+      "expression": "parent=pdf.pages[0].Resources.Font.F1;desc=parent.DescendantFonts[0];original_data=desc.FontDescriptor.FontFile2.read_bytes();tt=TTFont(io.BytesIO(original_data),recalcTimestamp=False);order=list(tt.getGlyphOrder());glyf=tt['glyf'];metrics=tt['hmtx'].metrics"
+    },
+    {
+      "source": "qualification/font04/composite_transport.py:28",
+      "value": 0,
+      "expression": "oldmap=desc.CIDToGIDMap.read_bytes();mapping=[int.from_bytes(oldmap[i:i+2],'big') for i in range(0,len(oldmap),2)]"
+    },
+    {
+      "source": "qualification/font04/composite_transport.py:28",
+      "value": 2,
+      "expression": "oldmap=desc.CIDToGIDMap.read_bytes();mapping=[int.from_bytes(oldmap[i:i+2],'big') for i in range(0,len(oldmap),2)]"
+    },
+    {
+      "source": "qualification/font04/composite_transport.py:28",
+      "value": 2,
+      "expression": "oldmap=desc.CIDToGIDMap.read_bytes();mapping=[int.from_bytes(oldmap[i:i+2],'big') for i in range(0,len(oldmap),2)]"
+    },
+    {
+      "source": "qualification/font04/composite_transport.py:34",
+      "value": 2,
+      "expression": "t[:2,2]*=tt['head'].unitsPerEm"
+    },
+    {
+      "source": "qualification/font04/composite_transport.py:34",
+      "value": 2,
+      "expression": "t[:2,2]*=tt['head'].unitsPerEm"
+    },
+    {
+      "source": "qualification/font04/composite_transport.py:36",
+      "value": 1.0,
+      "expression": "factors={j:max(1.,max(np.abs(transforms[a['member']][:2,:2]).max() for a in plan['assignments'] if a['canonical']==j)/1.5) for j in {a['canonical'] for a in plan['assignments']}}"
+    },
+    {
+      "source": "qualification/font04/composite_transport.py:36",
+      "value": 1.5,
+      "expression": "factors={j:max(1.,max(np.abs(transforms[a['member']][:2,:2]).max() for a in plan['assignments'] if a['canonical']==j)/1.5) for j in {a['canonical'] for a in plan['assignments']}}"
+    },
+    {
+      "source": "qualification/font04/composite_transport.py:36",
+      "value": 2,
+      "expression": "factors={j:max(1.,max(np.abs(transforms[a['member']][:2,:2]).max() for a in plan['assignments'] if a['canonical']==j)/1.5) for j in {a['canonical'] for a in plan['assignments']}}"
+    },
+    {
+      "source": "qualification/font04/composite_transport.py:36",
+      "value": 2,
+      "expression": "factors={j:max(1.,max(np.abs(transforms[a['member']][:2,:2]).max() for a in plan['assignments'] if a['canonical']==j)/1.5) for j in {a['canonical'] for a in plan['assignments']}}"
+    },
+    {
+      "source": "qualification/font04/composite_transport.py:39",
+      "value": 2048,
+      "expression": "name=f'canonical{j}';pen=TTGlyphPen(None);canon.getGlyphSet()[canon.getGlyphOrder()[lookup[j]['gid']]].draw(TransformPen(pen,(factor,0,0,factor,0,0)));glyf.glyphs[name]=pen.glyph();metrics[name]=(2048,0);canonical_names[j]=name;order.append(name)"
+    },
+    {
+      "source": "qualification/font04/composite_transport.py:39",
+      "value": 0,
+      "expression": "name=f'canonical{j}';pen=TTGlyphPen(None);canon.getGlyphSet()[canon.getGlyphOrder()[lookup[j]['gid']]].draw(TransformPen(pen,(factor,0,0,factor,0,0)));glyf.glyphs[name]=pen.glyph();metrics[name]=(2048,0);canonical_names[j]=name;order.append(name)"
+    },
+    {
+      "source": "qualification/font04/composite_transport.py:39",
+      "value": 0,
+      "expression": "name=f'canonical{j}';pen=TTGlyphPen(None);canon.getGlyphSet()[canon.getGlyphOrder()[lookup[j]['gid']]].draw(TransformPen(pen,(factor,0,0,factor,0,0)));glyf.glyphs[name]=pen.glyph();metrics[name]=(2048,0);canonical_names[j]=name;order.append(name)"
+    },
+    {
+      "source": "qualification/font04/composite_transport.py:39",
+      "value": 0,
+      "expression": "name=f'canonical{j}';pen=TTGlyphPen(None);canon.getGlyphSet()[canon.getGlyphOrder()[lookup[j]['gid']]].draw(TransformPen(pen,(factor,0,0,factor,0,0)));glyf.glyphs[name]=pen.glyph();metrics[name]=(2048,0);canonical_names[j]=name;order.append(name)"
+    },
+    {
+      "source": "qualification/font04/composite_transport.py:39",
+      "value": 0,
+      "expression": "name=f'canonical{j}';pen=TTGlyphPen(None);canon.getGlyphSet()[canon.getGlyphOrder()[lookup[j]['gid']]].draw(TransformPen(pen,(factor,0,0,factor,0,0)));glyf.glyphs[name]=pen.glyph();metrics[name]=(2048,0);canonical_names[j]=name;order.append(name)"
+    },
+    {
+      "source": "qualification/font04/composite_transport.py:39",
+      "value": 0,
+      "expression": "name=f'canonical{j}';pen=TTGlyphPen(None);canon.getGlyphSet()[canon.getGlyphOrder()[lookup[j]['gid']]].draw(TransformPen(pen,(factor,0,0,factor,0,0)));glyf.glyphs[name]=pen.glyph();metrics[name]=(2048,0);canonical_names[j]=name;order.append(name)"
+    },
+    {
+      "source": "qualification/font04/composite_transport.py:42",
+      "value": 2,
+      "expression": "i=a['member'];j=a['canonical'];d=base_draws[i];t=transforms[i];lin=t[:2,:2]/factors[j];offset=np.rint(t[:2,2]).astype(int)"
+    },
+    {
+      "source": "qualification/font04/composite_transport.py:42",
+      "value": 2,
+      "expression": "i=a['member'];j=a['canonical'];d=base_draws[i];t=transforms[i];lin=t[:2,:2]/factors[j];offset=np.rint(t[:2,2]).astype(int)"
+    },
+    {
+      "source": "qualification/font04/composite_transport.py:42",
+      "value": 2,
+      "expression": "i=a['member'];j=a['canonical'];d=base_draws[i];t=transforms[i];lin=t[:2,:2]/factors[j];offset=np.rint(t[:2,2]).astype(int)"
+    },
+    {
+      "source": "qualification/font04/composite_transport.py:42",
+      "value": 2,
+      "expression": "i=a['member'];j=a['canonical'];d=base_draws[i];t=transforms[i];lin=t[:2,:2]/factors[j];offset=np.rint(t[:2,2]).astype(int)"
+    },
+    {
+      "source": "qualification/font04/composite_transport.py:43",
+      "value": 2,
+      "expression": "if np.abs(lin).max()>=2 or np.abs(offset).max()>32767:raise ValueError(('composite transform range',i,t.tolist()))"
+    },
+    {
+      "source": "qualification/font04/composite_transport.py:43",
+      "value": 32767,
+      "expression": "if np.abs(lin).max()>=2 or np.abs(offset).max()>32767:raise ValueError(('composite transform range',i,t.tolist()))"
+    },
+    {
+      "source": "qualification/font04/composite_transport.py:44",
+      "value": 16384,
+      "expression": "quant=np.rint(lin*16384)/16384;key=(j,tuple(quant.ravel()),tuple(offset),mapping[d['cid']])"
+    },
+    {
+      "source": "qualification/font04/composite_transport.py:44",
+      "value": 16384,
+      "expression": "quant=np.rint(lin*16384)/16384;key=(j,tuple(quant.ravel()),tuple(offset),mapping[d['cid']])"
+    },
+    {
+      "source": "qualification/font04/composite_transport.py:46",
+      "value": 4,
+      "expression": "name=f'instance{len(stub_names)}';c=GlyphComponent();c.glyphName=canonical_names[j];c.x,c.y=map(int,offset);c.transform=quant.T.tolist();c.flags=4|0x1000 # ROUND_XY_TO_GRID and UNSCALED_COMPONENT_OFFSET"
+    },
+    {
+      "source": "qualification/font04/composite_transport.py:46",
+      "value": 4096,
+      "expression": "name=f'instance{len(stub_names)}';c=GlyphComponent();c.glyphName=canonical_names[j];c.x,c.y=map(int,offset);c.transform=quant.T.tolist();c.flags=4|0x1000 # ROUND_XY_TO_GRID and UNSCALED_COMPONENT_OFFSET"
+    },
+    {
+      "source": "qualification/font04/composite_transport.py:47",
+      "value": 1,
+      "expression": "glyph=Glyph();glyph.numberOfContours=-1;glyph.components=[c];glyf.glyphs[name]=glyph;metrics[name]=metrics[tt.getGlyphOrder()[mapping[d['cid']]]];stub_names[key]=name;order.append(name)"
+    },
+    {
+      "source": "qualification/font04/composite_transport.py:52",
+      "value": 0,
+      "expression": "glyf[name].recalcBounds(glyf);metrics[name]=(metrics[name][0],glyf[name].xMin)"
+    },
+    {
+      "source": "qualification/font04/composite_transport.py:56",
+      "value": 0,
+      "expression": "mode=0;oi=0"
+    },
+    {
+      "source": "qualification/font04/composite_transport.py:56",
+      "value": 0,
+      "expression": "mode=0;oi=0"
+    },
+    {
+      "source": "qualification/font04/composite_transport.py:58",
+      "value": 0,
+      "expression": "if str(op)=='Tr':mode=int(args[0])"
+    },
+    {
+      "source": "qualification/font04/composite_transport.py:60",
+      "value": 2,
+      "expression": "raw=bytes(args[0]);assert len(raw)==2;cid=int.from_bytes(raw,'big');a=assignments.get((pi,oi)) if mode!=3 else None"
+    },
+    {
+      "source": "qualification/font04/composite_transport.py:60",
+      "value": 0,
+      "expression": "raw=bytes(args[0]);assert len(raw)==2;cid=int.from_bytes(raw,'big');a=assignments.get((pi,oi)) if mode!=3 else None"
+    },
+    {
+      "source": "qualification/font04/composite_transport.py:60",
+      "value": 3,
+      "expression": "raw=bytes(args[0]);assert len(raw)==2;cid=int.from_bytes(raw,'big');a=assignments.get((pi,oi)) if mode!=3 else None"
+    },
+    {
+      "source": "qualification/font04/composite_transport.py:65",
+      "value": 3,
+      "expression": "if mode!=3:oi+=1"
+    },
+    {
+      "source": "qualification/font04/composite_transport.py:65",
+      "value": 1,
+      "expression": "if mode!=3:oi+=1"
+    },
+    {
+      "source": "qualification/font04/composite_transport.py:67",
+      "value": 0,
+      "expression": "before={name:dict(bytes=len(glyf[name].compile(glyf)),points=len(glyf[name].coordinates) if glyf[name].numberOfContours>0 else 0) for name in order if name not in canonical_names.values() and name not in stub_names.values()}"
+    },
+    {
+      "source": "qualification/font04/composite_transport.py:67",
+      "value": 0,
+      "expression": "before={name:dict(bytes=len(glyf[name].compile(glyf)),points=len(glyf[name].coordinates) if glyf[name].numberOfContours>0 else 0) for name in order if name not in canonical_names.values() and name not in stub_names.values()}"
+    },
+    {
+      "source": "qualification/font04/composite_transport.py:69",
+      "value": 0,
+      "expression": "tt['head'].modified=0;tt['head'].created=0;buffer=io.BytesIO();tt.save(buffer,reorderTables=False);data=buffer.getvalue();neworder=tt.getGlyphOrder();gids={name:i for i,name in enumerate(neworder)}"
+    },
+    {
+      "source": "qualification/font04/composite_transport.py:69",
+      "value": 0,
+      "expression": "tt['head'].modified=0;tt['head'].created=0;buffer=io.BytesIO();tt.save(buffer,reorderTables=False);data=buffer.getvalue();neworder=tt.getGlyphOrder();gids={name:i for i,name in enumerate(neworder)}"
+    },
+    {
+      "source": "qualification/font04/composite_transport.py:75",
+      "value": 2,
+      "expression": "mapbytes=b''.join((gids[v[cid]] if cid in v else 0).to_bytes(2,'big') for cid,oldgid in enumerate(mapping));child.CIDToGIDMap=pdf.make_stream(mapbytes)"
+    },
+    {
+      "source": "qualification/font04/composite_transport.py:75",
+      "value": 0,
+      "expression": "mapbytes=b''.join((gids[v[cid]] if cid in v else 0).to_bytes(2,'big') for cid,oldgid in enumerate(mapping));child.CIDToGIDMap=pdf.make_stream(mapbytes)"
+    },
+    {
+      "source": "qualification/font04/composite_transport.py:80",
+      "value": 0,
+      "expression": "resources.Font=fr;page.Resources=resources;instructions=[];mode=0;oi=0;size=1;active=None"
+    },
+    {
+      "source": "qualification/font04/composite_transport.py:80",
+      "value": 0,
+      "expression": "resources.Font=fr;page.Resources=resources;instructions=[];mode=0;oi=0;size=1;active=None"
+    },
+    {
+      "source": "qualification/font04/composite_transport.py:80",
+      "value": 1,
+      "expression": "resources.Font=fr;page.Resources=resources;instructions=[];mode=0;oi=0;size=1;active=None"
+    },
+    {
+      "source": "qualification/font04/composite_transport.py:82",
+      "value": 0,
+      "expression": "if str(op)=='Tr':mode=int(args[0])"
+    },
+    {
+      "source": "qualification/font04/composite_transport.py:83",
+      "value": 1,
+      "expression": "if str(op)=='Tf':size=float(args[1]);active=None;continue"
+    },
+    {
+      "source": "qualification/font04/composite_transport.py:85",
+      "value": 0,
+      "expression": "cid=int.from_bytes(bytes(args[0]),'big');v=draw_variant[pi,mode,oi,cid]"
+    },
+    {
+      "source": "qualification/font04/composite_transport.py:87",
+      "value": 3,
+      "expression": "if mode!=3:oi+=1"
+    },
+    {
+      "source": "qualification/font04/composite_transport.py:87",
+      "value": 1,
+      "expression": "if mode!=3:oi+=1"
+    },
+    {
+      "source": "qualification/font04/composite_transport.py:93",
+      "value": 0,
+      "expression": "added=[dict(program=name,kind='canonical' if name in canonical_names.values() else 'stub',bytes=len(tt['glyf'][name].compile(tt['glyf'])),points=(len(tt['glyf'][name].coordinates) if tt['glyf'][name].numberOfContours>0 else 0)) for name in neworder if name in canonical_names.values() or name in stub_names.values()]"
+    },
+    {
+      "source": "qualification/font04/composite_transport.py:93",
+      "value": 0,
+      "expression": "added=[dict(program=name,kind='canonical' if name in canonical_names.values() else 'stub',bytes=len(tt['glyf'][name].compile(tt['glyf'])),points=(len(tt['glyf'][name].coordinates) if tt['glyf'][name].numberOfContours>0 else 0)) for name in neworder if name in canonical_names.values() or name in stub_names.values()]"
+    },
+    {
+      "source": "qualification/font04/composite_transport.py:98",
+      "value": 1,
+      "expression": "p=Path(sys.argv[1]);plan=json.loads(Path(str(CONTROL)+'.font04/plan.json').read_text());result=emit(p,plan);Path(str(p)+'.transport.json').write_text(json.dumps(result,indent=2)+'\\n');print({k:v for k,v in result.items() if k not in ('instances','added_programs','retired_programs')})"
+    },
+    {
+      "source": "qualification/font04/composite_transport.py:98",
+      "value": 2,
+      "expression": "p=Path(sys.argv[1]);plan=json.loads(Path(str(CONTROL)+'.font04/plan.json').read_text());result=emit(p,plan);Path(str(p)+'.transport.json').write_text(json.dumps(result,indent=2)+'\\n');print({k:v for k,v in result.items() if k not in ('instances','added_programs','retired_programs')})"
+    },
+    {
+      "source": "qualification/font04/geometry.py:14",
+      "value": 2.0,
+      "expression": "translation: float = 2.0"
+    },
+    {
+      "source": "qualification/font04/geometry.py:15",
+      "value": 0.02,
+      "expression": "scale: float = 0.02"
+    },
+    {
+      "source": "qualification/font04/geometry.py:16",
+      "value": 0.76,
+      "expression": "minimum_iou: float = 0.76"
+    },
+    {
+      "source": "qualification/font04/geometry.py:17",
+      "value": 1.25,
+      "expression": "area_ratio: float = 1.25"
+    },
+    {
+      "source": "qualification/font04/geometry.py:18",
+      "value": 1.18,
+      "expression": "extent_ratio: float = 1.18"
+    },
+    {
+      "source": "qualification/font04/geometry.py:19",
+      "value": 1.5,
+      "expression": "elongation_ratio: float = 1.5"
+    },
+    {
+      "source": "qualification/font04/geometry.py:20",
+      "value": 1.3,
+      "expression": "stroke_ratio: float = 1.3"
+    },
+    {
+      "source": "qualification/font04/geometry.py:21",
+      "value": 0.12,
+      "expression": "huber_delta: float = 0.12"
+    },
+    {
+      "source": "qualification/font04/geometry.py:27",
+      "value": 48.0,
+      "expression": "center = np.array([48.0, 32.0])"
+    },
+    {
+      "source": "qualification/font04/geometry.py:27",
+      "value": 32.0,
+      "expression": "center = np.array([48.0, 32.0])"
+    },
+    {
+      "source": "qualification/font04/geometry.py:28",
+      "value": 2,
+      "expression": "inverse = np.eye(2) / scale"
+    },
+    {
+      "source": "qualification/font04/geometry.py:33",
+      "value": 1,
+      "expression": "order=1,"
+    },
+    {
+      "source": "qualification/font04/geometry.py:43",
+      "value": 0.0,
+      "expression": "[0.0, 0.0, 1.0],"
+    },
+    {
+      "source": "qualification/font04/geometry.py:43",
+      "value": 0.0,
+      "expression": "[0.0, 0.0, 1.0],"
+    },
+    {
+      "source": "qualification/font04/geometry.py:43",
+      "value": 1.0,
+      "expression": "[0.0, 0.0, 1.0],"
+    },
+    {
+      "source": "qualification/font04/geometry.py:45",
+      "value": 1,
+      "expression": "[-limits.translation, -limits.translation, 1 - limits.scale],"
+    },
+    {
+      "source": "qualification/font04/geometry.py:46",
+      "value": 1,
+      "expression": "[limits.translation, limits.translation, 1 + limits.scale],"
+    },
+    {
+      "source": "qualification/font04/geometry.py:50",
+      "value": 35,
+      "expression": "max_nfev=35,"
+    },
+    {
+      "source": "qualification/font04/geometry.py:51",
+      "value": 0.001,
+      "expression": "diff_step=0.001,"
+    },
+    {
+      "source": "qualification/font04/geometry.py:52",
+      "value": 1e-05,
+      "expression": "ftol=1e-5,"
+    },
+    {
+      "source": "qualification/font04/geometry.py:53",
+      "value": 1e-05,
+      "expression": "xtol=1e-5,"
+    },
+    {
+      "source": "qualification/font04/geometry.py:54",
+      "value": 1e-05,
+      "expression": "gtol=1e-5,"
+    },
+    {
+      "source": "qualification/font04/geometry.py:61",
+      "value": 3,
+      "expression": "_, components = ndimage.label(mask, np.ones((3, 3)))"
+    },
+    {
+      "source": "qualification/font04/geometry.py:61",
+      "value": 3,
+      "expression": "_, components = ndimage.label(mask, np.ones((3, 3)))"
+    },
+    {
+      "source": "qualification/font04/geometry.py:62",
+      "value": 3,
+      "expression": "labels, count = ndimage.label(~mask, np.ones((3, 3)))"
+    },
+    {
+      "source": "qualification/font04/geometry.py:62",
+      "value": 3,
+      "expression": "labels, count = ndimage.label(~mask, np.ones((3, 3)))"
+    },
+    {
+      "source": "qualification/font04/geometry.py:63",
+      "value": 0,
+      "expression": "border = set(labels[0]) | set(labels[-1]) | set(labels[:, 0]) | set(labels[:, -1])"
+    },
+    {
+      "source": "qualification/font04/geometry.py:63",
+      "value": 0,
+      "expression": "border = set(labels[0]) | set(labels[-1]) | set(labels[:, 0]) | set(labels[:, -1])"
+    },
+    {
+      "source": "qualification/font04/geometry.py:63",
+      "value": 1,
+      "expression": "border = set(labels[0]) | set(labels[-1]) | set(labels[:, 0]) | set(labels[:, -1])"
+    },
+    {
+      "source": "qualification/font04/geometry.py:63",
+      "value": 1,
+      "expression": "border = set(labels[0]) | set(labels[-1]) | set(labels[:, 0]) | set(labels[:, -1])"
+    },
+    {
+      "source": "qualification/font04/geometry.py:64",
+      "value": 1,
+      "expression": "return int(components), len(set(range(1, count + 1)) - border)"
+    },
+    {
+      "source": "qualification/font04/geometry.py:64",
+      "value": 1,
+      "expression": "return int(components), len(set(range(1, count + 1)) - border)"
+    },
+    {
+      "source": "qualification/font04/geometry.py:70",
+      "value": 0.5,
+      "expression": "mask = a > 0.5"
+    },
+    {
+      "source": "qualification/font04/geometry.py:72",
+      "value": 0,
+      "expression": "if not len(xs) or a.sum() <= 0:"
+    },
+    {
+      "source": "qualification/font04/geometry.py:77",
+      "value": 0,
+      "expression": "coordinates = np.array([xx.ravel() - centroid[0], yy.ravel() - centroid[1]])"
+    },
+    {
+      "source": "qualification/font04/geometry.py:77",
+      "value": 1,
+      "expression": "coordinates = np.array([xx.ravel() - centroid[0], yy.ravel() - centroid[1]])"
+    },
+    {
+      "source": "qualification/font04/geometry.py:83",
+      "value": 1,
+      "expression": "width=float(xs.max() - xs.min() + 1),"
+    },
+    {
+      "source": "qualification/font04/geometry.py:84",
+      "value": 1,
+      "expression": "height=float(ys.max() - ys.min() + 1),"
+    },
+    {
+      "source": "qualification/font04/geometry.py:86",
+      "value": 0.01,
+      "expression": "elongation=float(np.sqrt(max(values[-1], 0.01) / max(values[0], 0.01))),"
+    },
+    {
+      "source": "qualification/font04/geometry.py:86",
+      "value": 0.01,
+      "expression": "elongation=float(np.sqrt(max(values[-1], 0.01) / max(values[0], 0.01))),"
+    },
+    {
+      "source": "qualification/font04/geometry.py:86",
+      "value": 0,
+      "expression": "elongation=float(np.sqrt(max(values[-1], 0.01) / max(values[0], 0.01))),"
+    },
+    {
+      "source": "qualification/font04/geometry.py:86",
+      "value": 1,
+      "expression": "elongation=float(np.sqrt(max(values[-1], 0.01) / max(values[0], 0.01))),"
+    },
+    {
+      "source": "qualification/font04/geometry.py:87",
+      "value": 1,
+      "expression": "axis=axes[:, -1].tolist(),"
+    },
+    {
+      "source": "qualification/font04/geometry.py:106",
+      "value": 1e-08,
+      "expression": "ratio = b[key] / max(a[key], 1e-8)"
+    },
+    {
+      "source": "qualification/font04/geometry.py:107",
+      "value": 1,
+      "expression": "if not 1 / maximum <= ratio <= maximum:"
+    },
+    {
+      "source": "qualification/font04/geometry.py:111",
+      "value": 2,
+      "expression": "if np.linalg.norm(np.array(a[\"centroid\"]) - b[\"centroid\"]) > 2:"
+    },
+    {
+      "source": "qualification/font04/geometry.py:113",
+      "value": 1.5,
+      "expression": "if min(a[\"elongation\"], b[\"elongation\"]) > 1.5:"
+    },
+    {
+      "source": "qualification/font04/geometry.py:115",
+      "value": 15,
+      "expression": "if cosine < np.cos(np.deg2rad(15)):"
+    },
+    {
+      "source": "qualification/font04/geometry.py:122",
+      "value": 1e-08,
+      "expression": "return float(np.minimum(a, b).sum() / max(1e-8, np.maximum(a, b).sum()))"
+    },
+    {
+      "source": "qualification/font04/geometry.py:139",
+      "value": 3,
+      "expression": "reasons = [\"forward:\" + reason for reason in forward[3]] + ["
+    },
+    {
+      "source": "qualification/font04/geometry.py:140",
+      "value": 3,
+      "expression": "\"reverse:\" + reason for reason in reverse[3]"
+    },
+    {
+      "source": "qualification/font04/geometry.py:142",
+      "value": 1,
+      "expression": "return forward[0] and reverse[0], forward[1], min(forward[2], reverse[2]), reasons"
+    },
+    {
+      "source": "qualification/font04/geometry.py:142",
+      "value": 0,
+      "expression": "return forward[0] and reverse[0], forward[1], min(forward[2], reverse[2]), reasons"
+    },
+    {
+      "source": "qualification/font04/geometry.py:142",
+      "value": 0,
+      "expression": "return forward[0] and reverse[0], forward[1], min(forward[2], reverse[2]), reasons"
+    },
+    {
+      "source": "qualification/font04/geometry.py:142",
+      "value": 2,
+      "expression": "return forward[0] and reverse[0], forward[1], min(forward[2], reverse[2]), reasons"
+    },
+    {
+      "source": "qualification/font04/geometry.py:142",
+      "value": 2,
+      "expression": "return forward[0] and reverse[0], forward[1], min(forward[2], reverse[2]), reasons"
+    },
+    {
+      "source": "qualification/font04/geometry.py:151",
+      "value": 0,
+      "expression": "if characters[i] != characters[members[0]]:"
+    },
+    {
+      "source": "qualification/font04/geometry.py:165",
+      "value": 0,
+      "expression": "_, index = max(choices, key=lambda x: (x[0], -x[1]))"
+    },
+    {
+      "source": "qualification/font04/geometry.py:165",
+      "value": 1,
+      "expression": "_, index = max(choices, key=lambda x: (x[0], -x[1]))"
+    },
+    {
+      "source": "qualification/font04/geometry.py:172",
+      "value": 0.12,
+      "expression": "def robust_template(aligned, delta=0.12, iterations=12):"
+    },
+    {
+      "source": "qualification/font04/geometry.py:172",
+      "value": 12,
+      "expression": "def robust_template(aligned, delta=0.12, iterations=12):"
+    },
+    {
+      "source": "qualification/font04/geometry.py:175",
+      "value": 0,
+      "expression": "template = observations.mean(axis=0)"
+    },
+    {
+      "source": "qualification/font04/geometry.py:178",
+      "value": 1.0,
+      "expression": "weights = np.minimum(1.0, delta / np.maximum(np.abs(residuals), 1e-8))"
+    },
+    {
+      "source": "qualification/font04/geometry.py:178",
+      "value": 1e-08,
+      "expression": "weights = np.minimum(1.0, delta / np.maximum(np.abs(residuals), 1e-8))"
+    },
+    {
+      "source": "qualification/font04/geometry.py:179",
+      "value": 0,
+      "expression": "template = (weights * observations).sum(axis=0) / weights.sum(axis=0)"
+    },
+    {
+      "source": "qualification/font04/geometry.py:179",
+      "value": 0,
+      "expression": "template = (weights * observations).sum(axis=0) / weights.sum(axis=0)"
+    },
+    {
+      "source": "qualification/font04/geometry.py:180",
+      "value": 0,
+      "expression": "uncertainty = np.median(np.abs(observations - template), axis=0)"
+    },
+    {
+      "source": "qualification/font04/geometry.py:189",
+      "value": 1,
+      "expression": "1 - soft_iou(images[i], register(images[i], images[j], limits)[1])"
+    },
+    {
+      "source": "qualification/font04/geometry.py:189",
+      "value": 1,
+      "expression": "1 - soft_iou(images[i], register(images[i], images[j], limits)[1])"
+    },
+    {
+      "source": "qualification/font04/geometry.py:197",
+      "value": 1,
+      "expression": "medoid = min(costs)[1]"
+    },
+    {
+      "source": "qualification/font04/geometry.py:202",
+      "value": 3,
+      "expression": "if len(members) >= 3:"
+    },
+    {
+      "source": "qualification/font04/geometry.py:205",
+      "value": 0,
+      "expression": "np.delete(aligned, k, axis=0), limits.huber_delta"
+    },
+    {
+      "source": "qualification/font04/geometry.py:208",
+      "value": 1.0,
+      "expression": "float(np.square(other - image).sum() / max(1.0, image.sum()))"
+    },
+    {
+      "source": "qualification/font04/geometry.py:219",
+      "value": 3,
+      "expression": "noise_upper=None if center is None else center + 3 * 1.4826 * mad,"
+    },
+    {
+      "source": "qualification/font04/geometry.py:219",
+      "value": 1.4826,
+      "expression": "noise_upper=None if center is None else center + 3 * 1.4826 * mad,"
+    },
+    {
+      "source": "qualification/font04/geometry.py:223",
+      "value": 4,
+      "expression": "def distance_template(aligned, upsample=4):"
+    },
+    {
+      "source": "qualification/font04/geometry.py:232",
+      "value": 1,
+      "expression": "high = ndimage.zoom(image, upsample, order=1, prefilter=False)"
+    },
+    {
+      "source": "qualification/font04/geometry.py:233",
+      "value": 0.5,
+      "expression": "mask = high > 0.5"
+    },
+    {
+      "source": "qualification/font04/geometry.py:240",
+      "value": 1,
+      "expression": "signed, [yy * upsample, xx * upsample], order=1, mode=\"nearest\""
+    },
+    {
+      "source": "qualification/font04/geometry.py:244",
+      "value": 0,
+      "expression": "fitted = fields.mean(axis=0)"
+    },
+    {
+      "source": "qualification/font04/geometry.py:245",
+      "value": 12,
+      "expression": "for _ in range(12):"
+    },
+    {
+      "source": "qualification/font04/geometry.py:246",
+      "value": 1.0,
+      "expression": "weights = np.minimum(1.0, 0.5 / np.maximum(np.abs(fields - fitted), 1e-8))"
+    },
+    {
+      "source": "qualification/font04/geometry.py:246",
+      "value": 0.5,
+      "expression": "weights = np.minimum(1.0, 0.5 / np.maximum(np.abs(fields - fitted), 1e-8))"
+    },
+    {
+      "source": "qualification/font04/geometry.py:246",
+      "value": 1e-08,
+      "expression": "weights = np.minimum(1.0, 0.5 / np.maximum(np.abs(fields - fitted), 1e-8))"
+    },
+    {
+      "source": "qualification/font04/geometry.py:247",
+      "value": 0,
+      "expression": "fitted = (weights * fields).sum(axis=0) / weights.sum(axis=0)"
+    },
+    {
+      "source": "qualification/font04/geometry.py:247",
+      "value": 0,
+      "expression": "fitted = (weights * fields).sum(axis=0) / weights.sum(axis=0)"
+    },
+    {
+      "source": "qualification/font04/geometry.py:248",
+      "value": 0.35,
+      "expression": "fitted = ndimage.gaussian_filter(fitted, 0.35)"
+    },
+    {
+      "source": "qualification/font04/geometry.py:249",
+      "value": 0,
+      "expression": "return np.clip(0.5 + fitted / 1.2, 0, 1)"
+    },
+    {
+      "source": "qualification/font04/geometry.py:249",
+      "value": 1,
+      "expression": "return np.clip(0.5 + fitted / 1.2, 0, 1)"
+    },
+    {
+      "source": "qualification/font04/geometry.py:249",
+      "value": 0.5,
+      "expression": "return np.clip(0.5 + fitted / 1.2, 0, 1)"
+    },
+    {
+      "source": "qualification/font04/geometry.py:249",
+      "value": 1.2,
+      "expression": "return np.clip(0.5 + fitted / 1.2, 0, 1)"
+    },
+    {
+      "source": "qualification/font04/geometry.py:260",
+      "value": 32.0,
+      "expression": "center = np.array([32.0, 48.0])"
+    },
+    {
+      "source": "qualification/font04/geometry.py:260",
+      "value": 48.0,
+      "expression": "center = np.array([32.0, 48.0])"
+    },
+    {
+      "source": "qualification/font04/geometry.py:261",
+      "value": 3,
+      "expression": "result = np.eye(3)"
+    },
+    {
+      "source": "qualification/font04/geometry.py:262",
+      "value": 2,
+      "expression": "result[:2, :2] = matrix"
+    },
+    {
+      "source": "qualification/font04/geometry.py:262",
+      "value": 2,
+      "expression": "result[:2, :2] = matrix"
+    },
+    {
+      "source": "qualification/font04/geometry.py:263",
+      "value": 2,
+      "expression": "result[:2, 2] = center + [dx, dy] - matrix @ center"
+    },
+    {
+      "source": "qualification/font04/geometry.py:263",
+      "value": 2,
+      "expression": "result[:2, 2] = center + [dx, dy] - matrix @ center"
+    },
+    {
+      "source": "qualification/font04/geometry.py:273",
+      "value": 1,
+      "expression": "image, [points[1], points[0]], order=1, mode=\"constant\", prefilter=False"
+    },
+    {
+      "source": "qualification/font04/geometry.py:273",
+      "value": 1,
+      "expression": "image, [points[1], points[0]], order=1, mode=\"constant\", prefilter=False"
+    },
+    {
+      "source": "qualification/font04/geometry.py:273",
+      "value": 0,
+      "expression": "image, [points[1], points[0]], order=1, mode=\"constant\", prefilter=False"
+    },
+    {
+      "source": "qualification/font04/geometry.py:281",
+      "value": 0.0,
+      "expression": "[0.0, 0.0, 0.0, 1.0, 1.0],"
+    },
+    {
+      "source": "qualification/font04/geometry.py:281",
+      "value": 0.0,
+      "expression": "[0.0, 0.0, 0.0, 1.0, 1.0],"
+    },
+    {
+      "source": "qualification/font04/geometry.py:281",
+      "value": 0.0,
+      "expression": "[0.0, 0.0, 0.0, 1.0, 1.0],"
+    },
+    {
+      "source": "qualification/font04/geometry.py:281",
+      "value": 1.0,
+      "expression": "[0.0, 0.0, 0.0, 1.0, 1.0],"
+    },
+    {
+      "source": "qualification/font04/geometry.py:281",
+      "value": 1.0,
+      "expression": "[0.0, 0.0, 0.0, 1.0, 1.0],"
+    },
+    {
+      "source": "qualification/font04/geometry.py:282",
+      "value": 0.96,
+      "expression": "bounds=([-2.0, -2.0, -1.0, 0.96, 0.96], [2.0, 2.0, 1.0, 1.04, 1.04]),"
+    },
+    {
+      "source": "qualification/font04/geometry.py:282",
+      "value": 0.96,
+      "expression": "bounds=([-2.0, -2.0, -1.0, 0.96, 0.96], [2.0, 2.0, 1.0, 1.04, 1.04]),"
+    },
+    {
+      "source": "qualification/font04/geometry.py:282",
+      "value": 2.0,
+      "expression": "bounds=([-2.0, -2.0, -1.0, 0.96, 0.96], [2.0, 2.0, 1.0, 1.04, 1.04]),"
+    },
+    {
+      "source": "qualification/font04/geometry.py:282",
+      "value": 2.0,
+      "expression": "bounds=([-2.0, -2.0, -1.0, 0.96, 0.96], [2.0, 2.0, 1.0, 1.04, 1.04]),"
+    },
+    {
+      "source": "qualification/font04/geometry.py:282",
+      "value": 1.0,
+      "expression": "bounds=([-2.0, -2.0, -1.0, 0.96, 0.96], [2.0, 2.0, 1.0, 1.04, 1.04]),"
+    },
+    {
+      "source": "qualification/font04/geometry.py:282",
+      "value": 1.04,
+      "expression": "bounds=([-2.0, -2.0, -1.0, 0.96, 0.96], [2.0, 2.0, 1.0, 1.04, 1.04]),"
+    },
+    {
+      "source": "qualification/font04/geometry.py:282",
+      "value": 1.04,
+      "expression": "bounds=([-2.0, -2.0, -1.0, 0.96, 0.96], [2.0, 2.0, 1.0, 1.04, 1.04]),"
+    },
+    {
+      "source": "qualification/font04/geometry.py:282",
+      "value": 2.0,
+      "expression": "bounds=([-2.0, -2.0, -1.0, 0.96, 0.96], [2.0, 2.0, 1.0, 1.04, 1.04]),"
+    },
+    {
+      "source": "qualification/font04/geometry.py:282",
+      "value": 2.0,
+      "expression": "bounds=([-2.0, -2.0, -1.0, 0.96, 0.96], [2.0, 2.0, 1.0, 1.04, 1.04]),"
+    },
+    {
+      "source": "qualification/font04/geometry.py:282",
+      "value": 1.0,
+      "expression": "bounds=([-2.0, -2.0, -1.0, 0.96, 0.96], [2.0, 2.0, 1.0, 1.04, 1.04]),"
+    },
+    {
+      "source": "qualification/font04/geometry.py:284",
+      "value": 0.12,
+      "expression": "f_scale=0.12,"
+    },
+    {
+      "source": "qualification/font04/geometry.py:285",
+      "value": 35,
+      "expression": "max_nfev=35,"
+    },
+    {
+      "source": "qualification/font04/geometry.py:286",
+      "value": 0.001,
+      "expression": "diff_step=0.001,"
+    },
+    {
+      "source": "qualification/font04/geometry.py:287",
+      "value": 1e-05,
+      "expression": "ftol=1e-5,"
+    },
+    {
+      "source": "qualification/font04/geometry.py:288",
+      "value": 1e-05,
+      "expression": "xtol=1e-5,"
+    },
+    {
+      "source": "qualification/font04/geometry.py:289",
+      "value": 1e-05,
+      "expression": "gtol=1e-5,"
+    },
+    {
+      "source": "qualification/font04/geometry.py:303",
+      "value": 2,
+      "expression": "effective_stroke = 2 * image.sum() / max(1e-8, np.hypot(gx, gy).sum())"
+    },
+    {
+      "source": "qualification/font04/geometry.py:303",
+      "value": 1e-08,
+      "expression": "effective_stroke = 2 * image.sum() / max(1e-8, np.hypot(gx, gy).sum())"
+    },
+    {
+      "source": "qualification/font04/geometry.py:307",
+      "value": 2,
+      "expression": "vx = ((xx - cx) ** 2 * image).sum() / mass"
+    },
+    {
+      "source": "qualification/font04/geometry.py:308",
+      "value": 2,
+      "expression": "vy = ((yy - cy) ** 2 * image).sum() / mass"
+    },
+    {
+      "source": "qualification/font04/geometry.py:309",
+      "value": 1e-08,
+      "expression": "cross = ((xx - cx) * (yy - cy) * image).sum() / mass / max(1e-8, vx + vy)"
+    },
+    {
+      "source": "qualification/font04/geometry.py:310",
+      "value": 0.5,
+      "expression": "mask = image > 0.5"
+    },
+    {
+      "source": "qualification/font04/geometry.py:316",
+      "value": 1.0,
+      "expression": "scale = max(ga[\"height\"], ga[\"width\"], 1.0)"
+    },
+    {
+      "source": "qualification/font04/geometry.py:318",
+      "value": 0,
+      "expression": "for axis in [0, 1]:"
+    },
+    {
+      "source": "qualification/font04/geometry.py:318",
+      "value": 1,
+      "expression": "for axis in [0, 1]:"
+    },
+    {
+      "source": "qualification/font04/geometry.py:324",
+      "value": 1,
+      "expression": "np.logical_xor(ha, hb).sum() / max(1, np.logical_or(ha, hb).sum())"
+    },
+    {
+      "source": "qualification/font04/geometry.py:329",
+      "value": 0,
+      "expression": "horizontal_profile=profiles[0],"
+    },
+    {
+      "source": "qualification/font04/geometry.py:330",
+      "value": 1,
+      "expression": "vertical_profile=profiles[1],"
+    },
+    {
+      "source": "qualification/font04/owned_ink.py:7",
+      "value": 1.0,
+      "expression": "HALO=1.0"
+    },
+    {
+      "source": "qualification/font04/owned_ink.py:8",
+      "value": 1,
+      "expression": "MIN_AREA=1"
+    },
+    {
+      "source": "qualification/font04/owned_ink.py:9",
+      "value": 0.75,
+      "expression": "MIN_MASS=.75"
+    },
+    {
+      "source": "qualification/font04/owned_ink.py:14",
+      "value": 0.25,
+      "expression": "labels,n=ndimage.label(source>.25)"
+    },
+    {
+      "source": "qualification/font04/owned_ink.py:15",
+      "value": 0.15,
+      "expression": "current_distance=ndimage.distance_transform_edt(~(current>.15))"
+    },
+    {
+      "source": "qualification/font04/owned_ink.py:16",
+      "value": 1,
+      "expression": "body=max(range(1,n+1),key=lambda k:int(((labels==k)&(current>.15)).sum()),default=0)"
+    },
+    {
+      "source": "qualification/font04/owned_ink.py:16",
+      "value": 0,
+      "expression": "body=max(range(1,n+1),key=lambda k:int(((labels==k)&(current>.15)).sum()),default=0)"
+    },
+    {
+      "source": "qualification/font04/owned_ink.py:16",
+      "value": 1,
+      "expression": "body=max(range(1,n+1),key=lambda k:int(((labels==k)&(current>.15)).sum()),default=0)"
+    },
+    {
+      "source": "qualification/font04/owned_ink.py:16",
+      "value": 0.15,
+      "expression": "body=max(range(1,n+1),key=lambda k:int(((labels==k)&(current>.15)).sum()),default=0)"
+    },
+    {
+      "source": "qualification/font04/owned_ink.py:17",
+      "value": 0.1,
+      "expression": "footprint=candidate>.10"
+    },
+    {
+      "source": "qualification/font04/owned_ink.py:20",
+      "value": 1,
+      "expression": "for label in range(1,n+1):"
+    },
+    {
+      "source": "qualification/font04/owned_ink.py:20",
+      "value": 1,
+      "expression": "for label in range(1,n+1):"
+    },
+    {
+      "source": "qualification/font04/owned_ink.py:22",
+      "value": 0.15,
+      "expression": "owned=component & (current>.15)"
+    },
+    {
+      "source": "qualification/font04/owned_ink.py:26",
+      "value": 0.0,
+      "expression": "ledger.append(dict(member=member,component=label,source_area=int(component.sum()),component_area=int(component.sum()),component_contrast=float(source[component].mean()),component_peak_contrast=float(source[component].max()),distance_to_current=float(current_distance[component].min()),distance_to_canonical=float(distance[component].min()),detached_in_ownership_halo=bool(label!=body and current_distance[component].min()<=1.5),owned_area=int(owned.sum()),area=area,contrast=float(source[unexplained].mean()) if area else 0.,mass=mass,distance=float(distance[owned].max()) if owned.any() else None,halo=HALO,decision='keep_default_exception' if firing else ('unowned_dirt_ignored' if not owned.any() else 'covered_or_below_significance'),fires=bool(firing)))"
+    },
+    {
+      "source": "qualification/font04/owned_ink.py:26",
+      "value": 1.5,
+      "expression": "ledger.append(dict(member=member,component=label,source_area=int(component.sum()),component_area=int(component.sum()),component_contrast=float(source[component].mean()),component_peak_contrast=float(source[component].max()),distance_to_current=float(current_distance[component].min()),distance_to_canonical=float(distance[component].min()),detached_in_ownership_halo=bool(label!=body and current_distance[component].min()<=1.5),owned_area=int(owned.sum()),area=area,contrast=float(source[unexplained].mean()) if area else 0.,mass=mass,distance=float(distance[owned].max()) if owned.any() else None,halo=HALO,decision='keep_default_exception' if firing else ('unowned_dirt_ignored' if not owned.any() else 'covered_or_below_significance'),fires=bool(firing)))"
+    },
+    {
+      "source": "qualification/font04/owned_ink.py:36",
+      "value": 277,
+      "expression": "if not is_b2:assert 277 in fired, 'glyph-277 owned mark must veto the substitution'"
+    },
+    {
+      "source": "qualification/font04/owned_ink.py:37",
+      "value": 0.25,
+      "expression": "result=dict(schema='font04-owned-components-v1',source_pdf=str(path),source_pdf_sha256=__import__('hashlib').sha256(path.read_bytes()).hexdigest(),exceptions=fired,components=ledger,policy=dict(halo_pixels=HALO,min_area=MIN_AREA,min_mass=MIN_MASS,source_threshold=.25,default_ownership_threshold=.15,candidate_footprint_threshold=.10),regression_glyph_277='PV complete-output regression pending class_verify' if is_b2 else 'PASS: default retained; owned mark survives')"
+    },
+    {
+      "source": "qualification/font04/owned_ink.py:37",
+      "value": 0.15,
+      "expression": "result=dict(schema='font04-owned-components-v1',source_pdf=str(path),source_pdf_sha256=__import__('hashlib').sha256(path.read_bytes()).hexdigest(),exceptions=fired,components=ledger,policy=dict(halo_pixels=HALO,min_area=MIN_AREA,min_mass=MIN_MASS,source_threshold=.25,default_ownership_threshold=.15,candidate_footprint_threshold=.10),regression_glyph_277='PV complete-output regression pending class_verify' if is_b2 else 'PASS: default retained; owned mark survives')"
+    },
+    {
+      "source": "qualification/font04/owned_ink.py:37",
+      "value": 0.1,
+      "expression": "result=dict(schema='font04-owned-components-v1',source_pdf=str(path),source_pdf_sha256=__import__('hashlib').sha256(path.read_bytes()).hexdigest(),exceptions=fired,components=ledger,policy=dict(halo_pixels=HALO,min_area=MIN_AREA,min_mass=MIN_MASS,source_threshold=.25,default_ownership_threshold=.15,candidate_footprint_threshold=.10),regression_glyph_277='PV complete-output regression pending class_verify' if is_b2 else 'PASS: default retained; owned mark survives')"
+    },
+    {
+      "source": "qualification/font04/owned_ink.py:38",
+      "value": 2,
+      "expression": "Path('qualification/font04/'+('b2-owned-component-ledger.json' if is_b2 else 'owned-component-ledger.json')).write_text(json.dumps(result,indent=2)+'\\n')"
+    },
+    {
+      "source": "qualification/font04/owned_ink.py:42",
+      "value": 1,
+      "expression": "source=np.zeros((24,24));source[10:20,8:16]=1;source[3:5,12:14]=1"
+    },
+    {
+      "source": "qualification/font04/owned_ink.py:42",
+      "value": 1,
+      "expression": "source=np.zeros((24,24));source[10:20,8:16]=1;source[3:5,12:14]=1"
+    },
+    {
+      "source": "qualification/font04/owned_ink.py:42",
+      "value": 24,
+      "expression": "source=np.zeros((24,24));source[10:20,8:16]=1;source[3:5,12:14]=1"
+    },
+    {
+      "source": "qualification/font04/owned_ink.py:42",
+      "value": 24,
+      "expression": "source=np.zeros((24,24));source[10:20,8:16]=1;source[3:5,12:14]=1"
+    },
+    {
+      "source": "qualification/font04/owned_ink.py:42",
+      "value": 10,
+      "expression": "source=np.zeros((24,24));source[10:20,8:16]=1;source[3:5,12:14]=1"
+    },
+    {
+      "source": "qualification/font04/owned_ink.py:42",
+      "value": 20,
+      "expression": "source=np.zeros((24,24));source[10:20,8:16]=1;source[3:5,12:14]=1"
+    },
+    {
+      "source": "qualification/font04/owned_ink.py:42",
+      "value": 8,
+      "expression": "source=np.zeros((24,24));source[10:20,8:16]=1;source[3:5,12:14]=1"
+    },
+    {
+      "source": "qualification/font04/owned_ink.py:42",
+      "value": 16,
+      "expression": "source=np.zeros((24,24));source[10:20,8:16]=1;source[3:5,12:14]=1"
+    },
+    {
+      "source": "qualification/font04/owned_ink.py:42",
+      "value": 3,
+      "expression": "source=np.zeros((24,24));source[10:20,8:16]=1;source[3:5,12:14]=1"
+    },
+    {
+      "source": "qualification/font04/owned_ink.py:42",
+      "value": 5,
+      "expression": "source=np.zeros((24,24));source[10:20,8:16]=1;source[3:5,12:14]=1"
+    },
+    {
+      "source": "qualification/font04/owned_ink.py:42",
+      "value": 12,
+      "expression": "source=np.zeros((24,24));source[10:20,8:16]=1;source[3:5,12:14]=1"
+    },
+    {
+      "source": "qualification/font04/owned_ink.py:42",
+      "value": 14,
+      "expression": "source=np.zeros((24,24));source[10:20,8:16]=1;source[3:5,12:14]=1"
+    },
+    {
+      "source": "qualification/font04/owned_ink.py:43",
+      "value": 0,
+      "expression": "candidate=source.copy();candidate[3:5,12:14]=0"
+    },
+    {
+      "source": "qualification/font04/owned_ink.py:43",
+      "value": 3,
+      "expression": "candidate=source.copy();candidate[3:5,12:14]=0"
+    },
+    {
+      "source": "qualification/font04/owned_ink.py:43",
+      "value": 5,
+      "expression": "candidate=source.copy();candidate[3:5,12:14]=0"
+    },
+    {
+      "source": "qualification/font04/owned_ink.py:43",
+      "value": 12,
+      "expression": "candidate=source.copy();candidate[3:5,12:14]=0"
+    },
+    {
+      "source": "qualification/font04/owned_ink.py:43",
+      "value": 14,
+      "expression": "candidate=source.copy();candidate[3:5,12:14]=0"
+    },
+    {
+      "source": "qualification/font04/owned_ink.py:44",
+      "value": 277,
+      "expression": "assert any(r['fires'] for r in components(source,source,candidate,277))"
+    },
+    {
+      "source": "qualification/font04/owned_ink.py:45",
+      "value": 0,
+      "expression": "assert not any(r['fires'] for r in components(source,candidate,candidate,0))"
+    },
+    {
+      "source": "qualification/font04/owned_ink.py:46",
+      "value": 0,
+      "expression": "assert not any(r['fires'] for r in components(source,source,source,0))"
+    },
+    {
+      "source": "qualification/font04/owned_ink.py:50",
+      "value": 1,
+      "expression": "test();main(Path(sys.argv[1]))"
+    },
+    {
+      "source": "qualification/font04/planner.py:16",
+      "value": 0,
+      "expression": "sys.path.insert(0, str(Path(__file__).resolve().parents[2]))"
+    },
+    {
+      "source": "qualification/font04/planner.py:16",
+      "value": 2,
+      "expression": "sys.path.insert(0, str(Path(__file__).resolve().parents[2]))"
+    },
+    {
+      "source": "qualification/font04/planner.py:19",
+      "value": 0.5,
+      "expression": "SWEEP = [0.5, 0.75, 1., 1.25, 1.5, 2., 3.]"
+    },
+    {
+      "source": "qualification/font04/planner.py:19",
+      "value": 0.75,
+      "expression": "SWEEP = [0.5, 0.75, 1., 1.25, 1.5, 2., 3.]"
+    },
+    {
+      "source": "qualification/font04/planner.py:19",
+      "value": 1.0,
+      "expression": "SWEEP = [0.5, 0.75, 1., 1.25, 1.5, 2., 3.]"
+    },
+    {
+      "source": "qualification/font04/planner.py:19",
+      "value": 1.25,
+      "expression": "SWEEP = [0.5, 0.75, 1., 1.25, 1.5, 2., 3.]"
+    },
+    {
+      "source": "qualification/font04/planner.py:19",
+      "value": 1.5,
+      "expression": "SWEEP = [0.5, 0.75, 1., 1.25, 1.5, 2., 3.]"
+    },
+    {
+      "source": "qualification/font04/planner.py:19",
+      "value": 2.0,
+      "expression": "SWEEP = [0.5, 0.75, 1., 1.25, 1.5, 2., 3.]"
+    },
+    {
+      "source": "qualification/font04/planner.py:19",
+      "value": 3.0,
+      "expression": "SWEEP = [0.5, 0.75, 1., 1.25, 1.5, 2., 3.]"
+    },
+    {
+      "source": "qualification/font04/planner.py:22",
+      "value": 255,
+      "expression": "def local_source(source, paper_rgb=(255,255,255)):"
+    },
+    {
+      "source": "qualification/font04/planner.py:22",
+      "value": 255,
+      "expression": "def local_source(source, paper_rgb=(255,255,255)):"
+    },
+    {
+      "source": "qualification/font04/planner.py:22",
+      "value": 255,
+      "expression": "def local_source(source, paper_rgb=(255,255,255)):"
+    },
+    {
+      "source": "qualification/font04/planner.py:25",
+      "value": 4,
+      "expression": "halo=np.array(source['halo'],float).reshape(h+4,w+4)"
+    },
+    {
+      "source": "qualification/font04/planner.py:25",
+      "value": 4,
+      "expression": "halo=np.array(source['halo'],float).reshape(h+4,w+4)"
+    },
+    {
+      "source": "qualification/font04/planner.py:26",
+      "value": 2,
+      "expression": "owned=np.pad(mask,2)"
+    },
+    {
+      "source": "qualification/font04/planner.py:27",
+      "value": 0.8,
+      "expression": "paper=float(np.quantile(halo[~owned],.8))"
+    },
+    {
+      "source": "qualification/font04/planner.py:28",
+      "value": 0.15,
+      "expression": "ink=float(np.quantile(halo[owned],.15))"
+    },
+    {
+      "source": "qualification/font04/planner.py:29",
+      "value": 30,
+      "expression": "if paper-ink<30: raise ValueError('insufficient_contrast')"
+    },
+    {
+      "source": "qualification/font04/planner.py:31",
+      "value": 60,
+      "expression": "foreign=(np.abs(halo-np.dot(paper_rgb,[.2126,.7152,.0722]))>60)&~owned"
+    },
+    {
+      "source": "qualification/font04/planner.py:31",
+      "value": 0.2126,
+      "expression": "foreign=(np.abs(halo-np.dot(paper_rgb,[.2126,.7152,.0722]))>60)&~owned"
+    },
+    {
+      "source": "qualification/font04/planner.py:31",
+      "value": 0.7152,
+      "expression": "foreign=(np.abs(halo-np.dot(paper_rgb,[.2126,.7152,.0722]))>60)&~owned"
+    },
+    {
+      "source": "qualification/font04/planner.py:31",
+      "value": 0.0722,
+      "expression": "foreign=(np.abs(halo-np.dot(paper_rgb,[.2126,.7152,.0722]))>60)&~owned"
+    },
+    {
+      "source": "qualification/font04/planner.py:32",
+      "value": 100.0,
+      "expression": "fd=ndimage.distance_transform_edt(~foreign) if foreign.any() else np.full(halo.shape,100.)"
+    },
+    {
+      "source": "qualification/font04/planner.py:33",
+      "value": 1.5,
+      "expression": "support=(distance<=1.5)&(distance<fd)"
+    },
+    {
+      "source": "qualification/font04/planner.py:34",
+      "value": 0,
+      "expression": "return np.clip((paper-halo)/(paper-ink),0,1)*support"
+    },
+    {
+      "source": "qualification/font04/planner.py:34",
+      "value": 1,
+      "expression": "return np.clip((paper-halo)/(paper-ink),0,1)*support"
+    },
+    {
+      "source": "qualification/font04/planner.py:40",
+      "value": 2,
+      "expression": "own_center=(s['bbox'][1]+s['bbox'][3])/2"
+    },
+    {
+      "source": "qualification/font04/planner.py:40",
+      "value": 1,
+      "expression": "own_center=(s['bbox'][1]+s['bbox'][3])/2"
+    },
+    {
+      "source": "qualification/font04/planner.py:40",
+      "value": 3,
+      "expression": "own_center=(s['bbox'][1]+s['bbox'][3])/2"
+    },
+    {
+      "source": "qualification/font04/planner.py:41",
+      "value": 3,
+      "expression": "own_height=s['bbox'][3]-s['bbox'][1]"
+    },
+    {
+      "source": "qualification/font04/planner.py:41",
+      "value": 1,
+      "expression": "own_height=s['bbox'][3]-s['bbox'][1]"
+    },
+    {
+      "source": "qualification/font04/planner.py:42",
+      "value": 4,
+      "expression": "line=[u['bbox'] for u in row.get('line_units',[]) if u['text'] in 'ace' and u['bbox'][3]-u['bbox'][1]>=4"
+    },
+    {
+      "source": "qualification/font04/planner.py:42",
+      "value": 3,
+      "expression": "line=[u['bbox'] for u in row.get('line_units',[]) if u['text'] in 'ace' and u['bbox'][3]-u['bbox'][1]>=4"
+    },
+    {
+      "source": "qualification/font04/planner.py:42",
+      "value": 1,
+      "expression": "line=[u['bbox'] for u in row.get('line_units',[]) if u['text'] in 'ace' and u['bbox'][3]-u['bbox'][1]>=4"
+    },
+    {
+      "source": "qualification/font04/planner.py:43",
+      "value": 0.65,
+      "expression": "and (not row.get('geometric_line_filter',True) or abs((u['bbox'][1]+u['bbox'][3])/2-own_center)<=.65*max(own_height,u['bbox'][3]-u['bbox'][1]))]"
+    },
+    {
+      "source": "qualification/font04/planner.py:43",
+      "value": 2,
+      "expression": "and (not row.get('geometric_line_filter',True) or abs((u['bbox'][1]+u['bbox'][3])/2-own_center)<=.65*max(own_height,u['bbox'][3]-u['bbox'][1]))]"
+    },
+    {
+      "source": "qualification/font04/planner.py:43",
+      "value": 3,
+      "expression": "and (not row.get('geometric_line_filter',True) or abs((u['bbox'][1]+u['bbox'][3])/2-own_center)<=.65*max(own_height,u['bbox'][3]-u['bbox'][1]))]"
+    },
+    {
+      "source": "qualification/font04/planner.py:43",
+      "value": 1,
+      "expression": "and (not row.get('geometric_line_filter',True) or abs((u['bbox'][1]+u['bbox'][3])/2-own_center)<=.65*max(own_height,u['bbox'][3]-u['bbox'][1]))]"
+    },
+    {
+      "source": "qualification/font04/planner.py:43",
+      "value": 1,
+      "expression": "and (not row.get('geometric_line_filter',True) or abs((u['bbox'][1]+u['bbox'][3])/2-own_center)<=.65*max(own_height,u['bbox'][3]-u['bbox'][1]))]"
+    },
+    {
+      "source": "qualification/font04/planner.py:43",
+      "value": 3,
+      "expression": "and (not row.get('geometric_line_filter',True) or abs((u['bbox'][1]+u['bbox'][3])/2-own_center)<=.65*max(own_height,u['bbox'][3]-u['bbox'][1]))]"
+    },
+    {
+      "source": "qualification/font04/planner.py:45",
+      "value": 3,
+      "expression": "xh=float(np.median([b[3]-b[1] for b in line]));base=float(np.median([b[3] for b in line]))"
+    },
+    {
+      "source": "qualification/font04/planner.py:45",
+      "value": 3,
+      "expression": "xh=float(np.median([b[3]-b[1] for b in line]));base=float(np.median([b[3] for b in line]))"
+    },
+    {
+      "source": "qualification/font04/planner.py:45",
+      "value": 1,
+      "expression": "xh=float(np.median([b[3]-b[1] for b in line]));base=float(np.median([b[3] for b in line]))"
+    },
+    {
+      "source": "qualification/font04/planner.py:46",
+      "value": 2,
+      "expression": "cx=(s['ocr_bbox'][0]+s['ocr_bbox'][2])/2"
+    },
+    {
+      "source": "qualification/font04/planner.py:46",
+      "value": 0,
+      "expression": "cx=(s['ocr_bbox'][0]+s['ocr_bbox'][2])/2"
+    },
+    {
+      "source": "qualification/font04/planner.py:46",
+      "value": 2,
+      "expression": "cx=(s['ocr_bbox'][0]+s['ocr_bbox'][2])/2"
+    },
+    {
+      "source": "qualification/font04/planner.py:47",
+      "value": 32,
+      "expression": "scale=32/xh; yy,xx=np.mgrid[:64,:64]"
+    },
+    {
+      "source": "qualification/font04/planner.py:47",
+      "value": 64,
+      "expression": "scale=32/xh; yy,xx=np.mgrid[:64,:64]"
+    },
+    {
+      "source": "qualification/font04/planner.py:47",
+      "value": 64,
+      "expression": "scale=32/xh; yy,xx=np.mgrid[:64,:64]"
+    },
+    {
+      "source": "qualification/font04/planner.py:48",
+      "value": 1,
+      "expression": "canvas=ndimage.map_coordinates(evidence,[base+(yy-48)/scale-s['bbox'][1]+1.5,cx+(xx-32)/scale-s['bbox'][0]+1.5],order=1,mode='constant',prefilter=False)"
+    },
+    {
+      "source": "qualification/font04/planner.py:48",
+      "value": 1.5,
+      "expression": "canvas=ndimage.map_coordinates(evidence,[base+(yy-48)/scale-s['bbox'][1]+1.5,cx+(xx-32)/scale-s['bbox'][0]+1.5],order=1,mode='constant',prefilter=False)"
+    },
+    {
+      "source": "qualification/font04/planner.py:48",
+      "value": 1.5,
+      "expression": "canvas=ndimage.map_coordinates(evidence,[base+(yy-48)/scale-s['bbox'][1]+1.5,cx+(xx-32)/scale-s['bbox'][0]+1.5],order=1,mode='constant',prefilter=False)"
+    },
+    {
+      "source": "qualification/font04/planner.py:48",
+      "value": 1,
+      "expression": "canvas=ndimage.map_coordinates(evidence,[base+(yy-48)/scale-s['bbox'][1]+1.5,cx+(xx-32)/scale-s['bbox'][0]+1.5],order=1,mode='constant',prefilter=False)"
+    },
+    {
+      "source": "qualification/font04/planner.py:48",
+      "value": 0,
+      "expression": "canvas=ndimage.map_coordinates(evidence,[base+(yy-48)/scale-s['bbox'][1]+1.5,cx+(xx-32)/scale-s['bbox'][0]+1.5],order=1,mode='constant',prefilter=False)"
+    },
+    {
+      "source": "qualification/font04/planner.py:48",
+      "value": 48,
+      "expression": "canvas=ndimage.map_coordinates(evidence,[base+(yy-48)/scale-s['bbox'][1]+1.5,cx+(xx-32)/scale-s['bbox'][0]+1.5],order=1,mode='constant',prefilter=False)"
+    },
+    {
+      "source": "qualification/font04/planner.py:48",
+      "value": 32,
+      "expression": "canvas=ndimage.map_coordinates(evidence,[base+(yy-48)/scale-s['bbox'][1]+1.5,cx+(xx-32)/scale-s['bbox'][0]+1.5],order=1,mode='constant',prefilter=False)"
+    },
+    {
+      "source": "qualification/font04/planner.py:52",
+      "value": 0.0,
+      "expression": "def frame_bbox(frame, origin, size, parameters=(0., 0., 1.)):"
+    },
+    {
+      "source": "qualification/font04/planner.py:52",
+      "value": 0.0,
+      "expression": "def frame_bbox(frame, origin, size, parameters=(0., 0., 1.)):"
+    },
+    {
+      "source": "qualification/font04/planner.py:52",
+      "value": 1.0,
+      "expression": "def frame_bbox(frame, origin, size, parameters=(0., 0., 1.)):"
+    },
+    {
+      "source": "qualification/font04/planner.py:55",
+      "value": 32,
+      "expression": "left=32+s*(x-.5-32)+dx;top=48+s*(y-.5-48)+dy"
+    },
+    {
+      "source": "qualification/font04/planner.py:55",
+      "value": 48,
+      "expression": "left=32+s*(x-.5-32)+dx;top=48+s*(y-.5-48)+dy"
+    },
+    {
+      "source": "qualification/font04/planner.py:55",
+      "value": 32,
+      "expression": "left=32+s*(x-.5-32)+dx;top=48+s*(y-.5-48)+dy"
+    },
+    {
+      "source": "qualification/font04/planner.py:55",
+      "value": 48,
+      "expression": "left=32+s*(x-.5-32)+dx;top=48+s*(y-.5-48)+dy"
+    },
+    {
+      "source": "qualification/font04/planner.py:55",
+      "value": 0.5,
+      "expression": "left=32+s*(x-.5-32)+dx;top=48+s*(y-.5-48)+dy"
+    },
+    {
+      "source": "qualification/font04/planner.py:55",
+      "value": 0.5,
+      "expression": "left=32+s*(x-.5-32)+dx;top=48+s*(y-.5-48)+dy"
+    },
+    {
+      "source": "qualification/font04/planner.py:56",
+      "value": 32,
+      "expression": "return [frame['cx']+(left-32)/frame['scale'],"
+    },
+    {
+      "source": "qualification/font04/planner.py:57",
+      "value": 48,
+      "expression": "frame['baseline']+(top-48)/frame['scale'],"
+    },
+    {
+      "source": "qualification/font04/planner.py:58",
+      "value": 32,
+      "expression": "frame['cx']+(left+s*w-32)/frame['scale'],"
+    },
+    {
+      "source": "qualification/font04/planner.py:59",
+      "value": 48,
+      "expression": "frame['baseline']+(top+s*h-48)/frame['scale']]"
+    },
+    {
+      "source": "qualification/font04/planner.py:63",
+      "value": 0.5,
+      "expression": "yy,xx=np.nonzero(image>.5)"
+    },
+    {
+      "source": "qualification/font04/planner.py:65",
+      "value": 1,
+      "expression": "x0,x1=int(xx.min()),int(xx.max()+1);y0,y1=int(yy.min()),int(yy.max()+1)"
+    },
+    {
+      "source": "qualification/font04/planner.py:65",
+      "value": 1,
+      "expression": "x0,x1=int(xx.min()),int(xx.max()+1);y0,y1=int(yy.min()),int(yy.max()+1)"
+    },
+    {
+      "source": "qualification/font04/planner.py:75",
+      "value": 55,
+      "expression": "if len({r['character'] for r in snapshot['rows']})!=55:raise ValueError('B2 requires exactly 55 frequent classes')"
+    },
+    {
+      "source": "qualification/font04/planner.py:84",
+      "value": 64,
+      "expression": "frames.append(None);fields.append(np.zeros((64,64)));origins.append(None);errors.append(dict(index=row['index'],reason=str(error)))"
+    },
+    {
+      "source": "qualification/font04/planner.py:84",
+      "value": 64,
+      "expression": "frames.append(None);fields.append(np.zeros((64,64)));origins.append(None);errors.append(dict(index=row['index'],reason=str(error)))"
+    },
+    {
+      "source": "qualification/font04/planner.py:92",
+      "value": 1.0,
+      "expression": "return float(np.square(a-b).sum()/max(1.,np.maximum(a,b).sum()))"
+    },
+    {
+      "source": "qualification/font04/planner.py:100",
+      "value": 1,
+      "expression": "if ga is None or gb is None:return ['empty_ink'],dict(empty_ink=dict(value=1,limit=0))"
+    },
+    {
+      "source": "qualification/font04/planner.py:100",
+      "value": 0,
+      "expression": "if ga is None or gb is None:return ['empty_ink'],dict(empty_ink=dict(value=1,limit=0))"
+    },
+    {
+      "source": "qualification/font04/planner.py:101",
+      "value": 1.25,
+      "expression": "for key,limit in [('area',1.25),('width',1.18),('height',1.18),('elongation',1.5),('stroke',1.3)]:"
+    },
+    {
+      "source": "qualification/font04/planner.py:101",
+      "value": 1.18,
+      "expression": "for key,limit in [('area',1.25),('width',1.18),('height',1.18),('elongation',1.5),('stroke',1.3)]:"
+    },
+    {
+      "source": "qualification/font04/planner.py:101",
+      "value": 1.18,
+      "expression": "for key,limit in [('area',1.25),('width',1.18),('height',1.18),('elongation',1.5),('stroke',1.3)]:"
+    },
+    {
+      "source": "qualification/font04/planner.py:101",
+      "value": 1.5,
+      "expression": "for key,limit in [('area',1.25),('width',1.18),('height',1.18),('elongation',1.5),('stroke',1.3)]:"
+    },
+    {
+      "source": "qualification/font04/planner.py:101",
+      "value": 1.3,
+      "expression": "for key,limit in [('area',1.25),('width',1.18),('height',1.18),('elongation',1.5),('stroke',1.3)]:"
+    },
+    {
+      "source": "qualification/font04/planner.py:102",
+      "value": 1e-08,
+      "expression": "ratio=max(ga[key]/max(gb[key],1e-8),gb[key]/max(ga[key],1e-8))"
+    },
+    {
+      "source": "qualification/font04/planner.py:102",
+      "value": 1e-08,
+      "expression": "ratio=max(ga[key]/max(gb[key],1e-8),gb[key]/max(ga[key],1e-8))"
+    },
+    {
+      "source": "qualification/font04/planner.py:105",
+      "value": 2.0,
+      "expression": "values['centroid']=dict(value=float(np.linalg.norm(np.array(ga['centroid'])-gb['centroid'])),limit=2.)"
+    },
+    {
+      "source": "qualification/font04/planner.py:106",
+      "value": 15,
+      "expression": "values['orientation']=dict(value=float(abs(np.dot(ga['axis'],gb['axis']))),limit=float(np.cos(np.deg2rad(15))))"
+    },
+    {
+      "source": "qualification/font04/planner.py:108",
+      "value": 0.35,
+      "expression": "for key,limit in [('stroke_log',float(np.log(1.3))),('counter_difference',.35),('cross_moment',.08)]:"
+    },
+    {
+      "source": "qualification/font04/planner.py:108",
+      "value": 0.08,
+      "expression": "for key,limit in [('stroke_log',float(np.log(1.3))),('counter_difference',.35),('cross_moment',.08)]:"
+    },
+    {
+      "source": "qualification/font04/planner.py:108",
+      "value": 1.3,
+      "expression": "for key,limit in [('stroke_log',float(np.log(1.3))),('counter_difference',.35),('cross_moment',.08)]:"
+    },
+    {
+      "source": "qualification/font04/planner.py:112",
+      "value": 0.35,
+      "expression": "for threshold in [.35,.65]:"
+    },
+    {
+      "source": "qualification/font04/planner.py:112",
+      "value": 0.65,
+      "expression": "for threshold in [.35,.65]:"
+    },
+    {
+      "source": "qualification/font04/planner.py:122",
+      "value": 1,
+      "expression": "if rows is not None and len({r.get('character','e') for r in rows})>1:"
+    },
+    {
+      "source": "qualification/font04/planner.py:151",
+      "value": 0.0,
+      "expression": "if method=='star':priority=(float(np.median(errors[j,[i for i in remaining if i!=j]])) if len(remaining)>1 else 0.,-len(members),j)"
+    },
+    {
+      "source": "qualification/font04/planner.py:151",
+      "value": 1,
+      "expression": "if method=='star':priority=(float(np.median(errors[j,[i for i in remaining if i!=j]])) if len(remaining)>1 else 0.,-len(members),j)"
+    },
+    {
+      "source": "qualification/font04/planner.py:159",
+      "value": 1,
+      "expression": "priority=(-(retired-1),-len(members),priority[1],j)"
+    },
+    {
+      "source": "qualification/font04/planner.py:159",
+      "value": 1,
+      "expression": "priority=(-(retired-1),-len(members),priority[1],j)"
+    },
+    {
+      "source": "qualification/font04/planner.py:163",
+      "value": 2,
+      "expression": "if len(members)>=2:groups.append(dict(canonical=canonical,members=members))"
+    },
+    {
+      "source": "qualification/font04/planner.py:165",
+      "value": 2,
+      "expression": "if len(members)>=2:remapped.update(members)"
+    },
+    {
+      "source": "qualification/font04/planner.py:184",
+      "value": 1,
+      "expression": "j=int(o['key'].rsplit('-',1)[1]);x,y=origins[j];h,w=o['height'],o['width']"
+    },
+    {
+      "source": "qualification/font04/planner.py:184",
+      "value": 1,
+      "expression": "j=int(o['key'].rsplit('-',1)[1]);x,y=origins[j];h,w=o['height'],o['width']"
+    },
+    {
+      "source": "qualification/font04/planner.py:200",
+      "value": 2,
+      "expression": "(directory/'plan.json').write_text(json.dumps(result,indent=2))"
+    },
+    {
+      "source": "qualification/font04/planner.py:213",
+      "value": 1.0,
+      "expression": "if result['selected']['grouping']!='star' or result['selected']['error_scale']!=1.:raise ValueError('cached operating point mismatch')"
+    },
+    {
+      "source": "qualification/font04/planner.py:220",
+      "value": 2,
+      "expression": "if len(survivors)<2:survivors=[]"
+    },
+    {
+      "source": "qualification/font04/planner.py:227",
+      "value": 2,
+      "expression": "elif j in exceptions or sum(x['member'] not in exceptions for x in groups[j])<2:"
+    },
+    {
+      "source": "qualification/font04/planner.py:228",
+      "value": 2,
+      "expression": "reason='ownership_group_exception';checks=dict(ownership_group=dict(value=dict(canonical=j,canonical_veto=j in exceptions,remaining_members=sum(x['member'] not in exceptions for x in groups[j])),limit=dict(canonical_veto=False,minimum_members=2)))"
+    },
+    {
+      "source": "qualification/font04/planner.py:237",
+      "value": 0,
+      "expression": "result.update(assignments=accepted,arm=arm,fit_control_workers=result.get('fit_workers',1),fit_workers=0,ownership_veto=ownership,functional_veto=functional,runtime_seconds=time.monotonic()-started,fit_reuse=dict(control_pdf=str(control),sha256=control_sha,verification='Exact source snapshot and traced outline equality; existing groups only; orthogonal owned-ink and mandatory functional-identity vetoes.'))"
+    },
+    {
+      "source": "qualification/font04/planner.py:237",
+      "value": 1,
+      "expression": "result.update(assignments=accepted,arm=arm,fit_control_workers=result.get('fit_workers',1),fit_workers=0,ownership_veto=ownership,functional_veto=functional,runtime_seconds=time.monotonic()-started,fit_reuse=dict(control_pdf=str(control),sha256=control_sha,verification='Exact source snapshot and traced outline equality; existing groups only; orthogonal owned-ink and mandatory functional-identity vetoes.'))"
+    },
+    {
+      "source": "qualification/font04/planner.py:238",
+      "value": 2,
+      "expression": "(directory/'outlines.json').write_text(json.dumps(data['outlines']));(directory/'pair-ledger.json').write_bytes((reference/'pair-ledger.json').read_bytes());(directory/'plan.json').write_text(json.dumps(result,indent=2));return result"
+    },
+    {
+      "source": "qualification/font04/planner.py:250",
+      "value": 24,
+      "expression": "jobs.extend((i,indices[j]) for j in np.argsort(distances)[:min(24,len(indices)-1)] if np.isfinite(distances[j]))"
+    },
+    {
+      "source": "qualification/font04/planner.py:250",
+      "value": 1,
+      "expression": "jobs.extend((i,indices[j]) for j in np.argsort(distances)[:min(24,len(indices)-1)] if np.isfinite(distances[j]))"
+    },
+    {
+      "source": "qualification/font04/planner.py:251",
+      "value": 1,
+      "expression": "workers=max(1,min(16,int(os.environ.get('FONT04_FIT_WORKERS','1'))))"
+    },
+    {
+      "source": "qualification/font04/planner.py:251",
+      "value": 16,
+      "expression": "workers=max(1,min(16,int(os.environ.get('FONT04_FIT_WORKERS','1'))))"
+    },
+    {
+      "source": "qualification/font04/planner.py:253",
+      "value": 1,
+      "expression": "if workers>1:"
+    },
+    {
+      "source": "qualification/font04/planner.py:256",
+      "value": 32,
+      "expression": "fitted=executor.map(_fit_pair,jobs,chunksize=32)"
+    },
+    {
+      "source": "qualification/font04/planner.py:262",
+      "value": 0,
+      "expression": "if i!=previous and i%25==0:print(f'FONT04 fitted {i}/{n}',file=sys.stderr,flush=True)"
+    },
+    {
+      "source": "qualification/font04/planner.py:262",
+      "value": 25,
+      "expression": "if i!=previous and i%25==0:print(f'FONT04 fitted {i}/{n}',file=sys.stderr,flush=True)"
+    },
+    {
+      "source": "qualification/font04/planner.py:277",
+      "value": 5,
+      "expression": "if len(peers)>=5:break"
+    },
+    {
+      "source": "qualification/font04/planner.py:278",
+      "value": 2,
+      "expression": "noise.append(float(np.quantile(peers,.85)) if len(peers)>=2 else None)"
+    },
+    {
+      "source": "qualification/font04/planner.py:278",
+      "value": 0.85,
+      "expression": "noise.append(float(np.quantile(peers,.85)) if len(peers)>=2 else None)"
+    },
+    {
+      "source": "qualification/font04/planner.py:280",
+      "value": 2,
+      "expression": "calibration_failure=eligible_count>=2 and len(peers)<2"
+    },
+    {
+      "source": "qualification/font04/planner.py:280",
+      "value": 2,
+      "expression": "calibration_failure=eligible_count>=2 and len(peers)<2"
+    },
+    {
+      "source": "qualification/font04/planner.py:281",
+      "value": 2,
+      "expression": "noise_support.append(dict(member=i,witnesses=len(peers),eligible_witnesses=eligible_count,required_k=2,status='calibrated' if len(peers)>=2 else ('source_pair_calibration_failure' if calibration_failure else 'fewer_than_k_eligible_witnesses'),calibration_failure=calibration_failure,numerical_calibration_error=False))"
+    },
+    {
+      "source": "qualification/font04/planner.py:281",
+      "value": 2,
+      "expression": "noise_support.append(dict(member=i,witnesses=len(peers),eligible_witnesses=eligible_count,required_k=2,status='calibrated' if len(peers)>=2 else ('source_pair_calibration_failure' if calibration_failure else 'fewer_than_k_eligible_witnesses'),calibration_failure=calibration_failure,numerical_calibration_error=False))"
+    },
+    {
+      "source": "qualification/font04/planner.py:284",
+      "value": 1e-06,
+      "expression": "if level is not None:normalized[i]=errors[i]/max(level,1e-6)"
+    },
+    {
+      "source": "qualification/font04/planner.py:289",
+      "value": 1e-06,
+      "expression": "normalized[i,i]=err/max(noise[i],1e-6) if noise[i] is not None else np.inf"
+    },
+    {
+      "source": "qualification/font04/planner.py:306",
+      "value": 1.0,
+      "expression": "eligible=[(v,g) for v,g in choices if v['error_scale']==1.]"
+    },
+    {
+      "source": "qualification/font04/planner.py:323",
+      "value": 2,
+      "expression": "groups=[g for g in groups if len(g['members'])>=2]"
+    },
+    {
+      "source": "qualification/font04/planner.py:348",
+      "value": 2,
+      "expression": "best['reasons'].append('insufficient_noise_witnesses');best['checks']=dict(best['checks'],noise_witnesses=dict(value=noise_support[i]['witnesses'],limit=2))"
+    },
+    {
+      "source": "qualification/font04/planner.py:355",
+      "value": 0,
+      "expression": "unique=collections.Counter(p['reasons'][0] for p in pairs if len(p['reasons'])==1)"
+    },
+    {
+      "source": "qualification/font04/planner.py:355",
+      "value": 1,
+      "expression": "unique=collections.Counter(p['reasons'][0] for p in pairs if len(p['reasons'])==1)"
+    },
+    {
+      "source": "qualification/font04/planner.py:358",
+      "value": 24,
+      "expression": "arm=arm,fit_workers=workers,ownership_veto=ownership,self_checks=self_checks,total_pair_attempts=len(pairs),shortlist=24,shortlist_exclusions=sum(v*(v-1) for v in collections.Counter(r.get('character','e') for r in rows).values())-len(pairs),cross_label_forbidden=n*(n-1)-sum(v*(v-1) for v in collections.Counter(r.get('character','e') for r in rows).values()),runtime_seconds=time.monotonic()-started,"
+    },
+    {
+      "source": "qualification/font04/planner.py:358",
+      "value": 1,
+      "expression": "arm=arm,fit_workers=workers,ownership_veto=ownership,self_checks=self_checks,total_pair_attempts=len(pairs),shortlist=24,shortlist_exclusions=sum(v*(v-1) for v in collections.Counter(r.get('character','e') for r in rows).values())-len(pairs),cross_label_forbidden=n*(n-1)-sum(v*(v-1) for v in collections.Counter(r.get('character','e') for r in rows).values()),runtime_seconds=time.monotonic()-started,"
+    },
+    {
+      "source": "qualification/font04/planner.py:358",
+      "value": 1,
+      "expression": "arm=arm,fit_workers=workers,ownership_veto=ownership,self_checks=self_checks,total_pair_attempts=len(pairs),shortlist=24,shortlist_exclusions=sum(v*(v-1) for v in collections.Counter(r.get('character','e') for r in rows).values())-len(pairs),cross_label_forbidden=n*(n-1)-sum(v*(v-1) for v in collections.Counter(r.get('character','e') for r in rows).values()),runtime_seconds=time.monotonic()-started,"
+    },
+    {
+      "source": "qualification/font04/planner.py:358",
+      "value": 1,
+      "expression": "arm=arm,fit_workers=workers,ownership_veto=ownership,self_checks=self_checks,total_pair_attempts=len(pairs),shortlist=24,shortlist_exclusions=sum(v*(v-1) for v in collections.Counter(r.get('character','e') for r in rows).values())-len(pairs),cross_label_forbidden=n*(n-1)-sum(v*(v-1) for v in collections.Counter(r.get('character','e') for r in rows).values()),runtime_seconds=time.monotonic()-started,"
+    },
+    {
+      "source": "qualification/font04/planner.py:361",
+      "value": 2,
+      "expression": "(directory/'plan.json').write_text(json.dumps(result,indent=2));(directory/'pair-ledger.json').write_text(json.dumps(pairs))"
+    },
+    {
+      "source": "qualification/font04/planner.py:366",
+      "value": 1,
+      "expression": "stage,destination=sys.argv[1:];directory=Path(destination);directory.mkdir(parents=True,exist_ok=True)"
+    },
+    {
+      "source": "qualification/font04/soft_support.py:14",
+      "value": 0.0,
+      "expression": "g=geometry(f);weight=float(f.sum())/max(1.,float(((f>.5)^ndimage.binary_erosion(f>.5)).sum())) if g else 0.;bands.append(int(np.floor(np.log(max(weight,.1))/np.log(1.3))))"
+    },
+    {
+      "source": "qualification/font04/soft_support.py:14",
+      "value": 1.0,
+      "expression": "g=geometry(f);weight=float(f.sum())/max(1.,float(((f>.5)^ndimage.binary_erosion(f>.5)).sum())) if g else 0.;bands.append(int(np.floor(np.log(max(weight,.1))/np.log(1.3))))"
+    },
+    {
+      "source": "qualification/font04/soft_support.py:14",
+      "value": 1.3,
+      "expression": "g=geometry(f);weight=float(f.sum())/max(1.,float(((f>.5)^ndimage.binary_erosion(f>.5)).sum())) if g else 0.;bands.append(int(np.floor(np.log(max(weight,.1))/np.log(1.3))))"
+    },
+    {
+      "source": "qualification/font04/soft_support.py:14",
+      "value": 0.1,
+      "expression": "g=geometry(f);weight=float(f.sum())/max(1.,float(((f>.5)^ndimage.binary_erosion(f>.5)).sum())) if g else 0.;bands.append(int(np.floor(np.log(max(weight,.1))/np.log(1.3))))"
+    },
+    {
+      "source": "qualification/font04/soft_support.py:14",
+      "value": 0.5,
+      "expression": "g=geometry(f);weight=float(f.sum())/max(1.,float(((f>.5)^ndimage.binary_erosion(f>.5)).sum())) if g else 0.;bands.append(int(np.floor(np.log(max(weight,.1))/np.log(1.3))))"
+    },
+    {
+      "source": "qualification/font04/soft_support.py:14",
+      "value": 0.5,
+      "expression": "g=geometry(f);weight=float(f.sum())/max(1.,float(((f>.5)^ndimage.binary_erosion(f>.5)).sum())) if g else 0.;bands.append(int(np.floor(np.log(max(weight,.1))/np.log(1.3))))"
+    },
+    {
+      "source": "qualification/font04/soft_support.py:21",
+      "value": 0,
+      "expression": "candidates=[j for j,r in enumerate(rows) if j!=i and r['character']==row['character'] and fields[j].sum()>0];independent=[j for j in candidates if rows[j]['shape_key']!=row['shape_key']];pool=independent or candidates;sameband=[j for j in pool if bands[j]==bands[i]];pool=sameband or pool"
+    },
+    {
+      "source": "qualification/font04/soft_support.py:24",
+      "value": 5,
+      "expression": "nearest=sorted(pool,key=lambda j:(mse(fields[i],fields[j]),j))[:5]"
+    },
+    {
+      "source": "qualification/font04/soft_support.py:29",
+      "value": 0.85,
+      "expression": "level=float(np.quantile(values,.85));kind='source_LOO_no_support_gate' if independent else 'shared_current_program_source_LOO_diagnostic'"
+    },
+    {
+      "source": "qualification/font04/soft_support.py:31",
+      "value": 1,
+      "expression": "counts[kind]+=1;records.append(dict(member=i,character=row['character'],band=bands[i],floor=float(level),source=kind,independent_calibrated_peers=len(peers),source_witnesses=witnesses,original_noise_support=plan['noise_support'][i]['status']))"
+    },
+    {
+      "source": "qualification/font04/soft_support.py:33",
+      "value": 2,
+      "expression": "(BASE/'b2prime-soft-support.json').write_text(json.dumps(result,indent=2)+'\\n');print('Soft diagnostic estimates',dict(counts),flush=True);return result"
+    }
+  ],
+  "sources": {
+    "planner.py": "2d4cf103619aa9183966c98e2234e1bd34ee56c456f8df2531e7a85e839a9bc9",
+    "geometry.py": "99318fdadd8b254c16ceed50833bc8ae4ffb6989109343b134cb4a9b6f828a59",
+    "canonical_hygiene.py": "dca55a544b4faf9134801fb3f07c27a2678d9f210071c533961c96aa30d059ec",
+    "soft_support.py": "dfc7e147b0ad50ee0491c8726b700eca70580521fd7c283df742723d8cbd3e85",
+    "b2prime.py": "903dca4ca96df6c90aa43945bbebbc1e6d8d077c976d9fa45114addc2cb9b543",
+    "owned_ink.py": "5deb5d932973ab9e6e8d6afc043a920c380f297d27d3aa1472d4435921a9169e",
+    "composite_transport.py": "c548d5f65ae2bdb051fc85c112db1e7e808b91dd0ffe7f2914e3827149f35afa"
+  },
+  "references": {
+    "plan_membership_sha256": "7a5568c7064751b96658948ea7cbc285d8db8b56cbd6dcd080a2ffc335632cd2",
+    "canonical_set_sha256": "7d505cc16dd4539ef9c95b8353e4fa791d34b88ac8667ab3348e5de5b07965bf",
+    "emitted_bindings_sha256": "998d9bd6027ca8a83c9112e000574754579ab9878e8093514ae8f503ffc9ba71",
+    "plan_sha256": "5d656f22f8b2976bd3b8239053b71b2e6924e85669ea18d15b99dddfd456eb2f",
+    "output_pdf_sha256": "d4d0b26211ec643709ffa534525aed14e3fa09a91190e2aa7cf149c31c3b2563"
+  }
+}
