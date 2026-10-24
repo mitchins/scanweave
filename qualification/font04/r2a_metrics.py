@@ -26,20 +26,30 @@ CONTEXT = None
 
 
 def bind(rows, inventory, geometry):
-    """Bind by native f32 placement and label; text spans can reorder draws."""
+    """Bind by native f32 placement origin and label; require a bijection.
+
+    Text-span emission can reorder occurrences. The union can also select a
+    differently scaled program from an invisible owner, so pre-union scale is
+    not authoritative. Origins plus labels must identify exactly one draw.
+    The complete emitted matrices are independently equal in both arms.
+    """
     result = []
     used = set()
+    union_shapes = {}
+    for row in rows:
+        union_shapes.setdefault(row['shape_key'],row)
     for row in rows:
         g = geometry[row['page']]
         a, d = g['width_pt']/g['raster_width'], g['height_pt']/g['raster_height']
         x, y, xx, yy = row['bbox']
         f = np.float32
-        sx = f(f((xx-x)*a)*f(2048)/f(max(1, row['ink_span'][0])))
-        sy = f(f((yy-y)*d)*f(2048)/f(max(1, row['ink_span'][1])))
-        tx = f(f(a*x)-f(f(row['anchor'][0])*sx)/f(2048))
-        ty = f(f(g['height_pt']-d*yy)-f(f(row['anchor'][1])*sy)/f(2048))
+        shape = union_shapes[row['shape_key']]
+        sx = f(f((xx-x)*a)*f(2048)/f(max(1, shape['ink_span'][0])))
+        sy = f(f((yy-y)*d)*f(2048)/f(max(1, shape['ink_span'][1])))
+        tx = f(f(a*x)-f(f(shape['anchor'][0])*sx)/f(2048))
+        ty = f(f(g['height_pt']-d*yy)-f(f(shape['anchor'][1])*sy)/f(2048))
         expected = [sx, 0, 0, sy, tx, ty]
-        matches = [(i, draw) for i, draw in enumerate(inventory['draws']) if i not in used and draw['page'] == row['page'] and draw['character'] == row['character'] and np.allclose(draw['matrix'], expected, rtol=1e-6, atol=1e-4)]
+        matches = [(i, draw) for i, draw in enumerate(inventory['draws']) if i not in used and draw['page'] == row['page'] and draw['character'] == row['character'] and np.allclose(draw['matrix'][4:], expected[4:], rtol=1e-6, atol=1e-4)]
         assert len(matches) == 1, ('ambiguous native placement', row['index'], len(matches), expected)
         i, draw = matches[0]
         used.add(i)

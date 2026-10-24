@@ -1,0 +1,421 @@
+{
+  "schema": "font04-R2a-stop-case-v1",
+  "document": "mixed",
+  "page_zero_based": 1,
+  "page_one_based": 2,
+  "source_row_index": 595,
+  "member": 518,
+  "id": "w000044s0000",
+  "character": "w",
+  "word": "with",
+  "canonical": 838,
+  "canonical_id": "w000578s0000",
+  "canonical_source_row": 1030,
+  "canonical_word": "while",
+  "default_pdf_sha256": "c3f224bf18e5d2aeeba6e03de20000b84ff31893fc945e14882719b114d616d9",
+  "sharing_pdf_sha256": "6389a7c7662bda1d4012ecbcfe876587cc8fc96e48149ead33f8e9f791306b89",
+  "source_pdf_sha256": "bea7a5ae2599dab57807bc256692ec36c656ff34d82af572c35fa3cd285f5e9f",
+  "source_snapshot_sha256": "f7d0bf4fbfb20aec44b606de00e0ea52cb3ef4857090bb5846e5d1edbfb80859",
+  "pdfium_library_sha256": "b8784cbd652ad2993332b7695e2c80f3a797f877fc47d9be97b66bca9639539e",
+  "decision": {
+    "member": 518,
+    "page": 1,
+    "id": "w000044s0000",
+    "canonical": 838,
+    "accepted": true,
+    "reasons": [],
+    "fitted_transform": [
+      0.38251387628715655,
+      0.9546519050101335,
+      1.0199999999999998
+    ],
+    "error": 0.09065723358452173,
+    "noise_floor": 0.09082840987845578,
+    "weight_band": 3
+  },
+  "CID_to_GID_evidence": [
+    {
+      "pdf": "qualification/font04/local/R2a/baseline/mixed-off.pdf",
+      "pdf_sha256": "c3f224bf18e5d2aeeba6e03de20000b84ff31893fc945e14882719b114d616d9",
+      "binding": {
+        "page": 1,
+        "font": "/F1",
+        "font_hash": "3b0a0c53545b205ebb903673ce472173ba82d8173cff969bf66b30c6c40b2135",
+        "cid": 556,
+        "gid": 529,
+        "character": "w",
+        "matrix": [
+          57.12,
+          0.0,
+          0.0,
+          57.102695,
+          324.0,
+          667.71765
+        ],
+        "program": "2f7f54754583fac360478611fb0f84bde55c3f767d27b438d4cc59b055fa406c",
+        "invisible": false,
+        "center": [
+          327.96046875,
+          670.6034551428223
+        ]
+      },
+      "glyph_bbox": [
+        -1,
+        -1,
+        285,
+        208
+      ],
+      "composite": false
+    },
+    {
+      "pdf": "qualification/font04/local/R2a/baseline/mixed-cover-2.0.pdf",
+      "pdf_sha256": "6389a7c7662bda1d4012ecbcfe876587cc8fc96e48149ead33f8e9f791306b89",
+      "binding": {
+        "page": 1,
+        "font": "/F04V1",
+        "font_hash": "334e26f49baeb8d0a9ccb4935c3c3a9108a0ae36f7d45688c421e8c65f83d15c",
+        "cid": 556,
+        "gid": 1184,
+        "character": "w",
+        "matrix": [
+          57.12,
+          0.0,
+          0.0,
+          57.102695,
+          324.0,
+          667.71765
+        ],
+        "program": "031c67781c61c184989cdfa6b7c19afdf8af499c445d774f41df2589cda45663",
+        "invisible": false,
+        "center": [
+          327.9465234375,
+          670.7149838439942
+        ]
+      },
+      "glyph_bbox": [
+        13,
+        12,
+        270,
+        203
+      ],
+      "composite": true,
+      "components": [
+        {
+          "gid": 872,
+          "name": "glyph00872",
+          "transform": [
+            0.4285888671875,
+            0,
+            0,
+            0.4285888671875,
+            11,
+            11
+          ]
+        }
+      ]
+    }
+  ],
+  "measurements": {
+    "metrics": {
+      "records": [
+        {
+          "draw": 595,
+          "page": 1,
+          "occurrence": 113,
+          "character": "w",
+          "metric": "analytic",
+          "substituted": true,
+          "default": {
+            "error": 0.01893445994664394,
+            "iou": 0.8897891400356875,
+            "contour_distance": 0.0,
+            "rigid_contour_distance": 0.0,
+            "area_bias": 0.01948251067969384
+          },
+          "candidate": {
+            "error": 0.13930202565020935,
+            "iou": 0.720662469970853,
+            "contour_distance": 0.4088099853955962,
+            "rigid_contour_distance": 0.4088099853955962,
+            "area_bias": -0.11797008275881506
+          }
+        },
+        {
+          "draw": 595,
+          "page": 1,
+          "occurrence": 113,
+          "character": "w",
+          "metric": "pdfium",
+          "substituted": true,
+          "default": {
+            "error": 0.13591622071980258,
+            "iou": 0.7200563810418745,
+            "contour_distance": 0.5323047694082037,
+            "rigid_contour_distance": 0.5151977678608239,
+            "area_bias": -0.020292284605713362
+          },
+          "candidate": {
+            "error": 0.20506409503245615,
+            "iou": 0.6348838043751271,
+            "contour_distance": 0.7117658153751496,
+            "rigid_contour_distance": 0.6799989416668859,
+            "area_bias": -0.15205018318484775
+          }
+        },
+        {
+          "draw": 595,
+          "page": 1,
+          "occurrence": 113,
+          "character": "w",
+          "metric": "poppler",
+          "substituted": true,
+          "default": {
+            "error": 0.13376555059911246,
+            "iou": 0.7263145470640306,
+            "contour_distance": 0.40675391310682263,
+            "rigid_contour_distance": 0.47484127164259915,
+            "area_bias": -0.021989613761765656
+          },
+          "candidate": {
+            "error": 0.19432418139465316,
+            "iou": 0.648992371764649,
+            "contour_distance": 0.6620550534939901,
+            "rigid_contour_distance": 0.6620550534939901,
+            "area_bias": -0.15532024234555886
+          }
+        },
+        {
+          "draw": 595,
+          "page": 1,
+          "occurrence": 113,
+          "character": "w",
+          "metric": "direct",
+          "substituted": true,
+          "default": {
+            "error": 0.01880467824139386,
+            "iou": 0.8913334561058988,
+            "contour_distance": 0.019736842105263157,
+            "rigid_contour_distance": 0.019736842105263157,
+            "area_bias": 0.0469172958169438
+          },
+          "candidate": {
+            "error": 0.1346761259530374,
+            "iou": 0.7277478763679789,
+            "contour_distance": 0.413212784502125,
+            "rigid_contour_distance": 0.413212784502125,
+            "area_bias": -0.09774513730279567
+          }
+        }
+      ],
+      "floors": [
+        {
+          "draw": 595,
+          "metric": "analytic",
+          "substituted": true,
+          "analytic_reference": {
+            "error": 0.0,
+            "iou": 1.0,
+            "contour_distance": 0.0,
+            "rigid_contour_distance": 0.0,
+            "area_bias": 0.0
+          },
+          "direct_reference": {
+            "error": 0.002427921737893011,
+            "iou": 0.9673497530281936,
+            "contour_distance": 0.019736842105263157,
+            "rigid_contour_distance": 0.019736842105263157,
+            "area_bias": -0.026205303176161304
+          }
+        },
+        {
+          "draw": 595,
+          "metric": "pdfium",
+          "substituted": true,
+          "analytic_reference": {
+            "error": 0.002173403317887561,
+            "iou": 0.9675838116116956,
+            "contour_distance": 0.0,
+            "rigid_contour_distance": 0.0,
+            "area_bias": 0.00217290967644911
+          },
+          "direct_reference": {
+            "error": 0.0068466284494350695,
+            "iou": 0.9447435995409847,
+            "contour_distance": 0.019736842105263157,
+            "rigid_contour_distance": 0.019736842105263157,
+            "area_bias": -0.024089335256557955
+          }
+        },
+        {
+          "draw": 595,
+          "metric": "poppler",
+          "substituted": true,
+          "analytic_reference": {
+            "error": 0.15356448574637716,
+            "iou": 0.7635678292387749,
+            "contour_distance": 0.5,
+            "rigid_contour_distance": 0.0,
+            "area_bias": 9.853289702286157e-05
+          },
+          "direct_reference": {
+            "error": 0.13276192935049186,
+            "iou": 0.7763577155532445,
+            "contour_distance": 0.48026315789473684,
+            "rigid_contour_distance": 0.019736842105263157,
+            "area_bias": -0.02610935236357775
+          }
+        }
+      ]
+    },
+    "context-metrics": {
+      "records": [
+        {
+          "draw": 595,
+          "page": 1,
+          "occurrence": 113,
+          "character": "w",
+          "metric": "analytic",
+          "substituted": true,
+          "default": {
+            "error": 0.028635699979251878,
+            "iou": 0.8933632995046668,
+            "contour_distance": 0.024539877300613498,
+            "rigid_contour_distance": 0.024539877300613498,
+            "area_bias": 0.058555190984480476
+          },
+          "candidate": {
+            "error": 0.15188501473276267,
+            "iou": 0.7415405796578755,
+            "contour_distance": 0.4015878587588737,
+            "rigid_contour_distance": 0.41229268398961766,
+            "area_bias": -0.07801186471182742
+          }
+        },
+        {
+          "draw": 595,
+          "page": 1,
+          "occurrence": 113,
+          "character": "w",
+          "metric": "pdfium",
+          "substituted": true,
+          "default": {
+            "error": 0.021465879256214317,
+            "iou": 0.9048440474821431,
+            "contour_distance": 0.021529197909566006,
+            "rigid_contour_distance": 0.021529197909566006,
+            "area_bias": 0.06386454569367735
+          },
+          "candidate": {
+            "error": 0.15046007496864044,
+            "iou": 0.7405665686948908,
+            "contour_distance": 0.42739021982928055,
+            "rigid_contour_distance": 0.4384838578695244,
+            "area_bias": -0.07330647505918507
+          }
+        },
+        {
+          "draw": 595,
+          "page": 1,
+          "occurrence": 113,
+          "character": "w",
+          "metric": "poppler",
+          "substituted": true,
+          "default": {
+            "error": 0.21727682902974665,
+            "iou": 0.6292915501332336,
+            "contour_distance": 0.6359937729200791,
+            "rigid_contour_distance": 0.2627902198479556,
+            "area_bias": 0.06432846440380001
+          },
+          "candidate": {
+            "error": 0.19639066291412074,
+            "iou": 0.6386721066489551,
+            "contour_distance": 0.7259594714460033,
+            "rigid_contour_distance": 0.6216779973794406,
+            "area_bias": -0.07247589949636574
+          }
+        }
+      ],
+      "floors": [
+        {
+          "draw": 595,
+          "metric": "analytic",
+          "substituted": true,
+          "analytic_reference": {
+            "error": 0.0,
+            "iou": 1.0,
+            "contour_distance": 0.0,
+            "rigid_contour_distance": 0.0,
+            "area_bias": 0.0
+          },
+          "alternate_renderer_reference": {
+            "error": 0.15512184614259483,
+            "iou": 0.7463000210784295,
+            "contour_distance": 0.5015337423312883,
+            "rigid_contour_distance": 0.019875092648362028,
+            "area_bias": 0.002234893170795896
+          }
+        },
+        {
+          "draw": 595,
+          "metric": "pdfium",
+          "substituted": true,
+          "analytic_reference": {
+            "error": 0.0022826098931598396,
+            "iou": 0.9632430978759371,
+            "contour_distance": 0.003067484662576687,
+            "rigid_contour_distance": 0.003067484662576687,
+            "area_bias": 0.005015661681521819
+          },
+          "alternate_renderer_reference": {
+            "error": 0.0022826098931598396,
+            "iou": 0.9632430978759371,
+            "contour_distance": 0.003067484662576687,
+            "rigid_contour_distance": 0.003067484662576687,
+            "area_bias": 0.005015661681521819
+          }
+        },
+        {
+          "draw": 595,
+          "metric": "poppler",
+          "substituted": true,
+          "analytic_reference": {
+            "error": 0.15512184614259483,
+            "iou": 0.7463000210784295,
+            "contour_distance": 0.5015337423312883,
+            "rigid_contour_distance": 0.003067484662576687,
+            "area_bias": -0.0022299095611461976
+          },
+          "alternate_renderer_reference": {
+            "error": 0.15512184614259483,
+            "iou": 0.7463000210784295,
+            "contour_distance": 0.5015337423312883,
+            "rigid_contour_distance": 0.003067484662576687,
+            "area_bias": -0.0022299095611461976
+          }
+        }
+      ]
+    }
+  },
+  "observation": "Accepted source-relative regression: the w in with becomes visibly narrower/lighter and changes form in both PDFium and Poppler. The default closely follows source; analytic error increases by 0.1203675657 against an independent direct-outline/analytic default floor of 0.0024279217. This is raised as a material accepted-member fidelity defect requiring independent review, not repaired or threshold-tuned.",
+  "evidence_images": [
+    "qualification/font04/r2a-stop-evidence/mixed-member518-context.png",
+    "qualification/font04/r2a-stop-evidence/mixed-canonical838-context.png",
+    "qualification/font04/r2a-stop-evidence/mixed-worst-delta.png"
+  ],
+  "unblinded_diagnostic": true,
+  "sealed_blind_review": false,
+  "emitted_bbox_change": {
+    "default_font_units": [
+      286,
+      209
+    ],
+    "candidate_font_units": [
+      257,
+      191
+    ],
+    "width_reduction_percent": 10.139860139860135,
+    "height_reduction_percent": 8.61244019138756,
+    "unchanged_text_matrix": true
+  }
+}

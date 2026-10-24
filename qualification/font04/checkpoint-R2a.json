@@ -1,0 +1,139 @@
+{
+  "schema": "font04-checkpoint-R2a-v1",
+  "status": "STOP-CORPUS-DEFECT; independent review required",
+  "checkpoint_R2a_reached": false,
+  "qualification_complete": false,
+  "reviewer_pending": true,
+  "accepted_R1_commit": "fa8a08b",
+  "accepted_R1_present": true,
+  "product_branch": "feat/glyph-sharing",
+  "product_commit": "62c833d",
+  "research_branch": "research/font04-document-fonts",
+  "research_baseline_commit": "da25e03",
+  "stop_trigger": {
+    "rule": "If the corpus shows a concrete problem (a material defect in accepted members, a renderer or extraction difference, font growth), stop and report it with evidence. Do not fix it by tuning.",
+    "document": "mixed",
+    "page": 2,
+    "member": 518,
+    "id": "w000044s0000",
+    "canonical": 838,
+    "source_draw": 595,
+    "description": "The accepted w in with becomes 10.14% narrower and 8.61% shorter at unchanged text placement; visible in both renderers. Analytic source error rises 0.01893446 to 0.13930203 against a 0.00242792 independent outline floor.",
+    "present_in_accepted_R1_baseline": true,
+    "introduced_by_optimization": false,
+    "evidence": "qualification/font04/r2a-stop-evidence/case.json"
+  },
+  "completed": {
+    "pdfium_identity_reporting": true,
+    "sharing_stage_reporting": true,
+    "pinned_pdfium_library": "tools/src/pdfium/lib/libpdfium.so",
+    "pinned_pdfium_sha256": "b8784cbd652ad2993332b7695e2c80f3a797f877fc47d9be97b66bca9639539e",
+    "pdfium_version": null,
+    "pdfium_version_reason": "No runtime PDFium build-version query; SHA-256 and canonical loaded path recorded.",
+    "financial_default_reporting_build_sha256": "74c31136d00a18dbf05fba2d7fba59c85cc201a57ae65d77999a025a692fab0f",
+    "mixed_reporting_pdf_identical_to_R1": true,
+    "development_baseline_pages": 32,
+    "development_baseline_documents": 5,
+    "baseline_default_and_sharing_outputs": 10,
+    "financial_baseline_reused_from_accepted_R1": true,
+    "all_five_documents_text_equal": [
+      "Poppler default",
+      "Poppler -layout",
+      "Poppler -raw",
+      "PDFium",
+      "MuPDF"
+    ],
+    "all_five_documents_qpdf_OTS_pass": true,
+    "all_five_documents_raster_and_text_geometry_equal": true,
+    "fidelity_complete_documents": [
+      "forms",
+      "receipts",
+      "mixed",
+      "historical"
+    ],
+    "fidelity_definition": "Complete-page contextual all-draw scores plus isolated owned-source scores with explicit unavailable-witness counts; mean/p95/worst10 and floors retained.",
+    "reporting_tests": {
+      "native_stage_tests_passed": 5,
+      "integration_tests_passed": 6,
+      "regression_cases": 23
+    },
+    "optimization_trial_integration_tests_passed": 6
+  },
+  "incomplete_due_to_stop": [
+    "Reporting-only financial cover-2.0 and cover-1.5 golden reruns",
+    "Completed financial timing profile",
+    "Full optimized build corpus/financial before-after byte verification",
+    "Final optimized full-corpus paired runtime/RSS and repeats",
+    "Financial all-draw fidelity",
+    "Save-only control comparisons",
+    "Sealed corpus blind review and separate key"
+  ],
+  "optimization": {
+    "applied_in_trial": true,
+    "qualified": false,
+    "completed_byte_comparisons": [
+      "forms off",
+      "forms cover-2.0"
+    ],
+    "output_changes_observed": false,
+    "reverted": true,
+    "shipped": false,
+    "product_branch_clean": true,
+    "patch": "qualification/font04/local/R2a/unqualified-ordered-rows.patch"
+  },
+  "blind_review": {
+    "status": "NOT SEALED: qualification stopped on concrete accepted-member defect",
+    "key_generated": false,
+    "diagnostic_images_unblinded": true
+  },
+  "AdobeReader": {
+    "status": "BLOCKED-ON-OWNER",
+    "required": "Official Windows x64 installer for 26.00221.901",
+    "wine_acrobat_xi_touched": false,
+    "display_99_touched": false
+  },
+  "P2_opened": false,
+  "P2_generated": false,
+  "P2_rendered": false,
+  "product_PR_opened": false,
+  "merged": false,
+  "PR24_changed": false,
+  "PR25_changed": false,
+  "thresholds_changed": false,
+  "safeguards_weakened": false,
+  "next_action": "STOP. Independent review/owner decision on the corpus defect is required; do not tune or resume qualification automatically.",
+  "artifacts": [
+    {
+      "path": "qualification/font04/r2a-baseline.json",
+      "sha256": "e524cc305121daddf4b4c280bb0d11b4e52d61fb601f7d1959e9030bdfc72f87"
+    },
+    {
+      "path": "qualification/font04/r2a-partial-corpus.json",
+      "sha256": "f260885fe639ff6cbecd1a467de8d7deb009827ef3093598bab8e8c674f5b0f5"
+    },
+    {
+      "path": "qualification/font04/r2a-profile.json",
+      "sha256": "32b3682b2a987777c8df721fcca9f7ef377ae0cac06145bb7da54e67b07261c9"
+    },
+    {
+      "path": "qualification/font04/r2a-stop-evidence/case.json",
+      "sha256": "4964c0311a6a13b9a36e962fe4c68233c8d4aba447695e722eb28f9f472a6567"
+    },
+    {
+      "path": "qualification/font04/r2a-stop-evidence/README.md",
+      "sha256": "0a68565dadb2fb24542c57452628fe016f6900996734458f98549e8b22317b3a"
+    },
+    {
+      "path": "qualification/font04/r2a-stop-evidence/mixed-member518-context.png",
+      "sha256": "9f9557accd103ca65791d388bd50bbfdc11af22be3ee435e19cf3d475ffa5ef3"
+    },
+    {
+      "path": "qualification/font04/r2a-stop-evidence/mixed-canonical838-context.png",
+      "sha256": "ec885f4e213bfef2ff542bb82d3585d7580de53c005261e89ef693d0c41225f1"
+    },
+    {
+      "path": "qualification/font04/r2a-stop-evidence/mixed-worst-delta.png",
+      "sha256": "4f92a51b9ef174844ed59e5b8d9048ce96e41684df2453be869efd8ffe071045"
+    }
+  ]
+}

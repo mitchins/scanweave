@@ -328,3 +328,103 @@ Receipts: [checkpoint-R1.json](qualification/font04/checkpoint-R1.json),
 **STOP at R1.** Product branch pushed; no product PR or merge. P2 remains unopened;
 R2 corpus qualification was not run. PR #24 stays draft and untouched. No security
 finding was dismissed. Independent R1 acceptance is required before any P2 work.
+
+## Checkpoint R2a
+
+**STOP — accepted-member corpus fidelity defect. R2a is incomplete and is not
+submitted as a passing qualification.** R1 acceptance `fa8a08b` was verified on
+`research/font04-document-fonts`; its §4/§5 and the product mission/Clarification 1
+were read before resuming. The owner's concrete-problem stop rule governs this
+receipt. See [checkpoint-R2a.json](qualification/font04/checkpoint-R2a.json).
+
+**Concrete stop case.** In the mixed document, page 2, native member **518**
+(`w000044s0000`, the `w` in “with”, source draw 595) is accepted against canonical
+**838** (`w000578s0000`, the `w` in “while”). Its emitted outline becomes **10.14%
+narrower and 8.61% shorter at unchanged CID and text matrix**, visibly changing
+size/weight in PDFium and Poppler. Isolated analytic source error rises
+**0.01893446 → 0.13930203**, IoU falls **0.88978914 → 0.72066247**, and area bias
+changes **+1.95% → −11.80%**. The independent direct-outline/analytic default
+error floor is **0.00242792**. Complete-page analytic error rises
+0.02863570 → 0.15188501; complete-page PDFium error rises
+0.02146588 → 0.15046007. The larger Poppler phase floor is retained separately.
+This defect is present in the **accepted R1 executable's baseline output**, before
+optimization. No admission rule or threshold was tuned in response.
+
+Review the [two-renderer page-context evidence](qualification/font04/r2a-stop-evidence/mixed-member518-context.png),
+[original canonical context](qualification/font04/r2a-stop-evidence/mixed-canonical838-context.png),
+and [exact case/metrics/CID→GID ledger](qualification/font04/r2a-stop-evidence/case.json).
+CID 556 resolves to default GID 529; sharing resolves it through composite GID
+1184 to canonical GID 872. [Reproduction and interpretation](qualification/font04/r2a-stop-evidence/README.md)
+include the complete PDF/library hashes. These are unblinded defect diagnostics,
+not a sealed review or independent judgments.
+
+**Shipped reporting change:** product commit **`62c833d`**, pushed to
+`feat/glyph-sharing`. The recovered edits were reviewed and adopted with planner
+substage and source-snapshot timings. The report records the canonical loaded
+PDFium path and file SHA-256; `version` is null because the runtime API does not
+expose the PDFium build version. All native runs used pinned chromium/8100,
+`tools/src/pdfium/lib/libpdfium.so`, SHA-256
+`b8784cbd652ad2993332b7695e2c80f3a797f877fc47d9be97b66bca9639539e`.
+A local Python binding overlay used that same library for qualification renders
+and extraction. The default path still does not load PDFium.
+
+The reporting build reproduced financial default **`74c31136…ab0f`** and mixed
+sharing **`6389a7c7…6b89`**, byte-identical. Five native stage tests and all six
+integration tests passed, including the 23 regression cases and identity/timing
+assertions. Financial reporting-only sharing/comparison reruns were interrupted
+at the corpus stop, so their required golden-hash proof is **unfinished**.
+
+**Completed baseline evidence, not final optimized qualification:** all five
+established development inputs / 32 pages were covered by default and sharing
+baselines. Financial baseline bytes were reused from hash-verified accepted R1
+outputs; the other four pairs were rerun. Extraction is equal in Poppler
+(default/layout/raw), pinned PDFium and MuPDF for every document; qpdf, OTS,
+raster-stream/placement and text-geometry checks pass. Independent emitted-font
+accounting follows actual CID→GID and composite references. Full details are in
+[r2a-partial-corpus.json](qualification/font04/r2a-partial-corpus.json).
+
+| Document | Font B default → sharing | Retired / added / net | PDF B default → sharing |
+|---|---:|---:|---:|
+| Forms | 41,147 → 41,147 | 0 / 0 / 0 | 843,699 → 843,699 |
+| Receipts | 16,712 → 16,712 | 0 / 0 / 0 | 1,271,232 → 1,271,232 |
+| Mixed | 249,013 → 242,854 | 145 / 57 / 88 | 917,603 → 914,696 |
+| Historical | 3,472 → 3,472 | 0 / 0 / 0 | 2,266,058 → 2,266,058 |
+| Financial | 727,259 → 664,549 | 594 / 268 / 326 | 2,849,237 → 2,796,345 |
+| Total | 1,037,603 → 968,734 | 739 / 325 / 414 | 8,147,829 → 8,092,030 |
+
+Forms falls back to default: attempted net retirement −8 and encoded font
+41,147 → 46,879 B; these are attempted figures, not emitted growth. Receipts and
+historical have no surviving groups. Emitted zero-credit groups: mixed **5**
+(1,798 B canonical outlines + 234 B stubs); financial **54**
+(24,086 + 3,268 B); total **59**, **25,884 + 3,502 B**. Forms' attempted groups
+receive no emitted credit. All other emitted zero-credit counts are zero.
+
+All-draw contextual fidelity and isolated owned-source fidelity with explicit
+missing-witness counts were completed for forms, receipts, mixed and historical:
+mean, p95, worst ten, all/substituted subsets, and renderer/outline floors are in
+the partial receipt. No missing owned-source witness is silently treated as a
+perfect draw. Financial all-draw scoring was not completed.
+
+**Runtime work.** The unchanged mixed reporting output profiles at 53.20 s source
+snapshot and 145.53 s planning, including 124.14 s candidate fitting, 13.06 s
+source floors, 4.90 s self fits and 3.41 s hygiene. Owned-ink preflight is 0.226 s.
+An ordered parallel-row trial preserved forms default/sharing bytes and passed
+all six integration tests. Only its forms pair finished (42.87 / 59.65 s).
+Full corpus and financial 2.0/1.5/repeat hash checks did not finish. The trial was
+**reverted**, its patch retained ignored locally, and it was **not shipped**.
+Product HEAD remains the clean pushed reporting commit `62c833d`.
+[r2a-profile.json](qualification/font04/r2a-profile.json) records exact boundaries
+and limitations; profiling overlapped other qualification jobs. No full optimized
+paired wall/RSS result or performance-target claim is made.
+
+**Unfinished because of the hard stop:** financial reporting golden reruns and
+profile; final optimized corpus/financial hashes, repeat determinism and paired
+wall/RSS; financial fidelity; save-only controls; and the sealed ≥300 accepted /
+≥150 rejected corpus review with repeated words, cross-style probes and all
+regressions. No review key was generated. Active task conversions were stopped;
+no further qualification or repair proceeds automatically.
+
+**STOP for independent review/owner decision on this corpus defect.** P2 was not
+opened, generated or rendered. Adobe Reader remains **BLOCKED-ON-OWNER** for the
+official Windows x64 26.00221.901 installer. `~/.wine-acrobat-xi` and display `:99`
+were untouched. No product PR, merge, or PR #24/#25 action occurred.

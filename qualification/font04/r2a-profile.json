@@ -1,0 +1,147 @@
+{
+  "schema": "font04-R2a-profile-v1",
+  "reporting_product_commit": "62c833d",
+  "mixed_pdf_sha256": "6389a7c7662bda1d4012ecbcfe876587cc8fc96e48149ead33f8e9f791306b89",
+  "mixed_stage_seconds": {
+    "assignments": 0.001050518,
+    "decision_ledger": 0.018123688,
+    "font_and_economy": 0.014817116,
+    "owned_ink_preflight": 0.225826387,
+    "planning": 145.5309182,
+    "planning_candidate_fits": 124.140284517,
+    "planning_cover": 0.002479466,
+    "planning_hygiene": 3.4062620900000002,
+    "planning_prepare": 0.020666129,
+    "planning_self_fits": 4.901431971,
+    "planning_source_floors": 13.059599653,
+    "prepare_fields": 0.021171094,
+    "sharing_total": 146.590808688,
+    "source_snapshot": 53.204089287,
+    "transport_and_assembly": 0.778893816
+  },
+  "pdfium": {
+    "library_path": "/data/coding/scanweave/tools/src/pdfium/lib/libpdfium.so",
+    "sha256": "b8784cbd652ad2993332b7695e2c80f3a797f877fc47d9be97b66bca9639539e",
+    "version": null
+  },
+  "financial_reporting_default": {
+    "group": "financial",
+    "mode": "off",
+    "command": [
+      "/data/coding/scanweave/qualification/font04/local/R2a/reporting/scanweave",
+      "/data/coding/scanweave/qualification/pdf_packaging/groups/financial-input.pdf",
+      "/data/coding/scanweave/qualification/font04/local/R2a/reporting/financial-off.pdf",
+      "--dpi",
+      "300",
+      "--profile",
+      "clearscan",
+      "--glyph-sharing",
+      "off"
+    ],
+    "returncode": 0,
+    "seconds": 478.19151000108104,
+    "sha256": "74c31136d00a18dbf05fba2d7fba59c85cc201a57ae65d77999a025a692fab0f",
+    "bytes": 2849237
+  },
+  "financial_reporting_sharing": "INTERRUPTED at corpus-defect hard stop; no complete output or timings",
+  "optimization": {
+    "description": "Independent planner row workers; serial within-row evaluation; ordered joins",
+    "applied_in_trial": true,
+    "qualified": false,
+    "reverted_to_product_commit": "62c833d",
+    "patch": "qualification/font04/local/R2a/unqualified-ordered-rows.patch",
+    "only_completed_final_trial": [
+      {
+        "group": "forms",
+        "mode": "off",
+        "label": "off",
+        "threads": 4,
+        "command": [
+          "/data/coding/scanweave/qualification/font04/local/R2a/final/scanweave",
+          "/data/coding/scanweave/qualification/pdf_packaging/groups/forms-input.pdf",
+          "/data/coding/scanweave/qualification/font04/local/R2a/final/forms-off.pdf",
+          "--dpi",
+          "300",
+          "--profile",
+          "clearscan",
+          "--glyph-sharing",
+          "off"
+        ],
+        "returncode": 0,
+        "wall_seconds": 42.870594272972085,
+        "binary_sha256": "85fc1aa659f9729aebd510c1c6bb0328757b4130d02040965c94bf047a009a57",
+        "pdfium_library_sha256": "b8784cbd652ad2993332b7695e2c80f3a797f877fc47d9be97b66bca9639539e",
+        "expected_sha256": "691d7fe020990cd54d095c417113ad9acfdd897d0ee29ac824a5b0469c472fc8",
+        "sha256": "691d7fe020990cd54d095c417113ad9acfdd897d0ee29ac824a5b0469c472fc8",
+        "bytes": 843699,
+        "byte_identical_to_baseline": true,
+        "stage_timings": {
+          "total_ms": 38284,
+          "donor_collection_ms": 910,
+          "page_conversion_ms": 35911,
+          "document_font_union_ms": 0,
+          "font_build_ms": 2,
+          "reconstruction_pdf_ms": 1199,
+          "raster_baseline_prepare_ms": 55,
+          "raster_baseline_pdf_ms": 204,
+          "remaining_pipeline_ms": 3
+        },
+        "sharing_stage_seconds": null
+      },
+      {
+        "group": "forms",
+        "mode": "cover-2.0",
+        "label": "cover-2.0",
+        "threads": 4,
+        "command": [
+          "/data/coding/scanweave/qualification/font04/local/R2a/final/scanweave",
+          "/data/coding/scanweave/qualification/pdf_packaging/groups/forms-input.pdf",
+          "/data/coding/scanweave/qualification/font04/local/R2a/final/forms-cover-2.0.pdf",
+          "--dpi",
+          "300",
+          "--profile",
+          "clearscan",
+          "--glyph-sharing",
+          "cover-2.0"
+        ],
+        "returncode": 0,
+        "wall_seconds": 59.65410482790321,
+        "binary_sha256": "85fc1aa659f9729aebd510c1c6bb0328757b4130d02040965c94bf047a009a57",
+        "pdfium_library_sha256": "b8784cbd652ad2993332b7695e2c80f3a797f877fc47d9be97b66bca9639539e",
+        "expected_sha256": "691d7fe020990cd54d095c417113ad9acfdd897d0ee29ac824a5b0469c472fc8",
+        "sha256": "691d7fe020990cd54d095c417113ad9acfdd897d0ee29ac824a5b0469c472fc8",
+        "bytes": 843699,
+        "byte_identical_to_baseline": true,
+        "stage_timings": {
+          "total_ms": 55111,
+          "donor_collection_ms": 876,
+          "page_conversion_ms": 34406,
+          "document_font_union_ms": 0,
+          "font_build_ms": 2,
+          "reconstruction_pdf_ms": 9035,
+          "raster_baseline_prepare_ms": 54,
+          "raster_baseline_pdf_ms": 197,
+          "remaining_pipeline_ms": 10541
+        },
+        "sharing_stage_seconds": {
+          "assignments": 0.000281542,
+          "decision_ledger": 0.001829195,
+          "font_and_economy": 0.004007621,
+          "owned_ink_preflight": 0.050768019,
+          "planning": 7.843962393,
+          "planning_candidate_fits": 6.807052883,
+          "planning_cover": 0.000308261,
+          "planning_hygiene": 0.060070252,
+          "planning_prepare": 0.003945333,
+          "planning_self_fits": 0.332432376,
+          "planning_source_floors": 0.640122119,
+          "prepare_fields": 0.001630281,
+          "sharing_total": 7.9024822409999995,
+          "source_snapshot": 10.536686938
+        }
+      }
+    ],
+    "other_corpus_and_financial_hashes_not_verified": true
+  },
+  "timing_limit": "Profiling and trial runs overlapped other qualification jobs; no completed optimized full-corpus paired benchmark is claimed."
+}
