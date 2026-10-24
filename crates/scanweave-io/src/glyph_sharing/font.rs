@@ -16,7 +16,7 @@ use write_fonts::{
         maxp::Maxp,
     },
     types::{F2Dot14, GlyphId, GlyphId16},
-    FontBuilder,
+    FontBuilder, OtRound,
 };
 #[derive(Debug, Clone)]
 pub struct Instance {
@@ -86,18 +86,41 @@ pub fn build(
         *value = value.max(factor);
     }
     let mut canonical_gids = BTreeMap::new();
-    let mut canonical_paths = BTreeMap::new();
+    let mut canonical_points = BTreeMap::new();
+    let mut added_bounds: Option<write_fonts::tables::glyf::Bbox> = None;
     let mut canonical_bytes = 0;
     for (&j, shape) in canonicals {
         let factor = *factors.get(&j).ok_or("canonical has no instance")?;
-        let path = kurbo::Affine::scale(factor) * shape.path.clone();
-        let glyph = SimpleGlyph::from_bezpath(&path).map_err(|e| format!("{e:?}"))?;
+        // fontTools scales the already-compiled canonical, so quantize first.
+        let mut glyph = SimpleGlyph::from_bezpath(&shape.path).map_err(|e| format!("{e:?}"))?;
+        for contour in &mut glyph.contours {
+            let mut points: Vec<_> = contour.clone().into();
+            for point in &mut points {
+                let x = point.x as f64 * factor;
+                let y = point.y as f64 * factor;
+                if x.abs() > 32767. || y.abs() > 32767. {
+                    return Err("scaled canonical exceeds TrueType coordinate bounds".into());
+                }
+                point.x = x.ot_round();
+                point.y = y.ot_round();
+            }
+            *contour = points.into();
+        }
+        glyph.recompute_bounding_box();
         canonical_bytes += write_fonts::dump_table(&glyph)
             .map_err(|e| error(&e))?
             .len();
         let gid = metrics.len() as u16;
         canonical_gids.insert(j, gid);
-        canonical_paths.insert(j, path);
+        canonical_points.insert(
+            j,
+            glyph
+                .contours
+                .iter()
+                .flat_map(|c| c.iter().map(|p| (p.x, p.y)))
+                .collect::<Vec<_>>(),
+        );
+        added_bounds = Some(added_bounds.map_or(glyph.bbox, |b| b.union(glyph.bbox)));
         builder.add_glyph(&glyph).map_err(|e| error(&e))?;
         metrics.push(LongMetric {
             advance: 2048,
@@ -136,10 +159,20 @@ pub fn build(
             xy: F2Dot14::from_bits(q[2]),
             yy: F2Dot14::from_bits(q[3]),
         };
-        let path = kurbo::Affine::new([
-            linear[0], linear[1], linear[2], linear[3], offsets[0], offsets[1],
-        ]) * canonical_paths[&instance.canonical].clone();
-        let bbox = path.control_box();
+        let mut bbox = kurbo::Rect::new(
+            f64::INFINITY,
+            f64::INFINITY,
+            f64::NEG_INFINITY,
+            f64::NEG_INFINITY,
+        );
+        for &(x, y) in &canonical_points[&instance.canonical] {
+            let xx = linear[0] * x as f64 + linear[2] * y as f64 + offsets[0];
+            let yy = linear[1] * x as f64 + linear[3] * y as f64 + offsets[1];
+            bbox.x0 = bbox.x0.min(xx);
+            bbox.y0 = bbox.y0.min(yy);
+            bbox.x1 = bbox.x1.max(xx);
+            bbox.y1 = bbox.y1.max(yy);
+        }
         let glyph = CompositeGlyph::new(
             Component::new(
                 GlyphId16::new(canonical_gids[&instance.canonical]),
@@ -156,6 +189,7 @@ pub fn build(
             ),
             bbox,
         );
+        added_bounds = Some(added_bounds.map_or(glyph.bbox, |b| b.union(glyph.bbox)));
         let bytes = write_fonts::dump_table(&glyph).map_err(|e| error(&e))?;
         stub_bytes += bytes.len();
         builder.add_glyph(&glyph).map_err(|e| error(&e))?;
@@ -171,6 +205,12 @@ pub fn build(
     }
     let (glyf, loca, format) = builder.build();
     let mut head: Head = font.head().map_err(|e| error(&e))?.to_owned_table();
+    if let Some(b) = added_bounds {
+        head.x_min = head.x_min.min(b.x_min);
+        head.y_min = head.y_min.min(b.y_min);
+        head.x_max = head.x_max.max(b.x_max);
+        head.y_max = head.y_max.max(b.y_max);
+    }
     head.index_to_loc_format = if format == write_fonts::tables::loca::LocaFormat::Long {
         1
     } else {
@@ -214,6 +254,8 @@ pub fn build(
     );
     let mut hhea: Hhea = font.hhea().map_err(|e| error(&e))?.to_owned_table();
     hhea.number_of_h_metrics = metrics.len() as u16;
+    hhea.advance_width_max =
+        write_fonts::types::UfWord::new(metrics.iter().map(|m| m.advance).max().unwrap_or(0));
     let mut cmap = Vec::new();
     let mut chars = BTreeSet::new();
     for (shape, text) in encodings {

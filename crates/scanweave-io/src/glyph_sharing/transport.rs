@@ -192,7 +192,7 @@ pub fn share(
     }
     let before = crate::serialization::deflate(default_font)?.len();
     let mut report = SharingReport {
-        method: "cover-2.0 frozen at research 5356255".into(),
+        method: format!("cover-{multiplier:.1} frozen at research 5356255"),
         multiplier,
         net_retirement_rule: false,
         fallback: None,
