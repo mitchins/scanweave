@@ -28,10 +28,6 @@ jobs:
           components: llvm-tools-preview
       - name: Install pinned Rust coverage tool
         run: cargo install cargo-llvm-cov --version 0.9.1 --locked
-      - name: Measure Rust workspace coverage
-        run: |
-          mkdir -p coverage
-          cargo llvm-cov --workspace --locked --lcov --output-path coverage/lcov.info
       - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
         with:
           python-version: "3.12"
@@ -39,11 +35,22 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install -y --no-install-recommends poppler-utils fonts-dejavu-core fonts-freefont-ttf fonts-urw-base35 fonts-liberation
-      - name: Measure instrumented Python tests
+      - name: Install hash-pinned qualification dependencies
         run: |
           python -m venv qualification/.venv
           qualification/.venv/bin/pip install --require-hashes --only-binary=:all: -r .github/requirements-ci.txt
           qualification/.venv/bin/pip install --index-url https://download.pytorch.org/whl/cpu --require-hashes --only-binary=:all: -r .github/requirements-font01-cpu.txt
+      - name: Measure Rust workspace coverage
+        env:
+          # The existing pinned pypdfium2 wheel supplies the native test library.
+          # The shipped converter never starts Python.
+          SCANWEAVE_PDFIUM_LIBRARY: ${{ github.workspace }}/qualification/.venv/lib/python3.12/site-packages/pypdfium2_raw/libpdfium.so
+        run: |
+          test -f "$SCANWEAVE_PDFIUM_LIBRARY"
+          mkdir -p coverage
+          cargo llvm-cov --workspace --locked --lcov --output-path coverage/lcov.info
+      - name: Measure instrumented Python tests
+        run: |
           qualification/.venv/bin/coverage run --source=qualification -m unittest discover -s qualification -p test_hocr_xml_security.py
           qualification/.venv/bin/coverage run --append --source=qualification -m unittest discover -s qualification -p test_tools_env.py
           qualification/.venv/bin/coverage run --append --source=qualification -m unittest discover -s qualification -p test_reliability_indices.py

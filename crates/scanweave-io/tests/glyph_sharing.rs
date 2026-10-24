@@ -216,6 +216,7 @@ fn opt_in_document_fixture() {
     .unwrap();
     assert_eq!(off.pdf_bytes, default.pdf_bytes);
     if std::env::var_os("SCANWEAVE_PDFIUM_LIBRARY").is_none() {
+        eprintln!("Native ownership/transport portion requires SCANWEAVE_PDFIUM_LIBRARY; Sonar CI sets and checks it.");
         return;
     }
     let shared = document::convert_document_with_sources_and_sharing(
