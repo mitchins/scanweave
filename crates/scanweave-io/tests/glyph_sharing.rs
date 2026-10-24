@@ -254,3 +254,93 @@ fn opt_in_document_fixture() {
         .unwrap();
     }
 }
+
+#[test]
+fn hygiene_and_weight_are_independent_safety_stages() {
+    use scanweave_io::glyph_sharing::{hygiene, weight_band};
+    let mut thin = vec![0.; 4096];
+    let mut thick = vec![0.; 4096];
+    for y in 20..48 {
+        for x in 29..32 {
+            thin[y * 64 + x] = 1.;
+        }
+        for x in 27..35 {
+            thick[y * 64 + x] = 1.;
+        }
+    }
+    assert_ne!(weight_band(&thin), weight_band(&thick));
+    assert!(hygiene(&thin, &[thin.as_slice()]).is_empty());
+    let mut contaminated = thin.clone();
+    for y in 10..20 {
+        for x in 54..59 {
+            contaminated[y * 64 + x] = 1.;
+        }
+    }
+    let reasons = hygiene(&contaminated, &[thin.as_slice()]);
+    assert!(reasons
+        .iter()
+        .any(|r| r == "outside_independent_class_footprint"));
+    assert!(reasons.iter().any(|r| r == "unsupported_component"));
+    assert!(reasons.iter().any(|r| r == "class_unsupported_topology"));
+}
+
+#[test]
+fn canonical_scaling_quantizes_the_compiled_outline_first() {
+    use scanweave_io::{
+        fontbuild,
+        glyph_sharing::{
+            font::{build, Instance},
+            source,
+        },
+    };
+    use std::collections::{BTreeMap, BTreeSet};
+    use write_fonts::{
+        read::{tables::glyf::Glyph, FontRef, TableProvider},
+        tables::glyf::SimpleGlyph,
+        types::GlyphId,
+    };
+    let mut field = vec![0.; 4096];
+    for y in 20..48 {
+        for x in 25..38 {
+            field[y * 64 + x] = 1.;
+        }
+    }
+    let mut shape = source::trace(0, "a", &field).unwrap().shape;
+    shape.path = kurbo::Affine::translate((0.3, 0.3)) * shape.path;
+    let unscaled = SimpleGlyph::from_bezpath(&shape.path).unwrap();
+    let encodings = vec![(0, "a".into())];
+    let default = fontbuild::build_font(&[shape.clone()], &encodings, 2048).unwrap();
+    let make = |offset: f64| Instance {
+        canonical: 0,
+        original_gid: 1,
+        transform: [3., 0., 0., 3., offset, 0.],
+    };
+    let shared = build(
+        &default,
+        &BTreeSet::new(),
+        &BTreeMap::from([(0, shape.clone())]),
+        &[make(0.)],
+        &encodings,
+    )
+    .unwrap();
+    let font = FontRef::new(&shared.bytes).unwrap();
+    let loca = font.loca(None).unwrap();
+    let glyf = font.glyf().unwrap();
+    let Glyph::Simple(canonical) = loca
+        .get_glyf(GlyphId::new(shared.canonical_gids[&0] as u32), &glyf)
+        .unwrap()
+        .unwrap()
+    else {
+        panic!("canonical must be primitive")
+    };
+    assert_eq!(canonical.x_min(), unscaled.bbox.x_min * 2);
+    assert_eq!(canonical.y_min(), unscaled.bbox.y_min * 2);
+    assert!(build(
+        &default,
+        &BTreeSet::new(),
+        &BTreeMap::from([(0, shape)]),
+        &[make(32768.)],
+        &encodings
+    )
+    .is_err());
+}
