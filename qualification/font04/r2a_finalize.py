@@ -109,7 +109,7 @@ def main():
     checkpoint['completed'].update(financial_golden_reruns=True,financial_all_draw_fidelity=True,
         save_only_controls=True,final_paired_runtime_RSS=True,repeat_hashes=True,
         fidelity_complete_documents=list(GROUPS),all_outputs_byte_identical=True)
-    checkpoint['optimization'].update(qualified=True,reverted=False,shipped=True,output_changes_observed=False,
+    checkpoint['optimization'].update(qualified=True,reverted=False,shipped=True,product_branch_clean=True,output_changes_observed=False,
         completed_byte_comparisons=[f'{g} {mode}' for g, modes in optimized.items() for mode in modes],
         description=profile['optimization'])
     checkpoint['blind_review'] = blind
