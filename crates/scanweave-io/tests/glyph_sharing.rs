@@ -156,3 +156,100 @@ fn composite_metrics_and_quantization() {
         std::fs::write(path, shared.bytes).unwrap();
     }
 }
+
+#[test]
+fn opt_in_document_fixture() {
+    use scanweave_io::{
+        convert::{Input, Policy, SpanInput, SymbolInput},
+        document,
+    };
+    let image = image::load_from_memory(include_bytes!("fixtures/glyph-sharing-page.png"))
+        .unwrap()
+        .to_rgb8();
+    let fixture: serde_json::Value =
+        serde_json::from_str(include_str!("fixtures/glyph-sharing-page.json")).unwrap();
+    let poly = |b: [f64; 4]| vec![[b[0], b[1]], [b[2], b[1]], [b[2], b[3]], [b[0], b[3]]];
+    let spans = fixture["symbols"]
+        .as_array()
+        .unwrap()
+        .iter()
+        .map(|s| {
+            let b: [f64; 4] = serde_json::from_value(s["bbox"].clone()).unwrap();
+            let id = s["id"].as_str().unwrap();
+            SpanInput {
+                id: id.into(),
+                text: "e".into(),
+                separator_after: " ".into(),
+                polygon: poly(b),
+                symbols: vec![SymbolInput {
+                    id: id.into(),
+                    range: (0, 1),
+                    polygon: poly(b),
+                }],
+            }
+        })
+        .collect();
+    let input = Input {
+        rgb: image.into_raw(),
+        width: 640,
+        height: 240,
+        page_id: "sharing-fixture".into(),
+        spans,
+        protected_regions: vec![],
+        raster_to_page_pt: [0.24, 0., 0., -0.24, 0., 57.6],
+        pixel_sha256: None,
+    };
+    let policy = Policy {
+        profile: "clearscan".into(),
+        glyph_dictionary: "visual".into(),
+        ..Policy::default()
+    };
+    let default =
+        document::convert_document("fixture", std::slice::from_ref(&input), &policy).unwrap();
+    let off = document::convert_document_with_sources_and_sharing(
+        "fixture",
+        std::slice::from_ref(&input),
+        &policy,
+        &[],
+        None,
+    )
+    .unwrap();
+    assert_eq!(off.pdf_bytes, default.pdf_bytes);
+    if std::env::var_os("SCANWEAVE_PDFIUM_LIBRARY").is_none() {
+        return;
+    }
+    let shared = document::convert_document_with_sources_and_sharing(
+        "fixture",
+        &[input],
+        &policy,
+        &[],
+        Some(2.),
+    )
+    .unwrap();
+    let report = shared.report.glyph_sharing.as_ref().unwrap();
+    assert_eq!(
+        report.decisions.len(),
+        fixture["expected_visible_draws"].as_u64().unwrap() as usize
+    );
+    assert_eq!(report.substituted, 7);
+    assert_eq!(report.net_outlines_retired, 1);
+    assert!(report.fallback.is_none());
+    assert!(
+        report.encoded_font_bytes_after <= report.encoded_font_bytes_before
+            || report.fallback.is_some()
+    );
+    if report.fallback.is_some() {
+        assert_eq!(shared.pdf_bytes, default.pdf_bytes);
+    }
+    if let Some(directory) = std::env::var_os("FONT04_TEST_PDF_OUT") {
+        let p = std::path::Path::new(&directory);
+        std::fs::create_dir_all(p).unwrap();
+        std::fs::write(p.join("default.pdf"), default.pdf_bytes).unwrap();
+        std::fs::write(p.join("shared.pdf"), shared.pdf_bytes).unwrap();
+        std::fs::write(
+            p.join("report.json"),
+            serde_json::to_vec_pretty(report).unwrap(),
+        )
+        .unwrap();
+    }
+}

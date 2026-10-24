@@ -106,7 +106,7 @@ pub fn convert_pdf(args: &[String]) -> Result<(), String> {
     let input = args.first().ok_or("missing input PDF")?;
     let output = args.get(1).ok_or("usage: scanweave input.pdf output.pdf [--dpi 300] [--lang eng] [--profile clearscan|faithful]")?;
     for pair in args[2..].chunks(2) {
-        if pair.len() != 2 || !matches!(pair[0].as_str(), "--dpi" | "--lang" | "--profile") {
+        if pair.len() != 2 || !matches!(pair[0].as_str(), "--dpi" | "--lang" | "--profile" | "--glyph-sharing") {
             return Err(format!("unknown or incomplete option: {}", pair[0]));
         }
     }
@@ -122,6 +122,9 @@ pub fn convert_pdf(args: &[String]) -> Result<(), String> {
     if profile != "faithful" && profile != "clearscan" {
         return Err("--profile must be clearscan or faithful".into());
     }
+    let sharing=super::arg_value(args,"--glyph-sharing").unwrap_or_else(||"off".into());
+    let sharing=match sharing.as_str(){"off"=>None,"cover-2.0"=>Some(2.0),"cover-1.5"=>Some(1.5),_=>return Err("--glyph-sharing must be off, cover-2.0 or cover-1.5".into())};
+    if sharing.is_some() && profile!="clearscan" {return Err("glyph sharing requires --profile clearscan".into());}
     let input = std::fs::canonicalize(input).map_err(|e| format!("read input PDF: {e}"))?;
     if Path::new(output).canonicalize().ok().as_ref() == Some(&input) {
         return Err("input and output must be different files".into());
@@ -360,7 +363,7 @@ pub fn convert_pdf(args: &[String]) -> Result<(), String> {
     };
     let import_ms = import_started.elapsed().as_millis();
     let converted =
-        document::convert_document_with_sources("pdf-input", &inputs, &policy, &source_images)?;
+        document::convert_document_with_sources_and_sharing("pdf-input", &inputs, &policy, &source_images, sharing)?;
     // Unique, same-directory temporary publication avoids shared .tmp races.
     let parent = Path::new(output)
         .parent()
