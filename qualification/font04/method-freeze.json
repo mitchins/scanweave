@@ -2421,5 +2421,28 @@
     "emitted_bindings_sha256": "998d9bd6027ca8a83c9112e000574754579ab9878e8093514ae8f503ffc9ba71",
     "plan_sha256": "5d656f22f8b2976bd3b8239053b71b2e6924e85669ea18d15b99dddfd456eb2f",
     "output_pdf_sha256": "d4d0b26211ec643709ffa534525aed14e3fa09a91190e2aa7cf149c31c3b2563"
-  }
+  },
+  "dependency_inventory": {
+    "path": "qualification/font04/method-freeze-dependencies.json",
+    "sha256": "84d1e9ba9887b9eb491d95936949e9b8dd0b1c8e464214b1fc63bd567e954bf1",
+    "inventory_expansion_only": true,
+    "origin_freeze_commit": "5356255",
+    "original_manifest_sha256": "b99dba3abcb292f82bb17b3c4b37cada2d4fa2605128f05fc73b07f29e4b6526"
+  },
+  "execution_order": [
+    "snapshot and >=10 visible-draw label eligibility",
+    "source normalization and line frame",
+    "fresh source canonical traces",
+    "directed 24-nearest shortlist and bounded fits with hard checks",
+    "source-only LOO variation estimates and complete fallback floors",
+    "self fits and hard checks",
+    "weight bands and independent canonical hygiene before offers",
+    "cost-aware cover grouping at multiplier 2.0",
+    "raw-source/default/candidate owned-ink preflight and group survival",
+    "primitive retirement accounting, composite/font-variant construction",
+    "aggregate net>=0 and encoded-font non-growth guard, else default document",
+    "complete PDF emission with default CID/Tm/W/ActualText and raster representation"
+  ],
+  "stage_order_note": "The named contract stages below are policy stages; execution_order states their actual dependency order. Canonicals are traced per source impression before grouping, never retraced from a group.",
+  "research_cohort_guard": "The B2 research driver requires 55 financial labels only to bind that research cohort. Product eligibility is >=10 visible draws per label for any document; no fixed label set is a release gate."
 }

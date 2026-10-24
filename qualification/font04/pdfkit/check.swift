@@ -34,7 +34,7 @@ for (index, path) in args.dropFirst(2).enumerated() {
         NSGraphicsContext.current = context
         let cg = context.cgContext
         cg.setFillColor(NSColor.white.cgColor)
-        cg.fill(CGRect(x: 0, y: 0, width: width, height: height))
+        cg.fill(CGRect(x: 0, y: 0, width: CGFloat(width), height: CGFloat(height)))
         cg.scaleBy(x: scale, y: scale)
         cg.translateBy(x: -bounds.minX, y: -bounds.minY)
         page.draw(with: .mediaBox, to: cg)
