@@ -173,7 +173,11 @@ pub fn plan(
             })
             .collect();
         if values.is_empty() {
-            return Err(format!("no source LOO witness for member {i}"));
+            // No other source impression exists in this eligible label. No
+            // directed two-member group can form; retain default. Zero is an
+            // unused diagnostic sentinel, never an admission estimate.
+            floors[i] = 0.;
+            continue;
         }
         floors[i] = quantile(&values, 0.85);
     }
@@ -234,4 +238,38 @@ pub fn plan(
         bands,
         hygiene: screens,
     })
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+    #[test]
+    fn eligible_label_without_safe_sources_abstains() {
+        let rows: Vec<Member> = (0..10)
+            .map(|i| Member {
+                label: "a".into(),
+                shape_key: i.to_string(),
+                band: 0,
+            })
+            .collect();
+        let fields = vec![vec![0.; 4096]; 10];
+        let candidates = vec![None; 10];
+        let result = plan(&rows, &fields, &candidates, 2.).unwrap();
+        assert!(result.groups.is_empty());
+        assert!(result.fits.is_empty());
+        assert_eq!(result.floors, vec![0.; 10]);
+        let mut fields = fields;
+        let mut candidates = candidates;
+        for y in 20..48 {
+            for x in 25..38 {
+                fields[0][y * 64 + x] = 1.;
+            }
+        }
+        candidates[0] = Some(fields[0].clone());
+        let result = plan(&rows, &fields, &candidates, 2.).unwrap();
+        assert!(
+            result.groups.is_empty(),
+            "one source cannot create a two-member group"
+        );
+    }
 }
