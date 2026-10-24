@@ -461,21 +461,19 @@ pub fn convert_document_with_sources_and_sharing(
     let assemble = if tonal_document {
         crate::page_pdf::assemble_document_with_tonal_fallback
     } else {crate::page_pdf::assemble_document_with_options};
-    let (mut pdf_bytes, mut stats) = assemble(
-        &pages.iter().map(|p| p.parts.clone()).collect::<Vec<_>>(),
-        &shapes,
-        &encodings,
-        &font_bytes,
-        policy.image_encoding,
-    )?;
+    let parts:Vec<_>=pages.iter().map(|p|p.parts.clone()).collect();
+    let (mut pdf_bytes,mut stats,raster_choice)=if sharing.is_some() && tonal_document {
+        crate::page_pdf::assemble_document_with_tonal_choice(&parts,&shapes,&encodings,&font_bytes,policy.image_encoding)?
+    }else{let(pdf,stats)=assemble(&parts,&shapes,&encodings,&font_bytes,policy.image_encoding)?;(pdf,stats,false)};
     let baseline_font=sharing.map(|_|font_bytes.clone());
     let mut sharing_report=None;
     if let (Some(multiplier),Some(rows))=(sharing,observations.as_ref()) {
-        let parts:Vec<_>=pages.iter().map(|p|p.parts.clone()).collect();
-        let(candidate,report)=crate::glyph_sharing::transport::share(rows,&parts,&shapes,&encodings,&font_bytes,policy.image_encoding,tonal_document,multiplier)?;
+        let(candidate,report)=crate::glyph_sharing::transport::share(rows,&parts,&shapes,&encodings,&font_bytes,policy.image_encoding,raster_choice,multiplier)?;
         if let Some(candidate)=candidate {font_bytes=candidate.font;pdf_bytes=candidate.pdf;stats=candidate.stats;}
         sharing_report=Some(report);
     }
+    drop(parts);
+    drop(observations);
     stage_timings.reconstruction_pdf_ms = stage_start.elapsed().as_millis();
 
     // 4. the whole-page searchable raster baseline candidate (auto mode ranks

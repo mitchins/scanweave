@@ -1180,20 +1180,28 @@ pub(crate) fn assemble_document_with_tonal_fallback(
     pages: &[PageParts], shapes: &[GlyphShape], encodings: &[(usize, String)],
     font_bytes: &[u8], image_options: ImageEncodingOptions,
 ) -> Result<(Vec<u8>, AssemblyStats), String> {
+    assemble_document_with_tonal_choice(pages,shapes,encodings,font_bytes,image_options).map(|(pdf,stats,_)|(pdf,stats))
+}
+
+pub(crate) fn assemble_document_with_tonal_choice(
+    pages: &[PageParts], shapes: &[GlyphShape], encodings: &[(usize, String)],
+    font_bytes: &[u8], image_options: ImageEncodingOptions,
+) -> Result<(Vec<u8>, AssemblyStats, bool), String> {
     if !pages.iter().any(|p| whole_page_tonal_candidate(p)
         && crate::tonal_image::eligible(&p.patches[0].rgb,p.source_w as u32,p.source_h as u32,3)
         || (!p.raster_baseline && p.patches.len()>1 && p.patches.iter().any(|patch|
             !patch.compact_background && crate::tonal_image::native_candidate(&patch.rgb,patch.w,patch.h,3)))) {
-        return assemble_document_with_options(pages,shapes,encodings,font_bytes,image_options);
+        return assemble_document_with_options(pages,shapes,encodings,font_bytes,image_options).map(|(pdf,stats)|(pdf,stats,false));
     }
     let start = std::time::Instant::now();
     let lossless = assemble_document_impl(pages, shapes, encodings, font_bytes, image_options, false, None)?;
     let compact = assemble_document_impl(pages, shapes, encodings, font_bytes, image_options, true, None)?;
     let encoding_ms = lossless.1.image_encoding_ms + compact.1.image_encoding_ms;
-    let mut selected = if compact.0.len() < lossless.0.len() {compact} else {lossless};
+    let compact_selected=compact.0.len() < lossless.0.len();
+    let mut selected = if compact_selected {compact} else {lossless};
     selected.1.image_encoding_ms = encoding_ms;
     selected.1.assembly_ms = start.elapsed().as_millis();
-    Ok(selected)
+    Ok((selected.0,selected.1,compact_selected))
 }
 
 fn assemble_document_impl(
@@ -1650,6 +1658,16 @@ mod image_resource_tests {
         let (lossless, _) = assemble_document_with_options(&[p.clone()], &[], &[], &[], options).unwrap();
         let (compact, _) = assemble_document_with_tonal_fallback(&[p.clone()], &[], &[], &[], options).unwrap();
         assert!(compact.len() < lossless.len());
+        let (chosen,_,tonal_choice)=assemble_document_with_tonal_choice(&[p.clone()],&[],&[],&[],options).unwrap();
+        assert!(tonal_choice);
+        assert_eq!(chosen,compact);
+        let resources=SharingResources{cid_maps:vec![vec![0,0]],occurrence_variants:vec![vec![]]};
+        let shared=assemble_document_with_sharing(&[p.clone()],&[],&[],&[],options,tonal_choice,&resources).unwrap().0;
+        assert_eq!(shared,compact,"sharing must retain the exact chosen raster representation");
+        let small=page(vec![patch([0.,0.,1.,1.],[220;3])]);
+        let (control,_,choice)=assemble_document_with_tonal_choice(&[small.clone()],&[],&[],&[],options).unwrap();
+        assert!(!choice);
+        assert_eq!(control,assemble_document_with_sharing(&[small],&[],&[],&[],options,choice,&resources).unwrap().0);
         let start = compact.windows(3).position(|w| w == [0xff, 0xd8, 0xff]).unwrap();
         let decoded = image::load_from_memory_with_format(&compact[start..], image::ImageFormat::Jpeg).unwrap().to_rgb8();
         assert_eq!(decoded.dimensions(), (200, 200));
