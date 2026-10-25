@@ -1,0 +1,316 @@
+FONT-04 Reader 32-bit retry at c9948817ea4f86a4349cc596c43bdb72f1c3ee6b
+Wine 9.0; fresh win32 prefix; Xvfb :118; Windows 10
+Transcript excerpts normalize trailing whitespace only; full local logs are hashed below.
+Installer SHA-256: 9fa38ffe4aedba6b718d4d7634483196ae075160361e09633cf7d4c360b1a718
+Base MSI exit: 0. Direct MSP exit: 69. Bundled setup exit: 67.
+Direct MSP rollback file version (VS_FIXEDFILEINFO): 15.7.20033.2203.
+After bundled setup rollback: AcroRd32.exe absent. No installed current version.
+No PDF opened; no Reader page renders/crops, text, searches or PDFium comparisons possible.
+
+--- wineboot-win32.log ---
+wine: created the configuration directory '/data/coding/scanweave/qualification/font04/local/reader32/prefix'
+004c:err:ole:StdMarshalImpl_MarshalInterface Failed to create ifstub, hr 0x80004002
+004c:err:ole:CoMarshalInterface Failed to marshal the interface {6d5140c1-7436-11ce-8034-00aa006009fa}, hr 0x80004002
+004c:err:ole:apartment_get_local_server_stream Failed: 0x80004002
+004c:err:ole:start_rpcss Failed to open RpcSs service
+0054:err:ole:StdMarshalImpl_MarshalInterface Failed to create ifstub, hr 0x80004002
+0054:err:ole:CoMarshalInterface Failed to marshal the interface {6d5140c1-7436-11ce-8034-00aa006009fa}, hr 0x80004002
+0054:err:ole:apartment_get_local_server_stream Failed: 0x80004002
+wine: configuration in L"/data/coding/scanweave/qualification/font04/local/reader32/prefix" has been updated.
+wine: configuration in L"/data/coding/scanweave/qualification/font04/local/reader32/prefix" has been updated.
+
+
+--- registry.log ---
+reg: The operation completed successfully
+reg: The operation completed successfully
+reg: The operation completed successfully
+reg: The operation completed successfully
+reg: The operation completed successfully
+reg: The operation completed successfully
+reg: The operation completed successfully
+reg: The operation completed successfully
+reg: The operation completed successfully
+reg: The operation completed successfully
+
+
+--- patch-console.log ---
+0108:err:msidb:TransformView_set_row trying to modify existing table
+0108:err:msidb:TransformView_set_row trying to modify existing column
+0108:err:msidb:TransformView_set_row trying to modify existing column
+0108:err:msidb:TransformView_set_row trying to modify existing column
+0108:err:msidb:TransformView_set_row trying to modify existing column
+0108:err:msidb:TransformView_set_row trying to modify existing column
+0108:err:msidb:TransformView_set_row trying to modify existing column
+0108:err:msi:ACTION_PatchFiles Failed to apply patch to file: L"a3dutils.dll"
+0108:err:msi:execute_script Execution of script 0 halted; action L"PatchFiles" returned 1603
+0108:err:msi:ITERATE_Actions Execution halted, action L"InstallExecute" returned 1603
+
+
+--- setup-console.log ---
+010c:err:msidb:TransformView_set_row trying to modify existing table
+010c:err:msidb:TransformView_set_row trying to modify existing column
+010c:err:msidb:TransformView_set_row trying to modify existing column
+010c:err:msidb:TransformView_set_row trying to modify existing column
+010c:err:msidb:TransformView_set_row trying to modify existing column
+010c:err:msidb:TransformView_set_row trying to modify existing column
+010c:err:msidb:TransformView_set_row trying to modify existing column
+010c:err:msi:ACTION_PatchFiles Failed to apply patch to file: L"a3dutils.dll"
+010c:err:msi:execute_script Execution of script 0 halted; action L"PatchFiles" returned 1603
+010c:err:msi:ITERATE_Actions Execution halted, action L"InstallExecute" returned 1603
+
+
+--- launch-console.log ---
+wine: failed to open "C:\\Program Files\\Adobe\\Acrobat Reader DC\\Reader\\AcroRd32.exe": c0000135
+
+
+--- base-msi.log selected lines ---
+1: 1: 0 2: 1033 3: 1252
+2: === Logging started: 10/25/2026  6:08:17 ===
+3: Message type: 0, Argument: 1033
+4: Message type: 1, Argument: Adobe Acrobat Reader DC
+7: 1: 0 2: 1033 3: 1252
+8: 1: 0 2: 1033 3: 1252
+9: === Logging started: 10/25/2026  6:08:17 ===
+10: Message type: 0, Argument: 1033
+11: Message type: 1, Argument: Adobe Acrobat Reader DC
+231: Action start 6:08:18: InstallInitialize.
+232: Action ended 6:08:18: InstallInitialize. Return value 1.
+233: Action 6:08:18: RegisterProperties_Rollback.
+234: Action start 6:08:18: RegisterProperties_Rollback.
+235: Action ended 6:08:18: RegisterProperties_Rollback. Return value 1.
+236: Action 6:08:18: RegisterProperties.
+237: Action start 6:08:18: RegisterProperties.
+331: Action start 6:08:18: InstallFiles.
+332: Action ended 6:08:18: InstallFiles. Return value 1.
+333: Action 6:08:18: PatchFiles. Patching files
+334: Action start 6:08:18: PatchFiles.
+335: Action ended 6:08:18: PatchFiles. Return value 1.
+336: Action 6:08:18: DuplicateFiles. Creating duplicate files
+337: Action start 6:08:18: DuplicateFiles.
+453: Action start 6:08:18: CreateDDENameRegistry.
+454: Action ended 6:08:18: CreateDDENameRegistry. Return value 1.
+455: Action 6:08:18: CreateForceASLRReg_Rollback.
+456: Action start 6:08:18: CreateForceASLRReg_Rollback.
+457: Action ended 6:08:18: CreateForceASLRReg_Rollback. Return value 1.
+458: Action 6:08:18: CreateForceASLRReg.
+459: Action start 6:08:18: CreateForceASLRReg.
+1383: File: Updater.api  Size: 138851 bytes
+1384: Action ended 6:08:19: InstallFiles. Return value 1.
+1385: Action 6:08:19: PatchFiles. Patching files
+1386: Action start 6:08:19: PatchFiles.
+1387: Action ended 6:08:19: PatchFiles. Return value 1.
+1388: Action 6:08:19: DuplicateFiles. Creating duplicate files
+1389: Action start 6:08:19: DuplicateFiles.
+2336: Action start 6:08:21: DoSubLaunches.
+2337: Action ended 6:08:21: DoSubLaunches. Return value 1.
+2338: Action ended 6:08:21: INSTALL. Return value 1.
+2339: 1: Adobe Acrobat Reader DC 2: {AC76BA86-7AD7-1033-7B44-AC0F074E4100} 3: 1
+2340: Property(S): Text = 0
+2689: 1: 2 2: 0
+2690: 1: 2 2: 1
+2691: Action ended 6:08:21: INSTALL. Return value 1.
+
+--- patch-msi.log selected lines ---
+1: 1: 0 2: 1033 3: 1252
+2: === Logging started: 10/25/2026  6:08:36 ===
+3: Message type: 0, Argument: 1033
+4: Message type: 1, Argument: Adobe Acrobat Reader DC
+7: 1: 0 2: 1033 3: 1252
+8: 1: 0 2: 1033 3: 1252
+9: === Logging started: 10/25/2026  6:09:10 ===
+10: Message type: 0, Argument: 1033
+11: Message type: 1, Argument: Adobe Acrobat Reader
+245: Action start 6:09:13: InstallInitialize.
+246: Action ended 6:09:13: InstallInitialize. Return value 1.
+247: Action 6:09:13: RegisterProperties_Rollback.
+248: Action start 6:09:13: RegisterProperties_Rollback.
+249: Action ended 6:09:13: RegisterProperties_Rollback. Return value 1.
+250: Action 6:09:13: RegisterProperties.
+251: Action start 6:09:13: RegisterProperties.
+257: Action start 6:09:13: BroadcastUnloadStubMessage.
+258: Action ended 6:09:13: BroadcastUnloadStubMessage. Return value 1.
+259: Action 6:09:13: AllowAppLaunch_rollback.
+260: Action start 6:09:13: AllowAppLaunch_rollback.
+261: Action ended 6:09:13: AllowAppLaunch_rollback. Return value 1.
+262: Action 6:09:13: BlockAppLaunch.
+263: Action start 6:09:13: BlockAppLaunch.
+308: Action start 6:09:13: UnregisterFonts.
+309: Action ended 6:09:13: UnregisterFonts. Return value 1.
+310: Action 6:09:13: InstallCEF_Rollback.
+311: Action start 6:09:13: InstallCEF_Rollback.
+312: Action ended 6:09:13: InstallCEF_Rollback. Return value 1.
+313: Action 6:09:13: RemoveRegistryValues. Removing system registry values
+314: Action start 6:09:13: RemoveRegistryValues.
+357: Action start 6:09:13: InstallFiles.
+358: Action ended 6:09:13: InstallFiles. Return value 1.
+359: Action 6:09:13: CleanupPatchCache_Rollback.
+360: Action start 6:09:13: CleanupPatchCache_Rollback.
+361: Action ended 6:09:13: CleanupPatchCache_Rollback. Return value 1.
+362: Action 6:09:13: CreateInstallerAnalyticsReg.
+363: Action start 6:09:13: CreateInstallerAnalyticsReg.
+364: Action ended 6:09:13: CreateInstallerAnalyticsReg. Return value 1.
+365: Action 6:09:13: PatchFiles. Patching files
+366: Action start 6:09:13: PatchFiles.
+367: Action ended 6:09:13: PatchFiles. Return value 1.
+368: Action 6:09:13: CleanupPatchCache_SuccessReg.
+369: Action start 6:09:13: CleanupPatchCache_SuccessReg.
+11306: ADelRCP logging: : Installer_Analytics:: PatchUpdateInProgress registry was set to 1: HKEY_LOCAL_MACHINE\SOFTWARE\Adobe\InstallerAnalytics\{AC76BA86-7AD7-1033-7B44-AC0F074E4100}
+11307: Action ended 6:09:21: CreateInstallerAnalyticsReg. Return value 1.
+11308: Action 6:09:21: PatchFiles. Patching files
+11309: Action start 6:09:21: PatchFiles.
+11310: Action ended 6:09:25: PatchFiles. Return value 0.
+11311: Action ended 6:09:25: InstallExecute. Return value 0.
+11312: Action ended 6:09:25: INSTALL. Return value 0.
+11313: 1: Adobe Acrobat Reader 2: {AC76BA86-7AD7-1033-7B44-AC0F074E4100} 3: 0
+11314: Property(S): Text = 0
+11955: 1: 2 2: 0
+11956: 1: 2 2: 1
+11957: Action ended 6:09:25: INSTALL. Return value 0.
+11958: Action 6:09:25: RemoveFiles. Removing files
+11959: Action start 6:09:25: RemoveFiles.
+27801: Action start 6:09:30: RemoveDuplicateFiles.
+27802: Action ended 6:09:30: RemoveDuplicateFiles. Return value 1.
+27803: Action 6:09:30: CleanupPatchCache_Rollback.
+27804: Action start 6:09:30: CleanupPatchCache_Rollback.
+27805: ADelRCP logging: : CleanupPatchCache_Rollback:: Checking value of PatchFiles_SUCCESS, found =
+27806: ADelRCP logging: : CleanupPatchCache_Rollback:: GUIDToPackedGUID :: 68AB67CA7DA73301B744CAF070E41400
+27807: ADelRCP logging: : CleanupPatchCache_Rollback::Going to perform cleanup in directory :: C:\Windows\Installer\$PatchCache$\Managed\68AB67CA7DA73301B744CAF070E41400
+27808: ADelRCP logging: : DeleteFolderOrFile:: Invoked to DeleteC:\Windows\Installer\$PatchCache$\Managed\68AB67CA7DA73301B744CAF070E41400
+27809: ADelRCP logging: : PatchUpdateRollback:: PatchUpdateRollback registry set to 1
+27810: Action ended 6:09:30: CleanupPatchCache_Rollback. Return value 1.
+27811: Action 6:09:30: RemoveFiles. Removing files
+27812: Action start 6:09:30: RemoveFiles.
+42604: Key: HKEY_LOCAL_MACHINE\SOFTWARE\Adobe\Acrobat Reader\DC\Installer, Name: DisableAcroCEFCustomizations, Value:
+42605: Action ended 6:09:33: WriteRegistryValues. Return value 1.
+42606: Action 6:09:33: InstallCEF_Rollback.
+42607: Action start 6:09:33: InstallCEF_Rollback.
+42608: ADelRCP logging: : Begin: InstallCEF_Rollback
+42609: Action ended 6:09:33: InstallCEF_Rollback. Return value 1.
+42610: Action 6:09:33: RegisterFonts. Registering fonts
+42611: Action start 6:09:33: RegisterFonts.
+43504: 1: {AC76BA86-7AD7-1033-7B44-AC0F074E4100} 2: {F0D5238A-EE99-4D07-A47E-CD3D24A24B59} 3: C:\Program Files\Adobe\Acrobat Reader DC\
+43505: Action ended 6:09:33: ProcessComponents. Return value 1.
+43506: Action 6:09:33: AllowAppLaunch_rollback.
+43507: Action start 6:09:33: AllowAppLaunch_rollback.
+43508: ADelRCP logging: :  : : Successfully sent MSG to UnBlock Entry Points
+43509: Action ended 6:09:33: AllowAppLaunch_rollback. Return value 1.
+43510: Action 6:09:33: RegisterProperties_Rollback.
+43511: Action start 6:09:33: RegisterProperties_Rollback.
+43512: ADelRCP logging: : CleanupRunTime: Check for Uninstall Status
+43513: Action ended 6:09:33: RegisterProperties_Rollback. Return value 1.
+
+--- setup-msi.log selected lines ---
+1: 1: 0 2: 1033 3: 1252
+2: === Logging started: 10/25/2026  6:09:54 ===
+3: Message type: 0, Argument: 1033
+4: Message type: 1, Argument: Adobe Acrobat Reader DC
+7: 1: 0 2: 1033 3: 1252
+8: 1: 0 2: 1033 3: 1252
+9: === Logging started: 10/25/2026  6:10:28 ===
+10: Message type: 0, Argument: 1033
+11: Message type: 1, Argument: Adobe Acrobat Reader
+284: Action start 6:10:31: InstallInitialize.
+285: Action ended 6:10:31: InstallInitialize. Return value 1.
+286: Action 6:10:31: RegisterProperties_Rollback.
+287: Action start 6:10:31: RegisterProperties_Rollback.
+288: Action ended 6:10:31: RegisterProperties_Rollback. Return value 1.
+289: Action 6:10:31: RegisterProperties.
+290: Action start 6:10:31: RegisterProperties.
+358: Action start 6:10:31: UnregisterFonts.
+359: Action ended 6:10:31: UnregisterFonts. Return value 1.
+360: Action 6:10:31: InstallCEF_Rollback.
+361: Action start 6:10:31: InstallCEF_Rollback.
+362: Action ended 6:10:31: InstallCEF_Rollback. Return value 1.
+363: Action 6:10:31: RemoveRegistryValues. Removing system registry values
+364: Action start 6:10:31: RemoveRegistryValues.
+407: Action start 6:10:31: InstallFiles.
+408: Action ended 6:10:31: InstallFiles. Return value 1.
+409: Action 6:10:31: PatchFiles. Patching files
+410: Action start 6:10:31: PatchFiles.
+411: Action ended 6:10:31: PatchFiles. Return value 1.
+412: Action 6:10:31: DuplicateFiles. Creating duplicate files
+413: Action start 6:10:31: DuplicateFiles.
+529: Action start 6:10:31: CreateDDENameRegistry.
+530: Action ended 6:10:31: CreateDDENameRegistry. Return value 1.
+531: Action 6:10:31: CreateForceASLRReg_Rollback.
+532: Action start 6:10:31: CreateForceASLRReg_Rollback.
+533: Action ended 6:10:31: CreateForceASLRReg_Rollback. Return value 1.
+534: Action 6:10:31: CreateForceASLRReg.
+535: Action start 6:10:31: CreateForceASLRReg.
+11330: File: Onix.dll  Size: 415136 bytes
+11331: Action ended 6:10:40: InstallFiles. Return value 1.
+11332: Action 6:10:40: PatchFiles. Patching files
+11333: Action start 6:10:40: PatchFiles.
+11334: Action ended 6:10:44: PatchFiles. Return value 0.
+11335: Action ended 6:10:44: InstallExecute. Return value 0.
+11336: Action ended 6:10:44: INSTALL. Return value 0.
+11337: 1: Adobe Acrobat Reader 2: {AC76BA86-7AD7-1033-7B44-AC0F074E4100} 3: 0
+11338: Property(S): Text = 0
+11981: 1: 2 2: 0
+11982: 1: 2 2: 1
+11983: Action ended 6:10:44: INSTALL. Return value 0.
+11984: Action 6:10:44: RemoveFiles. Removing files
+11985: Action start 6:10:44: RemoveFiles.
+27245: 1: {AC76BA86-7AD7-1033-7B44-AC0F074E4100} 2: {F0D5238A-EE99-4D07-A47E-CD3D24A24B59} 3: C:\Program Files\Adobe\Acrobat Reader DC\
+27246: Action ended 6:10:51: ProcessComponents. Return value 1.
+27247: Action 6:10:51: CreateForceASLRReg_Rollback.
+27248: Action start 6:10:51: CreateForceASLRReg_Rollback.
+27249: ADelRCP logging: : CreateOpenWithProgIdsKeyOnWin8:: Function Creating OpenWithProgIdkeys on win8.
+27250: ADelRCP logging: : CreateOpenWithProgIdsKeyOnWin8:: Deleted OpenWithProgIdkeys on win8 for RegKey-HKEY_CLASSES_ROOT\.pdf\OpenWithProgids
+27266: ADelRCP logging: : CreateOpenWithProgIdsKeyOnWin8:: Deleted OpenWithProgIdkeys on win8 for RegKey-HKEY_CLASSES_ROOT\.secstore\OpenWithProgids
+27267: ADelRCP logging: : CreateOpenWithProgIdsKeyOnWin8:: Deleted OpenWithProgIdkeys on win8 for ProgId-AcroExch.SecStore
+27268: Action ended 6:10:51: CreateForceASLRReg_Rollback. Return value 1.
+27269: Action 6:10:51: UnpublishProduct. Unpublishing product information
+27270: Action start 6:10:51: UnpublishProduct.
+42489: Action start 6:10:53: WriteRegistryValues.
+42490: Action ended 6:10:53: WriteRegistryValues. Return value 1.
+42491: Action 6:10:53: InstallCEF_Rollback.
+42492: Action start 6:10:53: InstallCEF_Rollback.
+42493: ADelRCP logging: : Begin: InstallCEF_Rollback
+42494: ADelRCP logging: : AcroCEF folder path: C:\Program Files\Adobe\Acrobat Reader DC\Reader\AcroCEF
+42495: ADelRCP logging: : GetCEFDIR: C:\Program Files\Adobe\Acrobat Reader DC\Reader\AcroCEF
+42498: ADelRCP logging: : Only writing registry:
+42499: ADelRCP logging: : SetCEFDIR: At reg path HKEY_LOCAL_MACHINE\SOFTWARE\Adobe\Acrobat Reader\DC\Installer
+42500: ADelRCP logging: : InstallCEF_Rollback: Exit
+42501: Action ended 6:10:53: InstallCEF_Rollback. Return value 1.
+42502: Action 6:10:53: RegisterFonts. Registering fonts
+42503: Action start 6:10:53: RegisterFonts.
+43405: 1: {AC76BA86-7AD7-1033-7B44-AC0F074E4100} 2: {F0D5238A-EE99-4D07-A47E-CD3D24A24B59} 3: C:\Program Files\Adobe\Acrobat Reader DC\
+43406: Action ended 6:10:54: ProcessComponents. Return value 1.
+43407: Action 6:10:54: RegisterProperties_Rollback.
+43408: Action start 6:10:54: RegisterProperties_Rollback.
+43409: ADelRCP logging: : CleanupRunTime: Check for Uninstall Status
+43410: Action ended 6:10:54: RegisterProperties_Rollback. Return value 1.
+
+--- registry DWORD settings (all writes exit 0) ---
+{
+  "HKLM\\Software\\Policies\\Adobe\\Acrobat Reader\\DC\\FeatureLockDown": {
+    "bProtectedMode": 0,
+    "bEnhancedSecurityStandalone": 0,
+    "bUpdater": 0,
+    "bUsageMeasurement": 0,
+    "bEnableProtectedModeAppContainer": 0,
+    "iProtectedView": 0
+  },
+  "HKCU\\Software\\Adobe\\Acrobat Reader\\DC\\Privileged": {
+    "bProtectedMode": 0,
+    "bEnhancedSecurityStandalone": 0,
+    "bEnableProtectedModeAppContainer": 0,
+    "iProtectedView": 0
+  }
+}
+
+
+--- full local log SHA-256 ---
+e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855  qualification/font04/local/reader32/base-console.log
+1688891f1138c3a6299133d76af988687b4cf3ed4b93159ea589666af17347c5  qualification/font04/local/reader32/base-msi.log
+7ffc768d4cfd69e20f6ff8dd91f04574716ccdfee2fb3cf6c0e67652b36354e2  qualification/font04/local/reader32/extract.log
+83781c98a5aeed55f0d669c9a1ceec3fac4e42bf02976990f30d82febf7ef282  qualification/font04/local/reader32/launch-console.log
+1bd9f5fa966cfdf2a47ad501c37ab55b1e9b02ffda46ca538d0c8227fd3fcf55  qualification/font04/local/reader32/patch-console.log
+1d76b9f512eb92eb06573b590c7ec70e9fa2602ac974413107eba2dc7c6c4fd5  qualification/font04/local/reader32/patch-msi.log
+61cb1d127b2bc7f4191e452f882dd32d375ad114afc6702493aac9f02aa518a2  qualification/font04/local/reader32/registry.log
+c3013af94e7a0c9ccc4039e3a040d5d690c8e4fd13951bf0e4efa5199464cac2  qualification/font04/local/reader32/setup-console.log
+8c09d4152512ab50e690afb3c4cd35b7daed764e50fa7b3eb0e511d7e9727ad7  qualification/font04/local/reader32/setup-msi.log
+76883419a4c93e1b79835eccdb18fc278ad67ab36c535b384031b73958d487df  qualification/font04/local/reader32/windows-version.log
+70707ddb0c915226815f4c64ce9bdd5eca60ac05f8b7f7c6323dbe58542c85e0  qualification/font04/local/reader32/wineboot-win32.log
+d771b97a5cdfe48f0ed59948ef31ef90c4d19835de727a645224b2460ce3b290  qualification/font04/local/reader32/xvfb.log

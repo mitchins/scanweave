@@ -1,57 +1,98 @@
 {
-  "schema": "font04-reader-check-v1",
+  "schema": "font04-reader-check-v2",
   "date": "2026-10-25",
   "status": "BLOCKED",
-  "reason": "Current-version bundled MSP fails in Wine; post-rollback base Acrobat crashes before any PDF is opened.",
-  "checkpoint": "2d6293c",
+  "reason": "Both direct bundled MSP and bundled setup fail patching a3dutils.dll (MSI 1603); current Reader 26.002.22031 was not installed. Setup rollback removes executable.",
+  "checkpoint": "c9948817ea4f86a4349cc596c43bdb72f1c3ee6b",
   "branch": "research/font04-document-fonts",
-  "prefix": "/data/coding/scanweave/qualification/font04/local/reader/prefix",
+  "prefix": "/data/coding/scanweave/qualification/font04/local/reader32/prefix",
   "prefix_new": true,
-  "winearch": "win64",
+  "winearch": "win32",
   "wine_version": "wine-9.0 (Ubuntu 9.0~repack-4build3)",
-  "windows_version": "win10 (set after first bootstrap attempt)",
-  "display": ":117",
+  "windows_version": "win10 (set before installation and first launch)",
+  "display": ":118",
   "screen": "1600x1200x24",
   "installer": {
-    "path": "AcroRdrDCx642600222031_en_US.exe",
-    "sha256": "86e98feb3f2afa66656a85cbbc6fb71d6a3217ebf8fdc21f4d1a54d21cb45028",
+    "path": "AcroRdrDC2600222031_en_US.exe",
+    "sha256": "9fa38ffe4aedba6b718d4d7634483196ae075160361e09633cf7d4c360b1a718",
     "hash_verified_before_use": true,
+    "architecture": "PE32 i386 (file verified)",
     "version": "26.002.22031",
-    "version_source": "owner verified; bundled payload AcroRdrDCx64Upd2600222031.msp",
-    "signer": "Adobe Inc. (OU=Acrobat DC); owner/reviewer supplied verification",
+    "version_source": "owner/reviewer verification; bundled AcroRdrDCUpd2600222031.msp",
+    "authenticode_sha256": "bc7616d8fda4ccc68f6dd06ee373bdf52dc539cf279ddabb3a00adb49a0da39f",
+    "signature_verification_source": "owner/reviewer supplied: signed digest matches; Adobe Inc. (OU=Acrobat DC), DigiCert Trusted G4 Code Signing RSA4096 SHA384 2021 CA1, chain to DigiCert Trusted Root G4",
     "installed_current_version_verified": false,
-    "post_rollback_executable_file_version": "21.1.20135.27840"
+    "post_direct_msp_rollback_executable_file_version": "15.7.20033.2203",
+    "version_verification_method": "AcroRd32.exe VS_FIXEDFILEINFO signature and file version DWORDs read directly",
+    "post_setup_rollback_executable_present": false
   },
   "attempts": [
     {
-      "step": "wineboot -u",
-      "result": "Created fresh prefix; OLE marshal 0x80004002 and RpcSs warnings; configuration completed"
+      "step": "WINEARCH=win32 DISPLAY=:118 wineboot -u",
+      "exit": 0,
+      "result": "Fresh win32 prefix created; system.reg #arch=win32; OLE/RpcSs bootstrap warnings recorded."
     },
     {
-      "step": "owner EXE /sAll /rs /rps /msi EULA_ACCEPT=YES DISABLE_ARM_SERVICE_INSTALL=1",
-      "result": "First background X server stopped with shell; restarted persistent Xvfb and repeated; extracted supplied payload, update failed"
+      "step": "Set policy DWORDs and HKCU\\Software\\Wine Version=win10",
+      "result": "All writes exit 0; before any Reader launch; exact keys recorded in settings."
     },
     {
-      "step": "set win10; run extracted setup.exe interactively; run base MSI /qn /norestart with verbose logging",
-      "result": "Base MSI installed; overlapping processes then stopped using only this prefix wineserver -k"
+      "step": "7z extract supplied installer; wine msiexec /i AcroRead.msi /qn /norestart EULA_ACCEPT=YES DISABLE_ARM_SERVICE_INSTALL=1 /L*v base-msi.log",
+      "exit": 0,
+      "result": "Base installed. Initial shell command with unquoted /L*v was rejected by zsh before execution; corrected quoting used."
     },
     {
-      "step": "Sequential clean process retry: base MSI, then bundled MSP, then Acrobat.exe without PDF",
-      "result": "Base exit 0; MSP exit 69, internal MSI error 1603 on AcroPDF.dll; rollback leaves old base; Acrobat null-read crash"
+      "step": "wine msiexec /p AcroRdrDCUpd2600222031.msp /qn /norestart EULA_ACCEPT=YES DISABLE_ARM_SERVICE_INSTALL=1 /L*v patch-msi.log",
+      "exit": 69,
+      "result": "PatchFiles failed on a3dutils.dll, MSI 1603. Rolled-back executable version 15.7.20033.2203."
+    },
+    {
+      "step": "bundled setup.exe /sAll /rs /rps /msi EULA_ACCEPT=YES DISABLE_ARM_SERVICE_INSTALL=1 /L*v setup-msi.log",
+      "exit": 67,
+      "result": "Setup invokes MSI with PATCH=bundled MSP. Same a3dutils.dll / MSI 1603 failure; rollback removes AcroRd32.exe."
+    },
+    {
+      "step": "wine AcroRd32.exe without PDF after setup rollback",
+      "exit": 53,
+      "result": "c0000135; executable absent; no PDF opened. Not a current Reader test."
     }
   ],
   "errors": [
-    "ACTION_PatchFiles Failed to apply patch to file: L\"AcroPDF.dll\"",
-    "execute_script Execution of script 0 halted; action L\"PatchFiles\" returned 1603",
-    "ITERATE_Actions Execution halted, action L\"InstallExecute\" returned 1603",
-    "Unhandled page fault on read access to 0000000000000000 at address 000000014005D30F",
-    "ntlm_auth was not found; no NTLM support"
+    "0108:err:msidb:TransformView_set_row trying to modify existing table",
+    "0108:err:msidb:TransformView_set_row trying to modify existing column",
+    "0108:err:msidb:TransformView_set_row trying to modify existing column",
+    "0108:err:msidb:TransformView_set_row trying to modify existing column",
+    "0108:err:msidb:TransformView_set_row trying to modify existing column",
+    "0108:err:msidb:TransformView_set_row trying to modify existing column",
+    "0108:err:msidb:TransformView_set_row trying to modify existing column",
+    "0108:err:msi:ACTION_PatchFiles Failed to apply patch to file: L\"a3dutils.dll\"",
+    "0108:err:msi:execute_script Execution of script 0 halted; action L\"PatchFiles\" returned 1603",
+    "0108:err:msi:ITERATE_Actions Execution halted, action L\"InstallExecute\" returned 1603",
+    "wine: failed to open \"C:\\\\Program Files\\\\Adobe\\\\Acrobat Reader DC\\\\Reader\\\\AcroRd32.exe\": c0000135"
   ],
   "settings": {
     "DISABLE_ARM_SERVICE_INSTALL": 1,
-    "policy_registry_key": "HKLM\\Software\\Policies\\Adobe\\Adobe Acrobat\\DC\\FeatureLockDown",
-    "bUpdater": 0,
-    "bUsageMeasurement": 0
+    "registry_dword_values": {
+      "HKLM\\Software\\Policies\\Adobe\\Acrobat Reader\\DC\\FeatureLockDown": {
+        "bProtectedMode": 0,
+        "bEnhancedSecurityStandalone": 0,
+        "bUpdater": 0,
+        "bUsageMeasurement": 0,
+        "bEnableProtectedModeAppContainer": 0,
+        "iProtectedView": 0
+      },
+      "HKCU\\Software\\Adobe\\Acrobat Reader\\DC\\Privileged": {
+        "bProtectedMode": 0,
+        "bEnhancedSecurityStandalone": 0,
+        "bEnableProtectedModeAppContainer": 0,
+        "iProtectedView": 0
+      }
+    },
+    "wine_registry": {
+      "HKCU\\Software\\Wine": {
+        "Version": "win10"
+      }
+    }
   },
   "added_components": [],
   "network_installer_downloads": false,
@@ -67,7 +108,7 @@
       "expected_sha256": "74c31136d00a18dbf05fba2d7fba59c85cc201a57ae65d77999a025a692fab0f",
       "actual_sha256": "74c31136d00a18dbf05fba2d7fba59c85cc201a57ae65d77999a025a692fab0f",
       "page_count": 13,
-      "metadata_source": "r1-compatibility.json; financial PDF hash reverified",
+      "metadata_source": "Expected hash from prior receipt; all five PDF hashes reverified in 32-bit retry; no PDF opened",
       "status": "NOT_TESTED_BLOCKED",
       "text_equal_to_default": null,
       "search_results": [],
@@ -229,7 +270,7 @@
       "expected_sha256": "b007a27dd111937d5fb4bb75abb6cd41245635e679100f7de952cbb0509d20bc",
       "actual_sha256": "b007a27dd111937d5fb4bb75abb6cd41245635e679100f7de952cbb0509d20bc",
       "page_count": 13,
-      "metadata_source": "r1-compatibility.json; financial PDF hash reverified",
+      "metadata_source": "Expected hash from prior receipt; all five PDF hashes reverified in 32-bit retry; no PDF opened",
       "status": "NOT_TESTED_BLOCKED",
       "text_equal_to_default": null,
       "search_results": [],
@@ -391,7 +432,7 @@
       "expected_sha256": "dbdf30d38444985e9dd2839288329676865d93b0dd272cd69746a032aef8fb11",
       "actual_sha256": "dbdf30d38444985e9dd2839288329676865d93b0dd272cd69746a032aef8fb11",
       "page_count": 13,
-      "metadata_source": "r1-compatibility.json; financial PDF hash reverified",
+      "metadata_source": "Expected hash from prior receipt; all five PDF hashes reverified in 32-bit retry; no PDF opened",
       "status": "NOT_TESTED_BLOCKED",
       "text_equal_to_default": null,
       "search_results": [],
@@ -551,9 +592,9 @@
       "variant": "default",
       "pdf": "/data/coding/scanweave/qualification/font04/local/R2a/resume-optimized/mixed-off.pdf",
       "expected_sha256": "c3f224bf18e5d2aeeba6e03de20000b84ff31893fc945e14882719b114d616d9",
-      "actual_sha256": null,
+      "actual_sha256": "c3f224bf18e5d2aeeba6e03de20000b84ff31893fc945e14882719b114d616d9",
       "page_count": 2,
-      "metadata_source": "public r2a-optimization.json; count from mixed source pdfinfo; R2a local output not accessed",
+      "metadata_source": "Expected hash from prior receipt; all five PDF hashes reverified in 32-bit retry; no PDF opened",
       "status": "NOT_TESTED_BLOCKED",
       "text_equal_to_default": null,
       "search_results": [],
@@ -593,9 +634,9 @@
       "variant": "cover-2.0",
       "pdf": "/data/coding/scanweave/qualification/font04/local/R2a/resume-optimized/mixed-cover-2.0.pdf",
       "expected_sha256": "6389a7c7662bda1d4012ecbcfe876587cc8fc96e48149ead33f8e9f791306b89",
-      "actual_sha256": null,
+      "actual_sha256": "6389a7c7662bda1d4012ecbcfe876587cc8fc96e48149ead33f8e9f791306b89",
       "page_count": 2,
-      "metadata_source": "public r2a-optimization.json; count from mixed source pdfinfo; R2a local output not accessed",
+      "metadata_source": "Expected hash from prior receipt; all five PDF hashes reverified in 32-bit retry; no PDF opened",
       "status": "NOT_TESTED_BLOCKED",
       "text_equal_to_default": null,
       "search_results": [],
@@ -632,32 +673,701 @@
     }
   ],
   "evidence_paths": [
-    "qualification/font04/reader-evidence/acrobat-launch-crash.png",
-    "qualification/font04/reader-evidence/wine-failure-log.txt"
+    "qualification/font04/reader-evidence/reader32-failure-log.txt"
   ],
   "full_local_logs": [
-    "qualification/font04/local/reader/wineboot.log",
-    "qualification/font04/local/reader/install.log",
-    "qualification/font04/local/reader/setup-interactive.log",
-    "qualification/font04/local/reader/msiexec.log",
-    "qualification/font04/local/reader/sequential-console.log",
-    "qualification/font04/local/reader/launch.log",
-    "qualification/font04/local/reader/msi.log",
-    "qualification/font04/local/reader/patch.log",
-    "qualification/font04/local/reader/sequential-base.log",
-    "qualification/font04/local/reader/sequential-patch.log"
+    "qualification/font04/local/reader32/base-console.log",
+    "qualification/font04/local/reader32/base-msi.log",
+    "qualification/font04/local/reader32/extract.log",
+    "qualification/font04/local/reader32/launch-console.log",
+    "qualification/font04/local/reader32/patch-console.log",
+    "qualification/font04/local/reader32/patch-msi.log",
+    "qualification/font04/local/reader32/registry.log",
+    "qualification/font04/local/reader32/setup-console.log",
+    "qualification/font04/local/reader32/setup-msi.log",
+    "qualification/font04/local/reader32/windows-version.log",
+    "qualification/font04/local/reader32/wineboot-win32.log",
+    "qualification/font04/local/reader32/xvfb.log"
   ],
   "limitations": [
-    "No Reader PDF rendering, text copying, word searches, or PDFium control comparison was possible. Null fields mean untested, never pass.",
-    "No alternate viewer substituted. No product compatibility defect established.",
-    "Installer contains an older base MSI plus current MSP. Crashing rolled-back base is not a current Reader qualification."
+    "Current Reader build 26.002.22031 was never installed; base-only does not qualify.",
+    "All five PDFs / 43 pages remain NOT_TESTED_BLOCKED. No Reader fixed-zoom captures or dense crops (including mixed page 2 with / member 518), glyph checks, copied-text comparisons, ten-word searches, or matched PDFium/default controls were possible. Null values are untested, never passes.",
+    "No PDF compatibility defect established. No substitute viewer used.",
+    "No error dialog was shown by silent installation; desktop captures were blank, so no misleading page crops are supplied. Exact console errors and MSI action excerpts are committed; full verbose logs remain local."
   ],
   "scope": {
     "P2_opened_generated_or_rendered": false,
     "R2a_blind_package_or_key_accessed": false,
-    "R2a_local_directories_accessed": false,
+    "R2a_local_directories_accessed": true,
     "acrobat_XI_prefix_touched": false,
     "display_99_used": false,
-    "product_code_changed": false
-  }
+    "product_code_changed": false,
+    "R2a_access_detail": "Only the two explicitly authorized mixed output PDFs read for SHA-256; no blind package/key or P2 accessed."
+  },
+  "previous_attempts": [
+    {
+      "schema": "font04-reader-check-v1",
+      "date": "2026-10-25",
+      "status": "BLOCKED",
+      "reason": "Current-version bundled MSP fails in Wine; post-rollback base Acrobat crashes before any PDF is opened.",
+      "checkpoint": "2d6293c",
+      "branch": "research/font04-document-fonts",
+      "prefix": "/data/coding/scanweave/qualification/font04/local/reader/prefix",
+      "prefix_new": true,
+      "winearch": "win64",
+      "wine_version": "wine-9.0 (Ubuntu 9.0~repack-4build3)",
+      "windows_version": "win10 (set after first bootstrap attempt)",
+      "display": ":117",
+      "screen": "1600x1200x24",
+      "installer": {
+        "path": "AcroRdrDCx642600222031_en_US.exe",
+        "sha256": "86e98feb3f2afa66656a85cbbc6fb71d6a3217ebf8fdc21f4d1a54d21cb45028",
+        "hash_verified_before_use": true,
+        "version": "26.002.22031",
+        "version_source": "owner verified; bundled payload AcroRdrDCx64Upd2600222031.msp",
+        "signer": "Adobe Inc. (OU=Acrobat DC); owner/reviewer supplied verification",
+        "installed_current_version_verified": false,
+        "post_rollback_executable_file_version": "21.1.20135.27840"
+      },
+      "attempts": [
+        {
+          "step": "wineboot -u",
+          "result": "Created fresh prefix; OLE marshal 0x80004002 and RpcSs warnings; configuration completed"
+        },
+        {
+          "step": "owner EXE /sAll /rs /rps /msi EULA_ACCEPT=YES DISABLE_ARM_SERVICE_INSTALL=1",
+          "result": "First background X server stopped with shell; restarted persistent Xvfb and repeated; extracted supplied payload, update failed"
+        },
+        {
+          "step": "set win10; run extracted setup.exe interactively; run base MSI /qn /norestart with verbose logging",
+          "result": "Base MSI installed; overlapping processes then stopped using only this prefix wineserver -k"
+        },
+        {
+          "step": "Sequential clean process retry: base MSI, then bundled MSP, then Acrobat.exe without PDF",
+          "result": "Base exit 0; MSP exit 69, internal MSI error 1603 on AcroPDF.dll; rollback leaves old base; Acrobat null-read crash"
+        }
+      ],
+      "errors": [
+        "ACTION_PatchFiles Failed to apply patch to file: L\"AcroPDF.dll\"",
+        "execute_script Execution of script 0 halted; action L\"PatchFiles\" returned 1603",
+        "ITERATE_Actions Execution halted, action L\"InstallExecute\" returned 1603",
+        "Unhandled page fault on read access to 0000000000000000 at address 000000014005D30F",
+        "ntlm_auth was not found; no NTLM support"
+      ],
+      "settings": {
+        "DISABLE_ARM_SERVICE_INSTALL": 1,
+        "policy_registry_key": "HKLM\\Software\\Policies\\Adobe\\Adobe Acrobat\\DC\\FeatureLockDown",
+        "bUpdater": 0,
+        "bUsageMeasurement": 0
+      },
+      "added_components": [],
+      "network_installer_downloads": false,
+      "winetricks_used": false,
+      "local_winetricks_cache": [
+        "win2ksp4 (not used)"
+      ],
+      "pdfs": [
+        {
+          "document": "financial",
+          "variant": "default",
+          "pdf": "qualification/font04/local/R1-native/default.pdf",
+          "expected_sha256": "74c31136d00a18dbf05fba2d7fba59c85cc201a57ae65d77999a025a692fab0f",
+          "actual_sha256": "74c31136d00a18dbf05fba2d7fba59c85cc201a57ae65d77999a025a692fab0f",
+          "page_count": 13,
+          "metadata_source": "r1-compatibility.json; financial PDF hash reverified",
+          "status": "NOT_TESTED_BLOCKED",
+          "text_equal_to_default": null,
+          "search_results": [],
+          "control_comparison": {
+            "status": "NOT_TESTED_BLOCKED",
+            "default_vs_pdfium": null
+          },
+          "evidence_paths": [],
+          "pages": [
+            {
+              "page": 1,
+              "status": "NOT_TESTED_BLOCKED",
+              "fixed_zoom_render": null,
+              "dense_text_crop": null,
+              "error_dialog_check": null,
+              "glyph_integrity": null,
+              "select_all_copy_text_equal_to_default": null,
+              "search_results": [],
+              "pdfium_matched_resolution_comparison": null
+            },
+            {
+              "page": 2,
+              "status": "NOT_TESTED_BLOCKED",
+              "fixed_zoom_render": null,
+              "dense_text_crop": null,
+              "error_dialog_check": null,
+              "glyph_integrity": null,
+              "select_all_copy_text_equal_to_default": null,
+              "search_results": [],
+              "pdfium_matched_resolution_comparison": null
+            },
+            {
+              "page": 3,
+              "status": "NOT_TESTED_BLOCKED",
+              "fixed_zoom_render": null,
+              "dense_text_crop": null,
+              "error_dialog_check": null,
+              "glyph_integrity": null,
+              "select_all_copy_text_equal_to_default": null,
+              "search_results": [],
+              "pdfium_matched_resolution_comparison": null
+            },
+            {
+              "page": 4,
+              "status": "NOT_TESTED_BLOCKED",
+              "fixed_zoom_render": null,
+              "dense_text_crop": null,
+              "error_dialog_check": null,
+              "glyph_integrity": null,
+              "select_all_copy_text_equal_to_default": null,
+              "search_results": [],
+              "pdfium_matched_resolution_comparison": null
+            },
+            {
+              "page": 5,
+              "status": "NOT_TESTED_BLOCKED",
+              "fixed_zoom_render": null,
+              "dense_text_crop": null,
+              "error_dialog_check": null,
+              "glyph_integrity": null,
+              "select_all_copy_text_equal_to_default": null,
+              "search_results": [],
+              "pdfium_matched_resolution_comparison": null
+            },
+            {
+              "page": 6,
+              "status": "NOT_TESTED_BLOCKED",
+              "fixed_zoom_render": null,
+              "dense_text_crop": null,
+              "error_dialog_check": null,
+              "glyph_integrity": null,
+              "select_all_copy_text_equal_to_default": null,
+              "search_results": [],
+              "pdfium_matched_resolution_comparison": null
+            },
+            {
+              "page": 7,
+              "status": "NOT_TESTED_BLOCKED",
+              "fixed_zoom_render": null,
+              "dense_text_crop": null,
+              "error_dialog_check": null,
+              "glyph_integrity": null,
+              "select_all_copy_text_equal_to_default": null,
+              "search_results": [],
+              "pdfium_matched_resolution_comparison": null
+            },
+            {
+              "page": 8,
+              "status": "NOT_TESTED_BLOCKED",
+              "fixed_zoom_render": null,
+              "dense_text_crop": null,
+              "error_dialog_check": null,
+              "glyph_integrity": null,
+              "select_all_copy_text_equal_to_default": null,
+              "search_results": [],
+              "pdfium_matched_resolution_comparison": null
+            },
+            {
+              "page": 9,
+              "status": "NOT_TESTED_BLOCKED",
+              "fixed_zoom_render": null,
+              "dense_text_crop": null,
+              "error_dialog_check": null,
+              "glyph_integrity": null,
+              "select_all_copy_text_equal_to_default": null,
+              "search_results": [],
+              "pdfium_matched_resolution_comparison": null
+            },
+            {
+              "page": 10,
+              "status": "NOT_TESTED_BLOCKED",
+              "fixed_zoom_render": null,
+              "dense_text_crop": null,
+              "error_dialog_check": null,
+              "glyph_integrity": null,
+              "select_all_copy_text_equal_to_default": null,
+              "search_results": [],
+              "pdfium_matched_resolution_comparison": null
+            },
+            {
+              "page": 11,
+              "status": "NOT_TESTED_BLOCKED",
+              "fixed_zoom_render": null,
+              "dense_text_crop": null,
+              "error_dialog_check": null,
+              "glyph_integrity": null,
+              "select_all_copy_text_equal_to_default": null,
+              "search_results": [],
+              "pdfium_matched_resolution_comparison": null
+            },
+            {
+              "page": 12,
+              "status": "NOT_TESTED_BLOCKED",
+              "fixed_zoom_render": null,
+              "dense_text_crop": null,
+              "error_dialog_check": null,
+              "glyph_integrity": null,
+              "select_all_copy_text_equal_to_default": null,
+              "search_results": [],
+              "pdfium_matched_resolution_comparison": null
+            },
+            {
+              "page": 13,
+              "status": "NOT_TESTED_BLOCKED",
+              "fixed_zoom_render": null,
+              "dense_text_crop": null,
+              "error_dialog_check": null,
+              "glyph_integrity": null,
+              "select_all_copy_text_equal_to_default": null,
+              "search_results": [],
+              "pdfium_matched_resolution_comparison": null
+            }
+          ]
+        },
+        {
+          "document": "financial",
+          "variant": "cover-2.0",
+          "pdf": "qualification/font04/local/R1-native/cover-2.0.pdf",
+          "expected_sha256": "b007a27dd111937d5fb4bb75abb6cd41245635e679100f7de952cbb0509d20bc",
+          "actual_sha256": "b007a27dd111937d5fb4bb75abb6cd41245635e679100f7de952cbb0509d20bc",
+          "page_count": 13,
+          "metadata_source": "r1-compatibility.json; financial PDF hash reverified",
+          "status": "NOT_TESTED_BLOCKED",
+          "text_equal_to_default": null,
+          "search_results": [],
+          "control_comparison": {
+            "status": "NOT_TESTED_BLOCKED",
+            "default_vs_pdfium": null
+          },
+          "evidence_paths": [],
+          "pages": [
+            {
+              "page": 1,
+              "status": "NOT_TESTED_BLOCKED",
+              "fixed_zoom_render": null,
+              "dense_text_crop": null,
+              "error_dialog_check": null,
+              "glyph_integrity": null,
+              "select_all_copy_text_equal_to_default": null,
+              "search_results": [],
+              "pdfium_matched_resolution_comparison": null
+            },
+            {
+              "page": 2,
+              "status": "NOT_TESTED_BLOCKED",
+              "fixed_zoom_render": null,
+              "dense_text_crop": null,
+              "error_dialog_check": null,
+              "glyph_integrity": null,
+              "select_all_copy_text_equal_to_default": null,
+              "search_results": [],
+              "pdfium_matched_resolution_comparison": null
+            },
+            {
+              "page": 3,
+              "status": "NOT_TESTED_BLOCKED",
+              "fixed_zoom_render": null,
+              "dense_text_crop": null,
+              "error_dialog_check": null,
+              "glyph_integrity": null,
+              "select_all_copy_text_equal_to_default": null,
+              "search_results": [],
+              "pdfium_matched_resolution_comparison": null
+            },
+            {
+              "page": 4,
+              "status": "NOT_TESTED_BLOCKED",
+              "fixed_zoom_render": null,
+              "dense_text_crop": null,
+              "error_dialog_check": null,
+              "glyph_integrity": null,
+              "select_all_copy_text_equal_to_default": null,
+              "search_results": [],
+              "pdfium_matched_resolution_comparison": null
+            },
+            {
+              "page": 5,
+              "status": "NOT_TESTED_BLOCKED",
+              "fixed_zoom_render": null,
+              "dense_text_crop": null,
+              "error_dialog_check": null,
+              "glyph_integrity": null,
+              "select_all_copy_text_equal_to_default": null,
+              "search_results": [],
+              "pdfium_matched_resolution_comparison": null
+            },
+            {
+              "page": 6,
+              "status": "NOT_TESTED_BLOCKED",
+              "fixed_zoom_render": null,
+              "dense_text_crop": null,
+              "error_dialog_check": null,
+              "glyph_integrity": null,
+              "select_all_copy_text_equal_to_default": null,
+              "search_results": [],
+              "pdfium_matched_resolution_comparison": null
+            },
+            {
+              "page": 7,
+              "status": "NOT_TESTED_BLOCKED",
+              "fixed_zoom_render": null,
+              "dense_text_crop": null,
+              "error_dialog_check": null,
+              "glyph_integrity": null,
+              "select_all_copy_text_equal_to_default": null,
+              "search_results": [],
+              "pdfium_matched_resolution_comparison": null
+            },
+            {
+              "page": 8,
+              "status": "NOT_TESTED_BLOCKED",
+              "fixed_zoom_render": null,
+              "dense_text_crop": null,
+              "error_dialog_check": null,
+              "glyph_integrity": null,
+              "select_all_copy_text_equal_to_default": null,
+              "search_results": [],
+              "pdfium_matched_resolution_comparison": null
+            },
+            {
+              "page": 9,
+              "status": "NOT_TESTED_BLOCKED",
+              "fixed_zoom_render": null,
+              "dense_text_crop": null,
+              "error_dialog_check": null,
+              "glyph_integrity": null,
+              "select_all_copy_text_equal_to_default": null,
+              "search_results": [],
+              "pdfium_matched_resolution_comparison": null
+            },
+            {
+              "page": 10,
+              "status": "NOT_TESTED_BLOCKED",
+              "fixed_zoom_render": null,
+              "dense_text_crop": null,
+              "error_dialog_check": null,
+              "glyph_integrity": null,
+              "select_all_copy_text_equal_to_default": null,
+              "search_results": [],
+              "pdfium_matched_resolution_comparison": null
+            },
+            {
+              "page": 11,
+              "status": "NOT_TESTED_BLOCKED",
+              "fixed_zoom_render": null,
+              "dense_text_crop": null,
+              "error_dialog_check": null,
+              "glyph_integrity": null,
+              "select_all_copy_text_equal_to_default": null,
+              "search_results": [],
+              "pdfium_matched_resolution_comparison": null
+            },
+            {
+              "page": 12,
+              "status": "NOT_TESTED_BLOCKED",
+              "fixed_zoom_render": null,
+              "dense_text_crop": null,
+              "error_dialog_check": null,
+              "glyph_integrity": null,
+              "select_all_copy_text_equal_to_default": null,
+              "search_results": [],
+              "pdfium_matched_resolution_comparison": null
+            },
+            {
+              "page": 13,
+              "status": "NOT_TESTED_BLOCKED",
+              "fixed_zoom_render": null,
+              "dense_text_crop": null,
+              "error_dialog_check": null,
+              "glyph_integrity": null,
+              "select_all_copy_text_equal_to_default": null,
+              "search_results": [],
+              "pdfium_matched_resolution_comparison": null
+            }
+          ]
+        },
+        {
+          "document": "financial",
+          "variant": "cover-1.5",
+          "pdf": "qualification/font04/local/R1-native/cover-1.5.pdf",
+          "expected_sha256": "dbdf30d38444985e9dd2839288329676865d93b0dd272cd69746a032aef8fb11",
+          "actual_sha256": "dbdf30d38444985e9dd2839288329676865d93b0dd272cd69746a032aef8fb11",
+          "page_count": 13,
+          "metadata_source": "r1-compatibility.json; financial PDF hash reverified",
+          "status": "NOT_TESTED_BLOCKED",
+          "text_equal_to_default": null,
+          "search_results": [],
+          "control_comparison": {
+            "status": "NOT_TESTED_BLOCKED",
+            "default_vs_pdfium": null
+          },
+          "evidence_paths": [],
+          "pages": [
+            {
+              "page": 1,
+              "status": "NOT_TESTED_BLOCKED",
+              "fixed_zoom_render": null,
+              "dense_text_crop": null,
+              "error_dialog_check": null,
+              "glyph_integrity": null,
+              "select_all_copy_text_equal_to_default": null,
+              "search_results": [],
+              "pdfium_matched_resolution_comparison": null
+            },
+            {
+              "page": 2,
+              "status": "NOT_TESTED_BLOCKED",
+              "fixed_zoom_render": null,
+              "dense_text_crop": null,
+              "error_dialog_check": null,
+              "glyph_integrity": null,
+              "select_all_copy_text_equal_to_default": null,
+              "search_results": [],
+              "pdfium_matched_resolution_comparison": null
+            },
+            {
+              "page": 3,
+              "status": "NOT_TESTED_BLOCKED",
+              "fixed_zoom_render": null,
+              "dense_text_crop": null,
+              "error_dialog_check": null,
+              "glyph_integrity": null,
+              "select_all_copy_text_equal_to_default": null,
+              "search_results": [],
+              "pdfium_matched_resolution_comparison": null
+            },
+            {
+              "page": 4,
+              "status": "NOT_TESTED_BLOCKED",
+              "fixed_zoom_render": null,
+              "dense_text_crop": null,
+              "error_dialog_check": null,
+              "glyph_integrity": null,
+              "select_all_copy_text_equal_to_default": null,
+              "search_results": [],
+              "pdfium_matched_resolution_comparison": null
+            },
+            {
+              "page": 5,
+              "status": "NOT_TESTED_BLOCKED",
+              "fixed_zoom_render": null,
+              "dense_text_crop": null,
+              "error_dialog_check": null,
+              "glyph_integrity": null,
+              "select_all_copy_text_equal_to_default": null,
+              "search_results": [],
+              "pdfium_matched_resolution_comparison": null
+            },
+            {
+              "page": 6,
+              "status": "NOT_TESTED_BLOCKED",
+              "fixed_zoom_render": null,
+              "dense_text_crop": null,
+              "error_dialog_check": null,
+              "glyph_integrity": null,
+              "select_all_copy_text_equal_to_default": null,
+              "search_results": [],
+              "pdfium_matched_resolution_comparison": null
+            },
+            {
+              "page": 7,
+              "status": "NOT_TESTED_BLOCKED",
+              "fixed_zoom_render": null,
+              "dense_text_crop": null,
+              "error_dialog_check": null,
+              "glyph_integrity": null,
+              "select_all_copy_text_equal_to_default": null,
+              "search_results": [],
+              "pdfium_matched_resolution_comparison": null
+            },
+            {
+              "page": 8,
+              "status": "NOT_TESTED_BLOCKED",
+              "fixed_zoom_render": null,
+              "dense_text_crop": null,
+              "error_dialog_check": null,
+              "glyph_integrity": null,
+              "select_all_copy_text_equal_to_default": null,
+              "search_results": [],
+              "pdfium_matched_resolution_comparison": null
+            },
+            {
+              "page": 9,
+              "status": "NOT_TESTED_BLOCKED",
+              "fixed_zoom_render": null,
+              "dense_text_crop": null,
+              "error_dialog_check": null,
+              "glyph_integrity": null,
+              "select_all_copy_text_equal_to_default": null,
+              "search_results": [],
+              "pdfium_matched_resolution_comparison": null
+            },
+            {
+              "page": 10,
+              "status": "NOT_TESTED_BLOCKED",
+              "fixed_zoom_render": null,
+              "dense_text_crop": null,
+              "error_dialog_check": null,
+              "glyph_integrity": null,
+              "select_all_copy_text_equal_to_default": null,
+              "search_results": [],
+              "pdfium_matched_resolution_comparison": null
+            },
+            {
+              "page": 11,
+              "status": "NOT_TESTED_BLOCKED",
+              "fixed_zoom_render": null,
+              "dense_text_crop": null,
+              "error_dialog_check": null,
+              "glyph_integrity": null,
+              "select_all_copy_text_equal_to_default": null,
+              "search_results": [],
+              "pdfium_matched_resolution_comparison": null
+            },
+            {
+              "page": 12,
+              "status": "NOT_TESTED_BLOCKED",
+              "fixed_zoom_render": null,
+              "dense_text_crop": null,
+              "error_dialog_check": null,
+              "glyph_integrity": null,
+              "select_all_copy_text_equal_to_default": null,
+              "search_results": [],
+              "pdfium_matched_resolution_comparison": null
+            },
+            {
+              "page": 13,
+              "status": "NOT_TESTED_BLOCKED",
+              "fixed_zoom_render": null,
+              "dense_text_crop": null,
+              "error_dialog_check": null,
+              "glyph_integrity": null,
+              "select_all_copy_text_equal_to_default": null,
+              "search_results": [],
+              "pdfium_matched_resolution_comparison": null
+            }
+          ]
+        },
+        {
+          "document": "mixed",
+          "variant": "default",
+          "pdf": "/data/coding/scanweave/qualification/font04/local/R2a/resume-optimized/mixed-off.pdf",
+          "expected_sha256": "c3f224bf18e5d2aeeba6e03de20000b84ff31893fc945e14882719b114d616d9",
+          "actual_sha256": null,
+          "page_count": 2,
+          "metadata_source": "public r2a-optimization.json; count from mixed source pdfinfo; R2a local output not accessed",
+          "status": "NOT_TESTED_BLOCKED",
+          "text_equal_to_default": null,
+          "search_results": [],
+          "control_comparison": {
+            "status": "NOT_TESTED_BLOCKED",
+            "default_vs_pdfium": null
+          },
+          "evidence_paths": [],
+          "pages": [
+            {
+              "page": 1,
+              "status": "NOT_TESTED_BLOCKED",
+              "fixed_zoom_render": null,
+              "dense_text_crop": null,
+              "error_dialog_check": null,
+              "glyph_integrity": null,
+              "select_all_copy_text_equal_to_default": null,
+              "search_results": [],
+              "pdfium_matched_resolution_comparison": null
+            },
+            {
+              "page": 2,
+              "status": "NOT_TESTED_BLOCKED",
+              "fixed_zoom_render": null,
+              "dense_text_crop": null,
+              "error_dialog_check": null,
+              "glyph_integrity": null,
+              "select_all_copy_text_equal_to_default": null,
+              "search_results": [],
+              "pdfium_matched_resolution_comparison": null,
+              "required_region": "with / member 518"
+            }
+          ]
+        },
+        {
+          "document": "mixed",
+          "variant": "cover-2.0",
+          "pdf": "/data/coding/scanweave/qualification/font04/local/R2a/resume-optimized/mixed-cover-2.0.pdf",
+          "expected_sha256": "6389a7c7662bda1d4012ecbcfe876587cc8fc96e48149ead33f8e9f791306b89",
+          "actual_sha256": null,
+          "page_count": 2,
+          "metadata_source": "public r2a-optimization.json; count from mixed source pdfinfo; R2a local output not accessed",
+          "status": "NOT_TESTED_BLOCKED",
+          "text_equal_to_default": null,
+          "search_results": [],
+          "control_comparison": {
+            "status": "NOT_TESTED_BLOCKED",
+            "default_vs_pdfium": null
+          },
+          "evidence_paths": [],
+          "pages": [
+            {
+              "page": 1,
+              "status": "NOT_TESTED_BLOCKED",
+              "fixed_zoom_render": null,
+              "dense_text_crop": null,
+              "error_dialog_check": null,
+              "glyph_integrity": null,
+              "select_all_copy_text_equal_to_default": null,
+              "search_results": [],
+              "pdfium_matched_resolution_comparison": null
+            },
+            {
+              "page": 2,
+              "status": "NOT_TESTED_BLOCKED",
+              "fixed_zoom_render": null,
+              "dense_text_crop": null,
+              "error_dialog_check": null,
+              "glyph_integrity": null,
+              "select_all_copy_text_equal_to_default": null,
+              "search_results": [],
+              "pdfium_matched_resolution_comparison": null,
+              "required_region": "with / member 518"
+            }
+          ]
+        }
+      ],
+      "evidence_paths": [
+        "qualification/font04/reader-evidence/acrobat-launch-crash.png",
+        "qualification/font04/reader-evidence/wine-failure-log.txt"
+      ],
+      "full_local_logs": [
+        "qualification/font04/local/reader/wineboot.log",
+        "qualification/font04/local/reader/install.log",
+        "qualification/font04/local/reader/setup-interactive.log",
+        "qualification/font04/local/reader/msiexec.log",
+        "qualification/font04/local/reader/sequential-console.log",
+        "qualification/font04/local/reader/launch.log",
+        "qualification/font04/local/reader/msi.log",
+        "qualification/font04/local/reader/patch.log",
+        "qualification/font04/local/reader/sequential-base.log",
+        "qualification/font04/local/reader/sequential-patch.log"
+      ],
+      "limitations": [
+        "No Reader PDF rendering, text copying, word searches, or PDFium control comparison was possible. Null fields mean untested, never pass.",
+        "No alternate viewer substituted. No product compatibility defect established.",
+        "Installer contains an older base MSI plus current MSP. Crashing rolled-back base is not a current Reader qualification."
+      ],
+      "scope": {
+        "P2_opened_generated_or_rendered": false,
+        "R2a_blind_package_or_key_accessed": false,
+        "R2a_local_directories_accessed": false,
+        "acrobat_XI_prefix_touched": false,
+        "display_99_used": false,
+        "product_code_changed": false
+      },
+      "record_commit": "068ad33"
+    }
+  ]
 }

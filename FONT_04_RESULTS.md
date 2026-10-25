@@ -374,50 +374,57 @@ Review: `/data/coding/scanweave/qualification/font04/local/R2a/blind-review/blin
 
 ## Reader check
 
-**BLOCKED (2026-10-25): current Reader could not be installed and run under Wine 9.0.**
-The owner-supplied Windows x64 installer for **26.002.22031** was verified before
-execution: SHA-256 `86e98feb3f2afa66656a85cbbc6fb71d6a3217ebf8fdc21f4d1a54d21cb45028`.
-This supersedes the historical BLOCKED-ON-OWNER installer request; the remaining
-blocker is the Wine installation/runtime failure.
+**BLOCKED (2026-10-25): the 32-bit retry also failed to install current Reader
+26.002.22031 under Wine 9.0.** Started on `research/font04-document-fonts` at
+`c9948817ea4f86a4349cc596c43bdb72f1c3ee6b`, as requested. The owner-supplied
+PE32/i386 installer `AcroRdrDC2600222031_en_US.exe` was verified before use:
+SHA-256 `9fa38ffe4aedba6b718d4d7634483196ae075160361e09633cf7d4c360b1a718`.
+The owner/reviewer supplied the Adobe signature/chain verification; its digest
+and provenance are recorded in the receipt.
 
-A fresh 64-bit prefix at `qualification/font04/local/reader/prefix` used Xvfb
-**:117**, 1600×1200, with Windows 10 compatibility. Updater installation was
-disabled with `DISABLE_ARM_SERVICE_INSTALL=1`; Adobe policy values `bUpdater=0`
-and `bUsageMeasurement=0` were set. No winetricks components or installer
-downloads were added. The first background X server ended with its launching
-shell; the retry kept a dedicated X server alive. Both the supplied bootstrap
-and extracted setup were tried. A final sequential retry stopped only this
-prefix's Wine server, installed the supplied base MSI successfully (exit 0),
-then applied the bundled `AcroRdrDCx64Upd2600222031.msp`.
+A new **win32** prefix at `qualification/font04/local/reader32/prefix` was
+successfully created, using dedicated Xvfb **:118**, 1600×1200, and Windows 10.
+Before any Reader launch, DWORD policies disabled protected mode, enhanced
+standalone security, AppContainer, Protected View, updater and usage measurement.
+Every exact key/value is recorded in `reader-check.json`; all ten writes exited 0.
+`DISABLE_ARM_SERVICE_INSTALL=1` was also passed to installation. No installer
+network downloads, winetricks or added components were used.
 
-The current-version update reproducibly failed:
+The supplied base `AcroRead.msi` installed successfully (exit **0**). Applying the
+required bundled `AcroRdrDCUpd2600222031.msp` failed (process exit **69**):
 
-- `ACTION_PatchFiles Failed to apply patch to file: L"AcroPDF.dll"`.
-- `PatchFiles` and `InstallExecute` returned MSI **1603**; the sequential patch
-  process exited **69**.
-- After rollback, launching `Acrobat.exe` without a PDF produced an unhandled
-  null-read page fault at `000000014005D30F` and Wine's “serious problem” dialog.
-  Wine also reported missing `ntlm_auth` and no NTLM support. This warning is
-  recorded, not established as the cause of the patch or launch failure.
+- `ACTION_PatchFiles Failed to apply patch to file: L"a3dutils.dll"`.
+- `PatchFiles` and `InstallExecute` returned MSI **1603**.
+- The rolled-back `AcroRd32.exe` file version, read from `VS_FIXEDFILEINFO`, was
+  **15.7.20033.2203**, below the required **26.002.22031**.
 
-The remaining executable's file version is **21.1.20135.27840**, the bundled
-older base, so its crash is not a test of an installed current Reader.
+A retry through bundled `setup.exe /sAll /rs /rps /msi` invoked the MSI with the
+bundled MSP through `PATCH=`, but failed on the same DLL and MSI 1603 (setup exit
+**67**). That rollback removed `AcroRd32.exe`. A diagnostic launch without a PDF
+exited **53** with `wine: failed to open ...: c0000135`; the executable was absent.
+No installed current Reader was verified. A base-only install does not count.
+
 **All five PDFs and all 43 pages remain untested in Reader**: financial default,
-cover-2.0 and cover-1.5, plus mixed default and cover-2.0. Fixed-zoom renders,
-dense crops (including mixed page 2 “with” / member 518), glyph checks, copied
-text equality, ten-word searches and matched PDFium/default controls are all
-explicitly unavailable, not passes. No substitute viewer was used and no PDF
-compatibility defect was established.
+cover-2.0 and cover-1.5, plus mixed default and cover-2.0. All five hashes were
+reverified successfully. Fixed-zoom renders, dense crops (including mixed page 2
+“with” / member 518), glyph/dialog checks, select-all copied text, ten-word
+searches and matched PDFium/default comparisons remain explicitly unavailable,
+not passes. Silent installation produced no error dialog; the captured desktop
+was blank, so no page or dialog crops can be supplied. No substitute viewer was
+used and no PDF compatibility defect was established.
 
-Receipt: [reader-check.json](qualification/font04/reader-check.json).
-Evidence: [crash dialog crop](qualification/font04/reader-evidence/acrobat-launch-crash.png)
-and [exact error transcript](qualification/font04/reader-evidence/wine-failure-log.txt).
-Full desktop captures, verbose MSI logs and prefix remain ignored under
-`qualification/font04/local/reader/`. Financial hashes were reverified; mixed
-hashes and output paths were taken from the public reporting receipt without
-accessing R2a local directories. The R2a blind package/key, Acrobat XI prefix,
-and display :99 were untouched. P2 was not opened, generated or rendered.
-No product code, PR or merge action. **STOP.**
+Receipt: [reader-check.json](qualification/font04/reader-check.json), with the
+complete x64 attempt at `068ad33` preserved under `previous_attempts`.
+Evidence: [exact 32-bit errors and MSI excerpts](qualification/font04/reader-evidence/reader32-failure-log.txt).
+Full verbose MSI logs and desktop captures remain ignored under
+`qualification/font04/local/reader32/`. The x64 attempt had failed on
+`AcroPDF.dll` with MSI 1603, then crashed its rolled-back 21.1 executable; its
+original evidence remains intact.
+
+Only the two authorized mixed output PDFs were read in R2a local storage, for
+hash verification. The R2a blind package/key, old Reader prefix, Acrobat XI prefix
+and display :99 were untouched. P2 was not opened, generated or rendered. No
+product code, PR or merge action. **STOP.**
 
 ## Review package fix
 
