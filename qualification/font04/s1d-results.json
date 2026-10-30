@@ -1,0 +1,3589 @@
+{
+ "schema": "font04-s1d-results-v1",
+ "produced_by": "reviewer (Claude)",
+ "oracle_use": "analysis only",
+ "binary_sha256": null,
+ "synthetic": {
+  "P2": [
+   {
+    "page": 0,
+    "dpi": 200,
+    "join_rate": 0.9611111111111111,
+    "cover-2.0": {
+     "census": {
+      "same-face": 21,
+      "visible": 10,
+      "egregious": 4,
+      "different-family": 14,
+      "same-family-different-style": 1
+     },
+     "economy": {
+      "substituted": 59,
+      "retired_outlines": 53,
+      "added_canonicals": 23,
+      "net_outlines_retired": 30,
+      "encoded_font_bytes_before": 79436,
+      "encoded_font_bytes_after": 74091,
+      "fallback": null,
+      "pdf_bytes": 346831
+     },
+     "visible_remaining": [
+      {
+       "oracle": "b04bd7c12b0703d357437c23",
+       "cls": "different-family",
+       "character": "t",
+       "member_face": "P052-Roman",
+       "canonical_face": "NimbusRoman-Regular",
+       "shape_xor": 0.3143424975157337,
+       "error": 0.11835859797464493
+      },
+      {
+       "oracle": "075087c2f8e3eeef70161e0a",
+       "cls": "different-family",
+       "character": "c",
+       "member_face": "NotoSansMono-Regular",
+       "canonical_face": "NimbusSans-Regular",
+       "shape_xor": 0.3401250289418847,
+       "error": 0.2238865402033775
+      },
+      {
+       "oracle": "87ec7710614266c06b2c2b1b",
+       "cls": "different-family",
+       "character": "e",
+       "member_face": "NotoSansMono-Regular",
+       "canonical_face": "NimbusSans-Regular",
+       "shape_xor": 0.24371993586317478,
+       "error": 0.22922978251667714
+      },
+      {
+       "oracle": "2da8432f96b0ee0cb2e32c46",
+       "cls": "different-family",
+       "character": "r",
+       "member_face": "NotoSansMono-Regular",
+       "canonical_face": "URWBookman-Light",
+       "shape_xor": 0.4710877476748888,
+       "error": 0.14406031825932836
+      },
+      {
+       "oracle": "2d3ee8b102acd3a0c5dac203",
+       "cls": "different-family",
+       "character": "a",
+       "member_face": "NotoSansMono-Bold",
+       "canonical_face": "NimbusSans-Bold",
+       "shape_xor": 0.23504486540378863,
+       "error": 0.07478350955941136
+      },
+      {
+       "oracle": "d170ac6fb99e9a09630607e2",
+       "cls": "different-family",
+       "character": "c",
+       "member_face": "NotoSansMono-Bold",
+       "canonical_face": "NimbusSans-Bold",
+       "shape_xor": 0.2862708430730871,
+       "error": 0.12618817106429336
+      },
+      {
+       "oracle": "9d395d8796724b6e636d0f86",
+       "cls": "different-family",
+       "character": "e",
+       "member_face": "URWBookman-Light",
+       "canonical_face": "NimbusSans-Regular",
+       "shape_xor": 0.4950762695501062,
+       "error": 0.21318860932912043
+      },
+      {
+       "oracle": "e795588843ed9c8b7b91e18f",
+       "cls": "same-family-different-style",
+       "character": "t",
+       "member_face": "URWBookman-Light",
+       "canonical_face": "URWBookman-Demi",
+       "shape_xor": 0.4913377388819432,
+       "error": 0.08081474320927282
+      },
+      {
+       "oracle": "1e45f1b2e302bfc9d23c5cea",
+       "cls": "different-family",
+       "character": "c",
+       "member_face": "NimbusRoman-Bold",
+       "canonical_face": "NimbusSans-Bold",
+       "shape_xor": 0.31112521150592215,
+       "error": 0.18377635347609186
+      },
+      {
+       "oracle": "a97011cc1d3fc2154d997f45",
+       "cls": "different-family",
+       "character": "s",
+       "member_face": "NimbusRoman-Bold",
+       "canonical_face": "NimbusSans-Bold",
+       "shape_xor": 0.4161024702653248,
+       "error": 0.21236965115570805
+      }
+     ]
+    },
+    "cover-2.0-ceiling": {
+     "census": {
+      "same-face": 18,
+      "visible": 2,
+      "egregious": 1,
+      "different-family": 4,
+      "same-family-different-style": 1
+     },
+     "economy": {
+      "substituted": 41,
+      "retired_outlines": 36,
+      "added_canonicals": 18,
+      "net_outlines_retired": 18,
+      "encoded_font_bytes_before": 79436,
+      "encoded_font_bytes_after": 76353,
+      "fallback": null,
+      "pdf_bytes": 348904
+     },
+     "visible_remaining": [
+      {
+       "oracle": "2d3ee8b102acd3a0c5dac203",
+       "cls": "different-family",
+       "character": "a",
+       "member_face": "NotoSansMono-Bold",
+       "canonical_face": "NimbusSans-Bold",
+       "shape_xor": 0.23504486540378863,
+       "error": 0.07478350955941136
+      },
+      {
+       "oracle": "396eed943cc00bdff305231f",
+       "cls": "same-family-different-style",
+       "character": "t",
+       "member_face": "URWBookman-Demi",
+       "canonical_face": "URWBookman-Light",
+       "shape_xor": 0.4852724594992636,
+       "error": 0.0660101514981421
+      }
+     ]
+    },
+    "default_pdf_bytes": 351126
+   },
+   {
+    "page": 1,
+    "dpi": 200,
+    "join_rate": 0.966824644549763,
+    "cover-2.0": {
+     "census": {
+      "different-family": 7,
+      "visible": 8,
+      "egregious": 2,
+      "same-face": 18,
+      "different-character": 2
+     },
+     "economy": {
+      "substituted": 47,
+      "retired_outlines": 46,
+      "added_canonicals": 20,
+      "net_outlines_retired": 26,
+      "encoded_font_bytes_before": 97113,
+      "encoded_font_bytes_after": 91852,
+      "fallback": null,
+      "pdf_bytes": 419174
+     },
+     "visible_remaining": [
+      {
+       "oracle": "0df9def87662008d8b2f5252",
+       "cls": "different-character",
+       "character": "l",
+       "member_face": "P052-Roman",
+       "canonical_face": "P052-Roman",
+       "shape_xor": null,
+       "error": 0.19303573052198617
+      },
+      {
+       "oracle": "5d3c740b0235762dac88702e",
+       "cls": "different-family",
+       "character": "e",
+       "member_face": "NotoSansMono-Regular",
+       "canonical_face": "URWBookman-Light",
+       "shape_xor": 0.3814977973568282,
+       "error": 0.21696832650376893
+      },
+      {
+       "oracle": "32169789a6503760287f2a15",
+       "cls": "different-family",
+       "character": "1",
+       "member_face": "NotoSansMono-Regular",
+       "canonical_face": "URWBookman-Light",
+       "shape_xor": 0.34013756378966054,
+       "error": 0.19206557716818193
+      },
+      {
+       "oracle": "db78d543337d7ff83787b5ff",
+       "cls": "different-character",
+       "character": "l",
+       "member_face": "NotoSansMono-Regular",
+       "canonical_face": "NotoSansMono-Regular",
+       "shape_xor": null,
+       "error": 0.2972939729210843
+      },
+      {
+       "oracle": "7041c11e7e9c39d5d55aaa2f",
+       "cls": "different-family",
+       "character": "e",
+       "member_face": "URWBookman-Light",
+       "canonical_face": "NotoSansMono-Regular",
+       "shape_xor": 0.3850092156461192,
+       "error": 0.2608108242033502
+      },
+      {
+       "oracle": "5ca91db8945824bd68c0ea77",
+       "cls": "different-family",
+       "character": "n",
+       "member_face": "P052-Italic",
+       "canonical_face": "NotoSansMono-Bold",
+       "shape_xor": 0.5610030541713551,
+       "error": 0.23820229795397174
+      },
+      {
+       "oracle": "ba8fd37ea3547da28dcfc997",
+       "cls": "different-family",
+       "character": "c",
+       "member_face": "NotoSansMono-Bold",
+       "canonical_face": "P052-Bold",
+       "shape_xor": 0.2531895777178796,
+       "error": 0.17539893913856952
+      },
+      {
+       "oracle": "b61195a5a0c91cc314630c68",
+       "cls": "different-family",
+       "character": "1",
+       "member_face": "NimbusSans-Regular",
+       "canonical_face": "P052-Roman",
+       "shape_xor": 0.7998827437951925,
+       "error": 0.2132962315716777
+      }
+     ]
+    },
+    "cover-2.0-ceiling": {
+     "census": {
+      "different-family": 1,
+      "visible": 0,
+      "egregious": 0,
+      "same-face": 13
+     },
+     "economy": {
+      "substituted": 27,
+      "retired_outlines": 25,
+      "added_canonicals": 13,
+      "net_outlines_retired": 12,
+      "encoded_font_bytes_before": 97113,
+      "encoded_font_bytes_after": 94479,
+      "fallback": null,
+      "pdf_bytes": 421753
+     },
+     "visible_remaining": []
+    },
+    "default_pdf_bytes": 423847
+   },
+   {
+    "page": 2,
+    "dpi": 200,
+    "join_rate": 0.9796954314720813,
+    "cover-2.0": {
+     "census": {
+      "different-family": 23,
+      "visible": 20,
+      "egregious": 3,
+      "same-face": 25
+     },
+     "economy": {
+      "substituted": 79,
+      "retired_outlines": 73,
+      "added_canonicals": 31,
+      "net_outlines_retired": 42,
+      "encoded_font_bytes_before": 82800,
+      "encoded_font_bytes_after": 75273,
+      "fallback": null,
+      "pdf_bytes": 389103
+     },
+     "visible_remaining": [
+      {
+       "oracle": "126cfc2f0846b4f281524884",
+       "cls": "different-family",
+       "character": "m",
+       "member_face": "NimbusSans-Bold",
+       "canonical_face": "NimbusRoman-Bold",
+       "shape_xor": 0.20840445419816306,
+       "error": 0.10976680167389496
+      },
+      {
+       "oracle": "d011624498e22b74eab64195",
+       "cls": "different-family",
+       "character": "r",
+       "member_face": "NimbusRoman-Bold",
+       "canonical_face": "URWBookman-Demi",
+       "shape_xor": 0.2681190681622088,
+       "error": 0.310505026813227
+      },
+      {
+       "oracle": "0805e094f7a4266dec4de4fe",
+       "cls": "different-family",
+       "character": "a",
+       "member_face": "NimbusSans-Regular",
+       "canonical_face": "NotoSansMono-Regular",
+       "shape_xor": 0.3664027324949542,
+       "error": 0.1463355571643395
+      },
+      {
+       "oracle": "77a773f55289c7c9901e4675",
+       "cls": "different-family",
+       "character": "n",
+       "member_face": "NimbusSans-Regular",
+       "canonical_face": "NotoSansMono-Regular",
+       "shape_xor": 0.20029148448886114,
+       "error": 0.04240024149927577
+      },
+      {
+       "oracle": "1beebc7b46c0dc6029baa01c",
+       "cls": "different-family",
+       "character": "e",
+       "member_face": "NimbusSans-Regular",
+       "canonical_face": "NotoSansMono-Regular",
+       "shape_xor": 0.2529074529074529,
+       "error": 0.09542553965184294
+      },
+      {
+       "oracle": "63aa93f47d36647766a1bc7a",
+       "cls": "different-family",
+       "character": "i",
+       "member_face": "URWBookman-Demi",
+       "canonical_face": "NimbusRoman-Bold",
+       "shape_xor": 0.259703196347032,
+       "error": 0.13839686582563668
+      },
+      {
+       "oracle": "409cd8fac08e5203545a3821",
+       "cls": "different-family",
+       "character": "c",
+       "member_face": "NimbusRoman-Regular",
+       "canonical_face": "NimbusSans-Regular",
+       "shape_xor": 0.28707037643207856,
+       "error": 0.12296648966893983
+      },
+      {
+       "oracle": "2bf6d7b48de59f3143f1afba",
+       "cls": "different-family",
+       "character": "n",
+       "member_face": "NimbusRoman-Regular",
+       "canonical_face": "NotoSansMono-Regular",
+       "shape_xor": 0.40568897178829566,
+       "error": 0.22398379815182054
+      },
+      {
+       "oracle": "6a6c25125096b7fe5357ab72",
+       "cls": "different-family",
+       "character": "r",
+       "member_face": "URWBookman-Demi",
+       "canonical_face": "NimbusRoman-Bold",
+       "shape_xor": 0.2609430772120984,
+       "error": 0.18577837510155745
+      },
+      {
+       "oracle": "bea8ff5543cf436ca8dd5f32",
+       "cls": "different-family",
+       "character": "n",
+       "member_face": "NimbusSans-Regular",
+       "canonical_face": "NotoSansMono-Regular",
+       "shape_xor": 0.20029148448886114,
+       "error": 0.08050163703349084
+      },
+      {
+       "oracle": "10cab16eadf3158d0a7f792f",
+       "cls": "different-family",
+       "character": "u",
+       "member_face": "NimbusSans-Regular",
+       "canonical_face": "NotoSansMono-Regular",
+       "shape_xor": 0.2743449354712554,
+       "error": 0.1025693418371964
+      },
+      {
+       "oracle": "a93afc7f149cddfb6a20a96f",
+       "cls": "different-family",
+       "character": "t",
+       "member_face": "P052-Roman",
+       "canonical_face": "NimbusRoman-Bold",
+       "shape_xor": 0.41448222164547105,
+       "error": 0.190096590988154
+      },
+      {
+       "oracle": "dd6d555b6ab607f39d2d3115",
+       "cls": "different-family",
+       "character": "s",
+       "member_face": "P052-Roman",
+       "canonical_face": "NotoSansMono-Regular",
+       "shape_xor": 0.33568406205923834,
+       "error": 0.2451585569374199
+      },
+      {
+       "oracle": "dda3292da93db9263ad97ab5",
+       "cls": "different-family",
+       "character": "s",
+       "member_face": "URWBookman-Demi",
+       "canonical_face": "NimbusSans-Regular",
+       "shape_xor": 0.43280691299165674,
+       "error": 0.0746447841575999
+      },
+      {
+       "oracle": "dc46085cbb0f2e1b5364930e",
+       "cls": "different-family",
+       "character": "t",
+       "member_face": "NimbusSans-Bold",
+       "canonical_face": "NimbusRoman-Bold",
+       "shape_xor": 0.3515469513298354,
+       "error": 0.12172687774954603
+      },
+      {
+       "oracle": "97746d1cb3004a47c00231cc",
+       "cls": "different-family",
+       "character": "s",
+       "member_face": "NimbusRoman-Bold",
+       "canonical_face": "NotoSansMono-Regular",
+       "shape_xor": 0.385012285012285,
+       "error": 0.16988364521599553
+      },
+      {
+       "oracle": "a7dc0a6630644edd16654fea",
+       "cls": "different-family",
+       "character": "n",
+       "member_face": "NotoSansMono-Bold",
+       "canonical_face": "NimbusRoman-Bold",
+       "shape_xor": 0.2308896111713013,
+       "error": 0.12475821772004662
+      },
+      {
+       "oracle": "08eafbc54d2186e701e7cc9f",
+       "cls": "different-family",
+       "character": "T",
+       "member_face": "P052-Roman",
+       "canonical_face": "NimbusSans-Regular",
+       "shape_xor": 0.22918942538780862,
+       "error": 0.09919446710746979
+      },
+      {
+       "oracle": "223ff5d97e5f3ddbc928fb66",
+       "cls": "different-family",
+       "character": "1",
+       "member_face": "P052-Roman",
+       "canonical_face": "NotoSansMono-Regular",
+       "shape_xor": 0.20633631194151097,
+       "error": 0.09438803921162207
+      },
+      {
+       "oracle": "98794e44e0397580f40cc2df",
+       "cls": "different-family",
+       "character": "r",
+       "member_face": "NotoSansMono-Bold",
+       "canonical_face": "NimbusRoman-Bold",
+       "shape_xor": 0.39776733254994123,
+       "error": 0.202075943850008
+      }
+     ]
+    },
+    "cover-2.0-ceiling": {
+     "census": {
+      "same-face": 20,
+      "visible": 2,
+      "egregious": 1,
+      "different-family": 5
+     },
+     "economy": {
+      "substituted": 44,
+      "retired_outlines": 39,
+      "added_canonicals": 19,
+      "net_outlines_retired": 20,
+      "encoded_font_bytes_before": 82800,
+      "encoded_font_bytes_after": 78895,
+      "fallback": null,
+      "pdf_bytes": 392639
+     },
+     "visible_remaining": [
+      {
+       "oracle": "77a773f55289c7c9901e4675",
+       "cls": "different-family",
+       "character": "n",
+       "member_face": "NimbusSans-Regular",
+       "canonical_face": "NotoSansMono-Regular",
+       "shape_xor": 0.20029148448886114,
+       "error": 0.04240024149927577
+      },
+      {
+       "oracle": "dda3292da93db9263ad97ab5",
+       "cls": "different-family",
+       "character": "s",
+       "member_face": "URWBookman-Demi",
+       "canonical_face": "NimbusSans-Regular",
+       "shape_xor": 0.43280691299165674,
+       "error": 0.0746447841575999
+      }
+     ]
+    },
+    "default_pdf_bytes": 395569
+   },
+   {
+    "page": 3,
+    "dpi": 300,
+    "join_rate": 0.955456570155902,
+    "cover-2.0": {
+     "census": {
+      "different-family": 19,
+      "visible": 14,
+      "egregious": 2,
+      "same-face": 38,
+      "different-character": 1
+     },
+     "economy": {
+      "substituted": 87,
+      "retired_outlines": 71,
+      "added_canonicals": 29,
+      "net_outlines_retired": 42,
+      "encoded_font_bytes_before": 99037,
+      "encoded_font_bytes_after": 89162,
+      "fallback": null,
+      "pdf_bytes": 227278
+     },
+     "visible_remaining": [
+      {
+       "oracle": "123bcdc3729ad89f110e71bb",
+       "cls": "different-family",
+       "character": "a",
+       "member_face": "NotoSansMono-Regular",
+       "canonical_face": "NimbusSans-Regular",
+       "shape_xor": 0.35486591330747175,
+       "error": 0.07242187146071145
+      },
+      {
+       "oracle": "c51bdea2a3120bbe227ff8f3",
+       "cls": "different-family",
+       "character": "a",
+       "member_face": "NotoSansMono-Regular",
+       "canonical_face": "NimbusSans-Regular",
+       "shape_xor": 0.35486591330747175,
+       "error": 0.07245276122649418
+      },
+      {
+       "oracle": "0b13d90a3e5d2850e985eed1",
+       "cls": "different-family",
+       "character": "i",
+       "member_face": "NimbusRoman-Bold",
+       "canonical_face": "P052-Bold",
+       "shape_xor": 0.2269179004037685,
+       "error": 0.07244856871229341
+      },
+      {
+       "oracle": "7cf80014ff8ae5ee6d2e0f33",
+       "cls": "different-family",
+       "character": "e",
+       "member_face": "NimbusRoman-Bold",
+       "canonical_face": "P052-Bold",
+       "shape_xor": 0.24421965317919075,
+       "error": 0.15216553038595518
+      },
+      {
+       "oracle": "65a2c76f6eb14bd35d790fac",
+       "cls": "different-family",
+       "character": "a",
+       "member_face": "NotoSansMono-Regular",
+       "canonical_face": "NimbusSans-Regular",
+       "shape_xor": 0.35486591330747175,
+       "error": 0.07577481578873821
+      },
+      {
+       "oracle": "7f0cfccfb688d29135201a0a",
+       "cls": "different-family",
+       "character": "a",
+       "member_face": "URWBookman-Light",
+       "canonical_face": "NimbusSans-Regular",
+       "shape_xor": 0.41833115549747996,
+       "error": 0.09232989504393442
+      },
+      {
+       "oracle": "4a199d9513e38faa372f2b62",
+       "cls": "different-character",
+       "character": "1",
+       "member_face": "NimbusRoman-Regular",
+       "canonical_face": "NimbusRoman-Regular",
+       "shape_xor": null,
+       "error": 0.0414815453158439
+      },
+      {
+       "oracle": "41120a34eb0a2971c1408489",
+       "cls": "different-family",
+       "character": "t",
+       "member_face": "NimbusRoman-Regular",
+       "canonical_face": "NimbusSans-Regular",
+       "shape_xor": 0.4112218530823182,
+       "error": 0.11263615359824379
+      },
+      {
+       "oracle": "3f14345ca658f8abce3090a6",
+       "cls": "different-family",
+       "character": "8",
+       "member_face": "NimbusRoman-Regular",
+       "canonical_face": "NotoSansMono-Regular",
+       "shape_xor": 0.39387204318145735,
+       "error": 0.24413895011751005
+      },
+      {
+       "oracle": "4696c02a39e4cdae13816f00",
+       "cls": "different-family",
+       "character": "8",
+       "member_face": "NimbusRoman-Regular",
+       "canonical_face": "NotoSansMono-Regular",
+       "shape_xor": 0.39387204318145735,
+       "error": 0.17587290341881553
+      },
+      {
+       "oracle": "a1a5b1c629bcaaccb19a8ede",
+       "cls": "different-family",
+       "character": "e",
+       "member_face": "NotoSansMono-Regular",
+       "canonical_face": "NimbusSans-Regular",
+       "shape_xor": 0.24371993586317478,
+       "error": 0.08545205573336064
+      },
+      {
+       "oracle": "05f4d708f9ddc6f035366405",
+       "cls": "different-family",
+       "character": "n",
+       "member_face": "NimbusSans-Regular",
+       "canonical_face": "NotoSansMono-Regular",
+       "shape_xor": 0.20029148448886114,
+       "error": 0.07813761040530406
+      },
+      {
+       "oracle": "aa7745f50e8b08957906e501",
+       "cls": "different-family",
+       "character": "a",
+       "member_face": "NotoSansMono-Regular",
+       "canonical_face": "NimbusSans-Regular",
+       "shape_xor": 0.35486591330747175,
+       "error": 0.07284613476197825
+      },
+      {
+       "oracle": "2fa5110378eaa0dcef75a11a",
+       "cls": "different-family",
+       "character": "e",
+       "member_face": "NimbusRoman-Bold",
+       "canonical_face": "P052-Bold",
+       "shape_xor": 0.24421965317919075,
+       "error": 0.12909626271340396
+      }
+     ]
+    },
+    "cover-2.0-ceiling": {
+     "census": {
+      "different-family": 11,
+      "visible": 7,
+      "egregious": 0,
+      "same-face": 42,
+      "different-character": 1
+     },
+     "economy": {
+      "substituted": 85,
+      "retired_outlines": 64,
+      "added_canonicals": 31,
+      "net_outlines_retired": 33,
+      "encoded_font_bytes_before": 99037,
+      "encoded_font_bytes_after": 90729,
+      "fallback": null,
+      "pdf_bytes": 229018
+     },
+     "visible_remaining": [
+      {
+       "oracle": "123bcdc3729ad89f110e71bb",
+       "cls": "different-family",
+       "character": "a",
+       "member_face": "NotoSansMono-Regular",
+       "canonical_face": "NimbusSans-Regular",
+       "shape_xor": 0.35486591330747175,
+       "error": 0.07242187146071145
+      },
+      {
+       "oracle": "c51bdea2a3120bbe227ff8f3",
+       "cls": "different-family",
+       "character": "a",
+       "member_face": "NotoSansMono-Regular",
+       "canonical_face": "NimbusSans-Regular",
+       "shape_xor": 0.35486591330747175,
+       "error": 0.07245276122649418
+      },
+      {
+       "oracle": "0b13d90a3e5d2850e985eed1",
+       "cls": "different-family",
+       "character": "i",
+       "member_face": "NimbusRoman-Bold",
+       "canonical_face": "P052-Bold",
+       "shape_xor": 0.2269179004037685,
+       "error": 0.07244856871229341
+      },
+      {
+       "oracle": "65a2c76f6eb14bd35d790fac",
+       "cls": "different-family",
+       "character": "a",
+       "member_face": "NotoSansMono-Regular",
+       "canonical_face": "NimbusSans-Regular",
+       "shape_xor": 0.35486591330747175,
+       "error": 0.07577481578873821
+      },
+      {
+       "oracle": "4a199d9513e38faa372f2b62",
+       "cls": "different-character",
+       "character": "1",
+       "member_face": "NimbusRoman-Regular",
+       "canonical_face": "NimbusRoman-Regular",
+       "shape_xor": null,
+       "error": 0.0414815453158439
+      },
+      {
+       "oracle": "05f4d708f9ddc6f035366405",
+       "cls": "different-family",
+       "character": "n",
+       "member_face": "NimbusSans-Regular",
+       "canonical_face": "NotoSansMono-Regular",
+       "shape_xor": 0.20029148448886114,
+       "error": 0.07813761040530406
+      },
+      {
+       "oracle": "aa7745f50e8b08957906e501",
+       "cls": "different-family",
+       "character": "a",
+       "member_face": "NotoSansMono-Regular",
+       "canonical_face": "NimbusSans-Regular",
+       "shape_xor": 0.35486591330747175,
+       "error": 0.07284613476197825
+      }
+     ]
+    },
+    "default_pdf_bytes": 235970
+   },
+   {
+    "page": 4,
+    "dpi": 300,
+    "join_rate": 0.979002624671916,
+    "cover-2.0": {
+     "census": {
+      "different-family": 5,
+      "visible": 4,
+      "egregious": 2,
+      "same-face": 11
+     },
+     "economy": {
+      "substituted": 29,
+      "retired_outlines": 27,
+      "added_canonicals": 13,
+      "net_outlines_retired": 14,
+      "encoded_font_bytes_before": 96964,
+      "encoded_font_bytes_after": 93279,
+      "fallback": null,
+      "pdf_bytes": 216012
+     },
+     "visible_remaining": [
+      {
+       "oracle": "e523cd03a5d4160467d23804",
+       "cls": "different-family",
+       "character": "o",
+       "member_face": "NotoSansMono-Regular",
+       "canonical_face": "URWBookman-Light",
+       "shape_xor": 0.22059939301972686,
+       "error": 0.056865745103157124
+      },
+      {
+       "oracle": "b6ac9c0cf02f0160d5e5e449",
+       "cls": "different-family",
+       "character": "r",
+       "member_face": "NimbusRoman-Bold",
+       "canonical_face": "NotoSansMono-Bold",
+       "shape_xor": 0.40279417552144825,
+       "error": 0.172884081285046
+      },
+      {
+       "oracle": "145c50d8f36becf482c07930",
+       "cls": "different-family",
+       "character": "e",
+       "member_face": "P052-Bold",
+       "canonical_face": "NimbusRoman-Bold",
+       "shape_xor": 0.24153976311336717,
+       "error": 0.05131121991601541
+      },
+      {
+       "oracle": "08c4794edfd063657811e59d",
+       "cls": "different-family",
+       "character": "r",
+       "member_face": "NimbusRoman-Bold",
+       "canonical_face": "NotoSansMono-Bold",
+       "shape_xor": 0.40279417552144825,
+       "error": 0.17607048602352934
+      }
+     ]
+    },
+    "cover-2.0-ceiling": {
+     "census": {
+      "different-family": 3,
+      "visible": 2,
+      "egregious": 0,
+      "same-face": 14
+     },
+     "economy": {
+      "substituted": 31,
+      "retired_outlines": 28,
+      "added_canonicals": 14,
+      "net_outlines_retired": 14,
+      "encoded_font_bytes_before": 96964,
+      "encoded_font_bytes_after": 93321,
+      "fallback": null,
+      "pdf_bytes": 216358
+     },
+     "visible_remaining": [
+      {
+       "oracle": "e523cd03a5d4160467d23804",
+       "cls": "different-family",
+       "character": "o",
+       "member_face": "NotoSansMono-Regular",
+       "canonical_face": "URWBookman-Light",
+       "shape_xor": 0.22059939301972686,
+       "error": 0.056865745103157124
+      },
+      {
+       "oracle": "145c50d8f36becf482c07930",
+       "cls": "different-family",
+       "character": "e",
+       "member_face": "P052-Bold",
+       "canonical_face": "NimbusRoman-Bold",
+       "shape_xor": 0.24153976311336717,
+       "error": 0.05131121991601541
+      }
+     ]
+    },
+    "default_pdf_bytes": 219351
+   },
+   {
+    "page": 5,
+    "dpi": 300,
+    "join_rate": 0.9797421731123389,
+    "cover-2.0": {
+     "census": {
+      "same-face": 39,
+      "visible": 13,
+      "egregious": 2,
+      "different-family": 22,
+      "same-family-different-style": 1
+     },
+     "economy": {
+      "substituted": 100,
+      "retired_outlines": 82,
+      "added_canonicals": 38,
+      "net_outlines_retired": 44,
+      "encoded_font_bytes_before": 124259,
+      "encoded_font_bytes_after": 114626,
+      "fallback": null,
+      "pdf_bytes": 531643
+     },
+     "visible_remaining": [
+      {
+       "oracle": "fd3e7851c2f6fcef9320a2a8",
+       "cls": "different-family",
+       "character": "c",
+       "member_face": "P052-Bold",
+       "canonical_face": "NotoSansMono-Bold",
+       "shape_xor": 0.25798872180451127,
+       "error": 0.13189703841244943
+      },
+      {
+       "oracle": "a901af9378425a0e821d6806",
+       "cls": "different-family",
+       "character": "e",
+       "member_face": "P052-Bold",
+       "canonical_face": "NotoSansMono-Bold",
+       "shape_xor": 0.2466222302287876,
+       "error": 0.14159849001641908
+      },
+      {
+       "oracle": "9b597be92323fb09a9e38670",
+       "cls": "different-family",
+       "character": "e",
+       "member_face": "P052-Bold",
+       "canonical_face": "NotoSansMono-Bold",
+       "shape_xor": 0.2466222302287876,
+       "error": 0.13260759540834022
+      },
+      {
+       "oracle": "a079e9d564586aac0496c299",
+       "cls": "different-family",
+       "character": "r",
+       "member_face": "P052-Bold",
+       "canonical_face": "NimbusRoman-Bold",
+       "shape_xor": 0.356817637191469,
+       "error": 0.10173763610331872
+      },
+      {
+       "oracle": "ce1f116542e6712d328df936",
+       "cls": "different-family",
+       "character": "i",
+       "member_face": "P052-Bold",
+       "canonical_face": "NimbusRoman-Bold",
+       "shape_xor": 0.22286723876829884,
+       "error": 0.08223093727164257
+      },
+      {
+       "oracle": "27d5812b24bdd60a864005cc",
+       "cls": "different-family",
+       "character": "e",
+       "member_face": "NimbusRoman-Regular",
+       "canonical_face": "URWBookman-Light",
+       "shape_xor": 0.36418400876232204,
+       "error": 0.10042900994317162
+      },
+      {
+       "oracle": "823bb53edc9846addf12479b",
+       "cls": "different-family",
+       "character": "c",
+       "member_face": "P052-Roman",
+       "canonical_face": "URWBookman-Light",
+       "shape_xor": 0.47703081232493,
+       "error": 0.181178437432281
+      },
+      {
+       "oracle": "1df99e41ca9e77a05033c899",
+       "cls": "different-family",
+       "character": "f",
+       "member_face": "P052-Roman",
+       "canonical_face": "NimbusRoman-Regular",
+       "shape_xor": 0.5451559934318555,
+       "error": 0.16910155447311825
+      },
+      {
+       "oracle": "b740ecd0a4712a946a2c79d5",
+       "cls": "same-family-different-style",
+       "character": "e",
+       "member_face": "NotoSansMono-Regular",
+       "canonical_face": "NotoSansMono-Bold",
+       "shape_xor": 0.27653712296983757,
+       "error": 0.06343797581916755
+      },
+      {
+       "oracle": "56feed0d559a4767c486f098",
+       "cls": "different-family",
+       "character": "8",
+       "member_face": "NotoSansMono-Regular",
+       "canonical_face": "NimbusSans-Bold",
+       "shape_xor": 0.28440579710144925,
+       "error": 0.06415089034040498
+      },
+      {
+       "oracle": "6da115685bc80549aa094a6c",
+       "cls": "different-family",
+       "character": "r",
+       "member_face": "NimbusRoman-Regular",
+       "canonical_face": "P052-Roman",
+       "shape_xor": 0.23198109491925956,
+       "error": 0.09917725514987738
+      },
+      {
+       "oracle": "ee42e3b4c0045b1eaf16eb99",
+       "cls": "different-family",
+       "character": "e",
+       "member_face": "P052-Roman",
+       "canonical_face": "NimbusSans-Regular",
+       "shape_xor": 0.3501259445843829,
+       "error": 0.13310981221959448
+      },
+      {
+       "oracle": "6358dea792c535198bfe774d",
+       "cls": "different-family",
+       "character": "2",
+       "member_face": "P052-Roman",
+       "canonical_face": "URWBookman-Light",
+       "shape_xor": 0.39523730775591204,
+       "error": 0.20809983967428672
+      }
+     ]
+    },
+    "cover-2.0-ceiling": {
+     "census": {
+      "same-face": 45,
+      "visible": 2,
+      "egregious": 0,
+      "different-family": 11,
+      "same-family-different-style": 1
+     },
+     "economy": {
+      "substituted": 94,
+      "retired_outlines": 72,
+      "added_canonicals": 37,
+      "net_outlines_retired": 35,
+      "encoded_font_bytes_before": 124259,
+      "encoded_font_bytes_after": 116711,
+      "fallback": null,
+      "pdf_bytes": 533705
+     },
+     "visible_remaining": [
+      {
+       "oracle": "b740ecd0a4712a946a2c79d5",
+       "cls": "same-family-different-style",
+       "character": "e",
+       "member_face": "NotoSansMono-Regular",
+       "canonical_face": "NotoSansMono-Bold",
+       "shape_xor": 0.27653712296983757,
+       "error": 0.06343797581916755
+      },
+      {
+       "oracle": "56feed0d559a4767c486f098",
+       "cls": "different-family",
+       "character": "8",
+       "member_face": "NotoSansMono-Regular",
+       "canonical_face": "NimbusSans-Bold",
+       "shape_xor": 0.28440579710144925,
+       "error": 0.06415089034040498
+      }
+     ]
+    },
+    "default_pdf_bytes": 539438
+   },
+   {
+    "page": 6,
+    "dpi": 600,
+    "join_rate": 0.9576470588235294,
+    "cover-2.0": {
+     "census": {
+      "different-family": 30,
+      "visible": 29,
+      "egregious": 7,
+      "same-face": 32,
+      "different-character": 1
+     },
+     "economy": {
+      "substituted": 105,
+      "retired_outlines": 83,
+      "added_canonicals": 42,
+      "net_outlines_retired": 41,
+      "encoded_font_bytes_before": 110008,
+      "encoded_font_bytes_after": 98511,
+      "fallback": null,
+      "pdf_bytes": 1049701
+     },
+     "visible_remaining": [
+      {
+       "oracle": "fdbe7a6d25b23c6df6a27d26",
+       "cls": "different-family",
+       "character": "e",
+       "member_face": "NotoSansMono-Regular",
+       "canonical_face": "P052-Bold",
+       "shape_xor": 0.25802695059058395,
+       "error": 0.14792621711304438
+      },
+      {
+       "oracle": "af6eecb31c6094e2df1f09ed",
+       "cls": "different-family",
+       "character": "i",
+       "member_face": "URWBookman-Light",
+       "canonical_face": "P052-Bold",
+       "shape_xor": 0.28025078369905954,
+       "error": 0.15977991730654797
+      },
+      {
+       "oracle": "2c8efcc3b29bb3a9345f568c",
+       "cls": "different-family",
+       "character": "8",
+       "member_face": "URWBookman-Light",
+       "canonical_face": "NotoSansMono-Regular",
+       "shape_xor": 0.48984453360080243,
+       "error": 0.37440958937437013
+      },
+      {
+       "oracle": "b01d6e7902c3cda9c3433d97",
+       "cls": "different-family",
+       "character": "e",
+       "member_face": "NimbusSans-Regular",
+       "canonical_face": "NotoSansMono-Regular",
+       "shape_xor": 0.2529074529074529,
+       "error": 0.15909475146019597
+      },
+      {
+       "oracle": "ce2a28a972ea0b76da540a87",
+       "cls": "different-family",
+       "character": "6",
+       "member_face": "NimbusSans-Bold",
+       "canonical_face": "URWBookman-Demi",
+       "shape_xor": 0.36611083864639526,
+       "error": 0.18686923936874142
+      },
+      {
+       "oracle": "23e8624ba28601c923a19afc",
+       "cls": "different-family",
+       "character": "e",
+       "member_face": "P052-Bold",
+       "canonical_face": "NimbusSans-Bold",
+       "shape_xor": 0.2661631976422914,
+       "error": 0.15784750770149633
+      },
+      {
+       "oracle": "900d0c69532fa30ab29d452c",
+       "cls": "different-family",
+       "character": "r",
+       "member_face": "NimbusRoman-Regular",
+       "canonical_face": "P052-Roman",
+       "shape_xor": 0.23198109491925956,
+       "error": 0.07644323282541417
+      },
+      {
+       "oracle": "2a4c8a6f131ec1cd30573c4c",
+       "cls": "different-family",
+       "character": "s",
+       "member_face": "NimbusRoman-Regular",
+       "canonical_face": "P052-Roman",
+       "shape_xor": 0.4023173479240425,
+       "error": 0.2562625005034069
+      },
+      {
+       "oracle": "5590d952e47430fd293c0ef0",
+       "cls": "different-family",
+       "character": "p",
+       "member_face": "NimbusSans-Regular",
+       "canonical_face": "NotoSansMono-Regular",
+       "shape_xor": 0.21737809509342246,
+       "error": 0.09311101545038511
+      },
+      {
+       "oracle": "a343e8cd4118de69bb9f105a",
+       "cls": "different-family",
+       "character": "e",
+       "member_face": "URWBookman-Light",
+       "canonical_face": "P052-Roman",
+       "shape_xor": 0.312514842080266,
+       "error": 0.2968428427422741
+      },
+      {
+       "oracle": "116b12d68ddab076e34a03b5",
+       "cls": "different-family",
+       "character": "e",
+       "member_face": "URWBookman-Light",
+       "canonical_face": "P052-Roman",
+       "shape_xor": 0.312514842080266,
+       "error": 0.17253652685883764
+      },
+      {
+       "oracle": "18dc25c4d1628c5b984f4de2",
+       "cls": "different-family",
+       "character": "a",
+       "member_face": "URWBookman-Light",
+       "canonical_face": "NimbusSans-Regular",
+       "shape_xor": 0.41833115549747996,
+       "error": 0.1209699662349961
+      },
+      {
+       "oracle": "655d5e58cfa9cbf69b2d3880",
+       "cls": "different-family",
+       "character": "8",
+       "member_face": "URWBookman-Light",
+       "canonical_face": "NimbusRoman-Italic",
+       "shape_xor": 0.6386894661271374,
+       "error": 0.3936212089595301
+      },
+      {
+       "oracle": "921ccad00b6cc79ef736f262",
+       "cls": "different-family",
+       "character": "1",
+       "member_face": "URWBookman-Light",
+       "canonical_face": "NimbusRoman-Bold",
+       "shape_xor": 0.36565700588363476,
+       "error": 0.12112588190894627
+      },
+      {
+       "oracle": "6e93aad514f576029883e7c1",
+       "cls": "different-family",
+       "character": "e",
+       "member_face": "P052-Italic",
+       "canonical_face": "NimbusRoman-Italic",
+       "shape_xor": 0.38175675675675674,
+       "error": 0.14147413727293592
+      },
+      {
+       "oracle": "5dfbae6a9b9adba381af5f51",
+       "cls": "different-family",
+       "character": "9",
+       "member_face": "P052-Italic",
+       "canonical_face": "NimbusRoman-Italic",
+       "shape_xor": 0.5290530846484935,
+       "error": 0.38899687876537403
+      },
+      {
+       "oracle": "8eb14614dfa19b5f7a51af1a",
+       "cls": "different-family",
+       "character": "e",
+       "member_face": "NotoSansMono-Regular",
+       "canonical_face": "P052-Roman",
+       "shape_xor": 0.262895493767977,
+       "error": 0.1537244328845279
+      },
+      {
+       "oracle": "927ceeebaf1f5217059bb373",
+       "cls": "different-family",
+       "character": "i",
+       "member_face": "P052-Bold",
+       "canonical_face": "NimbusRoman-Bold",
+       "shape_xor": 0.22286723876829884,
+       "error": 0.11538529707947863
+      },
+      {
+       "oracle": "ea78f84a502576a43a6f26a2",
+       "cls": "different-family",
+       "character": "s",
+       "member_face": "NimbusSans-Regular",
+       "canonical_face": "NotoSansMono-Regular",
+       "shape_xor": 0.26939099385042653,
+       "error": 0.19736686133217335
+      },
+      {
+       "oracle": "df9a8d78a1d81c49475da97e",
+       "cls": "different-family",
+       "character": "e",
+       "member_face": "NimbusSans-Regular",
+       "canonical_face": "NotoSansMono-Regular",
+       "shape_xor": 0.2529074529074529,
+       "error": 0.15493407803747844
+      },
+      {
+       "oracle": "6787d1c3e96152dc94c07c4c",
+       "cls": "different-family",
+       "character": "e",
+       "member_face": "NimbusRoman-Bold",
+       "canonical_face": "P052-Bold",
+       "shape_xor": 0.24421965317919075,
+       "error": 0.10116811284947991
+      },
+      {
+       "oracle": "b90245410e634a46e81d4a50",
+       "cls": "different-family",
+       "character": "a",
+       "member_face": "URWBookman-Demi",
+       "canonical_face": "NimbusRoman-Bold",
+       "shape_xor": 0.2846062836860786,
+       "error": 0.21350809524126385
+      },
+      {
+       "oracle": "cdafe0d543c42516d3d3df5a",
+       "cls": "different-character",
+       "character": "1",
+       "member_face": "NimbusSans-Regular",
+       "canonical_face": "URWBookman-Light",
+       "shape_xor": null,
+       "error": 0.3465751769504824
+      },
+      {
+       "oracle": "bc06d5532c760c283fddfa43",
+       "cls": "different-family",
+       "character": "e",
+       "member_face": "NimbusRoman-Bold",
+       "canonical_face": "P052-Bold",
+       "shape_xor": 0.24421965317919075,
+       "error": 0.08656980082838352
+      },
+      {
+       "oracle": "c2ea596d5eafc959c29e7687",
+       "cls": "different-family",
+       "character": "c",
+       "member_face": "NimbusRoman-Bold",
+       "canonical_face": "URWBookman-Light",
+       "shape_xor": 0.44916864608076007,
+       "error": 0.22484375031905035
+      },
+      {
+       "oracle": "e0c0ce984d8d0633c94b87ab",
+       "cls": "different-family",
+       "character": "r",
+       "member_face": "NimbusRoman-Bold",
+       "canonical_face": "P052-Bold",
+       "shape_xor": 0.356817637191469,
+       "error": 0.14273614074877805
+      },
+      {
+       "oracle": "9cce90b469bd8cc114116076",
+       "cls": "different-family",
+       "character": "e",
+       "member_face": "NimbusRoman-Bold",
+       "canonical_face": "P052-Bold",
+       "shape_xor": 0.24421965317919075,
+       "error": 0.12188699727729801
+      },
+      {
+       "oracle": "3a8ab6d67cf448800b1b5fd4",
+       "cls": "different-family",
+       "character": "e",
+       "member_face": "NimbusRoman-Bold",
+       "canonical_face": "P052-Bold",
+       "shape_xor": 0.24421965317919075,
+       "error": 0.13490264377520306
+      },
+      {
+       "oracle": "2d14017f63ef954933be5d0a",
+       "cls": "different-family",
+       "character": "1",
+       "member_face": "NimbusRoman-Bold",
+       "canonical_face": "NotoSansMono-Regular",
+       "shape_xor": 0.4374266718811107,
+       "error": 0.3849896188464601
+      }
+     ]
+    },
+    "cover-2.0-ceiling": {
+     "census": {
+      "same-face": 22,
+      "visible": 1,
+      "egregious": 0,
+      "different-family": 3
+     },
+     "economy": {
+      "substituted": 45,
+      "retired_outlines": 26,
+      "added_canonicals": 20,
+      "net_outlines_retired": 6,
+      "encoded_font_bytes_before": 110008,
+      "encoded_font_bytes_after": 108646,
+      "fallback": null,
+      "pdf_bytes": 1059665
+     },
+     "visible_remaining": [
+      {
+       "oracle": "900d0c69532fa30ab29d452c",
+       "cls": "different-family",
+       "character": "r",
+       "member_face": "NimbusRoman-Regular",
+       "canonical_face": "P052-Roman",
+       "shape_xor": 0.23198109491925956,
+       "error": 0.07644323282541417
+      }
+     ]
+    },
+    "default_pdf_bytes": 1060220
+   },
+   {
+    "page": 7,
+    "dpi": 600,
+    "join_rate": 0.9721115537848606,
+    "cover-2.0": {
+     "census": {
+      "same-face": 32,
+      "visible": 15,
+      "egregious": 4,
+      "different-family": 19
+     },
+     "economy": {
+      "substituted": 85,
+      "retired_outlines": 68,
+      "added_canonicals": 34,
+      "net_outlines_retired": 34,
+      "encoded_font_bytes_before": 128334,
+      "encoded_font_bytes_after": 119129,
+      "fallback": null,
+      "pdf_bytes": 1083251
+     },
+     "visible_remaining": [
+      {
+       "oracle": "3bef0e8a7fbcc2746cd98711",
+       "cls": "different-family",
+       "character": "n",
+       "member_face": "NotoSansMono-Regular",
+       "canonical_face": "NimbusSans-Regular",
+       "shape_xor": 0.20029148448886114,
+       "error": 0.053341223814573374
+      },
+      {
+       "oracle": "249356f7d83610706c76f211",
+       "cls": "different-family",
+       "character": "9",
+       "member_face": "NotoSansMono-Regular",
+       "canonical_face": "P052-Roman",
+       "shape_xor": 0.44774273345701915,
+       "error": 0.27104654754934665
+      },
+      {
+       "oracle": "8ed6c37d8bf9a65ecdc1d69b",
+       "cls": "different-family",
+       "character": "e",
+       "member_face": "P052-Roman",
+       "canonical_face": "NimbusRoman-Italic",
+       "shape_xor": 0.6201826687458232,
+       "error": 0.36325457612518125
+      },
+      {
+       "oracle": "ce647bd8c6a235f63d71acef",
+       "cls": "different-family",
+       "character": "e",
+       "member_face": "P052-Roman",
+       "canonical_face": "URWBookman-Light",
+       "shape_xor": 0.32025157232704404,
+       "error": 0.2233889441858128
+      },
+      {
+       "oracle": "869c5461433c48cbff5aa789",
+       "cls": "different-family",
+       "character": "a",
+       "member_face": "P052-Roman",
+       "canonical_face": "NotoSansMono-Regular",
+       "shape_xor": 0.48747632077457376,
+       "error": 0.1326288407795837
+      },
+      {
+       "oracle": "19976a46f5afc51da3d92fe4",
+       "cls": "different-family",
+       "character": "e",
+       "member_face": "NimbusSans-Regular",
+       "canonical_face": "NotoSansMono-Regular",
+       "shape_xor": 0.2529074529074529,
+       "error": 0.10897919015859676
+      },
+      {
+       "oracle": "da592309da38b852e6d418d7",
+       "cls": "different-family",
+       "character": "s",
+       "member_face": "NimbusSans-Regular",
+       "canonical_face": "P052-Bold",
+       "shape_xor": 0.33553747032892506,
+       "error": 0.23780870799747647
+      },
+      {
+       "oracle": "c23dfa2974714a7561e12182",
+       "cls": "different-family",
+       "character": "e",
+       "member_face": "URWBookman-Demi",
+       "canonical_face": "P052-Bold",
+       "shape_xor": 0.28209658421672557,
+       "error": 0.21749961208284657
+      },
+      {
+       "oracle": "25507c28e0b4bc001b622f4f",
+       "cls": "different-family",
+       "character": "r",
+       "member_face": "P052-Bold",
+       "canonical_face": "URWBookman-Demi",
+       "shape_xor": 0.29034406215316316,
+       "error": 0.13958791943131366
+      },
+      {
+       "oracle": "ef1969a7dbd1ec7421ae52cd",
+       "cls": "different-family",
+       "character": "n",
+       "member_face": "NotoSansMono-Regular",
+       "canonical_face": "NimbusSans-Regular",
+       "shape_xor": 0.20029148448886114,
+       "error": 0.022887375027112408
+      },
+      {
+       "oracle": "87ef79930d4361824e6324cf",
+       "cls": "different-family",
+       "character": "o",
+       "member_face": "NotoSansMono-Regular",
+       "canonical_face": "URWBookman-Light",
+       "shape_xor": 0.22059939301972686,
+       "error": 0.08189319054318955
+      },
+      {
+       "oracle": "60b77034a4f180a91dbff73d",
+       "cls": "different-family",
+       "character": "1",
+       "member_face": "NotoSansMono-Bold",
+       "canonical_face": "P052-Bold",
+       "shape_xor": 0.23525661459993624,
+       "error": 0.319710939050108
+      },
+      {
+       "oracle": "89c4cb6f2cdae5656d7326ac",
+       "cls": "different-family",
+       "character": "e",
+       "member_face": "P052-Roman",
+       "canonical_face": "NotoSansMono-Regular",
+       "shape_xor": 0.24897664339032025,
+       "error": 0.11876346049677505
+      },
+      {
+       "oracle": "56cdd6d01081317506805bce",
+       "cls": "different-family",
+       "character": "e",
+       "member_face": "P052-Roman",
+       "canonical_face": "NotoSansMono-Regular",
+       "shape_xor": 0.24897664339032025,
+       "error": 0.284211481347099
+      },
+      {
+       "oracle": "85bb3a534c96b6743b95b66e",
+       "cls": "different-family",
+       "character": "0",
+       "member_face": "P052-Roman",
+       "canonical_face": "URWBookman-Light",
+       "shape_xor": 0.4831627354991841,
+       "error": 0.2258600661436243
+      }
+     ]
+    },
+    "cover-2.0-ceiling": {
+     "census": {
+      "same-face": 22,
+      "visible": 3,
+      "egregious": 0,
+      "different-family": 6
+     },
+     "economy": {
+      "substituted": 50,
+      "retired_outlines": 39,
+      "added_canonicals": 22,
+      "net_outlines_retired": 17,
+      "encoded_font_bytes_before": 128334,
+      "encoded_font_bytes_after": 123459,
+      "fallback": null,
+      "pdf_bytes": 1087461
+     },
+     "visible_remaining": [
+      {
+       "oracle": "3bef0e8a7fbcc2746cd98711",
+       "cls": "different-family",
+       "character": "n",
+       "member_face": "NotoSansMono-Regular",
+       "canonical_face": "NimbusSans-Regular",
+       "shape_xor": 0.20029148448886114,
+       "error": 0.053341223814573374
+      },
+      {
+       "oracle": "ef1969a7dbd1ec7421ae52cd",
+       "cls": "different-family",
+       "character": "n",
+       "member_face": "NotoSansMono-Regular",
+       "canonical_face": "NimbusSans-Regular",
+       "shape_xor": 0.20029148448886114,
+       "error": 0.022887375027112408
+      },
+      {
+       "oracle": "8a00b99c991953097e9ce8ce",
+       "cls": "different-family",
+       "character": "o",
+       "member_face": "URWBookman-Light",
+       "canonical_face": "NotoSansMono-Regular",
+       "shape_xor": 0.22434898731359892,
+       "error": 0.07399471590393963
+      }
+     ]
+    },
+    "default_pdf_bytes": 1091322
+   },
+   {
+    "page": 8,
+    "dpi": 600,
+    "join_rate": 0.9734345351043643,
+    "cover-2.0": {
+     "census": {
+      "different-family": 58,
+      "visible": 42,
+      "egregious": 4,
+      "same-face": 48,
+      "different-character": 3,
+      "same-family-different-style": 3
+     },
+     "economy": {
+      "substituted": 162,
+      "retired_outlines": 104,
+      "added_canonicals": 50,
+      "net_outlines_retired": 54,
+      "encoded_font_bytes_before": 118641,
+      "encoded_font_bytes_after": 104712,
+      "fallback": null,
+      "pdf_bytes": 997167
+     },
+     "visible_remaining": [
+      {
+       "oracle": "b6d27b796b687fcec0375e12",
+       "cls": "different-family",
+       "character": "a",
+       "member_face": "NotoSansMono-Bold",
+       "canonical_face": "P052-Bold",
+       "shape_xor": 0.36297032161927234,
+       "error": 0.17576116789340102
+      },
+      {
+       "oracle": "359a74dd43915e50e6f4fff6",
+       "cls": "different-family",
+       "character": "n",
+       "member_face": "NotoSansMono-Bold",
+       "canonical_face": "NimbusRoman-Bold",
+       "shape_xor": 0.2308896111713013,
+       "error": 0.13304918488054548
+      },
+      {
+       "oracle": "e560d431ec4f876a1f0d560e",
+       "cls": "different-family",
+       "character": "t",
+       "member_face": "NimbusSans-Bold",
+       "canonical_face": "NimbusRoman-Bold",
+       "shape_xor": 0.3515469513298354,
+       "error": 0.11683617194890862
+      },
+      {
+       "oracle": "6dae13eff8a475141e5d3447",
+       "cls": "different-character",
+       "character": "i",
+       "member_face": "NimbusRoman-Regular",
+       "canonical_face": "NimbusRoman-Regular",
+       "shape_xor": null,
+       "error": 0.25041112478033484
+      },
+      {
+       "oracle": "00a5ab419f8177c9c82a8c88",
+       "cls": "different-character",
+       "character": "i",
+       "member_face": "NimbusRoman-Regular",
+       "canonical_face": "NimbusRoman-Regular",
+       "shape_xor": null,
+       "error": 0.26393313919306954
+      },
+      {
+       "oracle": "52f198c0505aacd5b44d0ecb",
+       "cls": "different-family",
+       "character": "a",
+       "member_face": "NotoSansMono-Bold",
+       "canonical_face": "P052-Bold",
+       "shape_xor": 0.36297032161927234,
+       "error": 0.16248351847953083
+      },
+      {
+       "oracle": "71860756b7d53cf0e277aef2",
+       "cls": "different-family",
+       "character": "a",
+       "member_face": "NotoSansMono-Bold",
+       "canonical_face": "P052-Bold",
+       "shape_xor": 0.36297032161927234,
+       "error": 0.11369172023751249
+      },
+      {
+       "oracle": "53d901e1415b8df7110ef112",
+       "cls": "different-family",
+       "character": "c",
+       "member_face": "NimbusRoman-Bold",
+       "canonical_face": "NotoSansMono-Bold",
+       "shape_xor": 0.27806065972990923,
+       "error": 0.1996117320988587
+      },
+      {
+       "oracle": "3f626dfb04cc017db5b95907",
+       "cls": "different-family",
+       "character": "a",
+       "member_face": "NimbusSans-Bold",
+       "canonical_face": "P052-Bold",
+       "shape_xor": 0.2742078020451963,
+       "error": 0.13006879534072507
+      },
+      {
+       "oracle": "cfebb0d53c2809af1caab38a",
+       "cls": "different-family",
+       "character": "a",
+       "member_face": "NimbusSans-Bold",
+       "canonical_face": "P052-Bold",
+       "shape_xor": 0.2742078020451963,
+       "error": 0.11405994395859127
+      },
+      {
+       "oracle": "7a3e8a916f9ca7690f26f3a9",
+       "cls": "different-family",
+       "character": "t",
+       "member_face": "NimbusSans-Bold",
+       "canonical_face": "NimbusRoman-Bold",
+       "shape_xor": 0.3515469513298354,
+       "error": 0.10562539969180397
+      },
+      {
+       "oracle": "e4197188dd5bd60c023e7669",
+       "cls": "different-family",
+       "character": "f",
+       "member_face": "NimbusRoman-Bold",
+       "canonical_face": "NotoSansMono-Bold",
+       "shape_xor": 0.4329912935323383,
+       "error": 0.25107531229091534
+      },
+      {
+       "oracle": "ba70d4b2ca92bd529c189b8d",
+       "cls": "different-family",
+       "character": "o",
+       "member_face": "NimbusRoman-Bold",
+       "canonical_face": "P052-Bold",
+       "shape_xor": 0.23670261378175836,
+       "error": 0.12092726690796855
+      },
+      {
+       "oracle": "52698328bb6b7a6977d67b92",
+       "cls": "different-family",
+       "character": "s",
+       "member_face": "P052-Italic",
+       "canonical_face": "URWBookman-Light",
+       "shape_xor": 0.6411682892906815,
+       "error": 0.3916841632694065
+      },
+      {
+       "oracle": "380772b0eaa19ee58bded1ac",
+       "cls": "different-family",
+       "character": "u",
+       "member_face": "P052-Bold",
+       "canonical_face": "NimbusRoman-Bold",
+       "shape_xor": 0.2109079445145019,
+       "error": 0.12604260673329104
+      },
+      {
+       "oracle": "a01ca16292c67aa78fee13e6",
+       "cls": "different-family",
+       "character": "e",
+       "member_face": "P052-Bold",
+       "canonical_face": "NimbusSans-Bold",
+       "shape_xor": 0.2661631976422914,
+       "error": 0.18889334260006613
+      },
+      {
+       "oracle": "4503a76501af7e4d6fb93d75",
+       "cls": "different-family",
+       "character": "e",
+       "member_face": "P052-Bold",
+       "canonical_face": "NimbusSans-Bold",
+       "shape_xor": 0.2661631976422914,
+       "error": 0.1698649940694539
+      },
+      {
+       "oracle": "3b42acf566f8c921ca980729",
+       "cls": "different-family",
+       "character": "r",
+       "member_face": "P052-Bold",
+       "canonical_face": "NimbusRoman-Bold",
+       "shape_xor": 0.356817637191469,
+       "error": 0.10986580585804205
+      },
+      {
+       "oracle": "0d17b1469e3c9191b0a778da",
+       "cls": "different-family",
+       "character": "t",
+       "member_face": "NimbusSans-Bold",
+       "canonical_face": "NimbusRoman-Bold",
+       "shape_xor": 0.3515469513298354,
+       "error": 0.14936616599107763
+      },
+      {
+       "oracle": "fb0d7f2931e995884997f3ac",
+       "cls": "different-family",
+       "character": "8",
+       "member_face": "NimbusRoman-Bold",
+       "canonical_face": "P052-Bold",
+       "shape_xor": 0.21334720957460648,
+       "error": 0.11704180628637272
+      },
+      {
+       "oracle": "adc64bf0f217ffb4ab8d957e",
+       "cls": "different-family",
+       "character": "1",
+       "member_face": "NimbusRoman-Bold",
+       "canonical_face": "P052-Bold",
+       "shape_xor": 0.2444401092469762,
+       "error": 0.08783165406244006
+      },
+      {
+       "oracle": "6230ccb0d688018463f334e8",
+       "cls": "different-family",
+       "character": "3",
+       "member_face": "NimbusRoman-Bold",
+       "canonical_face": "P052-Bold",
+       "shape_xor": 0.26359008047298405,
+       "error": 0.1960401085989427
+      },
+      {
+       "oracle": "e302e9625edb8514b3c8d02c",
+       "cls": "different-family",
+       "character": "a",
+       "member_face": "NimbusRoman-Bold",
+       "canonical_face": "P052-Bold",
+       "shape_xor": 0.2763486959628439,
+       "error": 0.17982836953610948
+      },
+      {
+       "oracle": "550ad17a2c4f344e0d220366",
+       "cls": "different-family",
+       "character": "d",
+       "member_face": "NimbusRoman-Bold",
+       "canonical_face": "NotoSansMono-Bold",
+       "shape_xor": 0.35720973782771537,
+       "error": 0.1505679129366818
+      },
+      {
+       "oracle": "4709e5e08d6632344f1d768d",
+       "cls": "different-family",
+       "character": "i",
+       "member_face": "NimbusRoman-Bold",
+       "canonical_face": "P052-Bold",
+       "shape_xor": 0.2269179004037685,
+       "error": 0.14321357666643283
+      },
+      {
+       "oracle": "48d89398713a46bb60e53d23",
+       "cls": "same-family-different-style",
+       "character": "n",
+       "member_face": "NimbusRoman-Bold",
+       "canonical_face": "NimbusRoman-Regular",
+       "shape_xor": 0.34216411491484605,
+       "error": 0.23092569129575385
+      },
+      {
+       "oracle": "02e0b0f34dac65f3a1c26be3",
+       "cls": "different-family",
+       "character": "e",
+       "member_face": "NimbusRoman-Regular",
+       "canonical_face": "NimbusSans-Regular",
+       "shape_xor": 0.43603258265452804,
+       "error": 0.3347063692862546
+      },
+      {
+       "oracle": "759071c351c086899636fc1d",
+       "cls": "different-family",
+       "character": "e",
+       "member_face": "P052-Bold",
+       "canonical_face": "NimbusSans-Bold",
+       "shape_xor": 0.2661631976422914,
+       "error": 0.15710308009006962
+      },
+      {
+       "oracle": "5abe650599dd5cff1e22ae8b",
+       "cls": "different-family",
+       "character": "i",
+       "member_face": "P052-Bold",
+       "canonical_face": "NimbusRoman-Bold",
+       "shape_xor": 0.22286723876829884,
+       "error": 0.21501349972008327
+      },
+      {
+       "oracle": "7508beafd45eaaa09e34ede9",
+       "cls": "different-family",
+       "character": "n",
+       "member_face": "P052-Bold",
+       "canonical_face": "URWBookman-Light",
+       "shape_xor": 0.3183507941872254,
+       "error": 0.23737832965680666
+      },
+      {
+       "oracle": "8e59867d697300f3fdabec78",
+       "cls": "different-family",
+       "character": "r",
+       "member_face": "P052-Bold",
+       "canonical_face": "NimbusRoman-Bold",
+       "shape_xor": 0.356817637191469,
+       "error": 0.09165439709031345
+      },
+      {
+       "oracle": "20d105a8c8b48529e2855500",
+       "cls": "different-family",
+       "character": "e",
+       "member_face": "P052-Bold",
+       "canonical_face": "NimbusSans-Bold",
+       "shape_xor": 0.2661631976422914,
+       "error": 0.1662246782807231
+      },
+      {
+       "oracle": "49c5f9a8e6dcc7a4b063c2d6",
+       "cls": "different-character",
+       "character": "i",
+       "member_face": "NimbusRoman-Bold",
+       "canonical_face": "NimbusRoman-Regular",
+       "shape_xor": null,
+       "error": 0.3201447865024665
+      },
+      {
+       "oracle": "f88fa5d727712699da9eaff0",
+       "cls": "different-family",
+       "character": "s",
+       "member_face": "NimbusRoman-Bold",
+       "canonical_face": "URWBookman-Light",
+       "shape_xor": 0.46478270177692144,
+       "error": 0.44801464915610817
+      },
+      {
+       "oracle": "e406e189636aedafebfade46",
+       "cls": "different-family",
+       "character": "n",
+       "member_face": "NimbusSans-Regular",
+       "canonical_face": "NimbusRoman-Regular",
+       "shape_xor": 0.2935574229691877,
+       "error": 0.19863294370880022
+      },
+      {
+       "oracle": "98aaa496d1a0a09ad9bbdd34",
+       "cls": "different-family",
+       "character": "s",
+       "member_face": "NotoSansMono-Bold",
+       "canonical_face": "NimbusRoman-Bold",
+       "shape_xor": 0.37293729372937295,
+       "error": 0.20464539316681468
+      },
+      {
+       "oracle": "24b38f838601b8136d3b617c",
+       "cls": "different-family",
+       "character": "r",
+       "member_face": "NotoSansMono-Bold",
+       "canonical_face": "NimbusRoman-Bold",
+       "shape_xor": 0.39776733254994123,
+       "error": 0.28132982356683306
+      },
+      {
+       "oracle": "5fca1dd933f5931d6f3e51e4",
+       "cls": "same-family-different-style",
+       "character": "u",
+       "member_face": "NimbusRoman-Regular",
+       "canonical_face": "NimbusRoman-Bold",
+       "shape_xor": 0.3519044911881751,
+       "error": 0.1069094975493567
+      },
+      {
+       "oracle": "e08a5b0ca5d48b24d3bc97ef",
+       "cls": "different-family",
+       "character": "a",
+       "member_face": "NotoSansMono-Bold",
+       "canonical_face": "P052-Bold",
+       "shape_xor": 0.36297032161927234,
+       "error": 0.10880649785782606
+      },
+      {
+       "oracle": "920d54a21ba1606ace441ac8",
+       "cls": "different-family",
+       "character": "a",
+       "member_face": "NotoSansMono-Bold",
+       "canonical_face": "P052-Bold",
+       "shape_xor": 0.36297032161927234,
+       "error": 0.1642588807056921
+      },
+      {
+       "oracle": "b0b6bad87caccaa7139698b7",
+       "cls": "different-family",
+       "character": "a",
+       "member_face": "NotoSansMono-Bold",
+       "canonical_face": "P052-Bold",
+       "shape_xor": 0.36297032161927234,
+       "error": 0.11080272928130291
+      },
+      {
+       "oracle": "d0df5a29aed1faf3541fd4fd",
+       "cls": "different-family",
+       "character": "d",
+       "member_face": "NotoSansMono-Bold",
+       "canonical_face": "NimbusRoman-Bold",
+       "shape_xor": 0.3677705443909803,
+       "error": 0.15625213749100936
+      }
+     ]
+    },
+    "cover-2.0-ceiling": {
+     "census": {
+      "different-family": 16,
+      "visible": 2,
+      "egregious": 0,
+      "same-face": 50,
+      "same-family-different-style": 1
+     },
+     "economy": {
+      "substituted": 96,
+      "retired_outlines": 46,
+      "added_canonicals": 29,
+      "net_outlines_retired": 17,
+      "encoded_font_bytes_before": 118641,
+      "encoded_font_bytes_after": 114900,
+      "fallback": null,
+      "pdf_bytes": 1007059
+     },
+     "visible_remaining": [
+      {
+       "oracle": "3f626dfb04cc017db5b95907",
+       "cls": "different-family",
+       "character": "a",
+       "member_face": "NimbusSans-Bold",
+       "canonical_face": "NotoSansMono-Bold",
+       "shape_xor": 0.23040074775090547,
+       "error": 0.072389738820941
+      },
+      {
+       "oracle": "cfebb0d53c2809af1caab38a",
+       "cls": "different-family",
+       "character": "a",
+       "member_face": "NimbusSans-Bold",
+       "canonical_face": "NotoSansMono-Bold",
+       "shape_xor": 0.23040074775090547,
+       "error": 0.06369990412212918
+      }
+     ]
+    },
+    "default_pdf_bytes": 1007964
+   }
+  ],
+  "FONT-01 train": [
+   {
+    "page": 0,
+    "dpi": 200,
+    "join_rate": 0.972972972972973,
+    "fresh_cover_2_0_matches_traced": true,
+    "cover-2.0": {
+     "census": {
+      "same-face": 21,
+      "visible": 16,
+      "egregious": 3,
+      "different-family": 21,
+      "same-family-different-style": 2
+     },
+     "economy": {
+      "substituted": 71,
+      "retired_outlines": 56,
+      "added_canonicals": 27,
+      "net_outlines_retired": 29,
+      "encoded_font_bytes_before": 77422,
+      "encoded_font_bytes_after": 71934,
+      "fallback": null,
+      "pdf_bytes": 324608
+     },
+     "visible_remaining": [
+      {
+       "oracle": "6d0ccbc768a07dc3bf8c9b61",
+       "cls": "different-family",
+       "character": "x",
+       "member_face": "FreeSerif",
+       "canonical_face": "DejaVuSans",
+       "shape_xor": 0.39658071748878926,
+       "error": 0.2624855117076108
+      },
+      {
+       "oracle": "962f351678bf6bb72694d5dc",
+       "cls": "different-family",
+       "character": "e",
+       "member_face": "DejaVuSerif",
+       "canonical_face": "FreeSerif",
+       "shape_xor": 0.4626315789473684,
+       "error": 0.1755458368436878
+      },
+      {
+       "oracle": "68b54960aff48a06749624d3",
+       "cls": "different-family",
+       "character": "T",
+       "member_face": "DejaVuSerif",
+       "canonical_face": "DejaVuSans",
+       "shape_xor": 0.27221636810677907,
+       "error": 0.141233862592225
+      },
+      {
+       "oracle": "2675f4a91e9f72a06dc3ef8c",
+       "cls": "different-family",
+       "character": "1",
+       "member_face": "DejaVuSansMono",
+       "canonical_face": "DejaVuSans-Bold",
+       "shape_xor": 0.4191654970014036,
+       "error": 0.08642148471387397
+      },
+      {
+       "oracle": "e279241351c16d04d25e5378",
+       "cls": "different-family",
+       "character": "e",
+       "member_face": "DejaVuSans-Bold",
+       "canonical_face": "DejaVuSerif-Bold",
+       "shape_xor": 0.20302233902759526,
+       "error": 0.10319407758646157
+      },
+      {
+       "oracle": "559f90cc18417d0aa0dc6433",
+       "cls": "same-family-different-style",
+       "character": "e",
+       "member_face": "DejaVuSansMono",
+       "canonical_face": "DejaVuSansMono-Oblique",
+       "shape_xor": 0.2721393034825871,
+       "error": 0.1452782814539249
+      },
+      {
+       "oracle": "ac69b8a8f1656a4d05adc84b",
+       "cls": "different-family",
+       "character": "n",
+       "member_face": "DejaVuSans",
+       "canonical_face": "DejaVuSansMono",
+       "shape_xor": 0.29805575935436535,
+       "error": 0.04791982918269023
+      },
+      {
+       "oracle": "3b5c42fee6fcb0cade7a464f",
+       "cls": "different-family",
+       "character": "n",
+       "member_face": "DejaVuSans",
+       "canonical_face": "DejaVuSansMono",
+       "shape_xor": 0.29805575935436535,
+       "error": 0.03904464019803316
+      },
+      {
+       "oracle": "3710a2b85edc4b875cd24120",
+       "cls": "different-family",
+       "character": "T",
+       "member_face": "DejaVuSans-Bold",
+       "canonical_face": "DejaVuSerif-Bold",
+       "shape_xor": 0.25065019505851754,
+       "error": 0.13405785450109609
+      },
+      {
+       "oracle": "bb7a4a2eb747b960ed1c13f2",
+       "cls": "different-family",
+       "character": "1",
+       "member_face": "DejaVuSans",
+       "canonical_face": "DejaVuSerif-Bold",
+       "shape_xor": 0.3893688680626739,
+       "error": 0.11054684775032082
+      },
+      {
+       "oracle": "26b4cb87f200d7a2591e330b",
+       "cls": "same-family-different-style",
+       "character": "e",
+       "member_face": "DejaVuSansMono-Oblique",
+       "canonical_face": "DejaVuSansMono",
+       "shape_xor": 0.2721393034825871,
+       "error": 0.1914642665633224
+      },
+      {
+       "oracle": "ec4bc701ab8b94a3d3344db1",
+       "cls": "different-family",
+       "character": "a",
+       "member_face": "DejaVuSerif",
+       "canonical_face": "DejaVuSansMono",
+       "shape_xor": 0.4606021780909673,
+       "error": 0.09244714935221562
+      },
+      {
+       "oracle": "dbc43030778ed7ff67107210",
+       "cls": "different-family",
+       "character": "p",
+       "member_face": "DejaVuSans",
+       "canonical_face": "DejaVuSansMono",
+       "shape_xor": 0.26380885453267744,
+       "error": 0.06594060437381567
+      },
+      {
+       "oracle": "b4281513224db44038eb9867",
+       "cls": "different-family",
+       "character": "e",
+       "member_face": "DejaVuSerif",
+       "canonical_face": "DejaVuSans",
+       "shape_xor": 0.21386957338846083,
+       "error": 0.11218757442047572
+      },
+      {
+       "oracle": "8d7e9472aa37447163381b21",
+       "cls": "different-family",
+       "character": "e",
+       "member_face": "DejaVuSerif",
+       "canonical_face": "DejaVuSans",
+       "shape_xor": 0.21386957338846083,
+       "error": 0.10478276466168233
+      },
+      {
+       "oracle": "22e11c697e6d950268eb9c68",
+       "cls": "different-family",
+       "character": "s",
+       "member_face": "DejaVuSerif",
+       "canonical_face": "DejaVuSans",
+       "shape_xor": 0.21417215534862594,
+       "error": 0.21455693572426193
+      }
+     ]
+    },
+    "cover-2.0-ceiling": {
+     "census": {
+      "same-face": 19,
+      "visible": 3,
+      "egregious": 0,
+      "different-family": 7
+     },
+     "economy": {
+      "substituted": 43,
+      "retired_outlines": 32,
+      "added_canonicals": 17,
+      "net_outlines_retired": 15,
+      "encoded_font_bytes_before": 77422,
+      "encoded_font_bytes_after": 74442,
+      "fallback": null,
+      "pdf_bytes": 326871
+     },
+     "visible_remaining": [
+      {
+       "oracle": "ac69b8a8f1656a4d05adc84b",
+       "cls": "different-family",
+       "character": "n",
+       "member_face": "DejaVuSans",
+       "canonical_face": "DejaVuSansMono",
+       "shape_xor": 0.29805575935436535,
+       "error": 0.04791982918269023
+      },
+      {
+       "oracle": "3b5c42fee6fcb0cade7a464f",
+       "cls": "different-family",
+       "character": "n",
+       "member_face": "DejaVuSans",
+       "canonical_face": "DejaVuSansMono",
+       "shape_xor": 0.29805575935436535,
+       "error": 0.03904464019803316
+      },
+      {
+       "oracle": "dbc43030778ed7ff67107210",
+       "cls": "different-family",
+       "character": "p",
+       "member_face": "DejaVuSans",
+       "canonical_face": "DejaVuSansMono",
+       "shape_xor": 0.26380885453267744,
+       "error": 0.06594060437381567
+      }
+     ]
+    },
+    "default_pdf_bytes": 328837
+   },
+   {
+    "page": 1,
+    "dpi": 300,
+    "join_rate": 0.9667458432304038,
+    "fresh_cover_2_0_matches_traced": true,
+    "cover-2.0": {
+     "census": {
+      "same-face": 23,
+      "visible": 7,
+      "egregious": 2,
+      "different-family": 11,
+      "same-family-different-style": 2
+     },
+     "economy": {
+      "substituted": 58,
+      "retired_outlines": 49,
+      "added_canonicals": 22,
+      "net_outlines_retired": 27,
+      "encoded_font_bytes_before": 99861,
+      "encoded_font_bytes_after": 92939,
+      "fallback": null,
+      "pdf_bytes": 445489
+     },
+     "visible_remaining": [
+      {
+       "oracle": "fff7048e06ef3171e1422e71",
+       "cls": "different-family",
+       "character": "r",
+       "member_face": "FreeSerifItalic",
+       "canonical_face": "DejaVuSansMono-Oblique",
+       "shape_xor": 0.5005758157389635,
+       "error": 0.17105104715284014
+      },
+      {
+       "oracle": "348fbd6bfb48f8ccae3848dd",
+       "cls": "different-family",
+       "character": "a",
+       "member_face": "DejaVuSans",
+       "canonical_face": "DejaVuSerif",
+       "shape_xor": 0.4377480523298545,
+       "error": 0.10218431563782183
+      },
+      {
+       "oracle": "bc1dab64e10d6b63861eb744",
+       "cls": "different-family",
+       "character": "e",
+       "member_face": "DejaVuSans",
+       "canonical_face": "DejaVuSansMono-Oblique",
+       "shape_xor": 0.25964854655936936,
+       "error": 0.14588083334918864
+      },
+      {
+       "oracle": "8c37ffb6995657abb03ac04a",
+       "cls": "different-family",
+       "character": "n",
+       "member_face": "DejaVuSansMono",
+       "canonical_face": "DejaVuSans",
+       "shape_xor": 0.29805575935436535,
+       "error": 0.09569891618416186
+      },
+      {
+       "oracle": "d6dea62c33f35a20bae76122",
+       "cls": "different-family",
+       "character": "s",
+       "member_face": "DejaVuSansMono",
+       "canonical_face": "DejaVuSerif",
+       "shape_xor": 0.25887096774193546,
+       "error": 0.10291508486504178
+      },
+      {
+       "oracle": "884e7ddb05daa4d102078621",
+       "cls": "same-family-different-style",
+       "character": "e",
+       "member_face": "DejaVuSansMono",
+       "canonical_face": "DejaVuSansMono-Oblique",
+       "shape_xor": 0.2721393034825871,
+       "error": 0.11859305311717831
+      },
+      {
+       "oracle": "7b2a76d2edf945dd0477d5f8",
+       "cls": "different-family",
+       "character": "p",
+       "member_face": "FreeSerif",
+       "canonical_face": "DejaVuSerif",
+       "shape_xor": 0.36276164753544904,
+       "error": 0.13971601485024637
+      }
+     ]
+    },
+    "cover-2.0-ceiling": {
+     "census": {
+      "same-face": 23,
+      "visible": 1,
+      "egregious": 1,
+      "different-family": 6,
+      "same-family-different-style": 1
+     },
+     "economy": {
+      "substituted": 49,
+      "retired_outlines": 40,
+      "added_canonicals": 19,
+      "net_outlines_retired": 21,
+      "encoded_font_bytes_before": 99861,
+      "encoded_font_bytes_after": 94810,
+      "fallback": null,
+      "pdf_bytes": 447342
+     },
+     "visible_remaining": [
+      {
+       "oracle": "f4eb7ae7a8e15339b89e7973",
+       "cls": "different-family",
+       "character": "s",
+       "member_face": "DejaVuSansMono",
+       "canonical_face": "DejaVuSans-Bold",
+       "shape_xor": 0.42741061755146265,
+       "error": 0.06866216102053602
+      }
+     ]
+    },
+    "default_pdf_bytes": 451502
+   },
+   {
+    "page": 2,
+    "dpi": 600,
+    "join_rate": 0.9769585253456221,
+    "fresh_cover_2_0_matches_traced": true,
+    "cover-2.0": {
+     "census": {
+      "different-family": 35,
+      "visible": 18,
+      "egregious": 7,
+      "same-face": 35,
+      "different-character": 1,
+      "same-family-different-style": 1
+     },
+     "economy": {
+      "substituted": 113,
+      "retired_outlines": 68,
+      "added_canonicals": 41,
+      "net_outlines_retired": 27,
+      "encoded_font_bytes_before": 101221,
+      "encoded_font_bytes_after": 95608,
+      "fallback": null,
+      "pdf_bytes": 894484
+     },
+     "visible_remaining": [
+      {
+       "oracle": "1675c5e3da80ac32bd20d2bc",
+       "cls": "different-family",
+       "character": "p",
+       "member_face": "DejaVuSansMono",
+       "canonical_face": "FreeSerif",
+       "shape_xor": 0.524949849548646,
+       "error": 0.1452759362640877
+      },
+      {
+       "oracle": "36c54a9df9411a138462b0ae",
+       "cls": "different-family",
+       "character": "r",
+       "member_face": "DejaVuSansMono",
+       "canonical_face": "FreeSerifItalic",
+       "shape_xor": 0.5726198749131342,
+       "error": 0.3417266546384618
+      },
+      {
+       "oracle": "43791dadf5fcf37485635c5c",
+       "cls": "different-family",
+       "character": "e",
+       "member_face": "DejaVuSans-Bold",
+       "canonical_face": "DejaVuSerif-Bold",
+       "shape_xor": 0.20302233902759526,
+       "error": 0.18831939659726452
+      },
+      {
+       "oracle": "938797cb14a7a054e915341a",
+       "cls": "different-family",
+       "character": "r",
+       "member_face": "DejaVuSansMono",
+       "canonical_face": "FreeSerifItalic",
+       "shape_xor": 0.5726198749131342,
+       "error": 0.2957404751234869
+      },
+      {
+       "oracle": "123d128c304b9abaa775a26c",
+       "cls": "different-family",
+       "character": "1",
+       "member_face": "FreeSerif",
+       "canonical_face": "DejaVuSerif",
+       "shape_xor": 0.23506988564167725,
+       "error": 0.14420734117569894
+      },
+      {
+       "oracle": "f0717fe8ea088d7cbb56c108",
+       "cls": "different-family",
+       "character": "T",
+       "member_face": "DejaVuSans-Bold",
+       "canonical_face": "DejaVuSerif-Bold",
+       "shape_xor": 0.25065019505851754,
+       "error": 0.2387706841522235
+      },
+      {
+       "oracle": "2394a99313ae454b7b17f812",
+       "cls": "different-character",
+       "character": "l",
+       "member_face": "DejaVuSansMono-Oblique",
+       "canonical_face": "DejaVuSerif",
+       "shape_xor": null,
+       "error": 0.2336914037578885
+      },
+      {
+       "oracle": "e358fc9f6b5484c734d4cf25",
+       "cls": "different-family",
+       "character": "e",
+       "member_face": "DejaVuSerif",
+       "canonical_face": "DejaVuSans",
+       "shape_xor": 0.21386957338846083,
+       "error": 0.11576093224586705
+      },
+      {
+       "oracle": "7d5743429aeac21b8a9cb694",
+       "cls": "different-family",
+       "character": "e",
+       "member_face": "DejaVuSerif",
+       "canonical_face": "DejaVuSans",
+       "shape_xor": 0.21386957338846083,
+       "error": 0.12686251802780826
+      },
+      {
+       "oracle": "090cc6f983ab627ef721c367",
+       "cls": "different-family",
+       "character": "s",
+       "member_face": "DejaVuSerif",
+       "canonical_face": "DejaVuSans",
+       "shape_xor": 0.21417215534862594,
+       "error": 0.10737852486356415
+      },
+      {
+       "oracle": "d55e45162073308303e2a8f3",
+       "cls": "different-family",
+       "character": "a",
+       "member_face": "DejaVuSerif-Bold",
+       "canonical_face": "DejaVuSans-Bold",
+       "shape_xor": 0.32047347654537484,
+       "error": 0.13222844884910037
+      },
+      {
+       "oracle": "916746eb06939b525fbdfc52",
+       "cls": "different-family",
+       "character": "r",
+       "member_face": "DejaVuSansMono-Oblique",
+       "canonical_face": "FreeSerifItalic",
+       "shape_xor": 0.5204986813713738,
+       "error": 0.18341937948350512
+      },
+      {
+       "oracle": "64c656d9ec4215fe9e16cdfe",
+       "cls": "different-family",
+       "character": "a",
+       "member_face": "DejaVuSansMono-Oblique",
+       "canonical_face": "DejaVuSans-Bold",
+       "shape_xor": 0.41111483093404755,
+       "error": 0.2065510059616256
+      },
+      {
+       "oracle": "56da05ba0cecb17220c75905",
+       "cls": "different-family",
+       "character": "e",
+       "member_face": "DejaVuSerif",
+       "canonical_face": "DejaVuSans",
+       "shape_xor": 0.21386957338846083,
+       "error": 0.12591726993999197
+      },
+      {
+       "oracle": "fef47ff3edc210ab69154219",
+       "cls": "same-family-different-style",
+       "character": "x",
+       "member_face": "DejaVuSerif",
+       "canonical_face": "DejaVuSerif-Bold",
+       "shape_xor": 0.42966052934407367,
+       "error": 0.16241147026048408
+      },
+      {
+       "oracle": "deeb8b27698cf98f6acc807f",
+       "cls": "different-family",
+       "character": "e",
+       "member_face": "DejaVuSerif",
+       "canonical_face": "DejaVuSans",
+       "shape_xor": 0.21386957338846083,
+       "error": 0.11925047979472662
+      },
+      {
+       "oracle": "3085a180ee25262af26aa713",
+       "cls": "different-family",
+       "character": "x",
+       "member_face": "FreeSerif",
+       "canonical_face": "DejaVuSerif",
+       "shape_xor": 0.35756918068366794,
+       "error": 0.19093385813032981
+      },
+      {
+       "oracle": "da237d03a229329be2138ac8",
+       "cls": "different-family",
+       "character": "r",
+       "member_face": "DejaVuSansMono-Oblique",
+       "canonical_face": "FreeSerifItalic",
+       "shape_xor": 0.5204986813713738,
+       "error": 0.21748753161892426
+      }
+     ]
+    },
+    "cover-2.0-ceiling": {
+     "census": {
+      "different-family": 10,
+      "visible": 1,
+      "egregious": 1,
+      "same-face": 30
+     },
+     "economy": {
+      "substituted": 61,
+      "retired_outlines": 29,
+      "added_canonicals": 21,
+      "net_outlines_retired": 8,
+      "encoded_font_bytes_before": 101221,
+      "encoded_font_bytes_after": 100424,
+      "fallback": null,
+      "pdf_bytes": 898968
+     },
+     "visible_remaining": [
+      {
+       "oracle": "36c54a9df9411a138462b0ae",
+       "cls": "different-family",
+       "character": "r",
+       "member_face": "DejaVuSansMono",
+       "canonical_face": "DejaVuSans",
+       "shape_xor": 0.4625668449197861,
+       "error": 0.07048627462587277
+      }
+     ]
+    },
+    "default_pdf_bytes": 898250
+   }
+  ],
+  "FONT-01 validation": [
+   {
+    "page": 0,
+    "dpi": 200,
+    "join_rate": 0.97,
+    "fresh_cover_2_0_matches_traced": true,
+    "cover-2.0": {
+     "census": {
+      "same-face": 10,
+      "visible": 4,
+      "egregious": 1,
+      "different-character": 1,
+      "different-family": 2,
+      "same-family-different-style": 1
+     },
+     "economy": {
+      "substituted": 24,
+      "retired_outlines": 23,
+      "added_canonicals": 10,
+      "net_outlines_retired": 13,
+      "encoded_font_bytes_before": 66504,
+      "encoded_font_bytes_after": 64628,
+      "fallback": null,
+      "pdf_bytes": 272283
+     },
+     "visible_remaining": [
+      {
+       "oracle": "74532d827a8ef700d4ce5471",
+       "cls": "different-character",
+       "character": "l",
+       "member_face": "NimbusMonoPS-Italic",
+       "canonical_face": "NimbusMonoPS-Italic",
+       "shape_xor": null,
+       "error": 0.06276265360052498
+      },
+      {
+       "oracle": "2c4c306ec3e648c23ee76009",
+       "cls": "different-family",
+       "character": "t",
+       "member_face": "C059-Roman",
+       "canonical_face": "NimbusMonoPS-Regular",
+       "shape_xor": 0.8038286235186873,
+       "error": 0.2457011643517648
+      },
+      {
+       "oracle": "3c21481429b6af7783eeb36f",
+       "cls": "same-family-different-style",
+       "character": "e",
+       "member_face": "NimbusMonoPS-Italic",
+       "canonical_face": "NimbusMonoPS-Regular",
+       "shape_xor": 0.3340265141668833,
+       "error": 0.15732469176870997
+      },
+      {
+       "oracle": "bf46423203c6ec8bdd3c832c",
+       "cls": "different-family",
+       "character": "0",
+       "member_face": "NimbusMonoPS-Italic",
+       "canonical_face": "C059-Italic",
+       "shape_xor": 0.32766825288919105,
+       "error": 0.19074685803655134
+      }
+     ]
+    },
+    "cover-2.0-ceiling": {
+     "census": {
+      "same-face": 8,
+      "visible": 1,
+      "egregious": 0,
+      "different-character": 1
+     },
+     "economy": {
+      "substituted": 16,
+      "retired_outlines": 15,
+      "added_canonicals": 7,
+      "net_outlines_retired": 8,
+      "encoded_font_bytes_before": 66504,
+      "encoded_font_bytes_after": 65455,
+      "fallback": null,
+      "pdf_bytes": 273092
+     },
+     "visible_remaining": [
+      {
+       "oracle": "74532d827a8ef700d4ce5471",
+       "cls": "different-character",
+       "character": "l",
+       "member_face": "NimbusMonoPS-Italic",
+       "canonical_face": "NimbusMonoPS-Italic",
+       "shape_xor": null,
+       "error": 0.06276265360052498
+      }
+     ]
+    },
+    "default_pdf_bytes": 273701
+   },
+   {
+    "page": 1,
+    "dpi": 300,
+    "join_rate": 0.9656160458452722,
+    "fresh_cover_2_0_matches_traced": true,
+    "cover-2.0": {
+     "census": {
+      "same-face": 27,
+      "visible": 2,
+      "egregious": 0,
+      "different-family": 3,
+      "same-family-different-style": 1
+     },
+     "economy": {
+      "substituted": 54,
+      "retired_outlines": 47,
+      "added_canonicals": 23,
+      "net_outlines_retired": 24,
+      "encoded_font_bytes_before": 91281,
+      "encoded_font_bytes_after": 84193,
+      "fallback": null,
+      "pdf_bytes": 174244
+     },
+     "visible_remaining": [
+      {
+       "oracle": "9087bdf1aa08f30a2c943a8f",
+       "cls": "different-family",
+       "character": "1",
+       "member_face": "C059-Italic",
+       "canonical_face": "Z003-MediumItalic",
+       "shape_xor": 0.27218934911242604,
+       "error": 0.025441485140074317
+      },
+      {
+       "oracle": "c6f4c3f043719a8e20305e14",
+       "cls": "same-family-different-style",
+       "character": "o",
+       "member_face": "C059-Roman",
+       "canonical_face": "C059-Italic",
+       "shape_xor": 0.38105678579258934,
+       "error": 0.19121401963768198
+      }
+     ]
+    },
+    "cover-2.0-ceiling": {
+     "census": {
+      "same-face": 22,
+      "visible": 1,
+      "egregious": 0,
+      "different-family": 1,
+      "same-family-different-style": 1
+     },
+     "economy": {
+      "substituted": 42,
+      "retired_outlines": 36,
+      "added_canonicals": 18,
+      "net_outlines_retired": 18,
+      "encoded_font_bytes_before": 91281,
+      "encoded_font_bytes_after": 85896,
+      "fallback": null,
+      "pdf_bytes": 175925
+     },
+     "visible_remaining": [
+      {
+       "oracle": "9087bdf1aa08f30a2c943a8f",
+       "cls": "different-family",
+       "character": "1",
+       "member_face": "C059-Italic",
+       "canonical_face": "Z003-MediumItalic",
+       "shape_xor": 0.27218934911242604,
+       "error": 0.025441485140074317
+      }
+     ]
+    },
+    "default_pdf_bytes": 180461
+   },
+   {
+    "page": 2,
+    "dpi": 600,
+    "join_rate": 0.9751552795031055,
+    "fresh_cover_2_0_matches_traced": true,
+    "cover-2.0": {
+     "census": {
+      "same-face": 27,
+      "visible": 2,
+      "egregious": 1,
+      "same-family-different-style": 1,
+      "different-family": 1
+     },
+     "economy": {
+      "substituted": 52,
+      "retired_outlines": 43,
+      "added_canonicals": 23,
+      "net_outlines_retired": 20,
+      "encoded_font_bytes_before": 88745,
+      "encoded_font_bytes_after": 82230,
+      "fallback": null,
+      "pdf_bytes": 744541
+     },
+     "visible_remaining": [
+      {
+       "oracle": "3d3a826fd17c842c7c13466d",
+       "cls": "same-family-different-style",
+       "character": "o",
+       "member_face": "NimbusMonoPS-Italic",
+       "canonical_face": "NimbusMonoPS-Regular",
+       "shape_xor": 0.4188905547226387,
+       "error": 0.25789366694651644
+      },
+      {
+       "oracle": "83a957bcf54a566258642815",
+       "cls": "different-family",
+       "character": "s",
+       "member_face": "NimbusMonoPS-Bold",
+       "canonical_face": "C059-Bold",
+       "shape_xor": 0.3614892570116451,
+       "error": 0.21153221224047877
+      }
+     ]
+    },
+    "cover-2.0-ceiling": {
+     "census": {
+      "same-face": 21,
+      "visible": 0,
+      "egregious": 0
+     },
+     "economy": {
+      "substituted": 39,
+      "retired_outlines": 30,
+      "added_canonicals": 18,
+      "net_outlines_retired": 12,
+      "encoded_font_bytes_before": 88745,
+      "encoded_font_bytes_after": 84214,
+      "fallback": null,
+      "pdf_bytes": 746509
+     },
+     "visible_remaining": []
+    },
+    "default_pdf_bytes": 750491
+   }
+  ],
+  "FONT-01 test": [
+   {
+    "page": 0,
+    "dpi": 200,
+    "join_rate": 0.971830985915493,
+    "fresh_cover_2_0_matches_traced": true,
+    "cover-2.0": {
+     "census": {
+      "same-family-different-style": 4,
+      "visible": 13,
+      "egregious": 3,
+      "same-face": 8,
+      "different-family": 14,
+      "different-character": 1
+     },
+     "economy": {
+      "substituted": 44,
+      "retired_outlines": 41,
+      "added_canonicals": 17,
+      "net_outlines_retired": 24,
+      "encoded_font_bytes_before": 61746,
+      "encoded_font_bytes_after": 56681,
+      "fallback": null,
+      "pdf_bytes": 289561
+     },
+     "visible_remaining": [
+      {
+       "oracle": "11010aaf9b4bf32639b1cd57",
+       "cls": "same-family-different-style",
+       "character": "e",
+       "member_face": "LiberationSans-Regular",
+       "canonical_face": "LiberationSans-Italic",
+       "shape_xor": 0.2599817684594348,
+       "error": 0.16813302246690826
+      },
+      {
+       "oracle": "38155db16de5d8a1007b8ba1",
+       "cls": "same-family-different-style",
+       "character": "e",
+       "member_face": "LiberationSans-Regular",
+       "canonical_face": "LiberationSans-Italic",
+       "shape_xor": 0.2599817684594348,
+       "error": 0.1297289847572049
+      },
+      {
+       "oracle": "4b9bb7b6755143d32b58b9db",
+       "cls": "different-family",
+       "character": "r",
+       "member_face": "LiberationSerif-Italic",
+       "canonical_face": "LiberationMono-Italic",
+       "shape_xor": 0.4537477148080439,
+       "error": 0.0861913085643924
+      },
+      {
+       "oracle": "83f16a6c2e5e1046c71d1b7a",
+       "cls": "different-family",
+       "character": "s",
+       "member_face": "LiberationSerif-Italic",
+       "canonical_face": "LiberationMono-Italic",
+       "shape_xor": 0.3709862385321101,
+       "error": 0.2552864715078034
+      },
+      {
+       "oracle": "b8e155301b2ae2d64c2d2c2c",
+       "cls": "different-family",
+       "character": "T",
+       "member_face": "LiberationSans-Regular",
+       "canonical_face": "LiberationSerif-Regular",
+       "shape_xor": 0.2554807901020187,
+       "error": 0.17039455212640728
+      },
+      {
+       "oracle": "4a4b91218b374984bc991b73",
+       "cls": "different-character",
+       "character": "1",
+       "member_face": "LiberationSans-Italic",
+       "canonical_face": "LiberationSerif-Regular",
+       "shape_xor": null,
+       "error": 0.3890345155370916
+      },
+      {
+       "oracle": "3e6ff02e16083b436cf65ad8",
+       "cls": "different-family",
+       "character": "e",
+       "member_face": "LiberationMono-Regular",
+       "canonical_face": "LiberationSans-Italic",
+       "shape_xor": 0.26319621405169275,
+       "error": 0.19254377651522273
+      },
+      {
+       "oracle": "be73487425d5866980b859c3",
+       "cls": "different-family",
+       "character": "s",
+       "member_face": "LiberationSerif-Bold",
+       "canonical_face": "LiberationSans-Regular",
+       "shape_xor": 0.35669099756691,
+       "error": 0.19095788818345766
+      },
+      {
+       "oracle": "bf29aebd1ad565d8f943eebc",
+       "cls": "same-family-different-style",
+       "character": "9",
+       "member_face": "LiberationSerif-Bold",
+       "canonical_face": "LiberationSerif-BoldItalic",
+       "shape_xor": 0.308148352405901,
+       "error": 0.08086791552758074
+      },
+      {
+       "oracle": "ef40373fcd7c73cfa25e4d81",
+       "cls": "different-family",
+       "character": "r",
+       "member_face": "LiberationSerif-Italic",
+       "canonical_face": "LiberationMono-Italic",
+       "shape_xor": 0.4537477148080439,
+       "error": 0.18478209817675
+      },
+      {
+       "oracle": "a7585b7139339e5f686e5e49",
+       "cls": "different-family",
+       "character": "T",
+       "member_face": "LiberationSans-Regular",
+       "canonical_face": "LiberationSerif-Regular",
+       "shape_xor": 0.2554807901020187,
+       "error": 0.11743503515848552
+      },
+      {
+       "oracle": "8dc284c762c6f0f2a083887f",
+       "cls": "same-family-different-style",
+       "character": "r",
+       "member_face": "LiberationSerif-BoldItalic",
+       "canonical_face": "LiberationSerif-Bold",
+       "shape_xor": 0.3198711595639247,
+       "error": 0.09308850378516892
+      },
+      {
+       "oracle": "379360d119df6b6f75cfbd82",
+       "cls": "different-family",
+       "character": "r",
+       "member_face": "LiberationSans-Italic",
+       "canonical_face": "LiberationMono-Italic",
+       "shape_xor": 0.7043914680050188,
+       "error": 0.19226060414782373
+      }
+     ]
+    },
+    "cover-2.0-ceiling": {
+     "census": {
+      "same-face": 9,
+      "visible": 0,
+      "egregious": 0,
+      "different-family": 3
+     },
+     "economy": {
+      "substituted": 23,
+      "retired_outlines": 21,
+      "added_canonicals": 11,
+      "net_outlines_retired": 10,
+      "encoded_font_bytes_before": 61746,
+      "encoded_font_bytes_after": 59374,
+      "fallback": null,
+      "pdf_bytes": 292204
+     },
+     "visible_remaining": []
+    },
+    "default_pdf_bytes": 294280
+   },
+   {
+    "page": 1,
+    "dpi": 300,
+    "join_rate": 0.9748743718592965,
+    "fresh_cover_2_0_matches_traced": true,
+    "cover-2.0": {
+     "census": {
+      "same-face": 22,
+      "visible": 8,
+      "egregious": 0,
+      "different-family": 15,
+      "same-family-different-style": 3
+     },
+     "economy": {
+      "substituted": 66,
+      "retired_outlines": 53,
+      "added_canonicals": 26,
+      "net_outlines_retired": 27,
+      "encoded_font_bytes_before": 96085,
+      "encoded_font_bytes_after": 88695,
+      "fallback": null,
+      "pdf_bytes": 190001
+     },
+     "visible_remaining": [
+      {
+       "oracle": "6de85c07b379bc50205345eb",
+       "cls": "different-family",
+       "character": "o",
+       "member_face": "LiberationSerif-Regular",
+       "canonical_face": "LiberationSans-Italic",
+       "shape_xor": 0.2901852779168753,
+       "error": 0.16718711461272892
+      },
+      {
+       "oracle": "aa003ad1435957c1871787ac",
+       "cls": "different-family",
+       "character": "e",
+       "member_face": "LiberationSerif-Regular",
+       "canonical_face": "LiberationMono-Regular",
+       "shape_xor": 0.3150074294205052,
+       "error": 0.10000031098747644
+      },
+      {
+       "oracle": "385a213c5d0bb6595cabbcb8",
+       "cls": "different-family",
+       "character": "s",
+       "member_face": "LiberationMono-Regular",
+       "canonical_face": "LiberationSans-Italic",
+       "shape_xor": 0.28540633757275274,
+       "error": 0.08877032310185441
+      },
+      {
+       "oracle": "b9383930e25366405368b712",
+       "cls": "different-family",
+       "character": "s",
+       "member_face": "LiberationMono-Italic",
+       "canonical_face": "LiberationSerif-Italic",
+       "shape_xor": 0.37227898711683693,
+       "error": 0.1504519961900558
+      },
+      {
+       "oracle": "f0448c729b28b81bc7cdd3dc",
+       "cls": "different-family",
+       "character": "e",
+       "member_face": "LiberationSans-Regular",
+       "canonical_face": "LiberationMono-Italic",
+       "shape_xor": 0.3023502385580491,
+       "error": 0.1066459668260537
+      },
+      {
+       "oracle": "31f878a258f7de3695210539",
+       "cls": "same-family-different-style",
+       "character": "s",
+       "member_face": "LiberationSans-Regular",
+       "canonical_face": "LiberationSans-Italic",
+       "shape_xor": 0.28202391118701964,
+       "error": 0.09204387787554619
+      },
+      {
+       "oracle": "cedd340ba48960c3515857ac",
+       "cls": "different-family",
+       "character": "e",
+       "member_face": "LiberationSans-Italic",
+       "canonical_face": "LiberationMono-Regular",
+       "shape_xor": 0.26319621405169275,
+       "error": 0.09472535805312753
+      },
+      {
+       "oracle": "0160352f3195cb45bdb35836",
+       "cls": "same-family-different-style",
+       "character": "o",
+       "member_face": "LiberationSans-Regular",
+       "canonical_face": "LiberationSans-Italic",
+       "shape_xor": 0.2550824702723437,
+       "error": 0.1769186055064099
+      }
+     ]
+    },
+    "cover-2.0-ceiling": {
+     "census": {
+      "same-face": 25,
+      "visible": 0,
+      "egregious": 0,
+      "different-family": 11,
+      "same-family-different-style": 1
+     },
+     "economy": {
+      "substituted": 65,
+      "retired_outlines": 51,
+      "added_canonicals": 28,
+      "net_outlines_retired": 23,
+      "encoded_font_bytes_before": 96085,
+      "encoded_font_bytes_after": 89394,
+      "fallback": null,
+      "pdf_bytes": 190704
+     },
+     "visible_remaining": []
+    },
+    "default_pdf_bytes": 196306
+   },
+   {
+    "page": 2,
+    "dpi": 600,
+    "join_rate": 0.974293059125964,
+    "fresh_cover_2_0_matches_traced": true,
+    "cover-2.0": {
+     "census": {
+      "same-face": 29,
+      "visible": 25,
+      "egregious": 14,
+      "different-family": 32,
+      "different-character": 2,
+      "same-family-different-style": 5
+     },
+     "economy": {
+      "substituted": 107,
+      "retired_outlines": 84,
+      "added_canonicals": 39,
+      "net_outlines_retired": 45,
+      "encoded_font_bytes_before": 96379,
+      "encoded_font_bytes_after": 85072,
+      "fallback": null,
+      "pdf_bytes": 815342
+     },
+     "visible_remaining": [
+      {
+       "oracle": "dedc38dfcfb3ae26bd1ff3b2",
+       "cls": "different-family",
+       "character": "r",
+       "member_face": "LiberationMono-Italic",
+       "canonical_face": "LiberationSerif-Italic",
+       "shape_xor": 0.4643152383576743,
+       "error": 0.1369693715755258
+      },
+      {
+       "oracle": "77772e8dab9292ac937da44d",
+       "cls": "different-character",
+       "character": "1",
+       "member_face": "LiberationMono-Italic",
+       "canonical_face": "LiberationMono-Italic",
+       "shape_xor": null,
+       "error": 0.4483087801944614
+      },
+      {
+       "oracle": "e2017386ee65ca37f924a58a",
+       "cls": "different-family",
+       "character": "r",
+       "member_face": "LiberationMono-Regular",
+       "canonical_face": "LiberationSerif-Italic",
+       "shape_xor": 0.4204221334854535,
+       "error": 0.3218649034106106
+      },
+      {
+       "oracle": "13496198d3c326b08519b0fb",
+       "cls": "different-character",
+       "character": "1",
+       "member_face": "LiberationSerif-Italic",
+       "canonical_face": "LiberationMono-Italic",
+       "shape_xor": null,
+       "error": 0.11847591194023678
+      },
+      {
+       "oracle": "e14ff784a7bdf4fa8262ab73",
+       "cls": "different-family",
+       "character": "e",
+       "member_face": "LiberationSerif-Regular",
+       "canonical_face": "LiberationMono-Italic",
+       "shape_xor": 0.45994599459945995,
+       "error": 0.21513128397099154
+      },
+      {
+       "oracle": "42bace0bc99e32f8325d2fc2",
+       "cls": "same-family-different-style",
+       "character": "n",
+       "member_face": "LiberationSerif-BoldItalic",
+       "canonical_face": "LiberationSerif-Bold",
+       "shape_xor": 0.27130218842154274,
+       "error": 0.1551536474094078
+      },
+      {
+       "oracle": "8e9160885efee4c1b5405f0e",
+       "cls": "different-family",
+       "character": "r",
+       "member_face": "LiberationMono-Regular",
+       "canonical_face": "LiberationSerif-Italic",
+       "shape_xor": 0.4204221334854535,
+       "error": 0.2711066642450732
+      },
+      {
+       "oracle": "2244177b6467a8d801fe12f9",
+       "cls": "different-family",
+       "character": "s",
+       "member_face": "LiberationMono-Regular",
+       "canonical_face": "LiberationSans-Italic",
+       "shape_xor": 0.28540633757275274,
+       "error": 0.18040115749929167
+      },
+      {
+       "oracle": "3abdc47a951e0bfaae9a743b",
+       "cls": "different-family",
+       "character": "e",
+       "member_face": "LiberationSerif-Italic",
+       "canonical_face": "LiberationMono-Italic",
+       "shape_xor": 0.414071785120038,
+       "error": 0.22677674303849174
+      },
+      {
+       "oracle": "98a0dba23e131db16aa7fc03",
+       "cls": "different-family",
+       "character": "e",
+       "member_face": "LiberationSerif-Italic",
+       "canonical_face": "LiberationMono-Italic",
+       "shape_xor": 0.414071785120038,
+       "error": 0.19629780272670896
+      },
+      {
+       "oracle": "539f7347a3bc57d8e6852733",
+       "cls": "different-family",
+       "character": "p",
+       "member_face": "LiberationSerif-Italic",
+       "canonical_face": "LiberationMono-Italic",
+       "shape_xor": 0.44322033898305085,
+       "error": 0.12387641696073673
+      },
+      {
+       "oracle": "53578c9bc7e3c14a8caa815d",
+       "cls": "same-family-different-style",
+       "character": "s",
+       "member_face": "LiberationSans-Regular",
+       "canonical_face": "LiberationSans-Italic",
+       "shape_xor": 0.28202391118701964,
+       "error": 0.11546713008188171
+      },
+      {
+       "oracle": "7139c9418050e154181892b2",
+       "cls": "same-family-different-style",
+       "character": "r",
+       "member_face": "LiberationMono-Regular",
+       "canonical_face": "LiberationMono-Italic",
+       "shape_xor": 0.40981281905842315,
+       "error": 0.16936673039164268
+      },
+      {
+       "oracle": "eb55bc1ecec0f40ba8a66128",
+       "cls": "different-family",
+       "character": "p",
+       "member_face": "LiberationMono-Regular",
+       "canonical_face": "LiberationSerif-Regular",
+       "shape_xor": 0.4643595753481318,
+       "error": 0.1171361507098768
+      },
+      {
+       "oracle": "c9258765fb46fa00eecc7fe4",
+       "cls": "different-family",
+       "character": "r",
+       "member_face": "LiberationMono-Regular",
+       "canonical_face": "LiberationSerif-Italic",
+       "shape_xor": 0.4204221334854535,
+       "error": 0.295553732312245
+      },
+      {
+       "oracle": "59cb32e9da890051955ba5b0",
+       "cls": "different-family",
+       "character": "s",
+       "member_face": "LiberationMono-Regular",
+       "canonical_face": "LiberationSans-Italic",
+       "shape_xor": 0.28540633757275274,
+       "error": 0.1362698059940057
+      },
+      {
+       "oracle": "9b038d14c7e4247e5d0fd28d",
+       "cls": "different-family",
+       "character": "1",
+       "member_face": "LiberationSans-Italic",
+       "canonical_face": "LiberationMono-Italic",
+       "shape_xor": 0.29558734636308687,
+       "error": 0.09870909885639399
+      },
+      {
+       "oracle": "776f4f0e015699e2dee4f2c9",
+       "cls": "same-family-different-style",
+       "character": "o",
+       "member_face": "LiberationSans-Italic",
+       "canonical_face": "LiberationSans-Regular",
+       "shape_xor": 0.2550824702723437,
+       "error": 0.13094372290469314
+      },
+      {
+       "oracle": "e209809179b3afb10c58bf4a",
+       "cls": "different-family",
+       "character": "t",
+       "member_face": "LiberationSans-Italic",
+       "canonical_face": "LiberationSerif-Italic",
+       "shape_xor": 0.21437578814627994,
+       "error": 0.1350886873994452
+      },
+      {
+       "oracle": "733c994229271601286a23d3",
+       "cls": "different-family",
+       "character": "e",
+       "member_face": "LiberationSerif-Regular",
+       "canonical_face": "LiberationMono-Italic",
+       "shape_xor": 0.45994599459945995,
+       "error": 0.21075285498031232
+      },
+      {
+       "oracle": "554ac27a9c46facab110e0cc",
+       "cls": "different-family",
+       "character": "e",
+       "member_face": "LiberationSerif-Regular",
+       "canonical_face": "LiberationMono-Italic",
+       "shape_xor": 0.45994599459945995,
+       "error": 0.2436750959479244
+      },
+      {
+       "oracle": "2f757316295832a13524c316",
+       "cls": "same-family-different-style",
+       "character": "s",
+       "member_face": "LiberationSerif-Italic",
+       "canonical_face": "LiberationSerif-Regular",
+       "shape_xor": 0.3585682610072854,
+       "error": 0.2573979289539165
+      },
+      {
+       "oracle": "bed51dda32912572093b7a68",
+       "cls": "different-family",
+       "character": "n",
+       "member_face": "LiberationSerif-Italic",
+       "canonical_face": "LiberationMono-Italic",
+       "shape_xor": 0.23028224742811923,
+       "error": 0.1383055774406883
+      },
+      {
+       "oracle": "0035dd1c2f5d6ad652fd109e",
+       "cls": "different-family",
+       "character": "e",
+       "member_face": "LiberationSerif-Italic",
+       "canonical_face": "LiberationMono-Italic",
+       "shape_xor": 0.414071785120038,
+       "error": 0.20964868351138677
+      },
+      {
+       "oracle": "29baee18d136402745f2adc8",
+       "cls": "different-family",
+       "character": "e",
+       "member_face": "LiberationSerif-Italic",
+       "canonical_face": "LiberationMono-Italic",
+       "shape_xor": 0.414071785120038,
+       "error": 0.1582404011776671
+      }
+     ]
+    },
+    "cover-2.0-ceiling": {
+     "census": {
+      "same-face": 29,
+      "visible": 0,
+      "egregious": 0,
+      "different-family": 11
+     },
+     "economy": {
+      "substituted": 68,
+      "retired_outlines": 48,
+      "added_canonicals": 28,
+      "net_outlines_retired": 20,
+      "encoded_font_bytes_before": 96379,
+      "encoded_font_bytes_after": 91525,
+      "fallback": null,
+      "pdf_bytes": 821722
+     },
+     "visible_remaining": []
+    },
+    "default_pdf_bytes": 825528
+   }
+  ]
+ },
+ "corpus": {
+  "forms": {
+   "default_pdf_bytes": 843699,
+   "cover-2.0": {
+    "substituted": 0,
+    "retired_outlines": 19,
+    "added_canonicals": 27,
+    "net_outlines_retired": -8,
+    "encoded_font_bytes_before": 41147,
+    "encoded_font_bytes_after": 46879,
+    "fallback": "aggregate economy: negative net outline retirement or encoded font growth",
+    "pdf_bytes": 843699
+   },
+   "cover-2.0-ceiling": {
+    "substituted": 0,
+    "retired_outlines": 15,
+    "added_canonicals": 27,
+    "net_outlines_retired": -12,
+    "encoded_font_bytes_before": 41147,
+    "encoded_font_bytes_after": 47012,
+    "fallback": "aggregate economy: negative net outline retirement or encoded font growth",
+    "pdf_bytes": 843699
+   }
+  },
+  "receipts": {
+   "default_pdf_bytes": 1271232,
+   "cover-2.0": {
+    "substituted": 0,
+    "retired_outlines": 0,
+    "added_canonicals": 0,
+    "net_outlines_retired": 0,
+    "encoded_font_bytes_before": 16712,
+    "encoded_font_bytes_after": 16712,
+    "fallback": "no surviving cover groups",
+    "pdf_bytes": 1271232
+   },
+   "cover-2.0-ceiling": {
+    "substituted": 0,
+    "retired_outlines": 0,
+    "added_canonicals": 0,
+    "net_outlines_retired": 0,
+    "encoded_font_bytes_before": 16712,
+    "encoded_font_bytes_after": 16712,
+    "fallback": "no surviving cover groups",
+    "pdf_bytes": 1271232
+   }
+  },
+  "mixed": {
+   "default_pdf_bytes": 917603,
+   "cover-2.0": {
+    "substituted": 326,
+    "retired_outlines": 145,
+    "added_canonicals": 57,
+    "net_outlines_retired": 88,
+    "encoded_font_bytes_before": 249013,
+    "encoded_font_bytes_after": 242854,
+    "fallback": null,
+    "pdf_bytes": 914696
+   },
+   "cover-2.0-ceiling": {
+    "substituted": 314,
+    "retired_outlines": 137,
+    "added_canonicals": 55,
+    "net_outlines_retired": 82,
+    "encoded_font_bytes_before": 249013,
+    "encoded_font_bytes_after": 243905,
+    "fallback": null,
+    "pdf_bytes": 915733
+   }
+  },
+  "historical": {
+   "default_pdf_bytes": 2266058,
+   "cover-2.0": {
+    "substituted": 0,
+    "retired_outlines": 0,
+    "added_canonicals": 0,
+    "net_outlines_retired": 0,
+    "encoded_font_bytes_before": 3472,
+    "encoded_font_bytes_after": 3472,
+    "fallback": "no surviving cover groups",
+    "pdf_bytes": 2266058
+   },
+   "cover-2.0-ceiling": {
+    "substituted": 0,
+    "retired_outlines": 0,
+    "added_canonicals": 0,
+    "net_outlines_retired": 0,
+    "encoded_font_bytes_before": 3472,
+    "encoded_font_bytes_after": 3472,
+    "fallback": "no surviving cover groups",
+    "pdf_bytes": 2266058
+   }
+  },
+  "financial": {
+   "default_pdf_bytes": 2849237,
+   "cover-2.0": {
+    "substituted": 1750,
+    "retired_outlines": 594,
+    "added_canonicals": 268,
+    "net_outlines_retired": 326,
+    "encoded_font_bytes_before": 727259,
+    "encoded_font_bytes_after": 664549,
+    "fallback": null,
+    "pdf_bytes": 2796345
+   },
+   "cover-2.0-ceiling": {
+    "substituted": 1736,
+    "retired_outlines": 585,
+    "added_canonicals": 267,
+    "net_outlines_retired": 318,
+    "encoded_font_bytes_before": 727259,
+    "encoded_font_bytes_after": 665673,
+    "fallback": null,
+    "pdf_bytes": 2797500
+   }
+  }
+ },
+ "synthetic_totals": {
+  "P2": {
+   "cover-2.0": {
+    "same-face": 264,
+    "visible": 155,
+    "egregious": 30,
+    "different-family": 197,
+    "same-family-different-style": 5,
+    "substituted": 753,
+    "net_outlines_retired": 327,
+    "font_bytes_saved": 75957,
+    "different-character": 7
+   },
+   "cover-2.0-ceiling": {
+    "same-face": 246,
+    "visible": 21,
+    "egregious": 2,
+    "different-family": 60,
+    "same-family-different-style": 3,
+    "substituted": 513,
+    "net_outlines_retired": 172,
+    "font_bytes_saved": 39099,
+    "different-character": 1
+   }
+  },
+  "FONT-01 train": {
+   "cover-2.0": {
+    "same-face": 79,
+    "visible": 41,
+    "egregious": 12,
+    "different-family": 67,
+    "same-family-different-style": 5,
+    "substituted": 242,
+    "net_outlines_retired": 83,
+    "font_bytes_saved": 18023,
+    "different-character": 1
+   },
+   "cover-2.0-ceiling": {
+    "same-face": 72,
+    "visible": 5,
+    "egregious": 2,
+    "different-family": 23,
+    "substituted": 153,
+    "net_outlines_retired": 44,
+    "font_bytes_saved": 8828,
+    "same-family-different-style": 1
+   }
+  },
+  "FONT-01 validation": {
+   "cover-2.0": {
+    "same-face": 64,
+    "visible": 8,
+    "egregious": 2,
+    "different-character": 1,
+    "different-family": 6,
+    "same-family-different-style": 3,
+    "substituted": 130,
+    "net_outlines_retired": 57,
+    "font_bytes_saved": 15479
+   },
+   "cover-2.0-ceiling": {
+    "same-face": 51,
+    "visible": 2,
+    "egregious": 0,
+    "different-character": 1,
+    "substituted": 97,
+    "net_outlines_retired": 38,
+    "font_bytes_saved": 10965,
+    "different-family": 1,
+    "same-family-different-style": 1
+   }
+  },
+  "FONT-01 test": {
+   "cover-2.0": {
+    "same-family-different-style": 12,
+    "visible": 46,
+    "egregious": 17,
+    "same-face": 59,
+    "different-family": 61,
+    "different-character": 3,
+    "substituted": 217,
+    "net_outlines_retired": 96,
+    "font_bytes_saved": 23762
+   },
+   "cover-2.0-ceiling": {
+    "same-face": 63,
+    "visible": 0,
+    "egregious": 0,
+    "different-family": 25,
+    "substituted": 156,
+    "net_outlines_retired": 53,
+    "font_bytes_saved": 13917,
+    "same-family-different-style": 1
+   }
+  }
+ }
+}

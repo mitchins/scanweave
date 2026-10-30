@@ -180,3 +180,68 @@ Same-face members lost to the ceiling fall back to the default reconstruction. T
 1. Implement the ceiling natively on `exp/style-compat`, created from `76681da`, under a new flag value. Frozen `cover-2.0` and `off` must stay unchanged.
 2. Measure actual full PDFs on P2, FONT-01 (all splits), financial and mixed.
 3. Then return to Checkpoint S1 review.
+
+## Review of S1d: native absolute ceiling (2026-10-31)
+
+**Implementation.** Commit `3370de3` on `exp/style-compat`, branched from `76681da`. Binary sha256 `d3a26c6d…`.
+
+- The new opt-in flag value is `cover-2.0-ceiling`. A pair must satisfy both the existing `error/floor ≤ 2.0` and `error ≤ 0.08`. Nothing else changes.
+- Tests pass.
+- The `off` and `cover-2.0` outputs are byte-identical to the frozen outputs:
+  - Codex's smoke check: P2 sheet 0;
+  - reviewer re-check: all 9 FONT-01 pages.
+
+**Native full-PDF results.** Full PDFs were run by the reviewer; the census and evaluation script is `s1d_eval.py`, with results in `s1d-results.json`.
+
+| Set | Arm | Visible¹ | Egregious (xor ≥ 0.4) | Different-character | Substituted | Net outlines retired |
+|---|---|---|---|---|---|---|
+| P2 (spent) | cover-2.0 | 155 | 30 | 7 | 753 | 327 |
+| | **ceiling** | **21** | **2** | **1** | 513 | 172 |
+| FONT-01 train (calibration) | cover-2.0 | 41 | 12 | 1 | 242 | 83 |
+| | ceiling | 5 | 2 | 0 | 153 | 44 |
+| FONT-01 validation | cover-2.0 | 8 | 2 | 1 | 130 | 57 |
+| | ceiling | 2 | 0 | 1 | 97 | 38 |
+| FONT-01 test | cover-2.0 | 46 | 17 | 3 | 217 | 96 |
+| | **ceiling** | **0** | **0** | **0** | 156 | 53 |
+
+¹ "Visible" uses the font-outline proxy: a different character, or shape_xor > 0.2.
+
+**Real corpus.** Default ClearScan is unchanged throughout.
+
+| Document | cover-2.0 | ceiling |
+|---|---|---|
+| Financial | 1,750 substituted, net 326, font −62,710 B | 1,736 substituted, net **318 (97.5%)**, font −61,586 B; PDF +1.2 KB vs cover-2.0 |
+| Mixed | net 88 | net 82 |
+| Forms, receipts, historical | economy guard or no groups (unchanged) | same |
+
+**Residual check** (`s1d-evidence/residual-scan-default-ceiling.png`). This covers every remaining case with a different character or xor ≥ 0.3. The reviewer rendered each at native DPI, with columns scan | default | ceiling. **None is distinguishable from default at reading size.** The cases are:
+
+- NotoSansMono `a` ↔ NimbusSans `a`;
+- Bookman-Demi `s`/`t`;
+- DejaVu Mono/Sans `s`/`r`;
+- Times `1` ↔ `l`;
+- NimbusMono-Italic `l`.
+
+The outline-xor proxy overstates these as defects. At scan resolution they are interchangeable shapes, which the owner explicitly allows. This check was unblinded; the P2′ blind review is the qualifying test.
+
+**Verdict.** The correction addresses the diagnosed failure without weakening any safeguard:
+
+- it removes all egregious cross-style substitutions on held-out FONT-01 test;
+- on spent P2 it removes 28 of 30 egregious substitutions, and the 2 that remain look indistinguishable from default at reading size;
+- it keeps 97.5% of the financial net outline retirement.
+
+It is suitable to freeze as the next candidate.
+
+**Before P2′, the freeze package needs:**
+
+- determinism repeats;
+- qpdf, OTS, and text-extraction/search equality on the ceiling outputs;
+- paired runtime and RSS;
+- the method-freeze record with the ceiling constant and its calibration provenance;
+- a fresh P2′ preregistration:
+  - new families with related style siblings (Roman/Italic/Bold/Light/Demi);
+  - a new seed;
+  - the v1.1 sheet layout;
+  - the same pass criteria and blind protocol.
+
+P2′ stays ungenerated until the reviewer has checked the preregistration.
