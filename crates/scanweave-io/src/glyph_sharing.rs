@@ -511,3 +511,6 @@ pub mod font;
 pub mod ownership;
 
 pub mod transport;
+
+/// Absolute fit-error ceiling calibrated on FONT-01 train; see FONT_04_REVIEW_R2B.md.
+pub const ABSOLUTE_FIT_ERROR_CEILING: f64 = 0.08;
