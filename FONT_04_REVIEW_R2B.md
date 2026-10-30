@@ -110,3 +110,73 @@ S1c should test the following:
    - simple exclusion, with its economy cost reported on the financial document.
 
 Calibration stays on FONT-01 train. The metrics and the frontier format are the same as S1b.
+
+## Review of S1c, and the root cause (2026-10-31)
+
+### S1c: run-level style evidence (Codex, rerun by the reviewer after a model-capacity abort)
+
+Verdict: **target not met by any variant.**
+
+- **Best variant: A+C1 at line level, k=2.**
+  - P2: 67/155 visible defects caught.
+  - FONT-01 test: 27/46 caught.
+  - Financial: 97% of accepted substitutions retained.
+  - Even on egregious swaps (shape_xor ≥ 0.4), P2 caught only 16/30.
+- **B (style clustering):** collapsed to a single cluster per page under single linkage, so it caught almost nothing.
+- **C2 (exclude confusables):** caught every different-character case, but cost 30% of financial reuse.
+
+### Root cause
+
+In the frozen product (`plan.rs`), each member's noise floor is the 85th percentile of its errors against its 5 nearest same-label neighbours that pass the hard checks. Admission requires `error / floor ≤ 2.0`.
+
+- **Financial:** a member's neighbours are true repeats of the same design, so the floor measures scan noise.
+- **P2:** most face/character designs occur only a few times per sheet. The nearest neighbours are therefore *other designs*, the floor absorbs between-design differences, and a cross-design swap passes as "within noise".
+
+Accepted P2 substitutions, compared:
+
+| Population | Median fit error | Median floor |
+|---|---|---|
+| Egregious swaps | 0.219 | 0.208 |
+| Same-face swaps | 0.048 | 0.125 |
+
+Population-relative floors cannot separate the egregious swaps. The following were also tested and are ineffective (egregious swaps caught ≤ 7/30):
+
+- using the nearest neighbour or a lower quantile as the floor;
+- capping the floor at the document median.
+
+The cause is that the document median is itself inflated in a mixed-design document.
+
+### Candidate correction: an absolute ceiling on fit error
+
+A fixed ceiling on fit error, applied in addition to the relative rule, anchors admission to an evidence scale that the document's own population cannot inflate.
+
+- **Calibration:** chosen on FONT-01 train only, as the largest ceiling that catches at least 90% of visible defects there. That gives t = 0.08 (38/41 caught, 12/12 egregious).
+- **Results** (offline emulation on the frozen decisions; vetoes only):
+
+| Set | Visible caught | Egregious caught | Different-character caught | Same-face lost | Accepted kept |
+|---|---|---|---|---|---|
+| FONT-01 train (calibration) | 38/41 | 12/12 | 1/1 | 14/79 | 57% |
+| FONT-01 validation | 6/8 | 2/2 | 0/1 | 13/64 | 73% |
+| FONT-01 test | 46/46 | 17/17 | 3/3 | 10/59 | 52% |
+| P2 (spent) | 138/155 | 29/30 | 6/7 | 67/264 | — |
+| Financial | — | — | — | — | **98%** |
+
+The 17 visible P2 defects that remain are mostly near-interchangeable sans pairs, with shape_xor 0.20–0.35:
+
+- NimbusSans ↔ NotoSansMono `a`/`n`;
+- Bookman-Demi `s` ← NimbusSans;
+- one Times `1` ← `l` (error 0.041).
+
+Same-face members lost to the ceiling fall back to the default reconstruction. That costs only economy, not fidelity.
+
+### Caveats
+
+- The emulation removes accepted members from the frozen plan. Natively, cover grouping may then select different canonicals, so full native PDF runs are required.
+- The ceiling is scale-free only if the fit error is resolution-independent. That must be confirmed across DPI natively. Same-face error is somewhat higher at 600 dpi.
+- The confusable guard (C1 or a stricter variant) should be re-tested on top of the ceiling for the residual i/l/1 case.
+
+### Direction: S1d
+
+1. Implement the ceiling natively on `exp/style-compat`, created from `76681da`, under a new flag value. Frozen `cover-2.0` and `off` must stay unchanged.
+2. Measure actual full PDFs on P2, FONT-01 (all splits), financial and mixed.
+3. Then return to Checkpoint S1 review.
