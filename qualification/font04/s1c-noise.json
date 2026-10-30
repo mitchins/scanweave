@@ -1,0 +1,198 @@
+{
+  "schema": "font04-s1c-noise-v1",
+  "method": "Train-only per-DPI character median centering; median run residual; RMS same-face run pair differences multiplied by 1/sqrt(1/n1+1/n2). Oracle-pure among resolved glyphs, at least two resolved. All distinct within-page run pairs; pair dependence and unresolved labels limit precision.",
+  "features": [
+    "slant",
+    "weight"
+  ],
+  "character_normalization_counts": {
+    "200": 52,
+    "300": 41,
+    "600": 48
+  },
+  "calibration": {
+    "word": {
+      "200": {
+        "scales": {
+          "slant": 0.11303813395478261,
+          "weight": 0.05128512392001493
+        },
+        "same_face_run_pairs": 119,
+        "pure_resolved_runs": 47,
+        "length_bins": {
+          "1-2": {
+            "pairs": 11,
+            "rms_difference": {
+              "slant": 0.1089847671354223,
+              "weight": 0.03672009219591399
+            }
+          },
+          "3-5": {
+            "pairs": 87,
+            "rms_difference": {
+              "slant": 0.08248257261680543,
+              "weight": 0.034504108797255365
+            }
+          },
+          "6-11": {
+            "pairs": 21,
+            "rms_difference": {
+              "slant": 0.03655989921429692,
+              "weight": 0.0300255705550553
+            }
+          }
+        }
+      },
+      "300": {
+        "scales": {
+          "slant": 0.11899408303384593,
+          "weight": 0.0658455686369964
+        },
+        "same_face_run_pairs": 183,
+        "pure_resolved_runs": 57,
+        "length_bins": {
+          "1-2": {
+            "pairs": 11,
+            "rms_difference": {
+              "slant": 0.08011982378673348,
+              "weight": 0.04604055346547136
+            }
+          },
+          "3-5": {
+            "pairs": 131,
+            "rms_difference": {
+              "slant": 0.08113125716849769,
+              "weight": 0.03844168983489157
+            }
+          },
+          "6-11": {
+            "pairs": 41,
+            "rms_difference": {
+              "slant": 0.06649940653917187,
+              "weight": 0.04874146756548478
+            }
+          }
+        }
+      },
+      "600": {
+        "scales": {
+          "slant": 0.10611220558366981,
+          "weight": 0.04260914747182864
+        },
+        "same_face_run_pairs": 175,
+        "pure_resolved_runs": 56,
+        "length_bins": {
+          "1-2": {
+            "pairs": 7,
+            "rms_difference": {
+              "slant": 0.12342687401939073,
+              "weight": 0.02289905347345009
+            }
+          },
+          "3-5": {
+            "pairs": 119,
+            "rms_difference": {
+              "slant": 0.07183398173649821,
+              "weight": 0.02246755580901395
+            }
+          },
+          "6-11": {
+            "pairs": 49,
+            "rms_difference": {
+              "slant": 0.05363830018347405,
+              "weight": 0.03207909438290069
+            }
+          }
+        }
+      }
+    },
+    "line": {
+      "200": {
+        "scales": {
+          "slant": 0.08602245914000925,
+          "weight": 0.06242343002002656
+        },
+        "same_face_run_pairs": 20,
+        "pure_resolved_runs": 22,
+        "length_bins": {
+          "12+": {
+            "pairs": 4,
+            "rms_difference": {
+              "slant": 0.020682450956009193,
+              "weight": 0.023752507950680075
+            }
+          },
+          "3-5": {
+            "pairs": 2,
+            "rms_difference": {
+              "slant": 0.03693261422030457,
+              "weight": 0.05612967374599304
+            }
+          },
+          "6-11": {
+            "pairs": 14,
+            "rms_difference": {
+              "slant": 0.044225920094320706,
+              "weight": 0.02845037570358313
+            }
+          }
+        }
+      },
+      "300": {
+        "scales": {
+          "slant": 0.08642422729108701,
+          "weight": 0.07191168282459265
+        },
+        "same_face_run_pairs": 24,
+        "pure_resolved_runs": 24,
+        "length_bins": {
+          "12+": {
+            "pairs": 6,
+            "rms_difference": {
+              "slant": 0.04649931382059163,
+              "weight": 0.03696334141907822
+            }
+          },
+          "3-5": {
+            "pairs": 3,
+            "rms_difference": {
+              "slant": 0.020713354548237285,
+              "weight": 0.026035680286806088
+            }
+          },
+          "6-11": {
+            "pairs": 15,
+            "rms_difference": {
+              "slant": 0.026885718027559503,
+              "weight": 0.024431417821039747
+            }
+          }
+        }
+      },
+      "600": {
+        "scales": {
+          "slant": 0.06046309124860461,
+          "weight": 0.07447205685347062
+        },
+        "same_face_run_pairs": 22,
+        "pure_resolved_runs": 23,
+        "length_bins": {
+          "12+": {
+            "pairs": 7,
+            "rms_difference": {
+              "slant": 0.023781771025397833,
+              "weight": 0.012204388649923655
+            }
+          },
+          "6-11": {
+            "pairs": 15,
+            "rms_difference": {
+              "slant": 0.02552903750756642,
+              "weight": 0.04000153433247749
+            }
+          }
+        }
+      }
+    }
+  }
+}
