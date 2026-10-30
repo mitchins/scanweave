@@ -374,6 +374,58 @@ Review: `/data/coding/scanweave/qualification/font04/local/R2a/blind-review/blin
 
 ## Reader check
 
+**PASS (2026-10-30): current Adobe Reader 26.002.22031 (64-bit) on Windows 11.** The
+reviewer ran this check directly, in a Windows 11 Enterprise Evaluation VM (26H2, build
+26300.9457) under QEMU/KVM with Secure Boot and TPM 2.0. Wine cannot install current Reader
+(see the earlier attempts below).
+
+**Install.** The owner's x64 installer (`86e98feb…5028`) was hash- and Authenticode-verified
+inside the guest. Before first launch, policy disabled protected mode, enhanced security,
+AppContainer, the updater, usage measurement, upsell, first-run screens and the AI assistant,
+and the Adobe update task was disabled. The install exited 0, and `Acrobat.exe` reports
+**26.2.22031.0** ("Adobe Acrobat (64-bit) 26.002.22031", running as Reader).
+
+**Coverage.** The five PDFs were checked: financial default, cover-2.0 and cover-1.5, plus
+mixed default and cover-2.0. Their hashes were verified in the guest. Each of the 43 pages was
+opened fresh, giving 184 captures in total:
+- a fit-page capture;
+- the page's text, copied with select-all and copy;
+- a 400% crop of its densest text region (mixed p2 fixed on the title and the member-518 "with"
+  line);
+- the window classes present, recorded after every open.
+
+| Check | Result |
+|---|---|
+| Error dialogs | **0** in 184 captures; only Reader's own window classes appeared |
+| Copied text, candidate vs default | **28/28 pages identical** |
+| Search, 11 words per PDF | **33/33** candidate searches return the same instance counts as default (e.g. labor 26, Term 16, sequence 10, with 3). Hit lists match line for line; the only pixel differences are UI selection state |
+| Fit render vs pinned PDFium (control) | Within Reader, the default-vs-candidate difference is 0.90–1.11× the same difference within PDFium. Candidates are no further from PDFium than default is: Δ mean −0.078 to +0.009 grey levels |
+| 400% crops | Substitutions show only as faint outline-edge differences. No missing glyphs, wrong component offsets or misplaced glyphs. Member 518 renders normally |
+
+**No genuine Reader-specific difference was found.** An incidental *default* defect is visible
+on mixed p2: in "the professional", the `e` renders as a small raised glyph. `cover-2.0`
+renders it normally, as PDFium does. This is logged with the other default-ClearScan defects
+and is out of scope.
+
+A "Reopen closed PDFs" notice appeared top-right in some captures because Reader was
+force-closed between launches. It lies outside the page and is masked from pixel metrics. An
+early analysis that included it produced two spurious outliers, which disappeared once the
+notice was masked.
+
+Receipt: [reader-check.json](qualification/font04/reader-check.json) (the Wine attempts are
+preserved under `previous_attempts`). Evidence:
+[reader-evidence/windows/](qualification/font04/reader-evidence/windows/). Reproduction kit
+(unattended install, VM launcher, in-guest agent, harness, analysis):
+[reader-win/](qualification/font04/reader-win/). Full captures remain ignored under
+`qualification/font04/local/winvm/`. P2 was not opened.
+
+### Earlier Wine attempts (blocked)
+
+Root cause, found by the reviewer with `WINEDEBUG=trace+mspatcha`: Wine's `mspatcha` logs
+`special processing of 32-bit executables not implemented` and fails. Adobe's MSPs ship DLLs
+as deltas against normalised PE images. The code path is unimplemented in Wine 9.0, 10.0,
+11.0 and master, so no Wine version or setting can install current Reader.
+
 **BLOCKED (2026-10-25): the 32-bit retry also failed to install current Reader
 26.002.22031 under Wine 9.0.** Started on `research/font04-document-fonts` at
 `c9948817ea4f86a4349cc596c43bdb72f1c3ee6b`, as requested. The owner-supplied
