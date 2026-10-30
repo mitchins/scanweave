@@ -66,6 +66,7 @@ pub fn plan(
     fields: &[Field],
     candidates: &[Option<Field>],
     multiplier: f64,
+    absolute_error_ceiling: Option<f64>,
 ) -> Result<Plan, String> {
     if !matches!(multiplier, 1.5 | 2.0) {
         return Err("unsupported frozen operating point".into());
@@ -277,12 +278,13 @@ pub fn plan(
             member: f.member,
             canonical: f.canonical,
             normalized_error: f.error / floors[f.member].max(1e-6),
+            error: f.error,
             safe: f.reasons.is_empty()
                 && screens[f.canonical].is_empty()
                 && bands[f.member] == bands[f.canonical],
         })
         .collect();
-    let groups = cover(&ranked, &pairs, multiplier);
+    let groups = cover(&ranked, &pairs, multiplier, absolute_error_ceiling);
     stage_seconds.insert("planning_cover".into(), stage.elapsed().as_secs_f64());
     Ok(Plan {
         stage_seconds,
@@ -308,7 +310,7 @@ mod tests {
             .collect();
         let fields = vec![vec![0.; 4096]; 10];
         let candidates = vec![None; 10];
-        let result = plan(&rows, &fields, &candidates, 2.).unwrap();
+        let result = plan(&rows, &fields, &candidates, 2., None).unwrap();
         assert!(result.groups.is_empty());
         assert!(result.fits.is_empty());
         assert_eq!(result.floors, vec![0.; 10]);
@@ -320,7 +322,7 @@ mod tests {
             }
         }
         candidates[0] = Some(fields[0].clone());
-        let result = plan(&rows, &fields, &candidates, 2.).unwrap();
+        let result = plan(&rows, &fields, &candidates, 2., None).unwrap();
         assert!(
             result.groups.is_empty(),
             "one source cannot create a two-member group"

@@ -318,6 +318,14 @@ pub fn convert_document_with_sources_and_sharing(
     document_id:&str,inputs:&[Input],policy:&Policy,
     sources:&[Option<crate::source_image::EncodedSourceImage>],sharing:Option<f64>,
 )->Result<DocumentOutput,String>{
+    convert_document_with_sources_and_sharing_ceiling(document_id, inputs, policy, sources, sharing, None)
+}
+
+/// Convert with an optional absolute fit-error ceiling for glyph sharing.
+pub fn convert_document_with_sources_and_sharing_ceiling(
+    document_id:&str,inputs:&[Input],policy:&Policy,
+    sources:&[Option<crate::source_image::EncodedSourceImage>],sharing:Option<f64>, absolute_error_ceiling:Option<f64>,
+)->Result<DocumentOutput,String>{
     if sharing.is_some() && policy.profile != "clearscan" {return Err("glyph sharing requires ClearScan".into());}
     let mut effective_policy = policy.clone();
     if policy.profile == "clearscan" && policy.image_encoding.predictor == 1 {
@@ -471,7 +479,7 @@ pub fn convert_document_with_sources_and_sharing(
     let baseline_font=sharing.map(|_|font_bytes.clone());
     let mut sharing_report=None;
     if let (Some(multiplier),Some(rows))=(sharing,observations.as_ref()) {
-        let(candidate,mut report)=crate::glyph_sharing::transport::share(rows,&parts,&shapes,&encodings,&font_bytes,policy.image_encoding,raster_choice,multiplier)?;
+        let(candidate,mut report)=crate::glyph_sharing::transport::share(rows,&parts,&shapes,&encodings,&font_bytes,policy.image_encoding,raster_choice,multiplier,absolute_error_ceiling)?;
         report.stage_seconds.insert("source_snapshot".into(), snapshot_seconds);
         if let Some(candidate)=candidate {font_bytes=candidate.font;pdf_bytes=candidate.pdf;stats=candidate.stats;}
         sharing_report=Some(report);

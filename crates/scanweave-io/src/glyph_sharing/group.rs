@@ -16,11 +16,12 @@ pub struct Pair {
     pub member: usize,
     pub canonical: usize,
     pub normalized_error: f64,
+    pub error: f64,
     pub safe: bool,
 }
 /// Missing pairs are untested, not interchangeable with rejected fits. A
 /// canonical must pass its own admission. Tie breaks follow research index order.
-pub fn cover(rows: &[Member], pairs: &[Pair], multiplier: f64) -> Vec<Group> {
+pub fn cover(rows: &[Member], pairs: &[Pair], multiplier: f64, absolute_error_ceiling: Option<f64>) -> Vec<Group> {
     let mut partitions: BTreeMap<String, Vec<usize>> = BTreeMap::new();
     for (i, row) in rows.iter().enumerate() {
         partitions
@@ -30,7 +31,7 @@ pub fn cover(rows: &[Member], pairs: &[Pair], multiplier: f64) -> Vec<Group> {
     }
     let valid: BTreeMap<(usize, usize), f64> = pairs
         .iter()
-        .filter(|p| p.safe && p.normalized_error <= multiplier)
+        .filter(|p| p.safe && p.normalized_error <= multiplier && absolute_error_ceiling.is_none_or(|ceiling| p.error <= ceiling))
         .map(|p| ((p.member, p.canonical), p.normalized_error))
         .collect();
     let mut groups = Vec::new();
@@ -128,16 +129,30 @@ mod tests {
                     member: i,
                     canonical: j,
                     normalized_error: 1.,
+                    error: 0.1,
                     safe: j != 1,
                 });
             }
         }
         assert_eq!(
-            cover(&rows, &pairs, 2.),
+            cover(&rows, &pairs, 2., None),
             vec![Group {
                 canonical: 0,
                 members: vec![0, 1]
             }]
         );
     }
+    #[test]
+    fn ceiling_excludes_low_normalized_high_absolute_error() {
+        let rows: Vec<Member> = ["one", "two"].into_iter().map(|key| Member {
+            label: "a".into(), shape_key: key.into(), band: 1,
+        }).collect();
+        let pairs: Vec<Pair> = (0..2).flat_map(|i| (0..2).map(move |j| Pair {
+            member: i, canonical: j, normalized_error: 0.5,
+            error: if i == j { 0.0 } else { 0.09 }, safe: true,
+        })).collect();
+        assert!(cover(&rows, &pairs, 2.0, Some(super::super::ABSOLUTE_FIT_ERROR_CEILING)).is_empty());
+        assert_eq!(cover(&rows, &pairs, 2.0, None), vec![Group { canonical: 0, members: vec![0, 1] }]);
+    }
+
 }

@@ -5,7 +5,7 @@ fn sharing_flag_validation_precedes_input_work() {
         (
             "clearscan",
             "unknown",
-            "--glyph-sharing must be off, cover-2.0 or cover-1.5",
+            "--glyph-sharing must be off, cover-2.0, cover-2.0-ceiling or cover-1.5",
         ),
         (
             "faithful",
