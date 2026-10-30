@@ -1,5 +1,20 @@
 # FONT-04 results — Checkpoint R1
 
+## Checkpoint R2b (P2) — stopped after adverse pristine screen
+
+P2 was opened once and all nine sheets were converted in both arms; all nine
+candidate repeats were byte-identical. R2a extraction, qpdf and OTS checks and
+native search passed on all sheets. A full-context pristine screen found worse
+candidate mean or p95 for 34 of 43 frequent classes in PDFium and 36 of 43 in
+Poppler. This diagnostic includes overlapping neighbours in each observation
+box, so it is not a validated isolated-glyph qualification result. The frozen
+per-glyph criterion remains **unverified**, and the adverse screen triggered a
+stop rather than any tuning. Material defects remain **PENDING-REVIEW**; the
+blind package, false-rejection measurement and complete economy accounting are
+not complete. See `qualification/font04/r2b-stop-receipt.json`,
+`r2b-pristine-context.json`, and `R2B_REPRODUCTION.md`.
+
+
 **Status: stopped at Checkpoint R1 for independent review.** B2′ is accepted and cover-2.0 is frozen. Native parity, fidelity, available-consumer compatibility and local coverage pass; current Windows Reader is BLOCKED-ON-OWNER. Default remains byte-identical. P2 is unopened; earlier checkpoint sections are historical.
 
 Historical research contract: `9c2e9963aebce439495a409ac9588a5b38321fc3`. Current product contract: `3610e009b89aa3a5f97aea65af6df87477295656`. Product baseline: `c10e3dff93ca12ac410c0f6626a4ef74ce34e0c1`. The preregistration retains SHA-256 `a4f9ccd3a7e51d719946be80f7cc9a297de7ca22285e8755e5e26e415e7db466`.

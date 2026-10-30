@@ -1,0 +1,713 @@
+{
+  "status": "STOP: pristine page-context screen failed; isolated-glyph criterion remains unverified",
+  "precheck": {
+    "binary_sha256": "85fc1aa659f9729aebd510c1c6bb0328757b4130d02040965c94bf047a009a57",
+    "product_commit": "76681da",
+    "pdfium_sha256": "b8784cbd652ad2993332b7695e2c80f3a797f877fc47d9be97b66bca9639539e",
+    "retained_financial_default_and_candidate_match_r2a_baseline": true,
+    "schedule_clean_and_damaged_witnesses_all_516_identities": true,
+    "abandoned_preflight": "local/P2-preflight retained, incomplete and not used"
+  },
+  "opened": {
+    "timestamp": "2026-10-30T21:02:40.369755+00:00",
+    "git_head": "0809db366cb40fc74cb8fcf146849738f2b4015d",
+    "product_binary_sha256": "85fc1aa659f9729aebd510c1c6bb0328757b4130d02040965c94bf047a009a57",
+    "argv": [
+      "/data/coding/scanweave/qualification/font04/r2b_generator.py",
+      "--split",
+      "p2",
+      "--binary",
+      "qualification/font04/local/R2a/resume-optimized/scanweave"
+    ]
+  },
+  "runs": [
+    {
+      "sheet": 0,
+      "dpi": 200,
+      "label": "off",
+      "command": [
+        "/data/coding/scanweave/qualification/font04/local/R2a/resume-optimized/scanweave",
+        "/data/coding/scanweave/qualification/font04/local/P2/sheet-0.pdf",
+        "/data/coding/scanweave/qualification/font04/local/P2/sheet-0-off.pdf",
+        "--dpi",
+        "200",
+        "--profile",
+        "clearscan",
+        "--glyph-sharing",
+        "off"
+      ],
+      "returncode": 0,
+      "wall_seconds": 12.00586132099852,
+      "binary_sha256": "85fc1aa659f9729aebd510c1c6bb0328757b4130d02040965c94bf047a009a57",
+      "pdfium_sha256": "b8784cbd652ad2993332b7695e2c80f3a797f877fc47d9be97b66bca9639539e",
+      "sha256": "bd1df18ad074eff6ffd2d96f838ec3460795b93b5595d3a1a93aa5d3616a1957",
+      "bytes": 351126,
+      "peak_rss_kb": 78976
+    },
+    {
+      "sheet": 0,
+      "dpi": 200,
+      "label": "cover-2.0",
+      "command": [
+        "/data/coding/scanweave/qualification/font04/local/R2a/resume-optimized/scanweave",
+        "/data/coding/scanweave/qualification/font04/local/P2/sheet-0.pdf",
+        "/data/coding/scanweave/qualification/font04/local/P2/sheet-0-cover-2.0.pdf",
+        "--dpi",
+        "200",
+        "--profile",
+        "clearscan",
+        "--glyph-sharing",
+        "cover-2.0"
+      ],
+      "returncode": 0,
+      "wall_seconds": 27.23469638000097,
+      "binary_sha256": "85fc1aa659f9729aebd510c1c6bb0328757b4130d02040965c94bf047a009a57",
+      "pdfium_sha256": "b8784cbd652ad2993332b7695e2c80f3a797f877fc47d9be97b66bca9639539e",
+      "sha256": "7ed6831dca248e71fce85f40a476495c01d0daca00d9575995635922b16596a2",
+      "bytes": 346831,
+      "peak_rss_kb": 84548
+    },
+    {
+      "sheet": 0,
+      "dpi": 200,
+      "label": "cover-2.0-repeat",
+      "command": [
+        "/data/coding/scanweave/qualification/font04/local/R2a/resume-optimized/scanweave",
+        "/data/coding/scanweave/qualification/font04/local/P2/sheet-0.pdf",
+        "/data/coding/scanweave/qualification/font04/local/P2/sheet-0-cover-2.0-repeat.pdf",
+        "--dpi",
+        "200",
+        "--profile",
+        "clearscan",
+        "--glyph-sharing",
+        "cover-2.0"
+      ],
+      "returncode": 0,
+      "wall_seconds": 27.432287317999,
+      "binary_sha256": "85fc1aa659f9729aebd510c1c6bb0328757b4130d02040965c94bf047a009a57",
+      "pdfium_sha256": "b8784cbd652ad2993332b7695e2c80f3a797f877fc47d9be97b66bca9639539e",
+      "sha256": "7ed6831dca248e71fce85f40a476495c01d0daca00d9575995635922b16596a2",
+      "bytes": 346831,
+      "peak_rss_kb": 84536
+    },
+    {
+      "sheet": 1,
+      "dpi": 200,
+      "label": "off",
+      "command": [
+        "/data/coding/scanweave/qualification/font04/local/R2a/resume-optimized/scanweave",
+        "/data/coding/scanweave/qualification/font04/local/P2/sheet-1.pdf",
+        "/data/coding/scanweave/qualification/font04/local/P2/sheet-1-off.pdf",
+        "--dpi",
+        "200",
+        "--profile",
+        "clearscan",
+        "--glyph-sharing",
+        "off"
+      ],
+      "returncode": 0,
+      "wall_seconds": 15.63943646599364,
+      "binary_sha256": "85fc1aa659f9729aebd510c1c6bb0328757b4130d02040965c94bf047a009a57",
+      "pdfium_sha256": "b8784cbd652ad2993332b7695e2c80f3a797f877fc47d9be97b66bca9639539e",
+      "sha256": "3c96d6a1faf2f6fcc37f3375ce94f36cd6e6b3e296eeef7c39a061ab6a7d0e44",
+      "bytes": 423847,
+      "peak_rss_kb": 82828
+    },
+    {
+      "sheet": 1,
+      "dpi": 200,
+      "label": "cover-2.0",
+      "command": [
+        "/data/coding/scanweave/qualification/font04/local/R2a/resume-optimized/scanweave",
+        "/data/coding/scanweave/qualification/font04/local/P2/sheet-1.pdf",
+        "/data/coding/scanweave/qualification/font04/local/P2/sheet-1-cover-2.0.pdf",
+        "--dpi",
+        "200",
+        "--profile",
+        "clearscan",
+        "--glyph-sharing",
+        "cover-2.0"
+      ],
+      "returncode": 0,
+      "wall_seconds": 37.19842224400054,
+      "binary_sha256": "85fc1aa659f9729aebd510c1c6bb0328757b4130d02040965c94bf047a009a57",
+      "pdfium_sha256": "b8784cbd652ad2993332b7695e2c80f3a797f877fc47d9be97b66bca9639539e",
+      "sha256": "cb8160aa4e2c1c2a1f564bf42bc48d09fcffe1938f0335b8913ebb951f8f1171",
+      "bytes": 419174,
+      "peak_rss_kb": 94856
+    },
+    {
+      "sheet": 1,
+      "dpi": 200,
+      "label": "cover-2.0-repeat",
+      "command": [
+        "/data/coding/scanweave/qualification/font04/local/R2a/resume-optimized/scanweave",
+        "/data/coding/scanweave/qualification/font04/local/P2/sheet-1.pdf",
+        "/data/coding/scanweave/qualification/font04/local/P2/sheet-1-cover-2.0-repeat.pdf",
+        "--dpi",
+        "200",
+        "--profile",
+        "clearscan",
+        "--glyph-sharing",
+        "cover-2.0"
+      ],
+      "returncode": 0,
+      "wall_seconds": 37.457317533000605,
+      "binary_sha256": "85fc1aa659f9729aebd510c1c6bb0328757b4130d02040965c94bf047a009a57",
+      "pdfium_sha256": "b8784cbd652ad2993332b7695e2c80f3a797f877fc47d9be97b66bca9639539e",
+      "sha256": "cb8160aa4e2c1c2a1f564bf42bc48d09fcffe1938f0335b8913ebb951f8f1171",
+      "bytes": 419174,
+      "peak_rss_kb": 94340
+    },
+    {
+      "sheet": 2,
+      "dpi": 200,
+      "label": "off",
+      "command": [
+        "/data/coding/scanweave/qualification/font04/local/R2a/resume-optimized/scanweave",
+        "/data/coding/scanweave/qualification/font04/local/P2/sheet-2.pdf",
+        "/data/coding/scanweave/qualification/font04/local/P2/sheet-2-off.pdf",
+        "--dpi",
+        "200",
+        "--profile",
+        "clearscan",
+        "--glyph-sharing",
+        "off"
+      ],
+      "returncode": 0,
+      "wall_seconds": 13.947452799999155,
+      "binary_sha256": "85fc1aa659f9729aebd510c1c6bb0328757b4130d02040965c94bf047a009a57",
+      "pdfium_sha256": "b8784cbd652ad2993332b7695e2c80f3a797f877fc47d9be97b66bca9639539e",
+      "sha256": "1ea7470900bc0938ed7b2530e18676d4b75b2b7a28772aecbf9d8d5a9f03c77e",
+      "bytes": 395569,
+      "peak_rss_kb": 81488
+    },
+    {
+      "sheet": 2,
+      "dpi": 200,
+      "label": "cover-2.0",
+      "command": [
+        "/data/coding/scanweave/qualification/font04/local/R2a/resume-optimized/scanweave",
+        "/data/coding/scanweave/qualification/font04/local/P2/sheet-2.pdf",
+        "/data/coding/scanweave/qualification/font04/local/P2/sheet-2-cover-2.0.pdf",
+        "--dpi",
+        "200",
+        "--profile",
+        "clearscan",
+        "--glyph-sharing",
+        "cover-2.0"
+      ],
+      "returncode": 0,
+      "wall_seconds": 34.91923041900009,
+      "binary_sha256": "85fc1aa659f9729aebd510c1c6bb0328757b4130d02040965c94bf047a009a57",
+      "pdfium_sha256": "b8784cbd652ad2993332b7695e2c80f3a797f877fc47d9be97b66bca9639539e",
+      "sha256": "c35bc38d907890516b3de32859d45d7c64d1e0ea463a425d8683aaa20a05298b",
+      "bytes": 389103,
+      "peak_rss_kb": 94644
+    },
+    {
+      "sheet": 2,
+      "dpi": 200,
+      "label": "cover-2.0-repeat",
+      "command": [
+        "/data/coding/scanweave/qualification/font04/local/R2a/resume-optimized/scanweave",
+        "/data/coding/scanweave/qualification/font04/local/P2/sheet-2.pdf",
+        "/data/coding/scanweave/qualification/font04/local/P2/sheet-2-cover-2.0-repeat.pdf",
+        "--dpi",
+        "200",
+        "--profile",
+        "clearscan",
+        "--glyph-sharing",
+        "cover-2.0"
+      ],
+      "returncode": 0,
+      "wall_seconds": 34.3957810819993,
+      "binary_sha256": "85fc1aa659f9729aebd510c1c6bb0328757b4130d02040965c94bf047a009a57",
+      "pdfium_sha256": "b8784cbd652ad2993332b7695e2c80f3a797f877fc47d9be97b66bca9639539e",
+      "sha256": "c35bc38d907890516b3de32859d45d7c64d1e0ea463a425d8683aaa20a05298b",
+      "bytes": 389103,
+      "peak_rss_kb": 94036
+    },
+    {
+      "sheet": 3,
+      "dpi": 300,
+      "label": "off",
+      "command": [
+        "/data/coding/scanweave/qualification/font04/local/R2a/resume-optimized/scanweave",
+        "/data/coding/scanweave/qualification/font04/local/P2/sheet-3.pdf",
+        "/data/coding/scanweave/qualification/font04/local/P2/sheet-3-off.pdf",
+        "--dpi",
+        "300",
+        "--profile",
+        "clearscan",
+        "--glyph-sharing",
+        "off"
+      ],
+      "returncode": 0,
+      "wall_seconds": 29.363377399000456,
+      "binary_sha256": "85fc1aa659f9729aebd510c1c6bb0328757b4130d02040965c94bf047a009a57",
+      "pdfium_sha256": "b8784cbd652ad2993332b7695e2c80f3a797f877fc47d9be97b66bca9639539e",
+      "sha256": "91549d852311858a05a3e3f9f5909ba7001ef7abe153efec839368361ac9cf4b",
+      "bytes": 235970,
+      "peak_rss_kb": 168540
+    },
+    {
+      "sheet": 3,
+      "dpi": 300,
+      "label": "cover-2.0",
+      "command": [
+        "/data/coding/scanweave/qualification/font04/local/R2a/resume-optimized/scanweave",
+        "/data/coding/scanweave/qualification/font04/local/P2/sheet-3.pdf",
+        "/data/coding/scanweave/qualification/font04/local/P2/sheet-3-cover-2.0.pdf",
+        "--dpi",
+        "300",
+        "--profile",
+        "clearscan",
+        "--glyph-sharing",
+        "cover-2.0"
+      ],
+      "returncode": 0,
+      "wall_seconds": 52.569818664997,
+      "binary_sha256": "85fc1aa659f9729aebd510c1c6bb0328757b4130d02040965c94bf047a009a57",
+      "pdfium_sha256": "b8784cbd652ad2993332b7695e2c80f3a797f877fc47d9be97b66bca9639539e",
+      "sha256": "8b2f7f6428d5076c588575e3609f8b61320328955546b97a80bf7d00f885a2a9",
+      "bytes": 227278,
+      "peak_rss_kb": 199996
+    },
+    {
+      "sheet": 3,
+      "dpi": 300,
+      "label": "cover-2.0-repeat",
+      "command": [
+        "/data/coding/scanweave/qualification/font04/local/R2a/resume-optimized/scanweave",
+        "/data/coding/scanweave/qualification/font04/local/P2/sheet-3.pdf",
+        "/data/coding/scanweave/qualification/font04/local/P2/sheet-3-cover-2.0-repeat.pdf",
+        "--dpi",
+        "300",
+        "--profile",
+        "clearscan",
+        "--glyph-sharing",
+        "cover-2.0"
+      ],
+      "returncode": 0,
+      "wall_seconds": 52.78043812899705,
+      "binary_sha256": "85fc1aa659f9729aebd510c1c6bb0328757b4130d02040965c94bf047a009a57",
+      "pdfium_sha256": "b8784cbd652ad2993332b7695e2c80f3a797f877fc47d9be97b66bca9639539e",
+      "sha256": "8b2f7f6428d5076c588575e3609f8b61320328955546b97a80bf7d00f885a2a9",
+      "bytes": 227278,
+      "peak_rss_kb": 199428
+    },
+    {
+      "sheet": 4,
+      "dpi": 300,
+      "label": "off",
+      "command": [
+        "/data/coding/scanweave/qualification/font04/local/R2a/resume-optimized/scanweave",
+        "/data/coding/scanweave/qualification/font04/local/P2/sheet-4.pdf",
+        "/data/coding/scanweave/qualification/font04/local/P2/sheet-4-off.pdf",
+        "--dpi",
+        "300",
+        "--profile",
+        "clearscan",
+        "--glyph-sharing",
+        "off"
+      ],
+      "returncode": 0,
+      "wall_seconds": 23.118179842000245,
+      "binary_sha256": "85fc1aa659f9729aebd510c1c6bb0328757b4130d02040965c94bf047a009a57",
+      "pdfium_sha256": "b8784cbd652ad2993332b7695e2c80f3a797f877fc47d9be97b66bca9639539e",
+      "sha256": "04103ff086c71141615ed679472971872d9b463b4b5d4e62674ddd1ad01dd023",
+      "bytes": 219351,
+      "peak_rss_kb": 168024
+    },
+    {
+      "sheet": 4,
+      "dpi": 300,
+      "label": "cover-2.0",
+      "command": [
+        "/data/coding/scanweave/qualification/font04/local/R2a/resume-optimized/scanweave",
+        "/data/coding/scanweave/qualification/font04/local/P2/sheet-4.pdf",
+        "/data/coding/scanweave/qualification/font04/local/P2/sheet-4-cover-2.0.pdf",
+        "--dpi",
+        "300",
+        "--profile",
+        "clearscan",
+        "--glyph-sharing",
+        "cover-2.0"
+      ],
+      "returncode": 0,
+      "wall_seconds": 41.62433426699863,
+      "binary_sha256": "85fc1aa659f9729aebd510c1c6bb0328757b4130d02040965c94bf047a009a57",
+      "pdfium_sha256": "b8784cbd652ad2993332b7695e2c80f3a797f877fc47d9be97b66bca9639539e",
+      "sha256": "641bd09af2a6bc85f088d47f7f83b0eb1e8e0c409e42aa3dd318255a27e0b8ae",
+      "bytes": 216012,
+      "peak_rss_kb": 188196
+    },
+    {
+      "sheet": 4,
+      "dpi": 300,
+      "label": "cover-2.0-repeat",
+      "command": [
+        "/data/coding/scanweave/qualification/font04/local/R2a/resume-optimized/scanweave",
+        "/data/coding/scanweave/qualification/font04/local/P2/sheet-4.pdf",
+        "/data/coding/scanweave/qualification/font04/local/P2/sheet-4-cover-2.0-repeat.pdf",
+        "--dpi",
+        "300",
+        "--profile",
+        "clearscan",
+        "--glyph-sharing",
+        "cover-2.0"
+      ],
+      "returncode": 0,
+      "wall_seconds": 41.1997041670038,
+      "binary_sha256": "85fc1aa659f9729aebd510c1c6bb0328757b4130d02040965c94bf047a009a57",
+      "pdfium_sha256": "b8784cbd652ad2993332b7695e2c80f3a797f877fc47d9be97b66bca9639539e",
+      "sha256": "641bd09af2a6bc85f088d47f7f83b0eb1e8e0c409e42aa3dd318255a27e0b8ae",
+      "bytes": 216012,
+      "peak_rss_kb": 188660
+    },
+    {
+      "sheet": 5,
+      "dpi": 300,
+      "label": "off",
+      "command": [
+        "/data/coding/scanweave/qualification/font04/local/R2a/resume-optimized/scanweave",
+        "/data/coding/scanweave/qualification/font04/local/P2/sheet-5.pdf",
+        "/data/coding/scanweave/qualification/font04/local/P2/sheet-5-off.pdf",
+        "--dpi",
+        "300",
+        "--profile",
+        "clearscan",
+        "--glyph-sharing",
+        "off"
+      ],
+      "returncode": 0,
+      "wall_seconds": 29.870261179996305,
+      "binary_sha256": "85fc1aa659f9729aebd510c1c6bb0328757b4130d02040965c94bf047a009a57",
+      "pdfium_sha256": "b8784cbd652ad2993332b7695e2c80f3a797f877fc47d9be97b66bca9639539e",
+      "sha256": "979e61b873c8145873e1bd4e30222d42e5ebb821ef1ad0fc2d4df72e5d98058d",
+      "bytes": 539438,
+      "peak_rss_kb": 141556
+    },
+    {
+      "sheet": 5,
+      "dpi": 300,
+      "label": "cover-2.0",
+      "command": [
+        "/data/coding/scanweave/qualification/font04/local/R2a/resume-optimized/scanweave",
+        "/data/coding/scanweave/qualification/font04/local/P2/sheet-5.pdf",
+        "/data/coding/scanweave/qualification/font04/local/P2/sheet-5-cover-2.0.pdf",
+        "--dpi",
+        "300",
+        "--profile",
+        "clearscan",
+        "--glyph-sharing",
+        "cover-2.0"
+      ],
+      "returncode": 0,
+      "wall_seconds": 63.32936754899856,
+      "binary_sha256": "85fc1aa659f9729aebd510c1c6bb0328757b4130d02040965c94bf047a009a57",
+      "pdfium_sha256": "b8784cbd652ad2993332b7695e2c80f3a797f877fc47d9be97b66bca9639539e",
+      "sha256": "6ecd9d69bbb51c8fd031b465f0a884016e013a975dd22b91199171b88c7aafb7",
+      "bytes": 531643,
+      "peak_rss_kb": 156800
+    },
+    {
+      "sheet": 5,
+      "dpi": 300,
+      "label": "cover-2.0-repeat",
+      "command": [
+        "/data/coding/scanweave/qualification/font04/local/R2a/resume-optimized/scanweave",
+        "/data/coding/scanweave/qualification/font04/local/P2/sheet-5.pdf",
+        "/data/coding/scanweave/qualification/font04/local/P2/sheet-5-cover-2.0-repeat.pdf",
+        "--dpi",
+        "300",
+        "--profile",
+        "clearscan",
+        "--glyph-sharing",
+        "cover-2.0"
+      ],
+      "returncode": 0,
+      "wall_seconds": 62.91968667799665,
+      "binary_sha256": "85fc1aa659f9729aebd510c1c6bb0328757b4130d02040965c94bf047a009a57",
+      "pdfium_sha256": "b8784cbd652ad2993332b7695e2c80f3a797f877fc47d9be97b66bca9639539e",
+      "sha256": "6ecd9d69bbb51c8fd031b465f0a884016e013a975dd22b91199171b88c7aafb7",
+      "bytes": 531643,
+      "peak_rss_kb": 156356
+    },
+    {
+      "sheet": 6,
+      "dpi": 600,
+      "label": "off",
+      "command": [
+        "/data/coding/scanweave/qualification/font04/local/R2a/resume-optimized/scanweave",
+        "/data/coding/scanweave/qualification/font04/local/P2/sheet-6.pdf",
+        "/data/coding/scanweave/qualification/font04/local/P2/sheet-6-off.pdf",
+        "--dpi",
+        "600",
+        "--profile",
+        "clearscan",
+        "--glyph-sharing",
+        "off"
+      ],
+      "returncode": 0,
+      "wall_seconds": 92.28341615299723,
+      "binary_sha256": "85fc1aa659f9729aebd510c1c6bb0328757b4130d02040965c94bf047a009a57",
+      "pdfium_sha256": "b8784cbd652ad2993332b7695e2c80f3a797f877fc47d9be97b66bca9639539e",
+      "sha256": "e36fc1ef6c306aff6d1f7cde5acbdea5c9a649257042c6300538f199ca7e1e63",
+      "bytes": 1060220,
+      "peak_rss_kb": 448544
+    },
+    {
+      "sheet": 6,
+      "dpi": 600,
+      "label": "cover-2.0",
+      "command": [
+        "/data/coding/scanweave/qualification/font04/local/R2a/resume-optimized/scanweave",
+        "/data/coding/scanweave/qualification/font04/local/P2/sheet-6.pdf",
+        "/data/coding/scanweave/qualification/font04/local/P2/sheet-6-cover-2.0.pdf",
+        "--dpi",
+        "600",
+        "--profile",
+        "clearscan",
+        "--glyph-sharing",
+        "cover-2.0"
+      ],
+      "returncode": 0,
+      "wall_seconds": 115.74128939399816,
+      "binary_sha256": "85fc1aa659f9729aebd510c1c6bb0328757b4130d02040965c94bf047a009a57",
+      "pdfium_sha256": "b8784cbd652ad2993332b7695e2c80f3a797f877fc47d9be97b66bca9639539e",
+      "sha256": "5c33898d0397f3d6b9b403c2b5e38cdbe205056b4369dd8029bbc0cdacdccd6d",
+      "bytes": 1049701,
+      "peak_rss_kb": 448460
+    },
+    {
+      "sheet": 6,
+      "dpi": 600,
+      "label": "cover-2.0-repeat",
+      "command": [
+        "/data/coding/scanweave/qualification/font04/local/R2a/resume-optimized/scanweave",
+        "/data/coding/scanweave/qualification/font04/local/P2/sheet-6.pdf",
+        "/data/coding/scanweave/qualification/font04/local/P2/sheet-6-cover-2.0-repeat.pdf",
+        "--dpi",
+        "600",
+        "--profile",
+        "clearscan",
+        "--glyph-sharing",
+        "cover-2.0"
+      ],
+      "returncode": 0,
+      "wall_seconds": 114.96529784700397,
+      "binary_sha256": "85fc1aa659f9729aebd510c1c6bb0328757b4130d02040965c94bf047a009a57",
+      "pdfium_sha256": "b8784cbd652ad2993332b7695e2c80f3a797f877fc47d9be97b66bca9639539e",
+      "sha256": "5c33898d0397f3d6b9b403c2b5e38cdbe205056b4369dd8029bbc0cdacdccd6d",
+      "bytes": 1049701,
+      "peak_rss_kb": 448336
+    },
+    {
+      "sheet": 7,
+      "dpi": 600,
+      "label": "off",
+      "command": [
+        "/data/coding/scanweave/qualification/font04/local/R2a/resume-optimized/scanweave",
+        "/data/coding/scanweave/qualification/font04/local/P2/sheet-7.pdf",
+        "/data/coding/scanweave/qualification/font04/local/P2/sheet-7-off.pdf",
+        "--dpi",
+        "600",
+        "--profile",
+        "clearscan",
+        "--glyph-sharing",
+        "off"
+      ],
+      "returncode": 0,
+      "wall_seconds": 98.62442519799515,
+      "binary_sha256": "85fc1aa659f9729aebd510c1c6bb0328757b4130d02040965c94bf047a009a57",
+      "pdfium_sha256": "b8784cbd652ad2993332b7695e2c80f3a797f877fc47d9be97b66bca9639539e",
+      "sha256": "7c2a9513db683306e14c9b3ab8a0edcd881f2004690cc9ea0f97d6df40bbc735",
+      "bytes": 1091322,
+      "peak_rss_kb": 448892
+    },
+    {
+      "sheet": 7,
+      "dpi": 600,
+      "label": "cover-2.0",
+      "command": [
+        "/data/coding/scanweave/qualification/font04/local/R2a/resume-optimized/scanweave",
+        "/data/coding/scanweave/qualification/font04/local/P2/sheet-7.pdf",
+        "/data/coding/scanweave/qualification/font04/local/P2/sheet-7-cover-2.0.pdf",
+        "--dpi",
+        "600",
+        "--profile",
+        "clearscan",
+        "--glyph-sharing",
+        "cover-2.0"
+      ],
+      "returncode": 0,
+      "wall_seconds": 120.91625974699855,
+      "binary_sha256": "85fc1aa659f9729aebd510c1c6bb0328757b4130d02040965c94bf047a009a57",
+      "pdfium_sha256": "b8784cbd652ad2993332b7695e2c80f3a797f877fc47d9be97b66bca9639539e",
+      "sha256": "d1dff44156c9ca1295d1672d1e35e566c8fb68cadea381c79de6193e10cc447b",
+      "bytes": 1083251,
+      "peak_rss_kb": 449508
+    },
+    {
+      "sheet": 7,
+      "dpi": 600,
+      "label": "cover-2.0-repeat",
+      "command": [
+        "/data/coding/scanweave/qualification/font04/local/R2a/resume-optimized/scanweave",
+        "/data/coding/scanweave/qualification/font04/local/P2/sheet-7.pdf",
+        "/data/coding/scanweave/qualification/font04/local/P2/sheet-7-cover-2.0-repeat.pdf",
+        "--dpi",
+        "600",
+        "--profile",
+        "clearscan",
+        "--glyph-sharing",
+        "cover-2.0"
+      ],
+      "returncode": 0,
+      "wall_seconds": 120.10303095199924,
+      "binary_sha256": "85fc1aa659f9729aebd510c1c6bb0328757b4130d02040965c94bf047a009a57",
+      "pdfium_sha256": "b8784cbd652ad2993332b7695e2c80f3a797f877fc47d9be97b66bca9639539e",
+      "sha256": "d1dff44156c9ca1295d1672d1e35e566c8fb68cadea381c79de6193e10cc447b",
+      "bytes": 1083251,
+      "peak_rss_kb": 448652
+    },
+    {
+      "sheet": 8,
+      "dpi": 600,
+      "label": "off",
+      "command": [
+        "/data/coding/scanweave/qualification/font04/local/R2a/resume-optimized/scanweave",
+        "/data/coding/scanweave/qualification/font04/local/P2/sheet-8.pdf",
+        "/data/coding/scanweave/qualification/font04/local/P2/sheet-8-off.pdf",
+        "--dpi",
+        "600",
+        "--profile",
+        "clearscan",
+        "--glyph-sharing",
+        "off"
+      ],
+      "returncode": 0,
+      "wall_seconds": 80.88277599499997,
+      "binary_sha256": "85fc1aa659f9729aebd510c1c6bb0328757b4130d02040965c94bf047a009a57",
+      "pdfium_sha256": "b8784cbd652ad2993332b7695e2c80f3a797f877fc47d9be97b66bca9639539e",
+      "sha256": "dbcd479571a7cf77d528568d328cb03aa2df059e58e1869dd3bdc11912b60c11",
+      "bytes": 1007964,
+      "peak_rss_kb": 449136
+    },
+    {
+      "sheet": 8,
+      "dpi": 600,
+      "label": "cover-2.0",
+      "command": [
+        "/data/coding/scanweave/qualification/font04/local/R2a/resume-optimized/scanweave",
+        "/data/coding/scanweave/qualification/font04/local/P2/sheet-8.pdf",
+        "/data/coding/scanweave/qualification/font04/local/P2/sheet-8-cover-2.0.pdf",
+        "--dpi",
+        "600",
+        "--profile",
+        "clearscan",
+        "--glyph-sharing",
+        "cover-2.0"
+      ],
+      "returncode": 0,
+      "wall_seconds": 111.65826955500233,
+      "binary_sha256": "85fc1aa659f9729aebd510c1c6bb0328757b4130d02040965c94bf047a009a57",
+      "pdfium_sha256": "b8784cbd652ad2993332b7695e2c80f3a797f877fc47d9be97b66bca9639539e",
+      "sha256": "216968da65487b2df950a0650823fb50731fda522f108cc41db2baae16a2653b",
+      "bytes": 997167,
+      "peak_rss_kb": 449336
+    },
+    {
+      "sheet": 8,
+      "dpi": 600,
+      "label": "cover-2.0-repeat",
+      "command": [
+        "/data/coding/scanweave/qualification/font04/local/R2a/resume-optimized/scanweave",
+        "/data/coding/scanweave/qualification/font04/local/P2/sheet-8.pdf",
+        "/data/coding/scanweave/qualification/font04/local/P2/sheet-8-cover-2.0-repeat.pdf",
+        "--dpi",
+        "600",
+        "--profile",
+        "clearscan",
+        "--glyph-sharing",
+        "cover-2.0"
+      ],
+      "returncode": 0,
+      "wall_seconds": 111.89475434600172,
+      "binary_sha256": "85fc1aa659f9729aebd510c1c6bb0328757b4130d02040965c94bf047a009a57",
+      "pdfium_sha256": "b8784cbd652ad2993332b7695e2c80f3a797f877fc47d9be97b66bca9639539e",
+      "sha256": "216968da65487b2df950a0650823fb50731fda522f108cc41db2baae16a2653b",
+      "bytes": 997167,
+      "peak_rss_kb": 448720
+    }
+  ],
+  "functional": {
+    "all_r2a_audits_pass": true,
+    "all_engines_equal": true,
+    "qpdf_and_ots_pass": true,
+    "native_search": {
+      "0": {
+        "pdfium_text": true,
+        "pdfium_search": true,
+        "poppler_layout": true
+      },
+      "1": {
+        "pdfium_text": true,
+        "pdfium_search": true,
+        "poppler_layout": true
+      },
+      "2": {
+        "pdfium_text": true,
+        "pdfium_search": true,
+        "poppler_layout": true
+      },
+      "3": {
+        "pdfium_text": true,
+        "pdfium_search": true,
+        "poppler_layout": true
+      },
+      "4": {
+        "pdfium_text": true,
+        "pdfium_search": true,
+        "poppler_layout": true
+      },
+      "5": {
+        "pdfium_text": true,
+        "pdfium_search": true,
+        "poppler_layout": true
+      },
+      "6": {
+        "pdfium_text": true,
+        "pdfium_search": true,
+        "poppler_layout": true
+      },
+      "7": {
+        "pdfium_text": true,
+        "pdfium_search": true,
+        "poppler_layout": true
+      },
+      "8": {
+        "pdfium_text": true,
+        "pdfium_search": true,
+        "poppler_layout": true
+      }
+    },
+    "repeat_identical": true
+  },
+  "pristine_screen": {
+    "path": "qualification/font04/r2b-pristine-context.json",
+    "interpretation": "Composited pristine page reference inside each original observation box, including overlap with adjacent glyphs. Diagnostic page-context result; not validated as the isolated per-glyph frozen quality criterion.",
+    "failed_classes_by_renderer": {
+      "pdfium": 34,
+      "poppler": 36
+    }
+  },
+  "remaining": [
+    "Validate isolated per-glyph pristine criterion",
+    "False-rejection rate and full economy accounting",
+    "Blind review package and structural checks",
+    "Independent material-defect review"
+  ]
+}

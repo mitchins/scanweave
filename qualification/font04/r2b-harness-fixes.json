@@ -1,0 +1,38 @@
+{
+  "fixes": [
+    {
+      "reason": "PDFium native rendering rounds page width up by one pixel at 300 and 600 DPI; harness wrongly required exact canvas dimensions.",
+      "change": "Allow the extra page-edge pixel while retaining original-coordinate observation boxes; reran every observation in both renderers.",
+      "proof": "Every PDF hash checked against its conversion receipt after the rerun.",
+      "pdf_sha256": {
+        "0-off": "bd1df18ad074eff6ffd2d96f838ec3460795b93b5595d3a1a93aa5d3616a1957",
+        "0-cover-2.0": "7ed6831dca248e71fce85f40a476495c01d0daca00d9575995635922b16596a2",
+        "0-cover-2.0-repeat": "7ed6831dca248e71fce85f40a476495c01d0daca00d9575995635922b16596a2",
+        "1-off": "3c96d6a1faf2f6fcc37f3375ce94f36cd6e6b3e296eeef7c39a061ab6a7d0e44",
+        "1-cover-2.0": "cb8160aa4e2c1c2a1f564bf42bc48d09fcffe1938f0335b8913ebb951f8f1171",
+        "1-cover-2.0-repeat": "cb8160aa4e2c1c2a1f564bf42bc48d09fcffe1938f0335b8913ebb951f8f1171",
+        "2-off": "1ea7470900bc0938ed7b2530e18676d4b75b2b7a28772aecbf9d8d5a9f03c77e",
+        "2-cover-2.0": "c35bc38d907890516b3de32859d45d7c64d1e0ea463a425d8683aaa20a05298b",
+        "2-cover-2.0-repeat": "c35bc38d907890516b3de32859d45d7c64d1e0ea463a425d8683aaa20a05298b",
+        "3-off": "91549d852311858a05a3e3f9f5909ba7001ef7abe153efec839368361ac9cf4b",
+        "3-cover-2.0": "8b2f7f6428d5076c588575e3609f8b61320328955546b97a80bf7d00f885a2a9",
+        "3-cover-2.0-repeat": "8b2f7f6428d5076c588575e3609f8b61320328955546b97a80bf7d00f885a2a9",
+        "4-off": "04103ff086c71141615ed679472971872d9b463b4b5d4e62674ddd1ad01dd023",
+        "4-cover-2.0": "641bd09af2a6bc85f088d47f7f83b0eb1e8e0c409e42aa3dd318255a27e0b8ae",
+        "4-cover-2.0-repeat": "641bd09af2a6bc85f088d47f7f83b0eb1e8e0c409e42aa3dd318255a27e0b8ae",
+        "5-off": "979e61b873c8145873e1bd4e30222d42e5ebb821ef1ad0fc2d4df72e5d98058d",
+        "5-cover-2.0": "6ecd9d69bbb51c8fd031b465f0a884016e013a975dd22b91199171b88c7aafb7",
+        "5-cover-2.0-repeat": "6ecd9d69bbb51c8fd031b465f0a884016e013a975dd22b91199171b88c7aafb7",
+        "6-off": "e36fc1ef6c306aff6d1f7cde5acbdea5c9a649257042c6300538f199ca7e1e63",
+        "6-cover-2.0": "5c33898d0397f3d6b9b403c2b5e38cdbe205056b4369dd8029bbc0cdacdccd6d",
+        "6-cover-2.0-repeat": "5c33898d0397f3d6b9b403c2b5e38cdbe205056b4369dd8029bbc0cdacdccd6d",
+        "7-off": "7c2a9513db683306e14c9b3ab8a0edcd881f2004690cc9ea0f97d6df40bbc735",
+        "7-cover-2.0": "d1dff44156c9ca1295d1672d1e35e566c8fb68cadea381c79de6193e10cc447b",
+        "7-cover-2.0-repeat": "d1dff44156c9ca1295d1672d1e35e566c8fb68cadea381c79de6193e10cc447b",
+        "8-off": "dbcd479571a7cf77d528568d328cb03aa2df059e58e1869dd3bdc11912b60c11",
+        "8-cover-2.0": "216968da65487b2df950a0650823fb50731fda522f108cc41db2baae16a2653b",
+        "8-cover-2.0-repeat": "216968da65487b2df950a0650823fb50731fda522f108cc41db2baae16a2653b"
+      }
+    }
+  ]
+}
