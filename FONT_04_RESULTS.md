@@ -8,13 +8,44 @@ matching SHA-256 hashes, recorded in `qualification/font04/s1-trace-receipt.json
 No exports were rerun. The independent R2b verdict remains P2 FAIL: cross-style
 identity defects were observed, and cover-2.0 is not qualified.
 
-Phase 1 step 2 has begun but is not complete. The exported planner groups and
+The earlier Phase 1 step 2 receipt recorded incomplete work. The exported planner groups and
 fits, source observations and native bindings are available; the mapping from
 source occurrences to P2 oracle labels still needs validation, especially for
 overlapping observation boxes. No full-population classifications, isolated
 pristine distances, review panel, calibrated frontier, native correction or
-comparison runs have been completed. No operating point is recommended. This
-is a partial progress receipt, not Checkpoint S1 acceptance evidence.
+comparison runs had been completed at that time. The S1b diagnostic below updates
+that receipt; it is not Checkpoint S1 acceptance evidence.
+
+### S1b — offline source-mask veto
+
+This is a diagnostic prototype, not a qualification or a product change. It adds an OR of scan-derived feature differences to the frozen accepted decisions. Slant is ink second-moment shear; weight is median local distance-transform ridge width divided by ink height; profile is the 90th/10th percentile ridge-width ratio. For OCR `i,l,1,I,|`, it also compares an upper detached component, top-left protrusion and foot breadth; for `0,O,o`, enclosed area. Scales are the root mean square of same-face accepted pair differences in FONT-01 train, separately by DPI. A zero scale means any difference triggers; absent scales abstain. In particular, 300 dpi has no training pairs for the confusable features, and dot has only 2 and 4 pairs at 200 and 600 dpi, both with zero noise. The rule sees source masks and OCR labels only; oracle faces, characters and pristine font shapes are used solely for analysis. The optional run-context variant was not implemented.
+
+FONT-01 uses the S1a maximum-IoU, same-page, single-character join, excluding exact ties. Across train/validation/test pages the single-best rate is 96.6–97.7%, below the earlier 98% join gate; OCR/oracle agreement within single-best is 86.3–91.8%, median IoU 0.409–0.661, with weak overlaps and small margins recorded per page in the JSON. The assigned classes are therefore provisional, especially for different-character pairs. The P2 join is the existing S1a join. The visible definition is different oracle character or shape XOR above threshold, with the S1a centred height-normalised font raster comparison. Same-face is the negative class. FONT-01 validation and test are held-out development data; P2 is spent development, not a new P2 qualification.
+
+In the table, C/R is visible caught/remaining; F/I is same-face false vetoes / cross-face non-visible vetoes. Reuse is kept accepted non-self substitutions. Financial has no oracle; its first percentage is substitution retention and the second is accepted-member retention including self members. Class-level counts and both thresholds are in `qualification/font04/s1b-frontier.json`.
+
+| Data | k | XOR > 0.2 C/R | 0.2 F/I | XOR > 0.3 C/R | 0.3 F/I | Reuse kept | Financial members kept |
+|---|---:|---:|---:|---:|---:|---:|---:|
+| P2 | 2 | 97/58 | 83/24 | 50/34 | 83/71 | 56.9% | — |
+| P2 | 3 | 60/95 | 50/18 | 29/55 | 50/49 | 72.9% | — |
+| P2 | 4 | 28/127 | 35/9 | 12/72 | 35/25 | 84.8% | — |
+| P2 | 6 | 10/145 | 14/6 | 6/78 | 14/10 | 93.7% | — |
+| Validation | 2 | 6/2 | 12/2 | 6/1 | 12/2 | 73.0% | — |
+| Validation | 3 | 5/3 | 9/2 | 5/2 | 9/2 | 78.4% | — |
+| Validation | 4 | 3/5 | 3/1 | 3/4 | 3/1 | 90.5% | — |
+| Validation | 6 | 1/7 | 3/0 | 1/6 | 3/0 | 94.6% | — |
+| Test | 2 | 35/11 | 14/7 | 21/7 | 14/21 | 58.5% | — |
+| Test | 3 | 17/29 | 6/3 | 12/16 | 6/8 | 80.7% | — |
+| Test | 4 | 4/42 | 2/2 | 3/25 | 2/3 | 94.1% | — |
+| Test | 6 | 1/45 | 2/0 | 1/27 | 2/0 | 97.8% | — |
+| Financial | 2 | — | — | — | — | 35.0% | 44.9% |
+| Financial | 3 | — | — | — | — | 59.6% | 65.8% |
+| Financial | 4 | — | — | — | — | 73.5% | 77.6% |
+| Financial | 6 | — | — | — | — | 91.8% | 93.0% |
+
+Financial's frozen ledger records 594 outlines retired and 268 canonicals added (net 326); a post-veto net cannot be inferred reliably by scaling those totals because multiple occurrences can share an outline and groups can disappear. No post-veto outline estimate is claimed. The source-only per-feature AUCs for XOR > 0.2, in slant/weight/profile/dot/flag/foot/hole order, are P2 0.643/0.680/0.751/0.500/0.758/0.652/0.500; validation 0.734/0.620/0.536/0.500/0.625/0.500/0.690; test 0.844/0.620/0.672/0.500/0.722/0.722/0.667. Confusable-feature AUCs use only eligible OCR labels and have small denominators; both thresholds and sample sizes are in the JSON. Review sheets at `qualification/font04/local/S1b/` show 40 each of caught, missed, and false vetoes for P2 k=2, with scan/default/cover crops, and small examples are committed.
+
+For further offline exploration only, recommend the per-glyph k=2 variant: it catches the most visible defects among this fixed frontier, including 97/155 on P2 and 35/46 on test. It is not a deployable operating point: 58 P2 defects remain, 83 same-face P2 substitutions are falsely vetoed, financial retains only 35.0% of substitutions, the join misses the 98% gate, and some confusable calibration is absent or based on very few pairs. No run-context recommendation is supported.
 
 ## Checkpoint R2b (P2) — stopped after adverse pristine screen
 
