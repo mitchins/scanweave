@@ -1,0 +1,25 @@
+{
+  "schema": "font04-r2b-generator-identity-v1",
+  "status": "PASS",
+  "command": "qualification/.venv/bin/python -m qualification.font04.r2b_generator --split font01 --out /tmp/font04-r2b-font01-identity --verify-manifest qualification/font01/fixture-manifest.json",
+  "reference_manifest": "qualification/font01/fixture-manifest.json",
+  "reference_manifest_sha256": "83089bafa130bc9785e9df879416c31ecc33531d2834abab170ffe1dc1a30a6b",
+  "wrapper_sha256": "201cee9a651844a157c686a8ace55fa7d691966521adfe7ad72fece70bac0c0c",
+  "reference_corpus": "qualification/font01/local/corpus-font01-v1",
+  "method": "Both corpora match every split record in the frozen manifest; compared SHA-256 of every file and relative path.",
+  "splits": {
+    "test": {
+      "files": 5407,
+      "differences": 0
+    },
+    "train": {
+      "files": 5407,
+      "differences": 0
+    },
+    "validation": {
+      "files": 4732,
+      "differences": 0
+    }
+  },
+  "p2_opened": false
+}
