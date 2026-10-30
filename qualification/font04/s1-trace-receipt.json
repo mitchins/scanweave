@@ -1,0 +1,65 @@
+{
+  "schema": "font04-s1-trace-receipt-v1",
+  "status": "PASS",
+  "provenance": "Reviewer reported cmp byte equality for all nine retained outputs after running sheets 6\u20138; this receipt independently hashes the retained files without rerunning exports.",
+  "instrumented_checkout_base": "76681da",
+  "instrumented_binary": "/tmp/font04-s1-checkout/target/release/scanweave",
+  "instrumented_binary_sha256": "10120fce54178693da15a2b0620349cb3dd84e4278b0e4ba6c5465a348caf88c",
+  "research_only": true,
+  "sheets": [
+    {
+      "sheet": 0,
+      "instrumented_pdf_sha256": "7ed6831dca248e71fce85f40a476495c01d0daca00d9575995635922b16596a2",
+      "frozen_pdf_sha256": "7ed6831dca248e71fce85f40a476495c01d0daca00d9575995635922b16596a2",
+      "sha256_equal": true
+    },
+    {
+      "sheet": 1,
+      "instrumented_pdf_sha256": "cb8160aa4e2c1c2a1f564bf42bc48d09fcffe1938f0335b8913ebb951f8f1171",
+      "frozen_pdf_sha256": "cb8160aa4e2c1c2a1f564bf42bc48d09fcffe1938f0335b8913ebb951f8f1171",
+      "sha256_equal": true
+    },
+    {
+      "sheet": 2,
+      "instrumented_pdf_sha256": "c35bc38d907890516b3de32859d45d7c64d1e0ea463a425d8683aaa20a05298b",
+      "frozen_pdf_sha256": "c35bc38d907890516b3de32859d45d7c64d1e0ea463a425d8683aaa20a05298b",
+      "sha256_equal": true
+    },
+    {
+      "sheet": 3,
+      "instrumented_pdf_sha256": "8b2f7f6428d5076c588575e3609f8b61320328955546b97a80bf7d00f885a2a9",
+      "frozen_pdf_sha256": "8b2f7f6428d5076c588575e3609f8b61320328955546b97a80bf7d00f885a2a9",
+      "sha256_equal": true
+    },
+    {
+      "sheet": 4,
+      "instrumented_pdf_sha256": "641bd09af2a6bc85f088d47f7f83b0eb1e8e0c409e42aa3dd318255a27e0b8ae",
+      "frozen_pdf_sha256": "641bd09af2a6bc85f088d47f7f83b0eb1e8e0c409e42aa3dd318255a27e0b8ae",
+      "sha256_equal": true
+    },
+    {
+      "sheet": 5,
+      "instrumented_pdf_sha256": "6ecd9d69bbb51c8fd031b465f0a884016e013a975dd22b91199171b88c7aafb7",
+      "frozen_pdf_sha256": "6ecd9d69bbb51c8fd031b465f0a884016e013a975dd22b91199171b88c7aafb7",
+      "sha256_equal": true
+    },
+    {
+      "sheet": 6,
+      "instrumented_pdf_sha256": "5c33898d0397f3d6b9b403c2b5e38cdbe205056b4369dd8029bbc0cdacdccd6d",
+      "frozen_pdf_sha256": "5c33898d0397f3d6b9b403c2b5e38cdbe205056b4369dd8029bbc0cdacdccd6d",
+      "sha256_equal": true
+    },
+    {
+      "sheet": 7,
+      "instrumented_pdf_sha256": "d1dff44156c9ca1295d1672d1e35e566c8fb68cadea381c79de6193e10cc447b",
+      "frozen_pdf_sha256": "d1dff44156c9ca1295d1672d1e35e566c8fb68cadea381c79de6193e10cc447b",
+      "sha256_equal": true
+    },
+    {
+      "sheet": 8,
+      "instrumented_pdf_sha256": "216968da65487b2df950a0650823fb50731fda522f108cc41db2baae16a2653b",
+      "frozen_pdf_sha256": "216968da65487b2df950a0650823fb50731fda522f108cc41db2baae16a2653b",
+      "sha256_equal": true
+    }
+  ]
+}

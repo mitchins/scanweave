@@ -1,5 +1,21 @@
 # FONT-04 results — Checkpoint R1
 
+## Checkpoint S1 (style compatibility) — partial, not ready for review
+
+Phase 1 step 1: the reviewer reported byte-for-byte equality for all nine
+instrumented exports against the frozen P2 PDFs; the retained files also have
+matching SHA-256 hashes, recorded in `qualification/font04/s1-trace-receipt.json`.
+No exports were rerun. The independent R2b verdict remains P2 FAIL: cross-style
+identity defects were observed, and cover-2.0 is not qualified.
+
+Phase 1 step 2 has begun but is not complete. The exported planner groups and
+fits, source observations and native bindings are available; the mapping from
+source occurrences to P2 oracle labels still needs validation, especially for
+overlapping observation boxes. No full-population classifications, isolated
+pristine distances, review panel, calibrated frontier, native correction or
+comparison runs have been completed. No operating point is recommended. This
+is a partial progress receipt, not Checkpoint S1 acceptance evidence.
+
 ## Checkpoint R2b (P2) — stopped after adverse pristine screen
 
 P2 was opened once and all nine sheets were converted in both arms; all nine
