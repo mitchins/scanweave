@@ -1,0 +1,142 @@
+{
+  "schema": "scanweave-font04-p2-preregistration-v1",
+  "registered": "2026-10-23",
+  "status": "FROZEN before any FONT-04 result exists. Do not generate, render or inspect until a method-freeze commit references this file's SHA-256.",
+  "purpose": "Single-use held-out synthetic qualification population (P2) for FONT-04 production qualification only. Not for discovery, calibration or iteration.",
+  "generator": {
+    "base": "qualification/font01/benchmark.py at c10e3dff93ca12ac410c0f6626a4ef74ce34e0c1",
+    "permitted_change": "Add an explicit face-manifest input (this file's faces) and the extra phrases below. The change must not alter page schedule, placement, transform, degradation or damage logic. Prove this by regenerating the frozen FONT-01 corpus byte-identically with the modified generator.",
+    "split_name": "p2",
+    "seed": 40401,
+    "seed_derivation": "Uses the generator's existing offsets (seed, seed+17000+i schedules, seed+31000 damage plan, seed+47000 damage rng). No other seeds are consumed.",
+    "dpis": [
+      200,
+      300,
+      600
+    ],
+    "damage_bands": [
+      "D0",
+      "D1",
+      "D2",
+      "D3",
+      "D4"
+    ],
+    "damage_plan": "unchanged FONT-01 plan_damage()",
+    "phrases": [
+      "expires",
+      "Term expires 1921; $106.08!",
+      "constant use were after",
+      "Body TEXT 0O1Il 38.06, 1921.",
+      "Balance carried forward 4,385.27",
+      "Receipt No. 8813 - paid in full.",
+      "minimum amount 0.69; rate 3.5%",
+      "Officers elected annually 1856-1923"
+    ]
+  },
+  "faces": [
+    {
+      "family": "P052",
+      "name": "P052-Roman",
+      "path": "/usr/share/fonts/opentype/urw-base35/P052-Roman.otf",
+      "sha256": "f054a7389d8d0e9f4c5f7b4c21feb7e2b14bec8004a1e92778a78d149524eea9"
+    },
+    {
+      "family": "P052",
+      "name": "P052-Bold",
+      "path": "/usr/share/fonts/opentype/urw-base35/P052-Bold.otf",
+      "sha256": "ba6503baaf0f9e4e40a69cc4c0e57049fbde313fe183aba8fe823208337a94af"
+    },
+    {
+      "family": "P052",
+      "name": "P052-Italic",
+      "path": "/usr/share/fonts/opentype/urw-base35/P052-Italic.otf",
+      "sha256": "1feac6055211cf5c6c812c026e398195070f174064cc4d390f0db01647443b0e"
+    },
+    {
+      "family": "NimbusRoman",
+      "name": "NimbusRoman-Regular",
+      "path": "/usr/share/fonts/opentype/urw-base35/NimbusRoman-Regular.otf",
+      "sha256": "fd41669443616a7ae890c42e53a58f47fa24a940fd1e367acaff665cf5b6e9d8"
+    },
+    {
+      "family": "NimbusRoman",
+      "name": "NimbusRoman-Bold",
+      "path": "/usr/share/fonts/opentype/urw-base35/NimbusRoman-Bold.otf",
+      "sha256": "e0ad81923bc6d85d5426f796217c87963ca1ae3c65e22c87a25b6c6353de299e"
+    },
+    {
+      "family": "NimbusRoman",
+      "name": "NimbusRoman-Italic",
+      "path": "/usr/share/fonts/opentype/urw-base35/NimbusRoman-Italic.otf",
+      "sha256": "b7c424e6cb79baddfcdcd9a9d87f9fc4fdd06f0e5160066e2b2e47bcd647c7b9"
+    },
+    {
+      "family": "NimbusSans",
+      "name": "NimbusSans-Regular",
+      "path": "/usr/share/fonts/opentype/urw-base35/NimbusSans-Regular.otf",
+      "sha256": "7c25be4d78155523080ab85b10277150657ff7dabbcad7037bdd536c9b6d0d08"
+    },
+    {
+      "family": "NimbusSans",
+      "name": "NimbusSans-Bold",
+      "path": "/usr/share/fonts/opentype/urw-base35/NimbusSans-Bold.otf",
+      "sha256": "7f33328e6b4d4cd21b45fa625791928c9407dc702db6780e56b09ca9a3ecaa67"
+    },
+    {
+      "family": "URWBookman",
+      "name": "URWBookman-Light",
+      "path": "/usr/share/fonts/opentype/urw-base35/URWBookman-Light.otf",
+      "sha256": "7b1bc8e6a16cef53785ce03d4848f8971f3ba38cd9e266e4786a50e08bd9235b"
+    },
+    {
+      "family": "URWBookman",
+      "name": "URWBookman-Demi",
+      "path": "/usr/share/fonts/opentype/urw-base35/URWBookman-Demi.otf",
+      "sha256": "ab8b2fe57cbea9783c6179188dc013c76cfc5717c22cf59bbf3016ef2d7d93ee"
+    },
+    {
+      "family": "NotoSansMono",
+      "name": "NotoSansMono-Regular",
+      "path": "/usr/share/fonts/truetype/noto/NotoSansMono-Regular.ttf",
+      "sha256": "6b692c4b6d15ccf59f1c1fe8d11cb8a92f51960f3e9f1f523781755a3af7e29f"
+    },
+    {
+      "family": "NotoSansMono",
+      "name": "NotoSansMono-Bold",
+      "path": "/usr/share/fonts/truetype/noto/NotoSansMono-Bold.ttf",
+      "sha256": "b22563d5f03b345a62115e78d8789c9ed99c2cfa8059fad6e7a5c4ced288e21e"
+    }
+  ],
+  "licensing": {
+    "fonts-urw-base35 20200910-8": "AGPL-3 with Font Exception",
+    "fonts-noto-mono 20201225-2": "OFL-1.1",
+    "rule": "Font binaries and generated P2 pages are never committed; only hashes, manifests and compact metrics."
+  },
+  "family_disjointness": "None of these families appears in FONT-01 to FONT-03 (DejaVu, FreeSerif, C059, NimbusMonoPS, Z003, Liberation). NimbusRoman is Times-metric, like LiberationSerif: it is a related-but-unseen family, not a reused one.",
+  "evaluation_rules": {
+    "single_use": "Evaluate exactly once, with the frozen method and operating point. Any code or parameter change afterwards voids P2 for qualification and needs a new pre-registration (P2').",
+    "arms": [
+      "current default ClearScan (method-freeze base)",
+      "frozen FONT-04 candidate"
+    ],
+    "rendering": "Both PDFium and Poppler, at native 200/300/600 DPI, original physical coordinates.",
+    "pass_criteria": {
+      "pristine_quality": "Per frequent class (>=10 P2 observations), in each renderer: candidate mean and p95 pristine error <= current default.",
+      "material_defects": "Blinded review under FONT_04_REVIEW_PROTOCOL.md: zero identity-class defects (wrong character appearance, counter opened/closed, missing/added stroke, dot/sliver, weight/slant-class change) in the accepted sample, the rejected sample and the negative-set analogues; candidate total material-defect rate <= current default.",
+      "functional": "Text extraction and native search identical to current default; qpdf and OTS pass; deterministic repeat byte-identical.",
+      "economy": "Report distinct designs, draws per design, retired/added/net programs, font and PDF bytes. No economy threshold: economy is established on the real financial document (P3), not on P2."
+    },
+    "no_post_hoc": "No target, class, page or renderer may be excluded after P2 results are seen. Abstentions are counted by the frozen method's own rules."
+  },
+  "amends": {
+    "path": "qualification/font04/p2-preregistration.json",
+    "sha256": "a4f9ccd3a7e51d719946be80f7cc9a297de7ca22285e8755e5e26e415e7db466"
+  },
+  "amendment": {
+    "date": "2026-10-31",
+    "approval": "Owner approved layout-only amendment.",
+    "reason": "Code inspection before opening found that the 96 scheduled lines per DPI extended beyond the 9-inch page and were silently clipped; no P2 data exists.",
+    "change": "Each DPI schedule is divided in order into three physical sheets of 32 lines; sheet k contains global lines 32k through 32k+31. Baseline is 32 + 18*(line % 32) points. Physical sheet is added to public and truth records; crops and PDF assembly use it. Full final scan bounding boxes must fit the 6-by-9-inch sheet or generation fails. All random draws, identities, global line keys and ordering remain unchanged.",
+    "carry_over": "Everything else carries over verbatim, including faces, phrases, seeds, rules and criteria."
+  }
+}
