@@ -62,3 +62,51 @@ falsification check. It is enough to establish that the zero-defect rule fails.
    changes.
 3. **The remaining R2b items (blind package, false rejection, full economy)** no longer decide qualification. They are
    optional diagnostics: P2 data may inform the fix, and any fix then needs P2′.
+
+## Review of S1a and S1b (2026-10-31)
+
+### S1a: substitution census
+
+The census (`s1a-census.json`) was produced by the reviewer, because Codex's join gate tripped on 118 multi-character OCR labels. It covers 473 accepted non-self substitutions:
+
+| Source of the canonical | Count | Share |
+|---|---|---|
+| Same face | 264 | 56% |
+| Different family | 197 | 42% |
+| Same family, different style | 5 | 1% |
+| Different character (OCR i/l/1 confusion) | 7 | 1% |
+
+- The existing fit error separates visible swaps from same-face swaps at AUC 0.82–0.85.
+- Same-face and cross-family fit-error distributions overlap heavily.
+- Tightening the multiplier alone therefore cannot fix the defect without losing reuse.
+
+### S1b: per-glyph veto (`30ae13c`)
+
+Verdict: **rejected as a product path.**
+
+| k | P2 caught / 155 visible | P2 same-face vetoed | FONT-01 test caught / 46 | Financial reuse kept |
+|---|---|---|---|---|
+| 2 | 97 | 83 | 35 | 35% |
+| 3 | 60 | 50 | 17 | 60% |
+| 4 | 28 | 35 | 4 | 74% |
+| 6 | 10 | 14 | 1 | 92% |
+
+- The financial document uses a single typeface, so every substitution its veto removes is a false veto.
+- The per-glyph features are weaker than the fit error they would supplement:
+  - slant: AUC 0.64–0.84;
+  - weight: 0.62–0.68;
+  - profile: 0.49–0.77.
+- Single-glyph style evidence at scan resolution is noise-dominated. No k gives both defect capture and retained reuse.
+
+### Next: S1c, run-level style evidence
+
+Style is a property of a typographic run, not of one glyph. Pooling slant and weight evidence over an OCR word or line cuts the noise by roughly √n.
+
+S1c should test the following:
+
+1. **Style partition.** Partition each document into style clusters using run-pooled features. A member may then use only a canonical whose source lies in a compatible run cluster.
+2. **Confusable characters.** For the confusable labels, test two separate options:
+   - an explicit confusable-set restriction, where an i/l/1/I/| or 0/O/o member may share only with a canonical of the same label whose shape passes a structural check;
+   - simple exclusion, with its economy cost reported on the financial document.
+
+Calibration stays on FONT-01 train. The metrics and the frontier format are the same as S1b.
