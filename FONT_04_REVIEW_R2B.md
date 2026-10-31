@@ -245,3 +245,61 @@ It is suitable to freeze as the next candidate.
   - the same pass criteria and blind protocol.
 
 P2′ stays ungenerated until the reviewer has checked the preregistration.
+
+## Review of S1e: freeze package and P2′ draft (2026-10-31)
+
+**Freeze package (`aeb04d3`): accepted.**
+
+- **Functional checks:** all 14 ceiling outputs pass: 5 corpus documents and the 9 P2 sheets. The checks are:
+  - text extraction equality in Poppler (default, layout and raw), PDFium and MuPDF;
+  - native search equality;
+  - qpdf;
+  - OTS.
+- **Other evidence:** determinism, default identity and paired timing are as recorded in `method-freeze-ceiling.json`.
+- **Guard:** the P2′ guard refuses to run without:
+  - a final, non-DRAFT preregistration whose hash is in the ceiling freeze;
+  - a recorded reviewer acceptance of that hash;
+  - matching face and binary hashes;
+  - a fresh lock.
+
+  FONT-01 and P2 geometry still reproduce.
+
+**P2′ draft: changes required before acceptance.**
+
+1. **Design freshness.** FreeSans and FreeMono are not genuinely fresh designs, and FreeSerif is the same GNU FreeFont project.
+   - FreeSans is a Helvetica design, the same as NimbusSans in the P2 development set, and close to the Arial-metric Liberation Sans in FONT-01.
+   - FreeMono is a Courier design, the same as NimbusMonoPS in FONT-01.
+
+   Using them would test families that the ceiling's diagnosis has effectively already seen. URW Gothic (an Avant Garde design) and Bitstream Charter are fresh.
+
+   The installed system has no other fresh Latin families with style siblings. The remaining candidates are Courier 10 Pitch, the cm* math fonts, CJK fallbacks and Unifont. **The owner should install `fonts-ibm-plex`** (official Ubuntu archive, version 6.1.1-1, OFL-1.1). IBM Plex provides:
+   - a coordinated sans/serif/mono superfamily;
+   - Light/Regular/Italic/Bold siblings, the hardest weight-class and slant-class test;
+   - a designed sans/serif skeleton pair, the hardest cross-family interchangeability test.
+2. **Proposed faces (12):**
+
+   | Family | Faces |
+   |---|---|
+   | IBM Plex Serif | Light, Regular, Italic, Bold |
+   | IBM Plex Sans | Regular, Italic, Bold |
+   | IBM Plex Mono | Regular |
+   | URW Gothic | Book, BookOblique, Demi |
+   | Bitstream Charter | Regular |
+
+   Charter is Type 1. Confirm in a geometry-only precheck that FreeType renders it, before acceptance.
+3. **Registration date.** `registered` reads 2026-10-23, copied from P2. It must be the actual date.
+4. **Operationalise "visible at reading size" in advance.**
+   - Panels show source | arm at native DPI, at 100% and at 200%.
+   - An identity-class defect counts when the reviewer can distinguish the arm's glyph from the source glyph at either scale.
+   - 400% views are informational only.
+   - The reviewer grades blind; the key stays sealed until all grades are committed.
+5. **Seed.** Re-derive the seed from the final text. Record the derivation in the final file.
+
+**Next steps:**
+
+1. The owner installs `fonts-ibm-plex`.
+2. Codex revises the draft into the final `p2prime-preregistration.json` and runs a P2′ geometry-only precheck.
+3. The reviewer verifies the final file independently, then records acceptance.
+4. P2′ runs once.
+
+Note that a geometry-only precheck requires the final file. Codex should therefore produce the final file with reviewer acceptance left unset, then run the precheck through a dry-run path that writes geometry only and never the lock.
