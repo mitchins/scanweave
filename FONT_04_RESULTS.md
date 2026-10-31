@@ -1,5 +1,26 @@
 # FONT-04 results — Checkpoint R1
 
+## Checkpoint R2c (P2′)
+
+**Pristine: FAIL. Functional: PASS. Material defects: PENDING-BLIND-REVIEW.**
+The frozen full-context pristine screen fails the per-class candidate versus
+default rule in 31 of 43 frequent classes in PDFium and 30 of 43 in Poppler.
+All 6,768 observations per renderer are retained, including overlapping
+neighbours. The per-class and DPI × damage results, including the reference,
+are in [r2c-pristine.json](qualification/font04/r2c-pristine.json). Extraction,
+native search, qpdf, OTS and all nine deterministic repeats pass
+([functional](qualification/font04/r2c-functional.json)).
+
+Across nine sheets, default / reference / candidate respectively: substituted
+members 0 / 790 / 468; outlines retired 0 / 689 / 381, added 0 / 309 / 199,
+net retired 0 / 380 / 182; encoded font bytes 1,016,028 / 916,035 / 967,948;
+PDF bytes 6,276,005 / 6,185,269 / 6,236,273. Economy and original run time
+and RSS are report-only ([economy](qualification/font04/r2c-economy.json)).
+The reviewer must commit blind grades before the sealed key or census is opened.
+Rejected-member panels show final outputs, not proposed counterfactuals, so they
+cannot independently adjudicate over-rejection; see the reproduction receipt.
+
+
 ## Checkpoint S1 (style compatibility) — partial, not ready for review
 
 Phase 1 step 1: the reviewer reported byte-for-byte equality for all nine

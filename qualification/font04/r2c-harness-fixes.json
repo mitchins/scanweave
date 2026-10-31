@@ -1,0 +1,16 @@
+{
+  "fixes": [
+    {
+      "issue": "Initial sealed census omitted the S1d outline-xor proxy and per-substitution oracle ledger.",
+      "fix": "Recomputed the entire census with r2c_census.py, including the fixed S1d classifier and shape proxy; no selection or product changes.",
+      "pdf_hash_proof": {
+        "manifest_sha256": "fb6ce69a39bd8fda245d3ea83c4dd4c79d9d1de5d8f6c259cc3e8514dc32e685",
+        "checked_entries": 45,
+        "all_match_before": true,
+        "all_match_after": true,
+        "before_check_log_sha256": "ad448d689f5123c0812bcdfb03629bd4ee400121fba49e6df33121213acd7ca3",
+        "after_check_log_sha256": "ad448d689f5123c0812bcdfb03629bd4ee400121fba49e6df33121213acd7ca3"
+      }
+    }
+  ]
+}
