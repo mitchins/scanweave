@@ -139,14 +139,11 @@ def main():
     parser.add_argument('--geometry-only', type=Path, metavar='OUT.json')
     args = parser.parse_args()
     if args.split == 'p2prime':
-        # No P2-prime work, including geometry, can begin from a draft.
+        # Geometry requires the final registration; generation also requires acceptance.
         final = BASE / 'p2prime-preregistration.json'
         freeze = json.loads((BASE / 'method-freeze-ceiling.json').read_text())
         if not final.is_file() or freeze.get('p2prime_preregistration_sha256') != sha(final):
             raise ValueError('P2prime requires final preregistration hash in ceiling freeze')
-        approval = freeze.get('p2prime_reviewer_acceptance', {})
-        if approval.get('accepted') is not True or approval.get('preregistration_sha256') != sha(final) or not approval.get('reviewer') or not approval.get('evidence'):
-            raise ValueError('P2prime requires recorded reviewer acceptance of final hash')
         if args.binary is None or args.verify_manifest is not None:
             parser.error('P2prime requires --binary and does not accept --verify-manifest')
         registration = json.loads(final.read_text())
@@ -167,6 +164,8 @@ def main():
         faces = [dict(face, split='p2prime') for face in registration['faces']]
         seed, dpis = registration['generator']['seed'], tuple(registration['generator']['dpis'])
         if args.geometry_only:
+            if args.out is not None or args.geometry_only.resolve().is_relative_to(p2prime.resolve()):
+                parser.error('P2prime geometry must write outside local/P2prime and does not accept --out')
             if args.geometry_only.exists():
                 raise FileExistsError(args.geometry_only)
             rows = generate_document(None, faces, seed, dpis, geometry_only=True, is_p2=True)
@@ -175,6 +174,9 @@ def main():
                 raise ValueError('observation count mismatch')
             args.geometry_only.write_text(json.dumps(report, indent=2) + '\n')
             return
+        approval = freeze.get('p2prime_reviewer_acceptance') or {}
+        if approval.get('accepted') is not True or approval.get('preregistration_sha256') != sha(final) or not approval.get('reviewer') or not approval.get('evidence'):
+            raise ValueError('P2prime requires recorded reviewer acceptance of final hash')
         p2prime.mkdir(parents=True, exist_ok=True)
         receipt = {'timestamp': datetime.now(timezone.utc).isoformat(),
                    'git_head': subprocess.check_output(['git', 'rev-parse', 'HEAD'], cwd=ROOT, text=True).strip(),

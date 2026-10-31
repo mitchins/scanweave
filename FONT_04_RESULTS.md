@@ -16,6 +16,10 @@ pristine distances, review panel, calibrated frontier, native correction or
 comparison runs had been completed at that time. The S1b diagnostic below updates
 that receipt; it is not Checkpoint S1 acceptance evidence.
 
+### S1f — final P2′ preregistration and geometry precheck
+
+The [final preregistration](qualification/font04/p2prime-preregistration.json) is frozen by hash and awaits independent reviewer acceptance. The [geometry-only precheck](qualification/font04/r2b-p2prime-geometry.json) rendered all 12 faces, including Type 1 Charter: 6,768 observations across nine 32-line sheets, 564 per face and zero out of bounds. [Generator identity](qualification/font04/s1f-generator-identity.json) confirms FONT-01 byte-for-byte and exact P2 geometry reproduction. P2′ remains unopened; generation requires recorded acceptance of the final preregistration hash.
+
 ### S1e — ceiling freeze and P2′ draft
 
 The `cover-2.0-ceiling` candidate is frozen in [method-freeze-ceiling.json](qualification/font04/method-freeze-ceiling.json); the existing freeze is unchanged. All 14 requested ceiling outputs passed Poppler, PDFium and MuPDF extraction equality, native search equality, qpdf and OTS ([functional results](qualification/font04/s1e-functional.json)). The reviewer-reported determinism, unchanged defaults and cover-2.0, serial timing, and S1d economy evidence are recorded in the freeze. The guarded generator reproduces FONT-01 byte-for-byte and the P2 geometry report exactly ([identity proof](qualification/font04/s1e-generator-identity.json)). The [P2′ preregistration](qualification/font04/p2prime-preregistration-DRAFT.json) is a draft for reviewer review; no P2′ pages have been generated or inspected. The final preregistration hash and reviewer acceptance are required before the guard permits P2′.

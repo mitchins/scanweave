@@ -1,0 +1,35 @@
+{
+  "schema": "font04-s1f-generator-identity-v1",
+  "status": "PASS",
+  "generator_sha256": "f1140b34ea074efa3ac03498e6126a3f573f15756f0eb722006322bdb46633a2",
+  "font01": {
+    "command": "qualification/.venv/bin/python -m qualification.font04.r2b_generator --split font01 --out /tmp/font04-s1f-font01 --verify-manifest qualification/font01/fixture-manifest.json",
+    "reference": "qualification/font01/local/corpus-font01-v1",
+    "method": "Compare every relative filename and SHA-256 in each split.",
+    "splits": {
+      "train": {
+        "reference_files": 5407,
+        "generated_files": 5407,
+        "differences": 0,
+        "examples": []
+      },
+      "validation": {
+        "reference_files": 4732,
+        "generated_files": 4732,
+        "differences": 0,
+        "examples": []
+      },
+      "test": {
+        "reference_files": 5407,
+        "generated_files": 5407,
+        "differences": 0,
+        "examples": []
+      }
+    }
+  },
+  "p2_geometry": {
+    "method": "Call generate_document geometry_only with p2-preregistration-v1.1 faces, phrases, seed and DPIs; compare geometry_report object exactly to retained r2b-p2-geometry.json.",
+    "reference_sha256": "f1f0597b81cf7601df39f201e288bc5ecad58035b18d4bcad6ad2ec4e01f0111",
+    "exact_match": true
+  }
+}

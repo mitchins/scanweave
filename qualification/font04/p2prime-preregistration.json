@@ -1,0 +1,198 @@
+{
+  "schema": "scanweave-font04-p2prime-preregistration-v1",
+  "registered": "2026-10-31",
+  "status": "FINAL — awaiting reviewer acceptance",
+  "purpose": "Single-use held-out synthetic qualification population P2prime for FONT-04 candidate; no discovery, calibration or iteration.",
+  "generator": {
+    "base": "qualification/font01/benchmark.py at c10e3dff93ca12ac410c0f6626a4ef74ce34e0c1",
+    "permitted_change": "Same r2b_generator.py and v1.1 layout: 32 lines per sheet, full final scan bounding-box check and geometry-only precheck before opening. Existing placement, transforms, degradation and damage logic unchanged. Geometry requires final registration; generation additionally requires reviewer acceptance.",
+    "split_name": "p2prime",
+    "seed": 2710955184,
+    "seed_derivation": {
+      "exact_string": "FONT-04 P2prime final 2026-10-31\n04318316cee29950805110c9c8949eea189ef5575132881f4d4d7e03e5299903\n5b009410cf5231dcb1e45b155c1afedcfc63d82042fd8c414d0dd7705c9fbbae\n729908583fdfe9c29398238e922e3b5a086fce703456405e60d62e503b0ec537\n8ac5bad34cad9b59b087eebfaf9087c16901b0761f7f9cc538f2f65567fc3959\na3c50f7c0e063998cfaeae56c6169ece9e0feaffaef425aa038f85d037fb4b9b\nb80a71fc5ac0f4d95f55dd97ca6be2c6073bea4ed6296336fe781620df41894b\nbbba26ef21431e8b11c0433d7104e88800ab7598e50b1b4d0adec7d3a0cf2966\nd425e6d9c36d8f3cf2acd81380ef4544af4826899fb9a361f86672c23890708c\nda20a825f716ae2b75b69297aa27a4042056dbcf2e043de5ea69ac11651cb4e5\ndb8293671bdae77ab001707d81ce3deaad8297e9e546ac73c6885f0703248d9c\nec4e947734950fd344918e560bc8ad0c5d8b17d0ab4853988824f13b9f77e53f\nfa5e34608ba7f0bec2f36d95d9fbf3586fb1cac567ef1a2d07393d6f1390fc48",
+      "encoding": "UTF-8",
+      "sha256": "a195e4b0c54cc55b6d5a4b9bb86589456f5a8a71833ddee5e4b58e31fa0214b9",
+      "integer": 2710955184,
+      "rule": "First eight hexadecimal digits of SHA-256 interpreted as an unsigned big-endian integer; existing +17000+i, +31000 and +47000 offsets unchanged."
+    },
+    "dpis": [
+      200,
+      300,
+      600
+    ],
+    "damage_bands": [
+      "D0",
+      "D1",
+      "D2",
+      "D3",
+      "D4"
+    ],
+    "damage_plan": "unchanged FONT-01 plan_damage()",
+    "phrases": [
+      "expires",
+      "Term expires 1921; $106.08!",
+      "constant use were after",
+      "Body TEXT 0O1Il 38.06, 1921.",
+      "Balance carried forward 4,385.27",
+      "Receipt No. 8813 - paid in full.",
+      "minimum amount 0.69; rate 3.5%",
+      "Officers elected annually 1856-1923"
+    ]
+  },
+  "faces": [
+    {
+      "family": "IBM Plex Serif",
+      "name": "IBMPlexSerif-Light",
+      "path": "/usr/share/fonts/truetype/ibm-plex/IBMPlexSerif-Light.ttf",
+      "sha256": "bbba26ef21431e8b11c0433d7104e88800ab7598e50b1b4d0adec7d3a0cf2966",
+      "package": "fonts-ibm-plex",
+      "package_licence": "OFL-1.1",
+      "licence_source": "/usr/share/doc/fonts-ibm-plex/copyright"
+    },
+    {
+      "family": "IBM Plex Serif",
+      "name": "IBMPlexSerif-Regular",
+      "path": "/usr/share/fonts/truetype/ibm-plex/IBMPlexSerif-Regular.ttf",
+      "sha256": "fa5e34608ba7f0bec2f36d95d9fbf3586fb1cac567ef1a2d07393d6f1390fc48",
+      "package": "fonts-ibm-plex",
+      "package_licence": "OFL-1.1",
+      "licence_source": "/usr/share/doc/fonts-ibm-plex/copyright"
+    },
+    {
+      "family": "IBM Plex Serif",
+      "name": "IBMPlexSerif-Italic",
+      "path": "/usr/share/fonts/truetype/ibm-plex/IBMPlexSerif-Italic.ttf",
+      "sha256": "d425e6d9c36d8f3cf2acd81380ef4544af4826899fb9a361f86672c23890708c",
+      "package": "fonts-ibm-plex",
+      "package_licence": "OFL-1.1",
+      "licence_source": "/usr/share/doc/fonts-ibm-plex/copyright"
+    },
+    {
+      "family": "IBM Plex Serif",
+      "name": "IBMPlexSerif-Bold",
+      "path": "/usr/share/fonts/truetype/ibm-plex/IBMPlexSerif-Bold.ttf",
+      "sha256": "db8293671bdae77ab001707d81ce3deaad8297e9e546ac73c6885f0703248d9c",
+      "package": "fonts-ibm-plex",
+      "package_licence": "OFL-1.1",
+      "licence_source": "/usr/share/doc/fonts-ibm-plex/copyright"
+    },
+    {
+      "family": "IBM Plex Sans",
+      "name": "IBMPlexSans-Regular",
+      "path": "/usr/share/fonts/truetype/ibm-plex/IBMPlexSans-Regular.ttf",
+      "sha256": "729908583fdfe9c29398238e922e3b5a086fce703456405e60d62e503b0ec537",
+      "package": "fonts-ibm-plex",
+      "package_licence": "OFL-1.1",
+      "licence_source": "/usr/share/doc/fonts-ibm-plex/copyright"
+    },
+    {
+      "family": "IBM Plex Sans",
+      "name": "IBMPlexSans-Italic",
+      "path": "/usr/share/fonts/truetype/ibm-plex/IBMPlexSans-Italic.ttf",
+      "sha256": "da20a825f716ae2b75b69297aa27a4042056dbcf2e043de5ea69ac11651cb4e5",
+      "package": "fonts-ibm-plex",
+      "package_licence": "OFL-1.1",
+      "licence_source": "/usr/share/doc/fonts-ibm-plex/copyright"
+    },
+    {
+      "family": "IBM Plex Sans",
+      "name": "IBMPlexSans-Bold",
+      "path": "/usr/share/fonts/truetype/ibm-plex/IBMPlexSans-Bold.ttf",
+      "sha256": "b80a71fc5ac0f4d95f55dd97ca6be2c6073bea4ed6296336fe781620df41894b",
+      "package": "fonts-ibm-plex",
+      "package_licence": "OFL-1.1",
+      "licence_source": "/usr/share/doc/fonts-ibm-plex/copyright"
+    },
+    {
+      "family": "IBM Plex Mono",
+      "name": "IBMPlexMono-Regular",
+      "path": "/usr/share/fonts/truetype/ibm-plex/IBMPlexMono-Regular.ttf",
+      "sha256": "a3c50f7c0e063998cfaeae56c6169ece9e0feaffaef425aa038f85d037fb4b9b",
+      "package": "fonts-ibm-plex",
+      "package_licence": "OFL-1.1",
+      "licence_source": "/usr/share/doc/fonts-ibm-plex/copyright"
+    },
+    {
+      "family": "URW Gothic",
+      "name": "URWGothic-Book",
+      "path": "/usr/share/fonts/opentype/urw-base35/URWGothic-Book.otf",
+      "sha256": "04318316cee29950805110c9c8949eea189ef5575132881f4d4d7e03e5299903",
+      "package": "fonts-urw-base35",
+      "package_licence": "AGPL-3 with Font Exception",
+      "licence_source": "/usr/share/doc/fonts-urw-base35/copyright"
+    },
+    {
+      "family": "URW Gothic",
+      "name": "URWGothic-BookOblique",
+      "path": "/usr/share/fonts/opentype/urw-base35/URWGothic-BookOblique.otf",
+      "sha256": "ec4e947734950fd344918e560bc8ad0c5d8b17d0ab4853988824f13b9f77e53f",
+      "package": "fonts-urw-base35",
+      "package_licence": "AGPL-3 with Font Exception",
+      "licence_source": "/usr/share/doc/fonts-urw-base35/copyright"
+    },
+    {
+      "family": "URW Gothic",
+      "name": "URWGothic-Demi",
+      "path": "/usr/share/fonts/opentype/urw-base35/URWGothic-Demi.otf",
+      "sha256": "5b009410cf5231dcb1e45b155c1afedcfc63d82042fd8c414d0dd7705c9fbbae",
+      "package": "fonts-urw-base35",
+      "package_licence": "AGPL-3 with Font Exception",
+      "licence_source": "/usr/share/doc/fonts-urw-base35/copyright"
+    },
+    {
+      "family": "Bitstream Charter",
+      "name": "BitstreamCharter-Regular",
+      "path": "/usr/share/fonts/X11/Type1/c0648bt_.pfb",
+      "sha256": "8ac5bad34cad9b59b087eebfaf9087c16901b0761f7f9cc538f2f65567fc3959",
+      "package": "xfonts-scalable",
+      "package_licence": "Bitstream Charter permissive licence; notice and trademark acknowledgement required",
+      "licence_source": "/usr/share/doc/xfonts-scalable/copyright"
+    }
+  ],
+  "licensing": {
+    "rule": "Font binaries and generated P2prime pages are never committed; only hashes, manifests and compact metrics.",
+    "sources": [
+      "/usr/share/doc/fonts-ibm-plex/copyright",
+      "/usr/share/doc/fonts-urw-base35/copyright",
+      "/usr/share/doc/xfonts-scalable/copyright"
+    ]
+  },
+  "family_disjointness": "IBM Plex Serif, IBM Plex Sans, IBM Plex Mono, URW Gothic and Bitstream Charter are separate oracle families. These designs are held out from FONT-01 through P2. Charter Type 1 compatibility is subject to the geometry-only precheck.",
+  "evaluation_rules": {
+    "single_use": "Evaluate exactly once, with the frozen method and operating point. Any code or parameter change afterwards voids P2prime for qualification and needs a new preregistration.",
+    "arms": [
+      "current default ClearScan",
+      "frozen cover-2.0 (reference)",
+      "cover-2.0-ceiling (candidate)"
+    ],
+    "rendering": "Both PDFium and Poppler, at native 200/300/600 DPI, original physical coordinates.",
+    "pass_criteria": {
+      "pristine_quality": "Per frequent class (>=10 P2 observations), in each renderer: candidate mean and p95 pristine error <= current default.",
+      "material_defects": "Blinded review under FONT_04_REVIEW_PROTOCOL.md: zero identity-class defects (wrong character appearance, counter opened/closed, missing/added stroke, dot/sliver, weight/slant-class change) in the accepted sample, the rejected sample and the negative-set analogues; candidate total material-defect rate <= current default.",
+      "functional": "Text extraction and native search identical to current default; qpdf and OTS pass; deterministic repeat byte-identical.",
+      "economy": "Report distinct designs, draws per design, retired/added/net programs, font and PDF bytes. No economy threshold: economy is established on the real financial document (P3), not on P2."
+    },
+    "no_post_hoc": "No target, class, page or renderer may be excluded after P2 results are seen. Abstentions are counted by the frozen method's own rules.",
+    "criteria_interpretation": "P2 criteria below are copied verbatim and apply to candidate vs default; P2 means this P2prime population for these criteria.",
+    "identity_visibility_rule": "Visibility rule (fixed in advance): blinded panels show source | arm at native DPI at 100% and 200%. An identity-class defect counts when the reviewer can distinguish the arm's glyph from the source glyph at either scale; 400% views are informational only. The font-outline xor proxy is reported but is not a pass/fail criterion. The reviewer grades blind and commits all grades before the key is unsealed."
+  },
+  "review_package": {
+    "format": "R2a v2 blind review package with separately held sealed key; see qualification/font04/R2A_BLIND_README.md",
+    "strata": [
+      "all admitted substitutions, or random at least 300 stratified by face and DPI if more than 300",
+      "at least 150 rejected",
+      "cross-style probes",
+      "repeated words"
+    ],
+    "sampling": "Specify deterministic seed and allocation before reviewing; include available strata and record shortages explicitly."
+  },
+  "single_use_guard": {
+    "lock": "qualification/font04/local/P2prime/OPENED",
+    "conditions": [
+      "Final non-DRAFT preregistration SHA-256 referenced in method-freeze-ceiling.json",
+      "Reviewer acceptance of that exact hash recorded in method-freeze-ceiling.json"
+    ],
+    "state": "Geometry-only requires the final registration hash, matching face and binary hashes, and no OPENED lock; generation additionally requires reviewer acceptance of the final hash and a fresh output. No post-result tuning."
+  },
+  "layout": "P2 v1.1: each DPI schedule split in order into sheets of 32 lines, baseline 32 + 18*(line % 32) points; full scan bounding boxes must fit 6 x 9 inches."
+}
