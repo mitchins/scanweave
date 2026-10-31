@@ -66,3 +66,36 @@ Reviewer: Claude, independent and blind. Date: 2026-10-31.
 3. **Ship nothing** until a P2″ pass, whatever the choice. P2′ is spent.
 
 The reviewer's recommendation is option 2a with a consensus canonical. It is the only mechanism aimed at the observed residual, and it would make sharing a denoiser rather than a copier. Option 1 is also defensible, given the remaining effort and the modest economy on mixed documents.
+
+## S2a reviewer diagnosis (2026-10-31): pair groups
+
+Codex's S2a run stopped partway (`a0a5f0a`). Its partial prototype could not test A or B, because its smoke groups had fewer than 3 witnesses. The reviewer checked group sizes in the frozen P2′ candidate.
+
+**P2′ candidate groups (accepted members, including the canonical):**
+
+| Group size | Groups |
+|---|---|
+| 2 (pairs) | 150 |
+| 3 | 33 |
+| 4 | 11 |
+| 5 | 5 |
+
+**The 7 graded P2′ candidate defects by group size:**
+- **Pair groups (5):** panels 207 (Plex Bold `o`), 819 (Plex Sans `e`), 951 (Gothic `1`), 267 (Charter `.`) and 1040 (Plex Mono `T`).
+- **One 5-member group:** panels 425 and 1131, both URW Gothic `e` with canonical 228.
+
+**Consequence.** In a pair there is no third witness, so cross-witness agreement (A) and consensus (B) cannot decide which witness is contaminated. The defensible rule is a **witness quorum**: share only when at least 3 compatible witnesses support the shape. A or B then applies within groups of 3 or more, where it can actually adjudicate.
+
+**Upper bound on the economy cost of a quorum of 3**, from the frozen ceiling outputs. Each pair group retires at most one outline net.
+
+| Document | Pair groups | All groups | Net retired | Maximum loss |
+|---|---|---|---|---|
+| Financial | 67 | 267 | 318 | 67 (21%) |
+| Mixed | 22 | 55 | 82 | 22 |
+
+**Redirected S2a plan:**
+1. Arm Q: the ceiling plus a quorum of 3 or more admitted witnesses.
+2. Arm QA: Q plus the cleanest supported witness as canonical within each group.
+3. Arm QB, the consensus canonical, follows only if QA leaves the 5-member Gothic `e` group defective.
+
+Evaluation is as briefed: all confirmed defects, a blind sample, pristine quality split into clean and restoration cases, economy and functional checks.
