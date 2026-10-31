@@ -1,0 +1,39 @@
+{
+  "schema": "font04-s1e-generator-identity-v1",
+  "status": "PASS",
+  "generator_sha256": "b57cb3f87ebfe5401012ea6811ec3bc489078002f1c9254263bdb0f99663b5cf",
+  "font01": {
+    "command": "qualification/.venv/bin/python -m qualification.font04.r2b_generator --split font01 --out /tmp/font04-s1e-font01-final --verify-manifest qualification/font01/fixture-manifest.json",
+    "reference": "qualification/font01/local/corpus-font01-v1",
+    "method": "Compare every relative filename and SHA-256 in each split.",
+    "splits": {
+      "train": {
+        "reference_files": 5407,
+        "generated_files": 5407,
+        "differences": 0,
+        "examples": []
+      },
+      "validation": {
+        "reference_files": 4732,
+        "generated_files": 4732,
+        "differences": 0,
+        "examples": []
+      },
+      "test": {
+        "reference_files": 5407,
+        "generated_files": 5407,
+        "differences": 0,
+        "examples": []
+      }
+    }
+  },
+  "p2_geometry": {
+    "method": "Call generate_document geometry_only with p2-preregistration-v1.1 faces, phrases, seed and DPIs; compare geometry_report object exactly to retained r2b-p2-geometry.json. No P2prime input or pages.",
+    "reference_sha256": "f1f0597b81cf7601df39f201e288bc5ecad58035b18d4bcad6ad2ec4e01f0111",
+    "exact_match": true
+  },
+  "p2prime_guard": {
+    "command": "qualification/.venv/bin/python -m qualification.font04.r2b_generator --split p2prime --binary qualification/font04/local/S1d/scanweave",
+    "result": "Refused: final preregistration hash absent from ceiling freeze; no P2prime lock created."
+  }
+}

@@ -1,0 +1,180 @@
+{
+  "schema": "scanweave-font04-p2prime-preregistration-DRAFT-v1",
+  "registered": "2026-10-23",
+  "status": "DRAFT ONLY: reviewer acceptance and final preregistration hash in method-freeze-ceiling.json required before P2prime; generation remains disabled.",
+  "purpose": "Single-use held-out synthetic qualification population P2prime for FONT-04 candidate; no discovery, calibration or iteration.",
+  "generator": {
+    "base": "qualification/font01/benchmark.py at c10e3dff93ca12ac410c0f6626a4ef74ce34e0c1",
+    "permitted_change": "Same r2b_generator.py and v1.1 layout: 32 lines per sheet, full final scan bounding-box check and geometry-only precheck before opening. Existing placement, transforms, degradation and damage logic unchanged. P2prime is guarded against use until final registration and reviewer acceptance.",
+    "split_name": "p2prime",
+    "seed": 2075948809,
+    "seed_derivation": "First 8 hexadecimal digits of SHA-256 UTF-8 text 'FONT-04 P2prime preregistration DRAFT seed 2026-10-31': 7bbc7709a8008b597a05742f46cdd98bc48dca705f106f56d9fcedcd98b37717; interpreted as unsigned big-endian integer. Existing +17000+i, +31000 and +47000 offsets unchanged.",
+    "dpis": [
+      200,
+      300,
+      600
+    ],
+    "damage_bands": [
+      "D0",
+      "D1",
+      "D2",
+      "D3",
+      "D4"
+    ],
+    "damage_plan": "unchanged FONT-01 plan_damage()",
+    "phrases": [
+      "expires",
+      "Term expires 1921; $106.08!",
+      "constant use were after",
+      "Body TEXT 0O1Il 38.06, 1921.",
+      "Balance carried forward 4,385.27",
+      "Receipt No. 8813 - paid in full.",
+      "minimum amount 0.69; rate 3.5%",
+      "Officers elected annually 1856-1923"
+    ]
+  },
+  "faces": [
+    {
+      "family": "FreeMono",
+      "name": "FreeMono-Regular",
+      "path": "/usr/share/fonts/truetype/freefont/FreeMono.ttf",
+      "sha256": "9691040d4d89266db211cd9da1094cf1991beaaf5e01cc752bc1dab84d483534",
+      "package": "fonts-freefont-ttf",
+      "package_licence": "GPL-3+ with Special Font Exception"
+    },
+    {
+      "family": "FreeMono",
+      "name": "FreeMono-Oblique",
+      "path": "/usr/share/fonts/truetype/freefont/FreeMonoOblique.ttf",
+      "sha256": "c350255406bf9dd314c8261d49118b2d44c38d7c2555884eba43dffea7bd7313",
+      "package": "fonts-freefont-ttf",
+      "package_licence": "GPL-3+ with Special Font Exception"
+    },
+    {
+      "family": "FreeMono",
+      "name": "FreeMono-Bold",
+      "path": "/usr/share/fonts/truetype/freefont/FreeMonoBold.ttf",
+      "sha256": "7a5ded6ffe5ba84c7c478de521ad0653efae4d2b92b251216bc390c6022e91ac",
+      "package": "fonts-freefont-ttf",
+      "package_licence": "GPL-3+ with Special Font Exception"
+    },
+    {
+      "family": "FreeSans",
+      "name": "FreeSans-Regular",
+      "path": "/usr/share/fonts/truetype/freefont/FreeSans.ttf",
+      "sha256": "350badd6ab6a58e7fd7a0ea2ae0c10174941a08e1cd06b3c6010e10b3d5ae319",
+      "package": "fonts-freefont-ttf",
+      "package_licence": "GPL-3+ with Special Font Exception"
+    },
+    {
+      "family": "FreeSans",
+      "name": "FreeSans-Oblique",
+      "path": "/usr/share/fonts/truetype/freefont/FreeSansOblique.ttf",
+      "sha256": "31f2e994c6bb0f6c8a8f1d27ae25b4b754ef072154220bb4db2a69e8e3d1193f",
+      "package": "fonts-freefont-ttf",
+      "package_licence": "GPL-3+ with Special Font Exception"
+    },
+    {
+      "family": "FreeSans",
+      "name": "FreeSans-Bold",
+      "path": "/usr/share/fonts/truetype/freefont/FreeSansBold.ttf",
+      "sha256": "e0a07c1e9495262c430fde74e80daadd0b2a353eb444a47b265c62f5a5836af5",
+      "package": "fonts-freefont-ttf",
+      "package_licence": "GPL-3+ with Special Font Exception"
+    },
+    {
+      "family": "URW Gothic",
+      "name": "URWGothic-Book",
+      "path": "/usr/share/fonts/opentype/urw-base35/URWGothic-Book.otf",
+      "sha256": "04318316cee29950805110c9c8949eea189ef5575132881f4d4d7e03e5299903",
+      "package": "fonts-urw-base35",
+      "package_licence": "AGPL-3 with Font Exception"
+    },
+    {
+      "family": "URW Gothic",
+      "name": "URWGothic-BookOblique",
+      "path": "/usr/share/fonts/opentype/urw-base35/URWGothic-BookOblique.otf",
+      "sha256": "ec4e947734950fd344918e560bc8ad0c5d8b17d0ab4853988824f13b9f77e53f",
+      "package": "fonts-urw-base35",
+      "package_licence": "AGPL-3 with Font Exception"
+    },
+    {
+      "family": "URW Gothic",
+      "name": "URWGothic-Demi",
+      "path": "/usr/share/fonts/opentype/urw-base35/URWGothic-Demi.otf",
+      "sha256": "5b009410cf5231dcb1e45b155c1afedcfc63d82042fd8c414d0dd7705c9fbbae",
+      "package": "fonts-urw-base35",
+      "package_licence": "AGPL-3 with Font Exception"
+    },
+    {
+      "family": "Bitstream Charter",
+      "name": "BitstreamCharter-Regular",
+      "path": "/usr/share/fonts/X11/Type1/c0648bt_.pfb",
+      "sha256": "8ac5bad34cad9b59b087eebfaf9087c16901b0761f7f9cc538f2f65567fc3959",
+      "package": "xfonts-scalable",
+      "package_licence": "Bitstream Charter permissive licence; notice and trademark acknowledgement required"
+    },
+    {
+      "family": "Bitstream Charter",
+      "name": "BitstreamCharter-Italic",
+      "path": "/usr/share/fonts/X11/Type1/c0649bt_.pfb",
+      "sha256": "0c3e189c6a52401c62c9fcde32f453a4dc95836d8c6e03fe8908100d854f3a83",
+      "package": "xfonts-scalable",
+      "package_licence": "Bitstream Charter permissive licence; notice and trademark acknowledgement required"
+    },
+    {
+      "family": "Bitstream Charter",
+      "name": "BitstreamCharter-Bold",
+      "path": "/usr/share/fonts/X11/Type1/c0632bt_.pfb",
+      "sha256": "c50fd6e717599f306b8b3261d309c56849f4366771c1983c875eabf46bc2b956",
+      "package": "xfonts-scalable",
+      "package_licence": "Bitstream Charter permissive licence; notice and trademark acknowledgement required"
+    }
+  ],
+  "licensing": {
+    "rule": "Font binaries and generated P2prime pages are never committed; only hashes, manifests and compact metrics.",
+    "sources": [
+      "/usr/share/doc/fonts-freefont-ttf/copyright",
+      "/usr/share/doc/fonts-urw-base35/copyright",
+      "/usr/share/doc/xfonts-scalable/copyright"
+    ]
+  },
+  "family_disjointness": "fc-list inventory and text/manifest fixture search across qualification/font01 through font04, excluding generated local artifacts: none of FreeMono, FreeSans, URW Gothic, or Bitstream Charter found. FONT-01 through P2 known families excluded. FreeSans and Bitstream Charter provide sans/serif text designs; FreeMono is monospace. Reviewer should assess design similarity and Type 1 compatibility with the outline-xor proxy before acceptance.",
+  "evaluation_rules": {
+    "single_use": "Evaluate exactly once, with the frozen method and operating point. Any code or parameter change afterwards voids P2prime for qualification and needs a new preregistration.",
+    "arms": [
+      "current default ClearScan",
+      "frozen cover-2.0 (reference)",
+      "cover-2.0-ceiling (candidate)"
+    ],
+    "rendering": "Both PDFium and Poppler, at native 200/300/600 DPI, original physical coordinates.",
+    "pass_criteria": {
+      "pristine_quality": "Per frequent class (>=10 P2 observations), in each renderer: candidate mean and p95 pristine error <= current default.",
+      "material_defects": "Blinded review under FONT_04_REVIEW_PROTOCOL.md: zero identity-class defects (wrong character appearance, counter opened/closed, missing/added stroke, dot/sliver, weight/slant-class change) in the accepted sample, the rejected sample and the negative-set analogues; candidate total material-defect rate <= current default.",
+      "functional": "Text extraction and native search identical to current default; qpdf and OTS pass; deterministic repeat byte-identical.",
+      "economy": "Report distinct designs, draws per design, retired/added/net programs, font and PDF bytes. No economy threshold: economy is established on the real financial document (P3), not on P2."
+    },
+    "no_post_hoc": "No target, class, page or renderer may be excluded after P2 results are seen. Abstentions are counted by the frozen method's own rules.",
+    "criteria_interpretation": "P2 criteria below are copied verbatim and apply to candidate vs default; P2 means this P2prime population for these criteria.",
+    "identity_visibility_rule": "Blind review counts an identity-class defect only when visibly distinguishable at reading size from the source glyph. Visually interchangeable cross-family glyphs are allowed. Font-outline xor proxy is reported but is not a pass/fail criterion; zero identity-class defects remains required."
+  },
+  "review_package": {
+    "format": "R2a v2 blind review package with separately held sealed key; see qualification/font04/R2A_BLIND_README.md",
+    "strata": [
+      "all admitted substitutions, or random at least 300 stratified by face and DPI if more than 300",
+      "at least 150 rejected",
+      "cross-style probes",
+      "repeated words"
+    ],
+    "sampling": "Specify deterministic seed and allocation before reviewing; include available strata and record shortages explicitly."
+  },
+  "single_use_guard": {
+    "lock": "qualification/font04/local/P2prime/OPENED",
+    "conditions": [
+      "Final non-DRAFT preregistration SHA-256 referenced in method-freeze-ceiling.json",
+      "Reviewer acceptance of that exact hash recorded in method-freeze-ceiling.json"
+    ],
+    "state": "P2prime generation and geometry refuse to run pending final registration hash and reviewer acceptance; no post-result tuning."
+  },
+  "layout": "P2 v1.1: each DPI schedule split in order into sheets of 32 lines, baseline 32 + 18*(line % 32) points; full scan bounding boxes must fit 6 x 9 inches."
+}

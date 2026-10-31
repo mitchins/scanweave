@@ -16,6 +16,10 @@ pristine distances, review panel, calibrated frontier, native correction or
 comparison runs had been completed at that time. The S1b diagnostic below updates
 that receipt; it is not Checkpoint S1 acceptance evidence.
 
+### S1e — ceiling freeze and P2′ draft
+
+The `cover-2.0-ceiling` candidate is frozen in [method-freeze-ceiling.json](qualification/font04/method-freeze-ceiling.json); the existing freeze is unchanged. All 14 requested ceiling outputs passed Poppler, PDFium and MuPDF extraction equality, native search equality, qpdf and OTS ([functional results](qualification/font04/s1e-functional.json)). The reviewer-reported determinism, unchanged defaults and cover-2.0, serial timing, and S1d economy evidence are recorded in the freeze. The guarded generator reproduces FONT-01 byte-for-byte and the P2 geometry report exactly ([identity proof](qualification/font04/s1e-generator-identity.json)). The [P2′ preregistration](qualification/font04/p2prime-preregistration-DRAFT.json) is a draft for reviewer review; no P2′ pages have been generated or inspected. The final preregistration hash and reviewer acceptance are required before the guard permits P2′.
+
 ### S1b — offline source-mask veto
 
 This is a diagnostic prototype, not a qualification or a product change. It adds an OR of scan-derived feature differences to the frozen accepted decisions. Slant is ink second-moment shear; weight is median local distance-transform ridge width divided by ink height; profile is the 90th/10th percentile ridge-width ratio. For OCR `i,l,1,I,|`, it also compares an upper detached component, top-left protrusion and foot breadth; for `0,O,o`, enclosed area. Scales are the root mean square of same-face accepted pair differences in FONT-01 train, separately by DPI. A zero scale means any difference triggers; absent scales abstain. In particular, 300 dpi has no training pairs for the confusable features, and dot has only 2 and 4 pairs at 200 and 600 dpi, both with zero noise. The rule sees source masks and OCR labels only; oracle faces, characters and pristine font shapes are used solely for analysis. The optional run-context variant was not implemented.

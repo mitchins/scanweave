@@ -1,0 +1,691 @@
+{
+  "method": "R2a extraction (Poppler default/layout/raw, PDFium, MuPDF); functional_guard.native PDFium word search; R2a qpdf and OTS",
+  "results": [
+    {
+      "name": "financial",
+      "default": "qualification/font04/local/R2a/baseline/financial-off.pdf",
+      "candidate": "qualification/font04/local/S1d/runs/financial-ceiling.pdf",
+      "default_sha256": "74c31136d00a18dbf05fba2d7fba59c85cc201a57ae65d77999a025a692fab0f",
+      "candidate_sha256": "7f2bc84934d1de9a4d7e6779744d6c4e83e71582ecdb07406edd1dd9504f29bb",
+      "extraction_hashes": {
+        "default": {
+          "Poppler_default": "1a06706941913c1d76aaa59f05c6786ad9c26427882d667276135a08fc9e0f43",
+          "Poppler_layout": "7f866f93c38ec5f1661783c4cdf52f661aa66e6dfe1f8628cc3e607f0369fbbd",
+          "Poppler_raw": "358589bccca356757df791bd793295e09d84c3399aef0263225046ea8ecc414b",
+          "PDFium": "d94977266f8a035692b92ecf7a780428b928c46a7334c5e8c5b37474ee36868f",
+          "MuPDF": "62a8bdda8a51e1211a42311c8cacd5bc7594ec1a8643475aaa6911cd70d423c1"
+        },
+        "candidate": {
+          "Poppler_default": "1a06706941913c1d76aaa59f05c6786ad9c26427882d667276135a08fc9e0f43",
+          "Poppler_layout": "7f866f93c38ec5f1661783c4cdf52f661aa66e6dfe1f8628cc3e607f0369fbbd",
+          "Poppler_raw": "358589bccca356757df791bd793295e09d84c3399aef0263225046ea8ecc414b",
+          "PDFium": "d94977266f8a035692b92ecf7a780428b928c46a7334c5e8c5b37474ee36868f",
+          "MuPDF": "62a8bdda8a51e1211a42311c8cacd5bc7594ec1a8643475aaa6911cd70d423c1"
+        }
+      },
+      "extraction_equal": {
+        "Poppler_default": true,
+        "Poppler_layout": true,
+        "Poppler_raw": true,
+        "PDFium": true,
+        "MuPDF": true
+      },
+      "page_count": [
+        13,
+        13
+      ],
+      "native_search_equal_by_page": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "qpdf": "checking qualification/font04/local/S1d/runs/financial-ceiling.pdf\nPDF Version: 1.7\nFile is not encrypted\nFile is not linearized\nNo syntax or stream encoding errors found; the file may still contain\nerrors that qpdf cannot detect\n",
+      "fonts": [
+        {
+          "sha256": "90f8767135ad558732cfcdd1d55eae16322a2ed4efd14e67ee16714c91170588",
+          "decoded_bytes": 1169036,
+          "encoded_bytes": 665673,
+          "ots": "File sanitized successfully!\n"
+        }
+      ],
+      "pass": true
+    },
+    {
+      "name": "mixed",
+      "default": "qualification/font04/local/R2a/baseline/mixed-off.pdf",
+      "candidate": "qualification/font04/local/S1d/runs/mixed-ceiling.pdf",
+      "default_sha256": "c3f224bf18e5d2aeeba6e03de20000b84ff31893fc945e14882719b114d616d9",
+      "candidate_sha256": "ef49febed6a97956fab93204e28ef900725ad276595e9ea2ee225c88e5c87371",
+      "extraction_hashes": {
+        "default": {
+          "Poppler_default": "d61ffff1e47e010ef30e281f8df333391eba019ecc63290c3509fc1fe8a352ae",
+          "Poppler_layout": "15fe99666bfdd3902b58b3dffc568633d24c67ea6f79dfed789d1ec31ace23f8",
+          "Poppler_raw": "0b93a04b71b3a9d98dc50042eed6e6ca241795ae992f5fcad173bc3ea1a4886d",
+          "PDFium": "52f5780165411b82beb97abadbba9515126c0470e99e52173652631075a66396",
+          "MuPDF": "72966a94a0b7f37c2c3e0e0cdcc7a85904dad02ba09fe00566315a214eb150d7"
+        },
+        "candidate": {
+          "Poppler_default": "d61ffff1e47e010ef30e281f8df333391eba019ecc63290c3509fc1fe8a352ae",
+          "Poppler_layout": "15fe99666bfdd3902b58b3dffc568633d24c67ea6f79dfed789d1ec31ace23f8",
+          "Poppler_raw": "0b93a04b71b3a9d98dc50042eed6e6ca241795ae992f5fcad173bc3ea1a4886d",
+          "PDFium": "52f5780165411b82beb97abadbba9515126c0470e99e52173652631075a66396",
+          "MuPDF": "72966a94a0b7f37c2c3e0e0cdcc7a85904dad02ba09fe00566315a214eb150d7"
+        }
+      },
+      "extraction_equal": {
+        "Poppler_default": true,
+        "Poppler_layout": true,
+        "Poppler_raw": true,
+        "PDFium": true,
+        "MuPDF": true
+      },
+      "page_count": [
+        2,
+        2
+      ],
+      "native_search_equal_by_page": [
+        true,
+        true
+      ],
+      "qpdf": "checking qualification/font04/local/S1d/runs/mixed-ceiling.pdf\nPDF Version: 1.7\nFile is not encrypted\nFile is not linearized\nNo syntax or stream encoding errors found; the file may still contain\nerrors that qpdf cannot detect\n",
+      "fonts": [
+        {
+          "sha256": "5dbbf67fc57742b9118e18766f4399fbe2ee32c01dbaae0549a0585a12662eff",
+          "decoded_bytes": 467148,
+          "encoded_bytes": 243905,
+          "ots": "File sanitized successfully!\n"
+        }
+      ],
+      "pass": true
+    },
+    {
+      "name": "forms",
+      "default": "qualification/font04/local/R2a/baseline/forms-off.pdf",
+      "candidate": "qualification/font04/local/S1d/runs/forms-ceiling.pdf",
+      "default_sha256": "691d7fe020990cd54d095c417113ad9acfdd897d0ee29ac824a5b0469c472fc8",
+      "candidate_sha256": "691d7fe020990cd54d095c417113ad9acfdd897d0ee29ac824a5b0469c472fc8",
+      "extraction_hashes": {
+        "default": {
+          "Poppler_default": "0ec82a80f52ee3a8e76cf14c49d3dc6e74a2b415eda4c80c4439f0cb2a356a53",
+          "Poppler_layout": "0e04a618b8b9342e00720de9b929c916761524d775ad7e98030d88635c801e1a",
+          "Poppler_raw": "d6b648643eb2635b1249f36a98a3f5832d1dfb7a8be242fcb21d6c288ed21b23",
+          "PDFium": "874084a8da0325318cc7c7f8da5233bf49bf2048cc97e53908bdb118b20c36c0",
+          "MuPDF": "c151b03b80a6e9a6ebc5001756c65708889ff7a3330c1c9bf6a724ffc998b738"
+        },
+        "candidate": {
+          "Poppler_default": "0ec82a80f52ee3a8e76cf14c49d3dc6e74a2b415eda4c80c4439f0cb2a356a53",
+          "Poppler_layout": "0e04a618b8b9342e00720de9b929c916761524d775ad7e98030d88635c801e1a",
+          "Poppler_raw": "d6b648643eb2635b1249f36a98a3f5832d1dfb7a8be242fcb21d6c288ed21b23",
+          "PDFium": "874084a8da0325318cc7c7f8da5233bf49bf2048cc97e53908bdb118b20c36c0",
+          "MuPDF": "c151b03b80a6e9a6ebc5001756c65708889ff7a3330c1c9bf6a724ffc998b738"
+        }
+      },
+      "extraction_equal": {
+        "Poppler_default": true,
+        "Poppler_layout": true,
+        "Poppler_raw": true,
+        "PDFium": true,
+        "MuPDF": true
+      },
+      "page_count": [
+        2,
+        2
+      ],
+      "native_search_equal_by_page": [
+        true,
+        true
+      ],
+      "qpdf": "checking qualification/font04/local/S1d/runs/forms-ceiling.pdf\nPDF Version: 1.7\nFile is not encrypted\nFile is not linearized\nNo syntax or stream encoding errors found; the file may still contain\nerrors that qpdf cannot detect\n",
+      "fonts": [
+        {
+          "sha256": "d8525980a5a2e2dc668a8c42ba2ecde794511e485835abeec276e79db8c10bb2",
+          "decoded_bytes": 95140,
+          "encoded_bytes": 41147,
+          "ots": "File sanitized successfully!\n"
+        }
+      ],
+      "pass": true
+    },
+    {
+      "name": "receipts",
+      "default": "qualification/font04/local/R2a/baseline/receipts-off.pdf",
+      "candidate": "qualification/font04/local/S1d/runs/receipts-ceiling.pdf",
+      "default_sha256": "6b5d58175089652177e8942af97c630df6c423682af7146bd2cba2726b8e400b",
+      "candidate_sha256": "6b5d58175089652177e8942af97c630df6c423682af7146bd2cba2726b8e400b",
+      "extraction_hashes": {
+        "default": {
+          "Poppler_default": "65add6d92bdbb64243702e27c1386644d757e418b4516f0ade161894df7f575b",
+          "Poppler_layout": "bfb8d1ad7fd815a1a4ab0476675f1d84ae80452862901a55dd6dc783dbde97cf",
+          "Poppler_raw": "b49c942ce5266645a5df4884288ae1bc927c56603c98fabccae0c9bb51ef82aa",
+          "PDFium": "3add1ae12b8d92f775b7acd2be13cedb766182073e338b5e8bd90af0810ea7a0",
+          "MuPDF": "9e6e2302417bbcd0653e757a04c81154e35bf8b13f6f71c53f651f0b3c863213"
+        },
+        "candidate": {
+          "Poppler_default": "65add6d92bdbb64243702e27c1386644d757e418b4516f0ade161894df7f575b",
+          "Poppler_layout": "bfb8d1ad7fd815a1a4ab0476675f1d84ae80452862901a55dd6dc783dbde97cf",
+          "Poppler_raw": "b49c942ce5266645a5df4884288ae1bc927c56603c98fabccae0c9bb51ef82aa",
+          "PDFium": "3add1ae12b8d92f775b7acd2be13cedb766182073e338b5e8bd90af0810ea7a0",
+          "MuPDF": "9e6e2302417bbcd0653e757a04c81154e35bf8b13f6f71c53f651f0b3c863213"
+        }
+      },
+      "extraction_equal": {
+        "Poppler_default": true,
+        "Poppler_layout": true,
+        "Poppler_raw": true,
+        "PDFium": true,
+        "MuPDF": true
+      },
+      "page_count": [
+        10,
+        10
+      ],
+      "native_search_equal_by_page": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "qpdf": "checking qualification/font04/local/S1d/runs/receipts-ceiling.pdf\nPDF Version: 1.7\nFile is not encrypted\nFile is not linearized\nNo syntax or stream encoding errors found; the file may still contain\nerrors that qpdf cannot detect\n",
+      "fonts": [
+        {
+          "sha256": "2bb1192b6f72fa59cab61a74f1beefd3d5af75442817fdac7be2b5a6a8735301",
+          "decoded_bytes": 28784,
+          "encoded_bytes": 16712,
+          "ots": "File sanitized successfully!\n"
+        }
+      ],
+      "pass": true
+    },
+    {
+      "name": "historical",
+      "default": "qualification/font04/local/R2a/baseline/historical-off.pdf",
+      "candidate": "qualification/font04/local/S1d/runs/historical-ceiling.pdf",
+      "default_sha256": "9263905f899815097b74fb8b6a802a75d0439756ac32d84b278f3b54a26f716e",
+      "candidate_sha256": "9263905f899815097b74fb8b6a802a75d0439756ac32d84b278f3b54a26f716e",
+      "extraction_hashes": {
+        "default": {
+          "Poppler_default": "21e334661d52329b8f18d80e761db2f50ff1351fd05f7bae2b4db5fcecd187b5",
+          "Poppler_layout": "ae02df681b8b0deee9a345e7da78fa439680f70b2020ee521c49369db3a50d10",
+          "Poppler_raw": "7e6149a57dfa2ab6b8671e6bfd4c4f8aa3ceb4853f18484069207cf369b60b9b",
+          "PDFium": "ac7be1137e1954bf1d9f9cb395829f35aadcb0939782e570b032db1d5a41bcb6",
+          "MuPDF": "7ac3836023725ff57637fc1c5866f865f669731a47b7174f4289c221122e1ce2"
+        },
+        "candidate": {
+          "Poppler_default": "21e334661d52329b8f18d80e761db2f50ff1351fd05f7bae2b4db5fcecd187b5",
+          "Poppler_layout": "ae02df681b8b0deee9a345e7da78fa439680f70b2020ee521c49369db3a50d10",
+          "Poppler_raw": "7e6149a57dfa2ab6b8671e6bfd4c4f8aa3ceb4853f18484069207cf369b60b9b",
+          "PDFium": "ac7be1137e1954bf1d9f9cb395829f35aadcb0939782e570b032db1d5a41bcb6",
+          "MuPDF": "7ac3836023725ff57637fc1c5866f865f669731a47b7174f4289c221122e1ce2"
+        }
+      },
+      "extraction_equal": {
+        "Poppler_default": true,
+        "Poppler_layout": true,
+        "Poppler_raw": true,
+        "PDFium": true,
+        "MuPDF": true
+      },
+      "page_count": [
+        5,
+        5
+      ],
+      "native_search_equal_by_page": [
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "qpdf": "checking qualification/font04/local/S1d/runs/historical-ceiling.pdf\nPDF Version: 1.7\nFile is not encrypted\nFile is not linearized\nNo syntax or stream encoding errors found; the file may still contain\nerrors that qpdf cannot detect\n",
+      "fonts": [
+        {
+          "sha256": "a28dc86b6406395a4b7473c6878d858ba2dfcb5a2b16a4fbecf785036a856d67",
+          "decoded_bytes": 8108,
+          "encoded_bytes": 3472,
+          "ots": "File sanitized successfully!\n"
+        }
+      ],
+      "pass": true
+    },
+    {
+      "name": "p2-0",
+      "default": "qualification/font04/local/P2/sheet-0-off.pdf",
+      "candidate": "qualification/font04/local/S1d/runs/p2-0-ceiling.pdf",
+      "default_sha256": "bd1df18ad074eff6ffd2d96f838ec3460795b93b5595d3a1a93aa5d3616a1957",
+      "candidate_sha256": "a6ab8b9e246f8595755b5d18bcc212bd4120f7eb6eb83db749d755af21955a5e",
+      "extraction_hashes": {
+        "default": {
+          "Poppler_default": "6c835c63cca7ad4368a9f467e70bbd719dd1902eb25864964d6955285c497e1a",
+          "Poppler_layout": "353ba1aaa78e1610444d31d1b0dcc795c52a1bbc7389bd0e4255a2ae84e71838",
+          "Poppler_raw": "b4eed761f117a14d4033ae71a68fb93f397e2c7445b166131acf424d8ef143a0",
+          "PDFium": "2dede823f15fd1b39ed57c1db37c0915509007b6e4ca36433b52c20fe79811ae",
+          "MuPDF": "2d7fbf0116a42abb33281a50ae09b9cb033409bafe0eb42990113f565fbc4713"
+        },
+        "candidate": {
+          "Poppler_default": "6c835c63cca7ad4368a9f467e70bbd719dd1902eb25864964d6955285c497e1a",
+          "Poppler_layout": "353ba1aaa78e1610444d31d1b0dcc795c52a1bbc7389bd0e4255a2ae84e71838",
+          "Poppler_raw": "b4eed761f117a14d4033ae71a68fb93f397e2c7445b166131acf424d8ef143a0",
+          "PDFium": "2dede823f15fd1b39ed57c1db37c0915509007b6e4ca36433b52c20fe79811ae",
+          "MuPDF": "2d7fbf0116a42abb33281a50ae09b9cb033409bafe0eb42990113f565fbc4713"
+        }
+      },
+      "extraction_equal": {
+        "Poppler_default": true,
+        "Poppler_layout": true,
+        "Poppler_raw": true,
+        "PDFium": true,
+        "MuPDF": true
+      },
+      "page_count": [
+        1,
+        1
+      ],
+      "native_search_equal_by_page": [
+        true
+      ],
+      "qpdf": "checking qualification/font04/local/S1d/runs/p2-0-ceiling.pdf\nPDF Version: 1.7\nFile is not encrypted\nFile is not linearized\nNo syntax or stream encoding errors found; the file may still contain\nerrors that qpdf cannot detect\n",
+      "fonts": [
+        {
+          "sha256": "1d2747a93c0d563fbfbac0a3a81da2854d81b12b11bdd0986f8dc3149fe5b518",
+          "decoded_bytes": 131328,
+          "encoded_bytes": 76353,
+          "ots": "File sanitized successfully!\n"
+        }
+      ],
+      "pass": true
+    },
+    {
+      "name": "p2-1",
+      "default": "qualification/font04/local/P2/sheet-1-off.pdf",
+      "candidate": "qualification/font04/local/S1d/runs/p2-1-ceiling.pdf",
+      "default_sha256": "3c96d6a1faf2f6fcc37f3375ce94f36cd6e6b3e296eeef7c39a061ab6a7d0e44",
+      "candidate_sha256": "17cd8b9b70275972b06223c5eebf1777042055a31e4d46ddfd27a6ebb653d0ac",
+      "extraction_hashes": {
+        "default": {
+          "Poppler_default": "09047658f98248d50f97c2be6e3997dfb08c19674e6353db19bba78437e42b83",
+          "Poppler_layout": "6e00ac0681a0eddfd0cdf26b6b5a89ae2adbd905862c7a2b2b26f02a98cfaafe",
+          "Poppler_raw": "b9e2191a8d2f367565a22c7240dd626efc3bb64eafcb4745c441fd4152508705",
+          "PDFium": "7cd31a3ace0f6a078792b3002baa7c3fdf11d62755772b3ab6be4620d1848d11",
+          "MuPDF": "36331ca72a895921acdb4641a83a8b7770a168c7b6663b07b264d5c013a44013"
+        },
+        "candidate": {
+          "Poppler_default": "09047658f98248d50f97c2be6e3997dfb08c19674e6353db19bba78437e42b83",
+          "Poppler_layout": "6e00ac0681a0eddfd0cdf26b6b5a89ae2adbd905862c7a2b2b26f02a98cfaafe",
+          "Poppler_raw": "b9e2191a8d2f367565a22c7240dd626efc3bb64eafcb4745c441fd4152508705",
+          "PDFium": "7cd31a3ace0f6a078792b3002baa7c3fdf11d62755772b3ab6be4620d1848d11",
+          "MuPDF": "36331ca72a895921acdb4641a83a8b7770a168c7b6663b07b264d5c013a44013"
+        }
+      },
+      "extraction_equal": {
+        "Poppler_default": true,
+        "Poppler_layout": true,
+        "Poppler_raw": true,
+        "PDFium": true,
+        "MuPDF": true
+      },
+      "page_count": [
+        1,
+        1
+      ],
+      "native_search_equal_by_page": [
+        true
+      ],
+      "qpdf": "checking qualification/font04/local/S1d/runs/p2-1-ceiling.pdf\nPDF Version: 1.7\nFile is not encrypted\nFile is not linearized\nNo syntax or stream encoding errors found; the file may still contain\nerrors that qpdf cannot detect\n",
+      "fonts": [
+        {
+          "sha256": "b9f463803cb11bb5a2de6ae88622defef4a735a3de3ac3d3369192899ea5e855",
+          "decoded_bytes": 161576,
+          "encoded_bytes": 94479,
+          "ots": "File sanitized successfully!\n"
+        }
+      ],
+      "pass": true
+    },
+    {
+      "name": "p2-2",
+      "default": "qualification/font04/local/P2/sheet-2-off.pdf",
+      "candidate": "qualification/font04/local/S1d/runs/p2-2-ceiling.pdf",
+      "default_sha256": "1ea7470900bc0938ed7b2530e18676d4b75b2b7a28772aecbf9d8d5a9f03c77e",
+      "candidate_sha256": "73d818d5f4c0e764979dd3b7b6babed09d37c2d9c0b065e7f5a80cc964d8604f",
+      "extraction_hashes": {
+        "default": {
+          "Poppler_default": "c97096ec41c9fc605f0af9c04dabde8717dd3e44a7f8f4fd283087110ba0290d",
+          "Poppler_layout": "4c8ddfb511f175a0278137a20be8f54c2c193b1b5a809de87c482a2c55d2839d",
+          "Poppler_raw": "a0ed43ded27e29decc35910bc3c1b37b83614cb56ba6b3522e05e8a25d567e37",
+          "PDFium": "3db9867e7464263083694148b3df7d7a87f0e2fc19620e35fe82ff282bde6d41",
+          "MuPDF": "fe57387059b1e7326c90bba0167109c10ee17eedf4e9fe3639458825eaf20761"
+        },
+        "candidate": {
+          "Poppler_default": "c97096ec41c9fc605f0af9c04dabde8717dd3e44a7f8f4fd283087110ba0290d",
+          "Poppler_layout": "4c8ddfb511f175a0278137a20be8f54c2c193b1b5a809de87c482a2c55d2839d",
+          "Poppler_raw": "a0ed43ded27e29decc35910bc3c1b37b83614cb56ba6b3522e05e8a25d567e37",
+          "PDFium": "3db9867e7464263083694148b3df7d7a87f0e2fc19620e35fe82ff282bde6d41",
+          "MuPDF": "fe57387059b1e7326c90bba0167109c10ee17eedf4e9fe3639458825eaf20761"
+        }
+      },
+      "extraction_equal": {
+        "Poppler_default": true,
+        "Poppler_layout": true,
+        "Poppler_raw": true,
+        "PDFium": true,
+        "MuPDF": true
+      },
+      "page_count": [
+        1,
+        1
+      ],
+      "native_search_equal_by_page": [
+        true
+      ],
+      "qpdf": "checking qualification/font04/local/S1d/runs/p2-2-ceiling.pdf\nPDF Version: 1.7\nFile is not encrypted\nFile is not linearized\nNo syntax or stream encoding errors found; the file may still contain\nerrors that qpdf cannot detect\n",
+      "fonts": [
+        {
+          "sha256": "7e9c45d14844bb9b8b957ef14624832161608432750f9ae1dda8238c9a402387",
+          "decoded_bytes": 131664,
+          "encoded_bytes": 78895,
+          "ots": "File sanitized successfully!\n"
+        }
+      ],
+      "pass": true
+    },
+    {
+      "name": "p2-3",
+      "default": "qualification/font04/local/P2/sheet-3-off.pdf",
+      "candidate": "qualification/font04/local/S1d/runs/p2-3-ceiling.pdf",
+      "default_sha256": "91549d852311858a05a3e3f9f5909ba7001ef7abe153efec839368361ac9cf4b",
+      "candidate_sha256": "ebb7dfba4253bc09abd9f158951b3a18ff32993c074ea8723d28949a9c32d0e5",
+      "extraction_hashes": {
+        "default": {
+          "Poppler_default": "d9f499f0b69d5ac099b541e3c647a22aa49deeef7d6d95e19b8decf13d284a71",
+          "Poppler_layout": "54c7caa8c5d7fe158aed5b071da64a39a0e3128a7c0bba423c9efdef5c3c16cc",
+          "Poppler_raw": "e02e2d321382b4eaf72ce5fd8ee3cdb5ef84d8810bb11d3b27ee8741a32e7594",
+          "PDFium": "6c04dd40e8f0603c96573bc7fc101bcc016abee185418aaf88445f01f80eb702",
+          "MuPDF": "1437404fd5ac17f0c973a7179148759d2bf5ef1f99d860b84d7cb0274cb3d7f4"
+        },
+        "candidate": {
+          "Poppler_default": "d9f499f0b69d5ac099b541e3c647a22aa49deeef7d6d95e19b8decf13d284a71",
+          "Poppler_layout": "54c7caa8c5d7fe158aed5b071da64a39a0e3128a7c0bba423c9efdef5c3c16cc",
+          "Poppler_raw": "e02e2d321382b4eaf72ce5fd8ee3cdb5ef84d8810bb11d3b27ee8741a32e7594",
+          "PDFium": "6c04dd40e8f0603c96573bc7fc101bcc016abee185418aaf88445f01f80eb702",
+          "MuPDF": "1437404fd5ac17f0c973a7179148759d2bf5ef1f99d860b84d7cb0274cb3d7f4"
+        }
+      },
+      "extraction_equal": {
+        "Poppler_default": true,
+        "Poppler_layout": true,
+        "Poppler_raw": true,
+        "PDFium": true,
+        "MuPDF": true
+      },
+      "page_count": [
+        1,
+        1
+      ],
+      "native_search_equal_by_page": [
+        true
+      ],
+      "qpdf": "checking qualification/font04/local/S1d/runs/p2-3-ceiling.pdf\nPDF Version: 1.7\nFile is not encrypted\nFile is not linearized\nNo syntax or stream encoding errors found; the file may still contain\nerrors that qpdf cannot detect\n",
+      "fonts": [
+        {
+          "sha256": "49bff98707f01fcda2b6acc2a844b14042c02e58e7d8cb9828901e50c71e2c9d",
+          "decoded_bytes": 154620,
+          "encoded_bytes": 90729,
+          "ots": "File sanitized successfully!\n"
+        }
+      ],
+      "pass": true
+    },
+    {
+      "name": "p2-4",
+      "default": "qualification/font04/local/P2/sheet-4-off.pdf",
+      "candidate": "qualification/font04/local/S1d/runs/p2-4-ceiling.pdf",
+      "default_sha256": "04103ff086c71141615ed679472971872d9b463b4b5d4e62674ddd1ad01dd023",
+      "candidate_sha256": "fa73a10c1c6fa4de1520362a367c9f3dd3cb7b15d54bf0ab06b3a46d63cd7635",
+      "extraction_hashes": {
+        "default": {
+          "Poppler_default": "5b469164519bd5c0cce7dbb8e4ca2089acacfa68a5eaf6c74e61f10857f29d45",
+          "Poppler_layout": "4e943a23395c86fc58a286c4bd3295227424b66de972fb0fe864f0b479f5a710",
+          "Poppler_raw": "b3b193726ab3d5e7a38ce9759ec612b8db76c4235ba4ae7ecaca92d0f9bf7269",
+          "PDFium": "db59254413f9ea78e0f156be4714d5315d1cceae5122179083b5c353ef672434",
+          "MuPDF": "447c9615fe23fd1fd7b11b000e146f735369bed566fed380edc0768e6b8f4b2c"
+        },
+        "candidate": {
+          "Poppler_default": "5b469164519bd5c0cce7dbb8e4ca2089acacfa68a5eaf6c74e61f10857f29d45",
+          "Poppler_layout": "4e943a23395c86fc58a286c4bd3295227424b66de972fb0fe864f0b479f5a710",
+          "Poppler_raw": "b3b193726ab3d5e7a38ce9759ec612b8db76c4235ba4ae7ecaca92d0f9bf7269",
+          "PDFium": "db59254413f9ea78e0f156be4714d5315d1cceae5122179083b5c353ef672434",
+          "MuPDF": "447c9615fe23fd1fd7b11b000e146f735369bed566fed380edc0768e6b8f4b2c"
+        }
+      },
+      "extraction_equal": {
+        "Poppler_default": true,
+        "Poppler_layout": true,
+        "Poppler_raw": true,
+        "PDFium": true,
+        "MuPDF": true
+      },
+      "page_count": [
+        1,
+        1
+      ],
+      "native_search_equal_by_page": [
+        true
+      ],
+      "qpdf": "checking qualification/font04/local/S1d/runs/p2-4-ceiling.pdf\nPDF Version: 1.7\nFile is not encrypted\nFile is not linearized\nNo syntax or stream encoding errors found; the file may still contain\nerrors that qpdf cannot detect\n",
+      "fonts": [
+        {
+          "sha256": "9924b764241d7c9ce81f8ec769098e9a17c9aa48b622ce29a6c1374f5db1716e",
+          "decoded_bytes": 163184,
+          "encoded_bytes": 93321,
+          "ots": "File sanitized successfully!\n"
+        }
+      ],
+      "pass": true
+    },
+    {
+      "name": "p2-5",
+      "default": "qualification/font04/local/P2/sheet-5-off.pdf",
+      "candidate": "qualification/font04/local/S1d/runs/p2-5-ceiling.pdf",
+      "default_sha256": "979e61b873c8145873e1bd4e30222d42e5ebb821ef1ad0fc2d4df72e5d98058d",
+      "candidate_sha256": "68057767f9190e4e5bbbc63899a90c79d547f01c0b712e7dd3e654398500043b",
+      "extraction_hashes": {
+        "default": {
+          "Poppler_default": "6fd25c90a601e0b22ec4914209d6fc11be56101c337745e4d3b045ca6b9202e2",
+          "Poppler_layout": "187cd55744b1942f05940fddacd071e2fb0642776d37ce5665b477b537e850d7",
+          "Poppler_raw": "13e6a11369a0135c71dcbaf7f38c708db93c9dc4fe91a4b6e393b256abc5825e",
+          "PDFium": "1938f2b1acda55a75b71e2c07f8828a50ad3a7fd49ba38c05e4517dbf5991036",
+          "MuPDF": "0f5ebd299eb046cdde5272f613b49785b1d9b5fa5768c8f340385b6de2c3b6ca"
+        },
+        "candidate": {
+          "Poppler_default": "6fd25c90a601e0b22ec4914209d6fc11be56101c337745e4d3b045ca6b9202e2",
+          "Poppler_layout": "187cd55744b1942f05940fddacd071e2fb0642776d37ce5665b477b537e850d7",
+          "Poppler_raw": "13e6a11369a0135c71dcbaf7f38c708db93c9dc4fe91a4b6e393b256abc5825e",
+          "PDFium": "1938f2b1acda55a75b71e2c07f8828a50ad3a7fd49ba38c05e4517dbf5991036",
+          "MuPDF": "0f5ebd299eb046cdde5272f613b49785b1d9b5fa5768c8f340385b6de2c3b6ca"
+        }
+      },
+      "extraction_equal": {
+        "Poppler_default": true,
+        "Poppler_layout": true,
+        "Poppler_raw": true,
+        "PDFium": true,
+        "MuPDF": true
+      },
+      "page_count": [
+        1,
+        1
+      ],
+      "native_search_equal_by_page": [
+        true
+      ],
+      "qpdf": "checking qualification/font04/local/S1d/runs/p2-5-ceiling.pdf\nPDF Version: 1.7\nFile is not encrypted\nFile is not linearized\nNo syntax or stream encoding errors found; the file may still contain\nerrors that qpdf cannot detect\n",
+      "fonts": [
+        {
+          "sha256": "7fe54876bd957076de4866646a1951f3d36db802f1155d3971f4276da342f540",
+          "decoded_bytes": 195880,
+          "encoded_bytes": 116711,
+          "ots": "File sanitized successfully!\n"
+        }
+      ],
+      "pass": true
+    },
+    {
+      "name": "p2-6",
+      "default": "qualification/font04/local/P2/sheet-6-off.pdf",
+      "candidate": "qualification/font04/local/S1d/runs/p2-6-ceiling.pdf",
+      "default_sha256": "e36fc1ef6c306aff6d1f7cde5acbdea5c9a649257042c6300538f199ca7e1e63",
+      "candidate_sha256": "1c96e4b673756afd27418d76c84eb60f48654fccb83a4115e5390a778d6c8200",
+      "extraction_hashes": {
+        "default": {
+          "Poppler_default": "6142b0b3d9a053cb3bcfc5684839d6c93c4d55fdc31dcd6e9788883f00a04c1e",
+          "Poppler_layout": "e0f06532440c4681908bd6f703db10ec8bc459797c9679c296ed56e4f222884b",
+          "Poppler_raw": "44b2690dd81a7dcba563c650e85cdef8ebb968218af6c1471b012bda996e5792",
+          "PDFium": "ad1509a806ef84f4fabfc76691a780fdbc5b87a088556d9be9a58f86592d4ac1",
+          "MuPDF": "a6ce83baefb7beeaa3905b6e48437c4bba20904f59635ac329d630f4ee8e1e03"
+        },
+        "candidate": {
+          "Poppler_default": "6142b0b3d9a053cb3bcfc5684839d6c93c4d55fdc31dcd6e9788883f00a04c1e",
+          "Poppler_layout": "e0f06532440c4681908bd6f703db10ec8bc459797c9679c296ed56e4f222884b",
+          "Poppler_raw": "44b2690dd81a7dcba563c650e85cdef8ebb968218af6c1471b012bda996e5792",
+          "PDFium": "ad1509a806ef84f4fabfc76691a780fdbc5b87a088556d9be9a58f86592d4ac1",
+          "MuPDF": "a6ce83baefb7beeaa3905b6e48437c4bba20904f59635ac329d630f4ee8e1e03"
+        }
+      },
+      "extraction_equal": {
+        "Poppler_default": true,
+        "Poppler_layout": true,
+        "Poppler_raw": true,
+        "PDFium": true,
+        "MuPDF": true
+      },
+      "page_count": [
+        1,
+        1
+      ],
+      "native_search_equal_by_page": [
+        true
+      ],
+      "qpdf": "checking qualification/font04/local/S1d/runs/p2-6-ceiling.pdf\nPDF Version: 1.7\nFile is not encrypted\nFile is not linearized\nNo syntax or stream encoding errors found; the file may still contain\nerrors that qpdf cannot detect\n",
+      "fonts": [
+        {
+          "sha256": "a5058cc3cefe2b9d9273731e05398ad23180b52b72b5203831fcd64874444622",
+          "decoded_bytes": 187188,
+          "encoded_bytes": 108646,
+          "ots": "File sanitized successfully!\n"
+        }
+      ],
+      "pass": true
+    },
+    {
+      "name": "p2-7",
+      "default": "qualification/font04/local/P2/sheet-7-off.pdf",
+      "candidate": "qualification/font04/local/S1d/runs/p2-7-ceiling.pdf",
+      "default_sha256": "7c2a9513db683306e14c9b3ab8a0edcd881f2004690cc9ea0f97d6df40bbc735",
+      "candidate_sha256": "527c54866679fbe195f6a566bcc2751bc034d2a1353e1d8b27038604fde6117f",
+      "extraction_hashes": {
+        "default": {
+          "Poppler_default": "345e590605045a9721498d6da161e4dbed528ad1bf3a6a2cf501b271db6c493e",
+          "Poppler_layout": "8f2573c033708970090048087d86255af47f14b60b7c87dc0dace47f1373c920",
+          "Poppler_raw": "2076c5d2117a64acab16cce4db0aa02e047dae60060bb338636997b8953aef5d",
+          "PDFium": "9e10a18488871be34f9619c1757af893c65ba311c0bad26a0c0ba3174d05b025",
+          "MuPDF": "c5920e405311431637abb1a33d307d90275f044747e24564a3f5dbb64afcad98"
+        },
+        "candidate": {
+          "Poppler_default": "345e590605045a9721498d6da161e4dbed528ad1bf3a6a2cf501b271db6c493e",
+          "Poppler_layout": "8f2573c033708970090048087d86255af47f14b60b7c87dc0dace47f1373c920",
+          "Poppler_raw": "2076c5d2117a64acab16cce4db0aa02e047dae60060bb338636997b8953aef5d",
+          "PDFium": "9e10a18488871be34f9619c1757af893c65ba311c0bad26a0c0ba3174d05b025",
+          "MuPDF": "c5920e405311431637abb1a33d307d90275f044747e24564a3f5dbb64afcad98"
+        }
+      },
+      "extraction_equal": {
+        "Poppler_default": true,
+        "Poppler_layout": true,
+        "Poppler_raw": true,
+        "PDFium": true,
+        "MuPDF": true
+      },
+      "page_count": [
+        1,
+        1
+      ],
+      "native_search_equal_by_page": [
+        true
+      ],
+      "qpdf": "checking qualification/font04/local/S1d/runs/p2-7-ceiling.pdf\nPDF Version: 1.7\nFile is not encrypted\nFile is not linearized\nNo syntax or stream encoding errors found; the file may still contain\nerrors that qpdf cannot detect\n",
+      "fonts": [
+        {
+          "sha256": "60125adc07a2981fd6d594932e9e9debc4131beb628768737488d5340733575d",
+          "decoded_bytes": 213908,
+          "encoded_bytes": 123459,
+          "ots": "File sanitized successfully!\n"
+        }
+      ],
+      "pass": true
+    },
+    {
+      "name": "p2-8",
+      "default": "qualification/font04/local/P2/sheet-8-off.pdf",
+      "candidate": "qualification/font04/local/S1d/runs/p2-8-ceiling.pdf",
+      "default_sha256": "dbcd479571a7cf77d528568d328cb03aa2df059e58e1869dd3bdc11912b60c11",
+      "candidate_sha256": "46373cec3c6c86c415c19a40214d367693f2e29ee578b85e0e19ed5d70ef531f",
+      "extraction_hashes": {
+        "default": {
+          "Poppler_default": "b2c84e12be802d35a4c1c3ed8cad6dc09e62f47e6ed8fd95b52b7ce6e2e9dc40",
+          "Poppler_layout": "dec4eb64902bc2ef5b09b3d8193c717dde68cade0b9204a04902d111a06591a4",
+          "Poppler_raw": "64b1a969b2880ca16c9e3bf2bc35e3bae0d4b52776a6ead48cd085a660bb620a",
+          "PDFium": "05b3d13b6f87591d13d3275a295222e786a817f7f0bec414cc2bb9a035c9a654",
+          "MuPDF": "dc407dafa1d39eed972634d8795834eb9a27be89b72cccea737c18f16df96b38"
+        },
+        "candidate": {
+          "Poppler_default": "b2c84e12be802d35a4c1c3ed8cad6dc09e62f47e6ed8fd95b52b7ce6e2e9dc40",
+          "Poppler_layout": "dec4eb64902bc2ef5b09b3d8193c717dde68cade0b9204a04902d111a06591a4",
+          "Poppler_raw": "64b1a969b2880ca16c9e3bf2bc35e3bae0d4b52776a6ead48cd085a660bb620a",
+          "PDFium": "05b3d13b6f87591d13d3275a295222e786a817f7f0bec414cc2bb9a035c9a654",
+          "MuPDF": "dc407dafa1d39eed972634d8795834eb9a27be89b72cccea737c18f16df96b38"
+        }
+      },
+      "extraction_equal": {
+        "Poppler_default": true,
+        "Poppler_layout": true,
+        "Poppler_raw": true,
+        "PDFium": true,
+        "MuPDF": true
+      },
+      "page_count": [
+        1,
+        1
+      ],
+      "native_search_equal_by_page": [
+        true
+      ],
+      "qpdf": "checking qualification/font04/local/S1d/runs/p2-8-ceiling.pdf\nPDF Version: 1.7\nFile is not encrypted\nFile is not linearized\nNo syntax or stream encoding errors found; the file may still contain\nerrors that qpdf cannot detect\n",
+      "fonts": [
+        {
+          "sha256": "874eb412d69d6ff6c749108d229c23b56635c0285b1b0af7b3efb5edc7c0cfd9",
+          "decoded_bytes": 196268,
+          "encoded_bytes": 114900,
+          "ots": "File sanitized successfully!\n"
+        }
+      ],
+      "pass": true
+    }
+  ],
+  "pass": true
+}

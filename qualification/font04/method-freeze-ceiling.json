@@ -1,0 +1,63 @@
+{
+  "schema": "font04-method-freeze-ceiling-v1",
+  "status": "FROZEN candidate; P2prime preregistration DRAFT pending reviewer acceptance",
+  "base": {
+    "commit": "76681da",
+    "method": "cover-2.0",
+    "constants_and_safeguards": "qualification/font04/method-freeze.json",
+    "sha256": "c8564d52280108cb3ed3d5235a7fc6dd7c9f098757518077aff8c28f40a69ef9"
+  },
+  "single_change": {
+    "location": "group::cover",
+    "constant": "ABSOLUTE_FIT_ERROR_CEILING",
+    "value": 0.08,
+    "rule": "A pair must satisfy error <= 0.08 as well as the unchanged error/floor <= 2.0."
+  },
+  "provenance": "Calibrated on FONT-01 train only: largest ceiling catching at least 90% of proxy-visible substitutions (38/41). See FONT_04_REVIEW_R2B.md, S1c root cause and S1d review.",
+  "implementation": {
+    "branch": "exp/style-compat",
+    "commit": "3370de3",
+    "binary": "qualification/font04/local/S1d/scanweave",
+    "binary_sha256": "d3a26c6d0677563858f2c57e393ec538d0395335a7460f960ef228705aee4177",
+    "pdfium_sha256": "b8784cbd652ad2993332b7695e2c80f3a797f877fc47d9be97b66bca9639539e",
+    "flag": "cover-2.0-ceiling"
+  },
+  "evidence": {
+    "functional": {
+      "path": "qualification/font04/s1e-functional.json",
+      "sha256": "7581a11884d3634ae00a31378c706731fece0f489323d5ce82949b5424baf5b4"
+    },
+    "reviewer_reported_not_rerun": {
+      "determinism": "ceiling timed/repeat byte-identical financial, mixed and P2 sheets 0, 4, 8",
+      "default_identity": "off byte-identical to frozen default for financial and mixed",
+      "cover_2_0_identity": "fresh cover-2.0 byte-identical to frozen traced outputs all nine FONT-01 pages; Codex smoke P2 sheet 0",
+      "paired_serial_timing": {
+        "financial": {
+          "off": [
+            "7:31.14",
+            1465796
+          ],
+          "ceiling": [
+            "14:01.97",
+            1761444
+          ]
+        },
+        "mixed": {
+          "off": [
+            "1:46.40",
+            358032
+          ],
+          "ceiling": [
+            "3:18.38",
+            404448
+          ]
+        },
+        "units": "wall time and max RSS KB; *-timed.pdf.time, nothing else running"
+      }
+    },
+    "economy_and_census": "qualification/font04/s1d-results.json"
+  },
+  "p2prime_preregistration_sha256": null,
+  "p2prime_reviewer_acceptance": null,
+  "change_rule": "After this record any method change requires a recorded stop and owner approval."
+}
