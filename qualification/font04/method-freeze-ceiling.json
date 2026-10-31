@@ -58,6 +58,19 @@
     "economy_and_census": "qualification/font04/s1d-results.json"
   },
   "p2prime_preregistration_sha256": "fd8d69e3b941740f6360b6abb38e53068de7b90db3694f148748d933155666ce",
-  "p2prime_reviewer_acceptance": null,
+  "p2prime_reviewer_acceptance": {
+    "accepted": true,
+    "preregistration_sha256": "fd8d69e3b941740f6360b6abb38e53068de7b90db3694f148748d933155666ce",
+    "reviewer": "Claude (independent reviewer)",
+    "date": "2026-10-31",
+    "evidence": [
+      "face sha256 recomputed for all 12 faces; families disjoint from FONT-01..P2 (design-duplicate FreeSans/FreeMono removed)",
+      "seed derivation recomputed: sha256(exact_string)=a195e4b0..., integer 2710955184; distinct from 40401 and FONT-01 seeds",
+      "reviewer rerun of P2prime geometry-only byte-identical to r2b-p2prime-geometry.json: 6768 obs, 564/face, 9x32 lines, 0 out of bounds",
+      "phrases, DPIs, damage plan, arms and P2 pass criteria carried verbatim; visibility rule added verbatim before opening",
+      "guard: generation requires this acceptance; geometry path cannot write local/P2prime; FONT-01 and P2 geometry identity re-proven (s1f-generator-identity.json)"
+    ],
+    "owner_approval": "Owner approved sequence 2026-10-31: freeze, review P2prime preregistration, run once, no post-result tuning"
+  },
   "change_rule": "After this record any method change requires a recorded stop and owner approval."
 }
