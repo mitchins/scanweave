@@ -1,0 +1,145 @@
+{
+ "schema": "font04-s2a-quorum-v1",
+ "produced_by": "reviewer (Claude)",
+ "oracle_use": "analysis only",
+ "results": {
+  "P2prime": {
+   "cover-2.0-ceiling": {
+    "same-face": 229,
+    "visible": 12,
+    "egregious": 1,
+    "different-family": 34,
+    "same-family-different-style": 5,
+    "substituted": 468,
+    "net_outlines_retired": 182,
+    "font_bytes_saved": 48080,
+    "different-character": 1
+   },
+   "cover-2.0-ceiling-q3": {
+    "same-face": 64,
+    "visible": 4,
+    "egregious": 0,
+    "different-family": 15,
+    "substituted": 116,
+    "net_outlines_retired": 78,
+    "font_bytes_saved": 19087,
+    "different-character": 1
+   }
+  },
+  "P2": {
+   "cover-2.0-ceiling": {
+    "same-face": 246,
+    "visible": 21,
+    "egregious": 2,
+    "different-family": 60,
+    "same-family-different-style": 3,
+    "substituted": 513,
+    "net_outlines_retired": 172,
+    "font_bytes_saved": 39099,
+    "different-character": 1
+   },
+   "cover-2.0-ceiling-q3": {
+    "same-face": 52,
+    "visible": 10,
+    "egregious": 0,
+    "different-family": 20,
+    "substituted": 102,
+    "net_outlines_retired": 61,
+    "font_bytes_saved": 14150,
+    "same-family-different-style": 1
+   }
+  },
+  "FONT-01 train": {
+   "cover-2.0-ceiling": {
+    "same-face": 72,
+    "visible": 5,
+    "egregious": 2,
+    "different-family": 23,
+    "substituted": 153,
+    "net_outlines_retired": 44,
+    "font_bytes_saved": 8828,
+    "same-family-different-style": 1
+   },
+   "cover-2.0-ceiling-q3": {
+    "same-face": 19,
+    "visible": 3,
+    "egregious": 1,
+    "different-family": 14,
+    "substituted": 44,
+    "net_outlines_retired": 25,
+    "font_bytes_saved": 5827
+   }
+  },
+  "FONT-01 validation": {
+   "cover-2.0-ceiling": {
+    "same-face": 51,
+    "visible": 2,
+    "egregious": 0,
+    "different-character": 1,
+    "substituted": 97,
+    "net_outlines_retired": 38,
+    "font_bytes_saved": 10965,
+    "different-family": 1,
+    "same-family-different-style": 1
+   },
+   "cover-2.0-ceiling-q3": {
+    "same-face": 10,
+    "visible": 1,
+    "egregious": 0,
+    "different-character": 1,
+    "substituted": 16,
+    "net_outlines_retired": 10,
+    "font_bytes_saved": 2589
+   }
+  },
+  "FONT-01 test": {
+   "cover-2.0-ceiling": {
+    "same-face": 63,
+    "visible": 0,
+    "egregious": 0,
+    "different-family": 25,
+    "substituted": 156,
+    "net_outlines_retired": 53,
+    "font_bytes_saved": 13917,
+    "same-family-different-style": 1
+   },
+   "cover-2.0-ceiling-q3": {
+    "same-face": 17,
+    "visible": 0,
+    "egregious": 0,
+    "substituted": 33,
+    "net_outlines_retired": 14,
+    "font_bytes_saved": 3066,
+    "different-family": 7
+   }
+  },
+  "financial": {
+   "cover-2.0-ceiling": {
+    "substituted": 1736,
+    "net_outlines_retired": 318,
+    "font_bytes_saved": 61586,
+    "pdf_bytes": 2797500
+   },
+   "cover-2.0-ceiling-q3": {
+    "substituted": 1513,
+    "net_outlines_retired": 322,
+    "font_bytes_saved": 64015,
+    "pdf_bytes": 2794145
+   }
+  },
+  "mixed": {
+   "cover-2.0-ceiling": {
+    "substituted": 314,
+    "net_outlines_retired": 82,
+    "font_bytes_saved": 5108,
+    "pdf_bytes": 915733
+   },
+   "cover-2.0-ceiling-q3": {
+    "substituted": 233,
+    "net_outlines_retired": 81,
+    "font_bytes_saved": 7877,
+    "pdf_bytes": 911922
+   }
+  }
+ }
+}
