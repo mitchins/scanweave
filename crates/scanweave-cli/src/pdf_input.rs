@@ -123,8 +123,9 @@ pub fn convert_pdf(args: &[String]) -> Result<(), String> {
         return Err("--profile must be clearscan or faithful".into());
     }
     let sharing=super::arg_value(args,"--glyph-sharing").unwrap_or_else(||"off".into());
-    let absolute_error_ceiling=if sharing == "cover-2.0-ceiling" { Some(scanweave_io::glyph_sharing::ABSOLUTE_FIT_ERROR_CEILING) } else { None };
-    let sharing=match sharing.as_str(){"off"=>None,"cover-2.0"|"cover-2.0-ceiling"=>Some(2.0),"cover-1.5"=>Some(1.5),_=>return Err("--glyph-sharing must be off, cover-2.0, cover-2.0-ceiling or cover-1.5".into())};
+    let min_witnesses=if sharing == "cover-2.0-ceiling-q3" { scanweave_io::glyph_sharing::MIN_WITNESS_QUORUM } else { 2 };
+    let absolute_error_ceiling=if sharing.starts_with("cover-2.0-ceiling") { Some(scanweave_io::glyph_sharing::ABSOLUTE_FIT_ERROR_CEILING) } else { None };
+    let sharing=match sharing.as_str(){"off"=>None,"cover-2.0"|"cover-2.0-ceiling"|"cover-2.0-ceiling-q3"=>Some(2.0),"cover-1.5"=>Some(1.5),_=>return Err("--glyph-sharing must be off, cover-2.0, cover-2.0-ceiling, cover-2.0-ceiling-q3 or cover-1.5".into())};
     if sharing.is_some() && profile!="clearscan" {return Err("glyph sharing requires --profile clearscan".into());}
     let input = std::fs::canonicalize(input).map_err(|e| format!("read input PDF: {e}"))?;
     if Path::new(output).canonicalize().ok().as_ref() == Some(&input) {
@@ -364,7 +365,7 @@ pub fn convert_pdf(args: &[String]) -> Result<(), String> {
     };
     let import_ms = import_started.elapsed().as_millis();
     let converted =
-        document::convert_document_with_sources_and_sharing_ceiling("pdf-input", &inputs, &policy, &source_images, sharing, absolute_error_ceiling)?;
+        document::convert_document_with_sources_and_sharing_ceiling("pdf-input", &inputs, &policy, &source_images, sharing, absolute_error_ceiling, min_witnesses)?;
     // Unique, same-directory temporary publication avoids shared .tmp races.
     let parent = Path::new(output)
         .parent()
