@@ -1,0 +1,10 @@
+{
+  "checkpoint": "S2a",
+  "status": "incomplete-not-ready-for-blind-review",
+  "base": "3370de3",
+  "native_branch": "exp/canonical-witness",
+  "consensus_minimum_witnesses": 3,
+  "smoke": {"dataset": "existing P2 instrumented-0", "groups": 2, "both_fallback": true},
+  "limitations": ["source-only exploratory prototype lacks local disagreement rejection and native tracing", "exported groups precede ownership preflight", "P2 export is cover-2.0, not ceiling", "P2prime planner export unavailable", "native implementations and all requested comparisons outstanding", "blind package not produced", "independent margins uncalibrated"],
+  "p2prime_verdict": "FAIL stands"
+}

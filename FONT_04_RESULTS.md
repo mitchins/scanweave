@@ -1,5 +1,17 @@
 # FONT-04 results — Checkpoint R1
 
+## S2a — partial development, not ready for review
+
+P2′ remains **FAIL**. A source-only exploratory prototype and independent
+contract draft have been started, but neither canonical arm is implemented
+natively or evaluated. Two existing P2 groups were smoke-tested; both had two
+members, so consensus with k=3 fell back to the source medoid. This does not
+establish whether either arm improves any confirmed defect. The existing P2
+export is for cover-2.0 and records groups before ownership preflight, so it
+cannot be treated as the ceiling admitted population. See the [partial receipt](qualification/font04/S2A_REPRODUCTION.md),
+[status](qualification/font04/s2a-status.json), and [contract draft](qualification/font04/P2DOUBLEPRIME_CONTRACT_DRAFT.md).
+No S2a blind review package or measurements have been produced.
+
 ## Checkpoint R2c (P2′)
 
 **Pristine: FAIL. Functional: PASS. Material defects: PENDING-BLIND-REVIEW.**
