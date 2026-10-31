@@ -40,6 +40,8 @@ pub struct SharingReport {
     pub multiplier: f64,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub absolute_error_ceiling: Option<f64>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub min_witnesses: Option<usize>,
     pub net_retirement_rule: bool,
     pub fallback: Option<String>,
     pub proposed_members: usize,
@@ -69,6 +71,7 @@ pub fn share(
     tonal: bool,
     multiplier: f64,
     absolute_error_ceiling: Option<f64>,
+    min_witnesses: usize,
 ) -> Result<(Option<Candidate>, SharingReport), String> {
     let started = std::time::Instant::now();
     let mut stage_seconds = BTreeMap::new();
@@ -87,7 +90,7 @@ pub fn share(
         .collect();
     stage_seconds.insert("prepare_fields".into(), started.elapsed().as_secs_f64());
     let stage = std::time::Instant::now();
-    let plan = plan::plan(&members, &fields, &candidates, multiplier, absolute_error_ceiling)?;
+    let plan = plan::plan(&members, &fields, &candidates, multiplier, absolute_error_ceiling, min_witnesses)?;
     stage_seconds.insert("planning".into(), stage.elapsed().as_secs_f64());
     stage_seconds.extend(plan.stage_seconds.clone());
     let stage = std::time::Instant::now();
@@ -213,8 +216,13 @@ pub fn share(
     let mut report = SharingReport {
         pdfium,
         stage_seconds,
-        method: if absolute_error_ceiling.is_some() { format!("cover-{multiplier:.1}-ceiling") } else { format!("cover-{multiplier:.1} frozen at research 5356255") },
+        method: match (absolute_error_ceiling.is_some(), min_witnesses > 2) {
+            (true, true) => format!("cover-{multiplier:.1}-ceiling-q{min_witnesses}"),
+            (true, false) => format!("cover-{multiplier:.1}-ceiling"),
+            _ => format!("cover-{multiplier:.1} frozen at research 5356255"),
+        },
         absolute_error_ceiling,
+        min_witnesses: (min_witnesses > 2).then_some(min_witnesses),
         multiplier,
         net_retirement_rule: false,
         fallback: None,

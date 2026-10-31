@@ -514,3 +514,6 @@ pub mod transport;
 
 /// Absolute fit-error ceiling calibrated on FONT-01 train; see FONT_04_REVIEW_R2B.md.
 pub const ABSOLUTE_FIT_ERROR_CEILING: f64 = 0.08;
+
+/// Minimum distinct source designs for a shared canonical (S2a diagnosis, FONT_04_REVIEW_R2C.md).
+pub const MIN_WITNESS_QUORUM: usize = 3;
