@@ -40,5 +40,19 @@
     "economy": "financial net 322 / font -64.0 KB; mixed net 81 / font -7.9 KB (s2a-quorum.json)",
     "functional": "s2b-functional.json: text extraction (5 engines), native search, qpdf, OTS pass on all 20 q3 outputs (P2prime 9, P2 9, mixed, financial)"
   },
-  "p2pp_preregistration_sha256": "771bea1027a975e7222d014c52efd0ee824f35beeaf757429bcfed9beeef1578"
+  "p2pp_preregistration_sha256": "771bea1027a975e7222d014c52efd0ee824f35beeaf757429bcfed9beeef1578",
+  "p2pp_owner_approval": {
+    "approved": true,
+    "preregistration_sha256": "771bea1027a975e7222d014c52efd0ee824f35beeaf757429bcfed9beeef1578",
+    "approver": "Mitchell Currie (owner)",
+    "date": "2026-11-03",
+    "evidence": [
+      "Owner message 2026-11-03: \"Approved: P2\u2033 preregistration SHA-256 771bea10...578\"",
+      "Accepts frozen cover-2.0-ceiling-q3 at e61c0dc, binary 8667f6dd...ee70; S2b witness audit and group-consumption behaviour accepted",
+      "Accepts numerical criteria with documented weak power; blinded review is the decisive quality gate",
+      "Authorizes recording approval, opening P2pp once and executing the frozen protocol; approval is for the final qualification run, not advance approval to merge"
+    ],
+    "evaluation_script_commit": "4781da2",
+    "evaluation_script_sha256": "b3f23569ffa5cca792ce5f85893dfcc252c9d4140ac481f1480de19e7821803c"
+  }
 }
