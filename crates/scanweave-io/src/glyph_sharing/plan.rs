@@ -61,7 +61,7 @@ fn ordered_rows<T: Send, F: Fn(usize) -> T + Sync>(n: usize, operation: F) -> Ve
 
 /// Compute all frozen stages through cover grouping. Ownership must be checked
 /// against raw source and default emission before these groups can be emitted.
-pub fn plan(
+pub(crate) fn plan(
     rows: &[Member],
     fields: &[Field],
     candidates: &[Option<Field>],
@@ -285,7 +285,13 @@ pub fn plan(
                 && bands[f.member] == bands[f.canonical],
         })
         .collect();
-    let groups = cover(&ranked, &pairs, multiplier, absolute_error_ceiling, min_witnesses);
+    let groups = cover(
+        &ranked,
+        &pairs,
+        multiplier,
+        absolute_error_ceiling,
+        min_witnesses,
+    );
     stage_seconds.insert("planning_cover".into(), stage.elapsed().as_secs_f64());
     Ok(Plan {
         stage_seconds,

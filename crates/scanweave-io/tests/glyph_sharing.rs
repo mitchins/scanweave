@@ -152,9 +152,6 @@ fn composite_metrics_and_quantization() {
     assert_eq!(c.anchor, Anchor::Offset { x: 2, y: -4 });
     assert!(c.flags.bits() & 4 != 0);
     assert!(c.flags.bits() & 0x1000 != 0);
-    if let Some(path) = std::env::var_os("FONT04_TEST_FONT_OUT") {
-        std::fs::write(path, shared.bytes).unwrap();
-    }
 }
 
 #[test]
@@ -219,15 +216,32 @@ fn opt_in_document_fixture() {
         eprintln!("Native ownership/transport portion requires SCANWEAVE_PDFIUM_LIBRARY; Sonar CI sets and checks it.");
         return;
     }
-    let shared = document::convert_document_with_sources_and_sharing(
+    let shared_result = document::convert_document_with_sources_and_sharing(
         "fixture",
         &[input],
         &policy,
         &[],
-        Some(2.),
-    )
-    .unwrap();
+        Some(document::GlyphSharing::CoverCeilingQ3),
+    );
+    if let Some(output) = std::env::var_os("SCANWEAVE_TEST_MISSING_PDFIUM_OUTPUT") {
+        match shared_result {
+            Ok(result) => {
+                std::fs::write(output, result.pdf_bytes).unwrap();
+                panic!("missing PDFium was accepted");
+            }
+            Err(error) => assert!(
+                error.contains("glyph sharing requires PDFium for its frozen owned-ink check"),
+                "{error}"
+            ),
+        }
+        return;
+    }
+    let shared = shared_result.unwrap();
     let report = shared.report.glyph_sharing.as_ref().unwrap();
+    assert_eq!(report.method, "cover-2.0-ceiling-q3");
+    assert_eq!(report.multiplier, 2.0);
+    assert_eq!(report.absolute_error_ceiling, Some(0.08));
+    assert_eq!(report.min_witnesses, Some(3));
     assert_eq!(
         report.decisions.len(),
         fixture["expected_visible_draws"].as_u64().unwrap() as usize
@@ -257,17 +271,6 @@ fn opt_in_document_fixture() {
     );
     if report.fallback.is_some() {
         assert_eq!(shared.pdf_bytes, default.pdf_bytes);
-    }
-    if let Some(directory) = std::env::var_os("FONT04_TEST_PDF_OUT") {
-        let p = std::path::Path::new(&directory);
-        std::fs::create_dir_all(p).unwrap();
-        std::fs::write(p.join("default.pdf"), default.pdf_bytes).unwrap();
-        std::fs::write(p.join("shared.pdf"), shared.pdf_bytes).unwrap();
-        std::fs::write(
-            p.join("report.json"),
-            serde_json::to_vec_pretty(report).unwrap(),
-        )
-        .unwrap();
     }
 }
 
@@ -359,4 +362,24 @@ fn canonical_scaling_quantizes_the_compiled_outline_first() {
         &encodings
     )
     .is_err());
+}
+
+#[test]
+fn missing_pdfium_fails_without_output() {
+    let dir = std::env::temp_dir().join(format!("scanweave-missing-pdfium-{}", std::process::id()));
+    std::fs::create_dir_all(&dir).unwrap();
+    let output = dir.join("output.pdf");
+    let result = std::process::Command::new(std::env::current_exe().unwrap())
+        .args(["--exact", "opt_in_document_fixture", "--nocapture"])
+        .env("SCANWEAVE_PDFIUM_LIBRARY", dir.join("missing-pdfium.so"))
+        .env("SCANWEAVE_TEST_MISSING_PDFIUM_OUTPUT", &output)
+        .output()
+        .unwrap();
+    assert!(
+        result.status.success(),
+        "{}",
+        String::from_utf8_lossy(&result.stderr)
+    );
+    assert!(!output.exists());
+    std::fs::remove_dir_all(dir).unwrap();
 }

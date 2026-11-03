@@ -61,18 +61,28 @@ pub struct Candidate {
     pub stats: AssemblyStats,
 }
 
-pub fn share(
+pub(crate) struct OperatingPoint {
+    pub tonal: bool,
+    pub multiplier: f64,
+    pub absolute_error_ceiling: Option<f64>,
+    pub min_witnesses: usize,
+}
+
+pub(crate) fn share(
     rows: &[Observation],
     pages: &[PageParts],
     shapes: &[GlyphShape],
     encodings: &[(usize, String)],
     default_font: &[u8],
     options: ImageEncodingOptions,
-    tonal: bool,
-    multiplier: f64,
-    absolute_error_ceiling: Option<f64>,
-    min_witnesses: usize,
+    point: OperatingPoint,
 ) -> Result<(Option<Candidate>, SharingReport), String> {
+    let OperatingPoint {
+        multiplier,
+        absolute_error_ceiling,
+        min_witnesses,
+        tonal,
+    } = point;
     let started = std::time::Instant::now();
     let mut stage_seconds = BTreeMap::new();
     let fields: Vec<_> = rows.iter().map(|r| r.field.clone()).collect();
@@ -90,7 +100,14 @@ pub fn share(
         .collect();
     stage_seconds.insert("prepare_fields".into(), started.elapsed().as_secs_f64());
     let stage = std::time::Instant::now();
-    let plan = plan::plan(&members, &fields, &candidates, multiplier, absolute_error_ceiling, min_witnesses)?;
+    let plan = plan::plan(
+        &members,
+        &fields,
+        &candidates,
+        multiplier,
+        absolute_error_ceiling,
+        min_witnesses,
+    )?;
     stage_seconds.insert("planning".into(), stage.elapsed().as_secs_f64());
     stage_seconds.extend(plan.stage_seconds.clone());
     let stage = std::time::Instant::now();

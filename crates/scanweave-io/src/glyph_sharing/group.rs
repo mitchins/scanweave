@@ -23,7 +23,13 @@ pub struct Pair {
 /// canonical must pass its own admission. Tie breaks follow research index order.
 /// `min_witnesses` above 2 requires that many distinct source designs (shape keys) in a group:
 /// with only two witnesses there is no third to show which one carries local contamination.
-pub fn cover(rows: &[Member], pairs: &[Pair], multiplier: f64, absolute_error_ceiling: Option<f64>, min_witnesses: usize) -> Vec<Group> {
+pub(crate) fn cover(
+    rows: &[Member],
+    pairs: &[Pair],
+    multiplier: f64,
+    absolute_error_ceiling: Option<f64>,
+    min_witnesses: usize,
+) -> Vec<Group> {
     let mut partitions: BTreeMap<String, Vec<usize>> = BTreeMap::new();
     for (i, row) in rows.iter().enumerate() {
         partitions
@@ -33,7 +39,11 @@ pub fn cover(rows: &[Member], pairs: &[Pair], multiplier: f64, absolute_error_ce
     }
     let valid: BTreeMap<(usize, usize), f64> = pairs
         .iter()
-        .filter(|p| p.safe && p.normalized_error <= multiplier && absolute_error_ceiling.is_none_or(|ceiling| p.error <= ceiling))
+        .filter(|p| {
+            p.safe
+                && p.normalized_error <= multiplier
+                && absolute_error_ceiling.is_none_or(|ceiling| p.error <= ceiling)
+        })
         .map(|p| ((p.member, p.canonical), p.normalized_error))
         .collect();
     let mut groups = Vec::new();
@@ -95,7 +105,11 @@ pub fn cover(rows: &[Member], pairs: &[Pair], multiplier: f64, absolute_error_ce
             for i in &members {
                 remaining.remove(i);
             }
-            let witnesses = members.iter().map(|&i| rows[i].shape_key.as_str()).collect::<BTreeSet<_>>().len();
+            let witnesses = members
+                .iter()
+                .map(|&i| rows[i].shape_key.as_str())
+                .collect::<BTreeSet<_>>()
+                .len();
             if members.len() >= 2 && (min_witnesses <= 2 || witnesses >= min_witnesses) {
                 remapped.extend(members.iter().copied());
                 groups.push(Group {
@@ -147,27 +161,96 @@ mod tests {
     }
     #[test]
     fn ceiling_excludes_low_normalized_high_absolute_error() {
-        let rows: Vec<Member> = ["one", "two"].into_iter().map(|key| Member {
-            label: "a".into(), shape_key: key.into(), band: 1,
-        }).collect();
-        let pairs: Vec<Pair> = (0..2).flat_map(|i| (0..2).map(move |j| Pair {
-            member: i, canonical: j, normalized_error: 0.5,
-            error: if i == j { 0.0 } else { 0.09 }, safe: true,
-        })).collect();
-        assert!(cover(&rows, &pairs, 2.0, Some(super::super::ABSOLUTE_FIT_ERROR_CEILING), 2).is_empty());
-        assert_eq!(cover(&rows, &pairs, 2.0, None, 2), vec![Group { canonical: 0, members: vec![0, 1] }]);
+        let rows: Vec<Member> = ["one", "two"]
+            .into_iter()
+            .map(|key| Member {
+                label: "a".into(),
+                shape_key: key.into(),
+                band: 1,
+            })
+            .collect();
+        let pairs: Vec<Pair> = (0..2)
+            .flat_map(|i| {
+                (0..2).map(move |j| Pair {
+                    member: i,
+                    canonical: j,
+                    normalized_error: 0.5,
+                    error: if i == j { 0.0 } else { 0.09 },
+                    safe: true,
+                })
+            })
+            .collect();
+        assert!(cover(
+            &rows,
+            &pairs,
+            2.0,
+            Some(super::super::ABSOLUTE_FIT_ERROR_CEILING),
+            2
+        )
+        .is_empty());
+        assert_eq!(
+            cover(&rows, &pairs, 2.0, None, 2),
+            vec![Group {
+                canonical: 0,
+                members: vec![0, 1]
+            }]
+        );
     }
 
     #[test]
     fn quorum_requires_three_distinct_witness_designs() {
-        let rows: Vec<Member> = ["one", "two", "three"].into_iter().map(|key| Member {
-            label: "a".into(), shape_key: key.into(), band: 1,
-        }).collect();
-        let pairs: Vec<Pair> = (0..3).flat_map(|i| (0..3).map(move |j| Pair {
-            member: i, canonical: j, normalized_error: 0.5, error: 0.01, safe: true,
-        })).collect();
-        assert_eq!(cover(&rows, &pairs, 2.0, None, 3), vec![Group { canonical: 0, members: vec![0, 1, 2] }]);
-        assert!(cover(&rows[..2], &pairs.iter().filter(|p| p.member < 2 && p.canonical < 2).cloned().collect::<Vec<_>>(), 2.0, None, 3).is_empty());
-        assert_eq!(cover(&rows[..2], &pairs.iter().filter(|p| p.member < 2 && p.canonical < 2).cloned().collect::<Vec<_>>(), 2.0, None, 2).len(), 1);
+        let rows: Vec<Member> = ["one", "two", "three"]
+            .into_iter()
+            .map(|key| Member {
+                label: "a".into(),
+                shape_key: key.into(),
+                band: 1,
+            })
+            .collect();
+        let pairs: Vec<Pair> = (0..3)
+            .flat_map(|i| {
+                (0..3).map(move |j| Pair {
+                    member: i,
+                    canonical: j,
+                    normalized_error: 0.5,
+                    error: 0.01,
+                    safe: true,
+                })
+            })
+            .collect();
+        assert_eq!(
+            cover(&rows, &pairs, 2.0, None, 3),
+            vec![Group {
+                canonical: 0,
+                members: vec![0, 1, 2]
+            }]
+        );
+        assert!(cover(
+            &rows[..2],
+            &pairs
+                .iter()
+                .filter(|p| p.member < 2 && p.canonical < 2)
+                .cloned()
+                .collect::<Vec<_>>(),
+            2.0,
+            None,
+            3
+        )
+        .is_empty());
+        assert_eq!(
+            cover(
+                &rows[..2],
+                &pairs
+                    .iter()
+                    .filter(|p| p.member < 2 && p.canonical < 2)
+                    .cloned()
+                    .collect::<Vec<_>>(),
+                2.0,
+                None,
+                2
+            )
+            .len(),
+            1
+        );
     }
 }

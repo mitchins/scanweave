@@ -1,62 +1,22 @@
-# Document glyph sharing (opt-in)
+# Glyph sharing
 
-```sh
-scanweave input.pdf output.pdf --profile clearscan --dpi 300 --glyph-sharing cover-2.0
-```
+Glyph sharing is opt-in: `--glyph-sharing cover-2.0-ceiling-q3`. The default is `--glyph-sharing off`. It is available only with the ClearScan profile and requires PDFium; set `SCANWEAVE_PDFIUM_LIBRARY` to the native library path.
 
-The default is `--glyph-sharing off`. It retains the existing ClearScan PDF bytes.
-`cover-1.5` is the frozen comparison point. Both options use native Rust; neither
-starts Python or reads a research decision ledger. Labels need at least ten
-visible draws in the document. Ineligible and rejected draws retain default.
+The cover planner accepts a relative fit error at most 2.0 times the member noise floor and an absolute fit error at most 0.08. A group requires at least 3 distinct default-emission design witnesses. Existing structural and owned-ink checks also apply. The converter deterministically falls back to the default output when sharing cannot safely or economically improve the document.
 
-The frozen owned-ink check uses PDFium, already a workspace dependency. Install
-its shared library through your normal trusted package source and make it
-available to the system loader, or set `SCANWEAVE_PDFIUM_LIBRARY` to its full path.
-The default conversion does not load PDFium. A missing library during an opt-in
-ownership check is an explicit error, not a skipped check.
+On the P2″ qualification population, measured costs and savings were:
 
-The conversion JSON records the loaded library's canonical file path and SHA-256
-in `conversion.glyph_sharing.pdfium`. `version` is null because PDFium has no
-runtime build-version query (the PDF file-version API describes the document).
-The identity is null when no assignments require loading PDFium. Qualification
-uses the pinned `tools/src/pdfium/lib/libpdfium.so` (chromium/8100).
+| Metric | Default | q3 |
+|---|---:|---:|
+| Font bytes | 932,887 | 913,302 |
+| PDF bytes | 5,026,084 | 5,009,868 |
+| Runtime | 396 s | 620 s (1.57×) |
+| Peak RSS | 442 MB | 441 MB |
 
-`conversion.glyph_sharing.stage_seconds` reports source snapshot, field preparation,
-planning, assignment preparation, owned-ink preflight, decision ledger, font/economy,
-and transport/assembly wall times. The `planning_*` entries subdivide `planning`;
-`sharing_total` includes the sharing stages but excludes `source_snapshot`.
-These nested totals should not be added together. Existing document stage timings
-cover the rest of conversion; the CLI report also records import time.
+The real financial document saved about 64 KB of font with a net 322 outlines retired; the mixed document saved about 7.9 KB.
 
-Sharing preserves each occurrence's CID, text matrix, PDF width and ActualText.
-TrueType composite stubs retain original advances and reference source-traced
-canonicals. Separate CID-map resources resolve repeated-CID placements. Invisible
-owners retain original programs. Net retirement is aggregate document accounting;
-there is no per-group net-retirement gate. If aggregate retirement would be
-negative or encoded font bytes would grow, the document emits default and records
-that fallback in its JSON report. Candidate economy figures remain in the report
-when fallback occurs; `substituted` is zero and member decisions retain default.
-Zero-credit groups and their canonical/stub bytes are reported separately.
+q3 passed all preregistered P2″ criteria, with zero detected new material defects among the 89 blinded admitted substitutions.
 
-The existing per-page tracing reports describe reconstruction before document
-sharing. The `glyph_sharing` report describes substitutions and actual font
-economy; the R1 scorecards measure the emitted shared output independently.
+The blind positive controls did not demonstrate sensitivity on the P2″ population. The numerical non-inferiority margins were relatively permissive. Overall pristine accuracy was at parity with default, not superior. Documents without enough repeated glyph evidence may see little or no benefit. q3 is opt-in and ordinary ClearScan is unchanged. There is no claim of zero-risk typography or universal visual improvement.
 
-Independent planner rows run on scoped workers (up to eight by default, or the
-positive `RAYON_NUM_THREADS` setting, limited to available CPUs). Each fit keeps
-its serial pixel/evaluation order, and row results are collected in original
-member order before floors and groups are reduced. Group priorities use
-explicit index tie breaks. The bounded Huber trust-region fit retains the frozen
-35 evaluations, `.001` relative differences and `1e-5` stopping tolerances; its
-three-dimensional dense subproblem uses a deterministic symmetric eigensystem.
-Hard checks use the original strict comparisons with no epsilon enlargement.
-Offsets and F2Dot14 coefficients use round-to-even quantization. Changing thread
-counts does not change reduction order. Qualification records numerical
-variations and all membership/canonical divergences against the frozen oracle.
-
-The numerical solver derives from SciPy's BSD-licensed TRF implementation; its
-notice is in `THIRD_PARTY_LICENSES/scipy.txt`. No new crate was introduced:
-`pdfium-render` was already in the workspace, and the existing `write-fonts`
-reader feature is enabled to retain original glyph metrics safely.
-
-FONT-04 qualification is reviewer-pending. This branch is not promoted to main.
+Research evidence: [`FONT_04_REVIEW_P2PP.md`](https://github.com/mitchins/scanweave/blob/research/font04-document-fonts/FONT_04_REVIEW_P2PP.md) and [`FONT_04_REVIEW_R2C.md`](https://github.com/mitchins/scanweave/blob/research/font04-document-fonts/FONT_04_REVIEW_R2C.md) on `research/font04-document-fonts`.

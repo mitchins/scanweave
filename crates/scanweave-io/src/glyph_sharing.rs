@@ -362,7 +362,7 @@ pub fn owned_ink(
         h,
     );
     let mut fired = Vec::new();
-    for k in 1..=n {
+    for (k, &owned_count) in owned.iter().enumerate().take(n + 1).skip(1) {
         let mut distance = f64::INFINITY;
         let mut area = 0;
         let mut mass = 0.;
@@ -376,7 +376,7 @@ pub fn owned_ink(
                 mass += source[i];
             }
         }
-        if owned_component_fires(owned[k], k != body && distance <= 1.5, area, mass) {
+        if owned_component_fires(owned_count, k != body && distance <= 1.5, area, mass) {
             fired.push(k);
         }
     }
