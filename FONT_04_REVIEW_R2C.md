@@ -166,3 +166,34 @@ Adding either would add complexity without a demonstrated benefit, so neither is
 
    Avoid Hack, which derives from DejaVu, and Carlito/Caladea, whose metrics were seen in Liberation. Audit ancestry before selection.
 4. **Freeze before opening.** The contract must reference the frozen q3 binary hash, and the guard must refuse to open otherwise.
+
+## S2b: q3 witness-provenance audit (2026-11-03, owner-requested before freeze)
+
+**What a "witness" is.** In `group::cover`, each member row's `shape_key` is the **default-emission design key**: the mask identity after default ClearScan's own visual dictionary has merged identical-looking occurrences. The quorum therefore counts distinct default designs.
+- Each design is built from its own disjoint set of source occurrences. Every occurrence maps to exactly one design.
+- So "at least 3 distinct keys" means at least 3 independent groups of source observations.
+
+The pre-merge per-occurrence mask key in the sidecar is a different quantity. A first audit draft that used it was wrong and has been discarded.
+
+**Method.**
+- A research-only build of `e61c0dc` was compiled outside the repository; it only adds an `eprintln` per cover candidate.
+- It was rerun on P2′ (9 sheets), P2 (9 sheets), financial and mixed.
+- All 20 outputs are byte-identical to the recorded q3 runs. The summary is in `s2b-provenance-cover-log-summary.json`.
+
+**Result.** Every accepted q3 group has at least 3 distinct design keys, and every member is a distinct occurrence: **0 violations**.
+
+| Set | Accepted groups | Rejected candidates |
+|---|---|---|
+| P2′ | 36 | 167 |
+| P2 | 29 | 182 |
+| Financial | 177 | 95 (mostly 2 members / 2 designs) |
+| Mixed | 26 | 30 |
+
+**The five-member Gothic `e` group** (P2′ sheet 6, canonical 228). The debug log shows `members=[76,225,228,233,358] keys=1`.
+- Default ClearScan had **already** merged all five occurrences into **one** design.
+- The ceiling arm's "sharing" therefore merged nothing. It replaced default's shared outline with a single occurrence's trace: retired 1 and added 1, a net economy of zero.
+- It also imported that occurrence's terminal shape onto the other four, which was the graded defect.
+
+q3 rejects it on principle: one design is not three witnesses. The same "N members / 1 design" pattern accounts for 14 three-member, 6 four-member and 3 five-member rejected candidates on the synthetic sets, plus 21 on the real documents.
+
+**Behaviour to document in the freeze.** A candidate group that fails the quorum still consumes its members for that grouping pass, so they stay default. This is conservative and deterministic, and it is the behaviour that was blind-graded.
