@@ -153,12 +153,20 @@ impl Drop for Document<'_> {
         }
     }
 }
-fn render_dimensions(size: [f32; 2], scale: [f64; 2]) -> Option<[i32; 2]> {
+#[derive(Clone, Copy)]
+enum CropVariant {
+    Legacy,
+    Corrected,
+}
+
+fn render_dimensions(size: [f32; 2], scale: [f64; 2], variant: CropVariant) -> Option<[i32; 2]> {
     let mut dimensions = [0; 2];
     for axis in 0..2 {
         let s = scale[axis];
-        // Preserve the exact arithmetic of the qualified 300-DPI renderer.
-        let factor = if s == 72. / 300. { 1200. / 72. } else { 4. / s };
+        let factor = match variant {
+            CropVariant::Legacy => 1200. / 72.,
+            CropVariant::Corrected => 4. / s,
+        };
         let pixels = (size[axis] as f64 * factor).ceil();
         if !s.is_finite()
             || s <= 0.
@@ -180,8 +188,9 @@ fn crop(
     size: [f32; 2],
     bounds: [i32; 4],
     scale: [f64; 2],
+    variant: CropVariant,
 ) -> Result<Option<Vec<f64>>, String> {
-    let Some([fw, fh]) = render_dimensions(size, scale) else {
+    let Some([fw, fh]) = render_dimensions(size, scale, variant) else {
         return Ok(None);
     };
     let w = (i64::from(bounds[2]) - i64::from(bounds[0])) * 4;
@@ -400,11 +409,33 @@ pub fn preflight(
     let mut exceptions = BTreeSet::new();
     for (k, &(i, _, _)) in assignments.iter().enumerate() {
         let size = source[k].size;
-        if assignment_exception(bindings, &docs, k, size, bounds[k], scales[k])? {
+        let legacy = assignment_exception(
+            bindings,
+            &docs,
+            k,
+            size,
+            bounds[k],
+            scales[k],
+            CropVariant::Legacy,
+        )?;
+        let corrected = assignment_exception(
+            bindings,
+            &docs,
+            k,
+            size,
+            bounds[k],
+            scales[k],
+            CropVariant::Corrected,
+        )?;
+        if combined_exception(legacy, corrected) {
             exceptions.insert(i);
         }
     }
     Ok((exceptions, identity))
+}
+
+fn combined_exception(legacy: Option<bool>, corrected: Option<bool>) -> bool {
+    legacy.unwrap_or(true) || corrected.unwrap_or(true)
 }
 
 fn assignment_exception(
@@ -414,22 +445,25 @@ fn assignment_exception(
     size: [f32; 2],
     bounds: [i32; 4],
     scale: [f64; 2],
-) -> Result<bool, String> {
+    variant: CropVariant,
+) -> Result<Option<bool>, String> {
     let values: Vec<Option<Vec<f64>>> = docs
         .iter()
-        .map(|doc| crop(bindings, doc.handle, index, size, bounds, scale))
+        .map(|doc| crop(bindings, doc.handle, index, size, bounds, scale, variant))
         .collect::<Result<_, _>>()?;
     let [Some(source), Some(current), Some(candidate)] = values.as_slice() else {
-        return Ok(true);
+        return Ok(None);
     };
-    Ok(!owned_ink(
-        source,
-        current,
-        candidate,
-        (bounds[2] - bounds[0]) as usize,
-        (bounds[3] - bounds[1]) as usize,
-    )
-    .is_empty())
+    Ok(Some(
+        !owned_ink(
+            source,
+            current,
+            candidate,
+            (bounds[2] - bounds[0]) as usize,
+            (bounds[3] - bounds[1]) as usize,
+        )
+        .is_empty(),
+    ))
 }
 
 #[cfg(test)]
@@ -437,14 +471,36 @@ mod tests {
     use super::*;
 
     #[test]
-    fn dimensions_match_old_300_dpi() {
+    fn legacy_dimensions_match_frozen_arithmetic() {
         for n in 1..=100_000 {
             let size = n as f32 / 37.;
             let old = (size as f64 * (1200. / 72.)).ceil() as i32;
-            assert_eq!(
-                render_dimensions([size, size], [72. / 300.; 2]),
-                Some([old, old])
-            );
+            for scale in [
+                [72. / 200.; 2],
+                [72. / 300.; 2],
+                [72. / 600.; 2],
+                [435. / 1813.; 2],
+            ] {
+                assert_eq!(
+                    render_dimensions([size, size], scale, CropVariant::Legacy),
+                    Some([old, old])
+                );
+            }
+        }
+    }
+
+    #[test]
+    fn combined_exception_truth_table() {
+        for (legacy, corrected, expected) in [
+            (Some(false), Some(false), false),
+            (Some(true), Some(false), true),
+            (Some(false), Some(true), true),
+            (Some(true), Some(true), true),
+            (None, Some(false), true),
+            (Some(false), None, true),
+            (None, None, true),
+        ] {
+            assert_eq!(combined_exception(legacy, corrected), expected);
         }
     }
 
@@ -456,9 +512,13 @@ mod tests {
         };
         let pdfium = Pdfium::new(Pdfium::bind_to_library(path).unwrap());
         let bindings = pdfium.bindings();
-        for dpi in [200., 300., 600.] {
-            let sx = 72. / dpi;
-            let size = [(100. * sx) as f32, (100. * sx) as f32];
+        for (name, sx, sy) in [
+            ("200", 72. / 200., 72. / 200.),
+            ("300", 72. / 300., 72. / 300.),
+            ("600", 72. / 600., 72. / 600.),
+            ("financial", 435. / 1813., 565. / 2355.),
+        ] {
+            let size = [(100. * sx) as f32, (100. * sy) as f32];
             let make_page = |missing: bool| {
                 let mut pixels = vec![255; 20 * 20];
                 for y in 3..17 {
@@ -483,9 +543,9 @@ mod tests {
                             20. * sx,
                             0.,
                             0.,
-                            20. * sx,
+                            20. * sy,
                             30. * sx,
-                            size[1] as f64 - 50. * sx,
+                            size[1] as f64 - 50. * sy,
                         ],
                     },
                 }
@@ -498,20 +558,22 @@ mod tests {
             };
             let docs = [open(&full), open(&full), open(&missing)];
             assert!(docs.iter().all(|d| !d.handle.is_null()));
-            assert!(
-                assignment_exception(bindings, &docs, 0, size, [26, 26, 54, 54], [sx; 2]).unwrap(),
-                "dpi={dpi}"
-            );
+            let check = |docs: &[Document<'_>], bounds, variant| {
+                assignment_exception(bindings, docs, 0, size, bounds, [sx, sy], variant).unwrap()
+            };
+            let bounds = [26, 26, 54, 54];
+            let legacy = check(&docs, bounds, CropVariant::Legacy);
+            let corrected = check(&docs, bounds, CropVariant::Corrected);
+            assert!(combined_exception(legacy, corrected), "{name}");
             let matching = [open(&full), open(&full), open(&full)];
-            assert!(
-                !assignment_exception(bindings, &matching, 0, size, [26, 26, 54, 54], [sx; 2])
-                    .unwrap(),
-                "dpi={dpi}"
-            );
-            assert!(
-                assignment_exception(bindings, &matching, 0, size, [-1, 26, 54, 54], [sx; 2])
-                    .unwrap()
-            );
+            let legacy_matching = check(&matching, bounds, CropVariant::Legacy);
+            let corrected_matching = check(&matching, bounds, CropVariant::Corrected);
+            assert_eq!(corrected_matching, Some(false), "{name}");
+            eprintln!("{name}: legacy missing={legacy:?}, matching={legacy_matching:?}");
+            assert!(combined_exception(
+                check(&matching, [-1, 26, 54, 54], CropVariant::Legacy),
+                check(&matching, [-1, 26, 54, 54], CropVariant::Corrected)
+            ));
         }
     }
 }

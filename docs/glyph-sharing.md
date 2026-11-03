@@ -23,6 +23,6 @@ Research evidence: [`FONT_04_REVIEW_P2PP.md`](https://github.com/mitchins/scanwe
 
 ## Safety corrections after qualification
 
-Review after P2″ qualification found two defects: the owned-ink crop was correct only at 300 DPI, and the witness quorum was not rechecked after owned-ink exceptions. The corrections are strictly subtractive: they can only reject substitutions accepted by the qualified build. The P2″ qualification applies to the original build; the corrected build is verified as a subset of it, not re-qualified.
+Review after P2″ qualification found two defects: the owned-ink crop was correct only at 300 DPI, and the witness quorum was not rechecked after owned-ink exceptions. The frozen legacy crop check remains as a qualification-compatibility veto, while a corrected DPI-aware check adds protection; a substitution is rejected if either check reports an exception. The final three-distinct-design quorum is applied after both checks. These corrections are strictly subtractive: they can only reject substitutions accepted by the qualified build. The P2″ qualification applies to the original build; the corrected build is verified as a subset of it, not re-qualified.
 
 <!-- reviewer fills subset ledger summary -->
