@@ -9,6 +9,7 @@ Compares the repaired q3 build against the qualified q3 build (e61c0dc) on every
   6. renders differ from qualified only inside removed members' boxes, and there equal default.
 """
 import json
+import os
 import re
 import sys
 from collections import defaultdict
@@ -19,8 +20,8 @@ import numpy as np
 ROOT = Path(__file__).resolve().parents[2]
 L = ROOT / 'qualification/font04/local'
 LOGS = Path(sys.argv[1]) if len(sys.argv) > 1 else None
-RUNS = L / 'PR2/runs'
-OUT = ROOT / 'qualification/font04/pr26-subset-ledger.json'
+RUNS = L / os.environ.get('LEDGER_RUNS', 'PR2/runs')
+OUT = ROOT / 'qualification/font04' / os.environ.get('LEDGER_OUT', 'pr26-subset-ledger.json')
 MARGIN = 3
 
 
