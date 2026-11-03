@@ -1,7 +1,7 @@
 //! Full native cover sharing with aggregate per-document economy fallback.
 use super::{
     font::{self, Instance},
-    group::Member,
+    group::{Group, Member},
     ownership::{candidate_matrix, default_matrix, preflight},
     plan::{self, Fit},
     source::{fitted_bbox, Observation},
@@ -66,6 +66,27 @@ pub(crate) struct OperatingPoint {
     pub multiplier: f64,
     pub absolute_error_ceiling: Option<f64>,
     pub min_witnesses: usize,
+}
+
+fn final_group(
+    g: &Group,
+    members: &[Member],
+    exceptions: &BTreeSet<usize>,
+    min_witnesses: usize,
+) -> Option<Vec<usize>> {
+    let kept: Vec<_> = g
+        .members
+        .iter()
+        .copied()
+        .filter(|i| !exceptions.contains(i))
+        .collect();
+    let witnesses = kept
+        .iter()
+        .map(|&i| members[i].shape_key.as_str())
+        .collect::<BTreeSet<_>>()
+        .len();
+    (!exceptions.contains(&g.canonical) && kept.len() >= 2 && witnesses >= min_witnesses)
+        .then_some(kept)
 }
 
 pub(crate) fn share(
@@ -150,16 +171,12 @@ pub(crate) fn share(
     let stage = std::time::Instant::now();
     let mut surviving = BTreeMap::new();
     let mut groups = BTreeMap::new();
+    let mut discarded = BTreeSet::new();
     for g in &plan.groups {
-        let kept: Vec<usize> = g
-            .members
-            .iter()
-            .copied()
-            .filter(|i| !exceptions.contains(i))
-            .collect();
-        if exceptions.contains(&g.canonical) || kept.len() < 2 {
+        let Some(kept) = final_group(g, &members, &exceptions, min_witnesses) else {
+            discarded.extend(g.members.iter().copied());
             continue;
-        }
+        };
         for &i in &kept {
             surviving.insert(i, g.canonical);
         }
@@ -206,6 +223,9 @@ pub(crate) fn share(
                 if plan.bands[i] != plan.bands[f.canonical] {
                     reasons.push("stroke_weight_band".into());
                 }
+            }
+            if discarded.contains(&i) {
+                reasons.push("final_witness_quorum".into());
             }
             if exceptions.contains(&i) {
                 reasons.push("unexplained_owned_ink".into());
@@ -480,4 +500,51 @@ pub(crate) fn share(
         }),
         report,
     ))
+}
+
+#[cfg(test)]
+mod final_group_tests {
+    use super::*;
+
+    fn members(keys: &[&str]) -> Vec<Member> {
+        keys.iter()
+            .map(|key| Member {
+                label: "x".into(),
+                shape_key: (*key).into(),
+                band: 0,
+            })
+            .collect()
+    }
+    #[test]
+    fn requires_final_distinct_witnesses_and_canonical() {
+        let group = Group {
+            canonical: 0,
+            members: vec![0, 1, 2],
+        };
+        assert_eq!(
+            final_group(&group, &members(&["a", "b", "c"]), &BTreeSet::from([2]), 3),
+            None
+        );
+        assert_eq!(
+            final_group(&group, &members(&["a", "b", "b"]), &BTreeSet::new(), 3),
+            None
+        );
+        assert_eq!(
+            final_group(&group, &members(&["a", "b", "c"]), &BTreeSet::from([0]), 3),
+            None
+        );
+        let group = Group {
+            canonical: 0,
+            members: vec![0, 1, 2, 3],
+        };
+        assert_eq!(
+            final_group(
+                &group,
+                &members(&["a", "b", "c", "d"]),
+                &BTreeSet::from([1]),
+                3
+            ),
+            Some(vec![0, 2, 3])
+        );
+    }
 }

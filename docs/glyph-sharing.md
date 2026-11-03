@@ -20,3 +20,9 @@ q3 passed all preregistered P2″ criteria, with zero detected new material defe
 The blind positive controls did not demonstrate sensitivity on the P2″ population. The numerical non-inferiority margins were relatively permissive. Overall pristine accuracy was at parity with default, not superior. Documents without enough repeated glyph evidence may see little or no benefit. q3 is opt-in and ordinary ClearScan is unchanged. There is no claim of zero-risk typography or universal visual improvement.
 
 Research evidence: [`FONT_04_REVIEW_P2PP.md`](https://github.com/mitchins/scanweave/blob/research/font04-document-fonts/FONT_04_REVIEW_P2PP.md) and [`FONT_04_REVIEW_R2C.md`](https://github.com/mitchins/scanweave/blob/research/font04-document-fonts/FONT_04_REVIEW_R2C.md) on `research/font04-document-fonts`.
+
+## Safety corrections after qualification
+
+Review after P2″ qualification found two defects: the owned-ink crop was correct only at 300 DPI, and the witness quorum was not rechecked after owned-ink exceptions. The corrections are strictly subtractive: they can only reject substitutions accepted by the qualified build. The P2″ qualification applies to the original build; the corrected build is verified as a subset of it, not re-qualified.
+
+<!-- reviewer fills subset ledger summary -->
