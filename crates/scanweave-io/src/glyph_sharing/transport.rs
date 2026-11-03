@@ -73,7 +73,7 @@ fn final_group(
     members: &[Member],
     exceptions: &BTreeSet<usize>,
     min_witnesses: usize,
-) -> Option<Vec<usize>> {
+) -> Result<Vec<usize>, &'static str> {
     let kept: Vec<_> = g
         .members
         .iter()
@@ -85,8 +85,13 @@ fn final_group(
         .map(|&i| members[i].shape_key.as_str())
         .collect::<BTreeSet<_>>()
         .len();
-    (!exceptions.contains(&g.canonical) && kept.len() >= 2 && witnesses >= min_witnesses)
-        .then_some(kept)
+    if exceptions.contains(&g.canonical) {
+        Err("final_canonical_rejected")
+    } else if kept.len() < 2 || witnesses < min_witnesses {
+        Err("final_witness_quorum")
+    } else {
+        Ok(kept)
+    }
 }
 
 pub(crate) fn share(
@@ -171,11 +176,14 @@ pub(crate) fn share(
     let stage = std::time::Instant::now();
     let mut surviving = BTreeMap::new();
     let mut groups = BTreeMap::new();
-    let mut discarded = BTreeSet::new();
+    let mut discarded = BTreeMap::new();
     for g in &plan.groups {
-        let Some(kept) = final_group(g, &members, &exceptions, min_witnesses) else {
-            discarded.extend(g.members.iter().copied());
-            continue;
+        let kept = match final_group(g, &members, &exceptions, min_witnesses) {
+            Ok(kept) => kept,
+            Err(reason) => {
+                discarded.extend(g.members.iter().map(|&i| (i, reason)));
+                continue;
+            }
         };
         for &i in &kept {
             surviving.insert(i, g.canonical);
@@ -224,8 +232,8 @@ pub(crate) fn share(
                     reasons.push("stroke_weight_band".into());
                 }
             }
-            if discarded.contains(&i) {
-                reasons.push("final_witness_quorum".into());
+            if let Some(reason) = discarded.get(&i) {
+                reasons.push((*reason).into());
             }
             if exceptions.contains(&i) {
                 reasons.push("unexplained_owned_ink".into());
@@ -523,15 +531,15 @@ mod final_group_tests {
         };
         assert_eq!(
             final_group(&group, &members(&["a", "b", "c"]), &BTreeSet::from([2]), 3),
-            None
+            Err("final_witness_quorum")
         );
         assert_eq!(
             final_group(&group, &members(&["a", "b", "b"]), &BTreeSet::new(), 3),
-            None
+            Err("final_witness_quorum")
         );
         assert_eq!(
             final_group(&group, &members(&["a", "b", "c"]), &BTreeSet::from([0]), 3),
-            None
+            Err("final_canonical_rejected")
         );
         let group = Group {
             canonical: 0,
@@ -544,7 +552,17 @@ mod final_group_tests {
                 &BTreeSet::from([1]),
                 3
             ),
-            Some(vec![0, 2, 3])
+            Ok(vec![0, 2, 3])
+        );
+        // A rejected canonical is reported as such even when enough designs remain.
+        assert_eq!(
+            final_group(
+                &group,
+                &members(&["a", "b", "c", "d"]),
+                &BTreeSet::from([0]),
+                3
+            ),
+            Err("final_canonical_rejected")
         );
     }
 }

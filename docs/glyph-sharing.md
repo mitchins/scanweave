@@ -25,4 +25,11 @@ Research evidence: [`FONT_04_REVIEW_P2PP.md`](https://github.com/mitchins/scanwe
 
 Review after P2″ qualification found two defects: the owned-ink crop was correct only at 300 DPI, and the witness quorum was not rechecked after owned-ink exceptions. The frozen legacy crop check remains as a qualification-compatibility veto, while a corrected DPI-aware check adds protection; a substitution is rejected if either check reports an exception. The final three-distinct-design quorum is applied after both checks. These corrections are strictly subtractive: they can only reject substitutions accepted by the qualified build. The P2″ qualification applies to the original build; the corrected build is verified as a subset of it, not re-qualified.
 
-<!-- reviewer fills subset ledger summary -->
+Subset verification (independent reviewer, 41 documents: P2, P2′ and P2″ at 200/300/600 DPI, FONT-01, and the five real development documents):
+
+- 0 added substitutions, groups or canonicals; 0 changed canonical shapes or placements. 108 of 1,853 qualified substitutions are removed: 0 at 200 DPI, 14 at 300 DPI, 94 at 600 DPI.
+- 0 final groups with fewer than three distinct design witnesses (the qualified build emitted 11).
+- Every pixel of every changed output equals either the qualified output or default ClearScan. Outputs whose substitution set did not change are byte-identical, and default and faithful outputs are byte-identical to `main`.
+- Real documents: the financial document drops 7 of 1,336 substitutions (`final_witness_quorum` and `final_canonical_rejected`); mixed, forms, receipts and historical are unchanged.
+- The second crop check adds about 0.9 s to the owned-ink stage on the 13-page financial document (1.15 s → 2.01 s). Total wall time and peak RSS changed within run-to-run noise.
+- At 600 DPI the legacy crop window falls outside its own render for most glyphs. Under the combined rule this counts as an exception, so most 600 DPI substitutions are now rejected. This is conservative by design.
