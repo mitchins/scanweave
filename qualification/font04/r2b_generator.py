@@ -132,7 +132,7 @@ def geometry_report(rows, faces, dpis):
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('--split', choices=('font01', 'p2', 'p2prime'), required=True)
+    parser.add_argument('--split', choices=('font01', 'p2', 'p2prime', 'p2pp'), required=True)
     parser.add_argument('--out', type=Path)
     parser.add_argument('--binary', type=Path)
     parser.add_argument('--verify-manifest', type=Path)
@@ -182,6 +182,59 @@ def main():
                    'git_head': subprocess.check_output(['git', 'rev-parse', 'HEAD'], cwd=ROOT, text=True).strip(),
                    'product_binary_sha256': sha(args.binary), 'preregistration_sha256': sha(final), 'argv': sys.argv}
         fd = os.open(p2prime / 'OPENED', os.O_WRONLY | os.O_CREAT | os.O_EXCL, 0o444)
+        with os.fdopen(fd, 'w') as stream:
+            json.dump(receipt, stream, indent=2)
+            stream.write('\n')
+            stream.flush()
+            os.fsync(stream.fileno())
+        manifest = generate_document(output, faces, seed, dpis, is_p2=True)
+        if manifest['damage_coverage']['incomplete']:
+            raise ValueError('Incomplete clean/damaged coverage')
+        return
+    if args.split == 'p2pp':
+        # Geometry requires the final registration; generation also requires acceptance.
+        final = BASE / 'p2pp-preregistration.json'
+        freeze = json.loads((BASE / 'method-freeze-q3.json').read_text())
+        if not final.is_file() or freeze.get('p2pp_preregistration_sha256') != sha(final):
+            raise ValueError('P2pp requires final preregistration hash in q3 freeze')
+        if args.binary is None or args.verify_manifest is not None:
+            parser.error('P2pp requires --binary and does not accept --verify-manifest')
+        registration = json.loads(final.read_text())
+        if 'DRAFT' in registration.get('status', '').upper() or registration['generator']['split_name'] != 'p2pp':
+            raise ValueError('P2pp registration must be final')
+        p2pp = BASE / 'local/P2pp'
+        output = args.out if args.out is not None else p2pp / 'p2pp'
+        if output.resolve() != (p2pp / 'p2pp').resolve():
+            parser.error('P2pp output must be qualification/font04/local/P2pp/p2pp')
+        if output.exists() or (p2pp / 'OPENED').exists():
+            raise FileExistsError('P2pp already opened or output exists')
+        for face in registration['faces']:
+            if sha(Path(face['path'])) != face['sha256']:
+                raise ValueError('face hash mismatch: ' + face['name'])
+        if sha(args.binary) != freeze['implementation']['binary_sha256']:
+            raise ValueError('candidate binary hash mismatch')
+        benchmark.PHRASES = tuple(registration['generator']['phrases'])
+        faces = [dict(face, split='p2pp') for face in registration['faces']]
+        seed, dpis = registration['generator']['seed'], tuple(registration['generator']['dpis'])
+        if args.geometry_only:
+            if args.out is not None or args.geometry_only.resolve().is_relative_to(p2pp.resolve()):
+                parser.error('P2pp geometry must write outside local/P2pp and does not accept --out')
+            if args.geometry_only.exists():
+                raise FileExistsError(args.geometry_only)
+            rows = generate_document(None, faces, seed, dpis, geometry_only=True, is_p2=True)
+            report = geometry_report(rows, faces, dpis)
+            if report['actual_observations'] != report['expected_observations']:
+                raise ValueError('observation count mismatch')
+            args.geometry_only.write_text(json.dumps(report, indent=2) + '\n')
+            return
+        approval = freeze.get('p2pp_owner_approval') or {}
+        if approval.get('approved') is not True or approval.get('preregistration_sha256') != sha(final) or not approval.get('approver') or not approval.get('evidence'):
+            raise ValueError('P2pp requires recorded owner approval of the final preregistration hash')
+        p2pp.mkdir(parents=True, exist_ok=True)
+        receipt = {'timestamp': datetime.now(timezone.utc).isoformat(),
+                   'git_head': subprocess.check_output(['git', 'rev-parse', 'HEAD'], cwd=ROOT, text=True).strip(),
+                   'product_binary_sha256': sha(args.binary), 'preregistration_sha256': sha(final), 'argv': sys.argv}
+        fd = os.open(p2pp / 'OPENED', os.O_WRONLY | os.O_CREAT | os.O_EXCL, 0o444)
         with os.fdopen(fd, 'w') as stream:
             json.dump(receipt, stream, indent=2)
             stream.write('\n')

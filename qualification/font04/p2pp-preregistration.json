@@ -1,0 +1,207 @@
+{
+ "schema": "scanweave-font04-p2pp-preregistration-v1",
+ "registered": "2026-11-03",
+ "status": "FINAL \u2014 awaiting owner approval. Single use. Final qualification attempt for the current FONT-04 method family.",
+ "purpose": "Single-use held-out synthetic qualification population P2pp for the frozen cover-2.0-ceiling-q3 candidate.",
+ "frozen_candidate": {
+  "freeze": "qualification/font04/method-freeze-q3.json",
+  "flag": "cover-2.0-ceiling-q3",
+  "binary_sha256": "8667f6dd0594d4f7d488df392c7a2f639ac01a21c665a7ab4147c036af68ee70",
+  "commit": "e61c0dc"
+ },
+ "generator": {
+  "script": "qualification/font04/r2b_generator.py --split p2pp",
+  "layout": "v1.1: each DPI schedule split in order into sheets of 32 lines; full final scan bbox must fit the 6x9 in sheet or generation fails; geometry-only precheck before opening",
+  "split_name": "p2pp",
+  "seed": 1513376107,
+  "seed_derivation": {
+   "exact_string": "FONT-04 P2pp final 2026-11-03\n1561e616c414a1b82d6e6dfbd18e5726fd65028913ade191e5fa38b6ec375a1a\n222794214c518fc0c3913585eb1e662a69153ad460a9eb75dde87718fe992a42\n2dc5d31e2cf1e29f3430eb2dfa1ba9911e08ee401b61dd12f40e0acb047a17a3\n6f6940be0835c3ddec9199e5fc42be4cbc61ebcfd58c623fdf719366253f1780\n86368d83c243438e640106bc33fd27942a5f70962a334546d1e3b4bb4a42de05\n8c66efeb2e3dbbe1015db5b45c081b8581671ca145625fa2c5197977097b9ae5\n8c863f833b12bc8486671d26e3a58b13b0f9eaff1d6b10398e7c107a9b7ee05a\nbf1b8130069b44b9148eeece35e5423bedac49777ba746615b826b8276574a7b\ne2f9244fdcd20840f2480f91370cea885bf99230c49d153199fa64853ad74b69\ne9d59afb6d9cb9cf6e8d8159d4639d5b577e29efc64a15182f228659cfc1e818\nf58cd4bb02b0dfa215513b2d7033db0d86d5d25c214006dc282955795f45e00e\nff4b3ba8c8832f982f991bb89f286a0e7be82b5a8b841328c48c82d1979cec9c",
+   "sha256": "5a34496b31fadd68b0ca6569f13f12f1d2ecab6e667237f79d5a81479d65ece0",
+   "integer": 1513376107,
+   "rule": "first 8 hex digits of SHA-256, unsigned big-endian; +17000+i, +31000, +47000 offsets unchanged"
+  },
+  "dpis": [
+   200,
+   300,
+   600
+  ],
+  "damage_bands": [
+   "D0",
+   "D1",
+   "D2",
+   "D3",
+   "D4"
+  ],
+  "damage_plan": "unchanged FONT-01 plan_damage()",
+  "phrases": [
+   "expires",
+   "Term expires 1921; $106.08!",
+   "constant use were after",
+   "Body TEXT 0O1Il 38.06, 1921.",
+   "Balance carried forward 4,385.27",
+   "Receipt No. 8813 - paid in full.",
+   "minimum amount 0.69; rate 3.5%",
+   "Officers elected annually 1856-1923"
+  ]
+ },
+ "faces": [
+  {
+   "family": "EBGaramond",
+   "name": "EBGaramond12-Regular",
+   "path": "/usr/share/fonts/opentype/ebgaramond/EBGaramond12-Regular.otf",
+   "sha256": "222794214c518fc0c3913585eb1e662a69153ad460a9eb75dde87718fe992a42",
+   "package": "fonts-ebgaramond",
+   "package_version": "0.016+git20210310.42d4f9f2-1",
+   "package_licence": "OFL-1.1 (font files); packaging GPL-2+",
+   "licence_source": "/usr/share/doc/fonts-ebgaramond/copyright"
+  },
+  {
+   "family": "EBGaramond",
+   "name": "EBGaramond12-Italic",
+   "path": "/usr/share/fonts/opentype/ebgaramond/EBGaramond12-Italic.otf",
+   "sha256": "86368d83c243438e640106bc33fd27942a5f70962a334546d1e3b4bb4a42de05",
+   "package": "fonts-ebgaramond",
+   "package_version": "0.016+git20210310.42d4f9f2-1",
+   "package_licence": "OFL-1.1 (font files); packaging GPL-2+",
+   "licence_source": "/usr/share/doc/fonts-ebgaramond/copyright"
+  },
+  {
+   "family": "EBGaramond",
+   "name": "EBGaramond12-Bold",
+   "path": "/usr/share/fonts/opentype/ebgaramond/EBGaramond12-Bold.otf",
+   "sha256": "f58cd4bb02b0dfa215513b2d7033db0d86d5d25c214006dc282955795f45e00e",
+   "package": "fonts-ebgaramond",
+   "package_version": "0.016+git20210310.42d4f9f2-1",
+   "package_licence": "OFL-1.1 (font files); packaging GPL-2+",
+   "licence_source": "/usr/share/doc/fonts-ebgaramond/copyright"
+  },
+  {
+   "family": "EBGaramond",
+   "name": "EBGaramond08-Regular",
+   "path": "/usr/share/fonts/opentype/ebgaramond/EBGaramond08-Regular.otf",
+   "sha256": "ff4b3ba8c8832f982f991bb89f286a0e7be82b5a8b841328c48c82d1979cec9c",
+   "package": "fonts-ebgaramond",
+   "package_version": "0.016+git20210310.42d4f9f2-1",
+   "package_licence": "OFL-1.1 (font files); packaging GPL-2+",
+   "licence_source": "/usr/share/doc/fonts-ebgaramond/copyright"
+  },
+  {
+   "family": "EBGaramond",
+   "name": "EBGaramond08-Italic",
+   "path": "/usr/share/fonts/opentype/ebgaramond/EBGaramond08-Italic.otf",
+   "sha256": "8c66efeb2e3dbbe1015db5b45c081b8581671ca145625fa2c5197977097b9ae5",
+   "package": "fonts-ebgaramond",
+   "package_version": "0.016+git20210310.42d4f9f2-1",
+   "package_licence": "OFL-1.1 (font files); packaging GPL-2+",
+   "licence_source": "/usr/share/doc/fonts-ebgaramond/copyright"
+  },
+  {
+   "family": "Lato",
+   "name": "Lato-Light",
+   "path": "/usr/share/fonts/truetype/lato/Lato-Light.ttf",
+   "sha256": "e9d59afb6d9cb9cf6e8d8159d4639d5b577e29efc64a15182f228659cfc1e818",
+   "package": "fonts-lato",
+   "package_version": "2.015-1",
+   "package_licence": "OFL-1.1",
+   "licence_source": "/usr/share/doc/fonts-lato/copyright"
+  },
+  {
+   "family": "Lato",
+   "name": "Lato-Regular",
+   "path": "/usr/share/fonts/truetype/lato/Lato-Regular.ttf",
+   "sha256": "6f6940be0835c3ddec9199e5fc42be4cbc61ebcfd58c623fdf719366253f1780",
+   "package": "fonts-lato",
+   "package_version": "2.015-1",
+   "package_licence": "OFL-1.1",
+   "licence_source": "/usr/share/doc/fonts-lato/copyright"
+  },
+  {
+   "family": "Lato",
+   "name": "Lato-Semibold",
+   "path": "/usr/share/fonts/truetype/lato/Lato-Semibold.ttf",
+   "sha256": "2dc5d31e2cf1e29f3430eb2dfa1ba9911e08ee401b61dd12f40e0acb047a17a3",
+   "package": "fonts-lato",
+   "package_version": "2.015-1",
+   "package_licence": "OFL-1.1",
+   "licence_source": "/usr/share/doc/fonts-lato/copyright"
+  },
+  {
+   "family": "Lato",
+   "name": "Lato-Bold",
+   "path": "/usr/share/fonts/truetype/lato/Lato-Bold.ttf",
+   "sha256": "bf1b8130069b44b9148eeece35e5423bedac49777ba746615b826b8276574a7b",
+   "package": "fonts-lato",
+   "package_version": "2.015-1",
+   "package_licence": "OFL-1.1",
+   "licence_source": "/usr/share/doc/fonts-lato/copyright"
+  },
+  {
+   "family": "Lato",
+   "name": "Lato-Italic",
+   "path": "/usr/share/fonts/truetype/lato/Lato-Italic.ttf",
+   "sha256": "8c863f833b12bc8486671d26e3a58b13b0f9eaff1d6b10398e7c107a9b7ee05a",
+   "package": "fonts-lato",
+   "package_version": "2.015-1",
+   "package_licence": "OFL-1.1",
+   "licence_source": "/usr/share/doc/fonts-lato/copyright"
+  },
+  {
+   "family": "Lato",
+   "name": "Lato-BoldItalic",
+   "path": "/usr/share/fonts/truetype/lato/Lato-BoldItalic.ttf",
+   "sha256": "e2f9244fdcd20840f2480f91370cea885bf99230c49d153199fa64853ad74b69",
+   "package": "fonts-lato",
+   "package_version": "2.015-1",
+   "package_licence": "OFL-1.1",
+   "licence_source": "/usr/share/doc/fonts-lato/copyright"
+  },
+  {
+   "family": "Inconsolata",
+   "name": "Inconsolata-Medium",
+   "path": "/usr/share/fonts/truetype/inconsolata/Inconsolata.otf",
+   "sha256": "1561e616c414a1b82d6e6dfbd18e5726fd65028913ade191e5fa38b6ec375a1a",
+   "package": "fonts-inconsolata",
+   "package_version": "001.010-6build1",
+   "package_licence": "OFL-1.0",
+   "licence_source": "/usr/share/doc/fonts-inconsolata/copyright"
+  }
+ ],
+ "family_ancestry_audit": "EB Garamond (Duffner; Garamond revival), Lato (Dziedzic; humanist sans), Inconsolata (Levien; Consolas-inspired mono). Development families: DejaVu/Bitstream Vera, FreeSerif/FreeSans/FreeMono, C059 (Century), NimbusMonoPS/FreeMono (Courier), Z003, Liberation (Times/Arial/Courier metrics), P052 (Palatino), NimbusRoman (Times), NimbusSans (Helvetica), URW Bookman, Noto Sans Mono, IBM Plex Serif/Sans/Mono, URW Gothic (Avant Garde), Bitstream Charter. No Garamond, humanist-sans Lato, or Inconsolata design appears in any development set. Competing siblings: EB Garamond 12 Regular/Italic/Bold plus 08-point optical-size Regular/Italic (near-identical siblings); Lato Light/Regular/Semibold/Bold weight ladder plus Italic/BoldItalic. Only one Inconsolata face is packaged.",
+ "licensing": {
+  "rule": "Font binaries and generated P2pp pages are never committed; only hashes, manifests and compact metrics."
+ },
+ "evaluation": {
+  "arms": [
+   "default ClearScan (off), frozen 76681da binary",
+   "cover-2.0-ceiling (reference; source of positive controls), binary d3a26c6d...",
+   "cover-2.0-ceiling-q3 (candidate), frozen binary"
+  ],
+  "conversion": "each of the 9 sheets converted once per arm at its native DPI, clearscan profile, OMP_THREAD_LIMIT=1 RAYON_NUM_THREADS=4; candidate converted twice (determinism)",
+  "pristine_method": "unchanged r2b_pristine/r2c_pristine method: composited pristine page, original observation boxes, PDFium and Poppler at native DPI",
+  "margins": {
+   "file": "qualification/font04/p2pp-margins.json",
+   "sha256": "91e8d71102a26bad3cbda38ee02f9531b4ab381564fcc583db65c4d23c6e18b2",
+   "source": "6 independent default-vs-default realizations generated from FONT-01 train faces with fresh seeds (p2pp_calibration.py); no P2/P2prime/development data"
+  }
+ },
+ "pass_criteria": {
+  "functional": "Candidate text extraction (Poppler default/layout/raw, PDFium, MuPDF) and native PDFium search identical to default on every sheet; qpdf --check clean; OTS sanitizes every embedded font; repeat conversion byte-identical.",
+  "numerical_non_inferiority": "For every character class with >=10 observations and each renderer: candidate mean error - default mean error <= mean_margin(class, renderer) and candidate p95 - default p95 <= p95_margin(class, renderer), margins from p2pp-margins.json. A class absent from the margin file is reported and counted as FAIL.",
+  "regression_tail": "Per renderer, with tau = tail_threshold(renderer) from p2pp-margins.json: W = occurrences with candidate - default error > tau, B = occurrences with default - candidate > tau. FAIL if a one-sided exact binomial (sign) test of W versus B at p < 0.05 indicates more worsening than improvement.",
+  "material_defects": "Blinded review: zero newly introduced class (iii) material changes in the candidate arm, relative to default on the same occurrence. Class (iii): wrong character, wrong numeral, counter opened or closed, weight/slant/style-class change, unsupported added or removed stroke. Class (i) harmless visual difference and class (ii) justified restoration (ink missing from a damaged scan and supported by the other witnesses) are not failures.",
+  "economy": "Report only: substituted members, retired/added/net outlines (CID->GID), actual font bytes, PDF bytes, runtime, peak RSS. No economy threshold."
+ },
+ "power_disclosure": "Calibrated from independent realizations, the numerical criteria are guards against broad degradation, not detectors of individual typography errors: applied retrospectively to the failed cover-2.0 arm on P2 they fail one class in PDFium only, and the tail sign test is not significant. Qualification therefore rests on the blinded material-defect review; this is stated in advance.",
+ "blind_review": {
+  "population": [
+   "every candidate non-self admitted substitution (all, no sampling)",
+   "every occurrence with candidate - default error > 0.5 x tau in either renderer (review-selection rule, not a pass threshold)",
+   "positive controls: up to 100 reference-arm substitutions not admitted by the candidate, random with recorded seed, shuffled in to estimate grader sensitivity (reported, not a pass criterion)"
+  ],
+  "format": "per row: source scan crop with word context | arm X | arm Y, X/Y = default vs candidate (or default vs reference for controls), randomized per row; shown at native 100% and 200%; target glyph boxed; no filenames or size hints",
+  "visibility_rule": "An arm difference counts only if the reviewer can distinguish it from the source glyph at 100% or 200%; 400% views are informational only. The font-outline xor proxy is reported but is not a pass/fail criterion.",
+  "grading": "Grade class (i)/(ii)/(iii) per arm with reason; commit all grades before unsealing; key and oracle census sealed under local/P2pp/sealed with SHA-256 commitments committed before grading."
+ },
+ "single_use": "Evaluate exactly once with the frozen candidate. No code, constant, margin, population or criterion change after opening. If P2pp fails materially, preserve results and reassess the approach; do not launch another holdout automatically.",
+ "opening_guard": "r2b_generator.py --split p2pp refuses to generate unless this file hash is in method-freeze-q3.json as p2pp_preregistration_sha256, owner approval of this hash is recorded as p2pp_owner_approval, every face hash matches, the binary hash matches the freeze, and local/P2pp/OPENED does not exist."
+}

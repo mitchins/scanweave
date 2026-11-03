@@ -1,0 +1,44 @@
+{
+  "schema": "font04-method-freeze-q3-v1",
+  "frozen": "2026-11-03",
+  "status": "FROZEN candidate for P2pp; any change requires a recorded stop and owner approval",
+  "base": {
+    "method_freeze": "qualification/font04/method-freeze.json",
+    "ceiling_freeze": "qualification/font04/method-freeze-ceiling.json",
+    "base_commit": "76681da",
+    "ceiling_commit": "3370de3"
+  },
+  "changes_from_cover_2_0": [
+    {
+      "name": "absolute fit-error ceiling",
+      "constant": "ABSOLUTE_FIT_ERROR_CEILING = 0.08",
+      "where": "crates/scanweave-io/src/glyph_sharing/group.rs cover()",
+      "provenance": "FONT-01 train only; largest ceiling catching >=90% proxy-visible substitutions (FONT_04_REVIEW_R2B.md, S1c)"
+    },
+    {
+      "name": "witness quorum",
+      "constant": "MIN_WITNESS_QUORUM = 3",
+      "where": "group.rs cover(): a group is emitted only if its members span >= 3 distinct default-emission design keys; a failing candidate still consumes its members for that pass (they stay default)",
+      "provenance": "S2a mechanism diagnosis: two-witness groups cannot adjudicate local contamination; one-design groups are zero-gain replacements (FONT_04_REVIEW_R2C.md S2a/S2b); not tuned"
+    }
+  ],
+  "implementation": {
+    "branch": "exp/canonical-witness",
+    "commit": "e61c0dc",
+    "flag": "--glyph-sharing cover-2.0-ceiling-q3",
+    "binary": "qualification/font04/local/S2/scanweave",
+    "binary_sha256": "8667f6dd0594d4f7d488df392c7a2f639ac01a21c665a7ab4147c036af68ee70",
+    "pdfium_sha256": "b8784cbd652ad2993332b7695e2c80f3a797f877fc47d9be97b66bca9639539e",
+    "build": "cargo build --release -p scanweave-cli in a checkout of e61c0dc",
+    "tests": "scanweave-io lib 73 passed (incl. quorum test); CLI flag test passed"
+  },
+  "unchanged": "All other constants, stages, vetoes, hygiene, owned-ink, placement and transport as in method-freeze.json at 76681da. Default (off) and existing flags byte-identical (verified on P2prime sheet 0 for off and cover-2.0-ceiling).",
+  "evidence": {
+    "determinism": "20 debug-logged reruns (P2prime 9, P2 9, financial, mixed) byte-identical to recorded q3 outputs",
+    "provenance": "s2b-provenance-cover-log-summary.json: 0 quorum violations",
+    "development_quality": "s2a-quorum.json; blind review of all 153 q3 substitutions on P2prime/P2: 0 material defects (s2a-quorum-blind-grades.txt)",
+    "economy": "financial net 322 / font -64.0 KB; mixed net 81 / font -7.9 KB (s2a-quorum.json)",
+    "functional": "s2b-functional.json: text extraction (5 engines), native search, qpdf, OTS pass on all 20 q3 outputs (P2prime 9, P2 9, mixed, financial)"
+  },
+  "p2pp_preregistration_sha256": "771bea1027a975e7222d014c52efd0ee824f35beeaf757429bcfed9beeef1578"
+}

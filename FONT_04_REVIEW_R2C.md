@@ -197,3 +197,45 @@ The pre-merge per-occurrence mask key in the sidecar is a different quantity. A 
 q3 rejects it on principle: one design is not three witnesses. The same "N members / 1 design" pattern accounts for 14 three-member, 6 four-member and 3 five-member rejected candidates on the synthetic sets, plus 21 on the real documents.
 
 **Behaviour to document in the freeze.** A candidate group that fails the quorum still consumes its members for that grouping pass, so they stay default. This is conservative and deterministic, and it is the behaviour that was blind-graded.
+
+## P2″ package: freeze, calibration, preregistration (2026-11-03) — awaiting owner approval
+
+**Frozen candidate:** `method-freeze-q3.json`.
+- Flag `cover-2.0-ceiling-q3`, commit `e61c0dc`, binary `8667f6dd…`.
+- Ceiling 0.08 and quorum 3, with provenance as recorded in the freeze.
+- Functional checks (`s2b-functional.json`): text extraction in 5 engines, native search, qpdf and OTS all pass on all 20 q3 outputs (P2′, P2, mixed, financial).
+
+**Faces (12, hashed):**
+- EB Garamond 12 Regular, Italic and Bold;
+- EB Garamond 08 Regular and Italic (optical-size near-siblings);
+- Lato Light, Regular, Semibold, Bold, Italic and BoldItalic;
+- Inconsolata Medium (the only packaged face).
+
+All are OFL. Ancestry was audited against every development family.
+
+**Seed:** 1513376107, derived from SHA-256 of a recorded string that includes the sorted face hashes.
+
+**Geometry precheck:** 6,768 observations, 564 per face, 9 sheets × 32 lines, 0 out of bounds. Two runs were byte-identical (`r2b-p2pp-geometry.json`).
+
+**Margins** (`p2pp-margins.json`, from `p2pp_calibration.py`):
+- Source: 6 independent default-vs-default realizations, using FONT-01 train faces, the P2 layout and phrases, and fresh seeds.
+- Class margin: the 95th percentile of pairwise |Δ| of per-class mean and p95, for each renderer.
+  - Median mean margin: about 0.016.
+  - Median p95 margin: about 0.06.
+- Per-occurrence tail threshold τ: about 0.22 in both renderers.
+
+**Power disclosure (stated in the preregistration).** The calibrated numerical criteria are weak detectors of individual typography errors. Applied retrospectively to the failed `cover-2.0` arm on P2:
+- they fail only one class, in PDFium;
+- the tail sign test is not significant (p = 0.29 and 0.21).
+
+Qualification therefore rests on the blind material-defect review. For that reason, every occurrence that worsens by more than 0.5 × τ is added to the blind population.
+
+**Pass criteria:**
+1. Functional equality.
+2. Per-class non-inferiority in both renderers.
+3. Tail sign test p ≥ 0.05.
+4. Zero newly introduced class (iii) defects relative to default.
+
+Economy is report-only.
+
+**Guard:** `r2b_generator.py --split p2pp` refuses to run without owner approval recorded against preregistration hash `771bea10…`. Verified: it refuses, and no `local/P2pp/` exists.
