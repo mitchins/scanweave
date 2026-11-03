@@ -153,22 +153,53 @@ impl Drop for Document<'_> {
         }
     }
 }
+fn render_dimensions(size: [f32; 2], scale: [f64; 2]) -> Option<[i32; 2]> {
+    let mut dimensions = [0; 2];
+    for axis in 0..2 {
+        let s = scale[axis];
+        // Preserve the exact arithmetic of the qualified 300-DPI renderer.
+        let factor = if s == 72. / 300. { 1200. / 72. } else { 4. / s };
+        let pixels = (size[axis] as f64 * factor).ceil();
+        if !s.is_finite()
+            || s <= 0.
+            || !pixels.is_finite()
+            || pixels < 1.
+            || pixels > i32::MAX as f64
+        {
+            return None;
+        }
+        dimensions[axis] = pixels as i32;
+    }
+    Some(dimensions)
+}
+
 fn crop(
     bindings: &dyn PdfiumLibraryBindings,
     document: *mut std::ffi::c_void,
     index: usize,
     size: [f32; 2],
     bounds: [i32; 4],
-) -> Result<Vec<f64>, String> {
+    scale: [f64; 2],
+) -> Result<Option<Vec<f64>>, String> {
+    let Some([fw, fh]) = render_dimensions(size, scale) else {
+        return Ok(None);
+    };
+    let w = (i64::from(bounds[2]) - i64::from(bounds[0])) * 4;
+    let h = (i64::from(bounds[3]) - i64::from(bounds[1])) * 4;
+    if w <= 0
+        || h <= 0
+        || w > 16_777_216 / h
+        || bounds[0] < 0
+        || bounds[1] < 0
+        || i64::from(bounds[2]) * 4 > i64::from(fw)
+        || i64::from(bounds[3]) * 4 > i64::from(fh)
+    {
+        return Ok(None);
+    }
+    let (w, h) = (w as i32, h as i32);
     let page = bindings.FPDF_LoadPage(document.cast(), index as i32);
     if page.is_null() {
         return Err("PDFium preflight page load failed".into());
-    }
-    let w = (bounds[2] - bounds[0]) * 4;
-    let h = (bounds[3] - bounds[1]) * 4;
-    if w <= 0 || h <= 0 || w as i64 * h as i64 > 16_777_216 {
-        bindings.FPDF_ClosePage(page);
-        return Err("owned crop exceeds bounds".into());
     }
     let bitmap = bindings.FPDFBitmap_CreateEx(w, h, 1, std::ptr::null_mut(), 0);
     if bitmap.is_null() {
@@ -176,9 +207,6 @@ fn crop(
         return Err("PDFium preflight bitmap allocation failed".into());
     }
     bindings.FPDFBitmap_FillRect(bitmap, 0, 0, w, h, 0xffffffff);
-    let scale = 1200. / 72.;
-    let fw = (size[0] as f64 * scale).ceil() as i32;
-    let fh = (size[1] as f64 * scale).ceil() as i32;
     bindings.FPDF_RenderPageBitmap(bitmap, page, -bounds[0] * 4, -bounds[1] * 4, fw, fh, 0, 8);
     let stride = bindings.FPDFBitmap_GetStride(bitmap) as usize;
     let bytes = bindings.FPDFBitmap_GetBuffer_as_vec(bitmap);
@@ -196,7 +224,7 @@ fn crop(
             result[y * (w as usize / 4) + x] = 1. - sum / (16. * 255.);
         }
     }
-    Ok(result)
+    Ok(Some(result))
 }
 
 /// Identity of the library used by the ownership renderer. PDFium exposes no
@@ -269,6 +297,7 @@ pub fn preflight(
     let mut current = Vec::new();
     let mut candidate = Vec::new();
     let mut bounds = Vec::new();
+    let mut scales = Vec::new();
     for &(i, j, bbox) in assignments {
         let row = &rows[i];
         let page = &pages[row.page];
@@ -347,11 +376,12 @@ pub fn preflight(
                 matrix: candidate_matrix(page, &c.shape, bbox),
             },
         });
+        scales.push([xf.sx(), xf.sy()]);
         bounds.push([
-            s[0] as i32 - 4,
-            s[1] as i32 - 4,
-            s[2] as i32 + 4,
-            s[3] as i32 + 4,
+            (s[0] as i32).saturating_sub(4),
+            (s[1] as i32).saturating_sub(4),
+            (s[2] as i32).saturating_add(4),
+            (s[3] as i32).saturating_add(4),
         ]);
     }
     let source_pdf = isolated(default_font, &source)?;
@@ -370,21 +400,118 @@ pub fn preflight(
     let mut exceptions = BTreeSet::new();
     for (k, &(i, _, _)) in assignments.iter().enumerate() {
         let size = source[k].size;
-        let values: Vec<Vec<f64>> = docs
-            .iter()
-            .map(|doc| crop(bindings, doc.handle, k, size, bounds[k]))
-            .collect::<Result<_, _>>()?;
-        if !owned_ink(
-            &values[0],
-            &values[1],
-            &values[2],
-            (bounds[k][2] - bounds[k][0]) as usize,
-            (bounds[k][3] - bounds[k][1]) as usize,
-        )
-        .is_empty()
-        {
+        if assignment_exception(bindings, &docs, k, size, bounds[k], scales[k])? {
             exceptions.insert(i);
         }
     }
     Ok((exceptions, identity))
+}
+
+fn assignment_exception(
+    bindings: &dyn PdfiumLibraryBindings,
+    docs: &[Document<'_>],
+    index: usize,
+    size: [f32; 2],
+    bounds: [i32; 4],
+    scale: [f64; 2],
+) -> Result<bool, String> {
+    let values: Vec<Option<Vec<f64>>> = docs
+        .iter()
+        .map(|doc| crop(bindings, doc.handle, index, size, bounds, scale))
+        .collect::<Result<_, _>>()?;
+    let [Some(source), Some(current), Some(candidate)] = values.as_slice() else {
+        return Ok(true);
+    };
+    Ok(!owned_ink(
+        source,
+        current,
+        candidate,
+        (bounds[2] - bounds[0]) as usize,
+        (bounds[3] - bounds[1]) as usize,
+    )
+    .is_empty())
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn dimensions_match_old_300_dpi() {
+        for n in 1..=100_000 {
+            let size = n as f32 / 37.;
+            let old = (size as f64 * (1200. / 72.)).ceil() as i32;
+            assert_eq!(
+                render_dimensions([size, size], [72. / 300.; 2]),
+                Some([old, old])
+            );
+        }
+    }
+
+    #[test]
+    fn crops_detect_missing_owned_component_at_multiple_dpis() {
+        let Some(path) = std::env::var_os("SCANWEAVE_PDFIUM_LIBRARY") else {
+            eprintln!("skipping PDFium test: SCANWEAVE_PDFIUM_LIBRARY is unset");
+            return;
+        };
+        let pdfium = Pdfium::new(Pdfium::bind_to_library(path).unwrap());
+        let bindings = pdfium.bindings();
+        for dpi in [200., 300., 600.] {
+            let sx = 72. / dpi;
+            let size = [(100. * sx) as f32, (100. * sx) as f32];
+            let make_page = |missing: bool| {
+                let mut pixels = vec![255; 20 * 20];
+                for y in 3..17 {
+                    for x in 3..7 {
+                        pixels[y * 20 + x] = 0;
+                    }
+                }
+                if !missing {
+                    for y in 8..13 {
+                        for x in 12..17 {
+                            pixels[y * 20 + x] = 0;
+                        }
+                    }
+                }
+                IsolatedPage {
+                    size,
+                    draw: Draw::Image {
+                        pixels,
+                        width: 20,
+                        height: 20,
+                        matrix: [
+                            20. * sx,
+                            0.,
+                            0.,
+                            20. * sx,
+                            30. * sx,
+                            size[1] as f64 - 50. * sx,
+                        ],
+                    },
+                }
+            };
+            let full = isolated(&[], &[make_page(false)]).unwrap();
+            let missing = isolated(&[], &[make_page(true)]).unwrap();
+            let open = |bytes: &[u8]| Document {
+                bindings,
+                handle: bindings.FPDF_LoadMemDocument64(bytes, None).cast(),
+            };
+            let docs = [open(&full), open(&full), open(&missing)];
+            assert!(docs.iter().all(|d| !d.handle.is_null()));
+            assert!(
+                assignment_exception(bindings, &docs, 0, size, [26, 26, 54, 54], [sx; 2]).unwrap(),
+                "dpi={dpi}"
+            );
+            let matching = [open(&full), open(&full), open(&full)];
+            assert!(
+                !assignment_exception(bindings, &matching, 0, size, [26, 26, 54, 54], [sx; 2])
+                    .unwrap(),
+                "dpi={dpi}"
+            );
+            assert!(
+                assignment_exception(bindings, &matching, 0, size, [-1, 26, 54, 54], [sx; 2])
+                    .unwrap()
+            );
+        }
+    }
 }
