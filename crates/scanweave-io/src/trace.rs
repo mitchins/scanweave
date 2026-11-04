@@ -267,11 +267,23 @@ pub(crate) fn trace_shape_clearscan(
     k: f64,
     preserved_source: Option<(&Unit, f64)>,
 ) -> Result<TracedShape, String> {
+    trace_shape_clearscan_with_options(unit, budget, k, preserved_source, None, 16_384)
+}
+
+/// Source-normalized canonical tracing; the default wrapper retains its exact settings.
+pub(crate) fn trace_shape_clearscan_with_options(
+    unit: &Unit,
+    budget: &Budget,
+    k: f64,
+    preserved_source: Option<(&Unit, f64)>,
+    coverage: Option<&[f64]>,
+    grayscale_cap: usize,
+) -> Result<TracedShape, String> {
     let baseline = trace_shape(unit, budget, k)?;
     let Some(gray) = unit
         .gray_samples
         .as_deref()
-        .filter(|g| g.len() == unit.mask.len() && !g.is_empty() && g.len() <= 16_384)
+        .filter(|g| g.len() == unit.mask.len() && !g.is_empty() && g.len() <= grayscale_cap)
     else {
         return Ok(baseline);
     };
@@ -282,10 +294,11 @@ pub(crate) fn trace_shape_clearscan(
     if paper - ink < 48.0 {
         return Ok(baseline);
     }
-    let target: Vec<f64> = gray
+    let normalized: Vec<f64> = gray
         .iter()
         .map(|&v| ((paper - v as f64) / (paper - ink)).clamp(0.0, 1.0))
         .collect();
+    let target = coverage.unwrap_or(&normalized);
     // A local glyph without qualified canonical replacement still has the
     // ordinary source-preservation contract. Fit must not make an already
     // accepted source outline fail that contract. Exact shape keys include
@@ -335,7 +348,7 @@ pub(crate) fn trace_shape_clearscan(
         Some(
             coverage
                 .iter()
-                .zip(&target)
+                .zip(target)
                 .map(|(c, t)| (c - t).powi(2))
                 .sum::<f64>()
                 / target.len() as f64,
@@ -347,7 +360,7 @@ pub(crate) fn trace_shape_clearscan(
     let mut best_score = score(&baseline).unwrap_or_else(|| {
         crate::convert::reconstructed_glyph_coverage(&old_shape, unit.crop_w, unit.crop_h)
             .iter()
-            .zip(&target)
+            .zip(target)
             .map(|(c, t)| (c - t).powi(2))
             .sum::<f64>()
             / target.len() as f64

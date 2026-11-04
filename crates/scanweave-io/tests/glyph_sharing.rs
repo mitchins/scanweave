@@ -1,0 +1,385 @@
+use scanweave_io::glyph_sharing::{hard_checks, warp};
+#[test]
+fn frozen_safety_regressions() {
+    let f: serde_json::Value =
+        serde_json::from_str(include_str!("fixtures/glyph-sharing-regressions.json")).unwrap();
+    for c in f["cases"].as_array().unwrap() {
+        let field = |name: &str| {
+            let mut a = vec![0.; 4096];
+            for pair in c[name].as_array().unwrap() {
+                a[pair[0].as_u64().unwrap() as usize] = pair[1].as_f64().unwrap();
+            }
+            a
+        };
+        let p: [f64; 3] = serde_json::from_value(c["parameters"].clone()).unwrap();
+        let got = hard_checks(&field("reference"), &warp(&field("candidate"), p));
+        let expected: Vec<String> =
+            serde_json::from_value(c["expected_hard_reasons"].clone()).unwrap();
+        for component in c["owned_components"].as_array().into_iter().flatten() {
+            assert_eq!(
+                scanweave_io::glyph_sharing::owned_component_fires(
+                    component["owned_area"].as_u64().unwrap() as usize,
+                    component["detached_in_ownership_halo"].as_bool().unwrap(),
+                    component["area"].as_u64().unwrap() as usize,
+                    component["mass"].as_f64().unwrap()
+                ),
+                component["fires"].as_bool().unwrap()
+            );
+        }
+        assert_eq!(got, expected, "{} member {}", c["source"], c["member"]);
+    }
+}
+
+#[test]
+fn source_frame_and_trace_parity() {
+    use scanweave_io::{glyph_sharing::source, units::Unit};
+    let cases: serde_json::Value =
+        serde_json::from_str(include_str!("fixtures/glyph-sharing-source.json")).unwrap();
+    for r in cases.as_array().unwrap() {
+        let s = &r["source"];
+        let unit = Unit {
+            shape_key: "source".into(),
+            span_id: "source".into(),
+            symbol_id: "source".into(),
+            semantic_text: r["character"].as_str().unwrap().into(),
+            bbox_px: serde_json::from_value(s["bbox"].clone()).unwrap(),
+            ocr_bbox_px: serde_json::from_value(s["ocr_bbox"].clone()).unwrap(),
+            crop_w: s["width"].as_u64().unwrap() as usize,
+            crop_h: s["height"].as_u64().unwrap() as usize,
+            mask: serde_json::from_value(s["mask"].clone()).unwrap(),
+            gray_samples: serde_json::from_value(s["gray"].clone()).unwrap(),
+            gray_halo: serde_json::from_value(s["halo"].clone()).unwrap(),
+        };
+        let line: Vec<(&str, [f64; 4])> = r["line_units"]
+            .as_array()
+            .unwrap()
+            .iter()
+            .map(|u| {
+                (
+                    u["text"].as_str().unwrap(),
+                    serde_json::from_value(u["bbox"].clone()).unwrap(),
+                )
+            })
+            .collect();
+        let (field, _) = source::frame(
+            &unit,
+            serde_json::from_value(r["paper"].clone()).unwrap(),
+            &line,
+        )
+        .unwrap();
+        let mut expected = vec![0.; 4096];
+        for pair in r["field"].as_array().unwrap() {
+            expected[pair[0].as_u64().unwrap() as usize] = pair[1].as_f64().unwrap();
+        }
+        let delta = field
+            .iter()
+            .zip(&expected)
+            .map(|(a, b)| (a - b).abs())
+            .fold(0., f64::max);
+        assert!(delta < 1e-12, "frame member {} delta {delta}", r["index"]);
+        let canonical = source::trace(
+            r["index"].as_u64().unwrap() as usize,
+            r["character"].as_str().unwrap(),
+            &field,
+        )
+        .unwrap();
+        assert_eq!(
+            canonical.shape.path.to_svg(),
+            r["outline"]["path"].as_str().unwrap(),
+            "trace member {}",
+            r["index"]
+        );
+    }
+}
+
+#[test]
+fn composite_metrics_and_quantization() {
+    use scanweave_io::{
+        fontbuild,
+        glyph_sharing::{
+            font::{build, Instance},
+            source,
+        },
+    };
+    use std::collections::{BTreeMap, BTreeSet};
+    use write_fonts::{
+        read::{
+            tables::glyf::{Anchor, Glyph},
+            FontRef, TableProvider,
+        },
+        types::GlyphId,
+    };
+    let mut field = vec![0.; 4096];
+    for y in 20..48 {
+        for x in 25..38 {
+            field[y * 64 + x] = 1.;
+        }
+    }
+    let canonical = source::trace(0, "a", &field).unwrap();
+    let shapes = vec![canonical.shape.clone(); 3];
+    let encodings = vec![(0, "a".into()), (1, "a".into()), (2, "a".into())];
+    let original = fontbuild::build_font(&shapes, &encodings, 2048).unwrap();
+    let canonicals = BTreeMap::from([(0, canonical.shape)]);
+    let instance = Instance {
+        canonical: 0,
+        original_gid: 1,
+        transform: [1., 0., 0., 1., 2.5, -3.5],
+    };
+    let shared = build(
+        &original,
+        &BTreeSet::new(),
+        &canonicals,
+        &[instance.clone(), instance],
+        &encodings,
+    )
+    .unwrap();
+    assert_eq!(shared.instance_gids[0], shared.instance_gids[1]);
+    assert_eq!(shared.retired, 3);
+    assert_eq!(shared.canonical_gids.len(), 1);
+    let base = FontRef::new(&original).unwrap();
+    let font = FontRef::new(&shared.bytes).unwrap();
+    let gid = GlyphId::new(shared.instance_gids[0] as u32);
+    assert_eq!(
+        base.hmtx().unwrap().advance(GlyphId::new(1)),
+        font.hmtx().unwrap().advance(gid)
+    );
+    let loca = font.loca(None).unwrap();
+    let glyf = font.glyf().unwrap();
+    let Glyph::Composite(stub) = loca.get_glyf(gid, &glyf).unwrap().unwrap() else {
+        panic!("expected composite")
+    };
+    let c = stub.components().next().unwrap();
+    assert_eq!(c.anchor, Anchor::Offset { x: 2, y: -4 });
+    assert!(c.flags.bits() & 4 != 0);
+    assert!(c.flags.bits() & 0x1000 != 0);
+}
+
+#[test]
+fn opt_in_document_fixture() {
+    use scanweave_io::{
+        convert::{Input, Policy, SpanInput, SymbolInput},
+        document,
+    };
+    let image = image::load_from_memory(include_bytes!("fixtures/glyph-sharing-page.png"))
+        .unwrap()
+        .to_rgb8();
+    let fixture: serde_json::Value =
+        serde_json::from_str(include_str!("fixtures/glyph-sharing-page.json")).unwrap();
+    let poly = |b: [f64; 4]| vec![[b[0], b[1]], [b[2], b[1]], [b[2], b[3]], [b[0], b[3]]];
+    let spans = fixture["symbols"]
+        .as_array()
+        .unwrap()
+        .iter()
+        .map(|s| {
+            let b: [f64; 4] = serde_json::from_value(s["bbox"].clone()).unwrap();
+            let id = s["id"].as_str().unwrap();
+            SpanInput {
+                id: id.into(),
+                text: "e".into(),
+                separator_after: " ".into(),
+                polygon: poly(b),
+                symbols: vec![SymbolInput {
+                    id: id.into(),
+                    range: (0, 1),
+                    polygon: poly(b),
+                }],
+            }
+        })
+        .collect();
+    let input = Input {
+        rgb: image.into_raw(),
+        width: 640,
+        height: 240,
+        page_id: "sharing-fixture".into(),
+        spans,
+        protected_regions: vec![],
+        raster_to_page_pt: [0.24, 0., 0., -0.24, 0., 57.6],
+        pixel_sha256: None,
+    };
+    let policy = Policy {
+        profile: "clearscan".into(),
+        glyph_dictionary: "visual".into(),
+        ..Policy::default()
+    };
+    let default =
+        document::convert_document("fixture", std::slice::from_ref(&input), &policy).unwrap();
+    let off = document::convert_document_with_sources_and_sharing(
+        "fixture",
+        std::slice::from_ref(&input),
+        &policy,
+        &[],
+        None,
+    )
+    .unwrap();
+    assert_eq!(off.pdf_bytes, default.pdf_bytes);
+    if std::env::var_os("SCANWEAVE_PDFIUM_LIBRARY").is_none() {
+        eprintln!("Native ownership/transport portion requires SCANWEAVE_PDFIUM_LIBRARY; Sonar CI sets and checks it.");
+        return;
+    }
+    let shared_result = document::convert_document_with_sources_and_sharing(
+        "fixture",
+        &[input],
+        &policy,
+        &[],
+        Some(document::GlyphSharing::CoverCeilingQ3),
+    );
+    if let Some(output) = std::env::var_os("SCANWEAVE_TEST_MISSING_PDFIUM_OUTPUT") {
+        match shared_result {
+            Ok(result) => {
+                std::fs::write(output, result.pdf_bytes).unwrap();
+                panic!("missing PDFium was accepted");
+            }
+            Err(error) => assert!(
+                error.contains("glyph sharing requires PDFium for its frozen owned-ink check"),
+                "{error}"
+            ),
+        }
+        return;
+    }
+    let shared = shared_result.unwrap();
+    let report = shared.report.glyph_sharing.as_ref().unwrap();
+    assert_eq!(report.method, "cover-2.0-ceiling-q3");
+    assert_eq!(report.multiplier, 2.0);
+    assert_eq!(report.absolute_error_ceiling, Some(0.08));
+    assert_eq!(report.min_witnesses, Some(3));
+    assert_eq!(
+        report.decisions.len(),
+        fixture["expected_visible_draws"].as_u64().unwrap() as usize
+    );
+    let identity = report.pdfium.as_ref().expect("loaded PDFium identity");
+    use sha2::{Digest, Sha256};
+    let library = std::fs::read(std::env::var_os("SCANWEAVE_PDFIUM_LIBRARY").unwrap()).unwrap();
+    assert_eq!(identity.sha256, format!("{:x}", Sha256::digest(library)));
+    assert!(std::path::Path::new(&identity.library_path).is_absolute());
+    for name in [
+        "source_snapshot",
+        "planning",
+        "planning_candidate_fits",
+        "planning_source_floors",
+        "owned_ink_preflight",
+        "sharing_total",
+    ] {
+        let seconds = report.stage_seconds[name];
+        assert!(seconds.is_finite() && seconds >= 0., "{name}");
+    }
+    assert_eq!(report.substituted, 7);
+    assert_eq!(report.net_outlines_retired, 1);
+    assert!(report.fallback.is_none());
+    assert!(
+        report.encoded_font_bytes_after <= report.encoded_font_bytes_before
+            || report.fallback.is_some()
+    );
+    if report.fallback.is_some() {
+        assert_eq!(shared.pdf_bytes, default.pdf_bytes);
+    }
+}
+
+#[test]
+fn hygiene_and_weight_are_independent_safety_stages() {
+    use scanweave_io::glyph_sharing::{hygiene, weight_band};
+    let mut thin = vec![0.; 4096];
+    let mut thick = vec![0.; 4096];
+    for y in 20..48 {
+        for x in 29..32 {
+            thin[y * 64 + x] = 1.;
+        }
+        for x in 27..35 {
+            thick[y * 64 + x] = 1.;
+        }
+    }
+    assert_ne!(weight_band(&thin), weight_band(&thick));
+    assert!(hygiene(&thin, &[thin.as_slice()]).is_empty());
+    let mut contaminated = thin.clone();
+    for y in 10..20 {
+        for x in 54..59 {
+            contaminated[y * 64 + x] = 1.;
+        }
+    }
+    let reasons = hygiene(&contaminated, &[thin.as_slice()]);
+    assert!(reasons
+        .iter()
+        .any(|r| r == "outside_independent_class_footprint"));
+    assert!(reasons.iter().any(|r| r == "unsupported_component"));
+    assert!(reasons.iter().any(|r| r == "class_unsupported_topology"));
+}
+
+#[test]
+fn canonical_scaling_quantizes_the_compiled_outline_first() {
+    use scanweave_io::{
+        fontbuild,
+        glyph_sharing::{
+            font::{build, Instance},
+            source,
+        },
+    };
+    use std::collections::{BTreeMap, BTreeSet};
+    use write_fonts::{
+        read::{tables::glyf::Glyph, FontRef, TableProvider},
+        tables::glyf::SimpleGlyph,
+        types::GlyphId,
+    };
+    let mut field = vec![0.; 4096];
+    for y in 20..48 {
+        for x in 25..38 {
+            field[y * 64 + x] = 1.;
+        }
+    }
+    let mut shape = source::trace(0, "a", &field).unwrap().shape;
+    shape.path = kurbo::Affine::translate((0.3, 0.3)) * shape.path;
+    let unscaled = SimpleGlyph::from_bezpath(&shape.path).unwrap();
+    let encodings = vec![(0, "a".into())];
+    let default = fontbuild::build_font(&[shape.clone()], &encodings, 2048).unwrap();
+    let make = |offset: f64| Instance {
+        canonical: 0,
+        original_gid: 1,
+        transform: [3., 0., 0., 3., offset, 0.],
+    };
+    let shared = build(
+        &default,
+        &BTreeSet::new(),
+        &BTreeMap::from([(0, shape.clone())]),
+        &[make(0.)],
+        &encodings,
+    )
+    .unwrap();
+    let font = FontRef::new(&shared.bytes).unwrap();
+    let loca = font.loca(None).unwrap();
+    let glyf = font.glyf().unwrap();
+    let Glyph::Simple(canonical) = loca
+        .get_glyf(GlyphId::new(shared.canonical_gids[&0] as u32), &glyf)
+        .unwrap()
+        .unwrap()
+    else {
+        panic!("canonical must be primitive")
+    };
+    assert_eq!(canonical.x_min(), unscaled.bbox.x_min * 2);
+    assert_eq!(canonical.y_min(), unscaled.bbox.y_min * 2);
+    assert!(build(
+        &default,
+        &BTreeSet::new(),
+        &BTreeMap::from([(0, shape)]),
+        &[make(32768.)],
+        &encodings
+    )
+    .is_err());
+}
+
+#[test]
+fn missing_pdfium_fails_without_output() {
+    let dir = std::env::temp_dir().join(format!("scanweave-missing-pdfium-{}", std::process::id()));
+    std::fs::create_dir_all(&dir).unwrap();
+    let output = dir.join("output.pdf");
+    let result = std::process::Command::new(std::env::current_exe().unwrap())
+        .args(["--exact", "opt_in_document_fixture", "--nocapture"])
+        .env("SCANWEAVE_PDFIUM_LIBRARY", dir.join("missing-pdfium.so"))
+        .env("SCANWEAVE_TEST_MISSING_PDFIUM_OUTPUT", &output)
+        .output()
+        .unwrap();
+    assert!(
+        result.status.success(),
+        "{}",
+        String::from_utf8_lossy(&result.stderr)
+    );
+    assert!(!output.exists());
+    std::fs::remove_dir_all(dir).unwrap();
+}

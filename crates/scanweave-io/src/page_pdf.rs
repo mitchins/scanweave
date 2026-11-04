@@ -539,6 +539,7 @@ fn emit_text_runs(
     xf: &PageTransform,
     ink: [u8; 3],
     raster_baseline: bool,
+    sharing_variants: Option<&[Option<usize>]>,
 ) {
     let span_map: std::collections::HashMap<&str, &str> = span_texts
         .iter()
@@ -633,6 +634,7 @@ fn emit_text_runs(
                             TextRenderingMode::Fill
                         });
                     }
+                    select_sharing_font(c, i, sharing_variants);
                     let g = &shapes[*gidx];
                     let x0 = xf.x(bbox_px[0]);
                     let bottom_pt = xf.y(bbox_px[3]);
@@ -709,6 +711,7 @@ fn emit_text_runs(
         let sid = occ.3.as_str();
         if !emitted_spans.contains(sid) {
             let (gidx, cid, bbox_px, _, _, _) = &occurrences[i];
+            select_sharing_font(c, i, sharing_variants);
             let g = &shapes[*gidx];
             let x0 = xf.x(bbox_px[0]);
             let bottom_pt = xf.y(bbox_px[3]);
@@ -998,6 +1001,7 @@ pub fn assemble_with_options(
         to_pt,
         ink,
         false,
+        None,
     );
 
     c.end_text();
@@ -1156,7 +1160,7 @@ pub fn assemble_document_with_options(
     font_bytes: &[u8],
     image_options: ImageEncodingOptions,
 ) -> Result<(Vec<u8>, AssemblyStats), String> {
-    assemble_document_impl(pages, shapes, encodings, font_bytes, image_options, false)
+    assemble_document_impl(pages, shapes, encodings, font_bytes, image_options, false, None)
 }
 
 // A complete cleaned residual is eligible even when fonts already replace ink.
@@ -1176,25 +1180,34 @@ pub(crate) fn assemble_document_with_tonal_fallback(
     pages: &[PageParts], shapes: &[GlyphShape], encodings: &[(usize, String)],
     font_bytes: &[u8], image_options: ImageEncodingOptions,
 ) -> Result<(Vec<u8>, AssemblyStats), String> {
+    assemble_document_with_tonal_choice(pages,shapes,encodings,font_bytes,image_options).map(|(pdf,stats,_)|(pdf,stats))
+}
+
+pub(crate) fn assemble_document_with_tonal_choice(
+    pages: &[PageParts], shapes: &[GlyphShape], encodings: &[(usize, String)],
+    font_bytes: &[u8], image_options: ImageEncodingOptions,
+) -> Result<(Vec<u8>, AssemblyStats, bool), String> {
     if !pages.iter().any(|p| whole_page_tonal_candidate(p)
         && crate::tonal_image::eligible(&p.patches[0].rgb,p.source_w as u32,p.source_h as u32,3)
         || (!p.raster_baseline && p.patches.len()>1 && p.patches.iter().any(|patch|
             !patch.compact_background && crate::tonal_image::native_candidate(&patch.rgb,patch.w,patch.h,3)))) {
-        return assemble_document_with_options(pages,shapes,encodings,font_bytes,image_options);
+        return assemble_document_with_options(pages,shapes,encodings,font_bytes,image_options).map(|(pdf,stats)|(pdf,stats,false));
     }
     let start = std::time::Instant::now();
-    let lossless = assemble_document_impl(pages, shapes, encodings, font_bytes, image_options, false)?;
-    let compact = assemble_document_impl(pages, shapes, encodings, font_bytes, image_options, true)?;
+    let lossless = assemble_document_impl(pages, shapes, encodings, font_bytes, image_options, false, None)?;
+    let compact = assemble_document_impl(pages, shapes, encodings, font_bytes, image_options, true, None)?;
     let encoding_ms = lossless.1.image_encoding_ms + compact.1.image_encoding_ms;
-    let mut selected = if compact.0.len() < lossless.0.len() {compact} else {lossless};
+    let compact_selected=compact.0.len() < lossless.0.len();
+    let mut selected = if compact_selected {compact} else {lossless};
     selected.1.image_encoding_ms = encoding_ms;
     selected.1.assembly_ms = start.elapsed().as_millis();
-    Ok(selected)
+    Ok((selected.0,selected.1,compact_selected))
 }
 
 fn assemble_document_impl(
     pages: &[PageParts], shapes: &[GlyphShape], encodings: &[(usize, String)],
     font_bytes: &[u8], image_options: ImageEncodingOptions, tonal_whole_pages: bool,
+    sharing: Option<&SharingResources>,
 ) -> Result<(Vec<u8>, AssemblyStats), String> {
     for page in pages {
         validate_occurrence_geometry(&page.occurrences)?;
@@ -1363,8 +1376,12 @@ fn assemble_document_impl(
     let kids: Vec<Ref> = page_refs.clone();
     pdf.pages(page_tree).kids(kids).count(pages.len() as i32);
 
+    // Sharing resources use one indirect W array, preserving every default width.
+    let sharing_widths=if sharing.is_some_and(|s|s.cid_maps.len()>1){let id=Ref::new(next_image);next_image+=1;Some(id)}else{None};
+    if let Some(id)=sharing_widths {let mut widths=pdf.indirect(id).start::<pdf_writer::writers::Widths>();for (cid_index,(elem,_))in encodings.iter().enumerate(){let w=if *elem<shapes.len(){(shapes[*elem].ink_span_fu[0].ceil().max(1.)+2.)*1000./2048.}else{500.};widths.consecutive(cid_index as u16+1,[w as f32]);}widths.finish();}
+
     // shared font program
-    let map_bytes = cid_to_gid_bytes(encodings);
+    let map_bytes = sharing.map_or_else(||cid_to_gid_bytes(encodings),|s|s.cid_maps[0].clone());
     let tu = to_unicode_stream(encodings);
     compressed_stream(&mut pdf, cid_map, &map_bytes, false)?;
     compressed_stream(&mut pdf, to_uni, tu.as_bytes(), false)?;
@@ -1391,6 +1408,7 @@ fn assemble_document_impl(
             .font_descriptor(desc)
             .default_width(1000.0)
             .cid_to_gid_map_stream(cid_map);
+        if let Some(id)=sharing_widths {cid.pair(Name(b"W"),id);}else {
         {
             let mut widths = cid.widths();
             for (cid_index, (elem, _)) in encodings.iter().enumerate() {
@@ -1402,7 +1420,8 @@ fn assemble_document_impl(
                 widths.consecutive(cid_index as u16 + 1, [w as f32]);
             }
             widths.finish();
-        }
+        }        }
+
     }
     let mut t0 = pdf.type0_font(font);
     t0.base_font(Name(b"ScanWeaveDoc"))
@@ -1410,6 +1429,20 @@ fn assemble_document_impl(
         .descendant_font(cidfont)
         .to_unicode(to_uni);
     t0.finish();
+
+    let mut sharing_fonts=Vec::new();
+    if let Some(shared)=sharing {
+        for (index,map) in shared.cid_maps.iter().enumerate().skip(1) {
+            let font_ref=Ref::new(next_image);let child=Ref::new(next_image+1);let descriptor=Ref::new(next_image+2);let map_ref=Ref::new(next_image+3);next_image+=4;
+            let name=format!("ScanWeaveDocV{index}");
+            compressed_stream(&mut pdf,map_ref,map,false)?;
+            pdf.font_descriptor(descriptor).name(Name(name.as_bytes())).flags(pdf_writer::types::FontFlags::SYMBOLIC).bbox(Rect::new(0.,-50.,4096.,4096.)).italic_angle(0.).ascent(3800.).descent(-500.).cap_height(3600.).stem_v(80.).font_file2(fontfile);
+            let mut cid=pdf.cid_font(child);cid.subtype(CidFontType::Type2).base_font(Name(name.as_bytes())).system_info(SystemInfo{registry:Str(b"Adobe"),ordering:Str(b"Identity"),supplement:0}).font_descriptor(descriptor).default_width(1000.).cid_to_gid_map_stream(map_ref);
+            if let Some(id)=sharing_widths {cid.pair(Name(b"W"),id);}cid.finish();
+            pdf.type0_font(font_ref).base_font(Name(name.as_bytes())).encoding_predefined(Name(b"Identity-H")).descendant_font(child).to_unicode(to_uni);
+            sharing_fonts.push((index,font_ref));
+        }
+    }
 
     // Image streams are document-global; page-local content names refer to a
     // shared XObject only when its complete decoded samples and parameters match.
@@ -1479,6 +1512,7 @@ fn assemble_document_impl(
             &p.to_pt,
             p.ink,
             p.raster_baseline,
+            sharing.map(|s| s.occurrence_variants[i].as_slice()),
         );
         c.end_text();
         let content_bytes = c.finish();
@@ -1489,7 +1523,7 @@ fn assemble_document_impl(
             .media_box(Rect::new(0.0, 0.0, p.page_w_pt, p.page_h_pt))
             .contents(content_refs[i]);
         let mut res = page.resources();
-        res.fonts().pair(Name(b"F1"), font);
+        {let mut fonts=res.fonts();fonts.pair(Name(b"F1"),font);for (index,font_ref) in &sharing_fonts{let name=format!("F04V{index}");fonts.pair(Name(name.as_bytes()),*font_ref);}fonts.finish();}
         {
             let mut xo = res.x_objects();
             for (j, r) in image_refs[i].iter().enumerate() {
@@ -1630,6 +1664,16 @@ mod image_resource_tests {
         let (lossless, _) = assemble_document_with_options(&[p.clone()], &[], &[], &[], options).unwrap();
         let (compact, _) = assemble_document_with_tonal_fallback(&[p.clone()], &[], &[], &[], options).unwrap();
         assert!(compact.len() < lossless.len());
+        let (chosen,_,tonal_choice)=assemble_document_with_tonal_choice(&[p.clone()],&[],&[],&[],options).unwrap();
+        assert!(tonal_choice);
+        assert_eq!(chosen,compact);
+        let resources=SharingResources{cid_maps:vec![vec![0,0]],occurrence_variants:vec![vec![]]};
+        let shared=assemble_document_with_sharing(&[p.clone()],&[],&[],&[],options,tonal_choice,&resources).unwrap().0;
+        assert_eq!(shared,compact,"sharing must retain the exact chosen raster representation");
+        let small=page(vec![patch([0.,0.,1.,1.],[220;3])]);
+        let (control,_,choice)=assemble_document_with_tonal_choice(&[small.clone()],&[],&[],&[],options).unwrap();
+        assert!(!choice);
+        assert_eq!(control,assemble_document_with_sharing(&[small],&[],&[],&[],options,choice,&resources).unwrap().0);
         let start = compact.windows(3).position(|w| w == [0xff, 0xd8, 0xff]).unwrap();
         let decoded = image::load_from_memory_with_format(&compact[start..], image::ImageFormat::Jpeg).unwrap().to_rgb8();
         assert_eq!(decoded.dimensions(), (200, 200));
@@ -1964,4 +2008,14 @@ mod coherent_residual_tests {
         let binary = Patch { rgb: vec![255; 512 * 512 * 3], ..whole };
         assert!(!coherent_residual_is_smaller(&binary, &[], &paper, [122.88, 122.88], ImageEncodingOptions::default(), true).unwrap());
     }
+}
+
+/// Metric-identical resource variants, sharing a single embedded font program.
+pub struct SharingResources {pub cid_maps:Vec<Vec<u8>>,pub occurrence_variants:Vec<Vec<Option<usize>>>}
+fn select_sharing_font(c:&mut Content,occurrence:usize,variants:Option<&[Option<usize>]>) {
+    if let Some(variants)=variants {if let Some(index)=variants[occurrence]{let name=format!("F04V{index}");c.set_font(Name(name.as_bytes()),1.);}else{c.set_font(Name(b"F1"),1.);}}
+}
+pub(crate) fn assemble_document_with_sharing(pages:&[PageParts],shapes:&[GlyphShape],encodings:&[(usize,String)],font_bytes:&[u8],image_options:ImageEncodingOptions,tonal:bool,sharing:&SharingResources)->Result<(Vec<u8>,AssemblyStats),String>{
+    if sharing.occurrence_variants.len()!=pages.len()||pages.iter().zip(&sharing.occurrence_variants).any(|(p,v)|p.occurrences.len()!=v.len())||sharing.cid_maps.is_empty()||sharing.cid_maps.iter().any(|m|m.len()!=2*(encodings.len()+1))||sharing.occurrence_variants.iter().flatten().flatten().any(|&v|v==0||v>=sharing.cid_maps.len()){return Err("invalid sharing resource dimensions".into());}
+    assemble_document_impl(pages,shapes,encodings,font_bytes,image_options,tonal,Some(sharing))
 }

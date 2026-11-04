@@ -72,6 +72,8 @@ pub struct DocumentReport {
     pub ownership_invariants: std::collections::BTreeMap<String, bool>,
     /// sha256 of every source asset and OCR page (binding, per page)
     pub bindings: Vec<PageBinding>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub glyph_sharing: Option<crate::glyph_sharing::transport::SharingReport>,
 }
 
 #[derive(Debug, Clone, Default, serde::Serialize)]
@@ -235,7 +237,10 @@ fn retain_required_font_entries(
             }
         }
         for cid in page.parts.owner_cids.iter().copied().chain(
-            page.parts.owners.iter().flat_map(|o| o.characters.iter().map(|ch| ch.cid)),
+            page.parts
+                .owners
+                .iter()
+                .flat_map(|o| o.characters.iter().map(|ch| ch.cid)),
         ) {
             if let Some(required) = required_cids.get_mut(cid.saturating_sub(1) as usize) {
                 *required = true;
@@ -279,16 +284,32 @@ fn retain_required_font_entries(
 }
 
 fn document_design_bounds(shapes: &[GlyphShape]) -> Option<[i16; 4]> {
-    shapes.iter().map(|s| [
-        s.bbox_fu[0].floor() as i16, s.bbox_fu[1].floor() as i16,
-        s.bbox_fu[2].ceil() as i16, s.bbox_fu[3].ceil() as i16,
-    ]).reduce(|a, b| [a[0].min(b[0]), a[1].min(b[1]), a[2].max(b[2]), a[3].max(b[3])])
+    shapes
+        .iter()
+        .map(|s| {
+            [
+                s.bbox_fu[0].floor() as i16,
+                s.bbox_fu[1].floor() as i16,
+                s.bbox_fu[2].ceil() as i16,
+                s.bbox_fu[3].ceil() as i16,
+            ]
+        })
+        .reduce(|a, b| {
+            [
+                a[0].min(b[0]),
+                a[1].min(b[1]),
+                a[2].max(b[2]),
+                a[3].max(b[3]),
+            ]
+        })
 }
 
 // The layout chooser and writer must share the document-wide encoding gate.
 fn allows_tonal_images(inputs: &[Input], policy: &Policy) -> bool {
     policy.profile == "clearscan"
-        && inputs.iter().all(|input| input.protected_regions.is_empty())
+        && inputs
+            .iter()
+            .all(|input| input.protected_regions.is_empty())
 }
 
 /// Convert a bundle of pages into ONE document PDF.
@@ -308,6 +329,29 @@ pub fn convert_document_with_sources(
     policy: &Policy,
     sources: &[Option<crate::source_image::EncodedSourceImage>],
 ) -> Result<DocumentOutput, String> {
+    convert_document_with_sources_and_sharing(document_id, inputs, policy, sources, None)
+}
+
+/// The supported opt-in glyph-sharing operating point.
+#[derive(Clone, Copy, Debug, PartialEq, Eq)]
+pub enum GlyphSharing {
+    CoverCeilingQ3,
+}
+
+/// Opt-in frozen native glyph sharing. None retains the default conversion path.
+pub fn convert_document_with_sources_and_sharing(
+    document_id: &str,
+    inputs: &[Input],
+    policy: &Policy,
+    sources: &[Option<crate::source_image::EncodedSourceImage>],
+    sharing: Option<GlyphSharing>,
+) -> Result<DocumentOutput, String> {
+    let sharing = sharing.map(|GlyphSharing::CoverCeilingQ3| 2.0);
+    let absolute_error_ceiling = Some(crate::glyph_sharing::ABSOLUTE_FIT_ERROR_CEILING);
+    let min_witnesses = crate::glyph_sharing::MIN_WITNESS_QUORUM;
+    if sharing.is_some() && policy.profile != "clearscan" {
+        return Err("glyph sharing requires ClearScan".into());
+    }
     let mut effective_policy = policy.clone();
     if policy.profile == "clearscan" && policy.image_encoding.predictor == 1 {
         effective_policy.image_encoding.predictor = 0;
@@ -408,8 +452,12 @@ pub fn convert_document_with_sources(
                 }
             }
         }
-        let (mut parts, report) =
-            crate::convert::convert_parts_with_document_donors(input, policy, &sibling_donors, tonal_document)?;
+        let (mut parts, report) = crate::convert::convert_parts_with_document_donors(
+            input,
+            policy,
+            &sibling_donors,
+            tonal_document,
+        )?;
         if policy.profile == "clearscan" && parts.occurrences.is_empty() {
             parts.encoded_source = sources
                 .get(page_index)
@@ -420,6 +468,11 @@ pub fn convert_document_with_sources(
         pages.push(DocumentPage { parts, report });
     }
     stage_timings.page_conversion_ms = stage_start.elapsed().as_millis();
+
+    let snapshot_start = std::time::Instant::now();
+    let observations = sharing.map(|_| crate::glyph_sharing::source::snapshot(&pages, &all_donors));
+
+    let snapshot_seconds = snapshot_start.elapsed().as_secs_f64();
 
     // 2. document-wide font: union of (shape, label), remapped per page
     let stage_start = std::time::Instant::now();
@@ -433,7 +486,7 @@ pub fn convert_document_with_sources(
     }
     stage_timings.document_font_union_ms = stage_start.elapsed().as_millis();
     let stage_start = std::time::Instant::now();
-    let font_bytes = if policy.profile == "clearscan" {
+    let mut font_bytes = if policy.profile == "clearscan" {
         build_font_with_bounds(&shapes, &encodings, policy.upem, design_bounds)?
     } else {
         build_font(&shapes, &encodings, policy.upem)?
@@ -447,14 +500,57 @@ pub fn convert_document_with_sources(
     // any page has caller protection; no new per-page ownership flags are needed.
     let assemble = if tonal_document {
         crate::page_pdf::assemble_document_with_tonal_fallback
-    } else {crate::page_pdf::assemble_document_with_options};
-    let (pdf_bytes, stats) = assemble(
-        &pages.iter().map(|p| p.parts.clone()).collect::<Vec<_>>(),
-        &shapes,
-        &encodings,
-        &font_bytes,
-        policy.image_encoding,
-    )?;
+    } else {
+        crate::page_pdf::assemble_document_with_options
+    };
+    let parts: Vec<_> = pages.iter().map(|p| p.parts.clone()).collect();
+    let (mut pdf_bytes, mut stats, raster_choice) = if sharing.is_some() && tonal_document {
+        crate::page_pdf::assemble_document_with_tonal_choice(
+            &parts,
+            &shapes,
+            &encodings,
+            &font_bytes,
+            policy.image_encoding,
+        )?
+    } else {
+        let (pdf, stats) = assemble(
+            &parts,
+            &shapes,
+            &encodings,
+            &font_bytes,
+            policy.image_encoding,
+        )?;
+        (pdf, stats, false)
+    };
+    let baseline_font = sharing.map(|_| font_bytes.clone());
+    let mut sharing_report = None;
+    if let (Some(multiplier), Some(rows)) = (sharing, observations.as_ref()) {
+        let (candidate, mut report) = crate::glyph_sharing::transport::share(
+            rows,
+            &parts,
+            &shapes,
+            &encodings,
+            &font_bytes,
+            policy.image_encoding,
+            crate::glyph_sharing::transport::OperatingPoint {
+                tonal: raster_choice,
+                multiplier,
+                absolute_error_ceiling,
+                min_witnesses,
+            },
+        )?;
+        report
+            .stage_seconds
+            .insert("source_snapshot".into(), snapshot_seconds);
+        if let Some(candidate) = candidate {
+            font_bytes = candidate.font;
+            pdf_bytes = candidate.pdf;
+            stats = candidate.stats;
+        }
+        sharing_report = Some(report);
+    }
+    drop(parts);
+    drop(observations);
     stage_timings.reconstruction_pdf_ms = stage_start.elapsed().as_millis();
 
     // 4. the whole-page searchable raster baseline candidate (auto mode ranks
@@ -479,7 +575,7 @@ pub fn convert_document_with_sources(
         &baseline_parts,
         &shapes,
         &encodings,
-        &font_bytes,
+        baseline_font.as_deref().unwrap_or(&font_bytes),
         policy.image_encoding,
     )?;
     stage_timings.raster_baseline_pdf_ms = stage_start.elapsed().as_millis();
@@ -623,7 +719,11 @@ pub fn convert_document_with_sources(
     stage_timings.remaining_pipeline_ms = stage_timings.total_ms.saturating_sub(measured);
     Ok(DocumentOutput {
         pdf_bytes: out_bytes.clone(),
-        font_bytes: font_bytes.clone(),
+        font_bytes: if selected == "raster_baseline" {
+            baseline_font.unwrap_or_else(|| font_bytes.clone())
+        } else {
+            font_bytes.clone()
+        },
         raster_baseline_pdf_bytes: baseline_pdf.clone(),
         report: DocumentReport {
             document_id: document_id.to_string(),
@@ -685,6 +785,7 @@ pub fn convert_document_with_sources(
             search,
             ownership_invariants,
             bindings: Vec::new(),
+            glyph_sharing: sharing_report,
         },
     })
 }
@@ -780,7 +881,8 @@ mod semantic_owner_union_tests {
         // pruning must remap visible occurrences and invisible character owners.
         let expected_encodings = encodings.clone();
         let expected_keys: Vec<_> = shapes.iter().map(|s| s.shape_key.clone()).collect();
-        let expected_occurrences: Vec<_> = pages.iter().map(|p| p.parts.occurrences.clone()).collect();
+        let expected_occurrences: Vec<_> =
+            pages.iter().map(|p| p.parts.occurrences.clone()).collect();
         let shift = Remap {
             shape_map: (1..=shapes.len()).collect(),
             cid_map: (2..=encodings.len() as u32 + 1).collect(),
@@ -797,7 +899,13 @@ mod semantic_owner_union_tests {
         encodings.insert(0, (0, "unused label".into()));
         retain_required_font_entries(&mut pages, &mut shapes, &mut encodings);
         assert_eq!(encodings, expected_encodings);
-        assert_eq!(shapes.iter().map(|s| s.shape_key.clone()).collect::<Vec<_>>(), expected_keys);
+        assert_eq!(
+            shapes
+                .iter()
+                .map(|s| s.shape_key.clone())
+                .collect::<Vec<_>>(),
+            expected_keys
+        );
         for (page, expected) in pages.iter().zip(&expected_occurrences) {
             assert_eq!(&page.parts.occurrences, expected);
             for owner in &page.parts.owners {
@@ -818,16 +926,28 @@ mod tonal_protection_tests {
     #[test]
     fn one_protected_page_disables_tonal_layout_and_assembly_document_wide() {
         let page = Input {
-            page_id: "unprotected".into(), width: 2, height: 2, rgb: vec![255; 12],
-            spans: vec![], protected_regions: vec![], pixel_sha256: None,
+            page_id: "unprotected".into(),
+            width: 2,
+            height: 2,
+            rgb: vec![255; 12],
+            spans: vec![],
+            protected_regions: vec![],
+            pixel_sha256: None,
             raster_to_page_pt: [0.24, 0.0, 0.0, -0.24, 0.0, 0.48],
         };
-        let clear = Policy { profile: "clearscan".into(), ..Policy::default() };
+        let clear = Policy {
+            profile: "clearscan".into(),
+            ..Policy::default()
+        };
         assert!(allows_tonal_images(&[page.clone(), page.clone()], &clear));
         let mut protected = page.clone();
-        protected.protected_regions.push(crate::convert::ProtectedInput {
-            id: "mark".into(), polygon: vec![[0.0, 0.0], [1.0, 0.0], [1.0, 1.0]], reason: "caller".into(),
-        });
+        protected
+            .protected_regions
+            .push(crate::convert::ProtectedInput {
+                id: "mark".into(),
+                polygon: vec![[0.0, 0.0], [1.0, 0.0], [1.0, 1.0]],
+                reason: "caller".into(),
+            });
         assert!(!allows_tonal_images(&[page.clone(), protected], &clear));
         assert!(!allows_tonal_images(&[page], &Policy::default()));
     }

@@ -26,3 +26,5 @@ mod serialization;
 mod tonal_image;
 
 pub mod source_image;
+
+pub mod glyph_sharing;

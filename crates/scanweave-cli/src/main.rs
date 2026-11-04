@@ -5,7 +5,7 @@ use std::process::ExitCode;
 
 fn usage() -> ! {
     eprintln!(
-        "scanweave input.pdf output.pdf [--dpi 300] [--lang eng] [--profile clearscan|faithful]\n\nscanweave build <input.png> --ocr <input.hocr> [--dpi N] [--mode reconstruct|auto] \
+        "scanweave input.pdf output.pdf [--dpi 300] [--lang eng] [--profile clearscan|faithful] [--glyph-sharing off|cover-2.0-ceiling-q3]\nGlyph sharing is native, source-only, opt-in; requires PDFium (SCANWEAVE_PDFIUM_LIBRARY). Default: off.\n\nscanweave build <input.png> --ocr <input.hocr> [--dpi N] [--mode reconstruct|auto] \
          [--min-ink-iou F] [--profile faithful|clearscan]
          [--glyph-dictionary off|visual]
          --output <out.pdf> --report <out.json>\n\
@@ -352,7 +352,10 @@ fn main() -> ExitCode {
         }
         Some(input) if !input.starts_with('-') => match pdf_input::convert_pdf(&args) {
             Ok(()) => ExitCode::SUCCESS,
-            Err(e) => { eprintln!("scanweave: {e}"); ExitCode::from(2) }
+            Err(e) => {
+                eprintln!("scanweave: {e}");
+                ExitCode::from(2)
+            }
         },
         _ => usage(),
     }
