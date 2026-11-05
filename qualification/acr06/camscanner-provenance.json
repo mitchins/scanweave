@@ -1,0 +1,49 @@
+{
+  "schema": "acr06-camscanner-provenance-v1",
+  "obtained_utc": "2026-11-05T21:48:41Z",
+  "source_page": "https://www.camscanner.com/download?platform=windows",
+  "link_resolution": {
+    "site_script": "static-cdn.camscanner.com/camscanner-seo-2/_nuxt/BWI4fWy_.js chooses https://cc.co/16YSSp for Windows x64 (cc.co/16YS3j, 16YS3k are 32-bit/legacy fallbacks)",
+    "redirect_target": "https://cs-dl.camscanner.com/download/CamScanner-1.90.0-online11051943-x64-Setup.exe",
+    "note": "cc.co is the shortener used by the official page; the final host is camscanner.com. The binary was fetched directly from cs-dl.camscanner.com."
+  },
+  "installer": {
+    "file": "CamScanner-1.90.0-online11051943-x64-Setup.exe",
+    "bytes": 229736184,
+    "sha256": "ddb5cc0acef4fefc76e26955682f4edd5984ccbe60e3da53c295ae69eca8c46a",
+    "pe": "PE32 GUI, Squirrel.Windows setup; FileDescription 'CamScanner Desktop App', FileVersion 1.90.0.0",
+    "authenticode_chain_parsed": [
+      "CN=上海临冠数据科技有限公司 (Shanghai Linguan Data Technology Co., Ltd.), C=CN, serial 91310106MA1FY9LT3N, valid 2025-04-28..2028-04-26",
+      "issuer CN=DigiCert Trusted G4 Code Signing RSA4096 SHA384 2021 CA1",
+      "root CN=DigiCert Trusted Root G4"
+    ],
+    "authenticode_digest_verified": false,
+    "authenticode_note": "Certificate chain parsed from the PE security directory on Linux. Cryptographic digest verification (Get-AuthenticodeSignature) is pending inside Windows."
+  },
+  "payload": {
+    "nupkg": "CamScanner-1.90.0-online11051943-full.nupkg",
+    "nupkg_bytes": 229066590,
+    "nupkg_sha1_from_RELEASES": "63094B8C4BC6EE3F22495ED25F5D1029C07602B0",
+    "app_exe_sha256": "7be9b19fb7396573c5ae89bffc40e0a1b92a06b26f0ce34f8d24f1563db03b73",
+    "runtime": "Electron (Chromium) desktop app",
+    "native_modules_observed": [
+      "@ccint/pageScan (pageScan.win32-x64-msvc.node, 18.7 MB; strings show OpenCV and MNN inference)",
+      "@ccint/pdfium (pdfium.dll + cs-pdfium.node)",
+      "@img/sharp-win32-x64 (libvips)",
+      "@ccint/adb-forward (adb.exe, phone link)",
+      "exiftool-vendored"
+    ],
+    "interpretation": "The bundled native image and inference modules suggest local page enhancement may be possible. That has not been established: capability must be confirmed experimentally with the network disabled."
+  },
+  "wine_attempt": {
+    "wine": "wine-9.0 (Ubuntu 9.0~repack-4build3)",
+    "prefix": "~/.wine-camscanner-acr06 (new, isolated; Xvfb :161)",
+    "installer_result": "Squirrel Setup.exe hung for 300 s and was killed; no SquirrelTemp extraction. The prefix has no wine-mono, which the .NET Update.exe requires.",
+    "direct_payload_result": "The nupkg lib/net45 tree was placed in the Squirrel layout and launched with CamScanner.exe --no-sandbox --disable-gpu. It aborted with 'Unimplemented function ole32.dll.CoCancelCall'; no window appeared.",
+    "verdict": "Wine 9.0 cannot run CamScanner Desktop 1.90.0 reliably. Fall back to the isolated Windows VM."
+  },
+  "vm_fallback": {
+    "plan": "Windows 11 evaluation VM from FONT-04, booted through a copy-on-write overlay (qualification/acr06/local/winvm/overlay.qcow2). The FONT-04 backing disk is made read-only and never written. Firmware variables and TPM state are copied separately, and the VM gets its own SMB share and VNC :18.",
+    "status": "BLOCKED: /dev/kvm is not accessible to this user session (its ACL has no user entry). Owner action is required to restore KVM access."
+  }
+}
