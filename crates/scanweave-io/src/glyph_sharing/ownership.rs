@@ -406,8 +406,11 @@ pub fn preflight(
     if docs.iter().any(|d| d.handle.is_null()) {
         return Err("PDFium preflight document load failed".into());
     }
+    // Research-only probe: unset preserves the frozen q3 decision and emits nothing.
+    let research = std::env::var("SCANWEAVE_RESEARCH_OWNERSHIP").unwrap_or_default();
+    let mut research_rows = Vec::new();
     let mut exceptions = BTreeSet::new();
-    for (k, &(i, _, _)) in assignments.iter().enumerate() {
+    for (k, &(i, j, _)) in assignments.iter().enumerate() {
         let size = source[k].size;
         let legacy = assignment_exception(
             bindings,
@@ -427,9 +430,27 @@ pub fn preflight(
             scales[k],
             CropVariant::Corrected,
         )?;
-        if combined_exception(legacy, corrected) {
+        let combined = combined_exception(legacy, corrected);
+        if research == "trace" {
+            research_rows.push(serde_json::json!({
+                "member": i, "canonical": j, "page": rows[i].page,
+                "legacy": legacy, "corrected": corrected, "combined_exception": combined,
+                "source_scale_pt": scales[k], "crop_bounds_px": bounds[k]
+            }));
+        }
+        if if research == "corrected-only" {
+            corrected.unwrap_or(true)
+        } else {
+            combined
+        } {
             exceptions.insert(i);
         }
+    }
+    if research == "trace" {
+        let path = std::env::var_os("SCANWEAVE_RESEARCH_OWNERSHIP_TRACE")
+            .ok_or("research trace requires SCANWEAVE_RESEARCH_OWNERSHIP_TRACE")?;
+        let data = serde_json::to_vec_pretty(&research_rows).map_err(|e| e.to_string())?;
+        std::fs::write(path, data).map_err(|e| format!("research trace write: {e}"))?;
     }
     Ok((exceptions, identity))
 }
