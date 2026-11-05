@@ -352,6 +352,9 @@ pub fn convert_document_with_sources_and_sharing(
     if sharing.is_some() && policy.profile != "clearscan" {
         return Err("glyph sharing requires ClearScan".into());
     }
+    if sharing.is_some() {
+        crate::glyph_sharing::ownership::check_pdfium()?;
+    }
     let mut effective_policy = policy.clone();
     if policy.profile == "clearscan" && policy.image_encoding.predictor == 1 {
         effective_policy.image_encoding.predictor = 0;

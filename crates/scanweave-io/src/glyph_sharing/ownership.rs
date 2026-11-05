@@ -269,13 +269,8 @@ fn loaded_identity() -> Result<PdfiumIdentity, String> {
     })
 }
 
-pub fn preflight(
-    rows: &[Observation],
-    pages: &[PageParts],
-    shapes: &[GlyphShape],
-    default_font: &[u8],
-    assignments: &[(usize, usize, [f64; 4])],
-) -> Result<(BTreeSet<usize>, PdfiumIdentity), String> {
+/// Bind the same PDFium library used by the ownership renderer.
+pub fn bind_pdfium() -> Result<Pdfium, String> {
     let library = std::env::var_os("SCANWEAVE_PDFIUM_LIBRARY");
     let bindings = if let Some(path) = library {
         Pdfium::bind_to_library(path)
@@ -283,7 +278,23 @@ pub fn preflight(
         Pdfium::bind_to_system_library()
     }
     .map_err(|e| format!("glyph sharing requires PDFium for its frozen owned-ink check: {e}"))?;
-    let pdfium = Pdfium::new(bindings);
+    Ok(Pdfium::new(bindings))
+}
+
+/// Check both the runtime bindings and the identity required by preflight.
+pub fn check_pdfium() -> Result<PdfiumIdentity, String> {
+    let _pdfium = bind_pdfium()?;
+    loaded_identity()
+}
+
+pub fn preflight(
+    rows: &[Observation],
+    pages: &[PageParts],
+    shapes: &[GlyphShape],
+    default_font: &[u8],
+    assignments: &[(usize, usize, [f64; 4])],
+) -> Result<(BTreeSet<usize>, PdfiumIdentity), String> {
+    let pdfium = bind_pdfium()?;
     let identity = loaded_identity()?;
     let bindings = pdfium.bindings();
     let mut trace_shapes = Vec::new();
@@ -502,6 +513,18 @@ mod tests {
         ] {
             assert_eq!(combined_exception(legacy, corrected), expected);
         }
+    }
+
+    #[test]
+    fn check_pdfium_succeeds_repeatedly() {
+        if std::env::var_os("SCANWEAVE_PDFIUM_LIBRARY").is_none() {
+            eprintln!("skipping PDFium test: SCANWEAVE_PDFIUM_LIBRARY is unset");
+            return;
+        }
+        let first = check_pdfium().unwrap();
+        let second = check_pdfium().unwrap();
+        assert_eq!(first.sha256, second.sha256);
+        assert_eq!(first.library_path, second.library_path);
     }
 
     #[test]
