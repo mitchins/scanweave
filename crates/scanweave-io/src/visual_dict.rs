@@ -690,6 +690,87 @@ pub fn reconstruct(
     out
 }
 
+/// Compare the donor at its proposed page position with the observed ink.
+/// Repairs may add a missing stroke, so their extent and overlap limits are
+/// less restrictive than those for replacing an already healthy observation.
+pub(crate) fn donor_geometry_compatible(
+    target: &crate::units::Unit,
+    donor: &crate::units::Unit,
+    placed: [f64; 4],
+    damaged: bool,
+    neighbors: &[&crate::units::Unit],
+) -> bool {
+    let ink = target.bbox_px;
+    let width = ink[2] - ink[0];
+    let height = ink[3] - ink[1];
+    if width <= 0.0
+        || height <= 0.0
+        || placed.iter().any(|v| !v.is_finite())
+        || placed[2] <= placed[0]
+        || placed[3] <= placed[1]
+        || donor.crop_w == 0
+        || donor.crop_h == 0
+        || donor.mask.len() != donor.crop_w * donor.crop_h
+        || target.mask.len() != target.crop_w * target.crop_h
+    {
+        return false;
+    }
+    let allowance = if damaged { 0.25 } else { 0.15 };
+    let x_margin = (width * allowance).max(2.0);
+    let y_margin = (height * allowance).max(2.0);
+    if (placed[0] - ink[0]).abs() > x_margin
+        || (placed[2] - ink[2]).abs() > x_margin
+        || (placed[1] - ink[1]).abs() > y_margin
+        || (placed[3] - ink[3]).abs() > y_margin
+    {
+        return false;
+    }
+    let donor_at = |x: f64, y: f64| {
+        if x < placed[0] || x >= placed[2] || y < placed[1] || y >= placed[3] {
+            return false;
+        }
+        let dx = ((x - placed[0]) * donor.crop_w as f64 / (placed[2] - placed[0])) as usize;
+        let dy = ((y - placed[1]) * donor.crop_h as f64 / (placed[3] - placed[1])) as usize;
+        donor.mask[dy * donor.crop_w + dx]
+    };
+    let ink_at = |u: &crate::units::Unit, x: f64, y: f64| {
+        if x < u.bbox_px[0] || y < u.bbox_px[1] || x >= u.bbox_px[2] || y >= u.bbox_px[3] {
+            return false;
+        }
+        let dx = (x - u.bbox_px[0]) as usize;
+        let dy = (y - u.bbox_px[1]) as usize;
+        dx < u.crop_w && dy < u.crop_h && u.mask.get(dy * u.crop_w + dx).copied().unwrap_or(false)
+    };
+    let nearby: Vec<_> = neighbors
+        .iter()
+        .copied()
+        .filter(|n| {
+            n.bbox_px[0] < placed[2]
+                && placed[0] < n.bbox_px[2]
+                && n.bbox_px[1] < placed[3]
+                && placed[1] < n.bbox_px[3]
+        })
+        .collect();
+    let x0 = ink[0].min(placed[0]).floor() as i64;
+    let y0 = ink[1].min(placed[1]).floor() as i64;
+    let x1 = ink[2].max(placed[2]).ceil() as i64;
+    let y1 = ink[3].max(placed[3]).ceil() as i64;
+    let (mut intersection, mut union) = (0usize, 0usize);
+    for y in y0..y1 {
+        for x in x0..x1 {
+            let (x, y) = (x as f64 + 0.5, y as f64 + 0.5);
+            let source = ink_at(target, x, y);
+            let replacement = donor_at(x, y);
+            if replacement && nearby.iter().any(|other| ink_at(other, x, y)) {
+                return false;
+            }
+            intersection += usize::from(source && replacement);
+            union += usize::from(source || replacement);
+        }
+    }
+    union > 0 && intersection as f64 / union as f64 >= if damaged { 0.65 } else { 0.70 }
+}
+
 /// Estimate expected ink extents from document-local OCR-box padding observed
 /// on intact donors. This keeps a missing outer stroke from shrinking the
 /// replacement's PDF placement box while preserving its original OCR location.
@@ -972,5 +1053,71 @@ mod component_tests {
             }
         }
         assert_eq!(count_components(&[], 0, 0, 1), 0);
+    }
+}
+
+#[cfg(test)]
+mod donor_geometry_tests {
+    use super::donor_geometry_compatible;
+    use crate::units::Unit;
+
+    fn unit(bbox: [f64; 4], mask: Vec<bool>) -> Unit {
+        Unit {
+            shape_key: String::new(),
+            span_id: String::new(),
+            symbol_id: String::new(),
+            semantic_text: "e".into(),
+            bbox_px: bbox,
+            ocr_bbox_px: bbox,
+            crop_w: (bbox[2] - bbox[0]) as usize,
+            crop_h: (bbox[3] - bbox[1]) as usize,
+            mask,
+            gray_samples: None,
+            gray_halo: None,
+        }
+    }
+
+    #[test]
+    fn rejects_merged_ocr_placement() {
+        let target = unit([10.0, 10.0, 20.0, 20.0], vec![true; 100]);
+        let donor = target.clone();
+        assert!(!donor_geometry_compatible(
+            &target,
+            &donor,
+            [10.0, 10.0, 30.0, 20.0],
+            true,
+            &[]
+        ));
+    }
+
+    #[test]
+    fn accepts_repair_of_a_missing_crossbar() {
+        let mut damaged = vec![true; 100];
+        for x in 2..8 {
+            damaged[5 * 10 + x] = false;
+        }
+        let target = unit([10.0, 10.0, 20.0, 20.0], damaged);
+        let donor = unit([30.0, 10.0, 40.0, 20.0], vec![true; 100]);
+        assert!(donor_geometry_compatible(
+            &target,
+            &donor,
+            target.bbox_px,
+            true,
+            &[]
+        ));
+    }
+
+    #[test]
+    fn rejects_replacement_ink_on_a_separately_owned_neighbor() {
+        let target = unit([10.0, 10.0, 20.0, 20.0], vec![true; 100]);
+        let donor = target.clone();
+        let neighbor = unit([20.0, 10.0, 21.0, 20.0], vec![true; 10]);
+        assert!(!donor_geometry_compatible(
+            &target,
+            &donor,
+            [11.0, 10.0, 21.0, 20.0],
+            true,
+            &[&neighbor]
+        ));
     }
 }
