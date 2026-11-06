@@ -1,0 +1,202 @@
+[
+  {
+    "dataset": "fresh",
+    "name": "200",
+    "truth_pixels": 74225,
+    "variants": {
+      "main": {
+        "shape": [
+          1208,
+          1208
+        ],
+        "iou": 0.9187636796093167,
+        "false_positive_pixels": 4816,
+        "false_negative_pixels": 1605
+      },
+      "candidate": {
+        "shape": [
+          1208,
+          1208
+        ],
+        "iou": 0.9198644170692839,
+        "false_positive_pixels": 4841,
+        "false_negative_pixels": 1495
+      }
+    }
+  },
+  {
+    "dataset": "fresh",
+    "name": "300",
+    "truth_pixels": 163455,
+    "variants": {
+      "main": {
+        "shape": [
+          1812,
+          1812
+        ],
+        "iou": 0.9164236611273114,
+        "false_positive_pixels": 7323,
+        "false_negative_pixels": 6950
+      },
+      "candidate": {
+        "shape": [
+          1812,
+          1812
+        ],
+        "iou": 0.9297542986000188,
+        "false_positive_pixels": 6833,
+        "false_negative_pixels": 5129
+      }
+    }
+  },
+  {
+    "dataset": "fresh",
+    "name": "600",
+    "truth_pixels": 654916,
+    "variants": {
+      "main": {
+        "shape": [
+          3625,
+          3625
+        ],
+        "iou": 0.9141056535448912,
+        "false_positive_pixels": 31043,
+        "false_negative_pixels": 27877
+      },
+      "candidate": {
+        "shape": [
+          3625,
+          3625
+        ],
+        "iou": 0.9139178443169629,
+        "false_positive_pixels": 31196,
+        "false_negative_pixels": 27866
+      }
+    }
+  },
+  {
+    "dataset": "fresh",
+    "name": "fractional",
+    "truth_pixels": 166096,
+    "variants": {
+      "main": {
+        "shape": [
+          1813,
+          1813
+        ],
+        "iou": 0.9253391976389662,
+        "false_positive_pixels": 8065,
+        "false_negative_pixels": 4938
+      },
+      "candidate": {
+        "shape": [
+          1813,
+          1813
+        ],
+        "iou": 0.926617093968017,
+        "false_positive_pixels": 8059,
+        "false_negative_pixels": 4721
+      }
+    }
+  },
+  {
+    "dataset": "fresh2",
+    "name": "200",
+    "truth_pixels": 74225,
+    "variants": {
+      "main": {
+        "shape": [
+          1208,
+          1208
+        ],
+        "iou": 0.92193515704154,
+        "false_positive_pixels": 4735,
+        "false_negative_pixels": 1429
+      },
+      "candidate": {
+        "shape": [
+          1208,
+          1208
+        ],
+        "iou": 0.9222278481012658,
+        "false_positive_pixels": 4775,
+        "false_negative_pixels": 1369
+      }
+    }
+  },
+  {
+    "dataset": "fresh2",
+    "name": "300",
+    "truth_pixels": 163455,
+    "variants": {
+      "main": {
+        "shape": [
+          1812,
+          1812
+        ],
+        "iou": 0.9168824625335411,
+        "false_positive_pixels": 7231,
+        "false_negative_pixels": 6956
+      },
+      "candidate": {
+        "shape": [
+          1812,
+          1812
+        ],
+        "iou": 0.9301738016616332,
+        "false_positive_pixels": 6739,
+        "false_negative_pixels": 5145
+      }
+    }
+  },
+  {
+    "dataset": "fresh2",
+    "name": "600",
+    "truth_pixels": 654916,
+    "variants": {
+      "main": {
+        "shape": [
+          3625,
+          3625
+        ],
+        "iou": 0.9134942850478189,
+        "false_positive_pixels": 31004,
+        "false_negative_pixels": 28332
+      },
+      "candidate": {
+        "shape": [
+          3625,
+          3625
+        ],
+        "iou": 0.9152313747449868,
+        "false_positive_pixels": 30833,
+        "false_negative_pixels": 27297
+      }
+    }
+  },
+  {
+    "dataset": "fresh2",
+    "name": "fractional",
+    "truth_pixels": 166096,
+    "variants": {
+      "main": {
+        "shape": [
+          1813,
+          1813
+        ],
+        "iou": 0.9248507805325987,
+        "false_positive_pixels": 8144,
+        "false_negative_pixels": 4950
+      },
+      "candidate": {
+        "shape": [
+          1813,
+          1813
+        ],
+        "iou": 0.9263278159573307,
+        "false_positive_pixels": 8081,
+        "false_negative_pixels": 4751
+      }
+    }
+  }
+]

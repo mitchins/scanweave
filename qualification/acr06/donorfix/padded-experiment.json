@@ -1,0 +1,22 @@
+{
+  "input": "historical-input.pdf",
+  "candidate": "historical-padded-experiment.pdf",
+  "sha256": "72ba22114c4db012c3b690e7619bc67fb51dcffec75e28a85003930d88244732",
+  "target": "p000002:w000105s0001",
+  "owner": "invisible",
+  "pdfium_difference_from_main": [
+    {
+      "operation": "delete",
+      "main": "it "
+    },
+    {
+      "operation": "insert",
+      "candidate": " it"
+    },
+    {
+      "operation": "insert",
+      "candidate": "‘Quoquo "
+    }
+  ],
+  "outcome": "Padding the 1x1 crop before the existing tracer did not prevent raster/semantic fallback or the duplicate."
+}

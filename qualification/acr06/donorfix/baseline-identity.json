@@ -1,0 +1,97 @@
+[
+  {
+    "group": "receipts",
+    "command": [
+      "/tmp/scanweave-donorfix/target/release/scanweave",
+      "/data/coding/scanweave/qualification/pdf_packaging/groups/receipts-input.pdf",
+      "/data/coding/scanweave/qualification/acr06/local/donorfix/baseline/receipts-off.pdf",
+      "--dpi",
+      "300",
+      "--profile",
+      "clearscan",
+      "--glyph-sharing",
+      "off"
+    ],
+    "returncode": 0,
+    "seconds": 29.813956398982555,
+    "sha256": "6b5d58175089652177e8942af97c630df6c423682af7146bd2cba2726b8e400b",
+    "reference_sha256": "6b5d58175089652177e8942af97c630df6c423682af7146bd2cba2726b8e400b",
+    "identical": true
+  },
+  {
+    "group": "forms",
+    "command": [
+      "/tmp/scanweave-donorfix/target/release/scanweave",
+      "/data/coding/scanweave/qualification/pdf_packaging/groups/forms-input.pdf",
+      "/data/coding/scanweave/qualification/acr06/local/donorfix/baseline/forms-off.pdf",
+      "--dpi",
+      "300",
+      "--profile",
+      "clearscan",
+      "--glyph-sharing",
+      "off"
+    ],
+    "returncode": 0,
+    "seconds": 43.62298621807713,
+    "sha256": "691d7fe020990cd54d095c417113ad9acfdd897d0ee29ac824a5b0469c472fc8",
+    "reference_sha256": "691d7fe020990cd54d095c417113ad9acfdd897d0ee29ac824a5b0469c472fc8",
+    "identical": true
+  },
+  {
+    "group": "historical",
+    "command": [
+      "/tmp/scanweave-donorfix/target/release/scanweave",
+      "/data/coding/scanweave/qualification/pdf_packaging/groups/historical-input.pdf",
+      "/data/coding/scanweave/qualification/acr06/local/donorfix/baseline/historical-off.pdf",
+      "--dpi",
+      "300",
+      "--profile",
+      "clearscan",
+      "--glyph-sharing",
+      "off"
+    ],
+    "returncode": 0,
+    "seconds": 68.46630925801583,
+    "sha256": "9263905f899815097b74fb8b6a802a75d0439756ac32d84b278f3b54a26f716e",
+    "reference_sha256": "9263905f899815097b74fb8b6a802a75d0439756ac32d84b278f3b54a26f716e",
+    "identical": true
+  },
+  {
+    "group": "mixed",
+    "command": [
+      "/tmp/scanweave-donorfix/target/release/scanweave",
+      "/data/coding/scanweave/qualification/pdf_packaging/groups/mixed-input.pdf",
+      "/data/coding/scanweave/qualification/acr06/local/donorfix/baseline/mixed-off.pdf",
+      "--dpi",
+      "300",
+      "--profile",
+      "clearscan",
+      "--glyph-sharing",
+      "off"
+    ],
+    "returncode": 0,
+    "seconds": 105.75359466695227,
+    "sha256": "c3f224bf18e5d2aeeba6e03de20000b84ff31893fc945e14882719b114d616d9",
+    "reference_sha256": "c3f224bf18e5d2aeeba6e03de20000b84ff31893fc945e14882719b114d616d9",
+    "identical": true
+  },
+  {
+    "group": "financial",
+    "command": [
+      "/tmp/scanweave-donorfix/target/release/scanweave",
+      "/data/coding/scanweave/qualification/pdf_packaging/groups/financial-input.pdf",
+      "/data/coding/scanweave/qualification/acr06/local/donorfix/baseline/financial-off.pdf",
+      "--dpi",
+      "300",
+      "--profile",
+      "clearscan",
+      "--glyph-sharing",
+      "off"
+    ],
+    "returncode": 0,
+    "seconds": 479.7129563529743,
+    "sha256": "74c31136d00a18dbf05fba2d7fba59c85cc201a57ae65d77999a025a692fab0f",
+    "reference_sha256": "74c31136d00a18dbf05fba2d7fba59c85cc201a57ae65d77999a025a692fab0f",
+    "identical": true
+  }
+]

@@ -1,0 +1,98 @@
+[
+  {
+    "name": "200",
+    "truth_pixels": 74225,
+    "variants": {
+      "main": {
+        "shape": [
+          1208,
+          1208
+        ],
+        "iou": 0.9187636796093167,
+        "false_positive_pixels": 4816,
+        "false_negative_pixels": 1605
+      },
+      "candidate": {
+        "shape": [
+          1208,
+          1208
+        ],
+        "iou": 0.9171306454272198,
+        "false_positive_pixels": 4622,
+        "false_negative_pixels": 1912
+      }
+    }
+  },
+  {
+    "name": "300",
+    "truth_pixels": 163455,
+    "variants": {
+      "main": {
+        "shape": [
+          1812,
+          1812
+        ],
+        "iou": 0.9164236611273114,
+        "false_positive_pixels": 7323,
+        "false_negative_pixels": 6950
+      },
+      "candidate": {
+        "shape": [
+          1812,
+          1812
+        ],
+        "iou": 0.9340192456143452,
+        "false_positive_pixels": 6246,
+        "false_negative_pixels": 4951
+      }
+    }
+  },
+  {
+    "name": "600",
+    "truth_pixels": 654916,
+    "variants": {
+      "main": {
+        "shape": [
+          3625,
+          3625
+        ],
+        "iou": 0.9141056535448912,
+        "false_positive_pixels": 31043,
+        "false_negative_pixels": 27877
+      },
+      "candidate": {
+        "shape": [
+          3625,
+          3625
+        ],
+        "iou": 0.9127264197127938,
+        "false_positive_pixels": 31420,
+        "false_negative_pixels": 28479
+      }
+    }
+  },
+  {
+    "name": "fractional",
+    "truth_pixels": 166096,
+    "variants": {
+      "main": {
+        "shape": [
+          1813,
+          1813
+        ],
+        "iou": 0.9253391976389662,
+        "false_positive_pixels": 8065,
+        "false_negative_pixels": 4938
+      },
+      "candidate": {
+        "shape": [
+          1813,
+          1813
+        ],
+        "iou": 0.9269402719196423,
+        "false_positive_pixels": 7926,
+        "false_negative_pixels": 4788
+      }
+    }
+  }
+]
