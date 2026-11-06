@@ -1061,6 +1061,7 @@ mod donor_geometry_tests {
     use super::donor_geometry_compatible;
     use crate::units::Unit;
 
+    /// Build a test unit whose crop matches `bbox`.
     fn unit(bbox: [f64; 4], mask: Vec<bool>) -> Unit {
         Unit {
             shape_key: String::new(),
@@ -1077,6 +1078,7 @@ mod donor_geometry_tests {
         }
     }
 
+    /// A donor stretched over a merged OCR box (twice the observed width) is rejected.
     #[test]
     fn rejects_merged_ocr_placement() {
         let target = unit([10.0, 10.0, 20.0, 20.0], vec![true; 100]);
@@ -1090,6 +1092,7 @@ mod donor_geometry_tests {
         ));
     }
 
+    /// Restoring a missing crossbar in place stays within the repair allowance.
     #[test]
     fn accepts_repair_of_a_missing_crossbar() {
         let mut damaged = vec![true; 100];
@@ -1107,6 +1110,7 @@ mod donor_geometry_tests {
         ));
     }
 
+    /// Donor ink that lands on a neighbour's owned ink is rejected.
     #[test]
     fn rejects_replacement_ink_on_a_separately_owned_neighbor() {
         let target = unit([10.0, 10.0, 20.0, 20.0], vec![true; 100]);
