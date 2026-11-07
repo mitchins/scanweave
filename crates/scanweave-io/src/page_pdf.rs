@@ -407,32 +407,121 @@ fn cid_advance(shapes: &[GlyphShape], encodings: &[(usize, String)], cid: u32) -
         .unwrap_or(0.5)
 }
 
+/// Text matrix that paints a visible glyph's ink exactly over its source box.
+fn glyph_matrix(g: &GlyphShape, bbox_px: &[f64; 4], xf: &PageTransform) -> [f32; 6] {
+    let x0 = xf.x(bbox_px[0]);
+    let bottom_pt = xf.y(bbox_px[3]);
+    let w_pt = ((bbox_px[2] - bbox_px[0]) * xf.sx()) as f32;
+    let h_pt = ((bbox_px[3] - bbox_px[1]) * xf.sy()) as f32;
+    let sx = w_pt * 2048.0 / g.ink_span_fu[0].max(1.0) as f32;
+    let sy = h_pt * 2048.0 / g.ink_span_fu[1].max(1.0) as f32;
+    let tx = x0 - (g.anchor_bbox_fu[0] as f32) * sx / 2048.0;
+    let ty = bottom_pt - (g.anchor_bbox_fu[1] as f32) * sy / 2048.0;
+    [sx, 0.0, 0.0, sy, tx, ty]
+}
+
+fn median(mut values: Vec<f32>) -> f32 {
+    values.sort_by(f32::total_cmp);
+    values[values.len() / 2]
+}
+
+/// Emit invisible OCR characters.
+///
+/// PDFium groups consecutive text objects into a line by origin y, sorts each
+/// line by origin x, and re-emits a span's /ActualText whenever that span's
+/// objects stop being consecutive. With one object per OCR character box, a
+/// raised quote, a box clamped at a page edge or a duplicate OCR span sharing
+/// the line could be sorted between a word's characters, and copied text
+/// repeated words (#31).
+///
+/// `whole_span` (an all-invisible span with /ActualText) is one TJ object on
+/// the span's median box bottom, so the sort cannot interleave it. TJ offsets
+/// keep each character's OCR x, and the last character ends at its box edge,
+/// so the word's extent is unchanged. The narrow horizontal scale matters:
+/// PDFium measures the following word gap in the previous object's text
+/// space, so any real gap yields the word space. With one object per
+/// character it measured from the word's first character and nearly always
+/// inserted one, and this keeps that behaviour. Characters in a span with
+/// visible glyphs, or without /ActualText, keep one object each at their OCR
+/// box (on `visible_baseline` when given).
 fn emit_owner_characters(
     c: &mut Content,
     characters: &[OwnerCharacter],
     shapes: &[GlyphShape],
     encodings: &[(usize, String)],
     xf: &PageTransform,
+    whole_span: bool,
+    visible_baseline: Option<f32>,
 ) {
+    let Some(first) = characters.first() else {
+        return;
+    };
     c.set_text_rendering_mode(TextRenderingMode::Invisible);
-    for ch in characters {
-        let b = ch.bbox_px;
-        let height = ((b[3] - b[1]) * xf.sy()).max(0.1) as f32;
-        let width = ((b[2] - b[0]) * xf.sx()).max(0.01) as f32;
-        let glyph = encodings
-            .get(ch.cid.saturating_sub(1) as usize)
-            .and_then(|e| shapes.get(e.0));
-        // An observed glyph need not be one em tall: the first glyph may be a
-        // tiny punctuation mark. Fit its real font frame rather than assuming
-        // font size equals source ink height (which made native boxes vanish).
-        let frame = glyph.map(|g| g.bbox_fu).unwrap_or([4.0, 4.0, 200.0, 200.0]);
-        let horizontal = width / cid_advance(shapes, encodings, ch.cid).max(0.0001);
-        let vertical = height * 2048.0 / (frame[3] - frame[1]).max(1.0) as f32;
-        let tx = xf.x(b[0]) - frame[0] as f32 * horizontal / 2048.0;
-        let ty = xf.y(b[3]) - frame[1] as f32 * vertical / 2048.0;
-        c.set_font(Name(b"F1"), 1.0);
-        c.set_text_matrix([horizontal, 0.0, 0.0, vertical, tx, ty]);
-        c.show(Str(&[(ch.cid >> 8) as u8, (ch.cid & 0xff) as u8]));
+    // An observed glyph need not be one em tall: the first glyph may be a
+    // tiny punctuation mark. Fit its real font frame rather than assuming
+    // font size equals source ink height (which made native boxes vanish).
+    let frame = |cid: u32| {
+        encodings
+            .get(cid.saturating_sub(1) as usize)
+            .and_then(|e| shapes.get(e.0))
+            .map(|g| g.bbox_fu)
+            .unwrap_or([4.0, 4.0, 200.0, 200.0])
+    };
+    let height =
+        |ch: &OwnerCharacter| ((ch.bbox_px[3] - ch.bbox_px[1]) * xf.sy()).max(0.1) as f32;
+    let width =
+        |ch: &OwnerCharacter| ((ch.bbox_px[2] - ch.bbox_px[0]) * xf.sx()).max(0.01) as f32;
+    if !whole_span {
+        for ch in characters {
+            let f = frame(ch.cid);
+            let horizontal = width(ch) / cid_advance(shapes, encodings, ch.cid).max(0.0001);
+            let vertical = height(ch) * 2048.0 / (f[3] - f[1]).max(1.0) as f32;
+            let tx = xf.x(ch.bbox_px[0]) - f[0] as f32 * horizontal / 2048.0;
+            let ty = visible_baseline.unwrap_or_else(|| xf.y(ch.bbox_px[3]))
+                - f[1] as f32 * vertical / 2048.0;
+            c.set_font(Name(b"F1"), 1.0);
+            c.set_text_matrix([horizontal, 0.0, 0.0, vertical, tx, ty]);
+            c.show(Str(&[(ch.cid >> 8) as u8, (ch.cid & 0xff) as u8]));
+        }
+        return;
+    }
+    let last = &characters[characters.len() - 1];
+    let f = frame(first.cid);
+    // a tenth of the median character width per glyph advance
+    let horizontal = 0.1 * median(characters.iter().map(width).collect())
+        / cid_advance(shapes, encodings, first.cid).max(0.0001);
+    // the last character's height: gap-based extractors (Poppler) size the
+    // following word break from the span's last font size, as before
+    let vertical = height(last) * 2048.0 / (f[3] - f[1]).max(1.0) as f32;
+    let baseline = median(characters.iter().map(|ch| xf.y(ch.bbox_px[3])).collect());
+    let origin_x = |ch: &OwnerCharacter| xf.x(ch.bbox_px[0]) - f[0] as f32 * horizontal / 2048.0;
+    let mut pen = origin_x(first);
+    c.set_font(Name(b"F1"), 1.0);
+    c.set_text_matrix([
+        horizontal,
+        0.0,
+        0.0,
+        vertical,
+        pen,
+        baseline - f[1] as f32 * vertical / 2048.0,
+    ]);
+    let mut tj = c.show_positioned();
+    let mut items = tj.items();
+    for (i, ch) in characters.iter().enumerate() {
+        let advance = cid_advance(shapes, encodings, ch.cid) * horizontal;
+        let target = if i + 1 == characters.len() {
+            // end exactly at the box's right edge
+            (xf.x(ch.bbox_px[2]) - advance).max(origin_x(ch))
+        } else {
+            origin_x(ch)
+        };
+        if i > 0 {
+            // TJ moves the pen left by n/1000 text-space units.
+            items.adjust((pen - target) * 1000.0 / horizontal);
+        }
+        pen = target;
+        items.show(Str(&[(ch.cid >> 8) as u8, (ch.cid & 0xff) as u8]));
+        pen += advance;
     }
 }
 
@@ -608,8 +697,22 @@ fn emit_text_runs(
                         });
                     }
                 }
+                // a word's invisible characters sit on its visible glyphs'
+                // baseline, so a raised mark cannot join the previous line
+                let visible_baseline = (!missing.is_empty()).then(|| {
+                    median(
+                        group
+                            .iter()
+                            .map(|&i| {
+                                let (gidx, _, bbox_px, _, _, _) = &occurrences[i];
+                                glyph_matrix(&shapes[*gidx], bbox_px, xf)[5]
+                            })
+                            .collect(),
+                    )
+                });
                 for &i in &ordered {
                     let (gidx, cid, bbox_px, _, _, _) = &occurrences[i];
+                    let run_start = missing_cursor;
                     while missing_cursor < missing.len()
                         && missing[missing_cursor].order
                             < partial_owner
@@ -617,15 +720,17 @@ fn emit_text_runs(
                                 .copied()
                                 .unwrap_or(usize::MAX)
                     {
-                        emit_owner_characters(
-                            c,
-                            &missing[missing_cursor..missing_cursor + 1],
-                            shapes,
-                            encodings,
-                            xf,
-                        );
                         missing_cursor += 1;
                     }
+                    emit_owner_characters(
+                        c,
+                        &missing[run_start..missing_cursor],
+                        shapes,
+                        encodings,
+                        xf,
+                        false,
+                        visible_baseline,
+                    );
                     if !missing.is_empty() {
                         c.set_font(Name(b"F1"), 1.0);
                         c.set_text_rendering_mode(if raster_baseline {
@@ -635,21 +740,20 @@ fn emit_text_runs(
                         });
                     }
                     select_sharing_font(c, i, sharing_variants);
-                    let g = &shapes[*gidx];
-                    let x0 = xf.x(bbox_px[0]);
-                    let bottom_pt = xf.y(bbox_px[3]);
-                    let w_pt = ((bbox_px[2] - bbox_px[0]) * xf.sx()) as f32;
-                    let h_pt = ((bbox_px[3] - bbox_px[1]) * xf.sy()) as f32;
-                    let sx = w_pt * 2048.0 / g.ink_span_fu[0].max(1.0) as f32;
-                    let sy = h_pt * 2048.0 / g.ink_span_fu[1].max(1.0) as f32;
-                    let tx = x0 - (g.anchor_bbox_fu[0] as f32) * sx / 2048.0;
-                    let ty = bottom_pt - (g.anchor_bbox_fu[1] as f32) * sy / 2048.0;
-                    c.set_text_matrix([sx, 0.0, 0.0, sy, tx, ty]);
+                    c.set_text_matrix(glyph_matrix(&shapes[*gidx], bbox_px, xf));
                     let cid = *cid + 1;
                     c.show(Str(&[(cid >> 8) as u8, (cid & 0xFF) as u8]));
                 }
                 if missing_cursor < missing.len() {
-                    emit_owner_characters(c, &missing[missing_cursor..], shapes, encodings, xf);
+                    emit_owner_characters(
+                        c,
+                        &missing[missing_cursor..],
+                        shapes,
+                        encodings,
+                        xf,
+                        false,
+                        visible_baseline,
+                    );
                     c.set_font(Name(b"F1"), 1.0);
                     c.set_text_rendering_mode(if raster_baseline {
                         TextRenderingMode::Invisible
@@ -669,7 +773,15 @@ fn emit_text_runs(
                     pl.actual_text(TextStr(owner_text));
                 }
                 if !owner.characters.is_empty() {
-                    emit_owner_characters(c, &owner.characters, shapes, encodings, xf);
+                    emit_owner_characters(
+                        c,
+                        &owner.characters,
+                        shapes,
+                        encodings,
+                        xf,
+                        !astral,
+                        None,
+                    );
                     c.set_text_rendering_mode(if raster_baseline {
                         TextRenderingMode::Invisible
                     } else {
@@ -712,16 +824,7 @@ fn emit_text_runs(
         if !emitted_spans.contains(sid) {
             let (gidx, cid, bbox_px, _, _, _) = &occurrences[i];
             select_sharing_font(c, i, sharing_variants);
-            let g = &shapes[*gidx];
-            let x0 = xf.x(bbox_px[0]);
-            let bottom_pt = xf.y(bbox_px[3]);
-            let w_pt = ((bbox_px[2] - bbox_px[0]) * xf.sx()) as f32;
-            let h_pt = ((bbox_px[3] - bbox_px[1]) * xf.sy()) as f32;
-            let sx = w_pt * 2048.0 / g.ink_span_fu[0].max(1.0) as f32;
-            let sy = h_pt * 2048.0 / g.ink_span_fu[1].max(1.0) as f32;
-            let tx = x0 - (g.anchor_bbox_fu[0] as f32) * sx / 2048.0;
-            let ty = bottom_pt - (g.anchor_bbox_fu[1] as f32) * sy / 2048.0;
-            c.set_text_matrix([sx, 0.0, 0.0, sy, tx, ty]);
+            c.set_text_matrix(glyph_matrix(&shapes[*gidx], bbox_px, xf));
             let cid = *cid + 1;
             c.show(Str(&[(cid >> 8) as u8, (cid & 0xFF) as u8]));
         }
@@ -731,7 +834,15 @@ fn emit_text_runs(
             continue;
         }
         if !owner.characters.is_empty() {
-            emit_owner_characters(c, &owner.characters, shapes, encodings, xf);
+            emit_owner_characters(
+                c,
+                &owner.characters,
+                shapes,
+                encodings,
+                xf,
+                false,
+                None,
+            );
             c.set_text_rendering_mode(if raster_baseline {
                 TextRenderingMode::Invisible
             } else {
@@ -1935,6 +2046,8 @@ mod owner_frame_tests {
                 e: 0.0,
                 f: 100.0,
             },
+            false,
+            None,
         );
         let stream = String::from_utf8(content.finish()).unwrap();
         assert!(
@@ -1945,6 +2058,72 @@ mod owner_frame_tests {
             stream.contains("3 Tr"),
             "semantic glyph must stay invisible: {stream}"
         );
+    }
+
+    fn owner_char(cid: u32, bbox_px: [f64; 4]) -> OwnerCharacter {
+        OwnerCharacter {
+            cid,
+            bbox_px,
+            order: 0,
+        }
+    }
+
+    const FLIP: PageTransform = PageTransform {
+        a: 1.0,
+        d: -1.0,
+        e: 0.0,
+        f: 100.0,
+    };
+
+    /// An all-invisible word is one text object: PDFium's line sort cannot
+    /// interleave another span between its characters (#31).
+    #[test]
+    fn whole_span_owner_is_one_positioned_text_object() {
+        let shapes = [crate::glyphs::semantic_owner_shape(2048.0)];
+        let encodings = [(0, "a".to_string()), (0, "b".into()), (0, "c".into())];
+        let mut content = Content::new();
+        content.begin_text();
+        emit_owner_characters(
+            &mut content,
+            &[
+                // a raised first mark and an uneven bottom share one baseline
+                owner_char(1, [10.0, 20.0, 14.0, 30.0]),
+                owner_char(2, [16.0, 22.0, 26.0, 40.0]),
+                owner_char(3, [28.0, 22.0, 38.0, 40.0]),
+            ],
+            &shapes,
+            &encodings,
+            &FLIP,
+            true,
+            None,
+        );
+        let stream = String::from_utf8(content.finish()).unwrap();
+        assert_eq!(stream.matches(" Tm").count(), 1, "{stream}");
+        assert_eq!(stream.matches("TJ").count(), 1, "{stream}");
+        assert!(!stream.contains("Tj"), "{stream}");
+        // median box bottom 40 px -> 60 pt; the frame bottom is 0
+        assert!(stream.contains(" 10 60 Tm"), "{stream}");
+    }
+
+    /// Invisible characters of a word with visible glyphs sit on the visible
+    /// glyphs' baseline, so a raised mark cannot join the previous line.
+    #[test]
+    fn partial_span_characters_use_the_visible_baseline() {
+        let shapes = [crate::glyphs::semantic_owner_shape(2048.0)];
+        let mut content = Content::new();
+        content.begin_text();
+        emit_owner_characters(
+            &mut content,
+            &[owner_char(1, [10.0, 20.0, 14.0, 30.0])],
+            &shapes,
+            &[(0, "‘".into())],
+            &FLIP,
+            false,
+            Some(55.0),
+        );
+        let stream = String::from_utf8(content.finish()).unwrap();
+        assert!(stream.contains(" 10 55 Tm"), "{stream}");
+        assert!(stream.contains("Tj"), "{stream}");
     }
 
     #[test]
