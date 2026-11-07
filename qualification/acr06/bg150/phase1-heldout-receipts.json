@@ -1,0 +1,778 @@
+{
+  "source": "/data/coding/scanweave/qualification/pdf_packaging/groups/receipts-input.pdf",
+  "default": "/data/coding/scanweave/qualification/acr06/local/bg150/baseline/receipts.pdf",
+  "candidate": "/data/coding/scanweave/qualification/acr06/local/bg150/unguarded/receipts.pdf",
+  "pages": [
+    {
+      "page": 1,
+      "complete_ocr": {
+        "source_words": 0,
+        "default_recalled": 0,
+        "candidate_recalled": 0,
+        "lost_source_words": [],
+        "gained_source_words": [],
+        "all_lost_words": [],
+        "all_gained_words": []
+      },
+      "visual": {
+        "small_components_2_to_20px": 1582,
+        "small_survival_default": 0.40581542351453853,
+        "small_survival_candidate": 0.20290771175726927,
+        "line_pixels": 79107,
+        "line_continuity_default": 0.9983566561745484,
+        "line_continuity_candidate": 0.9946907353331563,
+        "ssim_default": 0.995681249288645,
+        "ssim_candidate": 0.9929223738766608,
+        "whole_render_mean_abs_diff": 1.680195689201355,
+        "whole_render_max_abs_diff": 35.0,
+        "whole_render_changed_pixels": 830897,
+        "note": "Small components and lines are threshold proxies, not semantic classifications; SSIM is whole-page at quarter scale."
+      },
+      "background_ocr": {
+        "source_words": 0,
+        "default_recalled": 0,
+        "candidate_recalled": 0,
+        "lost_source_words": [],
+        "gained_source_words": [],
+        "all_lost_words": [],
+        "all_gained_words": []
+      },
+      "backgrounds": [
+        {
+          "width": 576,
+          "height": 864,
+          "bytes": 83699
+        },
+        {
+          "width": 432,
+          "height": 648,
+          "bytes": 52097
+        }
+      ]
+    },
+    {
+      "page": 2,
+      "complete_ocr": {
+        "source_words": 7,
+        "default_recalled": 0,
+        "candidate_recalled": 0,
+        "lost_source_words": [],
+        "gained_source_words": [],
+        "all_lost_words": [],
+        "all_gained_words": [
+          "HE",
+          "TE",
+          "ie",
+          "is"
+        ]
+      },
+      "visual": {
+        "small_components_2_to_20px": 836,
+        "small_survival_default": 0.9019138755980861,
+        "small_survival_candidate": 0.7344497607655502,
+        "line_pixels": 12980,
+        "line_continuity_default": 0.9991525423728813,
+        "line_continuity_candidate": 0.9964560862865948,
+        "ssim_default": 0.9952503759674144,
+        "ssim_candidate": 0.9925421695569502,
+        "whole_render_mean_abs_diff": 1.2909337282180786,
+        "whole_render_max_abs_diff": 32.0,
+        "whole_render_changed_pixels": 774246,
+        "note": "Small components and lines are threshold proxies, not semantic classifications; SSIM is whole-page at quarter scale."
+      },
+      "background_ocr": {
+        "source_words": 7,
+        "default_recalled": 0,
+        "candidate_recalled": 0,
+        "lost_source_words": [],
+        "gained_source_words": [],
+        "all_lost_words": [],
+        "all_gained_words": [
+          "LYCHE",
+          "Le",
+          "ROWNIES",
+          "TE",
+          "ies"
+        ]
+      },
+      "backgrounds": [
+        {
+          "width": 576,
+          "height": 864,
+          "bytes": 66397
+        },
+        {
+          "width": 432,
+          "height": 648,
+          "bytes": 41615
+        }
+      ]
+    },
+    {
+      "page": 3,
+      "complete_ocr": {
+        "source_words": 42,
+        "default_recalled": 41,
+        "candidate_recalled": 41,
+        "lost_source_words": [],
+        "gained_source_words": [],
+        "all_lost_words": [],
+        "all_gained_words": []
+      },
+      "visual": {
+        "small_components_2_to_20px": 26,
+        "small_survival_default": 1.0,
+        "small_survival_candidate": 1.0,
+        "line_pixels": 17188,
+        "line_continuity_default": 0.9767861298580405,
+        "line_continuity_candidate": 0.9767861298580405,
+        "ssim_default": 0.995487992399835,
+        "ssim_candidate": 0.995487992399835,
+        "whole_render_mean_abs_diff": 0.0,
+        "whole_render_max_abs_diff": 0.0,
+        "whole_render_changed_pixels": 0,
+        "note": "Small components and lines are threshold proxies, not semantic classifications; SSIM is whole-page at quarter scale."
+      }
+    },
+    {
+      "page": 4,
+      "complete_ocr": {
+        "source_words": 19,
+        "default_recalled": 13,
+        "candidate_recalled": 9,
+        "lost_source_words": [
+          "Ades",
+          "Service",
+          "Sub",
+          "Total"
+        ],
+        "gained_source_words": [],
+        "all_lost_words": [
+          "Ades",
+          "Ae",
+          "Ciniskei",
+          "Service",
+          "Sub",
+          "Total",
+          "Wietberee"
+        ],
+        "all_gained_words": [
+          "TOTAL",
+          "Wietbeoes"
+        ]
+      },
+      "visual": {
+        "small_components_2_to_20px": 1615,
+        "small_survival_default": 0.6829721362229102,
+        "small_survival_candidate": 0.4340557275541796,
+        "line_pixels": 49539,
+        "line_continuity_default": 0.9920466703001676,
+        "line_continuity_candidate": 0.9856274854155312,
+        "ssim_default": 0.9922621882874872,
+        "ssim_candidate": 0.988439550577678,
+        "whole_render_mean_abs_diff": 1.83955717086792,
+        "whole_render_max_abs_diff": 56.0,
+        "whole_render_changed_pixels": 1181769,
+        "note": "Small components and lines are threshold proxies, not semantic classifications; SSIM is whole-page at quarter scale."
+      },
+      "background_ocr": {
+        "source_words": 19,
+        "default_recalled": 14,
+        "candidate_recalled": 13,
+        "lost_source_words": [
+          "52",
+          "Chicken"
+        ],
+        "gained_source_words": [
+          "19"
+        ],
+        "all_lost_words": [
+          "49",
+          "52",
+          "Chicken"
+        ],
+        "all_gained_words": [
+          "19",
+          "92",
+          "Ghicken"
+        ]
+      },
+      "backgrounds": [
+        {
+          "width": 739,
+          "height": 985,
+          "bytes": 122528
+        },
+        {
+          "width": 554,
+          "height": 739,
+          "bytes": 75159
+        }
+      ]
+    },
+    {
+      "page": 5,
+      "complete_ocr": {
+        "source_words": 21,
+        "default_recalled": 8,
+        "candidate_recalled": 7,
+        "lost_source_words": [
+          "43",
+          "ONAN",
+          "VE"
+        ],
+        "gained_source_words": [
+          "636",
+          "OND"
+        ],
+        "all_lost_words": [
+          "43",
+          "63",
+          "634",
+          "83",
+          "ASO",
+          "Cc",
+          "ON",
+          "ONAN",
+          "Onn",
+          "Tal",
+          "VE",
+          "bad",
+          "bee"
+        ],
+        "all_gained_words": [
+          "636",
+          "93",
+          "DONNA",
+          "FASO",
+          "NO",
+          "OD",
+          "OND",
+          "ONNA",
+          "VEY",
+          "fi",
+          "va"
+        ]
+      },
+      "visual": {
+        "small_components_2_to_20px": 393,
+        "small_survival_default": 0.7684478371501272,
+        "small_survival_candidate": 0.6183206106870229,
+        "line_pixels": 22403,
+        "line_continuity_default": 0.9992411730571799,
+        "line_continuity_candidate": 0.9977681560505289,
+        "ssim_default": 0.9957527971179339,
+        "ssim_candidate": 0.9935430248876399,
+        "whole_render_mean_abs_diff": 0.8940516114234924,
+        "whole_render_max_abs_diff": 33.0,
+        "whole_render_changed_pixels": 636366,
+        "note": "Small components and lines are threshold proxies, not semantic classifications; SSIM is whole-page at quarter scale."
+      },
+      "background_ocr": {
+        "source_words": 21,
+        "default_recalled": 8,
+        "candidate_recalled": 6,
+        "lost_source_words": [
+          "OND",
+          "VE",
+          "VQ"
+        ],
+        "gained_source_words": [
+          "43"
+        ],
+        "all_lost_words": [
+          "434",
+          "DONNA",
+          "OND",
+          "ONE",
+          "ONNA",
+          "VE",
+          "VQ",
+          "oes",
+          "om"
+        ],
+        "all_gained_words": [
+          "00",
+          "43",
+          "43",
+          "63",
+          "GRAND",
+          "La",
+          "SI",
+          "SONNY",
+          "TOTAL",
+          "Za",
+          "ow",
+          "va",
+          "wad"
+        ]
+      },
+      "backgrounds": [
+        {
+          "width": 576,
+          "height": 864,
+          "bytes": 48912
+        },
+        {
+          "width": 432,
+          "height": 648,
+          "bytes": 31405
+        }
+      ]
+    },
+    {
+      "page": 6,
+      "complete_ocr": {
+        "source_words": 50,
+        "default_recalled": 1,
+        "candidate_recalled": 0,
+        "lost_source_words": [
+          "Bae"
+        ],
+        "gained_source_words": [],
+        "all_lost_words": [
+          "017K",
+          "Bae",
+          "GORD",
+          "KOE",
+          "ORte",
+          "aie",
+          "alinadhandiiedieenl",
+          "ebte",
+          "end",
+          "ied",
+          "ieee",
+          "lem",
+          "pent",
+          "wore"
+        ],
+        "all_gained_words": [
+          "Ane",
+          "ESE",
+          "GAOT",
+          "Hens",
+          "Het",
+          "NINE",
+          "OFN8",
+          "OOS",
+          "SETS",
+          "SHEE",
+          "SURE",
+          "Saatiiedent",
+          "See",
+          "See",
+          "Sete",
+          "Stee",
+          "THRE",
+          "TOTh",
+          "TY",
+          "UneH",
+          "aii",
+          "ate",
+          "ceed",
+          "ee",
+          "ee",
+          "ee",
+          "eee",
+          "he",
+          "meee",
+          "omm",
+          "tee",
+          "tee",
+          "tory",
+          "wmOd"
+        ]
+      },
+      "visual": {
+        "small_components_2_to_20px": 932,
+        "small_survival_default": 0.648068669527897,
+        "small_survival_candidate": 0.4592274678111588,
+        "line_pixels": 114085,
+        "line_continuity_default": 0.9996581496252794,
+        "line_continuity_candidate": 0.9986063023184468,
+        "ssim_default": 0.9939824357752346,
+        "ssim_candidate": 0.9902656650580904,
+        "whole_render_mean_abs_diff": 1.1183903217315674,
+        "whole_render_max_abs_diff": 39.0,
+        "whole_render_changed_pixels": 6216895,
+        "note": "Small components and lines are threshold proxies, not semantic classifications; SSIM is whole-page at quarter scale."
+      },
+      "background_ocr": {
+        "source_words": 50,
+        "default_recalled": 3,
+        "candidate_recalled": 1,
+        "lost_source_words": [
+          "mee",
+          "ne",
+          "teed"
+        ],
+        "gained_source_words": [
+          "Sere"
+        ],
+        "all_lost_words": [
+          "17R",
+          "AT",
+          "Aine",
+          "BORD",
+          "ERE",
+          "GET",
+          "Geet",
+          "HE",
+          "HOHE",
+          "Hed",
+          "KE",
+          "Lede",
+          "ONDE",
+          "ORE",
+          "ORES",
+          "OnE",
+          "QuEh",
+          "Rene",
+          "SOND",
+          "Salinadhaendiiedeanl",
+          "Sind",
+          "Sint",
+          "TROD",
+          "YE",
+          "aeF",
+          "aed",
+          "aie",
+          "ee",
+          "ete",
+          "eters",
+          "he",
+          "howe",
+          "ieee",
+          "ime",
+          "mee",
+          "mime",
+          "mtwe",
+          "ne",
+          "oPe",
+          "omen",
+          "one",
+          "onee",
+          "teed",
+          "wane",
+          "went",
+          "whbe"
+        ],
+        "all_gained_words": [
+          "9T",
+          "Gret",
+          "Guns",
+          "HOND",
+          "Nhe",
+          "ODEF",
+          "OE",
+          "OF88",
+          "ONE",
+          "Oab",
+          "PSE",
+          "Pies",
+          "Rete",
+          "SED",
+          "Sach",
+          "Sere",
+          "Sere",
+          "Solicited",
+          "Suet",
+          "TOTe",
+          "WAS",
+          "WE",
+          "esee",
+          "eter",
+          "ied",
+          "ment",
+          "nite",
+          "sree",
+          "tee",
+          "wEbP",
+          "wiles"
+        ]
+      },
+      "backgrounds": [
+        {
+          "width": 1536,
+          "height": 2729,
+          "bytes": 485445
+        },
+        {
+          "width": 1152,
+          "height": 2047,
+          "bytes": 291296
+        }
+      ]
+    },
+    {
+      "page": 7,
+      "complete_ocr": {
+        "source_words": 4,
+        "default_recalled": 0,
+        "candidate_recalled": 0,
+        "lost_source_words": [],
+        "gained_source_words": [],
+        "all_lost_words": [
+          "FUN",
+          "Ga",
+          "be"
+        ],
+        "all_gained_words": [
+          "HUNG",
+          "JA"
+        ]
+      },
+      "visual": {
+        "small_components_2_to_20px": 680,
+        "small_survival_default": 0.6426470588235295,
+        "small_survival_candidate": 0.4102941176470588,
+        "line_pixels": 32732,
+        "line_continuity_default": 0.9992362214346816,
+        "line_continuity_candidate": 0.9969754368813394,
+        "ssim_default": 0.9948957797894894,
+        "ssim_candidate": 0.992487562283526,
+        "whole_render_mean_abs_diff": 1.162208914756775,
+        "whole_render_max_abs_diff": 55.0,
+        "whole_render_changed_pixels": 745881,
+        "note": "Small components and lines are threshold proxies, not semantic classifications; SSIM is whole-page at quarter scale."
+      },
+      "background_ocr": {
+        "source_words": 4,
+        "default_recalled": 0,
+        "candidate_recalled": 0,
+        "lost_source_words": [],
+        "gained_source_words": [],
+        "all_lost_words": [
+          "Cc",
+          "Dy",
+          "FUNG",
+          "SHA",
+          "th"
+        ],
+        "all_gained_words": [
+          "Func",
+          "GHA",
+          "LAS"
+        ]
+      },
+      "backgrounds": [
+        {
+          "width": 576,
+          "height": 864,
+          "bytes": 60807
+        },
+        {
+          "width": 432,
+          "height": 648,
+          "bytes": 37677
+        }
+      ]
+    },
+    {
+      "page": 8,
+      "complete_ocr": {
+        "source_words": 8,
+        "default_recalled": 8,
+        "candidate_recalled": 7,
+        "lost_source_words": [
+          "00xITEMS"
+        ],
+        "gained_source_words": [],
+        "all_lost_words": [
+          "00xITEMS"
+        ],
+        "all_gained_words": [
+          "000",
+          "000",
+          "000",
+          "13",
+          "300",
+          "300",
+          "33",
+          "33",
+          "36",
+          "50",
+          "700",
+          "O0xITEMS"
+        ]
+      },
+      "visual": {
+        "small_components_2_to_20px": 39,
+        "small_survival_default": 0.8205128205128205,
+        "small_survival_candidate": 0.6923076923076923,
+        "line_pixels": 55424,
+        "line_continuity_default": 0.9996752309468823,
+        "line_continuity_candidate": 0.9982859411085451,
+        "ssim_default": 0.9935681491980182,
+        "ssim_candidate": 0.9908695120096819,
+        "whole_render_mean_abs_diff": 1.3164572715759277,
+        "whole_render_max_abs_diff": 60.0,
+        "whole_render_changed_pixels": 713572,
+        "note": "Small components and lines are threshold proxies, not semantic classifications; SSIM is whole-page at quarter scale."
+      },
+      "background_ocr": {
+        "source_words": 8,
+        "default_recalled": 8,
+        "candidate_recalled": 7,
+        "lost_source_words": [
+          "00xITEMS"
+        ],
+        "gained_source_words": [],
+        "all_lost_words": [
+          "00xITEMS",
+          "eer"
+        ],
+        "all_gained_words": [
+          "O0xITEMS"
+        ]
+      },
+      "backgrounds": [
+        {
+          "width": 576,
+          "height": 864,
+          "bytes": 58362
+        },
+        {
+          "width": 432,
+          "height": 648,
+          "bytes": 36015
+        }
+      ]
+    },
+    {
+      "page": 9,
+      "complete_ocr": {
+        "source_words": 19,
+        "default_recalled": 15,
+        "candidate_recalled": 13,
+        "lost_source_words": [
+          "1x",
+          "1x",
+          "RPO"
+        ],
+        "gained_source_words": [
+          "000"
+        ],
+        "all_lost_words": [
+          "10TAL",
+          "1x",
+          "1x",
+          "O00",
+          "Pe",
+          "RPO",
+          "fe",
+          "pie"
+        ],
+        "all_gained_words": [
+          "000",
+          "01AL",
+          "Ix",
+          "Ix",
+          "Re0",
+          "annie",
+          "wy"
+        ]
+      },
+      "visual": {
+        "small_components_2_to_20px": 70,
+        "small_survival_default": 0.6714285714285714,
+        "small_survival_candidate": 0.5571428571428572,
+        "line_pixels": 25996,
+        "line_continuity_default": 1.0,
+        "line_continuity_candidate": 0.9997307278042776,
+        "ssim_default": 0.9951846680215886,
+        "ssim_candidate": 0.9929342743050128,
+        "whole_render_mean_abs_diff": 1.0820612907409668,
+        "whole_render_max_abs_diff": 21.0,
+        "whole_render_changed_pixels": 761882,
+        "note": "Small components and lines are threshold proxies, not semantic classifications; SSIM is whole-page at quarter scale."
+      },
+      "background_ocr": {
+        "source_words": 19,
+        "default_recalled": 15,
+        "candidate_recalled": 15,
+        "lost_source_words": [],
+        "gained_source_words": [],
+        "all_lost_words": [
+          "101AL",
+          "Rp0",
+          "aa",
+          "ew",
+          "wv"
+        ],
+        "all_gained_words": [
+          "01AL",
+          "RpO",
+          "cE"
+        ]
+      },
+      "backgrounds": [
+        {
+          "width": 576,
+          "height": 864,
+          "bytes": 59408
+        },
+        {
+          "width": 432,
+          "height": 648,
+          "bytes": 36537
+        }
+      ]
+    },
+    {
+      "page": 10,
+      "complete_ocr": {
+        "source_words": 20,
+        "default_recalled": 17,
+        "candidate_recalled": 19,
+        "lost_source_words": [],
+        "gained_source_words": [
+          "40",
+          "GRANDTOTAL"
+        ],
+        "all_lost_words": [
+          "gRTOT"
+        ],
+        "all_gained_words": [
+          "40",
+          "GRANDTOTAL"
+        ]
+      },
+      "visual": {
+        "small_components_2_to_20px": 444,
+        "small_survival_default": 0.3355855855855856,
+        "small_survival_candidate": 0.1554054054054054,
+        "line_pixels": 35341,
+        "line_continuity_default": 0.9922186695339691,
+        "line_continuity_candidate": 0.9879177159672902,
+        "ssim_default": 0.9928155890037252,
+        "ssim_candidate": 0.9889443312934653,
+        "whole_render_mean_abs_diff": 1.6763451099395752,
+        "whole_render_max_abs_diff": 61.0,
+        "whole_render_changed_pixels": 809047,
+        "note": "Small components and lines are threshold proxies, not semantic classifications; SSIM is whole-page at quarter scale."
+      },
+      "background_ocr": {
+        "source_words": 20,
+        "default_recalled": 13,
+        "candidate_recalled": 13,
+        "lost_source_words": [],
+        "gained_source_words": [],
+        "all_lost_words": [],
+        "all_gained_words": []
+      },
+      "backgrounds": [
+        {
+          "width": 576,
+          "height": 864,
+          "bytes": 71595
+        },
+        {
+          "width": 432,
+          "height": 648,
+          "bytes": 39867
+        }
+      ]
+    }
+  ]
+}

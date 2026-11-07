@@ -1,0 +1,45 @@
+{
+  "default": "/data/coding/scanweave/qualification/acr06/local/bg150/baseline/fresh1.pdf",
+  "candidate": "/data/coding/scanweave/qualification/acr06/local/bg150/candidate/fresh1.pdf",
+  "default_bytes": 475919,
+  "candidate_bytes": 475919,
+  "pages": [
+    {
+      "page": 1,
+      "font_streams_equal": true,
+      "content_streams_equal": true,
+      "images_default": {
+        "//Resources//XObject//Im0": {
+          "sha256": "cc252ffeb11b280be7c183f515988652397d3befe7d9ddebe44d3f585411aa88",
+          "width": 1700,
+          "height": 2200,
+          "bytes": 438107,
+          "filter": "/DCTDecode"
+        }
+      },
+      "images_candidate": {
+        "//Resources//XObject//Im0": {
+          "sha256": "cc252ffeb11b280be7c183f515988652397d3befe7d9ddebe44d3f585411aa88",
+          "width": 1700,
+          "height": 2200,
+          "bytes": 438107,
+          "filter": "/DCTDecode"
+        }
+      },
+      "changed_image_paths": [],
+      "pdfium_text_equal": true,
+      "poppler_text_equal": true,
+      "pdfium_render_diff": {
+        "changed_pixels": 0,
+        "mean_max_channel_abs": 0.0,
+        "max_abs": 0
+      },
+      "poppler_render_diff": {
+        "changed_pixels": 0,
+        "mean_max_channel_abs": 0.0,
+        "max_abs": 0
+      },
+      "note": "Render differences are whole-page; if only a background stream changed and content is equal they arise through that background, including its compositing edges."
+    }
+  ]
+}

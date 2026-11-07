@@ -1,0 +1,86 @@
+{
+  "default": "/data/coding/scanweave/qualification/acr06/local/bg150/baseline/forms.pdf",
+  "candidate": "/data/coding/scanweave/qualification/acr06/local/bg150/unguarded/forms.pdf",
+  "default_bytes": 831974,
+  "candidate_bytes": 708630,
+  "pages": [
+    {
+      "page": 1,
+      "font_streams_equal": true,
+      "content_streams_equal": true,
+      "images_default": {
+        "//Resources//XObject//Im0": {
+          "sha256": "12c7e58b7a88bf6c4daba172974b7d2e6d085162c007404f5c4529312aba5ec3",
+          "width": 2544,
+          "height": 3301,
+          "bytes": 386679,
+          "filter": "/FlateDecode"
+        }
+      },
+      "images_candidate": {
+        "//Resources//XObject//Im0": {
+          "sha256": "a82243e06913813de6e056b60ac326cf5998accf448379050904dfbdf054e2ed",
+          "width": 1272,
+          "height": 1650,
+          "bytes": 304246,
+          "filter": "/DCTDecode"
+        }
+      },
+      "changed_image_paths": [
+        "//Resources//XObject//Im0"
+      ],
+      "pdfium_text_equal": true,
+      "poppler_text_equal": true,
+      "pdfium_render_diff": {
+        "changed_pixels": 2431518,
+        "mean_max_channel_abs": 5.063460734216237,
+        "max_abs": 186
+      },
+      "poppler_render_diff": {
+        "changed_pixels": 2427172,
+        "mean_max_channel_abs": 5.583448279969506,
+        "max_abs": 196
+      },
+      "note": "Render differences are whole-page; if only a background stream changed and content is equal they arise through that background, including its compositing edges."
+    },
+    {
+      "page": 2,
+      "font_streams_equal": true,
+      "content_streams_equal": true,
+      "images_default": {
+        "//Resources//XObject//Im0": {
+          "sha256": "8215f386435fed23381511b250bdf600779dbc1407b88e6f0348a8c76dd2a6cb",
+          "width": 2544,
+          "height": 3301,
+          "bytes": 351145,
+          "filter": "/FlateDecode"
+        }
+      },
+      "images_candidate": {
+        "//Resources//XObject//Im0": {
+          "sha256": "fddf4e73b411e64ef815be1b53388d777edaf6dd1df2a092ce39a90e52c9344c",
+          "width": 1272,
+          "height": 1650,
+          "bytes": 310238,
+          "filter": "/DCTDecode"
+        }
+      },
+      "changed_image_paths": [
+        "//Resources//XObject//Im0"
+      ],
+      "pdfium_text_equal": true,
+      "poppler_text_equal": true,
+      "pdfium_render_diff": {
+        "changed_pixels": 2570789,
+        "mean_max_channel_abs": 5.840624100949017,
+        "max_abs": 182
+      },
+      "poppler_render_diff": {
+        "changed_pixels": 2568589,
+        "mean_max_channel_abs": 6.224997975033352,
+        "max_abs": 220
+      },
+      "note": "Render differences are whole-page; if only a background stream changed and content is equal they arise through that background, including its compositing edges."
+    }
+  ]
+}

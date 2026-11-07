@@ -1,0 +1,54 @@
+{
+  "source": "/data/coding/scanweave/qualification/acr06/local/bg150/fresh/page-2.pdf",
+  "default": "/data/coding/scanweave/qualification/acr06/local/bg150/baseline/fresh2.pdf",
+  "candidate": "/data/coding/scanweave/qualification/acr06/local/bg150/candidate/fresh2.pdf",
+  "pages": [
+    {
+      "page": 1,
+      "complete_ocr": {
+        "source_words": 259,
+        "default_recalled": 259,
+        "candidate_recalled": 259,
+        "lost_source_words": [],
+        "gained_source_words": [],
+        "all_lost_words": [],
+        "all_gained_words": []
+      },
+      "visual": {
+        "small_components_2_to_20px": 2671,
+        "small_survival_default": 1.0,
+        "small_survival_candidate": 1.0,
+        "line_pixels": 137163,
+        "line_continuity_default": 0.9763930506040258,
+        "line_continuity_candidate": 0.9763930506040258,
+        "ssim_default": 0.9881924586633183,
+        "ssim_candidate": 0.9881924586633183,
+        "whole_render_mean_abs_diff": 0.0,
+        "whole_render_max_abs_diff": 0.0,
+        "whole_render_changed_pixels": 0,
+        "note": "Small components and lines are threshold proxies, not semantic classifications; SSIM is whole-page at quarter scale."
+      },
+      "background_ocr": {
+        "source_words": 259,
+        "default_recalled": 118,
+        "candidate_recalled": 118,
+        "lost_source_words": [],
+        "gained_source_words": [],
+        "all_lost_words": [],
+        "all_gained_words": []
+      },
+      "backgrounds": [
+        {
+          "width": 1699,
+          "height": 2199,
+          "bytes": 459203
+        },
+        {
+          "width": 1699,
+          "height": 2199,
+          "bytes": 459203
+        }
+      ]
+    }
+  ]
+}

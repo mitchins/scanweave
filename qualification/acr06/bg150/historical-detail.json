@@ -1,0 +1,44 @@
+{
+  "source": {
+    "dark_pixels": 560919,
+    "median_component_height_300px": 27.0,
+    "component_count_for_height": 1016,
+    "median_skeleton_stroke_width_300px": 5.656854249492381,
+    "mean_dark_contrast": 94.68318939208984,
+    "ocr_lowercase_xheight_proxy_300px": {
+      "median": 32.0,
+      "samples": 789,
+      "p25": 28.0,
+      "p75": 44.0
+    }
+  },
+  "default_background": {
+    "dark_pixels": 568783,
+    "median_component_height_300px": 27.0,
+    "component_count_for_height": 1026,
+    "median_skeleton_stroke_width_300px": 6.0,
+    "mean_dark_contrast": 92.32211303710938,
+    "ocr_lowercase_xheight_proxy_300px": {
+      "median": 31.0,
+      "samples": 797,
+      "p25": 28.0,
+      "p75": 41.0
+    },
+    "near_source_ink_mean_abs_error_vs_source": 7.035878658294678
+  },
+  "150_background": {
+    "dark_pixels": 570644,
+    "median_component_height_300px": 27.0,
+    "component_count_for_height": 1049,
+    "median_skeleton_stroke_width_300px": 6.0,
+    "mean_dark_contrast": 90.2286148071289,
+    "ocr_lowercase_xheight_proxy_300px": {
+      "median": 31.0,
+      "samples": 799,
+      "p25": 28.0,
+      "p75": 42.5
+    },
+    "near_source_ink_mean_abs_error_vs_source": 10.116786003112793
+  },
+  "caveat": "The x-height proxy uses Tesseract boxes labeled as lower-case x-height letters; blackletter misrecognition can bias it. Components and skeletons are whole-page proxies; near-ink error includes resampling and registration, not JPEG ringing alone."
+}

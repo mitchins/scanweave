@@ -1,0 +1,78 @@
+--- a/crates/scanweave-io/src/tonal_image.rs
++++ b/crates/scanweave-io/src/tonal_image.rs
+@@ -114,6 +114,20 @@
+     page_width_pt: f32,
+     page_height_pt: f32,
+ ) -> Result<Option<CompactImage>, String> {
++    encode_residual_at(samples, width, height, colors, page_width_pt, page_height_pt, 200.0)
++}
++
++pub(crate) fn encode_residual_150(
++    samples: &[u8], width: u32, height: u32, colors: u8,
++    page_width_pt: f32, page_height_pt: f32,
++) -> Result<Option<CompactImage>, String> {
++    encode_residual_at(samples, width, height, colors, page_width_pt, page_height_pt, 150.0)
++}
++
++fn encode_residual_at(
++    samples: &[u8], width: u32, height: u32, colors: u8,
++    page_width_pt: f32, page_height_pt: f32, dpi: f64,
++) -> Result<Option<CompactImage>, String> {
+     let Some(bytes) = encode_compact(samples, width, height, colors)? else {
+         return Ok(None);
+     };
+@@ -129,14 +143,15 @@
+     {
+         return Ok(Some(native));
+     }
+-    let scale = (200.0 * f64::from(page_width_pt) / (72.0 * f64::from(width)))
+-        .min(200.0 * f64::from(page_height_pt) / (72.0 * f64::from(height)))
++    let scale = (dpi * f64::from(page_width_pt) / (72.0 * f64::from(width)))
++        .min(dpi * f64::from(page_height_pt) / (72.0 * f64::from(height)))
+         .min(1.0);
+     let w = (f64::from(width) * scale).round().max(1.0) as u32;
+     let h = (f64::from(height) * scale).round().max(1.0) as u32;
+     if w == width && h == height {
+         return Ok(Some(native));
+     }
++    let original_samples = samples;
+     let samples = resized_samples(samples, width, height, colors, w, h)?;
+     match optimized_jpeg(
+         &samples,
+@@ -147,6 +162,25 @@
+         jpeg_encoder::SamplingFactor::R_4_2_0,
+     ) {
+         Ok(bytes) if (bytes.len() as f64) < native.bytes.len() as f64 * 0.95 => {
++            if dpi == 150.0 {
++                if let Ok(decoded) = image::load_from_memory(&bytes) {
++                    let raw = if colors == 1 { decoded.to_luma8().into_raw() } else { decoded.to_rgb8().into_raw() };
++                    if let Ok(roundtrip) = resized_samples(&raw, w, h, colors, width, height) {
++                        let mut edge = 0u64; let mut edge_error = 0u64; let mut lost = 0u64; let mut total = 0u64;
++                        let ch = colors as usize;
++                        for y in 2..height as usize-2 { for x in 2..width as usize-2 {
++                            let i=(y*width as usize+x)*ch;
++                            let lum=|a: &[u8], k:usize| -> i32 { if ch==1 {a[k] as i32} else {(a[k] as i32*54+a[k+1] as i32*183+a[k+2] as i32*19)/256} };
++                            let orig=lum(original_samples,i); let new=lum(&roundtrip,i);
++                            let neighbor=lum(original_samples,i+2*ch);
++                            let gradient=orig.abs_diff(neighbor) as u64;
++                            if gradient>=20 { edge+=1; edge_error+=orig.abs_diff(new) as u64; if orig.abs_diff(new)>=20 {lost+=1;} }
++                            total+=1;
++                        }}
++                        eprintln!("BG150_METRIC width={width} height={height} reduced={w}x{h} edge={edge} edge_error={edge_error} lost={lost} total={total}");
++                    }
++                }
++            }
+             Ok(Some(CompactImage {
+                 bytes,
+                 width: w,
+--- a/crates/scanweave-io/src/page_pdf.rs
++++ b/crates/scanweave-io/src/page_pdf.rs
+@@ -1381,7 +1381,7 @@
+                     let tonal = if tonal_whole_pages && whole_page_tonal_candidate(p) {
+                         // This is optional representation work. Encoder failure
+                         // retains the already-built lossless resource.
+-                        crate::tonal_image::encode_residual(&key.samples,key.width,key.height,key.color_space,p.page_w_pt,p.page_h_pt)
++                        crate::tonal_image::encode_residual_150(&key.samples,key.width,key.height,key.color_space,p.page_w_pt,p.page_h_pt)
+                             .and_then(|compact| match compact {
+                                 Some(bytes) => Ok(Some(bytes)),
+                                 None => crate::tonal_image::encode(&key.samples,key.width,key.height,key.color_space).map(|bytes|bytes.map(|bytes|crate::tonal_image::CompactImage {bytes,width:key.width,height:key.height})),
