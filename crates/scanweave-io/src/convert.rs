@@ -1015,6 +1015,7 @@ pub(crate) fn convert_parts_with_document_donors(
     }
     // Restoration has a separate gate: the selected observed prototype must
     // survive the actual tracing step with high overlap to its refined donor.
+    let mut local_geometry_fallback = Vec::new();
     for occurrence in reconstruction
         .occurrences
         .iter_mut()
@@ -1063,15 +1064,52 @@ pub(crate) fn convert_parts_with_document_donors(
                     || u.mask.iter().filter(|&&b| b).count() < 6
                     || (u.crop_h as f64) < (u.ocr_bbox_px[3] - u.ocr_bbox_px[1]) * 0.3
             });
+        // Check physical placement before a donor is emitted (issue #29). The
+        // original tracing and fidelity gates stay intact; a donor whose page
+        // geometry the observed ink cannot support is rejected, and the glyph
+        // keeps its own source shape (or the raster fallback) below.
+        let geometry_failed = policy.profile == "clearscan"
+            && traced_iou.is_some_and(|iou| iou >= 0.90)
+            && !source_gate_failed
+            && !invalid_geometry
+            && !insufficient_donor
+            && match (
+                donor,
+                occurrence.replacement_bbox_px,
+                plan.owned
+                    .iter()
+                    .find(|o| o.unit.symbol_id == occurrence.symbol_id),
+            ) {
+                (Some(donor), Some(placed), Some(target)) => {
+                    let neighbors: Vec<_> = plan
+                        .owned
+                        .iter()
+                        .filter(|other| other.unit.symbol_id != occurrence.symbol_id)
+                        .map(|other| &other.unit)
+                        .chain(plan.artwork_units.iter().map(|(unit, _)| unit))
+                        .collect();
+                    !crate::visual_dict::donor_geometry_compatible(
+                        &target.unit,
+                        donor,
+                        placed,
+                        occurrence.repaired,
+                        &neighbors,
+                    )
+                }
+                _ => true,
+            };
         if traced_iou.is_none_or(|iou| iou < 0.90)
             || source_gate_failed
             || invalid_geometry
             || insufficient_donor
+            || geometry_failed
         {
             occurrence.repaired = false;
             occurrence.reused = false;
             occurrence.restoration_evidence_passed = false;
-            occurrence.decision = if invalid_geometry {
+            occurrence.decision = if geometry_failed {
+                "rejected_donor_geometry".into()
+            } else if invalid_geometry {
                 "rejected_invalid_replacement_geometry".into()
             } else if insufficient_donor {
                 "rejected_insufficient_donor_extent".into()
@@ -1080,7 +1118,45 @@ pub(crate) fn convert_parts_with_document_donors(
             } else {
                 "rejected_traced_prototype_fidelity".into()
             };
-            missing.insert((occurrence.symbol_id.clone(),));
+            if geometry_failed {
+                local_geometry_fallback.push((
+                    occurrence.symbol_id.clone(),
+                    occurrence.source_shape_key.clone(),
+                ));
+            } else {
+                missing.insert((occurrence.symbol_id.clone(),));
+            }
+        }
+    }
+    // A geometry-rejected glyph is traced from its own source mask, so the
+    // rest of the page plan is unchanged. If that outline fails the existing
+    // fidelity gate, the glyph goes to the raster fallback as before.
+    for (symbol, source_key) in local_geometry_fallback {
+        let Some(index) = plan.owned.iter().position(|o| o.unit.symbol_id == symbol) else {
+            missing.insert((symbol,));
+            continue;
+        };
+        let mut local = plan.owned[index].unit.clone();
+        local.shape_key = format!("__source_geometry:{symbol}:{source_key}");
+        let result = crate::trace::trace_shape_clearscan(
+            &local,
+            &budget,
+            units_per_px,
+            Some((&local, policy.min_ink_iou)),
+        )
+        .ok()
+        .and_then(|trace| build_glyph_shapes(&[trace], units_per_px, &budget).ok())
+        .and_then(|mut local_shapes| local_shapes.pop());
+        if let Some(shape) = result.filter(|shape| {
+            reconstructed_glyph_ink_iou(shape, local.crop_w, local.crop_h, &local.mask)
+                >= policy.min_ink_iou
+        }) {
+            plan.owned[index].unit.shape_key = local.shape_key;
+            reconstruction.repaired_symbols.remove(&symbol);
+            reconstruction.reused_symbols.remove(&symbol);
+            shapes.push(shape);
+        } else {
+            missing.insert((symbol,));
         }
     }
     reconstruction.restoration_qualified = reconstruction
