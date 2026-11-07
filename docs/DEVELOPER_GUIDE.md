@@ -90,6 +90,13 @@ thresholds remain. See [the repair evidence](../qualification/pr_closure/DONOR_F
 and [publication status](../GITHUB_CONSOLIDATION.md) for CI/review history. No skipped
 local test is presented as a green workspace run.
 
+ClearScan donor placement is checked against the target’s page-scale ink and
+separately owned neighboring ink before emission. When the geometry is not
+supported, the report records `rejected_donor_geometry`; a source-local outline
+is used if it passes the existing fidelity gate, otherwise the existing raster
+fallback preserves the source. Damaged-stroke repair has a wider allowance than
+healthy canonical reuse.
+
 ## Build
 
 ```bash
