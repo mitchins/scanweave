@@ -13,7 +13,7 @@ On the P2″ qualification population, measured costs and savings were:
 | Runtime | 396 s | 620 s (1.57×) |
 | Peak RSS | 442 MB | 441 MB |
 
-The real financial document saved about 64 KB of font with a net 322 outlines retired; the mixed document saved about 7.9 KB. Cost is larger on real documents: in a paired serial run the 13-page financial document took 14:02 against 7:31 for default (1.86×), with peak RSS 1.76 GB against 1.47 GB (+20%); the mixed document took 3:18 against 1:46 (1.86×). A missing PDFium library is reported only after OCR and planning, so a q3 run without PDFium fails late (exit 2, no output written).
+The real financial document saved about 64 KB of font with a net 322 outlines retired; the mixed document saved about 7.9 KB. Cost is larger on real documents: in a paired serial run the 13-page financial document took 14:02 against 7:31 for default (1.86×), with peak RSS 1.76 GB against 1.47 GB (+20%); the mixed document took 3:18 against 1:46 (1.86×). A missing or unusable PDFium library is reported before rasterization, OCR, and planning, so a q3 run fails fast (exit 2, no output written).
 
 q3 passed all preregistered P2″ criteria, with zero detected new material defects among the 89 blinded admitted substitutions.
 

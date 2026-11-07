@@ -138,6 +138,11 @@ pub fn convert_pdf(args: &[String]) -> Result<(), String> {
     if sharing.is_some() && profile != "clearscan" {
         return Err("glyph sharing requires --profile clearscan".into());
     }
+    if sharing.is_some() {
+        scanweave_io::glyph_sharing::ownership::check_pdfium().map_err(|e| {
+            format!("{e}. Set SCANWEAVE_PDFIUM_LIBRARY to the native libpdfium path, or rerun with --glyph-sharing off")
+        })?;
+    }
     let input = std::fs::canonicalize(input).map_err(|e| format!("read input PDF: {e}"))?;
     if Path::new(output).canonicalize().ok().as_ref() == Some(&input) {
         return Err("input and output must be different files".into());
