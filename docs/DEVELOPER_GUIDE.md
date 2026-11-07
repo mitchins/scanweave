@@ -97,6 +97,14 @@ is used if it passes the existing fidelity gate, otherwise the existing raster
 fallback preserves the source. Damaged-stroke repair has a wider allowance than
 healthy canonical reuse.
 
+Invisible OCR text is laid out for stable copy and extraction. A word drawn
+entirely as invisible text is one positioned text object on the word's median
+box bottom. Invisible characters inside a word with visible glyphs use the
+glyphs' baseline. PDFium sorts text objects by position within a line, and the
+previous one-object-per-character layout let duplicate OCR lines, raised marks
+and page-edge boxes interleave words, repeating them in copied text (#31).
+Visible output is unchanged.
+
 ## Build
 
 ```bash
