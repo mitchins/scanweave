@@ -109,12 +109,13 @@ pub fn convert_pdf(args: &[String]) -> Result<(), String> {
         if pair.len() != 2
             || !matches!(
                 pair[0].as_str(),
-                "--dpi" | "--lang" | "--profile" | "--glyph-sharing"
+                "--dpi" | "--lang" | "--profile" | "--glyph-sharing" | "--experimental-background-dpi"
             )
         {
             return Err(format!("unknown or incomplete option: {}", pair[0]));
         }
     }
+    let image_encoding = super::image_encoding(args)?;
     let dpi: u32 = super::arg_value(args, "--dpi")
         .unwrap_or_else(|| "300".into())
         .parse()
@@ -371,6 +372,7 @@ pub fn convert_pdf(args: &[String]) -> Result<(), String> {
     }
     let policy = convert::Policy {
         dpi: dpi as f64,
+        image_encoding,
         glyph_dictionary: if profile == "clearscan" {
             "visual".into()
         } else {

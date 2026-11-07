@@ -52,7 +52,12 @@ pub struct ImageEncodingOptions {
     pub compression_level: u32,
     /// PDF predictor: 0 (smallest of lossless variants), 1 (none), 2 (TIFF), or 12 (PNG Up).
     pub predictor: u8,
+    /// Experimental 150-DPI background with a per-page preservation fallback.
+    #[serde(skip_serializing_if = "is_false")]
+    pub experimental_background_150: bool,
 }
+
+fn is_false(value: &bool) -> bool { !*value }
 
 impl Default for ImageEncodingOptions {
     fn default() -> Self {
@@ -61,6 +66,7 @@ impl Default for ImageEncodingOptions {
             grayscale_equal_channels: true,
             compression_level: 6,
             predictor: 1,
+            experimental_background_150: false,
         }
     }
 }
@@ -1302,14 +1308,32 @@ pub(crate) fn assemble_document_with_tonal_choice(
         && crate::tonal_image::eligible(&p.patches[0].rgb,p.source_w as u32,p.source_h as u32,3)
         || (!p.raster_baseline && p.patches.len()>1 && p.patches.iter().any(|patch|
             !patch.compact_background && crate::tonal_image::native_candidate(&patch.rgb,patch.w,patch.h,3)))) {
+        if image_options.experimental_background_150 {
+            for page in 1..=pages.len() {
+                eprintln!("scanweave: background150 page={page} decision=fallback reason=no_tonal_candidates");
+            }
+        }
         return assemble_document_with_options(pages,shapes,encodings,font_bytes,image_options).map(|(pdf,stats)|(pdf,stats,false));
     }
     let start = std::time::Instant::now();
     let lossless = assemble_document_impl(pages, shapes, encodings, font_bytes, image_options, false, None)?;
-    let compact = assemble_document_impl(pages, shapes, encodings, font_bytes, image_options, true, None)?;
+    let mut baseline_options = image_options;
+    baseline_options.experimental_background_150 = false;
+    let compact = assemble_document_impl(pages, shapes, encodings, font_bytes, baseline_options, true, None)?;
     let encoding_ms = lossless.1.image_encoding_ms + compact.1.image_encoding_ms;
     let compact_selected=compact.0.len() < lossless.0.len();
     let mut selected = if compact_selected {compact} else {lossless};
+    if compact_selected && image_options.experimental_background_150 {
+        let experimental = assemble_document_impl(pages, shapes, encodings, font_bytes, image_options, true, None)?;
+        let use_experimental = experimental.0.len() < selected.0.len();
+        eprintln!("scanweave: background150 document decision={}", if use_experimental {"experimental"} else {"default"});
+        if use_experimental { selected = experimental; }
+    } else if image_options.experimental_background_150 {
+        eprintln!("scanweave: background150 document decision=default reason=lossless_selected");
+        for page in 1..=pages.len() {
+            eprintln!("scanweave: background150 page={page} decision=fallback reason=lossless_selected");
+        }
+    }
     selected.1.image_encoding_ms = encoding_ms;
     selected.1.assembly_ms = start.elapsed().as_millis();
     Ok((selected.0,selected.1,compact_selected))
@@ -1358,11 +1382,18 @@ fn assemble_document_impl(
     let mut image_refs: Vec<Vec<Ref>> = Vec::with_capacity(pages.len());
     let mut image_resources: Vec<EncodedImageResource> = Vec::new();
     let mut resource_lookup: HashMap<[u8; 32], Vec<usize>> = HashMap::new();
-    for p in pages {
+    for (page_index, p) in pages.iter().enumerate() {
+        if tonal_whole_pages && image_options.experimental_background_150 && !whole_page_tonal_candidate(p) {
+            let reason = if p.raster_baseline { "raster_baseline" }
+                else if p.encoded_source.as_ref().is_some_and(|s| s.jpeg) { "source_jpeg" }
+                else { "not_whole_page_background" };
+            eprintln!("scanweave: background150 page={} decision=fallback reason={reason}", page_index + 1);
+        }
         let mut ids = Vec::with_capacity(p.patches.len());
         for patch in &p.patches {
             let key = canonical_patch(patch, image_options)?;
-            let existing = if image_options.reuse_identical {
+            let existing = if image_options.reuse_identical
+                && !(tonal_whole_pages && image_options.experimental_background_150 && whole_page_tonal_candidate(p)) {
                 resource_lookup
                     .get(&key.sample_sha256)
                     .and_then(|candidates| {
@@ -1381,7 +1412,12 @@ fn assemble_document_impl(
                     let tonal = if tonal_whole_pages && whole_page_tonal_candidate(p) {
                         // This is optional representation work. Encoder failure
                         // retains the already-built lossless resource.
-                        crate::tonal_image::encode_residual(&key.samples,key.width,key.height,key.color_space,p.page_w_pt,p.page_h_pt)
+                        let result = if image_options.experimental_background_150 {
+                            crate::tonal_image::encode_experimental_residual(&key.samples,key.width,key.height,key.color_space,p.page_w_pt,p.page_h_pt,page_index+1)
+                        } else {
+                            crate::tonal_image::encode_residual(&key.samples,key.width,key.height,key.color_space,p.page_w_pt,p.page_h_pt)
+                        };
+                        result
                             .and_then(|compact| match compact {
                                 Some(bytes) => Ok(Some(bytes)),
                                 None => crate::tonal_image::encode(&key.samples,key.width,key.height,key.color_space).map(|bytes|bytes.map(|bytes|crate::tonal_image::CompactImage {bytes,width:key.width,height:key.height})),
@@ -1747,6 +1783,31 @@ mod image_resource_tests {
     }
 
     #[test]
+    fn experimental_setting_only_changes_eligible_reduced_whole_pages() {
+        let rgb: Vec<u8> = (0..512 * 512)
+            .flat_map(|i| [((i % 512) / 8 + 128) as u8; 3])
+            .collect();
+        let whole = Patch { bbox_px: [0., 0., 512., 512.], rgb, w: 512, h: 512, compact_background: false };
+        let mut p = page(vec![whole]);
+        p.source_w = 512; p.source_h = 512;
+        let standard = ImageEncodingOptions::default();
+        let experiment = ImageEncodingOptions { experimental_background_150: true, ..standard };
+        assert!(serde_json::to_value(standard).unwrap().get("experimental_background_150").is_none());
+        assert_eq!(serde_json::to_value(experiment).unwrap()["experimental_background_150"], true);
+        let normal = assemble_document_with_tonal_fallback(&[p.clone()], &[], &[], &[], standard).unwrap().0;
+        let reduced = assemble_document_with_tonal_fallback(&[p.clone()], &[], &[], &[], experiment).unwrap().0;
+        let decode = |pdf: &[u8]| {
+            let start = pdf.windows(3).position(|w| w == [0xff, 0xd8, 0xff]).unwrap();
+            image::load_from_memory_with_format(&pdf[start..], image::ImageFormat::Jpeg).unwrap().width()
+        };
+        assert_eq!(decode(&normal), 200);
+        assert_eq!(decode(&reduced), 150);
+        p.raster_baseline = true;
+        assert_eq!(assemble_document_with_tonal_fallback(&[p.clone()], &[], &[], &[], standard).unwrap().0,
+                   assemble_document_with_tonal_fallback(&[p], &[], &[], &[], experiment).unwrap().0);
+    }
+
+    #[test]
     fn compact_document_uses_cleaned_samples_and_keeps_lossless_entry_point() {
         let mut rgb = Vec::with_capacity(512 * 512 * 3);
         for y in 0..512 {
@@ -1808,12 +1869,18 @@ mod image_resource_tests {
         let options=ImageEncodingOptions::default();
         let (lossless,_)=assemble_document_with_options(&[p.clone()],&[],&[],&[],options).unwrap();
         let (compact,stats)=assemble_document_with_tonal_fallback(&[p.clone()],&[],&[],&[],options).unwrap();
+        let experiment = ImageEncodingOptions { experimental_background_150: true, ..options };
+        assert_eq!(compact, assemble_document_with_tonal_fallback(&[p.clone()],&[],&[],&[],experiment).unwrap().0,
+            "native exception patches must not change");
         assert!(compact.len()<lossless.len());
         assert_eq!(stats.image_xobjects,1);
         assert_eq!(stats.image_references,2);
         assert_eq!(compact,assemble_document_with_tonal_fallback(&[p.clone()],&[],&[],&[],options).unwrap().0);
         assert_eq!(lossless,assemble_document_with_options(&[p.clone()],&[],&[],&[],options).unwrap().0);
         p.raster_baseline=true;
+        assert_eq!(assemble_document_with_tonal_fallback(&[p.clone()],&[],&[],&[],experiment).unwrap().0,
+            assemble_document_with_tonal_fallback(&[p.clone()],&[],&[],&[],options).unwrap().0,
+            "raster baseline must not change");
         assert_eq!(assemble_document_with_options(&[p.clone()],&[],&[],&[],options).unwrap().0,
             assemble_document_with_tonal_fallback(&[p],&[],&[],&[],options).unwrap().0);
     }

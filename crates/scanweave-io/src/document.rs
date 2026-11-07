@@ -366,6 +366,11 @@ pub fn convert_document_with_sources_and_sharing(
         return Err("document has no pages".into());
     }
     let tonal_document = allows_tonal_images(inputs, policy);
+    if policy.image_encoding.experimental_background_150 && !tonal_document {
+        for page in 1..=inputs.len() {
+            eprintln!("scanweave: background150 page={page} decision=fallback reason=faithful_or_protected_document");
+        }
+    }
     // 1. Collect only safe, unprotected single-glyph evidence across the
     //    document, then convert pages with sibling-page observations available
     //    to their local reconstruction dictionary.
@@ -506,6 +511,18 @@ pub fn convert_document_with_sources_and_sharing(
     } else {
         crate::page_pdf::assemble_document_with_options
     };
+    // The experiment must not alter auto-mode selection or glyph-sharing
+    // transport decisions, both of which compare complete PDF sizes.
+    let mut assembly_image_options = policy.image_encoding;
+    if policy.mode == "auto" || sharing.is_some() {
+        if assembly_image_options.experimental_background_150 {
+            eprintln!("scanweave: background150 disabled for auto mode or glyph sharing");
+            for page in 1..=inputs.len() {
+                eprintln!("scanweave: background150 page={page} decision=fallback reason=auto_or_glyph_sharing");
+            }
+        }
+        assembly_image_options.experimental_background_150 = false;
+    }
     let parts: Vec<_> = pages.iter().map(|p| p.parts.clone()).collect();
     let (mut pdf_bytes, mut stats, raster_choice) = if sharing.is_some() && tonal_document {
         crate::page_pdf::assemble_document_with_tonal_choice(
@@ -513,7 +530,7 @@ pub fn convert_document_with_sources_and_sharing(
             &shapes,
             &encodings,
             &font_bytes,
-            policy.image_encoding,
+            assembly_image_options,
         )?
     } else {
         let (pdf, stats) = assemble(
@@ -521,7 +538,7 @@ pub fn convert_document_with_sources_and_sharing(
             &shapes,
             &encodings,
             &font_bytes,
-            policy.image_encoding,
+            assembly_image_options,
         )?;
         (pdf, stats, false)
     };
@@ -534,7 +551,7 @@ pub fn convert_document_with_sources_and_sharing(
             &shapes,
             &encodings,
             &font_bytes,
-            policy.image_encoding,
+            assembly_image_options,
             crate::glyph_sharing::transport::OperatingPoint {
                 tonal: raster_choice,
                 multiplier,
@@ -579,7 +596,7 @@ pub fn convert_document_with_sources_and_sharing(
         &shapes,
         &encodings,
         baseline_font.as_deref().unwrap_or(&font_bytes),
-        policy.image_encoding,
+        assembly_image_options,
     )?;
     stage_timings.raster_baseline_pdf_ms = stage_start.elapsed().as_millis();
 
@@ -951,7 +968,10 @@ mod tonal_protection_tests {
                 polygon: vec![[0.0, 0.0], [1.0, 0.0], [1.0, 1.0]],
                 reason: "caller".into(),
             });
-        assert!(!allows_tonal_images(&[page.clone(), protected], &clear));
+        assert!(!allows_tonal_images(&[page.clone(), protected.clone()], &clear));
+        let mut experimental = clear.clone();
+        experimental.image_encoding.experimental_background_150 = true;
+        assert!(!allows_tonal_images(&[page.clone(), protected], &experimental));
         assert!(!allows_tonal_images(&[page], &Policy::default()));
     }
 }

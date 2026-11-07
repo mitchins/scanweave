@@ -114,6 +114,13 @@ pub(crate) fn encode_residual(
     page_width_pt: f32,
     page_height_pt: f32,
 ) -> Result<Option<CompactImage>, String> {
+    encode_residual_at(samples, width, height, colors, page_width_pt, page_height_pt, 200.0)
+}
+
+fn encode_residual_at(
+    samples: &[u8], width: u32, height: u32, colors: u8,
+    page_width_pt: f32, page_height_pt: f32, dpi: f64,
+) -> Result<Option<CompactImage>, String> {
     let Some(bytes) = encode_compact(samples, width, height, colors)? else {
         return Ok(None);
     };
@@ -129,8 +136,8 @@ pub(crate) fn encode_residual(
     {
         return Ok(Some(native));
     }
-    let scale = (200.0 * f64::from(page_width_pt) / (72.0 * f64::from(width)))
-        .min(200.0 * f64::from(page_height_pt) / (72.0 * f64::from(height)))
+    let scale = (dpi * f64::from(page_width_pt) / (72.0 * f64::from(width)))
+        .min(dpi * f64::from(page_height_pt) / (72.0 * f64::from(height)))
         .min(1.0);
     let w = (f64::from(width) * scale).round().max(1.0) as u32;
     let h = (f64::from(height) * scale).round().max(1.0) as u32;
@@ -155,6 +162,73 @@ pub(crate) fn encode_residual(
         }
         _ => Ok(Some(native)),
     }
+}
+
+/// Conservative screen on actual 150-DPI JPEG round-trip luminance at source
+/// edges. The existing 200-DPI representation remains the fallback.
+fn preserves_edges(source: &[u8], roundtrip: &[u8], width: u32, height: u32, colors: u8) -> (bool, u64, u64, u64, u32) {
+    let channels = colors as usize;
+    let luminance = |data: &[u8], i: usize| -> i32 {
+        if channels == 1 { data[i] as i32 } else {
+            (54 * data[i] as i32 + 183 * data[i + 1] as i32 + 19 * data[i + 2] as i32) / 256
+        }
+    };
+    let mut edges = 0u64;
+    let mut error = 0u64;
+    let mut large_error = 0u64;
+    let mut max_error = 0u32;
+    for y in 0..height as usize {
+        for x in 0..width as usize {
+            let i = (y * width as usize + x) * channels;
+            let original = luminance(source, i);
+            let delta = original.abs_diff(luminance(roundtrip, i));
+            for channel in 0..channels {
+                max_error = max_error.max(u32::from(source[i + channel].abs_diff(roundtrip[i + channel])));
+            }
+            if x + 2 < width as usize && original.abs_diff(luminance(source, i + 2 * channels)) >= 20 {
+                edges += 1;
+                error += u64::from(delta);
+                large_error += u64::from(delta > 5);
+            }
+        }
+    }
+    // A maximum five-level channel error and one-level mean edge error are
+    // intentionally strict; no OCR or document-wide statistic enters this gate.
+    let pass = max_error <= 5 && (edges == 0 || (error <= edges && large_error.saturating_mul(100) <= edges));
+    (pass, edges, error, large_error, max_error)
+}
+
+pub(crate) fn encode_experimental_residual(
+    samples: &[u8], width: u32, height: u32, colors: u8,
+    page_width_pt: f32, page_height_pt: f32, page: usize,
+) -> Result<Option<CompactImage>, String> {
+    let Some(fallback) = encode_residual(samples, width, height, colors, page_width_pt, page_height_pt)? else {
+        eprintln!("scanweave: background150 page={page} decision=ineligible");
+        return Ok(None);
+    };
+    if fallback.width == width && fallback.height == height {
+        eprintln!("scanweave: background150 page={page} decision=fallback reason=not_previously_reduced");
+        return Ok(Some(fallback));
+    }
+    let Some(candidate) = encode_residual_at(samples, width, height, colors, page_width_pt, page_height_pt, 150.0)? else {
+        return Ok(Some(fallback));
+    };
+    if candidate.width >= fallback.width || candidate.height >= fallback.height || candidate.bytes.len() >= fallback.bytes.len() {
+        eprintln!("scanweave: background150 page={page} decision=fallback reason=no_reduction_or_saving");
+        return Ok(Some(fallback));
+    }
+    let decoded = match image::load_from_memory(&candidate.bytes) {
+        Ok(image) => image,
+        Err(_) => {
+            eprintln!("scanweave: background150 page={page} decision=fallback reason=decode_failed");
+            return Ok(Some(fallback));
+        }
+    };
+    let decoded = if colors == 1 { decoded.to_luma8().into_raw() } else { decoded.to_rgb8().into_raw() };
+    let roundtrip = resized_samples(&decoded, candidate.width, candidate.height, colors, width, height)?;
+    let (pass, edges, error, large, max_error) = preserves_edges(samples, &roundtrip, width, height, colors);
+    eprintln!("scanweave: background150 page={page} decision={} edge_pixels={edges} edge_error_sum={error} edge_error_gt5={large} max_error={max_error}", if pass {"150"} else {"fallback"});
+    Ok(Some(if pass { candidate } else { fallback }))
 }
 
 /// Source-resolution tonal exception only. Binary ink and tiny resources retain
@@ -325,6 +399,21 @@ pub(crate) fn encode(
 
 #[cfg(test)]
 mod tests {
+    #[test]
+    fn experimental_rejects_fine_detail_accepts_smooth_and_never_upscales() {
+        let smooth: Vec<u8> = (0..512 * 512).map(|i| ((i % 512) / 8 + 128) as u8).collect();
+        let baseline = encode_residual(&smooth, 512, 512, 1, 72., 72.).unwrap().unwrap();
+        let accepted = encode_experimental_residual(&smooth, 512, 512, 1, 72., 72., 1).unwrap().unwrap();
+        assert!(accepted.width < baseline.width, "smooth page should accept 150 DPI");
+        let mut detail = smooth.clone();
+        for y in 100..400 { detail[y * 512 + 256] = 0; }
+        let before = encode_residual(&detail, 512, 512, 1, 72., 72.).unwrap().unwrap();
+        let after = encode_experimental_residual(&detail, 512, 512, 1, 72., 72., 1).unwrap().unwrap();
+        assert_eq!(before.bytes, after.bytes, "thin line must fall back");
+        let native = encode_experimental_residual(&smooth, 512, 512, 1, 512., 512., 1).unwrap().unwrap();
+        assert_eq!((native.width, native.height), (512, 512));
+    }
+
     #[test]
     fn compact_encoder_keeps_native_dimensions_sampling_and_thin_dark_details() {
         let (w, h) = (512usize, 512usize);

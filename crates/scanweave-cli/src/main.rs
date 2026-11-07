@@ -5,7 +5,7 @@ use std::process::ExitCode;
 
 fn usage() -> ! {
     eprintln!(
-        "scanweave input.pdf output.pdf [--dpi 300] [--lang eng] [--profile clearscan|faithful] [--glyph-sharing off|cover-2.0-ceiling-q3]\nGlyph sharing is native, source-only, opt-in; requires PDFium (SCANWEAVE_PDFIUM_LIBRARY). Default: off.\n\nscanweave build <input.png> --ocr <input.hocr> [--dpi N] [--mode reconstruct|auto] \
+        "scanweave input.pdf output.pdf [--dpi 300] [--lang eng] [--profile clearscan|faithful] [--glyph-sharing off|cover-2.0-ceiling-q3] [--experimental-background-dpi 150]\nThe background DPI option is experimental; absent means existing behavior.\nGlyph sharing is native, source-only, opt-in; requires PDFium (SCANWEAVE_PDFIUM_LIBRARY). Default: off.\n\nscanweave build <input.png> --ocr <input.hocr> [--dpi N] [--mode reconstruct|auto] \
          [--min-ink-iou F] [--profile faithful|clearscan]
          [--glyph-dictionary off|visual]
          --output <out.pdf> --report <out.json>\n\
@@ -38,6 +38,12 @@ fn arg_f64(args: &[String], flag: &str, default: f64) -> Result<f64, String> {
 fn image_encoding(args: &[String]) -> Result<scanweave_io::page_pdf::ImageEncodingOptions, String> {
     use scanweave_io::page_pdf::ImageEncodingOptions;
     let mut options = ImageEncodingOptions::default();
+    if args.iter().any(|arg| arg == "--experimental-background-dpi") {
+        match arg_value(args, "--experimental-background-dpi").as_deref() {
+            Some("150") => options.experimental_background_150 = true,
+            _ => return Err("--experimental-background-dpi only accepts 150".into()),
+        }
+    }
     match arg_value(args, "--pdf-image-variant").as_deref().unwrap_or("optimized") {
         "baseline" => { options.reuse_identical = false; options.grayscale_equal_channels = false; options.predictor = 1; }
         "reuse" => { options.reuse_identical = true; options.grayscale_equal_channels = false; options.predictor = 1; }
@@ -358,5 +364,18 @@ fn main() -> ExitCode {
             }
         },
         _ => usage(),
+    }
+}
+
+#[cfg(test)]
+mod image_option_tests {
+    #[test]
+    fn experimental_background_flag_requires_exact_value() {
+        assert!(!super::image_encoding(&[]).unwrap().experimental_background_150);
+        assert!(super::image_encoding(&["--experimental-background-dpi".into(), "150".into()]).unwrap().experimental_background_150);
+        for value in ["", "149", "200", "abc"] {
+            assert!(super::image_encoding(&["--experimental-background-dpi".into(), value.into()]).is_err());
+        }
+        assert!(super::image_encoding(&["--experimental-background-dpi".into()]).is_err());
     }
 }

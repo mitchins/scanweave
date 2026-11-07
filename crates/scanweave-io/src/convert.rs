@@ -643,13 +643,26 @@ pub fn convert(input: &Input, policy: &Policy) -> Result<Output, String> {
     // document-level equivalent lives in crate::document)
     let (shapes, encodings) = (&parts.shapes, parts.encodings.clone());
     let font_bytes = build_font(shapes, &encodings, policy.upem)?;
+    let mut image_encoding = policy.image_encoding;
+    // Auto mode compares the reconstruction with the raster baseline by size.
+    // Keep that selection on the established encoding.
+    if policy.mode == "auto" {
+        if image_encoding.experimental_background_150 {
+            eprintln!("scanweave: background150 page=1 decision=fallback reason=auto_mode");
+        }
+        image_encoding.experimental_background_150 = false;
+    }
+    if image_encoding.experimental_background_150
+        && (policy.profile != "clearscan" || !input.protected_regions.is_empty()) {
+        eprintln!("scanweave: background150 page=1 decision=fallback reason=faithful_or_protected_page");
+    }
     let pdf_bytes = if policy.profile == "clearscan" && input.protected_regions.is_empty() {
         crate::page_pdf::assemble_document_with_tonal_fallback(
             std::slice::from_ref(&parts),
             shapes,
             &encodings,
             &font_bytes,
-            policy.image_encoding,
+            image_encoding,
         )?
         .0
     } else {
@@ -3044,6 +3057,11 @@ mod contour_coverage_tests {
         let policy = Policy { profile: "clearscan".into(), ..Policy::default() };
         let single = convert(&input, &policy).unwrap();
         let document = crate::document::convert_document("tonal", std::slice::from_ref(&input), &policy).unwrap();
+        let mut auto = policy.clone();
+        auto.mode = "auto".into();
+        let baseline_auto = convert(&input, &auto).unwrap();
+        auto.image_encoding.experimental_background_150 = true;
+        assert_eq!(baseline_auto.pdf_bytes, convert(&input, &auto).unwrap().pdf_bytes);
         let has_jpeg = |pdf: &[u8]| pdf.windows(3).any(|bytes| bytes == [0xff, 0xd8, 0xff]);
         assert!(has_jpeg(&single.pdf_bytes));
         assert!(has_jpeg(&document.pdf_bytes));
@@ -3053,6 +3071,10 @@ mod contour_coverage_tests {
         });
         let protected_single = convert(&input, &policy).unwrap();
         let protected_document = crate::document::convert_document("tonal", std::slice::from_ref(&input), &policy).unwrap();
+        let mut experiment = policy.clone();
+        experiment.image_encoding.experimental_background_150 = true;
+        assert_eq!(protected_single.pdf_bytes, convert(&input, &experiment).unwrap().pdf_bytes);
+        assert_eq!(protected_document.pdf_bytes, crate::document::convert_document("tonal", std::slice::from_ref(&input), &experiment).unwrap().pdf_bytes);
         assert!(!has_jpeg(&protected_single.pdf_bytes));
         assert!(!has_jpeg(&protected_document.pdf_bytes));
         assert!(single.pdf_bytes.len() < protected_single.pdf_bytes.len());
