@@ -255,6 +255,22 @@ pub(crate) fn share(
             weight_band: plan.bands[i],
         });
     }
+    if let Some(path) = std::env::var_os("SCANWEAVE_RESEARCH_C2B_TRACE") {
+        let trace_rows: Vec<_> = rows.iter().enumerate().map(|(i, r)| serde_json::json!({
+            "member": i, "page": r.page, "id": r.id, "label": r.label, "shape_key": r.shape_key,
+            "source_error": r.source_error, "has_frame": r.frame.is_some(), "has_canonical": r.canonical.is_some(),
+            "band": plan.bands[i], "hygiene": plan.hygiene[i], "floor": plan.floors[i],
+            "decision": decisions[i],
+        })).collect();
+        let trace_groups: Vec<_> = plan.groups.iter().map(|g| serde_json::json!({"canonical": g.canonical, "members": g.members, "discarded": discarded.get(&g.canonical)})).collect();
+        let occurrences: Vec<_> = pages.iter().enumerate().flat_map(|(page, p)| p.occurrences.iter().enumerate().map(move |(occurrence, o)| serde_json::json!({"page": page, "occurrence": occurrence, "id": o.4, "label": o.5}))).collect();
+        let data = serde_json::json!({"occurrences": occurrences, "rows": trace_rows, "fits": plan.fits, "groups": trace_groups});
+        std::fs::write(
+            path,
+            serde_json::to_vec_pretty(&data).map_err(|e| e.to_string())?,
+        )
+        .map_err(|e| e.to_string())?;
+    }
     let before = crate::serialization::deflate(default_font)?.len();
     stage_seconds.insert("decision_ledger".into(), stage.elapsed().as_secs_f64());
     let stage = std::time::Instant::now();

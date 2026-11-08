@@ -417,8 +417,10 @@ pub fn preflight(
     if docs.iter().any(|d| d.handle.is_null()) {
         return Err("PDFium preflight document load failed".into());
     }
+    let trace = std::env::var_os("SCANWEAVE_RESEARCH_C2B_TRACE");
+    let mut trace_rows = Vec::new();
     let mut exceptions = BTreeSet::new();
-    for (k, &(i, _, _)) in assignments.iter().enumerate() {
+    for (k, &(i, j, _)) in assignments.iter().enumerate() {
         let size = source[k].size;
         let legacy = assignment_exception(
             bindings,
@@ -438,9 +440,20 @@ pub fn preflight(
             scales[k],
             CropVariant::Corrected,
         )?;
+        if trace.is_some() {
+            trace_rows.push(serde_json::json!({"member": i, "canonical": j, "legacy": legacy, "corrected": corrected, "combined": combined_exception(legacy, corrected)}));
+        }
         if combined_exception(legacy, corrected) {
             exceptions.insert(i);
         }
+    }
+    if let Some(path) = trace {
+        let path = format!("{}.ownership.json", path.to_string_lossy());
+        std::fs::write(
+            path,
+            serde_json::to_vec_pretty(&trace_rows).map_err(|e| e.to_string())?,
+        )
+        .map_err(|e| e.to_string())?;
     }
     Ok((exceptions, identity))
 }
