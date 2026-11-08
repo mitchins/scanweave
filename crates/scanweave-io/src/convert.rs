@@ -10,7 +10,7 @@ use crate::glyphs::{build_glyph_shapes, GlyphShape};
 use crate::mask::{segment, Segmentation};
 use crate::ownership::{build_plan, OwnershipPlan};
 use crate::page_pdf::{ImageEncodingOptions, Owner, Patch};
-use crate::plan::{plan_regions, FallbackReason, RegionDisposition, RegionKind};
+use crate::plan::{plan_regions, FallbackReason, Region, RegionDisposition, RegionKind};
 use crate::trace::{trace_shape, Budget, TracedShape};
 use serde::Serialize;
 use std::collections::BTreeMap;
@@ -623,6 +623,15 @@ fn glyph_coverage_contract(
     cover
 }
 
+/// Runs `trace` only when unit `index` is in a vector-disposition region.
+/// Raster regions never return to vector, so their local outline is never emitted.
+fn trace_if_vector<T>(regions: &[Region], index: usize, trace: impl FnOnce() -> T) -> Option<T> {
+    regions
+        .iter()
+        .any(|r| matches!(r.disposition, RegionDisposition::Vector) && r.units.contains(&index))
+        .then(trace)
+}
+
 fn span_bbox(poly: &[[f64; 2]]) -> [f64; 4] {
     let mut bb = [f64::MAX, f64::MAX, f64::MIN, f64::MIN];
     for [x, y] in poly {
@@ -1128,9 +1137,9 @@ pub(crate) fn convert_parts_with_document_donors(
             }
         }
     }
-    // A geometry-rejected glyph is traced from its own source mask, so the
-    // rest of the page plan is unchanged. If that outline fails the existing
-    // fidelity gate, the glyph goes to the raster fallback as before.
+    // A vector-eligible geometry-rejected glyph is traced from its own source
+    // mask. If that outline fails the existing fidelity gate, the glyph goes
+    // to the raster fallback as before.
     for (symbol, source_key) in local_geometry_fallback {
         let Some(index) = plan.owned.iter().position(|o| o.unit.symbol_id == symbol) else {
             missing.insert((symbol,));
@@ -1138,15 +1147,21 @@ pub(crate) fn convert_parts_with_document_donors(
         };
         let mut local = plan.owned[index].unit.clone();
         local.shape_key = format!("__source_geometry:{symbol}:{source_key}");
-        let result = crate::trace::trace_shape_clearscan(
-            &local,
-            &budget,
-            units_per_px,
-            Some((&local, policy.min_ink_iou)),
-        )
-        .ok()
-        .and_then(|trace| build_glyph_shapes(&[trace], units_per_px, &budget).ok())
-        .and_then(|mut local_shapes| local_shapes.pop());
+        // Raster regions never return to vector disposition; their local
+        // source outline cannot be emitted.
+        let Some(result) = trace_if_vector(&regions, index, || {
+            crate::trace::trace_shape_clearscan(
+                &local,
+                &budget,
+                units_per_px,
+                Some((&local, policy.min_ink_iou)),
+            )
+            .ok()
+            .and_then(|trace| build_glyph_shapes(&[trace], units_per_px, &budget).ok())
+            .and_then(|mut local_shapes| local_shapes.pop())
+        }) else {
+            continue;
+        };
         if let Some(shape) = result.filter(|shape| {
             reconstructed_glyph_ink_iou(shape, local.crop_w, local.crop_h, &local.mask)
                 >= policy.min_ink_iou
@@ -2956,6 +2971,24 @@ mod dpi_tests {
 #[cfg(test)]
 mod contour_coverage_tests {
     use super::*;
+
+    #[test]
+    fn geometry_fallback_traces_only_vector_regions() {
+        let region = |index, disposition| Region {
+            id: index,
+            kind: RegionKind::Text,
+            units: vec![index],
+            artwork: vec![],
+            bbox_px: [0.0, 0.0, 1.0, 1.0],
+            disposition,
+        };
+        let regions = vec![
+            region(0, RegionDisposition::Raster { reason: FallbackReason::ContactNonText }),
+            region(1, RegionDisposition::Vector),
+        ];
+        assert!(trace_if_vector(&regions, 0, || panic!("raster source traced")).is_none());
+        assert_eq!(trace_if_vector(&regions, 1, || 42), Some(42));
+    }
 
     #[test]
     fn fidelity_uses_covered_area_and_the_pdf_construction_frame() {
