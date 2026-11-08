@@ -271,6 +271,17 @@ pub(crate) fn share(
         )
         .map_err(|e| e.to_string())?;
     }
+    if let Some(path) = std::env::var_os("SCANWEAVE_RESEARCH_C2B_DETAIL") {
+        let detail: Vec<_> = rows.iter().enumerate().map(|(i, r)| serde_json::json!({
+            "member": i, "id": r.id, "page": r.page, "frame": r.frame, "field": r.field,
+            "canonical_field": r.canonical.as_ref().map(|c| &c.coverage),
+            "paper": pages[r.page].paper,
+            "source": r.source.as_ref().map(|u| serde_json::json!({"bbox": u.bbox_px, "ocr_bbox": u.ocr_bbox_px, "width": u.crop_w, "height": u.crop_h, "mask": u.mask, "gray_halo": u.gray_halo})),
+        })).collect();
+        let file = std::fs::File::create(path).map_err(|e| e.to_string())?;
+        serde_json::to_writer_pretty(std::io::BufWriter::new(file), &detail)
+            .map_err(|e| e.to_string())?;
+    }
     let before = crate::serialization::deflate(default_font)?.len();
     stage_seconds.insert("decision_ledger".into(), stage.elapsed().as_secs_f64());
     let stage = std::time::Instant::now();

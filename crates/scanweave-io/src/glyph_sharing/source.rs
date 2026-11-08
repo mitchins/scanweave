@@ -32,16 +32,26 @@ pub struct Canonical {
 }
 
 pub fn local_source(unit: &Unit, paper: [u8; 3]) -> Result<Field, String> {
-    let w = unit.crop_w + 4;
-    let h = unit.crop_h + 4;
     let halo = unit.gray_halo.as_ref().ok_or("no grayscale halo")?;
+    local_source_with_halo(unit, paper, halo, 2, 1.5)
+}
+
+fn local_source_with_halo(
+    unit: &Unit,
+    paper: [u8; 3],
+    halo: &[u8],
+    margin: usize,
+    distance: f64,
+) -> Result<Field, String> {
+    let w = unit.crop_w + 2 * margin;
+    let h = unit.crop_h + 2 * margin;
     if halo.len() != w * h || unit.mask.len() != unit.crop_w * unit.crop_h {
         return Err("invalid owned source dimensions".into());
     }
     let mut owned = vec![false; w * h];
     for y in 0..unit.crop_h {
         for x in 0..unit.crop_w {
-            owned[(y + 2) * w + x + 2] = unit.mask[y * unit.crop_w + x];
+            owned[(y + margin) * w + x + margin] = unit.mask[y * unit.crop_w + x];
         }
     }
     let off: Vec<f64> = halo
@@ -78,7 +88,7 @@ pub fn local_source(unit: &Unit, paper: [u8; 3]) -> Result<Field, String> {
     };
     Ok((0..w * h)
         .map(|i| {
-            if dist[i] <= 1.5 && dist[i] < fd[i] {
+            if dist[i] <= distance && dist[i] < fd[i] {
                 ((paper_level - halo[i] as f64) / (paper_level - ink)).clamp(0., 1.)
             } else {
                 0.
@@ -93,6 +103,15 @@ pub fn frame(
     line: &[(&str, [f64; 4])],
 ) -> Result<(Field, Frame), String> {
     let field = local_source(unit, paper)?;
+    frame_from_local(unit, line, field, 2)
+}
+
+fn frame_from_local(
+    unit: &Unit,
+    line: &[(&str, [f64; 4])],
+    field: Field,
+    margin: usize,
+) -> Result<(Field, Frame), String> {
     let bbox = unit.bbox_px;
     let center = (bbox[1] + bbox[3]) / 2.;
     let height = bbox[3] - bbox[1];
@@ -119,10 +138,10 @@ pub fn frame(
         .map(|i| {
             sample(
                 &field,
-                unit.crop_w + 4,
-                unit.crop_h + 4,
-                cx + ((i % SIDE) as f64 - 32.) / scale - bbox[0] + 1.5,
-                baseline + ((i / SIDE) as f64 - 48.) / scale - bbox[1] + 1.5,
+                unit.crop_w + 2 * margin,
+                unit.crop_h + 2 * margin,
+                cx + ((i % SIDE) as f64 - 32.) / scale - bbox[0] + margin as f64 - 0.5,
+                baseline + ((i / SIDE) as f64 - 48.) / scale - bbox[1] + margin as f64 - 0.5,
             )
         })
         .collect();
@@ -231,7 +250,42 @@ pub fn snapshot(pages: &[DocumentPage], donors: &[Vec<Unit>]) -> Vec<Observation
             let prepared = source
                 .as_ref()
                 .ok_or_else(|| "no_safe_owned_witness".into())
-                .and_then(|u| frame(u, p.paper, &line_units));
+                .and_then(|u| {
+                    // Diagnostic counterfactual only; its output is not qualified for use.
+                    if std::env::var_os("SCANWEAVE_RESEARCH_C2B_HALO").is_some()
+                        && std::env::var_os("SCANWEAVE_RESEARCH_C2B_TRACE").is_some()
+                        && p.dpi > 300.
+                    {
+                        let ratio = p.dpi / 300.;
+                        let margin = (2. * ratio).ceil() as usize;
+                        let x0 = u.bbox_px[0] as isize;
+                        let y0 = u.bbox_px[1] as isize;
+                        let halo: Vec<u8> = (0..u.crop_h + 2 * margin)
+                            .flat_map(|y| {
+                                (0..u.crop_w + 2 * margin).map(move |x| {
+                                    let sx = x0 + x as isize - margin as isize;
+                                    let sy = y0 + y as isize - margin as isize;
+                                    if sx < 0
+                                        || sy < 0
+                                        || sx >= p.source_w as isize
+                                        || sy >= p.source_h as isize
+                                    {
+                                        return 255;
+                                    }
+                                    let at = (sy as usize * p.source_w + sx as usize) * 3;
+                                    (0.2126 * p.source_rgb[at] as f64
+                                        + 0.7152 * p.source_rgb[at + 1] as f64
+                                        + 0.0722 * p.source_rgb[at + 2] as f64)
+                                        .round() as u8
+                                })
+                            })
+                            .collect();
+                        let field = local_source_with_halo(u, p.paper, &halo, margin, 1.5 * ratio)?;
+                        frame_from_local(u, &line_units, field, margin)
+                    } else {
+                        frame(u, p.paper, &line_units)
+                    }
+                });
             let (field, frame, source_error) = match prepared {
                 Ok((f, m)) => (f, Some(m), None),
                 Err(e) => (vec![0.; 4096], None, Some(e)),
