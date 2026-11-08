@@ -1,0 +1,72 @@
+[
+  {
+    "page": 1,
+    "ocr_lines": 75,
+    "symbols": 2413,
+    "scan_visible": 297,
+    "mapped_visible": 297,
+    "adobe_visible": 421,
+    "a_changed": 297,
+    "b_changed": 297,
+    "c_changed": 297,
+    "registration": {
+      "method": "ORB-RANSAC affine",
+      "matches": 1159,
+      "inliers": 1117,
+      "residual_px_p50": 0.05871814826184606,
+      "residual_px_p90": 0.13531791948076763,
+      "matrix": [
+        [
+          0.9999191811174586,
+          -2.6842832317842856e-05,
+          0.15681075422321555
+        ],
+        [
+          -5.284024134100444e-05,
+          0.9999927019241474,
+          0.07532675534662303
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ]
+    }
+  },
+  {
+    "page": 2,
+    "ocr_lines": 81,
+    "symbols": 2798,
+    "scan_visible": 207,
+    "mapped_visible": 207,
+    "adobe_visible": 640,
+    "a_changed": 207,
+    "b_changed": 207,
+    "c_changed": 207,
+    "registration": {
+      "method": "ORB-RANSAC affine",
+      "matches": 853,
+      "inliers": 808,
+      "residual_px_p50": 0.15904576443022303,
+      "residual_px_p90": 3.177619059510556,
+      "matrix": [
+        [
+          0.999921471419653,
+          -7.489506219720299e-05,
+          0.2600449426729483
+        ],
+        [
+          -7.436480922470628e-05,
+          0.999979991536173,
+          0.07477700047138569
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ]
+    }
+  }
+]
