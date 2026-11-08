@@ -1,0 +1,148 @@
+{
+  "300": {
+    "same_design_n": 60,
+    "metrics": {
+      "original_fit": {
+        "median": 0.1542741275232683,
+        "p90": 0.5805855041174478
+      },
+      "unregistered_fit": {
+        "median": 0.2720055043141696,
+        "p90": 0.6324633907657085
+      },
+      "registration_error_reduction": {
+        "median": 0.07916195579602925,
+        "p90": 0.20994757249681825
+      },
+      "pristine_missing_fraction": {
+        "median": 0.04502504475439833,
+        "p90": 0.23203084479523997
+      },
+      "missing_in_source_fraction": {
+        "median": 0.058032624773742214,
+        "p90": 0.20509879746356866
+      },
+      "additional_mask_loss_fraction": {
+        "median": 0.00012073036845349031,
+        "p90": 0.0012824721611136589
+      },
+      "excluded_overlap_fraction": {
+        "median": 3.071131177013759e-05,
+        "p90": 0.0005046343141611736
+      },
+      "estimated_xheight_ratio": {
+        "median": 1.0,
+        "p90": 1.4367588932806323
+      },
+      "true_point_size_ratio": {
+        "median": 1.0,
+        "p90": 1.2750000000000004
+      },
+      "repaired_fit": {
+        "median": 0.15338489080138698,
+        "p90": 0.5805195833129745
+      },
+      "true_scale_fit": {
+        "median": 0.14675588266373202,
+        "p90": 0.26940545051849246
+      },
+      "repaired_true_scale_fit": {
+        "median": 0.1413779773339255,
+        "p90": 0.2683959477745338
+      },
+      "residual_after_joint": {
+        "median": 0.1413779773339255,
+        "p90": 0.2683959477745338
+      }
+    },
+    "abs_log_scale_ratio_error": {
+      "median": 0.0255629348292635,
+      "p90": 0.2937445346334244
+    },
+    "registration_translation_norm": {
+      "median": 1.0664204936895287,
+      "p90": 2.101249449154843
+    },
+    "passes_008": {
+      "original_fit": 0,
+      "repaired_fit": 0,
+      "true_scale_fit": 5,
+      "repaired_true_scale_fit": 5
+    },
+    "max_field_reconstruction_error": 4.440892098500626e-16,
+    "max_fit_reconstruction_error": 2.55351295663786e-15
+  },
+  "600": {
+    "same_design_n": 63,
+    "metrics": {
+      "original_fit": {
+        "median": 0.166274999821136,
+        "p90": 0.5843222759245496
+      },
+      "unregistered_fit": {
+        "median": 0.26926457586773217,
+        "p90": 0.6536391613500534
+      },
+      "registration_error_reduction": {
+        "median": 0.08124849096845779,
+        "p90": 0.1934787626155055
+      },
+      "pristine_missing_fraction": {
+        "median": 0.051513443241564184,
+        "p90": 0.18257879663012935
+      },
+      "missing_in_source_fraction": {
+        "median": 0.05474166196891429,
+        "p90": 0.18373760912039822
+      },
+      "additional_mask_loss_fraction": {
+        "median": 0.0,
+        "p90": 0.0006638118337228652
+      },
+      "excluded_overlap_fraction": {
+        "median": 0.0,
+        "p90": 3.5509156923841925e-06
+      },
+      "estimated_xheight_ratio": {
+        "median": 1.0,
+        "p90": 1.235985312117503
+      },
+      "true_point_size_ratio": {
+        "median": 1.0,
+        "p90": 1.2
+      },
+      "repaired_fit": {
+        "median": 0.16623849929604162,
+        "p90": 0.5843024226368473
+      },
+      "true_scale_fit": {
+        "median": 0.12869126245671872,
+        "p90": 0.25903402733787584
+      },
+      "repaired_true_scale_fit": {
+        "median": 0.12864529206735834,
+        "p90": 0.25895045400974215
+      },
+      "residual_after_joint": {
+        "median": 0.12864529206735834,
+        "p90": 0.25895045400974215
+      }
+    },
+    "abs_log_scale_ratio_error": {
+      "median": 0.016129381929883717,
+      "p90": 0.2155156749406509
+    },
+    "registration_translation_norm": {
+      "median": 0.9556072266226092,
+      "p90": 2.004063005362302
+    },
+    "passes_008": {
+      "original_fit": 0,
+      "repaired_fit": 0,
+      "true_scale_fit": 8,
+      "repaired_true_scale_fit": 8
+    },
+    "max_field_reconstruction_error": 4.440892098500626e-16,
+    "max_fit_reconstruction_error": 1.6653345369377348e-15
+  }
+}

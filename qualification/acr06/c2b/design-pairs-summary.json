@@ -1,0 +1,697 @@
+{
+  "p2-3": {
+    "eligible": 311,
+    "match_counts": {
+      "matched": 275,
+      "ocr_truth_mismatch": 20,
+      "ambiguous_overlap": 11,
+      "low_overlap": 5
+    },
+    "pair_counts": {
+      "same": 634,
+      "same_above_008": 422,
+      "different": 3684,
+      "different_above_008": 3649
+    },
+    "best": {
+      "same": {
+        "count": 205,
+        "above_008": 107,
+        "median": 0.08426818636087993,
+        "p90": 0.2817906170213749
+      },
+      "different": {
+        "count": 275,
+        "above_008": 248,
+        "median": 0.1835722547563057,
+        "p90": 0.2851507374602233
+      }
+    }
+  },
+  "p2-4": {
+    "eligible": 254,
+    "match_counts": {
+      "matched": 230,
+      "ocr_truth_mismatch": 20,
+      "low_overlap": 1,
+      "ambiguous_overlap": 3
+    },
+    "pair_counts": {
+      "different": 2873,
+      "different_above_008": 2849,
+      "same": 262,
+      "same_above_008": 201
+    },
+    "best": {
+      "same": {
+        "count": 155,
+        "above_008": 105,
+        "median": 0.1482911787210513,
+        "p90": 0.6150479931007257
+      },
+      "different": {
+        "count": 230,
+        "above_008": 209,
+        "median": 0.20083164353476535,
+        "p90": 0.3485736495086508
+      }
+    }
+  },
+  "p2-5": {
+    "eligible": 452,
+    "match_counts": {
+      "matched": 418,
+      "ocr_truth_mismatch": 25,
+      "ambiguous_overlap": 7,
+      "low_overlap": 2
+    },
+    "pair_counts": {
+      "different": 6198,
+      "different_above_008": 6068,
+      "same": 778,
+      "same_above_008": 549
+    },
+    "best": {
+      "same": {
+        "count": 300,
+        "above_008": 166,
+        "median": 0.09079049157300711,
+        "p90": 0.2607290357942013
+      },
+      "different": {
+        "count": 418,
+        "above_008": 360,
+        "median": 0.15328373689426916,
+        "p90": 0.2903389804811411
+      }
+    }
+  },
+  "p2-6": {
+    "eligible": 289,
+    "match_counts": {
+      "matched": 266,
+      "ocr_truth_mismatch": 12,
+      "low_overlap": 2,
+      "ambiguous_overlap": 9
+    },
+    "pair_counts": {
+      "same": 493,
+      "same_above_008": 354,
+      "different": 3713,
+      "different_above_008": 3709
+    },
+    "best": {
+      "same": {
+        "count": 202,
+        "above_008": 120,
+        "median": 0.09800654917635657,
+        "p90": 0.3879301561988835
+      },
+      "different": {
+        "count": 266,
+        "above_008": 262,
+        "median": 0.20465741558944872,
+        "p90": 0.3473086214933008
+      }
+    }
+  },
+  "p2-7": {
+    "eligible": 372,
+    "match_counts": {
+      "matched": 344,
+      "ocr_truth_mismatch": 15,
+      "ambiguous_overlap": 11,
+      "low_overlap": 2
+    },
+    "pair_counts": {
+      "same": 625,
+      "same_above_008": 468,
+      "different": 5197,
+      "different_above_008": 5147
+    },
+    "best": {
+      "same": {
+        "count": 268,
+        "above_008": 171,
+        "median": 0.10276885086603216,
+        "p90": 0.5354459254449383
+      },
+      "different": {
+        "count": 344,
+        "above_008": 324,
+        "median": 0.2084206535888014,
+        "p90": 0.3605892385570073
+      }
+    }
+  },
+  "p2-8": {
+    "eligible": 412,
+    "match_counts": {
+      "matched": 376,
+      "low_overlap": 7,
+      "ambiguous_overlap": 10,
+      "ocr_truth_mismatch": 19
+    },
+    "pair_counts": {
+      "different": 5800,
+      "different_above_008": 5682,
+      "same": 948,
+      "same_above_008": 504
+    },
+    "best": {
+      "same": {
+        "count": 317,
+        "above_008": 138,
+        "median": 0.06946627666384701,
+        "p90": 0.1797985774675668
+      },
+      "different": {
+        "count": 376,
+        "above_008": 335,
+        "median": 0.19849680357347865,
+        "p90": 0.3422421817968623
+      }
+    }
+  },
+  "p2prime-3": {
+    "eligible": 396,
+    "match_counts": {
+      "matched": 352,
+      "ocr_truth_mismatch": 27,
+      "low_overlap": 7,
+      "ambiguous_overlap": 10
+    },
+    "pair_counts": {
+      "same": 620,
+      "same_above_008": 503,
+      "different": 4822,
+      "different_above_008": 4758
+    },
+    "best": {
+      "same": {
+        "count": 254,
+        "above_008": 163,
+        "median": 0.10397964850206745,
+        "p90": 0.3692224428000585
+      },
+      "different": {
+        "count": 352,
+        "above_008": 311,
+        "median": 0.17465468014559815,
+        "p90": 0.3074627462310399
+      }
+    }
+  },
+  "p2prime-4": {
+    "eligible": 290,
+    "match_counts": {
+      "matched": 252,
+      "ocr_truth_mismatch": 15,
+      "low_overlap": 8,
+      "ambiguous_overlap": 15
+    },
+    "pair_counts": {
+      "different": 3578,
+      "different_above_008": 3529,
+      "same": 382,
+      "same_above_008": 297
+    },
+    "best": {
+      "same": {
+        "count": 176,
+        "above_008": 113,
+        "median": 0.1356427413716177,
+        "p90": 0.23360923965961816
+      },
+      "different": {
+        "count": 252,
+        "above_008": 223,
+        "median": 0.17232745096770236,
+        "p90": 0.2937509195677891
+      }
+    }
+  },
+  "p2prime-5": {
+    "eligible": 281,
+    "match_counts": {
+      "matched": 247,
+      "ocr_truth_mismatch": 15,
+      "ambiguous_overlap": 17,
+      "low_overlap": 2
+    },
+    "pair_counts": {
+      "different": 3659,
+      "different_above_008": 3643,
+      "same": 389,
+      "same_above_008": 311
+    },
+    "best": {
+      "same": {
+        "count": 196,
+        "above_008": 131,
+        "median": 0.12365827127485682,
+        "p90": 0.5324888945948918
+      },
+      "different": {
+        "count": 247,
+        "above_008": 234,
+        "median": 0.18950701117316496,
+        "p90": 0.3122869518358629
+      }
+    }
+  },
+  "p2prime-6": {
+    "eligible": 403,
+    "match_counts": {
+      "matched": 371,
+      "ocr_truth_mismatch": 21,
+      "ambiguous_overlap": 8,
+      "low_overlap": 3
+    },
+    "pair_counts": {
+      "different": 5785,
+      "different_above_008": 5722,
+      "same": 712,
+      "same_above_008": 534
+    },
+    "best": {
+      "same": {
+        "count": 289,
+        "above_008": 170,
+        "median": 0.09373124014943233,
+        "p90": 0.32232699984249696
+      },
+      "different": {
+        "count": 371,
+        "above_008": 333,
+        "median": 0.18367041112052357,
+        "p90": 0.38166453244356296
+      }
+    }
+  },
+  "p2prime-7": {
+    "eligible": 441,
+    "match_counts": {
+      "matched": 398,
+      "ocr_truth_mismatch": 27,
+      "low_overlap": 4,
+      "ambiguous_overlap": 12
+    },
+    "pair_counts": {
+      "same": 822,
+      "same_above_008": 608,
+      "different": 5952,
+      "different_above_008": 5927
+    },
+    "best": {
+      "same": {
+        "count": 310,
+        "above_008": 181,
+        "median": 0.09039974258387978,
+        "p90": 0.5103806097562559
+      },
+      "different": {
+        "count": 398,
+        "above_008": 379,
+        "median": 0.20880144615265617,
+        "p90": 0.34078517645267664
+      }
+    }
+  },
+  "p2prime-8": {
+    "eligible": 430,
+    "match_counts": {
+      "matched": 384,
+      "ocr_truth_mismatch": 21,
+      "ambiguous_overlap": 16,
+      "low_overlap": 9
+    },
+    "pair_counts": {
+      "same": 823,
+      "same_above_008": 613,
+      "different": 5957,
+      "different_above_008": 5932
+    },
+    "best": {
+      "same": {
+        "count": 304,
+        "above_008": 175,
+        "median": 0.1004104893233187,
+        "p90": 0.22539620388141668
+      },
+      "different": {
+        "count": 384,
+        "above_008": 362,
+        "median": 0.19016721460838948,
+        "p90": 0.30755981766045815
+      }
+    }
+  },
+  "p2pp-3": {
+    "eligible": 357,
+    "match_counts": {
+      "matched": 309,
+      "ocr_truth_mismatch": 28,
+      "ambiguous_overlap": 13,
+      "low_overlap": 7
+    },
+    "pair_counts": {
+      "different": 4109,
+      "different_above_008": 4031,
+      "same": 534,
+      "same_above_008": 423
+    },
+    "best": {
+      "same": {
+        "count": 241,
+        "above_008": 155,
+        "median": 0.11171459603474147,
+        "p90": 0.3357504883375947
+      },
+      "different": {
+        "count": 309,
+        "above_008": 264,
+        "median": 0.17268421185252525,
+        "p90": 0.32272835778213244
+      }
+    }
+  },
+  "p2pp-4": {
+    "eligible": 294,
+    "match_counts": {
+      "matched": 251,
+      "ambiguous_overlap": 23,
+      "ocr_truth_mismatch": 12,
+      "low_overlap": 8
+    },
+    "pair_counts": {
+      "same": 393,
+      "same_above_008": 282,
+      "different": 3239,
+      "different_above_008": 3188
+    },
+    "best": {
+      "same": {
+        "count": 182,
+        "above_008": 109,
+        "median": 0.11263846875874539,
+        "p90": 0.31606967068848935
+      },
+      "different": {
+        "count": 251,
+        "above_008": 223,
+        "median": 0.17860875979603502,
+        "p90": 0.3545586982696841
+      }
+    }
+  },
+  "p2pp-5": {
+    "eligible": 333,
+    "match_counts": {
+      "matched": 304,
+      "low_overlap": 5,
+      "ocr_truth_mismatch": 14,
+      "ambiguous_overlap": 10
+    },
+    "pair_counts": {
+      "same": 626,
+      "same_above_008": 422,
+      "different": 4180,
+      "different_above_008": 4135
+    },
+    "best": {
+      "same": {
+        "count": 225,
+        "above_008": 113,
+        "median": 0.0803047218570875,
+        "p90": 0.3078907037384923
+      },
+      "different": {
+        "count": 304,
+        "above_008": 268,
+        "median": 0.16629873013862628,
+        "p90": 0.32247319349812226
+      }
+    }
+  },
+  "p2pp-6": {
+    "eligible": 330,
+    "match_counts": {
+      "matched": 302,
+      "ocr_truth_mismatch": 17,
+      "ambiguous_overlap": 9,
+      "low_overlap": 2
+    },
+    "pair_counts": {
+      "same": 476,
+      "same_above_008": 372,
+      "different": 4481,
+      "different_above_008": 4437
+    },
+    "best": {
+      "same": {
+        "count": 226,
+        "above_008": 145,
+        "median": 0.1085259543426918,
+        "p90": 0.3959946474916676
+      },
+      "different": {
+        "count": 302,
+        "above_008": 273,
+        "median": 0.182040665222381,
+        "p90": 0.3388976949902497
+      }
+    }
+  },
+  "p2pp-7": {
+    "eligible": 450,
+    "match_counts": {
+      "matched": 417,
+      "ambiguous_overlap": 15,
+      "low_overlap": 3,
+      "ocr_truth_mismatch": 15
+    },
+    "pair_counts": {
+      "different": 6697,
+      "different_above_008": 6532,
+      "same": 738,
+      "same_above_008": 530
+    },
+    "best": {
+      "same": {
+        "count": 330,
+        "above_008": 194,
+        "median": 0.09666213891830273,
+        "p90": 0.2513697256578254
+      },
+      "different": {
+        "count": 417,
+        "above_008": 348,
+        "median": 0.151840119754999,
+        "p90": 0.31709911730210905
+      }
+    }
+  },
+  "p2pp-8": {
+    "eligible": 396,
+    "match_counts": {
+      "matched": 346,
+      "ocr_truth_mismatch": 32,
+      "ambiguous_overlap": 15,
+      "low_overlap": 3
+    },
+    "pair_counts": {
+      "same": 543,
+      "same_above_008": 364,
+      "different": 5183,
+      "different_above_008": 5136
+    },
+    "best": {
+      "same": {
+        "count": 263,
+        "above_008": 149,
+        "median": 0.1050474104792195,
+        "p90": 0.6039489650236245
+      },
+      "different": {
+        "count": 346,
+        "above_008": 323,
+        "median": 0.18427093555648516,
+        "p90": 0.3228992216584191
+      }
+    }
+  },
+  "font01-train-1": {
+    "eligible": 279,
+    "match_counts": {
+      "matched": 258,
+      "ambiguous_overlap": 5,
+      "ocr_truth_mismatch": 14,
+      "low_overlap": 2
+    },
+    "pair_counts": {
+      "different": 3867,
+      "different_above_008": 3819,
+      "same": 646,
+      "same_above_008": 478
+    },
+    "best": {
+      "same": {
+        "count": 241,
+        "above_008": 145,
+        "median": 0.1101112800439433,
+        "p90": 0.31070120400373935
+      },
+      "different": {
+        "count": 258,
+        "above_008": 229,
+        "median": 0.16816454919282936,
+        "p90": 0.3183698374451184
+      }
+    }
+  },
+  "font01-train-2": {
+    "eligible": 294,
+    "match_counts": {
+      "matched": 268,
+      "ocr_truth_mismatch": 20,
+      "ambiguous_overlap": 4,
+      "low_overlap": 2
+    },
+    "pair_counts": {
+      "same": 580,
+      "same_above_008": 342,
+      "different": 4019,
+      "different_above_008": 3934
+    },
+    "best": {
+      "same": {
+        "count": 227,
+        "above_008": 130,
+        "median": 0.09941568041127236,
+        "p90": 0.5215445498462188
+      },
+      "different": {
+        "count": 268,
+        "above_008": 231,
+        "median": 0.18225195772694405,
+        "p90": 0.35672744045838944
+      }
+    }
+  },
+  "font01-validation-1": {
+    "eligible": 200,
+    "match_counts": {
+      "matched": 183,
+      "ocr_truth_mismatch": 11,
+      "low_overlap": 1,
+      "ambiguous_overlap": 5
+    },
+    "pair_counts": {
+      "different": 2460,
+      "different_above_008": 2447,
+      "same": 405,
+      "same_above_008": 288
+    },
+    "best": {
+      "same": {
+        "count": 158,
+        "above_008": 94,
+        "median": 0.1005710027907424,
+        "p90": 0.5440004895759426
+      },
+      "different": {
+        "count": 183,
+        "above_008": 172,
+        "median": 0.20047134123174606,
+        "p90": 0.3138388088990035
+      }
+    }
+  },
+  "font01-validation-2": {
+    "eligible": 159,
+    "match_counts": {
+      "matched": 150,
+      "ocr_truth_mismatch": 8,
+      "ambiguous_overlap": 1
+    },
+    "pair_counts": {
+      "same": 402,
+      "same_above_008": 264,
+      "different": 2146,
+      "different_above_008": 2146
+    },
+    "best": {
+      "same": {
+        "count": 138,
+        "above_008": 61,
+        "median": 0.07110904510357041,
+        "p90": 0.20319734319414998
+      },
+      "different": {
+        "count": 150,
+        "above_008": 150,
+        "median": 0.25120026088544173,
+        "p90": 0.36670530207463464
+      }
+    }
+  },
+  "font01-test-1": {
+    "eligible": 271,
+    "match_counts": {
+      "matched": 254,
+      "ocr_truth_mismatch": 11,
+      "ambiguous_overlap": 3,
+      "low_overlap": 3
+    },
+    "pair_counts": {
+      "different": 3764,
+      "different_above_008": 3702,
+      "same": 512,
+      "same_above_008": 412
+    },
+    "best": {
+      "same": {
+        "count": 215,
+        "above_008": 146,
+        "median": 0.1121076977492571,
+        "p90": 0.48922087501279254
+      },
+      "different": {
+        "count": 254,
+        "above_008": 218,
+        "median": 0.1533254312513097,
+        "p90": 0.24388662687473686
+      }
+    }
+  },
+  "font01-test-2": {
+    "eligible": 257,
+    "match_counts": {
+      "matched": 238,
+      "ambiguous_overlap": 6,
+      "ocr_truth_mismatch": 12,
+      "low_overlap": 1
+    },
+    "pair_counts": {
+      "different": 3413,
+      "different_above_008": 3347,
+      "same": 494,
+      "same_above_008": 315
+    },
+    "best": {
+      "same": {
+        "count": 200,
+        "above_008": 108,
+        "median": 0.08558059214394152,
+        "p90": 0.4733727833778757
+      },
+      "different": {
+        "count": 238,
+        "above_008": 203,
+        "median": 0.17409445700324788,
+        "p90": 0.29395480119146483
+      }
+    }
+  }
+}
