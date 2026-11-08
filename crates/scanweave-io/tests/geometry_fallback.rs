@@ -1,5 +1,6 @@
 use scanweave_io::convert::{convert_parts, Input, Policy, ProtectedInput, SpanInput, SymbolInput};
 
+/// The m1d damage fixture, optionally with a protected box over the rejected glyph.
 fn input(protected: bool) -> Input {
     let root = std::path::Path::new(env!("CARGO_MANIFEST_DIR"))
         .join("../../qualification/fixtures/m1d_damage");
@@ -59,6 +60,7 @@ fn input(protected: bool) -> Input {
     }
 }
 
+/// A geometry-rejected glyph in a raster region is never traced or referenced.
 #[test]
 fn raster_rejected_geometry_has_no_trace_or_font_reference() {
     let policy = Policy {

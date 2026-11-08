@@ -623,6 +623,8 @@ fn glyph_coverage_contract(
     cover
 }
 
+/// Runs `trace` only when unit `index` is in a vector-disposition region.
+/// Raster regions never return to vector, so their local outline is never emitted.
 fn trace_if_vector<T>(regions: &[Region], index: usize, trace: impl FnOnce() -> T) -> Option<T> {
     regions
         .iter()
