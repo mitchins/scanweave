@@ -628,12 +628,12 @@ pub fn convert_document_with_sources_and_sharing(
     // fall below min_ink_iou is disqualified, not ranked by bytes. The raster
     // baseline reproduces the source pixels exactly and is always qualified.
     let recon_ok = pages.iter().all(|p| {
-        (policy.profile == "clearscan"
+        p.parts.raster_baseline || ((policy.profile == "clearscan"
             || p.report
                 .fidelity
                 .preservation_ink_iou_min
                 .is_none_or(|m| m >= policy.min_ink_iou))
-            && (policy.profile != "clearscan" || p.report.reconstruction.restoration_qualified)
+            && (policy.profile != "clearscan" || p.report.reconstruction.restoration_qualified))
     });
     let baseline_ok = true;
     let selected: String = if policy.mode == "auto" {

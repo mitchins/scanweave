@@ -119,8 +119,14 @@ pub struct Fidelity {
 #[derive(Debug, Clone, Serialize)]
 pub struct Report {
     pub segmentation_method: String,
+    pub polarity_paper_luminance: f64,
+    pub polarity_ink_luminance: f64,
+    pub polarity_inverted: bool,
+    pub polarity_visible_occurrences: usize,
+    pub polarity_raster_baseline: bool,
     pub stage_timings_ms: BTreeMap<String, u128>,
     pub fidelity: Fidelity,
+    /// The reconstruction proposal, before any page-level raster route.
     pub reconstruction: crate::visual_dict::Reconstruction,
     pub glyph_stats: Vec<GlyphStat>,
     /// candidates actually serialized and measured (name, pdf bytes); auto mode
@@ -138,6 +144,7 @@ pub struct Report {
     pub components_artwork: usize,
     pub visual_units: usize,
     pub semantic_spans: usize,
+    /// Region planning decisions before any page-level raster route.
     pub regions: Vec<RegionRecord>,
     pub coverage: Coverage,
     /// Source pixels removed because an emitted vector occurrence owns them.
@@ -646,13 +653,21 @@ fn span_bbox(poly: &[[f64; 2]]) -> [f64; 4] {
     bb
 }
 
+// A light foreground against corner-estimated dark paper is ambiguous: it
+// can be reverse printing or paper selected as foreground. Preserve the source.
+fn polarity_requires_baseline(profile: &str, paper: [u8; 3], ink: [u8; 3], visible: usize) -> bool {
+    profile == "clearscan" && crate::mask::lum(ink) > crate::mask::lum(paper) && visible > 0
+}
+
 pub fn convert(input: &Input, policy: &Policy) -> Result<Output, String> {
     let (parts, report) = convert_parts(input, policy)?;
     // single-page PDF + the B0 searchable-raster baseline candidate (the
     // document-level equivalent lives in crate::document)
     let (shapes, encodings) = (&parts.shapes, parts.encodings.clone());
     let font_bytes = build_font(shapes, &encodings, policy.upem)?;
-    let pdf_bytes = if policy.profile == "clearscan" && input.protected_regions.is_empty() {
+    let pdf_bytes = if parts.raster_baseline
+        || (policy.profile == "clearscan" && input.protected_regions.is_empty())
+    {
         crate::page_pdf::assemble_document_with_tonal_fallback(
             std::slice::from_ref(&parts),
             shapes,
@@ -700,7 +715,9 @@ pub fn convert(input: &Input, policy: &Policy) -> Result<Output, String> {
     let restoration_ok =
         policy.profile != "clearscan" || report.reconstruction.restoration_qualified;
     let recon_fidelity_ok = preservation_ok && restoration_ok;
-    let selected = if policy.mode == "auto" {
+    let selected = if parts.raster_baseline {
+        "raster_baseline".to_string()
+    } else if policy.mode == "auto" {
         if recon_fidelity_ok && pdf_bytes.len() <= b0.len() {
             "reconstruct"
         } else {
@@ -1992,7 +2009,17 @@ pub(crate) fn convert_parts_with_document_donors(
         "raster_composition_and_owners".into(),
         composition_started.elapsed().as_millis(),
     );
-    let report = Report {
+    let paper_luminance = crate::mask::lum(seg.paper);
+    let ink_luminance = crate::mask::lum(seg.ink);
+    let polarity_inverted = ink_luminance > paper_luminance;
+    let polarity_visible_occurrences = parts.occurrences.len();
+    let polarity_raster_baseline = polarity_requires_baseline(&policy.profile, seg.paper, seg.ink, polarity_visible_occurrences);
+    let mut report = Report {
+        polarity_inverted,
+        polarity_visible_occurrences,
+        polarity_paper_luminance: paper_luminance,
+        polarity_ink_luminance: ink_luminance,
+        polarity_raster_baseline,
         segmentation_method: "global_corner_paper".into(),
         stage_timings_ms,
         candidates: Vec::new(),
@@ -2033,6 +2060,40 @@ pub(crate) fn convert_parts_with_document_donors(
         elapsed_ms: start.elapsed().as_millis(),
     };
 
+    let mut parts = parts;
+    if polarity_raster_baseline {
+        parts.patches = vec![whole_page_patch(&parts, parts.source_w, parts.source_h)?];
+        parts.raster_baseline = true;
+        report.selected = "raster_baseline".into();
+        report.patches = parts
+            .patches
+            .iter()
+            .map(|p| PatchRecord {
+                compact_background: p.compact_background,
+                bbox_px: p.bbox_px,
+                w: p.w,
+                h: p.h,
+                rgb_sha256: scanweave_core::hash_hex(&p.rgb),
+            })
+            .collect();
+        for occurrence in &mut report.occurrences {
+            if occurrence.owner == "visible_tounicode" {
+                occurrence.owner = "invisible".into();
+            }
+        }
+        for owner in report.semantic_owner.values_mut() {
+            *owner = "invisible".into();
+        }
+        report.fidelity.raster_ink_px += report.coverage.text_ink_px_vector;
+        report.fidelity.vector_ink_iou_min = None;
+        report.fidelity.vector_ink_iou_mean = None;
+        report.fidelity.preservation_ink_iou_min = None;
+        report.coverage.text_ink_px_raster += report.coverage.text_ink_px_vector;
+        report.coverage.text_ink_px_vector = 0;
+        report.raster_ink_pixels_suppressed = 0;
+        report.antialias_fringe_pixels_suppressed = 0;
+        report.raster_bytes = input.rgb.len();
+    }
     Ok((parts, report))
 }
 
@@ -3554,5 +3615,24 @@ mod contour_coverage_tests {
         let mut untouched = vec![false; w * h];
         assert!(protect_weak_rules(&short, w, h, 300.0, [250; 3], &ink, &mut untouched).is_empty());
         assert!(untouched.iter().all(|&b| !b));
+    }
+}
+
+#[cfg(test)]
+mod polarity_gate_tests {
+    use super::polarity_requires_baseline;
+
+    #[test]
+    fn unreliable_inverted_and_reverse_estimates_use_baseline() {
+        assert!(polarity_requires_baseline("clearscan", [20, 20, 20], [230, 220, 210], 1));
+        assert!(polarity_requires_baseline("clearscan", [30, 30, 30], [240, 240, 240], 1));
+    }
+
+    #[test]
+    fn normal_and_equal_estimates_do_not_change() {
+        assert!(!polarity_requires_baseline("clearscan", [250, 250, 250], [20, 20, 20], 1));
+        assert!(!polarity_requires_baseline("clearscan", [40, 40, 40], [40, 40, 40], 1));
+        assert!(!polarity_requires_baseline("faithful", [20, 20, 20], [240, 240, 240], 1));
+        assert!(!polarity_requires_baseline("clearscan", [20, 20, 20], [240, 240, 240], 0));
     }
 }

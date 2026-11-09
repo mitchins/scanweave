@@ -14,7 +14,7 @@ pub struct Segmentation {
     pub ink: [u8; 3],
 }
 
-fn lum(rgb: [u8; 3]) -> f64 {
+pub(crate) fn lum(rgb: [u8; 3]) -> f64 {
     0.2126 * rgb[0] as f64 + 0.7152 * rgb[1] as f64 + 0.0722 * rgb[2] as f64
 }
 

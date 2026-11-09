@@ -27,7 +27,7 @@ scanweave input.pdf output.pdf
 
 Conversion defaults to ClearScan at 300 DPI; the adjacent `output.pdf.json` records provenance and conversion results. Install additional Tesseract language data before selecting another language.
 
-Use `--profile faithful` for the independent preservation profile without ClearScan's lossy residual-image encoding.
+Use `--profile faithful` for the independent preservation profile without ClearScan's lossy residual-image encoding. ClearScan preserves a page as a searchable source raster when its estimated ink is lighter than its estimated paper and it would otherwise emit visible vector glyphs, because that polarity can be ambiguous.
 
 OCR can fail, not every page vectorizes or becomes searchable, and ClearScan is not pixel-exact; real-document quality and size still vary.
 

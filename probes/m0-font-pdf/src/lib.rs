@@ -198,6 +198,11 @@ pub fn build_page(page_dir: &PathBuf, out_dir: &PathBuf) -> Result<Report, Strin
     // legacy shim report fields (io Report mirrors the shim shape)
     let mut report = Report {
         segmentation_method: out.report.segmentation_method.clone(),
+        polarity_inverted: out.report.polarity_inverted,
+        polarity_visible_occurrences: out.report.polarity_visible_occurrences,
+        polarity_paper_luminance: out.report.polarity_paper_luminance,
+        polarity_ink_luminance: out.report.polarity_ink_luminance,
+        polarity_raster_baseline: out.report.polarity_raster_baseline,
         stage_timings_ms: out.report.stage_timings_ms.clone(),
         fidelity: out.report.fidelity.clone(),
         reconstruction: out.report.reconstruction.clone(),
