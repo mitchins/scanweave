@@ -151,6 +151,7 @@ fn inverted_visible_glyph_routes_to_exact_searchable_baseline() {
     assert!(report.polarity_visible_occurrences > 0);
     assert!(parts.raster_baseline);
     assert!(report.polarity_raster_baseline);
+    assert_eq!(report.compact_decision, "encoder_ineligible");
     assert_eq!(parts.patches.len(), 1);
     assert_eq!(
         parts.patches[0].bbox_px,
@@ -212,4 +213,85 @@ fn document_routes_only_the_inverted_page() {
     assert_eq!(counts[0].0, 0, "routed page must paint no text");
     assert!(counts[0].1 > 0, "routed page must retain invisible text");
     assert!(counts[1].0 > 0, "normal page must retain visible text");
+}
+
+#[test]
+fn tonal_inverted_page_uses_explicit_compact_representation() {
+    let mut input = outlined_text_page(true);
+    let source = image::RgbImage::from_raw(input.width, input.height, input.rgb.clone()).unwrap();
+    let scaled = image::imageops::resize(
+        &source,
+        input.width * 4,
+        input.height * 4,
+        image::imageops::FilterType::Nearest,
+    );
+    input.width *= 4;
+    input.height *= 4;
+    input.rgb = scaled.into_raw();
+    let mut noise = 12345u32;
+    for y in 0..input.height as usize {
+        for x in 0..input.width as usize {
+            noise = noise.wrapping_mul(1664525).wrapping_add(1013904223);
+            let i = (y * input.width as usize + x) * 3;
+            if input.rgb[i] == 245 {
+                input.rgb[i..i + 3]
+                    .fill((160 + (x % 85) as i32 + ((noise >> 24) % 5) as i32 - 2) as u8);
+            }
+        }
+    }
+    for span in &mut input.spans {
+        for point in &mut span.polygon {
+            point[0] *= 4.0;
+            point[1] *= 4.0;
+        }
+        for symbol in &mut span.symbols {
+            for point in &mut symbol.polygon {
+                point[0] *= 4.0;
+                point[1] *= 4.0;
+            }
+        }
+    }
+    input.raster_to_page_pt[5] = input.height as f64 * 0.24;
+    let policy = Policy {
+        profile: "clearscan".into(),
+        ..Policy::default()
+    };
+    let (parts, report) = convert_parts(&input, &policy).unwrap();
+    assert!(report.polarity_inverted && report.polarity_visible_occurrences > 0);
+    assert!(report.polarity_raster_baseline);
+    assert!(
+        !parts.raster_baseline,
+        "exact baseline contract remains distinct"
+    );
+    assert!(parts.compact_source.is_some());
+    assert_eq!(report.selected, "raster_baseline_compact");
+    assert_eq!(report.raster_fidelity, "clearscan_compact_lossy");
+    assert_eq!(report.compact_decision, "accepted");
+    assert!(report.compact_source_mae.is_some());
+    assert!(report.compact_ink_recall.is_some());
+    assert_eq!(report.fidelity.raster_ink_px, 0);
+    let output = scanweave_io::convert::convert(&input, &policy).unwrap();
+    assert_eq!(output.report.selected, "raster_baseline_compact");
+    assert_eq!(output.report.raster_encoding, "jpeg");
+    assert_ne!(output.pdf_bytes, output.b0_bytes);
+    assert_eq!(text_show_counts(&output.pdf_bytes)[0].0, 0);
+    assert_eq!(text_show_counts(&output.b0_bytes)[0].0, 0);
+    let document = scanweave_io::document::convert_document(
+        "compact",
+        &[input, outlined_text_page(false)],
+        &policy,
+    )
+    .unwrap();
+    assert_eq!(document.report.page_reports[0].raster_encoding, "jpeg");
+    assert_eq!(
+        document.report.page_reports[0].raster_fidelity,
+        "clearscan_compact_lossy"
+    );
+    assert_ne!(
+        document.report.page_reports[1].raster_encoding,
+        "pending_assembly"
+    );
+    let counts = text_show_counts(&document.pdf_bytes);
+    assert_eq!(counts[0].0, 0);
+    assert!(counts[1].0 > 0);
 }

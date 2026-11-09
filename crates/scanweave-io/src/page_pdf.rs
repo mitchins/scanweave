@@ -1209,6 +1209,14 @@ fn validate_occurrence_geometry(occurrences: &[Occurrence]) -> Result<(), String
 /// One page's assembly inputs. `occurrences`/`owner_cids` use the CID space of
 /// the encodings slice inside the same struct (single-page use). For documents,
 /// the document builder remaps them onto the shared encoding space.
+/// Prequalified compact encoding of the original source raster.
+#[derive(Debug, Clone)]
+pub struct CompactSourceRaster {
+    pub bytes: Vec<u8>,
+    pub width: u32,
+    pub height: u32,
+}
+
 #[derive(Debug, Clone)]
 pub struct PageParts {
     /// the canonical source raster (needed by the whole-page raster baseline)
@@ -1216,6 +1224,8 @@ pub struct PageParts {
     /// raster-baseline candidate: the text layer is drawn INVISIBLY over the
     /// whole-page source patch (searchable text, source pixels, no vector ink)
     pub raster_baseline: bool,
+    /// Optional lossy source-raster representation; absent for exact baselines.
+    pub compact_source: Option<CompactSourceRaster>,
     /// Verified simple input image, available only for a zero-vector page.
     pub encoded_source: Option<crate::source_image::EncodedSourceImage>,
     pub source_w: usize,
@@ -1278,7 +1288,7 @@ pub fn assemble_document_with_options(
 // Use the emitted patch samples, never restore source_rgb beneath those fonts.
 // Verified source JPEGs retain the existing passthrough path.
 fn whole_page_tonal_candidate(p: &PageParts) -> bool {
-    !p.raster_baseline && p.patches.len()==1
+    !p.raster_baseline && p.compact_source.is_none() && p.patches.len()==1
         && p.patches[0].w as usize==p.source_w && p.patches[0].h as usize==p.source_h
         && p.patches[0].bbox_px==[0.0,0.0,p.source_w as f64,p.source_h as f64]
         && !p.patches[0].compact_background
@@ -1362,7 +1372,7 @@ fn assemble_document_impl(
         let mut ids = Vec::with_capacity(p.patches.len());
         for patch in &p.patches {
             let key = canonical_patch(patch, image_options)?;
-            let existing = if image_options.reuse_identical {
+            let existing = if image_options.reuse_identical && p.compact_source.is_none() {
                 resource_lookup
                     .get(&key.sample_sha256)
                     .and_then(|candidates| {
@@ -1429,6 +1439,21 @@ fn assemble_document_impl(
                                 key.samples = source.bytes.clone();
                             }
                         }
+                    }
+                    if let Some(compact) = &p.compact_source {
+                        let mut digest = Sha256::new();
+                        digest.update(b"compact-source-raster-v1");
+                        digest.update(&compact.bytes);
+                        digest.update(compact.width.to_be_bytes());
+                        digest.update(compact.height.to_be_bytes());
+                        key.sample_sha256 = digest.finalize().into();
+                        key.samples = compact.bytes.clone();
+                        key.width = compact.width;
+                        key.height = compact.height;
+                        key.color_space = 3;
+                        compressed = compact.bytes.clone();
+                        jpeg = true;
+                        predictor = 1;
                     }
                     if let Some(tonal) = tonal.filter(|image|image.bytes.len()<compressed.len()) {
                         // Encoded identity cannot alias a lossless native patch.
@@ -1557,6 +1582,17 @@ fn assemble_document_impl(
 
     // Image streams are document-global; page-local content names refer to a
     // shared XObject only when its complete decoded samples and parameters match.
+    let image_is_jpeg: HashMap<_, _> = image_resources.iter().map(|r| (r.id, r.jpeg)).collect();
+    stats.page_image_encodings = image_refs.iter().map(|ids| {
+        let has_jpeg = ids.iter().any(|id| image_is_jpeg.get(id) == Some(&true));
+        let has_lossless = ids.iter().any(|id| image_is_jpeg.get(id) == Some(&false));
+        match (has_jpeg, has_lossless) {
+            (true, true) => "mixed",
+            (true, false) => "jpeg",
+            (false, true) => "lossless",
+            (false, false) => "none",
+        }.to_string()
+    }).collect();
     stats.image_xobjects = image_resources.len();
     stats.image_references = image_refs.iter().map(Vec::len).sum();
     for resource in &image_resources {
@@ -1622,7 +1658,7 @@ fn assemble_document_impl(
             &p.lines,
             &p.to_pt,
             p.ink,
-            p.raster_baseline,
+            p.raster_baseline || p.compact_source.is_some(),
             sharing.map(|s| s.occurrence_variants[i].as_slice()),
         );
         c.end_text();
@@ -1656,6 +1692,8 @@ fn assemble_document_impl(
 /// object counts and the encoded sizes that end up in the file).
 #[derive(Debug, Clone, Default, serde::Serialize)]
 pub struct AssemblyStats {
+    /// Image stream encoding selected on each page (JPEG, lossless, mixed or none).
+    pub page_image_encodings: Vec<String>,
     /// Unique image resources serialized in the document.
     pub image_xobjects: usize,
     /// Page-local image placements that reference those resources.
@@ -1711,6 +1749,7 @@ mod image_resource_tests {
         PageParts {
             source_rgb: vec![255; 3],
             raster_baseline: false,
+            compact_source: None,
             encoded_source: None,
             source_w: 1,
             source_h: 1,
