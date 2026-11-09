@@ -1,0 +1,80 @@
+Warning: this sign-in ends between 2026-11-14 and 2026-11-17 (in 6 days at the earliest). Renewing it does not move those dates. Run claude auth login before then, or use claude setup-token for unattended jobs.
+**Verdict: the decision is sound as a way to contain the reported damage, but not as stated.** On the 10 reported pages it gives the right result. It doesn't satisfy "no unsupported vector colour" in general, and nothing yet shows the "permit" branch works for true reverse printing. "Normal-polarity pages unchanged" is also false at document level unless donors and sharing are handled explicitly. I edited nothing.
+
+## 1. The 10 reported pages
+
+Luminance values below are from `segmentation-investigation.json`. "Top mode" is the strongest 8-level bin in the central 80% of the page.
+
+| page | corner L | legacy ink L | top mode L (fraction) |
+|---|---|---|---|
+| hist 1–5 | 1–54 | 178–218 | 176–223 (0.22–0.49) |
+| rcpt 4 | 130 | 205 | 200–207 (**0.11**) |
+| rcpt 6 | 116 | 210 | 208–215 (0.15) |
+| rcpt 7 / 8 | 29 / 13 | 190 / 199 | 184–207 (0.29 / 0.20) |
+| rcpt 9 | 64 | 149 | 160–167 (0.21) |
+
+On all 10 the trigger fires and the top mode is the bright one, so they all fall back. But the investigation only records the top mode, so the "dark mode close to the corner" test is never actually exercised by this data. Receipt 4's top mode has only 0.11 support, so a dark table bin could easily come close to it. You need second-mode fractions before choosing thresholds.
+
+Seven of the 10 pages already emit 0 visible objects (`glyph-evidence-probe.json`). In ClearScan with no vectors, the page already keeps `input.rgb` whole (`convert.rs:1520-1528`). So visually the fix only changes historical 2 and 5 and receipts 4. Report it that way.
+
+## 2. Counterexamples
+
+**A. The "permit" branch passes the very bug it should catch.** Take a small light receipt or card photographed on a large dark table. The table fills most of the page interior, and it is exactly the corner colour by construction. The rule then permits visible vectors in the paper colour, which is the issue #37 failure. Receipts 7 and 8 already show bright-mode support of only 0.20–0.29; a wider crop flips them. The rule measures how much of the page is dark, not which way round text and background are. Your own constraint applies here: you can't assume the bright mode is paper, and equally you can't assume a dominant dark mode is the background behind the text.
+
+**B. The trigger misses mixed-polarity masks.** The mask is a two-sided absolute threshold (`mask.rs:62-69`), and ink is a per-channel median over everything above it (`mask.rs:73-90`). With mid-tone corners, foreground includes both dark text and bright paper:
+- Receipt 1: corner L≈113, so pixels with L>173 count as "ink" (150k mask changes).
+- Receipt 2: corner L≈133, so pixels with L>193 count as "ink" (107k changes; 12 visible objects).
+
+Whether the median comes out dark or light depends on how many dark-text pixels there are versus bright-paper pixels. Less text, or more receipt in frame, flips the classification. Per-channel medians also aren't a real colour, so compare luminance, not channels.
+
+**C. A true reverse page with a light scanner margin.** The corners are white, so the dark background becomes "ink" and the trigger doesn't fire. The rule never sees this page. There is no control for it.
+
+**D. Wrong colours on pages the rule treats as normal.** In `control-main-audit.json`:
+- `binding_shadow` emits 14 visible shows with fill (97,94,89) against true ink (34,31,29). That is a 3× luminance error on a page this rule leaves alone.
+- `photograph` emits 57 visible shows with fill (76,77,71). The added text is (250,250,250). These shows may be the photograph's own receipt text, which isn't in the truth manifest; this needs checking.
+
+So "no unsupported vector colour" is not met overall. The rule only handles the inverted case.
+
+**E. The cost of over-triggering is acceptable.** A dark-on-light page with a black border (like `black_border`, or historical-style scans) loses vectors permanently. That's conservative, but the reason should be reported as "polarity estimate unsupported", not "reverse print".
+
+## 3. Other paths the fallback has to cover
+
+- **Downstream code assumes dark ink on light paper.** Even if the permit branch allows true reverse printing, ClearScan code assumes dark ink:
+  - `trace.rs:292-299`: paper is the 90th percentile, ink the 5th.
+  - `glyph_sharing/source.rs:62-82`: the same assumption.
+  - `clean_replaced_text` at `convert.rs:2261-2305`: computes `paper - source_dark`.
+  - `protect_weak_rules` at `convert.rs:2485`.
+
+  On light-on-dark text these produce inverted coverage targets and inverted cleanup. Main emits 0 visible shows on `reverse_page`, so in practice the permit branch currently permits nothing. Without a positive control that is a blanket prohibition in effect, not in wording.
+- **Donors.** `collect_document_donors` (`convert.rs:374`, `document.rs:373-376`) segments each page on its own. It would still export masks from inverted pages, which are paper/background shapes labelled as characters, to sibling pages. The fallback must exclude flagged pages as donors. Doing so changes output on normal pages in mixed documents.
+- **q3 glyph sharing.** `snapshot` counts occurrences across the document; a label needs at least 10 (`source.rs:204-216`). It also frames sources with `p.paper` (`source.rs:234`). Removing a flagged page's occurrences changes quorums and canonicals on normal pages.
+- **Auto mode picks one candidate for the whole document by byte size** (`document.rs:639-641`). Rasterising flagged pages can flip the whole document to `raster_baseline`, normal pages included.
+- **"Original raster" is ambiguous.** A whole-page patch can still be re-encoded through the tonal path (`page_pdf.rs:1280`, `1381-1387`), or the source JPEG can be passed through unchanged (`document.rs:464-470`). Say which one the fallback guarantees: pixel-exact, passthrough, or the qualified lossy tonal encoding.
+
+## 4. Semantic and reporting pitfalls
+
+- **The invisible text still depends on segmentation.** In the faithful profile, fallback owners are positioned with `place_px`, which is the first unit's bbox from the inverted mask (`convert.rs:1633-1638`, `page_pdf.rs:796-856`). That box can be a whole paper blob. On flagged pages, place owners from OCR geometry only. ClearScan already uses OCR symbol boxes.
+- **The report keeps meaningless numbers.** `coverage` (`text_ink_px_*`, `unowned`, `multiply_owned`) and `parts.paper`/`parts.ink` still come from the inverted mask, and `segmentation_method` still says `global_corner_paper`. Mark them invalid, or rename them "corner estimate" and "legacy foreground median". Never label them as paper or ink.
+- **No distinct fallback reason.** Add a reason (e.g. `UnsupportedPolarity`) and a per-page flag. At document level `selected` stays `reconstruct`, so without this the reason is invisible.
+- **Search/copy must be re-verified** for wholly fallback pages: PDFium, plus Poppler for faithful. Fixes #31 and #34 were qualified on mixed pages.
+
+## 5. Evidence needed before shipping
+
+1. Second-mode and dark-bin fractions for all 32 pages and the controls, with sensitivity sweeps over the "strong" and "close" thresholds. Any threshold must show margin, not just a pass.
+2. A positive control for true reverse printing: a dark page with a light-text OCR layer, in both faithful and ClearScan, emitting visible vectors whose fill is checked against the glyph pixels. Also new negative controls:
+   - a small light receipt on a dominant dark table (counterexample A);
+   - a reverse page with a white scanner margin (C);
+   - a mid-tone table with variable text density (B).
+3. Byte-identical output on every unaffected page, both single-page and document, with and without q3, plus a stated, measured diff wherever donor or sharing exclusion changes normal pages.
+4. An independent check of the 65 objects and the fresh reruns. The current probe is admittedly unreliable: it finds 0 bad objects on receipts 4.
+5. A better local test to replace or back up the page-mode rule. Pad each OCR word box and measure the share of foreground pixels and the stroke-width distribution. On an inverted mask the "ink" fills most of the box; real glyphs fill a small share. This doesn't depend on which side is bright.
+
+## 6. Against the requirements
+
+- **No blanket ban on reverse printing:** met in wording only. It isn't demonstrated, and the ClearScan stages in §3 make visible reverse vectors unqualified today.
+- **No unsupported vector colour:** not met. The trigger misses B–D, and permit-branch colours aren't checked per glyph.
+- **No re-segmentation:** met. But the fallback must stop using segmentation-derived owner placement, donors and coverage on flagged pages.
+
+**Recommendation:** adopt whole-page fallback for the inverted trigger now, since it is strictly safer for the 3 damaged pages. Treat the permit branch as unqualified until item 2 exists. Separately, add a per-glyph fill-versus-local-pixel check, so the colour requirement is enforced on every page and not inferred from page-level modes.
+
+EXIT=0

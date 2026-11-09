@@ -1,0 +1,84 @@
+Warning: this sign-in ends between 2026-11-14 and 2026-11-17 (in 6 days at the earliest). Renewing it does not move those dates. Run claude auth login before then, or use claude setup-token for unattended jobs.
+I reviewed all 65 numbered glyphs on the nine sheets, one by one. The index has 65 entries: sheets 1–8 hold 8 rows each and sheet 9 holds 1. Glyphs 001–022 are historical page 2, 023–058 are historical page 5, and 059–065 are receipts page 4. The index gives boxes but no character labels, so the character names below are my own reading. I didn't check the sheet SHA-256 values, and I didn't modify any files.
+
+**What the panels can and can't show.** The 4x crops make main's defects obvious, and they also show any loss of the character's shape in the candidate. They can't tell me whether the candidate matches the source pixel for pixel. A difference smaller than about one source pixel, or a small shift in tone, wouldn't be visible at this scale. So "matches source" below means I couldn't see a difference at 4x, not that the two images are identical.
+
+**How main fails.** On the historical pages, main fills counters (the enclosed spaces inside letters) with a flat paper-coloured patch. The patch often has stair-stepped edges, cuts into strokes, or leaves specks inside solid ink. On the receipts page, main reverses the colours: dark strokes come out as light outlines.
+
+### Findings
+
+1. Unidentifiable dark mark (possibly a broken letter or ornament). Main has paper specks inside the solid ink. Candidate matches source. **Ambiguous:** the character itself can't be identified.
+2. `D`: main's flat counter patch cuts into the left stem. Candidate matches source; stroke and counter look intact.
+3. `P`: main has a flat bowl patch. Candidate matches source.
+4. `R`: main fills the upper bowl with a patch that cuts into the stroke. Candidate matches source.
+5. `R`: main has a blob plus specks in the bowl. Candidate matches source, including the faint mark above the letter.
+6. `A`: main has a patch in the upper counter. Candidate matches source.
+7. Woodcut or decorative texture, not a clear character. Main has a light jagged patch. Candidate matches source texture. **Ambiguous:** I can't judge which pixels are ink and which are paper in the source.
+8. `d` with a neighbour on the left: main has a large bowl patch and a speck in the stem. Candidate matches source, including the speckled stem and neighbouring ink.
+9. `a/` with a leading period: main has a square patch in the `a` bowl. Candidate matches source; the period and slash are intact.
+10. `d` with a partial neighbour: main has a bowl patch. Candidate matches source.
+11. `im`: main has specks between the strokes and on a stem. Candidate matches source.
+12. `os` next to a long-s/l stem: main has a jagged patch in the `o`. Candidate matches source; the stem next to it is unchanged.
+13. `ò,` (o with an accent mark, then a comma): main has a flat patch in the `o`. Candidate matches source; the accent and comma are intact.
+14. `q` next to a comma: main has a large bowl patch. Candidate matches source.
+15. `o`: main has a stair-stepped patch. Candidate matches source; the neighbours are intact.
+16. `d`: main has a bowl patch and a speck at the foot. Candidate matches source.
+17. `ẽ` (e with a tilde above): main has a patch in the eye of the `e` and a speck in the tilde. Candidate matches source; the tilde is preserved.
+18. `o`: main has a patch. Candidate matches source.
+19. `q` (or `p` with a neighbour): main has a bowl patch. Candidate matches source.
+20. `o`: main has a patch. Candidate matches source, including the faint mottling inside the counter.
+21. `r.`: main has paper specks inside the stem ink. Candidate matches source; the period is intact.
+22. `g`/`s` blackletter form: main cuts a T-shaped hole into it, which destroys the character's shape. Candidate matches source.
+23. `a` (blackletter): main has an irregular patch. Candidate matches source; the small counter is preserved.
+24. `er`: main has a large rectangular patch across the `e`. Candidate matches source.
+25. Ornate `Q`/`B` form (likely a capital or abbreviation): main has two large patches. Candidate matches source. **Ambiguous:** I can't identify the character, but the candidate matches the source shape.
+26. `p`: main has a bowl patch. Candidate matches source.
+27. `p`: main has a patch. Candidate matches source, including the faint inner line.
+28. `a` after a stem: main has a patch plus a light streak. Candidate matches source.
+29. `s`/`8`-like blackletter form: main has a patch. Candidate matches source.
+30. `a` after a mark: main has a patch. Candidate matches source.
+31. `A` with a red rubrication stroke (hand-added red ink): main has a large patch that breaks the red stroke. Candidate matches source; the red stroke is continuous.
+32. Blackletter cluster (`m`/`n`-like): main has a patch. Candidate matches source. **Ambiguous:** I can't identify the character, but the candidate matches the source shape.
+33. `p`: main has a bowl patch. Candidate matches source.
+34. `p`: main has a patch. Candidate matches source.
+35. `g`/`q`: main has a patch. Candidate matches source.
+36. `a`: main has a stair-stepped patch and a speck. Candidate matches source.
+37. `q`: main has a patch. Candidate matches source.
+38. `s` (blackletter round s): main has a split patch. Candidate matches source.
+39. `P`/`B` ligature form: main cuts patches into it. Candidate matches source. **Ambiguous:** I can't identify the character, but the candidate matches the source shape.
+40. `a`: main has a patch. Candidate matches source.
+41. `b`/`d` form: main has a patch. Candidate matches source.
+42. `q:` inside a frame line: main has a patch. Candidate matches source; the colon and frame line are intact.
+43. `o`: main has a patch. Candidate matches source.
+44. `a`: main has a patch. Candidate matches source.
+45. `a`: main has a patch. Candidate matches source.
+46. `p` with a red stroke: main fills the bowl and hides the red stroke inside it. Candidate matches source; the red stroke is preserved.
+47. `g`: main puts patches in both counters. Candidate matches source.
+48. `e`/`a`: main has a patch. Candidate matches source.
+49. `o`/`d`: main has a patch. Candidate matches source.
+50. `a`: main has a patch. Candidate matches source.
+51. `d`/`o`: main has a patch. Candidate matches source.
+52. `o` next to a leaf-shaped ornament: main has a patch. Candidate matches source; the ornament next to it is unchanged.
+53. `A` with red rubrication: main has a large patch and specks over part of the red. Candidate matches source.
+54. `o`: main has a patch. Candidate matches source.
+55. `m`/`in` cluster: main has a patch. Candidate matches source.
+56. Heavy, blotted blackletter (`e`/`c`?): main has a patch. Candidate matches source. **Ambiguous:** in the source itself it's unclear what is counter and what is ink.
+57. `eu`/`en`, blotted: main has patches. Candidate matches source. **Ambiguous:** I can't identify the character, but the candidate matches the source shape.
+58. `s`: main has a split patch. Candidate matches source.
+59. `Ch` (receipt): main turns the strokes into light outlines. Candidate restores dark strokes and matches source.
+60. `Chi`: main has light outlines. Candidate matches source, including the dot on the `i`.
+61. `hic`: main has light outlines. Candidate matches source.
+62. `ick`: main has light outlines. Candidate matches source.
+63. `ke`: main has light outlines. Candidate matches source.
+64. `ker`: main has light outlines. Candidate matches source.
+65. `en`: main has light outlines plus a lighter rectangular background patch. Candidate matches source with no patch.
+
+### Overall verdict
+
+On these 65 glyphs, the candidate fixes main's defect every time. Across all 65, I saw no damage to strokes, counters or punctuation, and no change to the neighbouring ink, ornaments or red strokes. The candidate restores the source character in every case where I could identify one.
+
+Six glyphs (1, 7, 25, 32, 39, 56/57) are ambiguous because the source itself is hard to read. For those, I can only say the candidate keeps the source's shape. At this panel resolution I can't decide whether the candidate is pixel-identical to the source.
+
+This passes only these 65 glyphs. It doesn't change the existing rejection of the candidate for changing unrelated financial/forms pages, and it isn't a review of any other changed glyphs.
+
+EXIT=0

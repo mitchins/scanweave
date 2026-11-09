@@ -1,0 +1,97 @@
+Warning: this sign-in ends between 2026-11-14 and 2026-11-17 (in 6 days at the earliest). Renewing it does not move those dates. Run claude auth login before then, or use claude setup-token for unattended jobs.
+# Review of issue #37: fallback when the page's ink comes out lighter than its paper
+
+I couldn't read four of the inputs you pointed me to. The permission prompts were declined or unanswered for:
+- `gh issue view 37 --comments`
+- the owner's `prompt.md` in the scratchpad
+- `qualification/acr06/ink37/segmentation-investigation.json`
+- `qualification/acr06/ink37/glyph-evidence-probe.json`
+
+So this review rests only on `mask.rs`, `convert.rs`, `units.rs` and `page_pdf.rs`. I haven't checked my guess about the cause against the acr06 measurements. Treat the numbers below as suggestions until the JSON confirms them. I modified no files.
+
+## What the code does, and the likely cause
+
+`crates/scanweave-io/src/mask.rs:28-90`:
+- **Paper colour:** one 6×6 patch from each corner. For each colour channel it takes the third-smallest of the four values (`v[2]`).
+- **Foreground (ink):** any pixel whose brightness differs from the paper's by more than 60. The test is symmetric: pixels much lighter than the paper count as ink too.
+- **Ink colour:** the median of every foreground pixel, not just the pixels in text.
+
+If three or more corners are dark (scanner bed, black border, edge shadow), the "paper" comes out dark. Then the real light paper passes the more-than-60 test and becomes "ink", the ink colour turns into the paper colour (lighter than the "paper"), and the actual dark text may not count as foreground at all. The text is then painted in that ink colour (`page_pdf.rs:1624`), and text cleanup fills with the paper colour (`convert.rs:1384,1409`). So the visible damage is invisible or inverted vector text plus wrong cleanup fills.
+
+## Does the proposed fallback work?
+
+**For the dark-border case, yes, in principle.** The two conditions together tell the dark-border bug apart from a real reverse page (white text on a dark background):
+
+| Page | Ink lighter than corners? | Main interior colour ≈ ink? | Fallback runs? | Right outcome? |
+|---|---|---|---|---|
+| Light page, dark scan border (the bug) | yes | yes (light paper) | yes | yes |
+| Full reverse page, dark corners | yes | no (dark background ≈ corners) | no | yes (no change) |
+| Reverse page, white scanner border | no | – | no | no change; still broken as before, outside #37 |
+| Light page, normal corners | no | – | no | yes |
+
+**It is not safe as described. It needs the safeguards below before it can merge.**
+
+## Blockers
+
+1. **"Main interior colour" needs a precise definition with a minimum share.** Photo pages have flat histograms, so some colour bin always "wins". A large bright sky or overexposed photo with dark corners would meet both conditions. The paper would become the sky colour, and the photo's content would become ink and be cut into pieces next to OCR text. Require all of:
+   - the winning colour holds a large share of the interior (on the order of ≥40–50% within a tolerance of about half of 60);
+   - it is measured in both brightness and colour, not only per channel;
+   - "interior" excludes pixels connected to the page edge, or at least a margin band. The border can be any thickness, so a fixed inset is fragile.
+2. **Re-check after re-segmenting, and revert if the result looks wrong.** After switching the paper colour, confirm:
+   - the ink is now darker than the paper by a clear margin;
+   - the share of the page counted as ink is plausible (e.g. under about 25–30%);
+   - OCR symbol boxes are mostly filled with plausible amounts of ink.
+
+   If any check fails, keep the original result and flag the page. Never accept a page whose ink is still lighter than its paper.
+3. **The ink colour is the median of all ink, not just text.** After the fix, the dark border becomes ink, and so do any dark panels or photos. On a page with a big dark border or a dark blue panel, the median ink colour can become the border or panel colour, and all vector text is painted in it. Compute ink from pixels owned by text units (after `build_plan`), or at least exclude pixels connected to the edge. This weakness existed before, but the fallback is aimed at exactly the pages that trigger it.
+4. **The border must stay visible.** After the fix the border counts as artwork or unowned ink. Confirm three things:
+   - it is kept in the ClearScan background and fallback patches, not painted over with the paper colour by `emit_patches` or `clean_replaced_text`;
+   - text near the edge that touches the border goes to raster (non-text contact) rather than being vectorised with border pixels attached;
+   - unowned-ink coverage numbers don't blow up and trip the page's quality checks.
+5. **Record when the fallback ran.** Add the reason and both paper estimates to the page report (paper source: corners or interior, plus the corner values). Qualification can then audit when it fired, and it stays deterministic.
+
+## Reverse panels (light page with a dark box of white text)
+
+- After the fallback, the paper is light and the panel becomes one big ink component. The white letters are holes in it, not ink, so the words inside should become raster through artwork/non-text contact. That matches today's behaviour on normal-corner pages, but needs a test, especially that none of those words are vectorised from fragments of the panel.
+- The panel's colour can drag the ink colour (blocker 3).
+- The fallback must stay one decision per page, with no per-region polarity flips. Panels are out of scope for #37 and should not be silently "fixed" by inverting the polarity.
+- On a dark-border page where reverse panels are a large share of the page, the main interior colour may be the panel colour, so the fallback won't run. That is safe (no change) but not fixed; keep it as a known limitation.
+
+## Text over photos
+
+- Flat histogram: the fallback should not run, which is safe. Verify the minimum-share rule actually blocks it.
+- Large bright region (sky, white wall) plus dark corners: the fallback can wrongly run (blocker 1). The share and post-check limits in blocker 2 are the protection.
+- Text over the photo is already unreliable with a single global threshold. Check that the fallback doesn't push photo-text units from raster to vector.
+
+## Other failure cases to test
+
+- **Two of four corners dark** (gutter shadow on one side): the per-channel median mixes channels from different corners and can produce a colour no corner actually has. The fallback condition may or may not fire. Add a fixture for this.
+- **Coloured paper** (yellow, cream): matching on brightness alone is fine, but use colour distance when comparing to the interior colour.
+- **Blank or nearly blank page:** no ink at all means ink = paper, so the "lighter than" test must be a strict comparison with a margin.
+- **Pages smaller than 6 px or very thin strips:** the clamped patches overlap.
+- **Mid-grey corner shadow** (brightness ~150 on 240 paper): both paper and text become ink. Confirm the fallback still runs and the result is correct.
+- **Every caller goes through `segment()`:** `collect_document_donors` (`convert.rs:375`), the main conversion (`convert.rs:793`), and q3 glyph sharing (`glyph_sharing/source.rs:234` reads `p.paper`). The fallback must live inside `segment()` so donors and sharing pages agree on polarity. If it is added only in `convert`, ClearScan donors from a sibling dark-border page would carry inverted masks into the dictionary.
+
+## Fixtures needed before merging
+
+1. The acr06 failing page: fixed, with page-level colour error and vector coverage checked against the probe JSON.
+2. A full reverse page with dark corners: unchanged, byte for byte.
+3. A light page with a reverse panel and normal corners: unchanged.
+4. A dark-border page with a reverse panel: panel text goes raster and the ink colour is not the panel colour.
+5. A photo with overlaid text, dark corners, and a flat histogram: the fallback does not run.
+6. A photo with a big bright sky and dark corners: the fallback either doesn't run or is reverted by the post-checks.
+7. Two dark corners, coloured paper, a blank page, and a tiny page.
+8. A cross-page ClearScan/q3 run mixing dark-border and normal pages: donor masks keep the same polarity.
+
+## Verdict
+
+The two-condition test is sound and does tell the dark-border bug apart from a true reverse page. It is not safe yet. The blockers are:
+- no minimum share on the main interior colour (photo risk);
+- no re-check-and-revert after re-segmenting;
+- the ink colour being polluted by the newly counted border and panels;
+- the fallback not being placed inside `segment()`;
+- no reporting of when it ran.
+
+Once you grant read access, I'll check the thresholds above against `segmentation-investigation.json` and `glyph-evidence-probe.json`.
+
+EXIT=0

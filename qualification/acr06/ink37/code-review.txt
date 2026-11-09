@@ -1,0 +1,80 @@
+Warning: this sign-in ends between 2026-11-14 and 2026-11-17 (in 6 days at the earliest). Renewing it does not move those dates. Run claude auth login before then, or use claude setup-token for unattended jobs.
+# Issue 37 review: do not approve
+
+The candidate does remove the visible inverted text on the 10 reported pages. But it also rasterises whole pages that were rendering correctly, across most of the corpus. Its per-glyph local test misses most of the known damage, and it changes pages the issue never touched.
+
+I didn't change anything in the checkout or the qualification folders. My scratch scripts are in `/tmp/ink37review`. All five candidate runs finished while I was reviewing, so the numbers below cover the full corpus.
+
+## Confirmed results
+
+**What works**
+- **Segmentation is unchanged.** `segment()` isn't modified, and my Python copy of it reproduces main's paper and ink colours on all 32 pages.
+- **Fallback pages are pixel-exact copies of the source.** On every fallback page in historical, financial, receipts and forms, the decoded image matches the input's own image. Main stored downsampled JPEG-compressed images instead.
+- **The 10 reported pages lose all visible text:** historical 1–5 and receipts 4, 6–9.
+- **mixed** is byte-identical to main.
+
+**C1. Whole-page fallback fires on healthy pages.** Verified from the candidate's own reports and PDFs:
+
+| Document | Pages that fall back | Visible glyphs lost | Size, main → candidate |
+|---|---|---|---|
+| financial | 1, 2, 5, 8, 10, 11, 13 (normal polarity) | 2,142 | 2.84 → 7.83 MB |
+| forms | both (clean black on white) | 504 | — |
+| receipts | 2 and 5 (not in the issue) | 19 | 1.27 → 10.26 MB |
+| historical | all 5 (reported pages) | 58 | 2.25 → 34.5 MB |
+
+- The cause is `all(...)` at `convert.rs:1316-1328`: one failing unit rasterises the whole page.
+- The financial triggers are faint commas, apostrophes and specks (one or two per page). They're lighter than the page ink, so 0% of their pixels match it.
+- The forms triggers are thin or small marks where fewer than 2% of the padded box's pixels match the ink colour.
+- My copy of the tests predicted the fallback flag on all 32 pages before those runs finished, and every prediction was correct.
+
+**C2. The local test misses most of the real #37 damage.** I applied `supported_local_ink` to main's damaged vector regions:
+- It passes 10 of 22 on historical page 2 and 25 of 27 on page 5.
+- The local brightness peak is dark (4–36), and 10–38% of pixels match the light "ink".
+- So only the page test protects these pages.
+
+**C3. The page test passes a page whose colours are inverted.** On `small_receipt` the corner "paper" is the dark table (brightness 35), the "ink" is the light receipt (230), and the dark table fills 78% of the interior. The test passes.
+- The supplemental run proves nothing either way: neither run has any vector candidates (all regions are `ContactNonText`).
+- **Conjecture:** dense or bold receipt text there would pass both tests, combining C2 and C3. That's the #37 failure. It needs a control that actually produces vector candidates.
+
+**C4. Pages that didn't fall back still changed.** The donor filter at `convert.rs:410` changes reconstruction on financial pages 3 and 9, which lose 5 and 15 visible glyphs, and on page 6, whose image changed.
+- Every financial page's content stream differs. That includes pages 4, 7 and 12, whose images are identical. I suspect glyph IDs were renumbered in the shared font, but haven't checked.
+- Receipts pages 3 and 10 also didn't fall back; I didn't check whether they're byte-identical.
+
+**C5. Copy text regressed in PDFium.** On financial page 1, two standalone "-" become U+FFFE and join the next word ("\ufffeJohn", "\ufffeTREASURER"). Poppler's physical-layout text gains one '¢' on historical page 5; its raw text is identical.
+
+**C6. The fallback-reason counts are inflated.** `convert.rs:1332-1339` counts every vector region, including non-text regions with no units. Historical page 1 reports 295 `UncertainInkColour` regions although main had zero vector text there.
+
+**C7. Code-level issues:**
+- **Faithful profile not covered.** It's excluded (`convert.rs:1313`, `document.rs:375`) but still paints with the page-wide ink (`convert.rs:1985`). The faithful profile wasn't run, so whether it still shows the damage is unverified.
+- **Repaired glyphs checked in the wrong place.** For repaired or reused glyphs the test checks `unit.bbox_px` (`:1325`), but the glyph is drawn at `replacement_bbox_px` using the donor's shape (`:1376-1383`).
+- **Donors from fallback pages are still exported.** A page that falls back on local evidence still exports its other units as donors (`:378-411`). Combined with C2 and C3, donor safety isn't shown.
+- **Reverse printing is never exercised.** `reverse_page` passes the page test but has no vector candidates in either run. The unit test feeds in hand-picked colour estimates, and `dark_border_does_not_support_inverted_estimates` has no border at all.
+- **q3 glyph sharing is untested.** Every run used `--glyph-sharing off`.
+- **Formatting:** the new `mask.rs` code adds rustfmt differences (HEAD was clean), and `:1331-1347` is mis-indented.
+
+**C8. Several thresholds pass by thin margins.**
+- `binding_shadow` matched-ink fraction is 0.0011 against a 0.001 threshold.
+- receipts 5 falls back only on that fraction (0.0005).
+- receipts 4's dominant brightness covers 0.11 of the interior against 0.10.
+- In auto mode, historical's reconstruct and raster-baseline candidates are only 5.2 KB apart.
+
+## Not reviewed
+
+I looked at 8 failing crops, not every changed glyph. About 2,750 glyphs changed in the corpus (58 historical, 2,162 financial, 26 receipts, 504 forms), plus 71 in the controls (`binding_shadow` 14, `photograph` 57). Receipts 2 and 5 need an owner decision on whether their glyphs were wrong in main.
+
+## Required before re-review
+
+1. **Demote per region, not per page, on local failure.** Keep whole-page fallback only for the page-level polarity check. Run the local check only on glyphs that are actually drawn, at their placement box with the shape actually drawn.
+2. **Replace or back up the local test with one that doesn't depend on which side is bright**, such as the foreground share in a padded OCR box. Validate it against the 65 known-bad objects (target 0 passes) and every glyph on financial and forms (target 0 false failures).
+3. **Make donor eligibility use the same rule as the page's final decision.** Then measure the effect on financial pages 3, 6 and 9.
+4. **Add controls that actually produce vector candidates:**
+   - a small receipt with bold text on a dark table;
+   - true reverse printing with visible vectors whose fill is checked against the glyph pixels;
+   - faint punctuation and hairline glyphs on clean pages.
+5. **Corpus runs in faithful and ClearScan, with q3 sharing on and off, and in auto mode.** Every unaffected page should be byte-identical, or every difference explained.
+6. **PDFium and Poppler text identity for every page,** including a fix for the U+FFFE hyphen.
+7. **Correct the fallback counts** to exclude non-text regions, add a document-level flag, and add convert-level tests that cover the report fields.
+
+That notification is only the leftover filesystem search for pikepdf, which I started early in the review. It hit its time limit and was stopped. I don't need it: I ran the PDF checks with a cached pikepdf through `uv run --offline` instead. The review above is complete and unchanged.
+
+EXIT=0
