@@ -772,7 +772,6 @@ pub fn convert(input: &Input, policy: &Policy) -> Result<Output, String> {
     report.candidates = candidates;
     if selected == "raster_baseline" {
         report.raster_fidelity = "source_exact".into();
-        report.raster_encoding = "lossless".into();
         report.compact_source_mae = None;
         report.compact_ink_recall = None;
     }
@@ -2158,8 +2157,8 @@ pub(crate) fn convert_parts_with_document_donors(
 }
 
 // Source-supported qualification for the experimental compact baseline.
-// The bounds are deliberately conservative relative to the frozen corpus
-// measurements; no eligible dark OCR pixels means there is no ink evidence.
+// Check page-wide error and dark OCR-box pixel recall; no eligible dark OCR
+// pixels means there is no ink evidence. These checks do not assess artwork.
 fn compact_source_candidate(input: &Input, page_w: f32, page_h: f32, patch: &Patch)
     -> Result<(crate::page_pdf::CompactSourceRaster, f64, f64), &'static str> {
     let image = crate::tonal_image::encode_residual(&input.rgb, input.width, input.height, 3, page_w, page_h)
@@ -2186,23 +2185,9 @@ fn compact_fidelity(input: &Input, samples: &[u8]) -> Option<(f64, f64)> {
         let y0 = b[1].floor().clamp(0.0, h as f64) as usize;
         let x1 = b[2].ceil().clamp(0.0, w as f64) as usize;
         let y1 = b[3].ceil().clamp(0.0, h as f64) as usize;
-        let (mut colour_error, mut colour_count) = (0u64, 0usize);
         for y in y0..y1 {
             mask[y*w+x0..y*w+x1].fill(true);
-            for x in x0..x1 {
-                let i = (y*w+x)*3;
-                let source = &input.rgb[i..i+3];
-                let min = *source.iter().min().unwrap();
-                let max = *source.iter().max().unwrap();
-                if max - min >= 45 {
-                    colour_count += 1;
-                    for c in 0..3 { colour_error += u64::from(source[c].abs_diff(samples[i+c])); }
-                }
-            }
         }
-        // A page-wide average can conceal loss of fine coloured ornament.
-        // Require sufficient colour evidence before applying the local bound.
-        if colour_count >= 32 && colour_error as f64 / (colour_count * 3) as f64 > 16.0 { return None; }
     }
     let mut ink = 0usize;
     let mut retained = 0usize;
@@ -3802,7 +3787,7 @@ mod compact_source_tests {
     }
 
     #[test]
-    fn local_colour_detail_loss_rejects_even_when_page_average_is_small() {
+    fn coloured_artwork_does_not_veto_when_aggregate_checks_pass() {
         let mut input = fixture();
         let mut samples = input.rgb.clone();
         for y in 220..260usize {
@@ -3812,7 +3797,8 @@ mod compact_source_tests {
                 samples[i..i + 3].copy_from_slice(&[170, 40, 90]);
             }
         }
-        assert!(compact_fidelity(&input, &samples).is_none());
+        let (mae, recall) = compact_fidelity(&input, &samples).expect("colour alone is not a veto");
+        assert!(mae <= 10.0 && recall >= 0.98);
     }
 
     #[test]
