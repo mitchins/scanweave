@@ -1,0 +1,51 @@
+{
+  "files": [
+    {
+      "file": "crates/scanweave-io/src/convert.rs",
+      "executable_changed_lines": 164,
+      "covered_changed_lines": 162,
+      "uncovered": [
+        679,
+        2123
+      ]
+    },
+    {
+      "file": "crates/scanweave-io/src/document.rs",
+      "executable_changed_lines": 17,
+      "covered_changed_lines": 10,
+      "uncovered": [
+        792,
+        793,
+        794,
+        795,
+        796,
+        797,
+        798
+      ]
+    },
+    {
+      "file": "crates/scanweave-io/src/page_pdf.rs",
+      "executable_changed_lines": 30,
+      "covered_changed_lines": 29,
+      "uncovered": [
+        1590
+      ]
+    },
+    {
+      "file": "probes/m0-font-pdf/src/lib.rs",
+      "executable_changed_lines": 5,
+      "covered_changed_lines": 0,
+      "uncovered": [
+        201,
+        202,
+        203,
+        204,
+        205
+      ]
+    }
+  ],
+  "covered": 201,
+  "total": 216,
+  "percentage": 93.05555555555556,
+  "note": "Local diff-line approximation, not the SonarCloud new-code metric."
+}
