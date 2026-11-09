@@ -1,0 +1,50 @@
+{
+  "region_300dpi_xyxy": [
+    95,
+    410,
+    350,
+    690
+  ],
+  "source_vs_main": {
+    "delta_chroma_ab_mean_abs": 9.012627132556172,
+    "delta_chroma_ab_p99_abs": 38.13744324555744,
+    "rgb_mae": 15.030891690009337,
+    "pixel_rgb_max_p99": 75.0,
+    "pixel_mean_absolute_difference_p99": 46.666666666666664,
+    "delta_e_76_mean": 14.7725096928754,
+    "delta_e_76_p99": 46.92648348657155,
+    "different_pixels": 71392
+  },
+  "source_vs_cprime": {
+    "delta_chroma_ab_mean_abs": 9.008795877517526,
+    "delta_chroma_ab_p99_abs": 38.09000209964282,
+    "rgb_mae": 14.9765406162465,
+    "pixel_rgb_max_p99": 75.0,
+    "pixel_mean_absolute_difference_p99": 46.0,
+    "delta_e_76_mean": 14.759297347497013,
+    "delta_e_76_p99": 46.6177527758044,
+    "different_pixels": 71392
+  },
+  "main_vs_cprime": {
+    "delta_chroma_ab_mean_abs": 0.07002369210145634,
+    "delta_chroma_ab_p99_abs": 2.0882054680216933,
+    "rgb_mae": 0.17026143790849674,
+    "pixel_rgb_max_p99": 6.0,
+    "pixel_mean_absolute_difference_p99": 3.3333333333333335,
+    "delta_e_76_mean": 0.1353344441131312,
+    "delta_e_76_p99": 4.271996758370856,
+    "different_pixels": 1509,
+    "changed_bbox_300dpi_xyxy": [
+      190,
+      478,
+      229,
+      530
+    ],
+    "changed_pixels_lower_mean_rgb": 654,
+    "changed_pixels_higher_mean_rgb": 755
+  },
+  "woodcut-0.32x.png": "edc6ba5aa55e44202c00a7989445c9681a92da74d200ded47a0f3cad0ec144be",
+  "woodcut-1x.png": "67823d1237c33a7e1969d4b73e15af8f36afb1c63288de1e9eea5801980f49e2",
+  "woodcut-4x.png": "7e52954581bef2706015af633afcc8437d4af62589d09c6a25f56e184df0d521",
+  "main-vs-cprime-heat-x4.png": "72c4df1a1e28ea9f07ce917ce34327e468f500787e1ed68435bb2ce37e13092c"
+}
