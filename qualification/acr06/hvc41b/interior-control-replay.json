@@ -1,0 +1,30 @@
+[
+  {
+    "set": "control",
+    "case": "white",
+    "changed_pixels_pdfium": {
+      "96": 0,
+      "300": 0
+    },
+    "pdfium_text_identical": true,
+    "poppler_text_identical": true,
+    "baseline_bytes": 63343,
+    "probe_bytes": 63343,
+    "baseline_sha256": "6da4d600a23505b738a3ee6379eef22205a699343e00b8eeb0b1178aa221c106",
+    "probe_sha256": "6da4d600a23505b738a3ee6379eef22205a699343e00b8eeb0b1178aa221c106"
+  },
+  {
+    "set": "control",
+    "case": "black_border",
+    "changed_pixels_pdfium": {
+      "96": 37833,
+      "300": 368818
+    },
+    "pdfium_text_identical": true,
+    "poppler_text_identical": false,
+    "baseline_bytes": 125449,
+    "probe_bytes": 69226,
+    "baseline_sha256": "62edfda0e511e4532a95332a3f6ae28edb5c9f60125def2a10449786dd3aa556",
+    "probe_sha256": "45040ee6c1c7580efe42c1ca6ab728940bce02c1018d740bf66db743529bf66c"
+  }
+]

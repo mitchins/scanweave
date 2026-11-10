@@ -1,0 +1,475 @@
+[
+  {
+    "comparison": "baseline_to_interior",
+    "page": 1,
+    "before_symbols": 152,
+    "after_symbols": 843,
+    "common_symbols": 147,
+    "changed_decision_count": 62,
+    "changed_source_shape_count": 147,
+    "transitions": [
+      {
+        "before": "no_supported_donor",
+        "after": "rejected_unchanged_source_fidelity",
+        "count": 11
+      },
+      {
+        "before": "rejected_unchanged_source_fidelity",
+        "after": "no_supported_donor",
+        "count": 10
+      },
+      {
+        "before": "no_supported_donor",
+        "after": "canonical_reuse_of_document_outline",
+        "count": 8
+      },
+      {
+        "before": "rejected_invalid_replacement_geometry",
+        "after": "no_supported_donor",
+        "count": 7
+      },
+      {
+        "before": "rejected_traced_prototype_fidelity",
+        "after": "no_supported_donor",
+        "count": 6
+      },
+      {
+        "before": "rejected_invalid_replacement_geometry",
+        "after": "canonical_reuse_of_document_outline",
+        "count": 5
+      },
+      {
+        "before": "rejected_invalid_replacement_geometry",
+        "after": "rejected_unchanged_source_fidelity",
+        "count": 3
+      },
+      {
+        "before": "no_supported_donor",
+        "after": "repaired_from_document_donors",
+        "count": 3
+      },
+      {
+        "before": "rejected_unchanged_source_fidelity",
+        "after": "canonical_reuse_of_document_outline",
+        "count": 2
+      },
+      {
+        "before": "rejected_traced_prototype_fidelity",
+        "after": "rejected_unchanged_source_fidelity",
+        "count": 2
+      },
+      {
+        "before": "no_supported_donor",
+        "after": "rejected_traced_prototype_fidelity",
+        "count": 1
+      },
+      {
+        "before": "rejected_insufficient_donor_extent",
+        "after": "repaired_from_document_donors",
+        "count": 1
+      },
+      {
+        "before": "rejected_traced_prototype_fidelity",
+        "after": "canonical_reuse_of_document_outline",
+        "count": 1
+      },
+      {
+        "before": "rejected_insufficient_donor_extent",
+        "after": "canonical_reuse_of_document_outline",
+        "count": 1
+      },
+      {
+        "before": "rejected_invalid_replacement_geometry",
+        "after": "repaired_from_document_donors",
+        "count": 1
+      }
+    ],
+    "note": "Recorded reconstruction decisions; matching uses OCR symbol IDs. The border variant leaves donor collection on the original planner, but later region decisions can change outcomes."
+  },
+  {
+    "comparison": "baseline_to_interior",
+    "page": 2,
+    "before_symbols": 237,
+    "after_symbols": 608,
+    "common_symbols": 226,
+    "changed_decision_count": 108,
+    "changed_source_shape_count": 226,
+    "transitions": [
+      {
+        "before": "no_supported_donor",
+        "after": "rejected_unchanged_source_fidelity",
+        "count": 24
+      },
+      {
+        "before": "rejected_invalid_replacement_geometry",
+        "after": "no_supported_donor",
+        "count": 21
+      },
+      {
+        "before": "no_supported_donor",
+        "after": "canonical_reuse_of_document_outline",
+        "count": 12
+      },
+      {
+        "before": "no_supported_donor",
+        "after": "repaired_from_document_donors",
+        "count": 7
+      },
+      {
+        "before": "rejected_insufficient_donor_extent",
+        "after": "no_supported_donor",
+        "count": 7
+      },
+      {
+        "before": "rejected_invalid_replacement_geometry",
+        "after": "canonical_reuse_of_document_outline",
+        "count": 6
+      },
+      {
+        "before": "no_supported_donor",
+        "after": "rejected_donor_geometry",
+        "count": 5
+      },
+      {
+        "before": "rejected_donor_geometry",
+        "after": "no_supported_donor",
+        "count": 5
+      },
+      {
+        "before": "canonical_reuse_of_document_outline",
+        "after": "rejected_unchanged_source_fidelity",
+        "count": 4
+      },
+      {
+        "before": "rejected_donor_geometry",
+        "after": "canonical_reuse_of_document_outline",
+        "count": 2
+      },
+      {
+        "before": "rejected_invalid_replacement_geometry",
+        "after": "rejected_unchanged_source_fidelity",
+        "count": 2
+      },
+      {
+        "before": "rejected_unchanged_source_fidelity",
+        "after": "canonical_reuse_of_document_outline",
+        "count": 2
+      },
+      {
+        "before": "rejected_invalid_replacement_geometry",
+        "after": "repaired_from_document_donors",
+        "count": 2
+      },
+      {
+        "before": "repaired_from_document_donors",
+        "after": "rejected_unchanged_source_fidelity",
+        "count": 2
+      },
+      {
+        "before": "rejected_invalid_replacement_geometry",
+        "after": "rejected_donor_geometry",
+        "count": 2
+      },
+      {
+        "before": "rejected_donor_geometry",
+        "after": "repaired_from_document_donors",
+        "count": 1
+      },
+      {
+        "before": "rejected_invalid_replacement_geometry",
+        "after": "rejected_traced_prototype_fidelity",
+        "count": 1
+      },
+      {
+        "before": "rejected_donor_geometry",
+        "after": "rejected_unchanged_source_fidelity",
+        "count": 1
+      },
+      {
+        "before": "rejected_unchanged_source_fidelity",
+        "after": "no_supported_donor",
+        "count": 1
+      },
+      {
+        "before": "no_supported_donor",
+        "after": "rejected_traced_prototype_fidelity",
+        "count": 1
+      }
+    ],
+    "note": "Recorded reconstruction decisions; matching uses OCR symbol IDs. The border variant leaves donor collection on the original planner, but later region decisions can change outcomes."
+  },
+  {
+    "comparison": "baseline_to_interior",
+    "page": 3,
+    "before_symbols": 2,
+    "after_symbols": 803,
+    "common_symbols": 2,
+    "changed_decision_count": 1,
+    "changed_source_shape_count": 2,
+    "transitions": [
+      {
+        "before": "no_supported_donor",
+        "after": "rejected_unchanged_source_fidelity",
+        "count": 1
+      }
+    ],
+    "note": "Recorded reconstruction decisions; matching uses OCR symbol IDs. The border variant leaves donor collection on the original planner, but later region decisions can change outcomes."
+  },
+  {
+    "comparison": "baseline_to_interior",
+    "page": 4,
+    "before_symbols": 165,
+    "after_symbols": 343,
+    "common_symbols": 142,
+    "changed_decision_count": 35,
+    "changed_source_shape_count": 142,
+    "transitions": [
+      {
+        "before": "no_supported_donor",
+        "after": "rejected_unchanged_source_fidelity",
+        "count": 13
+      },
+      {
+        "before": "rejected_insufficient_donor_extent",
+        "after": "rejected_unchanged_source_fidelity",
+        "count": 5
+      },
+      {
+        "before": "rejected_invalid_replacement_geometry",
+        "after": "no_supported_donor",
+        "count": 5
+      },
+      {
+        "before": "rejected_unchanged_source_fidelity",
+        "after": "no_supported_donor",
+        "count": 4
+      },
+      {
+        "before": "rejected_unchanged_source_fidelity",
+        "after": "rejected_traced_prototype_fidelity",
+        "count": 4
+      },
+      {
+        "before": "rejected_traced_prototype_fidelity",
+        "after": "rejected_unchanged_source_fidelity",
+        "count": 2
+      },
+      {
+        "before": "rejected_insufficient_donor_extent",
+        "after": "rejected_traced_prototype_fidelity",
+        "count": 1
+      },
+      {
+        "before": "rejected_traced_prototype_fidelity",
+        "after": "no_supported_donor",
+        "count": 1
+      }
+    ],
+    "note": "Recorded reconstruction decisions; matching uses OCR symbol IDs. The border variant leaves donor collection on the original planner, but later region decisions can change outcomes."
+  },
+  {
+    "comparison": "baseline_to_interior",
+    "page": 5,
+    "before_symbols": 517,
+    "after_symbols": 1125,
+    "common_symbols": 413,
+    "changed_decision_count": 195,
+    "changed_source_shape_count": 413,
+    "transitions": [
+      {
+        "before": "rejected_unchanged_source_fidelity",
+        "after": "no_supported_donor",
+        "count": 37
+      },
+      {
+        "before": "rejected_insufficient_donor_extent",
+        "after": "no_supported_donor",
+        "count": 36
+      },
+      {
+        "before": "no_supported_donor",
+        "after": "rejected_unchanged_source_fidelity",
+        "count": 26
+      },
+      {
+        "before": "rejected_donor_geometry",
+        "after": "rejected_unchanged_source_fidelity",
+        "count": 26
+      },
+      {
+        "before": "rejected_insufficient_donor_extent",
+        "after": "rejected_unchanged_source_fidelity",
+        "count": 13
+      },
+      {
+        "before": "rejected_donor_geometry",
+        "after": "no_supported_donor",
+        "count": 13
+      },
+      {
+        "before": "no_supported_donor",
+        "after": "rejected_traced_prototype_fidelity",
+        "count": 10
+      },
+      {
+        "before": "rejected_invalid_replacement_geometry",
+        "after": "rejected_unchanged_source_fidelity",
+        "count": 9
+      },
+      {
+        "before": "rejected_unchanged_source_fidelity",
+        "after": "rejected_traced_prototype_fidelity",
+        "count": 9
+      },
+      {
+        "before": "rejected_invalid_replacement_geometry",
+        "after": "no_supported_donor",
+        "count": 8
+      },
+      {
+        "before": "rejected_insufficient_donor_extent",
+        "after": "rejected_traced_prototype_fidelity",
+        "count": 6
+      },
+      {
+        "before": "rejected_donor_geometry",
+        "after": "rejected_traced_prototype_fidelity",
+        "count": 1
+      },
+      {
+        "before": "no_supported_donor",
+        "after": "rejected_insufficient_donor_extent",
+        "count": 1
+      }
+    ],
+    "note": "Recorded reconstruction decisions; matching uses OCR symbol IDs. The border variant leaves donor collection on the original planner, but later region decisions can change outcomes."
+  },
+  {
+    "comparison": "interior_to_border",
+    "page": 1,
+    "before_symbols": 843,
+    "after_symbols": 843,
+    "common_symbols": 843,
+    "changed_decision_count": 0,
+    "changed_source_shape_count": 0,
+    "transitions": [],
+    "note": "Recorded reconstruction decisions; matching uses OCR symbol IDs. The border variant leaves donor collection on the original planner, but later region decisions can change outcomes."
+  },
+  {
+    "comparison": "interior_to_border",
+    "page": 2,
+    "before_symbols": 608,
+    "after_symbols": 608,
+    "common_symbols": 608,
+    "changed_decision_count": 0,
+    "changed_source_shape_count": 0,
+    "transitions": [],
+    "note": "Recorded reconstruction decisions; matching uses OCR symbol IDs. The border variant leaves donor collection on the original planner, but later region decisions can change outcomes."
+  },
+  {
+    "comparison": "interior_to_border",
+    "page": 3,
+    "before_symbols": 803,
+    "after_symbols": 803,
+    "common_symbols": 803,
+    "changed_decision_count": 273,
+    "changed_source_shape_count": 0,
+    "transitions": [
+      {
+        "before": "rejected_traced_prototype_fidelity",
+        "after": "repaired_from_document_donors",
+        "count": 86
+      },
+      {
+        "before": "rejected_unchanged_source_fidelity",
+        "after": "canonical_reuse_of_document_outline",
+        "count": 83
+      },
+      {
+        "before": "rejected_traced_prototype_fidelity",
+        "after": "rejected_donor_geometry",
+        "count": 55
+      },
+      {
+        "before": "rejected_unchanged_source_fidelity",
+        "after": "rejected_donor_geometry",
+        "count": 49
+      }
+    ],
+    "note": "Recorded reconstruction decisions; matching uses OCR symbol IDs. The border variant leaves donor collection on the original planner, but later region decisions can change outcomes."
+  },
+  {
+    "comparison": "interior_to_border",
+    "page": 4,
+    "before_symbols": 343,
+    "after_symbols": 343,
+    "common_symbols": 343,
+    "changed_decision_count": 60,
+    "changed_source_shape_count": 0,
+    "transitions": [
+      {
+        "before": "rejected_unchanged_source_fidelity",
+        "after": "canonical_reuse_of_document_outline",
+        "count": 39
+      },
+      {
+        "before": "rejected_traced_prototype_fidelity",
+        "after": "repaired_from_document_donors",
+        "count": 9
+      },
+      {
+        "before": "rejected_unchanged_source_fidelity",
+        "after": "rejected_traced_prototype_fidelity",
+        "count": 6
+      },
+      {
+        "before": "rejected_unchanged_source_fidelity",
+        "after": "rejected_donor_geometry",
+        "count": 4
+      },
+      {
+        "before": "rejected_traced_prototype_fidelity",
+        "after": "rejected_donor_geometry",
+        "count": 2
+      }
+    ],
+    "note": "Recorded reconstruction decisions; matching uses OCR symbol IDs. The border variant leaves donor collection on the original planner, but later region decisions can change outcomes."
+  },
+  {
+    "comparison": "interior_to_border",
+    "page": 5,
+    "before_symbols": 1125,
+    "after_symbols": 1125,
+    "common_symbols": 1125,
+    "changed_decision_count": 137,
+    "changed_source_shape_count": 0,
+    "transitions": [
+      {
+        "before": "rejected_unchanged_source_fidelity",
+        "after": "canonical_reuse_of_document_outline",
+        "count": 64
+      },
+      {
+        "before": "rejected_traced_prototype_fidelity",
+        "after": "repaired_from_document_donors",
+        "count": 58
+      },
+      {
+        "before": "rejected_traced_prototype_fidelity",
+        "after": "rejected_donor_geometry",
+        "count": 7
+      },
+      {
+        "before": "rejected_unchanged_source_fidelity",
+        "after": "rejected_donor_geometry",
+        "count": 7
+      },
+      {
+        "before": "rejected_unchanged_source_fidelity",
+        "after": "rejected_traced_prototype_fidelity",
+        "count": 1
+      }
+    ],
+    "note": "Recorded reconstruction decisions; matching uses OCR symbol IDs. The border variant leaves donor collection on the original planner, but later region decisions can change outcomes."
+  }
+]
