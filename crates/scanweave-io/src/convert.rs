@@ -119,8 +119,20 @@ pub struct Fidelity {
 #[derive(Debug, Clone, Serialize)]
 pub struct Report {
     pub segmentation_method: String,
+    pub polarity_paper_luminance: f64,
+    pub polarity_ink_luminance: f64,
+    pub polarity_inverted: bool,
+    pub polarity_visible_occurrences: usize,
+    pub polarity_raster_baseline: bool,
+    pub raster_fidelity: String,
+    /// Image stream encoding after document assembly, when known.
+    pub raster_encoding: String,
+    pub compact_source_mae: Option<f64>,
+    pub compact_ink_recall: Option<f64>,
+    pub compact_decision: String,
     pub stage_timings_ms: BTreeMap<String, u128>,
     pub fidelity: Fidelity,
+    /// The reconstruction proposal, before any page-level raster route.
     pub reconstruction: crate::visual_dict::Reconstruction,
     pub glyph_stats: Vec<GlyphStat>,
     /// candidates actually serialized and measured (name, pdf bytes); auto mode
@@ -138,6 +150,7 @@ pub struct Report {
     pub components_artwork: usize,
     pub visual_units: usize,
     pub semantic_spans: usize,
+    /// Region planning decisions before any page-level raster route.
     pub regions: Vec<RegionRecord>,
     pub coverage: Coverage,
     /// Source pixels removed because an emitted vector occurrence owns them.
@@ -646,13 +659,40 @@ fn span_bbox(poly: &[[f64; 2]]) -> [f64; 4] {
     bb
 }
 
+// A light foreground against corner-estimated dark paper is ambiguous: it
+// can be reverse printing or paper selected as foreground. Preserve the source.
+fn polarity_requires_baseline(profile: &str, paper: [u8; 3], ink: [u8; 3], visible: usize) -> bool {
+    profile == "clearscan" && crate::mask::lum(ink) > crate::mask::lum(paper) && visible > 0
+}
+
+fn emitted_image_encoding(bytes: &[u8]) -> String {
+    use hayro::hayro_syntax::{object::Name, Pdf};
+    let Ok(pdf) = Pdf::new(bytes.to_vec()) else { return "unknown".into(); };
+    let Some(page) = pdf.pages().first() else { return "unknown".into(); };
+    let resources = page.resources();
+    let (mut jpeg, mut lossless) = (false, false);
+    for name in resources.x_objects.keys() {
+        let Some(image) = resources.get_x_object(&name) else { return "unknown".into(); };
+        match image.dict().get::<Name<'_>>(b"Filter").map(|v| v.as_ref().to_vec()).as_deref() {
+            Some(b"DCTDecode") => jpeg = true,
+            Some(b"FlateDecode") => lossless = true,
+            _ => return "unknown".into(),
+        }
+    }
+    match (jpeg, lossless) {
+        (true, true) => "mixed", (true, false) => "jpeg", (false, true) => "lossless", (false, false) => "none",
+    }.into()
+}
+
 pub fn convert(input: &Input, policy: &Policy) -> Result<Output, String> {
     let (parts, report) = convert_parts(input, policy)?;
     // single-page PDF + the B0 searchable-raster baseline candidate (the
     // document-level equivalent lives in crate::document)
     let (shapes, encodings) = (&parts.shapes, parts.encodings.clone());
     let font_bytes = build_font(shapes, &encodings, policy.upem)?;
-    let pdf_bytes = if policy.profile == "clearscan" && input.protected_regions.is_empty() {
+    let pdf_bytes = if parts.raster_baseline || parts.compact_source.is_some()
+        || (policy.profile == "clearscan" && input.protected_regions.is_empty())
+    {
         crate::page_pdf::assemble_document_with_tonal_fallback(
             std::slice::from_ref(&parts),
             shapes,
@@ -700,7 +740,11 @@ pub fn convert(input: &Input, policy: &Policy) -> Result<Output, String> {
     let restoration_ok =
         policy.profile != "clearscan" || report.reconstruction.restoration_qualified;
     let recon_fidelity_ok = preservation_ok && restoration_ok;
-    let selected = if policy.mode == "auto" {
+    let selected = if parts.compact_source.is_some() {
+        "raster_baseline_compact".to_string()
+    } else if parts.raster_baseline {
+        "raster_baseline".to_string()
+    } else if policy.mode == "auto" {
         if recon_fidelity_ok && pdf_bytes.len() <= b0.len() {
             "reconstruct"
         } else {
@@ -726,6 +770,12 @@ pub fn convert(input: &Input, policy: &Policy) -> Result<Output, String> {
     };
     let mut report = report;
     report.candidates = candidates;
+    if selected == "raster_baseline" {
+        report.raster_fidelity = "source_exact".into();
+        report.compact_source_mae = None;
+        report.compact_ink_recall = None;
+    }
+    report.raster_encoding = emitted_image_encoding(&pdf_bytes);
     report.selected = selected;
     report.pdf_bytes = pdf_bytes.len();
     report.font_bytes = font_bytes.len();
@@ -1925,6 +1975,7 @@ pub(crate) fn convert_parts_with_document_donors(
 
     let parts = crate::page_pdf::PageParts {
         raster_baseline: false,
+        compact_source: None,
         encoded_source: None,
         page_w_pt,
         page_h_pt,
@@ -1992,7 +2043,22 @@ pub(crate) fn convert_parts_with_document_donors(
         "raster_composition_and_owners".into(),
         composition_started.elapsed().as_millis(),
     );
-    let report = Report {
+    let paper_luminance = crate::mask::lum(seg.paper);
+    let ink_luminance = crate::mask::lum(seg.ink);
+    let polarity_inverted = ink_luminance > paper_luminance;
+    let polarity_visible_occurrences = parts.occurrences.len();
+    let polarity_raster_baseline = polarity_requires_baseline(&policy.profile, seg.paper, seg.ink, polarity_visible_occurrences);
+    let mut report = Report {
+        raster_fidelity: "not_raster_baseline".into(),
+        raster_encoding: "pending_assembly".into(),
+        compact_source_mae: None,
+        compact_ink_recall: None,
+        compact_decision: "not_evaluated".into(),
+        polarity_inverted,
+        polarity_visible_occurrences,
+        polarity_paper_luminance: paper_luminance,
+        polarity_ink_luminance: ink_luminance,
+        polarity_raster_baseline,
         segmentation_method: "global_corner_paper".into(),
         stage_timings_ms,
         candidates: Vec::new(),
@@ -2033,7 +2099,111 @@ pub(crate) fn convert_parts_with_document_donors(
         elapsed_ms: start.elapsed().as_millis(),
     };
 
+    let mut parts = parts;
+    if polarity_raster_baseline {
+        parts.patches = vec![whole_page_patch(&parts, parts.source_w, parts.source_h)?];
+        parts.raster_baseline = true;
+        report.selected = "raster_baseline".into();
+        report.raster_fidelity = "source_exact".into();
+        if tonal_document {
+            match compact_source_candidate(input, page_w_pt, page_h_pt, &parts.patches[0]) {
+                Ok((compact, mae, recall)) => {
+                    parts.compact_source = Some(compact);
+                    parts.raster_baseline = false;
+                    report.selected = "raster_baseline_compact".into();
+                    report.raster_fidelity = "clearscan_compact_lossy".into();
+                    report.raster_encoding = "jpeg".into();
+                    report.compact_source_mae = Some(mae);
+                    report.compact_ink_recall = Some(recall);
+                    report.compact_decision = "accepted".into();
+                }
+                Err(reason) => report.compact_decision = reason.into(),
+            }
+        }
+        report.patches = parts
+            .patches
+            .iter()
+            .map(|p| PatchRecord {
+                compact_background: p.compact_background,
+                bbox_px: p.bbox_px,
+                w: p.w,
+                h: p.h,
+                rgb_sha256: scanweave_core::hash_hex(&p.rgb),
+            })
+            .collect();
+        for occurrence in &mut report.occurrences {
+            if occurrence.owner == "visible_tounicode" {
+                occurrence.owner = "invisible".into();
+            }
+        }
+        for owner in report.semantic_owner.values_mut() {
+            *owner = "invisible".into();
+        }
+        report.fidelity.raster_ink_px += report.coverage.text_ink_px_vector;
+        if parts.compact_source.is_some() {
+            // This field counts source-exact raster ink, not JPEG pixels.
+            report.fidelity.raster_ink_px = 0;
+        }
+        report.fidelity.vector_ink_iou_min = None;
+        report.fidelity.vector_ink_iou_mean = None;
+        report.fidelity.preservation_ink_iou_min = None;
+        report.coverage.text_ink_px_raster += report.coverage.text_ink_px_vector;
+        report.coverage.text_ink_px_vector = 0;
+        report.raster_ink_pixels_suppressed = 0;
+        report.antialias_fringe_pixels_suppressed = 0;
+        report.raster_bytes = input.rgb.len();
+    }
     Ok((parts, report))
+}
+
+// Source-supported qualification for the experimental compact baseline.
+// Check page-wide error and dark OCR-box pixel recall; no eligible dark OCR
+// pixels means there is no ink evidence. These checks do not assess artwork.
+fn compact_source_candidate(input: &Input, page_w: f32, page_h: f32, patch: &Patch)
+    -> Result<(crate::page_pdf::CompactSourceRaster, f64, f64), &'static str> {
+    let image = crate::tonal_image::encode_residual(&input.rgb, input.width, input.height, 3, page_w, page_h)
+        .map_err(|_| "encoder_failed")?.ok_or("encoder_ineligible")?;
+    let exact = crate::page_pdf::lossless_patch_cost(std::slice::from_ref(patch)).map_err(|_| "lossless_cost_failed")?;
+    if image.bytes.len() as f64 >= exact as f64 * 0.95 { return Err("insufficient_savings"); }
+    let decoded = image::load_from_memory(&image.bytes).map_err(|_| "decode_failed")?.to_rgb8();
+    let decoded = image::imageops::resize(&decoded, input.width, input.height, image::imageops::FilterType::Lanczos3);
+    let samples = decoded.as_raw();
+    let (mae, recall) = compact_fidelity(input, samples).ok_or("source_fidelity_rejected")?;
+    Ok((crate::page_pdf::CompactSourceRaster { bytes: image.bytes, width: image.width, height: image.height }, mae, recall))
+}
+
+fn compact_fidelity(input: &Input, samples: &[u8]) -> Option<(f64, f64)> {
+    if samples.len() != input.rgb.len() || samples.is_empty() { return None; }
+    let mut sum = 0u64;
+    for (a, b) in input.rgb.iter().zip(samples) { sum += u64::from(a.abs_diff(*b)); }
+    let mae = sum as f64 / input.rgb.len() as f64;
+    let (w, h) = (input.width as usize, input.height as usize);
+    let mut mask = vec![false; w * h];
+    for span in &input.spans {
+        let b = span_bbox(&span.polygon);
+        let x0 = b[0].floor().clamp(0.0, w as f64) as usize;
+        let y0 = b[1].floor().clamp(0.0, h as f64) as usize;
+        let x1 = b[2].ceil().clamp(0.0, w as f64) as usize;
+        let y1 = b[3].ceil().clamp(0.0, h as f64) as usize;
+        for y in y0..y1 {
+            mask[y*w+x0..y*w+x1].fill(true);
+        }
+    }
+    let mut ink = 0usize;
+    let mut retained = 0usize;
+    for (i, inside) in mask.into_iter().enumerate() {
+        if !inside { continue; }
+        let j = i * 3;
+        let luminance = |v: &[u8]| 0.2126 * f64::from(v[0]) + 0.7152 * f64::from(v[1]) + 0.0722 * f64::from(v[2]);
+        if luminance(&input.rgb[j..j+3]) < 128.0 {
+            ink += 1;
+            if luminance(&samples[j..j+3]) < 160.0 { retained += 1; }
+        }
+    }
+    if ink == 0 { return None; }
+    let recall = retained as f64 / ink as f64;
+    if mae > 10.0 || recall < 0.98 { return None; }
+    Some((mae, recall))
 }
 
 /// Source-pixel patches for non-text artwork (never dropped, never relabelled).
@@ -2911,6 +3081,7 @@ pub fn baseline_one_page(
     let patch = whole_page_patch(parts, parts.source_w, parts.source_h)?;
     let baseline = crate::page_pdf::PageParts {
         raster_baseline: true,
+        compact_source: None,
         patches: vec![patch],
         ..parts.clone()
     };
@@ -3554,5 +3725,105 @@ mod contour_coverage_tests {
         let mut untouched = vec![false; w * h];
         assert!(protect_weak_rules(&short, w, h, 300.0, [250; 3], &ink, &mut untouched).is_empty());
         assert!(untouched.iter().all(|&b| !b));
+    }
+}
+
+#[cfg(test)]
+mod polarity_gate_tests {
+    use super::polarity_requires_baseline;
+
+    #[test]
+    fn unreliable_inverted_and_reverse_estimates_use_baseline() {
+        assert!(polarity_requires_baseline("clearscan", [20, 20, 20], [230, 220, 210], 1));
+        assert!(polarity_requires_baseline("clearscan", [30, 30, 30], [240, 240, 240], 1));
+    }
+
+    #[test]
+    fn normal_and_equal_estimates_do_not_change() {
+        assert!(!polarity_requires_baseline("clearscan", [250, 250, 250], [20, 20, 20], 1));
+        assert!(!polarity_requires_baseline("clearscan", [40, 40, 40], [40, 40, 40], 1));
+        assert!(!polarity_requires_baseline("faithful", [20, 20, 20], [240, 240, 240], 1));
+        assert!(!polarity_requires_baseline("clearscan", [20, 20, 20], [240, 240, 240], 0));
+    }
+}
+
+#[cfg(test)]
+mod compact_source_tests {
+    use super::*;
+
+    fn fixture() -> Input {
+        let (width, height) = (640u32, 640u32);
+        let mut rgb = Vec::new();
+        let mut noise = 12345u32;
+        for y in 0..height {
+            for x in 0..width {
+                noise = noise.wrapping_mul(1664525).wrapping_add(1013904223);
+                let level = if (200..400).contains(&x) && (200..400).contains(&y) {
+                    30
+                } else {
+                    (150 + (x % 100) as i32 + ((noise >> 24) % 5) as i32 - 2) as u8
+                };
+                rgb.extend_from_slice(&[level; 3]);
+            }
+        }
+        Input {
+            rgb, width, height, page_id: "compact".into(),
+            spans: vec![SpanInput { id: "text".into(), text: "X".into(), separator_after: "".into(),
+                polygon: vec![[190.0,190.0],[410.0,190.0],[410.0,410.0],[190.0,410.0]], symbols: vec![] }],
+            protected_regions: vec![], raster_to_page_pt: [0.24,0.0,0.0,-0.24,0.0,153.6], pixel_sha256: None,
+        }
+    }
+
+    #[test]
+    fn source_fidelity_rejects_missing_ink_and_accepts_exact() {
+        let input = fixture();
+        assert_eq!(compact_fidelity(&input, &input.rgb), Some((0.0, 1.0)));
+        assert!(compact_fidelity(&input, &vec![255; input.rgb.len()]).is_none());
+        assert!(compact_fidelity(&input, &[]).is_none());
+        let mut no_dark_ink = input.clone();
+        no_dark_ink.rgb.fill(255);
+        assert!(compact_fidelity(&no_dark_ink, &no_dark_ink.rgb).is_none());
+        assert_eq!(emitted_image_encoding(b"not a PDF"), "unknown");
+    }
+
+    #[test]
+    fn coloured_artwork_does_not_veto_when_aggregate_checks_pass() {
+        let mut input = fixture();
+        let mut samples = input.rgb.clone();
+        for y in 220..260usize {
+            for x in 220..260usize {
+                let i = (y * input.width as usize + x) * 3;
+                input.rgb[i..i + 3].copy_from_slice(&[200, 30, 60]);
+                samples[i..i + 3].copy_from_slice(&[170, 40, 90]);
+            }
+        }
+        let (mae, recall) = compact_fidelity(&input, &samples).expect("colour alone is not a veto");
+        assert!(mae <= 10.0 && recall >= 0.98);
+    }
+
+    #[test]
+    fn high_frequency_ink_rejects_compact_encoding() {
+        let mut input = fixture();
+        for y in 200..400usize {
+            for x in 200..400usize {
+                let i = (y * input.width as usize + x) * 3;
+                input.rgb[i..i + 3].fill(if (x + y) % 2 == 0 { 0 } else { 255 });
+            }
+        }
+        let patch = Patch { compact_background:false, bbox_px:[0.0,0.0,640.0,640.0], rgb:input.rgb.clone(), w:640,h:640 };
+        let image = crate::tonal_image::encode_residual(&input.rgb, 640, 640, 3, 153.6, 153.6).unwrap().expect("encoder offers a compact image");
+        assert!((image.bytes.len() as f64) < crate::page_pdf::lossless_patch_cost(std::slice::from_ref(&patch)).unwrap() as f64 * 0.95);
+        assert!(compact_source_candidate(&input,153.6,153.6,&patch).is_err(), "lost fine ink must retain exact raster");
+    }
+
+    #[test]
+    fn encoder_candidate_and_ineligible_fallback() {
+        let input = fixture();
+        let patch = Patch { compact_background:false, bbox_px:[0.0,0.0,640.0,640.0], rgb:input.rgb.clone(), w:640,h:640 };
+        let candidate = compact_source_candidate(&input,153.6,153.6,&patch).expect("tonal image qualifies");
+        assert!(candidate.1 <= 10.0 && candidate.2 >= 0.98);
+        let mut ineligible = input.clone();
+        ineligible.rgb.fill(255);
+        assert!(compact_source_candidate(&ineligible,153.6,153.6,&patch).is_err());
     }
 }

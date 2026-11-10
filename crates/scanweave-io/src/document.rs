@@ -565,6 +565,7 @@ pub fn convert_document_with_sources_and_sharing(
     for p in &pages {
         let mut bp = p.parts.clone();
         bp.raster_baseline = true;
+        bp.compact_source = None;
         bp.patches = vec![crate::convert::whole_page_patch(
             &p.parts,
             p.parts.source_w,
@@ -628,12 +629,12 @@ pub fn convert_document_with_sources_and_sharing(
     // fall below min_ink_iou is disqualified, not ranked by bytes. The raster
     // baseline reproduces the source pixels exactly and is always qualified.
     let recon_ok = pages.iter().all(|p| {
-        (policy.profile == "clearscan"
+        p.parts.raster_baseline || p.parts.compact_source.is_some() || ((policy.profile == "clearscan"
             || p.report
                 .fidelity
                 .preservation_ink_iou_min
                 .is_none_or(|m| m >= policy.min_ink_iou))
-            && (policy.profile != "clearscan" || p.report.reconstruction.restoration_qualified)
+            && (policy.profile != "clearscan" || p.report.reconstruction.restoration_qualified))
     });
     let baseline_ok = true;
     let selected: String = if policy.mode == "auto" {
@@ -783,7 +784,21 @@ pub fn convert_document_with_sources_and_sharing(
             },
             stage_timings,
             page_order: pages.iter().map(|p| p.report.page_id.clone()).collect(),
-            page_reports: pages.iter().map(|p| p.report.clone()).collect(),
+            page_reports: pages.iter().enumerate().map(|(i, p)| {
+                let mut report = p.report.clone();
+                let encoding_stats = if selected == "raster_baseline" { &baseline_stats } else { &stats };
+                report.raster_encoding = encoding_stats.page_image_encodings.get(i).cloned().unwrap_or_else(|| "unknown".into());
+                if selected == "raster_baseline" {
+                    report.selected = "raster_baseline".into();
+                    report.raster_fidelity = "source_exact".into();
+                    report.compact_source_mae = None;
+                    report.compact_ink_recall = None;
+                    if report.compact_decision == "accepted" {
+                        report.compact_decision = "document_exact_baseline_selected".into();
+                    }
+                }
+                report
+            }).collect(),
             coverage,
             search,
             ownership_invariants,
