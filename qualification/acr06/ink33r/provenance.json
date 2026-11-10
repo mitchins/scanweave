@@ -1,0 +1,52 @@
+{
+  "main_commit": "ab7dfba96561595e7c587d8033954ed1ec235a20",
+  "build": "cargo build --release --locked -p scanweave-cli",
+  "conversion": "--dpi 300 --profile clearscan --glyph-sharing off",
+  "documents": {
+    "historical": {
+      "corrected_sha256": "68c874e44bd0bf8d48ffed413d674c6c307c6d3d4742e008ca12b2b6ab4a713b",
+      "reference_cprime_sha256": "68c874e44bd0bf8d48ffed413d674c6c307c6d3d4742e008ca12b2b6ab4a713b",
+      "matches_reference": true,
+      "old_main_sha256": "8486f69c3d694c4a760ad4845c2cb6b64161467adc3e4061fef9b771b84abd2e",
+      "source_sha256": "53276a63753bba7801c73c8d91e2e52d310a70ca16efb93c1d69f52c462fce6f",
+      "adobe_sha256": "0b5768a06e9f6507cf7c1d47e17b9367fa661bbf282c0b5cc6f0f053b54e4eda",
+      "corrected_size": 2247390
+    },
+    "financial": {
+      "corrected_sha256": "96e3b89df58f3e33629300faebf2b3cde81065437b49f1695c24361b10f472bd",
+      "reference_cprime_sha256": "96e3b89df58f3e33629300faebf2b3cde81065437b49f1695c24361b10f472bd",
+      "matches_reference": true,
+      "old_main_sha256": "96e3b89df58f3e33629300faebf2b3cde81065437b49f1695c24361b10f472bd",
+      "source_sha256": "206f0f669d0196bb5e3b8da64acbffe1e53b2611377450a71b1440622291ac6f",
+      "adobe_sha256": "0168c79a74237c1d2fe2a1bb1fd47ff3bb6fb73108be4087b5f689d7854fd452",
+      "corrected_size": 2842414
+    },
+    "mixed": {
+      "corrected_sha256": "a7efc67a2d331b756aade6a490328d2690343c43523c5284ae8db25937246f9a",
+      "reference_cprime_sha256": "a7efc67a2d331b756aade6a490328d2690343c43523c5284ae8db25937246f9a",
+      "matches_reference": true,
+      "old_main_sha256": "a7efc67a2d331b756aade6a490328d2690343c43523c5284ae8db25937246f9a",
+      "source_sha256": "bea7a5ae2599dab57807bc256692ec36c656ff34d82af572c35fa3cd285f5e9f",
+      "adobe_sha256": "c1f37db2a8ca8562964129f2392e5371b2871516a4c8a932809c1003a58c8060",
+      "corrected_size": 920248
+    },
+    "receipts": {
+      "corrected_sha256": "82c00d2131a69f8c20ad4a078f011e15473f2c7ac25a059933162155f1068b34",
+      "reference_cprime_sha256": "82c00d2131a69f8c20ad4a078f011e15473f2c7ac25a059933162155f1068b34",
+      "matches_reference": true,
+      "old_main_sha256": "d2da6b69bb803e6c3a5f5db0c6735f3d3357a2f84f12a98fc99fc3ef836d9360",
+      "source_sha256": "72cf20dce418051d7dd5dbb236f4e3e15bf4af5280309029913415bb704d6a5d",
+      "adobe_sha256": "74ee49edc9f1a4d22cd5316843715c623ac818f770174673c55de5d8c90f0c40",
+      "corrected_size": 1266953
+    },
+    "forms": {
+      "corrected_sha256": "75dfda81cef2a5857328ede7dd76279d72e65a838fb6d352b7f6ea6673d383ff",
+      "reference_cprime_sha256": "75dfda81cef2a5857328ede7dd76279d72e65a838fb6d352b7f6ea6673d383ff",
+      "matches_reference": true,
+      "old_main_sha256": "75dfda81cef2a5857328ede7dd76279d72e65a838fb6d352b7f6ea6673d383ff",
+      "source_sha256": "9d042396ccc23cdaf74f0e2c3abb86231afaa160aa29902f0ddf708cdabdbc28",
+      "adobe_sha256": "b5b6ced31fef6c5d41aa4b58d38163223f059fe9834d75e47eddbab6e285a38e",
+      "corrected_size": 831974
+    }
+  }
+}
