@@ -1,0 +1,5030 @@
+[
+  {
+    "id": 0,
+    "units": [
+      0,
+      1,
+      2
+    ],
+    "disposition": "Vector",
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "bbox_rule_reason": "neither",
+    "pixel_rule_reason": "neither"
+  },
+  {
+    "id": 1,
+    "units": [
+      3,
+      4,
+      5,
+      6,
+      7
+    ],
+    "disposition": "Vector",
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "bbox_rule_reason": "neither",
+    "pixel_rule_reason": "neither"
+  },
+  {
+    "id": 2,
+    "units": [
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14
+    ],
+    "disposition": "Vector",
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "bbox_rule_reason": "neither",
+    "pixel_rule_reason": "neither"
+  },
+  {
+    "id": 3,
+    "units": [
+      15
+    ],
+    "disposition": "Vector",
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "bbox_rule_reason": "neither",
+    "pixel_rule_reason": "neither"
+  },
+  {
+    "id": 4,
+    "units": [
+      16,
+      17,
+      18,
+      19,
+      20
+    ],
+    "disposition": "Vector",
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "bbox_rule_reason": "neither",
+    "pixel_rule_reason": "neither"
+  },
+  {
+    "id": 5,
+    "units": [
+      21,
+      22
+    ],
+    "disposition": "Vector",
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "bbox_rule_reason": "neither",
+    "pixel_rule_reason": "neither"
+  },
+  {
+    "id": 6,
+    "units": [
+      23
+    ],
+    "disposition": "Vector",
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "bbox_rule_reason": "neither",
+    "pixel_rule_reason": "neither"
+  },
+  {
+    "id": 7,
+    "units": [
+      24,
+      25,
+      26
+    ],
+    "disposition": "Vector",
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "bbox_rule_reason": "neither",
+    "pixel_rule_reason": "neither"
+  },
+  {
+    "id": 8,
+    "units": [
+      27
+    ],
+    "disposition": "Vector",
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "bbox_rule_reason": "neither",
+    "pixel_rule_reason": "neither"
+  },
+  {
+    "id": 9,
+    "units": [
+      28
+    ],
+    "disposition": "Vector",
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "bbox_rule_reason": "neither",
+    "pixel_rule_reason": "neither"
+  },
+  {
+    "id": 10,
+    "units": [
+      29
+    ],
+    "disposition": "Vector",
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "bbox_rule_reason": "neither",
+    "pixel_rule_reason": "neither"
+  },
+  {
+    "id": 11,
+    "units": [
+      30
+    ],
+    "disposition": "Vector",
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "bbox_rule_reason": "neither",
+    "pixel_rule_reason": "neither"
+  },
+  {
+    "id": 12,
+    "units": [
+      31
+    ],
+    "disposition": "Vector",
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "bbox_rule_reason": "neither",
+    "pixel_rule_reason": "neither"
+  },
+  {
+    "id": 13,
+    "units": [
+      32
+    ],
+    "disposition": "Vector",
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "bbox_rule_reason": "neither",
+    "pixel_rule_reason": "neither"
+  },
+  {
+    "id": 14,
+    "units": [
+      33,
+      34
+    ],
+    "disposition": {
+      "Raster": {
+        "reason": "ContactNonText"
+      }
+    },
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": [
+        {
+          "unit_index": 34,
+          "symbol": "w000035s0001",
+          "ink_bbox": [
+            787.0,
+            1121.0,
+            812.0,
+            1130.0
+          ],
+          "slots": [
+            {
+              "symbol": "w000035s0001",
+              "bbox": [
+                791.0,
+                1110.0,
+                801.0,
+                1167.0
+              ]
+            },
+            {
+              "symbol": "w000035s0002",
+              "bbox": [
+                781.0,
+                1119.0,
+                822.0,
+                1163.0
+              ]
+            }
+          ],
+          "reason": "component ink bbox exceeded the original owning OCR slot bbox by more than 6 pixels on at least one side"
+        }
+      ]
+    },
+    "bbox_rule_reason": "suspect",
+    "pixel_rule_reason": "suspect"
+  },
+  {
+    "id": 15,
+    "units": [],
+    "disposition": "Vector",
+    "kind": "NonText",
+    "bbox_px": [
+      77.0,
+      47.0,
+      78.0,
+      50.0
+    ],
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "reason": "standalone artwork; no text units"
+  },
+  {
+    "id": 16,
+    "units": [],
+    "disposition": "Vector",
+    "kind": "NonText",
+    "bbox_px": [
+      36.0,
+      54.0,
+      76.0,
+      577.0
+    ],
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "reason": "standalone artwork; no text units"
+  },
+  {
+    "id": 17,
+    "units": [],
+    "disposition": "Vector",
+    "kind": "NonText",
+    "bbox_px": [
+      739.0,
+      59.0,
+      740.0,
+      60.0
+    ],
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "reason": "standalone artwork; no text units"
+  },
+  {
+    "id": 18,
+    "units": [],
+    "disposition": "Vector",
+    "kind": "NonText",
+    "bbox_px": [
+      758.0,
+      98.0,
+      762.0,
+      99.0
+    ],
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "reason": "standalone artwork; no text units"
+  },
+  {
+    "id": 19,
+    "units": [],
+    "disposition": "Vector",
+    "kind": "NonText",
+    "bbox_px": [
+      745.0,
+      102.0,
+      747.0,
+      104.0
+    ],
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "reason": "standalone artwork; no text units"
+  },
+  {
+    "id": 20,
+    "units": [],
+    "disposition": "Vector",
+    "kind": "NonText",
+    "bbox_px": [
+      740.0,
+      106.0,
+      743.0,
+      109.0
+    ],
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "reason": "standalone artwork; no text units"
+  },
+  {
+    "id": 21,
+    "units": [],
+    "disposition": "Vector",
+    "kind": "NonText",
+    "bbox_px": [
+      754.0,
+      167.0,
+      755.0,
+      168.0
+    ],
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "reason": "standalone artwork; no text units"
+  },
+  {
+    "id": 22,
+    "units": [],
+    "disposition": "Vector",
+    "kind": "NonText",
+    "bbox_px": [
+      781.0,
+      271.0,
+      782.0,
+      272.0
+    ],
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "reason": "standalone artwork; no text units"
+  },
+  {
+    "id": 23,
+    "units": [],
+    "disposition": "Vector",
+    "kind": "NonText",
+    "bbox_px": [
+      757.0,
+      351.0,
+      758.0,
+      352.0
+    ],
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "reason": "standalone artwork; no text units"
+  },
+  {
+    "id": 24,
+    "units": [],
+    "disposition": "Vector",
+    "kind": "NonText",
+    "bbox_px": [
+      390.0,
+      561.0,
+      392.0,
+      562.0
+    ],
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "reason": "standalone artwork; no text units"
+  },
+  {
+    "id": 25,
+    "units": [],
+    "disposition": "Vector",
+    "kind": "NonText",
+    "bbox_px": [
+      762.0,
+      567.0,
+      768.0,
+      570.0
+    ],
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "reason": "standalone artwork; no text units"
+  },
+  {
+    "id": 26,
+    "units": [],
+    "disposition": "Vector",
+    "kind": "NonText",
+    "bbox_px": [
+      766.0,
+      569.0,
+      768.0,
+      570.0
+    ],
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "reason": "standalone artwork; no text units"
+  },
+  {
+    "id": 27,
+    "units": [],
+    "disposition": "Vector",
+    "kind": "NonText",
+    "bbox_px": [
+      46.0,
+      578.0,
+      47.0,
+      580.0
+    ],
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "reason": "standalone artwork; no text units"
+  },
+  {
+    "id": 28,
+    "units": [],
+    "disposition": "Vector",
+    "kind": "NonText",
+    "bbox_px": [
+      0.0,
+      596.0,
+      45.0,
+      1274.0
+    ],
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "reason": "standalone artwork; no text units"
+  },
+  {
+    "id": 29,
+    "units": [],
+    "disposition": "Vector",
+    "kind": "NonText",
+    "bbox_px": [
+      768.0,
+      600.0,
+      783.0,
+      607.0
+    ],
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "reason": "standalone artwork; no text units"
+  },
+  {
+    "id": 30,
+    "units": [],
+    "disposition": "Vector",
+    "kind": "NonText",
+    "bbox_px": [
+      766.0,
+      606.0,
+      767.0,
+      607.0
+    ],
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "reason": "standalone artwork; no text units"
+  },
+  {
+    "id": 31,
+    "units": [],
+    "disposition": "Vector",
+    "kind": "NonText",
+    "bbox_px": [
+      758.0,
+      609.0,
+      762.0,
+      612.0
+    ],
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "reason": "standalone artwork; no text units"
+  },
+  {
+    "id": 32,
+    "units": [],
+    "disposition": "Vector",
+    "kind": "NonText",
+    "bbox_px": [
+      787.0,
+      611.0,
+      788.0,
+      613.0
+    ],
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "reason": "standalone artwork; no text units"
+  },
+  {
+    "id": 33,
+    "units": [],
+    "disposition": "Vector",
+    "kind": "NonText",
+    "bbox_px": [
+      754.0,
+      616.0,
+      755.0,
+      618.0
+    ],
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "reason": "standalone artwork; no text units"
+  },
+  {
+    "id": 34,
+    "units": [],
+    "disposition": "Vector",
+    "kind": "NonText",
+    "bbox_px": [
+      790.0,
+      617.0,
+      793.0,
+      618.0
+    ],
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "reason": "standalone artwork; no text units"
+  },
+  {
+    "id": 35,
+    "units": [],
+    "disposition": "Vector",
+    "kind": "NonText",
+    "bbox_px": [
+      795.0,
+      618.0,
+      796.0,
+      619.0
+    ],
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "reason": "standalone artwork; no text units"
+  },
+  {
+    "id": 36,
+    "units": [],
+    "disposition": "Vector",
+    "kind": "NonText",
+    "bbox_px": [
+      797.0,
+      618.0,
+      799.0,
+      620.0
+    ],
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "reason": "standalone artwork; no text units"
+  },
+  {
+    "id": 37,
+    "units": [],
+    "disposition": "Vector",
+    "kind": "NonText",
+    "bbox_px": [
+      750.0,
+      619.0,
+      751.0,
+      620.0
+    ],
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "reason": "standalone artwork; no text units"
+  },
+  {
+    "id": 38,
+    "units": [],
+    "disposition": "Vector",
+    "kind": "NonText",
+    "bbox_px": [
+      752.0,
+      620.0,
+      753.0,
+      623.0
+    ],
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "reason": "standalone artwork; no text units"
+  },
+  {
+    "id": 39,
+    "units": [],
+    "disposition": "Vector",
+    "kind": "NonText",
+    "bbox_px": [
+      749.0,
+      623.0,
+      750.0,
+      625.0
+    ],
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "reason": "standalone artwork; no text units"
+  },
+  {
+    "id": 40,
+    "units": [],
+    "disposition": "Vector",
+    "kind": "NonText",
+    "bbox_px": [
+      795.0,
+      626.0,
+      796.0,
+      628.0
+    ],
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "reason": "standalone artwork; no text units"
+  },
+  {
+    "id": 41,
+    "units": [],
+    "disposition": "Vector",
+    "kind": "NonText",
+    "bbox_px": [
+      792.0,
+      638.0,
+      793.0,
+      639.0
+    ],
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "reason": "standalone artwork; no text units"
+  },
+  {
+    "id": 42,
+    "units": [],
+    "disposition": "Vector",
+    "kind": "NonText",
+    "bbox_px": [
+      755.0,
+      644.0,
+      758.0,
+      648.0
+    ],
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "reason": "standalone artwork; no text units"
+  },
+  {
+    "id": 43,
+    "units": [],
+    "disposition": "Vector",
+    "kind": "NonText",
+    "bbox_px": [
+      760.0,
+      649.0,
+      762.0,
+      651.0
+    ],
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "reason": "standalone artwork; no text units"
+  },
+  {
+    "id": 44,
+    "units": [],
+    "disposition": "Vector",
+    "kind": "NonText",
+    "bbox_px": [
+      733.0,
+      653.0,
+      736.0,
+      656.0
+    ],
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "reason": "standalone artwork; no text units"
+  },
+  {
+    "id": 45,
+    "units": [],
+    "disposition": "Vector",
+    "kind": "NonText",
+    "bbox_px": [
+      769.0,
+      655.0,
+      771.0,
+      656.0
+    ],
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "reason": "standalone artwork; no text units"
+  },
+  {
+    "id": 46,
+    "units": [],
+    "disposition": "Vector",
+    "kind": "NonText",
+    "bbox_px": [
+      198.0,
+      671.0,
+      201.0,
+      673.0
+    ],
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "reason": "standalone artwork; no text units"
+  },
+  {
+    "id": 47,
+    "units": [],
+    "disposition": "Vector",
+    "kind": "NonText",
+    "bbox_px": [
+      215.0,
+      671.0,
+      216.0,
+      673.0
+    ],
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "reason": "standalone artwork; no text units"
+  },
+  {
+    "id": 48,
+    "units": [],
+    "disposition": "Vector",
+    "kind": "NonText",
+    "bbox_px": [
+      218.0,
+      671.0,
+      221.0,
+      673.0
+    ],
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "reason": "standalone artwork; no text units"
+  },
+  {
+    "id": 49,
+    "units": [],
+    "disposition": "Vector",
+    "kind": "NonText",
+    "bbox_px": [
+      251.0,
+      671.0,
+      253.0,
+      673.0
+    ],
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "reason": "standalone artwork; no text units"
+  },
+  {
+    "id": 50,
+    "units": [],
+    "disposition": "Vector",
+    "kind": "NonText",
+    "bbox_px": [
+      255.0,
+      671.0,
+      261.0,
+      673.0
+    ],
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "reason": "standalone artwork; no text units"
+  },
+  {
+    "id": 51,
+    "units": [],
+    "disposition": "Vector",
+    "kind": "NonText",
+    "bbox_px": [
+      267.0,
+      671.0,
+      269.0,
+      673.0
+    ],
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "reason": "standalone artwork; no text units"
+  },
+  {
+    "id": 52,
+    "units": [],
+    "disposition": "Vector",
+    "kind": "NonText",
+    "bbox_px": [
+      272.0,
+      671.0,
+      273.0,
+      672.0
+    ],
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "reason": "standalone artwork; no text units"
+  },
+  {
+    "id": 53,
+    "units": [],
+    "disposition": "Vector",
+    "kind": "NonText",
+    "bbox_px": [
+      276.0,
+      671.0,
+      277.0,
+      673.0
+    ],
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "reason": "standalone artwork; no text units"
+  },
+  {
+    "id": 54,
+    "units": [],
+    "disposition": "Vector",
+    "kind": "NonText",
+    "bbox_px": [
+      290.0,
+      671.0,
+      292.0,
+      673.0
+    ],
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "reason": "standalone artwork; no text units"
+  },
+  {
+    "id": 55,
+    "units": [],
+    "disposition": "Vector",
+    "kind": "NonText",
+    "bbox_px": [
+      294.0,
+      671.0,
+      296.0,
+      673.0
+    ],
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "reason": "standalone artwork; no text units"
+  },
+  {
+    "id": 56,
+    "units": [],
+    "disposition": "Vector",
+    "kind": "NonText",
+    "bbox_px": [
+      307.0,
+      671.0,
+      309.0,
+      673.0
+    ],
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "reason": "standalone artwork; no text units"
+  },
+  {
+    "id": 57,
+    "units": [],
+    "disposition": "Vector",
+    "kind": "NonText",
+    "bbox_px": [
+      314.0,
+      671.0,
+      316.0,
+      673.0
+    ],
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "reason": "standalone artwork; no text units"
+  },
+  {
+    "id": 58,
+    "units": [],
+    "disposition": "Vector",
+    "kind": "NonText",
+    "bbox_px": [
+      322.0,
+      671.0,
+      324.0,
+      673.0
+    ],
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "reason": "standalone artwork; no text units"
+  },
+  {
+    "id": 59,
+    "units": [],
+    "disposition": "Vector",
+    "kind": "NonText",
+    "bbox_px": [
+      334.0,
+      671.0,
+      336.0,
+      673.0
+    ],
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "reason": "standalone artwork; no text units"
+  },
+  {
+    "id": 60,
+    "units": [],
+    "disposition": "Vector",
+    "kind": "NonText",
+    "bbox_px": [
+      406.0,
+      671.0,
+      408.0,
+      673.0
+    ],
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "reason": "standalone artwork; no text units"
+  },
+  {
+    "id": 61,
+    "units": [],
+    "disposition": "Vector",
+    "kind": "NonText",
+    "bbox_px": [
+      445.0,
+      671.0,
+      448.0,
+      673.0
+    ],
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "reason": "standalone artwork; no text units"
+  },
+  {
+    "id": 62,
+    "units": [],
+    "disposition": "Vector",
+    "kind": "NonText",
+    "bbox_px": [
+      456.0,
+      671.0,
+      463.0,
+      673.0
+    ],
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "reason": "standalone artwork; no text units"
+  },
+  {
+    "id": 63,
+    "units": [],
+    "disposition": "Vector",
+    "kind": "NonText",
+    "bbox_px": [
+      465.0,
+      671.0,
+      467.0,
+      673.0
+    ],
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "reason": "standalone artwork; no text units"
+  },
+  {
+    "id": 64,
+    "units": [],
+    "disposition": "Vector",
+    "kind": "NonText",
+    "bbox_px": [
+      469.0,
+      671.0,
+      474.0,
+      673.0
+    ],
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "reason": "standalone artwork; no text units"
+  },
+  {
+    "id": 65,
+    "units": [],
+    "disposition": "Vector",
+    "kind": "NonText",
+    "bbox_px": [
+      476.0,
+      671.0,
+      485.0,
+      673.0
+    ],
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "reason": "standalone artwork; no text units"
+  },
+  {
+    "id": 66,
+    "units": [],
+    "disposition": "Vector",
+    "kind": "NonText",
+    "bbox_px": [
+      487.0,
+      671.0,
+      493.0,
+      673.0
+    ],
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "reason": "standalone artwork; no text units"
+  },
+  {
+    "id": 67,
+    "units": [],
+    "disposition": "Vector",
+    "kind": "NonText",
+    "bbox_px": [
+      496.0,
+      671.0,
+      497.0,
+      673.0
+    ],
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "reason": "standalone artwork; no text units"
+  },
+  {
+    "id": 68,
+    "units": [],
+    "disposition": "Vector",
+    "kind": "NonText",
+    "bbox_px": [
+      499.0,
+      671.0,
+      501.0,
+      673.0
+    ],
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "reason": "standalone artwork; no text units"
+  },
+  {
+    "id": 69,
+    "units": [],
+    "disposition": "Vector",
+    "kind": "NonText",
+    "bbox_px": [
+      503.0,
+      671.0,
+      505.0,
+      672.0
+    ],
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "reason": "standalone artwork; no text units"
+  },
+  {
+    "id": 70,
+    "units": [],
+    "disposition": "Vector",
+    "kind": "NonText",
+    "bbox_px": [
+      507.0,
+      671.0,
+      508.0,
+      673.0
+    ],
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "reason": "standalone artwork; no text units"
+  },
+  {
+    "id": 71,
+    "units": [],
+    "disposition": "Vector",
+    "kind": "NonText",
+    "bbox_px": [
+      511.0,
+      671.0,
+      512.0,
+      672.0
+    ],
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "reason": "standalone artwork; no text units"
+  },
+  {
+    "id": 72,
+    "units": [],
+    "disposition": "Vector",
+    "kind": "NonText",
+    "bbox_px": [
+      515.0,
+      671.0,
+      516.0,
+      672.0
+    ],
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "reason": "standalone artwork; no text units"
+  },
+  {
+    "id": 73,
+    "units": [],
+    "disposition": "Vector",
+    "kind": "NonText",
+    "bbox_px": [
+      523.0,
+      671.0,
+      524.0,
+      672.0
+    ],
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "reason": "standalone artwork; no text units"
+  },
+  {
+    "id": 74,
+    "units": [],
+    "disposition": "Vector",
+    "kind": "NonText",
+    "bbox_px": [
+      527.0,
+      671.0,
+      528.0,
+      672.0
+    ],
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "reason": "standalone artwork; no text units"
+  },
+  {
+    "id": 75,
+    "units": [],
+    "disposition": "Vector",
+    "kind": "NonText",
+    "bbox_px": [
+      534.0,
+      671.0,
+      535.0,
+      672.0
+    ],
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "reason": "standalone artwork; no text units"
+  },
+  {
+    "id": 76,
+    "units": [],
+    "disposition": "Vector",
+    "kind": "NonText",
+    "bbox_px": [
+      538.0,
+      671.0,
+      539.0,
+      672.0
+    ],
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "reason": "standalone artwork; no text units"
+  },
+  {
+    "id": 77,
+    "units": [],
+    "disposition": "Vector",
+    "kind": "NonText",
+    "bbox_px": [
+      565.0,
+      671.0,
+      566.0,
+      672.0
+    ],
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "reason": "standalone artwork; no text units"
+  },
+  {
+    "id": 78,
+    "units": [],
+    "disposition": "Vector",
+    "kind": "NonText",
+    "bbox_px": [
+      607.0,
+      671.0,
+      609.0,
+      672.0
+    ],
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "reason": "standalone artwork; no text units"
+  },
+  {
+    "id": 79,
+    "units": [],
+    "disposition": "Vector",
+    "kind": "NonText",
+    "bbox_px": [
+      643.0,
+      671.0,
+      644.0,
+      672.0
+    ],
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "reason": "standalone artwork; no text units"
+  },
+  {
+    "id": 80,
+    "units": [],
+    "disposition": "Vector",
+    "kind": "NonText",
+    "bbox_px": [
+      662.0,
+      671.0,
+      664.0,
+      673.0
+    ],
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "reason": "standalone artwork; no text units"
+  },
+  {
+    "id": 81,
+    "units": [],
+    "disposition": "Vector",
+    "kind": "NonText",
+    "bbox_px": [
+      112.0,
+      672.0,
+      113.0,
+      673.0
+    ],
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "reason": "standalone artwork; no text units"
+  },
+  {
+    "id": 82,
+    "units": [],
+    "disposition": "Vector",
+    "kind": "NonText",
+    "bbox_px": [
+      114.0,
+      672.0,
+      115.0,
+      673.0
+    ],
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "reason": "standalone artwork; no text units"
+  },
+  {
+    "id": 83,
+    "units": [],
+    "disposition": "Vector",
+    "kind": "NonText",
+    "bbox_px": [
+      119.0,
+      672.0,
+      120.0,
+      673.0
+    ],
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "reason": "standalone artwork; no text units"
+  },
+  {
+    "id": 84,
+    "units": [],
+    "disposition": "Vector",
+    "kind": "NonText",
+    "bbox_px": [
+      122.0,
+      672.0,
+      123.0,
+      673.0
+    ],
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "reason": "standalone artwork; no text units"
+  },
+  {
+    "id": 85,
+    "units": [],
+    "disposition": "Vector",
+    "kind": "NonText",
+    "bbox_px": [
+      125.0,
+      672.0,
+      127.0,
+      673.0
+    ],
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "reason": "standalone artwork; no text units"
+  },
+  {
+    "id": 86,
+    "units": [],
+    "disposition": "Vector",
+    "kind": "NonText",
+    "bbox_px": [
+      129.0,
+      672.0,
+      131.0,
+      673.0
+    ],
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "reason": "standalone artwork; no text units"
+  },
+  {
+    "id": 87,
+    "units": [],
+    "disposition": "Vector",
+    "kind": "NonText",
+    "bbox_px": [
+      133.0,
+      672.0,
+      135.0,
+      673.0
+    ],
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "reason": "standalone artwork; no text units"
+  },
+  {
+    "id": 88,
+    "units": [],
+    "disposition": "Vector",
+    "kind": "NonText",
+    "bbox_px": [
+      137.0,
+      672.0,
+      139.0,
+      673.0
+    ],
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "reason": "standalone artwork; no text units"
+  },
+  {
+    "id": 89,
+    "units": [],
+    "disposition": "Vector",
+    "kind": "NonText",
+    "bbox_px": [
+      141.0,
+      672.0,
+      143.0,
+      673.0
+    ],
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "reason": "standalone artwork; no text units"
+  },
+  {
+    "id": 90,
+    "units": [],
+    "disposition": "Vector",
+    "kind": "NonText",
+    "bbox_px": [
+      145.0,
+      672.0,
+      147.0,
+      673.0
+    ],
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "reason": "standalone artwork; no text units"
+  },
+  {
+    "id": 91,
+    "units": [],
+    "disposition": "Vector",
+    "kind": "NonText",
+    "bbox_px": [
+      149.0,
+      672.0,
+      151.0,
+      673.0
+    ],
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "reason": "standalone artwork; no text units"
+  },
+  {
+    "id": 92,
+    "units": [],
+    "disposition": "Vector",
+    "kind": "NonText",
+    "bbox_px": [
+      154.0,
+      672.0,
+      155.0,
+      673.0
+    ],
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "reason": "standalone artwork; no text units"
+  },
+  {
+    "id": 93,
+    "units": [],
+    "disposition": "Vector",
+    "kind": "NonText",
+    "bbox_px": [
+      162.0,
+      672.0,
+      163.0,
+      673.0
+    ],
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "reason": "standalone artwork; no text units"
+  },
+  {
+    "id": 94,
+    "units": [],
+    "disposition": "Vector",
+    "kind": "NonText",
+    "bbox_px": [
+      165.0,
+      672.0,
+      168.0,
+      673.0
+    ],
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "reason": "standalone artwork; no text units"
+  },
+  {
+    "id": 95,
+    "units": [],
+    "disposition": "Vector",
+    "kind": "NonText",
+    "bbox_px": [
+      195.0,
+      672.0,
+      196.0,
+      673.0
+    ],
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "reason": "standalone artwork; no text units"
+  },
+  {
+    "id": 96,
+    "units": [],
+    "disposition": "Vector",
+    "kind": "NonText",
+    "bbox_px": [
+      202.0,
+      672.0,
+      203.0,
+      673.0
+    ],
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "reason": "standalone artwork; no text units"
+  },
+  {
+    "id": 97,
+    "units": [],
+    "disposition": "Vector",
+    "kind": "NonText",
+    "bbox_px": [
+      208.0,
+      672.0,
+      209.0,
+      673.0
+    ],
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "reason": "standalone artwork; no text units"
+  },
+  {
+    "id": 98,
+    "units": [],
+    "disposition": "Vector",
+    "kind": "NonText",
+    "bbox_px": [
+      228.0,
+      672.0,
+      229.0,
+      673.0
+    ],
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "reason": "standalone artwork; no text units"
+  },
+  {
+    "id": 99,
+    "units": [],
+    "disposition": "Vector",
+    "kind": "NonText",
+    "bbox_px": [
+      330.0,
+      672.0,
+      331.0,
+      673.0
+    ],
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "reason": "standalone artwork; no text units"
+  },
+  {
+    "id": 100,
+    "units": [],
+    "disposition": "Vector",
+    "kind": "NonText",
+    "bbox_px": [
+      342.0,
+      672.0,
+      343.0,
+      673.0
+    ],
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "reason": "standalone artwork; no text units"
+  },
+  {
+    "id": 101,
+    "units": [],
+    "disposition": "Vector",
+    "kind": "NonText",
+    "bbox_px": [
+      357.0,
+      672.0,
+      358.0,
+      673.0
+    ],
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "reason": "standalone artwork; no text units"
+  },
+  {
+    "id": 102,
+    "units": [],
+    "disposition": "Vector",
+    "kind": "NonText",
+    "bbox_px": [
+      361.0,
+      672.0,
+      363.0,
+      673.0
+    ],
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "reason": "standalone artwork; no text units"
+  },
+  {
+    "id": 103,
+    "units": [],
+    "disposition": "Vector",
+    "kind": "NonText",
+    "bbox_px": [
+      373.0,
+      672.0,
+      374.0,
+      673.0
+    ],
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "reason": "standalone artwork; no text units"
+  },
+  {
+    "id": 104,
+    "units": [],
+    "disposition": "Vector",
+    "kind": "NonText",
+    "bbox_px": [
+      384.0,
+      672.0,
+      386.0,
+      673.0
+    ],
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "reason": "standalone artwork; no text units"
+  },
+  {
+    "id": 105,
+    "units": [],
+    "disposition": "Vector",
+    "kind": "NonText",
+    "bbox_px": [
+      388.0,
+      672.0,
+      389.0,
+      673.0
+    ],
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "reason": "standalone artwork; no text units"
+  },
+  {
+    "id": 106,
+    "units": [],
+    "disposition": "Vector",
+    "kind": "NonText",
+    "bbox_px": [
+      392.0,
+      672.0,
+      394.0,
+      674.0
+    ],
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "reason": "standalone artwork; no text units"
+  },
+  {
+    "id": 107,
+    "units": [],
+    "disposition": "Vector",
+    "kind": "NonText",
+    "bbox_px": [
+      395.0,
+      672.0,
+      397.0,
+      673.0
+    ],
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "reason": "standalone artwork; no text units"
+  },
+  {
+    "id": 108,
+    "units": [],
+    "disposition": "Vector",
+    "kind": "NonText",
+    "bbox_px": [
+      411.0,
+      672.0,
+      413.0,
+      673.0
+    ],
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "reason": "standalone artwork; no text units"
+  },
+  {
+    "id": 109,
+    "units": [],
+    "disposition": "Vector",
+    "kind": "NonText",
+    "bbox_px": [
+      414.0,
+      672.0,
+      417.0,
+      674.0
+    ],
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "reason": "standalone artwork; no text units"
+  },
+  {
+    "id": 110,
+    "units": [],
+    "disposition": "Vector",
+    "kind": "NonText",
+    "bbox_px": [
+      418.0,
+      672.0,
+      420.0,
+      674.0
+    ],
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "reason": "standalone artwork; no text units"
+  },
+  {
+    "id": 111,
+    "units": [],
+    "disposition": "Vector",
+    "kind": "NonText",
+    "bbox_px": [
+      422.0,
+      672.0,
+      427.0,
+      674.0
+    ],
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "reason": "standalone artwork; no text units"
+  },
+  {
+    "id": 112,
+    "units": [],
+    "disposition": "Vector",
+    "kind": "NonText",
+    "bbox_px": [
+      430.0,
+      672.0,
+      432.0,
+      673.0
+    ],
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "reason": "standalone artwork; no text units"
+  },
+  {
+    "id": 113,
+    "units": [],
+    "disposition": "Vector",
+    "kind": "NonText",
+    "bbox_px": [
+      434.0,
+      672.0,
+      436.0,
+      673.0
+    ],
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "reason": "standalone artwork; no text units"
+  },
+  {
+    "id": 114,
+    "units": [],
+    "disposition": "Vector",
+    "kind": "NonText",
+    "bbox_px": [
+      438.0,
+      672.0,
+      440.0,
+      673.0
+    ],
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "reason": "standalone artwork; no text units"
+  },
+  {
+    "id": 115,
+    "units": [],
+    "disposition": "Vector",
+    "kind": "NonText",
+    "bbox_px": [
+      441.0,
+      672.0,
+      443.0,
+      673.0
+    ],
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "reason": "standalone artwork; no text units"
+  },
+  {
+    "id": 116,
+    "units": [],
+    "disposition": "Vector",
+    "kind": "NonText",
+    "bbox_px": [
+      762.0,
+      672.0,
+      769.0,
+      675.0
+    ],
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "reason": "standalone artwork; no text units"
+  },
+  {
+    "id": 117,
+    "units": [],
+    "disposition": "Vector",
+    "kind": "NonText",
+    "bbox_px": [
+      565.0,
+      678.0,
+      567.0,
+      680.0
+    ],
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "reason": "standalone artwork; no text units"
+  },
+  {
+    "id": 118,
+    "units": [],
+    "disposition": "Vector",
+    "kind": "NonText",
+    "bbox_px": [
+      596.0,
+      678.0,
+      597.0,
+      680.0
+    ],
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "reason": "standalone artwork; no text units"
+  },
+  {
+    "id": 119,
+    "units": [],
+    "disposition": "Vector",
+    "kind": "NonText",
+    "bbox_px": [
+      129.0,
+      679.0,
+      131.0,
+      681.0
+    ],
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "reason": "standalone artwork; no text units"
+  },
+  {
+    "id": 120,
+    "units": [],
+    "disposition": "Vector",
+    "kind": "NonText",
+    "bbox_px": [
+      132.0,
+      679.0,
+      135.0,
+      681.0
+    ],
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "reason": "standalone artwork; no text units"
+  },
+  {
+    "id": 121,
+    "units": [],
+    "disposition": "Vector",
+    "kind": "NonText",
+    "bbox_px": [
+      150.0,
+      679.0,
+      154.0,
+      681.0
+    ],
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "reason": "standalone artwork; no text units"
+  },
+  {
+    "id": 122,
+    "units": [],
+    "disposition": "Vector",
+    "kind": "NonText",
+    "bbox_px": [
+      158.0,
+      679.0,
+      159.0,
+      681.0
+    ],
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "reason": "standalone artwork; no text units"
+  },
+  {
+    "id": 123,
+    "units": [],
+    "disposition": "Vector",
+    "kind": "NonText",
+    "bbox_px": [
+      198.0,
+      679.0,
+      200.0,
+      681.0
+    ],
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "reason": "standalone artwork; no text units"
+  },
+  {
+    "id": 124,
+    "units": [],
+    "disposition": "Vector",
+    "kind": "NonText",
+    "bbox_px": [
+      207.0,
+      679.0,
+      209.0,
+      680.0
+    ],
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "reason": "standalone artwork; no text units"
+  },
+  {
+    "id": 125,
+    "units": [],
+    "disposition": "Vector",
+    "kind": "NonText",
+    "bbox_px": [
+      211.0,
+      679.0,
+      212.0,
+      680.0
+    ],
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "reason": "standalone artwork; no text units"
+  },
+  {
+    "id": 126,
+    "units": [],
+    "disposition": "Vector",
+    "kind": "NonText",
+    "bbox_px": [
+      219.0,
+      679.0,
+      220.0,
+      680.0
+    ],
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "reason": "standalone artwork; no text units"
+  },
+  {
+    "id": 127,
+    "units": [],
+    "disposition": "Vector",
+    "kind": "NonText",
+    "bbox_px": [
+      222.0,
+      679.0,
+      224.0,
+      680.0
+    ],
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "reason": "standalone artwork; no text units"
+  },
+  {
+    "id": 128,
+    "units": [],
+    "disposition": "Vector",
+    "kind": "NonText",
+    "bbox_px": [
+      246.0,
+      679.0,
+      249.0,
+      681.0
+    ],
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "reason": "standalone artwork; no text units"
+  },
+  {
+    "id": 129,
+    "units": [],
+    "disposition": "Vector",
+    "kind": "NonText",
+    "bbox_px": [
+      256.0,
+      679.0,
+      257.0,
+      680.0
+    ],
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "reason": "standalone artwork; no text units"
+  },
+  {
+    "id": 130,
+    "units": [],
+    "disposition": "Vector",
+    "kind": "NonText",
+    "bbox_px": [
+      259.0,
+      679.0,
+      260.0,
+      680.0
+    ],
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "reason": "standalone artwork; no text units"
+  },
+  {
+    "id": 131,
+    "units": [],
+    "disposition": "Vector",
+    "kind": "NonText",
+    "bbox_px": [
+      262.0,
+      679.0,
+      265.0,
+      680.0
+    ],
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "reason": "standalone artwork; no text units"
+  },
+  {
+    "id": 132,
+    "units": [],
+    "disposition": "Vector",
+    "kind": "NonText",
+    "bbox_px": [
+      330.0,
+      679.0,
+      331.0,
+      680.0
+    ],
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "reason": "standalone artwork; no text units"
+  },
+  {
+    "id": 133,
+    "units": [],
+    "disposition": "Vector",
+    "kind": "NonText",
+    "bbox_px": [
+      361.0,
+      679.0,
+      363.0,
+      681.0
+    ],
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "reason": "standalone artwork; no text units"
+  },
+  {
+    "id": 134,
+    "units": [],
+    "disposition": "Vector",
+    "kind": "NonText",
+    "bbox_px": [
+      365.0,
+      679.0,
+      366.0,
+      680.0
+    ],
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "reason": "standalone artwork; no text units"
+  },
+  {
+    "id": 135,
+    "units": [],
+    "disposition": "Vector",
+    "kind": "NonText",
+    "bbox_px": [
+      377.0,
+      679.0,
+      378.0,
+      681.0
+    ],
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "reason": "standalone artwork; no text units"
+  },
+  {
+    "id": 136,
+    "units": [],
+    "disposition": "Vector",
+    "kind": "NonText",
+    "bbox_px": [
+      391.0,
+      679.0,
+      394.0,
+      681.0
+    ],
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "reason": "standalone artwork; no text units"
+  },
+  {
+    "id": 137,
+    "units": [],
+    "disposition": "Vector",
+    "kind": "NonText",
+    "bbox_px": [
+      414.0,
+      679.0,
+      416.0,
+      681.0
+    ],
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "reason": "standalone artwork; no text units"
+  },
+  {
+    "id": 138,
+    "units": [],
+    "disposition": "Vector",
+    "kind": "NonText",
+    "bbox_px": [
+      423.0,
+      679.0,
+      424.0,
+      681.0
+    ],
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "reason": "standalone artwork; no text units"
+  },
+  {
+    "id": 139,
+    "units": [],
+    "disposition": "Vector",
+    "kind": "NonText",
+    "bbox_px": [
+      426.0,
+      679.0,
+      428.0,
+      681.0
+    ],
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "reason": "standalone artwork; no text units"
+  },
+  {
+    "id": 140,
+    "units": [],
+    "disposition": "Vector",
+    "kind": "NonText",
+    "bbox_px": [
+      431.0,
+      679.0,
+      436.0,
+      681.0
+    ],
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "reason": "standalone artwork; no text units"
+  },
+  {
+    "id": 141,
+    "units": [],
+    "disposition": "Vector",
+    "kind": "NonText",
+    "bbox_px": [
+      438.0,
+      679.0,
+      440.0,
+      681.0
+    ],
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "reason": "standalone artwork; no text units"
+  },
+  {
+    "id": 142,
+    "units": [],
+    "disposition": "Vector",
+    "kind": "NonText",
+    "bbox_px": [
+      441.0,
+      679.0,
+      444.0,
+      681.0
+    ],
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "reason": "standalone artwork; no text units"
+  },
+  {
+    "id": 143,
+    "units": [],
+    "disposition": "Vector",
+    "kind": "NonText",
+    "bbox_px": [
+      457.0,
+      679.0,
+      459.0,
+      681.0
+    ],
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "reason": "standalone artwork; no text units"
+  },
+  {
+    "id": 144,
+    "units": [],
+    "disposition": "Vector",
+    "kind": "NonText",
+    "bbox_px": [
+      464.0,
+      679.0,
+      466.0,
+      680.0
+    ],
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "reason": "standalone artwork; no text units"
+  },
+  {
+    "id": 145,
+    "units": [],
+    "disposition": "Vector",
+    "kind": "NonText",
+    "bbox_px": [
+      469.0,
+      679.0,
+      470.0,
+      680.0
+    ],
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "reason": "standalone artwork; no text units"
+  },
+  {
+    "id": 146,
+    "units": [],
+    "disposition": "Vector",
+    "kind": "NonText",
+    "bbox_px": [
+      476.0,
+      679.0,
+      479.0,
+      681.0
+    ],
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "reason": "standalone artwork; no text units"
+  },
+  {
+    "id": 147,
+    "units": [],
+    "disposition": "Vector",
+    "kind": "NonText",
+    "bbox_px": [
+      480.0,
+      679.0,
+      482.0,
+      681.0
+    ],
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "reason": "standalone artwork; no text units"
+  },
+  {
+    "id": 148,
+    "units": [],
+    "disposition": "Vector",
+    "kind": "NonText",
+    "bbox_px": [
+      484.0,
+      679.0,
+      489.0,
+      680.0
+    ],
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "reason": "standalone artwork; no text units"
+  },
+  {
+    "id": 149,
+    "units": [],
+    "disposition": "Vector",
+    "kind": "NonText",
+    "bbox_px": [
+      492.0,
+      679.0,
+      498.0,
+      680.0
+    ],
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "reason": "standalone artwork; no text units"
+  },
+  {
+    "id": 150,
+    "units": [],
+    "disposition": "Vector",
+    "kind": "NonText",
+    "bbox_px": [
+      507.0,
+      679.0,
+      508.0,
+      680.0
+    ],
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "reason": "standalone artwork; no text units"
+  },
+  {
+    "id": 151,
+    "units": [],
+    "disposition": "Vector",
+    "kind": "NonText",
+    "bbox_px": [
+      554.0,
+      679.0,
+      555.0,
+      680.0
+    ],
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "reason": "standalone artwork; no text units"
+  },
+  {
+    "id": 152,
+    "units": [],
+    "disposition": "Vector",
+    "kind": "NonText",
+    "bbox_px": [
+      600.0,
+      679.0,
+      601.0,
+      680.0
+    ],
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "reason": "standalone artwork; no text units"
+  },
+  {
+    "id": 153,
+    "units": [],
+    "disposition": "Vector",
+    "kind": "NonText",
+    "bbox_px": [
+      779.0,
+      679.0,
+      781.0,
+      680.0
+    ],
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "reason": "standalone artwork; no text units"
+  },
+  {
+    "id": 154,
+    "units": [],
+    "disposition": "Vector",
+    "kind": "NonText",
+    "bbox_px": [
+      112.0,
+      680.0,
+      115.0,
+      681.0
+    ],
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "reason": "standalone artwork; no text units"
+  },
+  {
+    "id": 155,
+    "units": [],
+    "disposition": "Vector",
+    "kind": "NonText",
+    "bbox_px": [
+      117.0,
+      680.0,
+      118.0,
+      681.0
+    ],
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "reason": "standalone artwork; no text units"
+  },
+  {
+    "id": 156,
+    "units": [],
+    "disposition": "Vector",
+    "kind": "NonText",
+    "bbox_px": [
+      165.0,
+      680.0,
+      167.0,
+      681.0
+    ],
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "reason": "standalone artwork; no text units"
+  },
+  {
+    "id": 157,
+    "units": [],
+    "disposition": "Vector",
+    "kind": "NonText",
+    "bbox_px": [
+      384.0,
+      680.0,
+      385.0,
+      681.0
+    ],
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "reason": "standalone artwork; no text units"
+  },
+  {
+    "id": 158,
+    "units": [],
+    "disposition": "Vector",
+    "kind": "NonText",
+    "bbox_px": [
+      395.0,
+      680.0,
+      397.0,
+      681.0
+    ],
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "reason": "standalone artwork; no text units"
+  },
+  {
+    "id": 159,
+    "units": [],
+    "disposition": "Vector",
+    "kind": "NonText",
+    "bbox_px": [
+      404.0,
+      680.0,
+      405.0,
+      681.0
+    ],
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "reason": "standalone artwork; no text units"
+  },
+  {
+    "id": 160,
+    "units": [],
+    "disposition": "Vector",
+    "kind": "NonText",
+    "bbox_px": [
+      446.0,
+      680.0,
+      448.0,
+      681.0
+    ],
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "reason": "standalone artwork; no text units"
+  },
+  {
+    "id": 161,
+    "units": [],
+    "disposition": "Vector",
+    "kind": "NonText",
+    "bbox_px": [
+      782.0,
+      681.0,
+      783.0,
+      682.0
+    ],
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "reason": "standalone artwork; no text units"
+  },
+  {
+    "id": 162,
+    "units": [],
+    "disposition": "Vector",
+    "kind": "NonText",
+    "bbox_px": [
+      261.0,
+      1004.0,
+      262.0,
+      1005.0
+    ],
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "reason": "standalone artwork; no text units"
+  },
+  {
+    "id": 163,
+    "units": [],
+    "disposition": "Vector",
+    "kind": "NonText",
+    "bbox_px": [
+      161.0,
+      1006.0,
+      162.0,
+      1007.0
+    ],
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "reason": "standalone artwork; no text units"
+  },
+  {
+    "id": 164,
+    "units": [],
+    "disposition": "Vector",
+    "kind": "NonText",
+    "bbox_px": [
+      92.0,
+      1010.0,
+      93.0,
+      1011.0
+    ],
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "reason": "standalone artwork; no text units"
+  },
+  {
+    "id": 165,
+    "units": [],
+    "disposition": "Vector",
+    "kind": "NonText",
+    "bbox_px": [
+      154.0,
+      1010.0,
+      156.0,
+      1012.0
+    ],
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "reason": "standalone artwork; no text units"
+  },
+  {
+    "id": 166,
+    "units": [],
+    "disposition": "Vector",
+    "kind": "NonText",
+    "bbox_px": [
+      171.0,
+      1013.0,
+      172.0,
+      1015.0
+    ],
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "reason": "standalone artwork; no text units"
+  },
+  {
+    "id": 167,
+    "units": [],
+    "disposition": "Vector",
+    "kind": "NonText",
+    "bbox_px": [
+      172.0,
+      1016.0,
+      173.0,
+      1017.0
+    ],
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "reason": "standalone artwork; no text units"
+  },
+  {
+    "id": 168,
+    "units": [],
+    "disposition": "Vector",
+    "kind": "NonText",
+    "bbox_px": [
+      150.0,
+      1057.0,
+      152.0,
+      1059.0
+    ],
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "reason": "standalone artwork; no text units"
+  },
+  {
+    "id": 169,
+    "units": [],
+    "disposition": "Vector",
+    "kind": "NonText",
+    "bbox_px": [
+      137.0,
+      1072.0,
+      143.0,
+      1076.0
+    ],
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "reason": "standalone artwork; no text units"
+  },
+  {
+    "id": 170,
+    "units": [],
+    "disposition": "Vector",
+    "kind": "NonText",
+    "bbox_px": [
+      140.0,
+      1077.0,
+      144.0,
+      1080.0
+    ],
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "reason": "standalone artwork; no text units"
+  },
+  {
+    "id": 171,
+    "units": [],
+    "disposition": "Vector",
+    "kind": "NonText",
+    "bbox_px": [
+      195.0,
+      1106.0,
+      197.0,
+      1107.0
+    ],
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "reason": "standalone artwork; no text units"
+  },
+  {
+    "id": 172,
+    "units": [],
+    "disposition": "Vector",
+    "kind": "NonText",
+    "bbox_px": [
+      122.0,
+      1107.0,
+      123.0,
+      1108.0
+    ],
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "reason": "standalone artwork; no text units"
+  },
+  {
+    "id": 173,
+    "units": [],
+    "disposition": "Vector",
+    "kind": "NonText",
+    "bbox_px": [
+      124.0,
+      1107.0,
+      126.0,
+      1109.0
+    ],
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "reason": "standalone artwork; no text units"
+  },
+  {
+    "id": 174,
+    "units": [],
+    "disposition": "Vector",
+    "kind": "NonText",
+    "bbox_px": [
+      133.0,
+      1107.0,
+      136.0,
+      1111.0
+    ],
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "reason": "standalone artwork; no text units"
+  },
+  {
+    "id": 175,
+    "units": [],
+    "disposition": "Vector",
+    "kind": "NonText",
+    "bbox_px": [
+      129.0,
+      1110.0,
+      131.0,
+      1111.0
+    ],
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "reason": "standalone artwork; no text units"
+  },
+  {
+    "id": 176,
+    "units": [],
+    "disposition": "Vector",
+    "kind": "NonText",
+    "bbox_px": [
+      124.0,
+      1111.0,
+      125.0,
+      1112.0
+    ],
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "reason": "standalone artwork; no text units"
+  },
+  {
+    "id": 177,
+    "units": [],
+    "disposition": "Vector",
+    "kind": "NonText",
+    "bbox_px": [
+      123.0,
+      1120.0,
+      124.0,
+      1121.0
+    ],
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "reason": "standalone artwork; no text units"
+  },
+  {
+    "id": 178,
+    "units": [],
+    "disposition": "Vector",
+    "kind": "NonText",
+    "bbox_px": [
+      143.0,
+      1120.0,
+      144.0,
+      1121.0
+    ],
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "reason": "standalone artwork; no text units"
+  },
+  {
+    "id": 179,
+    "units": [],
+    "disposition": "Vector",
+    "kind": "NonText",
+    "bbox_px": [
+      170.0,
+      1120.0,
+      172.0,
+      1121.0
+    ],
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "reason": "standalone artwork; no text units"
+  },
+  {
+    "id": 180,
+    "units": [],
+    "disposition": "Vector",
+    "kind": "NonText",
+    "bbox_px": [
+      153.0,
+      1123.0,
+      156.0,
+      1126.0
+    ],
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "reason": "standalone artwork; no text units"
+  },
+  {
+    "id": 181,
+    "units": [],
+    "disposition": "Vector",
+    "kind": "NonText",
+    "bbox_px": [
+      123.0,
+      1124.0,
+      124.0,
+      1126.0
+    ],
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "reason": "standalone artwork; no text units"
+  },
+  {
+    "id": 182,
+    "units": [],
+    "disposition": "Vector",
+    "kind": "NonText",
+    "bbox_px": [
+      171.0,
+      1124.0,
+      174.0,
+      1126.0
+    ],
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "reason": "standalone artwork; no text units"
+  },
+  {
+    "id": 183,
+    "units": [],
+    "disposition": "Vector",
+    "kind": "NonText",
+    "bbox_px": [
+      120.0,
+      1128.0,
+      124.0,
+      1132.0
+    ],
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "reason": "standalone artwork; no text units"
+  },
+  {
+    "id": 184,
+    "units": [],
+    "disposition": "Vector",
+    "kind": "NonText",
+    "bbox_px": [
+      107.0,
+      1130.0,
+      108.0,
+      1131.0
+    ],
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "reason": "standalone artwork; no text units"
+  },
+  {
+    "id": 185,
+    "units": [],
+    "disposition": "Vector",
+    "kind": "NonText",
+    "bbox_px": [
+      115.0,
+      1130.0,
+      117.0,
+      1131.0
+    ],
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "reason": "standalone artwork; no text units"
+  },
+  {
+    "id": 186,
+    "units": [],
+    "disposition": "Vector",
+    "kind": "NonText",
+    "bbox_px": [
+      784.0,
+      1181.0,
+      812.0,
+      1196.0
+    ],
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "reason": "standalone artwork; no text units"
+  },
+  {
+    "id": 187,
+    "units": [],
+    "disposition": "Vector",
+    "kind": "NonText",
+    "bbox_px": [
+      820.0,
+      1189.0,
+      821.0,
+      1192.0
+    ],
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "reason": "standalone artwork; no text units"
+  },
+  {
+    "id": 188,
+    "units": [],
+    "disposition": "Vector",
+    "kind": "NonText",
+    "bbox_px": [
+      811.0,
+      1192.0,
+      815.0,
+      1194.0
+    ],
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "reason": "standalone artwork; no text units"
+  },
+  {
+    "id": 189,
+    "units": [],
+    "disposition": "Vector",
+    "kind": "NonText",
+    "bbox_px": [
+      738.0,
+      1193.0,
+      740.0,
+      1194.0
+    ],
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "reason": "standalone artwork; no text units"
+  },
+  {
+    "id": 190,
+    "units": [],
+    "disposition": "Vector",
+    "kind": "NonText",
+    "bbox_px": [
+      750.0,
+      1194.0,
+      751.0,
+      1195.0
+    ],
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "reason": "standalone artwork; no text units"
+  },
+  {
+    "id": 191,
+    "units": [],
+    "disposition": "Vector",
+    "kind": "NonText",
+    "bbox_px": [
+      726.0,
+      1195.0,
+      728.0,
+      1196.0
+    ],
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "reason": "standalone artwork; no text units"
+  },
+  {
+    "id": 192,
+    "units": [],
+    "disposition": "Vector",
+    "kind": "NonText",
+    "bbox_px": [
+      657.0,
+      1196.0,
+      659.0,
+      1197.0
+    ],
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "reason": "standalone artwork; no text units"
+  },
+  {
+    "id": 193,
+    "units": [],
+    "disposition": "Vector",
+    "kind": "NonText",
+    "bbox_px": [
+      627.0,
+      1198.0,
+      630.0,
+      1199.0
+    ],
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "reason": "standalone artwork; no text units"
+  },
+  {
+    "id": 194,
+    "units": [],
+    "disposition": "Vector",
+    "kind": "NonText",
+    "bbox_px": [
+      656.0,
+      1198.0,
+      659.0,
+      1199.0
+    ],
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "reason": "standalone artwork; no text units"
+  },
+  {
+    "id": 195,
+    "units": [],
+    "disposition": "Vector",
+    "kind": "NonText",
+    "bbox_px": [
+      777.0,
+      1198.0,
+      784.0,
+      1205.0
+    ],
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "reason": "standalone artwork; no text units"
+  },
+  {
+    "id": 196,
+    "units": [],
+    "disposition": "Vector",
+    "kind": "NonText",
+    "bbox_px": [
+      800.0,
+      1198.0,
+      801.0,
+      1199.0
+    ],
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "reason": "standalone artwork; no text units"
+  },
+  {
+    "id": 197,
+    "units": [],
+    "disposition": "Vector",
+    "kind": "NonText",
+    "bbox_px": [
+      806.0,
+      1198.0,
+      826.0,
+      1203.0
+    ],
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "reason": "standalone artwork; no text units"
+  },
+  {
+    "id": 198,
+    "units": [],
+    "disposition": "Vector",
+    "kind": "NonText",
+    "bbox_px": [
+      598.0,
+      1199.0,
+      600.0,
+      1200.0
+    ],
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "reason": "standalone artwork; no text units"
+  },
+  {
+    "id": 199,
+    "units": [],
+    "disposition": "Vector",
+    "kind": "NonText",
+    "bbox_px": [
+      791.0,
+      1199.0,
+      794.0,
+      1201.0
+    ],
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "reason": "standalone artwork; no text units"
+  },
+  {
+    "id": 200,
+    "units": [],
+    "disposition": "Vector",
+    "kind": "NonText",
+    "bbox_px": [
+      549.0,
+      1200.0,
+      550.0,
+      1201.0
+    ],
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "reason": "standalone artwork; no text units"
+  },
+  {
+    "id": 201,
+    "units": [],
+    "disposition": "Vector",
+    "kind": "NonText",
+    "bbox_px": [
+      557.0,
+      1200.0,
+      559.0,
+      1201.0
+    ],
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "reason": "standalone artwork; no text units"
+  },
+  {
+    "id": 202,
+    "units": [],
+    "disposition": "Vector",
+    "kind": "NonText",
+    "bbox_px": [
+      628.0,
+      1200.0,
+      629.0,
+      1201.0
+    ],
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "reason": "standalone artwork; no text units"
+  },
+  {
+    "id": 203,
+    "units": [],
+    "disposition": "Vector",
+    "kind": "NonText",
+    "bbox_px": [
+      754.0,
+      1200.0,
+      756.0,
+      1201.0
+    ],
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "reason": "standalone artwork; no text units"
+  },
+  {
+    "id": 204,
+    "units": [],
+    "disposition": "Vector",
+    "kind": "NonText",
+    "bbox_px": [
+      766.0,
+      1200.0,
+      768.0,
+      1201.0
+    ],
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "reason": "standalone artwork; no text units"
+  },
+  {
+    "id": 205,
+    "units": [],
+    "disposition": "Vector",
+    "kind": "NonText",
+    "bbox_px": [
+      579.0,
+      1201.0,
+      580.0,
+      1202.0
+    ],
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "reason": "standalone artwork; no text units"
+  },
+  {
+    "id": 206,
+    "units": [],
+    "disposition": "Vector",
+    "kind": "NonText",
+    "bbox_px": [
+      734.0,
+      1201.0,
+      736.0,
+      1202.0
+    ],
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "reason": "standalone artwork; no text units"
+  },
+  {
+    "id": 207,
+    "units": [],
+    "disposition": "Vector",
+    "kind": "NonText",
+    "bbox_px": [
+      540.0,
+      1202.0,
+      544.0,
+      1203.0
+    ],
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "reason": "standalone artwork; no text units"
+  },
+  {
+    "id": 208,
+    "units": [],
+    "disposition": "Vector",
+    "kind": "NonText",
+    "bbox_px": [
+      549.0,
+      1202.0,
+      551.0,
+      1203.0
+    ],
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "reason": "standalone artwork; no text units"
+  },
+  {
+    "id": 209,
+    "units": [],
+    "disposition": "Vector",
+    "kind": "NonText",
+    "bbox_px": [
+      705.0,
+      1202.0,
+      708.0,
+      1203.0
+    ],
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "reason": "standalone artwork; no text units"
+  },
+  {
+    "id": 210,
+    "units": [],
+    "disposition": "Vector",
+    "kind": "NonText",
+    "bbox_px": [
+      753.0,
+      1202.0,
+      756.0,
+      1203.0
+    ],
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "reason": "standalone artwork; no text units"
+  },
+  {
+    "id": 211,
+    "units": [],
+    "disposition": "Vector",
+    "kind": "NonText",
+    "bbox_px": [
+      681.0,
+      1203.0,
+      688.0,
+      1205.0
+    ],
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "reason": "standalone artwork; no text units"
+  },
+  {
+    "id": 212,
+    "units": [],
+    "disposition": "Vector",
+    "kind": "NonText",
+    "bbox_px": [
+      477.0,
+      1204.0,
+      479.0,
+      1205.0
+    ],
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "reason": "standalone artwork; no text units"
+  },
+  {
+    "id": 213,
+    "units": [],
+    "disposition": "Vector",
+    "kind": "NonText",
+    "bbox_px": [
+      486.0,
+      1204.0,
+      487.0,
+      1205.0
+    ],
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "reason": "standalone artwork; no text units"
+  },
+  {
+    "id": 214,
+    "units": [],
+    "disposition": "Vector",
+    "kind": "NonText",
+    "bbox_px": [
+      693.0,
+      1204.0,
+      695.0,
+      1205.0
+    ],
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "reason": "standalone artwork; no text units"
+  },
+  {
+    "id": 215,
+    "units": [],
+    "disposition": "Vector",
+    "kind": "NonText",
+    "bbox_px": [
+      705.0,
+      1204.0,
+      706.0,
+      1205.0
+    ],
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "reason": "standalone artwork; no text units"
+  },
+  {
+    "id": 216,
+    "units": [],
+    "disposition": "Vector",
+    "kind": "NonText",
+    "bbox_px": [
+      457.0,
+      1205.0,
+      458.0,
+      1206.0
+    ],
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "reason": "standalone artwork; no text units"
+  },
+  {
+    "id": 217,
+    "units": [],
+    "disposition": "Vector",
+    "kind": "NonText",
+    "bbox_px": [
+      673.0,
+      1205.0,
+      678.0,
+      1206.0
+    ],
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "reason": "standalone artwork; no text units"
+  },
+  {
+    "id": 218,
+    "units": [],
+    "disposition": "Vector",
+    "kind": "NonText",
+    "bbox_px": [
+      622.0,
+      1206.0,
+      626.0,
+      1209.0
+    ],
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "reason": "standalone artwork; no text units"
+  },
+  {
+    "id": 219,
+    "units": [],
+    "disposition": "Vector",
+    "kind": "NonText",
+    "bbox_px": [
+      631.0,
+      1206.0,
+      633.0,
+      1207.0
+    ],
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "reason": "standalone artwork; no text units"
+  },
+  {
+    "id": 220,
+    "units": [],
+    "disposition": "Vector",
+    "kind": "NonText",
+    "bbox_px": [
+      665.0,
+      1206.0,
+      666.0,
+      1207.0
+    ],
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "reason": "standalone artwork; no text units"
+  },
+  {
+    "id": 221,
+    "units": [],
+    "disposition": "Vector",
+    "kind": "NonText",
+    "bbox_px": [
+      813.0,
+      1206.0,
+      825.0,
+      1211.0
+    ],
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "reason": "standalone artwork; no text units"
+  },
+  {
+    "id": 222,
+    "units": [],
+    "disposition": "Vector",
+    "kind": "NonText",
+    "bbox_px": [
+      585.0,
+      1207.0,
+      587.0,
+      1208.0
+    ],
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "reason": "standalone artwork; no text units"
+  },
+  {
+    "id": 223,
+    "units": [],
+    "disposition": "Vector",
+    "kind": "NonText",
+    "bbox_px": [
+      593.0,
+      1207.0,
+      594.0,
+      1208.0
+    ],
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "reason": "standalone artwork; no text units"
+  },
+  {
+    "id": 224,
+    "units": [],
+    "disposition": "Vector",
+    "kind": "NonText",
+    "bbox_px": [
+      596.0,
+      1207.0,
+      600.0,
+      1208.0
+    ],
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "reason": "standalone artwork; no text units"
+  },
+  {
+    "id": 225,
+    "units": [],
+    "disposition": "Vector",
+    "kind": "NonText",
+    "bbox_px": [
+      605.0,
+      1207.0,
+      609.0,
+      1209.0
+    ],
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "reason": "standalone artwork; no text units"
+  },
+  {
+    "id": 226,
+    "units": [],
+    "disposition": "Vector",
+    "kind": "NonText",
+    "bbox_px": [
+      614.0,
+      1207.0,
+      617.0,
+      1209.0
+    ],
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "reason": "standalone artwork; no text units"
+  },
+  {
+    "id": 227,
+    "units": [],
+    "disposition": "Vector",
+    "kind": "NonText",
+    "bbox_px": [
+      373.0,
+      1208.0,
+      376.0,
+      1209.0
+    ],
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "reason": "standalone artwork; no text units"
+  },
+  {
+    "id": 228,
+    "units": [],
+    "disposition": "Vector",
+    "kind": "NonText",
+    "bbox_px": [
+      549.0,
+      1208.0,
+      555.0,
+      1209.0
+    ],
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "reason": "standalone artwork; no text units"
+  },
+  {
+    "id": 229,
+    "units": [],
+    "disposition": "Vector",
+    "kind": "NonText",
+    "bbox_px": [
+      556.0,
+      1208.0,
+      559.0,
+      1209.0
+    ],
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "reason": "standalone artwork; no text units"
+  },
+  {
+    "id": 230,
+    "units": [],
+    "disposition": "Vector",
+    "kind": "NonText",
+    "bbox_px": [
+      523.0,
+      1209.0,
+      525.0,
+      1210.0
+    ],
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "reason": "standalone artwork; no text units"
+  },
+  {
+    "id": 231,
+    "units": [],
+    "disposition": "Vector",
+    "kind": "NonText",
+    "bbox_px": [
+      539.0,
+      1209.0,
+      547.0,
+      1211.0
+    ],
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "reason": "standalone artwork; no text units"
+  },
+  {
+    "id": 232,
+    "units": [],
+    "disposition": "Vector",
+    "kind": "NonText",
+    "bbox_px": [
+      586.0,
+      1209.0,
+      587.0,
+      1210.0
+    ],
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "reason": "standalone artwork; no text units"
+  },
+  {
+    "id": 233,
+    "units": [],
+    "disposition": "Vector",
+    "kind": "NonText",
+    "bbox_px": [
+      498.0,
+      1210.0,
+      499.0,
+      1211.0
+    ],
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "reason": "standalone artwork; no text units"
+  },
+  {
+    "id": 234,
+    "units": [],
+    "disposition": "Vector",
+    "kind": "NonText",
+    "bbox_px": [
+      472.0,
+      1211.0,
+      475.0,
+      1212.0
+    ],
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "reason": "standalone artwork; no text units"
+  },
+  {
+    "id": 235,
+    "units": [],
+    "disposition": "Vector",
+    "kind": "NonText",
+    "bbox_px": [
+      480.0,
+      1211.0,
+      484.0,
+      1213.0
+    ],
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "reason": "standalone artwork; no text units"
+  },
+  {
+    "id": 236,
+    "units": [],
+    "disposition": "Vector",
+    "kind": "NonText",
+    "bbox_px": [
+      90.0,
+      1212.0,
+      111.0,
+      1216.0
+    ],
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "reason": "standalone artwork; no text units"
+  },
+  {
+    "id": 237,
+    "units": [],
+    "disposition": "Vector",
+    "kind": "NonText",
+    "bbox_px": [
+      230.0,
+      1212.0,
+      232.0,
+      1213.0
+    ],
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "reason": "standalone artwork; no text units"
+  },
+  {
+    "id": 238,
+    "units": [],
+    "disposition": "Vector",
+    "kind": "NonText",
+    "bbox_px": [
+      239.0,
+      1212.0,
+      246.0,
+      1214.0
+    ],
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "reason": "standalone artwork; no text units"
+  },
+  {
+    "id": 239,
+    "units": [],
+    "disposition": "Vector",
+    "kind": "NonText",
+    "bbox_px": [
+      261.0,
+      1212.0,
+      263.0,
+      1214.0
+    ],
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "reason": "standalone artwork; no text units"
+  },
+  {
+    "id": 240,
+    "units": [],
+    "disposition": "Vector",
+    "kind": "NonText",
+    "bbox_px": [
+      269.0,
+      1212.0,
+      275.0,
+      1214.0
+    ],
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "reason": "standalone artwork; no text units"
+  },
+  {
+    "id": 241,
+    "units": [],
+    "disposition": "Vector",
+    "kind": "NonText",
+    "bbox_px": [
+      281.0,
+      1212.0,
+      284.0,
+      1214.0
+    ],
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "reason": "standalone artwork; no text units"
+  },
+  {
+    "id": 242,
+    "units": [],
+    "disposition": "Vector",
+    "kind": "NonText",
+    "bbox_px": [
+      113.0,
+      1213.0,
+      130.0,
+      1216.0
+    ],
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "reason": "standalone artwork; no text units"
+  },
+  {
+    "id": 243,
+    "units": [],
+    "disposition": "Vector",
+    "kind": "NonText",
+    "bbox_px": [
+      146.0,
+      1213.0,
+      156.0,
+      1216.0
+    ],
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "reason": "standalone artwork; no text units"
+  },
+  {
+    "id": 244,
+    "units": [],
+    "disposition": "Vector",
+    "kind": "NonText",
+    "bbox_px": [
+      157.0,
+      1213.0,
+      176.0,
+      1216.0
+    ],
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "reason": "standalone artwork; no text units"
+  },
+  {
+    "id": 245,
+    "units": [],
+    "disposition": "Vector",
+    "kind": "NonText",
+    "bbox_px": [
+      218.0,
+      1213.0,
+      219.0,
+      1215.0
+    ],
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "reason": "standalone artwork; no text units"
+  },
+  {
+    "id": 246,
+    "units": [],
+    "disposition": "Vector",
+    "kind": "NonText",
+    "bbox_px": [
+      439.0,
+      1213.0,
+      441.0,
+      1214.0
+    ],
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "reason": "standalone artwork; no text units"
+  },
+  {
+    "id": 247,
+    "units": [],
+    "disposition": "Vector",
+    "kind": "NonText",
+    "bbox_px": [
+      472.0,
+      1213.0,
+      475.0,
+      1214.0
+    ],
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "reason": "standalone artwork; no text units"
+  },
+  {
+    "id": 248,
+    "units": [],
+    "disposition": "Vector",
+    "kind": "NonText",
+    "bbox_px": [
+      182.0,
+      1214.0,
+      189.0,
+      1216.0
+    ],
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "reason": "standalone artwork; no text units"
+  },
+  {
+    "id": 249,
+    "units": [],
+    "disposition": "Vector",
+    "kind": "NonText",
+    "bbox_px": [
+      200.0,
+      1214.0,
+      201.0,
+      1216.0
+    ],
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "reason": "standalone artwork; no text units"
+  },
+  {
+    "id": 250,
+    "units": [],
+    "disposition": "Vector",
+    "kind": "NonText",
+    "bbox_px": [
+      451.0,
+      1214.0,
+      452.0,
+      1215.0
+    ],
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "reason": "standalone artwork; no text units"
+  },
+  {
+    "id": 251,
+    "units": [],
+    "disposition": "Vector",
+    "kind": "NonText",
+    "bbox_px": [
+      140.0,
+      1215.0,
+      143.0,
+      1216.0
+    ],
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "reason": "standalone artwork; no text units"
+  },
+  {
+    "id": 252,
+    "units": [],
+    "disposition": "Vector",
+    "kind": "NonText",
+    "bbox_px": [
+      208.0,
+      1215.0,
+      211.0,
+      1216.0
+    ],
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "reason": "standalone artwork; no text units"
+  },
+  {
+    "id": 253,
+    "units": [],
+    "disposition": "Vector",
+    "kind": "NonText",
+    "bbox_px": [
+      389.0,
+      1215.0,
+      390.0,
+      1216.0
+    ],
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "reason": "standalone artwork; no text units"
+  },
+  {
+    "id": 254,
+    "units": [],
+    "disposition": "Vector",
+    "kind": "NonText",
+    "bbox_px": [
+      389.0,
+      1217.0,
+      391.0,
+      1218.0
+    ],
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "reason": "standalone artwork; no text units"
+  },
+  {
+    "id": 255,
+    "units": [],
+    "disposition": "Vector",
+    "kind": "NonText",
+    "bbox_px": [
+      329.0,
+      1218.0,
+      334.0,
+      1221.0
+    ],
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "reason": "standalone artwork; no text units"
+  },
+  {
+    "id": 256,
+    "units": [],
+    "disposition": "Vector",
+    "kind": "NonText",
+    "bbox_px": [
+      775.0,
+      1218.0,
+      776.0,
+      1220.0
+    ],
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "reason": "standalone artwork; no text units"
+  },
+  {
+    "id": 257,
+    "units": [],
+    "disposition": "Vector",
+    "kind": "NonText",
+    "bbox_px": [
+      294.0,
+      1219.0,
+      296.0,
+      1220.0
+    ],
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "reason": "standalone artwork; no text units"
+  },
+  {
+    "id": 258,
+    "units": [],
+    "disposition": "Vector",
+    "kind": "NonText",
+    "bbox_px": [
+      316.0,
+      1219.0,
+      318.0,
+      1221.0
+    ],
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "reason": "standalone artwork; no text units"
+  },
+  {
+    "id": 259,
+    "units": [],
+    "disposition": "Vector",
+    "kind": "NonText",
+    "bbox_px": [
+      262.0,
+      1220.0,
+      273.0,
+      1223.0
+    ],
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "reason": "standalone artwork; no text units"
+  },
+  {
+    "id": 260,
+    "units": [],
+    "disposition": "Vector",
+    "kind": "NonText",
+    "bbox_px": [
+      286.0,
+      1220.0,
+      289.0,
+      1222.0
+    ],
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "reason": "standalone artwork; no text units"
+  },
+  {
+    "id": 261,
+    "units": [],
+    "disposition": "Vector",
+    "kind": "NonText",
+    "bbox_px": [
+      90.0,
+      1221.0,
+      95.0,
+      1224.0
+    ],
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "reason": "standalone artwork; no text units"
+  },
+  {
+    "id": 262,
+    "units": [],
+    "disposition": "Vector",
+    "kind": "NonText",
+    "bbox_px": [
+      96.0,
+      1221.0,
+      104.0,
+      1225.0
+    ],
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "reason": "standalone artwork; no text units"
+  },
+  {
+    "id": 263,
+    "units": [],
+    "disposition": "Vector",
+    "kind": "NonText",
+    "bbox_px": [
+      104.0,
+      1221.0,
+      136.0,
+      1225.0
+    ],
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "reason": "standalone artwork; no text units"
+  },
+  {
+    "id": 264,
+    "units": [],
+    "disposition": "Vector",
+    "kind": "NonText",
+    "bbox_px": [
+      219.0,
+      1221.0,
+      227.0,
+      1224.0
+    ],
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "reason": "standalone artwork; no text units"
+  },
+  {
+    "id": 265,
+    "units": [],
+    "disposition": "Vector",
+    "kind": "NonText",
+    "bbox_px": [
+      233.0,
+      1221.0,
+      236.0,
+      1223.0
+    ],
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "reason": "standalone artwork; no text units"
+  },
+  {
+    "id": 266,
+    "units": [],
+    "disposition": "Vector",
+    "kind": "NonText",
+    "bbox_px": [
+      293.0,
+      1221.0,
+      297.0,
+      1222.0
+    ],
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "reason": "standalone artwork; no text units"
+  },
+  {
+    "id": 267,
+    "units": [],
+    "disposition": "Vector",
+    "kind": "NonText",
+    "bbox_px": [
+      141.0,
+      1222.0,
+      160.0,
+      1225.0
+    ],
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "reason": "standalone artwork; no text units"
+  },
+  {
+    "id": 268,
+    "units": [],
+    "disposition": "Vector",
+    "kind": "NonText",
+    "bbox_px": [
+      163.0,
+      1222.0,
+      172.0,
+      1225.0
+    ],
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "reason": "standalone artwork; no text units"
+  },
+  {
+    "id": 269,
+    "units": [],
+    "disposition": "Vector",
+    "kind": "NonText",
+    "bbox_px": [
+      173.0,
+      1222.0,
+      195.0,
+      1225.0
+    ],
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "reason": "standalone artwork; no text units"
+  },
+  {
+    "id": 270,
+    "units": [],
+    "disposition": "Vector",
+    "kind": "NonText",
+    "bbox_px": [
+      211.0,
+      1222.0,
+      214.0,
+      1223.0
+    ],
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "reason": "standalone artwork; no text units"
+  },
+  {
+    "id": 271,
+    "units": [],
+    "disposition": "Vector",
+    "kind": "NonText",
+    "bbox_px": [
+      198.0,
+      1223.0,
+      201.0,
+      1225.0
+    ],
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "reason": "standalone artwork; no text units"
+  },
+  {
+    "id": 272,
+    "units": [],
+    "disposition": "Vector",
+    "kind": "NonText",
+    "bbox_px": [
+      775.0,
+      1224.0,
+      776.0,
+      1225.0
+    ],
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "reason": "standalone artwork; no text units"
+  },
+  {
+    "id": 273,
+    "units": [],
+    "disposition": "Vector",
+    "kind": "NonText",
+    "bbox_px": [
+      814.0,
+      1225.0,
+      817.0,
+      1228.0
+    ],
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "reason": "standalone artwork; no text units"
+  },
+  {
+    "id": 274,
+    "units": [],
+    "disposition": "Vector",
+    "kind": "NonText",
+    "bbox_px": [
+      775.0,
+      1226.0,
+      777.0,
+      1229.0
+    ],
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "reason": "standalone artwork; no text units"
+  },
+  {
+    "id": 275,
+    "units": [],
+    "disposition": "Vector",
+    "kind": "NonText",
+    "bbox_px": [
+      806.0,
+      1230.0,
+      811.0,
+      1234.0
+    ],
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "reason": "standalone artwork; no text units"
+  },
+  {
+    "id": 276,
+    "units": [],
+    "disposition": "Vector",
+    "kind": "NonText",
+    "bbox_px": [
+      278.0,
+      1253.0,
+      279.0,
+      1255.0
+    ],
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "reason": "standalone artwork; no text units"
+  },
+  {
+    "id": 277,
+    "units": [],
+    "disposition": "Vector",
+    "kind": "NonText",
+    "bbox_px": [
+      208.0,
+      1255.0,
+      211.0,
+      1258.0
+    ],
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "reason": "standalone artwork; no text units"
+  },
+  {
+    "id": 278,
+    "units": [],
+    "disposition": "Vector",
+    "kind": "NonText",
+    "bbox_px": [
+      262.0,
+      1259.0,
+      265.0,
+      1260.0
+    ],
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "reason": "standalone artwork; no text units"
+  },
+  {
+    "id": 279,
+    "units": [],
+    "disposition": "Vector",
+    "kind": "NonText",
+    "bbox_px": [
+      281.0,
+      1259.0,
+      285.0,
+      1260.0
+    ],
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "reason": "standalone artwork; no text units"
+  },
+  {
+    "id": 280,
+    "units": [],
+    "disposition": "Vector",
+    "kind": "NonText",
+    "bbox_px": [
+      209.0,
+      1260.0,
+      211.0,
+      1262.0
+    ],
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "reason": "standalone artwork; no text units"
+  },
+  {
+    "id": 281,
+    "units": [],
+    "disposition": "Vector",
+    "kind": "NonText",
+    "bbox_px": [
+      251.0,
+      1260.0,
+      253.0,
+      1261.0
+    ],
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "reason": "standalone artwork; no text units"
+  },
+  {
+    "id": 282,
+    "units": [],
+    "disposition": "Vector",
+    "kind": "NonText",
+    "bbox_px": [
+      245.0,
+      1261.0,
+      253.0,
+      1263.0
+    ],
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "reason": "standalone artwork; no text units"
+  },
+  {
+    "id": 283,
+    "units": [],
+    "disposition": "Vector",
+    "kind": "NonText",
+    "bbox_px": [
+      262.0,
+      1261.0,
+      263.0,
+      1262.0
+    ],
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "reason": "standalone artwork; no text units"
+  },
+  {
+    "id": 284,
+    "units": [],
+    "disposition": "Vector",
+    "kind": "NonText",
+    "bbox_px": [
+      281.0,
+      1261.0,
+      285.0,
+      1262.0
+    ],
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "reason": "standalone artwork; no text units"
+  },
+  {
+    "id": 285,
+    "units": [],
+    "disposition": "Vector",
+    "kind": "NonText",
+    "bbox_px": [
+      230.0,
+      1262.0,
+      234.0,
+      1265.0
+    ],
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "reason": "standalone artwork; no text units"
+  },
+  {
+    "id": 286,
+    "units": [],
+    "disposition": "Vector",
+    "kind": "NonText",
+    "bbox_px": [
+      208.0,
+      1264.0,
+      214.0,
+      1270.0
+    ],
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "reason": "standalone artwork; no text units"
+  },
+  {
+    "id": 287,
+    "units": [],
+    "disposition": "Vector",
+    "kind": "NonText",
+    "bbox_px": [
+      24.0,
+      1274.0,
+      30.0,
+      1278.0
+    ],
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "reason": "standalone artwork; no text units"
+  },
+  {
+    "id": 288,
+    "units": [],
+    "disposition": "Vector",
+    "kind": "NonText",
+    "bbox_px": [
+      35.0,
+      1275.0,
+      38.0,
+      1277.0
+    ],
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "reason": "standalone artwork; no text units"
+  },
+  {
+    "id": 289,
+    "units": [],
+    "disposition": "Vector",
+    "kind": "NonText",
+    "bbox_px": [
+      40.0,
+      1275.0,
+      45.0,
+      1278.0
+    ],
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "reason": "standalone artwork; no text units"
+  },
+  {
+    "id": 290,
+    "units": [],
+    "disposition": "Vector",
+    "kind": "NonText",
+    "bbox_px": [
+      61.0,
+      1276.0,
+      68.0,
+      1279.0
+    ],
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "reason": "standalone artwork; no text units"
+  },
+  {
+    "id": 291,
+    "units": [],
+    "disposition": "Vector",
+    "kind": "NonText",
+    "bbox_px": [
+      53.0,
+      1277.0,
+      54.0,
+      1278.0
+    ],
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "reason": "standalone artwork; no text units"
+  },
+  {
+    "id": 292,
+    "units": [],
+    "disposition": "Vector",
+    "kind": "NonText",
+    "bbox_px": [
+      114.0,
+      1278.0,
+      118.0,
+      1280.0
+    ],
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "reason": "standalone artwork; no text units"
+  },
+  {
+    "id": 293,
+    "units": [],
+    "disposition": "Vector",
+    "kind": "NonText",
+    "bbox_px": [
+      0.0,
+      1290.0,
+      3.0,
+      1296.0
+    ],
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "reason": "standalone artwork; no text units"
+  },
+  {
+    "id": 294,
+    "units": [],
+    "disposition": "Vector",
+    "kind": "NonText",
+    "bbox_px": [
+      5.0,
+      1290.0,
+      7.0,
+      1292.0
+    ],
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "reason": "standalone artwork; no text units"
+  },
+  {
+    "id": 295,
+    "units": [],
+    "disposition": "Vector",
+    "kind": "NonText",
+    "bbox_px": [
+      6.0,
+      1295.0,
+      7.0,
+      1297.0
+    ],
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "reason": "standalone artwork; no text units"
+  }
+]

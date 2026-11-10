@@ -72,6 +72,87 @@ The contained experimental historical and receipts PDFs have zero changed pixels
 
 The research switch substitutes interior paper only when its luminance exceeds the corner estimate by more than 60; the offline alternatives always report their own estimate. On normal receipts pages 1, 2, 3, 5 and 10 the switch retains the corner estimate, so their actual pipeline run is not the offline interior-mode counterfactual. On all ten inverted pages the experimental pipeline and offline dominant-interior RGB agree. Independent source and Adobe XI file hashes and corrected PDF hashes all matched prior provenance ([provenance.json](provenance.json)). The research-only Rust library suite passed 90 tests; this is instrumentation validation, not production qualification.
 
+## ContactNonText decomposition
+
+**Actual bottleneck: bounding-box contact with page-spanning artwork components.** With the interior estimator on historical pages 3–5, all 2,271 owned units are in regions whose bboxes overlap artwork bboxes. For 2,024 units there is no artwork pixel within four Euclidean pixels of any unit pixel in that region; 247 units are in regions with actual nearby artwork pixels. Suspect flags overlap those categories. On each of the three pages, the largest artwork component has a page-spanning bbox intersecting every text region, while **that component itself has zero unit-pixel contacts** within four pixels. Other components account for the real pixel contacts.
+
+This diagnostic uses the same connected components, ownership, OCR, margins and estimators as the earlier run. The counterfactual replaces bbox intersection with a mask-pixel Euclidean distance of at most `CONTACT_MARGIN_PX = 4`, and retains the existing independent suspect and protected-region tests. It is behind `SCANWEAVE_HVC41_PIXEL_CONTACT` on research commit `4c9a6ca` only. Pages with pre-containment vectors are forced to source-raster containment, including in the corner run. No unverified glyphs are exposed. The focused proximity test passes, including boundary and diagonal distances.
+
+For each text region, [per-page region JSON](contact/) records unit indexes, original planner disposition, bbox contacts with component IDs, pixel counts, bbox fill ratios and pixel-contact booleans, plus suspect unit symbols and boxes. The `suspect` test in `ownership.rs::unit_ink_exceeds_slots` compares the owned component ink bbox to its **original owning OCR slot** bbox expanded by six pixels: any side beyond that is suspect. The recorded slots may subsequently include absorbed slots. Protected regions retain priority. Standalone artwork entries are also included. [decomposition.json](contact/decomposition.json) lists the five largest artwork components per page; [panel index](contact/panel-index.json) hashes 20 source-overlay sheets showing the three largest masks and bboxes for each affected page and estimator.
+
+The cells below are **units / union of source-reference ink pixels**. “BBox only” means at least one artwork bbox intersects, but no artwork pixel is within four pixels; “pixel” means at least one actual nearby artwork pixel; “suspect” is independent and can overlap either. Counts are region-level: an entire multi-unit region is counted if any of its units meets the condition. OCR-local ink is the proxy described above, not ground-truth characters; receipt 7 has no reference. The corner rows compare against the actual current estimator, not a polarity-adjusted estimate.
+
+| Estimator / page | Bbox only: units / ref px | Pixel contact: units / ref px | Suspect: units / ref px |
+|---|---:|---:|---:|
+| interior historical 1 | 75 / 17,492 | 40 / 8,995 | 116 / 24,986 |
+| interior historical 2 | 115 / 29,801 | 228 / 64,705 | 149 / 40,752 |
+| interior historical 3 | 783 / 127,128 | 20 / 2,756 | 94 / 16,083 |
+| interior historical 4 | 246 / 255,969 | 97 / 151,315 | 86 / 104,268 |
+| interior historical 5 | 995 / 443,220 | 130 / 69,252 | 618 / 292,372 |
+| interior receipts 4 | 76 / 6,927 | 9 / 897 | 8 / 1,352 |
+| interior receipts 6 | 40 / 2,209 | 5 / 3 | 38 / 2,022 |
+| interior receipts 7 | 0 / 0 | 0 / 0 | 0 / 0 |
+| interior receipts 8 | 40 / 3,022 | 0 / 0 | 0 / 0 |
+| interior receipts 9 | 1 / 3,364 | 5 / 1,836 | 27 / 15,619 |
+| corner historical 1 | 0 / 0 | 152 / 2,265 | 0 / 0 |
+| corner historical 2 | 1 / 1 | 1 / 90,462 | 1 / 90,462 |
+| corner historical 3 | 0 / 0 | 2 / 125 | 0 / 0 |
+| corner historical 4 | 5 / 108 | 160 / 21,815 | 16 / 6,252 |
+| corner historical 5 | 13 / 1,002 | 6 / 182,914 | 22 / 184,346 |
+| corner receipts 4 | 11 / 480 | 56 / 1,058 | 6 / 599 |
+| corner receipts 6 | 0 / 0 | 1 / 2 | 0 / 0 |
+| corner receipts 7 | 0 / 0 | 0 / 0 | 0 / 0 |
+| corner receipts 8 | 0 / 0 | 9 / 197 | 0 / 0 |
+| corner receipts 9 | 26 / 42 | 21 / 15 | 3 / 0 |
+
+Largest interior artwork components on the three principal pages:
+
+| Page | Component IDs | Bbox (source px) | Artwork pixels | Bbox fill | Units bbox-hit / actually nearby |
+|---|---|---|---:|---:|---:|
+| historical 3 | [1] | [0.0, 0.0, 1676.0, 2287.0] | 1,090,936 | 28.5% | 803 / 0 |
+| historical 4 | [1] | [0.0, 0.0, 2319.0, 3928.0] | 1,757,958 | 19.3% | 343 / 0 |
+| historical 5 | [1] | [0.0, 0.0, 1757.0, 2440.0] | 477,439 | 11.1% | 1125 / 0 |
+
+The following funnel is the contained interior-mode counterfactual. `Vector` is the number of regions changed from bbox-contact raster to pixel-contact vector at the initial planning stage. Proposals are actual pre-containment visible occurrences after the other pipeline gates; “new” counts those within newly released regions. Reference overlap is the union of their owned source masks, not rendered outline coverage. The screen is post-hoc: source-mask reference precision ≥0.9, page-fill luminance within 25 of the unit’s reference-ink median, donor source-mask IoU ≥0.98, and prototype trace IoU ≥0.98 when reported. The donor IoU and trace-budget flags are proxies, not a complete independent geometry test; neither this screen nor OCR label verifies the emitted character. Full per-occurrence measurements are in [new-proposals.json](contact/new-proposals.json).
+
+| Interior page | Newly vector regions / units | Pre-containment proposals: bbox → pixel | Newly proposed / proxy ink overlap | Screened / proxy ink overlap |
+|---|---:|---:|---:|---:|
+| historical 1 | 15 / 75 | 275 → 267 | 16 / 1.8% | 12 / 1.5% |
+| historical 2 | 18 / 100 | 73 → 95 | 22 / 2.9% | 9 / 1.6% |
+| historical 3 | 169 / 689 | 0 → 160 | 160 / 18.8% | 0 / 0.0% |
+| historical 4 | 44 / 196 | 0 → 93 | 93 / 21.6% | 54 / 17.5% |
+| historical 5 | 115 / 465 | 0 → 129 | 129 / 10.1% | 92 / 8.6% |
+| receipts 4 | 12 / 68 | 0 → 61 | 61 / 63.5% | 11 / 19.3% |
+| receipts 6 | 3 / 4 | 0 → 4 | 4 / 6.7% | 0 / 0.0% |
+| receipts 7 | 0 / 0 | 0 → 0 | 0 / n/a | 0 / n/a |
+| receipts 8 | 8 / 40 | 0 → 40 | 40 / 84.0% | 0 / 0.0% |
+| receipts 9 | 0 / 0 | 30 → 30 | 0 / 0.0% | 0 / 0.0% |
+
+For historical p3 all 160 newly proposed units fail the exploratory fill threshold; median absolute fill difference is 50.4 luminance units. The threshold is not calibrated, and reference boxes can miss or include neighboring content, so this is a warning rather than a character verdict. Pages 4 and 5 have more screen passes, but no traced outline has been independently matched to the source. Consequently neither the 17.5% p4 screened-mask proxy nor any other number proves the ≥10% safe-visible-vector target.
+
+The [40 unit panels](contact/panel-index.json) show source / corner segmentation / interior segmentation / newly proposed unit mask at enlarged scale: 20 worst proxy-agreement cases and 20 seeded-random cases (seed 41037), without using OCR labels as ground truth. A low proxy overlap can reflect a missed or inaccurate OCR box; the panels do not display or validate the traced glyph. The masks retain the source ownership geometry; they are not generated vectors.
+
+**Normal-page regression exposure:** with the corner estimator unchanged, the proximity rule changes initial region dispositions on 14 of 22 normal-polarity pages: 523 regions containing 2,149 units. This is planner exposure, not a claim that all units became visible vectors. The full 32-page corner run is recorded in `decomposition.json`; forced containment means its outputs are not an unchanged-visible-output candidate.
+
+| Normal page with changed regions | Regions | Units |
+|---|---:|---:|
+| receipts 2 | 5 | 12 |
+| receipts 10 | 7 | 30 |
+| financial 1 | 1 | 4 |
+| financial 2 | 1 | 6 |
+| financial 3 | 2 | 10 |
+| financial 6 | 3 | 5 |
+| financial 8 | 1 | 3 |
+| financial 9 | 1 | 7 |
+| financial 10 | 1 | 4 |
+| financial 11 | 2 | 10 |
+| mixed 1 | 1 | 4 |
+| mixed 2 | 3 | 12 |
+| forms 1 | 140 | 488 |
+| forms 2 | 355 | 1554 |
+
+The bbox test is therefore the dominant planning bottleneck on these historical pages, and pixel proximity is a useful **bounded research direction**, not an implementation ready to ship. A single further experiment would first need a source-supported estimator/admission rule that handles the failed reverse-panel and small-receipt controls, confines any planner change so normal pages and shared donors remain unchanged, and independently validates each released outline, fill, counters, placement, extraction and rendering against the source. Until then retain #39 containment; no product experiment or default change is recommended.
+
 ## Cost, reproducibility, and recommendation
 
 These are contained diagnostics, not a vector-coverage or compression candidate. The complete historical research PDF is 2,273,051 bytes versus 2,247,390 baseline (+25,661); receipts is 1,269,241 versus 1,266,953 (+2,288). This difference includes changed segmentation, donors, containment and shared serialization; it is **not** a compression saving or an estimate of safely recoverable vectors. Probe runtime / max RSS from `/usr/bin/time -v`: historical 2:21.29 / 782,840 KiB; receipts 0:22.42 / 551,804 KiB. Estimator-only offline timing and memory for all 58 images are in local `time-*.txt`; this excludes OCR and full conversion and is not an end-to-end benchmark.
@@ -89,4 +170,4 @@ The normal-polarity financial, mixed and forms complete PDFs are byte-identical,
 
 The research instrumentation is reproducible on branch `research/hvc41-feasibility` at `88482b4`; its switch is disabled by default. Reproduction commands, exact estimator timing, hashes and the 90-test result are included or linked above. Independent review by Claude remains outstanding.
 
-Engineering risks include polarity mixtures within a page, receipt/table inference, large border and artwork admissions, reference errors, changes to ownership and shared donors, and contour/fill fidelity; safe implementation would need source-validated glyph geometry and per-region polarity handling plus preservation of unaffected pages. That is not justified by the current evidence. **Recommendation: no implementation experiment selected.** Keep #37 containment and preserve these measurements for an independently specified future study. Do not infer that all possible estimators are unsafe.
+Engineering risks include polarity mixtures within a page, receipt/table inference, large border and artwork admissions, reference errors, changes to ownership and shared donors, and contour/fill fidelity; safe implementation would need source-validated glyph geometry and per-region polarity handling plus preservation of unaffected pages. That is not justified by the current evidence. **Recommendation: no implementation experiment selected yet.** The bounded follow-up and its prerequisites are set out in the ContactNonText decomposition. Keep #37 containment. Do not infer that all possible estimators are unsafe.

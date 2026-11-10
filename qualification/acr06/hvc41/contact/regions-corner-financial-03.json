@@ -1,0 +1,3104 @@
+[
+  {
+    "id": 0,
+    "units": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "disposition": "Vector",
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "bbox_rule_reason": "neither",
+    "pixel_rule_reason": "neither"
+  },
+  {
+    "id": 1,
+    "units": [
+      7,
+      8,
+      9
+    ],
+    "disposition": "Vector",
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "bbox_rule_reason": "neither",
+    "pixel_rule_reason": "neither"
+  },
+  {
+    "id": 2,
+    "units": [
+      10,
+      11,
+      12,
+      13,
+      14,
+      15
+    ],
+    "disposition": "Vector",
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "bbox_rule_reason": "neither",
+    "pixel_rule_reason": "neither"
+  },
+  {
+    "id": 3,
+    "units": [
+      16,
+      17
+    ],
+    "disposition": "Vector",
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "bbox_rule_reason": "neither",
+    "pixel_rule_reason": "neither"
+  },
+  {
+    "id": 4,
+    "units": [
+      18,
+      19,
+      20,
+      21,
+      22,
+      23
+    ],
+    "disposition": {
+      "Raster": {
+        "reason": "ContactNonText"
+      }
+    },
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": [
+        {
+          "unit_index": 19,
+          "symbol": "w000004s0001",
+          "ink_bbox": [
+            222.0,
+            360.0,
+            246.0,
+            386.0
+          ],
+          "slots": [
+            {
+              "symbol": "w000004s0001",
+              "bbox": [
+                205.0,
+                346.0,
+                235.0,
+                386.0
+              ]
+            }
+          ],
+          "reason": "component ink bbox exceeded the original owning OCR slot bbox by more than 6 pixels on at least one side"
+        }
+      ]
+    },
+    "bbox_rule_reason": "suspect",
+    "pixel_rule_reason": "suspect"
+  },
+  {
+    "id": 5,
+    "units": [
+      24
+    ],
+    "disposition": "Vector",
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "bbox_rule_reason": "neither",
+    "pixel_rule_reason": "neither"
+  },
+  {
+    "id": 6,
+    "units": [
+      25,
+      26,
+      27,
+      28
+    ],
+    "disposition": "Vector",
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "bbox_rule_reason": "neither",
+    "pixel_rule_reason": "neither"
+  },
+  {
+    "id": 7,
+    "units": [
+      29,
+      30,
+      31,
+      32
+    ],
+    "disposition": "Vector",
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "bbox_rule_reason": "neither",
+    "pixel_rule_reason": "neither"
+  },
+  {
+    "id": 8,
+    "units": [
+      33,
+      34,
+      35,
+      36
+    ],
+    "disposition": {
+      "Raster": {
+        "reason": "ContactNonText"
+      }
+    },
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": [
+        {
+          "unit_index": 33,
+          "symbol": "w000008s0000",
+          "ink_bbox": [
+            702.0,
+            346.0,
+            730.0,
+            385.0
+          ],
+          "slots": [
+            {
+              "symbol": "w000008s0000",
+              "bbox": [
+                702.0,
+                346.0,
+                717.0,
+                386.0
+              ]
+            }
+          ],
+          "reason": "component ink bbox exceeded the original owning OCR slot bbox by more than 6 pixels on at least one side"
+        }
+      ]
+    },
+    "bbox_rule_reason": "suspect",
+    "pixel_rule_reason": "suspect"
+  },
+  {
+    "id": 9,
+    "units": [
+      37
+    ],
+    "disposition": "Vector",
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "bbox_rule_reason": "neither",
+    "pixel_rule_reason": "neither"
+  },
+  {
+    "id": 10,
+    "units": [
+      38
+    ],
+    "disposition": "Vector",
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "bbox_rule_reason": "neither",
+    "pixel_rule_reason": "neither"
+  },
+  {
+    "id": 11,
+    "units": [
+      39,
+      40,
+      41,
+      42
+    ],
+    "disposition": "Vector",
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "bbox_rule_reason": "neither",
+    "pixel_rule_reason": "neither"
+  },
+  {
+    "id": 12,
+    "units": [
+      43,
+      44,
+      45
+    ],
+    "disposition": "Vector",
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "bbox_rule_reason": "neither",
+    "pixel_rule_reason": "neither"
+  },
+  {
+    "id": 13,
+    "units": [
+      46,
+      47
+    ],
+    "disposition": "Vector",
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "bbox_rule_reason": "neither",
+    "pixel_rule_reason": "neither"
+  },
+  {
+    "id": 14,
+    "units": [
+      48,
+      49,
+      50,
+      51
+    ],
+    "disposition": "Vector",
+    "contact": {
+      "bbox_contacts": [
+        {
+          "artwork_index": 5,
+          "component_ids": [
+            59
+          ],
+          "bbox": [
+            733.0,
+            417.0,
+            735.0,
+            419.0
+          ],
+          "pixels": 4,
+          "bbox_fill_ratio": 1.0,
+          "pixel_contact": false
+        }
+      ],
+      "suspects": []
+    },
+    "bbox_rule_reason": "artwork_contact",
+    "pixel_rule_reason": "neither"
+  },
+  {
+    "id": 15,
+    "units": [
+      52,
+      53,
+      54,
+      55,
+      56,
+      57,
+      58
+    ],
+    "disposition": "Vector",
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "bbox_rule_reason": "neither",
+    "pixel_rule_reason": "neither"
+  },
+  {
+    "id": 16,
+    "units": [
+      59,
+      60,
+      61,
+      62,
+      63,
+      64
+    ],
+    "disposition": "Vector",
+    "contact": {
+      "bbox_contacts": [
+        {
+          "artwork_index": 8,
+          "component_ids": [
+            77
+          ],
+          "bbox": [
+            500.0,
+            479.0,
+            532.0,
+            517.0
+          ],
+          "pixels": 372,
+          "bbox_fill_ratio": 0.3059210526315789,
+          "pixel_contact": false
+        }
+      ],
+      "suspects": []
+    },
+    "bbox_rule_reason": "artwork_contact",
+    "pixel_rule_reason": "neither"
+  },
+  {
+    "id": 17,
+    "units": [
+      65,
+      66
+    ],
+    "disposition": "Vector",
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "bbox_rule_reason": "neither",
+    "pixel_rule_reason": "neither"
+  },
+  {
+    "id": 18,
+    "units": [
+      67,
+      68
+    ],
+    "disposition": "Vector",
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "bbox_rule_reason": "neither",
+    "pixel_rule_reason": "neither"
+  },
+  {
+    "id": 19,
+    "units": [
+      69,
+      70,
+      71,
+      72,
+      73,
+      74,
+      75
+    ],
+    "disposition": "Vector",
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "bbox_rule_reason": "neither",
+    "pixel_rule_reason": "neither"
+  },
+  {
+    "id": 20,
+    "units": [
+      76,
+      77,
+      78,
+      79,
+      80,
+      81
+    ],
+    "disposition": "Vector",
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "bbox_rule_reason": "neither",
+    "pixel_rule_reason": "neither"
+  },
+  {
+    "id": 21,
+    "units": [
+      82
+    ],
+    "disposition": "Vector",
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "bbox_rule_reason": "neither",
+    "pixel_rule_reason": "neither"
+  },
+  {
+    "id": 22,
+    "units": [
+      83,
+      84,
+      85,
+      86,
+      87
+    ],
+    "disposition": "Vector",
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "bbox_rule_reason": "neither",
+    "pixel_rule_reason": "neither"
+  },
+  {
+    "id": 23,
+    "units": [
+      88,
+      89,
+      90,
+      91,
+      92,
+      93,
+      94
+    ],
+    "disposition": "Vector",
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "bbox_rule_reason": "neither",
+    "pixel_rule_reason": "neither"
+  },
+  {
+    "id": 24,
+    "units": [
+      95
+    ],
+    "disposition": "Vector",
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "bbox_rule_reason": "neither",
+    "pixel_rule_reason": "neither"
+  },
+  {
+    "id": 25,
+    "units": [
+      96
+    ],
+    "disposition": "Vector",
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "bbox_rule_reason": "neither",
+    "pixel_rule_reason": "neither"
+  },
+  {
+    "id": 26,
+    "units": [
+      97,
+      98
+    ],
+    "disposition": "Vector",
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "bbox_rule_reason": "neither",
+    "pixel_rule_reason": "neither"
+  },
+  {
+    "id": 27,
+    "units": [
+      99,
+      100,
+      101,
+      102,
+      103,
+      104
+    ],
+    "disposition": "Vector",
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "bbox_rule_reason": "neither",
+    "pixel_rule_reason": "neither"
+  },
+  {
+    "id": 28,
+    "units": [
+      105,
+      106,
+      107,
+      108,
+      109,
+      110,
+      111
+    ],
+    "disposition": "Vector",
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "bbox_rule_reason": "neither",
+    "pixel_rule_reason": "neither"
+  },
+  {
+    "id": 29,
+    "units": [
+      112
+    ],
+    "disposition": "Vector",
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "bbox_rule_reason": "neither",
+    "pixel_rule_reason": "neither"
+  },
+  {
+    "id": 30,
+    "units": [
+      113
+    ],
+    "disposition": "Vector",
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "bbox_rule_reason": "neither",
+    "pixel_rule_reason": "neither"
+  },
+  {
+    "id": 31,
+    "units": [
+      114,
+      115,
+      116,
+      117,
+      118,
+      119,
+      120
+    ],
+    "disposition": "Vector",
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "bbox_rule_reason": "neither",
+    "pixel_rule_reason": "neither"
+  },
+  {
+    "id": 32,
+    "units": [
+      121
+    ],
+    "disposition": "Vector",
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "bbox_rule_reason": "neither",
+    "pixel_rule_reason": "neither"
+  },
+  {
+    "id": 33,
+    "units": [
+      122,
+      123,
+      124
+    ],
+    "disposition": "Vector",
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "bbox_rule_reason": "neither",
+    "pixel_rule_reason": "neither"
+  },
+  {
+    "id": 34,
+    "units": [
+      125,
+      126,
+      127,
+      128,
+      129,
+      130,
+      131,
+      132
+    ],
+    "disposition": "Vector",
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "bbox_rule_reason": "neither",
+    "pixel_rule_reason": "neither"
+  },
+  {
+    "id": 35,
+    "units": [
+      133,
+      134
+    ],
+    "disposition": "Vector",
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "bbox_rule_reason": "neither",
+    "pixel_rule_reason": "neither"
+  },
+  {
+    "id": 36,
+    "units": [
+      135,
+      136,
+      137,
+      138,
+      139
+    ],
+    "disposition": {
+      "Raster": {
+        "reason": "ContactNonText"
+      }
+    },
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": [
+        {
+          "unit_index": 136,
+          "symbol": "w000037s0001",
+          "ink_bbox": [
+            385.0,
+            748.0,
+            403.0,
+            782.0
+          ],
+          "slots": [
+            {
+              "symbol": "w000037s0001",
+              "bbox": [
+                368.0,
+                742.0,
+                393.0,
+                790.0
+              ]
+            }
+          ],
+          "reason": "component ink bbox exceeded the original owning OCR slot bbox by more than 6 pixels on at least one side"
+        }
+      ]
+    },
+    "bbox_rule_reason": "suspect",
+    "pixel_rule_reason": "suspect"
+  },
+  {
+    "id": 37,
+    "units": [
+      140,
+      141,
+      142
+    ],
+    "disposition": "Vector",
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "bbox_rule_reason": "neither",
+    "pixel_rule_reason": "neither"
+  },
+  {
+    "id": 38,
+    "units": [
+      143,
+      144,
+      145,
+      146
+    ],
+    "disposition": "Vector",
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "bbox_rule_reason": "neither",
+    "pixel_rule_reason": "neither"
+  },
+  {
+    "id": 39,
+    "units": [
+      147,
+      148,
+      149
+    ],
+    "disposition": "Vector",
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "bbox_rule_reason": "neither",
+    "pixel_rule_reason": "neither"
+  },
+  {
+    "id": 40,
+    "units": [
+      150,
+      151,
+      152,
+      153,
+      154,
+      155,
+      156
+    ],
+    "disposition": "Vector",
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "bbox_rule_reason": "neither",
+    "pixel_rule_reason": "neither"
+  },
+  {
+    "id": 41,
+    "units": [
+      157,
+      158,
+      159,
+      160,
+      161
+    ],
+    "disposition": "Vector",
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "bbox_rule_reason": "neither",
+    "pixel_rule_reason": "neither"
+  },
+  {
+    "id": 42,
+    "units": [
+      162,
+      163,
+      164,
+      165,
+      166,
+      167,
+      168,
+      169,
+      170,
+      171,
+      172,
+      173
+    ],
+    "disposition": "Vector",
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "bbox_rule_reason": "neither",
+    "pixel_rule_reason": "neither"
+  },
+  {
+    "id": 43,
+    "units": [
+      174,
+      175,
+      176,
+      177,
+      178,
+      179,
+      180,
+      181,
+      182,
+      183
+    ],
+    "disposition": {
+      "Raster": {
+        "reason": "ContactNonText"
+      }
+    },
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": [
+        {
+          "unit_index": 182,
+          "symbol": "w000044s0008",
+          "ink_bbox": [
+            420.0,
+            1021.0,
+            439.0,
+            1046.0
+          ],
+          "slots": [
+            {
+              "symbol": "w000044s0008",
+              "bbox": [
+                403.0,
+                1007.0,
+                430.0,
+                1055.0
+              ]
+            }
+          ],
+          "reason": "component ink bbox exceeded the original owning OCR slot bbox by more than 6 pixels on at least one side"
+        }
+      ]
+    },
+    "bbox_rule_reason": "suspect",
+    "pixel_rule_reason": "suspect"
+  },
+  {
+    "id": 44,
+    "units": [
+      184,
+      185,
+      186,
+      187,
+      188,
+      189,
+      190
+    ],
+    "disposition": "Vector",
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "bbox_rule_reason": "neither",
+    "pixel_rule_reason": "neither"
+  },
+  {
+    "id": 45,
+    "units": [
+      191,
+      192,
+      193,
+      194,
+      195,
+      196,
+      197,
+      198,
+      199,
+      200,
+      201,
+      202
+    ],
+    "disposition": "Vector",
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "bbox_rule_reason": "neither",
+    "pixel_rule_reason": "neither"
+  },
+  {
+    "id": 46,
+    "units": [
+      203,
+      204,
+      205,
+      206,
+      207,
+      208,
+      209,
+      210,
+      211,
+      212,
+      213,
+      214
+    ],
+    "disposition": "Vector",
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "bbox_rule_reason": "neither",
+    "pixel_rule_reason": "neither"
+  },
+  {
+    "id": 47,
+    "units": [
+      215,
+      216,
+      217,
+      218,
+      219
+    ],
+    "disposition": {
+      "Raster": {
+        "reason": "ContactNonText"
+      }
+    },
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": [
+        {
+          "unit_index": 215,
+          "symbol": "w000048s0000",
+          "ink_bbox": [
+            540.0,
+            1285.0,
+            600.0,
+            1311.0
+          ],
+          "slots": [
+            {
+              "symbol": "w000048s0000",
+              "bbox": [
+                541.0,
+                1285.0,
+                569.0,
+                1311.0
+              ]
+            },
+            {
+              "symbol": "w000048s0001",
+              "bbox": [
+                570.0,
+                1286.0,
+                600.0,
+                1311.0
+              ]
+            }
+          ],
+          "reason": "component ink bbox exceeded the original owning OCR slot bbox by more than 6 pixels on at least one side"
+        }
+      ]
+    },
+    "bbox_rule_reason": "suspect",
+    "pixel_rule_reason": "suspect"
+  },
+  {
+    "id": 48,
+    "units": [
+      220,
+      221,
+      222,
+      223
+    ],
+    "disposition": "Vector",
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "bbox_rule_reason": "neither",
+    "pixel_rule_reason": "neither"
+  },
+  {
+    "id": 49,
+    "units": [
+      224,
+      225,
+      226,
+      227
+    ],
+    "disposition": "Vector",
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "bbox_rule_reason": "neither",
+    "pixel_rule_reason": "neither"
+  },
+  {
+    "id": 50,
+    "units": [
+      228,
+      229,
+      230,
+      231
+    ],
+    "disposition": "Vector",
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "bbox_rule_reason": "neither",
+    "pixel_rule_reason": "neither"
+  },
+  {
+    "id": 51,
+    "units": [
+      232,
+      233,
+      234,
+      235,
+      236,
+      237,
+      238,
+      239,
+      240,
+      241
+    ],
+    "disposition": "Vector",
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "bbox_rule_reason": "neither",
+    "pixel_rule_reason": "neither"
+  },
+  {
+    "id": 52,
+    "units": [
+      242,
+      243,
+      244,
+      245,
+      246,
+      247,
+      248,
+      249
+    ],
+    "disposition": "Vector",
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "bbox_rule_reason": "neither",
+    "pixel_rule_reason": "neither"
+  },
+  {
+    "id": 53,
+    "units": [
+      250,
+      251,
+      252
+    ],
+    "disposition": "Vector",
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "bbox_rule_reason": "neither",
+    "pixel_rule_reason": "neither"
+  },
+  {
+    "id": 54,
+    "units": [
+      253,
+      254,
+      255,
+      256,
+      257
+    ],
+    "disposition": "Vector",
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "bbox_rule_reason": "neither",
+    "pixel_rule_reason": "neither"
+  },
+  {
+    "id": 55,
+    "units": [
+      258,
+      259,
+      260,
+      261
+    ],
+    "disposition": "Vector",
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "bbox_rule_reason": "neither",
+    "pixel_rule_reason": "neither"
+  },
+  {
+    "id": 56,
+    "units": [
+      262,
+      263,
+      264
+    ],
+    "disposition": "Vector",
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "bbox_rule_reason": "neither",
+    "pixel_rule_reason": "neither"
+  },
+  {
+    "id": 57,
+    "units": [
+      265,
+      266,
+      267,
+      268,
+      269
+    ],
+    "disposition": {
+      "Raster": {
+        "reason": "ContactNonText"
+      }
+    },
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": [
+        {
+          "unit_index": 265,
+          "symbol": "w000058s0000",
+          "ink_bbox": [
+            162.0,
+            1690.0,
+            220.0,
+            1729.0
+          ],
+          "slots": [
+            {
+              "symbol": "w000058s0000",
+              "bbox": [
+                162.0,
+                1690.0,
+                199.0,
+                1728.0
+              ]
+            },
+            {
+              "symbol": "w000058s0001",
+              "bbox": [
+                199.0,
+                1704.0,
+                220.0,
+                1729.0
+              ]
+            }
+          ],
+          "reason": "component ink bbox exceeded the original owning OCR slot bbox by more than 6 pixels on at least one side"
+        }
+      ]
+    },
+    "bbox_rule_reason": "suspect",
+    "pixel_rule_reason": "suspect"
+  },
+  {
+    "id": 58,
+    "units": [
+      270,
+      271,
+      272,
+      273
+    ],
+    "disposition": "Vector",
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "bbox_rule_reason": "neither",
+    "pixel_rule_reason": "neither"
+  },
+  {
+    "id": 59,
+    "units": [
+      274,
+      275,
+      276,
+      277,
+      278,
+      279,
+      280,
+      281,
+      282,
+      283,
+      284,
+      285,
+      286,
+      287
+    ],
+    "disposition": "Vector",
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "bbox_rule_reason": "neither",
+    "pixel_rule_reason": "neither"
+  },
+  {
+    "id": 60,
+    "units": [
+      288,
+      289,
+      290,
+      291,
+      292
+    ],
+    "disposition": "Vector",
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "bbox_rule_reason": "neither",
+    "pixel_rule_reason": "neither"
+  },
+  {
+    "id": 61,
+    "units": [
+      293
+    ],
+    "disposition": "Vector",
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "bbox_rule_reason": "neither",
+    "pixel_rule_reason": "neither"
+  },
+  {
+    "id": 62,
+    "units": [
+      294,
+      295,
+      296,
+      297,
+      298
+    ],
+    "disposition": "Vector",
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "bbox_rule_reason": "neither",
+    "pixel_rule_reason": "neither"
+  },
+  {
+    "id": 63,
+    "units": [
+      299,
+      300,
+      301,
+      302,
+      303,
+      304,
+      305,
+      306,
+      307,
+      308,
+      309,
+      310,
+      311,
+      312
+    ],
+    "disposition": "Vector",
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "bbox_rule_reason": "neither",
+    "pixel_rule_reason": "neither"
+  },
+  {
+    "id": 64,
+    "units": [
+      313,
+      314,
+      315,
+      316
+    ],
+    "disposition": "Vector",
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "bbox_rule_reason": "neither",
+    "pixel_rule_reason": "neither"
+  },
+  {
+    "id": 65,
+    "units": [
+      317,
+      318,
+      319,
+      320,
+      321,
+      322
+    ],
+    "disposition": "Vector",
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "bbox_rule_reason": "neither",
+    "pixel_rule_reason": "neither"
+  },
+  {
+    "id": 66,
+    "units": [
+      323,
+      324,
+      325,
+      326,
+      327
+    ],
+    "disposition": "Vector",
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "bbox_rule_reason": "neither",
+    "pixel_rule_reason": "neither"
+  },
+  {
+    "id": 67,
+    "units": [
+      328,
+      329,
+      330,
+      331,
+      332,
+      333,
+      334,
+      335
+    ],
+    "disposition": "Vector",
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "bbox_rule_reason": "neither",
+    "pixel_rule_reason": "neither"
+  },
+  {
+    "id": 68,
+    "units": [
+      336,
+      337,
+      338,
+      339,
+      340,
+      341,
+      342
+    ],
+    "disposition": "Vector",
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "bbox_rule_reason": "neither",
+    "pixel_rule_reason": "neither"
+  },
+  {
+    "id": 69,
+    "units": [
+      343,
+      344,
+      345,
+      346,
+      347
+    ],
+    "disposition": "Vector",
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "bbox_rule_reason": "neither",
+    "pixel_rule_reason": "neither"
+  },
+  {
+    "id": 70,
+    "units": [
+      348,
+      349,
+      350,
+      351,
+      352
+    ],
+    "disposition": "Vector",
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "bbox_rule_reason": "neither",
+    "pixel_rule_reason": "neither"
+  },
+  {
+    "id": 71,
+    "units": [
+      353,
+      354,
+      355,
+      356,
+      357,
+      358,
+      359
+    ],
+    "disposition": {
+      "Raster": {
+        "reason": "ContactNonText"
+      }
+    },
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": [
+        {
+          "unit_index": 354,
+          "symbol": "w000073s0001",
+          "ink_bbox": [
+            384.0,
+            1969.0,
+            405.0,
+            1995.0
+          ],
+          "slots": [
+            {
+              "symbol": "w000073s0001",
+              "bbox": [
+                369.0,
+                1956.0,
+                394.0,
+                2007.0
+              ]
+            }
+          ],
+          "reason": "component ink bbox exceeded the original owning OCR slot bbox by more than 6 pixels on at least one side"
+        }
+      ]
+    },
+    "bbox_rule_reason": "suspect",
+    "pixel_rule_reason": "suspect"
+  },
+  {
+    "id": 72,
+    "units": [
+      360,
+      361,
+      362,
+      363,
+      364
+    ],
+    "disposition": "Vector",
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "bbox_rule_reason": "neither",
+    "pixel_rule_reason": "neither"
+  },
+  {
+    "id": 73,
+    "units": [
+      365,
+      366,
+      367,
+      368
+    ],
+    "disposition": "Vector",
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "bbox_rule_reason": "neither",
+    "pixel_rule_reason": "neither"
+  },
+  {
+    "id": 74,
+    "units": [
+      369,
+      370,
+      371,
+      372,
+      373,
+      374,
+      375
+    ],
+    "disposition": "Vector",
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "bbox_rule_reason": "neither",
+    "pixel_rule_reason": "neither"
+  },
+  {
+    "id": 75,
+    "units": [
+      376,
+      377,
+      378,
+      379,
+      380
+    ],
+    "disposition": "Vector",
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "bbox_rule_reason": "neither",
+    "pixel_rule_reason": "neither"
+  },
+  {
+    "id": 76,
+    "units": [
+      381,
+      382,
+      383,
+      384,
+      385,
+      386
+    ],
+    "disposition": "Vector",
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "bbox_rule_reason": "neither",
+    "pixel_rule_reason": "neither"
+  },
+  {
+    "id": 77,
+    "units": [
+      387,
+      388,
+      389,
+      390,
+      391,
+      392,
+      393,
+      394
+    ],
+    "disposition": {
+      "Raster": {
+        "reason": "ContactNonText"
+      }
+    },
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": [
+        {
+          "unit_index": 388,
+          "symbol": "w000079s0001",
+          "ink_bbox": [
+            378.0,
+            2102.0,
+            402.0,
+            2128.0
+          ],
+          "slots": [
+            {
+              "symbol": "w000079s0001",
+              "bbox": [
+                364.0,
+                2088.0,
+                389.0,
+                2139.0
+              ]
+            }
+          ],
+          "reason": "component ink bbox exceeded the original owning OCR slot bbox by more than 6 pixels on at least one side"
+        }
+      ]
+    },
+    "bbox_rule_reason": "suspect",
+    "pixel_rule_reason": "suspect"
+  },
+  {
+    "id": 78,
+    "units": [
+      395,
+      396,
+      397,
+      398,
+      399
+    ],
+    "disposition": "Vector",
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "bbox_rule_reason": "neither",
+    "pixel_rule_reason": "neither"
+  },
+  {
+    "id": 79,
+    "units": [
+      400,
+      401,
+      402,
+      403,
+      404,
+      405
+    ],
+    "disposition": "Vector",
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "bbox_rule_reason": "neither",
+    "pixel_rule_reason": "neither"
+  },
+  {
+    "id": 80,
+    "units": [
+      406,
+      407,
+      408,
+      409,
+      410,
+      411
+    ],
+    "disposition": "Vector",
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "bbox_rule_reason": "neither",
+    "pixel_rule_reason": "neither"
+  },
+  {
+    "id": 81,
+    "units": [
+      412,
+      413,
+      414,
+      415,
+      416
+    ],
+    "disposition": "Vector",
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "bbox_rule_reason": "neither",
+    "pixel_rule_reason": "neither"
+  },
+  {
+    "id": 82,
+    "units": [
+      417,
+      418,
+      419,
+      420,
+      421
+    ],
+    "disposition": "Vector",
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "bbox_rule_reason": "neither",
+    "pixel_rule_reason": "neither"
+  },
+  {
+    "id": 83,
+    "units": [
+      422,
+      423,
+      424,
+      425
+    ],
+    "disposition": "Vector",
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "bbox_rule_reason": "neither",
+    "pixel_rule_reason": "neither"
+  },
+  {
+    "id": 84,
+    "units": [
+      426,
+      427,
+      428,
+      429,
+      430
+    ],
+    "disposition": "Vector",
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "bbox_rule_reason": "neither",
+    "pixel_rule_reason": "neither"
+  },
+  {
+    "id": 85,
+    "units": [
+      431,
+      432,
+      433,
+      434,
+      435,
+      436,
+      437
+    ],
+    "disposition": "Vector",
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "bbox_rule_reason": "neither",
+    "pixel_rule_reason": "neither"
+  },
+  {
+    "id": 86,
+    "units": [
+      438,
+      439,
+      440,
+      441,
+      442
+    ],
+    "disposition": "Vector",
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "bbox_rule_reason": "neither",
+    "pixel_rule_reason": "neither"
+  },
+  {
+    "id": 87,
+    "units": [
+      443,
+      444,
+      445,
+      446,
+      447
+    ],
+    "disposition": "Vector",
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "bbox_rule_reason": "neither",
+    "pixel_rule_reason": "neither"
+  },
+  {
+    "id": 88,
+    "units": [
+      448,
+      449,
+      450,
+      451,
+      452
+    ],
+    "disposition": "Vector",
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "bbox_rule_reason": "neither",
+    "pixel_rule_reason": "neither"
+  },
+  {
+    "id": 89,
+    "units": [
+      453,
+      454,
+      455,
+      456,
+      457
+    ],
+    "disposition": "Vector",
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "bbox_rule_reason": "neither",
+    "pixel_rule_reason": "neither"
+  },
+  {
+    "id": 90,
+    "units": [
+      458,
+      459,
+      460,
+      461,
+      462
+    ],
+    "disposition": "Vector",
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "bbox_rule_reason": "neither",
+    "pixel_rule_reason": "neither"
+  },
+  {
+    "id": 91,
+    "units": [
+      463
+    ],
+    "disposition": "Vector",
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "bbox_rule_reason": "neither",
+    "pixel_rule_reason": "neither"
+  },
+  {
+    "id": 92,
+    "units": [
+      464,
+      465,
+      466,
+      467,
+      468
+    ],
+    "disposition": "Vector",
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "bbox_rule_reason": "neither",
+    "pixel_rule_reason": "neither"
+  },
+  {
+    "id": 93,
+    "units": [
+      469,
+      470
+    ],
+    "disposition": "Vector",
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "bbox_rule_reason": "neither",
+    "pixel_rule_reason": "neither"
+  },
+  {
+    "id": 94,
+    "units": [
+      471,
+      472,
+      473,
+      474
+    ],
+    "disposition": "Vector",
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "bbox_rule_reason": "neither",
+    "pixel_rule_reason": "neither"
+  },
+  {
+    "id": 95,
+    "units": [
+      475,
+      476,
+      477
+    ],
+    "disposition": "Vector",
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "bbox_rule_reason": "neither",
+    "pixel_rule_reason": "neither"
+  },
+  {
+    "id": 96,
+    "units": [
+      478,
+      479,
+      480
+    ],
+    "disposition": "Vector",
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "bbox_rule_reason": "neither",
+    "pixel_rule_reason": "neither"
+  },
+  {
+    "id": 97,
+    "units": [
+      481,
+      482,
+      483
+    ],
+    "disposition": "Vector",
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "bbox_rule_reason": "neither",
+    "pixel_rule_reason": "neither"
+  },
+  {
+    "id": 98,
+    "units": [
+      484,
+      485,
+      486
+    ],
+    "disposition": "Vector",
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "bbox_rule_reason": "neither",
+    "pixel_rule_reason": "neither"
+  },
+  {
+    "id": 99,
+    "units": [
+      487,
+      488,
+      489
+    ],
+    "disposition": "Vector",
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "bbox_rule_reason": "neither",
+    "pixel_rule_reason": "neither"
+  },
+  {
+    "id": 100,
+    "units": [
+      490,
+      491
+    ],
+    "disposition": "Vector",
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "bbox_rule_reason": "neither",
+    "pixel_rule_reason": "neither"
+  },
+  {
+    "id": 101,
+    "units": [
+      492,
+      493,
+      494
+    ],
+    "disposition": "Vector",
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "bbox_rule_reason": "neither",
+    "pixel_rule_reason": "neither"
+  },
+  {
+    "id": 102,
+    "units": [
+      495,
+      496
+    ],
+    "disposition": "Vector",
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "bbox_rule_reason": "neither",
+    "pixel_rule_reason": "neither"
+  },
+  {
+    "id": 103,
+    "units": [
+      497,
+      498
+    ],
+    "disposition": "Vector",
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "bbox_rule_reason": "neither",
+    "pixel_rule_reason": "neither"
+  },
+  {
+    "id": 104,
+    "units": [
+      499
+    ],
+    "disposition": "Vector",
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "bbox_rule_reason": "neither",
+    "pixel_rule_reason": "neither"
+  },
+  {
+    "id": 105,
+    "units": [
+      500,
+      501
+    ],
+    "disposition": "Vector",
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "bbox_rule_reason": "neither",
+    "pixel_rule_reason": "neither"
+  },
+  {
+    "id": 106,
+    "units": [
+      502,
+      503
+    ],
+    "disposition": "Vector",
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "bbox_rule_reason": "neither",
+    "pixel_rule_reason": "neither"
+  },
+  {
+    "id": 107,
+    "units": [
+      504,
+      505
+    ],
+    "disposition": "Vector",
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "bbox_rule_reason": "neither",
+    "pixel_rule_reason": "neither"
+  },
+  {
+    "id": 108,
+    "units": [
+      506,
+      507
+    ],
+    "disposition": "Vector",
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "bbox_rule_reason": "neither",
+    "pixel_rule_reason": "neither"
+  },
+  {
+    "id": 109,
+    "units": [
+      508,
+      509
+    ],
+    "disposition": "Vector",
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "bbox_rule_reason": "neither",
+    "pixel_rule_reason": "neither"
+  },
+  {
+    "id": 110,
+    "units": [
+      510,
+      511
+    ],
+    "disposition": "Vector",
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "bbox_rule_reason": "neither",
+    "pixel_rule_reason": "neither"
+  },
+  {
+    "id": 111,
+    "units": [
+      512,
+      513
+    ],
+    "disposition": "Vector",
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "bbox_rule_reason": "neither",
+    "pixel_rule_reason": "neither"
+  },
+  {
+    "id": 112,
+    "units": [
+      514,
+      515
+    ],
+    "disposition": "Vector",
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "bbox_rule_reason": "neither",
+    "pixel_rule_reason": "neither"
+  },
+  {
+    "id": 113,
+    "units": [
+      516,
+      517
+    ],
+    "disposition": "Vector",
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "bbox_rule_reason": "neither",
+    "pixel_rule_reason": "neither"
+  },
+  {
+    "id": 114,
+    "units": [
+      518,
+      519
+    ],
+    "disposition": "Vector",
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "bbox_rule_reason": "neither",
+    "pixel_rule_reason": "neither"
+  },
+  {
+    "id": 115,
+    "units": [
+      520,
+      521
+    ],
+    "disposition": "Vector",
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "bbox_rule_reason": "neither",
+    "pixel_rule_reason": "neither"
+  },
+  {
+    "id": 116,
+    "units": [
+      522,
+      523
+    ],
+    "disposition": "Vector",
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "bbox_rule_reason": "neither",
+    "pixel_rule_reason": "neither"
+  },
+  {
+    "id": 117,
+    "units": [
+      524,
+      525
+    ],
+    "disposition": "Vector",
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "bbox_rule_reason": "neither",
+    "pixel_rule_reason": "neither"
+  },
+  {
+    "id": 118,
+    "units": [
+      526,
+      527
+    ],
+    "disposition": "Vector",
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "bbox_rule_reason": "neither",
+    "pixel_rule_reason": "neither"
+  },
+  {
+    "id": 119,
+    "units": [
+      528,
+      529
+    ],
+    "disposition": "Vector",
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "bbox_rule_reason": "neither",
+    "pixel_rule_reason": "neither"
+  },
+  {
+    "id": 120,
+    "units": [
+      530,
+      531
+    ],
+    "disposition": "Vector",
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "bbox_rule_reason": "neither",
+    "pixel_rule_reason": "neither"
+  },
+  {
+    "id": 121,
+    "units": [
+      532,
+      533
+    ],
+    "disposition": "Vector",
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "bbox_rule_reason": "neither",
+    "pixel_rule_reason": "neither"
+  },
+  {
+    "id": 122,
+    "units": [
+      534,
+      535
+    ],
+    "disposition": "Vector",
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "bbox_rule_reason": "neither",
+    "pixel_rule_reason": "neither"
+  },
+  {
+    "id": 123,
+    "units": [
+      536,
+      537
+    ],
+    "disposition": "Vector",
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "bbox_rule_reason": "neither",
+    "pixel_rule_reason": "neither"
+  },
+  {
+    "id": 124,
+    "units": [
+      538,
+      539
+    ],
+    "disposition": {
+      "Raster": {
+        "reason": "ContactNonText"
+      }
+    },
+    "contact": {
+      "bbox_contacts": [
+        {
+          "artwork_index": 36,
+          "component_ids": [
+            684
+          ],
+          "bbox": [
+            1356.0,
+            2388.0,
+            1358.0,
+            2390.0
+          ],
+          "pixels": 3,
+          "bbox_fill_ratio": 0.75,
+          "pixel_contact": true
+        }
+      ],
+      "suspects": []
+    },
+    "bbox_rule_reason": "artwork_contact",
+    "pixel_rule_reason": "artwork_contact"
+  },
+  {
+    "id": 125,
+    "units": [
+      540,
+      541,
+      542
+    ],
+    "disposition": "Vector",
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "bbox_rule_reason": "neither",
+    "pixel_rule_reason": "neither"
+  },
+  {
+    "id": 126,
+    "units": [
+      543,
+      544
+    ],
+    "disposition": "Vector",
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "bbox_rule_reason": "neither",
+    "pixel_rule_reason": "neither"
+  },
+  {
+    "id": 127,
+    "units": [
+      545,
+      546,
+      547,
+      548
+    ],
+    "disposition": "Vector",
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "bbox_rule_reason": "neither",
+    "pixel_rule_reason": "neither"
+  },
+  {
+    "id": 128,
+    "units": [
+      549,
+      550
+    ],
+    "disposition": "Vector",
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "bbox_rule_reason": "neither",
+    "pixel_rule_reason": "neither"
+  },
+  {
+    "id": 129,
+    "units": [
+      551,
+      552
+    ],
+    "disposition": "Vector",
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "bbox_rule_reason": "neither",
+    "pixel_rule_reason": "neither"
+  },
+  {
+    "id": 130,
+    "units": [
+      553,
+      554
+    ],
+    "disposition": "Vector",
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "bbox_rule_reason": "neither",
+    "pixel_rule_reason": "neither"
+  },
+  {
+    "id": 131,
+    "units": [
+      555,
+      556,
+      557,
+      558
+    ],
+    "disposition": "Vector",
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "bbox_rule_reason": "neither",
+    "pixel_rule_reason": "neither"
+  },
+  {
+    "id": 132,
+    "units": [
+      559,
+      560
+    ],
+    "disposition": "Vector",
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "bbox_rule_reason": "neither",
+    "pixel_rule_reason": "neither"
+  },
+  {
+    "id": 133,
+    "units": [
+      561,
+      562,
+      563,
+      564
+    ],
+    "disposition": "Vector",
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "bbox_rule_reason": "neither",
+    "pixel_rule_reason": "neither"
+  },
+  {
+    "id": 134,
+    "units": [
+      565,
+      566
+    ],
+    "disposition": "Vector",
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "bbox_rule_reason": "neither",
+    "pixel_rule_reason": "neither"
+  },
+  {
+    "id": 135,
+    "units": [],
+    "disposition": "Vector",
+    "kind": "NonText",
+    "bbox_px": [
+      808.0,
+      119.0,
+      809.0,
+      121.0
+    ],
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "reason": "standalone artwork; no text units"
+  },
+  {
+    "id": 136,
+    "units": [],
+    "disposition": "Vector",
+    "kind": "NonText",
+    "bbox_px": [
+      992.0,
+      301.0,
+      1660.0,
+      312.0
+    ],
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "reason": "standalone artwork; no text units"
+  },
+  {
+    "id": 137,
+    "units": [],
+    "disposition": "Vector",
+    "kind": "NonText",
+    "bbox_px": [
+      173.0,
+      307.0,
+      988.0,
+      314.0
+    ],
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "reason": "standalone artwork; no text units"
+  },
+  {
+    "id": 138,
+    "units": [],
+    "disposition": "Vector",
+    "kind": "NonText",
+    "bbox_px": [
+      1271.0,
+      412.0,
+      1294.0,
+      434.0
+    ],
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "reason": "standalone artwork; no text units"
+  },
+  {
+    "id": 139,
+    "units": [],
+    "disposition": "Vector",
+    "kind": "NonText",
+    "bbox_px": [
+      1300.0,
+      413.0,
+      1321.0,
+      452.0
+    ],
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "reason": "standalone artwork; no text units"
+  },
+  {
+    "id": 140,
+    "units": [],
+    "disposition": "Vector",
+    "kind": "NonText",
+    "bbox_px": [
+      733.0,
+      417.0,
+      735.0,
+      419.0
+    ],
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "reason": "standalone artwork; no text units"
+  },
+  {
+    "id": 141,
+    "units": [],
+    "disposition": "Vector",
+    "kind": "NonText",
+    "bbox_px": [
+      1302.0,
+      438.0,
+      1306.0,
+      446.0
+    ],
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "reason": "standalone artwork; no text units"
+  },
+  {
+    "id": 142,
+    "units": [],
+    "disposition": "Vector",
+    "kind": "NonText",
+    "bbox_px": [
+      1271.0,
+      445.0,
+      1289.0,
+      452.0
+    ],
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "reason": "standalone artwork; no text units"
+  },
+  {
+    "id": 143,
+    "units": [],
+    "disposition": "Vector",
+    "kind": "NonText",
+    "bbox_px": [
+      500.0,
+      479.0,
+      532.0,
+      517.0
+    ],
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "reason": "standalone artwork; no text units"
+  },
+  {
+    "id": 144,
+    "units": [],
+    "disposition": "Vector",
+    "kind": "NonText",
+    "bbox_px": [
+      1299.0,
+      480.0,
+      1321.0,
+      517.0
+    ],
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "reason": "standalone artwork; no text units"
+  },
+  {
+    "id": 145,
+    "units": [],
+    "disposition": "Vector",
+    "kind": "NonText",
+    "bbox_px": [
+      1297.0,
+      546.0,
+      1324.0,
+      584.0
+    ],
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "reason": "standalone artwork; no text units"
+  },
+  {
+    "id": 146,
+    "units": [],
+    "disposition": "Vector",
+    "kind": "NonText",
+    "bbox_px": [
+      1297.0,
+      612.0,
+      1320.0,
+      650.0
+    ],
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "reason": "standalone artwork; no text units"
+  },
+  {
+    "id": 147,
+    "units": [],
+    "disposition": "Vector",
+    "kind": "NonText",
+    "bbox_px": [
+      1272.0,
+      613.0,
+      1294.0,
+      650.0
+    ],
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "reason": "standalone artwork; no text units"
+  },
+  {
+    "id": 148,
+    "units": [],
+    "disposition": "Vector",
+    "kind": "NonText",
+    "bbox_px": [
+      954.0,
+      617.0,
+      958.0,
+      621.0
+    ],
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "reason": "standalone artwork; no text units"
+  },
+  {
+    "id": 149,
+    "units": [],
+    "disposition": "Vector",
+    "kind": "NonText",
+    "bbox_px": [
+      945.0,
+      670.0,
+      947.0,
+      672.0
+    ],
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "reason": "standalone artwork; no text units"
+  },
+  {
+    "id": 150,
+    "units": [],
+    "disposition": "Vector",
+    "kind": "NonText",
+    "bbox_px": [
+      1297.0,
+      679.0,
+      1318.0,
+      716.0
+    ],
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "reason": "standalone artwork; no text units"
+  },
+  {
+    "id": 151,
+    "units": [],
+    "disposition": "Vector",
+    "kind": "NonText",
+    "bbox_px": [
+      291.0,
+      742.0,
+      331.0,
+      781.0
+    ],
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "reason": "standalone artwork; no text units"
+  },
+  {
+    "id": 152,
+    "units": [],
+    "disposition": "Vector",
+    "kind": "NonText",
+    "bbox_px": [
+      1297.0,
+      744.0,
+      1320.0,
+      783.0
+    ],
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "reason": "standalone artwork; no text units"
+  },
+  {
+    "id": 153,
+    "units": [],
+    "disposition": "Vector",
+    "kind": "NonText",
+    "bbox_px": [
+      1184.0,
+      835.0,
+      1403.0,
+      839.0
+    ],
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "reason": "standalone artwork; no text units"
+  },
+  {
+    "id": 154,
+    "units": [],
+    "disposition": "Vector",
+    "kind": "NonText",
+    "bbox_px": [
+      1443.0,
+      901.0,
+      1661.0,
+      908.0
+    ],
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "reason": "standalone artwork; no text units"
+  },
+  {
+    "id": 155,
+    "units": [],
+    "disposition": "Vector",
+    "kind": "NonText",
+    "bbox_px": [
+      723.0,
+      957.0,
+      727.0,
+      965.0
+    ],
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "reason": "standalone artwork; no text units"
+  },
+  {
+    "id": 156,
+    "units": [],
+    "disposition": "Vector",
+    "kind": "NonText",
+    "bbox_px": [
+      128.0,
+      996.0,
+      129.0,
+      998.0
+    ],
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "reason": "standalone artwork; no text units"
+  },
+  {
+    "id": 157,
+    "units": [],
+    "disposition": "Vector",
+    "kind": "NonText",
+    "bbox_px": [
+      20.0,
+      1023.0,
+      25.0,
+      1032.0
+    ],
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "reason": "standalone artwork; no text units"
+  },
+  {
+    "id": 158,
+    "units": [],
+    "disposition": "Vector",
+    "kind": "NonText",
+    "bbox_px": [
+      1129.0,
+      1056.0,
+      1132.0,
+      1059.0
+    ],
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "reason": "standalone artwork; no text units"
+  },
+  {
+    "id": 159,
+    "units": [],
+    "disposition": "Vector",
+    "kind": "NonText",
+    "bbox_px": [
+      1120.0,
+      1060.0,
+      1124.0,
+      1066.0
+    ],
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "reason": "standalone artwork; no text units"
+  },
+  {
+    "id": 160,
+    "units": [],
+    "disposition": "Vector",
+    "kind": "NonText",
+    "bbox_px": [
+      1129.0,
+      1060.0,
+      1136.0,
+      1066.0
+    ],
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "reason": "standalone artwork; no text units"
+  },
+  {
+    "id": 161,
+    "units": [],
+    "disposition": "Vector",
+    "kind": "NonText",
+    "bbox_px": [
+      1440.0,
+      1102.0,
+      1649.0,
+      1107.0
+    ],
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "reason": "standalone artwork; no text units"
+  },
+  {
+    "id": 162,
+    "units": [],
+    "disposition": "Vector",
+    "kind": "NonText",
+    "bbox_px": [
+      1651.0,
+      1103.0,
+      1658.0,
+      1106.0
+    ],
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "reason": "standalone artwork; no text units"
+  },
+  {
+    "id": 163,
+    "units": [],
+    "disposition": "Vector",
+    "kind": "NonText",
+    "bbox_px": [
+      1176.0,
+      1366.0,
+      1396.0,
+      1372.0
+    ],
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "reason": "standalone artwork; no text units"
+  },
+  {
+    "id": 164,
+    "units": [],
+    "disposition": "Vector",
+    "kind": "NonText",
+    "bbox_px": [
+      661.0,
+      1441.0,
+      1153.0,
+      1448.0
+    ],
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "reason": "standalone artwork; no text units"
+  },
+  {
+    "id": 165,
+    "units": [],
+    "disposition": "Vector",
+    "kind": "NonText",
+    "bbox_px": [
+      1385.0,
+      1443.0,
+      1387.0,
+      1445.0
+    ],
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "reason": "standalone artwork; no text units"
+  },
+  {
+    "id": 166,
+    "units": [],
+    "disposition": "Vector",
+    "kind": "NonText",
+    "bbox_px": [
+      1441.0,
+      1487.0,
+      1444.0,
+      1490.0
+    ],
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "reason": "standalone artwork; no text units"
+  },
+  {
+    "id": 167,
+    "units": [],
+    "disposition": "Vector",
+    "kind": "NonText",
+    "bbox_px": [
+      1773.0,
+      1586.0,
+      1776.0,
+      1591.0
+    ],
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "reason": "standalone artwork; no text units"
+  },
+  {
+    "id": 168,
+    "units": [],
+    "disposition": "Vector",
+    "kind": "NonText",
+    "bbox_px": [
+      620.0,
+      1683.0,
+      621.0,
+      1685.0
+    ],
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "reason": "standalone artwork; no text units"
+  },
+  {
+    "id": 169,
+    "units": [],
+    "disposition": "Vector",
+    "kind": "NonText",
+    "bbox_px": [
+      367.0,
+      1691.0,
+      398.0,
+      1731.0
+    ],
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "reason": "standalone artwork; no text units"
+  },
+  {
+    "id": 170,
+    "units": [],
+    "disposition": "Vector",
+    "kind": "NonText",
+    "bbox_px": [
+      1166.0,
+      2059.0,
+      1169.0,
+      2063.0
+    ],
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "reason": "standalone artwork; no text units"
+  },
+  {
+    "id": 171,
+    "units": [],
+    "disposition": "Vector",
+    "kind": "NonText",
+    "bbox_px": [
+      320.0,
+      2486.0,
+      323.0,
+      2489.0
+    ],
+    "contact": {
+      "bbox_contacts": [],
+      "suspects": []
+    },
+    "reason": "standalone artwork; no text units"
+  }
+]
