@@ -873,6 +873,7 @@ pub(crate) fn convert_parts_with_document_donors(
 
     // regions (protection / non-text contact → raster) -------------------------
     let mut regions = plan_regions(&plan, &protected_boxes);
+    let research_initial_regions = std::env::var_os("SCANWEAVE_HVC41_DUMP_DIR").map(|_| regions.clone());
 
     let mut coverage = Coverage::default();
     let mut fallback_reasons: BTreeMap<String, usize> = BTreeMap::new();
@@ -2050,7 +2051,7 @@ pub(crate) fn convert_parts_with_document_donors(
     // Research estimator runs never emit unreviewed vector glyphs. The
     // ordinary decision is untouched unless the experimental switch is set.
     let polarity_raster_baseline = polarity_requires_baseline(&policy.profile, seg.paper, seg.ink, polarity_visible_occurrences)
-        || (seg.hvc41_changed && policy.profile == "clearscan" && polarity_visible_occurrences > 0);
+        || ((seg.hvc41_changed || std::env::var_os("SCANWEAVE_HVC41_PIXEL_CONTACT").is_some()) && policy.profile == "clearscan" && polarity_visible_occurrences > 0);
     let mut report = Report {
         raster_fidelity: "not_raster_baseline".into(),
         raster_encoding: "pending_assembly".into(),
@@ -2111,11 +2112,26 @@ pub(crate) fn convert_parts_with_document_donors(
             let emitted = parts.occurrences.iter().any(|o| o.4 == u.symbol_id);
             serde_json::json!({"symbol":u.symbol_id,"text":u.semantic_text,"bbox":u.bbox_px,
                 "crop_w":u.crop_w,"crop_h":u.crop_h,"mask_indices":on,"emitted_before_containment":emitted,
-                "region":reg.map(|r| &r.disposition)})
+                "region":reg.map(|r| &r.disposition),"region_id":reg.map(|r| r.id),"suspect":owned.suspect})
         }).collect();
+        let region_details: Vec<_> = research_initial_regions.as_ref().expect("dump enabled").iter().filter(|r| !r.units.is_empty()).map(|r| serde_json::json!({
+            "id":r.id,"units":r.units,"disposition":r.disposition,
+            "contact":crate::plan::research_contacts(&plan, &r.units)})).collect();
+        let mut largest: Vec<_> = plan.artwork_units.iter().enumerate().map(|(i,(u, ids))| {
+            let pixels=u.mask.iter().filter(|p| **p).count(); (i,u,ids,pixels)
+        }).collect();
+        largest.sort_by_key(|x| std::cmp::Reverse(x.3));
+        let mut art_meta=Vec::new();
+        for (i,u,ids,pixels) in largest.iter().take(5) {
+            let name=format!("{}-art-{:05}.png",input.page_id,i);
+            let pixels8: Vec<u8> = u.mask.iter().map(|v| if *v {255} else {0}).collect();
+            let img=image::GrayImage::from_raw(u.crop_w as u32,u.crop_h as u32,pixels8).ok_or("invalid artwork mask")?;
+            img.save(std::path::PathBuf::from(&dir).join(&name)).map_err(|e| e.to_string())?;
+            art_meta.push(serde_json::json!({"artwork_index":i,"component_ids":ids,"bbox":u.bbox_px,"pixels":pixels,"mask_file":name}));
+        }
         let evidence=serde_json::json!({"page_id":input.page_id,"paper":seg.paper,"ink":seg.ink,"estimator_changed":seg.hvc41_changed,
             "precontainment_coverage":&report.coverage,"precontainment_fidelity":&report.fidelity,
-            "precontainment_occurrences":polarity_visible_occurrences,"units":units});
+            "precontainment_occurrences":polarity_visible_occurrences,"units":units,"region_contacts":region_details,"largest_artwork":art_meta});
         let path=std::path::PathBuf::from(dir).join(format!("{}.json",input.page_id));
         std::fs::write(path,serde_json::to_vec(&evidence).map_err(|e| e.to_string())?).map_err(|e| e.to_string())?;
     }

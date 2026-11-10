@@ -88,6 +88,48 @@ fn intersects(a: &[f64; 4], b: &[f64; 4]) -> bool {
     a[0] <= b[2] && b[0] <= a[2] && a[1] <= b[3] && b[1] <= a[3]
 }
 
+// Research-only Euclidean proximity of source mask pixels. Bounding-box checks
+// remain the default; neither OCR labels nor pixels outside the owned mask count.
+fn research_pixel_contact(a: &crate::units::Unit, b: &crate::units::Unit) -> bool {
+    let margin = CONTACT_MARGIN_PX as isize;
+    let ax = a.bbox_px[0] as isize;
+    let ay = a.bbox_px[1] as isize;
+    let bx = b.bbox_px[0] as isize;
+    let by = b.bbox_px[1] as isize;
+    for (i, on) in a.mask.iter().enumerate() {
+        if !*on { continue; }
+        let x = ax + (i % a.crop_w) as isize;
+        let y = ay + (i / a.crop_w) as isize;
+        if x < bx - margin || y < by - margin || x >= bx + b.crop_w as isize + margin || y >= by + b.crop_h as isize + margin { continue; }
+        for dy in -margin..=margin {
+            for dx in -margin..=margin {
+                if dx * dx + dy * dy > margin * margin { continue; }
+                let xx = x + dx - bx;
+                let yy = y + dy - by;
+                if xx >= 0 && yy >= 0 && xx < b.crop_w as isize && yy < b.crop_h as isize && b.mask[yy as usize * b.crop_w + xx as usize] { return true; }
+            }
+        }
+    }
+    false
+}
+
+pub(crate) fn research_contacts(plan: &OwnershipPlan, group: &[usize]) -> serde_json::Value {
+    let probe = expand(&union_bbox(group, plan), CONTACT_MARGIN_PX);
+    let hits: Vec<_> = plan.artwork_units.iter().enumerate().filter_map(|(ai, (art, components))| {
+        if !intersects(&probe, &art.bbox_px) { return None; }
+        let count = art.mask.iter().filter(|p| **p).count();
+        let pixel_contact = group.iter().any(|&ui| research_pixel_contact(&plan.owned[ui].unit, art));
+        Some(serde_json::json!({"artwork_index":ai,"component_ids":components,"bbox":art.bbox_px,
+            "pixels":count,"bbox_fill_ratio":count as f64 / (art.crop_w * art.crop_h).max(1) as f64,
+            "pixel_contact":pixel_contact}))
+    }).collect();
+    let suspects: Vec<_> = group.iter().filter_map(|&ui| {let u=&plan.owned[ui]; u.suspect.then(|| serde_json::json!({
+        "unit_index":ui,"symbol":u.unit.symbol_id,"ink_bbox":u.unit.bbox_px,
+        "slots":u.slots.iter().map(|s| serde_json::json!({"symbol":s.symbol_id,"bbox":s.bbox})).collect::<Vec<_>>(),
+        "reason":"component ink bbox exceeded the original owning OCR slot bbox by more than 6 pixels on at least one side"}))}).collect();
+    serde_json::json!({"bbox_contacts":hits,"suspects":suspects})
+}
+
 /// Group the plan's units into regions by line adjacency (sharing horizontal
 /// overlap and vertical proximity within 1.5× median unit height) and assign
 /// dispositions.
@@ -128,7 +170,9 @@ pub fn plan_regions(
         let mut touching_artwork: Vec<usize> = Vec::new();
         let probe = expand(&region_bbox, CONTACT_MARGIN_PX);
         for (ai, (au, _)) in plan.artwork_units.iter().enumerate() {
-            if intersects(&probe, &au.bbox_px) {
+            if intersects(&probe, &au.bbox_px)
+                && (std::env::var_os("SCANWEAVE_HVC41_PIXEL_CONTACT").is_none()
+                    || group.iter().any(|&ui| research_pixel_contact(&plan.owned[ui].unit, au))) {
                 touching_artwork.push(ai);
             }
         }
@@ -193,4 +237,28 @@ pub fn plan_regions(
     }
 
     regions
+}
+
+#[cfg(test)]
+mod research_contact_tests {
+    use super::research_pixel_contact;
+    use crate::units::Unit;
+
+    fn one_pixel(x: f64, y: f64) -> Unit {
+        Unit {
+            shape_key: String::new(), span_id: String::new(), symbol_id: String::new(),
+            semantic_text: String::new(), bbox_px: [x, y, x + 1.0, y + 1.0],
+            ocr_bbox_px: [x, y, x + 1.0, y + 1.0], crop_w: 1, crop_h: 1,
+            mask: vec![true], gray_samples: None, gray_halo: None,
+        }
+    }
+
+    #[test]
+    fn proximity_uses_euclidean_distance_between_actual_pixels() {
+        let origin = one_pixel(10.0, 10.0);
+        assert!(research_pixel_contact(&origin, &one_pixel(14.0, 10.0)));
+        assert!(research_pixel_contact(&origin, &one_pixel(13.0, 12.0)));
+        assert!(!research_pixel_contact(&origin, &one_pixel(15.0, 10.0)));
+        assert!(!research_pixel_contact(&origin, &one_pixel(13.0, 13.0)));
+    }
 }
