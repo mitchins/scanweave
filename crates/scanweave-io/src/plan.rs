@@ -113,6 +113,11 @@ fn research_pixel_contact(a: &crate::units::Unit, b: &crate::units::Unit) -> boo
     false
 }
 
+fn research_border_component(b: [f64;4], w: u32, h: u32) -> bool {
+    let edges=(b[0]<=0.0) as u8+(b[1]<=0.0) as u8+(b[2]>=w as f64) as u8+(b[3]>=h as f64) as u8;
+    edges>=2 && b[2]-b[0]>=0.8*w as f64 && b[3]-b[1]>=0.8*h as f64
+}
+
 pub(crate) fn research_contacts(plan: &OwnershipPlan, group: &[usize]) -> serde_json::Value {
     let probe = expand(&union_bbox(group, plan), CONTACT_MARGIN_PX);
     let hits: Vec<_> = plan.artwork_units.iter().enumerate().filter_map(|(ai, (art, components))| {
@@ -136,9 +141,12 @@ pub(crate) fn research_contacts(plan: &OwnershipPlan, group: &[usize]) -> serde_
 /// Regions follow the OCR's own reading order: one region per span that owns
 /// units (plus any absorbed slots), in slot order. Proximity grouping would
 /// scramble reading order (observed: a row crossing into the next line).
-pub fn plan_regions(
-    plan: &OwnershipPlan,
-    protected: &[[f64; 4]],
+pub fn plan_regions(plan: &OwnershipPlan, protected: &[[f64; 4]]) -> Vec<Region> {
+    plan_regions_for_research(plan, protected, None)
+}
+
+pub(crate) fn plan_regions_for_research(
+    plan: &OwnershipPlan, protected: &[[f64; 4]], page_size: Option<(u32,u32)>,
 ) -> Vec<Region> {
     let mut regions = Vec::new();
     let mut uid = 0usize;
@@ -170,8 +178,10 @@ pub fn plan_regions(
         let mut touching_artwork: Vec<usize> = Vec::new();
         let probe = expand(&region_bbox, CONTACT_MARGIN_PX);
         for (ai, (au, _)) in plan.artwork_units.iter().enumerate() {
+            let border_refinement = std::env::var_os("SCANWEAVE_HVC41B_BORDER_CONTACT").is_some()
+                && page_size.is_some_and(|(w,h)| research_border_component(au.bbox_px,w,h));
             if intersects(&probe, &au.bbox_px)
-                && (std::env::var_os("SCANWEAVE_HVC41_PIXEL_CONTACT").is_none()
+                && ((std::env::var_os("SCANWEAVE_HVC41_PIXEL_CONTACT").is_none() && !border_refinement)
                     || group.iter().any(|&ui| research_pixel_contact(&plan.owned[ui].unit, au))) {
                 touching_artwork.push(ai);
             }
@@ -241,7 +251,7 @@ pub fn plan_regions(
 
 #[cfg(test)]
 mod research_contact_tests {
-    use super::research_pixel_contact;
+    use super::{research_border_component, research_pixel_contact};
     use crate::units::Unit;
 
     fn one_pixel(x: f64, y: f64) -> Unit {
@@ -251,6 +261,14 @@ mod research_contact_tests {
             ocr_bbox_px: [x, y, x + 1.0, y + 1.0], crop_w: 1, crop_h: 1,
             mask: vec![true], gray_samples: None, gray_halo: None,
         }
+    }
+
+    #[test]
+    fn border_definition_requires_two_edges_and_large_area_in_both_dimensions() {
+        assert!(research_border_component([0.0,0.0,100.0,100.0],100,100));
+        assert!(!research_border_component([1.0,1.0,99.0,99.0],100,100));
+        assert!(!research_border_component([0.0,0.0,100.0,79.0],100,100));
+        assert!(!research_border_component([0.0,1.0,90.0,99.0],100,100));
     }
 
     #[test]

@@ -872,7 +872,7 @@ pub(crate) fn convert_parts_with_document_donors(
         .collect();
 
     // regions (protection / non-text contact → raster) -------------------------
-    let mut regions = plan_regions(&plan, &protected_boxes);
+    let mut regions = crate::plan::plan_regions_for_research(&plan, &protected_boxes, if seg.hvc41_changed { Some((w,h)) } else { None });
     let research_initial_regions = std::env::var_os("SCANWEAVE_HVC41_DUMP_DIR").map(|_| regions.clone());
 
     let mut coverage = Coverage::default();
@@ -2134,6 +2134,23 @@ pub(crate) fn convert_parts_with_document_donors(
             "precontainment_occurrences":polarity_visible_occurrences,"units":units,"region_contacts":region_details,"largest_artwork":art_meta});
         let path=std::path::PathBuf::from(dir).join(format!("{}.json",input.page_id));
         std::fs::write(path,serde_json::to_vec(&evidence).map_err(|e| e.to_string())?).map_err(|e| e.to_string())?;
+    }
+    // Export the actual pre-containment paths for offline review only.  This
+    // does not bypass the raster fallback or emit any additional glyphs.
+    if let Some(dir) = std::env::var_os("SCANWEAVE_HVC41B_TRACE_DIR") {
+        let traces: Vec<_> = parts.occurrences.iter().map(|(gid, cid, bbox, span, symbol, text)| {
+            let shape = &parts.shapes[*gid];
+            serde_json::json!({"gid":gid,"cid":cid,"bbox":bbox,"span":span,"symbol":symbol,"text":text,
+                "path_svg":shape.path.to_svg(),"matrix":crate::page_pdf::glyph_matrix(shape,bbox,&parts.to_pt),
+                "ink_span_fu":shape.ink_span_fu,"anchor_bbox_fu":shape.anchor_bbox_fu,"stages":shape.stages})
+        }).collect();
+        let artifacts: Vec<_> = plan.artwork_units.iter().enumerate().map(|(i,(u,components))| {
+            let b=u.bbox_px; let edges=(b[0]<=0.0) as u8+(b[1]<=0.0) as u8+(b[2]>=w as f64) as u8+(b[3]>=h as f64) as u8;
+            serde_json::json!({"index":i,"component_ids":components,"bbox":b,"pixels":u.mask.iter().filter(|x|**x).count(),
+                "border_eligible":edges>=2 && b[2]-b[0]>=0.8*w as f64 && b[3]-b[1]>=0.8*h as f64})
+        }).collect();
+        let path=std::path::PathBuf::from(dir).join(format!("{}-outlines.json",input.page_id));
+        std::fs::write(path,serde_json::to_vec(&serde_json::json!({"outlines":traces,"artwork":artifacts,"paper":seg.paper,"ink":seg.ink})).map_err(|e|e.to_string())?).map_err(|e|e.to_string())?;
     }
     if polarity_raster_baseline {
         parts.patches = vec![whole_page_patch(&parts, parts.source_w, parts.source_h)?];

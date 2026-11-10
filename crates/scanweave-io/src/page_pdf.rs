@@ -408,7 +408,7 @@ fn cid_advance(shapes: &[GlyphShape], encodings: &[(usize, String)], cid: u32) -
 }
 
 /// Text matrix that paints a visible glyph's ink exactly over its source box.
-fn glyph_matrix(g: &GlyphShape, bbox_px: &[f64; 4], xf: &PageTransform) -> [f32; 6] {
+pub(crate) fn glyph_matrix(g: &GlyphShape, bbox_px: &[f64; 4], xf: &PageTransform) -> [f32; 6] {
     let x0 = xf.x(bbox_px[0]);
     let bottom_pt = xf.y(bbox_px[3]);
     let w_pt = ((bbox_px[2] - bbox_px[0]) * xf.sx()) as f32;

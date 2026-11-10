@@ -176,11 +176,15 @@ pub fn convert_pdf(args: &[String]) -> Result<(), String> {
     let info = String::from_utf8_lossy(&info);
     let pages = pdf_page_count(&info)?;
     let work = tempfile::tempdir().map_err(|e| format!("create temporary workspace: {e}"))?;
-    let tesseract_version = String::from_utf8_lossy(&run("tesseract", &["--version".as_ref()])?)
-        .lines()
-        .next()
-        .unwrap_or("unknown")
-        .to_string();
+    // Research-only replay: reuse already captured OCR; never invoke Tesseract.
+    let frozen_ocr = if let Some(path) = std::env::var_os("SCANWEAVE_HVC41B_OCR_SIDECAR") {
+        Some(serde_json::from_slice::<serde_json::Value>(&std::fs::read(path).map_err(|e| e.to_string())?).map_err(|e| e.to_string())?)
+    } else { None };
+    let tesseract_version = if let Some(saved) = &frozen_ocr {
+        saved["pages"][0]["ocr"]["version"].as_str().ok_or("missing frozen OCR version")?.to_string()
+    } else {
+        String::from_utf8_lossy(&run("tesseract", &["--version".as_ref()])?).lines().next().unwrap_or("unknown").to_string()
+    };
     let source_images = if profile == "clearscan" {
         scanweave_io::source_image::simple_page_images(
             std::fs::read(&input).map_err(|e| e.to_string())?,
@@ -193,6 +197,11 @@ pub fn convert_pdf(args: &[String]) -> Result<(), String> {
     let mut provenance = Vec::new();
     let import_started = std::time::Instant::now();
     let input_hash = scanweave_core::hash_hex(&std::fs::read(&input).map_err(|e| e.to_string())?);
+    if let Some(saved) = &frozen_ocr {
+        if saved["input_sha256"].as_str() != Some(input_hash.as_str()) || saved["pages"].as_array().map(|a| a.len()) != Some(pages) {
+            return Err("frozen OCR source hash or page count mismatch".into());
+        }
+    }
     for page in 1..=pages {
         eprintln!("scanweave: rasterizing and recognizing page {page}/{pages}");
         let number = page.to_string();
@@ -262,6 +271,18 @@ pub fn convert_pdf(args: &[String]) -> Result<(), String> {
         {
             return Err(format!("page {page} exceeds raster pixel budget"));
         }
+        let (ocr_bytes, doc, selected_psm, baseline_reliable, retry_reliable) = if let Some(saved) = &frozen_ocr {
+            let rec = &saved["pages"][page - 1];
+            if rec["raster_width"].as_u64() != Some(image.width() as u64) || rec["raster_height"].as_u64() != Some(image.height() as u64) {
+                return Err("frozen OCR raster dimensions mismatch".into());
+            }
+            let hash = scanweave_core::pixel_hash::pixel_hash(scanweave_core::pixel_hash::CanonicalFormat::Rgb8, image.width() as u64, image.height() as u64, scanweave_core::pixel_hash::ColourTag::Srgb, None, image.as_raw()).map_err(|e| e.to_string())?;
+            if rec["pixel_sha256"].as_str() != Some(hash.as_str()) { return Err("frozen OCR pixel hash mismatch".into()); }
+            let data = rec["hocr"].as_str().ok_or("missing frozen hOCR")?.as_bytes().to_vec();
+            if rec["hocr_sha256"].as_str() != Some(scanweave_core::hash_hex(&data).as_str()) { return Err("frozen hOCR hash mismatch".into()); }
+            let doc = hocr::parse_hocr(&data, image.width(), image.height()).map_err(|e| e.to_string())?;
+            (data, doc, rec["selected_psm"].as_u64().unwrap_or(3) as i32, rec["baseline_reliable_words"].as_u64().unwrap_or(0) as usize, rec["retry_reliable_words"].as_u64().map(|v| v as usize))
+        } else {
         run(
             "tesseract",
             &[
@@ -314,6 +335,8 @@ pub fn convert_pdf(args: &[String]) -> Result<(), String> {
                 selected_psm = 6;
             }
         }
+            (ocr_bytes, doc, selected_psm, baseline_reliable, retry_reliable)
+        };
         if doc.words.is_empty() {
             eprintln!("scanweave: page {page}: Tesseract recognized no words; preserving the page image without searchable text for this page");
         }

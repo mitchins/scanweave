@@ -61,7 +61,7 @@ pub fn segment(rgb: &[u8], width: u32, height: u32) -> Segmentation {
     // Apply only where the dominant interior mode is much brighter than the
     // corner estimate. This is a hypothesis, not a polarity safety decision.
     let mut hvc41_changed = false;
-    if std::env::var_os("SCANWEAVE_HVC41_INTERIOR").is_some() {
+    if std::env::var_os("SCANWEAVE_HVC41_INTERIOR").is_some() || std::env::var_os("SCANWEAVE_HVC41B_INTERIOR").is_some() {
         let (x0, x1, y0, y1) = (w / 10, w * 9 / 10, h / 10, h * 9 / 10);
         let mut hist = [0usize; 32];
         for y in y0..y1 {
