@@ -2047,7 +2047,10 @@ pub(crate) fn convert_parts_with_document_donors(
     let ink_luminance = crate::mask::lum(seg.ink);
     let polarity_inverted = ink_luminance > paper_luminance;
     let polarity_visible_occurrences = parts.occurrences.len();
-    let polarity_raster_baseline = polarity_requires_baseline(&policy.profile, seg.paper, seg.ink, polarity_visible_occurrences);
+    // Research estimator runs never emit unreviewed vector glyphs. The
+    // ordinary decision is untouched unless the experimental switch is set.
+    let polarity_raster_baseline = polarity_requires_baseline(&policy.profile, seg.paper, seg.ink, polarity_visible_occurrences)
+        || (seg.hvc41_changed && policy.profile == "clearscan" && polarity_visible_occurrences > 0);
     let mut report = Report {
         raster_fidelity: "not_raster_baseline".into(),
         raster_encoding: "pending_assembly".into(),
@@ -2100,6 +2103,22 @@ pub(crate) fn convert_parts_with_document_donors(
     };
 
     let mut parts = parts;
+    if let Some(dir) = std::env::var_os("SCANWEAVE_HVC41_DUMP_DIR") {
+        let units: Vec<_> = plan.owned.iter().enumerate().map(|(i, owned)| {
+            let u = &owned.unit;
+            let on: Vec<usize> = u.mask.iter().enumerate().filter_map(|(j, v)| v.then_some(j)).collect();
+            let reg = regions.iter().find(|r| r.units.contains(&i));
+            let emitted = parts.occurrences.iter().any(|o| o.4 == u.symbol_id);
+            serde_json::json!({"symbol":u.symbol_id,"text":u.semantic_text,"bbox":u.bbox_px,
+                "crop_w":u.crop_w,"crop_h":u.crop_h,"mask_indices":on,"emitted_before_containment":emitted,
+                "region":reg.map(|r| &r.disposition)})
+        }).collect();
+        let evidence=serde_json::json!({"page_id":input.page_id,"paper":seg.paper,"ink":seg.ink,"estimator_changed":seg.hvc41_changed,
+            "precontainment_coverage":&report.coverage,"precontainment_fidelity":&report.fidelity,
+            "precontainment_occurrences":polarity_visible_occurrences,"units":units});
+        let path=std::path::PathBuf::from(dir).join(format!("{}.json",input.page_id));
+        std::fs::write(path,serde_json::to_vec(&evidence).map_err(|e| e.to_string())?).map_err(|e| e.to_string())?;
+    }
     if polarity_raster_baseline {
         parts.patches = vec![whole_page_patch(&parts, parts.source_w, parts.source_h)?];
         parts.raster_baseline = true;

@@ -12,6 +12,8 @@ pub struct Segmentation {
     /// repaint ink in the SOURCE ink colour, not pure black (M0-Q repair:
     /// the whole-page MAE gate correctly caught pure-black over gray-30 ink)
     pub ink: [u8; 3],
+    /// Research-only marker; false unless the opt-in estimate changed paper.
+    pub hvc41_changed: bool,
 }
 
 pub(crate) fn lum(rgb: [u8; 3]) -> f64 {
@@ -55,6 +57,35 @@ pub fn segment(rgb: &[u8], width: u32, height: u32) -> Segmentation {
         paper[c] = v[2];
     }
 
+    // HVC41 research-only counterfactual. The normal path is unchanged.
+    // Apply only where the dominant interior mode is much brighter than the
+    // corner estimate. This is a hypothesis, not a polarity safety decision.
+    let mut hvc41_changed = false;
+    if std::env::var_os("SCANWEAVE_HVC41_INTERIOR").is_some() {
+        let (x0, x1, y0, y1) = (w / 10, w * 9 / 10, h / 10, h * 9 / 10);
+        let mut hist = [0usize; 32];
+        for y in y0..y1 {
+            for x in x0..x1 {
+                hist[((lum(px(x, y)) / 8.0) as usize).min(31)] += 1;
+            }
+        }
+        let mode = hist.iter().enumerate().max_by_key(|(_, n)| *n).map(|(i, _)| i).unwrap_or(0);
+        let mut samples = [Vec::new(), Vec::new(), Vec::new()];
+        for y in y0..y1 {
+            for x in x0..x1 {
+                let p = px(x, y);
+                if ((lum(p) / 8.0) as usize).min(31) == mode {
+                    for c in 0..3 { samples[c].push(p[c]); }
+                }
+            }
+        }
+        if !samples[0].is_empty() {
+            let mut candidate = [0u8; 3];
+            for c in 0..3 { samples[c].sort_unstable(); candidate[c] = samples[c][samples[c].len()/2]; }
+            if lum(candidate) > lum(paper) + 60.0 { paper = candidate; hvc41_changed = true; }
+        }
+    }
+
     // conservative foreground: channel-distance from paper
     const FG_DELTA: f64 = 60.0;
     let paper_lum = lum(paper);
@@ -95,5 +126,6 @@ pub fn segment(rgb: &[u8], width: u32, height: u32) -> Segmentation {
         fg,
         paper,
         ink,
+        hvc41_changed,
     }
 }
