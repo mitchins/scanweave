@@ -1,0 +1,990 @@
+[
+  {
+    "set": "control",
+    "case": "white",
+    "png_sha256": "35d3180d55e1a0067665ebfc1038037ae6a632e3cdd71d5cafc7469e283ca3b5",
+    "pdf_sha256": "9b7711d041e3f980b367a35c39d1502f27960c45895fae70e160d2cba3c0c51a",
+    "reference_polarity": "dark",
+    "pristine_ink_core_pixels_in_accepted_boxes": 22528,
+    "reference_core_recall": 0.9972478693181818,
+    "reference_pixels": 33252,
+    "direct_pristine_core_and_paper": {
+      "corner": {
+        "pristine_core_recall": 1.0,
+        "pristine_paper_false_admission": 0.0,
+        "pristine_paper_pixels": 34860
+      },
+      "interior_mode": {
+        "pristine_core_recall": 1.0,
+        "pristine_paper_false_admission": 0.0,
+        "pristine_paper_pixels": 34860
+      },
+      "bright_mode": {
+        "pristine_core_recall": 1.0,
+        "pristine_paper_false_admission": 0.0,
+        "pristine_paper_pixels": 34860
+      },
+      "interior_median": {
+        "pristine_core_recall": 1.0,
+        "pristine_paper_false_admission": 0.0,
+        "pristine_paper_pixels": 34860
+      },
+      "tile_median_128": {
+        "pristine_core_recall": 1.0,
+        "pristine_paper_false_admission": 0.0,
+        "pristine_paper_pixels": 34860
+      }
+    },
+    "note": "Exact RGB core; excludes antialiasing and may include same-colour artwork in OCR boxes. Not full truth segmentation."
+  },
+  {
+    "set": "control",
+    "case": "black_border",
+    "png_sha256": "7629c1009003b33a14bbcbc8027604410f456a957a544ac4a280b6976fcd0fd9",
+    "pdf_sha256": "b59125e62698a507d0c7287f86fe93a611c4e0c591a953401b70ecc12766dbd9",
+    "reference_polarity": "dark",
+    "pristine_ink_core_pixels_in_accepted_boxes": 16452,
+    "reference_core_recall": 0.9979941648431802,
+    "reference_pixels": 24264,
+    "direct_pristine_core_and_paper": {
+      "corner": {
+        "pristine_core_recall": 6.0782883539995136e-05,
+        "pristine_paper_false_admission": 1.0,
+        "pristine_paper_pixels": 25917
+      },
+      "interior_mode": {
+        "pristine_core_recall": 1.0,
+        "pristine_paper_false_admission": 0.0,
+        "pristine_paper_pixels": 25917
+      },
+      "bright_mode": {
+        "pristine_core_recall": 1.0,
+        "pristine_paper_false_admission": 0.0,
+        "pristine_paper_pixels": 25917
+      },
+      "interior_median": {
+        "pristine_core_recall": 1.0,
+        "pristine_paper_false_admission": 0.0,
+        "pristine_paper_pixels": 25917
+      },
+      "tile_median_128": {
+        "pristine_core_recall": 1.0,
+        "pristine_paper_false_admission": 0.0,
+        "pristine_paper_pixels": 25917
+      }
+    },
+    "note": "Exact RGB core; excludes antialiasing and may include same-colour artwork in OCR boxes. Not full truth segmentation."
+  },
+  {
+    "set": "control",
+    "case": "binding_shadow",
+    "png_sha256": "b5f867a2538a5a762caa435e005304ad56674581fbc236904c64cfd5a4163282",
+    "pdf_sha256": "05032800ca4676b8ffa01147fd42726ac3997668d9774295ebdb5272d20921d5",
+    "reference_polarity": "dark",
+    "pristine_ink_core_pixels_in_accepted_boxes": 22528,
+    "reference_core_recall": 0.9967151988636364,
+    "reference_pixels": 33489,
+    "direct_pristine_core_and_paper": {
+      "corner": {
+        "pristine_core_recall": 1.0,
+        "pristine_paper_false_admission": 0.0,
+        "pristine_paper_pixels": 35854
+      },
+      "interior_mode": {
+        "pristine_core_recall": 1.0,
+        "pristine_paper_false_admission": 0.0,
+        "pristine_paper_pixels": 35854
+      },
+      "bright_mode": {
+        "pristine_core_recall": 1.0,
+        "pristine_paper_false_admission": 0.0,
+        "pristine_paper_pixels": 35854
+      },
+      "interior_median": {
+        "pristine_core_recall": 1.0,
+        "pristine_paper_false_admission": 0.0,
+        "pristine_paper_pixels": 35854
+      },
+      "tile_median_128": {
+        "pristine_core_recall": 1.0,
+        "pristine_paper_false_admission": 0.0,
+        "pristine_paper_pixels": 35854
+      }
+    },
+    "note": "Exact RGB core; excludes antialiasing and may include same-colour artwork in OCR boxes. Not full truth segmentation."
+  },
+  {
+    "set": "control",
+    "case": "receipt_table",
+    "png_sha256": "16991b4bdbf600cc463c9ed5db967de121ee5f2668eb3cfb56eb2656de7401f4",
+    "pdf_sha256": "a69220155e3e4dc0d28eef272f7a09fc1ff395f6f760160f349ed72f4da7eff9",
+    "reference_polarity": "dark",
+    "pristine_ink_core_pixels_in_accepted_boxes": 16848,
+    "reference_core_recall": 0.9987535612535613,
+    "reference_pixels": 24897,
+    "direct_pristine_core_and_paper": {
+      "corner": {
+        "pristine_core_recall": 0.0,
+        "pristine_paper_false_admission": 1.0,
+        "pristine_paper_pixels": 26111
+      },
+      "interior_mode": {
+        "pristine_core_recall": 1.0,
+        "pristine_paper_false_admission": 0.0,
+        "pristine_paper_pixels": 26111
+      },
+      "bright_mode": {
+        "pristine_core_recall": 1.0,
+        "pristine_paper_false_admission": 0.0,
+        "pristine_paper_pixels": 26111
+      },
+      "interior_median": {
+        "pristine_core_recall": 1.0,
+        "pristine_paper_false_admission": 0.0,
+        "pristine_paper_pixels": 26111
+      },
+      "tile_median_128": {
+        "pristine_core_recall": 1.0,
+        "pristine_paper_false_admission": 0.0,
+        "pristine_paper_pixels": 26111
+      }
+    },
+    "note": "Exact RGB core; excludes antialiasing and may include same-colour artwork in OCR boxes. Not full truth segmentation."
+  },
+  {
+    "set": "control",
+    "case": "yellow",
+    "png_sha256": "724d38c83d21b40e7ea2f5acaaa1f01bf08d775ce21d363438013a31480c43ab",
+    "pdf_sha256": "1c6884b412ad8f35b08c23bd45cdb14cf8fdd55e5b5564a3ec6181ecc446aae0",
+    "reference_polarity": "dark",
+    "pristine_ink_core_pixels_in_accepted_boxes": 22504,
+    "reference_core_recall": 0.9972449342339139,
+    "reference_pixels": 33247,
+    "direct_pristine_core_and_paper": {
+      "corner": {
+        "pristine_core_recall": 1.0,
+        "pristine_paper_false_admission": 0.0,
+        "pristine_paper_pixels": 34945
+      },
+      "interior_mode": {
+        "pristine_core_recall": 1.0,
+        "pristine_paper_false_admission": 0.0,
+        "pristine_paper_pixels": 34945
+      },
+      "bright_mode": {
+        "pristine_core_recall": 1.0,
+        "pristine_paper_false_admission": 0.0,
+        "pristine_paper_pixels": 34945
+      },
+      "interior_median": {
+        "pristine_core_recall": 1.0,
+        "pristine_paper_false_admission": 0.0,
+        "pristine_paper_pixels": 34945
+      },
+      "tile_median_128": {
+        "pristine_core_recall": 1.0,
+        "pristine_paper_false_admission": 0.0,
+        "pristine_paper_pixels": 34945
+      }
+    },
+    "note": "Exact RGB core; excludes antialiasing and may include same-colour artwork in OCR boxes. Not full truth segmentation."
+  },
+  {
+    "set": "control",
+    "case": "blue",
+    "png_sha256": "a1d3a6751fb53f61cc7a3d19ef9a1dbea8b1697c57b83a0c4bed3300d0bfc5d9",
+    "pdf_sha256": "0c5fd0b9d4dd25c02bb9e72bab0f33090ecbdff95f090244293fc404c2f412b1",
+    "reference_polarity": "dark",
+    "pristine_ink_core_pixels_in_accepted_boxes": 22620,
+    "reference_core_recall": 1.0,
+    "reference_pixels": 33060,
+    "direct_pristine_core_and_paper": {
+      "corner": {
+        "pristine_core_recall": 1.0,
+        "pristine_paper_false_admission": 0.0,
+        "pristine_paper_pixels": 34928
+      },
+      "interior_mode": {
+        "pristine_core_recall": 1.0,
+        "pristine_paper_false_admission": 0.0,
+        "pristine_paper_pixels": 34928
+      },
+      "bright_mode": {
+        "pristine_core_recall": 1.0,
+        "pristine_paper_false_admission": 0.0,
+        "pristine_paper_pixels": 34928
+      },
+      "interior_median": {
+        "pristine_core_recall": 1.0,
+        "pristine_paper_false_admission": 0.0,
+        "pristine_paper_pixels": 34928
+      },
+      "tile_median_128": {
+        "pristine_core_recall": 1.0,
+        "pristine_paper_false_admission": 0.0,
+        "pristine_paper_pixels": 34928
+      }
+    },
+    "note": "Exact RGB core; excludes antialiasing and may include same-colour artwork in OCR boxes. Not full truth segmentation."
+  },
+  {
+    "set": "control",
+    "case": "pink",
+    "png_sha256": "f202e295e12f46f0ddc4ac9d1340d02514cdc585503c7e11f8e537f26b79b299",
+    "pdf_sha256": "92cb67698f0530aa21ebd290fad09bba0f3ed0943db6c971f4ff07d9fff7cc1d",
+    "reference_polarity": "dark",
+    "pristine_ink_core_pixels_in_accepted_boxes": 22620,
+    "reference_core_recall": 1.0,
+    "reference_pixels": 33027,
+    "direct_pristine_core_and_paper": {
+      "corner": {
+        "pristine_core_recall": 1.0,
+        "pristine_paper_false_admission": 0.0,
+        "pristine_paper_pixels": 34928
+      },
+      "interior_mode": {
+        "pristine_core_recall": 1.0,
+        "pristine_paper_false_admission": 0.0,
+        "pristine_paper_pixels": 34928
+      },
+      "bright_mode": {
+        "pristine_core_recall": 1.0,
+        "pristine_paper_false_admission": 0.0,
+        "pristine_paper_pixels": 34928
+      },
+      "interior_median": {
+        "pristine_core_recall": 1.0,
+        "pristine_paper_false_admission": 0.0,
+        "pristine_paper_pixels": 34928
+      },
+      "tile_median_128": {
+        "pristine_core_recall": 1.0,
+        "pristine_paper_false_admission": 0.0,
+        "pristine_paper_pixels": 34928
+      }
+    },
+    "note": "Exact RGB core; excludes antialiasing and may include same-colour artwork in OCR boxes. Not full truth segmentation."
+  },
+  {
+    "set": "control",
+    "case": "faded_brown",
+    "png_sha256": "50928778cd8ae22e56587dfd221a89f5c2cc20b05ddae1917a995d49fc5bab17",
+    "pdf_sha256": "dca681af20c57eb31bc862487f37c2e74a18a8b6dfc68b1e35767f5e7ff27fa8",
+    "reference_polarity": "dark",
+    "pristine_ink_core_pixels_in_accepted_boxes": 22620,
+    "reference_core_recall": 1.0,
+    "reference_pixels": 32723,
+    "direct_pristine_core_and_paper": {
+      "corner": {
+        "pristine_core_recall": 1.0,
+        "pristine_paper_false_admission": 0.0,
+        "pristine_paper_pixels": 35070
+      },
+      "interior_mode": {
+        "pristine_core_recall": 1.0,
+        "pristine_paper_false_admission": 0.0,
+        "pristine_paper_pixels": 35070
+      },
+      "bright_mode": {
+        "pristine_core_recall": 1.0,
+        "pristine_paper_false_admission": 0.0,
+        "pristine_paper_pixels": 35070
+      },
+      "interior_median": {
+        "pristine_core_recall": 1.0,
+        "pristine_paper_false_admission": 0.0,
+        "pristine_paper_pixels": 35070
+      },
+      "tile_median_128": {
+        "pristine_core_recall": 1.0,
+        "pristine_paper_false_admission": 0.0,
+        "pristine_paper_pixels": 35070
+      }
+    },
+    "note": "Exact RGB core; excludes antialiasing and may include same-colour artwork in OCR boxes. Not full truth segmentation."
+  },
+  {
+    "set": "control",
+    "case": "reverse_panel",
+    "png_sha256": "38f712d78e8bc4b9858683869fe1dcd6af0f021e7f3dde4142d7c389dede3ccf",
+    "pdf_sha256": "d986ff2cfbde5f025a9172cf04ed8673e72e1fcd72e60d357f867636e3443a6f",
+    "reference_polarity": "light",
+    "pristine_ink_core_pixels_in_accepted_boxes": 16592,
+    "reference_core_recall": 0.9973481195756991,
+    "reference_pixels": 24465,
+    "direct_pristine_core_and_paper": {
+      "corner": {
+        "pristine_core_recall": 0.0,
+        "pristine_paper_false_admission": 1.0,
+        "pristine_paper_pixels": 26060
+      },
+      "interior_mode": {
+        "pristine_core_recall": 0.0,
+        "pristine_paper_false_admission": 1.0,
+        "pristine_paper_pixels": 26060
+      },
+      "bright_mode": {
+        "pristine_core_recall": 0.0,
+        "pristine_paper_false_admission": 1.0,
+        "pristine_paper_pixels": 26060
+      },
+      "interior_median": {
+        "pristine_core_recall": 0.0,
+        "pristine_paper_false_admission": 1.0,
+        "pristine_paper_pixels": 26060
+      },
+      "tile_median_128": {
+        "pristine_core_recall": 1.0,
+        "pristine_paper_false_admission": 0.0,
+        "pristine_paper_pixels": 26060
+      }
+    },
+    "note": "Exact RGB core; excludes antialiasing and may include same-colour artwork in OCR boxes. Not full truth segmentation."
+  },
+  {
+    "set": "control",
+    "case": "reverse_page",
+    "png_sha256": "351dcc094a84980dfedf8ae0ace9cbdee23073762c48cb72fa9260c5f59206bc",
+    "pdf_sha256": "f5d4a6ada06ff536ca6cf251936dbbfb1e207be84f198c48a94af018228eb210",
+    "reference_polarity": "light",
+    "pristine_ink_core_pixels_in_accepted_boxes": 22456,
+    "reference_core_recall": 0.999109369433559,
+    "reference_pixels": 33251,
+    "direct_pristine_core_and_paper": {
+      "corner": {
+        "pristine_core_recall": 1.0,
+        "pristine_paper_false_admission": 0.0,
+        "pristine_paper_pixels": 34860
+      },
+      "interior_mode": {
+        "pristine_core_recall": 1.0,
+        "pristine_paper_false_admission": 0.0,
+        "pristine_paper_pixels": 34860
+      },
+      "bright_mode": {
+        "pristine_core_recall": 1.0,
+        "pristine_paper_false_admission": 0.0,
+        "pristine_paper_pixels": 34860
+      },
+      "interior_median": {
+        "pristine_core_recall": 1.0,
+        "pristine_paper_false_admission": 0.0,
+        "pristine_paper_pixels": 34860
+      },
+      "tile_median_128": {
+        "pristine_core_recall": 1.0,
+        "pristine_paper_false_admission": 0.0,
+        "pristine_paper_pixels": 34860
+      }
+    },
+    "note": "Exact RGB core; excludes antialiasing and may include same-colour artwork in OCR boxes. Not full truth segmentation."
+  },
+  {
+    "set": "control",
+    "case": "photograph",
+    "png_sha256": "ced820003ed4587084e8a46ee117b24c82c1f36d8814414991630da4116c72bf",
+    "pdf_sha256": "5d6359c04cdabcfae2f3710f092eb957eaa6cd7c2c7d41142f742dc5318bbee3",
+    "reference_polarity": "light",
+    "pristine_ink_core_pixels_in_accepted_boxes": 2206,
+    "reference_core_recall": 1.0,
+    "reference_pixels": 142831,
+    "direct_pristine_core_and_paper": {
+      "corner": {
+        "pristine_core_recall": 1.0,
+        "pristine_paper_false_admission": null,
+        "pristine_paper_pixels": 0
+      },
+      "interior_mode": {
+        "pristine_core_recall": 1.0,
+        "pristine_paper_false_admission": null,
+        "pristine_paper_pixels": 0
+      },
+      "bright_mode": {
+        "pristine_core_recall": 0.99909338168631,
+        "pristine_paper_false_admission": null,
+        "pristine_paper_pixels": 0
+      },
+      "interior_median": {
+        "pristine_core_recall": 1.0,
+        "pristine_paper_false_admission": null,
+        "pristine_paper_pixels": 0
+      },
+      "tile_median_128": {
+        "pristine_core_recall": 1.0,
+        "pristine_paper_false_admission": null,
+        "pristine_paper_pixels": 0
+      }
+    },
+    "note": "Exact RGB core; excludes antialiasing and may include same-colour artwork in OCR boxes. Not full truth segmentation."
+  },
+  {
+    "set": "supplemental",
+    "case": "small_receipt",
+    "png_sha256": "17d142210d8d502387273ef4102a7e5c55fee6b33536dc6bdf52df87e47e23f6",
+    "pdf_sha256": "554f7fc225b7a641d0d01faeeacfd9c42db069cd2d8a74e65a610be85258f5cd",
+    "reference_polarity": "dark",
+    "pristine_ink_core_pixels_in_accepted_boxes": 8442,
+    "reference_core_recall": 0.9998815446576641,
+    "reference_pixels": 12748,
+    "direct_pristine_core_and_paper": {
+      "corner": {
+        "pristine_core_recall": 0.0,
+        "pristine_paper_false_admission": 1.0,
+        "pristine_paper_pixels": 15153
+      },
+      "interior_mode": {
+        "pristine_core_recall": 0.0,
+        "pristine_paper_false_admission": 1.0,
+        "pristine_paper_pixels": 15153
+      },
+      "bright_mode": {
+        "pristine_core_recall": 1.0,
+        "pristine_paper_false_admission": 0.0,
+        "pristine_paper_pixels": 15153
+      },
+      "interior_median": {
+        "pristine_core_recall": 0.0,
+        "pristine_paper_false_admission": 1.0,
+        "pristine_paper_pixels": 15153
+      },
+      "tile_median_128": {
+        "pristine_core_recall": 0.9488272921108742,
+        "pristine_paper_false_admission": 0.08315185111859037,
+        "pristine_paper_pixels": 15153
+      }
+    },
+    "note": "Exact RGB core; excludes antialiasing and may include same-colour artwork in OCR boxes. Not full truth segmentation."
+  },
+  {
+    "set": "supplemental",
+    "case": "reverse_with_margin",
+    "png_sha256": "acdfa3fdfc0163799d4073e1fa17f70e842b183503f7a1e002545845174a5a01",
+    "pdf_sha256": "69ab8e37bc142d2dbd9e5a4a664a16fcf8a0593486576df19fb79fd7c338fc8e",
+    "reference_polarity": "light",
+    "pristine_ink_core_pixels_in_accepted_boxes": 8442,
+    "reference_core_recall": 0.9996446339729922,
+    "reference_pixels": 12711,
+    "direct_pristine_core_and_paper": {
+      "corner": {
+        "pristine_core_recall": 0.0,
+        "pristine_paper_false_admission": 1.0,
+        "pristine_paper_pixels": 15093
+      },
+      "interior_mode": {
+        "pristine_core_recall": 1.0,
+        "pristine_paper_false_admission": 0.0,
+        "pristine_paper_pixels": 15093
+      },
+      "bright_mode": {
+        "pristine_core_recall": 1.0,
+        "pristine_paper_false_admission": 0.0,
+        "pristine_paper_pixels": 15093
+      },
+      "interior_median": {
+        "pristine_core_recall": 1.0,
+        "pristine_paper_false_admission": 0.0,
+        "pristine_paper_pixels": 15093
+      },
+      "tile_median_128": {
+        "pristine_core_recall": 1.0,
+        "pristine_paper_false_admission": 0.0,
+        "pristine_paper_pixels": 15093
+      }
+    },
+    "note": "Exact RGB core; excludes antialiasing and may include same-colour artwork in OCR boxes. Not full truth segmentation."
+  },
+  {
+    "set": "supplemental",
+    "case": "midtone_table",
+    "png_sha256": "98e00325c4d74f706431a49f35153d26246f347dd130c0995f80c214cef64403",
+    "pdf_sha256": "8463004f74faaccdd00e4760ef6c1d5fa6252308a8f1f94cd11dd1b401d1a68a",
+    "reference_polarity": "dark",
+    "pristine_ink_core_pixels_in_accepted_boxes": 19698,
+    "reference_core_recall": 1.0,
+    "reference_pixels": 29815,
+    "direct_pristine_core_and_paper": {
+      "corner": {
+        "pristine_core_recall": 0.9996446339729922,
+        "pristine_paper_false_admission": 1.0,
+        "pristine_paper_pixels": 36120
+      },
+      "interior_mode": {
+        "pristine_core_recall": 1.0,
+        "pristine_paper_false_admission": 0.0,
+        "pristine_paper_pixels": 36120
+      },
+      "bright_mode": {
+        "pristine_core_recall": 1.0,
+        "pristine_paper_false_admission": 0.0,
+        "pristine_paper_pixels": 36120
+      },
+      "interior_median": {
+        "pristine_core_recall": 1.0,
+        "pristine_paper_false_admission": 0.0,
+        "pristine_paper_pixels": 36120
+      },
+      "tile_median_128": {
+        "pristine_core_recall": 1.0,
+        "pristine_paper_false_admission": 0.0,
+        "pristine_paper_pixels": 36120
+      }
+    },
+    "note": "Exact RGB core; excludes antialiasing and may include same-colour artwork in OCR boxes. Not full truth segmentation."
+  },
+  {
+    "set": "positive",
+    "case": "reverse_page-44",
+    "png_sha256": "054baf30a11b23afa70fc59c4b47fcaad4193fccfd2a252221fbb8e8c5e7951e",
+    "pdf_sha256": "37a40c911a510a44d93b431494f7460736a0f40e8d0945577697d947d9bbf762",
+    "reference_polarity": "light",
+    "pristine_ink_core_pixels_in_accepted_boxes": 61515,
+    "reference_core_recall": 1.0,
+    "reference_pixels": 76512,
+    "direct_pristine_core_and_paper": {
+      "corner": {
+        "pristine_core_recall": 1.0,
+        "pristine_paper_false_admission": 0.0,
+        "pristine_paper_pixels": 48546
+      },
+      "interior_mode": {
+        "pristine_core_recall": 1.0,
+        "pristine_paper_false_admission": 0.0,
+        "pristine_paper_pixels": 48546
+      },
+      "bright_mode": {
+        "pristine_core_recall": 1.0,
+        "pristine_paper_false_admission": 0.0,
+        "pristine_paper_pixels": 48546
+      },
+      "interior_median": {
+        "pristine_core_recall": 1.0,
+        "pristine_paper_false_admission": 0.0,
+        "pristine_paper_pixels": 48546
+      },
+      "tile_median_128": {
+        "pristine_core_recall": 1.0,
+        "pristine_paper_false_admission": 0.0,
+        "pristine_paper_pixels": 48546
+      }
+    },
+    "note": "Exact RGB core; excludes antialiasing and may include same-colour artwork in OCR boxes. Not full truth segmentation."
+  },
+  {
+    "set": "positive",
+    "case": "reverse_page-72",
+    "png_sha256": "1dd1b40c8c74bd3d28b7360a002d30832b606c397889fb1751cd45fb9cf411d3",
+    "pdf_sha256": "69c41764f794d315ec0e3f8cf1553da06b38362b7478cde03003d38923c6a279",
+    "reference_polarity": "light",
+    "pristine_ink_core_pixels_in_accepted_boxes": 175437,
+    "reference_core_recall": 1.0,
+    "reference_pixels": 199247,
+    "direct_pristine_core_and_paper": {
+      "corner": {
+        "pristine_core_recall": 1.0,
+        "pristine_paper_false_admission": 0.0,
+        "pristine_paper_pixels": 135153
+      },
+      "interior_mode": {
+        "pristine_core_recall": 1.0,
+        "pristine_paper_false_admission": 0.0,
+        "pristine_paper_pixels": 135153
+      },
+      "bright_mode": {
+        "pristine_core_recall": 0.0,
+        "pristine_paper_false_admission": 1.0,
+        "pristine_paper_pixels": 135153
+      },
+      "interior_median": {
+        "pristine_core_recall": 1.0,
+        "pristine_paper_false_admission": 0.0,
+        "pristine_paper_pixels": 135153
+      },
+      "tile_median_128": {
+        "pristine_core_recall": 1.0,
+        "pristine_paper_false_admission": 0.0,
+        "pristine_paper_pixels": 135153
+      }
+    },
+    "note": "Exact RGB core; excludes antialiasing and may include same-colour artwork in OCR boxes. Not full truth segmentation."
+  },
+  {
+    "set": "positive",
+    "case": "reverse_page-108",
+    "png_sha256": "6a0a0a80f349027ff9b7d9a93d7c631127720c7ba2cf84b0ca7136d9bf7bba71",
+    "pdf_sha256": "10a7d7847d0a288880d2adc1e0230e7faaf17cc446c3de6596baf6a4eb37b5a8",
+    "reference_polarity": "light",
+    "pristine_ink_core_pixels_in_accepted_boxes": 406998,
+    "reference_core_recall": 1.0,
+    "reference_pixels": 443714,
+    "direct_pristine_core_and_paper": {
+      "corner": {
+        "pristine_core_recall": 1.0,
+        "pristine_paper_false_admission": 0.0,
+        "pristine_paper_pixels": 327546
+      },
+      "interior_mode": {
+        "pristine_core_recall": 1.0,
+        "pristine_paper_false_admission": 0.0,
+        "pristine_paper_pixels": 327546
+      },
+      "bright_mode": {
+        "pristine_core_recall": 0.0,
+        "pristine_paper_false_admission": 1.0,
+        "pristine_paper_pixels": 327546
+      },
+      "interior_median": {
+        "pristine_core_recall": 1.0,
+        "pristine_paper_false_admission": 0.0,
+        "pristine_paper_pixels": 327546
+      },
+      "tile_median_128": {
+        "pristine_core_recall": 1.0,
+        "pristine_paper_false_admission": 0.0,
+        "pristine_paper_pixels": 327546
+      }
+    },
+    "note": "Exact RGB core; excludes antialiasing and may include same-colour artwork in OCR boxes. Not full truth segmentation."
+  },
+  {
+    "set": "positive",
+    "case": "reverse_page-160",
+    "png_sha256": "1f8d54fde8ab197c8a62f5fcd7832457545986bdafb31508233f8ece58614007",
+    "pdf_sha256": "ea69671726ea2bfe901f195e4f73e5c042a9ec07150cb3a8eba044c5d52df56f",
+    "reference_polarity": "light",
+    "pristine_ink_core_pixels_in_accepted_boxes": 691713,
+    "reference_core_recall": 1.0,
+    "reference_pixels": 731035,
+    "direct_pristine_core_and_paper": {
+      "corner": {
+        "pristine_core_recall": 1.0,
+        "pristine_paper_false_admission": 0.0,
+        "pristine_paper_pixels": 574533
+      },
+      "interior_mode": {
+        "pristine_core_recall": 1.0,
+        "pristine_paper_false_admission": 0.0,
+        "pristine_paper_pixels": 574533
+      },
+      "bright_mode": {
+        "pristine_core_recall": 0.0,
+        "pristine_paper_false_admission": 1.0,
+        "pristine_paper_pixels": 574533
+      },
+      "interior_median": {
+        "pristine_core_recall": 1.0,
+        "pristine_paper_false_admission": 0.0,
+        "pristine_paper_pixels": 574533
+      },
+      "tile_median_128": {
+        "pristine_core_recall": 0.9756054895599765,
+        "pristine_paper_false_admission": 0.020825609669070357,
+        "pristine_paper_pixels": 574533
+      }
+    },
+    "note": "Exact RGB core; excludes antialiasing and may include same-colour artwork in OCR boxes. Not full truth segmentation."
+  },
+  {
+    "set": "positive",
+    "case": "reverse_panel-44",
+    "png_sha256": "ca05e6659d4302c985a0efc8ca81c2640180cbd52103c499eea3433610eb3842",
+    "pdf_sha256": "5375adec24617aba63d4fffe9189d13f51b3c37b4aecdbeb01e2b8265f494b0a",
+    "reference_polarity": "light",
+    "pristine_ink_core_pixels_in_accepted_boxes": 54680,
+    "reference_core_recall": 1.0,
+    "reference_pixels": 68012,
+    "direct_pristine_core_and_paper": {
+      "corner": {
+        "pristine_core_recall": 0.0,
+        "pristine_paper_false_admission": 1.0,
+        "pristine_paper_pixels": 43152
+      },
+      "interior_mode": {
+        "pristine_core_recall": 1.0,
+        "pristine_paper_false_admission": 0.0,
+        "pristine_paper_pixels": 43152
+      },
+      "bright_mode": {
+        "pristine_core_recall": 1.0,
+        "pristine_paper_false_admission": 0.0,
+        "pristine_paper_pixels": 43152
+      },
+      "interior_median": {
+        "pristine_core_recall": 1.0,
+        "pristine_paper_false_admission": 0.0,
+        "pristine_paper_pixels": 43152
+      },
+      "tile_median_128": {
+        "pristine_core_recall": 1.0,
+        "pristine_paper_false_admission": 0.0,
+        "pristine_paper_pixels": 43152
+      }
+    },
+    "note": "Exact RGB core; excludes antialiasing and may include same-colour artwork in OCR boxes. Not full truth segmentation."
+  },
+  {
+    "set": "positive",
+    "case": "reverse_panel-72",
+    "png_sha256": "c828c50b3533ea8febed185efd6e5b3720dba4e47bf2a731dad1282b495fc660",
+    "pdf_sha256": "a982686ba7a11a47a8d958f53c3a3d07f32c97e3548955312cc15616b767086b",
+    "reference_polarity": "light",
+    "pristine_ink_core_pixels_in_accepted_boxes": 155944,
+    "reference_core_recall": 1.0,
+    "reference_pixels": 176684,
+    "direct_pristine_core_and_paper": {
+      "corner": {
+        "pristine_core_recall": 0.0,
+        "pristine_paper_false_admission": 1.0,
+        "pristine_paper_pixels": 119736
+      },
+      "interior_mode": {
+        "pristine_core_recall": 1.0,
+        "pristine_paper_false_admission": 0.0,
+        "pristine_paper_pixels": 119736
+      },
+      "bright_mode": {
+        "pristine_core_recall": 0.0,
+        "pristine_paper_false_admission": 1.0,
+        "pristine_paper_pixels": 119736
+      },
+      "interior_median": {
+        "pristine_core_recall": 1.0,
+        "pristine_paper_false_admission": 0.0,
+        "pristine_paper_pixels": 119736
+      },
+      "tile_median_128": {
+        "pristine_core_recall": 1.0,
+        "pristine_paper_false_admission": 0.0,
+        "pristine_paper_pixels": 119736
+      }
+    },
+    "note": "Exact RGB core; excludes antialiasing and may include same-colour artwork in OCR boxes. Not full truth segmentation."
+  },
+  {
+    "set": "positive",
+    "case": "reverse_panel-108",
+    "png_sha256": "0ac0c9dcac09bcde16a6bec37333c2b7c92269bd6aa4adeab8425448beb0873e",
+    "pdf_sha256": "386ba2998aaecd0651c73206930c5dfbb28709f46bc09aa70a05e69af818fbf6",
+    "reference_polarity": "light",
+    "pristine_ink_core_pixels_in_accepted_boxes": 180888,
+    "reference_core_recall": 1.0,
+    "reference_pixels": 197206,
+    "direct_pristine_core_and_paper": {
+      "corner": {
+        "pristine_core_recall": 0.0,
+        "pristine_paper_false_admission": 1.0,
+        "pristine_paper_pixels": 145576
+      },
+      "interior_mode": {
+        "pristine_core_recall": 1.0,
+        "pristine_paper_false_admission": 0.0,
+        "pristine_paper_pixels": 145576
+      },
+      "bright_mode": {
+        "pristine_core_recall": 0.0,
+        "pristine_paper_false_admission": 1.0,
+        "pristine_paper_pixels": 145576
+      },
+      "interior_median": {
+        "pristine_core_recall": 1.0,
+        "pristine_paper_false_admission": 0.0,
+        "pristine_paper_pixels": 145576
+      },
+      "tile_median_128": {
+        "pristine_core_recall": 1.0,
+        "pristine_paper_false_admission": 0.0,
+        "pristine_paper_pixels": 145576
+      }
+    },
+    "note": "Exact RGB core; excludes antialiasing and may include same-colour artwork in OCR boxes. Not full truth segmentation."
+  },
+  {
+    "set": "positive",
+    "case": "reverse_panel-160",
+    "png_sha256": "b23ec00f745d52690c133d46383fc8b730b230f91e72757b935c36a4477eec76",
+    "pdf_sha256": "46f0b3c0cdc5b043f39100a403c9bfcf3dace376e5e5e3bdf6f5405375838031",
+    "reference_polarity": "light",
+    "pristine_ink_core_pixels_in_accepted_boxes": 248468,
+    "reference_core_recall": 1.0,
+    "reference_pixels": 263144,
+    "direct_pristine_core_and_paper": {
+      "corner": {
+        "pristine_core_recall": 0.0,
+        "pristine_paper_false_admission": 1.0,
+        "pristine_paper_pixels": 228526
+      },
+      "interior_mode": {
+        "pristine_core_recall": 1.0,
+        "pristine_paper_false_admission": 0.0,
+        "pristine_paper_pixels": 228526
+      },
+      "bright_mode": {
+        "pristine_core_recall": 0.0,
+        "pristine_paper_false_admission": 1.0,
+        "pristine_paper_pixels": 228526
+      },
+      "interior_median": {
+        "pristine_core_recall": 1.0,
+        "pristine_paper_false_admission": 0.0,
+        "pristine_paper_pixels": 228526
+      },
+      "tile_median_128": {
+        "pristine_core_recall": 0.9234428578327994,
+        "pristine_paper_false_admission": 0.09549022868295073,
+        "pristine_paper_pixels": 228526
+      }
+    },
+    "note": "Exact RGB core; excludes antialiasing and may include same-colour artwork in OCR boxes. Not full truth segmentation."
+  },
+  {
+    "set": "positive",
+    "case": "dark_table-44",
+    "png_sha256": "792a2d5c7010ca02995dcf11caeaaffcaf9b2966ffc79c620332b8b134caf65e",
+    "pdf_sha256": "90b61fdc1829a5d1951c23b0ac9ea5fec8847954611a71f77978949044e72d27",
+    "reference_polarity": "dark",
+    "pristine_ink_core_pixels_in_accepted_boxes": 54680,
+    "reference_core_recall": 1.0,
+    "reference_pixels": 68040,
+    "direct_pristine_core_and_paper": {
+      "corner": {
+        "pristine_core_recall": 0.0,
+        "pristine_paper_false_admission": 1.0,
+        "pristine_paper_pixels": 43152
+      },
+      "interior_mode": {
+        "pristine_core_recall": 1.0,
+        "pristine_paper_false_admission": 0.0,
+        "pristine_paper_pixels": 43152
+      },
+      "bright_mode": {
+        "pristine_core_recall": 1.0,
+        "pristine_paper_false_admission": 0.0,
+        "pristine_paper_pixels": 43152
+      },
+      "interior_median": {
+        "pristine_core_recall": 1.0,
+        "pristine_paper_false_admission": 0.0,
+        "pristine_paper_pixels": 43152
+      },
+      "tile_median_128": {
+        "pristine_core_recall": 1.0,
+        "pristine_paper_false_admission": 0.0,
+        "pristine_paper_pixels": 43152
+      }
+    },
+    "note": "Exact RGB core; excludes antialiasing and may include same-colour artwork in OCR boxes. Not full truth segmentation."
+  },
+  {
+    "set": "positive",
+    "case": "dark_table-72",
+    "png_sha256": "02d59594d49ec138f69e07441a04d82ee4d362ac3993cb9f85038cbb437b5fad",
+    "pdf_sha256": "134923a9ff06826ddca5d9536833b609f1594ce8a2d314ea24cf3e8721029503",
+    "reference_polarity": "dark",
+    "pristine_ink_core_pixels_in_accepted_boxes": 155944,
+    "reference_core_recall": 1.0,
+    "reference_pixels": 177152,
+    "direct_pristine_core_and_paper": {
+      "corner": {
+        "pristine_core_recall": 0.0,
+        "pristine_paper_false_admission": 1.0,
+        "pristine_paper_pixels": 120136
+      },
+      "interior_mode": {
+        "pristine_core_recall": 1.0,
+        "pristine_paper_false_admission": 0.0,
+        "pristine_paper_pixels": 120136
+      },
+      "bright_mode": {
+        "pristine_core_recall": 1.0,
+        "pristine_paper_false_admission": 0.0,
+        "pristine_paper_pixels": 120136
+      },
+      "interior_median": {
+        "pristine_core_recall": 1.0,
+        "pristine_paper_false_admission": 0.0,
+        "pristine_paper_pixels": 120136
+      },
+      "tile_median_128": {
+        "pristine_core_recall": 1.0,
+        "pristine_paper_false_admission": 0.0,
+        "pristine_paper_pixels": 120136
+      }
+    },
+    "note": "Exact RGB core; excludes antialiasing and may include same-colour artwork in OCR boxes. Not full truth segmentation."
+  },
+  {
+    "set": "positive",
+    "case": "dark_table-108",
+    "png_sha256": "f84e331fb567334dd50eb21c711a0609ea7dddc6ce6f807f59b703e7b3cd863f",
+    "pdf_sha256": "ff6137011c635f2e99c2d0f779e80882f21f2d964907c237e98fc5e1a49f1df9",
+    "reference_polarity": "dark",
+    "pristine_ink_core_pixels_in_accepted_boxes": 180888,
+    "reference_core_recall": 1.0,
+    "reference_pixels": 197176,
+    "direct_pristine_core_and_paper": {
+      "corner": {
+        "pristine_core_recall": 0.0,
+        "pristine_paper_false_admission": 1.0,
+        "pristine_paper_pixels": 145576
+      },
+      "interior_mode": {
+        "pristine_core_recall": 1.0,
+        "pristine_paper_false_admission": 0.0,
+        "pristine_paper_pixels": 145576
+      },
+      "bright_mode": {
+        "pristine_core_recall": 1.0,
+        "pristine_paper_false_admission": 0.0,
+        "pristine_paper_pixels": 145576
+      },
+      "interior_median": {
+        "pristine_core_recall": 1.0,
+        "pristine_paper_false_admission": 0.0,
+        "pristine_paper_pixels": 145576
+      },
+      "tile_median_128": {
+        "pristine_core_recall": 1.0,
+        "pristine_paper_false_admission": 0.0,
+        "pristine_paper_pixels": 145576
+      }
+    },
+    "note": "Exact RGB core; excludes antialiasing and may include same-colour artwork in OCR boxes. Not full truth segmentation."
+  },
+  {
+    "set": "positive",
+    "case": "dark_table-160",
+    "png_sha256": "44fe74bf9d5d87b4fa96e318ddb4876751589441677011b015d84bfc6a6f3b56",
+    "pdf_sha256": "f914058bceaa9f0b46ee9a5e34f496a183aef9599822bdf52b5620ec84bf5753",
+    "reference_polarity": "dark",
+    "pristine_ink_core_pixels_in_accepted_boxes": 276556,
+    "reference_core_recall": 1.0,
+    "reference_pixels": 292656,
+    "direct_pristine_core_and_paper": {
+      "corner": {
+        "pristine_core_recall": 0.0,
+        "pristine_paper_false_admission": 1.0,
+        "pristine_paper_pixels": 238430
+      },
+      "interior_mode": {
+        "pristine_core_recall": 1.0,
+        "pristine_paper_false_admission": 0.0,
+        "pristine_paper_pixels": 238430
+      },
+      "bright_mode": {
+        "pristine_core_recall": 1.0,
+        "pristine_paper_false_admission": 0.0,
+        "pristine_paper_pixels": 238430
+      },
+      "interior_median": {
+        "pristine_core_recall": 1.0,
+        "pristine_paper_false_admission": 0.0,
+        "pristine_paper_pixels": 238430
+      },
+      "tile_median_128": {
+        "pristine_core_recall": 0.9389852326472757,
+        "pristine_paper_false_admission": 0.03465167973828797,
+        "pristine_paper_pixels": 238430
+      }
+    },
+    "note": "Exact RGB core; excludes antialiasing and may include same-colour artwork in OCR boxes. Not full truth segmentation."
+  }
+]
