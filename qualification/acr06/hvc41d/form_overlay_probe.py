@@ -1,0 +1,6 @@
+"""Test extraction from a visible embedded-font glyph inside a form XObject."""
+import pathlib,pikepdf,pypdfium2 as pdfium,subprocess,json,hashlib
+R=pathlib.Path('/data/coding/scanweave/qualification/acr06');L=R/'local/hvc41d';E=R/'hvc41d';base=R/'local/hvc41b/controls/control/white/baseline.pdf'
+def extract(p):
+ d=pdfium.PdfDocument(str(p));pg=d[0];t=pg.get_textpage();s=t.get_text_range();t.close();pg.close();d.close();return s,subprocess.check_output(['pdftotext','-layout',str(p),'-']).decode()
+ref=extract(base);pdf=pikepdf.open(base);pg=pdf.pages[0];form=pdf.make_stream(b'/Artifact BMC q BT /F1 1 Tf 0 0 0 rg 20.391722 0 0 21.12 172.32 480.96 Tm <0001> Tj ET Q EMC');form.Type=pikepdf.Name.XObject;form.Subtype=pikepdf.Name.Form;form.BBox=pikepdf.Array([0,0,432,576]);form.Resources=pikepdf.Dictionary(Font=pikepdf.Dictionary(F1=pg.Resources.Font.F1));pg.Resources.XObject.FOverlay=form;pg.Contents=pikepdf.Array([pg.Contents,pdf.make_stream(b'q /FOverlay Do Q')]);f=L/'form-overlay.pdf';pdf.save(f);pdf.close();v=extract(f);out={'pdfium_equal':v[0]==ref[0],'poppler_equal':v[1]==ref[1],'pdfium_delta':v[0].replace(ref[0],''),'sha256':hashlib.sha256(f.read_bytes()).hexdigest()};(E/'form-overlay-probe.json').write_text(json.dumps(out,indent=2)+'\n');print(out)

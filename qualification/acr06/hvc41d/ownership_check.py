@@ -1,0 +1,7 @@
+"""Compare the candidate patch against the recorded p1 owned-unit source mask."""
+import json,pathlib,hashlib,numpy as np
+from PIL import Image
+from scipy.ndimage import binary_dilation
+R=pathlib.Path('/data/coding/scanweave/qualification/acr06');L=R/'local/hvc41d';E=R/'hvc41d';dump=json.loads((R/'local/hvc41/trial2/historical/p000001.json').read_text());u=next(z for z in dump['units'] if z['symbol']=='w000171s0004');patch=np.asarray(Image.open(L/'p1-footprint-243.png').convert('L'))>0;own=np.zeros_like(patch);x0,y0,x1,y1=map(int,u['bbox']);crop=np.zeros((u['crop_h'],u['crop_w']),bool);crop.flat[u['mask_indices']]=True;own[y0:y1,x0:x1]=crop;diff=patch&~own
+Image.fromarray((own*255).astype(np.uint8)).save(L/'p1-original-owned-mask-243.png');Image.fromarray((diff*255).astype(np.uint8)).save(L/'p1-outside-ownership-243.png')
+out={'symbol':u['symbol'],'provenance':'HVC-41 interior segmentation p1 unit dump, matching the HVC-41B pre-containment proposal symbol and bbox','owned_mask_pixels':int(own.sum()),'proposed_patch_pixels':int(patch.sum()),'patch_pixels_outside_recorded_owner':int(diff.sum()),'owner_pixels_missing_from_patch':int((own&~patch).sum()),'outside_one_pixel_dilation':int((patch&~binary_dilation(own,iterations=1)).sum()),'outside_mask_file':str(L/'p1-outside-ownership-243.png'),'outside_mask_sha256':hashlib.sha256((L/'p1-outside-ownership-243.png').read_bytes()).hexdigest(),'decision':'reject: the required patch extends outside the recorded owned-unit mask'};(E/'p1-ownership-check.json').write_text(json.dumps(out,indent=2)+'\n');print(out)

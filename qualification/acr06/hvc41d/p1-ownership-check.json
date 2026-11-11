@@ -1,0 +1,12 @@
+{
+  "symbol": "w000171s0004",
+  "provenance": "HVC-41 interior segmentation p1 unit dump, matching the HVC-41B pre-containment proposal symbol and bbox",
+  "owned_mask_pixels": 141,
+  "proposed_patch_pixels": 156,
+  "patch_pixels_outside_recorded_owner": 15,
+  "owner_pixels_missing_from_patch": 0,
+  "outside_one_pixel_dilation": 0,
+  "outside_mask_file": "/data/coding/scanweave/qualification/acr06/local/hvc41d/p1-outside-ownership-243.png",
+  "outside_mask_sha256": "64e7232739ec726f23219eab4916e412f75f7b156c6b480464e5d9b67bdbf55e",
+  "decision": "reject: the required patch extends outside the recorded owned-unit mask"
+}

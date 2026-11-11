@@ -1,0 +1,16 @@
+{
+  "artifact": {
+    "sha256": "ce0d051dc4be550535a8914d4c33ad354477c4ec1ce72b67b2da3e1dae192670",
+    "pdfium_equal": false,
+    "poppler_equal": false,
+    "pdfium_extra": "\r\nC",
+    "poppler_after": "Invoice   No.   4821:   CChicken $12.50\nInvoice   No.   4821:   Chicken $12.50\nInvoice   No.   4821: Chicken $12.50\nInvoice No. 4821: Chicken $12.50\n\f"
+  },
+  "empty_actualtext": {
+    "sha256": "5ad0be7e7942bfb91bfae850796a9eff2268693a9d866bc8bc2658d4ef57dd23",
+    "pdfium_equal": false,
+    "poppler_equal": true,
+    "pdfium_extra": "\r\nC",
+    "poppler_after": "Invoice   No.   4821:   Chicken $12.50\nInvoice   No.   4821:   Chicken $12.50\nInvoice   No.   4821: Chicken $12.50\nInvoice No. 4821: Chicken $12.50\n\f"
+  }
+}

@@ -1,0 +1,38 @@
+[
+  {
+    "case": "missing",
+    "returncode": 1,
+    "message": "frozen sidecar missing",
+    "stub_invoked": false
+  },
+  {
+    "case": "pdf_hash",
+    "returncode": 1,
+    "message": "source PDF hash mismatch",
+    "stub_invoked": false
+  },
+  {
+    "case": "dimension",
+    "returncode": 1,
+    "message": "raster dimensions mismatch",
+    "stub_invoked": false
+  },
+  {
+    "case": "pixel_hash",
+    "returncode": 1,
+    "message": "canonical pixel hash mismatch",
+    "stub_invoked": false
+  },
+  {
+    "case": "hocr_hash",
+    "returncode": 1,
+    "message": "hOCR hash mismatch",
+    "stub_invoked": false
+  },
+  {
+    "case": "decoded_hash",
+    "returncode": 1,
+    "message": "decoded source RGB hash mismatch",
+    "stub_invoked": false
+  }
+]
