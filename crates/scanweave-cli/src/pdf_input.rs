@@ -3,7 +3,14 @@
 use scanweave_io::{convert, document, hocr, normalize};
 use std::{path::Path, process::Command};
 
+fn ocr_forbidden(program: &str, locked: bool) -> bool {
+    locked && std::path::Path::new(program).file_name().is_some_and(|p| p.to_string_lossy().to_ascii_lowercase().contains("tesseract"))
+}
+
 fn run(program: &str, args: &[&std::ffi::OsStr]) -> Result<Vec<u8>, String> {
+    if ocr_forbidden(program, std::env::var_os("SCANWEAVE_HVC41C_LOCK_OCR").is_some()) {
+        return Err("HVC-41C OCR lock forbids invoking Tesseract".into());
+    }
     let output = Command::new(program)
         .args(args)
         .env("LC_ALL", "C")
@@ -177,7 +184,11 @@ pub fn convert_pdf(args: &[String]) -> Result<(), String> {
     let pages = pdf_page_count(&info)?;
     let work = tempfile::tempdir().map_err(|e| format!("create temporary workspace: {e}"))?;
     // Research-only replay: reuse already captured OCR; never invoke Tesseract.
-    let frozen_ocr = if let Some(path) = std::env::var_os("SCANWEAVE_HVC41B_OCR_SIDECAR") {
+    let locked = std::env::var_os("SCANWEAVE_HVC41C_LOCK_OCR").is_some();
+    let frozen_path = if locked {
+        Some(std::env::var_os("SCANWEAVE_HVC41C_OCR_SIDECAR").ok_or("HVC-41C OCR lock requires a frozen OCR sidecar")?)
+    } else { std::env::var_os("SCANWEAVE_HVC41B_OCR_SIDECAR") };
+    let frozen_ocr = if let Some(path) = frozen_path {
         Some(serde_json::from_slice::<serde_json::Value>(&std::fs::read(path).map_err(|e| e.to_string())?).map_err(|e| e.to_string())?)
     } else { None };
     let tesseract_version = if let Some(saved) = &frozen_ocr {
@@ -442,6 +453,13 @@ pub fn convert_pdf(args: &[String]) -> Result<(), String> {
 
 #[cfg(test)]
 mod tests {
+    #[test]
+    fn research_ocr_lock_blocks_process_even_for_absolute_paths() {
+        assert!(super::ocr_forbidden("tesseract", true));
+        assert!(super::ocr_forbidden("/usr/bin/Tesseract", true));
+        assert!(!super::ocr_forbidden("pdfinfo", true));
+        assert!(!super::ocr_forbidden("tesseract", false));
+    }
     #[test]
     fn page_count_keeps_first_match_and_existing_errors() {
         use super::pdf_page_count as parse;
