@@ -1,0 +1,12 @@
+# HVC-41D development freeze, before historical p1
+
+The HVC-41C word admission rule and its hash at commit `773db80` remain unchanged. For shape, use independent source masks (word-ring paper and padded symbol crop) and an actual completed-PDF rendered font mask at original page coordinates. No shift search is allowed. Require minimum directional one-pixel Euclidean tolerant overlap 0.93, actual unshifted ink-centroid distance at most 1 source pixel, rendered/source area 0.91–1.20, and luminance fill error at most 15. Reject unmatched enclosed paper components of at least 2 pixels and unmatched foreground components of at least 3 pixels (80% overlap with the other mask dilated by one eight-connected pixel). Report raw IoU as a warning; identity is independently reviewed, not inferred from a tolerance score. Any uncertain reference, shape, colour, counter, placement, or protected-neighbour footprint must be rejected. There is no historical tuning or shift search.
+
+On development controls, 101/141 source-identity-reviewed visible glyphs pass all criteria; white 20/22, financial page 1 79/117 and financial page 2 2/2. Of 118 glyphs within the unchanged colour bound, 101 pass all checks; 23 reviewed glyphs fail the colour bound. These are development data, not held-out evidence. When conditioned on a passing original, all 404 two-pixel shifts, 101 85%-scale, 101 115%-scale, 36 filled-counter, 101 added-punctuation, 7 dropped-punctuation, 101 colour-error and 10 cross-character tests reject. They are limited synthetic challenges, not a general proof. The 10 substitutions include one c/e, four n/h and five l/1 cases. Full unconditioned counts are in the summary. The white C previously rejected by IoU passes; visually review any low-IoU glyph, including the white N. The panels use separated labels and were reviewed from the contact sheets. No p1 candidate, admission or reconstruction has been run under this rule.
+
+SHA-256:
+- `validator.py`: `003632077b7badae6f8f14689f351f4485250049205f54f9b7a148c470b58f8f`
+- `calibrate_validator.py`: `52e1a12fdabc1bf9cee16ada95127b73a56e0098583ae2482e2f1b5d71eee503`
+- `validator-positives.json`: `ec06251b65c978ff51f100e13af697fe84fdb347018ada290d86e0130820db43`
+- `validator-negatives.json`: `a129946e4acf964f1249347f844961db069145c5ded4d5cca4e191a9327bc134`
+- `validator-summary.json`: `048b6aeb6e23490c3ff299f3e651279fe3e5cbb953ce260c523605ea2b49e61d`

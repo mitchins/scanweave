@@ -1,0 +1,48 @@
+{
+  "positives": {
+    "total": 141,
+    "passed": 101
+  },
+  "negative": {
+    "shift_2": {
+      "total": 564,
+      "rejected": 564,
+      "survived": []
+    },
+    "scale_0.85": {
+      "total": 141,
+      "rejected": 141,
+      "survived": []
+    },
+    "scale_1.15": {
+      "total": 141,
+      "rejected": 141,
+      "survived": []
+    },
+    "fill_error_16": {
+      "total": 141,
+      "rejected": 141,
+      "survived": []
+    },
+    "added_punctuation": {
+      "total": 141,
+      "rejected": 141,
+      "survived": []
+    },
+    "dropped_punctuation": {
+      "total": 8,
+      "rejected": 8,
+      "survived": []
+    },
+    "filled_counter": {
+      "total": 47,
+      "rejected": 47,
+      "survived": []
+    },
+    "substitution": {
+      "total": 15,
+      "rejected": 15,
+      "survived": []
+    }
+  }
+}
