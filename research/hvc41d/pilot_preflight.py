@@ -26,7 +26,7 @@ if sha(head+source.tobytes())!=meta['pixel_sha256']:sys.exit('canonical pixel ha
 if sha(source.tobytes())!=meta['native_source']['decoded_rgb_sha256']:sys.exit('decoded source RGB hash mismatch')
 expected=json.loads((R/'hvc41c/baseline-results.json').read_text());item=next(x for x in expected if x['document']=='historical') if isinstance(expected,list) else None
 # Compare against the frozen completed #39 output directly, not a new OCR run.
-if a.baseline.read_bytes()!=(R/'local/ink33r/historical.pdf').read_bytes():sys.exit('baseline differs from frozen #39 PDF')
+if item is None or sha(a.baseline.read_bytes())!=item['baseline_sha256']:sys.exit('baseline differs from frozen #39 PDF')
 freeze=(E/'RULE_FREEZE.md').read_text()
 if sha(pathlib.Path(__file__).with_name('validator.py').read_bytes()) not in freeze:sys.exit('frozen validator hash mismatch')
 if sha((R/'hvc41c/calibrate.py').read_bytes())!='8fb8d8fc9845d90eafdb8631be0b2b2d8b7317c58f097f8aa596cb03dc91b4b5':sys.exit('frozen admission code hash mismatch')

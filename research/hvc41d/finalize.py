@@ -10,6 +10,8 @@ if not args.sidecar.is_file():sys.exit('frozen sidecar missing')
 if not (L/'p1-single-run.started').exists():sys.exit('single-run marker missing')
 if sha(args.sidecar.read_bytes()) not in (L/'p1-single-run.started').read_text():sys.exit('frozen sidecar differs from preflight')
 side=json.loads(args.sidecar.read_text());input=R.parent/'pdf_packaging/groups/historical-input.pdf'
+expected=next(x['baseline_sha256'] for x in json.loads((R/'hvc41c/baseline-results.json').read_text()) if x['document']=='historical')
+if sha(baseline.read_bytes())!=expected:sys.exit('baseline differs from frozen #39 PDF')
 if sha(input.read_bytes())!=side['input_sha256']:sys.exit('input mismatch')
 if any(sha(x['hocr'].encode())!=x['hocr_sha256'] for x in side['pages']):sys.exit('hOCR mismatch')
 raw=Image.open(R/'local/ink33r/renders/historical/01-source.png').convert('RGB');w0,h0=raw.size;meta=side['pages'][0]
