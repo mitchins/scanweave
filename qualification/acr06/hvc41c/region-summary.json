@@ -1,0 +1,122 @@
+[
+  {
+    "control": "white",
+    "ocr_words": 20,
+    "admitted_words": 20,
+    "baseline_text_regions": 20,
+    "observed_distinct_span_ids": 20,
+    "word_spans_with_observed_units": 20,
+    "admitted_word_spans_with_observed_units": 20,
+    "rejected_word_spans_with_observed_units": 0,
+    "span_counts_match": true,
+    "rejection_reasons": {},
+    "note": "Planner groups contiguous units by OCR span. Count equality and IDs support this mapping; the offline admission rule was not integrated into the planner."
+  },
+  {
+    "control": "financial-01",
+    "ocr_words": 136,
+    "admitted_words": 132,
+    "baseline_text_regions": 136,
+    "observed_distinct_span_ids": 136,
+    "word_spans_with_observed_units": 136,
+    "admitted_word_spans_with_observed_units": 132,
+    "rejected_word_spans_with_observed_units": 4,
+    "span_counts_match": true,
+    "rejection_reasons": {
+      "ink_fraction": 2,
+      "low_contrast": 1,
+      "artwork_bbox_overlap": 1
+    },
+    "note": "Planner groups contiguous units by OCR span. Count equality and IDs support this mapping; the offline admission rule was not integrated into the planner."
+  },
+  {
+    "control": "financial-02",
+    "ocr_words": 129,
+    "admitted_words": 127,
+    "baseline_text_regions": 129,
+    "observed_distinct_span_ids": 129,
+    "word_spans_with_observed_units": 129,
+    "admitted_word_spans_with_observed_units": 127,
+    "rejected_word_spans_with_observed_units": 2,
+    "span_counts_match": true,
+    "rejection_reasons": {
+      "insufficient_dark_ink": 1,
+      "ink_fraction": 2
+    },
+    "note": "Planner groups contiguous units by OCR span. Count equality and IDs support this mapping; the offline admission rule was not integrated into the planner."
+  },
+  {
+    "control": "reverse-panel",
+    "ocr_words": 15,
+    "admitted_words": 0,
+    "baseline_text_regions": 20,
+    "observed_distinct_span_ids": 20,
+    "word_spans_with_observed_units": 15,
+    "admitted_word_spans_with_observed_units": 0,
+    "rejected_word_spans_with_observed_units": 15,
+    "span_counts_match": true,
+    "rejection_reasons": {
+      "insufficient_exterior_ring": 15,
+      "insufficient_dark_ink": 15,
+      "ink_fraction": 15,
+      "low_contrast": 15,
+      "artwork_bbox_overlap": 15
+    },
+    "note": "Planner groups contiguous units by OCR span. Count equality and IDs support this mapping; the offline admission rule was not integrated into the planner."
+  },
+  {
+    "control": "small-receipt",
+    "ocr_words": 9,
+    "admitted_words": 0,
+    "baseline_text_regions": 12,
+    "observed_distinct_span_ids": 12,
+    "word_spans_with_observed_units": 9,
+    "admitted_word_spans_with_observed_units": 0,
+    "rejected_word_spans_with_observed_units": 9,
+    "span_counts_match": true,
+    "rejection_reasons": {
+      "insufficient_exterior_ring": 9,
+      "insufficient_dark_ink": 9,
+      "ink_fraction": 9,
+      "low_contrast": 9,
+      "artwork_bbox_overlap": 9
+    },
+    "note": "Planner groups contiguous units by OCR span. Count equality and IDs support this mapping; the offline admission rule was not integrated into the planner."
+  },
+  {
+    "control": "black-border",
+    "ocr_words": 15,
+    "admitted_words": 0,
+    "baseline_text_regions": 20,
+    "observed_distinct_span_ids": 20,
+    "word_spans_with_observed_units": 15,
+    "admitted_word_spans_with_observed_units": 0,
+    "rejected_word_spans_with_observed_units": 15,
+    "span_counts_match": true,
+    "rejection_reasons": {
+      "insufficient_exterior_ring": 15,
+      "insufficient_dark_ink": 15,
+      "ink_fraction": 15,
+      "low_contrast": 15,
+      "artwork_bbox_overlap": 15
+    },
+    "note": "Planner groups contiguous units by OCR span. Count equality and IDs support this mapping; the offline admission rule was not integrated into the planner."
+  },
+  {
+    "control": "photograph",
+    "ocr_words": 34,
+    "admitted_words": 0,
+    "baseline_text_regions": 40,
+    "observed_distinct_span_ids": 40,
+    "word_spans_with_observed_units": 32,
+    "admitted_word_spans_with_observed_units": 0,
+    "rejected_word_spans_with_observed_units": 32,
+    "span_counts_match": true,
+    "rejection_reasons": {
+      "ink_fraction": 2,
+      "low_contrast": 32,
+      "artwork_bbox_overlap": 4
+    },
+    "note": "Planner groups contiguous units by OCR span. Count equality and IDs support this mapping; the offline admission rule was not integrated into the planner."
+  }
+]

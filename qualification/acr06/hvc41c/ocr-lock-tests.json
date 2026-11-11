@@ -1,0 +1,44 @@
+[
+  {
+    "case": "missing",
+    "exit": 1,
+    "pass": true,
+    "output_exists": false,
+    "stderr_tail": "HVC-41C: missing frozen OCR sidecar\n"
+  },
+  {
+    "case": "source_hash",
+    "exit": 1,
+    "pass": true,
+    "output_exists": false,
+    "stderr_tail": "HVC-41C: source PDF hash mismatch\n"
+  },
+  {
+    "case": "dimensions",
+    "exit": 2,
+    "pass": true,
+    "output_exists": false,
+    "stderr_tail": "scanweave: rasterizing and recognizing page 1/1\nscanweave: frozen OCR raster dimensions mismatch\nHVC-41C: Tesseract stub not invoked\n"
+  },
+  {
+    "case": "pixel_hash",
+    "exit": 2,
+    "pass": true,
+    "output_exists": false,
+    "stderr_tail": "scanweave: rasterizing and recognizing page 1/1\nscanweave: frozen OCR pixel hash mismatch\nHVC-41C: Tesseract stub not invoked\n"
+  },
+  {
+    "case": "hocr_hash",
+    "exit": 1,
+    "pass": true,
+    "output_exists": false,
+    "stderr_tail": "HVC-41C: hOCR hash mismatch\n"
+  },
+  {
+    "case": "valid",
+    "exit": 0,
+    "pass": true,
+    "output_exists": true,
+    "stderr_tail": "scanweave: rasterizing and recognizing page 1/1\nHVC-41C: Tesseract stub not invoked\n"
+  }
+]

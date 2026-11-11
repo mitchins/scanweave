@@ -1,0 +1,115 @@
+[
+  {
+    "kind": "admitted_word",
+    "control": "white",
+    "word_index": 0,
+    "ocr_hypothesis": "Invoice",
+    "visual_result": "source text agrees with OCR word in this spot-check",
+    "path": "/data/coding/scanweave/qualification/acr06/local/hvc41c/panels/admission-white-01.png",
+    "sha256": "dbe826d180e203b8c666dd7dc341dfd2e3ba567d313b679fd00eaf9b936f8513"
+  },
+  {
+    "kind": "admitted_word",
+    "control": "white",
+    "word_index": 3,
+    "ocr_hypothesis": "Chicken",
+    "visual_result": "source text agrees with OCR word in this spot-check",
+    "path": "/data/coding/scanweave/qualification/acr06/local/hvc41c/panels/admission-white-04.png",
+    "sha256": "324ead966eea81339a14b96cbc68bd37aaafdee10c4c136aa74f84b495ab0cd7"
+  },
+  {
+    "kind": "admitted_word",
+    "control": "financial-01",
+    "word_index": 0,
+    "ocr_hypothesis": "IPSWICH",
+    "visual_result": "source text agrees with OCR word in this spot-check",
+    "path": "/data/coding/scanweave/qualification/acr06/local/hvc41c/panels/admission-financial-01-01.png",
+    "sha256": "c6da2d1fc386c2fd4f3ac4e3423411822b609b55642cd9dd1a389f543feede6c"
+  },
+  {
+    "kind": "admitted_word",
+    "control": "financial-01",
+    "word_index": 1,
+    "ocr_hypothesis": "TOWN",
+    "visual_result": "source text agrees with OCR word in this spot-check",
+    "path": "/data/coding/scanweave/qualification/acr06/local/hvc41c/panels/admission-financial-01-02.png",
+    "sha256": "842d180d3430da900f3dacdd19d77d319a64755aff1b7bdb364ab531b0e1300b"
+  },
+  {
+    "kind": "admitted_word",
+    "control": "financial-02",
+    "word_index": 0,
+    "ocr_hypothesis": "IPSWICH",
+    "visual_result": "source text agrees with OCR word in this spot-check",
+    "path": "/data/coding/scanweave/qualification/acr06/local/hvc41c/panels/admission-financial-02-01.png",
+    "sha256": "98de8b60d57099ba5eea898985ecb3afc397406c640f159fa4d9e043b9c24d74"
+  },
+  {
+    "kind": "admitted_word",
+    "control": "financial-02",
+    "word_index": 1,
+    "ocr_hypothesis": "TOWN",
+    "visual_result": "source text agrees with OCR word in this spot-check",
+    "path": "/data/coding/scanweave/qualification/acr06/local/hvc41c/panels/admission-financial-02-02.png",
+    "sha256": "90e4a932261089f077bec120b2d6579fd7f9198e52115ef744be243a8aa941f3"
+  },
+  {
+    "kind": "completed_font_glyph",
+    "control": "white",
+    "word_index": 3,
+    "ocr_hypothesis": "C",
+    "visual_result": "source and existing rendered font depict the same recognizable character; shape, registration and stroke weight can differ",
+    "iou": 0.754874651810585,
+    "path": "/data/coding/scanweave/qualification/acr06/local/hvc41c/panels/white-0003-00.png",
+    "sha256": "989834b552c25c0a6b834800e436e105fe45c42c728bc0b4fac62852ce1af1e3"
+  },
+  {
+    "kind": "completed_font_glyph",
+    "control": "white",
+    "word_index": 12,
+    "ocr_hypothesis": "4",
+    "visual_result": "source and existing rendered font depict the same recognizable character; shape, registration and stroke weight can differ",
+    "iou": 0.9603399433427762,
+    "path": "/data/coding/scanweave/qualification/acr06/local/hvc41c/panels/white-0012-00.png",
+    "sha256": "789b4f1db11aa9fced11ebf76e30b942a2e2bb8324e23ea3ab5a4a89892bda1d"
+  },
+  {
+    "kind": "completed_font_glyph",
+    "control": "white",
+    "word_index": 16,
+    "ocr_hypothesis": "N",
+    "visual_result": "source and existing rendered font depict the same recognizable character; shape, registration and stroke weight can differ",
+    "iou": 0.7593688362919132,
+    "path": "/data/coding/scanweave/qualification/acr06/local/hvc41c/panels/white-0016-00.png",
+    "sha256": "0af722d4f686a697c2a5304e949d88ae0c6bcbd642abc1ff562d0cf6d8468b73"
+  },
+  {
+    "kind": "completed_font_glyph",
+    "control": "financial-01",
+    "word_index": 9,
+    "ocr_hypothesis": "B",
+    "visual_result": "source and existing rendered font depict the same recognizable character; shape, registration and stroke weight can differ",
+    "iou": 0.8117001828153565,
+    "path": "/data/coding/scanweave/qualification/acr06/local/hvc41c/panels/financial-01-0009-00.png",
+    "sha256": "67fdaf1685351223bd67b0b5530288a23af1c4cd151880fca4bdc0562c5d73aa"
+  },
+  {
+    "kind": "completed_font_glyph",
+    "control": "financial-02",
+    "word_index": 0,
+    "ocr_hypothesis": "I",
+    "visual_result": "source and existing rendered font depict the same recognizable character; shape, registration and stroke weight can differ",
+    "iou": 0.7450199203187251,
+    "path": "/data/coding/scanweave/qualification/acr06/local/hvc41c/panels/financial-02-0000-00.png",
+    "sha256": "854f507022e2b5ff4c03dd54faa2c4f7cdb846b73c1860c417c415eb8418a989"
+  },
+  {
+    "kind": "rejected_word",
+    "control": "financial-01",
+    "word_index": 80,
+    "ocr_hypothesis": "TREASURER",
+    "visual_result": "source visibly reads TREASURER; false rejection from artwork bbox overlap",
+    "path": "/data/coding/scanweave/qualification/acr06/local/hvc41c/panels/rejected-financial-01-0080.png",
+    "sha256": "d15ee2e8b936afbb5e704cf8a823b3e3e821089bd158dd9c34f8f67e5ef6abc8"
+  }
+]
