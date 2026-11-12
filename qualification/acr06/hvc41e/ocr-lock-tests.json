@@ -1,0 +1,38 @@
+[
+  {
+    "case": "missing",
+    "exit": 1,
+    "output": "frozen OCR sidecar required",
+    "ocr_stub_invoked": false
+  },
+  {
+    "case": "pdf_hash",
+    "exit": 1,
+    "output": "frozen input or baseline hash mismatch",
+    "ocr_stub_invoked": false
+  },
+  {
+    "case": "dimensions",
+    "exit": 1,
+    "output": "raster dimensions mismatch",
+    "ocr_stub_invoked": false
+  },
+  {
+    "case": "pixel_hash",
+    "exit": 1,
+    "output": "raster pixel hash mismatch",
+    "ocr_stub_invoked": false
+  },
+  {
+    "case": "decoded_hash",
+    "exit": 1,
+    "output": "decoded source hash mismatch",
+    "ocr_stub_invoked": false
+  },
+  {
+    "case": "hocr_hash",
+    "exit": 1,
+    "output": "frozen hOCR mismatch",
+    "ocr_stub_invoked": false
+  }
+]

@@ -1,0 +1,24 @@
+{
+  "glyphs": 54,
+  "decisions_pending": 54,
+  "patch_outside_owner_sum": 0,
+  "foreign_ink_pixels_sum": 0,
+  "glyphs_with_ghost_flag": 53,
+  "glyphs_with_under_replacement_flag": 36,
+  "glyphs_with_missing_ring": 0,
+  "glyphs_with_renderer_outside_envelope": 20,
+  "renderer_outside_owned_pixel_sum": {
+    "pdfium": 1576,
+    "poppler": 4597,
+    "mupdf": 3510
+  },
+  "renderer_outside_two_pixel_envelope_sum": {
+    "pdfium": 3,
+    "poppler": 72,
+    "mupdf": 3
+  },
+  "reference_ink_pixels_total": 208768,
+  "pre_review_font_overlap_unique_pixels": 10285,
+  "owner_prior_ceiling_pixels": 9930,
+  "caveat": "Diagnostic font-mask/reference intersection is not verified text-ink coverage; it differs from the owner\u2019s earlier 9,930-pixel ceiling for reasons not yet established. Do not treat it as an expanded coverage target."
+}
