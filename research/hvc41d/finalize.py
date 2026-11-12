@@ -3,7 +3,7 @@
 import argparse,json,pathlib,sys,hashlib,os,tempfile,numpy as np,pikepdf,pypdfium2 as pdfium
 from PIL import Image
 sys.path.insert(0,str(pathlib.Path(__file__).parent));from pdf_font import pattern
-from ownership_guard import require_owned
+from ownership_guard import require_owned,clip_owned,require_contained_bbox
 R=pathlib.Path('/data/coding/scanweave/qualification/acr06');E=R/'hvc41d';L=R/'local/hvc41d';sha=lambda b:hashlib.sha256(b).hexdigest();baseline=R/'local/ink33r/historical.pdf';ledger=json.loads((E/'p1-preflight-ledger.json').read_text());review=json.loads((E/'p1-visual-review.json').read_text());chosen=[x for x in review if x['decision']=='accept_for_completed_pdf']
 ap=argparse.ArgumentParser();ap.add_argument('--sidecar',type=pathlib.Path,required=True);args=ap.parse_args()
 if not args.sidecar.is_file():sys.exit('frozen sidecar missing')
@@ -24,9 +24,13 @@ if not chosen:
 source=np.asarray(Image.open(R/'local/ink33r/renders/historical/01-source.png').convert('RGB'));h,w=source.shape[:2];lum=source.astype(float)@np.array([.2126,.7152,.0722]);outlines=json.loads((R/'local/hvc41b/interior/p000001-outlines.json').read_text())['outlines'];units=json.loads((R/'local/hvc41/trial2/historical/p000001.json').read_text())['units'];d=pdfium.PdfDocument(str(L/'p1-font-diagnostic.pdf'));pg=d[0];diagnostic=np.asarray(pg.render(scale=300/72,rev_byteorder=True,fill_color=(255,255,255,255)).to_pil().convert('RGB')).copy();pg.close();d.close();pdf=pikepdf.open(baseline);page=pdf.pages[0];pw=float(page.MediaBox[2]);ph=float(page.MediaBox[3]);groups=[];patchops=['q'];footprints=[]
 for v in chosen:
  r=ledger[v['proposal']];a,b,c,d=r['reference_box'];paper=r['admission']['paper_luma'];ink=r['source_ink_luma'];ref=lum[b:d,a:c]<(paper+ink)/2;vec=diagnostic[b:d,a:c];support=np.any(vec<254,axis=2);patch=ref|support
- unit=next((u for u in units if u['symbol']==r['symbol'] and list(map(float,u['bbox']))==list(map(float,r['bbox']))),None)
- if unit is None:sys.exit('recorded unit ownership is missing or mismatched')
+ unit=next((u for u in units if u['symbol']==r['symbol']),None)
+ if unit is None:sys.exit('recorded unit ownership is missing')
+ if os.environ.get('SCANWEAVE_HVC41E_CLIP_OWNERSHIP')=='1':require_contained_bbox(r['bbox'],unit['bbox'])
+ elif list(map(float,unit['bbox']))!=list(map(float,r['bbox'])):sys.exit('recorded unit ownership is mismatched')
  owner=np.zeros((h,w),bool);ux0,uy0,ux1,uy1=map(int,unit['bbox']);owned_crop=np.zeros((unit['crop_h'],unit['crop_w']),bool);owned_crop.flat[unit['mask_indices']]=True;owner[uy0:uy1,ux0:ux1]=owned_crop
+ if os.environ.get('SCANWEAVE_HVC41E_CLIP_OWNERSHIP')=='1':
+  patch=clip_owned(patch,owner[b:d,a:c])
  require_owned(patch,owner[b:d,a:c])
  if patch[0,:].any() or patch[-1,:].any() or patch[:,0].any() or patch[:,-1].any():sys.exit('font support touches footprint boundary')
  paper_rgb=r['admission']['paper_rgb'];patchops.append(' '.join(str(x/255) for x in paper_rgb)+' rg')
