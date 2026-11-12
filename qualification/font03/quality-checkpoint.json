@@ -1,0 +1,57 @@
+{
+  "revision": "1878b96c88507f5ca4c454155ef04e3e8737557f",
+  "run": "https://github.com/mitchins/scanweave/actions/runs/39902698234",
+  "status": "ERROR",
+  "conditions": [
+    {
+      "status": "OK",
+      "metricKey": "new_reliability_rating",
+      "comparator": "GT",
+      "periodIndex": 1,
+      "errorThreshold": "1",
+      "actualValue": "1"
+    },
+    {
+      "status": "ERROR",
+      "metricKey": "new_security_rating",
+      "comparator": "GT",
+      "periodIndex": 1,
+      "errorThreshold": "1",
+      "actualValue": "5"
+    },
+    {
+      "status": "OK",
+      "metricKey": "new_maintainability_rating",
+      "comparator": "GT",
+      "periodIndex": 1,
+      "errorThreshold": "1",
+      "actualValue": "1"
+    },
+    {
+      "status": "ERROR",
+      "metricKey": "new_coverage",
+      "comparator": "LT",
+      "periodIndex": 1,
+      "errorThreshold": "80",
+      "actualValue": "14.2"
+    },
+    {
+      "status": "ERROR",
+      "metricKey": "new_duplicated_lines_density",
+      "comparator": "GT",
+      "periodIndex": 1,
+      "errorThreshold": "3",
+      "actualValue": "11.7"
+    },
+    {
+      "status": "OK",
+      "metricKey": "new_security_hotspots_reviewed",
+      "comparator": "LT",
+      "periodIndex": 1,
+      "errorThreshold": "100",
+      "actualValue": "100.0"
+    }
+  ],
+  "open_findings": 95,
+  "note": "Research branch only. No exclusions, threshold changes or finding dispositions applied. Later-head checks are authoritative. This gate failure prevents merging the combined infrastructure/evidence PR."
+}
