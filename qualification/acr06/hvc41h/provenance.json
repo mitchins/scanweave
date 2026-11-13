@@ -1,0 +1,33 @@
+{
+  "source_png_sha256_before_after": "796661b65b887f6d9e5226258d8a8007b5b2439708164887abe926f041698b9f",
+  "control_matches_embedded_stream": true,
+  "decoder": "Pillow 13.0.0 JPEG 6.2",
+  "files": {
+    "original-39": {
+      "bytes": 451336,
+      "sha256": "4f5734599b697f9bf6f43522a3e005d08d60b1908cdb03e8428d309af95453a3"
+    },
+    "control": {
+      "bytes": 451336,
+      "sha256": "4f5734599b697f9bf6f43522a3e005d08d60b1908cdb03e8428d309af95453a3"
+    },
+    "b-pre": {
+      "bytes": 448450,
+      "sha256": "6369e7abd5ce91fdeade4881d67ef554a72023ba54de645809c703d609ec1c81"
+    },
+    "b-native": {
+      "bytes": 451757,
+      "sha256": "a0d61093a722da67f2b9bbb8f73214f64b47b8da6c96b463a19eb4198152fd7f"
+    }
+  },
+  "source_dimensions": [
+    1738,
+    2355
+  ],
+  "jpeg_dimensions": [
+    1158,
+    1569
+  ],
+  "encoder": "#39 jpeg-encoder 0.7.1 Q85 progressive 4:2:0 optimized Huffman, image crate Lanczos3",
+  "native_variant_input": "unencoded source-derived Lanczos3 samples, never decoded #39 JPEG"
+}
