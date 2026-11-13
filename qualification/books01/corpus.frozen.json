@@ -1,0 +1,3829 @@
+{
+  "schema": "books01-corpus-frozen/1",
+  "status": "selection frozen; see PHASE0.md for limitations",
+  "proposed_sha256": "987ec04c3479a12de45034b49013823863e4811c46e082c0b340c074d77aadbc",
+  "book_disjoint_assertion": {
+    "dev_works": 15,
+    "holdout_works": 23,
+    "intersection": []
+  },
+  "pilot_6": [
+    "quiver/aventinus_grammatica_1515_0008",
+    "quiver/luther_babstum_1526_0011",
+    "quiver/arnold_ketzerhistorie01_1699_0114",
+    "quiver/benner_herrnhuterey04_1748_0013",
+    "finebooks/conchologiaiconi05reev/8967333",
+    "finebooks/trudyrusskagoent161881russ/12342014"
+  ],
+  "deviations": [],
+  "pages": [
+    {
+      "id": "quiver/nn_besuch_1780_00001",
+      "source": "ocr-d-quiver",
+      "repo": "tboenig/18_frak_complex",
+      "work": "nn_besuch_1780",
+      "page": "nn_besuch_1780_00001",
+      "split": "holdout",
+      "image_px": [
+        2000,
+        2271
+      ],
+      "gt_lines": 10,
+      "gt_chars": 313,
+      "regions": {
+        "GraphicRegion": 2,
+        "TextRegion": 2,
+        "SeparatorRegion": 1
+      },
+      "text_types": {
+        "heading": 1,
+        "paragraph": 1
+      },
+      "tags": [],
+      "pilot_6": false,
+      "source_lock_reference": "sealed_holdout/quiver/nn_besuch_1780_00001"
+    },
+    {
+      "id": "quiver/nn_besuch_1780_00002",
+      "source": "ocr-d-quiver",
+      "repo": "tboenig/18_frak_complex",
+      "work": "nn_besuch_1780",
+      "page": "nn_besuch_1780_00002",
+      "split": "holdout",
+      "image_px": [
+        2000,
+        2271
+      ],
+      "gt_lines": 26,
+      "gt_chars": 896,
+      "regions": {
+        "TextRegion": 1
+      },
+      "text_types": {
+        "paragraph": 1
+      },
+      "tags": [],
+      "pilot_6": false,
+      "source_lock_reference": "sealed_holdout/quiver/nn_besuch_1780_00002"
+    },
+    {
+      "id": "quiver/nn_besuch_1780_00003",
+      "source": "ocr-d-quiver",
+      "repo": "tboenig/18_frak_complex",
+      "work": "nn_besuch_1780",
+      "page": "nn_besuch_1780_00003",
+      "split": "holdout",
+      "image_px": [
+        2000,
+        2271
+      ],
+      "gt_lines": 26,
+      "gt_chars": 914,
+      "regions": {
+        "TextRegion": 1
+      },
+      "text_types": {
+        "paragraph": 1
+      },
+      "tags": [],
+      "pilot_6": false,
+      "source_lock_reference": "sealed_holdout/quiver/nn_besuch_1780_00003"
+    },
+    {
+      "id": "quiver/nn_besuch_1780_00004",
+      "source": "ocr-d-quiver",
+      "repo": "tboenig/18_frak_complex",
+      "work": "nn_besuch_1780",
+      "page": "nn_besuch_1780_00004",
+      "split": "holdout",
+      "image_px": [
+        2000,
+        2271
+      ],
+      "gt_lines": 14,
+      "gt_chars": 491,
+      "regions": {
+        "TextRegion": 1,
+        "GraphicRegion": 1
+      },
+      "text_types": {
+        "paragraph": 1
+      },
+      "tags": [],
+      "pilot_6": false,
+      "source_lock_reference": "sealed_holdout/quiver/nn_besuch_1780_00004"
+    },
+    {
+      "id": "quiver/estor_rechtsgelehrsamkeit02_1758_0007",
+      "source": "ocr-d-quiver",
+      "repo": "tboenig/18_frak_complex",
+      "work": "estor_rechtsgelehrsamkeit02_1758",
+      "page": "estor_rechtsgelehrsamkeit02_1758_0007",
+      "split": "dev",
+      "image_px": [
+        1489,
+        2526
+      ],
+      "gt_lines": 20,
+      "gt_chars": 720,
+      "regions": {
+        "GraphicRegion": 1,
+        "TextRegion": 7,
+        "SeparatorRegion": 2
+      },
+      "text_types": {
+        "heading": 1,
+        "paragraph": 3,
+        "drop-capital": 1,
+        "signature-mark": 1,
+        "catch-word": 1
+      },
+      "tags": [
+        "fraktur",
+        "headpiece-ornament",
+        "ornamental-initial",
+        "show-through"
+      ],
+      "pilot_6": false,
+      "source_lock_reference": "pages/quiver/estor_rechtsgelehrsamkeit02_1758_0007",
+      "language": "deu_latf"
+    },
+    {
+      "id": "quiver/estor_rechtsgelehrsamkeit02_1758_0117",
+      "source": "ocr-d-quiver",
+      "repo": "tboenig/18_frak_complex",
+      "work": "estor_rechtsgelehrsamkeit02_1758",
+      "page": "estor_rechtsgelehrsamkeit02_1758_0117",
+      "split": "reserve-dev-work",
+      "image_px": [
+        1502,
+        2525
+      ],
+      "gt_lines": 48,
+      "gt_chars": 1742,
+      "regions": {
+        "TextRegion": 11
+      },
+      "text_types": {
+        "header": 1,
+        "page-number": 1,
+        "paragraph": 3,
+        "heading": 2,
+        "marginalia": 2,
+        "signature-mark": 1,
+        "catch-word": 1
+      },
+      "tags": [],
+      "pilot_6": false,
+      "source_lock_reference": null
+    },
+    {
+      "id": "quiver/estor_rechtsgelehrsamkeit02_1758_0119",
+      "source": "ocr-d-quiver",
+      "repo": "tboenig/18_frak_complex",
+      "work": "estor_rechtsgelehrsamkeit02_1758",
+      "page": "estor_rechtsgelehrsamkeit02_1758_0119",
+      "split": "reserve-dev-work",
+      "image_px": [
+        1502,
+        2525
+      ],
+      "gt_lines": 44,
+      "gt_chars": 1749,
+      "regions": {
+        "TextRegion": 8
+      },
+      "text_types": {
+        "header": 1,
+        "page-number": 1,
+        "paragraph": 2,
+        "heading": 1,
+        "signature-mark": 1,
+        "catch-word": 1,
+        "marginalia": 1
+      },
+      "tags": [],
+      "pilot_6": false,
+      "source_lock_reference": null
+    },
+    {
+      "id": "quiver/estor_rechtsgelehrsamkeit02_1758_0819",
+      "source": "ocr-d-quiver",
+      "repo": "tboenig/18_frak_complex",
+      "work": "estor_rechtsgelehrsamkeit02_1758",
+      "page": "estor_rechtsgelehrsamkeit02_1758_0819",
+      "split": "dev",
+      "image_px": [
+        1461,
+        2525
+      ],
+      "gt_lines": 41,
+      "gt_chars": 1182,
+      "regions": {
+        "TextRegion": 18,
+        "SeparatorRegion": 1
+      },
+      "text_types": {
+        "header": 1,
+        "page-number": 1,
+        "paragraph": 5,
+        "heading": 5,
+        "marginalia": 4,
+        "signature-mark": 1,
+        "catch-word": 1
+      },
+      "tags": [
+        "fraktur",
+        "marginalia",
+        "footnotes"
+      ],
+      "pilot_6": false,
+      "source_lock_reference": "pages/quiver/estor_rechtsgelehrsamkeit02_1758_0819",
+      "language": "deu_latf"
+    },
+    {
+      "id": "quiver/buerger_gedichte_1778_0039",
+      "source": "ocr-d-quiver",
+      "repo": "tboenig/18_frak_complex",
+      "work": "buerger_gedichte_1778",
+      "page": "buerger_gedichte_1778_0039",
+      "split": "holdout",
+      "image_px": [
+        1440,
+        1929
+      ],
+      "gt_lines": 38,
+      "gt_chars": 911,
+      "regions": {
+        "TextRegion": 6,
+        "SeparatorRegion": 5
+      },
+      "text_types": {
+        "paragraph": 4,
+        "heading": 1,
+        "catch-word": 1
+      },
+      "tags": [],
+      "pilot_6": false,
+      "source_lock_reference": "sealed_holdout/quiver/buerger_gedichte_1778_0039"
+    },
+    {
+      "id": "quiver/buerger_gedichte_1778_0066",
+      "source": "ocr-d-quiver",
+      "repo": "tboenig/18_frak_complex",
+      "work": "buerger_gedichte_1778",
+      "page": "buerger_gedichte_1778_0066",
+      "split": "holdout",
+      "image_px": [
+        1439,
+        1929
+      ],
+      "gt_lines": 15,
+      "gt_chars": 210,
+      "regions": {
+        "TextRegion": 8,
+        "SeparatorRegion": 1
+      },
+      "text_types": {
+        "page-number": 1,
+        "heading": 2,
+        "drop-capital": 1,
+        "paragraph": 2,
+        "signature-mark": 1,
+        "catch-word": 1
+      },
+      "tags": [],
+      "pilot_6": false,
+      "source_lock_reference": "sealed_holdout/quiver/buerger_gedichte_1778_0066"
+    },
+    {
+      "id": "quiver/luz_blitz_1784_0007",
+      "source": "ocr-d-quiver",
+      "repo": "tboenig/18_frak_complex",
+      "work": "luz_blitz_1784",
+      "page": "luz_blitz_1784_0007",
+      "split": "holdout",
+      "image_px": [
+        1728,
+        2646
+      ],
+      "gt_lines": 15,
+      "gt_chars": 255,
+      "regions": {
+        "TextRegion": 3,
+        "SeparatorRegion": 2,
+        "GraphicRegion": 1
+      },
+      "text_types": {
+        "paragraph": 3
+      },
+      "tags": [],
+      "pilot_6": false,
+      "source_lock_reference": "sealed_holdout/quiver/luz_blitz_1784_0007"
+    },
+    {
+      "id": "quiver/luz_blitz_1784_0009",
+      "source": "ocr-d-quiver",
+      "repo": "tboenig/18_frak_complex",
+      "work": "luz_blitz_1784",
+      "page": "luz_blitz_1784_0009",
+      "split": "holdout",
+      "image_px": [
+        1728,
+        2647
+      ],
+      "gt_lines": 24,
+      "gt_chars": 829,
+      "regions": {
+        "TextRegion": 3
+      },
+      "text_types": {
+        "heading": 1,
+        "paragraph": 1,
+        "footer": 1
+      },
+      "tags": [],
+      "pilot_6": false,
+      "source_lock_reference": "sealed_holdout/quiver/luz_blitz_1784_0009"
+    },
+    {
+      "id": "quiver/luz_blitz_1784_0020",
+      "source": "ocr-d-quiver",
+      "repo": "tboenig/18_frak_complex",
+      "work": "luz_blitz_1784",
+      "page": "luz_blitz_1784_0020",
+      "split": "holdout",
+      "image_px": [
+        1728,
+        2647
+      ],
+      "gt_lines": 35,
+      "gt_chars": 1651,
+      "regions": {
+        "TextRegion": 7,
+        "SeparatorRegion": 1
+      },
+      "text_types": {
+        "page-number": 1,
+        "paragraph": 2,
+        "catch-word": 1,
+        "footnote": 3
+      },
+      "tags": [],
+      "pilot_6": false,
+      "source_lock_reference": "sealed_holdout/quiver/luz_blitz_1784_0020"
+    },
+    {
+      "id": "quiver/luz_blitz_1784_0027",
+      "source": "ocr-d-quiver",
+      "repo": "tboenig/18_frak_complex",
+      "work": "luz_blitz_1784",
+      "page": "luz_blitz_1784_0027",
+      "split": "holdout",
+      "image_px": [
+        1728,
+        2646
+      ],
+      "gt_lines": 36,
+      "gt_chars": 1725,
+      "regions": {
+        "TextRegion": 4,
+        "SeparatorRegion": 1
+      },
+      "text_types": {
+        "page-number": 1,
+        "paragraph": 2,
+        "catch-word": 1
+      },
+      "tags": [],
+      "pilot_6": false,
+      "source_lock_reference": "sealed_holdout/quiver/luz_blitz_1784_0027"
+    },
+    {
+      "id": "quiver/euler_rechenkunst01_1738_0024",
+      "source": "ocr-d-quiver",
+      "repo": "tboenig/18_frak_complex",
+      "work": "euler_rechenkunst01_1738",
+      "page": "euler_rechenkunst01_1738_0024",
+      "split": "reserve-dev-work",
+      "image_px": [
+        1296,
+        1855
+      ],
+      "gt_lines": 32,
+      "gt_chars": 1126,
+      "regions": {
+        "TextRegion": 13,
+        "SeparatorRegion": 2
+      },
+      "text_types": {
+        "page-number": 1,
+        "paragraph": 11,
+        "catch-word": 1
+      },
+      "tags": [],
+      "pilot_6": false,
+      "source_lock_reference": null
+    },
+    {
+      "id": "quiver/euler_rechenkunst01_1738_0025",
+      "source": "ocr-d-quiver",
+      "repo": "tboenig/18_frak_complex",
+      "work": "euler_rechenkunst01_1738",
+      "page": "euler_rechenkunst01_1738_0025",
+      "split": "dev",
+      "image_px": [
+        1296,
+        1855
+      ],
+      "gt_lines": 64,
+      "gt_chars": 893,
+      "regions": {
+        "TextRegion": 23,
+        "SeparatorRegion": 12
+      },
+      "text_types": {
+        "page-number": 1,
+        "paragraph": 20,
+        "signature-mark": 1,
+        "catch-word": 1
+      },
+      "tags": [
+        "fraktur",
+        "numeric-tables",
+        "book-edge",
+        "dark-border"
+      ],
+      "pilot_6": false,
+      "source_lock_reference": "pages/quiver/euler_rechenkunst01_1738_0025",
+      "language": "deu_latf"
+    },
+    {
+      "id": "quiver/euler_rechenkunst01_1738_0026",
+      "source": "ocr-d-quiver",
+      "repo": "tboenig/18_frak_complex",
+      "work": "euler_rechenkunst01_1738",
+      "page": "euler_rechenkunst01_1738_0026",
+      "split": "reserve-dev-work",
+      "image_px": [
+        1296,
+        1855
+      ],
+      "gt_lines": 44,
+      "gt_chars": 1262,
+      "regions": {
+        "TextRegion": 27,
+        "SeparatorRegion": 6
+      },
+      "text_types": {
+        "page-number": 1,
+        "paragraph": 25,
+        "catch-word": 1
+      },
+      "tags": [],
+      "pilot_6": false,
+      "source_lock_reference": null
+    },
+    {
+      "id": "quiver/euler_rechenkunst01_1738_0031",
+      "source": "ocr-d-quiver",
+      "repo": "tboenig/18_frak_complex",
+      "work": "euler_rechenkunst01_1738",
+      "page": "euler_rechenkunst01_1738_0031",
+      "split": "dev",
+      "image_px": [
+        1296,
+        1855
+      ],
+      "gt_lines": 30,
+      "gt_chars": 967,
+      "regions": {
+        "TextRegion": 7,
+        "SeparatorRegion": 8,
+        "GraphicRegion": 6
+      },
+      "text_types": {
+        "page-number": 1,
+        "paragraph": 5,
+        "catch-word": 1
+      },
+      "tags": [
+        "fraktur",
+        "numerals",
+        "symbols",
+        "book-edge",
+        "dark-border"
+      ],
+      "pilot_6": false,
+      "source_lock_reference": "pages/quiver/euler_rechenkunst01_1738_0031",
+      "language": "deu_latf"
+    },
+    {
+      "id": "quiver/euler_rechenkunst01_1738_0033",
+      "source": "ocr-d-quiver",
+      "repo": "tboenig/18_frak_complex",
+      "work": "euler_rechenkunst01_1738",
+      "page": "euler_rechenkunst01_1738_0033",
+      "split": "reserve-dev-work",
+      "image_px": [
+        1296,
+        1855
+      ],
+      "gt_lines": 35,
+      "gt_chars": 1096,
+      "regions": {
+        "TextRegion": 13,
+        "SeparatorRegion": 2,
+        "GraphicRegion": 1
+      },
+      "text_types": {
+        "page-number": 1,
+        "paragraph": 10,
+        "signature-mark": 1,
+        "catch-word": 1
+      },
+      "tags": [],
+      "pilot_6": false,
+      "source_lock_reference": null
+    },
+    {
+      "id": "quiver/euler_rechenkunst01_1738_0041",
+      "source": "ocr-d-quiver",
+      "repo": "tboenig/18_frak_complex",
+      "work": "euler_rechenkunst01_1738",
+      "page": "euler_rechenkunst01_1738_0041",
+      "split": "reserve-dev-work",
+      "image_px": [
+        1296,
+        1855
+      ],
+      "gt_lines": 29,
+      "gt_chars": 836,
+      "regions": {
+        "TextRegion": 11,
+        "SeparatorRegion": 2
+      },
+      "text_types": {
+        "page-number": 1,
+        "paragraph": 4,
+        "heading": 3,
+        "drop-capital": 1,
+        "signature-mark": 1,
+        "catch-word": 1
+      },
+      "tags": [],
+      "pilot_6": false,
+      "source_lock_reference": null
+    },
+    {
+      "id": "quiver/bernd_lebensbeschreibung_1738_0007",
+      "source": "ocr-d-quiver",
+      "repo": "tboenig/18_frak_complex",
+      "work": "bernd_lebensbeschreibung_1738",
+      "page": "bernd_lebensbeschreibung_1738_0007",
+      "split": "holdout",
+      "image_px": [
+        1285,
+        2062
+      ],
+      "gt_lines": 19,
+      "gt_chars": 481,
+      "regions": {
+        "TextRegion": 7,
+        "SeparatorRegion": 2,
+        "GraphicRegion": 1
+      },
+      "text_types": {
+        "heading": 4,
+        "paragraph": 3
+      },
+      "tags": [],
+      "pilot_6": false,
+      "source_lock_reference": "sealed_holdout/quiver/bernd_lebensbeschreibung_1738_0007"
+    },
+    {
+      "id": "quiver/bernd_lebensbeschreibung_1738_0021",
+      "source": "ocr-d-quiver",
+      "repo": "tboenig/18_frak_complex",
+      "work": "bernd_lebensbeschreibung_1738",
+      "page": "bernd_lebensbeschreibung_1738_0021",
+      "split": "holdout",
+      "image_px": [
+        1285,
+        2062
+      ],
+      "gt_lines": 21,
+      "gt_chars": 640,
+      "regions": {
+        "TextRegion": 4,
+        "SeparatorRegion": 1
+      },
+      "text_types": {
+        "header": 1,
+        "paragraph": 2,
+        "catch-word": 1
+      },
+      "tags": [],
+      "pilot_6": false,
+      "source_lock_reference": "sealed_holdout/quiver/bernd_lebensbeschreibung_1738_0021"
+    },
+    {
+      "id": "quiver/bernd_lebensbeschreibung_1738_0066",
+      "source": "ocr-d-quiver",
+      "repo": "tboenig/18_frak_complex",
+      "work": "bernd_lebensbeschreibung_1738",
+      "page": "bernd_lebensbeschreibung_1738_0066",
+      "split": "holdout",
+      "image_px": [
+        1287,
+        2063
+      ],
+      "gt_lines": 31,
+      "gt_chars": 1285,
+      "regions": {
+        "TextRegion": 4,
+        "SeparatorRegion": 1
+      },
+      "text_types": {
+        "page-number": 1,
+        "header": 1,
+        "paragraph": 1,
+        "catch-word": 1
+      },
+      "tags": [],
+      "pilot_6": false,
+      "source_lock_reference": "sealed_holdout/quiver/bernd_lebensbeschreibung_1738_0066"
+    },
+    {
+      "id": "quiver/justi_abhandlung01_1758_0026",
+      "source": "ocr-d-quiver",
+      "repo": "tboenig/18_frak_complex",
+      "work": "justi_abhandlung01_1758",
+      "page": "justi_abhandlung01_1758_0026",
+      "split": "holdout",
+      "image_px": [
+        1542,
+        2386
+      ],
+      "gt_lines": 27,
+      "gt_chars": 944,
+      "regions": {
+        "SeparatorRegion": 1,
+        "TextRegion": 19
+      },
+      "text_types": {
+        "heading": 3,
+        "paragraph": 15,
+        "catch-word": 1
+      },
+      "tags": [],
+      "pilot_6": false,
+      "source_lock_reference": "sealed_holdout/quiver/justi_abhandlung01_1758_0026"
+    },
+    {
+      "id": "quiver/justi_abhandlung01_1758_0031",
+      "source": "ocr-d-quiver",
+      "repo": "tboenig/18_frak_complex",
+      "work": "justi_abhandlung01_1758",
+      "page": "justi_abhandlung01_1758_0031",
+      "split": "holdout",
+      "image_px": [
+        1537,
+        2390
+      ],
+      "gt_lines": 31,
+      "gt_chars": 915,
+      "regions": {
+        "GraphicRegion": 1,
+        "TextRegion": 7
+      },
+      "text_types": {
+        "heading": 2,
+        "drop-capital": 1,
+        "paragraph": 1,
+        "marginalia": 1,
+        "signature-mark": 1,
+        "catch-word": 1
+      },
+      "tags": [],
+      "pilot_6": false,
+      "source_lock_reference": "sealed_holdout/quiver/justi_abhandlung01_1758_0031"
+    },
+    {
+      "id": "quiver/justi_abhandlung01_1758_0133",
+      "source": "ocr-d-quiver",
+      "repo": "tboenig/18_frak_complex",
+      "work": "justi_abhandlung01_1758",
+      "page": "justi_abhandlung01_1758_0133",
+      "split": "holdout",
+      "image_px": [
+        1533,
+        2397
+      ],
+      "gt_lines": 41,
+      "gt_chars": 1568,
+      "regions": {
+        "TextRegion": 7
+      },
+      "text_types": {
+        "header": 1,
+        "page-number": 1,
+        "paragraph": 2,
+        "marginalia": 1,
+        "signature-mark": 1,
+        "catch-word": 1
+      },
+      "tags": [],
+      "pilot_6": false,
+      "source_lock_reference": "sealed_holdout/quiver/justi_abhandlung01_1758_0133"
+    },
+    {
+      "id": "quiver/justi_abhandlung01_1758_0134",
+      "source": "ocr-d-quiver",
+      "repo": "tboenig/18_frak_complex",
+      "work": "justi_abhandlung01_1758",
+      "page": "justi_abhandlung01_1758_0134",
+      "split": "holdout",
+      "image_px": [
+        1530,
+        2382
+      ],
+      "gt_lines": 32,
+      "gt_chars": 1496,
+      "regions": {
+        "TextRegion": 4
+      },
+      "text_types": {
+        "page-number": 1,
+        "header": 1,
+        "paragraph": 1,
+        "catch-word": 1
+      },
+      "tags": [],
+      "pilot_6": false,
+      "source_lock_reference": "sealed_holdout/quiver/justi_abhandlung01_1758_0134"
+    },
+    {
+      "id": "quiver/petrarca_psalmi_1506_0010",
+      "source": "ocr-d-quiver",
+      "repo": "tboenig/16_frak_complex",
+      "work": "petrarca_psalmi_1506",
+      "page": "petrarca_psalmi_1506_0010",
+      "split": "holdout",
+      "image_px": [
+        1777,
+        2471
+      ],
+      "gt_lines": 33,
+      "gt_chars": 1641,
+      "regions": {
+        "TextRegion": 5,
+        "GraphicRegion": 3
+      },
+      "text_types": {
+        "paragraph": 3,
+        "heading": 2
+      },
+      "tags": [],
+      "pilot_6": false,
+      "source_lock_reference": "sealed_holdout/quiver/petrarca_psalmi_1506_0010"
+    },
+    {
+      "id": "quiver/petrarca_psalmi_1506_0012",
+      "source": "ocr-d-quiver",
+      "repo": "tboenig/16_frak_complex",
+      "work": "petrarca_psalmi_1506",
+      "page": "petrarca_psalmi_1506_0012",
+      "split": "holdout",
+      "image_px": [
+        1777,
+        2471
+      ],
+      "gt_lines": 25,
+      "gt_chars": 1045,
+      "regions": {
+        "TextRegion": 7
+      },
+      "text_types": {
+        "heading": 1,
+        "paragraph": 6
+      },
+      "tags": [],
+      "pilot_6": false,
+      "source_lock_reference": "sealed_holdout/quiver/petrarca_psalmi_1506_0012"
+    },
+    {
+      "id": "quiver/petrarca_psalmi_1506_0016",
+      "source": "ocr-d-quiver",
+      "repo": "tboenig/16_frak_complex",
+      "work": "petrarca_psalmi_1506",
+      "page": "petrarca_psalmi_1506_0016",
+      "split": "holdout",
+      "image_px": [
+        1777,
+        2471
+      ],
+      "gt_lines": 6,
+      "gt_chars": 153,
+      "regions": {
+        "TextRegion": 1,
+        "GraphicRegion": 2
+      },
+      "text_types": {
+        "paragraph": 1
+      },
+      "tags": [],
+      "pilot_6": false,
+      "source_lock_reference": "sealed_holdout/quiver/petrarca_psalmi_1506_0016"
+    },
+    {
+      "id": "quiver/nn_historia_1500_0007",
+      "source": "ocr-d-quiver",
+      "repo": "tboenig/16_frak_complex",
+      "work": "nn_historia_1500",
+      "page": "nn_historia_1500_0007",
+      "split": "holdout",
+      "image_px": [
+        1626,
+        2288
+      ],
+      "gt_lines": 5,
+      "gt_chars": 234,
+      "regions": {
+        "TextRegion": 3,
+        "GraphicRegion": 1
+      },
+      "text_types": {
+        "heading": 1,
+        "paragraph": 1,
+        "drop-capital": 1
+      },
+      "tags": [],
+      "pilot_6": false,
+      "source_lock_reference": "sealed_holdout/quiver/nn_historia_1500_0007"
+    },
+    {
+      "id": "quiver/nn_historia_1500_0009",
+      "source": "ocr-d-quiver",
+      "repo": "tboenig/16_frak_complex",
+      "work": "nn_historia_1500",
+      "page": "nn_historia_1500_0009",
+      "split": "holdout",
+      "image_px": [
+        1670,
+        2307
+      ],
+      "gt_lines": 30,
+      "gt_chars": 1248,
+      "regions": {
+        "TextRegion": 3
+      },
+      "text_types": {
+        "drop-capital": 1,
+        "paragraph": 1,
+        "signature-mark": 1
+      },
+      "tags": [],
+      "pilot_6": false,
+      "source_lock_reference": "sealed_holdout/quiver/nn_historia_1500_0009"
+    },
+    {
+      "id": "quiver/luther_babstum_1526_0010",
+      "source": "ocr-d-quiver",
+      "repo": "tboenig/16_frak_complex",
+      "work": "luther_babstum_1526",
+      "page": "luther_babstum_1526_0010",
+      "split": "dev",
+      "image_px": [
+        1736,
+        2350
+      ],
+      "gt_lines": 32,
+      "gt_chars": 1015,
+      "regions": {
+        "TextRegion": 2
+      },
+      "text_types": {
+        "heading": 1,
+        "paragraph": 1
+      },
+      "tags": [
+        "fraktur",
+        "stained-paper"
+      ],
+      "pilot_6": false,
+      "source_lock_reference": "pages/quiver/luther_babstum_1526_0010",
+      "language": "deu_latf"
+    },
+    {
+      "id": "quiver/luther_babstum_1526_0011",
+      "source": "ocr-d-quiver",
+      "repo": "tboenig/16_frak_complex",
+      "work": "luther_babstum_1526",
+      "page": "luther_babstum_1526_0011",
+      "split": "dev",
+      "image_px": [
+        1736,
+        2362
+      ],
+      "gt_lines": 19,
+      "gt_chars": 580,
+      "regions": {
+        "TextRegion": 5,
+        "GraphicRegion": 2
+      },
+      "text_types": {
+        "heading": 2,
+        "paragraph": 2,
+        "signature-mark": 1
+      },
+      "tags": [
+        "fraktur",
+        "hand-coloured-woodcuts",
+        "two-column"
+      ],
+      "pilot_6": true,
+      "source_lock_reference": "pages/quiver/luther_babstum_1526_0011",
+      "language": "deu_latf"
+    },
+    {
+      "id": "quiver/aventinus_grammatica_1515_0006",
+      "source": "ocr-d-quiver",
+      "repo": "tboenig/16_frak_complex",
+      "work": "aventinus_grammatica_1515",
+      "page": "aventinus_grammatica_1515_0006",
+      "split": "dev",
+      "image_px": [
+        1756,
+        2440
+      ],
+      "gt_lines": 26,
+      "gt_chars": 1694,
+      "regions": {
+        "TextRegion": 4,
+        "GraphicRegion": 1
+      },
+      "text_types": {
+        "heading": 2,
+        "paragraph": 2
+      },
+      "tags": [
+        "fraktur",
+        "library-stamp",
+        "dense"
+      ],
+      "pilot_6": false,
+      "source_lock_reference": "pages/quiver/aventinus_grammatica_1515_0006",
+      "language": "deu_latf"
+    },
+    {
+      "id": "quiver/aventinus_grammatica_1515_0007",
+      "source": "ocr-d-quiver",
+      "repo": "tboenig/16_frak_complex",
+      "work": "aventinus_grammatica_1515",
+      "page": "aventinus_grammatica_1515_0007",
+      "split": "dev",
+      "image_px": [
+        1756,
+        2440
+      ],
+      "gt_lines": 49,
+      "gt_chars": 763,
+      "regions": {
+        "TextRegion": 17,
+        "GraphicRegion": 9
+      },
+      "text_types": {
+        "heading": 4,
+        "paragraph": 12,
+        "signature-mark": 1
+      },
+      "tags": [
+        "fraktur",
+        "brace-tables",
+        "complex-layout"
+      ],
+      "pilot_6": false,
+      "source_lock_reference": "pages/quiver/aventinus_grammatica_1515_0007",
+      "language": "deu_latf"
+    },
+    {
+      "id": "quiver/aventinus_grammatica_1515_0008",
+      "source": "ocr-d-quiver",
+      "repo": "tboenig/16_frak_complex",
+      "work": "aventinus_grammatica_1515",
+      "page": "aventinus_grammatica_1515_0008",
+      "split": "dev",
+      "image_px": [
+        1756,
+        2440
+      ],
+      "gt_lines": 54,
+      "gt_chars": 1414,
+      "regions": {
+        "TextRegion": 8,
+        "GraphicRegion": 10
+      },
+      "text_types": {
+        "heading": 1,
+        "paragraph": 7
+      },
+      "tags": [
+        "fraktur",
+        "brace-tables",
+        "complex-layout",
+        "marginalia"
+      ],
+      "pilot_6": true,
+      "source_lock_reference": "pages/quiver/aventinus_grammatica_1515_0008",
+      "language": "deu_latf"
+    },
+    {
+      "id": "quiver/arnimb_goethe03_1835_0029",
+      "source": "ocr-d-quiver",
+      "repo": "tboenig/19_frak_simple",
+      "work": "arnimb_goethe03_1835",
+      "page": "arnimb_goethe03_1835_0029",
+      "split": "holdout",
+      "image_px": [
+        1675,
+        2286
+      ],
+      "gt_lines": 22,
+      "gt_chars": 1038,
+      "regions": {
+        "TextRegion": 5,
+        "SeparatorRegion": 1
+      },
+      "text_types": {
+        "page-number": 1,
+        "paragraph": 4
+      },
+      "tags": [],
+      "pilot_6": false,
+      "source_lock_reference": "sealed_holdout/quiver/arnimb_goethe03_1835_0029"
+    },
+    {
+      "id": "quiver/benner_herrnhuterey04_1748_0013",
+      "source": "ocr-d-quiver",
+      "repo": "tboenig/18_fontmix_complex",
+      "work": "benner_herrnhuterey04_1748",
+      "page": "benner_herrnhuterey04_1748_0013",
+      "split": "dev",
+      "image_px": [
+        1553,
+        2607
+      ],
+      "gt_lines": 44,
+      "gt_chars": 866,
+      "regions": {
+        "TextRegion": 16,
+        "SeparatorRegion": 3
+      },
+      "text_types": {
+        "page-number": 1,
+        "heading": 6,
+        "paragraph": 6,
+        "drop-capital": 1,
+        "signature-mark": 1,
+        "catch-word": 1
+      },
+      "tags": [
+        "fontmix",
+        "title-page",
+        "two-column",
+        "drop-capital",
+        "dark-border"
+      ],
+      "pilot_6": true,
+      "source_lock_reference": "pages/quiver/benner_herrnhuterey04_1748_0013",
+      "language": "deu_latf+lat"
+    },
+    {
+      "id": "quiver/benner_herrnhuterey04_1748_0014",
+      "source": "ocr-d-quiver",
+      "repo": "tboenig/18_fontmix_complex",
+      "work": "benner_herrnhuterey04_1748",
+      "page": "benner_herrnhuterey04_1748_0014",
+      "split": "dev",
+      "image_px": [
+        1553,
+        2607
+      ],
+      "gt_lines": 33,
+      "gt_chars": 1240,
+      "regions": {
+        "TextRegion": 6,
+        "SeparatorRegion": 1
+      },
+      "text_types": {
+        "page-number": 1,
+        "header": 1,
+        "paragraph": 1,
+        "catch-word": 2,
+        "footnote": 1
+      },
+      "tags": [
+        "fontmix",
+        "footnotes",
+        "dark-border"
+      ],
+      "pilot_6": false,
+      "source_lock_reference": "pages/quiver/benner_herrnhuterey04_1748_0014",
+      "language": "deu_latf+lat"
+    },
+    {
+      "id": "quiver/benner_herrnhuterey04_1748_0015",
+      "source": "ocr-d-quiver",
+      "repo": "tboenig/18_fontmix_complex",
+      "work": "benner_herrnhuterey04_1748",
+      "page": "benner_herrnhuterey04_1748_0015",
+      "split": "reserve-dev-work",
+      "image_px": [
+        1553,
+        2607
+      ],
+      "gt_lines": 34,
+      "gt_chars": 1168,
+      "regions": {
+        "TextRegion": 8,
+        "SeparatorRegion": 1
+      },
+      "text_types": {
+        "header": 1,
+        "page-number": 1,
+        "paragraph": 1,
+        "catch-word": 2,
+        "footnote-continued": 2,
+        "signature-mark": 1
+      },
+      "tags": [],
+      "pilot_6": false,
+      "source_lock_reference": null
+    },
+    {
+      "id": "quiver/benner_herrnhuterey04_1748_0016",
+      "source": "ocr-d-quiver",
+      "repo": "tboenig/18_fontmix_complex",
+      "work": "benner_herrnhuterey04_1748",
+      "page": "benner_herrnhuterey04_1748_0016",
+      "split": "reserve-dev-work",
+      "image_px": [
+        1553,
+        2607
+      ],
+      "gt_lines": 33,
+      "gt_chars": 1200,
+      "regions": {
+        "TextRegion": 7,
+        "SeparatorRegion": 2
+      },
+      "text_types": {
+        "page-number": 1,
+        "header": 1,
+        "paragraph": 1,
+        "catch-word": 2,
+        "footnote-continued": 1,
+        "footnote": 1
+      },
+      "tags": [],
+      "pilot_6": false,
+      "source_lock_reference": null
+    },
+    {
+      "id": "quiver/lessing_menschengeschlecht_1780_0084",
+      "source": "ocr-d-quiver",
+      "repo": "tboenig/18_frak_simple",
+      "work": "lessing_menschengeschlecht_1780",
+      "page": "lessing_menschengeschlecht_1780_0084",
+      "split": "holdout",
+      "image_px": [
+        1267,
+        2155
+      ],
+      "gt_lines": 15,
+      "gt_chars": 390,
+      "regions": {
+        "TextRegion": 8,
+        "SeparatorRegion": 1
+      },
+      "text_types": {
+        "page-number": 1,
+        "paragraph": 3,
+        "heading": 2,
+        "signature-mark": 1,
+        "catch-word": 1
+      },
+      "tags": [],
+      "pilot_6": false,
+      "source_lock_reference": "sealed_holdout/quiver/lessing_menschengeschlecht_1780_0084"
+    },
+    {
+      "id": "quiver/alberti_pictura_1540_0007",
+      "source": "ocr-d-quiver",
+      "repo": "tboenig/16_ant_complex",
+      "work": "alberti_pictura_1540",
+      "page": "alberti_pictura_1540_0007",
+      "split": "reserve-dev-work",
+      "image_px": [
+        1116,
+        1835
+      ],
+      "gt_lines": 28,
+      "gt_chars": 748,
+      "regions": {
+        "TextRegion": 6
+      },
+      "text_types": {
+        "page-number": 1,
+        "heading": 1,
+        "drop-capital": 1,
+        "paragraph": 1,
+        "signature-mark": 1,
+        "catch-word": 1
+      },
+      "tags": [],
+      "pilot_6": false,
+      "source_lock_reference": null
+    },
+    {
+      "id": "quiver/alberti_pictura_1540_0008",
+      "source": "ocr-d-quiver",
+      "repo": "tboenig/16_ant_complex",
+      "work": "alberti_pictura_1540",
+      "page": "alberti_pictura_1540_0008",
+      "split": "dev",
+      "image_px": [
+        1118,
+        1837
+      ],
+      "gt_lines": 31,
+      "gt_chars": 961,
+      "regions": {
+        "TextRegion": 7,
+        "NoiseRegion": 1
+      },
+      "text_types": {
+        "page-number": 1,
+        "header": 1,
+        "paragraph": 1,
+        "marginalia": 3,
+        "catch-word": 1
+      },
+      "tags": [
+        "antiqua",
+        "latin",
+        "handwritten-marginalia",
+        "printed-marginalia",
+        "stained-paper"
+      ],
+      "pilot_6": false,
+      "source_lock_reference": "pages/quiver/alberti_pictura_1540_0008",
+      "language": "lat"
+    },
+    {
+      "id": "quiver/alberti_pictura_1540_0009",
+      "source": "ocr-d-quiver",
+      "repo": "tboenig/16_ant_complex",
+      "work": "alberti_pictura_1540",
+      "page": "alberti_pictura_1540_0009",
+      "split": "reserve-dev-work",
+      "image_px": [
+        1124,
+        1833
+      ],
+      "gt_lines": 35,
+      "gt_chars": 948,
+      "regions": {
+        "TextRegion": 9
+      },
+      "text_types": {
+        "header": 1,
+        "page-number": 1,
+        "paragraph": 2,
+        "marginalia": 3,
+        "signature-mark": 1,
+        "catch-word": 1
+      },
+      "tags": [],
+      "pilot_6": false,
+      "source_lock_reference": null
+    },
+    {
+      "id": "quiver/huebner_handbuch_1696_0005",
+      "source": "ocr-d-quiver",
+      "repo": "tboenig/17_frak_complex",
+      "work": "huebner_handbuch_1696",
+      "page": "huebner_handbuch_1696_0005",
+      "split": "holdout",
+      "image_px": [
+        1844,
+        2888
+      ],
+      "gt_lines": 18,
+      "gt_chars": 299,
+      "regions": {
+        "TextRegion": 6,
+        "SeparatorRegion": 1,
+        "GraphicRegion": 1,
+        "NoiseRegion": 1
+      },
+      "text_types": {
+        "paragraph": 6
+      },
+      "tags": [],
+      "pilot_6": false,
+      "source_lock_reference": "sealed_holdout/quiver/huebner_handbuch_1696_0005"
+    },
+    {
+      "id": "quiver/huebner_handbuch_1696_0015",
+      "source": "ocr-d-quiver",
+      "repo": "tboenig/17_frak_complex",
+      "work": "huebner_handbuch_1696",
+      "page": "huebner_handbuch_1696_0015",
+      "split": "holdout",
+      "image_px": [
+        1844,
+        2888
+      ],
+      "gt_lines": 27,
+      "gt_chars": 636,
+      "regions": {
+        "TextRegion": 10,
+        "SeparatorRegion": 2,
+        "GraphicRegion": 2
+      },
+      "text_types": {
+        "page-number": 1,
+        "heading": 2,
+        "drop-capital": 1,
+        "paragraph": 5,
+        "catch-word": 1
+      },
+      "tags": [],
+      "pilot_6": false,
+      "source_lock_reference": "sealed_holdout/quiver/huebner_handbuch_1696_0015"
+    },
+    {
+      "id": "quiver/huebner_handbuch_1696_0021",
+      "source": "ocr-d-quiver",
+      "repo": "tboenig/17_frak_complex",
+      "work": "huebner_handbuch_1696",
+      "page": "huebner_handbuch_1696_0021",
+      "split": "holdout",
+      "image_px": [
+        1844,
+        2888
+      ],
+      "gt_lines": 33,
+      "gt_chars": 1060,
+      "regions": {
+        "TextRegion": 9,
+        "SeparatorRegion": 1,
+        "NoiseRegion": 1
+      },
+      "text_types": {
+        "page-number": 1,
+        "paragraph": 6,
+        "signature-mark": 1,
+        "catch-word": 1
+      },
+      "tags": [],
+      "pilot_6": false,
+      "source_lock_reference": "sealed_holdout/quiver/huebner_handbuch_1696_0021"
+    },
+    {
+      "id": "quiver/silesius_seelenlust01_1657_0009",
+      "source": "ocr-d-quiver",
+      "repo": "tboenig/17_frak_complex",
+      "work": "silesius_seelenlust01_1657",
+      "page": "silesius_seelenlust01_1657_0009",
+      "split": "reserve-dev-work",
+      "image_px": [
+        1152,
+        1852
+      ],
+      "gt_lines": 21,
+      "gt_chars": 497,
+      "regions": {
+        "TextRegion": 6
+      },
+      "text_types": {
+        "heading": 2,
+        "paragraph": 4
+      },
+      "tags": [],
+      "pilot_6": false,
+      "source_lock_reference": null
+    },
+    {
+      "id": "quiver/silesius_seelenlust01_1657_0010",
+      "source": "ocr-d-quiver",
+      "repo": "tboenig/17_frak_complex",
+      "work": "silesius_seelenlust01_1657",
+      "page": "silesius_seelenlust01_1657_0010",
+      "split": "dev",
+      "image_px": [
+        1152,
+        1852
+      ],
+      "gt_lines": 19,
+      "gt_chars": 559,
+      "regions": {
+        "TextRegion": 4,
+        "SeparatorRegion": 2,
+        "GraphicRegion": 1
+      },
+      "text_types": {
+        "heading": 1,
+        "drop-capital": 1,
+        "paragraph": 1,
+        "catch-word": 1
+      },
+      "tags": [
+        "fraktur",
+        "ornamental-initial",
+        "headpiece-ornament"
+      ],
+      "pilot_6": false,
+      "source_lock_reference": "pages/quiver/silesius_seelenlust01_1657_0010",
+      "language": "deu_latf"
+    },
+    {
+      "id": "quiver/silesius_seelenlust01_1657_0021",
+      "source": "ocr-d-quiver",
+      "repo": "tboenig/17_frak_complex",
+      "work": "silesius_seelenlust01_1657",
+      "page": "silesius_seelenlust01_1657_0021",
+      "split": "dev",
+      "image_px": [
+        1098,
+        1852
+      ],
+      "gt_lines": 17,
+      "gt_chars": 403,
+      "regions": {
+        "TextRegion": 9,
+        "MusicRegion": 4,
+        "SeparatorRegion": 2
+      },
+      "text_types": {
+        "page-number": 1,
+        "heading": 2,
+        "paragraph": 3,
+        "drop-capital": 1,
+        "catch-word": 1,
+        "signature-mark": 1
+      },
+      "tags": [
+        "fraktur",
+        "music-notation"
+      ],
+      "pilot_6": false,
+      "source_lock_reference": "pages/quiver/silesius_seelenlust01_1657_0021",
+      "language": "deu_latf"
+    },
+    {
+      "id": "quiver/silesius_seelenlust01_1657_0022",
+      "source": "ocr-d-quiver",
+      "repo": "tboenig/17_frak_complex",
+      "work": "silesius_seelenlust01_1657",
+      "page": "silesius_seelenlust01_1657_0022",
+      "split": "reserve-dev-work",
+      "image_px": [
+        1158,
+        1852
+      ],
+      "gt_lines": 28,
+      "gt_chars": 641,
+      "regions": {
+        "TextRegion": 7,
+        "SeparatorRegion": 1
+      },
+      "text_types": {
+        "page-number": 1,
+        "header": 1,
+        "paragraph": 4,
+        "catch-word": 1
+      },
+      "tags": [],
+      "pilot_6": false,
+      "source_lock_reference": null
+    },
+    {
+      "id": "quiver/silesius_seelenlust01_1657_0423",
+      "source": "ocr-d-quiver",
+      "repo": "tboenig/17_frak_complex",
+      "work": "silesius_seelenlust01_1657",
+      "page": "silesius_seelenlust01_1657_0423",
+      "split": "dev",
+      "image_px": [
+        1154,
+        1852
+      ],
+      "gt_lines": 52,
+      "gt_chars": 682,
+      "regions": {
+        "TextRegion": 12,
+        "SeparatorRegion": 2
+      },
+      "text_types": {
+        "heading": 5,
+        "drop-capital": 1,
+        "paragraph": 4,
+        "catch-word": 1,
+        "signature-mark": 1
+      },
+      "tags": [
+        "fraktur",
+        "index-layout"
+      ],
+      "pilot_6": false,
+      "source_lock_reference": "pages/quiver/silesius_seelenlust01_1657_0423",
+      "language": "deu_latf"
+    },
+    {
+      "id": "quiver/calvi_beutelschneider01_1627_0010",
+      "source": "ocr-d-quiver",
+      "repo": "tboenig/17_frak_simple",
+      "work": "calvi_beutelschneider01_1627",
+      "page": "calvi_beutelschneider01_1627_0010",
+      "split": "holdout",
+      "image_px": [
+        1000,
+        1550
+      ],
+      "gt_lines": 26,
+      "gt_chars": 939,
+      "regions": {
+        "TextRegion": 7,
+        "GraphicRegion": 1
+      },
+      "text_types": {
+        "heading": 1,
+        "paragraph": 5,
+        "catch-word": 1
+      },
+      "tags": [],
+      "pilot_6": false,
+      "source_lock_reference": "sealed_holdout/quiver/calvi_beutelschneider01_1627_0010"
+    },
+    {
+      "id": "quiver/calvi_beutelschneider01_1627_0013",
+      "source": "ocr-d-quiver",
+      "repo": "tboenig/17_frak_simple",
+      "work": "calvi_beutelschneider01_1627",
+      "page": "calvi_beutelschneider01_1627_0013",
+      "split": "holdout",
+      "image_px": [
+        1000,
+        1545
+      ],
+      "gt_lines": 30,
+      "gt_chars": 848,
+      "regions": {
+        "TextRegion": 6,
+        "SeparatorRegion": 1
+      },
+      "text_types": {
+        "heading": 2,
+        "paragraph": 2,
+        "drop-capital": 1,
+        "catch-word": 1
+      },
+      "tags": [],
+      "pilot_6": false,
+      "source_lock_reference": "sealed_holdout/quiver/calvi_beutelschneider01_1627_0013"
+    },
+    {
+      "id": "quiver/calvi_beutelschneider01_1627_0020",
+      "source": "ocr-d-quiver",
+      "repo": "tboenig/17_frak_simple",
+      "work": "calvi_beutelschneider01_1627",
+      "page": "calvi_beutelschneider01_1627_0020",
+      "split": "holdout",
+      "image_px": [
+        1000,
+        1588
+      ],
+      "gt_lines": 31,
+      "gt_chars": 1131,
+      "regions": {
+        "TextRegion": 8,
+        "SeparatorRegion": 1
+      },
+      "text_types": {
+        "page-number": 1,
+        "header": 1,
+        "paragraph": 3,
+        "heading": 1,
+        "drop-capital": 1,
+        "catch-word": 1
+      },
+      "tags": [],
+      "pilot_6": false,
+      "source_lock_reference": "sealed_holdout/quiver/calvi_beutelschneider01_1627_0020"
+    },
+    {
+      "id": "quiver/weigel_gnothi02_1618_0003",
+      "source": "ocr-d-quiver",
+      "repo": "tboenig/17_fontmix_simple",
+      "work": "weigel_gnothi02_1618",
+      "page": "weigel_gnothi02_1618_0003",
+      "split": "holdout",
+      "image_px": [
+        2091,
+        2951
+      ],
+      "gt_lines": 30,
+      "gt_chars": 1096,
+      "regions": {
+        "GraphicRegion": 1,
+        "TextRegion": 5
+      },
+      "text_types": {
+        "heading": 1,
+        "drop-capital": 1,
+        "paragraph": 1,
+        "signature-mark": 1,
+        "catch-word": 1
+      },
+      "tags": [],
+      "pilot_6": false,
+      "source_lock_reference": "sealed_holdout/quiver/weigel_gnothi02_1618_0003"
+    },
+    {
+      "id": "quiver/weigel_gnothi02_1618_0004",
+      "source": "ocr-d-quiver",
+      "repo": "tboenig/17_fontmix_simple",
+      "work": "weigel_gnothi02_1618",
+      "page": "weigel_gnothi02_1618_0004",
+      "split": "holdout",
+      "image_px": [
+        2091,
+        2951
+      ],
+      "gt_lines": 33,
+      "gt_chars": 1500,
+      "regions": {
+        "TextRegion": 3
+      },
+      "text_types": {
+        "heading": 1,
+        "paragraph": 1,
+        "catch-word": 1
+      },
+      "tags": [],
+      "pilot_6": false,
+      "source_lock_reference": "sealed_holdout/quiver/weigel_gnothi02_1618_0004"
+    },
+    {
+      "id": "quiver/weigel_gnothi02_1618_0016",
+      "source": "ocr-d-quiver",
+      "repo": "tboenig/17_fontmix_simple",
+      "work": "weigel_gnothi02_1618",
+      "page": "weigel_gnothi02_1618_0016",
+      "split": "holdout",
+      "image_px": [
+        2091,
+        2951
+      ],
+      "gt_lines": 34,
+      "gt_chars": 1375,
+      "regions": {
+        "TextRegion": 7
+      },
+      "text_types": {
+        "page-number": 1,
+        "heading": 1,
+        "drop-capital": 1,
+        "paragraph": 3,
+        "catch-word": 1
+      },
+      "tags": [],
+      "pilot_6": false,
+      "source_lock_reference": "sealed_holdout/quiver/weigel_gnothi02_1618_0016"
+    },
+    {
+      "id": "quiver/weigel_gnothi02_1618_0112",
+      "source": "ocr-d-quiver",
+      "repo": "tboenig/17_fontmix_simple",
+      "work": "weigel_gnothi02_1618",
+      "page": "weigel_gnothi02_1618_0112",
+      "split": "holdout",
+      "image_px": [
+        2091,
+        2951
+      ],
+      "gt_lines": 33,
+      "gt_chars": 1409,
+      "regions": {
+        "TextRegion": 9
+      },
+      "text_types": {
+        "page-number": 1,
+        "header": 1,
+        "paragraph": 6,
+        "catch-word": 1
+      },
+      "tags": [],
+      "pilot_6": false,
+      "source_lock_reference": "sealed_holdout/quiver/weigel_gnothi02_1618_0112"
+    },
+    {
+      "id": "quiver/bohse_helicon_1696_0007",
+      "source": "ocr-d-quiver",
+      "repo": "tboenig/17_fontmix_simple",
+      "work": "bohse_helicon_1696",
+      "page": "bohse_helicon_1696_0007",
+      "split": "reserve-dev-work",
+      "image_px": [
+        1280,
+        2014
+      ],
+      "gt_lines": 19,
+      "gt_chars": 371,
+      "regions": {
+        "TextRegion": 7,
+        "GraphicRegion": 1
+      },
+      "text_types": {
+        "heading": 1,
+        "paragraph": 6
+      },
+      "tags": [],
+      "pilot_6": false,
+      "source_lock_reference": null
+    },
+    {
+      "id": "quiver/bohse_helicon_1696_0009",
+      "source": "ocr-d-quiver",
+      "repo": "tboenig/17_fontmix_simple",
+      "work": "bohse_helicon_1696",
+      "page": "bohse_helicon_1696_0009",
+      "split": "dev",
+      "image_px": [
+        1280,
+        2090
+      ],
+      "gt_lines": 18,
+      "gt_chars": 359,
+      "regions": {
+        "TextRegion": 6,
+        "GraphicRegion": 1
+      },
+      "text_types": {
+        "heading": 2,
+        "drop-capital": 1,
+        "paragraph": 1,
+        "signature-mark": 1,
+        "catch-word": 1
+      },
+      "tags": [
+        "fontmix",
+        "ornamental-initial",
+        "foxed-paper"
+      ],
+      "pilot_6": false,
+      "source_lock_reference": "pages/quiver/bohse_helicon_1696_0009",
+      "language": "deu_latf+lat"
+    },
+    {
+      "id": "quiver/bohse_helicon_1696_0021",
+      "source": "ocr-d-quiver",
+      "repo": "tboenig/17_fontmix_simple",
+      "work": "bohse_helicon_1696",
+      "page": "bohse_helicon_1696_0021",
+      "split": "reserve-dev-work",
+      "image_px": [
+        1280,
+        2091
+      ],
+      "gt_lines": 27,
+      "gt_chars": 849,
+      "regions": {
+        "TextRegion": 8,
+        "GraphicRegion": 1
+      },
+      "text_types": {
+        "page-number": 1,
+        "heading": 3,
+        "drop-capital": 1,
+        "paragraph": 1,
+        "signature-mark": 1,
+        "catch-word": 1
+      },
+      "tags": [],
+      "pilot_6": false,
+      "source_lock_reference": null
+    },
+    {
+      "id": "quiver/bohse_helicon_1696_0022",
+      "source": "ocr-d-quiver",
+      "repo": "tboenig/17_fontmix_simple",
+      "work": "bohse_helicon_1696",
+      "page": "bohse_helicon_1696_0022",
+      "split": "reserve-dev-work",
+      "image_px": [
+        1280,
+        2085
+      ],
+      "gt_lines": 21,
+      "gt_chars": 727,
+      "regions": {
+        "TextRegion": 4,
+        "SeparatorRegion": 1
+      },
+      "text_types": {
+        "page-number": 1,
+        "header": 1,
+        "paragraph": 1,
+        "catch-word": 1
+      },
+      "tags": [],
+      "pilot_6": false,
+      "source_lock_reference": null
+    },
+    {
+      "id": "quiver/bohse_helicon_1696_0036",
+      "source": "ocr-d-quiver",
+      "repo": "tboenig/17_fontmix_simple",
+      "work": "bohse_helicon_1696",
+      "page": "bohse_helicon_1696_0036",
+      "split": "dev",
+      "image_px": [
+        1280,
+        2106
+      ],
+      "gt_lines": 36,
+      "gt_chars": 1449,
+      "regions": {
+        "TextRegion": 10,
+        "SeparatorRegion": 1
+      },
+      "text_types": {
+        "page-number": 1,
+        "header": 1,
+        "paragraph": 4,
+        "heading": 2,
+        "drop-capital": 1,
+        "catch-word": 1
+      },
+      "tags": [
+        "fontmix",
+        "foxed-paper",
+        "dense"
+      ],
+      "pilot_6": false,
+      "source_lock_reference": "pages/quiver/bohse_helicon_1696_0036",
+      "language": "deu_latf+lat"
+    },
+    {
+      "id": "quiver/rollenhagen_reysen_1603_0007",
+      "source": "ocr-d-quiver",
+      "repo": "tboenig/17_fontmix_simple",
+      "work": "rollenhagen_reysen_1603",
+      "page": "rollenhagen_reysen_1603_0007",
+      "split": "holdout",
+      "image_px": [
+        2000,
+        3018
+      ],
+      "gt_lines": 23,
+      "gt_chars": 695,
+      "regions": {
+        "TextRegion": 8,
+        "SeparatorRegion": 1
+      },
+      "text_types": {
+        "paragraph": 3,
+        "heading": 2,
+        "drop-capital": 1,
+        "signature-mark": 1,
+        "catch-word": 1
+      },
+      "tags": [],
+      "pilot_6": false,
+      "source_lock_reference": "sealed_holdout/quiver/rollenhagen_reysen_1603_0007"
+    },
+    {
+      "id": "quiver/rollenhagen_reysen_1603_0011",
+      "source": "ocr-d-quiver",
+      "repo": "tboenig/17_fontmix_simple",
+      "work": "rollenhagen_reysen_1603",
+      "page": "rollenhagen_reysen_1603_0011",
+      "split": "holdout",
+      "image_px": [
+        2000,
+        3018
+      ],
+      "gt_lines": 29,
+      "gt_chars": 995,
+      "regions": {
+        "TextRegion": 9
+      },
+      "text_types": {
+        "page-number": 1,
+        "heading": 3,
+        "drop-capital": 1,
+        "paragraph": 2,
+        "signature-mark": 1,
+        "catch-word": 1
+      },
+      "tags": [],
+      "pilot_6": false,
+      "source_lock_reference": "sealed_holdout/quiver/rollenhagen_reysen_1603_0011"
+    },
+    {
+      "id": "quiver/rollenhagen_reysen_1603_0012",
+      "source": "ocr-d-quiver",
+      "repo": "tboenig/17_fontmix_simple",
+      "work": "rollenhagen_reysen_1603",
+      "page": "rollenhagen_reysen_1603_0012",
+      "split": "holdout",
+      "image_px": [
+        2000,
+        3018
+      ],
+      "gt_lines": 29,
+      "gt_chars": 1307,
+      "regions": {
+        "TextRegion": 5
+      },
+      "text_types": {
+        "page-number": 1,
+        "paragraph": 3,
+        "catch-word": 1
+      },
+      "tags": [],
+      "pilot_6": false,
+      "source_lock_reference": "sealed_holdout/quiver/rollenhagen_reysen_1603_0012"
+    },
+    {
+      "id": "quiver/glauber_opera01_1658_0007",
+      "source": "ocr-d-quiver",
+      "repo": "tboenig/17_fontmix_complex",
+      "work": "glauber_opera01_1658",
+      "page": "glauber_opera01_1658_0007",
+      "split": "holdout",
+      "image_px": [
+        2000,
+        2497
+      ],
+      "gt_lines": 88,
+      "gt_chars": 1734,
+      "regions": {
+        "GraphicRegion": 1,
+        "TextRegion": 35
+      },
+      "text_types": {
+        "heading": 18,
+        "drop-capital": 1,
+        "paragraph": 14,
+        "signature-mark": 1,
+        "catch-word": 1
+      },
+      "tags": [],
+      "pilot_6": false,
+      "source_lock_reference": "sealed_holdout/quiver/glauber_opera01_1658_0007"
+    },
+    {
+      "id": "quiver/glauber_opera01_1658_0009",
+      "source": "ocr-d-quiver",
+      "repo": "tboenig/17_fontmix_complex",
+      "work": "glauber_opera01_1658",
+      "page": "glauber_opera01_1658_0009",
+      "split": "holdout",
+      "image_px": [
+        2000,
+        2505
+      ],
+      "gt_lines": 143,
+      "gt_chars": 1972,
+      "regions": {
+        "TextRegion": 66
+      },
+      "text_types": {
+        "header": 1,
+        "paragraph": 62,
+        "heading": 1,
+        "signature-mark": 1,
+        "catch-word": 1
+      },
+      "tags": [],
+      "pilot_6": false,
+      "source_lock_reference": "sealed_holdout/quiver/glauber_opera01_1658_0009"
+    },
+    {
+      "id": "quiver/glauber_opera01_1658_0029",
+      "source": "ocr-d-quiver",
+      "repo": "tboenig/17_fontmix_complex",
+      "work": "glauber_opera01_1658",
+      "page": "glauber_opera01_1658_0029",
+      "split": "holdout",
+      "image_px": [
+        2000,
+        2485
+      ],
+      "gt_lines": 28,
+      "gt_chars": 1350,
+      "regions": {
+        "TextRegion": 8,
+        "GraphicRegion": 1,
+        "SeparatorRegion": 2
+      },
+      "text_types": {
+        "page-number": 1,
+        "heading": 3,
+        "drop-capital": 1,
+        "paragraph": 1,
+        "catch-word": 1,
+        "signature-mark": 1
+      },
+      "tags": [],
+      "pilot_6": false,
+      "source_lock_reference": "sealed_holdout/quiver/glauber_opera01_1658_0029"
+    },
+    {
+      "id": "quiver/glauber_opera01_1658_0032",
+      "source": "ocr-d-quiver",
+      "repo": "tboenig/17_fontmix_complex",
+      "work": "glauber_opera01_1658",
+      "page": "glauber_opera01_1658_0032",
+      "split": "holdout",
+      "image_px": [
+        2000,
+        2625
+      ],
+      "gt_lines": 34,
+      "gt_chars": 2272,
+      "regions": {
+        "TextRegion": 6,
+        "GraphicRegion": 1
+      },
+      "text_types": {
+        "page-number": 1,
+        "heading": 1,
+        "header": 1,
+        "drop-capital": 1,
+        "paragraph": 1,
+        "catch-word": 1
+      },
+      "tags": [],
+      "pilot_6": false,
+      "source_lock_reference": "sealed_holdout/quiver/glauber_opera01_1658_0032"
+    },
+    {
+      "id": "quiver/glauber_opera01_1658_0072",
+      "source": "ocr-d-quiver",
+      "repo": "tboenig/17_fontmix_complex",
+      "work": "glauber_opera01_1658",
+      "page": "glauber_opera01_1658_0072",
+      "split": "holdout",
+      "image_px": [
+        2000,
+        2757
+      ],
+      "gt_lines": 41,
+      "gt_chars": 2905,
+      "regions": {
+        "TextRegion": 7
+      },
+      "text_types": {
+        "page-number": 1,
+        "header": 1,
+        "paragraph": 2,
+        "heading": 1,
+        "drop-capital": 1,
+        "catch-word": 1
+      },
+      "tags": [],
+      "pilot_6": false,
+      "source_lock_reference": "sealed_holdout/quiver/glauber_opera01_1658_0072"
+    },
+    {
+      "id": "quiver/glauber_opera01_1658_0078",
+      "source": "ocr-d-quiver",
+      "repo": "tboenig/17_fontmix_complex",
+      "work": "glauber_opera01_1658",
+      "page": "glauber_opera01_1658_0078",
+      "split": "holdout",
+      "image_px": [
+        2000,
+        2758
+      ],
+      "gt_lines": 42,
+      "gt_chars": 3269,
+      "regions": {
+        "TextRegion": 5
+      },
+      "text_types": {
+        "page-number": 1,
+        "header": 1,
+        "paragraph": 2,
+        "catch-word": 1
+      },
+      "tags": [],
+      "pilot_6": false,
+      "source_lock_reference": "sealed_holdout/quiver/glauber_opera01_1658_0078"
+    },
+    {
+      "id": "quiver/lohenstein_agrippina_1665_0018",
+      "source": "ocr-d-quiver",
+      "repo": "tboenig/17_fontmix_complex",
+      "work": "lohenstein_agrippina_1665",
+      "page": "lohenstein_agrippina_1665_0018",
+      "split": "holdout",
+      "image_px": [
+        1214,
+        1916
+      ],
+      "gt_lines": 39,
+      "gt_chars": 1127,
+      "regions": {
+        "TextRegion": 34,
+        "SeparatorRegion": 1,
+        "GraphicRegion": 2
+      },
+      "text_types": {
+        "heading": 1,
+        "paragraph": 33
+      },
+      "tags": [],
+      "pilot_6": false,
+      "source_lock_reference": "sealed_holdout/quiver/lohenstein_agrippina_1665_0018"
+    },
+    {
+      "id": "quiver/lohenstein_agrippina_1665_0019",
+      "source": "ocr-d-quiver",
+      "repo": "tboenig/17_fontmix_complex",
+      "work": "lohenstein_agrippina_1665",
+      "page": "lohenstein_agrippina_1665_0019",
+      "split": "holdout",
+      "image_px": [
+        1214,
+        1916
+      ],
+      "gt_lines": 32,
+      "gt_chars": 1062,
+      "regions": {
+        "TextRegion": 9,
+        "SeparatorRegion": 1
+      },
+      "text_types": {
+        "page-number": 1,
+        "heading": 2,
+        "paragraph": 3,
+        "drop-capital": 1,
+        "signature-mark": 1,
+        "catch-word": 1
+      },
+      "tags": [],
+      "pilot_6": false,
+      "source_lock_reference": "sealed_holdout/quiver/lohenstein_agrippina_1665_0019"
+    },
+    {
+      "id": "quiver/lohenstein_agrippina_1665_0121",
+      "source": "ocr-d-quiver",
+      "repo": "tboenig/17_fontmix_complex",
+      "work": "lohenstein_agrippina_1665",
+      "page": "lohenstein_agrippina_1665_0121",
+      "split": "holdout",
+      "image_px": [
+        1214,
+        1916
+      ],
+      "gt_lines": 38,
+      "gt_chars": 1495,
+      "regions": {
+        "TextRegion": 13,
+        "GraphicRegion": 1
+      },
+      "text_types": {
+        "page-number": 1,
+        "paragraph": 9,
+        "heading": 1,
+        "signature-mark": 1,
+        "catch-word": 1
+      },
+      "tags": [],
+      "pilot_6": false,
+      "source_lock_reference": "sealed_holdout/quiver/lohenstein_agrippina_1665_0121"
+    },
+    {
+      "id": "quiver/meyfart_rhetorica_1634_0007",
+      "source": "ocr-d-quiver",
+      "repo": "tboenig/17_fontmix_complex",
+      "work": "meyfart_rhetorica_1634",
+      "page": "meyfart_rhetorica_1634_0007",
+      "split": "reserve-dev-work",
+      "image_px": [
+        1169,
+        1889
+      ],
+      "gt_lines": 16,
+      "gt_chars": 402,
+      "regions": {
+        "TextRegion": 4,
+        "SeparatorRegion": 1
+      },
+      "text_types": {
+        "heading": 2,
+        "paragraph": 2
+      },
+      "tags": [],
+      "pilot_6": false,
+      "source_lock_reference": null
+    },
+    {
+      "id": "quiver/meyfart_rhetorica_1634_0021",
+      "source": "ocr-d-quiver",
+      "repo": "tboenig/17_fontmix_complex",
+      "work": "meyfart_rhetorica_1634",
+      "page": "meyfart_rhetorica_1634_0021",
+      "split": "dev",
+      "image_px": [
+        1169,
+        1889
+      ],
+      "gt_lines": 30,
+      "gt_chars": 617,
+      "regions": {
+        "TextRegion": 10,
+        "SeparatorRegion": 1
+      },
+      "text_types": {
+        "page-number": 1,
+        "heading": 4,
+        "drop-capital": 1,
+        "paragraph": 1,
+        "marginalia": 1,
+        "catch-word": 1,
+        "signature-mark": 1
+      },
+      "tags": [
+        "fontmix",
+        "title-ornament",
+        "marginalia",
+        "foxed-paper"
+      ],
+      "pilot_6": false,
+      "source_lock_reference": "pages/quiver/meyfart_rhetorica_1634_0021",
+      "language": "deu_latf+lat"
+    },
+    {
+      "id": "quiver/meyfart_rhetorica_1634_0022",
+      "source": "ocr-d-quiver",
+      "repo": "tboenig/17_fontmix_complex",
+      "work": "meyfart_rhetorica_1634",
+      "page": "meyfart_rhetorica_1634_0022",
+      "split": "dev",
+      "image_px": [
+        1169,
+        1889
+      ],
+      "gt_lines": 37,
+      "gt_chars": 1070,
+      "regions": {
+        "TextRegion": 7,
+        "SeparatorRegion": 1
+      },
+      "text_types": {
+        "page-number": 1,
+        "header": 1,
+        "marginalia": 2,
+        "paragraph": 2,
+        "catch-word": 1
+      },
+      "tags": [
+        "fontmix",
+        "marginalia",
+        "foxed-paper"
+      ],
+      "pilot_6": false,
+      "source_lock_reference": "pages/quiver/meyfart_rhetorica_1634_0022",
+      "language": "deu_latf+lat"
+    },
+    {
+      "id": "quiver/meyfart_rhetorica_1634_0122",
+      "source": "ocr-d-quiver",
+      "repo": "tboenig/17_fontmix_complex",
+      "work": "meyfart_rhetorica_1634",
+      "page": "meyfart_rhetorica_1634_0122",
+      "split": "reserve-dev-work",
+      "image_px": [
+        1169,
+        1889
+      ],
+      "gt_lines": 30,
+      "gt_chars": 834,
+      "regions": {
+        "TextRegion": 6,
+        "SeparatorRegion": 1
+      },
+      "text_types": {
+        "page-number": 1,
+        "header": 1,
+        "paragraph": 3,
+        "catch-word": 1
+      },
+      "tags": [],
+      "pilot_6": false,
+      "source_lock_reference": null
+    },
+    {
+      "id": "quiver/arnold_ketzerhistorie01_1699_0010",
+      "source": "ocr-d-quiver",
+      "repo": "tboenig/17_fontmix_complex",
+      "work": "arnold_ketzerhistorie01_1699",
+      "page": "arnold_ketzerhistorie01_1699_0010",
+      "split": "reserve-dev-work",
+      "image_px": [
+        2319,
+        3928
+      ],
+      "gt_lines": 13,
+      "gt_chars": 369,
+      "regions": {
+        "TextRegion": 5,
+        "SeparatorRegion": 1
+      },
+      "text_types": {
+        "heading": 2,
+        "drop-capital": 1,
+        "paragraph": 1,
+        "catch-word": 1
+      },
+      "tags": [],
+      "pilot_6": false,
+      "source_lock_reference": null
+    },
+    {
+      "id": "quiver/arnold_ketzerhistorie01_1699_0011",
+      "source": "ocr-d-quiver",
+      "repo": "tboenig/17_fontmix_complex",
+      "work": "arnold_ketzerhistorie01_1699",
+      "page": "arnold_ketzerhistorie01_1699_0011",
+      "split": "reserve-dev-work",
+      "image_px": [
+        2319,
+        3928
+      ],
+      "gt_lines": 38,
+      "gt_chars": 2007,
+      "regions": {
+        "TextRegion": 3,
+        "SeparatorRegion": 1
+      },
+      "text_types": {
+        "paragraph": 2,
+        "catch-word": 1
+      },
+      "tags": [],
+      "pilot_6": false,
+      "source_lock_reference": null
+    },
+    {
+      "id": "quiver/arnold_ketzerhistorie01_1699_0114",
+      "source": "ocr-d-quiver",
+      "repo": "tboenig/17_fontmix_complex",
+      "work": "arnold_ketzerhistorie01_1699",
+      "page": "arnold_ketzerhistorie01_1699_0114",
+      "split": "dev",
+      "image_px": [
+        2319,
+        3928
+      ],
+      "gt_lines": 159,
+      "gt_chars": 5807,
+      "regions": {
+        "TextRegion": 17,
+        "SeparatorRegion": 2
+      },
+      "text_types": {
+        "page-number": 1,
+        "header": 1,
+        "marginalia": 8,
+        "paragraph": 4,
+        "footnote": 2,
+        "catch-word": 1
+      },
+      "tags": [
+        "fontmix",
+        "marginalia",
+        "footnotes",
+        "very-dense",
+        "colour-target-in-frame"
+      ],
+      "pilot_6": true,
+      "source_lock_reference": "pages/quiver/arnold_ketzerhistorie01_1699_0114",
+      "language": "deu_latf+lat"
+    },
+    {
+      "id": "quiver/arnold_ketzerhistorie01_1699_0115",
+      "source": "ocr-d-quiver",
+      "repo": "tboenig/17_fontmix_complex",
+      "work": "arnold_ketzerhistorie01_1699",
+      "page": "arnold_ketzerhistorie01_1699_0115",
+      "split": "dev",
+      "image_px": [
+        2319,
+        3928
+      ],
+      "gt_lines": 168,
+      "gt_chars": 5949,
+      "regions": {
+        "TextRegion": 18,
+        "SeparatorRegion": 2
+      },
+      "text_types": {
+        "header": 1,
+        "page-number": 1,
+        "marginalia": 8,
+        "paragraph": 4,
+        "footnote": 2,
+        "catch-word": 1,
+        "signature-mark": 1
+      },
+      "tags": [
+        "fontmix",
+        "marginalia",
+        "footnotes",
+        "very-dense",
+        "colour-target-in-frame"
+      ],
+      "pilot_6": false,
+      "source_lock_reference": "pages/quiver/arnold_ketzerhistorie01_1699_0115",
+      "language": "deu_latf+lat"
+    },
+    {
+      "id": "quiver/valentinus_occulta_1603_0004",
+      "source": "ocr-d-quiver",
+      "repo": "tboenig/17_fontmix_complex",
+      "work": "valentinus_occulta_1603",
+      "page": "valentinus_occulta_1603_0004",
+      "split": "holdout",
+      "image_px": [
+        1055,
+        1732
+      ],
+      "gt_lines": 27,
+      "gt_chars": 1075,
+      "regions": {
+        "TextRegion": 3,
+        "GraphicRegion": 1
+      },
+      "text_types": {
+        "header": 1,
+        "paragraph": 1,
+        "catch-word": 1
+      },
+      "tags": [],
+      "pilot_6": false,
+      "source_lock_reference": "sealed_holdout/quiver/valentinus_occulta_1603_0004"
+    },
+    {
+      "id": "quiver/valentinus_occulta_1603_0005",
+      "source": "ocr-d-quiver",
+      "repo": "tboenig/17_fontmix_complex",
+      "work": "valentinus_occulta_1603",
+      "page": "valentinus_occulta_1603_0005",
+      "split": "holdout",
+      "image_px": [
+        1051,
+        1732
+      ],
+      "gt_lines": 26,
+      "gt_chars": 966,
+      "regions": {
+        "TextRegion": 5,
+        "GraphicRegion": 2
+      },
+      "text_types": {
+        "header": 1,
+        "paragraph": 2,
+        "signature-mark": 1,
+        "catch-word": 1
+      },
+      "tags": [],
+      "pilot_6": false,
+      "source_lock_reference": "sealed_holdout/quiver/valentinus_occulta_1603_0005"
+    },
+    {
+      "id": "quiver/valentinus_occulta_1603_0006",
+      "source": "ocr-d-quiver",
+      "repo": "tboenig/17_fontmix_complex",
+      "work": "valentinus_occulta_1603",
+      "page": "valentinus_occulta_1603_0006",
+      "split": "holdout",
+      "image_px": [
+        1055,
+        1732
+      ],
+      "gt_lines": 30,
+      "gt_chars": 1156,
+      "regions": {
+        "TextRegion": 4,
+        "GraphicRegion": 1
+      },
+      "text_types": {
+        "heading": 1,
+        "drop-capital": 1,
+        "paragraph": 1,
+        "catch-word": 1
+      },
+      "tags": [],
+      "pilot_6": false,
+      "source_lock_reference": "sealed_holdout/quiver/valentinus_occulta_1603_0006"
+    },
+    {
+      "id": "quiver/valentinus_occulta_1603_0031",
+      "source": "ocr-d-quiver",
+      "repo": "tboenig/17_fontmix_complex",
+      "work": "valentinus_occulta_1603",
+      "page": "valentinus_occulta_1603_0031",
+      "split": "holdout",
+      "image_px": [
+        1051,
+        1732
+      ],
+      "gt_lines": 26,
+      "gt_chars": 855,
+      "regions": {
+        "TextRegion": 3
+      },
+      "text_types": {
+        "page-number": 1,
+        "paragraph": 1,
+        "catch-word": 1
+      },
+      "tags": [],
+      "pilot_6": false,
+      "source_lock_reference": "sealed_holdout/quiver/valentinus_occulta_1603_0031"
+    },
+    {
+      "id": "quiver/valentinus_occulta_1603_0032",
+      "source": "ocr-d-quiver",
+      "repo": "tboenig/17_fontmix_complex",
+      "work": "valentinus_occulta_1603",
+      "page": "valentinus_occulta_1603_0032",
+      "split": "holdout",
+      "image_px": [
+        1055,
+        1732
+      ],
+      "gt_lines": 27,
+      "gt_chars": 1003,
+      "regions": {
+        "TextRegion": 3
+      },
+      "text_types": {
+        "page-number": 1,
+        "paragraph": 1,
+        "catch-word": 1
+      },
+      "tags": [],
+      "pilot_6": false,
+      "source_lock_reference": "sealed_holdout/quiver/valentinus_occulta_1603_0032"
+    },
+    {
+      "id": "quiver/valentinus_occulta_1603_0033",
+      "source": "ocr-d-quiver",
+      "repo": "tboenig/17_fontmix_complex",
+      "work": "valentinus_occulta_1603",
+      "page": "valentinus_occulta_1603_0033",
+      "split": "holdout",
+      "image_px": [
+        1051,
+        1732
+      ],
+      "gt_lines": 28,
+      "gt_chars": 1011,
+      "regions": {
+        "TextRegion": 4
+      },
+      "text_types": {
+        "page-number": 1,
+        "paragraph": 1,
+        "signature-mark": 1,
+        "catch-word": 1
+      },
+      "tags": [],
+      "pilot_6": false,
+      "source_lock_reference": "sealed_holdout/quiver/valentinus_occulta_1603_0033"
+    },
+    {
+      "id": "quiver/kistler_kraeuter_1500_0007",
+      "source": "ocr-d-quiver",
+      "repo": "tboenig/16_frak_simple",
+      "work": "kistler_kraeuter_1500",
+      "page": "kistler_kraeuter_1500_0007",
+      "split": "holdout",
+      "image_px": [
+        1623,
+        2304
+      ],
+      "gt_lines": 29,
+      "gt_chars": 1194,
+      "regions": {
+        "TextRegion": 8,
+        "GraphicRegion": 1
+      },
+      "text_types": {
+        "paragraph": 4,
+        "heading": 3,
+        "signature-mark": 1
+      },
+      "tags": [],
+      "pilot_6": false,
+      "source_lock_reference": "sealed_holdout/quiver/kistler_kraeuter_1500_0007"
+    },
+    {
+      "id": "quiver/kistler_kraeuter_1500_0021",
+      "source": "ocr-d-quiver",
+      "repo": "tboenig/16_frak_simple",
+      "work": "kistler_kraeuter_1500",
+      "page": "kistler_kraeuter_1500_0021",
+      "split": "holdout",
+      "image_px": [
+        1584,
+        2320
+      ],
+      "gt_lines": 30,
+      "gt_chars": 1252,
+      "regions": {
+        "TextRegion": 7
+      },
+      "text_types": {
+        "page-number": 1,
+        "paragraph": 4,
+        "heading": 1,
+        "signature-mark": 1
+      },
+      "tags": [],
+      "pilot_6": false,
+      "source_lock_reference": "sealed_holdout/quiver/kistler_kraeuter_1500_0021"
+    },
+    {
+      "id": "quiver/trota_mordtbrenner_1540_0011",
+      "source": "ocr-d-quiver",
+      "repo": "tboenig/16_frak_simple",
+      "work": "trota_mordtbrenner_1540",
+      "page": "trota_mordtbrenner_1540_0011",
+      "split": "holdout",
+      "image_px": [
+        1732,
+        2383
+      ],
+      "gt_lines": 24,
+      "gt_chars": 648,
+      "regions": {
+        "TextRegion": 14
+      },
+      "text_types": {
+        "paragraph": 12,
+        "signature-mark": 1,
+        "catch-word": 1
+      },
+      "tags": [],
+      "pilot_6": false,
+      "source_lock_reference": "sealed_holdout/quiver/trota_mordtbrenner_1540_0011"
+    },
+    {
+      "id": "quiver/trota_mordtbrenner_1540_0013",
+      "source": "ocr-d-quiver",
+      "repo": "tboenig/16_frak_simple",
+      "work": "trota_mordtbrenner_1540",
+      "page": "trota_mordtbrenner_1540_0013",
+      "split": "holdout",
+      "image_px": [
+        1732,
+        2383
+      ],
+      "gt_lines": 20,
+      "gt_chars": 613,
+      "regions": {
+        "TextRegion": 6,
+        "GraphicRegion": 2
+      },
+      "text_types": {
+        "paragraph": 5,
+        "catch-word": 1
+      },
+      "tags": [],
+      "pilot_6": false,
+      "source_lock_reference": "sealed_holdout/quiver/trota_mordtbrenner_1540_0013"
+    },
+    {
+      "id": "quiver/luther_auszlegunge_1520_0003",
+      "source": "ocr-d-quiver",
+      "repo": "tboenig/16_frak_simple",
+      "work": "luther_auszlegunge_1520",
+      "page": "luther_auszlegunge_1520_0003",
+      "split": "dev",
+      "image_px": [
+        1820,
+        2530
+      ],
+      "gt_lines": 34,
+      "gt_chars": 1635,
+      "regions": {
+        "TextRegion": 6
+      },
+      "text_types": {
+        "paragraph": 4,
+        "signature-mark": 1,
+        "drop-capital": 1
+      },
+      "tags": [
+        "fraktur",
+        "stained-paper",
+        "dense"
+      ],
+      "pilot_6": false,
+      "source_lock_reference": "pages/quiver/luther_auszlegunge_1520_0003",
+      "language": "deu_latf"
+    },
+    {
+      "id": "quiver/luther_auszlegunge_1520_0029",
+      "source": "ocr-d-quiver",
+      "repo": "tboenig/16_frak_simple",
+      "work": "luther_auszlegunge_1520",
+      "page": "luther_auszlegunge_1520_0029",
+      "split": "dev",
+      "image_px": [
+        1785,
+        2530
+      ],
+      "gt_lines": 26,
+      "gt_chars": 1221,
+      "regions": {
+        "TextRegion": 5
+      },
+      "text_types": {
+        "paragraph": 3,
+        "heading": 2
+      },
+      "tags": [
+        "fraktur",
+        "stained-paper"
+      ],
+      "pilot_6": false,
+      "source_lock_reference": "pages/quiver/luther_auszlegunge_1520_0029",
+      "language": "deu_latf"
+    },
+    {
+      "id": "quiver/ballenstedt_delatio_1777_00003",
+      "source": "ocr-d-quiver",
+      "repo": "tboenig/18_ant_simple",
+      "work": "ballenstedt_delatio_1777",
+      "page": "ballenstedt_delatio_1777_00003",
+      "split": "holdout",
+      "image_px": [
+        2463,
+        2578
+      ],
+      "gt_lines": 31,
+      "gt_chars": 1716,
+      "regions": {
+        "SeparatorRegion": 1,
+        "TextRegion": 9
+      },
+      "text_types": {
+        "heading": 1,
+        "drop-capital": 1,
+        "paragraph": 5,
+        "signature-mark": 1,
+        "catch-word": 1
+      },
+      "tags": [],
+      "pilot_6": false,
+      "source_lock_reference": "sealed_holdout/quiver/ballenstedt_delatio_1777_00003"
+    },
+    {
+      "id": "quiver/ballenstedt_delatio_1777_00005",
+      "source": "ocr-d-quiver",
+      "repo": "tboenig/18_ant_simple",
+      "work": "ballenstedt_delatio_1777",
+      "page": "ballenstedt_delatio_1777_00005",
+      "split": "holdout",
+      "image_px": [
+        2463,
+        2578
+      ],
+      "gt_lines": 34,
+      "gt_chars": 1668,
+      "regions": {
+        "SeparatorRegion": 1,
+        "TextRegion": 9
+      },
+      "text_types": {
+        "page-number": 1,
+        "paragraph": 6,
+        "signature-mark": 1,
+        "catch-word": 1
+      },
+      "tags": [],
+      "pilot_6": false,
+      "source_lock_reference": "sealed_holdout/quiver/ballenstedt_delatio_1777_00005"
+    },
+    {
+      "id": "quiver/ballenstedt_delatio_1777_00010",
+      "source": "ocr-d-quiver",
+      "repo": "tboenig/18_ant_simple",
+      "work": "ballenstedt_delatio_1777",
+      "page": "ballenstedt_delatio_1777_00010",
+      "split": "holdout",
+      "image_px": [
+        2463,
+        2578
+      ],
+      "gt_lines": 33,
+      "gt_chars": 1832,
+      "regions": {
+        "TextRegion": 8,
+        "SeparatorRegion": 1
+      },
+      "text_types": {
+        "page-number": 1,
+        "heading": 1,
+        "paragraph": 5,
+        "catch-word": 1
+      },
+      "tags": [],
+      "pilot_6": false,
+      "source_lock_reference": "sealed_holdout/quiver/ballenstedt_delatio_1777_00010"
+    },
+    {
+      "id": "quiver/heyden_paedono_1548_0007",
+      "source": "ocr-d-quiver",
+      "repo": "tboenig/16_ant_simple",
+      "work": "heyden_paedono_1548",
+      "page": "heyden_paedono_1548_0007",
+      "split": "holdout",
+      "image_px": [
+        1189,
+        1928
+      ],
+      "gt_lines": 25,
+      "gt_chars": 631,
+      "regions": {
+        "TextRegion": 5
+      },
+      "text_types": {
+        "heading": 1,
+        "paragraph": 1,
+        "drop-capital": 1,
+        "signature-mark": 1,
+        "catch-word": 1
+      },
+      "tags": [],
+      "pilot_6": false,
+      "source_lock_reference": "sealed_holdout/quiver/heyden_paedono_1548_0007"
+    },
+    {
+      "id": "quiver/heyden_paedono_1548_0013",
+      "source": "ocr-d-quiver",
+      "repo": "tboenig/16_ant_simple",
+      "work": "heyden_paedono_1548",
+      "page": "heyden_paedono_1548_0013",
+      "split": "holdout",
+      "image_px": [
+        1207,
+        1928
+      ],
+      "gt_lines": 24,
+      "gt_chars": 667,
+      "regions": {
+        "TextRegion": 7
+      },
+      "text_types": {
+        "heading": 1,
+        "drop-capital": 1,
+        "paragraph": 4,
+        "signature-mark": 1
+      },
+      "tags": [],
+      "pilot_6": false,
+      "source_lock_reference": "sealed_holdout/quiver/heyden_paedono_1548_0013"
+    },
+    {
+      "id": "quiver/heyden_paedono_1548_0014",
+      "source": "ocr-d-quiver",
+      "repo": "tboenig/16_ant_simple",
+      "work": "heyden_paedono_1548",
+      "page": "heyden_paedono_1548_0014",
+      "split": "holdout",
+      "image_px": [
+        1199,
+        1929
+      ],
+      "gt_lines": 23,
+      "gt_chars": 786,
+      "regions": {
+        "TextRegion": 7
+      },
+      "text_types": {
+        "paragraph": 6,
+        "catch-word": 1
+      },
+      "tags": [],
+      "pilot_6": false,
+      "source_lock_reference": "sealed_holdout/quiver/heyden_paedono_1548_0014"
+    },
+    {
+      "id": "quiver/blumenbach_anatomie_1805_0047",
+      "source": "ocr-d-quiver",
+      "repo": "tboenig/19_ant_simple",
+      "work": "blumenbach_anatomie_1805",
+      "page": "blumenbach_anatomie_1805_0047",
+      "split": "dev",
+      "image_px": [
+        1700,
+        2687
+      ],
+      "gt_lines": 29,
+      "gt_chars": 922,
+      "regions": {
+        "TextRegion": 8
+      },
+      "text_types": {
+        "header": 1,
+        "page-number": 1,
+        "paragraph": 1,
+        "signature-mark": 1,
+        "catch-word": 2,
+        "footnote-continued": 1,
+        "footnote": 1
+      },
+      "tags": [
+        "antiqua",
+        "footnotes",
+        "book-edge",
+        "dark-border"
+      ],
+      "pilot_6": false,
+      "source_lock_reference": "pages/quiver/blumenbach_anatomie_1805_0047",
+      "language": "deu"
+    },
+    {
+      "id": "quiver/blumenbach_anatomie_1805_0048",
+      "source": "ocr-d-quiver",
+      "repo": "tboenig/19_ant_simple",
+      "work": "blumenbach_anatomie_1805",
+      "page": "blumenbach_anatomie_1805_0048",
+      "split": "reserve-dev-work",
+      "image_px": [
+        1700,
+        2686
+      ],
+      "gt_lines": 29,
+      "gt_chars": 909,
+      "regions": {
+        "TextRegion": 6
+      },
+      "text_types": {
+        "page-number": 1,
+        "header": 1,
+        "heading": 1,
+        "paragraph": 1,
+        "footnote-continued": 2
+      },
+      "tags": [],
+      "pilot_6": false,
+      "source_lock_reference": null
+    },
+    {
+      "id": "quiver/blumenbach_anatomie_1805_0049",
+      "source": "ocr-d-quiver",
+      "repo": "tboenig/19_ant_simple",
+      "work": "blumenbach_anatomie_1805",
+      "page": "blumenbach_anatomie_1805_0049",
+      "split": "reserve-dev-work",
+      "image_px": [
+        1699,
+        2687
+      ],
+      "gt_lines": 26,
+      "gt_chars": 828,
+      "regions": {
+        "TextRegion": 6
+      },
+      "text_types": {
+        "page-number": 1,
+        "header": 1,
+        "paragraph": 2,
+        "heading": 1,
+        "footnote": 1
+      },
+      "tags": [],
+      "pilot_6": false,
+      "source_lock_reference": null
+    },
+    {
+      "id": "finebooks/conchologiaiconi05reev/8967333",
+      "source": "finebooks-bhl-impact",
+      "work": "conchologiaiconi05reev",
+      "page": 8967333,
+      "bhl_page_id": 8967333,
+      "gt_xml": "pc-00668873.xml",
+      "split": "dev",
+      "selection_rule": "illustration+text",
+      "image_px": [
+        2368,
+        3167
+      ],
+      "gt_chars": 325,
+      "gt_fffd": 0,
+      "regions": {
+        "TextRegion": 4,
+        "GraphicRegion": 2
+      },
+      "text_types": {
+        "heading": 3,
+        "paragraph": 1
+      },
+      "tags": [],
+      "bhl_item": 35904,
+      "year": 1849,
+      "lang": "eng",
+      "ppi": 500,
+      "holder": "Smithsonian Libraries",
+      "pilot_6": true,
+      "source_lock_reference": "pages/finebooks/conchologiaiconi05reev/8967333",
+      "language": "eng"
+    },
+    {
+      "id": "finebooks/conchologiaiconi05reev/8966753",
+      "source": "finebooks-bhl-impact",
+      "work": "conchologiaiconi05reev",
+      "page": 8966753,
+      "bhl_page_id": 8966753,
+      "gt_xml": "pc-00668264.xml",
+      "split": "dev",
+      "selection_rule": "densest text",
+      "image_px": [
+        2526,
+        3172
+      ],
+      "gt_chars": 5502,
+      "gt_fffd": 0,
+      "regions": {
+        "TextRegion": 7,
+        "SeparatorRegion": 1
+      },
+      "text_types": {
+        "paragraph": 6,
+        "header": 1
+      },
+      "tags": [],
+      "bhl_item": 35904,
+      "year": 1849,
+      "lang": "eng",
+      "ppi": 500,
+      "holder": "Smithsonian Libraries",
+      "pilot_6": false,
+      "source_lock_reference": "pages/finebooks/conchologiaiconi05reev/8966753",
+      "language": "eng"
+    },
+    {
+      "id": "finebooks/conchologiaiconi05reev/8967228",
+      "source": "finebooks-bhl-impact",
+      "work": "conchologiaiconi05reev",
+      "page": 8967228,
+      "bhl_page_id": 8967228,
+      "gt_xml": "pc-00668768.xml",
+      "split": "dev",
+      "selection_rule": "most illegible (U+FFFD)",
+      "image_px": [
+        2368,
+        3167
+      ],
+      "gt_chars": 83,
+      "gt_fffd": 31,
+      "regions": {
+        "TextRegion": 8,
+        "ImageRegion": 5
+      },
+      "text_types": {
+        "heading": 1,
+        "caption": 5,
+        "paragraph": 2
+      },
+      "tags": [],
+      "bhl_item": 35904,
+      "year": 1849,
+      "lang": "eng",
+      "ppi": 500,
+      "holder": "Smithsonian Libraries",
+      "pilot_6": false,
+      "source_lock_reference": "pages/finebooks/conchologiaiconi05reev/8967228",
+      "language": "eng"
+    },
+    {
+      "id": "finebooks/conchologiaiconi05reev/8967062",
+      "source": "finebooks-bhl-impact",
+      "work": "conchologiaiconi05reev",
+      "page": 8967062,
+      "bhl_page_id": 8967062,
+      "gt_xml": "pc-00668602.xml",
+      "split": "dev",
+      "selection_rule": "median text",
+      "image_px": [
+        2368,
+        3167
+      ],
+      "gt_chars": 121,
+      "gt_fffd": 0,
+      "regions": {
+        "TextRegion": 13,
+        "ImageRegion": 10
+      },
+      "text_types": {
+        "heading": 1,
+        "caption": 10,
+        "paragraph": 2
+      },
+      "tags": [],
+      "bhl_item": 35904,
+      "year": 1849,
+      "lang": "eng",
+      "ppi": 500,
+      "holder": "Smithsonian Libraries",
+      "pilot_6": false,
+      "source_lock_reference": "pages/finebooks/conchologiaiconi05reev/8967062",
+      "language": "eng"
+    },
+    {
+      "id": "finebooks/pisciumquerelaee00sche/9684341",
+      "source": "finebooks-bhl-impact",
+      "work": "pisciumquerelaee00sche",
+      "page": 9684341,
+      "bhl_page_id": 9684341,
+      "gt_xml": "pc-00672141.xml",
+      "split": "dev",
+      "selection_rule": "illustration+text",
+      "image_px": [
+        2928,
+        1857
+      ],
+      "gt_chars": 883,
+      "gt_fffd": 0,
+      "regions": {
+        "TextRegion": 21,
+        "ImageRegion": 18
+      },
+      "text_types": {
+        "heading": 1,
+        "caption": 20
+      },
+      "tags": [],
+      "bhl_item": 37459,
+      "year": 1708,
+      "lang": "lat",
+      "ppi": 400,
+      "holder": "Harvard MCZ Ernst Mayr Library",
+      "pilot_6": false,
+      "source_lock_reference": "pages/finebooks/pisciumquerelaee00sche/9684341",
+      "language": "lat"
+    },
+    {
+      "id": "finebooks/pisciumquerelaee00sche/9684355",
+      "source": "finebooks-bhl-impact",
+      "work": "pisciumquerelaee00sche",
+      "page": 9684355,
+      "bhl_page_id": 9684355,
+      "gt_xml": "pc-00672109.xml",
+      "split": "dev",
+      "selection_rule": "densest text",
+      "image_px": [
+        2291,
+        3037
+      ],
+      "gt_chars": 1801,
+      "gt_fffd": 0,
+      "regions": {
+        "TextRegion": 4,
+        "GraphicRegion": 2
+      },
+      "text_types": {
+        "paragraph": 1,
+        "signature-mark": 1,
+        "catch-word": 1,
+        "page-number": 1
+      },
+      "tags": [],
+      "bhl_item": 37459,
+      "year": 1708,
+      "lang": "lat",
+      "ppi": 400,
+      "holder": "Harvard MCZ Ernst Mayr Library",
+      "pilot_6": false,
+      "source_lock_reference": "pages/finebooks/pisciumquerelaee00sche/9684355",
+      "language": "lat"
+    },
+    {
+      "id": "finebooks/pisciumquerelaee00sche/9684335",
+      "source": "finebooks-bhl-impact",
+      "work": "pisciumquerelaee00sche",
+      "page": 9684335,
+      "bhl_page_id": 9684335,
+      "gt_xml": "pc-00672135.xml",
+      "split": "dev",
+      "selection_rule": "most illegible (U+FFFD)",
+      "image_px": [
+        2291,
+        3037
+      ],
+      "gt_chars": 1467,
+      "gt_fffd": 75,
+      "regions": {
+        "TextRegion": 7,
+        "GraphicRegion": 2
+      },
+      "text_types": {
+        "paragraph": 4,
+        "catch-word": 1,
+        "page-number": 1,
+        "signature-mark": 1
+      },
+      "tags": [],
+      "bhl_item": 37459,
+      "year": 1708,
+      "lang": "lat",
+      "ppi": 400,
+      "holder": "Harvard MCZ Ernst Mayr Library",
+      "pilot_6": false,
+      "source_lock_reference": "pages/finebooks/pisciumquerelaee00sche/9684335",
+      "language": "lat"
+    },
+    {
+      "id": "finebooks/pisciumquerelaee00sche/9684354",
+      "source": "finebooks-bhl-impact",
+      "work": "pisciumquerelaee00sche",
+      "page": 9684354,
+      "bhl_page_id": 9684354,
+      "gt_xml": "pc-00672110.xml",
+      "split": "dev",
+      "selection_rule": "median text",
+      "image_px": [
+        2291,
+        3037
+      ],
+      "gt_chars": 1430,
+      "gt_fffd": 0,
+      "regions": {
+        "TextRegion": 6,
+        "GraphicRegion": 2
+      },
+      "text_types": {
+        "paragraph": 4,
+        "catch-word": 1,
+        "page-number": 1
+      },
+      "tags": [],
+      "bhl_item": 37459,
+      "year": 1708,
+      "lang": "lat",
+      "ppi": 400,
+      "holder": "Harvard MCZ Ernst Mayr Library",
+      "pilot_6": false,
+      "source_lock_reference": "pages/finebooks/pisciumquerelaee00sche/9684354",
+      "language": "lat"
+    },
+    {
+      "id": "finebooks/trudyrusskagoent161881russ/12341923",
+      "source": "finebooks-bhl-impact",
+      "work": "trudyrusskagoent161881russ",
+      "page": 12341923,
+      "bhl_page_id": 12341923,
+      "gt_xml": "pc-00672175.xml",
+      "split": "dev",
+      "selection_rule": "illustration+text",
+      "image_px": [
+        2201,
+        3129
+      ],
+      "gt_chars": 591,
+      "gt_fffd": 0,
+      "regions": {
+        "TextRegion": 21,
+        "GraphicRegion": 1,
+        "SeparatorRegion": 3
+      },
+      "text_types": {
+        "heading": 11,
+        "paragraph": 9,
+        "signature-mark": 1
+      },
+      "tags": [],
+      "bhl_item": 44806,
+      "year": 1881,
+      "lang": "fra+deu",
+      "ppi": 400,
+      "holder": "Smithsonian Libraries",
+      "pilot_6": false,
+      "source_lock_reference": "pages/finebooks/trudyrusskagoent161881russ/12341923",
+      "language": "fra+deu"
+    },
+    {
+      "id": "finebooks/trudyrusskagoent161881russ/12342014",
+      "source": "finebooks-bhl-impact",
+      "work": "trudyrusskagoent161881russ",
+      "page": 12342014,
+      "bhl_page_id": 12342014,
+      "gt_xml": "pc-00672289.xml",
+      "split": "dev",
+      "selection_rule": "densest text",
+      "image_px": [
+        2109,
+        3276
+      ],
+      "gt_chars": 3435,
+      "gt_fffd": 0,
+      "regions": {
+        "TextRegion": 108,
+        "SeparatorRegion": 1
+      },
+      "text_types": {
+        "page-number": 1,
+        "paragraph": 98,
+        "heading": 9
+      },
+      "tags": [],
+      "bhl_item": 44806,
+      "year": 1881,
+      "lang": "fra+deu",
+      "ppi": 400,
+      "holder": "Smithsonian Libraries",
+      "pilot_6": true,
+      "source_lock_reference": "pages/finebooks/trudyrusskagoent161881russ/12342014",
+      "language": "fra+deu"
+    },
+    {
+      "id": "finebooks/trudyrusskagoent161881russ/12341934",
+      "source": "finebooks-bhl-impact",
+      "work": "trudyrusskagoent161881russ",
+      "page": 12341934,
+      "bhl_page_id": 12341934,
+      "gt_xml": "pc-00672164.xml",
+      "split": "dev",
+      "selection_rule": "most illegible (U+FFFD)",
+      "image_px": [
+        2201,
+        3129
+      ],
+      "gt_chars": 2598,
+      "gt_fffd": 74,
+      "regions": {
+        "TextRegion": 10,
+        "SeparatorRegion": 1
+      },
+      "text_types": {
+        "heading": 1,
+        "paragraph": 9
+      },
+      "tags": [],
+      "bhl_item": 44806,
+      "year": 1881,
+      "lang": "fra+deu",
+      "ppi": 400,
+      "holder": "Smithsonian Libraries",
+      "pilot_6": false,
+      "source_lock_reference": "pages/finebooks/trudyrusskagoent161881russ/12341934",
+      "language": "fra+deu"
+    },
+    {
+      "id": "finebooks/trudyrusskagoent161881russ/12342041",
+      "source": "finebooks-bhl-impact",
+      "work": "trudyrusskagoent161881russ",
+      "page": 12342041,
+      "bhl_page_id": 12342041,
+      "gt_xml": "pc-00672316.xml",
+      "split": "dev",
+      "selection_rule": "table",
+      "image_px": [
+        2109,
+        3276
+      ],
+      "gt_chars": 322,
+      "gt_fffd": 0,
+      "regions": {
+        "TextRegion": 3,
+        "TableRegion": 2,
+        "SeparatorRegion": 1
+      },
+      "text_types": {
+        "paragraph": 2,
+        "page-number": 1
+      },
+      "tags": [],
+      "bhl_item": 44806,
+      "year": 1881,
+      "lang": "fra+deu",
+      "ppi": 400,
+      "holder": "Smithsonian Libraries",
+      "pilot_6": false,
+      "source_lock_reference": "pages/finebooks/trudyrusskagoent161881russ/12342041",
+      "language": "fra+deu"
+    },
+    {
+      "id": "finebooks/birdsofgreatbrit02butl/8992360",
+      "source": "finebooks-bhl-impact",
+      "work": "birdsofgreatbrit02butl",
+      "page": 8992360,
+      "bhl_page_id": 8992360,
+      "gt_xml": "pc-00667813.xml",
+      "split": "holdout",
+      "selection_rule": "illustration+text",
+      "image_px": [
+        2293,
+        3062
+      ],
+      "gt_chars": 573,
+      "gt_fffd": 0,
+      "regions": {
+        "TextRegion": 11,
+        "GraphicRegion": 1
+      },
+      "text_types": {
+        "heading": 8,
+        "paragraph": 3
+      },
+      "tags": [],
+      "bhl_item": 35947,
+      "year": 1907,
+      "lang": "eng",
+      "ppi": 300,
+      "holder": "American Museum of Natural History Library",
+      "pilot_6": false,
+      "source_lock_reference": "sealed_holdout/finebooks/birdsofgreatbrit02butl/8992360"
+    },
+    {
+      "id": "finebooks/birdsofgreatbrit02butl/8992651",
+      "source": "finebooks-bhl-impact",
+      "work": "birdsofgreatbrit02butl",
+      "page": 8992651,
+      "bhl_page_id": 8992651,
+      "gt_xml": "pc-00668238.xml",
+      "split": "holdout",
+      "selection_rule": "densest text",
+      "image_px": [
+        2293,
+        3062
+      ],
+      "gt_chars": 4981,
+      "gt_fffd": 0,
+      "regions": {
+        "TextRegion": 159,
+        "SeparatorRegion": 2
+      },
+      "text_types": {
+        "page-number": 1,
+        "header": 1,
+        "paragraph": 157
+      },
+      "tags": [],
+      "bhl_item": 35947,
+      "year": 1907,
+      "lang": "eng",
+      "ppi": 300,
+      "holder": "American Museum of Natural History Library",
+      "pilot_6": false,
+      "source_lock_reference": "sealed_holdout/finebooks/birdsofgreatbrit02butl/8992651"
+    },
+    {
+      "id": "finebooks/birdsofgreatbrit02butl/8992363",
+      "source": "finebooks-bhl-impact",
+      "work": "birdsofgreatbrit02butl",
+      "page": 8992363,
+      "bhl_page_id": 8992363,
+      "gt_xml": "pc-00667806.xml",
+      "split": "holdout",
+      "selection_rule": "most illegible (U+FFFD)",
+      "image_px": [
+        2293,
+        3062
+      ],
+      "gt_chars": 83,
+      "gt_fffd": 6,
+      "regions": {
+        "ImageRegion": 1,
+        "TextRegion": 5
+      },
+      "text_types": {
+        "caption": 4,
+        "header": 1
+      },
+      "tags": [],
+      "bhl_item": 35947,
+      "year": 1907,
+      "lang": "eng",
+      "ppi": 300,
+      "holder": "American Museum of Natural History Library",
+      "pilot_6": false,
+      "source_lock_reference": "sealed_holdout/finebooks/birdsofgreatbrit02butl/8992363"
+    },
+    {
+      "id": "finebooks/birdsofgreatbrit02butl/8992336",
+      "source": "finebooks-bhl-impact",
+      "work": "birdsofgreatbrit02butl",
+      "page": 8992336,
+      "bhl_page_id": 8992336,
+      "gt_xml": "pc-00667851.xml",
+      "split": "holdout",
+      "selection_rule": "median text",
+      "image_px": [
+        2293,
+        3062
+      ],
+      "gt_chars": 1853,
+      "gt_fffd": 0,
+      "regions": {
+        "TextRegion": 10,
+        "SeparatorRegion": 1
+      },
+      "text_types": {
+        "header": 1,
+        "page-number": 1,
+        "heading": 1,
+        "paragraph": 4,
+        "signature-mark": 2,
+        "drop-capital": 1
+      },
+      "tags": [],
+      "bhl_item": 35947,
+      "year": 1907,
+      "lang": "eng",
+      "ppi": 300,
+      "holder": "American Museum of Natural History Library",
+      "pilot_6": false,
+      "source_lock_reference": "sealed_holdout/finebooks/birdsofgreatbrit02butl/8992336"
+    },
+    {
+      "id": "finebooks/histoirenaturell10cuvi/4443602",
+      "source": "finebooks-bhl-impact",
+      "work": "histoirenaturell10cuvi",
+      "page": 4443602,
+      "bhl_page_id": 4443602,
+      "gt_xml": "pc-00669415.xml",
+      "split": "holdout",
+      "selection_rule": "illustration+text",
+      "image_px": [
+        1876,
+        3225
+      ],
+      "gt_chars": 1231,
+      "gt_fffd": 0,
+      "regions": {
+        "TextRegion": 30,
+        "SeparatorRegion": 1,
+        "GraphicRegion": 3
+      },
+      "text_types": {
+        "heading": 2,
+        "paragraph": 4,
+        "TOC-entry": 24
+      },
+      "tags": [],
+      "bhl_item": 25923,
+      "year": 1835,
+      "lang": "fra",
+      "ppi": 300,
+      "holder": "Harvard MCZ Ernst Mayr Library",
+      "pilot_6": false,
+      "source_lock_reference": "sealed_holdout/finebooks/histoirenaturell10cuvi/4443602"
+    },
+    {
+      "id": "finebooks/histoirenaturell10cuvi/4443640",
+      "source": "finebooks-bhl-impact",
+      "work": "histoirenaturell10cuvi",
+      "page": 4443640,
+      "bhl_page_id": 4443640,
+      "gt_xml": "pc-00669001.xml",
+      "split": "holdout",
+      "selection_rule": "densest text",
+      "image_px": [
+        1876,
+        3225
+      ],
+      "gt_chars": 1680,
+      "gt_fffd": 0,
+      "regions": {
+        "TextRegion": 3
+      },
+      "text_types": {
+        "paragraph": 1,
+        "header": 1,
+        "page-number": 1
+      },
+      "tags": [],
+      "bhl_item": 25923,
+      "year": 1835,
+      "lang": "fra",
+      "ppi": 300,
+      "holder": "Harvard MCZ Ernst Mayr Library",
+      "pilot_6": false,
+      "source_lock_reference": "sealed_holdout/finebooks/histoirenaturell10cuvi/4443640"
+    },
+    {
+      "id": "finebooks/histoirenaturell10cuvi/4443898",
+      "source": "finebooks-bhl-impact",
+      "work": "histoirenaturell10cuvi",
+      "page": 4443898,
+      "bhl_page_id": 4443898,
+      "gt_xml": "pc-00669259.xml",
+      "split": "holdout",
+      "selection_rule": "most illegible (U+FFFD)",
+      "image_px": [
+        1876,
+        3225
+      ],
+      "gt_chars": 1262,
+      "gt_fffd": 30,
+      "regions": {
+        "TextRegion": 6,
+        "SeparatorRegion": 1
+      },
+      "text_types": {
+        "paragraph": 3,
+        "footnote": 1,
+        "header": 1,
+        "page-number": 1
+      },
+      "tags": [],
+      "bhl_item": 25923,
+      "year": 1835,
+      "lang": "fra",
+      "ppi": 300,
+      "holder": "Harvard MCZ Ernst Mayr Library",
+      "pilot_6": false,
+      "source_lock_reference": "sealed_holdout/finebooks/histoirenaturell10cuvi/4443898"
+    },
+    {
+      "id": "finebooks/histoirenaturell10cuvi/4443592",
+      "source": "finebooks-bhl-impact",
+      "work": "histoirenaturell10cuvi",
+      "page": 4443592,
+      "bhl_page_id": 4443592,
+      "gt_xml": "pc-00669405.xml",
+      "split": "holdout",
+      "selection_rule": "median text",
+      "image_px": [
+        1876,
+        3225
+      ],
+      "gt_chars": 1251,
+      "gt_fffd": 0,
+      "regions": {
+        "TextRegion": 11
+      },
+      "text_types": {
+        "paragraph": 7,
+        "header": 1,
+        "page-number": 1,
+        "heading": 2
+      },
+      "tags": [],
+      "bhl_item": 25923,
+      "year": 1835,
+      "lang": "fra",
+      "ppi": 300,
+      "holder": "Harvard MCZ Ernst Mayr Library",
+      "pilot_6": false,
+      "source_lock_reference": "sealed_holdout/finebooks/histoirenaturell10cuvi/4443592"
+    },
+    {
+      "id": "finebooks/daschitinskelett00prel/9739690",
+      "source": "finebooks-bhl-impact",
+      "work": "daschitinskelett00prel",
+      "page": 9739690,
+      "bhl_page_id": 9739690,
+      "gt_xml": "pc-00671106.xml",
+      "split": "holdout",
+      "selection_rule": "illustration+text",
+      "image_px": [
+        2548,
+        3454
+      ],
+      "gt_chars": 3355,
+      "gt_fffd": 0,
+      "regions": {
+        "TextRegion": 16,
+        "SeparatorRegion": 1,
+        "ImageRegion": 6
+      },
+      "text_types": {
+        "page-number": 1,
+        "paragraph": 4,
+        "footnote": 11
+      },
+      "tags": [],
+      "bhl_item": 37582,
+      "year": 1913,
+      "lang": "deu",
+      "ppi": 300,
+      "holder": "Smithsonian Libraries",
+      "pilot_6": false,
+      "source_lock_reference": "sealed_holdout/finebooks/daschitinskelett00prel/9739690"
+    },
+    {
+      "id": "finebooks/daschitinskelett00prel/9739740",
+      "source": "finebooks-bhl-impact",
+      "work": "daschitinskelett00prel",
+      "page": 9739740,
+      "bhl_page_id": 9739740,
+      "gt_xml": "pc-00671133.xml",
+      "split": "holdout",
+      "selection_rule": "densest text",
+      "image_px": [
+        2619,
+        3454
+      ],
+      "gt_chars": 4865,
+      "gt_fffd": 0,
+      "regions": {
+        "TextRegion": 35
+      },
+      "text_types": {
+        "heading": 1,
+        "paragraph": 34
+      },
+      "tags": [],
+      "bhl_item": 37582,
+      "year": 1913,
+      "lang": "deu",
+      "ppi": 300,
+      "holder": "Smithsonian Libraries",
+      "pilot_6": false,
+      "source_lock_reference": "sealed_holdout/finebooks/daschitinskelett00prel/9739740"
+    },
+    {
+      "id": "finebooks/daschitinskelett00prel/9739728",
+      "source": "finebooks-bhl-impact",
+      "work": "daschitinskelett00prel",
+      "page": 9739728,
+      "bhl_page_id": 9739728,
+      "gt_xml": "pc-00671121.xml",
+      "split": "holdout",
+      "selection_rule": "most illegible (U+FFFD)",
+      "image_px": [
+        2548,
+        3454
+      ],
+      "gt_chars": 147,
+      "gt_fffd": 6,
+      "regions": {
+        "TextRegion": 5,
+        "ImageRegion": 7
+      },
+      "text_types": {
+        "header": 1,
+        "heading": 1,
+        "signature-mark": 2,
+        "caption": 1
+      },
+      "tags": [],
+      "bhl_item": 37582,
+      "year": 1913,
+      "lang": "deu",
+      "ppi": 300,
+      "holder": "Smithsonian Libraries",
+      "pilot_6": false,
+      "source_lock_reference": "sealed_holdout/finebooks/daschitinskelett00prel/9739728"
+    },
+    {
+      "id": "finebooks/daschitinskelett00prel/9739675",
+      "source": "finebooks-bhl-impact",
+      "work": "daschitinskelett00prel",
+      "page": 9739675,
+      "bhl_page_id": 9739675,
+      "gt_xml": "pc-00671089.xml",
+      "split": "holdout",
+      "selection_rule": "table",
+      "image_px": [
+        2548,
+        3454
+      ],
+      "gt_chars": 2519,
+      "gt_fffd": 0,
+      "regions": {
+        "TextRegion": 9,
+        "TableRegion": 1
+      },
+      "text_types": {
+        "page-number": 1,
+        "paragraph": 7,
+        "footnote": 1
+      },
+      "tags": [],
+      "bhl_item": 37582,
+      "year": 1913,
+      "lang": "deu",
+      "ppi": 300,
+      "holder": "Smithsonian Libraries",
+      "pilot_6": false,
+      "source_lock_reference": "sealed_holdout/finebooks/daschitinskelett00prel/9739675"
+    }
+  ]
+}
