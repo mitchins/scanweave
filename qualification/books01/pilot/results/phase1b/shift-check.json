@@ -1,0 +1,24 @@
+{
+  "page": "finebooks/conchologiaiconi05reev/8967333",
+  "row": "mrc-M",
+  "source_renderer": "pdfium",
+  "method": "150-DPI renders reduced to 75 DPI; mean background removed with Gaussian sigma 2; whole-page phase correlation",
+  "results": {
+    "phase": {
+      "shift_yx_75dpi_pixels": [
+        0.0,
+        0.0
+      ],
+      "normalized_error": 0.9999999999999947
+    },
+    "unnormalized": {
+      "shift_yx_75dpi_pixels": [
+        0.0,
+        0.0
+      ],
+      "normalized_error": 0.08813642015680656
+    }
+  },
+  "review_reference": "approximately 4 pixels at 75 DPI",
+  "limitation": "whole-page correlation can be insensitive to local or crop-specific displacement"
+}

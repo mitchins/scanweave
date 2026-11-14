@@ -1,0 +1,2758 @@
+{
+  "pages": {
+    "quiver/aventinus_grammatica_1515_0008": {
+      "gt_type": "TextLine",
+      "gt_lines": 54,
+      "known_gt_characters": 1412,
+      "frozen_hocr": {
+        "gt_count": 54,
+        "output_count": 26,
+        "matched_lines": 26,
+        "missing_lines": 28,
+        "missing_known_characters": 480,
+        "total_known_characters": 1412,
+        "missing_character_share": 0.33994334277620397,
+        "extra_lines": 0,
+        "matched_known_characters": 932,
+        "matched_character_edits": 528,
+        "line_aligned_cer": 0.5665236051502146,
+        "matched_known_words": 136,
+        "line_aligned_wer": 1.1838235294117647,
+        "kendall_tau": 0.9323076923076923,
+        "kendall_pair_count": 26,
+        "matching": "axis-aligned source-frame bounding-box IoU >= 0.2, one-to-one maximum weight"
+      },
+      "rows": {
+        "src": {
+          "dpi_confidence": "moderate",
+          "source_type": "quiver-original-tiff",
+          "adobe_label": null,
+          "document_level_scores": {
+            "diplomatic": {
+              "cer": 1.0,
+              "character_edits": 1467,
+              "known_characters": 1467,
+              "unknown_characters": 0,
+              "wer": 1.0,
+              "word_edits": 222,
+              "known_words": 222,
+              "bag_character_recall": 0.0
+            },
+            "reading": {
+              "cer": 1.0,
+              "character_edits": 1453,
+              "known_characters": 1453,
+              "unknown_characters": 0,
+              "wer": 1.0,
+              "word_edits": 216,
+              "known_words": 216,
+              "bag_character_recall": 0.0
+            }
+          },
+          "status": "ok",
+          "line_metrics": {
+            "gt_count": 54,
+            "output_count": 0,
+            "matched_lines": 0,
+            "missing_lines": 54,
+            "missing_known_characters": 1412,
+            "total_known_characters": 1412,
+            "missing_character_share": 1.0,
+            "extra_lines": 0,
+            "matched_known_characters": 0,
+            "matched_character_edits": 0,
+            "line_aligned_cer": null,
+            "matched_known_words": 0,
+            "line_aligned_wer": null,
+            "kendall_tau": null,
+            "kendall_pair_count": 0,
+            "matching": "axis-aligned source-frame bounding-box IoU >= 0.2, one-to-one maximum weight"
+          },
+          "matched_ocr_same_gt_lines": {
+            "shared_gt_lines": 0,
+            "known_characters": 0,
+            "known_words": 0,
+            "frozen_cer": null,
+            "pdf_cer": null,
+            "frozen_wer": null,
+            "pdf_wer": null,
+            "method": "compare both OCR texts against exactly the same GT lines, matched independently by geometry"
+          },
+          "recognized_word_search": {
+            "recognized_frozen_ocr_words_in_sample": 6,
+            "pdf_search_hits": 0,
+            "hit_rate": 0.0,
+            "semantics": "exact reading-normalized GT token present in selected frozen hOCR; case-insensitive literal PDFium search"
+          }
+        },
+        "sw-E": {
+          "dpi_confidence": "moderate",
+          "source_type": "quiver-original-tiff",
+          "adobe_label": null,
+          "document_level_scores": {
+            "diplomatic": {
+              "cer": 0.558282208588957,
+              "character_edits": 819,
+              "known_characters": 1467,
+              "unknown_characters": 0,
+              "wer": 0.9414414414414415,
+              "word_edits": 209,
+              "known_words": 222,
+              "bag_character_recall": 0.8561690524880708
+            },
+            "reading": {
+              "cer": 0.5588437715072264,
+              "character_edits": 812,
+              "known_characters": 1453,
+              "unknown_characters": 0,
+              "wer": 0.9398148148148148,
+              "word_edits": 203,
+              "known_words": 216,
+              "bag_character_recall": 0.8719889883000688
+            }
+          },
+          "status": "ok",
+          "line_metrics": {
+            "gt_count": 54,
+            "output_count": 35,
+            "matched_lines": 27,
+            "missing_lines": 27,
+            "missing_known_characters": 518,
+            "total_known_characters": 1412,
+            "missing_character_share": 0.3668555240793201,
+            "extra_lines": 8,
+            "matched_known_characters": 894,
+            "matched_character_edits": 820,
+            "line_aligned_cer": 0.9172259507829977,
+            "matched_known_words": 139,
+            "line_aligned_wer": 1.381294964028777,
+            "kendall_tau": 0.9487179487179488,
+            "kendall_pair_count": 27,
+            "matching": "axis-aligned source-frame bounding-box IoU >= 0.2, one-to-one maximum weight"
+          },
+          "matched_ocr_same_gt_lines": {
+            "shared_gt_lines": 19,
+            "known_characters": 710,
+            "known_words": 107,
+            "frozen_cer": 0.5112676056338028,
+            "pdf_cer": 0.795774647887324,
+            "frozen_wer": 1.1214953271028036,
+            "pdf_wer": 1.2990654205607477,
+            "method": "compare both OCR texts against exactly the same GT lines, matched independently by geometry"
+          },
+          "recognized_word_search": {
+            "recognized_frozen_ocr_words_in_sample": 6,
+            "pdf_search_hits": 5,
+            "hit_rate": 0.8333333333333334,
+            "semantics": "exact reading-normalized GT token present in selected frozen hOCR; case-insensitive literal PDFium search"
+          }
+        },
+        "sw-M": {
+          "dpi_confidence": "moderate",
+          "source_type": "quiver-original-tiff",
+          "adobe_label": null,
+          "document_level_scores": {
+            "diplomatic": {
+              "cer": 0.558282208588957,
+              "character_edits": 819,
+              "known_characters": 1467,
+              "unknown_characters": 0,
+              "wer": 0.9414414414414415,
+              "word_edits": 209,
+              "known_words": 222,
+              "bag_character_recall": 0.8561690524880708
+            },
+            "reading": {
+              "cer": 0.5588437715072264,
+              "character_edits": 812,
+              "known_characters": 1453,
+              "unknown_characters": 0,
+              "wer": 0.9398148148148148,
+              "word_edits": 203,
+              "known_words": 216,
+              "bag_character_recall": 0.8719889883000688
+            }
+          },
+          "status": "ok",
+          "line_metrics": {
+            "gt_count": 54,
+            "output_count": 35,
+            "matched_lines": 27,
+            "missing_lines": 27,
+            "missing_known_characters": 518,
+            "total_known_characters": 1412,
+            "missing_character_share": 0.3668555240793201,
+            "extra_lines": 8,
+            "matched_known_characters": 894,
+            "matched_character_edits": 820,
+            "line_aligned_cer": 0.9172259507829977,
+            "matched_known_words": 139,
+            "line_aligned_wer": 1.381294964028777,
+            "kendall_tau": 0.9487179487179488,
+            "kendall_pair_count": 27,
+            "matching": "axis-aligned source-frame bounding-box IoU >= 0.2, one-to-one maximum weight"
+          },
+          "matched_ocr_same_gt_lines": {
+            "shared_gt_lines": 19,
+            "known_characters": 710,
+            "known_words": 107,
+            "frozen_cer": 0.5112676056338028,
+            "pdf_cer": 0.795774647887324,
+            "frozen_wer": 1.1214953271028036,
+            "pdf_wer": 1.2990654205607477,
+            "method": "compare both OCR texts against exactly the same GT lines, matched independently by geometry"
+          },
+          "recognized_word_search": {
+            "recognized_frozen_ocr_words_in_sample": 6,
+            "pdf_search_hits": 5,
+            "hit_rate": 0.8333333333333334,
+            "semantics": "exact reading-normalized GT token present in selected frozen hOCR; case-insensitive literal PDFium search"
+          }
+        },
+        "sw-build": {
+          "dpi_confidence": "moderate",
+          "source_type": "quiver-original-tiff",
+          "adobe_label": null,
+          "document_level_scores": {
+            "diplomatic": {
+              "cer": 0.558282208588957,
+              "character_edits": 819,
+              "known_characters": 1467,
+              "unknown_characters": 0,
+              "wer": 0.9414414414414415,
+              "word_edits": 209,
+              "known_words": 222,
+              "bag_character_recall": 0.8561690524880708
+            },
+            "reading": {
+              "cer": 0.5588437715072264,
+              "character_edits": 812,
+              "known_characters": 1453,
+              "unknown_characters": 0,
+              "wer": 0.9398148148148148,
+              "word_edits": 203,
+              "known_words": 216,
+              "bag_character_recall": 0.8719889883000688
+            }
+          },
+          "status": "ok",
+          "line_metrics": {
+            "gt_count": 54,
+            "output_count": 35,
+            "matched_lines": 27,
+            "missing_lines": 27,
+            "missing_known_characters": 518,
+            "total_known_characters": 1412,
+            "missing_character_share": 0.3668555240793201,
+            "extra_lines": 8,
+            "matched_known_characters": 894,
+            "matched_character_edits": 820,
+            "line_aligned_cer": 0.9172259507829977,
+            "matched_known_words": 139,
+            "line_aligned_wer": 1.381294964028777,
+            "kendall_tau": 0.9487179487179488,
+            "kendall_pair_count": 27,
+            "matching": "axis-aligned source-frame bounding-box IoU >= 0.2, one-to-one maximum weight"
+          },
+          "matched_ocr_same_gt_lines": {
+            "shared_gt_lines": 19,
+            "known_characters": 710,
+            "known_words": 107,
+            "frozen_cer": 0.5112676056338028,
+            "pdf_cer": 0.795774647887324,
+            "frozen_wer": 1.1214953271028036,
+            "pdf_wer": 1.2990654205607477,
+            "method": "compare both OCR texts against exactly the same GT lines, matched independently by geometry"
+          },
+          "recognized_word_search": {
+            "recognized_frozen_ocr_words_in_sample": 6,
+            "pdf_search_hits": 5,
+            "hit_rate": 0.8333333333333334,
+            "semantics": "exact reading-normalized GT token present in selected frozen hOCR; case-insensitive literal PDFium search"
+          }
+        },
+        "ocrmypdf-E": {
+          "dpi_confidence": "moderate",
+          "source_type": "quiver-original-tiff",
+          "adobe_label": null,
+          "document_level_scores": {
+            "diplomatic": {
+              "cer": 0.5705521472392638,
+              "character_edits": 837,
+              "known_characters": 1467,
+              "unknown_characters": 0,
+              "wer": 0.9594594594594594,
+              "word_edits": 213,
+              "known_words": 222,
+              "bag_character_recall": 0.8316291751874574
+            },
+            "reading": {
+              "cer": 0.553337921541638,
+              "character_edits": 804,
+              "known_characters": 1453,
+              "unknown_characters": 0,
+              "wer": 0.9398148148148148,
+              "word_edits": 203,
+              "known_words": 216,
+              "bag_character_recall": 0.8733654507914659
+            }
+          },
+          "status": "ok",
+          "line_metrics": {
+            "gt_count": 54,
+            "output_count": 32,
+            "matched_lines": 31,
+            "missing_lines": 23,
+            "missing_known_characters": 384,
+            "total_known_characters": 1412,
+            "missing_character_share": 0.2719546742209632,
+            "extra_lines": 1,
+            "matched_known_characters": 1028,
+            "matched_character_edits": 708,
+            "line_aligned_cer": 0.688715953307393,
+            "matched_known_words": 157,
+            "line_aligned_wer": 1.2547770700636942,
+            "kendall_tau": 0.956989247311828,
+            "kendall_pair_count": 31,
+            "matching": "axis-aligned source-frame bounding-box IoU >= 0.2, one-to-one maximum weight"
+          },
+          "matched_ocr_same_gt_lines": {
+            "shared_gt_lines": 24,
+            "known_characters": 878,
+            "known_words": 129,
+            "frozen_cer": 0.5364464692482915,
+            "pdf_cer": 0.5979498861047836,
+            "frozen_wer": 1.1550387596899225,
+            "pdf_wer": 1.1550387596899225,
+            "method": "compare both OCR texts against exactly the same GT lines, matched independently by geometry"
+          },
+          "recognized_word_search": {
+            "recognized_frozen_ocr_words_in_sample": 6,
+            "pdf_search_hits": 5,
+            "hit_rate": 0.8333333333333334,
+            "semantics": "exact reading-normalized GT token present in selected frozen hOCR; case-insensitive literal PDFium search"
+          }
+        },
+        "mrc-M": {
+          "dpi_confidence": "moderate",
+          "source_type": "quiver-original-tiff",
+          "adobe_label": null,
+          "document_level_scores": {
+            "diplomatic": {
+              "cer": 0.5548738922972052,
+              "character_edits": 814,
+              "known_characters": 1467,
+              "unknown_characters": 0,
+              "wer": 0.9369369369369369,
+              "word_edits": 208,
+              "known_words": 222,
+              "bag_character_recall": 0.8554873892297206
+            },
+            "reading": {
+              "cer": 0.5540261527873366,
+              "character_edits": 805,
+              "known_characters": 1453,
+              "unknown_characters": 0,
+              "wer": 0.9398148148148148,
+              "word_edits": 203,
+              "known_words": 216,
+              "bag_character_recall": 0.8726772195457674
+            }
+          },
+          "status": "ok",
+          "line_metrics": {
+            "gt_count": 54,
+            "output_count": 36,
+            "matched_lines": 35,
+            "missing_lines": 19,
+            "missing_known_characters": 324,
+            "total_known_characters": 1412,
+            "missing_character_share": 0.22946175637393768,
+            "extra_lines": 1,
+            "matched_known_characters": 1088,
+            "matched_character_edits": 687,
+            "line_aligned_cer": 0.6314338235294118,
+            "matched_known_words": 164,
+            "line_aligned_wer": 1.2073170731707317,
+            "kendall_tau": 0.9529411764705882,
+            "kendall_pair_count": 35,
+            "matching": "axis-aligned source-frame bounding-box IoU >= 0.2, one-to-one maximum weight"
+          },
+          "matched_ocr_same_gt_lines": {
+            "shared_gt_lines": 24,
+            "known_characters": 858,
+            "known_words": 125,
+            "frozen_cer": 0.5582750582750583,
+            "pdf_cer": 0.5990675990675991,
+            "frozen_wer": 1.168,
+            "pdf_wer": 1.184,
+            "method": "compare both OCR texts against exactly the same GT lines, matched independently by geometry"
+          },
+          "recognized_word_search": {
+            "recognized_frozen_ocr_words_in_sample": 6,
+            "pdf_search_hits": 5,
+            "hit_rate": 0.8333333333333334,
+            "semantics": "exact reading-normalized GT token present in selected frozen hOCR; case-insensitive literal PDFium search"
+          }
+        },
+        "adobe-E": {
+          "dpi_confidence": "moderate",
+          "source_type": "quiver-original-tiff",
+          "adobe_label": "Acrobat default OCR language (not matched); no Fraktur support; page straightened (deskew)",
+          "document_level_scores": {
+            "diplomatic": {
+              "cer": 0.8084526244035446,
+              "character_edits": 1186,
+              "known_characters": 1467,
+              "unknown_characters": 0,
+              "wer": 1.1576576576576576,
+              "word_edits": 257,
+              "known_words": 222,
+              "bag_character_recall": 0.7307430129516019
+            },
+            "reading": {
+              "cer": 0.8059187887130076,
+              "character_edits": 1171,
+              "known_characters": 1453,
+              "unknown_characters": 0,
+              "wer": 1.1805555555555556,
+              "word_edits": 255,
+              "known_words": 216,
+              "bag_character_recall": 0.7487955953200275
+            }
+          },
+          "status": "ok",
+          "line_metrics": {
+            "gt_count": 54,
+            "output_count": 63,
+            "matched_lines": 33,
+            "missing_lines": 21,
+            "missing_known_characters": 323,
+            "total_known_characters": 1412,
+            "missing_character_share": 0.22875354107648727,
+            "extra_lines": 30,
+            "matched_known_characters": 1089,
+            "matched_character_edits": 1078,
+            "line_aligned_cer": 0.98989898989899,
+            "matched_known_words": 164,
+            "line_aligned_wer": 1.4451219512195121,
+            "kendall_tau": 0.9545454545454545,
+            "kendall_pair_count": 33,
+            "matching": "axis-aligned source-frame bounding-box IoU >= 0.2, one-to-one maximum weight"
+          },
+          "matched_ocr_same_gt_lines": {
+            "shared_gt_lines": 26,
+            "known_characters": 932,
+            "known_words": 136,
+            "frozen_cer": 0.5665236051502146,
+            "pdf_cer": 0.9259656652360515,
+            "frozen_wer": 1.1838235294117647,
+            "pdf_wer": 1.3602941176470589,
+            "method": "compare both OCR texts against exactly the same GT lines, matched independently by geometry"
+          },
+          "recognized_word_search": {
+            "recognized_frozen_ocr_words_in_sample": 6,
+            "pdf_search_hits": 0,
+            "hit_rate": 0.0,
+            "semantics": "exact reading-normalized GT token present in selected frozen hOCR; case-insensitive literal PDFium search"
+          }
+        }
+      }
+    },
+    "quiver/luther_babstum_1526_0011": {
+      "gt_type": "TextLine",
+      "gt_lines": 19,
+      "known_gt_characters": 582,
+      "frozen_hocr": {
+        "gt_count": 19,
+        "output_count": 17,
+        "matched_lines": 17,
+        "missing_lines": 2,
+        "missing_known_characters": 41,
+        "total_known_characters": 582,
+        "missing_character_share": 0.070446735395189,
+        "extra_lines": 0,
+        "matched_known_characters": 541,
+        "matched_character_edits": 93,
+        "line_aligned_cer": 0.17190388170055454,
+        "matched_known_words": 99,
+        "line_aligned_wer": 0.6767676767676768,
+        "kendall_tau": 0.9999999999999999,
+        "kendall_pair_count": 17,
+        "matching": "axis-aligned source-frame bounding-box IoU >= 0.2, one-to-one maximum weight"
+      },
+      "rows": {
+        "src": {
+          "dpi_confidence": "moderate",
+          "source_type": "quiver-original-tiff",
+          "adobe_label": null,
+          "document_level_scores": {
+            "diplomatic": {
+              "cer": 1.0,
+              "character_edits": 598,
+              "known_characters": 598,
+              "unknown_characters": 0,
+              "wer": 1.0,
+              "word_edits": 105,
+              "known_words": 105,
+              "bag_character_recall": 0.0
+            },
+            "reading": {
+              "cer": 1.0,
+              "character_edits": 600,
+              "known_characters": 600,
+              "unknown_characters": 0,
+              "wer": 1.0,
+              "word_edits": 105,
+              "known_words": 105,
+              "bag_character_recall": 0.0
+            }
+          },
+          "status": "ok",
+          "line_metrics": {
+            "gt_count": 19,
+            "output_count": 0,
+            "matched_lines": 0,
+            "missing_lines": 19,
+            "missing_known_characters": 582,
+            "total_known_characters": 582,
+            "missing_character_share": 1.0,
+            "extra_lines": 0,
+            "matched_known_characters": 0,
+            "matched_character_edits": 0,
+            "line_aligned_cer": null,
+            "matched_known_words": 0,
+            "line_aligned_wer": null,
+            "kendall_tau": null,
+            "kendall_pair_count": 0,
+            "matching": "axis-aligned source-frame bounding-box IoU >= 0.2, one-to-one maximum weight"
+          },
+          "matched_ocr_same_gt_lines": {
+            "shared_gt_lines": 0,
+            "known_characters": 0,
+            "known_words": 0,
+            "frozen_cer": null,
+            "pdf_cer": null,
+            "frozen_wer": null,
+            "pdf_wer": null,
+            "method": "compare both OCR texts against exactly the same GT lines, matched independently by geometry"
+          },
+          "recognized_word_search": {
+            "recognized_frozen_ocr_words_in_sample": 9,
+            "pdf_search_hits": 0,
+            "hit_rate": 0.0,
+            "semantics": "exact reading-normalized GT token present in selected frozen hOCR; case-insensitive literal PDFium search"
+          }
+        },
+        "sw-E": {
+          "dpi_confidence": "moderate",
+          "source_type": "quiver-original-tiff",
+          "adobe_label": null,
+          "document_level_scores": {
+            "diplomatic": {
+              "cer": 0.22742474916387959,
+              "character_edits": 136,
+              "known_characters": 598,
+              "unknown_characters": 0,
+              "wer": 0.6857142857142857,
+              "word_edits": 72,
+              "known_words": 105,
+              "bag_character_recall": 0.8110367892976589
+            },
+            "reading": {
+              "cer": 0.22666666666666666,
+              "character_edits": 136,
+              "known_characters": 600,
+              "unknown_characters": 0,
+              "wer": 0.6857142857142857,
+              "word_edits": 72,
+              "known_words": 105,
+              "bag_character_recall": 0.82
+            }
+          },
+          "status": "ok",
+          "line_metrics": {
+            "gt_count": 19,
+            "output_count": 14,
+            "matched_lines": 14,
+            "missing_lines": 5,
+            "missing_known_characters": 108,
+            "total_known_characters": 582,
+            "missing_character_share": 0.18556701030927836,
+            "extra_lines": 0,
+            "matched_known_characters": 474,
+            "matched_character_edits": 136,
+            "line_aligned_cer": 0.2869198312236287,
+            "matched_known_words": 88,
+            "line_aligned_wer": 0.7272727272727273,
+            "kendall_tau": 1.0,
+            "kendall_pair_count": 14,
+            "matching": "axis-aligned source-frame bounding-box IoU >= 0.2, one-to-one maximum weight"
+          },
+          "matched_ocr_same_gt_lines": {
+            "shared_gt_lines": 14,
+            "known_characters": 474,
+            "known_words": 88,
+            "frozen_cer": 0.17088607594936708,
+            "pdf_cer": 0.2869198312236287,
+            "frozen_wer": 0.6704545454545454,
+            "pdf_wer": 0.7272727272727273,
+            "method": "compare both OCR texts against exactly the same GT lines, matched independently by geometry"
+          },
+          "recognized_word_search": {
+            "recognized_frozen_ocr_words_in_sample": 9,
+            "pdf_search_hits": 7,
+            "hit_rate": 0.7777777777777778,
+            "semantics": "exact reading-normalized GT token present in selected frozen hOCR; case-insensitive literal PDFium search"
+          }
+        },
+        "sw-M": {
+          "dpi_confidence": "moderate",
+          "source_type": "quiver-original-tiff",
+          "adobe_label": null,
+          "document_level_scores": {
+            "diplomatic": {
+              "cer": 0.22742474916387959,
+              "character_edits": 136,
+              "known_characters": 598,
+              "unknown_characters": 0,
+              "wer": 0.6857142857142857,
+              "word_edits": 72,
+              "known_words": 105,
+              "bag_character_recall": 0.8110367892976589
+            },
+            "reading": {
+              "cer": 0.22666666666666666,
+              "character_edits": 136,
+              "known_characters": 600,
+              "unknown_characters": 0,
+              "wer": 0.6857142857142857,
+              "word_edits": 72,
+              "known_words": 105,
+              "bag_character_recall": 0.82
+            }
+          },
+          "status": "ok",
+          "line_metrics": {
+            "gt_count": 19,
+            "output_count": 14,
+            "matched_lines": 14,
+            "missing_lines": 5,
+            "missing_known_characters": 108,
+            "total_known_characters": 582,
+            "missing_character_share": 0.18556701030927836,
+            "extra_lines": 0,
+            "matched_known_characters": 474,
+            "matched_character_edits": 136,
+            "line_aligned_cer": 0.2869198312236287,
+            "matched_known_words": 88,
+            "line_aligned_wer": 0.7272727272727273,
+            "kendall_tau": 1.0,
+            "kendall_pair_count": 14,
+            "matching": "axis-aligned source-frame bounding-box IoU >= 0.2, one-to-one maximum weight"
+          },
+          "matched_ocr_same_gt_lines": {
+            "shared_gt_lines": 14,
+            "known_characters": 474,
+            "known_words": 88,
+            "frozen_cer": 0.17088607594936708,
+            "pdf_cer": 0.2869198312236287,
+            "frozen_wer": 0.6704545454545454,
+            "pdf_wer": 0.7272727272727273,
+            "method": "compare both OCR texts against exactly the same GT lines, matched independently by geometry"
+          },
+          "recognized_word_search": {
+            "recognized_frozen_ocr_words_in_sample": 9,
+            "pdf_search_hits": 7,
+            "hit_rate": 0.7777777777777778,
+            "semantics": "exact reading-normalized GT token present in selected frozen hOCR; case-insensitive literal PDFium search"
+          }
+        },
+        "sw-build": {
+          "dpi_confidence": "moderate",
+          "source_type": "quiver-original-tiff",
+          "adobe_label": null,
+          "document_level_scores": {
+            "diplomatic": {
+              "cer": 0.22742474916387959,
+              "character_edits": 136,
+              "known_characters": 598,
+              "unknown_characters": 0,
+              "wer": 0.6857142857142857,
+              "word_edits": 72,
+              "known_words": 105,
+              "bag_character_recall": 0.8110367892976589
+            },
+            "reading": {
+              "cer": 0.22666666666666666,
+              "character_edits": 136,
+              "known_characters": 600,
+              "unknown_characters": 0,
+              "wer": 0.6857142857142857,
+              "word_edits": 72,
+              "known_words": 105,
+              "bag_character_recall": 0.82
+            }
+          },
+          "status": "ok",
+          "line_metrics": {
+            "gt_count": 19,
+            "output_count": 14,
+            "matched_lines": 14,
+            "missing_lines": 5,
+            "missing_known_characters": 108,
+            "total_known_characters": 582,
+            "missing_character_share": 0.18556701030927836,
+            "extra_lines": 0,
+            "matched_known_characters": 474,
+            "matched_character_edits": 136,
+            "line_aligned_cer": 0.2869198312236287,
+            "matched_known_words": 88,
+            "line_aligned_wer": 0.7272727272727273,
+            "kendall_tau": 1.0,
+            "kendall_pair_count": 14,
+            "matching": "axis-aligned source-frame bounding-box IoU >= 0.2, one-to-one maximum weight"
+          },
+          "matched_ocr_same_gt_lines": {
+            "shared_gt_lines": 14,
+            "known_characters": 474,
+            "known_words": 88,
+            "frozen_cer": 0.17088607594936708,
+            "pdf_cer": 0.2869198312236287,
+            "frozen_wer": 0.6704545454545454,
+            "pdf_wer": 0.7272727272727273,
+            "method": "compare both OCR texts against exactly the same GT lines, matched independently by geometry"
+          },
+          "recognized_word_search": {
+            "recognized_frozen_ocr_words_in_sample": 9,
+            "pdf_search_hits": 7,
+            "hit_rate": 0.7777777777777778,
+            "semantics": "exact reading-normalized GT token present in selected frozen hOCR; case-insensitive literal PDFium search"
+          }
+        },
+        "ocrmypdf-E": {
+          "dpi_confidence": "moderate",
+          "source_type": "quiver-original-tiff",
+          "adobe_label": null,
+          "document_level_scores": {
+            "diplomatic": {
+              "cer": 0.23411371237458195,
+              "character_edits": 140,
+              "known_characters": 598,
+              "unknown_characters": 0,
+              "wer": 0.7333333333333333,
+              "word_edits": 77,
+              "known_words": 105,
+              "bag_character_recall": 0.8127090301003345
+            },
+            "reading": {
+              "cer": 0.20333333333333334,
+              "character_edits": 122,
+              "known_characters": 600,
+              "unknown_characters": 0,
+              "wer": 0.6952380952380952,
+              "word_edits": 73,
+              "known_words": 105,
+              "bag_character_recall": 0.8533333333333334
+            }
+          },
+          "status": "ok",
+          "line_metrics": {
+            "gt_count": 19,
+            "output_count": 20,
+            "matched_lines": 18,
+            "missing_lines": 1,
+            "missing_known_characters": 18,
+            "total_known_characters": 582,
+            "missing_character_share": 0.030927835051546393,
+            "extra_lines": 2,
+            "matched_known_characters": 564,
+            "matched_character_edits": 103,
+            "line_aligned_cer": 0.18262411347517732,
+            "matched_known_words": 102,
+            "line_aligned_wer": 0.6862745098039216,
+            "kendall_tau": 1.0,
+            "kendall_pair_count": 18,
+            "matching": "axis-aligned source-frame bounding-box IoU >= 0.2, one-to-one maximum weight"
+          },
+          "matched_ocr_same_gt_lines": {
+            "shared_gt_lines": 17,
+            "known_characters": 541,
+            "known_words": 99,
+            "frozen_cer": 0.17190388170055454,
+            "pdf_cer": 0.18299445471349354,
+            "frozen_wer": 0.6767676767676768,
+            "pdf_wer": 0.6767676767676768,
+            "method": "compare both OCR texts against exactly the same GT lines, matched independently by geometry"
+          },
+          "recognized_word_search": {
+            "recognized_frozen_ocr_words_in_sample": 9,
+            "pdf_search_hits": 9,
+            "hit_rate": 1.0,
+            "semantics": "exact reading-normalized GT token present in selected frozen hOCR; case-insensitive literal PDFium search"
+          }
+        },
+        "mrc-M": {
+          "dpi_confidence": "moderate",
+          "source_type": "quiver-original-tiff",
+          "adobe_label": null,
+          "document_level_scores": {
+            "diplomatic": {
+              "cer": 0.22742474916387959,
+              "character_edits": 136,
+              "known_characters": 598,
+              "unknown_characters": 0,
+              "wer": 0.6857142857142857,
+              "word_edits": 72,
+              "known_words": 105,
+              "bag_character_recall": 0.8110367892976589
+            },
+            "reading": {
+              "cer": 0.22666666666666666,
+              "character_edits": 136,
+              "known_characters": 600,
+              "unknown_characters": 0,
+              "wer": 0.6857142857142857,
+              "word_edits": 72,
+              "known_words": 105,
+              "bag_character_recall": 0.82
+            }
+          },
+          "status": "ok",
+          "line_metrics": {
+            "gt_count": 19,
+            "output_count": 16,
+            "matched_lines": 16,
+            "missing_lines": 3,
+            "missing_known_characters": 71,
+            "total_known_characters": 582,
+            "missing_character_share": 0.12199312714776632,
+            "extra_lines": 0,
+            "matched_known_characters": 511,
+            "matched_character_edits": 112,
+            "line_aligned_cer": 0.2191780821917808,
+            "matched_known_words": 95,
+            "line_aligned_wer": 0.6947368421052632,
+            "kendall_tau": 1.0,
+            "kendall_pair_count": 16,
+            "matching": "axis-aligned source-frame bounding-box IoU >= 0.2, one-to-one maximum weight"
+          },
+          "matched_ocr_same_gt_lines": {
+            "shared_gt_lines": 16,
+            "known_characters": 511,
+            "known_words": 95,
+            "frozen_cer": 0.17416829745596868,
+            "pdf_cer": 0.2191780821917808,
+            "frozen_wer": 0.6736842105263158,
+            "pdf_wer": 0.6947368421052632,
+            "method": "compare both OCR texts against exactly the same GT lines, matched independently by geometry"
+          },
+          "recognized_word_search": {
+            "recognized_frozen_ocr_words_in_sample": 9,
+            "pdf_search_hits": 7,
+            "hit_rate": 0.7777777777777778,
+            "semantics": "exact reading-normalized GT token present in selected frozen hOCR; case-insensitive literal PDFium search"
+          }
+        },
+        "adobe-E": {
+          "dpi_confidence": "moderate",
+          "source_type": "quiver-original-tiff",
+          "adobe_label": "Acrobat default OCR language (not matched); no Fraktur support; page straightened (deskew)",
+          "document_level_scores": {
+            "diplomatic": {
+              "cer": 0.6471571906354515,
+              "character_edits": 387,
+              "known_characters": 598,
+              "unknown_characters": 0,
+              "wer": 0.9809523809523809,
+              "word_edits": 103,
+              "known_words": 105,
+              "bag_character_recall": 0.6254180602006689
+            },
+            "reading": {
+              "cer": 0.6433333333333333,
+              "character_edits": 386,
+              "known_characters": 600,
+              "unknown_characters": 0,
+              "wer": 0.9809523809523809,
+              "word_edits": 103,
+              "known_words": 105,
+              "bag_character_recall": 0.6333333333333333
+            }
+          },
+          "status": "ok",
+          "line_metrics": {
+            "gt_count": 19,
+            "output_count": 23,
+            "matched_lines": 17,
+            "missing_lines": 2,
+            "missing_known_characters": 41,
+            "total_known_characters": 582,
+            "missing_character_share": 0.070446735395189,
+            "extra_lines": 6,
+            "matched_known_characters": 541,
+            "matched_character_edits": 350,
+            "line_aligned_cer": 0.6469500924214417,
+            "matched_known_words": 99,
+            "line_aligned_wer": 1.0101010101010102,
+            "kendall_tau": 0.9999999999999999,
+            "kendall_pair_count": 17,
+            "matching": "axis-aligned source-frame bounding-box IoU >= 0.2, one-to-one maximum weight"
+          },
+          "matched_ocr_same_gt_lines": {
+            "shared_gt_lines": 17,
+            "known_characters": 541,
+            "known_words": 99,
+            "frozen_cer": 0.17190388170055454,
+            "pdf_cer": 0.6469500924214417,
+            "frozen_wer": 0.6767676767676768,
+            "pdf_wer": 1.0101010101010102,
+            "method": "compare both OCR texts against exactly the same GT lines, matched independently by geometry"
+          },
+          "recognized_word_search": {
+            "recognized_frozen_ocr_words_in_sample": 9,
+            "pdf_search_hits": 0,
+            "hit_rate": 0.0,
+            "semantics": "exact reading-normalized GT token present in selected frozen hOCR; case-insensitive literal PDFium search"
+          }
+        }
+      }
+    },
+    "quiver/arnold_ketzerhistorie01_1699_0114": {
+      "gt_type": "TextLine",
+      "gt_lines": 159,
+      "known_gt_characters": 5826,
+      "frozen_hocr": {
+        "gt_count": 159,
+        "output_count": 149,
+        "matched_lines": 137,
+        "missing_lines": 22,
+        "missing_known_characters": 607,
+        "total_known_characters": 5826,
+        "missing_character_share": 0.10418812221077926,
+        "extra_lines": 12,
+        "matched_known_characters": 5219,
+        "matched_character_edits": 803,
+        "line_aligned_cer": 0.1538608928913585,
+        "matched_known_words": 969,
+        "line_aligned_wer": 0.49742002063983487,
+        "kendall_tau": 0.8540145985401458,
+        "kendall_pair_count": 137,
+        "matching": "axis-aligned source-frame bounding-box IoU >= 0.2, one-to-one maximum weight"
+      },
+      "rows": {
+        "src": {
+          "dpi_confidence": "moderate",
+          "source_type": "quiver-original-tiff",
+          "adobe_label": null,
+          "document_level_scores": {
+            "diplomatic": {
+              "cer": 1.0,
+              "character_edits": 5965,
+              "known_characters": 5965,
+              "unknown_characters": 0,
+              "wer": 1.0,
+              "word_edits": 1079,
+              "known_words": 1079,
+              "bag_character_recall": 0.0
+            },
+            "reading": {
+              "cer": 1.0,
+              "character_edits": 5918,
+              "known_characters": 5918,
+              "unknown_characters": 0,
+              "wer": 1.0,
+              "word_edits": 1046,
+              "known_words": 1046,
+              "bag_character_recall": 0.0
+            }
+          },
+          "status": "ok",
+          "line_metrics": {
+            "gt_count": 159,
+            "output_count": 0,
+            "matched_lines": 0,
+            "missing_lines": 159,
+            "missing_known_characters": 5826,
+            "total_known_characters": 5826,
+            "missing_character_share": 1.0,
+            "extra_lines": 0,
+            "matched_known_characters": 0,
+            "matched_character_edits": 0,
+            "line_aligned_cer": null,
+            "matched_known_words": 0,
+            "line_aligned_wer": null,
+            "kendall_tau": null,
+            "kendall_pair_count": 0,
+            "matching": "axis-aligned source-frame bounding-box IoU >= 0.2, one-to-one maximum weight"
+          },
+          "matched_ocr_same_gt_lines": {
+            "shared_gt_lines": 0,
+            "known_characters": 0,
+            "known_words": 0,
+            "frozen_cer": null,
+            "pdf_cer": null,
+            "frozen_wer": null,
+            "pdf_wer": null,
+            "method": "compare both OCR texts against exactly the same GT lines, matched independently by geometry"
+          },
+          "recognized_word_search": {
+            "recognized_frozen_ocr_words_in_sample": 12,
+            "pdf_search_hits": 0,
+            "hit_rate": 0.0,
+            "semantics": "exact reading-normalized GT token present in selected frozen hOCR; case-insensitive literal PDFium search"
+          }
+        },
+        "sw-E": {
+          "dpi_confidence": "moderate",
+          "source_type": "quiver-original-tiff",
+          "adobe_label": null,
+          "document_level_scores": {
+            "diplomatic": {
+              "cer": 0.37753562447611066,
+              "character_edits": 2252,
+              "known_characters": 5965,
+              "unknown_characters": 0,
+              "wer": 0.6904541241890639,
+              "word_edits": 745,
+              "known_words": 1079,
+              "bag_character_recall": 0.9186923721709975
+            },
+            "reading": {
+              "cer": 0.3754646840148699,
+              "character_edits": 2222,
+              "known_characters": 5918,
+              "unknown_characters": 0,
+              "wer": 0.6931166347992351,
+              "word_edits": 725,
+              "known_words": 1046,
+              "bag_character_recall": 0.9317336938154782
+            }
+          },
+          "status": "ok",
+          "line_metrics": {
+            "gt_count": 159,
+            "output_count": 173,
+            "matched_lines": 143,
+            "missing_lines": 16,
+            "missing_known_characters": 280,
+            "total_known_characters": 5826,
+            "missing_character_share": 0.048060418812221076,
+            "extra_lines": 30,
+            "matched_known_characters": 5546,
+            "matched_character_edits": 1189,
+            "line_aligned_cer": 0.214388748647674,
+            "matched_known_words": 1033,
+            "line_aligned_wer": 0.5605033881897387,
+            "kendall_tau": 0.857382054565153,
+            "kendall_pair_count": 143,
+            "matching": "axis-aligned source-frame bounding-box IoU >= 0.2, one-to-one maximum weight"
+          },
+          "matched_ocr_same_gt_lines": {
+            "shared_gt_lines": 131,
+            "known_characters": 5081,
+            "known_words": 947,
+            "frozen_cer": 0.1509545365085613,
+            "pdf_cer": 0.18165715410352293,
+            "frozen_wer": 0.498416050686378,
+            "pdf_wer": 0.5248152059134108,
+            "method": "compare both OCR texts against exactly the same GT lines, matched independently by geometry"
+          },
+          "recognized_word_search": {
+            "recognized_frozen_ocr_words_in_sample": 12,
+            "pdf_search_hits": 9,
+            "hit_rate": 0.75,
+            "semantics": "exact reading-normalized GT token present in selected frozen hOCR; case-insensitive literal PDFium search"
+          }
+        },
+        "sw-M": {
+          "dpi_confidence": "moderate",
+          "source_type": "quiver-original-tiff",
+          "adobe_label": null,
+          "document_level_scores": {
+            "diplomatic": {
+              "cer": 0.37753562447611066,
+              "character_edits": 2252,
+              "known_characters": 5965,
+              "unknown_characters": 0,
+              "wer": 0.6904541241890639,
+              "word_edits": 745,
+              "known_words": 1079,
+              "bag_character_recall": 0.9186923721709975
+            },
+            "reading": {
+              "cer": 0.3754646840148699,
+              "character_edits": 2222,
+              "known_characters": 5918,
+              "unknown_characters": 0,
+              "wer": 0.6931166347992351,
+              "word_edits": 725,
+              "known_words": 1046,
+              "bag_character_recall": 0.9317336938154782
+            }
+          },
+          "status": "ok",
+          "line_metrics": {
+            "gt_count": 159,
+            "output_count": 173,
+            "matched_lines": 143,
+            "missing_lines": 16,
+            "missing_known_characters": 280,
+            "total_known_characters": 5826,
+            "missing_character_share": 0.048060418812221076,
+            "extra_lines": 30,
+            "matched_known_characters": 5546,
+            "matched_character_edits": 1189,
+            "line_aligned_cer": 0.214388748647674,
+            "matched_known_words": 1033,
+            "line_aligned_wer": 0.5605033881897387,
+            "kendall_tau": 0.857382054565153,
+            "kendall_pair_count": 143,
+            "matching": "axis-aligned source-frame bounding-box IoU >= 0.2, one-to-one maximum weight"
+          },
+          "matched_ocr_same_gt_lines": {
+            "shared_gt_lines": 131,
+            "known_characters": 5081,
+            "known_words": 947,
+            "frozen_cer": 0.1509545365085613,
+            "pdf_cer": 0.18165715410352293,
+            "frozen_wer": 0.498416050686378,
+            "pdf_wer": 0.5248152059134108,
+            "method": "compare both OCR texts against exactly the same GT lines, matched independently by geometry"
+          },
+          "recognized_word_search": {
+            "recognized_frozen_ocr_words_in_sample": 12,
+            "pdf_search_hits": 9,
+            "hit_rate": 0.75,
+            "semantics": "exact reading-normalized GT token present in selected frozen hOCR; case-insensitive literal PDFium search"
+          }
+        },
+        "sw-build": {
+          "dpi_confidence": "moderate",
+          "source_type": "quiver-original-tiff",
+          "adobe_label": null,
+          "document_level_scores": {
+            "diplomatic": {
+              "cer": 0.37753562447611066,
+              "character_edits": 2252,
+              "known_characters": 5965,
+              "unknown_characters": 0,
+              "wer": 0.6904541241890639,
+              "word_edits": 745,
+              "known_words": 1079,
+              "bag_character_recall": 0.9186923721709975
+            },
+            "reading": {
+              "cer": 0.3754646840148699,
+              "character_edits": 2222,
+              "known_characters": 5918,
+              "unknown_characters": 0,
+              "wer": 0.6931166347992351,
+              "word_edits": 725,
+              "known_words": 1046,
+              "bag_character_recall": 0.9317336938154782
+            }
+          },
+          "status": "ok",
+          "line_metrics": {
+            "gt_count": 159,
+            "output_count": 173,
+            "matched_lines": 143,
+            "missing_lines": 16,
+            "missing_known_characters": 280,
+            "total_known_characters": 5826,
+            "missing_character_share": 0.048060418812221076,
+            "extra_lines": 30,
+            "matched_known_characters": 5546,
+            "matched_character_edits": 1189,
+            "line_aligned_cer": 0.214388748647674,
+            "matched_known_words": 1033,
+            "line_aligned_wer": 0.5605033881897387,
+            "kendall_tau": 0.857382054565153,
+            "kendall_pair_count": 143,
+            "matching": "axis-aligned source-frame bounding-box IoU >= 0.2, one-to-one maximum weight"
+          },
+          "matched_ocr_same_gt_lines": {
+            "shared_gt_lines": 131,
+            "known_characters": 5081,
+            "known_words": 947,
+            "frozen_cer": 0.1509545365085613,
+            "pdf_cer": 0.18165715410352293,
+            "frozen_wer": 0.498416050686378,
+            "pdf_wer": 0.5248152059134108,
+            "method": "compare both OCR texts against exactly the same GT lines, matched independently by geometry"
+          },
+          "recognized_word_search": {
+            "recognized_frozen_ocr_words_in_sample": 12,
+            "pdf_search_hits": 9,
+            "hit_rate": 0.75,
+            "semantics": "exact reading-normalized GT token present in selected frozen hOCR; case-insensitive literal PDFium search"
+          }
+        },
+        "ocrmypdf-E": {
+          "dpi_confidence": "moderate",
+          "source_type": "quiver-original-tiff",
+          "adobe_label": null,
+          "document_level_scores": {
+            "diplomatic": {
+              "cer": 0.5813914501257335,
+              "character_edits": 3468,
+              "known_characters": 5965,
+              "unknown_characters": 0,
+              "wer": 0.8387395736793327,
+              "word_edits": 905,
+              "known_words": 1079,
+              "bag_character_recall": 0.898742665549036
+            },
+            "reading": {
+              "cer": 0.5699560662385941,
+              "character_edits": 3373,
+              "known_characters": 5918,
+              "unknown_characters": 0,
+              "wer": 0.8126195028680688,
+              "word_edits": 850,
+              "known_words": 1046,
+              "bag_character_recall": 0.9369719499831024
+            }
+          },
+          "status": "ok",
+          "line_metrics": {
+            "gt_count": 159,
+            "output_count": 154,
+            "matched_lines": 143,
+            "missing_lines": 16,
+            "missing_known_characters": 219,
+            "total_known_characters": 5826,
+            "missing_character_share": 0.03759011328527292,
+            "extra_lines": 11,
+            "matched_known_characters": 5607,
+            "matched_character_edits": 1013,
+            "line_aligned_cer": 0.1806670233636526,
+            "matched_known_words": 1038,
+            "line_aligned_wer": 0.5327552986512524,
+            "kendall_tau": 0.7602679011129715,
+            "kendall_pair_count": 143,
+            "matching": "axis-aligned source-frame bounding-box IoU >= 0.2, one-to-one maximum weight"
+          },
+          "matched_ocr_same_gt_lines": {
+            "shared_gt_lines": 132,
+            "known_characters": 5150,
+            "known_words": 954,
+            "frozen_cer": 0.15029126213592234,
+            "pdf_cer": 0.16019417475728157,
+            "frozen_wer": 0.4979035639412998,
+            "pdf_wer": 0.5146750524109015,
+            "method": "compare both OCR texts against exactly the same GT lines, matched independently by geometry"
+          },
+          "recognized_word_search": {
+            "recognized_frozen_ocr_words_in_sample": 12,
+            "pdf_search_hits": 10,
+            "hit_rate": 0.8333333333333334,
+            "semantics": "exact reading-normalized GT token present in selected frozen hOCR; case-insensitive literal PDFium search"
+          }
+        },
+        "mrc-M": {
+          "dpi_confidence": "moderate",
+          "source_type": "quiver-original-tiff",
+          "adobe_label": null,
+          "document_level_scores": {
+            "diplomatic": {
+              "cer": 0.3766974015088013,
+              "character_edits": 2247,
+              "known_characters": 5965,
+              "unknown_characters": 0,
+              "wer": 0.6867469879518072,
+              "word_edits": 741,
+              "known_words": 1079,
+              "bag_character_recall": 0.9195305951383068
+            },
+            "reading": {
+              "cer": 0.37461980398783373,
+              "character_edits": 2217,
+              "known_characters": 5918,
+              "unknown_characters": 0,
+              "wer": 0.6883365200764818,
+              "word_edits": 720,
+              "known_words": 1046,
+              "bag_character_recall": 0.9325785738425144
+            }
+          },
+          "status": "ok",
+          "line_metrics": {
+            "gt_count": 159,
+            "output_count": 139,
+            "matched_lines": 126,
+            "missing_lines": 33,
+            "missing_known_characters": 1038,
+            "total_known_characters": 5826,
+            "missing_character_share": 0.17816683831101957,
+            "extra_lines": 13,
+            "matched_known_characters": 4788,
+            "matched_character_edits": 1746,
+            "line_aligned_cer": 0.36466165413533835,
+            "matched_known_words": 888,
+            "line_aligned_wer": 0.6711711711711712,
+            "kendall_tau": 0.8603174603174604,
+            "kendall_pair_count": 126,
+            "matching": "axis-aligned source-frame bounding-box IoU >= 0.2, one-to-one maximum weight"
+          },
+          "matched_ocr_same_gt_lines": {
+            "shared_gt_lines": 116,
+            "known_characters": 4404,
+            "known_words": 818,
+            "frozen_cer": 0.14350590372388738,
+            "pdf_cer": 0.3485467756584923,
+            "frozen_wer": 0.4828850855745721,
+            "pdf_wer": 0.6528117359413202,
+            "method": "compare both OCR texts against exactly the same GT lines, matched independently by geometry"
+          },
+          "recognized_word_search": {
+            "recognized_frozen_ocr_words_in_sample": 12,
+            "pdf_search_hits": 9,
+            "hit_rate": 0.75,
+            "semantics": "exact reading-normalized GT token present in selected frozen hOCR; case-insensitive literal PDFium search"
+          }
+        },
+        "adobe-E": {
+          "dpi_confidence": "moderate",
+          "source_type": "quiver-original-tiff",
+          "adobe_label": "Acrobat default OCR language (not matched); no Fraktur support; page straightened (deskew)",
+          "document_level_scores": {
+            "diplomatic": {
+              "cer": 0.8536462699077955,
+              "character_edits": 5092,
+              "known_characters": 5965,
+              "unknown_characters": 0,
+              "wer": 0.9925857275254866,
+              "word_edits": 1071,
+              "known_words": 1079,
+              "bag_character_recall": 0.7305951383067896
+            },
+            "reading": {
+              "cer": 0.8513011152416357,
+              "character_edits": 5038,
+              "known_characters": 5918,
+              "unknown_characters": 0,
+              "wer": 1.0066921606118546,
+              "word_edits": 1053,
+              "known_words": 1046,
+              "bag_character_recall": 0.7445082798242649
+            }
+          },
+          "status": "ok",
+          "line_metrics": {
+            "gt_count": 159,
+            "output_count": 103,
+            "matched_lines": 80,
+            "missing_lines": 79,
+            "missing_known_characters": 2768,
+            "total_known_characters": 5826,
+            "missing_character_share": 0.4751115688293855,
+            "extra_lines": 23,
+            "matched_known_characters": 3058,
+            "matched_character_edits": 4403,
+            "line_aligned_cer": 1.4398299542184434,
+            "matched_known_words": 553,
+            "line_aligned_wer": 1.7938517179023508,
+            "kendall_tau": 0.7664556962025315,
+            "kendall_pair_count": 80,
+            "matching": "axis-aligned source-frame bounding-box IoU >= 0.2, one-to-one maximum weight"
+          },
+          "matched_ocr_same_gt_lines": {
+            "shared_gt_lines": 72,
+            "known_characters": 2759,
+            "known_words": 500,
+            "frozen_cer": 0.1319318593693367,
+            "pdf_cer": 1.4305907937658573,
+            "frozen_wer": 0.444,
+            "pdf_wer": 1.79,
+            "method": "compare both OCR texts against exactly the same GT lines, matched independently by geometry"
+          },
+          "recognized_word_search": {
+            "recognized_frozen_ocr_words_in_sample": 12,
+            "pdf_search_hits": 3,
+            "hit_rate": 0.25,
+            "semantics": "exact reading-normalized GT token present in selected frozen hOCR; case-insensitive literal PDFium search"
+          }
+        }
+      }
+    },
+    "quiver/benner_herrnhuterey04_1748_0013": {
+      "gt_type": "TextLine",
+      "gt_lines": 44,
+      "known_gt_characters": 866,
+      "frozen_hocr": {
+        "gt_count": 44,
+        "output_count": 29,
+        "matched_lines": 29,
+        "missing_lines": 15,
+        "missing_known_characters": 261,
+        "total_known_characters": 866,
+        "missing_character_share": 0.30138568129330257,
+        "extra_lines": 0,
+        "matched_known_characters": 605,
+        "matched_character_edits": 197,
+        "line_aligned_cer": 0.3256198347107438,
+        "matched_known_words": 95,
+        "line_aligned_wer": 0.7052631578947368,
+        "kendall_tau": 0.7635467980295566,
+        "kendall_pair_count": 29,
+        "matching": "axis-aligned source-frame bounding-box IoU >= 0.2, one-to-one maximum weight"
+      },
+      "rows": {
+        "src": {
+          "dpi_confidence": "low",
+          "source_type": "quiver-original-tiff",
+          "adobe_label": null,
+          "document_level_scores": {
+            "diplomatic": {
+              "cer": 1.0,
+              "character_edits": 909,
+              "known_characters": 909,
+              "unknown_characters": 0,
+              "wer": 1.0,
+              "word_edits": 141,
+              "known_words": 141,
+              "bag_character_recall": 0.0
+            },
+            "reading": {
+              "cer": 1.0,
+              "character_edits": 879,
+              "known_characters": 879,
+              "unknown_characters": 0,
+              "wer": 1.0,
+              "word_edits": 126,
+              "known_words": 126,
+              "bag_character_recall": 0.0
+            }
+          },
+          "status": "ok",
+          "line_metrics": {
+            "gt_count": 44,
+            "output_count": 0,
+            "matched_lines": 0,
+            "missing_lines": 44,
+            "missing_known_characters": 866,
+            "total_known_characters": 866,
+            "missing_character_share": 1.0,
+            "extra_lines": 0,
+            "matched_known_characters": 0,
+            "matched_character_edits": 0,
+            "line_aligned_cer": null,
+            "matched_known_words": 0,
+            "line_aligned_wer": null,
+            "kendall_tau": null,
+            "kendall_pair_count": 0,
+            "matching": "axis-aligned source-frame bounding-box IoU >= 0.2, one-to-one maximum weight"
+          },
+          "matched_ocr_same_gt_lines": {
+            "shared_gt_lines": 0,
+            "known_characters": 0,
+            "known_words": 0,
+            "frozen_cer": null,
+            "pdf_cer": null,
+            "frozen_wer": null,
+            "pdf_wer": null,
+            "method": "compare both OCR texts against exactly the same GT lines, matched independently by geometry"
+          },
+          "recognized_word_search": {
+            "recognized_frozen_ocr_words_in_sample": 11,
+            "pdf_search_hits": 0,
+            "hit_rate": 0.0,
+            "semantics": "exact reading-normalized GT token present in selected frozen hOCR; case-insensitive literal PDFium search"
+          }
+        },
+        "sw-E": {
+          "dpi_confidence": "low",
+          "source_type": "quiver-original-tiff",
+          "adobe_label": null,
+          "document_level_scores": {
+            "diplomatic": {
+              "cer": 0.38173817381738173,
+              "character_edits": 347,
+              "known_characters": 909,
+              "unknown_characters": 0,
+              "wer": 0.723404255319149,
+              "word_edits": 102,
+              "known_words": 141,
+              "bag_character_recall": 0.9097909790979097
+            },
+            "reading": {
+              "cer": 0.3981797497155859,
+              "character_edits": 350,
+              "known_characters": 879,
+              "unknown_characters": 0,
+              "wer": 0.8015873015873016,
+              "word_edits": 101,
+              "known_words": 126,
+              "bag_character_recall": 0.9328782707622298
+            }
+          },
+          "status": "ok",
+          "line_metrics": {
+            "gt_count": 44,
+            "output_count": 40,
+            "matched_lines": 31,
+            "missing_lines": 13,
+            "missing_known_characters": 180,
+            "total_known_characters": 866,
+            "missing_character_share": 0.20785219399538107,
+            "extra_lines": 9,
+            "matched_known_characters": 686,
+            "matched_character_edits": 242,
+            "line_aligned_cer": 0.35276967930029157,
+            "matched_known_words": 109,
+            "line_aligned_wer": 0.7155963302752294,
+            "kendall_tau": 0.8236559139784947,
+            "kendall_pair_count": 31,
+            "matching": "axis-aligned source-frame bounding-box IoU >= 0.2, one-to-one maximum weight"
+          },
+          "matched_ocr_same_gt_lines": {
+            "shared_gt_lines": 26,
+            "known_characters": 550,
+            "known_words": 87,
+            "frozen_cer": 0.33454545454545453,
+            "pdf_cer": 0.34545454545454546,
+            "frozen_wer": 0.7011494252873564,
+            "pdf_wer": 0.6781609195402298,
+            "method": "compare both OCR texts against exactly the same GT lines, matched independently by geometry"
+          },
+          "recognized_word_search": {
+            "recognized_frozen_ocr_words_in_sample": 11,
+            "pdf_search_hits": 8,
+            "hit_rate": 0.7272727272727273,
+            "semantics": "exact reading-normalized GT token present in selected frozen hOCR; case-insensitive literal PDFium search"
+          }
+        },
+        "sw-M": {
+          "dpi_confidence": "low",
+          "source_type": "quiver-original-tiff",
+          "adobe_label": null,
+          "document_level_scores": {
+            "diplomatic": {
+              "cer": 0.38173817381738173,
+              "character_edits": 347,
+              "known_characters": 909,
+              "unknown_characters": 0,
+              "wer": 0.723404255319149,
+              "word_edits": 102,
+              "known_words": 141,
+              "bag_character_recall": 0.9097909790979097
+            },
+            "reading": {
+              "cer": 0.3981797497155859,
+              "character_edits": 350,
+              "known_characters": 879,
+              "unknown_characters": 0,
+              "wer": 0.8015873015873016,
+              "word_edits": 101,
+              "known_words": 126,
+              "bag_character_recall": 0.9328782707622298
+            }
+          },
+          "status": "ok",
+          "line_metrics": {
+            "gt_count": 44,
+            "output_count": 40,
+            "matched_lines": 31,
+            "missing_lines": 13,
+            "missing_known_characters": 180,
+            "total_known_characters": 866,
+            "missing_character_share": 0.20785219399538107,
+            "extra_lines": 9,
+            "matched_known_characters": 686,
+            "matched_character_edits": 242,
+            "line_aligned_cer": 0.35276967930029157,
+            "matched_known_words": 109,
+            "line_aligned_wer": 0.7155963302752294,
+            "kendall_tau": 0.8236559139784947,
+            "kendall_pair_count": 31,
+            "matching": "axis-aligned source-frame bounding-box IoU >= 0.2, one-to-one maximum weight"
+          },
+          "matched_ocr_same_gt_lines": {
+            "shared_gt_lines": 26,
+            "known_characters": 550,
+            "known_words": 87,
+            "frozen_cer": 0.33454545454545453,
+            "pdf_cer": 0.34545454545454546,
+            "frozen_wer": 0.7011494252873564,
+            "pdf_wer": 0.6781609195402298,
+            "method": "compare both OCR texts against exactly the same GT lines, matched independently by geometry"
+          },
+          "recognized_word_search": {
+            "recognized_frozen_ocr_words_in_sample": 11,
+            "pdf_search_hits": 8,
+            "hit_rate": 0.7272727272727273,
+            "semantics": "exact reading-normalized GT token present in selected frozen hOCR; case-insensitive literal PDFium search"
+          }
+        },
+        "sw-build": {
+          "dpi_confidence": "low",
+          "source_type": "quiver-original-tiff",
+          "adobe_label": null,
+          "document_level_scores": {
+            "diplomatic": {
+              "cer": 0.38173817381738173,
+              "character_edits": 347,
+              "known_characters": 909,
+              "unknown_characters": 0,
+              "wer": 0.723404255319149,
+              "word_edits": 102,
+              "known_words": 141,
+              "bag_character_recall": 0.9097909790979097
+            },
+            "reading": {
+              "cer": 0.3981797497155859,
+              "character_edits": 350,
+              "known_characters": 879,
+              "unknown_characters": 0,
+              "wer": 0.8015873015873016,
+              "word_edits": 101,
+              "known_words": 126,
+              "bag_character_recall": 0.9328782707622298
+            }
+          },
+          "status": "ok",
+          "line_metrics": {
+            "gt_count": 44,
+            "output_count": 40,
+            "matched_lines": 31,
+            "missing_lines": 13,
+            "missing_known_characters": 180,
+            "total_known_characters": 866,
+            "missing_character_share": 0.20785219399538107,
+            "extra_lines": 9,
+            "matched_known_characters": 686,
+            "matched_character_edits": 242,
+            "line_aligned_cer": 0.35276967930029157,
+            "matched_known_words": 109,
+            "line_aligned_wer": 0.7155963302752294,
+            "kendall_tau": 0.8236559139784947,
+            "kendall_pair_count": 31,
+            "matching": "axis-aligned source-frame bounding-box IoU >= 0.2, one-to-one maximum weight"
+          },
+          "matched_ocr_same_gt_lines": {
+            "shared_gt_lines": 26,
+            "known_characters": 550,
+            "known_words": 87,
+            "frozen_cer": 0.33454545454545453,
+            "pdf_cer": 0.34545454545454546,
+            "frozen_wer": 0.7011494252873564,
+            "pdf_wer": 0.6781609195402298,
+            "method": "compare both OCR texts against exactly the same GT lines, matched independently by geometry"
+          },
+          "recognized_word_search": {
+            "recognized_frozen_ocr_words_in_sample": 11,
+            "pdf_search_hits": 8,
+            "hit_rate": 0.7272727272727273,
+            "semantics": "exact reading-normalized GT token present in selected frozen hOCR; case-insensitive literal PDFium search"
+          }
+        },
+        "ocrmypdf-E": {
+          "dpi_confidence": "low",
+          "source_type": "quiver-original-tiff",
+          "adobe_label": null,
+          "document_level_scores": {
+            "diplomatic": {
+              "cer": 0.36523652365236525,
+              "character_edits": 332,
+              "known_characters": 909,
+              "unknown_characters": 0,
+              "wer": 0.7943262411347518,
+              "word_edits": 112,
+              "known_words": 141,
+              "bag_character_recall": 0.8888888888888888
+            },
+            "reading": {
+              "cer": 0.35381114903299204,
+              "character_edits": 311,
+              "known_characters": 879,
+              "unknown_characters": 0,
+              "wer": 0.7619047619047619,
+              "word_edits": 96,
+              "known_words": 126,
+              "bag_character_recall": 0.9408418657565415
+            }
+          },
+          "status": "ok",
+          "line_metrics": {
+            "gt_count": 44,
+            "output_count": 41,
+            "matched_lines": 36,
+            "missing_lines": 8,
+            "missing_known_characters": 100,
+            "total_known_characters": 866,
+            "missing_character_share": 0.11547344110854503,
+            "extra_lines": 5,
+            "matched_known_characters": 766,
+            "matched_character_edits": 217,
+            "line_aligned_cer": 0.283289817232376,
+            "matched_known_words": 123,
+            "line_aligned_wer": 0.6097560975609756,
+            "kendall_tau": 0.819047619047619,
+            "kendall_pair_count": 36,
+            "matching": "axis-aligned source-frame bounding-box IoU >= 0.2, one-to-one maximum weight"
+          },
+          "matched_ocr_same_gt_lines": {
+            "shared_gt_lines": 28,
+            "known_characters": 601,
+            "known_words": 94,
+            "frozen_cer": 0.3277870216306156,
+            "pdf_cer": 0.3227953410981697,
+            "frozen_wer": 0.7127659574468085,
+            "pdf_wer": 0.648936170212766,
+            "method": "compare both OCR texts against exactly the same GT lines, matched independently by geometry"
+          },
+          "recognized_word_search": {
+            "recognized_frozen_ocr_words_in_sample": 11,
+            "pdf_search_hits": 11,
+            "hit_rate": 1.0,
+            "semantics": "exact reading-normalized GT token present in selected frozen hOCR; case-insensitive literal PDFium search"
+          }
+        },
+        "mrc-M": {
+          "dpi_confidence": "low",
+          "source_type": "quiver-original-tiff",
+          "adobe_label": null,
+          "document_level_scores": {
+            "diplomatic": {
+              "cer": 0.38393839383938394,
+              "character_edits": 349,
+              "known_characters": 909,
+              "unknown_characters": 0,
+              "wer": 0.7375886524822695,
+              "word_edits": 104,
+              "known_words": 141,
+              "bag_character_recall": 0.9075907590759076
+            },
+            "reading": {
+              "cer": 0.39476678043230945,
+              "character_edits": 347,
+              "known_characters": 879,
+              "unknown_characters": 0,
+              "wer": 0.7936507936507936,
+              "word_edits": 100,
+              "known_words": 126,
+              "bag_character_recall": 0.9328782707622298
+            }
+          },
+          "status": "ok",
+          "line_metrics": {
+            "gt_count": 44,
+            "output_count": 40,
+            "matched_lines": 35,
+            "missing_lines": 9,
+            "missing_known_characters": 101,
+            "total_known_characters": 866,
+            "missing_character_share": 0.11662817551963048,
+            "extra_lines": 5,
+            "matched_known_characters": 765,
+            "matched_character_edits": 204,
+            "line_aligned_cer": 0.26666666666666666,
+            "matched_known_words": 124,
+            "line_aligned_wer": 0.6290322580645161,
+            "kendall_tau": 0.8352941176470589,
+            "kendall_pair_count": 35,
+            "matching": "axis-aligned source-frame bounding-box IoU >= 0.2, one-to-one maximum weight"
+          },
+          "matched_ocr_same_gt_lines": {
+            "shared_gt_lines": 28,
+            "known_characters": 593,
+            "known_words": 94,
+            "frozen_cer": 0.3288364249578415,
+            "pdf_cer": 0.30354131534569984,
+            "frozen_wer": 0.7021276595744681,
+            "pdf_wer": 0.6595744680851063,
+            "method": "compare both OCR texts against exactly the same GT lines, matched independently by geometry"
+          },
+          "recognized_word_search": {
+            "recognized_frozen_ocr_words_in_sample": 11,
+            "pdf_search_hits": 8,
+            "hit_rate": 0.7272727272727273,
+            "semantics": "exact reading-normalized GT token present in selected frozen hOCR; case-insensitive literal PDFium search"
+          }
+        },
+        "adobe-E": {
+          "dpi_confidence": "low",
+          "source_type": "quiver-original-tiff",
+          "adobe_label": "Acrobat default OCR language (not matched); no Fraktur support; page straightened (deskew)",
+          "document_level_scores": {
+            "diplomatic": {
+              "cer": 0.7106710671067107,
+              "character_edits": 646,
+              "known_characters": 909,
+              "unknown_characters": 0,
+              "wer": 1.198581560283688,
+              "word_edits": 169,
+              "known_words": 141,
+              "bag_character_recall": 0.7271727172717272
+            },
+            "reading": {
+              "cer": 0.7303754266211604,
+              "character_edits": 642,
+              "known_characters": 879,
+              "unknown_characters": 0,
+              "wer": 1.3492063492063493,
+              "word_edits": 170,
+              "known_words": 126,
+              "bag_character_recall": 0.7485779294653014
+            }
+          },
+          "status": "ok",
+          "line_metrics": {
+            "gt_count": 44,
+            "output_count": 36,
+            "matched_lines": 32,
+            "missing_lines": 12,
+            "missing_known_characters": 214,
+            "total_known_characters": 866,
+            "missing_character_share": 0.2471131639722864,
+            "extra_lines": 4,
+            "matched_known_characters": 652,
+            "matched_character_edits": 554,
+            "line_aligned_cer": 0.8496932515337423,
+            "matched_known_words": 107,
+            "line_aligned_wer": 1.439252336448598,
+            "kendall_tau": 0.9798387096774195,
+            "kendall_pair_count": 32,
+            "matching": "axis-aligned source-frame bounding-box IoU >= 0.2, one-to-one maximum weight"
+          },
+          "matched_ocr_same_gt_lines": {
+            "shared_gt_lines": 23,
+            "known_characters": 475,
+            "known_words": 75,
+            "frozen_cer": 0.37473684210526315,
+            "pdf_cer": 0.991578947368421,
+            "frozen_wer": 0.76,
+            "pdf_wer": 1.68,
+            "method": "compare both OCR texts against exactly the same GT lines, matched independently by geometry"
+          },
+          "recognized_word_search": {
+            "recognized_frozen_ocr_words_in_sample": 11,
+            "pdf_search_hits": 1,
+            "hit_rate": 0.09090909090909091,
+            "semantics": "exact reading-normalized GT token present in selected frozen hOCR; case-insensitive literal PDFium search"
+          }
+        }
+      }
+    },
+    "finebooks/conchologiaiconi05reev/8967333": {
+      "gt_type": "single-line TextRegion proxy",
+      "gt_lines": 3,
+      "known_gt_characters": 32,
+      "frozen_hocr": {
+        "gt_count": 3,
+        "output_count": 9,
+        "matched_lines": 3,
+        "missing_lines": 0,
+        "missing_known_characters": 0,
+        "total_known_characters": 32,
+        "missing_character_share": 0.0,
+        "extra_lines": 6,
+        "matched_known_characters": 32,
+        "matched_character_edits": 1,
+        "line_aligned_cer": 0.03125,
+        "matched_known_words": 5,
+        "line_aligned_wer": 0.2,
+        "kendall_tau": 1.0,
+        "kendall_pair_count": 3,
+        "matching": "axis-aligned source-frame bounding-box IoU >= 0.2, one-to-one maximum weight"
+      },
+      "rows": {
+        "src": {
+          "dpi_confidence": "moderate",
+          "source_type": "processed-derivative",
+          "adobe_label": null,
+          "document_level_scores": {
+            "diplomatic": {
+              "cer": 1.0,
+              "character_edits": 322,
+              "known_characters": 322,
+              "unknown_characters": 0,
+              "wer": 1.0,
+              "word_edits": 53,
+              "known_words": 53,
+              "bag_character_recall": 0.0
+            },
+            "reading": {
+              "cer": 1.0,
+              "character_edits": 322,
+              "known_characters": 322,
+              "unknown_characters": 0,
+              "wer": 1.0,
+              "word_edits": 53,
+              "known_words": 53,
+              "bag_character_recall": 0.0
+            }
+          },
+          "status": "ok",
+          "line_metrics": {
+            "gt_count": 3,
+            "output_count": 0,
+            "matched_lines": 0,
+            "missing_lines": 3,
+            "missing_known_characters": 32,
+            "total_known_characters": 32,
+            "missing_character_share": 1.0,
+            "extra_lines": 0,
+            "matched_known_characters": 0,
+            "matched_character_edits": 0,
+            "line_aligned_cer": null,
+            "matched_known_words": 0,
+            "line_aligned_wer": null,
+            "kendall_tau": null,
+            "kendall_pair_count": 0,
+            "matching": "axis-aligned source-frame bounding-box IoU >= 0.2, one-to-one maximum weight"
+          },
+          "matched_ocr_same_gt_lines": {
+            "shared_gt_lines": 0,
+            "known_characters": 0,
+            "known_words": 0,
+            "frozen_cer": null,
+            "pdf_cer": null,
+            "frozen_wer": null,
+            "pdf_wer": null,
+            "method": "compare both OCR texts against exactly the same GT lines, matched independently by geometry"
+          },
+          "recognized_word_search": {
+            "recognized_frozen_ocr_words_in_sample": 18,
+            "pdf_search_hits": 0,
+            "hit_rate": 0.0,
+            "semantics": "exact reading-normalized GT token present in selected frozen hOCR; case-insensitive literal PDFium search"
+          }
+        },
+        "sw-E": {
+          "dpi_confidence": "moderate",
+          "source_type": "processed-derivative",
+          "adobe_label": null,
+          "document_level_scores": {
+            "diplomatic": {
+              "cer": 0.018633540372670808,
+              "character_edits": 6,
+              "known_characters": 322,
+              "unknown_characters": 0,
+              "wer": 0.16981132075471697,
+              "word_edits": 9,
+              "known_words": 53,
+              "bag_character_recall": 0.9937888198757764
+            },
+            "reading": {
+              "cer": 0.018633540372670808,
+              "character_edits": 6,
+              "known_characters": 322,
+              "unknown_characters": 0,
+              "wer": 0.16981132075471697,
+              "word_edits": 9,
+              "known_words": 53,
+              "bag_character_recall": 0.9937888198757764
+            }
+          },
+          "status": "ok",
+          "line_metrics": {
+            "gt_count": 3,
+            "output_count": 14,
+            "matched_lines": 1,
+            "missing_lines": 2,
+            "missing_known_characters": 20,
+            "total_known_characters": 32,
+            "missing_character_share": 0.625,
+            "extra_lines": 13,
+            "matched_known_characters": 12,
+            "matched_character_edits": 0,
+            "line_aligned_cer": 0.0,
+            "matched_known_words": 3,
+            "line_aligned_wer": 0.0,
+            "kendall_tau": null,
+            "kendall_pair_count": 1,
+            "matching": "axis-aligned source-frame bounding-box IoU >= 0.2, one-to-one maximum weight"
+          },
+          "matched_ocr_same_gt_lines": {
+            "shared_gt_lines": 1,
+            "known_characters": 12,
+            "known_words": 3,
+            "frozen_cer": 0.0,
+            "pdf_cer": 0.0,
+            "frozen_wer": 0.0,
+            "pdf_wer": 0.0,
+            "method": "compare both OCR texts against exactly the same GT lines, matched independently by geometry"
+          },
+          "recognized_word_search": {
+            "recognized_frozen_ocr_words_in_sample": 18,
+            "pdf_search_hits": 18,
+            "hit_rate": 1.0,
+            "semantics": "exact reading-normalized GT token present in selected frozen hOCR; case-insensitive literal PDFium search"
+          }
+        },
+        "sw-M": {
+          "dpi_confidence": "moderate",
+          "source_type": "processed-derivative",
+          "adobe_label": null,
+          "document_level_scores": {
+            "diplomatic": {
+              "cer": 0.018633540372670808,
+              "character_edits": 6,
+              "known_characters": 322,
+              "unknown_characters": 0,
+              "wer": 0.16981132075471697,
+              "word_edits": 9,
+              "known_words": 53,
+              "bag_character_recall": 0.9937888198757764
+            },
+            "reading": {
+              "cer": 0.018633540372670808,
+              "character_edits": 6,
+              "known_characters": 322,
+              "unknown_characters": 0,
+              "wer": 0.16981132075471697,
+              "word_edits": 9,
+              "known_words": 53,
+              "bag_character_recall": 0.9937888198757764
+            }
+          },
+          "status": "ok",
+          "line_metrics": {
+            "gt_count": 3,
+            "output_count": 14,
+            "matched_lines": 1,
+            "missing_lines": 2,
+            "missing_known_characters": 20,
+            "total_known_characters": 32,
+            "missing_character_share": 0.625,
+            "extra_lines": 13,
+            "matched_known_characters": 12,
+            "matched_character_edits": 0,
+            "line_aligned_cer": 0.0,
+            "matched_known_words": 3,
+            "line_aligned_wer": 0.0,
+            "kendall_tau": null,
+            "kendall_pair_count": 1,
+            "matching": "axis-aligned source-frame bounding-box IoU >= 0.2, one-to-one maximum weight"
+          },
+          "matched_ocr_same_gt_lines": {
+            "shared_gt_lines": 1,
+            "known_characters": 12,
+            "known_words": 3,
+            "frozen_cer": 0.0,
+            "pdf_cer": 0.0,
+            "frozen_wer": 0.0,
+            "pdf_wer": 0.0,
+            "method": "compare both OCR texts against exactly the same GT lines, matched independently by geometry"
+          },
+          "recognized_word_search": {
+            "recognized_frozen_ocr_words_in_sample": 18,
+            "pdf_search_hits": 18,
+            "hit_rate": 1.0,
+            "semantics": "exact reading-normalized GT token present in selected frozen hOCR; case-insensitive literal PDFium search"
+          }
+        },
+        "sw-build": {
+          "dpi_confidence": "moderate",
+          "source_type": "processed-derivative",
+          "adobe_label": null,
+          "document_level_scores": {
+            "diplomatic": {
+              "cer": 0.018633540372670808,
+              "character_edits": 6,
+              "known_characters": 322,
+              "unknown_characters": 0,
+              "wer": 0.16981132075471697,
+              "word_edits": 9,
+              "known_words": 53,
+              "bag_character_recall": 0.9937888198757764
+            },
+            "reading": {
+              "cer": 0.018633540372670808,
+              "character_edits": 6,
+              "known_characters": 322,
+              "unknown_characters": 0,
+              "wer": 0.16981132075471697,
+              "word_edits": 9,
+              "known_words": 53,
+              "bag_character_recall": 0.9937888198757764
+            }
+          },
+          "status": "ok",
+          "line_metrics": {
+            "gt_count": 3,
+            "output_count": 14,
+            "matched_lines": 1,
+            "missing_lines": 2,
+            "missing_known_characters": 20,
+            "total_known_characters": 32,
+            "missing_character_share": 0.625,
+            "extra_lines": 13,
+            "matched_known_characters": 12,
+            "matched_character_edits": 0,
+            "line_aligned_cer": 0.0,
+            "matched_known_words": 3,
+            "line_aligned_wer": 0.0,
+            "kendall_tau": null,
+            "kendall_pair_count": 1,
+            "matching": "axis-aligned source-frame bounding-box IoU >= 0.2, one-to-one maximum weight"
+          },
+          "matched_ocr_same_gt_lines": {
+            "shared_gt_lines": 1,
+            "known_characters": 12,
+            "known_words": 3,
+            "frozen_cer": 0.0,
+            "pdf_cer": 0.0,
+            "frozen_wer": 0.0,
+            "pdf_wer": 0.0,
+            "method": "compare both OCR texts against exactly the same GT lines, matched independently by geometry"
+          },
+          "recognized_word_search": {
+            "recognized_frozen_ocr_words_in_sample": 18,
+            "pdf_search_hits": 18,
+            "hit_rate": 1.0,
+            "semantics": "exact reading-normalized GT token present in selected frozen hOCR; case-insensitive literal PDFium search"
+          }
+        },
+        "ocrmypdf-E": {
+          "dpi_confidence": "moderate",
+          "source_type": "processed-derivative",
+          "adobe_label": null,
+          "document_level_scores": {
+            "diplomatic": {
+              "cer": 0.021739130434782608,
+              "character_edits": 7,
+              "known_characters": 322,
+              "unknown_characters": 0,
+              "wer": 0.16981132075471697,
+              "word_edits": 9,
+              "known_words": 53,
+              "bag_character_recall": 0.9875776397515528
+            },
+            "reading": {
+              "cer": 0.021739130434782608,
+              "character_edits": 7,
+              "known_characters": 322,
+              "unknown_characters": 0,
+              "wer": 0.16981132075471697,
+              "word_edits": 9,
+              "known_words": 53,
+              "bag_character_recall": 0.9875776397515528
+            }
+          },
+          "status": "ok",
+          "line_metrics": {
+            "gt_count": 3,
+            "output_count": 9,
+            "matched_lines": 3,
+            "missing_lines": 0,
+            "missing_known_characters": 0,
+            "total_known_characters": 32,
+            "missing_character_share": 0.0,
+            "extra_lines": 6,
+            "matched_known_characters": 32,
+            "matched_character_edits": 1,
+            "line_aligned_cer": 0.03125,
+            "matched_known_words": 5,
+            "line_aligned_wer": 0.2,
+            "kendall_tau": 1.0,
+            "kendall_pair_count": 3,
+            "matching": "axis-aligned source-frame bounding-box IoU >= 0.2, one-to-one maximum weight"
+          },
+          "matched_ocr_same_gt_lines": {
+            "shared_gt_lines": 3,
+            "known_characters": 32,
+            "known_words": 5,
+            "frozen_cer": 0.03125,
+            "pdf_cer": 0.03125,
+            "frozen_wer": 0.2,
+            "pdf_wer": 0.2,
+            "method": "compare both OCR texts against exactly the same GT lines, matched independently by geometry"
+          },
+          "recognized_word_search": {
+            "recognized_frozen_ocr_words_in_sample": 18,
+            "pdf_search_hits": 18,
+            "hit_rate": 1.0,
+            "semantics": "exact reading-normalized GT token present in selected frozen hOCR; case-insensitive literal PDFium search"
+          }
+        },
+        "mrc-M": {
+          "dpi_confidence": "moderate",
+          "source_type": "processed-derivative",
+          "adobe_label": null,
+          "document_level_scores": {
+            "diplomatic": {
+              "cer": 0.018633540372670808,
+              "character_edits": 6,
+              "known_characters": 322,
+              "unknown_characters": 0,
+              "wer": 0.16981132075471697,
+              "word_edits": 9,
+              "known_words": 53,
+              "bag_character_recall": 0.9937888198757764
+            },
+            "reading": {
+              "cer": 0.018633540372670808,
+              "character_edits": 6,
+              "known_characters": 322,
+              "unknown_characters": 0,
+              "wer": 0.16981132075471697,
+              "word_edits": 9,
+              "known_words": 53,
+              "bag_character_recall": 0.9937888198757764
+            }
+          },
+          "status": "ok",
+          "line_metrics": {
+            "gt_count": 3,
+            "output_count": 4,
+            "matched_lines": 3,
+            "missing_lines": 0,
+            "missing_known_characters": 0,
+            "total_known_characters": 32,
+            "missing_character_share": 0.0,
+            "extra_lines": 1,
+            "matched_known_characters": 32,
+            "matched_character_edits": 1,
+            "line_aligned_cer": 0.03125,
+            "matched_known_words": 5,
+            "line_aligned_wer": 0.2,
+            "kendall_tau": 1.0,
+            "kendall_pair_count": 3,
+            "matching": "axis-aligned source-frame bounding-box IoU >= 0.2, one-to-one maximum weight"
+          },
+          "matched_ocr_same_gt_lines": {
+            "shared_gt_lines": 3,
+            "known_characters": 32,
+            "known_words": 5,
+            "frozen_cer": 0.03125,
+            "pdf_cer": 0.03125,
+            "frozen_wer": 0.2,
+            "pdf_wer": 0.2,
+            "method": "compare both OCR texts against exactly the same GT lines, matched independently by geometry"
+          },
+          "recognized_word_search": {
+            "recognized_frozen_ocr_words_in_sample": 18,
+            "pdf_search_hits": 18,
+            "hit_rate": 1.0,
+            "semantics": "exact reading-normalized GT token present in selected frozen hOCR; case-insensitive literal PDFium search"
+          }
+        },
+        "adobe-E": {
+          "dpi_confidence": "moderate",
+          "source_type": "processed-derivative",
+          "adobe_label": "Acrobat default OCR language (not matched); no Fraktur support; page straightened (deskew)",
+          "document_level_scores": {
+            "diplomatic": {
+              "cer": 0.27639751552795033,
+              "character_edits": 89,
+              "known_characters": 322,
+              "unknown_characters": 0,
+              "wer": 0.6037735849056604,
+              "word_edits": 32,
+              "known_words": 53,
+              "bag_character_recall": 0.8478260869565217
+            },
+            "reading": {
+              "cer": 0.2670807453416149,
+              "character_edits": 86,
+              "known_characters": 322,
+              "unknown_characters": 0,
+              "wer": 0.6037735849056604,
+              "word_edits": 32,
+              "known_words": 53,
+              "bag_character_recall": 0.8540372670807453
+            }
+          },
+          "status": "ok",
+          "line_metrics": {
+            "gt_count": 3,
+            "output_count": 9,
+            "matched_lines": 3,
+            "missing_lines": 0,
+            "missing_known_characters": 0,
+            "total_known_characters": 32,
+            "missing_character_share": 0.0,
+            "extra_lines": 6,
+            "matched_known_characters": 32,
+            "matched_character_edits": 2,
+            "line_aligned_cer": 0.0625,
+            "matched_known_words": 5,
+            "line_aligned_wer": 0.2,
+            "kendall_tau": 1.0,
+            "kendall_pair_count": 3,
+            "matching": "axis-aligned source-frame bounding-box IoU >= 0.2, one-to-one maximum weight"
+          },
+          "matched_ocr_same_gt_lines": {
+            "shared_gt_lines": 3,
+            "known_characters": 32,
+            "known_words": 5,
+            "frozen_cer": 0.03125,
+            "pdf_cer": 0.0625,
+            "frozen_wer": 0.2,
+            "pdf_wer": 0.2,
+            "method": "compare both OCR texts against exactly the same GT lines, matched independently by geometry"
+          },
+          "recognized_word_search": {
+            "recognized_frozen_ocr_words_in_sample": 18,
+            "pdf_search_hits": 5,
+            "hit_rate": 0.2777777777777778,
+            "semantics": "exact reading-normalized GT token present in selected frozen hOCR; case-insensitive literal PDFium search"
+          }
+        }
+      }
+    },
+    "finebooks/trudyrusskagoent161881russ/12342014": {
+      "gt_type": "single-line TextRegion proxy",
+      "gt_lines": 107,
+      "known_gt_characters": 3169,
+      "frozen_hocr": {
+        "gt_count": 107,
+        "output_count": 117,
+        "matched_lines": 73,
+        "missing_lines": 34,
+        "missing_known_characters": 1012,
+        "total_known_characters": 3169,
+        "missing_character_share": 0.31934364152729566,
+        "extra_lines": 44,
+        "matched_known_characters": 2157,
+        "matched_character_edits": 1053,
+        "line_aligned_cer": 0.48817802503477054,
+        "matched_known_words": 731,
+        "line_aligned_wer": 0.7906976744186046,
+        "kendall_tau": 0.9353120243531202,
+        "kendall_pair_count": 73,
+        "matching": "axis-aligned source-frame bounding-box IoU >= 0.2, one-to-one maximum weight"
+      },
+      "rows": {
+        "src": {
+          "dpi_confidence": "moderate",
+          "source_type": "processed-derivative",
+          "adobe_label": null,
+          "document_level_scores": {
+            "diplomatic": {
+              "cer": 1.0,
+              "character_edits": 3328,
+              "known_characters": 3328,
+              "unknown_characters": 0,
+              "wer": 1.0,
+              "word_edits": 1057,
+              "known_words": 1057,
+              "bag_character_recall": 0.0
+            },
+            "reading": {
+              "cer": 1.0,
+              "character_edits": 3327,
+              "known_characters": 3327,
+              "unknown_characters": 0,
+              "wer": 1.0,
+              "word_edits": 1055,
+              "known_words": 1055,
+              "bag_character_recall": 0.0
+            }
+          },
+          "status": "ok",
+          "line_metrics": {
+            "gt_count": 107,
+            "output_count": 0,
+            "matched_lines": 0,
+            "missing_lines": 107,
+            "missing_known_characters": 3169,
+            "total_known_characters": 3169,
+            "missing_character_share": 1.0,
+            "extra_lines": 0,
+            "matched_known_characters": 0,
+            "matched_character_edits": 0,
+            "line_aligned_cer": null,
+            "matched_known_words": 0,
+            "line_aligned_wer": null,
+            "kendall_tau": null,
+            "kendall_pair_count": 0,
+            "matching": "axis-aligned source-frame bounding-box IoU >= 0.2, one-to-one maximum weight"
+          },
+          "matched_ocr_same_gt_lines": {
+            "shared_gt_lines": 0,
+            "known_characters": 0,
+            "known_words": 0,
+            "frozen_cer": null,
+            "pdf_cer": null,
+            "frozen_wer": null,
+            "pdf_wer": null,
+            "method": "compare both OCR texts against exactly the same GT lines, matched independently by geometry"
+          },
+          "recognized_word_search": {
+            "recognized_frozen_ocr_words_in_sample": 11,
+            "pdf_search_hits": 0,
+            "hit_rate": 0.0,
+            "semantics": "exact reading-normalized GT token present in selected frozen hOCR; case-insensitive literal PDFium search"
+          }
+        },
+        "sw-E": {
+          "dpi_confidence": "moderate",
+          "source_type": "processed-derivative",
+          "adobe_label": null,
+          "document_level_scores": {
+            "diplomatic": {
+              "cer": 0.5618990384615384,
+              "character_edits": 1870,
+              "known_characters": 3328,
+              "unknown_characters": 0,
+              "wer": 0.8240302743614002,
+              "word_edits": 871,
+              "known_words": 1057,
+              "bag_character_recall": 0.6364182692307693
+            },
+            "reading": {
+              "cer": 0.5548542230237451,
+              "character_edits": 1846,
+              "known_characters": 3327,
+              "unknown_characters": 0,
+              "wer": 0.8218009478672986,
+              "word_edits": 867,
+              "known_words": 1055,
+              "bag_character_recall": 0.6441238352870454
+            }
+          },
+          "status": "ok",
+          "line_metrics": {
+            "gt_count": 107,
+            "output_count": 257,
+            "matched_lines": 64,
+            "missing_lines": 43,
+            "missing_known_characters": 1261,
+            "total_known_characters": 3169,
+            "missing_character_share": 0.39791732407699587,
+            "extra_lines": 193,
+            "matched_known_characters": 1908,
+            "matched_character_edits": 1004,
+            "line_aligned_cer": 0.5262054507337526,
+            "matched_known_words": 636,
+            "line_aligned_wer": 0.8113207547169812,
+            "kendall_tau": 0.9246031746031745,
+            "kendall_pair_count": 64,
+            "matching": "axis-aligned source-frame bounding-box IoU >= 0.2, one-to-one maximum weight"
+          },
+          "matched_ocr_same_gt_lines": {
+            "shared_gt_lines": 44,
+            "known_characters": 1290,
+            "known_words": 453,
+            "frozen_cer": 0.47674418604651164,
+            "pdf_cer": 0.5651162790697675,
+            "frozen_wer": 0.8057395143487859,
+            "pdf_wer": 0.8366445916114791,
+            "method": "compare both OCR texts against exactly the same GT lines, matched independently by geometry"
+          },
+          "recognized_word_search": {
+            "recognized_frozen_ocr_words_in_sample": 11,
+            "pdf_search_hits": 11,
+            "hit_rate": 1.0,
+            "semantics": "exact reading-normalized GT token present in selected frozen hOCR; case-insensitive literal PDFium search"
+          }
+        },
+        "sw-M": {
+          "dpi_confidence": "moderate",
+          "source_type": "processed-derivative",
+          "adobe_label": null,
+          "document_level_scores": {
+            "diplomatic": {
+              "cer": 0.5618990384615384,
+              "character_edits": 1870,
+              "known_characters": 3328,
+              "unknown_characters": 0,
+              "wer": 0.8240302743614002,
+              "word_edits": 871,
+              "known_words": 1057,
+              "bag_character_recall": 0.6364182692307693
+            },
+            "reading": {
+              "cer": 0.5548542230237451,
+              "character_edits": 1846,
+              "known_characters": 3327,
+              "unknown_characters": 0,
+              "wer": 0.8218009478672986,
+              "word_edits": 867,
+              "known_words": 1055,
+              "bag_character_recall": 0.6441238352870454
+            }
+          },
+          "status": "ok",
+          "line_metrics": {
+            "gt_count": 107,
+            "output_count": 257,
+            "matched_lines": 64,
+            "missing_lines": 43,
+            "missing_known_characters": 1261,
+            "total_known_characters": 3169,
+            "missing_character_share": 0.39791732407699587,
+            "extra_lines": 193,
+            "matched_known_characters": 1908,
+            "matched_character_edits": 1004,
+            "line_aligned_cer": 0.5262054507337526,
+            "matched_known_words": 636,
+            "line_aligned_wer": 0.8113207547169812,
+            "kendall_tau": 0.9246031746031745,
+            "kendall_pair_count": 64,
+            "matching": "axis-aligned source-frame bounding-box IoU >= 0.2, one-to-one maximum weight"
+          },
+          "matched_ocr_same_gt_lines": {
+            "shared_gt_lines": 44,
+            "known_characters": 1290,
+            "known_words": 453,
+            "frozen_cer": 0.47674418604651164,
+            "pdf_cer": 0.5651162790697675,
+            "frozen_wer": 0.8057395143487859,
+            "pdf_wer": 0.8366445916114791,
+            "method": "compare both OCR texts against exactly the same GT lines, matched independently by geometry"
+          },
+          "recognized_word_search": {
+            "recognized_frozen_ocr_words_in_sample": 11,
+            "pdf_search_hits": 11,
+            "hit_rate": 1.0,
+            "semantics": "exact reading-normalized GT token present in selected frozen hOCR; case-insensitive literal PDFium search"
+          }
+        },
+        "sw-build": {
+          "dpi_confidence": "moderate",
+          "source_type": "processed-derivative",
+          "adobe_label": null,
+          "document_level_scores": {
+            "diplomatic": {
+              "cer": 0.5618990384615384,
+              "character_edits": 1870,
+              "known_characters": 3328,
+              "unknown_characters": 0,
+              "wer": 0.8240302743614002,
+              "word_edits": 871,
+              "known_words": 1057,
+              "bag_character_recall": 0.6364182692307693
+            },
+            "reading": {
+              "cer": 0.5548542230237451,
+              "character_edits": 1846,
+              "known_characters": 3327,
+              "unknown_characters": 0,
+              "wer": 0.8218009478672986,
+              "word_edits": 867,
+              "known_words": 1055,
+              "bag_character_recall": 0.6441238352870454
+            }
+          },
+          "status": "ok",
+          "line_metrics": {
+            "gt_count": 107,
+            "output_count": 257,
+            "matched_lines": 64,
+            "missing_lines": 43,
+            "missing_known_characters": 1261,
+            "total_known_characters": 3169,
+            "missing_character_share": 0.39791732407699587,
+            "extra_lines": 193,
+            "matched_known_characters": 1908,
+            "matched_character_edits": 1004,
+            "line_aligned_cer": 0.5262054507337526,
+            "matched_known_words": 636,
+            "line_aligned_wer": 0.8113207547169812,
+            "kendall_tau": 0.9246031746031745,
+            "kendall_pair_count": 64,
+            "matching": "axis-aligned source-frame bounding-box IoU >= 0.2, one-to-one maximum weight"
+          },
+          "matched_ocr_same_gt_lines": {
+            "shared_gt_lines": 44,
+            "known_characters": 1290,
+            "known_words": 453,
+            "frozen_cer": 0.47674418604651164,
+            "pdf_cer": 0.5651162790697675,
+            "frozen_wer": 0.8057395143487859,
+            "pdf_wer": 0.8366445916114791,
+            "method": "compare both OCR texts against exactly the same GT lines, matched independently by geometry"
+          },
+          "recognized_word_search": {
+            "recognized_frozen_ocr_words_in_sample": 11,
+            "pdf_search_hits": 11,
+            "hit_rate": 1.0,
+            "semantics": "exact reading-normalized GT token present in selected frozen hOCR; case-insensitive literal PDFium search"
+          }
+        },
+        "ocrmypdf-E": {
+          "dpi_confidence": "moderate",
+          "source_type": "processed-derivative",
+          "adobe_label": null,
+          "document_level_scores": {
+            "diplomatic": {
+              "cer": 0.5606971153846154,
+              "character_edits": 1866,
+              "known_characters": 3328,
+              "unknown_characters": 0,
+              "wer": 0.8240302743614002,
+              "word_edits": 871,
+              "known_words": 1057,
+              "bag_character_recall": 0.6394230769230769
+            },
+            "reading": {
+              "cer": 0.5545536519386834,
+              "character_edits": 1845,
+              "known_characters": 3327,
+              "unknown_characters": 0,
+              "wer": 0.8218009478672986,
+              "word_edits": 867,
+              "known_words": 1055,
+              "bag_character_recall": 0.6432221220318606
+            }
+          },
+          "status": "ok",
+          "line_metrics": {
+            "gt_count": 107,
+            "output_count": 182,
+            "matched_lines": 98,
+            "missing_lines": 9,
+            "missing_known_characters": 261,
+            "total_known_characters": 3169,
+            "missing_character_share": 0.08236036604607132,
+            "extra_lines": 84,
+            "matched_known_characters": 2908,
+            "matched_character_edits": 1284,
+            "line_aligned_cer": 0.44154057771664373,
+            "matched_known_words": 944,
+            "line_aligned_wer": 0.7669491525423728,
+            "kendall_tau": 0.952451083526194,
+            "kendall_pair_count": 98,
+            "matching": "axis-aligned source-frame bounding-box IoU >= 0.2, one-to-one maximum weight"
+          },
+          "matched_ocr_same_gt_lines": {
+            "shared_gt_lines": 70,
+            "known_characters": 2057,
+            "known_words": 693,
+            "frozen_cer": 0.47690811861934856,
+            "pdf_cer": 0.4837141468157511,
+            "frozen_wer": 0.7864357864357865,
+            "pdf_wer": 0.7893217893217893,
+            "method": "compare both OCR texts against exactly the same GT lines, matched independently by geometry"
+          },
+          "recognized_word_search": {
+            "recognized_frozen_ocr_words_in_sample": 11,
+            "pdf_search_hits": 11,
+            "hit_rate": 1.0,
+            "semantics": "exact reading-normalized GT token present in selected frozen hOCR; case-insensitive literal PDFium search"
+          }
+        },
+        "mrc-M": {
+          "dpi_confidence": "moderate",
+          "source_type": "processed-derivative",
+          "adobe_label": null,
+          "document_level_scores": {
+            "diplomatic": {
+              "cer": 0.5597956730769231,
+              "character_edits": 1863,
+              "known_characters": 3328,
+              "unknown_characters": 0,
+              "wer": 0.8202459791863765,
+              "word_edits": 867,
+              "known_words": 1057,
+              "bag_character_recall": 0.6364182692307693
+            },
+            "reading": {
+              "cer": 0.5527502254283138,
+              "character_edits": 1839,
+              "known_characters": 3327,
+              "unknown_characters": 0,
+              "wer": 0.8180094786729858,
+              "word_edits": 863,
+              "known_words": 1055,
+              "bag_character_recall": 0.6438232642019838
+            }
+          },
+          "status": "ok",
+          "line_metrics": {
+            "gt_count": 107,
+            "output_count": 161,
+            "matched_lines": 100,
+            "missing_lines": 7,
+            "missing_known_characters": 188,
+            "total_known_characters": 3169,
+            "missing_character_share": 0.05932470810981382,
+            "extra_lines": 61,
+            "matched_known_characters": 2981,
+            "matched_character_edits": 1341,
+            "line_aligned_cer": 0.4498490439449849,
+            "matched_known_words": 974,
+            "line_aligned_wer": 0.7669404517453798,
+            "kendall_tau": 0.943838383838384,
+            "kendall_pair_count": 100,
+            "matching": "axis-aligned source-frame bounding-box IoU >= 0.2, one-to-one maximum weight"
+          },
+          "matched_ocr_same_gt_lines": {
+            "shared_gt_lines": 72,
+            "known_characters": 2130,
+            "known_words": 723,
+            "frozen_cer": 0.49014084507042255,
+            "pdf_cer": 0.4887323943661972,
+            "frozen_wer": 0.7925311203319502,
+            "pdf_wer": 0.7897648686030428,
+            "method": "compare both OCR texts against exactly the same GT lines, matched independently by geometry"
+          },
+          "recognized_word_search": {
+            "recognized_frozen_ocr_words_in_sample": 11,
+            "pdf_search_hits": 11,
+            "hit_rate": 1.0,
+            "semantics": "exact reading-normalized GT token present in selected frozen hOCR; case-insensitive literal PDFium search"
+          }
+        },
+        "adobe-E": {
+          "dpi_confidence": "moderate",
+          "source_type": "processed-derivative",
+          "adobe_label": "Acrobat default OCR language (not matched); no Fraktur support; page straightened (deskew)",
+          "document_level_scores": {
+            "diplomatic": {
+              "cer": 0.3759014423076923,
+              "character_edits": 1251,
+              "known_characters": 3328,
+              "unknown_characters": 0,
+              "wer": 0.5856196783349101,
+              "word_edits": 619,
+              "known_words": 1057,
+              "bag_character_recall": 0.7836538461538461
+            },
+            "reading": {
+              "cer": 0.3727081454764052,
+              "character_edits": 1240,
+              "known_characters": 3327,
+              "unknown_characters": 0,
+              "wer": 0.5838862559241706,
+              "word_edits": 616,
+              "known_words": 1055,
+              "bag_character_recall": 0.7899008115419297
+            }
+          },
+          "status": "ok",
+          "line_metrics": {
+            "gt_count": 107,
+            "output_count": 192,
+            "matched_lines": 106,
+            "missing_lines": 1,
+            "missing_known_characters": 6,
+            "total_known_characters": 3169,
+            "missing_character_share": 0.0018933417481855476,
+            "extra_lines": 86,
+            "matched_known_characters": 3163,
+            "matched_character_edits": 1181,
+            "line_aligned_cer": 0.3733797028137844,
+            "matched_known_words": 1040,
+            "line_aligned_wer": 0.6375,
+            "kendall_tau": 1.0,
+            "kendall_pair_count": 106,
+            "matching": "axis-aligned source-frame bounding-box IoU >= 0.2, one-to-one maximum weight"
+          },
+          "matched_ocr_same_gt_lines": {
+            "shared_gt_lines": 73,
+            "known_characters": 2157,
+            "known_words": 731,
+            "frozen_cer": 0.48817802503477054,
+            "pdf_cer": 0.4019471488178025,
+            "frozen_wer": 0.7906976744186046,
+            "pdf_wer": 0.66484268125855,
+            "method": "compare both OCR texts against exactly the same GT lines, matched independently by geometry"
+          },
+          "recognized_word_search": {
+            "recognized_frozen_ocr_words_in_sample": 11,
+            "pdf_search_hits": 5,
+            "hit_rate": 0.45454545454545453,
+            "semantics": "exact reading-normalized GT token present in selected frozen hOCR; case-insensitive literal PDFium search"
+          }
+        }
+      }
+    }
+  }
+}

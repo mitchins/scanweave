@@ -1,0 +1,1381 @@
+{
+  "assessment": "AI-assessed, provisional (not human-adjudicated); fresh controls nonblinded",
+  "sampling": "one fixed-seed OCR word box per page x row, excluding previous reviewed crop overlaps",
+  "controls": [
+    {
+      "page": "quiver/aventinus_grammatica_1515_0008",
+      "row": "sw-E",
+      "bbox": [
+        812,
+        876,
+        880,
+        912
+      ],
+      "seed_label": "books01-1b-control-v1/quiver/aventinus_grammatica_1515_0008/sw-E",
+      "assessment": "AI-assessed, provisional (not human-adjudicated); fresh controls nonblinded",
+      "control_id": "fresh-001",
+      "taxonomy": [
+        "no_visible_defect"
+      ],
+      "scores": {
+        "valid_source_contrast_and_ink": true,
+        "local_contrast": 199.0,
+        "source_ink_pixels": 1321,
+        "source_ink_fraction": 0.5396241830065359,
+        "contrast_floor": 20,
+        "glyph_shape": 0.4578754578754579,
+        "contour_iou": 0.5421245421245421,
+        "chamfer_px": 0.07004398184447136,
+        "missing_ink": 0.03179409538228615,
+        "spurious_ink": 0.0772005772005772,
+        "illustration_colour": null,
+        "border_inversion": null
+      },
+      "small_box": false,
+      "text_detector_flagged": false,
+      "visible_change_not_flagged_by_text_detectors": false
+    },
+    {
+      "page": "quiver/aventinus_grammatica_1515_0008",
+      "row": "sw-M",
+      "bbox": [
+        1466,
+        1667,
+        1584,
+        1763
+      ],
+      "seed_label": "books01-1b-control-v1/quiver/aventinus_grammatica_1515_0008/sw-M",
+      "assessment": "AI-assessed, provisional (not human-adjudicated); fresh controls nonblinded",
+      "control_id": "fresh-002",
+      "taxonomy": [
+        "no_visible_defect"
+      ],
+      "scores": {
+        "valid_source_contrast_and_ink": true,
+        "local_contrast": 179.0,
+        "source_ink_pixels": 6181,
+        "source_ink_fraction": 0.5456391242937854,
+        "contrast_floor": 20,
+        "glyph_shape": 0.5138836059338152,
+        "contour_iou": 0.48611639406618484,
+        "chamfer_px": 0.06300019475827293,
+        "missing_ink": 0.03284258210645526,
+        "spurious_ink": 0.08326943720288299,
+        "illustration_colour": null,
+        "border_inversion": null
+      },
+      "small_box": false,
+      "text_detector_flagged": false,
+      "visible_change_not_flagged_by_text_detectors": false
+    },
+    {
+      "page": "quiver/aventinus_grammatica_1515_0008",
+      "row": "sw-build",
+      "bbox": [
+        1165,
+        762,
+        1328,
+        823
+      ],
+      "seed_label": "books01-1b-control-v1/quiver/aventinus_grammatica_1515_0008/sw-build",
+      "assessment": "AI-assessed, provisional (not human-adjudicated); fresh controls nonblinded",
+      "control_id": "fresh-003",
+      "taxonomy": [
+        "no_visible_defect"
+      ],
+      "scores": {
+        "valid_source_contrast_and_ink": true,
+        "local_contrast": 194.0,
+        "source_ink_pixels": 4555,
+        "source_ink_fraction": 0.4581112340339938,
+        "contrast_floor": 20,
+        "glyph_shape": 0.4927152317880795,
+        "contour_iou": 0.5072847682119205,
+        "chamfer_px": 0.08583897206683687,
+        "missing_ink": 0.04544456641053787,
+        "spurious_ink": 0.10146724529861542,
+        "illustration_colour": null,
+        "border_inversion": null
+      },
+      "small_box": false,
+      "text_detector_flagged": false,
+      "visible_change_not_flagged_by_text_detectors": false
+    },
+    {
+      "page": "quiver/aventinus_grammatica_1515_0008",
+      "row": "ocrmypdf-E",
+      "bbox": [
+        321,
+        599,
+        367,
+        653
+      ],
+      "seed_label": "books01-1b-control-v1/quiver/aventinus_grammatica_1515_0008/ocrmypdf-E",
+      "assessment": "AI-assessed, provisional (not human-adjudicated); fresh controls nonblinded",
+      "control_id": "fresh-004",
+      "taxonomy": [
+        "no_visible_defect"
+      ],
+      "scores": {
+        "valid_source_contrast_and_ink": true,
+        "local_contrast": 190.0,
+        "source_ink_pixels": 1192,
+        "source_ink_fraction": 0.47987117552334946,
+        "contrast_floor": 20,
+        "glyph_shape": 0.0,
+        "contour_iou": 1.0,
+        "chamfer_px": 0.0,
+        "missing_ink": 0.0,
+        "spurious_ink": 0.0,
+        "illustration_colour": null,
+        "border_inversion": null
+      },
+      "small_box": false,
+      "text_detector_flagged": false,
+      "visible_change_not_flagged_by_text_detectors": false
+    },
+    {
+      "page": "quiver/aventinus_grammatica_1515_0008",
+      "row": "mrc-M",
+      "bbox": [
+        766,
+        401,
+        813,
+        436
+      ],
+      "seed_label": "books01-1b-control-v1/quiver/aventinus_grammatica_1515_0008/mrc-M",
+      "assessment": "AI-assessed, provisional (not human-adjudicated); fresh controls nonblinded",
+      "control_id": "fresh-005",
+      "taxonomy": [
+        "blur_texture",
+        "colour_shift"
+      ],
+      "scores": {
+        "valid_source_contrast_and_ink": true,
+        "local_contrast": 191.0,
+        "source_ink_pixels": 1022,
+        "source_ink_fraction": 0.6212765957446809,
+        "contrast_floor": 20,
+        "glyph_shape": 0.7092511013215859,
+        "contour_iou": 0.2907488986784141,
+        "chamfer_px": 0.1726476517005098,
+        "missing_ink": 0.1360078277886497,
+        "spurious_ink": 0.08686659772492245,
+        "illustration_colour": null,
+        "border_inversion": null
+      },
+      "small_box": false,
+      "text_detector_flagged": true,
+      "visible_change_not_flagged_by_text_detectors": false
+    },
+    {
+      "page": "quiver/aventinus_grammatica_1515_0008",
+      "row": "adobe-E",
+      "bbox": [
+        1434,
+        1402,
+        1623,
+        1453
+      ],
+      "seed_label": "books01-1b-control-v1/quiver/aventinus_grammatica_1515_0008/adobe-E",
+      "assessment": "AI-assessed, provisional (not human-adjudicated); fresh controls nonblinded",
+      "control_id": "fresh-006",
+      "taxonomy": [
+        "blur_texture"
+      ],
+      "scores": {
+        "valid_source_contrast_and_ink": true,
+        "local_contrast": 187.0,
+        "source_ink_pixels": 5295,
+        "source_ink_fraction": 0.5493308434484905,
+        "contrast_floor": 20,
+        "glyph_shape": 0.817246835443038,
+        "contour_iou": 0.18275316455696203,
+        "chamfer_px": 0.20014339348923174,
+        "missing_ink": 0.1355996222851747,
+        "spurious_ink": 0.16872502724300764,
+        "illustration_colour": null,
+        "border_inversion": null
+      },
+      "small_box": false,
+      "text_detector_flagged": true,
+      "visible_change_not_flagged_by_text_detectors": false,
+      "adobe_configuration": "Acrobat default OCR language (not matched); no Fraktur support; page straightened (deskew)"
+    },
+    {
+      "page": "quiver/luther_babstum_1526_0011",
+      "row": "sw-E",
+      "bbox": [
+        621,
+        1554,
+        747,
+        1609
+      ],
+      "seed_label": "books01-1b-control-v1/quiver/luther_babstum_1526_0011/sw-E",
+      "assessment": "AI-assessed, provisional (not human-adjudicated); fresh controls nonblinded",
+      "control_id": "fresh-007",
+      "taxonomy": [
+        "no_visible_defect"
+      ],
+      "scores": {
+        "valid_source_contrast_and_ink": true,
+        "local_contrast": 146.0,
+        "source_ink_pixels": 2377,
+        "source_ink_fraction": 0.343001443001443,
+        "contrast_floor": 20,
+        "glyph_shape": 0.3263598326359832,
+        "contour_iou": 0.6736401673640168,
+        "chamfer_px": 0.05026621072667474,
+        "missing_ink": 0.012200252419015565,
+        "spurious_ink": 0.05816285599679102,
+        "illustration_colour": null,
+        "border_inversion": null
+      },
+      "small_box": false,
+      "text_detector_flagged": false,
+      "visible_change_not_flagged_by_text_detectors": false
+    },
+    {
+      "page": "quiver/luther_babstum_1526_0011",
+      "row": "sw-M",
+      "bbox": [
+        368,
+        1391,
+        617,
+        1450
+      ],
+      "seed_label": "books01-1b-control-v1/quiver/luther_babstum_1526_0011/sw-M",
+      "assessment": "AI-assessed, provisional (not human-adjudicated); fresh controls nonblinded",
+      "control_id": "fresh-008",
+      "taxonomy": [
+        "no_visible_defect"
+      ],
+      "scores": {
+        "valid_source_contrast_and_ink": true,
+        "local_contrast": 153.0,
+        "source_ink_pixels": 5159,
+        "source_ink_fraction": 0.35116738138996667,
+        "contrast_floor": 20,
+        "glyph_shape": 0.2996828752642706,
+        "contour_iou": 0.7003171247357294,
+        "chamfer_px": 0.03936615514591373,
+        "missing_ink": 0.012405504942818375,
+        "spurious_ink": 0.04588014981273408,
+        "illustration_colour": null,
+        "border_inversion": null
+      },
+      "small_box": false,
+      "text_detector_flagged": false,
+      "visible_change_not_flagged_by_text_detectors": false
+    },
+    {
+      "page": "quiver/luther_babstum_1526_0011",
+      "row": "sw-build",
+      "bbox": [
+        562,
+        1457,
+        633,
+        1503
+      ],
+      "seed_label": "books01-1b-control-v1/quiver/luther_babstum_1526_0011/sw-build",
+      "assessment": "AI-assessed, provisional (not human-adjudicated); fresh controls nonblinded",
+      "control_id": "fresh-009",
+      "taxonomy": [
+        "no_visible_defect"
+      ],
+      "scores": {
+        "valid_source_contrast_and_ink": true,
+        "local_contrast": 148.0,
+        "source_ink_pixels": 1189,
+        "source_ink_fraction": 0.3640538885486834,
+        "contrast_floor": 20,
+        "glyph_shape": 0.2781456953642384,
+        "contour_iou": 0.7218543046357616,
+        "chamfer_px": 0.02720729811781551,
+        "missing_ink": 0.005046257359125316,
+        "spurious_ink": 0.04903536977491962,
+        "illustration_colour": null,
+        "border_inversion": null
+      },
+      "small_box": false,
+      "text_detector_flagged": false,
+      "visible_change_not_flagged_by_text_detectors": false
+    },
+    {
+      "page": "quiver/luther_babstum_1526_0011",
+      "row": "ocrmypdf-E",
+      "bbox": [
+        309,
+        1387,
+        369,
+        1436
+      ],
+      "seed_label": "books01-1b-control-v1/quiver/luther_babstum_1526_0011/ocrmypdf-E",
+      "assessment": "AI-assessed, provisional (not human-adjudicated); fresh controls nonblinded",
+      "control_id": "fresh-010",
+      "taxonomy": [
+        "no_visible_defect"
+      ],
+      "scores": {
+        "valid_source_contrast_and_ink": true,
+        "local_contrast": 154.0,
+        "source_ink_pixels": 1177,
+        "source_ink_fraction": 0.40034013605442176,
+        "contrast_floor": 20,
+        "glyph_shape": 0.0,
+        "contour_iou": 1.0,
+        "chamfer_px": 0.0,
+        "missing_ink": 0.0,
+        "spurious_ink": 0.0,
+        "illustration_colour": null,
+        "border_inversion": null
+      },
+      "small_box": false,
+      "text_detector_flagged": false,
+      "visible_change_not_flagged_by_text_detectors": false
+    },
+    {
+      "page": "quiver/luther_babstum_1526_0011",
+      "row": "mrc-M",
+      "bbox": [
+        1110,
+        1397,
+        1549,
+        1465
+      ],
+      "seed_label": "books01-1b-control-v1/quiver/luther_babstum_1526_0011/mrc-M",
+      "assessment": "AI-assessed, provisional (not human-adjudicated); fresh controls nonblinded",
+      "control_id": "fresh-011",
+      "taxonomy": [
+        "blur_texture",
+        "colour_shift"
+      ],
+      "scores": {
+        "valid_source_contrast_and_ink": true,
+        "local_contrast": 155.0,
+        "source_ink_pixels": 11463,
+        "source_ink_fraction": 0.38399437223636607,
+        "contrast_floor": 20,
+        "glyph_shape": 0.7278540530374271,
+        "contour_iou": 0.2721459469625729,
+        "chamfer_px": 0.4537916492958422,
+        "missing_ink": 0.20134345284829452,
+        "spurious_ink": 0.09900600334612734,
+        "illustration_colour": null,
+        "border_inversion": null
+      },
+      "small_box": false,
+      "text_detector_flagged": true,
+      "visible_change_not_flagged_by_text_detectors": false
+    },
+    {
+      "page": "quiver/luther_babstum_1526_0011",
+      "row": "adobe-E",
+      "bbox": [
+        1247,
+        1512,
+        1324,
+        1557
+      ],
+      "seed_label": "books01-1b-control-v1/quiver/luther_babstum_1526_0011/adobe-E",
+      "assessment": "AI-assessed, provisional (not human-adjudicated); fresh controls nonblinded",
+      "control_id": "fresh-012",
+      "taxonomy": [
+        "blur_texture"
+      ],
+      "scores": {
+        "valid_source_contrast_and_ink": true,
+        "local_contrast": 161.0,
+        "source_ink_pixels": 1478,
+        "source_ink_fraction": 0.42655122655122657,
+        "contrast_floor": 20,
+        "glyph_shape": 0.8149171270718232,
+        "contour_iou": 0.1850828729281768,
+        "chamfer_px": 0.25585417747347683,
+        "missing_ink": 0.2523680649526387,
+        "spurious_ink": 0.08069883527454243,
+        "illustration_colour": null,
+        "border_inversion": null
+      },
+      "small_box": false,
+      "text_detector_flagged": true,
+      "visible_change_not_flagged_by_text_detectors": false,
+      "adobe_configuration": "Acrobat default OCR language (not matched); no Fraktur support; page straightened (deskew)"
+    },
+    {
+      "page": "quiver/arnold_ketzerhistorie01_1699_0114",
+      "row": "sw-E",
+      "bbox": [
+        852,
+        2320,
+        1064,
+        2368
+      ],
+      "seed_label": "books01-1b-control-v1/quiver/arnold_ketzerhistorie01_1699_0114/sw-E",
+      "assessment": "AI-assessed, provisional (not human-adjudicated); fresh controls nonblinded",
+      "control_id": "fresh-013",
+      "taxonomy": [
+        "no_visible_defect"
+      ],
+      "scores": {
+        "valid_source_contrast_and_ink": true,
+        "local_contrast": 105.0,
+        "source_ink_pixels": 3622,
+        "source_ink_fraction": 0.355935534591195,
+        "contrast_floor": 20,
+        "glyph_shape": 0.3839758125472411,
+        "contour_iou": 0.6160241874527589,
+        "chamfer_px": 0.03713246750092136,
+        "missing_ink": 0.0041413583655438985,
+        "spurious_ink": 0.0645746887966805,
+        "illustration_colour": null,
+        "border_inversion": null
+      },
+      "small_box": false,
+      "text_detector_flagged": false,
+      "visible_change_not_flagged_by_text_detectors": false
+    },
+    {
+      "page": "quiver/arnold_ketzerhistorie01_1699_0114",
+      "row": "sw-M",
+      "bbox": [
+        1364,
+        2869,
+        1372,
+        2905
+      ],
+      "seed_label": "books01-1b-control-v1/quiver/arnold_ketzerhistorie01_1699_0114/sw-M",
+      "assessment": "AI-assessed, provisional (not human-adjudicated); fresh controls nonblinded",
+      "control_id": "fresh-014",
+      "taxonomy": [
+        "unclear"
+      ],
+      "scores": {
+        "valid_source_contrast_and_ink": true,
+        "local_contrast": 81.0,
+        "source_ink_pixels": 145,
+        "source_ink_fraction": 0.5034722222222222,
+        "contrast_floor": 20,
+        "glyph_shape": 0.14634146341463417,
+        "contour_iou": 0.8536585365853658,
+        "chamfer_px": 0.019867549668874173,
+        "missing_ink": 0.0,
+        "spurious_ink": 0.039735099337748346,
+        "illustration_colour": null,
+        "border_inversion": null
+      },
+      "small_box": true,
+      "text_detector_flagged": false,
+      "visible_change_not_flagged_by_text_detectors": false
+    },
+    {
+      "page": "quiver/arnold_ketzerhistorie01_1699_0114",
+      "row": "sw-build",
+      "bbox": [
+        1555,
+        1893,
+        1683,
+        1932
+      ],
+      "seed_label": "books01-1b-control-v1/quiver/arnold_ketzerhistorie01_1699_0114/sw-build",
+      "assessment": "AI-assessed, provisional (not human-adjudicated); fresh controls nonblinded",
+      "control_id": "fresh-015",
+      "taxonomy": [
+        "no_visible_defect"
+      ],
+      "scores": {
+        "valid_source_contrast_and_ink": true,
+        "local_contrast": 107.0,
+        "source_ink_pixels": 2245,
+        "source_ink_fraction": 0.44971955128205127,
+        "contrast_floor": 20,
+        "glyph_shape": 0.4903846153846154,
+        "contour_iou": 0.5096153846153846,
+        "chamfer_px": 0.03578260280003195,
+        "missing_ink": 0.004008908685968819,
+        "spurious_ink": 0.06755629691409508,
+        "illustration_colour": null,
+        "border_inversion": null
+      },
+      "small_box": false,
+      "text_detector_flagged": false,
+      "visible_change_not_flagged_by_text_detectors": false
+    },
+    {
+      "page": "quiver/arnold_ketzerhistorie01_1699_0114",
+      "row": "ocrmypdf-E",
+      "bbox": [
+        1125,
+        2745,
+        1263,
+        2790
+      ],
+      "seed_label": "books01-1b-control-v1/quiver/arnold_ketzerhistorie01_1699_0114/ocrmypdf-E",
+      "assessment": "AI-assessed, provisional (not human-adjudicated); fresh controls nonblinded",
+      "control_id": "fresh-016",
+      "taxonomy": [
+        "no_visible_defect"
+      ],
+      "scores": {
+        "valid_source_contrast_and_ink": true,
+        "local_contrast": 108.0,
+        "source_ink_pixels": 2469,
+        "source_ink_fraction": 0.39758454106280194,
+        "contrast_floor": 20,
+        "glyph_shape": 0.0,
+        "contour_iou": 1.0,
+        "chamfer_px": 0.0,
+        "missing_ink": 0.0,
+        "spurious_ink": 0.0,
+        "illustration_colour": null,
+        "border_inversion": null
+      },
+      "small_box": false,
+      "text_detector_flagged": false,
+      "visible_change_not_flagged_by_text_detectors": false
+    },
+    {
+      "page": "quiver/arnold_ketzerhistorie01_1699_0114",
+      "row": "mrc-M",
+      "bbox": [
+        823,
+        3796,
+        869,
+        3820
+      ],
+      "seed_label": "books01-1b-control-v1/quiver/arnold_ketzerhistorie01_1699_0114/mrc-M",
+      "assessment": "AI-assessed, provisional (not human-adjudicated); fresh controls nonblinded",
+      "control_id": "fresh-017",
+      "taxonomy": [
+        "blur_texture",
+        "colour_shift"
+      ],
+      "scores": {
+        "valid_source_contrast_and_ink": true,
+        "local_contrast": 100.0,
+        "source_ink_pixels": 494,
+        "source_ink_fraction": 0.447463768115942,
+        "contrast_floor": 20,
+        "glyph_shape": 0.7868852459016393,
+        "contour_iou": 0.21311475409836064,
+        "chamfer_px": 0.19660809823280323,
+        "missing_ink": 0.20040485829959515,
+        "spurious_ink": 0.1595744680851064,
+        "illustration_colour": null,
+        "border_inversion": 0.04800724637681159
+      },
+      "small_box": false,
+      "text_detector_flagged": true,
+      "visible_change_not_flagged_by_text_detectors": false
+    },
+    {
+      "page": "quiver/arnold_ketzerhistorie01_1699_0114",
+      "row": "adobe-E",
+      "bbox": [
+        1555,
+        1893,
+        1683,
+        1932
+      ],
+      "seed_label": "books01-1b-control-v1/quiver/arnold_ketzerhistorie01_1699_0114/adobe-E",
+      "assessment": "AI-assessed, provisional (not human-adjudicated); fresh controls nonblinded",
+      "control_id": "fresh-018",
+      "taxonomy": [
+        "blur_texture"
+      ],
+      "scores": {
+        "valid_source_contrast_and_ink": true,
+        "local_contrast": 107.0,
+        "source_ink_pixels": 2245,
+        "source_ink_fraction": 0.44971955128205127,
+        "contrast_floor": 20,
+        "glyph_shape": 0.8624612202688728,
+        "contour_iou": 0.1375387797311272,
+        "chamfer_px": 0.22232234339357143,
+        "missing_ink": 0.25879732739420935,
+        "spurious_ink": 0.06883044208170118,
+        "illustration_colour": null,
+        "border_inversion": null
+      },
+      "small_box": false,
+      "text_detector_flagged": true,
+      "visible_change_not_flagged_by_text_detectors": false,
+      "adobe_configuration": "Acrobat default OCR language (not matched); no Fraktur support; page straightened (deskew)"
+    },
+    {
+      "page": "quiver/benner_herrnhuterey04_1748_0013",
+      "row": "sw-E",
+      "bbox": [
+        1149,
+        1150,
+        1308,
+        1216
+      ],
+      "seed_label": "books01-1b-control-v1/quiver/benner_herrnhuterey04_1748_0013/sw-E",
+      "assessment": "AI-assessed, provisional (not human-adjudicated); fresh controls nonblinded",
+      "control_id": "fresh-019",
+      "taxonomy": [
+        "no_visible_defect"
+      ],
+      "scores": {
+        "valid_source_contrast_and_ink": true,
+        "local_contrast": 132.0,
+        "source_ink_pixels": 4179,
+        "source_ink_fraction": 0.3982275586049171,
+        "contrast_floor": 20,
+        "glyph_shape": 0.44995864350703063,
+        "contour_iou": 0.5500413564929694,
+        "chamfer_px": 0.03767605280114869,
+        "missing_ink": 0.009093084469968891,
+        "spurious_ink": 0.0556442417331813,
+        "illustration_colour": null,
+        "border_inversion": null
+      },
+      "small_box": false,
+      "text_detector_flagged": false,
+      "visible_change_not_flagged_by_text_detectors": false
+    },
+    {
+      "page": "quiver/benner_herrnhuterey04_1748_0013",
+      "row": "sw-M",
+      "bbox": [
+        507,
+        1674,
+        610,
+        1730
+      ],
+      "seed_label": "books01-1b-control-v1/quiver/benner_herrnhuterey04_1748_0013/sw-M",
+      "assessment": "AI-assessed, provisional (not human-adjudicated); fresh controls nonblinded",
+      "control_id": "fresh-020",
+      "taxonomy": [
+        "no_visible_defect"
+      ],
+      "scores": {
+        "valid_source_contrast_and_ink": true,
+        "local_contrast": 127.0,
+        "source_ink_pixels": 1973,
+        "source_ink_fraction": 0.3420596393897365,
+        "contrast_floor": 20,
+        "glyph_shape": 0.37142857142857144,
+        "contour_iou": 0.6285714285714286,
+        "chamfer_px": 0.04203882626131888,
+        "missing_ink": 0.00912316269640142,
+        "spurious_ink": 0.07169990503323836,
+        "illustration_colour": null,
+        "border_inversion": null
+      },
+      "small_box": false,
+      "text_detector_flagged": false,
+      "visible_change_not_flagged_by_text_detectors": false
+    },
+    {
+      "page": "quiver/benner_herrnhuterey04_1748_0013",
+      "row": "sw-build",
+      "bbox": [
+        1212,
+        2176,
+        1314,
+        2229
+      ],
+      "seed_label": "books01-1b-control-v1/quiver/benner_herrnhuterey04_1748_0013/sw-build",
+      "assessment": "AI-assessed, provisional (not human-adjudicated); fresh controls nonblinded",
+      "control_id": "fresh-021",
+      "taxonomy": [
+        "no_visible_defect"
+      ],
+      "scores": {
+        "valid_source_contrast_and_ink": true,
+        "local_contrast": 131.0,
+        "source_ink_pixels": 2547,
+        "source_ink_fraction": 0.4711431742508324,
+        "contrast_floor": 20,
+        "glyph_shape": 0.4330935251798561,
+        "contour_iou": 0.5669064748201439,
+        "chamfer_px": 0.029887566931925423,
+        "missing_ink": 0.005104043973301924,
+        "spurious_ink": 0.052710280373831776,
+        "illustration_colour": null,
+        "border_inversion": null
+      },
+      "small_box": false,
+      "text_detector_flagged": false,
+      "visible_change_not_flagged_by_text_detectors": false
+    },
+    {
+      "page": "quiver/benner_herrnhuterey04_1748_0013",
+      "row": "ocrmypdf-E",
+      "bbox": [
+        614,
+        1920,
+        693,
+        1977
+      ],
+      "seed_label": "books01-1b-control-v1/quiver/benner_herrnhuterey04_1748_0013/ocrmypdf-E",
+      "assessment": "AI-assessed, provisional (not human-adjudicated); fresh controls nonblinded",
+      "control_id": "fresh-022",
+      "taxonomy": [
+        "no_visible_defect"
+      ],
+      "scores": {
+        "valid_source_contrast_and_ink": true,
+        "local_contrast": 129.0,
+        "source_ink_pixels": 1758,
+        "source_ink_fraction": 0.39040639573617586,
+        "contrast_floor": 20,
+        "glyph_shape": 0.0,
+        "contour_iou": 1.0,
+        "chamfer_px": 0.0,
+        "missing_ink": 0.0,
+        "spurious_ink": 0.0,
+        "illustration_colour": null,
+        "border_inversion": null
+      },
+      "small_box": false,
+      "text_detector_flagged": false,
+      "visible_change_not_flagged_by_text_detectors": false
+    },
+    {
+      "page": "quiver/benner_herrnhuterey04_1748_0013",
+      "row": "mrc-M",
+      "bbox": [
+        251,
+        2164,
+        446,
+        2234
+      ],
+      "seed_label": "books01-1b-control-v1/quiver/benner_herrnhuterey04_1748_0013/mrc-M",
+      "assessment": "AI-assessed, provisional (not human-adjudicated); fresh controls nonblinded",
+      "control_id": "fresh-023",
+      "taxonomy": [
+        "blur_texture",
+        "colour_shift"
+      ],
+      "scores": {
+        "valid_source_contrast_and_ink": true,
+        "local_contrast": 140.0,
+        "source_ink_pixels": 6083,
+        "source_ink_fraction": 0.44564102564102565,
+        "contrast_floor": 20,
+        "glyph_shape": 0.8281524926686217,
+        "contour_iou": 0.1718475073313783,
+        "chamfer_px": 0.1951391109369372,
+        "missing_ink": 0.09321058688147296,
+        "spurious_ink": 0.0967741935483871,
+        "illustration_colour": null,
+        "border_inversion": null
+      },
+      "small_box": false,
+      "text_detector_flagged": true,
+      "visible_change_not_flagged_by_text_detectors": false
+    },
+    {
+      "page": "quiver/benner_herrnhuterey04_1748_0013",
+      "row": "adobe-E",
+      "bbox": [
+        1165,
+        1204,
+        1176,
+        1219
+      ],
+      "seed_label": "books01-1b-control-v1/quiver/benner_herrnhuterey04_1748_0013/adobe-E",
+      "assessment": "AI-assessed, provisional (not human-adjudicated); fresh controls nonblinded",
+      "control_id": "fresh-024",
+      "taxonomy": [
+        "unclear"
+      ],
+      "scores": {
+        "valid_source_contrast_and_ink": true,
+        "local_contrast": 67.0,
+        "source_ink_pixels": 108,
+        "source_ink_fraction": 0.6545454545454545,
+        "contrast_floor": 20,
+        "glyph_shape": 0.5686274509803921,
+        "contour_iou": 0.43137254901960786,
+        "chamfer_px": 0.06388110799875506,
+        "missing_ink": 0.018518518518518517,
+        "spurious_ink": 0.1092436974789916,
+        "illustration_colour": null,
+        "border_inversion": null
+      },
+      "small_box": true,
+      "text_detector_flagged": false,
+      "visible_change_not_flagged_by_text_detectors": false,
+      "adobe_configuration": "Acrobat default OCR language (not matched); no Fraktur support; page straightened (deskew)"
+    },
+    {
+      "page": "finebooks/conchologiaiconi05reev/8967333",
+      "row": "sw-E",
+      "bbox": [
+        1013,
+        1668,
+        1057,
+        1696
+      ],
+      "seed_label": "books01-1b-control-v1/finebooks/conchologiaiconi05reev/8967333/sw-E",
+      "assessment": "AI-assessed, provisional (not human-adjudicated); fresh controls nonblinded",
+      "control_id": "fresh-025",
+      "taxonomy": [
+        "no_visible_defect"
+      ],
+      "scores": {
+        "valid_source_contrast_and_ink": true,
+        "local_contrast": 112.0,
+        "source_ink_pixels": 463,
+        "source_ink_fraction": 0.3758116883116883,
+        "contrast_floor": 20,
+        "glyph_shape": 0.4113475177304965,
+        "contour_iou": 0.5886524822695035,
+        "chamfer_px": 0.06124825450205594,
+        "missing_ink": 0.07775377969762419,
+        "spurious_ink": 0.0447427293064877,
+        "illustration_colour": null,
+        "border_inversion": null
+      },
+      "small_box": false,
+      "text_detector_flagged": false,
+      "visible_change_not_flagged_by_text_detectors": false
+    },
+    {
+      "page": "finebooks/conchologiaiconi05reev/8967333",
+      "row": "sw-M",
+      "bbox": [
+        1237,
+        1170,
+        1382,
+        1207
+      ],
+      "seed_label": "books01-1b-control-v1/finebooks/conchologiaiconi05reev/8967333/sw-M",
+      "assessment": "AI-assessed, provisional (not human-adjudicated); fresh controls nonblinded",
+      "control_id": "fresh-026",
+      "taxonomy": [
+        "no_visible_defect"
+      ],
+      "scores": {
+        "valid_source_contrast_and_ink": true,
+        "local_contrast": 141.0,
+        "source_ink_pixels": 1984,
+        "source_ink_fraction": 0.36980428704566637,
+        "contrast_floor": 20,
+        "glyph_shape": 0.35209923664122134,
+        "contour_iou": 0.6479007633587787,
+        "chamfer_px": 0.04791268317207048,
+        "missing_ink": 0.05443548387096774,
+        "spurious_ink": 0.041389882473173226,
+        "illustration_colour": null,
+        "border_inversion": null
+      },
+      "small_box": false,
+      "text_detector_flagged": false,
+      "visible_change_not_flagged_by_text_detectors": false
+    },
+    {
+      "page": "finebooks/conchologiaiconi05reev/8967333",
+      "row": "sw-build",
+      "bbox": [
+        1048,
+        1750,
+        1072,
+        1778
+      ],
+      "seed_label": "books01-1b-control-v1/finebooks/conchologiaiconi05reev/8967333/sw-build",
+      "assessment": "AI-assessed, provisional (not human-adjudicated); fresh controls nonblinded",
+      "control_id": "fresh-027",
+      "taxonomy": [
+        "no_visible_defect"
+      ],
+      "scores": {
+        "valid_source_contrast_and_ink": true,
+        "local_contrast": 103.0,
+        "source_ink_pixels": 257,
+        "source_ink_fraction": 0.38244047619047616,
+        "contrast_floor": 20,
+        "glyph_shape": 0.2153846153846154,
+        "contour_iou": 0.7846153846153846,
+        "chamfer_px": 0.029320751248506388,
+        "missing_ink": 0.03501945525291829,
+        "spurious_ink": 0.023622047244094488,
+        "illustration_colour": null,
+        "border_inversion": null
+      },
+      "small_box": false,
+      "text_detector_flagged": false,
+      "visible_change_not_flagged_by_text_detectors": false
+    },
+    {
+      "page": "finebooks/conchologiaiconi05reev/8967333",
+      "row": "ocrmypdf-E",
+      "bbox": [
+        1414,
+        1872,
+        1488,
+        1908
+      ],
+      "seed_label": "books01-1b-control-v1/finebooks/conchologiaiconi05reev/8967333/ocrmypdf-E",
+      "assessment": "AI-assessed, provisional (not human-adjudicated); fresh controls nonblinded",
+      "control_id": "fresh-028",
+      "taxonomy": [
+        "no_visible_defect"
+      ],
+      "scores": {
+        "valid_source_contrast_and_ink": true,
+        "local_contrast": 111.0,
+        "source_ink_pixels": 646,
+        "source_ink_fraction": 0.2424924924924925,
+        "contrast_floor": 20,
+        "glyph_shape": 0.0,
+        "contour_iou": 1.0,
+        "chamfer_px": 0.0,
+        "missing_ink": 0.0,
+        "spurious_ink": 0.0,
+        "illustration_colour": null,
+        "border_inversion": null
+      },
+      "small_box": false,
+      "text_detector_flagged": false,
+      "visible_change_not_flagged_by_text_detectors": false
+    },
+    {
+      "page": "finebooks/conchologiaiconi05reev/8967333",
+      "row": "mrc-M",
+      "bbox": [
+        901,
+        1708,
+        991,
+        1737
+      ],
+      "seed_label": "books01-1b-control-v1/finebooks/conchologiaiconi05reev/8967333/mrc-M",
+      "assessment": "AI-assessed, provisional (not human-adjudicated); fresh controls nonblinded",
+      "control_id": "fresh-029",
+      "taxonomy": [
+        "blur_texture"
+      ],
+      "scores": {
+        "valid_source_contrast_and_ink": true,
+        "local_contrast": 130.0,
+        "source_ink_pixels": 1132,
+        "source_ink_fraction": 0.4337164750957854,
+        "contrast_floor": 20,
+        "glyph_shape": 0.38703703703703707,
+        "contour_iou": 0.6129629629629629,
+        "chamfer_px": 0.045852411287513065,
+        "missing_ink": 0.044169611307420496,
+        "spurious_ink": 0.04753521126760563,
+        "illustration_colour": null,
+        "border_inversion": null
+      },
+      "small_box": false,
+      "text_detector_flagged": false,
+      "visible_change_not_flagged_by_text_detectors": true
+    },
+    {
+      "page": "finebooks/conchologiaiconi05reev/8967333",
+      "row": "adobe-E",
+      "bbox": [
+        1273,
+        1749,
+        1328,
+        1778
+      ],
+      "seed_label": "books01-1b-control-v1/finebooks/conchologiaiconi05reev/8967333/adobe-E",
+      "assessment": "AI-assessed, provisional (not human-adjudicated); fresh controls nonblinded",
+      "control_id": "fresh-030",
+      "taxonomy": [
+        "blur_texture"
+      ],
+      "scores": {
+        "valid_source_contrast_and_ink": true,
+        "local_contrast": 112.30000000000001,
+        "source_ink_pixels": 555,
+        "source_ink_fraction": 0.34796238244514105,
+        "contrast_floor": 20,
+        "glyph_shape": 0.7690288713910761,
+        "contour_iou": 0.23097112860892388,
+        "chamfer_px": 0.1530587560922859,
+        "missing_ink": 0.2072072072072072,
+        "spurious_ink": 0.08902691511387163,
+        "illustration_colour": null,
+        "border_inversion": null
+      },
+      "small_box": false,
+      "text_detector_flagged": true,
+      "visible_change_not_flagged_by_text_detectors": false,
+      "adobe_configuration": "Acrobat default OCR language (not matched); no Fraktur support; page straightened (deskew)"
+    },
+    {
+      "page": "finebooks/trudyrusskagoent161881russ/12342014",
+      "row": "sw-E",
+      "bbox": [
+        992,
+        666,
+        1010,
+        690
+      ],
+      "seed_label": "books01-1b-control-v1/finebooks/trudyrusskagoent161881russ/12342014/sw-E",
+      "assessment": "AI-assessed, provisional (not human-adjudicated); fresh controls nonblinded",
+      "control_id": "fresh-031",
+      "taxonomy": [
+        "unclear"
+      ],
+      "scores": {
+        "valid_source_contrast_and_ink": true,
+        "local_contrast": 148.45,
+        "source_ink_pixels": 164,
+        "source_ink_fraction": 0.37962962962962965,
+        "contrast_floor": 20,
+        "glyph_shape": 0.5625,
+        "contour_iou": 0.4375,
+        "chamfer_px": 0.1225009371185202,
+        "missing_ink": 0.10365853658536585,
+        "spurious_ink": 0.1144578313253012,
+        "illustration_colour": null,
+        "border_inversion": null
+      },
+      "small_box": false,
+      "text_detector_flagged": false,
+      "visible_change_not_flagged_by_text_detectors": false
+    },
+    {
+      "page": "finebooks/trudyrusskagoent161881russ/12342014",
+      "row": "sw-M",
+      "bbox": [
+        149,
+        2413,
+        310,
+        2463
+      ],
+      "seed_label": "books01-1b-control-v1/finebooks/trudyrusskagoent161881russ/12342014/sw-M",
+      "assessment": "AI-assessed, provisional (not human-adjudicated); fresh controls nonblinded",
+      "control_id": "fresh-032",
+      "taxonomy": [
+        "no_visible_defect"
+      ],
+      "scores": {
+        "valid_source_contrast_and_ink": true,
+        "local_contrast": 141.0,
+        "source_ink_pixels": 2107,
+        "source_ink_fraction": 0.2617391304347826,
+        "contrast_floor": 20,
+        "glyph_shape": 0.7685250529287226,
+        "contour_iou": 0.23147494707127736,
+        "chamfer_px": 0.10896587921814647,
+        "missing_ink": 0.004746084480303749,
+        "spurious_ink": 0.20927601809954752,
+        "illustration_colour": null,
+        "border_inversion": 0.023354037267080744
+      },
+      "small_box": false,
+      "text_detector_flagged": true,
+      "visible_change_not_flagged_by_text_detectors": false
+    },
+    {
+      "page": "finebooks/trudyrusskagoent161881russ/12342014",
+      "row": "sw-build",
+      "bbox": [
+        92,
+        2035,
+        131,
+        2073
+      ],
+      "seed_label": "books01-1b-control-v1/finebooks/trudyrusskagoent161881russ/12342014/sw-build",
+      "assessment": "AI-assessed, provisional (not human-adjudicated); fresh controls nonblinded",
+      "control_id": "fresh-033",
+      "taxonomy": [
+        "no_visible_defect"
+      ],
+      "scores": {
+        "valid_source_contrast_and_ink": true,
+        "local_contrast": 136.0,
+        "source_ink_pixels": 367,
+        "source_ink_fraction": 0.247638326585695,
+        "contrast_floor": 20,
+        "glyph_shape": 0.6224489795918368,
+        "contour_iou": 0.37755102040816324,
+        "chamfer_px": 0.07580407606352663,
+        "missing_ink": 0.005449591280653951,
+        "spurious_ink": 0.1411764705882353,
+        "illustration_colour": null,
+        "border_inversion": 0.017543859649122806
+      },
+      "small_box": false,
+      "text_detector_flagged": false,
+      "visible_change_not_flagged_by_text_detectors": false
+    },
+    {
+      "page": "finebooks/trudyrusskagoent161881russ/12342014",
+      "row": "ocrmypdf-E",
+      "bbox": [
+        1149,
+        1827,
+        1334,
+        1871
+      ],
+      "seed_label": "books01-1b-control-v1/finebooks/trudyrusskagoent161881russ/12342014/ocrmypdf-E",
+      "assessment": "AI-assessed, provisional (not human-adjudicated); fresh controls nonblinded",
+      "control_id": "fresh-034",
+      "taxonomy": [
+        "no_visible_defect"
+      ],
+      "scores": {
+        "valid_source_contrast_and_ink": true,
+        "local_contrast": 148.0,
+        "source_ink_pixels": 3101,
+        "source_ink_fraction": 0.38095823095823095,
+        "contrast_floor": 20,
+        "glyph_shape": 0.0,
+        "contour_iou": 1.0,
+        "chamfer_px": 0.0,
+        "missing_ink": 0.0,
+        "spurious_ink": 0.0,
+        "illustration_colour": null,
+        "border_inversion": null
+      },
+      "small_box": false,
+      "text_detector_flagged": false,
+      "visible_change_not_flagged_by_text_detectors": false
+    },
+    {
+      "page": "finebooks/trudyrusskagoent161881russ/12342014",
+      "row": "mrc-M",
+      "bbox": [
+        1125,
+        794,
+        1322,
+        867
+      ],
+      "seed_label": "books01-1b-control-v1/finebooks/trudyrusskagoent161881russ/12342014/mrc-M",
+      "assessment": "AI-assessed, provisional (not human-adjudicated); fresh controls nonblinded",
+      "control_id": "fresh-035",
+      "taxonomy": [
+        "blur_texture",
+        "colour_shift"
+      ],
+      "scores": {
+        "valid_source_contrast_and_ink": true,
+        "local_contrast": 110.0,
+        "source_ink_pixels": 2941,
+        "source_ink_fraction": 0.20450594534455183,
+        "contrast_floor": 20,
+        "glyph_shape": 0.5665835411471322,
+        "contour_iou": 0.43341645885286784,
+        "chamfer_px": 0.1169106042588171,
+        "missing_ink": 0.12002720163209793,
+        "spurious_ink": 0.0988857938718663,
+        "illustration_colour": null,
+        "border_inversion": null
+      },
+      "small_box": false,
+      "text_detector_flagged": false,
+      "visible_change_not_flagged_by_text_detectors": true
+    },
+    {
+      "page": "finebooks/trudyrusskagoent161881russ/12342014",
+      "row": "adobe-E",
+      "bbox": [
+        1067,
+        2877,
+        1129,
+        2914
+      ],
+      "seed_label": "books01-1b-control-v1/finebooks/trudyrusskagoent161881russ/12342014/adobe-E",
+      "assessment": "AI-assessed, provisional (not human-adjudicated); fresh controls nonblinded",
+      "control_id": "fresh-036",
+      "taxonomy": [
+        "wrong_shape",
+        "missing_ink"
+      ],
+      "scores": {
+        "valid_source_contrast_and_ink": true,
+        "local_contrast": 120.0,
+        "source_ink_pixels": 706,
+        "source_ink_fraction": 0.3077593722755013,
+        "contrast_floor": 20,
+        "glyph_shape": 0.8228782287822878,
+        "contour_iou": 0.17712177121771217,
+        "chamfer_px": 0.3933727412093439,
+        "missing_ink": 0.3654390934844193,
+        "spurious_ink": 0.23156089193825044,
+        "illustration_colour": null,
+        "border_inversion": null
+      },
+      "small_box": false,
+      "text_detector_flagged": true,
+      "visible_change_not_flagged_by_text_detectors": false,
+      "adobe_configuration": "Acrobat default OCR language (not matched); no Fraktur support; page straightened (deskew)"
+    }
+  ],
+  "detectors": {
+    "glyph_shape": {
+      "all": {
+        "positive": 1,
+        "negative": 22,
+        "true_positive": 1,
+        "false_positive": 1,
+        "false_negative": 0,
+        "precision": 0.5,
+        "recall": 1.0
+      },
+      "min_dimension_lt_10_px": {
+        "positive": 0,
+        "negative": 0,
+        "true_positive": 0,
+        "false_positive": 0,
+        "false_negative": 0,
+        "precision": null,
+        "recall": null
+      },
+      "min_dimension_ge_10_px": {
+        "positive": 1,
+        "negative": 22,
+        "true_positive": 1,
+        "false_positive": 1,
+        "false_negative": 0,
+        "precision": 0.5,
+        "recall": 1.0
+      },
+      "threshold": 0.681136543014996
+    },
+    "missing_ink": {
+      "all": {
+        "positive": 1,
+        "negative": 22,
+        "true_positive": 1,
+        "false_positive": 0,
+        "false_negative": 0,
+        "precision": 1.0,
+        "recall": 1.0
+      },
+      "min_dimension_lt_10_px": {
+        "positive": 0,
+        "negative": 0,
+        "true_positive": 0,
+        "false_positive": 0,
+        "false_negative": 0,
+        "precision": null,
+        "recall": null
+      },
+      "min_dimension_ge_10_px": {
+        "positive": 1,
+        "negative": 22,
+        "true_positive": 1,
+        "false_positive": 0,
+        "false_negative": 0,
+        "precision": 1.0,
+        "recall": 1.0
+      },
+      "threshold": 0.1675564681724846
+    },
+    "spurious_ink": {
+      "all": {
+        "positive": 0,
+        "negative": 22,
+        "true_positive": 0,
+        "false_positive": 0,
+        "false_negative": 0,
+        "precision": null,
+        "recall": null
+      },
+      "min_dimension_lt_10_px": {
+        "positive": 0,
+        "negative": 0,
+        "true_positive": 0,
+        "false_positive": 0,
+        "false_negative": 0,
+        "precision": null,
+        "recall": null
+      },
+      "min_dimension_ge_10_px": {
+        "positive": 0,
+        "negative": 22,
+        "true_positive": 0,
+        "false_positive": 0,
+        "false_negative": 0,
+        "precision": null,
+        "recall": null
+      },
+      "threshold": 0.5714285724285714
+    },
+    "illustration_colour": {
+      "all": {
+        "positive": 0,
+        "negative": 0,
+        "true_positive": 0,
+        "false_positive": 0,
+        "false_negative": 0,
+        "precision": null,
+        "recall": null
+      },
+      "min_dimension_lt_10_px": {
+        "positive": 0,
+        "negative": 0,
+        "true_positive": 0,
+        "false_positive": 0,
+        "false_negative": 0,
+        "precision": null,
+        "recall": null
+      },
+      "min_dimension_ge_10_px": {
+        "positive": 0,
+        "negative": 0,
+        "true_positive": 0,
+        "false_positive": 0,
+        "false_negative": 0,
+        "precision": null,
+        "recall": null
+      },
+      "threshold": 3.2371860277566333
+    },
+    "border_inversion": {
+      "all": {
+        "positive": 0,
+        "negative": 2,
+        "true_positive": 0,
+        "false_positive": 0,
+        "false_negative": 0,
+        "precision": null,
+        "recall": null
+      },
+      "min_dimension_lt_10_px": {
+        "positive": 0,
+        "negative": 0,
+        "true_positive": 0,
+        "false_positive": 0,
+        "false_negative": 0,
+        "precision": null,
+        "recall": null
+      },
+      "min_dimension_ge_10_px": {
+        "positive": 0,
+        "negative": 2,
+        "true_positive": 0,
+        "false_positive": 0,
+        "false_negative": 0,
+        "precision": null,
+        "recall": null
+      },
+      "threshold": 0.1053466806875
+    }
+  },
+  "visible_change_not_flagged_examples": [
+    {
+      "control_id": "fresh-029",
+      "page": "finebooks/conchologiaiconi05reev/8967333",
+      "row": "mrc-M",
+      "taxonomy": [
+        "blur_texture"
+      ],
+      "assessment": "AI-assessed, provisional (not human-adjudicated); nonblinded"
+    },
+    {
+      "control_id": "fresh-035",
+      "page": "finebooks/trudyrusskagoent161881russ/12342014",
+      "row": "mrc-M",
+      "taxonomy": [
+        "blur_texture",
+        "colour_shift"
+      ],
+      "assessment": "AI-assessed, provisional (not human-adjudicated); nonblinded"
+    }
+  ],
+  "missed_change_note": "Visible change is provisional and broader than wrong-glyph damage; text detectors do not include a dedicated text-colour/texture classifier.",
+  "adobe_configuration": "Acrobat default OCR language (not matched); no Fraktur support; page straightened (deskew)"
+}

@@ -1,0 +1,34 @@
+{
+  "assessment": "AI-assessed, provisional (not human-adjudicated)",
+  "source": "all prior hOCR word candidates and GT-scoped artwork/border tiles, globally aligned PDFium source-DPI renders",
+  "per_detector": {
+    "glyph_shape": {
+      "examined": 12030,
+      "valid": 11934,
+      "suspected": 2504
+    },
+    "missing_ink": {
+      "examined": 12030,
+      "valid": 11934,
+      "suspected": 2248
+    },
+    "spurious_ink": {
+      "examined": 12030,
+      "valid": 11934,
+      "suspected": 4
+    },
+    "illustration_colour": {
+      "examined": 84,
+      "valid": 24,
+      "suspected": 10
+    },
+    "border_inversion": {
+      "examined": 144,
+      "valid": 144,
+      "suspected": 3
+    }
+  },
+  "raw_scores_local": "$B/pilot/phase1b/triage-raw.jsonl",
+  "calibration": "results/phase1b/calibration.json",
+  "adobe_configuration": "Acrobat default OCR language (not matched); no Fraktur support; page straightened (deskew)"
+}

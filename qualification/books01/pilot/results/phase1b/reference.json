@@ -1,0 +1,1437 @@
+{
+  "assessment": "AI-assessed, provisional (not human-adjudicated)",
+  "review_sha256": "a86c55d30953bbebd71c657ea22470d99cbde08c90f6b43729de5967198e5d8e",
+  "crops": [
+    {
+      "crop_id": "crop-0001",
+      "page": "quiver/aventinus_grammatica_1515_0008",
+      "bbox": [
+        896,
+        1051,
+        939,
+        1061
+      ],
+      "original_detector": "glyph_shape",
+      "original_flagged_row": "mrc-M",
+      "review_verdict": "false_positive",
+      "provisional_positive_rows": [],
+      "panel_taxonomy_by_row": {
+        "mrc-M": [
+          "geometric_shift"
+        ]
+      },
+      "assessment": "AI-assessed, provisional (not human-adjudicated)"
+    },
+    {
+      "crop_id": "crop-0002",
+      "page": "quiver/aventinus_grammatica_1515_0008",
+      "bbox": [
+        896,
+        1051,
+        939,
+        1061
+      ],
+      "original_detector": "glyph_shape",
+      "original_flagged_row": "adobe-E",
+      "review_verdict": "false_positive",
+      "provisional_positive_rows": [],
+      "panel_taxonomy_by_row": {
+        "mrc-M": [
+          "geometric_shift"
+        ]
+      },
+      "assessment": "AI-assessed, provisional (not human-adjudicated)",
+      "adobe_configuration": "Acrobat default OCR language (not matched); no Fraktur support; page straightened (deskew)"
+    },
+    {
+      "crop_id": "crop-0003",
+      "page": "quiver/aventinus_grammatica_1515_0008",
+      "bbox": [
+        896,
+        1051,
+        939,
+        1061
+      ],
+      "original_detector": "missing_ink",
+      "original_flagged_row": "mrc-M",
+      "review_verdict": "false_positive",
+      "provisional_positive_rows": [],
+      "panel_taxonomy_by_row": {
+        "mrc-M": [
+          "geometric_shift"
+        ]
+      },
+      "assessment": "AI-assessed, provisional (not human-adjudicated)"
+    },
+    {
+      "crop_id": "crop-0004",
+      "page": "quiver/aventinus_grammatica_1515_0008",
+      "bbox": [
+        896,
+        1051,
+        939,
+        1061
+      ],
+      "original_detector": "missing_ink",
+      "original_flagged_row": "adobe-E",
+      "review_verdict": "false_positive",
+      "provisional_positive_rows": [],
+      "panel_taxonomy_by_row": {
+        "mrc-M": [
+          "geometric_shift"
+        ]
+      },
+      "assessment": "AI-assessed, provisional (not human-adjudicated)",
+      "adobe_configuration": "Acrobat default OCR language (not matched); no Fraktur support; page straightened (deskew)"
+    },
+    {
+      "crop_id": "crop-0005",
+      "page": "quiver/aventinus_grammatica_1515_0008",
+      "bbox": [
+        896,
+        1051,
+        939,
+        1061
+      ],
+      "original_detector": "spurious_ink",
+      "original_flagged_row": "mrc-M",
+      "review_verdict": "false_positive",
+      "provisional_positive_rows": [],
+      "panel_taxonomy_by_row": {
+        "mrc-M": [
+          "geometric_shift"
+        ]
+      },
+      "assessment": "AI-assessed, provisional (not human-adjudicated)"
+    },
+    {
+      "crop_id": "crop-0006",
+      "page": "quiver/aventinus_grammatica_1515_0008",
+      "bbox": [
+        896,
+        1051,
+        939,
+        1061
+      ],
+      "original_detector": "spurious_ink",
+      "original_flagged_row": "adobe-E",
+      "review_verdict": "false_positive",
+      "provisional_positive_rows": [],
+      "panel_taxonomy_by_row": {
+        "mrc-M": [
+          "geometric_shift"
+        ]
+      },
+      "assessment": "AI-assessed, provisional (not human-adjudicated)",
+      "adobe_configuration": "Acrobat default OCR language (not matched); no Fraktur support; page straightened (deskew)"
+    },
+    {
+      "crop_id": "crop-0007",
+      "page": "quiver/aventinus_grammatica_1515_0008",
+      "bbox": [
+        514,
+        299,
+        642,
+        427
+      ],
+      "original_detector": "illustration_colour",
+      "original_flagged_row": "adobe-E",
+      "review_verdict": "true_positive_misscoped",
+      "provisional_positive_rows": [
+        "adobe-E",
+        "mrc-M"
+      ],
+      "panel_taxonomy_by_row": {
+        "adobe-E": [
+          "blur_texture",
+          "geometric_shift"
+        ],
+        "mrc-M": [
+          "colour_shift",
+          "blur_texture"
+        ]
+      },
+      "assessment": "AI-assessed, provisional (not human-adjudicated)",
+      "adobe_configuration": "Acrobat default OCR language (not matched); no Fraktur support; page straightened (deskew)"
+    },
+    {
+      "crop_id": "crop-0008",
+      "page": "quiver/aventinus_grammatica_1515_0008",
+      "bbox": [
+        541,
+        1681,
+        669,
+        1809
+      ],
+      "original_detector": "illustration_colour",
+      "original_flagged_row": "adobe-E",
+      "review_verdict": "true_positive_misscoped",
+      "provisional_positive_rows": [],
+      "panel_taxonomy_by_row": {
+        "adobe-E": [
+          "blur_texture",
+          "geometric_shift"
+        ],
+        "mrc-M": [
+          "colour_shift",
+          "blur_texture"
+        ]
+      },
+      "assessment": "AI-assessed, provisional (not human-adjudicated)",
+      "adobe_configuration": "Acrobat default OCR language (not matched); no Fraktur support; page straightened (deskew)"
+    },
+    {
+      "crop_id": "crop-0009",
+      "page": "quiver/aventinus_grammatica_1515_0008",
+      "bbox": [
+        0,
+        0,
+        128,
+        128
+      ],
+      "original_detector": "border_inversion",
+      "original_flagged_row": "adobe-E",
+      "review_verdict": "no_inversion",
+      "provisional_positive_rows": [],
+      "panel_taxonomy_by_row": {
+        "mrc-M": [
+          "blur_texture",
+          "spurious_ink_halo"
+        ],
+        "adobe-E": [
+          "geometric_shift"
+        ]
+      },
+      "assessment": "AI-assessed, provisional (not human-adjudicated)",
+      "adobe_configuration": "Acrobat default OCR language (not matched); no Fraktur support; page straightened (deskew)"
+    },
+    {
+      "crop_id": "crop-0010",
+      "page": "quiver/aventinus_grammatica_1515_0008",
+      "bbox": [
+        0,
+        2312,
+        128,
+        2440
+      ],
+      "original_detector": "border_inversion",
+      "original_flagged_row": "adobe-E",
+      "review_verdict": "no_inversion",
+      "provisional_positive_rows": [],
+      "panel_taxonomy_by_row": {
+        "mrc-M": [
+          "blur_texture",
+          "spurious_ink_halo"
+        ],
+        "adobe-E": [
+          "geometric_shift"
+        ]
+      },
+      "assessment": "AI-assessed, provisional (not human-adjudicated)",
+      "adobe_configuration": "Acrobat default OCR language (not matched); no Fraktur support; page straightened (deskew)"
+    },
+    {
+      "crop_id": "crop-0011",
+      "page": "quiver/aventinus_grammatica_1515_0008",
+      "bbox": [
+        318,
+        1720,
+        448,
+        1760
+      ],
+      "original_detector": "control",
+      "original_flagged_row": null,
+      "review_verdict": "control_with_differences",
+      "provisional_positive_rows": [],
+      "panel_taxonomy_by_row": {
+        "mrc-M": [
+          "colour_shift",
+          "blur_texture"
+        ],
+        "adobe-E": [
+          "blur_texture",
+          "geometric_shift"
+        ]
+      },
+      "assessment": "AI-assessed, provisional (not human-adjudicated)"
+    },
+    {
+      "crop_id": "crop-0012",
+      "page": "quiver/aventinus_grammatica_1515_0008",
+      "bbox": [
+        920,
+        1554,
+        1088,
+        1647
+      ],
+      "original_detector": "control",
+      "original_flagged_row": null,
+      "review_verdict": "control_with_differences",
+      "provisional_positive_rows": [],
+      "panel_taxonomy_by_row": {
+        "adobe-E": [
+          "blur_texture"
+        ],
+        "mrc-M": [
+          "colour_shift",
+          "blur_texture"
+        ]
+      },
+      "assessment": "AI-assessed, provisional (not human-adjudicated)"
+    },
+    {
+      "crop_id": "crop-0013",
+      "page": "quiver/luther_babstum_1526_0011",
+      "bbox": [
+        778,
+        1752,
+        781,
+        1757
+      ],
+      "original_detector": "glyph_shape",
+      "original_flagged_row": "adobe-E",
+      "review_verdict": "false_positive",
+      "provisional_positive_rows": [],
+      "panel_taxonomy_by_row": {
+        "adobe-E": [
+          "geometric_shift"
+        ]
+      },
+      "assessment": "AI-assessed, provisional (not human-adjudicated)",
+      "adobe_configuration": "Acrobat default OCR language (not matched); no Fraktur support; page straightened (deskew)"
+    },
+    {
+      "crop_id": "crop-0014",
+      "page": "quiver/luther_babstum_1526_0011",
+      "bbox": [
+        242,
+        1710,
+        421,
+        1763
+      ],
+      "original_detector": "glyph_shape",
+      "original_flagged_row": "adobe-E",
+      "review_verdict": "true_positive",
+      "provisional_positive_rows": [
+        "mrc-M"
+      ],
+      "panel_taxonomy_by_row": {
+        "mrc-M": [
+          "missing_ink"
+        ],
+        "adobe-E": [
+          "geometric_shift"
+        ]
+      },
+      "assessment": "AI-assessed, provisional (not human-adjudicated)",
+      "adobe_configuration": "Acrobat default OCR language (not matched); no Fraktur support; page straightened (deskew)"
+    },
+    {
+      "crop_id": "crop-0015",
+      "page": "quiver/luther_babstum_1526_0011",
+      "bbox": [
+        778,
+        1752,
+        781,
+        1757
+      ],
+      "original_detector": "missing_ink",
+      "original_flagged_row": "adobe-E",
+      "review_verdict": "false_positive",
+      "provisional_positive_rows": [],
+      "panel_taxonomy_by_row": {
+        "adobe-E": [
+          "geometric_shift"
+        ]
+      },
+      "assessment": "AI-assessed, provisional (not human-adjudicated)",
+      "adobe_configuration": "Acrobat default OCR language (not matched); no Fraktur support; page straightened (deskew)"
+    },
+    {
+      "crop_id": "crop-0016",
+      "page": "quiver/luther_babstum_1526_0011",
+      "bbox": [
+        242,
+        1710,
+        421,
+        1763
+      ],
+      "original_detector": "missing_ink",
+      "original_flagged_row": "adobe-E",
+      "review_verdict": "true_positive",
+      "provisional_positive_rows": [
+        "mrc-M"
+      ],
+      "panel_taxonomy_by_row": {
+        "adobe-E": [
+          "geometric_shift"
+        ],
+        "mrc-M": [
+          "missing_ink"
+        ]
+      },
+      "assessment": "AI-assessed, provisional (not human-adjudicated)",
+      "adobe_configuration": "Acrobat default OCR language (not matched); no Fraktur support; page straightened (deskew)"
+    },
+    {
+      "crop_id": "crop-0017",
+      "page": "quiver/luther_babstum_1526_0011",
+      "bbox": [
+        242,
+        1710,
+        421,
+        1763
+      ],
+      "original_detector": "spurious_ink",
+      "original_flagged_row": "adobe-E",
+      "review_verdict": "true_positive",
+      "provisional_positive_rows": [
+        "mrc-M"
+      ],
+      "panel_taxonomy_by_row": {
+        "adobe-E": [
+          "geometric_shift"
+        ],
+        "mrc-M": [
+          "missing_ink"
+        ]
+      },
+      "assessment": "AI-assessed, provisional (not human-adjudicated)",
+      "adobe_configuration": "Acrobat default OCR language (not matched); no Fraktur support; page straightened (deskew)"
+    },
+    {
+      "crop_id": "crop-0018",
+      "page": "quiver/luther_babstum_1526_0011",
+      "bbox": [
+        401,
+        1777,
+        478,
+        1818
+      ],
+      "original_detector": "spurious_ink",
+      "original_flagged_row": "adobe-E",
+      "review_verdict": "true_positive",
+      "provisional_positive_rows": [
+        "mrc-M",
+        "adobe-E"
+      ],
+      "panel_taxonomy_by_row": {
+        "mrc-M": [
+          "missing_ink",
+          "wrong_shape"
+        ],
+        "adobe-E": [
+          "wrong_shape",
+          "missing_ink",
+          "geometric_shift"
+        ]
+      },
+      "assessment": "AI-assessed, provisional (not human-adjudicated)",
+      "adobe_configuration": "Acrobat default OCR language (not matched); no Fraktur support; page straightened (deskew)"
+    },
+    {
+      "crop_id": "crop-0019",
+      "page": "quiver/luther_babstum_1526_0011",
+      "bbox": [
+        1187,
+        744,
+        1315,
+        872
+      ],
+      "original_detector": "illustration_colour",
+      "original_flagged_row": "adobe-E",
+      "review_verdict": "true_positive",
+      "provisional_positive_rows": [
+        "mrc-M"
+      ],
+      "panel_taxonomy_by_row": {
+        "mrc-M": [
+          "colour_shift",
+          "blur_texture"
+        ]
+      },
+      "assessment": "AI-assessed, provisional (not human-adjudicated)",
+      "adobe_configuration": "Acrobat default OCR language (not matched); no Fraktur support; page straightened (deskew)"
+    },
+    {
+      "crop_id": "crop-0020",
+      "page": "quiver/luther_babstum_1526_0011",
+      "bbox": [
+        409,
+        737,
+        537,
+        865
+      ],
+      "original_detector": "illustration_colour",
+      "original_flagged_row": "adobe-E",
+      "review_verdict": "true_positive",
+      "provisional_positive_rows": [
+        "mrc-M"
+      ],
+      "panel_taxonomy_by_row": {
+        "mrc-M": [
+          "colour_shift",
+          "blur_texture"
+        ]
+      },
+      "assessment": "AI-assessed, provisional (not human-adjudicated)",
+      "adobe_configuration": "Acrobat default OCR language (not matched); no Fraktur support; page straightened (deskew)"
+    },
+    {
+      "crop_id": "crop-0021",
+      "page": "quiver/luther_babstum_1526_0011",
+      "bbox": [
+        1608,
+        0,
+        1736,
+        128
+      ],
+      "original_detector": "border_inversion",
+      "original_flagged_row": "adobe-E",
+      "review_verdict": "no_inversion",
+      "provisional_positive_rows": [],
+      "panel_taxonomy_by_row": {
+        "mrc-M": [
+          "blur_texture",
+          "spurious_ink_halo"
+        ],
+        "adobe-E": [
+          "geometric_shift"
+        ]
+      },
+      "assessment": "AI-assessed, provisional (not human-adjudicated)",
+      "adobe_configuration": "Acrobat default OCR language (not matched); no Fraktur support; page straightened (deskew)"
+    },
+    {
+      "crop_id": "crop-0022",
+      "page": "quiver/luther_babstum_1526_0011",
+      "bbox": [
+        0,
+        0,
+        128,
+        128
+      ],
+      "original_detector": "border_inversion",
+      "original_flagged_row": "adobe-E",
+      "review_verdict": "no_inversion",
+      "provisional_positive_rows": [],
+      "panel_taxonomy_by_row": {
+        "adobe-E": [
+          "geometric_shift"
+        ],
+        "mrc-M": [
+          "blur_texture"
+        ]
+      },
+      "assessment": "AI-assessed, provisional (not human-adjudicated)",
+      "adobe_configuration": "Acrobat default OCR language (not matched); no Fraktur support; page straightened (deskew)"
+    },
+    {
+      "crop_id": "crop-0023",
+      "page": "quiver/luther_babstum_1526_0011",
+      "bbox": [
+        1081,
+        1626,
+        1157,
+        1658
+      ],
+      "original_detector": "control",
+      "original_flagged_row": null,
+      "review_verdict": "control_with_differences",
+      "provisional_positive_rows": [],
+      "panel_taxonomy_by_row": {
+        "mrc-M": [
+          "blur_texture"
+        ],
+        "adobe-E": [
+          "geometric_shift",
+          "blur_texture"
+        ]
+      },
+      "assessment": "AI-assessed, provisional (not human-adjudicated)"
+    },
+    {
+      "crop_id": "crop-0024",
+      "page": "quiver/luther_babstum_1526_0011",
+      "bbox": [
+        562,
+        1662,
+        686,
+        1714
+      ],
+      "original_detector": "control",
+      "original_flagged_row": null,
+      "review_verdict": "control_with_differences",
+      "provisional_positive_rows": [
+        "mrc-M"
+      ],
+      "panel_taxonomy_by_row": {
+        "adobe-E": [
+          "geometric_shift"
+        ],
+        "mrc-M": [
+          "missing_ink"
+        ]
+      },
+      "assessment": "AI-assessed, provisional (not human-adjudicated)"
+    },
+    {
+      "crop_id": "crop-0025",
+      "page": "quiver/arnold_ketzerhistorie01_1699_0114",
+      "bbox": [
+        899,
+        663,
+        918,
+        721
+      ],
+      "original_detector": "glyph_shape",
+      "original_flagged_row": "adobe-E",
+      "review_verdict": "mixed",
+      "provisional_positive_rows": [],
+      "panel_taxonomy_by_row": {
+        "adobe-E": [
+          "geometric_shift"
+        ],
+        "mrc-M": [
+          "missing_ink",
+          "colour_shift"
+        ]
+      },
+      "assessment": "AI-assessed, provisional (not human-adjudicated)",
+      "adobe_configuration": "Acrobat default OCR language (not matched); no Fraktur support; page straightened (deskew)"
+    },
+    {
+      "crop_id": "crop-0026",
+      "page": "quiver/arnold_ketzerhistorie01_1699_0114",
+      "bbox": [
+        1356,
+        733,
+        1358,
+        763
+      ],
+      "original_detector": "glyph_shape",
+      "original_flagged_row": "adobe-E",
+      "review_verdict": "false_positive",
+      "provisional_positive_rows": [],
+      "panel_taxonomy_by_row": {},
+      "assessment": "AI-assessed, provisional (not human-adjudicated)",
+      "adobe_configuration": "Acrobat default OCR language (not matched); no Fraktur support; page straightened (deskew)"
+    },
+    {
+      "crop_id": "crop-0027",
+      "page": "quiver/arnold_ketzerhistorie01_1699_0114",
+      "bbox": [
+        899,
+        663,
+        918,
+        721
+      ],
+      "original_detector": "missing_ink",
+      "original_flagged_row": "adobe-E",
+      "review_verdict": "mixed",
+      "provisional_positive_rows": [],
+      "panel_taxonomy_by_row": {
+        "adobe-E": [
+          "geometric_shift"
+        ],
+        "mrc-M": [
+          "missing_ink",
+          "colour_shift"
+        ]
+      },
+      "assessment": "AI-assessed, provisional (not human-adjudicated)",
+      "adobe_configuration": "Acrobat default OCR language (not matched); no Fraktur support; page straightened (deskew)"
+    },
+    {
+      "crop_id": "crop-0028",
+      "page": "quiver/arnold_ketzerhistorie01_1699_0114",
+      "bbox": [
+        1356,
+        733,
+        1358,
+        763
+      ],
+      "original_detector": "missing_ink",
+      "original_flagged_row": "adobe-E",
+      "review_verdict": "false_positive",
+      "provisional_positive_rows": [],
+      "panel_taxonomy_by_row": {},
+      "assessment": "AI-assessed, provisional (not human-adjudicated)",
+      "adobe_configuration": "Acrobat default OCR language (not matched); no Fraktur support; page straightened (deskew)"
+    },
+    {
+      "crop_id": "crop-0029",
+      "page": "quiver/arnold_ketzerhistorie01_1699_0114",
+      "bbox": [
+        899,
+        663,
+        918,
+        721
+      ],
+      "original_detector": "spurious_ink",
+      "original_flagged_row": "adobe-E",
+      "review_verdict": "mixed",
+      "provisional_positive_rows": [],
+      "panel_taxonomy_by_row": {
+        "mrc-M": [
+          "missing_ink",
+          "colour_shift"
+        ],
+        "adobe-E": [
+          "geometric_shift"
+        ]
+      },
+      "assessment": "AI-assessed, provisional (not human-adjudicated)",
+      "adobe_configuration": "Acrobat default OCR language (not matched); no Fraktur support; page straightened (deskew)"
+    },
+    {
+      "crop_id": "crop-0030",
+      "page": "quiver/arnold_ketzerhistorie01_1699_0114",
+      "bbox": [
+        1651,
+        696,
+        1669,
+        752
+      ],
+      "original_detector": "spurious_ink",
+      "original_flagged_row": "adobe-E",
+      "review_verdict": "false_positive",
+      "provisional_positive_rows": [],
+      "panel_taxonomy_by_row": {
+        "mrc-M": [
+          "geometric_shift"
+        ],
+        "adobe-E": [
+          "geometric_shift"
+        ]
+      },
+      "assessment": "AI-assessed, provisional (not human-adjudicated)",
+      "adobe_configuration": "Acrobat default OCR language (not matched); no Fraktur support; page straightened (deskew)"
+    },
+    {
+      "crop_id": "crop-0031",
+      "page": "quiver/arnold_ketzerhistorie01_1699_0114",
+      "bbox": [
+        2191,
+        3800,
+        2319,
+        3928
+      ],
+      "original_detector": "border_inversion",
+      "original_flagged_row": "adobe-E",
+      "review_verdict": "no_inversion",
+      "provisional_positive_rows": [],
+      "panel_taxonomy_by_row": {
+        "mrc-M": [
+          "blur_texture",
+          "colour_shift"
+        ],
+        "adobe-E": [
+          "geometric_shift"
+        ]
+      },
+      "assessment": "AI-assessed, provisional (not human-adjudicated)",
+      "adobe_configuration": "Acrobat default OCR language (not matched); no Fraktur support; page straightened (deskew)"
+    },
+    {
+      "crop_id": "crop-0032",
+      "page": "quiver/arnold_ketzerhistorie01_1699_0114",
+      "bbox": [
+        0,
+        0,
+        128,
+        128
+      ],
+      "original_detector": "border_inversion",
+      "original_flagged_row": "adobe-E",
+      "review_verdict": "no_inversion",
+      "provisional_positive_rows": [],
+      "panel_taxonomy_by_row": {
+        "mrc-M": [
+          "blur_texture"
+        ],
+        "adobe-E": [
+          "geometric_shift"
+        ]
+      },
+      "assessment": "AI-assessed, provisional (not human-adjudicated)",
+      "adobe_configuration": "Acrobat default OCR language (not matched); no Fraktur support; page straightened (deskew)"
+    },
+    {
+      "crop_id": "crop-0033",
+      "page": "quiver/arnold_ketzerhistorie01_1699_0114",
+      "bbox": [
+        965,
+        3307,
+        1247,
+        3353
+      ],
+      "original_detector": "control",
+      "original_flagged_row": null,
+      "review_verdict": "control_with_differences",
+      "provisional_positive_rows": [],
+      "panel_taxonomy_by_row": {
+        "mrc-M": [
+          "blur_texture"
+        ],
+        "adobe-E": [
+          "geometric_shift"
+        ]
+      },
+      "assessment": "AI-assessed, provisional (not human-adjudicated)"
+    },
+    {
+      "crop_id": "crop-0034",
+      "page": "quiver/arnold_ketzerhistorie01_1699_0114",
+      "bbox": [
+        1722,
+        705,
+        1815,
+        737
+      ],
+      "original_detector": "control",
+      "original_flagged_row": null,
+      "review_verdict": "control_with_differences",
+      "provisional_positive_rows": [],
+      "panel_taxonomy_by_row": {
+        "adobe-E": [
+          "geometric_shift"
+        ],
+        "mrc-M": [
+          "blur_texture",
+          "colour_shift"
+        ]
+      },
+      "assessment": "AI-assessed, provisional (not human-adjudicated)"
+    },
+    {
+      "crop_id": "crop-0035",
+      "page": "quiver/benner_herrnhuterey04_1748_0013",
+      "bbox": [
+        1230,
+        480,
+        1267,
+        506
+      ],
+      "original_detector": "glyph_shape",
+      "original_flagged_row": "adobe-E",
+      "review_verdict": "false_positive",
+      "provisional_positive_rows": [],
+      "panel_taxonomy_by_row": {},
+      "assessment": "AI-assessed, provisional (not human-adjudicated)",
+      "adobe_configuration": "Acrobat default OCR language (not matched); no Fraktur support; page straightened (deskew)"
+    },
+    {
+      "crop_id": "crop-0036",
+      "page": "quiver/benner_herrnhuterey04_1748_0013",
+      "bbox": [
+        102,
+        1014,
+        138,
+        1057
+      ],
+      "original_detector": "glyph_shape",
+      "original_flagged_row": "adobe-E",
+      "review_verdict": "false_positive",
+      "provisional_positive_rows": [],
+      "panel_taxonomy_by_row": {},
+      "assessment": "AI-assessed, provisional (not human-adjudicated)",
+      "adobe_configuration": "Acrobat default OCR language (not matched); no Fraktur support; page straightened (deskew)"
+    },
+    {
+      "crop_id": "crop-0037",
+      "page": "quiver/benner_herrnhuterey04_1748_0013",
+      "bbox": [
+        1230,
+        480,
+        1267,
+        506
+      ],
+      "original_detector": "missing_ink",
+      "original_flagged_row": "adobe-E",
+      "review_verdict": "false_positive",
+      "provisional_positive_rows": [],
+      "panel_taxonomy_by_row": {},
+      "assessment": "AI-assessed, provisional (not human-adjudicated)",
+      "adobe_configuration": "Acrobat default OCR language (not matched); no Fraktur support; page straightened (deskew)"
+    },
+    {
+      "crop_id": "crop-0038",
+      "page": "quiver/benner_herrnhuterey04_1748_0013",
+      "bbox": [
+        102,
+        1014,
+        138,
+        1057
+      ],
+      "original_detector": "missing_ink",
+      "original_flagged_row": "adobe-E",
+      "review_verdict": "false_positive",
+      "provisional_positive_rows": [],
+      "panel_taxonomy_by_row": {},
+      "assessment": "AI-assessed, provisional (not human-adjudicated)",
+      "adobe_configuration": "Acrobat default OCR language (not matched); no Fraktur support; page straightened (deskew)"
+    },
+    {
+      "crop_id": "crop-0039",
+      "page": "quiver/benner_herrnhuterey04_1748_0013",
+      "bbox": [
+        102,
+        1014,
+        138,
+        1057
+      ],
+      "original_detector": "spurious_ink",
+      "original_flagged_row": "adobe-E",
+      "review_verdict": "false_positive",
+      "provisional_positive_rows": [],
+      "panel_taxonomy_by_row": {},
+      "assessment": "AI-assessed, provisional (not human-adjudicated)",
+      "adobe_configuration": "Acrobat default OCR language (not matched); no Fraktur support; page straightened (deskew)"
+    },
+    {
+      "crop_id": "crop-0040",
+      "page": "quiver/benner_herrnhuterey04_1748_0013",
+      "bbox": [
+        140,
+        1147,
+        146,
+        1173
+      ],
+      "original_detector": "spurious_ink",
+      "original_flagged_row": "adobe-E",
+      "review_verdict": "false_positive",
+      "provisional_positive_rows": [],
+      "panel_taxonomy_by_row": {},
+      "assessment": "AI-assessed, provisional (not human-adjudicated)",
+      "adobe_configuration": "Acrobat default OCR language (not matched); no Fraktur support; page straightened (deskew)"
+    },
+    {
+      "crop_id": "crop-0041",
+      "page": "quiver/benner_herrnhuterey04_1748_0013",
+      "bbox": [
+        0,
+        2479,
+        128,
+        2607
+      ],
+      "original_detector": "border_inversion",
+      "original_flagged_row": "adobe-E",
+      "review_verdict": "no_inversion",
+      "provisional_positive_rows": [],
+      "panel_taxonomy_by_row": {
+        "mrc-M": [
+          "blur_texture",
+          "spurious_ink_halo"
+        ],
+        "adobe-E": [
+          "geometric_shift"
+        ]
+      },
+      "assessment": "AI-assessed, provisional (not human-adjudicated)",
+      "adobe_configuration": "Acrobat default OCR language (not matched); no Fraktur support; page straightened (deskew)"
+    },
+    {
+      "crop_id": "crop-0042",
+      "page": "quiver/benner_herrnhuterey04_1748_0013",
+      "bbox": [
+        1425,
+        0,
+        1553,
+        128
+      ],
+      "original_detector": "border_inversion",
+      "original_flagged_row": "adobe-E",
+      "review_verdict": "no_inversion",
+      "provisional_positive_rows": [],
+      "panel_taxonomy_by_row": {
+        "mrc-M": [
+          "blur_texture"
+        ],
+        "adobe-E": [
+          "geometric_shift"
+        ]
+      },
+      "assessment": "AI-assessed, provisional (not human-adjudicated)",
+      "adobe_configuration": "Acrobat default OCR language (not matched); no Fraktur support; page straightened (deskew)"
+    },
+    {
+      "crop_id": "crop-0043",
+      "page": "quiver/benner_herrnhuterey04_1748_0013",
+      "bbox": [
+        488,
+        1854,
+        570,
+        1908
+      ],
+      "original_detector": "control",
+      "original_flagged_row": null,
+      "review_verdict": "control_with_differences",
+      "provisional_positive_rows": [],
+      "panel_taxonomy_by_row": {
+        "mrc-M": [
+          "colour_shift",
+          "blur_texture"
+        ],
+        "adobe-E": [
+          "geometric_shift",
+          "blur_texture"
+        ]
+      },
+      "assessment": "AI-assessed, provisional (not human-adjudicated)"
+    },
+    {
+      "crop_id": "crop-0044",
+      "page": "quiver/benner_herrnhuterey04_1748_0013",
+      "bbox": [
+        681,
+        1685,
+        723,
+        1725
+      ],
+      "original_detector": "control",
+      "original_flagged_row": null,
+      "review_verdict": "control_with_differences",
+      "provisional_positive_rows": [],
+      "panel_taxonomy_by_row": {
+        "adobe-E": [
+          "blur_texture"
+        ],
+        "mrc-M": [
+          "blur_texture"
+        ]
+      },
+      "assessment": "AI-assessed, provisional (not human-adjudicated)"
+    },
+    {
+      "crop_id": "crop-0045",
+      "page": "finebooks/conchologiaiconi05reev/8967333",
+      "bbox": [
+        904,
+        1670,
+        947,
+        1692
+      ],
+      "original_detector": "glyph_shape",
+      "original_flagged_row": "adobe-E",
+      "review_verdict": "false_positive",
+      "provisional_positive_rows": [],
+      "panel_taxonomy_by_row": {
+        "adobe-E": [
+          "geometric_shift"
+        ]
+      },
+      "assessment": "AI-assessed, provisional (not human-adjudicated)",
+      "adobe_configuration": "Acrobat default OCR language (not matched); no Fraktur support; page straightened (deskew)"
+    },
+    {
+      "crop_id": "crop-0046",
+      "page": "finebooks/conchologiaiconi05reev/8967333",
+      "bbox": [
+        961,
+        1670,
+        1004,
+        1693
+      ],
+      "original_detector": "glyph_shape",
+      "original_flagged_row": "adobe-E",
+      "review_verdict": "false_positive",
+      "provisional_positive_rows": [],
+      "panel_taxonomy_by_row": {
+        "adobe-E": [
+          "geometric_shift"
+        ]
+      },
+      "assessment": "AI-assessed, provisional (not human-adjudicated)",
+      "adobe_configuration": "Acrobat default OCR language (not matched); no Fraktur support; page straightened (deskew)"
+    },
+    {
+      "crop_id": "crop-0047",
+      "page": "finebooks/conchologiaiconi05reev/8967333",
+      "bbox": [
+        904,
+        1670,
+        947,
+        1692
+      ],
+      "original_detector": "missing_ink",
+      "original_flagged_row": "adobe-E",
+      "review_verdict": "false_positive",
+      "provisional_positive_rows": [],
+      "panel_taxonomy_by_row": {
+        "adobe-E": [
+          "geometric_shift"
+        ]
+      },
+      "assessment": "AI-assessed, provisional (not human-adjudicated)",
+      "adobe_configuration": "Acrobat default OCR language (not matched); no Fraktur support; page straightened (deskew)"
+    },
+    {
+      "crop_id": "crop-0048",
+      "page": "finebooks/conchologiaiconi05reev/8967333",
+      "bbox": [
+        961,
+        1670,
+        1004,
+        1693
+      ],
+      "original_detector": "missing_ink",
+      "original_flagged_row": "adobe-E",
+      "review_verdict": "false_positive",
+      "provisional_positive_rows": [],
+      "panel_taxonomy_by_row": {
+        "adobe-E": [
+          "geometric_shift"
+        ]
+      },
+      "assessment": "AI-assessed, provisional (not human-adjudicated)",
+      "adobe_configuration": "Acrobat default OCR language (not matched); no Fraktur support; page straightened (deskew)"
+    },
+    {
+      "crop_id": "crop-0049",
+      "page": "finebooks/conchologiaiconi05reev/8967333",
+      "bbox": [
+        1439,
+        1666,
+        1453,
+        1705
+      ],
+      "original_detector": "spurious_ink",
+      "original_flagged_row": "sw-E",
+      "review_verdict": "false_positive",
+      "provisional_positive_rows": [],
+      "panel_taxonomy_by_row": {},
+      "assessment": "AI-assessed, provisional (not human-adjudicated)"
+    },
+    {
+      "crop_id": "crop-0050",
+      "page": "finebooks/conchologiaiconi05reev/8967333",
+      "bbox": [
+        1439,
+        1666,
+        1453,
+        1705
+      ],
+      "original_detector": "spurious_ink",
+      "original_flagged_row": "sw-M",
+      "review_verdict": "false_positive",
+      "provisional_positive_rows": [],
+      "panel_taxonomy_by_row": {},
+      "assessment": "AI-assessed, provisional (not human-adjudicated)"
+    },
+    {
+      "crop_id": "crop-0051",
+      "page": "finebooks/conchologiaiconi05reev/8967333",
+      "bbox": [
+        1143,
+        1925,
+        1271,
+        2053
+      ],
+      "original_detector": "illustration_colour",
+      "original_flagged_row": "adobe-E",
+      "review_verdict": "minor",
+      "provisional_positive_rows": [],
+      "panel_taxonomy_by_row": {
+        "mrc-M": [
+          "colour_shift"
+        ]
+      },
+      "assessment": "AI-assessed, provisional (not human-adjudicated)",
+      "adobe_configuration": "Acrobat default OCR language (not matched); no Fraktur support; page straightened (deskew)"
+    },
+    {
+      "crop_id": "crop-0052",
+      "page": "finebooks/conchologiaiconi05reev/8967333",
+      "bbox": [
+        1155,
+        1533,
+        1283,
+        1661
+      ],
+      "original_detector": "illustration_colour",
+      "original_flagged_row": "mrc-M",
+      "review_verdict": "minor",
+      "provisional_positive_rows": [],
+      "panel_taxonomy_by_row": {
+        "mrc-M": [
+          "colour_shift"
+        ]
+      },
+      "assessment": "AI-assessed, provisional (not human-adjudicated)"
+    },
+    {
+      "crop_id": "crop-0053",
+      "page": "finebooks/conchologiaiconi05reev/8967333",
+      "bbox": [
+        2241,
+        3039,
+        2369,
+        3167
+      ],
+      "original_detector": "border_inversion",
+      "original_flagged_row": "adobe-E",
+      "review_verdict": "no_inversion",
+      "provisional_positive_rows": [],
+      "panel_taxonomy_by_row": {},
+      "assessment": "AI-assessed, provisional (not human-adjudicated)",
+      "adobe_configuration": "Acrobat default OCR language (not matched); no Fraktur support; page straightened (deskew)"
+    },
+    {
+      "crop_id": "crop-0054",
+      "page": "finebooks/conchologiaiconi05reev/8967333",
+      "bbox": [
+        2241,
+        3039,
+        2369,
+        3167
+      ],
+      "original_detector": "border_inversion",
+      "original_flagged_row": "mrc-M",
+      "review_verdict": "no_inversion",
+      "provisional_positive_rows": [],
+      "panel_taxonomy_by_row": {},
+      "assessment": "AI-assessed, provisional (not human-adjudicated)"
+    },
+    {
+      "crop_id": "crop-0055",
+      "page": "finebooks/conchologiaiconi05reev/8967333",
+      "bbox": [
+        1060,
+        1173,
+        1110,
+        1203
+      ],
+      "original_detector": "control",
+      "original_flagged_row": null,
+      "review_verdict": "control_with_defect",
+      "provisional_positive_rows": [
+        "adobe-E"
+      ],
+      "panel_taxonomy_by_row": {
+        "adobe-E": [
+          "missing_ink",
+          "wrong_shape"
+        ]
+      },
+      "assessment": "AI-assessed, provisional (not human-adjudicated)",
+      "adobe_configuration": "Acrobat default OCR language (not matched); no Fraktur support; page straightened (deskew)"
+    },
+    {
+      "crop_id": "crop-0056",
+      "page": "finebooks/conchologiaiconi05reev/8967333",
+      "bbox": [
+        1133,
+        1173,
+        1216,
+        1203
+      ],
+      "original_detector": "control",
+      "original_flagged_row": null,
+      "review_verdict": "control_with_defect",
+      "provisional_positive_rows": [
+        "adobe-E"
+      ],
+      "panel_taxonomy_by_row": {
+        "adobe-E": [
+          "missing_ink"
+        ]
+      },
+      "assessment": "AI-assessed, provisional (not human-adjudicated)",
+      "adobe_configuration": "Acrobat default OCR language (not matched); no Fraktur support; page straightened (deskew)"
+    },
+    {
+      "crop_id": "crop-0057",
+      "page": "finebooks/trudyrusskagoent161881russ/12342014",
+      "bbox": [
+        615,
+        1444,
+        623,
+        1452
+      ],
+      "original_detector": "glyph_shape",
+      "original_flagged_row": "mrc-M",
+      "review_verdict": "minor",
+      "provisional_positive_rows": [],
+      "panel_taxonomy_by_row": {},
+      "assessment": "AI-assessed, provisional (not human-adjudicated)"
+    },
+    {
+      "crop_id": "crop-0058",
+      "page": "finebooks/trudyrusskagoent161881russ/12342014",
+      "bbox": [
+        689,
+        1418,
+        706,
+        1437
+      ],
+      "original_detector": "glyph_shape",
+      "original_flagged_row": "adobe-E",
+      "review_verdict": "suspected_minor",
+      "provisional_positive_rows": [],
+      "panel_taxonomy_by_row": {
+        "adobe-E": [
+          "wrong_shape"
+        ]
+      },
+      "assessment": "AI-assessed, provisional (not human-adjudicated)",
+      "adobe_configuration": "Acrobat default OCR language (not matched); no Fraktur support; page straightened (deskew)"
+    },
+    {
+      "crop_id": "crop-0059",
+      "page": "finebooks/trudyrusskagoent161881russ/12342014",
+      "bbox": [
+        615,
+        1444,
+        623,
+        1452
+      ],
+      "original_detector": "missing_ink",
+      "original_flagged_row": "mrc-M",
+      "review_verdict": "minor",
+      "provisional_positive_rows": [],
+      "panel_taxonomy_by_row": {},
+      "assessment": "AI-assessed, provisional (not human-adjudicated)"
+    },
+    {
+      "crop_id": "crop-0060",
+      "page": "finebooks/trudyrusskagoent161881russ/12342014",
+      "bbox": [
+        689,
+        1418,
+        706,
+        1437
+      ],
+      "original_detector": "missing_ink",
+      "original_flagged_row": "adobe-E",
+      "review_verdict": "suspected_minor",
+      "provisional_positive_rows": [],
+      "panel_taxonomy_by_row": {
+        "mrc-M": [
+          "wrong_shape"
+        ],
+        "adobe-E": [
+          "wrong_shape"
+        ]
+      },
+      "assessment": "AI-assessed, provisional (not human-adjudicated)",
+      "adobe_configuration": "Acrobat default OCR language (not matched); no Fraktur support; page straightened (deskew)"
+    },
+    {
+      "crop_id": "crop-0061",
+      "page": "finebooks/trudyrusskagoent161881russ/12342014",
+      "bbox": [
+        614,
+        1983,
+        658,
+        2035
+      ],
+      "original_detector": "spurious_ink",
+      "original_flagged_row": "mrc-M",
+      "review_verdict": "minor",
+      "provisional_positive_rows": [],
+      "panel_taxonomy_by_row": {},
+      "assessment": "AI-assessed, provisional (not human-adjudicated)"
+    },
+    {
+      "crop_id": "crop-0062",
+      "page": "finebooks/trudyrusskagoent161881russ/12342014",
+      "bbox": [
+        685,
+        1989,
+        702,
+        2009
+      ],
+      "original_detector": "spurious_ink",
+      "original_flagged_row": "mrc-M",
+      "review_verdict": "suspected_minor",
+      "provisional_positive_rows": [],
+      "panel_taxonomy_by_row": {
+        "adobe-E": [
+          "wrong_shape"
+        ],
+        "mrc-M": [
+          "wrong_shape"
+        ]
+      },
+      "assessment": "AI-assessed, provisional (not human-adjudicated)"
+    },
+    {
+      "crop_id": "crop-0063",
+      "page": "finebooks/trudyrusskagoent161881russ/12342014",
+      "bbox": [
+        0,
+        0,
+        128,
+        128
+      ],
+      "original_detector": "border_inversion",
+      "original_flagged_row": "sw-E",
+      "review_verdict": "no_inversion",
+      "provisional_positive_rows": [],
+      "panel_taxonomy_by_row": {
+        "mrc-M": [
+          "blur_texture"
+        ]
+      },
+      "assessment": "AI-assessed, provisional (not human-adjudicated)"
+    },
+    {
+      "crop_id": "crop-0064",
+      "page": "finebooks/trudyrusskagoent161881russ/12342014",
+      "bbox": [
+        0,
+        0,
+        128,
+        128
+      ],
+      "original_detector": "border_inversion",
+      "original_flagged_row": "sw-M",
+      "review_verdict": "no_inversion",
+      "provisional_positive_rows": [],
+      "panel_taxonomy_by_row": {
+        "mrc-M": [
+          "blur_texture"
+        ]
+      },
+      "assessment": "AI-assessed, provisional (not human-adjudicated)"
+    },
+    {
+      "crop_id": "crop-0065",
+      "page": "finebooks/trudyrusskagoent161881russ/12342014",
+      "bbox": [
+        1342,
+        1677,
+        1382,
+        1711
+      ],
+      "original_detector": "control",
+      "original_flagged_row": null,
+      "review_verdict": "control_minor",
+      "provisional_positive_rows": [],
+      "panel_taxonomy_by_row": {
+        "mrc-M": [
+          "missing_ink"
+        ]
+      },
+      "assessment": "AI-assessed, provisional (not human-adjudicated)"
+    },
+    {
+      "crop_id": "crop-0066",
+      "page": "finebooks/trudyrusskagoent161881russ/12342014",
+      "bbox": [
+        981,
+        1746,
+        1177,
+        1782
+      ],
+      "original_detector": "control",
+      "original_flagged_row": null,
+      "review_verdict": "control_minor",
+      "provisional_positive_rows": [],
+      "panel_taxonomy_by_row": {},
+      "assessment": "AI-assessed, provisional (not human-adjudicated)"
+    }
+  ],
+  "adobe_configuration": "Acrobat default OCR language (not matched); no Fraktur support; page straightened (deskew)"
+}

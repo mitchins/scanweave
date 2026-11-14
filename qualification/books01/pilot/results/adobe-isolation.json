@@ -1,10 +1,28 @@
 {
   "adobe": {
     "sha256": "534965da81557d283539d92cd3c2f5e1488225c250f9a4cd9a9f6ccc780e31b0",
-    "denied_internet_socket_events": 104
+    "denied_internet_socket_events": 104,
+    "registry_evidence_sha256": {
+      "before": "c599a3f7d9a51a31acb6f7227dc8d57b194f56345361f6876605127c0a639d7b",
+      "after": "024ec1a8f8b574270c4ef3efb14d58d14c19cc9bde9e0062693a4947b2260fed",
+      "diff": "c277f74d56a8cb6cfc24af295870184cdbb5cfec23f42039356bd4f21a5706e0"
+    }
   },
   "adobe-engb-superseded": {
     "sha256": "48dcbe060c27410e0391e4ff3bb6821bb40d59ab887bda1bbf5e7e49890198aa",
-    "denied_internet_socket_events": 198
+    "denied_internet_socket_events": 198,
+    "registry_evidence_sha256": {
+      "before": "9c4b530aba8e43cd414ed90ec79f72a83fc9405b836b57284bdaacf48c50a636",
+      "after": "c599a3f7d9a51a31acb6f7227dc8d57b194f56345361f6876605127c0a639d7b",
+      "diff": "86ddd74bcfdba0131f4e1faa55762594d96aa02d6bf8ae867984e5a08b8ce5cc"
+    }
+  },
+  "isolation_deviation": {
+    "first_batch": "2026-11-14, host LANG=en_GB.UTF-8; Wine resynchronized the prefix international locale to en-GB and changed keyboard preload and codepage",
+    "second_batch": "host LANG=en_US.UTF-8 restored en-US; extracted text identical and sizes differed by at most one byte",
+    "additional_changes": "Wine auto-registered newly installed host fonts and Acrobat updated its recent-files list",
+    "acrobat_ocr_output_settings_changed": false,
+    "evidence": "Claude review and SHA-256-pinned local registry snapshots/diffs",
+    "interpretation": "AI-assessed provisional; no further Wine/Acrobat execution in Phase 1b"
   }
 }
