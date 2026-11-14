@@ -41,7 +41,7 @@ Labels were randomised independently per panel. "Worst aesthetically" is recorde
 - ScanWeave is named worst once ("a bit weaker", panel 002), gets "gradient noise" once (003), and is "better" or "like the source" twice (001, 019).
 - The reviewer separates **restoration and readability** (Adobe's thresholding sometimes reads clearer) from **fidelity to the source**. The acceptance rule should keep these as separate axes rather than treating one as a defect of the other.
 
-**Detector candidates.** Of the 9 new candidates (008–016), the human named the flagged row as worst in 4 (MRC in 012 and 015; MRC in 009 as "harsh"; and none of the Adobe-flagged 010, 013, 016). The ScanWeave-flagged candidate (014) drew no comment on ScanWeave. This is calibration context only, not a detector accuracy estimate.
+**Detector candidates.** Of the 9 new candidates (008–016), the human criticised the flagged row in 3: MRC in 012 and 015 (worst) and MRC in 009 (harsh). For 008, the flagged MRC row drew only an aesthetic gradient comment. For the four Adobe-flagged candidates (010, 011, 013, 016), the human named MRC as worst instead. For the ScanWeave-flagged candidate (014), MRC was named worst and nothing was said about ScanWeave. This is calibration context only, not a detector accuracy estimate.
 
 ## Potential material defects that need clarification
 Only these four. The rest of the panel needs no repeat.
