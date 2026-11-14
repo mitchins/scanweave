@@ -50,7 +50,7 @@ for p in pages:
   if len(coords)>2:draw.line([tuple(x) for x in coords]+[tuple(coords[0])],fill=(255,0,0),width=3)
  qa=B/'qa/align'/work/(str(p['page'])+'.png'); qa.parent.mkdir(parents=True,exist_ok=True); overlay.save(qa)
  pdf=B/'sources/single'/work/(str(p['page'])+'.pdf'); pdf.parent.mkdir(parents=True,exist_ok=True); again=B/'tmp/rebuild.pdf'; decoded=makepdf(pdf,im,dpi); assert makepdf(again,im,dpi)==decoded and sha(pdf)==sha(again); works[work].append(pdf)
- locks[id]={'origin':data[0],'gt_origin':data[1],'origin_codec': 'TIFF uncompressed RGB8 (Compression tag 1)' if p['source']=='ocr-d-quiver' else 'WebP lossy','lossy_origin':p['source']!='ocr-d-quiver','decoded_pixel_sha256':decoded,'canonical_pixels':mode+'8 row-major','dimensions':list(im.size),'resolved_dpi':dpi,'dpi_evidence':evidence,'registration':reg.get(id),'source_pdf_sha256':sha(pdf),'source_pdf_path':str(pdf.relative_to(B)),'generator':'pikepdf '+pikepdf.__version__,'language':language}
+ locks[id]={'origin':data[0],'gt_origin':data[1],'origin_codec': 'TIFF uncompressed RGB8 (Compression tag 1)' if p['source']=='ocr-d-quiver' else 'WebP lossy','lossy_origin':p['source']!='ocr-d-quiver','processed_derivative':p['source']!='ocr-d-quiver','source_type':'processed-derivative' if p['source']!='ocr-d-quiver' else 'quiver-original-tiff','decoded_pixel_sha256':decoded,'canonical_pixels':mode+'8 row-major','dimensions':list(im.size),'resolved_dpi':dpi,'dpi_evidence':evidence,'registration':reg.get(id),'source_pdf_sha256':sha(pdf),'source_pdf_path':str(pdf.relative_to(B)),'generator':'pikepdf '+pikepdf.__version__,'language':language}
  print(id,im.size,dpi,flush=True)
 for work,paths in works.items():
  dest=B/'sources/work'/(work+'.pdf'); dest.parent.mkdir(parents=True,exist_ok=True)

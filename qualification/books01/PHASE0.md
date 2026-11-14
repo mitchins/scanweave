@@ -2,7 +2,7 @@
 
 **Status: selection frozen with material open issues below.** This is not a Phase 1 comparison.
 
-Quiver revisions are in `phase0/repo-pins.json`; FineBooks dataset and image revisions, source URLs and byte hashes are in the provenance and lock files. Twelve IA original-capture JP2 codestreams use irreversible 9/7 wavelets and decode to RGB8 via the pinned Pillow/OpenJPEG versions. Their candidates were fetched as individual tar members. All 12 use the WebP fallback under the accepted rule. Holdout files were hashed as bytes only. The accepted split is book-disjoint and unchanged.
+Quiver revisions are in `phase0/repo-pins.json`; FineBooks dataset and image revisions, source URLs and byte hashes are in the provenance and lock files. Twelve IA original-capture JP2 codestreams use irreversible 9/7 wavelets and decode to RGB8 via the pinned Pillow/OpenJPEG versions. Their candidates were fetched as individual tar members. All 12 use the WebP fallback, labelled both lossy-origin and processed-derivative: the original JP2 is a raw camera frame while the access image is rotated, cropped, deskewed and tone-processed. The permitted registration model cannot reproduce the derivative geometry; the patch matcher’s ±80-pixel window was not the deciding factor. Holdout files were hashed as bytes only. The accepted split is book-disjoint and unchanged.
 
 The language rule is `deu_latf` for Quiver Fraktur, `deu_latf+lat` for fontmix, `lat` for Alberti Antiqua, and `deu` for the other Antiqua work; FineBooks uses the volume language string in the accepted proposal. Each string is recorded per dev page.
 
@@ -14,18 +14,18 @@ Patch matching uses 128-pixel access-image patches and searches each exact quart
 
 | Page | Residual px | Inliers / patches | Inlier fraction | Ink delta | Decision |
 |---|---:|---:|---:|---:|---|
-| finebooks/conchologiaiconi05reev/8967333 | — | 0 / 0 | 0.00 | — | webp: insufficient spatially separated matches |
-| finebooks/conchologiaiconi05reev/8966753 | 1.83 | 7 / 9 | 0.78 | — | webp: correlation residual or inlier requirement failed |
-| finebooks/conchologiaiconi05reev/8967228 | 0.00 | 8 / 8 | 1.00 | — | webp: no measurable GT line ink |
-| finebooks/conchologiaiconi05reev/8967062 | — | 0 / 7 | 0.00 | — | webp: insufficient spatially separated matches |
-| finebooks/pisciumquerelaee00sche/9684341 | 1.59 | 3 / 21 | 0.14 | — | webp: correlation residual or inlier requirement failed |
-| finebooks/pisciumquerelaee00sche/9684355 | 1.17 | 2 / 13 | 0.15 | — | webp: correlation residual or inlier requirement failed |
-| finebooks/pisciumquerelaee00sche/9684335 | 1.31 | 2 / 14 | 0.14 | — | webp: correlation residual or inlier requirement failed |
-| finebooks/pisciumquerelaee00sche/9684354 | 0.86 | 1 / 10 | 0.10 | — | webp: correlation residual or inlier requirement failed |
-| finebooks/trudyrusskagoent161881russ/12341923 | 0.10 | 1 / 9 | 0.11 | — | webp: correlation residual or inlier requirement failed |
-| finebooks/trudyrusskagoent161881russ/12342014 | 1.71 | 3 / 11 | 0.27 | — | webp: correlation residual or inlier requirement failed |
-| finebooks/trudyrusskagoent161881russ/12341934 | 1.99 | 1 / 12 | 0.08 | — | webp: correlation residual or inlier requirement failed |
-| finebooks/trudyrusskagoent161881russ/12342041 | — | 0 / 9 | 0.00 | — | webp: correlation residual or inlier requirement failed |
+| finebooks/conchologiaiconi05reev/8967333 | — | 0 / 0 | 0.00 | — | webp: camera frame vs processed-derivative geometry |
+| finebooks/conchologiaiconi05reev/8966753 | 1.83 | 7 / 9 | 0.78 | — | webp: camera frame vs processed-derivative geometry |
+| finebooks/conchologiaiconi05reev/8967228 | 0.00 | 8 / 8 | 1.00 | — | webp: camera frame vs processed-derivative geometry |
+| finebooks/conchologiaiconi05reev/8967062 | — | 0 / 7 | 0.00 | — | webp: camera frame vs processed-derivative geometry |
+| finebooks/pisciumquerelaee00sche/9684341 | 1.59 | 3 / 21 | 0.14 | — | webp: camera frame vs processed-derivative geometry |
+| finebooks/pisciumquerelaee00sche/9684355 | 1.17 | 2 / 13 | 0.15 | — | webp: camera frame vs processed-derivative geometry |
+| finebooks/pisciumquerelaee00sche/9684335 | 1.31 | 2 / 14 | 0.14 | — | webp: camera frame vs processed-derivative geometry |
+| finebooks/pisciumquerelaee00sche/9684354 | 0.86 | 1 / 10 | 0.10 | — | webp: camera frame vs processed-derivative geometry |
+| finebooks/trudyrusskagoent161881russ/12341923 | 0.10 | 1 / 9 | 0.11 | — | webp: camera frame vs processed-derivative geometry |
+| finebooks/trudyrusskagoent161881russ/12342014 | 1.71 | 3 / 11 | 0.27 | — | webp: camera frame vs processed-derivative geometry |
+| finebooks/trudyrusskagoent161881russ/12341934 | 1.99 | 1 / 12 | 0.08 | — | webp: camera frame vs processed-derivative geometry |
+| finebooks/trudyrusskagoent161881russ/12342041 | — | 0 / 9 | 0.00 | — | webp: camera frame vs processed-derivative geometry |
 
 ## Quiver DPI evidence
 
@@ -69,4 +69,4 @@ Logical disk bytes: {'src': 1056450237, 'sources': 513641002, 'gt': 3080493, 'qa
 - All 12 FineBooks XML files contain TextRegion polygons and text but no TextLine elements. Line counts are zero, region text is preserved without inventing line boxes, and line-polygon ink containment cannot be measured. The accepted rule therefore forces fallback even when the patch correlation alone might pass. Line-level alignment metrics for these pages require a separately approved methodology or different GT.
 - For Quiver works whose METS gives no physical format or dimensions, the TIFF DPI is provisional and low confidence. A catalogue-based physical-size check remains needed before treating those page sizes as established.
 - Fetch, registration and smoke timing and actual network byte totals were not instrumented; the missing measurements cannot be reconstructed reliably.
-- Registration did not establish image correspondence for every JP2 candidate, particularly sparse plates. The fallback is safe under the acceptance rule but original-capture use remains unverified for those pages.
+- The camera-frame versus access-derivative difference makes the original JP2 unsuitable under the approved no-crop/no-deskew registration rule; the correlation numbers above are supporting evidence, not the fallback decision basis.
