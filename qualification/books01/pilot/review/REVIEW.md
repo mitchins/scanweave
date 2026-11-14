@@ -57,3 +57,19 @@ Reviewer: Claude. Implementation by Codex (`219ce4b`, `b2fa741`). The adjudicati
 - **Line-level OCR.** The earlier rise from frozen to extracted line CER was a grouping and parsing artefact. After the correction, the matched rows agree with frozen OCR within 0.0032 CER.
 - **Detectors.** Calibration is in-sample (16 labelled crops for glyph/ink), and the full triage flags 21% of word boxes (2,504 of 12,030). The suspicion rate is too high to serve as a review queue at 36 pages. Precision outside the calibration sample is unknown.
 - **Human panel.** Now one output per distinct converter (4), with fresh labels and a sealed key. Pixel-identical source-preserving outputs may still be recognisable.
+
+## Addendum after Phase 1c (`3b7519a`)
+- **Search audit accepted.** All 40 ScanWeave/MRC conditional-search misses are long-s query normalisation (the reading-form query against the diplomatic ſ in the text layer); PDFium finds the diplomatic form. No ScanWeave text-layer defect.
+- **Queue coverage check (Claude, diagnostic only; not calibration).** For the four locations the human questioned, the best rank of the concerned output on its page:
+
+| Known location | Output | Rank by raw score | Rank by contrast against other outputs |
+|---|---|---|---|
+| 0018 | MRC | 58 of 432 | 39 |
+| 0018 | Adobe | 48 of 432 | 31 |
+| 0055 | Adobe | 17 of 336 | 46 |
+| 0056 | Adobe | 8 of 336 | 5 |
+| 0014 | MRC | 47 of 432 | 48 |
+
+  - A source-identical output (OCRmyPDF) scores exactly 0 on all 3,978 boxes, so the scores carry no renderer noise.
+  - For MRC and Adobe, many words on a page change to a similar degree, so no instance-level ranking with a cap of 10 per page will reliably surface specific known instances.
+- **Implication.** The review question should be decided per page × output ("does this output show material damage anywhere on this page?") by stratified sampling: top-k by raw score plus random word crops per distinct output, plus all illustration and border candidates. Instance-level coverage is the wrong yardstick. This is a proposal for the owner and has not been implemented.
