@@ -11,6 +11,8 @@ Reviewer: Claude. Implementation by Codex (`219ce4b`, `b2fa741`). The adjudicati
 
 ## Blind adjudication (66 crops: 54 suspected + 12 controls)
 
+**Status: AI-assessed, provisional (not human-adjudicated).** Per the owner's Phase 1 review, these verdicts are an AI assessment by Claude and need human confirmation (blinded panel, Phase 1b) before any count becomes a benchmark result. Zero visible differences in sampled ScanWeave/OCRmyPDF crops does not establish a defect-free converter.
+
 | Detector | Crops | False positive | True positive | Other |
 |---|---:|---:|---:|---|
 | glyph_shape | 12 | 8 | 1 | 1 mixed, 2 minor |
@@ -20,7 +22,7 @@ Reviewer: Claude. Implementation by Codex (`219ce4b`, `b2fa741`). The adjudicati
 | border_inversion | 12 | — | — | **no inversion in any output** |
 | controls (random words) | 12 | — | 2 with a confirmed defect | 8 with visible differences |
 
-**Confirmed material defects, after joining with the key:**
+**Provisionally assessed material defects (AI, pending human confirmation), after joining with the key:**
 - **Adobe XI (3):**
   - luther "was": flat glyphs, with the w broken into fragments;
   - 8967333 "OF": the O is broken into two arcs;
@@ -48,3 +50,10 @@ Reviewer: Claude. Implementation by Codex (`219ce4b`, `b2fa741`). The adjudicati
 - **Quiver pages:** ScanWeave's output is 97–98% one DCT background, with 0.5–3 KB of fonts. It barely vectorises historical Fraktur, which explains why its fidelity matches the source.
 - **Trudy:** 246 KB of its 555 KB is vector fonts.
 - **Size comparison:** MRC is 3–5× smaller on every page, but with confirmed visible losses. Adobe is 10–30% smaller on the Quiver pages, with rotation and confirmed glyph defects.
+
+## Addendum after Phase 1b (`b7b3235`, `f222252`)
+- **Geometry.** Global registration now precedes the pixel metrics. Adobe rotation is −0.50° to +0.82°. Adobe text SSIM went from 0.20–0.50 native to 0.76–0.81 aligned on the Quiver pages; the native and aligned scores are both reported.
+- **MRC shift on 8967333.** Claude's "4 px" was one quantisation step of a 4×-downsampled phase correlation, not a measured shift. Codex's near-zero estimate is accepted.
+- **Line-level OCR.** The earlier rise from frozen to extracted line CER was a grouping and parsing artefact. After the correction, the matched rows agree with frozen OCR within 0.0032 CER.
+- **Detectors.** Calibration is in-sample (16 labelled crops for glyph/ink), and the full triage flags 21% of word boxes (2,504 of 12,030). The suspicion rate is too high to serve as a review queue at 36 pages. Precision outside the calibration sample is unknown.
+- **Human panel.** Now one output per distinct converter (4), with fresh labels and a sealed key. Pixel-identical source-preserving outputs may still be recognisable.
