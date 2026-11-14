@@ -1,0 +1,1063 @@
+{
+  "definition": "At most 10 flagged crops per page, at most 3 per pixel-distinct representative row, plus 2 fixed-seed random controls. Rank by within-page, row and detector empirical raw-score percentile; ties by raw score then row, box and detector. Deduplicate boxes at IoU >= 0.5 and rows by exact decoded RGB crop bytes; omit source-identical flagged outputs. Counts use original candidate instances including duplicates.",
+  "pages": {
+    "quiver/aventinus_grammatica_1515_0008": [
+      {
+        "page": "quiver/aventinus_grammatica_1515_0008",
+        "row": "adobe-E",
+        "equivalent_rows": [
+          "adobe-E"
+        ],
+        "bbox": [
+          1466,
+          1501,
+          1607,
+          1570
+        ],
+        "detector": "glyph_shape",
+        "raw_score": 0.8702544847726325,
+        "rank_percentile_within_page_row_detector": 1.0,
+        "type": "candidate",
+        "queue_id": "aventinus_grammatica_1515_0008-01"
+      },
+      {
+        "page": "quiver/aventinus_grammatica_1515_0008",
+        "row": "mrc-M",
+        "equivalent_rows": [
+          "mrc-M"
+        ],
+        "bbox": [
+          901,
+          597,
+          1251,
+          687
+        ],
+        "detector": "glyph_shape",
+        "raw_score": 0.8540164778578785,
+        "rank_percentile_within_page_row_detector": 1.0,
+        "type": "candidate",
+        "queue_id": "aventinus_grammatica_1515_0008-02"
+      },
+      {
+        "page": "quiver/aventinus_grammatica_1515_0008",
+        "row": "mrc-M",
+        "equivalent_rows": [
+          "mrc-M"
+        ],
+        "bbox": [
+          1004,
+          915,
+          1026,
+          982
+        ],
+        "detector": "missing_ink",
+        "raw_score": 0.4423897581792319,
+        "rank_percentile_within_page_row_detector": 1.0,
+        "type": "candidate",
+        "queue_id": "aventinus_grammatica_1515_0008-03"
+      },
+      {
+        "page": "quiver/aventinus_grammatica_1515_0008",
+        "row": "adobe-E",
+        "equivalent_rows": [
+          "adobe-E"
+        ],
+        "bbox": [
+          1195,
+          1880,
+          1210,
+          1960
+        ],
+        "detector": "missing_ink",
+        "raw_score": 0.34505494505494505,
+        "rank_percentile_within_page_row_detector": 1.0,
+        "type": "candidate",
+        "queue_id": "aventinus_grammatica_1515_0008-04"
+      },
+      {
+        "page": "quiver/aventinus_grammatica_1515_0008",
+        "row": "adobe-E",
+        "equivalent_rows": [
+          "adobe-E"
+        ],
+        "bbox": [
+          1194,
+          546,
+          1401,
+          610
+        ],
+        "detector": "glyph_shape",
+        "raw_score": 0.8656818962555823,
+        "rank_percentile_within_page_row_detector": 0.9945054945054945,
+        "type": "candidate",
+        "queue_id": "aventinus_grammatica_1515_0008-05"
+      },
+      {
+        "page": "quiver/aventinus_grammatica_1515_0008",
+        "row": "mrc-M",
+        "equivalent_rows": [
+          "mrc-M"
+        ],
+        "bbox": [
+          500,
+          93,
+          614,
+          168
+        ],
+        "detector": "glyph_shape",
+        "raw_score": 0.8448935008192244,
+        "rank_percentile_within_page_row_detector": 0.9940828402366864,
+        "type": "candidate",
+        "queue_id": "aventinus_grammatica_1515_0008-06"
+      },
+      {
+        "page": "quiver/aventinus_grammatica_1515_0008",
+        "row": "sw-build",
+        "equivalent_rows": [
+          "sw-E",
+          "sw-M",
+          "sw-build"
+        ],
+        "bbox": [
+          1165,
+          762,
+          1328,
+          823
+        ],
+        "type": "random control",
+        "source_identical": false,
+        "queue_id": "aventinus_grammatica_1515_0008-07"
+      },
+      {
+        "page": "quiver/aventinus_grammatica_1515_0008",
+        "row": "src",
+        "equivalent_rows": [
+          "ocrmypdf-E"
+        ],
+        "bbox": [
+          321,
+          599,
+          367,
+          653
+        ],
+        "type": "random control",
+        "source_identical": true,
+        "queue_id": "aventinus_grammatica_1515_0008-08"
+      }
+    ],
+    "quiver/luther_babstum_1526_0011": [
+      {
+        "page": "quiver/luther_babstum_1526_0011",
+        "row": "mrc-M",
+        "equivalent_rows": [
+          "mrc-M"
+        ],
+        "bbox": [
+          1187,
+          744,
+          1315,
+          872
+        ],
+        "detector": "illustration_colour",
+        "raw_score": 6.5577686805903825,
+        "rank_percentile_within_page_row_detector": 1.0,
+        "type": "candidate",
+        "queue_id": "luther_babstum_1526_0011-01"
+      },
+      {
+        "page": "quiver/luther_babstum_1526_0011",
+        "row": "sw-E",
+        "equivalent_rows": [
+          "sw-E",
+          "sw-M",
+          "sw-build"
+        ],
+        "bbox": [
+          409,
+          737,
+          537,
+          865
+        ],
+        "detector": "illustration_colour",
+        "raw_score": 3.730993603105855,
+        "rank_percentile_within_page_row_detector": 1.0,
+        "type": "candidate",
+        "queue_id": "luther_babstum_1526_0011-02"
+      },
+      {
+        "page": "quiver/luther_babstum_1526_0011",
+        "row": "mrc-M",
+        "equivalent_rows": [
+          "mrc-M"
+        ],
+        "bbox": [
+          1614,
+          1501,
+          1638,
+          1513
+        ],
+        "detector": "glyph_shape",
+        "raw_score": 1.0,
+        "rank_percentile_within_page_row_detector": 1.0,
+        "type": "candidate",
+        "queue_id": "luther_babstum_1526_0011-03"
+      },
+      {
+        "page": "quiver/luther_babstum_1526_0011",
+        "row": "adobe-E",
+        "equivalent_rows": [
+          "adobe-E"
+        ],
+        "bbox": [
+          159,
+          1390,
+          299,
+          1441
+        ],
+        "detector": "glyph_shape",
+        "raw_score": 0.897029702970297,
+        "rank_percentile_within_page_row_detector": 1.0,
+        "type": "candidate",
+        "queue_id": "luther_babstum_1526_0011-04"
+      },
+      {
+        "page": "quiver/luther_babstum_1526_0011",
+        "row": "adobe-E",
+        "equivalent_rows": [
+          "adobe-E"
+        ],
+        "bbox": [
+          1608,
+          2235,
+          1736,
+          2363
+        ],
+        "detector": "border_inversion",
+        "raw_score": 0.13275146484375,
+        "rank_percentile_within_page_row_detector": 1.0,
+        "type": "candidate",
+        "queue_id": "luther_babstum_1526_0011-05"
+      },
+      {
+        "page": "quiver/luther_babstum_1526_0011",
+        "row": "adobe-E",
+        "equivalent_rows": [
+          "adobe-E"
+        ],
+        "bbox": [
+          358,
+          1448,
+          556,
+          1498
+        ],
+        "detector": "glyph_shape",
+        "raw_score": 0.8733826247689465,
+        "rank_percentile_within_page_row_detector": 0.9848484848484849,
+        "type": "candidate",
+        "queue_id": "luther_babstum_1526_0011-06"
+      },
+      {
+        "page": "quiver/luther_babstum_1526_0011",
+        "row": "mrc-M",
+        "equivalent_rows": [
+          "mrc-M"
+        ],
+        "bbox": [
+          1387,
+          1835,
+          1597,
+          1895
+        ],
+        "detector": "missing_ink",
+        "raw_score": 0.4621306183262975,
+        "rank_percentile_within_page_row_detector": 0.972972972972973,
+        "type": "candidate",
+        "queue_id": "luther_babstum_1526_0011-07"
+      },
+      {
+        "page": "quiver/luther_babstum_1526_0011",
+        "row": "adobe-E",
+        "equivalent_rows": [
+          "adobe-E"
+        ],
+        "bbox": [
+          1247,
+          1512,
+          1324,
+          1557
+        ],
+        "type": "random control",
+        "source_identical": false,
+        "queue_id": "luther_babstum_1526_0011-08"
+      },
+      {
+        "page": "quiver/luther_babstum_1526_0011",
+        "row": "mrc-M",
+        "equivalent_rows": [
+          "mrc-M"
+        ],
+        "bbox": [
+          1110,
+          1397,
+          1549,
+          1465
+        ],
+        "type": "random control",
+        "source_identical": false,
+        "queue_id": "luther_babstum_1526_0011-09"
+      }
+    ],
+    "quiver/arnold_ketzerhistorie01_1699_0114": [
+      {
+        "page": "quiver/arnold_ketzerhistorie01_1699_0114",
+        "row": "mrc-M",
+        "equivalent_rows": [
+          "mrc-M"
+        ],
+        "bbox": [
+          1355,
+          918,
+          1368,
+          970
+        ],
+        "detector": "glyph_shape",
+        "raw_score": 0.9597989949748744,
+        "rank_percentile_within_page_row_detector": 1.0,
+        "type": "candidate",
+        "queue_id": "arnold_ketzerhistorie01_1699_0114-01"
+      },
+      {
+        "page": "quiver/arnold_ketzerhistorie01_1699_0114",
+        "row": "adobe-E",
+        "equivalent_rows": [
+          "adobe-E"
+        ],
+        "bbox": [
+          1358,
+          1844,
+          1368,
+          1883
+        ],
+        "detector": "glyph_shape",
+        "raw_score": 0.9565217391304348,
+        "rank_percentile_within_page_row_detector": 1.0,
+        "type": "candidate",
+        "queue_id": "arnold_ketzerhistorie01_1699_0114-02"
+      },
+      {
+        "page": "quiver/arnold_ketzerhistorie01_1699_0114",
+        "row": "adobe-E",
+        "equivalent_rows": [
+          "adobe-E"
+        ],
+        "bbox": [
+          1367,
+          2872,
+          1369,
+          2902
+        ],
+        "detector": "missing_ink",
+        "raw_score": 0.7666666666666667,
+        "rank_percentile_within_page_row_detector": 1.0,
+        "type": "candidate",
+        "queue_id": "arnold_ketzerhistorie01_1699_0114-03"
+      },
+      {
+        "page": "quiver/arnold_ketzerhistorie01_1699_0114",
+        "row": "adobe-E",
+        "equivalent_rows": [
+          "adobe-E"
+        ],
+        "bbox": [
+          1357,
+          2831,
+          1371,
+          2884
+        ],
+        "detector": "spurious_ink",
+        "raw_score": 0.6875,
+        "rank_percentile_within_page_row_detector": 1.0,
+        "type": "candidate",
+        "queue_id": "arnold_ketzerhistorie01_1699_0114-04"
+      },
+      {
+        "page": "quiver/arnold_ketzerhistorie01_1699_0114",
+        "row": "mrc-M",
+        "equivalent_rows": [
+          "mrc-M"
+        ],
+        "bbox": [
+          1540,
+          2356,
+          1555,
+          2411
+        ],
+        "detector": "missing_ink",
+        "raw_score": 0.6111111111111112,
+        "rank_percentile_within_page_row_detector": 1.0,
+        "type": "candidate",
+        "queue_id": "arnold_ketzerhistorie01_1699_0114-05"
+      },
+      {
+        "page": "quiver/arnold_ketzerhistorie01_1699_0114",
+        "row": "mrc-M",
+        "equivalent_rows": [
+          "mrc-M"
+        ],
+        "bbox": [
+          1354,
+          1090,
+          1370,
+          1151
+        ],
+        "detector": "glyph_shape",
+        "raw_score": 0.9462809917355371,
+        "rank_percentile_within_page_row_detector": 0.9988814317673378,
+        "type": "candidate",
+        "queue_id": "arnold_ketzerhistorie01_1699_0114-06"
+      },
+      {
+        "page": "quiver/arnold_ketzerhistorie01_1699_0114",
+        "row": "sw-build",
+        "equivalent_rows": [
+          "sw-E",
+          "sw-M",
+          "sw-build"
+        ],
+        "bbox": [
+          1555,
+          1893,
+          1683,
+          1932
+        ],
+        "type": "random control",
+        "source_identical": false,
+        "queue_id": "arnold_ketzerhistorie01_1699_0114-07"
+      },
+      {
+        "page": "quiver/arnold_ketzerhistorie01_1699_0114",
+        "row": "sw-M",
+        "equivalent_rows": [
+          "sw-E",
+          "sw-M",
+          "sw-build"
+        ],
+        "bbox": [
+          1364,
+          2869,
+          1372,
+          2905
+        ],
+        "type": "random control",
+        "source_identical": false,
+        "queue_id": "arnold_ketzerhistorie01_1699_0114-08"
+      }
+    ],
+    "quiver/benner_herrnhuterey04_1748_0013": [
+      {
+        "page": "quiver/benner_herrnhuterey04_1748_0013",
+        "row": "mrc-M",
+        "equivalent_rows": [
+          "mrc-M"
+        ],
+        "bbox": [
+          96,
+          1118,
+          146,
+          1145
+        ],
+        "detector": "glyph_shape",
+        "raw_score": 0.9814814814814815,
+        "rank_percentile_within_page_row_detector": 1.0,
+        "type": "candidate",
+        "queue_id": "benner_herrnhuterey04_1748_0013-01"
+      },
+      {
+        "page": "quiver/benner_herrnhuterey04_1748_0013",
+        "row": "adobe-E",
+        "equivalent_rows": [
+          "adobe-E"
+        ],
+        "bbox": [
+          1152,
+          1153,
+          1305,
+          1213
+        ],
+        "detector": "glyph_shape",
+        "raw_score": 0.888823181549379,
+        "rank_percentile_within_page_row_detector": 1.0,
+        "type": "candidate",
+        "queue_id": "benner_herrnhuterey04_1748_0013-02"
+      },
+      {
+        "page": "quiver/benner_herrnhuterey04_1748_0013",
+        "row": "adobe-E",
+        "equivalent_rows": [
+          "adobe-E"
+        ],
+        "bbox": [
+          1049,
+          791,
+          1055,
+          798
+        ],
+        "detector": "missing_ink",
+        "raw_score": 0.425,
+        "rank_percentile_within_page_row_detector": 1.0,
+        "type": "candidate",
+        "queue_id": "benner_herrnhuterey04_1748_0013-03"
+      },
+      {
+        "page": "quiver/benner_herrnhuterey04_1748_0013",
+        "row": "sw-E",
+        "equivalent_rows": [
+          "sw-E",
+          "sw-M",
+          "sw-build"
+        ],
+        "bbox": [
+          140,
+          1147,
+          146,
+          1173
+        ],
+        "detector": "missing_ink",
+        "raw_score": 0.3448275862068966,
+        "rank_percentile_within_page_row_detector": 1.0,
+        "type": "candidate",
+        "queue_id": "benner_herrnhuterey04_1748_0013-04"
+      },
+      {
+        "page": "quiver/benner_herrnhuterey04_1748_0013",
+        "row": "adobe-E",
+        "equivalent_rows": [
+          "adobe-E"
+        ],
+        "bbox": [
+          589,
+          1572,
+          721,
+          1625
+        ],
+        "detector": "glyph_shape",
+        "raw_score": 0.8886059834500318,
+        "rank_percentile_within_page_row_detector": 0.992,
+        "type": "candidate",
+        "queue_id": "benner_herrnhuterey04_1748_0013-05"
+      },
+      {
+        "page": "quiver/benner_herrnhuterey04_1748_0013",
+        "row": "mrc-M",
+        "equivalent_rows": [
+          "mrc-M"
+        ],
+        "bbox": [
+          821,
+          1570,
+          1051,
+          1624
+        ],
+        "detector": "glyph_shape",
+        "raw_score": 0.8775241439859526,
+        "rank_percentile_within_page_row_detector": 0.9915254237288136,
+        "type": "candidate",
+        "queue_id": "benner_herrnhuterey04_1748_0013-06"
+      },
+      {
+        "page": "quiver/benner_herrnhuterey04_1748_0013",
+        "row": "mrc-M",
+        "equivalent_rows": [
+          "mrc-M"
+        ],
+        "bbox": [
+          824,
+          1520,
+          1155,
+          1572
+        ],
+        "detector": "glyph_shape",
+        "raw_score": 0.872669715089694,
+        "rank_percentile_within_page_row_detector": 0.9830508474576272,
+        "type": "candidate",
+        "queue_id": "benner_herrnhuterey04_1748_0013-07"
+      },
+      {
+        "page": "quiver/benner_herrnhuterey04_1748_0013",
+        "row": "mrc-M",
+        "equivalent_rows": [
+          "mrc-M"
+        ],
+        "bbox": [
+          251,
+          2164,
+          446,
+          2234
+        ],
+        "type": "random control",
+        "source_identical": false,
+        "queue_id": "benner_herrnhuterey04_1748_0013-08"
+      },
+      {
+        "page": "quiver/benner_herrnhuterey04_1748_0013",
+        "row": "sw-M",
+        "equivalent_rows": [
+          "sw-E",
+          "sw-M",
+          "sw-build"
+        ],
+        "bbox": [
+          507,
+          1674,
+          610,
+          1730
+        ],
+        "type": "random control",
+        "source_identical": false,
+        "queue_id": "benner_herrnhuterey04_1748_0013-09"
+      }
+    ],
+    "finebooks/conchologiaiconi05reev/8967333": [
+      {
+        "page": "finebooks/conchologiaiconi05reev/8967333",
+        "row": "adobe-E",
+        "equivalent_rows": [
+          "adobe-E"
+        ],
+        "bbox": [
+          961,
+          1670,
+          1004,
+          1693
+        ],
+        "detector": "glyph_shape",
+        "raw_score": 0.832,
+        "rank_percentile_within_page_row_detector": 1.0,
+        "type": "candidate",
+        "queue_id": "8967333-01"
+      },
+      {
+        "page": "finebooks/conchologiaiconi05reev/8967333",
+        "row": "sw-E",
+        "equivalent_rows": [
+          "sw-E",
+          "sw-M",
+          "sw-build"
+        ],
+        "bbox": [
+          1498,
+          1875,
+          1679,
+          1906
+        ],
+        "detector": "glyph_shape",
+        "raw_score": 0.713371266002845,
+        "rank_percentile_within_page_row_detector": 1.0,
+        "type": "candidate",
+        "queue_id": "8967333-02"
+      },
+      {
+        "page": "finebooks/conchologiaiconi05reev/8967333",
+        "row": "adobe-E",
+        "equivalent_rows": [
+          "adobe-E"
+        ],
+        "bbox": [
+          1527,
+          1731,
+          1529,
+          1733
+        ],
+        "detector": "missing_ink",
+        "raw_score": 0.5,
+        "rank_percentile_within_page_row_detector": 1.0,
+        "type": "candidate",
+        "queue_id": "8967333-03"
+      },
+      {
+        "page": "finebooks/conchologiaiconi05reev/8967333",
+        "row": "adobe-E",
+        "equivalent_rows": [
+          "adobe-E"
+        ],
+        "bbox": [
+          1168,
+          1671,
+          1262,
+          1693
+        ],
+        "detector": "missing_ink",
+        "raw_score": 0.3523809523809524,
+        "rank_percentile_within_page_row_detector": 0.96,
+        "type": "candidate",
+        "queue_id": "8967333-04"
+      },
+      {
+        "page": "finebooks/conchologiaiconi05reev/8967333",
+        "row": "sw-build",
+        "equivalent_rows": [
+          "sw-E",
+          "sw-M",
+          "sw-build"
+        ],
+        "bbox": [
+          1048,
+          1750,
+          1072,
+          1778
+        ],
+        "type": "random control",
+        "source_identical": false,
+        "queue_id": "8967333-05"
+      },
+      {
+        "page": "finebooks/conchologiaiconi05reev/8967333",
+        "row": "mrc-M",
+        "equivalent_rows": [
+          "mrc-M"
+        ],
+        "bbox": [
+          901,
+          1708,
+          991,
+          1737
+        ],
+        "type": "random control",
+        "source_identical": false,
+        "queue_id": "8967333-06"
+      }
+    ],
+    "finebooks/trudyrusskagoent161881russ/12342014": [
+      {
+        "page": "finebooks/trudyrusskagoent161881russ/12342014",
+        "row": "sw-E",
+        "equivalent_rows": [
+          "sw-E",
+          "sw-M",
+          "sw-build"
+        ],
+        "bbox": [
+          1472,
+          1920,
+          1480,
+          1928
+        ],
+        "detector": "glyph_shape",
+        "raw_score": 0.9473684210526316,
+        "rank_percentile_within_page_row_detector": 1.0,
+        "type": "candidate",
+        "queue_id": "12342014-01"
+      },
+      {
+        "page": "finebooks/trudyrusskagoent161881russ/12342014",
+        "row": "adobe-E",
+        "equivalent_rows": [
+          "adobe-E"
+        ],
+        "bbox": [
+          460,
+          1022,
+          561,
+          1057
+        ],
+        "detector": "glyph_shape",
+        "raw_score": 0.8990450204638472,
+        "rank_percentile_within_page_row_detector": 1.0,
+        "type": "candidate",
+        "queue_id": "12342014-02"
+      },
+      {
+        "page": "finebooks/trudyrusskagoent161881russ/12342014",
+        "row": "mrc-M",
+        "equivalent_rows": [
+          "mrc-M"
+        ],
+        "bbox": [
+          1467,
+          1003,
+          1486,
+          1031
+        ],
+        "detector": "glyph_shape",
+        "raw_score": 0.8571428571428572,
+        "rank_percentile_within_page_row_detector": 1.0,
+        "type": "candidate",
+        "queue_id": "12342014-03"
+      },
+      {
+        "page": "finebooks/trudyrusskagoent161881russ/12342014",
+        "row": "adobe-E",
+        "equivalent_rows": [
+          "adobe-E"
+        ],
+        "bbox": [
+          671,
+          2272,
+          714,
+          2298
+        ],
+        "detector": "missing_ink",
+        "raw_score": 0.47692307692307695,
+        "rank_percentile_within_page_row_detector": 1.0,
+        "type": "candidate",
+        "queue_id": "12342014-04"
+      },
+      {
+        "page": "finebooks/trudyrusskagoent161881russ/12342014",
+        "row": "sw-E",
+        "equivalent_rows": [
+          "sw-E",
+          "sw-M",
+          "sw-build"
+        ],
+        "bbox": [
+          503,
+          2252,
+          511,
+          2260
+        ],
+        "detector": "missing_ink",
+        "raw_score": 0.43333333333333335,
+        "rank_percentile_within_page_row_detector": 1.0,
+        "type": "candidate",
+        "queue_id": "12342014-05"
+      },
+      {
+        "page": "finebooks/trudyrusskagoent161881russ/12342014",
+        "row": "adobe-E",
+        "equivalent_rows": [
+          "adobe-E"
+        ],
+        "bbox": [
+          988,
+          515,
+          1021,
+          547
+        ],
+        "detector": "missing_ink",
+        "raw_score": 0.4577259475218659,
+        "rank_percentile_within_page_row_detector": 0.9955947136563876,
+        "type": "candidate",
+        "queue_id": "12342014-06"
+      },
+      {
+        "page": "finebooks/trudyrusskagoent161881russ/12342014",
+        "row": "mrc-M",
+        "equivalent_rows": [
+          "mrc-M"
+        ],
+        "bbox": [
+          1552,
+          990,
+          1570,
+          1009
+        ],
+        "detector": "missing_ink",
+        "raw_score": 0.3712871287128713,
+        "rank_percentile_within_page_row_detector": 0.9900990099009901,
+        "type": "candidate",
+        "queue_id": "12342014-07"
+      },
+      {
+        "page": "finebooks/trudyrusskagoent161881russ/12342014",
+        "row": "mrc-M",
+        "equivalent_rows": [
+          "mrc-M"
+        ],
+        "bbox": [
+          1699,
+          1181,
+          1716,
+          1200
+        ],
+        "detector": "glyph_shape",
+        "raw_score": 0.791044776119403,
+        "rank_percentile_within_page_row_detector": 0.9803921568627451,
+        "type": "candidate",
+        "queue_id": "12342014-08"
+      },
+      {
+        "page": "finebooks/trudyrusskagoent161881russ/12342014",
+        "row": "sw-E",
+        "equivalent_rows": [
+          "sw-E",
+          "sw-M",
+          "sw-build"
+        ],
+        "bbox": [
+          152,
+          2416,
+          307,
+          2460
+        ],
+        "detector": "glyph_shape",
+        "raw_score": 0.7403355215171408,
+        "rank_percentile_within_page_row_detector": 0.9047619047619048,
+        "type": "candidate",
+        "queue_id": "12342014-09"
+      },
+      {
+        "page": "finebooks/trudyrusskagoent161881russ/12342014",
+        "row": "src",
+        "equivalent_rows": [
+          "ocrmypdf-E"
+        ],
+        "bbox": [
+          1149,
+          1827,
+          1334,
+          1871
+        ],
+        "type": "random control",
+        "source_identical": true,
+        "queue_id": "12342014-10"
+      },
+      {
+        "page": "finebooks/trudyrusskagoent161881russ/12342014",
+        "row": "sw-build",
+        "equivalent_rows": [
+          "sw-E",
+          "sw-M",
+          "sw-build"
+        ],
+        "bbox": [
+          92,
+          2035,
+          131,
+          2073
+        ],
+        "type": "random control",
+        "source_identical": false,
+        "queue_id": "12342014-11"
+      }
+    ]
+  },
+  "summary": {
+    "quiver/aventinus_grammatica_1515_0008": {
+      "candidate_instances": 609,
+      "candidate_instances_covered": 12,
+      "covered_fraction": 0.019704433497536946,
+      "queued_candidates": 6,
+      "random_controls": 2,
+      "total_crops": 8,
+      "seconds_at_20_per_crop": 160,
+      "row_caps": {
+        "adobe-E": 3,
+        "mrc-M": 3
+      }
+    },
+    "quiver/luther_babstum_1526_0011": {
+      "candidate_instances": 210,
+      "candidate_instances_covered": 13,
+      "covered_fraction": 0.06190476190476191,
+      "queued_candidates": 7,
+      "random_controls": 2,
+      "total_crops": 9,
+      "seconds_at_20_per_crop": 180,
+      "row_caps": {
+        "mrc-M": 3,
+        "sw-E": 1,
+        "adobe-E": 3
+      }
+    },
+    "quiver/arnold_ketzerhistorie01_1699_0114": {
+      "candidate_instances": 2864,
+      "candidate_instances_covered": 13,
+      "covered_fraction": 0.004539106145251397,
+      "queued_candidates": 6,
+      "random_controls": 2,
+      "total_crops": 8,
+      "seconds_at_20_per_crop": 160,
+      "row_caps": {
+        "mrc-M": 3,
+        "adobe-E": 3
+      }
+    },
+    "quiver/benner_herrnhuterey04_1748_0013": {
+      "candidate_instances": 370,
+      "candidate_instances_covered": 13,
+      "covered_fraction": 0.03513513513513514,
+      "queued_candidates": 7,
+      "random_controls": 2,
+      "total_crops": 9,
+      "seconds_at_20_per_crop": 180,
+      "row_caps": {
+        "mrc-M": 3,
+        "adobe-E": 3,
+        "sw-E": 1
+      }
+    },
+    "finebooks/conchologiaiconi05reev/8967333": {
+      "candidate_instances": 77,
+      "candidate_instances_covered": 8,
+      "covered_fraction": 0.1038961038961039,
+      "queued_candidates": 4,
+      "random_controls": 2,
+      "total_crops": 6,
+      "seconds_at_20_per_crop": 120,
+      "row_caps": {
+        "adobe-E": 3,
+        "sw-E": 1
+      }
+    },
+    "finebooks/trudyrusskagoent161881russ/12342014": {
+      "candidate_instances": 639,
+      "candidate_instances_covered": 27,
+      "covered_fraction": 0.04225352112676056,
+      "queued_candidates": 9,
+      "random_controls": 2,
+      "total_crops": 11,
+      "seconds_at_20_per_crop": 220,
+      "row_caps": {
+        "sw-E": 3,
+        "adobe-E": 3,
+        "mrc-M": 3
+      }
+    }
+  },
+  "concern_coverage": [
+    {
+      "crop_id": "crop-0014",
+      "panel": "panel-004",
+      "page": "quiver/luther_babstum_1526_0011",
+      "concern_rows": [
+        "mrc-M"
+      ],
+      "matches": [],
+      "covered": false
+    },
+    {
+      "crop_id": "crop-0018",
+      "panel": "panel-001",
+      "page": "quiver/luther_babstum_1526_0011",
+      "concern_rows": [
+        "mrc-M",
+        "adobe-E"
+      ],
+      "matches": [],
+      "covered": false
+    },
+    {
+      "crop_id": "crop-0055",
+      "panel": "panel-002",
+      "page": "finebooks/conchologiaiconi05reev/8967333",
+      "concern_rows": [
+        "adobe-E"
+      ],
+      "matches": [],
+      "covered": false
+    },
+    {
+      "crop_id": "crop-0056",
+      "panel": "panel-003",
+      "page": "finebooks/conchologiaiconi05reev/8967333",
+      "concern_rows": [
+        "adobe-E"
+      ],
+      "matches": [],
+      "covered": false
+    }
+  ],
+  "projection": "36 pages = six times observed six-page workload; not a measured 36-page outcome",
+  "local_crops": "$B/pilot/phase1c/queue/"
+}
