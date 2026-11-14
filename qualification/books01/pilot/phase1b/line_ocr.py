@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Line-aligned pilot OCR metrics. Reads only the six pilot PDFs and local GT."""
-import ctypes,hashlib,json,math,pathlib,random,re,unicodedata
+import ctypes,difflib,hashlib,json,math,pathlib,random,re,unicodedata
 import numpy as np,pypdfium2 as pdfium
 from lxml import html
 from scipy.optimize import linear_sum_assignment
@@ -24,7 +24,7 @@ def gt(id):
  return [{'box':bbox(x['polygon']),'text':x.get('text') or ''} for x in lines if len(x['polygon'])>=3],g
 def hocr(id,psm):
  key=id.split('/')[-1];root=html.parse(str(B/'ocr-frozen'/key/f'psm{psm}-1.hocr'));lines=[];words=[]
- for line in root.xpath('//*[contains(concat(" ",normalize-space(@class)," ")," ocr_line ")]'):
+ for line in root.xpath('//*[@class="ocr_line" or @class="ocr_caption" or @class="ocr_header" or @class="ocr_textfloat"]'):
   m=re.search(r'\bbbox (\d+) (\d+) (\d+) (\d+)',line.get('title',''))
   if not m:continue
   ws=[]
@@ -60,6 +60,27 @@ def pdf_lines(page,dpi,geom):
    chars.append(char)
   except Exception:continue
  flush();return lines,tp
+def locked_pdf_lines(frozen, tp):
+ # Partition actual PDFium text using a monotonic character alignment against
+ # frozen hOCR. Frozen text supplies boundaries/boxes, never output characters.
+ chunks=[norm(x['text']) for x in frozen]; source=' '.join(chunks); actual=norm(tp.get_text_range()); owners=[]
+ for i,chunk in enumerate(chunks):
+  if i: owners.append(i-1)
+  owners.extend([i]*len(chunk))
+ assert len(owners)==len(source)
+ lines=['' for _ in chunks]; equal=0; matcher=difflib.SequenceMatcher(None,source,actual,autojunk=False)
+ for tag,a,b,c,d in matcher.get_opcodes():
+  if tag=='equal':
+   equal+=b-a
+   for offset,ch in enumerate(actual[c:d]):lines[owners[a+offset]]+=ch
+  elif tag in ('replace','insert') and chunks:
+   # Distribute replacements monotonically across the corresponding source
+   # span; adjacent insertions are assigned at their boundary.
+   for k,ch in enumerate(actual[c:d]):
+    idx=min(len(owners)-1,a+(k*(b-a)//max(1,d-c))) if b>a else min(len(owners)-1,max(0,a-1))
+    if owners:lines[owners[idx]]+=ch
+ output=[{'box':frozen[i]['box'],'text':value.strip(),'frozen_line':i} for i,value in enumerate(lines) if value.strip()]
+ return output,{'method':'monotonic character alignment of actual PDFium text to frozen hOCR; frozen hOCR supplies line boundaries and geometry only','frozen_characters':len(source),'pdfium_characters':len(actual),'equal_characters':equal,'equal_fraction_of_frozen':equal/len(source) if source else None,'pdfium_nonspace_characters':sum(not x.isspace() for x in actual),'partitioned_nonspace_characters':sum(sum(not c.isspace() for c in x['text']) for x in output)}
 def pair(reference,hyp):
  if not reference or not hyp:return []
  matrix=np.zeros((len(reference),len(hyp)),dtype=np.float32)
@@ -87,10 +108,14 @@ for id in ids:
   key=id.split('/')[-1];r=runs[id]['rows'][row];path=pathlib.Path(r.get('path',B/'pilot/runs'/key/(row+'.pdf')));geom=geo[id][row]['pdfium'][str(int(locks[id]['resolved_dpi']))]; entry={'dpi_confidence':locks[id]['dpi_evidence']['confidence'],'source_type':locks[id]['source_type'],'adobe_label':ADOBE if row=='adobe-E' else None,'document_level_scores':document_scores[id]['rows'][row].get('extraction',{}).get('pdfium',{}).get('scores')}
   if geom['status']!='accepted':entry.update(status='unavailable',reason='global registration unaccepted');result['rows'][row]=entry;continue
   try:
-   doc=pdfium.PdfDocument(str(path));page=doc[0];lines,tp=pdf_lines(page,int(locks[id]['resolved_dpi']),geom);scores=score(ref,lines);hits=0
+   doc=pdfium.PdfDocument(str(path));page=doc[0];lines,tp=pdf_lines(page,int(locks[id]['resolved_dpi']),geom); partition=None
+   if row in ('sw-M','mrc-M'):lines,partition=locked_pdf_lines(frozen,tp)
+   scores=score(ref,lines);hits=0
+   if partition is not None:
+    scores['kendall_tau']=None;scores['kendall_pair_count']=0;scores['matching']+='; matched-track boxes and line order inherited from frozen hOCR, PDF line geometry/order not independently assessed'
    for w in subset:
     search=tp.search(w,match_case=False);hits+=search.get_next() is not None;search.close()
-   entry.update(status='ok',line_metrics=scores,matched_ocr_same_gt_lines=same_gt_comparison(ref,frozen,lines),recognized_word_search={'recognized_frozen_ocr_words_in_sample':len(subset),'pdf_search_hits':int(hits),'hit_rate':hits/len(subset) if subset else None,'semantics':'exact reading-normalized GT token present in selected frozen hOCR; case-insensitive literal PDFium search'})
+   entry.update(status='ok',locked_text_partition=partition,line_metrics=scores,matched_ocr_same_gt_lines=same_gt_comparison(ref,frozen,lines),recognized_word_search={'recognized_frozen_ocr_words_in_sample':len(subset),'pdf_search_hits':int(hits),'hit_rate':hits/len(subset) if subset else None,'semantics':'exact reading-normalized GT token present in selected frozen hOCR; case-insensitive literal PDFium search'})
   except Exception as e:entry.update(status='error',reason=str(e))
   result['rows'][row]=entry
  out[id]=result;print(id,flush=True)

@@ -6,20 +6,20 @@
       "known_gt_characters": 1412,
       "frozen_hocr": {
         "gt_count": 54,
-        "output_count": 26,
-        "matched_lines": 26,
-        "missing_lines": 28,
-        "missing_known_characters": 480,
+        "output_count": 33,
+        "matched_lines": 33,
+        "missing_lines": 21,
+        "missing_known_characters": 327,
         "total_known_characters": 1412,
-        "missing_character_share": 0.33994334277620397,
+        "missing_character_share": 0.23158640226628896,
         "extra_lines": 0,
-        "matched_known_characters": 932,
-        "matched_character_edits": 528,
-        "line_aligned_cer": 0.5665236051502146,
-        "matched_known_words": 136,
-        "line_aligned_wer": 1.1838235294117647,
-        "kendall_tau": 0.9323076923076923,
-        "kendall_pair_count": 26,
+        "matched_known_characters": 1085,
+        "matched_character_edits": 690,
+        "line_aligned_cer": 0.6359447004608295,
+        "matched_known_words": 164,
+        "line_aligned_wer": 1.225609756097561,
+        "kendall_tau": 0.9507575757575757,
+        "kendall_pair_count": 33,
         "matching": "axis-aligned source-frame bounding-box IoU >= 0.2, one-to-one maximum weight"
       },
       "rows": {
@@ -50,6 +50,7 @@
             }
           },
           "status": "ok",
+          "locked_text_partition": null,
           "line_metrics": {
             "gt_count": 54,
             "output_count": 0,
@@ -79,7 +80,7 @@
             "method": "compare both OCR texts against exactly the same GT lines, matched independently by geometry"
           },
           "recognized_word_search": {
-            "recognized_frozen_ocr_words_in_sample": 6,
+            "recognized_frozen_ocr_words_in_sample": 7,
             "pdf_search_hits": 0,
             "hit_rate": 0.0,
             "semantics": "exact reading-normalized GT token present in selected frozen hOCR; case-insensitive literal PDFium search"
@@ -112,6 +113,7 @@
             }
           },
           "status": "ok",
+          "locked_text_partition": null,
           "line_metrics": {
             "gt_count": 54,
             "output_count": 35,
@@ -131,19 +133,19 @@
             "matching": "axis-aligned source-frame bounding-box IoU >= 0.2, one-to-one maximum weight"
           },
           "matched_ocr_same_gt_lines": {
-            "shared_gt_lines": 19,
-            "known_characters": 710,
-            "known_words": 107,
-            "frozen_cer": 0.5112676056338028,
-            "pdf_cer": 0.795774647887324,
-            "frozen_wer": 1.1214953271028036,
-            "pdf_wer": 1.2990654205607477,
+            "shared_gt_lines": 24,
+            "known_characters": 819,
+            "known_words": 128,
+            "frozen_cer": 0.5848595848595849,
+            "pdf_cer": 0.9304029304029304,
+            "frozen_wer": 1.171875,
+            "pdf_wer": 1.3984375,
             "method": "compare both OCR texts against exactly the same GT lines, matched independently by geometry"
           },
           "recognized_word_search": {
-            "recognized_frozen_ocr_words_in_sample": 6,
-            "pdf_search_hits": 5,
-            "hit_rate": 0.8333333333333334,
+            "recognized_frozen_ocr_words_in_sample": 7,
+            "pdf_search_hits": 6,
+            "hit_rate": 0.8571428571428571,
             "semantics": "exact reading-normalized GT token present in selected frozen hOCR; case-insensitive literal PDFium search"
           }
         },
@@ -174,38 +176,47 @@
             }
           },
           "status": "ok",
+          "locked_text_partition": {
+            "method": "monotonic character alignment of actual PDFium text to frozen hOCR; frozen hOCR supplies line boundaries and geometry only",
+            "frozen_characters": 1483,
+            "pdfium_characters": 1484,
+            "equal_characters": 1476,
+            "equal_fraction_of_frozen": 0.99527983816588,
+            "pdfium_nonspace_characters": 1285,
+            "partitioned_nonspace_characters": 1285
+          },
           "line_metrics": {
             "gt_count": 54,
-            "output_count": 35,
-            "matched_lines": 27,
-            "missing_lines": 27,
-            "missing_known_characters": 518,
+            "output_count": 33,
+            "matched_lines": 33,
+            "missing_lines": 21,
+            "missing_known_characters": 327,
             "total_known_characters": 1412,
-            "missing_character_share": 0.3668555240793201,
-            "extra_lines": 8,
-            "matched_known_characters": 894,
-            "matched_character_edits": 820,
-            "line_aligned_cer": 0.9172259507829977,
-            "matched_known_words": 139,
-            "line_aligned_wer": 1.381294964028777,
-            "kendall_tau": 0.9487179487179488,
-            "kendall_pair_count": 27,
-            "matching": "axis-aligned source-frame bounding-box IoU >= 0.2, one-to-one maximum weight"
+            "missing_character_share": 0.23158640226628896,
+            "extra_lines": 0,
+            "matched_known_characters": 1085,
+            "matched_character_edits": 693,
+            "line_aligned_cer": 0.6387096774193548,
+            "matched_known_words": 164,
+            "line_aligned_wer": 1.2073170731707317,
+            "kendall_tau": null,
+            "kendall_pair_count": 0,
+            "matching": "axis-aligned source-frame bounding-box IoU >= 0.2, one-to-one maximum weight; matched-track boxes and line order inherited from frozen hOCR, PDF line geometry/order not independently assessed"
           },
           "matched_ocr_same_gt_lines": {
-            "shared_gt_lines": 19,
-            "known_characters": 710,
-            "known_words": 107,
-            "frozen_cer": 0.5112676056338028,
-            "pdf_cer": 0.795774647887324,
-            "frozen_wer": 1.1214953271028036,
-            "pdf_wer": 1.2990654205607477,
+            "shared_gt_lines": 33,
+            "known_characters": 1085,
+            "known_words": 164,
+            "frozen_cer": 0.6359447004608295,
+            "pdf_cer": 0.6387096774193548,
+            "frozen_wer": 1.225609756097561,
+            "pdf_wer": 1.2073170731707317,
             "method": "compare both OCR texts against exactly the same GT lines, matched independently by geometry"
           },
           "recognized_word_search": {
-            "recognized_frozen_ocr_words_in_sample": 6,
-            "pdf_search_hits": 5,
-            "hit_rate": 0.8333333333333334,
+            "recognized_frozen_ocr_words_in_sample": 7,
+            "pdf_search_hits": 6,
+            "hit_rate": 0.8571428571428571,
             "semantics": "exact reading-normalized GT token present in selected frozen hOCR; case-insensitive literal PDFium search"
           }
         },
@@ -236,6 +247,7 @@
             }
           },
           "status": "ok",
+          "locked_text_partition": null,
           "line_metrics": {
             "gt_count": 54,
             "output_count": 35,
@@ -255,19 +267,19 @@
             "matching": "axis-aligned source-frame bounding-box IoU >= 0.2, one-to-one maximum weight"
           },
           "matched_ocr_same_gt_lines": {
-            "shared_gt_lines": 19,
-            "known_characters": 710,
-            "known_words": 107,
-            "frozen_cer": 0.5112676056338028,
-            "pdf_cer": 0.795774647887324,
-            "frozen_wer": 1.1214953271028036,
-            "pdf_wer": 1.2990654205607477,
+            "shared_gt_lines": 24,
+            "known_characters": 819,
+            "known_words": 128,
+            "frozen_cer": 0.5848595848595849,
+            "pdf_cer": 0.9304029304029304,
+            "frozen_wer": 1.171875,
+            "pdf_wer": 1.3984375,
             "method": "compare both OCR texts against exactly the same GT lines, matched independently by geometry"
           },
           "recognized_word_search": {
-            "recognized_frozen_ocr_words_in_sample": 6,
-            "pdf_search_hits": 5,
-            "hit_rate": 0.8333333333333334,
+            "recognized_frozen_ocr_words_in_sample": 7,
+            "pdf_search_hits": 6,
+            "hit_rate": 0.8571428571428571,
             "semantics": "exact reading-normalized GT token present in selected frozen hOCR; case-insensitive literal PDFium search"
           }
         },
@@ -298,6 +310,7 @@
             }
           },
           "status": "ok",
+          "locked_text_partition": null,
           "line_metrics": {
             "gt_count": 54,
             "output_count": 32,
@@ -317,19 +330,19 @@
             "matching": "axis-aligned source-frame bounding-box IoU >= 0.2, one-to-one maximum weight"
           },
           "matched_ocr_same_gt_lines": {
-            "shared_gt_lines": 24,
-            "known_characters": 878,
-            "known_words": 129,
-            "frozen_cer": 0.5364464692482915,
-            "pdf_cer": 0.5979498861047836,
-            "frozen_wer": 1.1550387596899225,
-            "pdf_wer": 1.1550387596899225,
+            "shared_gt_lines": 30,
+            "known_characters": 1019,
+            "known_words": 155,
+            "frozen_cer": 0.6025515210991168,
+            "pdf_cer": 0.6840039254170756,
+            "frozen_wer": 1.1870967741935483,
+            "pdf_wer": 1.2516129032258065,
             "method": "compare both OCR texts against exactly the same GT lines, matched independently by geometry"
           },
           "recognized_word_search": {
-            "recognized_frozen_ocr_words_in_sample": 6,
-            "pdf_search_hits": 5,
-            "hit_rate": 0.8333333333333334,
+            "recognized_frozen_ocr_words_in_sample": 7,
+            "pdf_search_hits": 6,
+            "hit_rate": 0.8571428571428571,
             "semantics": "exact reading-normalized GT token present in selected frozen hOCR; case-insensitive literal PDFium search"
           }
         },
@@ -360,38 +373,47 @@
             }
           },
           "status": "ok",
+          "locked_text_partition": {
+            "method": "monotonic character alignment of actual PDFium text to frozen hOCR; frozen hOCR supplies line boundaries and geometry only",
+            "frozen_characters": 1483,
+            "pdfium_characters": 1478,
+            "equal_characters": 1477,
+            "equal_fraction_of_frozen": 0.9959541469993257,
+            "pdfium_nonspace_characters": 1277,
+            "partitioned_nonspace_characters": 1277
+          },
           "line_metrics": {
             "gt_count": 54,
-            "output_count": 36,
-            "matched_lines": 35,
-            "missing_lines": 19,
-            "missing_known_characters": 324,
+            "output_count": 33,
+            "matched_lines": 33,
+            "missing_lines": 21,
+            "missing_known_characters": 327,
             "total_known_characters": 1412,
-            "missing_character_share": 0.22946175637393768,
-            "extra_lines": 1,
-            "matched_known_characters": 1088,
-            "matched_character_edits": 687,
-            "line_aligned_cer": 0.6314338235294118,
+            "missing_character_share": 0.23158640226628896,
+            "extra_lines": 0,
+            "matched_known_characters": 1085,
+            "matched_character_edits": 689,
+            "line_aligned_cer": 0.6350230414746544,
             "matched_known_words": 164,
-            "line_aligned_wer": 1.2073170731707317,
-            "kendall_tau": 0.9529411764705882,
-            "kendall_pair_count": 35,
-            "matching": "axis-aligned source-frame bounding-box IoU >= 0.2, one-to-one maximum weight"
+            "line_aligned_wer": 1.2195121951219512,
+            "kendall_tau": null,
+            "kendall_pair_count": 0,
+            "matching": "axis-aligned source-frame bounding-box IoU >= 0.2, one-to-one maximum weight; matched-track boxes and line order inherited from frozen hOCR, PDF line geometry/order not independently assessed"
           },
           "matched_ocr_same_gt_lines": {
-            "shared_gt_lines": 24,
-            "known_characters": 858,
-            "known_words": 125,
-            "frozen_cer": 0.5582750582750583,
-            "pdf_cer": 0.5990675990675991,
-            "frozen_wer": 1.168,
-            "pdf_wer": 1.184,
+            "shared_gt_lines": 33,
+            "known_characters": 1085,
+            "known_words": 164,
+            "frozen_cer": 0.6359447004608295,
+            "pdf_cer": 0.6350230414746544,
+            "frozen_wer": 1.225609756097561,
+            "pdf_wer": 1.2195121951219512,
             "method": "compare both OCR texts against exactly the same GT lines, matched independently by geometry"
           },
           "recognized_word_search": {
-            "recognized_frozen_ocr_words_in_sample": 6,
-            "pdf_search_hits": 5,
-            "hit_rate": 0.8333333333333334,
+            "recognized_frozen_ocr_words_in_sample": 7,
+            "pdf_search_hits": 6,
+            "hit_rate": 0.8571428571428571,
             "semantics": "exact reading-normalized GT token present in selected frozen hOCR; case-insensitive literal PDFium search"
           }
         },
@@ -422,6 +444,7 @@
             }
           },
           "status": "ok",
+          "locked_text_partition": null,
           "line_metrics": {
             "gt_count": 54,
             "output_count": 63,
@@ -441,17 +464,17 @@
             "matching": "axis-aligned source-frame bounding-box IoU >= 0.2, one-to-one maximum weight"
           },
           "matched_ocr_same_gt_lines": {
-            "shared_gt_lines": 26,
-            "known_characters": 932,
-            "known_words": 136,
-            "frozen_cer": 0.5665236051502146,
-            "pdf_cer": 0.9259656652360515,
-            "frozen_wer": 1.1838235294117647,
-            "pdf_wer": 1.3602941176470589,
+            "shared_gt_lines": 31,
+            "known_characters": 1074,
+            "known_words": 160,
+            "frozen_cer": 0.6061452513966481,
+            "pdf_cer": 0.9506517690875232,
+            "frozen_wer": 1.19375,
+            "pdf_wer": 1.40625,
             "method": "compare both OCR texts against exactly the same GT lines, matched independently by geometry"
           },
           "recognized_word_search": {
-            "recognized_frozen_ocr_words_in_sample": 6,
+            "recognized_frozen_ocr_words_in_sample": 7,
             "pdf_search_hits": 0,
             "hit_rate": 0.0,
             "semantics": "exact reading-normalized GT token present in selected frozen hOCR; case-insensitive literal PDFium search"
@@ -509,6 +532,7 @@
             }
           },
           "status": "ok",
+          "locked_text_partition": null,
           "line_metrics": {
             "gt_count": 19,
             "output_count": 0,
@@ -571,6 +595,7 @@
             }
           },
           "status": "ok",
+          "locked_text_partition": null,
           "line_metrics": {
             "gt_count": 19,
             "output_count": 14,
@@ -633,32 +658,41 @@
             }
           },
           "status": "ok",
+          "locked_text_partition": {
+            "method": "monotonic character alignment of actual PDFium text to frozen hOCR; frozen hOCR supplies line boundaries and geometry only",
+            "frozen_characters": 518,
+            "pdfium_characters": 518,
+            "equal_characters": 518,
+            "equal_fraction_of_frozen": 1.0,
+            "pdfium_nonspace_characters": 447,
+            "partitioned_nonspace_characters": 447
+          },
           "line_metrics": {
             "gt_count": 19,
-            "output_count": 14,
-            "matched_lines": 14,
-            "missing_lines": 5,
-            "missing_known_characters": 108,
+            "output_count": 17,
+            "matched_lines": 17,
+            "missing_lines": 2,
+            "missing_known_characters": 41,
             "total_known_characters": 582,
-            "missing_character_share": 0.18556701030927836,
+            "missing_character_share": 0.070446735395189,
             "extra_lines": 0,
-            "matched_known_characters": 474,
-            "matched_character_edits": 136,
-            "line_aligned_cer": 0.2869198312236287,
-            "matched_known_words": 88,
-            "line_aligned_wer": 0.7272727272727273,
-            "kendall_tau": 1.0,
-            "kendall_pair_count": 14,
-            "matching": "axis-aligned source-frame bounding-box IoU >= 0.2, one-to-one maximum weight"
+            "matched_known_characters": 541,
+            "matched_character_edits": 93,
+            "line_aligned_cer": 0.17190388170055454,
+            "matched_known_words": 99,
+            "line_aligned_wer": 0.6767676767676768,
+            "kendall_tau": null,
+            "kendall_pair_count": 0,
+            "matching": "axis-aligned source-frame bounding-box IoU >= 0.2, one-to-one maximum weight; matched-track boxes and line order inherited from frozen hOCR, PDF line geometry/order not independently assessed"
           },
           "matched_ocr_same_gt_lines": {
-            "shared_gt_lines": 14,
-            "known_characters": 474,
-            "known_words": 88,
-            "frozen_cer": 0.17088607594936708,
-            "pdf_cer": 0.2869198312236287,
-            "frozen_wer": 0.6704545454545454,
-            "pdf_wer": 0.7272727272727273,
+            "shared_gt_lines": 17,
+            "known_characters": 541,
+            "known_words": 99,
+            "frozen_cer": 0.17190388170055454,
+            "pdf_cer": 0.17190388170055454,
+            "frozen_wer": 0.6767676767676768,
+            "pdf_wer": 0.6767676767676768,
             "method": "compare both OCR texts against exactly the same GT lines, matched independently by geometry"
           },
           "recognized_word_search": {
@@ -695,6 +729,7 @@
             }
           },
           "status": "ok",
+          "locked_text_partition": null,
           "line_metrics": {
             "gt_count": 19,
             "output_count": 14,
@@ -757,6 +792,7 @@
             }
           },
           "status": "ok",
+          "locked_text_partition": null,
           "line_metrics": {
             "gt_count": 19,
             "output_count": 20,
@@ -819,32 +855,41 @@
             }
           },
           "status": "ok",
+          "locked_text_partition": {
+            "method": "monotonic character alignment of actual PDFium text to frozen hOCR; frozen hOCR supplies line boundaries and geometry only",
+            "frozen_characters": 518,
+            "pdfium_characters": 518,
+            "equal_characters": 518,
+            "equal_fraction_of_frozen": 1.0,
+            "pdfium_nonspace_characters": 447,
+            "partitioned_nonspace_characters": 447
+          },
           "line_metrics": {
             "gt_count": 19,
-            "output_count": 16,
-            "matched_lines": 16,
-            "missing_lines": 3,
-            "missing_known_characters": 71,
+            "output_count": 17,
+            "matched_lines": 17,
+            "missing_lines": 2,
+            "missing_known_characters": 41,
             "total_known_characters": 582,
-            "missing_character_share": 0.12199312714776632,
+            "missing_character_share": 0.070446735395189,
             "extra_lines": 0,
-            "matched_known_characters": 511,
-            "matched_character_edits": 112,
-            "line_aligned_cer": 0.2191780821917808,
-            "matched_known_words": 95,
-            "line_aligned_wer": 0.6947368421052632,
-            "kendall_tau": 1.0,
-            "kendall_pair_count": 16,
-            "matching": "axis-aligned source-frame bounding-box IoU >= 0.2, one-to-one maximum weight"
+            "matched_known_characters": 541,
+            "matched_character_edits": 93,
+            "line_aligned_cer": 0.17190388170055454,
+            "matched_known_words": 99,
+            "line_aligned_wer": 0.6767676767676768,
+            "kendall_tau": null,
+            "kendall_pair_count": 0,
+            "matching": "axis-aligned source-frame bounding-box IoU >= 0.2, one-to-one maximum weight; matched-track boxes and line order inherited from frozen hOCR, PDF line geometry/order not independently assessed"
           },
           "matched_ocr_same_gt_lines": {
-            "shared_gt_lines": 16,
-            "known_characters": 511,
-            "known_words": 95,
-            "frozen_cer": 0.17416829745596868,
-            "pdf_cer": 0.2191780821917808,
-            "frozen_wer": 0.6736842105263158,
-            "pdf_wer": 0.6947368421052632,
+            "shared_gt_lines": 17,
+            "known_characters": 541,
+            "known_words": 99,
+            "frozen_cer": 0.17190388170055454,
+            "pdf_cer": 0.17190388170055454,
+            "frozen_wer": 0.6767676767676768,
+            "pdf_wer": 0.6767676767676768,
             "method": "compare both OCR texts against exactly the same GT lines, matched independently by geometry"
           },
           "recognized_word_search": {
@@ -881,6 +926,7 @@
             }
           },
           "status": "ok",
+          "locked_text_partition": null,
           "line_metrics": {
             "gt_count": 19,
             "output_count": 23,
@@ -924,20 +970,20 @@
       "known_gt_characters": 5826,
       "frozen_hocr": {
         "gt_count": 159,
-        "output_count": 149,
-        "matched_lines": 137,
-        "missing_lines": 22,
-        "missing_known_characters": 607,
+        "output_count": 166,
+        "matched_lines": 150,
+        "missing_lines": 9,
+        "missing_known_characters": 101,
         "total_known_characters": 5826,
-        "missing_character_share": 0.10418812221077926,
-        "extra_lines": 12,
-        "matched_known_characters": 5219,
-        "matched_character_edits": 803,
-        "line_aligned_cer": 0.1538608928913585,
-        "matched_known_words": 969,
-        "line_aligned_wer": 0.49742002063983487,
-        "kendall_tau": 0.8540145985401458,
-        "kendall_pair_count": 137,
+        "missing_character_share": 0.017336079642979747,
+        "extra_lines": 16,
+        "matched_known_characters": 5725,
+        "matched_character_edits": 1082,
+        "line_aligned_cer": 0.18899563318777293,
+        "matched_known_words": 1062,
+        "line_aligned_wer": 0.5329566854990584,
+        "kendall_tau": 0.8432214765100671,
+        "kendall_pair_count": 150,
         "matching": "axis-aligned source-frame bounding-box IoU >= 0.2, one-to-one maximum weight"
       },
       "rows": {
@@ -968,6 +1014,7 @@
             }
           },
           "status": "ok",
+          "locked_text_partition": null,
           "line_metrics": {
             "gt_count": 159,
             "output_count": 0,
@@ -1030,6 +1077,7 @@
             }
           },
           "status": "ok",
+          "locked_text_partition": null,
           "line_metrics": {
             "gt_count": 159,
             "output_count": 173,
@@ -1049,13 +1097,13 @@
             "matching": "axis-aligned source-frame bounding-box IoU >= 0.2, one-to-one maximum weight"
           },
           "matched_ocr_same_gt_lines": {
-            "shared_gt_lines": 131,
-            "known_characters": 5081,
-            "known_words": 947,
-            "frozen_cer": 0.1509545365085613,
-            "pdf_cer": 0.18165715410352293,
-            "frozen_wer": 0.498416050686378,
-            "pdf_wer": 0.5248152059134108,
+            "shared_gt_lines": 143,
+            "known_characters": 5546,
+            "known_words": 1033,
+            "frozen_cer": 0.1830147854309412,
+            "pdf_cer": 0.214388748647674,
+            "frozen_wer": 0.5314617618586641,
+            "pdf_wer": 0.5605033881897387,
             "method": "compare both OCR texts against exactly the same GT lines, matched independently by geometry"
           },
           "recognized_word_search": {
@@ -1092,32 +1140,41 @@
             }
           },
           "status": "ok",
+          "locked_text_partition": {
+            "method": "monotonic character alignment of actual PDFium text to frozen hOCR; frozen hOCR supplies line boundaries and geometry only",
+            "frozen_characters": 5954,
+            "pdfium_characters": 5941,
+            "equal_characters": 5933,
+            "equal_fraction_of_frozen": 0.9964729593550554,
+            "pdfium_nonspace_characters": 4964,
+            "partitioned_nonspace_characters": 4964
+          },
           "line_metrics": {
             "gt_count": 159,
-            "output_count": 173,
-            "matched_lines": 143,
-            "missing_lines": 16,
-            "missing_known_characters": 280,
+            "output_count": 166,
+            "matched_lines": 150,
+            "missing_lines": 9,
+            "missing_known_characters": 101,
             "total_known_characters": 5826,
-            "missing_character_share": 0.048060418812221076,
-            "extra_lines": 30,
-            "matched_known_characters": 5546,
-            "matched_character_edits": 1189,
-            "line_aligned_cer": 0.214388748647674,
-            "matched_known_words": 1033,
-            "line_aligned_wer": 0.5605033881897387,
-            "kendall_tau": 0.857382054565153,
-            "kendall_pair_count": 143,
-            "matching": "axis-aligned source-frame bounding-box IoU >= 0.2, one-to-one maximum weight"
+            "missing_character_share": 0.017336079642979747,
+            "extra_lines": 16,
+            "matched_known_characters": 5725,
+            "matched_character_edits": 1095,
+            "line_aligned_cer": 0.19126637554585152,
+            "matched_known_words": 1062,
+            "line_aligned_wer": 0.544256120527307,
+            "kendall_tau": null,
+            "kendall_pair_count": 0,
+            "matching": "axis-aligned source-frame bounding-box IoU >= 0.2, one-to-one maximum weight; matched-track boxes and line order inherited from frozen hOCR, PDF line geometry/order not independently assessed"
           },
           "matched_ocr_same_gt_lines": {
-            "shared_gt_lines": 131,
-            "known_characters": 5081,
-            "known_words": 947,
-            "frozen_cer": 0.1509545365085613,
-            "pdf_cer": 0.18165715410352293,
-            "frozen_wer": 0.498416050686378,
-            "pdf_wer": 0.5248152059134108,
+            "shared_gt_lines": 150,
+            "known_characters": 5725,
+            "known_words": 1062,
+            "frozen_cer": 0.18899563318777293,
+            "pdf_cer": 0.19126637554585152,
+            "frozen_wer": 0.5329566854990584,
+            "pdf_wer": 0.544256120527307,
             "method": "compare both OCR texts against exactly the same GT lines, matched independently by geometry"
           },
           "recognized_word_search": {
@@ -1154,6 +1211,7 @@
             }
           },
           "status": "ok",
+          "locked_text_partition": null,
           "line_metrics": {
             "gt_count": 159,
             "output_count": 173,
@@ -1173,13 +1231,13 @@
             "matching": "axis-aligned source-frame bounding-box IoU >= 0.2, one-to-one maximum weight"
           },
           "matched_ocr_same_gt_lines": {
-            "shared_gt_lines": 131,
-            "known_characters": 5081,
-            "known_words": 947,
-            "frozen_cer": 0.1509545365085613,
-            "pdf_cer": 0.18165715410352293,
-            "frozen_wer": 0.498416050686378,
-            "pdf_wer": 0.5248152059134108,
+            "shared_gt_lines": 143,
+            "known_characters": 5546,
+            "known_words": 1033,
+            "frozen_cer": 0.1830147854309412,
+            "pdf_cer": 0.214388748647674,
+            "frozen_wer": 0.5314617618586641,
+            "pdf_wer": 0.5605033881897387,
             "method": "compare both OCR texts against exactly the same GT lines, matched independently by geometry"
           },
           "recognized_word_search": {
@@ -1216,6 +1274,7 @@
             }
           },
           "status": "ok",
+          "locked_text_partition": null,
           "line_metrics": {
             "gt_count": 159,
             "output_count": 154,
@@ -1235,13 +1294,13 @@
             "matching": "axis-aligned source-frame bounding-box IoU >= 0.2, one-to-one maximum weight"
           },
           "matched_ocr_same_gt_lines": {
-            "shared_gt_lines": 132,
-            "known_characters": 5150,
-            "known_words": 954,
-            "frozen_cer": 0.15029126213592234,
-            "pdf_cer": 0.16019417475728157,
-            "frozen_wer": 0.4979035639412998,
-            "pdf_wer": 0.5146750524109015,
+            "shared_gt_lines": 143,
+            "known_characters": 5607,
+            "known_words": 1038,
+            "frozen_cer": 0.17995362939183163,
+            "pdf_cer": 0.1806670233636526,
+            "frozen_wer": 0.5279383429672447,
+            "pdf_wer": 0.5327552986512524,
             "method": "compare both OCR texts against exactly the same GT lines, matched independently by geometry"
           },
           "recognized_word_search": {
@@ -1278,32 +1337,41 @@
             }
           },
           "status": "ok",
+          "locked_text_partition": {
+            "method": "monotonic character alignment of actual PDFium text to frozen hOCR; frozen hOCR supplies line boundaries and geometry only",
+            "frozen_characters": 5954,
+            "pdfium_characters": 5946,
+            "equal_characters": 5938,
+            "equal_fraction_of_frozen": 0.9973127309371851,
+            "pdfium_nonspace_characters": 4964,
+            "partitioned_nonspace_characters": 4964
+          },
           "line_metrics": {
             "gt_count": 159,
-            "output_count": 139,
-            "matched_lines": 126,
-            "missing_lines": 33,
-            "missing_known_characters": 1038,
+            "output_count": 166,
+            "matched_lines": 150,
+            "missing_lines": 9,
+            "missing_known_characters": 101,
             "total_known_characters": 5826,
-            "missing_character_share": 0.17816683831101957,
-            "extra_lines": 13,
-            "matched_known_characters": 4788,
-            "matched_character_edits": 1746,
-            "line_aligned_cer": 0.36466165413533835,
-            "matched_known_words": 888,
-            "line_aligned_wer": 0.6711711711711712,
-            "kendall_tau": 0.8603174603174604,
-            "kendall_pair_count": 126,
-            "matching": "axis-aligned source-frame bounding-box IoU >= 0.2, one-to-one maximum weight"
+            "missing_character_share": 0.017336079642979747,
+            "extra_lines": 16,
+            "matched_known_characters": 5725,
+            "matched_character_edits": 1090,
+            "line_aligned_cer": 0.1903930131004367,
+            "matched_known_words": 1062,
+            "line_aligned_wer": 0.5376647834274952,
+            "kendall_tau": null,
+            "kendall_pair_count": 0,
+            "matching": "axis-aligned source-frame bounding-box IoU >= 0.2, one-to-one maximum weight; matched-track boxes and line order inherited from frozen hOCR, PDF line geometry/order not independently assessed"
           },
           "matched_ocr_same_gt_lines": {
-            "shared_gt_lines": 116,
-            "known_characters": 4404,
-            "known_words": 818,
-            "frozen_cer": 0.14350590372388738,
-            "pdf_cer": 0.3485467756584923,
-            "frozen_wer": 0.4828850855745721,
-            "pdf_wer": 0.6528117359413202,
+            "shared_gt_lines": 150,
+            "known_characters": 5725,
+            "known_words": 1062,
+            "frozen_cer": 0.18899563318777293,
+            "pdf_cer": 0.1903930131004367,
+            "frozen_wer": 0.5329566854990584,
+            "pdf_wer": 0.5376647834274952,
             "method": "compare both OCR texts against exactly the same GT lines, matched independently by geometry"
           },
           "recognized_word_search": {
@@ -1340,6 +1408,7 @@
             }
           },
           "status": "ok",
+          "locked_text_partition": null,
           "line_metrics": {
             "gt_count": 159,
             "output_count": 103,
@@ -1359,13 +1428,13 @@
             "matching": "axis-aligned source-frame bounding-box IoU >= 0.2, one-to-one maximum weight"
           },
           "matched_ocr_same_gt_lines": {
-            "shared_gt_lines": 72,
-            "known_characters": 2759,
-            "known_words": 500,
-            "frozen_cer": 0.1319318593693367,
-            "pdf_cer": 1.4305907937658573,
-            "frozen_wer": 0.444,
-            "pdf_wer": 1.79,
+            "shared_gt_lines": 78,
+            "known_characters": 3009,
+            "known_words": 545,
+            "frozen_cer": 0.16218012628780326,
+            "pdf_cer": 1.4313725490196079,
+            "frozen_wer": 0.47706422018348627,
+            "pdf_wer": 1.7798165137614679,
             "method": "compare both OCR texts against exactly the same GT lines, matched independently by geometry"
           },
           "recognized_word_search": {
@@ -1383,20 +1452,20 @@
       "known_gt_characters": 866,
       "frozen_hocr": {
         "gt_count": 44,
-        "output_count": 29,
-        "matched_lines": 29,
-        "missing_lines": 15,
-        "missing_known_characters": 261,
+        "output_count": 36,
+        "matched_lines": 35,
+        "missing_lines": 9,
+        "missing_known_characters": 97,
         "total_known_characters": 866,
-        "missing_character_share": 0.30138568129330257,
-        "extra_lines": 0,
-        "matched_known_characters": 605,
-        "matched_character_edits": 197,
-        "line_aligned_cer": 0.3256198347107438,
-        "matched_known_words": 95,
-        "line_aligned_wer": 0.7052631578947368,
-        "kendall_tau": 0.7635467980295566,
-        "kendall_pair_count": 29,
+        "missing_character_share": 0.11200923787528869,
+        "extra_lines": 1,
+        "matched_known_characters": 769,
+        "matched_character_edits": 217,
+        "line_aligned_cer": 0.28218465539661897,
+        "matched_known_words": 122,
+        "line_aligned_wer": 0.6475409836065574,
+        "kendall_tau": 0.838655462184874,
+        "kendall_pair_count": 35,
         "matching": "axis-aligned source-frame bounding-box IoU >= 0.2, one-to-one maximum weight"
       },
       "rows": {
@@ -1427,6 +1496,7 @@
             }
           },
           "status": "ok",
+          "locked_text_partition": null,
           "line_metrics": {
             "gt_count": 44,
             "output_count": 0,
@@ -1456,7 +1526,7 @@
             "method": "compare both OCR texts against exactly the same GT lines, matched independently by geometry"
           },
           "recognized_word_search": {
-            "recognized_frozen_ocr_words_in_sample": 11,
+            "recognized_frozen_ocr_words_in_sample": 13,
             "pdf_search_hits": 0,
             "hit_rate": 0.0,
             "semantics": "exact reading-normalized GT token present in selected frozen hOCR; case-insensitive literal PDFium search"
@@ -1489,6 +1559,7 @@
             }
           },
           "status": "ok",
+          "locked_text_partition": null,
           "line_metrics": {
             "gt_count": 44,
             "output_count": 40,
@@ -1508,19 +1579,19 @@
             "matching": "axis-aligned source-frame bounding-box IoU >= 0.2, one-to-one maximum weight"
           },
           "matched_ocr_same_gt_lines": {
-            "shared_gt_lines": 26,
-            "known_characters": 550,
-            "known_words": 87,
-            "frozen_cer": 0.33454545454545453,
-            "pdf_cer": 0.34545454545454546,
-            "frozen_wer": 0.7011494252873564,
-            "pdf_wer": 0.6781609195402298,
+            "shared_gt_lines": 30,
+            "known_characters": 678,
+            "known_words": 106,
+            "frozen_cer": 0.2920353982300885,
+            "pdf_cer": 0.3525073746312684,
+            "frozen_wer": 0.6509433962264151,
+            "pdf_wer": 0.7075471698113207,
             "method": "compare both OCR texts against exactly the same GT lines, matched independently by geometry"
           },
           "recognized_word_search": {
-            "recognized_frozen_ocr_words_in_sample": 11,
-            "pdf_search_hits": 8,
-            "hit_rate": 0.7272727272727273,
+            "recognized_frozen_ocr_words_in_sample": 13,
+            "pdf_search_hits": 9,
+            "hit_rate": 0.6923076923076923,
             "semantics": "exact reading-normalized GT token present in selected frozen hOCR; case-insensitive literal PDFium search"
           }
         },
@@ -1551,38 +1622,47 @@
             }
           },
           "status": "ok",
+          "locked_text_partition": {
+            "method": "monotonic character alignment of actual PDFium text to frozen hOCR; frozen hOCR supplies line boundaries and geometry only",
+            "frozen_characters": 912,
+            "pdfium_characters": 909,
+            "equal_characters": 906,
+            "equal_fraction_of_frozen": 0.993421052631579,
+            "pdfium_nonspace_characters": 772,
+            "partitioned_nonspace_characters": 772
+          },
           "line_metrics": {
             "gt_count": 44,
-            "output_count": 40,
-            "matched_lines": 31,
-            "missing_lines": 13,
-            "missing_known_characters": 180,
+            "output_count": 36,
+            "matched_lines": 35,
+            "missing_lines": 9,
+            "missing_known_characters": 97,
             "total_known_characters": 866,
-            "missing_character_share": 0.20785219399538107,
-            "extra_lines": 9,
-            "matched_known_characters": 686,
-            "matched_character_edits": 242,
-            "line_aligned_cer": 0.35276967930029157,
-            "matched_known_words": 109,
-            "line_aligned_wer": 0.7155963302752294,
-            "kendall_tau": 0.8236559139784947,
-            "kendall_pair_count": 31,
-            "matching": "axis-aligned source-frame bounding-box IoU >= 0.2, one-to-one maximum weight"
+            "missing_character_share": 0.11200923787528869,
+            "extra_lines": 1,
+            "matched_known_characters": 769,
+            "matched_character_edits": 219,
+            "line_aligned_cer": 0.2847854356306892,
+            "matched_known_words": 122,
+            "line_aligned_wer": 0.6557377049180327,
+            "kendall_tau": null,
+            "kendall_pair_count": 0,
+            "matching": "axis-aligned source-frame bounding-box IoU >= 0.2, one-to-one maximum weight; matched-track boxes and line order inherited from frozen hOCR, PDF line geometry/order not independently assessed"
           },
           "matched_ocr_same_gt_lines": {
-            "shared_gt_lines": 26,
-            "known_characters": 550,
-            "known_words": 87,
-            "frozen_cer": 0.33454545454545453,
-            "pdf_cer": 0.34545454545454546,
-            "frozen_wer": 0.7011494252873564,
-            "pdf_wer": 0.6781609195402298,
+            "shared_gt_lines": 35,
+            "known_characters": 769,
+            "known_words": 122,
+            "frozen_cer": 0.28218465539661897,
+            "pdf_cer": 0.2847854356306892,
+            "frozen_wer": 0.6475409836065574,
+            "pdf_wer": 0.6557377049180327,
             "method": "compare both OCR texts against exactly the same GT lines, matched independently by geometry"
           },
           "recognized_word_search": {
-            "recognized_frozen_ocr_words_in_sample": 11,
-            "pdf_search_hits": 8,
-            "hit_rate": 0.7272727272727273,
+            "recognized_frozen_ocr_words_in_sample": 13,
+            "pdf_search_hits": 9,
+            "hit_rate": 0.6923076923076923,
             "semantics": "exact reading-normalized GT token present in selected frozen hOCR; case-insensitive literal PDFium search"
           }
         },
@@ -1613,6 +1693,7 @@
             }
           },
           "status": "ok",
+          "locked_text_partition": null,
           "line_metrics": {
             "gt_count": 44,
             "output_count": 40,
@@ -1632,19 +1713,19 @@
             "matching": "axis-aligned source-frame bounding-box IoU >= 0.2, one-to-one maximum weight"
           },
           "matched_ocr_same_gt_lines": {
-            "shared_gt_lines": 26,
-            "known_characters": 550,
-            "known_words": 87,
-            "frozen_cer": 0.33454545454545453,
-            "pdf_cer": 0.34545454545454546,
-            "frozen_wer": 0.7011494252873564,
-            "pdf_wer": 0.6781609195402298,
+            "shared_gt_lines": 30,
+            "known_characters": 678,
+            "known_words": 106,
+            "frozen_cer": 0.2920353982300885,
+            "pdf_cer": 0.3525073746312684,
+            "frozen_wer": 0.6509433962264151,
+            "pdf_wer": 0.7075471698113207,
             "method": "compare both OCR texts against exactly the same GT lines, matched independently by geometry"
           },
           "recognized_word_search": {
-            "recognized_frozen_ocr_words_in_sample": 11,
-            "pdf_search_hits": 8,
-            "hit_rate": 0.7272727272727273,
+            "recognized_frozen_ocr_words_in_sample": 13,
+            "pdf_search_hits": 9,
+            "hit_rate": 0.6923076923076923,
             "semantics": "exact reading-normalized GT token present in selected frozen hOCR; case-insensitive literal PDFium search"
           }
         },
@@ -1675,6 +1756,7 @@
             }
           },
           "status": "ok",
+          "locked_text_partition": null,
           "line_metrics": {
             "gt_count": 44,
             "output_count": 41,
@@ -1694,18 +1776,18 @@
             "matching": "axis-aligned source-frame bounding-box IoU >= 0.2, one-to-one maximum weight"
           },
           "matched_ocr_same_gt_lines": {
-            "shared_gt_lines": 28,
-            "known_characters": 601,
-            "known_words": 94,
-            "frozen_cer": 0.3277870216306156,
-            "pdf_cer": 0.3227953410981697,
-            "frozen_wer": 0.7127659574468085,
-            "pdf_wer": 0.648936170212766,
+            "shared_gt_lines": 33,
+            "known_characters": 731,
+            "known_words": 116,
+            "frozen_cer": 0.28864569083447333,
+            "pdf_cer": 0.28864569083447333,
+            "frozen_wer": 0.646551724137931,
+            "pdf_wer": 0.6120689655172413,
             "method": "compare both OCR texts against exactly the same GT lines, matched independently by geometry"
           },
           "recognized_word_search": {
-            "recognized_frozen_ocr_words_in_sample": 11,
-            "pdf_search_hits": 11,
+            "recognized_frozen_ocr_words_in_sample": 13,
+            "pdf_search_hits": 13,
             "hit_rate": 1.0,
             "semantics": "exact reading-normalized GT token present in selected frozen hOCR; case-insensitive literal PDFium search"
           }
@@ -1737,38 +1819,47 @@
             }
           },
           "status": "ok",
+          "locked_text_partition": {
+            "method": "monotonic character alignment of actual PDFium text to frozen hOCR; frozen hOCR supplies line boundaries and geometry only",
+            "frozen_characters": 912,
+            "pdfium_characters": 906,
+            "equal_characters": 902,
+            "equal_fraction_of_frozen": 0.9890350877192983,
+            "pdfium_nonspace_characters": 771,
+            "partitioned_nonspace_characters": 771
+          },
           "line_metrics": {
             "gt_count": 44,
-            "output_count": 40,
+            "output_count": 36,
             "matched_lines": 35,
             "missing_lines": 9,
-            "missing_known_characters": 101,
+            "missing_known_characters": 97,
             "total_known_characters": 866,
-            "missing_character_share": 0.11662817551963048,
-            "extra_lines": 5,
-            "matched_known_characters": 765,
-            "matched_character_edits": 204,
-            "line_aligned_cer": 0.26666666666666666,
-            "matched_known_words": 124,
-            "line_aligned_wer": 0.6290322580645161,
-            "kendall_tau": 0.8352941176470589,
-            "kendall_pair_count": 35,
-            "matching": "axis-aligned source-frame bounding-box IoU >= 0.2, one-to-one maximum weight"
+            "missing_character_share": 0.11200923787528869,
+            "extra_lines": 1,
+            "matched_known_characters": 769,
+            "matched_character_edits": 218,
+            "line_aligned_cer": 0.2834850455136541,
+            "matched_known_words": 122,
+            "line_aligned_wer": 0.6557377049180327,
+            "kendall_tau": null,
+            "kendall_pair_count": 0,
+            "matching": "axis-aligned source-frame bounding-box IoU >= 0.2, one-to-one maximum weight; matched-track boxes and line order inherited from frozen hOCR, PDF line geometry/order not independently assessed"
           },
           "matched_ocr_same_gt_lines": {
-            "shared_gt_lines": 28,
-            "known_characters": 593,
-            "known_words": 94,
-            "frozen_cer": 0.3288364249578415,
-            "pdf_cer": 0.30354131534569984,
-            "frozen_wer": 0.7021276595744681,
-            "pdf_wer": 0.6595744680851063,
+            "shared_gt_lines": 35,
+            "known_characters": 769,
+            "known_words": 122,
+            "frozen_cer": 0.28218465539661897,
+            "pdf_cer": 0.2834850455136541,
+            "frozen_wer": 0.6475409836065574,
+            "pdf_wer": 0.6557377049180327,
             "method": "compare both OCR texts against exactly the same GT lines, matched independently by geometry"
           },
           "recognized_word_search": {
-            "recognized_frozen_ocr_words_in_sample": 11,
-            "pdf_search_hits": 8,
-            "hit_rate": 0.7272727272727273,
+            "recognized_frozen_ocr_words_in_sample": 13,
+            "pdf_search_hits": 9,
+            "hit_rate": 0.6923076923076923,
             "semantics": "exact reading-normalized GT token present in selected frozen hOCR; case-insensitive literal PDFium search"
           }
         },
@@ -1799,6 +1890,7 @@
             }
           },
           "status": "ok",
+          "locked_text_partition": null,
           "line_metrics": {
             "gt_count": 44,
             "output_count": 36,
@@ -1818,19 +1910,19 @@
             "matching": "axis-aligned source-frame bounding-box IoU >= 0.2, one-to-one maximum weight"
           },
           "matched_ocr_same_gt_lines": {
-            "shared_gt_lines": 23,
-            "known_characters": 475,
-            "known_words": 75,
-            "frozen_cer": 0.37473684210526315,
-            "pdf_cer": 0.991578947368421,
-            "frozen_wer": 0.76,
-            "pdf_wer": 1.68,
+            "shared_gt_lines": 29,
+            "known_characters": 639,
+            "known_words": 102,
+            "frozen_cer": 0.30985915492957744,
+            "pdf_cer": 0.8575899843505478,
+            "frozen_wer": 0.6764705882352942,
+            "pdf_wer": 1.4705882352941178,
             "method": "compare both OCR texts against exactly the same GT lines, matched independently by geometry"
           },
           "recognized_word_search": {
-            "recognized_frozen_ocr_words_in_sample": 11,
+            "recognized_frozen_ocr_words_in_sample": 13,
             "pdf_search_hits": 1,
-            "hit_rate": 0.09090909090909091,
+            "hit_rate": 0.07692307692307693,
             "semantics": "exact reading-normalized GT token present in selected frozen hOCR; case-insensitive literal PDFium search"
           }
         }
@@ -1886,6 +1978,7 @@
             }
           },
           "status": "ok",
+          "locked_text_partition": null,
           "line_metrics": {
             "gt_count": 3,
             "output_count": 0,
@@ -1948,6 +2041,7 @@
             }
           },
           "status": "ok",
+          "locked_text_partition": null,
           "line_metrics": {
             "gt_count": 3,
             "output_count": 14,
@@ -2010,32 +2104,41 @@
             }
           },
           "status": "ok",
+          "locked_text_partition": {
+            "method": "monotonic character alignment of actual PDFium text to frozen hOCR; frozen hOCR supplies line boundaries and geometry only",
+            "frozen_characters": 326,
+            "pdfium_characters": 326,
+            "equal_characters": 326,
+            "equal_fraction_of_frozen": 1.0,
+            "pdfium_nonspace_characters": 271,
+            "partitioned_nonspace_characters": 271
+          },
           "line_metrics": {
             "gt_count": 3,
-            "output_count": 14,
-            "matched_lines": 1,
-            "missing_lines": 2,
-            "missing_known_characters": 20,
+            "output_count": 9,
+            "matched_lines": 3,
+            "missing_lines": 0,
+            "missing_known_characters": 0,
             "total_known_characters": 32,
-            "missing_character_share": 0.625,
-            "extra_lines": 13,
-            "matched_known_characters": 12,
-            "matched_character_edits": 0,
-            "line_aligned_cer": 0.0,
-            "matched_known_words": 3,
-            "line_aligned_wer": 0.0,
+            "missing_character_share": 0.0,
+            "extra_lines": 6,
+            "matched_known_characters": 32,
+            "matched_character_edits": 1,
+            "line_aligned_cer": 0.03125,
+            "matched_known_words": 5,
+            "line_aligned_wer": 0.2,
             "kendall_tau": null,
-            "kendall_pair_count": 1,
-            "matching": "axis-aligned source-frame bounding-box IoU >= 0.2, one-to-one maximum weight"
+            "kendall_pair_count": 0,
+            "matching": "axis-aligned source-frame bounding-box IoU >= 0.2, one-to-one maximum weight; matched-track boxes and line order inherited from frozen hOCR, PDF line geometry/order not independently assessed"
           },
           "matched_ocr_same_gt_lines": {
-            "shared_gt_lines": 1,
-            "known_characters": 12,
-            "known_words": 3,
-            "frozen_cer": 0.0,
-            "pdf_cer": 0.0,
-            "frozen_wer": 0.0,
-            "pdf_wer": 0.0,
+            "shared_gt_lines": 3,
+            "known_characters": 32,
+            "known_words": 5,
+            "frozen_cer": 0.03125,
+            "pdf_cer": 0.03125,
+            "frozen_wer": 0.2,
+            "pdf_wer": 0.2,
             "method": "compare both OCR texts against exactly the same GT lines, matched independently by geometry"
           },
           "recognized_word_search": {
@@ -2072,6 +2175,7 @@
             }
           },
           "status": "ok",
+          "locked_text_partition": null,
           "line_metrics": {
             "gt_count": 3,
             "output_count": 14,
@@ -2134,6 +2238,7 @@
             }
           },
           "status": "ok",
+          "locked_text_partition": null,
           "line_metrics": {
             "gt_count": 3,
             "output_count": 9,
@@ -2196,23 +2301,32 @@
             }
           },
           "status": "ok",
+          "locked_text_partition": {
+            "method": "monotonic character alignment of actual PDFium text to frozen hOCR; frozen hOCR supplies line boundaries and geometry only",
+            "frozen_characters": 326,
+            "pdfium_characters": 326,
+            "equal_characters": 326,
+            "equal_fraction_of_frozen": 1.0,
+            "pdfium_nonspace_characters": 271,
+            "partitioned_nonspace_characters": 271
+          },
           "line_metrics": {
             "gt_count": 3,
-            "output_count": 4,
+            "output_count": 9,
             "matched_lines": 3,
             "missing_lines": 0,
             "missing_known_characters": 0,
             "total_known_characters": 32,
             "missing_character_share": 0.0,
-            "extra_lines": 1,
+            "extra_lines": 6,
             "matched_known_characters": 32,
             "matched_character_edits": 1,
             "line_aligned_cer": 0.03125,
             "matched_known_words": 5,
             "line_aligned_wer": 0.2,
-            "kendall_tau": 1.0,
-            "kendall_pair_count": 3,
-            "matching": "axis-aligned source-frame bounding-box IoU >= 0.2, one-to-one maximum weight"
+            "kendall_tau": null,
+            "kendall_pair_count": 0,
+            "matching": "axis-aligned source-frame bounding-box IoU >= 0.2, one-to-one maximum weight; matched-track boxes and line order inherited from frozen hOCR, PDF line geometry/order not independently assessed"
           },
           "matched_ocr_same_gt_lines": {
             "shared_gt_lines": 3,
@@ -2258,6 +2372,7 @@
             }
           },
           "status": "ok",
+          "locked_text_partition": null,
           "line_metrics": {
             "gt_count": 3,
             "output_count": 9,
@@ -2301,20 +2416,20 @@
       "known_gt_characters": 3169,
       "frozen_hocr": {
         "gt_count": 107,
-        "output_count": 117,
-        "matched_lines": 73,
-        "missing_lines": 34,
-        "missing_known_characters": 1012,
+        "output_count": 163,
+        "matched_lines": 103,
+        "missing_lines": 4,
+        "missing_known_characters": 83,
         "total_known_characters": 3169,
-        "missing_character_share": 0.31934364152729566,
-        "extra_lines": 44,
-        "matched_known_characters": 2157,
-        "matched_character_edits": 1053,
-        "line_aligned_cer": 0.48817802503477054,
-        "matched_known_words": 731,
-        "line_aligned_wer": 0.7906976744186046,
-        "kendall_tau": 0.9353120243531202,
-        "kendall_pair_count": 73,
+        "missing_character_share": 0.02619122751656674,
+        "extra_lines": 60,
+        "matched_known_characters": 3086,
+        "matched_character_edits": 1406,
+        "line_aligned_cer": 0.45560596241088785,
+        "matched_known_words": 1007,
+        "line_aligned_wer": 0.7735849056603774,
+        "kendall_tau": 0.9455549209975254,
+        "kendall_pair_count": 103,
         "matching": "axis-aligned source-frame bounding-box IoU >= 0.2, one-to-one maximum weight"
       },
       "rows": {
@@ -2345,6 +2460,7 @@
             }
           },
           "status": "ok",
+          "locked_text_partition": null,
           "line_metrics": {
             "gt_count": 107,
             "output_count": 0,
@@ -2374,7 +2490,7 @@
             "method": "compare both OCR texts against exactly the same GT lines, matched independently by geometry"
           },
           "recognized_word_search": {
-            "recognized_frozen_ocr_words_in_sample": 11,
+            "recognized_frozen_ocr_words_in_sample": 15,
             "pdf_search_hits": 0,
             "hit_rate": 0.0,
             "semantics": "exact reading-normalized GT token present in selected frozen hOCR; case-insensitive literal PDFium search"
@@ -2407,6 +2523,7 @@
             }
           },
           "status": "ok",
+          "locked_text_partition": null,
           "line_metrics": {
             "gt_count": 107,
             "output_count": 257,
@@ -2426,18 +2543,18 @@
             "matching": "axis-aligned source-frame bounding-box IoU >= 0.2, one-to-one maximum weight"
           },
           "matched_ocr_same_gt_lines": {
-            "shared_gt_lines": 44,
-            "known_characters": 1290,
-            "known_words": 453,
-            "frozen_cer": 0.47674418604651164,
-            "pdf_cer": 0.5651162790697675,
-            "frozen_wer": 0.8057395143487859,
-            "pdf_wer": 0.8366445916114791,
+            "shared_gt_lines": 64,
+            "known_characters": 1908,
+            "known_words": 636,
+            "frozen_cer": 0.44025157232704404,
+            "pdf_cer": 0.5262054507337526,
+            "frozen_wer": 0.7814465408805031,
+            "pdf_wer": 0.8113207547169812,
             "method": "compare both OCR texts against exactly the same GT lines, matched independently by geometry"
           },
           "recognized_word_search": {
-            "recognized_frozen_ocr_words_in_sample": 11,
-            "pdf_search_hits": 11,
+            "recognized_frozen_ocr_words_in_sample": 15,
+            "pdf_search_hits": 15,
             "hit_rate": 1.0,
             "semantics": "exact reading-normalized GT token present in selected frozen hOCR; case-insensitive literal PDFium search"
           }
@@ -2469,37 +2586,46 @@
             }
           },
           "status": "ok",
+          "locked_text_partition": {
+            "method": "monotonic character alignment of actual PDFium text to frozen hOCR; frozen hOCR supplies line boundaries and geometry only",
+            "frozen_characters": 2425,
+            "pdfium_characters": 2425,
+            "equal_characters": 2397,
+            "equal_fraction_of_frozen": 0.9884536082474227,
+            "pdfium_nonspace_characters": 1880,
+            "partitioned_nonspace_characters": 1880
+          },
           "line_metrics": {
             "gt_count": 107,
-            "output_count": 257,
-            "matched_lines": 64,
-            "missing_lines": 43,
-            "missing_known_characters": 1261,
+            "output_count": 159,
+            "matched_lines": 103,
+            "missing_lines": 4,
+            "missing_known_characters": 83,
             "total_known_characters": 3169,
-            "missing_character_share": 0.39791732407699587,
-            "extra_lines": 193,
-            "matched_known_characters": 1908,
-            "matched_character_edits": 1004,
-            "line_aligned_cer": 0.5262054507337526,
-            "matched_known_words": 636,
-            "line_aligned_wer": 0.8113207547169812,
-            "kendall_tau": 0.9246031746031745,
-            "kendall_pair_count": 64,
-            "matching": "axis-aligned source-frame bounding-box IoU >= 0.2, one-to-one maximum weight"
+            "missing_character_share": 0.02619122751656674,
+            "extra_lines": 56,
+            "matched_known_characters": 3086,
+            "matched_character_edits": 1416,
+            "line_aligned_cer": 0.4588464031108231,
+            "matched_known_words": 1007,
+            "line_aligned_wer": 0.7745779543197616,
+            "kendall_tau": null,
+            "kendall_pair_count": 0,
+            "matching": "axis-aligned source-frame bounding-box IoU >= 0.2, one-to-one maximum weight; matched-track boxes and line order inherited from frozen hOCR, PDF line geometry/order not independently assessed"
           },
           "matched_ocr_same_gt_lines": {
-            "shared_gt_lines": 44,
-            "known_characters": 1290,
-            "known_words": 453,
-            "frozen_cer": 0.47674418604651164,
-            "pdf_cer": 0.5651162790697675,
-            "frozen_wer": 0.8057395143487859,
-            "pdf_wer": 0.8366445916114791,
+            "shared_gt_lines": 103,
+            "known_characters": 3086,
+            "known_words": 1007,
+            "frozen_cer": 0.45560596241088785,
+            "pdf_cer": 0.4588464031108231,
+            "frozen_wer": 0.7735849056603774,
+            "pdf_wer": 0.7745779543197616,
             "method": "compare both OCR texts against exactly the same GT lines, matched independently by geometry"
           },
           "recognized_word_search": {
-            "recognized_frozen_ocr_words_in_sample": 11,
-            "pdf_search_hits": 11,
+            "recognized_frozen_ocr_words_in_sample": 15,
+            "pdf_search_hits": 15,
             "hit_rate": 1.0,
             "semantics": "exact reading-normalized GT token present in selected frozen hOCR; case-insensitive literal PDFium search"
           }
@@ -2531,6 +2657,7 @@
             }
           },
           "status": "ok",
+          "locked_text_partition": null,
           "line_metrics": {
             "gt_count": 107,
             "output_count": 257,
@@ -2550,18 +2677,18 @@
             "matching": "axis-aligned source-frame bounding-box IoU >= 0.2, one-to-one maximum weight"
           },
           "matched_ocr_same_gt_lines": {
-            "shared_gt_lines": 44,
-            "known_characters": 1290,
-            "known_words": 453,
-            "frozen_cer": 0.47674418604651164,
-            "pdf_cer": 0.5651162790697675,
-            "frozen_wer": 0.8057395143487859,
-            "pdf_wer": 0.8366445916114791,
+            "shared_gt_lines": 64,
+            "known_characters": 1908,
+            "known_words": 636,
+            "frozen_cer": 0.44025157232704404,
+            "pdf_cer": 0.5262054507337526,
+            "frozen_wer": 0.7814465408805031,
+            "pdf_wer": 0.8113207547169812,
             "method": "compare both OCR texts against exactly the same GT lines, matched independently by geometry"
           },
           "recognized_word_search": {
-            "recognized_frozen_ocr_words_in_sample": 11,
-            "pdf_search_hits": 11,
+            "recognized_frozen_ocr_words_in_sample": 15,
+            "pdf_search_hits": 15,
             "hit_rate": 1.0,
             "semantics": "exact reading-normalized GT token present in selected frozen hOCR; case-insensitive literal PDFium search"
           }
@@ -2593,6 +2720,7 @@
             }
           },
           "status": "ok",
+          "locked_text_partition": null,
           "line_metrics": {
             "gt_count": 107,
             "output_count": 182,
@@ -2612,18 +2740,18 @@
             "matching": "axis-aligned source-frame bounding-box IoU >= 0.2, one-to-one maximum weight"
           },
           "matched_ocr_same_gt_lines": {
-            "shared_gt_lines": 70,
-            "known_characters": 2057,
-            "known_words": 693,
-            "frozen_cer": 0.47690811861934856,
-            "pdf_cer": 0.4837141468157511,
-            "frozen_wer": 0.7864357864357865,
-            "pdf_wer": 0.7893217893217893,
+            "shared_gt_lines": 98,
+            "known_characters": 2908,
+            "known_words": 944,
+            "frozen_cer": 0.43707015130674004,
+            "pdf_cer": 0.44154057771664373,
+            "frozen_wer": 0.7658898305084746,
+            "pdf_wer": 0.7669491525423728,
             "method": "compare both OCR texts against exactly the same GT lines, matched independently by geometry"
           },
           "recognized_word_search": {
-            "recognized_frozen_ocr_words_in_sample": 11,
-            "pdf_search_hits": 11,
+            "recognized_frozen_ocr_words_in_sample": 15,
+            "pdf_search_hits": 15,
             "hit_rate": 1.0,
             "semantics": "exact reading-normalized GT token present in selected frozen hOCR; case-insensitive literal PDFium search"
           }
@@ -2655,37 +2783,46 @@
             }
           },
           "status": "ok",
+          "locked_text_partition": {
+            "method": "monotonic character alignment of actual PDFium text to frozen hOCR; frozen hOCR supplies line boundaries and geometry only",
+            "frozen_characters": 2425,
+            "pdfium_characters": 2420,
+            "equal_characters": 2417,
+            "equal_fraction_of_frozen": 0.996701030927835,
+            "pdfium_nonspace_characters": 1872,
+            "partitioned_nonspace_characters": 1872
+          },
           "line_metrics": {
             "gt_count": 107,
-            "output_count": 161,
-            "matched_lines": 100,
-            "missing_lines": 7,
-            "missing_known_characters": 188,
+            "output_count": 163,
+            "matched_lines": 103,
+            "missing_lines": 4,
+            "missing_known_characters": 83,
             "total_known_characters": 3169,
-            "missing_character_share": 0.05932470810981382,
-            "extra_lines": 61,
-            "matched_known_characters": 2981,
-            "matched_character_edits": 1341,
-            "line_aligned_cer": 0.4498490439449849,
-            "matched_known_words": 974,
-            "line_aligned_wer": 0.7669404517453798,
-            "kendall_tau": 0.943838383838384,
-            "kendall_pair_count": 100,
-            "matching": "axis-aligned source-frame bounding-box IoU >= 0.2, one-to-one maximum weight"
+            "missing_character_share": 0.02619122751656674,
+            "extra_lines": 60,
+            "matched_known_characters": 3086,
+            "matched_character_edits": 1406,
+            "line_aligned_cer": 0.45560596241088785,
+            "matched_known_words": 1007,
+            "line_aligned_wer": 0.7735849056603774,
+            "kendall_tau": null,
+            "kendall_pair_count": 0,
+            "matching": "axis-aligned source-frame bounding-box IoU >= 0.2, one-to-one maximum weight; matched-track boxes and line order inherited from frozen hOCR, PDF line geometry/order not independently assessed"
           },
           "matched_ocr_same_gt_lines": {
-            "shared_gt_lines": 72,
-            "known_characters": 2130,
-            "known_words": 723,
-            "frozen_cer": 0.49014084507042255,
-            "pdf_cer": 0.4887323943661972,
-            "frozen_wer": 0.7925311203319502,
-            "pdf_wer": 0.7897648686030428,
+            "shared_gt_lines": 103,
+            "known_characters": 3086,
+            "known_words": 1007,
+            "frozen_cer": 0.45560596241088785,
+            "pdf_cer": 0.45560596241088785,
+            "frozen_wer": 0.7735849056603774,
+            "pdf_wer": 0.7735849056603774,
             "method": "compare both OCR texts against exactly the same GT lines, matched independently by geometry"
           },
           "recognized_word_search": {
-            "recognized_frozen_ocr_words_in_sample": 11,
-            "pdf_search_hits": 11,
+            "recognized_frozen_ocr_words_in_sample": 15,
+            "pdf_search_hits": 15,
             "hit_rate": 1.0,
             "semantics": "exact reading-normalized GT token present in selected frozen hOCR; case-insensitive literal PDFium search"
           }
@@ -2717,6 +2854,7 @@
             }
           },
           "status": "ok",
+          "locked_text_partition": null,
           "line_metrics": {
             "gt_count": 107,
             "output_count": 192,
@@ -2736,19 +2874,19 @@
             "matching": "axis-aligned source-frame bounding-box IoU >= 0.2, one-to-one maximum weight"
           },
           "matched_ocr_same_gt_lines": {
-            "shared_gt_lines": 73,
-            "known_characters": 2157,
-            "known_words": 731,
-            "frozen_cer": 0.48817802503477054,
-            "pdf_cer": 0.4019471488178025,
-            "frozen_wer": 0.7906976744186046,
-            "pdf_wer": 0.66484268125855,
+            "shared_gt_lines": 103,
+            "known_characters": 3086,
+            "known_words": 1007,
+            "frozen_cer": 0.45560596241088785,
+            "pdf_cer": 0.3694102397926118,
+            "frozen_wer": 0.7735849056603774,
+            "pdf_wer": 0.6305858987090367,
             "method": "compare both OCR texts against exactly the same GT lines, matched independently by geometry"
           },
           "recognized_word_search": {
-            "recognized_frozen_ocr_words_in_sample": 11,
-            "pdf_search_hits": 5,
-            "hit_rate": 0.45454545454545453,
+            "recognized_frozen_ocr_words_in_sample": 15,
+            "pdf_search_hits": 7,
+            "hit_rate": 0.4666666666666667,
             "semantics": "exact reading-normalized GT token present in selected frozen hOCR; case-insensitive literal PDFium search"
           }
         }
