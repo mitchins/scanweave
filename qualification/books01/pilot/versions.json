@@ -1,0 +1,85 @@
+{
+  "python": "3.12.3 (main, Aug 31 2026, 10:18:26) [GCC 13.3.0]",
+  "platform": "Linux-7.0.0-38-generic-x86_64-with-glibc2.39",
+  "executables": {
+    "/data/coding/scanweave/work/scanweave-ab7dfba/target/release/scanweave": {
+      "sha256": "53908c50537e5cdcf2ee5bf84d6ca5f56ca4c6c2560ca43aade0c8deee4914c9"
+    },
+    "/usr/bin/tesseract": {
+      "sha256": "9f831cab7525c3dab04af41bda35182af7ea1df9dceeaaa2f3bf207ac45c06a5"
+    },
+    "/usr/bin/pdftotext": {
+      "sha256": "88263e2333fa712d6eadfc69dd2daf826792a67abb14f4d2110673d5f195b154"
+    },
+    "/usr/bin/pdftoppm": {
+      "sha256": "ab7c91f0f144335ad7696f4f23aefbd564ef67c099290bd8f813cdbb47cd1e9e"
+    },
+    "/data/coding/scanweave/qualification/.venv/bin/recode_pdf": {
+      "sha256": "570af8c486f193a925f65cb3cb618faafcc79672359a4382cd5c1dc052fb5a38"
+    },
+    "/data/coding/scanweave/qualification/.venv/bin/ocrmypdf": {
+      "sha256": "bc5cf1f89a672bdaf232c864e8c9287ff9993c9548f91d98f0bccca808bcc145"
+    }
+  },
+  "scanweave_commit": "ab7dfba",
+  "tesseract_full": "tesseract 5.3.4\n leptonica-1.82.0\n  libgif 5.2.1 : libjpeg 8d (libjpeg-turbo 2.1.5) : libpng 1.6.43 : libtiff 4.5.1 : zlib 1.3 : libwebp 1.3.2 : libopenjp2 2.5.0\n Found AVX2\n Found AVX\n Found FMA\n Found SSE4.1\n Found OpenMP 201511\n Found libarchive 3.7.2 zlib/1.3 liblzma/5.4.5 bz2lib/1.0.8 liblz4/1.9.4 libzstd/1.5.5\n Found libcurl/8.5.0 OpenSSL/3.0.13 zlib/1.3 brotli/1.1.0 zstd/1.5.5 libidn2/2.3.7 libpsl/0.21.2 (+libidn2/2.3.7) libssh/0.10.6/openssl/zlib nghttp2/1.59.0 librtmp/2.3 OpenLDAP/2.6.10",
+  "tessdata_best_commit": "e12c65a915945e4c28e237a9b52bc4a8f39a0cec",
+  "traineddata_sha256": {
+    "deu_latf.traineddata": "429b8c33d37e1a4823a2bb082a644ff13e252f735b7945e08a518d22ddcc459e",
+    "deu.traineddata": "8407331d6aa0229dc927685c01a7938fc5a641d1a9524f74838cdac599f0d06e",
+    "eng.traineddata": "8280aed0782fe27257a68ea10fe7ef324ca0f8d85bd2fd145d1c2b560bcb66ba",
+    "fra.traineddata": "907743d98915c91a3906dfbf6e48b97598346698fe53aaa797e1a064ffcac913",
+    "grc.traineddata": "dfc9bda286cd9d8755b1832e5731a5425d1cf0803393a5fa6dee078466178cf1",
+    "lat.traineddata": "60054dd32ac03ebd9b4f87d0665bd491a7ffe0d3ee99ceb91aefaf348b65e94f",
+    "osd.traineddata": "9cf5d576fcc47564f11265841e5ca839001e7e6f38ff7f7aacf46d15a96b00ff",
+    "rus.traineddata": "b617eb6830ffabaaa795dd87ea7fd251adfe9cf0efe05eb9a2e8128b7728d6b6",
+    "script/Fraktur.traineddata": "29a867a25f1b00a5e9827356582515619d5102688bc1d14015789c78941116ee",
+    "script/Latin.traineddata": "cf7216998bf7f363f18e3def04cc6b28ae954d2a5a3bdad09f743c9d3538ef35"
+  },
+  "hocr_config": {
+    "origin": "/usr/share/tesseract-ocr/5/tessdata/configs/hocr",
+    "sha256": "d6a7ec7c5143317a59fce2393054f6b7a8261824b934e7426fdd24febc929ad6",
+    "additional_manifest": "$B/tessdata_best/SHA256SUMS.additions"
+  },
+  "txt_config": {
+    "origin": "/usr/share/tesseract-ocr/5/tessdata/configs/txt",
+    "sha256": "9bcbdbe285fd3a024be563cb237751ceb3435d86610e231f08894023321af5d7",
+    "additional_manifest": "$B/tessdata_best/SHA256SUMS.additions"
+  },
+  "ocrmypdf": "17.13.0",
+  "archive_pdf_tools": "1.5.7",
+  "archive_shim": "LEDGER.md: getPageImageList -> get_page_images and modulo index guard",
+  "pikepdf": "10.17.0",
+  "pdfium": "156.0.8076.0",
+  "mupdf": "PyMuPDF 1.23.8: Python bindings for the MuPDF 1.23.7 library.\nVersion date: 2023-12-19 00:00:01.\nBuilt for Python 3.12 on linux (64-bit).",
+  "poppler": "pdftoppm version 24.02.0\nCopyright 2005-2024 The Poppler Developers - http://poppler.freedesktop.org\nCopyright 1996-2011, 2022 Glyph & Cog, LLC",
+  "adobe": "Acrobat XI 11.0.20; existing opaque GUI output, default OCR language",
+  "optional_optimisers": {
+    "pngquant": null,
+    "jbig2": null,
+    "jbig2enc": null
+  },
+  "renderer_binaries": {
+    "pdfium": "pypdfium2 bundled native library",
+    "mupdf": "PyMuPDF bundled library",
+    "poppler": "/usr/bin/pdftoppm"
+  },
+  "packages": {
+    "numpy": "2.5.4",
+    "scipy": "1.18.1",
+    "pillow": "13.0.0",
+    "scikit-image": "0.26.0",
+    "pypdfium2": "5.14.0",
+    "PyMuPDF": "1.23.8"
+  },
+  "native_renderer_libraries": {
+    "/data/coding/scanweave/qualification/.venv/lib/python3.12/site-packages/fitz/_fitz.cpython-312-x86_64-linux-gnu.so": "921718c1db10ce3e90482d003b6f89158f6fe0ac7c4c96eec6f8801cd5904919",
+    "/data/coding/scanweave/qualification/.venv/lib/python3.12/site-packages/fitz/libmupdf.so": "449b032d0f5c5394f71de62adac0ef3f359cd63fd747ba00d58b9b2ed0298f4f",
+    "/data/coding/scanweave/qualification/.venv/lib/python3.12/site-packages/pypdfium2_raw/libpdfium.so": "fd4de9f91f183476d04b1bc3fd17dacd95aba349c55d2c376512d95e082b441e"
+  },
+  "edit_distance": {
+    "source_sha256": "ea75239df2d521431a1697e49617b1f9f462ef0d4db5a066540ce6cdda7d6ac8",
+    "library_sha256": "0ea28804199c0abe945471e0e408ecdd04d53c29048e6e5c4f7221056d7aae6e",
+    "compiler": "cc (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0\nCopyright (C) 2023 Free Software Foundation, Inc.\nThis is free software; see the source for copying conditions.  There is NO\nwarranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE."
+  }
+}

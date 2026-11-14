@@ -1,0 +1,4986 @@
+{
+  "quiver/aventinus_grammatica_1515_0008": {
+    "dpi": 300.0,
+    "dpi_confidence": "moderate",
+    "source_type": "quiver-original-tiff",
+    "frozen_hocr_scores": {
+      "diplomatic": {
+        "cer": 0.5541922290388548,
+        "character_edits": 813,
+        "known_characters": 1467,
+        "unknown_characters": 0,
+        "wer": 0.9414414414414415,
+        "word_edits": 209,
+        "known_words": 222,
+        "bag_character_recall": 0.8568507157464212
+      },
+      "reading": {
+        "cer": 0.5547143840330351,
+        "character_edits": 806,
+        "known_characters": 1453,
+        "unknown_characters": 0,
+        "wer": 0.9444444444444444,
+        "word_edits": 204,
+        "known_words": 216,
+        "bag_character_recall": 0.874741913282863
+      }
+    },
+    "rows": {
+      "src": {
+        "status": "ok",
+        "size": {
+          "file_bytes": 10289513,
+          "stream_bytes_by_category": {
+            "page_content_stream": 42,
+            "background_image:/FlateDecode": 10288701
+          },
+          "stream_count_by_category": {
+            "page_content_stream": 1,
+            "background_image:/FlateDecode": 1
+          },
+          "page_font_resource_count": 0,
+          "structure_xref_dictionary_and_unclassified_bytes": 770,
+          "reconciles": true,
+          "image_role_method": "largest non-mask image is background; remaining non-mask images foreground; masks from ImageMask, Mask and SMask"
+        },
+        "size_ratio": 1.0,
+        "dpi_confidence": "moderate",
+        "source_type": "quiver-original-tiff",
+        "extraction": {
+          "poppler_plain": {
+            "scores": {
+              "diplomatic": {
+                "cer": 1.0,
+                "character_edits": 1467,
+                "known_characters": 1467,
+                "unknown_characters": 0,
+                "wer": 1.0,
+                "word_edits": 222,
+                "known_words": 222,
+                "bag_character_recall": 0.0
+              },
+              "reading": {
+                "cer": 1.0,
+                "character_edits": 1453,
+                "known_characters": 1453,
+                "unknown_characters": 0,
+                "wer": 1.0,
+                "word_edits": 216,
+                "known_words": 216,
+                "bag_character_recall": 0.0
+              }
+            },
+            "empty_text_layer": true,
+            "control_characters": 1,
+            "private_use_characters": 0,
+            "frozen_hocr_words_absent": 179
+          },
+          "poppler_raw": {
+            "scores": {
+              "diplomatic": {
+                "cer": 1.0,
+                "character_edits": 1467,
+                "known_characters": 1467,
+                "unknown_characters": 0,
+                "wer": 1.0,
+                "word_edits": 222,
+                "known_words": 222,
+                "bag_character_recall": 0.0
+              },
+              "reading": {
+                "cer": 1.0,
+                "character_edits": 1453,
+                "known_characters": 1453,
+                "unknown_characters": 0,
+                "wer": 1.0,
+                "word_edits": 216,
+                "known_words": 216,
+                "bag_character_recall": 0.0
+              }
+            },
+            "empty_text_layer": true,
+            "control_characters": 1,
+            "private_use_characters": 0,
+            "frozen_hocr_words_absent": 179
+          },
+          "pdfium": {
+            "scores": {
+              "diplomatic": {
+                "cer": 1.0,
+                "character_edits": 1467,
+                "known_characters": 1467,
+                "unknown_characters": 0,
+                "wer": 1.0,
+                "word_edits": 222,
+                "known_words": 222,
+                "bag_character_recall": 0.0
+              },
+              "reading": {
+                "cer": 1.0,
+                "character_edits": 1453,
+                "known_characters": 1453,
+                "unknown_characters": 0,
+                "wer": 1.0,
+                "word_edits": 216,
+                "known_words": 216,
+                "bag_character_recall": 0.0
+              }
+            },
+            "empty_text_layer": true,
+            "control_characters": 0,
+            "private_use_characters": 0,
+            "frozen_hocr_words_absent": 179
+          }
+        },
+        "poppler_pdfium_reading_disagreement": {
+          "character_edits": 0
+        }
+      },
+      "sw-E": {
+        "status": "ok",
+        "size": {
+          "file_bytes": 567928,
+          "stream_bytes_by_category": {
+            "font_program": 3003,
+            "other_stream": 1674,
+            "page_content_stream": 11968,
+            "background_image:/DCTDecode": 550503
+          },
+          "stream_count_by_category": {
+            "font_program": 1,
+            "other_stream": 4,
+            "page_content_stream": 1,
+            "background_image:/DCTDecode": 1
+          },
+          "page_font_resource_count": 1,
+          "structure_xref_dictionary_and_unclassified_bytes": 780,
+          "reconciles": true,
+          "image_role_method": "largest non-mask image is background; remaining non-mask images foreground; masks from ImageMask, Mask and SMask"
+        },
+        "size_ratio": 0.05519483769542834,
+        "dpi_confidence": "moderate",
+        "source_type": "quiver-original-tiff",
+        "extraction": {
+          "poppler_plain": {
+            "scores": {
+              "diplomatic": {
+                "cer": 0.6591683708248125,
+                "character_edits": 967,
+                "known_characters": 1467,
+                "unknown_characters": 0,
+                "wer": 0.9414414414414415,
+                "word_edits": 209,
+                "known_words": 222,
+                "bag_character_recall": 0.841854124062713
+              },
+              "reading": {
+                "cer": 0.6510667584308327,
+                "character_edits": 946,
+                "known_characters": 1453,
+                "unknown_characters": 0,
+                "wer": 0.9398148148148148,
+                "word_edits": 203,
+                "known_words": 216,
+                "bag_character_recall": 0.8568479008947006
+              }
+            },
+            "empty_text_layer": false,
+            "control_characters": 1,
+            "private_use_characters": 0,
+            "frozen_hocr_words_absent": 39
+          },
+          "poppler_raw": {
+            "scores": {
+              "diplomatic": {
+                "cer": 0.5719154737559645,
+                "character_edits": 839,
+                "known_characters": 1467,
+                "unknown_characters": 0,
+                "wer": 0.9684684684684685,
+                "word_edits": 215,
+                "known_words": 222,
+                "bag_character_recall": 0.8111792774369462
+              },
+              "reading": {
+                "cer": 0.5705437026841018,
+                "character_edits": 829,
+                "known_characters": 1453,
+                "unknown_characters": 0,
+                "wer": 0.9675925925925926,
+                "word_edits": 209,
+                "known_words": 216,
+                "bag_character_recall": 0.8265657260839642
+              }
+            },
+            "empty_text_layer": false,
+            "control_characters": 1,
+            "private_use_characters": 0,
+            "frozen_hocr_words_absent": 97
+          },
+          "pdfium": {
+            "scores": {
+              "diplomatic": {
+                "cer": 0.558282208588957,
+                "character_edits": 819,
+                "known_characters": 1467,
+                "unknown_characters": 0,
+                "wer": 0.9414414414414415,
+                "word_edits": 209,
+                "known_words": 222,
+                "bag_character_recall": 0.8561690524880708
+              },
+              "reading": {
+                "cer": 0.5588437715072264,
+                "character_edits": 812,
+                "known_characters": 1453,
+                "unknown_characters": 0,
+                "wer": 0.9398148148148148,
+                "word_edits": 203,
+                "known_words": 216,
+                "bag_character_recall": 0.8719889883000688
+              }
+            },
+            "empty_text_layer": false,
+            "control_characters": 0,
+            "private_use_characters": 0,
+            "frozen_hocr_words_absent": 11
+          }
+        },
+        "poppler_pdfium_reading_disagreement": {
+          "character_edits": 837
+        }
+      },
+      "sw-M": {
+        "status": "ok",
+        "size": {
+          "file_bytes": 567928,
+          "stream_bytes_by_category": {
+            "font_program": 3003,
+            "other_stream": 1674,
+            "page_content_stream": 11968,
+            "background_image:/DCTDecode": 550503
+          },
+          "stream_count_by_category": {
+            "font_program": 1,
+            "other_stream": 4,
+            "page_content_stream": 1,
+            "background_image:/DCTDecode": 1
+          },
+          "page_font_resource_count": 1,
+          "structure_xref_dictionary_and_unclassified_bytes": 780,
+          "reconciles": true,
+          "image_role_method": "largest non-mask image is background; remaining non-mask images foreground; masks from ImageMask, Mask and SMask"
+        },
+        "size_ratio": 0.05519483769542834,
+        "dpi_confidence": "moderate",
+        "source_type": "quiver-original-tiff",
+        "extraction": {
+          "poppler_plain": {
+            "scores": {
+              "diplomatic": {
+                "cer": 0.6591683708248125,
+                "character_edits": 967,
+                "known_characters": 1467,
+                "unknown_characters": 0,
+                "wer": 0.9414414414414415,
+                "word_edits": 209,
+                "known_words": 222,
+                "bag_character_recall": 0.841854124062713
+              },
+              "reading": {
+                "cer": 0.6510667584308327,
+                "character_edits": 946,
+                "known_characters": 1453,
+                "unknown_characters": 0,
+                "wer": 0.9398148148148148,
+                "word_edits": 203,
+                "known_words": 216,
+                "bag_character_recall": 0.8568479008947006
+              }
+            },
+            "empty_text_layer": false,
+            "control_characters": 1,
+            "private_use_characters": 0,
+            "frozen_hocr_words_absent": 39
+          },
+          "poppler_raw": {
+            "scores": {
+              "diplomatic": {
+                "cer": 0.5719154737559645,
+                "character_edits": 839,
+                "known_characters": 1467,
+                "unknown_characters": 0,
+                "wer": 0.9684684684684685,
+                "word_edits": 215,
+                "known_words": 222,
+                "bag_character_recall": 0.8111792774369462
+              },
+              "reading": {
+                "cer": 0.5705437026841018,
+                "character_edits": 829,
+                "known_characters": 1453,
+                "unknown_characters": 0,
+                "wer": 0.9675925925925926,
+                "word_edits": 209,
+                "known_words": 216,
+                "bag_character_recall": 0.8265657260839642
+              }
+            },
+            "empty_text_layer": false,
+            "control_characters": 1,
+            "private_use_characters": 0,
+            "frozen_hocr_words_absent": 97
+          },
+          "pdfium": {
+            "scores": {
+              "diplomatic": {
+                "cer": 0.558282208588957,
+                "character_edits": 819,
+                "known_characters": 1467,
+                "unknown_characters": 0,
+                "wer": 0.9414414414414415,
+                "word_edits": 209,
+                "known_words": 222,
+                "bag_character_recall": 0.8561690524880708
+              },
+              "reading": {
+                "cer": 0.5588437715072264,
+                "character_edits": 812,
+                "known_characters": 1453,
+                "unknown_characters": 0,
+                "wer": 0.9398148148148148,
+                "word_edits": 203,
+                "known_words": 216,
+                "bag_character_recall": 0.8719889883000688
+              }
+            },
+            "empty_text_layer": false,
+            "control_characters": 0,
+            "private_use_characters": 0,
+            "frozen_hocr_words_absent": 11
+          }
+        },
+        "poppler_pdfium_reading_disagreement": {
+          "character_edits": 837
+        }
+      },
+      "sw-build": {
+        "status": "ok",
+        "size": {
+          "file_bytes": 576609,
+          "stream_bytes_by_category": {
+            "font_program": 11643,
+            "other_stream": 1700,
+            "page_content_stream": 11980,
+            "background_image:/DCTDecode": 550503
+          },
+          "stream_count_by_category": {
+            "font_program": 1,
+            "other_stream": 4,
+            "page_content_stream": 1,
+            "background_image:/DCTDecode": 1
+          },
+          "page_font_resource_count": 1,
+          "structure_xref_dictionary_and_unclassified_bytes": 783,
+          "reconciles": true,
+          "image_role_method": "largest non-mask image is background; remaining non-mask images foreground; masks from ImageMask, Mask and SMask"
+        },
+        "size_ratio": 0.05603851222113233,
+        "dpi_confidence": "moderate",
+        "source_type": "quiver-original-tiff",
+        "extraction": {
+          "poppler_plain": {
+            "scores": {
+              "diplomatic": {
+                "cer": 0.6591683708248125,
+                "character_edits": 967,
+                "known_characters": 1467,
+                "unknown_characters": 0,
+                "wer": 0.9414414414414415,
+                "word_edits": 209,
+                "known_words": 222,
+                "bag_character_recall": 0.841854124062713
+              },
+              "reading": {
+                "cer": 0.6510667584308327,
+                "character_edits": 946,
+                "known_characters": 1453,
+                "unknown_characters": 0,
+                "wer": 0.9398148148148148,
+                "word_edits": 203,
+                "known_words": 216,
+                "bag_character_recall": 0.8568479008947006
+              }
+            },
+            "empty_text_layer": false,
+            "control_characters": 1,
+            "private_use_characters": 0,
+            "frozen_hocr_words_absent": 39
+          },
+          "poppler_raw": {
+            "scores": {
+              "diplomatic": {
+                "cer": 0.5719154737559645,
+                "character_edits": 839,
+                "known_characters": 1467,
+                "unknown_characters": 0,
+                "wer": 0.9684684684684685,
+                "word_edits": 215,
+                "known_words": 222,
+                "bag_character_recall": 0.8111792774369462
+              },
+              "reading": {
+                "cer": 0.5705437026841018,
+                "character_edits": 829,
+                "known_characters": 1453,
+                "unknown_characters": 0,
+                "wer": 0.9675925925925926,
+                "word_edits": 209,
+                "known_words": 216,
+                "bag_character_recall": 0.8265657260839642
+              }
+            },
+            "empty_text_layer": false,
+            "control_characters": 1,
+            "private_use_characters": 0,
+            "frozen_hocr_words_absent": 97
+          },
+          "pdfium": {
+            "scores": {
+              "diplomatic": {
+                "cer": 0.558282208588957,
+                "character_edits": 819,
+                "known_characters": 1467,
+                "unknown_characters": 0,
+                "wer": 0.9414414414414415,
+                "word_edits": 209,
+                "known_words": 222,
+                "bag_character_recall": 0.8561690524880708
+              },
+              "reading": {
+                "cer": 0.5588437715072264,
+                "character_edits": 812,
+                "known_characters": 1453,
+                "unknown_characters": 0,
+                "wer": 0.9398148148148148,
+                "word_edits": 203,
+                "known_words": 216,
+                "bag_character_recall": 0.8719889883000688
+              }
+            },
+            "empty_text_layer": false,
+            "control_characters": 0,
+            "private_use_characters": 0,
+            "frozen_hocr_words_absent": 11
+          }
+        },
+        "poppler_pdfium_reading_disagreement": {
+          "character_edits": 837
+        }
+      },
+      "ocrmypdf-E": {
+        "status": "ok",
+        "size": {
+          "file_bytes": 10301842,
+          "stream_bytes_by_category": {
+            "other_stream": 11048,
+            "page_content_stream": 77,
+            "background_image:/FlateDecode": 10288701
+          },
+          "stream_count_by_category": {
+            "other_stream": 9,
+            "page_content_stream": 1,
+            "background_image:/FlateDecode": 1
+          },
+          "page_font_resource_count": 0,
+          "structure_xref_dictionary_and_unclassified_bytes": 2016,
+          "reconciles": true,
+          "image_role_method": "largest non-mask image is background; remaining non-mask images foreground; masks from ImageMask, Mask and SMask"
+        },
+        "size_ratio": 1.001198210255432,
+        "dpi_confidence": "moderate",
+        "source_type": "quiver-original-tiff",
+        "extraction": {
+          "poppler_plain": {
+            "scores": {
+              "diplomatic": {
+                "cer": 0.569188820722563,
+                "character_edits": 835,
+                "known_characters": 1467,
+                "unknown_characters": 0,
+                "wer": 0.9594594594594594,
+                "word_edits": 213,
+                "known_words": 222,
+                "bag_character_recall": 0.820040899795501
+              },
+              "reading": {
+                "cer": 0.5498967653131452,
+                "character_edits": 799,
+                "known_characters": 1453,
+                "unknown_characters": 0,
+                "wer": 0.9444444444444444,
+                "word_edits": 204,
+                "known_words": 216,
+                "bag_character_recall": 0.860977288368892
+              }
+            },
+            "empty_text_layer": false,
+            "control_characters": 1,
+            "private_use_characters": 0,
+            "frozen_hocr_words_absent": 110
+          },
+          "poppler_raw": {
+            "scores": {
+              "diplomatic": {
+                "cer": 0.5855487389229721,
+                "character_edits": 859,
+                "known_characters": 1467,
+                "unknown_characters": 0,
+                "wer": 0.9684684684684685,
+                "word_edits": 215,
+                "known_words": 222,
+                "bag_character_recall": 0.7948193592365371
+              },
+              "reading": {
+                "cer": 0.5671025464556091,
+                "character_edits": 824,
+                "known_characters": 1453,
+                "unknown_characters": 0,
+                "wer": 0.9583333333333334,
+                "word_edits": 207,
+                "known_words": 216,
+                "bag_character_recall": 0.8355127322780455
+              }
+            },
+            "empty_text_layer": false,
+            "control_characters": 1,
+            "private_use_characters": 0,
+            "frozen_hocr_words_absent": 131
+          },
+          "pdfium": {
+            "scores": {
+              "diplomatic": {
+                "cer": 0.5705521472392638,
+                "character_edits": 837,
+                "known_characters": 1467,
+                "unknown_characters": 0,
+                "wer": 0.9594594594594594,
+                "word_edits": 213,
+                "known_words": 222,
+                "bag_character_recall": 0.8316291751874574
+              },
+              "reading": {
+                "cer": 0.553337921541638,
+                "character_edits": 804,
+                "known_characters": 1453,
+                "unknown_characters": 0,
+                "wer": 0.9398148148148148,
+                "word_edits": 203,
+                "known_words": 216,
+                "bag_character_recall": 0.8733654507914659
+              }
+            },
+            "empty_text_layer": false,
+            "control_characters": 0,
+            "private_use_characters": 0,
+            "frozen_hocr_words_absent": 99
+          }
+        },
+        "poppler_pdfium_reading_disagreement": {
+          "character_edits": 73
+        }
+      },
+      "mrc-M": {
+        "status": "ok",
+        "size": {
+          "file_bytes": 103604,
+          "stream_bytes_by_category": {
+            "other_stream": 4202,
+            "font_program": 333,
+            "page_content_stream": 4065,
+            "background_image:/JPXDecode": 25557,
+            "foreground_image:/JPXDecode": 17024,
+            "mask:/CCITTFaxDecode": 48453
+          },
+          "stream_count_by_category": {
+            "other_stream": 4,
+            "font_program": 1,
+            "page_content_stream": 3,
+            "background_image:/JPXDecode": 1,
+            "foreground_image:/JPXDecode": 1,
+            "mask:/CCITTFaxDecode": 1
+          },
+          "page_font_resource_count": 1,
+          "structure_xref_dictionary_and_unclassified_bytes": 3970,
+          "reconciles": true,
+          "image_role_method": "largest non-mask image is background; remaining non-mask images foreground; masks from ImageMask, Mask and SMask"
+        },
+        "size_ratio": 0.010068892473336687,
+        "dpi_confidence": "moderate",
+        "source_type": "quiver-original-tiff",
+        "extraction": {
+          "poppler_plain": {
+            "scores": {
+              "diplomatic": {
+                "cer": 0.5412406271301977,
+                "character_edits": 794,
+                "known_characters": 1467,
+                "unknown_characters": 0,
+                "wer": 0.9414414414414415,
+                "word_edits": 209,
+                "known_words": 222,
+                "bag_character_recall": 0.8404907975460123
+              },
+              "reading": {
+                "cer": 0.534755677907777,
+                "character_edits": 777,
+                "known_characters": 1453,
+                "unknown_characters": 0,
+                "wer": 0.9398148148148148,
+                "word_edits": 203,
+                "known_words": 216,
+                "bag_character_recall": 0.8575361321403991
+              }
+            },
+            "empty_text_layer": false,
+            "control_characters": 1,
+            "private_use_characters": 0,
+            "frozen_hocr_words_absent": 37
+          },
+          "poppler_raw": {
+            "scores": {
+              "diplomatic": {
+                "cer": 0.5507839127471029,
+                "character_edits": 808,
+                "known_characters": 1467,
+                "unknown_characters": 0,
+                "wer": 0.9504504504504504,
+                "word_edits": 211,
+                "known_words": 222,
+                "bag_character_recall": 0.8391274710293115
+              },
+              "reading": {
+                "cer": 0.5505849965588437,
+                "character_edits": 800,
+                "known_characters": 1453,
+                "unknown_characters": 0,
+                "wer": 0.9490740740740741,
+                "word_edits": 205,
+                "known_words": 216,
+                "bag_character_recall": 0.8554714384033035
+              }
+            },
+            "empty_text_layer": false,
+            "control_characters": 1,
+            "private_use_characters": 0,
+            "frozen_hocr_words_absent": 40
+          },
+          "pdfium": {
+            "scores": {
+              "diplomatic": {
+                "cer": 0.5548738922972052,
+                "character_edits": 814,
+                "known_characters": 1467,
+                "unknown_characters": 0,
+                "wer": 0.9369369369369369,
+                "word_edits": 208,
+                "known_words": 222,
+                "bag_character_recall": 0.8554873892297206
+              },
+              "reading": {
+                "cer": 0.5540261527873366,
+                "character_edits": 805,
+                "known_characters": 1453,
+                "unknown_characters": 0,
+                "wer": 0.9398148148148148,
+                "word_edits": 203,
+                "known_words": 216,
+                "bag_character_recall": 0.8726772195457674
+              }
+            },
+            "empty_text_layer": false,
+            "control_characters": 0,
+            "private_use_characters": 0,
+            "frozen_hocr_words_absent": 4
+          }
+        },
+        "poppler_pdfium_reading_disagreement": {
+          "character_edits": 176
+        }
+      },
+      "adobe-E": {
+        "status": "ok",
+        "size": {
+          "file_bytes": 509174,
+          "stream_bytes_by_category": {
+            "other_stream": 14914,
+            "page_content_stream": 8782,
+            "font_program": 183176,
+            "foreground_image:pikepdf.Array([ \"/FlateDecode\", \"/DCTDecode\" ])": 42032,
+            "background_image:pikepdf.Array([ \"/FlateDecode\", \"/DCTDecode\" ])": 213218,
+            "foreground_image:/DCTDecode": 40146
+          },
+          "stream_count_by_category": {
+            "other_stream": 21,
+            "page_content_stream": 8,
+            "font_program": 14,
+            "foreground_image:pikepdf.Array([ \"/FlateDecode\", \"/DCTDecode\" ])": 1,
+            "background_image:pikepdf.Array([ \"/FlateDecode\", \"/DCTDecode\" ])": 1,
+            "foreground_image:/DCTDecode": 12
+          },
+          "page_font_resource_count": 14,
+          "structure_xref_dictionary_and_unclassified_bytes": 6906,
+          "reconciles": true,
+          "image_role_method": "largest non-mask image is background; remaining non-mask images foreground; masks from ImageMask, Mask and SMask"
+        },
+        "size_ratio": 0.04948475209662498,
+        "dpi_confidence": "moderate",
+        "source_type": "quiver-original-tiff",
+        "extraction": {
+          "poppler_plain": {
+            "scores": {
+              "diplomatic": {
+                "cer": 0.809134287661895,
+                "character_edits": 1187,
+                "known_characters": 1467,
+                "unknown_characters": 0,
+                "wer": 1.0765765765765767,
+                "word_edits": 239,
+                "known_words": 222,
+                "bag_character_recall": 0.732788002726653
+              },
+              "reading": {
+                "cer": 0.8086717136958018,
+                "character_edits": 1175,
+                "known_characters": 1453,
+                "unknown_characters": 0,
+                "wer": 1.1018518518518519,
+                "word_edits": 238,
+                "known_words": 216,
+                "bag_character_recall": 0.7494838265657261
+              }
+            },
+            "empty_text_layer": false,
+            "control_characters": 1,
+            "private_use_characters": 0,
+            "frozen_hocr_words_absent": 173
+          },
+          "poppler_raw": {
+            "scores": {
+              "diplomatic": {
+                "cer": 0.8186775732788003,
+                "character_edits": 1201,
+                "known_characters": 1467,
+                "unknown_characters": 0,
+                "wer": 1.0,
+                "word_edits": 222,
+                "known_words": 222,
+                "bag_character_recall": 0.7116564417177914
+              },
+              "reading": {
+                "cer": 0.8148657949070888,
+                "character_edits": 1184,
+                "known_characters": 1453,
+                "unknown_characters": 0,
+                "wer": 1.0,
+                "word_edits": 216,
+                "known_words": 216,
+                "bag_character_recall": 0.7309015829318651
+              }
+            },
+            "empty_text_layer": false,
+            "control_characters": 1,
+            "private_use_characters": 0,
+            "frozen_hocr_words_absent": 173
+          },
+          "pdfium": {
+            "scores": {
+              "diplomatic": {
+                "cer": 0.8084526244035446,
+                "character_edits": 1186,
+                "known_characters": 1467,
+                "unknown_characters": 0,
+                "wer": 1.1576576576576576,
+                "word_edits": 257,
+                "known_words": 222,
+                "bag_character_recall": 0.7307430129516019
+              },
+              "reading": {
+                "cer": 0.8059187887130076,
+                "character_edits": 1171,
+                "known_characters": 1453,
+                "unknown_characters": 0,
+                "wer": 1.1805555555555556,
+                "word_edits": 255,
+                "known_words": 216,
+                "bag_character_recall": 0.7487955953200275
+              }
+            },
+            "empty_text_layer": false,
+            "control_characters": 0,
+            "private_use_characters": 0,
+            "frozen_hocr_words_absent": 173
+          }
+        },
+        "poppler_pdfium_reading_disagreement": {
+          "character_edits": 256
+        }
+      }
+    }
+  },
+  "quiver/luther_babstum_1526_0011": {
+    "dpi": 300.0,
+    "dpi_confidence": "moderate",
+    "source_type": "quiver-original-tiff",
+    "frozen_hocr_scores": {
+      "diplomatic": {
+        "cer": 0.22742474916387959,
+        "character_edits": 136,
+        "known_characters": 598,
+        "unknown_characters": 0,
+        "wer": 0.6857142857142857,
+        "word_edits": 72,
+        "known_words": 105,
+        "bag_character_recall": 0.8110367892976589
+      },
+      "reading": {
+        "cer": 0.22666666666666666,
+        "character_edits": 136,
+        "known_characters": 600,
+        "unknown_characters": 0,
+        "wer": 0.6857142857142857,
+        "word_edits": 72,
+        "known_words": 105,
+        "bag_character_recall": 0.82
+      }
+    },
+    "rows": {
+      "src": {
+        "status": "ok",
+        "size": {
+          "file_bytes": 9377387,
+          "stream_bytes_by_category": {
+            "page_content_stream": 42,
+            "background_image:/FlateDecode": 9376576
+          },
+          "stream_count_by_category": {
+            "page_content_stream": 1,
+            "background_image:/FlateDecode": 1
+          },
+          "page_font_resource_count": 0,
+          "structure_xref_dictionary_and_unclassified_bytes": 769,
+          "reconciles": true,
+          "image_role_method": "largest non-mask image is background; remaining non-mask images foreground; masks from ImageMask, Mask and SMask"
+        },
+        "size_ratio": 1.0,
+        "dpi_confidence": "moderate",
+        "source_type": "quiver-original-tiff",
+        "extraction": {
+          "poppler_plain": {
+            "scores": {
+              "diplomatic": {
+                "cer": 1.0,
+                "character_edits": 598,
+                "known_characters": 598,
+                "unknown_characters": 0,
+                "wer": 1.0,
+                "word_edits": 105,
+                "known_words": 105,
+                "bag_character_recall": 0.0
+              },
+              "reading": {
+                "cer": 1.0,
+                "character_edits": 600,
+                "known_characters": 600,
+                "unknown_characters": 0,
+                "wer": 1.0,
+                "word_edits": 105,
+                "known_words": 105,
+                "bag_character_recall": 0.0
+              }
+            },
+            "empty_text_layer": true,
+            "control_characters": 1,
+            "private_use_characters": 0,
+            "frozen_hocr_words_absent": 67
+          },
+          "poppler_raw": {
+            "scores": {
+              "diplomatic": {
+                "cer": 1.0,
+                "character_edits": 598,
+                "known_characters": 598,
+                "unknown_characters": 0,
+                "wer": 1.0,
+                "word_edits": 105,
+                "known_words": 105,
+                "bag_character_recall": 0.0
+              },
+              "reading": {
+                "cer": 1.0,
+                "character_edits": 600,
+                "known_characters": 600,
+                "unknown_characters": 0,
+                "wer": 1.0,
+                "word_edits": 105,
+                "known_words": 105,
+                "bag_character_recall": 0.0
+              }
+            },
+            "empty_text_layer": true,
+            "control_characters": 1,
+            "private_use_characters": 0,
+            "frozen_hocr_words_absent": 67
+          },
+          "pdfium": {
+            "scores": {
+              "diplomatic": {
+                "cer": 1.0,
+                "character_edits": 598,
+                "known_characters": 598,
+                "unknown_characters": 0,
+                "wer": 1.0,
+                "word_edits": 105,
+                "known_words": 105,
+                "bag_character_recall": 0.0
+              },
+              "reading": {
+                "cer": 1.0,
+                "character_edits": 600,
+                "known_characters": 600,
+                "unknown_characters": 0,
+                "wer": 1.0,
+                "word_edits": 105,
+                "known_words": 105,
+                "bag_character_recall": 0.0
+              }
+            },
+            "empty_text_layer": true,
+            "control_characters": 0,
+            "private_use_characters": 0,
+            "frozen_hocr_words_absent": 67
+          }
+        },
+        "poppler_pdfium_reading_disagreement": {
+          "character_edits": 0
+        }
+      },
+      "sw-E": {
+        "status": "ok",
+        "size": {
+          "file_bytes": 441781,
+          "stream_bytes_by_category": {
+            "font_program": 470,
+            "other_stream": 1049,
+            "page_content_stream": 4170,
+            "background_image:/DCTDecode": 435315
+          },
+          "stream_count_by_category": {
+            "font_program": 1,
+            "other_stream": 4,
+            "page_content_stream": 1,
+            "background_image:/DCTDecode": 1
+          },
+          "page_font_resource_count": 1,
+          "structure_xref_dictionary_and_unclassified_bytes": 777,
+          "reconciles": true,
+          "image_role_method": "largest non-mask image is background; remaining non-mask images foreground; masks from ImageMask, Mask and SMask"
+        },
+        "size_ratio": 0.0471113114986083,
+        "dpi_confidence": "moderate",
+        "source_type": "quiver-original-tiff",
+        "extraction": {
+          "poppler_plain": {
+            "scores": {
+              "diplomatic": {
+                "cer": 0.6705685618729097,
+                "character_edits": 401,
+                "known_characters": 598,
+                "unknown_characters": 0,
+                "wer": 0.9428571428571428,
+                "word_edits": 99,
+                "known_words": 105,
+                "bag_character_recall": 0.8093645484949833
+              },
+              "reading": {
+                "cer": 0.6566666666666666,
+                "character_edits": 394,
+                "known_characters": 600,
+                "unknown_characters": 0,
+                "wer": 0.9238095238095239,
+                "word_edits": 97,
+                "known_words": 105,
+                "bag_character_recall": 0.8183333333333334
+              }
+            },
+            "empty_text_layer": false,
+            "control_characters": 1,
+            "private_use_characters": 0,
+            "frozen_hocr_words_absent": 2
+          },
+          "poppler_raw": {
+            "scores": {
+              "diplomatic": {
+                "cer": 0.27759197324414714,
+                "character_edits": 166,
+                "known_characters": 598,
+                "unknown_characters": 0,
+                "wer": 0.9047619047619048,
+                "word_edits": 95,
+                "known_words": 105,
+                "bag_character_recall": 0.7608695652173914
+              },
+              "reading": {
+                "cer": 0.27666666666666667,
+                "character_edits": 166,
+                "known_characters": 600,
+                "unknown_characters": 0,
+                "wer": 0.9047619047619048,
+                "word_edits": 95,
+                "known_words": 105,
+                "bag_character_recall": 0.77
+              }
+            },
+            "empty_text_layer": false,
+            "control_characters": 1,
+            "private_use_characters": 0,
+            "frozen_hocr_words_absent": 45
+          },
+          "pdfium": {
+            "scores": {
+              "diplomatic": {
+                "cer": 0.22742474916387959,
+                "character_edits": 136,
+                "known_characters": 598,
+                "unknown_characters": 0,
+                "wer": 0.6857142857142857,
+                "word_edits": 72,
+                "known_words": 105,
+                "bag_character_recall": 0.8110367892976589
+              },
+              "reading": {
+                "cer": 0.22666666666666666,
+                "character_edits": 136,
+                "known_characters": 600,
+                "unknown_characters": 0,
+                "wer": 0.6857142857142857,
+                "word_edits": 72,
+                "known_words": 105,
+                "bag_character_recall": 0.82
+              }
+            },
+            "empty_text_layer": false,
+            "control_characters": 0,
+            "private_use_characters": 0,
+            "frozen_hocr_words_absent": 0
+          }
+        },
+        "poppler_pdfium_reading_disagreement": {
+          "character_edits": 348
+        }
+      },
+      "sw-M": {
+        "status": "ok",
+        "size": {
+          "file_bytes": 441781,
+          "stream_bytes_by_category": {
+            "font_program": 470,
+            "other_stream": 1049,
+            "page_content_stream": 4170,
+            "background_image:/DCTDecode": 435315
+          },
+          "stream_count_by_category": {
+            "font_program": 1,
+            "other_stream": 4,
+            "page_content_stream": 1,
+            "background_image:/DCTDecode": 1
+          },
+          "page_font_resource_count": 1,
+          "structure_xref_dictionary_and_unclassified_bytes": 777,
+          "reconciles": true,
+          "image_role_method": "largest non-mask image is background; remaining non-mask images foreground; masks from ImageMask, Mask and SMask"
+        },
+        "size_ratio": 0.0471113114986083,
+        "dpi_confidence": "moderate",
+        "source_type": "quiver-original-tiff",
+        "extraction": {
+          "poppler_plain": {
+            "scores": {
+              "diplomatic": {
+                "cer": 0.6705685618729097,
+                "character_edits": 401,
+                "known_characters": 598,
+                "unknown_characters": 0,
+                "wer": 0.9428571428571428,
+                "word_edits": 99,
+                "known_words": 105,
+                "bag_character_recall": 0.8093645484949833
+              },
+              "reading": {
+                "cer": 0.6566666666666666,
+                "character_edits": 394,
+                "known_characters": 600,
+                "unknown_characters": 0,
+                "wer": 0.9238095238095239,
+                "word_edits": 97,
+                "known_words": 105,
+                "bag_character_recall": 0.8183333333333334
+              }
+            },
+            "empty_text_layer": false,
+            "control_characters": 1,
+            "private_use_characters": 0,
+            "frozen_hocr_words_absent": 2
+          },
+          "poppler_raw": {
+            "scores": {
+              "diplomatic": {
+                "cer": 0.27759197324414714,
+                "character_edits": 166,
+                "known_characters": 598,
+                "unknown_characters": 0,
+                "wer": 0.9047619047619048,
+                "word_edits": 95,
+                "known_words": 105,
+                "bag_character_recall": 0.7608695652173914
+              },
+              "reading": {
+                "cer": 0.27666666666666667,
+                "character_edits": 166,
+                "known_characters": 600,
+                "unknown_characters": 0,
+                "wer": 0.9047619047619048,
+                "word_edits": 95,
+                "known_words": 105,
+                "bag_character_recall": 0.77
+              }
+            },
+            "empty_text_layer": false,
+            "control_characters": 1,
+            "private_use_characters": 0,
+            "frozen_hocr_words_absent": 45
+          },
+          "pdfium": {
+            "scores": {
+              "diplomatic": {
+                "cer": 0.22742474916387959,
+                "character_edits": 136,
+                "known_characters": 598,
+                "unknown_characters": 0,
+                "wer": 0.6857142857142857,
+                "word_edits": 72,
+                "known_words": 105,
+                "bag_character_recall": 0.8110367892976589
+              },
+              "reading": {
+                "cer": 0.22666666666666666,
+                "character_edits": 136,
+                "known_characters": 600,
+                "unknown_characters": 0,
+                "wer": 0.6857142857142857,
+                "word_edits": 72,
+                "known_words": 105,
+                "bag_character_recall": 0.82
+              }
+            },
+            "empty_text_layer": false,
+            "control_characters": 0,
+            "private_use_characters": 0,
+            "frozen_hocr_words_absent": 0
+          }
+        },
+        "poppler_pdfium_reading_disagreement": {
+          "character_edits": 348
+        }
+      },
+      "sw-build": {
+        "status": "ok",
+        "size": {
+          "file_bytes": 441781,
+          "stream_bytes_by_category": {
+            "font_program": 470,
+            "other_stream": 1049,
+            "page_content_stream": 4170,
+            "background_image:/DCTDecode": 435315
+          },
+          "stream_count_by_category": {
+            "font_program": 1,
+            "other_stream": 4,
+            "page_content_stream": 1,
+            "background_image:/DCTDecode": 1
+          },
+          "page_font_resource_count": 1,
+          "structure_xref_dictionary_and_unclassified_bytes": 777,
+          "reconciles": true,
+          "image_role_method": "largest non-mask image is background; remaining non-mask images foreground; masks from ImageMask, Mask and SMask"
+        },
+        "size_ratio": 0.0471113114986083,
+        "dpi_confidence": "moderate",
+        "source_type": "quiver-original-tiff",
+        "extraction": {
+          "poppler_plain": {
+            "scores": {
+              "diplomatic": {
+                "cer": 0.6705685618729097,
+                "character_edits": 401,
+                "known_characters": 598,
+                "unknown_characters": 0,
+                "wer": 0.9428571428571428,
+                "word_edits": 99,
+                "known_words": 105,
+                "bag_character_recall": 0.8093645484949833
+              },
+              "reading": {
+                "cer": 0.6566666666666666,
+                "character_edits": 394,
+                "known_characters": 600,
+                "unknown_characters": 0,
+                "wer": 0.9238095238095239,
+                "word_edits": 97,
+                "known_words": 105,
+                "bag_character_recall": 0.8183333333333334
+              }
+            },
+            "empty_text_layer": false,
+            "control_characters": 1,
+            "private_use_characters": 0,
+            "frozen_hocr_words_absent": 2
+          },
+          "poppler_raw": {
+            "scores": {
+              "diplomatic": {
+                "cer": 0.27759197324414714,
+                "character_edits": 166,
+                "known_characters": 598,
+                "unknown_characters": 0,
+                "wer": 0.9047619047619048,
+                "word_edits": 95,
+                "known_words": 105,
+                "bag_character_recall": 0.7608695652173914
+              },
+              "reading": {
+                "cer": 0.27666666666666667,
+                "character_edits": 166,
+                "known_characters": 600,
+                "unknown_characters": 0,
+                "wer": 0.9047619047619048,
+                "word_edits": 95,
+                "known_words": 105,
+                "bag_character_recall": 0.77
+              }
+            },
+            "empty_text_layer": false,
+            "control_characters": 1,
+            "private_use_characters": 0,
+            "frozen_hocr_words_absent": 45
+          },
+          "pdfium": {
+            "scores": {
+              "diplomatic": {
+                "cer": 0.22742474916387959,
+                "character_edits": 136,
+                "known_characters": 598,
+                "unknown_characters": 0,
+                "wer": 0.6857142857142857,
+                "word_edits": 72,
+                "known_words": 105,
+                "bag_character_recall": 0.8110367892976589
+              },
+              "reading": {
+                "cer": 0.22666666666666666,
+                "character_edits": 136,
+                "known_characters": 600,
+                "unknown_characters": 0,
+                "wer": 0.6857142857142857,
+                "word_edits": 72,
+                "known_words": 105,
+                "bag_character_recall": 0.82
+              }
+            },
+            "empty_text_layer": false,
+            "control_characters": 0,
+            "private_use_characters": 0,
+            "frozen_hocr_words_absent": 0
+          }
+        },
+        "poppler_pdfium_reading_disagreement": {
+          "character_edits": 348
+        }
+      },
+      "ocrmypdf-E": {
+        "status": "ok",
+        "size": {
+          "file_bytes": 9385962,
+          "stream_bytes_by_category": {
+            "other_stream": 7292,
+            "page_content_stream": 77,
+            "background_image:/FlateDecode": 9376576
+          },
+          "stream_count_by_category": {
+            "other_stream": 9,
+            "page_content_stream": 1,
+            "background_image:/FlateDecode": 1
+          },
+          "page_font_resource_count": 0,
+          "structure_xref_dictionary_and_unclassified_bytes": 2017,
+          "reconciles": true,
+          "image_role_method": "largest non-mask image is background; remaining non-mask images foreground; masks from ImageMask, Mask and SMask"
+        },
+        "size_ratio": 1.0009144338396188,
+        "dpi_confidence": "moderate",
+        "source_type": "quiver-original-tiff",
+        "extraction": {
+          "poppler_plain": {
+            "scores": {
+              "diplomatic": {
+                "cer": 0.2591973244147157,
+                "character_edits": 155,
+                "known_characters": 598,
+                "unknown_characters": 0,
+                "wer": 0.7428571428571429,
+                "word_edits": 78,
+                "known_words": 105,
+                "bag_character_recall": 0.8110367892976589
+              },
+              "reading": {
+                "cer": 0.22833333333333333,
+                "character_edits": 137,
+                "known_characters": 600,
+                "unknown_characters": 0,
+                "wer": 0.7047619047619048,
+                "word_edits": 74,
+                "known_words": 105,
+                "bag_character_recall": 0.8516666666666667
+              }
+            },
+            "empty_text_layer": false,
+            "control_characters": 1,
+            "private_use_characters": 0,
+            "frozen_hocr_words_absent": 27
+          },
+          "poppler_raw": {
+            "scores": {
+              "diplomatic": {
+                "cer": 0.23745819397993312,
+                "character_edits": 142,
+                "known_characters": 598,
+                "unknown_characters": 0,
+                "wer": 0.7428571428571429,
+                "word_edits": 78,
+                "known_words": 105,
+                "bag_character_recall": 0.8093645484949833
+              },
+              "reading": {
+                "cer": 0.20666666666666667,
+                "character_edits": 124,
+                "known_characters": 600,
+                "unknown_characters": 0,
+                "wer": 0.7047619047619048,
+                "word_edits": 74,
+                "known_words": 105,
+                "bag_character_recall": 0.85
+              }
+            },
+            "empty_text_layer": false,
+            "control_characters": 1,
+            "private_use_characters": 0,
+            "frozen_hocr_words_absent": 26
+          },
+          "pdfium": {
+            "scores": {
+              "diplomatic": {
+                "cer": 0.23411371237458195,
+                "character_edits": 140,
+                "known_characters": 598,
+                "unknown_characters": 0,
+                "wer": 0.7333333333333333,
+                "word_edits": 77,
+                "known_words": 105,
+                "bag_character_recall": 0.8127090301003345
+              },
+              "reading": {
+                "cer": 0.20333333333333334,
+                "character_edits": 122,
+                "known_characters": 600,
+                "unknown_characters": 0,
+                "wer": 0.6952380952380952,
+                "word_edits": 73,
+                "known_words": 105,
+                "bag_character_recall": 0.8533333333333334
+              }
+            },
+            "empty_text_layer": false,
+            "control_characters": 0,
+            "private_use_characters": 0,
+            "frozen_hocr_words_absent": 26
+          }
+        },
+        "poppler_pdfium_reading_disagreement": {
+          "character_edits": 45
+        }
+      },
+      "mrc-M": {
+        "status": "ok",
+        "size": {
+          "file_bytes": 98623,
+          "stream_bytes_by_category": {
+            "other_stream": 4202,
+            "font_program": 333,
+            "page_content_stream": 1625,
+            "background_image:/JPXDecode": 24594,
+            "foreground_image:/JPXDecode": 16410,
+            "mask:/CCITTFaxDecode": 47489
+          },
+          "stream_count_by_category": {
+            "other_stream": 4,
+            "font_program": 1,
+            "page_content_stream": 3,
+            "background_image:/JPXDecode": 1,
+            "foreground_image:/JPXDecode": 1,
+            "mask:/CCITTFaxDecode": 1
+          },
+          "page_font_resource_count": 1,
+          "structure_xref_dictionary_and_unclassified_bytes": 3970,
+          "reconciles": true,
+          "image_role_method": "largest non-mask image is background; remaining non-mask images foreground; masks from ImageMask, Mask and SMask"
+        },
+        "size_ratio": 0.010517108870520113,
+        "dpi_confidence": "moderate",
+        "source_type": "quiver-original-tiff",
+        "extraction": {
+          "poppler_plain": {
+            "scores": {
+              "diplomatic": {
+                "cer": 0.5819397993311036,
+                "character_edits": 348,
+                "known_characters": 598,
+                "unknown_characters": 0,
+                "wer": 0.9047619047619048,
+                "word_edits": 95,
+                "known_words": 105,
+                "bag_character_recall": 0.8076923076923077
+              },
+              "reading": {
+                "cer": 0.575,
+                "character_edits": 345,
+                "known_characters": 600,
+                "unknown_characters": 0,
+                "wer": 0.8952380952380953,
+                "word_edits": 94,
+                "known_words": 105,
+                "bag_character_recall": 0.8166666666666667
+              }
+            },
+            "empty_text_layer": false,
+            "control_characters": 1,
+            "private_use_characters": 0,
+            "frozen_hocr_words_absent": 3
+          },
+          "poppler_raw": {
+            "scores": {
+              "diplomatic": {
+                "cer": 0.23076923076923078,
+                "character_edits": 138,
+                "known_characters": 598,
+                "unknown_characters": 0,
+                "wer": 0.7238095238095238,
+                "word_edits": 76,
+                "known_words": 105,
+                "bag_character_recall": 0.8076923076923077
+              },
+              "reading": {
+                "cer": 0.23,
+                "character_edits": 138,
+                "known_characters": 600,
+                "unknown_characters": 0,
+                "wer": 0.7238095238095238,
+                "word_edits": 76,
+                "known_words": 105,
+                "bag_character_recall": 0.8166666666666667
+              }
+            },
+            "empty_text_layer": false,
+            "control_characters": 1,
+            "private_use_characters": 0,
+            "frozen_hocr_words_absent": 3
+          },
+          "pdfium": {
+            "scores": {
+              "diplomatic": {
+                "cer": 0.22742474916387959,
+                "character_edits": 136,
+                "known_characters": 598,
+                "unknown_characters": 0,
+                "wer": 0.6857142857142857,
+                "word_edits": 72,
+                "known_words": 105,
+                "bag_character_recall": 0.8110367892976589
+              },
+              "reading": {
+                "cer": 0.22666666666666666,
+                "character_edits": 136,
+                "known_characters": 600,
+                "unknown_characters": 0,
+                "wer": 0.6857142857142857,
+                "word_edits": 72,
+                "known_words": 105,
+                "bag_character_recall": 0.82
+              }
+            },
+            "empty_text_layer": false,
+            "control_characters": 0,
+            "private_use_characters": 0,
+            "frozen_hocr_words_absent": 0
+          }
+        },
+        "poppler_pdfium_reading_disagreement": {
+          "character_edits": 262
+        }
+      },
+      "adobe-E": {
+        "status": "ok",
+        "size": {
+          "file_bytes": 345022,
+          "stream_bytes_by_category": {
+            "other_stream": 8684,
+            "page_content_stream": 3972,
+            "font_program": 67973,
+            "foreground_image:pikepdf.Array([ \"/FlateDecode\", \"/DCTDecode\" ])": 15660,
+            "background_image:pikepdf.Array([ \"/FlateDecode\", \"/DCTDecode\" ])": 233896,
+            "foreground_image:/DCTDecode": 10400
+          },
+          "stream_count_by_category": {
+            "other_stream": 15,
+            "page_content_stream": 8,
+            "font_program": 8,
+            "foreground_image:pikepdf.Array([ \"/FlateDecode\", \"/DCTDecode\" ])": 1,
+            "background_image:pikepdf.Array([ \"/FlateDecode\", \"/DCTDecode\" ])": 1,
+            "foreground_image:/DCTDecode": 4
+          },
+          "page_font_resource_count": 8,
+          "structure_xref_dictionary_and_unclassified_bytes": 4437,
+          "reconciles": true,
+          "image_role_method": "largest non-mask image is background; remaining non-mask images foreground; masks from ImageMask, Mask and SMask"
+        },
+        "size_ratio": 0.036792978683720744,
+        "dpi_confidence": "moderate",
+        "source_type": "quiver-original-tiff",
+        "extraction": {
+          "poppler_plain": {
+            "scores": {
+              "diplomatic": {
+                "cer": 0.7976588628762542,
+                "character_edits": 477,
+                "known_characters": 598,
+                "unknown_characters": 0,
+                "wer": 1.0095238095238095,
+                "word_edits": 106,
+                "known_words": 105,
+                "bag_character_recall": 0.6287625418060201
+              },
+              "reading": {
+                "cer": 0.795,
+                "character_edits": 477,
+                "known_characters": 600,
+                "unknown_characters": 0,
+                "wer": 1.0095238095238095,
+                "word_edits": 106,
+                "known_words": 105,
+                "bag_character_recall": 0.6366666666666667
+              }
+            },
+            "empty_text_layer": false,
+            "control_characters": 1,
+            "private_use_characters": 0,
+            "frozen_hocr_words_absent": 63
+          },
+          "poppler_raw": {
+            "scores": {
+              "diplomatic": {
+                "cer": 0.6939799331103679,
+                "character_edits": 415,
+                "known_characters": 598,
+                "unknown_characters": 0,
+                "wer": 1.0,
+                "word_edits": 105,
+                "known_words": 105,
+                "bag_character_recall": 0.5468227424749164
+              },
+              "reading": {
+                "cer": 0.69,
+                "character_edits": 414,
+                "known_characters": 600,
+                "unknown_characters": 0,
+                "wer": 1.0,
+                "word_edits": 105,
+                "known_words": 105,
+                "bag_character_recall": 0.555
+              }
+            },
+            "empty_text_layer": false,
+            "control_characters": 1,
+            "private_use_characters": 0,
+            "frozen_hocr_words_absent": 66
+          },
+          "pdfium": {
+            "scores": {
+              "diplomatic": {
+                "cer": 0.6471571906354515,
+                "character_edits": 387,
+                "known_characters": 598,
+                "unknown_characters": 0,
+                "wer": 0.9809523809523809,
+                "word_edits": 103,
+                "known_words": 105,
+                "bag_character_recall": 0.6254180602006689
+              },
+              "reading": {
+                "cer": 0.6433333333333333,
+                "character_edits": 386,
+                "known_characters": 600,
+                "unknown_characters": 0,
+                "wer": 0.9809523809523809,
+                "word_edits": 103,
+                "known_words": 105,
+                "bag_character_recall": 0.6333333333333333
+              }
+            },
+            "empty_text_layer": false,
+            "control_characters": 0,
+            "private_use_characters": 0,
+            "frozen_hocr_words_absent": 63
+          }
+        },
+        "poppler_pdfium_reading_disagreement": {
+          "character_edits": 334
+        }
+      }
+    }
+  },
+  "quiver/arnold_ketzerhistorie01_1699_0114": {
+    "dpi": 300.0,
+    "dpi_confidence": "moderate",
+    "source_type": "quiver-original-tiff",
+    "frozen_hocr_scores": {
+      "diplomatic": {
+        "cer": 0.3743503772003353,
+        "character_edits": 2233,
+        "known_characters": 5965,
+        "unknown_characters": 0,
+        "wer": 0.6784059314179796,
+        "word_edits": 732,
+        "known_words": 1079,
+        "bag_character_recall": 0.9222129086336965
+      },
+      "reading": {
+        "cer": 0.37580263602568437,
+        "character_edits": 2224,
+        "known_characters": 5918,
+        "unknown_characters": 0,
+        "wer": 0.6921606118546845,
+        "word_edits": 724,
+        "known_words": 1046,
+        "bag_character_recall": 0.9339303818857723
+      }
+    },
+    "rows": {
+      "src": {
+        "status": "ok",
+        "size": {
+          "file_bytes": 17138441,
+          "stream_bytes_by_category": {
+            "page_content_stream": 42,
+            "background_image:/FlateDecode": 17137628
+          },
+          "stream_count_by_category": {
+            "page_content_stream": 1,
+            "background_image:/FlateDecode": 1
+          },
+          "page_font_resource_count": 0,
+          "structure_xref_dictionary_and_unclassified_bytes": 771,
+          "reconciles": true,
+          "image_role_method": "largest non-mask image is background; remaining non-mask images foreground; masks from ImageMask, Mask and SMask"
+        },
+        "size_ratio": 1.0,
+        "dpi_confidence": "moderate",
+        "source_type": "quiver-original-tiff",
+        "extraction": {
+          "poppler_plain": {
+            "scores": {
+              "diplomatic": {
+                "cer": 1.0,
+                "character_edits": 5965,
+                "known_characters": 5965,
+                "unknown_characters": 0,
+                "wer": 1.0,
+                "word_edits": 1079,
+                "known_words": 1079,
+                "bag_character_recall": 0.0
+              },
+              "reading": {
+                "cer": 1.0,
+                "character_edits": 5918,
+                "known_characters": 5918,
+                "unknown_characters": 0,
+                "wer": 1.0,
+                "word_edits": 1046,
+                "known_words": 1046,
+                "bag_character_recall": 0.0
+              }
+            },
+            "empty_text_layer": true,
+            "control_characters": 1,
+            "private_use_characters": 0,
+            "frozen_hocr_words_absent": 624
+          },
+          "poppler_raw": {
+            "scores": {
+              "diplomatic": {
+                "cer": 1.0,
+                "character_edits": 5965,
+                "known_characters": 5965,
+                "unknown_characters": 0,
+                "wer": 1.0,
+                "word_edits": 1079,
+                "known_words": 1079,
+                "bag_character_recall": 0.0
+              },
+              "reading": {
+                "cer": 1.0,
+                "character_edits": 5918,
+                "known_characters": 5918,
+                "unknown_characters": 0,
+                "wer": 1.0,
+                "word_edits": 1046,
+                "known_words": 1046,
+                "bag_character_recall": 0.0
+              }
+            },
+            "empty_text_layer": true,
+            "control_characters": 1,
+            "private_use_characters": 0,
+            "frozen_hocr_words_absent": 624
+          },
+          "pdfium": {
+            "scores": {
+              "diplomatic": {
+                "cer": 1.0,
+                "character_edits": 5965,
+                "known_characters": 5965,
+                "unknown_characters": 0,
+                "wer": 1.0,
+                "word_edits": 1079,
+                "known_words": 1079,
+                "bag_character_recall": 0.0
+              },
+              "reading": {
+                "cer": 1.0,
+                "character_edits": 5918,
+                "known_characters": 5918,
+                "unknown_characters": 0,
+                "wer": 1.0,
+                "word_edits": 1046,
+                "known_words": 1046,
+                "bag_character_recall": 0.0
+              }
+            },
+            "empty_text_layer": true,
+            "control_characters": 0,
+            "private_use_characters": 0,
+            "frozen_hocr_words_absent": 624
+          }
+        },
+        "poppler_pdfium_reading_disagreement": {
+          "character_edits": 0
+        }
+      },
+      "sw-E": {
+        "status": "ok",
+        "size": {
+          "file_bytes": 927973,
+          "stream_bytes_by_category": {
+            "font_program": 492,
+            "other_stream": 1324,
+            "page_content_stream": 38932,
+            "background_image:/DCTDecode": 886446
+          },
+          "stream_count_by_category": {
+            "font_program": 1,
+            "other_stream": 4,
+            "page_content_stream": 1,
+            "background_image:/DCTDecode": 1
+          },
+          "page_font_resource_count": 1,
+          "structure_xref_dictionary_and_unclassified_bytes": 779,
+          "reconciles": true,
+          "image_role_method": "largest non-mask image is background; remaining non-mask images foreground; masks from ImageMask, Mask and SMask"
+        },
+        "size_ratio": 0.054145706718598266,
+        "dpi_confidence": "moderate",
+        "source_type": "quiver-original-tiff",
+        "extraction": {
+          "poppler_plain": {
+            "scores": {
+              "diplomatic": {
+                "cer": 0.7475272422464375,
+                "character_edits": 4459,
+                "known_characters": 5965,
+                "unknown_characters": 0,
+                "wer": 0.9425393883225208,
+                "word_edits": 1017,
+                "known_words": 1079,
+                "bag_character_recall": 0.91802179379715
+              },
+              "reading": {
+                "cer": 0.7434944237918215,
+                "character_edits": 4400,
+                "known_characters": 5918,
+                "unknown_characters": 0,
+                "wer": 0.9435946462715105,
+                "word_edits": 987,
+                "known_words": 1046,
+                "bag_character_recall": 0.9302129097668131
+              }
+            },
+            "empty_text_layer": false,
+            "control_characters": 1,
+            "private_use_characters": 0,
+            "frozen_hocr_words_absent": 24
+          },
+          "poppler_raw": {
+            "scores": {
+              "diplomatic": {
+                "cer": 0.37720033528918695,
+                "character_edits": 2250,
+                "known_characters": 5965,
+                "unknown_characters": 0,
+                "wer": 0.7052826691380908,
+                "word_edits": 761,
+                "known_words": 1079,
+                "bag_character_recall": 0.9146689019279128
+              },
+              "reading": {
+                "cer": 0.3764785400473133,
+                "character_edits": 2228,
+                "known_characters": 5918,
+                "unknown_characters": 0,
+                "wer": 0.7122370936902486,
+                "word_edits": 745,
+                "known_words": 1046,
+                "bag_character_recall": 0.9248056775937816
+              }
+            },
+            "empty_text_layer": false,
+            "control_characters": 1,
+            "private_use_characters": 0,
+            "frozen_hocr_words_absent": 51
+          },
+          "pdfium": {
+            "scores": {
+              "diplomatic": {
+                "cer": 0.37753562447611066,
+                "character_edits": 2252,
+                "known_characters": 5965,
+                "unknown_characters": 0,
+                "wer": 0.6904541241890639,
+                "word_edits": 745,
+                "known_words": 1079,
+                "bag_character_recall": 0.9186923721709975
+              },
+              "reading": {
+                "cer": 0.3754646840148699,
+                "character_edits": 2222,
+                "known_characters": 5918,
+                "unknown_characters": 0,
+                "wer": 0.6931166347992351,
+                "word_edits": 725,
+                "known_words": 1046,
+                "bag_character_recall": 0.9317336938154782
+              }
+            },
+            "empty_text_layer": false,
+            "control_characters": 0,
+            "private_use_characters": 0,
+            "frozen_hocr_words_absent": 16
+          }
+        },
+        "poppler_pdfium_reading_disagreement": {
+          "character_edits": 4404
+        }
+      },
+      "sw-M": {
+        "status": "ok",
+        "size": {
+          "file_bytes": 927973,
+          "stream_bytes_by_category": {
+            "font_program": 492,
+            "other_stream": 1324,
+            "page_content_stream": 38932,
+            "background_image:/DCTDecode": 886446
+          },
+          "stream_count_by_category": {
+            "font_program": 1,
+            "other_stream": 4,
+            "page_content_stream": 1,
+            "background_image:/DCTDecode": 1
+          },
+          "page_font_resource_count": 1,
+          "structure_xref_dictionary_and_unclassified_bytes": 779,
+          "reconciles": true,
+          "image_role_method": "largest non-mask image is background; remaining non-mask images foreground; masks from ImageMask, Mask and SMask"
+        },
+        "size_ratio": 0.054145706718598266,
+        "dpi_confidence": "moderate",
+        "source_type": "quiver-original-tiff",
+        "extraction": {
+          "poppler_plain": {
+            "scores": {
+              "diplomatic": {
+                "cer": 0.7475272422464375,
+                "character_edits": 4459,
+                "known_characters": 5965,
+                "unknown_characters": 0,
+                "wer": 0.9425393883225208,
+                "word_edits": 1017,
+                "known_words": 1079,
+                "bag_character_recall": 0.91802179379715
+              },
+              "reading": {
+                "cer": 0.7434944237918215,
+                "character_edits": 4400,
+                "known_characters": 5918,
+                "unknown_characters": 0,
+                "wer": 0.9435946462715105,
+                "word_edits": 987,
+                "known_words": 1046,
+                "bag_character_recall": 0.9302129097668131
+              }
+            },
+            "empty_text_layer": false,
+            "control_characters": 1,
+            "private_use_characters": 0,
+            "frozen_hocr_words_absent": 24
+          },
+          "poppler_raw": {
+            "scores": {
+              "diplomatic": {
+                "cer": 0.37720033528918695,
+                "character_edits": 2250,
+                "known_characters": 5965,
+                "unknown_characters": 0,
+                "wer": 0.7052826691380908,
+                "word_edits": 761,
+                "known_words": 1079,
+                "bag_character_recall": 0.9146689019279128
+              },
+              "reading": {
+                "cer": 0.3764785400473133,
+                "character_edits": 2228,
+                "known_characters": 5918,
+                "unknown_characters": 0,
+                "wer": 0.7122370936902486,
+                "word_edits": 745,
+                "known_words": 1046,
+                "bag_character_recall": 0.9248056775937816
+              }
+            },
+            "empty_text_layer": false,
+            "control_characters": 1,
+            "private_use_characters": 0,
+            "frozen_hocr_words_absent": 51
+          },
+          "pdfium": {
+            "scores": {
+              "diplomatic": {
+                "cer": 0.37753562447611066,
+                "character_edits": 2252,
+                "known_characters": 5965,
+                "unknown_characters": 0,
+                "wer": 0.6904541241890639,
+                "word_edits": 745,
+                "known_words": 1079,
+                "bag_character_recall": 0.9186923721709975
+              },
+              "reading": {
+                "cer": 0.3754646840148699,
+                "character_edits": 2222,
+                "known_characters": 5918,
+                "unknown_characters": 0,
+                "wer": 0.6931166347992351,
+                "word_edits": 725,
+                "known_words": 1046,
+                "bag_character_recall": 0.9317336938154782
+              }
+            },
+            "empty_text_layer": false,
+            "control_characters": 0,
+            "private_use_characters": 0,
+            "frozen_hocr_words_absent": 16
+          }
+        },
+        "poppler_pdfium_reading_disagreement": {
+          "character_edits": 4404
+        }
+      },
+      "sw-build": {
+        "status": "ok",
+        "size": {
+          "file_bytes": 927973,
+          "stream_bytes_by_category": {
+            "font_program": 492,
+            "other_stream": 1324,
+            "page_content_stream": 38932,
+            "background_image:/DCTDecode": 886446
+          },
+          "stream_count_by_category": {
+            "font_program": 1,
+            "other_stream": 4,
+            "page_content_stream": 1,
+            "background_image:/DCTDecode": 1
+          },
+          "page_font_resource_count": 1,
+          "structure_xref_dictionary_and_unclassified_bytes": 779,
+          "reconciles": true,
+          "image_role_method": "largest non-mask image is background; remaining non-mask images foreground; masks from ImageMask, Mask and SMask"
+        },
+        "size_ratio": 0.054145706718598266,
+        "dpi_confidence": "moderate",
+        "source_type": "quiver-original-tiff",
+        "extraction": {
+          "poppler_plain": {
+            "scores": {
+              "diplomatic": {
+                "cer": 0.7475272422464375,
+                "character_edits": 4459,
+                "known_characters": 5965,
+                "unknown_characters": 0,
+                "wer": 0.9425393883225208,
+                "word_edits": 1017,
+                "known_words": 1079,
+                "bag_character_recall": 0.91802179379715
+              },
+              "reading": {
+                "cer": 0.7434944237918215,
+                "character_edits": 4400,
+                "known_characters": 5918,
+                "unknown_characters": 0,
+                "wer": 0.9435946462715105,
+                "word_edits": 987,
+                "known_words": 1046,
+                "bag_character_recall": 0.9302129097668131
+              }
+            },
+            "empty_text_layer": false,
+            "control_characters": 1,
+            "private_use_characters": 0,
+            "frozen_hocr_words_absent": 24
+          },
+          "poppler_raw": {
+            "scores": {
+              "diplomatic": {
+                "cer": 0.37720033528918695,
+                "character_edits": 2250,
+                "known_characters": 5965,
+                "unknown_characters": 0,
+                "wer": 0.7052826691380908,
+                "word_edits": 761,
+                "known_words": 1079,
+                "bag_character_recall": 0.9146689019279128
+              },
+              "reading": {
+                "cer": 0.3764785400473133,
+                "character_edits": 2228,
+                "known_characters": 5918,
+                "unknown_characters": 0,
+                "wer": 0.7122370936902486,
+                "word_edits": 745,
+                "known_words": 1046,
+                "bag_character_recall": 0.9248056775937816
+              }
+            },
+            "empty_text_layer": false,
+            "control_characters": 1,
+            "private_use_characters": 0,
+            "frozen_hocr_words_absent": 51
+          },
+          "pdfium": {
+            "scores": {
+              "diplomatic": {
+                "cer": 0.37753562447611066,
+                "character_edits": 2252,
+                "known_characters": 5965,
+                "unknown_characters": 0,
+                "wer": 0.6904541241890639,
+                "word_edits": 745,
+                "known_words": 1079,
+                "bag_character_recall": 0.9186923721709975
+              },
+              "reading": {
+                "cer": 0.3754646840148699,
+                "character_edits": 2222,
+                "known_characters": 5918,
+                "unknown_characters": 0,
+                "wer": 0.6931166347992351,
+                "word_edits": 725,
+                "known_words": 1046,
+                "bag_character_recall": 0.9317336938154782
+              }
+            },
+            "empty_text_layer": false,
+            "control_characters": 0,
+            "private_use_characters": 0,
+            "frozen_hocr_words_absent": 16
+          }
+        },
+        "poppler_pdfium_reading_disagreement": {
+          "character_edits": 4404
+        }
+      },
+      "ocrmypdf-E": {
+        "status": "ok",
+        "size": {
+          "file_bytes": 17161011,
+          "stream_bytes_by_category": {
+            "other_stream": 21288,
+            "page_content_stream": 77,
+            "background_image:/FlateDecode": 17137628
+          },
+          "stream_count_by_category": {
+            "other_stream": 9,
+            "page_content_stream": 1,
+            "background_image:/FlateDecode": 1
+          },
+          "page_font_resource_count": 0,
+          "structure_xref_dictionary_and_unclassified_bytes": 2018,
+          "reconciles": true,
+          "image_role_method": "largest non-mask image is background; remaining non-mask images foreground; masks from ImageMask, Mask and SMask"
+        },
+        "size_ratio": 1.0013169225835652,
+        "dpi_confidence": "moderate",
+        "source_type": "quiver-original-tiff",
+        "extraction": {
+          "poppler_plain": {
+            "scores": {
+              "diplomatic": {
+                "cer": 0.7549036043587595,
+                "character_edits": 4503,
+                "known_characters": 5965,
+                "unknown_characters": 0,
+                "wer": 0.953660797034291,
+                "word_edits": 1029,
+                "known_words": 1079,
+                "bag_character_recall": 0.8970662196144175
+              },
+              "reading": {
+                "cer": 0.7468739438999662,
+                "character_edits": 4420,
+                "known_characters": 5918,
+                "unknown_characters": 0,
+                "wer": 0.9531548757170172,
+                "word_edits": 997,
+                "known_words": 1046,
+                "bag_character_recall": 0.9346062859074011
+              }
+            },
+            "empty_text_layer": false,
+            "control_characters": 1,
+            "private_use_characters": 0,
+            "frozen_hocr_words_absent": 243
+          },
+          "poppler_raw": {
+            "scores": {
+              "diplomatic": {
+                "cer": 0.5800502933780386,
+                "character_edits": 3460,
+                "known_characters": 5965,
+                "unknown_characters": 0,
+                "wer": 0.8378127896200185,
+                "word_edits": 904,
+                "known_words": 1079,
+                "bag_character_recall": 0.8994132439228835
+              },
+              "reading": {
+                "cer": 0.5682663061845218,
+                "character_edits": 3363,
+                "known_characters": 5918,
+                "unknown_characters": 0,
+                "wer": 0.8126195028680688,
+                "word_edits": 850,
+                "known_words": 1046,
+                "bag_character_recall": 0.9344373099019939
+              }
+            },
+            "empty_text_layer": false,
+            "control_characters": 1,
+            "private_use_characters": 0,
+            "frozen_hocr_words_absent": 228
+          },
+          "pdfium": {
+            "scores": {
+              "diplomatic": {
+                "cer": 0.5813914501257335,
+                "character_edits": 3468,
+                "known_characters": 5965,
+                "unknown_characters": 0,
+                "wer": 0.8387395736793327,
+                "word_edits": 905,
+                "known_words": 1079,
+                "bag_character_recall": 0.898742665549036
+              },
+              "reading": {
+                "cer": 0.5699560662385941,
+                "character_edits": 3373,
+                "known_characters": 5918,
+                "unknown_characters": 0,
+                "wer": 0.8126195028680688,
+                "word_edits": 850,
+                "known_words": 1046,
+                "bag_character_recall": 0.9369719499831024
+              }
+            },
+            "empty_text_layer": false,
+            "control_characters": 0,
+            "private_use_characters": 0,
+            "frozen_hocr_words_absent": 222
+          }
+        },
+        "poppler_pdfium_reading_disagreement": {
+          "character_edits": 4201
+        }
+      },
+      "mrc-M": {
+        "status": "ok",
+        "size": {
+          "file_bytes": 246622,
+          "stream_bytes_by_category": {
+            "other_stream": 4202,
+            "font_program": 333,
+            "page_content_stream": 16586,
+            "background_image:/JPXDecode": 54634,
+            "foreground_image:/JPXDecode": 36447,
+            "mask:/CCITTFaxDecode": 130447
+          },
+          "stream_count_by_category": {
+            "other_stream": 4,
+            "font_program": 1,
+            "page_content_stream": 3,
+            "background_image:/JPXDecode": 1,
+            "foreground_image:/JPXDecode": 1,
+            "mask:/CCITTFaxDecode": 1
+          },
+          "page_font_resource_count": 1,
+          "structure_xref_dictionary_and_unclassified_bytes": 3973,
+          "reconciles": true,
+          "image_role_method": "largest non-mask image is background; remaining non-mask images foreground; masks from ImageMask, Mask and SMask"
+        },
+        "size_ratio": 0.014389990314755,
+        "dpi_confidence": "moderate",
+        "source_type": "quiver-original-tiff",
+        "extraction": {
+          "poppler_plain": {
+            "scores": {
+              "diplomatic": {
+                "cer": 0.7411567476948868,
+                "character_edits": 4421,
+                "known_characters": 5965,
+                "unknown_characters": 0,
+                "wer": 0.9462465245597775,
+                "word_edits": 1021,
+                "known_words": 1079,
+                "bag_character_recall": 0.913327745180218
+              },
+              "reading": {
+                "cer": 0.7379182156133829,
+                "character_edits": 4367,
+                "known_characters": 5918,
+                "unknown_characters": 0,
+                "wer": 0.9502868068833652,
+                "word_edits": 994,
+                "known_words": 1046,
+                "bag_character_recall": 0.925819533626225
+              }
+            },
+            "empty_text_layer": false,
+            "control_characters": 1,
+            "private_use_characters": 0,
+            "frozen_hocr_words_absent": 58
+          },
+          "poppler_raw": {
+            "scores": {
+              "diplomatic": {
+                "cer": 0.37803855825649624,
+                "character_edits": 2255,
+                "known_characters": 5965,
+                "unknown_characters": 0,
+                "wer": 0.7145505097312326,
+                "word_edits": 771,
+                "known_words": 1079,
+                "bag_character_recall": 0.913327745180218
+              },
+              "reading": {
+                "cer": 0.37732342007434944,
+                "character_edits": 2233,
+                "known_characters": 5918,
+                "unknown_characters": 0,
+                "wer": 0.7237093690248566,
+                "word_edits": 757,
+                "known_words": 1046,
+                "bag_character_recall": 0.9236228455559311
+              }
+            },
+            "empty_text_layer": false,
+            "control_characters": 1,
+            "private_use_characters": 0,
+            "frozen_hocr_words_absent": 47
+          },
+          "pdfium": {
+            "scores": {
+              "diplomatic": {
+                "cer": 0.3766974015088013,
+                "character_edits": 2247,
+                "known_characters": 5965,
+                "unknown_characters": 0,
+                "wer": 0.6867469879518072,
+                "word_edits": 741,
+                "known_words": 1079,
+                "bag_character_recall": 0.9195305951383068
+              },
+              "reading": {
+                "cer": 0.37461980398783373,
+                "character_edits": 2217,
+                "known_characters": 5918,
+                "unknown_characters": 0,
+                "wer": 0.6883365200764818,
+                "word_edits": 720,
+                "known_words": 1046,
+                "bag_character_recall": 0.9325785738425144
+              }
+            },
+            "empty_text_layer": false,
+            "control_characters": 0,
+            "private_use_characters": 0,
+            "frozen_hocr_words_absent": 13
+          }
+        },
+        "poppler_pdfium_reading_disagreement": {
+          "character_edits": 4230
+        }
+      },
+      "adobe-E": {
+        "status": "ok",
+        "size": {
+          "file_bytes": 794311,
+          "stream_bytes_by_category": {
+            "other_stream": 22848,
+            "page_content_stream": 30231,
+            "font_program": 406625,
+            "foreground_image:pikepdf.Array([ \"/FlateDecode\", \"/DCTDecode\" ])": 49322,
+            "background_image:pikepdf.Array([ \"/FlateDecode\", \"/DCTDecode\" ])": 205296,
+            "foreground_image:/DCTDecode": 67702
+          },
+          "stream_count_by_category": {
+            "other_stream": 22,
+            "page_content_stream": 8,
+            "font_program": 15,
+            "foreground_image:pikepdf.Array([ \"/FlateDecode\", \"/DCTDecode\" ])": 1,
+            "background_image:pikepdf.Array([ \"/FlateDecode\", \"/DCTDecode\" ])": 1,
+            "foreground_image:/DCTDecode": 43
+          },
+          "page_font_resource_count": 15,
+          "structure_xref_dictionary_and_unclassified_bytes": 12287,
+          "reconciles": true,
+          "image_role_method": "largest non-mask image is background; remaining non-mask images foreground; masks from ImageMask, Mask and SMask"
+        },
+        "size_ratio": 0.046346747641748745,
+        "dpi_confidence": "moderate",
+        "source_type": "quiver-original-tiff",
+        "extraction": {
+          "poppler_plain": {
+            "scores": {
+              "diplomatic": {
+                "cer": 0.8568315171835709,
+                "character_edits": 5111,
+                "known_characters": 5965,
+                "unknown_characters": 0,
+                "wer": 0.995366079703429,
+                "word_edits": 1074,
+                "known_words": 1079,
+                "bag_character_recall": 0.7346186085498743
+              },
+              "reading": {
+                "cer": 0.8555255153768165,
+                "character_edits": 5063,
+                "known_characters": 5918,
+                "unknown_characters": 0,
+                "wer": 1.020076481835564,
+                "word_edits": 1067,
+                "known_words": 1046,
+                "bag_character_recall": 0.7455221358567083
+              }
+            },
+            "empty_text_layer": false,
+            "control_characters": 1,
+            "private_use_characters": 0,
+            "frozen_hocr_words_absent": 536
+          },
+          "poppler_raw": {
+            "scores": {
+              "diplomatic": {
+                "cer": 0.8512992455993295,
+                "character_edits": 5078,
+                "known_characters": 5965,
+                "unknown_characters": 0,
+                "wer": 0.9888785912882299,
+                "word_edits": 1067,
+                "known_words": 1079,
+                "bag_character_recall": 0.6995808885163454
+              },
+              "reading": {
+                "cer": 0.8482595471443055,
+                "character_edits": 5020,
+                "known_characters": 5918,
+                "unknown_characters": 0,
+                "wer": 0.9894837476099426,
+                "word_edits": 1035,
+                "known_words": 1046,
+                "bag_character_recall": 0.7156133828996283
+              }
+            },
+            "empty_text_layer": false,
+            "control_characters": 1,
+            "private_use_characters": 0,
+            "frozen_hocr_words_absent": 545
+          },
+          "pdfium": {
+            "scores": {
+              "diplomatic": {
+                "cer": 0.8536462699077955,
+                "character_edits": 5092,
+                "known_characters": 5965,
+                "unknown_characters": 0,
+                "wer": 0.9925857275254866,
+                "word_edits": 1071,
+                "known_words": 1079,
+                "bag_character_recall": 0.7305951383067896
+              },
+              "reading": {
+                "cer": 0.8513011152416357,
+                "character_edits": 5038,
+                "known_characters": 5918,
+                "unknown_characters": 0,
+                "wer": 1.0066921606118546,
+                "word_edits": 1053,
+                "known_words": 1046,
+                "bag_character_recall": 0.7445082798242649
+              }
+            },
+            "empty_text_layer": false,
+            "control_characters": 0,
+            "private_use_characters": 0,
+            "frozen_hocr_words_absent": 534
+          }
+        },
+        "poppler_pdfium_reading_disagreement": {
+          "character_edits": 852
+        }
+      }
+    }
+  },
+  "quiver/benner_herrnhuterey04_1748_0013": {
+    "dpi": 300.0,
+    "dpi_confidence": "low",
+    "source_type": "quiver-original-tiff",
+    "frozen_hocr_scores": {
+      "diplomatic": {
+        "cer": 0.37843784378437845,
+        "character_edits": 344,
+        "known_characters": 909,
+        "unknown_characters": 0,
+        "wer": 0.7092198581560284,
+        "word_edits": 100,
+        "known_words": 141,
+        "bag_character_recall": 0.9163916391639164
+      },
+      "reading": {
+        "cer": 0.40159271899886234,
+        "character_edits": 353,
+        "known_characters": 879,
+        "unknown_characters": 0,
+        "wer": 0.8174603174603174,
+        "word_edits": 103,
+        "known_words": 126,
+        "bag_character_recall": 0.9328782707622298
+      }
+    },
+    "rows": {
+      "src": {
+        "status": "ok",
+        "size": {
+          "file_bytes": 7805527,
+          "stream_bytes_by_category": {
+            "page_content_stream": 42,
+            "background_image:/FlateDecode": 7804716
+          },
+          "stream_count_by_category": {
+            "page_content_stream": 1,
+            "background_image:/FlateDecode": 1
+          },
+          "page_font_resource_count": 0,
+          "structure_xref_dictionary_and_unclassified_bytes": 769,
+          "reconciles": true,
+          "image_role_method": "largest non-mask image is background; remaining non-mask images foreground; masks from ImageMask, Mask and SMask"
+        },
+        "size_ratio": 1.0,
+        "dpi_confidence": "low",
+        "source_type": "quiver-original-tiff",
+        "extraction": {
+          "poppler_plain": {
+            "scores": {
+              "diplomatic": {
+                "cer": 1.0,
+                "character_edits": 909,
+                "known_characters": 909,
+                "unknown_characters": 0,
+                "wer": 1.0,
+                "word_edits": 141,
+                "known_words": 141,
+                "bag_character_recall": 0.0
+              },
+              "reading": {
+                "cer": 1.0,
+                "character_edits": 879,
+                "known_characters": 879,
+                "unknown_characters": 0,
+                "wer": 1.0,
+                "word_edits": 126,
+                "known_words": 126,
+                "bag_character_recall": 0.0
+              }
+            },
+            "empty_text_layer": true,
+            "control_characters": 1,
+            "private_use_characters": 0,
+            "frozen_hocr_words_absent": 132
+          },
+          "poppler_raw": {
+            "scores": {
+              "diplomatic": {
+                "cer": 1.0,
+                "character_edits": 909,
+                "known_characters": 909,
+                "unknown_characters": 0,
+                "wer": 1.0,
+                "word_edits": 141,
+                "known_words": 141,
+                "bag_character_recall": 0.0
+              },
+              "reading": {
+                "cer": 1.0,
+                "character_edits": 879,
+                "known_characters": 879,
+                "unknown_characters": 0,
+                "wer": 1.0,
+                "word_edits": 126,
+                "known_words": 126,
+                "bag_character_recall": 0.0
+              }
+            },
+            "empty_text_layer": true,
+            "control_characters": 1,
+            "private_use_characters": 0,
+            "frozen_hocr_words_absent": 132
+          },
+          "pdfium": {
+            "scores": {
+              "diplomatic": {
+                "cer": 1.0,
+                "character_edits": 909,
+                "known_characters": 909,
+                "unknown_characters": 0,
+                "wer": 1.0,
+                "word_edits": 141,
+                "known_words": 141,
+                "bag_character_recall": 0.0
+              },
+              "reading": {
+                "cer": 1.0,
+                "character_edits": 879,
+                "known_characters": 879,
+                "unknown_characters": 0,
+                "wer": 1.0,
+                "word_edits": 126,
+                "known_words": 126,
+                "bag_character_recall": 0.0
+              }
+            },
+            "empty_text_layer": true,
+            "control_characters": 0,
+            "private_use_characters": 0,
+            "frozen_hocr_words_absent": 132
+          }
+        },
+        "poppler_pdfium_reading_disagreement": {
+          "character_edits": 0
+        }
+      },
+      "sw-E": {
+        "status": "ok",
+        "size": {
+          "file_bytes": 420009,
+          "stream_bytes_by_category": {
+            "font_program": 3031,
+            "other_stream": 1450,
+            "page_content_stream": 7271,
+            "background_image:/DCTDecode": 407478
+          },
+          "stream_count_by_category": {
+            "font_program": 1,
+            "other_stream": 4,
+            "page_content_stream": 1,
+            "background_image:/DCTDecode": 1
+          },
+          "page_font_resource_count": 1,
+          "structure_xref_dictionary_and_unclassified_bytes": 779,
+          "reconciles": true,
+          "image_role_method": "largest non-mask image is background; remaining non-mask images foreground; masks from ImageMask, Mask and SMask"
+        },
+        "size_ratio": 0.05380917905991485,
+        "dpi_confidence": "low",
+        "source_type": "quiver-original-tiff",
+        "extraction": {
+          "poppler_plain": {
+            "scores": {
+              "diplomatic": {
+                "cer": 0.5720572057205721,
+                "character_edits": 520,
+                "known_characters": 909,
+                "unknown_characters": 0,
+                "wer": 0.8581560283687943,
+                "word_edits": 121,
+                "known_words": 141,
+                "bag_character_recall": 0.9031903190319032
+              },
+              "reading": {
+                "cer": 0.5790671217292378,
+                "character_edits": 509,
+                "known_characters": 879,
+                "unknown_characters": 0,
+                "wer": 0.8809523809523809,
+                "word_edits": 111,
+                "known_words": 126,
+                "bag_character_recall": 0.9328782707622298
+              }
+            },
+            "empty_text_layer": false,
+            "control_characters": 1,
+            "private_use_characters": 0,
+            "frozen_hocr_words_absent": 15
+          },
+          "poppler_raw": {
+            "scores": {
+              "diplomatic": {
+                "cer": 0.3949394939493949,
+                "character_edits": 359,
+                "known_characters": 909,
+                "unknown_characters": 0,
+                "wer": 0.8297872340425532,
+                "word_edits": 117,
+                "known_words": 141,
+                "bag_character_recall": 0.8987898789878987
+              },
+              "reading": {
+                "cer": 0.4072810011376564,
+                "character_edits": 358,
+                "known_characters": 879,
+                "unknown_characters": 0,
+                "wer": 0.8650793650793651,
+                "word_edits": 109,
+                "known_words": 126,
+                "bag_character_recall": 0.926052332195677
+              }
+            },
+            "empty_text_layer": false,
+            "control_characters": 1,
+            "private_use_characters": 0,
+            "frozen_hocr_words_absent": 31
+          },
+          "pdfium": {
+            "scores": {
+              "diplomatic": {
+                "cer": 0.38173817381738173,
+                "character_edits": 347,
+                "known_characters": 909,
+                "unknown_characters": 0,
+                "wer": 0.723404255319149,
+                "word_edits": 102,
+                "known_words": 141,
+                "bag_character_recall": 0.9097909790979097
+              },
+              "reading": {
+                "cer": 0.3981797497155859,
+                "character_edits": 350,
+                "known_characters": 879,
+                "unknown_characters": 0,
+                "wer": 0.8015873015873016,
+                "word_edits": 101,
+                "known_words": 126,
+                "bag_character_recall": 0.9328782707622298
+              }
+            },
+            "empty_text_layer": false,
+            "control_characters": 0,
+            "private_use_characters": 0,
+            "frozen_hocr_words_absent": 6
+          }
+        },
+        "poppler_pdfium_reading_disagreement": {
+          "character_edits": 394
+        }
+      },
+      "sw-M": {
+        "status": "ok",
+        "size": {
+          "file_bytes": 420009,
+          "stream_bytes_by_category": {
+            "font_program": 3031,
+            "other_stream": 1450,
+            "page_content_stream": 7271,
+            "background_image:/DCTDecode": 407478
+          },
+          "stream_count_by_category": {
+            "font_program": 1,
+            "other_stream": 4,
+            "page_content_stream": 1,
+            "background_image:/DCTDecode": 1
+          },
+          "page_font_resource_count": 1,
+          "structure_xref_dictionary_and_unclassified_bytes": 779,
+          "reconciles": true,
+          "image_role_method": "largest non-mask image is background; remaining non-mask images foreground; masks from ImageMask, Mask and SMask"
+        },
+        "size_ratio": 0.05380917905991485,
+        "dpi_confidence": "low",
+        "source_type": "quiver-original-tiff",
+        "extraction": {
+          "poppler_plain": {
+            "scores": {
+              "diplomatic": {
+                "cer": 0.5720572057205721,
+                "character_edits": 520,
+                "known_characters": 909,
+                "unknown_characters": 0,
+                "wer": 0.8581560283687943,
+                "word_edits": 121,
+                "known_words": 141,
+                "bag_character_recall": 0.9031903190319032
+              },
+              "reading": {
+                "cer": 0.5790671217292378,
+                "character_edits": 509,
+                "known_characters": 879,
+                "unknown_characters": 0,
+                "wer": 0.8809523809523809,
+                "word_edits": 111,
+                "known_words": 126,
+                "bag_character_recall": 0.9328782707622298
+              }
+            },
+            "empty_text_layer": false,
+            "control_characters": 1,
+            "private_use_characters": 0,
+            "frozen_hocr_words_absent": 15
+          },
+          "poppler_raw": {
+            "scores": {
+              "diplomatic": {
+                "cer": 0.3949394939493949,
+                "character_edits": 359,
+                "known_characters": 909,
+                "unknown_characters": 0,
+                "wer": 0.8297872340425532,
+                "word_edits": 117,
+                "known_words": 141,
+                "bag_character_recall": 0.8987898789878987
+              },
+              "reading": {
+                "cer": 0.4072810011376564,
+                "character_edits": 358,
+                "known_characters": 879,
+                "unknown_characters": 0,
+                "wer": 0.8650793650793651,
+                "word_edits": 109,
+                "known_words": 126,
+                "bag_character_recall": 0.926052332195677
+              }
+            },
+            "empty_text_layer": false,
+            "control_characters": 1,
+            "private_use_characters": 0,
+            "frozen_hocr_words_absent": 31
+          },
+          "pdfium": {
+            "scores": {
+              "diplomatic": {
+                "cer": 0.38173817381738173,
+                "character_edits": 347,
+                "known_characters": 909,
+                "unknown_characters": 0,
+                "wer": 0.723404255319149,
+                "word_edits": 102,
+                "known_words": 141,
+                "bag_character_recall": 0.9097909790979097
+              },
+              "reading": {
+                "cer": 0.3981797497155859,
+                "character_edits": 350,
+                "known_characters": 879,
+                "unknown_characters": 0,
+                "wer": 0.8015873015873016,
+                "word_edits": 101,
+                "known_words": 126,
+                "bag_character_recall": 0.9328782707622298
+              }
+            },
+            "empty_text_layer": false,
+            "control_characters": 0,
+            "private_use_characters": 0,
+            "frozen_hocr_words_absent": 6
+          }
+        },
+        "poppler_pdfium_reading_disagreement": {
+          "character_edits": 394
+        }
+      },
+      "sw-build": {
+        "status": "ok",
+        "size": {
+          "file_bytes": 424393,
+          "stream_bytes_by_category": {
+            "font_program": 7404,
+            "other_stream": 1460,
+            "page_content_stream": 7271,
+            "background_image:/DCTDecode": 407478
+          },
+          "stream_count_by_category": {
+            "font_program": 1,
+            "other_stream": 4,
+            "page_content_stream": 1,
+            "background_image:/DCTDecode": 1
+          },
+          "page_font_resource_count": 1,
+          "structure_xref_dictionary_and_unclassified_bytes": 780,
+          "reconciles": true,
+          "image_role_method": "largest non-mask image is background; remaining non-mask images foreground; masks from ImageMask, Mask and SMask"
+        },
+        "size_ratio": 0.0543708323601981,
+        "dpi_confidence": "low",
+        "source_type": "quiver-original-tiff",
+        "extraction": {
+          "poppler_plain": {
+            "scores": {
+              "diplomatic": {
+                "cer": 0.5720572057205721,
+                "character_edits": 520,
+                "known_characters": 909,
+                "unknown_characters": 0,
+                "wer": 0.8581560283687943,
+                "word_edits": 121,
+                "known_words": 141,
+                "bag_character_recall": 0.9031903190319032
+              },
+              "reading": {
+                "cer": 0.5790671217292378,
+                "character_edits": 509,
+                "known_characters": 879,
+                "unknown_characters": 0,
+                "wer": 0.8809523809523809,
+                "word_edits": 111,
+                "known_words": 126,
+                "bag_character_recall": 0.9328782707622298
+              }
+            },
+            "empty_text_layer": false,
+            "control_characters": 1,
+            "private_use_characters": 0,
+            "frozen_hocr_words_absent": 15
+          },
+          "poppler_raw": {
+            "scores": {
+              "diplomatic": {
+                "cer": 0.3949394939493949,
+                "character_edits": 359,
+                "known_characters": 909,
+                "unknown_characters": 0,
+                "wer": 0.8297872340425532,
+                "word_edits": 117,
+                "known_words": 141,
+                "bag_character_recall": 0.8987898789878987
+              },
+              "reading": {
+                "cer": 0.4072810011376564,
+                "character_edits": 358,
+                "known_characters": 879,
+                "unknown_characters": 0,
+                "wer": 0.8650793650793651,
+                "word_edits": 109,
+                "known_words": 126,
+                "bag_character_recall": 0.926052332195677
+              }
+            },
+            "empty_text_layer": false,
+            "control_characters": 1,
+            "private_use_characters": 0,
+            "frozen_hocr_words_absent": 31
+          },
+          "pdfium": {
+            "scores": {
+              "diplomatic": {
+                "cer": 0.38173817381738173,
+                "character_edits": 347,
+                "known_characters": 909,
+                "unknown_characters": 0,
+                "wer": 0.723404255319149,
+                "word_edits": 102,
+                "known_words": 141,
+                "bag_character_recall": 0.9097909790979097
+              },
+              "reading": {
+                "cer": 0.3981797497155859,
+                "character_edits": 350,
+                "known_characters": 879,
+                "unknown_characters": 0,
+                "wer": 0.8015873015873016,
+                "word_edits": 101,
+                "known_words": 126,
+                "bag_character_recall": 0.9328782707622298
+              }
+            },
+            "empty_text_layer": false,
+            "control_characters": 0,
+            "private_use_characters": 0,
+            "frozen_hocr_words_absent": 6
+          }
+        },
+        "poppler_pdfium_reading_disagreement": {
+          "character_edits": 394
+        }
+      },
+      "ocrmypdf-E": {
+        "status": "ok",
+        "size": {
+          "file_bytes": 7816515,
+          "stream_bytes_by_category": {
+            "other_stream": 9705,
+            "page_content_stream": 77,
+            "background_image:/FlateDecode": 7804716
+          },
+          "stream_count_by_category": {
+            "other_stream": 9,
+            "page_content_stream": 1,
+            "background_image:/FlateDecode": 1
+          },
+          "page_font_resource_count": 0,
+          "structure_xref_dictionary_and_unclassified_bytes": 2017,
+          "reconciles": true,
+          "image_role_method": "largest non-mask image is background; remaining non-mask images foreground; masks from ImageMask, Mask and SMask"
+        },
+        "size_ratio": 1.0014077204524434,
+        "dpi_confidence": "low",
+        "source_type": "quiver-original-tiff",
+        "extraction": {
+          "poppler_plain": {
+            "scores": {
+              "diplomatic": {
+                "cer": 0.46094609460946095,
+                "character_edits": 419,
+                "known_characters": 909,
+                "unknown_characters": 0,
+                "wer": 0.8226950354609929,
+                "word_edits": 116,
+                "known_words": 141,
+                "bag_character_recall": 0.8888888888888888
+              },
+              "reading": {
+                "cer": 0.4379977246871445,
+                "character_edits": 385,
+                "known_characters": 879,
+                "unknown_characters": 0,
+                "wer": 0.7698412698412699,
+                "word_edits": 97,
+                "known_words": 126,
+                "bag_character_recall": 0.9408418657565415
+              }
+            },
+            "empty_text_layer": false,
+            "control_characters": 1,
+            "private_use_characters": 0,
+            "frozen_hocr_words_absent": 42
+          },
+          "poppler_raw": {
+            "scores": {
+              "diplomatic": {
+                "cer": 0.3586358635863586,
+                "character_edits": 326,
+                "known_characters": 909,
+                "unknown_characters": 0,
+                "wer": 0.7730496453900709,
+                "word_edits": 109,
+                "known_words": 141,
+                "bag_character_recall": 0.8943894389438944
+              },
+              "reading": {
+                "cer": 0.3503981797497156,
+                "character_edits": 308,
+                "known_characters": 879,
+                "unknown_characters": 0,
+                "wer": 0.753968253968254,
+                "word_edits": 95,
+                "known_words": 126,
+                "bag_character_recall": 0.9408418657565415
+              }
+            },
+            "empty_text_layer": false,
+            "control_characters": 1,
+            "private_use_characters": 0,
+            "frozen_hocr_words_absent": 42
+          },
+          "pdfium": {
+            "scores": {
+              "diplomatic": {
+                "cer": 0.36523652365236525,
+                "character_edits": 332,
+                "known_characters": 909,
+                "unknown_characters": 0,
+                "wer": 0.7943262411347518,
+                "word_edits": 112,
+                "known_words": 141,
+                "bag_character_recall": 0.8888888888888888
+              },
+              "reading": {
+                "cer": 0.35381114903299204,
+                "character_edits": 311,
+                "known_characters": 879,
+                "unknown_characters": 0,
+                "wer": 0.7619047619047619,
+                "word_edits": 96,
+                "known_words": 126,
+                "bag_character_recall": 0.9408418657565415
+              }
+            },
+            "empty_text_layer": false,
+            "control_characters": 0,
+            "private_use_characters": 0,
+            "frozen_hocr_words_absent": 42
+          }
+        },
+        "poppler_pdfium_reading_disagreement": {
+          "character_edits": 271
+        }
+      },
+      "mrc-M": {
+        "status": "ok",
+        "size": {
+          "file_bytes": 100806,
+          "stream_bytes_by_category": {
+            "other_stream": 4202,
+            "font_program": 333,
+            "page_content_stream": 2619,
+            "background_image:/JPXDecode": 24277,
+            "foreground_image:/JPXDecode": 16211,
+            "mask:/CCITTFaxDecode": 49193
+          },
+          "stream_count_by_category": {
+            "other_stream": 4,
+            "font_program": 1,
+            "page_content_stream": 3,
+            "background_image:/JPXDecode": 1,
+            "foreground_image:/JPXDecode": 1,
+            "mask:/CCITTFaxDecode": 1
+          },
+          "page_font_resource_count": 1,
+          "structure_xref_dictionary_and_unclassified_bytes": 3971,
+          "reconciles": true,
+          "image_role_method": "largest non-mask image is background; remaining non-mask images foreground; masks from ImageMask, Mask and SMask"
+        },
+        "size_ratio": 0.012914694933474703,
+        "dpi_confidence": "low",
+        "source_type": "quiver-original-tiff",
+        "extraction": {
+          "poppler_plain": {
+            "scores": {
+              "diplomatic": {
+                "cer": 0.4807480748074808,
+                "character_edits": 437,
+                "known_characters": 909,
+                "unknown_characters": 0,
+                "wer": 0.7872340425531915,
+                "word_edits": 111,
+                "known_words": 141,
+                "bag_character_recall": 0.9163916391639164
+              },
+              "reading": {
+                "cer": 0.4812286689419795,
+                "character_edits": 423,
+                "known_characters": 879,
+                "unknown_characters": 0,
+                "wer": 0.8333333333333334,
+                "word_edits": 105,
+                "known_words": 126,
+                "bag_character_recall": 0.9328782707622298
+              }
+            },
+            "empty_text_layer": false,
+            "control_characters": 1,
+            "private_use_characters": 0,
+            "frozen_hocr_words_absent": 9
+          },
+          "poppler_raw": {
+            "scores": {
+              "diplomatic": {
+                "cer": 0.37843784378437845,
+                "character_edits": 344,
+                "known_characters": 909,
+                "unknown_characters": 0,
+                "wer": 0.7092198581560284,
+                "word_edits": 100,
+                "known_words": 141,
+                "bag_character_recall": 0.9163916391639164
+              },
+              "reading": {
+                "cer": 0.3902161547212742,
+                "character_edits": 343,
+                "known_characters": 879,
+                "unknown_characters": 0,
+                "wer": 0.7857142857142857,
+                "word_edits": 99,
+                "known_words": 126,
+                "bag_character_recall": 0.9328782707622298
+              }
+            },
+            "empty_text_layer": false,
+            "control_characters": 1,
+            "private_use_characters": 0,
+            "frozen_hocr_words_absent": 9
+          },
+          "pdfium": {
+            "scores": {
+              "diplomatic": {
+                "cer": 0.38393839383938394,
+                "character_edits": 349,
+                "known_characters": 909,
+                "unknown_characters": 0,
+                "wer": 0.7375886524822695,
+                "word_edits": 104,
+                "known_words": 141,
+                "bag_character_recall": 0.9075907590759076
+              },
+              "reading": {
+                "cer": 0.39476678043230945,
+                "character_edits": 347,
+                "known_characters": 879,
+                "unknown_characters": 0,
+                "wer": 0.7936507936507936,
+                "word_edits": 100,
+                "known_words": 126,
+                "bag_character_recall": 0.9328782707622298
+              }
+            },
+            "empty_text_layer": false,
+            "control_characters": 0,
+            "private_use_characters": 0,
+            "frozen_hocr_words_absent": 9
+          }
+        },
+        "poppler_pdfium_reading_disagreement": {
+          "character_edits": 372
+        }
+      },
+      "adobe-E": {
+        "status": "ok",
+        "size": {
+          "file_bytes": 322434,
+          "stream_bytes_by_category": {
+            "other_stream": 11393,
+            "page_content_stream": 5289,
+            "font_program": 125208,
+            "foreground_image:pikepdf.Array([ \"/FlateDecode\", \"/DCTDecode\" ])": 28848,
+            "background_image:pikepdf.Array([ \"/FlateDecode\", \"/DCTDecode\" ])": 142705,
+            "foreground_image:/DCTDecode": 4139
+          },
+          "stream_count_by_category": {
+            "other_stream": 19,
+            "page_content_stream": 8,
+            "font_program": 12,
+            "foreground_image:pikepdf.Array([ \"/FlateDecode\", \"/DCTDecode\" ])": 1,
+            "background_image:pikepdf.Array([ \"/FlateDecode\", \"/DCTDecode\" ])": 1,
+            "foreground_image:/DCTDecode": 2
+          },
+          "page_font_resource_count": 12,
+          "structure_xref_dictionary_and_unclassified_bytes": 4852,
+          "reconciles": true,
+          "image_role_method": "largest non-mask image is background; remaining non-mask images foreground; masks from ImageMask, Mask and SMask"
+        },
+        "size_ratio": 0.041308421583834125,
+        "dpi_confidence": "low",
+        "source_type": "quiver-original-tiff",
+        "extraction": {
+          "poppler_plain": {
+            "scores": {
+              "diplomatic": {
+                "cer": 0.7216721672167217,
+                "character_edits": 656,
+                "known_characters": 909,
+                "unknown_characters": 0,
+                "wer": 1.177304964539007,
+                "word_edits": 166,
+                "known_words": 141,
+                "bag_character_recall": 0.7271727172717272
+              },
+              "reading": {
+                "cer": 0.7417519908987485,
+                "character_edits": 652,
+                "known_characters": 879,
+                "unknown_characters": 0,
+                "wer": 1.3253968253968254,
+                "word_edits": 167,
+                "known_words": 126,
+                "bag_character_recall": 0.7485779294653014
+              }
+            },
+            "empty_text_layer": false,
+            "control_characters": 1,
+            "private_use_characters": 0,
+            "frozen_hocr_words_absent": 116
+          },
+          "poppler_raw": {
+            "scores": {
+              "diplomatic": {
+                "cer": 0.7040704070407041,
+                "character_edits": 640,
+                "known_characters": 909,
+                "unknown_characters": 0,
+                "wer": 1.0921985815602837,
+                "word_edits": 154,
+                "known_words": 141,
+                "bag_character_recall": 0.7271727172717272
+              },
+              "reading": {
+                "cer": 0.7224118316268487,
+                "character_edits": 635,
+                "known_characters": 879,
+                "unknown_characters": 0,
+                "wer": 1.1984126984126984,
+                "word_edits": 151,
+                "known_words": 126,
+                "bag_character_recall": 0.7485779294653014
+              }
+            },
+            "empty_text_layer": false,
+            "control_characters": 1,
+            "private_use_characters": 0,
+            "frozen_hocr_words_absent": 116
+          },
+          "pdfium": {
+            "scores": {
+              "diplomatic": {
+                "cer": 0.7106710671067107,
+                "character_edits": 646,
+                "known_characters": 909,
+                "unknown_characters": 0,
+                "wer": 1.198581560283688,
+                "word_edits": 169,
+                "known_words": 141,
+                "bag_character_recall": 0.7271727172717272
+              },
+              "reading": {
+                "cer": 0.7303754266211604,
+                "character_edits": 642,
+                "known_characters": 879,
+                "unknown_characters": 0,
+                "wer": 1.3492063492063493,
+                "word_edits": 170,
+                "known_words": 126,
+                "bag_character_recall": 0.7485779294653014
+              }
+            },
+            "empty_text_layer": false,
+            "control_characters": 0,
+            "private_use_characters": 0,
+            "frozen_hocr_words_absent": 116
+          }
+        },
+        "poppler_pdfium_reading_disagreement": {
+          "character_edits": 234
+        }
+      }
+    }
+  },
+  "finebooks/conchologiaiconi05reev/8967333": {
+    "dpi": 500,
+    "dpi_confidence": "moderate",
+    "source_type": "processed-derivative",
+    "frozen_hocr_scores": {
+      "diplomatic": {
+        "cer": 0.018633540372670808,
+        "character_edits": 6,
+        "known_characters": 322,
+        "unknown_characters": 0,
+        "wer": 0.16981132075471697,
+        "word_edits": 9,
+        "known_words": 53,
+        "bag_character_recall": 0.9937888198757764
+      },
+      "reading": {
+        "cer": 0.018633540372670808,
+        "character_edits": 6,
+        "known_characters": 322,
+        "unknown_characters": 0,
+        "wer": 0.16981132075471697,
+        "word_edits": 9,
+        "known_words": 53,
+        "bag_character_recall": 0.9937888198757764
+      }
+    },
+    "rows": {
+      "src": {
+        "status": "ok",
+        "size": {
+          "file_bytes": 611306,
+          "stream_bytes_by_category": {
+            "page_content_stream": 44,
+            "background_image:/FlateDecode": 610493
+          },
+          "stream_count_by_category": {
+            "page_content_stream": 1,
+            "background_image:/FlateDecode": 1
+          },
+          "page_font_resource_count": 0,
+          "structure_xref_dictionary_and_unclassified_bytes": 769,
+          "reconciles": true,
+          "image_role_method": "largest non-mask image is background; remaining non-mask images foreground; masks from ImageMask, Mask and SMask"
+        },
+        "size_ratio": 1.0,
+        "dpi_confidence": "moderate",
+        "source_type": "processed-derivative",
+        "extraction": {
+          "poppler_plain": {
+            "scores": {
+              "diplomatic": {
+                "cer": 1.0,
+                "character_edits": 322,
+                "known_characters": 322,
+                "unknown_characters": 0,
+                "wer": 1.0,
+                "word_edits": 53,
+                "known_words": 53,
+                "bag_character_recall": 0.0
+              },
+              "reading": {
+                "cer": 1.0,
+                "character_edits": 322,
+                "known_characters": 322,
+                "unknown_characters": 0,
+                "wer": 1.0,
+                "word_edits": 53,
+                "known_words": 53,
+                "bag_character_recall": 0.0
+              }
+            },
+            "empty_text_layer": true,
+            "control_characters": 1,
+            "private_use_characters": 0,
+            "frozen_hocr_words_absent": 45
+          },
+          "poppler_raw": {
+            "scores": {
+              "diplomatic": {
+                "cer": 1.0,
+                "character_edits": 322,
+                "known_characters": 322,
+                "unknown_characters": 0,
+                "wer": 1.0,
+                "word_edits": 53,
+                "known_words": 53,
+                "bag_character_recall": 0.0
+              },
+              "reading": {
+                "cer": 1.0,
+                "character_edits": 322,
+                "known_characters": 322,
+                "unknown_characters": 0,
+                "wer": 1.0,
+                "word_edits": 53,
+                "known_words": 53,
+                "bag_character_recall": 0.0
+              }
+            },
+            "empty_text_layer": true,
+            "control_characters": 1,
+            "private_use_characters": 0,
+            "frozen_hocr_words_absent": 45
+          },
+          "pdfium": {
+            "scores": {
+              "diplomatic": {
+                "cer": 1.0,
+                "character_edits": 322,
+                "known_characters": 322,
+                "unknown_characters": 0,
+                "wer": 1.0,
+                "word_edits": 53,
+                "known_words": 53,
+                "bag_character_recall": 0.0
+              },
+              "reading": {
+                "cer": 1.0,
+                "character_edits": 322,
+                "known_characters": 322,
+                "unknown_characters": 0,
+                "wer": 1.0,
+                "word_edits": 53,
+                "known_words": 53,
+                "bag_character_recall": 0.0
+              }
+            },
+            "empty_text_layer": true,
+            "control_characters": 0,
+            "private_use_characters": 0,
+            "frozen_hocr_words_absent": 45
+          }
+        },
+        "poppler_pdfium_reading_disagreement": {
+          "character_edits": 0
+        }
+      },
+      "sw-E": {
+        "status": "ok",
+        "size": {
+          "file_bytes": 215146,
+          "stream_bytes_by_category": {
+            "font_program": 33908,
+            "other_stream": 2754,
+            "page_content_stream": 3386,
+            "foreground_image:/FlateDecode": 63299,
+            "background_image:/DCTDecode": 52219,
+            "foreground_image:/DCTDecode": 51834
+          },
+          "stream_count_by_category": {
+            "font_program": 1,
+            "other_stream": 4,
+            "page_content_stream": 1,
+            "foreground_image:/FlateDecode": 16,
+            "background_image:/DCTDecode": 1,
+            "foreground_image:/DCTDecode": 16
+          },
+          "page_font_resource_count": 1,
+          "structure_xref_dictionary_and_unclassified_bytes": 7746,
+          "reconciles": true,
+          "image_role_method": "largest non-mask image is background; remaining non-mask images foreground; masks from ImageMask, Mask and SMask"
+        },
+        "size_ratio": 0.3519448524961312,
+        "dpi_confidence": "moderate",
+        "source_type": "processed-derivative",
+        "extraction": {
+          "poppler_plain": {
+            "scores": {
+              "diplomatic": {
+                "cer": 0.577639751552795,
+                "character_edits": 186,
+                "known_characters": 322,
+                "unknown_characters": 0,
+                "wer": 0.8490566037735849,
+                "word_edits": 45,
+                "known_words": 53,
+                "bag_character_recall": 0.937888198757764
+              },
+              "reading": {
+                "cer": 0.5714285714285714,
+                "character_edits": 184,
+                "known_characters": 322,
+                "unknown_characters": 0,
+                "wer": 0.8490566037735849,
+                "word_edits": 45,
+                "known_words": 53,
+                "bag_character_recall": 0.937888198757764
+              }
+            },
+            "empty_text_layer": false,
+            "control_characters": 1,
+            "private_use_characters": 0,
+            "frozen_hocr_words_absent": 24
+          },
+          "poppler_raw": {
+            "scores": {
+              "diplomatic": {
+                "cer": 0.11801242236024845,
+                "character_edits": 38,
+                "known_characters": 322,
+                "unknown_characters": 0,
+                "wer": 0.8679245283018868,
+                "word_edits": 46,
+                "known_words": 53,
+                "bag_character_recall": 0.8975155279503105
+              },
+              "reading": {
+                "cer": 0.11801242236024845,
+                "character_edits": 38,
+                "known_characters": 322,
+                "unknown_characters": 0,
+                "wer": 0.8679245283018868,
+                "word_edits": 46,
+                "known_words": 53,
+                "bag_character_recall": 0.8975155279503105
+              }
+            },
+            "empty_text_layer": false,
+            "control_characters": 1,
+            "private_use_characters": 0,
+            "frozen_hocr_words_absent": 35
+          },
+          "pdfium": {
+            "scores": {
+              "diplomatic": {
+                "cer": 0.018633540372670808,
+                "character_edits": 6,
+                "known_characters": 322,
+                "unknown_characters": 0,
+                "wer": 0.16981132075471697,
+                "word_edits": 9,
+                "known_words": 53,
+                "bag_character_recall": 0.9937888198757764
+              },
+              "reading": {
+                "cer": 0.018633540372670808,
+                "character_edits": 6,
+                "known_characters": 322,
+                "unknown_characters": 0,
+                "wer": 0.16981132075471697,
+                "word_edits": 9,
+                "known_words": 53,
+                "bag_character_recall": 0.9937888198757764
+              }
+            },
+            "empty_text_layer": false,
+            "control_characters": 0,
+            "private_use_characters": 0,
+            "frozen_hocr_words_absent": 0
+          }
+        },
+        "poppler_pdfium_reading_disagreement": {
+          "character_edits": 184
+        }
+      },
+      "sw-M": {
+        "status": "ok",
+        "size": {
+          "file_bytes": 215146,
+          "stream_bytes_by_category": {
+            "font_program": 33908,
+            "other_stream": 2754,
+            "page_content_stream": 3386,
+            "foreground_image:/FlateDecode": 63299,
+            "background_image:/DCTDecode": 52219,
+            "foreground_image:/DCTDecode": 51834
+          },
+          "stream_count_by_category": {
+            "font_program": 1,
+            "other_stream": 4,
+            "page_content_stream": 1,
+            "foreground_image:/FlateDecode": 16,
+            "background_image:/DCTDecode": 1,
+            "foreground_image:/DCTDecode": 16
+          },
+          "page_font_resource_count": 1,
+          "structure_xref_dictionary_and_unclassified_bytes": 7746,
+          "reconciles": true,
+          "image_role_method": "largest non-mask image is background; remaining non-mask images foreground; masks from ImageMask, Mask and SMask"
+        },
+        "size_ratio": 0.3519448524961312,
+        "dpi_confidence": "moderate",
+        "source_type": "processed-derivative",
+        "extraction": {
+          "poppler_plain": {
+            "scores": {
+              "diplomatic": {
+                "cer": 0.577639751552795,
+                "character_edits": 186,
+                "known_characters": 322,
+                "unknown_characters": 0,
+                "wer": 0.8490566037735849,
+                "word_edits": 45,
+                "known_words": 53,
+                "bag_character_recall": 0.937888198757764
+              },
+              "reading": {
+                "cer": 0.5714285714285714,
+                "character_edits": 184,
+                "known_characters": 322,
+                "unknown_characters": 0,
+                "wer": 0.8490566037735849,
+                "word_edits": 45,
+                "known_words": 53,
+                "bag_character_recall": 0.937888198757764
+              }
+            },
+            "empty_text_layer": false,
+            "control_characters": 1,
+            "private_use_characters": 0,
+            "frozen_hocr_words_absent": 24
+          },
+          "poppler_raw": {
+            "scores": {
+              "diplomatic": {
+                "cer": 0.11801242236024845,
+                "character_edits": 38,
+                "known_characters": 322,
+                "unknown_characters": 0,
+                "wer": 0.8679245283018868,
+                "word_edits": 46,
+                "known_words": 53,
+                "bag_character_recall": 0.8975155279503105
+              },
+              "reading": {
+                "cer": 0.11801242236024845,
+                "character_edits": 38,
+                "known_characters": 322,
+                "unknown_characters": 0,
+                "wer": 0.8679245283018868,
+                "word_edits": 46,
+                "known_words": 53,
+                "bag_character_recall": 0.8975155279503105
+              }
+            },
+            "empty_text_layer": false,
+            "control_characters": 1,
+            "private_use_characters": 0,
+            "frozen_hocr_words_absent": 35
+          },
+          "pdfium": {
+            "scores": {
+              "diplomatic": {
+                "cer": 0.018633540372670808,
+                "character_edits": 6,
+                "known_characters": 322,
+                "unknown_characters": 0,
+                "wer": 0.16981132075471697,
+                "word_edits": 9,
+                "known_words": 53,
+                "bag_character_recall": 0.9937888198757764
+              },
+              "reading": {
+                "cer": 0.018633540372670808,
+                "character_edits": 6,
+                "known_characters": 322,
+                "unknown_characters": 0,
+                "wer": 0.16981132075471697,
+                "word_edits": 9,
+                "known_words": 53,
+                "bag_character_recall": 0.9937888198757764
+              }
+            },
+            "empty_text_layer": false,
+            "control_characters": 0,
+            "private_use_characters": 0,
+            "frozen_hocr_words_absent": 0
+          }
+        },
+        "poppler_pdfium_reading_disagreement": {
+          "character_edits": 184
+        }
+      },
+      "sw-build": {
+        "status": "ok",
+        "size": {
+          "file_bytes": 226174,
+          "stream_bytes_by_category": {
+            "font_program": 40701,
+            "other_stream": 2765,
+            "page_content_stream": 3386,
+            "foreground_image:/FlateDecode": 68562,
+            "background_image:/DCTDecode": 52219,
+            "foreground_image:/DCTDecode": 51834
+          },
+          "stream_count_by_category": {
+            "font_program": 1,
+            "other_stream": 4,
+            "page_content_stream": 1,
+            "foreground_image:/FlateDecode": 16,
+            "background_image:/DCTDecode": 1,
+            "foreground_image:/DCTDecode": 16
+          },
+          "page_font_resource_count": 1,
+          "structure_xref_dictionary_and_unclassified_bytes": 6707,
+          "reconciles": true,
+          "image_role_method": "largest non-mask image is background; remaining non-mask images foreground; masks from ImageMask, Mask and SMask"
+        },
+        "size_ratio": 0.36998491753720725,
+        "dpi_confidence": "moderate",
+        "source_type": "processed-derivative",
+        "extraction": {
+          "poppler_plain": {
+            "scores": {
+              "diplomatic": {
+                "cer": 0.577639751552795,
+                "character_edits": 186,
+                "known_characters": 322,
+                "unknown_characters": 0,
+                "wer": 0.8490566037735849,
+                "word_edits": 45,
+                "known_words": 53,
+                "bag_character_recall": 0.937888198757764
+              },
+              "reading": {
+                "cer": 0.5714285714285714,
+                "character_edits": 184,
+                "known_characters": 322,
+                "unknown_characters": 0,
+                "wer": 0.8490566037735849,
+                "word_edits": 45,
+                "known_words": 53,
+                "bag_character_recall": 0.937888198757764
+              }
+            },
+            "empty_text_layer": false,
+            "control_characters": 1,
+            "private_use_characters": 0,
+            "frozen_hocr_words_absent": 24
+          },
+          "poppler_raw": {
+            "scores": {
+              "diplomatic": {
+                "cer": 0.11801242236024845,
+                "character_edits": 38,
+                "known_characters": 322,
+                "unknown_characters": 0,
+                "wer": 0.8679245283018868,
+                "word_edits": 46,
+                "known_words": 53,
+                "bag_character_recall": 0.8975155279503105
+              },
+              "reading": {
+                "cer": 0.11801242236024845,
+                "character_edits": 38,
+                "known_characters": 322,
+                "unknown_characters": 0,
+                "wer": 0.8679245283018868,
+                "word_edits": 46,
+                "known_words": 53,
+                "bag_character_recall": 0.8975155279503105
+              }
+            },
+            "empty_text_layer": false,
+            "control_characters": 1,
+            "private_use_characters": 0,
+            "frozen_hocr_words_absent": 35
+          },
+          "pdfium": {
+            "scores": {
+              "diplomatic": {
+                "cer": 0.018633540372670808,
+                "character_edits": 6,
+                "known_characters": 322,
+                "unknown_characters": 0,
+                "wer": 0.16981132075471697,
+                "word_edits": 9,
+                "known_words": 53,
+                "bag_character_recall": 0.9937888198757764
+              },
+              "reading": {
+                "cer": 0.018633540372670808,
+                "character_edits": 6,
+                "known_characters": 322,
+                "unknown_characters": 0,
+                "wer": 0.16981132075471697,
+                "word_edits": 9,
+                "known_words": 53,
+                "bag_character_recall": 0.9937888198757764
+              }
+            },
+            "empty_text_layer": false,
+            "control_characters": 0,
+            "private_use_characters": 0,
+            "frozen_hocr_words_absent": 0
+          }
+        },
+        "poppler_pdfium_reading_disagreement": {
+          "character_edits": 184
+        }
+      },
+      "ocrmypdf-E": {
+        "status": "ok",
+        "size": {
+          "file_bytes": 618300,
+          "stream_bytes_by_category": {
+            "other_stream": 6581,
+            "page_content_stream": 91,
+            "background_image:/FlateDecode": 610493
+          },
+          "stream_count_by_category": {
+            "other_stream": 7,
+            "page_content_stream": 1,
+            "background_image:/FlateDecode": 1
+          },
+          "page_font_resource_count": 0,
+          "structure_xref_dictionary_and_unclassified_bytes": 1135,
+          "reconciles": true,
+          "image_role_method": "largest non-mask image is background; remaining non-mask images foreground; masks from ImageMask, Mask and SMask"
+        },
+        "size_ratio": 1.011441078608749,
+        "dpi_confidence": "moderate",
+        "source_type": "processed-derivative",
+        "extraction": {
+          "poppler_plain": {
+            "scores": {
+              "diplomatic": {
+                "cer": 0.021739130434782608,
+                "character_edits": 7,
+                "known_characters": 322,
+                "unknown_characters": 0,
+                "wer": 0.16981132075471697,
+                "word_edits": 9,
+                "known_words": 53,
+                "bag_character_recall": 0.9875776397515528
+              },
+              "reading": {
+                "cer": 0.021739130434782608,
+                "character_edits": 7,
+                "known_characters": 322,
+                "unknown_characters": 0,
+                "wer": 0.16981132075471697,
+                "word_edits": 9,
+                "known_words": 53,
+                "bag_character_recall": 0.9875776397515528
+              }
+            },
+            "empty_text_layer": false,
+            "control_characters": 1,
+            "private_use_characters": 0,
+            "frozen_hocr_words_absent": 3
+          },
+          "poppler_raw": {
+            "scores": {
+              "diplomatic": {
+                "cer": 0.021739130434782608,
+                "character_edits": 7,
+                "known_characters": 322,
+                "unknown_characters": 0,
+                "wer": 0.16981132075471697,
+                "word_edits": 9,
+                "known_words": 53,
+                "bag_character_recall": 0.9875776397515528
+              },
+              "reading": {
+                "cer": 0.021739130434782608,
+                "character_edits": 7,
+                "known_characters": 322,
+                "unknown_characters": 0,
+                "wer": 0.16981132075471697,
+                "word_edits": 9,
+                "known_words": 53,
+                "bag_character_recall": 0.9875776397515528
+              }
+            },
+            "empty_text_layer": false,
+            "control_characters": 1,
+            "private_use_characters": 0,
+            "frozen_hocr_words_absent": 3
+          },
+          "pdfium": {
+            "scores": {
+              "diplomatic": {
+                "cer": 0.021739130434782608,
+                "character_edits": 7,
+                "known_characters": 322,
+                "unknown_characters": 0,
+                "wer": 0.16981132075471697,
+                "word_edits": 9,
+                "known_words": 53,
+                "bag_character_recall": 0.9875776397515528
+              },
+              "reading": {
+                "cer": 0.021739130434782608,
+                "character_edits": 7,
+                "known_characters": 322,
+                "unknown_characters": 0,
+                "wer": 0.16981132075471697,
+                "word_edits": 9,
+                "known_words": 53,
+                "bag_character_recall": 0.9875776397515528
+              }
+            },
+            "empty_text_layer": false,
+            "control_characters": 0,
+            "private_use_characters": 0,
+            "frozen_hocr_words_absent": 3
+          }
+        },
+        "poppler_pdfium_reading_disagreement": {
+          "character_edits": 0
+        }
+      },
+      "mrc-M": {
+        "status": "ok",
+        "size": {
+          "file_bytes": 91088,
+          "stream_bytes_by_category": {
+            "other_stream": 4202,
+            "font_program": 333,
+            "page_content_stream": 1122,
+            "background_image:/JPXDecode": 45011,
+            "foreground_image:/JPXDecode": 30000,
+            "mask:/CCITTFaxDecode": 6453
+          },
+          "stream_count_by_category": {
+            "other_stream": 4,
+            "font_program": 1,
+            "page_content_stream": 3,
+            "background_image:/JPXDecode": 1,
+            "foreground_image:/JPXDecode": 1,
+            "mask:/CCITTFaxDecode": 1
+          },
+          "page_font_resource_count": 1,
+          "structure_xref_dictionary_and_unclassified_bytes": 3967,
+          "reconciles": true,
+          "image_role_method": "largest non-mask image is background; remaining non-mask images foreground; masks from ImageMask, Mask and SMask"
+        },
+        "size_ratio": 0.1490055716776868,
+        "dpi_confidence": "moderate",
+        "source_type": "processed-derivative",
+        "extraction": {
+          "poppler_plain": {
+            "scores": {
+              "diplomatic": {
+                "cer": 0.015527950310559006,
+                "character_edits": 5,
+                "known_characters": 322,
+                "unknown_characters": 0,
+                "wer": 0.1320754716981132,
+                "word_edits": 7,
+                "known_words": 53,
+                "bag_character_recall": 0.9937888198757764
+              },
+              "reading": {
+                "cer": 0.015527950310559006,
+                "character_edits": 5,
+                "known_characters": 322,
+                "unknown_characters": 0,
+                "wer": 0.1320754716981132,
+                "word_edits": 7,
+                "known_words": 53,
+                "bag_character_recall": 0.9937888198757764
+              }
+            },
+            "empty_text_layer": false,
+            "control_characters": 1,
+            "private_use_characters": 0,
+            "frozen_hocr_words_absent": 1
+          },
+          "poppler_raw": {
+            "scores": {
+              "diplomatic": {
+                "cer": 0.015527950310559006,
+                "character_edits": 5,
+                "known_characters": 322,
+                "unknown_characters": 0,
+                "wer": 0.1320754716981132,
+                "word_edits": 7,
+                "known_words": 53,
+                "bag_character_recall": 0.9937888198757764
+              },
+              "reading": {
+                "cer": 0.015527950310559006,
+                "character_edits": 5,
+                "known_characters": 322,
+                "unknown_characters": 0,
+                "wer": 0.1320754716981132,
+                "word_edits": 7,
+                "known_words": 53,
+                "bag_character_recall": 0.9937888198757764
+              }
+            },
+            "empty_text_layer": false,
+            "control_characters": 1,
+            "private_use_characters": 0,
+            "frozen_hocr_words_absent": 1
+          },
+          "pdfium": {
+            "scores": {
+              "diplomatic": {
+                "cer": 0.018633540372670808,
+                "character_edits": 6,
+                "known_characters": 322,
+                "unknown_characters": 0,
+                "wer": 0.16981132075471697,
+                "word_edits": 9,
+                "known_words": 53,
+                "bag_character_recall": 0.9937888198757764
+              },
+              "reading": {
+                "cer": 0.018633540372670808,
+                "character_edits": 6,
+                "known_characters": 322,
+                "unknown_characters": 0,
+                "wer": 0.16981132075471697,
+                "word_edits": 9,
+                "known_words": 53,
+                "bag_character_recall": 0.9937888198757764
+              }
+            },
+            "empty_text_layer": false,
+            "control_characters": 0,
+            "private_use_characters": 0,
+            "frozen_hocr_words_absent": 0
+          }
+        },
+        "poppler_pdfium_reading_disagreement": {
+          "character_edits": 1
+        }
+      },
+      "adobe-E": {
+        "status": "ok",
+        "size": {
+          "file_bytes": 63983,
+          "stream_bytes_by_category": {
+            "other_stream": 6716,
+            "page_content_stream": 1213,
+            "font_program": 26849,
+            "background_image:pikepdf.Array([ \"/FlateDecode\", \"/DCTDecode\" ])": 2509,
+            "foreground_image:/DCTDecode": 20860,
+            "foreground_image:pikepdf.Array([ \"/FlateDecode\", \"/DCTDecode\" ])": 2666
+          },
+          "stream_count_by_category": {
+            "other_stream": 12,
+            "page_content_stream": 1,
+            "font_program": 5,
+            "background_image:pikepdf.Array([ \"/FlateDecode\", \"/DCTDecode\" ])": 1,
+            "foreground_image:/DCTDecode": 3,
+            "foreground_image:pikepdf.Array([ \"/FlateDecode\", \"/DCTDecode\" ])": 1
+          },
+          "page_font_resource_count": 5,
+          "structure_xref_dictionary_and_unclassified_bytes": 3170,
+          "reconciles": true,
+          "image_role_method": "largest non-mask image is background; remaining non-mask images foreground; masks from ImageMask, Mask and SMask"
+        },
+        "size_ratio": 0.10466607558244152,
+        "dpi_confidence": "moderate",
+        "source_type": "processed-derivative",
+        "extraction": {
+          "poppler_plain": {
+            "scores": {
+              "diplomatic": {
+                "cer": 0.27639751552795033,
+                "character_edits": 89,
+                "known_characters": 322,
+                "unknown_characters": 0,
+                "wer": 0.6037735849056604,
+                "word_edits": 32,
+                "known_words": 53,
+                "bag_character_recall": 0.8478260869565217
+              },
+              "reading": {
+                "cer": 0.2670807453416149,
+                "character_edits": 86,
+                "known_characters": 322,
+                "unknown_characters": 0,
+                "wer": 0.6037735849056604,
+                "word_edits": 32,
+                "known_words": 53,
+                "bag_character_recall": 0.8540372670807453
+              }
+            },
+            "empty_text_layer": false,
+            "control_characters": 1,
+            "private_use_characters": 0,
+            "frozen_hocr_words_absent": 30
+          },
+          "poppler_raw": {
+            "scores": {
+              "diplomatic": {
+                "cer": 0.27639751552795033,
+                "character_edits": 89,
+                "known_characters": 322,
+                "unknown_characters": 0,
+                "wer": 0.6037735849056604,
+                "word_edits": 32,
+                "known_words": 53,
+                "bag_character_recall": 0.8478260869565217
+              },
+              "reading": {
+                "cer": 0.2670807453416149,
+                "character_edits": 86,
+                "known_characters": 322,
+                "unknown_characters": 0,
+                "wer": 0.6037735849056604,
+                "word_edits": 32,
+                "known_words": 53,
+                "bag_character_recall": 0.8540372670807453
+              }
+            },
+            "empty_text_layer": false,
+            "control_characters": 1,
+            "private_use_characters": 0,
+            "frozen_hocr_words_absent": 30
+          },
+          "pdfium": {
+            "scores": {
+              "diplomatic": {
+                "cer": 0.27639751552795033,
+                "character_edits": 89,
+                "known_characters": 322,
+                "unknown_characters": 0,
+                "wer": 0.6037735849056604,
+                "word_edits": 32,
+                "known_words": 53,
+                "bag_character_recall": 0.8478260869565217
+              },
+              "reading": {
+                "cer": 0.2670807453416149,
+                "character_edits": 86,
+                "known_characters": 322,
+                "unknown_characters": 0,
+                "wer": 0.6037735849056604,
+                "word_edits": 32,
+                "known_words": 53,
+                "bag_character_recall": 0.8540372670807453
+              }
+            },
+            "empty_text_layer": false,
+            "control_characters": 0,
+            "private_use_characters": 0,
+            "frozen_hocr_words_absent": 30
+          }
+        },
+        "poppler_pdfium_reading_disagreement": {
+          "character_edits": 0
+        }
+      }
+    }
+  },
+  "finebooks/trudyrusskagoent161881russ/12342014": {
+    "dpi": 400,
+    "dpi_confidence": "moderate",
+    "source_type": "processed-derivative",
+    "frozen_hocr_scores": {
+      "diplomatic": {
+        "cer": 0.5603966346153846,
+        "character_edits": 1865,
+        "known_characters": 3328,
+        "unknown_characters": 0,
+        "wer": 0.8211920529801324,
+        "word_edits": 868,
+        "known_words": 1057,
+        "bag_character_recall": 0.6370192307692307
+      },
+      "reading": {
+        "cer": 0.5536519386834986,
+        "character_edits": 1842,
+        "known_characters": 3327,
+        "unknown_characters": 0,
+        "wer": 0.818957345971564,
+        "word_edits": 864,
+        "known_words": 1055,
+        "bag_character_recall": 0.6447249774571686
+      }
+    },
+    "rows": {
+      "src": {
+        "status": "ok",
+        "size": {
+          "file_bytes": 4955345,
+          "stream_bytes_by_category": {
+            "page_content_stream": 41,
+            "background_image:/FlateDecode": 4954535
+          },
+          "stream_count_by_category": {
+            "page_content_stream": 1,
+            "background_image:/FlateDecode": 1
+          },
+          "page_font_resource_count": 0,
+          "structure_xref_dictionary_and_unclassified_bytes": 769,
+          "reconciles": true,
+          "image_role_method": "largest non-mask image is background; remaining non-mask images foreground; masks from ImageMask, Mask and SMask"
+        },
+        "size_ratio": 1.0,
+        "dpi_confidence": "moderate",
+        "source_type": "processed-derivative",
+        "extraction": {
+          "poppler_plain": {
+            "scores": {
+              "diplomatic": {
+                "cer": 1.0,
+                "character_edits": 3328,
+                "known_characters": 3328,
+                "unknown_characters": 0,
+                "wer": 1.0,
+                "word_edits": 1057,
+                "known_words": 1057,
+                "bag_character_recall": 0.0
+              },
+              "reading": {
+                "cer": 1.0,
+                "character_edits": 3327,
+                "known_characters": 3327,
+                "unknown_characters": 0,
+                "wer": 1.0,
+                "word_edits": 1055,
+                "known_words": 1055,
+                "bag_character_recall": 0.0
+              }
+            },
+            "empty_text_layer": true,
+            "control_characters": 1,
+            "private_use_characters": 0,
+            "frozen_hocr_words_absent": 334
+          },
+          "poppler_raw": {
+            "scores": {
+              "diplomatic": {
+                "cer": 1.0,
+                "character_edits": 3328,
+                "known_characters": 3328,
+                "unknown_characters": 0,
+                "wer": 1.0,
+                "word_edits": 1057,
+                "known_words": 1057,
+                "bag_character_recall": 0.0
+              },
+              "reading": {
+                "cer": 1.0,
+                "character_edits": 3327,
+                "known_characters": 3327,
+                "unknown_characters": 0,
+                "wer": 1.0,
+                "word_edits": 1055,
+                "known_words": 1055,
+                "bag_character_recall": 0.0
+              }
+            },
+            "empty_text_layer": true,
+            "control_characters": 1,
+            "private_use_characters": 0,
+            "frozen_hocr_words_absent": 334
+          },
+          "pdfium": {
+            "scores": {
+              "diplomatic": {
+                "cer": 1.0,
+                "character_edits": 3328,
+                "known_characters": 3328,
+                "unknown_characters": 0,
+                "wer": 1.0,
+                "word_edits": 1057,
+                "known_words": 1057,
+                "bag_character_recall": 0.0
+              },
+              "reading": {
+                "cer": 1.0,
+                "character_edits": 3327,
+                "known_characters": 3327,
+                "unknown_characters": 0,
+                "wer": 1.0,
+                "word_edits": 1055,
+                "known_words": 1055,
+                "bag_character_recall": 0.0
+              }
+            },
+            "empty_text_layer": true,
+            "control_characters": 0,
+            "private_use_characters": 0,
+            "frozen_hocr_words_absent": 334
+          }
+        },
+        "poppler_pdfium_reading_disagreement": {
+          "character_edits": 0
+        }
+      },
+      "sw-E": {
+        "status": "ok",
+        "size": {
+          "file_bytes": 554944,
+          "stream_bytes_by_category": {
+            "font_program": 246280,
+            "other_stream": 11492,
+            "page_content_stream": 19930,
+            "background_image:/DCTDecode": 276454
+          },
+          "stream_count_by_category": {
+            "font_program": 1,
+            "other_stream": 4,
+            "page_content_stream": 1,
+            "background_image:/DCTDecode": 1
+          },
+          "page_font_resource_count": 1,
+          "structure_xref_dictionary_and_unclassified_bytes": 788,
+          "reconciles": true,
+          "image_role_method": "largest non-mask image is background; remaining non-mask images foreground; masks from ImageMask, Mask and SMask"
+        },
+        "size_ratio": 0.11198897352252972,
+        "dpi_confidence": "moderate",
+        "source_type": "processed-derivative",
+        "extraction": {
+          "poppler_plain": {
+            "scores": {
+              "diplomatic": {
+                "cer": 0.7178485576923077,
+                "character_edits": 2389,
+                "known_characters": 3328,
+                "unknown_characters": 0,
+                "wer": 0.9157994323557237,
+                "word_edits": 968,
+                "known_words": 1057,
+                "bag_character_recall": 0.6186899038461539
+              },
+              "reading": {
+                "cer": 0.7066426209798617,
+                "character_edits": 2351,
+                "known_characters": 3327,
+                "unknown_characters": 0,
+                "wer": 0.9156398104265403,
+                "word_edits": 966,
+                "known_words": 1055,
+                "bag_character_recall": 0.6266907123534716
+              }
+            },
+            "empty_text_layer": false,
+            "control_characters": 1,
+            "private_use_characters": 0,
+            "frozen_hocr_words_absent": 61
+          },
+          "poppler_raw": {
+            "scores": {
+              "diplomatic": {
+                "cer": 0.5682091346153846,
+                "character_edits": 1891,
+                "known_characters": 3328,
+                "unknown_characters": 0,
+                "wer": 0.825922421948912,
+                "word_edits": 873,
+                "known_words": 1057,
+                "bag_character_recall": 0.6237980769230769
+              },
+              "reading": {
+                "cer": 0.562067929065224,
+                "character_edits": 1870,
+                "known_characters": 3327,
+                "unknown_characters": 0,
+                "wer": 0.8246445497630331,
+                "word_edits": 870,
+                "known_words": 1055,
+                "bag_character_recall": 0.6311992786293958
+              }
+            },
+            "empty_text_layer": false,
+            "control_characters": 1,
+            "private_use_characters": 0,
+            "frozen_hocr_words_absent": 44
+          },
+          "pdfium": {
+            "scores": {
+              "diplomatic": {
+                "cer": 0.5618990384615384,
+                "character_edits": 1870,
+                "known_characters": 3328,
+                "unknown_characters": 0,
+                "wer": 0.8240302743614002,
+                "word_edits": 871,
+                "known_words": 1057,
+                "bag_character_recall": 0.6364182692307693
+              },
+              "reading": {
+                "cer": 0.5548542230237451,
+                "character_edits": 1846,
+                "known_characters": 3327,
+                "unknown_characters": 0,
+                "wer": 0.8218009478672986,
+                "word_edits": 867,
+                "known_words": 1055,
+                "bag_character_recall": 0.6441238352870454
+              }
+            },
+            "empty_text_layer": false,
+            "control_characters": 0,
+            "private_use_characters": 0,
+            "frozen_hocr_words_absent": 5
+          }
+        },
+        "poppler_pdfium_reading_disagreement": {
+          "character_edits": 1805
+        }
+      },
+      "sw-M": {
+        "status": "ok",
+        "size": {
+          "file_bytes": 554944,
+          "stream_bytes_by_category": {
+            "font_program": 246280,
+            "other_stream": 11492,
+            "page_content_stream": 19930,
+            "background_image:/DCTDecode": 276454
+          },
+          "stream_count_by_category": {
+            "font_program": 1,
+            "other_stream": 4,
+            "page_content_stream": 1,
+            "background_image:/DCTDecode": 1
+          },
+          "page_font_resource_count": 1,
+          "structure_xref_dictionary_and_unclassified_bytes": 788,
+          "reconciles": true,
+          "image_role_method": "largest non-mask image is background; remaining non-mask images foreground; masks from ImageMask, Mask and SMask"
+        },
+        "size_ratio": 0.11198897352252972,
+        "dpi_confidence": "moderate",
+        "source_type": "processed-derivative",
+        "extraction": {
+          "poppler_plain": {
+            "scores": {
+              "diplomatic": {
+                "cer": 0.7178485576923077,
+                "character_edits": 2389,
+                "known_characters": 3328,
+                "unknown_characters": 0,
+                "wer": 0.9157994323557237,
+                "word_edits": 968,
+                "known_words": 1057,
+                "bag_character_recall": 0.6186899038461539
+              },
+              "reading": {
+                "cer": 0.7066426209798617,
+                "character_edits": 2351,
+                "known_characters": 3327,
+                "unknown_characters": 0,
+                "wer": 0.9156398104265403,
+                "word_edits": 966,
+                "known_words": 1055,
+                "bag_character_recall": 0.6266907123534716
+              }
+            },
+            "empty_text_layer": false,
+            "control_characters": 1,
+            "private_use_characters": 0,
+            "frozen_hocr_words_absent": 61
+          },
+          "poppler_raw": {
+            "scores": {
+              "diplomatic": {
+                "cer": 0.5682091346153846,
+                "character_edits": 1891,
+                "known_characters": 3328,
+                "unknown_characters": 0,
+                "wer": 0.825922421948912,
+                "word_edits": 873,
+                "known_words": 1057,
+                "bag_character_recall": 0.6237980769230769
+              },
+              "reading": {
+                "cer": 0.562067929065224,
+                "character_edits": 1870,
+                "known_characters": 3327,
+                "unknown_characters": 0,
+                "wer": 0.8246445497630331,
+                "word_edits": 870,
+                "known_words": 1055,
+                "bag_character_recall": 0.6311992786293958
+              }
+            },
+            "empty_text_layer": false,
+            "control_characters": 1,
+            "private_use_characters": 0,
+            "frozen_hocr_words_absent": 44
+          },
+          "pdfium": {
+            "scores": {
+              "diplomatic": {
+                "cer": 0.5618990384615384,
+                "character_edits": 1870,
+                "known_characters": 3328,
+                "unknown_characters": 0,
+                "wer": 0.8240302743614002,
+                "word_edits": 871,
+                "known_words": 1057,
+                "bag_character_recall": 0.6364182692307693
+              },
+              "reading": {
+                "cer": 0.5548542230237451,
+                "character_edits": 1846,
+                "known_characters": 3327,
+                "unknown_characters": 0,
+                "wer": 0.8218009478672986,
+                "word_edits": 867,
+                "known_words": 1055,
+                "bag_character_recall": 0.6441238352870454
+              }
+            },
+            "empty_text_layer": false,
+            "control_characters": 0,
+            "private_use_characters": 0,
+            "frozen_hocr_words_absent": 5
+          }
+        },
+        "poppler_pdfium_reading_disagreement": {
+          "character_edits": 1805
+        }
+      },
+      "sw-build": {
+        "status": "ok",
+        "size": {
+          "file_bytes": 637972,
+          "stream_bytes_by_category": {
+            "font_program": 329231,
+            "other_stream": 11545,
+            "page_content_stream": 19954,
+            "background_image:/DCTDecode": 276454
+          },
+          "stream_count_by_category": {
+            "font_program": 1,
+            "other_stream": 4,
+            "page_content_stream": 1,
+            "background_image:/DCTDecode": 1
+          },
+          "page_font_resource_count": 1,
+          "structure_xref_dictionary_and_unclassified_bytes": 788,
+          "reconciles": true,
+          "image_role_method": "largest non-mask image is background; remaining non-mask images foreground; masks from ImageMask, Mask and SMask"
+        },
+        "size_ratio": 0.1287442145804177,
+        "dpi_confidence": "moderate",
+        "source_type": "processed-derivative",
+        "extraction": {
+          "poppler_plain": {
+            "scores": {
+              "diplomatic": {
+                "cer": 0.7178485576923077,
+                "character_edits": 2389,
+                "known_characters": 3328,
+                "unknown_characters": 0,
+                "wer": 0.9157994323557237,
+                "word_edits": 968,
+                "known_words": 1057,
+                "bag_character_recall": 0.6186899038461539
+              },
+              "reading": {
+                "cer": 0.7066426209798617,
+                "character_edits": 2351,
+                "known_characters": 3327,
+                "unknown_characters": 0,
+                "wer": 0.9156398104265403,
+                "word_edits": 966,
+                "known_words": 1055,
+                "bag_character_recall": 0.6266907123534716
+              }
+            },
+            "empty_text_layer": false,
+            "control_characters": 1,
+            "private_use_characters": 0,
+            "frozen_hocr_words_absent": 61
+          },
+          "poppler_raw": {
+            "scores": {
+              "diplomatic": {
+                "cer": 0.5682091346153846,
+                "character_edits": 1891,
+                "known_characters": 3328,
+                "unknown_characters": 0,
+                "wer": 0.825922421948912,
+                "word_edits": 873,
+                "known_words": 1057,
+                "bag_character_recall": 0.6237980769230769
+              },
+              "reading": {
+                "cer": 0.562067929065224,
+                "character_edits": 1870,
+                "known_characters": 3327,
+                "unknown_characters": 0,
+                "wer": 0.8246445497630331,
+                "word_edits": 870,
+                "known_words": 1055,
+                "bag_character_recall": 0.6311992786293958
+              }
+            },
+            "empty_text_layer": false,
+            "control_characters": 1,
+            "private_use_characters": 0,
+            "frozen_hocr_words_absent": 44
+          },
+          "pdfium": {
+            "scores": {
+              "diplomatic": {
+                "cer": 0.5618990384615384,
+                "character_edits": 1870,
+                "known_characters": 3328,
+                "unknown_characters": 0,
+                "wer": 0.8240302743614002,
+                "word_edits": 871,
+                "known_words": 1057,
+                "bag_character_recall": 0.6364182692307693
+              },
+              "reading": {
+                "cer": 0.5548542230237451,
+                "character_edits": 1846,
+                "known_characters": 3327,
+                "unknown_characters": 0,
+                "wer": 0.8218009478672986,
+                "word_edits": 867,
+                "known_words": 1055,
+                "bag_character_recall": 0.6441238352870454
+              }
+            },
+            "empty_text_layer": false,
+            "control_characters": 0,
+            "private_use_characters": 0,
+            "frozen_hocr_words_absent": 5
+          }
+        },
+        "poppler_pdfium_reading_disagreement": {
+          "character_edits": 1805
+        }
+      },
+      "ocrmypdf-E": {
+        "status": "ok",
+        "size": {
+          "file_bytes": 4972564,
+          "stream_bytes_by_category": {
+            "other_stream": 15925,
+            "page_content_stream": 76,
+            "background_image:/FlateDecode": 4954535
+          },
+          "stream_count_by_category": {
+            "other_stream": 9,
+            "page_content_stream": 1,
+            "background_image:/FlateDecode": 1
+          },
+          "page_font_resource_count": 0,
+          "structure_xref_dictionary_and_unclassified_bytes": 2028,
+          "reconciles": true,
+          "image_role_method": "largest non-mask image is background; remaining non-mask images foreground; masks from ImageMask, Mask and SMask"
+        },
+        "size_ratio": 1.0034748337401331,
+        "dpi_confidence": "moderate",
+        "source_type": "processed-derivative",
+        "extraction": {
+          "poppler_plain": {
+            "scores": {
+              "diplomatic": {
+                "cer": 0.6409254807692307,
+                "character_edits": 2133,
+                "known_characters": 3328,
+                "unknown_characters": 0,
+                "wer": 0.8543046357615894,
+                "word_edits": 903,
+                "known_words": 1057,
+                "bag_character_recall": 0.6391225961538461
+              },
+              "reading": {
+                "cer": 0.6333032762248272,
+                "character_edits": 2107,
+                "known_characters": 3327,
+                "unknown_characters": 0,
+                "wer": 0.852132701421801,
+                "word_edits": 899,
+                "known_words": 1055,
+                "bag_character_recall": 0.6435226931169221
+              }
+            },
+            "empty_text_layer": false,
+            "control_characters": 1,
+            "private_use_characters": 0,
+            "frozen_hocr_words_absent": 4
+          },
+          "poppler_raw": {
+            "scores": {
+              "diplomatic": {
+                "cer": 0.5612980769230769,
+                "character_edits": 1868,
+                "known_characters": 3328,
+                "unknown_characters": 0,
+                "wer": 0.8221381267738883,
+                "word_edits": 869,
+                "known_words": 1057,
+                "bag_character_recall": 0.6379206730769231
+              },
+              "reading": {
+                "cer": 0.5548542230237451,
+                "character_edits": 1846,
+                "known_characters": 3327,
+                "unknown_characters": 0,
+                "wer": 0.8199052132701422,
+                "word_edits": 865,
+                "known_words": 1055,
+                "bag_character_recall": 0.6417192666065524
+              }
+            },
+            "empty_text_layer": false,
+            "control_characters": 1,
+            "private_use_characters": 0,
+            "frozen_hocr_words_absent": 13
+          },
+          "pdfium": {
+            "scores": {
+              "diplomatic": {
+                "cer": 0.5606971153846154,
+                "character_edits": 1866,
+                "known_characters": 3328,
+                "unknown_characters": 0,
+                "wer": 0.8240302743614002,
+                "word_edits": 871,
+                "known_words": 1057,
+                "bag_character_recall": 0.6394230769230769
+              },
+              "reading": {
+                "cer": 0.5545536519386834,
+                "character_edits": 1845,
+                "known_characters": 3327,
+                "unknown_characters": 0,
+                "wer": 0.8218009478672986,
+                "word_edits": 867,
+                "known_words": 1055,
+                "bag_character_recall": 0.6432221220318606
+              }
+            },
+            "empty_text_layer": false,
+            "control_characters": 0,
+            "private_use_characters": 0,
+            "frozen_hocr_words_absent": 2
+          }
+        },
+        "poppler_pdfium_reading_disagreement": {
+          "character_edits": 1496
+        }
+      },
+      "mrc-M": {
+        "status": "ok",
+        "size": {
+          "file_bytes": 137040,
+          "stream_bytes_by_category": {
+            "other_stream": 4202,
+            "font_program": 333,
+            "page_content_stream": 7551,
+            "background_image:/JPXDecode": 41381,
+            "foreground_image:/JPXDecode": 27651,
+            "mask:/CCITTFaxDecode": 51951
+          },
+          "stream_count_by_category": {
+            "other_stream": 4,
+            "font_program": 1,
+            "page_content_stream": 3,
+            "background_image:/JPXDecode": 1,
+            "foreground_image:/JPXDecode": 1,
+            "mask:/CCITTFaxDecode": 1
+          },
+          "page_font_resource_count": 1,
+          "structure_xref_dictionary_and_unclassified_bytes": 3971,
+          "reconciles": true,
+          "image_role_method": "largest non-mask image is background; remaining non-mask images foreground; masks from ImageMask, Mask and SMask"
+        },
+        "size_ratio": 0.0276549866860935,
+        "dpi_confidence": "moderate",
+        "source_type": "processed-derivative",
+        "extraction": {
+          "poppler_plain": {
+            "scores": {
+              "diplomatic": {
+                "cer": 0.6784855769230769,
+                "character_edits": 2258,
+                "known_characters": 3328,
+                "unknown_characters": 0,
+                "wer": 0.8883632923368022,
+                "word_edits": 939,
+                "known_words": 1057,
+                "bag_character_recall": 0.6337139423076923
+              },
+              "reading": {
+                "cer": 0.6684700931770363,
+                "character_edits": 2224,
+                "known_characters": 3327,
+                "unknown_characters": 0,
+                "wer": 0.8872037914691943,
+                "word_edits": 936,
+                "known_words": 1055,
+                "bag_character_recall": 0.6420198376916141
+              }
+            },
+            "empty_text_layer": false,
+            "control_characters": 1,
+            "private_use_characters": 0,
+            "frozen_hocr_words_absent": 10
+          },
+          "poppler_raw": {
+            "scores": {
+              "diplomatic": {
+                "cer": 0.5625,
+                "character_edits": 1872,
+                "known_characters": 3328,
+                "unknown_characters": 0,
+                "wer": 0.8211920529801324,
+                "word_edits": 868,
+                "known_words": 1057,
+                "bag_character_recall": 0.6349158653846154
+              },
+              "reading": {
+                "cer": 0.5548542230237451,
+                "character_edits": 1846,
+                "known_characters": 3327,
+                "unknown_characters": 0,
+                "wer": 0.8199052132701422,
+                "word_edits": 865,
+                "known_words": 1055,
+                "bag_character_recall": 0.6423204087766757
+              }
+            },
+            "empty_text_layer": false,
+            "control_characters": 1,
+            "private_use_characters": 0,
+            "frozen_hocr_words_absent": 7
+          },
+          "pdfium": {
+            "scores": {
+              "diplomatic": {
+                "cer": 0.5597956730769231,
+                "character_edits": 1863,
+                "known_characters": 3328,
+                "unknown_characters": 0,
+                "wer": 0.8202459791863765,
+                "word_edits": 867,
+                "known_words": 1057,
+                "bag_character_recall": 0.6364182692307693
+              },
+              "reading": {
+                "cer": 0.5527502254283138,
+                "character_edits": 1839,
+                "known_characters": 3327,
+                "unknown_characters": 0,
+                "wer": 0.8180094786729858,
+                "word_edits": 863,
+                "known_words": 1055,
+                "bag_character_recall": 0.6438232642019838
+              }
+            },
+            "empty_text_layer": false,
+            "control_characters": 0,
+            "private_use_characters": 0,
+            "frozen_hocr_words_absent": 2
+          }
+        },
+        "poppler_pdfium_reading_disagreement": {
+          "character_edits": 1639
+        }
+      },
+      "adobe-E": {
+        "status": "ok",
+        "size": {
+          "file_bytes": 396265,
+          "stream_bytes_by_category": {
+            "other_stream": 13294,
+            "page_content_stream": 16092,
+            "font_program": 177252,
+            "background_image:/DCTDecode": 180484,
+            "foreground_image:/DCTDecode": 4885
+          },
+          "stream_count_by_category": {
+            "other_stream": 16,
+            "page_content_stream": 8,
+            "font_program": 9,
+            "background_image:/DCTDecode": 1,
+            "foreground_image:/DCTDecode": 3
+          },
+          "page_font_resource_count": 9,
+          "structure_xref_dictionary_and_unclassified_bytes": 4258,
+          "reconciles": true,
+          "image_role_method": "largest non-mask image is background; remaining non-mask images foreground; masks from ImageMask, Mask and SMask"
+        },
+        "size_ratio": 0.07996718694662026,
+        "dpi_confidence": "moderate",
+        "source_type": "processed-derivative",
+        "extraction": {
+          "poppler_plain": {
+            "scores": {
+              "diplomatic": {
+                "cer": 0.5985576923076923,
+                "character_edits": 1992,
+                "known_characters": 3328,
+                "unknown_characters": 0,
+                "wer": 0.7341532639545885,
+                "word_edits": 776,
+                "known_words": 1057,
+                "bag_character_recall": 0.7923677884615384
+              },
+              "reading": {
+                "cer": 0.5936278929966937,
+                "character_edits": 1975,
+                "known_characters": 3327,
+                "unknown_characters": 0,
+                "wer": 0.7336492890995261,
+                "word_edits": 774,
+                "known_words": 1055,
+                "bag_character_recall": 0.798316801923655
+              }
+            },
+            "empty_text_layer": false,
+            "control_characters": 1,
+            "private_use_characters": 0,
+            "frozen_hocr_words_absent": 251
+          },
+          "poppler_raw": {
+            "scores": {
+              "diplomatic": {
+                "cer": 0.3786057692307692,
+                "character_edits": 1260,
+                "known_characters": 3328,
+                "unknown_characters": 0,
+                "wer": 0.5998107852412489,
+                "word_edits": 634,
+                "known_words": 1057,
+                "bag_character_recall": 0.7734375
+              },
+              "reading": {
+                "cer": 0.3754132852419597,
+                "character_edits": 1249,
+                "known_characters": 3327,
+                "unknown_characters": 0,
+                "wer": 0.5981042654028436,
+                "word_edits": 631,
+                "known_words": 1055,
+                "bag_character_recall": 0.7790802524797115
+              }
+            },
+            "empty_text_layer": false,
+            "control_characters": 1,
+            "private_use_characters": 0,
+            "frozen_hocr_words_absent": 258
+          },
+          "pdfium": {
+            "scores": {
+              "diplomatic": {
+                "cer": 0.3759014423076923,
+                "character_edits": 1251,
+                "known_characters": 3328,
+                "unknown_characters": 0,
+                "wer": 0.5856196783349101,
+                "word_edits": 619,
+                "known_words": 1057,
+                "bag_character_recall": 0.7836538461538461
+              },
+              "reading": {
+                "cer": 0.3727081454764052,
+                "character_edits": 1240,
+                "known_characters": 3327,
+                "unknown_characters": 0,
+                "wer": 0.5838862559241706,
+                "word_edits": 616,
+                "known_words": 1055,
+                "bag_character_recall": 0.7899008115419297
+              }
+            },
+            "empty_text_layer": false,
+            "control_characters": 0,
+            "private_use_characters": 0,
+            "frozen_hocr_words_absent": 252
+          }
+        },
+        "poppler_pdfium_reading_disagreement": {
+          "character_edits": 1631
+        }
+      }
+    }
+  }
+}

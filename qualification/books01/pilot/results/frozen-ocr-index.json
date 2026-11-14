@@ -1,0 +1,623 @@
+{
+  "schema": "books01-frozen-ocr/1",
+  "pages": {
+    "quiver/aventinus_grammatica_1515_0008": {
+      "page_id": "quiver/aventinus_grammatica_1515_0008",
+      "dpi": 300,
+      "language": "deu_latf",
+      "decoded_pixel_sha256": "2c7fa08ba7c9cdc274ed11a73b30a8d4f1dbfd33df2c0e6b8c3bbea8454031ec",
+      "source_pdf_sha256": "f66c23111c3f9e6d0d6b321bfd34eb39381488d574333b259b6f7e986547ac51",
+      "png_sha256": "c4f1b0dd015129685bcdc9feaa79f05ecdebd1a771b7366c3c2a181523c04c6a",
+      "runs": {
+        "3": {
+          "repeat": [
+            {
+              "argv": [
+                "/usr/bin/tesseract",
+                "/data/coding/scanweave/work/books01/ocr-frozen/aventinus_grammatica_1515_0008/page.png",
+                "/data/coding/scanweave/work/books01/ocr-frozen/aventinus_grammatica_1515_0008/psm3-1",
+                "-l",
+                "deu_latf",
+                "--dpi",
+                "300",
+                "-c",
+                "hocr_char_boxes=1",
+                "--psm",
+                "3",
+                "hocr"
+              ],
+              "status": 0,
+              "wall_seconds": 2.3848196789622307,
+              "output_sha256": "54d8387b883dcbbea223afa8d1145c7f8694e7f2a3a40e3039c182102527ae72",
+              "time_file": "/data/coding/scanweave/work/books01/ocr-frozen/aventinus_grammatica_1515_0008/psm3-1.time"
+            },
+            {
+              "argv": [
+                "/usr/bin/tesseract",
+                "/data/coding/scanweave/work/books01/ocr-frozen/aventinus_grammatica_1515_0008/page.png",
+                "/data/coding/scanweave/work/books01/ocr-frozen/aventinus_grammatica_1515_0008/psm3-2",
+                "-l",
+                "deu_latf",
+                "--dpi",
+                "300",
+                "-c",
+                "hocr_char_boxes=1",
+                "--psm",
+                "3",
+                "hocr"
+              ],
+              "status": 0,
+              "wall_seconds": 2.3850640230812132,
+              "output_sha256": "54d8387b883dcbbea223afa8d1145c7f8694e7f2a3a40e3039c182102527ae72",
+              "time_file": "/data/coding/scanweave/work/books01/ocr-frozen/aventinus_grammatica_1515_0008/psm3-2.time"
+            }
+          ],
+          "deterministic": true
+        },
+        "6": {
+          "repeat": [
+            {
+              "argv": [
+                "/usr/bin/tesseract",
+                "/data/coding/scanweave/work/books01/ocr-frozen/aventinus_grammatica_1515_0008/page.png",
+                "/data/coding/scanweave/work/books01/ocr-frozen/aventinus_grammatica_1515_0008/psm6-exact-1",
+                "-l",
+                "deu_latf",
+                "--dpi",
+                "300",
+                "--psm",
+                "6",
+                "-c",
+                "hocr_char_boxes=1",
+                "hocr"
+              ],
+              "status": 0,
+              "wall_seconds": 2.4926547950599343,
+              "output_sha256": "e0605450c188fc621771153fee638ad8bac6bda737c904389628c8db8f1ecf1e",
+              "time_file": "/data/coding/scanweave/work/books01/ocr-frozen/aventinus_grammatica_1515_0008/psm6-exact-1.time"
+            },
+            {
+              "argv": [
+                "/usr/bin/tesseract",
+                "/data/coding/scanweave/work/books01/ocr-frozen/aventinus_grammatica_1515_0008/page.png",
+                "/data/coding/scanweave/work/books01/ocr-frozen/aventinus_grammatica_1515_0008/psm6-exact-2",
+                "-l",
+                "deu_latf",
+                "--dpi",
+                "300",
+                "--psm",
+                "6",
+                "-c",
+                "hocr_char_boxes=1",
+                "hocr"
+              ],
+              "status": 0,
+              "wall_seconds": 2.474161138990894,
+              "output_sha256": "e0605450c188fc621771153fee638ad8bac6bda737c904389628c8db8f1ecf1e",
+              "time_file": "/data/coding/scanweave/work/books01/ocr-frozen/aventinus_grammatica_1515_0008/psm6-exact-2.time"
+            }
+          ],
+          "deterministic": true,
+          "same_as_original_order": true
+        }
+      },
+      "dpi_confidence": "moderate",
+      "source_type": "quiver-original-tiff"
+    },
+    "quiver/luther_babstum_1526_0011": {
+      "page_id": "quiver/luther_babstum_1526_0011",
+      "dpi": 300,
+      "language": "deu_latf",
+      "decoded_pixel_sha256": "e2490a69fdbb331cf8885fdadfc319fe7fb4a1a51e0720b67e9a9b364877f30b",
+      "source_pdf_sha256": "1ebf80b5c646f604ae3663acdd051b7d4209288507626f38857797e8112dd2e3",
+      "png_sha256": "da635f07669406ab827d16e73ff72016cbada870d44b373176ddba825c6ff542",
+      "runs": {
+        "3": {
+          "repeat": [
+            {
+              "argv": [
+                "/usr/bin/tesseract",
+                "/data/coding/scanweave/work/books01/ocr-frozen/luther_babstum_1526_0011/page.png",
+                "/data/coding/scanweave/work/books01/ocr-frozen/luther_babstum_1526_0011/psm3-1",
+                "-l",
+                "deu_latf",
+                "--dpi",
+                "300",
+                "-c",
+                "hocr_char_boxes=1",
+                "--psm",
+                "3",
+                "hocr"
+              ],
+              "status": 0,
+              "wall_seconds": 1.223872252041474,
+              "output_sha256": "db0b90573f89c8e8fe1df4563c4bbe680480bc53c66b59bc2e0729924d390a6b",
+              "time_file": "/data/coding/scanweave/work/books01/ocr-frozen/luther_babstum_1526_0011/psm3-1.time"
+            },
+            {
+              "argv": [
+                "/usr/bin/tesseract",
+                "/data/coding/scanweave/work/books01/ocr-frozen/luther_babstum_1526_0011/page.png",
+                "/data/coding/scanweave/work/books01/ocr-frozen/luther_babstum_1526_0011/psm3-2",
+                "-l",
+                "deu_latf",
+                "--dpi",
+                "300",
+                "-c",
+                "hocr_char_boxes=1",
+                "--psm",
+                "3",
+                "hocr"
+              ],
+              "status": 0,
+              "wall_seconds": 1.232705508125946,
+              "output_sha256": "db0b90573f89c8e8fe1df4563c4bbe680480bc53c66b59bc2e0729924d390a6b",
+              "time_file": "/data/coding/scanweave/work/books01/ocr-frozen/luther_babstum_1526_0011/psm3-2.time"
+            }
+          ],
+          "deterministic": true
+        },
+        "6": {
+          "repeat": [
+            {
+              "argv": [
+                "/usr/bin/tesseract",
+                "/data/coding/scanweave/work/books01/ocr-frozen/luther_babstum_1526_0011/page.png",
+                "/data/coding/scanweave/work/books01/ocr-frozen/luther_babstum_1526_0011/psm6-exact-1",
+                "-l",
+                "deu_latf",
+                "--dpi",
+                "300",
+                "--psm",
+                "6",
+                "-c",
+                "hocr_char_boxes=1",
+                "hocr"
+              ],
+              "status": 0,
+              "wall_seconds": 2.006000018911436,
+              "output_sha256": "e3ab8c1ec2938f3d03977560dee62ed3ea212be2be11aef133285db1280dab9c",
+              "time_file": "/data/coding/scanweave/work/books01/ocr-frozen/luther_babstum_1526_0011/psm6-exact-1.time"
+            },
+            {
+              "argv": [
+                "/usr/bin/tesseract",
+                "/data/coding/scanweave/work/books01/ocr-frozen/luther_babstum_1526_0011/page.png",
+                "/data/coding/scanweave/work/books01/ocr-frozen/luther_babstum_1526_0011/psm6-exact-2",
+                "-l",
+                "deu_latf",
+                "--dpi",
+                "300",
+                "--psm",
+                "6",
+                "-c",
+                "hocr_char_boxes=1",
+                "hocr"
+              ],
+              "status": 0,
+              "wall_seconds": 2.0043380060233176,
+              "output_sha256": "e3ab8c1ec2938f3d03977560dee62ed3ea212be2be11aef133285db1280dab9c",
+              "time_file": "/data/coding/scanweave/work/books01/ocr-frozen/luther_babstum_1526_0011/psm6-exact-2.time"
+            }
+          ],
+          "deterministic": true,
+          "same_as_original_order": true
+        }
+      },
+      "dpi_confidence": "moderate",
+      "source_type": "quiver-original-tiff"
+    },
+    "quiver/arnold_ketzerhistorie01_1699_0114": {
+      "page_id": "quiver/arnold_ketzerhistorie01_1699_0114",
+      "dpi": 300,
+      "language": "deu_latf+lat",
+      "decoded_pixel_sha256": "c77785bf10128a5501f71984965ddf40026ebb568cda3dd6be07a9cb0fefa145",
+      "source_pdf_sha256": "f45799e1baec423205602002ba840638558497012ddafdfa91736a8b8d1c5b74",
+      "png_sha256": "b95e1a6b3ec7faaea91b6a08264972f71998a680f1d7c087d6bb0cb454c27051",
+      "runs": {
+        "3": {
+          "repeat": [
+            {
+              "argv": [
+                "/usr/bin/tesseract",
+                "/data/coding/scanweave/work/books01/ocr-frozen/arnold_ketzerhistorie01_1699_0114/page.png",
+                "/data/coding/scanweave/work/books01/ocr-frozen/arnold_ketzerhistorie01_1699_0114/psm3-1",
+                "-l",
+                "deu_latf+lat",
+                "--dpi",
+                "300",
+                "-c",
+                "hocr_char_boxes=1",
+                "--psm",
+                "3",
+                "hocr"
+              ],
+              "status": 0,
+              "wall_seconds": 14.245845993049443,
+              "output_sha256": "0ebfd6ae137a4323bab2b293d5478c821dad4ee27aa622693b020e78e415d267",
+              "time_file": "/data/coding/scanweave/work/books01/ocr-frozen/arnold_ketzerhistorie01_1699_0114/psm3-1.time"
+            },
+            {
+              "argv": [
+                "/usr/bin/tesseract",
+                "/data/coding/scanweave/work/books01/ocr-frozen/arnold_ketzerhistorie01_1699_0114/page.png",
+                "/data/coding/scanweave/work/books01/ocr-frozen/arnold_ketzerhistorie01_1699_0114/psm3-2",
+                "-l",
+                "deu_latf+lat",
+                "--dpi",
+                "300",
+                "-c",
+                "hocr_char_boxes=1",
+                "--psm",
+                "3",
+                "hocr"
+              ],
+              "status": 0,
+              "wall_seconds": 13.790168969891965,
+              "output_sha256": "0ebfd6ae137a4323bab2b293d5478c821dad4ee27aa622693b020e78e415d267",
+              "time_file": "/data/coding/scanweave/work/books01/ocr-frozen/arnold_ketzerhistorie01_1699_0114/psm3-2.time"
+            }
+          ],
+          "deterministic": true
+        },
+        "6": {
+          "repeat": [
+            {
+              "argv": [
+                "/usr/bin/tesseract",
+                "/data/coding/scanweave/work/books01/ocr-frozen/arnold_ketzerhistorie01_1699_0114/page.png",
+                "/data/coding/scanweave/work/books01/ocr-frozen/arnold_ketzerhistorie01_1699_0114/psm6-exact-1",
+                "-l",
+                "deu_latf+lat",
+                "--dpi",
+                "300",
+                "--psm",
+                "6",
+                "-c",
+                "hocr_char_boxes=1",
+                "hocr"
+              ],
+              "status": 0,
+              "wall_seconds": 14.448210437083617,
+              "output_sha256": "14ab6ea896ba963c5e9b357e556fa2ce8d623e60032443de0a9ea155a4192c38",
+              "time_file": "/data/coding/scanweave/work/books01/ocr-frozen/arnold_ketzerhistorie01_1699_0114/psm6-exact-1.time"
+            },
+            {
+              "argv": [
+                "/usr/bin/tesseract",
+                "/data/coding/scanweave/work/books01/ocr-frozen/arnold_ketzerhistorie01_1699_0114/page.png",
+                "/data/coding/scanweave/work/books01/ocr-frozen/arnold_ketzerhistorie01_1699_0114/psm6-exact-2",
+                "-l",
+                "deu_latf+lat",
+                "--dpi",
+                "300",
+                "--psm",
+                "6",
+                "-c",
+                "hocr_char_boxes=1",
+                "hocr"
+              ],
+              "status": 0,
+              "wall_seconds": 13.92681673890911,
+              "output_sha256": "14ab6ea896ba963c5e9b357e556fa2ce8d623e60032443de0a9ea155a4192c38",
+              "time_file": "/data/coding/scanweave/work/books01/ocr-frozen/arnold_ketzerhistorie01_1699_0114/psm6-exact-2.time"
+            }
+          ],
+          "deterministic": true,
+          "same_as_original_order": true
+        }
+      },
+      "dpi_confidence": "moderate",
+      "source_type": "quiver-original-tiff"
+    },
+    "quiver/benner_herrnhuterey04_1748_0013": {
+      "page_id": "quiver/benner_herrnhuterey04_1748_0013",
+      "dpi": 300,
+      "language": "deu_latf+lat",
+      "decoded_pixel_sha256": "d8d2577005c8caba620e0fe3332101b379d9d8ad0daa1d6e0ec6bed0a91a3612",
+      "source_pdf_sha256": "3ff6b073ff50c4c04eaffd78f57530f122a914f3944c821718a4c62361c330a9",
+      "png_sha256": "e6e0e2b2655b826b30c7308593a3e1e4fec4b19a414be10b8997208166f5349d",
+      "runs": {
+        "3": {
+          "repeat": [
+            {
+              "argv": [
+                "/usr/bin/tesseract",
+                "/data/coding/scanweave/work/books01/ocr-frozen/benner_herrnhuterey04_1748_0013/page.png",
+                "/data/coding/scanweave/work/books01/ocr-frozen/benner_herrnhuterey04_1748_0013/psm3-1",
+                "-l",
+                "deu_latf+lat",
+                "--dpi",
+                "300",
+                "-c",
+                "hocr_char_boxes=1",
+                "--psm",
+                "3",
+                "hocr"
+              ],
+              "status": 0,
+              "wall_seconds": 3.1070693070068955,
+              "output_sha256": "e7b35a8e854810d46401483a2bcef4feed016ad2ef04c53df2dbaa9f0d947b2f",
+              "time_file": "/data/coding/scanweave/work/books01/ocr-frozen/benner_herrnhuterey04_1748_0013/psm3-1.time"
+            },
+            {
+              "argv": [
+                "/usr/bin/tesseract",
+                "/data/coding/scanweave/work/books01/ocr-frozen/benner_herrnhuterey04_1748_0013/page.png",
+                "/data/coding/scanweave/work/books01/ocr-frozen/benner_herrnhuterey04_1748_0013/psm3-2",
+                "-l",
+                "deu_latf+lat",
+                "--dpi",
+                "300",
+                "-c",
+                "hocr_char_boxes=1",
+                "--psm",
+                "3",
+                "hocr"
+              ],
+              "status": 0,
+              "wall_seconds": 3.1718212529085577,
+              "output_sha256": "e7b35a8e854810d46401483a2bcef4feed016ad2ef04c53df2dbaa9f0d947b2f",
+              "time_file": "/data/coding/scanweave/work/books01/ocr-frozen/benner_herrnhuterey04_1748_0013/psm3-2.time"
+            }
+          ],
+          "deterministic": true
+        },
+        "6": {
+          "repeat": [
+            {
+              "argv": [
+                "/usr/bin/tesseract",
+                "/data/coding/scanweave/work/books01/ocr-frozen/benner_herrnhuterey04_1748_0013/page.png",
+                "/data/coding/scanweave/work/books01/ocr-frozen/benner_herrnhuterey04_1748_0013/psm6-exact-1",
+                "-l",
+                "deu_latf+lat",
+                "--dpi",
+                "300",
+                "--psm",
+                "6",
+                "-c",
+                "hocr_char_boxes=1",
+                "hocr"
+              ],
+              "status": 0,
+              "wall_seconds": 4.813918316969648,
+              "output_sha256": "a70640f62736b3b4100efc8e3d2ca0a259599d3b7f04e3a9ae3aebe338abaeea",
+              "time_file": "/data/coding/scanweave/work/books01/ocr-frozen/benner_herrnhuterey04_1748_0013/psm6-exact-1.time"
+            },
+            {
+              "argv": [
+                "/usr/bin/tesseract",
+                "/data/coding/scanweave/work/books01/ocr-frozen/benner_herrnhuterey04_1748_0013/page.png",
+                "/data/coding/scanweave/work/books01/ocr-frozen/benner_herrnhuterey04_1748_0013/psm6-exact-2",
+                "-l",
+                "deu_latf+lat",
+                "--dpi",
+                "300",
+                "--psm",
+                "6",
+                "-c",
+                "hocr_char_boxes=1",
+                "hocr"
+              ],
+              "status": 0,
+              "wall_seconds": 4.702920170966536,
+              "output_sha256": "a70640f62736b3b4100efc8e3d2ca0a259599d3b7f04e3a9ae3aebe338abaeea",
+              "time_file": "/data/coding/scanweave/work/books01/ocr-frozen/benner_herrnhuterey04_1748_0013/psm6-exact-2.time"
+            }
+          ],
+          "deterministic": true,
+          "same_as_original_order": true
+        }
+      },
+      "dpi_confidence": "low",
+      "source_type": "quiver-original-tiff"
+    },
+    "finebooks/conchologiaiconi05reev/8967333": {
+      "page_id": "finebooks/conchologiaiconi05reev/8967333",
+      "dpi": 500,
+      "language": "eng",
+      "decoded_pixel_sha256": "48df257a51c94ad888d99a38dc4c319ca7484737046d2821dc58619f86b33544",
+      "source_pdf_sha256": "0bdea84368ed08a3c01506f14048bb437b59c7ecc654a631953154ab8f60f819",
+      "png_sha256": "552e55d87001bea72c2f16793717d1b329b3d8c99c1641679da004e8774ee5cb",
+      "runs": {
+        "3": {
+          "repeat": [
+            {
+              "argv": [
+                "/usr/bin/tesseract",
+                "/data/coding/scanweave/work/books01/ocr-frozen/8967333/page.png",
+                "/data/coding/scanweave/work/books01/ocr-frozen/8967333/psm3-1",
+                "-l",
+                "eng",
+                "--dpi",
+                "500",
+                "-c",
+                "hocr_char_boxes=1",
+                "--psm",
+                "3",
+                "hocr"
+              ],
+              "status": 0,
+              "wall_seconds": 0.7637796660419554,
+              "output_sha256": "83157448e405713c813f8a8b3b54d0924fa9c916a00755c0467bb36cb3a8a525",
+              "time_file": "/data/coding/scanweave/work/books01/ocr-frozen/8967333/psm3-1.time"
+            },
+            {
+              "argv": [
+                "/usr/bin/tesseract",
+                "/data/coding/scanweave/work/books01/ocr-frozen/8967333/page.png",
+                "/data/coding/scanweave/work/books01/ocr-frozen/8967333/psm3-2",
+                "-l",
+                "eng",
+                "--dpi",
+                "500",
+                "-c",
+                "hocr_char_boxes=1",
+                "--psm",
+                "3",
+                "hocr"
+              ],
+              "status": 0,
+              "wall_seconds": 0.7898079080041498,
+              "output_sha256": "83157448e405713c813f8a8b3b54d0924fa9c916a00755c0467bb36cb3a8a525",
+              "time_file": "/data/coding/scanweave/work/books01/ocr-frozen/8967333/psm3-2.time"
+            }
+          ],
+          "deterministic": true
+        },
+        "6": {
+          "repeat": [
+            {
+              "argv": [
+                "/usr/bin/tesseract",
+                "/data/coding/scanweave/work/books01/ocr-frozen/8967333/page.png",
+                "/data/coding/scanweave/work/books01/ocr-frozen/8967333/psm6-exact-1",
+                "-l",
+                "eng",
+                "--dpi",
+                "500",
+                "--psm",
+                "6",
+                "-c",
+                "hocr_char_boxes=1",
+                "hocr"
+              ],
+              "status": 0,
+              "wall_seconds": 0.6647777820471674,
+              "output_sha256": "f98cb7ddb1c213f050677e40e4def2ddcd7326bfdff052270c99718e1b81d8f6",
+              "time_file": "/data/coding/scanweave/work/books01/ocr-frozen/8967333/psm6-exact-1.time"
+            },
+            {
+              "argv": [
+                "/usr/bin/tesseract",
+                "/data/coding/scanweave/work/books01/ocr-frozen/8967333/page.png",
+                "/data/coding/scanweave/work/books01/ocr-frozen/8967333/psm6-exact-2",
+                "-l",
+                "eng",
+                "--dpi",
+                "500",
+                "--psm",
+                "6",
+                "-c",
+                "hocr_char_boxes=1",
+                "hocr"
+              ],
+              "status": 0,
+              "wall_seconds": 0.6818966879509389,
+              "output_sha256": "f98cb7ddb1c213f050677e40e4def2ddcd7326bfdff052270c99718e1b81d8f6",
+              "time_file": "/data/coding/scanweave/work/books01/ocr-frozen/8967333/psm6-exact-2.time"
+            }
+          ],
+          "deterministic": true,
+          "same_as_original_order": true
+        }
+      },
+      "dpi_confidence": "moderate",
+      "source_type": "processed-derivative"
+    },
+    "finebooks/trudyrusskagoent161881russ/12342014": {
+      "page_id": "finebooks/trudyrusskagoent161881russ/12342014",
+      "dpi": 400,
+      "language": "fra+deu",
+      "decoded_pixel_sha256": "4bac9c0be7d8612aa3899a552c56f261cc806cc33cf782b74780c05727341771",
+      "source_pdf_sha256": "15fee5696e4a04d2be8651170cf928db2343709e064ec441ef8395213aa9d95a",
+      "png_sha256": "8343838c600011a29845deddb89bc73266a25fc30591b90a94610c4236c1898c",
+      "runs": {
+        "3": {
+          "repeat": [
+            {
+              "argv": [
+                "/usr/bin/tesseract",
+                "/data/coding/scanweave/work/books01/ocr-frozen/12342014/page.png",
+                "/data/coding/scanweave/work/books01/ocr-frozen/12342014/psm3-1",
+                "-l",
+                "fra+deu",
+                "--dpi",
+                "400",
+                "-c",
+                "hocr_char_boxes=1",
+                "--psm",
+                "3",
+                "hocr"
+              ],
+              "status": 0,
+              "wall_seconds": 7.9479328519664705,
+              "output_sha256": "24e1aeb95c4426990c2b982c653105763e6b12a3c3cb2ac7ea1b346f5fe7ba71",
+              "time_file": "/data/coding/scanweave/work/books01/ocr-frozen/12342014/psm3-1.time"
+            },
+            {
+              "argv": [
+                "/usr/bin/tesseract",
+                "/data/coding/scanweave/work/books01/ocr-frozen/12342014/page.png",
+                "/data/coding/scanweave/work/books01/ocr-frozen/12342014/psm3-2",
+                "-l",
+                "fra+deu",
+                "--dpi",
+                "400",
+                "-c",
+                "hocr_char_boxes=1",
+                "--psm",
+                "3",
+                "hocr"
+              ],
+              "status": 0,
+              "wall_seconds": 7.896991296904162,
+              "output_sha256": "24e1aeb95c4426990c2b982c653105763e6b12a3c3cb2ac7ea1b346f5fe7ba71",
+              "time_file": "/data/coding/scanweave/work/books01/ocr-frozen/12342014/psm3-2.time"
+            }
+          ],
+          "deterministic": true
+        },
+        "6": {
+          "repeat": [
+            {
+              "argv": [
+                "/usr/bin/tesseract",
+                "/data/coding/scanweave/work/books01/ocr-frozen/12342014/page.png",
+                "/data/coding/scanweave/work/books01/ocr-frozen/12342014/psm6-exact-1",
+                "-l",
+                "fra+deu",
+                "--dpi",
+                "400",
+                "--psm",
+                "6",
+                "-c",
+                "hocr_char_boxes=1",
+                "hocr"
+              ],
+              "status": 0,
+              "wall_seconds": 9.81986079690978,
+              "output_sha256": "eb67ab2e0f0eaeb17290a0cd0fa3f72ee25349561c6f6ae3fda227561248b4e9",
+              "time_file": "/data/coding/scanweave/work/books01/ocr-frozen/12342014/psm6-exact-1.time"
+            },
+            {
+              "argv": [
+                "/usr/bin/tesseract",
+                "/data/coding/scanweave/work/books01/ocr-frozen/12342014/page.png",
+                "/data/coding/scanweave/work/books01/ocr-frozen/12342014/psm6-exact-2",
+                "-l",
+                "fra+deu",
+                "--dpi",
+                "400",
+                "--psm",
+                "6",
+                "-c",
+                "hocr_char_boxes=1",
+                "hocr"
+              ],
+              "status": 0,
+              "wall_seconds": 9.731533179990947,
+              "output_sha256": "eb67ab2e0f0eaeb17290a0cd0fa3f72ee25349561c6f6ae3fda227561248b4e9",
+              "time_file": "/data/coding/scanweave/work/books01/ocr-frozen/12342014/psm6-exact-2.time"
+            }
+          ],
+          "deterministic": true,
+          "same_as_original_order": true
+        }
+      },
+      "dpi_confidence": "moderate",
+      "source_type": "processed-derivative"
+    }
+  }
+}

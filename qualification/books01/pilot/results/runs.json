@@ -1,0 +1,785 @@
+{
+  "quiver/aventinus_grammatica_1515_0008": {
+    "id": "quiver/aventinus_grammatica_1515_0008",
+    "source_type": "quiver-original-tiff",
+    "dpi": 300,
+    "dpi_confidence": "moderate",
+    "selected_psm": "3",
+    "rows": {
+      "sw-E": {
+        "argv": [
+          "/data/coding/scanweave/work/scanweave-ab7dfba/target/release/scanweave",
+          "/data/coding/scanweave/work/books01/sources/single/aventinus_grammatica_1515/aventinus_grammatica_1515_0008.pdf",
+          "/data/coding/scanweave/work/books01/pilot/runs/aventinus_grammatica_1515_0008/sw-E.pdf",
+          "--dpi",
+          "300",
+          "--lang",
+          "deu_latf"
+        ],
+        "status": 0,
+        "wall_seconds": 45.24574250704609,
+        "time_file": "/data/coding/scanweave/work/books01/pilot/runs/aventinus_grammatica_1515_0008/sw-E.time",
+        "log_file": "/data/coding/scanweave/work/books01/pilot/runs/aventinus_grammatica_1515_0008/sw-E.log",
+        "output_sha256": "71c61b570a45313815e0cfcee8264fce1a816090920b6b16e6bd6cade19294ec",
+        "dpi_confidence": "moderate",
+        "source_type": "quiver-original-tiff"
+      },
+      "sw-M": {
+        "argv": [
+          "/data/coding/scanweave/work/scanweave-ab7dfba/target/release/scanweave",
+          "/data/coding/scanweave/work/books01/sources/single/aventinus_grammatica_1515/aventinus_grammatica_1515_0008.pdf",
+          "/data/coding/scanweave/work/books01/pilot/runs/aventinus_grammatica_1515_0008/sw-M.pdf",
+          "--dpi",
+          "300",
+          "--lang",
+          "deu_latf"
+        ],
+        "status": 0,
+        "wall_seconds": 41.5872361601796,
+        "time_file": "/data/coding/scanweave/work/books01/pilot/runs/aventinus_grammatica_1515_0008/sw-M.time",
+        "log_file": "/data/coding/scanweave/work/books01/pilot/runs/aventinus_grammatica_1515_0008/sw-M.log",
+        "strict_call_order_recheck": {
+          "status": 0,
+          "wall_seconds": 43.0333425141871,
+          "time_file": "/data/coding/scanweave/work/books01/pilot/runs/aventinus_grammatica_1515_0008/sw-M-strict.time",
+          "identical_to_previous_pdf": true
+        },
+        "output_sha256": "71c61b570a45313815e0cfcee8264fce1a816090920b6b16e6bd6cade19294ec",
+        "dpi_confidence": "moderate",
+        "source_type": "quiver-original-tiff"
+      },
+      "sw-build": {
+        "argv": [
+          "/data/coding/scanweave/work/scanweave-ab7dfba/target/release/scanweave",
+          "build",
+          "/data/coding/scanweave/work/books01/ocr-frozen/aventinus_grammatica_1515_0008/page.png",
+          "--ocr",
+          "/data/coding/scanweave/work/books01/ocr-frozen/aventinus_grammatica_1515_0008/psm3-1.hocr",
+          "--dpi",
+          "300",
+          "--profile",
+          "clearscan",
+          "--output",
+          "/data/coding/scanweave/work/books01/pilot/runs/aventinus_grammatica_1515_0008/sw-build.pdf",
+          "--report",
+          "/data/coding/scanweave/work/books01/pilot/runs/aventinus_grammatica_1515_0008/sw-build.report.json"
+        ],
+        "status": 0,
+        "wall_seconds": 37.79198758606799,
+        "time_file": "/data/coding/scanweave/work/books01/pilot/runs/aventinus_grammatica_1515_0008/sw-build.time",
+        "log_file": "/data/coding/scanweave/work/books01/pilot/runs/aventinus_grammatica_1515_0008/sw-build.log",
+        "output_sha256": "249fc68a0e2885275b8023ae033eccfca49bd5d62c540dfddeab110bae7a22d5",
+        "dpi_confidence": "moderate",
+        "source_type": "quiver-original-tiff"
+      },
+      "mrc-M": {
+        "argv": [
+          "/data/coding/scanweave/qualification/.venv/bin/recode_pdf",
+          "-P",
+          "/data/coding/scanweave/work/books01/sources/single/aventinus_grammatica_1515/aventinus_grammatica_1515_0008.pdf",
+          "-T",
+          "/data/coding/scanweave/work/books01/ocr-frozen/aventinus_grammatica_1515_0008/psm3-1.hocr",
+          "-o",
+          "/data/coding/scanweave/work/books01/pilot/runs/aventinus_grammatica_1515_0008/mrc-M.pdf",
+          "--mask-compression",
+          "ccitt",
+          "--threads",
+          "1"
+        ],
+        "status": 0,
+        "wall_seconds": 3.471028121886775,
+        "time_file": "/data/coding/scanweave/work/books01/pilot/runs/aventinus_grammatica_1515_0008/mrc-M.time",
+        "log_file": "/data/coding/scanweave/work/books01/pilot/runs/aventinus_grammatica_1515_0008/mrc-M.log",
+        "output_sha256": "bb5a1d93bc5a71c93940eaa31eb12a00156e3781b4e95054cf8d35127f0c5c8e",
+        "dpi_confidence": "moderate",
+        "source_type": "quiver-original-tiff"
+      },
+      "ocrmypdf-E": {
+        "argv": [
+          "/data/coding/scanweave/qualification/.venv/bin/ocrmypdf",
+          "--output-type",
+          "pdf",
+          "-l",
+          "deu_latf",
+          "/data/coding/scanweave/work/books01/sources/single/aventinus_grammatica_1515/aventinus_grammatica_1515_0008.pdf",
+          "/data/coding/scanweave/work/books01/pilot/runs/aventinus_grammatica_1515_0008/ocrmypdf-E.pdf"
+        ],
+        "status": 0,
+        "wall_seconds": 5.4755029489751905,
+        "time_file": "/data/coding/scanweave/work/books01/pilot/runs/aventinus_grammatica_1515_0008/ocrmypdf-E.time",
+        "log_file": "/data/coding/scanweave/work/books01/pilot/runs/aventinus_grammatica_1515_0008/ocrmypdf-E.log",
+        "output_sha256": "cb07a88769cc2a21d3203b7f3d1c3a3da4e2d993a7e7f3c2f4cbd0791478b5c9",
+        "dpi_confidence": "moderate",
+        "source_type": "quiver-original-tiff"
+      },
+      "adobe-E": {
+        "path": "/data/coding/scanweave/work/books01/runs/adobe/aventinus_grammatica_1515_0008.adobe.pdf",
+        "source": "existing GUI output",
+        "output_sha256": "78a8fde89b7eea656eaf9b01d60f20c39636bcaf6840946052a4742e25f72a4b",
+        "dpi_confidence": "moderate",
+        "source_type": "quiver-original-tiff"
+      },
+      "src": {
+        "path": "/data/coding/scanweave/work/books01/sources/single/aventinus_grammatica_1515/aventinus_grammatica_1515_0008.pdf",
+        "output_sha256": "f66c23111c3f9e6d0d6b321bfd34eb39381488d574333b259b6f7e986547ac51",
+        "dpi_confidence": "moderate",
+        "source_type": "quiver-original-tiff"
+      }
+    }
+  },
+  "quiver/luther_babstum_1526_0011": {
+    "id": "quiver/luther_babstum_1526_0011",
+    "source_type": "quiver-original-tiff",
+    "dpi": 300,
+    "dpi_confidence": "moderate",
+    "selected_psm": "3",
+    "rows": {
+      "sw-E": {
+        "argv": [
+          "/data/coding/scanweave/work/scanweave-ab7dfba/target/release/scanweave",
+          "/data/coding/scanweave/work/books01/sources/single/luther_babstum_1526/luther_babstum_1526_0011.pdf",
+          "/data/coding/scanweave/work/books01/pilot/runs/luther_babstum_1526_0011/sw-E.pdf",
+          "--dpi",
+          "300",
+          "--lang",
+          "deu_latf"
+        ],
+        "status": 0,
+        "wall_seconds": 4.6213555231224746,
+        "time_file": "/data/coding/scanweave/work/books01/pilot/runs/luther_babstum_1526_0011/sw-E.time",
+        "log_file": "/data/coding/scanweave/work/books01/pilot/runs/luther_babstum_1526_0011/sw-E.log",
+        "output_sha256": "4f8331f2abc04ef057edecdd829a904b5053378b87595ce3dbc991c21b5a9a16",
+        "dpi_confidence": "moderate",
+        "source_type": "quiver-original-tiff"
+      },
+      "sw-M": {
+        "argv": [
+          "/data/coding/scanweave/work/scanweave-ab7dfba/target/release/scanweave",
+          "/data/coding/scanweave/work/books01/sources/single/luther_babstum_1526/luther_babstum_1526_0011.pdf",
+          "/data/coding/scanweave/work/books01/pilot/runs/luther_babstum_1526_0011/sw-M.pdf",
+          "--dpi",
+          "300",
+          "--lang",
+          "deu_latf"
+        ],
+        "status": 0,
+        "wall_seconds": 3.6702913569752127,
+        "time_file": "/data/coding/scanweave/work/books01/pilot/runs/luther_babstum_1526_0011/sw-M.time",
+        "log_file": "/data/coding/scanweave/work/books01/pilot/runs/luther_babstum_1526_0011/sw-M.log",
+        "strict_call_order_recheck": {
+          "status": 0,
+          "wall_seconds": 3.5197091288864613,
+          "time_file": "/data/coding/scanweave/work/books01/pilot/runs/luther_babstum_1526_0011/sw-M-strict.time",
+          "identical_to_previous_pdf": true
+        },
+        "output_sha256": "4f8331f2abc04ef057edecdd829a904b5053378b87595ce3dbc991c21b5a9a16",
+        "dpi_confidence": "moderate",
+        "source_type": "quiver-original-tiff"
+      },
+      "sw-build": {
+        "argv": [
+          "/data/coding/scanweave/work/scanweave-ab7dfba/target/release/scanweave",
+          "build",
+          "/data/coding/scanweave/work/books01/ocr-frozen/luther_babstum_1526_0011/page.png",
+          "--ocr",
+          "/data/coding/scanweave/work/books01/ocr-frozen/luther_babstum_1526_0011/psm3-1.hocr",
+          "--dpi",
+          "300",
+          "--profile",
+          "clearscan",
+          "--output",
+          "/data/coding/scanweave/work/books01/pilot/runs/luther_babstum_1526_0011/sw-build.pdf",
+          "--report",
+          "/data/coding/scanweave/work/books01/pilot/runs/luther_babstum_1526_0011/sw-build.report.json"
+        ],
+        "status": 0,
+        "wall_seconds": 1.5663877150509506,
+        "time_file": "/data/coding/scanweave/work/books01/pilot/runs/luther_babstum_1526_0011/sw-build.time",
+        "log_file": "/data/coding/scanweave/work/books01/pilot/runs/luther_babstum_1526_0011/sw-build.log",
+        "output_sha256": "4f8331f2abc04ef057edecdd829a904b5053378b87595ce3dbc991c21b5a9a16",
+        "dpi_confidence": "moderate",
+        "source_type": "quiver-original-tiff"
+      },
+      "mrc-M": {
+        "argv": [
+          "/data/coding/scanweave/qualification/.venv/bin/recode_pdf",
+          "-P",
+          "/data/coding/scanweave/work/books01/sources/single/luther_babstum_1526/luther_babstum_1526_0011.pdf",
+          "-T",
+          "/data/coding/scanweave/work/books01/ocr-frozen/luther_babstum_1526_0011/psm3-1.hocr",
+          "-o",
+          "/data/coding/scanweave/work/books01/pilot/runs/luther_babstum_1526_0011/mrc-M.pdf",
+          "--mask-compression",
+          "ccitt",
+          "--threads",
+          "1"
+        ],
+        "status": 0,
+        "wall_seconds": 3.319578804075718,
+        "time_file": "/data/coding/scanweave/work/books01/pilot/runs/luther_babstum_1526_0011/mrc-M.time",
+        "log_file": "/data/coding/scanweave/work/books01/pilot/runs/luther_babstum_1526_0011/mrc-M.log",
+        "output_sha256": "2ab77d4a9b2f73819be16ffea937a8948bc1fcf48ec970c617c989c384423a72",
+        "dpi_confidence": "moderate",
+        "source_type": "quiver-original-tiff"
+      },
+      "ocrmypdf-E": {
+        "argv": [
+          "/data/coding/scanweave/qualification/.venv/bin/ocrmypdf",
+          "--output-type",
+          "pdf",
+          "-l",
+          "deu_latf",
+          "/data/coding/scanweave/work/books01/sources/single/luther_babstum_1526/luther_babstum_1526_0011.pdf",
+          "/data/coding/scanweave/work/books01/pilot/runs/luther_babstum_1526_0011/ocrmypdf-E.pdf"
+        ],
+        "status": 0,
+        "wall_seconds": 4.822213249048218,
+        "time_file": "/data/coding/scanweave/work/books01/pilot/runs/luther_babstum_1526_0011/ocrmypdf-E.retry.time",
+        "log_file": "/data/coding/scanweave/work/books01/pilot/runs/luther_babstum_1526_0011/ocrmypdf-E.retry.log",
+        "previous_attempt": {
+          "argv": [
+            "/data/coding/scanweave/qualification/.venv/bin/ocrmypdf",
+            "--output-type",
+            "pdf",
+            "-l",
+            "deu_latf",
+            "/data/coding/scanweave/work/books01/sources/single/luther_babstum_1526/luther_babstum_1526_0011.pdf",
+            "/data/coding/scanweave/work/books01/pilot/runs/luther_babstum_1526_0011/ocrmypdf-E.pdf"
+          ],
+          "status": 9,
+          "wall_seconds": 3.168497380800545,
+          "time_file": "/data/coding/scanweave/work/books01/pilot/runs/luther_babstum_1526_0011/ocrmypdf-E.time",
+          "log_file": "/data/coding/scanweave/work/books01/pilot/runs/luther_babstum_1526_0011/ocrmypdf-E.log"
+        },
+        "output_sha256": "7382782d33a05096646583ea3eb5c038053bf433254996620789e91b31e30433",
+        "dpi_confidence": "moderate",
+        "source_type": "quiver-original-tiff"
+      },
+      "adobe-E": {
+        "path": "/data/coding/scanweave/work/books01/runs/adobe/luther_babstum_1526_0011.adobe.pdf",
+        "source": "existing GUI output",
+        "output_sha256": "2789cd2dacd220b671756a2e4b7875cb57dfa1def0b95594846406c91336dfba",
+        "dpi_confidence": "moderate",
+        "source_type": "quiver-original-tiff"
+      },
+      "src": {
+        "path": "/data/coding/scanweave/work/books01/sources/single/luther_babstum_1526/luther_babstum_1526_0011.pdf",
+        "output_sha256": "1ebf80b5c646f604ae3663acdd051b7d4209288507626f38857797e8112dd2e3",
+        "dpi_confidence": "moderate",
+        "source_type": "quiver-original-tiff"
+      }
+    }
+  },
+  "quiver/arnold_ketzerhistorie01_1699_0114": {
+    "id": "quiver/arnold_ketzerhistorie01_1699_0114",
+    "source_type": "quiver-original-tiff",
+    "dpi": 300,
+    "dpi_confidence": "moderate",
+    "selected_psm": "3",
+    "rows": {
+      "sw-E": {
+        "argv": [
+          "/data/coding/scanweave/work/scanweave-ab7dfba/target/release/scanweave",
+          "/data/coding/scanweave/work/books01/sources/single/arnold_ketzerhistorie01_1699/arnold_ketzerhistorie01_1699_0114.pdf",
+          "/data/coding/scanweave/work/books01/pilot/runs/arnold_ketzerhistorie01_1699_0114/sw-E.pdf",
+          "--dpi",
+          "300",
+          "--lang",
+          "deu_latf+lat"
+        ],
+        "status": 0,
+        "wall_seconds": 23.804612295003608,
+        "time_file": "/data/coding/scanweave/work/books01/pilot/runs/arnold_ketzerhistorie01_1699_0114/sw-E.time",
+        "log_file": "/data/coding/scanweave/work/books01/pilot/runs/arnold_ketzerhistorie01_1699_0114/sw-E.log",
+        "output_sha256": "4513239558ecc1b8a116ca9c90652a355b65c6f37c38cdfed048a77604fe5863",
+        "dpi_confidence": "moderate",
+        "source_type": "quiver-original-tiff"
+      },
+      "sw-M": {
+        "argv": [
+          "/data/coding/scanweave/work/scanweave-ab7dfba/target/release/scanweave",
+          "/data/coding/scanweave/work/books01/sources/single/arnold_ketzerhistorie01_1699/arnold_ketzerhistorie01_1699_0114.pdf",
+          "/data/coding/scanweave/work/books01/pilot/runs/arnold_ketzerhistorie01_1699_0114/sw-M.pdf",
+          "--dpi",
+          "300",
+          "--lang",
+          "deu_latf+lat"
+        ],
+        "status": 0,
+        "wall_seconds": 9.245946570998058,
+        "time_file": "/data/coding/scanweave/work/books01/pilot/runs/arnold_ketzerhistorie01_1699_0114/sw-M.time",
+        "log_file": "/data/coding/scanweave/work/books01/pilot/runs/arnold_ketzerhistorie01_1699_0114/sw-M.log",
+        "strict_call_order_recheck": {
+          "status": 0,
+          "wall_seconds": 8.880787305999547,
+          "time_file": "/data/coding/scanweave/work/books01/pilot/runs/arnold_ketzerhistorie01_1699_0114/sw-M-strict.time",
+          "identical_to_previous_pdf": true
+        },
+        "output_sha256": "4513239558ecc1b8a116ca9c90652a355b65c6f37c38cdfed048a77604fe5863",
+        "dpi_confidence": "moderate",
+        "source_type": "quiver-original-tiff"
+      },
+      "sw-build": {
+        "argv": [
+          "/data/coding/scanweave/work/scanweave-ab7dfba/target/release/scanweave",
+          "build",
+          "/data/coding/scanweave/work/books01/ocr-frozen/arnold_ketzerhistorie01_1699_0114/page.png",
+          "--ocr",
+          "/data/coding/scanweave/work/books01/ocr-frozen/arnold_ketzerhistorie01_1699_0114/psm3-1.hocr",
+          "--dpi",
+          "300",
+          "--profile",
+          "clearscan",
+          "--output",
+          "/data/coding/scanweave/work/books01/pilot/runs/arnold_ketzerhistorie01_1699_0114/sw-build.pdf",
+          "--report",
+          "/data/coding/scanweave/work/books01/pilot/runs/arnold_ketzerhistorie01_1699_0114/sw-build.report.json"
+        ],
+        "status": 0,
+        "wall_seconds": 3.369301490020007,
+        "time_file": "/data/coding/scanweave/work/books01/pilot/runs/arnold_ketzerhistorie01_1699_0114/sw-build.time",
+        "log_file": "/data/coding/scanweave/work/books01/pilot/runs/arnold_ketzerhistorie01_1699_0114/sw-build.log",
+        "output_sha256": "4513239558ecc1b8a116ca9c90652a355b65c6f37c38cdfed048a77604fe5863",
+        "dpi_confidence": "moderate",
+        "source_type": "quiver-original-tiff"
+      },
+      "mrc-M": {
+        "argv": [
+          "/data/coding/scanweave/qualification/.venv/bin/recode_pdf",
+          "-P",
+          "/data/coding/scanweave/work/books01/sources/single/arnold_ketzerhistorie01_1699/arnold_ketzerhistorie01_1699_0114.pdf",
+          "-T",
+          "/data/coding/scanweave/work/books01/ocr-frozen/arnold_ketzerhistorie01_1699_0114/psm3-1.hocr",
+          "-o",
+          "/data/coding/scanweave/work/books01/pilot/runs/arnold_ketzerhistorie01_1699_0114/mrc-M.pdf",
+          "--mask-compression",
+          "ccitt",
+          "--threads",
+          "1"
+        ],
+        "status": 0,
+        "wall_seconds": 6.376053262036294,
+        "time_file": "/data/coding/scanweave/work/books01/pilot/runs/arnold_ketzerhistorie01_1699_0114/mrc-M.time",
+        "log_file": "/data/coding/scanweave/work/books01/pilot/runs/arnold_ketzerhistorie01_1699_0114/mrc-M.log",
+        "output_sha256": "171188866e3d3363adb35750fcc3f7148ca84b0b2266027b965bc3dafc3cf165",
+        "dpi_confidence": "moderate",
+        "source_type": "quiver-original-tiff"
+      },
+      "ocrmypdf-E": {
+        "argv": [
+          "/data/coding/scanweave/qualification/.venv/bin/ocrmypdf",
+          "--output-type",
+          "pdf",
+          "-l",
+          "deu_latf+lat",
+          "/data/coding/scanweave/work/books01/sources/single/arnold_ketzerhistorie01_1699/arnold_ketzerhistorie01_1699_0114.pdf",
+          "/data/coding/scanweave/work/books01/pilot/runs/arnold_ketzerhistorie01_1699_0114/ocrmypdf-E.pdf"
+        ],
+        "status": 0,
+        "wall_seconds": 22.049567761132494,
+        "time_file": "/data/coding/scanweave/work/books01/pilot/runs/arnold_ketzerhistorie01_1699_0114/ocrmypdf-E.time",
+        "log_file": "/data/coding/scanweave/work/books01/pilot/runs/arnold_ketzerhistorie01_1699_0114/ocrmypdf-E.log",
+        "output_sha256": "5281cc5def0e8607e131f1aabf82e9d223c8999bc983269030a70586574ec795",
+        "dpi_confidence": "moderate",
+        "source_type": "quiver-original-tiff"
+      },
+      "adobe-E": {
+        "path": "/data/coding/scanweave/work/books01/runs/adobe/arnold_ketzerhistorie01_1699_0114.adobe.pdf",
+        "source": "existing GUI output",
+        "output_sha256": "5fc2c79c3113dca652c18ff92865061526773af086110ad26b3ba5424f938c5c",
+        "dpi_confidence": "moderate",
+        "source_type": "quiver-original-tiff"
+      },
+      "src": {
+        "path": "/data/coding/scanweave/work/books01/sources/single/arnold_ketzerhistorie01_1699/arnold_ketzerhistorie01_1699_0114.pdf",
+        "output_sha256": "f45799e1baec423205602002ba840638558497012ddafdfa91736a8b8d1c5b74",
+        "dpi_confidence": "moderate",
+        "source_type": "quiver-original-tiff"
+      }
+    }
+  },
+  "quiver/benner_herrnhuterey04_1748_0013": {
+    "id": "quiver/benner_herrnhuterey04_1748_0013",
+    "source_type": "quiver-original-tiff",
+    "dpi": 300,
+    "dpi_confidence": "low",
+    "selected_psm": "3",
+    "rows": {
+      "sw-E": {
+        "argv": [
+          "/data/coding/scanweave/work/scanweave-ab7dfba/target/release/scanweave",
+          "/data/coding/scanweave/work/books01/sources/single/benner_herrnhuterey04_1748/benner_herrnhuterey04_1748_0013.pdf",
+          "/data/coding/scanweave/work/books01/pilot/runs/benner_herrnhuterey04_1748_0013/sw-E.pdf",
+          "--dpi",
+          "300",
+          "--lang",
+          "deu_latf+lat"
+        ],
+        "status": 0,
+        "wall_seconds": 15.988207705086097,
+        "time_file": "/data/coding/scanweave/work/books01/pilot/runs/benner_herrnhuterey04_1748_0013/sw-E.time",
+        "log_file": "/data/coding/scanweave/work/books01/pilot/runs/benner_herrnhuterey04_1748_0013/sw-E.log",
+        "output_sha256": "3ce889b2a6895533735fb1b1047c343981695e70e86efd28f80b71cd716c63b4",
+        "dpi_confidence": "low",
+        "source_type": "quiver-original-tiff"
+      },
+      "sw-M": {
+        "argv": [
+          "/data/coding/scanweave/work/scanweave-ab7dfba/target/release/scanweave",
+          "/data/coding/scanweave/work/books01/sources/single/benner_herrnhuterey04_1748/benner_herrnhuterey04_1748_0013.pdf",
+          "/data/coding/scanweave/work/books01/pilot/runs/benner_herrnhuterey04_1748_0013/sw-M.pdf",
+          "--dpi",
+          "300",
+          "--lang",
+          "deu_latf+lat"
+        ],
+        "status": 0,
+        "wall_seconds": 14.336875281995162,
+        "time_file": "/data/coding/scanweave/work/books01/pilot/runs/benner_herrnhuterey04_1748_0013/sw-M.time",
+        "log_file": "/data/coding/scanweave/work/books01/pilot/runs/benner_herrnhuterey04_1748_0013/sw-M.log",
+        "strict_call_order_recheck": {
+          "status": 0,
+          "wall_seconds": 12.03317314805463,
+          "time_file": "/data/coding/scanweave/work/books01/pilot/runs/benner_herrnhuterey04_1748_0013/sw-M-strict.time",
+          "identical_to_previous_pdf": true
+        },
+        "output_sha256": "3ce889b2a6895533735fb1b1047c343981695e70e86efd28f80b71cd716c63b4",
+        "dpi_confidence": "low",
+        "source_type": "quiver-original-tiff"
+      },
+      "sw-build": {
+        "argv": [
+          "/data/coding/scanweave/work/scanweave-ab7dfba/target/release/scanweave",
+          "build",
+          "/data/coding/scanweave/work/books01/ocr-frozen/benner_herrnhuterey04_1748_0013/page.png",
+          "--ocr",
+          "/data/coding/scanweave/work/books01/ocr-frozen/benner_herrnhuterey04_1748_0013/psm3-1.hocr",
+          "--dpi",
+          "300",
+          "--profile",
+          "clearscan",
+          "--output",
+          "/data/coding/scanweave/work/books01/pilot/runs/benner_herrnhuterey04_1748_0013/sw-build.pdf",
+          "--report",
+          "/data/coding/scanweave/work/books01/pilot/runs/benner_herrnhuterey04_1748_0013/sw-build.report.json"
+        ],
+        "status": 0,
+        "wall_seconds": 10.237337284954265,
+        "time_file": "/data/coding/scanweave/work/books01/pilot/runs/benner_herrnhuterey04_1748_0013/sw-build.time",
+        "log_file": "/data/coding/scanweave/work/books01/pilot/runs/benner_herrnhuterey04_1748_0013/sw-build.log",
+        "output_sha256": "c7cb58bdcc427d82367e8bfbe52c65ff03177aa00779ea035d1d4054fdc88cc3",
+        "dpi_confidence": "low",
+        "source_type": "quiver-original-tiff"
+      },
+      "mrc-M": {
+        "argv": [
+          "/data/coding/scanweave/qualification/.venv/bin/recode_pdf",
+          "-P",
+          "/data/coding/scanweave/work/books01/sources/single/benner_herrnhuterey04_1748/benner_herrnhuterey04_1748_0013.pdf",
+          "-T",
+          "/data/coding/scanweave/work/books01/ocr-frozen/benner_herrnhuterey04_1748_0013/psm3-1.hocr",
+          "-o",
+          "/data/coding/scanweave/work/books01/pilot/runs/benner_herrnhuterey04_1748_0013/mrc-M.pdf",
+          "--mask-compression",
+          "ccitt",
+          "--threads",
+          "1"
+        ],
+        "status": 0,
+        "wall_seconds": 3.226685072062537,
+        "time_file": "/data/coding/scanweave/work/books01/pilot/runs/benner_herrnhuterey04_1748_0013/mrc-M.time",
+        "log_file": "/data/coding/scanweave/work/books01/pilot/runs/benner_herrnhuterey04_1748_0013/mrc-M.log",
+        "output_sha256": "94a3eccc91e76b651fe78e6e56f56c1df3cef50ce48648361d7cf21e41aa60b7",
+        "dpi_confidence": "low",
+        "source_type": "quiver-original-tiff"
+      },
+      "ocrmypdf-E": {
+        "argv": [
+          "/data/coding/scanweave/qualification/.venv/bin/ocrmypdf",
+          "--output-type",
+          "pdf",
+          "-l",
+          "deu_latf+lat",
+          "/data/coding/scanweave/work/books01/sources/single/benner_herrnhuterey04_1748/benner_herrnhuterey04_1748_0013.pdf",
+          "/data/coding/scanweave/work/books01/pilot/runs/benner_herrnhuterey04_1748_0013/ocrmypdf-E.pdf"
+        ],
+        "status": 0,
+        "wall_seconds": 6.374254057183862,
+        "time_file": "/data/coding/scanweave/work/books01/pilot/runs/benner_herrnhuterey04_1748_0013/ocrmypdf-E.time",
+        "log_file": "/data/coding/scanweave/work/books01/pilot/runs/benner_herrnhuterey04_1748_0013/ocrmypdf-E.log",
+        "output_sha256": "ccf524d961305cb8c9f6d4347298d194373d5117dd5fa1e926f6c186783e39cd",
+        "dpi_confidence": "low",
+        "source_type": "quiver-original-tiff"
+      },
+      "adobe-E": {
+        "path": "/data/coding/scanweave/work/books01/runs/adobe/benner_herrnhuterey04_1748_0013.adobe.pdf",
+        "source": "existing GUI output",
+        "output_sha256": "62177885af07630e1b90448429968c7bc5e52460ea28e74a3ed25ba99101ffd0",
+        "dpi_confidence": "low",
+        "source_type": "quiver-original-tiff"
+      },
+      "src": {
+        "path": "/data/coding/scanweave/work/books01/sources/single/benner_herrnhuterey04_1748/benner_herrnhuterey04_1748_0013.pdf",
+        "output_sha256": "3ff6b073ff50c4c04eaffd78f57530f122a914f3944c821718a4c62361c330a9",
+        "dpi_confidence": "low",
+        "source_type": "quiver-original-tiff"
+      }
+    }
+  },
+  "finebooks/conchologiaiconi05reev/8967333": {
+    "id": "finebooks/conchologiaiconi05reev/8967333",
+    "source_type": "processed-derivative",
+    "dpi": 500,
+    "dpi_confidence": "moderate",
+    "selected_psm": "3",
+    "rows": {
+      "sw-E": {
+        "argv": [
+          "/data/coding/scanweave/work/scanweave-ab7dfba/target/release/scanweave",
+          "/data/coding/scanweave/work/books01/sources/single/conchologiaiconi05reev/8967333.pdf",
+          "/data/coding/scanweave/work/books01/pilot/runs/8967333/sw-E.pdf",
+          "--dpi",
+          "500",
+          "--lang",
+          "eng"
+        ],
+        "status": 0,
+        "wall_seconds": 9.077569351997226,
+        "time_file": "/data/coding/scanweave/work/books01/pilot/runs/8967333/sw-E.time",
+        "log_file": "/data/coding/scanweave/work/books01/pilot/runs/8967333/sw-E.log",
+        "output_sha256": "2ecd7a1f758b1e4d45d6de28545d68abeaecb94bc636cdaced6e61dd6723be56",
+        "dpi_confidence": "moderate",
+        "source_type": "processed-derivative"
+      },
+      "sw-M": {
+        "argv": [
+          "/data/coding/scanweave/work/scanweave-ab7dfba/target/release/scanweave",
+          "/data/coding/scanweave/work/books01/sources/single/conchologiaiconi05reev/8967333.pdf",
+          "/data/coding/scanweave/work/books01/pilot/runs/8967333/sw-M.pdf",
+          "--dpi",
+          "500",
+          "--lang",
+          "eng"
+        ],
+        "status": 0,
+        "wall_seconds": 8.626440388849005,
+        "time_file": "/data/coding/scanweave/work/books01/pilot/runs/8967333/sw-M.time",
+        "log_file": "/data/coding/scanweave/work/books01/pilot/runs/8967333/sw-M.log",
+        "strict_call_order_recheck": {
+          "status": 0,
+          "wall_seconds": 8.37820368213579,
+          "time_file": "/data/coding/scanweave/work/books01/pilot/runs/8967333/sw-M-strict.time",
+          "identical_to_previous_pdf": true
+        },
+        "output_sha256": "2ecd7a1f758b1e4d45d6de28545d68abeaecb94bc636cdaced6e61dd6723be56",
+        "dpi_confidence": "moderate",
+        "source_type": "processed-derivative"
+      },
+      "sw-build": {
+        "argv": [
+          "/data/coding/scanweave/work/scanweave-ab7dfba/target/release/scanweave",
+          "build",
+          "/data/coding/scanweave/work/books01/ocr-frozen/8967333/page.png",
+          "--ocr",
+          "/data/coding/scanweave/work/books01/ocr-frozen/8967333/psm3-1.hocr",
+          "--dpi",
+          "500",
+          "--profile",
+          "clearscan",
+          "--output",
+          "/data/coding/scanweave/work/books01/pilot/runs/8967333/sw-build.pdf",
+          "--report",
+          "/data/coding/scanweave/work/books01/pilot/runs/8967333/sw-build.report.json"
+        ],
+        "status": 0,
+        "wall_seconds": 7.9755915850400925,
+        "time_file": "/data/coding/scanweave/work/books01/pilot/runs/8967333/sw-build.time",
+        "log_file": "/data/coding/scanweave/work/books01/pilot/runs/8967333/sw-build.log",
+        "output_sha256": "596f11ad33bc37d42be0714b764c7fccae0969519c72bb25b3cadf9679233593",
+        "dpi_confidence": "moderate",
+        "source_type": "processed-derivative"
+      },
+      "mrc-M": {
+        "argv": [
+          "/data/coding/scanweave/qualification/.venv/bin/recode_pdf",
+          "-P",
+          "/data/coding/scanweave/work/books01/sources/single/conchologiaiconi05reev/8967333.pdf",
+          "-T",
+          "/data/coding/scanweave/work/books01/ocr-frozen/8967333/psm3-1.hocr",
+          "-o",
+          "/data/coding/scanweave/work/books01/pilot/runs/8967333/mrc-M.pdf",
+          "--mask-compression",
+          "ccitt",
+          "--threads",
+          "1"
+        ],
+        "status": 0,
+        "wall_seconds": 2.2687626008410007,
+        "time_file": "/data/coding/scanweave/work/books01/pilot/runs/8967333/mrc-M.time",
+        "log_file": "/data/coding/scanweave/work/books01/pilot/runs/8967333/mrc-M.log",
+        "output_sha256": "49d1cbe92436d6bb3e175d1446de362c34ea76e325e3ee2e350f37bf8143ec35",
+        "dpi_confidence": "moderate",
+        "source_type": "processed-derivative"
+      },
+      "ocrmypdf-E": {
+        "argv": [
+          "/data/coding/scanweave/qualification/.venv/bin/ocrmypdf",
+          "--output-type",
+          "pdf",
+          "-l",
+          "eng",
+          "/data/coding/scanweave/work/books01/sources/single/conchologiaiconi05reev/8967333.pdf",
+          "/data/coding/scanweave/work/books01/pilot/runs/8967333/ocrmypdf-E.pdf"
+        ],
+        "status": 0,
+        "wall_seconds": 2.016923459013924,
+        "time_file": "/data/coding/scanweave/work/books01/pilot/runs/8967333/ocrmypdf-E.time",
+        "log_file": "/data/coding/scanweave/work/books01/pilot/runs/8967333/ocrmypdf-E.log",
+        "output_sha256": "1033673b54d98b1fedef32608e1f3bd3a4560df2b98c5f4d975f59b41bf1c85e",
+        "dpi_confidence": "moderate",
+        "source_type": "processed-derivative"
+      },
+      "adobe-E": {
+        "path": "/data/coding/scanweave/work/books01/runs/adobe/8967333.adobe.pdf",
+        "source": "existing GUI output",
+        "output_sha256": "b93c33cb1b5b2261580d6686c9623a9c3022b16e8556ad05f482a653aac0c5b6",
+        "dpi_confidence": "moderate",
+        "source_type": "processed-derivative"
+      },
+      "src": {
+        "path": "/data/coding/scanweave/work/books01/sources/single/conchologiaiconi05reev/8967333.pdf",
+        "output_sha256": "0bdea84368ed08a3c01506f14048bb437b59c7ecc654a631953154ab8f60f819",
+        "dpi_confidence": "moderate",
+        "source_type": "processed-derivative"
+      }
+    }
+  },
+  "finebooks/trudyrusskagoent161881russ/12342014": {
+    "id": "finebooks/trudyrusskagoent161881russ/12342014",
+    "source_type": "processed-derivative",
+    "dpi": 400,
+    "dpi_confidence": "moderate",
+    "selected_psm": "3",
+    "rows": {
+      "sw-E": {
+        "argv": [
+          "/data/coding/scanweave/work/scanweave-ab7dfba/target/release/scanweave",
+          "/data/coding/scanweave/work/books01/sources/single/trudyrusskagoent161881russ/12342014.pdf",
+          "/data/coding/scanweave/work/books01/pilot/runs/12342014/sw-E.pdf",
+          "--dpi",
+          "400",
+          "--lang",
+          "fra+deu"
+        ],
+        "status": 0,
+        "wall_seconds": 53.65674603404477,
+        "time_file": "/data/coding/scanweave/work/books01/pilot/runs/12342014/sw-E.time",
+        "log_file": "/data/coding/scanweave/work/books01/pilot/runs/12342014/sw-E.log",
+        "output_sha256": "a26139c97ce7e43914228a6b2bd6a3eabcae3cd71d61508f4ef579ab597707fa",
+        "dpi_confidence": "moderate",
+        "source_type": "processed-derivative"
+      },
+      "sw-M": {
+        "argv": [
+          "/data/coding/scanweave/work/scanweave-ab7dfba/target/release/scanweave",
+          "/data/coding/scanweave/work/books01/sources/single/trudyrusskagoent161881russ/12342014.pdf",
+          "/data/coding/scanweave/work/books01/pilot/runs/12342014/sw-M.pdf",
+          "--dpi",
+          "400",
+          "--lang",
+          "fra+deu"
+        ],
+        "status": 0,
+        "wall_seconds": 45.83966215606779,
+        "time_file": "/data/coding/scanweave/work/books01/pilot/runs/12342014/sw-M.time",
+        "log_file": "/data/coding/scanweave/work/books01/pilot/runs/12342014/sw-M.log",
+        "strict_call_order_recheck": {
+          "status": 0,
+          "wall_seconds": 46.139961085049435,
+          "time_file": "/data/coding/scanweave/work/books01/pilot/runs/12342014/sw-M-strict.time",
+          "identical_to_previous_pdf": true
+        },
+        "output_sha256": "a26139c97ce7e43914228a6b2bd6a3eabcae3cd71d61508f4ef579ab597707fa",
+        "dpi_confidence": "moderate",
+        "source_type": "processed-derivative"
+      },
+      "sw-build": {
+        "argv": [
+          "/data/coding/scanweave/work/scanweave-ab7dfba/target/release/scanweave",
+          "build",
+          "/data/coding/scanweave/work/books01/ocr-frozen/12342014/page.png",
+          "--ocr",
+          "/data/coding/scanweave/work/books01/ocr-frozen/12342014/psm3-1.hocr",
+          "--dpi",
+          "400",
+          "--profile",
+          "clearscan",
+          "--output",
+          "/data/coding/scanweave/work/books01/pilot/runs/12342014/sw-build.pdf",
+          "--report",
+          "/data/coding/scanweave/work/books01/pilot/runs/12342014/sw-build.report.json"
+        ],
+        "status": 0,
+        "wall_seconds": 44.036992059787735,
+        "time_file": "/data/coding/scanweave/work/books01/pilot/runs/12342014/sw-build.time",
+        "log_file": "/data/coding/scanweave/work/books01/pilot/runs/12342014/sw-build.log",
+        "output_sha256": "b17efae737729d3a36058b0d56a86f35729e938554b7ddbf5e0b1d8e80b579f5",
+        "dpi_confidence": "moderate",
+        "source_type": "processed-derivative"
+      },
+      "mrc-M": {
+        "argv": [
+          "/data/coding/scanweave/qualification/.venv/bin/recode_pdf",
+          "-P",
+          "/data/coding/scanweave/work/books01/sources/single/trudyrusskagoent161881russ/12342014.pdf",
+          "-T",
+          "/data/coding/scanweave/work/books01/ocr-frozen/12342014/psm3-1.hocr",
+          "-o",
+          "/data/coding/scanweave/work/books01/pilot/runs/12342014/mrc-M.pdf",
+          "--mask-compression",
+          "ccitt",
+          "--threads",
+          "1"
+        ],
+        "status": 0,
+        "wall_seconds": 3.720211226027459,
+        "time_file": "/data/coding/scanweave/work/books01/pilot/runs/12342014/mrc-M.time",
+        "log_file": "/data/coding/scanweave/work/books01/pilot/runs/12342014/mrc-M.log",
+        "output_sha256": "24c6cf48c7d023dd06acafdb884a308d47ccc509e223f7092b0c0ac6c5e56119",
+        "dpi_confidence": "moderate",
+        "source_type": "processed-derivative"
+      },
+      "ocrmypdf-E": {
+        "argv": [
+          "/data/coding/scanweave/qualification/.venv/bin/ocrmypdf",
+          "--output-type",
+          "pdf",
+          "-l",
+          "fra+deu",
+          "/data/coding/scanweave/work/books01/sources/single/trudyrusskagoent161881russ/12342014.pdf",
+          "/data/coding/scanweave/work/books01/pilot/runs/12342014/ocrmypdf-E.pdf"
+        ],
+        "status": 0,
+        "wall_seconds": 10.530022029997781,
+        "time_file": "/data/coding/scanweave/work/books01/pilot/runs/12342014/ocrmypdf-E.time",
+        "log_file": "/data/coding/scanweave/work/books01/pilot/runs/12342014/ocrmypdf-E.log",
+        "output_sha256": "727f025a939abc39acf22920326d94dc94db875c648059e5ceaaf986e6c20427",
+        "dpi_confidence": "moderate",
+        "source_type": "processed-derivative"
+      },
+      "adobe-E": {
+        "path": "/data/coding/scanweave/work/books01/runs/adobe/12342014.adobe.pdf",
+        "source": "existing GUI output",
+        "output_sha256": "58e9f5840e8317f09df75d446cdf869b005ef3d61ecf8ba22917208f04b69e86",
+        "dpi_confidence": "moderate",
+        "source_type": "processed-derivative"
+      },
+      "src": {
+        "path": "/data/coding/scanweave/work/books01/sources/single/trudyrusskagoent161881russ/12342014.pdf",
+        "output_sha256": "15fee5696e4a04d2be8651170cf928db2343709e064ec441ef8395213aa9d95a",
+        "dpi_confidence": "moderate",
+        "source_type": "processed-derivative"
+      }
+    }
+  }
+}
