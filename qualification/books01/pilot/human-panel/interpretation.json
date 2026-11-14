@@ -1,0 +1,34 @@
+{
+  "schema": "books01-human-panel-interpretation/1",
+  "source": "responses.original.json (sha256 e24cb315e18a0c7156788807df84b7bdc1f726e97e8e80b846893153dca4f7ef), preserved unchanged",
+  "status": "Locked before the converter key was opened. Transcribed by Claude from the reviewer's free-text notes only. The notes are the authoritative human review; the empty structured responses mean the precise cause was hard to assign, not that the assessment is missing.",
+  "rules": [
+    "Labels A-D are per panel and randomised independently; nothing carries across panels.",
+    "'Worst aesthetically' stays aesthetic: it is never a material defect.",
+    "No ranking or severity beyond what the note states. 'X worst' gives no order among the others unless the note gives one.",
+    "Hedges ('probably', 'a bit', 'if that's what matters') are kept as uncertainty."
+  ],
+  "categories": ["preferences", "content_loss_or_alteration", "aesthetic_only", "restoration_or_readability", "uncertain_or_context"],
+  "panels": {
+    "panel-001": {"preferences": ["A and C better (than the other outputs, which are not named or ordered)"], "content_loss_or_alteration": ["Implied: outputs other than A and C preserve the trajectory of the faint/missing source ink less well (B, D by implication; not stated explicitly)"], "aesthetic_only": [], "restoration_or_readability": ["Context: the source ink is itself partly missing"], "uncertain_or_context": ["B/D loss is inferred from 'A and C are better', not stated"]},
+    "panel-002": {"preferences": ["C worst"], "content_loss_or_alteration": ["C 'becomes a bit weaker' - possible weakening of strokes (mild)"], "aesthetic_only": [], "restoration_or_readability": [], "uncertain_or_context": ["'weaker' may mean lighter or thinner strokes; whether content is lost is unclear"]},
+    "panel-003": {"preferences": ["B probably the cleanest (hedged)"], "content_loss_or_alteration": ["C 'a bit too bold' - stroke weight altered (mild)"], "aesthetic_only": ["D adds a bit of gradient noise"], "restoration_or_readability": [], "uncertain_or_context": ["'probably'"]},
+    "panel-004": {"preferences": [], "content_loss_or_alteration": ["C and D make the missing ink worse through thresholding (stated)"], "aesthetic_only": [], "restoration_or_readability": ["Source is a restoration case: without stroke restoration any output is limited"], "uncertain_or_context": ["Compared to panel-001 ('like 1')"]},
+    "panel-005": {"preferences": ["C worst, followed by D (explicit order for these two only)"], "content_loss_or_alteration": [], "aesthetic_only": [], "restoration_or_readability": [], "uncertain_or_context": ["'Similar result to the first' may mean the same faint-ink trajectory issue as panel-001; the cause is not stated"]},
+    "panel-006": {"preferences": ["C worst, followed by D"], "content_loss_or_alteration": [], "aesthetic_only": [], "restoration_or_readability": [], "uncertain_or_context": ["Basis (aesthetic or content) not stated"]},
+    "panel-007": {"preferences": ["A worst"], "content_loss_or_alteration": [], "aesthetic_only": [], "restoration_or_readability": [], "uncertain_or_context": ["Basis not stated"]},
+    "panel-008": {"preferences": [], "content_loss_or_alteration": [], "aesthetic_only": ["B smooths the background into a gradient (acceptable if intended); A, C and D much alike"], "restoration_or_readability": [], "uncertain_or_context": ["Hard to judge: background only, no context"]},
+    "panel-009": {"preferences": [], "content_loss_or_alteration": [], "aesthetic_only": ["B makes the foreground fragments harsh"], "restoration_or_readability": [], "uncertain_or_context": ["Mostly background; 'harsh' could be aesthetic or an alteration of the fragments"]},
+    "panel-010": {"preferences": ["D worst aesthetically"], "content_loss_or_alteration": [], "aesthetic_only": ["D"], "restoration_or_readability": [], "uncertain_or_context": []},
+    "panel-011": {"preferences": ["C worst aesthetically"], "content_loss_or_alteration": [], "aesthetic_only": ["C"], "restoration_or_readability": [], "uncertain_or_context": ["'if that's what matters' - the reviewer questions whether aesthetics is the relevant criterion"]},
+    "panel-012": {"preferences": ["D worst aesthetically"], "content_loss_or_alteration": [], "aesthetic_only": ["D"], "restoration_or_readability": [], "uncertain_or_context": []},
+    "panel-013": {"preferences": ["A worst aesthetically"], "content_loss_or_alteration": [], "aesthetic_only": ["A"], "restoration_or_readability": [], "uncertain_or_context": []},
+    "panel-014": {"preferences": ["D worst aesthetically"], "content_loss_or_alteration": [], "aesthetic_only": ["D"], "restoration_or_readability": [], "uncertain_or_context": []},
+    "panel-015": {"preferences": ["C worst aesthetically"], "content_loss_or_alteration": [], "aesthetic_only": ["C"], "restoration_or_readability": [], "uncertain_or_context": []},
+    "panel-016": {"preferences": ["D worst aesthetically"], "content_loss_or_alteration": [], "aesthetic_only": ["D"], "restoration_or_readability": [], "uncertain_or_context": []},
+    "panel-017": {"preferences": ["C worst aesthetically"], "content_loss_or_alteration": [], "aesthetic_only": ["C"], "restoration_or_readability": [], "uncertain_or_context": []},
+    "panel-018": {"preferences": ["D probably clearer (hedged)"], "content_loss_or_alteration": ["Reviewer states D does not lose stroke"], "aesthetic_only": [], "restoration_or_readability": ["D improves clarity without losing stroke"], "uncertain_or_context": ["'probably'; compared against which outputs is not stated"]},
+    "panel-019": {"preferences": ["B is like the source", "C probably OK (hedged)"], "content_loss_or_alteration": ["A 'a bit on the weak side' - possible mild weakening"], "aesthetic_only": [], "restoration_or_readability": ["C's thresholding acceptable because the source ink is substantial"], "uncertain_or_context": ["'probably'; 'a bit'"]},
+    "panel-020": {"preferences": ["D worst, followed by C", "C decent, with more clarity than A and B"], "content_loss_or_alteration": [], "aesthetic_only": [], "restoration_or_readability": ["C offers more clarity than A and B"], "uncertain_or_context": ["Basis for D being worst not stated"]}
+  }
+}
