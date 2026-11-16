@@ -5,6 +5,8 @@ import unittest
 import numpy as np
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
 import prototype as p
+import local_model
+import calibration
 
 class PrototypeChecks(unittest.TestCase):
     def test_forward_zero_and_full_coverage(self):
@@ -22,6 +24,22 @@ class PrototypeChecks(unittest.TestCase):
         self.assertEqual(p.scores(truth, truth)['false_joins'], 0)
         self.assertGreater(p.scores(truth, joined)['false_joins'], 0)
         self.assertGreater(p.scores(truth, np.zeros_like(truth))['missing_fraction'], .99)
+
+    def test_component_ink_excludes_large_illustration(self):
+        bg = np.full((100, 150, 3), .8)
+        obs = bg.copy()
+        obs[30:45, 20:25] = [.15, .15, .15]
+        obs[20:70, 90:140] = [.32, .14, .045]
+        result = local_model.estimate(obs, bg)
+        self.assertTrue(result['eligible'][35, 22])
+        self.assertFalse(result['eligible'][40, 110])
+        self.assertLess(abs(result['ink'][35, 22, 0] - result['ink'][35, 22, 1]), .01)
+
+    def test_calibration_does_not_use_heldout_font(self):
+        metrics = {'boundary_f1': 1., 'missing_fraction': 0., 'false_ink_fraction': 0., 'false_joins': 0}
+        train = {'font':'DejaVuSerif.ttf','declined':False,'confidence':10.,'uncertainty':.01,'methods':{'local':metrics}}
+        held = {'font':'LiberationSerif-Italic.ttf','declined':False,'confidence':100.,'uncertainty':.01,'methods':{'local':metrics}}
+        self.assertEqual(calibration.calibrate([train]), calibration.calibrate([train, held]))
 
     def test_flat_patch_declines(self):
         rgb = np.full((32, 32, 3), 225, np.uint8)

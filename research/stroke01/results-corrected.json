@@ -1,0 +1,7771 @@
+{
+  "gate": {
+    "snr_min": 4,
+    "target_precision": 0.9,
+    "training_accepted": 54,
+    "training_correct": 49,
+    "uncertainty_max": 0.2
+  },
+  "real": {
+    "12342014": {
+      "alpha_percentiles": [
+        0.0,
+        0.0,
+        0.4760539135114442,
+        1.0
+      ],
+      "background_luma_percentiles": [
+        0.6943609931266026,
+        0.7283502696584666,
+        0.747616240436439
+      ],
+      "baseline_paper_luma": 204.33479999999997,
+      "baseline_topology": {
+        "components": 144,
+        "euler": 142,
+        "holes": 2
+      },
+      "calibrated_accept": true,
+      "class": "serif",
+      "components": [
+        {
+          "area": 838,
+          "bbox": [
+            116,
+            0,
+            173,
+            38
+          ],
+          "bbox_source": [
+            159,
+            319,
+            216,
+            357
+          ],
+          "borrowed": false,
+          "contrast": 0.6667504402979728,
+          "core_samples": 54,
+          "ink": [
+            70,
+            50,
+            9
+          ],
+          "label": 1,
+          "uncertainty": 0.016778424981829593
+        },
+        {
+          "area": 268,
+          "bbox": [
+            306,
+            0,
+            320,
+            37
+          ],
+          "bbox_source": [
+            349,
+            319,
+            363,
+            356
+          ],
+          "borrowed": false,
+          "contrast": 0.7062521720478963,
+          "core_samples": 14,
+          "ink": [
+            61,
+            43,
+            1
+          ],
+          "label": 4,
+          "uncertainty": 0.003028003278557506
+        },
+        {
+          "area": 260,
+          "bbox": [
+            197,
+            1,
+            213,
+            37
+          ],
+          "bbox_source": [
+            240,
+            320,
+            256,
+            356
+          ],
+          "borrowed": false,
+          "contrast": 0.6787585302621597,
+          "core_samples": 17,
+          "ink": [
+            69,
+            49,
+            7
+          ],
+          "label": 5,
+          "uncertainty": 0.012298053189647593
+        },
+        {
+          "area": 61,
+          "bbox": [
+            216,
+            1,
+            225,
+            10
+          ],
+          "bbox_source": [
+            259,
+            320,
+            268,
+            329
+          ],
+          "borrowed": true,
+          "contrast": 0.5997609309153222,
+          "core_samples": 2,
+          "ink": [
+            60,
+            39,
+            0
+          ],
+          "label": 6,
+          "uncertainty": 0.08598348101770975
+        },
+        {
+          "area": 595,
+          "bbox": [
+            270,
+            2,
+            304,
+            37
+          ],
+          "bbox_source": [
+            313,
+            321,
+            347,
+            356
+          ],
+          "borrowed": false,
+          "contrast": 0.7052754581516643,
+          "core_samples": 39,
+          "ink": [
+            66,
+            49,
+            7
+          ],
+          "label": 7,
+          "uncertainty": 0.016853459623646778
+        },
+        {
+          "area": 310,
+          "bbox": [
+            59,
+            4,
+            81,
+            38
+          ],
+          "bbox_source": [
+            102,
+            323,
+            124,
+            357
+          ],
+          "borrowed": false,
+          "contrast": 0.6659770680984083,
+          "core_samples": 21,
+          "ink": [
+            69,
+            51,
+            9
+          ],
+          "label": 9,
+          "uncertainty": 0.014499003840482767
+        },
+        {
+          "area": 378,
+          "bbox": [
+            33,
+            5,
+            57,
+            39
+          ],
+          "bbox_source": [
+            76,
+            324,
+            100,
+            358
+          ],
+          "borrowed": false,
+          "contrast": 0.6591181564377069,
+          "core_samples": 25,
+          "ink": [
+            63,
+            47,
+            4
+          ],
+          "label": 10,
+          "uncertainty": 0.006157235398450178
+        },
+        {
+          "area": 161,
+          "bbox": [
+            322,
+            12,
+            335,
+            37
+          ],
+          "bbox_source": [
+            365,
+            331,
+            378,
+            356
+          ],
+          "borrowed": false,
+          "contrast": 0.7062647504970847,
+          "core_samples": 10,
+          "ink": [
+            62,
+            41,
+            1
+          ],
+          "label": 15,
+          "uncertainty": 0.009687431254668422
+        },
+        {
+          "area": 270,
+          "bbox": [
+            176,
+            13,
+            194,
+            38
+          ],
+          "bbox_source": [
+            219,
+            332,
+            237,
+            357
+          ],
+          "borrowed": false,
+          "contrast": 0.6661771568511097,
+          "core_samples": 18,
+          "ink": [
+            69,
+            51,
+            9
+          ],
+          "label": 16,
+          "uncertainty": 0.026480591717519264
+        },
+        {
+          "area": 286,
+          "bbox": [
+            229,
+            13,
+            245,
+            40
+          ],
+          "bbox_source": [
+            272,
+            332,
+            288,
+            359
+          ],
+          "borrowed": false,
+          "contrast": 0.6581698972183585,
+          "core_samples": 24,
+          "ink": [
+            88,
+            68,
+            26
+          ],
+          "label": 18,
+          "uncertainty": 0.04777135778349123
+        },
+        {
+          "area": 169,
+          "bbox": [
+            332,
+            13,
+            346,
+            38
+          ],
+          "bbox_source": [
+            375,
+            332,
+            389,
+            357
+          ],
+          "borrowed": false,
+          "contrast": 0.7101502297237313,
+          "core_samples": 11,
+          "ink": [
+            58,
+            39,
+            0
+          ],
+          "label": 20,
+          "uncertainty": 0.010715582273310148
+        },
+        {
+          "area": 414,
+          "bbox": [
+            348,
+            13,
+            371,
+            47
+          ],
+          "bbox_source": [
+            391,
+            332,
+            414,
+            366
+          ],
+          "borrowed": false,
+          "contrast": 0.6794519012203298,
+          "core_samples": 31,
+          "ink": [
+            80,
+            62,
+            21
+          ],
+          "label": 21,
+          "uncertainty": 0.01766266249861257
+        },
+        {
+          "area": 24,
+          "bbox": [
+            1,
+            14,
+            9,
+            19
+          ],
+          "bbox_source": [
+            44,
+            333,
+            52,
+            338
+          ],
+          "borrowed": true,
+          "contrast": 0.1281662652406216,
+          "core_samples": 2,
+          "ink": [
+            63,
+            47,
+            4
+          ],
+          "label": 22,
+          "uncertainty": 0.12437324923707832
+        },
+        {
+          "area": 167,
+          "bbox": [
+            213,
+            14,
+            226,
+            37
+          ],
+          "bbox_source": [
+            256,
+            333,
+            269,
+            356
+          ],
+          "borrowed": false,
+          "contrast": 0.6924539752743164,
+          "core_samples": 11,
+          "ink": [
+            60,
+            39,
+            0
+          ],
+          "label": 24,
+          "uncertainty": 0.005832927205173703
+        },
+        {
+          "area": 66,
+          "bbox": [
+            469,
+            28,
+            477,
+            38
+          ],
+          "bbox_source": [
+            512,
+            347,
+            520,
+            357
+          ],
+          "borrowed": false,
+          "contrast": 0.6710180794745246,
+          "core_samples": 2,
+          "ink": [
+            93,
+            71,
+            28
+          ],
+          "label": 37,
+          "uncertainty": 0.01905447097769407
+        },
+        {
+          "area": 63,
+          "bbox": [
+            505,
+            29,
+            514,
+            38
+          ],
+          "bbox_source": [
+            548,
+            348,
+            557,
+            357
+          ],
+          "borrowed": false,
+          "contrast": 0.6961052914361776,
+          "core_samples": 2,
+          "ink": [
+            79,
+            59,
+            16
+          ],
+          "label": 41,
+          "uncertainty": 0.0311011007378713
+        },
+        {
+          "area": 74,
+          "bbox": [
+            577,
+            29,
+            588,
+            39
+          ],
+          "bbox_source": [
+            620,
+            348,
+            631,
+            358
+          ],
+          "borrowed": false,
+          "contrast": 0.7150531222367008,
+          "core_samples": 3,
+          "ink": [
+            66,
+            45,
+            2
+          ],
+          "label": 43,
+          "uncertainty": 0.015039398686445112
+        },
+        {
+          "area": 57,
+          "bbox": [
+            396,
+            30,
+            404,
+            38
+          ],
+          "bbox_source": [
+            439,
+            349,
+            447,
+            357
+          ],
+          "borrowed": true,
+          "contrast": 0.6792077198710648,
+          "core_samples": 2,
+          "ink": [
+            80,
+            62,
+            21
+          ],
+          "label": 44,
+          "uncertainty": 0.01766266249861257
+        },
+        {
+          "area": 17,
+          "bbox": [
+            282,
+            38,
+            289,
+            41
+          ],
+          "bbox_source": [
+            325,
+            357,
+            332,
+            360
+          ],
+          "borrowed": true,
+          "contrast": 0.15765818883468002,
+          "core_samples": 2,
+          "ink": [
+            66,
+            49,
+            7
+          ],
+          "label": 49,
+          "uncertainty": 0.06336964037409647
+        },
+        {
+          "area": 7,
+          "bbox": [
+            151,
+            40,
+            156,
+            42
+          ],
+          "bbox_source": [
+            194,
+            359,
+            199,
+            361
+          ],
+          "borrowed": true,
+          "contrast": 0.20848287277725386,
+          "core_samples": 2,
+          "ink": [
+            70,
+            50,
+            9
+          ],
+          "label": 53,
+          "uncertainty": 0.06270416934430628
+        },
+        {
+          "area": 67,
+          "bbox": [
+            196,
+            49,
+            208,
+            57
+          ],
+          "bbox_source": [
+            239,
+            368,
+            251,
+            376
+          ],
+          "borrowed": false,
+          "contrast": 0.6300065744735376,
+          "core_samples": 4,
+          "ink": [
+            95,
+            77,
+            27
+          ],
+          "label": 60,
+          "uncertainty": 0.07894122638582006
+        },
+        {
+          "area": 516,
+          "bbox": [
+            317,
+            49,
+            347,
+            85
+          ],
+          "bbox_source": [
+            360,
+            368,
+            390,
+            404
+          ],
+          "borrowed": false,
+          "contrast": 0.6756453153149403,
+          "core_samples": 36,
+          "ink": [
+            86,
+            68,
+            25
+          ],
+          "label": 61,
+          "uncertainty": 0.020359746122086755
+        },
+        {
+          "area": 364,
+          "bbox": [
+            353,
+            49,
+            376,
+            85
+          ],
+          "bbox_source": [
+            396,
+            368,
+            419,
+            404
+          ],
+          "borrowed": false,
+          "contrast": 0.7064701377198889,
+          "core_samples": 25,
+          "ink": [
+            63,
+            45,
+            3
+          ],
+          "label": 63,
+          "uncertainty": 0.01109481964888126
+        },
+        {
+          "area": 504,
+          "bbox": [
+            117,
+            50,
+            147,
+            85
+          ],
+          "bbox_source": [
+            160,
+            369,
+            190,
+            404
+          ],
+          "borrowed": false,
+          "contrast": 0.6701759998730734,
+          "core_samples": 27,
+          "ink": [
+            65,
+            46,
+            4
+          ],
+          "label": 65,
+          "uncertainty": 0.005089902991720721
+        },
+        {
+          "area": 668,
+          "bbox": [
+            149,
+            50,
+            195,
+            85
+          ],
+          "bbox_source": [
+            192,
+            369,
+            238,
+            404
+          ],
+          "borrowed": false,
+          "contrast": 0.6744486992327972,
+          "core_samples": 45,
+          "ink": [
+            60,
+            44,
+            0
+          ],
+          "label": 66,
+          "uncertainty": 0.00825108403570927
+        },
+        {
+          "area": 9,
+          "bbox": [
+            405,
+            50,
+            409,
+            54
+          ],
+          "bbox_source": [
+            448,
+            369,
+            452,
+            373
+          ],
+          "borrowed": true,
+          "contrast": 0.11754985008988031,
+          "core_samples": 2,
+          "ink": [
+            63,
+            45,
+            3
+          ],
+          "label": 67,
+          "uncertainty": 0.01109481964888126
+        },
+        {
+          "area": 404,
+          "bbox": [
+            58,
+            51,
+            80,
+            85
+          ],
+          "bbox_source": [
+            101,
+            370,
+            123,
+            404
+          ],
+          "borrowed": false,
+          "contrast": 0.6417445966244901,
+          "core_samples": 22,
+          "ink": [
+            79,
+            61,
+            17
+          ],
+          "label": 68,
+          "uncertainty": 0.02563862450625708
+        },
+        {
+          "area": 13,
+          "bbox": [
+            114,
+            53,
+            119,
+            59
+          ],
+          "bbox_source": [
+            157,
+            372,
+            162,
+            378
+          ],
+          "borrowed": true,
+          "contrast": 0.10820384416401103,
+          "core_samples": 3,
+          "ink": [
+            65,
+            46,
+            4
+          ],
+          "label": 70,
+          "uncertainty": 0.005089902991720721
+        },
+        {
+          "area": 8,
+          "bbox": [
+            57,
+            54,
+            58,
+            62
+          ],
+          "bbox_source": [
+            100,
+            373,
+            101,
+            381
+          ],
+          "borrowed": true,
+          "contrast": 0.138725399921401,
+          "core_samples": 3,
+          "ink": [
+            79,
+            61,
+            17
+          ],
+          "label": 72,
+          "uncertainty": 0.02563862450625708
+        },
+        {
+          "area": 516,
+          "bbox": [
+            211,
+            57,
+            246,
+            85
+          ],
+          "bbox_source": [
+            254,
+            376,
+            289,
+            404
+          ],
+          "borrowed": false,
+          "contrast": 0.679327643067548,
+          "core_samples": 33,
+          "ink": [
+            63,
+            45,
+            3
+          ],
+          "label": 74,
+          "uncertainty": 0.015542540104918744
+        },
+        {
+          "area": 170,
+          "bbox": [
+            247,
+            57,
+            262,
+            85
+          ],
+          "bbox_source": [
+            290,
+            376,
+            305,
+            404
+          ],
+          "borrowed": false,
+          "contrast": 0.6926543839434612,
+          "core_samples": 13,
+          "ink": [
+            54,
+            36,
+            0
+          ],
+          "label": 75,
+          "uncertainty": 0.01205026945924091
+        },
+        {
+          "area": 251,
+          "bbox": [
+            274,
+            60,
+            291,
+            84
+          ],
+          "bbox_source": [
+            317,
+            379,
+            334,
+            403
+          ],
+          "borrowed": false,
+          "contrast": 0.6447228969101305,
+          "core_samples": 20,
+          "ink": [
+            93,
+            75,
+            34
+          ],
+          "label": 76,
+          "uncertainty": 0.0527569217170941
+        },
+        {
+          "area": 179,
+          "bbox": [
+            197,
+            61,
+            209,
+            85
+          ],
+          "bbox_source": [
+            240,
+            380,
+            252,
+            404
+          ],
+          "borrowed": false,
+          "contrast": 0.6814761408347081,
+          "core_samples": 11,
+          "ink": [
+            58,
+            40,
+            0
+          ],
+          "label": 78,
+          "uncertainty": 0.001258976837841471
+        },
+        {
+          "area": 144,
+          "bbox": [
+            260,
+            61,
+            271,
+            84
+          ],
+          "bbox_source": [
+            303,
+            380,
+            314,
+            403
+          ],
+          "borrowed": false,
+          "contrast": 0.6981109622771648,
+          "core_samples": 7,
+          "ink": [
+            48,
+            34,
+            0
+          ],
+          "label": 79,
+          "uncertainty": 0.0037779579667285095
+        },
+        {
+          "area": 27,
+          "bbox": [
+            52,
+            63,
+            55,
+            73
+          ],
+          "bbox_source": [
+            95,
+            382,
+            98,
+            392
+          ],
+          "borrowed": true,
+          "contrast": 0.13987787004225657,
+          "core_samples": 2,
+          "ink": [
+            79,
+            61,
+            17
+          ],
+          "label": 81,
+          "uncertainty": 0.0330475957904782
+        },
+        {
+          "area": 65,
+          "bbox": [
+            84,
+            73,
+            92,
+            85
+          ],
+          "bbox_source": [
+            127,
+            392,
+            135,
+            404
+          ],
+          "borrowed": true,
+          "contrast": 0.659461376558001,
+          "core_samples": 3,
+          "ink": [
+            79,
+            61,
+            17
+          ],
+          "label": 90,
+          "uncertainty": 0.02563862450625708
+        },
+        {
+          "area": 24,
+          "bbox": [
+            99,
+            74,
+            108,
+            78
+          ],
+          "bbox_source": [
+            142,
+            393,
+            151,
+            397
+          ],
+          "borrowed": true,
+          "contrast": 0.14078967364191328,
+          "core_samples": 3,
+          "ink": [
+            65,
+            46,
+            4
+          ],
+          "label": 93,
+          "uncertainty": 0.005089902991720721
+        },
+        {
+          "area": 62,
+          "bbox": [
+            380,
+            76,
+            389,
+            84
+          ],
+          "bbox_source": [
+            423,
+            395,
+            432,
+            403
+          ],
+          "borrowed": true,
+          "contrast": 0.6938781894037487,
+          "core_samples": 3,
+          "ink": [
+            63,
+            45,
+            3
+          ],
+          "label": 96,
+          "uncertainty": 0.01109481964888126
+        },
+        {
+          "area": 60,
+          "bbox": [
+            506,
+            77,
+            515,
+            85
+          ],
+          "bbox_source": [
+            549,
+            396,
+            558,
+            404
+          ],
+          "borrowed": false,
+          "contrast": 0.6956007488886686,
+          "core_samples": 2,
+          "ink": [
+            80,
+            59,
+            17
+          ],
+          "label": 100,
+          "uncertainty": 0.023800420723737864
+        },
+        {
+          "area": 72,
+          "bbox": [
+            576,
+            77,
+            585,
+            87
+          ],
+          "bbox_source": [
+            619,
+            396,
+            628,
+            406
+          ],
+          "borrowed": false,
+          "contrast": 0.6857204876887378,
+          "core_samples": 2,
+          "ink": [
+            87,
+            68,
+            25
+          ],
+          "label": 102,
+          "uncertainty": 0.021574219693659375
+        },
+        {
+          "area": 405,
+          "bbox": [
+            117,
+            97,
+            147,
+            133
+          ],
+          "bbox_source": [
+            160,
+            416,
+            190,
+            452
+          ],
+          "borrowed": false,
+          "contrast": 0.6843817770969136,
+          "core_samples": 27,
+          "ink": [
+            62,
+            44,
+            1
+          ],
+          "label": 112,
+          "uncertainty": 0.02020391699680684
+        },
+        {
+          "area": 434,
+          "bbox": [
+            149,
+            97,
+            175,
+            133
+          ],
+          "bbox_source": [
+            192,
+            416,
+            218,
+            452
+          ],
+          "borrowed": false,
+          "contrast": 0.6964453169036916,
+          "core_samples": 32,
+          "ink": [
+            59,
+            40,
+            0
+          ],
+          "label": 113,
+          "uncertainty": 0.01599963237167913
+        },
+        {
+          "area": 417,
+          "bbox": [
+            370,
+            97,
+            401,
+            131
+          ],
+          "bbox_source": [
+            413,
+            416,
+            444,
+            450
+          ],
+          "borrowed": false,
+          "contrast": 0.7063632588306503,
+          "core_samples": 35,
+          "ink": [
+            71,
+            53,
+            11
+          ],
+          "label": 114,
+          "uncertainty": 0.03614570442299283
+        },
+        {
+          "area": 450,
+          "bbox": [
+            56,
+            99,
+            80,
+            135
+          ],
+          "bbox_source": [
+            99,
+            418,
+            123,
+            454
+          ],
+          "borrowed": false,
+          "contrast": 0.6510946735976458,
+          "core_samples": 25,
+          "ink": [
+            75,
+            59,
+            17
+          ],
+          "label": 116,
+          "uncertainty": 0.027942578510532754
+        },
+        {
+          "area": 265,
+          "bbox": [
+            195,
+            104,
+            216,
+            132
+          ],
+          "bbox_source": [
+            238,
+            423,
+            259,
+            451
+          ],
+          "borrowed": false,
+          "contrast": 0.6830363681421138,
+          "core_samples": 21,
+          "ink": [
+            70,
+            52,
+            8
+          ],
+          "label": 119,
+          "uncertainty": 0.014554793988250792
+        },
+        {
+          "area": 8,
+          "bbox": [
+            305,
+            105,
+            313,
+            106
+          ],
+          "bbox_source": [
+            348,
+            424,
+            356,
+            425
+          ],
+          "borrowed": true,
+          "contrast": 0.10125431337270044,
+          "core_samples": 3,
+          "ink": [
+            68,
+            48,
+            5
+          ],
+          "label": 120,
+          "uncertainty": 0.012442412280703731
+        },
+        {
+          "area": 268,
+          "bbox": [
+            176,
+            107,
+            195,
+            132
+          ],
+          "bbox_source": [
+            219,
+            426,
+            238,
+            451
+          ],
+          "borrowed": false,
+          "contrast": 0.6840188968267312,
+          "core_samples": 19,
+          "ink": [
+            66,
+            51,
+            8
+          ],
+          "label": 124,
+          "uncertainty": 0.010646051871166837
+        },
+        {
+          "area": 237,
+          "bbox": [
+            218,
+            107,
+            233,
+            133
+          ],
+          "bbox_source": [
+            261,
+            426,
+            276,
+            452
+          ],
+          "borrowed": false,
+          "contrast": 0.6300669904877576,
+          "core_samples": 17,
+          "ink": [
+            101,
+            84,
+            39
+          ],
+          "label": 125,
+          "uncertainty": 0.06808909568575594
+        },
+        {
+          "area": 312,
+          "bbox": [
+            237,
+            107,
+            259,
+            131
+          ],
+          "bbox_source": [
+            280,
+            426,
+            302,
+            450
+          ],
+          "borrowed": false,
+          "contrast": 0.687074453540861,
+          "core_samples": 22,
+          "ink": [
+            71,
+            52,
+            15
+          ],
+          "label": 126,
+          "uncertainty": 0.024205245462465573
+        },
+        {
+          "area": 460,
+          "bbox": [
+            261,
+            107,
+            295,
+            132
+          ],
+          "bbox_source": [
+            304,
+            426,
+            338,
+            451
+          ],
+          "borrowed": false,
+          "contrast": 0.6998212897595472,
+          "core_samples": 34,
+          "ink": [
+            60,
+            43,
+            5
+          ],
+          "label": 127,
+          "uncertainty": 0.013403963130969471
+        },
+        {
+          "area": 214,
+          "bbox": [
+            405,
+            107,
+            421,
+            131
+          ],
+          "bbox_source": [
+            448,
+            426,
+            464,
+            450
+          ],
+          "borrowed": false,
+          "contrast": 0.6344615861581622,
+          "core_samples": 18,
+          "ink": [
+            107,
+            88,
+            47
+          ],
+          "label": 128,
+          "uncertainty": 0.037277731491585635
+        },
+        {
+          "area": 235,
+          "bbox": [
+            299,
+            108,
+            319,
+            132
+          ],
+          "bbox_source": [
+            342,
+            427,
+            362,
+            451
+          ],
+          "borrowed": false,
+          "contrast": 0.6946151518248443,
+          "core_samples": 16,
+          "ink": [
+            68,
+            48,
+            5
+          ],
+          "label": 131,
+          "uncertainty": 0.011845331186451162
+        },
+        {
+          "area": 337,
+          "bbox": [
+            320,
+            108,
+            345,
+            133
+          ],
+          "bbox_source": [
+            363,
+            427,
+            388,
+            452
+          ],
+          "borrowed": false,
+          "contrast": 0.6973648145473657,
+          "core_samples": 24,
+          "ink": [
+            67,
+            51,
+            8
+          ],
+          "label": 132,
+          "uncertainty": 0.011410599962597972
+        },
+        {
+          "area": 350,
+          "bbox": [
+            423,
+            108,
+            447,
+            141
+          ],
+          "bbox_source": [
+            466,
+            427,
+            490,
+            460
+          ],
+          "borrowed": false,
+          "contrast": 0.7056165639722861,
+          "core_samples": 27,
+          "ink": [
+            66,
+            47,
+            9
+          ],
+          "label": 133,
+          "uncertainty": 0.0064367021359977294
+        },
+        {
+          "area": 27,
+          "bbox": [
+            457,
+            112,
+            469,
+            118
+          ],
+          "bbox_source": [
+            500,
+            431,
+            512,
+            437
+          ],
+          "borrowed": false,
+          "contrast": 0.16980320718547143,
+          "core_samples": 4,
+          "ink": [
+            219,
+            199,
+            158
+          ],
+          "label": 136,
+          "uncertainty": 0.07253539281709694
+        },
+        {
+          "area": 5,
+          "bbox": [
+            321,
+            114,
+            322,
+            119
+          ],
+          "bbox_source": [
+            364,
+            433,
+            365,
+            438
+          ],
+          "borrowed": true,
+          "contrast": 0.11712085101516534,
+          "core_samples": 2,
+          "ink": [
+            67,
+            51,
+            8
+          ],
+          "label": 140,
+          "uncertainty": 0.10579889058677619
+        },
+        {
+          "area": 5,
+          "bbox": [
+            373,
+            116,
+            374,
+            121
+          ],
+          "bbox_source": [
+            416,
+            435,
+            417,
+            440
+          ],
+          "borrowed": true,
+          "contrast": 0.1170013231237787,
+          "core_samples": 2,
+          "ink": [
+            71,
+            53,
+            11
+          ],
+          "label": 142,
+          "uncertainty": 0.07322115301437783
+        },
+        {
+          "area": 76,
+          "bbox": [
+            392,
+            117,
+            401,
+            132
+          ],
+          "bbox_source": [
+            435,
+            436,
+            444,
+            451
+          ],
+          "borrowed": false,
+          "contrast": 0.7036274984358273,
+          "core_samples": 4,
+          "ink": [
+            71,
+            53,
+            9
+          ],
+          "label": 144,
+          "uncertainty": 0.015403047687658043
+        },
+        {
+          "area": 61,
+          "bbox": [
+            452,
+            124,
+            460,
+            133
+          ],
+          "bbox_source": [
+            495,
+            443,
+            503,
+            452
+          ],
+          "borrowed": true,
+          "contrast": 0.690438658662313,
+          "core_samples": 3,
+          "ink": [
+            219,
+            199,
+            158
+          ],
+          "label": 156,
+          "uncertainty": 0.07253539281709694
+        },
+        {
+          "area": 65,
+          "bbox": [
+            576,
+            124,
+            585,
+            133
+          ],
+          "bbox_source": [
+            619,
+            443,
+            628,
+            452
+          ],
+          "borrowed": false,
+          "contrast": 0.7144007827124931,
+          "core_samples": 2,
+          "ink": [
+            71,
+            52,
+            8
+          ],
+          "label": 158,
+          "uncertainty": 0.004115430061571427
+        },
+        {
+          "area": 57,
+          "bbox": [
+            542,
+            125,
+            550,
+            134
+          ],
+          "bbox_source": [
+            585,
+            444,
+            593,
+            453
+          ],
+          "borrowed": true,
+          "contrast": 0.694019582892276,
+          "core_samples": 3,
+          "ink": [
+            125,
+            106,
+            62
+          ],
+          "label": 165,
+          "uncertainty": 0.029626838891981533
+        },
+        {
+          "area": 251,
+          "bbox": [
+            224,
+            144,
+            252,
+            164
+          ],
+          "bbox_source": [
+            267,
+            463,
+            295,
+            483
+          ],
+          "borrowed": false,
+          "contrast": 0.6999701075016536,
+          "core_samples": 13,
+          "ink": [
+            63,
+            44,
+            5
+          ],
+          "label": 180,
+          "uncertainty": 0.009119368472312296
+        },
+        {
+          "area": 179,
+          "bbox": [
+            317,
+            144,
+            340,
+            164
+          ],
+          "bbox_source": [
+            360,
+            463,
+            383,
+            483
+          ],
+          "borrowed": false,
+          "contrast": 0.691703867276275,
+          "core_samples": 14,
+          "ink": [
+            72,
+            53,
+            10
+          ],
+          "label": 181,
+          "uncertainty": 0.020331808637736606
+        },
+        {
+          "area": 99,
+          "bbox": [
+            371,
+            144,
+            379,
+            164
+          ],
+          "bbox_source": [
+            414,
+            463,
+            422,
+            483
+          ],
+          "borrowed": false,
+          "contrast": 0.7038950238102305,
+          "core_samples": 7,
+          "ink": [
+            71,
+            53,
+            11
+          ],
+          "label": 182,
+          "uncertainty": 0.015513698050405964
+        },
+        {
+          "area": 128,
+          "bbox": [
+            433,
+            144,
+            445,
+            164
+          ],
+          "bbox_source": [
+            476,
+            463,
+            488,
+            483
+          ],
+          "borrowed": false,
+          "contrast": 0.7165814560228475,
+          "core_samples": 7,
+          "ink": [
+            54,
+            34,
+            0
+          ],
+          "label": 183,
+          "uncertainty": 0.016494231727636796
+        },
+        {
+          "area": 133,
+          "bbox": [
+            442,
+            144,
+            461,
+            164
+          ],
+          "bbox_source": [
+            485,
+            463,
+            504,
+            483
+          ],
+          "borrowed": false,
+          "contrast": 0.6638017709410088,
+          "core_samples": 9,
+          "ink": [
+            96,
+            75,
+            34
+          ],
+          "label": 184,
+          "uncertainty": 0.04741737460055258
+        },
+        {
+          "area": 125,
+          "bbox": [
+            466,
+            144,
+            475,
+            164
+          ],
+          "bbox_source": [
+            509,
+            463,
+            518,
+            483
+          ],
+          "borrowed": false,
+          "contrast": 0.7124183848554017,
+          "core_samples": 6,
+          "ink": [
+            70,
+            50,
+            15
+          ],
+          "label": 185,
+          "uncertainty": 0.0024534237477387803
+        },
+        {
+          "area": 127,
+          "bbox": [
+            104,
+            154,
+            122,
+            164
+          ],
+          "bbox_source": [
+            147,
+            473,
+            165,
+            483
+          ],
+          "borrowed": false,
+          "contrast": 0.6442373868066749,
+          "core_samples": 6,
+          "ink": [
+            86,
+            72,
+            31
+          ],
+          "label": 193,
+          "uncertainty": 0.007812991582968432
+        },
+        {
+          "area": 135,
+          "bbox": [
+            163,
+            154,
+            185,
+            164
+          ],
+          "bbox_source": [
+            206,
+            473,
+            228,
+            483
+          ],
+          "borrowed": false,
+          "contrast": 0.6646399073376499,
+          "core_samples": 9,
+          "ink": [
+            75,
+            59,
+            16
+          ],
+          "label": 194,
+          "uncertainty": 0.015155339335176212
+        },
+        {
+          "area": 209,
+          "bbox": [
+            254,
+            154,
+            289,
+            164
+          ],
+          "bbox_source": [
+            297,
+            473,
+            332,
+            483
+          ],
+          "borrowed": false,
+          "contrast": 0.6552641826979015,
+          "core_samples": 13,
+          "ink": [
+            94,
+            76,
+            34
+          ],
+          "label": 195,
+          "uncertainty": 0.06883863918343794
+        },
+        {
+          "area": 105,
+          "bbox": [
+            345,
+            154,
+            361,
+            164
+          ],
+          "bbox_source": [
+            388,
+            473,
+            404,
+            483
+          ],
+          "borrowed": false,
+          "contrast": 0.6967799680684177,
+          "core_samples": 7,
+          "ink": [
+            70,
+            57,
+            12
+          ],
+          "label": 196,
+          "uncertainty": 0.04995769426910946
+        },
+        {
+          "area": 89,
+          "bbox": [
+            385,
+            154,
+            403,
+            164
+          ],
+          "bbox_source": [
+            428,
+            473,
+            446,
+            483
+          ],
+          "borrowed": false,
+          "contrast": 0.5873300414044741,
+          "core_samples": 7,
+          "ink": [
+            123,
+            107,
+            65
+          ],
+          "label": 197,
+          "uncertainty": 0.14998994277612132
+        },
+        {
+          "area": 114,
+          "bbox": [
+            291,
+            155,
+            314,
+            164
+          ],
+          "bbox_source": [
+            334,
+            474,
+            357,
+            483
+          ],
+          "borrowed": false,
+          "contrast": 0.6783889206066203,
+          "core_samples": 8,
+          "ink": [
+            81,
+            61,
+            20
+          ],
+          "label": 199,
+          "uncertainty": 0.039864144931369236
+        },
+        {
+          "area": 44,
+          "bbox": [
+            481,
+            156,
+            488,
+            164
+          ],
+          "bbox_source": [
+            524,
+            475,
+            531,
+            483
+          ],
+          "borrowed": true,
+          "contrast": 0.7045062503160238,
+          "core_samples": 3,
+          "ink": [
+            113,
+            95,
+            53
+          ],
+          "label": 200,
+          "uncertainty": 0.039073226001421955
+        },
+        {
+          "area": 48,
+          "bbox": [
+            492,
+            156,
+            501,
+            164
+          ],
+          "bbox_source": [
+            535,
+            475,
+            544,
+            483
+          ],
+          "borrowed": false,
+          "contrast": 0.6293839375898889,
+          "core_samples": 4,
+          "ink": [
+            113,
+            95,
+            53
+          ],
+          "label": 201,
+          "uncertainty": 0.039073226001421955
+        },
+        {
+          "area": 116,
+          "bbox": [
+            508,
+            156,
+            529,
+            164
+          ],
+          "bbox_source": [
+            551,
+            475,
+            572,
+            483
+          ],
+          "borrowed": false,
+          "contrast": 0.5986137398048265,
+          "core_samples": 8,
+          "ink": [
+            125,
+            106,
+            62
+          ],
+          "label": 202,
+          "uncertainty": 0.029626838891981533
+        }
+      ],
+      "confidence_heuristic": 29.577805977347214,
+      "context_bbox": [
+        43,
+        319,
+        652,
+        483
+      ],
+      "contrast_linear": 0.6629140387467675,
+      "core_luma_percentiles": [
+        0.020739775251262957,
+        0.03580667786995201,
+        0.08754736119512725
+      ],
+      "core_samples": 1019,
+      "decline": false,
+      "foreground_fraction": [
+        0.07886779606712323,
+        0.09661980856261765,
+        0.1071829068044375,
+        0.08570627578196964
+      ],
+      "geometry_topology": {
+        "components": 94,
+        "euler": 68,
+        "holes": 26
+      },
+      "ink_rgb": [
+        69,
+        50,
+        8
+      ],
+      "ink_uncertainty": 0.022137192443266045,
+      "local_background_rgb": [
+        239,
+        220,
+        177
+      ],
+      "noise_linear": 0.022412549438402367,
+      "probability_percentiles": [
+        0.0,
+        0.0,
+        0.4760539135114442,
+        1.0
+      ],
+      "psf_sigma_px": 0.6523588614710722,
+      "rendered_support_fraction": 0.298560651640672,
+      "rescan_rmse_linear": {
+        "baseline_mask": 0.05982361296988508,
+        "energy": 0.0597118249788156,
+        "geometry": 0.06742335951451256,
+        "local": 0.050822693877508686
+      },
+      "seconds": 0.1246432289481163,
+      "target_bbox": [
+        84,
+        360,
+        611,
+        442
+      ],
+      "target_diagnostics": {
+        "baseline": {
+          "mean_abs_rgb_difference": 5.936062387189337,
+          "source_ink_mean_delta_e2000": 6.541303767641098,
+          "source_ink_recall": 0.932473655019412
+        },
+        "local": {
+          "mean_abs_rgb_difference": 1.184392403696333,
+          "source_ink_mean_delta_e2000": 2.495800153870018,
+          "source_ink_recall": 0.9943150305047144
+        }
+      },
+      "width_scale": 0.8504810739261083
+    },
+    "8967062": {
+      "alpha_percentiles": [
+        0.0,
+        0.0,
+        0.0,
+        0.7922665406364303
+      ],
+      "background_luma_percentiles": [
+        0.972022216168038,
+        0.9738210676341105,
+        0.9795087171681469
+      ],
+      "baseline_paper_luma": 237.78759999999997,
+      "baseline_topology": {
+        "components": 19,
+        "euler": 18,
+        "holes": 1
+      },
+      "calibrated_accept": true,
+      "class": "engraved",
+      "components": [
+        {
+          "area": 18,
+          "bbox": [
+            89,
+            11,
+            95,
+            16
+          ],
+          "bbox_source": [
+            1224,
+            729,
+            1230,
+            734
+          ],
+          "borrowed": false,
+          "contrast": 0.02638308469679902,
+          "core_samples": 3,
+          "ink": [
+            252,
+            251,
+            215
+          ],
+          "label": 7,
+          "uncertainty": 0.0001743131463959673
+        },
+        {
+          "area": 272,
+          "bbox": [
+            68,
+            42,
+            97,
+            66
+          ],
+          "bbox_source": [
+            1203,
+            760,
+            1232,
+            784
+          ],
+          "borrowed": false,
+          "contrast": 0.517925611368047,
+          "core_samples": 24,
+          "ink": [
+            184,
+            183,
+            151
+          ],
+          "label": 9,
+          "uncertainty": 0.26322857683943746
+        },
+        {
+          "area": 322,
+          "bbox": [
+            42,
+            43,
+            74,
+            66
+          ],
+          "bbox_source": [
+            1177,
+            761,
+            1209,
+            784
+          ],
+          "borrowed": false,
+          "contrast": 0.5746504410593887,
+          "core_samples": 28,
+          "ink": [
+            174,
+            172,
+            143
+          ],
+          "label": 10,
+          "uncertainty": 0.12376347132161808
+        }
+      ],
+      "confidence_heuristic": 100.72213978646377,
+      "context_bbox": [
+        1135,
+        718,
+        1266,
+        821
+      ],
+      "contrast_linear": 0.5199922959379347,
+      "core_luma_percentiles": [
+        0.25856760935320977,
+        0.42359287335984014,
+        0.5640430084550948
+      ],
+      "core_samples": 55,
+      "decline": false,
+      "foreground_fraction": [
+        0.012006225450233454,
+        0.0192692507225969,
+        0.020825613280960498,
+        0.015044838064181427
+      ],
+      "geometry_topology": {
+        "components": 4,
+        "euler": 2,
+        "holes": 2
+      },
+      "ink_rgb": [
+        174,
+        172,
+        143
+      ],
+      "ink_uncertainty": 0.1778797451016544,
+      "local_background_rgb": [
+        255,
+        254,
+        221
+      ],
+      "noise_linear": 0.005162641471282736,
+      "probability_percentiles": [
+        0.0,
+        0.0,
+        0.0,
+        0.7922665406364303
+      ],
+      "psf_sigma_px": 0.5312977561500932,
+      "rendered_support_fraction": 0.3452341958729119,
+      "rescan_rmse_linear": {
+        "baseline_mask": 0.08081987746729608,
+        "energy": 0.08006075840997195,
+        "geometry": 0.08135116410144629,
+        "local": 0.07909562296820513
+      },
+      "seconds": 0.02378476201556623,
+      "target_bbox": [
+        1165,
+        748,
+        1236,
+        791
+      ],
+      "target_diagnostics": {
+        "baseline": {
+          "mean_abs_rgb_difference": 4.880554645703679,
+          "source_ink_mean_delta_e2000": 6.9627582980090565,
+          "source_ink_recall": 0.8571428571428571
+        },
+        "local": {
+          "mean_abs_rgb_difference": 0.672125777923354,
+          "source_ink_mean_delta_e2000": 1.9494981066275037,
+          "source_ink_recall": 0.9860627177700348
+        }
+      },
+      "width_scale": 0.8680315651182163
+    },
+    "8967228": {
+      "alpha_percentiles": [
+        0.0,
+        0.0,
+        0.06756301142094454,
+        1.0
+      ],
+      "background_luma_percentiles": [
+        0.967991120899272,
+        0.985343864548189,
+        0.986102938320467
+      ],
+      "baseline_paper_luma": 249.46779999999998,
+      "baseline_topology": {
+        "components": 24,
+        "euler": 24,
+        "holes": 0
+      },
+      "calibrated_accept": false,
+      "class": "engraved",
+      "components": [
+        {
+          "area": 182,
+          "bbox": [
+            360,
+            0,
+            380,
+            32
+          ],
+          "bbox_source": [
+            2272,
+            118,
+            2292,
+            150
+          ],
+          "borrowed": false,
+          "contrast": 0.01343320424654195,
+          "core_samples": 10,
+          "ink": [
+            255,
+            251,
+            221
+          ],
+          "label": 1,
+          "uncertainty": 0.01616849642910516
+        },
+        {
+          "area": 215,
+          "bbox": [
+            408,
+            0,
+            415,
+            42
+          ],
+          "bbox_source": [
+            2320,
+            118,
+            2327,
+            160
+          ],
+          "borrowed": false,
+          "contrast": 0.013812287221326484,
+          "core_samples": 12,
+          "ink": [
+            255,
+            249,
+            215
+          ],
+          "label": 2,
+          "uncertainty": 0.028726602672825445
+        },
+        {
+          "area": 143,
+          "bbox": [
+            392,
+            30,
+            400,
+            58
+          ],
+          "bbox_source": [
+            2304,
+            148,
+            2312,
+            176
+          ],
+          "borrowed": false,
+          "contrast": 0.013867598444121462,
+          "core_samples": 11,
+          "ink": [
+            254,
+            250,
+            222
+          ],
+          "label": 3,
+          "uncertainty": 0.02196536439018432
+        },
+        {
+          "area": 3304,
+          "bbox": [
+            67,
+            33,
+            207,
+            86
+          ],
+          "bbox_source": [
+            1979,
+            151,
+            2119,
+            204
+          ],
+          "borrowed": false,
+          "contrast": 0.5617378367888988,
+          "core_samples": 226,
+          "ink": [
+            178,
+            175,
+            152
+          ],
+          "label": 4,
+          "uncertainty": 0.3440727073234962
+        },
+        {
+          "area": 15,
+          "bbox": [
+            424,
+            35,
+            427,
+            42
+          ],
+          "bbox_source": [
+            2336,
+            153,
+            2339,
+            160
+          ],
+          "borrowed": true,
+          "contrast": 0.012969136710867357,
+          "core_samples": 2,
+          "ink": [
+            255,
+            249,
+            215
+          ],
+          "label": 5,
+          "uncertainty": 0.028726602672825445
+        },
+        {
+          "area": 615,
+          "bbox": [
+            231,
+            36,
+            274,
+            79
+          ],
+          "bbox_source": [
+            2143,
+            154,
+            2186,
+            197
+          ],
+          "borrowed": false,
+          "contrast": 0.5908471633374827,
+          "core_samples": 37,
+          "ink": [
+            171,
+            170,
+            145
+          ],
+          "label": 6,
+          "uncertainty": 0.2218570768066547
+        },
+        {
+          "area": 588,
+          "bbox": [
+            313,
+            37,
+            346,
+            82
+          ],
+          "bbox_source": [
+            2225,
+            155,
+            2258,
+            200
+          ],
+          "borrowed": false,
+          "contrast": 0.45583090090977485,
+          "core_samples": 35,
+          "ink": [
+            194,
+            194,
+            166
+          ],
+          "label": 7,
+          "uncertainty": 0.2269746430975327
+        },
+        {
+          "area": 394,
+          "bbox": [
+            271,
+            38,
+            294,
+            82
+          ],
+          "bbox_source": [
+            2183,
+            156,
+            2206,
+            200
+          ],
+          "borrowed": false,
+          "contrast": 0.41249632835209726,
+          "core_samples": 24,
+          "ink": [
+            201,
+            201,
+            176
+          ],
+          "label": 9,
+          "uncertainty": 0.14137399039776943
+        },
+        {
+          "area": 80,
+          "bbox": [
+            408,
+            58,
+            415,
+            74
+          ],
+          "bbox_source": [
+            2320,
+            176,
+            2327,
+            192
+          ],
+          "borrowed": false,
+          "contrast": 0.013981118454051693,
+          "core_samples": 4,
+          "ink": [
+            255,
+            249,
+            220
+          ],
+          "label": 15,
+          "uncertainty": 0.0057224385130138595
+        },
+        {
+          "area": 156,
+          "bbox": [
+            206,
+            62,
+            218,
+            84
+          ],
+          "bbox_source": [
+            2118,
+            180,
+            2130,
+            202
+          ],
+          "borrowed": false,
+          "contrast": 0.18655002714335808,
+          "core_samples": 9,
+          "ink": [
+            234,
+            232,
+            214
+          ],
+          "label": 18,
+          "uncertainty": 0.675965520318361
+        },
+        {
+          "area": 11,
+          "bbox": [
+            163,
+            69,
+            165,
+            76
+          ],
+          "bbox_source": [
+            2075,
+            187,
+            2077,
+            194
+          ],
+          "borrowed": true,
+          "contrast": 0.022184521246352826,
+          "core_samples": 2,
+          "ink": [
+            178,
+            175,
+            152
+          ],
+          "label": 19,
+          "uncertainty": 0.3440727073234962
+        },
+        {
+          "area": 97,
+          "bbox": [
+            347,
+            69,
+            362,
+            80
+          ],
+          "bbox_source": [
+            2259,
+            187,
+            2274,
+            198
+          ],
+          "borrowed": false,
+          "contrast": 0.17877033425124733,
+          "core_samples": 6,
+          "ink": [
+            235,
+            233,
+            204
+          ],
+          "label": 20,
+          "uncertainty": 0.6371123037812484
+        },
+        {
+          "area": 36,
+          "bbox": [
+            292,
+            70,
+            300,
+            77
+          ],
+          "bbox_source": [
+            2204,
+            188,
+            2212,
+            195
+          ],
+          "borrowed": true,
+          "contrast": 0.2000109714449401,
+          "core_samples": 3,
+          "ink": [
+            201,
+            201,
+            176
+          ],
+          "label": 21,
+          "uncertainty": 0.19039904741657723
+        },
+        {
+          "area": 196,
+          "bbox": [
+            392,
+            74,
+            402,
+            106
+          ],
+          "bbox_source": [
+            2304,
+            192,
+            2314,
+            224
+          ],
+          "borrowed": false,
+          "contrast": 0.014100378532708012,
+          "core_samples": 10,
+          "ink": [
+            255,
+            251,
+            221
+          ],
+          "label": 22,
+          "uncertainty": 0.012621848551042234
+        },
+        {
+          "area": 141,
+          "bbox": [
+            376,
+            87,
+            382,
+            117
+          ],
+          "bbox_source": [
+            2288,
+            205,
+            2294,
+            235
+          ],
+          "borrowed": false,
+          "contrast": 0.01369952153672661,
+          "core_samples": 9,
+          "ink": [
+            255,
+            253,
+            222
+          ],
+          "label": 23,
+          "uncertainty": 0.0029384006691829992
+        },
+        {
+          "area": 66,
+          "bbox": [
+            408,
+            90,
+            414,
+            106
+          ],
+          "bbox_source": [
+            2320,
+            208,
+            2326,
+            224
+          ],
+          "borrowed": false,
+          "contrast": 0.014584892255615923,
+          "core_samples": 4,
+          "ink": [
+            254,
+            250,
+            220
+          ],
+          "label": 24,
+          "uncertainty": 0.0055295974479355175
+        },
+        {
+          "area": 60,
+          "bbox": [
+            424,
+            96,
+            427,
+            117
+          ],
+          "bbox_source": [
+            2336,
+            214,
+            2339,
+            235
+          ],
+          "borrowed": false,
+          "contrast": 0.014952727684722038,
+          "core_samples": 6,
+          "ink": [
+            255,
+            249,
+            217
+          ],
+          "label": 25,
+          "uncertainty": 0.0104175478154263
+        },
+        {
+          "area": 28,
+          "bbox": [
+            410,
+            108,
+            415,
+            117
+          ],
+          "bbox_source": [
+            2322,
+            226,
+            2327,
+            235
+          ],
+          "borrowed": true,
+          "contrast": 0.01342053920772465,
+          "core_samples": 3,
+          "ink": [
+            255,
+            249,
+            217
+          ],
+          "label": 26,
+          "uncertainty": 0.010605819551847832
+        }
+      ],
+      "confidence_heuristic": 216.76896686180612,
+      "context_bbox": [
+        1912,
+        118,
+        2339,
+        235
+      ],
+      "contrast_linear": 0.43353793372361227,
+      "core_luma_percentiles": [
+        0.24842800042288926,
+        0.5186388342909609,
+        0.9471597135248132
+      ],
+      "core_samples": 413,
+      "decline": false,
+      "foreground_fraction": [
+        0.010808863267879661,
+        0.05730699173322124,
+        0.06026942092515863,
+        0.049100262215016316
+      ],
+      "geometry_topology": {
+        "components": 31,
+        "euler": 20,
+        "holes": 11
+      },
+      "ink_rgb": [
+        178,
+        175,
+        152
+      ],
+      "ink_uncertainty": 0.2653012334825509,
+      "local_background_rgb": [
+        255,
+        255,
+        231
+      ],
+      "noise_linear": 0.002,
+      "probability_percentiles": [
+        0.0,
+        0.0,
+        0.06756301142094454,
+        1.0
+      ],
+      "psf_sigma_px": 0.6552903966605835,
+      "rendered_support_fraction": 0.4009273865863569,
+      "rescan_rmse_linear": {
+        "baseline_mask": 0.04296766706503739,
+        "energy": 0.022523893863149083,
+        "geometry": 0.02514668490966685,
+        "local": 0.018030914025002044
+      },
+      "seconds": 0.05274378298781812,
+      "target_bbox": [
+        1942,
+        148,
+        2309,
+        205
+      ],
+      "target_diagnostics": {
+        "baseline": {
+          "mean_abs_rgb_difference": 4.007266121707539,
+          "source_ink_mean_delta_e2000": 8.889312715610119,
+          "source_ink_recall": 0.795364238410596
+        },
+        "local": {
+          "mean_abs_rgb_difference": 0.7222461239383654,
+          "source_ink_mean_delta_e2000": 2.6491403385767143,
+          "source_ink_recall": 0.9913907284768212
+        }
+      },
+      "width_scale": 0.8670281654700237
+    },
+    "euler_rechenkunst01_1738_0025": {
+      "alpha_percentiles": [
+        0.0,
+        0.0,
+        0.8390695170790907,
+        1.0
+      ],
+      "background_luma_percentiles": [
+        0.3196803425474705,
+        0.6010717866968653,
+        0.6213442059292862
+      ],
+      "baseline_paper_luma": 254.71119999999996,
+      "baseline_topology": {
+        "components": 763,
+        "euler": 501,
+        "holes": 262
+      },
+      "calibrated_accept": true,
+      "class": "fraktur",
+      "components": [
+        {
+          "area": 18,
+          "bbox": [
+            2,
+            0,
+            4,
+            11
+          ],
+          "bbox_source": [
+            2,
+            465,
+            4,
+            476
+          ],
+          "borrowed": true,
+          "contrast": 0.28862325925039356,
+          "core_samples": 3,
+          "ink": [
+            8,
+            5,
+            0
+          ],
+          "label": 1,
+          "uncertainty": 0.014576235778019898
+        },
+        {
+          "area": 23,
+          "bbox": [
+            7,
+            0,
+            13,
+            6
+          ],
+          "bbox_source": [
+            7,
+            465,
+            13,
+            471
+          ],
+          "borrowed": true,
+          "contrast": 0.31240082120274903,
+          "core_samples": 3,
+          "ink": [
+            8,
+            5,
+            0
+          ],
+          "label": 2,
+          "uncertainty": 0.013648382570180997
+        },
+        {
+          "area": 18,
+          "bbox": [
+            23,
+            0,
+            27,
+            7
+          ],
+          "bbox_source": [
+            23,
+            465,
+            27,
+            472
+          ],
+          "borrowed": true,
+          "contrast": 0.31453337257897224,
+          "core_samples": 2,
+          "ink": [
+            13,
+            10,
+            5
+          ],
+          "label": 3,
+          "uncertainty": 0.0069604498291036
+        },
+        {
+          "area": 17,
+          "bbox": [
+            29,
+            0,
+            32,
+            8
+          ],
+          "bbox_source": [
+            29,
+            465,
+            32,
+            473
+          ],
+          "borrowed": true,
+          "contrast": 0.3160448175266992,
+          "core_samples": 2,
+          "ink": [
+            13,
+            10,
+            5
+          ],
+          "label": 4,
+          "uncertainty": 0.0069604498291036
+        },
+        {
+          "area": 21,
+          "bbox": [
+            35,
+            0,
+            40,
+            7
+          ],
+          "bbox_source": [
+            35,
+            465,
+            40,
+            472
+          ],
+          "borrowed": true,
+          "contrast": 0.3207249996089805,
+          "core_samples": 3,
+          "ink": [
+            13,
+            10,
+            5
+          ],
+          "label": 5,
+          "uncertainty": 0.0069604498291036
+        },
+        {
+          "area": 25,
+          "bbox": [
+            49,
+            0,
+            55,
+            11
+          ],
+          "bbox_source": [
+            49,
+            465,
+            55,
+            476
+          ],
+          "borrowed": false,
+          "contrast": 0.3193144477667418,
+          "core_samples": 4,
+          "ink": [
+            13,
+            10,
+            5
+          ],
+          "label": 6,
+          "uncertainty": 0.0069604498291036
+        },
+        {
+          "area": 45,
+          "bbox": [
+            57,
+            0,
+            66,
+            8
+          ],
+          "bbox_source": [
+            57,
+            465,
+            66,
+            473
+          ],
+          "borrowed": false,
+          "contrast": 0.3172134843489154,
+          "core_samples": 5,
+          "ink": [
+            11,
+            8,
+            3
+          ],
+          "label": 7,
+          "uncertainty": 0.005397615725274657
+        },
+        {
+          "area": 25,
+          "bbox": [
+            76,
+            0,
+            80,
+            9
+          ],
+          "bbox_source": [
+            76,
+            465,
+            80,
+            474
+          ],
+          "borrowed": true,
+          "contrast": 0.3212138310243164,
+          "core_samples": 3,
+          "ink": [
+            11,
+            8,
+            3
+          ],
+          "label": 8,
+          "uncertainty": 0.005397615725274657
+        },
+        {
+          "area": 24,
+          "bbox": [
+            82,
+            0,
+            85,
+            8
+          ],
+          "bbox_source": [
+            82,
+            465,
+            85,
+            473
+          ],
+          "borrowed": true,
+          "contrast": 0.3210806341882214,
+          "core_samples": 2,
+          "ink": [
+            3,
+            0,
+            0
+          ],
+          "label": 9,
+          "uncertainty": 0.0028042012545088143
+        },
+        {
+          "area": 22,
+          "bbox": [
+            88,
+            0,
+            91,
+            9
+          ],
+          "bbox_source": [
+            88,
+            465,
+            91,
+            474
+          ],
+          "borrowed": true,
+          "contrast": 0.32116571305289315,
+          "core_samples": 3,
+          "ink": [
+            3,
+            0,
+            0
+          ],
+          "label": 10,
+          "uncertainty": 0.0028042012545088143
+        },
+        {
+          "area": 29,
+          "bbox": [
+            93,
+            0,
+            99,
+            9
+          ],
+          "bbox_source": [
+            93,
+            465,
+            99,
+            474
+          ],
+          "borrowed": true,
+          "contrast": 0.32305231145706337,
+          "core_samples": 3,
+          "ink": [
+            3,
+            0,
+            0
+          ],
+          "label": 11,
+          "uncertainty": 0.0028042012545088143
+        },
+        {
+          "area": 35,
+          "bbox": [
+            101,
+            0,
+            108,
+            11
+          ],
+          "bbox_source": [
+            101,
+            465,
+            108,
+            476
+          ],
+          "borrowed": false,
+          "contrast": 0.3302560856678685,
+          "core_samples": 4,
+          "ink": [
+            3,
+            0,
+            0
+          ],
+          "label": 12,
+          "uncertainty": 0.0028042012545088143
+        },
+        {
+          "area": 80,
+          "bbox": [
+            110,
+            0,
+            122,
+            12
+          ],
+          "bbox_source": [
+            110,
+            465,
+            122,
+            477
+          ],
+          "borrowed": false,
+          "contrast": 0.3332098842805501,
+          "core_samples": 9,
+          "ink": [
+            3,
+            0,
+            0
+          ],
+          "label": 13,
+          "uncertainty": 0.0020430548498917454
+        },
+        {
+          "area": 32,
+          "bbox": [
+            125,
+            0,
+            132,
+            11
+          ],
+          "bbox_source": [
+            125,
+            465,
+            132,
+            476
+          ],
+          "borrowed": false,
+          "contrast": 0.32902322964963304,
+          "core_samples": 4,
+          "ink": [
+            3,
+            0,
+            0
+          ],
+          "label": 14,
+          "uncertainty": 0.0021139143249089545
+        },
+        {
+          "area": 35,
+          "bbox": [
+            133,
+            0,
+            137,
+            12
+          ],
+          "bbox_source": [
+            133,
+            465,
+            137,
+            477
+          ],
+          "borrowed": true,
+          "contrast": 0.3270617342610254,
+          "core_samples": 3,
+          "ink": [
+            3,
+            0,
+            0
+          ],
+          "label": 15,
+          "uncertainty": 0.0021139143249089545
+        },
+        {
+          "area": 38,
+          "bbox": [
+            139,
+            0,
+            144,
+            13
+          ],
+          "bbox_source": [
+            139,
+            465,
+            144,
+            478
+          ],
+          "borrowed": false,
+          "contrast": 0.3259577085127529,
+          "core_samples": 4,
+          "ink": [
+            3,
+            0,
+            0
+          ],
+          "label": 16,
+          "uncertainty": 0.0012369772421611254
+        },
+        {
+          "area": 100,
+          "bbox": [
+            315,
+            0,
+            329,
+            14
+          ],
+          "bbox_source": [
+            315,
+            465,
+            329,
+            479
+          ],
+          "borrowed": false,
+          "contrast": 0.5922875112184686,
+          "core_samples": 8,
+          "ink": [
+            5,
+            2,
+            0
+          ],
+          "label": 19,
+          "uncertainty": 0.0022202561903546143
+        },
+        {
+          "area": 14,
+          "bbox": [
+            358,
+            0,
+            363,
+            4
+          ],
+          "bbox_source": [
+            358,
+            465,
+            363,
+            469
+          ],
+          "borrowed": true,
+          "contrast": 0.6102227284088685,
+          "core_samples": 2,
+          "ink": [
+            3,
+            0,
+            0
+          ],
+          "label": 20,
+          "uncertainty": 0.0024196351416114724
+        },
+        {
+          "area": 36,
+          "bbox": [
+            392,
+            0,
+            405,
+            5
+          ],
+          "bbox_source": [
+            392,
+            465,
+            405,
+            470
+          ],
+          "borrowed": false,
+          "contrast": 0.5988733099916664,
+          "core_samples": 4,
+          "ink": [
+            11,
+            8,
+            3
+          ],
+          "label": 21,
+          "uncertainty": 0.003812734394031793
+        },
+        {
+          "area": 33,
+          "bbox": [
+            411,
+            0,
+            420,
+            5
+          ],
+          "bbox_source": [
+            411,
+            465,
+            420,
+            470
+          ],
+          "borrowed": true,
+          "contrast": 0.6189491666194386,
+          "core_samples": 3,
+          "ink": [
+            11,
+            8,
+            3
+          ],
+          "label": 22,
+          "uncertainty": 0.003812734394031793
+        },
+        {
+          "area": 6,
+          "bbox": [
+            423,
+            0,
+            425,
+            6
+          ],
+          "bbox_source": [
+            423,
+            465,
+            425,
+            471
+          ],
+          "borrowed": true,
+          "contrast": 0.3421965290146659,
+          "core_samples": 2,
+          "ink": [
+            8,
+            5,
+            0
+          ],
+          "label": 23,
+          "uncertainty": 0.00749228257085159
+        },
+        {
+          "area": 36,
+          "bbox": [
+            426,
+            0,
+            437,
+            6
+          ],
+          "bbox_source": [
+            426,
+            465,
+            437,
+            471
+          ],
+          "borrowed": true,
+          "contrast": 0.6300723091366391,
+          "core_samples": 3,
+          "ink": [
+            8,
+            5,
+            0
+          ],
+          "label": 24,
+          "uncertainty": 0.002096892555886258
+        },
+        {
+          "area": 63,
+          "bbox": [
+            439,
+            0,
+            452,
+            12
+          ],
+          "bbox_source": [
+            439,
+            465,
+            452,
+            477
+          ],
+          "borrowed": false,
+          "contrast": 0.6210463618003328,
+          "core_samples": 7,
+          "ink": [
+            8,
+            5,
+            0
+          ],
+          "label": 25,
+          "uncertainty": 0.002096892555886258
+        },
+        {
+          "area": 5,
+          "bbox": [
+            29,
+            10,
+            30,
+            15
+          ],
+          "bbox_source": [
+            29,
+            475,
+            30,
+            480
+          ],
+          "borrowed": true,
+          "contrast": 0.2559685596480371,
+          "core_samples": 2,
+          "ink": [
+            13,
+            10,
+            5
+          ],
+          "label": 36,
+          "uncertainty": 0.015435765059018553
+        },
+        {
+          "area": 136,
+          "bbox": [
+            0,
+            16,
+            10,
+            46
+          ],
+          "bbox_source": [
+            0,
+            481,
+            10,
+            511
+          ],
+          "borrowed": false,
+          "contrast": 0.339736479698479,
+          "core_samples": 16,
+          "ink": [
+            8,
+            5,
+            0
+          ],
+          "label": 38,
+          "uncertainty": 0.013648382570180997
+        },
+        {
+          "area": 159,
+          "bbox": [
+            39,
+            19,
+            54,
+            47
+          ],
+          "bbox_source": [
+            39,
+            484,
+            54,
+            512
+          ],
+          "borrowed": false,
+          "contrast": 0.31988711702095196,
+          "core_samples": 18,
+          "ink": [
+            3,
+            0,
+            0
+          ],
+          "label": 40,
+          "uncertainty": 0.0027178450322103338
+        },
+        {
+          "area": 225,
+          "bbox": [
+            390,
+            20,
+            407,
+            47
+          ],
+          "bbox_source": [
+            390,
+            485,
+            407,
+            512
+          ],
+          "borrowed": false,
+          "contrast": 0.6196429443351528,
+          "core_samples": 15,
+          "ink": [
+            8,
+            5,
+            0
+          ],
+          "label": 41,
+          "uncertainty": 0.003421521016015066
+        },
+        {
+          "area": 157,
+          "bbox": [
+            419,
+            21,
+            432,
+            47
+          ],
+          "bbox_source": [
+            419,
+            486,
+            432,
+            512
+          ],
+          "borrowed": false,
+          "contrast": 0.6208808793026382,
+          "core_samples": 15,
+          "ink": [
+            4,
+            1,
+            0
+          ],
+          "label": 42,
+          "uncertainty": 0.0028679732130633627
+        },
+        {
+          "area": 109,
+          "bbox": [
+            409,
+            23,
+            418,
+            47
+          ],
+          "bbox_source": [
+            409,
+            488,
+            418,
+            512
+          ],
+          "borrowed": false,
+          "contrast": 0.6244696853960621,
+          "core_samples": 7,
+          "ink": [
+            6,
+            3,
+            0
+          ],
+          "label": 43,
+          "uncertainty": 0.002126660486258271
+        },
+        {
+          "area": 170,
+          "bbox": [
+            433,
+            23,
+            447,
+            47
+          ],
+          "bbox_source": [
+            433,
+            488,
+            447,
+            512
+          ],
+          "borrowed": false,
+          "contrast": 0.6138467980645633,
+          "core_samples": 11,
+          "ink": [
+            6,
+            3,
+            0
+          ],
+          "label": 44,
+          "uncertainty": 0.0014226750716608955
+        },
+        {
+          "area": 75,
+          "bbox": [
+            105,
+            24,
+            110,
+            54
+          ],
+          "bbox_source": [
+            105,
+            489,
+            110,
+            519
+          ],
+          "borrowed": false,
+          "contrast": 0.3302492141392492,
+          "core_samples": 10,
+          "ink": [
+            3,
+            0,
+            0
+          ],
+          "label": 45,
+          "uncertainty": 0.0007258769269767157
+        },
+        {
+          "area": 251,
+          "bbox": [
+            315,
+            26,
+            337,
+            55
+          ],
+          "bbox_source": [
+            315,
+            491,
+            337,
+            520
+          ],
+          "borrowed": false,
+          "contrast": 0.6044274266752272,
+          "core_samples": 16,
+          "ink": [
+            7,
+            4,
+            0
+          ],
+          "label": 46,
+          "uncertainty": 0.0020239376749731394
+        },
+        {
+          "area": 100,
+          "bbox": [
+            358,
+            26,
+            370,
+            45
+          ],
+          "bbox_source": [
+            358,
+            491,
+            370,
+            510
+          ],
+          "borrowed": false,
+          "contrast": 0.6053110668857378,
+          "core_samples": 8,
+          "ink": [
+            3,
+            0,
+            0
+          ],
+          "label": 47,
+          "uncertainty": 0.0024196351416114724
+        },
+        {
+          "area": 26,
+          "bbox": [
+            90,
+            27,
+            95,
+            39
+          ],
+          "bbox_source": [
+            90,
+            492,
+            95,
+            504
+          ],
+          "borrowed": false,
+          "contrast": 0.32441338831080213,
+          "core_samples": 4,
+          "ink": [
+            7,
+            4,
+            0
+          ],
+          "label": 48,
+          "uncertainty": 0.0033679653560249024
+        },
+        {
+          "area": 78,
+          "bbox": [
+            12,
+            28,
+            20,
+            47
+          ],
+          "bbox_source": [
+            12,
+            493,
+            20,
+            512
+          ],
+          "borrowed": false,
+          "contrast": 0.3218700872095534,
+          "core_samples": 9,
+          "ink": [
+            3,
+            0,
+            0
+          ],
+          "label": 49,
+          "uncertainty": 0.005922587048495062
+        },
+        {
+          "area": 31,
+          "bbox": [
+            23,
+            30,
+            28,
+            45
+          ],
+          "bbox_source": [
+            23,
+            495,
+            28,
+            510
+          ],
+          "borrowed": false,
+          "contrast": 0.31262822635555215,
+          "core_samples": 4,
+          "ink": [
+            10,
+            7,
+            3
+          ],
+          "label": 52,
+          "uncertainty": 0.004296935017570598
+        },
+        {
+          "area": 80,
+          "bbox": [
+            29,
+            30,
+            37,
+            48
+          ],
+          "bbox_source": [
+            29,
+            495,
+            37,
+            513
+          ],
+          "borrowed": false,
+          "contrast": 0.31592016926404853,
+          "core_samples": 10,
+          "ink": [
+            5,
+            1,
+            0
+          ],
+          "label": 53,
+          "uncertainty": 0.0021072228203638946
+        },
+        {
+          "area": 76,
+          "bbox": [
+            56,
+            30,
+            64,
+            48
+          ],
+          "bbox_source": [
+            56,
+            495,
+            64,
+            513
+          ],
+          "borrowed": false,
+          "contrast": 0.3198768506120113,
+          "core_samples": 8,
+          "ink": [
+            3,
+            0,
+            0
+          ],
+          "label": 54,
+          "uncertainty": 0.00039714707065669814
+        },
+        {
+          "area": 48,
+          "bbox": [
+            67,
+            31,
+            74,
+            47
+          ],
+          "bbox_source": [
+            67,
+            496,
+            74,
+            512
+          ],
+          "borrowed": false,
+          "contrast": 0.3189693400725468,
+          "core_samples": 6,
+          "ink": [
+            4,
+            1,
+            0
+          ],
+          "label": 55,
+          "uncertainty": 0.0017619660753348829
+        },
+        {
+          "area": 55,
+          "bbox": [
+            76,
+            31,
+            81,
+            48
+          ],
+          "bbox_source": [
+            76,
+            496,
+            81,
+            513
+          ],
+          "borrowed": false,
+          "contrast": 0.3210703912590581,
+          "core_samples": 6,
+          "ink": [
+            4,
+            1,
+            1
+          ],
+          "label": 56,
+          "uncertainty": 0.0021929508895887195
+        },
+        {
+          "area": 73,
+          "bbox": [
+            97,
+            31,
+            103,
+            55
+          ],
+          "bbox_source": [
+            97,
+            496,
+            103,
+            520
+          ],
+          "borrowed": false,
+          "contrast": 0.32726874954784874,
+          "core_samples": 10,
+          "ink": [
+            3,
+            0,
+            0
+          ],
+          "label": 57,
+          "uncertainty": 0.003339190881702349
+        },
+        {
+          "area": 84,
+          "bbox": [
+            116,
+            31,
+            123,
+            55
+          ],
+          "bbox_source": [
+            116,
+            496,
+            123,
+            520
+          ],
+          "borrowed": false,
+          "contrast": 0.32989744123380393,
+          "core_samples": 10,
+          "ink": [
+            8,
+            5,
+            3
+          ],
+          "label": 58,
+          "uncertainty": 0.010602711814398336
+        },
+        {
+          "area": 127,
+          "bbox": [
+            124,
+            31,
+            134,
+            55
+          ],
+          "bbox_source": [
+            124,
+            496,
+            134,
+            520
+          ],
+          "borrowed": false,
+          "contrast": 0.33230914923783794,
+          "core_samples": 15,
+          "ink": [
+            4,
+            1,
+            0
+          ],
+          "label": 59,
+          "uncertainty": 0.005649702315454983
+        },
+        {
+          "area": 66,
+          "bbox": [
+            108,
+            32,
+            114,
+            61
+          ],
+          "bbox_source": [
+            108,
+            497,
+            114,
+            526
+          ],
+          "borrowed": false,
+          "contrast": 0.333526056160239,
+          "core_samples": 8,
+          "ink": [
+            3,
+            0,
+            0
+          ],
+          "label": 61,
+          "uncertainty": 0.003834551823865359
+        },
+        {
+          "area": 31,
+          "bbox": [
+            136,
+            34,
+            144,
+            44
+          ],
+          "bbox_source": [
+            136,
+            499,
+            144,
+            509
+          ],
+          "borrowed": true,
+          "contrast": 0.32360016930724717,
+          "core_samples": 3,
+          "ink": [
+            4,
+            1,
+            0
+          ],
+          "label": 63,
+          "uncertainty": 0.005649702315454983
+        },
+        {
+          "area": 16,
+          "bbox": [
+            496,
+            36,
+            505,
+            40
+          ],
+          "bbox_source": [
+            496,
+            501,
+            505,
+            505
+          ],
+          "borrowed": true,
+          "contrast": 0.3057745386180059,
+          "core_samples": 3,
+          "ink": [
+            4,
+            1,
+            0
+          ],
+          "label": 66,
+          "uncertainty": 0.0236608256768466
+        },
+        {
+          "area": 52,
+          "bbox": [
+            90,
+            40,
+            95,
+            60
+          ],
+          "bbox_source": [
+            90,
+            505,
+            95,
+            525
+          ],
+          "borrowed": false,
+          "contrast": 0.3265314434931916,
+          "core_samples": 7,
+          "ink": [
+            4,
+            1,
+            0
+          ],
+          "label": 68,
+          "uncertainty": 0.002305151742796964
+        },
+        {
+          "area": 25,
+          "bbox": [
+            135,
+            42,
+            142,
+            51
+          ],
+          "bbox_source": [
+            135,
+            507,
+            142,
+            516
+          ],
+          "borrowed": true,
+          "contrast": 0.3292145646696828,
+          "core_samples": 2,
+          "ink": [
+            4,
+            1,
+            0
+          ],
+          "label": 70,
+          "uncertainty": 0.005649702315454983
+        },
+        {
+          "area": 216,
+          "bbox": [
+            378,
+            60,
+            392,
+            101
+          ],
+          "bbox_source": [
+            378,
+            525,
+            392,
+            566
+          ],
+          "borrowed": false,
+          "contrast": 0.6121794303513672,
+          "core_samples": 14,
+          "ink": [
+            8,
+            5,
+            0
+          ],
+          "label": 86,
+          "uncertainty": 0.0020453986726861576
+        },
+        {
+          "area": 139,
+          "bbox": [
+            35,
+            62,
+            44,
+            100
+          ],
+          "bbox_source": [
+            35,
+            527,
+            44,
+            565
+          ],
+          "borrowed": false,
+          "contrast": 0.31391694119305247,
+          "core_samples": 19,
+          "ink": [
+            4,
+            1,
+            0
+          ],
+          "label": 87,
+          "uncertainty": 0.0013334329188566191
+        },
+        {
+          "area": 465,
+          "bbox": [
+            328,
+            62,
+            358,
+            98
+          ],
+          "bbox_source": [
+            328,
+            527,
+            358,
+            563
+          ],
+          "borrowed": false,
+          "contrast": 0.6030780484108826,
+          "core_samples": 36,
+          "ink": [
+            7,
+            3,
+            0
+          ],
+          "label": 89,
+          "uncertainty": 0.00344628974340756
+        },
+        {
+          "area": 234,
+          "bbox": [
+            410,
+            62,
+            426,
+            94
+          ],
+          "bbox_source": [
+            410,
+            527,
+            426,
+            559
+          ],
+          "borrowed": false,
+          "contrast": 0.6201921042021128,
+          "core_samples": 18,
+          "ink": [
+            3,
+            1,
+            0
+          ],
+          "label": 92,
+          "uncertainty": 0.0013191131919884924
+        },
+        {
+          "area": 91,
+          "bbox": [
+            81,
+            63,
+            86,
+            96
+          ],
+          "bbox_source": [
+            81,
+            528,
+            86,
+            561
+          ],
+          "borrowed": false,
+          "contrast": 0.3333872175292153,
+          "core_samples": 10,
+          "ink": [
+            11,
+            7,
+            4
+          ],
+          "label": 93,
+          "uncertainty": 0.005490468126619578
+        },
+        {
+          "area": 134,
+          "bbox": [
+            112,
+            65,
+            121,
+            97
+          ],
+          "bbox_source": [
+            112,
+            530,
+            121,
+            562
+          ],
+          "borrowed": false,
+          "contrast": 0.3363427960913777,
+          "core_samples": 15,
+          "ink": [
+            3,
+            0,
+            0
+          ],
+          "label": 96,
+          "uncertainty": 0.0020920235779534574
+        },
+        {
+          "area": 115,
+          "bbox": [
+            6,
+            66,
+            15,
+            93
+          ],
+          "bbox_source": [
+            6,
+            531,
+            15,
+            558
+          ],
+          "borrowed": false,
+          "contrast": 0.30139469925128837,
+          "core_samples": 14,
+          "ink": [
+            3,
+            0,
+            0
+          ],
+          "label": 97,
+          "uncertainty": 0.00288358790575469
+        },
+        {
+          "area": 339,
+          "bbox": [
+            480,
+            66,
+            507,
+            93
+          ],
+          "bbox_source": [
+            480,
+            531,
+            507,
+            558
+          ],
+          "borrowed": false,
+          "contrast": 0.6165231633127799,
+          "core_samples": 26,
+          "ink": [
+            4,
+            1,
+            0
+          ],
+          "label": 98,
+          "uncertainty": 0.004350997898404157
+        },
+        {
+          "area": 143,
+          "bbox": [
+            469,
+            67,
+            478,
+            100
+          ],
+          "bbox_source": [
+            469,
+            532,
+            478,
+            565
+          ],
+          "borrowed": false,
+          "contrast": 0.6122343076140246,
+          "core_samples": 15,
+          "ink": [
+            9,
+            6,
+            1
+          ],
+          "label": 99,
+          "uncertainty": 0.0032194443458953698
+        },
+        {
+          "area": 148,
+          "bbox": [
+            509,
+            68,
+            521,
+            94
+          ],
+          "bbox_source": [
+            509,
+            533,
+            521,
+            559
+          ],
+          "borrowed": false,
+          "contrast": 0.6290146315717342,
+          "core_samples": 12,
+          "ink": [
+            3,
+            1,
+            0
+          ],
+          "label": 100,
+          "uncertainty": 0.005026630759073847
+        },
+        {
+          "area": 90,
+          "bbox": [
+            17,
+            69,
+            25,
+            93
+          ],
+          "bbox_source": [
+            17,
+            534,
+            25,
+            558
+          ],
+          "borrowed": false,
+          "contrast": 0.3064795224267009,
+          "core_samples": 13,
+          "ink": [
+            3,
+            0,
+            0
+          ],
+          "label": 101,
+          "uncertainty": 0.004967392016843921
+        },
+        {
+          "area": 59,
+          "bbox": [
+            27,
+            69,
+            33,
+            93
+          ],
+          "bbox_source": [
+            27,
+            534,
+            33,
+            558
+          ],
+          "borrowed": false,
+          "contrast": 0.3114942217008364,
+          "core_samples": 8,
+          "ink": [
+            3,
+            0,
+            0
+          ],
+          "label": 102,
+          "uncertainty": 0.0019837632675688472
+        },
+        {
+          "area": 154,
+          "bbox": [
+            427,
+            69,
+            441,
+            94
+          ],
+          "bbox_source": [
+            427,
+            534,
+            441,
+            559
+          ],
+          "borrowed": false,
+          "contrast": 0.6145189180934324,
+          "core_samples": 13,
+          "ink": [
+            10,
+            7,
+            2
+          ],
+          "label": 104,
+          "uncertainty": 0.002315921791027312
+        },
+        {
+          "area": 163,
+          "bbox": [
+            442,
+            69,
+            455,
+            93
+          ],
+          "bbox_source": [
+            442,
+            534,
+            455,
+            558
+          ],
+          "borrowed": false,
+          "contrast": 0.6152306136596966,
+          "core_samples": 14,
+          "ink": [
+            7,
+            4,
+            0
+          ],
+          "label": 105,
+          "uncertainty": 0.004544356117708091
+        },
+        {
+          "area": 114,
+          "bbox": [
+            522,
+            69,
+            530,
+            93
+          ],
+          "bbox_source": [
+            522,
+            534,
+            530,
+            558
+          ],
+          "borrowed": false,
+          "contrast": 0.6355674240231667,
+          "core_samples": 7,
+          "ink": [
+            6,
+            6,
+            1
+          ],
+          "label": 108,
+          "uncertainty": 0.0008502928050526069
+        },
+        {
+          "area": 93,
+          "bbox": [
+            525,
+            69,
+            535,
+            101
+          ],
+          "bbox_source": [
+            525,
+            534,
+            535,
+            566
+          ],
+          "borrowed": false,
+          "contrast": 0.6385053510060887,
+          "core_samples": 9,
+          "ink": [
+            6,
+            3,
+            0
+          ],
+          "label": 109,
+          "uncertainty": 0.0035653242115617234
+        },
+        {
+          "area": 15,
+          "bbox": [
+            31,
+            70,
+            34,
+            77
+          ],
+          "bbox_source": [
+            31,
+            535,
+            34,
+            542
+          ],
+          "borrowed": true,
+          "contrast": 0.31282269777376104,
+          "core_samples": 2,
+          "ink": [
+            3,
+            0,
+            0
+          ],
+          "label": 110,
+          "uncertainty": 0.0019837632675688472
+        },
+        {
+          "area": 68,
+          "bbox": [
+            46,
+            71,
+            53,
+            94
+          ],
+          "bbox_source": [
+            46,
+            536,
+            53,
+            559
+          ],
+          "borrowed": false,
+          "contrast": 0.31590144202018716,
+          "core_samples": 10,
+          "ink": [
+            3,
+            0,
+            0
+          ],
+          "label": 111,
+          "uncertainty": 0.002588771893709676
+        },
+        {
+          "area": 57,
+          "bbox": [
+            54,
+            71,
+            60,
+            94
+          ],
+          "bbox_source": [
+            54,
+            536,
+            60,
+            559
+          ],
+          "borrowed": false,
+          "contrast": 0.31802337586295204,
+          "core_samples": 7,
+          "ink": [
+            6,
+            2,
+            0
+          ],
+          "label": 112,
+          "uncertainty": 0.006849067213639976
+        },
+        {
+          "area": 15,
+          "bbox": [
+            59,
+            71,
+            61,
+            79
+          ],
+          "bbox_source": [
+            59,
+            536,
+            61,
+            544
+          ],
+          "borrowed": true,
+          "contrast": 0.31329341074050066,
+          "core_samples": 2,
+          "ink": [
+            6,
+            2,
+            0
+          ],
+          "label": 113,
+          "uncertainty": 0.006849067213639976
+        },
+        {
+          "area": 136,
+          "bbox": [
+            62,
+            71,
+            72,
+            101
+          ],
+          "bbox_source": [
+            62,
+            536,
+            72,
+            566
+          ],
+          "borrowed": false,
+          "contrast": 0.32980408661754085,
+          "core_samples": 16,
+          "ink": [
+            4,
+            0,
+            0
+          ],
+          "label": 114,
+          "uncertainty": 0.006798728686813202
+        },
+        {
+          "area": 78,
+          "bbox": [
+            73,
+            71,
+            80,
+            95
+          ],
+          "bbox_source": [
+            73,
+            536,
+            80,
+            560
+          ],
+          "borrowed": false,
+          "contrast": 0.3335503801727327,
+          "core_samples": 10,
+          "ink": [
+            4,
+            0,
+            0
+          ],
+          "label": 115,
+          "uncertainty": 0.0049923107763687425
+        },
+        {
+          "area": 231,
+          "bbox": [
+            359,
+            71,
+            377,
+            95
+          ],
+          "bbox_source": [
+            359,
+            536,
+            377,
+            560
+          ],
+          "borrowed": false,
+          "contrast": 0.6058984353229733,
+          "core_samples": 16,
+          "ink": [
+            5,
+            2,
+            0
+          ],
+          "label": 117,
+          "uncertainty": 0.0024123743208599065
+        },
+        {
+          "area": 66,
+          "bbox": [
+            85,
+            72,
+            91,
+            103
+          ],
+          "bbox_source": [
+            85,
+            537,
+            91,
+            568
+          ],
+          "borrowed": false,
+          "contrast": 0.3350622686745771,
+          "core_samples": 10,
+          "ink": [
+            6,
+            3,
+            0
+          ],
+          "label": 119,
+          "uncertainty": 0.0029518519539630484
+        },
+        {
+          "area": 87,
+          "bbox": [
+            92,
+            73,
+            100,
+            97
+          ],
+          "bbox_source": [
+            92,
+            538,
+            100,
+            562
+          ],
+          "borrowed": false,
+          "contrast": 0.3355249366423432,
+          "core_samples": 10,
+          "ink": [
+            4,
+            0,
+            0
+          ],
+          "label": 121,
+          "uncertainty": 0.0027951956544943314
+        },
+        {
+          "area": 109,
+          "bbox": [
+            100,
+            73,
+            110,
+            97
+          ],
+          "bbox_source": [
+            100,
+            538,
+            110,
+            562
+          ],
+          "borrowed": false,
+          "contrast": 0.33494146084306936,
+          "core_samples": 15,
+          "ink": [
+            3,
+            0,
+            0
+          ],
+          "label": 122,
+          "uncertainty": 0.0022788030678733365
+        },
+        {
+          "area": 77,
+          "bbox": [
+            123,
+            73,
+            129,
+            97
+          ],
+          "bbox_source": [
+            123,
+            538,
+            129,
+            562
+          ],
+          "borrowed": false,
+          "contrast": 0.33723029036256214,
+          "core_samples": 11,
+          "ink": [
+            3,
+            0,
+            0
+          ],
+          "label": 123,
+          "uncertainty": 0.001785921089256585
+        },
+        {
+          "area": 80,
+          "bbox": [
+            135,
+            73,
+            142,
+            98
+          ],
+          "bbox_source": [
+            135,
+            538,
+            142,
+            563
+          ],
+          "borrowed": false,
+          "contrast": 0.33614701923574236,
+          "core_samples": 8,
+          "ink": [
+            3,
+            0,
+            0
+          ],
+          "label": 124,
+          "uncertainty": 0.0018075835535465508
+        },
+        {
+          "area": 55,
+          "bbox": [
+            131,
+            74,
+            135,
+            97
+          ],
+          "bbox_source": [
+            131,
+            539,
+            135,
+            562
+          ],
+          "borrowed": false,
+          "contrast": 0.33657792504171347,
+          "core_samples": 7,
+          "ink": [
+            3,
+            0,
+            0
+          ],
+          "label": 125,
+          "uncertainty": 0.002335800242276539
+        },
+        {
+          "area": 8,
+          "bbox": [
+            357,
+            92,
+            360,
+            98
+          ],
+          "bbox_source": [
+            357,
+            557,
+            360,
+            563
+          ],
+          "borrowed": true,
+          "contrast": 0.37011000445149883,
+          "core_samples": 2,
+          "ink": [
+            5,
+            2,
+            0
+          ],
+          "label": 151,
+          "uncertainty": 0.045852985082027044
+        },
+        {
+          "area": 115,
+          "bbox": [
+            6,
+            103,
+            15,
+            139
+          ],
+          "bbox_source": [
+            6,
+            568,
+            15,
+            604
+          ],
+          "borrowed": false,
+          "contrast": 0.2991512500133481,
+          "core_samples": 13,
+          "ink": [
+            3,
+            0,
+            0
+          ],
+          "label": 159,
+          "uncertainty": 0.007546289351317962
+        },
+        {
+          "area": 114,
+          "bbox": [
+            16,
+            103,
+            21,
+            139
+          ],
+          "bbox_source": [
+            16,
+            568,
+            21,
+            604
+          ],
+          "borrowed": false,
+          "contrast": 0.30335935108160306,
+          "core_samples": 11,
+          "ink": [
+            3,
+            0,
+            0
+          ],
+          "label": 160,
+          "uncertainty": 0.0024987295074464858
+        },
+        {
+          "area": 377,
+          "bbox": [
+            416,
+            103,
+            444,
+            140
+          ],
+          "bbox_source": [
+            416,
+            568,
+            444,
+            605
+          ],
+          "borrowed": false,
+          "contrast": 0.6295615204507714,
+          "core_samples": 30,
+          "ink": [
+            11,
+            8,
+            5
+          ],
+          "label": 162,
+          "uncertainty": 0.011956352665922852
+        },
+        {
+          "area": 127,
+          "bbox": [
+            33,
+            104,
+            42,
+            137
+          ],
+          "bbox_source": [
+            33,
+            569,
+            42,
+            602
+          ],
+          "borrowed": false,
+          "contrast": 0.3112629922165357,
+          "core_samples": 15,
+          "ink": [
+            3,
+            0,
+            0
+          ],
+          "label": 163,
+          "uncertainty": 0.0029712458126611584
+        },
+        {
+          "area": 131,
+          "bbox": [
+            58,
+            106,
+            67,
+            137
+          ],
+          "bbox_source": [
+            58,
+            571,
+            67,
+            602
+          ],
+          "borrowed": false,
+          "contrast": 0.31927733940748254,
+          "core_samples": 14,
+          "ink": [
+            3,
+            0,
+            0
+          ],
+          "label": 165,
+          "uncertainty": 0.0005014831715641775
+        },
+        {
+          "area": 144,
+          "bbox": [
+            444,
+            107,
+            456,
+            136
+          ],
+          "bbox_source": [
+            444,
+            572,
+            456,
+            601
+          ],
+          "borrowed": false,
+          "contrast": 0.6168584487916872,
+          "core_samples": 13,
+          "ink": [
+            9,
+            6,
+            1
+          ],
+          "label": 166,
+          "uncertainty": 0.007087187066905625
+        },
+        {
+          "area": 226,
+          "bbox": [
+            455,
+            107,
+            472,
+            135
+          ],
+          "bbox_source": [
+            455,
+            572,
+            472,
+            600
+          ],
+          "borrowed": false,
+          "contrast": 0.6174042185804693,
+          "core_samples": 20,
+          "ink": [
+            9,
+            6,
+            1
+          ],
+          "label": 167,
+          "uncertainty": 0.005313159115325081
+        },
+        {
+          "area": 29,
+          "bbox": [
+            80,
+            111,
+            86,
+            120
+          ],
+          "bbox_source": [
+            80,
+            576,
+            86,
+            585
+          ],
+          "borrowed": true,
+          "contrast": 0.32898513293849724,
+          "core_samples": 3,
+          "ink": [
+            3,
+            0,
+            0
+          ],
+          "label": 172,
+          "uncertainty": 0.0035211977992721786
+        },
+        {
+          "area": 243,
+          "bbox": [
+            385,
+            111,
+            404,
+            136
+          ],
+          "bbox_source": [
+            385,
+            576,
+            404,
+            601
+          ],
+          "borrowed": false,
+          "contrast": 0.6395125603128033,
+          "core_samples": 19,
+          "ink": [
+            12,
+            11,
+            6
+          ],
+          "label": 173,
+          "uncertainty": 0.004697845884634367
+        },
+        {
+          "area": 122,
+          "bbox": [
+            406,
+            111,
+            415,
+            135
+          ],
+          "bbox_source": [
+            406,
+            576,
+            415,
+            600
+          ],
+          "borrowed": false,
+          "contrast": 0.644508364314232,
+          "core_samples": 8,
+          "ink": [
+            7,
+            4,
+            1
+          ],
+          "label": 175,
+          "uncertainty": 0.0021064917499373733
+        },
+        {
+          "area": 111,
+          "bbox": [
+            23,
+            113,
+            32,
+            137
+          ],
+          "bbox_source": [
+            23,
+            578,
+            32,
+            602
+          ],
+          "borrowed": false,
+          "contrast": 0.30537007207316846,
+          "core_samples": 16,
+          "ink": [
+            8,
+            5,
+            2
+          ],
+          "label": 180,
+          "uncertainty": 0.007299649746513226
+        },
+        {
+          "area": 206,
+          "bbox": [
+            309,
+            113,
+            328,
+            134
+          ],
+          "bbox_source": [
+            309,
+            578,
+            328,
+            599
+          ],
+          "borrowed": false,
+          "contrast": 0.6095616653784544,
+          "core_samples": 14,
+          "ink": [
+            8,
+            5,
+            1
+          ],
+          "label": 181,
+          "uncertainty": 0.007238682965815526
+        },
+        {
+          "area": 75,
+          "bbox": [
+            69,
+            114,
+            76,
+            139
+          ],
+          "bbox_source": [
+            69,
+            579,
+            76,
+            604
+          ],
+          "borrowed": false,
+          "contrast": 0.3223896165356654,
+          "core_samples": 10,
+          "ink": [
+            3,
+            0,
+            0
+          ],
+          "label": 182,
+          "uncertainty": 0.0022553715764987185
+        },
+        {
+          "area": 60,
+          "bbox": [
+            87,
+            115,
+            92,
+            139
+          ],
+          "bbox_source": [
+            87,
+            580,
+            92,
+            604
+          ],
+          "borrowed": false,
+          "contrast": 0.3301618978792462,
+          "core_samples": 7,
+          "ink": [
+            3,
+            0,
+            0
+          ],
+          "label": 186,
+          "uncertainty": 0.00041444212649773655
+        },
+        {
+          "area": 67,
+          "bbox": [
+            91,
+            116,
+            101,
+            140
+          ],
+          "bbox_source": [
+            91,
+            581,
+            101,
+            605
+          ],
+          "borrowed": false,
+          "contrast": 0.3309274984243987,
+          "core_samples": 8,
+          "ink": [
+            3,
+            0,
+            0
+          ],
+          "label": 188,
+          "uncertainty": 0.003195891488411187
+        },
+        {
+          "area": 38,
+          "bbox": [
+            98,
+            116,
+            103,
+            134
+          ],
+          "bbox_source": [
+            98,
+            581,
+            103,
+            599
+          ],
+          "borrowed": false,
+          "contrast": 0.33301508586888434,
+          "core_samples": 5,
+          "ink": [
+            3,
+            0,
+            0
+          ],
+          "label": 189,
+          "uncertainty": 0.003630514622783478
+        },
+        {
+          "area": 88,
+          "bbox": [
+            104,
+            116,
+            112,
+            140
+          ],
+          "bbox_source": [
+            104,
+            581,
+            112,
+            605
+          ],
+          "borrowed": false,
+          "contrast": 0.3310741636586317,
+          "core_samples": 10,
+          "ink": [
+            7,
+            4,
+            1
+          ],
+          "label": 190,
+          "uncertainty": 0.003857034034525173
+        },
+        {
+          "area": 129,
+          "bbox": [
+            133,
+            116,
+            143,
+            140
+          ],
+          "bbox_source": [
+            133,
+            581,
+            143,
+            605
+          ],
+          "borrowed": false,
+          "contrast": 0.32701988590768927,
+          "core_samples": 14,
+          "ink": [
+            3,
+            0,
+            0
+          ],
+          "label": 191,
+          "uncertainty": 0.011850388463658608
+        },
+        {
+          "area": 51,
+          "bbox": [
+            352,
+            116,
+            364,
+            126
+          ],
+          "bbox_source": [
+            352,
+            581,
+            364,
+            591
+          ],
+          "borrowed": false,
+          "contrast": 0.5980746376533965,
+          "core_samples": 4,
+          "ink": [
+            13,
+            10,
+            5
+          ],
+          "label": 193,
+          "uncertainty": 0.001436596576361845
+        },
+        {
+          "area": 102,
+          "bbox": [
+            114,
+            117,
+            123,
+            140
+          ],
+          "bbox_source": [
+            114,
+            582,
+            123,
+            605
+          ],
+          "borrowed": false,
+          "contrast": 0.33094119381203685,
+          "core_samples": 13,
+          "ink": [
+            3,
+            0,
+            0
+          ],
+          "label": 195,
+          "uncertainty": 0.005351961003968341
+        },
+        {
+          "area": 73,
+          "bbox": [
+            124,
+            117,
+            131,
+            140
+          ],
+          "bbox_source": [
+            124,
+            582,
+            131,
+            605
+          ],
+          "borrowed": false,
+          "contrast": 0.33284658426609703,
+          "core_samples": 9,
+          "ink": [
+            3,
+            0,
+            0
+          ],
+          "label": 196,
+          "uncertainty": 0.00578290448673667
+        },
+        {
+          "area": 76,
+          "bbox": [
+            77,
+            119,
+            86,
+            139
+          ],
+          "bbox_source": [
+            77,
+            584,
+            86,
+            604
+          ],
+          "borrowed": false,
+          "contrast": 0.3259495450184214,
+          "core_samples": 10,
+          "ink": [
+            3,
+            0,
+            0
+          ],
+          "label": 200,
+          "uncertainty": 0.008188260795666216
+        },
+        {
+          "area": 43,
+          "bbox": [
+            351,
+            124,
+            363,
+            134
+          ],
+          "bbox_source": [
+            351,
+            589,
+            363,
+            599
+          ],
+          "borrowed": false,
+          "contrast": 0.5966599066939116,
+          "core_samples": 4,
+          "ink": [
+            3,
+            0,
+            0
+          ],
+          "label": 204,
+          "uncertainty": 0.0017448308547806748
+        }
+      ],
+      "confidence_heuristic": 8.011103895634632,
+      "context_bbox": [
+        0,
+        465,
+        535,
+        605
+      ],
+      "contrast_linear": 0.444527937512821,
+      "core_luma_percentiles": [
+        0.00019358951010744856,
+        0.00047520184544406,
+        0.0041553852482435075
+      ],
+      "core_samples": 948,
+      "decline": false,
+      "foreground_fraction": [
+        0.5188651535380507,
+        0.13281708945260348,
+        0.1395861148197597,
+        0.10762349799732977
+      ],
+      "geometry_topology": {
+        "components": 110,
+        "euler": 55,
+        "holes": 55
+      },
+      "ink_rgb": [
+        5,
+        2,
+        0
+      ],
+      "ink_uncertainty": 0.004419405578531357,
+      "local_background_rgb": [
+        206,
+        203,
+        198
+      ],
+      "noise_linear": 0.05548897421678063,
+      "probability_percentiles": [
+        0.0,
+        0.0,
+        0.8390695170790907,
+        1.0
+      ],
+      "psf_sigma_px": 0.3867331090696899,
+      "rendered_support_fraction": 0.3008857142857143,
+      "rescan_rmse_linear": {
+        "baseline_mask": 0.22753069611617618,
+        "energy": 0.07940679686854434,
+        "geometry": 0.09107457618749602,
+        "local": 0.07006993793448149
+      },
+      "seconds": 0.1103149140253663,
+      "target_bbox": [
+        0,
+        500,
+        500,
+        570
+      ],
+      "target_diagnostics": {
+        "baseline": {
+          "mean_abs_rgb_difference": 1.307695238095238,
+          "source_ink_mean_delta_e2000": 0.6852077155338733,
+          "source_ink_recall": 0.9964425907752699
+        },
+        "local": {
+          "mean_abs_rgb_difference": 1.0968857142857142,
+          "source_ink_mean_delta_e2000": 0.7317542682012751,
+          "source_ink_recall": 0.9998159960745829
+        }
+      },
+      "width_scale": 0.851636688200665
+    },
+    "luther_babstum_1526_0011": {
+      "alpha_percentiles": [
+        0.0,
+        0.0,
+        0.7901877615373697,
+        1.0
+      ],
+      "background_luma_percentiles": [
+        0.6476921476192633,
+        0.6747126301785633,
+        0.6968842293786639
+      ],
+      "baseline_paper_luma": 40.9278,
+      "baseline_topology": {
+        "components": 7,
+        "euler": -240,
+        "holes": 247
+      },
+      "calibrated_accept": true,
+      "class": "fraktur",
+      "components": [
+        {
+          "area": 252,
+          "bbox": [
+            47,
+            0,
+            62,
+            46
+          ],
+          "bbox_source": [
+            412,
+            1665,
+            427,
+            1711
+          ],
+          "borrowed": false,
+          "contrast": 0.5614497616739207,
+          "core_samples": 21,
+          "ink": [
+            93,
+            79,
+            53
+          ],
+          "label": 2,
+          "uncertainty": 0.05483932330875111
+        },
+        {
+          "area": 11,
+          "bbox": [
+            63,
+            0,
+            69,
+            2
+          ],
+          "bbox_source": [
+            428,
+            1665,
+            434,
+            1667
+          ],
+          "borrowed": true,
+          "contrast": 0.5083086628092401,
+          "core_samples": 2,
+          "ink": [
+            72,
+            61,
+            57
+          ],
+          "label": 4,
+          "uncertainty": 0.058270541556826774
+        },
+        {
+          "area": 197,
+          "bbox": [
+            82,
+            0,
+            91,
+            34
+          ],
+          "bbox_source": [
+            447,
+            1665,
+            456,
+            1699
+          ],
+          "borrowed": false,
+          "contrast": 0.597585658418255,
+          "core_samples": 11,
+          "ink": [
+            69,
+            60,
+            50
+          ],
+          "label": 5,
+          "uncertainty": 0.018634039489044567
+        },
+        {
+          "area": 531,
+          "bbox": [
+            259,
+            0,
+            293,
+            48
+          ],
+          "bbox_source": [
+            624,
+            1665,
+            658,
+            1713
+          ],
+          "borrowed": false,
+          "contrast": 0.6195096978595293,
+          "core_samples": 41,
+          "ink": [
+            85,
+            69,
+            44
+          ],
+          "label": 7,
+          "uncertainty": 0.056007656935167925
+        },
+        {
+          "area": 280,
+          "bbox": [
+            329,
+            0,
+            346,
+            38
+          ],
+          "bbox_source": [
+            694,
+            1665,
+            711,
+            1703
+          ],
+          "borrowed": false,
+          "contrast": 0.6346592145171381,
+          "core_samples": 18,
+          "ink": [
+            74,
+            65,
+            49
+          ],
+          "label": 8,
+          "uncertainty": 0.0463574952506222
+        },
+        {
+          "area": 455,
+          "bbox": [
+            541,
+            1,
+            570,
+            44
+          ],
+          "bbox_source": [
+            906,
+            1666,
+            935,
+            1709
+          ],
+          "borrowed": false,
+          "contrast": 0.6508898355862415,
+          "core_samples": 34,
+          "ink": [
+            71,
+            59,
+            52
+          ],
+          "label": 10,
+          "uncertainty": 0.018588391573316886
+        },
+        {
+          "area": 226,
+          "bbox": [
+            118,
+            3,
+            130,
+            36
+          ],
+          "bbox_source": [
+            483,
+            1668,
+            495,
+            1701
+          ],
+          "borrowed": false,
+          "contrast": 0.6109949924614451,
+          "core_samples": 14,
+          "ink": [
+            77,
+            63,
+            44
+          ],
+          "label": 11,
+          "uncertainty": 0.02226555954929947
+        },
+        {
+          "area": 141,
+          "bbox": [
+            0,
+            4,
+            12,
+            33
+          ],
+          "bbox_source": [
+            365,
+            1669,
+            377,
+            1698
+          ],
+          "borrowed": false,
+          "contrast": 0.5560390427229323,
+          "core_samples": 10,
+          "ink": [
+            100,
+            81,
+            74
+          ],
+          "label": 12,
+          "uncertainty": 0.06937732058999743
+        },
+        {
+          "area": 359,
+          "bbox": [
+            14,
+            5,
+            38,
+            34
+          ],
+          "bbox_source": [
+            379,
+            1670,
+            403,
+            1699
+          ],
+          "borrowed": false,
+          "contrast": 0.6002882459343606,
+          "core_samples": 22,
+          "ink": [
+            73,
+            59,
+            47
+          ],
+          "label": 13,
+          "uncertainty": 0.026239434675091756
+        },
+        {
+          "area": 240,
+          "bbox": [
+            94,
+            6,
+            114,
+            46
+          ],
+          "bbox_source": [
+            459,
+            1671,
+            479,
+            1711
+          ],
+          "borrowed": false,
+          "contrast": 0.5409398980055985,
+          "core_samples": 18,
+          "ink": [
+            108,
+            93,
+            68
+          ],
+          "label": 14,
+          "uncertainty": 0.06496168605221576
+        },
+        {
+          "area": 198,
+          "bbox": [
+            138,
+            6,
+            152,
+            36
+          ],
+          "bbox_source": [
+            503,
+            1671,
+            517,
+            1701
+          ],
+          "borrowed": false,
+          "contrast": 0.6378822298529991,
+          "core_samples": 13,
+          "ink": [
+            63,
+            45,
+            46
+          ],
+          "label": 15,
+          "uncertainty": 0.013358595984463074
+        },
+        {
+          "area": 272,
+          "bbox": [
+            59,
+            7,
+            82,
+            35
+          ],
+          "bbox_source": [
+            424,
+            1672,
+            447,
+            1700
+          ],
+          "borrowed": false,
+          "contrast": 0.5881385574650528,
+          "core_samples": 19,
+          "ink": [
+            72,
+            61,
+            57
+          ],
+          "label": 16,
+          "uncertainty": 0.058270541556826774
+        },
+        {
+          "area": 161,
+          "bbox": [
+            154,
+            7,
+            163,
+            36
+          ],
+          "bbox_source": [
+            519,
+            1672,
+            528,
+            1701
+          ],
+          "borrowed": false,
+          "contrast": 0.6393997674303464,
+          "core_samples": 10,
+          "ink": [
+            61,
+            45,
+            46
+          ],
+          "label": 17,
+          "uncertainty": 0.009116787849010476
+        },
+        {
+          "area": 166,
+          "bbox": [
+            166,
+            7,
+            175,
+            37
+          ],
+          "bbox_source": [
+            531,
+            1672,
+            540,
+            1702
+          ],
+          "borrowed": false,
+          "contrast": 0.6375561185148896,
+          "core_samples": 9,
+          "ink": [
+            58,
+            46,
+            39
+          ],
+          "label": 18,
+          "uncertainty": 0.010927380109278243
+        },
+        {
+          "area": 194,
+          "bbox": [
+            175,
+            7,
+            189,
+            36
+          ],
+          "bbox_source": [
+            540,
+            1672,
+            554,
+            1701
+          ],
+          "borrowed": false,
+          "contrast": 0.6321874412889079,
+          "core_samples": 10,
+          "ink": [
+            64,
+            54,
+            22
+          ],
+          "label": 19,
+          "uncertainty": 0.012692058823226939
+        },
+        {
+          "area": 364,
+          "bbox": [
+            197,
+            7,
+            220,
+            47
+          ],
+          "bbox_source": [
+            562,
+            1672,
+            585,
+            1712
+          ],
+          "borrowed": false,
+          "contrast": 0.6000675196423271,
+          "core_samples": 28,
+          "ink": [
+            92,
+            75,
+            55
+          ],
+          "label": 20,
+          "uncertainty": 0.070274484266547
+        },
+        {
+          "area": 202,
+          "bbox": [
+            222,
+            7,
+            238,
+            36
+          ],
+          "bbox_source": [
+            587,
+            1672,
+            603,
+            1701
+          ],
+          "borrowed": false,
+          "contrast": 0.6350302923664246,
+          "core_samples": 12,
+          "ink": [
+            68,
+            53,
+            42
+          ],
+          "label": 21,
+          "uncertainty": 0.03394096354575478
+        },
+        {
+          "area": 164,
+          "bbox": [
+            287,
+            7,
+            301,
+            37
+          ],
+          "bbox_source": [
+            652,
+            1672,
+            666,
+            1702
+          ],
+          "borrowed": false,
+          "contrast": 0.5378822088183072,
+          "core_samples": 14,
+          "ink": [
+            120,
+            105,
+            99
+          ],
+          "label": 22,
+          "uncertainty": 0.05838525324880239
+        },
+        {
+          "area": 249,
+          "bbox": [
+            239,
+            8,
+            257,
+            36
+          ],
+          "bbox_source": [
+            604,
+            1673,
+            622,
+            1701
+          ],
+          "borrowed": false,
+          "contrast": 0.623325215471072,
+          "core_samples": 16,
+          "ink": [
+            83,
+            67,
+            68
+          ],
+          "label": 23,
+          "uncertainty": 0.041179558588634944
+        },
+        {
+          "area": 256,
+          "bbox": [
+            302,
+            8,
+            322,
+            38
+          ],
+          "bbox_source": [
+            667,
+            1673,
+            687,
+            1703
+          ],
+          "borrowed": false,
+          "contrast": 0.6146529251311013,
+          "core_samples": 19,
+          "ink": [
+            85,
+            68,
+            61
+          ],
+          "label": 24,
+          "uncertainty": 0.0429485512080421
+        },
+        {
+          "area": 219,
+          "bbox": [
+            352,
+            8,
+            367,
+            39
+          ],
+          "bbox_source": [
+            717,
+            1673,
+            732,
+            1704
+          ],
+          "borrowed": false,
+          "contrast": 0.6341695916705963,
+          "core_samples": 14,
+          "ink": [
+            72,
+            58,
+            40
+          ],
+          "label": 25,
+          "uncertainty": 0.021211317663080126
+        },
+        {
+          "area": 284,
+          "bbox": [
+            385,
+            8,
+            402,
+            39
+          ],
+          "bbox_source": [
+            750,
+            1673,
+            767,
+            1704
+          ],
+          "borrowed": false,
+          "contrast": 0.6300259066063358,
+          "core_samples": 14,
+          "ink": [
+            69,
+            62,
+            47
+          ],
+          "label": 26,
+          "uncertainty": 0.012058561423263699
+        },
+        {
+          "area": 200,
+          "bbox": [
+            368,
+            9,
+            383,
+            40
+          ],
+          "bbox_source": [
+            733,
+            1674,
+            748,
+            1705
+          ],
+          "borrowed": false,
+          "contrast": 0.6544715998286065,
+          "core_samples": 14,
+          "ink": [
+            61,
+            47,
+            27
+          ],
+          "label": 27,
+          "uncertainty": 0.014754417205089587
+        },
+        {
+          "area": 76,
+          "bbox": [
+            93,
+            20,
+            104,
+            35
+          ],
+          "bbox_source": [
+            458,
+            1685,
+            469,
+            1700
+          ],
+          "borrowed": false,
+          "contrast": 0.5524189903547114,
+          "core_samples": 5,
+          "ink": [
+            106,
+            83,
+            78
+          ],
+          "label": 31,
+          "uncertainty": 0.03310927906224538
+        },
+        {
+          "area": 80,
+          "bbox": [
+            335,
+            38,
+            347,
+            52
+          ],
+          "bbox_source": [
+            700,
+            1703,
+            712,
+            1717
+          ],
+          "borrowed": false,
+          "contrast": 0.5859583239566467,
+          "core_samples": 6,
+          "ink": [
+            100,
+            81,
+            47
+          ],
+          "label": 38,
+          "uncertainty": 0.049294148947091256
+        },
+        {
+          "area": 252,
+          "bbox": [
+            189,
+            49,
+            206,
+            90
+          ],
+          "bbox_source": [
+            554,
+            1714,
+            571,
+            1755
+          ],
+          "borrowed": false,
+          "contrast": 0.6087255467270215,
+          "core_samples": 17,
+          "ink": [
+            81,
+            61,
+            45
+          ],
+          "label": 42,
+          "uncertainty": 0.04285151444350226
+        },
+        {
+          "area": 422,
+          "bbox": [
+            120,
+            50,
+            141,
+            102
+          ],
+          "bbox_source": [
+            485,
+            1715,
+            506,
+            1767
+          ],
+          "borrowed": false,
+          "contrast": 0.6389808483586346,
+          "core_samples": 30,
+          "ink": [
+            49,
+            38,
+            27
+          ],
+          "label": 43,
+          "uncertainty": 0.009819857415149054
+        },
+        {
+          "area": 209,
+          "bbox": [
+            205,
+            51,
+            217,
+            90
+          ],
+          "bbox_source": [
+            570,
+            1716,
+            582,
+            1755
+          ],
+          "borrowed": false,
+          "contrast": 0.6344140576222925,
+          "core_samples": 13,
+          "ink": [
+            59,
+            46,
+            33
+          ],
+          "label": 45,
+          "uncertainty": 0.011140595889378001
+        },
+        {
+          "area": 321,
+          "bbox": [
+            256,
+            53,
+            276,
+            90
+          ],
+          "bbox_source": [
+            621,
+            1718,
+            641,
+            1755
+          ],
+          "borrowed": false,
+          "contrast": 0.6484696031791708,
+          "core_samples": 20,
+          "ink": [
+            65,
+            51,
+            41
+          ],
+          "label": 46,
+          "uncertainty": 0.030931858766452155
+        },
+        {
+          "area": 299,
+          "bbox": [
+            36,
+            54,
+            57,
+            87
+          ],
+          "bbox_source": [
+            401,
+            1719,
+            422,
+            1752
+          ],
+          "borrowed": false,
+          "contrast": 0.5347343176139805,
+          "core_samples": 27,
+          "ink": [
+            108,
+            93,
+            66
+          ],
+          "label": 47,
+          "uncertainty": 0.12052642344591202
+        },
+        {
+          "area": 20,
+          "bbox": [
+            199,
+            54,
+            204,
+            59
+          ],
+          "bbox_source": [
+            564,
+            1719,
+            569,
+            1724
+          ],
+          "borrowed": true,
+          "contrast": 0.576497152117097,
+          "core_samples": 2,
+          "ink": [
+            81,
+            61,
+            45
+          ],
+          "label": 48,
+          "uncertainty": 0.049132506889641055
+        },
+        {
+          "area": 208,
+          "bbox": [
+            542,
+            55,
+            570,
+            75
+          ],
+          "bbox_source": [
+            907,
+            1720,
+            935,
+            1740
+          ],
+          "borrowed": false,
+          "contrast": 0.6499473297249624,
+          "core_samples": 12,
+          "ink": [
+            60,
+            43,
+            39
+          ],
+          "label": 49,
+          "uncertainty": 0.008658001914105129
+        },
+        {
+          "area": 90,
+          "bbox": [
+            0,
+            58,
+            5,
+            88
+          ],
+          "bbox_source": [
+            365,
+            1723,
+            370,
+            1753
+          ],
+          "borrowed": false,
+          "contrast": 0.5722893591295873,
+          "core_samples": 9,
+          "ink": [
+            95,
+            79,
+            73
+          ],
+          "label": 50,
+          "uncertainty": 0.049497347575198275
+        },
+        {
+          "area": 199,
+          "bbox": [
+            67,
+            58,
+            84,
+            88
+          ],
+          "bbox_source": [
+            432,
+            1723,
+            449,
+            1753
+          ],
+          "borrowed": false,
+          "contrast": 0.5603728614885826,
+          "core_samples": 17,
+          "ink": [
+            93,
+            80,
+            67
+          ],
+          "label": 51,
+          "uncertainty": 0.0500133746884082
+        },
+        {
+          "area": 162,
+          "bbox": [
+            106,
+            58,
+            118,
+            89
+          ],
+          "bbox_source": [
+            471,
+            1723,
+            483,
+            1754
+          ],
+          "borrowed": false,
+          "contrast": 0.6115856069679582,
+          "core_samples": 11,
+          "ink": [
+            72,
+            57,
+            47
+          ],
+          "label": 52,
+          "uncertainty": 0.024803415898095205
+        },
+        {
+          "area": 226,
+          "bbox": [
+            296,
+            58,
+            310,
+            93
+          ],
+          "bbox_source": [
+            661,
+            1723,
+            675,
+            1758
+          ],
+          "borrowed": false,
+          "contrast": 0.6450701373032024,
+          "core_samples": 14,
+          "ink": [
+            64,
+            49,
+            42
+          ],
+          "label": 53,
+          "uncertainty": 0.009640768966826672
+        },
+        {
+          "area": 159,
+          "bbox": [
+            10,
+            59,
+            18,
+            89
+          ],
+          "bbox_source": [
+            375,
+            1724,
+            383,
+            1754
+          ],
+          "borrowed": false,
+          "contrast": 0.6222218714404641,
+          "core_samples": 9,
+          "ink": [
+            67,
+            47,
+            33
+          ],
+          "label": 54,
+          "uncertainty": 0.0207583570827804
+        },
+        {
+          "area": 253,
+          "bbox": [
+            85,
+            59,
+            105,
+            88
+          ],
+          "bbox_source": [
+            450,
+            1724,
+            470,
+            1753
+          ],
+          "borrowed": false,
+          "contrast": 0.5790499391903859,
+          "core_samples": 17,
+          "ink": [
+            84,
+            67,
+            76
+          ],
+          "label": 55,
+          "uncertainty": 0.051976790035258076
+        },
+        {
+          "area": 259,
+          "bbox": [
+            147,
+            60,
+            170,
+            100
+          ],
+          "bbox_source": [
+            512,
+            1725,
+            535,
+            1765
+          ],
+          "borrowed": false,
+          "contrast": 0.5104835851686045,
+          "core_samples": 22,
+          "ink": [
+            118,
+            103,
+            70
+          ],
+          "label": 56,
+          "uncertainty": 0.0762972808366495
+        },
+        {
+          "area": 182,
+          "bbox": [
+            173,
+            60,
+            187,
+            89
+          ],
+          "bbox_source": [
+            538,
+            1725,
+            552,
+            1754
+          ],
+          "borrowed": false,
+          "contrast": 0.6010789071095679,
+          "core_samples": 11,
+          "ink": [
+            84,
+            70,
+            52
+          ],
+          "label": 57,
+          "uncertainty": 0.01748105264123848
+        },
+        {
+          "area": 186,
+          "bbox": [
+            217,
+            60,
+            232,
+            90
+          ],
+          "bbox_source": [
+            582,
+            1725,
+            597,
+            1755
+          ],
+          "borrowed": false,
+          "contrast": 0.5971247267410661,
+          "core_samples": 13,
+          "ink": [
+            88,
+            72,
+            49
+          ],
+          "label": 58,
+          "uncertainty": 0.05654119317608104
+        },
+        {
+          "area": 162,
+          "bbox": [
+            19,
+            61,
+            33,
+            88
+          ],
+          "bbox_source": [
+            384,
+            1726,
+            398,
+            1753
+          ],
+          "borrowed": false,
+          "contrast": 0.575547391677219,
+          "core_samples": 11,
+          "ink": [
+            90,
+            78,
+            77
+          ],
+          "label": 59,
+          "uncertainty": 0.05356109931988637
+        },
+        {
+          "area": 326,
+          "bbox": [
+            233,
+            61,
+            252,
+            102
+          ],
+          "bbox_source": [
+            598,
+            1726,
+            617,
+            1767
+          ],
+          "borrowed": false,
+          "contrast": 0.5951818472680992,
+          "core_samples": 22,
+          "ink": [
+            88,
+            75,
+            36
+          ],
+          "label": 60,
+          "uncertainty": 0.049785774729335194
+        },
+        {
+          "area": 423,
+          "bbox": [
+            316,
+            61,
+            348,
+            91
+          ],
+          "bbox_source": [
+            681,
+            1726,
+            713,
+            1756
+          ],
+          "borrowed": false,
+          "contrast": 0.6112342975290365,
+          "core_samples": 29,
+          "ink": [
+            83,
+            66,
+            54
+          ],
+          "label": 61,
+          "uncertainty": 0.05356348280892927
+        },
+        {
+          "area": 191,
+          "bbox": [
+            280,
+            62,
+            294,
+            91
+          ],
+          "bbox_source": [
+            645,
+            1727,
+            659,
+            1756
+          ],
+          "borrowed": false,
+          "contrast": 0.6588553922253871,
+          "core_samples": 13,
+          "ink": [
+            68,
+            49,
+            40
+          ],
+          "label": 62,
+          "uncertainty": 0.023513682897001995
+        },
+        {
+          "area": 251,
+          "bbox": [
+            377,
+            63,
+            393,
+            93
+          ],
+          "bbox_source": [
+            742,
+            1728,
+            758,
+            1758
+          ],
+          "borrowed": false,
+          "contrast": 0.6555306423111344,
+          "core_samples": 15,
+          "ink": [
+            58,
+            47,
+            33
+          ],
+          "label": 63,
+          "uncertainty": 0.00894617161967594
+        },
+        {
+          "area": 462,
+          "bbox": [
+            541,
+            63,
+            570,
+            106
+          ],
+          "bbox_source": [
+            906,
+            1728,
+            935,
+            1771
+          ],
+          "borrowed": false,
+          "contrast": 0.6694327933124153,
+          "core_samples": 25,
+          "ink": [
+            54,
+            44,
+            33
+          ],
+          "label": 64,
+          "uncertainty": 0.021009813079164694
+        },
+        {
+          "area": 318,
+          "bbox": [
+            351,
+            64,
+            374,
+            93
+          ],
+          "bbox_source": [
+            716,
+            1729,
+            739,
+            1758
+          ],
+          "borrowed": false,
+          "contrast": 0.6566405852497268,
+          "core_samples": 20,
+          "ink": [
+            58,
+            46,
+            37
+          ],
+          "label": 65,
+          "uncertainty": 0.009786684631927682
+        },
+        {
+          "area": 79,
+          "bbox": [
+            147,
+            70,
+            156,
+            88
+          ],
+          "bbox_source": [
+            512,
+            1735,
+            521,
+            1753
+          ],
+          "borrowed": false,
+          "contrast": 0.5660178090447298,
+          "core_samples": 5,
+          "ink": [
+            101,
+            86,
+            60
+          ],
+          "label": 66,
+          "uncertainty": 0.04286362589466073
+        },
+        {
+          "area": 17,
+          "bbox": [
+            45,
+            87,
+            50,
+            94
+          ],
+          "bbox_source": [
+            410,
+            1752,
+            415,
+            1759
+          ],
+          "borrowed": true,
+          "contrast": 0.41569242806697204,
+          "core_samples": 3,
+          "ink": [
+            108,
+            93,
+            66
+          ],
+          "label": 69,
+          "uncertainty": 0.12052642344591202
+        },
+        {
+          "area": 112,
+          "bbox": [
+            179,
+            103,
+            194,
+            124
+          ],
+          "bbox_source": [
+            544,
+            1768,
+            559,
+            1789
+          ],
+          "borrowed": false,
+          "contrast": 0.5815176121302605,
+          "core_samples": 10,
+          "ink": [
+            90,
+            72,
+            59
+          ],
+          "label": 78,
+          "uncertainty": 0.045442014192873414
+        },
+        {
+          "area": 339,
+          "bbox": [
+            4,
+            104,
+            24,
+            140
+          ],
+          "bbox_source": [
+            369,
+            1769,
+            389,
+            1805
+          ],
+          "borrowed": false,
+          "contrast": 0.5958843392670407,
+          "core_samples": 19,
+          "ink": [
+            92,
+            74,
+            69
+          ],
+          "label": 79,
+          "uncertainty": 0.05325209690141321
+        },
+        {
+          "area": 139,
+          "bbox": [
+            550,
+            105,
+            570,
+            128
+          ],
+          "bbox_source": [
+            915,
+            1770,
+            935,
+            1793
+          ],
+          "borrowed": false,
+          "contrast": 0.6529800246514421,
+          "core_samples": 10,
+          "ink": [
+            66,
+            50,
+            36
+          ],
+          "label": 81,
+          "uncertainty": 0.018112391658484696
+        },
+        {
+          "area": 288,
+          "bbox": [
+            367,
+            106,
+            385,
+            140
+          ],
+          "bbox_source": [
+            732,
+            1771,
+            750,
+            1805
+          ],
+          "borrowed": false,
+          "contrast": 0.6177875530859577,
+          "core_samples": 19,
+          "ink": [
+            78,
+            63,
+            48
+          ],
+          "label": 82,
+          "uncertainty": 0.051887610538226096
+        },
+        {
+          "area": 416,
+          "bbox": [
+            36,
+            111,
+            69,
+            140
+          ],
+          "bbox_source": [
+            401,
+            1776,
+            434,
+            1805
+          ],
+          "borrowed": false,
+          "contrast": 0.6125484857399327,
+          "core_samples": 29,
+          "ink": [
+            75,
+            57,
+            67
+          ],
+          "label": 83,
+          "uncertainty": 0.044435469418307144
+        },
+        {
+          "area": 192,
+          "bbox": [
+            203,
+            111,
+            216,
+            140
+          ],
+          "bbox_source": [
+            568,
+            1776,
+            581,
+            1805
+          ],
+          "borrowed": false,
+          "contrast": 0.6025760317551094,
+          "core_samples": 12,
+          "ink": [
+            71,
+            54,
+            50
+          ],
+          "label": 84,
+          "uncertainty": 0.01767539373866105
+        },
+        {
+          "area": 220,
+          "bbox": [
+            96,
+            112,
+            115,
+            140
+          ],
+          "bbox_source": [
+            461,
+            1777,
+            480,
+            1805
+          ],
+          "borrowed": false,
+          "contrast": 0.5790863134652652,
+          "core_samples": 17,
+          "ink": [
+            84,
+            71,
+            73
+          ],
+          "label": 85,
+          "uncertainty": 0.07335709252409252
+        },
+        {
+          "area": 270,
+          "bbox": [
+            71,
+            113,
+            94,
+            140
+          ],
+          "bbox_source": [
+            436,
+            1778,
+            459,
+            1805
+          ],
+          "borrowed": false,
+          "contrast": 0.5679758884908184,
+          "core_samples": 20,
+          "ink": [
+            89,
+            73,
+            69
+          ],
+          "label": 86,
+          "uncertainty": 0.03813826408006952
+        },
+        {
+          "area": 159,
+          "bbox": [
+            123,
+            113,
+            132,
+            140
+          ],
+          "bbox_source": [
+            488,
+            1778,
+            497,
+            1805
+          ],
+          "borrowed": false,
+          "contrast": 0.6208506778649365,
+          "core_samples": 10,
+          "ink": [
+            61,
+            50,
+            46
+          ],
+          "label": 87,
+          "uncertainty": 0.013605311075251668
+        },
+        {
+          "area": 183,
+          "bbox": [
+            132,
+            113,
+            147,
+            140
+          ],
+          "bbox_source": [
+            497,
+            1778,
+            512,
+            1805
+          ],
+          "borrowed": false,
+          "contrast": 0.5448287773586726,
+          "core_samples": 11,
+          "ink": [
+            98,
+            88,
+            81
+          ],
+          "label": 88,
+          "uncertainty": 0.025418524737607362
+        },
+        {
+          "area": 179,
+          "bbox": [
+            274,
+            113,
+            287,
+            140
+          ],
+          "bbox_source": [
+            639,
+            1778,
+            652,
+            1805
+          ],
+          "borrowed": false,
+          "contrast": 0.6463263524715921,
+          "core_samples": 13,
+          "ink": [
+            65,
+            53,
+            39
+          ],
+          "label": 89,
+          "uncertainty": 0.03699723300173115
+        },
+        {
+          "area": 109,
+          "bbox": [
+            151,
+            114,
+            159,
+            140
+          ],
+          "bbox_source": [
+            516,
+            1779,
+            524,
+            1805
+          ],
+          "borrowed": false,
+          "contrast": 0.5890618564152286,
+          "core_samples": 8,
+          "ink": [
+            76,
+            55,
+            45
+          ],
+          "label": 90,
+          "uncertainty": 0.03004483872821558
+        },
+        {
+          "area": 172,
+          "bbox": [
+            163,
+            114,
+            177,
+            140
+          ],
+          "bbox_source": [
+            528,
+            1779,
+            542,
+            1805
+          ],
+          "borrowed": false,
+          "contrast": 0.5817490420637117,
+          "core_samples": 10,
+          "ink": [
+            70,
+            60,
+            47
+          ],
+          "label": 91,
+          "uncertainty": 0.04662992558639908
+        },
+        {
+          "area": 134,
+          "bbox": [
+            554,
+            114,
+            570,
+            140
+          ],
+          "bbox_source": [
+            919,
+            1779,
+            935,
+            1805
+          ],
+          "borrowed": false,
+          "contrast": 0.6637178304887728,
+          "core_samples": 12,
+          "ink": [
+            53,
+            40,
+            31
+          ],
+          "label": 92,
+          "uncertainty": 0.00914427824971676
+        },
+        {
+          "area": 255,
+          "bbox": [
+            223,
+            115,
+            246,
+            140
+          ],
+          "bbox_source": [
+            588,
+            1780,
+            611,
+            1805
+          ],
+          "borrowed": false,
+          "contrast": 0.6083808933374738,
+          "core_samples": 19,
+          "ink": [
+            70,
+            56,
+            55
+          ],
+          "label": 93,
+          "uncertainty": 0.04291650319543542
+        },
+        {
+          "area": 151,
+          "bbox": [
+            249,
+            115,
+            261,
+            140
+          ],
+          "bbox_source": [
+            614,
+            1780,
+            626,
+            1805
+          ],
+          "borrowed": false,
+          "contrast": 0.6190486980368447,
+          "core_samples": 10,
+          "ink": [
+            69,
+            59,
+            41
+          ],
+          "label": 94,
+          "uncertainty": 0.03818992571479222
+        },
+        {
+          "area": 160,
+          "bbox": [
+            295,
+            115,
+            309,
+            140
+          ],
+          "bbox_source": [
+            660,
+            1780,
+            674,
+            1805
+          ],
+          "borrowed": false,
+          "contrast": 0.6617684249084392,
+          "core_samples": 12,
+          "ink": [
+            62,
+            48,
+            25
+          ],
+          "label": 95,
+          "uncertainty": 0.025317220752662916
+        },
+        {
+          "area": 74,
+          "bbox": [
+            321,
+            115,
+            331,
+            130
+          ],
+          "bbox_source": [
+            686,
+            1780,
+            696,
+            1795
+          ],
+          "borrowed": true,
+          "contrast": 0.6456332517451904,
+          "core_samples": 3,
+          "ink": [
+            52,
+            38,
+            26
+          ],
+          "label": 96,
+          "uncertainty": 0.010866178913916686
+        },
+        {
+          "area": 218,
+          "bbox": [
+            413,
+            115,
+            432,
+            140
+          ],
+          "bbox_source": [
+            778,
+            1780,
+            797,
+            1805
+          ],
+          "borrowed": false,
+          "contrast": 0.6683184137372067,
+          "core_samples": 13,
+          "ink": [
+            50,
+            43,
+            24
+          ],
+          "label": 97,
+          "uncertainty": 0.008432573707901972
+        },
+        {
+          "area": 133,
+          "bbox": [
+            262,
+            116,
+            271,
+            140
+          ],
+          "bbox_source": [
+            627,
+            1781,
+            636,
+            1805
+          ],
+          "borrowed": false,
+          "contrast": 0.6346020441930276,
+          "core_samples": 9,
+          "ink": [
+            74,
+            54,
+            44
+          ],
+          "label": 98,
+          "uncertainty": 0.0239549809205446
+        },
+        {
+          "area": 140,
+          "bbox": [
+            312,
+            116,
+            320,
+            140
+          ],
+          "bbox_source": [
+            677,
+            1781,
+            685,
+            1805
+          ],
+          "borrowed": false,
+          "contrast": 0.6553581898010682,
+          "core_samples": 7,
+          "ink": [
+            52,
+            38,
+            26
+          ],
+          "label": 99,
+          "uncertainty": 0.010866178913916686
+        },
+        {
+          "area": 296,
+          "bbox": [
+            333,
+            116,
+            358,
+            140
+          ],
+          "bbox_source": [
+            698,
+            1781,
+            723,
+            1805
+          ],
+          "borrowed": false,
+          "contrast": 0.6416762626988517,
+          "core_samples": 18,
+          "ink": [
+            58,
+            47,
+            35
+          ],
+          "label": 100,
+          "uncertainty": 0.01383410529857936
+        },
+        {
+          "area": 213,
+          "bbox": [
+            388,
+            117,
+            408,
+            140
+          ],
+          "bbox_source": [
+            753,
+            1782,
+            773,
+            1805
+          ],
+          "borrowed": false,
+          "contrast": 0.6275813043406743,
+          "core_samples": 15,
+          "ink": [
+            78,
+            65,
+            35
+          ],
+          "label": 101,
+          "uncertainty": 0.03990310392331536
+        },
+        {
+          "area": 19,
+          "bbox": [
+            188,
+            118,
+            197,
+            121
+          ],
+          "bbox_source": [
+            553,
+            1783,
+            562,
+            1786
+          ],
+          "borrowed": true,
+          "contrast": 0.3393457759063206,
+          "core_samples": 3,
+          "ink": [
+            90,
+            72,
+            59
+          ],
+          "label": 102,
+          "uncertainty": 0.045442014192873414
+        },
+        {
+          "area": 35,
+          "bbox": [
+            193,
+            122,
+            200,
+            136
+          ],
+          "bbox_source": [
+            558,
+            1787,
+            565,
+            1801
+          ],
+          "borrowed": false,
+          "contrast": 0.43858943052760513,
+          "core_samples": 4,
+          "ink": [
+            140,
+            125,
+            96
+          ],
+          "label": 103,
+          "uncertainty": 0.1961777627169783
+        },
+        {
+          "area": 64,
+          "bbox": [
+            180,
+            126,
+            188,
+            140
+          ],
+          "bbox_source": [
+            545,
+            1791,
+            553,
+            1805
+          ],
+          "borrowed": false,
+          "contrast": 0.5856564226157661,
+          "core_samples": 4,
+          "ink": [
+            82,
+            62,
+            65
+          ],
+          "label": 104,
+          "uncertainty": 0.02993110670724681
+        },
+        {
+          "area": 14,
+          "bbox": [
+            326,
+            133,
+            329,
+            140
+          ],
+          "bbox_source": [
+            691,
+            1798,
+            694,
+            1805
+          ],
+          "borrowed": true,
+          "contrast": 0.39125565760972736,
+          "core_samples": 2,
+          "ink": [
+            52,
+            38,
+            26
+          ],
+          "label": 107,
+          "uncertainty": 0.0470774212893045
+        },
+        {
+          "area": 23,
+          "bbox": [
+            433,
+            135,
+            442,
+            140
+          ],
+          "bbox_source": [
+            798,
+            1800,
+            807,
+            1805
+          ],
+          "borrowed": true,
+          "contrast": 0.6018559105116542,
+          "core_samples": 3,
+          "ink": [
+            50,
+            43,
+            24
+          ],
+          "label": 109,
+          "uncertainty": 0.014284321312533496
+        }
+      ],
+      "confidence_heuristic": 9.61188285407041,
+      "context_bbox": [
+        365,
+        1665,
+        935,
+        1805
+      ],
+      "contrast_linear": 0.6084715780069284,
+      "core_luma_percentiles": [
+        0.02304919242959459,
+        0.04778521339519558,
+        0.108774021055262
+      ],
+      "core_samples": 1103,
+      "decline": false,
+      "foreground_fraction": [
+        0.9270175438596491,
+        0.18401002506265665,
+        0.20413533834586467,
+        0.16700501253132832
+      ],
+      "geometry_topology": {
+        "components": 81,
+        "euler": 50,
+        "holes": 31
+      },
+      "ink_rgb": [
+        73,
+        60,
+        47
+      ],
+      "ink_uncertainty": 0.03880371143579425,
+      "local_background_rgb": [
+        218,
+        216,
+        187
+      ],
+      "noise_linear": 0.0633040984003727,
+      "probability_percentiles": [
+        0.0,
+        0.0,
+        0.7901877615373697,
+        1.0
+      ],
+      "psf_sigma_px": 0.7374944344890294,
+      "rendered_support_fraction": 0.28465714285714283,
+      "rescan_rmse_linear": {
+        "baseline_mask": 0.5127009297599395,
+        "energy": 0.06984893380105275,
+        "geometry": 0.07564490935547055,
+        "local": 0.0585336278498699
+      },
+      "seconds": 0.09625688102096319,
+      "target_bbox": [
+        400,
+        1700,
+        900,
+        1770
+      ],
+      "target_diagnostics": {
+        "baseline": {
+          "mean_abs_rgb_difference": 9.144552380952382,
+          "source_ink_mean_delta_e2000": 9.747871014945657,
+          "source_ink_recall": 0.8954008487211836
+        },
+        "local": {
+          "mean_abs_rgb_difference": 2.5908571428571427,
+          "source_ink_mean_delta_e2000": 7.208717587798087,
+          "source_ink_recall": 0.9911687120082578
+        }
+      },
+      "width_scale": 0.8693810615068757
+    }
+  },
+  "shell_reference": {
+    "bbox_source": [
+      1080,
+      370,
+      1300,
+      730
+    ],
+    "description": "median RGB of darkest 10% observed shell ROI; illustration is multicoloured and this is not a fitted physical ink colour",
+    "luma_cut": 157.51359999999997,
+    "median_rgb": [
+      145.0,
+      120.0,
+      87.0
+    ],
+    "samples": 7922
+  },
+  "synthetic": {
+    "broken": {
+      "accepted": 18,
+      "mean_blob_core_fraction": 0.0,
+      "mean_blob_supported_fraction": 0.0,
+      "methods": {
+        "baseline": {
+          "accepted_only": {
+            "exact_topology_count": 2,
+            "false_joins_total": 0,
+            "mean_boundary_f1": 0.9206479975350371,
+            "mean_false_ink_fraction": 0.011438618403084662,
+            "mean_missing_fraction": 0.24168260098151723
+          },
+          "raw": {
+            "exact_topology_count": 2,
+            "false_joins_total": 0,
+            "mean_boundary_f1": 0.8758119725534391,
+            "mean_false_ink_fraction": 0.009804530059786853,
+            "mean_missing_fraction": 0.31452126580568573
+          }
+        },
+        "energy": {
+          "accepted_only": {
+            "exact_topology_count": 1,
+            "false_joins_total": 0,
+            "mean_boundary_f1": 0.9587797798800617,
+            "mean_false_ink_fraction": 0.1589238925868554,
+            "mean_missing_fraction": 0.13459719796871158
+          },
+          "raw": {
+            "exact_topology_count": 1,
+            "false_joins_total": 0,
+            "mean_boundary_f1": 0.9400023919692514,
+            "mean_false_ink_fraction": 0.1554398733083441,
+            "mean_missing_fraction": 0.18639217807501252
+          }
+        },
+        "geometry": {
+          "accepted_only": {
+            "exact_topology_count": 1,
+            "false_joins_total": 0,
+            "mean_boundary_f1": 0.9304574112606391,
+            "mean_false_ink_fraction": 0.09830861779993574,
+            "mean_missing_fraction": 0.2717792190811149
+          },
+          "raw": {
+            "exact_topology_count": 1,
+            "false_joins_total": 0,
+            "mean_boundary_f1": 0.9140885069844422,
+            "mean_false_ink_fraction": 0.09466104981713439,
+            "mean_missing_fraction": 0.3149545311185177
+          }
+        },
+        "local": {
+          "accepted_only": {
+            "exact_topology_count": 1,
+            "false_joins_total": 0,
+            "mean_boundary_f1": 0.9519185617564285,
+            "mean_false_ink_fraction": 0.08269289411454979,
+            "mean_missing_fraction": 0.1545076378381588
+          },
+          "raw": {
+            "exact_topology_count": 1,
+            "false_joins_total": 0,
+            "mean_boundary_f1": 0.9334717188652917,
+            "mean_false_ink_fraction": 0.08156344230695578,
+            "mean_missing_fraction": 0.20540319870899867
+          }
+        }
+      },
+      "n": 21
+    },
+    "clear": {
+      "accepted": 21,
+      "mean_blob_core_fraction": 0.0,
+      "mean_blob_supported_fraction": 0.0,
+      "methods": {
+        "baseline": {
+          "accepted_only": {
+            "exact_topology_count": 20,
+            "false_joins_total": 0,
+            "mean_boundary_f1": 0.9926543759684168,
+            "mean_false_ink_fraction": 0.010805979035208139,
+            "mean_missing_fraction": 0.09014781117595938
+          },
+          "raw": {
+            "exact_topology_count": 20,
+            "false_joins_total": 0,
+            "mean_boundary_f1": 0.9926543759684168,
+            "mean_false_ink_fraction": 0.010805979035208139,
+            "mean_missing_fraction": 0.09014781117595938
+          }
+        },
+        "energy": {
+          "accepted_only": {
+            "exact_topology_count": 19,
+            "false_joins_total": 0,
+            "mean_boundary_f1": 0.990202491847222,
+            "mean_false_ink_fraction": 0.20742736662079306,
+            "mean_missing_fraction": 0.007870752327118025
+          },
+          "raw": {
+            "exact_topology_count": 19,
+            "false_joins_total": 0,
+            "mean_boundary_f1": 0.990202491847222,
+            "mean_false_ink_fraction": 0.20742736662079306,
+            "mean_missing_fraction": 0.007870752327118025
+          }
+        },
+        "geometry": {
+          "accepted_only": {
+            "exact_topology_count": 17,
+            "false_joins_total": 0,
+            "mean_boundary_f1": 0.9788664814415875,
+            "mean_false_ink_fraction": 0.15385415122611398,
+            "mean_missing_fraction": 0.15706934666199224
+          },
+          "raw": {
+            "exact_topology_count": 17,
+            "false_joins_total": 0,
+            "mean_boundary_f1": 0.9788664814415875,
+            "mean_false_ink_fraction": 0.15385415122611398,
+            "mean_missing_fraction": 0.15706934666199224
+          }
+        },
+        "local": {
+          "accepted_only": {
+            "exact_topology_count": 19,
+            "false_joins_total": 0,
+            "mean_boundary_f1": 0.9902719526689702,
+            "mean_false_ink_fraction": 0.11588975353347689,
+            "mean_missing_fraction": 0.02000640065816363
+          },
+          "raw": {
+            "exact_topology_count": 19,
+            "false_joins_total": 0,
+            "mean_boundary_f1": 0.9902719526689702,
+            "mean_false_ink_fraction": 0.11588975353347689,
+            "mean_missing_fraction": 0.02000640065816363
+          }
+        }
+      },
+      "n": 21
+    },
+    "faded": {
+      "accepted": 21,
+      "mean_blob_core_fraction": 0.0,
+      "mean_blob_supported_fraction": 0.0,
+      "methods": {
+        "baseline": {
+          "accepted_only": {
+            "exact_topology_count": 0,
+            "false_joins_total": 0,
+            "mean_boundary_f1": 0.0,
+            "mean_false_ink_fraction": 0.0,
+            "mean_missing_fraction": 1.0
+          },
+          "raw": {
+            "exact_topology_count": 0,
+            "false_joins_total": 0,
+            "mean_boundary_f1": 0.0,
+            "mean_false_ink_fraction": 0.0,
+            "mean_missing_fraction": 1.0
+          }
+        },
+        "energy": {
+          "accepted_only": {
+            "exact_topology_count": 21,
+            "false_joins_total": 0,
+            "mean_boundary_f1": 0.9859515414547105,
+            "mean_false_ink_fraction": 0.20113278000420334,
+            "mean_missing_fraction": 0.01170727223114179
+          },
+          "raw": {
+            "exact_topology_count": 21,
+            "false_joins_total": 0,
+            "mean_boundary_f1": 0.9859515414547105,
+            "mean_false_ink_fraction": 0.20113278000420334,
+            "mean_missing_fraction": 0.01170727223114179
+          }
+        },
+        "geometry": {
+          "accepted_only": {
+            "exact_topology_count": 20,
+            "false_joins_total": 0,
+            "mean_boundary_f1": 0.9870327319991834,
+            "mean_false_ink_fraction": 0.11691070376911956,
+            "mean_missing_fraction": 0.07334030547850301
+          },
+          "raw": {
+            "exact_topology_count": 20,
+            "false_joins_total": 0,
+            "mean_boundary_f1": 0.9870327319991834,
+            "mean_false_ink_fraction": 0.11691070376911956,
+            "mean_missing_fraction": 0.07334030547850301
+          }
+        },
+        "local": {
+          "accepted_only": {
+            "exact_topology_count": 21,
+            "false_joins_total": 0,
+            "mean_boundary_f1": 0.9931617437050644,
+            "mean_false_ink_fraction": 0.08975570536206387,
+            "mean_missing_fraction": 0.028657210766280337
+          },
+          "raw": {
+            "exact_topology_count": 21,
+            "false_joins_total": 0,
+            "mean_boundary_f1": 0.9931617437050644,
+            "mean_false_ink_fraction": 0.08975570536206387,
+            "mean_missing_fraction": 0.028657210766280337
+          }
+        }
+      },
+      "n": 21
+    },
+    "no_evidence": {
+      "accepted": 0,
+      "mean_blob_core_fraction": 0.0,
+      "mean_blob_supported_fraction": 0.0,
+      "methods": {
+        "baseline": {
+          "accepted_only": null,
+          "raw": {
+            "exact_topology_count": 0,
+            "false_joins_total": 0,
+            "mean_boundary_f1": 0.0,
+            "mean_false_ink_fraction": 0.0,
+            "mean_missing_fraction": 1.0
+          }
+        },
+        "energy": {
+          "accepted_only": null,
+          "raw": {
+            "exact_topology_count": 5,
+            "false_joins_total": 0,
+            "mean_boundary_f1": 0.08239121596794766,
+            "mean_false_ink_fraction": 0.015565351088775374,
+            "mean_missing_fraction": 0.9377934134748588
+          }
+        },
+        "geometry": {
+          "accepted_only": null,
+          "raw": {
+            "exact_topology_count": 5,
+            "false_joins_total": 0,
+            "mean_boundary_f1": 0.07484078729161264,
+            "mean_false_ink_fraction": 0.01677541198505815,
+            "mean_missing_fraction": 0.94213190279364
+          }
+        },
+        "local": {
+          "accepted_only": null,
+          "raw": {
+            "exact_topology_count": 5,
+            "false_joins_total": 0,
+            "mean_boundary_f1": 0.0859297586276498,
+            "mean_false_ink_fraction": 0.013188207498461765,
+            "mean_missing_fraction": 0.9390809563545923
+          }
+        }
+      },
+      "n": 21
+    },
+    "two_inks": {
+      "accepted": 21,
+      "mean_blob_core_fraction": 0.0,
+      "mean_blob_supported_fraction": 0.0,
+      "methods": {
+        "baseline": {
+          "accepted_only": {
+            "exact_topology_count": 19,
+            "false_joins_total": 0,
+            "mean_boundary_f1": 0.9922447171002088,
+            "mean_false_ink_fraction": 0.011732711100303907,
+            "mean_missing_fraction": 0.09119753341601985
+          },
+          "raw": {
+            "exact_topology_count": 19,
+            "false_joins_total": 0,
+            "mean_boundary_f1": 0.9922447171002088,
+            "mean_false_ink_fraction": 0.011732711100303907,
+            "mean_missing_fraction": 0.09119753341601985
+          }
+        },
+        "energy": {
+          "accepted_only": {
+            "exact_topology_count": 20,
+            "false_joins_total": 1,
+            "mean_boundary_f1": 0.9988703820751945,
+            "mean_false_ink_fraction": 0.1668984822468323,
+            "mean_missing_fraction": 0.010020211729691215
+          },
+          "raw": {
+            "exact_topology_count": 20,
+            "false_joins_total": 1,
+            "mean_boundary_f1": 0.9988703820751945,
+            "mean_false_ink_fraction": 0.1668984822468323,
+            "mean_missing_fraction": 0.010020211729691215
+          }
+        },
+        "geometry": {
+          "accepted_only": {
+            "exact_topology_count": 19,
+            "false_joins_total": 1,
+            "mean_boundary_f1": 0.9880223788595064,
+            "mean_false_ink_fraction": 0.1239192688114661,
+            "mean_missing_fraction": 0.16287450769173867
+          },
+          "raw": {
+            "exact_topology_count": 19,
+            "false_joins_total": 1,
+            "mean_boundary_f1": 0.9880223788595064,
+            "mean_false_ink_fraction": 0.1239192688114661,
+            "mean_missing_fraction": 0.16287450769173867
+          }
+        },
+        "local": {
+          "accepted_only": {
+            "exact_topology_count": 21,
+            "false_joins_total": 0,
+            "mean_boundary_f1": 0.9982970441377603,
+            "mean_false_ink_fraction": 0.07402839212642086,
+            "mean_missing_fraction": 0.024133153302945628
+          },
+          "raw": {
+            "exact_topology_count": 21,
+            "false_joins_total": 0,
+            "mean_boundary_f1": 0.9982970441377603,
+            "mean_false_ink_fraction": 0.07402839212642086,
+            "mean_missing_fraction": 0.024133153302945628
+          }
+        }
+      },
+      "n": 21
+    }
+  },
+  "validation": {
+    "heldout_font": {
+      "accepted": 27,
+      "accepted_correct": 26,
+      "good_accepted": 26,
+      "good_total": 26,
+      "no_evidence_accepted": 0,
+      "total": 35
+    },
+    "training": {
+      "accepted": 54,
+      "accepted_correct": 49,
+      "good_accepted": 49,
+      "good_total": 49,
+      "no_evidence_accepted": 0,
+      "total": 70
+    }
+  },
+  "versions": {
+    "Pillow": "13.0.0",
+    "elapsed_s": 6.8769272970966995,
+    "font_sha256": {
+      "/usr/share/fonts/truetype/dejavu/DejaVuSerif.ttf": "8f2c103bfa3fd5de71f1b92b18f21906b5a26871fb7e19a9a4c9af539c3cc7ab",
+      "/usr/share/fonts/truetype/liberation/LiberationSerif-Italic.ttf": "eaeaf7f2b12544ecde64290c1fa7ec403ff70fd58b313637b265400b20249242",
+      "/usr/share/fonts/truetype/liberation/LiberationSerif-Regular.ttf": "705903ae1382f0150f115d6f10a30f5b2f3d6ade649c474afe6366c39174fb65"
+    },
+    "numpy": "2.5.4",
+    "python": "3.12.3",
+    "scipy": "1.18.1",
+    "skimage": "0.26.0"
+  }
+}
