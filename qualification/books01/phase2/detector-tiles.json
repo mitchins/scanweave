@@ -40,7 +40,17 @@
       }
     },
     "adobe-E": {
-      "status": "unavailable"
+      "status": "automated suspicions, unreviewed",
+      "detectors": {
+        "illustration_colour": {
+          "examined": 1,
+          "suspected": 1
+        },
+        "border_inversion": {
+          "examined": 4,
+          "suspected": 0
+        }
+      }
     }
   },
   "quiver/estor_rechtsgelehrsamkeit02_1758_0819": {
@@ -84,7 +94,17 @@
       }
     },
     "adobe-E": {
-      "status": "unavailable"
+      "status": "automated suspicions, unreviewed",
+      "detectors": {
+        "illustration_colour": {
+          "examined": 0,
+          "suspected": 0
+        },
+        "border_inversion": {
+          "examined": 4,
+          "suspected": 1
+        }
+      }
     }
   },
   "quiver/euler_rechenkunst01_1738_0025": {

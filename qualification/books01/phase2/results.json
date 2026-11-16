@@ -1394,11 +1394,404 @@
           "dpi_confidence": "low",
           "source_type": "quiver-original-tiff",
           "adobe_label": "Acrobat default OCR language (not matched); no Fraktur support; page straightened (deskew)",
-          "status": "missing",
-          "path": "/data/coding/scanweave/work/books01/runs/adobe-p2/estor_rechtsgelehrsamkeit02_1758_0007.adobe.pdf",
+          "status": "ok",
+          "size": {
+            "file_bytes": 310453,
+            "stream_bytes_by_category": {
+              "other_stream": 10845,
+              "page_content_stream": 5070,
+              "font_program": 77981,
+              "background_image:/DCTDecode": 187628,
+              "foreground_image:/DCTDecode": 22777
+            },
+            "stream_count_by_category": {
+              "other_stream": 19,
+              "page_content_stream": 8,
+              "font_program": 12,
+              "background_image:/DCTDecode": 1,
+              "foreground_image:/DCTDecode": 11
+            },
+            "page_font_resource_count": 12,
+            "structure_xref_dictionary_and_unclassified_bytes": 6152,
+            "reconciles": true,
+            "image_role_method": "largest non-mask image is background; remaining non-mask images foreground; masks from ImageMask, Mask and SMask"
+          },
+          "size_ratio": 0.03894402927127638,
+          "images": [
+            {
+              "width": 1493,
+              "height": 2529,
+              "bytes": 187628,
+              "filter": "/DCTDecode",
+              "mask": false
+            },
+            {
+              "width": 59,
+              "height": 51,
+              "bytes": 1368,
+              "filter": "/DCTDecode",
+              "mask": false
+            },
+            {
+              "width": 24,
+              "height": 34,
+              "bytes": 939,
+              "filter": "/DCTDecode",
+              "mask": false
+            },
+            {
+              "width": 257,
+              "height": 55,
+              "bytes": 3572,
+              "filter": "/DCTDecode",
+              "mask": false
+            },
+            {
+              "width": 93,
+              "height": 68,
+              "bytes": 1820,
+              "filter": "/DCTDecode",
+              "mask": false
+            },
+            {
+              "width": 73,
+              "height": 181,
+              "bytes": 3116,
+              "filter": "/DCTDecode",
+              "mask": false
+            },
+            {
+              "width": 82,
+              "height": 65,
+              "bytes": 1839,
+              "filter": "/DCTDecode",
+              "mask": false
+            },
+            {
+              "width": 67,
+              "height": 75,
+              "bytes": 1841,
+              "filter": "/DCTDecode",
+              "mask": false
+            },
+            {
+              "width": 81,
+              "height": 47,
+              "bytes": 1487,
+              "filter": "/DCTDecode",
+              "mask": false
+            },
+            {
+              "width": 70,
+              "height": 73,
+              "bytes": 1873,
+              "filter": "/DCTDecode",
+              "mask": false
+            },
+            {
+              "width": 310,
+              "height": 58,
+              "bytes": 3870,
+              "filter": "/DCTDecode",
+              "mask": false
+            },
+            {
+              "width": 38,
+              "height": 33,
+              "bytes": 1052,
+              "filter": "/DCTDecode",
+              "mask": false
+            }
+          ],
+          "render_150": {
+            "pdfium": {
+              "samples_seconds": [
+                0.018672192934900522,
+                0.019392398884519935,
+                0.017537958221510053,
+                0.017572856973856688,
+                0.017433230997994542
+              ],
+              "median_seconds": 0.017572856973856688,
+              "p95_seconds": 0.019392398884519935,
+              "p95_method": "nearest-rank n=5",
+              "peak_rss_kib": 108676,
+              "peak_rss_scope": "render worker and largest child, includes interpreter",
+              "output": "/data/coding/scanweave/work/books01/phase2/renders/estor_rechtsgelehrsamkeit02_1758_0007/adobe-E/pdfium-150.png",
+              "output_bytes": 1050093
+            },
+            "poppler": {
+              "samples_seconds": [
+                1.0779369189403951,
+                1.0743228630162776,
+                1.0814825671259314,
+                1.0844422348309308,
+                1.0821506869979203
+              ],
+              "median_seconds": 1.0814825671259314,
+              "p95_seconds": 1.0844422348309308,
+              "p95_method": "nearest-rank n=5",
+              "peak_rss_kib": 108676,
+              "peak_rss_scope": "render worker and largest child, includes interpreter",
+              "output": "/data/coding/scanweave/work/books01/phase2/renders/estor_rechtsgelehrsamkeit02_1758_0007/adobe-E/poppler-150.png",
+              "output_bytes": 977231
+            },
+            "mupdf": {
+              "samples_seconds": [
+                0.01899733184836805,
+                0.018302323995158076,
+                0.016583347925916314,
+                0.016509499866515398,
+                0.015902600018307567
+              ],
+              "median_seconds": 0.016583347925916314,
+              "p95_seconds": 0.01899733184836805,
+              "p95_method": "nearest-rank n=5",
+              "peak_rss_kib": 108676,
+              "peak_rss_scope": "render worker and largest child, includes interpreter",
+              "output": "/data/coding/scanweave/work/books01/phase2/renders/estor_rechtsgelehrsamkeit02_1758_0007/adobe-E/mupdf-150.png",
+              "output_bytes": 1021204
+            }
+          },
+          "geometry": {
+            "status": "accepted",
+            "reason": null,
+            "rotation_degrees": 0.10061820298250042,
+            "scale_x": 1.0000338026800086,
+            "scale_y": 1.0000338026800086,
+            "translation_px": [
+              1.4933523608361838,
+              -1.9060601997032336
+            ],
+            "method": "SIFT global similarity",
+            "inlier_count": 1012,
+            "inlier_fraction": 0.9777777777777777,
+            "residual_median_px_150_equivalent": 0.8720030361099271,
+            "residual_p95_px_150_equivalent": 1.4660146440855297,
+            "quadrants_covered": 4,
+            "source_page_boxes": {
+              "media": [
+                0.0,
+                0.0,
+                357.36,
+                606.24
+              ],
+              "crop": [
+                0.0,
+                0.0,
+                357.36,
+                606.24
+              ],
+              "rotation": 0
+            },
+            "output_page_boxes": {
+              "media": [
+                0.0,
+                0.0,
+                358.32,
+                606.96
+              ],
+              "crop": [
+                0.479996,
+                0.479996,
+                357.84,
+                606.72
+              ],
+              "rotation": 0
+            },
+            "page_box_changed": true,
+            "source_dimensions": [
+              1489,
+              2526
+            ],
+            "output_dimensions": [
+              1489,
+              2526
+            ],
+            "out_of_bounds_fraction": 0.0,
+            "coverage_method": "128x128 source-grid samples inverse-mapped to output; possible crop, not proof of lost content"
+          },
+          "native_fidelity": {
+            "text": {
+              "pixels": 1162597,
+              "ssim": 0.717928212387681,
+              "ink_recall": 0.7490850389295538,
+              "ink_precision": 0.6748837013934831,
+              "mean_abs_delta_L": 4.784695148468018
+            },
+            "illustration": {
+              "pixels": 526932,
+              "ssim": 0.820944523309392,
+              "ink_recall": 0.7871660555264537,
+              "ink_precision": 0.8096298557856361,
+              "mean_abs_delta_L": 3.517946720123291,
+              "deltaE2000_mean": 4.328324663848984
+            },
+            "paper": {
+              "pixels": 2071685,
+              "ssim": 0.8912642493168088,
+              "ink_recall": 0.9852441765062605,
+              "ink_precision": 0.9932356257046223,
+              "mean_abs_delta_L": 1.1763288974761963
+            }
+          },
+          "aligned_fidelity": {
+            "text": {
+              "pixels": 1162597,
+              "ssim": 0.8791976622493991,
+              "ink_recall": 0.9189356147139727,
+              "ink_precision": 0.8389839526667519,
+              "mean_abs_delta_L": 2.7678112983703613
+            },
+            "illustration": {
+              "pixels": 526932,
+              "ssim": 0.9433817273503636,
+              "ink_recall": 0.9251178627553693,
+              "ink_precision": 0.9332822491148338,
+              "mean_abs_delta_L": 1.6687803268432617,
+              "deltaE2000_mean": 3.0512787329276403
+            },
+            "paper": {
+              "pixels": 2071685,
+              "ssim": 0.9275270946405503,
+              "ink_recall": 0.9896711019155995,
+              "ink_precision": 0.9985908446293723,
+              "mean_abs_delta_L": 0.961331844329834
+            }
+          },
+          "text": {
+            "empty": false,
+            "scores": {
+              "diplomatic": {
+                "cer": 0.6414073071718539,
+                "character_edits": 474,
+                "known_characters": 739,
+                "unknown_characters": 0,
+                "wer": 1.2522522522522523,
+                "word_edits": 139,
+                "known_words": 111,
+                "bag_character_recall": 0.7117726657645467
+              },
+              "reading": {
+                "cer": 0.6452054794520548,
+                "character_edits": 471,
+                "known_characters": 730,
+                "unknown_characters": 0,
+                "wer": 1.320754716981132,
+                "word_edits": 140,
+                "known_words": 106,
+                "bag_character_recall": 0.726027397260274
+              }
+            }
+          },
+          "search": {
+            "recognized_words": 15,
+            "literal_hits": 1,
+            "diplomatic_variant_hits": 1,
+            "variant": "literal or a text-layer token with identical reading-normalised form",
+            "limitation": "long-s normalised query may fail literal search"
+          },
+          "frozen_hocr_scores": {
+            "diplomatic": {
+              "cer": 0.10284167794316644,
+              "character_edits": 76,
+              "known_characters": 739,
+              "unknown_characters": 0,
+              "wer": 0.36936936936936937,
+              "word_edits": 41,
+              "known_words": 111,
+              "bag_character_recall": 0.9485791610284168
+            },
+            "reading": {
+              "cer": 0.11643835616438356,
+              "character_edits": 85,
+              "known_characters": 730,
+              "unknown_characters": 0,
+              "wer": 0.4716981132075472,
+              "word_edits": 50,
+              "known_words": 106,
+              "bag_character_recall": 0.9561643835616438
+            }
+          },
+          "line_ocr": {
+            "reading": {
+              "line_metrics": {
+                "gt_count": 20,
+                "output_count": 49,
+                "matched_lines": 15,
+                "missing_lines": 5,
+                "missing_known_characters": 115,
+                "total_known_characters": 721,
+                "missing_character_share": 0.15950069348127602,
+                "extra_lines": 34,
+                "matched_known_characters": 606,
+                "matched_character_edits": 505,
+                "line_aligned_cer": 0.8333333333333334,
+                "matched_known_words": 93,
+                "line_aligned_wer": 1.3010752688172043,
+                "kendall_tau": 1.0,
+                "kendall_pair_count": 15,
+                "matching": "axis-aligned source-frame bounding-box IoU >= 0.2, one-to-one maximum weight"
+              },
+              "same_gt": {
+                "shared_gt_lines": 14,
+                "known_characters": 598,
+                "known_words": 92,
+                "frozen_cer": 0.09197324414715718,
+                "pdf_cer": 0.8394648829431438,
+                "frozen_wer": 0.34782608695652173,
+                "pdf_wer": 1.3043478260869565,
+                "method": "compare both OCR texts against exactly the same GT lines, matched independently by geometry"
+              },
+              "partition": null
+            },
+            "diplomatic": {
+              "line_metrics": {
+                "gt_count": 20,
+                "output_count": 49,
+                "matched_lines": 15,
+                "missing_lines": 5,
+                "missing_known_characters": 115,
+                "total_known_characters": 720,
+                "missing_character_share": 0.1597222222222222,
+                "extra_lines": 34,
+                "matched_known_characters": 605,
+                "matched_character_edits": 511,
+                "line_aligned_cer": 0.8446280991735537,
+                "matched_known_words": 93,
+                "line_aligned_wer": 1.3010752688172043,
+                "kendall_tau": 1.0,
+                "kendall_pair_count": 15,
+                "matching": "axis-aligned source-frame bounding-box IoU >= 0.2, one-to-one maximum weight"
+              },
+              "same_gt": {
+                "shared_gt_lines": 14,
+                "known_characters": 597,
+                "known_words": 92,
+                "frozen_cer": 0.09380234505862646,
+                "pdf_cer": 0.8509212730318257,
+                "frozen_wer": 0.34782608695652173,
+                "pdf_wer": 1.3043478260869565,
+                "method": "compare both OCR texts against exactly the same GT lines, matched independently by geometry"
+              },
+              "partition": null
+            }
+          },
+          "detectors": {
+            "status": "automated suspicions, unreviewed",
+            "word_boxes": 121,
+            "counts": {
+              "glyph_shape": 101,
+              "missing_ink": 93,
+              "spurious_ink": 0
+            },
+            "limitation": "word-box detectors; no confirmation; illustration and border tile counts unavailable in this pass"
+          },
+          "elapsed_seconds": 15.045514088124037,
           "conversion": {
-            "status": 1,
-            "wall_seconds": 166.611437785,
+            "status": 0,
+            "wall_seconds": 101.243437874,
+            "batch": "adobe-p2-retry2",
             "timing_scope": "GUI wall time includes fixed sleeps/startup; not comparable with CLI",
             "cpu_seconds": null,
             "peak_rss_kib": null
@@ -2867,11 +3260,354 @@
           "dpi_confidence": "low",
           "source_type": "quiver-original-tiff",
           "adobe_label": "Acrobat default OCR language (not matched); no Fraktur support; page straightened (deskew)",
-          "status": "missing",
-          "path": "/data/coding/scanweave/work/books01/runs/adobe-p2/estor_rechtsgelehrsamkeit02_1758_0819.adobe.pdf",
+          "status": "ok",
+          "size": {
+            "file_bytes": 253355,
+            "stream_bytes_by_category": {
+              "other_stream": 9271,
+              "page_content_stream": 5552,
+              "font_program": 79926,
+              "background_image:/DCTDecode": 150476,
+              "foreground_image:/DCTDecode": 4222
+            },
+            "stream_count_by_category": {
+              "other_stream": 15,
+              "page_content_stream": 8,
+              "font_program": 8,
+              "background_image:/DCTDecode": 1,
+              "foreground_image:/DCTDecode": 2
+            },
+            "page_font_resource_count": 8,
+            "structure_xref_dictionary_and_unclassified_bytes": 3908,
+            "reconciles": true,
+            "image_role_method": "largest non-mask image is background; remaining non-mask images foreground; masks from ImageMask, Mask and SMask"
+          },
+          "size_ratio": 0.03012349019909052,
+          "images": [
+            {
+              "width": 1465,
+              "height": 2528,
+              "bytes": 150476,
+              "filter": "/DCTDecode",
+              "mask": false
+            },
+            {
+              "width": 134,
+              "height": 69,
+              "bytes": 2523,
+              "filter": "/DCTDecode",
+              "mask": false
+            },
+            {
+              "width": 93,
+              "height": 51,
+              "bytes": 1699,
+              "filter": "/DCTDecode",
+              "mask": false
+            }
+          ],
+          "render_150": {
+            "pdfium": {
+              "samples_seconds": [
+                0.035024466924369335,
+                0.03262372291646898,
+                0.029007027158513665,
+                0.029342697001993656,
+                0.02946914196945727
+              ],
+              "median_seconds": 0.02946914196945727,
+              "p95_seconds": 0.035024466924369335,
+              "p95_method": "nearest-rank n=5",
+              "peak_rss_kib": 110216,
+              "peak_rss_scope": "render worker and largest child, includes interpreter",
+              "output": "/data/coding/scanweave/work/books01/phase2/renders/estor_rechtsgelehrsamkeit02_1758_0819/adobe-E/pdfium-150.png",
+              "output_bytes": 1094850
+            },
+            "poppler": {
+              "samples_seconds": [
+                1.0801981191616505,
+                1.0766590719576925,
+                1.0696855909191072,
+                1.066757523920387,
+                1.0749510570894927
+              ],
+              "median_seconds": 1.0749510570894927,
+              "p95_seconds": 1.0801981191616505,
+              "p95_method": "nearest-rank n=5",
+              "peak_rss_kib": 110216,
+              "peak_rss_scope": "render worker and largest child, includes interpreter",
+              "output": "/data/coding/scanweave/work/books01/phase2/renders/estor_rechtsgelehrsamkeit02_1758_0819/adobe-E/poppler-150.png",
+              "output_bytes": 972586
+            },
+            "mupdf": {
+              "samples_seconds": [
+                0.025816927896812558,
+                0.025638652965426445,
+                0.023659614846110344,
+                0.024163258960470557,
+                0.02349317097105086
+              ],
+              "median_seconds": 0.024163258960470557,
+              "p95_seconds": 0.025816927896812558,
+              "p95_method": "nearest-rank n=5",
+              "peak_rss_kib": 110216,
+              "peak_rss_scope": "render worker and largest child, includes interpreter",
+              "output": "/data/coding/scanweave/work/books01/phase2/renders/estor_rechtsgelehrsamkeit02_1758_0819/adobe-E/mupdf-150.png",
+              "output_bytes": 969620
+            }
+          },
+          "geometry": {
+            "status": "accepted",
+            "reason": null,
+            "rotation_degrees": 0.8313114568352067,
+            "scale_x": 0.9999156099516875,
+            "scale_y": 0.9999156099516875,
+            "translation_px": [
+              19.02279395855794,
+              -11.138190284722668
+            ],
+            "method": "SIFT global similarity",
+            "inlier_count": 860,
+            "inlier_fraction": 0.9652076318742986,
+            "residual_median_px_150_equivalent": 1.0088723811315279,
+            "residual_p95_px_150_equivalent": 2.054163910685016,
+            "quadrants_covered": 4,
+            "source_page_boxes": {
+              "media": [
+                0.0,
+                0.0,
+                350.64,
+                606.0
+              ],
+              "crop": [
+                0.0,
+                0.0,
+                350.64,
+                606.0
+              ],
+              "rotation": 0
+            },
+            "output_page_boxes": {
+              "media": [
+                0.0,
+                0.0,
+                351.6,
+                606.72
+              ],
+              "crop": [
+                0.479996,
+                0.479996,
+                351.12,
+                606.48
+              ],
+              "rotation": 0
+            },
+            "page_box_changed": true,
+            "source_dimensions": [
+              1462,
+              2525
+            ],
+            "output_dimensions": [
+              1461,
+              2525
+            ],
+            "out_of_bounds_fraction": 0.00689697265625,
+            "coverage_method": "128x128 source-grid samples inverse-mapped to output; possible crop, not proof of lost content"
+          },
+          "native_fidelity": {
+            "text": {
+              "pixels": 1423418,
+              "ssim": 0.3000870602421154,
+              "ink_recall": 0.34089889847991084,
+              "ink_precision": 0.3153272386791931,
+              "mean_abs_delta_L": 11.681941986083984
+            },
+            "illustration": {
+              "pixels": 0,
+              "ssim": null,
+              "ink_recall": null,
+              "ink_precision": null,
+              "mean_abs_delta_L": null
+            },
+            "paper": {
+              "pixels": 2265607,
+              "ssim": 0.7144317323092991,
+              "ink_recall": 0.9118585527918238,
+              "ink_precision": 0.9389671008244231,
+              "mean_abs_delta_L": 3.5361104011535645
+            }
+          },
+          "native_overlap": {
+            "source": [
+              1462,
+              2525
+            ],
+            "output": [
+              1461,
+              2525
+            ],
+            "overlap": [
+              1461,
+              2525
+            ],
+            "policy": "pilot common top-left grid; only dimensions within one pixel are scored"
+          },
+          "aligned_fidelity": {
+            "text": {
+              "pixels": 1423418,
+              "ssim": 0.7844399270402378,
+              "ink_recall": 0.8480850464056447,
+              "ink_precision": 0.7803646310262567,
+              "mean_abs_delta_L": 4.348018646240234
+            },
+            "illustration": {
+              "pixels": 0,
+              "ssim": null,
+              "ink_recall": null,
+              "ink_precision": null,
+              "mean_abs_delta_L": null
+            },
+            "paper": {
+              "pixels": 2268132,
+              "ssim": 0.8259733871428933,
+              "ink_recall": 0.9367315369140677,
+              "ink_precision": 0.981867178222344,
+              "mean_abs_delta_L": 2.5730483531951904
+            }
+          },
+          "text": {
+            "empty": false,
+            "scores": {
+              "diplomatic": {
+                "cer": 0.5106382978723404,
+                "character_edits": 624,
+                "known_characters": 1222,
+                "unknown_characters": 0,
+                "wer": 0.9841269841269841,
+                "word_edits": 186,
+                "known_words": 189,
+                "bag_character_recall": 0.7414075286415712
+              },
+              "reading": {
+                "cer": 0.5218120805369127,
+                "character_edits": 622,
+                "known_characters": 1192,
+                "unknown_characters": 0,
+                "wer": 1.0574712643678161,
+                "word_edits": 184,
+                "known_words": 174,
+                "bag_character_recall": 0.7550335570469798
+              }
+            }
+          },
+          "search": {
+            "recognized_words": 16,
+            "literal_hits": 3,
+            "diplomatic_variant_hits": 3,
+            "variant": "literal or a text-layer token with identical reading-normalised form",
+            "limitation": "long-s normalised query may fail literal search"
+          },
+          "frozen_hocr_scores": {
+            "diplomatic": {
+              "cer": 0.2160392798690671,
+              "character_edits": 264,
+              "known_characters": 1222,
+              "unknown_characters": 0,
+              "wer": 0.5238095238095238,
+              "word_edits": 99,
+              "known_words": 189,
+              "bag_character_recall": 0.9705400981996727
+            },
+            "reading": {
+              "cer": 0.22818791946308725,
+              "character_edits": 272,
+              "known_characters": 1192,
+              "unknown_characters": 0,
+              "wer": 0.6436781609195402,
+              "word_edits": 112,
+              "known_words": 174,
+              "bag_character_recall": 0.9723154362416108
+            }
+          },
+          "line_ocr": {
+            "reading": {
+              "line_metrics": {
+                "gt_count": 41,
+                "output_count": 29,
+                "matched_lines": 27,
+                "missing_lines": 14,
+                "missing_known_characters": 206,
+                "total_known_characters": 1182,
+                "missing_character_share": 0.17428087986463622,
+                "extra_lines": 2,
+                "matched_known_characters": 976,
+                "matched_character_edits": 585,
+                "line_aligned_cer": 0.5993852459016393,
+                "matched_known_words": 151,
+                "line_aligned_wer": 1.1788079470198676,
+                "kendall_tau": 0.9145299145299146,
+                "kendall_pair_count": 27,
+                "matching": "axis-aligned source-frame bounding-box IoU >= 0.2, one-to-one maximum weight"
+              },
+              "same_gt": {
+                "shared_gt_lines": 25,
+                "known_characters": 966,
+                "known_words": 148,
+                "frozen_cer": 0.15631469979296067,
+                "pdf_cer": 0.6014492753623188,
+                "frozen_wer": 0.5,
+                "pdf_wer": 1.1891891891891893,
+                "method": "compare both OCR texts against exactly the same GT lines, matched independently by geometry"
+              },
+              "partition": null
+            },
+            "diplomatic": {
+              "line_metrics": {
+                "gt_count": 41,
+                "output_count": 29,
+                "matched_lines": 27,
+                "missing_lines": 14,
+                "missing_known_characters": 206,
+                "total_known_characters": 1182,
+                "missing_character_share": 0.17428087986463622,
+                "extra_lines": 2,
+                "matched_known_characters": 976,
+                "matched_character_edits": 587,
+                "line_aligned_cer": 0.6014344262295082,
+                "matched_known_words": 151,
+                "line_aligned_wer": 1.185430463576159,
+                "kendall_tau": 0.9145299145299146,
+                "kendall_pair_count": 27,
+                "matching": "axis-aligned source-frame bounding-box IoU >= 0.2, one-to-one maximum weight"
+              },
+              "same_gt": {
+                "shared_gt_lines": 25,
+                "known_characters": 966,
+                "known_words": 148,
+                "frozen_cer": 0.15942028985507245,
+                "pdf_cer": 0.6035196687370601,
+                "frozen_wer": 0.5067567567567568,
+                "pdf_wer": 1.195945945945946,
+                "method": "compare both OCR texts against exactly the same GT lines, matched independently by geometry"
+              },
+              "partition": null
+            }
+          },
+          "detectors": {
+            "status": "automated suspicions, unreviewed",
+            "word_boxes": 208,
+            "counts": {
+              "glyph_shape": 186,
+              "missing_ink": 177,
+              "spurious_ink": 1
+            },
+            "limitation": "word-box detectors; no confirmation; illustration and border tile counts unavailable in this pass"
+          },
+          "elapsed_seconds": 14.315715732052922,
           "conversion": {
-            "status": 1,
-            "wall_seconds": 52.757366274,
+            "status": 0,
+            "wall_seconds": 82.267377292,
+            "batch": "adobe-p2-retry2",
             "timing_scope": "GUI wall time includes fixed sleeps/startup; not comparable with CLI",
             "cpu_seconds": null,
             "peak_rss_kib": null
@@ -4715,6 +5451,7 @@
           "conversion": {
             "status": 0,
             "wall_seconds": 87.934107914,
+            "batch": "adobe-p2",
             "timing_scope": "GUI wall time includes fixed sleeps/startup; not comparable with CLI",
             "cpu_seconds": null,
             "peak_rss_kib": null
@@ -6590,6 +7327,7 @@
           "conversion": {
             "status": 0,
             "wall_seconds": 82.394071162,
+            "batch": "adobe-p2",
             "timing_scope": "GUI wall time includes fixed sleeps/startup; not comparable with CLI",
             "cpu_seconds": null,
             "peak_rss_kib": null
@@ -8413,6 +9151,7 @@
           "conversion": {
             "status": 0,
             "wall_seconds": 82.481500416,
+            "batch": "adobe-p2",
             "timing_scope": "GUI wall time includes fixed sleeps/startup; not comparable with CLI",
             "cpu_seconds": null,
             "peak_rss_kib": null
@@ -10261,6 +11000,7 @@
           "conversion": {
             "status": 0,
             "wall_seconds": 82.273477842,
+            "batch": "adobe",
             "timing_scope": "GUI wall time includes fixed sleeps/startup; not comparable with CLI",
             "cpu_seconds": null,
             "peak_rss_kib": null
@@ -12073,6 +12813,7 @@
           "conversion": {
             "status": 0,
             "wall_seconds": 82.379928887,
+            "batch": "adobe-p2",
             "timing_scope": "GUI wall time includes fixed sleeps/startup; not comparable with CLI",
             "cpu_seconds": null,
             "peak_rss_kib": null
@@ -13921,6 +14662,7 @@
           "conversion": {
             "status": 0,
             "wall_seconds": 82.367196949,
+            "batch": "adobe-p2",
             "timing_scope": "GUI wall time includes fixed sleeps/startup; not comparable with CLI",
             "cpu_seconds": null,
             "peak_rss_kib": null
@@ -15826,6 +16568,7 @@
           "conversion": {
             "status": 0,
             "wall_seconds": 101.283761701,
+            "batch": "adobe",
             "timing_scope": "GUI wall time includes fixed sleeps/startup; not comparable with CLI",
             "cpu_seconds": null,
             "peak_rss_kib": null
@@ -17637,6 +18380,7 @@
           "conversion": {
             "status": 0,
             "wall_seconds": 82.269427819,
+            "batch": "adobe",
             "timing_scope": "GUI wall time includes fixed sleeps/startup; not comparable with CLI",
             "cpu_seconds": null,
             "peak_rss_kib": null
@@ -19460,6 +20204,7 @@
           "conversion": {
             "status": 0,
             "wall_seconds": 82.298291997,
+            "batch": "adobe-p2",
             "timing_scope": "GUI wall time includes fixed sleeps/startup; not comparable with CLI",
             "cpu_seconds": null,
             "peak_rss_kib": null
@@ -21290,6 +22035,7 @@
           "conversion": {
             "status": 0,
             "wall_seconds": 83.147402128,
+            "batch": "adobe-p2",
             "timing_scope": "GUI wall time includes fixed sleeps/startup; not comparable with CLI",
             "cpu_seconds": null,
             "peak_rss_kib": null
@@ -23114,6 +23860,7 @@
           "conversion": {
             "status": 0,
             "wall_seconds": 83.497680415,
+            "batch": "adobe-p2",
             "timing_scope": "GUI wall time includes fixed sleeps/startup; not comparable with CLI",
             "cpu_seconds": null,
             "peak_rss_kib": null
@@ -24773,6 +25520,7 @@
           "conversion": {
             "status": 0,
             "wall_seconds": 83.74073439,
+            "batch": "adobe-p2",
             "timing_scope": "GUI wall time includes fixed sleeps/startup; not comparable with CLI",
             "cpu_seconds": null,
             "peak_rss_kib": null
@@ -26229,7 +26977,8 @@
           "path": "/data/coding/scanweave/work/books01/runs/adobe-p2/silesius_seelenlust01_1657_0423.adobe.pdf",
           "conversion": {
             "status": 1,
-            "wall_seconds": 151.866822625,
+            "wall_seconds": 147.390217714,
+            "batch": "adobe-p2-retry2",
             "timing_scope": "GUI wall time includes fixed sleeps/startup; not comparable with CLI",
             "cpu_seconds": null,
             "peak_rss_kib": null
@@ -28037,6 +28786,7 @@
           "conversion": {
             "status": 0,
             "wall_seconds": 88.00913942,
+            "batch": "adobe-p2",
             "timing_scope": "GUI wall time includes fixed sleeps/startup; not comparable with CLI",
             "cpu_seconds": null,
             "peak_rss_kib": null
@@ -29959,6 +30709,7 @@
           "conversion": {
             "status": 0,
             "wall_seconds": 82.241665684,
+            "batch": "adobe-p2",
             "timing_scope": "GUI wall time includes fixed sleeps/startup; not comparable with CLI",
             "cpu_seconds": null,
             "peak_rss_kib": null
@@ -31743,6 +32494,7 @@
           "conversion": {
             "status": 0,
             "wall_seconds": 82.297463981,
+            "batch": "adobe-p2",
             "timing_scope": "GUI wall time includes fixed sleeps/startup; not comparable with CLI",
             "cpu_seconds": null,
             "peak_rss_kib": null
@@ -33200,7 +33952,8 @@
           "path": "/data/coding/scanweave/work/books01/runs/adobe-p2/meyfart_rhetorica_1634_0022.adobe.pdf",
           "conversion": {
             "status": 1,
-            "wall_seconds": 43.83968513,
+            "wall_seconds": 52.729419134,
+            "batch": "adobe-p2-retry2",
             "timing_scope": "GUI wall time includes fixed sleeps/startup; not comparable with CLI",
             "cpu_seconds": null,
             "peak_rss_kib": null
@@ -35299,6 +36052,7 @@
           "conversion": {
             "status": 0,
             "wall_seconds": 82.297810656,
+            "batch": "adobe",
             "timing_scope": "GUI wall time includes fixed sleeps/startup; not comparable with CLI",
             "cpu_seconds": null,
             "peak_rss_kib": null
@@ -36758,7 +37512,8 @@
           "path": "/data/coding/scanweave/work/books01/runs/adobe-p2/arnold_ketzerhistorie01_1699_0115.adobe.pdf",
           "conversion": {
             "status": 1,
-            "wall_seconds": 162.587657166,
+            "wall_seconds": 52.755236098,
+            "batch": "adobe-p2-retry2",
             "timing_scope": "GUI wall time includes fixed sleeps/startup; not comparable with CLI",
             "cpu_seconds": null,
             "peak_rss_kib": null
@@ -38586,6 +39341,7 @@
           "conversion": {
             "status": 0,
             "wall_seconds": 87.862639582,
+            "batch": "adobe-p2",
             "timing_scope": "GUI wall time includes fixed sleeps/startup; not comparable with CLI",
             "cpu_seconds": null,
             "peak_rss_kib": null
@@ -40384,6 +41140,7 @@
           "conversion": {
             "status": 0,
             "wall_seconds": 82.250886244,
+            "batch": "adobe-p2",
             "timing_scope": "GUI wall time includes fixed sleeps/startup; not comparable with CLI",
             "cpu_seconds": null,
             "peak_rss_kib": null
@@ -41842,7 +42599,8 @@
           "path": "/data/coding/scanweave/work/books01/runs/adobe-p2/blumenbach_anatomie_1805_0047.adobe.pdf",
           "conversion": {
             "status": 1,
-            "wall_seconds": 147.342881045,
+            "wall_seconds": 53.222718208,
+            "batch": "adobe-p2-retry2",
             "timing_scope": "GUI wall time includes fixed sleeps/startup; not comparable with CLI",
             "cpu_seconds": null,
             "peak_rss_kib": null
@@ -43893,6 +44651,7 @@
           "conversion": {
             "status": 0,
             "wall_seconds": 82.272101257,
+            "batch": "adobe",
             "timing_scope": "GUI wall time includes fixed sleeps/startup; not comparable with CLI",
             "cpu_seconds": null,
             "peak_rss_kib": null
@@ -45498,7 +46257,8 @@
           "path": "/data/coding/scanweave/work/books01/runs/adobe-p2/8966753.adobe.pdf",
           "conversion": {
             "status": 1,
-            "wall_seconds": 52.702149407,
+            "wall_seconds": 52.713109124,
+            "batch": "adobe-p2-retry2",
             "timing_scope": "GUI wall time includes fixed sleeps/startup; not comparable with CLI",
             "cpu_seconds": null,
             "peak_rss_kib": null
@@ -47197,6 +47957,7 @@
           "conversion": {
             "status": 0,
             "wall_seconds": 87.84988476,
+            "batch": "adobe-p2",
             "timing_scope": "GUI wall time includes fixed sleeps/startup; not comparable with CLI",
             "cpu_seconds": null,
             "peak_rss_kib": null
@@ -48988,6 +49749,7 @@
           "conversion": {
             "status": 0,
             "wall_seconds": 82.234822827,
+            "batch": "adobe-p2",
             "timing_scope": "GUI wall time includes fixed sleeps/startup; not comparable with CLI",
             "cpu_seconds": null,
             "peak_rss_kib": null
@@ -50450,7 +51212,8 @@
           "path": "/data/coding/scanweave/work/books01/runs/adobe-p2/9684341.adobe.pdf",
           "conversion": {
             "status": 1,
-            "wall_seconds": 37.478120955,
+            "wall_seconds": 52.734782137,
+            "batch": "adobe-p2-retry2",
             "timing_scope": "GUI wall time includes fixed sleeps/startup; not comparable with CLI",
             "cpu_seconds": null,
             "peak_rss_kib": null
@@ -52267,6 +53030,7 @@
           "conversion": {
             "status": 0,
             "wall_seconds": 82.236565987,
+            "batch": "adobe-p2",
             "timing_scope": "GUI wall time includes fixed sleeps/startup; not comparable with CLI",
             "cpu_seconds": null,
             "peak_rss_kib": null
@@ -54088,6 +54852,7 @@
           "conversion": {
             "status": 0,
             "wall_seconds": 82.233600061,
+            "batch": "adobe-p2",
             "timing_scope": "GUI wall time includes fixed sleeps/startup; not comparable with CLI",
             "cpu_seconds": null,
             "peak_rss_kib": null
@@ -55895,6 +56660,7 @@
           "conversion": {
             "status": 0,
             "wall_seconds": 82.239052296,
+            "batch": "adobe-p2",
             "timing_scope": "GUI wall time includes fixed sleeps/startup; not comparable with CLI",
             "cpu_seconds": null,
             "peak_rss_kib": null
@@ -57671,6 +58437,7 @@
           "conversion": {
             "status": 0,
             "wall_seconds": 82.225818799,
+            "batch": "adobe-p2",
             "timing_scope": "GUI wall time includes fixed sleeps/startup; not comparable with CLI",
             "cpu_seconds": null,
             "peak_rss_kib": null
@@ -59475,6 +60242,7 @@
           "conversion": {
             "status": 0,
             "wall_seconds": 82.296501428,
+            "batch": "adobe",
             "timing_scope": "GUI wall time includes fixed sleeps/startup; not comparable with CLI",
             "cpu_seconds": null,
             "peak_rss_kib": null
@@ -61309,6 +62077,7 @@
           "conversion": {
             "status": 0,
             "wall_seconds": 82.233159385,
+            "batch": "adobe-p2",
             "timing_scope": "GUI wall time includes fixed sleeps/startup; not comparable with CLI",
             "cpu_seconds": null,
             "peak_rss_kib": null
@@ -63135,6 +63904,7 @@
           "conversion": {
             "status": 0,
             "wall_seconds": 82.231742334,
+            "batch": "adobe-p2",
             "timing_scope": "GUI wall time includes fixed sleeps/startup; not comparable with CLI",
             "cpu_seconds": null,
             "peak_rss_kib": null
@@ -63364,42 +64134,42 @@
         "diplomatic_wer_median": 0.8252804433031491
       },
       "adobe-E": {
-        "n": 28,
-        "bytes_total": 9250750,
-        "bytes_median": 319948.5,
+        "n": 30,
+        "bytes_total": 9814558,
+        "bytes_median": 313958.0,
         "aligned_text_ssim_median": 0.8092986869690191,
         "aligned_text_ink_recall_median": 0.8929197843829886,
-        "aligned_illustration_ssim_median": 0.8699687778351018,
+        "aligned_illustration_ssim_median": 0.8829702831699715,
         "aligned_paper_ssim_median": 0.8817775389740872,
-        "reading_cer_median": 0.6868543799772469,
-        "reading_wer_median": 1.0033460803059273,
-        "nonempty_text": 25,
-        "literal_hits": 96,
-        "diplomatic_hits": 96,
-        "recognized_words": 288,
+        "reading_cer_median": 0.644269406392694,
+        "reading_wer_median": 1.0320817124898354,
+        "nonempty_text": 27,
+        "literal_hits": 100,
+        "diplomatic_hits": 100,
+        "recognized_words": 319,
         "conversion_wall_median": 82.2976373185,
         "aligned_region_medians": {
           "text": {
             "ssim": 0.8092986869690191,
             "ink_recall": 0.8929197843829886,
-            "ink_precision": 0.8618342735903977,
+            "ink_precision": 0.8537940518253107,
             "deltaE2000_mean": null
           },
           "illustration": {
-            "ssim": 0.8699687778351018,
-            "ink_recall": 0.9210120503293262,
-            "ink_precision": 0.9124842930002217,
-            "deltaE2000_mean": 3.7066269860831866
+            "ssim": 0.8829702831699715,
+            "ink_recall": 0.9251178627553693,
+            "ink_precision": 0.9188895907989313,
+            "deltaE2000_mean": 3.4491262436509706
           },
           "paper": {
             "ssim": 0.8817775389740872,
-            "ink_recall": 0.9334920685993758,
-            "ink_precision": 0.9323671497584541,
+            "ink_recall": 0.9362622443974294,
+            "ink_precision": 0.9452054794520548,
             "deltaE2000_mean": null
           }
         },
         "reading_bag_recall_median": 0.7465431046447832,
-        "diplomatic_cer_median": 0.6819554985270857,
+        "diplomatic_cer_median": 0.6501985602914561,
         "diplomatic_wer_median": 1.0
       }
     },
@@ -63561,32 +64331,32 @@
         "diplomatic_wer_median": 0.9046105919003116
       },
       "adobe-E": {
-        "n": 11,
-        "bytes_total": 4083536,
-        "bytes_median": 379388,
-        "aligned_text_ssim_median": 0.7719654868352925,
+        "n": 13,
+        "bytes_total": 4647344,
+        "bytes_median": 345022,
+        "aligned_text_ssim_median": 0.7760430878526658,
         "aligned_text_ink_recall_median": 0.8957449522489823,
-        "aligned_illustration_ssim_median": 0.8151423974859933,
+        "aligned_illustration_ssim_median": 0.839316720257119,
         "aligned_paper_ssim_median": 0.8445044167944138,
-        "reading_cer_median": 0.8059187887130076,
+        "reading_cer_median": 0.6452054794520548,
         "reading_wer_median": 1.1655405405405406,
-        "nonempty_text": 10,
-        "literal_hits": 14,
-        "diplomatic_hits": 14,
-        "recognized_words": 101,
+        "nonempty_text": 12,
+        "literal_hits": 18,
+        "diplomatic_hits": 18,
+        "recognized_words": 132,
         "conversion_wall_median": 82.481500416,
         "aligned_region_medians": {
           "text": {
-            "ssim": 0.7719654868352925,
+            "ssim": 0.7760430878526658,
             "ink_recall": 0.8957449522489823,
-            "ink_precision": 0.8845867150211348,
+            "ink_precision": 0.8583717594520548,
             "deltaE2000_mean": null
           },
           "illustration": {
-            "ssim": 0.8151423974859933,
-            "ink_recall": 0.9032638734297467,
-            "ink_precision": 0.8933683678656507,
-            "deltaE2000_mean": 4.764176240885513
+            "ssim": 0.839316720257119,
+            "ink_recall": 0.9149377593360996,
+            "ink_precision": 0.9025087556286184,
+            "deltaE2000_mean": 4.386685426689477
           },
           "paper": {
             "ssim": 0.8445044167944138,
@@ -63596,7 +64366,7 @@
           }
         },
         "reading_bag_recall_median": 0.7313345091122869,
-        "diplomatic_cer_median": 0.8084526244035446,
+        "diplomatic_cer_median": 0.6471571906354515,
         "diplomatic_wer_median": 1.15
       }
     },
@@ -63758,41 +64528,41 @@
         "diplomatic_wer_median": 0.9080021482277121
       },
       "adobe-E": {
-        "n": 5,
-        "bytes_total": 1417855,
-        "bytes_median": 299475,
-        "aligned_text_ssim_median": 0.8709781089197111,
-        "aligned_text_ink_recall_median": 0.9315723250954716,
-        "aligned_illustration_ssim_median": 0.9211420448311649,
-        "aligned_paper_ssim_median": 0.8783585437820991,
+        "n": 6,
+        "bytes_total": 1728308,
+        "bytes_median": 304964.0,
+        "aligned_text_ssim_median": 0.8791976622493991,
+        "aligned_text_ink_recall_median": 0.9189356147139727,
+        "aligned_illustration_ssim_median": 0.9322618860907643,
+        "aligned_paper_ssim_median": 0.9033525953643146,
         "reading_cer_median": 1.0,
         "reading_wer_median": 1.0,
-        "nonempty_text": 2,
-        "literal_hits": 0,
-        "diplomatic_hits": 0,
-        "recognized_words": 40,
-        "conversion_wall_median": 83.497680415,
+        "nonempty_text": 3,
+        "literal_hits": 1,
+        "diplomatic_hits": 1,
+        "recognized_words": 55,
+        "conversion_wall_median": 83.6192074025,
         "aligned_region_medians": {
           "text": {
-            "ssim": 0.8709781089197111,
-            "ink_recall": 0.9315723250954716,
-            "ink_precision": 0.901540446011061,
+            "ssim": 0.8791976622493991,
+            "ink_recall": 0.9189356147139727,
+            "ink_precision": 0.8777595662373576,
             "deltaE2000_mean": null
           },
           "illustration": {
-            "ssim": 0.9211420448311649,
-            "ink_recall": 0.9290968018203344,
-            "ink_precision": 0.8842279801026829,
-            "deltaE2000_mean": 3.1916255012187547
+            "ssim": 0.9322618860907643,
+            "ink_recall": 0.9271073322878518,
+            "ink_precision": 0.9087551146087584,
+            "deltaE2000_mean": 3.1214521170731975
           },
           "paper": {
-            "ssim": 0.8783585437820991,
-            "ink_recall": 0.9497671515728878,
-            "ink_precision": 0.965973586021287,
+            "ssim": 0.9033525953643146,
+            "ink_recall": 0.9632720587483461,
+            "ink_precision": 0.9724053490310565,
             "deltaE2000_mean": null
           }
         },
-        "reading_bag_recall_median": 0.0,
+        "reading_bag_recall_median": 0.31666666666666665,
         "diplomatic_cer_median": 1.0,
         "diplomatic_wer_median": 1.0
       }
@@ -63955,25 +64725,25 @@
         "diplomatic_wer_median": 0.7585278276481149
       },
       "adobe-E": {
-        "n": 4,
-        "bytes_total": 1742216,
-        "bytes_median": 387914.5,
-        "aligned_text_ssim_median": 0.822003911460299,
-        "aligned_text_ink_recall_median": 0.9046265825463333,
+        "n": 5,
+        "bytes_total": 1995571,
+        "bytes_median": 266655,
+        "aligned_text_ssim_median": 0.8091556809131941,
+        "aligned_text_ink_recall_median": 0.9022134355225443,
         "aligned_illustration_ssim_median": 0.7474239439877789,
-        "aligned_paper_ssim_median": 0.8512324372036295,
-        "reading_cer_median": 0.8286099519773216,
-        "reading_wer_median": 1.0033460803059273,
-        "nonempty_text": 3,
-        "literal_hits": 7,
-        "diplomatic_hits": 7,
-        "recognized_words": 33,
-        "conversion_wall_median": 82.72260639199999,
+        "aligned_paper_ssim_median": 0.8350556837357869,
+        "reading_cer_median": 0.8059187887130076,
+        "reading_wer_median": 1.0066921606118546,
+        "nonempty_text": 4,
+        "literal_hits": 10,
+        "diplomatic_hits": 10,
+        "recognized_words": 49,
+        "conversion_wall_median": 82.297810656,
         "aligned_region_medians": {
           "text": {
-            "ssim": 0.822003911460299,
-            "ink_recall": 0.9046265825463333,
-            "ink_precision": 0.9019161004295366,
+            "ssim": 0.8091556809131941,
+            "ink_recall": 0.9022134355225443,
+            "ink_precision": 0.8928972352299699,
             "deltaE2000_mean": null
           },
           "illustration": {
@@ -63983,15 +64753,15 @@
             "deltaE2000_mean": 5.14166705508155
           },
           "paper": {
-            "ssim": 0.8512324372036295,
-            "ink_recall": 0.966520249380416,
-            "ink_precision": 0.9937042549883801,
+            "ssim": 0.8350556837357869,
+            "ink_recall": 0.9632720587483461,
+            "ink_precision": 0.9899193830526792,
             "deltaE2000_mean": null
           }
         },
-        "reading_bag_recall_median": 0.7466519375721462,
-        "diplomatic_cer_median": 0.83104944715567,
-        "diplomatic_wer_median": 0.9962928637627433
+        "reading_bag_recall_median": 0.7487955953200275,
+        "diplomatic_cer_median": 0.8084526244035446,
+        "diplomatic_wer_median": 0.9925857275254866
       }
     },
     "tag: tables": {
@@ -65400,6 +66170,18 @@
       "competitor_ink_recall": 1.0
     },
     {
+      "page": "quiver/estor_rechtsgelehrsamkeit02_1758_0007",
+      "competitor": "adobe-E",
+      "sw_better_both_by_0_01": true,
+      "smaller_competitor_matches_both_within_0_01": false,
+      "sw_bytes": 343478,
+      "competitor_bytes": 310453,
+      "sw_text_ssim": 0.9703108362499583,
+      "competitor_text_ssim": 0.8791976622493991,
+      "sw_ink_recall": 0.949339130029372,
+      "competitor_ink_recall": 0.9189356147139727
+    },
+    {
       "page": "quiver/estor_rechtsgelehrsamkeit02_1758_0819",
       "competitor": "mrc-M",
       "sw_better_both_by_0_01": true,
@@ -65422,6 +66204,18 @@
       "competitor_text_ssim": 1.0,
       "sw_ink_recall": 0.9588948067534842,
       "competitor_ink_recall": 1.0
+    },
+    {
+      "page": "quiver/estor_rechtsgelehrsamkeit02_1758_0819",
+      "competitor": "adobe-E",
+      "sw_better_both_by_0_01": true,
+      "smaller_competitor_matches_both_within_0_01": false,
+      "sw_bytes": 355302,
+      "competitor_bytes": 253355,
+      "sw_text_ssim": 0.9695382012639535,
+      "competitor_text_ssim": 0.7844399270402378,
+      "sw_ink_recall": 0.9588948067534842,
+      "competitor_ink_recall": 0.8480850464056447
     },
     {
       "page": "quiver/euler_rechenkunst01_1738_0025",
@@ -66582,6 +67376,13 @@
       "text_ink_recall": 1.0
     },
     {
+      "page": "quiver/estor_rechtsgelehrsamkeit02_1758_0007",
+      "row": "adobe-E",
+      "bytes": 310453,
+      "text_ssim": 0.8791976622493991,
+      "text_ink_recall": 0.9189356147139727
+    },
+    {
       "page": "quiver/estor_rechtsgelehrsamkeit02_1758_0819",
       "row": "src",
       "bytes": 8410546,
@@ -66608,6 +67409,13 @@
       "bytes": 8421851,
       "text_ssim": 1.0,
       "text_ink_recall": 1.0
+    },
+    {
+      "page": "quiver/estor_rechtsgelehrsamkeit02_1758_0819",
+      "row": "adobe-E",
+      "bytes": 253355,
+      "text_ssim": 0.7844399270402378,
+      "text_ink_recall": 0.8480850464056447
     },
     {
       "page": "quiver/euler_rechenkunst01_1738_0025",
@@ -67760,29 +68568,16 @@
   ],
   "anomalies": [
     {
-      "page": "quiver/estor_rechtsgelehrsamkeit02_1758_0007",
-      "row": "adobe-E",
-      "kind": "missing_or_failed",
-      "detail": "Adobe GUI return code 1; output PDF missing",
-      "example": "/data/coding/scanweave/work/books01/phase2/examples/estor_rechtsgelehrsamkeit02_1758_0007.png",
-      "example_bbox_source_pixels": [
-        564,
-        1143,
-        924,
-        1383
-      ]
-    },
-    {
       "page": "quiver/estor_rechtsgelehrsamkeit02_1758_0819",
       "row": "adobe-E",
-      "kind": "missing_or_failed",
-      "detail": "Adobe GUI return code 1; output PDF missing",
+      "kind": "text_ssim_below_0.80",
+      "value": 0.7844399270402378,
       "example": "/data/coding/scanweave/work/books01/phase2/examples/estor_rechtsgelehrsamkeit02_1758_0819.png",
       "example_bbox_source_pixels": [
-        551,
-        1142,
-        911,
-        1382
+        1274,
+        2392,
+        1462,
+        2525
       ]
     },
     {
@@ -68220,10 +69015,10 @@
       "ratio": 4.16210200782513,
       "example": "/data/coding/scanweave/work/books01/phase2/examples/estor_rechtsgelehrsamkeit02_1758_0819.png",
       "example_bbox_source_pixels": [
-        551,
-        1142,
-        911,
-        1382
+        1274,
+        2392,
+        1462,
+        2525
       ]
     },
     {
@@ -68904,6 +69699,7 @@
     "Line matching inherits hOCR boxes for matched tracks and does not independently assess line order.",
     "Image attribution uses largest non-mask image as background; effective DPI assumes page fill.",
     "Automated detector suspicions are unreviewed.",
+    "Adobe retry 2 evidence: $B/runs/adobe-p2-retry2/; offline ClearScan en-US. The six remaining failures are GUI automation failures. The last four retries took about 52 seconds while the root filesystem was full; this is a possible contributing cause, not an established cause.",
     "Example crops use the same source-pixel region for all rows; low-text-SSIM examples target a low-resolution aligned difference, while other examples use the page centre. A crop may not establish the cause of an anomaly."
   ]
 }

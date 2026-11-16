@@ -24,12 +24,12 @@ def background(path):
    return v
  except Exception as e:return {'error':str(e)}
 adobe_times={}
-for dirname in ['adobe','adobe-p2']:
+for dirname in ['adobe','adobe-p2','adobe-p2-retry2']:
  f=B/'runs'/dirname/'timing.jsonl'
  if f.exists():
   for line in f.read_text().splitlines():
    try:
-    item=json.loads(line);adobe_times[item['page']]=item
+    item=json.loads(line);item['batch']=dirname;adobe_times[item['page']]=item
    except (ValueError,KeyError):pass
 for p in pages:
  id=p['id'];key=id.split('/')[-1];f=D/'runs'/key/'runs.json';run=json.loads(f.read_text()) if f.exists() else {'rows':{},'error':'run record missing'};entry={'metadata':{'tags':p.get('tags',[]),'work':p['work'],'repo':p.get('repo'),'source_type':locks[id]['source_type'],'dpi_confidence':locks[id]['dpi_evidence']['confidence']},'rows':{},'run_error':run.get('error'),'source_pdf_sha256':run.get('source_pdf_sha256'),'selected_psm':run.get('selected_psm'),'hocr_sha256':run.get('hocr_sha256'),'raster_import':run.get('raster_import')};records[id]=entry
@@ -38,7 +38,7 @@ for p in pages:
   if row in run.get('rows',{}):
    x=run['rows'][row];m['conversion']={k:x.get(k) for k in ['status','wall_seconds','reused_pilot']};m['conversion'].update(sec(x.get('time_file','')))
   if row=='adobe-E' and key in adobe_times:
-   z=adobe_times[key];m['conversion']={'status':z.get('rc'),'wall_seconds':z.get('wall_s'),'timing_scope':'GUI wall time includes fixed sleeps/startup; not comparable with CLI','cpu_seconds':None,'peak_rss_kib':None}
+   z=adobe_times[key];m['conversion']={'status':z.get('rc'),'wall_seconds':z.get('wall_s'),'batch':z.get('batch'),'timing_scope':'GUI wall time includes fixed sleeps/startup; not comparable with CLI','cpu_seconds':None,'peak_rss_kib':None}
   if m.get('status')!='ok':anomalies.append({'page':id,'row':row,'kind':'missing_or_failed','detail':m.get('error') or m.get('reason') or (('Adobe GUI return code '+str(m.get('conversion',{}).get('status'))+'; output PDF missing') if row=='adobe-E' else 'score not produced')});continue
   if row!='src' and m.get('text',{}).get('empty'):anomalies.append({'page':id,'row':row,'kind':'empty_text_layer'})
   if m.get('geometry',{}).get('status')!='accepted':anomalies.append({'page':id,'row':row,'kind':'registration_unaccepted','detail':m.get('geometry',{}).get('reason')})
@@ -114,4 +114,4 @@ for id in sorted(examplepages):
   else:draw.text((n*cw+4,28),'missing or unregistered',fill='black')
  path=exampledir/(key+'.png');sheet.save(path);examplepaths[id]=str(path)
 for x in anomalies:x['example']=examplepaths.get(x['page']);x['example_bbox_source_pixels']=exampleboxes.get(x['page'])
-res={'pages':records,'groups':summary,'comparisons':comparisons,'scatter':scatter,'anomalies':anomalies,'representative_examples':{k:{'page':v,'path':examplepaths.get(v)} for k,v in representatives.items()},'notes':['Adobe default OCR language (not matched); no Fraktur support; page straightened (deskew).','FineBooks sources are lossy-origin processed derivatives.','Line matching inherits hOCR boxes for matched tracks and does not independently assess line order.','Image attribution uses largest non-mask image as background; effective DPI assumes page fill.','Automated detector suspicions are unreviewed.','Example crops use the same source-pixel region for all rows; low-text-SSIM examples target a low-resolution aligned difference, while other examples use the page centre. A crop may not establish the cause of an anomaly.']};(out/'results.json').write_text(json.dumps(res,indent=2,allow_nan=False)+'\n');print('aggregated',len(records),'pages',len(anomalies),'anomalies')
+res={'pages':records,'groups':summary,'comparisons':comparisons,'scatter':scatter,'anomalies':anomalies,'representative_examples':{k:{'page':v,'path':examplepaths.get(v)} for k,v in representatives.items()},'notes':['Adobe default OCR language (not matched); no Fraktur support; page straightened (deskew).','FineBooks sources are lossy-origin processed derivatives.','Line matching inherits hOCR boxes for matched tracks and does not independently assess line order.','Image attribution uses largest non-mask image as background; effective DPI assumes page fill.','Automated detector suspicions are unreviewed.','Adobe retry 2 evidence: $B/runs/adobe-p2-retry2/; offline ClearScan en-US. The six remaining failures are GUI automation failures. The last four retries took about 52 seconds while the root filesystem was full; this is a possible contributing cause, not an established cause.','Example crops use the same source-pixel region for all rows; low-text-SSIM examples target a low-resolution aligned difference, while other examples use the page centre. A crop may not establish the cause of an anomaly.']};(out/'results.json').write_text(json.dumps(res,indent=2,allow_nan=False)+'\n');print('aggregated',len(records),'pages',len(anomalies),'anomalies')
