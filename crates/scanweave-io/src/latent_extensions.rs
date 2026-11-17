@@ -107,7 +107,49 @@ pub(crate) fn validate(plan: &OwnershipPlan, seg: &Segmentation, ledger: &Extens
     extension_owner.keys().all(|p| used.contains(p))
 }
 
-/// Add only complete, connected proposals inside the existing tight unit box.
+/// Expand only the experimental crop to the OCR glyph box plus a 2px PSF
+/// margin. Original component labels and membership remain unchanged.
+fn expanded_crop(
+    u: &crate::units::Unit,
+    width: usize,
+    height: usize,
+) -> Option<crate::units::Unit> {
+    let b = u.ocr_bbox_px;
+    if !b.iter().all(|x| x.is_finite()) || b[2] <= b[0] || b[3] <= b[1] {
+        return None;
+    }
+    let ox = u.bbox_px[0] as usize;
+    let oy = u.bbox_px[1] as usize;
+    if ox + u.crop_w > width || oy + u.crop_h > height || u.mask.len() != u.crop_w * u.crop_h {
+        return None;
+    }
+    let x0 = (b[0].floor() as isize - 2).max(0) as usize;
+    let y0 = (b[1].floor() as isize - 2).max(0) as usize;
+    let x1 = (b[2].ceil() as usize).saturating_add(2).min(width);
+    let y1 = (b[3].ceil() as usize).saturating_add(2).min(height);
+    let x0 = x0.min(ox);
+    let y0 = y0.min(oy);
+    let x1 = x1.max(ox + u.crop_w);
+    let y1 = y1.max(oy + u.crop_h);
+    if x1 <= x0 || y1 <= y0 || x1 > width || y1 > height {
+        return None;
+    }
+    let mut expanded = u.clone();
+    expanded.crop_w = x1 - x0;
+    expanded.crop_h = y1 - y0;
+    expanded.bbox_px = [x0 as f64, y0 as f64, x1 as f64, y1 as f64];
+    expanded.mask = vec![false; expanded.crop_w * expanded.crop_h];
+    for y in 0..u.crop_h {
+        for x in 0..u.crop_w {
+            expanded.mask[(y + oy - y0) * expanded.crop_w + x + ox - x0] = u.mask[y * u.crop_w + x];
+        }
+    }
+    expanded.gray_samples = None;
+    expanded.gray_halo = None;
+    Some(expanded)
+}
+
+/// Add only complete, connected proposals inside the OCR glyph box and PSF margin.
 /// Any unsafe/dropped part declines the entire unit and leaves it unchanged.
 pub(crate) fn apply(
     plan: &mut OwnershipPlan,
@@ -130,14 +172,12 @@ pub(crate) fn apply(
         {
             continue;
         }
+        let Some(expanded) = expanded_crop(u, seg.width, seg.height) else {
+            continue;
+        };
+        let u = &expanded;
         let x0 = u.bbox_px[0] as usize;
         let y0 = u.bbox_px[1] as usize;
-        if x0 + u.crop_w > seg.width
-            || y0 + u.crop_h > seg.height
-            || u.mask.len() != u.crop_w * u.crop_h
-        {
-            continue;
-        }
         let mut proposed = u.mask.clone();
         let mut extra = Vec::new();
         for y in 0..u.crop_h {
@@ -294,10 +334,11 @@ pub(crate) fn apply(
             claimed.insert(p);
         }
         decision(&mut ledger, u, extra.len(), "accepted");
-        let unit = &mut plan.owned[ui].unit;
+        let mut unit = expanded;
         ledger.symbols.insert(unit.symbol_id.clone());
         unit.mask = proposed;
         unit.shape_key = mask_identity_key(&unit.mask, unit.crop_w, unit.crop_h);
+        plan.owned[ui].unit = unit;
         ledger.accepted += 1;
     }
     ledger
@@ -425,7 +466,7 @@ mod tests {
     #[test]
     fn candidate_continuing_outside_unit_box_declines() {
         let (seg, mut plan, mut c) = fixture(false);
-        for x in 5..=9 {
+        for x in 5..=11 {
             c.put_pixel(x, 5, Luma([255]));
         }
         let before = plan.owned[0].unit.mask.clone();
@@ -439,6 +480,24 @@ mod tests {
         assert_eq!(ledger.accepted, 0);
         assert_eq!(ledger.rejected_box, 1);
         assert_eq!(before, plan.owned[0].unit.mask);
+    }
+    #[test]
+    fn proposed_pixel_outside_component_crop_but_inside_ocr_margin_is_allowed() {
+        let (seg, mut plan, mut c) = fixture(false);
+        for x in 5..=9 {
+            c.put_pixel(x, 5, Luma([255]));
+        }
+        let original_bbox = plan.owned[0].unit.bbox_px;
+        let ledger = apply(
+            &mut plan,
+            &seg,
+            &c,
+            &GrayImage::new(seg.width as u32, seg.height as u32),
+            &["x".to_string()].into_iter().collect(),
+        );
+        assert_eq!(ledger.accepted, 1);
+        assert!(plan.owned[0].unit.bbox_px[2] > original_bbox[2]);
+        assert!(validate(&plan, &seg, &ledger));
     }
     #[test]
     fn paper_veto_in_psf_footprint_declines_unchanged() {

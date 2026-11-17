@@ -6,11 +6,12 @@ from scipy import ndimage as ndi
 from lxml import html
 sys.path.insert(0,str(pathlib.Path(__file__).resolve().parent))
 import crop_fit as c
-B,O=c.B,c.O;root=O/'pages-extensions';root.mkdir(exist_ok=True); key=sys.argv[1];run=json.loads((B/'phase2/runs'/key/'runs.json').read_text());dest=root/key;dest.mkdir(exist_ok=True);t0=time.monotonic()
+import local_profile
+B,O=c.B,c.O;root=O/'pages-refit';root.mkdir(exist_ok=True); key=sys.argv[1];run=json.loads((B/'phase2/runs'/key/'runs.json').read_text());dest=root/key;dest.mkdir(exist_ok=True);t0=time.monotonic()
 source=run['rows']['src']['path'];subprocess.run(['pdfimages','-f','1','-l','1','-png',source,str(dest/'source')],check=True,stdout=subprocess.DEVNULL,stderr=subprocess.PIPE)
 files=list(dest.glob('source-*.png'))
 if len(files)!=1:raise RuntimeError(f'expected one original image, found {len(files)}')
-rgb=np.asarray(Image.open(files[0]).convert('RGB'));height,width=rgb.shape[:2];coverage=np.zeros((height,width),np.uint8);paper_veto=np.zeros((height,width),np.uint8);lines=html.parse(str(B/'phase2/runs'/key/'selected.hocr'));records=[];declined=[]
+rgb=np.asarray(Image.open(files[0]).convert('RGB'));height,width=rgb.shape[:2];coverage=np.zeros((height,width),np.uint8);raw_coverage=np.zeros((height,width),np.uint8);paper_veto=np.zeros((height,width),np.uint8);lines=html.parse(str(B/'phase2/runs'/key/'selected.hocr'));records=[];declined=[]
 pat=re.compile(r'\bbbox (\d+) (\d+) (\d+) (\d+)');chars=re.compile(r'x_bboxes (\d+) (\d+) (\d+) (\d+)')
 regions=[]
 for line in lines.xpath('//*[contains(concat(" ",normalize-space(@class)," ")," ocr_line ")]'):
@@ -33,6 +34,20 @@ for line in lines.xpath('//*[contains(concat(" ",normalize-space(@class)," ")," 
     if match:charboxes.append(tuple(map(int,match.groups())))
   regions.append((bound,charboxes))
 for (left,top,right,bottom),source_boxes in regions:
+ # Small groups are fitted per character with the crop experiment's profile
+ # model. The line pools colour direction and strength, not geometric sigma.
+ if 2 <= len(source_boxes) <= 5 and (right-left)*(bottom-top) < 200000:
+  fits,model,obs,context=local_profile.fit_line(rgb,source_boxes,(left,top,right,bottom))
+  good=[f for f in fits if f['best'] is not None and f['best']['t'] < f['t_max_physical']-.001 and f['core_pixels'] > 0 and np.isfinite(f['noise_linear_mad'])]
+  if len(good)>=2:
+   weights=np.array([f['core_pixels'] for f in good],float);direction=np.average(np.array([f['core_direction_linear'] for f in good]),axis=0,weights=weights);strength=float(np.median([f['best']['t'] for f in good]));cx,cy,ex,ey=context;bg=model['background'];den=float(direction@direction)
+   if den>=.01:
+    relative=np.maximum(((bg-obs)@direction)/den,0);paper=np.median(np.array([f['paper_linear'] for f in good]),axis=0);ink_rgb=c.st.srgb(np.clip(paper-strength*direction,0,1)).tolist()
+    for f in good:
+     a,b0,d,e=f['bbox'];xa=max(cx,a-2);xb=min(ex,d+2);ya=max(cy,b0-2);yb=min(ey,e+2);sub=relative[ya-cy:yb-cy,xa-cx:xb-cx];sigma=f['best']['sigma'];latent=c.bounded_inverse(np.clip(sub/strength,0,1),sigma,30)
+     ink=(sub/strength)>.25;holes=ndi.binary_fill_holes(ink,structure=np.ones((3,3)))&~ink;veto=holes&(np.abs(sub)*(direction@np.array([.2126,.7152,.0722]))<=2*f['noise_linear_mad']);np.maximum(raw_coverage[ya:yb,xa:xb],np.rint(latent*255).astype(np.uint8),out=raw_coverage[ya:yb,xa:xb]);latent[veto]=0;paper_veto[ya:yb,xa:xb][veto]=255
+     np.maximum(coverage[ya:yb,xa:xb],np.rint(latent*255).astype(np.uint8),out=coverage[ya:yb,xa:xb]);records.append({'bbox':[xa,ya,xb,yb],'sigma':sigma,'t':strength,'ink_rgb':ink_rgb,'edges':f['profiles'],'noise_proxy':f['noise_linear_mad'],'veto_pixels':int(veto.sum()),'boxes':1,'model':'per-glyph-profile','fit':f['best']})
+    continue
  x0=max(0,left-5);y0=max(0,top-5);x1=min(width,right+5);y1=min(height,bottom+5)
  if x1-x0<8 or y1-y0<8 or (x1-x0)*(y1-y0)>2_000_000:continue
  boxes=[]
@@ -82,7 +97,7 @@ for (left,top,right,bottom),source_boxes in regions:
   continue
  # Enclosed near-paper pixels remain raster evidence, never latent ink.
  noise=max(.005,float(1.4826*np.median(np.abs(lum[~allowed]-np.median(lum[~allowed]))))) if (~allowed).any() else .01
- ink=alpha>.25;holes=ndi.binary_fill_holes(ink,structure=np.ones((3,3)))&~ink;veto=holes&(np.abs(lum)<=2*noise);latent[veto]=0;paper_veto[y0:y1,x0:x1][veto]=255
+ ink=alpha>.25;holes=ndi.binary_fill_holes(ink,structure=np.ones((3,3)))&~ink;veto=holes&(np.abs(lum)<=2*noise);np.maximum(raw_coverage[y0:y1,x0:x1],np.rint(latent*255).astype(np.uint8),out=raw_coverage[y0:y1,x0:x1]);latent[veto]=0;paper_veto[y0:y1,x0:x1][veto]=255
  target=coverage[y0:y1,x0:x1];np.maximum(target,np.rint(latent*255).astype(np.uint8),out=target)
  records.append({'bbox':[x0,y0,x1,y1],'sigma':sigma,'t':strength,'ink_rgb':ink_rgb,'edges':len(widths),'noise_proxy':noise,'veto_pixels':int(veto.sum()),'boxes':len(boxes)})
-coverage[paper_veto>0]=0;Image.fromarray(coverage).save(dest/'coverage.png',compress_level=3);Image.fromarray(paper_veto).save(dest/'paper-veto.png',compress_level=3);(dest/'prepass.json').write_text(json.dumps({'key':key,'source':source,'dims':[width,height],'lines':records,'declined':declined,'wall_seconds':time.monotonic()-t0},indent=2));files[0].unlink();print(key,'lines',len(records),'seconds',round(time.monotonic()-t0,2),flush=True)
+coverage[paper_veto>0]=0;Image.fromarray(raw_coverage).save(dest/'raw-coverage.png',compress_level=3);Image.fromarray(coverage).save(dest/'coverage.png',compress_level=3);Image.fromarray(paper_veto).save(dest/'paper-veto.png',compress_level=3);(dest/'prepass.json').write_text(json.dumps({'key':key,'source':source,'dims':[width,height],'lines':records,'declined':declined,'wall_seconds':time.monotonic()-t0},indent=2));files[0].unlink();print(key,'lines',len(records),'seconds',round(time.monotonic()-t0,2),flush=True)
