@@ -841,7 +841,8 @@ pub(crate) fn convert_parts_with_document_donors(
 
     // Research-only sidecar. Missing, unreadable or mismatched coverage declines
     // the experiment and leaves the stock converter path unchanged.
-    let experimental_coverage = std::env::var_os("SCANWEAVE_STROKE_COVERAGE")
+    let coverage_path = std::env::var_os("SCANWEAVE_STROKE_COVERAGE").map(std::path::PathBuf::from);
+    let experimental_coverage = coverage_path.as_ref()
         .and_then(|path| image::open(path).ok())
         .map(|im| im.to_luma8())
         .filter(|im| im.width() == w && im.height() == h);
@@ -850,6 +851,46 @@ pub(crate) fn convert_parts_with_document_donors(
     let seg: Segmentation = segment(&input.rgb, w, h);
     let ocr = to_ocr_page(input);
     let (mut plan, _) = build_plan(&seg, w, h, &ocr);
+    let mut local_inks = std::collections::HashMap::new();
+    let mut extension_ledger = None;
+    if let (Some(map), Some(path)) = (&experimental_coverage, &coverage_path) {
+        // A line record is needed for both local color and per-unit eligibility.
+        // Missing or mismatched metadata declines all extensions.
+        let metadata = std::fs::read(path.with_file_name("prepass.json")).ok()
+            .and_then(|v| serde_json::from_slice::<serde_json::Value>(&v).ok());
+        let dimensions_match = metadata.as_ref().and_then(|v| v.get("dims"))
+            .and_then(|v| v.as_array()).is_some_and(|d| d.len()==2 && d[0].as_u64()==Some(w as u64) && d[1].as_u64()==Some(h as u64));
+        if dimensions_match {
+            if let Some(lines) = metadata.as_ref().and_then(|v|v.get("lines")).and_then(|v|v.as_array()) {
+                for owned in &plan.owned {
+                    let b=owned.unit.ocr_bbox_px;let cx=(b[0]+b[2])*0.5;let cy=(b[1]+b[3])*0.5;
+                    let mut best:Option<(f64,[u8;3])>=None;
+                    for line in lines {
+                        let Some(bb)=line.get("bbox").and_then(|v|v.as_array()).filter(|v|v.len()==4) else {continue};
+                        let Some(color)=line.get("ink_rgb").and_then(|v|v.as_array()).filter(|v|v.len()==3) else {continue};
+                        let coords:Option<Vec<f64>>=bb.iter().map(|v|v.as_f64()).collect();
+                        let rgb:Option<Vec<u8>>=color.iter().map(|v|v.as_u64().and_then(|x|u8::try_from(x).ok())).collect();
+                        let (Some(bb),Some(rgb))=(coords,rgb) else {continue};
+                        if cx>=bb[0] && cx<bb[2] && cy>=bb[1] && cy<bb[3] {
+                            let area=(bb[2]-bb[0])*(bb[3]-bb[1]);
+                            if best.as_ref().is_none_or(|x|area<x.0) {best=Some((area,[rgb[0],rgb[1],rgb[2]]));}
+                        }
+                    }
+                    if let Some((_,color))=best {local_inks.insert(owned.unit.symbol_id.clone(),color);}
+                }
+            }
+        }
+        let eligible:std::collections::HashSet<String>=local_inks.keys().cloned().collect();
+        let ledger=crate::latent_extensions::apply(&mut plan,&seg,map,&eligible);
+        if !crate::latent_extensions::validate(&plan,&seg,&ledger) {
+            return Err("experimental extension ownership invariant failed".into());
+        }
+        local_inks.retain(|symbol,_|ledger.symbols.contains(symbol));
+        let bytes=serde_json::to_vec_pretty(&ledger).map_err(|e|e.to_string())?;
+        std::fs::write(path.with_file_name("extensions.json"),bytes).map_err(|e|e.to_string())?;
+        eprintln!("STROKE_EXTENSIONS attempted={} accepted={} near_other={} disconnected={} overlap={} box={} pixels={}",ledger.attempted,ledger.accepted,ledger.rejected_neighbour,ledger.rejected_disconnected,ledger.rejected_overlap,ledger.rejected_box,ledger.pixels.values().map(Vec::len).sum::<usize>());
+        extension_ledger = Some(ledger);
+    }
     if policy.profile == "clearscan" {
         // Non-canonical local vectors (notably disconnected kana) need the
         // same original grayscale evidence as selected document witnesses.
@@ -996,6 +1037,11 @@ pub(crate) fn convert_parts_with_document_donors(
     let mut reconstruction =
         crate::visual_dict::reconstruct(&mut plan, policy, &input.rgb, input.width, input.height);
     plan.owned.truncate(local_units);
+    if let Some(ledger)=extension_ledger.as_ref() {
+        if !crate::latent_extensions::validate(&plan,&seg,ledger) {
+            return Err("experimental extension ownership invariant failed after reconstruction".into());
+        }
+    }
     reconstruction
         .observations
         .retain(|o| !o.symbol_id.starts_with("__doc_donor:"));
@@ -1037,7 +1083,8 @@ pub(crate) fn convert_parts_with_document_donors(
                         });
                         let coverage = experimental_coverage.as_ref().and_then(|map| {
                             // Never alter a shared dictionary entry or a visual-dictionary replacement.
-                            if prototype.symbol_id != u.symbol_id
+                            if !local_inks.contains_key(&u.symbol_id)
+                                || prototype.symbol_id != u.symbol_id
                                 || plan.owned.iter().filter(|x| x.unit.shape_key == u.shape_key).take(2).count() != 1
                                 || reconstruction.repaired_symbols.contains(&u.symbol_id)
                                 || reconstruction.reused_symbols.contains(&u.symbol_id)
@@ -2002,6 +2049,8 @@ pub(crate) fn convert_parts_with_document_donors(
     };
     let (page_w_pt, page_h_pt) = (to_pt.page_w(w as f64), to_pt.page_h(h as f64));
 
+    // Rejected/raster units must not change the page's text color stream.
+    local_inks.retain(|symbol,_| vector_owned_symbols.contains(symbol));
     let parts = crate::page_pdf::PageParts {
         raster_baseline: false,
         compact_source: None,
@@ -2019,6 +2068,7 @@ pub(crate) fn convert_parts_with_document_donors(
         dpi: policy.dpi,
         paper: seg.paper,
         ink: seg.ink,
+        local_inks,
         patches,
         owners,
         owner_cids,

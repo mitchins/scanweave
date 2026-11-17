@@ -2,7 +2,7 @@
 import collections,difflib,hashlib,json,os,pathlib,statistics,subprocess,sys,time
 import numpy as np
 import pypdfium2 as pdfium
-B=pathlib.Path('/data/coding/scanweave/work/books01');O=B/'stroke02';R=O/'pages';Q=pathlib.Path('/tmp/scanweave-books01/qualification/books01');SW=str(O/'target/release/scanweave');PY='/data/coding/scanweave/qualification/.venv/bin/python';corpus=json.loads((Q/'corpus.frozen.json').read_text());pages=[p for p in corpus['pages'] if p['split']=='dev'];assert len(pages)==36 and len({p['id'] for p in pages})==36
+B=pathlib.Path('/data/coding/scanweave/work/books01');O=B/'stroke02';R=O/'pages-extensions';Q=pathlib.Path('/tmp/scanweave-books01/qualification/books01');SW=str(O/'target/release/scanweave');PY='/data/coding/scanweave/qualification/.venv/bin/python';corpus=json.loads((Q/'corpus.frozen.json').read_text());pages=[p for p in corpus['pages'] if p['split']=='dev'];assert len(pages)==36 and len({p['id'] for p in pages})==36
 baseenv={**os.environ,'TMPDIR':str(O/'tmp'),'TESSDATA_PREFIX':str(B/'tessdata_best'),'OMP_THREAD_LIMIT':'1','OPENBLAS_NUM_THREADS':'1'}
 def text_pdf(path):
  doc=pdfium.PdfDocument(str(path));page=doc[0];tp=page.get_textpage();return tp.get_text_range()
@@ -26,8 +26,16 @@ def run_page(record):
  row.update({'status':p.returncode,'candidate_wall_seconds':time.monotonic()-t0,'candidate_argv':cmd})
  if p.returncode or not candidate.exists():out.write_text(json.dumps(row,indent=2));return row
  bt=text_pdf(baseline);ct=text_pdf(candidate);cb,cc=collections.Counter(bt),collections.Counter(ct);removed=cb-cc;added=cc-cb
- row['text_diff']={'same':bt==ct,'removed_characters':sum(removed.values()),'added_characters':sum(added.values()),'order_only':bt!=ct and cb==cc,'baseline_ufffe':bt.count('\ufffe'),'candidate_ufffe':ct.count('\ufffe'),'new_ufffe':max(0,ct.count('\ufffe')-bt.count('\ufffe'))}
+ row['text_diff']={'same':bt==ct,'removed_characters':sum(removed.values()),'added_characters':sum(added.values()),'whitespace_only':' '.join(bt.split())==' '.join(ct.split()) and bt!=ct,'order_only':bt!=ct and cb==cc,'baseline_ufffe':bt.count('\ufffe'),'candidate_ufffe':ct.count('\ufffe'),'new_ufffe':max(0,ct.count('\ufffe')-bt.count('\ufffe'))}
+ nonspace_old=collections.Counter(''.join(bt.split()));nonspace_new=collections.Counter(''.join(ct.split()));row['text_diff']['nonwhitespace_removed']=sum((nonspace_old-nonspace_new).values());row['text_diff']['nonwhitespace_added']=sum((nonspace_new-nonspace_old).values());row['text_diff']['nonwhitespace_order_changed']=(''.join(bt.split())!=''.join(ct.split()) and nonspace_old==nonspace_new)
  row['baseline']=stats(str(baseline)+'.json');row['candidate']=stats(str(candidate)+'.json');row['candidate_pdf_bytes']=candidate.stat().st_size
+ def owners(path):
+  report=json.loads(pathlib.Path(str(path)+'.json').read_text())['conversion']['page_reports'][0]
+  return {(x['span_id'],x['symbol_id']):x['owner'] for x in report['occurrences'] if x['owner']!='unmapped'}
+ old,new=owners(baseline),owners(candidate);row['ownership_moves']=dict(collections.Counter(old[k]+' -> '+new[k] for k in old.keys()&new.keys() if old[k]!=new[k]))
+ ledger=d/'extensions.json'
+ if ledger.exists():
+  v=json.loads(ledger.read_text());row['extensions']={k:v[k] for k in ('attempted','accepted','rejected_neighbour','rejected_disconnected','rejected_overlap','rejected_box')};row['extensions']['pixels']=sum(map(len,v['pixels'].values()))
  row['changed_region_dispositions']=sum(x!=y for x,y in zip(row['baseline']['regions'],row['candidate']['regions']))+abs(len(row['baseline']['regions'])-len(row['candidate']['regions']))
  a,at=pix(baseline);b,btm=pix(candidate);row['baseline_render_median_seconds']=at;row['candidate_render_median_seconds']=btm
  if a.shape==b.shape:

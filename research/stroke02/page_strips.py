@@ -4,7 +4,7 @@ from PIL import Image,ImageDraw
 sys.path.insert(0,str(pathlib.Path(__file__).resolve().parent));import crop_fit as c
 B,O=c.B,c.O;res=json.loads(pathlib.Path('/tmp/scanweave-books01/qualification/books01/phase2/results.json').read_text())['pages'];cases={'8967062':(1165,748,1236,791),'12342014':(84,360,611,442),'8967228':(1942,148,2309,205),'aventinus_grammatica_1515_0008':(400,1200,900,1270),'luther_babstum_1526_0011':(400,1700,900,1770),'euler_rechenkunst01_1738_0025':(0,500,500,570)};dest=O/'final';dest.mkdir(exist_ok=True)
 for key,box in cases.items():
- d=O/'pages'/key;candidate=d/'candidate.pdf'
+ d=O/'pages-extensions'/key;candidate=d/'candidate.pdf'
  if not candidate.exists():print(key,'missing candidate');continue
  run=json.loads((B/'phase2/runs'/key/'runs.json').read_text());row=res[run['id']]['rows'];dpi=run['dpi']
  for zoom in (1,2):

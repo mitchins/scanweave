@@ -19,6 +19,7 @@ pub mod trace;
 pub mod units;
 pub mod visual_dict;
 
+mod latent_extensions;
 mod contour_topology;
 mod curve_fit;
 

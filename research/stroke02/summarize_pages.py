@@ -1,6 +1,6 @@
 """Publish numeric development-page metrics, excluding PDF text and pixels."""
 import collections,json,pathlib,statistics
-B=pathlib.Path('/data/coding/scanweave/work/books01');P=B/'stroke02/pages';Q=pathlib.Path('/tmp/scanweave-books01/qualification/books01');pages=[p for p in json.loads((Q/'corpus.frozen.json').read_text())['pages'] if p['split']=='dev'];assert len(pages)==36
+B=pathlib.Path('/data/coding/scanweave/work/books01');P=B/'stroke02/pages-extensions';Q=pathlib.Path('/tmp/scanweave-books01/qualification/books01');pages=[p for p in json.loads((Q/'corpus.frozen.json').read_text())['pages'] if p['split']=='dev'];assert len(pages)==36
 out=[]
 for page in pages:
  k=page['id'].split('/')[-1];p=P/k/'metrics.json'
@@ -27,4 +27,4 @@ if ok:
    v=[x[name][field] for x in ok];s[name+'_'+field]={'sum':sum(v),'median':statistics.median(v)}
   s[name+'_coverage_totals']={k:sum(x[name]['coverage'][k] for x in ok) for k in ('text_ink_px_total','text_ink_px_vector','text_ink_px_raster')}
  s['byte_identical_pages']=sum(x['pdf_sha256_equal_to_baseline'] is True for x in ok);s['prepass_wall_seconds']={'sum':sum(x['prepass_wall_seconds'] for x in ok),'median':statistics.median(x['prepass_wall_seconds'] for x in ok)};s['actual_occurrence_owner_counts']={name:dict(sum((collections.Counter(x[name].get('occurrence_owner_counts',{})) for x in ok),collections.Counter())) for name in ('baseline','candidate')};s['baseline_ufffe']=sum(x['text_diff']['baseline_ufffe'] for x in ok);s['candidate_ufffe']=sum(x['text_diff']['candidate_ufffe'] for x in ok);s['text_changed_pages']=sum(not x['text_diff']['same'] for x in ok);s['new_ufffe']=sum(x['text_diff']['new_ufffe'] for x in ok);s['changed_region_pages']=sum(x['changed_region_dispositions']>0 for x in ok);s['pages_with_latent_trace_mentions']=sum(x['latent_trace_mentions']>0 for x in ok);s['mean_page_150dpi_delta']=statistics.mean(x['render_diff_150dpi']['mean_absolute_channel_delta'] for x in ok if 'mean_absolute_channel_delta' in x['render_diff_150dpi'])
-result={'summary':s,'pages':out};pathlib.Path(__file__).with_name('results-pages.json').write_text(json.dumps(result,indent=2)+'\n');print(json.dumps(s,indent=2))
+result={'summary':s,'pages':out};pathlib.Path(__file__).with_name('results-extensions.json').write_text(json.dumps(result,indent=2)+'\n');print(json.dumps(s,indent=2))

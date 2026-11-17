@@ -629,6 +629,7 @@ fn emit_text_runs(
     ink: [u8; 3],
     raster_baseline: bool,
     sharing_variants: Option<&[Option<usize>]>,
+    local_inks: Option<&HashMap<String, [u8; 3]>>,
 ) {
     let span_map: std::collections::HashMap<&str, &str> = span_texts
         .iter()
@@ -739,6 +740,10 @@ fn emit_text_runs(
                             TextRenderingMode::Fill
                         });
                     }
+                    if let Some(colors) = local_inks.filter(|_| !raster_baseline) {
+                        let color = colors.get(&occurrences[i].4).copied().unwrap_or(ink);
+                        c.set_fill_rgb(color[0] as f32 / 255.0, color[1] as f32 / 255.0, color[2] as f32 / 255.0);
+                    }
                     select_sharing_font(c, i, sharing_variants);
                     c.set_text_matrix(glyph_matrix(&shapes[*gidx], bbox_px, xf));
                     let cid = *cid + 1;
@@ -823,6 +828,10 @@ fn emit_text_runs(
         let sid = occ.3.as_str();
         if !emitted_spans.contains(sid) {
             let (gidx, cid, bbox_px, _, _, _) = &occurrences[i];
+            if let Some(colors) = local_inks.filter(|_| !raster_baseline) {
+                let color = colors.get(&occurrences[i].4).copied().unwrap_or(ink);
+                c.set_fill_rgb(color[0] as f32 / 255.0, color[1] as f32 / 255.0, color[2] as f32 / 255.0);
+            }
             select_sharing_font(c, i, sharing_variants);
             c.set_text_matrix(glyph_matrix(&shapes[*gidx], bbox_px, xf));
             let cid = *cid + 1;
@@ -1113,6 +1122,7 @@ pub fn assemble_with_options(
         ink,
         false,
         None,
+        None,
     );
 
     c.end_text();
@@ -1242,6 +1252,8 @@ pub struct PageParts {
     pub to_pt: PageTransform,
     pub paper: [u8; 3],
     pub ink: [u8; 3],
+    /// Research-only per-occurrence color; empty preserves stock serialization.
+    pub local_inks: HashMap<String, [u8; 3]>,
     pub patches: Vec<Patch>,
     pub owners: Vec<Owner>,
     pub owner_cids: Vec<u32>,
@@ -1660,6 +1672,7 @@ fn assemble_document_impl(
             p.ink,
             p.raster_baseline || p.compact_source.is_some(),
             sharing.map(|s| s.occurrence_variants[i].as_slice()),
+            if p.local_inks.is_empty() { None } else { Some(&p.local_inks) },
         );
         c.end_text();
         let content_bytes = c.finish();
@@ -1768,6 +1781,7 @@ mod image_resource_tests {
             },
             paper: [255; 3],
             ink: [0; 3],
+            local_inks: HashMap::new(),
             patches,
             owners: vec![],
             owner_cids: vec![],
