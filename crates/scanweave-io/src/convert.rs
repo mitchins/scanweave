@@ -880,11 +880,23 @@ pub(crate) fn convert_parts_with_document_donors(
                 }
             }
         }
-        let eligible:std::collections::HashSet<String>=local_inks.keys().cloned().collect();
+        let mut eligible:std::collections::HashSet<String>=local_inks.keys().cloned().collect();
+        // The measurement wrapper supplies per-symbol declines after rendering
+        // the actual trial PDF. Absence of this protocol keeps the old veto.
+        let verifier=std::env::var_os("SCANWEAVE_STROKE_PDF_VERIFIER").is_some();
+        if verifier {
+            if let Ok(data)=std::fs::read(path.with_file_name("blocked.json")) {
+                if let Ok(blocked)=serde_json::from_slice::<Vec<String>>(&data) {
+                    for symbol in blocked {eligible.remove(&symbol);}
+                }
+            }
+        }
         let veto=image::open(path.with_file_name("paper-veto.png")).ok().map(|im|im.to_luma8())
             .filter(|im|im.width()==w && im.height()==h);
+        let raw=if verifier {image::open(path.with_file_name("raw-coverage.png")).ok().map(|im|im.to_luma8()).filter(|im|im.width()==w && im.height()==h)} else {None};
         let ledger=if let Some(veto)=veto.as_ref() {
-            crate::latent_extensions::apply(&mut plan,&seg,map,veto,&eligible)
+            if let Some(raw)=raw.as_ref() {crate::latent_extensions::apply_with_pdf_verifier(&mut plan,&seg,map,veto,&eligible,raw)}
+            else {crate::latent_extensions::apply(&mut plan,&seg,map,veto,&eligible)}
         } else {crate::latent_extensions::ExtensionLedger::default()};
         if !crate::latent_extensions::validate(&plan,&seg,&ledger) {
             return Err("experimental extension ownership invariant failed".into());

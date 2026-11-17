@@ -158,6 +158,29 @@ pub(crate) fn apply(
     paper_veto: &GrayImage,
     eligible: &HashSet<String>,
 ) -> ExtensionLedger {
+    apply_inner(plan, seg, coverage, paper_veto, eligible, None)
+}
+
+/// Only the measurement wrapper may enable this: it must render the resulting
+/// PDF and retry failed symbols with the stock path before publishing output.
+pub(crate) fn apply_with_pdf_verifier(
+    plan: &mut OwnershipPlan,
+    seg: &Segmentation,
+    coverage: &GrayImage,
+    paper_veto: &GrayImage,
+    eligible: &HashSet<String>,
+    raw: &GrayImage,
+) -> ExtensionLedger {
+    apply_inner(plan, seg, coverage, paper_veto, eligible, Some(raw))
+}
+fn apply_inner(
+    plan: &mut OwnershipPlan,
+    seg: &Segmentation,
+    coverage: &GrayImage,
+    paper_veto: &GrayImage,
+    eligible: &HashSet<String>,
+    raw: Option<&GrayImage>,
+) -> ExtensionLedger {
     let original = labels(seg);
     let owners = plan.unit_of_component();
     let mut ledger = ExtensionLedger::default();
@@ -202,9 +225,56 @@ pub(crate) fn apply(
                 .any(|x| paper_veto.get_pixel(x as u32, y as u32)[0] != 0)
         });
         if vetoed {
-            ledger.rejected_veto += 1;
-            decision(&mut ledger, u, extra.len(), "paper_veto_in_unit_footprint");
-            continue;
+            let Some(raw) = raw else {
+                ledger.rejected_veto += 1;
+                decision(
+                    &mut ledger,
+                    u,
+                    extra.len(),
+                    "paper_veto_needs_pdf_verification",
+                );
+                continue;
+            };
+            // Removing the veto cannot split a proposed connected stroke, nor
+            // may it erase an original foreground pixel. The verifier checks
+            // the final rendered PDF separately, after actual glyph tracing.
+            let mut before = GrayImage::new(u.crop_w as u32, u.crop_h as u32);
+            let mut after = GrayImage::new(u.crop_w as u32, u.crop_h as u32);
+            let mut veto_original = false;
+            for yy in 0..u.crop_h {
+                for xx in 0..u.crop_w {
+                    let i = yy * u.crop_w + xx;
+                    let x = (x0 + xx) as u32;
+                    let y = (y0 + yy) as u32;
+                    let veto = paper_veto.get_pixel(x, y)[0] != 0;
+                    veto_original |= veto && u.mask[i];
+                    let b = u.mask[i] || raw.get_pixel(x, y)[0] >= 128;
+                    before.put_pixel(xx as u32, yy as u32, Luma([if b { 255 } else { 0 }]));
+                    after.put_pixel(
+                        xx as u32,
+                        yy as u32,
+                        Luma([if proposed[i] && !veto { 255 } else { 0 }]),
+                    );
+                    if veto {
+                        proposed[i] = false;
+                    }
+                }
+            }
+            extra.retain(|&p| {
+                paper_veto.get_pixel((p % seg.width) as u32, (p / seg.width) as u32)[0] == 0
+            });
+            let count = |im: &GrayImage| {
+                connected_components(im, Connectivity::Eight, Luma([0u8]))
+                    .pixels()
+                    .map(|p| p[0])
+                    .max()
+                    .unwrap_or(0)
+            };
+            if veto_original || count(&after) > count(&before) || extra.is_empty() {
+                ledger.rejected_veto += 1;
+                decision(&mut ledger, u, extra.len(), "paper_veto_disconnects_ink");
+                continue;
+            }
         }
         // If a candidate stroke continues immediately outside the tight unit
         // box, clipping it could break that glyph: retain the stock unit.
@@ -516,6 +586,44 @@ mod tests {
         assert_eq!(ledger.rejected_veto, 1);
         assert_eq!(before, plan.owned[0].unit.mask);
         assert!(validate(&plan, &seg, &ledger));
+    }
+    #[test]
+    fn verifier_can_propose_when_veto_nearby_without_dropping_ink() {
+        let (seg, mut plan, c) = fixture(false);
+        let mut veto = GrayImage::new(seg.width as u32, seg.height as u32);
+        veto.put_pixel(6, 6, Luma([255]));
+        let ledger = apply_with_pdf_verifier(
+            &mut plan,
+            &seg,
+            &c,
+            &veto,
+            &["x".to_string()].into_iter().collect(),
+            &c,
+        );
+        assert_eq!(ledger.accepted, 1);
+        assert!(validate(&plan, &seg, &ledger));
+    }
+    #[test]
+    fn verifier_declines_if_removing_veto_splits_proposal() {
+        let (seg, mut plan, mut c) = fixture(false);
+        c.put_pixel(6, 5, Luma([0]));
+        c.put_pixel(7, 5, Luma([255]));
+        let mut raw = c.clone();
+        raw.put_pixel(6, 5, Luma([255]));
+        let mut veto = GrayImage::new(seg.width as u32, seg.height as u32);
+        veto.put_pixel(6, 5, Luma([255]));
+        let before = plan.owned[0].unit.mask.clone();
+        let ledger = apply_with_pdf_verifier(
+            &mut plan,
+            &seg,
+            &c,
+            &veto,
+            &["x".to_string()].into_iter().collect(),
+            &raw,
+        );
+        assert_eq!(ledger.accepted, 0);
+        assert_eq!(ledger.rejected_veto, 1);
+        assert_eq!(plan.owned[0].unit.mask, before);
     }
     #[test]
     fn disconnected_proposal_declines_unchanged() {
