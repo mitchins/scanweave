@@ -13,7 +13,7 @@ for key,info in c.CASES.items():
   for title,row in [('source','src'),('ScanWeave #39','sw-E')]:
    geometry=None if row=='src' else rows[row]['geometry'];rows_at_zoom.append((title,c.pdf_crop(run['rows'][row]['path'],key,target,dpi,zoom,geometry)))
   rows_at_zoom.append(('improved ScanWeave: unavailable',None))
-  sigma=1.22 if key=='8967062' else .93;doc=c.pdfium.PdfDocument(str(O/'crops'/f'{key}-joint-layers-{sigma:.2f}.pdf'));rows_at_zoom.append(('local-ink layered crop PDF (not ScanWeave)',doc[0].render(scale=dpi*zoom/72).to_pil().convert('RGB')))
+  sigma=.7 if key=='8967062' else .93;style='r3' if key=='8967062' else 'layers';doc=c.pdfium.PdfDocument(str(O/'crops'/f'{key}-joint-{style}-{sigma:.2f}.pdf'));rows_at_zoom.append(('experimental crop PDF (not ScanWeave)',doc[0].render(scale=dpi*zoom/72).to_pil().convert('RGB')))
   for title,row in [('MRC','mrc-M'),('Adobe (registered)','adobe-E')]:
    if row=='adobe-E':
     paths=[B/'runs/adobe'/f'{key}.adobe.pdf',B/'runs/adobe-p2'/f'{key}.adobe.pdf'];path=next((p for p in paths if p.exists()),None)

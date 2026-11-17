@@ -41,3 +41,16 @@ class PdfCoordinateTest(unittest.TestCase):
         self.assertLess(abs((ink*xx).sum()/ink.sum() - 19.5), .1)
         self.assertLess(abs((ink*yy).sum()/ink.sum() - 15.5), .1)
         self.assertLess(np.abs(ink-mask).mean(), .02)
+
+class RasterFallbackTest(unittest.TestCase):
+    def test_counter_group_remains_source_raster(self):
+        import json
+        from PIL import Image
+        import pypdfium2
+        import joint_render
+        result = joint_render.generate('8967062', .7, 'r3')
+        self.assertTrue(any(x['bbox']==[1179,762,1193,779] for x in result['fallback']))
+        run = json.loads((joint_render.B/'phase2/runs/8967062/runs.json').read_text())
+        out = np.asarray(pypdfium2.PdfDocument(result['pdf'])[0].render(scale=run['dpi']/72).to_pil().convert('RGB'))
+        source = np.asarray(Image.open(joint_render.O/'native/8967062-000.png').convert('RGB'))
+        np.testing.assert_array_equal(out[14:31,14:28], source[762:779,1179:1193])
