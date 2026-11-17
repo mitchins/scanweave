@@ -44,6 +44,11 @@ def generate(key,sigma,style):
   # The counter-favoured alternative uses a lower local isocontour only for
   # the empirically located counter region; its actual rescan must still pass.
   threshold=({'counter':.25,'counter35':.35,'counter40':.40}.get(style,.5) if key=='8967062' and idx==0 and COUNTER['decision']=='counter' else .5)
+  if style=='holelayers' and key=='8967062' and idx==0:
+   # Preserve the observed counter hypothesis in every tonal layer.
+   for hx,hy in COUNTER['hole_pixel_coords_source']:
+    xx=hx-(cx+xa);yy=hy-(cy+ya)
+    if 0<=yy<latent.shape[0] and 0<=xx<latent.shape[1]:latent[yy,xx]=0
   binary=latent>=threshold
   relevant=groups
   eligible,forbidden,small,cross=c.protected_components(binary,relevant,cx+xa,cy+ya);support=ndi.binary_dilation(eligible,iterations=3)&allowed&~forbidden;latent*=ndi.binary_dilation(eligible,iterations=2)&~forbidden
@@ -62,7 +67,7 @@ def generate(key,sigma,style):
  # not a ScanWeave PDF and intentionally has no OCR layer.
  doc=fitz.open();page=doc.new_page(width=(x1-x0)*72/dpi,height=(y1-y0)*72/dpi);buf=io.BytesIO();Image.fromarray(c.st.srgb(base)[y0-cy:y1-cy,x0-cx:x1-cx]).save(buf,format='PNG');page.insert_image(page.rect,stream=buf.getvalue())
  for job in jobs:
-  levels=[(.20,.20),(.40,.25),(.60,1/3),(.80,.5)] if style=='layers' else [(job['threshold'],1.)]
+  levels=[(.20,.20),(.40,.25),(.60,1/3),(.80,.5)] if style in ('layers','holelayers') else [(job['threshold'],1.)]
   for level,opacity in levels:
    shape=page.new_shape();count=0
    for ring in measure.find_contours(np.pad(job['up'],1),level):
@@ -92,7 +97,7 @@ def main():
  all_results={}
  for key in c.CASES:
   sigmas=[.3,.5,.7,.93,1.22]
-  all_results[key]=[generate(key,s,style) for style in (['solid','layers','counter','counter35','counter40'] if key=='8967062' else ['solid','layers']) for s in sigmas]
+  all_results[key]=[generate(key,s,style) for style in (['solid','layers','counter','counter35','counter40','holelayers'] if key=='8967062' else ['solid','layers']) for s in sigmas]
   print(key, len(all_results[key]), 'candidate PDFs', flush=True)
  out={'runs':all_results,'noise_note':'legacy rescan score is diagnostic only, not an acceptance test; use oracle-calibration and fair-compare'}
  (O/'joint-render.json').write_text(json.dumps(out,indent=2))
