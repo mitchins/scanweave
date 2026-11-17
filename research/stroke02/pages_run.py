@@ -35,7 +35,7 @@ def run_page(record):
  old,new=owners(baseline),owners(candidate);row['ownership_moves']=dict(collections.Counter(old[k]+' -> '+new[k] for k in old.keys()&new.keys() if old[k]!=new[k]))
  ledger=d/'extensions.json'
  if ledger.exists():
-  v=json.loads(ledger.read_text());row['extensions']={k:v[k] for k in ('attempted','accepted','rejected_neighbour','rejected_disconnected','rejected_overlap','rejected_box')};row['extensions']['pixels']=sum(map(len,v['pixels'].values()))
+  v=json.loads(ledger.read_text());row['extensions']={k:v[k] for k in ('attempted','accepted','rejected_neighbour','rejected_disconnected','rejected_overlap','rejected_box','rejected_veto')};row['extensions']['pixels']=sum(map(len,v['pixels'].values()))
  row['changed_region_dispositions']=sum(x!=y for x,y in zip(row['baseline']['regions'],row['candidate']['regions']))+abs(len(row['baseline']['regions'])-len(row['candidate']['regions']))
  a,at=pix(baseline);b,btm=pix(candidate);row['baseline_render_median_seconds']=at;row['candidate_render_median_seconds']=btm
  if a.shape==b.shape:

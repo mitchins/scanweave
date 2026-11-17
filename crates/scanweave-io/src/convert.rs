@@ -881,14 +881,18 @@ pub(crate) fn convert_parts_with_document_donors(
             }
         }
         let eligible:std::collections::HashSet<String>=local_inks.keys().cloned().collect();
-        let ledger=crate::latent_extensions::apply(&mut plan,&seg,map,&eligible);
+        let veto=image::open(path.with_file_name("paper-veto.png")).ok().map(|im|im.to_luma8())
+            .filter(|im|im.width()==w && im.height()==h);
+        let ledger=if let Some(veto)=veto.as_ref() {
+            crate::latent_extensions::apply(&mut plan,&seg,map,veto,&eligible)
+        } else {crate::latent_extensions::ExtensionLedger::default()};
         if !crate::latent_extensions::validate(&plan,&seg,&ledger) {
             return Err("experimental extension ownership invariant failed".into());
         }
         local_inks.retain(|symbol,_|ledger.symbols.contains(symbol));
         let bytes=serde_json::to_vec_pretty(&ledger).map_err(|e|e.to_string())?;
         std::fs::write(path.with_file_name("extensions.json"),bytes).map_err(|e|e.to_string())?;
-        eprintln!("STROKE_EXTENSIONS attempted={} accepted={} near_other={} disconnected={} overlap={} box={} pixels={}",ledger.attempted,ledger.accepted,ledger.rejected_neighbour,ledger.rejected_disconnected,ledger.rejected_overlap,ledger.rejected_box,ledger.pixels.values().map(Vec::len).sum::<usize>());
+        eprintln!("STROKE_EXTENSIONS attempted={} accepted={} near_other={} disconnected={} overlap={} box={} veto={} pixels={}",ledger.attempted,ledger.accepted,ledger.rejected_neighbour,ledger.rejected_disconnected,ledger.rejected_overlap,ledger.rejected_box,ledger.rejected_veto,ledger.pixels.values().map(Vec::len).sum::<usize>());
         extension_ledger = Some(ledger);
     }
     if policy.profile == "clearscan" {

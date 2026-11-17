@@ -10,7 +10,7 @@ B,O=c.B,c.O;root=O/'pages-extensions';root.mkdir(exist_ok=True); key=sys.argv[1]
 source=run['rows']['src']['path'];subprocess.run(['pdfimages','-f','1','-l','1','-png',source,str(dest/'source')],check=True,stdout=subprocess.DEVNULL,stderr=subprocess.PIPE)
 files=list(dest.glob('source-*.png'))
 if len(files)!=1:raise RuntimeError(f'expected one original image, found {len(files)}')
-rgb=np.asarray(Image.open(files[0]).convert('RGB'));height,width=rgb.shape[:2];coverage=np.zeros((height,width),np.uint8);lines=html.parse(str(B/'phase2/runs'/key/'selected.hocr'));records=[];declined=[]
+rgb=np.asarray(Image.open(files[0]).convert('RGB'));height,width=rgb.shape[:2];coverage=np.zeros((height,width),np.uint8);paper_veto=np.zeros((height,width),np.uint8);lines=html.parse(str(B/'phase2/runs'/key/'selected.hocr'));records=[];declined=[]
 pat=re.compile(r'\bbbox (\d+) (\d+) (\d+) (\d+)');chars=re.compile(r'x_bboxes (\d+) (\d+) (\d+) (\d+)')
 regions=[]
 for line in lines.xpath('//*[contains(concat(" ",normalize-space(@class)," ")," ocr_line ")]'):
@@ -82,7 +82,7 @@ for (left,top,right,bottom),source_boxes in regions:
   continue
  # Enclosed near-paper pixels remain raster evidence, never latent ink.
  noise=max(.005,float(1.4826*np.median(np.abs(lum[~allowed]-np.median(lum[~allowed]))))) if (~allowed).any() else .01
- ink=alpha>.25;holes=ndi.binary_fill_holes(ink,structure=np.ones((3,3)))&~ink;veto=holes&(np.abs(lum)<=2*noise);latent[veto]=0
+ ink=alpha>.25;holes=ndi.binary_fill_holes(ink,structure=np.ones((3,3)))&~ink;veto=holes&(np.abs(lum)<=2*noise);latent[veto]=0;paper_veto[y0:y1,x0:x1][veto]=255
  target=coverage[y0:y1,x0:x1];np.maximum(target,np.rint(latent*255).astype(np.uint8),out=target)
  records.append({'bbox':[x0,y0,x1,y1],'sigma':sigma,'t':strength,'ink_rgb':ink_rgb,'edges':len(widths),'noise_proxy':noise,'veto_pixels':int(veto.sum()),'boxes':len(boxes)})
-Image.fromarray(coverage).save(dest/'coverage.png',compress_level=3);(dest/'prepass.json').write_text(json.dumps({'key':key,'source':source,'dims':[width,height],'lines':records,'declined':declined,'wall_seconds':time.monotonic()-t0},indent=2));files[0].unlink();print(key,'lines',len(records),'seconds',round(time.monotonic()-t0,2),flush=True)
+coverage[paper_veto>0]=0;Image.fromarray(coverage).save(dest/'coverage.png',compress_level=3);Image.fromarray(paper_veto).save(dest/'paper-veto.png',compress_level=3);(dest/'prepass.json').write_text(json.dumps({'key':key,'source':source,'dims':[width,height],'lines':records,'declined':declined,'wall_seconds':time.monotonic()-t0},indent=2));files[0].unlink();print(key,'lines',len(records),'seconds',round(time.monotonic()-t0,2),flush=True)

@@ -15,6 +15,7 @@ pub(crate) struct ExtensionLedger {
     pub rejected_disconnected: usize,
     pub rejected_overlap: usize,
     pub rejected_box: usize,
+    pub rejected_veto: usize,
     pub decisions: Vec<UnitDecision>,
 }
 
@@ -112,6 +113,7 @@ pub(crate) fn apply(
     plan: &mut OwnershipPlan,
     seg: &Segmentation,
     coverage: &GrayImage,
+    paper_veto: &GrayImage,
     eligible: &HashSet<String>,
 ) -> ExtensionLedger {
     let original = labels(seg);
@@ -153,6 +155,17 @@ pub(crate) fn apply(
             continue;
         }
         ledger.attempted += 1;
+        // Reserve one pixel for the trace's subpixel contour excursion, plus
+        // the two-pixel PSF footprint; affected units retain stock raster.
+        let vetoed = (y0.saturating_sub(3)..(y0 + u.crop_h + 3).min(seg.height)).any(|y| {
+            (x0.saturating_sub(3)..(x0 + u.crop_w + 3).min(seg.width))
+                .any(|x| paper_veto.get_pixel(x as u32, y as u32)[0] != 0)
+        });
+        if vetoed {
+            ledger.rejected_veto += 1;
+            decision(&mut ledger, u, extra.len(), "paper_veto_in_unit_footprint");
+            continue;
+        }
         // If a candidate stroke continues immediately outside the tight unit
         // box, clipping it could break that glyph: retain the stock unit.
         let mut clipped = false;
@@ -358,6 +371,7 @@ mod tests {
             &mut plan,
             &seg,
             &c,
+            &GrayImage::new(seg.width as u32, seg.height as u32),
             &["x".to_string()].into_iter().collect(),
         );
         assert_eq!(ledger.accepted, 1);
@@ -374,6 +388,7 @@ mod tests {
             &mut plan,
             &seg,
             &c,
+            &GrayImage::new(seg.width as u32, seg.height as u32),
             &["x".to_string()].into_iter().collect(),
         );
         assert_eq!(ledger.accepted, 0);
@@ -399,6 +414,7 @@ mod tests {
             &mut plan,
             &seg,
             &c,
+            &GrayImage::new(seg.width as u32, seg.height as u32),
             &["x".to_string()].into_iter().collect(),
         );
         assert_eq!(ledger.accepted, 0);
@@ -417,11 +433,30 @@ mod tests {
             &mut plan,
             &seg,
             &c,
+            &GrayImage::new(seg.width as u32, seg.height as u32),
             &["x".to_string()].into_iter().collect(),
         );
         assert_eq!(ledger.accepted, 0);
         assert_eq!(ledger.rejected_box, 1);
         assert_eq!(before, plan.owned[0].unit.mask);
+    }
+    #[test]
+    fn paper_veto_in_psf_footprint_declines_unchanged() {
+        let (seg, mut plan, c) = fixture(false);
+        let before = plan.owned[0].unit.mask.clone();
+        let mut veto = GrayImage::new(seg.width as u32, seg.height as u32);
+        veto.put_pixel(7, 6, Luma([255]));
+        let ledger = apply(
+            &mut plan,
+            &seg,
+            &c,
+            &veto,
+            &["x".to_string()].into_iter().collect(),
+        );
+        assert_eq!(ledger.accepted, 0);
+        assert_eq!(ledger.rejected_veto, 1);
+        assert_eq!(before, plan.owned[0].unit.mask);
+        assert!(validate(&plan, &seg, &ledger));
     }
     #[test]
     fn disconnected_proposal_declines_unchanged() {
@@ -434,6 +469,7 @@ mod tests {
             &mut plan,
             &seg,
             &c,
+            &GrayImage::new(seg.width as u32, seg.height as u32),
             &["x".to_string()].into_iter().collect(),
         );
         assert_eq!(ledger.accepted, 0);
