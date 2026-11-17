@@ -65,9 +65,9 @@ def analyze(key):
  config=c.CASES[key];target=config['target'];bounds=config['context'];cx,cy,_,_=bounds;native=Image.open(O/'native'/f'{key}-000.png').convert('RGB');rgb=np.asarray(native.crop(bounds));z=c.st.reconstruction(rgb,237.8 if key=='8967062' else 204.3);obs=c.st.linear(rgb);bg=z['background'];residual=(bg-obs)@L
  # Ink direction from centre observations in the region, not another line.
  groups=c.get_groups(key,target);out=[]
- if key=='8967062':regions=groups;sigmas=[.93,1.1,1.22,1.35,1.48]
+ if key=='8967062':regions=groups;sigmas=[.3,.5,.7,.93,1.22]
  else:
-  centres=np.array([(g[1]+g[3])/2 for g in groups]);pivot=float(np.median(centres));parts=[[g for g in groups if (g[1]+g[3])/2<=pivot],[g for g in groups if (g[1]+g[3])/2>pivot]];regions=[[min(g[0] for g in q),min(g[1] for g in q),max(g[2] for g in q),max(g[3] for g in q)] for q in parts if q];sigmas=[.65,.8,.93,1.06,1.18]
+  centres=np.array([(g[1]+g[3])/2 for g in groups]);pivot=float(np.median(centres));parts=[[g for g in groups if (g[1]+g[3])/2<=pivot],[g for g in groups if (g[1]+g[3])/2>pivot]];regions=[[min(g[0] for g in q),min(g[1] for g in q),max(g[2] for g in q),max(g[3] for g in q)] for q in parts if q];sigmas=[.3,.5,.7,.93,1.22]
  for a,b,d,e in regions:
   x0=max(0,a-cx-5);y0=max(0,b-cy-5);x1=min(rgb.shape[1],d-cx+5);y1=min(rgb.shape[0],e-cy+5);rr=residual[y0:y1,x0:x1];m=z['alpha'][y0:y1,x0:x1]>.28
   # Outside candidate glyph ink, local residual dispersion estimates texture,
@@ -78,7 +78,8 @@ def analyze(key):
   fit=profile_fit(rr,m,sigmas,float(vec@L),t_max);grid=fit['grid'];best=min(grid,key=lambda x:x['rmse']) if grid else None
   # Statistical tolerance includes estimated nuisance variation and finite profile
   # sampling; report the raw differences, rather than infer a calibrated posterior.
-  consistent=[x for x in grid if x['rmse']<=noise] if grid else []
+  # No acceptance threshold: observed-paper MAD is not an oracle residual.
+  consistent=[]
   out.append({'bbox':[a,b,d,e],'noise_linear_mad':noise,'core_direction_linear':vec.tolist(),'core_pixels':int(core.sum()),'paper_linear':paper.tolist(),'t_max_physical':t_max,'profiles':fit['n_profiles'],'free_amplitude':fit.get('free_amplitude',[]),'best':best,'within_noise':consistent,'grid':grid})
  return out
 

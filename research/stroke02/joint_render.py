@@ -43,7 +43,7 @@ def generate(key,sigma,style):
   allowed=np.zeros_like(latent,bool); xlo=max(0,a-cx-xa-1);xhi=min(latent.shape[1],d-cx-xa+1);ylo=max(0,b-cy-ya-1);yhi=min(latent.shape[0],e-cy-ya+1);allowed[ylo:yhi,xlo:xhi]=True;latent*=allowed
   # The counter-favoured alternative uses a lower local isocontour only for
   # the empirically located counter region; its actual rescan must still pass.
-  threshold=.25 if style=='counter' and key=='8967062' and idx==0 and COUNTER['decision']=='counter' else .5
+  threshold=({'counter':.25,'counter35':.35,'counter40':.40}.get(style,.5) if key=='8967062' and idx==0 and COUNTER['decision']=='counter' else .5)
   binary=latent>=threshold
   relevant=groups
   eligible,forbidden,small,cross=c.protected_components(binary,relevant,cx+xa,cy+ya);support=ndi.binary_dilation(eligible,iterations=3)&allowed&~forbidden;latent*=ndi.binary_dilation(eligible,iterations=2)&~forbidden
@@ -80,26 +80,20 @@ def generate(key,sigma,style):
  # The 4x render is diagnostic only; visual comparisons remain 1x and 2x.
  actual4=np.asarray(pdfium.PdfDocument(str(path))[0].render(scale=dpi*4/72).to_pil().convert('RGB'))[:hh*4,:ww*4];actual4=c.st.linear(actual4);paper4=ndi.zoom(Btarget,(4,4,1),order=1)[:hh*4,:ww*4]
  for job in jobs:
-  a,b,d,e=job['bbox'];xx=slice(max(0,a-x0),min(ww,d-x0));yy=slice(max(0,b-y0),min(hh,e-y0));direction=job['direction'];t=job['t'];di=direction*t;denom=max(float(di@di),1e-8);coverage=np.clip(((Btarget-rendered)*di).sum(-1)/denom,0,1);prediction=Btarget-di*ndi.gaussian_filter(coverage,sigma)[...,None];err=((prediction-Itarget)@np.array([.2126,.7152,.0722]))[yy,xx];job['pdf_rescan_luma_rmse']=float(np.sqrt(np.mean(err**2)));job['within_noise']=job['pdf_rescan_luma_rmse']<=job['noise'];job['ink_srgb']=c.st.srgb(job['ink']).tolist()
+  a,b,d,e=job['bbox'];xx=slice(max(0,a-x0),min(ww,d-x0));yy=slice(max(0,b-y0),min(hh,e-y0));direction=job['direction'];t=job['t'];di=direction*t;denom=max(float(di@di),1e-8);coverage=np.clip(((Btarget-rendered)*di).sum(-1)/denom,0,1);prediction=Btarget-di*ndi.gaussian_filter(coverage,sigma)[...,None];err=((prediction-Itarget)@np.array([.2126,.7152,.0722]))[yy,xx];job['pdf_rescan_luma_rmse']=float(np.sqrt(np.mean(err**2)));job['ink_srgb']=c.st.srgb(job['ink']).tolist()
   cov4=np.clip(((paper4-actual4)*di).sum(-1)/denom,0,1);y4=slice(max(0,b-y0)*4,min(hh,e-y0)*4);x4=slice(max(0,a-x0)*4,min(ww,d-x0)*4);region_cov=cov4[y4,x4];job['pdf_mass_px']=float(region_cov.sum()/16);mask4=region_cov>=.5;_,n4=ndi.label(mask4,np.ones((3,3)));_,h4=ndi.label(ndi.binary_fill_holes(mask4)&~mask4);job['pdf_components']=int(n4);job['pdf_holes']=int(h4)
  for job in jobs:
   for k in ['direction','paper','ink','latent','up','mask','_global']:job.pop(k)
  return {'pdf':str(path),'groups':jobs}
 
 def main():
- all_results={}; finals={}
+ # Candidate creation only. The old within-MAD gate was invalid and is not
+ # used for acceptance; fair_compare compares all PDFs with the same blur fit.
+ all_results={}
  for key in c.CASES:
-  sigmas=[.93,1.1,1.22,1.35,1.48] if key=='8967062' else [.65,.8,.93,1.06,1.18]; runs=[generate(key,s,style) for style in (['solid','layers','counter'] if key=='8967062' else ['solid','layers']) for s in sigmas];all_results[key]=runs; decisions=[]
-  for idx,reg in enumerate(DATA[key]):
-   consistent=[];by_style={}
-   for style in (['solid','layers','counter'] if key=='8967062' else ['solid','layers']):
-    available=[j for run in runs for j in run['groups'] if j['idx']==idx and j['style']==style];signatures={(x['pdf_components'],x['pdf_holes']) for x in available};stable=len(available)==len(sigmas) and len(signatures)==1
-    passing=[x for x in available if x['within_noise'] and stable and not x['join'] and x['cross']==0 and (key!='8967062' or idx!=0 or COUNTER['decision']!='counter' or x['pdf_holes']>=1)]
-    consistent.extend(passing);by_style[style]={'topology_stable':stable,'topology_signatures':[list(x) for x in sorted(signatures)],'passing':len(passing)}
-   best=min(consistent,key=lambda x:(x['pdf_mass_px'],x['width_mad'] if x['width_mad'] is not None else float('inf'))) if consistent else None
-   decisions.append({'bbox':reg['bbox'],'sigma_grid':sigmas,'by_style':by_style,'counter_evidence':COUNTER['decision'] if key=='8967062' and idx==0 else None,'consistent_set_size':len(consistent),'selected_sigma':best['sigma'] if best else None,'selected_style':best['style'] if best else None,'decision':'vector' if best else 'raster'})
-  finals[key]=decisions
-  print(key,json.dumps(decisions),flush=True)
- out={'runs':all_results,'decisions':finals,'noise_note':'local paper residual MAD; not independently measured sensor noise; PDF raster fallback near boundaries may be reblurred','policy':'within noise + same component/hole counts over full measured sigma grid + no cross-group component + counter test; minimum mass among passing'}
+  sigmas=[.3,.5,.7,.93,1.22]
+  all_results[key]=[generate(key,s,style) for style in (['solid','layers','counter','counter35','counter40'] if key=='8967062' else ['solid','layers']) for s in sigmas]
+  print(key, len(all_results[key]), 'candidate PDFs', flush=True)
+ out={'runs':all_results,'noise_note':'legacy rescan score is diagnostic only, not an acceptance test; use oracle-calibration and fair-compare'}
  (O/'joint-render.json').write_text(json.dumps(out,indent=2))
 if __name__=='__main__':main()
