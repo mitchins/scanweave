@@ -1,0 +1,55 @@
+{
+  "page": "finebooks/conchologiaiconi05reev/8967062",
+  "global_paper_luma": 237.7876,
+  "global_threshold": 60,
+  "candidate_mask": "existing STROKE-02 line-pooled sidecar, coverage >= 0.5; diagnostic only, not accepted as ground truth",
+  "source_global_components": 1562,
+  "regions": [
+    {
+      "group_index": 0,
+      "bbox": [
+        1179,
+        762,
+        1193,
+        779
+      ],
+      "original_ink_pixels": 34,
+      "candidate_local_mask_pixels": 92,
+      "candidate_added_pixels_outside_original_foreground": 58,
+      "original_pixels_excluded_by_candidate": 0,
+      "original_foreground_components_intersecting_box": 3,
+      "added_pixels_with_original_component_label": 0
+    },
+    {
+      "group_index": 1,
+      "bbox": [
+        1196,
+        764,
+        1204,
+        778
+      ],
+      "original_ink_pixels": 10,
+      "candidate_local_mask_pixels": 49,
+      "candidate_added_pixels_outside_original_foreground": 39,
+      "original_pixels_excluded_by_candidate": 0,
+      "original_foreground_components_intersecting_box": 2,
+      "added_pixels_with_original_component_label": 0
+    },
+    {
+      "group_index": 2,
+      "bbox": [
+        1205,
+        761,
+        1220,
+        780
+      ],
+      "original_ink_pixels": 23,
+      "candidate_local_mask_pixels": 92,
+      "candidate_added_pixels_outside_original_foreground": 69,
+      "original_pixels_excluded_by_candidate": 0,
+      "original_foreground_components_intersecting_box": 7,
+      "added_pixels_with_original_component_label": 0
+    }
+  ],
+  "finding": "build_plan creates component IDs only for original fg pixels; visual_invariant_ok checks IDs and counts, not unit masks; replacing a unit mask after planning cannot register added pixels in the existing ownership/contact references"
+}

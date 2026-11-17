@@ -1,4 +1,24 @@
-# STROKE-02 — 36 development-page converter measurement
+# STROKE-02 — per-unit segmentation: ownership-reference blocker
+
+**The requested per-unit experiment is blocked by the existing ownership gate.** No new converter behavior was enabled and no 36-page re-run was made. The user explicitly directed that a gate unable to evaluate per-unit masks be reported rather than worked around. The 36-page results below are the **previous trace-stage experiment**, not results of the proposed per-unit segmentation.
+
+`build_plan` labels connected components from page-wide `seg.fg` and assigns each original component ID to exactly one text or artwork unit. `visual_invariant_ok` verifies those IDs and their counts; it does not compare a unit's current mask pixels with the pixels in its assigned components. A focused executable test shows that the invariant still passes when a unit gains an unregistered mask pixel, and also when the altered mask overlaps a separate artwork mask. The separate contact gate uses original artwork bounding boxes: it can reject contacts with *known* artwork, but it has no component records for newly proposed pixels. This test shows the scope of the ownership check; it does not claim that the contact gate would miss every overlap.
+
+The existing 613 region is **already vector-planned**, with three units. Its problem is the fragmented masks and global fill, not wholesale region rejection. On that page the original segmentation has 1,562 components (738 text-owned, 824 artwork). Applying the already-generated line-pooled sidecar at coverage ≥ .5 as a diagnostic proposal gives:
+
+| OCR digit box | Original foreground pixels | Proposed mask pixels | Added pixels outside original foreground |
+|---|---:|---:|---:|
+| 6 | 34 | 92 | 58 |
+| 1 | 10 | 49 | 39 |
+| 3 | 23 | 92 | 69 |
+
+All 166 added pixels have original component label zero. The masks are **diagnostic proposals, not validated ground truth**; at this threshold they do not touch one another. Replacing the units' masks after ownership planning would leave these pixels outside the gate's component reference. Rebuilding the page's component map from a patched foreground would instead change that reference and can change which existing pixels are classified as artwork. Either requires an explicit ownership reconciliation that the existing gate cannot perform on its own. I did not silently change the reference or add a substitute gate.
+
+Per-unit paint has a separate, implementable scope: `PageParts` currently carries one `ink`, and `emit_text_runs` sets one fill for the page's visible text. A per-symbol color map passed through `PageParts`, with the fill selected immediately before each visible occurrence and stock ink as fallback, would be needed. The measured global ink is RGB (167,137,90), consistent with the shell-brown diagnosis. Color plumbing alone would not resolve the ownership blocker, so it was not added as an untestable converter change.
+
+The next design must reconcile proposed local pixels with the original foreground/artwork ownership reference while preserving component identity, contact checks, fallback and pixel exclusivity. This is an engineering gap in the current gate, not a claim that local segmentation is impossible. [Numeric evidence](/data/coding/scanweave/work/stroke01/research/stroke02/ownership-evidence.json) and [focused test](/data/coding/scanweave/work/stroke01/crates/scanweave-io/tests/ownership_reference.rs) are available. The source/actual #39/previous experimental PDF strips remain unchanged: [613 1×](/data/coding/scanweave/work/books01/stroke02/final/613-1x.png), [613 2×](/data/coding/scanweave/work/books01/stroke02/final/613.png), [French 1×](/data/coding/scanweave/work/books01/stroke02/final/french-1x.png), [French 2×](/data/coding/scanweave/work/books01/stroke02/final/french.png).
+
+## Previous 36-page trace-stage result
 
 **The real converter did not achieve the text-restoration objective.** All 36 development pages ran successfully. The 613, French list and four controls are byte-identical to #39; no raster-byte displacement or increase in vector-owned ink was measured. Four other pages changed slightly. This is a default-off research measurement, not a merge candidate.
 
