@@ -22,5 +22,6 @@ for key in ('8967062','12342014'):
    a,b,c,e=x['bbox']
    if a<1200<c and b<770<e:fits.append(x)
  else:fits=[]
- out[key]={'extension_counts':{k:ledger[k] for k in ('attempted','accepted','rejected_neighbour','rejected_disconnected','rejected_overlap','rejected_box','rejected_veto')},'extension_pixels':sum(map(len,ledger['pixels'].values())),'target_fit_declines':fits,'units':records}
+ target_fits=[x for x in pre.get('lines',[]) if key=='8967062' and x.get('model')=='per-glyph-profile' and 1160<x['bbox'][0]<1230 and 750<x['bbox'][1]<780]
+ out[key]={'target_fits':target_fits,'extension_counts':{k:ledger[k] for k in ('attempted','accepted','rejected_neighbour','rejected_disconnected','rejected_overlap','rejected_box','rejected_veto')},'extension_pixels':sum(map(len,ledger['pixels'].values())),'target_fit_declines':fits,'units':records}
 pathlib.Path(__file__).with_name('refit-diagnosis.json').write_text(json.dumps(out,indent=2)+'\n');print({k:{'counts':v['extension_counts'],'pixels':v['extension_pixels'],'target_units':len(v['units']),'fit_declines':v['target_fit_declines']} for k,v in out.items()})

@@ -43,7 +43,7 @@ def verify(directory,dpi):
    blocked.append(unit['symbol_id']);checks.append({'symbol_id':unit['symbol_id'],'reason':'render_geometry_or_noise_unavailable','shape':list(pixels.shape),'expected':list(expected)});continue
   ys=np.clip(((np.arange(py0,py1)+.5)*height/full_h).astype(int),0,height-1);xs=np.clip(((np.arange(px0,px1)+.5)*width/full_w).astype(int),0,width-1);vv=veto[np.ix_(ys,xs)]
   if not vv.any():continue
-  cov=1-pixels/255.;sim=ndi.gaussian_filter(cov,sigma*(full_w/width),mode='constant');direct=float(cov[vv].max());forward=float(sim[vv].max())
+  srgb=pixels/255.;linear=np.where(srgb<=.04045,srgb/12.92,((srgb+.055)/1.055)**2.4);cov=1-linear;sim=ndi.gaussian_filter(cov,sigma*(full_w/width),mode='constant');direct=float(cov[vv].max());forward=float(sim[vv].max())
   # Assume maximum possible ink contrast (1.0 linear luminance), a conservative
   # upper bound. The single glyph layer gets the whole local noise allowance.
   ok=direct<=noise and forward<=noise

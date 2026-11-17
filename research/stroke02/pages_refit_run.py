@@ -41,10 +41,11 @@ def run_page(record):
    raise
   verification_wall+=time.monotonic()-t0
   old_text=text_pdf(baseline);new_text=text_pdf(candidate);new_ufffe=sum(max(0,new_text[u:v].count('\ufffe')-old_text[i:j].count('\ufffe')) for tag,i,j,u,v in difflib.SequenceMatcher(None,old_text,new_text,autojunk=False).get_opcodes() if tag!='equal')
-  if new_ufffe:
-   accepted=json.loads((d/'extensions.json').read_text())['symbols'];result['new_ufffe']=new_ufffe;result['blocked']=sorted(set(result['blocked'])|set(accepted))
+  nonspace_old=''.join(old_text.split());nonspace_new=''.join(new_text.split());text_changed=nonspace_old!=nonspace_new
+  if new_ufffe or text_changed:
+   accepted=json.loads((d/'extensions.json').read_text())['symbols'];result['new_ufffe']=new_ufffe;result['nonwhitespace_text_changed']=text_changed;result['blocked']=sorted(set(result['blocked'])|set(accepted))
    if not accepted:
-    candidate.rename(d/f'unverified-{attempt}.pdf');raise RuntimeError('new U+FFFE with no accepted experimental units')
+    candidate.rename(d/f'unverified-{attempt}.pdf');raise RuntimeError('nonwhitespace extraction change with no accepted experimental units')
   attempts.append(result);failed=set(result['blocked'])-blocked
   if not failed:break
   candidate.rename(d/f'rejected-{attempt}.pdf');pathlib.Path(str(candidate)+'.json').rename(d/f'rejected-{attempt}.pdf.json');blocked.update(failed)
