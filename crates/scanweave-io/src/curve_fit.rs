@@ -29,6 +29,18 @@ fn contains(poly: &[P], p: P) -> bool {
 fn spline(poly: &[P]) -> Vec<P> {
     fit_ring(poly, 0.15)
 }
+/// Experimental latent-coverage contours, constrained by the original mask.
+/// Invalid or missing coverage declines without changing the ordinary path.
+pub(crate) fn layers_from_coverage(unit: &Unit, coverage: &[f64], level: f64) -> Option<Vec<ContourLayer>> {
+    if coverage.len() != unit.mask.len() || coverage.iter().any(|x| !x.is_finite() || !(0.0..=1.0).contains(x)) {
+        return None;
+    }
+    let mut latent = unit.clone();
+    latent.gray_samples = Some(coverage.iter().map(|x| ((1.0 - x) * 255.0).round() as u8).collect());
+    latent.gray_halo = None;
+    layers(&latent, 255.0, 0.0, level)
+}
+
 pub(crate) fn layers(unit: &Unit, paper: f64, ink: f64, level: f64) -> Option<Vec<ContourLayer>> {
     let gray = unit.gray_samples.as_deref()?;
     let w = unit.crop_w as isize;
@@ -407,6 +419,17 @@ pub(crate) fn fit_ring(poly: &[P], accuracy: f64) -> Vec<P> {
 #[cfg(test)]
 mod tests {
     use super::*;
+    #[test]
+    fn invalid_latent_coverage_declines() {
+        let u = Unit {
+            shape_key: "x".into(), span_id: "s".into(), symbol_id: "x".into(), semantic_text: "x".into(),
+            bbox_px: [0., 0., 2., 2.], ocr_bbox_px: [0., 0., 2., 2.], crop_w: 2, crop_h: 2,
+            mask: vec![true; 4], gray_samples: Some(vec![0; 4]), gray_halo: None,
+        };
+        assert!(layers_from_coverage(&u, &[0.5], 0.5).is_none());
+        assert!(layers_from_coverage(&u, &[0.5, 0.5, f64::NAN, 0.5], 0.5).is_none());
+        assert!(layers_from_coverage(&u, &[0.5, 0.5, 1.1, 0.5], 0.5).is_none());
+    }
     #[test]
     fn circle_is_compact_closed_and_has_shared_tangents() {
         let poly: Vec<_> = (0..256)

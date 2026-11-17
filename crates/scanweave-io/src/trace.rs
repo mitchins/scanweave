@@ -272,12 +272,22 @@ pub(crate) fn trace_shape_clearscan(
 
 /// Source-normalized canonical tracing; the default wrapper retains its exact settings.
 pub(crate) fn trace_shape_clearscan_with_options(
-    unit: &Unit,
-    budget: &Budget,
-    k: f64,
-    preserved_source: Option<(&Unit, f64)>,
-    coverage: Option<&[f64]>,
-    grayscale_cap: usize,
+    unit: &Unit, budget: &Budget, k: f64, preserved_source: Option<(&Unit, f64)>,
+    coverage: Option<&[f64]>, grayscale_cap: usize,
+) -> Result<TracedShape, String> {
+    trace_shape_clearscan_impl(unit, budget, k, preserved_source, coverage, grayscale_cap, false)
+}
+
+pub(crate) fn trace_shape_clearscan_experimental(
+    unit: &Unit, budget: &Budget, k: f64, preserved_source: Option<(&Unit, f64)>,
+    coverage: Option<&[f64]>, grayscale_cap: usize,
+) -> Result<TracedShape, String> {
+    trace_shape_clearscan_impl(unit, budget, k, preserved_source, coverage, grayscale_cap, true)
+}
+
+fn trace_shape_clearscan_impl(
+    unit: &Unit, budget: &Budget, k: f64, preserved_source: Option<(&Unit, f64)>,
+    coverage: Option<&[f64]>, grayscale_cap: usize, experimental: bool,
 ) -> Result<TracedShape, String> {
     let baseline = trace_shape(unit, budget, k)?;
     let Some(gray) = unit
@@ -465,6 +475,22 @@ pub(crate) fn trace_shape_clearscan_with_options(
             t.layers = layers;
             t.preserve_crop_frame = true;
             fitted.push((t, "grayscale_subpixel_curve", Some(level), 0.15));
+        }
+    }
+    // Experimental coverage only supplies alternative contours; it does not
+    // alter source ownership, topology checks, or any fidelity gate.
+    if let Some(latent) = coverage.filter(|_| experimental) {
+        for level in [0.3, 0.35, 0.4, 0.45] {
+            if let Some(layers) = crate::curve_fit::layers_from_coverage(unit, latent, level) {
+                if layers.len() != components
+                    || layers.iter().map(|(_, h)| h.len()).sum::<usize>() < substantial_holes
+                    || layers.iter().map(|(_, h)| h.len()).sum::<usize>() > topology
+                { continue; }
+                let mut candidate = best.clone();
+                candidate.layers = layers;
+                candidate.preserve_crop_frame = true;
+                fitted.push((candidate, "experimental_latent_curve", Some(level), 0.15));
+            }
         }
     }
     for (mut candidate, method, level, tolerance) in fitted {

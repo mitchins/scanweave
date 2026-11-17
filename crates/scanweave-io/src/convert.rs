@@ -839,6 +839,13 @@ pub(crate) fn convert_parts_with_document_donors(
         }
     }
 
+    // Research-only sidecar. Missing, unreadable or mismatched coverage declines
+    // the experiment and leaves the stock converter path unchanged.
+    let experimental_coverage = std::env::var_os("SCANWEAVE_STROKE_COVERAGE")
+        .and_then(|path| image::open(path).ok())
+        .map(|im| im.to_luma8())
+        .filter(|im| im.width() == w && im.height() == h);
+
     // segmentation + ownership -------------------------------------------------
     let seg: Segmentation = segment(&input.rgb, w, h);
     let ocr = to_ocr_page(input);
@@ -1028,12 +1035,34 @@ pub(crate) fn convert_parts_with_document_donors(
                                 && !reconstruction.repaired_symbols.contains(&other.symbol_id)
                                 && !reconstruction.reused_symbols.contains(&other.symbol_id)
                         });
-                        crate::trace::trace_shape_clearscan(
-                            prototype,
-                            &budget,
-                            units_per_px,
-                            preserved_source.map(|source| (source, policy.min_ink_iou)),
-                        )
+                        let coverage = experimental_coverage.as_ref().and_then(|map| {
+                            // Never alter a shared dictionary entry or a visual-dictionary replacement.
+                            if prototype.symbol_id != u.symbol_id
+                                || plan.owned.iter().filter(|x| x.unit.shape_key == u.shape_key).take(2).count() != 1
+                                || reconstruction.repaired_symbols.contains(&u.symbol_id)
+                                || reconstruction.reused_symbols.contains(&u.symbol_id)
+                            { return None; }
+                            let x = u.bbox_px[0] as usize;
+                            let y = u.bbox_px[1] as usize;
+                            if x + u.crop_w > w as usize || y + u.crop_h > h as usize { return None; }
+                            let mut v = Vec::with_capacity(u.crop_w * u.crop_h);
+                            for yy in y..y + u.crop_h {
+                                for xx in x..x + u.crop_w { v.push(map.get_pixel(xx as u32, yy as u32)[0] as f64 / 255.0); }
+                            }
+                            if v.iter().any(|&x| x > 0.0) { Some(v) } else { None }
+                        });
+                        if let Some(coverage) = coverage.as_deref() {
+                            crate::trace::trace_shape_clearscan_experimental(
+                                prototype, &budget, units_per_px,
+                                preserved_source.map(|source| (source, policy.min_ink_iou)),
+                                Some(coverage), 16_384,
+                            )
+                        } else {
+                            crate::trace::trace_shape_clearscan(
+                                prototype, &budget, units_per_px,
+                                preserved_source.map(|source| (source, policy.min_ink_iou)),
+                            )
+                        }
                     }
                 } else {
                     trace_shape(prototype, &budget, units_per_px)
