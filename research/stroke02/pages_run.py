@@ -2,7 +2,7 @@
 import collections,difflib,hashlib,json,os,pathlib,statistics,subprocess,sys,time
 import numpy as np
 import pypdfium2 as pdfium
-B=pathlib.Path('/data/coding/scanweave/work/books01');O=B/'stroke02';R=O/'pages';Q=pathlib.Path('/tmp/scanweave-books01/qualification/books01');SW='/data/coding/scanweave/work/stroke02-target/release/scanweave';PY='/data/coding/scanweave/qualification/.venv/bin/python';corpus=json.loads((Q/'corpus.frozen.json').read_text());pages=[p for p in corpus['pages'] if p['split']=='dev'];assert len(pages)==36 and len({p['id'] for p in pages})==36
+B=pathlib.Path('/data/coding/scanweave/work/books01');O=B/'stroke02';R=O/'pages';Q=pathlib.Path('/tmp/scanweave-books01/qualification/books01');SW=str(O/'target/release/scanweave');PY='/data/coding/scanweave/qualification/.venv/bin/python';corpus=json.loads((Q/'corpus.frozen.json').read_text());pages=[p for p in corpus['pages'] if p['split']=='dev'];assert len(pages)==36 and len({p['id'] for p in pages})==36
 baseenv={**os.environ,'TMPDIR':str(O/'tmp'),'TESSDATA_PREFIX':str(B/'tessdata_best'),'OMP_THREAD_LIMIT':'1','OPENBLAS_NUM_THREADS':'1'}
 def text_pdf(path):
  doc=pdfium.PdfDocument(str(path));page=doc[0];tp=page.get_textpage();return tp.get_text_range()
@@ -16,7 +16,7 @@ def pix(path):
 def run_page(record):
  key=record['id'].split('/')[-1];d=R/key;d.mkdir(parents=True,exist_ok=True);out=d/'metrics.json'
  if out.exists():return json.loads(out.read_text())
- run=json.loads((B/'phase2/runs'/key/'runs.json').read_text());baseline=pathlib.Path(run['rows']['sw-E']['path']);src=run['rows']['src']['path'];saved=run['rows']['sw-E']['argv'];assert saved[1]==src and saved[3:]==['--dpi',str(run['dpi']),'--lang',run['lang']]
+ run=json.loads((B/'phase2/runs'/key/'runs.json').read_text());baseline=pathlib.Path(run['rows']['sw-E']['path']);src=run['rows']['src']['path'];saved=run['rows']['sw-E']['argv'];assert saved[1]==src and saved[3:]==['--dpi',str(run['dpi']),'--lang',run['lang']];assert hashlib.sha256(pathlib.Path(src).read_bytes()).hexdigest()==run['source_pdf_sha256']
  log=d/'prepass.log';t0=time.monotonic()
  with log.open('wb') as f:p=subprocess.run([PY,'-I','-B',str(pathlib.Path(__file__).with_name('coverage_prepass.py')),key],env=baseenv,stdout=f,stderr=subprocess.STDOUT)
  row={'id':record['id'],'prepass_status':p.returncode,'prepass_wall_seconds':time.monotonic()-t0,'baseline_pdf_bytes':baseline.stat().st_size,'baseline_wall_seconds':run['rows']['sw-E']['wall_seconds']}

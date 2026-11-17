@@ -1,0 +1,2675 @@
+{
+  "summary": {
+    "expected_pages": 36,
+    "completed_pages": 36,
+    "failures": [],
+    "baseline_pdf_bytes": {
+      "sum": 16315763,
+      "median": 419693.5
+    },
+    "candidate_pdf_bytes": {
+      "sum": 16315054,
+      "median": 419588.0
+    },
+    "baseline_wall_seconds": {
+      "sum": 985.9354495648295,
+      "median": 20.480842276010662
+    },
+    "candidate_wall_seconds": {
+      "sum": 1236.4441298844758,
+      "median": 19.87308555445634
+    },
+    "baseline_render_median_seconds": {
+      "sum": 0.4740776608232409,
+      "median": 0.011652473942376673
+    },
+    "candidate_render_median_seconds": {
+      "sum": 0.4690084746107459,
+      "median": 0.01155203755479306
+    },
+    "baseline_raster_bytes": {
+      "sum": 14696444,
+      "median": 364892.5
+    },
+    "baseline_vector_units_proposed": {
+      "sum": 5339,
+      "median": 28.0
+    },
+    "baseline_raster_units_proposed": {
+      "sum": 17685,
+      "median": 291.5
+    },
+    "baseline_coverage_totals": {
+      "text_ink_px_total": 33816721,
+      "text_ink_px_vector": 1093241,
+      "text_ink_px_raster": 32723480
+    },
+    "candidate_raster_bytes": {
+      "sum": 14696444,
+      "median": 364892.5
+    },
+    "candidate_vector_units_proposed": {
+      "sum": 5339,
+      "median": 28.0
+    },
+    "candidate_raster_units_proposed": {
+      "sum": 17685,
+      "median": 291.5
+    },
+    "candidate_coverage_totals": {
+      "text_ink_px_total": 33816721,
+      "text_ink_px_vector": 1093241,
+      "text_ink_px_raster": 32723480
+    },
+    "byte_identical_pages": 32,
+    "prepass_wall_seconds": {
+      "sum": 169.5397936340887,
+      "median": 3.5420071680564433
+    },
+    "actual_occurrence_owner_counts": {
+      "baseline": {
+        "invisible": 17997,
+        "unmapped": 50468,
+        "visible_tounicode": 5027
+      },
+      "candidate": {
+        "invisible": 17997,
+        "unmapped": 50468,
+        "visible_tounicode": 5027
+      }
+    },
+    "baseline_ufffe": 113,
+    "candidate_ufffe": 113,
+    "text_changed_pages": 0,
+    "new_ufffe": 0,
+    "changed_region_pages": 0,
+    "pages_with_latent_trace_mentions": 0,
+    "mean_page_150dpi_delta": 0.0010472396297070633
+  },
+  "pages": [
+    {
+      "id": "quiver/estor_rechtsgelehrsamkeit02_1758_0007",
+      "prepass_status": 0,
+      "prepass_wall_seconds": 4.075845342129469,
+      "baseline_pdf_bytes": 343478,
+      "baseline_wall_seconds": 5.605273895896971,
+      "status": 0,
+      "candidate_wall_seconds": 4.521853886079043,
+      "text_diff": {
+        "same": true,
+        "removed_characters": 0,
+        "added_characters": 0,
+        "order_only": false,
+        "baseline_ufffe": 0,
+        "candidate_ufffe": 0,
+        "new_ufffe": 0
+      },
+      "baseline": {
+        "raster_bytes": 335392,
+        "coverage": {
+          "text_ink_px_total": 1711,
+          "text_ink_px_vector": 0,
+          "text_ink_px_raster": 1711,
+          "other_ink_px": 2983351,
+          "unowned_ink_px": 0,
+          "multiply_owned_ink_px": 0
+        },
+        "vector_units_proposed": 0,
+        "raster_units_proposed": 83,
+        "selected": "reconstruct",
+        "occurrence_owner_counts": {
+          "invisible": 83,
+          "unmapped": 427
+        }
+      },
+      "candidate": {
+        "raster_bytes": 335392,
+        "coverage": {
+          "text_ink_px_total": 1711,
+          "text_ink_px_vector": 0,
+          "text_ink_px_raster": 1711,
+          "other_ink_px": 2983351,
+          "unowned_ink_px": 0,
+          "multiply_owned_ink_px": 0
+        },
+        "vector_units_proposed": 0,
+        "raster_units_proposed": 83,
+        "selected": "reconstruct",
+        "occurrence_owner_counts": {
+          "invisible": 83,
+          "unmapped": 427
+        }
+      },
+      "candidate_pdf_bytes": 343478,
+      "changed_region_dispositions": 0,
+      "baseline_render_median_seconds": 0.014677744824439287,
+      "candidate_render_median_seconds": 0.021398996002972126,
+      "render_diff_150dpi": {
+        "mean_absolute_channel_delta": 0.0,
+        "changed_pixel_fraction": 0.0,
+        "max_channel_delta": 0
+      },
+      "candidate_sha256": "29d0921c358f5dc2b4b1d445005229c65fd2bc5a5c177b8cdb14ddc2dd0baeae",
+      "prepass_summary": {
+        "lines": 17,
+        "median_sigma_px": 1.0,
+        "enclosed_paper_pixels": 30103
+      },
+      "pdf_sha256_equal_to_baseline": true,
+      "latent_trace_mentions": 0
+    },
+    {
+      "id": "quiver/estor_rechtsgelehrsamkeit02_1758_0819",
+      "prepass_status": 0,
+      "prepass_wall_seconds": 3.329206380993128,
+      "baseline_pdf_bytes": 355302,
+      "baseline_wall_seconds": 19.909135994967073,
+      "status": 0,
+      "candidate_wall_seconds": 14.08919585798867,
+      "text_diff": {
+        "same": true,
+        "removed_characters": 0,
+        "added_characters": 0,
+        "order_only": false,
+        "baseline_ufffe": 3,
+        "candidate_ufffe": 3,
+        "new_ufffe": 0
+      },
+      "baseline": {
+        "raster_bytes": 341753,
+        "coverage": {
+          "text_ink_px_total": 3070487,
+          "text_ink_px_vector": 0,
+          "text_ink_px_raster": 3070487,
+          "other_ink_px": 136,
+          "unowned_ink_px": 0,
+          "multiply_owned_ink_px": 0
+        },
+        "vector_units_proposed": 28,
+        "raster_units_proposed": 59,
+        "selected": "reconstruct",
+        "occurrence_owner_counts": {
+          "invisible": 87,
+          "unmapped": 8
+        }
+      },
+      "candidate": {
+        "raster_bytes": 341753,
+        "coverage": {
+          "text_ink_px_total": 3070487,
+          "text_ink_px_vector": 0,
+          "text_ink_px_raster": 3070487,
+          "other_ink_px": 136,
+          "unowned_ink_px": 0,
+          "multiply_owned_ink_px": 0
+        },
+        "vector_units_proposed": 28,
+        "raster_units_proposed": 59,
+        "selected": "reconstruct",
+        "occurrence_owner_counts": {
+          "invisible": 87,
+          "unmapped": 8
+        }
+      },
+      "candidate_pdf_bytes": 355302,
+      "changed_region_dispositions": 0,
+      "baseline_render_median_seconds": 0.011083896970376372,
+      "candidate_render_median_seconds": 0.00972097902558744,
+      "render_diff_150dpi": {
+        "mean_absolute_channel_delta": 0.0,
+        "changed_pixel_fraction": 0.0,
+        "max_channel_delta": 0
+      },
+      "candidate_sha256": "82f7be0c8acb0d699a467416480ee89b7c4128a94ab2fabb8118ee685423b308",
+      "prepass_summary": {
+        "lines": 30,
+        "median_sigma_px": 1.0,
+        "enclosed_paper_pixels": 24173
+      },
+      "pdf_sha256_equal_to_baseline": true,
+      "latent_trace_mentions": 0
+    },
+    {
+      "id": "quiver/euler_rechenkunst01_1738_0025",
+      "prepass_status": 0,
+      "prepass_wall_seconds": 3.5501973791979253,
+      "baseline_pdf_bytes": 439391,
+      "baseline_wall_seconds": 4.938460258999839,
+      "status": 0,
+      "candidate_wall_seconds": 3.6201332539785653,
+      "text_diff": {
+        "same": true,
+        "removed_characters": 0,
+        "added_characters": 0,
+        "order_only": false,
+        "baseline_ufffe": 0,
+        "candidate_ufffe": 0,
+        "new_ufffe": 0
+      },
+      "baseline": {
+        "raster_bytes": 428319,
+        "coverage": {
+          "text_ink_px_total": 192622,
+          "text_ink_px_vector": 0,
+          "text_ink_px_raster": 192622,
+          "other_ink_px": 750504,
+          "unowned_ink_px": 0,
+          "multiply_owned_ink_px": 0
+        },
+        "vector_units_proposed": 0,
+        "raster_units_proposed": 737,
+        "selected": "reconstruct",
+        "occurrence_owner_counts": {
+          "invisible": 737,
+          "unmapped": 17613
+        }
+      },
+      "candidate": {
+        "raster_bytes": 428319,
+        "coverage": {
+          "text_ink_px_total": 192622,
+          "text_ink_px_vector": 0,
+          "text_ink_px_raster": 192622,
+          "other_ink_px": 750504,
+          "unowned_ink_px": 0,
+          "multiply_owned_ink_px": 0
+        },
+        "vector_units_proposed": 0,
+        "raster_units_proposed": 737,
+        "selected": "reconstruct",
+        "occurrence_owner_counts": {
+          "invisible": 737,
+          "unmapped": 17613
+        }
+      },
+      "candidate_pdf_bytes": 439391,
+      "changed_region_dispositions": 0,
+      "baseline_render_median_seconds": 0.014594118110835552,
+      "candidate_render_median_seconds": 0.01382501213811338,
+      "render_diff_150dpi": {
+        "mean_absolute_channel_delta": 0.0,
+        "changed_pixel_fraction": 0.0,
+        "max_channel_delta": 0
+      },
+      "candidate_sha256": "26e0cf869e279a18ea3f3855261042e7afe29e8031f17e4d377a0925f41adc87",
+      "prepass_summary": {
+        "lines": 25,
+        "median_sigma_px": 0.5,
+        "enclosed_paper_pixels": 6505
+      },
+      "pdf_sha256_equal_to_baseline": true,
+      "latent_trace_mentions": 0
+    },
+    {
+      "id": "quiver/euler_rechenkunst01_1738_0031",
+      "prepass_status": 0,
+      "prepass_wall_seconds": 3.0973581050056964,
+      "baseline_pdf_bytes": 465551,
+      "baseline_wall_seconds": 4.8850756720639765,
+      "status": 0,
+      "candidate_wall_seconds": 3.570174739928916,
+      "text_diff": {
+        "same": true,
+        "removed_characters": 0,
+        "added_characters": 0,
+        "order_only": false,
+        "baseline_ufffe": 1,
+        "candidate_ufffe": 1,
+        "new_ufffe": 0
+      },
+      "baseline": {
+        "raster_bytes": 453168,
+        "coverage": {
+          "text_ink_px_total": 206128,
+          "text_ink_px_vector": 0,
+          "text_ink_px_raster": 206128,
+          "other_ink_px": 669760,
+          "unowned_ink_px": 0,
+          "multiply_owned_ink_px": 0
+        },
+        "vector_units_proposed": 0,
+        "raster_units_proposed": 774,
+        "selected": "reconstruct",
+        "occurrence_owner_counts": {
+          "invisible": 774,
+          "unmapped": 12053
+        }
+      },
+      "candidate": {
+        "raster_bytes": 453168,
+        "coverage": {
+          "text_ink_px_total": 206128,
+          "text_ink_px_vector": 0,
+          "text_ink_px_raster": 206128,
+          "other_ink_px": 669760,
+          "unowned_ink_px": 0,
+          "multiply_owned_ink_px": 0
+        },
+        "vector_units_proposed": 0,
+        "raster_units_proposed": 774,
+        "selected": "reconstruct",
+        "occurrence_owner_counts": {
+          "invisible": 774,
+          "unmapped": 12053
+        }
+      },
+      "candidate_pdf_bytes": 465551,
+      "changed_region_dispositions": 0,
+      "baseline_render_median_seconds": 0.014131121104583144,
+      "candidate_render_median_seconds": 0.013743624091148376,
+      "render_diff_150dpi": {
+        "mean_absolute_channel_delta": 0.0,
+        "changed_pixel_fraction": 0.0,
+        "max_channel_delta": 0
+      },
+      "candidate_sha256": "c9917ee8941415dc7a25f83cfb078a8a3858cd812bb8c23e920c16f1ac5e1c96",
+      "prepass_summary": {
+        "lines": 30,
+        "median_sigma_px": 0.5,
+        "enclosed_paper_pixels": 9540
+      },
+      "pdf_sha256_equal_to_baseline": true,
+      "latent_trace_mentions": 0
+    },
+    {
+      "id": "quiver/luther_babstum_1526_0010",
+      "prepass_status": 0,
+      "prepass_wall_seconds": 4.549988986924291,
+      "baseline_pdf_bytes": 402102,
+      "baseline_wall_seconds": 6.706485678907484,
+      "status": 0,
+      "candidate_wall_seconds": 5.1229013309348375,
+      "text_diff": {
+        "same": true,
+        "removed_characters": 0,
+        "added_characters": 0,
+        "order_only": false,
+        "baseline_ufffe": 0,
+        "candidate_ufffe": 0,
+        "new_ufffe": 0
+      },
+      "baseline": {
+        "raster_bytes": 391589,
+        "coverage": {
+          "text_ink_px_total": 272,
+          "text_ink_px_vector": 0,
+          "text_ink_px_raster": 272,
+          "other_ink_px": 3578872,
+          "unowned_ink_px": 0,
+          "multiply_owned_ink_px": 0
+        },
+        "vector_units_proposed": 0,
+        "raster_units_proposed": 66,
+        "selected": "reconstruct",
+        "occurrence_owner_counts": {
+          "invisible": 66,
+          "unmapped": 20
+        }
+      },
+      "candidate": {
+        "raster_bytes": 391589,
+        "coverage": {
+          "text_ink_px_total": 272,
+          "text_ink_px_vector": 0,
+          "text_ink_px_raster": 272,
+          "other_ink_px": 3578872,
+          "unowned_ink_px": 0,
+          "multiply_owned_ink_px": 0
+        },
+        "vector_units_proposed": 0,
+        "raster_units_proposed": 66,
+        "selected": "reconstruct",
+        "occurrence_owner_counts": {
+          "invisible": 66,
+          "unmapped": 20
+        }
+      },
+      "candidate_pdf_bytes": 402102,
+      "changed_region_dispositions": 0,
+      "baseline_render_median_seconds": 0.011786454822868109,
+      "candidate_render_median_seconds": 0.01074835704639554,
+      "render_diff_150dpi": {
+        "mean_absolute_channel_delta": 0.0,
+        "changed_pixel_fraction": 0.0,
+        "max_channel_delta": 0
+      },
+      "candidate_sha256": "19636810cbd6a3d9f5ba62d0e214e90b3e611d6ea77abfc26c9a6cb69ee1d5f0",
+      "prepass_summary": {
+        "lines": 34,
+        "median_sigma_px": 1.0,
+        "enclosed_paper_pixels": 27868
+      },
+      "pdf_sha256_equal_to_baseline": true,
+      "latent_trace_mentions": 0
+    },
+    {
+      "id": "quiver/luther_babstum_1526_0011",
+      "prepass_status": 0,
+      "prepass_wall_seconds": 3.3989104251377285,
+      "baseline_pdf_bytes": 441781,
+      "baseline_wall_seconds": 4.6213555231224746,
+      "status": 0,
+      "candidate_wall_seconds": 4.571735228179023,
+      "text_diff": {
+        "same": true,
+        "removed_characters": 0,
+        "added_characters": 0,
+        "order_only": false,
+        "baseline_ufffe": 0,
+        "candidate_ufffe": 0,
+        "new_ufffe": 0
+      },
+      "baseline": {
+        "raster_bytes": 435315,
+        "coverage": {
+          "text_ink_px_total": 114,
+          "text_ink_px_vector": 0,
+          "text_ink_px_raster": 114,
+          "other_ink_px": 3556875,
+          "unowned_ink_px": 0,
+          "multiply_owned_ink_px": 0
+        },
+        "vector_units_proposed": 0,
+        "raster_units_proposed": 34,
+        "selected": "reconstruct",
+        "occurrence_owner_counts": {
+          "invisible": 34,
+          "unmapped": 439
+        }
+      },
+      "candidate": {
+        "raster_bytes": 435315,
+        "coverage": {
+          "text_ink_px_total": 114,
+          "text_ink_px_vector": 0,
+          "text_ink_px_raster": 114,
+          "other_ink_px": 3556875,
+          "unowned_ink_px": 0,
+          "multiply_owned_ink_px": 0
+        },
+        "vector_units_proposed": 0,
+        "raster_units_proposed": 34,
+        "selected": "reconstruct",
+        "occurrence_owner_counts": {
+          "invisible": 34,
+          "unmapped": 439
+        }
+      },
+      "candidate_pdf_bytes": 441781,
+      "changed_region_dispositions": 0,
+      "baseline_render_median_seconds": 0.010830333922058344,
+      "candidate_render_median_seconds": 0.010768566047772765,
+      "render_diff_150dpi": {
+        "mean_absolute_channel_delta": 0.0,
+        "changed_pixel_fraction": 0.0,
+        "max_channel_delta": 0
+      },
+      "candidate_sha256": "4f8331f2abc04ef057edecdd829a904b5053378b87595ce3dbc991c21b5a9a16",
+      "prepass_summary": {
+        "lines": 16,
+        "median_sigma_px": 1.0,
+        "enclosed_paper_pixels": 14800
+      },
+      "pdf_sha256_equal_to_baseline": true,
+      "latent_trace_mentions": 0
+    },
+    {
+      "id": "quiver/aventinus_grammatica_1515_0006",
+      "prepass_status": 0,
+      "prepass_wall_seconds": 3.5338169569149613,
+      "baseline_pdf_bytes": 593574,
+      "baseline_wall_seconds": 48.16578320786357,
+      "status": 0,
+      "candidate_wall_seconds": 45.30167144886218,
+      "text_diff": {
+        "same": true,
+        "removed_characters": 0,
+        "added_characters": 0,
+        "order_only": false,
+        "baseline_ufffe": 5,
+        "candidate_ufffe": 5,
+        "new_ufffe": 0
+      },
+      "baseline": {
+        "raster_bytes": 576265,
+        "coverage": {
+          "text_ink_px_total": 3378236,
+          "text_ink_px_vector": 0,
+          "text_ink_px_raster": 3378236,
+          "other_ink_px": 1223,
+          "unowned_ink_px": 0,
+          "multiply_owned_ink_px": 0
+        },
+        "vector_units_proposed": 31,
+        "raster_units_proposed": 485,
+        "selected": "reconstruct",
+        "occurrence_owner_counts": {
+          "invisible": 516,
+          "unmapped": 9
+        }
+      },
+      "candidate": {
+        "raster_bytes": 576265,
+        "coverage": {
+          "text_ink_px_total": 3378236,
+          "text_ink_px_vector": 0,
+          "text_ink_px_raster": 3378236,
+          "other_ink_px": 1223,
+          "unowned_ink_px": 0,
+          "multiply_owned_ink_px": 0
+        },
+        "vector_units_proposed": 31,
+        "raster_units_proposed": 485,
+        "selected": "reconstruct",
+        "occurrence_owner_counts": {
+          "invisible": 516,
+          "unmapped": 9
+        }
+      },
+      "candidate_pdf_bytes": 593574,
+      "changed_region_dispositions": 0,
+      "baseline_render_median_seconds": 0.011235252022743225,
+      "candidate_render_median_seconds": 0.011142404051497579,
+      "render_diff_150dpi": {
+        "mean_absolute_channel_delta": 0.0,
+        "changed_pixel_fraction": 0.0,
+        "max_channel_delta": 0
+      },
+      "candidate_sha256": "814701acc05c399cf3366f5d831d194b4012b7419997d690859b0174a657bfc4",
+      "prepass_summary": {
+        "lines": 27,
+        "median_sigma_px": 1.0,
+        "enclosed_paper_pixels": 46089
+      },
+      "pdf_sha256_equal_to_baseline": true,
+      "latent_trace_mentions": 0
+    },
+    {
+      "id": "quiver/aventinus_grammatica_1515_0007",
+      "prepass_status": 0,
+      "prepass_wall_seconds": 3.5289435188751668,
+      "baseline_pdf_bytes": 501469,
+      "baseline_wall_seconds": 43.473320106975734,
+      "status": 0,
+      "candidate_wall_seconds": 42.48434402793646,
+      "text_diff": {
+        "same": true,
+        "removed_characters": 0,
+        "added_characters": 0,
+        "order_only": false,
+        "baseline_ufffe": 1,
+        "candidate_ufffe": 1,
+        "new_ufffe": 0
+      },
+      "baseline": {
+        "raster_bytes": 490203,
+        "coverage": {
+          "text_ink_px_total": 3503698,
+          "text_ink_px_vector": 0,
+          "text_ink_px_raster": 3503698,
+          "other_ink_px": 197,
+          "unowned_ink_px": 0,
+          "multiply_owned_ink_px": 0
+        },
+        "vector_units_proposed": 23,
+        "raster_units_proposed": 283,
+        "selected": "reconstruct",
+        "occurrence_owner_counts": {
+          "invisible": 306,
+          "unmapped": 9
+        }
+      },
+      "candidate": {
+        "raster_bytes": 490203,
+        "coverage": {
+          "text_ink_px_total": 3503698,
+          "text_ink_px_vector": 0,
+          "text_ink_px_raster": 3503698,
+          "other_ink_px": 197,
+          "unowned_ink_px": 0,
+          "multiply_owned_ink_px": 0
+        },
+        "vector_units_proposed": 23,
+        "raster_units_proposed": 283,
+        "selected": "reconstruct",
+        "occurrence_owner_counts": {
+          "invisible": 306,
+          "unmapped": 9
+        }
+      },
+      "candidate_pdf_bytes": 501469,
+      "changed_region_dispositions": 0,
+      "baseline_render_median_seconds": 0.011518493061885238,
+      "candidate_render_median_seconds": 0.011460415087640285,
+      "render_diff_150dpi": {
+        "mean_absolute_channel_delta": 0.0,
+        "changed_pixel_fraction": 0.0,
+        "max_channel_delta": 0
+      },
+      "candidate_sha256": "9188d6d9aae484b0db1d3ff0049f799105f17ccd1f71e1b3bd4a048cc02a0e1e",
+      "prepass_summary": {
+        "lines": 31,
+        "median_sigma_px": 1.0,
+        "enclosed_paper_pixels": 37312
+      },
+      "pdf_sha256_equal_to_baseline": true,
+      "latent_trace_mentions": 0
+    },
+    {
+      "id": "quiver/aventinus_grammatica_1515_0008",
+      "prepass_status": 0,
+      "prepass_wall_seconds": 3.4911058770958334,
+      "baseline_pdf_bytes": 567928,
+      "baseline_wall_seconds": 45.24574250704609,
+      "status": 0,
+      "candidate_wall_seconds": 47.397828717017546,
+      "text_diff": {
+        "same": true,
+        "removed_characters": 0,
+        "added_characters": 0,
+        "order_only": false,
+        "baseline_ufffe": 0,
+        "candidate_ufffe": 0,
+        "new_ufffe": 0
+      },
+      "baseline": {
+        "raster_bytes": 550503,
+        "coverage": {
+          "text_ink_px_total": 3452098,
+          "text_ink_px_vector": 0,
+          "text_ink_px_raster": 3452098,
+          "other_ink_px": 701,
+          "unowned_ink_px": 0,
+          "multiply_owned_ink_px": 0
+        },
+        "vector_units_proposed": 46,
+        "raster_units_proposed": 333,
+        "selected": "reconstruct",
+        "occurrence_owner_counts": {
+          "invisible": 379,
+          "unmapped": 10
+        }
+      },
+      "candidate": {
+        "raster_bytes": 550503,
+        "coverage": {
+          "text_ink_px_total": 3452098,
+          "text_ink_px_vector": 0,
+          "text_ink_px_raster": 3452098,
+          "other_ink_px": 701,
+          "unowned_ink_px": 0,
+          "multiply_owned_ink_px": 0
+        },
+        "vector_units_proposed": 46,
+        "raster_units_proposed": 333,
+        "selected": "reconstruct",
+        "occurrence_owner_counts": {
+          "invisible": 379,
+          "unmapped": 10
+        }
+      },
+      "candidate_pdf_bytes": 567928,
+      "changed_region_dispositions": 0,
+      "baseline_render_median_seconds": 0.012882850831374526,
+      "candidate_render_median_seconds": 0.011670518899336457,
+      "render_diff_150dpi": {
+        "mean_absolute_channel_delta": 0.0,
+        "changed_pixel_fraction": 0.0,
+        "max_channel_delta": 0
+      },
+      "candidate_sha256": "71c61b570a45313815e0cfcee8264fce1a816090920b6b16e6bd6cade19294ec",
+      "prepass_summary": {
+        "lines": 26,
+        "median_sigma_px": 1.0,
+        "enclosed_paper_pixels": 51291
+      },
+      "pdf_sha256_equal_to_baseline": true,
+      "latent_trace_mentions": 0
+    },
+    {
+      "id": "quiver/benner_herrnhuterey04_1748_0013",
+      "prepass_status": 0,
+      "prepass_wall_seconds": 4.439939341042191,
+      "baseline_pdf_bytes": 420009,
+      "baseline_wall_seconds": 15.988207705086097,
+      "status": 0,
+      "candidate_wall_seconds": 17.34337417408824,
+      "text_diff": {
+        "same": true,
+        "removed_characters": 0,
+        "added_characters": 0,
+        "order_only": false,
+        "baseline_ufffe": 3,
+        "candidate_ufffe": 3,
+        "new_ufffe": 0
+      },
+      "baseline": {
+        "raster_bytes": 407478,
+        "coverage": {
+          "text_ink_px_total": 3559526,
+          "text_ink_px_vector": 0,
+          "text_ink_px_raster": 3559526,
+          "other_ink_px": 9507,
+          "unowned_ink_px": 0,
+          "multiply_owned_ink_px": 0
+        },
+        "vector_units_proposed": 25,
+        "raster_units_proposed": 284,
+        "selected": "reconstruct",
+        "occurrence_owner_counts": {
+          "invisible": 309,
+          "unmapped": 451
+        }
+      },
+      "candidate": {
+        "raster_bytes": 407478,
+        "coverage": {
+          "text_ink_px_total": 3559526,
+          "text_ink_px_vector": 0,
+          "text_ink_px_raster": 3559526,
+          "other_ink_px": 9507,
+          "unowned_ink_px": 0,
+          "multiply_owned_ink_px": 0
+        },
+        "vector_units_proposed": 25,
+        "raster_units_proposed": 284,
+        "selected": "reconstruct",
+        "occurrence_owner_counts": {
+          "invisible": 309,
+          "unmapped": 451
+        }
+      },
+      "candidate_pdf_bytes": 420009,
+      "changed_region_dispositions": 0,
+      "baseline_render_median_seconds": 0.010706777917221189,
+      "candidate_render_median_seconds": 0.011357208015397191,
+      "render_diff_150dpi": {
+        "mean_absolute_channel_delta": 0.0,
+        "changed_pixel_fraction": 0.0,
+        "max_channel_delta": 0
+      },
+      "candidate_sha256": "3ce889b2a6895533735fb1b1047c343981695e70e86efd28f80b71cd716c63b4",
+      "prepass_summary": {
+        "lines": 29,
+        "median_sigma_px": 1.0,
+        "enclosed_paper_pixels": 16711
+      },
+      "pdf_sha256_equal_to_baseline": true,
+      "latent_trace_mentions": 0
+    },
+    {
+      "id": "quiver/benner_herrnhuterey04_1748_0014",
+      "prepass_status": 0,
+      "prepass_wall_seconds": 5.1787213599309325,
+      "baseline_pdf_bytes": 453534,
+      "baseline_wall_seconds": 18.45373909501359,
+      "status": 0,
+      "candidate_wall_seconds": 17.64305026992224,
+      "text_diff": {
+        "same": true,
+        "removed_characters": 0,
+        "added_characters": 0,
+        "order_only": false,
+        "baseline_ufffe": 4,
+        "candidate_ufffe": 4,
+        "new_ufffe": 0
+      },
+      "baseline": {
+        "raster_bytes": 440725,
+        "coverage": {
+          "text_ink_px_total": 3550260,
+          "text_ink_px_vector": 0,
+          "text_ink_px_raster": 3550260,
+          "other_ink_px": 3170,
+          "unowned_ink_px": 0,
+          "multiply_owned_ink_px": 0
+        },
+        "vector_units_proposed": 9,
+        "raster_units_proposed": 398,
+        "selected": "reconstruct",
+        "occurrence_owner_counts": {
+          "invisible": 407,
+          "unmapped": 95
+        }
+      },
+      "candidate": {
+        "raster_bytes": 440725,
+        "coverage": {
+          "text_ink_px_total": 3550260,
+          "text_ink_px_vector": 0,
+          "text_ink_px_raster": 3550260,
+          "other_ink_px": 3170,
+          "unowned_ink_px": 0,
+          "multiply_owned_ink_px": 0
+        },
+        "vector_units_proposed": 9,
+        "raster_units_proposed": 398,
+        "selected": "reconstruct",
+        "occurrence_owner_counts": {
+          "invisible": 407,
+          "unmapped": 95
+        }
+      },
+      "candidate_pdf_bytes": 453534,
+      "changed_region_dispositions": 0,
+      "baseline_render_median_seconds": 0.01078635617159307,
+      "candidate_render_median_seconds": 0.010731857968494296,
+      "render_diff_150dpi": {
+        "mean_absolute_channel_delta": 0.0,
+        "changed_pixel_fraction": 0.0,
+        "max_channel_delta": 0
+      },
+      "candidate_sha256": "002b3a9410a3ab543a48d4e2b322bc73368975fa3578d391bd9f251023931abb",
+      "prepass_summary": {
+        "lines": 32,
+        "median_sigma_px": 1.0,
+        "enclosed_paper_pixels": 32515
+      },
+      "pdf_sha256_equal_to_baseline": true,
+      "latent_trace_mentions": 0
+    },
+    {
+      "id": "quiver/alberti_pictura_1540_0008",
+      "prepass_status": 0,
+      "prepass_wall_seconds": 2.051190236117691,
+      "baseline_pdf_bytes": 336151,
+      "baseline_wall_seconds": 3.2208883019629866,
+      "status": 0,
+      "candidate_wall_seconds": 2.8186517029535025,
+      "text_diff": {
+        "same": true,
+        "removed_characters": 0,
+        "added_characters": 0,
+        "order_only": false,
+        "baseline_ufffe": 6,
+        "candidate_ufffe": 6,
+        "new_ufffe": 0
+      },
+      "baseline": {
+        "raster_bytes": 326515,
+        "coverage": {
+          "text_ink_px_total": 14172,
+          "text_ink_px_vector": 0,
+          "text_ink_px_raster": 14172,
+          "other_ink_px": 1670746,
+          "unowned_ink_px": 0,
+          "multiply_owned_ink_px": 0
+        },
+        "vector_units_proposed": 0,
+        "raster_units_proposed": 299,
+        "selected": "reconstruct",
+        "occurrence_owner_counts": {
+          "invisible": 299,
+          "unmapped": 162
+        }
+      },
+      "candidate": {
+        "raster_bytes": 326515,
+        "coverage": {
+          "text_ink_px_total": 14172,
+          "text_ink_px_vector": 0,
+          "text_ink_px_raster": 14172,
+          "other_ink_px": 1670746,
+          "unowned_ink_px": 0,
+          "multiply_owned_ink_px": 0
+        },
+        "vector_units_proposed": 0,
+        "raster_units_proposed": 299,
+        "selected": "reconstruct",
+        "occurrence_owner_counts": {
+          "invisible": 299,
+          "unmapped": 162
+        }
+      },
+      "candidate_pdf_bytes": 336151,
+      "changed_region_dispositions": 0,
+      "baseline_render_median_seconds": 0.0062971950974315405,
+      "candidate_render_median_seconds": 0.00540479295887053,
+      "render_diff_150dpi": {
+        "mean_absolute_channel_delta": 0.0,
+        "changed_pixel_fraction": 0.0,
+        "max_channel_delta": 0
+      },
+      "candidate_sha256": "b4856591a43a9e076d7f0d1253fc687e570280a8cdcb9512606ebd3b7bd97aea",
+      "prepass_summary": {
+        "lines": 29,
+        "median_sigma_px": 0.5,
+        "enclosed_paper_pixels": 20366
+      },
+      "pdf_sha256_equal_to_baseline": true,
+      "latent_trace_mentions": 0
+    },
+    {
+      "id": "quiver/silesius_seelenlust01_1657_0010",
+      "prepass_status": 0,
+      "prepass_wall_seconds": 2.031420410843566,
+      "baseline_pdf_bytes": 376605,
+      "baseline_wall_seconds": 11.932202124968171,
+      "status": 0,
+      "candidate_wall_seconds": 15.943511096993461,
+      "text_diff": {
+        "same": true,
+        "removed_characters": 0,
+        "added_characters": 0,
+        "order_only": false,
+        "baseline_ufffe": 3,
+        "candidate_ufffe": 3,
+        "new_ufffe": 0
+      },
+      "baseline": {
+        "raster_bytes": 366431,
+        "coverage": {
+          "text_ink_px_total": 1624959,
+          "text_ink_px_vector": 0,
+          "text_ink_px_raster": 1624959,
+          "other_ink_px": 2512,
+          "unowned_ink_px": 0,
+          "multiply_owned_ink_px": 0
+        },
+        "vector_units_proposed": 28,
+        "raster_units_proposed": 325,
+        "selected": "reconstruct",
+        "occurrence_owner_counts": {
+          "invisible": 353,
+          "unmapped": 395
+        }
+      },
+      "candidate": {
+        "raster_bytes": 366431,
+        "coverage": {
+          "text_ink_px_total": 1624959,
+          "text_ink_px_vector": 0,
+          "text_ink_px_raster": 1624959,
+          "other_ink_px": 2512,
+          "unowned_ink_px": 0,
+          "multiply_owned_ink_px": 0
+        },
+        "vector_units_proposed": 28,
+        "raster_units_proposed": 325,
+        "selected": "reconstruct",
+        "occurrence_owner_counts": {
+          "invisible": 353,
+          "unmapped": 395
+        }
+      },
+      "candidate_pdf_bytes": 376605,
+      "changed_region_dispositions": 0,
+      "baseline_render_median_seconds": 0.005788570968434215,
+      "candidate_render_median_seconds": 0.0066182250156998634,
+      "render_diff_150dpi": {
+        "mean_absolute_channel_delta": 0.0,
+        "changed_pixel_fraction": 0.0,
+        "max_channel_delta": 0
+      },
+      "candidate_sha256": "f9ee90d98a411b6543f83627403bbf8685d5383fa6464cd389fca322c9f998fb",
+      "prepass_summary": {
+        "lines": 19,
+        "median_sigma_px": 0.75,
+        "enclosed_paper_pixels": 45601
+      },
+      "pdf_sha256_equal_to_baseline": true,
+      "latent_trace_mentions": 0
+    },
+    {
+      "id": "quiver/silesius_seelenlust01_1657_0021",
+      "prepass_status": 0,
+      "prepass_wall_seconds": 2.2331904268357903,
+      "baseline_pdf_bytes": 346050,
+      "baseline_wall_seconds": 11.135137022007257,
+      "status": 0,
+      "candidate_wall_seconds": 13.738215008052066,
+      "text_diff": {
+        "same": true,
+        "removed_characters": 0,
+        "added_characters": 0,
+        "order_only": false,
+        "baseline_ufffe": 2,
+        "candidate_ufffe": 2,
+        "new_ufffe": 0
+      },
+      "baseline": {
+        "raster_bytes": 336529,
+        "coverage": {
+          "text_ink_px_total": 1488633,
+          "text_ink_px_vector": 0,
+          "text_ink_px_raster": 1488633,
+          "other_ink_px": 1014,
+          "unowned_ink_px": 0,
+          "multiply_owned_ink_px": 0
+        },
+        "vector_units_proposed": 26,
+        "raster_units_proposed": 165,
+        "selected": "reconstruct",
+        "occurrence_owner_counts": {
+          "invisible": 191,
+          "unmapped": 63
+        }
+      },
+      "candidate": {
+        "raster_bytes": 336529,
+        "coverage": {
+          "text_ink_px_total": 1488633,
+          "text_ink_px_vector": 0,
+          "text_ink_px_raster": 1488633,
+          "other_ink_px": 1014,
+          "unowned_ink_px": 0,
+          "multiply_owned_ink_px": 0
+        },
+        "vector_units_proposed": 26,
+        "raster_units_proposed": 165,
+        "selected": "reconstruct",
+        "occurrence_owner_counts": {
+          "invisible": 191,
+          "unmapped": 63
+        }
+      },
+      "candidate_pdf_bytes": 346050,
+      "changed_region_dispositions": 0,
+      "baseline_render_median_seconds": 0.0051682800985872746,
+      "candidate_render_median_seconds": 0.00509801204316318,
+      "render_diff_150dpi": {
+        "mean_absolute_channel_delta": 0.0,
+        "changed_pixel_fraction": 0.0,
+        "max_channel_delta": 0
+      },
+      "candidate_sha256": "3bd8372d93a78bd47e8935361305728b6b200c74839d2ef4693234ec929e453c",
+      "prepass_summary": {
+        "lines": 20,
+        "median_sigma_px": 0.5,
+        "enclosed_paper_pixels": 38225
+      },
+      "pdf_sha256_equal_to_baseline": true,
+      "latent_trace_mentions": 0
+    },
+    {
+      "id": "quiver/silesius_seelenlust01_1657_0423",
+      "prepass_status": 0,
+      "prepass_wall_seconds": 2.008189231855795,
+      "baseline_pdf_bytes": 326855,
+      "baseline_wall_seconds": 3.3207790409214795,
+      "status": 0,
+      "candidate_wall_seconds": 3.3697096640244126,
+      "text_diff": {
+        "same": true,
+        "removed_characters": 0,
+        "added_characters": 0,
+        "order_only": false,
+        "baseline_ufffe": 0,
+        "candidate_ufffe": 0,
+        "new_ufffe": 0
+      },
+      "baseline": {
+        "raster_bytes": 317772,
+        "coverage": {
+          "text_ink_px_total": 12027,
+          "text_ink_px_vector": 0,
+          "text_ink_px_raster": 12027,
+          "other_ink_px": 1753893,
+          "unowned_ink_px": 0,
+          "multiply_owned_ink_px": 0
+        },
+        "vector_units_proposed": 0,
+        "raster_units_proposed": 257,
+        "selected": "reconstruct",
+        "occurrence_owner_counts": {
+          "invisible": 257,
+          "unmapped": 63
+        }
+      },
+      "candidate": {
+        "raster_bytes": 317772,
+        "coverage": {
+          "text_ink_px_total": 12027,
+          "text_ink_px_vector": 0,
+          "text_ink_px_raster": 12027,
+          "other_ink_px": 1753893,
+          "unowned_ink_px": 0,
+          "multiply_owned_ink_px": 0
+        },
+        "vector_units_proposed": 0,
+        "raster_units_proposed": 257,
+        "selected": "reconstruct",
+        "occurrence_owner_counts": {
+          "invisible": 257,
+          "unmapped": 63
+        }
+      },
+      "candidate_pdf_bytes": 326855,
+      "changed_region_dispositions": 0,
+      "baseline_render_median_seconds": 0.005976945161819458,
+      "candidate_render_median_seconds": 0.006137490039691329,
+      "render_diff_150dpi": {
+        "mean_absolute_channel_delta": 0.0,
+        "changed_pixel_fraction": 0.0,
+        "max_channel_delta": 0
+      },
+      "candidate_sha256": "242d403df347d7e8f707160d501a456b22efbe1da2961312569c60644e72ec4f",
+      "prepass_summary": {
+        "lines": 17,
+        "median_sigma_px": 1.0,
+        "enclosed_paper_pixels": 20423
+      },
+      "pdf_sha256_equal_to_baseline": true,
+      "latent_trace_mentions": 0
+    },
+    {
+      "id": "quiver/bohse_helicon_1696_0009",
+      "prepass_status": 0,
+      "prepass_wall_seconds": 5.143068932928145,
+      "baseline_pdf_bytes": 266753,
+      "baseline_wall_seconds": 30.568929268978536,
+      "status": 0,
+      "candidate_wall_seconds": 42.235232156002894,
+      "text_diff": {
+        "same": true,
+        "removed_characters": 0,
+        "added_characters": 0,
+        "order_only": false,
+        "baseline_ufffe": 1,
+        "candidate_ufffe": 1,
+        "new_ufffe": 0
+      },
+      "baseline": {
+        "raster_bytes": 240497,
+        "coverage": {
+          "text_ink_px_total": 386815,
+          "text_ink_px_vector": 61742,
+          "text_ink_px_raster": 325073,
+          "other_ink_px": 188327,
+          "unowned_ink_px": 0,
+          "multiply_owned_ink_px": 0
+        },
+        "vector_units_proposed": 68,
+        "raster_units_proposed": 188,
+        "selected": "reconstruct",
+        "occurrence_owner_counts": {
+          "invisible": 188,
+          "visible_tounicode": 68,
+          "unmapped": 104
+        }
+      },
+      "candidate": {
+        "raster_bytes": 240497,
+        "coverage": {
+          "text_ink_px_total": 386815,
+          "text_ink_px_vector": 61742,
+          "text_ink_px_raster": 325073,
+          "other_ink_px": 188327,
+          "unowned_ink_px": 0,
+          "multiply_owned_ink_px": 0
+        },
+        "vector_units_proposed": 68,
+        "raster_units_proposed": 188,
+        "selected": "reconstruct",
+        "occurrence_owner_counts": {
+          "invisible": 188,
+          "visible_tounicode": 68,
+          "unmapped": 104
+        }
+      },
+      "candidate_pdf_bytes": 266753,
+      "changed_region_dispositions": 0,
+      "baseline_render_median_seconds": 0.008417920209467411,
+      "candidate_render_median_seconds": 0.008506826823577285,
+      "render_diff_150dpi": {
+        "mean_absolute_channel_delta": 0.0,
+        "changed_pixel_fraction": 0.0,
+        "max_channel_delta": 0
+      },
+      "candidate_sha256": "0e091424bae7f1da18c3d4ad3f9b0a53b54a9aa3f4e03884fad90cc0e872c6c1",
+      "prepass_summary": {
+        "lines": 17,
+        "median_sigma_px": 1.0,
+        "enclosed_paper_pixels": 159930
+      },
+      "pdf_sha256_equal_to_baseline": true,
+      "latent_trace_mentions": 0
+    },
+    {
+      "id": "quiver/bohse_helicon_1696_0036",
+      "prepass_status": 0,
+      "prepass_wall_seconds": 4.467952583916485,
+      "baseline_pdf_bytes": 307814,
+      "baseline_wall_seconds": 39.13038480305113,
+      "status": 0,
+      "candidate_wall_seconds": 58.262138833059,
+      "text_diff": {
+        "same": true,
+        "removed_characters": 0,
+        "added_characters": 0,
+        "order_only": false,
+        "baseline_ufffe": 3,
+        "candidate_ufffe": 3,
+        "new_ufffe": 0
+      },
+      "baseline": {
+        "raster_bytes": 241918,
+        "coverage": {
+          "text_ink_px_total": 514563,
+          "text_ink_px_vector": 68154,
+          "text_ink_px_raster": 446409,
+          "other_ink_px": 40273,
+          "unowned_ink_px": 0,
+          "multiply_owned_ink_px": 0
+        },
+        "vector_units_proposed": 172,
+        "raster_units_proposed": 816,
+        "selected": "reconstruct",
+        "occurrence_owner_counts": {
+          "visible_tounicode": 172,
+          "invisible": 816,
+          "unmapped": 128
+        }
+      },
+      "candidate": {
+        "raster_bytes": 241918,
+        "coverage": {
+          "text_ink_px_total": 514563,
+          "text_ink_px_vector": 68154,
+          "text_ink_px_raster": 446409,
+          "other_ink_px": 40273,
+          "unowned_ink_px": 0,
+          "multiply_owned_ink_px": 0
+        },
+        "vector_units_proposed": 172,
+        "raster_units_proposed": 816,
+        "selected": "reconstruct",
+        "occurrence_owner_counts": {
+          "visible_tounicode": 172,
+          "invisible": 816,
+          "unmapped": 128
+        }
+      },
+      "candidate_pdf_bytes": 307814,
+      "changed_region_dispositions": 0,
+      "baseline_render_median_seconds": 0.00992614310234785,
+      "candidate_render_median_seconds": 0.009862513979896903,
+      "render_diff_150dpi": {
+        "mean_absolute_channel_delta": 0.0,
+        "changed_pixel_fraction": 0.0,
+        "max_channel_delta": 0
+      },
+      "candidate_sha256": "2d94eb8f42d33373376ae71322c551ebc6857e945c8e3cdc73ed2f3e3a27e7f0",
+      "prepass_summary": {
+        "lines": 32,
+        "median_sigma_px": 1.0,
+        "enclosed_paper_pixels": 88640
+      },
+      "pdf_sha256_equal_to_baseline": true,
+      "latent_trace_mentions": 0
+    },
+    {
+      "id": "quiver/meyfart_rhetorica_1634_0021",
+      "prepass_status": 0,
+      "prepass_wall_seconds": 2.05243950500153,
+      "baseline_pdf_bytes": 216031,
+      "baseline_wall_seconds": 3.3692492651753128,
+      "status": 0,
+      "candidate_wall_seconds": 3.369874174008146,
+      "text_diff": {
+        "same": true,
+        "removed_characters": 0,
+        "added_characters": 0,
+        "order_only": false,
+        "baseline_ufffe": 2,
+        "candidate_ufffe": 2,
+        "new_ufffe": 0
+      },
+      "baseline": {
+        "raster_bytes": 208449,
+        "coverage": {
+          "text_ink_px_total": 41782,
+          "text_ink_px_vector": 0,
+          "text_ink_px_raster": 41782,
+          "other_ink_px": 1505401,
+          "unowned_ink_px": 0,
+          "multiply_owned_ink_px": 0
+        },
+        "vector_units_proposed": 0,
+        "raster_units_proposed": 259,
+        "selected": "reconstruct",
+        "occurrence_owner_counts": {
+          "invisible": 259,
+          "unmapped": 78
+        }
+      },
+      "candidate": {
+        "raster_bytes": 208449,
+        "coverage": {
+          "text_ink_px_total": 41782,
+          "text_ink_px_vector": 0,
+          "text_ink_px_raster": 41782,
+          "other_ink_px": 1505401,
+          "unowned_ink_px": 0,
+          "multiply_owned_ink_px": 0
+        },
+        "vector_units_proposed": 0,
+        "raster_units_proposed": 259,
+        "selected": "reconstruct",
+        "occurrence_owner_counts": {
+          "invisible": 259,
+          "unmapped": 78
+        }
+      },
+      "candidate_pdf_bytes": 216031,
+      "changed_region_dispositions": 0,
+      "baseline_render_median_seconds": 0.007163698785007,
+      "candidate_render_median_seconds": 0.006118861027061939,
+      "render_diff_150dpi": {
+        "mean_absolute_channel_delta": 0.0,
+        "changed_pixel_fraction": 0.0,
+        "max_channel_delta": 0
+      },
+      "candidate_sha256": "5c71b647ed9c12195f55de08c239e0a4553eb269f7696c84b8c6e6fbf9a8b0bc",
+      "prepass_summary": {
+        "lines": 23,
+        "median_sigma_px": 1.0,
+        "enclosed_paper_pixels": 44852
+      },
+      "pdf_sha256_equal_to_baseline": true,
+      "latent_trace_mentions": 0
+    },
+    {
+      "id": "quiver/meyfart_rhetorica_1634_0022",
+      "prepass_status": 0,
+      "prepass_wall_seconds": 2.083576942095533,
+      "baseline_pdf_bytes": 248577,
+      "baseline_wall_seconds": 10.635122290812433,
+      "status": 0,
+      "candidate_wall_seconds": 11.385006083874032,
+      "text_diff": {
+        "same": true,
+        "removed_characters": 0,
+        "added_characters": 0,
+        "order_only": false,
+        "baseline_ufffe": 0,
+        "candidate_ufffe": 0,
+        "new_ufffe": 0
+      },
+      "baseline": {
+        "raster_bytes": 234359,
+        "coverage": {
+          "text_ink_px_total": 1632596,
+          "text_ink_px_vector": 0,
+          "text_ink_px_raster": 1632596,
+          "other_ink_px": 2602,
+          "unowned_ink_px": 0,
+          "multiply_owned_ink_px": 0
+        },
+        "vector_units_proposed": 54,
+        "raster_units_proposed": 313,
+        "selected": "reconstruct",
+        "occurrence_owner_counts": {
+          "invisible": 367,
+          "unmapped": 399
+        }
+      },
+      "candidate": {
+        "raster_bytes": 234359,
+        "coverage": {
+          "text_ink_px_total": 1632596,
+          "text_ink_px_vector": 0,
+          "text_ink_px_raster": 1632596,
+          "other_ink_px": 2602,
+          "unowned_ink_px": 0,
+          "multiply_owned_ink_px": 0
+        },
+        "vector_units_proposed": 54,
+        "raster_units_proposed": 313,
+        "selected": "reconstruct",
+        "occurrence_owner_counts": {
+          "invisible": 367,
+          "unmapped": 399
+        }
+      },
+      "candidate_pdf_bytes": 248577,
+      "changed_region_dispositions": 0,
+      "baseline_render_median_seconds": 0.005867987871170044,
+      "candidate_render_median_seconds": 0.0061478400602936745,
+      "render_diff_150dpi": {
+        "mean_absolute_channel_delta": 0.0,
+        "changed_pixel_fraction": 0.0,
+        "max_channel_delta": 0
+      },
+      "candidate_sha256": "8a1973fb3a2832be61933461c7d0626ce6632ccc0528c718adbe701fd8a813ae",
+      "prepass_summary": {
+        "lines": 25,
+        "median_sigma_px": 1.0,
+        "enclosed_paper_pixels": 37198
+      },
+      "pdf_sha256_equal_to_baseline": true,
+      "latent_trace_mentions": 0
+    },
+    {
+      "id": "quiver/arnold_ketzerhistorie01_1699_0114",
+      "prepass_status": 0,
+      "prepass_wall_seconds": 12.215026050107554,
+      "baseline_pdf_bytes": 927973,
+      "baseline_wall_seconds": 23.804612295003608,
+      "status": 0,
+      "candidate_wall_seconds": 22.103120838990435,
+      "text_diff": {
+        "same": true,
+        "removed_characters": 0,
+        "added_characters": 0,
+        "order_only": false,
+        "baseline_ufffe": 8,
+        "candidate_ufffe": 8,
+        "new_ufffe": 0
+      },
+      "baseline": {
+        "raster_bytes": 886446,
+        "coverage": {
+          "text_ink_px_total": 4433,
+          "text_ink_px_vector": 0,
+          "text_ink_px_raster": 4433,
+          "other_ink_px": 6744521,
+          "unowned_ink_px": 0,
+          "multiply_owned_ink_px": 0
+        },
+        "vector_units_proposed": 0,
+        "raster_units_proposed": 239,
+        "selected": "reconstruct",
+        "occurrence_owner_counts": {
+          "invisible": 239,
+          "unmapped": 24
+        }
+      },
+      "candidate": {
+        "raster_bytes": 886446,
+        "coverage": {
+          "text_ink_px_total": 4433,
+          "text_ink_px_vector": 0,
+          "text_ink_px_raster": 4433,
+          "other_ink_px": 6744521,
+          "unowned_ink_px": 0,
+          "multiply_owned_ink_px": 0
+        },
+        "vector_units_proposed": 0,
+        "raster_units_proposed": 239,
+        "selected": "reconstruct",
+        "occurrence_owner_counts": {
+          "invisible": 239,
+          "unmapped": 24
+        }
+      },
+      "candidate_pdf_bytes": 927973,
+      "changed_region_dispositions": 0,
+      "baseline_render_median_seconds": 0.027171978959813714,
+      "candidate_render_median_seconds": 0.024099344154819846,
+      "render_diff_150dpi": {
+        "mean_absolute_channel_delta": 0.0,
+        "changed_pixel_fraction": 0.0,
+        "max_channel_delta": 0
+      },
+      "candidate_sha256": "4513239558ecc1b8a116ca9c90652a355b65c6f37c38cdfed048a77604fe5863",
+      "prepass_summary": {
+        "lines": 140,
+        "median_sigma_px": 1.0,
+        "enclosed_paper_pixels": 63052
+      },
+      "pdf_sha256_equal_to_baseline": true,
+      "latent_trace_mentions": 0
+    },
+    {
+      "id": "quiver/arnold_ketzerhistorie01_1699_0115",
+      "prepass_status": 0,
+      "prepass_wall_seconds": 12.159030471928418,
+      "baseline_pdf_bytes": 963965,
+      "baseline_wall_seconds": 23.361615374917164,
+      "status": 0,
+      "candidate_wall_seconds": 22.402374796103686,
+      "text_diff": {
+        "same": true,
+        "removed_characters": 0,
+        "added_characters": 0,
+        "order_only": false,
+        "baseline_ufffe": 15,
+        "candidate_ufffe": 15,
+        "new_ufffe": 0
+      },
+      "baseline": {
+        "raster_bytes": 920977,
+        "coverage": {
+          "text_ink_px_total": 1519,
+          "text_ink_px_vector": 0,
+          "text_ink_px_raster": 1519,
+          "other_ink_px": 6991241,
+          "unowned_ink_px": 0,
+          "multiply_owned_ink_px": 0
+        },
+        "vector_units_proposed": 0,
+        "raster_units_proposed": 183,
+        "selected": "reconstruct",
+        "occurrence_owner_counts": {
+          "invisible": 183,
+          "unmapped": 10
+        }
+      },
+      "candidate": {
+        "raster_bytes": 920977,
+        "coverage": {
+          "text_ink_px_total": 1519,
+          "text_ink_px_vector": 0,
+          "text_ink_px_raster": 1519,
+          "other_ink_px": 6991241,
+          "unowned_ink_px": 0,
+          "multiply_owned_ink_px": 0
+        },
+        "vector_units_proposed": 0,
+        "raster_units_proposed": 183,
+        "selected": "reconstruct",
+        "occurrence_owner_counts": {
+          "invisible": 183,
+          "unmapped": 10
+        }
+      },
+      "candidate_pdf_bytes": 963965,
+      "changed_region_dispositions": 0,
+      "baseline_render_median_seconds": 0.028586715925484896,
+      "candidate_render_median_seconds": 0.024615407921373844,
+      "render_diff_150dpi": {
+        "mean_absolute_channel_delta": 0.0,
+        "changed_pixel_fraction": 0.0,
+        "max_channel_delta": 0
+      },
+      "candidate_sha256": "3ba4915829a541ac4207ff2d5b7f5ba91e092d8cabbe8c497052923eb807398e",
+      "prepass_summary": {
+        "lines": 145,
+        "median_sigma_px": 1.0,
+        "enclosed_paper_pixels": 68614
+      },
+      "pdf_sha256_equal_to_baseline": true,
+      "latent_trace_mentions": 0
+    },
+    {
+      "id": "quiver/luther_auszlegunge_1520_0003",
+      "prepass_status": 0,
+      "prepass_wall_seconds": 3.936794144101441,
+      "baseline_pdf_bytes": 694395,
+      "baseline_wall_seconds": 6.874650900019333,
+      "status": 0,
+      "candidate_wall_seconds": 6.975817383034155,
+      "text_diff": {
+        "same": true,
+        "removed_characters": 0,
+        "added_characters": 0,
+        "order_only": false,
+        "baseline_ufffe": 2,
+        "candidate_ufffe": 2,
+        "new_ufffe": 0
+      },
+      "baseline": {
+        "raster_bytes": 679824,
+        "coverage": {
+          "text_ink_px_total": 70920,
+          "text_ink_px_vector": 0,
+          "text_ink_px_raster": 70920,
+          "other_ink_px": 3454611,
+          "unowned_ink_px": 0,
+          "multiply_owned_ink_px": 0
+        },
+        "vector_units_proposed": 0,
+        "raster_units_proposed": 878,
+        "selected": "reconstruct",
+        "occurrence_owner_counts": {
+          "invisible": 878,
+          "unmapped": 193
+        }
+      },
+      "candidate": {
+        "raster_bytes": 679824,
+        "coverage": {
+          "text_ink_px_total": 70920,
+          "text_ink_px_vector": 0,
+          "text_ink_px_raster": 70920,
+          "other_ink_px": 3454611,
+          "unowned_ink_px": 0,
+          "multiply_owned_ink_px": 0
+        },
+        "vector_units_proposed": 0,
+        "raster_units_proposed": 878,
+        "selected": "reconstruct",
+        "occurrence_owner_counts": {
+          "invisible": 878,
+          "unmapped": 193
+        }
+      },
+      "candidate_pdf_bytes": 694395,
+      "changed_region_dispositions": 0,
+      "baseline_render_median_seconds": 0.013953937916085124,
+      "candidate_render_median_seconds": 0.012751755071803927,
+      "render_diff_150dpi": {
+        "mean_absolute_channel_delta": 0.0,
+        "changed_pixel_fraction": 0.0,
+        "max_channel_delta": 0
+      },
+      "candidate_sha256": "50c437441e1aec5b60c00bd5cacaf415eef1523ff0aa7d35288db98e34839c79",
+      "prepass_summary": {
+        "lines": 30,
+        "median_sigma_px": 0.5,
+        "enclosed_paper_pixels": 70867
+      },
+      "pdf_sha256_equal_to_baseline": true,
+      "latent_trace_mentions": 0
+    },
+    {
+      "id": "quiver/luther_auszlegunge_1520_0029",
+      "prepass_status": 0,
+      "prepass_wall_seconds": 3.4229007200337946,
+      "baseline_pdf_bytes": 601727,
+      "baseline_wall_seconds": 21.05254855705425,
+      "status": 0,
+      "candidate_wall_seconds": 25.066849010065198,
+      "text_diff": {
+        "same": true,
+        "removed_characters": 0,
+        "added_characters": 0,
+        "order_only": false,
+        "baseline_ufffe": 1,
+        "candidate_ufffe": 1,
+        "new_ufffe": 0
+      },
+      "baseline": {
+        "raster_bytes": 585573,
+        "coverage": {
+          "text_ink_px_total": 3522288,
+          "text_ink_px_vector": 0,
+          "text_ink_px_raster": 3522288,
+          "other_ink_px": 666,
+          "unowned_ink_px": 0,
+          "multiply_owned_ink_px": 0
+        },
+        "vector_units_proposed": 42,
+        "raster_units_proposed": 479,
+        "selected": "reconstruct",
+        "occurrence_owner_counts": {
+          "invisible": 521,
+          "unmapped": 76
+        }
+      },
+      "candidate": {
+        "raster_bytes": 585573,
+        "coverage": {
+          "text_ink_px_total": 3522288,
+          "text_ink_px_vector": 0,
+          "text_ink_px_raster": 3522288,
+          "other_ink_px": 666,
+          "unowned_ink_px": 0,
+          "multiply_owned_ink_px": 0
+        },
+        "vector_units_proposed": 42,
+        "raster_units_proposed": 479,
+        "selected": "reconstruct",
+        "occurrence_owner_counts": {
+          "invisible": 521,
+          "unmapped": 76
+        }
+      },
+      "candidate_pdf_bytes": 601727,
+      "changed_region_dispositions": 0,
+      "baseline_render_median_seconds": 0.012298259185627103,
+      "candidate_render_median_seconds": 0.01205056719481945,
+      "render_diff_150dpi": {
+        "mean_absolute_channel_delta": 0.0,
+        "changed_pixel_fraction": 0.0,
+        "max_channel_delta": 0
+      },
+      "candidate_sha256": "6d3d6403fca1f70ac32c7b71cc6f162ae761e4e57744862d2f4cb01a78424129",
+      "prepass_summary": {
+        "lines": 24,
+        "median_sigma_px": 0.5,
+        "enclosed_paper_pixels": 39139
+      },
+      "pdf_sha256_equal_to_baseline": true,
+      "latent_trace_mentions": 0
+    },
+    {
+      "id": "quiver/blumenbach_anatomie_1805_0047",
+      "prepass_status": 0,
+      "prepass_wall_seconds": 3.041919918032363,
+      "baseline_pdf_bytes": 395463,
+      "baseline_wall_seconds": 5.022709448123351,
+      "status": 0,
+      "candidate_wall_seconds": 5.0769922530744225,
+      "text_diff": {
+        "same": true,
+        "removed_characters": 0,
+        "added_characters": 0,
+        "order_only": false,
+        "baseline_ufffe": 7,
+        "candidate_ufffe": 7,
+        "new_ufffe": 0
+      },
+      "baseline": {
+        "raster_bytes": 386014,
+        "coverage": {
+          "text_ink_px_total": 145,
+          "text_ink_px_vector": 0,
+          "text_ink_px_raster": 145,
+          "other_ink_px": 3343888,
+          "unowned_ink_px": 0,
+          "multiply_owned_ink_px": 0
+        },
+        "vector_units_proposed": 0,
+        "raster_units_proposed": 14,
+        "selected": "reconstruct",
+        "occurrence_owner_counts": {
+          "invisible": 14,
+          "unmapped": 831
+        }
+      },
+      "candidate": {
+        "raster_bytes": 386014,
+        "coverage": {
+          "text_ink_px_total": 145,
+          "text_ink_px_vector": 0,
+          "text_ink_px_raster": 145,
+          "other_ink_px": 3343888,
+          "unowned_ink_px": 0,
+          "multiply_owned_ink_px": 0
+        },
+        "vector_units_proposed": 0,
+        "raster_units_proposed": 14,
+        "selected": "reconstruct",
+        "occurrence_owner_counts": {
+          "invisible": 14,
+          "unmapped": 831
+        }
+      },
+      "candidate_pdf_bytes": 395463,
+      "changed_region_dispositions": 0,
+      "baseline_render_median_seconds": 0.012785773957148194,
+      "candidate_render_median_seconds": 0.012490362860262394,
+      "render_diff_150dpi": {
+        "mean_absolute_channel_delta": 0.0,
+        "changed_pixel_fraction": 0.0,
+        "max_channel_delta": 0
+      },
+      "candidate_sha256": "88ef1f05916a694eb88ec0e378de542cca3bccd9e119f25fd81639704a369b71",
+      "prepass_summary": {
+        "lines": 27,
+        "median_sigma_px": 1.0,
+        "enclosed_paper_pixels": 8585
+      },
+      "pdf_sha256_equal_to_baseline": true,
+      "latent_trace_mentions": 0
+    },
+    {
+      "id": "finebooks/conchologiaiconi05reev/8967333",
+      "prepass_status": 0,
+      "prepass_wall_seconds": 1.719939504051581,
+      "baseline_pdf_bytes": 215146,
+      "baseline_wall_seconds": 9.077569351997226,
+      "status": 0,
+      "candidate_wall_seconds": 16.58897251007147,
+      "text_diff": {
+        "same": true,
+        "removed_characters": 0,
+        "added_characters": 0,
+        "order_only": false,
+        "baseline_ufffe": 0,
+        "candidate_ufffe": 0,
+        "new_ufffe": 0
+      },
+      "baseline": {
+        "raster_bytes": 167352,
+        "coverage": {
+          "text_ink_px_total": 42825,
+          "text_ink_px_vector": 36761,
+          "text_ink_px_raster": 6064,
+          "other_ink_px": 2527,
+          "unowned_ink_px": 0,
+          "multiply_owned_ink_px": 0
+        },
+        "vector_units_proposed": 167,
+        "raster_units_proposed": 96,
+        "selected": "reconstruct",
+        "occurrence_owner_counts": {
+          "visible_tounicode": 167,
+          "invisible": 96,
+          "unmapped": 89
+        }
+      },
+      "candidate": {
+        "raster_bytes": 167352,
+        "coverage": {
+          "text_ink_px_total": 42825,
+          "text_ink_px_vector": 36761,
+          "text_ink_px_raster": 6064,
+          "other_ink_px": 2527,
+          "unowned_ink_px": 0,
+          "multiply_owned_ink_px": 0
+        },
+        "vector_units_proposed": 167,
+        "raster_units_proposed": 96,
+        "selected": "reconstruct",
+        "occurrence_owner_counts": {
+          "visible_tounicode": 167,
+          "invisible": 96,
+          "unmapped": 89
+        }
+      },
+      "candidate_pdf_bytes": 215146,
+      "changed_region_dispositions": 0,
+      "baseline_render_median_seconds": 0.011347749037668109,
+      "candidate_render_median_seconds": 0.011643660021945834,
+      "render_diff_150dpi": {
+        "mean_absolute_channel_delta": 0.0,
+        "changed_pixel_fraction": 0.0,
+        "max_channel_delta": 0
+      },
+      "candidate_sha256": "2ecd7a1f758b1e4d45d6de28545d68abeaecb94bc636cdaced6e61dd6723be56",
+      "prepass_summary": {
+        "lines": 9,
+        "median_sigma_px": 1.0,
+        "enclosed_paper_pixels": 4950
+      },
+      "pdf_sha256_equal_to_baseline": true,
+      "latent_trace_mentions": 0
+    },
+    {
+      "id": "finebooks/conchologiaiconi05reev/8966753",
+      "prepass_status": 0,
+      "prepass_wall_seconds": 6.62965015694499,
+      "baseline_pdf_bytes": 1467004,
+      "baseline_wall_seconds": 56.99352342099883,
+      "status": 0,
+      "candidate_wall_seconds": 87.20883257500827,
+      "text_diff": {
+        "same": true,
+        "removed_characters": 0,
+        "added_characters": 0,
+        "order_only": false,
+        "baseline_ufffe": 6,
+        "candidate_ufffe": 6,
+        "new_ufffe": 0
+      },
+      "baseline": {
+        "raster_bytes": 1195658,
+        "coverage": {
+          "text_ink_px_total": 208821,
+          "text_ink_px_vector": 66395,
+          "text_ink_px_raster": 142426,
+          "other_ink_px": 13705,
+          "unowned_ink_px": 0,
+          "multiply_owned_ink_px": 0
+        },
+        "vector_units_proposed": 1393,
+        "raster_units_proposed": 3118,
+        "selected": "reconstruct",
+        "occurrence_owner_counts": {
+          "invisible": 3118,
+          "visible_tounicode": 1393,
+          "unmapped": 20
+        }
+      },
+      "candidate": {
+        "raster_bytes": 1195658,
+        "coverage": {
+          "text_ink_px_total": 208821,
+          "text_ink_px_vector": 66395,
+          "text_ink_px_raster": 142426,
+          "other_ink_px": 13705,
+          "unowned_ink_px": 0,
+          "multiply_owned_ink_px": 0
+        },
+        "vector_units_proposed": 1393,
+        "raster_units_proposed": 3118,
+        "selected": "reconstruct",
+        "occurrence_owner_counts": {
+          "invisible": 3118,
+          "visible_tounicode": 1393,
+          "unmapped": 20
+        }
+      },
+      "candidate_pdf_bytes": 1467004,
+      "changed_region_dispositions": 0,
+      "baseline_render_median_seconds": 0.020199326099827886,
+      "candidate_render_median_seconds": 0.020281573059037328,
+      "render_diff_150dpi": {
+        "mean_absolute_channel_delta": 0.0,
+        "changed_pixel_fraction": 0.0,
+        "max_channel_delta": 0
+      },
+      "candidate_sha256": "dc17277b16d1e6fd65c671b439e058f4378dd166947c1908f7b8852cde4da29f",
+      "prepass_summary": {
+        "lines": 96,
+        "median_sigma_px": 1.25,
+        "enclosed_paper_pixels": 30285
+      },
+      "pdf_sha256_equal_to_baseline": true,
+      "latent_trace_mentions": 0
+    },
+    {
+      "id": "finebooks/conchologiaiconi05reev/8967228",
+      "prepass_status": 0,
+      "prepass_wall_seconds": 2.6475101800169796,
+      "baseline_pdf_bytes": 161265,
+      "baseline_wall_seconds": 23.054444127017632,
+      "status": 0,
+      "candidate_wall_seconds": 22.498984436970204,
+      "text_diff": {
+        "same": true,
+        "removed_characters": 0,
+        "added_characters": 0,
+        "order_only": false,
+        "baseline_ufffe": 0,
+        "candidate_ufffe": 0,
+        "new_ufffe": 0
+      },
+      "baseline": {
+        "raster_bytes": 157464,
+        "coverage": {
+          "text_ink_px_total": 419,
+          "text_ink_px_vector": 415,
+          "text_ink_px_raster": 4,
+          "other_ink_px": 940765,
+          "unowned_ink_px": 0,
+          "multiply_owned_ink_px": 0
+        },
+        "vector_units_proposed": 9,
+        "raster_units_proposed": 1,
+        "selected": "reconstruct",
+        "occurrence_owner_counts": {
+          "visible_tounicode": 9,
+          "invisible": 1,
+          "unmapped": 7686
+        }
+      },
+      "candidate": {
+        "raster_bytes": 157464,
+        "coverage": {
+          "text_ink_px_total": 419,
+          "text_ink_px_vector": 415,
+          "text_ink_px_raster": 4,
+          "other_ink_px": 940765,
+          "unowned_ink_px": 0,
+          "multiply_owned_ink_px": 0
+        },
+        "vector_units_proposed": 9,
+        "raster_units_proposed": 1,
+        "selected": "reconstruct",
+        "occurrence_owner_counts": {
+          "visible_tounicode": 9,
+          "invisible": 1,
+          "unmapped": 7686
+        }
+      },
+      "candidate_pdf_bytes": 161265,
+      "changed_region_dispositions": 0,
+      "baseline_render_median_seconds": 0.007128288969397545,
+      "candidate_render_median_seconds": 0.007459969026967883,
+      "render_diff_150dpi": {
+        "mean_absolute_channel_delta": 0.0,
+        "changed_pixel_fraction": 0.0,
+        "max_channel_delta": 0
+      },
+      "candidate_sha256": "617a9436b0d1aa1e05107b03b0b6ecbd917d6a9ffa1b2b943babeff998d36a37",
+      "prepass_summary": {
+        "lines": 0,
+        "median_sigma_px": null,
+        "enclosed_paper_pixels": 0
+      },
+      "pdf_sha256_equal_to_baseline": true,
+      "latent_trace_mentions": 0
+    },
+    {
+      "id": "finebooks/conchologiaiconi05reev/8967062",
+      "prepass_status": 0,
+      "prepass_wall_seconds": 3.431863696081564,
+      "baseline_pdf_bytes": 92310,
+      "baseline_wall_seconds": 8.530242308042943,
+      "status": 0,
+      "candidate_wall_seconds": 11.483933380106464,
+      "text_diff": {
+        "same": true,
+        "removed_characters": 0,
+        "added_characters": 0,
+        "order_only": false,
+        "baseline_ufffe": 1,
+        "candidate_ufffe": 1,
+        "new_ufffe": 0
+      },
+      "baseline": {
+        "raster_bytes": 69269,
+        "coverage": {
+          "text_ink_px_total": 26398,
+          "text_ink_px_vector": 10061,
+          "text_ink_px_raster": 16337,
+          "other_ink_px": 92538,
+          "unowned_ink_px": 0,
+          "multiply_owned_ink_px": 0
+        },
+        "vector_units_proposed": 63,
+        "raster_units_proposed": 127,
+        "selected": "reconstruct",
+        "occurrence_owner_counts": {
+          "visible_tounicode": 63,
+          "invisible": 127,
+          "unmapped": 824
+        }
+      },
+      "candidate": {
+        "raster_bytes": 69269,
+        "coverage": {
+          "text_ink_px_total": 26398,
+          "text_ink_px_vector": 10061,
+          "text_ink_px_raster": 16337,
+          "other_ink_px": 92538,
+          "unowned_ink_px": 0,
+          "multiply_owned_ink_px": 0
+        },
+        "vector_units_proposed": 63,
+        "raster_units_proposed": 127,
+        "selected": "reconstruct",
+        "occurrence_owner_counts": {
+          "visible_tounicode": 63,
+          "invisible": 127,
+          "unmapped": 824
+        }
+      },
+      "candidate_pdf_bytes": 92310,
+      "changed_region_dispositions": 0,
+      "baseline_render_median_seconds": 0.008362511172890663,
+      "candidate_render_median_seconds": 0.008256625151261687,
+      "render_diff_150dpi": {
+        "mean_absolute_channel_delta": 0.0,
+        "changed_pixel_fraction": 0.0,
+        "max_channel_delta": 0
+      },
+      "candidate_sha256": "78a1145c212caa99fdd09e4b6506d3ccad3a55c99e0222a167ec2b9f4e103fd9",
+      "prepass_summary": {
+        "lines": 38,
+        "median_sigma_px": 1.5,
+        "enclosed_paper_pixels": 1859
+      },
+      "pdf_sha256_equal_to_baseline": true,
+      "latent_trace_mentions": 0
+    },
+    {
+      "id": "finebooks/pisciumquerelaee00sche/9684341",
+      "prepass_status": 0,
+      "prepass_wall_seconds": 3.1950652438681573,
+      "baseline_pdf_bytes": 423396,
+      "baseline_wall_seconds": 28.661144994897768,
+      "status": 0,
+      "candidate_wall_seconds": 25.91419728496112,
+      "text_diff": {
+        "same": true,
+        "removed_characters": 0,
+        "added_characters": 0,
+        "order_only": false,
+        "baseline_ufffe": 1,
+        "candidate_ufffe": 1,
+        "new_ufffe": 0
+      },
+      "baseline": {
+        "raster_bytes": 397029,
+        "coverage": {
+          "text_ink_px_total": 31244,
+          "text_ink_px_vector": 6876,
+          "text_ink_px_raster": 24368,
+          "other_ink_px": 1462966,
+          "unowned_ink_px": 0,
+          "multiply_owned_ink_px": 0
+        },
+        "vector_units_proposed": 94,
+        "raster_units_proposed": 266,
+        "selected": "reconstruct",
+        "occurrence_owner_counts": {
+          "invisible": 266,
+          "visible_tounicode": 94,
+          "unmapped": 6730
+        }
+      },
+      "candidate": {
+        "raster_bytes": 397029,
+        "coverage": {
+          "text_ink_px_total": 31244,
+          "text_ink_px_vector": 6876,
+          "text_ink_px_raster": 24368,
+          "other_ink_px": 1462966,
+          "unowned_ink_px": 0,
+          "multiply_owned_ink_px": 0
+        },
+        "vector_units_proposed": 94,
+        "raster_units_proposed": 266,
+        "selected": "reconstruct",
+        "occurrence_owner_counts": {
+          "invisible": 266,
+          "visible_tounicode": 94,
+          "unmapped": 6730
+        }
+      },
+      "candidate_pdf_bytes": 423396,
+      "changed_region_dispositions": 0,
+      "baseline_render_median_seconds": 0.010509394807741046,
+      "candidate_render_median_seconds": 0.009598382981494069,
+      "render_diff_150dpi": {
+        "mean_absolute_channel_delta": 0.0,
+        "changed_pixel_fraction": 0.0,
+        "max_channel_delta": 0
+      },
+      "candidate_sha256": "de2097a76e81630cd7f33dfc4994bac1dabf9be2938a69bab933dc5eaad4ee28",
+      "prepass_summary": {
+        "lines": 10,
+        "median_sigma_px": 1.0,
+        "enclosed_paper_pixels": 1027
+      },
+      "pdf_sha256_equal_to_baseline": true,
+      "latent_trace_mentions": 0
+    },
+    {
+      "id": "finebooks/pisciumquerelaee00sche/9684355",
+      "prepass_status": 0,
+      "prepass_wall_seconds": 7.480359145207331,
+      "baseline_pdf_bytes": 434445,
+      "baseline_wall_seconds": 82.42914623511024,
+      "status": 0,
+      "candidate_wall_seconds": 110.19633120088838,
+      "text_diff": {
+        "same": true,
+        "removed_characters": 0,
+        "added_characters": 0,
+        "order_only": false,
+        "baseline_ufffe": 14,
+        "candidate_ufffe": 14,
+        "new_ufffe": 0
+      },
+      "baseline": {
+        "raster_bytes": 373648,
+        "coverage": {
+          "text_ink_px_total": 814911,
+          "text_ink_px_vector": 81928,
+          "text_ink_px_raster": 732983,
+          "other_ink_px": 5160,
+          "unowned_ink_px": 0,
+          "multiply_owned_ink_px": 0
+        },
+        "vector_units_proposed": 136,
+        "raster_units_proposed": 1339,
+        "selected": "reconstruct",
+        "occurrence_owner_counts": {
+          "visible_tounicode": 136,
+          "invisible": 1339,
+          "unmapped": 94
+        }
+      },
+      "candidate": {
+        "raster_bytes": 373648,
+        "coverage": {
+          "text_ink_px_total": 814911,
+          "text_ink_px_vector": 81928,
+          "text_ink_px_raster": 732983,
+          "other_ink_px": 5160,
+          "unowned_ink_px": 0,
+          "multiply_owned_ink_px": 0
+        },
+        "vector_units_proposed": 136,
+        "raster_units_proposed": 1339,
+        "selected": "reconstruct",
+        "occurrence_owner_counts": {
+          "visible_tounicode": 136,
+          "invisible": 1339,
+          "unmapped": 94
+        }
+      },
+      "candidate_pdf_bytes": 433965,
+      "changed_region_dispositions": 0,
+      "baseline_render_median_seconds": 0.014023905852809548,
+      "candidate_render_median_seconds": 0.013741455040872097,
+      "render_diff_150dpi": {
+        "mean_absolute_channel_delta": 0.012849228549455187,
+        "changed_pixel_fraction": 0.0009759683116564919,
+        "max_channel_delta": 51
+      },
+      "candidate_sha256": "a766d740c3245fa7f717e366fa8ce917d95f82ffbbd0eeac437b379084db7982",
+      "prepass_summary": {
+        "lines": 36,
+        "median_sigma_px": 1.0,
+        "enclosed_paper_pixels": 42730
+      },
+      "pdf_sha256_equal_to_baseline": false,
+      "latent_trace_mentions": 0
+    },
+    {
+      "id": "finebooks/pisciumquerelaee00sche/9684335",
+      "prepass_status": 0,
+      "prepass_wall_seconds": 7.468354498967528,
+      "baseline_pdf_bytes": 431781,
+      "baseline_wall_seconds": 82.56563408486545,
+      "status": 0,
+      "candidate_wall_seconds": 117.1993287850637,
+      "text_diff": {
+        "same": true,
+        "removed_characters": 0,
+        "added_characters": 0,
+        "order_only": false,
+        "baseline_ufffe": 12,
+        "candidate_ufffe": 12,
+        "new_ufffe": 0
+      },
+      "baseline": {
+        "raster_bytes": 330266,
+        "coverage": {
+          "text_ink_px_total": 625395,
+          "text_ink_px_vector": 123590,
+          "text_ink_px_raster": 501805,
+          "other_ink_px": 2069,
+          "unowned_ink_px": 0,
+          "multiply_owned_ink_px": 0
+        },
+        "vector_units_proposed": 223,
+        "raster_units_proposed": 975,
+        "selected": "reconstruct",
+        "occurrence_owner_counts": {
+          "visible_tounicode": 223,
+          "invisible": 975,
+          "unmapped": 82
+        }
+      },
+      "candidate": {
+        "raster_bytes": 330266,
+        "coverage": {
+          "text_ink_px_total": 625395,
+          "text_ink_px_vector": 123590,
+          "text_ink_px_raster": 501805,
+          "other_ink_px": 2069,
+          "unowned_ink_px": 0,
+          "multiply_owned_ink_px": 0
+        },
+        "vector_units_proposed": 223,
+        "raster_units_proposed": 975,
+        "selected": "reconstruct",
+        "occurrence_owner_counts": {
+          "visible_tounicode": 223,
+          "invisible": 975,
+          "unmapped": 82
+        }
+      },
+      "candidate_pdf_bytes": 431752,
+      "changed_region_dispositions": 0,
+      "baseline_render_median_seconds": 0.016608526930212975,
+      "candidate_render_median_seconds": 0.016410622978582978,
+      "render_diff_150dpi": {
+        "mean_absolute_channel_delta": 0.009347584920813171,
+        "changed_pixel_fraction": 0.0007534148682034424,
+        "max_channel_delta": 47
+      },
+      "candidate_sha256": "24d3b86ef7a740926c01edc2ca732102a4e7014fe4441df447ba207e81528302",
+      "prepass_summary": {
+        "lines": 33,
+        "median_sigma_px": 1.0,
+        "enclosed_paper_pixels": 46837
+      },
+      "pdf_sha256_equal_to_baseline": false,
+      "latent_trace_mentions": 0
+    },
+    {
+      "id": "finebooks/pisciumquerelaee00sche/9684354",
+      "prepass_status": 0,
+      "prepass_wall_seconds": 7.684000197099522,
+      "baseline_pdf_bytes": 419378,
+      "baseline_wall_seconds": 91.05347533989698,
+      "status": 0,
+      "candidate_wall_seconds": 111.54240333219059,
+      "text_diff": {
+        "same": true,
+        "removed_characters": 0,
+        "added_characters": 0,
+        "order_only": false,
+        "baseline_ufffe": 10,
+        "candidate_ufffe": 10,
+        "new_ufffe": 0
+      },
+      "baseline": {
+        "raster_bytes": 363354,
+        "coverage": {
+          "text_ink_px_total": 721708,
+          "text_ink_px_vector": 85388,
+          "text_ink_px_raster": 636320,
+          "other_ink_px": 2295,
+          "unowned_ink_px": 0,
+          "multiply_owned_ink_px": 0
+        },
+        "vector_units_proposed": 119,
+        "raster_units_proposed": 1059,
+        "selected": "reconstruct",
+        "occurrence_owner_counts": {
+          "visible_tounicode": 119,
+          "invisible": 1059,
+          "unmapped": 134
+        }
+      },
+      "candidate": {
+        "raster_bytes": 363354,
+        "coverage": {
+          "text_ink_px_total": 721708,
+          "text_ink_px_vector": 85388,
+          "text_ink_px_raster": 636320,
+          "other_ink_px": 2295,
+          "unowned_ink_px": 0,
+          "multiply_owned_ink_px": 0
+        },
+        "vector_units_proposed": 119,
+        "raster_units_proposed": 1059,
+        "selected": "reconstruct",
+        "occurrence_owner_counts": {
+          "visible_tounicode": 119,
+          "invisible": 1059,
+          "unmapped": 134
+        }
+      },
+      "candidate_pdf_bytes": 419167,
+      "changed_region_dispositions": 0,
+      "baseline_render_median_seconds": 0.0138139589689672,
+      "candidate_render_median_seconds": 0.013720781076699495,
+      "render_diff_150dpi": {
+        "mean_absolute_channel_delta": 0.014898830063090838,
+        "changed_pixel_fraction": 0.001150540049410948,
+        "max_channel_delta": 68
+      },
+      "candidate_sha256": "c185891ecdf2e8ce621659d2901ffc01bc833ae7789cf3f36c4b5a7d2b7d55a1",
+      "prepass_summary": {
+        "lines": 33,
+        "median_sigma_px": 1.0,
+        "enclosed_paper_pixels": 47411
+      },
+      "pdf_sha256_equal_to_baseline": false,
+      "latent_trace_mentions": 0
+    },
+    {
+      "id": "finebooks/trudyrusskagoent161881russ/12341923",
+      "prepass_status": 0,
+      "prepass_wall_seconds": 5.490073131863028,
+      "baseline_pdf_bytes": 290081,
+      "baseline_wall_seconds": 31.216619645943865,
+      "status": 0,
+      "candidate_wall_seconds": 52.90163777116686,
+      "text_diff": {
+        "same": true,
+        "removed_characters": 0,
+        "added_characters": 0,
+        "order_only": false,
+        "baseline_ufffe": 0,
+        "candidate_ufffe": 0,
+        "new_ufffe": 0
+      },
+      "baseline": {
+        "raster_bytes": 179141,
+        "coverage": {
+          "text_ink_px_total": 178783,
+          "text_ink_px_vector": 133026,
+          "text_ink_px_raster": 45757,
+          "other_ink_px": 531,
+          "unowned_ink_px": 0,
+          "multiply_owned_ink_px": 0
+        },
+        "vector_units_proposed": 341,
+        "raster_units_proposed": 168,
+        "selected": "reconstruct",
+        "occurrence_owner_counts": {
+          "visible_tounicode": 341,
+          "invisible": 168,
+          "unmapped": 29
+        }
+      },
+      "candidate": {
+        "raster_bytes": 179141,
+        "coverage": {
+          "text_ink_px_total": 178783,
+          "text_ink_px_vector": 133026,
+          "text_ink_px_raster": 45757,
+          "other_ink_px": 531,
+          "unowned_ink_px": 0,
+          "multiply_owned_ink_px": 0
+        },
+        "vector_units_proposed": 341,
+        "raster_units_proposed": 168,
+        "selected": "reconstruct",
+        "occurrence_owner_counts": {
+          "visible_tounicode": 341,
+          "invisible": 168,
+          "unmapped": 29
+        }
+      },
+      "candidate_pdf_bytes": 290081,
+      "changed_region_dispositions": 0,
+      "baseline_render_median_seconds": 0.018349548103287816,
+      "candidate_render_median_seconds": 0.02110030292533338,
+      "render_diff_150dpi": {
+        "mean_absolute_channel_delta": 0.0,
+        "changed_pixel_fraction": 0.0,
+        "max_channel_delta": 0
+      },
+      "candidate_sha256": "3dd6dea76c87387d1da6118fe4a5e5130873efccc5c1caf356f800374b461cbd",
+      "prepass_summary": {
+        "lines": 21,
+        "median_sigma_px": 1.0,
+        "enclosed_paper_pixels": 8527
+      },
+      "pdf_sha256_equal_to_baseline": true,
+      "latent_trace_mentions": 0
+    },
+    {
+      "id": "finebooks/trudyrusskagoent161881russ/12342014",
+      "prepass_status": 0,
+      "prepass_wall_seconds": 6.991491032997146,
+      "baseline_pdf_bytes": 554944,
+      "baseline_wall_seconds": 53.65674603404477,
+      "status": 0,
+      "candidate_wall_seconds": 76.74363801791333,
+      "text_diff": {
+        "same": true,
+        "removed_characters": 0,
+        "added_characters": 0,
+        "order_only": false,
+        "baseline_ufffe": 0,
+        "candidate_ufffe": 0,
+        "new_ufffe": 0
+      },
+      "baseline": {
+        "raster_bytes": 276454,
+        "coverage": {
+          "text_ink_px_total": 219792,
+          "text_ink_px_vector": 150562,
+          "text_ink_px_raster": 69230,
+          "other_ink_px": 27144,
+          "unowned_ink_px": 0,
+          "multiply_owned_ink_px": 0
+        },
+        "vector_units_proposed": 1141,
+        "raster_units_proposed": 637,
+        "selected": "reconstruct",
+        "occurrence_owner_counts": {
+          "visible_tounicode": 1141,
+          "invisible": 637,
+          "unmapped": 945
+        }
+      },
+      "candidate": {
+        "raster_bytes": 276454,
+        "coverage": {
+          "text_ink_px_total": 219792,
+          "text_ink_px_vector": 150562,
+          "text_ink_px_raster": 69230,
+          "other_ink_px": 27144,
+          "unowned_ink_px": 0,
+          "multiply_owned_ink_px": 0
+        },
+        "vector_units_proposed": 1141,
+        "raster_units_proposed": 637,
+        "selected": "reconstruct",
+        "occurrence_owner_counts": {
+          "visible_tounicode": 1141,
+          "invisible": 637,
+          "unmapped": 945
+        }
+      },
+      "candidate_pdf_bytes": 554944,
+      "changed_region_dispositions": 0,
+      "baseline_render_median_seconds": 0.02832659683190286,
+      "candidate_render_median_seconds": 0.02904575294815004,
+      "render_diff_150dpi": {
+        "mean_absolute_channel_delta": 0.0,
+        "changed_pixel_fraction": 0.0,
+        "max_channel_delta": 0
+      },
+      "candidate_sha256": "a26139c97ce7e43914228a6b2bd6a3eabcae3cd71d61508f4ef579ab597707fa",
+      "prepass_summary": {
+        "lines": 93,
+        "median_sigma_px": 1.0,
+        "enclosed_paper_pixels": 11125
+      },
+      "pdf_sha256_equal_to_baseline": true,
+      "latent_trace_mentions": 0
+    },
+    {
+      "id": "finebooks/trudyrusskagoent161881russ/12341934",
+      "prepass_status": 0,
+      "prepass_wall_seconds": 9.61900185002014,
+      "baseline_pdf_bytes": 493526,
+      "baseline_wall_seconds": 64.21345462999307,
+      "status": 0,
+      "candidate_wall_seconds": 99.62376133492216,
+      "text_diff": {
+        "same": true,
+        "removed_characters": 0,
+        "added_characters": 0,
+        "order_only": false,
+        "baseline_ufffe": 1,
+        "candidate_ufffe": 1,
+        "new_ufffe": 0
+      },
+      "baseline": {
+        "raster_bytes": 321986,
+        "coverage": {
+          "text_ink_px_total": 441600,
+          "text_ink_px_vector": 168084,
+          "text_ink_px_raster": 273516,
+          "other_ink_px": 5570,
+          "unowned_ink_px": 0,
+          "multiply_owned_ink_px": 0
+        },
+        "vector_units_proposed": 746,
+        "raster_units_proposed": 1277,
+        "selected": "reconstruct",
+        "occurrence_owner_counts": {
+          "visible_tounicode": 746,
+          "invisible": 1277,
+          "unmapped": 95
+        }
+      },
+      "candidate": {
+        "raster_bytes": 321986,
+        "coverage": {
+          "text_ink_px_total": 441600,
+          "text_ink_px_vector": 168084,
+          "text_ink_px_raster": 273516,
+          "other_ink_px": 5570,
+          "unowned_ink_px": 0,
+          "multiply_owned_ink_px": 0
+        },
+        "vector_units_proposed": 746,
+        "raster_units_proposed": 1277,
+        "selected": "reconstruct",
+        "occurrence_owner_counts": {
+          "visible_tounicode": 746,
+          "invisible": 1277,
+          "unmapped": 95
+        }
+      },
+      "candidate_pdf_bytes": 493537,
+      "changed_region_dispositions": 0,
+      "baseline_render_median_seconds": 0.024615566013380885,
+      "candidate_render_median_seconds": 0.02436021389439702,
+      "render_diff_150dpi": {
+        "mean_absolute_channel_delta": 0.0006049831360950814,
+        "changed_pixel_fraction": 3.8155186424178425e-05,
+        "max_channel_delta": 24
+      },
+      "candidate_sha256": "75c9a2dc1a9448cf965bcc854f05edc6c954931fb82e223f77b77ddbd2b708cf",
+      "prepass_summary": {
+        "lines": 41,
+        "median_sigma_px": 1.0,
+        "enclosed_paper_pixels": 34876
+      },
+      "pdf_sha256_equal_to_baseline": false,
+      "latent_trace_mentions": 0
+    },
+    {
+      "id": "finebooks/trudyrusskagoent161881russ/12342041",
+      "prepass_status": 0,
+      "prepass_wall_seconds": 8.161751749925315,
+      "baseline_pdf_bytes": 340009,
+      "baseline_wall_seconds": 43.062041053082794,
+      "status": 0,
+      "candidate_wall_seconds": 66.12835332006216,
+      "text_diff": {
+        "same": true,
+        "removed_characters": 0,
+        "added_characters": 0,
+        "order_only": false,
+        "baseline_ufffe": 1,
+        "candidate_ufffe": 1,
+        "new_ufffe": 0
+      },
+      "baseline": {
+        "raster_bytes": 282809,
+        "coverage": {
+          "text_ink_px_total": 274821,
+          "text_ink_px_vector": 100259,
+          "text_ink_px_raster": 174562,
+          "other_ink_px": 106049,
+          "unowned_ink_px": 0,
+          "multiply_owned_ink_px": 0
+        },
+        "vector_units_proposed": 355,
+        "raster_units_proposed": 671,
+        "selected": "reconstruct",
+        "occurrence_owner_counts": {
+          "invisible": 671,
+          "visible_tounicode": 355,
+          "unmapped": 80
+        }
+      },
+      "candidate": {
+        "raster_bytes": 282809,
+        "coverage": {
+          "text_ink_px_total": 274821,
+          "text_ink_px_vector": 100259,
+          "text_ink_px_raster": 174562,
+          "other_ink_px": 106049,
+          "unowned_ink_px": 0,
+          "multiply_owned_ink_px": 0
+        },
+        "vector_units_proposed": 355,
+        "raster_units_proposed": 671,
+        "selected": "reconstruct",
+        "occurrence_owner_counts": {
+          "invisible": 671,
+          "visible_tounicode": 355,
+          "unmapped": 80
+        }
+      },
+      "candidate_pdf_bytes": 340009,
+      "changed_region_dispositions": 0,
+      "baseline_render_median_seconds": 0.017155481036752462,
+      "candidate_render_median_seconds": 0.016919197980314493,
+      "render_diff_150dpi": {
+        "mean_absolute_channel_delta": 0.0,
+        "changed_pixel_fraction": 0.0,
+        "max_channel_delta": 0
+      },
+      "candidate_sha256": "4d8dfbcf84154cebf6e24eb76aafe00b75b0c3b3dda267ad842409b6032f29f0",
+      "prepass_summary": {
+        "lines": 34,
+        "median_sigma_px": 0.5,
+        "enclosed_paper_pixels": 24523
+      },
+      "pdf_sha256_equal_to_baseline": true,
+      "latent_trace_mentions": 0
+    }
+  ]
+}
