@@ -282,7 +282,23 @@ pub(crate) fn trace_shape_clearscan_experimental(
     unit: &Unit, budget: &Budget, k: f64, preserved_source: Option<(&Unit, f64)>,
     coverage: Option<&[f64]>, grayscale_cap: usize,
 ) -> Result<TracedShape, String> {
-    trace_shape_clearscan_impl(unit, budget, k, preserved_source, coverage, grayscale_cap, true)
+    // Compute stock first. A declined latent outline must not alter which
+    // ordinary contour or fallback the stock path would have selected.
+    let baseline = trace_shape_clearscan_impl(unit, budget, k, preserved_source, None, grayscale_cap, false)?;
+    let candidate = match trace_shape_clearscan_impl(unit, budget, k, preserved_source, coverage, grayscale_cap, true) {
+        Ok(candidate) => candidate,
+        Err(_) => return Ok(baseline),
+    };
+    if !candidate.contour_fit.as_ref().is_some_and(|x| x.method == "experimental_latent_curve") {
+        return Ok(baseline);
+    }
+    if let Some((source, required)) = preserved_source {
+        let valid = crate::glyphs::build_glyph_shapes(std::slice::from_ref(&candidate), k, budget)
+            .ok().and_then(|v| v.into_iter().next())
+            .is_some_and(|shape| crate::convert::reconstructed_glyph_ink_iou(&shape, source.crop_w, source.crop_h, &source.mask) >= required);
+        if !valid { return Ok(baseline); }
+    }
+    Ok(candidate)
 }
 
 fn trace_shape_clearscan_impl(
@@ -615,3 +631,21 @@ fn offset_coverage_contour(source: &TracedShape, inset: f64) -> TracedShape {
 #[cfg(test)]
 #[path = "contour_tests.rs"]
 mod contour_tests;
+
+#[cfg(test)]
+mod experimental_fallback_tests {
+    use super::*;
+    #[test]
+    fn declined_coverage_returns_stock_trace() {
+        let (w,h)=(16usize,16usize);
+        let mask: Vec<bool>=(0..h).flat_map(|y|(0..w).map(move |x| (3..13).contains(&x) && (3..13).contains(&y))).collect();
+        let gray: Vec<u8>=mask.iter().map(|x| if *x { 20 } else { 245 }).collect();
+        let unit=Unit { shape_key:"test".into(), span_id:"span".into(), symbol_id:"symbol".into(), semantic_text:"x".into(), bbox_px:[0.,0.,16.,16.], ocr_bbox_px:[0.,0.,16.,16.], crop_w:w,crop_h:h,mask,gray_samples:Some(gray),gray_halo:None };
+        let budget=Budget::from_m0_policy();
+        let stock=trace_shape_clearscan(&unit,&budget,1.,Some((&unit,0.98))).unwrap();
+        let declined=trace_shape_clearscan_experimental(&unit,&budget,1.,Some((&unit,0.98)),Some(&[0.5]),16_384).unwrap();
+        assert_eq!(stock.polylines,declined.polylines);
+        assert_eq!(stock.layers,declined.layers);
+        assert_eq!(stock.contour_fit.as_ref().map(|x| &x.method),declined.contour_fit.as_ref().map(|x| &x.method));
+    }
+}
