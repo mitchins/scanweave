@@ -38,6 +38,22 @@ def pdf_crop(path,key,target,dpi,mode,geom=None):
  else:im=im.crop((x0*mode,y0*mode,x1*mode,y1*mode))
  return im
 
+def protected_components(binary,groups,cx0,cy0):
+ lab,n=ndi.label(binary,np.ones((3,3)));objects=ndi.find_objects(lab);eligible=np.zeros_like(binary);forbidden=np.zeros_like(binary);small=0;cross_group=0
+ for i,sl in enumerate(objects,1):
+  if sl is None:continue
+  mask=lab[sl]==i;area=int(mask.sum());memberships=0
+  for a,b,c,d in groups:
+   xa=max(sl[1].start,a-cx0);xb=min(sl[1].stop,c-cx0);ya=max(sl[0].start,b-cy0);yb=min(sl[0].stop,d-cy0)
+   if xa<xb and ya<yb and (lab[ya:yb,xa:xb]==i).any():memberships+=1
+  if area<5 or memberships>1:
+   forbidden[sl]|=mask
+   if area<5:small+=1
+   if memberships>1:cross_group+=1
+   continue
+  eligible[sl]|=mask
+ return eligible,ndi.binary_dilation(forbidden,iterations=2),small,cross_group
+
 def vector_pdf(key,setting):
  conf=CASES[key];target=conf['target'];cx0,cy0,cx1,cy1=conf['context'];x0,y0,x1,y1=target;native=Image.open(O/'native'/f'{key}-000.png').convert('RGB');rgb=np.asarray(native.crop(conf['context']));run=json.loads((B/'phase2/runs'/key/'runs.json').read_text());dpi=run['dpi'];z=st.reconstruction(rgb,237.8 if key=='8967062' else 204.3);obs=st.linear(rgb);bg=z['background']; ink=z['ink'];anchor=None
  if key=='8967062' and setting.get('anchor','header')=='header':
@@ -49,13 +65,8 @@ def vector_pdf(key,setting):
   a=max(0,a-cx0-1);b=max(0,b-cy0-1);c=min(rgb.shape[1],c-cx0+1);d=min(rgb.shape[0],d-cy0+1);allowed[b:d,a:c]=True
  observed=alpha*allowed; sigma=conf['sigma']*setting['sigma_multiplier'];latent=bounded_inverse(observed,sigma,setting['steps']);latent*=allowed
  # Small marks are not reconstructed or erased; they stay raster-owned.
- binary=latent>=setting['level'];lab,n=ndi.label(binary,np.ones((3,3)));objects=ndi.find_objects(lab);eligible=np.zeros_like(binary);small=0
- for i,sl in enumerate(objects,1):
-  if sl is None:continue
-  mask=lab[sl]==i; area=int(mask.sum())
-  if area<5:small+=1;continue
-  eligible[sl]|=mask
- support=ndi.binary_dilation(eligible,iterations=3)&allowed
+ binary=latent>=setting['level'];eligible,forbidden,small,cross_group=protected_components(binary,groups,cx0,cy0)
+ support=ndi.binary_dilation(eligible,iterations=3)&allowed&~forbidden
  # Remove only supported text, then paint antialiased PDF paths. This crop-only
  # packaging deliberately keeps the source image; it cannot prove compression.
  base=obs.copy();base[support]=bg[support];base=st.srgb(base)[y0-cy0:y1-cy0,x0-cx0:x1-cx0];stream=io.BytesIO();Image.fromarray(base).save(stream,format='PNG')
@@ -64,7 +75,7 @@ def vector_pdf(key,setting):
  levels=[(.20,.20),(.40,.25),(.60,1/3),(.80,.5)] if setting.get('layers') else [(setting['level'],1.)]
  for level,opacity in levels:
   shape=page.new_shape();layer_used=0
-  contours=measure.find_contours(np.pad((latent*ndi.binary_dilation(eligible,iterations=2)),1),level)
+  contours=measure.find_contours(np.pad((latent*ndi.binary_dilation(eligible,iterations=2)*(~forbidden)),1),level)
   for c in contours:
    if len(c)<4:continue
    if setting.get('smooth',0)>0 and len(c)>6:
@@ -84,7 +95,7 @@ def vector_pdf(key,setting):
  if key=='8967062':
   for a,b,c,d in groups:
    region=eligible[max(0,b-cy0):min(rgb.shape[0],d-cy0),max(0,a-cx0):min(rgb.shape[1],c-cx0)]; labels,cc=ndi.label(region,np.ones((3,3)));holes=ndi.binary_fill_holes(region)&~region;_,hh=ndi.label(holes);sk=morphology.skeletonize(region);near=ndi.convolve(sk.astype(int),np.ones((3,3),int));terminal=int((sk&(near==2)).sum());width=2*ndi.distance_transform_edt(region)[sk];rows.append({'bbox':[a,b,c,d],'components':int(cc),'holes':int(hh),'skeleton_terminals':terminal,'observed_mask_width_median':float(np.median(width)) if len(width) else None})
- return {'path':str(path),'groups':len(groups),'source_anchor_rgb':anchor,'paint_rgb':np.rint(colour*255).astype(int).tolist(),'sigma':sigma,'latent_rmse':rmse,'pdf_rescan_linear_rgb_rmse':pdf_rmse,'contours':used,'small_components_left_raster':small,'digit_topology':rows}
+ return {'path':str(path),'groups':len(groups),'source_anchor_rgb':anchor,'paint_rgb':np.rint(colour*255).astype(int).tolist(),'sigma':sigma,'latent_rmse':rmse,'pdf_rescan_linear_rgb_rmse':pdf_rmse,'contours':used,'small_components_left_raster':small,'cross_group_components_left_raster':cross_group,'digit_topology':rows}
 
 def main():
  settings=[{'name':'observed','sigma_multiplier':1,'steps':0,'level':.5},{'name':'inverse12','sigma_multiplier':1,'steps':12,'level':.5},{'name':'inverse60','sigma_multiplier':1,'steps':60,'level':.5},{'name':'inverse60_softpsf','sigma_multiplier':.76,'steps':60,'level':.5},{'name':'local12','anchor':'local','sigma_multiplier':1,'steps':12,'level':.5},{'name':'local60','anchor':'local','sigma_multiplier':1,'steps':60,'level':.5},{'name':'local60_tight','anchor':'local','sigma_multiplier':1,'steps':60,'level':.65},{'name':'local12_wide','anchor':'local','sigma_multiplier':1,'steps':12,'level':.35},{'name':'mixed12','ink_mix':.4,'sigma_multiplier':1,'steps':12,'level':.5},{'name':'mixed60','ink_mix':.4,'sigma_multiplier':1,'steps':60,'level':.5},{'name':'mixed12_smooth','ink_mix':.4,'sigma_multiplier':1,'steps':12,'level':.5,'smooth':.75},{'name':'local_observed_low','anchor':'local','sigma_multiplier':1,'steps':0,'level':.25},{'name':'local12_low','anchor':'local','sigma_multiplier':1,'steps':12,'level':.25},{'name':'local12_mid','anchor':'local','sigma_multiplier':1,'steps':12,'level':.32},{'name':'local_layers','anchor':'local','sigma_multiplier':1,'steps':0,'level':.2,'layers':True},{'name':'inverse_layers','anchor':'local','sigma_multiplier':1,'steps':12,'level':.2,'layers':True},{'name':'mixed_layers','ink_mix':.4,'sigma_multiplier':1,'steps':12,'level':.2,'layers':True}];results={};baseline=json.loads(pathlib.Path('/tmp/scanweave-books01/qualification/books01/phase2/results.json').read_text())['pages']

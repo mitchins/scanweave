@@ -1,0 +1,1429 @@
+{
+  "diagnostics": {
+    "one_dimensional_sensitivity": [
+      {
+        "sigma": 0.8,
+        "true_width_px": 2.0,
+        "peak_coverage": 0.7887240347139106,
+        "observed_relative_halfmax_width_px": 2.4,
+        "percent_overwidth": 19.999999999999996,
+        "true_ink_integral_px": 2.0
+      },
+      {
+        "sigma": 0.8,
+        "true_width_px": 3.0,
+        "peak_coverage": 0.9392502460316502,
+        "observed_relative_halfmax_width_px": 3.12,
+        "percent_overwidth": 4.0000000000000036,
+        "true_ink_integral_px": 3.0
+      },
+      {
+        "sigma": 0.8,
+        "true_width_px": 4.0,
+        "peak_coverage": 0.9876354148004223,
+        "observed_relative_halfmax_width_px": 4.04,
+        "percent_overwidth": 1.0000000000000009,
+        "true_ink_integral_px": 4.0
+      },
+      {
+        "sigma": 0.8,
+        "true_width_px": 6.0,
+        "peak_coverage": 0.9998830731740996,
+        "observed_relative_halfmax_width_px": 6.0,
+        "percent_overwidth": 0.0,
+        "true_ink_integral_px": 6.0
+      },
+      {
+        "sigma": 1.15,
+        "true_width_px": 2.0,
+        "peak_coverage": 0.6154875354084909,
+        "observed_relative_halfmax_width_px": 3.08,
+        "percent_overwidth": 54.0,
+        "true_ink_integral_px": 2.0
+      },
+      {
+        "sigma": 1.15,
+        "true_width_px": 3.0,
+        "peak_coverage": 0.8079230974272188,
+        "observed_relative_halfmax_width_px": 3.56,
+        "percent_overwidth": 18.666666666666675,
+        "true_ink_integral_px": 3.0000000000000004
+      },
+      {
+        "sigma": 1.15,
+        "true_width_px": 4.0,
+        "peak_coverage": 0.9180365078135714,
+        "observed_relative_halfmax_width_px": 4.24,
+        "percent_overwidth": 6.000000000000005,
+        "true_ink_integral_px": 4.0
+      },
+      {
+        "sigma": 1.15,
+        "true_width_px": 6.0,
+        "peak_coverage": 0.9909699408109404,
+        "observed_relative_halfmax_width_px": 6.04,
+        "percent_overwidth": 0.6666666666666599,
+        "true_ink_integral_px": 6.000000000000001
+      }
+    ],
+    "613": {
+      "image_dpi": 500,
+      "ocr_group_boxes": [
+        [
+          1179,
+          762,
+          1193,
+          779
+        ],
+        [
+          1196,
+          764,
+          1204,
+          778
+        ],
+        [
+          1205,
+          761,
+          1220,
+          780
+        ]
+      ],
+      "group_metrics": [
+        {
+          "bbox": [
+            1179,
+            762,
+            1193,
+            779
+          ],
+          "pixels": 80,
+          "components_4_connected": 4,
+          "observed_mask_skeleton_width_q25_median_q75_px": [
+            2.0,
+            2.8284271247461903,
+            2.8284271247461903
+          ]
+        },
+        {
+          "bbox": [
+            1196,
+            764,
+            1204,
+            778
+          ],
+          "pixels": 40,
+          "components_4_connected": 1,
+          "observed_mask_skeleton_width_q25_median_q75_px": [
+            2.0,
+            2.8284271247461903,
+            2.8284271247461903
+          ]
+        },
+        {
+          "bbox": [
+            1205,
+            761,
+            1220,
+            780
+          ],
+          "pixels": 89,
+          "components_4_connected": 2,
+          "observed_mask_skeleton_width_q25_median_q75_px": [
+            2.0,
+            2.8284271247461903,
+            2.8284271247461903
+          ]
+        }
+      ],
+      "qualification": "mask-derived observed widths; neither true unblurred widths nor a fitted scanner PSF"
+    }
+  },
+  "psf": {
+    "8967062": {
+      "roi": [
+        1585,
+        203,
+        2022,
+        242
+      ],
+      "fit": {
+        "n": 748,
+        "sigma_quantiles": [
+          0.6712084808952787,
+          0.9288490175516749,
+          1.2161215245807209,
+          1.4835294072526444,
+          1.7466639609278558
+        ],
+        "boundary_fit_count": 18
+      }
+    },
+    "12342014": {
+      "roi": [
+        84,
+        360,
+        611,
+        442
+      ],
+      "fit": {
+        "n": 1090,
+        "sigma_quantiles": [
+          0.4683002820260394,
+          0.6474654954209524,
+          0.9346929904630118,
+          1.1849298412351799,
+          1.5905261206661887
+        ],
+        "boundary_fit_count": 58
+      }
+    }
+  },
+  "ambiguity": {
+    "hypotheses": [
+      "inverse12",
+      "inverse60_softpsf",
+      "local12",
+      "mixed12_smooth",
+      "inverse_layers"
+    ],
+    "groups": [
+      {
+        "bbox": [
+          1179,
+          762,
+          1193,
+          779
+        ],
+        "shape_signatures": {
+          "inverse12": [
+            3,
+            0
+          ],
+          "inverse60_softpsf": [
+            4,
+            0
+          ],
+          "local12": [
+            1,
+            0
+          ],
+          "mixed12_smooth": [
+            2,
+            0
+          ],
+          "inverse_layers": [
+            1,
+            0
+          ]
+        },
+        "pairwise_iou_min": 0.625,
+        "pairwise_iou_median": 0.7788929311730615,
+        "edge_distance_p95_max_source_px": 0.7071067811865476,
+        "accept": false
+      },
+      {
+        "bbox": [
+          1196,
+          764,
+          1204,
+          778
+        ],
+        "shape_signatures": {
+          "inverse12": [
+            1,
+            0
+          ],
+          "inverse60_softpsf": [
+            1,
+            0
+          ],
+          "local12": [
+            1,
+            0
+          ],
+          "mixed12_smooth": [
+            1,
+            0
+          ],
+          "inverse_layers": [
+            1,
+            0
+          ]
+        },
+        "pairwise_iou_min": 0.6031746031746031,
+        "pairwise_iou_median": 0.7775372775372775,
+        "edge_distance_p95_max_source_px": 1.118033988749895,
+        "accept": false
+      },
+      {
+        "bbox": [
+          1205,
+          761,
+          1220,
+          780
+        ],
+        "shape_signatures": {
+          "inverse12": [
+            2,
+            0
+          ],
+          "inverse60_softpsf": [
+            3,
+            0
+          ],
+          "local12": [
+            2,
+            0
+          ],
+          "mixed12_smooth": [
+            2,
+            0
+          ],
+          "inverse_layers": [
+            2,
+            0
+          ]
+        },
+        "pairwise_iou_min": 0.5750636132315522,
+        "pairwise_iou_median": 0.7571884984025559,
+        "edge_distance_p95_max_source_px": 0.9414213562373087,
+        "accept": false
+      }
+    ]
+  },
+  "ink_mass": {
+    "heading_roi": [
+      1570,
+      190,
+      2035,
+      255
+    ],
+    "heading_ink_rgb": [
+      85,
+      75,
+      36
+    ],
+    "assumptions": {
+      "local": [
+        82.54526921819308,
+        43.92234737947474,
+        90.16529284000495
+      ],
+      "heading": [
+        54.97318024699554,
+        28.28159973285163,
+        55.02893454959407
+      ]
+    },
+    "warning": "heading ink equivalence is unverified; values are projected coverage mass, not true stroke area"
+  },
+  "actual_pdf_digit_metrics": {
+    "source": [
+      {
+        "bbox": [
+          1179,
+          762,
+          1193,
+          779
+        ],
+        "topology_by_relative_threshold": [
+          {
+            "threshold": 0.35,
+            "components": 1,
+            "holes": 1,
+            "terminals": 1,
+            "median_width_source_px": 2.914213562373095
+          },
+          {
+            "threshold": 0.5,
+            "components": 1,
+            "holes": 0,
+            "terminals": 2,
+            "median_width_source_px": 2.23606797749979
+          },
+          {
+            "threshold": 0.65,
+            "components": 3,
+            "holes": 0,
+            "terminals": 6,
+            "median_width_source_px": 2.118033988749895
+          }
+        ]
+      },
+      {
+        "bbox": [
+          1196,
+          764,
+          1204,
+          778
+        ],
+        "topology_by_relative_threshold": [
+          {
+            "threshold": 0.35,
+            "components": 1,
+            "holes": 0,
+            "terminals": 3,
+            "median_width_source_px": 3.1622776601683795
+          },
+          {
+            "threshold": 0.5,
+            "components": 1,
+            "holes": 0,
+            "terminals": 2,
+            "median_width_source_px": 2.8284271247461903
+          },
+          {
+            "threshold": 0.65,
+            "components": 1,
+            "holes": 0,
+            "terminals": 1,
+            "median_width_source_px": 2.23606797749979
+          }
+        ]
+      },
+      {
+        "bbox": [
+          1205,
+          761,
+          1220,
+          780
+        ],
+        "topology_by_relative_threshold": [
+          {
+            "threshold": 0.35,
+            "components": 2,
+            "holes": 0,
+            "terminals": 3,
+            "median_width_source_px": 2.8284271247461903
+          },
+          {
+            "threshold": 0.5,
+            "components": 2,
+            "holes": 0,
+            "terminals": 5,
+            "median_width_source_px": 2.23606797749979
+          },
+          {
+            "threshold": 0.65,
+            "components": 2,
+            "holes": 0,
+            "terminals": 5,
+            "median_width_source_px": 2.0
+          }
+        ]
+      }
+    ],
+    "baseline": [
+      {
+        "bbox": [
+          1179,
+          762,
+          1193,
+          779
+        ],
+        "topology_by_relative_threshold": [
+          {
+            "threshold": 0.35,
+            "components": 2,
+            "holes": 0,
+            "terminals": 7,
+            "median_width_source_px": 2.0
+          },
+          {
+            "threshold": 0.5,
+            "components": 3,
+            "holes": 0,
+            "terminals": 5,
+            "median_width_source_px": 2.0
+          },
+          {
+            "threshold": 0.65,
+            "components": 3,
+            "holes": 0,
+            "terminals": 5,
+            "median_width_source_px": 1.4142135623730951
+          }
+        ]
+      },
+      {
+        "bbox": [
+          1196,
+          764,
+          1204,
+          778
+        ],
+        "topology_by_relative_threshold": [
+          {
+            "threshold": 0.35,
+            "components": 2,
+            "holes": 2,
+            "terminals": 3,
+            "median_width_source_px": 2.23606797749979
+          },
+          {
+            "threshold": 0.5,
+            "components": 1,
+            "holes": 2,
+            "terminals": 3,
+            "median_width_source_px": 2.0
+          },
+          {
+            "threshold": 0.65,
+            "components": 3,
+            "holes": 0,
+            "terminals": 6,
+            "median_width_source_px": 2.0
+          }
+        ]
+      },
+      {
+        "bbox": [
+          1205,
+          761,
+          1220,
+          780
+        ],
+        "topology_by_relative_threshold": [
+          {
+            "threshold": 0.35,
+            "components": 3,
+            "holes": 2,
+            "terminals": 2,
+            "median_width_source_px": 3.0
+          },
+          {
+            "threshold": 0.5,
+            "components": 5,
+            "holes": 1,
+            "terminals": 9,
+            "median_width_source_px": 2.0
+          },
+          {
+            "threshold": 0.65,
+            "components": 7,
+            "holes": 0,
+            "terminals": 10,
+            "median_width_source_px": 2.0
+          }
+        ]
+      }
+    ],
+    "mrc": [
+      {
+        "bbox": [
+          1179,
+          762,
+          1193,
+          779
+        ],
+        "topology_by_relative_threshold": [
+          {
+            "threshold": 0.35,
+            "components": 1,
+            "holes": 1,
+            "terminals": 1,
+            "median_width_source_px": 2.8284271247461903
+          },
+          {
+            "threshold": 0.5,
+            "components": 1,
+            "holes": 0,
+            "terminals": 3,
+            "median_width_source_px": 2.23606797749979
+          },
+          {
+            "threshold": 0.65,
+            "components": 2,
+            "holes": 0,
+            "terminals": 4,
+            "median_width_source_px": 2.0
+          }
+        ]
+      },
+      {
+        "bbox": [
+          1196,
+          764,
+          1204,
+          778
+        ],
+        "topology_by_relative_threshold": [
+          {
+            "threshold": 0.35,
+            "components": 1,
+            "holes": 1,
+            "terminals": 2,
+            "median_width_source_px": 3.0
+          },
+          {
+            "threshold": 0.5,
+            "components": 1,
+            "holes": 1,
+            "terminals": 2,
+            "median_width_source_px": 2.8284271247461903
+          },
+          {
+            "threshold": 0.65,
+            "components": 1,
+            "holes": 0,
+            "terminals": 2,
+            "median_width_source_px": 2.23606797749979
+          }
+        ]
+      },
+      {
+        "bbox": [
+          1205,
+          761,
+          1220,
+          780
+        ],
+        "topology_by_relative_threshold": [
+          {
+            "threshold": 0.35,
+            "components": 2,
+            "holes": 0,
+            "terminals": 3,
+            "median_width_source_px": 3.0
+          },
+          {
+            "threshold": 0.5,
+            "components": 2,
+            "holes": 0,
+            "terminals": 3,
+            "median_width_source_px": 2.23606797749979
+          },
+          {
+            "threshold": 0.65,
+            "components": 2,
+            "holes": 0,
+            "terminals": 5,
+            "median_width_source_px": 2.23606797749979
+          }
+        ]
+      }
+    ],
+    "adobe": [
+      {
+        "bbox": [
+          1179,
+          762,
+          1193,
+          779
+        ],
+        "topology_by_relative_threshold": [
+          {
+            "threshold": 0.35,
+            "components": 1,
+            "holes": 1,
+            "terminals": 3,
+            "median_width_source_px": 3.0
+          },
+          {
+            "threshold": 0.5,
+            "components": 1,
+            "holes": 0,
+            "terminals": 4,
+            "median_width_source_px": 2.8284271247461903
+          },
+          {
+            "threshold": 0.65,
+            "components": 3,
+            "holes": 0,
+            "terminals": 7,
+            "median_width_source_px": 2.23606797749979
+          }
+        ]
+      },
+      {
+        "bbox": [
+          1196,
+          764,
+          1204,
+          778
+        ],
+        "topology_by_relative_threshold": [
+          {
+            "threshold": 0.35,
+            "components": 1,
+            "holes": 0,
+            "terminals": 2,
+            "median_width_source_px": 3.605551275463989
+          },
+          {
+            "threshold": 0.5,
+            "components": 1,
+            "holes": 0,
+            "terminals": 3,
+            "median_width_source_px": 3.0
+          },
+          {
+            "threshold": 0.65,
+            "components": 1,
+            "holes": 0,
+            "terminals": 3,
+            "median_width_source_px": 2.8284271247461903
+          }
+        ]
+      },
+      {
+        "bbox": [
+          1205,
+          761,
+          1220,
+          780
+        ],
+        "topology_by_relative_threshold": [
+          {
+            "threshold": 0.35,
+            "components": 3,
+            "holes": 0,
+            "terminals": 5,
+            "median_width_source_px": 3.605551275463989
+          },
+          {
+            "threshold": 0.5,
+            "components": 2,
+            "holes": 0,
+            "terminals": 5,
+            "median_width_source_px": 3.0
+          },
+          {
+            "threshold": 0.65,
+            "components": 2,
+            "holes": 0,
+            "terminals": 5,
+            "median_width_source_px": 2.23606797749979
+          }
+        ]
+      }
+    ],
+    "inverse12": [
+      {
+        "bbox": [
+          1179,
+          762,
+          1193,
+          779
+        ],
+        "topology_by_relative_threshold": [
+          {
+            "threshold": 0.35,
+            "components": 3,
+            "holes": 0,
+            "terminals": 6,
+            "median_width_source_px": 2.23606797749979
+          },
+          {
+            "threshold": 0.5,
+            "components": 3,
+            "holes": 0,
+            "terminals": 6,
+            "median_width_source_px": 2.118033988749895
+          },
+          {
+            "threshold": 0.65,
+            "components": 3,
+            "holes": 0,
+            "terminals": 6,
+            "median_width_source_px": 2.0
+          }
+        ]
+      },
+      {
+        "bbox": [
+          1196,
+          764,
+          1204,
+          778
+        ],
+        "topology_by_relative_threshold": [
+          {
+            "threshold": 0.35,
+            "components": 1,
+            "holes": 0,
+            "terminals": 1,
+            "median_width_source_px": 2.23606797749979
+          },
+          {
+            "threshold": 0.5,
+            "components": 1,
+            "holes": 0,
+            "terminals": 1,
+            "median_width_source_px": 2.0
+          },
+          {
+            "threshold": 0.65,
+            "components": 1,
+            "holes": 0,
+            "terminals": 1,
+            "median_width_source_px": 2.0
+          }
+        ]
+      },
+      {
+        "bbox": [
+          1205,
+          761,
+          1220,
+          780
+        ],
+        "topology_by_relative_threshold": [
+          {
+            "threshold": 0.35,
+            "components": 2,
+            "holes": 0,
+            "terminals": 5,
+            "median_width_source_px": 2.0
+          },
+          {
+            "threshold": 0.5,
+            "components": 2,
+            "holes": 0,
+            "terminals": 5,
+            "median_width_source_px": 2.0
+          },
+          {
+            "threshold": 0.65,
+            "components": 2,
+            "holes": 0,
+            "terminals": 5,
+            "median_width_source_px": 2.0
+          }
+        ]
+      }
+    ],
+    "local12": [
+      {
+        "bbox": [
+          1179,
+          762,
+          1193,
+          779
+        ],
+        "topology_by_relative_threshold": [
+          {
+            "threshold": 0.35,
+            "components": 1,
+            "holes": 0,
+            "terminals": 2,
+            "median_width_source_px": 2.8284271247461903
+          },
+          {
+            "threshold": 0.5,
+            "components": 1,
+            "holes": 0,
+            "terminals": 2,
+            "median_width_source_px": 2.23606797749979
+          },
+          {
+            "threshold": 0.65,
+            "components": 1,
+            "holes": 0,
+            "terminals": 2,
+            "median_width_source_px": 2.23606797749979
+          }
+        ]
+      },
+      {
+        "bbox": [
+          1196,
+          764,
+          1204,
+          778
+        ],
+        "topology_by_relative_threshold": [
+          {
+            "threshold": 0.35,
+            "components": 1,
+            "holes": 0,
+            "terminals": 3,
+            "median_width_source_px": 3.08113883008419
+          },
+          {
+            "threshold": 0.5,
+            "components": 1,
+            "holes": 0,
+            "terminals": 3,
+            "median_width_source_px": 2.8284271247461903
+          },
+          {
+            "threshold": 0.65,
+            "components": 1,
+            "holes": 0,
+            "terminals": 3,
+            "median_width_source_px": 2.8284271247461903
+          }
+        ]
+      },
+      {
+        "bbox": [
+          1205,
+          761,
+          1220,
+          780
+        ],
+        "topology_by_relative_threshold": [
+          {
+            "threshold": 0.35,
+            "components": 2,
+            "holes": 0,
+            "terminals": 4,
+            "median_width_source_px": 2.8284271247461903
+          },
+          {
+            "threshold": 0.5,
+            "components": 2,
+            "holes": 0,
+            "terminals": 5,
+            "median_width_source_px": 2.8284271247461903
+          },
+          {
+            "threshold": 0.65,
+            "components": 2,
+            "holes": 0,
+            "terminals": 4,
+            "median_width_source_px": 2.8284271247461903
+          }
+        ]
+      }
+    ],
+    "local_observed_low": [
+      {
+        "bbox": [
+          1179,
+          762,
+          1193,
+          779
+        ],
+        "topology_by_relative_threshold": [
+          {
+            "threshold": 0.35,
+            "components": 1,
+            "holes": 2,
+            "terminals": 0,
+            "median_width_source_px": 3.1622776601683795
+          },
+          {
+            "threshold": 0.5,
+            "components": 1,
+            "holes": 2,
+            "terminals": 0,
+            "median_width_source_px": 3.08113883008419
+          },
+          {
+            "threshold": 0.65,
+            "components": 1,
+            "holes": 2,
+            "terminals": 1,
+            "median_width_source_px": 3.0
+          }
+        ]
+      },
+      {
+        "bbox": [
+          1196,
+          764,
+          1204,
+          778
+        ],
+        "topology_by_relative_threshold": [
+          {
+            "threshold": 0.35,
+            "components": 1,
+            "holes": 0,
+            "terminals": 3,
+            "median_width_source_px": 3.605551275463989
+          },
+          {
+            "threshold": 0.5,
+            "components": 1,
+            "holes": 0,
+            "terminals": 3,
+            "median_width_source_px": 2.8284271247461903
+          },
+          {
+            "threshold": 0.65,
+            "components": 1,
+            "holes": 0,
+            "terminals": 2,
+            "median_width_source_px": 2.23606797749979
+          }
+        ]
+      },
+      {
+        "bbox": [
+          1205,
+          761,
+          1220,
+          780
+        ],
+        "topology_by_relative_threshold": [
+          {
+            "threshold": 0.35,
+            "components": 2,
+            "holes": 0,
+            "terminals": 3,
+            "median_width_source_px": 3.1622776601683795
+          },
+          {
+            "threshold": 0.5,
+            "components": 1,
+            "holes": 0,
+            "terminals": 3,
+            "median_width_source_px": 3.0
+          },
+          {
+            "threshold": 0.65,
+            "components": 1,
+            "holes": 0,
+            "terminals": 3,
+            "median_width_source_px": 3.0
+          }
+        ]
+      }
+    ],
+    "inverse_layers": [
+      {
+        "bbox": [
+          1179,
+          762,
+          1193,
+          779
+        ],
+        "topology_by_relative_threshold": [
+          {
+            "threshold": 0.35,
+            "components": 1,
+            "holes": 0,
+            "terminals": 2,
+            "median_width_source_px": 3.0
+          },
+          {
+            "threshold": 0.5,
+            "components": 1,
+            "holes": 0,
+            "terminals": 2,
+            "median_width_source_px": 2.8284271247461903
+          },
+          {
+            "threshold": 0.65,
+            "components": 2,
+            "holes": 0,
+            "terminals": 4,
+            "median_width_source_px": 2.8284271247461903
+          }
+        ]
+      },
+      {
+        "bbox": [
+          1196,
+          764,
+          1204,
+          778
+        ],
+        "topology_by_relative_threshold": [
+          {
+            "threshold": 0.35,
+            "components": 1,
+            "holes": 0,
+            "terminals": 3,
+            "median_width_source_px": 3.605551275463989
+          },
+          {
+            "threshold": 0.5,
+            "components": 1,
+            "holes": 0,
+            "terminals": 3,
+            "median_width_source_px": 2.8284271247461903
+          },
+          {
+            "threshold": 0.65,
+            "components": 1,
+            "holes": 0,
+            "terminals": 2,
+            "median_width_source_px": 2.23606797749979
+          }
+        ]
+      },
+      {
+        "bbox": [
+          1205,
+          761,
+          1220,
+          780
+        ],
+        "topology_by_relative_threshold": [
+          {
+            "threshold": 0.35,
+            "components": 2,
+            "holes": 0,
+            "terminals": 3,
+            "median_width_source_px": 2.8284271247461903
+          },
+          {
+            "threshold": 0.5,
+            "components": 2,
+            "holes": 0,
+            "terminals": 4,
+            "median_width_source_px": 2.8284271247461903
+          },
+          {
+            "threshold": 0.65,
+            "components": 2,
+            "holes": 0,
+            "terminals": 4,
+            "median_width_source_px": 2.23606797749979
+          }
+        ]
+      }
+    ]
+  },
+  "synthetic_physics": {
+    "cases": 30,
+    "methods": {
+      "oracle-0": {
+        "mean_boundary_f1": 0.981530098790242,
+        "mean_missing": 0.11165373123273406,
+        "mean_false": 0.022678247443529233,
+        "topology_match": 21,
+        "false_joins": 0,
+        "median_width_ratio": 1.0
+      },
+      "oracle-12": {
+        "mean_boundary_f1": 0.9979753109747457,
+        "mean_missing": 0.029458479286339195,
+        "mean_false": 0.0428034353840603,
+        "topology_match": 27,
+        "false_joins": 0,
+        "median_width_ratio": 1.0
+      },
+      "oracle-60": {
+        "mean_boundary_f1": 0.9990783193480071,
+        "mean_missing": 0.022843761740948678,
+        "mean_false": 0.03376106187777502,
+        "topology_match": 28,
+        "false_joins": 0,
+        "median_width_ratio": 1.0
+      },
+      "centre-0": {
+        "mean_boundary_f1": 0.9936115798975076,
+        "mean_missing": 0.038302431081970484,
+        "mean_false": 0.11713402540044669,
+        "topology_match": 28,
+        "false_joins": 0,
+        "median_width_ratio": 1.0
+      },
+      "centre-12": {
+        "mean_boundary_f1": 0.9986157234959445,
+        "mean_missing": 0.011436262469969039,
+        "mean_false": 0.15720885565237414,
+        "topology_match": 28,
+        "false_joins": 0,
+        "median_width_ratio": 1.0
+      },
+      "centre-60": {
+        "mean_boundary_f1": 0.9994607835423583,
+        "mean_missing": 0.005728532219033708,
+        "mean_false": 0.15110881391178932,
+        "topology_match": 28,
+        "false_joins": 0,
+        "median_width_ratio": 1.0
+      }
+    }
+  },
+  "candidate_crops": {
+    "8967062": {
+      "inverse12": {
+        "path": "/data/coding/scanweave/work/books01/stroke02/crops/8967062-inverse12.pdf",
+        "groups": 3,
+        "source_anchor_rgb": [
+          85,
+          75,
+          36
+        ],
+        "paint_rgb": [
+          85,
+          75,
+          36
+        ],
+        "sigma": 1.22,
+        "latent_rmse": 0.09833253597538325,
+        "pdf_rescan_linear_rgb_rmse": 0.0894445768585,
+        "contours": 9,
+        "small_components_left_raster": 0,
+        "cross_group_components_left_raster": 0,
+        "digit_topology": [
+          {
+            "bbox": [
+              1179,
+              762,
+              1193,
+              779
+            ],
+            "components": 2,
+            "holes": 0,
+            "skeleton_terminals": 3,
+            "observed_mask_width_median": 2.0
+          },
+          {
+            "bbox": [
+              1196,
+              764,
+              1204,
+              778
+            ],
+            "components": 1,
+            "holes": 0,
+            "skeleton_terminals": 1,
+            "observed_mask_width_median": 2.0
+          },
+          {
+            "bbox": [
+              1205,
+              761,
+              1220,
+              780
+            ],
+            "components": 2,
+            "holes": 0,
+            "skeleton_terminals": 3,
+            "observed_mask_width_median": 2.0
+          }
+        ]
+      },
+      "local12": {
+        "path": "/data/coding/scanweave/work/books01/stroke02/crops/8967062-local12.pdf",
+        "groups": 3,
+        "source_anchor_rgb": null,
+        "paint_rgb": [
+          174,
+          172,
+          143
+        ],
+        "sigma": 1.22,
+        "latent_rmse": 0.1658371793986812,
+        "pdf_rescan_linear_rgb_rmse": 0.10026177134999506,
+        "contours": 5,
+        "small_components_left_raster": 0,
+        "cross_group_components_left_raster": 0,
+        "digit_topology": [
+          {
+            "bbox": [
+              1179,
+              762,
+              1193,
+              779
+            ],
+            "components": 1,
+            "holes": 0,
+            "skeleton_terminals": 2,
+            "observed_mask_width_median": 2.0
+          },
+          {
+            "bbox": [
+              1196,
+              764,
+              1204,
+              778
+            ],
+            "components": 1,
+            "holes": 0,
+            "skeleton_terminals": 1,
+            "observed_mask_width_median": 2.8284271247461903
+          },
+          {
+            "bbox": [
+              1205,
+              761,
+              1220,
+              780
+            ],
+            "components": 1,
+            "holes": 0,
+            "skeleton_terminals": 3,
+            "observed_mask_width_median": 2.8284271247461903
+          }
+        ]
+      },
+      "local_observed_low": {
+        "path": "/data/coding/scanweave/work/books01/stroke02/crops/8967062-local_observed_low.pdf",
+        "groups": 3,
+        "source_anchor_rgb": null,
+        "paint_rgb": [
+          184,
+          183,
+          151
+        ],
+        "sigma": 1.22,
+        "latent_rmse": 0.18355224268453257,
+        "pdf_rescan_linear_rgb_rmse": 0.11661004585112414,
+        "contours": 3,
+        "small_components_left_raster": 1,
+        "cross_group_components_left_raster": 1,
+        "digit_topology": [
+          {
+            "bbox": [
+              1179,
+              762,
+              1193,
+              779
+            ],
+            "components": 1,
+            "holes": 1,
+            "skeleton_terminals": 1,
+            "observed_mask_width_median": 2.8284271247461903
+          },
+          {
+            "bbox": [
+              1196,
+              764,
+              1204,
+              778
+            ],
+            "components": 0,
+            "holes": 0,
+            "skeleton_terminals": 0,
+            "observed_mask_width_median": null
+          },
+          {
+            "bbox": [
+              1205,
+              761,
+              1220,
+              780
+            ],
+            "components": 1,
+            "holes": 1,
+            "skeleton_terminals": 1,
+            "observed_mask_width_median": 2.8284271247461903
+          }
+        ]
+      },
+      "inverse_layers": {
+        "path": "/data/coding/scanweave/work/books01/stroke02/crops/8967062-inverse_layers.pdf",
+        "groups": 3,
+        "source_anchor_rgb": null,
+        "paint_rgb": [
+          184,
+          183,
+          151
+        ],
+        "sigma": 1.22,
+        "latent_rmse": 0.1658371793986812,
+        "pdf_rescan_linear_rgb_rmse": 0.11988366476605118,
+        "contours": 14,
+        "small_components_left_raster": 0,
+        "cross_group_components_left_raster": 1,
+        "digit_topology": [
+          {
+            "bbox": [
+              1179,
+              762,
+              1193,
+              779
+            ],
+            "components": 1,
+            "holes": 1,
+            "skeleton_terminals": 1,
+            "observed_mask_width_median": 2.8284271247461903
+          },
+          {
+            "bbox": [
+              1196,
+              764,
+              1204,
+              778
+            ],
+            "components": 0,
+            "holes": 0,
+            "skeleton_terminals": 0,
+            "observed_mask_width_median": null
+          },
+          {
+            "bbox": [
+              1205,
+              761,
+              1220,
+              780
+            ],
+            "components": 1,
+            "holes": 0,
+            "skeleton_terminals": 2,
+            "observed_mask_width_median": 2.8284271247461903
+          }
+        ]
+      }
+    },
+    "12342014": {
+      "inverse12": {
+        "path": "/data/coding/scanweave/work/books01/stroke02/crops/12342014-inverse12.pdf",
+        "groups": 24,
+        "source_anchor_rgb": null,
+        "paint_rgb": [
+          65,
+          46,
+          4
+        ],
+        "sigma": 0.93,
+        "latent_rmse": 0.06822405641661494,
+        "pdf_rescan_linear_rgb_rmse": 0.0706073283417844,
+        "contours": 39,
+        "small_components_left_raster": 0,
+        "cross_group_components_left_raster": 3,
+        "digit_topology": []
+      },
+      "local12": {
+        "path": "/data/coding/scanweave/work/books01/stroke02/crops/12342014-local12.pdf",
+        "groups": 24,
+        "source_anchor_rgb": null,
+        "paint_rgb": [
+          65,
+          46,
+          4
+        ],
+        "sigma": 0.93,
+        "latent_rmse": 0.06822405641661494,
+        "pdf_rescan_linear_rgb_rmse": 0.0706073283417844,
+        "contours": 39,
+        "small_components_left_raster": 0,
+        "cross_group_components_left_raster": 3,
+        "digit_topology": []
+      },
+      "local_observed_low": {
+        "path": "/data/coding/scanweave/work/books01/stroke02/crops/12342014-local_observed_low.pdf",
+        "groups": 24,
+        "source_anchor_rgb": null,
+        "paint_rgb": [
+          63,
+          45,
+          5
+        ],
+        "sigma": 0.93,
+        "latent_rmse": 0.09143398812502788,
+        "pdf_rescan_linear_rgb_rmse": 0.12261580714831354,
+        "contours": 31,
+        "small_components_left_raster": 8,
+        "cross_group_components_left_raster": 4,
+        "digit_topology": []
+      },
+      "inverse_layers": {
+        "path": "/data/coding/scanweave/work/books01/stroke02/crops/12342014-inverse_layers.pdf",
+        "groups": 24,
+        "source_anchor_rgb": null,
+        "paint_rgb": [
+          63,
+          45,
+          5
+        ],
+        "sigma": 0.93,
+        "latent_rmse": 0.06822405641661494,
+        "pdf_rescan_linear_rgb_rmse": 0.07558098155272316,
+        "contours": 174,
+        "small_components_left_raster": 30,
+        "cross_group_components_left_raster": 5,
+        "digit_topology": []
+      }
+    }
+  }
+}

@@ -1,0 +1,33 @@
+# STROKE-02 — crop reconstruction result
+
+**The product objective is not met.** No improved ScanWeave PDF was produced. The crop-only prototype is greyer and more continuous than #39 on “613”, but its character topology is not stable across plausible ink and blur assumptions. MRC remains the safer, more convincing result. The prototype's French solid outlines look too dark; fractional layers look closer to the source but do not establish improved readability. No converter change, promotion, merge or release was made.
+
+The true-PDFium 2× panels are [613](/data/coding/scanweave/work/books01/stroke02/final/613.png) and [French](/data/coding/scanweave/work/books01/stroke02/final/french.png). They show source / #39 / **improved ScanWeave unavailable** / a separately labelled diagnostic crop PDF / MRC / Adobe. The diagnostic crop embeds source pixels and has **no OCR text layer**; it is not a ScanWeave output. Existing competitor registrations are applied to the native-resolution renders. All generated artifacts are local under `$B/stroke02/` (`$B=/data/coding/scanweave/work/books01`).
+
+1. **Is 613 at least as good as MRC?** No demonstrated win. Three OCR character boxes were used only to group image pixels, not to choose glyph shapes. Source-centre masks give observed skeleton widths around 2–3 px at 500 DPI; they are not the unknown original widths. The same source pixels yield projected ink masses **82.55/43.92/90.17** or **54.97/28.28/55.03 px²** depending on whether colour is estimated from the faint components or a darker same-page heading. The heading has not been shown to use the same ink. Five candidate ink/blur/contour hypotheses have per-digit minimum pairwise IoU **.625/.603/.575** and maximum 95th-percentile edge disagreement **.71/1.12/.94 source px**. A conservative stability test declines all three. The source's first-digit counter appears at one relative coverage level and disappears at another; this is measurement ambiguity, not proof of either topology.
+   At relative coverage .5 on the actual 2× PDFium crops, the per-box **components / holes / skeleton terminals** are below. The same source digit changes topology at other levels, and an OCR box can clip a stroke; these counts are diagnostics, not verified character identities. The prototype's middle group includes raster fallback.
+
+   | OCR group | Source | Crop prototype | MRC |
+   |---|---:|---:|---:|
+   | 6 | 1 / 0 / 2 | 1 / 0 / 2 | 1 / 0 / 3 |
+   | 1 | 1 / 0 / 2 | 1 / 0 / 3 | 1 / 1 / 2 |
+   | 3 | 2 / 0 / 5 | 2 / 0 / 4 | 2 / 0 / 3 |
+
+2. **Are the French letters better without bolding?** Not established. Solid-outline crop PDFs make strokes noticeably darker than the source. Layered fractional coverage looks less artificial but remains close to the source and does not demonstrate a legibility improvement. Small or cross-group components are protected as raster in the experiment; source text, punctuation and Fraktur fidelity have not been proven on whole pages.
+3. **What changed?** Offline code fitted Gaussian edge profiles, explored bounded projected deconvolution of local coverage, subpixel contours, modest contour smoothing and layered-opacity vector paths. The existing `grayscale_subpixel_curve` uses original grayscale within the old binary ownership mask; its optional latent coverage affects scoring, not contour generation. Feeding it new latent geometry would require further changes and still face existing ownership and fidelity gates. OCR supplies grouping rectangles only. A component below five pixels, or intersecting multiple OCR groups, is protected as raster in the crop prototype; this is not a production implementation.
+4. **What happened to actual PDF size and text coverage?** No improved full-page PDF exists, so **no raster-byte displacement, PDF size benefit, text-coverage gain, OCR/search result or render-performance gain has been measured**. Existing full-page sizes and #39 ownership are:
+
+   | Page | Source bytes | #39 bytes | MRC bytes | Adobe bytes | #39 vector / total text-ink pixels |
+   |---|---:|---:|---:|---:|---:|
+   | 8967062 | 1,691,991 | 92,310 | 105,242 | 151,635 | 10,061 / 26,398 |
+   | 12342014 | 4,955,345 | 554,944 | 137,040 | 396,265 | 150,562 / 219,792 |
+
+   These are existing baseline measurements, not a new benchmark. The diagnostic crop PDFs do not contain searchable text and cannot establish compression or extraction preservation.
+5. **What regressions remain?** Cross-line ink can make 613 too dark and split the first and last groups; low-level contours can thicken the middle numeral or introduce a counter. In one actual-PDF rescan diagnostic at the same assumed σ=1.22, cross-line `inverse12` scores **.0894** linear-RGB RMSE but fragments two groups; local `local12` scores **.1003** and has different contours. The score uses an approximate single-colour forward model and is not evidence that either glyph is right. Aventinus, Luther, Euler and the heading were not rerun because no crop candidate passed the stated gate. Existing #39 stays unchanged; the pre-existing U+FFFE issue remains unresolved, and no new candidate extraction can be assessed.
+6. **Ready to merge?** No. The explicit crop-quality condition for 36-page runs and converter integration was not met. Choosing a shape from OCR identity or treating a low rescan loss as proof would risk inventing strokes.
+
+## Why this stalled
+
+The 1-D Gaussian box check supports the core-bias hypothesis: a 2 px stroke at σ=1.15 px reaches only .615 peak coverage; normalizing that peak as solid ink produces a 3.08 px half-maximum width, while integrated true-ink coverage remains 2 px. Same-page step-edge fits span **.93–1.48 px** between their first and third quartiles; fits overlap spatially and are not independent confidence intervals. The observation can therefore be explained by materially different combinations of ink strength, blur and shape. On 30 controlled synthetic shapes, 12-step inversion gives mean false ink **.043 with known ink versus .157 with centre-estimated ink**, despite boundary F1 near .998 in both. The real scans lack that known-ink ground truth. This is evidence about the present model and observations, not a claim that stroke reconstruction is impossible.
+
+[Code and reproducibility](/data/coding/scanweave/work/stroke01/research/stroke02/README.md), [numerical results](/data/coding/scanweave/work/stroke01/research/stroke02/results.json), all local candidate PDFs and the [progress note](/data/coding/scanweave/work/books01/stroke02/PROGRESS.md) are available for independent review. Five focused inverse-model and fallback tests passed; no full cargo suite was run because converter code was unchanged.
