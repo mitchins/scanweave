@@ -12,7 +12,8 @@ B=c.B;O=c.O;DATA=json.loads((O/'joint-profiles.json').read_text());COUNTER=json.
 def cubic_ring(shape,ring,origin,scale):
  """Fit a closed cubic curve to 4x marching-squares data, preserve frame."""
  if len(ring)<9:return False
- points=np.column_stack([ring[:,1],ring[:,0]])/4-.375
+ # grid_mode=True maps upsampled pixel centres to PDF pixel edges.
+ points=(np.column_stack([ring[:,1],ring[:,0]])+.5)/4
  if np.linalg.norm(points[0]-points[-1])<.5:points=points[:-1]
  if len(points)<8:return False
  # Remove consecutive duplicates; periodic smoothing has no OCR shape template.
@@ -48,7 +49,7 @@ def generate(key,sigma,style):
   eligible,forbidden,small,cross=c.protected_components(binary,relevant,cx+xa,cy+ya);support=ndi.binary_dilation(eligible,iterations=3)&allowed&~forbidden;latent*=ndi.binary_dilation(eligible,iterations=2)&~forbidden
   ky=slice(ya,yb);kx=slice(xa,xb);paper=np.median(bg[ky,kx][support],axis=0) if support.any() else np.median(bg[ky,kx].reshape(-1,3),axis=0);ink=np.clip(paper-t*direction,0,1);base_sub=base[ky,kx];base_sub[support]=bg[ky,kx][support]
   # Bicubic 4x coverage, marching squares and fitted cubic Beziers.
-  up=np.clip(ndi.zoom(latent,4,order=3),0,1);bm=up>=threshold;_,cc=ndi.label(bm,np.ones((3,3)));_,holes=ndi.label(ndi.binary_fill_holes(bm)&~bm);sk=morphology.skeletonize(bm);nb=ndi.convolve(sk.astype(int),np.ones((3,3),int));width=2*ndi.distance_transform_edt(bm)[sk]/4
+  up=np.clip(ndi.zoom(latent,4,order=3,grid_mode=True,mode='grid-constant'),0,1);bm=up>=threshold;_,cc=ndi.label(bm,np.ones((3,3)));_,holes=ndi.label(ndi.binary_fill_holes(bm)&~bm);sk=morphology.skeletonize(bm);nb=ndi.convolve(sk.astype(int),np.ones((3,3),int));width=2*ndi.distance_transform_edt(bm)[sk]/4
   globalmask=np.zeros(rgb.shape[:2],bool);globalmask[ya:yb,xa:xb]=latent>=threshold
   jobs.append({'_global':globalmask,'join':False,'style':style,'threshold':threshold,'idx':idx,'bbox':r['bbox'],'t':t,'sigma':sigma,'noise':r['noise_linear_mad'],'direction':direction,'paper':paper,'ink':ink,'latent':latent,'up':up,'origin':(xa+cx-x0,ya+cy-y0),'small':small,'cross':cross,'components':int(cc),'holes':int(holes),'terminals':int((sk&(nb==2)).sum()),'width_median':float(np.median(width)) if len(width) else None,'width_mad':float(np.median(np.abs(width-np.median(width)))) if len(width) else None,'mass_px':float(np.sum(up)/16),'mask':bm,'base_slice':(xa,ya,xb,yb)})
  # Any proposed contact between independently grouped glyphs is rejected.
